@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.5 -->
+<!-- Statiq v0.8.6 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -62,6 +62,8 @@
     .field:last-child { margin-bottom: 0; }
     .field label { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 4px; margin-bottom: 5px; }
     .field label .unit { font-size: 11px; color: var(--text3); font-family:DM Mono, monospace; }
+    .field select { width: 100%; padding: 9px 10px; font-size: 14px; font-family:'DM Sans', sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
+    .field select:focus { outline: none; border-color: var(--accent); }
     .field input { width: 100%; padding: 9px 12px; font-size: 14px; font-family:DM Mono, monospace; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); transition: border-color 0.15s; }
     .field input:focus { outline: none; border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -302,8 +304,12 @@
       </div>
     </div>
     <div class="modal-section">
-      <h3>Solution Method</h3>
-      <p>This app assembles the three-moment equations into a tridiagonal linear system and solves it using Gaussian elimination. The support moments Mᵢ are found first, then reactions and internal forces are computed span-by-span using superposition.</p>
+      <h3 data-i18n="modalContSolveH">Solution Method</h3>
+      <p data-i18n="modalContSolveP">The three-moment equation is the classic hand method. calc itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.</p>
+    </div>
+    <div class="modal-section">
+      <h3 data-i18n="modalContOptH">Options: fixed ends, cantilevers, hinges</h3>
+      <p data-i18n="modalContOptP">Counting rule for beams (vertical loads): n = a − 2 − g, with a = vertical support reactions plus clamping moments (fixed end 2, pin/roller 1) and g = number of hinges. n = 0: statically determinate (e.g. Gerber beam), n &lt; 0: mechanism. In a hinge the moment is zero. I<sub>i</sub>/I scales the stiffness of a span — in indeterminate systems this shifts the support moments towards the stiffer span.</p>
     </div>
     <div class="modal-section">
       <h3>Boundary Conditions</h3>
@@ -369,7 +375,7 @@
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="app-header">
   <a class="logo" href="index.html">stat<span>iq</span></a>
-  <div style="font-size:10px;color:var(--text3);font-family:DM Mono,monospace;letter-spacing:0.5px;">v0.8.5</div>
+  <div style="font-size:10px;color:var(--text3);font-family:DM Mono,monospace;letter-spacing:0.5px;">v0.8.6</div>
 </header>
 
 <nav class="nav" style="display:flex;align-items:center;padding:0 16px;gap:10px">
@@ -537,7 +543,7 @@
       <div class="diagram-label" id="diag-label-beam">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.5</div>
+  <div class="footnote">Statiq v0.8.6</div>
 </main>
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
@@ -604,7 +610,7 @@
       <div class="diagram-label" id="diag-label-cant">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.5 · Cantilever</div>
+  <div class="footnote">Statiq v0.8.6 · Cantilever</div>
 </main>
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
@@ -673,7 +679,7 @@
       <div class="diagram-label" id="diag-label-cont">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.5 · Continuous Beam</div>
+  <div class="footnote">Statiq v0.8.6 · Continuous Beam</div>
 </main>
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
@@ -818,7 +824,7 @@
       <div class="diagram-label" id="diag-label-frame">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.5 · Frame</div>
+  <div class="footnote">Statiq v0.8.6 · Frame</div>
 </main>
 
 <script>
@@ -906,7 +912,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.5';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.6';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -916,10 +922,16 @@ let numSpans = 2;
 const MAX_SPANS = 5;
 // spanData[i] = { L, point:[], dist:[] }
 let spanData = [];
+// Durchlaufträger: Endlager, Kragarme, Gelenke. ovL/ovR wie ein Feld (L = 0: kein Kragarm).
+// Lagertypen: 'pin' (Festlager), 'roller' (Loslager), 'fixed' (Einspannung). Gelenke: {id, span (0-basiert), a}
+let contCfg = { supL:'pin', supR:'roller', ovL:{L:0, point:[], dist:[], mom:[]}, ovR:{L:0, point:[], dist:[], mom:[]}, hinges:[] };
+const contSeg = k => k==='L' ? contCfg.ovL : k==='R' ? contCfg.ovR : spanData[k];
+// Übersetzung für dynamisch erzeugte Texte (fehlt ein Schlüssel, gilt Englisch)
+const tr = key => (calcTranslations[calcLang]||calcTranslations.en)[key] || calcTranslations.en[key] || key;
 
 function initSpanData() {
   spanData = [];
-  for(let i=0;i<numSpans;i++) spanData.push({ L:5, point:[], dist:[] });
+  for(let i=0;i<numSpans;i++) spanData.push({ L:5, point:[], dist:[], mom:[], k:1 });
 }
 
 // ── Tabs ──────────────────────────────────────────
@@ -1083,8 +1095,8 @@ function changeSpans(delta) {
   const newN = numSpans + delta;
   if(newN < 2 || newN > MAX_SPANS) return;
   // Add or remove span data
-  if(delta > 0) spanData.push({ L:5, point:[], dist:[] });
-  else spanData.pop();
+  if(delta > 0) spanData.push({ L:5, point:[], dist:[], mom:[], k:1 });
+  else { spanData.pop(); contCfg.hinges = contCfg.hinges.filter(g=>g.span < newN); }
   numSpans = newN;
   document.getElementById('span-count-display').textContent = numSpans;
   document.getElementById('btn-span-minus').disabled = numSpans <= 2;
@@ -1093,86 +1105,142 @@ function changeSpans(delta) {
   drawContinuous();
 }
 
+const SUP_OPTS = () => [['pin',tr('supPin')],['roller',tr('supRoller')],['fixed',tr('supFixed')]];
+function setContSup(side, v){ contCfg[side==='L'?'supL':'supR'] = v; drawContinuous(); }
+function setOverhang(side, v){ const o=contSeg(side); o.L = Math.max(0, parseFloat(v)||0); renderContUI(); drawContinuous(); }
 function renderContUI() {
-  // Span length inputs
+  const lab = 'font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px';
+  // Feldlängen und Steifigkeitsverhältnis je Feld
   const lenEl = document.getElementById('span-length-inputs');
+  const sel = (side, cur) => `<select onchange="setContSup('${side}', this.value)">${SUP_OPTS().map(([v,t])=>`<option value="${v}"${v===cur?' selected':''}>${t}</option>`).join('')}</select>`;
   lenEl.innerHTML = spanData.map((sp,i) =>
-    `<div class="field"><label>Span ${i+1} — L<sub>${i+1}</sub> <span class="unit">m</span></label>
-      <input type="number" value="${sp.L}" step="0.1" min="0.5"
-        oninput="spanData[${i}].L=parseFloat(this.value)||5; drawContinuous()"></div>`
-  ).join('');
+    `<div class="field-row">
+      <div class="field"><label>${tr('spanWord')} ${i+1} — L<sub>${i+1}</sub> <span class="unit">m</span></label>
+        <input type="number" value="${sp.L}" step="0.1" min="0.5" oninput="spanData[${i}].L=parseFloat(this.value)||5; drawContinuous()"></div>
+      <div class="field"><label>I<sub>${i+1}</sub> / I</label>
+        <input type="number" value="${sp.k??1}" step="0.1" min="0.05" oninput="spanData[${i}].k=parseFloat(this.value)||1; drawContinuous()"></div>
+    </div>`).join('')
+    + `<div style="font-size:11px;color:var(--text3);margin-top:4px">I<sub>i</sub> / I — ${tr('eiRatio')} (1 = ${tr('eiRef')})</div>
+    <div style="${lab};margin-top:12px">${tr('endSupports')}</div>
+    <div class="field-row">
+      <div class="field"><label>${tr('leftEnd')}</label>${sel('L', contCfg.supL)}</div>
+      <div class="field"><label>${tr('rightEnd')}</label>${sel('R', contCfg.supR)}</div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>${tr('overhangL')} <span class="unit">m</span></label>
+        <input type="number" value="${contCfg.ovL.L}" step="0.1" min="0" onchange="setOverhang('L', this.value)"></div>
+      <div class="field"><label>${tr('overhangR')} <span class="unit">m</span></label>
+        <input type="number" value="${contCfg.ovR.L}" step="0.1" min="0" onchange="setOverhang('R', this.value)"></div>
+    </div>
+    <div style="${lab};margin-top:12px">${tr('internalHinges')}</div>
+    <div class="load-list" id="cont-hinge-list"></div>
+    <button class="add-load-btn" onclick="addContHinge()">${tr('addHinge')}</button>`;
 
-  // Per-span load cards
+  // Lastkarten: Kragarm links, Felder, Kragarm rechts
+  const keys = [...(contCfg.ovL.L>0?['L']:[]), ...spanData.map((_,i)=>i), ...(contCfg.ovR.L>0?['R']:[])];
+  const title = k => k==='L' ? tr('overhangL') : k==='R' ? tr('overhangR') : `${tr('spanWord')} ${k+1}`;
+  const q = k => typeof k==='string' ? `'${k}'` : k;
   const loadEl = document.getElementById('span-load-cards');
-  loadEl.innerHTML = spanData.map((sp,i) => `
+  loadEl.innerHTML = keys.map(k => `
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Span ${i+1} — Loads</div>
-      <div style="font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px">Point Loads</div>
-      <div class="load-list" id="cont-point-list-${i}"></div>
-      <button class="add-load-btn" onclick="addContLoad(${i},'point')">＋ Add Point Load</button>
-      <div style="font-size:11px;color:var(--text3);margin:12px 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px">Distributed Loads</div>
-      <div class="load-list" id="cont-dist-list-${i}"></div>
-      <button class="add-load-btn" onclick="addContLoad(${i},'dist')">＋ Add Distributed Load</button>
-    </div>`
-  ).join('');
+      <div class="card-title" style="margin-bottom:10px">${title(k)} — ${tr('loadsWord')}</div>
+      <div style="${lab}">${tr('pointLoads')}</div>
+      <div class="load-list" id="cont-point-list-${k}"></div>
+      <button class="add-load-btn" onclick="addContLoad(${q(k)},'point')">${tr('addPoint')}</button>
+      <div style="${lab};margin-top:12px">${tr('distLoads')}</div>
+      <div class="load-list" id="cont-dist-list-${k}"></div>
+      <button class="add-load-btn" onclick="addContLoad(${q(k)},'dist')">${tr('addDist')}</button>
+      <div style="${lab};margin-top:12px">${tr('pointMoments')}</div>
+      <div class="load-list" id="cont-mom-list-${k}"></div>
+      <button class="add-load-btn" onclick="addContLoad(${q(k)},'mom')">${tr('addMoment')}</button>
+    </div>`).join('');
+  keys.forEach(k => { ['point','dist','mom'].forEach(t=>renderContLoads(k,t)); });
+  renderContHinges();
+}
 
-  // Re-render existing loads
-  spanData.forEach((_,i) => {
-    renderContLoads(i,'point');
-    renderContLoads(i,'dist');
-  });
+function addContHinge(){
+  const sp = Math.min(1, numSpans-1);
+  contCfg.hinges.push({ id:++uid, span: sp, a: +(spanData[sp].L*0.2).toFixed(2) });
+  renderContHinges(); drawContinuous();
+}
+function removeContHinge(id){ contCfg.hinges = contCfg.hinges.filter(g=>g.id!==id); renderContHinges(); drawContinuous(); }
+function updateContHinge(id, key, val){ const g=contCfg.hinges.find(g=>g.id===id); if(g) g[key] = key==='span' ? parseInt(val) : (parseFloat(val)||0); drawContinuous(); }
+function renderContHinges(){
+  const el=document.getElementById('cont-hinge-list'); if(!el) return;
+  el.innerHTML = contCfg.hinges.map((g,i)=>`<div class="load-item">
+    <div class="load-item-header"><div class="load-item-label">G${i+1}</div>
+      <div class="load-item-actions"><button class="load-action-btn delete" onclick="removeContHinge(${g.id})">✕</button></div></div>
+    <div class="load-item-body"><div class="field-row">
+      <div class="field"><label>${tr('spanWord')}</label><select onchange="updateContHinge(${g.id},'span',this.value)">${spanData.map((_,k)=>`<option value="${k}"${k===g.span?' selected':''}>${k+1}</option>`).join('')}</select></div>
+      <div class="field"><label>a <span class="unit">m</span></label><input type="number" value="${g.a}" step="0.1" min="0" oninput="updateContHinge(${g.id},'a',this.value)"></div>
+    </div></div></div>`).join('');
 }
 
 function addContLoad(spanIdx, type) {
-  const sp = spanData[spanIdx];
+  const sp = contSeg(spanIdx);
   const id = ++uid;
+  if(!sp[type]) sp[type] = [];
   sp[type].push({ id, enabled:true,
-    values: type==='point' ? {F:10, a:+(sp.L/2).toFixed(1)} : {qa:5, qb:5, a:0, b:sp.L}
+    values: type==='point' ? {F:10, a:+(sp.L/2).toFixed(1)} : type==='mom' ? {M:10, a:+(sp.L/2).toFixed(1)} : {qa:5, qb:5, a:0, b:sp.L}
   });
   renderContLoads(spanIdx, type);
   drawContinuous();
 }
 function removeContLoad(spanIdx,type,id) {
-  spanData[spanIdx][type]=spanData[spanIdx][type].filter(l=>l.id!==id);
+  const sp=contSeg(spanIdx); sp[type]=sp[type].filter(l=>l.id!==id);
   renderContLoads(spanIdx,type); drawContinuous();
 }
 function toggleContLoad(spanIdx,type,id) {
-  const l=spanData[spanIdx][type].find(l=>l.id===id);
+  const l=contSeg(spanIdx)[type].find(l=>l.id===id);
   if(l){l.enabled=!l.enabled;renderContLoads(spanIdx,type);}
   drawContinuous();
 }
 function updateContVal(spanIdx,type,id,key,val) {
-  const l=spanData[spanIdx][type].find(l=>l.id===id);
+  const l=contSeg(spanIdx)[type].find(l=>l.id===id);
   if(l) l.values[key]=parseFloat(val)||0;
   drawContinuous();
 }
 function renderContLoads(spanIdx,type) {
   const el=document.getElementById(`cont-${type}-list-${spanIdx}`);
   if(!el) return;
-  const list=spanData[spanIdx][type];
+  const list=contSeg(spanIdx)[type]||[];
   if(!list.length){el.innerHTML='';return;}
+  const k = typeof spanIdx==='string' ? `'${spanIdx}'` : spanIdx;
+  const fld = (lab, unit, key, v, step) => `<div class="field"><label>${lab} <span class="unit">${unit}</span></label><input type="number" value="${v}" step="${step}" oninput="updateContVal(${k},'${type}',ID,'${key}',this.value)"></div>`;
   el.innerHTML=list.map((l,i)=>{
-    const lbl=type==='point'?`F${i+1}`:type==='horiz'?`H/Me${i+1}`:`q${i+1}`;
+    const lbl=type==='point'?`F${i+1}`:type==='mom'?`M${i+1}`:`q${i+1}`;
     const eye=l.enabled?ICON.eye:ICON.eyeOff;
-    const body=type==='point'
-      ?`<div class="field-row">
-          <div class="field"><label>F <span class="unit">kN</span></label><input type="number" value="${l.values.F}" step="0.5" oninput="updateContVal(${spanIdx},'point',${l.id},'F',this.value)"></div>
-          <div class="field"><label>a <span class="unit">m</span></label><input type="number" value="${l.values.a}" step="0.1" min="0" oninput="updateContVal(${spanIdx},'point',${l.id},'a',this.value)"></div>
-        </div>`
-      :`<div class="field-row-4">
-          <div class="field"><label>q_a <span class="unit">kN/m</span></label><input type="number" value="${l.values.qa}" step="0.5" oninput="updateContVal(${spanIdx},'dist',${l.id},'qa',this.value)"></div>
-          <div class="field"><label>q_b <span class="unit">kN/m</span></label><input type="number" value="${l.values.qb}" step="0.5" oninput="updateContVal(${spanIdx},'dist',${l.id},'qb',this.value)"></div>
-          <div class="field"><label>from <span class="unit">m</span></label><input type="number" value="${l.values.a}" step="0.1" min="0" oninput="updateContVal(${spanIdx},'dist',${l.id},'a',this.value)"></div>
-          <div class="field"><label>to <span class="unit">m</span></label><input type="number" value="${l.values.b}" step="0.1" min="0" oninput="updateContVal(${spanIdx},'dist',${l.id},'b',this.value)"></div>
-        </div>`;
+    const body = (type==='point'
+      ? `<div class="field-row">${fld('F','kN','F',l.values.F,0.5)}${fld('a','m','a',l.values.a,0.1)}</div>`
+      : type==='mom'
+      ? `<div class="field-row">${fld('M','kNm ↻','M',l.values.M,0.5)}${fld('a','m','a',l.values.a,0.1)}</div>`
+      : `<div class="field-row-4">${fld('q_a','kN/m','qa',l.values.qa,0.5)}${fld('q_b','kN/m','qb',l.values.qb,0.5)}${fld(tr('from'),'m','a',l.values.a,0.1)}${fld(tr('to'),'m','b',l.values.b,0.1)}</div>`).replace(/ID/g, l.id);
     return `<div class="load-item${l.enabled?'':' disabled'}">
       <div class="load-item-header"><div class="load-item-label">${lbl}</div>
         <div class="load-item-actions">
-          <button class="load-action-btn" onclick="toggleContLoad(${spanIdx},'${type}',${l.id})">${eye}</button>
-          <button class="load-action-btn delete" onclick="removeContLoad(${spanIdx},'${type}',${l.id})">✕</button>
+          <button class="load-action-btn" onclick="toggleContLoad(${k},'${type}',${l.id})">${eye}</button>
+          <button class="load-action-btn delete" onclick="removeContLoad(${k},'${type}',${l.id})">✕</button>
         </div></div>
       <div class="load-item-body">${body}</div></div>`;
   }).join('');
+}
+
+// Geometrie des Durchlaufträgers: Abschnitte (Kragarm links, Felder, Kragarm rechts), Lager, Gelenke — x in m ab linkem Trägerende
+function contLayout(){
+  const oL = contCfg.ovL.L>0 ? contCfg.ovL.L : 0, oR = contCfg.ovR.L>0 ? contCfg.ovR.L : 0;
+  const segs = [];
+  if(oL) segs.push({ key:'L', x0:0, L:oL, k:1 });
+  let x = oL;
+  spanData.forEach((sp,i)=>{ segs.push({ key:i, x0:x, L:sp.L, k:sp.k>0?sp.k:1 }); x += sp.L; });
+  if(oR) segs.push({ key:'R', x0:x, L:oR, k:1 });
+  const Ltot = x + oR;
+  const xs = [oL]; spanData.forEach(sp=>xs.push(xs[xs.length-1]+sp.L));
+  const n = spanData.length;
+  const supports = xs.map((xx,i)=>({ x:xx, type: i===0 ? contCfg.supL : i===n ? contCfg.supR : 'roller' }));
+  // Gelenke nur im Feldinneren (Kragarm würde verschieblich)
+  const hinges = contCfg.hinges.filter(g=>g.span<n).map(g=>{ const L=spanData[g.span].L; return xs[g.span] + Math.min(Math.max(g.a, 1e-3), L-1e-3); });
+  // Kragarme neben einer Einspannung sind kein sinnvolles System
+  return { segs, Ltot, xs, supports, hinges, oL, oR };
 }
 
 // ══════════════════════════════════════════════════
@@ -1189,9 +1257,9 @@ function globalMaxLoad(sys) {
   // Find max load value across ALL load types for consistent scaling
   let maxF=0;
   if(sys==='cont') {
-    spanData.forEach(sp=>{
-      sp.point.filter(l=>l.enabled).forEach(l=>{ maxF=Math.max(maxF,Math.abs(l.values.F)); });
-      sp.dist.filter(l=>l.enabled).forEach(l=>{ maxF=Math.max(maxF,Math.abs(l.values.qa),Math.abs(l.values.qb)); });
+    [...spanData, contCfg.ovL, contCfg.ovR].forEach(sp=>{
+      (sp.point||[]).filter(l=>l.enabled).forEach(l=>{ maxF=Math.max(maxF,Math.abs(l.values.F)); });
+      (sp.dist||[]).filter(l=>l.enabled).forEach(l=>{ maxF=Math.max(maxF,Math.abs(l.values.qa),Math.abs(l.values.qb)); });
     });
   } else {
     (loads[sys]?.point||[]).filter(l=>l.enabled).forEach(l=>{ maxF=Math.max(maxF,Math.abs(l.values.F)); });
@@ -1387,73 +1455,66 @@ function drawCantilever() {
   svg.innerHTML=mkDefs('c')+h;
 }
 
+// Lagersymbol am Balken (x, y = Unterkante Balken bzw. Balkenachse bei Einspannung)
+function contSupportSVG(sx, y, type, side, sz=1){
+  const c='#1a1a18';
+  if(type==='fixed'){                       // Einspannung: senkrechte Wand mit Schraffur
+    const d = side==='L' ? -1 : 1, x = sx;
+    let h=`<line x1="${x}" y1="${y-14*sz}" x2="${x}" y2="${y+10*sz}" stroke="${c}" stroke-width="2"/>`;
+    for(let k=0;k<5;k++){ const yy=y-12*sz+k*5*sz; h+=`<line x1="${x}" y1="${yy}" x2="${x+d*5*sz}" y2="${yy+4*sz}" stroke="${c}" stroke-width="0.8"/>`; }
+    return h;
+  }
+  let h=`<polygon points="${sx},${y} ${sx-7*sz},${y+12*sz} ${sx+7*sz},${y+12*sz}" fill="${c}"/>`;
+  if(type==='roller') h+=`<circle cx="${sx}" cy="${y+14*sz}" r="${3*sz}" fill="none" stroke="${c}" stroke-width="1.2"/>`;
+  return h;
+}
 function drawContinuous() {
   const svg=document.getElementById('cont-svg'); if(!svg) return;
-  const n=numSpans;
-  const Ls=spanData.map(sp=>sp.L);
-  const Ltotal=Ls.reduce((a,b)=>a+b,0);
+  const lay=contLayout(), Ltotal=lay.Ltot;
   const PAD=24, bY=52, beamH=7;
-  const svgW=Math.max(280, PAD*2+n*60);
+  const svgW=Math.max(280, PAD*2+lay.segs.length*60);
   svg.setAttribute('width', svgW);
   svg.setAttribute('viewBox', `0 0 ${svgW} 90`);
-  const bW=svgW-PAD*2;
+  const bW=svgW-PAD*2, X = x => PAD + x/Ltotal*bW;
   let h='';
-
-
   const maxF=globalMaxLoad('cont');
-
-  // Distributed loads
+  // Streckenlasten
   let distIdx=0;
-  spanData.forEach((sp,si)=>{
-    const xSpanStart=PAD+Ls.slice(0,si).reduce((a,b)=>a+b,0)/Ltotal*bW;
-    const xSpanEnd=PAD+Ls.slice(0,si+1).reduce((a,b)=>a+b,0)/Ltotal*bW;
-    const spW=xSpanEnd-xSpanStart;
-    sp.dist.filter(l=>l.enabled&&(l.values.qa!==0||l.values.qb!==0)).forEach((dl,di)=>{
-      const xa=xSpanStart+Math.min(dl.values.a/sp.L,1)*spW;
-      const xb=xSpanStart+Math.min(dl.values.b/sp.L,1)*spW;
-      h+=distSVG(xa,xb,dl.values.qa,dl.values.qb,maxF,bY,`q${distIdx+1}`,distIdx,'co');
-      distIdx++;
+  lay.segs.forEach(sg=>{
+    const sp=contSeg(sg.key);
+    (sp.dist||[]).filter(l=>l.enabled&&(l.values.qa!==0||l.values.qb!==0)).forEach(dl=>{
+      const xa=X(sg.x0+Math.min(Math.max(dl.values.a,0),sg.L)), xb=X(sg.x0+Math.min(dl.values.b,sg.L));
+      h+=distSVG(xa,xb,dl.values.qa,dl.values.qb,maxF,bY,`q${distIdx+1}`,distIdx,'co'); distIdx++;
     });
   });
-
-    // Beam
-  h+=`<rect x="${PAD}" y="${bY}" width="${bW}" height="${beamH}" rx="2" fill="#1a1a18"/>`;
-
-  // Point loads (red, globally scaled)
-  let ptIdx=0;
-  spanData.forEach((sp,si)=>{
-    const xSpanStart=PAD+Ls.slice(0,si).reduce((a,b)=>a+b,0)/Ltotal*bW;
-    const xSpanEnd=PAD+Ls.slice(0,si+1).reduce((a,b)=>a+b,0)/Ltotal*bW;
-    const spW=xSpanEnd-xSpanStart;
-    sp.point.filter(l=>l.enabled&&l.values.F!==0).forEach((pl,pi)=>{
-      const ax=xSpanStart+Math.min(pl.values.a/sp.L,1)*spW;
-      h+=arrowSVG(ax,bY,pl.values.F,0,maxF,`F${ptIdx+1}=${pl.values.F}kN`,0,'co');
-      ptIdx++;
+  // Balken (Abschnitte mit anderem Trägheitsmoment etwas dicker/dünner)
+  lay.segs.forEach(sg=>{ const t=Math.max(4, Math.min(11, beamH*Math.cbrt(sg.k)));
+    h+=`<rect x="${X(sg.x0)}" y="${bY+beamH/2-t/2}" width="${X(sg.x0+sg.L)-X(sg.x0)}" height="${t}" rx="1.5" fill="#1a1a18"/>`; });
+  // Gelenke
+  lay.hinges.forEach(x=>{ h+=`<circle cx="${X(x)}" cy="${bY+beamH/2}" r="4" fill="#fff" stroke="#1a1a18" stroke-width="1.5"/>`; });
+  // Einzellasten und Einzelmomente
+  let ptIdx=0, mIdx=0;
+  lay.segs.forEach(sg=>{
+    const sp=contSeg(sg.key);
+    (sp.point||[]).filter(l=>l.enabled&&l.values.F!==0).forEach(pl=>{
+      h+=arrowSVG(X(sg.x0+Math.min(Math.max(pl.values.a,0),sg.L)),bY,pl.values.F,0,maxF,`F${ptIdx+1}=${pl.values.F}kN`,0,'co'); ptIdx++;
+    });
+    (sp.mom||[]).filter(l=>l.enabled&&l.values.M!==0).forEach(ml=>{
+      h+=momentSVG(X(sg.x0+Math.min(Math.max(ml.values.a,0),sg.L)), bY+beamH/2, ml.values.M, `M${mIdx+1}=${ml.values.M}kNm`, -2.7); mIdx++;
     });
   });
-
-  // Supports: pin at 0, rollers at intermediate + end
-  let cumX=PAD;
-  for(let i=0;i<=n;i++){
-    const sx=i===0?PAD:i===n?(PAD+bW):(PAD+Ls.slice(0,i).reduce((a,b)=>a+b,0)/Ltotal*bW);
-    if(i===0){
-      h+=`<polygon points="${sx},${bY+beamH} ${sx-7},${bY+beamH+12} ${sx+7},${bY+beamH+12}" fill="#1a1a18"/>`;
-    } else {
-      h+=`<polygon points="${sx},${bY+beamH} ${sx-7},${bY+beamH+12} ${sx+7},${bY+beamH+12}" fill="#1a1a18"/>`;
-      h+=`<circle cx="${sx}" cy="${bY+beamH+14}" r="3" fill="none" stroke="#1a1a18" stroke-width="1.2"/>`;
-    }
-    const lbl=i===0?'A':String.fromCharCode(65+i);
-    h+=`<text x="${sx}" y="${bY+beamH+26}" text-anchor="middle" font-size="8" fill="#6b6a65">${lbl}</text>`;
-  }
-
-  // Span labels
-  let cx=PAD;
-  Ls.forEach((L,i)=>{
-    const spanPx=L/Ltotal*bW;
-    h+=`<text x="${(cx+spanPx/2).toFixed(1)}" y="${bY+beamH+38}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="DM Mono,monospace">L${i+1}=${L}m</text>`;
-    cx+=spanPx;
+  // Lager
+  lay.supports.forEach((sp,i)=>{
+    const sx=X(sp.x), side = i===0 ? 'L' : 'R';
+    const atEnd = (i===0 && !lay.oL) || (i===lay.supports.length-1 && !lay.oR);
+    h+= sp.type==='fixed' ? contSupportSVG(sx + (atEnd?0:0), bY+beamH/2, 'fixed', side) : contSupportSVG(sx, bY+beamH, sp.type);
+    h+=`<text x="${sx}" y="${bY+beamH+26}" text-anchor="middle" font-size="8" fill="#6b6a65">${String.fromCharCode(65+i)}</text>`;
   });
-
+  // Feldbeschriftung
+  lay.segs.forEach(sg=>{
+    const lbl = sg.key==='L'||sg.key==='R' ? `ü=${sg.L}m` : `L${sg.key+1}=${sg.L}m${sg.k!==1?` ·${sg.k}I`:''}`;
+    h+=`<text x="${((X(sg.x0)+X(sg.x0+sg.L))/2).toFixed(1)}" y="${bY+beamH+38}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="DM Mono,monospace">${lbl}</text>`;
+  });
   svg.innerHTML=mkDefs('co')+h;
 }
 
@@ -1609,52 +1670,62 @@ function calculateContinuous() {
   if(Ls.some(l=>!l||l<=0)){ calcError('cont','invalidSpans'); return; }
   if(n<2){ calcError('cont','minSpans'); return; }
   const warns=[];
-  const xs=[0]; Ls.forEach(L=>xs.push(xs[xs.length-1]+L));
-  const Ltot=xs[n];
-  const supports=xs.map((x,i)=>({x, type:i===0?'pin':'roller'}));
+  const lay=contLayout(), Ltot=lay.Ltot, xs=lay.xs;
+  const supports=lay.supports.map(sp=>({...sp}));
+  // keine horizontale Halterung (nur Loslager)? Dann ein Lager waagerecht halten — ändert keine Schnittgröße
+  if(!supports.some(sp=>sp.type!=='roller')) supports[0].hfix=true;
   const points=[], dists=[];
-  spanData.forEach((sp,k)=>{
-    sp.point.forEach((pl,i)=>{
+  lay.segs.forEach(sg=>{
+    const sp=contSeg(sg.key), k=sg.key, tag=typeof k==='string' ? (k==='L'?'üL':'üR') : `L${k+1}`;
+    (sp.point||[]).forEach((pl,i)=>{
       if(!pl.enabled) return;
-      points.push({x:xs[k]+checkPos(warns,`L${k+1}·F${i+1}`,pl.values.a,sp.L), Fx:0, Fy:pl.values.F||0, Me:0});
+      points.push({x:sg.x0+checkPos(warns,`${tag}·F${i+1}`,pl.values.a,sg.L), Fx:0, Fy:pl.values.F||0, Me:0});
     });
-    sp.dist.forEach((dl,i)=>{
+    (sp.mom||[]).forEach((ml,i)=>{
+      if(!ml.enabled) return;
+      points.push({x:sg.x0+checkPos(warns,`${tag}·M${i+1}`,ml.values.a,sg.L), Fx:0, Fy:0, Me:ml.values.M||0});
+    });
+    (sp.dist||[]).forEach((dl,i)=>{
       if(!dl.enabled) return;
-      const v=dl.values, d=cutRange(warns,`L${k+1}·q${i+1}`,v.a,v.b,v.qa,v.qb,sp.L);
-      if(d) dists.push({a:xs[k]+d.a, b:xs[k]+d.b, qa:d.qa, qb:d.qb});
+      const v=dl.values, d=cutRange(warns,`${tag}·q${i+1}`,v.a,v.b,v.qa,v.qb,sg.L);
+      if(d) dists.push({a:sg.x0+d.a, b:sg.x0+d.b, qa:d.qa, qb:d.qb});
     });
   });
-  const res=lineSolve(Ltot,{supports, points, dists, EI:lineEI('cont')}, 30*n);
-  if(!res){ calcError('cont','calcError'); return; }
+  const EI0=lineEI('cont');
+  const EIfn = x => { const sg=lay.segs.find(sg=>x>=sg.x0-1e-9 && x<=sg.x0+sg.L+1e-9) || lay.segs[0]; return EI0*sg.k; };
+  const res=lineSolve(Ltot,{supports, points, dists, EI:EI0, EIfn, hinges:lay.hinges}, 30*lay.segs.length);
+  if(!res){ calcError('cont', lay.hinges.length ? 'mechanism' : 'calcError'); return; }
   showCalcMsgs('cont', warns.map(text=>({type:'warn', text})));
 
   document.getElementById('cont-Mmax').textContent=absMaxOf(res.fine.M).toFixed(2);
   document.getElementById('cont-Qmax').textContent=absMaxOf(res.fine.Q).toFixed(2);
 
-  // Auflagertabelle: V und Stützmoment (Zug unten +, an Innenstützen)
+  // Auflagertabelle: V und Moment über dem Lager (Zug unten +); bei Einspannung das Einspannmoment
   const tbody=document.getElementById('cont-reactions-body');
   const supportNames=['A','B','C','D','E','F','G','H'];
-  tbody.innerHTML=res.reac.map((r,i)=>{
-    const mVal=(i===0||i===n)?'—':res.at(xs[i]).M.toFixed(2)+' kNm';
-    return `<tr><td>${supportNames[i]||('S'+i)}</td><td>${r.V.toFixed(2)}</td><td>${mVal}</td></tr>`;
-  }).join('');
+  const Msup = (r,i) => { const m=res.at(xs[i]).M; return Math.abs(m)<5e-5 ? '—' : m.toFixed(2)+' kNm'; };
+  tbody.innerHTML=res.reac.map((r,i)=>`<tr><td>${supportNames[i]||('S'+i)}</td><td>${r.V.toFixed(2)}</td><td>${Msup(r,i)}</td></tr>`).join('');
 
   document.getElementById('cont-results').classList.remove('hidden');
   const o=lineArrays(res,-1,-1,true);
   drawContinuous();
+  const segLoads = sp => ({
+    point:(sp.point||[]).map((l,i)=>({i:i+1, enabled:l.enabled, ...l.values})).filter(l=>l.enabled),
+    dist:(sp.dist||[]).map((l,i)=>({i:i+1, enabled:l.enabled, ...l.values})).filter(l=>l.enabled),
+    mom:(sp.mom||[]).map((l,i)=>({i:i+1, enabled:l.enabled, ...l.values})).filter(l=>l.enabled)});
+  const layout = { segs:lay.segs.map(sg=>({key:sg.key, x0:sg.x0, L:sg.L, k:sg.k})), Ltot, supports:lay.supports.map(sp=>({x:sp.x, type:sp.type})), hinges:lay.hinges.slice() };
   lastCalc.cont = {
-    svgSnapshot:systemSnapshot('cont-svg'), geometry:{spans:Ls.slice()},
+    svgSnapshot:systemSnapshot('cont-svg'), geometry:{spans:Ls.slice(), ovL:lay.oL, ovR:lay.oR, k:spanData.map(sp=>sp.k??1)},
     supports:{list:supports.map(sp=>sp.type)},
-    loads:{spans:spanData.map(sp=>({
-      point:sp.point.map((l,i)=>({i:i+1, enabled:l.enabled, ...l.values})).filter(l=>l.enabled),
-      dist: sp.dist.map((l,i)=>({i:i+1, enabled:l.enabled, ...l.values})).filter(l=>l.enabled)}))},
+    hinges:contCfg.hinges.filter(g=>g.span<n).map(g=>({span:g.span+1, a:g.a})),
+    loads:{spans:spanData.map(segLoads), ovL:lay.oL?segLoads(contCfg.ovL):null, ovR:lay.oR?segLoads(contCfg.ovR):null},
     stiffness:lineEIInputs('cont'),
-    reactions:res.reac.map((r,i)=>({support:supportNames[i]||('S'+i), H:i===0?fmt2(r.H):'—', V:fmt2(r.V), M:'—'})),
-    supportMoments:xs.slice(1,-1).map((x,i)=>({support:supportNames[i+1]||('S'+(i+1)), M:+res.at(x).M.toFixed(4)})),
+    reactions:res.reac.map((r,i)=>({support:supportNames[i]||('S'+i), H:supports[i].type!=='roller'||supports[i].hfix?fmt2(r.H):'—', V:fmt2(r.V), M:supports[i].type==='fixed'?fmt2(r.M):'—'})),
+    supportMoments:xs.map((x,i)=>({support:supportNames[i]||('S'+i), M:+res.at(x).M.toFixed(4)})).filter(m=>Math.abs(m.M)>1e-4),
     maxima:{Mmax:absMaxOf(res.fine.M), Qmax:absMaxOf(res.fine.Q), Nmax:absMaxOf(res.fine.N), w:signedMaxOf(o.w)},
-    plot:{kind:'cont', Ls:Ls.slice(), ts:r4(o.ts), M:r4(o.M), Q:r4(o.Q), N:r4(o.N), w:r4(o.w)}
+    plot:{kind:'cont', Ls:Ls.slice(), layout, ts:r4(o.ts), M:r4(o.M), Q:r4(o.Q), N:r4(o.N), w:r4(o.w)}
   };
-  renderContDiagram(Ls, o.Q, o.M, o);
+  renderContDiagram(Ls, o.Q, o.M, {...o, layout});
 }
 
 // ══════════════════════════════════════════════════
@@ -2285,7 +2356,7 @@ function saveCalc(sys){
     statiq_version:STATIQ_VERSION,
     timestamp:new Date().toISOString(),
     module:'calc',
-    system:{type:sys, geometry:geom, supports:lc.supports, loads:lc.loads, stiffness:lc.stiffness, svgSnapshot},
+    system:{type:sys, geometry:geom, supports:lc.supports, loads:lc.loads, stiffness:lc.stiffness, svgSnapshot, ...(lc.hinges&&lc.hinges.length?{hinges:lc.hinges}:{})},
     results,
     plot: lc.plot            // exakte Verläufe für den Bericht (ab v0.8.2)
   };
@@ -2441,7 +2512,7 @@ function uniquifySvgIds(svg, prefix){
 function reportGeometry(S){
   const g=S.geometry||{};
   if(S.type==='frame') return `b = ${num(g.b)} m, h<sub>A</sub> = ${num(g.hA??g.h)} m` + ((g.hB??g.h)!==(g.hA??g.h) ? `, h<sub>B</sub> = ${num(g.hB)} m` : '');
-  if(S.type==='cont')  return Array.isArray(g.spans) ? g.spans.map((L,i)=>`L<sub>${i+1}</sub> = ${num(L)} m`).join(', ') : '—';
+  if(S.type==='cont')  return Array.isArray(g.spans) ? [g.ovL?`Kragarm links ü = ${num(g.ovL)} m`:'', ...g.spans.map((L,i)=>`L<sub>${i+1}</sub> = ${num(L)} m`), g.ovR?`Kragarm rechts ü = ${num(g.ovR)} m`:''].filter(Boolean).join(', ') : '—';
   return g.L!=null ? `L = ${num(g.L)} m` : '—';
 }
 function reportSupports(S){
@@ -2456,6 +2527,7 @@ function reportSupports(S){
   } else if(S.type==='cont'){
     const list = sp.list || (Array.isArray(S.geometry?.spans) ? ['pin', ...S.geometry.spans.map(()=> 'roller')] : []);
     lines.push(list.map((t,i)=>`${String.fromCharCode(65+i)}: ${SUP_DE[t]||t}`).join(', ') || '—');
+    (S.hinges||[]).forEach((hg,i)=>lines.push(`Gelenk G${i+1}: Feld ${hg.span}, x = ${num(hg.a)} m vom Feldanfang`));
   } else {
     lines.push('A: Festlager, B: Loslager');
   }
@@ -2465,6 +2537,8 @@ function reportStiffness(S){
   const st=S.stiffness; if(!st) return null;
   const ei = (E,Iy)=>`EI = ${Math.round(10*E*Iy).toLocaleString('de-DE')} kNm² <span class="rep-dim">(E = ${num(E)}·10³ N/mm², I<sub>y</sub> = ${num(Iy)}·10³ cm⁴)</span>`;
   if(S.type==='frame') return [`Riegel: ${ei(st.E_raf,st.Iy_raf)}`, `Stiele: ${ei(st.E_col,st.Iy_col)}`];
+  const k = S.geometry?.k;
+  if(S.type==='cont' && Array.isArray(k) && k.some(v=>v!==1)) return [ei(st.E, st.Iy)+' (Bezug)', k.map((v,i)=>`Feld ${i+1}: ${num(v)}·EI`).join(', ')];
   return [ei(st.E, st.Iy)];
 }
 function reportLoads(S){
@@ -2483,10 +2557,13 @@ function reportLoads(S){
       out.push(`P${n}: ${parts.join(', ')||'0'}, ${MEM_DE[mem]}, ${mem==='rafter'?'x':'z'} = ${num(l.z)} m`);
     });
   } else if(S.type==='cont'){
-    (L.spans||[]).forEach((sp,k)=>{
-      (sp.point||[]).forEach(l=>out.push(`Feld ${k+1}: F${l.i} = ${num(l.F)} kN ↓, x = ${num(l.a)} m`));
-      (sp.dist||[]).forEach(l=>out.push(`Feld ${k+1}: q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
-    });
+    const segOut = (nm, sp) => { if(!sp) return;
+      (sp.point||[]).forEach(l=>out.push(`${nm}: F${l.i} = ${num(l.F)} kN ↓, x = ${num(l.a)} m`));
+      (sp.dist||[]).forEach(l=>out.push(`${nm}: q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
+      (sp.mom||[]).forEach(l=>out.push(`${nm}: M${l.i} = ${num(l.M)} kNm ↻, x = ${num(l.a)} m`)); };
+    segOut('Kragarm links', L.ovL);
+    (L.spans||[]).forEach((sp,k)=>segOut(`Feld ${k+1}`, sp));
+    segOut('Kragarm rechts', L.ovR);
   } else {
     (L.point||[]).forEach(l=>out.push(`F${l.i} = ${num(l.F)} kN, x = ${num(l.a)} m`+(+l.alpha?`, α = ${num(l.alpha)}°`:'')));
     (L.dist||[]).forEach(l=>out.push(`q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
@@ -2592,7 +2669,7 @@ function renderReportDiagrams(sdf){
     } else if(p.kind==='cant'){
       renderCantDiagram(p.L, p.Q, p.M, p.N, {ts:p.ts, w:p.w, target});
     } else if(p.kind==='cont'){
-      renderContDiagram(p.Ls, p.Q, p.M, {ts:p.ts, w:p.w, N:p.N, target});
+      renderContDiagram(p.Ls, p.Q, p.M, {ts:p.ts, w:p.w, N:p.N, layout:p.layout, target});
     }
     svg.style.width='100%'; svg.style.height='auto'; svg.removeAttribute('height');
   });
@@ -3143,14 +3220,18 @@ function sampleFine(elems, NP){
 //   und Auflagerkräfte je Lager {H (→ +), V (↑ +), M (↺ +)}.
 function lineBuildModel(L, cfg){
   const {supports, points, dists, EI} = cfg;
+  const hinges = cfg.hinges || [], EIfn = cfg.EIfn || null;   // Gelenke [x], EI je Stelle (optional)
   const cl = x => Math.min(Math.max(x,0),L);
   const cuts = [0, L];
+  hinges.forEach(x=>cuts.push(cl(x)));
   supports.forEach(s=>cuts.push(cl(s.x)));
   points.forEach(p=>cuts.push(cl(p.x)));
   dists.forEach(d=>cuts.push(cl(d.a), cl(d.b)));
   const xs = [...new Set(cuts.map(x=>+x.toFixed(9)))].sort((a,b)=>a-b);
   let ndof = 0;
-  const nodes = xs.map(x=>({x, ux:ndof++, uy:ndof++, rot:ndof++}));
+  const isH = x => hinges.some(h=>Math.abs(cl(h)-x)<1e-7);
+  // Gelenk: zweiter Drehfreiheitsgrad rot2 für den Stab rechts vom Knoten
+  const nodes = xs.map(x=>{ const n={x, ux:ndof++, uy:ndof++, rot:ndof++}; if(isH(x)) n.rot2=ndof++; return n; });
   const nodeAt = x => nodes.reduce((b,n)=>Math.abs(n.x-cl(x))<Math.abs(b.x-cl(x))?n:b, nodes[0]);
   const qAt = x => {                          // Streckenlast ↓ an der Stelle x
     let q = 0;
@@ -3165,8 +3246,8 @@ function lineBuildModel(L, cfg){
   for(let i=0;i<nodes.length-1;i++){
     const ni=nodes[i], nj=nodes[i+1], len=nj.x-ni.x;
     if(len < 1e-9) continue;
-    const e = {mem:'beam', x0:ni.x, t0:ni.x/L, t1:nj.x/L, L:len, c:1, s:0, EI,
-               dofs:[ni.ux, ni.uy, ni.rot, nj.ux, nj.uy, nj.rot]};
+    const e = {mem:'beam', x0:ni.x, t0:ni.x/L, t1:nj.x/L, L:len, c:1, s:0, EI: EIfn ? EIfn(ni.x+len/2) : EI,
+               dofs:[ni.ux, ni.uy, ni.rot2??ni.rot, nj.ux, nj.uy, nj.rot]};
     // Mitte des Elements auswerten, damit Lastgrenzen am Rand eindeutig sind
     e.pAt = xi => [0, -qAt(e.x0 + Math.min(Math.max(xi, 1e-9), len-1e-9))];
     elems.push(e);
@@ -3180,7 +3261,7 @@ function lineBuildModel(L, cfg){
   supports.forEach(s=>{
     const n = nodeAt(s.x);
     fixed.add(n.uy);
-    if(s.type==='pin' || s.type==='fixed') fixed.add(n.ux);
+    if(s.type==='pin' || s.type==='fixed' || s.hfix) fixed.add(n.ux);
     if(s.type==='fixed') fixed.add(n.rot);
   });
   return {nodes, elems, F, fixed, ndof, nodeAt};
@@ -3828,23 +3909,19 @@ function renderCantDiagram(L, Qv, Mv, Nv=null, ex={}){
 // ── Continuous beam diagram ────────────────────────
 function renderContDiagram(Ls, Qv_all, Mv_all, ex={}){
   const SVG_W=300, SVG_H=140, PAD=20, bY=75, x0=PAD, x1=SVG_W-PAD, bW=x1-x0;
-  const Ltot = Ls.reduce((a,b)=>a+b,0);
-  let ov = '', cumX=0;
-  Ls.forEach((L,i)=>{
-    const sx = x0 + cumX/Ltot*bW;
-    if(i===0){
-      ov += `<polygon points="${sx},${bY+6} ${sx-6},${bY+14} ${sx+6},${bY+14}" fill="#1a1a18"/>`;
-    } else {
-      ov += `<polygon points="${sx},${bY+6} ${sx-6},${bY+14} ${sx+6},${bY+14}" fill="#1a1a18"/>`;
-      ov += `<circle cx="${sx}" cy="${bY+16}" r="2.5" fill="none" stroke="#1a1a18" stroke-width="1"/>`;
-    }
-    ov += `<text x="${x0+(cumX+L/2)/Ltot*bW}" y="${bY+28}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">L${i+1}=${L}m</text>`;
-    cumX+=L;
+  // Geometrie: neu mit Kragarmen, Lagertypen und Gelenken (layout); ältere Speicherstände nur mit Feldlängen
+  const lay = ex.layout || (()=>{ const xs=[0]; Ls.forEach(L=>xs.push(xs[xs.length-1]+L));
+    return { Ltot:xs[xs.length-1], segs:Ls.map((L,i)=>({key:i, x0:xs[i], L, k:1})), supports:xs.map((x,i)=>({x, type:i===0?'pin':'roller'})), hinges:[] }; })();
+  const Ltot = lay.Ltot, X = x => x0 + x/Ltot*bW;
+  let ov = '';
+  lay.supports.forEach((sp,i)=>{
+    ov += sp.type==='fixed' ? contSupportSVG(X(sp.x), bY, 'fixed', i===0?'L':'R', 0.8) : contSupportSVG(X(sp.x), bY+6, sp.type, null, 0.85);
   });
-  // Last support
-  const sx = x1;
-  ov += `<polygon points="${sx},${bY+6} ${sx-6},${bY+14} ${sx+6},${bY+14}" fill="#1a1a18"/>`;
-  ov += `<circle cx="${sx}" cy="${bY+16}" r="2.5" fill="none" stroke="#1a1a18" stroke-width="1"/>`;
+  lay.hinges.forEach(x=>{ ov += `<circle cx="${X(x)}" cy="${bY}" r="3" fill="#fff" stroke="#1a1a18" stroke-width="1.2"/>`; });
+  lay.segs.forEach(sg=>{
+    const lbl = sg.key==='L'||sg.key==='R' ? `ü=${sg.L}m` : `L${sg.key+1}=${sg.L}m`;
+    ov += `<text x="${X(sg.x0+sg.L/2)}" y="${bY+28}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">${lbl}</text>`;
+  });
 
   const data = {
     svgW: SVG_W, svgH: SVG_H, overlay: ov,
@@ -3983,6 +4060,9 @@ let calcLang = localStorage.getItem('statiq-lang') || 'en';
 
 const calcTranslations = {
   en: {
+    spanWord:'Span', loadsWord:'Loads', eiRatio:'stiffness ratio', eiRef:'reference EI',
+    modalContSolveH:'Solution Method', modalContSolveP:'The three-moment equation is the classic hand method. calc itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.',
+    modalContOptH:'Options: fixed ends, cantilevers, hinges', modalContOptP:'Counting rule for beams (vertical loads): n = a − 2 − g, with a = vertical support reactions plus clamping moments (fixed end 2, pin/roller 1) and g = number of hinges. n = 0: statically determinate (e.g. Gerber beam), n &lt; 0: mechanism. In a hinge the moment is zero. I<sub>i</sub>/I scales the stiffness of a span — in indeterminate systems this shifts the support moments towards the stiffer span.', endSupports:'End supports and cantilevers', leftEnd:'Left end support', rightEnd:'Right end support', overhangL:'Cantilever left', overhangR:'Cantilever right', pointMoments:'Point Moments', addMoment:'＋ Add Moment', supPin:'Pin △', supRoller:'Roller ○', supFixed:'Fixed ⊞',
     tabs: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame'],
     system: 'System', span: 'Span L', length: 'Length L',
     pointLoads: 'Point Loads', distLoads: 'Distributed Loads',
@@ -4056,6 +4136,9 @@ const calcTranslations = {
     modalFrameS5t: 'M &gt; 0: tension on the inside (dashed fibre) · Q = dM/ds along the member · N &gt; 0: tension<br>Support reactions: H → +, V ↑ +, M ↺ + (forces of the support on the frame)',
   },
   de: {
+    spanWord:'Feld', loadsWord:'Lasten', eiRatio:'Steifigkeitsverhältnis', eiRef:'Bezugswert EI',
+    modalContSolveH:'Lösungsweg', modalContSolveP:'Die Dreimomentengleichung (Clapeyron) ist das klassische Handverfahren. calc selbst rechnet mit dem Weggrößenverfahren in Matrixform (wie beim Rahmen). Dadurch lassen sich Einspannungen, Kragarme, Gelenke, unterschiedliche Steifigkeiten je Feld und Einzelmomente beliebig kombinieren. M, Q und die Durchbiegung folgen exakt aus den Knotenverschiebungen.',
+    modalContOptH:'Optionen: Einspannung, Kragarme, Gelenke', modalContOptP:'Abzählkriterium für Balken (lotrechte Lasten): n = a − 2 − g mit a = lotrechte Auflagerkräfte plus Einspannmomente (Einspannung 2, Fest-/Loslager 1) und g = Anzahl der Gelenke. n = 0: statisch bestimmt (z. B. Gerberträger), n &lt; 0: verschieblich. Im Gelenk ist das Moment null. I<sub>i</sub>/I verändert die Steifigkeit eines Feldes — bei statisch unbestimmten Systemen wandern die Stützmomente dadurch zum steiferen Feld.', endSupports:'Endlager und Kragarme', leftEnd:'Lager links', rightEnd:'Lager rechts', overhangL:'Kragarm links', overhangR:'Kragarm rechts', pointMoments:'Einzelmomente', addMoment:'＋ Einzelmoment', supPin:'Festlager △', supRoller:'Loslager ○', supFixed:'Einspannung ⊞',
     tabs: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen'],
     system: 'System', span: 'Stützweite L', length: 'Länge L',
     pointLoads: 'Einzellasten', distLoads: 'Streckenlasten',
@@ -4125,6 +4208,7 @@ const calcTranslations = {
     modalFrameS5t: 'M &gt; 0: Zug innen (gestrichelte Faser) · Q = dM/ds in Stabrichtung · N &gt; 0: Zug<br>Auflagerreaktionen: H → +, V ↑ +, M ↺ + (Kräfte des Lagers auf den Rahmen)',
   },
   fr: {
+    spanWord:'Travée', loadsWord:'Charges', eiRatio:'rapport de rigidité', eiRef:'EI de référence', endSupports:'Appuis d’extrémité et consoles', leftEnd:'Appui gauche', rightEnd:'Appui droit', overhangL:'Console gauche', overhangR:'Console droite', pointMoments:'Moments ponctuels', addMoment:'＋ Ajouter un moment', supPin:'Appui fixe △', supRoller:'Appui mobile ○', supFixed:'Encastrement ⊞',
     tabs: ['Poutre Simple', 'Console', 'Poutre Continue', 'Portique'],
     system: 'Système', span: 'Portée L', length: 'Longueur L',
     pointLoads: 'Charges Ponctuelles', distLoads: 'Charges Réparties',
@@ -4182,6 +4266,7 @@ const calcTranslations = {
     modalFrameS5h: 'Conventions de signe',
   },
   es: {
+    spanWord:'Vano', loadsWord:'Cargas', eiRatio:'relación de rigidez', eiRef:'EI de referencia', endSupports:'Apoyos extremos y voladizos', leftEnd:'Apoyo izquierdo', rightEnd:'Apoyo derecho', overhangL:'Voladizo izquierdo', overhangR:'Voladizo derecho', pointMoments:'Momentos puntuales', addMoment:'＋ Añadir momento', supPin:'Apoyo fijo △', supRoller:'Apoyo móvil ○', supFixed:'Empotramiento ⊞',
     tabs: ['Viga Biapoyada', 'Ménsula', 'Viga Continua', 'Pórtico'],
     system: 'Sistema', span: 'Luz L', length: 'Longitud L',
     pointLoads: 'Cargas Puntuales', distLoads: 'Cargas Distribuidas',
@@ -4385,7 +4470,7 @@ function applyCalcTranslations(){
     const tabES = ['Viga Biapoyada','Ménsula','Viga Continua','Pórtico'];
     [...tab,...tabDE,...tabFR,...tabES].forEach((name,i)=>{
       if(fn.textContent.includes(name)){
-        fn.textContent = `Statiq v0.8.5 · ${t.tabs[i%4]}`;
+        fn.textContent = `Statiq v0.8.6 · ${t.tabs[i%4]}`;
       }
     });
   });

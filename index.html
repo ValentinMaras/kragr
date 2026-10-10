@@ -214,6 +214,7 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
       opacity: 0;
     }
+    .module-card { animation: fadeUp 0.4s 0.3s ease forwards; }   /* Rückfall, falls weitere Karten dazukommen */
     .module-card:nth-child(2) { animation: fadeUp 0.4s 0.05s ease forwards; }
     .module-card:nth-child(3) { animation: fadeUp 0.4s 0.12s ease forwards; }
     .module-card:nth-child(4) { animation: fadeUp 0.4s 0.19s ease forwards; }
@@ -384,7 +385,7 @@
     <span class="dim">Toolkit.</span>
   </h1>
 
-  <p class="subline" id="subline">Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5</p>
+  <p class="subline" id="subline">Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5<br>Eurocode 7</p>
 
 
 </section>
@@ -417,6 +418,27 @@
     <span id="saved-text">Saved calculations &amp; reports</span><span class="mono">statiq·calc →</span>
   </a>
 
+  <!-- ref -->
+  <a class="module-card active" href="ref.html" style="--card-accent:#3b6fd4;">
+    <div class="card-top">
+      <div class="card-id">statiq·ref</div>
+      <div class="card-badge badge-live" id="badge-live-2">● LIVE</div>
+    </div>
+    <div class="card-title" id="ref-title">Theory & Tables</div>
+    <div class="card-desc" id="ref-desc">Formulas, tables and design checks from structural analysis to geotechnics, with calculators and examples — your digital reference handbook.</div>
+    <div class="card-tags" id="ref-tags">
+      <span class="tag">Structural Analysis</span>
+      <span class="tag">Loads EC0/EC1</span>
+      <span class="tag">Concrete EC2</span>
+      <span class="tag">Steel Sections</span>
+      <span class="tag">Timber EC5</span>
+      <span class="tag">Geotechnics</span>
+      <span class="tag">Maths</span>
+      <span class="tag">Search</span>
+    </div>
+  <div class="card-arrow">→</div>
+  </a>
+
   <!-- size -->
   <div class="module-card inactive" style="--card-accent:#2563eb;">
     <div class="card-top">
@@ -433,28 +455,11 @@
     </div>
   </div>
 
-  <!-- ref -->
-  <div class="module-card inactive" style="--card-accent:#60a5fa;">
-    <div class="card-top">
-      <div class="card-id">statiq·ref</div>
-      <div class="card-badge badge-soon" id="badge-soon-2">SOON</div>
-    </div>
-    <div class="card-title" id="ref-title">Theory & Tables</div>
-    <div class="card-desc" id="ref-desc">Material values, factors and design checks to look up, starting with timber (EC5) — your digital reference handbook.</div>
-    <div class="card-tags" id="ref-tags">
-      <span class="tag">Timber EC5</span>
-      <span class="tag">Solid Timber &amp; Glulam</span>
-      <span class="tag">kmod &amp; γM</span>
-      <span class="tag">Fasteners</span>
-      <span class="tag">Search</span>
-    </div>
-  </div>
-
 </section>
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Built by engineers</span> · calc v0.8.4 · ref v0.1.1</div>
+  <div class="footer-meta"><span id="footer-meta">Built by engineers</span> · calc v0.8.5 · ref v0.3.1</div>
 </footer>
 
 <script>
@@ -473,11 +478,11 @@ const translations = {
     size_title: 'Design & Sizing',
     size_desc: 'Dimension cross-sections and connections according to Eurocode. Reinforced concrete, steel, and timber.',
     ref_title: 'Theory & Tables',
-    ref_desc: 'Material values, factors and design checks to look up, starting with timber (EC5) — your digital reference handbook.',
+    ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics, with calculators and examples — your digital reference handbook.',
     footer: 'Built by engineers',
     saved: 'Saved calculations &amp; reports',
     size_tags: ["Reinforced Concrete", "Steel Sections", "Connections", "Eurocode"],
-    ref_tags: ["Timber EC5", "Solid Timber & Glulam", "kmod & γM", "Fasteners", "Search"],
+    ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Geotechnics", "Maths", "Search"],
     tags: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame', 'Trapezoidal Loads', 'Wind on Columns', 'Exact Deflection', 'PDF Report'],
     spec1: '4', spec2: '4',
   },
@@ -491,11 +496,11 @@ const translations = {
     size_title: 'Bemessung',
     size_desc: 'Querschnitte und Verbindungen nach Eurocode bemessen. Stahlbeton, Stahl und Holz.',
     ref_title: 'Theorie & Tafeln',
-    ref_desc: 'Baustoffkennwerte, Beiwerte und Nachweise zum Nachschlagen, beginnend mit dem Holzbau (EC5) — dein digitales Nachschlagewerk.',
+    ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zum Grundbau, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
     footer: 'Von Ingenieuren gebaut',
     saved: 'Gespeicherte Berechnungen &amp; Berichte',
     size_tags: ["Stahlbeton", "Stahlprofile", "Verbindungen", "Eurocode"],
-    ref_tags: ["Holzbau EC5", "Vollholz & BSH", "kmod & γM", "Verbindungsmittel", "Suche"],
+    ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Grundbau", "Mathematik", "Suche"],
     tags: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen', 'Trapezlasten', 'Wind auf Stielen', 'Exakte Durchbiegung', 'Bericht als PDF'],
     spec1: '4', spec2: '4',
   },
@@ -509,11 +514,11 @@ const translations = {
     size_title: 'Dimensionnement',
     size_desc: 'Dimensionnez les sections et assemblages selon l\'Eurocode. Béton armé, acier et bois.',
     ref_title: 'Théorie & Tables',
-    ref_desc: 'Valeurs des matériaux, coefficients et vérifications à consulter, en commençant par le bois (EC5) — votre manuel de référence numérique.',
+    ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique, avec calculateurs et exemples — votre manuel de référence numérique.',
     footer: 'Construit par des ingénieurs',
     saved: 'Calculs &amp; rapports enregistrés',
     size_tags: ["Béton armé", "Profilés acier", "Assemblages", "Eurocode"],
-    ref_tags: ["Bois EC5", "Bois massif & lamellé-collé", "kmod & γM", "Organes d’assemblage", "Recherche"],
+    ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Géotechnique", "Mathématiques", "Recherche"],
     tags: ['Poutre simple', 'Console', 'Poutre continue', 'Portique', 'Charges trapézoïdales', 'Vent sur poteaux', 'Flèche exacte', 'Rapport PDF'],
     spec1: '4', spec2: '4',
   },
@@ -527,11 +532,11 @@ const translations = {
     size_title: 'Dimensionado',
     size_desc: 'Dimensiona secciones y uniones según el Eurocódigo. Hormigón armado, acero y madera.',
     ref_title: 'Teoría y Tablas',
-    ref_desc: 'Valores de materiales, coeficientes y comprobaciones para consultar, empezando por la madera (EC5) — tu manual de referencia digital.',
+    ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia, con calculadoras y ejemplos — tu manual de referencia digital.',
     footer: 'Hecho por ingenieros',
     saved: 'Cálculos e informes guardados',
     size_tags: ["Hormigón armado", "Perfiles de acero", "Uniones", "Eurocódigo"],
-    ref_tags: ["Madera EC5", "Madera maciza y laminada", "kmod y γM", "Medios de unión", "Búsqueda"],
+    ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Geotecnia", "Matemáticas", "Búsqueda"],
     tags: ['Viga biapoyada', 'Ménsula', 'Viga continua', 'Pórtico', 'Cargas trapezoidales', 'Viento en pilares', 'Flecha exacta', 'Informe PDF'],
     spec1: '4', spec2: '4',
   }
@@ -563,7 +568,7 @@ function applyLang(lang){
   document.getElementById('section-label').childNodes[0].textContent = t.modules;
   document.getElementById('badge-live').textContent = t.live;
   document.getElementById('badge-soon-1').textContent = t.soon;
-  document.getElementById('badge-soon-2').textContent = t.soon;
+  document.getElementById('badge-live-2').textContent = t.live;
   document.getElementById('calc-title').textContent = t.calc_title;
   document.getElementById('calc-desc').textContent = t.calc_desc;
   document.getElementById('size-title').textContent = t.size_title;

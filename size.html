@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.4.0 -->
+<!-- Statiq·size v0.4.1 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -45,6 +45,8 @@
     .page-title { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
     .page-sub { font-size: 13px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
 
+    .card, #results { scroll-margin-top: 64px; }
+    @media (max-width: 860px) { .card, #results { scroll-margin-top: 100px; } }
     .card { background: rgba(255,255,255,0.94); border: 1px solid var(--border-dark); border-radius: var(--radius); padding: 1rem 1.15rem; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .card-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-family:'DM Mono', monospace; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 
@@ -149,7 +151,7 @@
   <a class="logo" href="index.html" title="Zur Startseite">stat<span>iq</span></a>
   <nav class="header-links">
     <span class="module-name">size</span>
-    <a href="ref.html#/stahlbeton">ref</a>
+    <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
     <a href="calc.html">calc</a>
     <span class="version" id="ver"></span>
   </nav>
@@ -480,7 +482,7 @@
 </div>
 
 <script>
-const SIZE_VERSION = '0.4.0';
+const SIZE_VERSION = '0.4.1';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -1640,6 +1642,7 @@ function setMat(m){
   MAT=m; showMat(); run();
 }
 function showMat(){
+  const rl=$('hdr-ref'); if(rl) rl.href = MAT==='stahl' ? 'ref.html#/stahlbau' : MAT==='holz' ? 'ref.html#/holzbau' : 'ref.html#/stahlbeton';
   document.querySelectorAll('#seg-mat button').forEach(b=>b.classList.toggle('active', b.dataset.mat===MAT));
   $('mat-beton').style.display = MAT==='beton' ? '' : 'none';
   $('mat-stahl').style.display = MAT==='stahl' ? '' : 'none';

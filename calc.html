@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.6 -->
+<!-- Statiq v0.8.7 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -374,8 +374,13 @@
 
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="app-header">
-  <a class="logo" href="index.html">stat<span>iq</span></a>
-  <div style="font-size:10px;color:var(--text3);font-family:DM Mono,monospace;letter-spacing:0.5px;">v0.8.6</div>
+  <a class="logo" href="index.html" title="Startseite">stat<span>iq</span></a>
+  <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-family:DM Mono,monospace">
+    <span style="color:var(--accent);font-weight:500">calc</span>
+    <a href="size.html" style="color:var(--text2);text-decoration:none">size</a>
+    <a href="ref.html" style="color:var(--text2);text-decoration:none">ref</a>
+    <span style="font-size:10px;color:var(--text3);letter-spacing:0.5px">v0.8.7</span>
+  </div>
 </header>
 
 <nav class="nav" style="display:flex;align-items:center;padding:0 16px;gap:10px">
@@ -407,17 +412,17 @@
       <span style="margin-left:auto;color:var(--text-muted)">›</span>
     </button>
 
-    <button class="nd-item nd-module" style="opacity:0.4;cursor:not-allowed">
-      <span class="nd-mono-tag" style="background:var(--border);color:var(--text-muted)">SS</span>
+    <a href="size.html" class="nd-item nd-module" style="text-decoration:none">
+      <span class="nd-mono-tag" style="background:#2563eb;color:white">SS</span>
       <div><div style="font-weight:600">statiq·size</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="modSizeSub">Bemessung nach Eurocodes</div></div>
-      <span style="margin-left:auto;font-size:9px;background:var(--border);padding:2px 6px;border-radius:4px;color:var(--text-muted);font-family:DM Mono,monospace">SOON</span>
-    </button>
+      <span style="margin-left:auto;color:var(--text-muted)">›</span>
+    </a>
 
-    <button class="nd-item nd-module" style="opacity:0.4;cursor:not-allowed">
-      <span class="nd-mono-tag" style="background:var(--border);color:var(--text-muted)">SR</span>
+    <a href="ref.html" class="nd-item nd-module" style="text-decoration:none">
+      <span class="nd-mono-tag" style="background:#3b6fd4;color:white">SR</span>
       <div><div style="font-weight:600">statiq·ref</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="modRefSub">Profile, Tabellen, Eurocodes</div></div>
-      <span style="margin-left:auto;font-size:9px;background:var(--border);padding:2px 6px;border-radius:4px;color:var(--text-muted);font-family:DM Mono,monospace">SOON</span>
-    </button>
+      <span style="margin-left:auto;color:var(--text-muted)">›</span>
+    </a>
 
     <div style="height:1px;background:var(--border);margin:12px 0"></div>
 
@@ -543,7 +548,7 @@
       <div class="diagram-label" id="diag-label-beam">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.6</div>
+  <div class="footnote">Statiq v0.8.7</div>
 </main>
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
@@ -610,7 +615,7 @@
       <div class="diagram-label" id="diag-label-cant">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.6 · Cantilever</div>
+  <div class="footnote">Statiq v0.8.7 · Cantilever</div>
 </main>
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
@@ -679,7 +684,7 @@
       <div class="diagram-label" id="diag-label-cont">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.6 · Continuous Beam</div>
+  <div class="footnote">Statiq v0.8.7 · Continuous Beam</div>
 </main>
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
@@ -824,7 +829,7 @@
       <div class="diagram-label" id="diag-label-frame">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.6 · Frame</div>
+  <div class="footnote">Statiq v0.8.7 · Frame</div>
 </main>
 
 <script>
@@ -912,7 +917,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.6';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.7';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -986,13 +991,14 @@ function showTab(name) {
 
   // Update drawer active state
   // Use i18n tab names if available, else fallback
-  const i18nTabs = window._i18n?.tabs || ['Simply Supported','Cantilever','Continuous Beam','Frame'];
+  const _t = (typeof calcTranslations!=='undefined' && (calcTranslations[calcLang]||calcTranslations.en)) || {};
+  const i18nTabs = _t.tabs || ['Simply Supported','Cantilever','Continuous Beam','Frame'];
   const labels = {
     beam: i18nTabs[0]||'Einfeldträger',
     cantilever: i18nTabs[1]||'Kragarm',
     cont: i18nTabs[2]||'Durchlaufträger',
     frame: i18nTabs[3]||'Rahmen',
-    saved: window._i18n?.saved||'Gespeichert'
+    saved: _t.saved||'Saved'
   };
   document.querySelectorAll('.nd-item').forEach(b=>b.classList.remove('active'));
   const activeBtn=document.getElementById('nm-'+name);
@@ -4470,7 +4476,7 @@ function applyCalcTranslations(){
     const tabES = ['Viga Biapoyada','Ménsula','Viga Continua','Pórtico'];
     [...tab,...tabDE,...tabFR,...tabES].forEach((name,i)=>{
       if(fn.textContent.includes(name)){
-        fn.textContent = `Statiq v0.8.6 · ${t.tabs[i%4]}`;
+        fn.textContent = `Statiq v0.8.7 · ${t.tabs[i%4]}`;
       }
     });
   });

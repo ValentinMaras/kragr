@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.10 -->
+<!-- Statiq v0.8.11 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
   <title>Statiq — Structural Analysis</title>
   <meta name="description" content="Structural analysis app for civil engineering students — calculate shear forces, bending moments and section properties." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -232,6 +232,75 @@
       .main, #tab-saved { max-width:none!important; width:auto!important; margin:0!important; padding:0!important; }
       .card { box-shadow:none; border:1px solid #ddd; }
     }
+  
+    /* ══ Design 2026 (wie die Startseite): weiß, Inter, ohne Rahmen und Raster ══ */
+    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f1f3; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
+      --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --accent:#2563eb; --accent-bg:#eef3ff; --radius:18px; --radius-sm:10px; --card:#f8f8f9; }
+    body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
+    body::before { display:none; }
+    .app-header { background:rgba(255,255,255,0.92); border-bottom:none; padding:14px 24px; backdrop-filter:blur(10px); }
+    .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; color:var(--text); }
+    .logo span { color:var(--accent); }
+    .version { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
+    .header-links { font-family:inherit; font-size:13px; font-weight:600; gap:18px; }
+    .header-links a { color:var(--text3); }
+    .header-links a:hover { color:var(--text); }
+    .header-links .module-name { color:var(--text); font-weight:800; }
+    .card { background:var(--card); border:none; box-shadow:none; border-radius:18px; padding:20px 22px; margin-bottom:14px; }
+    .card-title { font-family:inherit; font-size:15px; font-weight:800; letter-spacing:-0.2px; text-transform:none; color:var(--text); margin-bottom:14px; }
+    .page-title { font-size:clamp(26px, 4.6vw, 38px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; }
+    .page-sub { font-size:14px; color:var(--text3); line-height:1.55; margin-top:8px; }
+    .field label, .calc-field label { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
+    .field input, .field select, .calc-field input, .calc-field select, .search input { border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; background:#fff; padding:9px 11px; font-family:inherit; font-size:14px; }
+    .field input:focus, .field select:focus, .calc-field input:focus, .search input:focus { outline:2px solid var(--accent); outline-offset:0; box-shadow:none; }
+    .field input:disabled, .field select:disabled { background:#f1f1f3; box-shadow:none; }
+    .seg { border:none; background:#efeff1; padding:3px; border-radius:12px; gap:3px; }
+    .seg button { background:transparent; border-radius:9px; color:var(--text2); font-family:inherit; font-weight:600; transition:background .15s, box-shadow .15s; }
+    .seg button + button { border-left:none; }
+    .seg button:hover { color:var(--text); }
+    .seg button.active { background:#fff; color:var(--text); font-weight:800; box-shadow:0 1px 3px rgba(0,0,0,0.10); }
+    .btn { border:none; border-radius:12px; background:#0a0a0a; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
+    .btn:hover { background:#262626; } .btn:active { transform:scale(0.98); }
+    .btn.secondary { background:#efeff1; color:var(--text); }
+    .btn.danger { background:#fff; box-shadow:inset 0 0 0 1px var(--bad, #b42318); }
+    .hint { color:var(--text3); }
+    .formula-box { background:#fff; border:none; border-radius:12px; }
+    .footnote { font-family:inherit; color:var(--text3); }
+    @media (max-width:560px){ .app-header{ padding:12px 16px; } .card{ padding:16px; border-radius:16px; } }
+    .nav { background:rgba(255,255,255,0.92); border-bottom:none; padding:0 16px; gap:4px; }
+    .nav-tab { font-family:inherit; font-weight:600; color:var(--text3); border-bottom:none; border-radius:10px; padding:9px 14px; margin:4px 0 8px; }
+    .nav-tab:hover { color:var(--text); }
+    .nav-tab.active { color:var(--text); background:#efeff1; font-weight:800; }
+    .main { padding:20px 20px; max-width:520px; }
+    .field label { font-size:13px; font-weight:500; color:var(--text2); }
+    .field input { font-family:'DM Mono', monospace; }
+    .load-item { border:none; border-radius:14px; box-shadow:none; background:#fff; }
+    .load-item-header { background:#fff; border-bottom:1px solid #f1f1f3; }
+    .load-item-label { font-family:inherit; font-weight:800; font-size:13px; color:var(--text); }
+    .load-item-body { background:#fff; }
+    .add-load-btn { border:1.5px dashed #d4d4d8; border-radius:12px; font-family:inherit; font-weight:600; font-size:13px; }
+    .add-load-btn:hover { background:#fff; border-color:#0a0a0a; color:var(--text); border-style:dashed; }
+    .calc-btn { background:#0a0a0a; border-radius:14px; font-family:inherit; font-weight:800; font-size:15px; letter-spacing:-0.1px; }
+    .calc-btn:hover { background:#262626; }
+    .toggle-btn, .diagram-toggle-btn { border:none !important; background:#efeff1; border-radius:10px; font-family:inherit; font-weight:600; }
+    .toggle-btn.active, .diagram-toggle-btn.active { background:#0a0a0a !important; color:#fff !important; }
+    .metric { background:#fff; border:none; border-radius:14px; box-shadow:none; }
+    .metric .m-label { font-family:inherit; font-size:11px; font-weight:600; letter-spacing:0.2px; text-transform:none; }
+    .metric .m-value { font-weight:800; letter-spacing:-0.4px; }
+    .span-count-btn, .modal-close { border:none; background:#efeff1; border-radius:10px; }
+    .info-btn { border:none; background:#efeff1; color:var(--text2); }
+    .info-btn:hover { background:#e4e4e7; color:var(--text); }
+    .modal { border-radius:20px 20px 0 0; }
+    .modal-title { font-weight:800; font-size:18px; letter-spacing:-0.3px; }
+    .lang-pick button { border:none; background:#efeff1; border-radius:10px; font-family:inherit; font-weight:700; }
+    .lang-pick button.active { background:#0a0a0a; color:#fff; }
+    .nd-item.active { color:var(--text); background:#efeff1; font-weight:800; }
+    .nd-item:hover { background:#f4f4f5; }
+    .header-links { display:flex; align-items:center; }
+    .header-links a { text-decoration:none; }
+    .load-action-btn { border:none; background:#efeff1; border-radius:8px; }
+    .diagram-toggle-btn { border-radius:10px; }
+    .beam-svg-wrap, .diagram-svg-wrap { background:#fff; border-radius:12px; }
   </style>
 </head>
 <body>
@@ -374,16 +443,16 @@
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="app-header">
   <a class="logo" href="index.html" title="Startseite">stat<span>iq</span></a>
-  <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-family:DM Mono,monospace">
-    <span style="color:var(--accent);font-weight:500">calc</span>
-    <a href="size.html" style="color:var(--text2);text-decoration:none">size</a>
-    <a href="ref.html" style="color:var(--text2);text-decoration:none">ref</a>
-    <span style="font-size:10px;color:var(--text3);letter-spacing:0.5px">v0.8.10</span>
+  <div class="header-links">
+    <span class="module-name">calc</span>
+    <a href="size.html">size</a>
+    <a href="ref.html">ref</a>
+    <span class="version">v0.8.11</span>
   </div>
 </header>
 
 <nav class="nav" style="display:flex;align-items:center;padding:0 16px;gap:10px">
-  <span id="nav-current-label" style="font-size:13px;font-weight:600;color:var(--accent);font-family:DM Sans,sans-serif;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span>
+  <span id="nav-current-label" style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.2px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span>
 
   <button onclick="toggleNavMenu()" style="background:none;border:none;cursor:pointer;padding:10px 2px;font-size:22px;color:var(--text2);line-height:1" title="Menu">☰</button>
 </nav>
@@ -514,7 +583,7 @@
   </div>
   <button class="calc-btn" onclick="calculateBeam()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-beam" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('beam')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('beam')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
   <div id="beam-results" class="hidden">
     <div class="results-grid">
       <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVA">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="b-res-A">—</div><div class="m-unit">kN</div></div>
@@ -581,7 +650,7 @@
   </div>
   <button class="calc-btn" onclick="calculateCantilever()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-cant" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('cantilever')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('cantilever')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
   <div id="cant-results" class="hidden">
     <div class="results-grid">
       <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVA">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="c-res-V">—</div><div class="m-unit">kN</div></div>
@@ -645,7 +714,7 @@
 
   <button class="calc-btn" onclick="calculateContinuous()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-cont" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('cont')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('cont')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
 
   <div id="cont-results" class="hidden">
     <div class="results-grid">
@@ -777,7 +846,7 @@
 
   <button class="calc-btn" onclick="calculateFrame()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-frame" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveFrameCalc()"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveFrameCalc()"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
 
   <div id="frame-results" class="hidden">
     <div class="results-grid">
@@ -919,7 +988,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.10';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.11';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;

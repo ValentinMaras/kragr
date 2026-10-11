@@ -6,357 +6,81 @@
   <title>Statiq — The Structural Engineer's Toolkit</title>
   <meta name="description" content="Structural analysis tools for engineers and students. Calculate, reference, and design." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    html, body { overflow-x: clip; }   /* dekorativer I-Träger darf auf dem Handy nicht seitlich überstehen */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --steel: #f0f1f3;
-      --steel-mid: #e4e6ea;
-      --steel-light: #d8dade;
-      --blue1: #1e3a8a;
-      --blue2: #2563eb;
-      --concrete: #6b7280;
-      --concrete-light: #374151;
-      --wire: #cbd5e1;
-      --surface: #ffffff;
-      --text: #111827;
-      --text2: #374151;
-      --text3: #9ca3af;
-      --accent: #2563eb;
-      --radius: 4px;
-      --radius-lg: 8px;
-    }
-
+    :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --accent:#2563eb; }
     html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
+    a { color: inherit; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--steel);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── STEEL GRID TEXTURE ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--wire) 1px, transparent 1px),
-        linear-gradient(90deg, var(--wire) 1px, transparent 1px);
-      background-size: 48px 48px;
-      opacity: 0.5;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── HEADER ── */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(240,241,243,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--wire);
-      padding: 0 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 52px;
-    }
-    .logo {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      color: var(--text);
-    }
-    .logo span { color: var(--blue2); }
-
-    /* Lang switcher */
+    /* Kopfzeile */
+    .header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+      display:flex; align-items:center; justify-content:space-between; height:64px; padding:0 24px; max-width:760px; margin:0 auto; }
+    .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; }
+    .logo span { color: inherit; }
     .lang-switcher { position: relative; }
-    .lang-btn {
-      display: flex; align-items: center; gap: 4px;
-      padding: 5px 10px;
-      border: 1px solid var(--wire);
-      border-radius: var(--radius);
-      background: transparent;
-      cursor: pointer;
-      font-size: 16px;
-      transition: border-color 0.15s;
-    }
-    .lang-btn:hover { border-color: var(--concrete); }
-    .lang-chevron { font-size: 9px; color: var(--text3); }
-    .lang-dropdown {
-      position: absolute; top: calc(100% + 6px); right: 0;
-      background: var(--surface);
-      border: 1px solid var(--wire);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-      opacity: 0; pointer-events: none;
-      transform: translateY(-6px);
-      transition: all 0.18s;
-      z-index: 100; min-width: 150px;
-    }
-    .lang-dropdown.open { opacity: 1; pointer-events: all; transform: translateY(0); }
-    .lang-option {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 16px;
-      font-size: 13px; color: var(--text2);
-      cursor: pointer; transition: background 0.1s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .lang-option:hover { background: var(--steel-mid); color: var(--text); }
-    .lang-option.active { color: var(--accent); font-weight: 500; }
-    .lang-code { font-family: 'DM Mono', monospace; font-size: 11px; width: 20px; color: var(--text3); }
-    .lang-option.active .lang-code { color: var(--accent); }
-    #current-flag { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--text2); }
-    /* Link zu gespeicherten Berechnungen */
-    .saved-link { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding: 0.8rem 1.25rem;
-      border: 1px dashed var(--wire); border-radius: var(--radius); background: rgba(255,255,255,0.6); text-decoration: none; color: var(--text2);
-      font-size: 13px; transition: border-color 0.15s, background 0.15s; }
-    .saved-link:hover { border-color: var(--blue2); background: rgba(255,255,255,0.95); color: var(--text); }
-    .saved-link .mono { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); }
+    .lang-btn { display:flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer; padding:6px 0; font:inherit; }
+    #current-flag { font-size:13px; font-weight:700; color:var(--text); letter-spacing:0.3px; }
+    .lang-chevron { font-size:10px; color:var(--text3); }
+    .lang-dropdown { position:absolute; top:calc(100% + 6px); right:0; background:#fff; border-radius:10px; box-shadow:0 12px 32px rgba(0,0,0,0.12);
+      opacity:0; pointer-events:none; transform:translateY(-4px); transition:all .16s; z-index:100; min-width:160px; padding:6px; }
+    .lang-dropdown.open { opacity:1; pointer-events:all; transform:none; }
+    .lang-option { display:flex; gap:12px; align-items:center; padding:9px 12px; border-radius:6px; font-size:14px; color:var(--text2); cursor:pointer; }
+    .lang-option:hover { background:#f5f5f5; color:var(--text); }
+    .lang-option.active { color:var(--text); font-weight:700; }
+    .lang-code { font-size:11px; font-weight:600; width:20px; color:var(--text3); }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      z-index: 1;
-      padding: 1.75rem 1.5rem 1.25rem;
-      max-width: 520px;
-      margin: 0 auto;
-    }
+    /* Einstieg */
+    .hero { max-width:760px; margin:0 auto; padding:40px 24px 32px; }
+    .headline { font-size:clamp(64px, 18vw, 120px); font-weight:800; line-height:0.95; letter-spacing:-0.055em; color:var(--text); margin-bottom:18px; }
+    .headline .iq, .footer-logo span { color:var(--accent); }
+    .headline .accent { color:var(--text); }
+    .headline .dim { color:#c4c4c4; }
+    .subline { font-size:15px; font-weight:500; color:var(--text3); letter-spacing:-0.1px; }
 
-    /* I-beam decorative SVG */
-    .ibeam-deco {
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.04;
-      pointer-events: none;
-    }
+    /* Module: Liste ohne Rahmen */
+    .modules { max-width:760px; margin:0 auto; padding:24px 24px 56px; }
+    .section-label { font-size:13px; font-weight:600; color:var(--text3); margin-bottom:8px; }
+    .module-card { display:block; text-decoration:none; position:relative; padding:22px 22px 26px; margin:0 -22px 18px; border-radius:18px; background:#f9f9fa;
+      transition: background-color .18s ease, transform .12s ease, box-shadow .18s ease; -webkit-tap-highlight-color: transparent; }
+    .module-card:hover { background:#f3f3f5; }
+    .module-card:active { background:#ececef; transform:scale(0.985); box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); }
+    .module-card:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    .module-card + .saved-link, .saved-link + .module-card { }
+    .card-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .card-id { font-size:13px; font-weight:600; color:var(--text3); }
+    .card-badge { font-size:11px; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text); }
+    .badge-new { color:var(--accent); }
+    .badge-live::first-letter { color:#16a34a; }
+    .card-title { font-size:clamp(32px, 9vw, 72px); font-weight:800; letter-spacing:-0.045em; line-height:1.12; margin-bottom:0; display:inline-flex; align-items:baseline; gap:14px; }
+    .card-desc, .card-tags { display:none; }
+    .card-desc-x { font-size:16px; line-height:1.6; color:var(--text2); max-width:620px; margin-bottom:14px; }
+    .card-tags { font-size:13px; font-weight:500; color:var(--text3); line-height:1.7; }
+    .tag { display:inline-block; margin-right:14px; white-space:nowrap; }
+    .card-arrow { display:none; }
+    .saved-link { display:flex; justify-content:space-between; align-items:center; text-decoration:none; margin:-6px 0 24px; padding:4px 0;
+      font-size:15px; font-weight:600; color:var(--text); }
+    .saved-link .mono { font-size:13px; font-weight:500; color:var(--text3); }
+    .saved-link:hover #saved-text { text-decoration: underline; text-underline-offset: 4px; }
 
+    /* Fußzeile */
+    .footer { max-width:760px; margin:0 auto; padding:32px 24px 48px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+    .footer-logo { font-size:15px; font-weight:800; letter-spacing:-0.4px; }
+    .footer-meta { font-size:12px; color:var(--text3); }
 
-    .headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(38px, 10vw, 58px);
-      line-height: 0.92;
-      letter-spacing: 1px;
-      color: var(--text);
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.5s 0.2s ease forwards;
-    }
-    .headline .accent { color: var(--blue2); }
-    .headline .dim { color: var(--concrete); }
-
-    .subline {
-      font-size: 13px;
-      font-family: 'DM Mono', monospace;
-      color: var(--concrete-light);
-      line-height: 1.9;
-      max-width: 320px;
-      margin-bottom: 1rem;
-      letter-spacing: 0.5px;
-      font-weight: 400;
-      opacity: 0;
-      animation: fadeUp 0.5s 0.3s ease forwards;
-    }
-
-
-
-    /* ── MODULES ── */
-    .modules {
-      position: relative;
-      z-index: 1;
-      padding: 0 1.5rem 2.5rem;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--wire);
-    }
-
-    /* Module cards — industrial style */
-    .module-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid var(--wire);
-      border-left: 3px solid var(--card-accent, var(--wire));
-      border-radius: var(--radius);
-      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-      margin-bottom: 1px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.2s, border-color 0.2s;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(4px);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
-      opacity: 0;
-    }
-    .module-card { animation: fadeUp 0.4s 0.3s ease forwards; }   /* Rückfall, falls weitere Karten dazukommen */
-    .module-card:nth-child(2) { animation: fadeUp 0.4s 0.05s ease forwards; }
-    .module-card:nth-child(3) { animation: fadeUp 0.4s 0.12s ease forwards; }
-    .module-card:nth-child(4) { animation: fadeUp 0.4s 0.19s ease forwards; }
-    .module-card:nth-child(5) { animation: fadeUp 0.4s 0.26s ease forwards; }
-    .saved-link { opacity: 0; animation: fadeUp 0.4s 0.12s ease forwards; }
-
-    .module-card.active:hover {
-      background: rgba(255,255,255,0.98);
-      border-left-color: var(--card-accent);
-    }
-    .module-card.inactive { cursor: default; }
-
-    /* Cross-hatch corner detail */
-    .module-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 40px; height: 40px;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 3px,
-        rgba(0,0,0,0.025) 3px,
-        rgba(0,0,0,0.025) 4px
-      );
-    }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-    .card-id {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--card-accent, var(--text3));
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .card-badge {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      padding: 2px 8px;
-      border-radius: 2px;
-      letter-spacing: 0.5px;
-    }
-    .badge-live {
-      background: rgba(37,99,235,0.08);
-      color: #1e3a8a;
-      border: 1px solid rgba(37,99,235,0.2);
-    }
-    .badge-new { background: #fff6dd; color: #9a6700; border: 1px solid #e8cf8a; }
-    .badge-soon {
-      background: var(--surface);
-      color: var(--text3);
-      border: 1px solid var(--wire);
-    }
-
-    .card-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 1px;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-      line-height: 1;
-    }
-    .card-desc {
-      font-size: 12px;
-      color: var(--text2);
-      line-height: 1.65;
-      margin-bottom: 0.85rem;
-    }
-
-    /* Feature tags */
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-    .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      padding: 3px 8px;
-      border: 1px solid var(--wire);
-      border-radius: 2px;
-      color: var(--text3);
-      letter-spacing: 0.3px;
-    }
-
-    /* Arrow on active hover */
-    .card-arrow {
-      position: absolute;
-      bottom: 1.25rem; right: 1.25rem;
-      font-size: 14px;
-      color: var(--card-accent, var(--text3));
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s;
-    }
-    .module-card.active:hover .card-arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* ── FOOTER ── */
-    .footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--wire);
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(240,241,243,0.8);
-    }
-    .footer-logo {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-      color: var(--text3);
-    }
-    .footer-logo span { color: var(--blue2); }
-    .footer-meta {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--text3);
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    /* sanftes Einblenden */
+    .hero, .module-card, .saved-link { animation: fadeUp .45s ease both; }
+    .module-card:nth-of-type(2) { animation-delay:.06s; } .module-card:nth-of-type(3) { animation-delay:.12s; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
+    @media (max-width:560px){ .hero{ padding:36px 20px 24px; } .modules{ padding:8px 20px 40px; } .header,.footer{ padding-left:20px; padding-right:20px; } .card-desc{ font-size:15px; } .module-card{ padding:16px 16px 20px; margin:0 -16px 12px; border-radius:14px; } .saved-link .mono{ display:none; } }
   </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="logo">stat<span>iq</span></div>
+  <div></div>
   <div class="lang-switcher" id="langSwitcher">
     <button class="lang-btn" onclick="toggleLang()">
       <span id="current-flag">EN</span>
@@ -373,28 +97,16 @@
 
 <!-- Hero -->
 <section class="hero">
-  <!-- I-beam decorative -->
-  <svg class="ibeam-deco" width="300" height="600" viewBox="0 0 300 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="100" y="0" width="100" height="20" fill="white"/>
-    <rect x="140" y="20" width="20" height="560" fill="white"/>
-    <rect x="100" y="580" width="100" height="20" fill="white"/>
-  </svg>
 
-  <h1 class="headline" id="headline">
-    The<br>
-    Structural<br>
-    <span class="accent">Engineer's</span><br>
-    <span class="dim">Toolkit.</span>
-  </h1>
+  <h1 class="headline" id="headline">stat<span class="iq">iq</span></h1>
 
-  <p class="subline" id="subline">Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5<br>Eurocode 7</p>
+  <p class="subline" id="subline">Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7</p>
 
 
 </section>
 
 <!-- Modules -->
 <section class="modules">
-  <div class="section-label" id="section-label">Modules</div>
 
   <!-- calc -->
   <a class="module-card active" href="calc.html" style="--card-accent:#1e3a8a;">
@@ -417,7 +129,27 @@
     <div class="card-arrow">→</div>
   </a>
   <a class="saved-link" href="calc.html#saved" id="saved-link">
-    <span id="saved-text">Saved calculations &amp; reports</span><span class="mono">statiq·calc →</span>
+    <span id="saved-text">Saved calculations &amp; reports</span><span class="mono">statiq·calc</span>
+  </a>
+
+  <!-- size -->
+  <a class="module-card active" href="size.html" style="--card-accent:#2563eb;">
+    <div class="card-top">
+      <div class="card-id">statiq·size</div>
+      <div class="card-badge badge-new" id="badge-new">BETA</div>
+    </div>
+    <div class="card-title" id="size-title">Design & Sizing</div>
+    <div class="card-desc" id="size-desc">Design reinforced concrete beams, slabs and columns (EC2), rolled steel sections and bolted/welded connections (EC3) and timber members (EC5) — every check step by step, printable report.</div>
+    <div class="card-tags" id="size-tags">
+      <span class="tag">Concrete EC2</span>
+      <span class="tag">Steel EC3</span>
+      <span class="tag">Connections</span>
+      <span class="tag">Timber EC5</span>
+      <span class="tag">Buckling</span>
+      <span class="tag">Torsion</span>
+      <span class="tag">Report</span>
+    </div>
+    <div class="card-arrow">→</div>
   </a>
 
   <!-- ref -->
@@ -441,31 +173,11 @@
   <div class="card-arrow">→</div>
   </a>
 
-  <!-- size -->
-  <a class="module-card active" href="size.html" style="--card-accent:#2563eb;">
-    <div class="card-top">
-      <div class="card-id">statiq·size</div>
-      <div class="card-badge badge-new" id="badge-new">BETA</div>
-    </div>
-    <div class="card-title" id="size-title">Design & Sizing</div>
-    <div class="card-desc" id="size-desc">Design reinforced concrete beams, slabs and columns (EC2), rolled steel sections and bolted/welded connections (EC3) and timber members (EC5) — every check step by step, printable report.</div>
-    <div class="card-tags" id="size-tags">
-      <span class="tag">Concrete EC2</span>
-      <span class="tag">Steel EC3</span>
-      <span class="tag">Connections</span>
-      <span class="tag">Timber EC5</span>
-      <span class="tag">Buckling</span>
-      <span class="tag">Torsion</span>
-      <span class="tag">Report</span>
-    </div>
-    <div class="card-arrow">→</div>
-  </a>
-
 </section>
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Built by engineers</span> · calc v0.8.10 · ref v0.3.2 · size v0.5.6</div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · calc v0.8.11 · ref v0.3.3 · size v0.5.8</div>
 </footer>
 
 <script>
@@ -476,16 +188,16 @@ let currentLang = localStorage.getItem('statiq-lang') || 'en';
 const translations = {
   en: {
     headline: 'The<br>Structural<br><span class="accent">Engineer\'s</span><br><span class="dim">Toolkit.</span>',
-    subline: 'Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5',
+    subline: 'Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7',
     modules: 'Modules',
     live: '● LIVE', soon: 'SOON',
     calc_title: 'Internal Forces',
     calc_desc: 'Shear forces, bending moments, normal forces, reactions and deflections for beams and frames. Diagrams drawn on the structure, printable report.',
     size_title: 'Design & Sizing',
-    size_desc: 'Design reinforced concrete beams, slabs, columns and punching shear (EC2), rolled steel sections, bolted connections, fillet welds and column bases (EC3) timber members and joints (EC5), masonry walls (EC6) and foundations, settlement, retaining walls and uplift (EC7) plus hydraulics — every check step by step, printable report.',
+    size_desc: 'Design in reinforced concrete, steel, timber and masonry, plus geotechnics and hydraulics — every check step by step, printable report.',
     ref_title: 'Theory & Tables',
     ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics, with calculators and examples — your digital reference handbook.',
-    footer: 'Built by engineers',
+    footer: 'Valentin Maras',
     saved: 'Saved calculations &amp; reports',
     size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Buckling", "Torsion", "Report"],
     ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Geotechnics", "Maths", "Search"],
@@ -494,16 +206,16 @@ const translations = {
   },
   de: {
     headline: 'The<br>Structural<br><span class="accent">Engineer\'s</span><br><span class="dim">Toolkit.</span>',
-    subline: 'Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5',
+    subline: 'Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7',
     modules: 'Module',
     live: '● LIVE', soon: 'BALD',
     calc_title: 'Schnittkräfte',
     calc_desc: 'Querkräfte, Biegemomente, Normalkräfte, Auflagerkräfte und Durchbiegungen für Träger und Rahmen. Verläufe direkt am Tragwerk, Bericht zum Ausdrucken.',
     size_title: 'Bemessung',
-    size_desc: 'Stahlbetonbalken, Platten, Stützen und Durchstanzen (EC2), Walzprofile, Schrauben- und Schweißverbindungen sowie Stützenfüße aus Stahl (EC3) Holzbauteile und -verbindungen (EC5), Mauerwerkswände (EC6) sowie Flachgründungen, Setzungen, Stützwände und Auftrieb (EC7) sowie Wasserbau (Hydrostatik, Rohre, Gerinne, Wehre) bemessen — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
+    size_desc: 'Bemessung in Stahlbeton, Stahl, Holz und Mauerwerk, dazu Grundbau und Wasserbau — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
     ref_title: 'Theorie & Tafeln',
     ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zum Grundbau, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
-    footer: 'Von Ingenieuren gebaut',
+    footer: 'Valentin Maras',
     saved: 'Gespeicherte Berechnungen &amp; Berichte',
     size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Stabilität", "Torsion", "Bericht"],
     ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Grundbau", "Mathematik", "Suche"],
@@ -512,16 +224,16 @@ const translations = {
   },
   fr: {
     headline: 'The<br>Structural<br><span class="accent">Engineer\'s</span><br><span class="dim">Toolkit.</span>',
-    subline: 'Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5',
+    subline: 'Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7',
     modules: 'Modules',
     live: '● EN LIGNE', soon: 'BIENTÔT',
     calc_title: 'Efforts Internes',
     calc_desc: 'Efforts tranchants, moments fléchissants, efforts normaux, réactions et flèches pour poutres et portiques. Diagrammes sur la structure, rapport imprimable.',
     size_title: 'Dimensionnement',
-    size_desc: 'Dimensionnez poutres, dalles, poteaux et poinçonnement en béton armé (EC2), profilés, assemblages boulonnés et soudés et pieds de poteaux en acier (EC3) éléments et assemblages en bois (EC5), murs en maçonnerie (EC6) et fondations, tassements, murs de soutènement et soulèvement (EC7) ainsi que l’hydraulique — chaque vérification pas à pas, note de calcul.',
+    size_desc: 'Dimensionnement en béton armé, acier, bois et maçonnerie, ainsi que géotechnique et hydraulique — chaque vérification pas à pas, note de calcul.',
     ref_title: 'Théorie & Tables',
     ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique, avec calculateurs et exemples — votre manuel de référence numérique.',
-    footer: 'Construit par des ingénieurs',
+    footer: 'Valentin Maras',
     saved: 'Calculs &amp; rapports enregistrés',
     size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Stabilité", "Torsion", "Note de calcul"],
     ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Géotechnique", "Mathématiques", "Recherche"],
@@ -530,16 +242,16 @@ const translations = {
   },
   es: {
     headline: 'The<br>Structural<br><span class="accent">Engineer\'s</span><br><span class="dim">Toolkit.</span>',
-    subline: 'Eurocode 0<br>Eurocode 1<br>Eurocode 2<br>Eurocode 3<br>Eurocode 5',
+    subline: 'Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7',
     modules: 'Módulos',
     live: '● EN VIVO', soon: 'PRONTO',
     calc_title: 'Fuerzas Internas',
     calc_desc: 'Cortantes, momentos flectores, axiles, reacciones y flechas para vigas y pórticos. Diagramas sobre la estructura, informe imprimible.',
     size_title: 'Dimensionado',
-    size_desc: 'Dimensiona vigas, losas, pilares y punzonamiento de hormigón armado (EC2), perfiles, uniones atornilladas y soldadas y placas base de acero (EC3) elementos y uniones de madera (EC5), muros de fábrica (EC6) y cimentaciones, asientos, muros de contención y subpresión (EC7) e hidráulica — cada comprobación paso a paso, informe imprimible.',
+    size_desc: 'Dimensionado en hormigón armado, acero, madera y fábrica, además de geotecnia e hidráulica — cada comprobación paso a paso, informe imprimible.',
     ref_title: 'Teoría y Tablas',
     ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia, con calculadoras y ejemplos — tu manual de referencia digital.',
-    footer: 'Hecho por ingenieros',
+    footer: 'Valentin Maras',
     saved: 'Cálculos e informes guardados',
     size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Estabilidad", "Torsión", "Informe"],
     ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Geotecnia", "Matemáticas", "Búsqueda"],
@@ -569,9 +281,7 @@ function setLang(lang){
 
 function applyLang(lang){
   const t = translations[lang] || translations.en;
-  document.getElementById('headline').innerHTML = t.headline;
   document.getElementById('subline').innerHTML = t.subline.replace(/\n/g, '<br>');
-  document.getElementById('section-label').childNodes[0].textContent = t.modules;
   document.getElementById('badge-live').textContent = t.live;
   document.getElementById('badge-new').textContent = 'BETA';
   document.getElementById('badge-live-2').textContent = t.live;

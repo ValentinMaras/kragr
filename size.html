@@ -7,7 +7,7 @@
   <title>Statiq·size — Bemessung</title>
   <meta name="description" content="Bemessung von Stahlbetonbalken und -platten nach DIN EN 1992-1-1 mit NA — mit Nachweisbericht." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -148,6 +148,56 @@
       .report section { break-inside: avoid; }
       @page { margin: 16mm 14mm; }
     }
+  
+    /* ══ Design 2026 (wie die Startseite): weiß, Inter, ohne Rahmen und Raster ══ */
+    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f1f3; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
+      --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --accent:#2563eb; --accent-bg:#eef3ff; --radius:18px; --radius-sm:10px; --card:#f8f8f9; }
+    body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
+    body::before { display:none; }
+    .app-header { background:rgba(255,255,255,0.92); border-bottom:none; padding:14px 24px; backdrop-filter:blur(10px); }
+    .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; color:var(--text); }
+    .logo span { color:var(--accent); }
+    .version { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
+    .header-links { font-family:inherit; font-size:13px; font-weight:600; gap:18px; }
+    .header-links a { color:var(--text3); }
+    .header-links a:hover { color:var(--text); }
+    .header-links .module-name { color:var(--text); font-weight:800; }
+    .card { background:var(--card); border:none; box-shadow:none; border-radius:18px; padding:20px 22px; margin-bottom:14px; }
+    .card-title { font-family:inherit; font-size:15px; font-weight:800; letter-spacing:-0.2px; text-transform:none; color:var(--text); margin-bottom:14px; }
+    .page-title { font-size:clamp(26px, 4.6vw, 38px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; }
+    .page-sub { font-size:14px; color:var(--text3); line-height:1.55; margin-top:8px; }
+    .field label, .calc-field label { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
+    .field input, .field select, .calc-field input, .calc-field select, .search input { border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; background:#fff; padding:9px 11px; font-family:inherit; font-size:14px; }
+    .field input:focus, .field select:focus, .calc-field input:focus, .search input:focus { outline:2px solid var(--accent); outline-offset:0; box-shadow:none; }
+    .field input:disabled, .field select:disabled { background:#f1f1f3; box-shadow:none; }
+    .seg { border:none; background:#efeff1; padding:3px; border-radius:12px; gap:3px; }
+    .seg button { background:transparent; border-radius:9px; color:var(--text2); font-family:inherit; font-weight:600; transition:background .15s, box-shadow .15s; }
+    .seg button + button { border-left:none; }
+    .seg button:hover { color:var(--text); }
+    .seg button.active { background:#fff; color:var(--text); font-weight:800; box-shadow:0 1px 3px rgba(0,0,0,0.10); }
+    .btn { border:none; border-radius:12px; background:#0a0a0a; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
+    .btn:hover { background:#262626; } .btn:active { transform:scale(0.98); }
+    .btn.secondary { background:#efeff1; color:var(--text); }
+    .btn.danger { background:#fff; box-shadow:inset 0 0 0 1px var(--bad, #b42318); }
+    .hint { color:var(--text3); }
+    .formula-box { background:#fff; border:none; border-radius:12px; }
+    .footnote { font-family:inherit; color:var(--text3); }
+    @media (max-width:560px){ .app-header{ padding:12px 16px; } .card{ padding:16px; border-radius:16px; } }
+    .main { gap:18px; padding:20px 24px; }
+    .seg-mat, .seg-sub { background:#efeff1; box-shadow:none; }
+    .seg-mat { display:grid; grid-template-columns:repeat(3,1fr); }
+    .seg-mat button { font-size:14px; padding:9px 6px; }
+    .seg:not(.seg-mat) { flex-wrap:wrap; }
+    .seg:not(.seg-mat) button { flex:1 1 auto; padding:7px 9px; font-size:13px; white-space:nowrap; }
+    .main > * { min-width:0; }
+    @media (max-width:560px){ .seg-mat { gap:3px; padding:3px; background:#efeff1; } .seg-mat button { background:transparent; } .seg-mat button.active { background:#fff; } .main{ padding:14px 16px; } }
+    #mob-status { border-bottom:none; font-weight:600; }
+    .summary { border-radius:12px; font-weight:700; }
+    .pos-item { border-bottom-color:#ececee; }
+    .ci-note { border-left:none; border-radius:10px; }
+    .lang-notice { border-left:none; border-radius:12px; }
+    .chk-table td { border-bottom-color:#ececee; }
+    .note { border-radius:10px; }
   </style>
 </head>
 <body>
@@ -1373,7 +1423,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.6';
+const SIZE_VERSION = '0.5.8';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -5060,9 +5110,11 @@ function figHV(I, res){
   const st=I.an[0]==='S', d=res.K.def;
   const layers = { HH1:[['h',I.t1],['h',I.t2]], HH2:[['h',I.t1],['h',I.t2],['h',I.t1]], SHi:[['h',I.t1],['s',I.ts],['h',I.t1]],
                    SHa:[['s',I.ts],['h',I.t2],['s',I.ts]], SH1:[['s',I.ts],['h',I.t1]] }[I.an];
-  const tot = layers.reduce((s,l)=>s+l[1],0), sc = Math.min(220/tot, 4), x0=20, yc=90, Hh=110;
-  let s=`<svg viewBox="0 0 ${Math.max(tot*sc+40, 260)+330} 200" width="${Math.max(tot*sc+40,260)+330}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verbindung im Schnitt und in der Draufsicht">`;
-  s+=svgT(x0+tot*sc/2, 12, 'Schnitt (Modus '+res.gov.id+')', 'middle', '#6b7280', 9.5);
+  const tot = layers.reduce((s,l)=>s+l[1],0), sc = Math.min(220/tot, 4), x0=28, yc=112;
+  // Schnitt quer zur Faser: die m Reihen liegen übereinander (Abstand a2, Rand a4)
+  const Bq = 2*I.a4+(I.m-1)*I.a2, vs = Math.min(130/Bq, 3), Hh = Math.max(60, Bq*vs), yRows = Array.from({length:I.m}, (_,j)=> yc - Hh/2 + (I.a4 + j*I.a2)*vs*Hh/(Bq*vs));
+  let s=`<svg viewBox="0 0 ${Math.max(tot*sc+40, 260)+370} 245" width="${Math.max(tot*sc+40,260)+370}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Verbindung im Schnitt und in der Draufsicht">`;
+  s+=svgT(x0+tot*sc/2, 12, `Schnitt quer zur Faser (${I.m} Reihe${I.m>1?'n':''}, Modus ${res.gov.id})`, 'middle', '#6b7280', 9.5);
   let x=x0; const xs=[];
   const sh = res.gov.shape||{}, emb=sh.emb||[], hin=sh.hinges||[];
   layers.forEach(([t,th],i)=>{ const w=th*sc, dy = (i%2 ? 6 : -6);            // Hölzer gegeneinander verschoben
@@ -5075,16 +5127,19 @@ function figHV(I, res){
   layers.forEach((l,i)=>{ const [a,b,dy]=xs[i], mx=(a+b)/2, up = dy<0; s+=svgArrow(mx, up?yc-Hh/2+dy-4:yc+Hh/2+dy+24, mx, up?yc-Hh/2+dy-24:yc+Hh/2+dy+42, C_EW); });
   // Stift: Knicke bei Fließgelenken, Drehung bei Modus c
   // Stiftachse: an den Fugen mittig, im Teil mit Fließgelenk geknickt (bewegt sich mit dem Teil), freie Enden mit dem Außenteil mitgedreht
-  const pts=[], nL=xs.length;
-  xs.forEach(([a,b,dy],i)=>{ const mid=(a+b)/2;
-    if(sh.rot){ const k=-6; pts.push([a, yc - k*(a-xs[0][0])/(xs[nL-1][1]-xs[0][0]) + k/2], [b, yc - k*(b-xs[0][0])/(xs[nL-1][1]-xs[0][0]) + k/2]); return; }
-    if(!hin.length){ pts.push([a,yc],[b,yc]); return; }
-    const ya = i===0 ? yc+dy*0.7 : yc, yb = i===nL-1 ? yc+dy*0.7 : yc;
-    if(hin.includes(i)) pts.push([a,ya],[mid,yc+dy],[b,yb]); else pts.push([a,ya],[b,yb]); });
-  s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#111" stroke-width="${Math.max(3, Math.min(9, d*sc*0.6))}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  hin.forEach(i=>{ const [a,b,dy]=xs[i]; s+=`<circle cx="${(a+b)/2}" cy="${yc+dy}" r="3.6" fill="#fff" stroke="${C_IN}" stroke-width="1.6"/>`; });
+  const nL=xs.length;
+  yRows.forEach(yp=>{ const pts=[];
+    xs.forEach(([a,b,dy],i)=>{ const mid=(a+b)/2;
+      if(sh.rot){ const k=-6; pts.push([a, yp - k*(a-xs[0][0])/(xs[nL-1][1]-xs[0][0]) + k/2], [b, yp - k*(b-xs[0][0])/(xs[nL-1][1]-xs[0][0]) + k/2]); return; }
+      if(!hin.length){ pts.push([a,yp],[b,yp]); return; }
+      const ya = i===0 ? yp+dy*0.7 : yp, yb = i===nL-1 ? yp+dy*0.7 : yp;
+      if(hin.includes(i)) pts.push([a,ya],[mid,yp+dy],[b,yb]); else pts.push([a,ya],[b,yb]); });
+    s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#111" stroke-width="${Math.max(3, Math.min(9, d*sc*0.6))}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    hin.forEach(i=>{ const [a,b,dy]=xs[i]; s+=`<circle cx="${(a+b)/2}" cy="${yp+dy}" r="3.6" fill="#fff" stroke="${C_IN}" stroke-width="1.6"/>`; }); });
+  // Maß a2 zwischen den Reihen im Schnitt
+  if(I.m>1){ const xd=xs[0][0]-10; s+=`<line x1="${xd}" y1="${yRows[0]}" x2="${xd}" y2="${yRows[1]}" stroke="${C_IN}" stroke-width="0.8"/>`+svgT(xd-3, (yRows[0]+yRows[1])/2+3, 'a₂', 'end', C_IN, 8.5); }
   // Draufsicht
-  const ox = Math.max(tot*sc+40,260)+20, n=I.n, m=I.m, Lx = I.a3+(n-1)*I.a1+I.a3*0.6, By = 2*I.a4+(m-1)*I.a2, ps=Math.min(280/Lx, 150/By), oy=38;
+  const ox = Math.max(tot*sc+40,260)+58, n=I.n, m=I.m, Lx = I.a3+(n-1)*I.a1+I.a3*0.6, By = 2*I.a4+(m-1)*I.a2, ps=Math.min(280/Lx, 150/By), oy=38;
   s+=svgT(ox+Lx*ps/2, 12, 'Draufsicht (Faser →)', 'middle', '#6b7280', 9.5);
   s+=`<rect x="${ox}" y="${oy}" width="${Lx*ps}" height="${By*ps}" fill="#f3ead9" stroke="#111" stroke-width="1.2"/>`;
   for(let k=1;k<6;k++) s+=`<path d="M ${ox+4} ${oy+By*ps*k/6} q ${Lx*ps*0.5} ${-3} ${Lx*ps-8} 0" fill="none" stroke="#b07c3a" stroke-width="0.5" opacity="0.5"/>`;

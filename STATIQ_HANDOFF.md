@@ -1,10 +1,10 @@
-# Statiq — Übergabe für neuen Chat (calc v0.8.10 · ref v0.3.2 · size v0.5.6 · Startseite)
+# Statiq — Übergabe für neuen Chat (calc v0.8.11 · ref v0.3.3 · size v0.5.8 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.10)
-- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.2)
-- `size.html` — Bemessung (Statiq·size v0.5.6, Beta: Wasserbau, Mauerwerk und Grundbau neu; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.11)
+- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.3)
+- `size.html` — Bemessung (Statiq·size v0.5.8, Beta: Wasserbau, Mauerwerk und Grundbau neu; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
 
 **Versionierung (Wunsch von Valentin):** in kleinen Schritten weiterzählen (0.8.1 → 0.8.2 …).
@@ -208,6 +208,26 @@ Neue Nebenversion, weil fünf Fächer dazukommen (Versionsregel: 0.x-Sprung nur 
 - ref-Karte beschreibt den tatsächlichen Inhalt (Holzbau statt „IPE/HEA/HEB“), bleibt „bald“ und unverlinkt
 - Neuer Link „Gespeicherte Berechnungen & Berichte“ → `calc.html#saved`
 - Einblendung: ohne Korrektur wäre die ref-Karte durch den neuen Link unsichtbar geblieben (`nth-child`)
+
+## Design 2026 für calc v0.8.11 · ref v0.3.3 · size v0.5.8
+
+- Neuer Stil wie die Startseite als CSS-Schicht am Ende des ersten `<style>`-Blocks jeder Seite („Design 2026“): Variablen überschrieben (weiß, --card #f8f8f9, Radius 18/10 px), Raster `body::before` aus, Schrift Inter (zusätzlich zu DM Mono für Zahlen/Formeln geladen).
+- Karten ohne Rahmen/Schatten mit hellgrauer Fläche, Kartentitel fett schwarz statt Mono-Großbuchstaben, Seitentitel groß und fett, Eingabefelder weiß mit feiner Kontur, Segmente als graue Leiste mit weißem aktivem Feld, Hauptknöpfe schwarz, Zweitknöpfe hellgrau.
+- size: Bereichsleiste immer 3er-Raster, Unterleisten umbrechen; ref: Kacheln/Listen/Suchtreffer als dezente Knöpfe (Pfeile ausgeblendet), Tabellen ohne Rahmen; calc: Kopfzeile auf `header-links` umgestellt, Tabs als graue Pillen, Speichern-Knöpfe hellgrau, Diagramm-Umschalter behalten ihre Schnittgrößenfarben.
+- Rückgängig: die Schicht „Design 2026“ löschen und den Google-Fonts-Link zurücksetzen.
+
+## Startseite neu (Design-Test, von Valentin freigegeben)
+
+- Weiß, ohne Raster, Rahmen und Schatten; Schrift Inter (fett, schwarz), „iq“ in Blau (#2563eb) oben und in der Fußzeile.
+- Oben nur großes „statiq“ + „Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7“, kein Slogan, keine Überschrift „Module“, kein kleines Logo in der Kopfzeile (nur Sprachwahl).
+- Module in der Reihenfolge Schnittkräfte, Bemessung, Theorie & Tafeln; nur Kennung + Status + großer Titel (Beschreibung und Stichworte per CSS ausgeblendet, Texte bleiben in der Datei). Keine Pfeile.
+- Dezenter Knopf: hellgraue Fläche (#f9f9fa, Radius 18 px), beim Überfahren dunkler, beim Drücken dunkler + scale(0,985).
+- Fußzeile: „Valentin Maras · calc … · ref … · size …“ (in allen Sprachen).
+- Nächster Schritt laut Plan: calc, size und ref im gleichen Stil angleichen (zusammen mit der Übersetzung von size/ref).
+
+## size v0.5.7 — Korrektur Skizze Holzverbindung
+
+- `figHV`: Der Schnitt quer zur Faser zeigt jetzt alle m Reihen von Verbindungsmitteln übereinander (Abstand a₂, Rand a₄, mit Maß a₂), vorher war unabhängig von m nur ein Stift gezeichnet. Bauteilhöhe im Schnitt aus 2a₄ + (m − 1)a₂. Rechnung unverändert.
 
 ## size v0.5.6 — neuer Bereich Wasserbau (Hydrostatik und Hydrodynamik)
 

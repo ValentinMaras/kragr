@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.2 -->
+<!-- Statiq·ref v0.3.3 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
   <title>Statiq·ref — Nachschlagewerk</title>
   <meta name="description" content="Nachschlagewerk für Studierende im Bauingenieurwesen — Baustoffkennwerte, Beiwerte und Nachweise nach Eurocode." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -164,7 +164,67 @@
       table.data th:first-child, table.data td:first-child { position: static; }
     }
       .lang-notice { position: relative; z-index: 1; max-width: 1120px; margin: 10px auto 0; padding: 8px 12px; font-size: 12.5px; line-height: 1.5; background: #fff6dd; border-left: 3px solid #9a6700; color: #374151; border-radius: 0 4px 4px 0; }
-</style>
+
+    /* ══ Design 2026 (wie die Startseite): weiß, Inter, ohne Rahmen und Raster ══ */
+    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f1f3; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
+      --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --accent:#2563eb; --accent-bg:#eef3ff; --radius:18px; --radius-sm:10px; --card:#f8f8f9; }
+    body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
+    body::before { display:none; }
+    .app-header { background:rgba(255,255,255,0.92); border-bottom:none; padding:14px 24px; backdrop-filter:blur(10px); }
+    .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; color:var(--text); }
+    .logo span { color:var(--accent); }
+    .version { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
+    .header-links { font-family:inherit; font-size:13px; font-weight:600; gap:18px; }
+    .header-links a { color:var(--text3); }
+    .header-links a:hover { color:var(--text); }
+    .header-links .module-name { color:var(--text); font-weight:800; }
+    .card { background:var(--card); border:none; box-shadow:none; border-radius:18px; padding:20px 22px; margin-bottom:14px; }
+    .card-title { font-family:inherit; font-size:15px; font-weight:800; letter-spacing:-0.2px; text-transform:none; color:var(--text); margin-bottom:14px; }
+    .page-title { font-size:clamp(26px, 4.6vw, 38px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; }
+    .page-sub { font-size:14px; color:var(--text3); line-height:1.55; margin-top:8px; }
+    .field label, .calc-field label { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
+    .field input, .field select, .calc-field input, .calc-field select, .search input { border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; background:#fff; padding:9px 11px; font-family:inherit; font-size:14px; }
+    .field input:focus, .field select:focus, .calc-field input:focus, .search input:focus { outline:2px solid var(--accent); outline-offset:0; box-shadow:none; }
+    .field input:disabled, .field select:disabled { background:#f1f1f3; box-shadow:none; }
+    .seg { border:none; background:#efeff1; padding:3px; border-radius:12px; gap:3px; }
+    .seg button { background:transparent; border-radius:9px; color:var(--text2); font-family:inherit; font-weight:600; transition:background .15s, box-shadow .15s; }
+    .seg button + button { border-left:none; }
+    .seg button:hover { color:var(--text); }
+    .seg button.active { background:#fff; color:var(--text); font-weight:800; box-shadow:0 1px 3px rgba(0,0,0,0.10); }
+    .btn { border:none; border-radius:12px; background:#0a0a0a; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
+    .btn:hover { background:#262626; } .btn:active { transform:scale(0.98); }
+    .btn.secondary { background:#efeff1; color:var(--text); }
+    .btn.danger { background:#fff; box-shadow:inset 0 0 0 1px var(--bad, #b42318); }
+    .hint { color:var(--text3); }
+    .formula-box { background:#fff; border:none; border-radius:12px; }
+    .footnote { font-family:inherit; color:var(--text3); }
+    @media (max-width:560px){ .app-header{ padding:12px 16px; } .card{ padding:16px; border-radius:16px; } }
+    .nav { background:rgba(255,255,255,0.92); border-bottom:none; font-family:inherit; font-size:13px; font-weight:600; padding:6px 24px 10px; }
+    .crumb { color:var(--text3); } .crumb:hover { color:var(--text); text-decoration:none; } .crumb.current { color:var(--text); }
+    .main { padding:20px 24px; max-width:620px; }
+    .tile, .nav-list-item, .search-hit { background:var(--card); border:none; border-radius:16px; box-shadow:none; transition:background .15s, transform .1s; }
+    a.tile:hover, .nav-list-item:hover, .search-hit:hover { background:#f1f1f3; border:none; transform:none; }
+    a.tile:active, .nav-list-item:active, .search-hit:active { background:#ececef; transform:scale(0.985); }
+    .tile { padding:18px 16px; }
+    .tile-tag { font-family:inherit; font-size:11px; font-weight:700; letter-spacing:0.4px; }
+    .tile-title { font-size:18px; font-weight:800; letter-spacing:-0.3px; }
+    .tile-sub { font-size:12.5px; }
+    .nav-list-label { font-size:16px; font-weight:700; letter-spacing:-0.2px; }
+    .nav-list-meta, .search-hit-path { font-family:inherit; }
+    .nav-list-arrow { display:none; }
+    .search-hit-title { font-weight:700; }
+    .data-table-wrap { border:none; border-radius:12px; background:#fff; }
+    table.data th { background:#f1f1f3; border-bottom:none; }
+    table.data th:first-child { background:#f1f1f3; }
+    table.data td { border-bottom-color:#f1f1f3; }
+    .chip { border:none; background:#efeff1; font-family:inherit; font-weight:600; }
+    .chip.active { background:#0a0a0a; color:#fff; }
+    .applink { font-family:inherit; font-weight:600; border:none; }
+    .legend, .table-hint { font-family:inherit; }
+    .section-head { font-size:15px; font-weight:800; }
+    .search input { padding-left:36px; }
+    @media (max-width:560px){ .main{ padding:14px 16px; } .nav{ padding:4px 16px 8px; } }
+  </style>
 </head>
 <body>
 
@@ -232,7 +292,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.2';
+const REF_VERSION = '0.3.3';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau

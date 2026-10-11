@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.7 -->
+<!-- Statiq v0.8.10 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -44,6 +44,9 @@
     .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
     .nd-item { display:flex;align-items:center;width:100%;text-align:left;padding:9px 10px;border-radius:8px;border:none;background:none;cursor:pointer;font-size:13px;color:var(--text);font-family:DM Sans,sans-serif;margin-bottom:2px;transition:background 0.1s; }
     .nd-item:hover { background:var(--border); }
+    .lang-pick { display:flex; gap:6px; }
+    .lang-pick button { flex:1; padding:7px 0; border:1px solid var(--border); border-radius:8px; background:none; cursor:pointer; font-family:DM Mono,monospace; font-size:12px; color:var(--text2); }
+    .lang-pick button.active { background:var(--accent); border-color:var(--accent); color:#fff; }
     .nd-item.active { color:var(--accent);font-weight:600;background:rgba(37,99,235,0.08); }
     .nd-module { padding:12px 10px;gap:12px; }
     .nd-module-icon { font-size:20px;width:32px;text-align:center;flex-shrink:0; }
@@ -245,20 +248,20 @@
       <p id="mbs1p">A simply supported beam rests on a pin at A and a roller at B. It is statically determinate — 3 equilibrium equations are sufficient.</p>
     </div>
     <div class="modal-section">
-      <h3>Reactions</h3>
+      <h3 data-i18n="mbReactH">Reactions</h3>
       <div class="formula-box">ΣF_y = 0 → A + B = ΣFᵢ·cos(αᵢ) + ΣqᵢLᵢ<br>ΣM_A = 0 → B·L = ΣFᵢ·cos(αᵢ)·aᵢ + Σqᵢ·Lᵢ·x̄ᵢ</div>
     </div>
     <div class="modal-section">
-      <h3>Shear Force Q(x)</h3>
-      <div class="formula-box">Q(x) = A − ΣFᵢ·cos(αᵢ)·H(x−aᵢ) − Σqᵢ·⟨x−aᵢ⟩<div class="comment">H = Heaviside, ⟨·⟩ = Macaulay bracket</div></div>
+      <h3 data-i18n="shearForce">Shear Force Q(x)</h3>
+      <div class="formula-box">Q(x) = A − ΣFᵢ·cos(αᵢ)·H(x−aᵢ) − Σqᵢ·⟨x−aᵢ⟩<div class="comment" data-i18n="mbHeav">H = Heaviside, ⟨·⟩ = Macaulay bracket</div></div>
     </div>
     <div class="modal-section">
-      <h3>Bending Moment M(x)</h3>
-      <div class="formula-box">M(x) = A·x − ΣFᵢ·cos(αᵢ)·⟨x−aᵢ⟩ − Σqᵢ·⟨x−aᵢ⟩²/2<div class="comment">Tension-bottom: positive M shown downward</div></div>
+      <h3 data-i18n="bendingMoment">Bending Moment M(x)</h3>
+      <div class="formula-box">M(x) = A·x − ΣFᵢ·cos(αᵢ)·⟨x−aᵢ⟩ − Σqᵢ·⟨x−aᵢ⟩²/2<div class="comment" data-i18n="mbTensB">Tension-bottom: positive M shown downward</div></div>
     </div>
     <div class="modal-section">
-      <h3>Inclined Loads</h3>
-      <div class="formula-box">F_y = F·cos(α) &nbsp;<span class="comment">→ Q, M</span><br>F_x = F·sin(α) &nbsp;<span class="comment">→ N (normal force)</span></div>
+      <h3 data-i18n="mbInclH">Inclined Loads</h3>
+      <div class="formula-box">F_y = F·cos(α) &nbsp;<span class="comment">→ Q, M</span><br>F_x = F·sin(α) &nbsp;<span class="comment" data-i18n="mbToN">→ N (normal force)</span></div>
     </div>
   </div>
 </div>
@@ -270,15 +273,15 @@
       <button class="modal-close" onclick="closeModal('cant')">×</button>
     </div>
     <div class="modal-section">
-      <h3>System</h3>
-      <p>A cantilever is fully fixed at A (moment, shear, normal) and free at the other end. It is statically determinate.</p>
+      <h3 data-i18n="modalCantS1h">System</h3>
+      <p data-i18n="modalCantS1p">A cantilever is fully fixed at A (moment, shear, normal) and free at the other end. It is statically determinate.</p>
     </div>
     <div class="modal-section">
-      <h3>Reactions at A</h3>
+      <h3 data-i18n="modalCantS2h">Reactions at A</h3>
       <div class="formula-box">V_A = ΣFᵢ·cos(αᵢ) + ΣqᵢLᵢ<br>H_A = ΣFᵢ·sin(αᵢ)<br>M_A = ΣFᵢ·cos(αᵢ)·aᵢ + Σqᵢ·Lᵢ·x̄ᵢ</div>
     </div>
     <div class="modal-section">
-      <h3>Shear Force & Moment</h3>
+      <h3 data-i18n="mcQM">Shear Force & Moment</h3>
       <div class="formula-box">Q(x) = V_A − ΣFᵢ·cos(αᵢ)·H(x−aᵢ) − Σqᵢ·⟨x−aᵢ⟩<br>M(x) = −M_A + V_A·x − ΣFᵢ·cos(αᵢ)·⟨x−aᵢ⟩ − Σqᵢ·⟨x−aᵢ⟩²/2</div>
     </div>
   </div>
@@ -291,16 +294,16 @@
       <button class="modal-close" onclick="closeModal('cont')">×</button>
     </div>
     <div class="modal-section">
-      <h3>Static Indeterminacy</h3>
-      <p>A continuous beam with n spans has (n−1) intermediate supports. Each extra support introduces one additional unknown reaction, making the system statically indeterminate to the (n−1)th degree. Equilibrium alone is not sufficient — compatibility of deformations must also be satisfied.</p>
+      <h3 data-i18n="mcIndetH">Static Indeterminacy</h3>
+      <p data-i18n="mcIndetP">A continuous beam with n spans has (n−1) intermediate supports. Each extra support introduces one additional unknown reaction, making the system statically indeterminate to the (n−1)th degree. Equilibrium alone is not sufficient — compatibility of deformations must also be satisfied.</p>
     </div>
     <div class="modal-section">
-      <h3>Three-Moment Equation (Clapeyron)</h3>
-      <p>For each intermediate support i, the compatibility condition relates the moments at supports i−1, i, and i+1:</p>
+      <h3 data-i18n="mc3mH">Three-Moment Equation (Clapeyron)</h3>
+      <p data-i18n="mc3mP">For each intermediate support i, the compatibility condition relates the moments at supports i−1, i, and i+1:</p>
       <div class="formula-box">
         Mᵢ₋₁·Lᵢ + 2Mᵢ·(Lᵢ+Lᵢ₊₁) + Mᵢ₊₁·Lᵢ₊₁ = −6·(Aᵢ·āᵢ/Lᵢ + Aᵢ₊₁·b̄ᵢ₊₁/Lᵢ₊₁)
-        <div class="comment">Lᵢ = span length i, Aᵢ = area of M₀ diagram in span i</div>
-        <div class="comment">āᵢ = distance of centroid from left support</div>
+        <div class="comment" data-i18n="mc3mC1">Lᵢ = span length i, Aᵢ = area of M₀ diagram in span i</div>
+        <div class="comment" data-i18n="mc3mC2">āᵢ = distance of centroid from left support</div>
       </div>
     </div>
     <div class="modal-section">
@@ -312,16 +315,12 @@
       <p data-i18n="modalContOptP">Counting rule for beams (vertical loads): n = a − 2 − g, with a = vertical support reactions plus clamping moments (fixed end 2, pin/roller 1) and g = number of hinges. n = 0: statically determinate (e.g. Gerber beam), n &lt; 0: mechanism. In a hinge the moment is zero. I<sub>i</sub>/I scales the stiffness of a span — in indeterminate systems this shifts the support moments towards the stiffer span.</p>
     </div>
     <div class="modal-section">
-      <h3>Boundary Conditions</h3>
-      <div class="formula-box">
-        Pin / Roller end: &nbsp; M = 0<br>
-        Fixed end: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = unknown (extra equation)<br>
-        Free end: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Q = 0, M = 0
-      </div>
+      <h3 data-i18n="mcBcH">Boundary Conditions</h3>
+      <div class="formula-box" data-i18n="mcBcT"></div>
     </div>
     <div class="modal-section">
-      <h3>Superposition</h3>
-      <p>Within each span, Q(x) and M(x) are found by treating the span as a simply supported beam with the computed end moments applied as external moments, superimposed with the applied loads.</p>
+      <h3 data-i18n="mcSupH">Superposition</h3>
+      <p data-i18n="mcSupP">Within each span, Q(x) and M(x) are found by treating the span as a simply supported beam with the computed end moments applied as external moments, superimposed with the applied loads.</p>
     </div>
   </div>
 </div>
@@ -379,7 +378,7 @@
     <span style="color:var(--accent);font-weight:500">calc</span>
     <a href="size.html" style="color:var(--text2);text-decoration:none">size</a>
     <a href="ref.html" style="color:var(--text2);text-decoration:none">ref</a>
-    <span style="font-size:10px;color:var(--text3);letter-spacing:0.5px">v0.8.7</span>
+    <span style="font-size:10px;color:var(--text3);letter-spacing:0.5px">v0.8.10</span>
   </div>
 </header>
 
@@ -404,7 +403,7 @@
 
   <!-- Level 1: Modules -->
   <div id="nd-level1" style="padding:12px 18px">
-    <div style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.5px;font-family:DM Mono,monospace;margin-bottom:10px">MODULE</div>
+    <div style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.5px;font-family:DM Mono,monospace;margin-bottom:10px" data-i18n="moduleHdr">MODULE</div>
 
     <button onclick="navMenuOpen('calc')" class="nd-item nd-module">
       <span class="nd-mono-tag" style="background:var(--accent);color:white">SC</span>
@@ -431,6 +430,12 @@
       <div><div class="nd-saved-label" style="font-weight:600" data-i18n="saved">Gespeichert</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="savedSub">Berechnungen &amp; Berichte</div></div>
       <span style="margin-left:auto;color:var(--text-muted)">›</span>
     </button>
+    <div style="height:1px;background:var(--border);margin:12px 0"></div>
+    <div style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.5px;font-family:DM Mono,monospace;margin-bottom:8px" data-i18n="langHdr">LANGUAGE</div>
+    <div class="lang-pick">
+      <button data-lang="en" onclick="setCalcLang('en')">EN</button><button data-lang="de" onclick="setCalcLang('de')">DE</button>
+      <button data-lang="fr" onclick="setCalcLang('fr')">FR</button><button data-lang="es" onclick="setCalcLang('es')">ES</button>
+    </div>
   </div>
 
   <!-- Level 2: statiq·calc systems -->
@@ -462,10 +467,7 @@
       <button onclick="saveFilterTab('size')" id="sf-size" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-family:DM Mono,monospace">size</button>
     </div>
     <div id="saved-calcs-list"></div>
-    <div id="saved-empty" style="color:var(--text-muted);font-size:12px;font-family:DM Mono,monospace;padding:40px 20px;text-align:center">
-      Noch keine Berechnungen gespeichert.<br><br>
-      Berechnung durchführen und <span data-icon="save"></span> drücken.
-    </div>
+    <div id="saved-empty" style="color:var(--text-muted);font-size:12px;font-family:DM Mono,monospace;padding:40px 20px;text-align:center"></div>
   </div>
 
   <!-- Report view (shown when a calc is opened) -->
@@ -473,7 +475,7 @@
     <!-- Report header toolbar -->
     <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10">
       <button onclick="closeReport()" style="background:none;border:none;cursor:pointer;font-size:18px;color:var(--text2);padding:4px;line-height:1">←</button>
-      <span id="report-title-bar" style="font-size:13px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Bericht</span>
+      <span id="report-title-bar" style="font-size:13px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span>
       <button onclick="window.print()" style="background:var(--accent);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif">↓ PDF</button>
     </div>
 
@@ -488,36 +490,36 @@
 <main class="main" id="tab-beam">
   <div class="card">
     <div class="card-title-row">
-      <div class="card-title">System</div>
+      <div class="card-title" data-i18n="system">System</div>
       <button class="info-btn" onclick="openModal('beam')">i</button>
     </div>
     <div class="beam-svg-wrap"><svg id="beam-svg" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style="width:100%"></svg></div>
-    <div class="field"><label>Span L <span class="unit">m</span></label>
+    <div class="field"><label><span data-i18n="span">Span L</span> <span class="unit">m</span></label>
       <input type="number" id="bL" value="5" step="0.1" min="0.1" oninput="drawBeam()"></div>
   </div>
   <div class="card">
-    <div class="card-title">Point Loads</div>
+    <div class="card-title" data-i18n="pointLoads">Point Loads</div>
     <div class="load-list" id="beam-point-list"></div>
-    <button class="add-load-btn" onclick="addLoad('beam','point')">＋ Add Point Load</button>
+    <button class="add-load-btn" onclick="addLoad('beam','point')" data-i18n="addPoint">＋ Add Point Load</button>
   </div>
   <div class="card">
-    <div class="card-title">Distributed Loads</div>
+    <div class="card-title" data-i18n="distLoads">Distributed Loads</div>
     <div class="load-list" id="beam-dist-list"></div>
-    <button class="add-load-btn" onclick="addLoad('beam','dist')">＋ Add Distributed Load</button>
+    <button class="add-load-btn" onclick="addLoad('beam','dist')" data-i18n="addDist">＋ Add Distributed Load</button>
   </div>
   <div class="card">
-    <div class="card-title">Horizontal Loads &amp; Moments</div>
+    <div class="card-title" data-i18n="horizLoads">Horizontal Loads &amp; Moments</div>
     <div class="load-list" id="beam-horiz-list"></div>
-    <button class="add-load-btn" onclick="addLoad('beam','horiz')">＋ Add H / M<sub>e</sub></button>
+    <button class="add-load-btn" onclick="addLoad('beam','horiz')" data-i18n="addHoriz">＋ Add H / M<sub>e</sub></button>
   </div>
-  <button class="calc-btn" onclick="calculateBeam()">Calculate</button>
+  <button class="calc-btn" onclick="calculateBeam()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-beam" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('beam')"><span class="btn-icon" data-icon="save"></span>Save Calculation</button>
+  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('beam')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
   <div id="beam-results" class="hidden">
     <div class="results-grid">
-      <div class="metric"><div class="m-label" title="Kraft des Lagers auf das Tragwerk">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="b-res-A">—</div><div class="m-unit">kN</div></div>
-      <div class="metric"><div class="m-label" title="Kraft des Lagers auf das Tragwerk">Reaction V<sub>B</sub> ↑</div><div class="m-value" id="b-res-B">—</div><div class="m-unit">kN</div></div>
-      <div class="metric"><div class="m-label" title="Kraft des Lagers auf das Tragwerk">Reaction H<sub>A</sub> →</div><div class="m-value" id="b-res-HA">—</div><div class="m-unit">kN</div></div>
+      <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVA">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="b-res-A">—</div><div class="m-unit">kN</div></div>
+      <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVB">Reaction V<sub>B</sub> ↑</div><div class="m-value" id="b-res-B">—</div><div class="m-unit">kN</div></div>
+      <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resHA">Reaction H<sub>A</sub> →</div><div class="m-value" id="b-res-HA">—</div><div class="m-unit">kN</div></div>
       <div class="metric"><div class="m-label">M<sub>max</sub></div><div class="m-value" id="b-res-Mmax">—</div><div class="m-unit">kNm</div></div>
       <div class="metric"><div class="m-label">Q<sub>max</sub></div><div class="m-value" id="b-res-Qmax">—</div><div class="m-unit">kN</div></div>
       <div class="metric"><div class="m-label">N<sub>max</sub></div><div class="m-value" id="b-res-Nmax">—</div><div class="m-unit">kN</div></div>
@@ -527,7 +529,7 @@
 
     <!-- Diagram on structure -->
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Diagram on Structure</div>
+      <div class="card-title" style="margin-bottom:10px" data-i18n="diagramOnStructure">Diagram on Structure</div>
       <div class="diagram-toggle-row">
         <button class="diagram-toggle-btn active-M" id="diag-btn-M-beam" onclick="setDiagMode('beam','M')">M</button>
         <button class="diagram-toggle-btn" id="diag-btn-Q-beam" onclick="setDiagMode('beam','Q')">Q</button>
@@ -548,44 +550,44 @@
       <div class="diagram-label" id="diag-label-beam">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.7</div>
+  <div class="footnote" data-foot="0">Statiq</div>
 </main>
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
 <main class="main hidden" id="tab-cantilever">
   <div class="card">
     <div class="card-title-row">
-      <div class="card-title">System</div>
+      <div class="card-title" data-i18n="system">System</div>
       <button class="info-btn" onclick="openModal('cant')">i</button>
     </div>
     <div class="beam-svg-wrap"><svg id="cant-svg" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style="width:100%"></svg></div>
-    <div class="field"><label>Length L <span class="unit">m</span></label>
+    <div class="field"><label><span data-i18n="length">Length L</span> <span class="unit">m</span></label>
       <input type="number" id="cL" value="3" step="0.1" min="0.1" oninput="drawCantilever()"></div>
   </div>
   <div class="card">
-    <div class="card-title">Point Loads</div>
+    <div class="card-title" data-i18n="pointLoads">Point Loads</div>
     <div class="load-list" id="cant-point-list"></div>
-    <button class="add-load-btn" onclick="addLoad('cant','point')">＋ Add Point Load</button>
+    <button class="add-load-btn" onclick="addLoad('cant','point')" data-i18n="addPoint">＋ Add Point Load</button>
   </div>
   <div class="card">
-    <div class="card-title">Distributed Loads</div>
+    <div class="card-title" data-i18n="distLoads">Distributed Loads</div>
     <div class="load-list" id="cant-dist-list"></div>
-    <button class="add-load-btn" onclick="addLoad('cant','dist')">＋ Add Distributed Load</button>
+    <button class="add-load-btn" onclick="addLoad('cant','dist')" data-i18n="addDist">＋ Add Distributed Load</button>
   </div>
   <div class="card">
-    <div class="card-title">Horizontal Loads &amp; Moments</div>
+    <div class="card-title" data-i18n="horizLoads">Horizontal Loads &amp; Moments</div>
     <div class="load-list" id="cant-horiz-list"></div>
-    <button class="add-load-btn" onclick="addLoad('cant','horiz')">＋ Add H / M<sub>e</sub></button>
+    <button class="add-load-btn" onclick="addLoad('cant','horiz')" data-i18n="addHoriz">＋ Add H / M<sub>e</sub></button>
   </div>
-  <button class="calc-btn" onclick="calculateCantilever()">Calculate</button>
+  <button class="calc-btn" onclick="calculateCantilever()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-cant" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('cantilever')"><span class="btn-icon" data-icon="save"></span>Save Calculation</button>
+  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('cantilever')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
   <div id="cant-results" class="hidden">
     <div class="results-grid">
-      <div class="metric"><div class="m-label" title="Kraft des Lagers auf das Tragwerk">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="c-res-V">—</div><div class="m-unit">kN</div></div>
-      <div class="metric"><div class="m-label" title="Kraft des Lagers auf das Tragwerk">Reaction H<sub>A</sub> →</div><div class="m-value" id="c-res-HA">—</div><div class="m-unit">kN</div></div>
-      <div class="metric"><div class="m-label" title="Kraft des Lagers auf das Tragwerk">Moment M<sub>A</sub> ↺</div><div class="m-value" id="c-res-M">—</div><div class="m-unit">kNm</div></div>
-      <div class="metric"><div class="m-label">M<sub>max</sub></div><div class="m-value" id="c-res-Mmax">—</div><div class="m-unit">kNm · Zug unten +</div></div>
+      <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVA">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="c-res-V">—</div><div class="m-unit">kN</div></div>
+      <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resHA">Reaction H<sub>A</sub> →</div><div class="m-value" id="c-res-HA">—</div><div class="m-unit">kN</div></div>
+      <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resMA">Moment M<sub>A</sub> ↺</div><div class="m-value" id="c-res-M">—</div><div class="m-unit">kNm</div></div>
+      <div class="metric"><div class="m-label">M<sub>max</sub></div><div class="m-value" id="c-res-Mmax">—</div><div class="m-unit" data-i18n="unitTensBottom">kNm · Zug unten +</div></div>
       <div class="metric"><div class="m-label">Q<sub>max</sub></div><div class="m-value" id="c-res-Qmax">—</div><div class="m-unit">kN</div></div>
       <div class="metric"><div class="m-label">N<sub>max</sub></div><div class="m-value" id="c-res-Nmax">—</div><div class="m-unit">kN</div></div>
     </div>
@@ -594,7 +596,7 @@
 
     <!-- Diagram on structure -->
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Diagram on Structure</div>
+      <div class="card-title" style="margin-bottom:10px" data-i18n="diagramOnStructure">Diagram on Structure</div>
       <div class="diagram-toggle-row">
         <button class="diagram-toggle-btn active-M" id="diag-btn-M-cant" onclick="setDiagMode('cant','M')">M</button>
         <button class="diagram-toggle-btn" id="diag-btn-Q-cant" onclick="setDiagMode('cant','Q')">Q</button>
@@ -615,14 +617,14 @@
       <div class="diagram-label" id="diag-label-cant">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.7 · Cantilever</div>
+  <div class="footnote" data-foot="1">Statiq</div>
 </main>
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
 <main class="main hidden" id="tab-cont">
   <div class="card">
     <div class="card-title-row">
-      <div class="card-title">System</div>
+      <div class="card-title" data-i18n="system">System</div>
       <button class="info-btn" onclick="openModal('cont')">i</button>
     </div>
     <div class="beam-svg-wrap" style="overflow-x:auto">
@@ -631,7 +633,7 @@
     <!-- Span count control -->
     <div class="span-controls">
       <button class="span-count-btn" id="btn-span-minus" onclick="changeSpans(-1)">−</button>
-      <div class="span-count-label">Spans: <span class="span-count-num" id="span-count-display">2</span></div>
+      <div class="span-count-label"><span data-i18n="spans">Spans</span>: <span class="span-count-num" id="span-count-display">2</span></div>
       <button class="span-count-btn" id="btn-span-plus" onclick="changeSpans(1)">＋</button>
     </div>
     <!-- Per-span length inputs -->
@@ -641,9 +643,9 @@
   <!-- Per-span load cards -->
   <div id="span-load-cards"></div>
 
-  <button class="calc-btn" onclick="calculateContinuous()">Calculate</button>
+  <button class="calc-btn" onclick="calculateContinuous()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-cont" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('cont')"><span class="btn-icon" data-icon="save"></span>Save Calculation</button>
+  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveCalc('cont')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
 
   <div id="cont-results" class="hidden">
     <div class="results-grid">
@@ -652,9 +654,9 @@
     </div>
     <!-- Reactions table -->
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Support Reactions</div>
+      <div class="card-title" style="margin-bottom:10px" data-i18n="supportReactions">Support Reactions</div>
       <table class="reactions-table">
-        <thead><tr><th>Support</th><th>Reaction (kN)</th><th>Moment (kNm)</th></tr></thead>
+        <thead><tr><th data-i18n="thSupport">Support</th><th data-i18n="thReaction">Reaction (kN)</th><th data-i18n="thMoment">Moment (kNm)</th></tr></thead>
         <tbody id="cont-reactions-body"></tbody>
       </table>
     </div>
@@ -663,7 +665,7 @@
 
     <!-- Diagram on structure -->
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Diagram on Structure</div>
+      <div class="card-title" style="margin-bottom:10px" data-i18n="diagramOnStructure">Diagram on Structure</div>
       <div class="diagram-toggle-row">
         <button class="diagram-toggle-btn active-M" id="diag-btn-M-cont" onclick="setDiagMode('cont','M')">M</button>
         <button class="diagram-toggle-btn" id="diag-btn-Q-cont" onclick="setDiagMode('cont','Q')">Q</button>
@@ -684,7 +686,7 @@
       <div class="diagram-label" id="diag-label-cont">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.7 · Continuous Beam</div>
+  <div class="footnote" data-foot="2">Statiq</div>
 </main>
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
@@ -692,16 +694,16 @@
 
   <div class="card">
     <div class="card-title-row">
-      <div class="card-title">System</div>
+      <div class="card-title" data-i18n="system">System</div>
       <button class="info-btn" onclick="openModal('frame')">i</button>
     </div>
     <div class="beam-svg-wrap" style="overflow-x:auto">
       <svg id="frame-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto"></svg>
     </div>
     <div class="field-row">
-      <div class="field"><label>Width b <span class="unit">m</span></label>
+      <div class="field"><label><span data-i18n="width">Width b</span> <span class="unit">m</span></label>
         <input type="number" id="fB" value="5" step="0.1" min="0.5" oninput="drawFrame(); refreshFrameInputs()"></div>
-      <div class="field"><label>Height h <span class="unit">m</span></label>
+      <div class="field"><label><span data-i18n="height">Height h</span> <span class="unit">m</span></label>
         <input type="number" id="fH" value="4" step="0.1" min="0.5" oninput="syncFrameHeights('h')"></div>
     </div>
     <div class="field-row" style="margin-top:4px">
@@ -723,39 +725,39 @@
 
     <!-- Individual support conditions -->
     <div style="margin-top:12px">
-      <div class="card-title" style="margin-bottom:8px">Support A (left)</div>
+      <div class="card-title" style="margin-bottom:8px" data-i18n="supportA">Support A (left)</div>
       <div class="toggle-row">
-        <button class="toggle-btn active" id="btn-sA-fixed" onclick="setSupportA('fixed')">Fixed ⊞</button>
-        <button class="toggle-btn" id="btn-sA-pin" onclick="setSupportA('pin')">Festlager △</button>
-        <button class="toggle-btn" id="btn-sA-roller" onclick="setSupportA('roller')">Roller ○</button>
+        <button class="toggle-btn active" id="btn-sA-fixed" onclick="setSupportA('fixed')" data-i18n="fixed">Fixed ⊞</button>
+        <button class="toggle-btn" id="btn-sA-pin" onclick="setSupportA('pin')" data-i18n="pinned">Festlager △</button>
+        <button class="toggle-btn" id="btn-sA-roller" onclick="setSupportA('roller')" data-i18n="roller">Roller ○</button>
       </div>
     </div>
     <div style="margin-top:8px">
-      <div class="card-title" style="margin-bottom:8px">Support B (right)</div>
+      <div class="card-title" style="margin-bottom:8px" data-i18n="supportB">Support B (right)</div>
       <div class="toggle-row">
-        <button class="toggle-btn" id="btn-sB-fixed" onclick="setSupportB('fixed')">Fixed ⊞</button>
-        <button class="toggle-btn active" id="btn-sB-pin" onclick="setSupportB('pin')">Festlager △</button>
-        <button class="toggle-btn" id="btn-sB-roller" onclick="setSupportB('roller')">Roller ○</button>
+        <button class="toggle-btn" id="btn-sB-fixed" onclick="setSupportB('fixed')" data-i18n="fixed">Fixed ⊞</button>
+        <button class="toggle-btn active" id="btn-sB-pin" onclick="setSupportB('pin')" data-i18n="pinned">Festlager △</button>
+        <button class="toggle-btn" id="btn-sB-roller" onclick="setSupportB('roller')" data-i18n="roller">Roller ○</button>
       </div>
     </div>
     <!-- Head support -->
     <div style="margin-top:8px">
-      <div class="card-title" style="margin-bottom:8px">Head Support (top)</div>
+      <div class="card-title" style="margin-bottom:8px" data-i18n="headSupport">Head Support (top)</div>
       <div class="toggle-row" style="margin-bottom:6px;">
-        <button class="toggle-btn active" id="btn-sH-none" onclick="setHeadSupport('pos','none')">None</button>
-        <button class="toggle-btn" id="btn-sH-left" onclick="setHeadSupport('pos','left')">&#8592; Left</button>
-        <button class="toggle-btn" id="btn-sH-right" onclick="setHeadSupport('pos','right')">Right &#8594;</button>
+        <button class="toggle-btn active" id="btn-sH-none" onclick="setHeadSupport('pos','none')" data-i18n="none">None</button>
+        <button class="toggle-btn" id="btn-sH-left" onclick="setHeadSupport('pos','left')" data-i18n="leftArrow">&#8592; Left</button>
+        <button class="toggle-btn" id="btn-sH-right" onclick="setHeadSupport('pos','right')" data-i18n="rightArrow">Right &#8594;</button>
       </div>
       <div class="toggle-row" id="head-type-row" style="display:none;">
-        <button class="toggle-btn active" id="btn-sHT-roller" onclick="setHeadSupport('type','roller')">Roller ○</button>
-        <button class="toggle-btn" id="btn-sHT-pin" onclick="setHeadSupport('type','pin')">Festlager △</button>
+        <button class="toggle-btn active" id="btn-sHT-roller" onclick="setHeadSupport('type','roller')" data-i18n="roller">Roller ○</button>
+        <button class="toggle-btn" id="btn-sHT-pin" onclick="setHeadSupport('type','pin')" data-i18n="pinned">Festlager △</button>
       </div>
     </div>
     <!-- Hinges -->
     <div style="margin-top:8px">
-      <div class="card-title" style="margin-bottom:8px">Internal Hinges</div>
+      <div class="card-title" style="margin-bottom:8px" data-i18n="internalHinges">Internal Hinges</div>
       <div class="load-list" id="frame-hinge-list"></div>
-      <button class="add-load-btn" onclick="addFrameHinge()">＋ Add Hinge</button>
+      <button class="add-load-btn" onclick="addFrameHinge()" data-i18n="addHinge">＋ Add Hinge</button>
     </div>
     <!-- Indeterminacy indicator -->
     <div id="frame-indet-info" style="margin-top:10px;padding:8px 10px;background:var(--surface2);border-radius:var(--radius-sm);font-size:12px;color:var(--text2);font-family:DM Mono,monospace;"></div>
@@ -763,33 +765,33 @@
 
   <!-- All frame loads -->
   <div class="card">
-    <div class="card-title">Distributed Loads</div>
+    <div class="card-title" data-i18n="distLoads">Distributed Loads</div>
     <div class="load-list" id="frame-vert-list"></div>
-    <button class="add-load-btn" onclick="addFrameLoad('vert')">＋ Add Distributed Load</button>
+    <button class="add-load-btn" onclick="addFrameLoad('vert')" data-i18n="addDist">＋ Add Distributed Load</button>
   </div>
   <div class="card">
-    <div class="card-title">Point &amp; Horizontal Loads</div>
+    <div class="card-title" data-i18n="horizLoadsCols">Point &amp; Horizontal Loads</div>
     <div class="load-list" id="frame-horiz-list"></div>
-    <button class="add-load-btn" onclick="addFrameLoad('horiz')">＋ Add Point / H Load</button>
+    <button class="add-load-btn" onclick="addFrameLoad('horiz')" data-i18n="addHorizLoad">＋ Add Point / H Load</button>
   </div>
 
-  <button class="calc-btn" onclick="calculateFrame()">Calculate</button>
+  <button class="calc-btn" onclick="calculateFrame()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-frame" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveFrameCalc()"><span class="btn-icon" data-icon="save"></span>Save Calculation</button>
+  <button class="calc-btn" style="margin-top:8px;background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);font-size:12px;padding:10px" onclick="saveFrameCalc()"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
 
   <div id="frame-results" class="hidden">
     <div class="results-grid">
       <div class="metric"><div class="m-label">M<sub>max</sub></div><div class="m-value" id="f-res-Mmax">—</div><div class="m-unit">kNm</div></div>
       <div class="metric"><div class="m-label">Q<sub>max</sub></div><div class="m-value" id="f-res-Qmax">—</div><div class="m-unit">kN</div></div>
       <div class="metric"><div class="m-label">N<sub>max</sub></div><div class="m-value" id="f-res-Nmax">—</div><div class="m-unit">kN</div></div>
-      <div class="metric"><div class="m-label">Degree n</div><div class="m-value" id="f-res-indet">—</div><div class="m-unit">stat. indet.</div></div>
+      <div class="metric"><div class="m-label" data-i18n="degreeN">Degree n</div><div class="m-value" id="f-res-indet">—</div><div class="m-unit" data-i18n="statIndet">stat. indet.</div></div>
     </div>
 
     <!-- Support reactions -->
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Support Reactions</div>
+      <div class="card-title" style="margin-bottom:10px" data-i18n="supportReactions">Support Reactions</div>
       <table class="reactions-table">
-        <thead><tr><th>Support</th><th>H (kN) →</th><th>V (kN) ↑</th><th>M (kNm) ↺</th></tr></thead>
+        <thead><tr><th data-i18n="thSupport">Support</th><th>H (kN) →</th><th>V (kN) ↑</th><th>M (kNm) ↺</th></tr></thead>
         <tbody id="frame-reactions-body"></tbody>
       </table>
     </div>
@@ -800,7 +802,7 @@
 
     <!-- Diagram on structure -->
     <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Diagram on Structure</div>
+      <div class="card-title" style="margin-bottom:10px" data-i18n="diagramOnStructure">Diagram on Structure</div>
       <div class="diagram-toggle-row">
         <button class="diagram-toggle-btn active-M" id="diag-btn-M-frame" onclick="setDiagMode('frame','M')">M</button>
         <button class="diagram-toggle-btn" id="diag-btn-Q-frame" onclick="setDiagMode('frame','Q')">Q</button>
@@ -808,14 +810,14 @@
         <button class="diagram-toggle-btn" id="diag-btn-W-frame" onclick="setDiagMode('frame','W')">w</button>
       </div>
       <div id="ei-input-frame" style="display:none;margin-bottom:8px;">
-        <div style="font-size:10px;font-family:DM Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Rafter</div>
+        <div style="font-size:10px;font-family:DM Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="rafter">Rafter</div>
         <div class="field-row" style="margin-bottom:6px;">
           <div class="field"><label>E <span class="unit">&#xD7;10&#x2076; kN/m&#xB2;</span></label>
             <input type="number" id="frame-E-raf" value="210" step="1" oninput="if(diagData.frame)calculateFrame()"></div>
           <div class="field"><label>I<sub>y</sub> <span class="unit">&#xD7;10&#xB3; cm&#x2074;</span></label>
             <input type="number" id="frame-Iy-raf" value="10" step="0.1" oninput="if(diagData.frame)calculateFrame()"></div>
         </div>
-        <div style="font-size:10px;font-family:DM Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Columns</div>
+        <div style="font-size:10px;font-family:DM Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="columnsLbl">Columns</div>
         <div class="field-row">
           <div class="field"><label>E <span class="unit">&#xD7;10&#x2076; kN/m&#xB2;</span></label>
             <input type="number" id="frame-E-col" value="210" step="1" oninput="if(diagData.frame)calculateFrame()"></div>
@@ -829,7 +831,7 @@
       <div class="diagram-label" id="diag-label-frame">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote">Statiq v0.8.7 · Frame</div>
+  <div class="footnote" data-foot="3">Statiq</div>
 </main>
 
 <script>
@@ -889,7 +891,7 @@ const MSG = {
   }
 };
 function msgText(key, ...args){
-  const lang = (typeof calcLang!=='undefined' && MSG[calcLang]) ? calcLang : 'en';
+  const lang = (typeof calcLang!=='undefined' && MSG[calcLang]) ? calcLang : 'en';   // MSG.fr/.es werden weiter unten ergänzt
   const tpl = MSG[lang][key] || MSG.en[key] || key;
   return tpl.replace(/\{(\d+)\}/g, (_,i)=>{ const v=args[+i]; return typeof v==='number' ? +v.toFixed(3) : v; });
 }
@@ -917,7 +919,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.7';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.10';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -1064,7 +1066,7 @@ function renderLoads(sys,type) {
           <div class="field"><label>α <span class="unit">°</span></label><input type="number" value="${l.values.alpha||0}" step="1" min="-90" max="90" oninput="updateVal('${sys}','point',${l.id},'alpha',this.value)"></div>
         </div>
         <div class="field">
-          <label>a <span class="unit">m from A</span></label>
+          <label>a <span class="unit">${tr('fromA')}</span></label>
           <input type="number" value="${l.values.a}" step="0.1" min="0" oninput="updateVal('${sys}','point',${l.id},'a',this.value)">
         </div>`
       :type==='horiz'
@@ -1081,8 +1083,8 @@ function renderLoads(sys,type) {
           <div class="field"><label>q_b <span class="unit">kN/m</span></label><input type="number" value="${l.values.qb}" step="0.5" oninput="updateVal('${sys}','dist',${l.id},'qb',this.value)"></div>
         </div>
         <div class="field-row">
-          <div class="field"><label>from <span class="unit">m</span></label><input type="number" value="${l.values.a}" step="0.1" min="0" oninput="updateVal('${sys}','dist',${l.id},'a',this.value)"></div>
-          <div class="field"><label>to <span class="unit">m</span></label><input type="number" value="${l.values.b}" step="0.1" min="0" oninput="updateVal('${sys}','dist',${l.id},'b',this.value)"></div>
+          <div class="field"><label>${tr('from')} <span class="unit">m</span></label><input type="number" value="${l.values.a}" step="0.1" min="0" oninput="updateVal('${sys}','dist',${l.id},'a',this.value)"></div>
+          <div class="field"><label>${tr('to')} <span class="unit">m</span></label><input type="number" value="${l.values.b}" step="0.1" min="0" oninput="updateVal('${sys}','dist',${l.id},'b',this.value)"></div>
         </div>`;
     return `<div class="load-item${l.enabled?'':' disabled'}">
       <div class="load-item-header"><div class="load-item-label">${lbl}</div>
@@ -1815,9 +1817,9 @@ function updateIndetInfo(){
   const n = frameIndeterminacy();
   const el = document.getElementById('frame-indet-info');
   if(!el) return;
-  const desc = n < 0 ? ICON.warn+' Mechanism — not solvable'
-             : n === 0 ? ICON.check+' Statically determinate'
-             : `${ICON.indet} Statically indeterminate — degree ${n}`;
+  const desc = n < 0 ? ICON.warn+' '+tr('indetMech')
+             : n === 0 ? ICON.check+' '+tr('indetDet')
+             : `${ICON.indet} ${trf('indetN', n)}`;
   el.innerHTML = desc;
 }
 
@@ -1876,24 +1878,24 @@ function renderFrameHinges(){
   const hA = parseFloat(document.getElementById('fHA')?.value)||h;
   const hB = parseFloat(document.getElementById('fHB')?.value)||h;
   el.innerHTML = frameHinges.map((hg,i)=>{
-    const posLabel = hg.member==='rafter' ? `x <span class="unit">m along rafter</span>`
-                   : `z <span class="unit">m from base</span>`;
+    const posLabel = hg.member==='rafter' ? `x <span class="unit">${tr('alongRafter')}</span>`
+                   : `z <span class="unit">${tr('fromBase')}</span>`;
     const maxPos   = hg.member==='rafter' ? b : hg.member==='left' ? hA : hB;
     return `<div class="load-item">
       <div class="load-item-header">
-        <div class="load-item-label">◇ Hinge ${i+1}</div>
+        <div class="load-item-label">◇ ${tr('hingeLbl')} ${i+1}</div>
         <div class="load-item-actions">
           <button class="load-action-btn delete" onclick="removeFrameHinge(${hg.id})">✕</button>
         </div>
       </div>
       <div class="load-item-body">
         <div class="field-row">
-          <div class="field"><label>Member</label>
+          <div class="field"><label>${tr('member')}</label>
             <select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif"
               onchange="updateHingeVal(${hg.id},'member',this.value)">
-              <option value="left" ${hg.member==='left'?'selected':''}>Left column</option>
-              <option value="rafter" ${hg.member==='rafter'?'selected':''}>Rafter</option>
-              <option value="right" ${hg.member==='right'?'selected':''}>Right column</option>
+              <option value="left" ${hg.member==='left'?'selected':''}>${tr('leftCol')}</option>
+              <option value="rafter" ${hg.member==='rafter'?'selected':''}>${tr('rafter')}</option>
+              <option value="right" ${hg.member==='right'?'selected':''}>${tr('rightCol')}</option>
             </select>
           </div>
           <div class="field"><label>${posLabel}</label>
@@ -1938,7 +1940,7 @@ function toggleFrameLoad(type,id){
 function updateFrameVal(type,id,key,val){
   const l=frameLoads[type].find(l=>l.id===id);
   if(l){
-    if(key==='member' || key==='dir') l.values[key] = val;
+    if(key==='member' || key==='dir' || key==='rdir') l.values[key] = val;
     else l.values[key] = parseFloat(val)||0;
     // Streckenlast neu auf eine Stütze gesetzt → Standard: horizontal (Wind)
     if(type==='vert' && key==='member' && val!=='rafter' && !l.values.dir) l.values.dir='h';
@@ -1970,20 +1972,29 @@ function renderFrameLoads(type){
     const mem=l.values.member||(type==='vert'?'rafter':'left');
     const maxPos=mem==='rafter'?b:(mem==='left'?hA:hB);
     // Richtung für Stützen-Streckenlasten: horizontal (Wind) oder axial
+    const rdir=l.values.rdir||'v';
+    const rdirSel=(type==='vert'&&mem==='rafter')?
+      '<div class="field" style="margin-top:6px"><label>'+tr('direction')+'</label>'+
+      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif" '+
+      'onchange="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;rdir&quot;,this.value);renderFrameLoads(&quot;vert&quot;)">'+
+      '<option value="v"'+(rdir==='v'?' selected':'')+'>'+tr('rdirV')+'</option>'+
+      '<option value="n"'+(rdir==='n'?' selected':'')+'>'+tr('rdirN')+'</option>'+
+      '<option value="h"'+(rdir==='h'?' selected':'')+'>'+tr('rdirH')+'</option>'+
+      '</select>'+(rdir==='n'?'<div style="font-size:11px;color:var(--text3);margin-top:4px">'+tr('rdirNote')+'</div>':'')+'</div>':'';
     const dirSel=(type==='vert'&&mem!=='rafter')?
-      '<div class="field" style="margin-top:6px"><label>Direction</label>'+
+      '<div class="field" style="margin-top:6px"><label>'+tr('direction')+'</label>'+
       '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif" '+
       'onchange="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;dir&quot;,this.value)">'+
-      '<option value="h"'+(l.values.dir==='h'?' selected':'')+'>⊥ horizontal (q &gt; 0 → right)</option>'+
-      '<option value="ax"'+(l.values.dir!=='h'?' selected':'')+'>∥ axial (q &gt; 0 ↓ down)</option>'+
+      '<option value="h"'+(l.values.dir==='h'?' selected':'')+'>'+tr('dirH')+'</option>'+
+      '<option value="ax"'+(l.values.dir!=='h'?' selected':'')+'>'+tr('dirAx')+'</option>'+
       '</select></div>':'';
     // Member selector (same for both types)
-    const memSel='<div class="field"><label>Member</label>'+
+    const memSel='<div class="field"><label>'+tr('member')+'</label>'+
       '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif" '+
       'onchange="updateFrameVal(&quot;'+type+'&quot;,'+l.id+',&quot;member&quot;,this.value);renderFrameLoads(&quot;'+type+'&quot;)">'+
-      '<option value="left"'+(mem==='left'?' selected':'')+'>Left col</option>'+
-      '<option value="rafter"'+(mem==='rafter'?' selected':'')+'>Rafter</option>'+
-      '<option value="right"'+(mem==='right'?' selected':'')+'>Right col</option>'+
+      '<option value="left"'+(mem==='left'?' selected':'')+'>'+tr('leftCol')+'</option>'+
+      '<option value="rafter"'+(mem==='rafter'?' selected':'')+'>'+tr('rafter')+'</option>'+
+      '<option value="right"'+(mem==='right'?' selected':'')+'>'+tr('rightCol')+'</option>'+
       '</select></div>';
     const body=type==='vert'
       // Zeile 1: q_a | q_b
@@ -1994,10 +2005,10 @@ function renderFrameLoads(type){
         '<div class="field"><label>q_b <span class="unit">kN/m</span></label><input type="number" value="'+l.values.qb+'" step="0.5" oninput="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;qb&quot;,this.value)"></div>'+
         '</div>'+
         '<div class="field-row" style="margin-top:6px">'+
-        '<div class="field"><label>from <span class="unit">m</span></label><input type="number" value="'+l.values.a+'" step="0.1" min="0" max="'+maxPos+'" oninput="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;a&quot;,this.value)"></div>'+
-        '<div class="field"><label>to <span class="unit">m</span></label><input type="number" value="'+l.values.b+'" step="0.1" min="0" max="'+maxPos+'" oninput="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;b&quot;,this.value)"></div>'+
+        '<div class="field"><label>'+tr('from')+' <span class="unit">m</span></label><input type="number" value="'+l.values.a+'" step="0.1" min="0" max="'+maxPos+'" oninput="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;a&quot;,this.value)"></div>'+
+        '<div class="field"><label>'+tr('to')+' <span class="unit">m</span></label><input type="number" value="'+l.values.b+'" step="0.1" min="0" max="'+maxPos+'" oninput="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;b&quot;,this.value)"></div>'+
         '</div>'+
-        '<div style="margin-top:6px">'+memSel+'</div>'+dirSel
+        '<div style="margin-top:6px">'+memSel+'</div>'+dirSel+rdirSel
       // Zeile 1: F | H
       // Zeile 2: pos (full width)
       // Zeile 3: Member (full width)
@@ -2005,7 +2016,7 @@ function renderFrameLoads(type){
         '<div class="field"><label>F <span class="unit">kN ⊥</span></label><input type="number" value="'+(l.values.F||0)+'" step="0.5" oninput="updateFrameVal(&quot;horiz&quot;,'+l.id+',&quot;F&quot;,this.value)"></div>'+
         '<div class="field"><label>H <span class="unit">kN ∥</span></label><input type="number" value="'+(l.values.H||0)+'" step="0.5" oninput="updateFrameVal(&quot;horiz&quot;,'+l.id+',&quot;H&quot;,this.value)"></div>'+
         '</div>'+
-        '<div style="margin-top:6px"><div class="field"><label>pos <span class="unit">m</span></label><input type="number" value="'+(l.values.z||0)+'" step="0.1" min="0" max="'+maxPos+'" oninput="updateFrameVal(&quot;horiz&quot;,'+l.id+',&quot;z&quot;,this.value)"></div></div>'+
+        '<div style="margin-top:6px"><div class="field"><label>'+tr('posLbl')+' <span class="unit">m</span></label><input type="number" value="'+(l.values.z||0)+'" step="0.1" min="0" max="'+maxPos+'" oninput="updateFrameVal(&quot;horiz&quot;,'+l.id+',&quot;z&quot;,this.value)"></div></div>'+
         '<div style="margin-top:6px">'+memSel+'</div>';
     return '<div class="load-item'+(l.enabled?'':' disabled')+'">'+
       '<div class="load-item-header"><div class="load-item-label">'+lbl+'</div>'+
@@ -2066,26 +2077,34 @@ function drawFrame(){
     const lbl = qa!==qb ? `q${di+1}=${qa}→${qb}kN/m` : `q${di+1}=${qa}kN/m`;
     const base = stackAt(mem, Math.min(pa,pb), Math.max(pa,pb));
     const hMaxQ = Math.max(qScale(qa), qScale(qb));
-    stack[mem].push({lo:Math.min(pa,pb), hi:Math.max(pa,pb), top: base + hMaxQ + 3});
+    stack[mem].push({lo:Math.min(pa,pb), hi:Math.max(pa,pb), top: base + (mem==='rafter' ? (v.rdir==='h' ? 10 : hMaxQ + 3) + 11 : hMaxQ + 3)});   // Riegel: Platz für die Beschriftung zwischen den Lagen
     const n = Math.max(3, Math.round(Math.abs(pb-pa)*(mem==='rafter'?rafW/b:scale_h)/16));
     if(mem==='rafter'){
-      const tails=[];
+      // Richtung: 'v' senkrecht (je m Grundriss), 'n' rechtwinklig zum Riegel (Wind auf die Dachfläche),
+      // 'h' waagerecht (je m Höhe, q > 0 → rechts). o = Versatz nach außen (oben), d = Kraftrichtung für q > 0
+      const rd = v.rdir||'v', rl = Math.hypot(rafW, col_topB-col_topA), rx = rafW/rl, ry = (col_topB-col_topA)/rl;
+      const o = rd==='v' ? [0,-1] : [ry, -rx];
+      const d = rd==='v' ? [0,1] : rd==='n' ? [-ry, rx] : [1,0];
+      if(rd==='h' && Math.abs(ry)<1e-6) return;            // waagerechter Riegel: keine Projektion
+      const tails=[], anch=[];
       for(let i=0;i<=n;i++){
         const x=pa+(pb-pa)*i/n, q=qa+(qb-qa)*i/n, [px,py]=rafPt(x);
-        const y0=py-base-1, len=qScale(q);
-        // q > 0 nach unten: Pfeil von oben auf die Last-Unterkante
-        if(q>=0) html+=`<line x1="${px.toFixed(1)}" y1="${(y0-len).toFixed(1)}" x2="${px.toFixed(1)}" y2="${y0.toFixed(1)}" stroke="${CLR.q}" stroke-width="1.1" marker-end="url(#farr-q)"/>`;
-        else     html+=`<line x1="${px.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${px.toFixed(1)}" y2="${(y0-len).toFixed(1)}" stroke="${CLR.q}" stroke-width="1.1" marker-end="url(#farr-q)"/>`;
-        tails.push([px, y0-len]);
+        const off = base + (rd==='h' ? 4 : 1), len = qScale(q);
+        const A=[px+o[0]*off, py+o[1]*off], T=[A[0]-d[0]*len, A[1]-d[1]*len];
+        // q > 0: Pfeil zeigt auf den Riegel (Spitze an A); q < 0: vom Riegel weg
+        const [p0,p1] = q>=0 ? [T,A] : [A,T];
+        html+=`<line x1="${p0[0].toFixed(1)}" y1="${p0[1].toFixed(1)}" x2="${p1[0].toFixed(1)}" y2="${p1[1].toFixed(1)}" stroke="${CLR.q}" stroke-width="1.1" marker-end="url(#farr-q)"/>`;
+        tails.push(T); anch.push(A);
       }
       html+=`<polyline points="${tails.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${CLR.q}" stroke-width="1.1"/>`;
-      const [xa]=rafPt(pa), [xb]=rafPt(pb);
-      blocked.push({x0:Math.min(xa,xb), x1:Math.max(xa,xb), y0:Math.min(...tails.map(p=>p[1])), y1:Math.max(rafPt(pa)[1],rafPt(pb)[1])-base});
-      const topY = Math.min(...tails.map(p=>p[1]));
-      // über dem Block; ist das belegt (gestapelt): rechts bzw. links neben dem Block
-      const midY = (Math.max(rafPt(pa)[1],rafPt(pb)[1])-base + topY)/2 + 3;
-      labels.push({x:(xa+xb)/2, y:topY-3, text:lbl, color:CLR.q, size:8, prio:1, bg:false,
-        cands:[{x:(xa+xb)/2, y:topY-3, anchor:'middle'}, {x:Math.max(xa,xb)+4, y:midY, anchor:'start'}, {x:Math.min(xa,xb)-4, y:midY, anchor:'end'}]});
+      // Pfeilfläche abschnittsweise sperren (bei geneigtem Riegel viel enger als ein Gesamtrechteck)
+      for(let i=0;i<n;i++){ const P=[tails[i],anch[i],tails[i+1],anch[i+1]];
+        blocked.push({x0:Math.min(...P.map(p=>p[0])), x1:Math.max(...P.map(p=>p[0])), y0:Math.min(...P.map(p=>p[1])), y1:Math.max(...P.map(p=>p[1]))}); }
+      // Beschriftung: mittig außen über den Pfeilenden, sonst rechts bzw. links neben dem Block
+      const tm = tails[Math.floor(n/2)], tR = tails.reduce((m,p)=>p[0]>m[0]?p:m), tL = tails.reduce((m,p)=>p[0]<m[0]?p:m);
+      labels.push({x:tm[0]+o[0]*6, y:tm[1]+o[1]*6-2, text:lbl, color:CLR.q, size:8, prio:1, bg:false,
+        cands:[{x:tm[0]+o[0]*6, y:tm[1]+o[1]*6-2, anchor:'middle'}, {x:tR[0]+4, y:tR[1]+3, anchor:'start'}, {x:tL[0]-4, y:tL[1]+3, anchor:'end'},
+          ...[0.25,0.75,0.1,0.9].map(f=>{ const t=tails[Math.round(f*n)]; return {x:t[0]+o[0]*6, y:t[1]+o[1]*6-2, anchor:'middle'}; })]});
     } else {
       const colX = mem==='left'?col_L:col_R;
       const isH = v.dir==='h';
@@ -2224,7 +2243,10 @@ function drawFrame(){
 
   // Stützen als Sperrflächen, damit keine Beschriftung über einer Stütze liegt
   blocked.push({x0:col_L-3, x1:col_L+3, y0:col_topA, y1:col_bot}, {x0:col_R-3, x1:col_R+3, y0:col_topB, y1:col_bot});
-  html += placeLabels(labels, 340, 240, blocked);
+  // Hohe Lastlagen auf dem Riegel: Zeichenfläche nach oben erweitern statt abschneiden
+  const yTop = Math.min(240, ...blocked.map(b=>b.y0)), ext = yTop < 14 ? Math.ceil(14 - yTop) : 0;
+  svg.setAttribute('viewBox', `0 ${-ext} 340 ${240+ext}`);
+  html += placeLabels(labels, 340, 240, blocked, -ext);
 
   svg.innerHTML=`<defs>
     <marker id="farr-q" markerWidth="4" markerHeight="4" refX="2.5" refY="2" orient="auto"><polygon points="0,0 4,2 0,4" fill="${CLR.q}"/></marker>
@@ -2335,7 +2357,8 @@ function buildSDF(){
 
 function saveCalc(sys){
   // Generic save for any system
-  const sysLabels={beam:'Einfeldträger',cantilever:'Kragarm',cont:'Durchlaufträger',frame:'Rahmen'};
+  const _tabs=(calcTranslations[calcLang]||calcTranslations.en).tabs;
+  const sysLabels={beam:_tabs[0],cantilever:_tabs[1],cont:_tabs[2],frame:_tabs[3]};
   if(sys==='frame'){ saveFrameCalc(); return; }
 
   // Einfeldträger/Kragarm/DLT: Stand der letzten Berechnung (lastCalc) speichern
@@ -2367,13 +2390,13 @@ function saveCalc(sys){
     plot: lc.plot            // exakte Verläufe für den Bericht (ab v0.8.2)
   };
   const name = sys==='cont'
-    ? `${sysLabels[sys]} ${geom.spans.length} Felder L=${geom.spans.join('/')}m`
+    ? trf('nameSpans', sysLabels[sys], geom.spans.length, geom.spans.join('/'))
     : `${sysLabels[sys]||sys} L=${geom.L||'?'}m`;
   const key='statiq_sdf_'+Date.now();
   try{
     localStorage.setItem(key, JSON.stringify({name,sdf}));
     const btn=document.querySelector(`[onclick="saveCalc('${sys}')"]`);
-    if(btn){ const o=btn.innerHTML; btn.innerHTML=ICON.check+' Gespeichert'; setTimeout(()=>btn.innerHTML=o,1500); }
+    if(btn){ const o=btn.innerHTML; btn.innerHTML=ICON.check+' '+tr('savedOk'); setTimeout(()=>btn.innerHTML=o,1500); }
   }catch(e){ showCalcMsgs(sid,[{type:'error', text:msgText('storageFull')}]); }
 }
 
@@ -2385,14 +2408,14 @@ function saveFrameCalc(){
   }
   // Generate name from system description
   const sp = sdf.system.supports, g = sdf.system.geometry;
-  const name = `Rahmen ${SUP_DE[sp.A]||sp.A}/${SUP_DE[sp.B]||sp.B} b=${g.b}m h=${g.hA}/${g.hB}m`;
+  const name = `${(calcTranslations[calcLang]||calcTranslations.en).tabs[3]} ${supW(sp.A)}/${supW(sp.B)} b=${g.b}m h=${g.hA}/${g.hB}m`;
   const key = 'statiq_sdf_' + Date.now();
   try {
     localStorage.setItem(key, JSON.stringify({name, sdf}));
     // Show brief confirmation
     const btn = document.querySelector('[onclick="saveFrameCalc()"]');
     const orig = btn.innerHTML;
-    btn.innerHTML = ICON.check+' Saved';
+    btn.innerHTML = ICON.check+' '+tr('savedOk');
     setTimeout(()=>btn.innerHTML=orig, 1500);
   } catch(e){
     showCalcMsgs('frame',[{type:'error', text:msgText('storageFull')}]);
@@ -2447,7 +2470,7 @@ function renderSavedTab(){
       <div style="display:flex;align-items:start;gap:8px;margin-bottom:8px">
         <div style="flex:1">
           <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">${escapeHtml(name)}</div>
-          <div style="font-size:10px;color:var(--text-muted);font-family:DM Mono,monospace">${new Date(sdf.timestamp).toLocaleString()}</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:DM Mono,monospace">${new Date(sdf.timestamp).toLocaleString(LOCALE())}</div>
         </div>
         <button onclick="deleteSDF('${k}',this.closest('div[style*=border-radius]'))" style="background:none;border:none;color:#e74c3c;cursor:pointer;font-size:16px;padding:0;line-height:1">✕</button>
       </div>
@@ -2470,8 +2493,9 @@ function renderSavedTab(){
         </div>
       </div>
       <div style="display:flex;gap:8px">
-        <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif">Bericht</button>
-        ${sdf.system?.type==='frame' ? `<button onclick="loadSDF('${k}')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600">Laden</button>` : ''}
+        <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif">${tr('report')}</button>
+        ${sdf.system?.type==='frame' ? `<button onclick="loadSDF('${k}')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600">${tr('load')}</button>` : ''}
+        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in statiq·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:DM Sans,sans-serif">${tr('toSize')}</a>` : ''}
         <button onclick="exportSDF('${k}')" style="padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-size:12px">↓</button>
       </div>
     </div>
@@ -2498,8 +2522,8 @@ function closeReport(){
 // Ab v0.8.2 enthält das SDF Lager, Lasten, Auflagerkräfte und die exakten
 // Verläufe (sdf.plot); die Diagramme werden mit denselben Funktionen wie in
 // der App am Tragwerk gezeichnet. Ältere Speicherungen: Ersatzdarstellung.
-const SUP_DE = {fixed:'Einspannung', pin:'Festlager', roller:'Loslager'};
-const MEM_DE = {rafter:'Riegel', left:'linker Stiel', right:'rechter Stiel'};
+const supW = t => ({fixed:tr('supFixedW'), pin:tr('supPinW'), roller:tr('supRollerW')})[t] || t || '—';
+const memW = m => ({rafter:tr('rafter'), left:tr('leftCol'), right:tr('rightCol')})[m] || m;
 const num = v => { const n=+v; return Number.isFinite(n) ? +n.toFixed(3) : v; };
 
 // ids in einem gespeicherten SVG eindeutig machen (Pfeilspitzen, Muster), sonst
@@ -2518,33 +2542,33 @@ function uniquifySvgIds(svg, prefix){
 function reportGeometry(S){
   const g=S.geometry||{};
   if(S.type==='frame') return `b = ${num(g.b)} m, h<sub>A</sub> = ${num(g.hA??g.h)} m` + ((g.hB??g.h)!==(g.hA??g.h) ? `, h<sub>B</sub> = ${num(g.hB)} m` : '');
-  if(S.type==='cont')  return Array.isArray(g.spans) ? [g.ovL?`Kragarm links ü = ${num(g.ovL)} m`:'', ...g.spans.map((L,i)=>`L<sub>${i+1}</sub> = ${num(L)} m`), g.ovR?`Kragarm rechts ü = ${num(g.ovR)} m`:''].filter(Boolean).join(', ') : '—';
+  if(S.type==='cont')  return Array.isArray(g.spans) ? [g.ovL?`${tr('repCantL')} = ${num(g.ovL)} m`:'', ...g.spans.map((L,i)=>`L<sub>${i+1}</sub> = ${num(L)} m`), g.ovR?`${tr('repCantR')} = ${num(g.ovR)} m`:''].filter(Boolean).join(', ') : '—';
   return g.L!=null ? `L = ${num(g.L)} m` : '—';
 }
 function reportSupports(S){
   const sp=S.supports||{};
   const lines=[];
   if(S.type==='frame'){
-    lines.push(`A: ${SUP_DE[sp.A]||sp.A||'—'}, B: ${SUP_DE[sp.B]||sp.B||'—'}`);
-    if(sp.head && sp.head!=='none') lines.push(`Kopfhalterung ${sp.head==='left'?'links':'rechts'} (${sp.headType==='pin'?'Festlager':'Loslager'})`);
-    (S.hinges||[]).forEach((hg,i)=>lines.push(`Gelenk ${i+1}: ${MEM_DE[hg.member]||hg.member}, ${hg.member==='rafter'?'x':'z'} = ${num(hg.pos)} m`));
+    lines.push(`A: ${supW(sp.A)}, B: ${supW(sp.B)}`);
+    if(sp.head && sp.head!=='none') lines.push(trf('repHead', sp.head==='left'?tr('wLeft'):tr('wRight'), supW(sp.headType==='pin'?'pin':'roller')));
+    (S.hinges||[]).forEach((hg,i)=>lines.push(trf('repHingeFrame', i+1, memW(hg.member), hg.member==='rafter'?'x':'z', num(hg.pos))));
   } else if(S.type==='cantilever'){
-    lines.push('A: Einspannung (x = 0), freies Ende rechts');
+    lines.push(tr('repCantSup'));
   } else if(S.type==='cont'){
     const list = sp.list || (Array.isArray(S.geometry?.spans) ? ['pin', ...S.geometry.spans.map(()=> 'roller')] : []);
-    lines.push(list.map((t,i)=>`${String.fromCharCode(65+i)}: ${SUP_DE[t]||t}`).join(', ') || '—');
-    (S.hinges||[]).forEach((hg,i)=>lines.push(`Gelenk G${i+1}: Feld ${hg.span}, x = ${num(hg.a)} m vom Feldanfang`));
+    lines.push(list.map((t,i)=>`${String.fromCharCode(65+i)}: ${supW(t)}`).join(', ') || '—');
+    (S.hinges||[]).forEach((hg,i)=>lines.push(trf('repHingeCont', i+1, hg.span, num(hg.a))));
   } else {
-    lines.push('A: Festlager, B: Loslager');
+    lines.push(tr('repBeamSup'));
   }
   return lines;
 }
 function reportStiffness(S){
   const st=S.stiffness; if(!st) return null;
-  const ei = (E,Iy)=>`EI = ${Math.round(10*E*Iy).toLocaleString('de-DE')} kNm² <span class="rep-dim">(E = ${num(E)}·10³ N/mm², I<sub>y</sub> = ${num(Iy)}·10³ cm⁴)</span>`;
-  if(S.type==='frame') return [`Riegel: ${ei(st.E_raf,st.Iy_raf)}`, `Stiele: ${ei(st.E_col,st.Iy_col)}`];
+  const ei = (E,Iy)=>`EI = ${Math.round(10*E*Iy).toLocaleString(LOCALE())} kNm² <span class="rep-dim">(E = ${num(E)}·10³ N/mm², I<sub>y</sub> = ${num(Iy)}·10³ cm⁴)</span>`;
+  if(S.type==='frame') return [`${tr('rafter')}: ${ei(st.E_raf,st.Iy_raf)}`, `${tr('columnsLbl')}: ${ei(st.E_col,st.Iy_col)}`];
   const k = S.geometry?.k;
-  if(S.type==='cont' && Array.isArray(k) && k.some(v=>v!==1)) return [ei(st.E, st.Iy)+' (Bezug)', k.map((v,i)=>`Feld ${i+1}: ${num(v)}·EI`).join(', ')];
+  if(S.type==='cont' && Array.isArray(k) && k.some(v=>v!==1)) return [ei(st.E, st.Iy)+' '+tr('repRef'), k.map((v,i)=>`${tr('spanWord')} ${i+1}: ${num(v)}·EI`).join(', ')];
   return [ei(st.E, st.Iy)];
 }
 function reportLoads(S){
@@ -2554,22 +2578,22 @@ function reportLoads(S){
   if(S.type==='frame'){
     (L.vertical||[]).forEach((l,k)=>{
       const n=l.i||k+1, mem=l.member||'rafter';
-      const dir = mem==='rafter' ? '↓ (je m Grundriss)' : (l.dir==='h' ? 'horizontal, + →' : 'axial, + ↓');
-      out.push(`q${n} = ${q(l)}, ${MEM_DE[mem]}, ${mem==='rafter'?'x':'z'} = ${num(l.a)} … ${num(l.b)} m, ${dir}`);
+      const dir = mem==='rafter' ? ({n:tr('perNormal'), h:tr('perHeight')}[l.rdir] || tr('perPlan')) : (l.dir==='h' ? tr('horizPlus') : tr('axialPlus'));
+      out.push(`q${n} = ${q(l)}, ${memW(mem)}, ${mem==='rafter'?'x':'z'} = ${num(l.a)} … ${num(l.b)} m, ${dir}`);
     });
     (L.horizontal||[]).forEach((l,k)=>{
       const n=l.i||k+1, mem=l.member||'left';
       const parts=[]; if(+l.F) parts.push(`F = ${num(l.F)} kN ⊥`); if(+l.H) parts.push(`H = ${num(l.H)} kN ∥`);
-      out.push(`P${n}: ${parts.join(', ')||'0'}, ${MEM_DE[mem]}, ${mem==='rafter'?'x':'z'} = ${num(l.z)} m`);
+      out.push(`P${n}: ${parts.join(', ')||'0'}, ${memW(mem)}, ${mem==='rafter'?'x':'z'} = ${num(l.z)} m`);
     });
   } else if(S.type==='cont'){
     const segOut = (nm, sp) => { if(!sp) return;
       (sp.point||[]).forEach(l=>out.push(`${nm}: F${l.i} = ${num(l.F)} kN ↓, x = ${num(l.a)} m`));
       (sp.dist||[]).forEach(l=>out.push(`${nm}: q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
       (sp.mom||[]).forEach(l=>out.push(`${nm}: M${l.i} = ${num(l.M)} kNm ↻, x = ${num(l.a)} m`)); };
-    segOut('Kragarm links', L.ovL);
-    (L.spans||[]).forEach((sp,k)=>segOut(`Feld ${k+1}`, sp));
-    segOut('Kragarm rechts', L.ovR);
+    segOut(tr('overhangL'), L.ovL);
+    (L.spans||[]).forEach((sp,k)=>segOut(`${tr('spanWord')} ${k+1}`, sp));
+    segOut(tr('overhangR'), L.ovR);
   } else {
     (L.point||[]).forEach(l=>out.push(`F${l.i} = ${num(l.F)} kN, x = ${num(l.a)} m`+(+l.alpha?`, α = ${num(l.alpha)}°`:'')));
     (L.dist||[]).forEach(l=>out.push(`q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
@@ -2581,8 +2605,8 @@ function reportLoads(S){
 
 function renderReport(name, sdf){
   const S=sdf.system||{}, r=sdf.results||{};
-  const date=new Date(sdf.timestamp).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
-  const sysLabel={beam:'Einfeldträger', cantilever:'Kragarm', cont:'Durchlaufträger', frame:'Rahmen'}[S.type]||S.type;
+  const date=new Date(sdf.timestamp).toLocaleDateString(LOCALE(),{day:'2-digit',month:'2-digit',year:'numeric'});
+  const _tb=(calcTranslations[calcLang]||calcTranslations.en).tabs, sysLabel={beam:_tb[0], cantilever:_tb[1], cont:_tb[2], frame:_tb[3]}[S.type]||S.type;
   const legacy = !sdf.plot;
   const sec = t => `<div class="rep-sec">${t}</div>`;
   const card = (t, body) => `<div class="rep-card"><div class="rep-card-t">${t}</div><div class="rep-card-b">${body}</div></div>`;
@@ -2605,48 +2629,48 @@ function renderReport(name, sdf){
       <div class="rep-head">
         <div>
           <div class="rep-brand">STATIQ</div>
-          <div class="rep-sub">statiq·calc · Berechnungsprotokoll</div>
+          <div class="rep-sub">${tr('repSub')}</div>
         </div>
         <div class="rep-meta"><div>${date}</div><div>v${escapeHtml(sdf.statiq_version||'—')}</div></div>
       </div>
       <div class="rep-title">${escapeHtml(name)}</div>
 
-      ${sec('SYSTEM')}
+      ${sec(tr('repSystem'))}
       <div class="rep-sys">
         ${snapshot ? `<div class="rep-sys-img">${snapshot}</div>` : ''}
         <div class="rep-grid">
-          ${card('Typ', sysLabel)}
-          ${card('Geometrie', reportGeometry(S))}
-          ${card('Lagerung', lines(reportSupports(S)))}
-          ${stiff ? card('Steifigkeit', lines(stiff)) : ''}
+          ${card(tr('repType'), sysLabel)}
+          ${card(tr('repGeom'), reportGeometry(S))}
+          ${card(tr('repSupports'), lines(reportSupports(S)))}
+          ${stiff ? card(tr('repStiff'), lines(stiff)) : ''}
         </div>
       </div>
 
-      ${sec('EINWIRKUNGEN')}
+      ${sec(tr('repActions'))}
       <div class="rep-loads">${lines(reportLoads(S))}</div>
 
-      ${sec('MAXIMALE SCHNITTGRÖSSEN')}
+      ${sec(tr('repMax'))}
       <div class="rep-maxrow">
         ${maxCard('|M|<sub>max</sub>', (+r.Mmax||0).toFixed(2), 'kNm', '#2d6a4f')}
         ${maxCard('|Q|<sub>max</sub>', (+r.Qmax||0).toFixed(2), 'kN', '#1d4ed8')}
         ${maxCard('|N|<sub>max</sub>', (+r.Nmax||0).toFixed(2), 'kN', '#92400e')}
-        ${defo ? maxCard('Verformung', `<span style="font-size:15px">${defo}</span>`, '', '#7c3aed') : ''}
+        ${defo ? maxCard(tr('repDefo'), `<span style="font-size:15px">${defo}</span>`, '', '#7c3aed') : ''}
       </div>
 
-      ${reactionRows ? `<div class="rep-block">${sec('AUFLAGERREAKTIONEN')}
+      ${reactionRows ? `<div class="rep-block">${sec(tr('repReactions'))}
       <table class="rep-table">
-        <thead><tr><th>Lager</th><th>H [kN]</th><th>V [kN]</th><th>M [kNm]</th></tr></thead>
+        <thead><tr><th>${tr('thSupport')}</th><th>H [kN]</th><th>V [kN]</th><th>M [kNm]</th></tr></thead>
         <tbody>${reactionRows}</tbody>
       </table>
-      <div class="rep-note">Vorzeichen: H → +, V ↑ +, M ↺ + (Kräfte des Lagers auf das Tragwerk)${supM ? '<br>Stützmomente (Zug unten +): '+supM : ''}</div></div>` : ''}
+      <div class="rep-note">${tr('repSign')}${supM ? '<br>'+tr('repSupM')+': '+supM : ''}</div></div>` : ''}
 
-      ${sec('SCHNITTGRÖSSENVERLÄUFE')}
-      ${legacy ? `<div class="rep-note">Ältere Speicherung (vor v0.8.2): Verläufe vereinfacht dargestellt. Für die Darstellung am Tragwerk und die exakte Durchbiegung bitte neu berechnen und speichern.</div>` : ''}
+      ${sec(tr('repDiagrams'))}
+      ${legacy ? `<div class="rep-note">${tr('repLegacy')}</div>` : ''}
       <div id="report-diagrams" class="rep-diagrams">
-        <div class="rep-dia"><div class="rep-dia-t" style="color:#2d6a4f">M — Biegemoment [kNm]</div><svg id="report-svg-M"></svg></div>
-        <div class="rep-dia"><div class="rep-dia-t" style="color:#1d4ed8">Q — Querkraft [kN]</div><svg id="report-svg-Q"></svg></div>
-        ${showN ? `<div class="rep-dia"><div class="rep-dia-t" style="color:#92400e">N — Normalkraft [kN]</div><svg id="report-svg-N"></svg></div>` : ''}
-        <div class="rep-dia"><div class="rep-dia-t" style="color:#7c3aed">${S.type==='frame'?'Verformung u, w':'Durchbiegung w'} [mm]</div><svg id="report-svg-w"></svg></div>
+        <div class="rep-dia"><div class="rep-dia-t" style="color:#2d6a4f">${tr('repM')}</div><svg id="report-svg-M"></svg></div>
+        <div class="rep-dia"><div class="rep-dia-t" style="color:#1d4ed8">${tr('repQ')}</div><svg id="report-svg-Q"></svg></div>
+        ${showN ? `<div class="rep-dia"><div class="rep-dia-t" style="color:#92400e">${tr('repN')}</div><svg id="report-svg-N"></svg></div>` : ''}
+        <div class="rep-dia"><div class="rep-dia-t" style="color:#7c3aed">${S.type==='frame'?tr('repUW'):tr('repW')} [mm]</div><svg id="report-svg-w"></svg></div>
       </div>
 
       <div class="rep-foot">
@@ -2766,7 +2790,7 @@ function renderReportDiagramsLegacy(sdf){
   const svgW=document.getElementById('report-svg-w');
   if(svgW){
     svgW.setAttribute('viewBox','0 0 300 140'); svgW.style.width='100%'; svgW.style.height='auto';
-    svgW.innerHTML=`<text x="150" y="66" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="DM Sans,sans-serif">In dieser Speicherung nicht enthalten.</text>
+    svgW.innerHTML=`<text x="150" y="66" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="DM Sans,sans-serif">${tr('repNotIncl')}</text>
       <text x="150" y="82" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="DM Sans,sans-serif">Bitte neu berechnen und speichern.</text>`;
   }
 }
@@ -2964,8 +2988,17 @@ function frameBuildModel(b, hA, hB, cfg){
         const frac = (t-ta)/(tb-ta);              // 0 bei a, 1 bei b
         const q = v.qa + (v.qb - v.qa)*frac;
         if(mem==='rafter'){
-          // Riegel: q je m Grundriss → je m Stablänge: q·|cos α|, nach unten
-          gy -= q*Math.abs(e.c);
+          const rd = v.rdir||'v';
+          if(rd==='n'){
+            // rechtwinklig zum Riegel, je m Stablänge, q > 0 auf den Riegel (Winddruck) = (sin α, −cos α)
+            gx += q*e.s; gy -= q*e.c;
+          } else if(rd==='h'){
+            // waagerecht, je m Höhe → je m Stablänge: q·|sin α|, q > 0 nach rechts
+            gx += q*Math.abs(e.s);
+          } else {
+            // Riegel: q je m Grundriss → je m Stablänge: q·|cos α|, nach unten
+            gy -= q*Math.abs(e.c);
+          }
         } else if(v.dir==='h'){
           // Stütze horizontal (z. B. Wind): q > 0 → nach rechts, je m Höhe
           gx += q;
@@ -3384,7 +3417,7 @@ function calculateFrame(){
   let rows = row('A', nA, supportA) + row('B', nB, supportB);
   if(supportHead==='left'||supportHead==='right'){
     const nh = supportHead==='left' ? n2 : n3;
-    rows += `<tr><td>H (top)</td><td>${clean(R[nh.ux]).toFixed(2)}</td>`+
+    rows += `<tr><td>${tr('headRow')}</td><td>${clean(R[nh.ux]).toFixed(2)}</td>`+
             `<td>${supportHeadType==='pin'?clean(R[nh.uy]).toFixed(2):'—'}</td><td>—</td></tr>`;
   }
   document.getElementById('frame-reactions-body').innerHTML = rows;
@@ -3418,14 +3451,8 @@ function setDiagMode(sys, mode){
     const btn = document.getElementById('diag-btn-'+m+'-'+sys);
     if(btn) btn.className = 'diagram-toggle-btn' + (m===mode ? ' active-'+m : '');
   });
-  const labels = {
-    M:'Bending Moment M — kNm',
-    Q:'Shear Force Q — kN',
-    N:'Normal Force N — kN',
-    W:'Deflection w — mm'
-  };
   const lbl = document.getElementById('diag-label-'+sys);
-  if(lbl) lbl.textContent = labels[mode]||'';
+  if(lbl) lbl.textContent = tr('diag'+mode);
   // Show/hide EI input
   const eiEl = document.getElementById('ei-input-'+sys);
   if(eiEl) eiEl.style.display = mode==='W' ? 'block' : 'none';
@@ -3447,7 +3474,7 @@ const diagFill   = { M:'rgba(15,110,86,0.15)', Q:'rgba(24,95,165,0.15)', N:'rgba
 // bereits gesetzte, werden Ausweichpositionen probiert (oben, unten,
 // seitlich). Findet sich keine, wird sie bei prio ≥ 2 weggelassen,
 // sonst an der Originalstelle gesetzt.
-function placeLabels(list, W, H, blocked=[]){
+function placeLabels(list, W, H, blocked=[], Y0=0){
   const placed = blocked.slice();
   let out = '';
   const texts = [];
@@ -3470,7 +3497,7 @@ function placeLabels(list, W, H, blocked=[]){
     let best = null;
     for(const c of cands){
       const bx = boxAt(c.x, c.y, c.anchor);
-      if(W && (bx.x0 < 1 || bx.x1 > W-1 || bx.y0 < 1 || bx.y1 > H-1)) continue;
+      if(W && (bx.x0 < 1 || bx.x1 > W-1 || bx.y0 < Y0+1 || bx.y1 > H-1)) continue;
       if(!placed.some(p=>hit(p,bx))){ best={...c, bx}; break; }
     }
     if(!best){ if((l.prio||0) >= 2) return; best={...c0, bx:boxAt(c0.x,c0.y,c0.anchor)}; }
@@ -4066,6 +4093,7 @@ let calcLang = localStorage.getItem('statiq-lang') || 'en';
 
 const calcTranslations = {
   en: {
+    toSize:'Design in size →',
     spanWord:'Span', loadsWord:'Loads', eiRatio:'stiffness ratio', eiRef:'reference EI',
     modalContSolveH:'Solution Method', modalContSolveP:'The three-moment equation is the classic hand method. calc itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.',
     modalContOptH:'Options: fixed ends, cantilevers, hinges', modalContOptP:'Counting rule for beams (vertical loads): n = a − 2 − g, with a = vertical support reactions plus clamping moments (fixed end 2, pin/roller 1) and g = number of hinges. n = 0: statically determinate (e.g. Gerber beam), n &lt; 0: mechanism. In a hinge the moment is zero. I<sub>i</sub>/I scales the stiffness of a span — in indeterminate systems this shifts the support moments towards the stiffer span.', endSupports:'End supports and cantilevers', leftEnd:'Left end support', rightEnd:'Right end support', overhangL:'Cantilever left', overhangR:'Cantilever right', pointMoments:'Point Moments', addMoment:'＋ Add Moment', supPin:'Pin △', supRoller:'Roller ○', supFixed:'Fixed ⊞',
@@ -4142,6 +4170,7 @@ const calcTranslations = {
     modalFrameS5t: 'M &gt; 0: tension on the inside (dashed fibre) · Q = dM/ds along the member · N &gt; 0: tension<br>Support reactions: H → +, V ↑ +, M ↺ + (forces of the support on the frame)',
   },
   de: {
+    toSize:'In size bemessen →',
     spanWord:'Feld', loadsWord:'Lasten', eiRatio:'Steifigkeitsverhältnis', eiRef:'Bezugswert EI',
     modalContSolveH:'Lösungsweg', modalContSolveP:'Die Dreimomentengleichung (Clapeyron) ist das klassische Handverfahren. calc selbst rechnet mit dem Weggrößenverfahren in Matrixform (wie beim Rahmen). Dadurch lassen sich Einspannungen, Kragarme, Gelenke, unterschiedliche Steifigkeiten je Feld und Einzelmomente beliebig kombinieren. M, Q und die Durchbiegung folgen exakt aus den Knotenverschiebungen.',
     modalContOptH:'Optionen: Einspannung, Kragarme, Gelenke', modalContOptP:'Abzählkriterium für Balken (lotrechte Lasten): n = a − 2 − g mit a = lotrechte Auflagerkräfte plus Einspannmomente (Einspannung 2, Fest-/Loslager 1) und g = Anzahl der Gelenke. n = 0: statisch bestimmt (z. B. Gerberträger), n &lt; 0: verschieblich. Im Gelenk ist das Moment null. I<sub>i</sub>/I verändert die Steifigkeit eines Feldes — bei statisch unbestimmten Systemen wandern die Stützmomente dadurch zum steiferen Feld.', endSupports:'Endlager und Kragarme', leftEnd:'Lager links', rightEnd:'Lager rechts', overhangL:'Kragarm links', overhangR:'Kragarm rechts', pointMoments:'Einzelmomente', addMoment:'＋ Einzelmoment', supPin:'Festlager △', supRoller:'Loslager ○', supFixed:'Einspannung ⊞',
@@ -4214,6 +4243,7 @@ const calcTranslations = {
     modalFrameS5t: 'M &gt; 0: Zug innen (gestrichelte Faser) · Q = dM/ds in Stabrichtung · N &gt; 0: Zug<br>Auflagerreaktionen: H → +, V ↑ +, M ↺ + (Kräfte des Lagers auf den Rahmen)',
   },
   fr: {
+    toSize:'Dimensionner →',
     spanWord:'Travée', loadsWord:'Charges', eiRatio:'rapport de rigidité', eiRef:'EI de référence', endSupports:'Appuis d’extrémité et consoles', leftEnd:'Appui gauche', rightEnd:'Appui droit', overhangL:'Console gauche', overhangR:'Console droite', pointMoments:'Moments ponctuels', addMoment:'＋ Ajouter un moment', supPin:'Appui fixe △', supRoller:'Appui mobile ○', supFixed:'Encastrement ⊞',
     tabs: ['Poutre Simple', 'Console', 'Poutre Continue', 'Portique'],
     system: 'Système', span: 'Portée L', length: 'Longueur L',
@@ -4228,7 +4258,7 @@ const calcTranslations = {
     shearForce: 'Effort Tranchant T(x)', bendingMoment: 'Moment Fléchissant M(x)',
     normalForce: 'Effort Normal N(x)', deflection: 'Flèche w — mm',
     tensionBottom: 'traction en bas', tensionTop: 'traction en haut',
-    diagramOnStructure: 'Diagramme sur Structure',
+    diagramOnStructure: 'Diagramme sur la structure',
     supportReactions: 'Réactions aux Appuis',
     supportA: 'Appui A (gauche)', supportB: 'Appui B (droite)',
     internalHinges: 'Rotules', addHinge: '＋ Ajouter rotule',
@@ -4272,6 +4302,7 @@ const calcTranslations = {
     modalFrameS5h: 'Conventions de signe',
   },
   es: {
+    toSize:'Dimensionar →',
     spanWord:'Vano', loadsWord:'Cargas', eiRatio:'relación de rigidez', eiRef:'EI de referencia', endSupports:'Apoyos extremos y voladizos', leftEnd:'Apoyo izquierdo', rightEnd:'Apoyo derecho', overhangL:'Voladizo izquierdo', overhangR:'Voladizo derecho', pointMoments:'Momentos puntuales', addMoment:'＋ Añadir momento', supPin:'Apoyo fijo △', supRoller:'Apoyo móvil ○', supFixed:'Empotramiento ⊞',
     tabs: ['Viga Biapoyada', 'Ménsula', 'Viga Continua', 'Pórtico'],
     system: 'Sistema', span: 'Luz L', length: 'Longitud L',
@@ -4331,155 +4362,481 @@ const calcTranslations = {
   }
 };
 
+// Zusätzliche Übersetzungen (Oberfläche, Bericht) — fehlt ein Schlüssel, gilt Englisch
+const I18N_UI = {
+ "en": {
+  "resVA": "Reaction V<sub>A</sub> ↑",
+  "resVB": "Reaction V<sub>B</sub> ↑",
+  "resHA": "Reaction H<sub>A</sub> →",
+  "resMA": "Moment M<sub>A</sub> ↺",
+  "tipReaction": "Force of the support on the structure",
+  "unitTensBottom": "kNm · tension bottom +",
+  "thSupport": "Support",
+  "thReaction": "Reaction (kN)",
+  "thMoment": "Moment (kNm)",
+  "headRow": "H (top)",
+  "degreeN": "Degree n",
+  "statIndet": "stat. indet.",
+  "columnsLbl": "Columns",
+  "headSupport": "Head support (top)",
+  "none": "None",
+  "leftArrow": "← Left",
+  "rightArrow": "Right →",
+  "moduleHdr": "MODULES",
+  "langHdr": "LANGUAGE",
+  "savedEmpty": "No calculations saved yet.<br><br>Run a calculation and press {0}.",
+  "report": "Report",
+  "load": "Load",
+  "savedOk": "Saved",
+  "deleteT": "Delete",
+  "exportT": "Export as file",
+  "fromA": "m from A",
+  "hingeLbl": "Hinge",
+  "alongRafter": "m along rafter",
+  "fromBase": "m from base",
+  "direction": "Direction",
+  "dirH": "⊥ horizontal (q &gt; 0 → right)",
+  "dirAx": "∥ axial (q &gt; 0 ↓ down)",
+  "rdirV": "↓ vertical (per m plan)",
+  "rdirNote": "q &gt; 0 presses onto the rafter (wind pressure), q &lt; 0 = suction",
+  "rdirN": "⊥ to rafter (wind, per m length)",
+  "rdirH": "→ horizontal (per m height)",
+  "perNormal": "⊥ rafter, per m length (+ onto rafter)",
+  "perHeight": "horizontal, per m height, + →",
+  "posLbl": "Position",
+  "indetMech": "Mechanism — not solvable",
+  "indetDet": "Statically determinate",
+  "indetN": "Statically indeterminate — degree {0}",
+  "diagM": "Bending moment M — kNm",
+  "diagQ": "Shear force Q — kN",
+  "diagN": "Normal force N — kN",
+  "diagW": "Deflection w — mm",
+  "nameSpans": "{0} {1} spans L={2}m",
+  "supFixedW": "Fixed",
+  "supPinW": "Pin",
+  "supRollerW": "Roller",
+  "wLeft": "left",
+  "wRight": "right",
+  "repSub": "statiq·calc · calculation report",
+  "repType": "Type",
+  "repGeom": "Geometry",
+  "repSupports": "Supports",
+  "repStiff": "Stiffness",
+  "repSystem": "SYSTEM",
+  "repActions": "ACTIONS",
+  "repMax": "MAXIMUM INTERNAL FORCES",
+  "repDefo": "Deformation",
+  "repReactions": "SUPPORT REACTIONS",
+  "repSign": "Signs: H → +, V ↑ +, M ↺ + (forces of the support on the structure)",
+  "repSupM": "Support moments (tension bottom +)",
+  "repDiagrams": "INTERNAL FORCE DIAGRAMS",
+  "repLegacy": "Older saved calculation (before v0.8.2): diagrams shown simplified. Recalculate and save for the exact diagrams and deflection.",
+  "repM": "M — bending moment [kNm]",
+  "repQ": "Q — shear force [kN]",
+  "repN": "N — normal force [kN]",
+  "repW": "Deflection w",
+  "repUW": "Deformation u, w",
+  "repNotIncl": "Not included in this saved calculation.",
+  "repHead": "Head support {0} ({1})",
+  "repCantSup": "A: fixed (x = 0), free end on the right",
+  "repBeamSup": "A: pin, B: roller",
+  "repHingeCont": "Hinge G{0}: span {1}, x = {2} m from span start",
+  "repHingeFrame": "Hinge {0}: {1}, {2} = {3} m",
+  "repRef": "(reference)",
+  "perPlan": "↓ (per m plan length)",
+  "horizPlus": "horizontal, + →",
+  "axialPlus": "axial, + ↓",
+  "repCantL": "Cantilever left ü",
+  "repCantR": "Cantilever right ü",
+  "mbReactH": "Reactions",
+  "mbHeav": "H = Heaviside, ⟨·⟩ = Macaulay bracket",
+  "mbTensB": "Tension bottom: positive M shown downward",
+  "mbInclH": "Inclined loads",
+  "mbToN": "→ N (normal force)",
+  "mcQM": "Shear force &amp; moment",
+  "mcIndetH": "Static indeterminacy",
+  "mcIndetP": "A continuous beam with n spans has (n−1) intermediate supports. Each extra support adds one unknown reaction, so the system is statically indeterminate to degree (n−1). Equilibrium alone is not sufficient — compatibility of deformations must also be satisfied.",
+  "mc3mH": "Three-moment equation (Clapeyron)",
+  "mc3mP": "For each intermediate support i, the compatibility condition relates the moments at supports i−1, i and i+1:",
+  "mc3mC1": "Lᵢ = span length i, Aᵢ = area of the M₀ diagram in span i",
+  "mc3mC2": "āᵢ = distance of the centroid from the left support",
+  "mcBcH": "Boundary conditions",
+  "mcBcT": "Pin / roller end: &nbsp; M = 0<br>Fixed end: &nbsp; M unknown (one more equation)<br>Free end (cantilever): &nbsp; Q = 0, M = 0",
+  "mcSupH": "Superposition (by hand)",
+  "mcSupP": "By hand, Q(x) and M(x) in each span follow from the span as a simply supported beam under its loads, superimposed with the support moments acting at its ends.",
+  "from": "from",
+  "to": "to",
+  "member": "Member",
+  "saved": "Saved",
+  "save": "Save Calculation"
+ },
+ "de": {
+  "resVA": "Auflagerkraft V<sub>A</sub> ↑",
+  "resVB": "Auflagerkraft V<sub>B</sub> ↑",
+  "resHA": "Auflagerkraft H<sub>A</sub> →",
+  "resMA": "Einspannmoment M<sub>A</sub> ↺",
+  "tipReaction": "Kraft des Lagers auf das Tragwerk",
+  "unitTensBottom": "kNm · Zug unten +",
+  "thSupport": "Lager",
+  "thReaction": "Auflagerkraft (kN)",
+  "thMoment": "Moment (kNm)",
+  "headRow": "H (Kopf)",
+  "degreeN": "Grad n",
+  "statIndet": "stat. unbest.",
+  "columnsLbl": "Stiele",
+  "headSupport": "Kopfhalterung (oben)",
+  "none": "Keine",
+  "leftArrow": "← Links",
+  "rightArrow": "Rechts →",
+  "moduleHdr": "MODULE",
+  "langHdr": "SPRACHE",
+  "savedEmpty": "Noch keine Berechnungen gespeichert.<br><br>Berechnung durchführen und {0} drücken.",
+  "report": "Bericht",
+  "load": "Laden",
+  "savedOk": "Gespeichert",
+  "deleteT": "Löschen",
+  "exportT": "Als Datei exportieren",
+  "fromA": "m ab A",
+  "hingeLbl": "Gelenk",
+  "alongRafter": "m entlang Riegel",
+  "fromBase": "m ab Fußpunkt",
+  "direction": "Richtung",
+  "dirH": "⊥ horizontal (q &gt; 0 → rechts)",
+  "dirAx": "∥ axial (q &gt; 0 ↓ nach unten)",
+  "rdirV": "↓ senkrecht (je m Grundriss)",
+  "rdirNote": "q &gt; 0 drückt auf den Riegel (Winddruck), q &lt; 0 = Sog",
+  "rdirN": "⊥ zum Riegel (Wind, je m Länge)",
+  "rdirH": "→ waagerecht (je m Höhe)",
+  "perNormal": "⊥ Riegel, je m Stablänge (+ auf den Riegel)",
+  "perHeight": "waagerecht, je m Höhe, + →",
+  "posLbl": "Position",
+  "indetMech": "Verschieblich — nicht lösbar",
+  "indetDet": "Statisch bestimmt",
+  "indetN": "Statisch unbestimmt — Grad {0}",
+  "diagM": "Biegemoment M — kNm",
+  "diagQ": "Querkraft Q — kN",
+  "diagN": "Normalkraft N — kN",
+  "diagW": "Durchbiegung w — mm",
+  "nameSpans": "{0} {1} Felder L={2}m",
+  "supFixedW": "Einspannung",
+  "supPinW": "Festlager",
+  "supRollerW": "Loslager",
+  "wLeft": "links",
+  "wRight": "rechts",
+  "repSub": "statiq·calc · Berechnungsprotokoll",
+  "repType": "Typ",
+  "repGeom": "Geometrie",
+  "repSupports": "Lagerung",
+  "repStiff": "Steifigkeit",
+  "repSystem": "SYSTEM",
+  "repActions": "EINWIRKUNGEN",
+  "repMax": "MAXIMALE SCHNITTGRÖSSEN",
+  "repDefo": "Verformung",
+  "repReactions": "AUFLAGERREAKTIONEN",
+  "repSign": "Vorzeichen: H → +, V ↑ +, M ↺ + (Kräfte des Lagers auf das Tragwerk)",
+  "repSupM": "Stützmomente (Zug unten +)",
+  "repDiagrams": "SCHNITTGRÖSSENVERLÄUFE",
+  "repLegacy": "Ältere Speicherung (vor v0.8.2): Verläufe vereinfacht dargestellt. Für die Darstellung am Tragwerk und die exakte Durchbiegung bitte neu berechnen und speichern.",
+  "repM": "M — Biegemoment [kNm]",
+  "repQ": "Q — Querkraft [kN]",
+  "repN": "N — Normalkraft [kN]",
+  "repW": "Durchbiegung w",
+  "repUW": "Verformung u, w",
+  "repNotIncl": "In dieser Speicherung nicht enthalten.",
+  "repHead": "Kopfhalterung {0} ({1})",
+  "repCantSup": "A: Einspannung (x = 0), freies Ende rechts",
+  "repBeamSup": "A: Festlager, B: Loslager",
+  "repHingeCont": "Gelenk G{0}: Feld {1}, x = {2} m vom Feldanfang",
+  "repHingeFrame": "Gelenk {0}: {1}, {2} = {3} m",
+  "repRef": "(Bezug)",
+  "perPlan": "↓ (je m Grundriss)",
+  "horizPlus": "horizontal, + →",
+  "axialPlus": "axial, + ↓",
+  "repCantL": "Kragarm links ü",
+  "repCantR": "Kragarm rechts ü",
+  "mbReactH": "Auflagerkräfte",
+  "mbHeav": "H = Heaviside-Funktion, ⟨·⟩ = Föppl-Klammer",
+  "mbTensB": "Zug unten: positives M nach unten angetragen",
+  "mbInclH": "Geneigte Lasten",
+  "mbToN": "→ N (Normalkraft)",
+  "mcQM": "Querkraft und Moment",
+  "mcIndetH": "Statische Unbestimmtheit",
+  "mcIndetP": "Ein Durchlaufträger mit n Feldern hat (n−1) Zwischenstützen. Jede zusätzliche Stütze bringt eine unbekannte Auflagerkraft, das System ist also (n−1)-fach statisch unbestimmt. Gleichgewicht allein reicht nicht — zusätzlich müssen die Verformungen verträglich sein.",
+  "mc3mH": "Dreimomentengleichung (Clapeyron)",
+  "mc3mP": "Für jede Zwischenstütze i verknüpft die Verträglichkeitsbedingung die Momente an den Stützen i−1, i und i+1:",
+  "mc3mC1": "Lᵢ = Länge von Feld i, Aᵢ = Fläche der M₀-Linie in Feld i",
+  "mc3mC2": "āᵢ = Abstand des Schwerpunkts vom linken Auflager",
+  "mcBcH": "Randbedingungen",
+  "mcBcT": "Fest-/Loslager am Ende: &nbsp; M = 0<br>Einspannung: &nbsp; M unbekannt (eine Gleichung mehr)<br>Freies Ende (Kragarm): &nbsp; Q = 0, M = 0",
+  "mcSupH": "Superposition (Handrechnung)",
+  "mcSupP": "Von Hand ergeben sich Q(x) und M(x) in jedem Feld aus dem Feld als Einfeldträger unter seinen Lasten, überlagert mit den Stützmomenten an seinen Enden.",
+  "from": "von",
+  "to": "bis",
+  "member": "Stab",
+  "saved": "Gespeichert",
+  "save": "Berechnung speichern"
+ },
+ "fr": {
+  "resVA": "Réaction V<sub>A</sub> ↑",
+  "resVB": "Réaction V<sub>B</sub> ↑",
+  "resHA": "Réaction H<sub>A</sub> →",
+  "resMA": "Moment M<sub>A</sub> ↺",
+  "tipReaction": "Force de l’appui sur la structure",
+  "unitTensBottom": "kNm · traction en bas +",
+  "thSupport": "Appui",
+  "thReaction": "Réaction (kN)",
+  "thMoment": "Moment (kNm)",
+  "headRow": "H (tête)",
+  "degreeN": "Degré n",
+  "statIndet": "hyperstat.",
+  "columnsLbl": "Poteaux",
+  "headSupport": "Appui en tête",
+  "none": "Aucun",
+  "leftArrow": "← Gauche",
+  "rightArrow": "Droite →",
+  "moduleHdr": "MODULES",
+  "langHdr": "LANGUE",
+  "savedEmpty": "Aucun calcul enregistré.<br><br>Lancez un calcul et appuyez sur {0}.",
+  "report": "Rapport",
+  "load": "Charger",
+  "savedOk": "Enregistré",
+  "deleteT": "Supprimer",
+  "exportT": "Exporter en fichier",
+  "fromA": "m depuis A",
+  "hingeLbl": "Rotule",
+  "alongRafter": "m le long de la traverse",
+  "fromBase": "m depuis la base",
+  "direction": "Direction",
+  "dirH": "⊥ horizontale (q &gt; 0 → droite)",
+  "dirAx": "∥ axiale (q &gt; 0 ↓ vers le bas)",
+  "rdirV": "↓ verticale (par m en plan)",
+  "rdirNote": "q &gt; 0 appuie sur la traverse (pression), q &lt; 0 = succion",
+  "rdirN": "⊥ à la traverse (vent, par m)",
+  "rdirH": "→ horizontale (par m de hauteur)",
+  "perNormal": "⊥ traverse, par m de longueur (+ vers la traverse)",
+  "perHeight": "horizontale, par m de hauteur, + →",
+  "posLbl": "Position",
+  "indetMech": "Mécanisme — non résoluble",
+  "indetDet": "Isostatique",
+  "indetN": "Hyperstatique — degré {0}",
+  "diagM": "Moment fléchissant M — kNm",
+  "diagQ": "Effort tranchant Q — kN",
+  "diagN": "Effort normal N — kN",
+  "diagW": "Flèche w — mm",
+  "nameSpans": "{0} {1} travées L={2}m",
+  "supFixedW": "Encastrement",
+  "supPinW": "Appui fixe",
+  "supRollerW": "Appui mobile",
+  "wLeft": "gauche",
+  "wRight": "droite",
+  "repSub": "statiq·calc · note de calcul",
+  "repType": "Type",
+  "repGeom": "Géométrie",
+  "repSupports": "Appuis",
+  "repStiff": "Rigidité",
+  "repSystem": "SYSTÈME",
+  "repActions": "ACTIONS",
+  "repMax": "EFFORTS MAXIMAUX",
+  "repDefo": "Déformation",
+  "repReactions": "RÉACTIONS D’APPUI",
+  "repSign": "Signes : H → +, V ↑ +, M ↺ + (forces de l’appui sur la structure)",
+  "repSupM": "Moments sur appuis (traction en bas +)",
+  "repDiagrams": "DIAGRAMMES DES EFFORTS",
+  "repLegacy": "Calcul enregistré ancien (avant v0.8.2) : diagrammes simplifiés. Recalculer et enregistrer pour les diagrammes et la flèche exacts.",
+  "repM": "M — moment fléchissant [kNm]",
+  "repQ": "Q — effort tranchant [kN]",
+  "repN": "N — effort normal [kN]",
+  "repW": "Flèche w",
+  "repUW": "Déformation u, w",
+  "repNotIncl": "Non inclus dans ce calcul enregistré.",
+  "repHead": "Appui en tête {0} ({1})",
+  "repCantSup": "A : encastrement (x = 0), extrémité libre à droite",
+  "repBeamSup": "A : appui fixe, B : appui mobile",
+  "repHingeCont": "Rotule G{0} : travée {1}, x = {2} m depuis le début de la travée",
+  "repHingeFrame": "Rotule {0} : {1}, {2} = {3} m",
+  "repRef": "(référence)",
+  "perPlan": "↓ (par m en plan)",
+  "horizPlus": "horizontale, + →",
+  "axialPlus": "axiale, + ↓",
+  "repCantL": "Console gauche ü",
+  "repCantR": "Console droite ü",
+  "mbReactH": "Réactions",
+  "mbHeav": "H = fonction de Heaviside, ⟨·⟩ = crochet de Macaulay",
+  "mbTensB": "Traction en bas : M positif tracé vers le bas",
+  "mbInclH": "Charges inclinées",
+  "mbToN": "→ N (effort normal)",
+  "mcQM": "Effort tranchant et moment",
+  "mcIndetH": "Hyperstaticité",
+  "mcIndetP": "Une poutre continue à n travées possède (n−1) appuis intermédiaires. Chaque appui supplémentaire ajoute une réaction inconnue : le système est hyperstatique de degré (n−1). L’équilibre seul ne suffit pas — la compatibilité des déformations doit aussi être satisfaite.",
+  "mc3mH": "Équation des trois moments (Clapeyron)",
+  "mc3mP": "Pour chaque appui intermédiaire i, la condition de compatibilité relie les moments aux appuis i−1, i et i+1 :",
+  "mc3mC1": "Lᵢ = longueur de la travée i, Aᵢ = aire du diagramme M₀ dans la travée i",
+  "mc3mC2": "āᵢ = distance du centre de gravité à l’appui gauche",
+  "mcBcH": "Conditions aux limites",
+  "mcBcT": "Appui fixe / mobile en extrémité : &nbsp; M = 0<br>Encastrement : &nbsp; M inconnu (une équation de plus)<br>Extrémité libre (console) : &nbsp; Q = 0, M = 0",
+  "mcSupH": "Superposition (calcul à la main)",
+  "mcSupP": "À la main, Q(x) et M(x) dans chaque travée s’obtiennent en considérant la travée comme une poutre simple sous ses charges, superposée aux moments sur appuis à ses extrémités.",
+  "from": "de",
+  "to": "à",
+  "member": "Barre",
+  "saved": "Enregistrés",
+  "save": "Enregistrer le calcul",
+  "modalContSolveH": "Méthode de résolution",
+  "modalContSolveP": "L’équation des trois moments est la méthode classique à la main. calc utilise la méthode des déplacements sous forme matricielle (comme pour les portiques) : encastrements, consoles, rotules, rigidités différentes par travée et moments ponctuels se combinent librement. M, Q et la flèche découlent exactement des déplacements nodaux.",
+  "modalContOptH": "Options : encastrements, consoles, rotules",
+  "modalContOptP": "Critère de comptage pour les poutres (charges verticales) : n = a − 2 − g, avec a = réactions verticales plus moments d’encastrement (encastrement 2, appui fixe/mobile 1) et g = nombre de rotules. n = 0 : isostatique (p. ex. poutre Gerber), n &lt; 0 : mécanisme. Dans une rotule, le moment est nul. I<sub>i</sub>/I modifie la rigidité d’une travée — dans les systèmes hyperstatiques, les moments sur appuis se déplacent vers la travée la plus rigide."
+ },
+ "es": {
+  "resVA": "Reacción V<sub>A</sub> ↑",
+  "resVB": "Reacción V<sub>B</sub> ↑",
+  "resHA": "Reacción H<sub>A</sub> →",
+  "resMA": "Momento M<sub>A</sub> ↺",
+  "tipReaction": "Fuerza del apoyo sobre la estructura",
+  "unitTensBottom": "kNm · tracción abajo +",
+  "thSupport": "Apoyo",
+  "thReaction": "Reacción (kN)",
+  "thMoment": "Momento (kNm)",
+  "headRow": "H (cabeza)",
+  "degreeN": "Grado n",
+  "statIndet": "hiperest.",
+  "columnsLbl": "Pilares",
+  "headSupport": "Apoyo en cabeza",
+  "none": "Ninguno",
+  "leftArrow": "← Izquierda",
+  "rightArrow": "Derecha →",
+  "moduleHdr": "MÓDULOS",
+  "langHdr": "IDIOMA",
+  "savedEmpty": "Todavía no hay cálculos guardados.<br><br>Calcule y pulse {0}.",
+  "report": "Informe",
+  "load": "Cargar",
+  "savedOk": "Guardado",
+  "deleteT": "Eliminar",
+  "exportT": "Exportar como archivo",
+  "fromA": "m desde A",
+  "hingeLbl": "Rótula",
+  "alongRafter": "m a lo largo del dintel",
+  "fromBase": "m desde la base",
+  "direction": "Dirección",
+  "dirH": "⊥ horizontal (q &gt; 0 → derecha)",
+  "dirAx": "∥ axial (q &gt; 0 ↓ hacia abajo)",
+  "rdirV": "↓ vertical (por m en planta)",
+  "rdirNote": "q &gt; 0 presiona el dintel (presión), q &lt; 0 = succión",
+  "rdirN": "⊥ al dintel (viento, por m)",
+  "rdirH": "→ horizontal (por m de altura)",
+  "perNormal": "⊥ dintel, por m de longitud (+ hacia el dintel)",
+  "perHeight": "horizontal, por m de altura, + →",
+  "posLbl": "Posición",
+  "indetMech": "Mecanismo — no resoluble",
+  "indetDet": "Isostático",
+  "indetN": "Hiperestático — grado {0}",
+  "diagM": "Momento flector M — kNm",
+  "diagQ": "Cortante Q — kN",
+  "diagN": "Axil N — kN",
+  "diagW": "Flecha w — mm",
+  "nameSpans": "{0} {1} vanos L={2}m",
+  "supFixedW": "Empotramiento",
+  "supPinW": "Apoyo fijo",
+  "supRollerW": "Apoyo móvil",
+  "wLeft": "izquierda",
+  "wRight": "derecha",
+  "repSub": "statiq·calc · memoria de cálculo",
+  "repType": "Tipo",
+  "repGeom": "Geometría",
+  "repSupports": "Apoyos",
+  "repStiff": "Rigidez",
+  "repSystem": "SISTEMA",
+  "repActions": "ACCIONES",
+  "repMax": "ESFUERZOS MÁXIMOS",
+  "repDefo": "Deformación",
+  "repReactions": "REACCIONES EN APOYOS",
+  "repSign": "Signos: H → +, V ↑ +, M ↺ + (fuerzas del apoyo sobre la estructura)",
+  "repSupM": "Momentos en apoyos (tracción abajo +)",
+  "repDiagrams": "DIAGRAMAS DE ESFUERZOS",
+  "repLegacy": "Cálculo guardado antiguo (antes de v0.8.2): diagramas simplificados. Recalcule y guarde para obtener diagramas y flecha exactos.",
+  "repM": "M — momento flector [kNm]",
+  "repQ": "Q — cortante [kN]",
+  "repN": "N — axil [kN]",
+  "repW": "Flecha w",
+  "repUW": "Deformación u, w",
+  "repNotIncl": "No incluido en este cálculo guardado.",
+  "repHead": "Apoyo en cabeza {0} ({1})",
+  "repCantSup": "A: empotramiento (x = 0), extremo libre a la derecha",
+  "repBeamSup": "A: apoyo fijo, B: apoyo móvil",
+  "repHingeCont": "Rótula G{0}: vano {1}, x = {2} m desde el inicio del vano",
+  "repHingeFrame": "Rótula {0}: {1}, {2} = {3} m",
+  "repRef": "(referencia)",
+  "perPlan": "↓ (por m en planta)",
+  "horizPlus": "horizontal, + →",
+  "axialPlus": "axial, + ↓",
+  "repCantL": "Voladizo izquierdo ü",
+  "repCantR": "Voladizo derecho ü",
+  "mbReactH": "Reacciones",
+  "mbHeav": "H = función de Heaviside, ⟨·⟩ = corchete de Macaulay",
+  "mbTensB": "Tracción abajo: M positivo dibujado hacia abajo",
+  "mbInclH": "Cargas inclinadas",
+  "mbToN": "→ N (axil)",
+  "mcQM": "Cortante y momento",
+  "mcIndetH": "Hiperestaticidad",
+  "mcIndetP": "Una viga continua de n vanos tiene (n−1) apoyos intermedios. Cada apoyo adicional añade una reacción desconocida, por lo que el sistema es hiperestático de grado (n−1). El equilibrio no basta — también debe cumplirse la compatibilidad de deformaciones.",
+  "mc3mH": "Ecuación de los tres momentos (Clapeyron)",
+  "mc3mP": "Para cada apoyo intermedio i, la condición de compatibilidad relaciona los momentos en los apoyos i−1, i e i+1:",
+  "mc3mC1": "Lᵢ = longitud del vano i, Aᵢ = área del diagrama M₀ en el vano i",
+  "mc3mC2": "āᵢ = distancia del centro de gravedad al apoyo izquierdo",
+  "mcBcH": "Condiciones de contorno",
+  "mcBcT": "Apoyo fijo / móvil en el extremo: &nbsp; M = 0<br>Empotramiento: &nbsp; M desconocido (una ecuación más)<br>Extremo libre (voladizo): &nbsp; Q = 0, M = 0",
+  "mcSupH": "Superposición (cálculo a mano)",
+  "mcSupP": "A mano, Q(x) y M(x) en cada vano se obtienen considerando el vano como viga biapoyada bajo sus cargas, superpuesta con los momentos en apoyos en sus extremos.",
+  "from": "desde",
+  "to": "hasta",
+  "member": "Barra",
+  "saved": "Guardados",
+  "save": "Guardar cálculo",
+  "modalContSolveH": "Método de resolución",
+  "modalContSolveP": "La ecuación de los tres momentos es el método clásico a mano. calc usa el método de los desplazamientos en forma matricial (como en los pórticos): empotramientos, voladizos, rótulas, rigideces distintas por vano y momentos puntuales se combinan libremente. M, Q y la flecha resultan exactamente de los desplazamientos nodales.",
+  "modalContOptH": "Opciones: empotramientos, voladizos, rótulas",
+  "modalContOptP": "Criterio de recuento para vigas (cargas verticales): n = a − 2 − g, con a = reacciones verticales más momentos de empotramiento (empotramiento 2, apoyo fijo/móvil 1) y g = número de rótulas. n = 0: isostático (p. ej. viga Gerber), n &lt; 0: mecanismo. En una rótula el momento es nulo. I<sub>i</sub>/I modifica la rigidez de un vano — en sistemas hiperestáticos los momentos en apoyos se desplazan hacia el vano más rígido."
+ }
+};
+Object.assign(I18N_UI.fr, {"modCalcSub": "Efforts internes &amp; déformations", "modSizeSub": "Dimensionnement selon les Eurocodes", "modRefSub": "Profilés, tableaux, Eurocodes", "savedSub": "Calculs &amp; rapports", "modalFrameS1p": "Un portique se compose de deux poteaux et d’une traverse. Les appuis (encastrement, appui fixe, appui mobile), un appui en tête et des rotules dans chaque barre se choisissent librement. Le degré d’hyperstaticité résulte du critère de comptage :", "modalFrameS1c": "a — nombre de réactions d’appui (encastrement 3, appui fixe 2, appui mobile 1, appui en tête 1 ou 2) · g — rotules effectives (une rotule directement au pied articulé ne compte pas). n &lt; 0 : mécanisme · n = 0 : isostatique · n &gt; 0 : hyperstatique.", "modalFrameS2t": "Portique à trois articulations : appui fixe + appui fixe + rotule dans la traverse → n = 4 − 3 − 1 = 0<br>Portique à deux articulations : appui fixe + appui fixe → n = 1<br>Portique à pieds encastrés : encastrement + encastrement → n = 3<div class=\"comment\">Les trois se règlent avec les boutons « Type de portique ».</div>", "modalFrameS3p": "Quatre réactions inconnues, trois équations d’équilibre et la condition de rotule (moment nul dans la rotule G) :", "modalFrameS3e": "Exemple : charge uniforme q sur la traverse, rotule à mi-portée, deux poteaux de hauteur h :", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, moment d’angle −31,25 kNm (traction à l’extérieur).", "modalFrameS4p": "calc utilise la méthode des déplacements sous forme matricielle (méthode de rigidité directe) pour toute combinaison d’appuis, de rotules et de charges : équations de rigidité K·u = F, puis réactions d’appui et efforts aux extrémités des barres. M, Q et N découlent exactement de l’équilibre de chaque partie de barre ; les déformations viennent directement des déplacements nodaux. Les déformations axiales sont pratiquement supprimées (EA très grand), comme dans un calcul à la main.", "modalFrameS5t": "M &gt; 0 : traction à l’intérieur (fibre en pointillés) · Q = dM/ds le long de la barre · N &gt; 0 : traction<br>Réactions d’appui : H → +, V ↑ +, M ↺ + (forces de l’appui sur le portique)"});
+Object.assign(I18N_UI.es, {"modCalcSub": "Esfuerzos &amp; deformaciones", "modSizeSub": "Dimensionado según Eurocódigos", "modRefSub": "Perfiles, tablas, Eurocódigos", "savedSub": "Cálculos &amp; informes", "modalFrameS1p": "Un pórtico consta de dos pilares y un dintel. Los apoyos (empotramiento, apoyo fijo, apoyo móvil), un apoyo en cabeza y rótulas en cualquier barra se eligen libremente. El grado de hiperestaticidad resulta del criterio de recuento:", "modalFrameS1c": "a — número de reacciones (empotramiento 3, apoyo fijo 2, apoyo móvil 1, apoyo en cabeza 1 o 2) · g — rótulas efectivas (una rótula justo en un pie articulado no cuenta). n &lt; 0: mecanismo · n = 0: isostático · n &gt; 0: hiperestático.", "modalFrameS2t": "Pórtico triarticulado: apoyo fijo + apoyo fijo + rótula en el dintel → n = 4 − 3 − 1 = 0<br>Pórtico biarticulado: apoyo fijo + apoyo fijo → n = 1<br>Pórtico con pies empotrados: empotramiento + empotramiento → n = 3<div class=\"comment\">Los tres se ajustan con los botones «Tipo de pórtico».</div>", "modalFrameS3p": "Cuatro reacciones desconocidas, tres ecuaciones de equilibrio y la condición de rótula (momento nulo en la rótula G):", "modalFrameS3e": "Ejemplo: carga uniforme q en el dintel, rótula en el centro del vano, ambos pilares de altura h:", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, momento en esquina −31,25 kNm (tracción exterior).", "modalFrameS4p": "calc utiliza el método de los desplazamientos en forma matricial (método de rigidez directa) para cualquier combinación de apoyos, rótulas y cargas: ecuaciones de rigidez K·u = F, luego reacciones y esfuerzos en los extremos de las barras. M, Q y N resultan exactamente del equilibrio de cada tramo de barra; las deformaciones salen directamente de los desplazamientos nodales. Las deformaciones axiales se suprimen prácticamente (EA muy grande), como en un cálculo a mano.", "modalFrameS5t": "M &gt; 0: tracción en el interior (fibra discontinua) · Q = dM/ds a lo largo de la barra · N &gt; 0: tracción<br>Reacciones: H → +, V ↑ +, M ↺ + (fuerzas del apoyo sobre el pórtico)"});
+Object.keys(I18N_UI).forEach(l=>{ calcTranslations[l] = Object.assign(calcTranslations[l]||{}, I18N_UI[l]); });
+const trf = (key, ...a) => tr(key).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
+const LOCALE = () => ({en:'en-GB', de:'de-DE', fr:'fr-FR', es:'es-ES'})[calcLang] || 'en-GB';
+MSG.fr = {"invalidL": "Veuillez saisir une longueur L valide (> 0).", "invalidSpans": "Veuillez saisir des longueurs de travée valides (> 0).", "minSpans": "Une poutre continue nécessite au moins 2 travées.", "invalidDims": "Veuillez saisir des dimensions valides (b, h > 0).", "mechanism": "Ce système est un mécanisme (cinématiquement instable) : il ne peut pas reprendre les charges. Vérifiez les appuis et les rotules.", "calcError": "Erreur de calcul. Veuillez vérifier les saisies.", "posClamped": "{0} : la position {1} m est hors de la barre (0 … {2} m) et a été fixée à {3} m.", "rangeClamped": "{0} : la plage {1} … {2} m dépasse la barre (0 … {3} m) et a été limitée à {4} … {5} m.", "rangeIgnored": "{0} : la plage est hors de la barre (0 … {1} m) et a été ignorée.", "hingeClamped": "Rotule {0} : la position {1} m est hors de la barre (0 … {2} m) et a été fixée à {3} m.", "calcFirst": "Veuillez d’abord calculer, puis enregistrer.", "storageFull": "Enregistrement impossible (mémoire du navigateur pleine ou bloquée). Supprimez d’anciens calculs et réessayez.", "loadFrameOnly": "Le chargement n’est disponible que pour les portiques.", "loadFailed": "Chargement impossible : {0}", "exportFailed": "Échec de l’export : {0}", "failed": "Erreur : {0}"};
+MSG.es = {"invalidL": "Introduzca una longitud L válida (> 0).", "invalidSpans": "Introduzca longitudes de vano válidas (> 0).", "minSpans": "Una viga continua necesita al menos 2 vanos.", "invalidDims": "Introduzca dimensiones válidas (b, h > 0).", "mechanism": "Este sistema es un mecanismo (cinemáticamente inestable): no puede soportar las cargas. Revise apoyos y rótulas.", "calcError": "Error de cálculo. Revise los datos.", "posClamped": "{0}: la posición {1} m está fuera de la barra (0 … {2} m) y se fijó en {3} m.", "rangeClamped": "{0}: el tramo {1} … {2} m excede la barra (0 … {3} m) y se limitó a {4} … {5} m.", "rangeIgnored": "{0}: el tramo está fuera de la barra (0 … {1} m) y se ignoró.", "hingeClamped": "Rótula {0}: la posición {1} m está fuera de la barra (0 … {2} m) y se fijó en {3} m.", "calcFirst": "Primero calcule y luego guarde.", "storageFull": "No se pudo guardar (memoria del navegador llena o bloqueada). Elimine cálculos antiguos e inténtelo de nuevo.", "loadFrameOnly": "La carga solo está disponible para pórticos.", "loadFailed": "No se pudo cargar: {0}", "exportFailed": "Error al exportar: {0}", "failed": "Error: {0}"};
+
 
 
 function applyCalcTranslations(){
   const t = calcTranslations[calcLang] || calcTranslations.en;
-
-  // Nav tabs (legacy, may not exist)
-  const tabs = document.querySelectorAll('.nav-tab');
-  t.tabs.forEach((label,i)=>{ if(tabs[i]) tabs[i].textContent=label; });
-
-  // Update drawer system labels
-  const drawerIds=['nm-beam','nm-cantilever','nm-cont','nm-frame'];
-  drawerIds.forEach((id,i)=>{
-    const el=document.getElementById(id);
-    if(el){
-      const lbl=el.querySelector('.nd-sys-label');
-      if(lbl && t.tabs[i]) lbl.textContent=t.tabs[i];
-    }
-  });
-
-  // Update drawer data-i18n elements
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key=el.getAttribute('data-i18n');
-    const v = t[key] || calcTranslations.en[key];
-    if(v) el.innerHTML=v;
-  });
-
-  // Update nav-current-label for active tab
-  const _activeTab=['beam','cantilever','cont','frame','saved'].find(
-    tt=>!document.getElementById('tab-'+tt)?.classList.contains('hidden'))||'beam';
-  const _tabMap={beam:t.tabs[0],cantilever:t.tabs[1],cont:t.tabs[2],frame:t.tabs[3],saved:'Gespeichert'};
-  const _navLbl=document.getElementById('nav-current-label');
-  if(_navLbl) _navLbl.textContent=_tabMap[_activeTab]||t.tabs[0]||'';
-
-  // Also update Save buttons text
-  document.querySelectorAll('[onclick*="saveCalc"],[onclick*="saveFrameCalc"]').forEach(b=>{
-    // t.save fehlt in FR/ES → auf Englisch zurückfallen (vorher: „undefined“)
-    b.innerHTML = ICON.save+' '+(t.save||calcTranslations.en.save);
-  });
-
-  // Calc buttons
-  document.querySelectorAll('.calc-btn').forEach(b=>{ if(b.textContent.trim().toUpperCase()==='CALCULATE'||b.textContent.trim()===t.calculate) b.textContent=t.calculate; });
-
-  // System card titles
-  const allCardTitles = document.querySelectorAll('.card-title');
-  allCardTitles.forEach(ct=>{
-    const txt = ct.textContent.trim();
-    if(txt==='System') ct.textContent=t.system;
-    else if(txt==='Point Loads'||txt==='Einzellasten'||txt==='Charges Ponctuelles'||txt==='Cargas Puntuales') ct.textContent=t.pointLoads;
-    else if(txt==='Distributed Loads'||txt==='Streckenlasten'||txt==='Charges Réparties'||txt==='Cargas Distribuidas') ct.textContent=t.distLoads;
-    else if(txt.startsWith('Horizontal')||txt.startsWith('Horizontal')||txt.startsWith('Charges Horiz')||txt.startsWith('Cargas Horiz')) ct.textContent=t.horizLoads;
-    else if(txt==='Internal Hinges'||txt==='Gelenke'||txt==='Rotules'||txt==='Rótulas') ct.textContent=t.internalHinges;
-    else if(txt==='Support Reactions'||txt==='Auflagerkräfte'||txt==='Réactions aux Appuis'||txt==='Reacciones en Apoyos') ct.textContent=t.supportReactions;
-    else if(txt==='Diagram on Structure'||txt==='Schnittgrößen am Tragwerk'||txt==='Diagramme sur Structure'||txt==='Diagrama en Estructura') ct.textContent=t.diagramOnStructure;
-  });
-
-  // Add load buttons
-  document.querySelectorAll('.add-load-btn').forEach(b=>{
-    const txt=b.textContent.trim();
-    if(txt.includes('Point Load')||txt.includes('Einzellast')||txt.includes('ponctuelle')||txt.includes('puntual')) b.textContent=t.addPoint;
-    else if(txt.includes('Distributed')||txt.includes('Streckenlast')||txt.includes('répartie')||txt.includes('distribuida')) b.textContent=t.addDist;
-    else if(txt.includes('H / M')||txt.includes('Horizontal')) b.textContent=t.addHoriz;
-    else if(txt.includes('Hinge')||txt.includes('Gelenk')||txt.includes('rotule')||txt.includes('rótula')) b.textContent=t.addHinge;
-  });
-
-  // Span label
-  const spanLabel = document.getElementById('span-count-display');
-  if(spanLabel){
-    const row = spanLabel.closest('.span-controls');
-    if(row){
-      const lbl = row.querySelector('.span-count-label');
-      if(lbl) lbl.innerHTML = t.spans+': <span class="span-count-num" id="span-count-display">'+numSpans+'</span>';
-    }
-  }
-
-  // Chart titles
-  document.querySelectorAll('.chart-title').forEach(ct=>{
-    const txt=ct.textContent.trim();
-    if(txt.startsWith('Shear')||txt.startsWith('Querkraft')||txt.startsWith('Effort')||txt.startsWith('Fuerza Cort')) ct.textContent=t.shearForce;
-    else if(txt.startsWith('Bending')||txt.startsWith('Momenten')||txt.startsWith('Moment Fléch')||txt.startsWith('Momento Flect')) ct.textContent=t.bendingMoment;
-    else if(txt.startsWith('Normal')||txt.startsWith('Normalkraft')||txt.startsWith('Effort Normal')||txt.startsWith('Fuerza Normal')) ct.textContent=t.normalForce;
-  });
-
-  // Chart badges (tension bottom/top)
-  document.querySelectorAll('.chart-badge').forEach(cb=>{
-    if(cb.textContent.includes('tension bottom')||cb.textContent.includes('Zugfaser unten')||cb.textContent.includes('traction en bas')||cb.textContent.includes('tracción abajo')) cb.textContent='kNm · '+t.tensionBottom;
-    else if(cb.textContent.includes('tension top')||cb.textContent.includes('Zugfaser oben')||cb.textContent.includes('traction en haut')||cb.textContent.includes('tracción arriba')) cb.textContent='kNm · '+t.tensionTop;
-  });
-
-  // Support labels
-  document.querySelectorAll('.card-title').forEach(ct=>{
-    if(ct.textContent.includes('Support A')||ct.textContent.includes('Lager A')||ct.textContent.includes('Appui A')||ct.textContent.includes('Apoyo A')) ct.textContent=t.supportA;
-    else if(ct.textContent.includes('Support B')||ct.textContent.includes('Lager B')||ct.textContent.includes('Appui B')||ct.textContent.includes('Apoyo B')) ct.textContent=t.supportB;
-  });
-
-  // Field labels - span and length
-  document.querySelectorAll('label').forEach(lbl=>{
-    const txt=lbl.childNodes[0]?.textContent?.trim();
-    if(txt==='Span L'||txt==='Stützweite L'||txt==='Portée L'||txt==='Luz L') lbl.childNodes[0].textContent=t.span+' ';
-    else if(txt==='Length L'||txt==='Länge L'||txt==='Longueur L'||txt==='Longitud L') lbl.childNodes[0].textContent=t.length+' ';
-    else if(txt==='Width b'||txt==='Breite b'||txt==='Largeur b'||txt==='Ancho b') lbl.childNodes[0].textContent=t.width+' ';
-    else if(txt==='Height h'||txt==='Höhe h'||txt==='Hauteur h'||txt==='Altura h') lbl.childNodes[0].textContent=t.height+' ';
-  });
-
-  // Modal titles
-  const t2 = calcTranslations[calcLang]||calcTranslations.en;
-  const setT = (id,val) => { const el=document.getElementById(id); if(el&&val) el.textContent=val; };
-  setT('modal-beam-title', t2.modalBeamTitle);
-  setT('modal-cant-title', t2.modalCantTitle);
-  setT('modal-cont-title', t2.modalContTitle);
-  setT('modal-frame-title', t2.modalFrameTitle);
-  // Modal beam sections
-  setT('mbs1h', t2.modalBeamS1h); setT('mbs1p', t2.modalBeamS1p);
-  setT('mbs2h', t2.modalBeamS2h);
-  setT('mbs3h', t2.modalBeamS3h); setT('mbs3p', t2.modalBeamS3p);
-  setT('mbs4h', t2.modalBeamS4h); setT('mbs4p', t2.modalBeamS4p);
-  setT('mbs5h', t2.modalBeamS5h); setT('mbs5p', t2.modalBeamS5p);
-  // Modal cant sections
-  setT('mcs1h', t2.modalCantS1h); setT('mcs1p', t2.modalCantS1p);
-  setT('mcs2h', t2.modalCantS2h);
-  setT('mcs3h', t2.modalCantS3h); setT('mcs3p', t2.modalCantS3p);
-  setT('mcs4h', t2.modalCantS4h); setT('mcs4p', t2.modalCantS4p);
-  // Rahmen-Hilfe (Texte mit HTML; fehlt eine Übersetzung, gilt Englisch)
-  const enT = calcTranslations.en;
+  document.documentElement.lang = calcLang;
+  document.querySelectorAll('.nav-tab').forEach((el,i)=>{ if(t.tabs[i]) el.textContent=t.tabs[i]; });
+  ['nm-beam','nm-cantilever','nm-cont','nm-frame'].forEach((id,i)=>{ const l=document.getElementById(id)?.querySelector('.nd-sys-label'); if(l) l.textContent=t.tabs[i]; });
+  // alle Elemente mit festem Übersetzungsschlüssel
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML = tr(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{ el.title = tr(el.dataset.i18nTitle).replace(/<[^>]+>/g,''); });
+  const se=document.getElementById('saved-empty'); if(se) se.innerHTML = trf('savedEmpty', `<span class="btn-icon">${ICON.save}</span>`);
+  // Theorie-Fenster mit ids (Texte mit HTML)
+  const setT = (id,key) => { const el=document.getElementById(id); if(el && tr(key)!==key) el.innerHTML=tr(key); };
+  setT('modal-beam-title','modalBeamTitle'); setT('modal-cant-title','modalCantTitle'); setT('modal-cont-title','modalContTitle'); setT('modal-frame-title','modalFrameTitle');
+  setT('mbs1h','modalBeamS1h'); setT('mbs1p','modalBeamS1p');
   [['mfs1h','modalFrameS1h'],['mfs1p','modalFrameS1p'],['mfs1c','modalFrameS1c'],['mfs2h','modalFrameS2h'],['mfs2t','modalFrameS2t'],
    ['mfs3h','modalFrameS3h'],['mfs3p','modalFrameS3p'],['mfs3e','modalFrameS3e'],['mfs3c','modalFrameS3c'],
-   ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t']]
-    .forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.innerHTML = t2[key] || enT[key] || ''; });
-  // Toggle buttons (On/Off, Fixed/Pinned/Roller)
-  document.querySelectorAll('.toggle-btn').forEach(btn=>{
-    const txt=btn.textContent.trim();
-    if(txt==='An'||txt==='On'||txt==='Actif'||txt==='Activo') btn.textContent=t2.on;
-    else if(txt==='Aus'||txt==='Off'||txt==='Inactif'||txt==='Inactivo') btn.textContent=t2.off;
-    else if(txt.startsWith('Fixed')||txt.startsWith('Einspan')||txt.startsWith('Encast')||txt.startsWith('Empo')) btn.textContent=t2.fixed;
-    else if(txt.startsWith('Pin')||txt.startsWith('Festlager')||txt.startsWith('Appui △')||txt.startsWith('Articu')) btn.textContent=t2.pinned;
-    else if(txt.startsWith('Roller')||txt.startsWith('Loslager')||txt.startsWith('Appui mobile')||txt.startsWith('Apoyo m')) btn.textContent=t2.roller;
-  });
-
-  // Footnotes
-  document.querySelectorAll('.footnote').forEach(fn=>{
-    const tab = ['Simply Supported','Cantilever','Continuous Beam','Frame'];
-    const tabDE = ['Einfeldträger','Kragarm','Durchlaufträger','Rahmen'];
-    const tabFR = ['Poutre Simple','Console','Poutre Continue','Portique'];
-    const tabES = ['Viga Biapoyada','Ménsula','Viga Continua','Pórtico'];
-    [...tab,...tabDE,...tabFR,...tabES].forEach((name,i)=>{
-      if(fn.textContent.includes(name)){
-        fn.textContent = `Statiq v0.8.7 · ${t.tabs[i%4]}`;
-      }
-    });
-  });
+   ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t']].forEach(([id,k])=>setT(id,k));
+  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.textContent = `Statiq v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]}`; });
+  ['beam','cant','cont','frame'].forEach(sys=>{ const l=document.getElementById('diag-label-'+sys); if(l) l.textContent = tr('diag'+((typeof diagMode!=='undefined' && diagMode[sys])||'M')); });
+  document.querySelectorAll('.lang-pick button').forEach(b=>b.classList.toggle('active', b.dataset.lang===calcLang));
+  const active=['beam','cantilever','cont','frame','saved'].find(x=>!document.getElementById('tab-'+x)?.classList.contains('hidden'))||'beam';
+  const nl=document.getElementById('nav-current-label');
+  if(nl) nl.textContent = active==='saved' ? tr('saved') : t.tabs[['beam','cantilever','cont','frame'].indexOf(active)];
+}
+// Sprache in calc wechseln (gilt auch für die Startseite: gemeinsamer Schlüssel statiq-lang)
+function setCalcLang(l){
+  calcLang = l; try{ localStorage.setItem('statiq-lang', l); }catch(e){}
+  applyCalcTranslations();
+  ['point','dist','horiz'].forEach(t=>{ renderLoads('beam',t); renderLoads('cant',t); });
+  renderContUI(); drawContinuous(); renderFrameUI(); renderFrameHinges(); updateIndetInfo();
+  if(!document.getElementById('tab-saved').classList.contains('hidden')) renderSavedTab();
 }
 
 // ── Init language ──────────────────────────────────

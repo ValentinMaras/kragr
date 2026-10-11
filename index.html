@@ -465,7 +465,7 @@
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Built by engineers</span> · calc v0.8.7 · ref v0.3.1 · size v0.4.1</div>
+  <div class="footer-meta"><span id="footer-meta">Built by engineers</span> · calc v0.8.10 · ref v0.3.2 · size v0.5.6</div>
 </footer>
 
 <script>
@@ -482,12 +482,12 @@ const translations = {
     calc_title: 'Internal Forces',
     calc_desc: 'Shear forces, bending moments, normal forces, reactions and deflections for beams and frames. Diagrams drawn on the structure, printable report.',
     size_title: 'Design & Sizing',
-    size_desc: 'Design reinforced concrete beams, slabs and columns (EC2), rolled steel sections and bolted/welded connections (EC3) and timber members (EC5) — every check step by step, printable report.',
+    size_desc: 'Design reinforced concrete beams, slabs, columns and punching shear (EC2), rolled steel sections, bolted connections, fillet welds and column bases (EC3) timber members and joints (EC5), masonry walls (EC6) and foundations, settlement, retaining walls and uplift (EC7) plus hydraulics — every check step by step, printable report.',
     ref_title: 'Theory & Tables',
     ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics, with calculators and examples — your digital reference handbook.',
     footer: 'Built by engineers',
     saved: 'Saved calculations &amp; reports',
-    size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Buckling", "Torsion", "Report"],
+    size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Buckling", "Torsion", "Report"],
     ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Geotechnics", "Maths", "Search"],
     tags: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame', 'Trapezoidal Loads', 'Wind on Columns', 'Exact Deflection', 'PDF Report'],
     spec1: '4', spec2: '4',
@@ -500,12 +500,12 @@ const translations = {
     calc_title: 'Schnittkräfte',
     calc_desc: 'Querkräfte, Biegemomente, Normalkräfte, Auflagerkräfte und Durchbiegungen für Träger und Rahmen. Verläufe direkt am Tragwerk, Bericht zum Ausdrucken.',
     size_title: 'Bemessung',
-    size_desc: 'Stahlbetonbalken, Unterzüge, Platten und Stützen (EC2), Walzprofile und Anschlüsse aus Stahl (EC3) sowie Holzbauteile (EC5) bemessen — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
+    size_desc: 'Stahlbetonbalken, Platten, Stützen und Durchstanzen (EC2), Walzprofile, Schrauben- und Schweißverbindungen sowie Stützenfüße aus Stahl (EC3) Holzbauteile und -verbindungen (EC5), Mauerwerkswände (EC6) sowie Flachgründungen, Setzungen, Stützwände und Auftrieb (EC7) sowie Wasserbau (Hydrostatik, Rohre, Gerinne, Wehre) bemessen — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
     ref_title: 'Theorie & Tafeln',
     ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zum Grundbau, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
     footer: 'Von Ingenieuren gebaut',
     saved: 'Gespeicherte Berechnungen &amp; Berichte',
-    size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Stabilität", "Torsion", "Bericht"],
+    size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Stabilität", "Torsion", "Bericht"],
     ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Grundbau", "Mathematik", "Suche"],
     tags: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen', 'Trapezlasten', 'Wind auf Stielen', 'Exakte Durchbiegung', 'Bericht als PDF'],
     spec1: '4', spec2: '4',
@@ -518,12 +518,12 @@ const translations = {
     calc_title: 'Efforts Internes',
     calc_desc: 'Efforts tranchants, moments fléchissants, efforts normaux, réactions et flèches pour poutres et portiques. Diagrammes sur la structure, rapport imprimable.',
     size_title: 'Dimensionnement',
-    size_desc: 'Dimensionnez poutres, dalles et poteaux en béton armé (EC2), profilés et assemblages en acier (EC3) et éléments en bois (EC5) — chaque vérification pas à pas, note de calcul.',
+    size_desc: 'Dimensionnez poutres, dalles, poteaux et poinçonnement en béton armé (EC2), profilés, assemblages boulonnés et soudés et pieds de poteaux en acier (EC3) éléments et assemblages en bois (EC5), murs en maçonnerie (EC6) et fondations, tassements, murs de soutènement et soulèvement (EC7) ainsi que l’hydraulique — chaque vérification pas à pas, note de calcul.',
     ref_title: 'Théorie & Tables',
     ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique, avec calculateurs et exemples — votre manuel de référence numérique.',
     footer: 'Construit par des ingénieurs',
     saved: 'Calculs &amp; rapports enregistrés',
-    size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Stabilité", "Torsion", "Note de calcul"],
+    size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Stabilité", "Torsion", "Note de calcul"],
     ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Géotechnique", "Mathématiques", "Recherche"],
     tags: ['Poutre simple', 'Console', 'Poutre continue', 'Portique', 'Charges trapézoïdales', 'Vent sur poteaux', 'Flèche exacte', 'Rapport PDF'],
     spec1: '4', spec2: '4',
@@ -536,12 +536,12 @@ const translations = {
     calc_title: 'Fuerzas Internas',
     calc_desc: 'Cortantes, momentos flectores, axiles, reacciones y flechas para vigas y pórticos. Diagramas sobre la estructura, informe imprimible.',
     size_title: 'Dimensionado',
-    size_desc: 'Dimensiona vigas, losas y pilares de hormigón armado (EC2), perfiles y uniones de acero (EC3) y elementos de madera (EC5) — cada comprobación paso a paso, informe imprimible.',
+    size_desc: 'Dimensiona vigas, losas, pilares y punzonamiento de hormigón armado (EC2), perfiles, uniones atornilladas y soldadas y placas base de acero (EC3) elementos y uniones de madera (EC5), muros de fábrica (EC6) y cimentaciones, asientos, muros de contención y subpresión (EC7) e hidráulica — cada comprobación paso a paso, informe imprimible.',
     ref_title: 'Teoría y Tablas',
     ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia, con calculadoras y ejemplos — tu manual de referencia digital.',
     footer: 'Hecho por ingenieros',
     saved: 'Cálculos e informes guardados',
-    size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Estabilidad", "Torsión", "Informe"],
+    size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Estabilidad", "Torsión", "Informe"],
     ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Geotecnia", "Matemáticas", "Búsqueda"],
     tags: ['Viga biapoyada', 'Ménsula', 'Viga continua', 'Pórtico', 'Cargas trapezoidales', 'Viento en pilares', 'Flecha exacta', 'Informe PDF'],
     spec1: '4', spec2: '4',

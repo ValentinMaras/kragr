@@ -1,14 +1,15 @@
-# Statiq — Übergabe für neuen Chat (calc v0.8.7 · ref v0.3.1 · size v0.4.1 · Startseite)
+# Statiq — Übergabe für neuen Chat (calc v0.8.10 · ref v0.3.2 · size v0.5.6 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.7)
-- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.1)
-- `size.html` — Bemessung (Statiq·size v0.4.1, Beta: Stahlbeton inkl. Stützen, Stahl, Anschlüsse, Holz)
+- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.10)
+- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.2)
+- `size.html` — Bemessung (Statiq·size v0.5.6, Beta: Wasserbau, Mauerwerk und Grundbau neu; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
 
 **Versionierung (Wunsch von Valentin):** in kleinen Schritten weiterzählen (0.8.1 → 0.8.2 …).
 Einen Sprung auf die nächste Nebenversion (0.9) gibt es nur bei größeren neuen Funktionen (neues Tragsystem, neues Modul). Nicht zu schnell Richtung 1.0.
+**Wichtig (Valentin, size 0.5.5):** v1.0 ist die finale Version. Neue Inhalte, auch ganze neue Bereiche, zählen nur die letzte Stelle hoch (0.5.5 → 0.5.6 …). Die mittlere Stelle nur nach Absprache. size wurde deshalb von 0.9.1 auf 0.5.5 zurückgesetzt.
 Versionsnummer steht in `STATIQ_VERSION` und an 8 Stellen im HTML (Kopfzeile, Fußnoten).
 
 ---
@@ -19,7 +20,7 @@ Versionsnummer steht in `STATIQ_VERSION` und an 8 Stellen im HTML (Kopfzeile, Fu
 - **Zugkraftdeckung und Staffelung** (Info-Zeile `zkd`): nur Balken/Unterzug, Einfeldträger (K = 1,0, kein Stützmoment), Gleichlast, ohne Druckbewehrung. Versatzmaß a_l = z·cot θ/2, die Hälfte der Stäbe (mind. 2 durchlaufend) endet bei x_E − l_bd (l_bd mit σ_sd = f_yd). Zugkraftdeckungsbild als SVG im Rechenschritt.
 - **Stahlbetonstütze** (Typ `stuetze`, eigener Eingabeblock `#beton-stuetze`, Felder `su-*`): Modellstützenverfahren mit Nennkrümmung (5.8.8): λ_lim nach NA (25 bzw. 16/√n), M_0e = max(0,6·M02 + 0,4·M01; 0,4·M02), e_i = θ_i·l0/2 (α_h = 2/√l ≤ 1), e2 = K_r·K_φ·ε_yd/(0,45·d)·l0²/10, M_Ed ≥ M02 + N·e_i und ≥ N·max(h/30; 20 mm). Querschnitt: Dehnungsebenen-Integration (`stuetzeQS`, Parabel-Rechteck, B500 bilinear, symmetrische Bewehrung in zwei Lagen), A_s,tot,erf per Bisektion mit K_r(A_s). Interaktionsdiagramm (`figInteraktion`), Ansicht des Ersatzstabs mit Knickfigur (`figStuetze`). Bewehrungsregeln NA 9.5.2/9.5.3. Bericht `buildReportStuetze`.
 - Tests: `test_size_beton2.py` (17, Sollwerte unabhängig in Python: Streifenmodell für M_Rd(N), Bisektion für A_s,erf, numerischer Endpunkt E).
-- Offen in size/Stahlbeton: schiefe Biegung bei Stützen, Querkraft Stütze, Zugkraftdeckung für Durchlaufträger/Einzellasten, Durchstanzen.
+- Offen in size/Stahlbeton: schiefe Biegung bei Stützen, Querkraft Stütze, Zugkraftdeckung für Durchlaufträger/Einzellasten (Durchstanzen erledigt in v0.6.0).
 
 ## Statiq·size v0.3.1 — Kräfte in den Abbildungen, kleinschrittige Nachweise
 
@@ -46,6 +47,7 @@ Nebenversion erhöht (neuer Werkstoff Holz). Werkstoffumschalter Stahlbeton | St
 - automatische Höhe (Vollholz 100–280 mm, BSH ab 120 mm in 40-mm-Schritten)
 - Quellen: KIT-Zusammenfassung Holzbau, Leporello FH Bielefeld (k_cr, k_c,90, k_def, Grenzwerte)
 ### Tests
+- `test_size_import.py` (14): calc → size für alle vier Systeme und alle Baustoffe, Hinweise
 - `test_calc_cont.py` (11): Durchlaufträger mit Einspannung, Kragarmen, Gerberträger, EI je Feld, Einzelmomenten, Mechanismus
 - `test_size_beton2.py` (17): Druckbewehrung, Staffelung, Stütze (λ, e2, M_Rd(N), A_s,erf, Kriechen, gedrungen, Bericht)
 - `test_size_ext.py` (19): Torsion gegen Differenzenverfahren, W_eff gegen Gitter-Integration, A_eff, (6.41), Lasteinleitung Typ c, Schrauben 2×2 mit Zug, Abstände, Kehlnaht, Kippen BSH, Knicken C24, automatische Holzhöhe, Positionen und Berichte
@@ -206,6 +208,115 @@ Neue Nebenversion, weil fünf Fächer dazukommen (Versionsregel: 0.x-Sprung nur 
 - ref-Karte beschreibt den tatsächlichen Inhalt (Holzbau statt „IPE/HEA/HEB“), bleibt „bald“ und unverlinkt
 - Neuer Link „Gespeicherte Berechnungen & Berichte“ → `calc.html#saved`
 - Einblendung: ohne Korrektur wäre die ref-Karte durch den neuen Link unsichtbar geblieben (`nth-child`)
+
+## size v0.5.6 — neuer Bereich Wasserbau (Hydrostatik und Hydrodynamik)
+
+- Reiter „Wasserbau“ (`MAT='wasser'`, `WBMODE` druck/schwimm/rohr/gerinne/wehr, Positionstypen `wasser_*`). g = 9,81, γ_w = 9,81 kN/m³. Auf dem Handy wird die Bereichsleiste ab 560 px zum 3er-Raster. Hinweis „Schnittgrößen aus calc“ ist bei Wasserbau ausgeblendet (`page-calc`). `renderOut` zeigt „Ergebnisse berechnet“, wenn ein Fall nur Info-Abschnitte hat.
+- **Wasserdruck** (`wd-*`, `wdFlaeche`): ebene Rechteckfläche, Neigung α, Oberkante t_o unter Wasser, Unterwasser h_u; Druckfigur (Trapez), F, Druckmittelpunkt (auch Steiner), Komponenten, Gegendruck, Resultierende und Moment um die Unterkante.
+- **Schwimmkörper** (`ws-*`): Ponton L×B×H, G, z_G; Tiefgang, Freibord, z_B = T/2, BM = B²/(12T), GM = z_B + BM − z_G; Süß-/Seewasser.
+- **Rohrleitung** (`wr-*`): v, Re, λ (laminar 64/Re, sonst Colebrook-White iterativ), h_v = (λL/D + Σζ)·v²/2g gegen Δh, Q_max per Bisektion; Energie- und Drucklinie, Reserve.
+- **Gerinne** (`wg-*`): Rechteck/Trapez, Manning-Strickler (h_n per Bisektion), Grenztiefe aus Q²B/(gA³) = 1, Froude, spezifische Energie E(h) als Diagramm, Freibord.
+- **Wehr** (`ww-*`): Poleni, μ-Vorgaben scharf-/rund-/breitkronig, Kontrolle der vernachlässigten Zulaufgeschwindigkeit, Oberwasserstand gegen zulässigen Wert.
+- Tests: `test_size_wasserbau.py` (28) mit unabhängiger Python-Rechnung (numerische Integration, scipy brentq).
+
+## size v0.5.5 (vorher als 0.9.1 ausgeliefert) — Setzung mit Bodenschichten
+
+- Setzung hat eine eigene Baugrundkarte (die allgemeine Grundbau-Karte ist im Modus Setzung ausgeblendet, `gr-Es` entfällt): 1–4 Schichten (`gs-n`), je Schicht Bodenauswahl `gs-b{i}` (füllt γ und E_s aus `GR_BODEN`, `gsPreset`), Dicke `gs-h{i}` (letzte Schicht unbegrenzt), `gs-g{i}`, `gs-E{i}`; γ über der Sohle `gs-g0`; Grundwasser `gs-gw`/`gs-zw` (Tiefe unter Gelände).
+- `gsUeber(I,z)`: wirksame Überlagerungsspannung schichtweise, unter GW γ′ = γ − 10; GW über der Sohle verringert auch die Aushubentlastung.
+- Abbildung mit Schichtnamen und Farben, GW-Linie; Bericht mit Schichttabelle (Δs je Schicht).
+- Tests in `test_size_grundbau.py` angepasst (33): drei Profile inkl. Grundwasser gegen unabhängige Boussinesq-Integration.
+
+## size v0.5.4 (vorher 0.9.0) — neuer Bereich Mauerwerk (EC6 mit NA, γ_M = 1,5, ζ = 0,85)
+
+- Reiter „Mauerwerk“ (`MAT='mauer'`, `MWMODE` druck/teil/keller/schub, Positionstypen `mauer_*`, `LAST.mat='mauer'`). Baustoffkarte `mw-*`: Steinart (Ziegel/KS/Porenbeton/Leichtbeton, Gruppe 1/2), Normal- oder Dünnbettmörtel; f_k nach EN 1996-1-1 Gl. 3.1–3.3 mit **empfohlenen** K-Werten (Tab. 3.3) oder eigener Wert (NA-Tabelle/Zulassung); f_vk0 nach Tab. 3.4 (empfohlen).
+- **Wand auf Druck** (`md-*`): DIN EN 1996-3/NA vereinfachtes Verfahren. ρ_2 = 0,75/0,90/1,0 (t ≤ 175/≤ 250/> 250 mm, Holzbalkendecke 1,0), Φ_2 = 0,85·a/t − 0,0011·(h_ef/t)², Φ_1 = 1,6 − l_f/6 (f_k < 1,8: /5) ≤ 0,9·a/t, Dachdecke 0,333, Zwischenauflager ohne Φ_1; kurze Wand A < 0,1 m² → f_d·0,8. Anwendungsgrenzen (Auszug) als eigener Nachweis.
+- **Teilflächenpressung** (`mt-*`): EN 1996-1-1 6.1.3, Ausbreitung 60° bis h_c/2, β = (1 + 0,3a_1/h_c)(1,5 − 1,1A_b/A_ef), 1 ≤ β ≤ min(1,25 + a_1/(2h_c); 1,5), Lochsteine β = 1.
+- **Kellerwand** (`mk-*`): EN 1996-3 4.5, n_min ≥ ρ_e·h·h_e²/(β·t) mit β = 20/60 − 20b_c/h/40, n_max ≤ t·f_d/3, Anwendungsbedingungen (Auszug).
+- **Schubwand** (`mh-*`): EN 1996-1-1 6.2, e = M/N, l_c = 3(l/2 − e), f_vk = f_vk0 + 0,4σ_d ≤ 0,065f_b, Stoßfugen unvermörtelt 0,5·f_vk0, Randdruck, e ≤ l/3. Hinweis: NA ergänzt Steinzug/Schubschlankheit.
+- Offene Prüfpunkte: K/f_vk0-Werte sind EN-Empfehlungen, nicht NA-Tabellen; NA-Tabellen für f_k ggf. ergänzen.
+- Tests: `test_size_mauerwerk.py` (29), unabhängige Python-Rechnung.
+
+## size v0.5.3 (vorher 0.8.0) — neuer Bereich Grundbau (EC7 mit DIN 1054, BS-P)
+
+- Vierter Reiter „Grundbau“ (`MAT='grund'`, Untermodi `GRMODE` flach/setzung/wand/upl, Positionstypen `grund_*`, `LAST.mat='grund'`, `LAST.mode`). Gemeinsame Baugrund-Karte `gr-*` mit Anhaltswerten wie in ref (`GR_BODEN`: γ, φ′, c′, E_s), „eigene Werte“ sobald ein Feld geändert wird.
+- **Flachgründung** (`gf-*`): Eigengewicht Fundament + Überschüttung, H an OK Fundament (Hebel h_f). Lage der Resultierenden e_G ≤ b/6, e ≤ b/3 (ungünstig: volles M, nur V_G). Grundbruch DIN 4017 (`grundbruch()`: N_d0/N_b0/N_c0, Form- und Neigungsbeiwerte, m = (2 + b′/a′)/(1 + b′/a′), b′ als kürzere Seite im Breitenglied), R_n,d = R_n,k/1,4 gegen V_d = 1,35·G + 1,5·Q. Gleiten R_t,d = V_G·tan φ′/1,1. Streifen je m.
+- **Setzung** (`gs-*`): σ_1 = V/A − γ·d, Steinbrenner (`steinbrenner`, `steinPunkt` durch Überlagerung), kennzeichnender Punkt 0,37a/0,37b von der Mitte, Grenztiefe 20 %-Kriterium, bis 3 Schichten (Schicht 1 E_s aus Baugrundkarte), Vergleich mit Mitte der schlaffen Last, optional s_zul.
+- **Winkelstützmauer** (`gw-*`): Erddruck auf Ersatzwand am hinteren Sporn, Coulomb (`kaCoulomb`, δ_a = 0, φ/3, 2φ/3), Eigengewichte + Erde über den Spornen, Kippen über Exzentrizität, Gleiten, Grundbruch (Streifen) mit derselben Funktion.
+- **Auftrieb** (`gu-*`): G aus Sohle, Außenwänden, Decke, Zusatzlast; A = γ_w·h_w·L·B; BS-P/T: 1,05/0,95, BS-A: 1,00/0,95; erforderliche Sohldicke.
+- Tests: `test_size_grundbau.py` (28): N_d0 gegen DIN-4017-Tabellenwerte, Grundbruch/Exzentrizität/Gleiten unabhängig, Steinbrenner gegen numerisch integrierte Boussinesq-Lösung, Setzung und Grenztiefe unabhängig integriert, Stützwand, Auftrieb.
+- Wasserbau erledigt in size v0.5.6.
+
+## size v0.5.2 (vorher 0.7.0) — Schweißverbindungen (EN 1993-1-8, 4.5)
+
+- Stahl › „Schweißnaht“ (`STMODE='schweiss'`, Felder `sw-*`, Positionstyp `schweiss`, Bericht `buildReportSW`). Drei Fälle über `sw-fall`:
+  - `stirn` Träger an Stirnplatte, Rundumnaht: Gurtnähte außen (l = b) und innen (b − t_w − 2r, nur wenn je Stück ≥ max(30; 6a)), Stegnähte l_w = h − 2t_f − 2r. A_w, I_w mit Schwerpunkten in Nahtmitte; σ_w = N/A_w + M/I_w·z auf alle Nähte, τ_w = V/A_w,Steg nur Steg. Nachweis am äußeren Gurtrand und am Stegnahtende.
+  - `lasche` Flachstahl an Knotenblech: Stirnnaht σ_w,Rd = f_u/(√2·β_w·γ_M2), Flankennaht τ_∥,Rd = f_u/(√3·β_w·γ_M2), lange Nähte β_Lw,1 (4.11), Tragfähigkeiten addiert; Flachstahl N_pl,Rd.
+  - `konsole` Konsolblech an Stütze: zwei senkrechte Nähte, σ_w = F·e/W_w, τ_∥ = F/A_w; Blech im Anschnitt mit Vergleichsspannung.
+- `swPunkt`: σ⊥ = τ⊥ = σ_w/√2, beide Bedingungen aus 4.5.3.2(6), Vergleich zum vereinfachten Verfahren in jedem Nachweis. `swKonstr`: a ≥ max(3; √t_max − 0,5) (NA), l ≥ max(30; 6a); a ≤ 0,7·t_min nur als Empfehlung.
+- Nicht enthalten: Stumpfnähte, Ermüdung, Hohlprofile, Grundwerkstoff im Anschluss (Stirnplatte, Stützengurt).
+- Tests: `test_size_schweiss.py` (16), unabhängige Python-Rechnung.
+
+## calc v0.8.10 — Streckenlast auf dem Riegel in drei Richtungen
+
+- Riegel-Streckenlast hat jetzt eine Richtung `rdir` (eigener Schlüssel, damit alte Dateien mit `dir` unverändert bleiben):
+  - `v` (Standard): senkrecht, je m Grundriss — wie bisher.
+  - `n`: rechtwinklig zum Riegel, je m Stablänge; q > 0 drückt auf den Riegel (Winddruck), q < 0 = Sog. Global (sin α, −cos α)·q.
+  - `h`: waagerecht, je m Höhe (Projektion), q > 0 nach rechts; auf flachem Riegel wirkungslos.
+- Position a/b bleibt die waagerechte Koordinate x. Zeichnung: Pfeile in Lastrichtung, Beschriftung ohne Überlappung, Zeichenfläche wächst bei vielen Lastlagen nach oben (`placeLabels(..., Y0)`).
+- Bericht nennt die Richtung (`perNormal`, `perHeight`), alle Texte in 4 Sprachen (`rdirV/N/H`, `rdirNote`).
+- Tests: `test_calc_rafterload.py` (9) gegen erweitertes `fem.py` (`rdir` dort unabhängig umgesetzt) und Gleichgewicht.
+
+## size v0.5.1 (vorher 0.6.0) — gelenkiger Stützenfuß und Durchstanzen
+
+### Stützenfuß (EN 1993-1-8, 6.2.5) — Stahl › „Stützenfuß“ (`STMODE='fuss'`)
+- Felder `fp-*`; Fugenfestigkeit f_jd = 2/3·k_j·f_cd mit k_j = min(B_f/B, L_f/L, 3); c = t_p·√(f_y/(3·f_jd·γ_M0)).
+- Wirksame Fläche als Vereinigung der T-Stummel um Gurte und Steg, auf die Platte begrenzt (`fpFlaeche`); N_j,Rd = A_eff·f_jd.
+- Querkraft über Reibung 0,2·N_c,Ed, Kehlnähte am Steg. Import aus calc füllt N/V aus der Rahmenstütze. Positionstyp `fuss`.
+- Tests: `test_size_fuss.py` (7), A_eff unabhängig per Raster.
+
+### Durchstanzen (DIN EN 1992-1-1 mit NA, 6.4) — Stahlbeton › „Durchstanzen“
+- Felder `ds-*`: Stütze rechteckig/rund, Innen-/Rand-/Eckstütze (β = 1,10/1,40/1,50 nach NA), V_Ed, Biegebewehrung oben in beiden Richtungen.
+- d als Mittel aus d_x/d_y; ρ_l = √(ρ_x·ρ_y) ≤ min(2 %, 0,5·f_cd/f_yd).
+- u_0, u_1 im Abstand 2d (Rand: 2c₁ + c₂ + π·2d, Ecke: c₁ + c₂ + π·d; rund: Halb-/Viertelkreis + D). C_Rd,c nach NA (Innenstütze mit u_0/d < 4 abgemindert), v_min, v_Rd,max = 1,4·v_Rd,c.
+- Durchstanzbewehrung: A_sw je Reihe mit s_r = 0,75d, f_ywd,ef = 250 + 0,25d; NA-Faktoren 2,5 (1. Reihe) und 1,4 (2. Reihe); äußerer Rundschnitt mit C_Rd = 0,15/γ_c, Anzahl Reihen bis 1,5d innerhalb u_out.
+- Abbildung: Draufsicht mit u₁, Bewehrungsreihen und u_out (freie Ränder bei Rand-/Eckstütze), Schnitt mit Bruchkegel.
+- Nicht enthalten: Öffnungen, Stützenkopfverstärkung, genaues β, Fundamente, Mindestmomente 6.4.4.
+- Tests: `test_size_durchstanzen.py` (13), unabhängige Python-Rechnung für 8 Fälle.
+
+## size v0.5.0 — Holzverbindungen (EN 1995-1-1, Abschnitt 8)
+
+- Holz hat Untermodi „Träger / Stütze“ und „Verbindung“ (`HOMODE`, `setHoMode`, Felder `hv-*`, Bericht `buildReportHV`, Positionstyp `holzverb`).
+- Verbindungsmittel: Stabdübel (f_u,k 360/490), Nägel glattschaftig (vorgebohrt oder nicht), Holzschrauben (d_ef = 1,1·d_k; ≤ 6 mm nagelartig, sonst wie Stabdübel; F_ax,Rk aus ETA).
+- Anordnungen: Holz–Holz ein-/zweischnittig (8.6/8.7), Schlitzblech innen (8.11), Bleche außen (8.12/8.13), Blech–Holz einschnittig (8.9/8.10) mit Interpolation zwischen dünnem und dickem Blech. Alle Modi werden mit Zahlen angezeigt, maßgebender markiert.
+- f_h,k (Nägel/Stabdübel, Winkel mit k90 = 1,35 + 0,015·d), M_y,Rk = 0,3·f_u·d^2,6, Einhängeeffekt begrenzt (Nagel 15 %, Schraube 100 %, Stabdübel 0); Nagel-F_ax aus f_ax,k/f_head,k mit Einbindetiefe.
+- n_ef: Stabdübel (8.34) mit Interpolation 0°–90°, Nägel Tab. 8.1 (k_ef). Mindestabstände Tab. 8.2/8.5 (Hirnholz belastet, Rand bei α = 0 unbelastet), Mindestholzdicke und Einbindetiefe nicht vorgebohrter Nägel.
+- Abbildung: Schnitt mit verformtem Stift (Fließgelenke, Lochleibung farbig, Kräfte der Teile) und Draufsicht mit a₁…a₄.
+- Nicht enthalten: Blockscheren/Nettoquerschnitt, Querzug, axial beanspruchte Schrauben, vereinfachtes Verfahren des NA.
+- Tests: `test_size_holzverb.py` (16).
+
+## size v0.4.3 · ref v0.3.2 (Grundgerüst Sprache)
+
+- Beide Seiten haben dasselbe Gerüst wie calc: `LANG` (aus `statiq-lang`), `I18N` mit Schlüsseln, `tx(key, …)`, `applyI18n()` für `data-i18n`, `data-i18n-ph` (Platzhalter), `data-i18n-title`. **Rückfall ist Deutsch** (Inhalte bisher nur deutsch). Oberflächenrahmen (Kopf, Positionen, calc-Import, Baustoffwahl, Bericht-Knöpfe; in ref Startseite, Suche, Zähler, „in Vorbereitung“) läuft schon über Schlüssel.
+- Bei EN/FR/ES erscheint ein Hinweis in der gewählten Sprache: Seite bisher nur deutsch, Nachweise nach deutschem NA (`showLangNotice`).
+- Regel für neue Inhalte: Texte gleich als Schlüssel anlegen. Reihenfolge laut Absprache: erst Inhalte, zum Schluss Übersetzung von size/ref zusammen mit der Design-Überarbeitung.
+- ref: Kopfzeile hat jetzt auch einen Link zu size.
+
+## calc v0.8.9 (Mehrsprachigkeit)
+
+- Alle Texte in calc über feste Schlüssel: statisch `data-i18n="key"` (innerHTML) und `data-i18n-title`, dynamisch `tr(key)` bzw. `trf(key, …)` mit Platzhaltern {0}. Zusätzliche Schlüssel in `I18N_UI` (EN/DE/FR/ES), wird in `calcTranslations` gemischt; fehlt ein Schlüssel, gilt Englisch.
+- `applyCalcTranslations()` neu ohne Textvergleich; Sprachwahl EN/DE/FR/ES im Menü (`setCalcLang`, gemeinsamer Schlüssel `statiq-lang` mit der Startseite), danach werden Lastlisten, Durchlaufträger, Rahmen und Gespeichert neu aufgebaut.
+- Bericht, Namen gespeicherter Berechnungen, Hinweise (`MSG.fr/es`), Datumsformat (`LOCALE()`) in der App-Sprache. Theorie-Fenster aller vier Systeme vollständig übersetzt; Durchlaufträger-Hilfe inhaltlich aktualisiert (Randbedingungen mit Kragarm, Superposition als Handrechnung).
+- Namen bereits gespeicherter Berechnungen bleiben in der Sprache, in der gespeichert wurde.
+- Offen: size und ref sind nur deutsch.
+- Tests: `runtests_report.py` prüft die Berichte auf DE (Inhalte) und EN/FR/ES; `test_calc_ui.py` FR-Hilfe und Rückfall auf Englisch.
+
+## calc v0.8.8 · size v0.4.2 (calc → size)
+
+- calc, Gespeichert: Knopf „In size bemessen →“ (`tr('toSize')`) öffnet `size.html#calc=<Schlüssel>`.
+- size: Karte „Schnittgrößen aus statiq·calc“ (`#calc-import`) mit Auswahl aller gespeicherten calc-Berechnungen; bei Rahmen Wahl Riegel / Stiel (stärker gedrückt). Übernahme in den gerade aktiven Baustoff und das Bauteil (`importCalc`), Hinweistext mit Quelle und den übernommenen Werten.
+- `calcSchnitt(sdf)` liest die gespeicherten Verläufe (`plot`): Vorzeichen M = −plot.M bei Einfeld-/Durchlaufträger, +plot.M beim Kragarm; Rahmen über `plot.fine` (Zug innen +, N Zug +). Feldmoment = max M > 0, Stützmoment = max(−M), V = max|Q|; DLT: Stützweite und K/l0-Faktor des Feldes mit dem größten Feldmoment (Endfeld 1,3 / 0,85, Innenfeld 1,5 / 0,7). Einfeldträger: Momentenverlauf Gleichlast oder Einzellast aus den Lasten. Stiel: M02/M01 aus den Endmomenten (gleiches Vorzeichen = einsinnig, M01 > 0).
+- Nicht übernommen (Hinweis): M_qp, charakteristische Momente für Durchbiegung, Knicklänge/Kriechzahl. Alte Speicherstände ohne `plot` → Hinweis „neu speichern“.
+- Tests: `test_size_import.py` (14).
 
 ## calc v0.8.7 · size v0.4.1 · Startseite (Navigation)
 
@@ -415,16 +526,17 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `runtests_report.py` (27) — **neu in v0.8.2**, im echten Browser (Playwright, sonst SKIP): je System speichern → Bericht öffnen ohne Fehler, Inhalte, Diagramme am Tragwerk, gespeichert = Stand der Berechnung, Verformung = Berechnung, Systembild; alte Speicherung öffnet mit Hinweis
 - Die Harnesses stubben Meldungen und Schnappschuss: `calcError` wirft weiterhin (→ `err`), Hinweise landen in `warns` bzw. `msgs`
 
-Stand: **326/326 grün** (calc 168 + ref 67 + size 91).
+Stand: **495/495 grün** (calc 181 + ref 67 + size 247).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---
 
 ## Noch offen
 1. **Bericht:** nur auf Deutsch (App-Sprache wird nicht berücksichtigt). Balken-Lasten erst ab 0.8.2 gespeichert, ältere Balken-Berichte zeigen „—“ bei den Einwirkungen
-2. **Mehrsprachigkeit:** Übersetzung per Textvergleich (fragil), viele Rahmen-Felder nur Englisch, FR/ES ohne `save`/`saved`. Besser durchgängig `data-i18n`-Schlüssel
+2. ~~Mehrsprachigkeit in calc~~ erledigt in v0.8.9 (Schlüssel, Bericht, Sprachwahl). Offen: size und ref nur deutsch
 3. **Modul-Struktur:** Solver liegt noch im selben Skript wie UI/Zeichnen. Ein abgegrenzter Block (`Statiq.solver`) würde die Harnesses vereinfachen
 4. ~~Neue Möglichkeiten beim Durchlaufträger~~ erledigt in calc v0.8.6 (Gelenke/EI je Feld beim Einfeldträger wären noch möglich)
-5. **Riegel-Streckenlast horizontal** (Wind auf geneigtes Dach): im Solver derselbe Zweig wie `dir='h'` bei Stützen
-7. **ref:** Bodenkennwerte und Sohlwiderstand (halbfest/fest, Ton) gegen Norm prüfen; Stahlbeton weiter: Durchstanzbewehrung, schiefe Biegung bei Stützen, Kriechen (K_φ), Torsion; size-Modul noch offen
+5. ~~Riegel-Streckenlast horizontal~~ erledigt in calc v0.8.10 (`rdir` n/h)
+7. **ref:** Bodenkennwerte und Sohlwiderstand (halbfest/fest, Ton) gegen Norm prüfen; Stahlbeton weiter: Durchstanzen als Thema (size kann es schon), schiefe Biegung bei Stützen, Kriechen (K_φ), Torsion; size-Modul noch offen
 6. **Unbestimmtheits-Info** („Statically determinate“ usw.) und Meldungen in FR/ES nur Englisch — gehört zur Mehrsprachigkeit (Punkt 2)
+8. ~~Schweißverbindungen~~ erledigt in size v0.7.0 (Kehlnähte; offen: Stumpfnähte, Fall Laschenstoß mit Moment). Danach: Übersetzung von size/ref zusammen mit der Design-Überarbeitung aller Seiten.

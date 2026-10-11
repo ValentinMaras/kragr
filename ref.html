@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.1 -->
+<!-- Statiq·ref v0.3.2 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -163,14 +163,16 @@
       .card { break-inside: avoid; box-shadow: none; }
       table.data th:first-child, table.data td:first-child { position: static; }
     }
-  </style>
+      .lang-notice { position: relative; z-index: 1; max-width: 1120px; margin: 10px auto 0; padding: 8px 12px; font-size: 12.5px; line-height: 1.5; background: #fff6dd; border-left: 3px solid #9a6700; color: #374151; border-radius: 0 4px 4px 0; }
+</style>
 </head>
 <body>
 
 <header class="app-header">
-  <a class="logo" href="index.html" title="Zur Startseite">stat<span>iq</span></a>
+  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">stat<span>iq</span></a>
   <div class="header-links">
     <a href="#/" class="module-name">ref</a>
+    <a href="size.html">size</a>
     <a href="calc.html">calc</a>
     <span class="version" id="ref-version"></span>
   </div>
@@ -182,13 +184,55 @@
 
 <script>
 // ══════════════════════════════════════════════════
+// SPRACHE (Grundgerüst) — Texte der Oberfläche über Schlüssel
+// ══════════════════════════════════════════════════
+// Die Inhalte gibt es bisher nur auf Deutsch: fehlt ein Schlüssel in der gewählten Sprache, gilt Deutsch.
+// Die Sprache teilen sich Startseite, calc, size und ref (localStorage „statiq-lang“).
+// Neue Texte bitte gleich als Schlüssel anlegen (data-i18n="…" bzw. tx('…')).
+const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
+const I18N = {
+ "de": {
+  "home": "Zur Startseite",
+  "refTitle": "Nachschlagewerk",
+  "refSub": "Formeln, Tabellen und Nachweise von Baustatik bis Grundbau, mit Rechnern und Beispielen.",
+  "searchPh": "Suchen, z. B. Schnee, HEB 200, qL²/8, kmod, Erddruck",
+  "searchAria": "Themen durchsuchen",
+  "topics": "Themen",
+  "topic": "Thema",
+  "soon": "in Vorbereitung",
+  "contentSoon": "Inhalt folgt in Kürze."
+ },
+ "en": {
+  "langNotice": "<b>statiq·ref</b> is currently available in German only — the translation will follow. Values follow the German National Annexes where they apply."
+ },
+ "fr": {
+  "langNotice": "<b>statiq·ref</b> n’est pour l’instant disponible qu’en allemand — la traduction suivra. Les valeurs suivent les Annexes nationales allemandes lorsqu’elles s’appliquent."
+ },
+ "es": {
+  "langNotice": "<b>statiq·ref</b> por ahora solo está disponible en alemán — la traducción llegará pronto. Los valores siguen los Anejos Nacionales alemanes cuando corresponde."
+ }
+};
+const tx = (k, ...a) => String((I18N[LANG]||{})[k] ?? I18N.de[k] ?? k).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
+function applyI18n(root=document){
+  root.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML = tx(el.dataset.i18n); });
+  root.querySelectorAll('[data-i18n-ph]').forEach(el=>{ el.placeholder = tx(el.dataset.i18nPh); });
+  root.querySelectorAll('[data-i18n-title]').forEach(el=>{ el.title = tx(el.dataset.i18nTitle); });
+}
+// Hinweis für andere Sprachen: Seite ist bisher nur deutsch
+function showLangNotice(){
+  if(LANG==='de' || !I18N[LANG]?.langNotice || document.querySelector('.lang-notice')) return;
+  const d=document.createElement('div'); d.className='lang-notice'; d.setAttribute('role','note'); d.innerHTML=tx('langNotice'); const y0=window.scrollY;
+  document.querySelector('header').insertAdjacentElement('afterend', d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
+}
+
+// ══════════════════════════════════════════════════
 // STATIQ·REF — Nachschlagewerk
 // ══════════════════════════════════════════════════
 // Navigation: Fach → Kapitel → Thema → Inhalt.
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.1';
+const REF_VERSION = '0.3.2';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -3458,25 +3502,25 @@ function viewFaecher(){
     tiles += `<a class="tile" href="${hrefOf(key)}">
       <span class="tile-tag">${f.tag}</span>
       <div class="tile-title">${f.title}</div>
-      <div class="tile-sub">${f.sub} · ${n} Themen</div>
+      <div class="tile-sub">${f.sub} · ${n} ${tx('topics')}</div>
     </a>`;
   }
   FAECHER_SOON.forEach(s=>{
     tiles += `<div class="tile soon" aria-disabled="true">
       <span class="tile-tag">${s.tag}</span>
       <div class="tile-title">${s.title}</div>
-      <div class="tile-sub">in Vorbereitung</div>
+      <div class="tile-sub">${tx('soon')}</div>
     </div>`;
   });
   return `
     <div class="page-head">
-      <div class="page-title">Nachschlagewerk</div>
-      <div class="page-sub">Formeln, Tabellen und Nachweise von Baustatik bis Grundbau, mit Rechnern und Beispielen.</div>
+      <div class="page-title">${tx('refTitle')}</div>
+      <div class="page-sub">${tx('refSub')}</div>
     </div>
     <div class="search">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-      <input type="search" id="search" placeholder="Suchen, z. B. Schnee, HEB 200, qL²/8, kmod, Erddruck" value="${escapeHtml(searchQuery)}"
-        oninput="runSearch(this.value)" aria-label="Themen durchsuchen" autocomplete="off">
+      <input type="search" id="search" placeholder="${tx('searchPh')}" value="${escapeHtml(searchQuery)}"
+        oninput="runSearch(this.value)" aria-label="${tx('searchAria')}" autocomplete="off">
     </div>
     <div id="search-results"></div>
     <div class="tile-grid">${tiles}</div>
@@ -3492,7 +3536,7 @@ function viewKapitel(){
     const n = Object.keys(k.themen).length;
     items += `<a class="nav-list-item" href="${hrefOf(navState.fach,key)}">
       <span class="nav-list-label">${k.title}</span>
-      <span class="nav-list-meta">${n} ${n===1?'Thema':'Themen'} <span class="nav-list-arrow">›</span></span>
+      <span class="nav-list-meta">${n} ${n===1?tx('topic'):tx('topics')} <span class="nav-list-arrow">›</span></span>
     </a>`;
   }
   return `
@@ -3532,7 +3576,7 @@ function viewThema(){
   const K = FAECHER[fach].kapitel[kapitel];
   const t = K.themen[thema];
   const keys = Object.keys(K.themen), i = keys.indexOf(thema);
-  const body = builder ? builder() : `<div class="card"><div class="section-note">Inhalt folgt in Kürze.</div></div>`;
+  const body = builder ? builder() : `<div class="card"><div class="section-note">${tx('contentSoon')}</div></div>`;
   const prev = i>0 ? `<a class="nav-list-item" href="${hrefOf(fach,kapitel,keys[i-1])}"><span class="nav-list-arrow">‹</span><span class="nav-list-label" style="flex:1">${K.themen[keys[i-1]].title}</span></a>` : '';
   const next = i<keys.length-1 ? `<a class="nav-list-item" href="${hrefOf(fach,kapitel,keys[i+1])}"><span class="nav-list-label">${K.themen[keys[i+1]].title}</span><span class="nav-list-arrow">›</span></a>` : '';
   return `
@@ -3619,6 +3663,7 @@ document.addEventListener('click', e=>{
 // ── Start ──────────────────────────────────────────
 document.getElementById('ref-version').textContent = 'v' + REF_VERSION;
 window.addEventListener('hashchange', ()=>{ render(); window.scrollTo(0,0); });
+applyI18n(); showLangNotice();
 render();
 </script>
 </body>

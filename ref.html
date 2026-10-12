@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.3 -->
+<!-- Statiq·ref v0.3.4 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -152,6 +152,14 @@
     /* Abbildungen (schwarz-weiß) */
     .figure { margin: 6px 0 4px; }
     .figure svg { display: block; width: 100%; height: auto; }
+    .shape-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin:6px 0 12px; }
+    .shape { background:#fff; border:1px solid #eceef1; border-radius:12px; padding:8px 10px 10px; }
+    .shape-fig svg { display:block; width:100%; height:auto; }
+    .shape-t { font-size:12.5px; font-weight:600; color:var(--text); margin:4px 0 5px; }
+    .shape-f { font-size:11.5px; font-family:'DM Mono', monospace; color:var(--text2); line-height:1.65; }
+    .shape-f div { display:flex; justify-content:space-between; gap:8px; }
+    .shape-f b { color:var(--text); font-weight:500; text-align:right; }
+    .sk-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; align-items:start; }
     .figure-cap { font-size: 11px; color: var(--text3); font-family:'DM Mono', monospace; margin-top: 4px; line-height: 1.6; }
 
     .hidden { display: none; }
@@ -292,7 +300,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.3';
+const REF_VERSION = '0.3.4';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -705,14 +713,387 @@ function figIProfil(){
     I<sub>z</sub>, W<sub>z</sub>: Biegung um die schwache Achse z–z</div>`;
 }
 
-// Rechtwinkliges Dreieck
-function figDreieck(){
-  let s = `<svg viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rechtwinkliges Dreieck mit Ankathete, Gegenkathete, Hypotenuse und Winkel α">${SVG_DEFS}`;
-  s += `<polygon points="40,125 240,125 240,25" fill="#f2f2f2" stroke="#111" stroke-width="1.4"/>
-    <polyline points="228,125 228,113 240,113" fill="none" stroke="#111" stroke-width="0.8"/>
-    <path d="M 75 125 A 35 35 0 0 0 71.3 109.3" fill="none" stroke="#111" stroke-width="0.9"/>${T(80,118,'α')}
-    ${T(120,140,'Ankathete a','text-anchor="middle"')}${T(248,78,'Gegenkathete g')}${T(118,68,'Hypotenuse c','text-anchor="middle" transform="rotate(-26.6 118 68)"')}`;
-  return `<div class="figure">${s}</svg></div>`;
+
+// ══════════════════════════════════════════════════
+// SKIZZEN im Lehrbuchstil (v0.3.4): Maßlinien, Winkelbögen, Schwerpunkt, Lager, Lasten, Verläufe
+// ══════════════════════════════════════════════════
+const SK = { ink:'#111', dim:'#6b7280', fill:'#eef0f3', fill2:'#dfe3e9', acc:'#2563eb', load:'#c2410c', m:'#0f6e56' };
+const sv = (w,h,lab,body) => `<svg viewBox="0 0 ${w} ${h}" style="max-width:${Math.round(w*1.7)}px;margin:0 auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${lab}">${SVG_DEFS}
+  <defs><marker id="skd" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L8,4 L0,7 z" fill="${SK.dim}"/></marker>
+  <marker id="ska" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="${SK.load}"/></marker>
+  <marker id="skb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="${SK.ink}"/></marker>
+  <marker id="skc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="${SK.acc}"/></marker></defs>${body}</svg>`;
+const R1 = v => Math.round(v*10)/10;
+// kursive Formelzeichen (Lehrbuch): sub('h','c') → h mit Index c
+const sb = (m,i) => `${m}<tspan font-size="0.7em" dy="3">${i}</tspan><tspan dy="-3"> </tspan>`;
+const it = (x,y,t,a='middle',c=SK.ink,sz=13) => `<text x="${R1(x)}" y="${R1(y)}" text-anchor="${a}" font-size="${sz}" font-style="italic" font-family="'Times New Roman',Georgia,serif" fill="${c}">${t}</text>`;
+const tl = (x,y,t,a='middle',c=SK.dim,sz=9.5) => `<text x="${R1(x)}" y="${R1(y)}" text-anchor="${a}" font-size="${sz}" font-family="Inter,system-ui,sans-serif" fill="${c}">${t}</text>`;
+const ln = (x1,y1,x2,y2,c=SK.ink,w=1.3,extra='') => `<line x1="${R1(x1)}" y1="${R1(y1)}" x2="${R1(x2)}" y2="${R1(y2)}" stroke="${c}" stroke-width="${w}" ${extra}/>`;
+const poly = (pts,fill=SK.fill,c=SK.ink,w=1.4,extra='') => `<polygon points="${pts.map(p=>R1(p[0])+','+R1(p[1])).join(' ')}" fill="${fill}" stroke="${c}" stroke-width="${w}" ${extra}/>`;
+const pl = (pts,c=SK.ink,w=1.4,extra='') => `<polyline points="${pts.map(p=>R1(p[0])+','+R1(p[1])).join(' ')}" fill="none" stroke="${c}" stroke-width="${w}" ${extra}/>`;
+// Maßlinie zwischen zwei Punkten, um off parallel versetzt (Vorzeichen = Seite), mit Hilfslinien und Text
+function dimL(x1,y1,x2,y2,t,off=14,tOff=10){
+  const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1, nx=-dy/L, ny=dx/L;
+  const a=[x1+nx*off, y1+ny*off], b=[x2+nx*off, y2+ny*off], s=Math.sign(off)||1;
+  let o=ln(x1+nx*s*3,y1+ny*s*3,a[0]+nx*s*4,a[1]+ny*s*4,'#9ca3af',0.6)+ln(x2+nx*s*3,y2+ny*s*3,b[0]+nx*s*4,b[1]+ny*s*4,'#9ca3af',0.6);
+  o+=ln(a[0],a[1],b[0],b[1],SK.dim,0.8,'marker-start="url(#skd)" marker-end="url(#skd)"');
+  const mx=(a[0]+b[0])/2+nx*s*tOff, my=(a[1]+b[1])/2+ny*s*tOff+4;
+  return o+it(mx,my,t,'middle',SK.ink,12);
+}
+// Winkelbogen um (cx,cy) von a1 nach a2 (Grad, mathematisch positiv, y nach oben)
+function arcA(cx,cy,r,a1,a2,t,c=SK.ink,tr=null){
+  const P=a=>[cx+r*Math.cos(a*Math.PI/180), cy-r*Math.sin(a*Math.PI/180)];
+  const [x1,y1]=P(a1), [x2,y2]=P(a2), large=Math.abs(a2-a1)>180?1:0, sw=a2>a1?0:1;
+  const am=(a1+a2)/2, rr=tr??r+9, tx_=cx+rr*Math.cos(am*Math.PI/180), ty_=cy-rr*Math.sin(am*Math.PI/180)+4;
+  return `<path d="M ${R1(x1)} ${R1(y1)} A ${r} ${r} 0 ${large} ${sw} ${R1(x2)} ${R1(y2)}" fill="none" stroke="${c}" stroke-width="0.9"/>`+(t?it(tx_,ty_,t,'middle',c,12):'');
+}
+// rechter Winkel in der Ecke (x,y) zwischen den Richtungen u und v (Einheitsvektoren)
+const rAng = (x,y,u,v,s=9) => pl([[x+u[0]*s,y+u[1]*s],[x+u[0]*s+v[0]*s,y+u[1]*s+v[1]*s],[x+v[0]*s,y+v[1]*s]],SK.ink,0.8);
+// Schwerpunktsymbol
+const cen = (x,y,lab='S') => `<circle cx="${R1(x)}" cy="${R1(y)}" r="5" fill="#fff" stroke="${SK.ink}" stroke-width="1"/><path d="M ${R1(x)} ${R1(y)} H ${R1(x+5)} A 5 5 0 0 1 ${R1(x)} ${R1(y+5)} Z M ${R1(x)} ${R1(y)} H ${R1(x-5)} A 5 5 0 0 1 ${R1(x)} ${R1(y-5)} Z" fill="${SK.ink}"/>`+(lab?it(x+9,y-6,lab,'start',SK.ink,12):'');
+// Achsenkreuz (gestrichelt)
+const axH = (x1,x2,y,lab='y') => ln(x1,y,x2,y,SK.ink,0.6,'stroke-dasharray="7 3 2 3"')+(lab?it(x2+4,y+4,lab,'start',SK.ink,12):'');
+const axV = (x,y1,y2,lab='z') => ln(x,y1,x,y2,SK.ink,0.6,'stroke-dasharray="7 3 2 3"')+(lab?it(x+4,y2+2,lab,'start',SK.ink,12):'');
+// Lager
+const hatchB = (x,y,w) => { let o=ln(x-w/2,y,x+w/2,y,SK.ink,1.2); for(let i=0;i<=w;i+=5) o+=ln(x-w/2+i,y,x-w/2+i-4,y+5,SK.ink,0.7); return o; };
+const supPin = (x,y) => poly([[x,y],[x-8,y+13],[x+8,y+13]],'#fff')+hatchB(x,y+13,24);
+const supRoll = (x,y) => poly([[x,y],[x-8,y+12],[x+8,y+12]],'#fff')+hatchB(x,y+16,24)+`<circle cx="${x-4}" cy="${y+14}" r="2" fill="#fff" stroke="${SK.ink}" stroke-width="0.8"/><circle cx="${x+4}" cy="${y+14}" r="2" fill="#fff" stroke="${SK.ink}" stroke-width="0.8"/>`;
+const supClamp = (x,y,side=-1) => { let o=ln(x,y-14,x,y+14,SK.ink,1.6); for(let i=-14;i<=12;i+=5) o+=ln(x,y+i,x+side*5,y+i+4,SK.ink,0.7); return o; };
+const beam = (x1,x2,y) => ln(x1,y,x2,y,SK.ink,3.2);
+// Lasten
+function udl(x1,x2,y,h=16,q1=1,q2=1,lab='q'){
+  let o=''; const n=Math.max(4,Math.round((x2-x1)/16));
+  for(let i=0;i<=n;i++){ const x=x1+(x2-x1)*i/n, hh=h*(q1+(q2-q1)*i/n); if(hh>2) o+=ln(x,y-hh,x,y-1.5,SK.load,1,'marker-end="url(#ska)"'); }
+  o+=pl([[x1,y-h*q1],[x2,y-h*q2]],SK.load,1.1);
+  return o+it((x1+x2)/2, y-h*Math.max(q1,q2)-5, lab,'middle',SK.load,12);
+}
+const pload = (x,y,lab='F',h=26) => ln(x,y-h,x,y-1.5,SK.load,1.6,'marker-end="url(#ska)"')+it(x+5,y-h+6,lab,'start',SK.load,12);
+// Momentenverlauf unter dem Träger: Funktion f(t) ∈ [-1,1] (positiv = unten), Skala k
+function mLine(x1,x2,y,f,k=24,lab='',labT=0.5){
+  const pts=[]; for(let i=0;i<=40;i++){ const t=i/40; pts.push([x1+(x2-x1)*t, y+f(t)*k]); }
+  let o=`<path d="M ${R1(x1)} ${y} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} L ${R1(x2)} ${y} Z" fill="${SK.m}" fill-opacity="0.12" stroke="none"/>`;
+  o+=pl(pts,SK.m,1.3)+ln(x1,y,x2,y,SK.ink,0.7);
+  if(lab){ const ft=f(labT); o+=it(x1+(x2-x1)*labT, y+ft*k+(ft>=0?15:-6), lab,'middle',SK.m,11.5); }
+  return o;
+}
+const fig = (svg, cap='') => `<div class="figure sk">${svg}</div>${cap?`<div class="figure-cap">${cap}</div>`:''}`;
+const shapeCard = (svg, title, rows) => `<div class="shape"><div class="shape-fig">${svg}</div><div class="shape-t">${title}</div><div class="shape-f">${rows.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('')}</div></div>`;
+const shapeGrid = items => `<div class="shape-grid">${items.join('')}</div>`;
+// ── Mathematik: Flächen ──
+function skRechteck(){ return sv(220,150,'Rechteck', poly([[60,30],[160,30],[160,100],[60,100]])+axH(40,178,65)+axV(110,16,110)+cen(110,65,'')+dimL(60,100,160,100,'b',20)+dimL(60,100,60,30,'h',-18)); }
+function skDreieck(){ const A=[45,110],B=[175,110],C=[85,25], S=[(45+175+85)/3, 110-(85)/3];
+  return sv(220,150,'Dreieck', poly([A,B,C])+ln(85,25,85,110,SK.dim,0.8,'stroke-dasharray="4 3"')+rAng(85,110,[1,0],[0,-1],7)+axH(30,190,S[1],'')+cen(S[0],S[1],'S')+dimL(45,110,175,110,'b',18)+dimL(85,110,85,25,'h',-48)+dimL(190,110,190,S[1],'h/3',-0.01,16)); }
+function skTrapez(){ const a=[40,115,180,115], b=[85,40,145,40], e=75*(140+2*60)/(3*(140+60));
+  return sv(220,160,'Trapez', poly([[40,115],[180,115],[145,40],[85,40]])+cen(112,115-e,'S')+axH(26,196,115-e,'')+dimL(40,115,180,115,'a',18)+dimL(85,40,145,40,'b',-14)+dimL(26,115,26,40,'h',-0.01,12)+dimL(196,115,196,115-e,'e',0.01,12)); }
+function skKreis(){ return sv(220,160,'Kreis', `<circle cx="110" cy="72" r="48" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`+axH(48,176,72)+axV(110,16,126,'')+cen(110,72,'')+ln(110,72,144,38,SK.ink,0.9)+it(132,62,'r','middle',SK.ink,12)+dimL(62,120,158,120,'d',18)+ln(62,72,62,128,'#9ca3af',0.5)+ln(158,72,158,128,'#9ca3af',0.5)); }
+function skRing(){ return sv(220,160,'Kreisring', `<circle cx="110" cy="72" r="50" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/><circle cx="110" cy="72" r="30" fill="#fff" stroke="${SK.ink}" stroke-width="1.4"/>`+axH(46,178,72)+dimL(60,122,160,122,'D',16)+dimL(80,72,140,72,'d',-16,10)); }
+function skHalbkreis(){ const r=62, e=4*r/(3*Math.PI);
+  return sv(220,150,'Halbkreis', `<path d="M ${110-r} 115 A ${r} ${r} 0 0 1 ${110+r} 115 Z" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`+cen(110,115-e,'S')+axH(36,186,115-e,'')+ln(110,115,110+r*Math.cos(2.35),115-r*Math.sin(2.35),SK.ink,0.9)+it(110-r*0.45,115-r*0.48,'r','middle',SK.ink,12)+dimL(190,115,190,115-e,'e',0.01,12)); }
+function skSektor(){ const r=78, al=0.62, cx=110, cy=128, e=2*r*Math.sin(al)/(3*al);
+  const P=a=>[cx+r*Math.sin(a), cy-r*Math.cos(a)];
+  return sv(220,150,'Kreisausschnitt', `<path d="M ${cx} ${cy} L ${R1(P(-al)[0])} ${R1(P(-al)[1])} A ${r} ${r} 0 0 1 ${R1(P(al)[0])} ${R1(P(al)[1])} Z" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`
+    +axV(cx,20,cy+6,'')+arcA(cx,cy,26,90,90-al*180/Math.PI,'α')+cen(cx,cy-e,'S')+it(cx-r*0.55,cy-r*0.45,'r','middle',SK.ink,12)+dimL(cx+70,cy,cx+70,cy-e,'e',0.01,12)); }
+function skParabelSeg(){ const x1=40,x2=180,y=110,h=70, pts=[]; for(let i=0;i<=30;i++){ const t=i/30, x=x1+(x2-x1)*t; pts.push([x, y-h*4*t*(1-t)]); }
+  return sv(240,150,'Parabelsegment', `<path d="M ${x1} ${y} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} Z" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`+cen(110,y-0.4*h,'S')+dimL(x1,y,x2,y,'b',18)+dimL(212,y,212,y-h,'h',0.01,12)+dimL(192,y,192,y-0.4*h,'2h/5',-0.01,18)); }
+function skZwickel(){ const x0=50,b=130,y=115,h=80, pts=[]; for(let i=0;i<=30;i++){ const t=i/30; pts.push([x0+b*t, y-h*t*t]); }
+  return sv(220,150,'Parabelzwickel', `<path d="M ${x0} ${y} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} L ${x0+b} ${y} Z" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`+cen(x0+0.75*b,y-0.3*h,'S')+dimL(x0,y,x0+b,y,'b',18)+dimL(x0+b+14,y,x0+b+14,y-h,'h',0.01,12)+it(x0-4,y+4,'0','end',SK.dim,11)); }
+// ── Mathematik: Dreiecke und Winkel ──
+function skRechtwinklig(){ const A=[40,140],B=[250,140],C=[250,35];
+  return sv(320,170,'Rechtwinkliges Dreieck', poly([A,B,C])+rAng(250,140,[-1,0],[0,-1],10)+arcA(40,140,40,0,26.6,'α')
+    +it(145,158,'a','middle')+tl(145,169,'Ankathete')+it(242,96,'g','end')+tl(242,108,'Gegenkathete','end')+it(112,74,'c','middle')+tl(112,86,'Hypotenuse','middle',SK.dim,9.5)); }
+function skDreieckAllg(){ const A=[40,140],B=[280,140],C=[115,32];
+  return sv(320,170,'Beliebiges Dreieck', poly([A,B,C])+ln(115,32,115,140,SK.dim,0.8,'stroke-dasharray="4 3"')+rAng(115,140,[1,0],[0,-1],8)
+    +arcA(40,140,30,0,55.2,'α')+arcA(280,140,30,180-24.3,180,'β')+arcA(115,32,22,-55.2-0.01+0+180-180,-124.8+0,'')+it(122,62,'γ','start')
+    +it(205,82,'a','start')+it(70,82,'b','end')+it(165,158,'c')+it(119,104,sb('h','c'),'start',SK.dim)
+    +it(32,150,'A','end',SK.ink,12)+it(288,150,'B','start',SK.ink,12)+it(115,24,'C','middle',SK.ink,12)); }
+function skEinheitskreis(){ const cx=120,cy=100,r=72,a=35*Math.PI/180, px=cx+r*Math.cos(a), py=cy-r*Math.sin(a);
+  return sv(300,180,'Einheitskreis', `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${SK.ink}" stroke-width="1.2"/>`
+    +ln(cx-r-14,cy,cx+r+20,cy,SK.ink,0.8,'marker-end="url(#skb)"')+ln(cx,cy+r+12,cx,cy-r-14,SK.ink,0.8,'marker-end="url(#skb)"')
+    +ln(cx,cy,px,py,SK.ink,1.4)+ln(cx,cy,px,cy,SK.acc,2.4)+ln(px,cy,px,py,SK.load,2.4)+`<circle cx="${R1(px)}" cy="${R1(py)}" r="3" fill="${SK.ink}"/>`
+    +arcA(cx,cy,22,0,35,'α')+it((cx+px)/2,cy+16,'cos α','middle',SK.acc,12)+it(px+6,(cy+py)/2+4,'sin α','start',SK.load,12)+it(cx+r*0.42,cy-r*0.36,'1','middle',SK.ink,12)
+    +tl(296,26,'sin²α + cos²α = 1','end',SK.ink,9.5)); }
+function skKraftzerlegung(){ const P=[110,30], Q=[180,140], V=[110,140];
+  return sv(300,170,'Zerlegung einer Kraft', ln(P[0],P[1],Q[0],Q[1],SK.load,2.2,'marker-end="url(#ska)"')
+    +ln(P[0],P[1],V[0],V[1]-2,SK.acc,1.8,'marker-end="url(#skc)"')+ln(V[0],V[1],Q[0]-2,Q[1],SK.acc,1.8,'marker-end="url(#skc)"')
+    +ln(P[0],P[1],Q[0],P[1]+0.01,SK.dim,0.6,'stroke-dasharray="3 3"')+ln(Q[0],P[1],Q[0],Q[1],SK.dim,0.6,'stroke-dasharray="3 3"')
+    +arcA(110,30,36,-90,-57.5,'α')+`<circle cx="110" cy="30" r="3" fill="${SK.ink}"/>`
+    +it(158,80,'F','start',SK.load,14)+it(100,92,'V = F·cos α','end',SK.acc,12)+it(145,158,'H = F·sin α','middle',SK.acc,12)); }
+// ── Mathematik: Analysis ──
+function skAbleitung(){ const x0=34, y0=150, W=260, f=t=>y0-(22+105*t*t), X=t=>x0+W*t;
+  const pts=[]; for(let i=0;i<=40;i++){ const t=i/40; pts.push([X(t), f(t)]); }
+  const t0=0.62, m=-(105*2*t0)/W, tx0=X(t0), ty0=f(t0);
+  let area=`M ${X(0.12)} ${y0}`; for(let i=0;i<=20;i++){ const t=0.12+0.33*i/20; area+=` L ${R1(X(t))} ${R1(f(t))}`; } area+=` L ${X(0.45)} ${y0} Z`;
+  return sv(320,175,'Ableitung und Integral', `<path d="${area}" fill="${SK.acc}" fill-opacity="0.15"/>`
+    +ln(x0,y0,x0+W+14,y0,SK.ink,0.8,'marker-end="url(#skb)"')+ln(x0,y0,x0,12,SK.ink,0.8,'marker-end="url(#skb)"')+it(x0+W+16,y0+4,'x','start')+it(x0-6,16,'y','end')
+    +pl(pts,SK.ink,1.6)+ln(tx0-70,ty0-70*m,tx0+60,ty0+60*m,SK.load,1.2)+`<circle cx="${R1(tx0)}" cy="${R1(ty0)}" r="3" fill="${SK.load}"/>`
+    +it(tx0-58,ty0+48,'Steigung f′(x₀)','start',SK.load,11.5)+it(X(0.29),y0-12,'∫ f(x) dx','middle',SK.acc,12)+it(X(0.97),f(0.97)-6,'f(x)','end')
+    +ln(tx0,ty0,tx0,y0,SK.dim,0.6,'stroke-dasharray="3 3"')+it(tx0,y0+14,'x₀','middle',SK.ink,11.5)+it(X(0.12),y0+14,'a','middle',SK.ink,11.5)+it(X(0.45),y0+14,'b','middle',SK.ink,11.5)); }
+function skBiegelinie(){ const x1=40,x2=280,y=56, W=x2-x1, wmax=30, w=t=>wmax*(16/5)*(t-2*t**3+t**4);
+  const pts=[]; for(let i=0;i<=40;i++){ const t=i/40; pts.push([x1+W*t, y+w(t)]); }
+  const phi=Math.atan(wmax*(16/5)/W);
+  return sv(320,175,'Biegelinie', udl(x1,x2,y-2,14,1,1,'q')+ln(x1,y,x2,y,SK.dim,0.9,'stroke-dasharray="5 4"')+pl(pts,SK.ink,2.6)+supPin(x1,y+1)+supRoll(x2,y+1)
+    +ln(x1,y+48,x1+60,y+48,SK.ink,0.8,'marker-end="url(#skb)"')+it(x1+64,y+52,'x','start')+ln(x1,y+48,x1,y+90,SK.ink,0.8,'marker-end="url(#skb)"')+it(x1+6,y+92,'z','start')
+    +ln(x1+W*0.7,y,x1+W*0.7,y+w(0.7)-2,SK.acc,1.2,'marker-end="url(#skc)"')+it(x1+W*0.7+6,y+w(0.7)/2+4,'w(x)','start',SK.acc,12)
+    +ln(x1,y,x1+70,y+70*Math.tan(phi),SK.load,0.9,'stroke-dasharray="4 3"')+arcA(x1,y,44,0,-phi*180/Math.PI,'φ',SK.load)); }
+// ── Baustatik ──
+// Bogenpfeil (Moment): Mittelpunkt, Radius, Winkel a1→a2 (Grad, math. positiv), Pfeil am Ende
+function arcArrow(cx,cy,r,a1,a2,c=SK.load,lab='',lx=0,ly=0){
+  const P=a=>[cx+r*Math.cos(a*Math.PI/180), cy-r*Math.sin(a*Math.PI/180)];
+  const [x1,y1]=P(a1),[x2,y2]=P(a2), sw=a2>a1?0:1, large=Math.abs(a2-a1)>180?1:0;
+  const m = c===SK.acc?'skc':'ska';
+  return `<path d="M ${R1(x1)} ${R1(y1)} A ${r} ${r} 0 ${large} ${sw} ${R1(x2)} ${R1(y2)}" fill="none" stroke="${c}" stroke-width="1.4" marker-end="url(#${m})"/>`+(lab?it(lx,ly,lab,'middle',c,12):'');
+}
+const hinge = (x,y) => `<circle cx="${x}" cy="${y}" r="3.6" fill="#fff" stroke="${SK.ink}" stroke-width="1.3"/>`;
+const vec = (x1,y1,x2,y2,c=SK.load,w=1.5) => ln(x1,y1,x2,y2,c,w,`marker-end="url(#${c===SK.acc?'skc':c===SK.ink?'skb':'ska'})"`);
+
+// Positives Schnittufer
+function skVorzeichen(){
+  const y=64, h=26, L1=[20,118], L2=[222,320];
+  const part=(a,b)=>poly([[a,y-h/2],[b,y-h/2],[b,y+h/2],[a,y+h/2]],SK.fill)+ln(a+3,y+h/2-4,b-3,y+h/2-4,SK.ink,0.9,'stroke-dasharray="5 3"');
+  let o=part(...L1)+part(...L2);
+  o+=vec(118,y,152,y)+it(148,y-6,'N','middle',SK.load)
+    +vec(118,y+h/2,118,y+48)+it(124,y+48,'Q','start',SK.load)
+    +arcArrow(118,y,24,-50,58,SK.acc)+it(138,y-26,'M','start',SK.acc);
+  o+=vec(222,y,188,y)+it(192,y+16,'N','middle',SK.load)
+    +vec(222,y-h/2,222,y-48)+it(216,y-40,'Q','end',SK.load)
+    +arcArrow(222,y,24,230,122,SK.acc)+it(202,y+34,'M','end',SK.acc);
+  o+=tl(69,y+h/2+16,'positives Ufer (rechts)','middle')+tl(271,y+h/2+16,'negatives Ufer (links)','middle');
+  o+=ln(20,132,62,132,SK.ink,0.8,'marker-end="url(#skb)"')+it(66,136,'x','start')+ln(20,132,20,154,SK.ink,0.8,'marker-end="url(#skb)"')+it(26,156,'z','start');
+  o+=ln(190,144,214,144,SK.ink,0.9,'stroke-dasharray="5 3"')+tl(220,147,'Faser unten','start');
+  return sv(340,166,'Schnittgrößen am positiven Schnittufer',o);
+}
+
+// Bestimmtheit: drei Mini-Systeme
+function skBestimmt(){
+  let o='';
+  // 1 Einfeldträger
+  o+=beam(20,120,50)+supPin(20,51)+supRoll(120,51)+tl(70,100,'a = 3, g = 0','middle')+it(70,116,'n = 0','middle',SK.acc,12)+tl(70,22,'Einfeldträger','middle',SK.ink,10);
+  // 2 Zweifeldträger
+  o+=beam(150,270,50)+supPin(150,51)+supRoll(210,51)+supRoll(270,51)+tl(210,100,'a = 4, g = 0','middle')+it(210,116,'n = 1','middle',SK.acc,12)+tl(210,22,'Zweifeldträger','middle',SK.ink,10);
+  // 3 Dreigelenkrahmen
+  const x1=305,x2=395,yt=40,yb=78;
+  o+=pl([[x1,yb],[x1,yt],[x2,yt],[x2,yb]],SK.ink,3)+hinge((x1+x2)/2,yt)+supPin(x1,yb+1)+supPin(x2,yb+1)+tl(350,108,'a = 4, g = 1','middle')+it(350,124,'n = 0','middle',SK.acc,12)+tl(350,22,'Dreigelenkrahmen','middle',SK.ink,10);
+  return sv(420,134,'Abzählkriterium an drei Systemen',o);
+}
+
+// Balkentafel-Kachel: System oben, M-Verlauf unten
+function btTile(sup, load, f, labs=[], k=22){
+  const x1=34,x2=196,y=46,ym=104; let o='';
+  o+=load(x1,x2,y-2)+beam(x1,x2,y);
+  if(sup==='pr') o+=supPin(x1,y+1)+supRoll(x2,y+1);
+  if(sup==='c-') o+=supClamp(x1-2,y,-1);
+  if(sup==='cc') o+=supClamp(x1-2,y,-1)+supClamp(x2+2,y,1);
+  if(sup==='cr') o+=supClamp(x1-2,y,-1)+supRoll(x2,y+1);
+  o+=mLine(x1,x2,ym,f,k,'')+it(x2+8,ym+4,'M','start',SK.m,12);
+  for(const [t,txt,a] of labs){ const v=f(t); o+=it(x1+(x2-x1)*t+(a==='s'?4:a==='e'?-4:0), ym+v*k+(v>=0?14:-6), txt, a==='s'?'start':a==='e'?'end':'middle', SK.m, 11); }
+  return sv(230,142,'Balkentafel',o);
+}
+const LQ  = (x1,x2,y)=>udl(x1,x2,y,14,1,1,'q');
+const LFm = (x1,x2,y)=>pload((x1+x2)/2,y,'F');
+const LFa = a=>(x1,x2,y)=>pload(x1+(x2-x1)*a,y,'F')+dimL(x1,y+28,x1+(x2-x1)*a,y+28,'a',-0.01,-10);
+const LFe = (x1,x2,y)=>pload(x2,y,'F');
+const LTri= up=>(x1,x2,y)=>udl(x1,x2,y,18,up?0:1,up?1:0,'q');
+const BT = {
+  e_q:  ()=>btTile('pr',LQ, t=>4*t*(1-t), [[0.5,'qL²/8']]),
+  e_F:  ()=>btTile('pr',LFm,t=>t<.5?2*t:2*(1-t), [[0.5,'FL/4']]),
+  e_Fa: ()=>btTile('pr',LFa(0.35),t=>t<.35?t/.35:(1-t)/.65, [[0.35,'Fab/L','s']]),
+  e_tri:()=>btTile('pr',LTri(true),t=>t*(1-t*t)/0.3849, [[0.577,'qL²/(9√3)']]),
+  k_q:  ()=>btTile('c-',LQ, t=>-((1-t)**2), [[0,'−qL²/2','s']]),
+  k_F:  ()=>btTile('c-',LFe,t=>-(1-t), [[0,'−FL','s']]),
+  k_tri:()=>btTile('c-',LTri(false),t=>-((1-t)**3), [[0,'−qL²/6','s']]),
+  c_q:  ()=>btTile('cc',LQ, t=>(6*t-6*t*t-1), [[0,'−qL²/12','s'],[0.5,'qL²/24']],18),
+  c_F:  ()=>btTile('cc',LFm,t=>t<.5?-1+4*t:-1+4*(1-t), [[0,'−FL/8','s'],[0.5,'FL/8']],16),
+  r_q:  ()=>btTile('cr',LQ, t=>(-1+5*t-4*t*t), [[0,'−qL²/8','s'],[0.625,'9qL²/128']],22),
+  r_F:  ()=>btTile('cr',LFm,t=>t<.5?(-3+11*t)/3:5*(1-t)/3, [[0,'−3FL/16','s'],[0.5,'5FL/32']],18),
+};
+function dlTrag(n){
+  const x1=30, W=n===2?300:330, x2=x1+W, y=46, ym=112, Ls=W/n; let o=udl(x1,x2,y-2,14,1,1,'q')+beam(x1,x2,y)+supPin(x1,y+1);
+  for(let i=1;i<=n;i++) o+=supRoll(x1+Ls*i,y+1);
+  const c = n===2 ? [0.375] : [0.4, 0.5];
+  // Moment in qL² je Feld
+  const M = s => { const i=Math.min(n-1,Math.floor(s)), t=s-i;
+    if(n===2) return i===0 ? .375*t-t*t/2 : .375*(1-t)-(1-t)*(1-t)/2;
+    if(i===0) return .4*t-t*t/2; if(i===2) return .4*(1-t)-(1-t)*(1-t)/2; return -0.1+0.5*t*(1-t); };
+  const k=200; o+=mLine(x1,x2,ym,t=>M(t*n),k,'')+it(x2+8,ym+4,'M','start',SK.m,12);
+  const lab=(s,txt)=>{ const v=M(s); o+=it(x1+Ls*s, ym+v*k+(v>=0?14:-6), txt,'middle',SK.m,11); };
+  if(n===2){ lab(0.375,'0,070'); lab(1.625,'0,070'); lab(1,'−0,125'); }
+  else { lab(0.4,'0,080'); lab(1.5,'0,025'); lab(2.6,'0,080'); lab(1,'−0,100'); lab(2,'−0,100'); }
+  o+=tl(x1+W/2,ym+48,'Momente in qL²','middle');
+  return sv(x2+40,ym+58,'Durchlaufträger',o);
+}
+function skZweifeld(){ return dlTrag(2); }
+function skDreifeld(){ return dlTrag(3); }
+
+// T-Querschnitt (Steiner-Beispiel): Flansch 200×20, Steg 20×180, s = 0,6 px/mm
+function skTQuer(){
+  const s=0.6, x0=60, y0=40, bf=200*s, tf=20*s, tw=20*s, hw=180*s, cx=x0+bf/2, zs=57.4*s;
+  let o=poly([[x0,y0],[x0+bf,y0],[x0+bf,y0+tf],[cx+tw/2,y0+tf],[cx+tw/2,y0+tf+hw],[cx-tw/2,y0+tf+hw],[cx-tw/2,y0+tf],[x0,y0+tf]]);
+  o+=axH(x0-14,x0+bf+20,y0+zs,'y')+cen(cx,y0+zs,'')+it(cx+10,y0+zs-6,'S','start');
+  o+=`<circle cx="${cx}" cy="${y0+10*s}" r="1.8" fill="${SK.acc}"/><circle cx="${cx}" cy="${y0+110*s}" r="1.8" fill="${SK.acc}"/>`;
+  o+=it(cx-8,y0+110*s+4,'S₂','end',SK.acc,11)+it(cx+8,y0+10*s+4,'S₁','start',SK.acc,11);
+  o+=dimL(x0,y0,x0+bf,y0,'200',-14)+dimL(x0+bf,y0,x0+bf,y0+tf,'20',-14,16);
+  o+=dimL(cx-tw/2,y0+tf+hw,cx+tw/2,y0+tf+hw,'20',14)+dimL(x0+bf,y0+tf,x0+bf,y0+tf+hw,'180',-14,18);
+  o+=dimL(x0-10,y0+zs,x0-10,y0,'z_s'.replace('z_s','z<tspan font-size="0.7em" dy="3">s</tspan>'),-0.01,16);
+  return sv(250,204,'T-Querschnitt',o);
+}
+
+// Spannungsverteilung Rechteck: σ linear, τ parabolisch
+function skSpannung(){
+  const y1=30,y2=130,ym=80; let o='';
+  o+=poly([[30,y1],[70,y1],[70,y2],[30,y2]])+axH(22,82,ym,'')+cen(50,ym,'')+it(50,y2+30,'Querschnitt','middle',SK.ink,11);
+  o+=dimL(30,y2,70,y2,'b',10,8)+dimL(30,y2,30,y1,'h',-10,8);
+  // σ
+  const xs=150; o+=ln(xs,y1-6,xs,y2+6,SK.ink,0.8)+poly([[xs,y1],[xs-36,y1],[xs+36,y2],[xs,y2]],'#dbe7f9',SK.acc,1.1)+ln(xs-36,y1,xs+36,y2,SK.acc,1.1);
+  o+=it(xs-40,y1+4,'σ<tspan font-size="0.7em" dy="3">D</tspan>','end',SK.acc,12)+it(xs+40,y2+4,'σ<tspan font-size="0.7em" dy="3">Z</tspan>','start',SK.acc,12)+tl(xs,y2+30,'σ = M/I · z','middle',SK.ink,10)+tl(xs+6,ym-3,'Nulllinie','start');
+  for(let i=1;i<6;i++){ const yy=y1+(y2-y1)*i/6, xx=xs-36+72*i/6; if(Math.abs(yy-ym)>4) o+=ln(xs,yy,xx,yy,SK.acc,0.6); }
+  // τ
+  const xt=250, pts=[]; for(let i=0;i<=30;i++){ const t=i/30, z=y1+(y2-y1)*t; pts.push([xt+44*4*t*(1-t), z]); }
+  o+=ln(xt,y1-6,xt,y2+6,SK.ink,0.8)+`<path d="M ${xt} ${y1} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} Z" fill="#fde8dc" stroke="${SK.load}" stroke-width="1.1"/>`;
+  o+=it(xt+48,ym+4,'τ<tspan font-size="0.7em" dy="3">max</tspan>','start',SK.load,12)+tl(xt+10,y2+30,'τmax = 1,5·V/A','middle',SK.ink,10);
+  return sv(330,170,'Spannungsverteilung',o);
+}
+
+// Die vier Eulerfälle
+function skEuler(){
+  const yb=182, yt=52, L=yb-yt, xs=[50,140,230,320]; let o='';
+  const base=(x,clamp)=> clamp ? (()=>{ let r=ln(x-14,yb,x+14,yb,SK.ink,1.6); for(let i=-14;i<=10;i+=5) r+=ln(x+i,yb,x+i+4,yb+5,SK.ink,0.7); return r; })() : supPin(x,yb);
+  const topRoll=(x)=>`<g transform="translate(${x},${yt}) rotate(180)">${poly([[0,0],[-8,13],[8,13]],'#fff')}${hatchB(0,13,24)}</g>`;
+  const topClamp=(x)=>{ let r=ln(x-14,yt,x+14,yt,SK.ink,1.6); for(let i=-14;i<=10;i+=5) r+=ln(x+i,yt,x+i+4,yt-5,SK.ink,0.7); return r; };
+  // Form y(s), s=0 unten … 1 oben
+  const kL=4.4934, A=-1/Math.tan(kL);
+  const raw3=s=>{ const x=1-s; return A*Math.sin(kL*x)+Math.cos(kL*x)-A*kL*x-1; };
+  let m3=0; for(let i=0;i<=100;i++) m3=Math.max(m3,Math.abs(raw3(i/100)));
+  const shapes=[ s=>1-Math.cos(Math.PI*s/2), s=>Math.sin(Math.PI*s), s=>Math.abs(raw3(s))/m3, s=>(1-Math.cos(2*Math.PI*s))/2 ];
+  const beta=['2,0','1,0','0,7','0,5'], tops=[null,'r','r','c'], bots=[true,false,true,true];
+  xs.forEach((x,i)=>{
+    const top=yt-(i===0?0:0), amp=i===0?22:18, pts=[];
+    for(let j=0;j<=40;j++){ const s=j/40; pts.push([x+amp*shapes[i](s), yb-L*s]); }
+    o+=ln(x,yb,x,yt,SK.dim,0.8,'stroke-dasharray="4 3"')+pl(pts,SK.ink,2.4)+base(x,bots[i]);
+    const xt=x+amp*shapes[i](1);
+    if(tops[i]==='r') o+=topRoll(x); if(tops[i]==='c') o+=topClamp(x);
+    o+=vec(xt,yt-(tops[i]?44:28),xt,yt-(tops[i]?21:2),SK.load,1.6);
+    o+=it(xt+6,yt-(tops[i]?36:20),'N','start',SK.load,12);
+    o+=tl(x,yb+28,`Fall ${i+1}`,'middle',SK.ink,10)+it(x,yb+44,`β = ${beta[i]}`,'middle',SK.acc,12);
+  });
+  o+=dimL(18,yb,18,yt,'L',-0.01,-8);
+  return sv(370,238,'Eulerfälle',o);
+}
+
+// PVK: M aus q, M̄ aus virtueller 1
+function skPVK(){
+  const x1=40,x2=230; let o='';
+  o+=udl(x1,x2,40,14,1,1,'q')+beam(x1,x2,42)+supPin(x1,43)+supRoll(x2,43);
+  o+=mLine(x1,x2,86,t=>4*t*(1-t),24,'qL²/8',0.5)+it(x2+8,90,'M','start',SK.m,12);
+  o+=ln((x1+x2)/2,150,(x1+x2)/2,172,SK.acc,1.6,'marker-end="url(#skc)"')+it((x1+x2)/2+6,156,'1̄','start',SK.acc,12).replace('1̄','„1“');
+  o+=beam(x1,x2,174)+supPin(x1,175)+supRoll(x2,175);
+  o+=`<path d="M ${x1} 216 L ${(x1+x2)/2} 240 L ${x2} 216 Z" fill="${SK.acc}" fill-opacity="0.12" stroke="none"/>`+pl([[x1,216],[(x1+x2)/2,240],[x2,216]],SK.acc,1.3)+ln(x1,216,x2,216,SK.ink,0.7);
+  o+=it((x1+x2)/2,254,'L/4','middle',SK.acc,11)+it(x2+8,220,'M̄','start',SK.acc,12);
+  return sv(280,264,'Prinzip der virtuellen Kräfte',o);
+}
+// ── Stahlbau / Stahlbeton / Grundbau / Lasten ──
+// Knicklinien χ(λ̄) nach EN 1993-1-1
+function skKnicklinien(){
+  const x0=44,y0=170,W=290,H=140, lm=3, X=l=>x0+W*l/lm, Y=c=>y0-H*c;
+  let o=ln(x0,y0,x0+W+8,y0,SK.ink,0.9,'marker-end="url(#skb)"')+ln(x0,y0,x0,y0-H-14,SK.ink,0.9,'marker-end="url(#skb)"');
+  for(let l=0.5;l<=3;l+=0.5){ o+=ln(X(l),y0,X(l),y0+4,SK.ink,0.7)+tl(X(l),y0+15,String(l).replace('.',','),'middle'); o+=ln(X(l),y0,X(l),Y(1),'#e5e7eb',0.6); }
+  for(let c=0.2;c<=1.001;c+=0.2){ o+=ln(x0-4,Y(c),x0,Y(c),SK.ink,0.7)+tl(x0-7,Y(c)+3,c.toFixed(1).replace('.',','),'end'); o+=ln(x0,Y(c),x0+W,Y(c),'#e5e7eb',0.6); }
+  // Euler-Hyperbel
+  const eu=[]; for(let l=1;l<=3.001;l+=0.05) eu.push([X(l),Y(1/(l*l))]);
+  o+=pl(eu,SK.dim,0.9,'stroke-dasharray="4 3"')+tl(X(1.08),Y(0.92),'Euler 1/λ̄²','start');
+  const cur=[['a0',0.13,'#0f6e56'],['a',0.21,'#2563eb'],['b',0.34,'#7c3aed'],['c',0.49,'#c2410c'],['d',0.76,'#111']];
+  cur.forEach(([n,a,c],i)=>{ const pts=[]; for(let l=0;l<=3.001;l+=0.03){ const P=0.5*(1+a*(l-0.2)+l*l); const chi=l<=0.2?1:Math.min(1,1/(P+Math.sqrt(P*P-l*l))); pts.push([X(l),Y(chi)]); }
+    o+=pl(pts,c,1.5); o+=ln(x0+W+24,40+i*16,x0+W+40,40+i*16,c,2)+tl(x0+W+44,44+i*16,n,'start',c,10.5); });
+  o+=it(x0+W+8,y0-6,'λ̄','end')+it(x0+8,y0-H-8,'χ','start');
+  return sv(400,200,'Knicklinien',o);
+}
+
+// Plattenbalken: mitwirkende Breite
+function skPlattenbalken(){
+  const y0=40, hf=18, x1=20, x2=320, cw1=150, cw2=190, hw=74;
+  let o=poly([[x1,y0],[x2,y0],[x2,y0+hf],[cw2,y0+hf],[cw2,y0+hf+hw],[cw1,y0+hf+hw],[cw1,y0+hf],[x1,y0+hf]]);
+  o+=`<rect x="70" y="${y0}" width="200" height="${hf}" fill="${SK.acc}" fill-opacity="0.16" stroke="${SK.acc}" stroke-width="1" stroke-dasharray="4 3"/>`;
+  o+=dimL(70,y0,270,y0,'b<tspan font-size="0.7em" dy="3">eff</tspan>',-14);
+  o+=dimL(70,y0+hf+hw,150,y0+hf+hw,'b<tspan font-size="0.7em" dy="3">eff,1</tspan>',16)+dimL(150,y0+hf+hw,190,y0+hf+hw,'b<tspan font-size="0.7em" dy="3">w</tspan>',16)+dimL(190,y0+hf+hw,270,y0+hf+hw,'b<tspan font-size="0.7em" dy="3">eff,2</tspan>',16);
+  o+=dimL(x1,y0+hf+34,150,y0+hf+34,'b<tspan font-size="0.7em" dy="3">1</tspan>',-0.01,-8)+dimL(190,y0+hf+34,x2,y0+hf+34,'b<tspan font-size="0.7em" dy="3">2</tspan>',-0.01,-8);
+  o+=dimL(x2,y0,x2,y0+hf,'h<tspan font-size="0.7em" dy="3">f</tspan>',-12,14);
+  o+=tl(14,y0+10,'…','end')+tl(330,y0+10,'…','start');
+  return sv(362,170,'Plattenbalken',o);
+}
+
+// Durchstanzen: Rundschnitt u1 im Abstand 2d
+function skRundschnitt(){
+  const cx=120,cy=95,c=40,a=34; let o='';
+  o+=`<rect x="10" y="10" width="220" height="170" fill="${SK.fill}" stroke="none"/>`;
+  o+=`<path d="M ${cx-c/2} ${cy-c/2-a} H ${cx+c/2} A ${a} ${a} 0 0 1 ${cx+c/2+a} ${cy-c/2} V ${cy+c/2} A ${a} ${a} 0 0 1 ${cx+c/2} ${cy+c/2+a} H ${cx-c/2} A ${a} ${a} 0 0 1 ${cx-c/2-a} ${cy+c/2} V ${cy-c/2} A ${a} ${a} 0 0 1 ${cx-c/2} ${cy-c/2-a} Z" fill="none" stroke="${SK.acc}" stroke-width="1.6" stroke-dasharray="6 3"/>`;
+  o+=`<rect x="${cx-c/2}" y="${cy-c/2}" width="${c}" height="${c}" fill="${SK.fill2}" stroke="${SK.ink}" stroke-width="1.4"/>`+ln(cx-c/2,cy-c/2,cx+c/2,cy+c/2,SK.ink,0.6)+ln(cx+c/2,cy-c/2,cx-c/2,cy+c/2,SK.ink,0.6);
+  o+=dimL(cx+c/2,cy,cx+c/2+a,cy,'2d',-0.01,-10);
+  o+=it(cx+c/2+a*0.8,cy-c/2-a*0.8,'u<tspan font-size="0.7em" dy="3">1</tspan>','start',SK.acc,13)+tl(cx,cy+4,'Stütze','middle',SK.ink,8.5);
+  o+=dimL(cx-c/2,cy+c/2+a+6,cx+c/2,cy+c/2+a+6,'c<tspan font-size="0.7em" dy="3">x</tspan>',10,8);
+  return sv(240,190,'Kritischer Rundschnitt',o);
+}
+
+// Sohldruck: Trapez (e ≤ b/6) und Dreieck (klaffende Fuge)
+function sohl(x0,e,klaff,title){
+  const b=120, y=60, h=20; let o='';
+  o+=poly([[x0,y],[x0+b,y],[x0+b,y+h],[x0,y+h]],SK.fill2)+ln(x0+b/2,y+h,x0+b/2,y+h+70,SK.dim,0.6,'stroke-dasharray="6 3 2 3"');
+  const xr=x0+b/2+e;
+  o+=vec(xr,y-38,xr,y-2,SK.load,1.8)+it(xr+5,y-28,'V','start',SK.load);
+  o+=dimL(x0+b/2,y-12,xr,y-12,'e',-0.01,8).replace(/<line[^>]*stroke="#9ca3af"[^>]*\/>/g,'');
+  const yb=y+h;
+  if(!klaff){ const s1=34, s2=12; o+=poly([[x0,yb],[x0+b,yb],[x0+b,yb+s1],[x0,yb+s2]],'#fde8dc',SK.load,1.1)+it(x0+b+4,yb+s1,'σ<tspan font-size="0.7em" dy="3">max</tspan>','start',SK.load,12)+it(x0-4,yb+s2,'σ<tspan font-size="0.7em" dy="3">min</tspan>','end',SK.load,12); }
+  else { const c=b/2-e, L3=3*c; o+=poly([[x0+b-L3,yb],[x0+b,yb],[x0+b,yb+40]],'#fde8dc',SK.load,1.1)+it(x0+b+4,yb+40,'σ<tspan font-size="0.7em" dy="3">max</tspan>','start',SK.load,12)
+      +dimL(x0+b-L3,yb+52,x0+b,yb+52,'3c',-0.01,-6)+dimL(xr,y+4,x0+b,y+4,'c',-0.01,-6).replace(/<line[^>]*stroke="#9ca3af"[^>]*\/>/g,''); }
+  o+=dimL(x0,yb+64,x0+b,yb+64,'b',10,6).replace(/<line[^>]*stroke="#9ca3af"[^>]*\/>/g,'')+tl(x0+b/2,16,title,'middle',SK.ink,10);
+  return o;
+}
+function skSohldruck(){ return sv(380,180,'Sohldruckverteilung', sohl(30,12,false,'e ≤ b/6: Trapez')+sohl(220,34,true,'e > b/6: klaffende Fuge')); }
+
+// Grundbruch: Bruchkörper (Prandtl)
+function skGrundbruch(){
+  const yS=86, b=40, x1=180, x2=x1+b, d=26, phi=30*Math.PI/180; let o='';
+  o+=ln(10,yS-d,390,yS-d,SK.ink,1)+`<rect x="10" y="${yS-d}" width="380" height="${150}" fill="#f5efe4" stroke="none"/>`+ln(10,yS-d,x1-6,yS-d,'#8a6d3b',1.2)+ln(x2+6,yS-d,390,yS-d,'#8a6d3b',1.2);
+  // Keil I unter dem Fundament
+  const th=Math.PI/4+phi/2, apex=[x1+b/2, yS+(b/2)*Math.tan(th)];
+  // Spirale II: r = r0·exp(θ tanφ), Pol an der Fundamentkante x2
+  const r0=Math.hypot(apex[0]-x2, apex[1]-yS), a0=Math.atan2(apex[1]-yS, apex[0]-x2), spts=[];
+  for(let i=0;i<=30;i++){ const t=i/30*(Math.PI/2), r=r0*Math.exp(t*Math.tan(phi)), a=a0-t; spts.push([x2+r*Math.cos(a), yS+r*Math.sin(a)]); }
+  const pE=spts[spts.length-1], xe=pE[0]+(pE[1]-yS)/Math.tan(Math.PI/4-phi/2);
+  const L=[[x1,yS],[x2,yS],apex], Rspi=[[x2,yS],...spts], Rk=[[x2,yS],pE,[xe,yS]];
+  const mir=p=>[2*(x1+b/2)-p[0],p[1]];
+  o+=poly(L,'#e8dcc4','#8a6d3b',1)+poly(Rspi,'#efe4cf','#8a6d3b',1)+poly(Rk,'#e8dcc4','#8a6d3b',1)+poly(Rspi.map(mir),'#efe4cf','#8a6d3b',0.7,'stroke-dasharray="4 3"')+poly(Rk.map(mir),'#e8dcc4','#8a6d3b',0.7,'stroke-dasharray="4 3"');
+  o+=pl([[x1,yS],apex,...spts,[xe,yS]],'#8a6d3b',2)+ln(xe,yS,xe+10,yS-d,'#8a6d3b',1);
+  o+=poly([[x1,yS-d-14],[x2,yS-d-14],[x2,yS],[x1,yS]],SK.fill2)+vec(x1+b/2,yS-d-52,x1+b/2,yS-d-16,SK.load,1.8)+it(x1+b/2+6,yS-d-38,'V','start',SK.load);
+  o+=it(x1+b/2,yS+14,'I','middle',SK.ink,12)+it(x2+28,yS+34,'II','middle',SK.ink,12)+it(xe-26,yS+8,'III','middle',SK.ink,12);
+  o+=dimL(x1,yS+0,x2,yS,'b',-0.01,0).replace(/<line[^>]*stroke="#9ca3af"[^>]*\/>/g,'').replace(/<text[\s\S]*?<\/text>$/,'')+dimL(x1-14,yS-d,x1-14,yS,'d',-0.01,-8);
+  o+=tl(395,yS-d-6,'Gelände','end')+tl(200,214,'I aktiver Keil · II Übergangszone (log. Spirale) · III passiver Keil','middle');
+  return sv(400,222,'Grundbruchkörper',o);
+}
+
+// Schnee: μ1 über Dachneigung + Dachskizze
+function skSchnee(){
+  const x0=40,y0=120,W=180,H=80, X=a=>x0+W*a/90, Y=m=>y0-H*m/1.0; let o='';
+  o+=ln(x0,y0,x0+W+10,y0,SK.ink,0.9,'marker-end="url(#skb)"')+ln(x0,y0,x0,y0-H-14,SK.ink,0.9,'marker-end="url(#skb)"');
+  o+=pl([[X(0),Y(.8)],[X(30),Y(.8)],[X(60),Y(0)],[X(90),Y(0)]],SK.acc,2);
+  [30,60,90].forEach(a=>{ o+=ln(X(a),y0,X(a),y0+4,SK.ink,0.7)+tl(X(a),y0+15,a+'°','middle'); });
+  o+=ln(x0-4,Y(.8),x0,Y(.8),SK.ink,0.7)+tl(x0-7,Y(.8)+3,'0,8','end')+ln(X(30),Y(.8),X(30),y0,'#9ca3af',0.6,'stroke-dasharray="3 3"');
+  o+=it(x0+W+14,y0-6,'α','end')+it(x0+8,y0-H-8,'μ<tspan font-size="0.7em" dy="3">1</tspan>','start');
+  // Satteldach
+  const bx=280, by=118, hw=60, hh=40; o+=poly([[bx-hw,by],[bx,by-hh],[bx+hw,by]],'#fff')+arcA(bx-hw,by,22,0,Math.atan(hh/hw)*180/Math.PI,'α');
+  for(let i=0;i<=6;i++){ const x=bx-hw+i*hw/3, y=by-hh*(1-Math.abs(x-bx)/hw); o+=vec(x,y-22,x,y-2,SK.load,1); }
+  o+=it(bx-hw/2-6,by-hh-6,'μ<tspan font-size="0.7em" dy="3">1</tspan>·s<tspan font-size="0.7em" dy="3">k</tspan>','middle',SK.load,12);
+  return sv(360,150,'Formbeiwert Schnee',o);
+}
+
+// Querkraft: Fachwerkmodell
+function skFachwerk(){
+  const x1=30,x2=330,yo=40,yu=120, th=40*Math.PI/180, dx=(yu-yo)/Math.tan(th); let o='';
+  o+=poly([[x1,yo-12],[x2,yo-12],[x2,yu+12],[x1,yu+12]],SK.fill,'#9ca3af',0.8);
+  o+=ln(x1,yo,x2,yo,SK.acc,2.2)+ln(x1,yu,x2,yu,SK.load,2.2);
+  for(let x=x1+10;x+dx<=x2;x+=dx){ o+=ln(x,yu,x+dx,yo,SK.acc,1.4,'stroke-dasharray="6 3"'); o+=ln(x+dx,yo,x+dx,yu,SK.load,1.4); }
+  o+=arcA(x1+10,yu,30,0,40,'θ',SK.ink);
+  o+=dimL(x2+8,yo,x2+8,yu,'z',-0.01,-10);
+  o+=tl(x1,yo-18,'Druckgurt','start',SK.acc,9.5)+tl(x1,yu+26,'Zuggurt (Längsbewehrung)','start',SK.load,9.5)+tl(x2,yu+26,'— Bügel (Zug)   - - Druckstreben','end',SK.ink,9.5);
+  return sv(360,156,'Fachwerkmodell',o);
 }
 
 // ══════════════════════════════════════════════════
@@ -2043,6 +2424,7 @@ Object.assign(CONTENT, {
     </div>
     <div class="card">
       <div class="card-title">Beispiele</div>
+      ${fig(skBestimmt())}
       ${textTable(['System','a','g','n'], [
         ['Einfeldträger (Festlager + Loslager)','3','0','0'],
         ['Kragarm (Einspannung)','3','0','0'],
@@ -2062,6 +2444,7 @@ Object.assign(CONTENT, {
         Schneidet man einen Stab gedanklich auf, wirken an der Schnittstelle die Schnittgrößen
         N, Q und M. Die <b>gestrichelte Faser</b> markiert die Unterseite des Stabs.
       </div>
+      ${fig(skVorzeichen(),'Am rechten Ufer des linken Teils (positives Ufer) zeigen N nach außen, Q nach unten und M dreht linksherum. Am gegenüberliegenden Ufer wirken sie entgegengesetzt (actio = reactio).')}
       ${textTable(['Größe','positiv, wenn …'], [
         ['N (Normalkraft)','Zug'],
         ['Q (Querkraft)','am positiven Schnittufer in +z-Richtung (nach unten) zeigend'],
@@ -2090,6 +2473,12 @@ Object.assign(CONTENT, {
   'baustatik/balkentafeln/einfeld': () => `
     <div class="card">
       <div class="card-title">Einfeldträger — Festlager A, Loslager B, Stützweite L</div>
+      ${shapeGrid([
+        shapeCard(BT.e_q(),'Gleichlast q',[['A = B','qL/2'],['max M','qL²/8']]),
+        shapeCard(BT.e_F(),'Einzellast F in der Mitte',[['A = B','F/2'],['max M','FL/4']]),
+        shapeCard(BT.e_Fa(),'Einzellast F bei a',[['A / B','F·b/L / F·a/L'],['max M','F·a·b/L']]),
+        shapeCard(BT.e_tri(),'Dreieckslast 0 → q',[['A / B','qL/6 / qL/3'],['max M','qL²/(9√3)']]),
+      ])}
       ${textTable(['Lastfall','A','B','max M','max w'], [
         ['Gleichlast q','qL/2','qL/2','qL²/8 (Mitte)','5qL⁴/(384EI)'],
         ['Einzellast F in der Mitte','F/2','F/2','FL/4','FL³/(48EI)'],
@@ -2107,6 +2496,11 @@ Object.assign(CONTENT, {
   'baustatik/balkentafeln/kragarm': () => `
     <div class="card">
       <div class="card-title">Kragarm — Einspannung bei A, freies Ende, Länge L</div>
+      ${shapeGrid([
+        shapeCard(BT.k_q(),'Gleichlast q',[['V<sub>A</sub>','qL'],['M<sub>A</sub>','−qL²/2']]),
+        shapeCard(BT.k_F(),'Einzellast F am Ende',[['V<sub>A</sub>','F'],['M<sub>A</sub>','−FL']]),
+        shapeCard(BT.k_tri(),'Dreieckslast q → 0',[['V<sub>A</sub>','qL/2'],['M<sub>A</sub>','−qL²/6']]),
+      ])}
       ${textTable(['Lastfall','V_A','M_A','w (Ende)','φ (Ende)'], [
         ['Gleichlast q','qL','−qL²/2','qL⁴/(8EI)','qL³/(6EI)'],
         ['Einzellast F am Ende','F','−FL','FL³/(3EI)','FL²/(2EI)'],
@@ -2120,6 +2514,10 @@ Object.assign(CONTENT, {
   'baustatik/balkentafeln/eingespannt': () => `
     <div class="card">
       <div class="card-title">Beidseitig eingespannter Träger</div>
+      ${shapeGrid([
+        shapeCard(BT.c_q(),'Gleichlast q',[['M<sub>A</sub> = M<sub>B</sub>','−qL²/12'],['M Feld','qL²/24']]),
+        shapeCard(BT.c_F(),'Einzellast F in der Mitte',[['M<sub>A</sub> = M<sub>B</sub>','−FL/8'],['M Feld','FL/8']]),
+      ])}
       ${textTable(['Lastfall','A = B','M_A = M_B','M Feld','max w'], [
         ['Gleichlast q','qL/2','−qL²/12','qL²/24','qL⁴/(384EI)'],
         ['Einzellast F in der Mitte','F/2','−FL/8','FL/8','FL³/(192EI)'],
@@ -2127,6 +2525,10 @@ Object.assign(CONTENT, {
     </div>
     <div class="card">
       <div class="card-title">Einseitig eingespannt (A eingespannt, B gelenkig)</div>
+      ${shapeGrid([
+        shapeCard(BT.r_q(),'Gleichlast q',[['M<sub>A</sub>','−qL²/8'],['max M Feld','9qL²/128']]),
+        shapeCard(BT.r_F(),'Einzellast F in der Mitte',[['M<sub>A</sub>','−3FL/16'],['M unter F','5FL/32']]),
+      ])}
       ${textTable(['Lastfall','A','B','M_A','max M Feld'], [
         ['Gleichlast q','5qL/8','3qL/8','−qL²/8','9qL²/128 bei x = 5L/8'],
         ['Einzellast F in der Mitte','11F/16','5F/16','−3FL/16','5FL/32 (unter F)'],
@@ -2141,6 +2543,7 @@ Object.assign(CONTENT, {
     <div class="card">
       <div class="card-title">Durchlaufträger, gleiche Stützweiten L, Gleichlast q auf allen Feldern</div>
       <div class="section-note">Beiwerte: Auflagerkraft = Beiwert · qL, Moment = Beiwert · qL².</div>
+      <div class="sk-row">${fig(skZweifeld(),'Zweifeldträger')}${fig(skDreifeld(),'Dreifeldträger')}</div>
       ${textTable(['System','Auflager','Stützmoment','Feldmomente'], [
         ['Zweifeldträger','A = C = 0,375 · B = 1,250','M_B = −0,125','M₁ = M₂ = 0,070'],
         ['Dreifeldträger','A = D = 0,400 · B = C = 1,100','M_B = M_C = −0,100','M₁ = M₃ = 0,080 · M₂ = 0,025'],
@@ -2159,6 +2562,11 @@ Object.assign(CONTENT, {
   'baustatik/querschnitte/querschnittswerte': () => `
     <div class="card">
       <div class="card-title">Grundformen</div>
+      ${shapeGrid([
+        shapeCard(skRechteck(),'Rechteck b × h',[['I<sub>y</sub>','b·h³/12'],['W<sub>el</sub>','b·h²/6']]),
+        shapeCard(skKreis(),'Kreis d',[['I','π·d⁴/64'],['W<sub>el</sub>','π·d³/32']]),
+        shapeCard(skRing(),'Kreisring D / d',[['I','π(D⁴ − d⁴)/64'],['W<sub>el</sub>','2I/D']]),
+      ])}
       ${textTable(['Querschnitt','A','I (Schwerachse)','W_el','i'], [
         ['Rechteck b × h','b·h','b·h³/12','b·h²/6','h/√12 ≈ 0,289·h'],
         ['Kreis, Durchmesser d','π·d²/4','π·d⁴/64','π·d³/32','d/4'],
@@ -2183,6 +2591,7 @@ Object.assign(CONTENT, {
         <div class="comment">I<sub>i</sub> — Eigenträgheitsmoment des Teils um seine eigene Schwerachse<br>
         A<sub>i</sub>·(z<sub>i</sub> − z<sub>s</sub>)² — Steiner-Anteil (immer ≥ 0)</div>
       </div>
+      ${fig(skTQuer(),'T-Querschnitt (mm): S₁, S₂ — Teilschwerpunkte, S — Gesamtschwerpunkt im Abstand z<sub>s</sub> von oben')}
       <div class="info-banner">
         Beispiel T-Querschnitt: Flansch 200 × 20 mm oben, Steg 20 × 180 mm (Höhe gesamt 200 mm).<br>
         A = 4000 + 3600 = 7600 mm² · z<sub>s</sub> = (4000·10 + 3600·110)/7600 = <b>57,4 mm</b> von oben<br>
@@ -2202,6 +2611,7 @@ Object.assign(CONTENT, {
       <div class="formula-box">
         Randspannungen: σ = N/A ± M/W
       </div>
+      ${fig(skSpannung(),'Rechteck unter Biegung: σ linear (Druck oben, Zug unten), τ parabolisch mit dem Maximum in der Schwerachse')}
       <div class="section-note">Die Spannung verläuft linear über die Höhe. Die Nulllinie liegt bei reiner Biegung
         in der Schwerachse, bei zusätzlicher Normalkraft verschoben.</div>
     </div>
@@ -2227,6 +2637,7 @@ Object.assign(CONTENT, {
         <div class="comment">Gilt für den ideal geraden, elastischen Stab. Reale Stäbe haben Imperfektionen
         und Eigenspannungen → Bemessung mit Abminderungsbeiwerten (χ im Stahlbau, k<sub>c</sub> im Holzbau).</div>
       </div>
+      ${fig(skEuler(),'Knickfiguren der vier Eulerfälle: L<sub>cr</sub> = β·L ist der Abstand der Wendepunkte (Halbwelle der Sinuslinie).')}
       ${textTable(['Eulerfall','Lagerung','β'], [
         ['1','eingespannt – frei','2,0'],
         ['2','gelenkig – gelenkig','1,0'],
@@ -2251,6 +2662,7 @@ Object.assign(CONTENT, {
         <div class="comment">M — Momentenverlauf aus der tatsächlichen Last<br>
         M̄ — Momentenverlauf aus einer virtuellen „1“ an der gesuchten Stelle</div>
       </div>
+      ${fig(skPVK(),'Oben: tatsächliche Last und M · unten: virtuelle „1“ an der gesuchten Stelle und M̄')}
       ${textTable(['Schritt','Vorgehen'], [
         ['1','M-Verlauf aus der äußeren Last bestimmen'],
         ['2','Virtuelle Last „1“ an der gesuchten Stelle in Richtung der gesuchten Verformung (Kraft für w, Moment für φ)'],
@@ -2467,6 +2879,7 @@ Object.assign(CONTENT, {
       ${textTable(['Dachneigung α','0° ≤ α ≤ 30°','30° < α < 60°','α ≥ 60°'], [
         ['μ₁ (Pult- und Satteldach)','0,8','0,8·(60° − α)/30°','0'],
       ])}
+      ${fig(skSchnee())}
       <div class="legend">Beim Satteldach zusätzlich einseitige Verteilungen (halbe Last auf einer Seite) untersuchen.
         Verwehungen an Höhensprüngen und Aufbauten gesondert.</div>
     </div>
@@ -2598,6 +3011,7 @@ Object.assign(CONTENT, {
         <div class="comment">Für λ̄ ≤ 0,2 ist χ = 1 (kein Stabilitätsnachweis nötig).</div>
       </div>
       ${textTable(['Knicklinie','a0','a','b','c','d'], [['Imperfektionsbeiwert α','0,13','0,21','0,34','0,49','0,76']])}
+      ${fig(skKnicklinien(),'Abminderungsbeiwert χ über dem bezogenen Schlankheitsgrad λ̄. Bei großer Schlankheit nähern sich alle Kurven der Euler-Hyperbel.')}
     </div>
     <div class="card">
       <div class="card-title">Zuordnung gewalzter I-Profile (S235 bis S420)</div>
@@ -2727,6 +3141,7 @@ Object.assign(CONTENT, {
         e > b/6:&nbsp; σ<sub>max</sub> = 2V / (3·a·c)&nbsp; mit c = b/2 − e&nbsp;&nbsp; (klaffende Fuge)
         <div class="comment">a — Fundamentlänge, b — Breite in Richtung der Ausmitte</div>
       </div>
+      ${fig(skSohldruck())}
     </div>
     <div class="card">
       <div class="card-title">Lage der Sohldruckresultierenden (DIN 1054)</div>
@@ -2741,6 +3156,7 @@ Object.assign(CONTENT, {
   'grundbau/flach/grundbruch': () => `
     <div class="card">
       <div class="card-title">Grundbruchwiderstand — DIN 4017</div>
+      ${fig(skGrundbruch(),'Bruchkörper nach Prandtl (einseitig ausgebildet): Der Boden unter dem Fundament wird verdrängt und seitlich hochgedrückt.')}
       <div class="formula-box">
         R<sub>n,k</sub> = a′·b′·( γ₂·b′·N<sub>b</sub> + γ₁·d·N<sub>d</sub> + c·N<sub>c</sub> )
         <div class="comment">a′ = a − 2e<sub>a</sub>, b′ = b − 2e<sub>b</sub> — rechnerische Fundamentfläche · d — Einbindetiefe<br>
@@ -2784,7 +3200,7 @@ Object.assign(CONTENT, {
   'mathematik/geometrie/trigonometrie': () => `
     <div class="card">
       <div class="card-title">Rechtwinkliges Dreieck</div>
-      ${figDreieck()}
+      <div class="sk-row">${fig(skRechtwinklig())}${fig(skEinheitskreis())}</div>
       <div class="formula-box">
         sin α = g / c&nbsp;&nbsp;&nbsp; cos α = a / c&nbsp;&nbsp;&nbsp; tan α = g / a<br>
         sin²α + cos²α = 1&nbsp;&nbsp;&nbsp; c² = a² + g²
@@ -2799,8 +3215,10 @@ Object.assign(CONTENT, {
       <div class="card-title">Beliebiges Dreieck</div>
       <div class="formula-box">
         Sinussatz:&nbsp; a / sin α = b / sin β = c / sin γ<br>
-        Kosinussatz:&nbsp; c² = a² + b² − 2·a·b·cos γ
+        Kosinussatz:&nbsp; c² = a² + b² − 2·a·b·cos γ<br>
+        Fläche:&nbsp; A = c·h<sub>c</sub>/2 = ½·a·b·sin γ&nbsp;&nbsp;&nbsp; α + β + γ = 180°
       </div>
+      <div class="sk-row">${fig(skDreieckAllg(),'Gegenüber jeder Ecke liegt die gleichnamige Seite: a gegenüber A usw.')}${fig(skKraftzerlegung(),'Zerlegung einer Kraft in eine senkrechte und eine waagerechte Komponente')}</div>
       <div class="info-banner">Anwendung in der Statik: Zerlegen einer schrägen Kraft F unter dem Winkel α zur Senkrechten:
         V = F·cos α, H = F·sin α.</div>
     </div>
@@ -2809,21 +3227,28 @@ Object.assign(CONTENT, {
   'mathematik/geometrie/flaechen': () => `
     <div class="card">
       <div class="card-title">Flächen und Schwerpunkte</div>
-      ${textTable(['Fläche','A','Schwerpunkt'], [
-        ['Rechteck b × h','b·h','Mitte'],
-        ['Dreieck (Basis b, Höhe h)','b·h/2','h/3 über der Basis'],
-        ['Trapez (Seiten a, b, Höhe h)','(a + b)·h/2','h/3 · (a + 2b)/(a + b) über der Seite a'],
-        ['Kreis, Radius r','π·r²','Mitte'],
-        ['Halbkreis','π·r²/2','4r/(3π) ≈ 0,424·r von der geraden Seite'],
-        ['Parabelsegment (Breite b, Stich h)','⅔·b·h','—'],
-        ['Parabelzwickel (unter y = k·x², 0 … b)','⅓·b·h','3/4·b vom Scheitel'],
+      ${shapeGrid([
+        shapeCard(skRechteck(),'Rechteck',[['A','b·h'],['I<sub>y</sub>','b·h³/12'],['S','Mitte']]),
+        shapeCard(skDreieck(),'Dreieck',[['A','b·h/2'],['I<sub>y</sub>','b·h³/36'],['S','h/3 über der Basis']]),
+        shapeCard(skTrapez(),'Trapez',[['A','(a + b)·h/2'],['e','h/3·(a + 2b)/(a + b)'],['I<sub>y</sub>','h³(a² + 4ab + b²)/(36(a + b))']]),
+        shapeCard(skKreis(),'Kreis',[['A','π·r² = π·d²/4'],['I<sub>y</sub>','π·d⁴/64'],['U','π·d']]),
+        shapeCard(skRing(),'Kreisring',[['A','π(D² − d²)/4'],['I<sub>y</sub>','π(D⁴ − d⁴)/64'],['S','Mitte']]),
+        shapeCard(skHalbkreis(),'Halbkreis',[['A','π·r²/2'],['e','4r/(3π) ≈ 0,424·r'],['I<sub>y</sub>','≈ 0,1098·r⁴']]),
+        shapeCard(skSektor(),'Kreisausschnitt',[['A','α·r² (α im Bogenmaß)'],['e','2r·sin α/(3α)'],['b','Bogen 2α·r']]),
+        shapeCard(skParabelSeg(),'Parabelsegment',[['A','⅔·b·h'],['e','2h/5 über der Sehne'],['S','Mitte (symmetrisch)']]),
+        shapeCard(skZwickel(),'Parabelzwickel',[['A','⅓·b·h'],['x<sub>S</sub>','¾·b vom Scheitel'],['z<sub>S</sub>','3h/10 über der Basis']]),
       ])}
+      <div class="legend">I<sub>y</sub> jeweils um die waagerechte Schwerachse. Beim Kreisausschnitt ist α der halbe Öffnungswinkel.</div>
       <div class="info-banner">In der Statik: Die Resultierende einer Streckenlast ist gleich der Fläche der Lastfigur
         und wirkt in ihrem Schwerpunkt. Dreieckslast q, Länge L → R = qL/2 im Drittelpunkt.</div>
     </div>
   `,
 
   'mathematik/analysis/ableitungen': () => `
+    <div class="card">
+      <div class="card-title">Ableitung als Steigung</div>
+      ${fig(skAbleitung(),'Die Ableitung f′(x₀) ist die Steigung der Tangente im Punkt x₀ — Grenzwert des Differenzenquotienten Δy/Δx.')}
+    </div>
     <div class="card">
       <div class="card-title">Grundableitungen und Stammfunktionen</div>
       ${textTable(['f(x)','f′(x)','∫ f(x) dx'], [
@@ -2850,6 +3275,7 @@ Object.assign(CONTENT, {
   'mathematik/analysis/biegelinie': () => `
     <div class="card">
       <div class="card-title">Differentialgleichung der Biegelinie</div>
+      ${fig(skBiegelinie())}
       <div class="formula-box">
         EI · w″″ = q&nbsp;&nbsp;&nbsp; EI · w‴ = −Q&nbsp;&nbsp;&nbsp; EI · w″ = −M&nbsp;&nbsp;&nbsp; w′ = φ
         <div class="comment">w nach unten positiv · M positiv bei Zug unten · EI konstant</div>
@@ -3114,6 +3540,7 @@ Object.assign(CONTENT, {
     </div>
     <div class="card">
       <div class="card-title">Bauteile mit Querkraftbewehrung (lotrechte Bügel) — 6.2.3</div>
+      ${fig(skFachwerk(),'Fachwerkmodell: Die Querkraft wird über geneigte Betondruckstreben (Winkel θ) und lotrechte Bügel als Zugpfosten abgetragen.')}
       <div class="formula-box">
         V<sub>Rd,s</sub> = a<sub>sw</sub> · z · f<sub>ywd</sub> · cot θ&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,erf</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ)<br>
         V<sub>Rd,max</sub> = b<sub>w</sub> · z · ν<sub>1</sub> · f<sub>cd</sub> / (cot θ + tan θ)
@@ -3250,6 +3677,7 @@ Object.assign(CONTENT, {
         b<sub>eff,i</sub> = 0,2·b<sub>i</sub> + 0,1·l<sub>0</sub> ≤ 0,2·l<sub>0</sub>&nbsp; und&nbsp; ≤ b<sub>i</sub>
         <div class="comment">b<sub>w</sub> — Stegbreite · b<sub>i</sub> — halber lichter Abstand zum Nachbarsteg (bzw. Plattenüberstand am Rand)</div>
       </div>
+      ${fig(skPlattenbalken())}
       ${textTable(['Bereich','l_0'], [
         ['Einfeldträger','l'],
         ['Endfeld eines Durchlaufträgers','0,85·l₁'],
@@ -3301,6 +3729,7 @@ Object.assign(CONTENT, {
         v<sub>Ed</sub> = β · V<sub>Ed</sub> / (u<sub>1</sub> · d)&nbsp;&nbsp; mit&nbsp; d = (d<sub>x</sub> + d<sub>y</sub>) / 2<br>
         Rechteckstütze c<sub>x</sub> × c<sub>y</sub>:&nbsp; u<sub>1</sub> = 2·(c<sub>x</sub> + c<sub>y</sub>) + 2·π·2d&nbsp;&nbsp;·&nbsp;&nbsp;Rundstütze D:&nbsp; u<sub>1</sub> = π·(D + 4d)
       </div>
+      ${fig(skRundschnitt(),'Draufsicht Innenstütze: u<sub>1</sub> verläuft im Abstand 2d um die Stütze, an den Ecken als Viertelkreis.')}
       ${textTable(['Lage der Stütze','β (vereinfacht, DE NA)'], DS_BETA.map(([b,t])=>[t, deNum(+b,2)]))}
       <div class="legend">β erfasst die ungleichmäßige Schubverteilung aus Momenten. Die vereinfachten Werte gelten für unverschiebliche Systeme
         mit Stützweitenverhältnis 0,8 ≤ l₁/l₂ ≤ 1,25. Bei Rand- und Eckstützen wird u<sub>1</sub> nur über die Plattenseite geführt

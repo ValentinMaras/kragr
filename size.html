@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.0 -->
+<!-- Statiq·size v0.5.10 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -974,6 +974,9 @@
     <div class="seg seg-sub" id="seg-ho">
       <button data-ho="bauteil" class="active" onclick="setHoMode('bauteil')" data-i18n="hoBauteil">Träger / Stütze</button>
       <button data-ho="verbindung" onclick="setHoMode('verbindung')" data-i18n="hoVerb">Verbindung</button>
+      <button data-ho="ausklink" onclick="setHoMode('ausklink')">Ausklinkung</button>
+      <button data-ho="sattel" onclick="setHoMode('sattel')">Satteldachträger</button>
+      <button data-ho="versatz" onclick="setHoMode('versatz')">Versatz</button>
     </div>
     <div id="ho-verb" style="display:none">
     <div class="card">
@@ -1023,6 +1026,67 @@
         <div class="field full"><label><span data-i18n="hvF">Kraft F<sub>Ed</sub> [kN] (gesamt)</span></label><input type="number" step="any" id="hv-F" value="45" oninput="run()"></div>
       </div>
       <div class="hint" data-i18n="hvHint3">Angenommen: Das Hirnholzende ist belastet (a<sub>3,t</sub>), bei α = 0 ist der Rand unbelastet (a<sub>4,c</sub>), sonst belastet (a<sub>4,t</sub>). Die Stäbe einer Reihe liegen nicht versetzt.</div>
+    </div>
+    </div>
+    <div id="ho-x" style="display:none">
+    <div class="card">
+      <div class="card-title">Baustoff und Nutzung</div>
+      <div class="grid2">
+        <div class="field"><label>Holz</label><select id="hx-art" onchange="fillHxKlassen(); run()"><option value="vh">Vollholz (Nadelholz)</option><option value="bsh" selected>Brettschichtholz</option></select></div>
+        <div class="field"><label>Festigkeitsklasse</label><select id="hx-kl" onchange="run()"></select></div>
+        <div class="field"><label>Nutzungsklasse</label><select id="hx-nkl" onchange="run()"><option value="1">1 (beheizt, innen)</option><option value="2">2 (überdacht, außen)</option><option value="3">3 (bewittert)</option></select></div>
+        <div class="field"><label>KLED (kürzeste Last der Kombination)</label><select id="hx-kled" onchange="run()">
+          <option value="0">ständig</option><option value="1">lang</option><option value="2" selected>mittel (Nutzlast)</option><option value="3">kurz (Schnee)</option><option value="4">sehr kurz (Wind)</option></select></div>
+      </div>
+      <div class="hint hx-sd-hint" style="display:none">Satteldach- und Pultdachträger werden aus Brettschichtholz hergestellt — die Auswahl ist hier fest auf BSH gestellt.</div>
+    </div>
+    <div id="ho-ak">
+    <div class="card">
+      <div class="card-title">Ausklinkung am Auflager</div>
+      <div class="grid2">
+        <div class="field full"><label>Bezeichnung</label><input id="ak-name" value="Pos. 7 — Deckenbalken, Auflager A" oninput="run()"></div>
+        <div class="field"><label>Lage der Ausklinkung</label><select id="ak-lage" onchange="run()"><option value="u" selected>unten, am Auflager (Zugseite)</option><option value="o">oben, gegenüber dem Auflager</option></select></div>
+        <div class="field"><label>Breite b [mm]</label><input type="number" step="any" id="ak-b" value="120" oninput="run()"></div>
+        <div class="field"><label>Trägerhöhe h [mm]</label><input type="number" step="any" id="ak-h" value="400" oninput="run()"></div>
+        <div class="field"><label>Resthöhe h<sub>ef</sub> [mm]</label><input type="number" step="any" id="ak-hef" value="300" oninput="run()"></div>
+        <div class="field ak-x"><label>Abstand x [mm] (Auflagerkraft bis Ausklinkungsecke)</label><input type="number" step="any" id="ak-x" value="100" oninput="run()"></div>
+        <div class="field ak-x"><label>Anschnitt i (waagerecht : senkrecht, 0 = rechtwinklig)</label><input type="number" step="any" id="ak-i" value="0" oninput="run()"></div>
+        <div class="field"><label>V<sub>Ed</sub> [kN] (Auflagerkraft)</label><input type="number" step="any" id="ak-V" value="18" oninput="run()"></div>
+      </div>
+      <div class="hint">EN 1995-1-1, 6.5.2: An der einspringenden Ecke einer unteren Ausklinkung entsteht Querzug — das Holz reißt dort ein. Der Abminderungsbeiwert k<sub>v</sub> erfasst das. Ein Anschnitt (i &gt; 0) mildert die Kerbwirkung.</div>
+    </div>
+    </div>
+    <div id="ho-sd" style="display:none">
+    <div class="card">
+      <div class="card-title">Satteldach- oder Pultdachträger</div>
+      <div class="grid2">
+        <div class="field full"><label>Bezeichnung</label><input id="sd-name" value="Hallenbinder B1" oninput="run()"></div>
+        <div class="field"><label>Form</label><select id="sd-form" onchange="run()"><option value="sattel" selected>Satteldachträger (symmetrisch)</option><option value="pult">Pultdachträger</option></select></div>
+        <div class="field"><label>Stützweite L [m]</label><input type="number" step="any" id="sd-L" value="15" oninput="run()"></div>
+        <div class="field"><label>Breite b [mm]</label><input type="number" step="any" id="sd-b" value="160" oninput="run()"></div>
+        <div class="field"><label>Höhe am Auflager h<sub>0</sub> [mm]</label><input type="number" step="any" id="sd-h0" value="600" oninput="run()"></div>
+        <div class="field"><label><span class="sd-hap-l">Höhe im First h<sub>ap</sub> [mm]</span></label><input type="number" step="any" id="sd-hap" value="1200" oninput="run()"></div>
+        <div class="field"><label>q<sub>Ed</sub> [kN/m] (Gleichlast, inkl. Eigenlast)</label><input type="number" step="any" id="sd-q" value="12" oninput="run()"></div>
+      </div>
+      <div class="hint">EN 1995-1-1, 6.4: Am geneigten (angeschnittenen) Rand laufen die Fasern schräg aus — dort wirken neben σ<sub>m</sub> auch Schub und Querdruck. Beim Satteldachträger entstehen im First zusätzlich Querzugspannungen. Unterkante gerade, Last von oben.</div>
+    </div>
+    </div>
+    <div id="ho-vs" style="display:none">
+    <div class="card">
+      <div class="card-title">Versatz (Druck schräg zur Faser)</div>
+      <div class="grid2">
+        <div class="field full"><label>Bezeichnung</label><input id="vs-name" value="Sparrenfuß auf Deckenbalken" oninput="run()"></div>
+        <div class="field"><label>Versatzart</label><select id="vs-art" onchange="run()"><option value="stirn" selected>Stirnversatz (Fläche halbiert den Winkel)</option><option value="ferse">Fersenversatz (Fläche ⊥ Strebe)</option></select></div>
+        <div class="field"><label>Anschlusswinkel γ [°] (Strebe zu Gurt)</label><input type="number" step="any" id="vs-gam" value="40" oninput="run()"></div>
+        <div class="field"><label>Breite b [mm] (Strebe = Gurt)</label><input type="number" step="any" id="vs-b" value="120" oninput="run()"></div>
+        <div class="field"><label>Gurthöhe h [mm]</label><input type="number" step="any" id="vs-h" value="200" oninput="run()"></div>
+        <div class="field"><label>Versatztiefe t<sub>v</sub> [mm]</label><input type="number" step="any" id="vs-tv" value="40" oninput="run()"></div>
+        <div class="field"><label>Vorholzlänge l<sub>v</sub> [mm]</label><input type="number" step="any" id="vs-lv" value="300" oninput="run()"></div>
+        <div class="field"><label>S<sub>Ed</sub> [kN] (Druck in der Strebe)</label><input type="number" step="any" id="vs-S" value="34" oninput="run()"></div>
+        <div class="field"><label>k<sub>c,90</sub> in Gl. (6.16)</label><input type="number" step="any" id="vs-kc90" value="1" oninput="run()"></div>
+      </div>
+      <div class="hint">EN 1995-1-1, 6.2.2: Die Druckfestigkeit hängt vom Winkel α zwischen Kraft und Faser ab — zwischen f<sub>c,0</sub> (längs) und f<sub>c,90</sub> (quer). k<sub>c,90</sub> = 1 liegt auf der sicheren Seite.</div>
+    </div>
     </div>
     </div>
     <div id="ho-bauteil">
@@ -1470,7 +1534,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.9';
+const SIZE_VERSION = '0.5.10';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -2347,7 +2411,7 @@ const NICHT_ENTHALTEN = 'Zugkraftdeckung bei Durchlaufträgern und Einzellasten,
 let LAST = null;
 let MAT = 'beton';
 let STMODE = 'traeger';
-function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : runHolz()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else runBeton(); save(); renderPos(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
+function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else runBeton(); save(); renderPos(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
 function setStMode(m){ STMODE=m; showMat(); run(); }
 function showBad(bad){
   $('summary').innerHTML = `<div class="summary bad">Bitte Eingaben prüfen: ${bad.join(', ')}</div>`;
@@ -2816,6 +2880,8 @@ function showMat(){
   document.querySelectorAll('#seg-ho button').forEach(b=>b.classList.toggle('active', b.dataset.ho===HOMODE));
   $('ho-bauteil').style.display = HOMODE==='bauteil' ? '' : 'none';
   $('ho-verb').style.display = HOMODE==='verbindung' ? '' : 'none';
+  const hx = ['ausklink','sattel','versatz'].includes(HOMODE); $('ho-x').style.display = hx ? '' : 'none';
+  $('ho-ak').style.display = HOMODE==='ausklink' ? '' : 'none'; $('ho-sd').style.display = HOMODE==='sattel' ? '' : 'none'; $('ho-vs').style.display = HOMODE==='versatz' ? '' : 'none';
   document.querySelectorAll('#seg-st button').forEach(b=>b.classList.toggle('active', b.dataset.st===STMODE));
   $('st-traeger').style.display = STMODE==='traeger' ? '' : 'none';
   $('st-anschluss').style.display = STMODE==='anschluss' ? '' : 'none';
@@ -2842,7 +2908,13 @@ function showMat(){
       setzung:['Grundbau — Setzung','Setzung eines Rechteckfundaments nach DIN 4019: Spannungsausbreitung nach Steinbrenner, Grenztiefe und Summe der Schichtsetzungen mit dem Steifemodul.','Spannungen und Setzung'],
       wand:['Grundbau — Winkelstützmauer','Erddruck nach Coulomb und Nachweise nach DIN 1054 (BS-P): Gleiten, Lage der Resultierenden und Grundbruch nach DIN 4017.','Stützwand'],
       upl:['Grundbau — Auftrieb','Nachweis der Auftriebssicherheit (UPL) nach DIN EN 1997-1 mit DIN 1054 für Keller, Wannen und Becken im Grundwasser.','Auftrieb'] }[GRMODE],
-    holz: HOMODE==='verbindung'
+    holz: HOMODE==='ausklink'
+      ? ['Holz — Ausklinkung am Auflager','Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.5.2: Schub im Restquerschnitt mit dem Abminderungsbeiwert kv für die Kerbwirkung an der einspringenden Ecke.','Trägerende']
+      : HOMODE==='sattel'
+      ? ['Holz — Satteldach- und Pultdachträger','Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.4: Biegung am angeschnittenen Rand (km,α), Firstquerschnitt (kl), Querzug im First (kp, kvol, kdis) und Schub am Auflager.','Träger']
+      : HOMODE==='versatz'
+      ? ['Holz — Versatz (Druck schräg zur Faser)','Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.2.2: Stirn- und Fersenversatz mit fc,α,d, Grenzen der Versatztiefe und Abscheren des Vorholzes.','Versatz']
+      : HOMODE==='verbindung'
       ? ['Holz — Verbindungen mit Stabdübeln, Nägeln und Schrauben','Bemessung nach DIN EN 1995-1-1 mit deutschem NA, Abschnitt 8: Lochleibung, Fließmoment, alle Versagensmodi nach Johansen, Einhängeeffekt, wirksame Anzahl und Mindestabstände.','Verbindung']
       : ['Holz — Vollholz und Brettschichtholz','Bemessung nach DIN EN 1995-1-1 mit deutschem NA: Biegung, Schub, Auflagerpressung, Kippen, Knicken und Durchbiegung.','Querschnitt'] }[MAT];
   $('page-title').textContent = T[0]; $('page-sub').textContent = T[1]; $('fig-title').textContent = T[2];
@@ -5244,9 +5316,247 @@ function runHolz(){
 }
 
 // ══════════════════════════════════════════════════
+// HOLZ — Ausklinkung, Satteldach-/Pultdachträger, Versatz (EN 1995-1-1 mit NA, 6.2.2 / 6.4 / 6.5.2)
+// ══════════════════════════════════════════════════
+const HX_NAME = { ausklink:'ak-name', sattel:'sd-name', versatz:'vs-name' };
+function fillHxKlassen(){
+  if(HOMODE==='sattel') $('hx-art').value='bsh';
+  const art=$('hx-art').value, cur=$('hx-kl').value, T = art==='bsh' ? HOLZ_BSH : HOLZ_VH;
+  $('hx-kl').innerHTML = T.map(r=>`<option${r[0]===cur?' selected':''}>${r[0]}</option>`).join('');
+  if(!T.some(r=>r[0]===cur)) $('hx-kl').value = art==='bsh' ? 'GL24h' : 'C24';
+}
+// Baustoff: Bemessungswerte ohne k_h (der wird je nach Höhe gesondert angesetzt)
+function hxMat(){
+  const art=$('hx-art').value, R=holzRow(art, $('hx-kl').value), nkl=+$('hx-nkl').value, kled=+$('hx-kled').value, kmod=KMOD_[nkl][kled], bsh=art==='bsh';
+  const [kl, fmk, ft0k, ft90k, fc0k, fc90k, fvk] = R, d = x => kmod*x/gMH;
+  return { art, bsh, R, kl, nkl, kled, kmod, fmk, ft90k, fc0k, fc90k, fvk, fmd:d(fmk), ft90d:d(ft90k), fc0d:d(fc0k), fc90d:d(fc90k), fvd:d(fvk), kcr:(bsh?2.5:2.0)/fvk,
+    kh: h => bsh ? (h<600 ? Math.min((600/h)**0.1, 1.1) : 1) : (h<150 ? Math.min((150/h)**0.2, 1.3) : 1) };
+}
+function hxMatSteps(M, extra=[]){
+  return [H('Baustoff'), `${M.kl} (${M.bsh?'Brettschichtholz, EN 14080':'Vollholz Nadelholz, EN 338'}) · f<sub>m,k</sub> = ${dk(M.fmk)} · f<sub>v,k</sub> = ${dk(M.fvk)} · f<sub>c,0,k</sub> = ${dk(M.fc0k)} · f<sub>c,90,k</sub> = ${dk(M.fc90k)} · f<sub>t,90,k</sub> = ${dk(M.ft90k)} N/mm²`,
+    H('Bemessungswerte: f<sub>d</sub> = k<sub>mod</sub>·f<sub>k</sub>/γ<sub>M</sub>'),
+    `Nutzungsklasse ${M.nkl} · KLED „${KLED_[M.kled]}“ → k<sub>mod</sub> = ${deNum(M.kmod,2)} · γ<sub>M</sub> = 1,3`,
+    `f<sub>m,d</sub> = ${deNum(M.fmd,2)} (ohne k<sub>h</sub>) · f<sub>v,d</sub> = ${deNum(M.fvd,2)} · f<sub>c,0,d</sub> = ${deNum(M.fc0d,2)} · f<sub>c,90,d</sub> = ${deNum(M.fc90d,3)} · f<sub>t,90,d</sub> = ${deNum(M.ft90d,3)} N/mm²`, ...extra];
+}
+
+// ── Ausklinkung am Auflager (6.5.2) ──
+function readAK(){ return { M:hxMat(), name:$('ak-name').value, lage:$('ak-lage').value, b:num('ak-b'), h:num('ak-h'), hef:num('ak-hef'), x:num('ak-x')||0, i:num('ak-i')||0, V:num('ak-V') }; }
+function validateAK(I){ const bad=[]; if(!(I.b>0 && I.h>0)) bad.push('b, h > 0'); if(!(I.hef>0 && I.hef<I.h)) bad.push('0 < h_ef < h'); if(!(I.x>=0)) bad.push('x ≥ 0'); if(!(I.i>=0)) bad.push('i ≥ 0'); if(!(I.V>0)) bad.push('V_Ed > 0'); return bad; }
+// k_v nach Gl. (6.62); unten ausgeklinkt (Auflagerseite). k_n: Vollholz 5, BSH 6,5 (h in mm)
+function akKv(kn, h, al, x, i){ return Math.min(1, kn*(1 + 1.1*i**1.5/Math.sqrt(h)) / (Math.sqrt(h)*(Math.sqrt(al*(1-al)) + 0.8*x/h*Math.sqrt(1/al - al*al)))); }
+function nachweiseAK(I){
+  const M=I.M, C=[], al=I.hef/I.h, kn=M.bsh?6.5:5, unten=I.lage==='u';
+  C.push({ id:'akb', title:'Baustoff und Bemessungswerte', eta:0, ok:true, info:true, steps:hxMatSteps(M, [H('Risse: wirksame Breite für Schub'), `k<sub>cr</sub> = ${M.bsh?'2,5':'2,0'}/f<sub>v,k</sub> = ${deNum(M.kcr,3)} → b<sub>ef</sub> = k<sub>cr</sub>·b = ${deNum(M.kcr*I.b,1)} mm`]) });
+  const kv = unten ? akKv(kn, I.h, al, I.x, I.i) : 1, bef=M.kcr*I.b, td=1.5*I.V*1000/(bef*I.hef), R=kv*M.fvd;
+  const S=[H('Geometrie der Ausklinkung'), `α = h<sub>ef</sub>/h = ${deNum(I.hef,0)}/${deNum(I.h,0)} = <b>${deNum(al,3)}</b>${unten?` · x = ${deNum(I.x,0)} mm · i = ${deNum(I.i,2)}`:''}`];
+  if(unten) S.push(H('Abminderung k<sub>v</sub> für die untere Ausklinkung (Gl. 6.62)'),
+    `k<sub>n</sub> = ${M.bsh?'6,5 (BSH)':'5 (Vollholz)'}`,
+    `k<sub>v</sub> = min{1; k<sub>n</sub>·(1 + 1,1·i<sup>1,5</sup>/√h) / (√h·(√(α(1−α)) + 0,8·x/h·√(1/α − α²)))}`,
+    `= ${deNum(kn,1)}·(1 + 1,1·${deNum(I.i,2)}<sup>1,5</sup>/√${deNum(I.h,0)}) / (√${deNum(I.h,0)}·(${deNum(Math.sqrt(al*(1-al)),3)} + 0,8·${deNum(I.x/I.h,3)}·${deNum(Math.sqrt(1/al-al*al),3)})) = <b>${deNum(kv,3)}</b>`);
+  else S.push(H('Ausklinkung oben (gegenüber dem Auflager)'), 'Die einspringende Ecke liegt in der Druckzone — keine Abminderung: k<sub>v</sub> = 1,0');
+  S.push(H('Schubspannung im Restquerschnitt'), `τ<sub>d</sub> = 1,5·V<sub>Ed</sub>/(b<sub>ef</sub>·h<sub>ef</sub>) = 1,5·${deNum(I.V,1)}·10³/(${deNum(bef,1)}·${deNum(I.hef,0)}) = <b>${deNum(td,3)} N/mm²</b>`,
+    H('Nachweis (Gl. 6.60)'), `${deNum(td,3)} N/mm² ${td<=R?'≤':'>'} k<sub>v</sub>·f<sub>v,d</sub> = ${deNum(kv,3)}·${deNum(M.fvd,2)} = ${deNum(R,3)} N/mm²`);
+  C.push({ id:'akv', title:'Schub an der Ausklinkung', eta:td/R, ok:td<=R, steps:S,
+    note: td>R ? (unten ? 'Ausklinkung flacher machen (größeres h<sub>ef</sub>), anschneiden (i &gt; 0), Auflager näher an die Ecke rücken (kleineres x) oder die Ecke mit Vollgewindeschrauben verstärken.' : 'Resthöhe h<sub>ef</sub> oder Breite vergrößern.') : '' });
+  const kr=[H('Konstruktive Regeln (übliche Praxis, z. B. nach DIN 1052 / Fachliteratur)'),
+    `α = ${deNum(al,2)} ${al>=0.5?'≥':'<'} 0,5 — tiefere Ausklinkungen nur mit Verstärkung ausführen`];
+  if(unten) kr.push(`Ausklinkungstiefe h − h<sub>ef</sub> = ${deNum(I.h-I.hef,0)} mm${I.i>0?` · Anschnittlänge i·(h − h<sub>ef</sub>) = ${deNum(I.i*(I.h-I.hef),0)} mm`:''}`);
+  C.push({ id:'akr', title:'Konstruktive Hinweise', eta:0, ok:true, info:true, steps:kr, note: al<0.5 ? 'α &lt; 0,5: Die Ausklinkung ist sehr tief. Querzugverstärkung (z. B. Vollgewindeschrauben) vorsehen oder Querschnitt ändern.' : '' });
+  return { C, ok:C.every(c=>c.ok), kv, td, al };
+}
+function figAK(I, res){
+  const sc=Math.min(150/I.h, 1.2), H=I.h*sc, He=I.hef*sc, top=24, bot=top+H, x0=30, xs=x0+34, xc=xs+I.x*sc, Lb=Math.max(xc+I.i*(H-He)+180, 360), unten=I.lage==='u';
+  const T=(x,y,t,a='middle',c='#111')=>svgT(x,y,t,a,c);
+  let s=`<svg viewBox="0 0 ${Lb+40} ${bot+70}" width="${Lb+40}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ausklinkung am Auflager">`;
+  const pts = unten ? [[x0,top],[Lb,top],[Lb,bot],[xc+I.i*(H-He),bot],[xc,top+He],[x0,top+He]] : [[x0,top+H-He],[xc,top+H-He],[xc,top],[Lb,top],[Lb,bot],[x0,bot]];
+  s+=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="#f3ead9" stroke="#111" stroke-width="1.4"/>`;
+  for(let k=1;k<5;k++){ const y=top+H*k/5; s+=`<path d="M ${x0+8} ${y} q ${(Lb-x0)*0.4} -3 ${Lb-x0-16} 0" fill="none" stroke="#b07c3a" stroke-width="0.5" opacity="0.45"/>`; }
+  const ySup = unten ? top+He : bot;
+  s+=`<polygon points="${xs},${ySup} ${xs-9},${ySup+15} ${xs+9},${ySup+15}" fill="#fff" stroke="#111" stroke-width="1.2"/><line x1="${xs-14}" y1="${ySup+15}" x2="${xs+14}" y2="${ySup+15}" stroke="#111" stroke-width="1.2"/>`;
+  s+=svgArrow(xs, ySup+48, xs, ySup+18, C_EW)+T(xs+8, ySup+44, sub('V','Ed'), 'start', C_EW);
+  if(unten){ s+=`<path d="M ${xc} ${top+He} l ${-6} ${-14} M ${xc} ${top+He} l ${8} ${-12}" stroke="${C_IN}" stroke-width="1.2" stroke-dasharray="3 2"/>`+T(xc+12, top+He-14, 'Riss­gefahr', 'start', C_IN);
+    s+=`<line x1="${xs}" y1="${bot+12}" x2="${xc}" y2="${bot+12}" stroke="#6b7280" stroke-width="0.8"/>`+T((xs+xc)/2, bot+24, 'x'); }
+  // Maße h, h_ef
+  const xd=Lb+14; s+=`<line x1="${xd}" y1="${top}" x2="${xd}" y2="${bot}" stroke="#6b7280" stroke-width="0.8"/>`+T(xd+4, (top+bot)/2+3, 'h', 'start');
+  const yA = unten ? top : bot-He, yB = unten ? top+He : bot, xe=x0-10;
+  s+=`<line x1="${xe}" y1="${yA}" x2="${xe}" y2="${yB}" stroke="#6b7280" stroke-width="0.8"/>`+T(xe-3, (yA+yB)/2+3, sub('h','ef'), 'end');
+  s+='</svg>';
+  return s + figLegend([`V<sub>Ed</sub> = ${deNum(I.V,1)} kN`], [`k<sub>v</sub> = ${deNum(res.kv,3)} · τ<sub>d</sub> = ${deNum(res.td,2)} N/mm²`], unten ? 'An der einspringenden Ecke der unteren Ausklinkung wirkt Querzug — dort reißt das Holz zuerst ein.' : 'Obere Ausklinkung: die Ecke liegt in der Druckzone.');
+}
+
+// ── Satteldach- und Pultdachträger (6.4.2, 6.4.3) ──
+function readSD(){ return { M:hxMat(), name:$('sd-name').value, form:$('sd-form').value, L:num('sd-L'), b:num('sd-b'), h0:num('sd-h0'), hap:num('sd-hap'), q:num('sd-q') }; }
+function validateSD(I){ const bad=[]; if(!(I.L>0 && I.b>0)) bad.push('L, b > 0'); if(!(I.h0>0 && I.hap>I.h0)) bad.push('0 < h_0 < h_ap'); if(!(I.q>0)) bad.push('q_Ed > 0'); if(!I.M.bsh) bad.push('Brettschichtholz wählen'); return bad; }
+// Höhe h(x) [mm] und Moment M(x) [kNm] (x in m vom niedrigen Auflager)
+const sdGeo = I => { const sat=I.form==='sattel', run=sat?I.L/2:I.L, ta=(I.hap-I.h0)/(run*1000);
+  return { sat, ta, al:Math.atan(ta), h:x=> sat ? I.h0 + ta*1000*Math.min(x, I.L-x) : I.h0 + ta*1000*x, M:x=> I.q*x*(I.L-x)/2 }; };
+function sdKma(M, ta, fmd){ return 1/Math.sqrt(1 + (fmd/(1.5*M.fvd)*ta)**2 + (fmd/M.fc90d*ta*ta)**2); }
+function nachweiseSD(I){
+  const M=I.M, G=sdGeo(I), C=[], b=I.b, aDeg=G.al*180/Math.PI;
+  C.push({ id:'sdb', title:'Baustoff, Geometrie und Bemessungswerte', eta:0, ok:true, info:true, steps:hxMatSteps(M, [H('Neigung des angeschnittenen Randes'),
+    `tan α = (h<sub>ap</sub> − h<sub>0</sub>)/${G.sat?'(L/2)':'L'} = (${deNum(I.hap,0)} − ${deNum(I.h0,0)})/${deNum((G.sat?I.L/2:I.L)*1000,0)} = ${deNum(G.ta,4)} → <b>α = ${deNum(aDeg,2)}°</b>`]) });
+  // 1) Biegung am angeschnittenen Rand: Größtwert von σ(x) = 6M(x)/(b·h(x)²) numerisch suchen (Druck am geneigten Rand)
+  const sig = x => 6*G.M(x)*1e6/(b*G.h(x)**2), lim = G.sat ? I.L/2 : I.L;
+  let xm=0, sm=0; for(let k=0;k<=2000;k++){ const x=lim*k/2000, v=sig(x); if(v>sm){ sm=v; xm=x; } }
+  for(let r=lim/2000, k=0;k<40;k++, r/=2){ [xm-r, xm+r].forEach(x=>{ if(x>0 && x<=lim && sig(x)>sm){ sm=sig(x); xm=x; } }); }
+  const hx=G.h(xm), kh=M.kh(hx), fmd=kh*M.fmd, kma=sdKma(M, G.ta, fmd), R=kma*fmd;
+  const xTh = G.sat ? I.L*I.h0/(2*I.hap) : I.L*I.h0/(I.h0+I.hap);
+  C.push({ id:'sdm', title:'Biegung am angeschnittenen Rand', eta:sm/R, ok:sm<=R, steps:[
+    H('Maßgebende Stelle: wegen der veränderlichen Höhe liegt sie nicht in Feldmitte'),
+    `größte Randspannung bei x = ${deNum(xm,2)} m vom Auflager (Gleichlast: x = ${G.sat?'L·h<sub>0</sub>/(2·h<sub>ap</sub>)':'L·h<sub>0</sub>/(h<sub>0</sub> + h<sub>ap</sub>)'} = ${deNum(xTh,2)} m)`,
+    `h(x) = ${deNum(hx,0)} mm · M<sub>Ed</sub>(x) = q·x·(L − x)/2 = ${deNum(G.M(xm),1)} kNm`,
+    H('Biegespannung am Rand (Gl. 6.37)'),
+    `σ<sub>m,α,d</sub> = σ<sub>m,0,d</sub> = 6·M<sub>Ed</sub>/(b·h²) = 6·${deNum(G.M(xm),1)}·10⁶/(${deNum(b,0)}·${deNum(hx,0)}²) = <b>${deNum(sm,2)} N/mm²</b>`,
+    H('Abminderung k<sub>m,α</sub> für den gedrückten angeschnittenen Rand (Gl. 6.40)'),
+    `k<sub>h</sub> = (600/h)<sup>0,1</sup> ≤ 1,1 = ${deNum(kh,3)} → f<sub>m,d</sub> = ${deNum(fmd,2)} N/mm²`,
+    `k<sub>m,α</sub> = 1/√(1 + (f<sub>m,d</sub>/(1,5·f<sub>v,d</sub>)·tan α)² + (f<sub>m,d</sub>/f<sub>c,90,d</sub>·tan²α)²) = <b>${deNum(kma,3)}</b>`,
+    H('Nachweis (Gl. 6.38)'), `${deNum(sm,2)} N/mm² ${sm<=R?'≤':'>'} k<sub>m,α</sub>·f<sub>m,d</sub> = ${deNum(R,2)} N/mm²`],
+    note: aDeg>10 ? 'Neigung über 10°: k<sub>m,α</sub> fällt stark ab — flachere Dachneigung oder Satteldachträger mit gekrümmtem Untergurt erwägen.' : '' });
+  const res={ C, xm, sm, kma, G };
+  // 2) Firstbereich (nur Satteldachträger): Biegung mit k_l und Querzug mit k_p, k_vol, k_dis
+  if(G.sat){
+    const Map=I.q*I.L*I.L/8, s0=6*Map*1e6/(b*I.hap**2), kl=1+1.4*G.ta+5.4*G.ta**2, khap=M.kh(I.hap), fmd2=khap*M.fmd, sF=kl*s0;
+    C.push({ id:'sdf', title:'Biegung im Firstquerschnitt', eta:sF/fmd2, ok:sF<=fmd2, steps:[
+      H('Moment im First'), `M<sub>ap,d</sub> = q·L²/8 = ${deNum(I.q,1)}·${deNum(I.L,2)}²/8 = ${deNum(Map,1)} kNm`,
+      H('Spannungserhöhung im First: Faserumlenkung (Gl. 6.42, 6.43; gerader Untergurt → k<sub>l</sub> = k<sub>1</sub>)'),
+      `k<sub>l</sub> = 1 + 1,4·tan α + 5,4·tan²α = <b>${deNum(kl,3)}</b>`,
+      `σ<sub>m,d</sub> = k<sub>l</sub>·6·M<sub>ap,d</sub>/(b·h<sub>ap</sub>²) = ${deNum(kl,3)}·${deNum(s0,2)} = <b>${deNum(sF,2)} N/mm²</b>`,
+      H('Nachweis (Gl. 6.41, k<sub>r</sub> = 1)'), `${deNum(sF,2)} N/mm² ${sF<=fmd2?'≤':'>'} k<sub>r</sub>·f<sub>m,d</sub> = ${deNum(fmd2,2)} N/mm² (k<sub>h</sub> = ${deNum(khap,3)})`] });
+    const kp=0.2*G.ta, st=kp*6*Map*1e6/(b*I.hap**2);
+    const Vap0=b/1000*(I.hap/1000)**2*(1-G.ta/4), Vtot=b/1000*I.L*(I.h0+I.hap)/2/1000, Vap=Math.min(Vap0, 2/3*Vtot), kvol=(0.01/Vap)**0.2, kdis=1.4, Rt=kdis*kvol*M.ft90d;
+    C.push({ id:'sdt', title:'Querzug im Firstbereich', eta:st/Rt, ok:st<=Rt, steps:[
+      H('Querzugspannung im First (Gl. 6.54, gerader Untergurt → k<sub>p</sub> = k<sub>5</sub>)'),
+      `k<sub>p</sub> = 0,2·tan α = ${deNum(kp,4)}`,
+      `σ<sub>t,90,d</sub> = k<sub>p</sub>·6·M<sub>ap,d</sub>/(b·h<sub>ap</sub>²) = <b>${deNum(st,3)} N/mm²</b>`,
+      H('Volumeneffekt: je größer das beanspruchte Volumen, desto wahrscheinlicher ein Fehler im Holz'),
+      `V = b·h<sub>ap</sub>²·(1 − tan α/4) = ${deNum(Vap0,4)} m³ (≤ 2/3·V<sub>b</sub> = ${deNum(2/3*Vtot,3)} m³) → V = ${deNum(Vap,4)} m³`,
+      `k<sub>vol</sub> = (V<sub>0</sub>/V)<sup>0,2</sup> = (0,01/${deNum(Vap,4)})<sup>0,2</sup> = ${deNum(kvol,3)} · k<sub>dis</sub> = 1,4 (Satteldachträger)`,
+      H('Nachweis (Gl. 6.50)'), `${deNum(st,3)} N/mm² ${st<=Rt?'≤':'>'} k<sub>dis</sub>·k<sub>vol</sub>·f<sub>t,90,d</sub> = 1,4·${deNum(kvol,3)}·${deNum(M.ft90d,3)} = ${deNum(Rt,3)} N/mm²`],
+      note: st>Rt ? 'Querzug im First zu groß: Querzugverstärkung (eingeklebte Gewindestangen, Vollgewindeschrauben) oder aufgesetzter Firstkeil.' : 'Bei Satteldachträgern zusätzlich die klimabedingten Querzugspannungen beachten — Verstärkungen im First sind in der Praxis üblich.' });
+    Object.assign(res, { Map, kl, kp, kvol, Vap });
+  }
+  // 3) Schub am Auflager (Höhe h0)
+  const V=I.q*I.L/2, td=1.5*V*1000/(M.kcr*b*I.h0);
+  C.push({ id:'sdv', title:'Schub am Auflager', eta:td/M.fvd, ok:td<=M.fvd, steps:[
+    `V<sub>Ed</sub> = q·L/2 = ${deNum(V,1)} kN · b<sub>ef</sub> = k<sub>cr</sub>·b = ${deNum(M.kcr*b,1)} mm`,
+    `τ<sub>d</sub> = 1,5·V<sub>Ed</sub>/(b<sub>ef</sub>·h<sub>0</sub>) = <b>${deNum(td,3)} N/mm²</b> ${td<=M.fvd?'≤':'>'} f<sub>v,d</sub> = ${deNum(M.fvd,2)} N/mm²`] });
+  res.ok = C.every(c=>c.ok); return res;
+}
+function figSD(I, res){
+  const G=res.G, W=380, x0=30, yb=150, hs=Math.min(100/I.hap, 0.12), X=x=>x0+W*x/I.L, Hh=x=>G.h(x)*hs;
+  const T=(x,y,t,a='middle',c='#111')=>svgT(x,y,t,a,c);
+  let s=`<svg viewBox="0 0 ${W+70} ${yb+62}" width="${W+70}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Satteldachträger">`;
+  const top = G.sat ? [[X(0),yb-Hh(0)],[X(I.L/2),yb-Hh(I.L/2)],[X(I.L),yb-Hh(I.L)]] : [[X(0),yb-Hh(0)],[X(I.L),yb-Hh(I.L)]];
+  s+=`<polygon points="${[...top,[X(I.L),yb],[X(0),yb]].map(p=>p.map(v=>Math.round(v*10)/10).join(',')).join(' ')}" fill="#f3ead9" stroke="#111" stroke-width="1.4"/>`;
+  if(G.sat){ const w=I.hap/1000/2; s+=`<polygon points="${X(I.L/2-w)},${yb-Hh(I.L/2-w)} ${X(I.L/2)},${yb-Hh(I.L/2)} ${X(I.L/2+w)},${yb-Hh(I.L/2+w)} ${X(I.L/2+w)},${yb} ${X(I.L/2-w)},${yb}" fill="${C_IN}" fill-opacity="0.12" stroke="${C_IN}" stroke-width="0.8" stroke-dasharray="3 2"/>`+T(X(I.L/2), yb+14, 'Firstbereich', 'middle', C_IN); }
+  for(let k=0;k<=12;k++){ const x=I.L*k/12, y=yb-Hh(x); s+=svgArrow(X(x), y-20, X(x), y-2, C_EW, false, 1.1); }
+  s+=T(X(I.L*0.25)-4, yb-Hh(I.L*0.25)-26, sub('q','Ed'), 'middle', C_EW);
+  const xm=res.xm; s+=`<line x1="${X(xm)}" y1="${yb-Hh(xm)-2}" x2="${X(xm)}" y2="${yb+2}" stroke="${C_IN}" stroke-width="1.2" stroke-dasharray="4 2"/>`+T(X(xm)+4, yb-Hh(xm)/2, `x = ${deNum(xm,2)} m`, 'start', C_IN);
+  [0, I.L].forEach(x=>{ s+=`<polygon points="${X(x)},${yb} ${X(x)-8},${yb+13} ${X(x)+8},${yb+13}" fill="#fff" stroke="#111" stroke-width="1.1"/>`; });
+  s+=T(X(0)-6, yb-Hh(0)/2+3, sub('h','0'), 'end')+(G.sat ? `<line x1="${X(I.L/2)}" y1="${yb-Hh(I.L/2)}" x2="${X(I.L/2)}" y2="${yb}" stroke="#6b7280" stroke-width="0.8"/>`+T(X(I.L/2)+4, yb-Hh(I.L/2)/2+3, sub('h','ap'), 'start') : T(X(I.L)+6, yb-Hh(I.L)/2+3, sub('h','ap'), 'start'));
+  s+=`<line x1="${X(0)}" y1="${yb+30}" x2="${X(I.L)}" y2="${yb+30}" stroke="#6b7280" stroke-width="0.8"/>`+T((X(0)+X(I.L))/2, yb+44, `L = ${deNum(I.L,2)} m`);
+  s+=T(X(G.sat?I.L*0.12:I.L*0.5), yb-Hh(G.sat?I.L*0.12:I.L*0.5)-30, `α = ${deNum(G.al*180/Math.PI,1)}°`, 'middle', '#111');
+  s+='</svg>';
+  return s + figLegend([`q<sub>Ed</sub> = ${deNum(I.q,1)} kN/m`], [`σ<sub>m,α,d</sub> = ${deNum(res.sm,2)} N/mm² bei x = ${deNum(xm,2)} m · k<sub>m,α</sub> = ${deNum(res.kma,3)}`], 'Höhen überhöht dargestellt. Blau gestrichelt: maßgebender Schnitt am angeschnittenen Rand.');
+}
+
+// ── Versatz: Druck schräg zur Faser (6.2.2) ──
+function readVS(){ return { M:hxMat(), name:$('vs-name').value, art:$('vs-art').value, gam:num('vs-gam'), b:num('vs-b'), h:num('vs-h'), tv:num('vs-tv'), lv:num('vs-lv'), S:num('vs-S'), kc90:num('vs-kc90') }; }
+function validateVS(I){ const bad=[]; if(!(I.gam>0 && I.gam<90)) bad.push('0° < γ < 90°'); if(!(I.b>0 && I.h>0)) bad.push('b, h > 0'); if(!(I.tv>0 && I.tv<I.h)) bad.push('0 < t_v < h'); if(!(I.lv>0)) bad.push('l_v > 0'); if(!(I.S>0)) bad.push('S_Ed > 0'); if(!(I.kc90>=1 && I.kc90<=1.75)) bad.push('1 ≤ k_c,90 ≤ 1,75'); return bad; }
+const fcAlpha = (M, a, kc90) => M.fc0d/(M.fc0d/(kc90*M.fc90d)*Math.sin(a)**2 + Math.cos(a)**2);
+function nachweiseVS(I){
+  const M=I.M, C=[], g=rad(I.gam), stirn=I.art==='stirn';
+  C.push({ id:'vsb', title:'Baustoff und Bemessungswerte', eta:0, ok:true, info:true, steps:hxMatSteps(M) });
+  const a = stirn ? g/2 : g, fca=fcAlpha(M, a, I.kc90);
+  const sig = stirn ? I.S*1000*Math.cos(g/2)**2/(I.b*I.tv) : I.S*1000*Math.cos(g)/(I.b*I.tv);
+  C.push({ id:'vsc', title:'Druck schräg zur Faser in der Versatzfläche', eta:sig/fca, ok:sig<=fca, steps:[
+    H(stirn ? 'Stirnversatz: Die Fläche halbiert den stumpfen Winkel — Kraft und Faser schließen in Gurt und Strebe den Winkel γ/2 ein' : 'Fersenversatz: Die Fläche steht senkrecht zur Strebe — im Gurt wirkt die Kraft unter dem Winkel γ zur Faser'),
+    stirn ? `Kraft auf die Fläche F = S·cos(γ/2), Fläche A = b·t<sub>v</sub>/cos(γ/2)` : `Kraft auf die Fläche F = S, Fläche A = b·t<sub>v</sub>/cos γ`,
+    stirn ? `σ<sub>c,α,d</sub> = S<sub>Ed</sub>·cos²(γ/2)/(b·t<sub>v</sub>) = ${deNum(I.S,1)}·10³·cos²(${deNum(I.gam/2,1)}°)/(${deNum(I.b,0)}·${deNum(I.tv,0)}) = <b>${deNum(sig,2)} N/mm²</b>`
+          : `σ<sub>c,α,d</sub> = S<sub>Ed</sub>·cos γ/(b·t<sub>v</sub>) = ${deNum(I.S,1)}·10³·cos ${deNum(I.gam,1)}°/(${deNum(I.b,0)}·${deNum(I.tv,0)}) = <b>${deNum(sig,2)} N/mm²</b>`,
+    H(`Druckfestigkeit unter dem Winkel α = ${deNum(a*180/Math.PI,1)}° (Gl. 6.16)`),
+    `f<sub>c,α,d</sub> = f<sub>c,0,d</sub>/((f<sub>c,0,d</sub>/(k<sub>c,90</sub>·f<sub>c,90,d</sub>))·sin²α + cos²α) = ${deNum(M.fc0d,2)}/((${deNum(M.fc0d,2)}/(${deNum(I.kc90,2)}·${deNum(M.fc90d,3)}))·${deNum(Math.sin(a)**2,4)} + ${deNum(Math.cos(a)**2,4)}) = <b>${deNum(fca,2)} N/mm²</b>`,
+    H('Nachweis'), `${deNum(sig,2)} N/mm² ${sig<=fca?'≤':'>'} f<sub>c,α,d</sub> = ${deNum(fca,2)} N/mm²`],
+    note: sig>fca ? 'Versatztiefe vergrößern (Grenze beachten), breiteren Querschnitt wählen oder einen doppelten Versatz ausführen.' : '' });
+  // Versatztiefe (Konstruktionsregel nach DIN EN 1995-1-1/NA bzw. DIN 1052): einseitig h/4 (γ ≤ 50°) … h/6 (γ > 60°)
+  const tmaxF = I.gam<=50 ? 1/4 : I.gam>=60 ? 1/6 : 1/4 - (I.gam-50)/10*(1/4-1/6), tmax=tmaxF*I.h;
+  C.push({ id:'vst', title:'Versatztiefe', eta:I.tv/tmax, ok:I.tv<=tmax, steps:[
+    H('Der Versatz schwächt den Gurt — die Tiefe ist begrenzt'),
+    `γ ≤ 50°: t<sub>v</sub> ≤ h/4 · γ ≥ 60°: t<sub>v</sub> ≤ h/6 · dazwischen linear`,
+    `t<sub>v,max</sub> = ${I.gam<=50?'h/4':I.gam>=60?'h/6':`h·${deNum(tmaxF,4)}`} = ${deNum(tmax,1)} mm → t<sub>v</sub> = ${deNum(I.tv,0)} mm ${I.tv<=tmax?'≤':'>'} ${deNum(tmax,1)} mm`] });
+  // Vorholz: Abscheren auf der Länge l_v (wirksam höchstens 8·t_v)
+  const Hk=I.S*Math.cos(g), lef=Math.min(I.lv, 8*I.tv), tau=Hk*1000/(I.b*lef);
+  C.push({ id:'vsv', title:'Abscheren des Vorholzes', eta:tau/M.fvd, ok:tau<=M.fvd, steps:[
+    H('Die waagerechte Komponente der Strebenkraft schiebt das Vorholz ab'),
+    `H<sub>d</sub> = S<sub>Ed</sub>·cos γ = ${deNum(I.S,1)}·cos ${deNum(I.gam,1)}° = ${deNum(Hk,2)} kN`,
+    `wirksame Vorholzlänge l<sub>v,ef</sub> = min(l<sub>v</sub>; 8·t<sub>v</sub>) = min(${deNum(I.lv,0)}; ${deNum(8*I.tv,0)}) = ${deNum(lef,0)} mm`,
+    `τ<sub>d</sub> = H<sub>d</sub>/(b·l<sub>v,ef</sub>) = ${deNum(Hk,2)}·10³/(${deNum(I.b,0)}·${deNum(lef,0)}) = <b>${deNum(tau,3)} N/mm²</b> ${tau<=M.fvd?'≤':'>'} f<sub>v,d</sub> = ${deNum(M.fvd,2)} N/mm²`],
+    note: 'Ohne Rissabminderung k<sub>cr</sub> (keine Biegeschubspannung). Die Lagesicherung (Bolzen, Bauklammern) ist gesondert zu planen.' });
+  return { C, ok:C.every(c=>c.ok), sig, fca, a, tau, tmax, lef };
+}
+const R1s = v => Math.round(v*10)/10;
+function figVS(I, res){
+  const W=420, x0=24, yc=96, sc=Math.min(80/I.h, 160/(I.lv+I.tv*3), 0.9), hh=I.h*sc, tv=I.tv*sc, g=rad(I.gam), stirn=I.art==='stirn', fa=stirn?g/2:g;
+  const T=(x,y,t,a='middle',c='#111')=>svgT(x,y,t,a,c);
+  const Px=x0+I.lv*sc, Py=yc+tv, Fx=Px-tv*Math.tan(fa), Bx=Px+tv/Math.tan(g);
+  let s=`<svg viewBox="0 0 ${W} ${yc+hh+52}" width="${W}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Versatz">`;
+  // Gurt mit Kerbe
+  s+=`<polygon points="${x0},${yc} ${Fx},${yc} ${Px},${Py} ${Bx},${yc} ${W-10},${yc} ${W-10},${yc+hh} ${x0},${yc+hh}" fill="#f3ead9" stroke="#111" stroke-width="1.4"/>`;
+  // Strebe (Dicke d = h, in Richtung γ nach rechts oben)
+  const ux=Math.cos(g), uy=-Math.sin(g), nx=Math.sin(g), ny=Math.cos(g), dS=Math.min(hh, 70), Ls=Math.min(200, (yc-8)/Math.sin(g), (W-30-Px)/Math.cos(g));
+  // Strebe als Parallelogramm: Unterkante durch P→B, Oberkante parallel durch F
+  const dirLen=Ls;
+  s+=`<polygon points="${R1s(Px)},${R1s(Py)} ${R1s(Px+ux*dirLen)},${R1s(Py+uy*dirLen)} ${R1s(Fx+ux*dirLen-nx*dS*0.6)},${R1s(yc+uy*dirLen-ny*dS*0.6)} ${R1s(Fx-nx*dS*0.6)},${R1s(yc-ny*dS*0.6)} ${R1s(Fx)},${yc}" fill="#ece3d0" stroke="#111" stroke-width="1.3"/>`;
+  s+=`<line x1="${R1s(Fx)}" y1="${yc}" x2="${R1s(Px)}" y2="${R1s(Py)}" stroke="${C_IN}" stroke-width="3"/>`;
+  // Kraft S in Strebenachse
+  const mx=(Px+Fx)/2+ux*Ls*0.75-nx*dS*0.15, my=(Py+yc)/2+uy*Ls*0.75-ny*dS*0.15;
+  s+=svgArrow(mx, my, mx-ux*55, my-uy*55, C_EW)+T(mx+6, my-6, sub('S','Ed'), 'start', C_EW);
+  // Maße
+  s+=`<line x1="${x0}" y1="${yc+hh+14}" x2="${R1s(Px)}" y2="${yc+hh+14}" stroke="#6b7280" stroke-width="0.8"/>`+T((x0+Px)/2, yc+hh+28, sub('l','v'));
+  s+=`<line x1="${x0}" y1="${R1s(Py)}" x2="${R1s(Px)}" y2="${R1s(Py)}" stroke="${C_EW}" stroke-width="0.9" stroke-dasharray="4 3"/>`+T(x0+8, Py+12, 'Scherfuge', 'start', C_EW);
+  s+=`<line x1="${R1s(Px+10)}" y1="${yc}" x2="${R1s(Px+10)}" y2="${R1s(Py)}" stroke="#6b7280" stroke-width="0.8"/>`+T(Px+14, yc+tv/2+4, sub('t','v'), 'start');
+  s+=`<path d="M ${R1s(Bx+34)} ${yc} A 34 34 0 0 0 ${R1s(Bx+34*ux)} ${R1s(yc+34*uy)}" fill="none" stroke="#111" stroke-width="0.9"/>`+T(Bx+42, yc-8, 'γ', 'start');
+  s+=`<line x1="${W-24}" y1="${yc}" x2="${W-24}" y2="${yc+hh}" stroke="#6b7280" stroke-width="0.8"/>`+T(W-28, yc+hh/2+3, 'h', 'end');
+  s+='</svg>';
+  return s + figLegend([`S<sub>Ed</sub> = ${deNum(I.S,1)} kN`], [`σ<sub>c,α,d</sub> = ${deNum(res.sig,2)} N/mm² ≤ f<sub>c,α,d</sub> = ${deNum(res.fca,2)} N/mm² (α = ${deNum(res.a*180/Math.PI,1)}°)`, `τ im Vorholz = ${deNum(res.tau,2)} N/mm²`],
+    'Blau: gedrückte Versatzfläche. Orange gestrichelt: Scherfuge des Vorholzes. Schematisch, nicht maßstäblich.');
+}
+
+const HX_FN = { ausklink:[readAK,validateAK,nachweiseAK,figAK], sattel:[readSD,validateSD,nachweiseSD,figSD], versatz:[readVS,validateVS,nachweiseVS,figVS] };
+function runHX(){
+  if(HOMODE==='sattel' && $('hx-art').value!=='bsh'){ $('hx-art').value='bsh'; fillHxKlassen(); }
+  $('hx-art').disabled = HOMODE==='sattel';
+  document.querySelectorAll('.hx-sd-hint').forEach(e=>e.style.display = HOMODE==='sattel' ? '' : 'none');
+  document.querySelectorAll('.ak-x').forEach(e=>e.style.display = $('ak-lage').value==='u' ? '' : 'none');
+  $('sd-hap').previousElementSibling.querySelector('.sd-hap-l').innerHTML = $('sd-form').value==='pult' ? 'Höhe am hohen Auflager h<sub>ap</sub> [mm]' : 'Höhe im First h<sub>ap</sub> [mm]';
+  const [rd,va,na,fg]=HX_FN[HOMODE], I=rd(), bad=va(I); if(bad.length){ showBad(bad); return; }
+  const res=na(I);
+  LAST={ mat:'holzx', mode:HOMODE, I, res, date:new Date() };
+  const M=I.M, base=`${M.kl} · k<sub>mod</sub> = ${deNum(M.kmod,2)}`;
+  const line = { ausklink:()=>`${deNum(I.b,0)} × ${deNum(I.h,0)} mm, h<sub>ef</sub> = ${deNum(I.hef,0)} mm (α = ${deNum(res.al,2)}) · k<sub>v</sub> = ${deNum(res.kv,3)}`,
+    sattel:()=>`${I.form==='sattel'?'Satteldachträger':'Pultdachträger'} ${deNum(I.b,0)} × ${deNum(I.h0,0)}/${deNum(I.hap,0)} mm, L = ${deNum(I.L,2)} m · α = ${deNum(res.G.al*180/Math.PI,2)}°`,
+    versatz:()=>`${I.art==='stirn'?'Stirnversatz':'Fersenversatz'} γ = ${deNum(I.gam,1)}°, t<sub>v</sub> = ${deNum(I.tv,0)} mm, l<sub>v</sub> = ${deNum(I.lv,0)} mm` }[HOMODE]();
+  const nicht = { ausklink:'Verstärkungen mit Vollgewindeschrauben (DIN EN 1995-1-1/NA, NA.6.8), Durchbrüche, Ausklinkungen am Trägerende ohne Auflager und schräge Ausklinkungen mit Querkraft- und Biegeinteraktion.',
+    sattel:'gekrümmte Träger und Satteldachträger mit gekrümmtem Untergurt (k<sub>r</sub>, k<sub>2</sub>…k<sub>7</sub>), Kippen, Querzugverstärkung, Durchbiegung mit Schubverformung und klimabedingte Querzugspannungen.',
+    versatz:'doppelter Versatz, Brustversatz mit Zapfen, Nachweis des geschwächten Gurtquerschnitts (Zug und Biegung im Nettoquerschnitt) und die Lagesicherung.' }[HOMODE];
+  renderOut(res.C, res.ok, fg(I,res), line+' · '+base, nicht, 'ref.html#/holzbau');
+}
+function buildReportHX(){
+  const {I,res,mode}=LAST, M=I.M;
+  const title={ausklink:'Ausklinkung am Auflager', sattel:I.form==='sattel'?'Satteldachträger':'Pultdachträger', versatz:I.art==='stirn'?'Stirnversatz':'Fersenversatz'}[mode];
+  const norm={ausklink:'DIN EN 1995-1-1 mit NA, 6.5.2', sattel:'DIN EN 1995-1-1 mit NA, 6.4', versatz:'DIN EN 1995-1-1 mit NA, 6.2.2'}[mode];
+  const rows={ ausklink:repRow('Geometrie', `b = ${deNum(I.b,0)} mm, h = ${deNum(I.h,0)} mm, h<sub>ef</sub> = ${deNum(I.hef,0)} mm, ${I.lage==='u'?`unten, x = ${deNum(I.x,0)} mm, i = ${deNum(I.i,2)}`:'oben'}`)+repRow('Last', `V<sub>Ed</sub> = ${deNum(I.V,1)} kN`),
+    sattel:repRow('Geometrie', `${title}, L = ${deNum(I.L,2)} m, b = ${deNum(I.b,0)} mm, h<sub>0</sub> = ${deNum(I.h0,0)} mm, h<sub>ap</sub> = ${deNum(I.hap,0)} mm`)+repRow('Last', `q<sub>Ed</sub> = ${deNum(I.q,1)} kN/m`),
+    versatz:repRow('Geometrie', `${title}, γ = ${deNum(I.gam,1)}°, b = ${deNum(I.b,0)} mm, h = ${deNum(I.h,0)} mm, t<sub>v</sub> = ${deNum(I.tv,0)} mm, l<sub>v</sub> = ${deNum(I.lv,0)} mm, k<sub>c,90</sub> = ${deNum(I.kc90,2)}`)+repRow('Last', `S<sub>Ed</sub> = ${deNum(I.S,1)} kN`) }[mode];
+  return repHead(I.name||title, norm) + `<section><h2>Eingaben</h2><table>
+      ${repRow('Holz, Nutzung', `${M.kl} (${M.bsh?'Brettschichtholz':'Vollholz'}), Nutzungsklasse ${M.nkl}, KLED „${KLED_[M.kled]}“, k<sub>mod</sub> = ${deNum(M.kmod,2)}, γ<sub>M</sub> = 1,3`)}${rows}
+    </table></section><section><h2>${title}</h2><div class="figure">${HX_FN[mode][3](I,res)}</div></section>` + reportChecks(res.C) + repEnd(title+'.');
+}
+
+// ══════════════════════════════════════════════════
 // Bericht
 // ══════════════════════════════════════════════════
-const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall' };
+const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall' };
 function reportChecks(C){
   return C.map((c,i)=>`<section><h2>${i+1}. ${c.title}</h2><div class="steps">${stepsHtml(c.steps)}</div>
       ${c.info?'':`<p>Ausnutzung η = ${deNum(c.eta,2)} — <span class="${c.ok?'ok':'bad'}">${c.ok?'Nachweis erfüllt':'Nachweis nicht erfüllt'}</span></p>`}
@@ -5323,6 +5633,7 @@ function buildReport(){
   if(LAST.mat==='anschluss') return buildReportAnschluss();
   if(LAST.mat==='holz') return buildReportHolz();
   if(LAST.mat==='holzverb') return buildReportHV();
+  if(LAST.mat==='holzx') return buildReportHX();
   if(LAST.mat==='fuss') return buildReportFP();
   if(LAST.mat==='schweiss') return buildReportSW();
   if(LAST.mat==='grund') return buildReportGrund();
@@ -5373,7 +5684,8 @@ const SFIELDS=['sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','s
   'gr-boden','gr-phi','gr-c','gr-g1','gr-g2','gf-name','gf-form','gf-b','gf-a','gf-d','gf-hf','gf-VG','gf-VQ','gf-HG','gf-HQ','gf-MG','gf-MQ',
   'gs-name','gs-b','gs-a','gs-d','gs-V','gs-szul','gs-n','gs-g0','gs-zw','gs-b1','gs-h1','gs-g1','gs-E1','gs-b2','gs-h2','gs-g2','gs-E2','gs-b3','gs-h3','gs-g3','gs-E3','gs-b4','gs-h4','gs-g4','gs-E4','gw-name','gw-H','gw-B','gw-bv','gw-tw','gw-ts','gw-d','gw-q','gw-delta','gu-name','gu-L','gu-B','gu-hw','gu-ts','gu-tw','gu-hwand','gu-td','gu-g','gu-bs',
   'mw-art','mw-m','mw-fb','mw-fm','mw-fk','md-name','md-t','md-h','md-l','md-lage','md-decke','md-a','md-lf','md-N','mt-name','mt-t','mt-hc','mt-lb','mt-bb','mt-a1','mt-lw','mt-N','mk-name','mk-t','mk-h','mk-he','mk-bc','mk-rho','mk-q','mk-Nmax','mk-Nmin','mh-name','mh-l','mh-t','mh-h','mh-lag','mh-N','mh-V',
-  'wd-name','wd-alpha','wd-b','wd-to','wd-L','wd-hu','ws-name','ws-L','ws-B','ws-H','ws-G','ws-zg','ws-f','ws-w','wr-name','wr-Q','wr-D','wr-L','wr-mat','wr-k','wr-zeta','wr-dh','wr-nu','wg-name','wg-Q','wg-I','wg-b','wg-m','wg-mat','wg-kst','wg-H','wg-f','ww-name','ww-Q','ww-b','ww-form','ww-mu','ww-w','ww-hmax'];
+  'wd-name','wd-alpha','wd-b','wd-to','wd-L','wd-hu','ws-name','ws-L','ws-B','ws-H','ws-G','ws-zg','ws-f','ws-w','wr-name','wr-Q','wr-D','wr-L','wr-mat','wr-k','wr-zeta','wr-dh','wr-nu','wg-name','wg-Q','wg-I','wg-b','wg-m','wg-mat','wg-kst','wg-H','wg-f','ww-name','ww-Q','ww-b','ww-form','ww-mu','ww-w','ww-hmax',
+  'hx-art','hx-kl','hx-nkl','hx-kled','ak-name','ak-lage','ak-b','ak-h','ak-hef','ak-x','ak-i','ak-V','sd-name','sd-form','sd-L','sd-b','sd-h0','sd-hap','sd-q','vs-name','vs-art','vs-gam','vs-b','vs-h','vs-tv','vs-lv','vs-S','vs-kc90'];
 const snapshot = () => { const o={typ:TYP, mat:MAT, stmode:STMODE, homode:HOMODE, grmode:GRMODE, mwmode:MWMODE, wbmode:WBMODE}; [...FIELDS,...SFIELDS].forEach(f=>o[f]=$(f).value); CHECKS.forEach(f=>o[f]=$(f).checked); return o; };
 function apply(o){
   if(o['sn-reihe']){ $('sn-reihe').value=o['sn-reihe']; fillProfile(); }
@@ -5386,6 +5698,7 @@ function apply(o){
   if(o['fp-reihe']){ $('fp-reihe').value=o['fp-reihe']; fillFpProfile(); }
   if(o['sw-reihe']){ $('sw-reihe').value=o['sw-reihe']; fillSwProfile(); }
   if(o['hv-art']){ $('hv-art').value=o['hv-art']; fillHvKlassen(); }
+  if(o['hx-art']){ $('hx-art').value=o['hx-art']; fillHxKlassen(); }
   [...FIELDS,...SFIELDS].forEach(f=>{ if(o[f]!=null) $(f).value=o[f]; }); CHECKS.forEach(f=>{ if(o[f]!=null) $(f).checked=o[f]; });
   if(o.typ && ['balken','unterzug','platte','stuetze','durchstanzen'].includes(o.typ)){ TYP=o.typ; showTyp(TYP); }
   if(o.mat){ MAT=o.mat; showMat(); }
@@ -5401,7 +5714,7 @@ function posMsg(t){ $('pos-msg').textContent = t; }
 function savePos(){
   const name = ($(nameField()).value || '').trim() || 'Ohne Bezeichnung';
   const list = posRead(), i = list.findIndex(p=>p.name===name);
-  const entry = { name, typ: MAT==='beton' ? TYP : MAT==='stahl' && STMODE==='anschluss' ? 'anschluss' : MAT==='stahl' && STMODE==='fuss' ? 'fuss' : MAT==='stahl' && STMODE==='schweiss' ? 'schweiss' : MAT==='holz' && HOMODE==='verbindung' ? 'holzverb' : MAT==='grund' ? 'grund_'+GRMODE : MAT==='mauer' ? 'mauer_'+MWMODE : MAT==='wasser' ? 'wasser_'+WBMODE : MAT, ok: !!LAST?.res?.ok, date: new Date().toISOString(), data: snapshot() };
+  const entry = { name, typ: MAT==='beton' ? TYP : MAT==='stahl' && STMODE==='anschluss' ? 'anschluss' : MAT==='stahl' && STMODE==='fuss' ? 'fuss' : MAT==='stahl' && STMODE==='schweiss' ? 'schweiss' : MAT==='holz' && HOMODE==='verbindung' ? 'holzverb' : MAT==='holz' && HOMODE!=='bauteil' ? 'holz_'+HOMODE : MAT==='grund' ? 'grund_'+GRMODE : MAT==='mauer' ? 'mauer_'+MWMODE : MAT==='wasser' ? 'wasser_'+WBMODE : MAT, ok: !!LAST?.res?.ok, date: new Date().toISOString(), data: snapshot() };
   if(i>=0) list[i]=entry; else list.push(entry);
   if(!posWrite(list)){ posMsg('Speichern nicht möglich — der Browser erlaubt hier keinen lokalen Speicher.'); return; }
   posMsg(i>=0 ? `„${name}“ aktualisiert.` : `„${name}“ gespeichert.`); renderPos();
@@ -5420,7 +5733,7 @@ function renderPos(){
       <button class="btn small danger${_armed===i?' armed':''}" onclick="delPos(${i}, this)">${_armed===i?tx('delConfirm'):tx('del')}</button></div>`).join('')
     : '<div class="hint" style="margin-top:0">Noch keine Positionen gespeichert. Die Bezeichnung oben dient als Name.</div>';
 }
-function nameField(){ return MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : 'sn-name') : 'in-name'; }
+function nameField(){ return MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : 'sn-name') : 'in-name'; }
 function syncK(){ const f=$('in-feld').value; $('in-K').value = f==='0.85' ? '1.3' : f==='0.7' ? '1.5' : '1.0'; }
 
 
@@ -5535,6 +5848,7 @@ function importCalc(key){
     setv('sn-L', B.L); setv('sn-M', M); setv('sn-V', B.V); setv('sn-N', B.N||0); $('sn-mv').value=B.mv; if(B.mv==='lin') setv('sn-psi', B.psi);
     notes.push('M<sub>y,k</sub> für die Durchbiegung ist charakteristisch — bitte von Hand anpassen.');
     say(src, [`L = ${deNum(B.L,2)} m · M<sub>y,Ed</sub> = ${deNum(M,1)} kNm · V<sub>z,Ed</sub> = ${deNum(B.V,1)} kN · N<sub>Ed</sub> = ${deNum(B.N||0,1)} kN`, ...notes]);
+  } else if(HOMODE!=='bauteil' && HOMODE!=='verbindung'){ say('Für Ausklinkung, Satteldachträger und Versatz bitte die Werte von Hand eingeben (z. B. die Auflagerkraft ' + deNum(C.Fsup||B.Fsup||0,1) + ' kN).'); return;
   } else if(HOMODE==='verbindung'){ say('Für Verbindungen bitte die Kraft von Hand eingeben (z. B. die Auflagerkraft als F<sub>Ed</sub>: ' + deNum(C.Fsup||B.Fsup||0,1) + ' kN).'); return;
   } else {
     const M=Math.max(B.Mf,B.Ms), mv = B.mv==='lin' ? 'c' : B.mv;
@@ -5640,7 +5954,7 @@ function initUX(){
 }
 $('an-k').innerHTML = SKLASSEN.map(r=>`<option${r[0]==='8.8'?' selected':''}>${r[0]}</option>`).join('');
 $('an-st').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');
-fillHolzKlassen(); fillHvKlassen(); hvSync();
+fillHolzKlassen(); fillHvKlassen(); fillHxKlassen(); hvSync();
 $('fp-st').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');
 $('fp-beton').innerHTML = BETON.map(r=>`<option${r[0]==='C25/30'?' selected':''}>${r[0]}</option>`).join('');
 fillFpProfile(); $('fp-prof').value='HEB 200';

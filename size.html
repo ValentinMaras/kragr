@@ -2468,7 +2468,7 @@ function eqLine(line){
   const plainOf = t => t.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ');
   const UNIT = /\b(kNm|kN|mm|cm|m|N|MPa|kPa|kg|rad|Hz|mm²|cm²|cm³|cm⁴|m²|m³)\b/g;
   const isChain = st => { const segs=eqSplit(st.t,[' = ',...EQ_CMP]); if(segs.length<3) return false;
-    return segs.slice(1,-1).every(([t])=>{ const pl0=plainOf(t), pl=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).replace(UNIT,''), tail=pl0.split(' · ').slice(1).pop(); return !/: /.test(pl) && !(tail!==undefined && /^[A-Za-zΑ-ωα-ωΣΔ]/.test(tail.trim())) && !/(^|[\s(])[A-Za-zÄÖÜäöüß]{3,}(?=[\s,.)]|$)/.test(pl.replace(/(max|min|cos|sin|tan|cot|exp|ln|log|sqrt)\s*\(/g,'(')); }); };
+    return segs.slice(1,-1).every(([t])=>{ const pl0=plainOf(t), pl=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).replace(UNIT,''), tail=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).split(' · ').slice(1).pop(); return !/: /.test(pl) && !(tail!==undefined && /^[A-Za-zΑ-ωα-ωΣΔ][\w,'′]*$/.test(tail.trim())) && !/(^|[\s(])[A-Za-zÄÖÜäöüß]{3,}(?=[\s,.)]|$)/.test(pl.replace(/(max|min|cos|sin|tan|cot|exp|ln|log|sqrt)\s*\(/g,'(')); }); };
   if(!stm.some(isChain)) return null;
   const rows=[];
   // Vorspann bis „: “ (z. B. „Querschnitt 120 × 240 mm: A = …“) als eigene Zeile

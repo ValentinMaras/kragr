@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.5 -->
+<!-- Statiq·ref v0.3.8 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -233,6 +233,81 @@
     .section-head { font-size:15px; font-weight:800; }
     .search input { padding-left:36px; }
     @media (max-width:560px){ .main{ padding:14px 16px; } .nav{ padding:4px 16px 8px; } }
+    /* ══ Layout 2026 (v0.3.7): Seitenleiste · Inhalt · „Auf dieser Seite“ ══ */
+    .layout { position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:0 20px; display:block; }
+    .sidebar { display:none; }
+    .toc { display:none; }
+    .main { max-width:860px; }
+    .side-search { position:relative; margin:4px 0 12px; }
+    .side-search input { width:100%; border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; background:#fff; padding:8px 10px 8px 30px; font-family:inherit; font-size:13px; }
+    .side-search input:focus { outline:2px solid var(--accent); box-shadow:none; }
+    .side-search svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text3); }
+    .tree { font-size:13.5px; }
+    .tree-f { margin-bottom:2px; }
+    .tree-fh { width:100%; display:flex; align-items:center; gap:8px; border:none; background:none; cursor:pointer; padding:7px 8px; border-radius:9px; font-family:inherit; font-size:14px; font-weight:700; color:var(--text); text-align:left; }
+    .tree-fh:hover { background:#f4f4f5; }
+    .tree-tag { font-size:10px; font-weight:700; color:var(--text3); min-width:34px; letter-spacing:0.3px; }
+    .tree-chev { margin-left:auto; font-size:10px; color:var(--text3); transition:transform .15s; }
+    .tree-f.open .tree-chev { transform:rotate(90deg); }
+    .tree-body { display:none; padding:0 0 6px 10px; }
+    .tree-f.open .tree-body { display:block; }
+    .tree-k { font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; padding:8px 8px 3px; }
+    .tree-t { display:block; padding:5px 8px 5px 10px; border-radius:8px; color:var(--text2); text-decoration:none; line-height:1.35; border-left:2px solid transparent; }
+    .tree-t:hover { background:#f4f4f5; color:var(--text); }
+    .tree-t.active { background:var(--accent-bg); color:var(--accent); font-weight:700; border-left-color:var(--accent); border-radius:0 8px 8px 0; }
+    .tree-t.hide, .tree-k.hide, .tree-f.hide { display:none; }
+    .toc-h { font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.6px; margin:6px 0 8px; }
+    .toc a { display:block; font-size:12.5px; color:var(--text3); text-decoration:none; padding:4px 0 4px 10px; border-left:2px solid #ececef; line-height:1.35; }
+    .toc a:hover { color:var(--text); }
+    .toc a.on { color:var(--accent); border-left-color:var(--accent); font-weight:600; }
+    .menu-toggle { display:none; align-items:center; gap:8px; border:none; background:var(--card); border-radius:12px; padding:9px 14px; font-family:inherit; font-size:13.5px; font-weight:700; color:var(--text); cursor:pointer; margin:4px 0 10px; }
+    .card[id] { scroll-margin-top:16px; }
+    .topic-pager { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .topic-pager a { display:block; background:var(--card); border-radius:14px; padding:12px 14px; text-decoration:none; color:var(--text); }
+    .topic-pager a:hover { background:#f1f1f3; }
+    .topic-pager small { display:block; font-size:11px; color:var(--text3); font-weight:600; margin-bottom:2px; }
+    .topic-pager b { font-size:14px; }
+    .topic-pager .nx { text-align:right; grid-column:2; }
+    .home-hint { display:none; font-size:13px; color:var(--text3); margin:2px 2px 0; }
+    @media (min-width:1000px){
+      .layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:28px; align-items:start; }
+      .sidebar { display:block; position:sticky; top:8px; max-height:calc(100vh - 16px); overflow:auto; padding:6px 4px 20px 0; scrollbar-width:thin; }
+      .layout > .main { margin:0; padding:8px 0 30px; max-width:none; }
+      .layout > .main > * { max-width:860px; }
+      #breadcrumb { max-width:1440px; margin:0 auto; padding-left:308px; }
+      .home-tiles { display:none; }
+      .home-hint { display:block; }
+    }
+    @media (min-width:1300px){
+      .layout { grid-template-columns:260px minmax(0,1fr) 200px; }
+      .toc { display:block; position:sticky; top:8px; max-height:calc(100vh - 16px); overflow:auto; padding-top:8px; }
+    }
+    @media (max-width:999px){
+      .menu-toggle { display:inline-flex; }
+      .sidebar.open { display:block; position:fixed; inset:0 auto 0 0; width:min(320px, 88vw); background:#fff; z-index:80; padding:16px 14px 30px; overflow:auto; box-shadow:0 0 0 100vmax rgba(0,0,0,0.25); }
+    }
+    .figure:not(.sk) svg { max-width:520px; margin:0 auto; }
+    /* Nachweisablauf: nummerierte Schritte, Gleichungen untereinander (wie statiq·size) */
+    .ablauf { background:#fff; border-radius:14px; padding:14px 16px 6px; margin:10px 0 12px; }
+    .ablauf-t { font-size:13px; font-weight:800; margin-bottom:10px; color:var(--text); }
+    .steps { font-family:'DM Mono', monospace; font-size:12.5px; line-height:1.85; color:var(--text2); }
+    .steps b { color:var(--text); }
+    .st { margin:0 0 10px; }
+    .st-h { font-family:'Inter', system-ui, sans-serif; font-size:13px; font-weight:600; color:var(--text); display:flex; gap:8px; align-items:baseline; line-height:1.45; }
+    .st-n { flex:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--text3); border:1px solid #d4d4d8; border-radius:50%; width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; transform:translateY(-1px); }
+    .st-f { padding-left:26px; line-height:1.75; }
+    .st-f > div { padding-left:0.9em; text-indent:-0.9em; }
+    .st-f .st-note { font-family:'Inter', system-ui, sans-serif; font-size:12px; color:var(--text3); }
+    .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; }
+    .st-f > div.eq { padding-left:0; text-indent:0; }
+    .eq-r { padding-left:0.9em; text-indent:-0.9em; }
+    .eq-w { grid-column:1 / -1; padding-left:0.9em; text-indent:-0.9em; }
+    /* große Tabellen: Filter und fester Kopf */
+    .tbl-filter { display:flex; gap:8px; align-items:center; margin:2px 0 10px; }
+    .tbl-filter input { flex:1; border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; padding:8px 10px; font-family:inherit; font-size:13px; }
+    .tbl-filter .n { font-size:12px; color:var(--text3); white-space:nowrap; }
+    .data-table-wrap.tall { max-height:560px; overflow:auto; }
+    .data-table-wrap.tall table.data thead th { position:sticky; top:0; z-index:2; }
   </style>
 </head>
 <body>
@@ -249,7 +324,7 @@
 
 <nav class="nav" id="breadcrumb" aria-label="Navigation"></nav>
 
-<main class="main" id="main"></main>
+<div class="layout"><aside class="sidebar" id="sidebar" aria-label="Themen"></aside><main class="main" id="main"></main><aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside></div>
 
 <script>
 // ══════════════════════════════════════════════════
@@ -301,7 +376,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.5';
+const REF_VERSION = '0.3.8';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -579,6 +654,36 @@ const FAECHER = {
           sohldruck:  { title: 'Sohldruck und Lage der Resultierenden' },
           grundbruch: { title: 'Grundbruch und Gleiten' },
           sohlwiderstand: { title: 'Sohlwiderstand (Tabellen DIN 1054)' },
+        }
+      },
+    }
+  },
+  wasserbau: {
+    title: 'Wasserbau', tag: 'WB',
+    sub: 'Hydrostatik, Rohrhydraulik, Gerinne, Wehre',
+    kapitel: {
+      hydrostatik: {
+        title: 'Hydrostatik',
+        themen: {
+          druck:     { title: 'Wasserdruck auf ebene Flächen' },
+          gekruemmt: { title: 'Wasserdruck auf gekrümmte Flächen' },
+          auftrieb:  { title: 'Auftrieb und Schwimmstabilität' },
+        }
+      },
+      hydrodynamik: {
+        title: 'Hydrodynamik',
+        themen: {
+          bernoulli: { title: 'Kontinuität und Bernoulli' },
+          rohr:      { title: 'Rohrreibung und Verluste' },
+          ausfluss:  { title: 'Ausfluss aus Öffnungen' },
+        }
+      },
+      gerinne: {
+        title: 'Offene Gerinne',
+        themen: {
+          normalabfluss: { title: 'Normalabfluss (Manning-Strickler)' },
+          energie:       { title: 'Froude-Zahl und Grenztiefe' },
+          wehr:          { title: 'Wehrüberfall (Poleni)' },
         }
       },
     }
@@ -1219,6 +1324,121 @@ function skNeigung(){ const A=[40,150], B=[280,150], C=[280,70];
   o+=tl(44,40,'tan α = h / l','start',SK.ink,11)+tl(44,56,'p = h / l · 100 %','start',SK.ink,11);
   return sv(320,190,'Steigung und Neigungswinkel',o); }
 
+// ── Wasserbau (v0.3.6): Hydrostatik, Rohrhydraulik, Gerinne, Wehre ──
+const WSK = { w:'#dbeafe', wl:'#2563eb', soil:'#efe7d6', wall:'#d4d4d8', p:'#fde8dc' };
+// Wasserspiegel-Symbol ▽ mit zwei Strichen darunter
+const wsp = (x,y,lab='') => `<path d="M ${x-6} ${y-9} L ${x+6} ${y-9} L ${x} ${y-1} Z" fill="none" stroke="${WSK.wl}" stroke-width="1.1"/>`+ln(x-5,y+3,x+5,y+3,WSK.wl,0.8)+ln(x-3,y+6,x+3,y+6,WSK.wl,0.8)+(lab?it(x+10,y-2,lab,'start',WSK.wl,11):'');
+const hatchL = (x1,y,x2) => { let o=ln(x1,y,x2,y,SK.ink,1.2); for(let x=x1;x<x2;x+=6) o+=ln(x,y,x+5,y+5,SK.ink,0.6); return o; };
+
+function skWDWand(){
+  const x0=190, yT=45, yB=160, h=yB-yT, pw=80;
+  let o=`<rect x="20" y="${yT}" width="${x0-20}" height="${h}" fill="${WSK.w}"/>`+wsp(50,yT)+ln(20,yT,x0,yT,WSK.wl,1);
+  o+=poly([[x0,yT],[x0,yB],[x0-pw,yB]],WSK.p,SK.load,1.1);
+  for(let i=1;i<=5;i++){ const y=yT+h*i/5, L=pw*i/5; o+=ln(x0-L,y,x0-2,y,SK.load,0.8,'marker-end="url(#ska)"'); }
+  o+=`<rect x="${x0}" y="${yT-20}" width="16" height="${h+20}" fill="${WSK.wall}" stroke="${SK.ink}" stroke-width="1.3"/>`+hatchL(10,yB,x0+50);
+  const yF=yB-h/3; o+=ln(x0-pw-50,yF,x0-3,yF,SK.load,2.2,'marker-end="url(#ska)"')+it(x0-pw-50,yF-6,'F','start',SK.load,13);
+  o+=dimL(x0+36,yB,x0+36,yT,'h',0.01,10)+dimL(x0+56,yB,x0+56,yF,'h/3',0.01,16)+it(x0-pw/2,yB+16,'p = γ<tspan font-size="0.7em" dy="3">w</tspan><tspan dy="-3">·h</tspan>','middle',SK.load,12);
+  return sv(300,190,'Wasserdruck auf eine senkrechte Wand',o);
+}
+function skWDSchraeg(){
+  const al=55*Math.PI/180, u=[Math.cos(al),Math.sin(al)], O=[110,40], P1=[O[0]+u[0]*50,O[1]+u[1]*50], P2=[O[0]+u[0]*170,O[1]+u[1]*170], E=[O[0]+u[0]*200,O[1]+u[1]*200];
+  let o=`<polygon points="20,40 ${O[0]},40 ${R1(E[0])},${R1(E[1])} 20,${R1(E[1])}" fill="${WSK.w}"/>`+ln(20,40,O[0],40,WSK.wl,1)+wsp(50,40);
+  o+=ln(O[0],O[1]-10,E[0],E[1],'#a1a1aa',6)+ln(P1[0],P1[1],P2[0],P2[1],SK.ink,4.5);
+  const S=mid(P1,P2), D=[S[0]+12*u[0], S[1]+12*u[1]], n=[-u[1],u[0]];   // n: zur Wasserseite
+  o+=cen(S[0]+n[0]*12,S[1]+n[1]*12,'')+it(S[0]+n[0]*12-8,S[1]+n[1]*12+4,'S','end')+`<circle cx="${R1(D[0])}" cy="${R1(D[1])}" r="3.5" fill="${SK.load}"/>`+it(D[0]+10,D[1]+4,'D','start',SK.load);
+  o+=ln(D[0]+n[0]*52,D[1]+n[1]*52,D[0]+n[0]*4,D[1]+n[1]*4,SK.load,2.2,'marker-end="url(#ska)"')+it(D[0]+n[0]*56-4,D[1]+n[1]*56+4,'F','end',SK.load,13);
+  o+=dimL(250,40,250,S[1],sb('h','s'),-0.01,-14)+ln(S[0],S[1],250,S[1],'#9ca3af',0.6,'stroke-dasharray="3 2"')+arcA(O[0],O[1],26,-55,0,'α');
+  o+=it(O[0]+u[0]*25+8,O[1]+u[1]*25+6,sb('y','s'),'start',SK.dim,11);
+  return sv(290,210,'Wasserdruck auf eine geneigte Fläche',o);
+}
+function skWDGekruemmt(){
+  const C=[200,50], r=110;   // Viertelkreis-Segment: Wasser links unten, Drehpunkt C oben rechts
+  let o=`<path d="M 30 50 L ${C[0]-r} 50 A ${r} ${r} 0 0 0 ${C[0]} ${C[1]+r} L 30 ${C[1]+r} Z" fill="${WSK.w}"/>`+ln(30,50,C[0]-r,50,WSK.wl,1)+wsp(55,50);
+  o+=`<path d="M ${C[0]-r} 50 A ${r} ${r} 0 0 0 ${C[0]} ${C[1]+r}" fill="none" stroke="${SK.ink}" stroke-width="3.2"/>`+ln(C[0]-r,50,C[0],50,SK.dim,0.8,'stroke-dasharray="4 3"')+ln(C[0],50,C[0],C[1]+r,SK.dim,0.8,'stroke-dasharray="4 3"');
+  o+=`<path d="M ${C[0]-r} 50 A ${r} ${r} 0 0 0 ${C[0]} ${C[1]+r} L ${C[0]} 50 Z" fill="#c7d7f5" fill-opacity="0.5" stroke="none"/>`+it(C[0]-28,82,'V<tspan font-size="0.7em" dy="3">W</tspan>','middle',WSK.wl,12);
+  o+=hatchL(20,C[1]+r,C[0]+40)+`<circle cx="${C[0]}" cy="${C[1]}" r="3" fill="#fff" stroke="${SK.ink}"/>`;
+  o+=ln(C[0]-r-50,C[1]+r*0.67,C[0]-r*0.3,C[1]+r*0.67,SK.load,2,'marker-end="url(#ska)"')+it(C[0]-r-50,C[1]+r*0.67-6,'F<tspan font-size="0.7em" dy="3">H</tspan>','start',SK.load,12);
+  o+=ln(C[0]-r*0.42,C[1]+r*0.95,C[0]-r*0.42,C[1]+r*0.35,SK.load,2,'marker-end="url(#ska)"')+it(C[0]-r*0.42+6,C[1]+r*0.5,'F<tspan font-size="0.7em" dy="3">V</tspan>','start',SK.load,12);
+  o+=dimL(C[0]+18,C[1],C[0]+18,C[1]+r,'h',-0.01,-10)+lab(C,[C[0]-r,50],'',0);
+  return sv(270,190,'Wasserdruck auf eine gekrümmte Fläche',o);
+}
+function skSchwimm(){
+  const cx=160, yW=90, B=170, H=70, t=40, x1=cx-B/2, x2=cx+B/2, yTop=yW+t-H, yBot=yW+t;
+  let o=`<rect x="20" y="${yW}" width="280" height="80" fill="${WSK.w}"/>`+ln(20,yW,300,yW,WSK.wl,1)+wsp(40,yW);
+  o+=poly([[x1,yTop],[x2,yTop],[x2,yBot],[x1,yBot]],'#f3f4f6',SK.ink,1.6)+`<rect x="${x1}" y="${yW}" width="${B}" height="${t}" fill="${WSK.wl}" fill-opacity="0.12"/>`;
+  const G=[cx,yTop+H*0.45], Bp=[cx,yW+t/2], M=[cx,yTop-24];
+  o+=ln(cx,M[1]-6,cx,yBot+6,SK.dim,0.8,'stroke-dasharray="6 3 2 3"');
+  o+=`<circle cx="${G[0]}" cy="${G[1]}" r="4" fill="${SK.ink}"/>`+it(G[0]+8,G[1]+4,'G','start')+`<circle cx="${Bp[0]}" cy="${Bp[1]}" r="4" fill="${WSK.wl}"/>`+it(Bp[0]+8,Bp[1]+4,'B','start',WSK.wl)+`<circle cx="${M[0]}" cy="${M[1]}" r="4" fill="#fff" stroke="${SK.load}" stroke-width="1.6"/>`+it(M[0]+8,M[1]+4,'M','start',SK.load);
+  o+=dimL(x2+14,yW,x2+14,yBot,'t',-0.01,-8)+dimL(x1,yBot+14,x2,yBot+14,'B',10,8)+dimL(cx-14,G[1],cx-14,M[1],'h<tspan font-size="0.7em" dy="3">M</tspan>',0.01,-16);
+  o+=ln(cx-40,yTop-28,cx-40,yTop-4,SK.load,1.6,'marker-end="url(#ska)"')+it(cx-44,yTop-18,'F<tspan font-size="0.7em" dy="3">G</tspan>','end',SK.load,12)+ln(cx+50,yBot+22,cx+50,yBot+2,WSK.wl,1.6,'marker-end="url(#skc)"')+it(cx+56,yBot+18,'F<tspan font-size="0.7em" dy="3">A</tspan>','start',WSK.wl,12);
+  return sv(320,200,'Schwimmender Ponton',o);
+}
+function skBernoulli(){
+  const y0=170, zA=110, x1=30, x2=110, x3=190, x4=300;
+  const EL=40, pA=78, pB=104;   // Energielinie, Drucklinie im weiten/engen Teil
+  let o=hatchL(20,y0,310)+ln(20,y0,310,y0,SK.ink,0.8)+it(312,y0+4,'z = 0','start',SK.dim,10);
+  // Rohr mit Verengung
+  o+=`<path d="M ${x1} ${zA-14} H ${x2} L ${x2+20} ${zA-7} H ${x3-20} L ${x3} ${zA-14} H ${x4} V ${zA+14} H ${x3} L ${x3-20} ${zA+7} H ${x2+20} L ${x2} ${zA+14} H ${x1} Z" fill="${WSK.w}" stroke="${SK.ink}" stroke-width="1.3"/>`;
+  o+=ln(x1,zA,x4,zA,SK.dim,0.7,'stroke-dasharray="6 3 2 3"');
+  o+=ln(x1,EL,x4,EL,SK.load,1.6)+it(x4+4,EL+4,'EL','start',SK.load,11);
+  o+=pl([[x1,pA],[x2,pA],[x2+20,pB],[x3-20,pB],[x3,pA],[x4,pA]],WSK.wl,1.6)+it(x4+4,pA+4,'DL','start',WSK.wl,11);
+  o+=dimL(70,EL,70,pA,'v₁²/2g',0.01,26)+dimL(150,EL,150,pB,'v₂²/2g',0.01,26)+dimL(250,pA,250,zA,'p/ρg',0.01,22)+dimL(285,zA,285,y0,'z',0.01,10);
+  o+=it(70,zA+4,'1','middle',SK.ink,12)+it(150,zA+4,'2','middle',SK.ink,12);
+  return sv(340,190,'Bernoulli: Energie- und Drucklinie',o);
+}
+function skRohrleitung(){
+  const yA=50, yB=120, x1=70, x2=270, yR=150;
+  let o=`<rect x="20" y="${yA}" width="50" height="${yR-yA+12}" fill="${WSK.w}"/>`+`<rect x="270" y="${yB}" width="50" height="${yR-yB+12}" fill="${WSK.w}"/>`;
+  o+=pl([[20,30],[20,yR+12],[70,yR+12],[70,yR+6]],SK.ink,1.4)+pl([[70,yR-6],[70,30]],SK.ink,1.4)+pl([[270,30],[270,yR-6]],SK.ink,1.4)+pl([[270,yR+6],[270,yR+12],[320,yR+12],[320,30]],SK.ink,1.4);
+  o+=`<rect x="${x1}" y="${yR-6}" width="${x2-x1}" height="12" fill="${WSK.w}" stroke="${SK.ink}" stroke-width="1.2"/>`;
+  o+=ln(20,yA,70,yA,WSK.wl,1)+wsp(45,yA)+ln(270,yB,320,yB,WSK.wl,1)+wsp(295,yB);
+  // Energielinie: Einlaufverlust, Reibung, Auslaufverlust
+  const e1=yA+8, e2=yB-14;
+  o+=pl([[45,yA],[x1,yA],[x1,e1],[x2,e2],[x2,yB],[295,yB]],SK.load,1.6)+it(170,(e1+e2)/2-8,'Energielinie','middle',SK.load,10);
+  o+=dimL(x1-10,yA,x1-10,e1,'ζ<tspan font-size="0.7em" dy="3">E</tspan>',0.01,-16).replace(/<line[^>]*stroke="#9ca3af"[^>]*\/>/g,'');
+  o+=dimL(340,yA,340,yB,'Δh',-0.01,-14);
+  o+=it(170,yR+28,'L, d, k','middle',SK.ink,12);
+  return sv(370,190,'Rohrleitung zwischen zwei Behältern',o);
+}
+function skGerinneQS(){
+  const yS=50, yB=150, b=110, m=1.0, h=yB-yS, xL=110, xR=xL+b, top=[xL-m*h, xR+m*h];
+  let o=poly([[top[0],yS],[top[1],yS],[xR,yB],[xL,yB]],WSK.w,'none',0)+ln(top[0]-20,yS,top[1]+20,yS,WSK.wl,1)+wsp(xL+b/2,yS);
+  o+=pl([[top[0]-30,yS-30],[xL,yB],[xR,yB],[top[1]+30,yS-30]],SK.ink,1.8)+pl([[top[0],yS],[xL,yB],[xR,yB],[top[1],yS]],WSK.wl,3.2,'stroke-opacity="0.55"');
+  o+=dimL(xL,yB,xR,yB,'b',16)+dimL(top[1]+28,yB,top[1]+28,yS,'h',-0.01,-10);
+  o+=ln(xR+15,yB-30,xR+45,yB-30,SK.ink,0.8)+ln(xR+45,yB-30,xR+45,yB-60,SK.ink,0.8)+it(xR+30,yB-20,'m','middle',SK.ink,11)+it(xR+50,yB-42,'1','start',SK.ink,11);
+  o+=it(xL+b/2,yB-40,'A','middle',WSK.wl,14)+it(xL-30,yB-30,'U','end',WSK.wl,12);
+  return sv(340,190,'Trapezgerinne',o+tl(330,184,'U = benetzter Umfang (blau)','end',SK.dim,9.5));
+}
+function skEnergie(){
+  const x0=40, y0=170, sx=60, sy=60, q=2.0, g=9.81, hg=Math.cbrt(q*q/g), Emin=1.5*hg, X=E=>x0+E*sx, Y=h=>y0-h*sy;
+  let o=ln(x0,y0,x0+250,y0,SK.ink,0.9,'marker-end="url(#skb)"')+ln(x0,y0,x0,y0-150,SK.ink,0.9,'marker-end="url(#skb)"')+it(x0+252,y0+14,'E','end')+it(x0+6,y0-148,'h','start');
+  o+=ln(x0,y0,X(2.4),Y(2.4),SK.dim,0.8,'stroke-dasharray="4 3"')+tl(X(2.2)+4,Y(2.4)+4,'E = h','start',SK.dim,9.5);
+  const pts=[]; for(let i=0;i<=120;i++){ const h=0.32+i*(2.35-0.32)/120, E=h+q*q/(2*g*h*h); if(E<4) pts.push([X(E),Y(h)]); }
+  o+=pl(pts,WSK.wl,2);
+  o+=ln(x0,Y(hg),X(Emin),Y(hg),SK.load,0.9,'stroke-dasharray="4 3"')+ln(X(Emin),y0,X(Emin),Y(hg),SK.load,0.9,'stroke-dasharray="4 3"')+`<circle cx="${R1(X(Emin))}" cy="${R1(Y(hg))}" r="3.5" fill="${SK.load}"/>`;
+  o+=it(x0-4,Y(hg)+4,sb('h','gr'),'end',SK.load,12)+it(X(Emin),y0+16,sb('E','min'),'middle',SK.load,12);
+  o+=tl(X(2.3),Y(2.0),'strömend (Fr < 1)','start',SK.ink,9.5)+tl(X(2.3),Y(0.42),'schießend (Fr > 1)','start',SK.ink,9.5);
+  return sv(330,195,'Spezifische Energie und Grenztiefe',o);
+}
+function skWehr(){
+  const yS=60, yC=100, yB=170, xC=150, wC=36;
+  let o=`<path d="M 20 ${yS} L ${xC} ${yS} Q ${xC+wC/2} ${yS+2} ${xC+wC} ${yC-6} Q ${xC+wC+30} ${yC+30} ${xC+wC+44} ${yB-10} L 330 ${yB-10} L 330 ${yB} L 20 ${yB} Z" fill="${WSK.w}"/>`;
+  o+=`<path d="M ${xC-6} ${yB} L ${xC-6} ${yC} Q ${xC+wC/2-6} ${yC-8} ${xC+wC} ${yC} L ${xC+wC+20} ${yB} Z" fill="${WSK.wall}" stroke="${SK.ink}" stroke-width="1.4"/>`;
+  o+=ln(20,yS,xC-20,yS,WSK.wl,1)+wsp(60,yS)+hatchL(10,yB,330);
+  o+=dimL(100,yC,100,yS,'h<tspan font-size="0.7em" dy="3">ü</tspan>',-0.01,-14)+dimL(100,yB,100,yC,'w',-0.01,-10)+ln(100,yC,xC-6,yC,'#9ca3af',0.6,'stroke-dasharray="3 2"');
+  o+=ln(40,yS+40,90,yS+40,WSK.wl,1.6,'marker-end="url(#skc)"')+it(44,yS+34,'Q','start',WSK.wl,12)+tl(xC+wC/2,yB-30,'Wehr','middle',SK.ink,9.5);
+  return sv(340,190,'Wehrüberfall',o);
+}
+function skAusfluss(){
+  const xT=30, xW=150, yS=40, yO=140, yB=170;
+  let o=`<rect x="${xT}" y="${yS}" width="${xW-xT}" height="${yB-yS}" fill="${WSK.w}"/>`+pl([[xT,20],[xT,yB],[xW,yB],[xW,yO+6]],SK.ink,1.6)+pl([[xW,yO-6],[xW,20]],SK.ink,1.6)+ln(xT,yS,xW,yS,WSK.wl,1)+wsp(70,yS);
+  const pts=[]; for(let i=0;i<=30;i++){ const t=i/30, x=xW+150*t, y=yO+70*t*t; pts.push([x,y]); }
+  o+=pl(pts,WSK.wl,6,'stroke-opacity="0.35" stroke-linecap="round"')+pl(pts,WSK.wl,1.2);
+  o+=dimL(xT+60,yO,xT+60,yS,'h',-0.01,-10)+ln(xT+50,yO,xW,yO,'#9ca3af',0.6,'stroke-dasharray="3 2"');
+  o+=ln(xW+4,yO,xW+44,yO,WSK.wl,1.8,'marker-end="url(#skc)"')+it(xW+48,yO-6,'v = √(2gh)','start',WSK.wl,12)+it(xW-4,yO+20,'A, μ','end',SK.ink,11);
+  return sv(330,190,'Ausfluss aus einer Öffnung',o);
+}
+
 // ══════════════════════════════════════════════════
 // RECHNER (neue Fächer)
 // ══════════════════════════════════════════════════
@@ -1773,6 +1993,30 @@ function updateKnick(){
 }
 
 // Rechteckquerschnitt
+// Wasserbau-Rechner
+function updateManning(){
+  const out=document.getElementById('wbg-out'); if(!out) return;
+  const b=num('wbg-b'), h=num('wbg-h'), m=num('wbg-m')||0, I=num('wbg-I')/1000, k=num('wbg-k');
+  if(!(b>=0 && h>0 && m>=0 && I>0 && k>0) || (b===0 && m===0)){ out.innerHTML='Bitte b, h, I und k<sub>St</sub> > 0 eingeben.'; return; }
+  const A=(b+m*h)*h, U=b+2*h*Math.sqrt(1+m*m), R=A/U, v=k*R**(2/3)*Math.sqrt(I), Q=v*A, B=b+2*m*h, hm=A/B, Fr=v/Math.sqrt(9.81*hm);
+  out.innerHTML=`A = ${deNum(A,3)} m² · U = ${deNum(U,3)} m · R = ${deNum(R,3)} m<br>v = <b>${deNum(v,2)} m/s</b> · Q = <b>${deNum(Q,3)} m³/s</b> · Fr = ${deNum(Fr,2)} (${Fr<1?'strömend':Fr>1?'schießend':'kritisch'})`;
+}
+function updateRohrR(){
+  const out=document.getElementById('wbr-out'); if(!out) return;
+  const Q=num('wbr-Q')/1000, d=num('wbr-d')/1000, L=num('wbr-L'), k=num('wbr-k')/1000, nu=1.31e-6, g=9.81;
+  if(!(Q>0 && d>0 && L>0 && k>=0)){ out.innerHTML='Bitte Q, d, L > 0 eingeben.'; return; }
+  const v=Q/(Math.PI*d*d/4), Re=v*d/nu; let lam;
+  if(Re<2320) lam=64/Re; else { lam=0.02; for(let i=0;i<60;i++) lam=(-2*Math.log10(2.51/(Re*Math.sqrt(lam))+k/(3.71*d)))**-2; }
+  const hv=lam*L/d*v*v/(2*g);
+  out.innerHTML=`v = <b>${deNum(v,2)} m/s</b> · v²/2g = ${deNum(v*v/2/g,3)} m · Re = ${deNum(Re,0)} (${Re<2320?'laminar':'turbulent'})<br>λ = ${deNum(lam,4)} · h<sub>v,R</sub> = λ·L/d·v²/2g = <b>${deNum(hv,2)} m</b> (${deNum(hv/L*1000,2)} ‰)`;
+}
+function updatePoleni(){
+  const out=document.getElementById('wbw-out'); if(!out) return;
+  const b=num('wbw-b'), h=num('wbw-h'), mu=num('wbw-mu');
+  if(!(b>0 && h>0 && mu>0)){ out.innerHTML='Bitte b, h<sub>ü</sub>, μ > 0 eingeben.'; return; }
+  const Q=2/3*mu*b*Math.sqrt(2*9.81)*h**1.5;
+  out.innerHTML=`Q = 2/3 · ${deNum(mu,3)} · ${deNum(b,2)} · √(2·9,81) · ${deNum(h,3)}<sup>3/2</sup> = <b>${deNum(Q,3)} m³/s</b> · q = Q/b = ${deNum(Q/b,3)} m²/s`;
+}
 function updateNeigung(fromAngle){
   const out=document.getElementById('ng2-out'); if(!out) return;
   let p=num('ng2-p'), a=num('ng2-a');
@@ -3356,6 +3600,191 @@ Object.assign(CONTENT, {
     </div>
   `,
 
+  // ═════════════ WASSERBAU ═════════════
+  'wasserbau/hydrostatik/druck': () => `
+    <div class="card">
+      <div class="card-title">Hydrostatischer Druck</div>
+      <div class="formula-box">
+        p = ρ · g · h = γ<sub>w</sub> · h&nbsp;&nbsp;&nbsp; γ<sub>w</sub> = 9,81 kN/m³ ≈ 10 kN/m³
+        <div class="comment">Der Druck wächst linear mit der Tiefe h unter dem Wasserspiegel und wirkt immer senkrecht auf die Fläche — unabhängig von deren Neigung.</div>
+      </div>
+      ${fig(skWDWand(),'Senkrechte Wand: Druckdreieck, Resultierende im Drittelpunkt über der Sohle.')}
+      <div class="formula-box">
+        Senkrechte Wand, Breite b:&nbsp; F = γ<sub>w</sub> · h² / 2 · b&nbsp;&nbsp;&nbsp; Angriff in h/3 über der Sohle<br>
+        Moment am Wandfuß:&nbsp; M = F · h/3 = γ<sub>w</sub> · h³ / 6 · b
+      </div>
+      <div class="info-banner">Beispiel: h = 3,0 m, b = 1 m → F = 10 · 3,0²/2 = <b>45 kN/m</b>, M = 45 · 1,0 = <b>45 kNm/m</b> (mit γ<sub>w</sub> = 10 kN/m³).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Geneigte Fläche — Druckkraft und Druckmittelpunkt</div>
+      ${fig(skWDSchraeg(),'y wird in der Ebene der Fläche ab dem Wasserspiegel gemessen. Der Druckmittelpunkt D liegt immer tiefer als der Schwerpunkt S.')}
+      <div class="formula-box">
+        F = γ<sub>w</sub> · h<sub>s</sub> · A&nbsp;&nbsp;&nbsp; (h<sub>s</sub> — Tiefe des Flächenschwerpunkts)<br>
+        y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub> / (y<sub>s</sub> · A)&nbsp;&nbsp;&nbsp; mit h<sub>s</sub> = y<sub>s</sub> · sin α
+        <div class="comment">I<sub>s</sub> — Flächenträgheitsmoment um die waagerechte Schwerachse der Fläche (Rechteck: b·l³/12)</div>
+      </div>
+      <div class="info-banner">Beispiel: Schütz 1 × 2 m (l = 2 m in Neigungsrichtung), α = 60°, Oberkante bei y = 1,0 m.<br>
+        y<sub>s</sub> = 2,0 m, h<sub>s</sub> = 2,0 · sin 60° = 1,73 m → F = 10 · 1,73 · 2,0 = <b>34,6 kN</b> · y<sub>D</sub> = 2,0 + (1·2³/12)/(2,0·2,0) = <b>2,17 m</b></div>
+      <a class="applink" href="size.html">→ Wasserdruck mit Gegendruck in statiq·size (Wasserbau)</a>
+    </div>
+  `,
+
+  'wasserbau/hydrostatik/gekruemmt': () => `
+    <div class="card">
+      <div class="card-title">Gekrümmte Flächen — Zerlegen in Komponenten</div>
+      ${fig(skWDGekruemmt(),'Segmentschütz (Viertelkreis): F<sub>H</sub> aus der senkrechten Projektion, F<sub>V</sub> aus dem Wasservolumen V<sub>W</sub> über der Fläche.')}
+      <div class="formula-box">
+        F<sub>H</sub> = γ<sub>w</sub> · h<sub>s,proj</sub> · A<sub>proj</sub>&nbsp;&nbsp;&nbsp; (wie bei einer senkrechten Wand mit der Projektionsfläche)<br>
+        F<sub>V</sub> = γ<sub>w</sub> · V<sub>W</sub>&nbsp;&nbsp;&nbsp; (Gewicht des — wirklichen oder gedachten — Wasserkörpers zwischen Fläche und Wasserspiegel)<br>
+        F = √(F<sub>H</sub>² + F<sub>V</sub>²)
+        <div class="comment">Bei Kreisflächen gehen alle Druckkräfte durch den Mittelpunkt — die Resultierende also auch. Liegt das Wasser unter der Fläche, wirkt F<sub>V</sub> nach oben.</div>
+      </div>
+      <div class="info-banner">Beispiel Viertelkreis r = h = 2,0 m, Breite 1 m:<br>
+        F<sub>H</sub> = 10 · 2,0²/2 = <b>20 kN</b> · V<sub>W</sub> = π·r²/4 = 3,14 m³ (Viertelkreis über der Fläche) → F<sub>V</sub> = <b>31,4 kN</b> (nach oben) · F = <b>37,2 kN</b></div>
+    </div>
+  `,
+
+  'wasserbau/hydrostatik/auftrieb': () => `
+    <div class="card">
+      <div class="card-title">Auftrieb (Archimedes)</div>
+      <div class="formula-box">
+        F<sub>A</sub> = γ<sub>w</sub> · V<sub>verdrängt</sub>&nbsp;&nbsp;&nbsp; Schwimmen: F<sub>A</sub> = G
+        <div class="comment">Die Auftriebskraft greift im Schwerpunkt B des verdrängten Wasservolumens an.</div>
+      </div>
+      ${fig(skSchwimm(),'G — Schwerpunkt des Körpers, B — Verdrängungsschwerpunkt, M — Metazentrum, h<sub>M</sub> — metazentrische Höhe.')}
+      <div class="formula-box">
+        Tiefgang Ponton L × B:&nbsp; t = G / (γ<sub>w</sub> · L · B)<br>
+        h<sub>M</sub> = I / V − e&nbsp;&nbsp;&nbsp; (e = Abstand G über B)<br>
+        stabil, wenn h<sub>M</sub> > 0 (M liegt über G)
+        <div class="comment">I — Flächenträgheitsmoment der Wasserlinienfläche um die Längsachse (Rechteck: L·B³/12), V — verdrängtes Volumen</div>
+      </div>
+      <div class="info-banner">Beispiel: Ponton 10 × 6 m, t = 0,80 m, G in 1,20 m Höhe.<br>
+        V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3,75 m · e = 1,20 − 0,40 = 0,80 m → h<sub>M</sub> = <b>2,95 m</b> > 0 → stabil</div>
+      <a class="applink" href="#/grundbau/flach/sohldruck">→ Auftrieb bei Bauwerken: Nachweis UPL in statiq·size (Grundbau)</a>
+    </div>
+  `,
+
+  'wasserbau/hydrodynamik/bernoulli': () => `
+    <div class="card">
+      <div class="card-title">Kontinuität</div>
+      <div class="formula-box">Q = v · A = konst.&nbsp;&nbsp;&nbsp; v<sub>1</sub> · A<sub>1</sub> = v<sub>2</sub> · A<sub>2</sub>
+        <div class="comment">Wird der Querschnitt kleiner, wird das Wasser schneller.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Bernoulli-Gleichung (Energiehöhe)</div>
+      ${fig(skBernoulli(),'EL — Energielinie (ohne Verluste waagerecht), DL — Drucklinie. In der Engstelle steigt v, der Druck sinkt.')}
+      <div class="formula-box">
+        H = z + p/(ρ·g) + v²/(2g) = konst.&nbsp;&nbsp;&nbsp; (ohne Verluste)<br>
+        mit Verlusten:&nbsp; z<sub>1</sub> + p<sub>1</sub>/(ρg) + v<sub>1</sub>²/(2g) = z<sub>2</sub> + p<sub>2</sub>/(ρg) + v<sub>2</sub>²/(2g) + h<sub>v</sub>
+        <div class="comment">z — Lagehöhe · p/(ρg) — Druckhöhe · v²/(2g) — Geschwindigkeitshöhe, alle in m</div>
+      </div>
+      ${textTable(['v [m/s]','0,5','1,0','2,0','3,0','5,0'], [['v²/(2g) [m]','0,013','0,051','0,204','0,459','1,274']])}
+    </div>
+  `,
+
+  'wasserbau/hydrodynamik/rohr': () => `
+    <div class="card">
+      <div class="card-title">Reibungsverlust (Darcy-Weisbach)</div>
+      ${fig(skRohrleitung(),'Zwischen zwei Behältern fällt die Energielinie um den Höhenunterschied Δh: Einlaufverlust, Reibung entlang der Leitung, Auslaufverlust.')}
+      <div class="formula-box">
+        h<sub>v,R</sub> = λ · L/d · v²/(2g)&nbsp;&nbsp;&nbsp; Re = v · d / ν&nbsp;&nbsp; (ν ≈ 1,31·10⁻⁶ m²/s bei 10 °C)<br>
+        laminar (Re < 2320):&nbsp; λ = 64 / Re<br>
+        turbulent (Colebrook-White):&nbsp; 1/√λ = −2 · lg( 2,51/(Re·√λ) + k/(3,71·d) )<br>
+        örtliche Verluste:&nbsp; h<sub>v,ö</sub> = Σζ · v²/(2g)
+      </div>
+      <div class="sk-row">
+      ${textTable(['Rohrwerkstoff','k [mm]'], [['PE, PVC','0,007 – 0,05'],['Stahl, neu','0,05 – 0,1'],['Guss, bitumiert','0,1 – 0,25'],['Beton, glatt','0,3 – 1,0'],['Beton, rau / alt','1 – 3']])}
+      ${textTable(['Formstück','ζ'], [['Einlauf scharfkantig','0,5'],['Einlauf gut gerundet','0,05 – 0,25'],['Auslauf ins Becken','1,0'],['Krümmer 90°','0,2 – 0,5'],['Absperrschieber offen','0,1 – 0,3']])}
+      </div>
+      <div class="legend">Anhaltswerte aus der Literatur — im Projekt die Herstellerangaben verwenden.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Rohrleitung berechnen</div>
+      <div class="calc-grid">
+        ${field('Durchfluss Q [l/s]', inp('wbr-Q', 50, 'updateRohrR()'))}
+        ${field('Innendurchmesser d [mm]', inp('wbr-d', 200, 'updateRohrR()'))}
+        ${field('Länge L [m]', inp('wbr-L', 500, 'updateRohrR()'))}
+        ${field('Rauheit k [mm]', inp('wbr-k', 0.1, 'updateRohrR()'))}
+      </div>
+      <div class="calc-out" id="wbr-out"></div>
+      <a class="applink" href="size.html">→ Mit Energie- und Drucklinie in statiq·size (Wasserbau → Rohr)</a>
+    </div>
+  `,
+
+  'wasserbau/hydrodynamik/ausfluss': () => `
+    <div class="card">
+      <div class="card-title">Ausfluss aus einer Öffnung (Torricelli)</div>
+      ${fig(skAusfluss(),'Ausfluss unter dem Wasserspiegel: Geschwindigkeit wie im freien Fall aus der Höhe h.')}
+      <div class="formula-box">
+        v = √(2·g·h)&nbsp;&nbsp;&nbsp; Q = μ · A · √(2·g·h)
+        <div class="comment">μ = α · φ — Ausflussbeiwert aus Strahleinschnürung α und Geschwindigkeitsbeiwert φ</div>
+      </div>
+      ${textTable(['Öffnung','μ'], [['scharfkantig (Blende)','0,60 – 0,62'],['kurzes Rohrstück','≈ 0,82'],['gut gerundet','0,95 – 0,99']])}
+      <div class="info-banner">Beispiel: Öffnung d = 10 cm, scharfkantig, h = 2,0 m → v = √(2·9,81·2,0) = 6,26 m/s, Q = 0,62 · 0,00785 · 6,26 = <b>30,5 l/s</b></div>
+    </div>
+  `,
+
+  'wasserbau/gerinne/normalabfluss': () => `
+    <div class="card">
+      <div class="card-title">Fließformel nach Gauckler-Manning-Strickler</div>
+      ${fig(skGerinneQS(),'Benetzter Querschnitt A und benetzter Umfang U (blau, ohne Wasserspiegel), Böschungsneigung 1 : m.')}
+      <div class="formula-box">
+        v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; R = A / U<br>
+        Trapez:&nbsp; A = (b + m·h)·h&nbsp;&nbsp;&nbsp; U = b + 2·h·√(1 + m²)&nbsp;&nbsp;&nbsp; Rechteck: m = 0
+        <div class="comment">I — Sohlgefälle (bei Normalabfluss = Wasserspiegel- und Energiegefälle) · R — hydraulischer Radius</div>
+      </div>
+      ${textTable(['Gerinne','k<sub>St</sub> [m<sup>1/3</sup>/s]'], [['Beton, glatt geschalt','70 – 90'],['Beton, rau','55 – 65'],['Mauerwerk, Pflaster','50 – 60'],['Erdkanal, gerade, sauber','35 – 45'],['natürlicher Bach, steinig','25 – 35'],['Fluss mit Bewuchs','15 – 25']])}
+      <div class="legend">Anhaltswerte. Der Kehrwert n = 1/k<sub>St</sub> heißt Manning-Beiwert.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Gerinne berechnen</div>
+      <div class="calc-grid">
+        ${field('Sohlbreite b [m]', inp('wbg-b', 3, 'updateManning()'))}
+        ${field('Wassertiefe h [m]', inp('wbg-h', 1.2, 'updateManning()'))}
+        ${field('Böschung m (0 = Rechteck)', inp('wbg-m', 0, 'updateManning()'))}
+        ${field('Gefälle I [‰]', inp('wbg-I', 0.5, 'updateManning()'))}
+        ${field('k<sub>St</sub> [m<sup>1/3</sup>/s]', inp('wbg-k', 60, 'updateManning()'))}
+      </div>
+      <div class="calc-out" id="wbg-out"></div>
+      <a class="applink" href="size.html">→ Normalwassertiefe für gegebenes Q in statiq·size (Wasserbau → Gerinne)</a>
+    </div>
+  `,
+
+  'wasserbau/gerinne/energie': () => `
+    <div class="card">
+      <div class="card-title">Spezifische Energie, Grenztiefe, Froude-Zahl</div>
+      ${fig(skEnergie(),'E(h) für einen festen Abfluss q: Jede Energie über E<sub>min</sub> ist mit zwei Tiefen möglich — strömend oder schießend.')}
+      <div class="formula-box">
+        E = h + v²/(2g)&nbsp;&nbsp;&nbsp; Fr = v / √(g·h)<br>
+        Rechteck (q = Q/b):&nbsp; h<sub>gr</sub> = ∛(q²/g)&nbsp;&nbsp;&nbsp; E<sub>min</sub> = 1,5 · h<sub>gr</sub>&nbsp;&nbsp;&nbsp; v<sub>gr</sub> = √(g·h<sub>gr</sub>)
+      </div>
+      ${textTable(['Fließzustand','Froude-Zahl','Tiefe'], [['strömend (Flachlandfluss)','Fr < 1','h > h<sub>gr</sub>'],['kritisch','Fr = 1','h = h<sub>gr</sub>'],['schießend (Wildbach, Schussrinne)','Fr > 1','h < h<sub>gr</sub>']])}
+      <div class="info-banner">Beim Übergang von schießend zu strömend entsteht ein Wechselsprung — dort wird viel Energie umgewandelt (Tosbecken unter Wehren).</div>
+    </div>
+  `,
+
+  'wasserbau/gerinne/wehr': () => `
+    <div class="card">
+      <div class="card-title">Vollkommener Überfall (Poleni)</div>
+      ${fig(skWehr(),'Überfallhöhe h<sub>ü</sub> über der Wehrkrone, Wehrhöhe w über der Sohle.')}
+      <div class="formula-box">
+        Q = 2/3 · μ · b · √(2g) · h<sub>ü</sub><sup>3/2</sup>
+        <div class="comment">vollkommen: das Unterwasser liegt so tief, dass es den Überfall nicht beeinflusst · b — Wehrbreite</div>
+      </div>
+      ${textTable(['Wehrform','μ'], [['scharfkantig','≈ 0,64'],['rundkronig','≈ 0,75'],['breitkronig','≈ 0,577 (= 1/√3)']])}
+    </div>
+    <div class="card">
+      <div class="card-title">Überfall berechnen</div>
+      <div class="calc-grid">
+        ${field('Wehrbreite b [m]', inp('wbw-b', 5, 'updatePoleni()'))}
+        ${field('Überfallhöhe h<sub>ü</sub> [m]', inp('wbw-h', 0.5, 'updatePoleni()'))}
+        ${field('Beiwert μ', inp('wbw-mu', 0.75, 'updatePoleni()'))}
+      </div>
+      <div class="calc-out" id="wbw-out"></div>
+      <a class="applink" href="size.html">→ Überfallhöhe für gegebenes Q in statiq·size (Wasserbau → Wehr)</a>
+    </div>
+  `,
+
   'mathematik/geometrie/dreiecke': () => `
     <div class="card">
       <div class="card-title">Rechtwinkliges Dreieck — Pythagoras, Höhen- und Kathetensatz</div>
@@ -4147,6 +4576,9 @@ Object.assign(CONTENT, {
 Object.assign(AFTER, {
   'baustatik/querschnitte/querschnittswerte': () => updateRechteck(),
   'mathematik/geometrie/neigung': () => updateNeigung(),
+  'wasserbau/gerinne/normalabfluss': () => updateManning(),
+  'wasserbau/hydrodynamik/rohr': () => updateRohrR(),
+  'wasserbau/gerinne/wehr': () => updatePoleni(),
   'lastannahmen/lasten/schnee': () => updateSchnee(),
   'lastannahmen/lasten/wind': () => updateWind(),
   'grundbau/erddruck/beiwerte': () => updateErd(),
@@ -4195,6 +4627,7 @@ function render(){
   if(AFTER[key]) AFTER[key]();
   if(!navState.fach && searchQuery) runSearch(searchQuery, false);
   document.title = pageTitle();
+  renderSidebar(); renderToc(); toggleSideMenu(false);
 }
 function pageTitle(){
   const {fach,kapitel,thema} = navState;
@@ -4252,7 +4685,8 @@ function viewFaecher(){
         oninput="runSearch(this.value)" aria-label="${tx('searchAria')}" autocomplete="off">
     </div>
     <div id="search-results"></div>
-    <div class="tile-grid">${tiles}</div>
+    <div class="home-hint">Links ein Fach aufklappen oder oben nach einem Begriff suchen.</div>
+    <div class="tile-grid home-tiles">${tiles}</div>
     ${footnote('Nachschlagewerk')}
   `;
 }
@@ -4309,12 +4743,14 @@ function viewThema(){
   const prev = i>0 ? `<a class="nav-list-item" href="${hrefOf(fach,kapitel,keys[i-1])}"><span class="nav-list-arrow">‹</span><span class="nav-list-label" style="flex:1">${K.themen[keys[i-1]].title}</span></a>` : '';
   const next = i<keys.length-1 ? `<a class="nav-list-item" href="${hrefOf(fach,kapitel,keys[i+1])}"><span class="nav-list-label">${K.themen[keys[i+1]].title}</span><span class="nav-list-arrow">›</span></a>` : '';
   return `
+    <button class="menu-toggle" onclick="event.stopPropagation(); toggleSideMenu()">☰ Alle Themen</button>
     <div class="page-head">
       <div class="page-title">${t.title}</div>
       <div class="page-sub">${FAECHER[fach].title} · ${K.title}</div>
     </div>
     ${body}
-    ${(prev||next) ? `<div class="nav-list" style="margin-top:14px">${prev}${next}</div>` : ''}
+    <div class="topic-pager">${i>0?`<a href="${hrefOf(fach,kapitel,keys[i-1])}"><small>‹ zurück</small><b>${K.themen[keys[i-1]].title}</b></a>`:'<span></span>'}${i<keys.length-1?`<a class="nx" href="${hrefOf(fach,kapitel,keys[i+1])}"><small>weiter ›</small><b>${K.themen[keys[i+1]].title}</b></a>`:''}</div>
+    ${(prev||next) ? `<div class="nav-list legacy-pager" style="display:none">${prev}${next}</div>` : ''}
     ${footnote()}
   `;
 }
@@ -4388,6 +4824,125 @@ document.addEventListener('click', e=>{
   const tr = e.target.closest('table.data tbody tr');
   if(tr) tr.classList.toggle('row-highlight');
 });
+
+
+// ══════════════════════════════════════════════════
+// LAYOUT (v0.3.7): Seitenleiste mit allen Themen, Inhaltsverzeichnis der Seite
+// ══════════════════════════════════════════════════
+const SIDE_KEY='statiq-ref-open';
+function sideOpenSet(){ try{ return new Set(JSON.parse(localStorage.getItem(SIDE_KEY)||'[]')); }catch(e){ return new Set(); } }
+function renderSidebar(){
+  const sb=document.getElementById('sidebar'); if(!sb) return;
+  const open=sideOpenSet(), {fach,kapitel,thema}=navState;
+  if(fach) open.add(fach);
+  const q=(document.getElementById('side-q')||{}).value||'';
+  sb.innerHTML = `<div class="side-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="side-q" type="search" placeholder="Themen filtern …" value="${escapeHtml(q)}" oninput="filterSidebar(this.value)" autocomplete="off"></div>
+    <nav class="tree">${Object.entries(FAECHER).map(([fk,F])=>`<div class="tree-f${open.has(fk)?' open':''}" data-f="${fk}">
+      <button class="tree-fh" onclick="toggleTree('${fk}')"><span class="tree-tag">${F.tag}</span>${F.title}<span class="tree-chev">›</span></button>
+      <div class="tree-body">${Object.entries(F.kapitel).map(([kk,K])=>`<div class="tree-k">${K.title}</div>${Object.entries(K.themen).map(([tk,T])=>
+        `<a class="tree-t${fk===fach&&kk===kapitel&&tk===thema?' active':''}" href="${hrefOf(fk,kk,tk)}">${T.title}</a>`).join('')}`).join('')}</div></div>`).join('')}</nav>`;
+  if(q) filterSidebar(q);
+  const act=sb.querySelector('.tree-t.active'); if(act && act.offsetParent){ const r=act.getBoundingClientRect(), sr=sb.getBoundingClientRect(); if(r.top<sr.top || r.bottom>sr.bottom) act.scrollIntoView({block:'center'}); }
+}
+function toggleTree(fk){ const el=document.querySelector(`.tree-f[data-f="${fk}"]`); if(!el) return; el.classList.toggle('open');
+  const s=sideOpenSet(); el.classList.contains('open') ? s.add(fk) : s.delete(fk); try{ localStorage.setItem(SIDE_KEY, JSON.stringify([...s])); }catch(e){} }
+function filterSidebar(q){
+  const t=norm(q).trim();
+  document.querySelectorAll('#sidebar .tree-f').forEach(f=>{
+    let any=false;
+    f.querySelectorAll('.tree-t').forEach(a=>{ const hit=!t || norm(a.textContent).includes(t); a.classList.toggle('hide', !hit); any=any||hit; });
+    f.querySelectorAll('.tree-k').forEach(k=>{ let n=k.nextElementSibling, vis=false; while(n && n.classList.contains('tree-t')){ if(!n.classList.contains('hide')) vis=true; n=n.nextElementSibling; } k.classList.toggle('hide', !vis); });
+    f.classList.toggle('hide', !any); if(t) f.classList.toggle('open', any);
+  });
+}
+const slug = s => norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48);
+let _tocObs=null;
+function renderToc(){
+  const toc=document.getElementById('toc'); if(!toc) return;
+  const cards=[...document.querySelectorAll('#main .card')].filter(c=>c.querySelector(':scope > .card-title'));
+  if(!navState.thema || cards.length<2){ toc.innerHTML=''; return; }
+  const used=new Set();
+  cards.forEach(c=>{ let id='s-'+slug(c.querySelector(':scope > .card-title').textContent); while(used.has(id)) id+='-2'; used.add(id); c.id=id; });
+  toc.innerHTML=`<div class="toc-h">Auf dieser Seite</div>`+cards.map(c=>`<a href="#${location.hash.slice(1)}" data-id="${c.id}">${c.querySelector(':scope > .card-title').textContent}</a>`).join('');
+  toc.querySelectorAll('a').forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById(a.dataset.id)?.scrollIntoView({behavior:'smooth', block:'start'}); });
+  if(_tocObs) _tocObs.disconnect();
+  if('IntersectionObserver' in window){
+    _tocObs=new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting){ toc.querySelectorAll('a').forEach(a=>a.classList.toggle('on', a.dataset.id===en.target.id)); } }); }, {rootMargin:'-10% 0px -75% 0px'});
+    cards.forEach(c=>_tocObs.observe(c));
+  }
+}
+function toggleSideMenu(force){ const sb=document.getElementById('sidebar'); const o=force??!sb.classList.contains('open'); sb.classList.toggle('open', o); }
+document.addEventListener('click', e=>{ const sb=document.getElementById('sidebar'); if(sb && sb.classList.contains('open') && !e.target.closest('#sidebar') && !e.target.closest('.menu-toggle')) toggleSideMenu(false); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') toggleSideMenu(false); });
+
+// Rechenschritt-Zeile in Einzelzeilen zerlegen: jede Gleichheit (=), jeder Vergleich (≤ ≥ < >) und jede Folgerung (→) beginnt eine neue Zeile,
+// das Gleichheitszeichen steht untereinander. Getrennt wird nur auf oberster Ebene (nicht in Klammern oder HTML-Tags).
+function eqSplit(s, seps){
+  const out=[]; let depth=0, cur='', i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(c==='<' && /[a-zA-Z\/!]/.test(s[i+1]||'')){ const j=s.indexOf('>', i); if(j<0){ cur+=s.slice(i); break; } cur+=s.slice(i,j+1); i=j+1; continue; }
+    if(c==='&'){ const m=/^&[a-z#0-9]+;/i.exec(s.slice(i)); if(m){ cur+=m[0]; i+=m[0].length; continue; } }
+    if(c==='('||c==='['||c==='{') depth++; else if((c===')'||c===']'||c==='}') && depth>0) depth--;
+    if(depth===0){ const sp=seps.find(x=>s.startsWith(x,i)); if(sp){ out.push([cur, sp.trim()]); cur=''; i+=sp.length; continue; } }
+    cur+=c; i++;
+  }
+  out.push([cur, null]); return out;   // [Text, Trennzeichen danach]
+}
+const EQ_CMP = [' ≤ ',' ≥ ',' < ',' > ',' &lt; ',' &gt; '];
+function eqLine(line){
+  if(/<(svg|table|div|ul|ol|br)\b/i.test(line)) return null;
+  const plain=line.replace(/<[^>]+>/g,'');
+  const nEq=(plain.match(/ = /g)||[]).length, nCmp=EQ_CMP.filter(c=>plain.includes(c.replace('&lt;','<').replace('&gt;','>'))).length, nTo=(plain.match(/ → /g)||[]).length;
+  if(nEq+nCmp+nTo<2 && plain.length<70) return null;
+  if(nEq===0) return null;
+  // Aussagen: an „ → “ und an „ · “ trennen, wenn beide Seiten eigene Gleichungen sind
+  let stm=[]; eqSplit(line,[' → ']).forEach(([t],k)=>stm.push({t, pre:k?'→':''}));
+  stm = stm.flatMap(st=>{ const parts=eqSplit(st.t,[' · ']).map(p=>p[0]);
+    const isEq=p=>{ const pl=p.replace(/<[^>]+>/g,'').trim(), i=pl.indexOf(' = '); return i>0 && i<30 && /^[^\d\s(−\-+]/.test(pl); };
+    if(parts.length>1 && parts.every(isEq)) return parts.map((t,k)=>({t, pre:k?'':st.pre}));
+    return [st]; });
+  // nur echte Rechenketten zerlegen: eine Aussage mit mindestens zwei Gleichheits-/Vergleichszeichen,
+  // deren Zwischenglieder keine Wörter oder Doppelpunkte enthalten („F = 10 kN bei x = 2 m“ bleibt eine Zeile)
+  const plainOf = t => t.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ');
+  const UNIT = /\b(kNm|kN|mm|cm|m|N|MPa|kPa|kg|rad|Hz|mm²|cm²|cm³|cm⁴|m²|m³)\b/g;
+  const isChain = st => { const segs=eqSplit(st.t,[' = ',...EQ_CMP]); if(segs.length<3) return false;
+    return segs.slice(1,-1).every(([t])=>{ const pl0=plainOf(t), pl=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).replace(UNIT,''), tail=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).split(' · ').slice(1).pop(); return !/: /.test(pl) && !(tail!==undefined && /^[A-Za-zΑ-ωα-ωΣΔ][\w,'′]*$/.test(tail.trim())) && !/(^|[\s(])[A-Za-zÄÖÜäöüß]{3,}(?=[\s,.)]|$)/.test(pl.replace(/(max|min|cos|sin|tan|cot|exp|ln|log|sqrt)\s*\(/g,'(')); }); };
+  if(!stm.some(isChain)) return null;
+  const rows=[];
+  // Vorspann bis „: “ (z. B. „Querschnitt 120 × 240 mm: A = …“) als eigene Zeile
+  if(stm[0]){ const pp=eqSplit(stm[0].t,[': ']); if(pp.length>1 && !/ = /.test(pp[0][0].replace(/<[^>]+>/g,''))){ rows.push(['', pp[0][0]+':', 'cont']); stm[0].t=pp.slice(1).map(p=>p[0]).join(': '); } }
+  stm.forEach(st=>{
+    const segs=eqSplit(st.t,[' = ',...EQ_CMP]);
+    if(segs.length===1){ rows.push(['', (st.pre?st.pre+' ':'')+segs[0][0], 'cont']); return; }
+    let op=null;
+    segs.forEach(([t,sep],k)=>{
+      if(k===0){ rows.push([(st.pre?st.pre+' ':'')+t, null, 'lhs']); }
+      else rows[rows.length-1][1]===null ? rows[rows.length-1][1]=op+' '+t : rows.push(['', op+' '+t, 'rhs']);
+      op=sep;
+    });
+  });
+  // lange Satzanfänge links (Fließtext statt Formelzeichen): Zeile unverändert lassen
+  if(rows.some(([l,r,k])=>k==='lhs' && l.replace(/<[^>]+>/g,'').replace(/^→ /,'').length>24)) return null;
+  // eine leere rechte Seite (Text ohne Gleichung) als ganze Zeile
+  return `<div class="eq">${rows.map(([l,r,k])=> r===null ? `<div class="eq-w">${l}</div>` : k==='cont' ? `<div class="eq-w">${r}</div>` : `<div class="eq-l">${l}</div><div class="eq-r">${r}</div>`).join('')}</div>`;
+}
+// Nachweisablauf: S = ['§Schrittüberschrift', 'Formelzeile', …] — Formelketten werden zeilenweise gesetzt
+function ablauf(title, S){
+  let out='', n=0, open=false;
+  for(const s of S){
+    if(s.startsWith('§')){ if(open) out+='</div></div>'; n++; out+=`<div class="st"><div class="st-h"><span class="st-n">${n}</span><span>${s.slice(1)}</span></div><div class="st-f">`; open=true; }
+    else if(s.startsWith('!')){ out+=`<div class="st-note">${s.slice(1)}</div>`; }
+    else { const e=eqLine(s); out += e || `<div>${s}</div>`; }
+  }
+  return `<div class="ablauf">${title?`<div class="ablauf-t">${title}</div>`:''}<div class="steps">${out}${open?'</div></div>':''}</div></div>`;
+}
+// große Tabelle mit Filterfeld: tableFind(id) filtert die Zeilen der Tabelle im Element #id
+function tableFind(id, q){ const box=document.getElementById(id); if(!box) return; const t=norm(q).trim(); let n=0;
+  box.querySelectorAll('tbody tr').forEach(tr=>{ const hit=!t || norm(tr.textContent).includes(t); tr.style.display=hit?'':'none'; if(hit) n++; });
+  const c=document.getElementById(id+'-n'); if(c) c.textContent=`${n} Zeilen`; }
+const filterBox = (id, ph='Filtern …') => `<div class="tbl-filter"><input type="search" placeholder="${ph}" oninput="tableFind('${id}', this.value)"><span class="n" id="${id}-n"></span></div>`;
 
 // ── Start ──────────────────────────────────────────
 document.getElementById('ref-version').textContent = 'v' + REF_VERSION;

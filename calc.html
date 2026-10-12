@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.13 -->
+<!-- Statiq v0.8.14 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -329,6 +329,10 @@
     .pick-item:hover { background:#fff; color:var(--text); }
     .pick-item.active { background:#fff; color:var(--text); font-weight:700; box-shadow:0 1px 2px rgba(0,0,0,0.06); }
     .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2563eb; }
+    .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text); cursor:pointer;
+      background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
+    .lang-sel:hover { background-color:#e4e4e7; }
+    @media (max-width:420px){ .header-links .version { display:none; } }
     .menu-btn { border:none; background:var(--card); border-radius:18px; width:56px; cursor:pointer; font-size:20px; color:var(--text2); }
     .menu-btn:hover { background:#f1f1f3; color:var(--text); }
     /* zwei Spalten: links Eingaben, rechts Ergebnis (mitlaufend) */
@@ -514,84 +518,15 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.13</span>
+    <span class="version">v0.8.14</span>
+    <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
 
 <nav class="nav calc-top">
   <span id="nav-current-label" style="display:none"></span>
   <div class="pick" id="pick"><button class="pick-btn" id="pick-btn" onclick="togglePick(event)" aria-haspopup="true"><span class="pick-txt"><span class="pick-g" id="pick-g"></span><span class="pick-t" id="pick-t"></span></span><span class="pick-chev">▾</span></button><div class="pick-menu" id="pick-menu" role="menu"></div></div>
-  <button class="menu-btn" onclick="toggleNavMenu()" title="Menu" aria-label="Menu">☰</button>
 </nav>
-
-<!-- ══ Navigation Drawer (2-level) ══ -->
-<div id="nav-overlay" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.35)" onclick="closeNavMenu()"></div>
-<div id="nav-drawer" style="display:none;position:fixed;top:0;right:0;width:270px;height:100%;z-index:201;background:var(--surface);box-shadow:-4px 0 24px rgba(0,0,0,0.18);overflow-y:auto">
-
-  <!-- Drawer header -->
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)">
-    <div style="display:flex;align-items:center;gap:8px">
-      <button id="nd-back-btn" onclick="navMenuBack()" style="display:none;background:none;border:none;cursor:pointer;font-size:18px;color:var(--text2);padding:0 4px 0 0;line-height:1">←</button>
-      <span id="nd-title" style="font-family:Bebas Neue,sans-serif;font-size:22px;color:var(--accent);letter-spacing:2px">STATIQ</span>
-    </div>
-    <button onclick="closeNavMenu()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--text2);line-height:1">✕</button>
-  </div>
-
-  <!-- Level 1: Modules -->
-  <div id="nd-level1" style="padding:12px 18px">
-    <div style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.5px;font-family:DM Mono,monospace;margin-bottom:10px" data-i18n="moduleHdr">MODULE</div>
-
-    <button onclick="navMenuOpen('calc')" class="nd-item nd-module">
-      <span class="nd-mono-tag" style="background:var(--accent);color:white">SC</span>
-      <div><div style="font-weight:600">statiq·calc</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="modCalcSub">Schnittgrößen &amp; Verformungen</div></div>
-      <span style="margin-left:auto;color:var(--text-muted)">›</span>
-    </button>
-
-    <a href="size.html" class="nd-item nd-module" style="text-decoration:none">
-      <span class="nd-mono-tag" style="background:#2563eb;color:white">SS</span>
-      <div><div style="font-weight:600">statiq·size</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="modSizeSub">Bemessung nach Eurocodes</div></div>
-      <span style="margin-left:auto;color:var(--text-muted)">›</span>
-    </a>
-
-    <a href="ref.html" class="nd-item nd-module" style="text-decoration:none">
-      <span class="nd-mono-tag" style="background:#3b6fd4;color:white">SR</span>
-      <div><div style="font-weight:600">statiq·ref</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="modRefSub">Profile, Tabellen, Eurocodes</div></div>
-      <span style="margin-left:auto;color:var(--text-muted)">›</span>
-    </a>
-
-    <div style="height:1px;background:var(--border);margin:12px 0"></div>
-
-    <button onclick="closeNavMenu();showTab('saved')" class="nd-item nd-module">
-      <span class="nd-mono-tag" style="background:var(--border);color:var(--text)"><span data-icon="save"></span></span>
-      <div><div class="nd-saved-label" style="font-weight:600" data-i18n="saved">Gespeichert</div><div class="nd-mod-sub" style="font-size:11px;color:var(--text-muted)" data-i18n="savedSub">Berechnungen &amp; Berichte</div></div>
-      <span style="margin-left:auto;color:var(--text-muted)">›</span>
-    </button>
-    <div style="height:1px;background:var(--border);margin:12px 0"></div>
-    <div style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.5px;font-family:DM Mono,monospace;margin-bottom:8px" data-i18n="langHdr">LANGUAGE</div>
-    <div class="lang-pick">
-      <button data-lang="en" onclick="setCalcLang('en')">EN</button><button data-lang="de" onclick="setCalcLang('de')">DE</button>
-      <button data-lang="fr" onclick="setCalcLang('fr')">FR</button><button data-lang="es" onclick="setCalcLang('es')">ES</button>
-    </div>
-  </div>
-
-  <!-- Level 2: statiq·calc systems -->
-  <div id="nd-level2-calc" style="display:none;padding:12px 18px">
-    <button onclick="closeNavMenu();showTab('beam')" class="nd-item" id="nm-beam">
-      <span class="nd-sys-icon">━━</span><span class="nd-sys-label">Einfeldträger</span>
-    </button>
-    <button onclick="closeNavMenu();showTab('cantilever')" class="nd-item" id="nm-cantilever">
-      <span class="nd-sys-icon">┗━</span><span class="nd-sys-label">Kragarm</span>
-    </button>
-    <button onclick="closeNavMenu();showTab('cont')" class="nd-item" id="nm-cont">
-      <span class="nd-sys-icon">┿━</span><span class="nd-sys-label">Durchlaufträger</span>
-    </button>
-    <button onclick="closeNavMenu();showTab('frame')" class="nd-item" id="nm-frame">
-      <span class="nd-sys-icon" style="font-size:17px;transform:scaleX(1.4);display:inline-block">⊓</span><span class="nd-sys-label">Rahmen</span>
-    </button>
-  </div>
-
-
-</div>
 
 <!-- ═══════════════ SAVED TAB ═══════════════ -->
 <main class="main hidden" id="tab-saved">
@@ -1055,7 +990,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.13';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.14';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -5442,7 +5377,7 @@ if(UX_ON){ let _fm=null; const oB=window.frameBuildModel, oS=window.frameSolveDS
   window.frameBuildModel=function(...a){ const m=oB.apply(this,a); _fm=m; return m; };
   window.frameSolveDSM=function(model){ const r=oS(model); if(model===_fm && model.nA) RW_FRAME = r.mechanism ? null : {model, sol:r}; return r; }; }
 if(UX_ON) (()=>{ const orig=window.showTab; window.showTab=function(n){ const r=orig(n); updatePick(); if(n!=='saved') liveCalc(true); return r; }; })();
-if(UX_ON) (()=>{ const orig=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=orig.apply(this,a); updatePick(); document.querySelectorAll('[data-live]').forEach(n=>n.textContent=ux('live')); compactLoads(); return r; }; })();
+if(UX_ON) (()=>{ const orig=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=orig.apply(this,a); updatePick(); const ls=document.getElementById('lang-sel'); if(ls) ls.value=calcLang; document.querySelectorAll('[data-live]').forEach(n=>n.textContent=ux('live')); compactLoads(); return r; }; })();
 if(UX_ON) (()=>{ const orig=window.updatePresetButtons; if(orig) window.updatePresetButtons=function(...a){ const r=orig.apply(this,a); updatePick(); return r; }; })();
 ['input','change'].forEach(ev=>document.addEventListener(ev, e=>{
   const m=e.target.closest && e.target.closest('.main'); if(!m || m.id==='tab-saved') return;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.13 -->
+<!-- Statiq·size v0.5.14 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -651,6 +651,7 @@
       <button data-gr="setzung" onclick="setGrMode('setzung')" data-i18n="grSetz">Setzung</button>
       <button data-gr="wand" onclick="setGrMode('wand')" data-i18n="grWand">Stützwand</button>
       <button data-gr="upl" onclick="setGrMode('upl')" data-i18n="grUpl">Auftrieb</button>
+      <button data-gr="gleit" onclick="setGrMode('gleit')">Gleiten</button>
     </div>
     <div class="card" id="gr-boden-card">
       <div class="card-title"><span data-i18n="grBodenT">Baugrund (charakteristische Werte)</span></div>
@@ -788,6 +789,26 @@
       <div class="hint" data-i18n="guHint">Nur ständige Lasten wirken stabilisierend, nur der tiefste Bauzustand bzw. ohne Ausbau zählt. Innenwände, Wandreibung und Zugpfähle sind nicht angesetzt (auf der sicheren Seite).</div>
     </div>
     </div>
+    <div id="gr-gleit" style="display:none">
+    <div class="card">
+      <div class="card-title"><span>Gleiten in der Sohlfuge</span></div>
+      <div class="grid2">
+        <div class="field full"><label><span>Bezeichnung</span></label><input id="gl-name" value="Fundament F2 — Gleiten" oninput="run()"></div>
+        <div class="field"><label><span>Sohlbreite b [m] (Richtung von H)</span></label><input type="number" step="any" id="gl-b" value="2.0" oninput="run()"></div>
+        <div class="field"><label><span>Sohllänge a [m] (quer, 1 = je m)</span></label><input type="number" step="any" id="gl-a" value="3.0" oninput="run()"></div>
+        <div class="field"><label>V<sub>G,k</sub> [kN] <span>(ständig, mit Eigengewicht)</span></label><input type="number" step="any" id="gl-VG" value="800" oninput="run()"></div>
+        <div class="field"><label>H<sub>G,k</sub> [kN]</label><input type="number" step="any" id="gl-HG" value="80" oninput="run()"></div>
+        <div class="field"><label>H<sub>Q,k</sub> [kN]</label><input type="number" step="any" id="gl-HQ" value="120" oninput="run()"></div>
+        <div class="field"><label><span>Bemessungssituation</span></label><select id="gl-bs" onchange="run()"><option value="P" selected>BS-P</option><option value="T">BS-T</option><option value="A">BS-A</option></select></div>
+        <div class="field"><label><span>Sohlfuge</span></label><select id="gl-sohle" onchange="run()"><option value="o" selected>Ortbeton (δ = φ′)</option><option value="f">Fertigteil, glatt (δ = 2/3·φ′)</option></select></div>
+        <div class="field"><label><span>Zustand</span></label><select id="gl-zu" onchange="run()"><option value="d" selected>dräniert (Reibung, φ′)</option><option value="u">undräniert (bindig, c<sub>u</sub>)</option></select></div>
+        <div class="field gl-cu"><label>c<sub>u,k</sub> [kN/m²]</label><input type="number" step="any" id="gl-cu" value="40" oninput="run()"></div>
+        <div class="field"><label><span>Erdwiderstand vor dem Fundament</span></label><select id="gl-ep" onchange="run()"><option value="0" selected>nicht ansetzen</option><option value="1">ansetzen (50 %)</option></select></div>
+        <div class="field gl-epf"><label><span>Einbindetiefe d [m]</span></label><input type="number" step="any" id="gl-d" value="1.0" oninput="run()"></div>
+      </div>
+      <div class="hint">Nur ständige Vertikallasten wirken günstig (γ = 1,0). Bodenwerte φ′, γ aus der Karte „Baugrund“. Der Erdwiderstand braucht große Verschiebungen — deshalb höchstens die Hälfte und nur, wenn der Boden vor dem Fundament dauerhaft vorhanden ist.</div>
+    </div>
+    </div>
     </div>
     <div id="mat-mauer" style="display:none">
     <div class="seg seg-sub" id="seg-mw">
@@ -905,18 +926,21 @@
     </div>
     <div id="wb-schwimm" style="display:none">
     <div class="card">
-      <div class="card-title"><span data-i18n="wsT">Quaderförmiger Schwimmkörper (Ponton)</span></div>
+      <div class="card-title"><span>Schwimmkörper</span></div>
       <div class="grid2">
         <div class="field full"><label><span data-i18n="wsName">Bezeichnung</span></label><input id="ws-name" value="Arbeitsponton" oninput="run()"></div>
-        <div class="field"><label><span data-i18n="wsL">Länge L [m]</span></label><input type="number" step="any" id="ws-L" value="12" oninput="run()"></div>
-        <div class="field"><label><span data-i18n="wsB">Breite B [m] (Kippachse längs)</span></label><input type="number" step="any" id="ws-B" value="5" oninput="run()"></div>
-        <div class="field"><label><span data-i18n="wsH">Seitenhöhe H [m]</span></label><input type="number" step="any" id="ws-H" value="1.5" oninput="run()"></div>
+        <div class="field full"><label><span>Form</span></label><select id="ws-form" onchange="wsPreset(); run()"><option value="quader" selected>Quader (Ponton)</option><option value="trapez">Trapezprisma (Ponton mit Schrägen, Keil)</option><option value="zylS">Zylinder, stehend (Boje, Senkkasten)</option><option value="zylL">Zylinder, liegend (Rohr, Schwimmrohr)</option><option value="kugel">Kugel (Boje)</option></select></div>
+        <div class="field ws-fL"><label><span data-i18n="wsL">Länge L [m]</span></label><input type="number" step="any" id="ws-L" value="12" oninput="run()"></div>
+        <div class="field ws-fB"><label><span class="ws-lB">Breite B [m] (Kippachse längs)</span></label><input type="number" step="any" id="ws-B" value="5" oninput="run()"></div>
+        <div class="field ws-fBu"><label><span>Bodenbreite B<sub>u</sub> [m] (0 = Keil)</span></label><input type="number" step="any" id="ws-Bu" value="3" oninput="run()"></div>
+        <div class="field ws-fH"><label><span data-i18n="wsH">Seitenhöhe H [m]</span></label><input type="number" step="any" id="ws-H" value="1.5" oninput="run()"></div>
+        <div class="field ws-fD"><label><span>Durchmesser D [m]</span></label><input type="number" step="any" id="ws-D" value="2.0" oninput="run()"></div>
         <div class="field"><label><span data-i18n="wsG">Gewicht G [kN] (mit Ladung)</span></label><input type="number" step="any" id="ws-G" value="450" oninput="run()"></div>
         <div class="field"><label><span data-i18n="wsZg">Schwerpunkt über Boden z<sub>G</sub> [m]</span></label><input type="number" step="any" id="ws-zg" value="1.6" oninput="run()"></div>
         <div class="field"><label><span data-i18n="wsF">Mindestfreibord f [m]</span></label><input type="number" step="any" id="ws-f" value="0.3" oninput="run()"></div>
         <div class="field"><label><span data-i18n="wsW">Wasser</span></label><select id="ws-w" onchange="run()"><option value="9.81" selected data-i18n="wsSuess">Süßwasser (9,81 kN/m³)</option><option value="10.05" data-i18n="wsSee">Seewasser (10,05 kN/m³)</option></select></div>
       </div>
-      <div class="hint" data-i18n="wsHint">Stabil schwimmt der Körper, wenn das Metazentrum M über dem Schwerpunkt G liegt (metazentrische Höhe GM &gt; 0). Gekippt wird um die Längsachse — die schmale Seite B ist maßgebend.</div>
+      <div class="hint" data-i18n="wsHint">Stabil schwimmt der Körper, wenn das Metazentrum M über dem Schwerpunkt G liegt (metazentrische Höhe GM &gt; 0). Gekippt wird um die Längsachse (bei Prismen und liegenden Zylindern die schmale Richtung). Höhen z<sub>G</sub> über der Unterkante. Beim Formwechsel werden passende Beispielwerte eingesetzt.</div>
     </div>
     </div>
     <div id="wb-rohr" style="display:none">
@@ -1275,7 +1299,7 @@ const I18N = {
   "wsW": "Wasser",
   "wsSuess": "Süßwasser (9,81 kN/m³)",
   "wsSee": "Seewasser (10,05 kN/m³)",
-  "wsHint": "Stabil schwimmt der Körper, wenn das Metazentrum M über dem Schwerpunkt G liegt (metazentrische Höhe GM &gt; 0). Gekippt wird um die Längsachse — die schmale Seite B ist maßgebend.",
+  "wsHint": "Stabil schwimmt der Körper, wenn das Metazentrum M über dem Schwerpunkt G liegt (metazentrische Höhe GM &gt; 0). Gekippt wird um die Längsachse (bei Prismen und liegenden Zylindern die schmale Richtung). Höhen z<sub>G</sub> über der Unterkante. Beim Formwechsel werden passende Beispielwerte eingesetzt.",
   "wrT": "Rohrleitung zwischen zwei Behältern",
   "wrName": "Bezeichnung",
   "wrD": "Innendurchmesser D [mm]",
@@ -1549,7 +1573,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.13';
+const SIZE_VERSION = '0.5.14';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -2966,7 +2990,7 @@ function showMat(){
   document.querySelectorAll('#seg-mw button').forEach(b=>b.classList.toggle('active', b.dataset.mw===MWMODE));
   ['druck','teil','keller','schub'].forEach(m=>$('mw-'+m).style.display = MWMODE===m ? '' : 'none');
   document.querySelectorAll('#seg-gr button').forEach(b=>b.classList.toggle('active', b.dataset.gr===GRMODE));
-  ['flach','setzung','wand','upl'].forEach(m=>$('gr-'+m).style.display = GRMODE===m ? '' : 'none');
+  ['flach','setzung','wand','upl','gleit'].forEach(m=>$('gr-'+m).style.display = GRMODE===m ? '' : 'none');
   $('gr-boden-card').style.display = GRMODE==='upl' || GRMODE==='setzung' ? 'none' : '';
   document.querySelectorAll('#seg-ho button').forEach(b=>b.classList.toggle('active', b.dataset.ho===HOMODE));
   $('ho-bauteil').style.display = HOMODE==='bauteil' ? '' : 'none';
@@ -2987,7 +3011,7 @@ function showMat(){
       ? ['Stahl — Schrauben und Kehlnähte','Bemessung nach DIN EN 1993-1-8 mit deutschem NA: Rand- und Lochabstände, Abscheren, Lochleibung, Zug in den Schrauben und Kehlnähte.','Schraubenbild']
       : ['Stahl — Walzprofile IPE, HEA, HEB','Bemessung nach DIN EN 1993-1-1 und 1-5 mit deutschem NA: Klassifizierung (auch Klasse 4), Querschnitt, zweiachsige Biegung, Torsion, Lasteinleitung, Knicken, Biegedrillknicken und Durchbiegung.','Profil'],
     wasser: { druck:['Wasserbau — Wasserdruck auf ebene Flächen','Hydrostatik: Druckverteilung, Druckkraft, Druckmittelpunkt (auch mit Steiner), Gegendruck aus Unterwasser und Moment am Fuß.','Druckfigur'],
-      schwimm:['Wasserbau — Schwimmkörper','Hydrostatik: Auftrieb nach Archimedes, Tiefgang, Freibord, Metazentrum und Schwimmstabilität eines Pontons.','Querschnitt'],
+      schwimm:['Wasserbau — Schwimmkörper','Hydrostatik: Auftrieb nach Archimedes, Tiefgang, Freibord, Metazentrum und Schwimmstabilität — Quader, Trapezprisma, stehender und liegender Zylinder, Kugel.','Querschnitt'],
       rohr:['Wasserbau — Rohrleitung','Hydrodynamik: Kontinuität, Reynolds-Zahl, Reibungsbeiwert nach Colebrook-White, Verluste nach Darcy-Weisbach, Energie- und Drucklinie.','Energielinie'],
       gerinne:['Wasserbau — Offenes Gerinne','Hydrodynamik: Normalabfluss nach Gauckler-Manning-Strickler, Froude-Zahl, Grenztiefe und spezifische Energie im Rechteck- oder Trapezgerinne.','Gerinne'],
       wehr:['Wasserbau — Wehrüberfall','Hydrodynamik: vollkommener Überfall nach Poleni, Überfallhöhe und Oberwasserstand.','Wehr'] }[WBMODE],
@@ -2998,7 +3022,8 @@ function showMat(){
     grund: { flach:['Grundbau — Flachgründung','Nachweise nach DIN EN 1997-1 mit DIN 1054 (BS-P): Lage der Resultierenden (klaffende Fuge), Grundbruch nach DIN 4017 mit Form- und Neigungsbeiwerten und Gleiten.','Fundament'],
       setzung:['Grundbau — Setzung','Setzung eines Rechteckfundaments nach DIN 4019: Spannungsausbreitung nach Steinbrenner, Grenztiefe und Summe der Schichtsetzungen mit dem Steifemodul.','Spannungen und Setzung'],
       wand:['Grundbau — Winkelstützmauer','Erddruck nach Coulomb und Nachweise nach DIN 1054 (BS-P): Gleiten, Lage der Resultierenden und Grundbruch nach DIN 4017.','Stützwand'],
-      upl:['Grundbau — Auftrieb','Nachweis der Auftriebssicherheit (UPL) nach DIN EN 1997-1 mit DIN 1054 für Keller, Wannen und Becken im Grundwasser.','Auftrieb'] }[GRMODE],
+      upl:['Grundbau — Auftrieb','Nachweis der Auftriebssicherheit (UPL) nach DIN EN 1997-1 mit DIN 1054 für Keller, Wannen und Becken im Grundwasser.','Auftrieb'],
+      gleit:['Grundbau — Gleiten','Gleitsicherheit in der Sohlfuge nach DIN EN 1997-1 mit DIN 1054 (BS-P, BS-T, BS-A): Sohlreibung dräniert oder undräniert, wahlweise mit abgemindertem Erdwiderstand.','Gleiten'] }[GRMODE],
     holz: HOMODE==='ausklink'
       ? ['Holz — Ausklinkung am Auflager','Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.5.2: Schub im Restquerschnitt mit dem Abminderungsbeiwert kv für die Kerbwirkung an der einspringenden Ecke.','Trägerende']
       : HOMODE==='sattel'
@@ -4345,9 +4370,9 @@ function buildReportGF(){
     </table></section><section><h2>Fundament</h2><div class="figure">${figGF(I,res)}</div></section>` + reportChecks(res.C) + repEnd('Flachgründung, Bemessungssituation BS-P.');
 }
 
-const GR_NAME = { flach:'gf-name', setzung:'gs-name', wand:'gw-name', upl:'gu-name' };
-function runGrund(){ if(GRMODE==='flach') return runGF(); if(GRMODE==='setzung') return runGS(); if(GRMODE==='wand') return runGW(); return runGU(); }
-function buildReportGrund(){ return { flach:buildReportGF, setzung:buildReportGS, wand:buildReportGW, upl:buildReportGU }[LAST.mode](); }
+const GR_NAME = { flach:'gf-name', setzung:'gs-name', wand:'gw-name', upl:'gu-name', gleit:'gl-name' };
+function runGrund(){ if(GRMODE==='flach') return runGF(); if(GRMODE==='setzung') return runGS(); if(GRMODE==='wand') return runGW(); if(GRMODE==='gleit') return runGL(); return runGU(); }
+function buildReportGrund(){ return { flach:buildReportGF, setzung:buildReportGS, wand:buildReportGW, upl:buildReportGU, gleit:buildReportGL }[LAST.mode](); }
 // ── Setzung nach DIN 4019 (Steinbrenner, kennzeichnender Punkt) ──
 // Einflusswert unter der Ecke einer schlaffen Rechtecklast a × b in der Tiefe z
 function steinbrenner(a, b, z){
@@ -4576,6 +4601,90 @@ function buildReportGW(){
 
 // ── Auftrieb (UPL), DIN EN 1997-1 mit DIN 1054, Tabelle A 2.1 ──
 const UPL_F = { P:{dst:1.05, stb:0.95}, T:{dst:1.05, stb:0.95}, A:{dst:1.00, stb:0.95} };
+// ── Gleiten in der Sohlfuge (DIN EN 1997-1, 6.5.3 mit DIN 1054) ──
+const GL_F = { P:{gG:1.35, gQ:1.50, gRh:1.10, gRe:1.40}, T:{gG:1.20, gQ:1.30, gRh:1.10, gRe:1.30}, A:{gG:1.10, gQ:1.10, gRh:1.10, gRe:1.20} };
+function readGL(){ return { name:$('gl-name').value, b:num('gl-b'), a:num('gl-a'), VG:num('gl-VG'), HG:num('gl-HG')||0, HQ:num('gl-HQ')||0, bs:$('gl-bs').value, sohle:$('gl-sohle').value,
+  zu:$('gl-zu').value, cu:num('gl-cu')||0, ep:$('gl-ep').value==='1', d:num('gl-d')||0, phi:num('gr-phi'), g1:num('gr-g1') }; }
+function validateGL(I){ const bad=[]; if(!(I.b>0 && I.a>0)) bad.push('b, a > 0'); if(!(I.VG>0)) bad.push('V_G,k > 0'); if(!(I.HG>=0 && I.HQ>=0) || I.HG+I.HQ<=0) bad.push('H > 0');
+  if(I.zu==='d' && !(I.phi>0 && I.phi<50)) bad.push('φ′ zwischen 0 und 50°'); if(I.zu==='u' && !(I.cu>0)) bad.push('c_u > 0'); if(I.ep && !(I.d>0 && I.g1>0)) bad.push('d, γ > 0'); return bad; }
+function nachweiseGL(I){
+  const f=x=>deNum(x,2), f1=x=>deNum(x,1), F=GL_F[I.bs], C=[], A=I.a*I.b;
+  const Hd=F.gG*I.HG+F.gQ*I.HQ;
+  C.push({ id:'glh', title:'Einwirkung parallel zur Sohle', eta:0, ok:true, info:true, steps:[
+    H(`Bemessungssituation BS-${I.bs}: γ<sub>G</sub> = ${f(F.gG)}, γ<sub>Q</sub> = ${f(F.gQ)} (DIN 1054, Tab. A 2.1)`),
+    `H<sub>d</sub> = γ<sub>G</sub>·H<sub>G,k</sub> + γ<sub>Q</sub>·H<sub>Q,k</sub> = ${f(F.gG)}·${f1(I.HG)} + ${f(F.gQ)}·${f1(I.HQ)} = <b>${f1(Hd)} kN</b>`,
+    H('Günstige Vertikallast: nur der ständige Anteil, charakteristisch (γ = 1,0)'),
+    `V<sub>k</sub> = V<sub>G,k</sub> = <b>${f1(I.VG)} kN</b> · Sohlfläche A = a·b = ${f(I.a)}·${f(I.b)} = ${f(A)} m²`]});
+  let Rtk, S=[];
+  if(I.zu==='d'){
+    const dl0=I.sohle==='o' ? I.phi : 2/3*I.phi, dl=Math.min(dl0,35);
+    Rtk=I.VG*Math.tan(rad(dl));
+    S.push(H('Dränierter Zustand: Reibung in der Sohlfuge, Kohäsion wird nicht angesetzt'),
+      `δ<sub>S,k</sub> = ${I.sohle==='o'?'φ′<sub>k</sub>':'2/3·φ′<sub>k</sub>'} = ${f1(dl0)}°${dl0>35?' → begrenzt auf 35°':''} (${I.sohle==='o'?'Ortbeton':'glattes Fertigteil'})`,
+      `R<sub>t,k</sub> = V<sub>k</sub>·tan δ<sub>S,k</sub> = ${f1(I.VG)}·tan ${f1(dl)}° = <b>${f1(Rtk)} kN</b>`);
+  } else {
+    Rtk=A*I.cu;
+    S.push(H('Undränierter Zustand (wassergesättigter bindiger Boden, schnelle Belastung)'),
+      `R<sub>t,k</sub> = A·c<sub>u,k</sub> = ${f(A)}·${f1(I.cu)} = <b>${f1(Rtk)} kN</b>`,
+      `Begrenzung, wenn Wasser oder Luft in die Sohlfuge gelangen kann: R<sub>t,k</sub> ≤ 0,4·V<sub>k</sub> = ${f1(0.4*I.VG)} kN${Rtk>0.4*I.VG?' → hier maßgebend, falls die Fuge nicht dicht ist':''}`);
+  }
+  const Rtd=Rtk/F.gRh;
+  S.push(`R<sub>t,d</sub> = R<sub>t,k</sub>/γ<sub>R,h</sub> = ${f1(Rtk)}/${f(F.gRh)} = <b>${f1(Rtd)} kN</b>`);
+  C.push({ id:'glr', title:'Gleitwiderstand in der Sohlfuge', eta:0, ok:true, info:true, steps:S });
+  let Rpd=0, Epk=0, Kp=0;
+  if(I.ep){
+    Kp=Math.tan(rad(45+I.phi/2))**2; Epk=0.5*I.g1*I.d*I.d*Kp*I.a; Rpd=0.5*Epk/F.gRe;
+    C.push({ id:'glep', title:'Erdwiderstand vor dem Fundament', eta:0, ok:true, info:true, steps:[
+      H('Passiver Erddruck (Rankine, δ<sub>p</sub> = 0, waagerechtes Gelände)'),
+      `K<sub>p</sub> = tan²(45° + φ′/2) = tan²(${f1(45+I.phi/2)}°) = <b>${deNum(Kp,3)}</b>`,
+      `E<sub>p,k</sub> = ½·γ·d²·K<sub>p</sub>·a = 0,5·${f1(I.g1)}·${f(I.d)}²·${deNum(Kp,3)}·${f(I.a)} = <b>${f1(Epk)} kN</b>`,
+      H('Abminderung auf 50 % (Verträglichkeit der Verschiebungen) und Teilsicherheit'),
+      `R<sub>p,d</sub> = 0,5·E<sub>p,k</sub>/γ<sub>R,e</sub> = 0,5·${f1(Epk)}/${f(F.gRe)} = <b>${f1(Rpd)} kN</b>`]});
+  }
+  const Rd=Rtd+Rpd, eta=Hd/Rd;
+  // erforderliche Vertikallast bzw. Breite für η = 1 (dräniert)
+  C.push({ id:'glnw', title:'Nachweis Gleiten', eta, ok:eta<=1, steps:[
+    H('H<sub>d</sub> ≤ R<sub>t,d</sub> + R<sub>p,d</sub>'),
+    `${f1(Hd)} ${eta<=1?'≤':'>'} ${f1(Rtd)}${I.ep?` + ${f1(Rpd)}`:''} = <b>${f1(Rd)} kN</b> → Ausnutzung η = ${deNum(eta,2)}`,
+    ...(I.zu==='d' && Rtk>0 ? [`Erforderlich ohne Erdwiderstand: V<sub>G,k</sub> ≥ H<sub>d</sub>·γ<sub>R,h</sub>/tan δ = ${f1(Hd*F.gRh/(Rtk/I.VG))} kN`] : [])],
+    note: eta>1 ? 'Abhilfe: Sporn unter der Sohle, Sohle geneigt ausführen, mehr ständige Auflast, rauere Fuge (Ortbeton statt Fertigteil), Erdwiderstand nur wenn gesichert.' : 'Zusätzlich Grundbruch und Lage der Resultierenden nachweisen (Modus Flachgründung).' });
+  return { C, ok:C.every(c=>c.ok), Hd, Rtk, Rtd, Epk, Rpd, Rd, Kp };
+}
+function figGL(I, res){
+  const f1=x=>deNum(x,1), f2=x=>deNum(x,2), sc=Math.min(180/I.b, 90/Math.max(I.d,1)), x0=235-I.b*sc/2, gy=125, hf=Math.max(I.d,0.6), X=x=>x0+x*sc, Y=z=>gy+z*sc;
+  let s=`<svg viewBox="0 0 470 280" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gleiten">`;
+  s+=svgT(235, 14, 'Schnitt', 'middle', '#6b7280', 9.5);
+  s+=`<rect x="10" y="${gy}" width="450" height="${270-gy}" fill="#efe7da"/><line x1="10" y1="${gy}" x2="460" y2="${gy}" stroke="#8b6b3e" stroke-width="1.4"/>`;
+  const top=I.ep ? Y(I.d-hf) : gy-hf*sc*0.6, bot=I.ep ? Y(I.d) : gy+hf*sc*0.4;
+  s+=`<rect x="${X(0)}" y="${top}" width="${I.b*sc}" height="${bot-top}" fill="#cbd5e1" stroke="#111" stroke-width="1.2"/>`;
+  s+=svgArrow(X(I.b/2), top-46, X(I.b/2), top-4, C_IN, false, 2)+svgT(X(I.b/2)+6, top-26, `V<tspan font-size="7" dy="2">G,k</tspan><tspan dy="-2"> = ${f1(I.VG)} kN</tspan>`, 'start', C_IN, 9);
+  s+=svgArrow(X(0)-70, top+12, X(0)-3, top+12, C_EW, false, 2.2)+svgT(X(0)-72, top+4, `H<tspan font-size="7" dy="2">d</tspan><tspan dy="-2"> = ${f1(res.Hd)} kN</tspan>`, 'start', C_EW, 9);
+  // Sohlreibung
+  for(let i=0;i<5;i++){ const xx=X(I.b*(i+0.6)/5.4); s+=svgArrow(xx+18, bot+8, xx-2, bot+8, '#047857', false, 1.2); }
+  s+=svgT(X(I.b/2), bot+24, `R<tspan font-size="7" dy="2">t,d</tspan><tspan dy="-2"> = ${f1(res.Rtd)} kN</tspan>`, 'middle', '#047857', 9);
+  if(I.ep){ const hd=I.d*sc, xr=X(I.b); s+=`<polygon points="${xr},${gy} ${xr},${Y(I.d)} ${xr+Math.min(90,hd*0.9)},${Y(I.d)}" fill="#047857" fill-opacity="0.18" stroke="#047857"/>`
+    + svgArrow(xr+40, Y(I.d*2/3), xr+3, Y(I.d*2/3), '#047857', false, 1.8) + svgT(xr+44, Y(I.d*2/3)+4, `R<tspan font-size="7" dy="2">p,d</tspan><tspan dy="-2"> = ${f1(res.Rpd)} kN</tspan>`, 'start', '#047857', 9); }
+  s+=svgT(X(I.b/2), (top+bot)/2+4, `b = ${f2(I.b)} m`, 'middle', '#111', 9);
+  s+='</svg>';
+  return s + figLegend([`H<sub>d</sub> = ${f1(res.Hd)} kN`], [`R<sub>t,d</sub> = ${f1(res.Rtd)} kN`, ...(I.ep?[`R<sub>p,d</sub> = ${f1(res.Rpd)} kN`]:[])], 'Orange: Einwirkung, grün: Widerstände in der Sohlfuge und vor dem Fundament.');
+}
+function runGL(){
+  document.querySelectorAll('.gl-cu').forEach(e=>e.style.display=$('gl-zu').value==='u'?'':'none');
+  document.querySelectorAll('.gl-epf').forEach(e=>e.style.display=$('gl-ep').value==='1'?'':'none');
+  const I=readGL(), bad=validateGL(I); if(bad.length){ showBad(bad); return; }
+  const res=nachweiseGL(I);
+  LAST={ mat:'grund', mode:'gleit', I, res, date:new Date() };
+  renderOut(res.C, res.ok, figGL(I,res), `Sohle ${deNum(I.b,2)} × ${deNum(I.a,2)} m · H<sub>d</sub> = ${deNum(res.Hd,1)} kN, R<sub>d</sub> = ${deNum(res.Rd,1)} kN`,
+    'Geneigte Sohlfuge, Sporn, Gleiten in tieferen Schichten (Geländebruch), Grundbruch und Kippen (Modus Flachgründung).', 'ref.html#/grundbau');
+}
+function buildReportGL(){
+  const {I,res}=LAST;
+  return repHead(I.name||'Gleiten','DIN EN 1997-1 mit DIN 1054, Gleiten (GEO-2)') + `<section><h2>Eingaben</h2><table>
+      ${repRow('Sohle', `b = ${deNum(I.b,2)} m, a = ${deNum(I.a,2)} m, ${I.sohle==='o'?'Ortbeton':'Fertigteil'}`)}
+      ${repRow('Lasten', `V<sub>G,k</sub> = ${deNum(I.VG,1)} kN, H<sub>G,k</sub> = ${deNum(I.HG,1)} kN, H<sub>Q,k</sub> = ${deNum(I.HQ,1)} kN, BS-${I.bs}`)}
+      ${repRow('Boden', I.zu==='d' ? `dräniert, φ′<sub>k</sub> = ${deNum(I.phi,1)}°` : `undräniert, c<sub>u,k</sub> = ${deNum(I.cu,1)} kN/m²`)}
+    </table></section><section><h2>Schnitt</h2><div class="figure">${figGL(I,res)}</div></section>` + reportChecks(res.C) + repEnd('Gleitnachweis.');
+}
 function readGU(){ return { name:$('gu-name').value, L:num('gu-L'), B:num('gu-B'), hw:num('gu-hw'), ts:num('gu-ts'), tw:num('gu-tw')||0, hwand:num('gu-hwand')||0, td:num('gu-td')||0, g:num('gu-g')||0, bs:$('gu-bs').value }; }
 function validateGU(I){ const bad=[]; if(!(I.L>0 && I.B>0)) bad.push('Grundriss > 0'); if(!(I.ts>0)) bad.push('Sohlplatte > 0'); if(!(I.hw>=0)) bad.push('h_w ≥ 0');
   if(!(2*I.tw<Math.min(I.L,I.B))) bad.push('Wanddicke zu groß'); return bad; }
@@ -4941,45 +5050,96 @@ function figWD(I, res){
   return s_ + figLegend([`Wasser γ<sub>w</sub> = 9,81 kN/m³, Breite b = ${f2(I.b)} m`], [`F = ${f1(res.O.F)} kN in e = ${f2(res.O.e)} m`, `F<sub>res</sub> = ${f1(res.Fn)} kN`, `M<sub>Fuß</sub> = ${f1(res.Mfuss)} kNm`], 'Orange: Druckfigur senkrecht zur Fläche, blau: Resultierende im Druckmittelpunkt.');
 }
 // ── Hydrostatik: Schwimmkörper ──
-function readWS(){ return { name:$('ws-name').value, L:num('ws-L'), B:num('ws-B'), H:num('ws-H'), G:num('ws-G'), zg:num('ws-zg'), f:num('ws-f')||0, gw:+$('ws-w').value }; }
-function validateWS(I){ const bad=[]; if(!(I.L>0 && I.B>0 && I.H>0)) bad.push('L, B, H > 0'); if(!(I.G>0)) bad.push('G > 0'); if(!(I.zg>=0)) bad.push('z_G ≥ 0'); return bad; }
+const WS_PRESET = { quader:{L:12,B:5,H:1.5,G:450,zg:1.6}, trapez:{L:12,B:5,Bu:3,H:1.5,G:350,zg:1.1}, zylS:{D:2,H:3,G:55,zg:0.8}, zylL:{L:12,D:2,G:200,zg:0.6}, kugel:{D:2,G:25,zg:0.5} };
+function wsPreset(){ const P=WS_PRESET[$('ws-form').value]; Object.entries(P).forEach(([k,v])=>{ const e=$('ws-'+(k==='zg'?'zg':k)); if(e) e.value=v; }); }
+const WS_FORM = { quader:'Quader', trapez:'Trapezprisma', zylS:'stehender Zylinder', zylL:'liegender Zylinder', kugel:'Kugel' };
+function readWS(){ return { name:$('ws-name').value, form:$('ws-form').value, L:num('ws-L'), B:num('ws-B'), Bu:num('ws-Bu')||0, H:num('ws-H'), D:num('ws-D'), G:num('ws-G'), zg:num('ws-zg'), f:num('ws-f')||0, gw:+$('ws-w').value }; }
+function wsFields(form){
+  const show={ quader:['L','B','H'], trapez:['L','B','Bu','H'], zylS:['D','H'], zylL:['L','D'], kugel:['D'] }[form];
+  ['L','B','Bu','H','D'].forEach(k=>document.querySelectorAll('.ws-f'+k).forEach(e=>e.style.display=show.includes(k)?'':'none'));
+  document.querySelectorAll('.ws-lB').forEach(e=>e.innerHTML = form==='trapez' ? 'Deckbreite B<sub>o</sub> [m] (oben)' : 'Breite B [m] (Kippachse längs)');
+}
+function validateWS(I){ const bad=[], F=I.form;
+  if((F==='quader'||F==='trapez'||F==='zylL') && !(I.L>0)) bad.push('L > 0');
+  if((F==='quader'||F==='trapez') && !(I.B>0 && I.H>0)) bad.push('B, H > 0');
+  if(F==='trapez' && !(I.Bu>=0)) bad.push('B_u ≥ 0');
+  if((F==='zylS'||F==='zylL'||F==='kugel') && !(I.D>0)) bad.push('D > 0');
+  if(F==='zylS' && !(I.H>0)) bad.push('H > 0');
+  if(!(I.G>0)) bad.push('G > 0'); if(!(I.zg>=0)) bad.push('z_G ≥ 0'); return bad; }
+// Geometrie: verdrängtes Volumen V(T), Auftriebsschwerpunkt z_B(T) über Unterkante, Wasserlinien-Trägheitsmoment I_W(T)
+function wsGeo(I){
+  const PI=Math.PI, R=(I.D||0)/2;
+  const seg = T => { const t=Math.min(Math.max(T,0),2*R), c=2*Math.sqrt(Math.max(0,t*(2*R-t))), A=R*R*Math.acos((R-t)/R)-(R-t)*Math.sqrt(Math.max(0,2*R*t-t*t)); return {c,A}; };
+  switch(I.form){
+    case 'quader': return { Hg:I.H, V:T=>I.L*I.B*T, zB:T=>T/2, Iw:()=>I.L*I.B**3/12, bw:()=>I.B };
+    case 'trapez': { const k=(I.B-I.Bu)/I.H, b=T=>I.Bu+k*T;
+      return { Hg:I.H, k, b, V:T=>I.L*(I.Bu+b(T))/2*T, zB:T=>T/3*(I.Bu+2*b(T))/(I.Bu+b(T)), Iw:T=>I.L*b(T)**3/12, bw:T=>b(T) }; }
+    case 'zylS': return { Hg:I.H, V:T=>PI*I.D*I.D/4*T, zB:T=>T/2, Iw:()=>PI*I.D**4/64, bw:()=>I.D };
+    case 'zylL': return { Hg:I.D, seg, V:T=>I.L*seg(T).A, zB:T=>{ const q=seg(T); return q.A>0 ? R-q.c**3/(12*q.A) : 0; }, Iw:T=>I.L*seg(T).c**3/12, bw:T=>seg(T).c };
+    case 'kugel': return { Hg:I.D, V:T=>PI*T*T*(3*R-T)/3, zB:T=>R-3*(2*R-T)**2/(4*(3*R-T)), Iw:T=>PI*(T*(2*R-T))**2/4, bw:T=>2*Math.sqrt(Math.max(0,T*(2*R-T))) };
+  }
+}
+function wsTiefgang(g, V){ let lo=0, hi=g.Hg; if(g.V(hi)<V) return { T:Infinity, sinkt:true };
+  for(let i=0;i<200;i++){ const m=(lo+hi)/2; if(g.V(m)<V) lo=m; else hi=m; } return { T:(lo+hi)/2, sinkt:false }; }
 function nachweiseWS(I){
-  const f=x=>deNum(x,2), f1=x=>deNum(x,1), f3=x=>deNum(x,3), C=[];
-  const V=I.G/I.gw, T=V/(I.L*I.B), zB=T/2, Iw=I.L*I.B**3/12, BM=Iw/V, KM=zB+BM, GM=KM-I.zg;
-  C.push({ id:'wst', title:'Tiefgang und Freibord', eta:T/(I.H-I.f), ok:T<=I.H-I.f, steps:[
+  const f=x=>deNum(x,2), f1=x=>deNum(x,1), f3=x=>deNum(x,3), C=[], g=wsGeo(I), F=I.form, R=(I.D||0)/2;
+  const V=I.G/I.gw, Vmax=g.V(g.Hg), tg=wsTiefgang(g,V), sinkt=tg.sinkt, T=sinkt?g.Hg:tg.T;
+  const vTxt = { quader:`V(T) = L·B·T → T = V/(L·B) = ${f3(V)}/(${f(I.L)}·${f(I.B)})`,
+    trapez:`V(T) = L·(B<sub>u</sub> + b(T))/2·T mit b(T) = B<sub>u</sub> + k·T, k = (B<sub>o</sub> − B<sub>u</sub>)/H = ${f3(g.k||0)} → ${Math.abs(g.k||0)>1e-12?`T = (−B<sub>u</sub> + √(B<sub>u</sub>² + 2k·V/L))/k`:'T = V/(L·B<sub>u</sub>)'}`,
+    zylS:`V(T) = π·D²/4·T → T = V/(π·${f(I.D)}²/4)`,
+    zylL:`V(T) = L·A<sub>Seg</sub>(T) mit A<sub>Seg</sub> = R²·arccos((R − T)/R) − (R − T)·√(2RT − T²), R = ${f3(R)} m → T iterativ`,
+    kugel:`V(T) = π·T²·(3R − T)/3 (Kugelkappe), R = ${f3(R)} m → T iterativ` }[F];
+  C.push({ id:'wst', title:'Tiefgang und Freibord', eta:sinkt?9.99:T/(g.Hg-I.f), ok:!sinkt && T<=g.Hg-I.f, steps:[
     H('Archimedes: Auftrieb = Gewicht der verdrängten Wassermenge'),
-    `V<sub>verdr</sub> = G/γ<sub>w</sub> = ${f1(I.G)}/${f(I.gw)} = ${f(V)} m³ · Tiefgang T = V/(L·B) = <b>${f3(T)} m</b>`,
-    `Freibord H − T = ${f3(I.H-T)} m ${I.H-T>=I.f?'≥':'<'} f<sub>min</sub> = ${f(I.f)} m`],
-    note: T>I.H ? 'Tiefgang größer als die Seitenhöhe: der Körper geht unter.' : '' });
+    `V<sub>verdr</sub> = G/γ<sub>w</sub> = ${f1(I.G)}/${f(I.gw)} = <b>${f3(V)} m³</b> · größtes Volumen des Körpers V<sub>max</sub> = ${f3(Vmax)} m³`,
+    H(`Tiefgang (${WS_FORM[F]})`),
+    sinkt ? `V<sub>verdr</sub> > V<sub>max</sub> → <b>der Körper geht unter</b>` : `${vTxt} = <b>${f3(T)} m</b>`,
+    ...(sinkt?[]:[`Kontrolle: V(T) = ${f3(g.V(T))} m³ = V<sub>verdr</sub> ✓`, `Freibord H − T = ${f(g.Hg)} − ${f3(T)} = ${f3(g.Hg-T)} m ${g.Hg-T>=I.f?'≥':'<'} f<sub>min</sub> = ${f(I.f)} m`])],
+    note: sinkt ? 'Mehr Volumen (größere Abmessungen) oder weniger Gewicht.' : '' });
+  if(sinkt) return { C, ok:false, V, T, zB:0, BM:0, KM:0, GM:-1, sinkt, g };
+  const zB=g.zB(T), Iw=g.Iw(T), BM=Iw/V, KM=zB+BM, GM=KM-I.zg, bw=g.bw(T);
+  const zTxt = { quader:`z<sub>B</sub> = T/2`, trapez:`z<sub>B</sub> = T/3·(B<sub>u</sub> + 2b)/(B<sub>u</sub> + b) mit b = b(T) = ${f3(bw)} m`, zylS:`z<sub>B</sub> = T/2`,
+    zylL:`z<sub>B</sub> = R − s³/(12·A<sub>Seg</sub>) mit Sehne s = 2·√(T·(2R − T)) = ${f3(bw)} m, A<sub>Seg</sub> = ${f3(g.seg?g.seg(T).A:0)} m²`,
+    kugel:`z<sub>B</sub> = R − 3·(2R − T)²/(4·(3R − T))` }[F];
+  const iTxt = { quader:`I<sub>W</sub> = L·B³/12`, trapez:`I<sub>W</sub> = L·b³/12`, zylS:`I<sub>W</sub> = π·D⁴/64`, zylL:`I<sub>W</sub> = L·s³/12`, kugel:`I<sub>W</sub> = π·r<sub>W</sub>⁴/4 mit r<sub>W</sub> = √(T·(2R − T)) = ${f3(bw/2)} m` }[F];
   const phi=10, Mr=I.G*GM*Math.sin(rad(phi));
   C.push({ id:'wsgm', title:'Schwimmstabilität (Metazentrum)', eta: KM>0 ? I.zg/KM : 9.99, ok:GM>0, steps:[
     H('Auftriebsmittelpunkt B: Schwerpunkt des verdrängten Volumens'),
-    `z<sub>B</sub> = T/2 = ${f3(zB)} m über dem Boden`,
+    `${zTxt} = <b>${f3(zB)} m</b> über Unterkante`,
     H('Metazentrum M: Schnittpunkt der Auftriebswirkungslinie bei kleiner Neigung'),
-    `I<sub>W</sub> = L·B³/12 = ${f(Iw)} m⁴ (Wasserlinienfläche um die Längsachse) · BM = I<sub>W</sub>/V = <b>${f3(BM)} m</b>`,
-    `z<sub>M</sub> = z<sub>B</sub> + BM = ${f3(KM)} m`,
+    `${iTxt} = ${f3(Iw)} m⁴ (Wasserlinienfläche um die Kippachse)`,
+    `BM = I<sub>W</sub>/V = ${f3(Iw)}/${f3(V)} = <b>${f3(BM)} m</b> · z<sub>M</sub> = z<sub>B</sub> + BM = ${f3(KM)} m`,
+    ...(F==='zylL'||F==='kugel' ? [`Kontrolle: bei ${F==='kugel'?'der Kugel':'kreisförmigem Querschnitt'} liegt M im Mittelpunkt, z<sub>M</sub> = R = ${f3(R)} m ✓`] : []),
     H('Metazentrische Höhe: positiv = stabil (aufrichtendes Moment)'),
     `GM = z<sub>M</sub> − z<sub>G</sub> = ${f3(KM)} − ${f3(I.zg)} = <b>${f3(GM)} m</b> ${GM>0?'> 0 → stabil':'≤ 0 → instabil, der Körper kippt'}`,
     `Aufrichtendes Moment bei ${phi}° Krängung (kleine Winkel): M = G·GM·sin φ = ${f1(Mr)} kNm`],
-    note: GM>0 && GM<0.3 ? 'GM klein: der Körper schwimmt zwar stabil, rollt aber stark — für Arbeitspontons üblich GM ≥ 0,3 … 1 m.' : (GM<=0?'Schwerpunkt tiefer legen (Ballast) oder Breite B vergrößern (BM wächst mit B²).':'') });
-  return { C, ok:C.every(c=>c.ok), V, T, zB, BM, KM, GM };
+    note: GM>0 && GM<0.3 ? 'GM klein: der Körper schwimmt zwar stabil, rollt aber stark — für Arbeitspontons üblich GM ≥ 0,3 … 1 m.'
+      : GM<=0 ? (F==='zylL'||F==='kugel' ? 'Beim runden Querschnitt liegt M im Mittelpunkt: stabil nur, wenn der Schwerpunkt G darunter liegt (Ballast unten).' : F==='zylS' ? 'Stehende Zylinder sind nur bei kleiner Höhe oder tiefem Schwerpunkt stabil — Ballast im Fuß oder größerer Durchmesser.' : 'Schwerpunkt tiefer legen (Ballast) oder breiter bauen (BM wächst mit der dritten Potenz der Breite).') : '' });
+  return { C, ok:C.every(c=>c.ok), V, T, zB, BM, KM, GM, Iw, g };
 }
 function figWS(I, res){
-  const f2=x=>deNum(x,2), f3=x=>deNum(x,3), sc=Math.min(260/I.B, 170/Math.max(I.H, res.KM, I.zg)+0), cx=200, yb=250, X=x=>cx+x*sc, Y=z=>yb-z*sc;
+  const f2=x=>deNum(x,2), f3=x=>deNum(x,3), F=I.form, g=res.g, Wd = F==='quader'?I.B : F==='trapez'?Math.max(I.B,I.Bu) : I.D;
+  const Ht=Math.max(g.Hg, res.KM||0, I.zg), sc=Math.min(240/Wd, 190/Ht), cx=200, yb=255, X=x=>cx+x*sc, Y=z=>yb-z*sc;
   let s=`<svg viewBox="0 0 470 290" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schwimmkörper">`;
-  s+=svgT(cx, 14, 'Querschnitt', 'middle', '#6b7280', 9.5);
-  const wl=Y(Math.min(res.T, I.H));
+  s+=svgT(cx, 14, F==='zylS'?'Ansicht':'Querschnitt', 'middle', '#6b7280', 9.5);
+  const wl=Y(Math.min(res.T, g.Hg));
   s+=`<rect x="10" y="${wl}" width="450" height="${yb-wl+30}" fill="#dbeafe"/>`+`<line x1="10" y1="${wl}" x2="460" y2="${wl}" stroke="#2563eb" stroke-width="1.2"/>`+svgT(456, wl-4, 'WL ▽', 'end', '#2563eb', 9);
-  s+=`<rect x="${X(-I.B/2)}" y="${Y(I.H)}" width="${I.B*sc}" height="${I.H*sc}" fill="#cbd5e1" fill-opacity="0.85" stroke="#111" stroke-width="1.2"/>`;
-  const pt=(z,lab,col)=>`<circle cx="${cx}" cy="${Y(z)}" r="3.5" fill="${col}"/>`+svgT(cx+8, Y(z)+3, lab, 'start', col, 9);
-  s+=pt(res.zB,`B (${f3(res.zB)})`, '#2563eb')+pt(I.zg,`G (${f3(I.zg)})`, C_EW)+pt(res.KM,`M (${f3(res.KM)})`, res.GM>0?'#047857':'#b91c1c');
-  s+=`<line x1="${cx}" y1="${Y(res.KM)}" x2="${cx}" y2="${Y(res.zB)}" stroke="#6b7280" stroke-dasharray="3 3"/>`;
-  s+=svgArrow(cx-40, Y(I.zg)-40, cx-40, Y(I.zg)-4, C_EW)+svgT(cx-46, Y(I.zg)-22, 'G', 'end', C_EW);
-  s+=svgArrow(cx-60, Y(res.zB)+36, cx-60, Y(res.zB)+4, '#2563eb')+svgT(cx-66, Y(res.zB)+24, 'A', 'end', '#2563eb');
-  s+=`<line x1="${X(I.B/2)+20}" y1="${yb}" x2="${X(I.B/2)+20}" y2="${wl}" stroke="#111" stroke-width="0.7"/>`+svgT(X(I.B/2)+24, (yb+wl)/2+3, `T = ${f3(res.T)} m`, 'start', '#111', 9);
-  s+=svgT(cx, yb+18, `B = ${f2(I.B)} m`, 'middle', '#111', 9);
+  const st='fill="#cbd5e1" fill-opacity="0.85" stroke="#111" stroke-width="1.2"';
+  if(F==='quader') s+=`<rect x="${X(-I.B/2)}" y="${Y(I.H)}" width="${I.B*sc}" height="${I.H*sc}" ${st}/>`;
+  else if(F==='trapez') s+=`<polygon points="${X(-I.Bu/2)},${Y(0)} ${X(I.Bu/2)},${Y(0)} ${X(I.B/2)},${Y(I.H)} ${X(-I.B/2)},${Y(I.H)}" ${st}/>`;
+  else if(F==='zylS') s+=`<rect x="${X(-I.D/2)}" y="${Y(I.H)}" width="${I.D*sc}" height="${I.H*sc}" rx="2" ${st}/>`;
+  else s+=`<circle cx="${cx}" cy="${Y(I.D/2)}" r="${I.D/2*sc}" ${st}/>`;
+  if(!res.sinkt){
+    const pt=(z,lab,col)=>`<circle cx="${cx}" cy="${Y(z)}" r="3.5" fill="${col}"/>`+svgT(cx+8, Y(z)+3, lab, 'start', col, 9);
+    s+=pt(res.zB,`B (${f3(res.zB)})`, '#2563eb')+pt(I.zg,`G (${f3(I.zg)})`, C_EW)+pt(res.KM,`M (${f3(res.KM)})`, res.GM>0?'#047857':'#b91c1c');
+    s+=`<line x1="${cx}" y1="${Y(res.KM)}" x2="${cx}" y2="${Y(res.zB)}" stroke="#6b7280" stroke-dasharray="3 3"/>`;
+    s+=svgArrow(cx-40, Y(I.zg)-40, cx-40, Y(I.zg)-4, C_EW)+svgT(cx-46, Y(I.zg)-22, 'G', 'end', C_EW);
+    s+=svgArrow(cx-60, Y(res.zB)+36, cx-60, Y(res.zB)+4, '#2563eb')+svgT(cx-66, Y(res.zB)+24, 'A', 'end', '#2563eb');
+    s+=`<line x1="${X(Wd/2)+20}" y1="${yb}" x2="${X(Wd/2)+20}" y2="${wl}" stroke="#111" stroke-width="0.7"/>`+svgT(X(Wd/2)+24, (yb+wl)/2+3, `T = ${f3(res.T)} m`, 'start', '#111', 9);
+  }
+  s+=svgT(cx, yb+18, F==='quader'?`B = ${f2(I.B)} m`:F==='trapez'?`B<tspan font-size="7" dy="2">u</tspan><tspan dy="-2"> = ${f2(I.Bu)} m, B</tspan><tspan font-size="7" dy="2">o</tspan><tspan dy="-2"> = ${f2(I.B)} m</tspan>`:`D = ${f2(I.D)} m`, 'middle', '#111', 9);
   s+='</svg>';
-  return s + figLegend([`G = ${deNum(I.G,1)} kN in z<sub>G</sub> = ${f3(I.zg)} m`], [`Auftrieb A = G`, `GM = ${f3(res.GM)} m`], 'Höhen über dem Boden des Pontons.');
+  return s + figLegend([`G = ${deNum(I.G,1)} kN in z<sub>G</sub> = ${f3(I.zg)} m`], res.sinkt ? ['geht unter'] : [`Auftrieb A = G`, `GM = ${f3(res.GM)} m`], `${WS_FORM[F]} · Höhen über der Unterkante.`);
 }
 // ── Hydrodynamik: Rohrleitung (Darcy-Weisbach, Colebrook-White) ──
 function wrPreset(){ const v=$('wr-mat').value; if(v!=='x') $('wr-k').value=v; }
@@ -5129,11 +5289,12 @@ function figWW(I, res){
 const WB_NAME = { druck:'wd-name', schwimm:'ws-name', rohr:'wr-name', gerinne:'wg-name', wehr:'ww-name' };
 const WB_FN = { druck:[readWD,validateWD,nachweiseWD,figWD], schwimm:[readWS,validateWS,nachweiseWS,figWS], rohr:[readWR,validateWR,nachweiseWR,figWR], gerinne:[readWG,validateWG,nachweiseWG,figWG], wehr:[readWW,validateWW,nachweiseWW,figWW] };
 function runWasser(){
+  if(WBMODE==='schwimm') wsFields($('ws-form').value);
   const [rd,va,na,fg]=WB_FN[WBMODE], I=rd(), bad=va(I); if(bad.length){ showBad(bad); return; }
   const res=na(I);
   LAST={ mat:'wasser', mode:WBMODE, I, res, date:new Date() };
   const line={ druck:`Fläche ${deNum(I.L,2)} × ${deNum(I.b,2)} m, α = ${deNum(I.alpha,1)}° · F = ${deNum(res.O?.F??0,1)} kN · M<sub>Fuß</sub> = ${deNum(res.Mfuss??0,1)} kNm`,
-    schwimm:`Ponton ${deNum(I.L,2)} × ${deNum(I.B,2)} × ${deNum(I.H,2)} m · T = ${deNum(res.T??0,3)} m · GM = ${deNum(res.GM??0,3)} m`,
+    schwimm:`${WS_FORM[I.form]} · T = ${res.sinkt?'—':deNum(res.T??0,3)+' m'} · GM = ${res.sinkt?'—':deNum(res.GM??0,3)+' m'}`,
     rohr:`DN ${I.D}, L = ${deNum(I.L,1)} m · v = ${deNum(res.v??0,2)} m/s · h<sub>v</sub> = ${deNum(res.hv??0,3)} m · Q<sub>max</sub> = ${deNum((res.Qmax??0)*1000,1)} l/s`,
     gerinne:`h<sub>n</sub> = ${deNum(res.hn??0,3)} m · h<sub>gr</sub> = ${deNum(res.hg??0,3)} m · v = ${deNum(res.v??0,2)} m/s · Fr = ${deNum(res.Fr??0,3)}`,
     wehr:`h<sub>ü</sub> = ${deNum(res.hu??0,3)} m · Oberwasser ${deNum(res.OW??0,3)} m über Sohle` }[WBMODE];
@@ -5149,7 +5310,7 @@ function buildReportWasser(){
   const title={druck:'Wasserdruck auf ebene Fläche', schwimm:'Schwimmkörper', rohr:'Rohrleitung', gerinne:'Offenes Gerinne', wehr:'Wehrüberfall'}[mode];
   const norm={druck:'Hydrostatik', schwimm:'Hydrostatik (Archimedes, Metazentrum)', rohr:'Hydrodynamik (Darcy-Weisbach, Colebrook-White)', gerinne:'Hydrodynamik (Gauckler-Manning-Strickler)', wehr:'Hydrodynamik (Poleni)'}[mode];
   const rows={ druck:repRow('Fläche', `L = ${deNum(I.L,2)} m, b = ${deNum(I.b,2)} m, α = ${deNum(I.alpha,1)}°, Oberkante ${deNum(I.to,2)} m unter Wasser, Unterwasser ${deNum(I.hu,2)} m`),
-    schwimm:repRow('Ponton', `L = ${deNum(I.L,2)} m, B = ${deNum(I.B,2)} m, H = ${deNum(I.H,2)} m, G = ${deNum(I.G,1)} kN, z<sub>G</sub> = ${deNum(I.zg,2)} m, γ<sub>w</sub> = ${deNum(I.gw,2)} kN/m³`),
+    schwimm:repRow(WS_FORM[I.form], ({quader:`L = ${deNum(I.L,2)} m, B = ${deNum(I.B,2)} m, H = ${deNum(I.H,2)} m`, trapez:`L = ${deNum(I.L,2)} m, B<sub>u</sub> = ${deNum(I.Bu,2)} m, B<sub>o</sub> = ${deNum(I.B,2)} m, H = ${deNum(I.H,2)} m`, zylS:`D = ${deNum(I.D,2)} m, H = ${deNum(I.H,2)} m`, zylL:`D = ${deNum(I.D,2)} m, L = ${deNum(I.L,2)} m`, kugel:`D = ${deNum(I.D,2)} m`})[I.form] + `, G = ${deNum(I.G,1)} kN, z<sub>G</sub> = ${deNum(I.zg,2)} m, γ<sub>w</sub> = ${deNum(I.gw,2)} kN/m³`),
     rohr:repRow('Leitung', `Q = ${deNum(I.Q,1)} l/s, D = ${I.D} mm, L = ${deNum(I.L,1)} m, k = ${deNum(I.k,3)} mm, Σζ = ${deNum(I.zeta,2)}, Δh = ${deNum(I.dh,2)} m, ν = ${deNum(I.nu*1e6,2)}·10⁻⁶ m²/s`),
     gerinne:repRow('Gerinne', `Q = ${deNum(I.Q,2)} m³/s, I = ${deNum(I.I,2)} ‰, b = ${deNum(I.b,2)} m, 1 : ${deNum(I.m,1)}, k<sub>St</sub> = ${deNum(I.kst,0)}, H = ${deNum(I.H,2)} m, f = ${deNum(I.f,2)} m`),
     wehr:repRow('Wehr', `Q = ${deNum(I.Q,2)} m³/s, b = ${deNum(I.b,2)} m, μ = ${deNum(I.mu,3)}, w = ${deNum(I.w,2)} m, zulässig ${deNum(I.hmax,2)} m`) }[mode];
@@ -5647,7 +5808,7 @@ function buildReportHX(){
 // ══════════════════════════════════════════════════
 // Bericht
 // ══════════════════════════════════════════════════
-const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall' };
+const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall' };
 function reportChecks(C){
   return C.map((c,i)=>`<section><h2>${i+1}. ${c.title}</h2><div class="steps">${stepsHtml(c.steps)}</div>
       ${c.info?'':`<p>Ausnutzung η = ${deNum(c.eta,2)} — <span class="${c.ok?'ok':'bad'}">${c.ok?'Nachweis erfüllt':'Nachweis nicht erfüllt'}</span></p>`}
@@ -5773,9 +5934,9 @@ const SFIELDS=['sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','s
   'ho-name','ho-art','ho-kl','ho-b','ho-h','ho-L','ho-nkl','ho-kled','ho-mv','ho-zg','ho-Llt','ho-M','ho-V','ho-N','ho-F','ho-lA','ho-by','ho-bz','ho-MG','ho-MQ','ho-psi2','hv-name','hv-vm','hv-an','hv-d','hv-fu','hv-dk','hv-fax','hv-art','hv-kl','hv-t1','hv-t2','hv-ts','hv-al1','hv-al2','hv-nkl','hv-kled','hv-n','hv-m','hv-a1','hv-a2','hv-a3','hv-a4','hv-F','fp-name','fp-reihe','fp-prof','fp-B','fp-L','fp-t','fp-st','fp-beton','fp-fund','fp-N','fp-V','fp-a',
   'sw-name','sw-fall','sw-st','sw-reihe','sw-prof','sw-tp','sw-af','sw-aw','sw-N','sw-V','sw-M','sw-b','sw-t','sw-tk','sw-a','sw-l','sw-F','sw-kt','sw-kl','sw-ka','sw-ke','sw-kF','sw-ktc',
   'gr-boden','gr-phi','gr-c','gr-g1','gr-g2','gf-name','gf-form','gf-b','gf-a','gf-d','gf-hf','gf-VG','gf-VQ','gf-HG','gf-HQ','gf-MG','gf-MQ',
-  'gs-name','gs-b','gs-a','gs-d','gs-V','gs-szul','gs-n','gs-g0','gs-zw','gs-b1','gs-h1','gs-g1','gs-E1','gs-b2','gs-h2','gs-g2','gs-E2','gs-b3','gs-h3','gs-g3','gs-E3','gs-b4','gs-h4','gs-g4','gs-E4','gw-name','gw-H','gw-B','gw-bv','gw-tw','gw-ts','gw-d','gw-q','gw-delta','gu-name','gu-L','gu-B','gu-hw','gu-ts','gu-tw','gu-hwand','gu-td','gu-g','gu-bs',
+  'gs-name','gs-b','gs-a','gs-d','gs-V','gs-szul','gs-n','gs-g0','gs-zw','gs-b1','gs-h1','gs-g1','gs-E1','gs-b2','gs-h2','gs-g2','gs-E2','gs-b3','gs-h3','gs-g3','gs-E3','gs-b4','gs-h4','gs-g4','gs-E4','gw-name','gw-H','gw-B','gw-bv','gw-tw','gw-ts','gw-d','gw-q','gw-delta','gu-name','gu-L','gu-B','gu-hw','gu-ts','gu-tw','gu-hwand','gu-td','gu-g','gu-bs','gl-name','gl-b','gl-a','gl-VG','gl-HG','gl-HQ','gl-bs','gl-sohle','gl-zu','gl-cu','gl-ep','gl-d',
   'mw-art','mw-m','mw-fb','mw-fm','mw-fk','md-name','md-t','md-h','md-l','md-lage','md-decke','md-a','md-lf','md-N','mt-name','mt-t','mt-hc','mt-lb','mt-bb','mt-a1','mt-lw','mt-N','mk-name','mk-t','mk-h','mk-he','mk-bc','mk-rho','mk-q','mk-Nmax','mk-Nmin','mh-name','mh-l','mh-t','mh-h','mh-lag','mh-N','mh-V',
-  'wd-name','wd-alpha','wd-b','wd-to','wd-L','wd-hu','ws-name','ws-L','ws-B','ws-H','ws-G','ws-zg','ws-f','ws-w','wr-name','wr-Q','wr-D','wr-L','wr-mat','wr-k','wr-zeta','wr-dh','wr-nu','wg-name','wg-Q','wg-I','wg-b','wg-m','wg-mat','wg-kst','wg-H','wg-f','ww-name','ww-Q','ww-b','ww-form','ww-mu','ww-w','ww-hmax',
+  'wd-name','wd-alpha','wd-b','wd-to','wd-L','wd-hu','ws-name','ws-form','ws-L','ws-B','ws-Bu','ws-H','ws-D','ws-G','ws-zg','ws-f','ws-w','wr-name','wr-Q','wr-D','wr-L','wr-mat','wr-k','wr-zeta','wr-dh','wr-nu','wg-name','wg-Q','wg-I','wg-b','wg-m','wg-mat','wg-kst','wg-H','wg-f','ww-name','ww-Q','ww-b','ww-form','ww-mu','ww-w','ww-hmax',
   'hx-art','hx-kl','hx-nkl','hx-kled','ak-name','ak-lage','ak-b','ak-h','ak-hef','ak-x','ak-i','ak-V','sd-name','sd-form','sd-L','sd-b','sd-h0','sd-hap','sd-q','vs-name','vs-art','vs-gam','vs-b','vs-h','vs-tv','vs-lv','vs-S','vs-kc90'];
 const snapshot = () => { const o={typ:TYP, mat:MAT, stmode:STMODE, homode:HOMODE, grmode:GRMODE, mwmode:MWMODE, wbmode:WBMODE}; [...FIELDS,...SFIELDS].forEach(f=>o[f]=$(f).value); CHECKS.forEach(f=>o[f]=$(f).checked); return o; };
 function apply(o){
@@ -6009,7 +6170,7 @@ function initFold(){
   document.querySelectorAll('.col-in .card').forEach(card=>{
     if(card.closest('#proj-panel') || card.classList.contains('fold')) return;
     const title=card.querySelector(':scope > .card-title'); if(!title) return;
-    const first=card.querySelector('[id^="in-"],[id^="ds-"],[id^="su-"],[id^="sn-"],[id^="fp-"],[id^="sw-"],[id^="an-"],[id^="gr-"],[id^="gf-"],[id^="gs-"],[id^="gw-"],[id^="gu-"],[id^="mw-"],[id^="md-"],[id^="mt-"],[id^="mk-"],[id^="mh-"],[id^="wd-"],[id^="ws-"],[id^="wr-"],[id^="wg-"],[id^="ww-"],[id^="hv-"],[id^="ho-"],[id^="seg-"]');
+    const first=card.querySelector('[id^="in-"],[id^="ds-"],[id^="su-"],[id^="sn-"],[id^="fp-"],[id^="sw-"],[id^="an-"],[id^="gr-"],[id^="gf-"],[id^="gs-"],[id^="gw-"],[id^="gu-"],[id^="gl-"],[id^="mw-"],[id^="md-"],[id^="mt-"],[id^="mk-"],[id^="mh-"],[id^="wd-"],[id^="ws-"],[id^="wr-"],[id^="wg-"],[id^="ww-"],[id^="hv-"],[id^="ho-"],[id^="seg-"]');
     const key=first?first.id:title.textContent.trim();
     const body=document.createElement('div'); body.className='fold-body';
     [...card.childNodes].filter(n=>n!==title).forEach(n=>body.appendChild(n));

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.10 -->
+<!-- Statiq·size v0.5.11 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -208,15 +208,24 @@
     .pick-t { font-size:20px; font-weight:800; letter-spacing:-0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .pick-chev { font-size:13px; color:var(--text3); transition:transform .18s; }
     .pick.open .pick-chev { transform:rotate(180deg); }
-    .pick-menu { display:none; position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:40; background:#fff; border-radius:18px; box-shadow:0 18px 48px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); padding:12px; max-height:min(70vh, 560px); overflow:auto;
-      grid-template-columns:1fr 1fr; gap:4px 14px; }
-    .pick.open .pick-menu { display:grid; }
-    .pick-group { display:flex; flex-direction:column; padding:4px 0 8px; }
-    .pick-head { font-size:11.5px; font-weight:700; color:var(--text3); padding:4px 10px 4px; letter-spacing:0.2px; }
-    .pick-item { text-align:left; border:none; background:none; cursor:pointer; font-family:inherit; font-size:14.5px; font-weight:600; color:var(--text); padding:7px 10px; border-radius:9px; }
-    .pick-item:hover { background:#f4f4f5; }
-    .pick-item.active { background:#efeff1; font-weight:800; }
-    @media (max-width:560px){ .pick-menu { grid-template-columns:1fr; } }
+    .pick-menu { display:none; position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:40; background:#fff; border-radius:18px; box-shadow:0 18px 48px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); padding:8px; max-height:min(72vh, 600px); overflow:auto; }
+    .pick.open .pick-menu { display:block; }
+    .pick-group { border-radius:12px; }
+    .pick-group + .pick-group { margin-top:2px; }
+    .pick-head { width:100%; display:flex; align-items:center; gap:10px; border:none; background:none; cursor:pointer; font-family:inherit; text-align:left; padding:11px 12px; border-radius:12px; color:var(--text); }
+    .pick-head:hover { background:#f6f6f7; }
+    .pick-hn { flex:1; font-size:15px; font-weight:700; letter-spacing:-0.1px; }
+    .pick-hc { font-size:12px; font-weight:600; color:var(--text3); max-width:55%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pick-hv { font-size:11px; color:var(--text3); transition:transform .18s; }
+    .pick-group.open { background:#f8f8f9; }
+    .pick-group.open .pick-head:hover { background:transparent; }
+    .pick-group.open .pick-hv { transform:rotate(180deg); }
+    .pick-body { display:none; flex-direction:column; padding:0 6px 8px; }
+    .pick-group.open .pick-body { display:flex; }
+    .pick-item { text-align:left; border:none; background:none; cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; color:var(--text2); padding:8px 12px 8px 22px; border-radius:9px; position:relative; }
+    .pick-item:hover { background:#fff; color:var(--text); }
+    .pick-item.active { background:#fff; color:var(--text); font-weight:700; box-shadow:0 1px 2px rgba(0,0,0,0.06); }
+    .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2563eb; }
     .ux-hide { display:none !important; }
     .proj-btn { border:none; background:#efeff1; border-radius:10px; padding:7px 12px; font-family:inherit; font-size:13px; font-weight:700; color:var(--text); cursor:pointer; }
     .proj-btn::after { content:' ▾'; font-size:10px; color:var(--text3); }
@@ -1534,7 +1543,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.10';
+const SIZE_VERSION = '0.5.11';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -5874,8 +5883,13 @@ function updatePick(){
   $('pick-g').textContent = matBtn(MAT).textContent; $('pick-t').textContent = a ? a.textContent : '';
 }
 function buildPick(){
-  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>`<div class="pick-group"><div class="pick-head">${matBtn(mat).textContent}</div>${
-    [...$(seg).querySelectorAll('button')].map((b,i)=>`<button class="pick-item${MAT===mat && b.classList.contains('active')?' active':''}" role="menuitem" data-mat="${mat}" data-i="${i}">${b.textContent}</button>`).join('')}</div>`).join('');
+  // Akkordeon: je Bereich eine aufklappbare Liste, der aktuelle Bereich ist offen
+  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>{ const bs=[...$(seg).querySelectorAll('button')], cur=MAT===mat, act=bs.find(b=>b.classList.contains('active'));
+    return `<div class="pick-group${cur?' open':''}" data-mat="${mat}"><button class="pick-head" aria-expanded="${cur}"><span class="pick-hn">${matBtn(mat).textContent}</span><span class="pick-hc">${cur&&act?act.textContent:bs.length+' Themen'}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
+    bs.map((b,i)=>`<button class="pick-item${cur && b.classList.contains('active')?' active':''}" role="menuitem" data-mat="${mat}" data-i="${i}">${b.textContent}</button>`).join('')}</div></div>`; }).join('');
+  $('pick-menu').querySelectorAll('.pick-head').forEach(h=>h.onclick=e=>{ e.stopPropagation(); const g=h.parentElement, o=!g.classList.contains('open');
+    $('pick-menu').querySelectorAll('.pick-group').forEach(x=>{ x.classList.toggle('open', x===g && o); x.querySelector('.pick-head').setAttribute('aria-expanded', x===g && o); });
+    if(o){ const m=$('pick-menu'), r=g.getBoundingClientRect(), mr=m.getBoundingClientRect(); if(r.bottom>mr.bottom) m.scrollTop += r.bottom-mr.bottom+8; } });
   $('pick-menu').querySelectorAll('.pick-item').forEach(el=>el.onclick=e=>{ e.stopPropagation();
     const mat=el.dataset.mat, seg=PICK_GROUPS.find(g=>g[0]===mat)[1];
     if(MAT!==mat) matBtn(mat).click();

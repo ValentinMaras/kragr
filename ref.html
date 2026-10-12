@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.8 -->
+<!-- Statiq·ref v0.3.9 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -262,12 +262,15 @@
     .toc a.on { color:var(--accent); border-left-color:var(--accent); font-weight:600; }
     .menu-toggle { display:none; align-items:center; gap:8px; border:none; background:var(--card); border-radius:12px; padding:9px 14px; font-family:inherit; font-size:13.5px; font-weight:700; color:var(--text); cursor:pointer; margin:4px 0 10px; }
     .card[id] { scroll-margin-top:16px; }
-    .topic-pager { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .topic-pager { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; margin-top:18px; }
     .topic-pager a { display:block; background:var(--card); border-radius:14px; padding:12px 14px; text-decoration:none; color:var(--text); }
     .topic-pager a:hover { background:#f1f1f3; }
     .topic-pager small { display:block; font-size:11px; color:var(--text3); font-weight:600; margin-bottom:2px; }
-    .topic-pager b { font-size:14px; }
+    .topic-pager b { font-size:14px; display:block; overflow-wrap:anywhere; hyphens:auto; }
     .topic-pager .nx { text-align:right; grid-column:2; }
+    .th-u { font-weight:400; color:var(--text3); font-size:10px; }
+    .ok-t { color:#15803d; } .bad-t { color:#b91c1c; }
+    .calc-out .ablauf { margin-top:8px; }
     .home-hint { display:none; font-size:13px; color:var(--text3); margin:2px 2px 0; }
     @media (min-width:1000px){
       .layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:28px; align-items:start; }
@@ -376,7 +379,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.8';
+const REF_VERSION = '0.3.9';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -565,7 +568,7 @@ const FAECHER = {
   },
   stahlbau: {
     title: 'Stahlbau', tag: 'EC3',
-    sub: 'EC3 — Werkstoffe, Walzprofile, Nachweise',
+    sub: 'EC3 — Werkstoffe, Profiltabellen, Nachweise, Verbindungen',
     kapitel: {
       werkstoff: {
         title: 'Werkstoff',
@@ -574,16 +577,30 @@ const FAECHER = {
         }
       },
       profile: {
-        title: 'Walzprofile',
+        title: 'Profiltabellen',
         themen: {
-          walzprofile: { title: 'IPE, HEA, HEB — Querschnittswerte' },
+          walzprofile: { title: 'I-Profile — IPE, HEA, HEB, HEM' },
+          uprofile:    { title: 'U-Profile — UPN, UPE' },
+          winkel:      { title: 'Winkel L' },
+          hohlprofile: { title: 'Hohlprofile — QRO, RRO, RO' },
         }
       },
       nachweise: {
         title: 'Nachweise',
         themen: {
-          querschnitt:  { title: 'Querschnittsklassen und Widerstände' },
-          biegeknicken: { title: 'Biegeknicken' },
+          querschnitt:       { title: 'Querschnittsklassen' },
+          widerstand:        { title: 'Querschnittswiderstände N, M, V' },
+          biegeknicken:      { title: 'Biegeknicken' },
+          biegedrillknicken: { title: 'Biegedrillknicken (Kippen)' },
+          interaktion:       { title: 'Biegung und Druck (Stabilität)' },
+          gebrauch:          { title: 'Durchbiegung (GZG)' },
+        }
+      },
+      verbindungen: {
+        title: 'Verbindungen',
+        themen: {
+          schrauben:  { title: 'Schraubenverbindungen' },
+          schweissen: { title: 'Schweißnähte' },
         }
       },
     }
@@ -731,7 +748,120 @@ const FAECHER_SOON = [];
 // Formeln wie in den Herstellertabellen). Abgleich mit veröffentlichten Werten: Abweichung ≤ 0,3 %.
 // Spalten: Name, h, b, t_w, t_f, r [mm], A [cm²], G [kg/m], I_y [cm⁴], W_el,y, W_pl,y [cm³], i_y [cm],
 //          I_z [cm⁴], W_el,z, W_pl,z [cm³], i_z [cm]
-const PROFILE = [["IPE 80", 80, 46, 3.8, 5.2, 5, 7.6, 6.0, 80, 20.0, 23.2, 3.24, 8.5, 3.7, 5.8, 1.05], ["IPE 100", 100, 55, 4.1, 5.7, 7, 10.3, 8.1, 171, 34.2, 39.4, 4.07, 15.9, 5.8, 9.1, 1.24], ["IPE 120", 120, 64, 4.4, 6.3, 7, 13.2, 10.4, 318, 53.0, 60.7, 4.9, 27.7, 8.6, 13.6, 1.45], ["IPE 140", 140, 73, 4.7, 6.9, 7, 16.4, 12.9, 541, 77.3, 88.3, 5.74, 44.9, 12.3, 19.2, 1.65], ["IPE 160", 160, 82, 5.0, 7.4, 9, 20.1, 15.8, 869, 108.7, 123.9, 6.58, 68.3, 16.7, 26.1, 1.84], ["IPE 180", 180, 91, 5.3, 8.0, 9, 23.9, 18.8, 1317, 146.3, 166.4, 7.42, 100.9, 22.2, 34.6, 2.05], ["IPE 200", 200, 100, 5.6, 8.5, 12, 28.5, 22.4, 1943, 194.3, 220.6, 8.26, 142.4, 28.5, 44.6, 2.24], ["IPE 220", 220, 110, 5.9, 9.2, 12, 33.4, 26.2, 2772, 252.0, 285.4, 9.11, 204.9, 37.3, 58.1, 2.48], ["IPE 240", 240, 120, 6.2, 9.8, 15, 39.1, 30.7, 3892, 324.3, 366.6, 9.97, 283.6, 47.3, 73.9, 2.69], ["IPE 270", 270, 135, 6.6, 10.2, 15, 45.9, 36.1, 5790, 428.9, 484.0, 11.23, 419.9, 62.2, 97.0, 3.02], ["IPE 300", 300, 150, 7.1, 10.7, 15, 53.8, 42.2, 8356, 557.1, 628.4, 12.46, 603.8, 80.5, 125.2, 3.35], ["IPE 330", 330, 160, 7.5, 11.5, 18, 62.6, 49.1, 11767, 713.1, 804.3, 13.71, 788.1, 98.5, 153.7, 3.55], ["IPE 360", 360, 170, 8.0, 12.7, 18, 72.7, 57.1, 16266, 903.6, 1019.1, 14.95, 1043, 122.8, 191.1, 3.79], ["IPE 400", 400, 180, 8.6, 13.5, 21, 84.5, 66.3, 23128, 1156.4, 1307.1, 16.55, 1318, 146.4, 229.0, 3.95], ["IPE 450", 450, 190, 9.4, 14.6, 21, 98.8, 77.6, 33743, 1499.7, 1701.8, 18.48, 1676, 176.4, 276.4, 4.12], ["IPE 500", 500, 200, 10.2, 16.0, 21, 115.5, 90.7, 48199, 1927.9, 2194.1, 20.43, 2142, 214.2, 335.9, 4.31], ["IPE 550", 550, 210, 11.1, 17.2, 24, 134.4, 105.5, 67116, 2440.6, 2787.0, 22.35, 2668, 254.1, 400.5, 4.45], ["IPE 600", 600, 220, 12.0, 19.0, 24, 156.0, 122.4, 92083, 3069.4, 3512.4, 24.3, 3387, 307.9, 485.6, 4.66], ["HEA 100", 96, 100, 5, 8, 12, 21.2, 16.7, 349, 72.8, 83.0, 4.06, 133.8, 26.8, 41.1, 2.51], ["HEA 120", 114, 120, 5, 8, 12, 25.3, 19.9, 606, 106.3, 119.5, 4.89, 230.9, 38.5, 58.9, 3.02], ["HEA 140", 133, 140, 5.5, 8.5, 12, 31.4, 24.7, 1033, 155.4, 173.5, 5.73, 389.3, 55.6, 84.8, 3.52], ["HEA 160", 152, 160, 6, 9, 15, 38.8, 30.4, 1673, 220.1, 245.1, 6.57, 615.6, 76.9, 117.6, 3.98], ["HEA 180", 171, 180, 6, 9.5, 15, 45.3, 35.5, 2510, 293.6, 324.9, 7.45, 924.6, 102.7, 156.5, 4.52], ["HEA 200", 190, 200, 6.5, 10, 18, 53.8, 42.3, 3692, 388.6, 429.5, 8.28, 1336, 133.6, 203.8, 4.98], ["HEA 220", 210, 220, 7, 11, 18, 64.3, 50.5, 5410, 515.2, 568.5, 9.17, 1955, 177.7, 270.6, 5.51], ["HEA 240", 230, 240, 7.5, 12, 21, 76.8, 60.3, 7763, 675.1, 744.6, 10.05, 2769, 230.7, 351.7, 6.0], ["HEA 260", 250, 260, 7.5, 12.5, 24, 86.8, 68.2, 10455, 836.4, 919.8, 10.97, 3668, 282.1, 430.2, 6.5], ["HEA 280", 270, 280, 8, 13, 24, 97.3, 76.4, 13673, 1012.8, 1112.2, 11.86, 4763, 340.2, 518.1, 7.0], ["HEA 300", 290, 300, 8.5, 14, 27, 112.5, 88.3, 18263, 1259.5, 1383.3, 12.74, 6310, 420.6, 641.2, 7.49], ["HEA 320", 310, 300, 9, 15.5, 27, 124.4, 97.6, 22929, 1479.3, 1628.1, 13.58, 6985, 465.7, 709.7, 7.49], ["HEA 340", 330, 300, 9.5, 16.5, 27, 133.5, 104.8, 27693, 1678.4, 1850.5, 14.4, 7436, 495.7, 755.9, 7.46], ["HEA 360", 350, 300, 10, 17.5, 27, 142.8, 112.1, 33090, 1890.8, 2088.5, 15.22, 7887, 525.8, 802.3, 7.43], ["HEA 400", 390, 300, 11, 19, 27, 159.0, 124.8, 45069, 2311.2, 2561.8, 16.84, 8564, 570.9, 872.9, 7.34], ["HEA 450", 440, 300, 11.5, 21, 27, 178.0, 139.8, 63722, 2896.4, 3215.9, 18.92, 9465, 631.0, 965.5, 7.29], ["HEA 500", 490, 300, 12, 23, 27, 197.5, 155.1, 86975, 3550.0, 3948.9, 20.98, 10367, 691.1, 1058.5, 7.24], ["HEB 100", 100, 100, 6, 10, 12, 26.0, 20.4, 450, 89.9, 104.2, 4.16, 167.3, 33.5, 51.4, 2.53], ["HEB 120", 120, 120, 6.5, 11, 12, 34.0, 26.7, 864, 144.1, 165.2, 5.04, 317.5, 52.9, 81.0, 3.06], ["HEB 140", 140, 140, 7, 12, 12, 43.0, 33.7, 1509, 215.6, 245.4, 5.93, 549.7, 78.5, 119.8, 3.58], ["HEB 160", 160, 160, 8, 13, 15, 54.3, 42.6, 2492, 311.5, 354.0, 6.78, 889.2, 111.2, 170.0, 4.05], ["HEB 180", 180, 180, 8.5, 14, 15, 65.3, 51.2, 3831, 425.7, 481.4, 7.66, 1363, 151.4, 231.0, 4.57], ["HEB 200", 200, 200, 9, 15, 18, 78.1, 61.3, 5696, 569.6, 642.5, 8.54, 2003, 200.3, 305.8, 5.07], ["HEB 220", 220, 220, 9.5, 16, 18, 91.0, 71.5, 8091, 735.5, 827.0, 9.43, 2843, 258.5, 393.9, 5.59], ["HEB 240", 240, 240, 10, 17, 21, 106.0, 83.2, 11259, 938.3, 1053.1, 10.31, 3923, 326.9, 498.4, 6.08], ["HEB 260", 260, 260, 10, 17.5, 24, 118.4, 93.0, 14919, 1147.6, 1282.9, 11.22, 5135, 395.0, 602.2, 6.58], ["HEB 280", 280, 280, 10.5, 18, 24, 131.4, 103.1, 19270, 1376.4, 1534.4, 12.11, 6595, 471.0, 717.6, 7.09], ["HEB 300", 300, 300, 11, 19, 27, 149.1, 117.0, 25166, 1677.7, 1868.7, 12.99, 8563, 570.9, 870.1, 7.58], ["HEB 320", 320, 300, 11.5, 20.5, 27, 161.3, 126.7, 30824, 1926.5, 2149.2, 13.82, 9239, 615.9, 939.1, 7.57], ["HEB 340", 340, 300, 12, 21.5, 27, 170.9, 134.2, 36656, 2156.3, 2408.1, 14.65, 9690, 646.0, 985.7, 7.53], ["HEB 360", 360, 300, 12.5, 22.5, 27, 180.6, 141.8, 43193, 2399.6, 2683.0, 15.46, 10141, 676.1, 1032.5, 7.49], ["HEB 400", 400, 300, 13.5, 24, 27, 197.8, 155.3, 57680, 2884.0, 3231.7, 17.08, 10819, 721.3, 1104.0, 7.4], ["HEB 450", 450, 300, 14, 26, 27, 218.0, 171.1, 79888, 3550.6, 3982.4, 19.14, 11721, 781.4, 1197.7, 7.33], ["HEB 500", 500, 300, 14.5, 28, 27, 238.6, 187.3, 107176, 4287.0, 4814.6, 21.19, 12624, 841.6, 1291.6, 7.27]];
+// ═══ STAHLPROFILE (ref v0.3.9): Nennmaße in mm, alle Querschnittswerte daraus berechnet ═══
+// ═══ STAHLPROFILE: Maße (mm) und berechnete Querschnittswerte ═══
+const I_DIMS = {
+  IPE: [[80,46,3.8,5.2,5],[100,55,4.1,5.7,7],[120,64,4.4,6.3,7],[140,73,4.7,6.9,7],[160,82,5,7.4,9],[180,91,5.3,8,9],[200,100,5.6,8.5,12],[220,110,5.9,9.2,12],[240,120,6.2,9.8,15],[270,135,6.6,10.2,15],[300,150,7.1,10.7,15],[330,160,7.5,11.5,18],[360,170,8,12.7,18],[400,180,8.6,13.5,21],[450,190,9.4,14.6,21],[500,200,10.2,16,21],[550,210,11.1,17.2,24],[600,220,12,19,24]],
+  HEA: [[100,96,100,5,8,12],[120,114,120,5,8,12],[140,133,140,5.5,8.5,12],[160,152,160,6,9,15],[180,171,180,6,9.5,15],[200,190,200,6.5,10,18],[220,210,220,7,11,18],[240,230,240,7.5,12,21],[260,250,260,7.5,12.5,24],[280,270,280,8,13,24],[300,290,300,8.5,14,27],[320,310,300,9,15.5,27],[340,330,300,9.5,16.5,27],[360,350,300,10,17.5,27],[400,390,300,11,19,27],[450,440,300,11.5,21,27],[500,490,300,12,23,27],[550,540,300,12.5,24,27],[600,590,300,13,25,27],[650,640,300,13.5,26,27],[700,690,300,14.5,27,27],[800,790,300,15,28,30],[900,890,300,16,30,30],[1000,990,300,16.5,31,30]],
+  HEB: [[100,100,100,6,10,12],[120,120,120,6.5,11,12],[140,140,140,7,12,12],[160,160,160,8,13,15],[180,180,180,8.5,14,15],[200,200,200,9,15,18],[220,220,220,9.5,16,18],[240,240,240,10,17,21],[260,260,260,10,17.5,24],[280,280,280,10.5,18,24],[300,300,300,11,19,27],[320,320,300,11.5,20.5,27],[340,340,300,12,21.5,27],[360,360,300,12.5,22.5,27],[400,400,300,13.5,24,27],[450,450,300,14,26,27],[500,500,300,14.5,28,27],[550,550,300,15,29,27],[600,600,300,15.5,30,27],[650,650,300,16,31,27],[700,700,300,17,32,27],[800,800,300,17.5,33,30],[900,900,300,18.5,35,30],[1000,1000,300,19,36,30]],
+  HEM: [[100,120,106,12,20,12],[120,140,126,12.5,21,12],[140,160,146,13,22,12],[160,180,166,14,23,15],[180,200,186,14.5,24,15],[200,220,206,15,25,18],[220,240,226,15.5,26,18],[240,270,248,18,32,21],[260,290,268,18,32.5,24],[280,310,288,18.5,33,24],[300,340,310,21,39,27],[320,359,309,21,40,27],[340,377,309,21,40,27],[360,395,308,21,40,27],[400,432,307,21,40,27],[450,478,307,21,40,27],[500,524,306,21,40,27],[550,572,306,21,40,27],[600,620,305,21,40,27],[650,668,305,21,40,27],[700,716,304,21,40,27],[800,814,303,21,40,30],[900,910,302,21,40,30],[1000,1008,302,21,40,30]],
+};
+// gewalzte I-Profile (parallele Flansche, Ausrundung r): Formeln wie in den Herstellertabellen; mm → cm-Einheiten
+function iProps(h,b,tw,tf,r){
+  const hw=h-2*tf, PI=Math.PI;
+  const A=2*b*tf+hw*tw+(4-PI)*r*r;
+  const Iy=(b*h**3-(b-tw)*hw**3)/12+0.03*r**4+0.2146*r*r*(hw-0.4468*r)**2;
+  const Iz=(2*tf*b**3+hw*tw**3)/12+0.03*r**4+0.2146*r*r*(tw+0.4468*r)**2;
+  const Wply=tw*h*h/4+(b-tw)*(h-tf)*tf+(4-PI)/2*r*r*(h-2*tf)+(3*PI-10)/3*r**3;
+  const Wplz=b*b*tf/2+hw*tw*tw/4+r**3*(10/3-PI)+(2-PI/2)*tw*r*r;
+  const D=((r+tw/2)**2+(r+tf)**2-r*r)/(2*r+tf);
+  const It=2/3*(b-0.63*tf)*tf**3+hw*tw**3/3+2*(tw/tf)*(0.145+0.1*r/tf)*D**4;
+  const Iw=tf*b**3*(h-tf)**2/24;
+  const Avz=Math.max(A-2*b*tf+(tw+2*r)*tf, (h-2*tf)*tw);   // η = 1,0 (NA)
+  return { A:A/100, G:A*7850/1e6, Iy:Iy/1e4, Wy:Iy/(h/2)/1e3, Wply:Wply/1e3, iy:Math.sqrt(Iy/A)/10,
+    Iz:Iz/1e4, Wz:Iz/(b/2)/1e3, Wplz:Wplz/1e3, iz:Math.sqrt(Iz/A)/10, Avz:Avz/100, It:It/1e4, Iw:Iw/1e6, Sy:Wply/2/1e3,
+    hw:h-2*tf, d:h-2*tf-2*r };
+}
+// Polygon mit ausgerundeten Ecken: V = [[x, y, r], …] (r = 0: scharfe Ecke)
+function roundPoly(V, n=24){
+  const out=[], N=V.length;
+  for(let i=0;i<N;i++){
+    const [x,y,r]=V[i]; if(!r){ out.push([x,y]); continue; }
+    const p=V[(i+N-1)%N], q=V[(i+1)%N];
+    let ax=p[0]-x, ay=p[1]-y, bx=q[0]-x, by=q[1]-y; const la=Math.hypot(ax,ay), lb=Math.hypot(bx,by); ax/=la; ay/=la; bx/=lb; by/=lb;
+    const th=Math.acos(Math.max(-1,Math.min(1,ax*bx+ay*by)))/2, t=r/Math.tan(th);
+    let mx=ax+bx, my=ay+by; const lm=Math.hypot(mx,my); mx/=lm; my/=lm;
+    const cx=x+mx*r/Math.sin(th), cy=y+my*r/Math.sin(th);
+    const t1=[x+ax*t, y+ay*t], t2=[x+bx*t, y+by*t];
+    let a1=Math.atan2(t1[1]-cy,t1[0]-cx), a2=Math.atan2(t2[1]-cy,t2[0]-cx), da=a2-a1;
+    while(da>Math.PI) da-=2*Math.PI; while(da<-Math.PI) da+=2*Math.PI;
+    for(let k=0;k<=n;k++){ const a=a1+da*k/n; out.push([cx+r*Math.cos(a), cy+r*Math.sin(a)]); }
+  }
+  return out;
+}
+// Flächenintegrale eines geschlossenen Polygons (Gauß): A, Sx = ∫y, Sy = ∫x, Ixx = ∫y², Iyy = ∫x², Ixy = ∫xy
+function polyInt(P){
+  let A=0,Sx=0,Sy=0,Ixx=0,Iyy=0,Ixy=0;
+  for(let i=0;i<P.length;i++){ const [x0,y0]=P[i], [x1,y1]=P[(i+1)%P.length], c=x0*y1-x1*y0;
+    A+=c/2; Sy+=(x0+x1)*c/6; Sx+=(y0+y1)*c/6; Iyy+=(x0*x0+x0*x1+x1*x1)*c/12; Ixx+=(y0*y0+y0*y1+y1*y1)*c/12; Ixy+=(x0*y1+2*x0*y0+2*x1*y1+x1*y0)*c/24; }
+  const s=Math.sign(A)||1; return {A:A*s,Sx:Sx*s,Sy:Sy*s,Ixx:Ixx*s,Iyy:Iyy*s,Ixy:Ixy*s};
+}
+// Polygon an der Geraden y = c abschneiden (oberer Teil), Sutherland–Hodgman
+function clipY(P,c,above=true){ const out=[], inn=p=>above?p[1]>=c:p[1]<=c;
+  for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], ia=inn(a), ib=inn(b);
+    if(ia) out.push(a); if(ia!==ib){ const t=(c-a[1])/(b[1]-a[1]); out.push([a[0]+t*(b[0]-a[0]), c]); } }
+  return out; }
+// plastisches Widerstandsmoment um eine waagerechte Achse (flächenhalbierende Linie)
+function wplY(P){ const ys=P.map(p=>p[1]); let lo=Math.min(...ys), hi=Math.max(...ys); const A=polyInt(P).A;
+  for(let k=0;k<80;k++){ const m=(lo+hi)/2; if(polyInt(clipY(P,m,true)).A>A/2) lo=m; else hi=m; }
+  const c=(lo+hi)/2, up=polyInt(clipY(P,c,true)), dn=polyInt(clipY(P,c,false));
+  return (up.Sx-c*up.A)+(c*dn.A-dn.Sx); }
+const swapXY=P=>P.map(([x,y])=>[y,x]);
+function polyProps(P){ const q=polyInt(P), xs=q.Sy/q.A, ys=q.Sx/q.A;
+  const Iy=q.Ixx-q.A*ys*ys, Iz=q.Iyy-q.A*xs*xs, Iyz=q.Ixy-q.A*xs*ys;
+  const m=(Iy+Iz)/2, d=Math.hypot((Iy-Iz)/2,Iyz);
+  return {A:q.A, xs, ys, Iy, Iz, Iyz, Iu:m+d, Iv:m-d, xmin:Math.min(...P.map(p=>p[0])), xmax:Math.max(...P.map(p=>p[0])), ymin:Math.min(...P.map(p=>p[1])), ymax:Math.max(...P.map(p=>p[1]))}; }
+
+// U-Profile: UPE (parallele Flansche) und UPN (geneigte Flanschinnenseite, DIN 1026-1)
+const UPE_DIMS=[[80,50,4,7,10],[100,55,4.5,7.5,10],[120,60,5,8,12],[140,65,5,9,12],[160,70,5.5,9.5,12],[180,75,5.5,10.5,12],[200,80,6,11,13],[220,85,6.5,12,13],[240,90,7,12.5,15],[270,95,7.5,13.5,15],[300,100,9.5,15,15],[330,105,11,16,18],[360,110,12,17,18],[400,115,13.5,18,18]];
+const UPN_DIMS=[[80,45,6,8],[100,50,6,8.5],[120,55,7,9],[140,60,7,10],[160,65,7.5,10.5],[180,70,8,11],[200,75,8.5,11.5],[220,80,9,12.5],[240,85,9.5,13],[260,90,10,14],[280,95,10,15],[300,100,10,16],[320,100,14,17.5],[350,100,14,16],[380,102,13.5,16],[400,110,14,18]];
+function uPoly(h,b,tw,tf,r1,r2=0,slope=0,xm=b/2){ const y=x=>tf+slope*(xm-x);   // t_f an der Stelle xm gemessen
+  return roundPoly([[0,0,0],[b,0,0],[b,y(b),r2],[tw,y(tw),r1],[tw,h-y(tw),r1],[b,h-y(b),r2],[b,h,0],[0,h,0]]); }
+function uProps(P,h){ const p=polyProps(P); return { A:p.A/100, G:p.A*7850/1e6, Iy:p.Iy/1e4, Wy:p.Iy/(h/2)/1e3, Wply:wplY(P)/1e3, iy:Math.sqrt(p.Iy/p.A)/10,
+  Iz:p.Iz/1e4, Wz:p.Iz/(p.xmax-p.xs)/1e3, Wplz:wplY(swapXY(P))/1e3, iz:Math.sqrt(p.Iz/p.A)/10, ez:p.xs/10 }; }
+// gleichschenklige Winkel L b × t (r1 Ausrundung, r2 Kantenrundung)
+const L_DIMS=[[40,4,6,3],[40,5,6,3],[45,5,7,3.5],[50,5,7,3.5],[50,6,7,3.5],[60,6,8,4],[60,8,8,4],[70,7,9,4.5],[80,8,10,5],[80,10,10,5],[90,9,11,5.5],[100,10,12,6],[100,12,12,6],[120,10,13,6.5],[120,12,13,6.5],[130,12,14,7],[150,12,16,8],[150,15,16,8],[160,15,17,8.5],[180,18,18,9],[200,20,18,9],[200,24,18,9]];
+function lPoly(b,t,r1,r2){ return roundPoly([[0,0,0],[b,0,0],[b,t,r2],[t,t,r1],[t,b,r2],[0,b,0]]); }
+function lProps(b,t,r1,r2){ const P=lPoly(b,t,r1,r2), p=polyProps(P);
+  return { A:p.A/100, G:p.A*7850/1e6, e:p.xs/10, Iy:p.Iy/1e4, Wy:p.Iy/(b-p.ys)/1e3, iy:Math.sqrt(p.Iy/p.A)/10, Iu:p.Iu/1e4, iu:Math.sqrt(p.Iu/p.A)/10, Iv:p.Iv/1e4, iv:Math.sqrt(p.Iv/p.A)/10 }; }
+
+// warmgefertigte Hohlprofile EN 10210-2: Außenradius 1,5 t, Innenradius 1,0 t
+function rrect(B,H,r){ // abgerundetes Rechteck: A, I um die Achse ∥ B, Wpl
+  const k=4-Math.PI, ec=H/2-r+4*r/(3*Math.PI), Iq=(Math.PI/16-4/(9*Math.PI))*r**4;
+  const A=B*H-k*r*r;
+  const I=B*H**3/12-4*(r**4/12+r*r*(H/2-r/2)**2)+4*(Iq+Math.PI*r*r/4*ec*ec);
+  const Wpl=B*H*H/4-4*r*r*(H/2-r/2)+4*Math.PI*r*r/4*ec;   // 2 · statisches Moment der halben Fläche
+  return {A,I,Wpl}; }
+function rhsProps(H,B,t){ const ro=1.5*t, ri=t, o=rrect(B,H,ro), i=rrect(B-2*t,H-2*t,ri), o2=rrect(H,B,ro), i2=rrect(H-2*t,B-2*t,ri);
+  const A=o.A-i.A, Iy=o.I-i.I, Iz=o2.I-i2.I;
+  const Rc=(ro+ri)/2, hp=2*((B-t)+(H-t))-2*Rc*(4-Math.PI), Ap=(B-t)*(H-t)-Rc*Rc*(4-Math.PI), K=2*Ap*t/hp, It=t**3*hp/3+2*K*Ap;
+  return { A:A/100, G:A*7850/1e6, Iy:Iy/1e4, Wy:Iy/(H/2)/1e3, Wply:(o.Wpl-i.Wpl)/1e3, iy:Math.sqrt(Iy/A)/10,
+    Iz:Iz/1e4, Wz:Iz/(B/2)/1e3, Wplz:(o2.Wpl-i2.Wpl)/1e3, iz:Math.sqrt(Iz/A)/10, It:It/1e4, Wt:It/(t+K/t)/1e3 }; }
+function chsProps(D,t){ const d=D-2*t, A=Math.PI*(D*D-d*d)/4, I=Math.PI*(D**4-d**4)/64;
+  return { A:A/100, G:A*7850/1e6, I:I/1e4, Wel:I/(D/2)/1e3, Wpl:(D**3-d**3)/6/1e3, i:Math.sqrt(I/A)/10, It:2*I/1e4, Wt:2*I/(D/2)/1e3 }; }
+const SHS_DIMS=[[40,4],[50,4],[50,5],[60,4],[60,5],[70,5],[80,5],[80,6.3],[90,6.3],[100,5],[100,6.3],[100,8],[120,6.3],[120,8],[120,10],[140,8],[140,10],[150,8],[150,10],[160,8],[160,10],[180,10],[200,8],[200,10],[200,12.5],[220,10],[250,10],[250,12.5],[260,10],[300,10],[300,12.5],[350,12.5],[400,12.5],[400,16]];
+const RHS_DIMS=[[80,40,4],[100,50,5],[120,60,5],[120,80,6.3],[140,80,6.3],[150,100,6.3],[160,80,6.3],[180,100,8],[200,100,6.3],[200,100,8],[200,120,8],[250,150,8],[250,150,10],[300,200,10],[400,200,12.5],[450,250,12.5],[500,300,16]];
+const CHS_DIMS=[[48.3,4],[60.3,4],[76.1,4],[88.9,5],[101.6,5],[114.3,6.3],[139.7,6.3],[168.3,8],[193.7,8],[219.1,10],[244.5,10],[273,10],[323.9,12.5],[355.6,12.5],[406.4,12.5],[457,16],[508,16]];
+
+// gerundete Tabellenwerte: 4 gültige Stellen, ab 1000 ganzzahlig
+const rS = v => v>=1000 ? Math.round(v) : +(+v).toPrecision(4);
+// alle Profile: Name → {typ, Maße, Werte (volle Genauigkeit)}
+const PROF = {};
+for(const [s,list] of Object.entries(I_DIMS)) for(const d of list){
+  const [n,h,b,tw,tf,r] = s==='IPE' ? [d[0],...d] : d;
+  PROF[s+' '+n] = { typ:'I', reihe:s, h,b,tw,tf,r, ...iProps(h,b,tw,tf,r) };
+}
+for(const [h,b,tw,tf,r] of UPE_DIMS) PROF['UPE '+h] = { typ:'U', reihe:'UPE', h,b,tw,tf,r, r2:0, ...uProps(uPoly(h,b,tw,tf,r),h) };
+for(const [h,b,tw,tf] of UPN_DIMS){ const big=h>300; PROF['UPN '+h] = { typ:'U', reihe:'UPN', h,b,tw,tf,r:tf,r2:tf/2, neig:big?5:8,
+  ...uProps(uPoly(h,b,tw,tf,tf,tf/2,big?0.05:0.08,big?(b+tw)/2:b/2),h) }; }
+for(const [b,t,r1,r2] of L_DIMS) PROF[`L ${b}×${t}`] = { typ:'L', reihe:'L', b,t,r1,r2, ...lProps(b,t,r1,r2) };
+for(const [b,t] of SHS_DIMS) PROF[`QRO ${b}×${String(t).replace('.',',')}`] = { typ:'RHS', reihe:'QRO', h:b,b,t, ...rhsProps(b,b,t) };
+for(const [h,b,t] of RHS_DIMS) PROF[`RRO ${h}×${b}×${String(t).replace('.',',')}`] = { typ:'RHS', reihe:'RRO', h,b,t, ...rhsProps(h,b,t) };
+for(const [D,t] of CHS_DIMS) PROF[`RO ${String(D).replace('.',',')}×${String(t).replace('.',',')}`] = { typ:'CHS', reihe:'RO', D,t, ...chsProps(D,t) };
+// alte Tabellenform der I-Profile (Biegeknicken, Suche): [Name, h, b, t_w, t_f, r, A, G, I_y, W_el,y, W_pl,y, i_y, I_z, W_el,z, W_pl,z, i_z]
+const PROFILE = Object.entries(PROF).filter(([,p])=>p.typ==='I').map(([n,p])=>[n,p.h,p.b,p.tw,p.tf,p.r,rS(p.A),rS(p.G),rS(p.Iy),rS(p.Wy),rS(p.Wply),rS(p.iy),rS(p.Iz),rS(p.Wz),rS(p.Wplz),rS(p.iz)]);
+const I_EXT = Object.fromEntries(Object.entries(PROF).filter(([,p])=>p.typ==='I'));
+
 
 
 // Stahlsorten nach EN 1993-1-1, Tab. 3.1 (Warmgewalzt, Baustahl EN 10025-2)
@@ -739,6 +869,7 @@ const STAHL = [
   ['S235', 235, 360, 215, 360],
   ['S275', 275, 430, 255, 410],
   ['S355', 355, 490, 335, 470],
+  ['S420', 420, 520, 390, 500],
   ['S460', 460, 540, 430, 540],
 ];
 
@@ -1967,30 +2098,6 @@ function updateErd(){
 }
 
 // Biegeknicken nach EN 1993-1-1, 6.3.1 (gewalzte I-Profile, S235–S355)
-const KNICK_ALPHA = { a0:0.13, a:0.21, b:0.34, c:0.49, d:0.76 };
-function knickLinie(name, axis){
-  const p=PROFILE.find(r=>r[0]===name); const [,h,b,,tf]=p;
-  if(h/b>1.2) return axis==='y' ? 'a' : 'b';          // t_f ≤ 40 mm bei allen Profilen der Tabelle
-  return axis==='y' ? 'b' : 'c';                      // t_f ≤ 100 mm
-}
-function chiOf(lb, alpha){
-  if(lb<=0.2) return 1;
-  const Phi=0.5*(1+alpha*(lb-0.2)+lb*lb);
-  return Math.min(1, 1/(Phi+Math.sqrt(Phi*Phi-lb*lb)));
-}
-function updateKnick(){
-  const out=document.getElementById('kn-out'); if(!out) return;
-  const name=document.getElementById('kn-prof').value, st=document.getElementById('kn-st').value, axis=document.getElementById('kn-ax').value;
-  const Lcr=num('kn-L');
-  if(!isFinite(Lcr) || Lcr<=0){ out.innerHTML='Bitte eine Knicklänge > 0 eingeben.'; return; }
-  const p=PROFILE.find(r=>r[0]===name), A=p[6], i=axis==='y'?p[11]:p[15];
-  const fy=STAHL.find(s=>s[0]===st)[1], lam1=Math.PI*Math.sqrt(210000/fy);
-  const lam=Lcr*100/i, lb=lam/lam1, kl=knickLinie(name,axis), chi=chiOf(lb,KNICK_ALPHA[kl]);
-  const Npl=A*fy/10, Nb=chi*Npl/1.1;
-  out.innerHTML = `λ = L<sub>cr</sub>/i = ${deNum(lam,1)} &nbsp;·&nbsp; λ<sub>1</sub> = ${deNum(lam1,1)} &nbsp;·&nbsp; λ̄ = <b>${deNum(lb,3)}</b><br>
-    Knicklinie <b>${kl}</b> (α = ${deNum(KNICK_ALPHA[kl])}) &nbsp;·&nbsp; χ = <b>${deNum(chi,3)}</b><br>
-    N<sub>pl,Rk</sub> = A·f<sub>y</sub> = ${deNum(Npl,0)} kN &nbsp;·&nbsp; N<sub>b,Rd</sub> = χ·A·f<sub>y</sub>/γ<sub>M1</sub> = <b>${deNum(Nb,0)} kN</b>`;
-}
 
 // Rechteckquerschnitt
 // Wasserbau-Rechner
@@ -2035,21 +2142,484 @@ function updateRechteck(){
     i<sub>y</sub> = <b>${deNum(h/Math.sqrt(12),2)} cm</b> &nbsp;·&nbsp; W<sub>pl,y</sub> = ${deNum(b*h*h/4,1)} cm³ &nbsp;·&nbsp; I<sub>z</sub> = ${deNum(h*b**3/12,1)} cm⁴`;
 }
 
-// Profiltabelle mit Filter
-let profileFilter = 'IPE';
-function profileTable(){
-  const rows = PROFILE.filter(r=>r[0].startsWith(profileFilter));
-  return dataTable({
-    cols: ['Profil','h','b','t_w','t_f','r','A','G','I_y','W_el,y','W_pl,y','i_y','I_z','W_el,z','W_pl,z','i_z'],
-    units:['','mm','mm','mm','mm','mm','cm²','kg/m','cm⁴','cm³','cm³','cm','cm⁴','cm³','cm³','cm'],
-    rows
-  });
+// ══════════════════════════════════════════════════
+// STAHLBAU (ref v0.3.9): Rechner mit Rechenweg Schritt für Schritt
+// Einheiten in den Rechnungen: kN, cm (f_y in kN/cm² = N/mm² / 10)
+// ══════════════════════════════════════════════════
+const E_ST = 21000, G_ST = 8100;                    // kN/cm²
+const GM0 = 1.0, GM1 = 1.1, GM2 = 1.25;
+const KNICK_ALPHA = { a0:0.13, a:0.21, b:0.34, c:0.49, d:0.76 };
+const stRow = st => STAHL.find(s=>s[0]===st) || STAHL[0];
+const stFy = (st,t) => t<=40 ? stRow(st)[1] : stRow(st)[3];
+const stFu = (st,t) => t<=40 ? stRow(st)[2] : stRow(st)[4];
+const d1 = (v,n=1) => deNum(v,n), dk = v => deNum(v,0).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const ok = (eta) => eta<=1.0005 ? `<b class="ok-t">✓ erfüllt</b>` : `<b class="bad-t">✗ nicht erfüllt</b>`;
+// Profilauswahl mit Gruppen
+function selProf(id, def, on, typen=['I']){
+  const groups = {};
+  for(const [n,p] of Object.entries(PROF)) if(typen.includes(p.typ)) (groups[p.reihe] ||= []).push(n);
+  return `<select id="${id}" onchange="${on}">${Object.entries(groups).map(([g,ns])=>`<optgroup label="${g}">${ns.map(n=>`<option${n===def?' selected':''}>${n}</option>`).join('')}</optgroup>`).join('')}</select>`;
 }
+const selSt = (id, def, on) => sel(id, STAHL.map(s=>[s[0],s[0]]), def, on);
+const valOf = id => document.getElementById(id)?.value;
+
+// Knicklinie nach EN 1993-1-1, Tab. 6.2 (gewalzte I-Profile)
+function knickLinie(name, axis, st='S235'){
+  const p = PROF[name]; if(!p) return 'b';
+  const s460 = st==='S460', hb = p.h/p.b;
+  if(p.typ==='RHS' || p.typ==='CHS') return s460 ? 'a0' : 'a';
+  if(p.typ!=='I') return 'c';
+  if(hb>1.2) return p.tf<=40 ? (s460?'a0':(axis==='y'?'a':'b')) : (s460?'a':(axis==='y'?'b':'c'));
+  return p.tf<=100 ? (s460?'a':(axis==='y'?'b':'c')) : (s460?'c':'d');
+}
+function chiOf(lb, alpha){
+  if(lb<=0.2) return 1;
+  const Phi=0.5*(1+alpha*(lb-0.2)+lb*lb);
+  return Math.min(1, 1/(Phi+Math.sqrt(Phi*Phi-lb*lb)));
+}
+
+// ── Querschnittsklassen (Tab. 5.2) für gewalzte I-Profile ──
+// art: 'druck' | 'biegung' | 'nm' (Druck + Biegung um y; N, M aus Eingabe)
+function klassifiziere(p, fy, art, N=0, M=0){
+  const eps=Math.sqrt(235/fy), S=[];
+  const cf=(p.b-p.tw-2*p.r)/2, rf=cf/p.tf;
+  const kf = rf<=9*eps?1 : rf<=10*eps?2 : rf<=14*eps?3 : 4;
+  const flansch = art==='biegung' || art==='druck' || art==='nm';
+  const cw=p.h-2*p.tf-2*p.r, rw=cw/p.tw;
+  let kw, gw='', alpha=null, psi=null;
+  if(art==='druck'){ kw = rw<=33*eps?1 : rw<=38*eps?2 : rw<=42*eps?3 : 4; gw=`33ε = ${d1(33*eps)} · 38ε = ${d1(38*eps)} · 42ε = ${d1(42*eps)}`; }
+  else if(art==='biegung'){ kw = rw<=72*eps?1 : rw<=83*eps?2 : rw<=124*eps?3 : 4; gw=`72ε = ${d1(72*eps)} · 83ε = ${d1(83*eps)} · 124ε = ${d1(124*eps)}`; }
+  else {
+    // plastisch: Anteil α der gedrückten Steghöhe; elastisch: Spannungsverhältnis ψ
+    alpha = Math.min(1, Math.max(0, 0.5*(1 + N/(cw/10*p.tw/10*fy/10))));
+    const g1 = alpha>0.5 ? 396*eps/(13*alpha-1) : 36*eps/alpha, g2 = alpha>0.5 ? 456*eps/(13*alpha-1) : 41.5*eps/alpha;
+    const sN=N/p.A, sM=M*100/p.Iy*(cw/20), s1=sN+sM, s2=sN-sM; psi = s1>0 ? Math.max(-3, s2/s1) : 1;
+    const g3 = psi>-1 ? 42*eps/(0.67+0.33*psi) : 62*eps*(1-psi)*Math.sqrt(-psi);
+    kw = rw<=g1?1 : rw<=g2?2 : rw<=g3?3 : 4;
+    gw=`α = ${d1(alpha,3)}: Kl. 1 ≤ ${d1(g1)} · Kl. 2 ≤ ${d1(g2)} · ψ = ${d1(psi,3)}: Kl. 3 ≤ ${d1(g3)}`;
+  }
+  return { eps, cf, rf, kf, cw, rw, kw, gw, alpha, psi, kl: Math.max(flansch?kf:1, kw),
+    gf:`9ε = ${d1(9*eps)} · 10ε = ${d1(10*eps)} · 14ε = ${d1(14*eps)}` };
+}
+function klasseSchritte(p, fy, k, artTxt){
+  return [
+    `§Querschnittsklasse (EN 1993-1-1, Tab. 5.2) — ${artTxt}`,
+    `ε = √(235 / f<sub>y</sub>) = √(235 / ${dk(fy)}) = ${d1(k.eps,3)}`,
+    `!Flansch (einseitig gestützt, Druck): c = (b − t<sub>w</sub> − 2r) / 2`,
+    `c = (${d1(p.b)} − ${d1(p.tw)} − 2 · ${d1(p.r)}) / 2 = ${d1(k.cf)} mm`,
+    `c / t<sub>f</sub> = ${d1(k.cf)} / ${d1(p.tf)} = ${d1(k.rf,2)}`,
+    `!Grenzen ${k.gf} → Flansch Klasse ${k.kf}`,
+    `!Steg (beidseitig gestützt): c = h − 2t<sub>f</sub> − 2r`,
+    `c = ${d1(p.h)} − 2 · ${d1(p.tf)} − 2 · ${d1(p.r)} = ${d1(k.cw)} mm`,
+    `c / t<sub>w</sub> = ${d1(k.cw)} / ${d1(p.tw)} = ${d1(k.rw,2)}`,
+    `!Grenzen ${k.gw} → Steg Klasse ${k.kw}`,
+    `!Der Querschnitt hat die ungünstigere Klasse: <b>Klasse ${k.kl}</b>`,
+  ];
+}
+
+// ── Profil-Steckbrief ──
+function updateSteckbrief(){
+  const out=document.getElementById('sb-out'); if(!out) return;
+  const n=valOf('sb-prof'), st=valOf('sb-st'), p=PROF[n]; if(!p) return;
+  const fy=stFy(st,p.tf), f=fy/10;
+  const kb=klassifiziere(p,fy,'biegung'), kd=klassifiziere(p,fy,'druck');
+  const Npl=p.A*f/GM0, Mply=p.Wply*f/GM0/100, Mplz=p.Wplz*f/GM0/100, Vpl=p.Avz*f/Math.sqrt(3)/GM0;
+  const W = kb.kl<=2 ? ['W<sub>pl,y</sub>', p.Wply, 'M<sub>pl,y,Rd</sub>'] : ['W<sub>el,y</sub>', p.Wy, 'M<sub>el,y,Rd</sub>'];
+  const tab = textTable(['Größe','Wert','Größe','Wert'], [
+    ['h · b', `${d1(p.h)} · ${d1(p.b)} mm`, 'A', `${d1(p.A,2)} cm²`],
+    ['t<sub>w</sub> · t<sub>f</sub> · r', `${d1(p.tw)} · ${d1(p.tf)} · ${d1(p.r)} mm`, 'G', `${d1(p.G,1)} kg/m`],
+    ['I<sub>y</sub>', `${dk(p.Iy)} cm⁴`, 'I<sub>z</sub>', `${d1(p.Iz,1)} cm⁴`],
+    ['W<sub>el,y</sub>', `${d1(p.Wy,1)} cm³`, 'W<sub>el,z</sub>', `${d1(p.Wz,1)} cm³`],
+    ['W<sub>pl,y</sub>', `${d1(p.Wply,1)} cm³`, 'W<sub>pl,z</sub>', `${d1(p.Wplz,1)} cm³`],
+    ['i<sub>y</sub>', `${d1(p.iy,2)} cm`, 'i<sub>z</sub>', `${d1(p.iz,2)} cm`],
+    ['A<sub>vz</sub>', `${d1(p.Avz,2)} cm²`, 'S<sub>y</sub>', `${d1(p.Sy,1)} cm³`],
+    ['I<sub>t</sub>', `${d1(p.It,2)} cm⁴`, 'I<sub>w</sub>', `${dk(p.Iw)} cm⁶`],
+    ['h<sub>w</sub> = h − 2t<sub>f</sub>', `${d1(p.hw)} mm`, 'd = h<sub>w</sub> − 2r', `${d1(p.d)} mm`],
+  ]);
+  out.innerHTML = tab + ablauf(`Widerstände ${n}, ${st}`, [
+    `§Streckgrenze`,
+    `!t<sub>f</sub> = ${d1(p.tf)} mm ${p.tf<=40?'≤ 40 mm':'> 40 mm'} → f<sub>y</sub> = ${dk(fy)} N/mm² = ${d1(f,2)} kN/cm²`,
+    `§Querschnittsklasse`,
+    `!Biegung um y: Flansch c/t = ${d1(kb.rf,2)}, Steg c/t = ${d1(kb.rw,2)} → <b>Klasse ${kb.kl}</b> · reiner Druck: Steg c/t = ${d1(kd.rw,2)} → <b>Klasse ${kd.kl}</b>`,
+    `§Normalkraft`,
+    `N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> = ${d1(p.A,2)} · ${d1(f,2)} / ${d1(GM0,2)} = ${d1(Npl,1)} kN`,
+    `§Biegung`,
+    `${W[2]} = ${W[0]} · f<sub>y</sub> / γ<sub>M0</sub> = ${d1(W[1],1)} · ${d1(f,2)} / 100 = ${d1(W[1]*f/100,1)} kNm`,
+    `M<sub>pl,z,Rd</sub> = W<sub>pl,z</sub> · f<sub>y</sub> / γ<sub>M0</sub> = ${d1(p.Wplz,1)} · ${d1(f,2)} / 100 = ${d1(Mplz,1)} kNm`,
+    `§Querkraft`,
+    `V<sub>pl,z,Rd</sub> = A<sub>vz</sub> · f<sub>y</sub> / (√3 · γ<sub>M0</sub>) = ${d1(p.Avz,2)} · ${d1(f,2)} / √3 = ${d1(Vpl,1)} kN`,
+  ]);
+}
+
+// ── Klassifizierung ──
+function updateQK(){
+  const out=document.getElementById('qk-out'); if(!out) return;
+  const n=valOf('qk-prof'), st=valOf('qk-st'), art=valOf('qk-art'), p=PROF[n]; if(!p) return;
+  const N=num('qk-N')||0, M=num('qk-M')||0, fy=stFy(st,p.tf);
+  document.getElementById('qk-nm').style.display = art==='nm' ? '' : 'none';
+  const k=klassifiziere(p,fy,art,N,M);
+  const S = klasseSchritte(p,fy,k,{druck:'reiner Druck', biegung:'Biegung um y', nm:`N<sub>Ed</sub> = ${d1(N,0)} kN, M<sub>y,Ed</sub> = ${d1(M,0)} kNm`}[art]);
+  if(art==='nm') S.splice(9,0,
+    `!α (plastisch): α = ½ · (1 + N<sub>Ed</sub> / (c · t<sub>w</sub> · f<sub>y</sub>))`,
+    `α = 0,5 · (1 + ${d1(N,0)} / (${d1(k.cw/10,2)} · ${d1(p.tw/10,2)} · ${d1(fy/10,2)})) = ${d1(k.alpha,3)}`,
+    `!ψ (elastisch) = σ<sub>2</sub> / σ<sub>1</sub> an den Stegenden mit σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = ${d1(k.psi,3)}`);
+  out.innerHTML = ablauf(`${n}, ${st}`, S) + `<div class="info-banner">Klasse ${k.kl}: ${['','plastische Berechnung und Bemessung (Fließgelenke möglich)','plastische Querschnittstragfähigkeit (W<sub>pl</sub>), keine Umlagerung','elastische Querschnittstragfähigkeit (W<sub>el</sub>)','örtliches Beulen vor Erreichen von f<sub>y</sub> → wirksame Querschnitte nach EN 1993-1-5'][k.kl]}</div>`;
+}
+
+// ── Querschnittsnachweis N + M_y + V_z ──
+function updateQN(){
+  const out=document.getElementById('qn-out'); if(!out) return;
+  const n=valOf('qn-prof'), st=valOf('qn-st'), p=PROF[n]; if(!p) return;
+  const N=num('qn-N')||0, M=Math.abs(num('qn-M')||0), V=Math.abs(num('qn-V')||0);
+  const fy=stFy(st,p.tf), f=fy/10, k=klassifiziere(p,fy, N>0 ? 'nm' : 'biegung', Math.max(N,0), M);
+  const S=[`§Werkstoff und Profil`, `!${n}: A = ${d1(p.A,2)} cm², W<sub>pl,y</sub> = ${d1(p.Wply,1)} cm³, W<sub>el,y</sub> = ${d1(p.Wy,1)} cm³, A<sub>vz</sub> = ${d1(p.Avz,2)} cm² · f<sub>y</sub> = ${dk(fy)} N/mm²`,
+    `!Querschnittsklasse für ${N>0?'Druck und Biegung':'Biegung'}: Flansch c/t = ${d1(k.rf,2)} (Kl. ${k.kf}), Steg c/t = ${d1(k.rw,2)} (Kl. ${k.kw}) → <b>Klasse ${k.kl}</b>`];
+  if(k.kl===4){ out.innerHTML = ablauf('Querschnittsnachweis', S.concat(['!Klasse 4: wirksamer Querschnitt nach EN 1993-1-5 nötig — hier nicht abgedeckt.'])); return; }
+  const Npl=p.A*f/GM0, Vpl=p.Avz*f/Math.sqrt(3)/GM0, hw=p.hw, eta=1.2, eps=k.eps;
+  S.push(`§Querkraft (6.2.6)`,
+    `V<sub>pl,z,Rd</sub> = A<sub>vz</sub> · f<sub>y</sub> / (√3 · γ<sub>M0</sub>) = ${d1(p.Avz,2)} · ${d1(f,2)} / √3 = ${d1(Vpl,1)} kN`,
+    `V<sub>Ed</sub> / V<sub>pl,z,Rd</sub> = ${d1(V,1)} / ${d1(Vpl,1)} = ${d1(V/Vpl,3)} ≤ 1 ${ok(V/Vpl)}`,
+    `!Schubbeulen: h<sub>w</sub>/t<sub>w</sub> = ${d1(hw,1)} / ${d1(p.tw)} = ${d1(hw/p.tw,1)} ${hw/p.tw<=72*eps/eta?'≤':'>'} 72ε/η = ${d1(72*eps/eta,1)} (η = 1,2) → ${hw/p.tw<=72*eps/eta?'kein Beulnachweis nötig':'Schubbeulen nach EN 1993-1-5 nachweisen'}`);
+  let MRd, uM, txtM=[];
+  if(k.kl<=2){
+    let Mpl=p.Wply*f/GM0/100, Mv=Mpl;
+    S.push(`§Biegung (6.2.5)`, `M<sub>pl,y,Rd</sub> = W<sub>pl,y</sub> · f<sub>y</sub> / γ<sub>M0</sub> = ${d1(p.Wply,1)} · ${d1(f,2)} / 100 = ${d1(Mpl,1)} kNm`);
+    if(V>0.5*Vpl){
+      const rho=(2*V/Vpl-1)**2, Aw=hw*p.tw/100;
+      Mv=Math.min(Mpl, (p.Wply-rho*Aw*Aw/(4*p.tw/10))*f/GM0/100);
+      S.push(`!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub> → Abminderung der Biegetragfähigkeit (6.2.8)`,
+        `ρ = (2 · V<sub>Ed</sub> / V<sub>pl,Rd</sub> − 1)² = (2 · ${d1(V/Vpl,3)} − 1)² = ${d1(rho,3)}`,
+        `A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub> = ${d1(hw/10,2)} · ${d1(p.tw/10,2)} = ${d1(Aw,2)} cm²`,
+        `M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> = (${d1(p.Wply,1)} − ${d1(rho,3)} · ${d1(Aw,2)}² / (4 · ${d1(p.tw/10,2)})) · ${d1(f,2)} / 100 = ${d1(Mv,1)} kNm`);
+    } else S.push(`!V<sub>Ed</sub> = ${d1(V,1)} kN ≤ 0,5 · V<sub>pl,Rd</sub> = ${d1(0.5*Vpl,1)} kN → keine Abminderung aus Querkraft`);
+    MRd=Mv;
+    if(N!==0){
+      const nn=Math.abs(N)/Npl, a=Math.min(0.5,(p.A*100-2*p.b*p.tf)/(p.A*100));
+      S.push(`§Normalkraft und Biegung (6.2.9.1)`,
+        `N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> = ${d1(p.A,2)} · ${d1(f,2)} = ${d1(Npl,1)} kN`,
+        `|N<sub>Ed</sub>| / N<sub>pl,Rd</sub> = ${d1(Math.abs(N),1)} / ${d1(Npl,1)} = ${d1(nn,3)} ≤ 1 ${ok(nn)}`);
+      const lim2=0.5*hw*p.tw/100*f/GM0;
+      if(Math.abs(N)<=0.25*Npl && Math.abs(N)<=lim2){
+        S.push(`!|N<sub>Ed</sub>| ≤ 0,25 · N<sub>pl,Rd</sub> = ${d1(0.25*Npl,1)} kN und ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub> = ${d1(lim2,1)} kN → Normalkraft darf bei M<sub>y</sub> unberücksichtigt bleiben`);
+      } else {
+        const MN=Math.min(MRd, MRd*(1-nn)/(1-0.5*a));
+        S.push(`n = ${d1(nn,3)} · a = (A − 2 · b · t<sub>f</sub>) / A = (${d1(p.A,2)} − 2 · ${d1(p.b/10,1)} · ${d1(p.tf/10,2)}) / ${d1(p.A,2)} = ${d1(a,3)} ≤ 0,5`,
+          `M<sub>N,y,Rd</sub> = M<sub>y,Rd</sub> · (1 − n) / (1 − 0,5 · a) = ${d1(MRd,1)} · (1 − ${d1(nn,3)}) / (1 − 0,5 · ${d1(a,3)}) = ${d1(MN,1)} kNm`);
+        if(V>0.5*Vpl) S.push(`!vereinfacht: Abminderung aus Querkraft und Normalkraft nacheinander angesetzt`);
+        MRd=MN;
+      }
+    }
+    uM=M/MRd;
+    S.push(`§Nachweis`, `M<sub>y,Ed</sub> / M<sub>y,Rd</sub> = ${d1(M,1)} / ${d1(MRd,1)} = ${d1(uM,3)} ≤ 1 ${ok(uM)}`);
+  } else {
+    const sig=N/p.A+M*100/p.Wy, sv=Math.abs(sig)*10;
+    S.push(`§Elastischer Nachweis (Klasse 3, 6.2.1 (7))`,
+      `σ<sub>x,Ed</sub> = N<sub>Ed</sub> / A + M<sub>y,Ed</sub> / W<sub>el,y</sub> = ${d1(N,1)} / ${d1(p.A,2)} + ${d1(M*100,0)} / ${d1(p.Wy,1)} = ${d1(sig,2)} kN/cm²`,
+      `σ<sub>x,Ed</sub> / (f<sub>y</sub> / γ<sub>M0</sub>) = ${d1(sv,1)} / ${dk(fy)} = ${d1(sv/fy,3)} ≤ 1 ${ok(sv/fy)}`);
+    uM=sv/fy;
+    if(V>0.5*Vpl) S.push(`!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub>: zusätzlich Vergleichsspannung σ<sub>v</sub> = √(σ² + 3τ²) nachweisen`);
+  }
+  out.innerHTML = ablauf(`Querschnittsnachweis ${n}, ${st}`, S) + `<div class="info-banner">Maßgebende Ausnutzung: <b>${d1(Math.max(uM, V/Vpl)*100,0)} %</b></div>`;
+}
+
+// ── Biegeknicken (6.3.1) ──
+function updateKnick(){
+  const out=document.getElementById('kn-out'); if(!out) return;
+  const name=valOf('kn-prof'), st=valOf('kn-st'), axis=valOf('kn-ax'), p=PROF[name];
+  const Lcr=num('kn-L'), NEd=num('kn-N')||0;
+  if(!isFinite(Lcr) || Lcr<=0){ out.innerHTML='Bitte eine Knicklänge > 0 eingeben.'; return; }
+  const A=p.A, i=axis==='y'?p.iy:p.iz, I=axis==='y'?p.Iy:p.Iz;
+  const fy=stFy(st,p.tf), lam1=Math.PI*Math.sqrt(210000/fy);
+  const lam=Lcr*100/i, lb=lam/lam1, kl=knickLinie(name,axis,st), al=KNICK_ALPHA[kl];
+  const Phi=0.5*(1+al*(lb-0.2)+lb*lb), chi=chiOf(lb,al);
+  const Npl=A*fy/10, Nb=chi*Npl/GM1, Ncr=Math.PI**2*E_ST*I/(Lcr*100)**2;
+  const S=[`§Querschnittswerte ${name} (Achse ${axis}–${axis})`,
+    `!A = ${d1(A,2)} cm² · I<sub>${axis}</sub> = ${d1(I,1)} cm⁴ · i<sub>${axis}</sub> = ${d1(i,3)} cm · t<sub>f</sub> = ${d1(p.tf)} mm → f<sub>y</sub> = ${dk(fy)} N/mm²`,
+    `§Schlankheit`,
+    `λ = L<sub>cr</sub> / i = ${d1(Lcr*100,0)} / ${d1(i,3)} = ${d1(lam,1)}`,
+    `λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = π · √(210000 / ${dk(fy)}) = ${d1(lam1,1)}`,
+    `λ̄ = λ / λ<sub>1</sub> = ${d1(lam,1)} / ${d1(lam1,1)} = ${d1(lb,3)}`,
+    `!Kontrolle über N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = ${dk(Ncr)} kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = ${d1(Math.sqrt(Npl/Ncr),3)}`,
+    `§Knicklinie und Abminderung`,
+    `!h/b = ${d1(p.h/p.b,2)} ${p.h/p.b>1.2?'> 1,2':'≤ 1,2'}, t<sub>f</sub> = ${d1(p.tf)} mm, ${st} → Knicklinie <b>${kl}</b>, α = ${deNum(al)}`];
+  if(lb<=0.2) S.push(`!λ̄ ≤ 0,2 → χ = 1,000 (kein Stabilitätsverlust maßgebend)`);
+  else S.push(`Φ = 0,5 · (1 + α · (λ̄ − 0,2) + λ̄²) = 0,5 · (1 + ${deNum(al)} · (${d1(lb,3)} − 0,2) + ${d1(lb,3)}²) = ${d1(Phi,3)}`,
+    `χ = 1 / (Φ + √(Φ² − λ̄²)) = 1 / (${d1(Phi,3)} + √(${d1(Phi,3)}² − ${d1(lb,3)}²)) = ${d1(chi,3)}`);
+  S.push(`§Tragfähigkeit`,
+    `N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> = ${d1(chi,3)} · ${d1(A,2)} · ${d1(fy/10,2)} / ${deNum(GM1)} = ${dk(Nb)} kN`);
+  if(NEd>0) S.push(`N<sub>Ed</sub> / N<sub>b,Rd</sub> = ${d1(NEd,1)} / ${d1(Nb,1)} = ${d1(NEd/Nb,3)} ≤ 1 ${ok(NEd/Nb)}`);
+  out.innerHTML = ablauf(`Biegeknicken ${name}, ${st}, L<sub>cr</sub> = ${d1(Lcr,2)} m`, S);
+}
+
+// ── Biegedrillknicken (6.3.2) ──
+const BDK_FALL = {
+  M:   { t:'konstantes Moment', C1:()=>1.0, C2:0, kc:()=>1.0 },
+  q:   { t:'Gleichstreckenlast', C1:()=>1.12, C2:0.45, kc:()=>0.94 },
+  F:   { t:'Einzellast in Feldmitte', C1:()=>1.35, C2:0.59, kc:()=>0.90 },
+  psi: { t:'linearer Momentenverlauf ψ', C1:psi=>Math.min(2.7, 1.88-1.40*psi+0.52*psi*psi), C2:0, kc:psi=>1/(1.33-0.33*psi) },
+};
+function mcrOf(p, Lcm, fall, psi, zg){
+  const F=BDK_FALL[fall], C1=F.C1(psi), C2=F.C2, a=Math.PI**2*E_ST*p.Iz/Lcm**2;
+  const root=Math.sqrt(p.Iw/p.Iz + Lcm**2*G_ST*p.It/(Math.PI**2*E_ST*p.Iz) + (C2*zg)**2);
+  return { C1, C2, a, root, Mcr: C1*a*(root - C2*zg) };   // kNcm
+}
+function chiLT(p, lbLT, kc, lb0=0.4, beta=0.75){
+  const kl = p.h/p.b<=2 ? 'b' : 'c', al=KNICK_ALPHA[kl];
+  const Phi=0.5*(1+al*(lbLT-lb0)+beta*lbLT*lbLT);
+  let chi = lbLT<=lb0 ? 1 : Math.min(1, 1/(Phi+Math.sqrt(Phi*Phi-beta*lbLT*lbLT)), 1/(lbLT*lbLT));
+  const f = Math.min(1, 1-0.5*(1-kc)*(1-2*(lbLT-0.8)**2));
+  return { kl, al, Phi, chi, f, chiMod: Math.min(1, chi/f, 1/(lbLT*lbLT)) };
+}
+function updateBDK(){
+  const out=document.getElementById('bd-out'); if(!out) return;
+  const n=valOf('bd-prof'), st=valOf('bd-st'), fall=valOf('bd-fall'), zgk=valOf('bd-zg'), p=PROF[n];
+  const L=num('bd-L'), psi=Math.max(-1,Math.min(1,num('bd-psi')||0)), M=Math.abs(num('bd-M')||0);
+  document.getElementById('bd-psi-f').style.display = fall==='psi' ? '' : 'none';
+  document.getElementById('bd-zg-f').style.display = fall==='q'||fall==='F' ? '' : 'none';
+  if(!(L>0)){ out.innerHTML='Bitte L > 0 eingeben.'; return; }
+  const fy=stFy(st,p.tf), f=fy/10, Lcm=L*100;
+  const zg = fall==='M'||fall==='psi' ? 0 : {o:p.h/20, s:0, u:-p.h/20}[zgk];
+  const kq=klassifiziere(p,fy,'biegung'), W = kq.kl<=2 ? p.Wply : p.Wy;
+  const r=mcrOf(p,Lcm,fall,psi,zg), lbLT=Math.sqrt(W*f/r.Mcr), F=BDK_FALL[fall], kc=F.kc(psi), c=chiLT(p,lbLT,kc);
+  const MbRd=c.chiMod*W*f/GM1/100;
+  const S=[`§Querschnittswerte ${n}, ${st}`,
+    `!I<sub>z</sub> = ${d1(p.Iz,1)} cm⁴ · I<sub>t</sub> = ${d1(p.It,2)} cm⁴ · I<sub>w</sub> = ${dk(p.Iw)} cm⁶ · ${kq.kl<=2?`Klasse ${kq.kl} → W<sub>y</sub> = W<sub>pl,y</sub>`:`Klasse ${kq.kl} → W<sub>y</sub> = W<sub>el,y</sub>`} = ${d1(W,1)} cm³ · f<sub>y</sub> = ${dk(fy)} N/mm²`,
+    `§Ideales Kippmoment M<sub>cr</sub> (Gabellagerung, k = k<sub>w</sub> = 1)`,
+    `!${F.t}${fall==='psi'?` = ${d1(psi,2)}`:''} → C<sub>1</sub> = ${d1(r.C1,3)}, C<sub>2</sub> = ${d1(r.C2,2)} · Lastangriff z<sub>g</sub> = ${d1(zg,2)} cm ${zg>0?'(Obergurt, ungünstig)':zg<0?'(Untergurt, günstig)':'(Schubmittelpunkt)'}`,
+    `!M<sub>cr</sub> = C<sub>1</sub> · π² · E · I<sub>z</sub> / L² · [√(I<sub>w</sub>/I<sub>z</sub> + L² · G · I<sub>t</sub> / (π² · E · I<sub>z</sub>) + (C<sub>2</sub> · z<sub>g</sub>)²) − C<sub>2</sub> · z<sub>g</sub>]`,
+    `π² · E · I<sub>z</sub> / L² = π² · 21000 · ${d1(p.Iz,1)} / ${dk(Lcm)}² = ${d1(r.a,1)} kN`,
+    `√(…) = √(${d1(p.Iw/p.Iz,1)} + ${d1(Lcm**2*G_ST*p.It/(Math.PI**2*E_ST*p.Iz),1)} + ${d1((r.C2*zg)**2,1)}) = ${d1(r.root,2)} cm`,
+    `M<sub>cr</sub> = ${d1(r.C1,3)} · ${d1(r.a,1)} · (${d1(r.root,2)} − ${d1(r.C2*zg,2)}) = ${dk(r.Mcr)} kNcm = ${d1(r.Mcr/100,1)} kNm`,
+    `§Schlankheit und Abminderung (6.3.2.3, gewalzte Profile)`,
+    `λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) = √(${d1(W,1)} · ${d1(f,2)} / ${dk(r.Mcr)}) = ${d1(lbLT,3)}`,
+    `!h/b = ${d1(p.h/p.b,2)} ${p.h/p.b<=2?'≤ 2 → Knicklinie b':'> 2 → Knicklinie c'}, α<sub>LT</sub> = ${deNum(c.al)} · λ̄<sub>LT,0</sub> = 0,4 · β = 0,75`];
+  if(lbLT<=0.4) S.push(`!λ̄<sub>LT</sub> ≤ 0,4 → χ<sub>LT</sub> = 1 (kein Biegedrillknicken)`);
+  else S.push(`Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − 0,4) + 0,75 · λ̄<sub>LT</sub>²) = ${d1(c.Phi,3)}`,
+    `χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − 0,75 · λ̄<sub>LT</sub>²)) = ${d1(c.chi,3)}`,
+    `k<sub>c</sub> = ${d1(kc,3)} · f = 1 − 0,5 · (1 − k<sub>c</sub>) · (1 − 2 · (λ̄<sub>LT</sub> − 0,8)²) = ${d1(c.f,3)} ≤ 1`,
+    `χ<sub>LT,mod</sub> = χ<sub>LT</sub> / f = ${d1(c.chi,3)} / ${d1(c.f,3)} = ${d1(c.chiMod,3)} ≤ 1`);
+  S.push(`§Nachweis`,
+    `M<sub>b,Rd</sub> = χ<sub>LT,mod</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> = ${d1(c.chiMod,3)} · ${d1(W,1)} · ${d1(f,2)} / (${deNum(GM1)} · 100) = ${d1(MbRd,1)} kNm`);
+  if(M>0) S.push(`M<sub>y,Ed</sub> / M<sub>b,Rd</sub> = ${d1(M,1)} / ${d1(MbRd,1)} = ${d1(M/MbRd,3)} ≤ 1 ${ok(M/MbRd)}`);
+  out.innerHTML = ablauf(`Biegedrillknicken ${n}, L = ${d1(L,2)} m`, S);
+}
+
+// ── Biegung und Druck: Ersatzstabverfahren 6.3.3 mit Anhang B (Tab. B.2, verdrehweiche I-Profile) ──
+const CM_FALL = { psi:{t:'linear (Randmomente)', cm:psi=>Math.max(0.4,0.6+0.4*psi)}, q:{t:'Gleichstreckenlast', cm:()=>0.95}, F:{t:'Einzellast', cm:()=>0.90} };
+function updateNMI(){
+  const out=document.getElementById('in-out'); if(!out) return;
+  const n=valOf('in-prof'), st=valOf('in-st'), fall=valOf('in-fall'), p=PROF[n];
+  const Ly=num('in-Ly'), Lz=num('in-Lz'), N=Math.abs(num('in-N')||0), M=Math.abs(num('in-M')||0), psi=Math.max(-1,Math.min(1,num('in-psi')||0));
+  document.getElementById('in-psi-f').style.display = fall==='psi' ? '' : 'none';
+  if(!(Ly>0 && Lz>0)){ out.innerHTML='Bitte Knicklängen > 0 eingeben.'; return; }
+  const fy=stFy(st,p.tf), f=fy/10, lam1=Math.PI*Math.sqrt(210000/fy);
+  const k=klassifiziere(p,fy,'nm',N,M), W = k.kl<=2 ? p.Wply : p.Wy;
+  if(k.kl===4){ out.innerHTML = ablauf('Biegung und Druck', ['!Querschnitt Klasse 4 — nicht abgedeckt.']); return; }
+  const NRk=p.A*f, MRk=W*f/100;
+  const lby=Ly*100/p.iy/lam1, lbz=Lz*100/p.iz/lam1, ky=knickLinie(n,'y',st), kz=knickLinie(n,'z',st);
+  const chy=chiOf(lby,KNICK_ALPHA[ky]), chz=chiOf(lbz,KNICK_ALPHA[kz]);
+  const bf = fall==='psi' ? 'psi' : fall, r=mcrOf(p,Lz*100,bf,psi,0), lbLT=Math.sqrt(W*f/r.Mcr), kc=BDK_FALL[bf].kc(psi), c=chiLT(p,lbLT,kc);
+  const Cm=CM_FALL[fall].cm(psi), ny=N/(chy*NRk/GM1), nz=N/(chz*NRk/GM1);
+  const kyy=Math.min(Cm*(1+(lby-0.2)*ny), Cm*(1+0.8*ny));
+  let kzy, kzyTxt;
+  if(lbz>=0.4){ kzy=Math.max(1-0.1*lbz*nz/(Cm-0.25), 1-0.1*nz/(Cm-0.25)); kzyTxt=`k<sub>zy</sub> = 1 − 0,1 · λ̄<sub>z</sub> · n<sub>z</sub> / (C<sub>mLT</sub> − 0,25) ≥ 1 − 0,1 · n<sub>z</sub> / (C<sub>mLT</sub> − 0,25) → ${d1(kzy,3)}`; }
+  else { kzy=Math.min(0.6+lbz, 1-0.1*lbz*nz/(Cm-0.25)); kzyTxt=`λ̄<sub>z</sub> < 0,4: k<sub>zy</sub> = 0,6 + λ̄<sub>z</sub> ≤ 1 − 0,1 · λ̄<sub>z</sub> · n<sub>z</sub> / (C<sub>mLT</sub> − 0,25) → ${d1(kzy,3)}`; }
+  const MbR=c.chiMod*MRk/GM1, e61=ny+kyy*M/MbR, e62=nz+kzy*M/MbR;
+  const S=[`§Querschnitt`, `!${n}, ${st}: f<sub>y</sub> = ${dk(fy)} N/mm² · Klasse ${k.kl} → W<sub>y</sub> = ${k.kl<=2?'W<sub>pl,y</sub>':'W<sub>el,y</sub>'} = ${d1(W,1)} cm³`,
+    `N<sub>Rk</sub> = A · f<sub>y</sub> = ${d1(p.A,2)} · ${d1(f,2)} = ${d1(NRk,1)} kN`,
+    `M<sub>y,Rk</sub> = W<sub>y</sub> · f<sub>y</sub> = ${d1(W,1)} · ${d1(f,2)} / 100 = ${d1(MRk,1)} kNm`,
+    `§Biegeknicken`,
+    `λ̄<sub>y</sub> = L<sub>cr,y</sub> / (i<sub>y</sub> · λ<sub>1</sub>) = ${dk(Ly*100)} / (${d1(p.iy,3)} · ${d1(lam1,1)}) = ${d1(lby,3)}`,
+    `!Knicklinie ${ky} → χ<sub>y</sub> = ${d1(chy,3)}`,
+    `λ̄<sub>z</sub> = L<sub>cr,z</sub> / (i<sub>z</sub> · λ<sub>1</sub>) = ${dk(Lz*100)} / (${d1(p.iz,3)} · ${d1(lam1,1)}) = ${d1(lbz,3)}`,
+    `!Knicklinie ${kz} → χ<sub>z</sub> = ${d1(chz,3)}`,
+    `§Biegedrillknicken (L = L<sub>cr,z</sub>, Last im Schubmittelpunkt)`,
+    `M<sub>cr</sub> = ${d1(r.C1,3)} · ${d1(r.a,1)} · ${d1(r.root,2)} / 100 = ${d1(r.Mcr/100,1)} kNm`,
+    `λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) = √(${d1(MRk,1)} / ${d1(r.Mcr/100,1)}) = ${d1(lbLT,3)}`,
+    `!χ<sub>LT</sub> = ${d1(c.chi,3)}, f = ${d1(c.f,3)} → χ<sub>LT,mod</sub> = ${d1(c.chiMod,3)}`,
+    `§Momentenbeiwerte und Interaktionsbeiwerte (Anhang B, Tab. B.2 und B.3)`,
+    `!Momentenverlauf ${CM_FALL[fall].t}${fall==='psi'?`, ψ = ${d1(psi,2)}: C<sub>m</sub> = 0,6 + 0,4 · ψ ≥ 0,4`:''} → C<sub>my</sub> = C<sub>mLT</sub> = ${d1(Cm,3)}`,
+    `n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>) = ${d1(N,1)} / (${d1(chy,3)} · ${d1(NRk,1)} / ${deNum(GM1)}) = ${d1(ny,3)}`,
+    `n<sub>z</sub> = N<sub>Ed</sub> / (χ<sub>z</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>) = ${d1(N,1)} / (${d1(chz,3)} · ${d1(NRk,1)} / ${deNum(GM1)}) = ${d1(nz,3)}`,
+    `k<sub>yy</sub> = C<sub>my</sub> · (1 + (λ̄<sub>y</sub> − 0,2) · n<sub>y</sub>) ≤ C<sub>my</sub> · (1 + 0,8 · n<sub>y</sub>) → ${d1(kyy,3)}`,
+    `!${kzyTxt}`,
+    `§Nachweise (6.61) und (6.62)`,
+    `!χ<sub>LT</sub> · M<sub>y,Rk</sub> / γ<sub>M1</sub> = ${d1(c.chiMod,3)} · ${d1(MRk,1)} / ${deNum(GM1)} = ${d1(MbR,1)} kNm`,
+    `(6.61): ${d1(ny,3)} + ${d1(kyy,3)} · ${d1(M,1)} / ${d1(MbR,1)} = ${d1(e61,3)} ≤ 1 ${ok(e61)}`,
+    `(6.62): ${d1(nz,3)} + ${d1(kzy,3)} · ${d1(M,1)} / ${d1(MbR,1)} = ${d1(e62,3)} ≤ 1 ${ok(e62)}`];
+  out.innerHTML = ablauf(`Biegung und Druck ${n}`, S);
+}
+
+// ── Schrauben: Abscheren und Lochleibung (EN 1993-1-8, Tab. 3.4) ──
+// [Bezeichnung, d, d0, A (Schaft), A_s (Spannungsquerschnitt)] in mm, mm²
+const SCHRAUBEN = [['M12',12,13,113,84.3],['M16',16,18,201,157],['M20',20,22,314,245],['M22',22,24,380,303],['M24',24,26,452,353],['M27',27,30,573,459],['M30',30,33,707,561],['M36',36,39,1018,817]];
+const SKLASSEN = [['4.6',240,400],['5.6',300,500],['8.8',640,800],['10.9',900,1000]];
+function updateSchraube(){
+  const out=document.getElementById('sr-out'); if(!out) return;
+  const sb=SCHRAUBEN.find(s=>s[0]===valOf('sr-d')), kl=SKLASSEN.find(s=>s[0]===valOf('sr-kl')), gew=valOf('sr-fuge')==='g';
+  const m=+valOf('sr-m'), st=valOf('sr-st'), t=num('sr-t'), e1=num('sr-e1'), e2=num('sr-e2'), p1=num('sr-p1'), p2=num('sr-p2');
+  const n1=Math.max(1,Math.round(num('sr-n1')||1)), n2=Math.max(1,Math.round(num('sr-n2')||1)), F=num('sr-F')||0;
+  if(!(t>0 && e1>0 && e2>0)){ out.innerHTML='Bitte t, e<sub>1</sub>, e<sub>2</sub> > 0 eingeben.'; return; }
+  const [, d, d0, As0, As] = sb, fub=kl[2], fyb=kl[1], fu=stFu(st,t);
+  const av = gew ? (kl[0]==='10.9' ? 0.5 : 0.6) : 0.6, Aq = gew ? As : As0;
+  const Fv = m*av*fub*Aq/GM2/1000;
+  const S=[`§Schraube und Blech`,
+    `!${sb[0]} ${kl[0]}: d = ${d} mm, d<sub>0</sub> = ${d0} mm, A = ${As0} mm², A<sub>s</sub> = ${deNum(As,1)} mm², f<sub>ub</sub> = ${fub} N/mm² · Blech ${st}, t = ${d1(t)} mm, f<sub>u</sub> = ${fu} N/mm²`,
+    `§Rand- und Lochabstände (Tab. 3.3, Mindestwerte)`,
+    `!e<sub>1</sub> = ${d1(e1)} ${e1>=1.2*d0?'≥':'<'} 1,2 · d<sub>0</sub> = ${d1(1.2*d0)} mm · e<sub>2</sub> = ${d1(e2)} ${e2>=1.2*d0?'≥':'<'} ${d1(1.2*d0)} mm`
+      + (n1>1?` · p<sub>1</sub> = ${d1(p1)} ${p1>=2.2*d0?'≥':'<'} 2,2 · d<sub>0</sub> = ${d1(2.2*d0)} mm`:'') + (n2>1?` · p<sub>2</sub> = ${d1(p2)} ${p2>=2.4*d0?'≥':'<'} 2,4 · d<sub>0</sub> = ${d1(2.4*d0)} mm`:''),
+    `§Abscheren je Schraube`,
+    `!Scherfuge im ${gew?'Gewinde → A = A<sub>s</sub>':'Schaft → A = Schaftquerschnitt'}, α<sub>v</sub> = ${deNum(av,1)}, ${m} Scherfuge${m>1?'n':''}`,
+    `F<sub>v,Rd</sub> = n · α<sub>v</sub> · f<sub>ub</sub> · A / γ<sub>M2</sub> = ${m} · ${deNum(av,1)} · ${fub} · ${deNum(Aq,1)} / ${deNum(GM2)} = ${d1(Fv,1)} kN`,
+    `§Lochleibung (Tab. 3.4)`];
+  // k1 quer zur Kraft: Randreihe (e2) bzw. innere Reihe (p2)
+  const k1R = Math.min(2.8*e2/d0-1.7, n2>1 ? 1.4*p2/d0-1.7 : 99, 2.5), k1I = Math.min(1.4*p2/d0-1.7, 2.5);
+  const adE = e1/(3*d0), adI = n1>1 ? p1/(3*d0)-0.25 : null, rf=fub/fu;
+  const abE = Math.min(adE, rf, 1), abI = adI===null ? null : Math.min(adI, rf, 1);
+  const Fb = (k1,ab) => k1*ab*fu*d*t/GM2/1000;
+  S.push(`!α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) mit f<sub>ub</sub>/f<sub>u</sub> = ${fub}/${fu} = ${d1(rf,3)}`,
+    `α<sub>d</sub> (Endschraube) = e<sub>1</sub> / (3 · d<sub>0</sub>) = ${d1(e1)} / (3 · ${d0}) = ${d1(adE,3)} → α<sub>b</sub> = ${d1(abE,3)}`);
+  if(adI!==null) S.push(`α<sub>d</sub> (innere Schraube) = p<sub>1</sub> / (3 · d<sub>0</sub>) − 1/4 = ${d1(p1)} / (3 · ${d0}) − 0,25 = ${d1(adI,3)} → α<sub>b</sub> = ${d1(abI,3)}`);
+  S.push(`k<sub>1</sub> (Randreihe) = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7${n2>1?'; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7':''}; 2,5) = ${d1(k1R,3)}`);
+  if(n2>2) S.push(`k<sub>1</sub> (innere Reihe) = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) = ${d1(k1I,3)}`);
+  S.push(`!F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub>`);
+  // alle Schrauben: Reihe i (in Kraftrichtung), Spalte j (quer)
+  const list=[];
+  for(let i=0;i<n1;i++) for(let j=0;j<n2;j++){ const rand = j===0 || j===n2-1, k1 = rand ? k1R : k1I, ab = i===0 ? abE : abI; list.push({i,j,k1,ab,Fb:Fb(k1,ab)}); }
+  const seen=new Set();
+  list.forEach(b=>{ const key=`${b.i===0?'E':'I'}${b.k1===k1R?'R':'I'}`; if(seen.has(key)) return; seen.add(key);
+    S.push(`F<sub>b,Rd</sub> (${b.i===0?'End':'innere'}schraube, ${b.k1===k1R?'Randreihe':'innere Reihe'}) = ${d1(b.k1,3)} · ${d1(b.ab,3)} · ${fu} · ${d} · ${d1(t)} / ${deNum(GM2)} = ${d1(b.Fb,1)} kN`); });
+  const allFvGe = list.every(b=>Fv>=b.Fb);
+  const FRd = allFvGe ? list.reduce((s,b)=>s+b.Fb,0) : list.length*Math.min(...list.map(b=>Math.min(Fv,b.Fb)));
+  S.push(`§Tragfähigkeit der Verbindung (3.7)`,
+    allFvGe ? `!F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> für alle Schrauben → Summe der Lochleibungswiderstände`
+            : `!F<sub>v,Rd</sub> < F<sub>b,Rd</sub> bei mindestens einer Schraube → n · kleinster Einzelwiderstand`,
+    `F<sub>Rd</sub> = ${d1(FRd,1)} kN (${list.length} Schrauben)`);
+  if(F>0) S.push(`F<sub>Ed</sub> / F<sub>Rd</sub> = ${d1(F,1)} / ${d1(FRd,1)} = ${d1(F/FRd,3)} ≤ 1 ${ok(F/FRd)}`);
+  const Lj=(n1-1)*p1; if(Lj>15*d) S.push(`!Anschlusslänge L<sub>j</sub> = ${d1(Lj)} mm > 15 d → Abminderung β<sub>Lf</sub> für lange Anschlüsse (3.8) beachten`);
+  out.innerHTML = ablauf(`Schraubenverbindung ${n1} × ${n2} ${sb[0]} ${kl[0]}`, S);
+}
+
+// ── Kehlnähte: vereinfachtes Verfahren (EN 1993-1-8, 4.5.3.3) ──
+const BETA_W = { S235:0.8, S275:0.85, S355:0.9, S420:1.0, S460:1.0 };
+function updateKehl(){
+  const out=document.getElementById('kw-out'); if(!out) return;
+  const st=valOf('kw-st'), a=num('kw-a'), l=num('kw-l'), nN=Math.max(1,Math.round(num('kw-n')||1)), F=num('kw-F')||0, t1=num('kw-t1'), t2=num('kw-t2');
+  if(!(a>0 && l>0 && t1>0 && t2>0)){ out.innerHTML='Bitte a, l, t<sub>1</sub>, t<sub>2</sub> > 0 eingeben.'; return; }
+  const tmin=Math.min(t1,t2), tmax=Math.max(t1,t2), fu=stFu(st,tmax), bw=BETA_W[st];
+  const amin=Math.max(3, Math.sqrt(tmax)-0.5), amax=0.7*tmin, leff=l-2*a;
+  const fvw=fu/(Math.sqrt(3)*bw*GM2), FwRd=fvw*a/1000, FRd=nN*leff*FwRd;
+  const S=[`§Grenzwerte der Nahtdicke`,
+    `!a = ${d1(a)} mm · a<sub>min</sub> = max(3 mm; √t<sub>max</sub> − 0,5) = max(3; √${d1(tmax)} − 0,5) = ${d1(amin,2)} mm · a<sub>max</sub> = 0,7 · t<sub>min</sub> = 0,7 · ${d1(tmin)} = ${d1(amax,2)} mm → ${a>=amin-1e-9 && a<=amax+1e-9 ? 'eingehalten' : '<b>nicht eingehalten</b>'}`,
+    `l<sub>eff</sub> = l − 2 · a = ${d1(l)} − 2 · ${d1(a)} = ${d1(leff)} mm ${leff>=Math.max(30,6*a)?'≥':'<'} max(30 mm; 6a) = ${d1(Math.max(30,6*a))} mm`,
+    `§Festigkeit der Naht`,
+    `!${st}: f<sub>u</sub> = ${fu} N/mm², β<sub>w</sub> = ${deNum(bw,2)}`,
+    `f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>) = ${fu} / (√3 · ${deNum(bw,2)} · ${deNum(GM2)}) = ${d1(fvw,1)} N/mm²`,
+    `F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a = ${d1(fvw,1)} · ${d1(a)} / 1000 = ${d1(FwRd,3)} kN/mm`,
+    `§Tragfähigkeit`,
+    `F<sub>Rd</sub> = n · l<sub>eff</sub> · F<sub>w,Rd</sub> = ${nN} · ${d1(leff)} · ${d1(FwRd,3)} = ${d1(FRd,1)} kN`];
+  if(F>0) S.push(`F<sub>Ed</sub> / F<sub>Rd</sub> = ${d1(F,1)} / ${d1(FRd,1)} = ${d1(F/FRd,3)} ≤ 1 ${ok(F/FRd)}`);
+  if(leff>150*a) S.push(`!l<sub>eff</sub> > 150 a: Abminderung β<sub>Lw</sub> für lange Nähte (4.11) beachten`);
+  out.innerHTML = ablauf(`Kehlnaht a = ${d1(a)} mm`, S);
+}
+
+// ── Zugstab mit Lochschwächung (6.2.3) — Beispiel ──
+function zugBeispiel(){
+  const b=100, t=10, dl=18, n=1, fy=235, fu=360;
+  const A=b*t, Anet=(b-n*dl)*t, Npl=A*fy/GM0/1000, Nu=0.9*Anet*fu/GM2/1000, NtRd=Math.min(Npl,Nu);
+  return ablauf('Beispiel: Flachstahl 100 × 10, S235, eine Bohrung d<sub>0</sub> = 18 mm im Querschnitt', [
+    `§Bruttoquerschnitt (Fließen)`,
+    `A = b · t = ${b} · ${t} = ${dk(A)} mm²`,
+    `N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> = ${dk(A)} · ${fy} / 1,0 = ${d1(Npl,1)} kN`,
+    `§Nettoquerschnitt (Bruch)`,
+    `A<sub>net</sub> = (b − d<sub>0</sub>) · t = (${b} − ${dl}) · ${t} = ${dk(Anet)} mm²`,
+    `N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub> = 0,9 · ${dk(Anet)} · ${fu} / ${deNum(GM2)} = ${d1(Nu,1)} kN`,
+    `§Ergebnis`,
+    `N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = min(${d1(Npl,1)}; ${d1(Nu,1)}) = ${d1(NtRd,1)} kN`]);
+}
+
+// ── Durchbiegung — Beispiel ──
+function updateDurchb(){
+  const out=document.getElementById('db-out'); if(!out) return;
+  const n=valOf('db-prof'), p=PROF[n], L=num('db-L'), q=num('db-q'), lim=+valOf('db-lim');
+  if(!(L>0 && q>=0)){ out.innerHTML='Bitte L > 0 und q ≥ 0 eingeben.'; return; }
+  const w=5*q/100*(L*100)**4/(384*E_ST*p.Iy)*10, wz=L*1000/lim;
+  out.innerHTML = ablauf(`Einfeldträger ${n}, L = ${d1(L,2)} m`, [
+    `§Durchbiegung in Feldmitte (charakteristische Last)`,
+    `w = 5 · q · L⁴ / (384 · E · I<sub>y</sub>) = 5 · ${d1(q/100,3)} · ${dk(L*100)}⁴ / (384 · 21000 · ${dk(p.Iy)}) = ${d1(w/10,3)} cm = ${d1(w,1)} mm`,
+    `§Grenzwert`,
+    `w<sub>zul</sub> = L / ${lim} = ${dk(L*1000)} / ${lim} = ${d1(wz,1)} mm`,
+    `w / w<sub>zul</sub> = ${d1(w,1)} / ${d1(wz,1)} = ${d1(w/wz,3)} ≤ 1 ${ok(w/wz)}`,
+    `!erforderliches I<sub>y</sub> = ${dk(p.Iy*w/wz)} cm⁴`]);
+}
+
+// ── Profiltabellen ──
+let profileFilter = 'IPE';
+const PCOLS = {
+  I:   [['h','mm','h'],['b','mm','b'],['t<sub>w</sub>','mm','tw'],['t<sub>f</sub>','mm','tf'],['r','mm','r'],['A','cm²','A'],['G','kg/m','G'],['I<sub>y</sub>','cm⁴','Iy'],['W<sub>el,y</sub>','cm³','Wy'],['W<sub>pl,y</sub>','cm³','Wply'],['i<sub>y</sub>','cm','iy'],['A<sub>vz</sub>','cm²','Avz'],['I<sub>z</sub>','cm⁴','Iz'],['W<sub>el,z</sub>','cm³','Wz'],['W<sub>pl,z</sub>','cm³','Wplz'],['i<sub>z</sub>','cm','iz'],['I<sub>t</sub>','cm⁴','It'],['I<sub>w</sub>','cm⁶','Iw']],
+  U:   [['h','mm','h'],['b','mm','b'],['t<sub>w</sub>','mm','tw'],['t<sub>f</sub>','mm','tf'],['r<sub>1</sub>','mm','r'],['A','cm²','A'],['G','kg/m','G'],['I<sub>y</sub>','cm⁴','Iy'],['W<sub>el,y</sub>','cm³','Wy'],['W<sub>pl,y</sub>','cm³','Wply'],['i<sub>y</sub>','cm','iy'],['I<sub>z</sub>','cm⁴','Iz'],['W<sub>el,z</sub>','cm³','Wz'],['W<sub>pl,z</sub>','cm³','Wplz'],['i<sub>z</sub>','cm','iz'],['e<sub>z</sub>','cm','ez']],
+  L:   [['b','mm','b'],['t','mm','t'],['r<sub>1</sub>','mm','r1'],['r<sub>2</sub>','mm','r2'],['A','cm²','A'],['G','kg/m','G'],['e','cm','e'],['I<sub>y</sub> = I<sub>z</sub>','cm⁴','Iy'],['W<sub>el,y</sub>','cm³','Wy'],['i<sub>y</sub>','cm','iy'],['I<sub>u</sub>','cm⁴','Iu'],['i<sub>u</sub>','cm','iu'],['I<sub>v</sub>','cm⁴','Iv'],['i<sub>v</sub>','cm','iv']],
+  RHS: [['h','mm','h'],['b','mm','b'],['t','mm','t'],['A','cm²','A'],['G','kg/m','G'],['I<sub>y</sub>','cm⁴','Iy'],['W<sub>el,y</sub>','cm³','Wy'],['W<sub>pl,y</sub>','cm³','Wply'],['i<sub>y</sub>','cm','iy'],['I<sub>z</sub>','cm⁴','Iz'],['W<sub>el,z</sub>','cm³','Wz'],['W<sub>pl,z</sub>','cm³','Wplz'],['i<sub>z</sub>','cm','iz'],['I<sub>t</sub>','cm⁴','It'],['W<sub>t</sub>','cm³','Wt']],
+  CHS: [['D','mm','D'],['t','mm','t'],['A','cm²','A'],['G','kg/m','G'],['I','cm⁴','I'],['W<sub>el</sub>','cm³','Wel'],['W<sub>pl</sub>','cm³','Wpl'],['i','cm','i'],['I<sub>t</sub>','cm⁴','It'],['W<sub>t</sub>','cm³','Wt']],
+};
+const DEC = { A:2, G:1, iy:2, iz:2, i:2, iu:2, iv:2, Avz:2, It:2, e:2, ez:2, Iw:0 };
+const DIMS = ['h','b','tw','tf','r','r1','r2','t','D'];
+const fmtT = (v,k) => typeof v!=='number' ? v : DIMS.includes(k) ? String(v).replace('.',',') : k in DEC ? (v>=1000||DEC[k]===0 ? dk(v) : deNum(v,DEC[k])) : v>=1000 ? dk(v) : deNum(v,1);
+function secTable(id, reihen){
+  const rows = Object.entries(PROF).filter(([,p])=>reihen.includes(p.reihe));
+  const typ = rows.length ? rows[0][1].typ : 'I', C = PCOLS[typ];
+  return `<div class="data-table-wrap tall" id="${id}"><table class="data"><thead><tr><th>Profil</th>${C.map(c=>`<th>${c[0]}<br><span class="th-u">${c[1]}</span></th>`).join('')}</tr></thead>
+    <tbody>${rows.map(([n,p])=>`<tr><td>${n}</td>${C.map(c=>`<td>${fmtT(p[c[2]],c[2])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+    <div class="table-hint">${rows.length} Profile · Zeile antippen zum Markieren · waagerecht scrollbar</div>`;
+}
+function profileTable(){ return secTable('profile-tbl', [profileFilter]); }
 function setProfileFilter(f){
   profileFilter = f;
   document.querySelectorAll('.chip[data-f]').forEach(c=>c.classList.toggle('active', c.dataset.f===f));
   document.getElementById('profile-table').innerHTML = profileTable();
 }
+let uFilter='UPN', hFilter='QRO';
+function setSecFilter(kind, f){
+  if(kind==='u') uFilter=f; else hFilter=f;
+  document.querySelectorAll(`.chip[data-${kind}]`).forEach(c=>c.classList.toggle('active', c.dataset[kind]===f));
+  document.getElementById(kind+'-table').innerHTML = secTable(kind+'-tbl', [f]);
+}
+
+// ── Skizzen Stahlprofile (aus der echten Geometrie gezeichnet) ──
+function skPolyAt(P, ox, oy, s){ return P.map(([x,y])=>[ox+x*s, oy-y*s]); }
+function skUProfil(){
+  const h=200,b=75,tw=8.5,tf=11.5, P=uPoly(h,b,tw,tf,tf,tf/2,0.08), pp=PROF['UPN 200'], s=0.8, ox=70, oy=195;
+  const Q=skPolyAt(P,ox,oy,s), xs=ox+pp.ez*10*s, ym=oy-h/2*s;
+  return sv(345,230,'U-Profil mit Abmessungen und Schwerpunkt', poly(Q)
+    + axH(ox-22, ox+b*s+40, ym, 'y') + axV(xs, oy-h*s-14, oy+14, 'z') + cen(xs, ym, 'S')
+    + dimL(ox, oy, ox, oy-h*s, 'h', -22) + dimL(ox, oy, ox+b*s, oy, 'b', 18)
+    + dimL(ox, oy-h*s, xs, oy-h*s, sb('e','z'), -14)
+    + ln(ox+tw*s, oy-h*0.66*s, ox+tw*s+70, oy-h*0.66*s, SK.ink, 0.6) + it(ox+tw*s+74, oy-h*0.66*s+4, sb('t','w'), 'start')
+    + ln(ox+b*s*0.5, oy-(h-tf/2)*s, ox+b*s+30, oy-(h+8)*s+12, SK.ink, 0.6) + it(ox+b*s+33, oy-(h+8)*s+16, sb('t','f'), 'start')
+    + tl(ox+b*s+50, oy-h*0.35*s, 'UPN: Flansch innen geneigt', 'start') + tl(ox+b*s+50, oy-h*0.35*s+13, 'UPE: Flansche parallel', 'start'));
+}
+function skLProfil(){
+  const b=100,t=10, P=lPoly(b,t,12,6), pp=PROF['L 100×10'], s=1.35, ox=60, oy=185;
+  const Q=skPolyAt(P,ox,oy,s), xs=ox+pp.e*10*s, ys=oy-pp.e*10*s, r=95;
+  const c=Math.SQRT1_2;
+  return sv(300,255,'Winkelprofil mit Hauptachsen', poly(Q)
+    + axH(ox-16, ox+b*s+18, ys, 'y') + axV(xs, oy-b*s-12, oy+16, 'z')
+    + ln(xs-r*c, ys+r*c, xs+r*c, ys-r*c, SK.acc, 0.7, 'stroke-dasharray="7 3 2 3"') + it(xs+r*c+4, ys-r*c, 'u', 'start', SK.acc)
+    + ln(xs-55*c, ys-55*c, xs+55*c, ys+55*c, SK.acc, 0.7, 'stroke-dasharray="7 3 2 3"') + it(xs+55*c+4, ys+55*c+6, 'v', 'start', SK.acc)
+    + cen(xs, ys, '') + dimL(ox, oy, ox+b*s, oy, 'b', 18) + dimL(ox, oy, ox, oy-b*s, 'b', -20)
+    + dimL(ox, oy, xs, oy, 'e', 36) + ln(ox+t*s, oy-b*s*0.75, ox+t*s+46, oy-b*s*0.75, SK.ink, 0.6) + it(ox+t*s+50, oy-b*s*0.75+4, 't', 'start'));
+}
+function skHohl(){
+  const rr=(B,H,r,ox,oy)=>{ const P=roundPoly([[0,0,r],[B,0,r],[B,H,r],[0,H,r]],8); return skPolyAt(P,ox,oy,1); };
+  const o1=rr(70,70,7,20,150), i1=rr(56,56,5,27,143), o2=rr(70,110,7,130,170), i2=rr(56,96,5,137,163);
+  const path = (A,B) => `<path d="M ${A.map(p=>R1(p[0])+' '+R1(p[1])).join(' L ')} Z M ${B.slice().reverse().map(p=>R1(p[0])+' '+R1(p[1])).join(' L ')} Z" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4" fill-rule="evenodd"/>`;
+  return sv(330,215,'Quadratisches, rechteckiges und rundes Hohlprofil', path(o1,i1) + path(o2,i2)
+    + `<circle cx="275" cy="115" r="38" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/><circle cx="275" cy="115" r="31" fill="#fff" stroke="${SK.ink}" stroke-width="1.4"/>`
+    + dimL(20,150,90,150,'b',18) + dimL(90,150,90,80,'b',16) + tl(55,28,'QRO')
+    + dimL(130,170,200,170,'b',18) + dimL(200,170,200,60,'h',16) + tl(165,28,'RRO')
+    + dimL(237,115,313,115,'D',-50) + tl(275,28,'RO') + ln(282,82,300,58,SK.ink,0.6) + it(302,56,'t','start'));
+}
+
 
 // ══════════════════════════════════════════════════
 // HILFSFUNKTIONEN
@@ -3303,30 +3873,38 @@ Object.assign(CONTENT, {
     </div>
   `,
 
-  // ═════════════ STAHLBAU ═════════════
+  // ═════════════ STAHLBAU (ref v0.3.9) ═════════════
   'stahlbau/werkstoff/stahlsorten': () => `
     <div class="card">
-      <div class="card-title">Festigkeiten — EN 1993-1-1, Tab. 3.1 (Baustahl nach EN 10025-2)</div>
+      <div class="card-title">Festigkeiten — EN 1993-1-1, Tab. 3.1</div>
       ${textTable(['Stahlsorte','f_y (t ≤ 40)','f_u (t ≤ 40)','f_y (40 < t ≤ 80)','f_u (40 < t ≤ 80)'],
         STAHL.map(r=>[r[0], ...r.slice(1).map(v=>v+' N/mm²')]))}
-      <div class="legend">t — Erzeugnisdicke (bei Walzprofilen: Flanschdicke t_f)</div>
+      <div class="legend">t — Erzeugnisdicke (bei Walzprofilen: Flanschdicke t<sub>f</sub>). S235–S355 nach EN 10025-2, S420 nach EN 10025-4, S460 nach EN 10025-3/4.
+        Für Hohlprofile (EN 10210 / 10219) gelten bei S235H, S275H, S355H dieselben Werte.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Beiwert ε für die Querschnittsklassen</div>
+      ${textTable(['f_y [N/mm²]','235','275','355','420','460'], [['ε = √(235/f_y)','1,00','0,92','0,81','0,75','0,71'],['ε²','1,00','0,85','0,66','0,56','0,51']])}
     </div>
     <div class="card">
       <div class="card-title">Werkstoffkennwerte</div>
       ${textTable(['Größe','Wert'], [
-        ['Elastizitätsmodul E','210 000 N/mm²'],
-        ['Schubmodul G','81 000 N/mm²'],
+        ['Elastizitätsmodul E','210 000 N/mm² = 21 000 kN/cm²'],
+        ['Schubmodul G = E / (2 · (1 + ν))','81 000 N/mm² = 8 100 kN/cm²'],
         ['Querdehnzahl ν','0,3'],
-        ['Wärmedehnzahl α_T','12 · 10⁻⁶ 1/K'],
-        ['Dichte ρ','7850 kg/m³'],
+        ['Wärmedehnzahl α<sub>T</sub>','12 · 10⁻⁶ 1/K'],
+        ['Dichte ρ','7850 kg/m³ (Wichte 78,5 kN/m³)'],
       ])}
     </div>
     <div class="card">
-      <div class="card-title">Teilsicherheitsbeiwerte γM — DIN EN 1993-1-1/NA</div>
+      <div class="card-title">Teilsicherheitsbeiwerte γM — DIN EN 1993-1-1/NA und 1993-1-8</div>
       ${textTable(['Beiwert','Wert','Anwendung'], [
-        ['γ_M0','1,00','Querschnittsnachweise'],
-        ['γ_M1','1,10','Stabilität (Biegeknicken, Biegedrillknicken)'],
-        ['γ_M2','1,25','Nettoquerschnitt auf Zug (Bruch), Verbindungen'],
+        ['γ<sub>M0</sub>','1,00','Querschnittsnachweise (Fließen)'],
+        ['γ<sub>M1</sub>','1,10','Stabilität: Biegeknicken, Biegedrillknicken'],
+        ['γ<sub>M2</sub>','1,25','Nettoquerschnitt auf Zug (Bruch), Schrauben, Schweißnähte, Bleche auf Lochleibung'],
+        ['γ<sub>M3</sub>','1,25','gleitfeste Verbindungen (GZT)'],
+        ['γ<sub>M3,ser</sub>','1,10','gleitfeste Verbindungen (GZG)'],
+        ['γ<sub>M7</sub>','1,10','Vorspannung hochfester Schrauben'],
       ])}
     </div>
   `,
@@ -3335,80 +3913,469 @@ Object.assign(CONTENT, {
     <div class="card">
       <div class="card-title">Bezeichnungen</div>
       ${figIProfil()}
-      <div class="section-note"><b>IPE</b> — schmale I-Träger, typisch für Biegeträger.
-        <b>HEA / HEB</b> — breite I-Träger (Breitflansch), typisch für Stützen; HEB ist die schwere, HEA die leichte Reihe.</div>
+      <div class="section-note"><b>IPE</b> — schmale I-Träger mit parallelen Flanschen, typisch für Biegeträger (Deckenträger, Pfetten).
+        <b>HEA / HEB / HEM</b> — Breitflanschträger, typisch für Stützen und hoch belastete Träger: HEA ist die leichte, HEB die normale und HEM die verstärkte Reihe.
+        Bis zur Nennhöhe 300 ist die Flanschbreite b = Nennhöhe, darüber bleibt b ≈ 300 mm.</div>
     </div>
     <div class="card">
       <div class="card-title">Querschnittswerte</div>
       <div class="chip-row">
-        ${['IPE','HEA','HEB'].map(f=>`<button class="chip${f===profileFilter?' active':''}" data-f="${f}" onclick="setProfileFilter('${f}')">${f}</button>`).join('')}
+        ${['IPE','HEA','HEB','HEM'].map(f=>`<button class="chip${f===profileFilter?' active':''}" data-f="${f}" onclick="setProfileFilter('${f}')">${f}</button>`).join('')}
       </div>
+      ${filterBox('profile-tbl','Profil suchen, z. B. 300')}
       <div id="profile-table">${profileTable()}</div>
-      <div class="legend">Aus den Nennmaßen einschließlich Ausrundungen berechnet; Abweichung zu Herstellertabellen ≤ 0,3 %.
-        G = Masse je Meter (ρ = 7850 kg/m³).</div>
+      <div class="legend">Aus den Nennmaßen einschließlich Ausrundungen berechnet (Formeln unten); Abweichung zu Herstellertabellen ≤ 0,3 %.
+        G = Masse je Meter (ρ = 7850 kg/m³) · A<sub>vz</sub> = Schubfläche für Querkraft in z (η = 1,0) · I<sub>t</sub> = Torsionsträgheitsmoment · I<sub>w</sub> = Wölbwiderstand.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">So werden die Werte berechnet</div>
+      ${ablauf('', [
+        '§Fläche und Trägheitsmomente (h<sub>w</sub> = h − 2t<sub>f</sub>)',
+        '!A = 2 · b · t<sub>f</sub> + h<sub>w</sub> · t<sub>w</sub> + (4 − π) · r²',
+        '!I<sub>y</sub> = [b · h³ − (b − t<sub>w</sub>) · h<sub>w</sub>³] / 12 + 0,03 · r⁴ + 0,2146 · r² · (h<sub>w</sub> − 0,4468 · r)²',
+        '!I<sub>z</sub> = [2 · t<sub>f</sub> · b³ + h<sub>w</sub> · t<sub>w</sub>³] / 12 + 0,03 · r⁴ + 0,2146 · r² · (t<sub>w</sub> + 0,4468 · r)²',
+        '§Plastische Widerstandsmomente',
+        '!W<sub>pl,y</sub> = t<sub>w</sub> · h² / 4 + (b − t<sub>w</sub>) · (h − t<sub>f</sub>) · t<sub>f</sub> + (4 − π)/2 · r² · h<sub>w</sub> + (3π − 10)/3 · r³',
+        '!W<sub>pl,z</sub> = b² · t<sub>f</sub> / 2 + h<sub>w</sub> · t<sub>w</sub>² / 4 + r³ · (10/3 − π) + (2 − π/2) · t<sub>w</sub> · r²',
+        '§Schub, Torsion, Wölbung',
+        '!A<sub>vz</sub> = A − 2 · b · t<sub>f</sub> + (t<sub>w</sub> + 2r) · t<sub>f</sub> ≥ η · h<sub>w</sub> · t<sub>w</sub>',
+        '!I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ mit D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)',
+        '!I<sub>w</sub> = t<sub>f</sub> · b³ · (h − t<sub>f</sub>)² / 24',
+        '!W<sub>el</sub> = I / (Randabstand), i = √(I / A)'])}
+    </div>
+    <div class="card">
+      <div class="card-title">Profil-Steckbrief mit Widerständen</div>
+      <div class="calc-grid">
+        ${field('Profil', selProf('sb-prof','IPE 300','updateSteckbrief()'))}
+        ${field('Stahlsorte', selSt('sb-st','S235','updateSteckbrief()'))}
+      </div>
+      <div class="calc-out" id="sb-out"></div>
+    </div>
+  `,
+
+  'stahlbau/profile/uprofile': () => `
+    <div class="card">
+      <div class="card-title">U-Profile: UPN und UPE</div>
+      ${fig(skUProfil(),'Der Schwerpunkt S liegt außerhalb der Stegmitte (Abstand e<sub>z</sub> vom Steg-Rücken). Der Schubmittelpunkt liegt auf der anderen Seite des Stegs — Querlast im Steg erzeugt Torsion.')}
+      <div class="section-note"><b>UPN</b> (DIN 1026-1) — Flanschinnenseite geneigt: 8 % bis h = 300, darüber 5 %; Ausrundung r<sub>1</sub> = t<sub>f</sub>, Flanschkante r<sub>2</sub> = t<sub>f</sub>/2.
+        <b>UPE</b> (DIN 1026-2) — parallele Flansche, einfacher anzuschließen, etwas höhere Biegesteifigkeit um z.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Querschnittswerte</div>
+      <div class="chip-row">${['UPN','UPE'].map(f=>`<button class="chip${f===uFilter?' active':''}" data-u="${f}" onclick="setSecFilter('u','${f}')">${f}</button>`).join('')}</div>
+      <div id="u-table">${secTable('u-tbl',[uFilter])}</div>
+      <div class="legend">Aus der Geometrie (Polygon mit Ausrundungen) numerisch berechnet; Abweichung zu Herstellertabellen ≤ 1 %.
+        e<sub>z</sub> — Schwerpunktabstand vom Steg-Rücken. W<sub>el,z</sub> bezogen auf die Flanschspitze.</div>
+    </div>
+  `,
+
+  'stahlbau/profile/winkel': () => `
+    <div class="card">
+      <div class="card-title">Gleichschenklige Winkel L b × t</div>
+      ${fig(skLProfil(),'y und z laufen parallel zu den Schenkeln durch den Schwerpunkt. Die Hauptachsen u (stark) und v (schwach) liegen unter 45°. Für Knicken ist meist i<sub>v</sub> maßgebend.')}
+      <div class="formula-box">I<sub>u</sub> = I<sub>y</sub> + |I<sub>yz</sub>|<br>I<sub>v</sub> = I<sub>y</sub> − |I<sub>yz</sub>|<br>I<sub>u</sub> + I<sub>v</sub> = I<sub>y</sub> + I<sub>z</sub>
+        <div class="comment">Bei gleichschenkligen Winkeln ist I<sub>y</sub> = I<sub>z</sub>, die Hauptachsen liegen deshalb genau unter 45°.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Querschnittswerte</div>
+      ${secTable('l-tbl',['L'])}
+      <div class="legend">Nach EN 10056-1; aus der Geometrie mit Ausrundung r<sub>1</sub> und Kantenrundung r<sub>2</sub> numerisch berechnet.
+        e — Schwerpunktabstand von der Schenkelaußenseite. W<sub>el,y</sub> bezogen auf die Schenkelspitze.</div>
+    </div>
+  `,
+
+  'stahlbau/profile/hohlprofile': () => `
+    <div class="card">
+      <div class="card-title">Hohlprofile — warmgefertigt nach EN 10210-2</div>
+      ${fig(skHohl(),'QRO quadratisch, RRO rechteckig, RO rund. Ecken warmgefertigter Profile: außen r<sub>o</sub> = 1,5 t, innen r<sub>i</sub> = 1,0 t.')}
+      <div class="section-note">Hohlprofile sind torsionssteif (geschlossener Querschnitt) und daher praktisch nicht kippgefährdet.
+        Sie eignen sich für Stützen, Fachwerke und Rahmen. Knicklinie <b>a</b> (warmgefertigt) bzw. <b>c</b> (kaltgefertigt, EN 10219).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Querschnittswerte</div>
+      <div class="chip-row">${[['QRO','quadratisch'],['RRO','rechteckig'],['RO','rund']].map(([f,l])=>`<button class="chip${f===hFilter?' active':''}" data-h="${f}" onclick="setSecFilter('h','${f}')">${f} ${l}</button>`).join('')}</div>
+      <div id="h-table">${secTable('h-tbl',[hFilter])}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Formeln</div>
+      ${ablauf('', [
+        '§Rundrohr (D außen, t Wand, d = D − 2t)',
+        '!A = π · (D² − d²) / 4 · I = π · (D⁴ − d⁴) / 64 · W<sub>pl</sub> = (D³ − d³) / 6 · I<sub>t</sub> = 2 · I · W<sub>t</sub> = 2 · I / D',
+        '§Rechteck-Hohlprofil (Mittellinie, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)',
+        '!h<sub>p</sub> = 2 · [(b − t) + (h − t)] − 2 · R<sub>c</sub> · (4 − π) · A<sub>p</sub> = (b − t) · (h − t) − R<sub>c</sub>² · (4 − π)',
+        '!K = 2 · A<sub>p</sub> · t / h<sub>p</sub> · I<sub>t</sub> = t³ · h<sub>p</sub> / 3 + 2 · K · A<sub>p</sub> · W<sub>t</sub> = I<sub>t</sub> / (t + K/t)',
+        '!I und W<sub>pl</sub>: Rechteck außen minus Rechteck innen, jeweils mit abgezogenen Eckquadraten und hinzugefügten Viertelkreisen'])}
     </div>
   `,
 
   'stahlbau/nachweise/querschnitt': () => `
     <div class="card">
-      <div class="card-title">Querschnittsklassen — c/t-Grenzwerte (EN 1993-1-1, Tab. 5.2)</div>
-      <div class="section-note">Die Klasse beschreibt, ob ein Querschnitt plastisch ausgenutzt werden darf, bevor örtliches Beulen eintritt.
-        ε = √(235/f<sub>y</sub>): S235 → 1,00 · S275 → 0,92 · S355 → 0,81 · S460 → 0,71</div>
-      ${textTable(['Querschnittsteil','Klasse 1','Klasse 2','Klasse 3'], [
-        ['Steg auf Biegung','72ε','83ε','124ε'],
-        ['Steg auf Druck','33ε','38ε','42ε'],
-        ['Flansch (einseitig gestützt) auf Druck, gewalzt','9ε','10ε','14ε'],
+      <div class="card-title">Was die Querschnittsklasse bedeutet</div>
+      ${textTable(['Klasse','Tragfähigkeit','Widerstandsmoment','Rechenverfahren'], [
+        ['1','plastisch, mit Rotationskapazität','W<sub>pl</sub>','Fließgelenktheorie zulässig'],
+        ['2','plastisch, ohne Rotationskapazität','W<sub>pl</sub>','elastische Schnittgrößen'],
+        ['3','elastisch bis f<sub>y</sub> am Rand','W<sub>el</sub>','elastisch'],
+        ['4','Beulen vor f<sub>y</sub>','W<sub>eff</sub>','wirksame Querschnitte (EN 1993-1-5)'],
       ])}
-      <div class="legend">Klasse 1/2: plastische Bemessung · Klasse 3: elastisch · Klasse 4: wirksame Querschnitte (Beulen)</div>
     </div>
     <div class="card">
-      <div class="card-title">Widerstände des Querschnitts</div>
-      <div class="formula-box">
-        N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub><br>
-        M<sub>pl,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub>&nbsp;&nbsp; (Klasse 1 und 2)<br>
-        M<sub>el,Rd</sub> = W<sub>el</sub> · f<sub>y</sub> / γ<sub>M0</sub>&nbsp;&nbsp; (Klasse 3)<br>
-        V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub>/√3) / γ<sub>M0</sub>
-        <div class="comment">Schubfläche gewalzter I-Profile (Last ∥ Steg): A<sub>v</sub> = A − 2·b·t<sub>f</sub> + (t<sub>w</sub> + 2r)·t<sub>f</sub>,
-        mindestens η·h<sub>w</sub>·t<sub>w</sub> (η nach NA)</div>
+      <div class="card-title">c/t-Grenzwerte — EN 1993-1-1, Tab. 5.2</div>
+      ${textTable(['Querschnittsteil','Klasse 1','Klasse 2','Klasse 3'], [
+        ['Innenteil (Steg) auf Biegung','72ε','83ε','124ε'],
+        ['Innenteil auf Druck','33ε','38ε','42ε'],
+        ['Innenteil Biegung + Druck, α > 0,5','396ε / (13α − 1)','456ε / (13α − 1)','42ε / (0,67 + 0,33ψ) für ψ > −1'],
+        ['Innenteil Biegung + Druck, α ≤ 0,5','36ε / α','41,5ε / α','62ε · (1 − ψ) · √(−ψ) für ψ ≤ −1'],
+        ['Flansch einseitig gestützt, Druck','9ε','10ε','14ε'],
+        ['Rundrohr d/t (Druck und Biegung)','50ε²','70ε²','90ε²'],
+      ])}
+      <div class="legend">ε = √(235/f<sub>y</sub>) · α — gedrückter Anteil des Innenteils (plastisch) · ψ = σ<sub>2</sub>/σ<sub>1</sub> (elastisch, Druck positiv)</div>
+      ${textTable(['Profil','Teil','c'], [
+        ['gewalztes I-Profil','Steg','c = h − 2t<sub>f</sub> − 2r'],
+        ['gewalztes I-Profil','Flansch (halbe Breite)','c = (b − t<sub>w</sub> − 2r) / 2'],
+        ['Hohlprofil, warmgefertigt','Wand','c = b − 3t (bzw. h − 3t)'],
+        ['geschweißtes I-Profil','Steg / Flansch','lichte Länge abzüglich Nahtdicke √2·a'],
+      ])}
+    </div>
+    <div class="card">
+      <div class="card-title">Querschnitt einstufen</div>
+      <div class="calc-grid">
+        ${field('Profil', selProf('qk-prof','IPE 300','updateQK()'))}
+        ${field('Stahlsorte', selSt('qk-st','S355','updateQK()'))}
+        ${field('Beanspruchung', sel('qk-art', [['biegung','Biegung um y'],['druck','reiner Druck'],['nm','Druck + Biegung']], 'nm', 'updateQK()'))}
       </div>
-      <div class="info-banner">Ist V<sub>Ed</sub> > 0,5·V<sub>pl,Rd</sub>, wird die Biegetragfähigkeit abgemindert (Interaktion M–V).</div>
-      <div class="info-banner">Beispiel IPE 300, S235: M<sub>pl,Rd</sub> = 628,4 cm³ · 23,5 kN/cm² = 14 767 kNcm ≈ <b>147,7 kNm</b></div>
+      <div class="calc-grid" id="qk-nm">
+        ${field('N<sub>Ed</sub> [kN] (Druck)', inp('qk-N', 400, 'updateQK()'))}
+        ${field('M<sub>y,Ed</sub> [kNm]', inp('qk-M', 120, 'updateQK()'))}
+      </div>
+      <div class="calc-out" id="qk-out"></div>
+    </div>
+  `,
+
+  'stahlbau/nachweise/widerstand': () => `
+    <div class="card">
+      <div class="card-title">Widerstände des Querschnitts — EN 1993-1-1, 6.2</div>
+      ${ablauf('', [
+        '§Zug (6.2.3)',
+        '!N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) mit N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> und N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>',
+        '§Druck (6.2.4)',
+        '!N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 1–3) bzw. A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 4)',
+        '§Biegung (6.2.5)',
+        '!M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 4)',
+        '§Querkraft (6.2.6)',
+        '!V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · Schubbeulen nachweisen, wenn h<sub>w</sub>/t<sub>w</sub> > 72 · ε / η (η = 1,2)',
+        '!elastisch: τ<sub>Ed</sub> = V<sub>Ed</sub> · S / (I · t) ≤ f<sub>y</sub> / (√3 · γ<sub>M0</sub>)',
+        '§Biegung und Querkraft (6.2.8)',
+        '!V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub>: keine Abminderung · sonst ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²',
+        '!M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> mit A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>',
+        '§Biegung und Normalkraft (6.2.9, Klasse 1 und 2, I-Profile)',
+        '!keine Abminderung um y, wenn N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> und N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>',
+        '!n = N<sub>Ed</sub> / N<sub>pl,Rd</sub> · a = (A − 2 · b · t<sub>f</sub>) / A ≤ 0,5',
+        '!M<sub>N,y,Rd</sub> = M<sub>pl,y,Rd</sub> · (1 − n) / (1 − 0,5 · a) ≤ M<sub>pl,y,Rd</sub>',
+        '!M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> für n ≤ a · sonst M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]',
+        '!zweiachsig: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 mit α = 2, β = 5n ≥ 1',
+        '§Klasse 3: elastisch (6.2.1)',
+        '!σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · Vergleichsspannung (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²'])}
+    </div>
+    <div class="card">
+      <div class="card-title">Zugstab mit Lochschwächung</div>
+      ${zugBeispiel()}
+    </div>
+    <div class="card">
+      <div class="card-title">Querschnittsnachweis berechnen</div>
+      <div class="calc-grid">
+        ${field('Profil', selProf('qn-prof','IPE 300','updateQN()'))}
+        ${field('Stahlsorte', selSt('qn-st','S235','updateQN()'))}
+        ${field('N<sub>Ed</sub> [kN] (Druck > 0, Zug < 0)', inp('qn-N', 250, 'updateQN()'))}
+        ${field('M<sub>y,Ed</sub> [kNm]', inp('qn-M', 110, 'updateQN()'))}
+        ${field('V<sub>z,Ed</sub> [kN] (an derselben Stelle)', inp('qn-V', 190, 'updateQN()'))}
+      </div>
+      <div class="calc-out" id="qn-out"></div>
     </div>
   `,
 
   'stahlbau/nachweise/biegeknicken': () => `
     <div class="card">
       <div class="card-title">Biegeknicken — EN 1993-1-1, 6.3.1</div>
-      <div class="formula-box">
-        λ̄ = √(A·f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>)&nbsp;&nbsp; mit λ<sub>1</sub> = π·√(E/f<sub>y</sub>) = 93,9·ε<br>
-        Φ = 0,5 · (1 + α·(λ̄ − 0,2) + λ̄²)<br>
-        χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1<br>
-        N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub>
-        <div class="comment">Für λ̄ ≤ 0,2 ist χ = 1 (kein Stabilitätsnachweis nötig).</div>
-      </div>
+      ${ablauf('', [
+        '§Ideale Verzweigungslast und Schlankheit',
+        '!N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² mit L<sub>cr</sub> = β · L',
+        '!λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) mit λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε',
+        '§Abminderungsbeiwert',
+        '!Φ = 0,5 · (1 + α · (λ̄ − 0,2) + λ̄²)',
+        '!χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · für λ̄ ≤ 0,2 oder N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04 ist χ = 1',
+        '§Nachweis',
+        '!N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (Klasse 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1'])}
       ${textTable(['Knicklinie','a0','a','b','c','d'], [['Imperfektionsbeiwert α','0,13','0,21','0,34','0,49','0,76']])}
       ${fig(skKnicklinien(),'Abminderungsbeiwert χ über dem bezogenen Schlankheitsgrad λ̄. Bei großer Schlankheit nähern sich alle Kurven der Euler-Hyperbel.')}
     </div>
     <div class="card">
-      <div class="card-title">Zuordnung gewalzter I-Profile (S235 bis S420)</div>
-      ${textTable(['Querschnitt','Grenzen','Achse y–y','Achse z–z'], [
-        ['gewalzt, h/b > 1,2','t_f ≤ 40 mm','a','b'],
-        ['gewalzt, h/b > 1,2','40 < t_f ≤ 100 mm','b','c'],
-        ['gewalzt, h/b ≤ 1,2','t_f ≤ 100 mm','b','c'],
-        ['gewalzt, h/b ≤ 1,2','t_f > 100 mm','d','d'],
+      <div class="card-title">Knicklängenbeiwerte β (Eulerfälle)</div>
+      ${textTable(['Fall','Lagerung','β','L<sub>cr</sub>'], [
+        ['1','unten eingespannt, oben frei (Kragstütze)','2,0','2 L'],
+        ['2','beidseitig gelenkig','1,0','L'],
+        ['3','eingespannt – gelenkig','0,699','0,7 L'],
+        ['4','beidseitig eingespannt','0,5','0,5 L'],
       ])}
-      <div class="legend">IPE gehören zu h/b > 1,2, die meisten HEA/HEB zu h/b ≤ 1,2.</div>
+      <a class="applink" href="#/baustatik/querschnitte/euler">→ Eulerfälle mit Knickfiguren</a>
+    </div>
+    <div class="card">
+      <div class="card-title">Zuordnung der Knicklinien — EN 1993-1-1, Tab. 6.2</div>
+      ${textTable(['Querschnitt','Grenzen','Ausweichen','S235–S420','S460'], [
+        ['gewalzte I-Profile, h/b > 1,2','t<sub>f</sub> ≤ 40 mm','y–y / z–z','a / b','a0 / a0'],
+        ['gewalzte I-Profile, h/b > 1,2','40 < t<sub>f</sub> ≤ 100 mm','y–y / z–z','b / c','a / a'],
+        ['gewalzte I-Profile, h/b ≤ 1,2','t<sub>f</sub> ≤ 100 mm','y–y / z–z','b / c','a / a'],
+        ['gewalzte I-Profile, h/b ≤ 1,2','t<sub>f</sub> > 100 mm','y–y / z–z','d / d','c / c'],
+        ['geschweißte I-Profile','t<sub>f</sub> ≤ 40 mm','y–y / z–z','b / c','b / c'],
+        ['geschweißte I-Profile','t<sub>f</sub> > 40 mm','y–y / z–z','c / d','c / d'],
+        ['Hohlprofile warmgefertigt','—','jede','a','a0'],
+        ['Hohlprofile kaltgefertigt','—','jede','c','c'],
+        ['geschweißte Kastenquerschnitte','allgemein','jede','b','b'],
+        ['U-, T- und Vollquerschnitte','—','jede','c','c'],
+        ['L-Profile','—','jede','b','b'],
+      ])}
+      <div class="legend">IPE gehören zu h/b > 1,2; HEA und HEB bis 300 zu h/b ≤ 1,2, die hohen HEA/HEB ab 400 und HEM ab 340 zu h/b > 1,2.</div>
     </div>
     <div class="card">
       <div class="card-title">Knicktragfähigkeit berechnen</div>
       <div class="calc-grid">
-        ${field('Profil', sel('kn-prof', PROFILE.map(p=>[p[0],p[0]]), 'HEB 200', 'updateKnick()'))}
-        ${field('Stahlsorte', sel('kn-st', STAHL.slice(0,3).map(s=>[s[0],s[0]]), 'S235', 'updateKnick()'))}
-        ${field('Knicklänge L_cr [m]', inp('kn-L', 4, 'updateKnick()'))}
+        ${field('Profil', selProf('kn-prof','HEB 200','updateKnick()'))}
+        ${field('Stahlsorte', selSt('kn-st','S235','updateKnick()'))}
+        ${field('Knicklänge L<sub>cr</sub> [m]', inp('kn-L', 4, 'updateKnick()'))}
         ${field('Ausweichen um', sel('kn-ax', [['z','schwache Achse z–z'],['y','starke Achse y–y']], 'z', 'updateKnick()'))}
+        ${field('N<sub>Ed</sub> [kN] (optional)', inp('kn-N', 600, 'updateKnick()'))}
       </div>
       <div class="calc-out" id="kn-out"></div>
-      <div class="legend">Nur Biegeknicken. Biegedrillknicken und Interaktion mit Biegung sind gesondert nachzuweisen.</div>
+      <div class="legend">Nur Biegeknicken. Biegedrillknicken und Interaktion mit Biegung: eigene Themen.</div>
+    </div>
+  `,
+
+  'stahlbau/nachweise/biegedrillknicken': () => `
+    <div class="card">
+      <div class="card-title">Biegedrillknicken (Kippen) — EN 1993-1-1, 6.3.2</div>
+      <div class="section-note">Ein auf Biegung um die starke Achse beanspruchter Träger kann seitlich ausweichen und sich gleichzeitig verdrehen.
+        Gefährdet sind offene, schlanke Profile (IPE, hohe HEA) mit großem Abstand der seitlichen Halterungen. Hohlprofile kippen praktisch nicht.</div>
+      ${ablauf('', [
+        '§Ideales Kippmoment (Gabellagerung an beiden Enden)',
+        '!M<sub>cr</sub> = C<sub>1</sub> · π² · E · I<sub>z</sub> / L² · [√(I<sub>w</sub>/I<sub>z</sub> + L² · G · I<sub>t</sub> / (π² · E · I<sub>z</sub>) + (C<sub>2</sub> · z<sub>g</sub>)²) − C<sub>2</sub> · z<sub>g</sub>]',
+        '!z<sub>g</sub> — Abstand des Lastangriffs vom Schubmittelpunkt, positiv oberhalb (Obergurt: ungünstig)',
+        '§Bezogener Schlankheitsgrad',
+        '!λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) mit W<sub>y</sub> = W<sub>pl,y</sub> (Klasse 1, 2) bzw. W<sub>el,y</sub> (Klasse 3)',
+        '§Abminderung — allgemeiner Fall (6.3.2.2)',
+        '!Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − 0,2) + λ̄<sub>LT</sub>²) · χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − λ̄<sub>LT</sub>²)) ≤ 1',
+        '§Abminderung — gewalzte und gleichartige geschweißte Profile (6.3.2.3, NA)',
+        '!Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) mit λ̄<sub>LT,0</sub> = 0,4 und β = 0,75',
+        '!χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 und ≤ 1/λ̄<sub>LT</sub>²',
+        '!f = 1 − 0,5 · (1 − k<sub>c</sub>) · [1 − 2 · (λ̄<sub>LT</sub> − 0,8)²] ≤ 1 · χ<sub>LT,mod</sub> = χ<sub>LT</sub> / f ≤ 1',
+        '§Nachweis',
+        '!M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · für λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> kein Nachweis'])}
+    </div>
+    <div class="card">
+      <div class="card-title">Momentenbeiwerte C<sub>1</sub>, C<sub>2</sub> und Korrekturbeiwert k<sub>c</sub></div>
+      ${textTable(['Momentenverlauf','C<sub>1</sub>','C<sub>2</sub>','k<sub>c</sub> (Tab. 6.6)'], [
+        ['konstantes Moment','1,00','—','1,00'],
+        ['Randmomente, linear (ψ = M<sub>2</sub>/M<sub>1</sub>)','1,88 − 1,40ψ + 0,52ψ² ≤ 2,70','—','1 / (1,33 − 0,33ψ)'],
+        ['Einfeldträger, Gleichstreckenlast','1,12','0,45','0,94'],
+        ['Einfeldträger, Einzellast in Feldmitte','1,35','0,59','0,90'],
+        ['Einfeldträger, zwei Einzellasten in den Drittelspunkten','1,04','0,42','—'],
+      ])}
+      <div class="legend">Werte für Gabellagerung (k = k<sub>w</sub> = 1). ψ = −1 (Doppelkrümmung) → C<sub>1</sub> = 2,70 (begrenzt).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Knicklinien für Biegedrillknicken</div>
+      ${textTable(['Querschnitt','Grenzen','allgemein (Tab. 6.4)','gewalzt (Tab. 6.5)'], [
+        ['gewalzte I-Profile','h/b ≤ 2','a','b'],
+        ['gewalzte I-Profile','h/b > 2','b','c'],
+        ['geschweißte I-Profile','h/b ≤ 2','c','c'],
+        ['geschweißte I-Profile','h/b > 2','d','d'],
+        ['andere Querschnitte','—','d','—'],
+      ])}
+      ${textTable(['Knicklinie','a','b','c','d'], [['α<sub>LT</sub>','0,21','0,34','0,49','0,76']])}
+    </div>
+    <div class="card">
+      <div class="card-title">Kippnachweis berechnen</div>
+      <div class="calc-grid">
+        ${field('Profil', selProf('bd-prof','IPE 300','updateBDK()'))}
+        ${field('Stahlsorte', selSt('bd-st','S235','updateBDK()'))}
+        ${field('Abstand der Gabellager L [m]', inp('bd-L', 6, 'updateBDK()'))}
+        ${field('Momentenverlauf', sel('bd-fall', Object.entries(BDK_FALL).map(([k,v])=>[k,v.t]), 'q', 'updateBDK()'))}
+        <div id="bd-psi-f">${field('ψ = M<sub>2</sub> / M<sub>1</sub>', inp('bd-psi', 0, 'updateBDK()'))}</div>
+        <div id="bd-zg-f">${field('Lastangriff', sel('bd-zg', [['o','Obergurt'],['s','Schubmittelpunkt'],['u','Untergurt']], 'o', 'updateBDK()'))}</div>
+        ${field('M<sub>y,Ed</sub> [kNm]', inp('bd-M', 60, 'updateBDK()'))}
+      </div>
+      <div class="calc-out" id="bd-out"></div>
+    </div>
+  `,
+
+  'stahlbau/nachweise/interaktion': () => `
+    <div class="card">
+      <div class="card-title">Biegung und Druck — Ersatzstabverfahren (6.3.3)</div>
+      ${ablauf('', [
+        '§Nachweisgleichungen (Klasse 1–3)',
+        '!(6.61): N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>) + k<sub>yy</sub> · M<sub>y,Ed</sub> / (χ<sub>LT</sub> · M<sub>y,Rk</sub> / γ<sub>M1</sub>) + k<sub>yz</sub> · M<sub>z,Ed</sub> / (M<sub>z,Rk</sub> / γ<sub>M1</sub>) ≤ 1',
+        '!(6.62): N<sub>Ed</sub> / (χ<sub>z</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>) + k<sub>zy</sub> · M<sub>y,Ed</sub> / (χ<sub>LT</sub> · M<sub>y,Rk</sub> / γ<sub>M1</sub>) + k<sub>zz</sub> · M<sub>z,Ed</sub> / (M<sub>z,Rk</sub> / γ<sub>M1</sub>) ≤ 1',
+        '!N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 für nicht kippgefährdete Bauteile (z. B. Hohlprofile)',
+        '§Interaktionsbeiwerte — Anhang B, Klasse 1 und 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> analog)',
+        '!k<sub>yy</sub> = C<sub>my</sub> · (1 + (λ̄<sub>y</sub> − 0,2) · n<sub>y</sub>) ≤ C<sub>my</sub> · (1 + 0,8 · n<sub>y</sub>)',
+        '!k<sub>zz</sub> = C<sub>mz</sub> · (1 + (2λ̄<sub>z</sub> − 0,6) · n<sub>z</sub>) ≤ C<sub>mz</sub> · (1 + 1,4 · n<sub>z</sub>) (I-Profile) · k<sub>yz</sub> = 0,6 · k<sub>zz</sub>',
+        '!verdrehsteif (Tab. B.1): k<sub>zy</sub> = 0,6 · k<sub>yy</sub>',
+        '!verdrehweich (Tab. B.2), λ̄<sub>z</sub> ≥ 0,4: k<sub>zy</sub> = 1 − 0,1 · λ̄<sub>z</sub> · n<sub>z</sub> / (C<sub>mLT</sub> − 0,25) ≥ 1 − 0,1 · n<sub>z</sub> / (C<sub>mLT</sub> − 0,25)',
+        '!verdrehweich, λ̄<sub>z</sub> < 0,4: k<sub>zy</sub> = 0,6 + λ̄<sub>z</sub> ≤ 1 − 0,1 · λ̄<sub>z</sub> · n<sub>z</sub> / (C<sub>mLT</sub> − 0,25)'])}
+    </div>
+    <div class="card">
+      <div class="card-title">Äquivalente Momentenbeiwerte C<sub>m</sub> — Anhang B, Tab. B.3</div>
+      ${textTable(['Momentenverlauf','C<sub>my</sub>, C<sub>mz</sub>, C<sub>mLT</sub>'], [
+        ['linear zwischen Randmomenten M und ψ·M (−1 ≤ ψ ≤ 1)','0,6 + 0,4ψ ≥ 0,4'],
+        ['Querlast (Gleichlast), Randmomente null','0,95'],
+        ['Querlast (Einzellast), Randmomente null','0,90'],
+        ['Querlast mit Randmomenten','0,2 + 0,8α<sub>s</sub> ≥ 0,4 bzw. 0,95 + 0,05α<sub>h</sub> (je nach Verlauf, siehe Tab. B.3)'],
+      ])}
+    </div>
+    <div class="card">
+      <div class="card-title">Nachweis berechnen (I-Profil, N + M<sub>y</sub>)</div>
+      <div class="calc-grid">
+        ${field('Profil', selProf('in-prof','HEB 200','updateNMI()'))}
+        ${field('Stahlsorte', selSt('in-st','S235','updateNMI()'))}
+        ${field('L<sub>cr,y</sub> [m]', inp('in-Ly', 5, 'updateNMI()'))}
+        ${field('L<sub>cr,z</sub> = Gabellagerabstand [m]', inp('in-Lz', 5, 'updateNMI()'))}
+        ${field('N<sub>Ed</sub> [kN] (Druck)', inp('in-N', 500, 'updateNMI()'))}
+        ${field('max M<sub>y,Ed</sub> [kNm]', inp('in-M', 40, 'updateNMI()'))}
+        ${field('Momentenverlauf', sel('in-fall', Object.entries(CM_FALL).map(([k,v])=>[k,v.t]), 'psi', 'updateNMI()'))}
+        <div id="in-psi-f">${field('ψ = M<sub>2</sub> / M<sub>1</sub>', inp('in-psi', 0, 'updateNMI()'))}</div>
+      </div>
+      <div class="calc-out" id="in-out"></div>
+      <div class="legend">Verfahren 2 (Anhang B), Tab. B.2 für verdrehweiche Bauteile, Klasse 1–3; M<sub>z</sub> = 0.</div>
+    </div>
+  `,
+
+  'stahlbau/nachweise/gebrauch': () => `
+    <div class="card">
+      <div class="card-title">Durchbiegung im Grenzzustand der Gebrauchstauglichkeit</div>
+      <div class="section-note">Die Grenzwerte sind in DIN EN 1993-1-1/NA nicht verbindlich festgelegt, sondern mit dem Bauherrn zu vereinbaren.
+        Übliche Anhaltswerte (charakteristische Lastkombination):</div>
+      ${textTable(['Bauteil','w<sub>max</sub>'], [
+        ['Deckenträger allgemein','L / 300'],
+        ['Deckenträger unter spröden Trennwänden','L / 500'],
+        ['Dachträger, Pfetten','L / 200 bis L / 250'],
+        ['Kragträger','L<sub>k</sub> / 150'],
+        ['Kranbahnträger (vertikal)','L / 500 bis L / 1000'],
+        ['Stützenkopf horizontal (Hallen)','H / 150 bis H / 300'],
+      ])}
+      ${textTable(['System','w<sub>max</sub>'], [
+        ['Einfeldträger, Gleichlast q','5 · q · L⁴ / (384 · E · I)'],
+        ['Einfeldträger, Einzellast F in Feldmitte','F · L³ / (48 · E · I)'],
+        ['Kragträger, Gleichlast q','q · L⁴ / (8 · E · I)'],
+        ['Kragträger, Einzellast F am Ende','F · L³ / (3 · E · I)'],
+      ])}
+    </div>
+    <div class="card">
+      <div class="card-title">Durchbiegung berechnen</div>
+      <div class="calc-grid">
+        ${field('Profil', selProf('db-prof','IPE 300','updateDurchb()'))}
+        ${field('Stützweite L [m]', inp('db-L', 6, 'updateDurchb()'))}
+        ${field('q<sub>k</sub> [kN/m]', inp('db-q', 15, 'updateDurchb()'))}
+        ${field('Grenzwert', sel('db-lim', [['300','L / 300'],['250','L / 250'],['200','L / 200'],['500','L / 500']], '300', 'updateDurchb()'))}
+      </div>
+      <div class="calc-out" id="db-out"></div>
+    </div>
+  `,
+
+  'stahlbau/verbindungen/schrauben': () => `
+    <div class="card">
+      <div class="card-title">Schrauben — Festigkeitsklassen (EN 1993-1-8, Tab. 3.1)</div>
+      ${textTable(['Klasse','f<sub>yb</sub> [N/mm²]','f<sub>ub</sub> [N/mm²]','α<sub>v</sub> (Gewinde in der Scherfuge)'], SKLASSEN.map(k=>[k[0],k[1],k[2], k[0]==='10.9'?'0,5':'0,6']))}
+      <div class="legend">Schaft in der Scherfuge: α<sub>v</sub> = 0,6 für alle Klassen, A = Schaftquerschnitt.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Abmessungen</div>
+      ${textTable(['Gewinde','d [mm]','d<sub>0</sub> [mm]','A [mm²]','A<sub>s</sub> [mm²]','F<sub>t,Rd</sub> 8.8 [kN]','F<sub>t,Rd</sub> 10.9 [kN]'],
+        SCHRAUBEN.map(s=>[s[0], s[1], s[2], s[3], deNum(s[4],1), deNum(0.9*800*s[4]/1250,1), deNum(0.9*1000*s[4]/1250,1)]))}
+      <div class="legend">d<sub>0</sub> — Lochdurchmesser normales Lochspiel (EN 1090-2: +1 mm bis M14, +2 mm bis M24, +3 mm ab M27) · A<sub>s</sub> — Spannungsquerschnitt</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Rand- und Lochabstände (Tab. 3.3)</div>
+      ${textTable(['Abstand','Richtung','Minimum','Maximum (Stahl ohne Witterungsschutz)'], [
+        ['e<sub>1</sub>','Rand in Kraftrichtung','1,2 · d<sub>0</sub>','4t + 40 mm'],
+        ['e<sub>2</sub>','Rand quer zur Kraft','1,2 · d<sub>0</sub>','4t + 40 mm'],
+        ['p<sub>1</sub>','Loch zu Loch in Kraftrichtung','2,2 · d<sub>0</sub>','min(14t; 200 mm)'],
+        ['p<sub>2</sub>','Loch zu Loch quer zur Kraft','2,4 · d<sub>0</sub>','min(14t; 200 mm)'],
+      ])}
+    </div>
+    <div class="card">
+      <div class="card-title">Tragfähigkeiten je Schraube (Tab. 3.4)</div>
+      ${ablauf('', [
+        '§Abscheren je Scherfuge',
+        '!F<sub>v,Rd</sub> = α<sub>v</sub> · f<sub>ub</sub> · A / γ<sub>M2</sub>',
+        '§Lochleibung',
+        '!F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> mit α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)',
+        '!in Kraftrichtung: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (Endschraube) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (innere Schraube)',
+        '!quer zur Kraft: k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (Randreihe) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (innere Reihe)',
+        '§Zug und Durchstanzen',
+        '!F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> mit k<sub>2</sub> = 0,9 (0,63 bei Senkschrauben)',
+        '!B<sub>p,Rd</sub> = 0,6 · π · d<sub>m</sub> · t<sub>p</sub> · f<sub>u</sub> / γ<sub>M2</sub>',
+        '§Abscheren und Zug gleichzeitig',
+        '!F<sub>v,Ed</sub> / F<sub>v,Rd</sub> + F<sub>t,Ed</sub> / (1,4 · F<sub>t,Rd</sub>) ≤ 1',
+        '§Gruppe von Verbindungsmitteln (3.7)',
+        '!Summe der F<sub>b,Rd</sub>, wenn F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> bei jeder Schraube; sonst n · kleinster Einzelwiderstand'])}
+    </div>
+    <div class="card">
+      <div class="card-title">Laschenstoß berechnen (Abscheren und Lochleibung)</div>
+      <div class="calc-grid">
+        ${field('Schraube', sel('sr-d', SCHRAUBEN.map(s=>[s[0],s[0]]), 'M20', 'updateSchraube()'))}
+        ${field('Festigkeitsklasse', sel('sr-kl', SKLASSEN.map(s=>[s[0],s[0]]), '8.8', 'updateSchraube()'))}
+        ${field('Scherfuge im', sel('sr-fuge', [['g','Gewinde'],['s','Schaft']], 'g', 'updateSchraube()'))}
+        ${field('Scherfugen je Schraube', sel('sr-m', [['1','1 (einschnittig)'],['2','2 (zweischnittig)']], '1', 'updateSchraube()'))}
+        ${field('Blechdicke t [mm] (maßgebend)', inp('sr-t', 10, 'updateSchraube()'))}
+        ${field('Blech', selSt('sr-st','S235','updateSchraube()'))}
+        ${field('Schrauben in Kraftrichtung n<sub>1</sub>', inp('sr-n1', 2, 'updateSchraube()'))}
+        ${field('Schrauben quer n<sub>2</sub>', inp('sr-n2', 2, 'updateSchraube()'))}
+        ${field('e<sub>1</sub> [mm]', inp('sr-e1', 40, 'updateSchraube()'))}
+        ${field('e<sub>2</sub> [mm]', inp('sr-e2', 35, 'updateSchraube()'))}
+        ${field('p<sub>1</sub> [mm]', inp('sr-p1', 70, 'updateSchraube()'))}
+        ${field('p<sub>2</sub> [mm]', inp('sr-p2', 70, 'updateSchraube()'))}
+        ${field('F<sub>Ed</sub> [kN]', inp('sr-F', 250, 'updateSchraube()'))}
+      </div>
+      <div class="calc-out" id="sr-out"></div>
+    </div>
+  `,
+
+  'stahlbau/verbindungen/schweissen': () => `
+    <div class="card">
+      <div class="card-title">Kehlnähte — EN 1993-1-8, 4.5</div>
+      ${textTable(['Regel','Wert'], [
+        ['Mindestdicke','a ≥ 3 mm'],
+        ['Empfehlung nach Blechdicke','a ≥ √t<sub>max</sub> − 0,5 (t in mm)'],
+        ['Höchstdicke (übliche Regel)','a ≤ 0,7 · t<sub>min</sub>'],
+        ['wirksame Länge','l<sub>eff</sub> = l − 2a (ohne Endkrater); l<sub>eff</sub> ≥ max(30 mm; 6a)'],
+        ['lange Nähte','l > 150a: Abminderung β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1'],
+      ])}
+      ${textTable(['Stahl','S235','S275','S355','S420','S460'], [['β<sub>w</sub>','0,80','0,85','0,90','1,00','1,00'],
+        ['f<sub>vw,d</sub> = f<sub>u</sub>/(√3 · β<sub>w</sub> · γ<sub>M2</sub>) [N/mm²]', ...['S235','S275','S355','S420','S460'].map(s=>deNum(stFu(s,10)/(Math.sqrt(3)*BETA_W[s]*1.25),1))]])}
+    </div>
+    <div class="card">
+      <div class="card-title">Nachweisverfahren</div>
+      ${ablauf('', [
+        '§Vereinfachtes Verfahren (4.5.3.3)',
+        '!F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (je Längeneinheit) mit f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)',
+        '§Richtungsbezogenes Verfahren (4.5.3.2)',
+        '!√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) und σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>',
+        '!σ<sub>⊥</sub>, τ<sub>⊥</sub> — Spannungen senkrecht zur Nahtachse in der Kehlfläche a · l · τ<sub>∥</sub> — parallel zur Nahtachse',
+        '§Doppelkehlnaht unter Querzug F (Kraft senkrecht zur Naht, 45°)',
+        '!σ<sub>⊥</sub> = τ<sub>⊥</sub> = F / (2 · a · l · √2) → √(σ<sub>⊥</sub>² + 3τ<sub>⊥</sub>²) = 2σ<sub>⊥</sub>',
+        '§Stumpfnähte mit voller Durchschweißung',
+        '!Tragfähigkeit wie das schwächere der verbundenen Bleche — kein gesonderter Nachweis'])}
+    </div>
+    <div class="card">
+      <div class="card-title">Kehlnaht berechnen (Längsnähte, vereinfachtes Verfahren)</div>
+      <div class="calc-grid">
+        ${field('Stahl', selSt('kw-st','S235','updateKehl()'))}
+        ${field('Nahtdicke a [mm]', inp('kw-a', 4, 'updateKehl()'))}
+        ${field('Nahtlänge l [mm] je Naht', inp('kw-l', 150, 'updateKehl()'))}
+        ${field('Anzahl Nähte', inp('kw-n', 2, 'updateKehl()'))}
+        ${field('Blechdicke t<sub>1</sub> [mm]', inp('kw-t1', 10, 'updateKehl()'))}
+        ${field('Blechdicke t<sub>2</sub> [mm]', inp('kw-t2', 12, 'updateKehl()'))}
+        ${field('F<sub>Ed</sub> [kN]', inp('kw-F', 200, 'updateKehl()'))}
+      </div>
+      <div class="calc-out" id="kw-out"></div>
     </div>
   `,
 
@@ -4583,6 +5550,14 @@ Object.assign(AFTER, {
   'lastannahmen/lasten/wind': () => updateWind(),
   'grundbau/erddruck/beiwerte': () => updateErd(),
   'stahlbau/nachweise/biegeknicken': () => updateKnick(),
+  'stahlbau/profile/walzprofile': () => updateSteckbrief(),
+  'stahlbau/nachweise/querschnitt': () => updateQK(),
+  'stahlbau/nachweise/widerstand': () => updateQN(),
+  'stahlbau/nachweise/biegedrillknicken': () => updateBDK(),
+  'stahlbau/nachweise/interaktion': () => updateNMI(),
+  'stahlbau/nachweise/gebrauch': () => updateDurchb(),
+  'stahlbau/verbindungen/schrauben': () => updateSchraube(),
+  'stahlbau/verbindungen/schweissen': () => updateKehl(),
   'lastannahmen/lasten/eigenlasten': () => updateAufbau(),
   'holzbau/verbindungen/naegel': () => updateNagel(),
   'grundbau/flach/sohlwiderstand': () => updateSohl(),
@@ -4762,6 +5737,9 @@ let SEARCH_INDEX = null;
 // Zusätzlicher Suchtext für Themen, deren Inhalt nicht vollständig sichtbar ist (z. B. gefilterte Tabellen)
 const SEARCH_EXTRA = {
   'stahlbau/profile/walzprofile': () => PROFILE.map(p=>p[0]).join(' '),
+  'stahlbau/profile/uprofile': () => Object.keys(PROF).filter(n=>/^UP/.test(n)).join(' ')+' U-Stahl',
+  'stahlbau/profile/winkel': () => Object.keys(PROF).filter(n=>/^L /.test(n)).join(' ')+' Winkelstahl',
+  'stahlbau/profile/hohlprofile': () => Object.keys(PROF).filter(n=>/^(QRO|RRO|RO) /.test(n)).join(' ')+' SHS RHS CHS Rohr',
   'stahlbeton/baustoffe/beton': () => 'Betonfestigkeit Druckfestigkeit fck fctm Elastizitätsmodul ' + BETON.map(r=>r[0]).join(' '),
   'stahlbeton/dauerhaftigkeit/deckung': () => 'Betondeckung cnom Vorhaltemaß Korrosion Karbonatisierung ' + EXPO.map(r=>r[0]).join(' '),
   'stahlbeton/bemessung/biegung': () => 'Biegebemessung Bewehrung As mu omega Tabelle Rechteckquerschnitt',
@@ -4799,7 +5777,7 @@ function runSearch(q, keepFocus=true){
   if(!terms.length){ out.innerHTML=''; return; }
   if(!SEARCH_INDEX) buildIndex();
   // Suche nach einer Profilreihe → Profiltabelle gleich auf diese Reihe stellen
-  const pr = terms.find(t=>['ipe','hea','heb'].includes(t));
+  const pr = terms.find(t=>['ipe','hea','heb','hem'].includes(t));
   if(pr) profileFilter = pr.toUpperCase();
   const hits = SEARCH_INDEX
     .map(e=>({e, score: terms.every(t=>e.hay.includes(t)) ? terms.reduce((s,t)=>s+(norm(e.title).includes(t)?3:1),0) : 0}))

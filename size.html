@@ -198,12 +198,57 @@
     .lang-notice { border-left:none; border-radius:12px; }
     .chk-table td { border-bottom-color:#ececee; }
     .note { border-radius:10px; }
+  
+    /* ══ Übersicht: Auswahlmenü, Projekt-Menü, aufklappbare Karten ══ */
+    .pick { position:relative; margin-bottom:14px; }
+    .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:14px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
+    .pick-btn:hover { background:#f1f1f3; } .pick-btn:active { transform:scale(0.99); }
+    .pick-txt { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+    .pick-g { font-size:12px; font-weight:600; color:var(--text3); }
+    .pick-t { font-size:20px; font-weight:800; letter-spacing:-0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pick-chev { font-size:13px; color:var(--text3); transition:transform .18s; }
+    .pick.open .pick-chev { transform:rotate(180deg); }
+    .pick-menu { display:none; position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:40; background:#fff; border-radius:18px; box-shadow:0 18px 48px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); padding:12px; max-height:min(70vh, 560px); overflow:auto;
+      grid-template-columns:1fr 1fr; gap:4px 14px; }
+    .pick.open .pick-menu { display:grid; }
+    .pick-group { display:flex; flex-direction:column; padding:4px 0 8px; }
+    .pick-head { font-size:11.5px; font-weight:700; color:var(--text3); padding:4px 10px 4px; letter-spacing:0.2px; }
+    .pick-item { text-align:left; border:none; background:none; cursor:pointer; font-family:inherit; font-size:14.5px; font-weight:600; color:var(--text); padding:7px 10px; border-radius:9px; }
+    .pick-item:hover { background:#f4f4f5; }
+    .pick-item.active { background:#efeff1; font-weight:800; }
+    @media (max-width:560px){ .pick-menu { grid-template-columns:1fr; } }
+    .ux-hide { display:none !important; }
+    .proj-btn { border:none; background:#efeff1; border-radius:10px; padding:7px 12px; font-family:inherit; font-size:13px; font-weight:700; color:var(--text); cursor:pointer; }
+    .proj-btn::after { content:' ▾'; font-size:10px; color:var(--text3); }
+    .proj-btn.open { background:#0a0a0a; color:#fff; } .proj-btn.open::after { color:#bbb; }
+    .proj-panel { display:none; position:fixed; z-index:60; top:58px; right:16px; width:min(440px, calc(100vw - 32px)); max-height:calc(100vh - 80px); overflow:auto; background:#fff; border-radius:20px; padding:10px;
+      box-shadow:0 18px 48px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04); }
+    .proj-panel.open { display:block; }
+    .proj-panel .card { margin-bottom:8px; }
+    .proj-panel .card:last-child { margin-bottom:0; }
+    .fold > .card-title { cursor:pointer; user-select:none; margin-bottom:0; }
+    .fold > .card-title::after { content:'▾'; font-size:12px; color:var(--text3); margin-left:auto; transition:transform .18s; }
+    .fold.closed > .card-title::after { transform:rotate(-90deg); }
+    .fold-body { overflow:hidden; padding-top:14px; }
+    .fold.closed > .fold-body { max-height:0; padding-top:0; }
+    .fold-sum { display:none; font-size:12.5px; color:var(--text3); margin-top:6px; line-height:1.5; }
+    .fold.closed > .fold-sum { display:block; }
+    #details .card.dfold > .card-title { cursor:pointer; margin-bottom:0; }
+    #details .card.dfold > .card-title > span:first-child::after { content:' ▾'; font-size:11px; color:var(--text3); }
+    #details .card.dfold.closed > .card-title > span:first-child::after { content:' ▸'; }
+    #details .card.dfold > .steps, #details .card.dfold > .note { margin-top:12px; }
+    #details .card.dfold.closed > .steps, #details .card.dfold.closed > .note { max-height:0; overflow:hidden; margin-top:0; padding-top:0; padding-bottom:0; }
+    #details .card.dfold { padding-top:16px; padding-bottom:16px; margin-bottom:8px; }
+    .det-bar { display:flex; justify-content:space-between; align-items:center; margin:6px 2px 10px; }
+    .det-bar span { font-size:15px; font-weight:800; }
+    .det-bar button { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); }
   </style>
 </head>
 <body>
 <header class="app-header">
   <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">stat<span>iq</span></a>
   <nav class="header-links">
+    <button class="proj-btn" id="proj-btn" onclick="toggleProj(event)" data-i18n="projBtn">Projekt</button>
     <span class="module-name">size</span>
     <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
     <a href="calc.html">calc</a>
@@ -239,6 +284,7 @@
       </div>
       <div id="ci-msg" class="hint"></div>
     </div>
+    <div class="pick" id="pick"><button class="pick-btn" id="pick-btn" onclick="togglePick(event)" aria-haspopup="true"><span class="pick-txt"><span class="pick-g" id="pick-g"></span><span class="pick-t" id="pick-t"></span></span><span class="pick-chev">▾</span></button><div class="pick-menu" id="pick-menu" role="menu"></div></div>
     <div class="seg seg-mat" id="seg-mat">
       <button data-mat="beton" class="active" onclick="setMat('beton')" data-i18n="matBeton">Stahlbeton</button>
       <button data-mat="stahl" onclick="setMat('stahl')" data-i18n="matStahl">Stahl</button>
@@ -1125,6 +1171,7 @@ const I18N = {
   "gfT2": "Lasten auf der Fundamentoberkante (charakteristisch)",
   "gfHint2": "Bemessungssituation BS-P nach DIN 1054: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (Grundbruch), γ<sub>R,h</sub> = 1,10 (Gleiten). H und M wirken in Richtung b.",
   "matGrund": "Grundbau",
+  "projBtn": "Projekt",
   "wbDruck": "Wasserdruck",
   "wbSchwimm": "Schwimmen",
   "wbRohr": "Rohr",
@@ -1423,7 +1470,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.8';
+const SIZE_VERSION = '0.5.9';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -2300,7 +2347,7 @@ const NICHT_ENTHALTEN = 'Zugkraftdeckung bei Durchlaufträgern und Einzellasten,
 let LAST = null;
 let MAT = 'beton';
 let STMODE = 'traeger';
-function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : runHolz()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else runBeton(); save(); renderPos(); }
+function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : runHolz()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else runBeton(); save(); renderPos(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
 function setStMode(m){ STMODE=m; showMat(); run(); }
 function showBad(bad){
   $('summary').innerHTML = `<div class="summary bad">Bitte Eingaben prüfen: ${bad.join(', ')}</div>`;
@@ -2745,6 +2792,7 @@ function renderOut(C, ok, fig, line, nicht, refLink){
       <div class="steps">${stepsHtml(c.steps)}</div>${c.note?`<div class="note warn">${c.note}</div>`:''}</div>`).join('')
     + `<div class="card"><div class="card-title">Nicht enthalten</div><div class="hint" style="margin-top:0">${nicht} Formeln dazu im
       <a href="${refLink}">Nachschlagewerk statiq·ref</a>.</div></div>`;
+  if(typeof foldDetails==='function') foldDetails();
 }
 function setMat(m){
   MAT=m; showMat(); run();
@@ -5502,6 +5550,94 @@ fillSelects();
 $('sn-stahl').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');
 fillProfile(); $('sn-prof').value='IPE 300';
 $('an-m').innerHTML = SCHRAUBEN.map(r=>`<option${r[0]==='M20'?' selected':''}>${r[0]}</option>`).join('');
+
+// ══ Übersicht: Auswahlmenü (Bereich › Nachweis), Projekt-Menü, aufklappbare Karten und Nachweise ══
+const PICK_GROUPS = [['beton','seg-typ'],['stahl','seg-st'],['holz','seg-ho'],['mauer','seg-mw'],['grund','seg-gr'],['wasser','seg-wb']];
+const matBtn = m => document.querySelector(`#seg-mat button[data-mat="${m}"]`);
+function updatePick(){
+  const g=PICK_GROUPS.find(x=>x[0]===MAT); if(!g || !$('pick-g')) return;
+  const a=$(g[1]).querySelector('button.active') || $(g[1]).querySelector('button');
+  $('pick-g').textContent = matBtn(MAT).textContent; $('pick-t').textContent = a ? a.textContent : '';
+}
+function buildPick(){
+  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>`<div class="pick-group"><div class="pick-head">${matBtn(mat).textContent}</div>${
+    [...$(seg).querySelectorAll('button')].map((b,i)=>`<button class="pick-item${MAT===mat && b.classList.contains('active')?' active':''}" role="menuitem" data-mat="${mat}" data-i="${i}">${b.textContent}</button>`).join('')}</div>`).join('');
+  $('pick-menu').querySelectorAll('.pick-item').forEach(el=>el.onclick=e=>{ e.stopPropagation();
+    const mat=el.dataset.mat, seg=PICK_GROUPS.find(g=>g[0]===mat)[1];
+    if(MAT!==mat) matBtn(mat).click();
+    $(seg).querySelectorAll('button')[+el.dataset.i].click();
+    closePick(); updatePick(); const r=$('pick').getBoundingClientRect(); if(r.top<0) window.scrollBy({top:r.top-80, behavior:'smooth'}); });
+}
+function togglePick(e){ e && e.stopPropagation(); const o=!$('pick').classList.contains('open'); closeProj(); if(o) buildPick(); $('pick').classList.toggle('open', o); }
+function closePick(){ $('pick') && $('pick').classList.remove('open'); }
+function toggleProj(e){ e && e.stopPropagation(); const o=!$('proj-panel').classList.contains('open'); closePick(); $('proj-panel').classList.toggle('open', o); $('proj-btn').classList.toggle('open', o); }
+function openProj(){ $('proj-panel').classList.add('open'); $('proj-btn').classList.add('open'); }
+function closeProj(){ $('proj-panel') && $('proj-panel').classList.remove('open'); $('proj-btn') && $('proj-btn').classList.remove('open'); }
+document.addEventListener('click', e=>{ if(!e.target.closest('#pick')) closePick(); if(!e.target.closest('#proj-panel') && !e.target.closest('#proj-btn')) closeProj(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closePick(); closeProj(); } });
+
+// Eingabekarten aufklappbar; Nebenkarten starten zugeklappt und zeigen eine Kurzfassung ihrer Werte
+const FOLD_CLOSED = ['in-beton','in-aufl','in-auto','su-auto','ds-dsx','sn-by','sn-Mz','sn-Mk','an-Fw','gr-boden','mw-art','ho-Llt','ho-MG'];
+const FOLD_STORE='statiq-size-fold';
+function foldState(){ try{ return JSON.parse(localStorage.getItem(FOLD_STORE)||'{}'); }catch(e){ return {}; } }
+function foldSummary(card){
+  const out=[];
+  card.querySelectorAll('.fold-body .field, .fold-body label.check').forEach(f=>{
+    if(out.length>=4 || f.offsetParent===null) return;
+    const el=f.querySelector('input, select'); if(!el || el.disabled && el.type!=='checkbox') return;
+    if(el.type==='checkbox'){ if(el.checked) out.push(f.textContent.trim().replace(/\s*\(.*\)$/,'').slice(0,40)); return; }
+    const lab=f.querySelector('label'); let t=(lab?lab.textContent:'').replace(/\s+/g,' ').trim();
+    const unit=(t.match(/\[([^\]]+)\]/)||[])[1]||''; t=t.replace(/\[[^\]]*\]/g,'').replace(/\([^)]*\)/g,'').trim();
+    let v = el.tagName==='SELECT' ? (el.options[el.selectedIndex]?.text||'') : el.value;
+    v=v.split(/ — | \(/)[0].trim(); if(!v) return;
+    out.push(el.tagName==='SELECT' ? v : `${t} ${v}${unit && !/^[°‰%]/.test(unit)?' '+unit:unit}`);
+  });
+  return out.join(' · ');
+}
+function initFold(){
+  const st=foldState();
+  document.querySelectorAll('.col-in .card').forEach(card=>{
+    if(card.closest('#proj-panel') || card.classList.contains('fold')) return;
+    const title=card.querySelector(':scope > .card-title'); if(!title) return;
+    const first=card.querySelector('[id^="in-"],[id^="ds-"],[id^="su-"],[id^="sn-"],[id^="fp-"],[id^="sw-"],[id^="an-"],[id^="gr-"],[id^="gf-"],[id^="gs-"],[id^="gw-"],[id^="gu-"],[id^="mw-"],[id^="md-"],[id^="mt-"],[id^="mk-"],[id^="mh-"],[id^="wd-"],[id^="ws-"],[id^="wr-"],[id^="wg-"],[id^="ww-"],[id^="hv-"],[id^="ho-"],[id^="seg-"]');
+    const key=first?first.id:title.textContent.trim();
+    const body=document.createElement('div'); body.className='fold-body';
+    [...card.childNodes].filter(n=>n!==title).forEach(n=>body.appendChild(n));
+    const sum=document.createElement('div'); sum.className='fold-sum';
+    card.appendChild(sum); card.appendChild(body); card.classList.add('fold'); card.dataset.fold=key;
+    const closed = key in st ? st[key] : FOLD_CLOSED.includes(key);
+    card.classList.toggle('closed', closed);
+    title.addEventListener('click', e=>{ if(e.target.closest('button, a, input, select')) return;
+      const c=!card.classList.contains('closed'); card.classList.toggle('closed', c); const s=foldState(); s[key]=c; try{ localStorage.setItem(FOLD_STORE, JSON.stringify(s)); }catch(_){}
+      if(c) sum.textContent=foldSummary(card); });
+  });
+}
+function updateFoldSums(){ document.querySelectorAll('.fold.closed').forEach(c=>{ const s=c.querySelector(':scope > .fold-sum'); if(s) s.textContent=foldSummary(c); }); }
+// Nachweisdetails: zugeklappt, nicht erfüllte offen; Zustand bleibt bei neuer Rechnung erhalten
+const DET_OPEN=new Set(); let DET_ALL=false;
+function foldDetails(){
+  const cards=[...document.querySelectorAll('#details > .card[id^="n-"]')]; if(!cards.length) return;
+  const bar=document.createElement('div'); bar.className='det-bar';
+  bar.innerHTML=`<span>Rechenschritte</span><button type="button">${DET_ALL?'Alle zuklappen':'Alle aufklappen'}</button>`;
+  bar.querySelector('button').onclick=()=>{ DET_ALL=!DET_ALL; DET_OPEN.clear(); foldDetails2(); bar.querySelector('button').textContent=DET_ALL?'Alle zuklappen':'Alle aufklappen'; };
+  $('details').prepend(bar);
+  cards.forEach(c=>{ c.classList.add('dfold'); const id=c.id;
+    c.querySelector(':scope > .card-title').addEventListener('click', e=>{ if(e.target.closest('a,button')) return; const open=c.classList.contains('closed'); c.classList.toggle('closed', !open); if(open) DET_OPEN.add(id); else { DET_OPEN.delete(id); DET_OPEN.add('!'+id); } }); });
+  foldDetails2();
+  document.querySelectorAll('#chk-table a[href^="#n-"]').forEach(a=>a.addEventListener('click', ()=>{ const c=document.querySelector(a.getAttribute('href')); if(c){ c.classList.remove('closed'); DET_OPEN.add(c.id); DET_OPEN.delete('!'+c.id); } }));
+}
+function foldDetails2(){
+  document.querySelectorAll('#details > .card.dfold').forEach(c=>{ const id=c.id, bad=c.querySelector('.card-title .tag.bad');
+    const open = DET_OPEN.has(id) || (!DET_OPEN.has('!'+id) && (DET_ALL || !!bad)); c.classList.toggle('closed', !open); });
+}
+function initUX(){
+  // Projekt-Menü: Positionen und calc-Import wandern aus der Eingabespalte in ein Fenster unter der Kopfzeile
+  const panel=document.createElement('div'); panel.id='proj-panel'; panel.className='proj-panel';
+  const posCard=$('pos-msg').closest('.card'); panel.appendChild(posCard); panel.appendChild($('calc-import'));
+  document.body.appendChild(panel);
+  PICK_GROUPS.forEach(([,seg])=>$(seg).classList.add('ux-hide')); $('seg-mat').classList.add('ux-hide');
+  initFold(); updatePick(); updateFoldSums();
+}
 $('an-k').innerHTML = SKLASSEN.map(r=>`<option${r[0]==='8.8'?' selected':''}>${r[0]}</option>`).join('');
 $('an-st').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');
 fillHolzKlassen(); fillHvKlassen(); hvSync();
@@ -5511,10 +5647,11 @@ fillFpProfile(); $('fp-prof').value='HEB 200';
 $('sw-st').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');
 fillSwProfile(); $('sw-prof').value='IPE 300';
 applyI18n(); showLangNotice();
+initUX();
 load(); run();
 // Aufruf aus calc: size.html#calc=<Schlüssel der gespeicherten Berechnung>
 { const m = location.hash.match(/^#calc=(.+)$/); renderCalcImport(m ? decodeURIComponent(m[1]) : null);
-  if(m){ importCalc(decodeURIComponent(m[1])); history.replaceState(null, '', location.pathname); } }
+  if(m){ openProj(); importCalc(decodeURIComponent(m[1])); history.replaceState(null, '', location.pathname); } }
 window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':focus')) renderCalcImport($('ci-sel').value); });
 </script>
 </body>

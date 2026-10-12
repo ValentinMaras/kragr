@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.11 -->
+<!-- Statiq·size v0.5.13 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -114,6 +114,11 @@
     .st-n { flex: none; font-family:'DM Mono', monospace; font-size: 10px; color: var(--text3); border: 1px solid var(--border-dark); border-radius: 50%; width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center; transform: translateY(-1px); }
     .st-f { padding-left: 25px; line-height: 1.75; }
     .st-f > div { padding-left: 0.9em; text-indent: -0.9em; }
+    .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; }
+    .st-f > div.eq { padding-left:0; text-indent:0; }
+    .eq-l { white-space:normal; }
+    .eq-r { padding-left:0.9em; text-indent:-0.9em; }
+    .eq-w { grid-column:1 / -1; padding-left:0.9em; text-indent:-0.9em; }
     .fig-legend { font-size: 11px; color: var(--text3); line-height: 1.5; margin-top: 6px; text-align: center; }
     .note { font-size: 12px; color: var(--text2); line-height: 1.55; background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 7px 10px; margin-top: 8px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
     .note.warn { background: var(--warn-bg); border-left-color: var(--warn); }
@@ -435,6 +440,7 @@
       <div class="grid2" id="reinf-balken">
         <div class="field"><label>Anzahl Längsstäbe</label><input type="number" step="1" id="in-n" value="4" oninput="run()"></div>
         <div class="field"><label>Ø Längsstab [mm]</label><select id="in-ds" onchange="run()"></select></div>
+        <div class="field full"><label>davon in der 2. Lage: Anzahl (0 = eine Lage)</label><input type="number" step="1" min="0" id="in-nl2" value="0" oninput="run()"></div>
         <div class="field"><label>Ø Bügel [mm]</label><select id="in-dsw" onchange="run()"></select></div>
         <div class="field"><label>Bügelabstand s<sub>w</sub> [cm]</label><input type="number" step="any" id="in-sw" value="20" oninput="run()"></div>
         <div class="field dz-only"><label>Feld oben: Anzahl (Druck-/Montagestäbe)</label><input type="number" step="1" id="in-n2" value="2" oninput="run()"></div>
@@ -1543,7 +1549,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.11';
+const SIZE_VERSION = '0.5.13';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -1694,7 +1700,7 @@ function readInput(){
     M: num('in-M'), V: num('in-V'), Mqp: num('in-Mqp'), Ms: num('in-Ms')||0, Mqps: num('in-Mqps')||0, zwang: $('in-zwang').checked,
     aufl: $('in-aufl').checked, ind: $('in-lager').value==='ind', t: num('in-t'), a1: +$('in-haken').value,
     auto: $('in-auto').checked,
-    n: Math.round(num('in-n')), ds: +$('in-ds').value, dsw: +$('in-dsw').value, sw: num('in-sw'),
+    n: Math.round(num('in-n')), nl2: Math.max(0, Math.round(num('in-nl2'))||0), ds: +$('in-ds').value, dsw: +$('in-dsw').value, sw: num('in-sw'),
     nt: Math.round(num('in-nt')), dst: +$('in-dst').value, n2: Math.round(num('in-n2')), ds2: +$('in-ds2').value,
     dsp: +$('in-dsp').value, s: num('in-s'), dspt: +$('in-dspt').value, st: num('in-st'),
   };
@@ -1708,7 +1714,7 @@ function validate(I){
   if(I.typ==='unterzug'){ if(!(I.hf>0 && I.hf<I.h)) bad.push('Plattendicke 0 < h_f < h'); if(!(I.b1>=0 && I.b2>=0)) bad.push('Plattenbreiten b₁, b₂ ≥ 0'); }
   if(I.aufl && !(I.t>0)) bad.push('Auflagertiefe');
   if(!I.auto){
-    if(isStab(I)){ if(!(I.n>=2)) bad.push('mindestens 2 Längsstäbe'); if(I.typ==='balken' && !(I.n2>=2)) bad.push('mindestens 2 Stäbe oben im Feld'); if(!(I.sw>0)) bad.push('Bügelabstand'); if(I.Ms>0 && !(I.nt>=2)) bad.push('mindestens 2 Stäbe oben'); }
+    if(isStab(I)){ if(!(I.n>=2)) bad.push('mindestens 2 Längsstäbe'); if(I.nl2>0 && !(I.n-I.nl2>=2 && I.nl2<=I.n-I.nl2)) bad.push('2. Lage: höchstens so viele Stäbe wie in der 1. Lage, unten mindestens 2'); if(I.typ==='balken' && !(I.n2>=2)) bad.push('mindestens 2 Stäbe oben im Feld'); if(!(I.sw>0)) bad.push('Bügelabstand'); if(I.Ms>0 && !(I.nt>=2)) bad.push('mindestens 2 Stäbe oben'); }
     else { if(!(I.s>0)) bad.push('Stababstand'); if(I.Ms>0 && !(I.st>0)) bad.push('Stababstand oben'); }
   }
   return bad;
@@ -1775,7 +1781,9 @@ function geometrie(I, R){
   const dsw=R.dsw, cw=deckung(I.expo, dsw), cl=deckung(I.expo, ds), ct=deckung(I.expo, dst);
   const cv = Math.max(cw.cnom, cl.cnom - dsw);                    // Verlegemaß Bügel unten
   const cvt = Math.max(cw.cnom, ct.cnom - dsw);                   // oben
-  return { b, h, cw, cl, ct, cv, cvl: cv+dsw, d: h - cv - dsw - ds/2, cvt, dt: h - cvt - dsw - dst/2 };
+  // zwei Lagen: m Stäbe der n liegen in der 2. Lage, lichter Lagenabstand a_v = max(Ø; d_g + 5; 20) (EN 1992-1-1, 8.2)
+  const m = R.nl2>0 ? R.nl2 : 0, av = Math.max(ds, (I.dg||16)+5, 20), d1 = h - cv - dsw - ds/2, d = d1 - (m>0 ? m/R.n*(ds+av) : 0);
+  return { b, h, cw, cl, ct, cv, cvl: cv+dsw, d, d1, m, av, cvt, dt: h - cvt - dsw - dst/2 };
 }
 
 // ══════════════════════════════════════════════════
@@ -1810,6 +1818,12 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
          H('Verlegemaß: der größere der beiden Werte, gemessen bis zur Bügelaußenkante'),
          `Verlegemaß Bügel c<sub>v</sub> = max(${G.cw.cnom}; ${G.cl.cnom-R.dsw}) = <b>${G.cv} mm</b>`];
     st.push(H('Statische Nutzhöhe: Abstand vom gedrückten Rand bis zur Mitte der Zugbewehrung'));
+    if(G.m>0){
+      st.push(`Bewehrung in zwei Lagen: ${R.n-G.m} Stäbe in der 1. Lage, ${G.m} in der 2. Lage darüber`);
+      st.push(`1. Lage: d<sub>1</sub> = h − c<sub>v</sub> − Ø<sub>w</sub> − Ø/2 = ${h} − ${G.cv} − ${R.dsw} − ${deNum(R.ds/2,1)} = ${deNum(G.d1,1)} mm`);
+      st.push(`lichter Lagenabstand a<sub>v</sub> = max(Ø; d<sub>g</sub> + 5; 20) = max(${R.ds}; ${I.dg+5}; 20) = ${deNum(G.av,0)} mm → Achsabstand der Lagen Ø + a<sub>v</sub> = ${deNum(R.ds+G.av,0)} mm`);
+      st.push(`Nutzhöhe bis zum Schwerpunkt beider Lagen (gleiche Ø): d = d<sub>1</sub> − ${G.m}/${R.n}·(Ø + a<sub>v</sub>) = ${deNum(G.d1,1)} − ${deNum(G.m/R.n*(R.ds+G.av),1)} = <b>${deNum(d,1)} mm</b>`);
+    } else
     st.push(`d = h − c<sub>v</sub>${platte?'':' − Ø<sub>w</sub>'} − Ø/2 = ${h} − ${G.cv}${platte?'':' − '+R.dsw} − ${deNum(R.ds/2,1)} = <b>${deNum(d,1)} mm</b>`);
     if(I.Ms>0) st.push(`oben (Stütze, Ø${R.dst}): d<sub>St</sub> = h − ${G.cvt}${platte?'':' − '+R.dsw} − ${deNum(R.dst/2,1)} = <b>${deNum(G.dt,1)} mm</b>`);
     st.push(H('Dauerhaftigkeit: Mindestbetonfestigkeitsklasse für die Expositionsklasse'));
@@ -1928,16 +1942,21 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       S.push(`Querbewehrung: ≥ 20 % der Hauptbewehrung = ${deNum(0.2*As/100)} cm²/m, Abstand ≤ 250 mm`);
       eta = Math.max(R.s/smax, amin/Math.max(a,1e-9));
     } else {
-      const bi = b - 2*G.cv - 2*R.dsw, a = (bi - R.n*R.ds)/(R.n-1);
+      const n1 = R.n - G.m, bi = b - 2*G.cv - 2*R.dsw, a = (bi - n1*R.ds)/(n1-1);
       S.push(H('Platz innerhalb der Bügel'));
       S.push(`Breite innerhalb der Bügel: b${uz?'<sub>w</sub>':''} − 2·c<sub>v</sub> − 2·Ø<sub>w</sub> = ${b} − 2·${G.cv} − 2·${R.dsw} = ${deNum(bi,0)} mm`);
-      S.push(H(`Lichter Abstand: Restbreite auf die ${R.n-1} Zwischenräume verteilen`));
-      S.push(`lichter Abstand a = (${deNum(bi,0)} − ${R.n}·${R.ds}) / ${R.n-1} = <b>${deNum(a,1)} mm</b>`);
+      S.push(H(`Lichter Abstand${G.m>0?' in der 1. Lage':''}: Restbreite auf die ${n1-1} Zwischenräume verteilen`));
+      S.push(`lichter Abstand a = (${deNum(bi,0)} − ${n1}·${R.ds}) / ${n1-1} = <b>${deNum(a,1)} mm</b>`);
       S.push(H('Mindestabstand: Stabdurchmesser, Größtkorn + 5 mm, mindestens 20 mm'));
       S.push(`a<sub>min</sub> = max(Ø; d<sub>g</sub> + 5; 20) = max(${R.ds}; ${I.dg+5}; 20) = ${amin} mm`);
       S.push(`${deNum(a,1)} mm ${a>=amin?'≥':'<'} ${amin} mm ${a>=amin?'✓':'✗'}`);
       eta = a>0 ? amin/a : 9.99;
-      if(a<amin) note = 'Die Stäbe passen nicht nebeneinander. Größeren Durchmesser mit weniger Stäben, zweite Lage oder breiteren Querschnitt wählen.';
+      if(G.m>0){
+        S.push(H('2. Lage: Stäbe lotrecht über denen der 1. Lage, damit Rüttelgassen frei bleiben'));
+        S.push(`${G.m} Stäbe in der 2. Lage ≤ ${n1} Stäbe in der 1. Lage ✓ · waagerechter Abstand dort ≥ a`);
+        S.push(`lotrechter lichter Abstand der Lagen a<sub>v</sub> = ${deNum(G.av,0)} mm ≥ a<sub>min</sub> = ${amin} mm ✓ (über Abstandhalter, z. B. Ø${Math.max(R.ds,20)}-Querstäbe)`);
+      }
+      if(a<amin) note = G.m>0 ? 'Die Stäbe der 1. Lage passen nicht nebeneinander. Mehr Stäbe in die 2. Lage, größeren Durchmesser oder breiteren Querschnitt wählen.' : 'Die Stäbe passen nicht nebeneinander. Größeren Durchmesser mit weniger Stäben, zweite Lage oder breiteren Querschnitt wählen.';
       if(I.typ==='balken' && R.n2>=2){
         const am2 = Math.max(R.ds2, I.dg+5, 20), a2 = (bi - R.n2*R.ds2)/(R.n2-1);
         S.push(H('Obere Lage im Feld'));
@@ -2245,16 +2264,23 @@ function autoBewehrung(I){
   const platte = I.typ==='platte';
   const bottom = [];
   if(platte){ const smax=smaxPlatte(I.h*10); for(const ds of DS_P) for(const s of [250,225,200,175,150,125,100,75]) if(s<=smax) bottom.push({ ds, s }); }
-  else for(const ds of DS_L) for(let n=2;n<=8;n++) bottom.push({ ds, n });
+  else for(const ds of DS_L) for(let n=2;n<=8;n++) bottom.push({ ds, n, nl2:0 });
   const area = c => platte ? areaBar(c.ds)*1000/c.s : c.n*areaBar(c.ds);
   bottom.sort((a,b)=> area(a)-area(b) || (a.n||0)-(b.n||0));
+  // zweite Lage nur, wenn eine Lage nicht reicht: n Stäbe, davon m oben (m ≤ n − m), vorab grob auf Platz geprüft (Bügel Ø8)
+  const bottom2 = [];
+  if(!platte){ const G0 = geometrie(I, { ds:10, dsw:8, dst:16 }), bi = I.b*10 - 2*G0.cv - 16;
+    for(const ds of DS_L) for(let n=4;n<=14;n++) for(let m=2;m<=n/2;m++){ const n1=n-m; if((bi-n1*ds)/(n1-1) >= Math.max(ds, I.dg+5, 20)) bottom2.push({ ds, n, nl2:m }); }
+    bottom2.sort((a,b)=> area(a)-area(b) || a.nl2-b.nl2); }
   const base = platte ? { dst:10, st:150 } : { dsw:8, sw:20, dst:16, nt:2, ...(I.typ==='balken'?{n2:2, ds2:12}:{}) };
   const Inob = {...I, Ms:0};                       // Feld zuerst ohne Stütze
   const pick = ids => { for(const c of bottom){ const r={...base, ...c}; if(!platte) stirrups(Inob, r);
     let res = nachweise(Inob, r);
     if(res.DZ && res.DZ.As2E > res.DZ.As2 && isFinite(res.DZ.As2E)){ const t = topDruck(res.DZ.As2E, I.b*10, r); if(t){ Object.assign(r, t); stirrups(Inob, r); res = nachweise(Inob, r); } }
     if(okIds(res, ids)) return r; } return null; };
-  let R = pick(['biegung','regeln','riss','auflager']) || pick(['biegung','regeln','riss']) || pick(['biegung','regeln']) || {...base, ...bottom[bottom.length-1]};
+  const pick2 = ids => { const keep=bottom.splice(0, bottom.length, ...bottom2); const r=pick(ids); bottom.splice(0, bottom.length, ...keep); return r; };
+  const both = ids => pick(ids) || pick2(ids);
+  let R = both(['biegung','regeln','riss','auflager']) || both(['biegung','regeln','riss']) || both(['biegung','regeln']) || {...base, ...bottom[bottom.length-1]};
   if(!platte && !R.dsw) stirrups(Inob, R);
   if(I.Ms>0) R = topBewehrung(I, R);
   return R;
@@ -2349,8 +2375,12 @@ function figQuerschnitt(I, res){
   } else {
     const o=(cv+R.dsw/2)*sc;
     s+=`<rect x="${xw+o}" y="${y0+o}" width="${bw-2*o}" height="${hh-2*o}" rx="${Math.max(2,2*R.dsw*sc)}" fill="none" stroke="#111" stroke-width="${Math.max(1, R.dsw*sc)}"/>`;
-    const xs = xw + (cv+R.dsw+R.ds/2)*sc, xe = xw + bw - (cv+R.dsw+R.ds/2)*sc;
-    for(let i=0;i<R.n;i++) s+=`<circle cx="${R.n===1?(xs+xe)/2:xs+(xe-xs)*i/(R.n-1)}" cy="${yb}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`;
+    const xs = xw + (cv+R.dsw+R.ds/2)*sc, xe = xw + bw - (cv+R.dsw+R.ds/2)*sc, m=res.G.m||0, n1=R.n-m, yb1 = y0 + (res.G.d1||d)*sc;
+    const xi = i => n1===1 ? (xs+xe)/2 : xs+(xe-xs)*i/(n1-1);
+    for(let i=0;i<n1;i++) s+=`<circle cx="${xi(i)}" cy="${yb1}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`;
+    if(m>0){ const y2 = yb1 - (R.ds+res.G.av)*sc;
+      for(let j=0;j<m;j++){ const i = m===1 ? Math.round((n1-1)/2) : Math.round(j*(n1-1)/(m-1)); s+=`<circle cx="${xi(i)}" cy="${y2}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`; }
+      s+=`<line x1="${xw+2}" y1="${yb}" x2="${xw+bw-2}" y2="${yb}" stroke="${C_IN}" stroke-width="0.8" stroke-dasharray="2 2"/>`+svgT(xw+bw+4, yb+3, 'S', 'start', C_IN, 8.5); }
     const yt = y0 + (h-res.G.dt)*sc;
     if(I.Ms>0){
       const w = uz ? res.BFs.beff : b - 2*res.G.cvt - 2*R.dsw, xa = (uz ? xw+bw/2-w/2*sc : xw+(res.G.cvt+R.dsw)*sc) + R.dst/2*sc, xb2 = xa + (w-R.dst)*sc;
@@ -2399,18 +2429,70 @@ function figQuerschnitt(I, res){
 function reinfText(I, R, dz){
   if(I.typ==='platte') return `unten Ø${R.ds}/${deNum(R.s/10,1)} cm = ${deNum(areaBar(R.ds)*1000/R.s/100)} cm²/m`
     + (I.Ms>0 ? ` · oben (Stütze) Ø${R.dst}/${deNum(R.st/10,1)} cm = ${deNum(areaBar(R.dst)*1000/R.st/100)} cm²/m` : '');
-  return `unten ${R.n} Ø ${R.ds} = ${deNum(R.n*areaBar(R.ds)/100)} cm²`
+  return `unten ${R.n} Ø ${R.ds} = ${deNum(R.n*areaBar(R.ds)/100)} cm²${R.nl2>0?` (${R.n-R.nl2} + ${R.nl2} in zwei Lagen)`:''}`
     + (R.n2 && I.typ==='balken' ? ` · oben ${R.n2} Ø ${R.ds2}${dz?' (Druckbewehrung)':''}` : '')
     + ` · Bügel Ø${R.dsw}/${deNum(R.sw,1)} cm`
     + (I.Ms>0 ? ` · oben (Stütze) ${R.nt} Ø ${R.dst} = ${deNum(R.nt*areaBar(R.dst)/100)} cm²` : '');
 }
 // Rechenschritte: '§Text' beginnt einen neuen, nummerierten Schritt; alle folgenden Zeilen sind dessen Formeln
 const H = t => '§'+t;
+// Rechenschritt-Zeile in Einzelzeilen zerlegen: jede Gleichheit (=), jeder Vergleich (≤ ≥ < >) und jede Folgerung (→) beginnt eine neue Zeile,
+// das Gleichheitszeichen steht untereinander. Getrennt wird nur auf oberster Ebene (nicht in Klammern oder HTML-Tags).
+function eqSplit(s, seps){
+  const out=[]; let depth=0, cur='', i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(c==='<' && /[a-zA-Z\/!]/.test(s[i+1]||'')){ const j=s.indexOf('>', i); if(j<0){ cur+=s.slice(i); break; } cur+=s.slice(i,j+1); i=j+1; continue; }
+    if(c==='&'){ const m=/^&[a-z#0-9]+;/i.exec(s.slice(i)); if(m){ cur+=m[0]; i+=m[0].length; continue; } }
+    if(c==='('||c==='['||c==='{') depth++; else if((c===')'||c===']'||c==='}') && depth>0) depth--;
+    if(depth===0){ const sp=seps.find(x=>s.startsWith(x,i)); if(sp){ out.push([cur, sp.trim()]); cur=''; i+=sp.length; continue; } }
+    cur+=c; i++;
+  }
+  out.push([cur, null]); return out;   // [Text, Trennzeichen danach]
+}
+const EQ_CMP = [' ≤ ',' ≥ ',' < ',' > ',' &lt; ',' &gt; '];
+function eqLine(line){
+  if(/<(svg|table|div|ul|ol|br)\b/i.test(line)) return null;
+  const plain=line.replace(/<[^>]+>/g,'');
+  const nEq=(plain.match(/ = /g)||[]).length, nCmp=EQ_CMP.filter(c=>plain.includes(c.replace('&lt;','<').replace('&gt;','>'))).length, nTo=(plain.match(/ → /g)||[]).length;
+  if(nEq+nCmp+nTo<2 && plain.length<70) return null;
+  if(nEq===0) return null;
+  // Aussagen: an „ → “ und an „ · “ trennen, wenn beide Seiten eigene Gleichungen sind
+  let stm=[]; eqSplit(line,[' → ']).forEach(([t],k)=>stm.push({t, pre:k?'→':''}));
+  stm = stm.flatMap(st=>{ const parts=eqSplit(st.t,[' · ']).map(p=>p[0]);
+    const isEq=p=>{ const pl=p.replace(/<[^>]+>/g,'').trim(), i=pl.indexOf(' = '); return i>0 && i<30 && /^[^\d\s(−\-+]/.test(pl); };
+    if(parts.length>1 && parts.every(isEq)) return parts.map((t,k)=>({t, pre:k?'':st.pre}));
+    return [st]; });
+  // nur echte Rechenketten zerlegen: eine Aussage mit mindestens zwei Gleichheits-/Vergleichszeichen,
+  // deren Zwischenglieder keine Wörter oder Doppelpunkte enthalten („F = 10 kN bei x = 2 m“ bleibt eine Zeile)
+  const plainOf = t => t.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ');
+  const UNIT = /\b(kNm|kN|mm|cm|m|N|MPa|kPa|kg|rad|Hz|mm²|cm²|cm³|cm⁴|m²|m³)\b/g;
+  const isChain = st => { const segs=eqSplit(st.t,[' = ',...EQ_CMP]); if(segs.length<3) return false;
+    return segs.slice(1,-1).every(([t])=>{ const pl0=plainOf(t), pl=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).replace(UNIT,''), tail=pl0.split(' · ').slice(1).pop(); return !/: /.test(pl) && !(tail!==undefined && /^[A-Za-zΑ-ωα-ωΣΔ]/.test(tail.trim())) && !/(^|[\s(])[A-Za-zÄÖÜäöüß]{3,}(?=[\s,.)]|$)/.test(pl.replace(/(max|min|cos|sin|tan|cot|exp|ln|log|sqrt)\s*\(/g,'(')); }); };
+  if(!stm.some(isChain)) return null;
+  const rows=[];
+  // Vorspann bis „: “ (z. B. „Querschnitt 120 × 240 mm: A = …“) als eigene Zeile
+  if(stm[0]){ const pp=eqSplit(stm[0].t,[': ']); if(pp.length>1 && !/ = /.test(pp[0][0].replace(/<[^>]+>/g,''))){ rows.push(['', pp[0][0]+':', 'cont']); stm[0].t=pp.slice(1).map(p=>p[0]).join(': '); } }
+  stm.forEach(st=>{
+    const segs=eqSplit(st.t,[' = ',...EQ_CMP]);
+    if(segs.length===1){ rows.push(['', (st.pre?st.pre+' ':'')+segs[0][0], 'cont']); return; }
+    let op=null;
+    segs.forEach(([t,sep],k)=>{
+      if(k===0){ rows.push([(st.pre?st.pre+' ':'')+t, null, 'lhs']); }
+      else rows[rows.length-1][1]===null ? rows[rows.length-1][1]=op+' '+t : rows.push(['', op+' '+t, 'rhs']);
+      op=sep;
+    });
+  });
+  // lange Satzanfänge links (Fließtext statt Formelzeichen): Zeile unverändert lassen
+  if(rows.some(([l,r,k])=>k==='lhs' && l.replace(/<[^>]+>/g,'').replace(/^→ /,'').length>24)) return null;
+  // eine leere rechte Seite (Text ohne Gleichung) als ganze Zeile
+  return `<div class="eq">${rows.map(([l,r,k])=> r===null ? `<div class="eq-w">${l}</div>` : k==='cont' ? `<div class="eq-w">${r}</div>` : `<div class="eq-l">${l}</div><div class="eq-r">${r}</div>`).join('')}</div>`;
+}
 function stepsHtml(S){
   let out='', n=0, open=false;
   for(const s of S){
     if(s.startsWith('§')){ if(open) out+='</div></div>'; n++; out+=`<div class="st"><div class="st-h"><span class="st-n">${n}</span><span>${s.slice(1)}</span></div><div class="st-f">`; open=true; }
-    else out += open ? `<div>${s}</div>` : `<div class="st"><div class="st-f" style="padding-left:0"><div>${s}</div></div></div>`;
+    else { const e=eqLine(s), row = e || `<div>${s}</div>`; out += open ? row : `<div class="st"><div class="st-f" style="padding-left:0">${row}</div></div>`; }
   }
   return out + (open ? '</div></div>' : '');
 }
@@ -2431,7 +2513,7 @@ function runBeton(){
   if(TYP==='stuetze') return runStuetze();
   if(TYP==='durchstanzen') return runDS();
   const I=readInput(), bad=validate(I);
-  ['in-n','in-ds','in-dsw','in-sw','in-dsp','in-s','in-nt','in-dst','in-dspt','in-st','in-n2','in-ds2'].forEach(id=>$(id).disabled = I.auto);
+  ['in-n','in-nl2','in-ds','in-dsw','in-sw','in-dsp','in-s','in-nt','in-dst','in-dspt','in-st','in-n2','in-ds2'].forEach(id=>$(id).disabled = I.auto);
   document.querySelectorAll('.dz-only').forEach(e=>e.style.display = I.typ==='balken' ? '' : 'none');
   document.querySelectorAll('.top-only').forEach(e=>e.style.display = I.Ms>0 ? '' : 'none');
   $('in-t').disabled = $('in-haken').disabled = $('in-lager').disabled = !I.aufl;
@@ -2443,9 +2525,9 @@ function runBeton(){
   if(I.auto){
     R = autoBewehrung(I);
     if(I.typ==='platte'){ $('in-dsp').value=R.ds; $('in-s').value=R.s/10; $('in-dspt').value=R.dst; $('in-st').value=R.st/10; }
-    else { $('in-n').value=R.n; $('in-ds').value=R.ds; $('in-dsw').value=R.dsw; $('in-sw').value=R.sw; $('in-nt').value=R.nt; $('in-dst').value=R.dst; if(R.n2){ $('in-n2').value=R.n2; $('in-ds2').value=R.ds2; } }
+    else { $('in-n').value=R.n; $('in-nl2').value=R.nl2||0; $('in-ds').value=R.ds; $('in-dsw').value=R.dsw; $('in-sw').value=R.sw; $('in-nt').value=R.nt; $('in-dst').value=R.dst; if(R.n2){ $('in-n2').value=R.n2; $('in-ds2').value=R.ds2; } }
   } else {
-    R = I.typ==='platte' ? { ds:I.dsp, s:I.s*10, dst:I.dspt, st:I.st*10 } : { ds:I.ds, n:I.n, dsw:I.dsw, sw:I.sw, dst:I.dst, nt:I.nt, ...(I.typ==='balken'?{n2:I.n2, ds2:I.ds2}:{}) };
+    R = I.typ==='platte' ? { ds:I.dsp, s:I.s*10, dst:I.dspt, st:I.st*10 } : { ds:I.ds, n:I.n, nl2:I.nl2, dsw:I.dsw, sw:I.sw, dst:I.dst, nt:I.nt, ...(I.typ==='balken'?{n2:I.n2, ds2:I.ds2}:{}) };
   }
   const res = nachweise(I, R);
   LAST = { mat:'beton', I, res, date: new Date() };
@@ -5682,7 +5764,7 @@ function hideReport(){ document.body.classList.remove('show-report'); }
 // ══════════════════════════════════════════════════
 const STORE='statiq-size-v1';
 const FIELDS=['in-name','in-b','in-h','in-l','in-K','in-hf','in-feld','in-b1','in-b2','in-beton','in-expo','in-dg','in-cot','in-M','in-V','in-Mqp','in-Ms','in-Mqps',
-  'in-t','in-haken','in-lager','in-n','in-ds','in-dsw','in-sw','in-nt','in-dst','in-dsp','in-s','in-dspt','in-st','in-n2','in-ds2',
+  'in-t','in-haken','in-lager','in-n','in-nl2','in-ds','in-dsw','in-sw','in-nt','in-dst','in-dsp','in-s','in-dspt','in-st','in-n2','in-ds2',
   'su-l','su-beta','su-N','su-phi','su-M02','su-M01','su-n','su-ds','su-dsw','su-sw','ds-form','ds-pos','ds-c1','ds-c2','ds-V','ds-dsx','ds-sx','ds-dsy','ds-sy'];
 const CHECKS=['hv-vorg','su-auto','in-tw','in-zwang','in-auto','in-aufl','sn-auto','an-gew','ho-auto','sw-front','mw-own','mh-stoss','gs-gw'];
 const SFIELDS=['sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','sn-N','sn-mv','sn-psi','sn-by','sn-bz','sn-Llt','sn-zg','sn-Mk','sn-wlim',

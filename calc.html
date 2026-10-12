@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.11 -->
+<!-- Statiq v0.8.13 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -301,6 +301,73 @@
     .load-action-btn { border:none; background:#efeff1; border-radius:8px; }
     .diagram-toggle-btn { border-radius:10px; }
     .beam-svg-wrap, .diagram-svg-wrap { background:#fff; border-radius:12px; }
+    /* ── UX 2026 (calc v0.8.12): Auswahlmenü, zwei Spalten, kompakte Lasten, Live-Ergebnis ── */
+    .nav.calc-top { z-index:30; overflow:visible; background:transparent; padding:6px 20px 0; max-width:1180px; margin:0 auto; display:flex; align-items:stretch; gap:10px; }
+    .pick { position:relative; flex:1; min-width:0; }
+    .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:13px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
+    .pick-btn:hover { background:#f1f1f3; } .pick-btn:active { transform:scale(0.99); }
+    .pick-txt { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+    .pick-g { font-size:12px; font-weight:600; color:var(--text3); }
+    .pick-t { font-size:20px; font-weight:800; letter-spacing:-0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pick-chev { font-size:13px; color:var(--text3); transition:transform .18s; }
+    .pick.open .pick-chev { transform:rotate(180deg); }
+    .pick-menu { display:none; position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:60; background:#fff; border-radius:18px; box-shadow:0 18px 48px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); padding:8px; max-height:min(72vh, 600px); overflow:auto; }
+    .pick.open .pick-menu { display:block; }
+    .pick-group + .pick-group { margin-top:2px; }
+    .pick-group { border-radius:12px; }
+    .pick-head { width:100%; display:flex; align-items:center; gap:10px; border:none; background:none; cursor:pointer; font-family:inherit; text-align:left; padding:11px 12px; border-radius:12px; color:var(--text); }
+    .pick-head:hover { background:#f6f6f7; }
+    .pick-hn { flex:1; font-size:15px; font-weight:700; }
+    .pick-hc { font-size:12px; font-weight:600; color:var(--text3); max-width:55%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pick-hv { font-size:11px; color:var(--text3); transition:transform .18s; }
+    .pick-group.open { background:#f8f8f9; }
+    .pick-group.open .pick-head:hover { background:transparent; }
+    .pick-group.open .pick-hv { transform:rotate(180deg); }
+    .pick-body { display:none; flex-direction:column; padding:0 6px 8px; }
+    .pick-group.open .pick-body { display:flex; }
+    .pick-item { text-align:left; border:none; background:none; cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; color:var(--text2); padding:8px 12px 8px 22px; border-radius:9px; position:relative; }
+    .pick-item:hover { background:#fff; color:var(--text); }
+    .pick-item.active { background:#fff; color:var(--text); font-weight:700; box-shadow:0 1px 2px rgba(0,0,0,0.06); }
+    .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2563eb; }
+    .menu-btn { border:none; background:var(--card); border-radius:18px; width:56px; cursor:pointer; font-size:20px; color:var(--text2); }
+    .menu-btn:hover { background:#f1f1f3; color:var(--text); }
+    /* zwei Spalten: links Eingaben, rechts Ergebnis (mitlaufend) */
+    .cols { display:block; }
+    .col-out .calc-btn.run-btn { display:none; }
+    .col-out .save-btn { margin-top:4px; }
+    .live-note { font-size:12px; color:var(--text3); margin:2px 2px 10px; display:flex; align-items:center; gap:6px; }
+    .live-note::before { content:''; width:7px; height:7px; border-radius:50%; background:#16a34a; }
+    @media (min-width:1000px){
+      .main:not(#tab-saved) { max-width:1180px; padding:16px 20px 20px; }
+      .cols { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:20px; align-items:start; }
+      .col-out { position:sticky; top:12px; max-height:calc(100vh - 24px); overflow:auto; padding-bottom:4px; scrollbar-width:thin; }
+    }
+    /* kompakte Lasten: zugeklappt mit Kurzfassung */
+    .load-item.cmp .load-item-header { cursor:pointer; gap:10px; }
+    .load-item.cmp .load-item-header:hover { background:#fafafa; }
+    .load-item.cmp .load-item-label { display:flex; align-items:baseline; gap:10px; min-width:0; flex:1; }
+    .load-sum { font-family:'DM Mono', monospace; font-size:12px; font-weight:500; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+    .load-chev { font-size:10px; color:var(--text3); transition:transform .18s; margin-right:2px; }
+    .load-item.cmp:not(.open) .load-item-body { display:none; }
+    .load-item.cmp:not(.open) .load-item-header { border-bottom:none; }
+    .load-item.cmp.open .load-chev { transform:rotate(180deg); }
+    .load-list { gap:8px; }
+    /* Rechenweg (v0.8.13): Schritte wie in size, jede Gleichung in eigener Zeile */
+    .rw-title { display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-bottom:12px; }
+    .rw-chev { font-size:12px; color:var(--text3); transition:transform .18s; }
+    .rw-card.closed .rw-chev { transform:rotate(-90deg); }
+    .rw-card.closed .rw-body { display:none; } .rw-card.closed .rw-title { margin-bottom:0; }
+    .steps { font-family:'DM Mono', monospace; font-size:12px; line-height:1.85; color:var(--text2); }
+    .steps b { color:var(--text); }
+    .st { margin:0 0 9px; }
+    .st-h { font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text); display:flex; gap:8px; align-items:baseline; line-height:1.45; font-family:'DM Sans', system-ui, sans-serif; }
+    .st-n { flex:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--text3); border:1px solid #d4d4d8; border-radius:50%; width:17px; height:17px; display:inline-flex; align-items:center; justify-content:center; transform:translateY(-1px); }
+    .st-f { padding-left:25px; line-height:1.75; }
+    .st-f > div { padding-left:0.9em; text-indent:-0.9em; }
+    .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; }
+    .st-f > div.eq { padding-left:0; text-indent:0; }
+    .eq-r { padding-left:0.9em; text-indent:-0.9em; }
+    .eq-w { grid-column:1 / -1; padding-left:0.9em; text-indent:-0.9em; }
   </style>
 </head>
 <body>
@@ -447,14 +514,14 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.11</span>
+    <span class="version">v0.8.13</span>
   </div>
 </header>
 
-<nav class="nav" style="display:flex;align-items:center;padding:0 16px;gap:10px">
-  <span id="nav-current-label" style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.2px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span>
-
-  <button onclick="toggleNavMenu()" style="background:none;border:none;cursor:pointer;padding:10px 2px;font-size:22px;color:var(--text2);line-height:1" title="Menu">☰</button>
+<nav class="nav calc-top">
+  <span id="nav-current-label" style="display:none"></span>
+  <div class="pick" id="pick"><button class="pick-btn" id="pick-btn" onclick="togglePick(event)" aria-haspopup="true"><span class="pick-txt"><span class="pick-g" id="pick-g"></span><span class="pick-t" id="pick-t"></span></span><span class="pick-chev">▾</span></button><div class="pick-menu" id="pick-menu" role="menu"></div></div>
+  <button class="menu-btn" onclick="toggleNavMenu()" title="Menu" aria-label="Menu">☰</button>
 </nav>
 
 <!-- ══ Navigation Drawer (2-level) ══ -->
@@ -988,7 +1055,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.11';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.13';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -4925,11 +4992,466 @@ addLoad('cant','point');
 addLoad('cant','dist');
 initSpanData();
 renderContUI();
+addContLoad(0,'dist'); addContLoad(1,'dist');   // Startwerte: Gleichlast auf beiden Feldern (wie beim Einfeldträger)
 addFrameLoad('vert');
 addFrameLoad('horiz');
 renderFrameHinges();
 updateIndetInfo();
 drawBeam();
+// Rechenschritt-Zeile in Einzelzeilen zerlegen: jede Gleichheit (=), jeder Vergleich (≤ ≥ < >) und jede Folgerung (→) beginnt eine neue Zeile,
+// das Gleichheitszeichen steht untereinander. Getrennt wird nur auf oberster Ebene (nicht in Klammern oder HTML-Tags).
+function eqSplit(s, seps){
+  const out=[]; let depth=0, cur='', i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(c==='<' && /[a-zA-Z\/!]/.test(s[i+1]||'')){ const j=s.indexOf('>', i); if(j<0){ cur+=s.slice(i); break; } cur+=s.slice(i,j+1); i=j+1; continue; }
+    if(c==='&'){ const m=/^&[a-z#0-9]+;/i.exec(s.slice(i)); if(m){ cur+=m[0]; i+=m[0].length; continue; } }
+    if(c==='('||c==='['||c==='{') depth++; else if((c===')'||c===']'||c==='}') && depth>0) depth--;
+    if(depth===0){ const sp=seps.find(x=>s.startsWith(x,i)); if(sp){ out.push([cur, sp.trim()]); cur=''; i+=sp.length; continue; } }
+    cur+=c; i++;
+  }
+  out.push([cur, null]); return out;   // [Text, Trennzeichen danach]
+}
+const EQ_CMP = [' ≤ ',' ≥ ',' < ',' > ',' &lt; ',' &gt; '];
+function eqLine(line){
+  if(/<(svg|table|div|ul|ol|br)\b/i.test(line)) return null;
+  const plain=line.replace(/<[^>]+>/g,'');
+  const nEq=(plain.match(/ = /g)||[]).length, nCmp=EQ_CMP.filter(c=>plain.includes(c.replace('&lt;','<').replace('&gt;','>'))).length, nTo=(plain.match(/ → /g)||[]).length;
+  if(nEq+nCmp+nTo<2 && plain.length<70) return null;
+  if(nEq===0) return null;
+  // Aussagen: an „ → “ und an „ · “ trennen, wenn beide Seiten eigene Gleichungen sind
+  let stm=[]; eqSplit(line,[' → ']).forEach(([t],k)=>stm.push({t, pre:k?'→':''}));
+  stm = stm.flatMap(st=>{ const parts=eqSplit(st.t,[' · ']).map(p=>p[0]);
+    const isEq=p=>{ const pl=p.replace(/<[^>]+>/g,'').trim(), i=pl.indexOf(' = '); return i>0 && i<30 && /^[^\d\s(−\-+]/.test(pl); };
+    if(parts.length>1 && parts.every(isEq)) return parts.map((t,k)=>({t, pre:k?'':st.pre}));
+    return [st]; });
+  // nur echte Rechenketten zerlegen: eine Aussage mit mindestens zwei Gleichheits-/Vergleichszeichen,
+  // deren Zwischenglieder keine Wörter oder Doppelpunkte enthalten („F = 10 kN bei x = 2 m“ bleibt eine Zeile)
+  const plainOf = t => t.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ');
+  const UNIT = /\b(kNm|kN|mm|cm|m|N|MPa|kPa|kg|rad|Hz|mm²|cm²|cm³|cm⁴|m²|m³)\b/g;
+  const isChain = st => { const segs=eqSplit(st.t,[' = ',...EQ_CMP]); if(segs.length<3) return false;
+    return segs.slice(1,-1).every(([t])=>{ const pl0=plainOf(t), pl=plainOf(t.replace(/<(sub|sup)>.*?<\/\1>/g,'')).replace(UNIT,''), tail=pl0.split(' · ').slice(1).pop(); return !/: /.test(pl) && !(tail!==undefined && /^[A-Za-zΑ-ωα-ωΣΔ]/.test(tail.trim())) && !/(^|[\s(])[A-Za-zÄÖÜäöüß]{3,}(?=[\s,.)]|$)/.test(pl.replace(/(max|min|cos|sin|tan|cot|exp|ln|log|sqrt)\s*\(/g,'(')); }); };
+  if(!stm.some(isChain)) return null;
+  const rows=[];
+  // Vorspann bis „: “ (z. B. „Querschnitt 120 × 240 mm: A = …“) als eigene Zeile
+  if(stm[0]){ const pp=eqSplit(stm[0].t,[': ']); if(pp.length>1 && !/ = /.test(pp[0][0].replace(/<[^>]+>/g,''))){ rows.push(['', pp[0][0]+':', 'cont']); stm[0].t=pp.slice(1).map(p=>p[0]).join(': '); } }
+  stm.forEach(st=>{
+    const segs=eqSplit(st.t,[' = ',...EQ_CMP]);
+    if(segs.length===1){ rows.push(['', (st.pre?st.pre+' ':'')+segs[0][0], 'cont']); return; }
+    let op=null;
+    segs.forEach(([t,sep],k)=>{
+      if(k===0){ rows.push([(st.pre?st.pre+' ':'')+t, null, 'lhs']); }
+      else rows[rows.length-1][1]===null ? rows[rows.length-1][1]=op+' '+t : rows.push(['', op+' '+t, 'rhs']);
+      op=sep;
+    });
+  });
+  // lange Satzanfänge links (Fließtext statt Formelzeichen): Zeile unverändert lassen
+  if(rows.some(([l,r,k])=>k==='lhs' && l.replace(/<[^>]+>/g,'').replace(/^→ /,'').length>24)) return null;
+  // eine leere rechte Seite (Text ohne Gleichung) als ganze Zeile
+  return `<div class="eq">${rows.map(([l,r,k])=> r===null ? `<div class="eq-w">${l}</div>` : k==='cont' ? `<div class="eq-w">${r}</div>` : `<div class="eq-l">${l}</div><div class="eq-r">${r}</div>`).join('')}</div>`;
+}
+
+// ══════════════════════════════════════════════════
+// RECHENWEG (v0.8.13): Schritt-für-Schritt-Lösung zu jedem System, Darstellung wie in statiq·size
+// ══════════════════════════════════════════════════
+const RWT = {
+  de:{ title:'Rechenweg — Schritt für Schritt', sys:'System und statische Bestimmtheit', loads:'Lasten und ihre Resultierenden', none:'keine Lasten',
+    momA:'Momentengleichgewicht um A (↺ positiv) liefert B<sub>V</sub>', sumV:'Summe der Vertikalkräfte liefert A<sub>V</sub>', sumH:'Summe der Horizontalkräfte liefert A<sub>H</sub>',
+    clamp:'Gleichgewicht an der Einspannung A', mmax:'Größtes Moment: Schnitt bei x₀, Gleichgewicht am linken Teil', at:'bei', from:'von', to:'bis',
+    detBeam:'Festlager A + Loslager B: 3 Auflagerreaktionen, 3 Gleichgewichtsbedingungen → statisch bestimmt', detCant:'Einspannung A: 3 Auflagerreaktionen, 3 Gleichgewichtsbedingungen → statisch bestimmt',
+    vzero:'Querkraft wechselt dort das Vorzeichen', check:'Kontrolle', cont1:'Statisch unbestimmt: unbekannte Stützmomente', cw:'(↻)',
+    clap:'Dreimomentengleichung (Clapeyron) je Innenstütze', clapFix:'Einspannung', lt:'Belastungsglieder aus dem Momentenverlauf M₀ des Einfeldträgers',
+    solve:'Gleichungssystem lösen → Stützmomente', reac:'Auflagerkräfte: Einfeldträger-Anteil + Anteil aus den Stützmomenten', field:'Feldmomente: M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l',
+    hinge:'Mit Gelenken wird der Durchlaufträger über das Weggrößenverfahren (Steifigkeitsmatrix) gelöst; hier stehen Ergebnis und Gleichgewichtskontrolle.',
+    span:'Feld', ovh:'Kragarm', known:'bekannt aus dem Kragarm', frDet:'Bestimmtheit n = a − 3 − g', frLoad:'Resultierende aller Lasten', frReac:'Auflagerkräfte (Lösung über das Weggrößenverfahren)', frEq:'Gleichgewichtskontrolle am Gesamtsystem',
+    frMeth:'n > 0: Lösung mit der Steifigkeitsmatrix (Weggrößenverfahren). Die Gleichgewichtskontrolle zeigt, dass Lasten und Auflagerkräfte zusammenpassen.',
+    frMeth0:'n = 0: statisch bestimmt — die Auflagerkräfte folgen allein aus Gleichgewicht (und M = 0 im Gelenk).', head:'Kopfhalterung' },
+  en:{ title:'Solution — step by step', sys:'System and static determinacy', loads:'Loads and their resultants', none:'no loads',
+    momA:'Moment equilibrium about A (↺ positive) gives B<sub>V</sub>', sumV:'Sum of vertical forces gives A<sub>V</sub>', sumH:'Sum of horizontal forces gives A<sub>H</sub>',
+    clamp:'Equilibrium at the fixed support A', mmax:'Largest moment: cut at x₀, equilibrium of the left part', at:'at', from:'from', to:'to',
+    detBeam:'Pin A + roller B: 3 reactions, 3 equilibrium equations → statically determinate', detCant:'Fixed support A: 3 reactions, 3 equilibrium equations → statically determinate',
+    vzero:'shear force changes sign there', check:'Check', cont1:'Statically indeterminate: unknown support moments', cw:'(↻)',
+    clap:'Three-moment equation (Clapeyron) for each inner support', clapFix:'fixed end', lt:'Load terms from the simple-beam moment M₀',
+    solve:'Solve the system → support moments', reac:'Reactions: simple-beam part + part from the support moments', field:'Span moments: M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l',
+    hinge:'With hinges the beam is solved with the stiffness method; result and equilibrium check are shown.',
+    span:'Span', ovh:'Overhang', known:'known from the overhang', frDet:'Determinacy n = a − 3 − g', frLoad:'Resultant of all loads', frReac:'Reactions (stiffness method)', frEq:'Equilibrium check of the whole system',
+    frMeth:'n > 0: solved with the stiffness method. The equilibrium check shows that loads and reactions match.',
+    frMeth0:'n = 0: statically determinate — reactions follow from equilibrium alone (and M = 0 at the hinge).', head:'head support' } };
+const rwT = k => (RWT[calcLang]||RWT.en)[k] ?? RWT.en[k];
+const nf = (v, d=2) => { const x = Math.abs(v)<5*10**(-d-1) ? 0 : v; const s = x.toFixed(d); return calcLang==='en' ? s : s.replace('.', ','); };
+const nfp = (v, d=2) => v<0 ? `(${nf(v,d)})` : nf(v,d);
+const G3 = [[-Math.sqrt(3/5),5/9],[0,8/9],[Math.sqrt(3/5),5/9]];
+
+// Lasten eines Trägers (global, x ab linkem Ende): P [{x,Fx,Fy,Me,lab}], D [{a,b,qa,qb,lab}]
+function rwRes(d){ const R=(d.qa+d.qb)/2*(d.b-d.a), xr = Math.abs(d.qa+d.qb)<1e-12 ? (d.a+d.b)/2 : d.a+(d.b-d.a)*(d.qa+2*d.qb)/(3*(d.qa+d.qb)); return {R, xr}; }
+function rwPart(d, x){ const b=Math.min(d.b,x); if(b<=d.a+1e-12) return null; const qb=d.qa+(d.qb-d.qa)*(b-d.a)/(d.b-d.a); return rwRes({a:d.a,b,qa:d.qa,qb}); }
+// Schnittmoment von links (Zug unten +) für Lasten P, D und Anfangswerte (A_V bei x=0, M_A Einspannmoment ↺)
+function rwMleft(x, AV, MA, P, D, x0=0){
+  let M = -MA + AV*(x-x0);
+  P.forEach(p=>{ if(p.x < x-1e-9){ M -= p.Fy*(x-p.x); M += p.Me; } });
+  D.forEach(d=>{ const r=rwPart(d,x); if(r) M -= r.R*(x-r.xr); });
+  return M;
+}
+function rwLoadLines(P, D, L){
+  const S=[];
+  P.forEach(p=>{
+    if(p.Fy || p.Fx){ if(p.al){ S.push(`${p.lab}: F = ${nf(p.F)} kN · α = ${nf(p.al,0)}° (x = ${nf(p.x)} m)`, `${p.lab},V = F·cos α = ${nf(p.Fy)} kN · ${p.lab},H = F·sin α = ${nf(p.Fx)} kN`); }
+      else if(p.Fy) S.push(`${p.lab} = ${nf(p.Fy)} kN (x = ${nf(p.x)} m)`); else S.push(`${p.lab} = ${nf(p.Fx)} kN → (x = ${nf(p.x)} m)`); }
+    if(p.Me) S.push(`${p.mlab||'M'} = ${nf(p.Me)} kNm ${rwT('cw')} (x = ${nf(p.x)} m)`);
+  });
+  D.forEach(d=>{ const {R,xr}=rwRes(d), uni=Math.abs(d.qa-d.qb)<1e-9;
+    S.push(uni ? `${d.lab}: R = q·(b − a) = ${nf(d.qa)}·(${nf(d.b)} − ${nf(d.a)}) = <b>${nf(R)} kN</b>` : `${d.lab}: R = (q<sub>a</sub> + q<sub>b</sub>)/2·(b − a) = (${nf(d.qa)} + ${nf(d.qb)})/2·(${nf(d.b)} − ${nf(d.a)}) = <b>${nf(R)} kN</b>`,
+      uni ? `x<sub>R</sub> = (a + b)/2 = ${nf(xr)} m` : `x<sub>R</sub> = a + (b − a)·(q<sub>a</sub> + 2q<sub>b</sub>)/(3·(q<sub>a</sub> + q<sub>b</sub>)) = ${nf(xr)} m`); });
+  if(!S.length) S.push(rwT('none'));
+  return S;
+}
+function rwBeamData(sys, L){
+  const P=[], D=[];
+  (loads[sys].point||[]).forEach((pl,i)=>{ if(!pl.enabled) return; const al=pl.values.alpha||0, F=pl.values.F||0, x=Math.min(Math.max(+pl.values.a||0,0),L);
+    if(F) P.push({x, F, al, Fx:F*Math.sin(al*DEG), Fy:F*Math.cos(al*DEG), Me:0, lab:`F${i+1}`}); });
+  (loads[sys].horiz||[]).forEach((hl,i)=>{ if(!hl.enabled) return; const x=Math.min(Math.max(+hl.values.a||0,0),L);
+    if(hl.values.H||hl.values.Me) P.push({x, Fx:hl.values.H||0, Fy:0, Me:hl.values.Me||0, lab:`H${i+1}`, mlab:`M${i+1}`}); });
+  (loads[sys].dist||[]).forEach((dl,i)=>{ if(!dl.enabled) return; const d=cutRange([], '', dl.values.a, dl.values.b, dl.values.qa, dl.values.qb, L); if(d && (d.qa||d.qb)) D.push({...d, lab:`q${i+1}`}); });
+  return {P, D};
+}
+// größtes |M| entlang des Trägers: Raster + Lastpunkte + Querkraft-Nullstellen
+function rwMaxM(f, L, P, D){
+  const xs=new Set([0,L]); for(let i=0;i<=2000;i++) xs.add(L*i/2000);
+  P.forEach(p=>{ xs.add(p.x); xs.add(Math.min(L,p.x+1e-7)); }); D.forEach(d=>{ xs.add(d.a); xs.add(d.b); });
+  let best=0, xb=0; xs.forEach(x=>{ const v=f(x); if(Math.abs(v)>Math.abs(best)+1e-12){ best=v; xb=x; } });
+  for(let h=L/2000, k=0;k<40;k++, h/=2) [xb-h, xb+h].forEach(x=>{ if(x>=0 && x<=L){ const v=f(x); if(Math.abs(v)>Math.abs(best)){ best=v; xb=x; } } });
+  return {x:xb, M:best};
+}
+function rwMmaxSteps(L, AV, MA, P, D, sol){
+  const f = x=>rwMleft(x, AV, MA, P, D), mx=rwMaxM(f, L, P, D), x0=mx.x, terms=[], nums=[];
+  if(MA){ terms.push('− M<sub>A</sub>'); nums.push(`− ${nfp(MA)}`); }
+  terms.push('+ A<sub>V</sub>·x₀'); nums.push(`+ ${nfp(AV)}·${nf(x0)}`);
+  P.forEach(p=>{ if(p.x < x0-1e-9){ if(p.Fy){ terms.push(`− ${p.lab}·(x₀ − ${nf(p.x)})`); nums.push(`− ${nfp(p.Fy)}·${nf(x0-p.x)}`); } if(p.Me){ terms.push(`+ ${p.mlab||'M'}`); nums.push(`+ ${nfp(p.Me)}`); } } });
+  D.forEach(d=>{ const r=rwPart(d,x0); if(r){ terms.push(`− R'<sub>${d.lab}</sub>·(x₀ − x'<sub>R</sub>)`); nums.push(`− ${nfp(r.R)}·${nf(x0-r.xr)}`); } });
+  const clean = s => s.replace(/^\+ /,'').replace(/^− /,'−');
+  const S=[`x₀ = ${nf(x0)} m${x0>1e-6 && x0<L-1e-6 ? ` (${rwT('vzero')})` : ''}`,
+    `M(x₀) = ${clean(terms.join(' '))} = ${clean(nums.join(' '))} = <b>${nf(mx.M)} kNm</b>`];
+  D.forEach(d=>{ const r=rwPart(d,x0); if(r && d.b>x0+1e-9) S.splice(1,0,`${calcLang==='de'?'Anteil links vom Schnitt':'part left of the cut'}: R'<sub>${d.lab}</sub> = ${nf(r.R)} kN · x'<sub>R</sub> = ${nf(r.xr)} m`); });
+  return {S, mx};
+}
+function rwBeam(sys){
+  const isB = sys==='beam', L=parseFloat(document.getElementById(isB?'bL':'cL').value); if(!(L>0)) return null;
+  const {P, D} = rwBeamData(sys, L), C=[];
+  const sFy=P.reduce((s,p)=>s+p.Fy,0), sFx=P.reduce((s,p)=>s+p.Fx,0), sR=D.reduce((s,d)=>s+rwRes(d).R,0);
+  const mF=P.reduce((s,p)=>s+p.Fy*p.x+p.Me,0) + D.reduce((s,d)=>{ const r=rwRes(d); return s+r.R*r.xr; },0);
+  const S=[]; S.push('§'+rwT('sys'), isB ? rwT('detBeam') : rwT('detCant'), `L = ${nf(L)} m`);
+  S.push('§'+rwT('loads'), ...rwLoadLines(P, D, L));
+  const parts=[]; P.forEach(p=>{ if(p.Fy) parts.push([`${p.lab}${p.al?',V':''}·${nf(p.x)}`, `${nfp(p.Fy)}·${nf(p.x)}`]); if(p.Me) parts.push([p.mlab, nfp(p.Me)]); });
+  D.forEach(d=>{ const r=rwRes(d); parts.push([`R<sub>${d.lab}</sub>·${nf(r.xr)}`, `${nfp(r.R)}·${nf(r.xr)}`]); });
+  const symb = parts.map(p=>p[0]).join(' + ') || '0', numb = parts.map(p=>p[1]).join(' + ') || '0';
+  let AV, BV=0, MA=0, AH=-sFx;
+  if(isB){
+    BV = mF/L; AV = sFy + sR - BV;
+    S.push('§'+rwT('momA'), `ΣM<sub>A</sub> = 0: B<sub>V</sub>·L − (${symb}) = 0`, `B<sub>V</sub> = (${numb}) / ${nf(L)} = <b>${nf(BV)} kN</b>`);
+    S.push('§'+rwT('sumV'), `A<sub>V</sub> = ΣF<sub>V</sub> + ΣR − B<sub>V</sub> = ${nf(sFy)} + ${nf(sR)} − ${nfp(BV)} = <b>${nf(AV)} kN</b>`);
+  } else {
+    AV = sFy + sR; MA = mF;
+    S.push('§'+rwT('clamp'), `A<sub>V</sub> = ΣF<sub>V</sub> + ΣR = ${nf(sFy)} + ${nf(sR)} = <b>${nf(AV)} kN</b>`,
+      `M<sub>A</sub> = ${symb} = ${numb} = <b>${nf(MA)} kNm</b> (↺)`);
+  }
+  S.push('§'+rwT('sumH'), `A<sub>H</sub> = −ΣH = −(${nf(sFx)}) = <b>${nf(AH)} kN</b>`);
+  const mm = rwMmaxSteps(L, AV, MA, P, D);
+  S.push('§'+rwT('mmax'), ...mm.S);
+  return { S, AV, BV, AH, MA, Mmax:mm.mx.M, x0:mm.mx.x };
+}
+// ── Durchlaufträger: Dreimomentengleichung ──
+function rwContData(){
+  const lay=contLayout(), P=[], D=[];
+  lay.segs.forEach(sg=>{ const sp=contSeg(sg.key), tag = typeof sg.key==='string' ? (sg.key==='L'?rwT('ovh')+' '+(calcLang==='de'?'links':'left'):rwT('ovh')+' '+(calcLang==='de'?'rechts':'right')) : `${rwT('span')} ${sg.key+1}`;
+    (sp.point||[]).forEach((pl,i)=>{ if(!pl.enabled || !(pl.values.F)) return; P.push({x:sg.x0+Math.min(Math.max(+pl.values.a||0,0),sg.L), Fy:pl.values.F, Fx:0, Me:0, lab:`${tag}·F${i+1}`}); });
+    (sp.mom||[]).forEach((ml,i)=>{ if(!ml.enabled || !(ml.values.M)) return; P.push({x:sg.x0+Math.min(Math.max(+ml.values.a||0,0),sg.L), Fy:0, Fx:0, Me:ml.values.M, lab:`${tag}·M${i+1}`, mlab:`${tag}·M${i+1}`}); });
+    (sp.dist||[]).forEach((dl,i)=>{ if(!dl.enabled) return; const d=cutRange([], '', dl.values.a, dl.values.b, dl.values.qa, dl.values.qb, sg.L); if(d && (d.qa||d.qb)) D.push({a:sg.x0+d.a, b:sg.x0+d.b, qa:d.qa, qb:d.qb, lab:`${tag}·q${i+1}`}); }); });
+  return {lay, P, D};
+}
+function rwSub(P, D, x0, x1){   // Lasten im Bereich [x0, x1], lokal ab x0
+  return { P: P.filter(p=>p.x>x0+1e-9 && p.x<x1-1e-9).map(p=>({...p, x:p.x-x0})),
+           D: D.map(d=>({...d, a:Math.max(d.a,x0), b:Math.min(d.b,x1)})).filter(d=>d.b>d.a+1e-12).map(d=>{ const q=x=>d.qa+(d.qb-d.qa)*(x-d.a)/(d.b-d.a);
+             const a=Math.max(d.a,x0), b=Math.min(d.b,x1); return {...d, a:a-x0, b:b-x0, qa:q(a), qb:q(b)}; }) };
+}
+// Einfeldträger-Anteil: Auflagerkräfte A0, B0 und M0(x)
+function rwSS(L, P, D){
+  const mB = P.reduce((s,p)=>s+p.Fy*p.x+p.Me,0) + D.reduce((s,d)=>{ const r=rwRes(d); return s+r.R*r.xr; },0);
+  const tot = P.reduce((s,p)=>s+p.Fy,0) + D.reduce((s,d)=>s+rwRes(d).R,0), B0=mB/L, A0=tot-B0;
+  return { A0, B0, M0: x=>rwMleft(x, A0, 0, P, D) };
+}
+function rwInt(f, L, brk){   // ∫₀ᴸ f, stückweise exakt (Gauß, 3 Punkte)
+  const xs=[...new Set([0,L,...brk.filter(x=>x>0&&x<L)])].sort((a,b)=>a-b); let s=0;
+  for(let i=0;i<xs.length-1;i++){ const a=xs[i], b=xs[i+1], h=(b-a)/2, m=(a+b)/2; G3.forEach(([g,w])=>s+=w*h*f(m+g*h)); }
+  return s;
+}
+function rwSolve(A, b){ const n=b.length, M=A.map((r,i)=>[...r, b[i]]);
+  for(let p=0;p<n;p++){ let mr=p; for(let r=p+1;r<n;r++) if(Math.abs(M[r][p])>Math.abs(M[mr][p])) mr=r; [M[p],M[mr]]=[M[mr],M[p]];
+    if(Math.abs(M[p][p])<1e-14) return null; for(let r=0;r<n;r++){ if(r===p) continue; const f=M[r][p]/M[p][p]; for(let c=p;c<=n;c++) M[r][c]-=f*M[p][c]; } }
+  return M.map((r,i)=>r[n]/r[i]); }
+function rwCont(){
+  const {lay, P, D}=rwContData(), xs=lay.xs, n=xs.length-1, names='ABCDEFGH', S=[];
+  const segs = lay.segs.filter(s=>typeof s.key==='number'), Lk = segs.map(s=>s.L/s.k);
+  const fixL = lay.supports[0].type==='fixed', fixR = lay.supports[n].type==='fixed';
+  S.push('§'+rwT('sys'), `${n} ${calcLang==='de'?'Felder':'spans'}: ${segs.map((s,i)=>`l<sub>${i+1}</sub> = ${nf(s.L)} m${s.k!==1?` (I/I₀ = ${nf(s.k)})`:''}`).join(' · ')}`);
+  S.push('§'+rwT('loads'), ...rwLoadLines(P, D));
+  if(lay.hinges.length){ S.push('§'+rwT('cont1'), rwT('hinge')); return {S, ok:false}; }
+  // Kragarmmomente (bekannt)
+  const ovM = side => { if(side==='L' && lay.oL){ const sub=rwSub(P, D, 0, xs[0]); // linker Teil: Moment am Lager von links
+      return rwMleft(xs[0], 0, 0, P.filter(p=>p.x<xs[0]-1e-9), D.map(d=>({...d, b:Math.min(d.b,xs[0])})).filter(d=>d.b>d.a+1e-12)); }
+    if(side==='R' && lay.oR){ const xe=lay.Ltot, x=xs[n]; let M=0; P.forEach(p=>{ if(p.x>x+1e-9){ M -= p.Fy*(p.x-x); M -= p.Me; } });
+      D.forEach(d=>{ const a=Math.max(d.a,x); if(d.b>a+1e-12){ const q=t=>d.qa+(d.qb-d.qa)*(t-d.a)/(d.b-d.a); const r=rwRes({a,b:d.b,qa:q(a),qb:q(d.b)}); M -= r.R*(r.xr-x); } }); return M; }
+    return 0; };
+  const M = new Array(n+1).fill(null); if(!fixL) M[0]=ovM('L'); if(!fixR) M[n]=ovM('R');
+  const unk = []; for(let j=0;j<=n;j++) if(M[j]===null || (j>0 && j<n)) unk.push(j);
+  const SS = segs.map((s,i)=>{ const sub=rwSub(P, D, xs[i], xs[i+1]), ss=rwSS(s.L, sub.P, sub.D), brk=[...sub.P.map(p=>p.x), ...sub.D.flatMap(d=>[d.a,d.b])];
+    const Ir = rwInt(x=>ss.M0(x)*x, s.L, brk), Il = rwInt(x=>ss.M0(x)*(s.L-x), s.L, brk);
+    return {...ss, sub, R:6*Ir/(s.k*s.L), Lt:6*Il/(s.k*s.L), L:s.L}; });
+  S.push('§'+rwT('cont1'), `n = ${unk.length}: ${unk.map(j=>`M<sub>${names[j]}</sub>`).join(', ')}`);
+  if(!fixL && lay.oL) S.push(`M<sub>A</sub> = ${nf(M[0])} kNm (${rwT('known')})`);
+  if(!fixR && lay.oR) S.push(`M<sub>${names[n]}</sub> = ${nf(M[n])} kNm (${rwT('known')})`);
+  S.push('§'+rwT('lt'), ...SS.flatMap((s,i)=>[`${rwT('span')} ${i+1}: R<sub>${i+1}</sub> = 6/(k·l)·∫M₀·x dx = <b>${nf(s.R,3)}</b> · L<sub>${i+1}</sub> = 6/(k·l)·∫M₀·(l − x) dx = <b>${nf(s.Lt,3)}</b>`]),
+    calcLang==='de'?'(k = I/I₀; bei Gleichlast über das ganze Feld: R = L = q·l³/4)':'(k = I/I₀; full uniform load: R = L = q·l³/4)');
+  const A=[], b=[], eqs=[], col=j=>unk.indexOf(j);
+  const term=(j,c)=>{ if(Math.abs(c)<1e-12) return; return [j,c]; };
+  const addEq=(pairs, rhs, label)=>{ const row=new Array(unk.length).fill(0); let r=rhs; const txt=[];
+    pairs.forEach(([j,c])=>{ if(col(j)>=0){ row[col(j)]+=c; txt.push(`${nf(c,3)}·M<sub>${names[j]}</sub>`); } else { r -= c*M[j]; if(Math.abs(M[j])>1e-12) txt.push(`${nf(c,3)}·${nfp(M[j])}`); } });
+    A.push(row); b.push(r); eqs.push(`${label}: ${txt.join(' + ')} = ${nf(rhs,3)}`); };
+  if(fixL) addEq([[0,2*Lk[0]],[1,Lk[0]]], -SS[0].Lt, `${rwT('clapFix')} A`);
+  for(let j=1;j<n;j++) addEq([[j-1,Lk[j-1]],[j,2*(Lk[j-1]+Lk[j])],[j+1,Lk[j]]], -(SS[j-1].R+SS[j].Lt), names[j]);
+  if(fixR) addEq([[n-1,Lk[n-1]],[n,2*Lk[n-1]]], -SS[n-1].R, `${rwT('clapFix')} ${names[n]}`);
+  S.push('§'+rwT('clap'), 'M<sub>i−1</sub>·l\'<sub>i</sub> + 2·M<sub>i</sub>·(l\'<sub>i</sub> + l\'<sub>i+1</sub>) + M<sub>i+1</sub>·l\'<sub>i+1</sub> = −(R<sub>i</sub> + L<sub>i+1</sub>) mit l\' = l/k', ...eqs);
+  const x = rwSolve(A, b); if(!x) return {S, ok:false};
+  unk.forEach((j,k)=>M[j]=x[k]);
+  S.push('§'+rwT('solve'), M.map((m,j)=>`M<sub>${names[j]}</sub> = <b>${nf(m)} kNm</b>`).join(' · '));
+  // Auflagerkräfte
+  const V=new Array(n+1).fill(0), lines=[];
+  SS.forEach((s,i)=>{ const dl=(M[i+1]-M[i])/s.L, Al=s.A0+dl, Br=s.B0-dl; V[i]+=Al; V[i+1]+=Br;
+    lines.push(`${rwT('span')} ${i+1} ${calcLang==='de'?'links':'left'}: V = A<sub>0</sub> + (M<sub>r</sub> − M<sub>l</sub>)/l = ${nf(s.A0)} + (${nf(M[i+1])} − ${nfp(M[i])})/${nf(s.L)} = ${nf(Al)} kN`,
+      `${rwT('span')} ${i+1} ${calcLang==='de'?'rechts':'right'}: V = B<sub>0</sub> − (M<sub>r</sub> − M<sub>l</sub>)/l = ${nf(s.B0)} − ${nfp(dl)} = ${nf(Br)} kN`); });
+  if(lay.oL){ const t=P.filter(p=>p.x<xs[0]-1e-9).reduce((s,p)=>s+p.Fy,0)+D.reduce((s,d)=>{ const r=rwPart(d,xs[0]); return s+(r?r.R:0); },0); V[0]+=t; lines.push(`${rwT('ovh')} ${calcLang==='de'?'links':'left'}: ΣF = ${nf(t)} kN → A`); }
+  if(lay.oR){ const x0=xs[n]; const t=P.filter(p=>p.x>x0+1e-9).reduce((s,p)=>s+p.Fy,0)+D.reduce((s,d)=>{ const a=Math.max(d.a,x0); if(d.b<=a+1e-12) return s; const q=u=>d.qa+(d.qb-d.qa)*(u-d.a)/(d.b-d.a); return s+(q(a)+q(d.b))/2*(d.b-a); },0); V[n]+=t; lines.push(`${rwT('ovh')} ${calcLang==='de'?'rechts':'right'}: ΣF = ${nf(t)} kN → ${names[n]}`); }
+  P.forEach(p=>{ const j=xs.findIndex(x=>Math.abs(x-p.x)<1e-9); if(j>=0 && p.Fy){ V[j]+=p.Fy; lines.push(`${p.lab} = ${nf(p.Fy)} kN ${rwT('at')} ${names[j]}`); } });
+  S.push('§'+rwT('reac'), ...lines, V.map((v,j)=>`${names[j]} = <b>${nf(v)} kN</b>`).join(' · '));
+  // Feldmomente
+  const fm=SS.map((s,i)=>{ const f=t=>s.M0(t)+M[i]*(1-t/s.L)+M[i+1]*t/s.L; let best=-Infinity, xb=0; for(let k=0;k<=1000;k++){ const t=s.L*k/1000, v=f(t); if(v>best){ best=v; xb=t; } }
+    return `max M<sub>${i+1}</sub> = ${nf(best)} kNm (x = ${nf(xb)} m)`; });
+  S.push('§'+rwT('field'), ...fm);
+  return {S, ok:true, M, V};
+}
+// ── Rahmen: Bestimmtheit, Lastresultierende, Auflagerkräfte, Gleichgewichtskontrolle ──
+let RW_FRAME=null;
+function rwFrame(){
+  const F=RW_FRAME; if(!F) return null;
+  const {model, sol}=F, S=[], nA=model.nA, nB=model.nB;
+  const r = supportDOF(supportA)+supportDOF(supportB)+(supportHead==='none'?0:(supportHeadType==='pin'?2:1)), g=frameEffectiveHinges(), n=r-3-g;
+  S.push('§'+rwT('frDet'), `a = ${supportDOF(supportA)} + ${supportDOF(supportB)}${supportHead==='none'?'':' + '+(supportHeadType==='pin'?2:1)} = ${r} · g = ${g}`, `n = ${r} − 3 − ${g} = <b>${n}</b>`, n===0 ? rwT('frMeth0') : rwT('frMeth'));
+  // Lasten als statisch gleichwertige Knotenlasten (Summe und Moment exakt)
+  const Fg=model.F.slice(); model.elems.forEach(e=>{ if(!e.T||!e.feq) return; const d=e.dofs; for(let i=0;i<6;i++){ let s=0; for(let p=0;p<6;p++) s+=e.T[p][i]*e.feq[p]; Fg[d[i]]+=s; } });
+  const isX=new Set(model.nodes.map(n=>n.ux)), isY=new Set(model.nodes.map(n=>n.uy)), byDof={};
+  model.nodes.forEach(nd=>{ byDof[nd.ux]=nd; byDof[nd.uy]=nd; });
+  let Fx=0, Fy=0, Mo=0; Fg.forEach((v,i)=>{ if(isX.has(i)){ Fx+=v; Mo-= (byDof[i].y-nA.y)*v; } else if(isY.has(i)){ Fy+=v; Mo+=(byDof[i].x-nA.x)*v; } else Mo+=v; });
+  S.push('§'+rwT('frLoad'), `ΣH<sub>Last</sub> = ${nf(Fx)} kN (→ +)`, `ΣV<sub>Last</sub> = ${nf(-Fy)} kN (↓ +)`, `M<sub>Last,A</sub> = ${nf(Mo)} kNm (↺ +, um A)`);
+  const R=sol.R, rows=[['A',nA,supportA],['B',nB,supportB]]; if(supportHead!=='none') rows.push([rwT('head'), supportHead==='left'?model.n2:model.n3, supportHeadType==='pin'?'pin':'roller']);
+  let Rx=0, Ry=0, RM=0; const L=[];
+  rows.forEach(([lab,nd,t])=>{ const h=R[nd.ux]||0, v=R[nd.uy]||0, m=t==='fixed'?(R[nd.rot]||0):0; Rx+=h; Ry+=v; RM+= (nd.x-nA.x)*v - (nd.y-nA.y)*h + m;
+    L.push(`${lab}: H = ${nf(h)} kN · V = ${nf(v)} kN${t==='fixed'?` · M = ${nf(m)} kNm`:''}`); });
+  S.push('§'+rwT('frReac'), ...L);
+  S.push('§'+rwT('frEq'), `ΣH = ΣH<sub>Last</sub> + ΣH<sub>Lager</sub> = ${nf(Fx)} + ${nfp(Rx)} = <b>${nf(Fx+Rx,3)}</b> ✓`,
+    `ΣV = −ΣV<sub>Last</sub> + ΣV<sub>Lager</sub> = ${nf(Fy)} + ${nfp(Ry)} = <b>${nf(Fy+Ry,3)}</b> ✓`, `ΣM<sub>A</sub> = M<sub>Last,A</sub> + M<sub>Lager,A</sub> = ${nf(Mo)} + ${nfp(RM)} = <b>${nf(Mo+RM,3)}</b> ✓`);
+  return {S, n, sums:[Fx+Rx, Fy+Ry, Mo+RM]};
+}
+// Anzeige
+function rwCard(sys){
+  const host = {beam:'tab-beam', cant:'tab-cantilever', cont:'tab-cont', frame:'tab-frame'}[sys], main=document.getElementById(host); if(!main) return;
+  let card=document.getElementById('rw-'+sys);
+  if(!card){ card=document.createElement('div'); card.className='card rw-card'; card.id='rw-'+sys;
+    card.innerHTML=`<div class="card-title rw-title"><span></span><span class="rw-chev">▾</span></div><div class="steps rw-body"></div>`;
+    card.querySelector('.rw-title').onclick=()=>{ card.classList.toggle('closed'); try{ localStorage.setItem('statiq-rw-closed', card.classList.contains('closed')?'1':''); }catch(e){} };
+    try{ if(localStorage.getItem('statiq-rw-closed')==='1') card.classList.add('closed'); }catch(e){}
+    const out = main.querySelector('.col-out') || main; const save = out.querySelector('.save-btn');
+    save ? out.insertBefore(card, save) : out.appendChild(card); }
+  card.querySelector('.rw-title span').textContent = rwT('title');
+  let res=null; try{ res = sys==='beam'||sys==='cant' ? rwBeam(sys) : sys==='cont' ? rwCont() : rwFrame(); }catch(e){ console.error(e); }
+  card.style.display = res ? '' : 'none';
+  if(res) card.querySelector('.rw-body').innerHTML = rwSteps(res.S);
+  return res;
+}
+function rwSteps(S){
+  let out='', n=0, open=false;
+  for(const s of S){
+    if(s.startsWith('§')){ if(open) out+='</div></div>'; n++; out+=`<div class="st"><div class="st-h"><span class="st-n">${n}</span><span>${s.slice(1)}</span></div><div class="st-f">`; open=true; }
+    else { const e=eqLine(s); out += e || `<div>${s}</div>`; }
+  }
+  return out + (open?'</div></div>':'');
+}
+
+// ══════════════════════════════════════════════════
+// UX 2026 (v0.8.12): Auswahlmenü, zwei Spalten, kompakte Lasten, Live-Berechnung
+// ══════════════════════════════════════════════════
+const UXT = { en:{beams:'Beams', frames:'Frames', project:'Project', topics:'systems', live:'Results update automatically', frame:'Frame'},
+  de:{beams:'Balken', frames:'Rahmen', project:'Projekt', topics:'Systeme', live:'Ergebnisse werden laufend berechnet', frame:'Rahmen'},
+  fr:{beams:'Poutres', frames:'Portiques', project:'Projet', topics:'systèmes', live:'Résultats calculés en continu', frame:'Portique'},
+  es:{beams:'Vigas', frames:'Pórticos', project:'Proyecto', topics:'sistemas', live:'Resultados calculados al instante', frame:'Pórtico'} };
+const ux = k => (UXT[calcLang]||UXT.en)[k];
+const curTab = () => ['beam','cantilever','cont','frame','saved'].find(x=>!document.getElementById('tab-'+x)?.classList.contains('hidden'))||'beam';
+function framePresetNow(){ const b=document.querySelector('[id^="btn-preset-"].active'); return b ? b.id.replace('btn-preset-','') : null; }
+function pickGroups(){
+  const t = calcTranslations[calcLang]||calcTranslations.en;
+  return [
+    { key:'beams', name:ux('beams'), items:[['beam',t.tabs[0]],['cantilever',t.tabs[1]],['cont',t.tabs[2]]] },
+    { key:'frames', name:ux('frames'), items:[['frame:three',tr('presetThree')],['frame:two',tr('presetTwo')],['frame:fixed',tr('presetFixed')]] },
+    { key:'project', name:ux('project'), items:[['saved',tr('saved')]] } ];
+}
+function pickCurrent(){ const tab=curTab(); return tab==='frame' ? 'frame:'+(framePresetNow()||'') : tab; }
+function updatePick(){
+  if(!document.getElementById('pick-t')) return;
+  const cur=pickCurrent(), G=pickGroups(), g=G.find(g=>g.items.some(i=>i[0]===cur)) || (cur.startsWith('frame') ? G[1] : G[0]);
+  const it=g.items.find(i=>i[0]===cur);
+  document.getElementById('pick-g').textContent = g.name;
+  document.getElementById('pick-t').textContent = it ? it[1] : ux('frame');
+}
+function buildPick(){
+  const cur=pickCurrent(), m=document.getElementById('pick-menu');
+  m.innerHTML = pickGroups().map(g=>{ const open = g.items.some(i=>i[0]===cur) || (g.key==='frames' && cur.startsWith('frame')); const act=g.items.find(i=>i[0]===cur);
+    return `<div class="pick-group${open?' open':''}" data-g="${g.key}"><button class="pick-head" aria-expanded="${open}"><span class="pick-hn">${g.name}</span><span class="pick-hc">${open&&act?act[1]:g.items.length>1?g.items.length+' '+ux('topics'):''}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
+      g.items.map(([k,l])=>`<button class="pick-item${k===cur?' active':''}" role="menuitem" data-k="${k}">${l}</button>`).join('')}</div></div>`; }).join('');
+  m.querySelectorAll('.pick-head').forEach(h=>h.onclick=e=>{ e.stopPropagation(); const g=h.parentElement, o=!g.classList.contains('open');
+    m.querySelectorAll('.pick-group').forEach(x=>{ x.classList.toggle('open', x===g && o); x.querySelector('.pick-head').setAttribute('aria-expanded', x===g && o); }); });
+  m.querySelectorAll('.pick-item').forEach(el=>el.onclick=e=>{ e.stopPropagation(); const [tab,preset]=el.dataset.k.split(':');
+    showTab(tab); if(preset) applyFramePreset(preset); closePick(); updatePick(); liveCalc(true); });
+}
+function togglePick(e){ e && e.stopPropagation(); const p=document.getElementById('pick'), o=!p.classList.contains('open'); if(o) buildPick(); p.classList.toggle('open', o); }
+function closePick(){ document.getElementById('pick')?.classList.remove('open'); }
+document.addEventListener('click', e=>{ if(e.target.closest && !e.target.closest('#pick')) closePick(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePick(); });
+
+// Zwei Spalten: alles ab dem Berechnen-Knopf wandert in die rechte Spalte
+function buildCols(){
+  ['beam','cantilever','cont','frame'].forEach(t=>{
+    const main=document.getElementById('tab-'+t); if(!main || main.querySelector(':scope > .cols')) return;
+    const kids=[...main.children], i=kids.findIndex(k=>k.classList.contains('calc-btn')); if(i<0) return;
+    const cols=document.createElement('div'); cols.className='cols';
+    const cin=document.createElement('div'); cin.className='col-in'; const cout=document.createElement('div'); cout.className='col-out';
+    kids.slice(0,i).forEach(k=>cin.appendChild(k));
+    kids.slice(i).forEach(k=>{ if(k.classList.contains('footnote')) return; cout.appendChild(k); });
+    kids[i].classList.add('run-btn');
+    const sv=[...cout.children].find(k=>k.classList.contains('calc-btn') && !k.classList.contains('run-btn')); if(sv){ sv.classList.add('save-btn'); cout.appendChild(sv); }
+    const note=document.createElement('div'); note.className='live-note'; note.dataset.live='1'; cout.insertBefore(note, cout.firstChild);
+    cols.append(cin, cout); main.insertBefore(cols, main.firstChild);
+  });
+  document.querySelectorAll('[data-live]').forEach(n=>n.textContent=ux('live'));
+}
+
+// Kompakte Lasten: Kopfzeile mit Kurzfassung, Klick klappt die Eingaben auf
+const LOAD_OPEN = new Set();
+const fmtV = v => { const n=parseFloat(String(v).replace(',','.')); return isFinite(n) ? String(+n.toFixed(3)).replace('.', calcLang==='en'?'.':',') : v; };
+function loadSummary(item){
+  const F={}; item.querySelectorAll('.load-item-body .field').forEach(f=>{ const inp=f.querySelector('input,select'); if(!inp) return;
+    const lab=(f.querySelector('label')?.childNodes[0]?.textContent||'').trim(), unit=(f.querySelector('label .unit')?.textContent||'').trim();
+    F[lab]={ v: inp.tagName==='SELECT' ? inp.options[inp.selectedIndex]?.text : inp.value, u:unit }; });
+  const g=k=>F[k], txt=[];
+  const from=g(tr('from')), to=g(tr('to'));
+  if(g('q_a')){ const qa=fmtV(g('q_a').v), qb=fmtV(g('q_b')?.v); txt.push(qa===qb ? `q = ${qa} kN/m` : `q = ${qa} → ${qb} kN/m`); if(from&&to) txt.push(`${fmtV(from.v)} – ${fmtV(to.v)} m`); }
+  else {
+    if(g('F') && parseFloat(g('F').v)) txt.push(`F = ${fmtV(g('F').v)} kN`);
+    if(g('H') && parseFloat(g('H').v)) txt.push(`H = ${fmtV(g('H').v)} kN`);
+    const me=Object.keys(F).find(k=>/^M/.test(k)); if(me && parseFloat(F[me].v)) txt.push(`M = ${fmtV(F[me].v)} kNm`);
+    if(g('α') && parseFloat(g('α').v)) txt.push(`α = ${fmtV(g('α').v)}°`);
+    const pos = g('a') || g(tr('posLbl')); if(pos) txt.push(`@ ${fmtV(pos.v)} m`);
+  }
+  const mem=Object.keys(F).find(k=>k===tr('member')); if(mem) txt.push(F[mem].v);
+  return txt.join(' · ');
+}
+function compactLoads(root=document){
+  root.querySelectorAll('.load-list').forEach(list=>{
+    const items=[...list.querySelectorAll(':scope > .load-item')];
+    items.forEach((it,i)=>{
+      const key=list.id+'#'+i; it.dataset.k=key;
+      if(!it.classList.contains('cmp')){
+        const hasBody = it.querySelector('.load-item-body input, .load-item-body select');
+        if(!hasBody) return;
+        it.classList.add('cmp');
+        const lab=it.querySelector('.load-item-label');
+        lab.insertAdjacentHTML('beforeend', '<span class="load-sum"></span>');
+        lab.insertAdjacentHTML('afterbegin', '<span class="load-chev">▾</span>');
+        it.querySelector('.load-item-header').addEventListener('click', e=>{ if(e.target.closest('button')) return; const o=!it.classList.contains('open'); it.classList.toggle('open', o); o?LOAD_OPEN.add(it.dataset.k):LOAD_OPEN.delete(it.dataset.k); });
+      }
+      if(LOAD_OPEN.has(key)) it.classList.add('open');
+      const sum=it.querySelector('.load-sum'); if(sum) sum.textContent=loadSummary(it);
+    });
+    const n=items.length, prev=+(list.dataset.n||n); list.dataset.n=n;
+    if(n>prev && items[n-1]){ items[n-1].classList.add('open'); LOAD_OPEN.add(items[n-1].dataset.k); }   // neue Last offen zeigen
+    if(n<prev) [...LOAD_OPEN].filter(k=>k.startsWith(list.id+'#') && +k.split('#')[1]>=n).forEach(k=>LOAD_OPEN.delete(k));
+  });
+}
+let _cmpBusy=false;
+const UX_ON = typeof MutationObserver==='function' && typeof window.getComputedStyle==='function';
+const cmpObs = UX_ON && new MutationObserver(()=>{ if(_cmpBusy) return; _cmpBusy=true; try{ compactLoads(); } finally { cmpObs.takeRecords(); _cmpBusy=false; } });
+
+// Beschriftungen in den Systemskizzen entzerren (überlappende Texte nach oben schieben)
+function declutter(svg){
+  if(!svg || !svg.getBBox) return;
+  const T=[...svg.querySelectorAll('text')].filter(t=>t.textContent.trim().length>1);
+  let boxes; try{ boxes=T.map(t=>t.getBBox()); }catch(e){ return; }
+  if(!boxes.length || boxes.every(b=>!b.width)) return;
+  const dy=T.map(()=>0);
+  for(let pass=0; pass<30; pass++){ let moved=false;
+    for(let i=0;i<T.length;i++) for(let j=0;j<i;j++){
+      const a=boxes[j], b=boxes[i], ay=a.y+dy[j], by=b.y+dy[i];
+      if(a.x < b.x+b.width+2 && b.x < a.x+a.width+2 && ay < by+b.height && by < ay+a.height){
+        const up = by<=ay ? i : j, other = up===i ? j : i;   // den oberen weiter nach oben schieben
+        const ou = up===i?by:ay, oo = up===i?ay:by, hu = boxes[up].height;
+        dy[up] -= (ou+hu) - oo + 1; moved=true; }
+    }
+    if(!moved) break; }
+  T.forEach((t,i)=>{ if(dy[i]) t.setAttribute('y', (parseFloat(t.getAttribute('y'))+dy[i]).toFixed(1)); });
+  // senkrechte Lastpfeile (Einzellasten) dürfen keine Beschriftung durchstreichen: Text seitlich daneben setzen
+  const V=[...svg.querySelectorAll('line')].filter(l=>Math.abs(+l.getAttribute('x1') - +l.getAttribute('x2'))<0.5 && (l.getAttribute('marker-end')||'').includes('red'));
+  T.forEach((t,i)=>{ const b=boxes[i], y0=b.y+dy[i];
+    for(const l of V){ const x=+l.getAttribute('x1'), ya=Math.min(+l.getAttribute('y1'), +l.getAttribute('y2')), yb=Math.max(+l.getAttribute('y1'), +l.getAttribute('y2'));
+      if(x>b.x-1 && x<b.x+b.width+1 && y0<yb && y0+b.height>ya && t.getAttribute('fill')!==l.getAttribute('stroke')){
+        const shift = (x+3) - b.x; t.setAttribute('x', (parseFloat(t.getAttribute('x'))+shift).toFixed(1)); b.x+=shift; } } });
+  const minY=Math.min(...T.map((t,i)=>boxes[i].y+dy[i]));
+  const vb=(svg.getAttribute('viewBox')||'').split(/[ ,]+/).map(Number);
+  if(vb.length===4 && minY < vb[1]+2){ const d=vb[1]+2-minY; svg.setAttribute('viewBox', `${vb[0]} ${vb[1]-d} ${vb[2]} ${vb[3]+d}`); }
+}
+
+// Live-Berechnung: nach jeder Änderung (entprellt) das aktive System rechnen
+let _liveT=null, _liveBusy=false;
+const CALC_FN = { beam:'calculateBeam', cantilever:'calculateCantilever', cont:'calculateContinuous', frame:'calculateFrame' };
+function liveCalc(now){
+  if(_liveBusy) return; clearTimeout(_liveT);
+  const run=()=>{ const t=curTab(), f=CALC_FN[t]; if(!f) return; try{ window[f](); } catch(e){ console.error(e); } };
+  if(now===true) run(); else _liveT=setTimeout(run, 220);
+}
+[['drawBeam','beam-svg'],['drawCantilever','cant-svg'],['drawContinuous','cont-svg'],['drawFrame','frame-svg']].forEach(([fn,id])=>{
+  const orig=window[fn]; if(!UX_ON || typeof orig!=='function') return;
+  window[fn] = function(...a){ const r=orig.apply(this,a); declutter(document.getElementById(id)); if(!_liveBusy && Date.now()-_userAct<800) liveCalc(); return r; };
+});
+// Nur Änderungen durch den Nutzer lösen die Live-Rechnung aus (Klick, Eingabe) — Aufrufe aus Skripten nicht
+let _userAct=0; ['pointerdown','keydown','input','change'].forEach(ev=>document.addEventListener(ev, ()=>{ _userAct=Date.now(); }, true));
+// Direkter Aufruf einer Berechnung: ausstehende Live-Rechnung verwerfen
+Object.values(CALC_FN).forEach(fn=>{ const orig=window[fn]; if(!UX_ON || typeof orig!=='function') return;
+  window[fn] = function(...a){ clearTimeout(_liveT); const was=_liveBusy; _liveBusy=true; try{ const r=orig.apply(this,a);
+    const sys={calculateBeam:'beam', calculateCantilever:'cant', calculateContinuous:'cont', calculateFrame:'frame'}[fn];
+    const ok = !document.getElementById({beam:'beam-results',cant:'cant-results',cont:'cont-results',frame:'frame-results'}[sys])?.classList.contains('hidden');
+    const card=document.getElementById('rw-'+sys); if(ok) rwCard(sys); else if(card) card.style.display='none';
+    return r; } finally { _liveBusy=was; } }; });
+// Rahmen: Modell und Lösung der letzten Rahmenberechnung für den Rechenweg festhalten
+if(UX_ON){ let _fm=null; const oB=window.frameBuildModel, oS=window.frameSolveDSM;
+  window.frameBuildModel=function(...a){ const m=oB.apply(this,a); _fm=m; return m; };
+  window.frameSolveDSM=function(model){ const r=oS(model); if(model===_fm && model.nA) RW_FRAME = r.mechanism ? null : {model, sol:r}; return r; }; }
+if(UX_ON) (()=>{ const orig=window.showTab; window.showTab=function(n){ const r=orig(n); updatePick(); if(n!=='saved') liveCalc(true); return r; }; })();
+if(UX_ON) (()=>{ const orig=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=orig.apply(this,a); updatePick(); document.querySelectorAll('[data-live]').forEach(n=>n.textContent=ux('live')); compactLoads(); return r; }; })();
+if(UX_ON) (()=>{ const orig=window.updatePresetButtons; if(orig) window.updatePresetButtons=function(...a){ const r=orig.apply(this,a); updatePick(); return r; }; })();
+['input','change'].forEach(ev=>document.addEventListener(ev, e=>{
+  const m=e.target.closest && e.target.closest('.main'); if(!m || m.id==='tab-saved') return;
+  const it=e.target.closest('.load-item'); if(it){ const s=it.querySelector('.load-sum'); if(s) s.textContent=loadSummary(it); }
+  liveCalc(); }));
+
+if(UX_ON){ buildCols(); compactLoads();
+  ['tab-beam','tab-cantilever','tab-cont','tab-frame'].forEach(id=>cmpObs.observe(document.getElementById(id), {childList:true, subtree:true}));
+  updatePick(); liveCalc(true); }
 // Direkt in einen Bereich springen, z. B. calc.html#saved (Link von der Startseite)
 if(['#saved','#beam','#cantilever','#cont','#frame'].includes(location.hash)) showTab(location.hash.slice(1));
 </script>

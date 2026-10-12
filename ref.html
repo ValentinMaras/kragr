@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.4 -->
+<!-- Statiq·ref v0.3.5 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -159,6 +159,7 @@
     .shape-f { font-size:11.5px; font-family:'DM Mono', monospace; color:var(--text2); line-height:1.65; }
     .shape-f div { display:flex; justify-content:space-between; gap:8px; }
     .shape-f b { color:var(--text); font-weight:500; text-align:right; }
+    .skfig { min-width:0; }
     .sk-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; align-items:start; }
     .figure-cap { font-size: 11px; color: var(--text3); font-family:'DM Mono', monospace; margin-top: 4px; line-height: 1.6; }
 
@@ -300,7 +301,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.4';
+const REF_VERSION = '0.3.5';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -590,7 +591,12 @@ const FAECHER = {
         title: 'Geometrie',
         themen: {
           trigonometrie: { title: 'Trigonometrie' },
+          dreiecke:      { title: 'Dreiecke und Sätze' },
+          vierecke:      { title: 'Vierecke und Sechseck' },
+          kreis:         { title: 'Kreisbogen, Sehne, Stich' },
           flaechen:      { title: 'Flächen und Schwerpunkte' },
+          koerper:       { title: 'Körper: Volumen und Oberfläche' },
+          neigung:       { title: 'Steigung, Gefälle, Dachneigung' },
         }
       },
       analysis: {
@@ -718,7 +724,7 @@ function figIProfil(){
 // SKIZZEN im Lehrbuchstil (v0.3.4): Maßlinien, Winkelbögen, Schwerpunkt, Lager, Lasten, Verläufe
 // ══════════════════════════════════════════════════
 const SK = { ink:'#111', dim:'#6b7280', fill:'#eef0f3', fill2:'#dfe3e9', acc:'#2563eb', load:'#c2410c', m:'#0f6e56' };
-const sv = (w,h,lab,body) => `<svg viewBox="0 0 ${w} ${h}" style="max-width:${Math.round(w*1.7)}px;margin:0 auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${lab}">${SVG_DEFS}
+const sv = (w,h,lab,body) => `<svg viewBox="0 0 ${w} ${h}" style="max-width:${Math.round(w*1.45)}px;margin:0 auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${lab}">${SVG_DEFS}
   <defs><marker id="skd" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L8,4 L0,7 z" fill="${SK.dim}"/></marker>
   <marker id="ska" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="${SK.load}"/></marker>
   <marker id="skb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L10,5 L0,9 z" fill="${SK.ink}"/></marker>
@@ -776,7 +782,7 @@ function mLine(x1,x2,y,f,k=24,lab='',labT=0.5){
   if(lab){ const ft=f(labT); o+=it(x1+(x2-x1)*labT, y+ft*k+(ft>=0?15:-6), lab,'middle',SK.m,11.5); }
   return o;
 }
-const fig = (svg, cap='') => `<div class="figure sk">${svg}</div>${cap?`<div class="figure-cap">${cap}</div>`:''}`;
+const fig = (svg, cap='') => `<div class="skfig"><div class="figure sk">${svg}</div>${cap?`<div class="figure-cap">${cap}</div>`:''}</div>`;
 const shapeCard = (svg, title, rows) => `<div class="shape"><div class="shape-fig">${svg}</div><div class="shape-t">${title}</div><div class="shape-f">${rows.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('')}</div></div>`;
 const shapeGrid = items => `<div class="shape-grid">${items.join('')}</div>`;
 // ── Mathematik: Flächen ──
@@ -1095,6 +1101,123 @@ function skFachwerk(){
   o+=tl(x1,yo-18,'Druckgurt','start',SK.acc,9.5)+tl(x1,yu+26,'Zuggurt (Längsbewehrung)','start',SK.load,9.5)+tl(x2,yu+26,'— Bügel (Zug)   - - Druckstreben','end',SK.ink,9.5);
   return sv(360,156,'Fachwerkmodell',o);
 }
+
+// ── Mathematik: Dreiecke, Vierecke, Kreisteile, Körper, Neigung (v0.3.5) ──
+const SKF = { a:'#dbe7f9', b:'#fde8dc', c:'#e3f1ea' };
+const mid = (P,Q) => [(P[0]+Q[0])/2, (P[1]+Q[1])/2];
+// Beschriftung einer Strecke P→Q mittig, um off nach außen (links der Laufrichtung) versetzt
+function lab(P,Q,t,off=10,c=SK.ink,sz=13){ const dx=Q[0]-P[0], dy=Q[1]-P[1], L=Math.hypot(dx,dy)||1, m=mid(P,Q); return it(m[0]-dy/L*off, m[1]+dx/L*off+4, t, 'middle', c, sz); }
+// Quadrat über der Strecke P→Q (nach links der Laufrichtung)
+function sqOn(P,Q,fill){ const dx=Q[0]-P[0], dy=Q[1]-P[1]; return poly([P,Q,[Q[0]+dy,Q[1]-dx],[P[0]+dy,P[1]-dx]], fill, SK.ink, 1); }
+// Winkel zwischen den Richtungen P→A und P→B (Grad), Bogen und Text
+function angAt(P,A,B,r,t,c=SK.ink){ const a1=Math.atan2(-(A[1]-P[1]),A[0]-P[0])*180/Math.PI, a2=Math.atan2(-(B[1]-P[1]),B[0]-P[0])*180/Math.PI;
+  let s=a1, e=a2; let d=((e-s)%360+360)%360; if(d>180){ [s,e]=[a2,a1]; d=360-d; } return arcA(P[0],P[1],r,s,s+d,t,c); }
+
+function skPythagoras(){
+  const C=[110,190], A=[210,190], B=[110,125];          // rechter Winkel bei C, Katheten a = BC, b = CA
+  let o=sqOn(A,C,SKF.b)+sqOn(C,B,SKF.a)+sqOn(B,A,SKF.c)+poly([A,B,C],'#fff');
+  o+=rAng(C[0],C[1],[1,0],[0,-1],9);
+  o+=it(160,245,'b²','middle',SK.load,14)+it(78,162,'a²','middle',SK.acc,14)+it(200,110,'c²','middle',SK.m,14);
+  o+=lab(C,B,'a',-9)+lab(A,C,'b',-11)+lab(B,A,'c',-11);
+  return sv(300,300,'Satz des Pythagoras',o+tl(292,290,'a² + b² = c²','end',SK.ink,11));
+}
+function skHoehensatz(){
+  const A=[30,150], B=[290,150], p0=A[0], c=B[0]-A[0], q=c*0.28, H=[A[0]+q, 150], h=Math.sqrt(q*(c-q)), C=[H[0], 150-h];
+  let o=poly([A,B,C])+ln(C[0],C[1],H[0],H[1],SK.dim,1,'stroke-dasharray="4 3"')+rAng(H[0],H[1],[1,0],[0,-1],7)+rAng(C[0],C[1],[(A[0]-C[0])/Math.hypot(A[0]-C[0],A[1]-C[1]),(A[1]-C[1])/Math.hypot(A[0]-C[0],A[1]-C[1])],[(B[0]-C[0])/Math.hypot(B[0]-C[0],B[1]-C[1]),(B[1]-C[1])/Math.hypot(B[0]-C[0],B[1]-C[1])],9);
+  o+=it(C[0]+5,(C[1]+H[1])/2+4,'h','start')+lab(A,C,'b',10)+lab(C,B,'a',10);
+  o+=dimL(A[0],150,H[0],150,'q',16)+dimL(H[0],150,B[0],150,'p',16)+dimL(A[0],150,B[0],150,'c',32);
+  o+=it(A[0]-6,A[1]+4,'A','end',SK.ink,12)+it(B[0]+6,B[1]+4,'B','start',SK.ink,12)+it(C[0],C[1]-7,'C','middle',SK.ink,12);
+  return sv(320,210,'Höhensatz und Kathetensatz',o);
+}
+function skGleichseitig(){
+  const a=170, A=[50,160], B=[50+a,160], C=[50+a/2,160-a*Math.sqrt(3)/2], S=[(A[0]+B[0]+C[0])/3,(A[1]+B[1]+C[1])/3];
+  let o=poly([A,B,C])+ln(C[0],C[1],C[0],160,SK.dim,0.9,'stroke-dasharray="4 3"')+rAng(C[0],160,[1,0],[0,-1],7)+cen(S[0],S[1],'');
+  o+=angAt(A,B,C,24,'60°')+angAt(B,C,A,24,'60°')+angAt(C,A,B,20,'')+it(C[0],C[1]+38,'60°','middle',SK.ink,11);
+  o+=dimL(A[0],160,B[0],160,'a',18)+lab(B,C,'a',10)+lab(C,A,'a',10)+it(C[0]-6,140,'h','end');
+  return sv(270,200,'Gleichseitiges Dreieck',o);
+}
+function skGleichschenklig(){
+  const A=[50,160], B=[230,160], C=[140,40];
+  let o=poly([A,B,C])+ln(140,40,140,160,SK.dim,0.9,'stroke-dasharray="4 3"')+rAng(140,160,[1,0],[0,-1],7);
+  o+=angAt(A,B,C,26,'β')+angAt(B,C,A,26,'β')+angAt(C,A,B,22,'γ');
+  o+=lab(A,C,'a',-11)+lab(C,B,'a',-11)+dimL(A[0],160,B[0],160,'c',18)+it(146,110,sb('h','c'),'start');
+  // Schenkel-Markierungen (gleich lang)
+  const tick=(P,Q)=>{ const m=mid(P,Q), dx=Q[0]-P[0], dy=Q[1]-P[1], L=Math.hypot(dx,dy); return ln(m[0]-dy/L*5,m[1]+dx/L*5,m[0]+dy/L*5,m[1]-dx/L*5,SK.ink,1.2); };
+  o+=tick(A,C)+tick(C,B);
+  return sv(280,200,'Gleichschenkliges Dreieck',o);
+}
+function skStrahlensatz(){
+  const Z=[30,160], u1=[1,0], u2=[Math.cos(0.5),-Math.sin(0.5)], a=130, b=240;
+  const A=[Z[0]+u1[0]*a, Z[1]], A2=[Z[0]+u1[0]*b, Z[1]], B=[Z[0]+u2[0]*a*1.06, Z[1]+u2[1]*a*1.06], B2=[Z[0]+u2[0]*b*1.06, Z[1]+u2[1]*b*1.06];
+  let o=ln(Z[0],Z[1],Z[0]+300,Z[1],SK.ink,1.2)+ln(Z[0],Z[1],Z[0]+u2[0]*300,Z[1]+u2[1]*300,SK.ink,1.2);
+  o+=ln(A[0],A[1],B[0],B[1],SK.acc,1.8)+ln(A2[0],A2[1],B2[0],B2[1],SK.acc,1.8);
+  o+=[A,A2,B,B2,Z].map(P=>`<circle cx="${R1(P[0])}" cy="${R1(P[1])}" r="2.5" fill="${SK.ink}"/>`).join('');
+  o+=it(Z[0]-4,Z[1]+14,'Z','middle',SK.ink,12)+it(A[0],A[1]+16,'A','middle',SK.ink,12)+it(A2[0],A2[1]+16,"A'",'middle',SK.ink,12)+it(B[0]-8,B[1]-4,'B','end',SK.ink,12)+it(B2[0]-8,B2[1]-4,"B'",'end',SK.ink,12);
+  o+=tl(320,198,"AB ∥ A'B' → ZA : ZA' = ZB : ZB' = AB : A'B'",'end',SK.acc,10);
+  return sv(330,206,'Strahlensatz',o);
+}
+// ── Vierecke ──
+function skQuadrat(){ const a=100, x=60, y=30; return sv(220,170,'Quadrat', poly([[x,y],[x+a,y],[x+a,y+a],[x,y+a]])+ln(x,y+a,x+a,y,SK.acc,1,'stroke-dasharray="5 3"')+it(x+a/2+6,y+a/2-4,'d','start',SK.acc)
+  +rAng(x,y+a,[1,0],[0,-1],8)+dimL(x,y+a,x+a,y+a,'a',16)+dimL(x,y+a,x,y,'a',-16)); }
+function skParallelogramm(){ const A=[40,140], B=[200,140], D=[90,50], C=[250,50];
+  return sv(290,180,'Parallelogramm', poly([A,B,C,D])+ln(90,50,90,140,SK.dim,0.9,'stroke-dasharray="4 3"')+rAng(90,140,[1,0],[0,-1],7)+it(96,100,'h','start')
+  +angAt(A,B,D,24,'α')+dimL(A[0],140,B[0],140,'a',16)+lab(B,C,'b',-10)); }
+function skRaute(){ const M=[140,95], e=110, f=70, A=[M[0]-e,M[1]], B=[M[0],M[1]+f], C=[M[0]+e,M[1]], D=[M[0],M[1]-f];
+  return sv(290,190,'Raute', poly([A,B,C,D])+ln(A[0],A[1],C[0],C[1],SK.acc,1,'stroke-dasharray="5 3"')+ln(B[0],B[1],D[0],D[1],SK.load,1,'stroke-dasharray="5 3"')
+  +rAng(M[0],M[1],[1,0],[0,-1],7)+it(M[0]+50,M[1]-5,'e','middle',SK.acc)+it(M[0]+7,M[1]+40,'f','start',SK.load)+lab(D,A,'a',-10)+lab(C,D,'a',-10)); }
+function skSechseck(){ const M=[140,95], r=70, P=[...Array(6)].map((_,i)=>[M[0]+r*Math.cos(Math.PI/3*i), M[1]+r*Math.sin(Math.PI/3*i)]), s=r*Math.sqrt(3);
+  let o=poly(P)+ln(P[3][0],P[3][1],P[0][0],P[0][1],SK.acc,1,'stroke-dasharray="5 3"')+cen(M[0],M[1],'');
+  o+=ln(M[0]-r-14,M[1]-s/2,M[0]-r-14,M[1]+s/2,SK.dim,0.8,'marker-start="url(#skd)" marker-end="url(#skd)"')+it(M[0]-r-24,M[1]+4,'s','middle')+ln(P[4][0],P[4][1],M[0]-r-18,P[4][1],'#9ca3af',0.6)+ln(P[2][0],P[2][1],M[0]-r-18,P[2][1],'#9ca3af',0.6);
+  o+=it(M[0]+30,M[1]-5,'e','middle',SK.acc)+lab(P[5],P[0],'a',-10);
+  return sv(280,190,'Regelmäßiges Sechseck',o); }
+// ── Kreisteile ──
+function skKreisteile(){
+  const M=[150,150], r=110, ph=1.4, a1=Math.PI/2+ph/2, a2=Math.PI/2-ph/2, P=a=>[M[0]+r*Math.cos(a), M[1]-r*Math.sin(a)], A=P(a1), B=P(a2), K=P(Math.PI/2);
+  let o=`<path d="M ${R1(A[0])} ${R1(A[1])} A ${r} ${r} 0 0 1 ${R1(B[0])} ${R1(B[1])} Z" fill="${SKF.a}" stroke="none"/>`;
+  o+=`<path d="M ${R1(P(a1+0.35)[0])} ${R1(P(a1+0.35)[1])} A ${r} ${r} 0 0 1 ${R1(P(a2-0.35)[0])} ${R1(P(a2-0.35)[1])}" fill="none" stroke="${SK.dim}" stroke-width="1" stroke-dasharray="3 3"/>`;
+  o+=`<path d="M ${R1(A[0])} ${R1(A[1])} A ${r} ${r} 0 0 1 ${R1(B[0])} ${R1(B[1])}" fill="none" stroke="${SK.load}" stroke-width="2.2"/>`;
+  o+=ln(A[0],A[1],B[0],B[1],SK.acc,1.8)+ln(M[0],M[1],A[0],A[1],SK.ink,1)+ln(M[0],M[1],B[0],B[1],SK.ink,1)+`<circle cx="${M[0]}" cy="${M[1]}" r="2.5" fill="${SK.ink}"/>`;
+  const S=[M[0], A[1]];
+  o+=ln(K[0],K[1],S[0],S[1],SK.m,1.6)+it(K[0]+6,(K[1]+S[1])/2+4,'h','start',SK.m)+arcA(M[0],M[1],26,90-ph*90/Math.PI,90+ph*90/Math.PI,'φ');
+  o+=it(K[0],K[1]-8,'b','middle',SK.load)+it(M[0]-14,S[1]+16,'s','middle',SK.acc)+lab(M,A,'r',10);
+  return sv(300,170,'Kreisbogen, Sehne, Stich',o);
+}
+// ── Körper (Schrägbild) ──
+const obl = (x,y,z) => [x + 0.5*z*Math.cos(Math.PI/4), y + 0.5*z*Math.sin(Math.PI/4)];
+function skQuader(){ const a=120, b=80, c=60, x0=30, y0=170;
+  const P=(x,y,z)=>{ const q=obl(x,y,z); return [x0+q[0], y0-q[1]]; };
+  const v=[P(0,0,0),P(a,0,0),P(a,c,0),P(0,c,0),P(0,0,b),P(a,0,b),P(a,c,b),P(0,c,b)];
+  let o=poly([v[0],v[1],v[2],v[3]],SK.fill)+poly([v[1],v[5],v[6],v[2]],SK.fill2)+poly([v[3],v[2],v[6],v[7]],'#f5f6f8');
+  o+=pl([v[0],v[4],v[5]],SK.dim,0.9,'stroke-dasharray="4 3"')+ln(v[4][0],v[4][1],v[7][0],v[7][1],SK.dim,0.9,'stroke-dasharray="4 3"');
+  o+=ln(v[0][0],v[0][1],v[6][0],v[6][1],SK.acc,1.2,'stroke-dasharray="5 3"')+it((v[0][0]+v[6][0])/2+4,(v[0][1]+v[6][1])/2+12,'d','start',SK.acc);
+  o+=dimL(v[0][0],v[0][1],v[1][0],v[1][1],'a',14)+lab(v[1],v[5],'b',12)+dimL(v[0][0],v[0][1],v[3][0],v[3][1],'c',-0.01,-12);
+  return sv(260,200,'Quader',o); }
+function skZylinder(){ const cx=110, r=55, ry=16, yT=40, yB=150;
+  let o=`<path d="M ${cx-r} ${yT} V ${yB} A ${r} ${ry} 0 0 0 ${cx+r} ${yB} V ${yT}" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`;
+  o+=`<ellipse cx="${cx}" cy="${yT}" rx="${r}" ry="${ry}" fill="#f5f6f8" stroke="${SK.ink}" stroke-width="1.4"/>`+`<path d="M ${cx-r} ${yB} A ${r} ${ry} 0 0 1 ${cx+r} ${yB}" fill="none" stroke="${SK.dim}" stroke-width="0.9" stroke-dasharray="4 3"/>`;
+  o+=ln(cx,yB,cx+r,yB,SK.ink,1)+it(cx+r/2,yB-5,'r','middle')+`<circle cx="${cx}" cy="${yB}" r="2" fill="${SK.ink}"/>`+dimL(cx+r+16,yB,cx+r+16,yT,'h',0.01,12);
+  return sv(220,180,'Zylinder',o); }
+function skKegel(){ const cx=110, r=60, ry=16, yT=30, yB=150;
+  let o=`<path d="M ${cx-r} ${yB} L ${cx} ${yT} L ${cx+r} ${yB} A ${r} ${ry} 0 0 1 ${cx-r} ${yB} Z" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`;
+  o+=`<path d="M ${cx-r} ${yB} A ${r} ${ry} 0 0 1 ${cx+r} ${yB}" fill="none" stroke="${SK.dim}" stroke-width="0.9" stroke-dasharray="4 3"/>`+ln(cx,yT,cx,yB,SK.dim,0.9,'stroke-dasharray="4 3"')+rAng(cx,yB,[1,0],[0,-1],7);
+  o+=ln(cx,yB,cx+r,yB,SK.ink,1)+it(cx+r/2,yB-5,'r','middle')+it(cx-5,95,'h','end')+lab([cx,yT],[cx+r,yB],'s',-10);
+  return sv(220,180,'Kegel',o); }
+function skPyramide(){ const a=110, x0=40, y0=170, hP=115, P=(x,y,z)=>{ const q=obl(x,y,z); return [x0+q[0], y0-q[1]]; };
+  const A=P(0,0,0), B=P(a,0,0), C=P(a,0,a), D=P(0,0,a), S=P(a/2,hP,a/2), F=P(a/2,0,a/2), Mb=P(a/2,0,0);
+  let o=poly([A,B,S],SK.fill)+poly([B,C,S],SK.fill2)+ln(A[0],A[1],D[0],D[1],SK.dim,0.9,'stroke-dasharray="4 3"')+ln(D[0],D[1],C[0],C[1],SK.dim,0.9,'stroke-dasharray="4 3"')+ln(D[0],D[1],S[0],S[1],SK.dim,0.9,'stroke-dasharray="4 3"');
+  o+=ln(S[0],S[1],F[0],F[1],SK.dim,0.9,'stroke-dasharray="4 3"')+it(F[0]+5,(S[1]+F[1])/2+8,'h','start')+ln(S[0],S[1],Mb[0],Mb[1],SK.acc,1.1)+it((S[0]+Mb[0])/2-6,(S[1]+Mb[1])/2+4,sb('h','s'),'end',SK.acc);
+  o+=dimL(A[0],A[1],B[0],B[1],'a',14)+lab(B,C,'a',12);
+  return sv(260,215,'Quadratische Pyramide',o); }
+function skKugel(){ const cx=110, cy=95, r=70;
+  let o=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.4"/>`+`<path d="M ${cx-r} ${cy} A ${r} 18 0 0 0 ${cx+r} ${cy}" fill="none" stroke="${SK.ink}" stroke-width="1"/>`+`<path d="M ${cx-r} ${cy} A ${r} 18 0 0 1 ${cx+r} ${cy}" fill="none" stroke="${SK.dim}" stroke-width="0.9" stroke-dasharray="4 3"/>`;
+  o+=ln(cx,cy,cx+r*0.75,cy-r*0.66,SK.ink,1)+`<circle cx="${cx}" cy="${cy}" r="2" fill="${SK.ink}"/>`+it(cx+r*0.42,cy-r*0.4,'r','middle');
+  return sv(220,180,'Kugel',o); }
+// ── Steigung / Neigung ──
+function skNeigung(){ const A=[40,150], B=[280,150], C=[280,70];
+  let o=poly([A,B,C],SKF.a)+rAng(B[0],B[1],[-1,0],[0,-1],9)+angAt(A,B,C,44,'α');
+  o+=dimL(A[0],B[1],B[0],B[1],'l',16)+dimL(B[0],B[1],C[0],C[1],'h',-14,12)+lab(A,C,'s',-11);
+  o+=tl(44,40,'tan α = h / l','start',SK.ink,11)+tl(44,56,'p = h / l · 100 %','start',SK.ink,11);
+  return sv(320,190,'Steigung und Neigungswinkel',o); }
 
 // ══════════════════════════════════════════════════
 // RECHNER (neue Fächer)
@@ -1650,6 +1773,15 @@ function updateKnick(){
 }
 
 // Rechteckquerschnitt
+function updateNeigung(fromAngle){
+  const out=document.getElementById('ng2-out'); if(!out) return;
+  let p=num('ng2-p'), a=num('ng2-a');
+  if(fromAngle && a>=0 && a<90){ p=100*Math.tan(a*Math.PI/180); document.getElementById('ng2-p').value=+p.toFixed(2); }
+  else if(p>=0){ a=Math.atan(p/100)*180/Math.PI; document.getElementById('ng2-a').value=''; }
+  else { out.innerHTML='Bitte p ≥ 0 eingeben.'; return; }
+  if(!fromAngle) a=Math.atan(p/100)*180/Math.PI;
+  out.innerHTML = `p = <b>${deNum(p,2)} %</b> &nbsp;·&nbsp; α = <b>${deNum(a,2)}°</b> &nbsp;·&nbsp; auf 1 m waagerecht: h = ${deNum(p*10,1)} mm &nbsp;·&nbsp; s/l = ${deNum(1/Math.cos(a*Math.PI/180),4)}`;
+}
 function updateRechteck(){
   const out=document.getElementById('rq-out'); if(!out) return;
   const b=num('rq-b'), h=num('rq-h');
@@ -3224,6 +3356,113 @@ Object.assign(CONTENT, {
     </div>
   `,
 
+  'mathematik/geometrie/dreiecke': () => `
+    <div class="card">
+      <div class="card-title">Rechtwinkliges Dreieck — Pythagoras, Höhen- und Kathetensatz</div>
+      <div class="sk-row">${fig(skPythagoras(),'Die Flächen der Quadrate über den Katheten ergeben zusammen das Quadrat über der Hypotenuse.')}${fig(skHoehensatz(),'Die Höhe h teilt die Hypotenuse c in die Abschnitte p (unter a) und q (unter b).')}</div>
+      <div class="formula-box">
+        Pythagoras:&nbsp; a² + b² = c²&nbsp;&nbsp;&nbsp; c = √(a² + b²)<br>
+        Höhensatz:&nbsp; h² = p · q<br>
+        Kathetensatz:&nbsp; a² = c · p&nbsp;&nbsp;&nbsp; b² = c · q<br>
+        Fläche:&nbsp; A = a · b / 2 = c · h / 2
+      </div>
+      <div class="info-banner">Baustelle: Ein rechter Winkel lässt sich mit dem Maßband abstecken — 3 m, 4 m und 5 m bilden ein rechtwinkliges Dreieck (3² + 4² = 9 + 16 = 25 = 5²).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Besondere Dreiecke</div>
+      ${shapeGrid([
+        shapeCard(skGleichseitig(),'Gleichseitiges Dreieck',[['h','a·√3/2 ≈ 0,866·a'],['A','a²·√3/4 ≈ 0,433·a²'],['Winkel','je 60°'],['S','h/3 über der Seite']]),
+        shapeCard(skGleichschenklig(),'Gleichschenkliges Dreieck',[['h<sub>c</sub>','√(a² − c²/4)'],['A','c · h<sub>c</sub> / 2'],['β','(180° − γ)/2'],['c','2 · a · sin(γ/2)']]),
+      ])}
+      <div class="legend">In jedem Dreieck gilt die Winkelsumme α + β + γ = 180°. Gleich lange Seiten sind mit einem Strich markiert.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Strahlensatz</div>
+      ${fig(skStrahlensatz(),'Zwei Strahlen von Z werden von zwei parallelen Geraden geschnitten.')}
+      <div class="formula-box">
+        ZA : ZA′ = ZB : ZB′&nbsp;&nbsp;&nbsp; (1. Strahlensatz)<br>
+        AB : A′B′ = ZA : ZA′&nbsp;&nbsp;&nbsp; (2. Strahlensatz)
+      </div>
+      <div class="info-banner">Anwendung: Höhe eines Pultdachs an einer Zwischenstelle. Firsthöhe 3,0 m über 6,0 m Länge → in 2,0 m Abstand vom Tiefpunkt: 3,0 · 2,0/6,0 = <b>1,0 m</b>.</div>
+    </div>
+  `,
+
+  'mathematik/geometrie/vierecke': () => `
+    <div class="card">
+      <div class="card-title">Vierecke und regelmäßiges Sechseck</div>
+      ${shapeGrid([
+        shapeCard(skQuadrat(),'Quadrat',[['A','a²'],['d','a·√2 ≈ 1,414·a'],['U','4·a']]),
+        shapeCard(skParallelogramm(),'Parallelogramm',[['A','a · h'],['h','b · sin α'],['U','2·(a + b)']]),
+        shapeCard(skRaute(),'Raute',[['A','e · f / 2'],['a','√(e² + f²) / 2'],['Diagonalen','senkrecht, halbieren sich']]),
+        shapeCard(skSechseck(),'Regelmäßiges Sechseck',[['A','3·√3/2 · a² ≈ 2,598·a²'],['s','a·√3 (Schlüsselweite)'],['e','2·a (Eckmaß)']]),
+      ])}
+      <div class="info-banner">Schlüsselweite: Eine Mutter M16 hat s = 24 mm. Das Eckmaß ist e = 2·s/√3 = 2·24/1,732 ≈ <b>27,7 mm</b> — so viel Platz braucht der Schlüssel mindestens.</div>
+      <a class="applink" href="#/mathematik/geometrie/flaechen">→ Weitere Flächen mit Schwerpunkt und Trägheitsmoment</a>
+    </div>
+  `,
+
+  'mathematik/geometrie/kreis': () => `
+    <div class="card">
+      <div class="card-title">Kreisbogen, Sehne und Stichhöhe</div>
+      ${fig(skKreisteile(),'Zentriwinkel φ, Radius r, Bogen b (orange), Sehne s (blau), Stichhöhe h (grün), Kreisabschnitt hellblau.')}
+      <div class="formula-box">
+        Bogenlänge:&nbsp; b = r · φ&nbsp;&nbsp; (φ im Bogenmaß)<br>
+        Sehne:&nbsp; s = 2 · r · sin(φ/2)<br>
+        Stichhöhe:&nbsp; h = r · (1 − cos(φ/2))<br>
+        Radius aus Sehne und Stich:&nbsp; r = s²/(8·h) + h/2<br>
+        Kreisausschnitt:&nbsp; A = r² · φ / 2&nbsp;&nbsp;&nbsp; Kreisabschnitt:&nbsp; A = r²/2 · (φ − sin φ)
+      </div>
+      <div class="info-banner">Beispiel: Ein Bogen spannt s = 10 m bei h = 2 m Stich.<br>
+        r = 10²/(8·2) + 2/2 = 6,25 + 1 = <b>7,25 m</b> · φ = 2·arcsin(5/7,25) = 87,2° = 1,522 rad · b = 7,25 · 1,522 = <b>11,03 m</b></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Bogenmaß</div>
+      <div class="formula-box">φ<sub>rad</sub> = φ° · π / 180&nbsp;&nbsp;&nbsp; φ° = φ<sub>rad</sub> · 180 / π</div>
+      ${textTable(['Grad','30°','45°','60°','90°','180°','360°'], [['Bogenmaß','π/6 ≈ 0,524','π/4 ≈ 0,785','π/3 ≈ 1,047','π/2 ≈ 1,571','π ≈ 3,142','2π ≈ 6,283']])}
+    </div>
+  `,
+
+  'mathematik/geometrie/koerper': () => `
+    <div class="card">
+      <div class="card-title">Volumen und Oberfläche</div>
+      ${shapeGrid([
+        shapeCard(skQuader(),'Quader',[['V','a · b · c'],['O','2·(ab + ac + bc)'],['d','√(a² + b² + c²)']]),
+        shapeCard(skZylinder(),'Zylinder',[['V','π · r² · h'],['M','2 · π · r · h'],['O','2·π·r·(r + h)']]),
+        shapeCard(skKegel(),'Kegel',[['V','π · r² · h / 3'],['s','√(r² + h²)'],['M','π · r · s']]),
+        shapeCard(skPyramide(),'Quadratische Pyramide',[['V','a² · h / 3'],['h<sub>s</sub>','√(h² + a²/4)'],['M','2 · a · h<sub>s</sub>']]),
+        shapeCard(skKugel(),'Kugel',[['V','4/3 · π · r³'],['O','4 · π · r²'],['Halbkugel','V = 2/3 · π · r³']]),
+      ])}
+      <div class="legend">V — Volumen, O — Oberfläche, M — Mantelfläche (ohne Grund- und Deckfläche), s — Mantellinie, h<sub>s</sub> — Höhe der Seitenfläche.</div>
+      <div class="info-banner">Beispiel Bohrpfahl: d = 0,90 m, Länge 12 m → V = π · 0,45² · 12 = <b>7,63 m³</b> Beton (zuzüglich Mehrverbrauch).</div>
+    </div>
+  `,
+
+  'mathematik/geometrie/neigung': () => `
+    <div class="card">
+      <div class="card-title">Steigung in Prozent und Neigungswinkel</div>
+      ${fig(skNeigung(),'Waagerechte Länge l, Höhenunterschied h, schräge Länge s.')}
+      <div class="formula-box">
+        tan α = h / l&nbsp;&nbsp;&nbsp; p = h / l · 100 %&nbsp;&nbsp;&nbsp; α = arctan(p / 100)<br>
+        schräge Länge:&nbsp; s = √(l² + h²) = l / cos α
+        <div class="comment">Prozent und Grad sind nicht proportional: 100 % entsprechen 45°, nicht 90°.</div>
+      </div>
+      <div class="calc-grid">
+        ${field('Steigung p [%]', inp('ng2-p', 2, 'updateNeigung()'))}
+        ${field('oder Winkel α [°]', inp('ng2-a', '', 'updateNeigung(true)'))}
+      </div>
+      <div class="calc-out" id="ng2-out"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Umrechnungstabelle</div>
+      <div class="sk-row">
+      ${textTable(['Steigung','Winkel'], [['1 %','0,57°'],['2 %','1,15°'],['2,5 %','1,43°'],['5 %','2,86°'],['10 %','5,71°'],['15 %','8,53°'],['20 %','11,31°'],['25 %','14,04°'],['50 %','26,57°'],['100 %','45,00°']])}
+      ${textTable(['Dachneigung','Steigung'], [['5°','8,7 %'],['10°','17,6 %'],['15°','26,8 %'],['22°','40,4 %'],['30°','57,7 %'],['35°','70,0 %'],['38°','78,1 %'],['45°','100 %'],['60°','173,2 %']])}
+      </div>
+      <div class="info-banner">Typische Werte: Entwässerungsrinne 0,5 – 1 % · Flachdach mindestens 2 % · barrierefreie Rampe höchstens 6 % · Satteldach meist 30° – 45°.</div>
+      <a class="applink" href="#/lastannahmen/lasten/schnee">→ Dachneigung und Schneelast</a>
+    </div>
+  `,
+
   'mathematik/geometrie/flaechen': () => `
     <div class="card">
       <div class="card-title">Flächen und Schwerpunkte</div>
@@ -3907,6 +4146,7 @@ Object.assign(CONTENT, {
 
 Object.assign(AFTER, {
   'baustatik/querschnitte/querschnittswerte': () => updateRechteck(),
+  'mathematik/geometrie/neigung': () => updateNeigung(),
   'lastannahmen/lasten/schnee': () => updateSchnee(),
   'lastannahmen/lasten/wind': () => updateWind(),
   'grundbau/erddruck/beiwerte': () => updateErd(),

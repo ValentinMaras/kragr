@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.14 -->
+<!-- Statiq·size v0.5.15 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -256,7 +256,12 @@
     .det-bar { display:flex; justify-content:space-between; align-items:center; margin:6px 2px 10px; }
     .det-bar span { font-size:15px; font-weight:800; }
     .det-bar button { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); }
-  </style>
+      .bp-lay { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 4px 6px; margin-bottom: 8px; }
+    .bp-lay select { grid-column: 1 / -1; }
+    .bp-lay select, .bp-lay input { width: 100%; min-width: 0; padding: 6px 6px; font-size: 13px; border: 1px solid var(--border-dark, #d1d5db); border-radius: 6px; background: var(--surface, #fff); color: inherit; }
+    .bp-head { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
+    .bp-head span:first-child { display: none; }
+</style>
 </head>
 <body>
 <header class="app-header">
@@ -306,6 +311,7 @@
       <button data-mat="mauer" onclick="setMat('mauer')" data-i18n="matMauer">Mauerwerk</button>
       <button data-mat="grund" onclick="setMat('grund')" data-i18n="matGrund">Grundbau</button>
       <button data-mat="wasser" onclick="setMat('wasser')" data-i18n="matWasser">Wasserbau</button>
+      <button data-mat="bauph" onclick="setMat('bauph')" data-i18n="matBauph">Bauphysik</button>
     </div>
     <div id="mat-beton">
     <div class="card">
@@ -1009,6 +1015,62 @@
     </div>
     </div>
     </div>
+    <div id="mat-bauph" style="display:none">
+    <div class="seg seg-sub" id="seg-bp">
+      <button data-bp="uwert" class="active" onclick="setBpMode('uwert')" data-i18n="bpUwert">U-Wert</button>
+      <button data-bp="glaser" onclick="setBpMode('glaser')" data-i18n="bpGlaser">Tauwasser (Glaser)</button>
+      <button data-bp="schall" onclick="setBpMode('schall')" data-i18n="bpSchall">Schallschutz</button>
+    </div>
+    <div class="card">
+      <div class="card-title"><span data-i18n="bpLayT">Bauteilaufbau (innen → außen)</span></div>
+      <div class="grid2"><div class="field full"><label><span data-i18n="bpName">Bezeichnung</span></label><input id="bp-name" value="Außenwand KS mit WDVS" oninput="run()"></div></div>
+      <div class="bp-lay bp-head"><span><span data-i18n="bpMat">Baustoff</span></span><span>d [cm]</span><span>λ [W/(mK)]</span><span>μ</span><span>ρ [kg/m³]</span></div>
+      <div class="bp-lay"><select id="bl-m1" onchange="bpPick(1)" aria-label="Baustoff Schicht 1"><option value="-">—</option><option value="0" selected>Gipsputz</option><option value="1">Kalkzementputz</option><option value="2">Zementestrich</option><option value="3">Stahlbeton</option><option value="4">Normalbeton (unbewehrt)</option><option value="5">Kalksandstein RDK 1,8</option><option value="6">Kalksandstein RDK 2,0</option><option value="7">Vollziegel RDK 1,8</option><option value="8">Hochlochziegel RDK 0,8</option><option value="9">Planziegel wärmedämmend (λ 0,09)</option><option value="10">Porenbeton RDK 0,35</option><option value="11">Leichtbeton-Vollblock RDK 0,8</option><option value="12">Mineralwolle WLS 035</option><option value="13">Mineralwolle WLS 032</option><option value="14">EPS WLS 035</option><option value="15">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="18">Holzfaserdämmung WLS 040</option><option value="19">Zellulose WLS 040</option><option value="20">Nadelholz</option><option value="21">OSB-Platte</option><option value="22">Gipskartonplatte</option><option value="23">Holzwolle-Leichtbauplatte</option><option value="24">PE-Folie 0,2 mm (s_d = 100 m)</option><option value="25">Dampfbremse 0,2 mm (s_d = 2 m)</option><option value="26">Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)</option><option value="27">Dachziegel</option></select><input type="number" step="any" id="bl-d1" value="1.5" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l1" value="0.51" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u1" value="10" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r1" value="1200" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
+      <div class="bp-lay"><select id="bl-m2" onchange="bpPick(2)" aria-label="Baustoff Schicht 2"><option value="-">—</option><option value="0">Gipsputz</option><option value="1">Kalkzementputz</option><option value="2">Zementestrich</option><option value="3">Stahlbeton</option><option value="4">Normalbeton (unbewehrt)</option><option value="5" selected>Kalksandstein RDK 1,8</option><option value="6">Kalksandstein RDK 2,0</option><option value="7">Vollziegel RDK 1,8</option><option value="8">Hochlochziegel RDK 0,8</option><option value="9">Planziegel wärmedämmend (λ 0,09)</option><option value="10">Porenbeton RDK 0,35</option><option value="11">Leichtbeton-Vollblock RDK 0,8</option><option value="12">Mineralwolle WLS 035</option><option value="13">Mineralwolle WLS 032</option><option value="14">EPS WLS 035</option><option value="15">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="18">Holzfaserdämmung WLS 040</option><option value="19">Zellulose WLS 040</option><option value="20">Nadelholz</option><option value="21">OSB-Platte</option><option value="22">Gipskartonplatte</option><option value="23">Holzwolle-Leichtbauplatte</option><option value="24">PE-Folie 0,2 mm (s_d = 100 m)</option><option value="25">Dampfbremse 0,2 mm (s_d = 2 m)</option><option value="26">Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)</option><option value="27">Dachziegel</option></select><input type="number" step="any" id="bl-d2" value="17.5" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l2" value="0.99" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u2" value="15" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r2" value="1800" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
+      <div class="bp-lay"><select id="bl-m3" onchange="bpPick(3)" aria-label="Baustoff Schicht 3"><option value="-">—</option><option value="0">Gipsputz</option><option value="1">Kalkzementputz</option><option value="2">Zementestrich</option><option value="3">Stahlbeton</option><option value="4">Normalbeton (unbewehrt)</option><option value="5">Kalksandstein RDK 1,8</option><option value="6">Kalksandstein RDK 2,0</option><option value="7">Vollziegel RDK 1,8</option><option value="8">Hochlochziegel RDK 0,8</option><option value="9">Planziegel wärmedämmend (λ 0,09)</option><option value="10">Porenbeton RDK 0,35</option><option value="11">Leichtbeton-Vollblock RDK 0,8</option><option value="12" selected>Mineralwolle WLS 035</option><option value="13">Mineralwolle WLS 032</option><option value="14">EPS WLS 035</option><option value="15">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="18">Holzfaserdämmung WLS 040</option><option value="19">Zellulose WLS 040</option><option value="20">Nadelholz</option><option value="21">OSB-Platte</option><option value="22">Gipskartonplatte</option><option value="23">Holzwolle-Leichtbauplatte</option><option value="24">PE-Folie 0,2 mm (s_d = 100 m)</option><option value="25">Dampfbremse 0,2 mm (s_d = 2 m)</option><option value="26">Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)</option><option value="27">Dachziegel</option></select><input type="number" step="any" id="bl-d3" value="16" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l3" value="0.035" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u3" value="1" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r3" value="30" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
+      <div class="bp-lay"><select id="bl-m4" onchange="bpPick(4)" aria-label="Baustoff Schicht 4"><option value="-">—</option><option value="0">Gipsputz</option><option value="1" selected>Kalkzementputz</option><option value="2">Zementestrich</option><option value="3">Stahlbeton</option><option value="4">Normalbeton (unbewehrt)</option><option value="5">Kalksandstein RDK 1,8</option><option value="6">Kalksandstein RDK 2,0</option><option value="7">Vollziegel RDK 1,8</option><option value="8">Hochlochziegel RDK 0,8</option><option value="9">Planziegel wärmedämmend (λ 0,09)</option><option value="10">Porenbeton RDK 0,35</option><option value="11">Leichtbeton-Vollblock RDK 0,8</option><option value="12">Mineralwolle WLS 035</option><option value="13">Mineralwolle WLS 032</option><option value="14">EPS WLS 035</option><option value="15">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="18">Holzfaserdämmung WLS 040</option><option value="19">Zellulose WLS 040</option><option value="20">Nadelholz</option><option value="21">OSB-Platte</option><option value="22">Gipskartonplatte</option><option value="23">Holzwolle-Leichtbauplatte</option><option value="24">PE-Folie 0,2 mm (s_d = 100 m)</option><option value="25">Dampfbremse 0,2 mm (s_d = 2 m)</option><option value="26">Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)</option><option value="27">Dachziegel</option></select><input type="number" step="any" id="bl-d4" value="1" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l4" value="1.0" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u4" value="20" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r4" value="1800" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
+      <div class="bp-lay"><select id="bl-m5" onchange="bpPick(5)" aria-label="Baustoff Schicht 5"><option value="-" selected>—</option><option value="0">Gipsputz</option><option value="1">Kalkzementputz</option><option value="2">Zementestrich</option><option value="3">Stahlbeton</option><option value="4">Normalbeton (unbewehrt)</option><option value="5">Kalksandstein RDK 1,8</option><option value="6">Kalksandstein RDK 2,0</option><option value="7">Vollziegel RDK 1,8</option><option value="8">Hochlochziegel RDK 0,8</option><option value="9">Planziegel wärmedämmend (λ 0,09)</option><option value="10">Porenbeton RDK 0,35</option><option value="11">Leichtbeton-Vollblock RDK 0,8</option><option value="12">Mineralwolle WLS 035</option><option value="13">Mineralwolle WLS 032</option><option value="14">EPS WLS 035</option><option value="15">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="18">Holzfaserdämmung WLS 040</option><option value="19">Zellulose WLS 040</option><option value="20">Nadelholz</option><option value="21">OSB-Platte</option><option value="22">Gipskartonplatte</option><option value="23">Holzwolle-Leichtbauplatte</option><option value="24">PE-Folie 0,2 mm (s_d = 100 m)</option><option value="25">Dampfbremse 0,2 mm (s_d = 2 m)</option><option value="26">Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)</option><option value="27">Dachziegel</option></select><input type="number" step="any" id="bl-d5" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l5" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u5" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r5" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
+      <div class="bp-lay"><select id="bl-m6" onchange="bpPick(6)" aria-label="Baustoff Schicht 6"><option value="-" selected>—</option><option value="0">Gipsputz</option><option value="1">Kalkzementputz</option><option value="2">Zementestrich</option><option value="3">Stahlbeton</option><option value="4">Normalbeton (unbewehrt)</option><option value="5">Kalksandstein RDK 1,8</option><option value="6">Kalksandstein RDK 2,0</option><option value="7">Vollziegel RDK 1,8</option><option value="8">Hochlochziegel RDK 0,8</option><option value="9">Planziegel wärmedämmend (λ 0,09)</option><option value="10">Porenbeton RDK 0,35</option><option value="11">Leichtbeton-Vollblock RDK 0,8</option><option value="12">Mineralwolle WLS 035</option><option value="13">Mineralwolle WLS 032</option><option value="14">EPS WLS 035</option><option value="15">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="18">Holzfaserdämmung WLS 040</option><option value="19">Zellulose WLS 040</option><option value="20">Nadelholz</option><option value="21">OSB-Platte</option><option value="22">Gipskartonplatte</option><option value="23">Holzwolle-Leichtbauplatte</option><option value="24">PE-Folie 0,2 mm (s_d = 100 m)</option><option value="25">Dampfbremse 0,2 mm (s_d = 2 m)</option><option value="26">Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)</option><option value="27">Dachziegel</option></select><input type="number" step="any" id="bl-d6" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l6" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u6" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r6" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
+      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in statiq·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.</span></div>
+    </div>
+    <div id="bp-uwert">
+    <div class="card">
+      <div class="card-title"><span data-i18n="buT">Randbedingungen</span></div>
+      <div class="grid2">
+        <div class="field full"><label><span data-i18n="buArt">Bauteil</span></label><select id="bp-art" onchange="run()"><option value="wand" selected>Wand (Wärmestrom horizontal)</option><option value="dach">Dach, Decke nach außen (Wärmestrom nach oben)</option><option value="boden">Decke über Außenluft (Wärmestrom nach unten)</option><option value="erd">Bauteil gegen Erdreich</option><option value="unb">Wand zu unbeheiztem Raum</option></select></div>
+        <div class="field"><label><span data-i18n="buTi">Innentemperatur θ<sub>i</sub> [°C]</span></label><input type="number" step="any" id="bp-ti" value="20" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="buTe">Außentemperatur θ<sub>e</sub> [°C]</span></label><input type="number" step="any" id="bp-te" value="-5" oninput="run()"></div>
+      </div>
+      <div class="hint"><span data-i18n="buHint">R<sub>si</sub> und R<sub>se</sub> nach DIN EN ISO 6946 je nach Bauteil. Geprüft werden Mindestwärmeschutz (DIN 4108-2), der U-Wert des GEG-Referenzgebäudes und der Temperaturfaktor f<sub>Rsi</sub> gegen Schimmel.</span></div>
+    </div>
+    </div>
+    <div id="bp-glaser">
+    <div class="card">
+      <div class="card-title"><span data-i18n="bgT">Tauwassernachweis</span></div>
+      <label class="check"><input type="checkbox" id="bg-ns" onchange="run()"> <span data-i18n="bgNs">Tauwasser an kapillar nicht wasseraufnahmefähiger Schicht (Grenze 0,5 kg/m²)</span></label>
+      <div class="hint"><span data-i18n="bgHint">Glaser-Verfahren nach DIN 4108-3: Tauperiode 2160 h mit innen 20 °C / 50 % und außen −5 °C / 80 %, Verdunstungsperiode 2160 h mit außen 12 °C / 70 %, R<sub>si</sub> = 0,25 und R<sub>se</sub> = 0,04 m²K/W.</span></div>
+    </div>
+    </div>
+    <div id="bp-schall">
+    <div class="card">
+      <div class="card-title"><span data-i18n="bsT">Luft- und Trittschall</span></div>
+      <div class="grid2">
+        <div class="field full"><label><span data-i18n="bsAnf">Anforderung (DIN 4109-1)</span></label><select id="bs-anf" onchange="run()"><option value="0" selected>Wohnungstrennwand (53 dB)</option><option value="1">Treppenhauswand (53 dB)</option><option value="2">Wohnungstrenndecke (54 dB)</option><option value="3">Decke über Keller/Durchfahrt (52 dB)</option><option value="4">Treppenlauf (nur Trittschall)</option><option value="5">Haustrennwand Reihenhaus, unterstes Geschoss (59 dB)</option><option value="6">Haustrennwand Reihenhaus, darüber (62 dB)</option></select></div>
+        <div class="field"><label><span data-i18n="bsKf">Abschlag Flankenübertragung [dB]</span></label><input type="number" step="any" id="bs-kf" value="3" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bsUp">Sicherheitsbeiwert u<sub>prog</sub> [dB]</span></label><input type="number" step="any" id="bs-up" value="2" oninput="run()"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="bs-tr" onchange="showMat(); run()"> <span data-i18n="bsTr">Decke mit schwimmendem Estrich (Trittschall)</span></label>
+      <div class="grid2 bs-trrow">
+        <div class="field"><label><span data-i18n="bsDE">Estrichdicke [cm]</span></label><input type="number" step="any" id="bs-dE" value="5" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bsRE">Estrich ρ [kg/m³]</span></label><input type="number" step="any" id="bs-rE" value="2000" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bsS">Trittschalldämmung s′ [MN/m³]</span></label><input type="number" step="any" id="bs-s" value="20" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bsK">Korrektur K [dB]</span></label><input type="number" step="any" id="bs-K" value="2" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bsZul">zul. L′<sub>n,w</sub> [dB]</span></label><input type="number" step="any" id="bs-zul" value="50" oninput="run()"></div>
+      </div>
+      <div class="hint"><span data-i18n="bsHint">Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Vereinfachter Nachweis: R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag für die Flanken; genau nach DIN 4109-2.</span></div>
+    </div>
+    </div>
+    </div>
     <div id="mat-holz" style="display:none">
     <div class="seg seg-sub" id="seg-ho">
       <button data-ho="bauteil" class="active" onclick="setHoMode('bauteil')" data-i18n="hoBauteil">Träger / Stütze</button>
@@ -1342,6 +1404,33 @@ const I18N = {
   "wwMu": "Überfallbeiwert μ",
   "wwW": "Wehrhöhe w [m]",
   "wwHmax": "zulässiger Oberwasserstand über Sohle [m]",
+  "matBauph": "Bauphysik",
+  "bpLayT": "Bauteilaufbau (innen → außen)",
+  "bpName": "Bezeichnung",
+  "bpMat": "Baustoff",
+  "bpLayHint": "Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in statiq·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.",
+  "buT": "Randbedingungen",
+  "buArt": "Bauteil",
+  "buTi": "Innentemperatur θ<sub>i</sub> [°C]",
+  "buTe": "Außentemperatur θ<sub>e</sub> [°C]",
+  "buHint": "R<sub>si</sub> und R<sub>se</sub> nach DIN EN ISO 6946 je nach Bauteil. Geprüft werden Mindestwärmeschutz (DIN 4108-2), der U-Wert des GEG-Referenzgebäudes und der Temperaturfaktor f<sub>Rsi</sub> gegen Schimmel.",
+  "bgT": "Tauwassernachweis",
+  "bgNs": "Tauwasser an kapillar nicht wasseraufnahmefähiger Schicht (Grenze 0,5 kg/m²)",
+  "bgHint": "Glaser-Verfahren nach DIN 4108-3: Tauperiode 2160 h mit innen 20 °C / 50 % und außen −5 °C / 80 %, Verdunstungsperiode 2160 h mit außen 12 °C / 70 %, R<sub>si</sub> = 0,25 und R<sub>se</sub> = 0,04 m²K/W.",
+  "bsT": "Luft- und Trittschall",
+  "bsAnf": "Anforderung (DIN 4109-1)",
+  "bsKf": "Abschlag Flankenübertragung [dB]",
+  "bsUp": "Sicherheitsbeiwert u<sub>prog</sub> [dB]",
+  "bsTr": "Decke mit schwimmendem Estrich (Trittschall)",
+  "bsDE": "Estrichdicke [cm]",
+  "bsRE": "Estrich ρ [kg/m³]",
+  "bsS": "Trittschalldämmung s′ [MN/m³]",
+  "bsK": "Korrektur K [dB]",
+  "bsZul": "zul. L′<sub>n,w</sub> [dB]",
+  "bsHint": "Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Vereinfachter Nachweis: R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag für die Flanken; genau nach DIN 4109-2.",
+  "bpUwert": "U-Wert",
+  "bpGlaser": "Tauwasser (Glaser)",
+  "bpSchall": "Schallschutz",
   "wwHint": "Formel von Poleni: Q = 2/3·μ·b·√(2g)·h<sub>ü</sub><sup>3/2</sup>. Vollkommener Überfall: das Unterwasser beeinflusst den Abfluss nicht. Die Zulaufgeschwindigkeit ist nicht angesetzt.",
   "matWasser": "Wasserbau",
   "gsT2": "Baugrund unter der Sohle",
@@ -1573,7 +1662,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.14';
+const SIZE_VERSION = '0.5.15';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -2526,7 +2615,7 @@ const NICHT_ENTHALTEN = 'Zugkraftdeckung bei Durchlaufträgern und Einzellasten,
 let LAST = null;
 let MAT = 'beton';
 let STMODE = 'traeger';
-function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else runBeton(); save(); renderPos(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
+function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else if(MAT==='bauph') runBauph(); else runBeton(); save(); renderPos(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
 function setStMode(m){ STMODE=m; showMat(); run(); }
 function showBad(bad){
   $('summary').innerHTML = `<div class="summary bad">Bitte Eingaben prüfen: ${bad.join(', ')}</div>`;
@@ -2977,7 +3066,7 @@ function setMat(m){
   MAT=m; showMat(); run();
 }
 function showMat(){
-  const rl=$('hdr-ref'); if(rl) rl.href = MAT==='stahl' ? 'ref.html#/stahlbau' : MAT==='holz' ? 'ref.html#/holzbau' : MAT==='grund' ? 'ref.html#/grundbau' : MAT==='mauer' || MAT==='wasser' ? 'ref.html' : 'ref.html#/stahlbeton';
+  const rl=$('hdr-ref'); if(rl) rl.href = MAT==='stahl' ? 'ref.html#/stahlbau' : MAT==='holz' ? 'ref.html#/holzbau' : MAT==='grund' ? 'ref.html#/grundbau' : MAT==='mauer' || MAT==='wasser' ? 'ref.html' : MAT==='bauph' ? 'ref.html#/bauphysik' : 'ref.html#/stahlbeton';
   document.querySelectorAll('#seg-mat button').forEach(b=>b.classList.toggle('active', b.dataset.mat===MAT));
   $('mat-beton').style.display = MAT==='beton' ? '' : 'none';
   $('mat-stahl').style.display = MAT==='stahl' ? '' : 'none';
@@ -2985,6 +3074,10 @@ function showMat(){
   $('mat-grund').style.display = MAT==='grund' ? '' : 'none';
   $('mat-mauer').style.display = MAT==='mauer' ? '' : 'none';
   $('mat-wasser').style.display = MAT==='wasser' ? '' : 'none';
+  $('mat-bauph').style.display = MAT==='bauph' ? '' : 'none';
+  document.querySelectorAll('#seg-bp button').forEach(b=>b.classList.toggle('active', b.dataset.bp===BPMODE));
+  ['uwert','glaser','schall'].forEach(m=>$('bp-'+m).style.display = BPMODE===m ? '' : 'none');
+  document.querySelectorAll('.bs-trrow').forEach(e=>e.style.display = $('bs-tr').checked ? '' : 'none');
   document.querySelectorAll('#seg-wb button').forEach(b=>b.classList.toggle('active', b.dataset.wb===WBMODE));
   ['druck','schwimm','rohr','gerinne','wehr'].forEach(m=>$('wb-'+m).style.display = WBMODE===m ? '' : 'none');
   document.querySelectorAll('#seg-mw button').forEach(b=>b.classList.toggle('active', b.dataset.mw===MWMODE));
@@ -3015,6 +3108,9 @@ function showMat(){
       rohr:['Wasserbau — Rohrleitung','Hydrodynamik: Kontinuität, Reynolds-Zahl, Reibungsbeiwert nach Colebrook-White, Verluste nach Darcy-Weisbach, Energie- und Drucklinie.','Energielinie'],
       gerinne:['Wasserbau — Offenes Gerinne','Hydrodynamik: Normalabfluss nach Gauckler-Manning-Strickler, Froude-Zahl, Grenztiefe und spezifische Energie im Rechteck- oder Trapezgerinne.','Gerinne'],
       wehr:['Wasserbau — Wehrüberfall','Hydrodynamik: vollkommener Überfall nach Poleni, Überfallhöhe und Oberwasserstand.','Wehr'] }[WBMODE],
+    bauph: { uwert:['Bauphysik — Wärmeschutz und U-Wert','Wärmedurchgangskoeffizient nach DIN EN ISO 6946 mit Temperaturverlauf, Mindestwärmeschutz nach DIN 4108-2, Vergleich mit dem GEG-Referenzgebäude und Temperaturfaktor gegen Schimmel.','Schnitt'],
+      glaser:['Bauphysik — Tauwasser (Glaser-Verfahren)','Wasserdampfdiffusion nach DIN 4108-3: Sättigungs- und Partialdampfdruck im Bauteil, Tauwassermasse in der Tauperiode und Austrocknung in der Verdunstungsperiode.','Glaser-Diagramm'],
+      schall:['Bauphysik — Schallschutz','Luftschalldämmung einschaliger Massivbauteile nach dem Massegesetz (DIN 4109-32) und Trittschall von Massivdecken mit schwimmendem Estrich, verglichen mit DIN 4109-1.','Massegesetz'] }[BPMODE],
     mauer: { druck:['Mauerwerk — Wand auf Druck','Vereinfachtes Verfahren nach DIN EN 1996-3 mit deutschem NA: Knicklänge, Abminderung Φ aus Knicken und Deckenverdrehung und Tragfähigkeit der Wand.','Wand'],
       teil:['Mauerwerk — Teilflächenpressung','Einzellast auf Mauerwerk nach DIN EN 1996-1-1, 6.1.3: Lastausbreitung, Erhöhungsfaktor β und Tragfähigkeit unter der Einzellast.','Auflager'],
       keller:['Mauerwerk — Kellerwand','Vereinfachter Nachweis nach DIN EN 1996-3, 4.5: Mindestauflast für die Bogenwirkung gegen den Erddruck und Höchstauflast.','Kellerwand'],
@@ -3034,7 +3130,7 @@ function showMat(){
       ? ['Holz — Verbindungen mit Stabdübeln, Nägeln und Schrauben','Bemessung nach DIN EN 1995-1-1 mit deutschem NA, Abschnitt 8: Lochleibung, Fließmoment, alle Versagensmodi nach Johansen, Einhängeeffekt, wirksame Anzahl und Mindestabstände.','Verbindung']
       : ['Holz — Vollholz und Brettschichtholz','Bemessung nach DIN EN 1995-1-1 mit deutschem NA: Biegung, Schub, Auflagerpressung, Kippen, Knicken und Durchbiegung.','Querschnitt'] }[MAT];
   $('page-title').textContent = T[0]; $('page-sub').textContent = T[1]; $('fig-title').textContent = T[2];
-  $('page-calc').style.display = MAT==='wasser' ? 'none' : '';
+  $('page-calc').style.display = MAT==='wasser' || MAT==='bauph' ? 'none' : '';
 }
 
 // ══════════════════════════════════════════════════
@@ -5317,6 +5413,209 @@ function buildReportWasser(){
   return repHead(I.name||title, norm) + `<section><h2>Eingaben</h2><table>${rows}</table></section><section><h2>${title}</h2><div class="figure">${WB_FN[mode][3](I,res)}</div></section>` + reportChecks(res.C) + repEnd(title+'.');
 }
 
+// ══════════════════════════════════════════════════
+// BAUPHYSIK — Rechenkerne (gleich in statiq·ref und statiq·size)
+// Wärme: DIN EN ISO 6946 · Feuchte: DIN 4108-3 (Glaser) · Schall: DIN 4109-32/-34 · Brand: MBO
+// ══════════════════════════════════════════════════
+// Baustoffe: [Name, λ W/(mK), μ (Rechenwert), ρ kg/m³]  — Bemessungswerte nach DIN 4108-4 / EN ISO 10456 (Anhaltswerte)
+const BP_MAT = [
+  ['Gipsputz', 0.51, 10, 1200], ['Kalkzementputz', 1.0, 20, 1800], ['Zementestrich', 1.4, 30, 2000],
+  ['Stahlbeton', 2.3, 100, 2400], ['Normalbeton (unbewehrt)', 2.0, 100, 2300],
+  ['Kalksandstein RDK 1,8', 0.99, 15, 1800], ['Kalksandstein RDK 2,0', 1.1, 15, 2000],
+  ['Vollziegel RDK 1,8', 0.81, 10, 1800], ['Hochlochziegel RDK 0,8', 0.39, 10, 800], ['Planziegel wärmedämmend (λ 0,09)', 0.09, 10, 650],
+  ['Porenbeton RDK 0,35', 0.10, 5, 350], ['Leichtbeton-Vollblock RDK 0,8', 0.39, 10, 800],
+  ['Mineralwolle WLS 035', 0.035, 1, 30], ['Mineralwolle WLS 032', 0.032, 1, 40], ['EPS WLS 035', 0.035, 60, 20], ['EPS WLS 032 (grau)', 0.032, 60, 20],
+  ['XPS WLS 035', 0.035, 150, 35], ['PUR/PIR WLS 024', 0.024, 60, 30], ['Holzfaserdämmung WLS 040', 0.040, 5, 160], ['Zellulose WLS 040', 0.040, 2, 50],
+  ['Nadelholz', 0.13, 40, 500], ['OSB-Platte', 0.13, 200, 650], ['Gipskartonplatte', 0.25, 8, 900], ['Holzwolle-Leichtbauplatte', 0.09, 5, 400],
+  ['PE-Folie 0,2 mm (s_d = 100 m)', 0.20, 500000, 950], ['Dampfbremse 0,2 mm (s_d = 2 m)', 0.20, 10000, 950],
+  ['Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)', 0.17, 50000, 1100], ['Dachziegel', 1.0, 40, 2000]
+];
+const BP_RS = { wand:{ n:'Wand (Wärmestrom horizontal)', si:0.13, se:0.04 }, dach:{ n:'Dach, Decke nach außen (Wärmestrom nach oben)', si:0.10, se:0.04 },
+  boden:{ n:'Decke über Außenluft (Wärmestrom nach unten)', si:0.17, se:0.04 }, erd:{ n:'Bauteil gegen Erdreich', si:0.13, se:0 }, unb:{ n:'Wand zu unbeheiztem Raum', si:0.13, se:0.13 } };
+// Anforderungen: Mindestwärmeschutz DIN 4108-2 (R) und GEG (U) — Anhaltswerte
+const BP_ANF = { wand:{ n:'Außenwand', Rmin:1.2, Uref:0.28, Ualt:0.24 }, dach:{ n:'Dach / oberste Geschossdecke', Rmin:1.2, Uref:0.20, Ualt:0.24 },
+  boden:{ n:'Decke über Außenluft', Rmin:1.75, Uref:0.28, Ualt:0.24 }, erd:{ n:'Bauteil gegen Erdreich', Rmin:1.2, Uref:0.35, Ualt:0.30 }, unb:{ n:'Wand zu unbeheiztem Raum', Rmin:0.07, Uref:0.35, Ualt:0.30 } };
+// Schichten: [{ name, d [m], lam, mu, rho }]
+function bpWaerme(L, art){
+  const rs=BP_RS[art]||BP_RS.wand, R=L.map(s=>s.d/s.lam), Rb=R.reduce((a,b)=>a+b,0), RT=rs.si+Rb+rs.se;
+  return { R, Rb, RT, U:1/RT, Rsi:rs.si, Rse:rs.se };
+}
+function bpTemperaturen(L, Rsi, Rse, ti, te){ // θ an Oberflächen und Schichtgrenzen von innen nach außen
+  const Rs=L.map(s=>s.d/s.lam), RT=Rsi+Rs.reduce((a,b)=>a+b,0)+Rse, q=(ti-te)/RT, T=[ti-q*Rsi];
+  Rs.forEach(r=>T.push(T[T.length-1]-q*r)); return { q, T, RT };
+}
+const psat = t => t>=0 ? 610.5*Math.exp(17.269*t/(237.3+t)) : 610.5*Math.exp(21.875*t/(265.5+t));
+function taupunkt(p){ const x=Math.log(p/610.5); return p>=610.5 ? 237.3*x/(17.269-x) : 265.5*x/(21.875-x); }
+// Glaser nach DIN 4108-3 (Anhang A): Tauperiode 2160 h (innen 20 °C/50 %, außen −5 °C/80 %),
+// Verdunstungsperiode 2160 h (innen 20 °C/50 %, außen 12 °C/70 %), R_si = 0,25 / R_se = 0,04, 1/δ₀ = 1,5·10⁶ m·h·Pa/kg
+const GL = { t:2160, Z:1.5e6, Rsi:0.25, Rse:0.04, Ti:20, phiI:0.5, Te:-5, phiE:0.8, TeV:12, phiEV:0.7, mMax:1.0 };
+function bpHull(P){ // untere konvexe Hülle (x aufsteigend)
+  const H=[]; for(const p of P){ while(H.length>=2){ const a=H[H.length-2], b=H[H.length-1]; if((b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0])<=1e-12) H.pop(); else break; } H.push(p); } return H; }
+function glaser(L){
+  const sd=L.map(s=>s.mu*s.d), S=[0]; sd.forEach(v=>S.push(S[S.length-1]+v)); const Stot=S[S.length-1];
+  const lauf=(te,phiE)=>{ const t=bpTemperaturen(L,GL.Rsi,GL.Rse,GL.Ti,te).T, ps=t.map(psat), pi=GL.phiI*psat(GL.Ti), pe=phiE*psat(te); return { T:t, ps, pi, pe }; };
+  const A=lauf(GL.Te,GL.phiE);
+  const pts=[[0,A.pi], ...S.map((x,k)=>[x,A.ps[k]]), [Stot,A.pe]];
+  // gleiche x-Werte (dünne Schichten, s_d = 0): nur den kleinsten Wert behalten
+  const P=[]; pts.forEach(p=>{ const last=P[P.length-1]; if(last && Math.abs(last[0]-p[0])<1e-12){ if(p[1]<last[1]) last[1]=p[1]; } else P.push([p[0],p[1]]); });
+  // Endpunkte sind die Luftdrücke (nicht p_s an der Oberfläche) — Hülle über alle Punkte
+  P[0]=[0,Math.min(A.pi,P[0][1])]; P[P.length-1]=[Stot,Math.min(A.pe,P[P.length-1][1])];
+  const H=bpHull(P), kontakt=H.slice(1,-1);
+  const res={ sd, S, Stot, T:A.T, ps:A.ps, pi:A.pi, pe:A.pe, H, tau:false, mT:0, mV:0 };
+  if(!kontakt.length || Stot<=0) return res;
+  const xa=kontakt[0][0], xb=kontakt[kontakt.length-1][0], ka=S.findIndex(x=>Math.abs(x-xa)<1e-9), kb=S.length-1-[...S].reverse().findIndex(x=>Math.abs(x-xb)<1e-9);
+  const gin=(A.pi-A.ps[ka])/(GL.Z*xa), gout=(A.ps[kb]-A.pe)/(GL.Z*(Stot-xb)), mT=(gin-gout)*GL.t;
+  const V=lauf(GL.TeV,GL.phiEV), giV=(V.ps[ka]-V.pi)/(GL.Z*xa), geV=(V.ps[kb]-V.pe)/(GL.Z*(Stot-xb)), mV=(Math.max(giV,0)+Math.max(geV,0))*GL.t;
+  return Object.assign(res,{ tau:mT>1e-9, ka, kb, xa, xb, gin, gout, mT:Math.max(mT,0), TV:V.T, psV:V.ps, piV:V.pi, peV:V.pe, giV, geV, mV });
+}
+// Schall: Massegesetz (DIN 4109-32), Resonanzfrequenz zweischaliger Bauteile, Trittschall Massivdecke mit schwimmendem Estrich
+const rwMasse = m => 30.9*Math.log10(m)-22.2;
+const f0Zweischalig = (s, m1, m2) => 160*Math.sqrt(s*(1/m1+1/m2));
+const lnEq = m => 164-35*Math.log10(m);
+const dLwEstrich = (mE, s) => 13*Math.log10(mE)-14.2*Math.log10(s)+20.8;
+const BP_SCHALL = [ // [Bauteil, erf. R'_w, zul. L'_n,w] nach DIN 4109-1 (Mehrfamilienhaus) — Anhaltswerte
+  ['Wohnungstrennwand', 53, null], ['Treppenhauswand', 53, null], ['Wohnungstrenndecke', 54, 50], ['Decke über Keller/Durchfahrt', 52, 50],
+  ['Treppenlauf und -podest', null, 53], ['Haustrennwand Reihenhaus (unterstes Geschoss)', 59, null], ['Haustrennwand Reihenhaus (darüber)', 62, null] ];
+// Gebäudeklassen nach MBO § 2
+function gebaeudeklasse(h, nNE, aNE, frei){
+  const aSum=nNE*aNE;
+  if(h<=7 && nNE<=2 && aSum<=400) return frei ? 1 : 2;
+  if(h<=7) return 3;
+  if(h<=13 && aNE<=400) return 4;
+  return 5;
+}
+const GK_ANF = { 1:['keine Anforderung','feuerhemmend'], 2:['feuerhemmend','feuerhemmend'], 3:['feuerhemmend','feuerbeständig'], 4:['hochfeuerhemmend','feuerbeständig'], 5:['feuerbeständig','feuerbeständig'] };
+
+// ── Bauphysik in size: U-Wert, Glaser, Schallschutz ──
+let BPMODE = 'uwert';
+function setBpMode(m){ BPMODE=m; showMat(); run(); }
+function bpPick(i){ const v=$('bl-m'+i).value; if(v!=='-'){ const M=BP_MAT[+v]; $('bl-l'+i).value=M[1]; $('bl-u'+i).value=M[2]; $('bl-r'+i).value=M[3]; if(!(num('bl-d'+i)>0)) $('bl-d'+i).value=10; } run(); }
+function bpLayersRead(){ const L=[]; for(let i=1;i<=6;i++){ const m=$('bl-m'+i).value, d=num('bl-d'+i), lam=num('bl-l'+i), mu=num('bl-u'+i), rho=num('bl-r'+i);
+  if(m!=='-' && d>0) L.push({ name:BP_MAT[+m][0], d:d/100, lam, mu, rho }); } return L; }
+function validateBpLayers(L, bad){ if(!L.length) bad.push('mindestens eine Schicht mit d > 0'); L.forEach((s,i)=>{ if(!(s.lam>0)) bad.push(`λ der Schicht ${i+1} > 0`); if(!(s.mu>0)) bad.push(`μ der Schicht ${i+1} > 0`); if(!(s.rho>=0)) bad.push(`ρ der Schicht ${i+1} ≥ 0`); }); }
+const bpF = (v,n=2) => deNum(Math.abs(v)<1e-12?0:v,n).replace(/^-/,'−');
+const BPC = n => /wolle|EPS|XPS|PUR|faser|Zellulose/.test(n) ? '#fde68a' : /holz|OSB|Holz/i.test(n) ? '#e7c9a0' : /Folie|bremse|Bitumen/.test(n) ? '#93c5fd' : /putz|estrich|karton/i.test(n) ? '#e5e7eb' : /beton/i.test(n) ? '#cbd5e1' : '#e7c9b0';
+// ── U-Wert ──
+function readBU(){ return { name:$('bp-name').value, L:bpLayersRead(), art:$('bp-art').value, ti:num('bp-ti'), te:num('bp-te') }; }
+function validateBU(I){ const bad=[]; validateBpLayers(I.L,bad); if(!(I.ti>I.te)) bad.push('θ_i > θ_e'); return bad; }
+function nachweiseBU(I){
+  const f=bpF, W=bpWaerme(I.L,I.art), T=bpTemperaturen(I.L,W.Rsi,W.Rse,I.ti,I.te), A=BP_ANF[I.art], fR=1-W.U*0.25, C=[];
+  C.push({ id:'bu', title:'Wärmedurchgangskoeffizient', eta:0, ok:true, info:true, steps:[H('Wärmedurchlasswiderstände der Schichten (R = d/λ)'),
+    ...I.L.map((s,i)=>`R<sub>${i+1}</sub> = d/λ = ${f(s.d,3)} / ${f(s.lam,3)} = ${f(W.R[i],3)} m²K/W (${s.name})`),
+    `R = Σ d/λ = <b>${f(W.Rb,3)} m²K/W</b> · R<sub>T</sub> = R<sub>si</sub> + R + R<sub>se</sub> = ${f(W.Rsi,2)} + ${f(W.Rb,3)} + ${f(W.Rse,2)} = ${f(W.RT,3)} m²K/W`,
+    `U = 1/R<sub>T</sub> = <b>${f(W.U,3)} W/(m²K)</b> · q = U·(θ<sub>i</sub> − θ<sub>e</sub>) = ${f(T.q,2)} W/m² · θ<sub>si</sub> = ${f(T.T[0],2)} °C · θ<sub>se</sub> = ${f(T.T[T.T.length-1],2)} °C`] });
+  C.push({ id:'bumin', title:`Mindestwärmeschutz DIN 4108-2 (${A.n})`, eta:A.Rmin/W.Rb, ok:W.Rb>=A.Rmin, steps:[`R = ${f(W.Rb,3)} m²K/W ${W.Rb>=A.Rmin?'≥':'<'} R<sub>min</sub> = ${f(A.Rmin,2)} m²K/W`],
+    note: W.Rb<A.Rmin ? 'Mehr oder bessere Dämmung (kleineres λ).' : '' });
+  C.push({ id:'bugeg', title:'GEG — U-Wert des Referenzgebäudes', eta:W.U/A.Uref, ok:W.U<=A.Uref, steps:[`U = ${f(W.U,3)} ${W.U<=A.Uref?'≤':'>'} U<sub>Ref</sub> = ${f(A.Uref,2)} W/(m²K) (Neubau, Referenzwert)`, `Änderung im Bestand: U ≤ ${f(A.Ualt,2)} W/(m²K) ${W.U<=A.Ualt?'✓':'✗'}`],
+    note:'Das GEG verlangt den Nachweis für das ganze Gebäude; der Referenzwert zeigt, ob das Bauteil auf dem üblichen Niveau liegt.' });
+  C.push({ id:'bufr', title:'Schimmel — Temperaturfaktor f<sub>Rsi</sub>', eta:0.7/Math.max(fR,1e-9), ok:fR>=0.7, steps:[`f<sub>Rsi</sub> = 1 − U·R<sub>si</sub> = 1 − ${f(W.U,3)}·0,25 = <b>${f(fR,3)}</b> ${fR>=0.7?'≥':'<'} 0,70 (θ<sub>si</sub> bei 20/−5 °C = ${f(20-25*W.U*0.25,2)} °C)`],
+    note:'Gilt für den ungestörten Bereich. An Wärmebrücken (Ecken, Auflager) gesondert nachweisen.' });
+  return { C, ok:C.every(c=>c.ok), W, T, fR };
+}
+function figBU(I,res){
+  const L=I.L, x0=90, Wd=300, yT=40, Hh=170, dsum=L.reduce((a,s)=>a+s.d,0), w=L.map(s=>Math.max(5,s.d/dsum*Wd)), k=Wd/w.reduce((a,b)=>a+b,0), T=res.T.T;
+  const tmax=Math.max(I.ti,I.te), tmin=Math.min(I.ti,I.te), Y=t=>yT+12+(tmax-t)/(tmax-tmin||1)*(Hh-24);
+  let s=`<svg viewBox="0 0 470 260" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bauteilschnitt">`+svgT(235,16,'Schnitt mit Temperaturverlauf','middle','#6b7280',9.5);
+  let x=x0; const X=[x0];
+  L.forEach((l,i)=>{ const ww=w[i]*k; s+=`<rect x="${x.toFixed(1)}" y="${yT}" width="${ww.toFixed(1)}" height="${Hh}" fill="${BPC(l.name)}" stroke="#111" stroke-width="0.7"/>`; if(ww>24) s+=svgT(x+ww/2,yT+Hh+13,bpF(l.d*100,1),'middle','#111',9); x+=ww; X.push(x); });
+  const P=[[x0-50,Y(I.ti)],[x0,Y(T[0])], ...T.slice(1).map((t,i)=>[X[i+1],Y(t)]), [X[X.length-1]+50,Y(I.te)]];
+  s+=`<polyline points="${P.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${C_EW}" stroke-width="1.8"/>`;
+  s+=svgT(x0-52,Y(I.ti)-6,bpF(I.ti,1)+' °C','start',C_EW,9)+svgT(X[X.length-1]+52,Y(I.te)-6,bpF(I.te,1)+' °C','end',C_EW,9);
+  s+=svgT(x0+3,Y(T[0])-6,bpF(T[0],1),'start',C_EW,9)+svgT(X[X.length-1]-3,Y(T[T.length-1])+13,bpF(T[T.length-1],1),'end',C_EW,9);
+  s+=svgT(x0-26,yT+Hh+13,'innen','middle','#6b7280',9)+svgT(X[X.length-1]+26,yT+Hh+13,'außen','middle','#6b7280',9)+svgT(235,yT+Hh+30,'Schichtdicken in cm','middle','#6b7280',9);
+  s+='</svg>';
+  return s + figLegend([],[], `U = ${bpF(res.W.U,3)} W/(m²K) · R = ${bpF(res.W.Rb,2)} m²K/W · ${BP_RS[I.art].n}`);
+}
+// ── Glaser ──
+function readBG(){ return { name:$('bp-name').value, L:bpLayersRead(), ns:$('bg-ns').checked }; }
+function validateBG(I){ const bad=[]; validateBpLayers(I.L,bad); return bad; }
+function nachweiseBG(I){
+  const f=bpF, G=glaser(I.L), lim=I.ns?0.5:1.0, C=[];
+  const tab=G.T.map((t,k)=>`${k===0?'Oberfläche innen':k===G.T.length-1?'Oberfläche außen':'Grenze '+k+'/'+(k+1)}: Σs<sub>d</sub> = ${f(G.S[k],3)} m · θ = ${f(t,1)} °C · p<sub>s</sub> = ${f(G.ps[k],0)} Pa`);
+  C.push({ id:'bgd', title:'Diffusion in der Tauperiode', eta:0, ok:true, info:true, steps:[H('Randbedingungen (DIN 4108-3)'),
+    `innen 20 °C / 50 % → p<sub>i</sub> = ${f(G.pi,0)} Pa · außen −5 °C / 80 % → p<sub>e</sub> = ${f(G.pe,0)} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 m²K/W · 2160 h`,
+    H('Temperaturen und Sättigungsdampfdrücke'), ...tab, `s<sub>d,ges</sub> = Σ μ·d = <b>${f(G.Stot,3)} m</b>`] });
+  if(!G.tau){ C.push({ id:'bgt', title:'Tauwasser im Bauteil', eta:0, ok:true, steps:['Die Dampfdrucklinie bleibt überall unter dem Sättigungsdampfdruck: <b>kein Tauwasser</b>.'] }); return { C, ok:true, G }; }
+  C.push({ id:'bgt', title:'Tauwassermasse', eta:G.mT/lim, ok:G.mT<=lim, steps:[H(`Tauwasser ${G.ka===G.kb?'in der Ebene '+G.ka+'/'+(G.ka+1):'im Bereich s<sub>d</sub> = '+f(G.xa,3)+' … '+f(G.xb,3)+' m'}`),
+    `g<sub>i</sub> = (p<sub>i</sub> − p<sub>s,c</sub>)/(1,5·10⁶·s<sub>d,i</sub>) = (${f(G.pi,0)} − ${f(G.ps[G.ka],0)})/(1,5·10⁶·${f(G.xa,3)}) = ${(G.gin*1e3).toFixed(4).replace('.',',')} g/(m²h)`,
+    `g<sub>e</sub> = (p<sub>s,c</sub> − p<sub>e</sub>)/(1,5·10⁶·s<sub>d,e</sub>) = (${f(G.ps[G.kb],0)} − ${f(G.pe,0)})/(1,5·10⁶·${f(G.Stot-G.xb,3)}) = ${(G.gout*1e3).toFixed(4).replace('.',',')} g/(m²h)`,
+    `m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>)·2160 h = <b>${f(G.mT,3)} kg/m²</b> ${G.mT<=lim?'≤':'>'} ${f(lim,1)} kg/m²`],
+    note: G.mT>lim ? 'Dampfbremse auf der warmen Seite der Dämmung oder diffusionsoffenere Außenschichten.' : '' });
+  C.push({ id:'bgv', title:'Austrocknung in der Verdunstungsperiode', eta:G.mV>0?G.mT/G.mV:9.99, ok:G.mT<=G.mV, steps:[H('innen 20 °C / 50 %, außen 12 °C / 70 %, 2160 h'),
+    `g<sub>i,V</sub> = ${(G.giV*1e3).toFixed(4).replace('.',',')} g/(m²h) · g<sub>e,V</sub> = ${(G.geV*1e3).toFixed(4).replace('.',',')} g/(m²h)`,
+    `m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>)·2160 h = <b>${f(G.mV,3)} kg/m²</b> ${G.mT<=G.mV?'≥':'<'} m<sub>W,T</sub> = ${f(G.mT,3)} kg/m²`] });
+  return { C, ok:C.every(c=>c.ok), G };
+}
+function figBG(I,res){
+  const G=res.G, x0=60, Wd=370, y0=230, Hh=190, S=G.Stot||1, k=Wd/S, pmax=Math.max(G.ps[0],G.pi)*1.08, Y=p=>y0-p/pmax*Hh, X=v=>x0+v*k;
+  let s=`<svg viewBox="0 0 470 265" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Glaser-Diagramm">`+svgT(245,16,'Glaser-Diagramm (Tauperiode), waagerecht s_d','middle','#6b7280',9.5);
+  G.S.forEach((v,i)=>{ if(i<G.S.length-1){ s+=`<rect x="${X(v).toFixed(1)}" y="${y0-Hh}" width="${Math.max((G.S[i+1]-v)*k,0.5).toFixed(1)}" height="${Hh}" fill="${BPC(I.L[i].name)}" fill-opacity="0.35" stroke="#d1d5db" stroke-width="0.5"/>`; } });
+  const PS=[]; for(let i=0;i<G.S.length-1;i++) for(let j=0;j<=12;j++){ const v=G.S[i]+(G.S[i+1]-G.S[i])*j/12, t=G.T[i]+(G.T[i+1]-G.T[i])*j/12; PS.push([X(v),Y(psat(t))]); }
+  s+=`<polyline points="${PS.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${C_EW}" stroke-width="1.7"/>`;
+  s+=`<polyline points="${G.H.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${C_IN}" stroke-width="1.7"/>`;
+  if(G.tau) s+=`<rect x="${(X(G.xa)-2).toFixed(1)}" y="${(Y(G.ps[G.ka])-2).toFixed(1)}" width="${((G.xb-G.xa)*k+4).toFixed(1)}" height="4" fill="${C_EW}"/>`;
+  s+=`<line x1="${x0}" y1="${y0}" x2="${x0+Wd}" y2="${y0}" stroke="#111"/><line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y0-Hh-4}" stroke="#111"/>`;
+  for(const p of [500,1000,1500,2000,2500]) if(p<pmax) s+=svgT(x0-5,Y(p)+3,String(p),'end','#6b7280',8.5);
+  s+=svgT(x0-5,y0-Hh-6,'p [Pa]','end','#6b7280',8.5)+svgT(x0+Wd,y0+14,`s_d = ${bpF(S,2)} m`,'end','#6b7280',9);
+  s+='</svg>';
+  return s + figLegend([],[], `<span style="color:${C_EW}">p<sub>s</sub> — Sättigungsdampfdruck</span> · <span style="color:${C_IN}">p — Wasserdampfdruck</span>${G.tau?` · Tauwasser m<sub>W,T</sub> = ${bpF(G.mT,3)} kg/m²`:' · kein Tauwasser'}`);
+}
+// ── Schallschutz ──
+function readBS(){ return { name:$('bp-name').value, L:bpLayersRead(), anf:+$('bs-anf').value, KF:num('bs-kf')||0, up:num('bs-up')||0, tr:$('bs-tr').checked, dE:num('bs-dE')/100, rE:num('bs-rE'), sp:num('bs-s'), K:num('bs-K')||0, zul:num('bs-zul') }; }
+function validateBS(I){ const bad=[]; validateBpLayers(I.L,bad); if(I.tr && !(I.dE>0 && I.rE>0 && I.sp>0 && I.zul>0)) bad.push('Estrich d, ρ, s′ und zul. L′n,w > 0'); return bad; }
+function nachweiseBS(I){
+  const f=bpF, m=I.L.reduce((a,s)=>a+s.rho*s.d,0), Rw=rwMasse(m), Rs=Rw-I.KF, A=BP_SCHALL[I.anf], erf=A[1], C=[];
+  C.push({ id:'bsm', title:'Flächenbezogene Masse und R<sub>w</sub>', eta:0, ok:true, info:true, steps:[`m′ = Σ ρ·d = ${I.L.map(s=>`${f(s.rho,0)}·${f(s.d,3)}`).join(' + ')} = <b>${f(m,1)} kg/m²</b>${m<65||m>720?' — außerhalb 65 … 720 kg/m², Massegesetz nur als Anhalt':''}`,
+    `R<sub>w</sub> = 30,9·lg(m′) − 22,2 = 30,9·lg(${f(m,1)}) − 22,2 = <b>${f(Rw,1)} dB</b> (DIN 4109-32, einschalig massiv)`] });
+  if(erf) C.push({ id:'bsl', title:`Luftschall — ${A[0]}`, eta: erf/Math.max(Rs-I.up,1e-9), ok:Rs-I.up>=erf, steps:[`R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag Flankenübertragung = ${f(Rw,1)} − ${f(I.KF,1)} = ${f(Rs,1)} dB`,
+    `R′<sub>w</sub> − u<sub>prog</sub> = ${f(Rs,1)} − ${f(I.up,1)} = <b>${f(Rs-I.up,1)} dB</b> ${Rs-I.up>=erf?'≥':'<'} erf. R′<sub>w</sub> = ${erf} dB`],
+    note:'Vereinfachung: Der genaue Nachweis nach DIN 4109-2 bestimmt R′<sub>w</sub> aus dem Trennbauteil und allen Flankenwegen.' + (Rs-I.up<erf?' Schwereres Bauteil (dicker, höhere Rohdichte) oder biegeweiche Vorsatzschale.':'') });
+  let T=null;
+  if(I.tr){ const mE=I.rE*I.dE, Ln=lnEq(m), dL=dLwEstrich(mE,I.sp), L=Ln-dL+I.K; T={ mE, Ln, dL, L };
+    C.push({ id:'bst', title:'Trittschall — schwimmender Estrich', eta:(L+I.up)/I.zul, ok:L+I.up<=I.zul, steps:[`L<sub>n,eq,0,w</sub> = 164 − 35·lg(${f(m,1)}) = ${f(Ln,1)} dB · m′<sub>Estrich</sub> = ${f(I.rE,0)}·${f(I.dE,3)} = ${f(mE,1)} kg/m²`,
+      `ΔL<sub>w</sub> = 13·lg(${f(mE,1)}) − 14,2·lg(${f(I.sp,0)}) + 20,8 = ${f(dL,1)} dB`,
+      `L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K = ${f(Ln,1)} − ${f(dL,1)} + ${f(I.K,1)} = ${f(L,1)} dB`,
+      `L′<sub>n,w</sub> + u<sub>prog</sub> = ${f(L+I.up,1)} dB ${L+I.up<=I.zul?'≤':'>'} zul. ${f(I.zul,0)} dB`],
+      note: L+I.up>I.zul ? 'Weichere Trittschalldämmung (kleineres s′), schwererer Estrich oder schwerere Rohdecke.' : '' }); }
+  return { C, ok:C.every(c=>c.ok), m, Rw, Rs, T };
+}
+function figBS(I,res){
+  const x0=60, Wd=380, y0=220, Hh=180, lx=v=>x0+(Math.log10(v)-Math.log10(50))/(Math.log10(1000)-Math.log10(50))*Wd, ly=r=>y0-(r-30)/45*Hh;
+  let s=`<svg viewBox="0 0 470 255" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Massegesetz">`+svgT(245,16,'Massegesetz R_w = 30,9·lg m′ − 22,2','middle','#6b7280',9.5);
+  for(const v of [50,100,200,500,1000]) s+=`<line x1="${lx(v).toFixed(1)}" y1="${y0}" x2="${lx(v).toFixed(1)}" y2="${y0-Hh}" stroke="#e5e7eb"/>`+svgT(lx(v),y0+13,String(v),'middle','#6b7280',8.5);
+  for(const r of [30,40,50,60,70]) s+=`<line x1="${x0}" y1="${ly(r).toFixed(1)}" x2="${x0+Wd}" y2="${ly(r).toFixed(1)}" stroke="#e5e7eb"/>`+svgT(x0-5,ly(r)+3,String(r),'end','#6b7280',8.5);
+  const P=[]; for(let v=65;v<=720;v*=1.05) P.push([lx(v),ly(rwMasse(v))]);
+  s+=`<polyline points="${P.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${C_IN}" stroke-width="1.7"/>`;
+  const erf=BP_SCHALL[I.anf][1]; if(erf) s+=`<line x1="${x0}" y1="${ly(erf).toFixed(1)}" x2="${x0+Wd}" y2="${ly(erf).toFixed(1)}" stroke="${C_EW}" stroke-dasharray="5 3"/>`+svgT(x0+Wd-2,ly(erf)-4,`erf. R′w = ${erf} dB`,'end',C_EW,9);
+  const mm=Math.min(Math.max(res.m,50),1000); s+=`<circle cx="${lx(mm).toFixed(1)}" cy="${ly(Math.min(Math.max(res.Rw,30),75)).toFixed(1)}" r="5" fill="${C_IN}" stroke="#fff" stroke-width="1.5"/>`;
+  s+=svgT(x0+Wd,y0+28,'m′ [kg/m²]','end','#6b7280',9)+svgT(x0-5,y0-Hh-6,'R_w [dB]','end','#6b7280',9);
+  s+='</svg>';
+  return s + figLegend([],[], `m′ = ${bpF(res.m,1)} kg/m² → R<sub>w</sub> = ${bpF(res.Rw,1)} dB${res.T?` · L′<sub>n,w</sub> = ${bpF(res.T.L,1)} dB`:''}`);
+}
+// ── Steuerung ──
+const BP_FN = { uwert:[readBU,validateBU,nachweiseBU,figBU], glaser:[readBG,validateBG,nachweiseBG,figBG], schall:[readBS,validateBS,nachweiseBS,figBS] };
+function runBauph(){
+  const [rd,va,na,fg]=BP_FN[BPMODE], I=rd(), bad=va(I); if(bad.length){ showBad(bad); return; }
+  const res=na(I);
+  LAST={ mat:'bauph', mode:BPMODE, I, res, date:new Date() };
+  const line={ uwert:`U = ${bpF(res.W?.U??0,3)} W/(m²K) · R = ${bpF(res.W?.Rb??0,2)} m²K/W · f<sub>Rsi</sub> = ${bpF(res.fR??0,3)}`,
+    glaser:res.G?.tau ? `Tauwasser m<sub>W,T</sub> = ${bpF(res.G.mT,3)} kg/m² · Verdunstung m<sub>W,V</sub> = ${bpF(res.G.mV,3)} kg/m² · s<sub>d</sub> = ${bpF(res.G.Stot,2)} m` : `kein Tauwasser · s<sub>d</sub> = ${bpF(res.G?.Stot??0,2)} m`,
+    schall:`m′ = ${bpF(res.m??0,1)} kg/m² · R<sub>w</sub> = ${bpF(res.Rw??0,1)} dB${res.T?` · L′<sub>n,w</sub> = ${bpF(res.T.L,1)} dB`:''}` }[BPMODE];
+  const nicht={ uwert:'Wärmebrücken (ψ-Werte), inhomogene Schichten (Holzständer, Sparren — Gefache anteilig), Luftschichten, Bauteile gegen Erdreich nach DIN EN ISO 13370, sommerlicher Wärmeschutz.',
+    glaser:'Instationäre Feuchte (WUFI), Holz-Massezunahme, Dachbegrünung, Flachdächer mit Sonderklima, Kapillartransport.',
+    schall:'Genauer Nachweis nach DIN 4109-2 mit allen Flankenwegen, zweischalige und leichte Bauteile, Holzbalkendecken, Außenlärm mit Fenstern.' }[BPMODE];
+  renderOut(res.C, res.ok, fg(I,res), line, nicht, 'ref.html#/bauphysik');
+}
+function buildReportBauph(){
+  const {I,res,mode}=LAST;
+  const title={uwert:'Wärmeschutz — U-Wert', glaser:'Feuchteschutz — Glaser-Verfahren', schall:'Schallschutz'}[mode];
+  const norm={uwert:'DIN EN ISO 6946, DIN 4108-2, GEG', glaser:'DIN 4108-3', schall:'DIN 4109-1, DIN 4109-32'}[mode];
+  const rows=I.L.map((s,i)=>repRow(`Schicht ${i+1}`, `${s.name}: d = ${bpF(s.d*100,1)} cm, λ = ${bpF(s.lam,3)} W/(mK), μ = ${bpF(s.mu,0)}, ρ = ${bpF(s.rho,0)} kg/m³`)).join('')
+    + (mode==='uwert'?repRow('Bauteil', `${BP_RS[I.art].n}, θ<sub>i</sub> = ${bpF(I.ti,1)} °C, θ<sub>e</sub> = ${bpF(I.te,1)} °C`):'')
+    + (mode==='schall'?repRow('Anforderung', `${BP_SCHALL[I.anf][0]}, Abschlag Flanken ${bpF(I.KF,1)} dB, u<sub>prog</sub> = ${bpF(I.up,1)} dB${I.tr?`; Estrich ${bpF(I.dE*100,1)} cm, ρ = ${bpF(I.rE,0)} kg/m³, s′ = ${bpF(I.sp,0)} MN/m³, K = ${bpF(I.K,1)} dB, zul. L′<sub>n,w</sub> = ${bpF(I.zul,0)} dB`:''}`):'');
+  return repHead(I.name||title, norm) + `<section><h2>Bauteilaufbau (innen → außen)</h2><table>${rows}</table></section><section><h2>${title}</h2><div class="figure">${BP_FN[mode][3](I,res)}</div></section>` + reportChecks(res.C) + repEnd(title+'.');
+}
+
 function fillHvKlassen(){
   const art=$('hv-art').value, cur=$('hv-kl').value, T = art==='bsh' ? HOLZ_BSH : HOLZ_VH;
   $('hv-kl').innerHTML = T.map(r=>`<option${r[0]===cur?' selected':''}>${r[0]}</option>`).join('');
@@ -5808,7 +6107,7 @@ function buildReportHX(){
 // ══════════════════════════════════════════════════
 // Bericht
 // ══════════════════════════════════════════════════
-const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall' };
+const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall', bauph_uwert:'U-Wert (Bauphysik)', bauph_glaser:'Tauwasser (Glaser)', bauph_schall:'Schallschutz' };
 function reportChecks(C){
   return C.map((c,i)=>`<section><h2>${i+1}. ${c.title}</h2><div class="steps">${stepsHtml(c.steps)}</div>
       ${c.info?'':`<p>Ausnutzung η = ${deNum(c.eta,2)} — <span class="${c.ok?'ok':'bad'}">${c.ok?'Nachweis erfüllt':'Nachweis nicht erfüllt'}</span></p>`}
@@ -5891,6 +6190,7 @@ function buildReport(){
   if(LAST.mat==='grund') return buildReportGrund();
   if(LAST.mat==='mauer') return buildReportMauer();
   if(LAST.mat==='wasser') return buildReportWasser();
+  if(LAST.mat==='bauph') return buildReportBauph();
   if(LAST.mat==='stahl') return buildReportStahl();
   if(LAST.I.typ==='stuetze') return buildReportStuetze();
   if(LAST.I.typ==='durchstanzen') return buildReportDS();
@@ -5927,8 +6227,8 @@ const STORE='statiq-size-v1';
 const FIELDS=['in-name','in-b','in-h','in-l','in-K','in-hf','in-feld','in-b1','in-b2','in-beton','in-expo','in-dg','in-cot','in-M','in-V','in-Mqp','in-Ms','in-Mqps',
   'in-t','in-haken','in-lager','in-n','in-nl2','in-ds','in-dsw','in-sw','in-nt','in-dst','in-dsp','in-s','in-dspt','in-st','in-n2','in-ds2',
   'su-l','su-beta','su-N','su-phi','su-M02','su-M01','su-n','su-ds','su-dsw','su-sw','ds-form','ds-pos','ds-c1','ds-c2','ds-V','ds-dsx','ds-sx','ds-dsy','ds-sy'];
-const CHECKS=['hv-vorg','su-auto','in-tw','in-zwang','in-auto','in-aufl','sn-auto','an-gew','ho-auto','sw-front','mw-own','mh-stoss','gs-gw'];
-const SFIELDS=['sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','sn-N','sn-mv','sn-psi','sn-by','sn-bz','sn-Llt','sn-zg','sn-Mk','sn-wlim',
+const CHECKS=['bg-ns','bs-tr','hv-vorg','su-auto','in-tw','in-zwang','in-auto','in-aufl','sn-auto','an-gew','ho-auto','sw-front','mw-own','mh-stoss','gs-gw'];
+const SFIELDS=['bp-name','bp-art','bp-ti','bp-te','bs-anf','bs-kf','bs-up','bs-dE','bs-rE','bs-s','bs-K','bs-zul','bl-m1','bl-d1','bl-l1','bl-u1','bl-r1','bl-m2','bl-d2','bl-l2','bl-u2','bl-r2','bl-m3','bl-d3','bl-l3','bl-u3','bl-r3','bl-m4','bl-d4','bl-l4','bl-u4','bl-r4','bl-m5','bl-d5','bl-l5','bl-u5','bl-r5','bl-m6','bl-d6','bl-l6','bl-u6','bl-r6','sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','sn-N','sn-mv','sn-psi','sn-by','sn-bz','sn-Llt','sn-zg','sn-Mk','sn-wlim',
   'sn-Mz','sn-tors','sn-Tw','sn-F','sn-ss','sn-lage','sn-cE',
   'an-name','an-m','an-k','an-n1','an-n2','an-ms','an-t','an-st','an-e1','an-e2','an-p1','an-p2','an-V','an-N','an-a','an-lw','an-nw','an-Fw','an-tmax',
   'ho-name','ho-art','ho-kl','ho-b','ho-h','ho-L','ho-nkl','ho-kled','ho-mv','ho-zg','ho-Llt','ho-M','ho-V','ho-N','ho-F','ho-lA','ho-by','ho-bz','ho-MG','ho-MQ','ho-psi2','hv-name','hv-vm','hv-an','hv-d','hv-fu','hv-dk','hv-fax','hv-art','hv-kl','hv-t1','hv-t2','hv-ts','hv-al1','hv-al2','hv-nkl','hv-kled','hv-n','hv-m','hv-a1','hv-a2','hv-a3','hv-a4','hv-F','fp-name','fp-reihe','fp-prof','fp-B','fp-L','fp-t','fp-st','fp-beton','fp-fund','fp-N','fp-V','fp-a',
@@ -5938,7 +6238,7 @@ const SFIELDS=['sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','s
   'mw-art','mw-m','mw-fb','mw-fm','mw-fk','md-name','md-t','md-h','md-l','md-lage','md-decke','md-a','md-lf','md-N','mt-name','mt-t','mt-hc','mt-lb','mt-bb','mt-a1','mt-lw','mt-N','mk-name','mk-t','mk-h','mk-he','mk-bc','mk-rho','mk-q','mk-Nmax','mk-Nmin','mh-name','mh-l','mh-t','mh-h','mh-lag','mh-N','mh-V',
   'wd-name','wd-alpha','wd-b','wd-to','wd-L','wd-hu','ws-name','ws-form','ws-L','ws-B','ws-Bu','ws-H','ws-D','ws-G','ws-zg','ws-f','ws-w','wr-name','wr-Q','wr-D','wr-L','wr-mat','wr-k','wr-zeta','wr-dh','wr-nu','wg-name','wg-Q','wg-I','wg-b','wg-m','wg-mat','wg-kst','wg-H','wg-f','ww-name','ww-Q','ww-b','ww-form','ww-mu','ww-w','ww-hmax',
   'hx-art','hx-kl','hx-nkl','hx-kled','ak-name','ak-lage','ak-b','ak-h','ak-hef','ak-x','ak-i','ak-V','sd-name','sd-form','sd-L','sd-b','sd-h0','sd-hap','sd-q','vs-name','vs-art','vs-gam','vs-b','vs-h','vs-tv','vs-lv','vs-S','vs-kc90'];
-const snapshot = () => { const o={typ:TYP, mat:MAT, stmode:STMODE, homode:HOMODE, grmode:GRMODE, mwmode:MWMODE, wbmode:WBMODE}; [...FIELDS,...SFIELDS].forEach(f=>o[f]=$(f).value); CHECKS.forEach(f=>o[f]=$(f).checked); return o; };
+const snapshot = () => { const o={typ:TYP, mat:MAT, stmode:STMODE, homode:HOMODE, grmode:GRMODE, mwmode:MWMODE, wbmode:WBMODE, bpmode:BPMODE}; [...FIELDS,...SFIELDS].forEach(f=>o[f]=$(f).value); CHECKS.forEach(f=>o[f]=$(f).checked); return o; };
 function apply(o){
   if(o['sn-reihe']){ $('sn-reihe').value=o['sn-reihe']; fillProfile(); }
   if(o['ho-art']){ $('ho-art').value=o['ho-art']; fillHolzKlassen(); }
@@ -5947,6 +6247,7 @@ function apply(o){
   if(o.grmode) GRMODE=o.grmode;
   if(o.mwmode) MWMODE=o.mwmode;
   if(o.wbmode) WBMODE=o.wbmode;
+  if(o.bpmode) BPMODE=o.bpmode;
   if(o['fp-reihe']){ $('fp-reihe').value=o['fp-reihe']; fillFpProfile(); }
   if(o['sw-reihe']){ $('sw-reihe').value=o['sw-reihe']; fillSwProfile(); }
   if(o['hv-art']){ $('hv-art').value=o['hv-art']; fillHvKlassen(); }
@@ -5966,7 +6267,7 @@ function posMsg(t){ $('pos-msg').textContent = t; }
 function savePos(){
   const name = ($(nameField()).value || '').trim() || 'Ohne Bezeichnung';
   const list = posRead(), i = list.findIndex(p=>p.name===name);
-  const entry = { name, typ: MAT==='beton' ? TYP : MAT==='stahl' && STMODE==='anschluss' ? 'anschluss' : MAT==='stahl' && STMODE==='fuss' ? 'fuss' : MAT==='stahl' && STMODE==='schweiss' ? 'schweiss' : MAT==='holz' && HOMODE==='verbindung' ? 'holzverb' : MAT==='holz' && HOMODE!=='bauteil' ? 'holz_'+HOMODE : MAT==='grund' ? 'grund_'+GRMODE : MAT==='mauer' ? 'mauer_'+MWMODE : MAT==='wasser' ? 'wasser_'+WBMODE : MAT, ok: !!LAST?.res?.ok, date: new Date().toISOString(), data: snapshot() };
+  const entry = { name, typ: MAT==='beton' ? TYP : MAT==='stahl' && STMODE==='anschluss' ? 'anschluss' : MAT==='stahl' && STMODE==='fuss' ? 'fuss' : MAT==='stahl' && STMODE==='schweiss' ? 'schweiss' : MAT==='holz' && HOMODE==='verbindung' ? 'holzverb' : MAT==='holz' && HOMODE!=='bauteil' ? 'holz_'+HOMODE : MAT==='grund' ? 'grund_'+GRMODE : MAT==='mauer' ? 'mauer_'+MWMODE : MAT==='wasser' ? 'wasser_'+WBMODE : MAT==='bauph' ? 'bauph_'+BPMODE : MAT, ok: !!LAST?.res?.ok, date: new Date().toISOString(), data: snapshot() };
   if(i>=0) list[i]=entry; else list.push(entry);
   if(!posWrite(list)){ posMsg('Speichern nicht möglich — der Browser erlaubt hier keinen lokalen Speicher.'); return; }
   posMsg(i>=0 ? `„${name}“ aktualisiert.` : `„${name}“ gespeichert.`); renderPos();
@@ -5985,7 +6286,7 @@ function renderPos(){
       <button class="btn small danger${_armed===i?' armed':''}" onclick="delPos(${i}, this)">${_armed===i?tx('delConfirm'):tx('del')}</button></div>`).join('')
     : '<div class="hint" style="margin-top:0">Noch keine Positionen gespeichert. Die Bezeichnung oben dient als Name.</div>';
 }
-function nameField(){ return MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : 'sn-name') : 'in-name'; }
+function nameField(){ return MAT==='bauph' ? 'bp-name' : MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : 'sn-name') : 'in-name'; }
 function syncK(){ const f=$('in-feld').value; $('in-K').value = f==='0.85' ? '1.3' : f==='0.7' ? '1.5' : '1.0'; }
 
 
@@ -6074,6 +6375,7 @@ function importCalc(key){
     else { B={...C.riegel, Fsup:C.Fsup}; if(C.riegel.N>0) notes.push(`Normalkraft im Riegel N = ${deNum(C.riegel.N,1)} kN (Druck).`); }
   }
   const src = `<b>Übernommen aus calc:</b> ${esc(e.name)}${B.what?` — ${B.what}`:''}`;
+  if(MAT==='bauph'){ say('Bauphysik rechnet mit dem Bauteilaufbau — aus calc gibt es hier nichts zu übernehmen.'); return; }
   if(MAT==='wasser'){ say('Wasserbau rechnet mit eigenen Eingaben (Abfluss, Geometrie) — aus calc gibt es hier nichts zu übernehmen.'); return; }
   if(MAT==='mauer'){ say('Für Mauerwerk bitte die Lasten von Hand eingeben. Auflagerkraft aus calc: ' + deNum(C.Fsup||B.Fsup||0,1) + ' kN (z. B. als N<sub>Edc</sub> für die Teilflächenpressung).'); return; }
   if(MAT==='grund'){ say('Für Grundbau bitte die Lasten von Hand und getrennt nach ständig und veränderlich eingeben (calc trennt die Lastarten nicht). Auflagerkraft aus calc: ' + deNum(C.Fsup||B.Fsup||0,1) + ' kN.'); return; }
@@ -6118,7 +6420,7 @@ fillProfile(); $('sn-prof').value='IPE 300';
 $('an-m').innerHTML = SCHRAUBEN.map(r=>`<option${r[0]==='M20'?' selected':''}>${r[0]}</option>`).join('');
 
 // ══ Übersicht: Auswahlmenü (Bereich › Nachweis), Projekt-Menü, aufklappbare Karten und Nachweise ══
-const PICK_GROUPS = [['beton','seg-typ'],['stahl','seg-st'],['holz','seg-ho'],['mauer','seg-mw'],['grund','seg-gr'],['wasser','seg-wb']];
+const PICK_GROUPS = [['beton','seg-typ'],['stahl','seg-st'],['holz','seg-ho'],['mauer','seg-mw'],['grund','seg-gr'],['wasser','seg-wb'],['bauph','seg-bp']];
 const matBtn = m => document.querySelector(`#seg-mat button[data-mat="${m}"]`);
 function updatePick(){
   const g=PICK_GROUPS.find(x=>x[0]===MAT); if(!g || !$('pick-g')) return;

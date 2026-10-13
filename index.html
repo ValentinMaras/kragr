@@ -159,7 +159,7 @@
       <div class="card-badge badge-live" id="badge-live-2">● LIVE</div>
     </div>
     <div class="card-title" id="ref-title">Theory & Tables</div>
-    <div class="card-desc" id="ref-desc">Formulas, tables and design checks from structural analysis to geotechnics, with calculators and examples — your digital reference handbook.</div>
+    <div class="card-desc" id="ref-desc">Formulas, tables and design checks from structural analysis to geotechnics and building physics, with calculators and examples — your digital reference handbook.</div>
     <div class="card-tags" id="ref-tags">
       <span class="tag">Structural Analysis</span>
       <span class="tag">Loads EC0/EC1</span>
@@ -177,7 +177,7 @@
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · calc v0.8.14 · ref v0.3.17 · size v0.5.14</div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · calc v0.8.14 · ref v0.3.18 · size v0.5.15</div>
 </footer>
 
 <script>
@@ -194,13 +194,13 @@ const translations = {
     calc_title: 'Internal Forces',
     calc_desc: 'Shear forces, bending moments, normal forces, reactions and deflections for beams and frames. Diagrams drawn on the structure, printable report.',
     size_title: 'Design & Sizing',
-    size_desc: 'Design in reinforced concrete, steel, timber and masonry, plus geotechnics and hydraulics — every check step by step, printable report.',
+    size_desc: 'Design in reinforced concrete, steel, timber and masonry, plus geotechnics, hydraulics and building physics — every check step by step, printable report.',
     ref_title: 'Theory & Tables',
-    ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics, with calculators and examples — your digital reference handbook.',
+    ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics and building physics, with calculators and examples — your digital reference handbook.',
     footer: 'Valentin Maras',
     saved: 'Saved calculations &amp; reports',
-    size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Buckling", "Torsion", "Report"],
-    ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Geotechnics", "Maths", "Search"],
+    size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Building physics", "Buckling", "Torsion", "Report"],
+    ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Masonry EC6", "Geotechnics", "Hydraulics", "Building physics", "Maths", "Search"],
     tags: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame', 'Trapezoidal Loads', 'Wind on Columns', 'Exact Deflection', 'PDF Report'],
     spec1: '4', spec2: '4',
   },
@@ -212,13 +212,13 @@ const translations = {
     calc_title: 'Schnittkräfte',
     calc_desc: 'Querkräfte, Biegemomente, Normalkräfte, Auflagerkräfte und Durchbiegungen für Träger und Rahmen. Verläufe direkt am Tragwerk, Bericht zum Ausdrucken.',
     size_title: 'Bemessung',
-    size_desc: 'Bemessung in Stahlbeton, Stahl, Holz und Mauerwerk, dazu Grundbau und Wasserbau — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
+    size_desc: 'Bemessung in Stahlbeton, Stahl, Holz und Mauerwerk, dazu Grundbau, Wasserbau und Bauphysik — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
     ref_title: 'Theorie & Tafeln',
-    ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zum Grund- und Wasserbau, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
+    ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zu Grund-, Wasserbau und Bauphysik, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
     footer: 'Valentin Maras',
     saved: 'Gespeicherte Berechnungen &amp; Berichte',
-    size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Stabilität", "Torsion", "Bericht"],
-    ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Grundbau", "Wasserbau", "Mathematik", "Suche"],
+    size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Bauphysik", "Stabilität", "Torsion", "Bericht"],
+    ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Mauerwerk EC6", "Grundbau", "Wasserbau", "Bauphysik", "Mathematik", "Suche"],
     tags: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen', 'Trapezlasten', 'Wind auf Stielen', 'Exakte Durchbiegung', 'Bericht als PDF'],
     spec1: '4', spec2: '4',
   },
@@ -230,13 +230,13 @@ const translations = {
     calc_title: 'Efforts Internes',
     calc_desc: 'Efforts tranchants, moments fléchissants, efforts normaux, réactions et flèches pour poutres et portiques. Diagrammes sur la structure, rapport imprimable.',
     size_title: 'Dimensionnement',
-    size_desc: 'Dimensionnement en béton armé, acier, bois et maçonnerie, ainsi que géotechnique et hydraulique — chaque vérification pas à pas, note de calcul.',
+    size_desc: 'Dimensionnement en béton armé, acier, bois et maçonnerie, ainsi que géotechnique, hydraulique et physique du bâtiment — chaque vérification pas à pas, note de calcul.',
     ref_title: 'Théorie & Tables',
-    ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique, avec calculateurs et exemples — votre manuel de référence numérique.',
+    ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique et à la physique du bâtiment, avec calculateurs et exemples — votre manuel de référence numérique.',
     footer: 'Valentin Maras',
     saved: 'Calculs &amp; rapports enregistrés',
-    size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Stabilité", "Torsion", "Note de calcul"],
-    ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Géotechnique", "Mathématiques", "Recherche"],
+    size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Physique du bâtiment", "Stabilité", "Torsion", "Note de calcul"],
+    ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Maçonnerie EC6", "Géotechnique", "Hydraulique", "Physique du bâtiment", "Mathématiques", "Recherche"],
     tags: ['Poutre simple', 'Console', 'Poutre continue', 'Portique', 'Charges trapézoïdales', 'Vent sur poteaux', 'Flèche exacte', 'Rapport PDF'],
     spec1: '4', spec2: '4',
   },
@@ -248,13 +248,13 @@ const translations = {
     calc_title: 'Fuerzas Internas',
     calc_desc: 'Cortantes, momentos flectores, axiles, reacciones y flechas para vigas y pórticos. Diagramas sobre la estructura, informe imprimible.',
     size_title: 'Dimensionado',
-    size_desc: 'Dimensionado en hormigón armado, acero, madera y fábrica, además de geotecnia e hidráulica — cada comprobación paso a paso, informe imprimible.',
+    size_desc: 'Dimensionado en hormigón armado, acero, madera y fábrica, además de geotecnia, hidráulica y física de la construcción — cada comprobación paso a paso, informe imprimible.',
     ref_title: 'Teoría y Tablas',
-    ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia, con calculadoras y ejemplos — tu manual de referencia digital.',
+    ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia y la física de la construcción, con calculadoras y ejemplos — tu manual de referencia digital.',
     footer: 'Valentin Maras',
     saved: 'Cálculos e informes guardados',
-    size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Estabilidad", "Torsión", "Informe"],
-    ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Geotecnia", "Matemáticas", "Búsqueda"],
+    size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Física de la construcción", "Estabilidad", "Torsión", "Informe"],
+    ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Fábrica EC6", "Geotecnia", "Hidráulica", "Física de la construcción", "Matemáticas", "Búsqueda"],
     tags: ['Viga biapoyada', 'Ménsula', 'Viga continua', 'Pórtico', 'Cargas trapezoidales', 'Viento en pilares', 'Flecha exacta', 'Informe PDF'],
     spec1: '4', spec2: '4',
   }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.17 -->
+<!-- Statiq·ref v0.3.18 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -144,6 +144,7 @@
 
     /* Rechner */
     .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .bp-row { display: flex; gap: 6px; } .bp-row select { flex: 1 1 auto; min-width: 0; } .bp-row input { flex: 0 0 70px; width: 70px !important; }
     .calc-field label { display: block; font-size: 11px; font-family:'DM Mono', monospace; color: var(--text3); margin-bottom: 3px; }
     .calc-field select { width: 100%; padding: 7px 8px; font-size: 13px; font-family:'DM Sans', sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
     .calc-out { font-size: 12px; font-family:'DM Mono', monospace; color: var(--text2); margin-bottom: 6px; line-height: 1.7; }
@@ -383,7 +384,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.17';
+const REF_VERSION = '0.3.18';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -790,6 +791,42 @@ const FAECHER = {
         title: 'Hydrologie',
         themen: {
           regen: { title: 'Regenabfluss' },
+        }
+      },
+    }
+  },
+  bauphysik: {
+    title: 'Bauphysik', tag: 'BPh',
+    sub: 'Wärmeschutz, U-Wert, Taupunkt, Glaser-Verfahren, Schallschutz, Brandschutz',
+    kapitel: {
+      waerme: {
+        title: 'Wärmeschutz',
+        themen: {
+          grundlagen:    { title: 'Wärmeleitung und Kennwerte' },
+          uwert:         { title: 'U-Wert und Temperaturverlauf' },
+          anforderungen: { title: 'Anforderungen und Wärmebrücken' },
+        }
+      },
+      feuchte: {
+        title: 'Feuchteschutz',
+        themen: {
+          luft:   { title: 'Luftfeuchte und Taupunkt' },
+          glaser: { title: 'Tauwasser (Glaser-Verfahren)' },
+        }
+      },
+      schall: {
+        title: 'Schallschutz',
+        themen: {
+          grundlagen:  { title: 'Grundlagen und Anforderungen' },
+          luftschall:  { title: 'Luftschalldämmung' },
+          trittschall: { title: 'Trittschall' },
+        }
+      },
+      brand: {
+        title: 'Brandschutz',
+        themen: {
+          klassen:         { title: 'Baustoff- und Feuerwiderstandsklassen' },
+          gebaeudeklassen: { title: 'Gebäudeklassen' },
         }
       },
     }
@@ -4452,6 +4489,206 @@ function updateLW(){
   const fg=document.getElementById('lw-fig'); if(fg) fg.innerHTML=fig(skLastabtrag(I.n),'Jede Decke gibt ihre Auflagerkraft an die Wand darunter ab; im untersten Geschoss summieren sich alle Decken, das Dach und die Wandeigenlasten.');
 }
 
+// ══════════════════════════════════════════════════
+// BAUPHYSIK — Rechenkerne (gleich in statiq·ref und statiq·size)
+// Wärme: DIN EN ISO 6946 · Feuchte: DIN 4108-3 (Glaser) · Schall: DIN 4109-32/-34 · Brand: MBO
+// ══════════════════════════════════════════════════
+// Baustoffe: [Name, λ W/(mK), μ (Rechenwert), ρ kg/m³]  — Bemessungswerte nach DIN 4108-4 / EN ISO 10456 (Anhaltswerte)
+const BP_MAT = [
+  ['Gipsputz', 0.51, 10, 1200], ['Kalkzementputz', 1.0, 20, 1800], ['Zementestrich', 1.4, 30, 2000],
+  ['Stahlbeton', 2.3, 100, 2400], ['Normalbeton (unbewehrt)', 2.0, 100, 2300],
+  ['Kalksandstein RDK 1,8', 0.99, 15, 1800], ['Kalksandstein RDK 2,0', 1.1, 15, 2000],
+  ['Vollziegel RDK 1,8', 0.81, 10, 1800], ['Hochlochziegel RDK 0,8', 0.39, 10, 800], ['Planziegel wärmedämmend (λ 0,09)', 0.09, 10, 650],
+  ['Porenbeton RDK 0,35', 0.10, 5, 350], ['Leichtbeton-Vollblock RDK 0,8', 0.39, 10, 800],
+  ['Mineralwolle WLS 035', 0.035, 1, 30], ['Mineralwolle WLS 032', 0.032, 1, 40], ['EPS WLS 035', 0.035, 60, 20], ['EPS WLS 032 (grau)', 0.032, 60, 20],
+  ['XPS WLS 035', 0.035, 150, 35], ['PUR/PIR WLS 024', 0.024, 60, 30], ['Holzfaserdämmung WLS 040', 0.040, 5, 160], ['Zellulose WLS 040', 0.040, 2, 50],
+  ['Nadelholz', 0.13, 40, 500], ['OSB-Platte', 0.13, 200, 650], ['Gipskartonplatte', 0.25, 8, 900], ['Holzwolle-Leichtbauplatte', 0.09, 5, 400],
+  ['PE-Folie 0,2 mm (s_d = 100 m)', 0.20, 500000, 950], ['Dampfbremse 0,2 mm (s_d = 2 m)', 0.20, 10000, 950],
+  ['Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)', 0.17, 50000, 1100], ['Dachziegel', 1.0, 40, 2000]
+];
+const BP_RS = { wand:{ n:'Wand (Wärmestrom horizontal)', si:0.13, se:0.04 }, dach:{ n:'Dach, Decke nach außen (Wärmestrom nach oben)', si:0.10, se:0.04 },
+  boden:{ n:'Decke über Außenluft (Wärmestrom nach unten)', si:0.17, se:0.04 }, erd:{ n:'Bauteil gegen Erdreich', si:0.13, se:0 }, unb:{ n:'Wand zu unbeheiztem Raum', si:0.13, se:0.13 } };
+// Anforderungen: Mindestwärmeschutz DIN 4108-2 (R) und GEG (U) — Anhaltswerte
+const BP_ANF = { wand:{ n:'Außenwand', Rmin:1.2, Uref:0.28, Ualt:0.24 }, dach:{ n:'Dach / oberste Geschossdecke', Rmin:1.2, Uref:0.20, Ualt:0.24 },
+  boden:{ n:'Decke über Außenluft', Rmin:1.75, Uref:0.28, Ualt:0.24 }, erd:{ n:'Bauteil gegen Erdreich', Rmin:1.2, Uref:0.35, Ualt:0.30 }, unb:{ n:'Wand zu unbeheiztem Raum', Rmin:0.07, Uref:0.35, Ualt:0.30 } };
+// Schichten: [{ name, d [m], lam, mu, rho }]
+function bpWaerme(L, art){
+  const rs=BP_RS[art]||BP_RS.wand, R=L.map(s=>s.d/s.lam), Rb=R.reduce((a,b)=>a+b,0), RT=rs.si+Rb+rs.se;
+  return { R, Rb, RT, U:1/RT, Rsi:rs.si, Rse:rs.se };
+}
+function bpTemperaturen(L, Rsi, Rse, ti, te){ // θ an Oberflächen und Schichtgrenzen von innen nach außen
+  const Rs=L.map(s=>s.d/s.lam), RT=Rsi+Rs.reduce((a,b)=>a+b,0)+Rse, q=(ti-te)/RT, T=[ti-q*Rsi];
+  Rs.forEach(r=>T.push(T[T.length-1]-q*r)); return { q, T, RT };
+}
+const psat = t => t>=0 ? 610.5*Math.exp(17.269*t/(237.3+t)) : 610.5*Math.exp(21.875*t/(265.5+t));
+function taupunkt(p){ const x=Math.log(p/610.5); return p>=610.5 ? 237.3*x/(17.269-x) : 265.5*x/(21.875-x); }
+// Glaser nach DIN 4108-3 (Anhang A): Tauperiode 2160 h (innen 20 °C/50 %, außen −5 °C/80 %),
+// Verdunstungsperiode 2160 h (innen 20 °C/50 %, außen 12 °C/70 %), R_si = 0,25 / R_se = 0,04, 1/δ₀ = 1,5·10⁶ m·h·Pa/kg
+const GL = { t:2160, Z:1.5e6, Rsi:0.25, Rse:0.04, Ti:20, phiI:0.5, Te:-5, phiE:0.8, TeV:12, phiEV:0.7, mMax:1.0 };
+function bpHull(P){ // untere konvexe Hülle (x aufsteigend)
+  const H=[]; for(const p of P){ while(H.length>=2){ const a=H[H.length-2], b=H[H.length-1]; if((b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0])<=1e-12) H.pop(); else break; } H.push(p); } return H; }
+function glaser(L){
+  const sd=L.map(s=>s.mu*s.d), S=[0]; sd.forEach(v=>S.push(S[S.length-1]+v)); const Stot=S[S.length-1];
+  const lauf=(te,phiE)=>{ const t=bpTemperaturen(L,GL.Rsi,GL.Rse,GL.Ti,te).T, ps=t.map(psat), pi=GL.phiI*psat(GL.Ti), pe=phiE*psat(te); return { T:t, ps, pi, pe }; };
+  const A=lauf(GL.Te,GL.phiE);
+  const pts=[[0,A.pi], ...S.map((x,k)=>[x,A.ps[k]]), [Stot,A.pe]];
+  // gleiche x-Werte (dünne Schichten, s_d = 0): nur den kleinsten Wert behalten
+  const P=[]; pts.forEach(p=>{ const last=P[P.length-1]; if(last && Math.abs(last[0]-p[0])<1e-12){ if(p[1]<last[1]) last[1]=p[1]; } else P.push([p[0],p[1]]); });
+  // Endpunkte sind die Luftdrücke (nicht p_s an der Oberfläche) — Hülle über alle Punkte
+  P[0]=[0,Math.min(A.pi,P[0][1])]; P[P.length-1]=[Stot,Math.min(A.pe,P[P.length-1][1])];
+  const H=bpHull(P), kontakt=H.slice(1,-1);
+  const res={ sd, S, Stot, T:A.T, ps:A.ps, pi:A.pi, pe:A.pe, H, tau:false, mT:0, mV:0 };
+  if(!kontakt.length || Stot<=0) return res;
+  const xa=kontakt[0][0], xb=kontakt[kontakt.length-1][0], ka=S.findIndex(x=>Math.abs(x-xa)<1e-9), kb=S.length-1-[...S].reverse().findIndex(x=>Math.abs(x-xb)<1e-9);
+  const gin=(A.pi-A.ps[ka])/(GL.Z*xa), gout=(A.ps[kb]-A.pe)/(GL.Z*(Stot-xb)), mT=(gin-gout)*GL.t;
+  const V=lauf(GL.TeV,GL.phiEV), giV=(V.ps[ka]-V.pi)/(GL.Z*xa), geV=(V.ps[kb]-V.pe)/(GL.Z*(Stot-xb)), mV=(Math.max(giV,0)+Math.max(geV,0))*GL.t;
+  return Object.assign(res,{ tau:mT>1e-9, ka, kb, xa, xb, gin, gout, mT:Math.max(mT,0), TV:V.T, psV:V.ps, piV:V.pi, peV:V.pe, giV, geV, mV });
+}
+// Schall: Massegesetz (DIN 4109-32), Resonanzfrequenz zweischaliger Bauteile, Trittschall Massivdecke mit schwimmendem Estrich
+const rwMasse = m => 30.9*Math.log10(m)-22.2;
+const f0Zweischalig = (s, m1, m2) => 160*Math.sqrt(s*(1/m1+1/m2));
+const lnEq = m => 164-35*Math.log10(m);
+const dLwEstrich = (mE, s) => 13*Math.log10(mE)-14.2*Math.log10(s)+20.8;
+const BP_SCHALL = [ // [Bauteil, erf. R'_w, zul. L'_n,w] nach DIN 4109-1 (Mehrfamilienhaus) — Anhaltswerte
+  ['Wohnungstrennwand', 53, null], ['Treppenhauswand', 53, null], ['Wohnungstrenndecke', 54, 50], ['Decke über Keller/Durchfahrt', 52, 50],
+  ['Treppenlauf und -podest', null, 53], ['Haustrennwand Reihenhaus (unterstes Geschoss)', 59, null], ['Haustrennwand Reihenhaus (darüber)', 62, null] ];
+// Gebäudeklassen nach MBO § 2
+function gebaeudeklasse(h, nNE, aNE, frei){
+  const aSum=nNE*aNE;
+  if(h<=7 && nNE<=2 && aSum<=400) return frei ? 1 : 2;
+  if(h<=7) return 3;
+  if(h<=13 && aNE<=400) return 4;
+  return 5;
+}
+const GK_ANF = { 1:['keine Anforderung','feuerhemmend'], 2:['feuerhemmend','feuerhemmend'], 3:['feuerhemmend','feuerbeständig'], 4:['hochfeuerhemmend','feuerbeständig'], 5:['feuerbeständig','feuerbeständig'] };
+
+// ── Bauphysik in ref: Eingaben, Skizzen, Rechner ──
+const dP = (v,n=2) => deNum(Math.abs(v)<1e-12?0:v,n).replace(/^-/,'−');
+const bpOpts = () => [['-','—'], ...BP_MAT.map((m,j)=>[String(j), m[0]])];
+const bpMatIdx = name => String(BP_MAT.findIndex(m=>m[0]===name));
+function bpSchichtFelder(p, def, on){
+  return def.map((d,i)=>field(`Schicht ${i+1} (innen → außen): Baustoff / d [cm]`, `<div class="bp-row">${sel(p+'m'+(i+1), bpOpts(), d[0]===null?'-':bpMatIdx(d[0]), on)}${inp(p+'d'+(i+1), d[1], on)}</div>`)).join('');
+}
+function bpLesen(p, n=6){
+  const L=[]; for(let i=1;i<=n;i++){ const m=valOf(p+'m'+i), d=num(p+'d'+i); if(m && m!=='-' && d>0){ const M=BP_MAT[+m]; L.push({ name:M[0], d:d/100, lam:M[1], mu:M[2], rho:M[3] }); } } return L;
+}
+const BP_FARBE = n => /wolle|EPS|XPS|PUR|faser|Zellulose/.test(n) ? '#fde68a' : /holz|OSB|Holz/i.test(n) ? '#e7c9a0' : /Folie|bremse|Bitumen/.test(n) ? '#93c5fd' : /putz|estrich|karton/i.test(n) ? '#e5e7eb' : /beton/i.test(n) ? '#cbd5e1' : '#e7c9b0';
+function skBauteil(L, T, ti, te, Rsi, Rse){
+  const x0=70, W=280, yT=30, H=150, dsum=L.reduce((a,s)=>a+s.d,0), w=L.map(s=>Math.max(4, s.d/dsum*W)), ws=w.reduce((a,b)=>a+b,0), k=W/ws;
+  const tmax=Math.max(ti,te), tmin=Math.min(ti,te), Y=t=>yT+10+(tmax-t)/(tmax-tmin||1)*(H-20);
+  let o='', x=x0; const X=[x0];
+  L.forEach((s,i)=>{ const ww=w[i]*k; o+=`<rect x="${R1(x)}" y="${yT}" width="${R1(ww)}" height="${H}" fill="${BP_FARBE(s.name)}" stroke="${SK.ink}" stroke-width="0.7"/>`; if(ww>22) o+=tl(x+ww/2,yT+H+12,dP(s.d*100,1),'middle'); x+=ww; X.push(x); });
+  // Temperaturlinie: Luft innen → Oberfläche (Übergang), Schichten, Oberfläche → Luft außen
+  const P=[[x0-40,Y(ti)],[x0,Y(T[0])], ...T.slice(1).map((t,i)=>[X[i+1],Y(t)]), [X[X.length-1]+40,Y(te)]];
+  o+=pl(P,SK.load,1.8)+tl(x0-42,Y(ti)-5,dP(ti,1)+' °C','start',SK.load)+tl(X[X.length-1]+42,Y(te)-5,dP(te,1)+' °C','end',SK.load);
+  o+=tl(x0+2,Y(T[0])-5,dP(T[0],1),'start',SK.load)+tl(X[X.length-1]-2,Y(T[T.length-1])+12,dP(T[T.length-1],1),'end',SK.load);
+  o+=tl(x0-20,yT+H+12,'innen','middle')+tl(X[X.length-1]+20,yT+H+12,'außen','middle')+tl(x0+W/2,yT+H+26,'Schichtdicken in cm','middle',SK.dim);
+  return sv(420,yT+H+34,'Bauteilschnitt mit Temperaturverlauf', o);
+}
+function updateUW(){
+  const out=document.getElementById('uw-out'); if(!out) return;
+  const L=bpLesen('uw-'), art=valOf('uw-art'), ti=num('uw-ti'), te=num('uw-te'), f=dP;
+  if(!L.length || !(ti>te)){ out.innerHTML='Bitte mindestens eine Schicht und θ<sub>i</sub> > θ<sub>e</sub> eingeben.'; return; }
+  const W=bpWaerme(L,art), T=bpTemperaturen(L,W.Rsi,W.Rse,ti,te), A=BP_ANF[art], fR=1-W.U*0.25;
+  const rows=L.map((s,i)=>[`${i+1}. ${s.name}`, f(s.d*100,1), f(s.lam,3), f(W.R[i],3)]);
+  out.innerHTML = textTable(['Schicht (innen → außen)','d [cm]','λ [W/(m·K)]','R = d/λ [m²K/W]'], rows) + ablauf(`${BP_RS[art].n}`, [
+    `§Wärmedurchgangswiderstand`, `R = Σ d<sub>i</sub> / λ<sub>i</sub> = ${f(W.Rb,3)} m²K/W`,
+    `R<sub>T</sub> = R<sub>si</sub> + R + R<sub>se</sub> = ${f(W.Rsi,2)} + ${f(W.Rb,3)} + ${f(W.Rse,2)} = ${f(W.RT,3)} m²K/W`,
+    `§Wärmedurchgangskoeffizient`, `U = 1 / R<sub>T</sub> = 1 / ${f(W.RT,3)} = ${f(W.U,3)} W/(m²K)`,
+    `§Wärmestrom und Temperaturen`, `q = U · (θ<sub>i</sub> − θ<sub>e</sub>) = ${f(W.U,3)} · ${f(ti-te,1)} = ${f(T.q,2)} W/m²`,
+    `θ<sub>si</sub> = θ<sub>i</sub> − q · R<sub>si</sub> = ${f(ti,1)} − ${f(T.q,2)} · ${f(W.Rsi,2)} = ${f(T.T[0],2)} °C`,
+    `!jede Schicht: Δθ = q · R<sub>i</sub> — die Temperatur fällt dort am stärksten, wo der Widerstand groß ist (Dämmung)`,
+    `§Anforderungen (Anhaltswerte)`, `!Mindestwärmeschutz DIN 4108-2 (${A.n}): R = ${f(W.Rb,2)} ${W.Rb>=A.Rmin?'≥':'<'} ${f(A.Rmin,2)} m²K/W ${W.Rb>=A.Rmin?'✓':'✗'}`,
+    `!GEG Referenzgebäude (Neubau): U = ${f(W.U,3)} ${W.U<=A.Uref?'≤':'>'} ${f(A.Uref,2)} W/(m²K) ${W.U<=A.Uref?'✓':'✗'} · Bauteil im Bestand erneuert: ${W.U<=A.Ualt?'≤':'>'} ${f(A.Ualt,2)} ${W.U<=A.Ualt?'✓':'✗'}`,
+    `!Schimmel: f<sub>Rsi</sub> = 1 − U · 0,25 = ${f(fR,3)} ${fR>=0.7?'≥':'<'} 0,70 ${fR>=0.7?'✓':'✗'} (ungestörter Bereich, R<sub>si</sub> = 0,25)`]);
+  const fg=document.getElementById('uw-fig'); if(fg) fg.innerHTML=fig(skBauteil(L,T.T,ti,te),'Der Temperaturverlauf ist in jeder Schicht eine Gerade. Die Neigung ist umgekehrt proportional zu λ: In der Dämmung fällt die Temperatur steil ab.');
+}
+function updateTP(){
+  const out=document.getElementById('tp-out'); if(!out) return;
+  const t=num('tp-t'), phi=num('tp-phi')/100, U=num('tp-U'), te=num('tp-te'), f=dP;
+  if(!(phi>0&&phi<=1&&t>-30&&t<60)){ out.innerHTML='Bitte −30 … 60 °C und 0 < φ ≤ 100 % eingeben.'; return; }
+  const ps=psat(t), p=phi*ps, ts=taupunkt(p), S=[`§Sättigungsdampfdruck (Magnus-Formel)`,
+    t>=0 ? `p<sub>s</sub> = 610,5 · e<sup>17,269 · θ / (237,3 + θ)</sup> = 610,5 · e<sup>17,269 · ${f(t,1)} / ${f(237.3+t,1)}</sup> = ${f(ps,1)} Pa` : `p<sub>s</sub> = 610,5 · e<sup>21,875 · θ / (265,5 + θ)</sup> = ${f(ps,1)} Pa`,
+    `§Dampfdruck der Luft`, `p = φ · p<sub>s</sub> = ${f(phi,2)} · ${f(ps,1)} = ${f(p,1)} Pa`,
+    `§Taupunkttemperatur`, `θ<sub>s</sub> = ${p>=610.5?'237,3 · ln(p/610,5) / (17,269 − ln(p/610,5))':'265,5 · ln(p/610,5) / (21,875 − ln(p/610,5))'} = ${f(ts,2)} °C`,
+    `!Jede Oberfläche, die kälter als ${f(ts,1)} °C ist, wird nass (Tauwasser). Schimmel droht schon ab 80 % Feuchte an der Oberfläche: θ ≤ ${f(taupunkt(p/0.8),1)} °C`];
+  if(U>0 && te<t){ const tsi=t-U*0.25*(t-te), fR=(tsi-te)/(t-te);
+    S.push(`§Innenoberfläche eines Bauteils (R<sub>si</sub> = 0,25)`, `θ<sub>si</sub> = θ<sub>i</sub> − U · R<sub>si</sub> · (θ<sub>i</sub> − θ<sub>e</sub>) = ${f(t,1)} − ${f(U,3)} · 0,25 · ${f(t-te,1)} = ${f(tsi,2)} °C`,
+      `!${tsi>ts?'über':'unter'} dem Taupunkt ${tsi>ts?'✓':'✗ Tauwasser'} · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = ${f(fR,3)} ${fR>=0.7?'≥ 0,70 ✓':'< 0,70 ✗ Schimmelgefahr'}`); }
+  out.innerHTML = ablauf(`Luft ${f(t,1)} °C, ${f(phi*100,0)} %`, S);
+}
+function skGlaser(G){
+  const x0=50, W=330, y0=190, H=160, S=G.Stot||1, k=W/S, pmax=Math.max(G.ps[0],G.pi)*1.08, Y=p=>y0-p/pmax*H, X=s=>x0+s*k;
+  let o='';
+  G.S.forEach((s,i)=>{ if(i<G.S.length-1){ const ww=(G.S[i+1]-s)*k; o+=`<rect x="${R1(X(s))}" y="${y0-H}" width="${R1(Math.max(ww,0.5))}" height="${H}" fill="${i%2?'#f3f4f6':'#fafafa'}" stroke="#d1d5db" stroke-width="0.5"/>`; } });
+  // p_s-Kurve: in jeder Schicht ist θ linear in s_d
+  const PS=[]; for(let i=0;i<G.S.length-1;i++){ for(let j=0;j<=12;j++){ const s=G.S[i]+(G.S[i+1]-G.S[i])*j/12, t=G.T[i]+(G.T[i+1]-G.T[i])*j/12; PS.push([X(s),Y(psat(t))]); } }
+  o+=pl(PS,SK.load,1.6)+tl(X(0)+3,Y(G.ps[0])-5,'p<tspan font-size="7" dy="2">s</tspan>','start',SK.load);
+  o+=pl(G.H.map(p=>[X(p[0]),Y(p[1])]),SK.acc,1.6)+tl(X(S)-3,Y(G.pe)-6,'p','end',SK.acc);
+  if(G.tau) o+=`<rect x="${R1(X(G.xa)-2)}" y="${R1(Y(G.ps[G.ka])-2)}" width="${R1((G.xb-G.xa)*k+4)}" height="4" fill="${SK.load}"/>`+tl((X(G.xa)+X(G.xb))/2,Y(G.ps[G.ka])-8,'Tauwasser','middle',SK.load);
+  o+=ln(x0,y0,x0+W,y0,SK.ink,0.9)+ln(x0,y0,x0,y0-H-6,SK.ink,0.9)+tl(x0+W,y0+14,`s<tspan font-size="7" dy="2">d</tspan><tspan dy="-2"> [m] → ${dP(S,2)}</tspan>`,'end')+tl(x0-4,y0-H,'p [Pa]','end');
+  for(const p of [500,1000,1500,2000,2500]) if(p<pmax) o+=ln(x0-3,Y(p),x0,Y(p),SK.ink,0.7)+tl(x0-5,Y(p)+3,String(p),'end');
+  return sv(400,215,'Glaser-Diagramm (Tauperiode)', o);
+}
+function updateGL(){
+  const out=document.getElementById('gl-out'); if(!out) return;
+  const L=bpLesen('gl-'), f=dP;
+  if(L.length<1){ out.innerHTML='Bitte mindestens eine Schicht eingeben.'; return; }
+  const G=glaser(L);
+  const rows=[['innen (Luft)','—','20,0',f(G.pi,0),'—']]; G.T.forEach((t,k)=>rows.push([k===0?'Oberfläche innen':k===G.T.length-1?'Oberfläche außen':`Grenze ${k}/${k+1}`, f(G.S[k],3), f(t,1), f(G.ps[k],0), k>0?`${L[k-1].name}: s<sub>d</sub> = ${f(G.sd[k-1],3)} m`:'—'])); rows.push(['außen (Luft)','—','−5,0',f(G.pe,0),'—']);
+  const S=[`§Randbedingungen Tauperiode (DIN 4108-3)`, `!innen 20 °C / 50 % → p<sub>i</sub> = ${f(G.pi,0)} Pa · außen −5 °C / 80 % → p<sub>e</sub> = ${f(G.pe,0)} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h`,
+    `§Diffusionswiderstand`, `s<sub>d</sub> = Σ μ<sub>i</sub> · d<sub>i</sub> = ${f(G.Stot,3)} m`];
+  if(!G.tau) S.push(`§Ergebnis`, `!Die Gerade von p<sub>i</sub> nach p<sub>e</sub> bleibt überall unter p<sub>s</sub> → kein Tauwasser im Bauteil ✓`);
+  else { S.push(`§Tauwasserebene${G.ka!==G.kb?'n (Bereich)':''}`, `!Die Dampfdrucklinie berührt p<sub>s</sub> ${G.ka===G.kb?`an der Grenze ${G.ka}/${G.ka+1} (s<sub>d</sub> = ${f(G.xa,3)} m)`:`zwischen s<sub>d</sub> = ${f(G.xa,3)} und ${f(G.xb,3)} m`}`,
+      `g<sub>i</sub> = (p<sub>i</sub> − p<sub>s,c</sub>) / (1,5 · 10⁶ · s<sub>d,i</sub>) = (${f(G.pi,0)} − ${f(G.ps[G.ka],0)}) / (1,5 · 10⁶ · ${f(G.xa,3)}) = ${(G.gin*1e3).toFixed(4).replace('.',',')} g/(m²h)`,
+      `g<sub>e</sub> = (p<sub>s,c</sub> − p<sub>e</sub>) / (1,5 · 10⁶ · s<sub>d,e</sub>) = (${f(G.ps[G.kb],0)} − ${f(G.pe,0)}) / (1,5 · 10⁶ · ${f(G.Stot-G.xb,3)}) = ${(G.gout*1e3).toFixed(4).replace('.',',')} g/(m²h)`,
+      `m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>) · 2160 h = ${f(G.mT,3)} kg/m²`,
+      `§Verdunstungsperiode (innen 20 °C / 50 %, außen 12 °C / 70 %, 2160 h)`, `m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>) · 2160 h = ${f(G.mV,3)} kg/m²`,
+      `§Nachweis`, `!m<sub>W,T</sub> = ${f(G.mT,3)} ${G.mT<=GL.mMax?'≤':'>'} 1,0 kg/m² ${G.mT<=GL.mMax?'✓':'✗'} (0,5 kg/m² an nicht saugenden Grenzflächen; Holz: Massezunahme ≤ 5 %)`,
+      `!m<sub>W,T</sub> ${G.mT<=G.mV?'≤':'>'} m<sub>W,V</sub> = ${f(G.mV,3)} kg/m² ${G.mT<=G.mV?'✓ trocknet im Sommer wieder aus':'✗ Feuchte reichert sich an'}`); }
+  out.innerHTML = textTable(['Stelle','Σ s<sub>d</sub> [m]','θ [°C]','p<sub>s</sub> bzw. p [Pa]','Schicht'], rows) + ablauf(`Glaser-Verfahren`, S);
+  const fg=document.getElementById('gl-fig'); if(fg) fg.innerHTML=fig(skGlaser(G),'Waagerecht der Diffusionswiderstand s<sub>d</sub>: Dichte Schichten (Folien) werden breit. Rot: Sättigungsdampfdruck, blau: Dampfdruck — berührt die blaue Linie die rote, fällt Tauwasser aus.');
+}
+function updateLS(){
+  const out=document.getElementById('ls-out'); if(!out) return;
+  const L=bpLesen('ls-',4), anf=+valOf('ls-anf'), f=dP;
+  if(!L.length){ out.innerHTML='Bitte mindestens eine Schicht eingeben.'; return; }
+  const m=L.reduce((a,s)=>a+s.rho*s.d,0), Rw=rwMasse(m), A=BP_SCHALL[anf], erf=A[1];
+  out.innerHTML = ablauf(`Einschaliges massives Bauteil`, [
+    `§Flächenbezogene Masse`, `m′ = Σ ρ<sub>i</sub> · d<sub>i</sub> = ${L.map(s=>`${dk(s.rho)} · ${f(s.d,3)}`).join(' + ')} = ${f(m,1)} kg/m²`,
+    ...(m<65||m>720?[`!Massegesetz gilt für 65 … 720 kg/m² — hier außerhalb`]:[]),
+    `§Bewertetes Schalldämmmaß (DIN 4109-32, Massegesetz)`, `R<sub>w</sub> = 30,9 · lg(m′) − 22,2 = 30,9 · lg(${f(m,1)}) − 22,2 = ${f(Rw,1)} dB`,
+    `!doppelte Masse → + 9,3 dB`,
+    ...(erf?[`§Vergleich mit der Anforderung (${A[0]})`, `!erf. R′<sub>w</sub> ≥ ${erf} dB · R<sub>w</sub> − erf = ${f(Rw-erf,1)} dB Reserve für Flankenübertragung (R′<sub>w</sub> < R<sub>w</sub>) und Sicherheitsbeiwert u<sub>prog</sub> = 2 dB ${Rw-erf>=5?'— reicht in der Regel':Rw-erf>=2?'— knapp, Flanken genau nachweisen':'— reicht nicht'}`]:[])]);
+  const s=num('ls-sp'), m1=num('ls-ma'), m2=num('ls-mb'), o2=document.getElementById('ls2-out');
+  if(o2){ if(s>0&&m1>0&&m2>0){ const f0=f0Zweischalig(s,m1,m2); o2.innerHTML=ablauf('Zweischaliges Bauteil / Vorsatzschale', [`f<sub>0</sub> = 160 · √(s′ · (1/m′<sub>1</sub> + 1/m′<sub>2</sub>)) = 160 · √(${f(s,1)} · (1/${f(m1,0)} + 1/${f(m2,0)})) = ${f(f0,1)} Hz`,
+      `!${f0<=80?'f₀ ≤ 80 Hz: sehr gut — die Resonanz liegt unter dem bauakustischen Bereich':f0<=100?'f₀ ≤ 100 Hz: in Ordnung':'f₀ > 100 Hz: die Resonanz fällt in den Hörbereich ab 100 Hz — weichere Dämmung (kleineres s′) oder schwerere Schale'}`]); }
+    else o2.innerHTML='Bitte s′, m′<sub>1</sub>, m′<sub>2</sub> > 0 eingeben.'; }
+}
+function updateTS(){
+  const out=document.getElementById('ts-out'); if(!out) return;
+  const mD=num('ts-mD'), dE=num('ts-dE')/100, rE=num('ts-rE'), s=num('ts-s'), K=num('ts-K')||0, zul=num('ts-zul'), f=dP;
+  if(!(mD>0&&dE>0&&rE>0&&s>0)){ out.innerHTML='Bitte alle Werte > 0 eingeben.'; return; }
+  const mE=rE*dE, Ln=lnEq(mD), dL_=dLwEstrich(mE,s), L=Ln-dL_+K;
+  out.innerHTML = ablauf('Massivdecke mit schwimmendem Estrich', [
+    `§Rohdecke`, `L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>) = 164 − 35 · lg(${f(mD,0)}) = ${f(Ln,1)} dB`,
+    `§Schwimmender Estrich`, `m′<sub>Estrich</sub> = ρ · d = ${dk(rE)} · ${f(dE,3)} = ${f(mE,1)} kg/m²`,
+    `ΔL<sub>w</sub> = 13 · lg(m′<sub>E</sub>) − 14,2 · lg(s′) + 20,8 = 13 · lg(${f(mE,1)}) − 14,2 · lg(${f(s,0)}) + 20,8 = ${f(dL_,1)} dB`,
+    `§Bewerteter Norm-Trittschallpegel`, `L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K = ${f(Ln,1)} − ${f(dL_,1)} + ${f(K,1)} = ${f(L,1)} dB`,
+    `!zul. L′<sub>n,w</sub> = ${f(zul,0)} dB: ${f(L,1)} ${L<=zul?'≤':'>'} ${f(zul,0)} ${L<=zul?'✓':'✗'} — beim Trittschall gilt: kleiner ist besser`]);
+}
+function updateGK(){
+  const out=document.getElementById('gk-out'); if(!out) return;
+  const h=num('gk-h'), n=Math.round(num('gk-n')), a=num('gk-a'), frei=valOf('gk-f')==='1', f=dP;
+  if(!(h>=0&&n>=1&&a>0)){ out.innerHTML='Bitte Höhe ≥ 0, mindestens eine Nutzungseinheit und deren Fläche eingeben.'; return; }
+  const gk=gebaeudeklasse(h,n,a,frei), A=GK_ANF[gk];
+  out.innerHTML = ablauf(`Gebäudeklasse ${gk}`, [
+    `§Einordnung nach MBO § 2 (3)`, `!Höhe h = ${f(h,2)} m (Fußboden des höchsten Geschosses mit Aufenthaltsraum über Gelände im Mittel) · ${n} Nutzungseinheit${n>1?'en':''} à ${f(a,0)} m² = ${f(n*a,0)} m²${frei?' · freistehend':''}`,
+    `!${gk<=2?`h ≤ 7 m, höchstens 2 Nutzungseinheiten mit zusammen ≤ 400 m² → ${frei?'freistehend: GK 1':'nicht freistehend: GK 2'}`:gk===3?'h ≤ 7 m, aber mehr Einheiten oder Fläche → GK 3':gk===4?'h ≤ 13 m und jede Nutzungseinheit ≤ 400 m² → GK 4':'h > 13 m oder Nutzungseinheiten > 400 m² → GK 5 (Hochhaus ab 22 m: Sonderbau)'}`,
+    `§Anforderungen an tragende Wände, Stützen und Decken (MBO §§ 27, 31)`, `!oberirdische Geschosse: ${A[0]} · Kellergeschoss: ${A[1]}`,
+    `!feuerhemmend ≈ F 30 / R 30 · hochfeuerhemmend ≈ F 60 / R 60 · feuerbeständig ≈ F 90 / R 90 (Landesbauordnung beachten)`]);
+}
+
 // ── Skizzen Stahlprofile (aus der echten Geometrie gezeichnet) ──
 function skPolyAt(P, ox, oy, s){ return P.map(([x,y])=>[ox+x*s, oy-y*s]); }
 function skUProfil(){
@@ -6410,6 +6647,218 @@ Object.assign(CONTENT, {
       <div class="calc-out" id="lw-out"></div>
       <div id="lw-fig"></div>
       <a class="applink" href="#/mauerwerk/bemessung/wand">→ Wand mit n<sub>Ed</sub> nachweisen (Mauerwerk)</a>
+    </div>
+  `,
+
+  // ═════════════ BAUPHYSIK (ref v0.3.18) ═════════════
+  'bauphysik/waerme/grundlagen': () => `
+    <div class="card">
+      <div class="card-title">Wärmeleitung durch ein Bauteil</div>
+      <div class="formula-box">
+        Wärmedurchlasswiderstand einer Schicht:&nbsp; R = d / λ&nbsp;&nbsp; [m²K/W]<br>
+        Wärmedurchgangswiderstand:&nbsp; R<sub>T</sub> = R<sub>si</sub> + Σ d<sub>i</sub>/λ<sub>i</sub> + R<sub>se</sub>&nbsp;&nbsp;&nbsp; U = 1 / R<sub>T</sub>&nbsp;&nbsp; [W/(m²K)]<br>
+        Wärmestromdichte:&nbsp; q = U · (θ<sub>i</sub> − θ<sub>e</sub>)&nbsp;&nbsp;&nbsp; Temperatursprung je Schicht:&nbsp; Δθ<sub>j</sub> = q · R<sub>j</sub><br>
+        Transmissionswärmeverlust:&nbsp; H<sub>T</sub> = Σ U<sub>i</sub> · A<sub>i</sub> + ΔU<sub>WB</sub> · ΣA&nbsp;&nbsp; [W/K]
+        <div class="comment">λ — Wärmeleitfähigkeit (Bemessungswert) · R<sub>si</sub>, R<sub>se</sub> — Wärmeübergangswiderstände innen und außen (Luftschicht an der Oberfläche)</div>
+      </div>
+      ${textTable(['Bauteil / Wärmestrom','R<sub>si</sub> [m²K/W]','R<sub>se</sub> [m²K/W]'], Object.values(BP_RS).map(r=>[r.n, dP(r.si,2), dP(r.se,2)]))}
+      <div class="legend">Für Tauwasser- und Schimmelnachweise gilt innen R<sub>si</sub> = 0,25 m²K/W (ungünstig, Ecken und hinter Möbeln). Hinterlüftete Fassade: R<sub>se</sub> wie R<sub>si</sub>, Schichten außerhalb der Luftschicht entfallen.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Baustoffkennwerte</div>
+      ${filterBox('bp-mat-t','Baustoff suchen …')}
+      <div class="data-table-wrap tall" id="bp-mat-t">${textTable(['Baustoff','λ [W/(m·K)]','μ','ρ [kg/m³]'], BP_MAT.map(m=>[m[0], dP(m[1],3), dk(m[2]), dk(m[3])]))}</div>
+      <div class="legend">Bemessungswerte nach DIN 4108-4 bzw. DIN EN ISO 10456 (Anhaltswerte). Dämmstoffe: λ aus der Wärmeleitstufe (WLS 035 → λ = 0,035). Im Projekt gelten die Werte der Zulassung bzw. Leistungserklärung. μ ist die Wasserdampf-Diffusionswiderstandszahl (s<sub>d</sub> = μ · d).</div>
+    </div>
+  `,
+
+  'bauphysik/waerme/uwert': () => `
+    <div class="card">
+      <div class="card-title">U-Wert und Temperaturverlauf berechnen</div>
+      <div class="calc-grid">
+        ${field('Bauteil', sel('uw-art', Object.entries(BP_RS).map(([k,v])=>[k,v.n]), 'wand', 'updateUW()'))}
+        ${field('Innentemperatur θ<sub>i</sub> [°C]', inp('uw-ti', 20, 'updateUW()'))}
+        ${field('Außentemperatur θ<sub>e</sub> [°C]', inp('uw-te', -5, 'updateUW()'))}
+        ${bpSchichtFelder('uw-', [['Gipsputz',1.5],['Kalksandstein RDK 1,8',17.5],['Mineralwolle WLS 035',16],['Kalkzementputz',1],[null,0],[null,0]], 'updateUW()')}
+      </div>
+      <div class="calc-out" id="uw-out"></div>
+      <div id="uw-fig"></div>
+      <a class="applink" href="size.html">→ U-Wert-Nachweis mit Bericht in statiq·size (Bauphysik)</a>
+    </div>
+  `,
+
+  'bauphysik/waerme/anforderungen': () => `
+    <div class="card">
+      <div class="card-title">Mindestwärmeschutz und Gebäudeenergiegesetz</div>
+      ${textTable(['Bauteil','R<sub>min</sub> DIN 4108-2 [m²K/W]','U GEG Referenzgebäude [W/(m²K)]','U GEG Änderung im Bestand [W/(m²K)]'], Object.values(BP_ANF).map(a=>[a.n, dP(a.Rmin,2), dP(a.Uref,2), dP(a.Ualt,2)]))}
+      ${textTable(['Bauteil','U [W/(m²K)]'], [['Fenster (Referenzgebäude)','1,3'],['Dachflächenfenster','1,4'],['Außentür','1,8']])}
+      <div class="legend">Anhaltswerte. Der Mindestwärmeschutz gilt für jedes Bauteil (Schutz vor Tauwasser und Schimmel), das GEG regelt den Energiebedarf des ganzen Gebäudes über ein Referenzgebäude. Im Projekt die aktuelle Fassung von GEG und DIN 4108-2 verwenden.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Wärmebrücken und Schimmel</div>
+      <div class="formula-box">
+        Temperaturfaktor:&nbsp; f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) ≥ 0,70&nbsp;&nbsp;&nbsp; (θ<sub>i</sub> = 20 °C, θ<sub>e</sub> = −5 °C → θ<sub>si</sub> ≥ 12,6 °C)<br>
+        Wärmebrückenzuschlag (GEG):&nbsp; ΔU<sub>WB</sub> = 0,10 W/(m²K) pauschal · 0,05 nach DIN 4108 Beiblatt 2 (Kategorie A) · 0,03 (Kategorie B) · sonst genauer Nachweis mit ψ-Werten
+        <div class="comment">An Wärmebrücken (Ecken, Deckenauflager, Balkonplatten, Fensteranschlüsse) ist die Innenoberfläche kälter als im Regelquerschnitt. Bei 50 % Raumluftfeuchte beginnt Schimmel bei etwa 12,6 °C (80 % Feuchte an der Oberfläche).</div>
+      </div>
+      <a class="applink" href="#/bauphysik/feuchte/luft">→ Taupunkt und Oberflächentemperatur berechnen</a>
+    </div>
+  `,
+
+  'bauphysik/feuchte/luft': () => `
+    <div class="card">
+      <div class="card-title">Luftfeuchte, Sättigung und Taupunkt</div>
+      <div class="formula-box">
+        Sättigungsdampfdruck (DIN 4108-3):&nbsp; p<sub>s</sub> = 610,5 · e<sup>17,269 · θ / (237,3 + θ)</sup>&nbsp; (θ ≥ 0 °C)&nbsp;&nbsp;&nbsp; p<sub>s</sub> = 610,5 · e<sup>21,875 · θ / (265,5 + θ)</sup>&nbsp; (θ &lt; 0 °C)<br>
+        Wasserdampfpartialdruck:&nbsp; p = φ · p<sub>s</sub>(θ)&nbsp;&nbsp;&nbsp; Taupunkt θ<sub>s</sub>: die Temperatur, bei der p<sub>s</sub>(θ<sub>s</sub>) = p
+        <div class="comment">Warme Luft kann mehr Wasserdampf tragen. Kühlt sie an einer kalten Oberfläche ab, steigt die relative Feuchte — bei 100 % fällt Tauwasser aus.</div>
+      </div>
+      ${textTable(['θ [°C]', ...[-10,-5,0,5,10,12,15,20,25].map(t=>dP(t,0))], [['p<sub>s</sub> [Pa]', ...[-10,-5,0,5,10,12,15,20,25].map(t=>dk(psat(t)))]])}
+    </div>
+    <div class="card">
+      <div class="card-title">Taupunkt und Oberflächentemperatur</div>
+      <div class="calc-grid">
+        ${field('Lufttemperatur θ<sub>i</sub> [°C]', inp('tp-t', 20, 'updateTP()'))}
+        ${field('relative Feuchte φ [%]', inp('tp-phi', 50, 'updateTP()'))}
+        ${field('U-Wert der Außenwand [W/(m²K)] (optional)', inp('tp-U', 1.2, 'updateTP()'))}
+        ${field('Außentemperatur θ<sub>e</sub> [°C]', inp('tp-te', -5, 'updateTP()'))}
+      </div>
+      <div class="calc-out" id="tp-out"></div>
+    </div>
+  `,
+
+  'bauphysik/feuchte/glaser': () => `
+    <div class="card">
+      <div class="card-title">Tauwasser im Bauteil — Glaser-Verfahren (DIN 4108-3)</div>
+      <div class="formula-box">
+        diffusionsäquivalente Luftschichtdicke:&nbsp; s<sub>d</sub> = μ · d&nbsp;&nbsp; [m]<br>
+        Diffusionsstromdichte:&nbsp; g = Δp / (1,5 · 10⁶ · s<sub>d</sub>)&nbsp;&nbsp; [kg/(m²h)]<br>
+        Tauwassermenge:&nbsp; m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>) · t<sub>T</sub>&nbsp;&nbsp;&nbsp; Verdunstung:&nbsp; m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>) · t<sub>V</sub>
+        <div class="comment">Diagramm mit s<sub>d</sub> auf der waagerechten Achse: Der Dampfdruck p verläuft dann als Gerade von p<sub>i</sub> nach p<sub>e</sub>. Schneidet die Gerade die Kurve des Sättigungsdampfdrucks p<sub>s</sub>, ersetzt man sie durch Tangenten — an den Berührpunkten fällt Tauwasser aus.</div>
+      </div>
+      ${textTable(['Anforderung','Grenze'], [['Tauwassermasse m<sub>W,T</sub>','≤ 1,0 kg/m² (≤ 0,5 kg/m² an kapillar nicht wasseraufnahmefähigen Schichten)'],['Austrocknung','m<sub>W,T</sub> ≤ m<sub>W,V</sub>'],['Holz und Holzwerkstoffe','Massezunahme ≤ 5 % bzw. 3 %'],['ohne Nachweis','Bauteile nach DIN 4108-3, 5.3 (z. B. Außenwand mit WDVS auf Mauerwerk)']])}
+      <div class="info-banner">Regel: innen dichter als außen. Die Dampfbremse gehört auf die warme Seite der Dämmung, außen sollten die Schichten diffusionsoffen sein — sonst staut sich der Dampf vor der kalten Außenschicht.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Glaser-Nachweis führen</div>
+      <div class="section-note">Beispiel: Innendämmung ohne Dampfbremse — die Dämmung ist innen offen, das Mauerwerk außen vergleichsweise dicht.</div>
+      <div class="calc-grid">
+        ${bpSchichtFelder('gl-', [['Gipskartonplatte',1.25],['Mineralwolle WLS 035',6],['Kalksandstein RDK 1,8',17.5],['Kalkzementputz',2],[null,0],[null,0]], 'updateGL()')}
+      </div>
+      <div class="calc-out" id="gl-out"></div>
+      <div id="gl-fig"></div>
+      <a class="applink" href="size.html">→ Glaser-Nachweis mit Bericht in statiq·size (Bauphysik)</a>
+    </div>
+  `,
+
+  'bauphysik/schall/grundlagen': () => `
+    <div class="card">
+      <div class="card-title">Pegel und Schalldämmung</div>
+      <div class="formula-box">
+        Schalldruckpegel:&nbsp; L = 20 · lg(p / p<sub>0</sub>)&nbsp;&nbsp; (p<sub>0</sub> = 20 μPa)&nbsp;&nbsp;&nbsp; Addition:&nbsp; L<sub>ges</sub> = 10 · lg(Σ 10<sup>L<sub>i</sub>/10</sup>)<br>
+        zwei gleich laute Quellen: + 3 dB&nbsp;&nbsp;&nbsp; zehn gleich laute Quellen: + 10 dB&nbsp;&nbsp;&nbsp; + 10 dB werden als „doppelt so laut“ empfunden<br>
+        Schalldämmmaß:&nbsp; R = L<sub>1</sub> − L<sub>2</sub> + 10 · lg(S / A)&nbsp;&nbsp;&nbsp; R′ (mit Apostroph): im Bau, mit Flankenübertragung
+        <div class="comment">Luftschall: Wände und Decken sollen ein großes R′<sub>w</sub> haben. Trittschall: der Pegel L′<sub>n,w</sub> unter der Decke soll klein sein.</div>
+      </div>
+      ${textTable(['Bauteil (Mehrfamilienhaus)','erf. R′<sub>w</sub> [dB]','zul. L′<sub>n,w</sub> [dB]'], BP_SCHALL.map(r=>[r[0], r[1]??'—', r[2]??'—']))}
+      <div class="legend">Mindestanforderungen nach DIN 4109-1 (Anhaltswerte). Erhöhter Schallschutz ist vertraglich zu vereinbaren.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Schutz gegen Außenlärm</div>
+      <div class="formula-box">
+        erf. R′<sub>w,ges</sub> = L<sub>a</sub> − K<sub>Raumart</sub>&nbsp;&nbsp; ≥ 30 dB<br>
+        K<sub>Raumart</sub> = 30 dB (Aufenthaltsräume in Wohnungen, Unterrichtsräume) · 35 dB (Büros) · 25 dB (Bettenräume in Krankenhäusern)
+        <div class="comment">L<sub>a</sub> — maßgeblicher Außenlärmpegel aus Straßen-, Schienen- und Gewerbelärm. R′<sub>w,ges</sub> gilt für die ganze Fassade aus Wand, Fenster und Rollladenkasten.</div>
+      </div>
+    </div>
+  `,
+
+  'bauphysik/schall/luftschall': () => `
+    <div class="card">
+      <div class="card-title">Luftschalldämmung einschaliger Massivbauteile</div>
+      <div class="formula-box">
+        R<sub>w</sub> = 30,9 · lg(m′ / (1 kg/m²)) − 22,2 dB&nbsp;&nbsp;&nbsp; (DIN 4109-32, 65 ≤ m′ ≤ 720 kg/m²)&nbsp;&nbsp;&nbsp; m′ = Σ ρ<sub>i</sub> · d<sub>i</sub> inkl. Putz
+        <div class="comment">Massegesetz: Schwere Bauteile dämmen gut. Doppelte Masse bringt rund 9 dB. Löcher, Steckdosen gegenüber und offene Stoßfugen verschlechtern das Ergebnis deutlich.</div>
+      </div>
+      <div class="calc-grid">
+        ${bpSchichtFelder('ls-', [['Gipsputz',1],['Kalksandstein RDK 2,0',24],['Gipsputz',1],[null,0]], 'updateLS()')}
+        ${field('Anforderung', sel('ls-anf', BP_SCHALL.map((r,i)=>[String(i),r[0]]).filter((_,i)=>BP_SCHALL[i][1]), '0', 'updateLS()'))}
+      </div>
+      <div class="calc-out" id="ls-out"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Zweischalige Bauteile und Vorsatzschalen</div>
+      <div class="formula-box">
+        Resonanzfrequenz:&nbsp; f<sub>0</sub> = 160 · √(s′ · (1/m′<sub>1</sub> + 1/m′<sub>2</sub>))&nbsp;&nbsp; [Hz]&nbsp;&nbsp;&nbsp; Ziel: f<sub>0</sub> ≤ 100 Hz (besser ≤ 80 Hz)
+        <div class="comment">s′ — dynamische Steifigkeit der Zwischenschicht [MN/m³] · m′<sub>1</sub>, m′<sub>2</sub> — flächenbezogene Massen der Schalen [kg/m²]. Unterhalb von f<sub>0</sub> schwingen beide Schalen gemeinsam, oberhalb wirkt die Trennung.</div>
+      </div>
+      <div class="calc-grid">
+        ${field('dynamische Steifigkeit s′ [MN/m³]', inp('ls-sp', 10, 'updateLS()'))}
+        ${field('m′<sub>1</sub> [kg/m²]', inp('ls-ma', 300, 'updateLS()'))}
+        ${field('m′<sub>2</sub> [kg/m²]', inp('ls-mb', 20, 'updateLS()'))}
+      </div>
+      <div class="calc-out" id="ls2-out"></div>
+    </div>
+  `,
+
+  'bauphysik/schall/trittschall': () => `
+    <div class="card">
+      <div class="card-title">Trittschall — Massivdecke mit schwimmendem Estrich</div>
+      <div class="formula-box">
+        L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K&nbsp;&nbsp;&nbsp; L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>)&nbsp;&nbsp; (DIN 4109-32)<br>
+        Zementestrich auf Trittschalldämmung:&nbsp; ΔL<sub>w</sub> = 13 · lg(m′<sub>Estrich</sub>) − 14,2 · lg(s′) + 20,8 dB
+        <div class="comment">K — Korrekturwert für die Übertragung über die flankierenden Wände (DIN 4109-2, abhängig von deren Masse). Der Estrich muss ringsum mit Randdämmstreifen vom Bauwerk getrennt sein — eine einzige Schallbrücke macht ΔL<sub>w</sub> zunichte.</div>
+      </div>
+      <div class="calc-grid">
+        ${field('Rohdecke m′ [kg/m²]', inp('ts-mD', 440, 'updateTS()'))}
+        ${field('Estrichdicke d [cm]', inp('ts-dE', 5, 'updateTS()'))}
+        ${field('Estrich ρ [kg/m³]', inp('ts-rE', 2000, 'updateTS()'))}
+        ${field('Trittschalldämmung s′ [MN/m³]', inp('ts-s', 20, 'updateTS()'))}
+        ${field('Korrektur K [dB]', inp('ts-K', 2, 'updateTS()'))}
+        ${field('zul. L′<sub>n,w</sub> [dB]', inp('ts-zul', 50, 'updateTS()'))}
+      </div>
+      <div class="calc-out" id="ts-out"></div>
+    </div>
+  `,
+
+  'bauphysik/brand/klassen': () => `
+    <div class="card">
+      <div class="card-title">Baustoffklassen (Brandverhalten)</div>
+      ${textTable(['bauaufsichtlich','DIN EN 13501-1','DIN 4102-1','Beispiele'], [
+        ['nichtbrennbar','A1','A1','Beton, Mauerwerk, Stahl, Mineralwolle (meist)'],
+        ['nichtbrennbar','A2-s1,d0','A2','Gipskarton (teilweise), Mineralwolle mit Bindemittel'],
+        ['schwerentflammbar','B-s1,d0 · C-s1,d0','B1','behandeltes Holz, Holzwolle-Leichtbauplatten'],
+        ['normalentflammbar','D-s2,d2 · E','B2','Holz, Holzwerkstoffe, EPS'],
+        ['leichtentflammbar','F','B3','unbehandeltes Papier — im Bauwesen unzulässig']])}
+      <div class="legend">Zusatz s1–s3: Rauchentwicklung · d0–d2: brennendes Abtropfen.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Feuerwiderstand von Bauteilen</div>
+      ${textTable(['bauaufsichtlich','DIN 4102-2','DIN EN 13501-2 (tragend / raumabschließend)','Minuten'], [
+        ['feuerhemmend','F 30','R 30 / REI 30 / EI 30','30'],['hochfeuerhemmend','F 60','R 60 / REI 60 / EI 60','60'],
+        ['feuerbeständig','F 90','R 90 / REI 90 / EI 90','90'],['Brandwand','—','REI-M 90','90 + Stoß']])}
+      <div class="legend">R — Tragfähigkeit · E — Raumabschluss · I — Wärmedämmung · M — mechanische Beanspruchung. Bemessung im Brandfall: Holz siehe Abbrand, Stahlbeton über Mindestmaße (Achsabstand der Bewehrung).</div>
+      <a class="applink" href="#/holzbau/gzt/brand">→ Abbrand im Holzbau</a>
+    </div>
+  `,
+
+  'bauphysik/brand/gebaeudeklassen': () => `
+    <div class="card">
+      <div class="card-title">Gebäudeklassen (Musterbauordnung § 2)</div>
+      ${textTable(['Klasse','Höhe h','Nutzungseinheiten','tragende Bauteile (oberirdisch / Keller)'], [
+        ['GK 1','≤ 7 m, freistehend','≤ 2, zusammen ≤ 400 m²',GK_ANF[1].join(' / ')],['GK 2','≤ 7 m','≤ 2, zusammen ≤ 400 m²',GK_ANF[2].join(' / ')],
+        ['GK 3','≤ 7 m','beliebig',GK_ANF[3].join(' / ')],['GK 4','≤ 13 m','je ≤ 400 m²',GK_ANF[4].join(' / ')],['GK 5','sonstige (bis Hochhausgrenze 22 m)','—',GK_ANF[5].join(' / ')]])}
+      <div class="legend">h = Fußbodenoberkante des höchstgelegenen Geschosses mit Aufenthaltsraum über der Geländeoberfläche im Mittel. Maßgebend ist die Landesbauordnung.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Gebäudeklasse bestimmen</div>
+      <div class="calc-grid">
+        ${field('Höhe h [m]', inp('gk-h', 6.5, 'updateGK()'))}
+        ${field('Anzahl Nutzungseinheiten', inp('gk-n', 4, 'updateGK()', 1))}
+        ${field('Fläche je Nutzungseinheit [m²]', inp('gk-a', 85, 'updateGK()'))}
+        ${field('freistehend', sel('gk-f', [['1','ja'],['0','nein']], '1', 'updateGK()'))}
+      </div>
+      <div class="calc-out" id="gk-out"></div>
     </div>
   `,
 
@@ -8667,6 +9116,12 @@ Object.assign(AFTER, {
   'wasserbau/gerinne/normalabfluss': () => updateManning(),
   'wasserbau/hydrodynamik/rohr': () => updateRohrR(),
   'wasserbau/gerinne/wehr': () => updatePoleni(),
+  'bauphysik/waerme/uwert': () => updateUW(),
+  'bauphysik/feuchte/luft': () => updateTP(),
+  'bauphysik/feuchte/glaser': () => updateGL(),
+  'bauphysik/schall/luftschall': () => updateLS(),
+  'bauphysik/schall/trittschall': () => updateTS(),
+  'bauphysik/brand/gebaeudeklassen': () => updateGK(),
   'mauerwerk/baustoffe/massordnung': () => updateMass(),
   'mauerwerk/baustoffe/festigkeit': () => updateFk(),
   'mauerwerk/bemessung/knicklaenge': () => updateHef(),
@@ -8888,6 +9343,16 @@ function viewThema(){
 let SEARCH_INDEX = null;
 // Zusätzlicher Suchtext für Themen, deren Inhalt nicht vollständig sichtbar ist (z. B. gefilterte Tabellen)
 const SEARCH_EXTRA = {
+  'bauphysik/waerme/grundlagen': () => 'Wärmeleitfähigkeit lambda Wärmeübergang Rsi Rse '+BP_MAT.map(m=>m[0]).join(' '),
+  'bauphysik/waerme/uwert': () => 'U-Wert Wärmedurchgangskoeffizient Wärmedurchlasswiderstand Temperaturverlauf Dämmung',
+  'bauphysik/waerme/anforderungen': () => 'GEG EnEV Mindestwärmeschutz DIN 4108-2 Wärmebrücke fRsi Schimmel',
+  'bauphysik/feuchte/luft': () => 'Taupunkt Sättigungsdampfdruck Magnus relative Luftfeuchte Schimmel',
+  'bauphysik/feuchte/glaser': () => 'Glaser Tauwasser Dampfdiffusion sd-Wert mu Dampfbremse DIN 4108-3',
+  'bauphysik/schall/grundlagen': () => 'Schallschutz DIN 4109 dB Pegel Außenlärm Schalldämmmaß',
+  'bauphysik/schall/luftschall': () => 'Massegesetz Rw Schalldämmung flächenbezogene Masse Vorsatzschale Resonanzfrequenz',
+  'bauphysik/schall/trittschall': () => 'Trittschall Lnw schwimmender Estrich Trittschalldämmung dynamische Steifigkeit',
+  'bauphysik/brand/klassen': () => 'Brandschutz F30 F90 REI A1 A2 B1 B2 feuerhemmend feuerbeständig',
+  'bauphysik/brand/gebaeudeklassen': () => 'Gebäudeklasse MBO Bauordnung Nutzungseinheit',
   'lastannahmen/lasten/schnee': () => 'Verwehung Höhensprung Schneesack Schneeüberhang Schneefanggitter Satteldach',
   'lastannahmen/lasten/wind': () => 'cpe Außendruckbeiwert Innendruck Flachdach Sog Bereich F G H I Attika',
   'lastannahmen/lasten/lastabtrag': () => 'Lastzusammenstellung Lastabtrag Einzugsbreite Einflussfläche Geschoss Fundament',

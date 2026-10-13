@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.18 -->
+<!-- Statiq·ref v0.3.19 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -144,7 +144,7 @@
 
     /* Rechner */
     .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-    .bp-row { display: flex; gap: 6px; } .bp-row select { flex: 1 1 auto; min-width: 0; } .bp-row input { flex: 0 0 70px; width: 70px !important; }
+    .bp-row { display: flex; gap: 6px; } .bp-row select { flex: 1 1 auto; min-width: 0; } .bp-row input { flex: 0 0 70px; width: 70px !important; } .fl-row input { flex: 1 1 0; width: auto !important; min-width: 0; } .fl-row select { flex: 0 0 104px; width: 104px; }
     .calc-field label { display: block; font-size: 11px; font-family:'DM Mono', monospace; color: var(--text3); margin-bottom: 3px; }
     .calc-field select { width: 100%; padding: 7px 8px; font-size: 13px; font-family:'DM Sans', sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
     .calc-out { font-size: 12px; font-family:'DM Mono', monospace; color: var(--text2); margin-bottom: 6px; line-height: 1.7; }
@@ -384,7 +384,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.18';
+const REF_VERSION = '0.3.19';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -819,6 +819,7 @@ const FAECHER = {
         themen: {
           grundlagen:  { title: 'Grundlagen und Anforderungen' },
           luftschall:  { title: 'Luftschalldämmung' },
+          flanken:     { title: 'Flankenübertragung (DIN 4109-2)' },
           trittschall: { title: 'Trittschall' },
         }
       },
@@ -4560,6 +4561,29 @@ function gebaeudeklasse(h, nNE, aNE, frei){
   if(h<=13 && aNE<=400) return 4;
   return 5;
 }
+// Flankenübertragung nach DIN 4109-2 (Massivbau, vereinfachtes Modell nach DIN EN ISO 12354-1)
+// Stoßstellendämmmaß starrer Stöße: M = lg(m′⊥ / m′i)
+function kStoss(art, mSenk, mI){
+  const M=Math.log10(mSenk/mI);
+  return art==='kreuz' ? { M, K13:8.7+17.1*M+5.7*M*M, K12:8.7+5.7*M*M } : { M, K13:5.7+14.1*M+5.7*M*M, K12:5.7+5.7*M*M };
+}
+// T: { mD, S (Trennfläche m²), d (Raumtiefe m), RDdPlus (Verbesserung ΔR des Trennbauteils, dB), F:[{ name, m, lf, art }] }
+function flankenR(T){
+  const RDd=rwMasse(T.mD)+(T.RDdPlus||0), W=[{ weg:'Dd', R:RDd }];
+  const F=T.F.map(f=>{
+    const Rf=rwMasse(f.m), K=kStoss(f.art, T.mD, f.m), Sf=f.lf*T.d, term=10*Math.log10(T.S/f.lf);
+    const KminFf=10*Math.log10(f.lf*(2/Sf)), KminDf=10*Math.log10(f.lf*(1/T.S+1/Sf));
+    const KFf=Math.max(K.K13,KminFf), KDf=Math.max(K.K12,KminDf);
+    const RFf=Rf+KFf+term, RDf=(RDd+Rf)/2+KDf+term;
+    W.push({ weg:'Ff', name:f.name, R:RFf },{ weg:'Df', name:f.name, R:RDf },{ weg:'Fd', name:f.name, R:RDf });
+    return { ...f, Rf, K, Sf, term, KminFf, KminDf, KFf, KDf, RFf, RDf };
+  });
+  const sum=W.reduce((a,w)=>a+Math.pow(10,-w.R/10),0), Rs=-10*Math.log10(sum);
+  W.forEach(w=>w.anteil=Math.pow(10,-w.R/10)/sum);
+  return { RDd, F, W, Rs };
+}
+// Trittschall: Korrekturwert für die Flankenübertragung (DIN 4109-2), m′f,m — Mittel der flankierenden Wände
+const kTritt = (mDecke, mfm) => Math.max(0, 0.6+5.5*Math.log10(mDecke/mfm));
 const GK_ANF = { 1:['keine Anforderung','feuerhemmend'], 2:['feuerhemmend','feuerhemmend'], 3:['feuerhemmend','feuerbeständig'], 4:['hochfeuerhemmend','feuerbeständig'], 5:['feuerbeständig','feuerbeständig'] };
 
 // ── Bauphysik in ref: Eingaben, Skizzen, Rechner ──
@@ -4667,13 +4691,14 @@ function updateLS(){
 }
 function updateTS(){
   const out=document.getElementById('ts-out'); if(!out) return;
-  const mD=num('ts-mD'), dE=num('ts-dE')/100, rE=num('ts-rE'), s=num('ts-s'), K=num('ts-K')||0, zul=num('ts-zul'), f=dP;
+  const mD=num('ts-mD'), dE=num('ts-dE')/100, rE=num('ts-rE'), s=num('ts-s'), mf=num('ts-mf')||0, K=mf>0?kTritt(mD,mf):(num('ts-K')||0), zul=num('ts-zul'), f=dP;
   if(!(mD>0&&dE>0&&rE>0&&s>0)){ out.innerHTML='Bitte alle Werte > 0 eingeben.'; return; }
   const mE=rE*dE, Ln=lnEq(mD), dL_=dLwEstrich(mE,s), L=Ln-dL_+K;
   out.innerHTML = ablauf('Massivdecke mit schwimmendem Estrich', [
     `§Rohdecke`, `L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>) = 164 − 35 · lg(${f(mD,0)}) = ${f(Ln,1)} dB`,
     `§Schwimmender Estrich`, `m′<sub>Estrich</sub> = ρ · d = ${dk(rE)} · ${f(dE,3)} = ${f(mE,1)} kg/m²`,
     `ΔL<sub>w</sub> = 13 · lg(m′<sub>E</sub>) − 14,2 · lg(s′) + 20,8 = 13 · lg(${f(mE,1)}) − 14,2 · lg(${f(s,0)}) + 20,8 = ${f(dL_,1)} dB`,
+    ...(mf>0?[`§Korrekturwert für die Flanken (DIN 4109-2)`, `K = 0,6 + 5,5 · lg(m′<sub>Decke</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg(${f(mD,0)} / ${f(mf,0)}) = ${f(K,1)} dB`, `!je schwerer die Decke im Verhältnis zu den Wänden, desto mehr Trittschall geht über die Wände; K ≥ 0`]:[]),
     `§Bewerteter Norm-Trittschallpegel`, `L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K = ${f(Ln,1)} − ${f(dL_,1)} + ${f(K,1)} = ${f(L,1)} dB`,
     `!zul. L′<sub>n,w</sub> = ${f(zul,0)} dB: ${f(L,1)} ${L<=zul?'≤':'>'} ${f(zul,0)} ${L<=zul?'✓':'✗'} — beim Trittschall gilt: kleiner ist besser`]);
 }
@@ -4687,6 +4712,42 @@ function updateGK(){
     `!${gk<=2?`h ≤ 7 m, höchstens 2 Nutzungseinheiten mit zusammen ≤ 400 m² → ${frei?'freistehend: GK 1':'nicht freistehend: GK 2'}`:gk===3?'h ≤ 7 m, aber mehr Einheiten oder Fläche → GK 3':gk===4?'h ≤ 13 m und jede Nutzungseinheit ≤ 400 m² → GK 4':'h > 13 m oder Nutzungseinheiten > 400 m² → GK 5 (Hochhaus ab 22 m: Sonderbau)'}`,
     `§Anforderungen an tragende Wände, Stützen und Decken (MBO §§ 27, 31)`, `!oberirdische Geschosse: ${A[0]} · Kellergeschoss: ${A[1]}`,
     `!feuerhemmend ≈ F 30 / R 30 · hochfeuerhemmend ≈ F 60 / R 60 · feuerbeständig ≈ F 90 / R 90 (Landesbauordnung beachten)`]);
+}
+
+// ── Flankenübertragung in ref ──
+const FL_DEF = [['Decke oben',432,4.0,'kreuz'],['Boden unten',432,4.0,'kreuz'],['Außenwand',331,2.6,'T'],['Innenwand',254,2.6,'T']];
+function flFelder(p, on){
+  return FL_DEF.map((d,i)=>field(`Flanke ${i+1}: ${d[0]} — m′ [kg/m²] / l<sub>f</sub> [m] / Stoß`, `<div class="bp-row fl-row">${inp(p+'m'+(i+1), d[1], on)}${inp(p+'l'+(i+1), d[2], on)}${sel(p+'a'+(i+1), [['kreuz','Kreuzstoß'],['T','T-Stoß']], d[3], on)}</div>`)).join('');
+}
+function flLesen(p){ return FL_DEF.map((d,i)=>({ name:d[0], m:num(p+'m'+(i+1)), lf:num(p+'l'+(i+1)), art:valOf(p+'a'+(i+1)) })); }
+function skFlanken(){
+  const xm=210, y1=40, y2=180, t=14, sl=12; let o='';
+  o+=`<rect x="${xm-t/2}" y="${y1}" width="${t}" height="${y2-y1}" fill="#e7c9b0" stroke="${SK.ink}"/>`;
+  o+=`<rect x="30" y="${y1-sl}" width="360" height="${sl}" fill="#cbd5e1" stroke="${SK.ink}"/><rect x="30" y="${y2}" width="360" height="${sl}" fill="#cbd5e1" stroke="${SK.ink}"/>`;
+  o+=`<rect x="${xm-t/2}" y="${y1-sl-30}" width="${t}" height="30" fill="#e7c9b0" stroke="${SK.ink}" opacity="0.5"/><rect x="${xm-t/2}" y="${y2+sl}" width="${t}" height="24" fill="#e7c9b0" stroke="${SK.ink}" opacity="0.5"/>`;
+  const ar=(d,c,lab,lx,ly)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="1.6" marker-end="url(#skc)"/>`+tl(lx,ly,lab,'middle',c);
+  o+=ar(`M ${xm-60} 110 L ${xm+60} 110`,SK.acc,'Dd',xm,102);
+  o+=ar(`M ${xm-100} ${y1+4} Q ${xm} ${y1+30} ${xm+100} ${y1+4}`,SK.load,'Ff',xm-60,y1+28);
+  o+=ar(`M ${xm-3} 70 Q ${xm+15} ${y1+6} ${xm+70} ${y1+4}`,'#7c3aed','Df',xm+40,y1+24);
+  o+=ar(`M ${xm-80} ${y2-4} Q ${xm-15} ${y2-8} ${xm+3} 150`,'#0f6e56','Fd',xm-48,y2-12);
+  o+=tl(100,128,'Senderaum','middle')+tl(320,128,'Empfangsraum','middle')+tl(xm,y2+sl+36,'Trennwand D/d, Flanken F (Senderaum) und f (Empfangsraum)','middle',SK.dim);
+  return sv(420,y2+sl+44,'Übertragungswege Dd, Ff, Df, Fd an einer Flanke', o);
+}
+function updateFL(){
+  const out=document.getElementById('fl-out'); if(!out) return;
+  const T={ mD:num('fl-mD'), S:num('fl-S'), d:num('fl-d'), RDdPlus:num('fl-dR')||0, F:flLesen('fl-') }, anf=+valOf('fl-anf'), up=2, f=dP;
+  if(!(T.mD>0&&T.S>0&&T.d>0) || T.F.some(x=>!(x.m>0&&x.lf>0))){ out.innerHTML='Bitte alle Massen, Längen und Flächen > 0 eingeben.'; return; }
+  const R=flankenR(T), A=BP_SCHALL[anf], erf=A[1], max=R.W.slice(1).reduce((a,w)=>w.anteil>a.anteil?w:a);
+  const rows=R.F.map(x=>[x.name, f(x.m,0), f(x.Rf,1), (x.K.M>=0?'+':'')+f(x.K.M,3), f(x.KFf,1)+(x.KFf>x.K.K13+1e-9?' (min)':''), f(x.KDf,1)+(x.KDf>x.K.K12+1e-9?' (min)':''), f(x.term,1), f(x.RFf,1), f(x.RDf,1)]);
+  out.innerHTML = ablauf(`Trennbauteil m′ = ${f(T.mD,0)} kg/m², S = ${f(T.S,1)} m²`, [
+    `§Direkte Übertragung`, `R<sub>Dd,w</sub> = 30,9 · lg(${f(T.mD,0)}) − 22,2${T.RDdPlus?` + ${f(T.RDdPlus,1)}`:''} = ${f(R.RDd,1)} dB`,
+    `§Stoßstellendämmmaß (DIN 4109-32, starre Stöße)`, `!M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) mit m′<sub>⊥</sub> = Trennbauteil · Kreuzstoß: K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · T-Stoß: K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²`,
+    `!Mindestwert K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) mit S<sub>f</sub> = l<sub>f</sub> · Raumtiefe`,
+    `§Flankenwege je Flanke`, `!R<sub>Ff</sub> = R<sub>f</sub> + K<sub>Ff</sub> + 10 · lg(S / l<sub>f</sub>) · R<sub>Df</sub> = R<sub>Fd</sub> = (R<sub>Dd</sub> + R<sub>f</sub>)/2 + K<sub>Df</sub> + 10 · lg(S / l<sub>f</sub>)`])
+    + textTable(['Flanke','m′','R<sub>f,w</sub>','M','K<sub>Ff</sub>','K<sub>Df</sub>','10·lg(S/l<sub>f</sub>)','R<sub>Ff</sub>','R<sub>Df</sub> = R<sub>Fd</sub>'], rows)
+    + ablauf('', [`§Bau-Schalldämmmaß`, `R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) über 13 Wege = ${f(R.Rs,1)} dB`,
+      `!Anteile an der übertragenen Schallenergie: direkt (Dd) ${f(R.W[0].anteil*100,0)} %, alle Flankenwege ${f((1-R.W[0].anteil)*100,0)} % · größter Flankenweg ${max.weg} über ${max.name} mit ${f(max.anteil*100,0)} % · ohne Flanken wäre R′<sub>w</sub> = R<sub>Dd</sub> = ${f(R.RDd,1)} dB`,
+      ...(erf?[`§Nachweis (${A[0]})`, `R′<sub>w</sub> − u<sub>prog</sub> = ${f(R.Rs,1)} − 2 = ${f(R.Rs-up,1)} dB ${R.Rs-up>=erf?'≥':'<'} erf. R′<sub>w</sub> = ${erf} dB ${R.Rs-up>=erf?'✓':'✗'}`]:[])]);
 }
 
 // ── Skizzen Stahlprofile (aus der echten Geometrie gezeichnet) ──
@@ -6801,20 +6862,50 @@ Object.assign(CONTENT, {
     </div>
   `,
 
+  'bauphysik/schall/flanken': () => `
+    <div class="card">
+      <div class="card-title">Bau-Schalldämmmaß mit Flankenübertragung (DIN 4109-2, Massivbau)</div>
+      ${fig(skFlanken(),'Schall geht nicht nur direkt durch die Trennwand (Dd), sondern auch über die angrenzenden Bauteile: entlang der Flanke (Ff) und um die Ecke (Df, Fd). Je Flanke drei Wege, bei vier Flanken zwölf.')}
+      <div class="formula-box">
+        R′<sub>w</sub> = −10 · lg( 10<sup>−R<sub>Dd,w</sub>/10</sup> + Σ<sub>F=f</sub> 10<sup>−R<sub>Ff,w</sub>/10</sup> + Σ<sub>f</sub> 10<sup>−R<sub>Df,w</sub>/10</sup> + Σ<sub>F</sub> 10<sup>−R<sub>Fd,w</sub>/10</sup> )<br>
+        R<sub>ij,w</sub> = (R<sub>i,w</sub> + R<sub>j,w</sub>)/2 + ΔR<sub>ij,w</sub> + K<sub>ij</sub> + 10 · lg(S<sub>s</sub> / (l<sub>0</sub> · l<sub>f</sub>))&nbsp;&nbsp;&nbsp; l<sub>0</sub> = 1 m<br>
+        Stoßstellendämmmaß starrer Stöße, M = lg(m′<sub>⊥</sub>/m′<sub>i</sub>):&nbsp; Kreuzstoß K<sub>13</sub> = 8,7 + 17,1M + 5,7M², K<sub>12</sub> = 8,7 + 5,7M² · T-Stoß K<sub>13</sub> = 5,7 + 14,1M + 5,7M², K<sub>12</sub> = 5,7 + 5,7M²<br>
+        Nachweis:&nbsp; R′<sub>w</sub> − u<sub>prog</sub> ≥ erf. R′<sub>w</sub>&nbsp;&nbsp; mit u<sub>prog</sub> = 2 dB
+        <div class="comment">K<sub>13</sub> gilt für den Weg geradeaus entlang der Flanke (Ff), K<sub>12</sub> für den Weg um die Ecke (Df, Fd). Eine schwere Trennwand an einer leichten Flanke erhöht K<sub>13</sub> — die Flanke wird am Stoß „abgeriegelt“. Leichte, durchlaufende Flanken (z. B. leichte Außenwand) sind oft der Schwachpunkt.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Trennwand mit vier Flanken</div>
+      <div class="calc-grid">
+        ${field('Trennbauteil m′ [kg/m²]', inp('fl-mD', 504, 'updateFL()'))}
+        ${field('Trennfläche S<sub>s</sub> [m²]', inp('fl-S', 10.4, 'updateFL()'))}
+        ${field('Raumtiefe (für K<sub>ij,min</sub>) [m]', inp('fl-d', 4.5, 'updateFL()'))}
+        ${field('Verbesserung ΔR<sub>Dd</sub> (Vorsatzschale) [dB]', inp('fl-dR', 0, 'updateFL()'))}
+        ${field('Anforderung', sel('fl-anf', BP_SCHALL.map((r,i)=>[String(i),r[0]]).filter((_,i)=>BP_SCHALL[i][1]), '0', 'updateFL()'))}
+      </div>
+      <div class="calc-grid" style="grid-template-columns:minmax(0,1fr)">
+        ${flFelder('fl-', 'updateFL()')}
+      </div>
+      <div class="calc-out" id="fl-out"></div>
+      <a class="applink" href="size.html">→ Nachweis mit Bericht in statiq·size (Bauphysik → Schallschutz, genauer Nachweis)</a>
+    </div>
+  `,
+
   'bauphysik/schall/trittschall': () => `
     <div class="card">
       <div class="card-title">Trittschall — Massivdecke mit schwimmendem Estrich</div>
       <div class="formula-box">
         L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K&nbsp;&nbsp;&nbsp; L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>)&nbsp;&nbsp; (DIN 4109-32)<br>
         Zementestrich auf Trittschalldämmung:&nbsp; ΔL<sub>w</sub> = 13 · lg(m′<sub>Estrich</sub>) − 14,2 · lg(s′) + 20,8 dB
-        <div class="comment">K — Korrekturwert für die Übertragung über die flankierenden Wände (DIN 4109-2, abhängig von deren Masse). Der Estrich muss ringsum mit Randdämmstreifen vom Bauwerk getrennt sein — eine einzige Schallbrücke macht ΔL<sub>w</sub> zunichte.</div>
+        <div class="comment">K = 0,6 + 5,5 · lg(m′<sub>Decke</sub> / m′<sub>f,m</sub>) ≥ 0 — Korrekturwert für die Übertragung über die flankierenden Wände (DIN 4109-2; m′<sub>f,m</sub> — Mittel der flankierenden Wände im unteren Raum). Der Estrich muss ringsum mit Randdämmstreifen vom Bauwerk getrennt sein — eine einzige Schallbrücke macht ΔL<sub>w</sub> zunichte.</div>
       </div>
       <div class="calc-grid">
         ${field('Rohdecke m′ [kg/m²]', inp('ts-mD', 440, 'updateTS()'))}
         ${field('Estrichdicke d [cm]', inp('ts-dE', 5, 'updateTS()'))}
         ${field('Estrich ρ [kg/m³]', inp('ts-rE', 2000, 'updateTS()'))}
         ${field('Trittschalldämmung s′ [MN/m³]', inp('ts-s', 20, 'updateTS()'))}
-        ${field('Korrektur K [dB]', inp('ts-K', 2, 'updateTS()'))}
+        ${field('Korrektur K [dB] (wenn m′<sub>f,m</sub> = 0)', inp('ts-K', 2, 'updateTS()'))}
+        ${field('mittlere Masse der flankierenden Wände m′<sub>f,m</sub> [kg/m²] (0 = K von Hand)', inp('ts-mf', 300, 'updateTS()'))}
         ${field('zul. L′<sub>n,w</sub> [dB]', inp('ts-zul', 50, 'updateTS()'))}
       </div>
       <div class="calc-out" id="ts-out"></div>
@@ -9121,6 +9212,7 @@ Object.assign(AFTER, {
   'bauphysik/feuchte/glaser': () => updateGL(),
   'bauphysik/schall/luftschall': () => updateLS(),
   'bauphysik/schall/trittschall': () => updateTS(),
+  'bauphysik/schall/flanken': () => updateFL(),
   'bauphysik/brand/gebaeudeklassen': () => updateGK(),
   'mauerwerk/baustoffe/massordnung': () => updateMass(),
   'mauerwerk/baustoffe/festigkeit': () => updateFk(),
@@ -9350,6 +9442,7 @@ const SEARCH_EXTRA = {
   'bauphysik/feuchte/glaser': () => 'Glaser Tauwasser Dampfdiffusion sd-Wert mu Dampfbremse DIN 4108-3',
   'bauphysik/schall/grundlagen': () => 'Schallschutz DIN 4109 dB Pegel Außenlärm Schalldämmmaß',
   'bauphysik/schall/luftschall': () => 'Massegesetz Rw Schalldämmung flächenbezogene Masse Vorsatzschale Resonanzfrequenz',
+  'bauphysik/schall/flanken': () => 'Flankenübertragung Stoßstellendämmmaß Kij Kreuzstoß T-Stoß Flankenweg DIN 4109-2 Bau-Schalldämmmaß',
   'bauphysik/schall/trittschall': () => 'Trittschall Lnw schwimmender Estrich Trittschalldämmung dynamische Steifigkeit',
   'bauphysik/brand/klassen': () => 'Brandschutz F30 F90 REI A1 A2 B1 B2 feuerhemmend feuerbeständig',
   'bauphysik/brand/gebaeudeklassen': () => 'Gebäudeklasse MBO Bauordnung Nutzungseinheit',

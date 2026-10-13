@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.15 -->
+<!-- Statiq·size v0.5.16 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -259,6 +259,7 @@
       .bp-lay { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 4px 6px; margin-bottom: 8px; }
     .bp-lay select { grid-column: 1 / -1; }
     .bp-lay select, .bp-lay input { width: 100%; min-width: 0; padding: 6px 6px; font-size: 13px; border: 1px solid var(--border-dark, #d1d5db); border-radius: 6px; background: var(--surface, #fff); color: inherit; }
+    .bf-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 112px; gap: 6px; } .bf-row input, .bf-row select { width: 100%; min-width: 0; padding: 6px 6px; font-size: 13px; border: 1px solid var(--border-dark, #d1d5db); border-radius: 6px; background: var(--surface, #fff); color: inherit; }
     .bp-head { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
     .bp-head span:first-child { display: none; }
 </style>
@@ -1056,18 +1057,28 @@
       <div class="card-title"><span data-i18n="bsT">Luft- und Trittschall</span></div>
       <div class="grid2">
         <div class="field full"><label><span data-i18n="bsAnf">Anforderung (DIN 4109-1)</span></label><select id="bs-anf" onchange="run()"><option value="0" selected>Wohnungstrennwand (53 dB)</option><option value="1">Treppenhauswand (53 dB)</option><option value="2">Wohnungstrenndecke (54 dB)</option><option value="3">Decke über Keller/Durchfahrt (52 dB)</option><option value="4">Treppenlauf (nur Trittschall)</option><option value="5">Haustrennwand Reihenhaus, unterstes Geschoss (59 dB)</option><option value="6">Haustrennwand Reihenhaus, darüber (62 dB)</option></select></div>
-        <div class="field"><label><span data-i18n="bsKf">Abschlag Flankenübertragung [dB]</span></label><input type="number" step="any" id="bs-kf" value="3" oninput="run()"></div>
+        <div class="field full"><label><span data-i18n="bsFl">Flankenübertragung</span></label><select id="bs-fl" onchange="showMat(); run()"><option value="genau" selected>genau nach DIN 4109-2 (vier Flanken)</option><option value="pauschal">vereinfacht (pauschaler Abschlag)</option></select></div>
+        <div class="field bs-paus"><label><span data-i18n="bsKf">Abschlag Flankenübertragung [dB]</span></label><input type="number" step="any" id="bs-kf" value="3" oninput="run()"></div>
         <div class="field"><label><span data-i18n="bsUp">Sicherheitsbeiwert u<sub>prog</sub> [dB]</span></label><input type="number" step="any" id="bs-up" value="2" oninput="run()"></div>
+      </div>
+      <div class="grid2 bs-gen">
+        <div class="field"><label><span data-i18n="bfS">Trennfläche S<sub>s</sub> [m²]</span></label><input type="number" step="any" id="bf-S" value="10.4" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bfD">Raumtiefe (für K<sub>ij,min</sub>) [m]</span></label><input type="number" step="any" id="bf-d" value="4.5" oninput="run()"></div>
+        <div class="field"><label><span data-i18n="bfDR">Verbesserung ΔR<sub>Dd</sub> durch Vorsatzschale [dB]</span></label><input type="number" step="any" id="bf-dR" value="0" oninput="run()"></div>
+        <div class="field full"><label><span data-i18n="bfF1">Flanke 1 (Decke oben): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß</span></label><div class="bf-row"><input type="number" step="any" id="bf-m1" value="432" oninput="run()" title="m′ [kg/m²]"><input type="number" step="any" id="bf-l1" value="4.0" oninput="run()" title="l_f [m]"><select id="bf-a1" onchange="run()"><option value="kreuz" selected>Kreuzstoß</option><option value="T">T-Stoß</option></select></div></div>
+        <div class="field full"><label><span data-i18n="bfF2">Flanke 2 (Boden unten): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß</span></label><div class="bf-row"><input type="number" step="any" id="bf-m2" value="432" oninput="run()" title="m′ [kg/m²]"><input type="number" step="any" id="bf-l2" value="4.0" oninput="run()" title="l_f [m]"><select id="bf-a2" onchange="run()"><option value="kreuz" selected>Kreuzstoß</option><option value="T">T-Stoß</option></select></div></div>
+        <div class="field full"><label><span data-i18n="bfF3">Flanke 3 (Außenwand): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß</span></label><div class="bf-row"><input type="number" step="any" id="bf-m3" value="331" oninput="run()" title="m′ [kg/m²]"><input type="number" step="any" id="bf-l3" value="2.6" oninput="run()" title="l_f [m]"><select id="bf-a3" onchange="run()"><option value="kreuz">Kreuzstoß</option><option value="T" selected>T-Stoß</option></select></div></div>
+        <div class="field full"><label><span data-i18n="bfF4">Flanke 4 (Innenwand): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß</span></label><div class="bf-row"><input type="number" step="any" id="bf-m4" value="254" oninput="run()" title="m′ [kg/m²]"><input type="number" step="any" id="bf-l4" value="2.6" oninput="run()" title="l_f [m]"><select id="bf-a4" onchange="run()"><option value="kreuz">Kreuzstoß</option><option value="T" selected>T-Stoß</option></select></div></div>
       </div>
       <label class="check"><input type="checkbox" id="bs-tr" onchange="showMat(); run()"> <span data-i18n="bsTr">Decke mit schwimmendem Estrich (Trittschall)</span></label>
       <div class="grid2 bs-trrow">
         <div class="field"><label><span data-i18n="bsDE">Estrichdicke [cm]</span></label><input type="number" step="any" id="bs-dE" value="5" oninput="run()"></div>
         <div class="field"><label><span data-i18n="bsRE">Estrich ρ [kg/m³]</span></label><input type="number" step="any" id="bs-rE" value="2000" oninput="run()"></div>
         <div class="field"><label><span data-i18n="bsS">Trittschalldämmung s′ [MN/m³]</span></label><input type="number" step="any" id="bs-s" value="20" oninput="run()"></div>
-        <div class="field"><label><span data-i18n="bsK">Korrektur K [dB]</span></label><input type="number" step="any" id="bs-K" value="2" oninput="run()"></div>
+        <div class="field bs-paus"><label><span data-i18n="bsK">Korrektur K [dB]</span></label><input type="number" step="any" id="bs-K" value="2" oninput="run()"></div>
         <div class="field"><label><span data-i18n="bsZul">zul. L′<sub>n,w</sub> [dB]</span></label><input type="number" step="any" id="bs-zul" value="50" oninput="run()"></div>
       </div>
-      <div class="hint"><span data-i18n="bsHint">Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Vereinfachter Nachweis: R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag für die Flanken; genau nach DIN 4109-2.</span></div>
+      <div class="hint"><span data-i18n="bsHint">Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Genauer Nachweis: R′<sub>w</sub> aus Trennbauteil und vier Flanken mit Stoßstellendämmmaß K<sub>ij</sub> (DIN 4109-2/-32, starre Stöße); vereinfacht: pauschaler Abschlag.</span></div>
     </div>
     </div>
     </div>
@@ -1427,10 +1438,18 @@ const I18N = {
   "bsS": "Trittschalldämmung s′ [MN/m³]",
   "bsK": "Korrektur K [dB]",
   "bsZul": "zul. L′<sub>n,w</sub> [dB]",
-  "bsHint": "Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Vereinfachter Nachweis: R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag für die Flanken; genau nach DIN 4109-2.",
+  "bsHint": "Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Genauer Nachweis: R′<sub>w</sub> aus Trennbauteil und vier Flanken mit Stoßstellendämmmaß K<sub>ij</sub> (DIN 4109-2/-32, starre Stöße); vereinfacht: pauschaler Abschlag.",
   "bpUwert": "U-Wert",
   "bpGlaser": "Tauwasser (Glaser)",
   "bpSchall": "Schallschutz",
+  "bfF1": "Flanke 1 (Decke oben): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "bfF2": "Flanke 2 (Boden unten): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "bfF3": "Flanke 3 (Außenwand): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "bfF4": "Flanke 4 (Innenwand): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "bsFl": "Flankenübertragung",
+  "bfS": "Trennfläche S<sub>s</sub> [m²]",
+  "bfD": "Raumtiefe (für K<sub>ij,min</sub>) [m]",
+  "bfDR": "Verbesserung ΔR<sub>Dd</sub> durch Vorsatzschale [dB]",
   "wwHint": "Formel von Poleni: Q = 2/3·μ·b·√(2g)·h<sub>ü</sub><sup>3/2</sup>. Vollkommener Überfall: das Unterwasser beeinflusst den Abfluss nicht. Die Zulaufgeschwindigkeit ist nicht angesetzt.",
   "matWasser": "Wasserbau",
   "gsT2": "Baugrund unter der Sohle",
@@ -1662,7 +1681,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.15';
+const SIZE_VERSION = '0.5.16';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -3078,6 +3097,7 @@ function showMat(){
   document.querySelectorAll('#seg-bp button').forEach(b=>b.classList.toggle('active', b.dataset.bp===BPMODE));
   ['uwert','glaser','schall'].forEach(m=>$('bp-'+m).style.display = BPMODE===m ? '' : 'none');
   document.querySelectorAll('.bs-trrow').forEach(e=>e.style.display = $('bs-tr').checked ? '' : 'none');
+  const bsGen = $('bs-fl').value==='genau'; document.querySelectorAll('.bs-gen').forEach(e=>e.style.display = bsGen ? '' : 'none'); document.querySelectorAll('.bs-paus').forEach(e=>e.style.display = bsGen ? 'none' : '');
   document.querySelectorAll('#seg-wb button').forEach(b=>b.classList.toggle('active', b.dataset.wb===WBMODE));
   ['druck','schwimm','rohr','gerinne','wehr'].forEach(m=>$('wb-'+m).style.display = WBMODE===m ? '' : 'none');
   document.querySelectorAll('#seg-mw button').forEach(b=>b.classList.toggle('active', b.dataset.mw===MWMODE));
@@ -5484,6 +5504,29 @@ function gebaeudeklasse(h, nNE, aNE, frei){
   if(h<=13 && aNE<=400) return 4;
   return 5;
 }
+// Flankenübertragung nach DIN 4109-2 (Massivbau, vereinfachtes Modell nach DIN EN ISO 12354-1)
+// Stoßstellendämmmaß starrer Stöße: M = lg(m′⊥ / m′i)
+function kStoss(art, mSenk, mI){
+  const M=Math.log10(mSenk/mI);
+  return art==='kreuz' ? { M, K13:8.7+17.1*M+5.7*M*M, K12:8.7+5.7*M*M } : { M, K13:5.7+14.1*M+5.7*M*M, K12:5.7+5.7*M*M };
+}
+// T: { mD, S (Trennfläche m²), d (Raumtiefe m), RDdPlus (Verbesserung ΔR des Trennbauteils, dB), F:[{ name, m, lf, art }] }
+function flankenR(T){
+  const RDd=rwMasse(T.mD)+(T.RDdPlus||0), W=[{ weg:'Dd', R:RDd }];
+  const F=T.F.map(f=>{
+    const Rf=rwMasse(f.m), K=kStoss(f.art, T.mD, f.m), Sf=f.lf*T.d, term=10*Math.log10(T.S/f.lf);
+    const KminFf=10*Math.log10(f.lf*(2/Sf)), KminDf=10*Math.log10(f.lf*(1/T.S+1/Sf));
+    const KFf=Math.max(K.K13,KminFf), KDf=Math.max(K.K12,KminDf);
+    const RFf=Rf+KFf+term, RDf=(RDd+Rf)/2+KDf+term;
+    W.push({ weg:'Ff', name:f.name, R:RFf },{ weg:'Df', name:f.name, R:RDf },{ weg:'Fd', name:f.name, R:RDf });
+    return { ...f, Rf, K, Sf, term, KminFf, KminDf, KFf, KDf, RFf, RDf };
+  });
+  const sum=W.reduce((a,w)=>a+Math.pow(10,-w.R/10),0), Rs=-10*Math.log10(sum);
+  W.forEach(w=>w.anteil=Math.pow(10,-w.R/10)/sum);
+  return { RDd, F, W, Rs };
+}
+// Trittschall: Korrekturwert für die Flankenübertragung (DIN 4109-2), m′f,m — Mittel der flankierenden Wände
+const kTritt = (mDecke, mfm) => Math.max(0, 0.6+5.5*Math.log10(mDecke/mfm));
 const GK_ANF = { 1:['keine Anforderung','feuerhemmend'], 2:['feuerhemmend','feuerhemmend'], 3:['feuerhemmend','feuerbeständig'], 4:['hochfeuerhemmend','feuerbeständig'], 5:['feuerbeständig','feuerbeständig'] };
 
 // ── Bauphysik in size: U-Wert, Glaser, Schallschutz ──
@@ -5561,23 +5604,32 @@ function figBG(I,res){
   return s + figLegend([],[], `<span style="color:${C_EW}">p<sub>s</sub> — Sättigungsdampfdruck</span> · <span style="color:${C_IN}">p — Wasserdampfdruck</span>${G.tau?` · Tauwasser m<sub>W,T</sub> = ${bpF(G.mT,3)} kg/m²`:' · kein Tauwasser'}`);
 }
 // ── Schallschutz ──
-function readBS(){ return { name:$('bp-name').value, L:bpLayersRead(), anf:+$('bs-anf').value, KF:num('bs-kf')||0, up:num('bs-up')||0, tr:$('bs-tr').checked, dE:num('bs-dE')/100, rE:num('bs-rE'), sp:num('bs-s'), K:num('bs-K')||0, zul:num('bs-zul') }; }
-function validateBS(I){ const bad=[]; validateBpLayers(I.L,bad); if(I.tr && !(I.dE>0 && I.rE>0 && I.sp>0 && I.zul>0)) bad.push('Estrich d, ρ, s′ und zul. L′n,w > 0'); return bad; }
+function readBS(){ return { name:$('bp-name').value, L:bpLayersRead(), fl:$('bs-fl').value, S:num('bf-S'), d:num('bf-d'), dR:num('bf-dR')||0, F:[1,2,3,4].map(i=>({ name:['Decke oben','Boden unten','Außenwand','Innenwand'][i-1], m:num('bf-m'+i), lf:num('bf-l'+i), art:$('bf-a'+i).value })), anf:+$('bs-anf').value, KF:num('bs-kf')||0, up:num('bs-up')||0, tr:$('bs-tr').checked, dE:num('bs-dE')/100, rE:num('bs-rE'), sp:num('bs-s'), K:num('bs-K')||0, zul:num('bs-zul') }; }
+function validateBS(I){ const bad=[]; validateBpLayers(I.L,bad); if(I.fl==='genau' && (!(I.S>0 && I.d>0) || I.F.some(f=>!(f.m>0 && f.lf>0)))) bad.push('Trennfläche, Raumtiefe und alle Flanken (m′, l_f) > 0'); if(I.tr && !(I.dE>0 && I.rE>0 && I.sp>0 && I.zul>0)) bad.push('Estrich d, ρ, s′ und zul. L′n,w > 0'); return bad; }
 function nachweiseBS(I){
-  const f=bpF, m=I.L.reduce((a,s)=>a+s.rho*s.d,0), Rw=rwMasse(m), Rs=Rw-I.KF, A=BP_SCHALL[I.anf], erf=A[1], C=[];
+  const f=bpF, m=I.L.reduce((a,s)=>a+s.rho*s.d,0), Rw=rwMasse(m), A=BP_SCHALL[I.anf], erf=A[1], C=[];
+  const FR = I.fl==='genau' ? flankenR({ mD:m, S:I.S, d:I.d, RDdPlus:I.dR, F:I.F }) : null, Rs = FR ? FR.Rs : Rw-I.KF;
   C.push({ id:'bsm', title:'Flächenbezogene Masse und R<sub>w</sub>', eta:0, ok:true, info:true, steps:[`m′ = Σ ρ·d = ${I.L.map(s=>`${f(s.rho,0)}·${f(s.d,3)}`).join(' + ')} = <b>${f(m,1)} kg/m²</b>${m<65||m>720?' — außerhalb 65 … 720 kg/m², Massegesetz nur als Anhalt':''}`,
     `R<sub>w</sub> = 30,9·lg(m′) − 22,2 = 30,9·lg(${f(m,1)}) − 22,2 = <b>${f(Rw,1)} dB</b> (DIN 4109-32, einschalig massiv)`] });
-  if(erf) C.push({ id:'bsl', title:`Luftschall — ${A[0]}`, eta: erf/Math.max(Rs-I.up,1e-9), ok:Rs-I.up>=erf, steps:[`R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag Flankenübertragung = ${f(Rw,1)} − ${f(I.KF,1)} = ${f(Rs,1)} dB`,
+  if(FR){ const mx=FR.W.slice(1).reduce((a,w)=>w.anteil>a.anteil?w:a);
+    C.push({ id:'bsf', title:'Flankenübertragung (DIN 4109-2)', eta:0, ok:true, info:true, steps:[H('Direkt und je Flanke drei Wege (Ff, Df, Fd)'),
+      `R<sub>Dd,w</sub> = R<sub>w</sub>${I.dR?` + ΔR = ${f(Rw,1)} + ${f(I.dR,1)}`:''} = ${f(FR.RDd,1)} dB`,
+      ...FR.F.map(x=>`${x.name}: m′ = ${f(x.m,0)} → R<sub>f</sub> = ${f(x.Rf,1)} dB · M = lg(${f(m,0)}/${f(x.m,0)}) = ${f(x.K.M,3)} · ${x.art==='kreuz'?'Kreuzstoß':'T-Stoß'} K<sub>Ff</sub> = ${f(x.KFf,1)}, K<sub>Df</sub> = ${f(x.KDf,1)} dB · 10·lg(S/l<sub>f</sub>) = ${f(x.term,1)} → R<sub>Ff</sub> = ${f(x.RFf,1)}, R<sub>Df</sub> = R<sub>Fd</sub> = ${f(x.RDf,1)} dB`),
+      `R′<sub>w</sub> = −10·lg(Σ 10<sup>−R<sub>ij</sub>/10</sup>) über 13 Wege = <b>${f(FR.Rs,1)} dB</b>`,
+      `Anteile: direkt ${f(FR.W[0].anteil*100,0)} %, Flanken ${f((1-FR.W[0].anteil)*100,0)} % · größter Flankenweg ${mx.weg} über ${mx.name} (${f(mx.anteil*100,0)} %)`] }); }
+  if(erf) C.push({ id:'bsl', title:`Luftschall — ${A[0]}`, eta: erf/Math.max(Rs-I.up,1e-9), ok:Rs-I.up>=erf, steps:[
+    FR ? `R′<sub>w</sub> = ${f(Rs,1)} dB aus dem Flankennachweis` : `R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag Flankenübertragung = ${f(Rw,1)} − ${f(I.KF,1)} = ${f(Rs,1)} dB`,
     `R′<sub>w</sub> − u<sub>prog</sub> = ${f(Rs,1)} − ${f(I.up,1)} = <b>${f(Rs-I.up,1)} dB</b> ${Rs-I.up>=erf?'≥':'<'} erf. R′<sub>w</sub> = ${erf} dB`],
-    note:'Vereinfachung: Der genaue Nachweis nach DIN 4109-2 bestimmt R′<sub>w</sub> aus dem Trennbauteil und allen Flankenwegen.' + (Rs-I.up<erf?' Schwereres Bauteil (dicker, höhere Rohdichte) oder biegeweiche Vorsatzschale.':'') });
+    note:(FR?'':'Vereinfachung: Der genaue Nachweis nach DIN 4109-2 bestimmt R′<sub>w</sub> aus dem Trennbauteil und allen Flankenwegen. ') + (Rs-I.up<erf?'Schwereres Trennbauteil, schwerere Flanken (vor allem die mit dem größten Anteil) oder biegeweiche Vorsatzschale.':'') });
   let T=null;
-  if(I.tr){ const mE=I.rE*I.dE, Ln=lnEq(m), dL=dLwEstrich(mE,I.sp), L=Ln-dL+I.K; T={ mE, Ln, dL, L };
+  if(I.tr){ const mE=I.rE*I.dE, Ln=lnEq(m), dL=dLwEstrich(mE,I.sp), mfm=I.F.reduce((a,x)=>a+x.m,0)/I.F.length, K=FR?kTritt(m,mfm):I.K, L=Ln-dL+K; T={ mE, Ln, dL, L, K, mfm };
     C.push({ id:'bst', title:'Trittschall — schwimmender Estrich', eta:(L+I.up)/I.zul, ok:L+I.up<=I.zul, steps:[`L<sub>n,eq,0,w</sub> = 164 − 35·lg(${f(m,1)}) = ${f(Ln,1)} dB · m′<sub>Estrich</sub> = ${f(I.rE,0)}·${f(I.dE,3)} = ${f(mE,1)} kg/m²`,
       `ΔL<sub>w</sub> = 13·lg(${f(mE,1)}) − 14,2·lg(${f(I.sp,0)}) + 20,8 = ${f(dL,1)} dB`,
-      `L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K = ${f(Ln,1)} − ${f(dL,1)} + ${f(I.K,1)} = ${f(L,1)} dB`,
+      FR ? `K = 0,6 + 5,5·lg(m′<sub>Decke</sub>/m′<sub>f,m</sub>) = 0,6 + 5,5·lg(${f(m,0)}/${f(mfm,0)}) = ${f(K,1)} dB (m′<sub>f,m</sub> — Mittel der vier Flanken)` : `K = ${f(K,1)} dB (eingegeben)`,
+      `L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K = ${f(Ln,1)} − ${f(dL,1)} + ${f(K,1)} = ${f(L,1)} dB`,
       `L′<sub>n,w</sub> + u<sub>prog</sub> = ${f(L+I.up,1)} dB ${L+I.up<=I.zul?'≤':'>'} zul. ${f(I.zul,0)} dB`],
       note: L+I.up>I.zul ? 'Weichere Trittschalldämmung (kleineres s′), schwererer Estrich oder schwerere Rohdecke.' : '' }); }
-  return { C, ok:C.every(c=>c.ok), m, Rw, Rs, T };
+  return { C, ok:C.every(c=>c.ok), m, Rw, Rs, FR, T };
 }
 function figBS(I,res){
   const x0=60, Wd=380, y0=220, Hh=180, lx=v=>x0+(Math.log10(v)-Math.log10(50))/(Math.log10(1000)-Math.log10(50))*Wd, ly=r=>y0-(r-30)/45*Hh;
@@ -5590,7 +5642,7 @@ function figBS(I,res){
   const mm=Math.min(Math.max(res.m,50),1000); s+=`<circle cx="${lx(mm).toFixed(1)}" cy="${ly(Math.min(Math.max(res.Rw,30),75)).toFixed(1)}" r="5" fill="${C_IN}" stroke="#fff" stroke-width="1.5"/>`;
   s+=svgT(x0+Wd,y0+28,'m′ [kg/m²]','end','#6b7280',9)+svgT(x0-5,y0-Hh-6,'R_w [dB]','end','#6b7280',9);
   s+='</svg>';
-  return s + figLegend([],[], `m′ = ${bpF(res.m,1)} kg/m² → R<sub>w</sub> = ${bpF(res.Rw,1)} dB${res.T?` · L′<sub>n,w</sub> = ${bpF(res.T.L,1)} dB`:''}`);
+  return s + figLegend([],[], `m′ = ${bpF(res.m,1)} kg/m² → R<sub>w</sub> = ${bpF(res.Rw,1)} dB · R′<sub>w</sub> = ${bpF(res.Rs,1)} dB${res.FR?' (mit Flanken)':''}${res.T?` · L′<sub>n,w</sub> = ${bpF(res.T.L,1)} dB`:''}`);
 }
 // ── Steuerung ──
 const BP_FN = { uwert:[readBU,validateBU,nachweiseBU,figBU], glaser:[readBG,validateBG,nachweiseBG,figBG], schall:[readBS,validateBS,nachweiseBS,figBS] };
@@ -5600,10 +5652,10 @@ function runBauph(){
   LAST={ mat:'bauph', mode:BPMODE, I, res, date:new Date() };
   const line={ uwert:`U = ${bpF(res.W?.U??0,3)} W/(m²K) · R = ${bpF(res.W?.Rb??0,2)} m²K/W · f<sub>Rsi</sub> = ${bpF(res.fR??0,3)}`,
     glaser:res.G?.tau ? `Tauwasser m<sub>W,T</sub> = ${bpF(res.G.mT,3)} kg/m² · Verdunstung m<sub>W,V</sub> = ${bpF(res.G.mV,3)} kg/m² · s<sub>d</sub> = ${bpF(res.G.Stot,2)} m` : `kein Tauwasser · s<sub>d</sub> = ${bpF(res.G?.Stot??0,2)} m`,
-    schall:`m′ = ${bpF(res.m??0,1)} kg/m² · R<sub>w</sub> = ${bpF(res.Rw??0,1)} dB${res.T?` · L′<sub>n,w</sub> = ${bpF(res.T.L,1)} dB`:''}` }[BPMODE];
+    schall:`m′ = ${bpF(res.m??0,1)} kg/m² · R<sub>w</sub> = ${bpF(res.Rw??0,1)} dB · R′<sub>w</sub> = ${bpF(res.Rs??0,1)} dB${res.T?` · L′<sub>n,w</sub> = ${bpF(res.T.L,1)} dB`:''}` }[BPMODE];
   const nicht={ uwert:'Wärmebrücken (ψ-Werte), inhomogene Schichten (Holzständer, Sparren — Gefache anteilig), Luftschichten, Bauteile gegen Erdreich nach DIN EN ISO 13370, sommerlicher Wärmeschutz.',
     glaser:'Instationäre Feuchte (WUFI), Holz-Massezunahme, Dachbegrünung, Flachdächer mit Sonderklima, Kapillartransport.',
-    schall:'Genauer Nachweis nach DIN 4109-2 mit allen Flankenwegen, zweischalige und leichte Bauteile, Holzbalkendecken, Außenlärm mit Fenstern.' }[BPMODE];
+    schall:'Flanken mit Vorsatzschalen (ΔR<sub>ij</sub>), leichte und zweischalige Bauteile, elastische Stöße, Holzbalkendecken, Außenlärm mit Fenstern.' }[BPMODE];
   renderOut(res.C, res.ok, fg(I,res), line, nicht, 'ref.html#/bauphysik');
 }
 function buildReportBauph(){
@@ -5612,7 +5664,8 @@ function buildReportBauph(){
   const norm={uwert:'DIN EN ISO 6946, DIN 4108-2, GEG', glaser:'DIN 4108-3', schall:'DIN 4109-1, DIN 4109-32'}[mode];
   const rows=I.L.map((s,i)=>repRow(`Schicht ${i+1}`, `${s.name}: d = ${bpF(s.d*100,1)} cm, λ = ${bpF(s.lam,3)} W/(mK), μ = ${bpF(s.mu,0)}, ρ = ${bpF(s.rho,0)} kg/m³`)).join('')
     + (mode==='uwert'?repRow('Bauteil', `${BP_RS[I.art].n}, θ<sub>i</sub> = ${bpF(I.ti,1)} °C, θ<sub>e</sub> = ${bpF(I.te,1)} °C`):'')
-    + (mode==='schall'?repRow('Anforderung', `${BP_SCHALL[I.anf][0]}, Abschlag Flanken ${bpF(I.KF,1)} dB, u<sub>prog</sub> = ${bpF(I.up,1)} dB${I.tr?`; Estrich ${bpF(I.dE*100,1)} cm, ρ = ${bpF(I.rE,0)} kg/m³, s′ = ${bpF(I.sp,0)} MN/m³, K = ${bpF(I.K,1)} dB, zul. L′<sub>n,w</sub> = ${bpF(I.zul,0)} dB`:''}`):'');
+    + (mode==='schall' && I.fl==='genau' ? I.F.map((x,i)=>repRow(`Flanke ${i+1}`, `${x.name}: m′ = ${bpF(x.m,0)} kg/m², l<sub>f</sub> = ${bpF(x.lf,2)} m, ${x.art==='kreuz'?'Kreuzstoß':'T-Stoß'}`)).join('')+repRow('Trennbauteil', `S<sub>s</sub> = ${bpF(I.S,2)} m², Raumtiefe ${bpF(I.d,2)} m, ΔR<sub>Dd</sub> = ${bpF(I.dR,1)} dB`) : '')
+    + (mode==='schall'?repRow('Anforderung', `${BP_SCHALL[I.anf][0]}, ${I.fl==='genau'?'Flanken nach DIN 4109-2':'Abschlag Flanken '+bpF(I.KF,1)+' dB'}, u<sub>prog</sub> = ${bpF(I.up,1)} dB${I.tr?`; Estrich ${bpF(I.dE*100,1)} cm, ρ = ${bpF(I.rE,0)} kg/m³, s′ = ${bpF(I.sp,0)} MN/m³, K = ${bpF(I.K,1)} dB, zul. L′<sub>n,w</sub> = ${bpF(I.zul,0)} dB`:''}`):'');
   return repHead(I.name||title, norm) + `<section><h2>Bauteilaufbau (innen → außen)</h2><table>${rows}</table></section><section><h2>${title}</h2><div class="figure">${BP_FN[mode][3](I,res)}</div></section>` + reportChecks(res.C) + repEnd(title+'.');
 }
 
@@ -6228,7 +6281,7 @@ const FIELDS=['in-name','in-b','in-h','in-l','in-K','in-hf','in-feld','in-b1','i
   'in-t','in-haken','in-lager','in-n','in-nl2','in-ds','in-dsw','in-sw','in-nt','in-dst','in-dsp','in-s','in-dspt','in-st','in-n2','in-ds2',
   'su-l','su-beta','su-N','su-phi','su-M02','su-M01','su-n','su-ds','su-dsw','su-sw','ds-form','ds-pos','ds-c1','ds-c2','ds-V','ds-dsx','ds-sx','ds-dsy','ds-sy'];
 const CHECKS=['bg-ns','bs-tr','hv-vorg','su-auto','in-tw','in-zwang','in-auto','in-aufl','sn-auto','an-gew','ho-auto','sw-front','mw-own','mh-stoss','gs-gw'];
-const SFIELDS=['bp-name','bp-art','bp-ti','bp-te','bs-anf','bs-kf','bs-up','bs-dE','bs-rE','bs-s','bs-K','bs-zul','bl-m1','bl-d1','bl-l1','bl-u1','bl-r1','bl-m2','bl-d2','bl-l2','bl-u2','bl-r2','bl-m3','bl-d3','bl-l3','bl-u3','bl-r3','bl-m4','bl-d4','bl-l4','bl-u4','bl-r4','bl-m5','bl-d5','bl-l5','bl-u5','bl-r5','bl-m6','bl-d6','bl-l6','bl-u6','bl-r6','sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','sn-N','sn-mv','sn-psi','sn-by','sn-bz','sn-Llt','sn-zg','sn-Mk','sn-wlim',
+const SFIELDS=['bs-fl','bf-S','bf-d','bf-dR','bf-m1','bf-l1','bf-a1','bf-m2','bf-l2','bf-a2','bf-m3','bf-l3','bf-a3','bf-m4','bf-l4','bf-a4','bp-name','bp-art','bp-ti','bp-te','bs-anf','bs-kf','bs-up','bs-dE','bs-rE','bs-s','bs-K','bs-zul','bl-m1','bl-d1','bl-l1','bl-u1','bl-r1','bl-m2','bl-d2','bl-l2','bl-u2','bl-r2','bl-m3','bl-d3','bl-l3','bl-u3','bl-r3','bl-m4','bl-d4','bl-l4','bl-u4','bl-r4','bl-m5','bl-d5','bl-l5','bl-u5','bl-r5','bl-m6','bl-d6','bl-l6','bl-u6','bl-r6','sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','sn-N','sn-mv','sn-psi','sn-by','sn-bz','sn-Llt','sn-zg','sn-Mk','sn-wlim',
   'sn-Mz','sn-tors','sn-Tw','sn-F','sn-ss','sn-lage','sn-cE',
   'an-name','an-m','an-k','an-n1','an-n2','an-ms','an-t','an-st','an-e1','an-e2','an-p1','an-p2','an-V','an-N','an-a','an-lw','an-nw','an-Fw','an-tmax',
   'ho-name','ho-art','ho-kl','ho-b','ho-h','ho-L','ho-nkl','ho-kled','ho-mv','ho-zg','ho-Llt','ho-M','ho-V','ho-N','ho-F','ho-lA','ho-by','ho-bz','ho-MG','ho-MQ','ho-psi2','hv-name','hv-vm','hv-an','hv-d','hv-fu','hv-dk','hv-fax','hv-art','hv-kl','hv-t1','hv-t2','hv-ts','hv-al1','hv-al2','hv-nkl','hv-kled','hv-n','hv-m','hv-a1','hv-a2','hv-a3','hv-a4','hv-F','fp-name','fp-reihe','fp-prof','fp-B','fp-L','fp-t','fp-st','fp-beton','fp-fund','fp-N','fp-V','fp-a',

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·ref v0.3.14 -->
+<!-- Statiq·ref v0.3.17 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -383,7 +383,7 @@ function showLangNotice(){
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.14';
+const REF_VERSION = '0.3.17';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -463,7 +463,7 @@ const GAMMA_M = [
 const FAECHER = {
   baustatik: {
     title: 'Baustatik', tag: 'BS',
-    sub: 'Lager, Standardfälle, Querschnitte, Arbeitssatz',
+    sub: 'Lager, Balkentafeln, Durchlaufträger, Einflusslinien, Fachwerke, Dreigelenkrahmen, Querschnitte, Arbeitssatz, Kraftgrößenverfahren',
     kapitel: {
       grundlagen: {
         title: 'Grundlagen',
@@ -480,6 +480,14 @@ const FAECHER = {
           kragarm:     { title: 'Kragarm' },
           eingespannt: { title: 'Eingespannte Träger' },
           durchlauf:   { title: 'Durchlaufträger' },
+          einflusslinien: { title: 'Einflusslinien' },
+        }
+      },
+      tragwerke: {
+        title: 'Fachwerke und Rahmen',
+        themen: {
+          fachwerk:   { title: 'Fachwerke (Ritterschnitt)' },
+          dreigelenk: { title: 'Dreigelenkrahmen und -bogen' },
         }
       },
       querschnitte: {
@@ -495,13 +503,14 @@ const FAECHER = {
         themen: {
           pvk:         { title: 'Prinzip der virtuellen Kräfte' },
           koppeltafel: { title: 'Koppeltafel ∫M·M̄ dx' },
+          kraftgroessen: { title: 'Kraftgrößenverfahren' },
         }
       },
     }
   },
   lastannahmen: {
     title: 'Lastannahmen', tag: 'EC0/1',
-    sub: 'Kombinationen, Eigen- und Nutzlasten, Schnee, Wind',
+    sub: 'Kombinationen, Eigen- und Nutzlasten, Schnee mit Verwehung, Windbereiche, Lastweiterleitung',
     kapitel: {
       grundlagen: {
         title: 'Einwirkungskombinationen (EC0)',
@@ -517,6 +526,7 @@ const FAECHER = {
           nutzlasten:  { title: 'Nutzlasten' },
           schnee:      { title: 'Schnee' },
           wind:        { title: 'Wind' },
+          lastabtrag:  { title: 'Lastweiterleitung' },
         }
       },
     }
@@ -657,6 +667,31 @@ const FAECHER = {
           abstaende:  { title: 'Mindestabstände' },
           stabduebel: { title: 'Stabdübel & Bolzen' },
           naegel:     { title: 'Nägel' },
+        }
+      },
+    }
+  },
+  mauerwerk: {
+    title: 'Mauerwerk', tag: 'EC6',
+    sub: 'Steine, Maßordnung, Mörtel, f_k, Knicklänge, Wand, Teilflächenpressung, Kellerwand, Schub',
+    kapitel: {
+      baustoffe: {
+        title: 'Baustoffe',
+        themen: {
+          steine:      { title: 'Steine und Formate' },
+          massordnung: { title: 'Maßordnung (oktametrisch)' },
+          moertel:     { title: 'Mörtel und Verband' },
+          festigkeit:  { title: 'Druckfestigkeit und Rechenwerte' },
+        }
+      },
+      bemessung: {
+        title: 'Bemessung (vereinfachtes Verfahren)',
+        themen: {
+          knicklaenge: { title: 'Knicklänge und Schlankheit' },
+          wand:        { title: 'Wand unter Druck' },
+          teilflaeche: { title: 'Teilflächenpressung' },
+          keller:      { title: 'Kellerwand' },
+          schub:       { title: 'Schubwand' },
         }
       },
     }
@@ -3834,6 +3869,589 @@ function updatePoleni(){
     `!spezifischer Abfluss q = Q / b = ${f(Q/b,3)} m²/s · Grenztiefe auf der Krone h<sub>gr</sub> = ∛(q²/g) = ${f(Math.cbrt((Q/b)**2/9.81),3)} m`]);
 }
 
+// ══════════════════════════════════════════════════
+// MAUERWERK (ref v0.3.15): Steine, Maßordnung, Mörtel, f_k, Knicklänge, Wand (vereinfachtes Verfahren),
+// Teilflächenpressung, Kellerwand, Schubwand — Rechenkerne wie in statiq·size (γ_M = 1,5, ζ = 0,85)
+// ══════════════════════════════════════════════════
+const MWR = { gM:1.5, zeta:0.85 };
+const MWR_ART = { z1:{t:'z',g:1,n:'Ziegel, Vollstein (Gr. 1)'}, z2:{t:'z',g:2,n:'Hochlochziegel (Gr. 2)'}, k1:{t:'k',g:1,n:'Kalksandstein, Voll-/Blockstein (Gr. 1)'},
+  k2:{t:'k',g:2,n:'Kalksandstein, Lochstein (Gr. 2)'}, p1:{t:'p',g:1,n:'Porenbeton (Gr. 1)'}, l1:{t:'l',g:1,n:'Leichtbeton, Vollstein (Gr. 1)'} };
+const MWR_K = { nm:{z1:0.55,z2:0.45,k1:0.55,k2:0.45,p1:0.55,l1:0.55}, dm:{z1:0.75,z2:0.70,k1:0.80,k2:0.65,p1:0.80,l1:0.80} };
+// Rechenwerte nach DIN EN 1996-1-1/NA (Anhaltswerte): K_E (E = K_E·f_k), Endkriechzahl φ∞, Endschwinden ε∞ [mm/m], α_t [10⁻⁶/K]
+const MWR_RW = { z:{n:'Mauerziegel', KE:1100, phi:1.0, eps:-0.1, at:6}, k:{n:'Kalksandstein', KE:950, phi:1.5, eps:-0.2, at:8},
+  l:{n:'Leichtbeton', KE:950, phi:2.0, eps:-0.4, at:10}, b:{n:'Normalbeton', KE:2400, phi:1.0, eps:-0.2, at:10}, p:{n:'Porenbeton', KE:550, phi:0.5, eps:-0.1, at:8} };
+const mwOpts = () => Object.entries(MWR_ART).map(([k,v])=>[k,v.n]);
+const mwMoertel = [['nm','Normalmauermörtel'],['dm','Dünnbettmörtel']];
+// f_k und f_d mit Rechenweg
+function mwFest(art, m, fb, fm){
+  const A=MWR_ART[art], K=MWR_K[m][art], f=deNum; let fk, S=[];
+  if(m==='nm'){ const fmE=Math.min(fm,20,2*fb); fk=K*fb**0.7*fmE**0.3;
+    if(fmE<fm) S.push(`!f<sub>m</sub> wird begrenzt auf min(20; 2·f<sub>b</sub>) = ${f(fmE,1)} N/mm²`);
+    S.push(`f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup> = ${f(K,2)} · ${f(fb,1)}<sup>0,7</sup> · ${f(fmE,1)}<sup>0,3</sup> = ${f(fk,2)} N/mm²`); }
+  else if(A.g===1){ fk=K*fb**0.85; S.push(`f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup> = ${f(K,2)} · ${f(fb,1)}<sup>0,85</sup> = ${f(fk,2)} N/mm²`); }
+  else { fk=K*fb**0.7; S.push(`f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> = ${f(K,2)} · ${f(fb,1)}<sup>0,7</sup> = ${f(fk,2)} N/mm²`); }
+  const fvk0 = m==='dm' ? ({z:0.30,k:0.40,p:0.30,l:0.30})[A.t] : (A.t==='z' ? (fm>=10?0.30:fm>=2.5?0.20:0.10) : (fm>=10?0.20:fm>=2.5?0.15:0.10));
+  const fd=MWR.zeta*fk/MWR.gM;
+  S.push(`f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub> = 0,85 · ${f(fk,2)} / 1,5 = ${f(fd,3)} N/mm²`);
+  return { fk, fd, K, fvk0, grp:A.g, typ:A.t, name:A.n, S };
+}
+function mwRead(p){ return mwFest(valOf(p+'art'), valOf(p+'m'), num(p+'fb'), num(p+'fm')); }
+// gemeinsame Baustofffelder
+const mwFelder = (p, on, d={art:'k1',m:'dm',fb:15,fm:10}) => field('Steinart', sel(p+'art', mwOpts(), d.art, on)) + field('Mörtel', sel(p+'m', mwMoertel, d.m, on))
+  + field('f<sub>b</sub> bzw. f<sub>st</sub> [N/mm²]', inp(p+'fb', d.fb, on)) + field('f<sub>m</sub> [N/mm²] (nur Normalmörtel)', inp(p+'fm', d.fm, on));
+
+// ── Skizzen ──
+const MWC = { st:'#e7c9b0', fu:'#b08968', db:'#cbd5e1' };
+function mwWand(x,y,w,h){ let o=`<rect x="${R1(x)}" y="${R1(y)}" width="${R1(w)}" height="${R1(h)}" fill="${MWC.st}" stroke="${SK.ink}" stroke-width="1.2"/>`;
+  for(let yy=y+10; yy<y+h-1; yy+=10) o+=ln(x,yy,x+w,yy,MWC.fu,0.6); return o; }
+function skMWFormat(){
+  const ox=30, oy=150, L=160, H=50, dx=52, dy=-32;
+  let o=poly([[ox,oy],[ox+L,oy],[ox+L,oy-H],[ox,oy-H]],MWC.st)+poly([[ox,oy-H],[ox+L,oy-H],[ox+L+dx,oy-H+dy],[ox+dx,oy-H+dy]],'#f0dcc9')+poly([[ox+L,oy],[ox+L+dx,oy+dy],[ox+L+dx,oy-H+dy],[ox+L,oy-H]],'#d9b596');
+  o+=dimL(ox,oy,ox+L,oy,'L',14)+dimL(ox,oy,ox,oy-H,'H',-14)+dimL(ox+L,oy,ox+L+dx,oy+dy,'B',12);
+  const x0=290, k=1.7;
+  o+=tl(x0+40,22,'Achtelmeter: 1 Kopf = 12,5 cm','middle')+tl(x0+40,34,'(11,5 cm Stein + 1 cm Fuge)','middle');
+  for(let i=0;i<4;i++) o+=`<rect x="${R1(x0+i*12.5*k)}" y="52" width="${R1(11.5*k)}" height="18" fill="${MWC.st}" stroke="${SK.ink}"/>`;
+  o+=dimL(x0,70,x0+(4*12.5-1)*k,70,'n · 12,5 − 1',14)+tl(x0+40,108,'Außenmaß (n = 4)','middle');
+  const y1=130, w=(3*12.5+1)*k;
+  o+=`<rect x="${R1(x0-22)}" y="${y1}" width="22" height="18" fill="${MWC.st}" stroke="${SK.ink}"/><rect x="${R1(x0+w)}" y="${y1}" width="22" height="18" fill="${MWC.st}" stroke="${SK.ink}"/>`;
+  o+=dimL(x0,y1+18,x0+w,y1+18,'n · 12,5 + 1',14)+tl(x0+w/2,y1+56,'Öffnungsmaß (n = 3)','middle');
+  return sv(440,195,'Steinmaße und oktametrische Maßordnung', o);
+}
+function skMWAuflager(){
+  const cx=80, y0=50, h=170, t=34, a=24, sl=14, L=170;
+  let o=mwWand(cx-t/2,y0,t,h);
+  o+=poly([[cx+t/2-a,y0-sl],[cx+t/2+L,y0-sl],[cx+t/2+L,y0],[cx+t/2-a,y0]],MWC.db)+poly([[cx+t/2-a,y0+h],[cx+t/2+L,y0+h],[cx+t/2+L,y0+h+sl],[cx+t/2-a,y0+h+sl]],MWC.db);
+  o+=`<path d="M${cx+t/2},${y0+2} Q${cx+t/2+L*0.6},${y0+34} ${cx+t/2+L},${y0+22}" fill="none" stroke="${SK.load}" stroke-width="1.3" stroke-dasharray="5 3"/>`;
+  o+=tl(cx+t/2+L,y0+40,'Deckendurchbiegung →','end',SK.load)+tl(cx+t/2+L,y0+52,'Verdrehung am Auflager','end',SK.load);
+  o+=`<path d="M ${cx} ${y0} Q ${cx+26} ${y0+h/2} ${cx} ${y0+h}" fill="none" stroke="${SK.acc}" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+  o+=tl(cx+30,y0+h/2+20,'Φ₂: Knicken in Wandmitte','start',SK.acc)+tl(cx-t/2-6,y0+16,'Φ₁','end',SK.load)+tl(cx-t/2-6,y0+h-6,'Φ₁','end',SK.load);
+  o+=dimL(cx+t/2-a,y0-sl,cx+t/2,y0-sl,'a',-10)+dimL(cx-t/2,y0+h+sl,cx+t/2,y0+h+sl,'t',14)+dimL(cx-t/2-34,y0+h,cx-t/2-34,y0,'h',0);
+  o+=dimL(cx+t/2,y0+h+sl,cx+t/2+L,y0+h+sl,'l<tspan font-size="9" dy="3">f</tspan>',14);
+  return sv(310,265,'Wand am Endauflager einer Decke: Φ₁ am Kopf und Fuß, Φ₂ in Wandmitte', o);
+}
+function skMWHalt(n){
+  // Ansicht einer Wand mit gehaltenen Rändern (dick) und freien Rändern (dünn gestrichelt)
+  const x0=60, y0=30, w=230, h=130;
+  let o=mwWand(x0,y0,w,h);
+  o+=ln(x0-6,y0,x0+w+6,y0,SK.acc,4)+ln(x0-6,y0+h,x0+w+6,y0+h,SK.acc,4);
+  if(n>=3) o+=ln(x0,y0,x0,y0+h,SK.acc,4); else o+=ln(x0,y0,x0,y0+h,SK.ink,1,'stroke-dasharray="4 3"');
+  if(n>=4) o+=ln(x0+w,y0,x0+w,y0+h,SK.acc,4); else o+=ln(x0+w,y0,x0+w,y0+h,SK.ink,1,'stroke-dasharray="4 3"');
+  o+=dimL(x0,y0+h,x0+w,y0+h,'l',18)+dimL(x0+w,y0+h,x0+w,y0,'h',18);
+  o+=tl(x0+w/2,y0-8,`${n}-seitig gehalten (blau: Decken${n>=3?' und Querwände':''})`,'middle',SK.acc);
+  return sv(360,200,`${n}-seitig gehaltene Wand`, o);
+}
+
+// ── Maßordnung ──
+function updateMass(){
+  const out=document.getElementById('ms-out'); if(!out) return;
+  const L=num('ms-L'), H=num('ms-H'), s=num('ms-s'), f=deNum;
+  if(!(L>0 && H>0 && s>0)){ out.innerHTML='Bitte Länge, Höhe und Schichthöhe > 0 eingeben.'; return; }
+  const near=(off)=>{ const n=(L-off)/12.5, a=Math.floor(n+1e-9), b=Math.ceil(n-1e-9); return [a,b].filter((v,i,arr)=>v>0&&arr.indexOf(v)===i).map(k=>[k,k*12.5+off]); };
+  const row=(name,off,sym)=>`${name}: ${near(off).map(([k,v])=>`n = ${k} → ${f(k*12.5,1)} ${sym} = <b>${f(v,1)} cm</b>`).join(' · ')}`;
+  const nS=H/s, sA=Math.floor(nS+1e-9), sB=Math.ceil(nS-1e-9);
+  out.innerHTML = ablauf(`Maßordnung für ${f(L,1)} cm`, [
+    `§Länge auf das Achtelmeter-Raster (12,5 cm)`, `!n = Anzahl der Köpfe; Baurichtmaß = n · 12,5 cm`,
+    `!${row('Außenmaß (Pfeiler, Wandstück)', -1, '− 1')}`, `!${row('Öffnungsmaß (Fenster, Tür)', 1, '+ 1')}`, `!${row('Anbaumaß (Vorsprung)', 0, '± 0')}`,
+    `!${Math.abs(L/12.5-Math.round(L/12.5))<1e-9?'Die Länge ist ein Anbaumaß.':Math.abs((L+1)/12.5-Math.round((L+1)/12.5))<1e-9?'Die Länge ist ein Außenmaß — ohne Verhau mauerbar.':Math.abs((L-1)/12.5-Math.round((L-1)/12.5))<1e-9?'Die Länge ist ein Öffnungsmaß.':'Die Länge passt nicht ins Raster — Steine müssen geschnitten werden.'}`,
+    `§Höhe auf die Schichthöhe ${f(s,2)} cm`, `Schichten = H / s = ${f(H,1)} / ${f(s,2)} = ${f(nS,2)}`,
+    `!${sA===sB?`${sA} Schichten passen genau`:`${sA} Schichten = ${f(sA*s,1)} cm oder ${sB} Schichten = ${f(sB*s,1)} cm`}`]);
+}
+// ── f_k und Rechenwerte ──
+function updateFk(){
+  const out=document.getElementById('fk-out'); if(!out) return;
+  const fb=num('fk-fb'), fm=num('fk-fm');
+  if(!(fb>0) || (valOf('fk-m')==='nm' && !(fm>0))){ out.innerHTML='Bitte f<sub>b</sub> (und bei Normalmörtel f<sub>m</sub>) > 0 eingeben.'; return; }
+  const R=mwRead('fk-'), rw=MWR_RW[R.typ], E=rw.KE*R.fk, f=deNum;
+  out.innerHTML = ablauf(`${R.name}, ${valOf('fk-m')==='nm'?'Normalmauermörtel':'Dünnbettmörtel'}`, [
+    `§Charakteristische Druckfestigkeit (EN 1996-1-1, 3.6.1.2)`, `!K = ${f(R.K,2)} für ${R.name} (Tab. 3.3, Empfehlung)`, ...R.S.slice(0,-1),
+    `§Bemessungswert`, R.S[R.S.length-1], `!ζ = 0,85 erfasst die geringere Festigkeit unter Dauerlast; γ<sub>M</sub> = 1,5 für Mauerwerk nach NA`,
+    `§Verformungskennwerte (NA, Anhaltswerte)`, `E = K<sub>E</sub> · f<sub>k</sub> = ${dk(rw.KE)} · ${f(R.fk,2)} = ${dk(E)} N/mm²`,
+    `!Endkriechzahl φ<sub>∞</sub> = ${f(rw.phi,1)} · Endschwinden ε<sub>∞</sub> = ${f(rw.eps,1).replace('-','−')} mm/m · α<sub>t</sub> = ${rw.at} · 10⁻⁶ /K`,
+    `§Haftscherfestigkeit (Tab. 3.4, Empfehlung)`, `!f<sub>vk0</sub> = ${f(R.fvk0,2)} N/mm²`]);
+}
+// ── Knicklänge ──
+function mwRho2(t, decke){ return decke==='hb' ? 1.0 : (t<=175 ? 0.75 : t<=250 ? 0.90 : 1.0); }
+function mwRhoN(n, h, l, t, rho2){
+  if(n===3){ if(l>=15*t/1000) return { rho:rho2, eff:2 }; return { rho: h<=3.5*l ? rho2/(1+(rho2*h/(3*l))**2) : 1.5*l/h, eff:3 }; }
+  if(n===4){ if(l>=30*t/1000) return { rho:rho2, eff:2 }; return { rho: h<=1.15*l ? rho2/(1+(rho2*h/l)**2) : 0.5*l/h, eff:4 }; }
+  return { rho:rho2, eff:2 };
+}
+function updateHef(){
+  const out=document.getElementById('hef-out'); if(!out) return;
+  const h=num('hef-h'), t=num('hef-t'), l=num('hef-l'), n=+valOf('hef-n'), decke=valOf('hef-d'), f=deNum;
+  if(!(h>0&&t>0&&(n===2||l>0))){ out.innerHTML='Bitte h, t (und l) > 0 eingeben.'; return; }
+  const r2=mwRho2(t,decke), R=mwRhoN(n,h,l,t,r2), hef=R.rho*h, lam=hef*1000/t, P=0.85-0.0011*lam*lam;
+  const S=[`§Abminderung für zweiseitige Halterung`, decke==='hb' ? `!Holzbalkendecke: keine Einspannwirkung → ρ<sub>2</sub> = 1,0` : `!Stahlbetondecke, t = ${t} mm → ρ<sub>2</sub> = ${f(r2,2)} (0,75 bis 175 mm, 0,90 bis 250 mm, darüber 1,0)`];
+  if(n===3){ S.push(`§Dreiseitig gehalten (ein freier senkrechter Rand)`);
+    if(R.eff===2) S.push(`!l = ${f(l,2)} m ≥ 15 · t = ${f(15*t/1000,2)} m → die Querwand wirkt nicht, Wand wie zweiseitig gehalten`);
+    else if(h<=3.5*l) S.push(`!h = ${f(h,2)} m ≤ 3,5 · l = ${f(3.5*l,2)} m`, `ρ<sub>3</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / (3 · l))²) = ${f(r2,2)} / (1 + (${f(r2,2)} · ${f(h,2)} / (3 · ${f(l,2)}))²) = ${f(R.rho,3)}`);
+    else S.push(`ρ<sub>3</sub> = 1,5 · l / h = 1,5 · ${f(l,2)} / ${f(h,2)} = ${f(R.rho,3)}`); }
+  if(n===4){ S.push(`§Vierseitig gehalten`);
+    if(R.eff===2) S.push(`!l = ${f(l,2)} m ≥ 30 · t = ${f(30*t/1000,2)} m → die Querwände wirken nicht, Wand wie zweiseitig gehalten`);
+    else if(h<=1.15*l) S.push(`!h = ${f(h,2)} m ≤ 1,15 · l = ${f(1.15*l,2)} m`, `ρ<sub>4</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / l)²) = ${f(r2,2)} / (1 + (${f(r2,2)} · ${f(h,2)} / ${f(l,2)})²) = ${f(R.rho,3)}`);
+    else S.push(`ρ<sub>4</sub> = 0,5 · l / h = 0,5 · ${f(l,2)} / ${f(h,2)} = ${f(R.rho,3)}`); }
+  S.push(`§Knicklänge und Schlankheit`, `h<sub>ef</sub> = ρ<sub>${R.eff}</sub> · h = ${f(R.rho,3)} · ${f(h,2)} = ${f(hef,3)} m`,
+    `h<sub>ef</sub> / t = ${f(hef*1000,0)} / ${t} = ${f(lam,1)}`, `!Grenze h<sub>ef</sub>/t ≤ 27: ${lam<=27?'eingehalten ✓':'überschritten ✗'}`,
+    `§Abminderung in Wandmitte (volles Deckenauflager a = t)`, `Φ<sub>2</sub> = 0,85 − 0,0011 · (h<sub>ef</sub>/t)² = 0,85 − 0,0011 · ${f(lam,1)}² = ${f(P,3)}`);
+  out.innerHTML = ablauf(`Wand ${n}-seitig gehalten, t = ${t} mm`, S);
+  const fg=document.getElementById('hef-fig'); if(fg) fg.innerHTML=fig(skMWHalt(n));
+}
+// ── Wand unter Druck ──
+function mwWandRechnung(I){
+  const M=I.M, t=I.t, A=I.l*t/1000, rho=mwRho2(t,I.decke), hef=rho*I.h, lam=hef*1000/t, kurz=A<0.1?0.8:1.0, fd=M.fd*kurz;
+  const P2=0.85*I.a/t-0.0011*lam*lam, P1=I.lage==='zw'?null:I.lage==='dach'?0.333:Math.min(M.fk>=1.8?1.6-I.lf/6:1.6-I.lf/5, 0.9*I.a/t);
+  const Phi=Math.min(P2, P1??Infinity), NRd=Phi*fd*A*1000, hlim=t<240?2.75:12*t/1000;
+  return { A, rho, hef, lam, kurz, fd, P1, P2, Phi, NRd, hlim };
+}
+function updateMWD(){
+  const out=document.getElementById('mwd-out'); if(!out) return;
+  const I={ M:mwRead('mwd-'), t:num('mwd-t'), h:num('mwd-h'), l:num('mwd-l'), lage:valOf('mwd-lage'), decke:valOf('mwd-d'), a:num('mwd-a'), lf:num('mwd-lf')||0, N:num('mwd-N') };
+  if(!(I.M.fk>0 && I.t>0 && I.h>0 && I.l>0 && I.a>0 && I.a<=I.t && I.N>0)){ out.innerHTML='Bitte alle Werte > 0 und a ≤ t eingeben.'; return; }
+  const R=mwWandRechnung(I), f=deNum, t=I.t, k6=I.M.fk>=1.8?6:5;
+  const G=[[`lichte Wandhöhe h = ${f(I.h,2)} m ≤ ${t<240?'2,75 m':'12 · t = '+f(R.hlim,2)+' m'}`, I.h<=R.hlim+1e-9],[`Deckenstützweite l<sub>f</sub> = ${f(I.lf,2)} m ≤ 6,0 m`, I.lf<=6],[`h<sub>ef</sub>/t = ${f(R.lam,1)} ≤ 27`, R.lam<=27],[`A = ${f(R.A,3)} m² ≥ 0,04 m²`, R.A>=0.04]];
+  const S=[`§Anwendungsgrenzen (Auszug)`, ...G.map(g=>`!${g[0]} ${g[1]?'✓':'✗'}`), `!außerdem Gebäudehöhe ≤ 20 m und Nutzlast ≤ 5 kN/m²`,
+    `§Baustoff`, ...I.M.S];
+  if(R.kurz<1) S.push(`!kurze Wand (A = ${f(R.A,3)} m² < 0,1 m²): f<sub>d</sub> · 0,8 = ${f(R.fd,3)} N/mm²`);
+  S.push(`§Knicklänge (zweiseitig gehalten)`, `h<sub>ef</sub> = ρ<sub>2</sub> · h = ${f(R.rho,2)} · ${f(I.h,2)} = ${f(R.hef,2)} m`, `h<sub>ef</sub> / t = ${f(R.hef*1000,0)} / ${t} = ${f(R.lam,1)}`,
+    `§Abminderung Φ<sub>2</sub> in Wandmitte`, `Φ<sub>2</sub> = 0,85 · a/t − 0,0011 · (h<sub>ef</sub>/t)² = 0,85 · ${I.a}/${t} − 0,0011 · ${f(R.lam,1)}² = ${f(R.P2,3)}`,
+    `§Abminderung Φ<sub>1</sub> am Wandkopf und -fuß`);
+  if(I.lage==='zw') S.push(`!Zwischenauflager: Die Verdrehungen der Deckenfelder heben sich auf → kein Φ<sub>1</sub>`);
+  else if(I.lage==='dach') S.push(`!Endauflager unter der Dachdecke (wenig Auflast, große Verdrehung): Φ<sub>1</sub> = 0,333`);
+  else S.push(`!f<sub>k</sub> = ${f(I.M.fk,2)} N/mm² ${I.M.fk>=1.8?'≥':'<'} 1,8 N/mm² → Nenner ${k6}`, `Φ<sub>1</sub> = 1,6 − l<sub>f</sub>/${k6} = 1,6 − ${f(I.lf,2)}/${k6} = ${f(I.M.fk>=1.8?1.6-I.lf/6:1.6-I.lf/5,3)}`, `!Grenze 0,9 · a/t = ${f(0.9*I.a/t,3)} → Φ<sub>1</sub> = ${f(R.P1,3)}`);
+  S.push(`§Tragfähigkeit`, `Φ = ${R.P1===null?'Φ<sub>2</sub>':'min(Φ<sub>1</sub>; Φ<sub>2</sub>)'} = ${f(R.Phi,3)}`, `A = l · t = ${f(I.l,2)} · ${f(t/1000,3)} = ${f(R.A,3)} m²`,
+    `N<sub>Rd</sub> = Φ · f<sub>d</sub> · A = ${f(R.Phi,3)} · ${f(R.fd,3)} · ${dk(R.A*1e6)} / 1000 = ${f(R.NRd,1)} kN`,
+    `!N<sub>Ed</sub> / N<sub>Rd</sub> = ${f(I.N,1)} / ${f(R.NRd,1)} = ${f(I.N/R.NRd,3)} ${ok(I.N/R.NRd)}${G.every(g=>g[1])?'':' — Anwendungsgrenzen nicht eingehalten: genaueres Verfahren'}`);
+  out.innerHTML = ablauf(`Wand t = ${t} mm, h = ${f(I.h,2)} m, l = ${f(I.l,2)} m`, S);
+}
+// ── Teilflächenpressung ──
+function mwTeilRechnung(I){
+  const hc=I.hc*1000, Ab=I.lb*I.bb, sp=hc/(2*Math.sqrt(3)), left=Math.min(I.a1,sp), right=Math.min(I.lw*1000-I.a1-I.lb,sp), lefm=I.lb+left+right, Aef=lefm*I.t;
+  const bcalc=(1+0.3*I.a1/hc)*(1.5-1.1*Ab/Aef), bmax=Math.min(1.25+I.a1/(2*hc),1.5); let beta=Math.min(Math.max(bcalc,1),bmax); if(I.M.grp>1) beta=1;
+  return { hc, Ab, sp, left, right, lefm, Aef, bcalc, bmax, beta, NRd:beta*Ab*I.M.fd/1000 };
+}
+function updateMWT(){
+  const out=document.getElementById('mwt-out'); if(!out) return;
+  const I={ M:mwRead('mwt-'), t:num('mwt-t'), hc:num('mwt-hc'), lb:num('mwt-lb'), bb:num('mwt-bb'), a1:num('mwt-a1')||0, lw:num('mwt-lw'), N:num('mwt-N') };
+  if(!(I.M.fk>0&&I.t>0&&I.hc>0&&I.lb>0&&I.bb>0&&I.bb<=I.t&&I.a1>=0&&I.a1+I.lb<=I.lw*1000&&I.N>0)){ out.innerHTML='Bitte Maße > 0, Auflagerbreite ≤ t und das Auflager innerhalb der Wand eingeben.'; return; }
+  const R=mwTeilRechnung(I), f=deNum;
+  out.innerHTML = ablauf(`Einzellast auf ${f(I.lb,0)} × ${f(I.bb,0)} mm`, [`§Baustoff`, ...I.M.S,
+    `§Lastausbreitung unter 60° bis zur halben Wandhöhe`, `Ausbreitung je Seite = h<sub>c</sub> / (2 · tan 60°) = ${f(R.hc,0)} / 3,464 = ${f(R.sp,1)} mm`,
+    `!links begrenzt durch a<sub>1</sub> = ${f(I.a1,0)} mm, rechts durch das Wandende`,
+    `l<sub>efm</sub> = ${f(I.lb,0)} + ${f(R.left,1)} + ${f(R.right,1)} = ${f(R.lefm,1)} mm`,
+    `A<sub>b</sub> / A<sub>ef</sub> = ${dk(R.Ab)} / ${dk(R.Aef)} = ${f(R.Ab/R.Aef,3)}`,
+    `§Erhöhungsfaktor (EN 1996-1-1, Gl. 6.10)`, `β = (1 + 0,3 · a<sub>1</sub>/h<sub>c</sub>) · (1,5 − 1,1 · A<sub>b</sub>/A<sub>ef</sub>) = ${f(R.bcalc,3)}`,
+    `!Grenzen 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2h<sub>c</sub>); 1,5) = ${f(R.bmax,3)}${I.M.grp>1?' · Lochsteine (Gruppe 2): β = 1':''} → β = ${f(R.beta,3)}`,
+    `§Tragfähigkeit`, `N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub> = ${f(R.beta,3)} · ${dk(R.Ab)} · ${f(I.M.fd,3)} / 1000 = ${f(R.NRd,1)} kN`,
+    `!N<sub>Edc</sub> / N<sub>Rdc</sub> = ${f(I.N,1)} / ${f(R.NRd,1)} = ${f(I.N/R.NRd,3)} ${ok(I.N/R.NRd)} — die Wand darunter zusätzlich als Druckwand nachweisen`]);
+}
+// ── Kellerwand ──
+function mwKellerBeta(bc,h){ return bc>=2*h ? 20 : bc<=h ? 40 : 60-20*bc/h; }
+function updateMWK(){
+  const out=document.getElementById('mwk-out'); if(!out) return;
+  const M=mwRead('mwk-'), t=num('mwk-t'), h=num('mwk-h'), he=num('mwk-he'), bc=num('mwk-bc'), rho=num('mwk-rho'), q=num('mwk-q')||0, Nmax=num('mwk-Nmax'), Nmin=num('mwk-Nmin'), f=deNum;
+  if(!(M.fk>0&&t>0&&h>0&&he>=0&&bc>0&&rho>0&&Nmax>=Nmin&&Nmin>=0)){ out.innerHTML='Bitte Maße > 0 und n<sub>max</sub> ≥ n<sub>min</sub> ≥ 0 eingeben.'; return; }
+  const beta=mwKellerBeta(bc,h), nreq=rho*h*he*he/(beta*t/1000), nlim=t*M.fd/3;
+  const G=[[`t = ${t} mm ≥ 200 mm`,t>=200],[`h = ${f(h,2)} m ≤ 2,60 m`,h<=2.6],[`q<sub>k</sub> = ${f(q,1)} kN/m² ≤ 5 kN/m²`,q<=5],[`h<sub>e</sub> = ${f(he,2)} m ≤ h`,he<=h]];
+  out.innerHTML = ablauf('Kellerwand ohne rechnerischen Biegenachweis', [`§Anwendungsbedingungen (Auszug)`, ...G.map(g=>`!${g[0]} ${g[1]?'✓':'✗'}`), `!außerdem: Gelände nicht ansteigend, kein Wasserdruck, Kellerdecke als Scheibe`,
+    `§Beiwert β aus dem Querwandabstand`, `!b<sub>c</sub> = ${f(bc,2)} m, h = ${f(h,2)} m → ${bc>=2*h?'b<sub>c</sub> ≥ 2h: β = 20':bc<=h?'b<sub>c</sub> ≤ h: β = 40':'h < b<sub>c</sub> < 2h'}`,
+    ...(bc>h&&bc<2*h?[`β = 60 − 20 · b<sub>c</sub>/h = 60 − 20 · ${f(bc,2)}/${f(h,2)} = ${f(beta,2)}`]:[]),
+    `§Mindestauflast (Druckbogen gegen den Erddruck)`, `n<sub>Ed,min,erf</sub> = ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t) = ${f(rho,1)} · ${f(h,2)} · ${f(he,2)}² / (${f(beta,1)} · ${f(t/1000,3)}) = ${f(nreq,1)} kN/m`,
+    `!n<sub>Ed,min</sub> = ${f(Nmin,1)} kN/m ${Nmin>=nreq?'≥':'<'} ${f(nreq,1)} kN/m ${Nmin>=nreq?'✓':'✗'}`,
+    `§Höchstauflast`, ...M.S, `n<sub>Ed,max,zul</sub> = t · f<sub>d</sub> / 3 = ${t} · ${f(M.fd,3)} / 3 = ${f(nlim,1)} kN/m`,
+    `!n<sub>Ed,max</sub> / n<sub>zul</sub> = ${f(Nmax,1)} / ${f(nlim,1)} = ${f(Nmax/nlim,3)} ${ok(Nmax/nlim)}`]);
+}
+// ── Schubwand ──
+function mwSchubRechnung(I){
+  const Mb=I.V*I.h*(I.lag==='krag'?1:0.5), e=Mb/I.N, l=I.l, lc=e<=l/6?l:Math.max(0,3*(l/2-e)), sd=lc>0?I.N/(I.t*lc):Infinity;
+  const smax=e<=l/6?I.N/(I.t*l)*(1+6*e/l):2*I.N/(I.t*lc), fvk0=(I.stoss?0.5:1)*I.M.fvk0, fvlt=0.065*I.fb, fvk=Math.min(fvk0+0.4*sd,fvlt), fvd=fvk/MWR.gM;
+  return { Mb, e, lc, sd, smax, fvk0, fvlt, fvk, fvd, VRd:fvd*I.t*lc };
+}
+function updateMWS(){
+  const out=document.getElementById('mws-out'); if(!out) return;
+  const I={ M:mwRead('mws-'), fb:num('mws-fb'), l:num('mws-l'), t:num('mws-t'), h:num('mws-h'), lag:valOf('mws-lag'), N:num('mws-N'), V:num('mws-V'), stoss:valOf('mws-st')==='1' };
+  if(!(I.M.fk>0&&I.l>0&&I.t>0&&I.h>0&&I.N>0&&I.V>=0)){ out.innerHTML='Bitte l, t, h, N > 0 und V ≥ 0 eingeben.'; return; }
+  const R=mwSchubRechnung(I), f=deNum, l=I.l;
+  out.innerHTML = ablauf(`Wandscheibe l = ${f(l,2)} m, t = ${I.t} mm`, [
+    `§Moment am Wandfuß und Ausmitte`, `M<sub>Ed</sub> = V<sub>Ed</sub> · h${I.lag==='krag'?'':' / 2'} = ${f(I.V,1)} · ${f(I.h,2)}${I.lag==='krag'?'':' / 2'} = ${f(R.Mb,1)} kNm`,
+    `e = M<sub>Ed</sub> / N<sub>Ed</sub> = ${f(R.Mb,1)} / ${f(I.N,1)} = ${f(R.e,3)} m`, `!klaffende Fuge höchstens bis Wandmitte: e ≤ l/3 = ${f(l/3,3)} m ${R.e<=l/3?'✓':'✗'}`,
+    `§Überdrückte Länge`, R.e<=l/6 ? `!e ≤ l/6 = ${f(l/6,3)} m: ganze Länge überdrückt, l<sub>c</sub> = ${f(R.lc,3)} m` : `l<sub>c</sub> = 3 · (l/2 − e) = 3 · (${f(l/2,3)} − ${f(R.e,3)}) = ${f(R.lc,3)} m`,
+    `§Randdruck`, ...I.M.S, R.e<=l/6 ? `σ<sub>max</sub> = N / (t · l) · (1 + 6e/l) = ${f(R.smax,3)} N/mm²` : `σ<sub>max</sub> = 2N / (t · l<sub>c</sub>) = ${f(R.smax,3)} N/mm²`,
+    `!σ<sub>max</sub> / f<sub>d</sub> = ${f(R.smax/I.M.fd,3)} ${ok(R.smax/I.M.fd)}`,
+    `§Schubfestigkeit (EN 1996-1-1, 3.6.2)`, `!f<sub>vk0</sub> = ${f(I.M.fvk0,2)} N/mm² (Tab. 3.4)${I.stoss?` · Stoßfugen unvermörtelt: halber Wert ${f(R.fvk0,3)} N/mm²`:''}`,
+    `σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>) = ${f(I.N,1)} / (${I.t} · ${f(R.lc,3)}) = ${f(R.sd,3)} N/mm²`,
+    `f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> = ${f(R.fvk0,3)} + 0,4 · ${f(R.sd,3)} = ${f(R.fvk0+0.4*R.sd,3)} N/mm²`,
+    `!Grenze 0,065 · f<sub>b</sub> = ${f(R.fvlt,3)} N/mm² → f<sub>vk</sub> = ${f(R.fvk,3)} N/mm²`, `f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub> = ${f(R.fvk,3)} / 1,5 = ${f(R.fvd,3)} N/mm²`,
+    `§Schubtragfähigkeit`, `V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub> = ${f(R.fvd,3)} · ${I.t} · ${f(R.lc,3)} = ${f(R.VRd,1)} kN`,
+    `!V<sub>Ed</sub> / V<sub>Rd</sub> = ${f(I.V,1)} / ${f(R.VRd,1)} = ${f(I.V/R.VRd,3)} ${ok(I.V/R.VRd)}`]);
+}
+
+// ══════════════════════════════════════════════════
+// BAUSTATIK (ref v0.3.16): Durchlaufträger (Dreimomentengleichung, Laststellungen), Steiner-Rechner,
+// Fachwerk (Ritterschnitt), Dreigelenkrahmen, Kraftgrößenverfahren, Einflusslinien
+// ══════════════════════════════════════════════════
+const dS = (v,n=2) => deNum(Math.abs(v)<1e-12?0:v,n).replace(/^-/,'−');
+// ── Durchlaufträger mit gleichen Stützweiten: Dreimomentengleichung ──
+// loads: Gleichlast je Feld; L gleich; liefert Stützmomente, Auflagerkräfte, Feldmomente (Maximum)
+function dltRechnung(n, loads, L=1){
+  const m=n-1, Ms=new Array(n+1).fill(0);
+  if(m>0){ // tridiagonal: M_{i-1} + 4 M_i + M_{i+1} = −(q_l + q_r)·L²/4
+    const a=new Array(m).fill(1), b=new Array(m).fill(4), c=new Array(m).fill(1), d=[];
+    for(let i=1;i<n;i++) d.push(-(loads[i-1]+loads[i])*L*L/4);
+    for(let i=1;i<m;i++){ const w=a[i]/b[i-1]; b[i]-=w*c[i-1]; d[i]-=w*d[i-1]; }
+    const x=new Array(m); x[m-1]=d[m-1]/b[m-1]; for(let i=m-2;i>=0;i--) x[i]=(d[i]-c[i]*x[i+1])/b[i];
+    for(let i=0;i<m;i++) Ms[i+1]=x[i];
+  }
+  const R=new Array(n+1).fill(0), Mf=[], xf=[];
+  for(let i=0;i<n;i++){ const q=loads[i], Va=q*L/2+(Ms[i+1]-Ms[i])/L, Vb=q*L/2-(Ms[i+1]-Ms[i])/L; R[i]+=Va; R[i+1]+=Vb;
+    let x0 = q>0 ? Math.min(Math.max(Va/q,0),L) : (Ms[i]>Ms[i+1]?0:L); const Mx=Ms[i]+Va*x0-q*x0*x0/2; Mf.push(Mx); xf.push(x0); }
+  return { Ms, R, Mf, xf };
+}
+function dltExtrem(n){
+  const full=dltRechnung(n,new Array(n).fill(1)), maxF=new Array(n).fill(-1e9), minS=new Array(n+1).fill(1e9), maxR=new Array(n+1).fill(-1e9), patF=[], patS=[];
+  for(let p=0;p<(1<<n);p++){ const ld=[...Array(n)].map((_,i)=>(p>>i)&1), r=dltRechnung(n,ld);
+    r.Mf.forEach((v,i)=>{ if(v>maxF[i]+1e-12){ maxF[i]=v; patF[i]=ld; } }); r.Ms.forEach((v,i)=>{ if(v<minS[i]-1e-12){ minS[i]=v; patS[i]=ld; } }); r.R.forEach((v,i)=>{ maxR[i]=Math.max(maxR[i],v); }); }
+  return { full, maxF, minS, maxR, patF, patS };
+}
+function dltTabelle(teil){
+  const rows=[]; for(const n of [2,3,4,5]){ const E=dltExtrem(n), h=Math.ceil(n/2), hs=Math.ceil((n+1)/2), j=a=>a.map(v=>dS(v,3)).join(' · ');
+    rows.push(teil==='voll' ? [`${n} Felder`, j(E.full.R.slice(0,hs)), j(E.full.Ms.slice(1,hs)), j(E.full.Mf.slice(0,h))]
+      : [`${n} Felder`, j(E.maxR.slice(0,hs)), j(E.minS.slice(1,hs)), j(E.maxF.slice(0,h))]); }
+  return rows;
+}
+const patStr = p => p.map(v=>v?'■':'□').join('');
+function skDLT(n, ld, E){
+  const x0=24, W=360, y=50, L=W/n; let o='';
+  for(let i=0;i<n;i++) if(ld[i]) o+=udl(x0+i*L+2,x0+(i+1)*L-2,y,14,1,1,'');
+  o+=beam(x0,x0+W,y+1)+supPin(x0,y+2); for(let i=1;i<=n;i++) o+=supRoll(x0+i*L,y+2);
+  // Momentenlinie (Gesamtlast, positiv nach unten)
+  const k=40/Math.max(...E.Ms.map(Math.abs),...E.Mf.map(Math.abs),1e-9), y0=y+68, pts=[];
+  for(let i=0;i<n;i++){ const Va=ld[i]*E.L/2+(E.Ms[i+1]-E.Ms[i])/E.L; for(let j=0;j<=20;j++){ const x=E.L*j/20, M=E.Ms[i]+Va*x-ld[i]*x*x/2; pts.push([x0+(i+j/20)*L, y0+M*k]); } }
+  o+=`<path d="M ${x0} ${y0} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} L ${x0+W} ${y0} Z" fill="${SK.m}" fill-opacity="0.12" stroke="none"/>`+pl(pts,SK.m,1.3)+ln(x0,y0,x0+W,y0,SK.ink,0.7);
+  E.Ms.forEach((v,i)=>{ if(Math.abs(v)>1e-9) o+=tl(x0+i*L,y0+v*k-5,dS(v,3),'middle',SK.m); });
+  E.Mf.forEach((v,i)=>{ if(v>1e-9) o+=tl(x0+(i*E.L+E.xf[i])/E.L*L,y0+v*k+12,dS(v,3),'middle',SK.m); });
+  return sv(410,190,'Durchlaufträger: Laststellung und Momentenlinie', o);
+}
+function updateDLT(){
+  const out=document.getElementById('dlt-out'); if(!out) return;
+  const n=+valOf('dlt-n'), L=num('dlt-L'), g=num('dlt-g'), q=num('dlt-q'), gG=1.35, gQ=1.5, f=dS;
+  if(!(n>=2&&L>0&&g>=0&&q>=0&&g+q>0)){ out.innerHTML='Bitte L > 0 und g, q ≥ 0 eingeben.'; return; }
+  const E=dltExtrem(n), G=dltRechnung(n,new Array(n).fill(1));
+  // Bemessungswerte: γG·g auf allen Feldern + γQ·q in ungünstiger Stellung (Beiwerte × qL²)
+  const fM=(gb,qb)=>(gG*g*gb+gQ*q*qb)*L*L, i1=0, iB=1;
+  const Ex=dltRechnung(n,E.patF[0].map(p=>gG*g+gQ*q*p),L), MF1=fM(G.Mf[0],E.maxF[0]), MB=gG*g*G.Ms[1]*L*L+gQ*q*E.minS[1]*L*L, RA=(gG*g*G.R[0]+gQ*q*E.maxR[0])*L, RB=(gG*g*G.R[1]+gQ*q*E.maxR[1])*L;
+  const S=[`§Bemessungslasten`, `g<sub>d</sub> = γ<sub>G</sub> · g<sub>k</sub> = 1,35 · ${f(g)} = ${f(gG*g)} kN/m (alle Felder)`, `q<sub>d</sub> = γ<sub>Q</sub> · q<sub>k</sub> = 1,5 · ${f(q)} = ${f(gQ*q)} kN/m (ungünstige Felder)`,
+    `§Feldmoment im Endfeld`, `!Laststellung für q: ${patStr(E.patF[0])} (jedes zweite Feld) · Beiwerte g: ${dS(G.Mf[0],4)}, q: ${dS(E.maxF[0],4)}`,
+    `!Summe der Beiwerte: (${f(gG*g)} · ${dS(G.Mf[0],4)} + ${f(gQ*q)} · ${dS(E.maxF[0],4)}) · ${f(L)}² = ${f(MF1)} kNm — etwas auf der sicheren Seite, weil die beiden Maxima an verschiedenen Stellen liegen`,
+    `M<sub>F1,d</sub> = max M(x) für g<sub>d</sub> überall + q<sub>d</sub> auf ${patStr(E.patF[0])} = ${f(Ex.Mf[0])} kNm bei x = ${f(Ex.xf[0])} m`,
+    `§Stützmoment über der ersten Innenstütze`, `!Laststellung für q: ${patStr(E.patS[1])} (beide angrenzenden Felder) · Beiwerte g: ${dS(G.Ms[1],4)}, q: ${dS(E.minS[1],4)}`,
+    `M<sub>B,d</sub> = (${f(gG*g)} · (${dS(G.Ms[1],4)}) + ${f(gQ*q)} · (${dS(E.minS[1],4)})) · ${f(L)}² = ${f(MB)} kNm`,
+    `§Auflagerkräfte (Maximalwerte)`, `A<sub>d</sub> = (${f(gG*g)} · ${dS(G.R[0],4)} + ${f(gQ*q)} · ${dS(E.maxR[0],4)}) · ${f(L)} = ${f(RA)} kN`,
+    `B<sub>d</sub> = (${f(gG*g)} · ${dS(G.R[1],4)} + ${f(gQ*q)} · ${dS(E.maxR[1],4)}) · ${f(L)} = ${f(RB)} kN`,
+    `!Ohne Laststellungen (alles Volllast): M<sub>F1</sub> = ${f((gG*g+gQ*q)*G.Mf[0]*L*L)} kNm, M<sub>B</sub> = ${f((gG*g+gQ*q)*G.Ms[1]*L*L)} kNm — das Feldmoment wäre um ${dS((Ex.Mf[0]/((gG*g+gQ*q)*G.Mf[0]*L*L)-1)*100,0)} % zu klein`];
+  out.innerHTML = ablauf(`${n}-Feldträger, L = ${f(L)} m`, S);
+  const fg=document.getElementById('dlt-fig'); if(fg){ const ld=E.patF[0], r=dltRechnung(n,ld,1); fg.innerHTML=fig(skDLT(n,ld,{...r,L:1}),`Laststellung für das größte Feldmoment im Endfeld (q auf ${patStr(ld)}), Momentenlinie in Vielfachen von qL².`); }
+}
+
+// ── Zusammengesetzter Querschnitt (Steiner) ──
+function steinerRechnung(T){ // T: [{b,h,z}] z = Oberkante von oben, symmetrisch zur senkrechten Achse
+  const A=T.reduce((s,t)=>s+t.b*t.h,0), zs=T.reduce((s,t)=>s+t.b*t.h*(t.z+t.h/2),0)/A, H=Math.max(...T.map(t=>t.z+t.h)), top=Math.min(...T.map(t=>t.z));
+  const P=T.map(t=>{ const Ai=t.b*t.h, zi=t.z+t.h/2, Ii=t.b*t.h**3/12, d=zi-zs; return { Ai, zi, Ii, d, St:Ai*d*d, Iz:t.h*t.b**3/12 }; });
+  const Iy=P.reduce((s,p)=>s+p.Ii+p.St,0), Iz=P.reduce((s,p)=>s+p.Iz,0);
+  return { A, zs, H, top, P, Iy, Iz, Wo:Iy/(zs-top), Wu:Iy/(H-zs) };
+}
+function skSteiner(T,R){
+  const W=Math.max(...T.map(t=>t.b)), k=Math.min(220/W, 170/(R.H-R.top)), cx=150, y0=20-R.top*k; let o='';
+  T.forEach((t,i)=>{ o+=`<rect x="${R1(cx-t.b*k/2)}" y="${R1(y0+t.z*k)}" width="${R1(t.b*k)}" height="${R1(t.h*k)}" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="1.2"/>`+tl(cx+t.b*k/2+4,y0+(t.z+t.h/2)*k+3,String(i+1),'start',SK.dim); });
+  o+=axH(cx-W*k/2-14,cx+W*k/2+14,y0+R.zs*k,'y')+cen(cx,y0+R.zs*k,'S');
+  o+=dimL(cx-W*k/2-24,y0+R.top*k,cx-W*k/2-24,y0+R.zs*k,'z<tspan font-size="9" dy="3">s</tspan>',0);
+  return sv(300,Math.round((R.H-R.top)*k+50),'Zusammengesetzter Querschnitt', o);
+}
+function updateSteiner(){
+  const out=document.getElementById('stq-out'); if(!out) return;
+  const T=[1,2,3,4].map(i=>({ b:num('stq-b'+i)||0, h:num('stq-h'+i)||0, z:num('stq-z'+i)||0 })).filter(t=>t.b>0&&t.h>0);
+  if(!T.length || T.some(t=>t.z<0)){ out.innerHTML='Bitte mindestens ein Rechteck mit b, h > 0 und z ≥ 0 eingeben.'; return; }
+  const R=steinerRechnung(T), f=(v,n=1)=>dS(v,n);
+  const rows=T.map((t,i)=>{ const p=R.P[i]; return [i+1, `${f(t.b)} × ${f(t.h)}`, f(p.Ai), f(p.zi,2), f(p.Ai*p.zi), f(p.Ii,0), f(p.d,2), f(p.St,0)]; });
+  rows.push(['Σ','',f(R.A),'',f(R.A*R.zs),f(R.P.reduce((s,p)=>s+p.Ii,0),0),'',f(R.P.reduce((s,p)=>s+p.St,0),0)]);
+  out.innerHTML = textTable(['Teil','b × h [cm]','A<sub>i</sub> [cm²]','z<sub>i</sub> [cm]','A<sub>i</sub>·z<sub>i</sub> [cm³]','I<sub>i</sub> [cm⁴]','z<sub>i</sub> − z<sub>s</sub> [cm]','A<sub>i</sub>·(z<sub>i</sub> − z<sub>s</sub>)² [cm⁴]'], rows)
+    + ablauf('', [`§Schwerpunkt (von der Oberkante)`, `z<sub>s</sub> = (Σ A<sub>i</sub> · z<sub>i</sub>) / Σ A<sub>i</sub> = ${f(R.A*R.zs)} / ${f(R.A)} = ${f(R.zs,2)} cm`,
+      `§Flächenmoment 2. Grades (Steiner)`, `I<sub>y</sub> = Σ I<sub>i</sub> + Σ A<sub>i</sub> · (z<sub>i</sub> − z<sub>s</sub>)² = ${f(R.P.reduce((s,p)=>s+p.Ii,0),0)} + ${f(R.P.reduce((s,p)=>s+p.St,0),0)} = ${dk(R.Iy)} cm⁴`,
+      `I<sub>z</sub> = Σ h<sub>i</sub> · b<sub>i</sub>³ / 12 = ${dk(R.Iz)} cm⁴`, `!alle Teile mittig auf einer senkrechten Achse — I<sub>z</sub> ohne Steiner-Anteil`,
+      `§Widerstandsmomente`, `W<sub>o</sub> = I<sub>y</sub> / z<sub>o</sub> = ${dk(R.Iy)} / ${f(R.zs-R.top,2)} = ${f(R.Wo)} cm³`, `W<sub>u</sub> = I<sub>y</sub> / z<sub>u</sub> = ${dk(R.Iy)} / ${f(R.H-R.zs,2)} = ${f(R.Wu)} cm³`]);
+  const fg=document.getElementById('stq-fig'); if(fg) fg.innerHTML=fig(skSteiner(T,R));
+}
+
+// ── Fachwerk: Parallelträger mit Pfosten, Diagonalen zur Mitte fallend (Ritterschnitt) ──
+function fachwerk(n, a, h, F, P=0, kP=-1){
+  const Fk=[...Array(n+1)].map((_,k)=>(k===0||k===n?F/2:F)+(k===kP?P:0)), Lg=n*a;
+  const B=Fk.reduce((s,v,k)=>s+v*k*a,0)/Lg, A=Fk.reduce((s,v)=>s+v,0)-B;
+  const Mk=[...Array(n+1)].map((_,k)=>{ let M=A*k*a; for(let j=0;j<=k;j++) M-=Fk[j]*(k-j)*a; return M; });
+  const Q=[...Array(n)].map((_,i)=>{ let s=A; for(let j=0;j<=i;j++) s-=Fk[j]; return s; });
+  const d=Math.hypot(a,h), sa=h/d, links=i=>i<n/2;
+  const O=[], U=[], D=[], V=[];
+  for(let i=0;i<n;i++){ if(links(i)){ O.push(-Mk[i+1]/h); U.push(Mk[i]/h); D.push(Q[i]/sa); } else { O.push(-Mk[i]/h); U.push(Mk[i+1]/h); D.push(-Q[i]/sa); } }
+  for(let k=0;k<=n;k++){ V.push(k<n/2 ? -Fk[k]-Q[k] : k>n/2 ? -Fk[k]+Q[k-1] : -Fk[k]); }
+  return { n, a, h, Fk, A, B, Mk, Q, sa, d, O, U, D, V, links };
+}
+function skFW(R){
+  const k=Math.min(360/(R.n*R.a), 110/R.h), x0=30, yb=40+R.h*k, X=i=>x0+i*R.a*k, yt=40;
+  const mx=Math.max(...[...R.O,...R.U,...R.D,...R.V].map(Math.abs),1e-9);
+  const col=v=>Math.abs(v)<1e-6*mx?'#9ca3af':v>0?SK.acc:SK.load, w=v=>Math.abs(v)<1e-6*mx?1:1.2+2.6*Math.abs(v)/mx;
+  let o='';
+  for(let i=0;i<R.n;i++){ o+=ln(X(i),yt,X(i+1),yt,col(R.O[i]),w(R.O[i]))+ln(X(i),yb,X(i+1),yb,col(R.U[i]),w(R.U[i]));
+    o+= R.links(i) ? ln(X(i),yt,X(i+1),yb,col(R.D[i]),w(R.D[i])) : ln(X(i),yb,X(i+1),yt,col(R.D[i]),w(R.D[i])); }
+  for(let i=0;i<=R.n;i++){ o+=ln(X(i),yt,X(i),yb,col(R.V[i]),w(R.V[i])); o+=`<circle cx="${R1(X(i))}" cy="${yt}" r="2.2" fill="#fff" stroke="${SK.ink}"/><circle cx="${R1(X(i))}" cy="${R1(yb)}" r="2.2" fill="#fff" stroke="${SK.ink}"/>`;
+    if(R.Fk[i]>0) o+=pload(X(i),yt-3,'',18); }
+  o+=supPin(X(0),yb+2)+supRoll(X(R.n),yb+2);
+  for(let i=0;i<R.n;i++){ o+=tl((X(i)+X(i+1))/2,yt-5,dS(R.O[i],1),'middle',col(R.O[i]))+tl((X(i)+X(i+1))/2,yb+12,dS(R.U[i],1),'middle',col(R.U[i])); }
+  o+=ln(250,yb+34,266,yb+34,SK.acc,3)+tl(270,yb+37,'Zug','start')+ln(304,yb+34,320,yb+34,SK.load,3)+tl(324,yb+37,'Druck','start')+ln(362,yb+34,378,yb+34,'#9ca3af',1)+tl(382,yb+37,'0','start');
+  return sv(420,Math.round(yb+48),'Fachwerk: Stabkräfte (Strichstärke ∝ Kraft)', o);
+}
+function updateFW(){
+  const out=document.getElementById('fw-out'); if(!out) return;
+  const n=Math.round(num('fw-n')), a=num('fw-a'), h=num('fw-h'), F=num('fw-F'), P=num('fw-P')||0, kP=Math.round(num('fw-k'));
+  if(!(n>=2&&n<=12&&n%2===0&&a>0&&h>0&&F>=0&&(F>0||P>0))){ out.innerHTML='Bitte eine gerade Feldzahl 2 … 12, a, h > 0 und Lasten eingeben.'; return; }
+  const R=fachwerk(n,a,h,F,P,(kP>=0&&kP<=n)?kP:-1), f=dS, i=Math.max(0,n/2-1);
+  const S=[`§Auflagerkräfte`, `!Obergurtknoten: F an den inneren Knoten, F/2 an den Endknoten${P>0&&kP>=0&&kP<=n?`, zusätzlich P = ${f(P)} kN am Knoten ${kP}`:''}`,
+    `B = Σ F<sub>k</sub> · x<sub>k</sub> / L = ${f(R.B)} kN`, `A = Σ F<sub>k</sub> − B = ${f(R.A)} kN`,
+    `§Ritterschnitt durch Feld ${i+1} (links der Mitte)`, `!Schnitt durch Obergurt O<sub>${i+1}</sub>, Diagonale D<sub>${i+1}</sub>, Untergurt U<sub>${i+1}</sub>; Diagonale fällt zur Mitte, sin α = h/d = ${f(h)}/${f(R.d,3)} = ${dS(R.sa,4)}`,
+    `M<sub>${i}</sub> = ${f(R.Mk[i])} kNm (Momente des Ersatzbalkens an den Knoten)`, `M<sub>${i+1}</sub> = ${f(R.Mk[i+1])} kNm`,
+    `O<sub>${i+1}</sub> = −M<sub>${i+1}</sub> / h = −${f(R.Mk[i+1])} / ${f(h)} = ${f(R.O[i])} kN`, `!Drehpunkt: Untergurtknoten ${i+1} (dort schneiden sich D und U)`,
+    `U<sub>${i+1}</sub> = M<sub>${i}</sub> / h = ${f(R.Mk[i])} / ${f(h)} = ${f(R.U[i])} kN`, `!Drehpunkt: Obergurtknoten ${i}`,
+    `D<sub>${i+1}</sub> = Q<sub>${i+1}</sub> / sin α = ${f(R.Q[i])} / ${dS(R.sa,4)} = ${f(R.D[i])} kN`, `!Querkraft im Feld = A minus Lasten links des Schnitts`,
+    `§Pfosten (Gleichgewicht am Obergurtknoten)`, `V<sub>0</sub> = −F<sub>0</sub> − Q<sub>1</sub> = −A = ${f(R.V[0])} kN (Endpfosten über dem Auflager)`, `V<sub>${n/2}</sub> = −F<sub>${n/2}</sub> = ${f(R.V[n/2])} kN (Mittelpfosten, keine Diagonale am oberen Knoten)`];
+  const rows=[]; for(let j=0;j<n;j++) rows.push([j+1, f(R.O[j]), f(R.U[j]), f(R.D[j])]);
+  out.innerHTML = ablauf(`Fachwerk ${n} × ${f(a)} m, h = ${f(h)} m`, S) + textTable(['Feld','Obergurt O [kN]','Untergurt U [kN]','Diagonale D [kN]'], rows)
+    + textTable(['Pfosten (Knoten)', ...R.V.map((_,k)=>'V<sub>'+k+'</sub>')], [['N [kN]', ...R.V.map(v=>f(v,1))]])
+    + `<div class="legend">Zug positiv, Druck negativ. Feld j liegt zwischen den Knoten j − 1 und j; Knoten 0 ist links über dem Festlager.</div>`;
+  const fg=document.getElementById('fw-fig'); if(fg) fg.innerHTML=fig(skFW(R),'Blau: Zugstab, rot: Druckstab, grau: Nullstab. Bei Volllast ist der Obergurt gedrückt, der Untergurt gezogen, die zur Mitte fallenden Diagonalen sind Zugstäbe.');
+}
+
+// ── Dreigelenkrahmen (Gelenk in Riegelmitte), Gleichlast q auf dem Riegel, Horizontallast W am linken Rahmeneck ──
+function dreigelenk(l, h, q, W){
+  const Bv=q*l/2+W*h/l, Av=q*l/2-W*h/l, Bh=-q*l*l/(8*h)-W/2, Ah=-W-Bh;
+  const Mc=-Ah*h, Md=Bh*h, Mb=x=>x*Av-h*Ah-q*x*x/2;
+  let xm=Av/q, MbMax=q>0&&xm>0&&xm<l?Mb(xm):Math.max(Mb(0),Mb(l));
+  return { Av, Bv, Ah, Bh, Mc, Md, Mb, MbMax, xm };
+}
+function skDreigelenk(l,h,q,W,R){
+  const k=Math.min(150/l,100/h), yt=50, yb=yt+h*k;
+  const rahmen=(x0)=>{ const X=x=>x0+x*k; return ln(X(0),yb,X(0),yt,SK.ink,3)+ln(X(0),yt,X(l),yt,SK.ink,3)+ln(X(l),yt,X(l),yb,SK.ink,3)+`<circle cx="${R1(X(l/2))}" cy="${yt}" r="4" fill="#fff" stroke="${SK.ink}" stroke-width="1.4"/>`+supPin(X(0),yb+1)+supPin(X(l),yb+1); };
+  // links: System, Lasten, Reaktionen
+  let x0=95, X=x=>x0+x*k, o=rahmen(x0)+tl(X(l/2),18,'System und Auflagerkräfte','middle');
+  if(q>0) o+=udl(X(0)+3,X(l)-3,yt-2,14,1,1,'q');
+  if(W>0) o+=`<line x1="${X(0)-40}" y1="${yt}" x2="${X(0)-3}" y2="${yt}" stroke="${SK.load}" stroke-width="1.6" marker-end="url(#ska)"/>`+it(X(0)-38,yt-6,'W','start',SK.load,12);
+  const ar=(x1,y1,x2,y2)=>`<line x1="${R1(x1)}" y1="${R1(y1)}" x2="${R1(x2)}" y2="${R1(y2)}" stroke="${SK.acc}" stroke-width="1.4" marker-end="url(#skc)"/>`;
+  o+=ar(X(0),yb+46,X(0),yb+20)+tl(X(0)+4,yb+44,`A<tspan font-size="7" dy="2">v</tspan><tspan dy="-2"> = ${dS(R.Av,1)}</tspan>`,'start',SK.acc)+ar(X(l),yb+46,X(l),yb+20)+tl(X(l)+4,yb+44,`B<tspan font-size="7" dy="2">v</tspan><tspan dy="-2"> = ${dS(R.Bv,1)}</tspan>`,'start',SK.acc);
+  o+=(R.Ah>=0?ar(X(0)-36,yb+14,X(0)-10,yb+14):ar(X(0)-10,yb+14,X(0)-36,yb+14))+tl(X(0)-38,yb+8,`A<tspan font-size="7" dy="2">h</tspan><tspan dy="-2"> = ${dS(Math.abs(R.Ah),1)}</tspan>`,'end',SK.acc);
+  o+=(R.Bh>=0?ar(X(l)+10,yb+14,X(l)+36,yb+14):ar(X(l)+36,yb+14,X(l)+10,yb+14))+tl(X(l)+12,yb+8,`B<tspan font-size="7" dy="2">h</tspan><tspan dy="-2"> = ${dS(Math.abs(R.Bh),1)}</tspan>`,'start',SK.acc);
+  // rechts: Momentenlinie
+  x0=375; o+=rahmen(x0)+tl(X(l/2),18,'Momentenlinie [kNm]','middle');
+  const mx=Math.max(Math.abs(R.Mc),Math.abs(R.Md),Math.abs(R.MbMax),1e-9), s=30/mx;
+  o+=poly([[X(0),yb],[X(0)+R.Mc*s,yt],[X(0),yt]],SK.m+'22',SK.m,1.1)+poly([[X(l),yb],[X(l)-R.Md*s,yt],[X(l),yt]],SK.m+'22',SK.m,1.1);
+  const pb=[[X(0),yt]]; for(let j=0;j<=40;j++){ const x=l*j/40; pb.push([X(x),yt+R.Mb(x)*s]); } pb.push([X(l),yt]); o+=poly(pb,SK.m+'22',SK.m,1.1);
+  o+=tl(X(0)+R.Mc*s-3,yt-4,dS(R.Mc,1),'end',SK.m)+tl(X(l)-R.Md*s+3,yt-4,dS(R.Md,1),'start',SK.m);
+  return sv(600,Math.round(yb+56),'Dreigelenkrahmen: System und Momentenlinie', o);
+}
+function updateDGR(){
+  const out=document.getElementById('dgr-out'); if(!out) return;
+  const l=num('dgr-l'), h=num('dgr-h'), q=num('dgr-q')||0, W=num('dgr-W')||0, f=dS;
+  if(!(l>0&&h>0&&q>=0&&W>=0&&q+W>0)){ out.innerHTML='Bitte l, h > 0 und Lasten ≥ 0 eingeben.'; return; }
+  const R=dreigelenk(l,h,q,W);
+  out.innerHTML = ablauf(`Dreigelenkrahmen l = ${f(l)} m, h = ${f(h)} m`, [
+    `§Senkrechte Auflagerkräfte (Momente um A bzw. B)`, `ΣM<sub>A</sub> = 0: B<sub>v</sub> · l − q · l · l/2 − W · h = 0`,
+    `B<sub>v</sub> = q · l / 2 + W · h / l = ${f(q)} · ${f(l)} / 2 + ${f(W)} · ${f(h)} / ${f(l)} = ${f(R.Bv)} kN`,
+    `A<sub>v</sub> = (q · l) − B<sub>v</sub> = ${f(q*l)} − ${f(R.Bv)} = ${f(R.Av)} kN`,
+    `§Horizontalkräfte (Gelenkbedingung M<sub>G</sub> = 0 am rechten Teil)`, `B<sub>v</sub> · l/2 + B<sub>h</sub> · h − q · (l/2)² / 2 = 0`,
+    `B<sub>h</sub> = (q · l² / 8 − B<sub>v</sub> · l / 2) / h = (${f(q*l*l/8)} − ${f(R.Bv*l/2)}) / ${f(h)} = ${f(R.Bh)} kN`,
+    `!negativ = nach innen (zur Rahmenmitte) gerichtet`, `A<sub>h</sub> = −W − B<sub>h</sub> = −${f(W)} − (${f(R.Bh)}) = ${f(R.Ah)} kN`,
+    `!nur Gleichlast: Horizontalschub H = q · l² / (8 · h) = ${f(q*l*l/(8*h))} kN — wie der Bogenschub mit dem Stich h`,
+    `§Rahmeneckmomente`, `M<sub>C</sub> = −A<sub>h</sub> · h = ${f(R.Mc)} kNm (links)`, `M<sub>D</sub> = B<sub>h</sub> · h = ${f(R.Md)} kNm (rechts)`,
+    `!negativ = Zug außen`,
+    `§Riegel`, `M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = ${f(R.Mb(l/2))} kNm (Gelenk)`,
+    ...(q>0&&R.xm>0&&R.xm<l?[`!größtes positives Riegelmoment bei x = A<sub>v</sub> / q = ${f(R.xm)} m: M = ${f(R.MbMax)} kNm`]:[])]);
+  const fg=document.getElementById('dgr-fig'); if(fg) fg.innerHTML=fig(skDreigelenk(l,h,q,W,R),'Momentenlinie auf der Zugseite; am Gelenk ist M = 0.');
+}
+
+// ── Kraftgrößenverfahren: Zweifeldträger, Gleichlast und Einzellast in Feldmitte je Feld ──
+function kgvZweifeld(l1,l2,q1,q2,F1,F2){
+  const d10=(q1*l1**3+q2*l2**3)/24+(F1*l1*l1+F2*l2*l2)/16, d11=(l1+l2)/3, X1=-d10/d11;
+  const A=q1*l1/2+F1/2+X1/l1, C=q2*l2/2+F2/2+X1/l2, B=q1*l1+q2*l2+F1+F2-A-C;
+  const M1=x=>A*x-q1*x*x/2-(x>l1/2?F1*(x-l1/2):0), M2=x=>C*x-q2*x*x/2-(x>l2/2?F2*(x-l2/2):0); // x von A bzw. von C aus
+  let m1=0,m2=0,x1=0,x2=0; for(let j=0;j<=2000;j++){ const a=l1*j/2000, b=l2*j/2000; if(M1(a)>m1){m1=M1(a);x1=a;} if(M2(b)>m2){m2=M2(b);x2=b;} }
+  return { d10, d11, X1, A, B, C, m1, m2, x1, x2 };
+}
+function updateKGV(){
+  const out=document.getElementById('kgv-out'); if(!out) return;
+  const l1=num('kgv-l1'), l2=num('kgv-l2'), q1=num('kgv-q1')||0, q2=num('kgv-q2')||0, F1=num('kgv-F1')||0, F2=num('kgv-F2')||0, f=dS;
+  if(!(l1>0&&l2>0&&q1>=0&&q2>=0&&F1>=0&&F2>=0&&q1+q2+F1+F2>0)){ out.innerHTML='Bitte Stützweiten > 0 und Lasten ≥ 0 eingeben.'; return; }
+  const R=kgvZweifeld(l1,l2,q1,q2,F1,F2);
+  const t10=[]; if(q1) t10.push(`⅓ · ${f(l1)} · ${f(q1*l1*l1/8)} · 1`); if(F1) t10.push(`¼ · ${f(l1)} · ${f(F1*l1/4)} · 1`); if(q2) t10.push(`⅓ · ${f(l2)} · ${f(q2*l2*l2/8)} · 1`); if(F2) t10.push(`¼ · ${f(l2)} · ${f(F2*l2/4)} · 1`);
+  out.innerHTML = ablauf(`Zweifeldträger ${f(l1)} m + ${f(l2)} m, EI konstant`, [
+    `§Grundsystem und Überzählige`, `!n = a − 3 = 4 − 3 = 1-fach statisch unbestimmt. Gelenk über B einfügen → zwei Einfeldträger; Überzählige X<sub>1</sub> = M<sub>B</sub>`,
+    `§Momentenlinien im Grundsystem`, `!M<sub>0</sub>: Parabeln mit Stich q · l² / 8${F1||F2?' und Dreiecke F · l / 4 (Einzellast in Feldmitte)':''} · M<sub>1</sub>: Dreieck mit dem Wert 1 über B`,
+    `§Formänderungswerte mit der Koppeltafel (EI · δ)`, `EI · δ<sub>10</sub> = ∫ M<sub>0</sub> · M<sub>1</sub> dx = ${t10.join(' + ')} = ${f(R.d10,3)}`,
+    `!Parabel × Dreieck (Spitze am Ende): ⅓ · l · i · k${F1||F2?' · Dreieck (Spitze Mitte) × Dreieck (Spitze am Ende): ¼ · l · i · k':''}`,
+    `EI · δ<sub>11</sub> = ∫ M<sub>1</sub>² dx = ⅓ · ${f(l1)} · 1 · 1 + ⅓ · ${f(l2)} · 1 · 1 = ${f(R.d11,4)}`,
+    `§Verträglichkeit: kein Knick über B`, `!δ<sub>10</sub> + X<sub>1</sub> · δ<sub>11</sub> = 0`, `X<sub>1</sub> = −δ<sub>10</sub> / δ<sub>11</sub> = −${f(R.d10,3)} / ${f(R.d11,4)} = ${f(R.X1)} kNm`,
+    `!M<sub>B</sub> = ${f(R.X1)} kNm (Zug oben)`,
+    `§Auflagerkräfte (Einfeldträger + Stützmoment)`, `A = (q<sub>1</sub> · l<sub>1</sub>)/2${F1?' + F<sub>1</sub>/2':''} + M<sub>B</sub>/l<sub>1</sub> = ${f(q1*l1/2+F1/2)} + (${f(R.X1)}) / ${f(l1)} = ${f(R.A)} kN`,
+    `C = (q<sub>2</sub> · l<sub>2</sub>)/2${F2?' + F<sub>2</sub>/2':''} + M<sub>B</sub>/l<sub>2</sub> = ${f(q2*l2/2+F2/2)} + (${f(R.X1)}) / ${f(l2)} = ${f(R.C)} kN`,
+    `B = ΣF − A − C = ${f(q1*l1+q2*l2+F1+F2)} − ${f(R.A)} − ${R.C<0?'('+f(R.C)+')':f(R.C)} = ${f(R.B)} kN`,
+    `§Feldmomente`, `!Feld 1: max M = ${f(R.m1)} kNm bei x = ${f(R.x1)} m von A · Feld 2: max M = ${f(R.m2)} kNm bei x = ${f(R.x2)} m von C`]);
+}
+
+// ── Einflusslinien am Einfeldträger ──
+function skEL(L,x0){
+  const x1=40, W=320, X=x=>x1+x/L*W, t=x0/L; let o='';
+  o+=beam(x1,x1+W,30)+supPin(x1,31)+supRoll(x1+W,31)+ln(X(x0),20,X(x0),40,SK.load,1,'stroke-dasharray="3 2"')+tl(X(x0),16,'x₀','middle',SK.load);
+  const row=(y,pts,lab,vals)=>{ o+=`<path d="M ${R1(pts[0][0])} ${y} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} L ${R1(pts[pts.length-1][0])} ${y} Z" fill="${SK.acc}" fill-opacity="0.12" stroke="none"/>`+pl(pts,SK.acc,1.3)+ln(x1,y,x1+W,y,SK.ink,0.7)+it(x1-8,y+4,lab,'end',SK.ink,12);
+    vals.forEach(([x,yy,s,a])=>{ o+=tl(x,yy,s,a||'middle',SK.acc); }); };
+  const k=34;
+  row(66,[[X(0),66+k],[X(L),66]],'η<tspan font-size="8" dy="2">A</tspan>',[[X(0)+4,66+k-4,'1','start']]);
+  row(150,[[X(0),150],[X(x0),150-t*k],[X(x0),150+(1-t)*k],[X(L),150]],'η<tspan font-size="8" dy="2">Q</tspan>',[[X(x0)+4,150+(1-t)*k+12,dS(1-t,2),'start'],[X(x0)-4,150-t*k-4,'−'+dS(t,2),'end']]);
+  const em=x0*(L-x0)/L, km=k/Math.max(L/4,1e-9);
+  row(206,[[X(0),206],[X(x0),206+em*km],[X(L),206]],'η<tspan font-size="8" dy="2">M</tspan>',[[X(x0),206+em*km+13,dS(em,3)+' m']]);
+  return sv(400,262,'Einflusslinien A, Q(x₀), M(x₀) am Einfeldträger', o);
+}
+function updateEL(){
+  const out=document.getElementById('el-out'); if(!out) return;
+  const L=num('el-L'), x0=num('el-x'), F=num('el-F')||0, q=num('el-q')||0, f=dS;
+  if(!(L>0&&x0>=0&&x0<=L&&F>=0&&q>=0)){ out.innerHTML='Bitte L > 0, 0 ≤ x₀ ≤ L und Lasten ≥ 0 eingeben.'; return; }
+  const t=x0/L, em=x0*(L-x0)/L, Qp=F*(1-t)+q*(L-x0)**2/(2*L), Qn=-(F*t+q*x0*x0/(2*L)), Mm=F*em+q*em*L/2;
+  out.innerHTML = ablauf(`Einfeldträger L = ${f(L)} m, Schnitt bei x₀ = ${f(x0)} m`, [
+    `§Ordinaten der Einflusslinien`, `!A: Gerade von 1 (über A) bis 0 (über B) · Q(x₀): Sprung um 1 bei x₀ · M(x₀): Dreieck mit der Spitze unter x₀`,
+    `η<sub>M,max</sub> = x₀ · (L − x₀) / L = ${f(x0)} · ${f(L-x0)} / ${f(L)} = ${f(em,3)} m`,
+    `η<sub>Q</sub> = +(1 − x₀/L) = ${f(1-t,3)} rechts · −x₀/L = −${f(t,3)} links`,
+    `§Größtes Moment M(x₀)`, `!Einzellast genau über x₀, Gleichlast über die ganze Länge (Fläche der Einflusslinie = η<sub>M,max</sub> · L / 2)`,
+    `max M(x₀) = F · η<sub>M,max</sub> + q · η<sub>M,max</sub> · L / 2 = ${f(F)} · ${f(em,3)} + ${f(q)} · ${f(em,3)} · ${f(L)} / 2 = ${f(Mm)} kNm`,
+    `§Größte Querkräfte Q(x₀)`, `!positiv: F knapp rechts von x₀, q nur rechts von x₀ · negativ: F knapp links, q nur links`,
+    `max Q(x₀) = F · (1 − x₀/L) + q · (L − x₀)² / (2L) = ${f(Qp)} kN`, `min Q(x₀) = −F · x₀/L − q · x₀² / (2L) = ${f(Qn)} kN`,
+    `!Bei Volllast wäre Q(x₀) = q · (L/2 − x₀)${F?' (ohne F)':''} = ${f(q*(L/2-x0))} kN — Teilbelastung ist hier ungünstiger`]);
+  const fg=document.getElementById('el-fig'); if(fg) fg.innerHTML=fig(skEL(L,x0),'Eine Einzellast „1“ wandert über den Träger: Die Ordinate zeigt den Wert der Größe, wenn die Last dort steht.');
+}
+
+// ══════════════════════════════════════════════════
+// LASTANNAHMEN (ref v0.3.17): Schneeverwehung am Höhensprung, Windbereiche (Wände, Flachdach), Lastweiterleitung
+// ══════════════════════════════════════════════════
+const dL = (v,n=2) => deNum(Math.abs(v)<1e-12?0:v,n).replace(/^-/,'−');
+// ── Schnee: Höhensprung (DIN EN 1991-1-3, 5.3.6) ──
+const SN_MUW_MAX = 2.4, SN_GAMMA = 2.0;
+function hoehensprung(sk, h, b1, b2, aO){
+  const muwRaw=(b1+b2)/(2*h), muwG=SN_GAMMA*h/sk, muw=Math.max(0.8, Math.min(muwRaw, muwG, SN_MUW_MAX));
+  const mus = aO>15 ? 0.5*schneeMu1(aO) : 0, mu2=mus+muw, lsRaw=2*h, ls=Math.min(Math.max(lsRaw,5),15);
+  return { muwRaw, muwG, muw, mus, mu2, lsRaw, ls, s1:0.8*sk, s2:mu2*sk, mu2b: b2<ls ? 0.8+(mu2-0.8)*(1-b2/ls) : null };
+}
+function skHoehensprung(R){
+  const x0=30, xs=170, x1=400, yb=150, hU=60, k=40/Math.max(R.mu2,1);
+  let o=poly([[x0,yb],[xs,yb],[xs,yb-hU-60],[x0,yb-hU-60]],SK.fill)+poly([[xs,yb],[x1,yb],[x1,yb-hU],[xs,yb-hU]],SK.fill);
+  o+=tl((x0+xs)/2,yb-hU-30,'oberes Dach b₁','middle')+tl((xs+x1)/2+30,yb-20,'unteres Dach b₂','middle');
+  const yr=yb-hU, lsPx=Math.min(R.ls/15*170+40, x1-xs-10);
+  const P=[[xs,yr],[xs,yr-R.mu2*k],[xs+lsPx,yr-0.8*k],[x1,yr-0.8*k],[x1,yr]];
+  o+=poly(P,'rgba(37,99,235,0.15)',SK.acc,1.2)+tl(xs+4,yr-R.mu2*k-4,`μ₂ = ${dL(R.mu2,2)}`,'start',SK.acc)+tl(x1-4,yr-0.8*k-4,'μ₁ = 0,8','end',SK.acc);
+  o+=dimL(xs,yb-hU-60,xs,yr,'h',14)+dimL(xs,yr+14,xs+lsPx,yr+14,'l<tspan font-size="9" dy="3">s</tspan>',0);
+  return sv(420,170,'Schneeverwehung am Höhensprung', o);
+}
+function updateHS(){
+  const out=document.getElementById('hs-out'); if(!out) return;
+  const zone=valOf('hs-zone'), A=num('hs-A'), h=num('hs-h'), b1=num('hs-b1'), b2=num('hs-b2'), aO=num('hs-a')||0, f=dL;
+  if(!(A>=0&&h>0&&b1>0&&b2>0&&aO>=0&&aO<90)){ out.innerHTML='Bitte Höhen und Breiten > 0 eingeben.'; return; }
+  const sk=schneeSk(zone,A), R=hoehensprung(sk,h,b1,b2,aO);
+  out.innerHTML = ablauf(`Höhensprung h = ${f(h)} m, Zone ${zone}`, [
+    `§Schneelast auf dem Boden`, `s<sub>k</sub> = ${f(sk,3)} kN/m² (Zone ${zone}, A = ${f(A,0)} m)`,
+    `§Verwehungsanteil μ<sub>w</sub>`, `μ<sub>w</sub> = (b<sub>1</sub> + b<sub>2</sub>) / (2 · h) = (${f(b1)} + ${f(b2)}) / (2 · ${f(h)}) = ${f(R.muwRaw,3)}`,
+    `!Grenze aus der Schneehöhe: μ<sub>w</sub> ≤ γ · h / s<sub>k</sub> = 2,0 · ${f(h)} / ${f(sk,3)} = ${f(R.muwG,3)} · Grenzen 0,8 ≤ μ<sub>w</sub> ≤ ${f(SN_MUW_MAX,1)} → μ<sub>w</sub> = ${f(R.muw,3)}`,
+    `§Abrutschen vom oberen Dach μ<sub>s</sub>`, aO>15 ? `μ<sub>s</sub> = 0,5 · μ<sub>1</sub>(α = ${f(aO,0)}°) = 0,5 · ${f(schneeMu1(aO),3)} = ${f(R.mus,3)}` : `!oberes Dach α = ${f(aO,0)}° ≤ 15° → μ<sub>s</sub> = 0`,
+    `§Formbeiwert am Höhensprung`, `μ<sub>2</sub> = μ<sub>s</sub> + μ<sub>w</sub> = ${f(R.mus,3)} + ${f(R.muw,3)} = ${f(R.mu2,3)}`,
+    `l<sub>s</sub> = 2 · h = ${f(R.lsRaw)} m → mit 5 m ≤ l<sub>s</sub> ≤ 15 m: ${f(R.ls)} m`,
+    `§Schneelasten`, `s<sub>2</sub> = μ<sub>2</sub> · s<sub>k</sub> = ${f(R.mu2,3)} · ${f(sk,3)} = ${f(R.s2,3)} kN/m² direkt am Höhensprung`,
+    `s<sub>1</sub> = μ<sub>1</sub> · s<sub>k</sub> = 0,8 · ${f(sk,3)} = ${f(R.s1,3)} kN/m² ab l<sub>s</sub>, dazwischen linear`,
+    ...(R.mu2b!==null?[`!unteres Dach kürzer als l<sub>s</sub>: am Dachrand μ = ${f(R.mu2b,3)} (Keil abgeschnitten)`]:[])]);
+  const fg=document.getElementById('hs-fig'); if(fg) fg.innerHTML=fig(skHoehensprung(R),'Am Höhensprung sammelt sich Schnee aus Verwehung und vom oberen Dach abrutschendem Schnee.');
+}
+
+// ── Wind: Bereiche nach EN 1991-1-4, 7.2 ──
+const CPE_WAND = { // h/d: [A, B, C, D, E] je [cpe10, cpe1]
+  5:[[-1.2,-1.4],[-0.8,-1.1],[-0.5,-0.5],[0.8,1.0],[-0.7,-0.7]], 1:[[-1.2,-1.4],[-0.8,-1.1],[-0.5,-0.5],[0.8,1.0],[-0.5,-0.5]], 0.25:[[-1.2,-1.4],[-0.8,-1.1],[-0.5,-0.5],[0.7,1.0],[-0.3,-0.3]] };
+const CPE_FLACH = { F:[-1.8,-2.5], G:[-1.2,-2.0], H:[-0.7,-1.2], I:[0.2,0.2], Ineg:[-0.2,-0.2] };
+const cpeA = (c10,c1,A) => A<=1 ? c1 : A>=10 ? c10 : c1-(c1-c10)*Math.log10(A);
+function cpeWand(hd, i, A){ const L=[0.25,1,5], hdc=Math.min(Math.max(hd,0.25),5); let lo=0.25, hi=1; if(hdc>1){ lo=1; hi=5; }
+  const t=(hdc-lo)/(hi-lo), v=k=>CPE_WAND[lo][i][k]+(CPE_WAND[hi][i][k]-CPE_WAND[lo][i][k])*t; return cpeA(v(0),v(1),A); }
+function windZonen(b, d, h){
+  const e=Math.min(b,2*h), W={ A: Math.min(e/5,d), B: Math.max(0,Math.min(e,d)-e/5), C: Math.max(0,d-e) };
+  const D={ F_b:e/4, F_t:e/10, G_b:b-e/2, H_t:Math.max(0,Math.min(e/2,d)-e/10), I_t:Math.max(0,d-e/2) };
+  return { e, W, D };
+}
+function skWindZonen(b,d,h,Z){
+  const k=Math.min(240/b,150/d), x0=110, y0=58, X=x=>x0+x*k, Y=y=>y0+y*k, e=Z.e; let o='';
+  // Dachdraufsicht, Wind von links (Wand der Breite b ist die linke Kante → im Bild senkrecht)
+  // Hier: Wind von oben auf die Kante der Länge b (waagerecht), Tiefe d nach unten
+  o+=poly([[X(0),Y(0)],[X(b),Y(0)],[X(b),Y(d)],[X(0),Y(d)]],'#fff');
+  const zr=(x1,y1,x2,y2,c,lab)=>{ if(x2-x1<=1e-9||y2-y1<=1e-9) return ''; return `<rect x="${R1(X(x1))}" y="${R1(Y(y1))}" width="${R1((x2-x1)*k)}" height="${R1((y2-y1)*k)}" fill="${c}" stroke="${SK.ink}" stroke-width="0.6"/>`+tl(X((x1+x2)/2),Y((y1+y2)/2)+3,lab,'middle',SK.ink); };
+  const t1=Math.min(e/10,d), t2=Math.min(e/2,d);
+  o+=zr(0,0,e/4,t1,'#fecaca','F')+zr(b-e/4,0,b,t1,'#fecaca','F')+zr(e/4,0,b-e/4,t1,'#fed7aa','G')+zr(0,t1,b,t2,'#fef3c7','H')+zr(0,t2,b,d,'#ecfccb','I');
+  for(let i=0;i<5;i++) o+=`<line x1="${R1(X(b*(0.15+0.17*i)))}" y1="${R1(Y(0)-30)}" x2="${R1(X(b*(0.15+0.17*i)))}" y2="${R1(Y(0)-6)}" stroke="${SK.load}" stroke-width="1.3" marker-end="url(#ska)"/>`;
+  o+=tl(X(0)-6,Y(0)-18,'Wind','end',SK.load);
+  // Seitenwand links: A, B, C entlang d
+  const wx=X(0)-34; const wz=(y1,y2,c,lab)=> y2-y1<=1e-9?'' : `<rect x="${R1(wx)}" y="${R1(Y(y1))}" width="16" height="${R1((y2-y1)*k)}" fill="${c}" stroke="${SK.ink}" stroke-width="0.6"/>`+tl(wx-4,Y((y1+y2)/2)+3,lab,'end',SK.ink);
+  const a1=Math.min(e/5,d), a2=Math.min(e,d); o+=wz(0,a1,'#fecaca','A')+wz(a1,a2,'#fed7aa','B')+wz(a2,d,'#ecfccb','C');
+  o+=tl(wx+8,Y(d)+14,'Seitenwand','middle',SK.dim)+tl(X(b/2),Y(0)-34,'D (Luv)','middle',SK.dim)+tl(X(b/2),Y(d)+14,'E (Lee)','middle',SK.dim);
+  o+=dimL(X(0),Y(d)+22,X(b),Y(d)+22,'b',0)+dimL(X(b)+18,Y(0),X(b)+18,Y(d),'d',0);
+  return sv(420,Math.round(Y(d)+44),'Windbereiche: Draufsicht Flachdach und Seitenwand', o);
+}
+function updateWB(){
+  const out=document.getElementById('wb-out'); if(!out) return;
+  const zone=valOf('wb-zone'), b=num('wb-b'), d=num('wb-d'), h=num('wb-h'), A=num('wb-A'), f=dL;
+  if(!(b>0&&d>0&&h>0&&h<=25&&A>0)){ out.innerHTML='Bitte b, d, h > 0 (h ≤ 25 m) und die Lasteinzugsfläche A > 0 eingeben.'; return; }
+  const row=WIND_Q.find(r=>r[0]===zone), q=row[2][h<=10?0:h<=18?1:2], Z=windZonen(b,d,h), hd=h/d;
+  const cw=['A','B','C','D','E'].map((n,i)=>[n,cpeWand(hd,i,A)]), cf=['F','G','H','I'].map(n=>[n, n==='I'?0.2:cpeA(CPE_FLACH[n][0],CPE_FLACH[n][1],A)]);
+  const S=[`§Geschwindigkeitsdruck (vereinfacht)`, `q = ${f(q)} kN/m² (${row[1]}, h = ${f(h)} m)`,
+    `§Bezugsmaß e`, `e = min(b; 2h) = min(${f(b)}; ${f(2*h)}) = ${f(Z.e)} m`,
+    `!Wände: A = ${f(Z.W.A)} m, B = ${f(Z.W.B)} m${Z.W.C>0?`, C = ${f(Z.W.C)} m`:''} (vom Luv-Rand) · Flachdach: F = ${f(Z.D.F_b)} × ${f(Z.D.F_t)} m, G zwischen den F, H bis e/2, I dahinter`,
+    `§Außendruckbeiwerte für A = ${f(A)} m²`, `!h/d = ${f(h)}/${f(d)} = ${f(hd,3)} · c<sub>pe</sub> = c<sub>pe,1</sub> − (c<sub>pe,1</sub> − c<sub>pe,10</sub>) · lg A${A<=1?' (A ≤ 1 m²: c<sub>pe,1</sub>)':A>=10?' (A ≥ 10 m²: c<sub>pe,10</sub>)':''}`];
+  out.innerHTML = ablauf(`Gebäude ${f(b)} × ${f(d)} m, h = ${f(h)} m`, S)
+    + textTable(['Wände', ...cw.map(c=>c[0])], [['c<sub>pe</sub>', ...cw.map(c=>(c[1]>0?'+':'')+f(c[1],2))], ['w<sub>e</sub> [kN/m²]', ...cw.map(c=>(c[1]>0?'+':'')+f(c[1]*q,3))]])
+    + textTable(['Flachdach', ...cf.map(c=>c[0])], [['c<sub>pe</sub>', ...cf.map(c=>c[0]==='I'?'+0,20 / −0,20':f(c[1],2))], ['w<sub>e</sub> [kN/m²]', ...cf.map(c=>c[0]==='I'?'+'+f(0.2*q,3)+' / '+f(-0.2*q,3):f(c[1]*q,3))]])
+    + `<div class="legend">Wände A–E nach Tab. 7.1, Flachdach mit scharfkantigem Traufbereich nach Tab. 7.2. Zusätzlich Innendruck c<sub>pi</sub> = +0,2 oder −0,3 ungünstig überlagern.</div>`;
+  const fg=document.getElementById('wb-fig'); if(fg) fg.innerHTML=fig(skWindZonen(b,d,h,Z),'Am Luv-Rand und an den Ecken ist der Sog am größten (F, A). Die Bereichsgrößen hängen von e = min(b; 2h) ab.');
+}
+
+// ── Lastweiterleitung: Innenwand unter Zweifelddecken ──
+function lastAbtrag(I){
+  const { l1, l2, n } = I, k = (l1+l2)/2;
+  const MB=-(l1**3+l2**3)/(8*(l1+l2)), fB=(l1+l2)/2-MB/l1-MB/l2;        // Auflagerkraft Mittelwand je 1 kN/m² (Durchlaufwirkung)
+  const fak = I.dlt ? fB : k;
+  const Ng=n*I.g*fak+I.gD*fak+n*I.gW, Nq=n*I.q*fak, Ns=I.s*fak;
+  const Nd_q=1.35*Ng+1.5*Nq+1.5*0.5*Ns, Nd_s=1.35*Ng+1.5*Ns+1.5*0.7*Nq;
+  return { k, MB, fB, fak, Ng, Nq, Ns, Nd_q, Nd_s, Nd:Math.max(Nd_q,Nd_s) };
+}
+function skLastabtrag(n){
+  const x0=60, x1=380, xm=200, hS=34, yb=40+(n+1)*hS; let o='';
+  for(let i=0;i<=n;i++){ const y=40+i*hS; o+=`<rect x="${x0}" y="${y}" width="${x1-x0}" height="6" fill="${SK.db||'#cbd5e1'}" stroke="${SK.ink}" stroke-width="0.8"/>`;
+    if(i<n) o+=mwWand(xm-7,y+6,14,hS-6)+`<rect x="${x0}" y="${y+6}" width="10" height="${hS-6}" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="0.8"/><rect x="${x1-10}" y="${y+6}" width="10" height="${hS-6}" fill="${SK.fill}" stroke="${SK.ink}" stroke-width="0.8"/>`; }
+  o+=`<rect x="${xm-30}" y="${yb-hS+6}" width="60" height="16" fill="#e5e7eb" stroke="${SK.ink}"/>`+tl(xm+36,yb-hS+18,'Fundament','start');
+  o+=`<line x1="${xm}" y1="20" x2="${xm}" y2="${yb-hS+4}" stroke="${SK.load}" stroke-width="1.6" stroke-dasharray="6 3" marker-end="url(#ska)"/>`+tl(xm+8,30,'Lastpfad','start',SK.load);
+  o+=tl((x0+xm)/2,36,'l₁','middle')+tl((xm+x1)/2,36,'l₂','middle');
+  return sv(420,yb+4,'Lastweiterleitung durch die Geschosse', o);
+}
+function updateLW(){
+  const out=document.getElementById('lw-out'); if(!out) return;
+  const I={ n:Math.round(num('lw-n')), l1:num('lw-l1'), l2:num('lw-l2'), g:num('lw-g'), q:num('lw-q'), gD:num('lw-gD')||0, s:num('lw-s')||0, gW:num('lw-gW')||0, dlt:valOf('lw-dlt')==='1' }, f=dL;
+  if(!(I.n>=1&&I.n<=8&&I.l1>0&&I.l2>0&&I.g>=0&&I.q>=0)){ out.innerHTML='Bitte 1 … 8 Geschosse, Stützweiten > 0 und Lasten ≥ 0 eingeben.'; return; }
+  const R=lastAbtrag(I);
+  out.innerHTML = ablauf(`Innenwand unter ${I.n} Decken + Dach`, [
+    `§Lasteinzugsbreite der Mittelwand`, `!Einfeldträger-Annahme: halbe Spannweiten links und rechts`, `b<sub>e</sub> = (l<sub>1</sub> + l<sub>2</sub>) / 2 = (${f(I.l1)} + ${f(I.l2)}) / 2 = ${f(R.k,3)} m`,
+    `!Durchlaufwirkung (Zweifeldträger, Gleichlast): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = ${f(R.MB,3)} m² je kN/m²`,
+    `b<sub>e,DLT</sub> = (l<sub>1</sub> + l<sub>2</sub>)/2 − M<sub>B</sub>/l<sub>1</sub> − M<sub>B</sub>/l<sub>2</sub> = ${f(R.k,3)} + ${f(-R.MB/I.l1,3)} + ${f(-R.MB/I.l2,3)} = ${f(R.fB,3)} m`,
+    `!verwendet: ${I.dlt?'mit Durchlaufwirkung':'ohne Durchlaufwirkung'} → b<sub>e</sub> = ${f(R.fak,3)} m`,
+    `§Charakteristische Lasten am Wandfuß`, `N<sub>G</sub> = n · g<sub>k</sub> · b<sub>e</sub> + g<sub>Dach</sub> · b<sub>e</sub> + n · g<sub>Wand</sub> = ${I.n} · ${f(I.g)} · ${f(R.fak,3)} + ${f(I.gD)} · ${f(R.fak,3)} + ${I.n} · ${f(I.gW)} = ${f(R.Ng)} kN/m`,
+    `N<sub>Q</sub> = n · q<sub>k</sub> · b<sub>e</sub> = ${I.n} · ${f(I.q)} · ${f(R.fak,3)} = ${f(R.Nq)} kN/m`, `N<sub>S</sub> = s · b<sub>e</sub> = ${f(I.s)} · ${f(R.fak,3)} = ${f(R.Ns)} kN/m`,
+    `§Bemessungswert (GZT, STR)`, `Nutzlast führend: 1,35 · N<sub>G</sub> + 1,5 · N<sub>Q</sub> + 1,5 · 0,5 · N<sub>S</sub> = ${f(R.Nd_q)} kN/m`,
+    `Schnee führend: 1,35 · N<sub>G</sub> + 1,5 · N<sub>S</sub> + 1,5 · 0,7 · N<sub>Q</sub> = ${f(R.Nd_s)} kN/m`,
+    `!maßgebend n<sub>Ed</sub> = ${f(R.Nd)} kN/m (${R.Nd_q>=R.Nd_s?'Nutzlast':'Schnee'} führend; ψ<sub>0</sub> = 0,7 für Kat. A, 0,5 für Schnee bis 1000 m)`]);
+  const fg=document.getElementById('lw-fig'); if(fg) fg.innerHTML=fig(skLastabtrag(I.n),'Jede Decke gibt ihre Auflagerkraft an die Wand darunter ab; im untersten Geschoss summieren sich alle Decken, das Dach und die Wandeigenlasten.');
+}
+
 // ── Skizzen Stahlprofile (aus der echten Geometrie gezeichnet) ──
 function skPolyAt(P, ox, oy, s){ return P.map(([x,y])=>[ox+x*s, oy-y*s]); }
 function skUProfil(){
@@ -4952,6 +5570,26 @@ Object.assign(CONTENT, {
         M_B = −0,125·10·25 = <b>−31,25 kNm</b>, B = 1,25·10·5 = <b>62,5 kN</b>.</div>
       <a class="applink" href="calc.html#cont">→ Beliebige Felder in statiq·calc</a>
     </div>
+    <div class="card">
+      <div class="card-title">Beiwerte für 2 bis 5 gleiche Felder mit Laststellungen</div>
+      <div class="section-note">Werte · qL (Auflager) bzw. · qL² (Momente), aus der Dreimomentengleichung berechnet. Wegen der Symmetrie nur die linke Hälfte.</div>
+      <div class="section-note"><b>Volllast</b> (alle Felder belastet)</div>
+      ${textTable(['System','Auflager A, B, C …','Stützmomente M<sub>B</sub>, M<sub>C</sub> …','Feldmomente 1, 2, 3 …'], dltTabelle('voll'))}
+      <div class="section-note"><b>Extremwerte aus Laststellungen</b> (max Auflager, min Stützmoment, max Feldmoment)</div>
+      ${textTable(['System','max A, B, C …','min M<sub>B</sub>, M<sub>C</sub> …','max M<sub>Feld</sub> 1, 2, 3 …'], dltTabelle('ext'))}
+      <div class="legend">„Laststellung“: q nur auf den Feldern, die die Größe vergrößern — für das Feldmoment jedes zweite Feld, für das Stützmoment die beiden angrenzenden und dann jedes zweite.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Durchlaufträger mit g und q bemessen</div>
+      <div class="calc-grid">
+        ${field('Anzahl Felder', sel('dlt-n', [['2','2'],['3','3'],['4','4'],['5','5']], '3', 'updateDLT()'))}
+        ${field('Stützweite L [m]', inp('dlt-L', 5, 'updateDLT()'))}
+        ${field('ständige Last g<sub>k</sub> [kN/m]', inp('dlt-g', 8, 'updateDLT()'))}
+        ${field('veränderliche Last q<sub>k</sub> [kN/m]', inp('dlt-q', 6, 'updateDLT()'))}
+      </div>
+      <div class="calc-out" id="dlt-out"></div>
+      <div id="dlt-fig"></div>
+    </div>
   `,
 
   'baustatik/querschnitte/querschnittswerte': () => `
@@ -4967,6 +5605,9 @@ Object.assign(CONTENT, {
         ['Kreis, Durchmesser d','π·d²/4','π·d⁴/64','π·d³/32','d/4'],
         ['Kreisring D / d','π(D² − d²)/4','π(D⁴ − d⁴)/64','π(D⁴ − d⁴)/(32·D)','√(I/A)'],
         ['Dreieck (Basis b, Höhe h)','b·h/2','b·h³/36','—','—'],
+        ['Halbkreis, Radius r (Achse durch S, parallel zum Durchmesser)','π·r²/2','(π/8 − 8/(9π))·r⁴ ≈ 0,1098·r⁴','—','—'],
+        ['dünnwandiges Rohr, Radius r, Wand t','2π·r·t','π·r³·t','π·r²·t','r/√2'],
+        ['Trapez (Breiten a oben, b unten, Höhe h)','(a + b)·h/2','h³·(a² + 4ab + b²)/(36·(a + b))','—','—'],
       ])}
       <div class="legend">Rechteck plastisch: W<sub>pl</sub> = b·h²/4 = 1,5·W<sub>el</sub>. Dreieck: Schwerpunkt bei h/3 über der Basis.</div>
     </div>
@@ -4993,6 +5634,15 @@ Object.assign(CONTENT, {
         I<sub>y</sub> = 200·20³/12 + 4000·47,4² + 20·180³/12 + 3600·52,6² ≈ <b>2880 cm⁴</b><br>
         W oben = 2880/5,74 ≈ 502 cm³ · W unten = 2880/14,26 ≈ 202 cm³
       </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Querschnitt aus Rechtecken berechnen (cm)</div>
+      <div class="section-note">Bis zu vier Rechtecke, symmetrisch zur senkrechten Achse; z = Abstand der Oberkante des Teils von der Oberkante des Querschnitts. Breite 0 = Teil nicht vorhanden.</div>
+      <div class="calc-grid">
+        ${[[20,2,0],[2,18,2],[0,0,0],[0,0,0]].map((d,i)=>field(`Teil ${i+1}: b / h / z`, `<div style="display:flex;gap:6px">${inp('stq-b'+(i+1), d[0], 'updateSteiner()')}${inp('stq-h'+(i+1), d[1], 'updateSteiner()')}${inp('stq-z'+(i+1), d[2], 'updateSteiner()')}</div>`)).join('')}
+      </div>
+      <div class="calc-out" id="stq-out"></div>
+      <div id="stq-fig"></div>
     </div>
   `,
 
@@ -5091,6 +5741,114 @@ Object.assign(CONTENT, {
         <div class="comment">Die allgemeine Formel für lineare Verläufe. Dreiecke und Rechtecke sind Sonderfälle.</div>
       </div>
       <div class="legend">Vorzeichen beachten: Liegen i und k auf verschiedenen Seiten, wird das Produkt negativ.</div>
+    </div>
+  `,
+
+  'baustatik/balkentafeln/einflusslinien': () => `
+    <div class="card">
+      <div class="card-title">Einflusslinien — wandernde Lasten</div>
+      <div class="section-note">Eine Einflusslinie zeigt, wie groß eine bestimmte Größe (Auflagerkraft, Querkraft oder Moment an <b>einer festen Stelle</b> x₀) wird, wenn eine Einzellast „1“ an der Stelle x steht. Sie beantwortet die Frage: Wo muss die Verkehrslast stehen, damit die Größe am größten wird?</div>
+      <div class="formula-box">
+        Einzellast:&nbsp; S = F · η(x<sub>F</sub>)&nbsp;&nbsp;&nbsp; Gleichlast:&nbsp; S = q · ∫ η dx (Fläche unter der Einflusslinie im belasteten Bereich)<br>
+        Einfeldträger:&nbsp; η<sub>A</sub> = 1 − x/L&nbsp;&nbsp;&nbsp; η<sub>M</sub>(x₀) = Dreieck mit max x₀ · (L − x₀) / L&nbsp;&nbsp;&nbsp; η<sub>Q</sub>(x₀) springt bei x₀ um 1
+        <div class="comment">Kinematische Konstruktion (Müller-Breslau): Die Einflusslinie ist die Biegelinie, wenn man an der gesuchten Stelle die Bindung löst (Gelenk für M, Querkraftgelenk für Q) und dort eine Verschiebung bzw. Verdrehung „1“ aufbringt.</div>
+      </div>
+      <div class="info-banner">Die Gleichlast nur dort ansetzen, wo die Einflusslinie das gewünschte Vorzeichen hat. Für die Querkraft in Feldmitte ist eine halbseitige Belastung ungünstiger als die Volllast.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Extremwerte an der Stelle x₀</div>
+      <div class="calc-grid">
+        ${field('Stützweite L [m]', inp('el-L', 8, 'updateEL()'))}
+        ${field('Stelle x₀ [m]', inp('el-x', 2, 'updateEL()'))}
+        ${field('Einzellast F [kN]', inp('el-F', 50, 'updateEL()'))}
+        ${field('Gleichlast q [kN/m]', inp('el-q', 10, 'updateEL()'))}
+      </div>
+      <div class="calc-out" id="el-out"></div>
+      <div id="el-fig"></div>
+    </div>
+  `,
+
+  'baustatik/tragwerke/fachwerk': () => `
+    <div class="card">
+      <div class="card-title">Ideales Fachwerk</div>
+      <div class="section-note">Gerade Stäbe, in den Knoten gelenkig verbunden, Lasten nur in den Knoten → die Stäbe tragen nur Normalkräfte (Zug oder Druck).</div>
+      <div class="formula-box">
+        statisch bestimmt, wenn:&nbsp; s + a = 2 · k&nbsp;&nbsp;&nbsp; (s Stäbe, a Lagerwertigkeiten, k Knoten)<br>
+        Knotenpunktverfahren:&nbsp; je Knoten ΣF<sub>x</sub> = 0, ΣF<sub>z</sub> = 0 (höchstens zwei Unbekannte je Knoten)<br>
+        Ritterschnitt:&nbsp; Schnitt durch drei Stäbe, die nicht alle durch einen Punkt gehen; Momentengleichgewicht um den Schnittpunkt zweier Stäbe liefert den dritten
+        <div class="comment">Parallelträger: Gurtkraft = ∓ M / h (M des Ersatzbalkens am Drehpunkt), Diagonalkraft = Q / sin α, Pfostenkraft aus dem Knotengleichgewicht.</div>
+      </div>
+      ${textTable(['Nullstab-Regel','Bedingung'], [['1','unbelasteter Knoten mit zwei Stäben, die nicht auf einer Geraden liegen → beide Nullstäbe'],['2','unbelasteter Knoten mit drei Stäben, zwei davon auf einer Geraden → der dritte ist ein Nullstab'],['3','belasteter Knoten mit zwei Stäben, Last in Richtung eines Stabs → der andere ist ein Nullstab']])}
+    </div>
+    <div class="card">
+      <div class="card-title">Parallelträger berechnen</div>
+      <div class="calc-grid">
+        ${field('Anzahl Felder n (gerade)', inp('fw-n', 6, 'updateFW()', 2))}
+        ${field('Feldweite a [m]', inp('fw-a', 2.5, 'updateFW()'))}
+        ${field('Höhe h [m]', inp('fw-h', 2.0, 'updateFW()'))}
+        ${field('Knotenlast F [kN]', inp('fw-F', 20, 'updateFW()'))}
+        ${field('Zusatzlast P [kN]', inp('fw-P', 0, 'updateFW()'))}
+        ${field('am Obergurtknoten k', inp('fw-k', 2, 'updateFW()', 1))}
+      </div>
+      <div class="calc-out" id="fw-out"></div>
+      <div id="fw-fig"></div>
+    </div>
+  `,
+
+  'baustatik/tragwerke/dreigelenk': () => `
+    <div class="card">
+      <div class="card-title">Dreigelenkrahmen und Dreigelenkbogen</div>
+      <div class="section-note">Zwei Festlager und ein Gelenk: 4 Reaktionen, 3 Gleichgewichtsbedingungen + 1 Gelenkbedingung (M<sub>G</sub> = 0) → statisch bestimmt. Die Füße drücken unter senkrechter Last nach außen — der <b>Horizontalschub</b> muss vom Fundament oder einem Zugband aufgenommen werden.</div>
+      <div class="formula-box">
+        symmetrisch, Gleichlast q auf der Spannweite l, Gelenk in der Mitte, Stich bzw. Höhe f:<br>
+        A<sub>v</sub> = B<sub>v</sub> = q · l / 2&nbsp;&nbsp;&nbsp; H = q · l² / (8 · f)&nbsp;&nbsp;&nbsp; (= M<sub>0</sub> / f mit dem Feldmoment des Ersatzbalkens)<br>
+        Parabelbogen y = 4f · x · (l − x) / l²:&nbsp; M(x) = M<sub>0</sub>(x) − H · y(x) = 0 überall — die Parabel ist die <b>Stützlinie</b> der Gleichlast
+        <div class="comment">Ein Bogen in Form der Stützlinie trägt nur über Druck. Beim Rahmen weicht die Stabachse von der Stützlinie ab: Das Moment ist H mal Abstand von der Stützlinie — an den Ecken am größten.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Dreigelenkrahmen berechnen</div>
+      <div class="calc-grid">
+        ${field('Spannweite l [m]', inp('dgr-l', 10, 'updateDGR()'))}
+        ${field('Höhe h [m]', inp('dgr-h', 4, 'updateDGR()'))}
+        ${field('Gleichlast q auf dem Riegel [kN/m]', inp('dgr-q', 12, 'updateDGR()'))}
+        ${field('Horizontallast W am linken Eck [kN]', inp('dgr-W', 8, 'updateDGR()'))}
+      </div>
+      <div class="calc-out" id="dgr-out"></div>
+      <div id="dgr-fig"></div>
+      <a class="applink" href="calc.html#frame">→ Rahmen mit beliebigen Lasten in statiq·calc</a>
+    </div>
+  `,
+
+  'baustatik/arbeitssatz/kraftgroessen': () => `
+    <div class="card">
+      <div class="card-title">Kraftgrößenverfahren</div>
+      <div class="formula-box">
+        1. Grad der Unbestimmtheit n bestimmen, n Bindungen lösen → statisch bestimmtes Grundsystem<br>
+        2. Überzählige X<sub>i</sub> als äußere Lasten ansetzen, Momentenlinien M<sub>0</sub> (Last) und M<sub>i</sub> (X<sub>i</sub> = 1)<br>
+        3. Formänderungswerte:&nbsp; δ<sub>ik</sub> = ∫ M<sub>i</sub> · M<sub>k</sub> / (EI) dx&nbsp;&nbsp;&nbsp; δ<sub>i0</sub> = ∫ M<sub>i</sub> · M<sub>0</sub> / (EI) dx&nbsp;&nbsp; (Koppeltafel)<br>
+        4. Verträglichkeit:&nbsp; δ<sub>10</sub> + X<sub>1</sub> · δ<sub>11</sub> = 0&nbsp;&nbsp; (n = 1)&nbsp;&nbsp;&nbsp; allgemein&nbsp; [δ<sub>ik</sub>] · {X} = −{δ<sub>i0</sub>}<br>
+        5. Endzustand:&nbsp; M = M<sub>0</sub> + Σ X<sub>i</sub> · M<sub>i</sub>
+        <div class="comment">Die Verträglichkeitsbedingung sagt: An der gelösten Bindung darf sich im wirklichen Tragwerk nichts verschieben oder verdrehen.</div>
+      </div>
+      <div class="formula-box">
+        Durchlaufträger (Dreimomentengleichung, EI konstant):&nbsp; M<sub>i−1</sub> · l<sub>i</sub> + 2 · M<sub>i</sub> · (l<sub>i</sub> + l<sub>i+1</sub>) + M<sub>i+1</sub> · l<sub>i+1</sub> = −(q<sub>i</sub> · l<sub>i</sub>³ + q<sub>i+1</sub> · l<sub>i+1</sub>³) / 4
+        <div class="comment">Das ist das Kraftgrößenverfahren mit den Stützmomenten als Überzähligen — für jede Innenstütze eine Gleichung.</div>
+      </div>
+      <a class="applink" href="#/baustatik/arbeitssatz/koppeltafel">→ Koppeltafel</a>
+    </div>
+    <div class="card">
+      <div class="card-title">Zweifeldträger Schritt für Schritt</div>
+      <div class="calc-grid">
+        ${field('Stützweite l<sub>1</sub> [m]', inp('kgv-l1', 5, 'updateKGV()'))}
+        ${field('Stützweite l<sub>2</sub> [m]', inp('kgv-l2', 4, 'updateKGV()'))}
+        ${field('Gleichlast q<sub>1</sub> [kN/m]', inp('kgv-q1', 10, 'updateKGV()'))}
+        ${field('Gleichlast q<sub>2</sub> [kN/m]', inp('kgv-q2', 10, 'updateKGV()'))}
+        ${field('Einzellast F<sub>1</sub> in Feldmitte [kN]', inp('kgv-F1', 0, 'updateKGV()'))}
+        ${field('Einzellast F<sub>2</sub> in Feldmitte [kN]', inp('kgv-F2', 20, 'updateKGV()'))}
+      </div>
+      <div class="calc-out" id="kgv-out"></div>
+      <a class="applink" href="calc.html#cont">→ Momentenlinie in statiq·calc</a>
     </div>
   `,
 
@@ -5299,6 +6057,33 @@ Object.assign(CONTENT, {
       <div class="norm-note">Norddeutsches Tiefland (Zonen 2 und 3): zusätzlich außergewöhnliche Schneelast
         s<sub>Ad</sub> = 2,3 · s<sub>k</sub> nach NA untersuchen. Die Zone des Bauorts steht in der Schneelastzonenkarte des NA.</div>
     </div>
+    <div class="card">
+      <div class="card-title">Lastanordnungen und Sonderfälle</div>
+      ${textTable(['Fall','Ansatz'], [
+        ['Satteldach','(i) beide Seiten μ₁(α) · s<sub>k</sub> · (ii) und (iii) eine Seite voll, die andere 0,5 · μ₁ — die ungünstigste Anordnung ist maßgebend'],
+        ['Schneeüberhang an der Traufe (über 800 m)','s<sub>e</sub> = k · s² / γ mit k = 3/d ≤ d · γ (d — Schneehöhe in m, γ = 3 kN/m³)'],
+        ['Schneefanggitter','F<sub>s</sub> = s · b · sin α (b — Abstand der Halter)'],
+        ['Höhensprung, Aufbauten, Brüstungen','Verwehungsanhäufung mit μ<sub>2</sub> = μ<sub>s</sub> + μ<sub>w</sub> (unten)'],
+        ['norddeutsches Tiefland','außergewöhnlich s<sub>Ad</sub> = 2,3 · s<sub>k</sub> (Bemessungssituation A)']])}
+    </div>
+    <div class="card">
+      <div class="card-title">Schneeverwehung am Höhensprung (EN 1991-1-3, 5.3.6)</div>
+      <div class="formula-box">
+        μ<sub>2</sub> = μ<sub>s</sub> + μ<sub>w</sub>&nbsp;&nbsp;&nbsp; μ<sub>w</sub> = (b<sub>1</sub> + b<sub>2</sub>) / (2h) ≤ γ · h / s<sub>k</sub>&nbsp;&nbsp; (γ = 2 kN/m³)&nbsp;&nbsp;&nbsp; 0,8 ≤ μ<sub>w</sub> ≤ 2,4 (NA; EN: 4,0)<br>
+        μ<sub>s</sub> = 0 für α ≤ 15° des oberen Dachs, sonst 0,5 · μ<sub>1</sub>(α)&nbsp;&nbsp;&nbsp; Verwehungslänge l<sub>s</sub> = 2h mit 5 m ≤ l<sub>s</sub> ≤ 15 m
+        <div class="comment">b<sub>1</sub>, b<sub>2</sub> — Breite des oberen und unteren Dachs · h — Höhe des Sprungs. Der Keil fällt über l<sub>s</sub> linear auf μ<sub>1</sub> = 0,8 ab.</div>
+      </div>
+      <div class="calc-grid">
+        ${field('Schneelastzone', sel('hs-zone', [['1','Zone 1'],['1a','Zone 1a'],['2','Zone 2'],['2a','Zone 2a'],['3','Zone 3']], '2', 'updateHS()'))}
+        ${field('Geländehöhe A [m]', inp('hs-A', 300, 'updateHS()'))}
+        ${field('Höhe des Sprungs h [m]', inp('hs-h', 3, 'updateHS()'))}
+        ${field('Breite oberes Dach b<sub>1</sub> [m]', inp('hs-b1', 12, 'updateHS()'))}
+        ${field('Breite unteres Dach b<sub>2</sub> [m]', inp('hs-b2', 8, 'updateHS()'))}
+        ${field('Neigung oberes Dach α [°]', inp('hs-a', 0, 'updateHS()'))}
+      </div>
+      <div class="calc-out" id="hs-out"></div>
+      <div id="hs-fig"></div>
+    </div>
   `,
 
   'lastannahmen/lasten/wind': () => `
@@ -5323,12 +6108,308 @@ Object.assign(CONTENT, {
       <div class="legend">A, B, C — Seitenwände (vom Luv-Rand aus) · D — angeströmte Wand · E — Rückwand · Zwischenwerte linear interpolieren</div>
     </div>
     <div class="card">
+      <div class="card-title">Flachdach, kleine Lasteinzugsflächen, Innendruck</div>
+      ${textTable(['Bereich','F','G','H','I'], [['c<sub>pe,10</sub>','−1,8','−1,2','−0,7','+0,2 / −0,2'],['c<sub>pe,1</sub>','−2,5','−2,0','−1,2','+0,2 / −0,2']])}
+      <div class="legend">Flachdach (α ≤ 5°) mit scharfkantigem Traufbereich, EN 1991-1-4 Tab. 7.2. Attika, abgerundete oder abgeschrägte Traufen verringern den Sog in F bis H.</div>
+      <div class="formula-box">
+        c<sub>pe</sub> = c<sub>pe,1</sub> − (c<sub>pe,1</sub> − c<sub>pe,10</sub>) · lg A&nbsp;&nbsp; für 1 m² &lt; A &lt; 10 m²&nbsp;&nbsp;&nbsp; e = min(b; 2h)<br>
+        Innendruck (geschlossenes Gebäude):&nbsp; c<sub>pi</sub> = +0,2 oder −0,3, jeweils ungünstig&nbsp;&nbsp;&nbsp; Nettodruck w = (c<sub>pe</sub> − c<sub>pi</sub>) · q
+        <div class="comment">c<sub>pe,1</sub> für Verankerungen und kleine Bauteile (Dachziegel, Befestigungen), c<sub>pe,10</sub> für die Tragkonstruktion.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Windbereiche und Winddrücke berechnen</div>
+      <div class="calc-grid">
+        ${field('Windzone', sel('wb-zone', WIND_Q.map(r=>[r[0], r[1]]), '2', 'updateWB()'))}
+        ${field('Breite quer zum Wind b [m]', inp('wb-b', 20, 'updateWB()'))}
+        ${field('Tiefe in Windrichtung d [m]', inp('wb-d', 12, 'updateWB()'))}
+        ${field('Höhe h [m]', inp('wb-h', 8, 'updateWB()'))}
+        ${field('Lasteinzugsfläche A [m²]', inp('wb-A', 10, 'updateWB()'))}
+      </div>
+      <div class="calc-out" id="wb-out"></div>
+      <div id="wb-fig"></div>
+    </div>
+    <div class="card">
       <div class="card-title">Geschwindigkeitsdruck bestimmen</div>
       <div class="calc-grid">
         ${field('Windzone', sel('wi-zone', WIND_Q.map(r=>[r[0], r[1]]), '2', 'updateWind()'))}
         ${field('Gebäudehöhe h [m]', inp('wi-h', 12, 'updateWind()'))}
       </div>
       <div class="calc-out" id="wi-out"></div>
+    </div>
+  `,
+
+  // ═════════════ MAUERWERK (ref v0.3.15) ═════════════
+  'mauerwerk/baustoffe/steine': () => `
+    <div class="card">
+      <div class="card-title">Steinarten</div>
+      ${textTable(['Steinart','Kurzzeichen','Festigkeitsklassen (übliche)','Rohdichteklassen'], [
+        ['Mauerziegel (Voll-, Hochlochziegel, Planziegel)','Mz, HLz, PHLz','4 … 28','0,55 … 2,2'],
+        ['Kalksandstein (Voll-, Loch-, Block-, Planstein)','KS, KS L, KS (P)','10 … 28','1,2 … 2,2'],
+        ['Porenbeton (Plansteine, Planelemente)','PP, PPE','2 … 8','0,35 … 0,80'],
+        ['Leichtbeton (Hohlblock, Vollstein, Vollblock)','Hbl, V, Vbl','2 … 12','0,45 … 2,0'],
+        ['Beton (Hohlblock, Vollstein)','Hbn, Vn','4 … 28','1,4 … 2,4']])}
+      <div class="legend">Anhaltswerte — maßgebend sind die Leistungserklärung des Herstellers bzw. die Anwendungsnormen (DIN 20000-401 ff.).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Steingruppen und Steinfestigkeit</div>
+      ${textTable(['Gruppe','Lochung','Beispiel'], [['1','Vollsteine, Lochanteil ≤ 25 %','Vollziegel, KS-Vollstein, Porenbeton'],['2 und 3','senkrechte Lochung, Grenzen je Baustoff (Tab. 3.1)','Hochlochziegel, KS-Lochstein'],['4','waagerechte Lochung','Langlochziegel']])}
+      <div class="formula-box">
+        f<sub>st</sub> = 1,25 · Steinfestigkeitsklasse&nbsp;&nbsp;&nbsp; (umgerechnete mittlere Steindruckfestigkeit nach NA)
+        <div class="comment">In den Formeln der EN 1996-1-1 steht f<sub>b</sub> (normierte Steindruckfestigkeit); das deutsche NA rechnet mit f<sub>st</sub>.</div>
+      </div>
+      ${textTable(['Festigkeitsklasse','2','4','6','8','10','12','16','20','28'], [['f<sub>st</sub> [N/mm²]', ...[2,4,6,8,10,12,16,20,28].map(k=>deNum(1.25*k,1))]])}
+    </div>
+    <div class="card">
+      <div class="card-title">Steinformate</div>
+      ${fig(skMWFormat(),'DF = Dünnformat. Alle Formate bauen auf dem Achtelmeter auf: 11,5 cm Stein + 1 cm Fuge = 12,5 cm.')}
+      ${textTable(['Format','L × B × H [mm]','Wanddicke (Läufer)','Schichthöhe mit Fuge'], [
+        ['DF','240 × 115 × 52','11,5 cm','6,25 cm'],['NF','240 × 115 × 71','11,5 cm','8,33 cm'],['2DF','240 × 115 × 113','11,5 cm','12,5 cm'],
+        ['3DF','240 × 175 × 113','17,5 cm','12,5 cm'],['4DF','240 × 240 × 113','24 cm','12,5 cm'],['5DF','240 × 300 × 113','30 cm','12,5 cm'],
+        ['6DF','240 × 365 × 113','36,5 cm','12,5 cm'],['8DF','240 × 240 × 238','24 cm','25 cm'],['10DF','240 × 300 × 238','30 cm','25 cm'],['12DF','240 × 365 × 238','36,5 cm','25 cm']])}
+      <div class="legend">Plansteine für Dünnbettmörtel haben 249 mm Höhe (Schicht 25 cm). Großformatige KS-Elemente bis 998 × 623 mm.</div>
+    </div>
+  `,
+
+  'mauerwerk/baustoffe/massordnung': () => `
+    <div class="card">
+      <div class="card-title">Oktametrische Maßordnung (DIN 4172)</div>
+      <div class="formula-box">
+        Baurichtmaß = n · 12,5 cm&nbsp;&nbsp;&nbsp; (n = Anzahl der Köpfe)<br>
+        Außenmaß (Pfeiler, Wandlänge zwischen zwei Enden):&nbsp; A = n · 12,5 − 1 cm<br>
+        Öffnungsmaß (Fenster, Tür, Nische):&nbsp; Ö = n · 12,5 + 1 cm<br>
+        Anbaumaß (Vorsprung, Wand an Wand):&nbsp; V = n · 12,5 cm
+        <div class="comment">Die 1 cm ist eine Stoßfuge: Ein Wandstück hat eine Fuge weniger als Köpfe, eine Öffnung eine mehr.</div>
+      </div>
+      ${textTable(['n','Außenmaß','Öffnungsmaß','Anbaumaß'], [1,2,3,4,5,6,8,10,12,16].map(n=>[n, deNum(n*12.5-1,1), deNum(n*12.5+1,1), deNum(n*12.5,1)]))}
+      ${textTable(['Format','Schichthöhe','Schichten je 1 m'], [['DF','6,25 cm','16'],['NF','8,33 cm','12'],['2DF … 6DF','12,5 cm','8'],['8DF … 12DF, Plansteine','25 cm','4']])}
+    </div>
+    <div class="card">
+      <div class="card-title">Maß prüfen</div>
+      <div class="calc-grid">
+        ${field('Länge L [cm]', inp('ms-L', 136.5, 'updateMass()'))}
+        ${field('Höhe H [cm]', inp('ms-H', 262.5, 'updateMass()'))}
+        ${field('Schichthöhe s [cm]', sel('ms-s', [['6.25','6,25 (DF)'],['8.3333333','8,33 (NF)'],['12.5','12,5 (2DF …)'],['25','25 (8DF, Plansteine)']], '12.5', 'updateMass()'))}
+      </div>
+      <div class="calc-out" id="ms-out"></div>
+    </div>
+  `,
+
+  'mauerwerk/baustoffe/moertel': () => `
+    <div class="card">
+      <div class="card-title">Mauermörtel (DIN EN 998-2, DIN 20000-412)</div>
+      ${textTable(['Mörtel','Klasse','f<sub>m</sub> [N/mm²]','Lagerfuge','Einsatz'], [
+        ['Normalmauermörtel NM II','M2,5','2,5','≈ 12 mm','untergeordnet, Altbau'],
+        ['NM IIa','M5','5','≈ 12 mm','übliches Mauerwerk'],
+        ['NM III','M10','10','≈ 12 mm','hoch belastet, Keller'],
+        ['NM IIIa','M20','20','≈ 12 mm','hoch belastete Pfeiler'],
+        ['Leichtmauermörtel LM 21 / LM 36','M5','5','≈ 12 mm','wärmedämmendes Mauerwerk'],
+        ['Dünnbettmörtel DM','M10','10','1 … 3 mm','Plansteine, Planelemente']])}
+      <div class="legend">Die Zahl hinter M ist die Druckfestigkeit in N/mm². Stoßfugen bei Normalmörtel ≈ 10 mm.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Verbandsregeln</div>
+      <div class="formula-box">
+        Überbindemaß:&nbsp; ü ≥ 0,4 · h<sub>u</sub>&nbsp; und&nbsp; ü ≥ 45 mm&nbsp;&nbsp; (h<sub>u</sub> — Steinhöhe)
+        <div class="comment">Die Stoßfugen zweier Schichten müssen um ü versetzt sein, damit der Verband Lasten verteilt und Zug in Längsrichtung übertragen kann.</div>
+      </div>
+      ${textTable(['Verband','Aufbau','typisch'], [['Läuferverband','nur Läufer, Versatz ½ Stein','11,5-cm-Wände, Vormauerschale'],['Binderverband','nur Binder, Versatz ¼ Stein','24-cm-Wände'],['Blockverband','Läufer- und Binderschicht im Wechsel','24- und 36,5-cm-Wände'],['Kreuzverband','wie Block, Läuferschichten um ½ Stein versetzt','Sichtmauerwerk']])}
+    </div>
+  `,
+
+  'mauerwerk/baustoffe/festigkeit': () => `
+    <div class="card">
+      <div class="card-title">Charakteristische Druckfestigkeit f<sub>k</sub> (EN 1996-1-1, 3.6.1.2)</div>
+      <div class="formula-box">
+        Normalmauermörtel:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup>&nbsp;&nbsp; mit f<sub>m</sub> ≤ min(20; 2 · f<sub>b</sub>)<br>
+        Dünnbettmörtel, Gruppe 1:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup>&nbsp;&nbsp;&nbsp; Lochsteine:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup><br>
+        Bemessungswert:&nbsp; f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub>&nbsp;&nbsp; mit ζ = 0,85 (Dauerstandfestigkeit), γ<sub>M</sub> = 1,5
+        <div class="comment">In Deutschland stehen die f<sub>k</sub>-Werte in Tabellen des NA (je Steinart, Festigkeitsklasse und Mörtel). Die Formel mit den Empfehlungswerten zeigt, wovon f<sub>k</sub> abhängt — für die Bemessung die NA-Tabelle oder die Zulassung verwenden.</div>
+      </div>
+      ${textTable(['Steinart','K (Normalmörtel)','K (Dünnbettmörtel)'], Object.entries(MWR_ART).map(([k,v])=>[v.n, deNum(MWR_K.nm[k],2), deNum(MWR_K.dm[k],2)]))}
+    </div>
+    <div class="card">
+      <div class="card-title">Rechenwerte für Verformungen (NA, Anhaltswerte)</div>
+      ${textTable(['Steinart','E = K<sub>E</sub> · f<sub>k</sub>','Kriechzahl φ<sub>∞</sub>','Schwinden ε<sub>∞</sub> [mm/m]','α<sub>t</sub> [10⁻⁶/K]'], Object.values(MWR_RW).map(r=>[r.n, dk(r.KE)+' · f<sub>k</sub>', deNum(r.phi,1), deNum(r.eps,1).replace('-','−'), r.at]))}
+      <div class="legend">Unterschiedliches Schwinden und Kriechen (z. B. KS-Innenwand auf Ziegel-Außenwand) führt zu Rissen — Steinarten in einem Bauteil nicht mischen.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">f<sub>k</sub> berechnen</div>
+      <div class="calc-grid">${mwFelder('fk-', 'updateFk()')}</div>
+      <div class="calc-out" id="fk-out"></div>
+    </div>
+  `,
+
+  'mauerwerk/bemessung/knicklaenge': () => `
+    <div class="card">
+      <div class="card-title">Knicklänge h<sub>ef</sub> = ρ<sub>n</sub> · h</div>
+      <div class="formula-box">
+        zweiseitig gehalten (Decke oben und unten):&nbsp; ρ<sub>2</sub> = 0,75 (t ≤ 175 mm) · 0,90 (175 &lt; t ≤ 250 mm) · 1,00 (t &gt; 250 mm, Holzbalkendecke)<br>
+        dreiseitig (h ≤ 3,5 · l):&nbsp; ρ<sub>3</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / (3 · l))²)&nbsp;&nbsp;&nbsp; (h &gt; 3,5 · l):&nbsp; ρ<sub>3</sub> = 1,5 · l / h<br>
+        vierseitig (h ≤ 1,15 · l):&nbsp; ρ<sub>4</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / l)²)&nbsp;&nbsp;&nbsp; (h &gt; 1,15 · l):&nbsp; ρ<sub>4</sub> = 0,5 · l / h
+        <div class="comment">l — Abstand der aussteifenden Querwand vom freien Rand (dreiseitig) bzw. zwischen den Querwänden (vierseitig). Querwände wirken nur bis l &lt; 15 · t (dreiseitig) bzw. l &lt; 30 · t (vierseitig). Schlankheit h<sub>ef</sub>/t ≤ 27.</div>
+      </div>
+      <div class="sk-row">${fig(skMWHalt(2))}${fig(skMWHalt(3))}</div>
+      <div class="info-banner">Die Stahlbetondecke spannt die Wand am Kopf und Fuß teilweise ein — deshalb ist ρ<sub>2</sub> &lt; 1. Bei dicken Wänden ist die Einspannung im Verhältnis kleiner.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Knicklänge berechnen</div>
+      <div class="calc-grid">
+        ${field('lichte Höhe h [m]', inp('hef-h', 2.6, 'updateHef()'))}
+        ${field('Wanddicke t [mm]', inp('hef-t', 175, 'updateHef()'))}
+        ${field('Halterung', sel('hef-n', [['2','zweiseitig'],['3','dreiseitig'],['4','vierseitig']], '4', 'updateHef()'))}
+        ${field('Querwandabstand l [m]', inp('hef-l', 3.5, 'updateHef()'))}
+        ${field('Decke', sel('hef-d', [['sb','Stahlbetondecke'],['hb','Holzbalkendecke']], 'sb', 'updateHef()'))}
+      </div>
+      <div class="calc-out" id="hef-out"></div>
+      <div id="hef-fig"></div>
+    </div>
+  `,
+
+  'mauerwerk/bemessung/wand': () => `
+    <div class="card">
+      <div class="card-title">Wand unter Druck — vereinfachtes Verfahren (DIN EN 1996-3/NA)</div>
+      ${fig(skMWAuflager(),'Am Endauflager verdreht sich die Decke und drückt auf die Innenkante der Wand (Φ<sub>1</sub>); in Wandmitte wirkt das Knicken (Φ<sub>2</sub>).')}
+      <div class="formula-box">
+        N<sub>Ed</sub> ≤ N<sub>Rd</sub> = Φ · f<sub>d</sub> · A&nbsp;&nbsp;&nbsp; Φ = min(Φ<sub>1</sub>; Φ<sub>2</sub>)<br>
+        Wandmitte:&nbsp; Φ<sub>2</sub> = 0,85 · a/t − 0,0011 · (h<sub>ef</sub>/t)²<br>
+        Endauflager:&nbsp; Φ<sub>1</sub> = 1,6 − l<sub>f</sub>/6 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> ≥ 1,8 N/mm²)&nbsp;&nbsp; bzw.&nbsp; 1,6 − l<sub>f</sub>/5 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> &lt; 1,8)<br>
+        Dachdecke (oberstes Geschoss):&nbsp; Φ<sub>1</sub> = 0,333&nbsp;&nbsp;&nbsp; Zwischenauflager: kein Φ<sub>1</sub>
+        <div class="comment">a — Auflagertiefe der Decke · l<sub>f</sub> — Stützweite der angrenzenden Decke (bei zweiachsig gespannten Decken die kürzere) · Wandquerschnitt A &lt; 0,1 m²: f<sub>d</sub> · 0,8; A &lt; 0,04 m² nicht als tragende Wand</div>
+      </div>
+      ${textTable(['Anwendungsgrenze','Wert'], [['Gebäudehöhe über Gelände','≤ 20 m'],['Stützweite der aufliegenden Decke l<sub>f</sub>','≤ 6,0 m'],['Nutzlast q<sub>k</sub> (inkl. Trennwandzuschlag)','≤ 5,0 kN/m²'],['lichte Wandhöhe, t &lt; 240 mm','≤ 2,75 m'],['lichte Wandhöhe, t ≥ 240 mm','≤ 12 · t'],['Schlankheit h<sub>ef</sub>/t','≤ 27']])}
+      <div class="legend">Auszug; außerdem Mindestdicken je Wandart und keine planmäßige Biegung (z. B. Erddruck → Kellerwand).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Wand nachweisen</div>
+      <div class="calc-grid">
+        ${mwFelder('mwd-', 'updateMWD()', {art:'k1',m:'dm',fb:15,fm:10})}
+        ${field('Wanddicke t [mm]', inp('mwd-t', 175, 'updateMWD()'))}
+        ${field('lichte Höhe h [m]', inp('mwd-h', 2.6, 'updateMWD()'))}
+        ${field('Wandlänge l [m]', inp('mwd-l', 1.0, 'updateMWD()'))}
+        ${field('Lage', sel('mwd-lage', [['end','Endauflager (Außenwand)'],['zw','Zwischenauflager (Innenwand)'],['dach','unter der Dachdecke']], 'end', 'updateMWD()'))}
+        ${field('Decke', sel('mwd-d', [['sb','Stahlbetondecke'],['hb','Holzbalkendecke']], 'sb', 'updateMWD()'))}
+        ${field('Auflagertiefe a [mm]', inp('mwd-a', 150, 'updateMWD()'))}
+        ${field('Deckenstützweite l<sub>f</sub> [m]', inp('mwd-lf', 5.0, 'updateMWD()'))}
+        ${field('N<sub>Ed</sub> [kN] auf die Länge l', inp('mwd-N', 300, 'updateMWD()'))}
+      </div>
+      <div class="calc-out" id="mwd-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in statiq·size (Mauerwerk → Wand)</a>
+    </div>
+  `,
+
+  'mauerwerk/bemessung/teilflaeche': () => `
+    <div class="card">
+      <div class="card-title">Teilflächenpressung (EN 1996-1-1, 6.1.3)</div>
+      <div class="formula-box">
+        N<sub>Edc</sub> ≤ N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub><br>
+        β = (1 + 0,3 · a<sub>1</sub>/h<sub>c</sub>) · (1,5 − 1,1 · A<sub>b</sub>/A<sub>ef</sub>)&nbsp;&nbsp;&nbsp; 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2 · h<sub>c</sub>); 1,5)<br>
+        A<sub>ef</sub> = l<sub>efm</sub> · t&nbsp;&nbsp;&nbsp; l<sub>efm</sub> — Länge in halber Wandhöhe bei Lastausbreitung unter 60°
+        <div class="comment">a<sub>1</sub> — Abstand der Lastfläche vom Wandende · h<sub>c</sub> — Wandhöhe bis zur Lastfläche · A<sub>b</sub> — belastete Fläche. Lochsteine (Gruppe 2 bis 4) und Mauerwerk mit Schalenfugen: β = 1.</div>
+      </div>
+      <div class="info-banner">Unter dem Auflager stützt das umgebende, nicht belastete Mauerwerk die belastete Fläche seitlich — deshalb darf die Spannung dort höher sein als f<sub>d</sub>. Am Wandende fehlt diese Stützung auf einer Seite (kleines a<sub>1</sub>).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Teilflächenpressung nachweisen</div>
+      <div class="calc-grid">
+        ${mwFelder('mwt-', 'updateMWT()', {art:'z1',m:'nm',fb:15,fm:5})}
+        ${field('Wanddicke t [mm]', inp('mwt-t', 240, 'updateMWT()'))}
+        ${field('Wandhöhe h<sub>c</sub> [m]', inp('mwt-hc', 2.5, 'updateMWT()'))}
+        ${field('Wandlänge [m]', inp('mwt-lw', 3.0, 'updateMWT()'))}
+        ${field('Auflagerlänge [mm]', inp('mwt-lb', 200, 'updateMWT()'))}
+        ${field('Auflagerbreite [mm]', inp('mwt-bb', 175, 'updateMWT()'))}
+        ${field('Abstand vom Wandende a<sub>1</sub> [mm]', inp('mwt-a1', 300, 'updateMWT()'))}
+        ${field('N<sub>Edc</sub> [kN]', inp('mwt-N', 110, 'updateMWT()'))}
+      </div>
+      <div class="calc-out" id="mwt-out"></div>
+    </div>
+  `,
+
+  'mauerwerk/bemessung/keller': () => `
+    <div class="card">
+      <div class="card-title">Kellerwand mit Erddruck (DIN EN 1996-3, 4.5)</div>
+      <div class="formula-box">
+        Mindestauflast:&nbsp; n<sub>Ed,min</sub> ≥ ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t)<br>
+        β = 20 (b<sub>c</sub> ≥ 2h)&nbsp;&nbsp; β = 60 − 20 · b<sub>c</sub>/h (h &lt; b<sub>c</sub> &lt; 2h)&nbsp;&nbsp; β = 40 (b<sub>c</sub> ≤ h)<br>
+        Höchstauflast:&nbsp; n<sub>Ed,max</sub> ≤ t · f<sub>d</sub> / 3
+        <div class="comment">ρ<sub>e</sub> — Wichte der Anschüttung · h — lichte Kellerhöhe · h<sub>e</sub> — Anschütthöhe · b<sub>c</sub> — Abstand der aussteifenden Querwände · n<sub>Ed,min</sub> mit γ<sub>G</sub> = 1,0 (günstig wirkende ständige Last)</div>
+      </div>
+      <div class="info-banner">Mauerwerk kann kaum Biegezug aufnehmen. Die Auflast überdrückt die Wand so stark, dass sich zwischen Kellerdecke und Bodenplatte ein Druckbogen bildet, der den Erddruck abträgt. Zu wenig Auflast — etwa unter einem Fenster oder bei einem leichten Dach — ist der kritische Fall.</div>
+      ${textTable(['Bedingung','Grenze'], [['Wanddicke t','≥ 200 mm'],['lichte Kellerhöhe h','≤ 2,60 m'],['Geländelast neben der Wand','≤ 5 kN/m²'],['Anschütthöhe h<sub>e</sub>','≤ h'],['Gelände','nicht ansteigend, kein Wasserdruck'],['Kellerdecke','wirkt als Scheibe']])}
+    </div>
+    <div class="card">
+      <div class="card-title">Kellerwand nachweisen</div>
+      <div class="calc-grid">
+        ${mwFelder('mwk-', 'updateMWK()', {art:'k1',m:'nm',fb:15,fm:10})}
+        ${field('Wanddicke t [mm]', inp('mwk-t', 300, 'updateMWK()'))}
+        ${field('lichte Höhe h [m]', inp('mwk-h', 2.5, 'updateMWK()'))}
+        ${field('Anschütthöhe h<sub>e</sub> [m]', inp('mwk-he', 2.0, 'updateMWK()'))}
+        ${field('Querwandabstand b<sub>c</sub> [m]', inp('mwk-bc', 4.0, 'updateMWK()'))}
+        ${field('Wichte Boden ρ<sub>e</sub> [kN/m³]', inp('mwk-rho', 19, 'updateMWK()'))}
+        ${field('Geländelast q<sub>k</sub> [kN/m²]', inp('mwk-q', 5, 'updateMWK()'))}
+        ${field('n<sub>Ed,max</sub> [kN/m]', inp('mwk-Nmax', 140, 'updateMWK()'))}
+        ${field('n<sub>Ed,min</sub> [kN/m]', inp('mwk-Nmin', 60, 'updateMWK()'))}
+      </div>
+      <div class="calc-out" id="mwk-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze in statiq·size (Mauerwerk → Kellerwand)</a>
+    </div>
+  `,
+
+  'mauerwerk/bemessung/schub': () => `
+    <div class="card">
+      <div class="card-title">Schubwand — Aussteifung in Wandebene (EN 1996-1-1, 6.2)</div>
+      <div class="formula-box">
+        Ausmitte:&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; überdrückte Länge:&nbsp; l<sub>c</sub> = l (e ≤ l/6) bzw. l<sub>c</sub> = 3 · (l/2 − e)<br>
+        f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> ≤ 0,065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br>
+        V<sub>Ed</sub> ≤ V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub>&nbsp;&nbsp;&nbsp; f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub>
+        <div class="comment">Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Das deutsche NA ergänzt Steinzugversagen und Schubschlankheit — hier die Empfehlungen der EN.</div>
+      </div>
+      ${textTable(['Mörtel','Ziegel','Kalksandstein, Beton, Porenbeton'], [['M10 … M20','0,30','0,20'],['M2,5 … M9','0,20','0,15'],['M1 … M2','0,10','0,10'],['Dünnbettmörtel','0,30','0,40 (KS), 0,30 (sonst)']])}
+      <div class="legend">Haftscherfestigkeit f<sub>vk0</sub> [N/mm²] nach Tab. 3.4 (Empfehlung). Unvermörtelte Stoßfugen: halber Wert.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Schubwand nachweisen</div>
+      <div class="calc-grid">
+        ${mwFelder('mws-', 'updateMWS()', {art:'k1',m:'dm',fb:25,fm:10})}
+        ${field('Wandlänge l [m]', inp('mws-l', 2.5, 'updateMWS()'))}
+        ${field('Wanddicke t [mm]', inp('mws-t', 175, 'updateMWS()'))}
+        ${field('Wandhöhe h [m]', inp('mws-h', 2.75, 'updateMWS()'))}
+        ${field('Lagerung', sel('mws-lag', [['krag','Kragscheibe (oben frei)'],['eing','oben eingespannt (M = V·h/2)']], 'krag', 'updateMWS()'))}
+        ${field('Stoßfugen', sel('mws-st', [['0','vermörtelt'],['1','unvermörtelt']], '1', 'updateMWS()'))}
+        ${field('N<sub>Ed</sub> [kN]', inp('mws-N', 150, 'updateMWS()'))}
+        ${field('V<sub>Ed</sub> [kN]', inp('mws-V', 25, 'updateMWS()'))}
+      </div>
+      <div class="calc-out" id="mws-out"></div>
+    </div>
+  `,
+
+  'lastannahmen/lasten/lastabtrag': () => `
+    <div class="card">
+      <div class="card-title">Lastweiterleitung — vom Dach bis zum Fundament</div>
+      <div class="section-note">Lasten werden von oben nach unten „eingesammelt“: Jedes Bauteil gibt seine Auflagerkräfte an das tragende Bauteil darunter weiter. Für eine Wand rechnet man mit Linienlasten in kN/m, für eine Stütze mit Einzellasten aus der Einflussfläche.</div>
+      ${textTable(['Bauteil','Lastanteil','Durchlaufwirkung'], [
+        ['Endwand unter einachsig gespannter Decke','g · l / 2','Zweifeldträger: 0,375 · g · l'],
+        ['Mittelwand unter Zweifelddecke','g · (l₁ + l₂) / 2','gleiche Felder: 1,25 · g · l'],
+        ['Stütze im Raster l<sub>x</sub> × l<sub>y</sub> (Flachdecke)','g · l<sub>x</sub> · l<sub>y</sub>','erste Innenstütze ≈ 1,1 … 1,25-fach'],
+        ['Unterzug unter Decke','Linienlast aus Deckenstreifen + Eigenlast','—']])}
+      <div class="info-banner">Die Durchlaufwirkung erhöht die Last auf der ersten Innenstütze/-wand und entlastet die Endauflager. Bei Mauerwerk gehen die Wandeigenlasten aller Geschosse darüber ein.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Innenwand im Geschossbau</div>
+      <div class="calc-grid">
+        ${field('Anzahl Geschossdecken n', inp('lw-n', 3, 'updateLW()', 1))}
+        ${field('Stützweite links l<sub>1</sub> [m]', inp('lw-l1', 4.5, 'updateLW()'))}
+        ${field('Stützweite rechts l<sub>2</sub> [m]', inp('lw-l2', 5.0, 'updateLW()'))}
+        ${field('Decke g<sub>k</sub> [kN/m²] (inkl. Aufbau)', inp('lw-g', 7.2, 'updateLW()'))}
+        ${field('Nutzlast q<sub>k</sub> [kN/m²] (inkl. Trennwände)', inp('lw-q', 2.3, 'updateLW()'))}
+        ${field('Dach g<sub>k</sub> [kN/m²]', inp('lw-gD', 6.5, 'updateLW()'))}
+        ${field('Schnee s [kN/m²]', inp('lw-s', 0.68, 'updateLW()'))}
+        ${field('Wandeigenlast je Geschoss [kN/m]', inp('lw-gW', 9.0, 'updateLW()'))}
+        ${field('Durchlaufwirkung', sel('lw-dlt', [['1','berücksichtigen'],['0','nicht (Einfeldträger)']], '1', 'updateLW()'))}
+      </div>
+      <div class="calc-out" id="lw-out"></div>
+      <div id="lw-fig"></div>
+      <a class="applink" href="#/mauerwerk/bemessung/wand">→ Wand mit n<sub>Ed</sub> nachweisen (Mauerwerk)</a>
     </div>
   `,
 
@@ -7575,12 +8656,24 @@ Object.assign(CONTENT, {
 });
 
 Object.assign(AFTER, {
-  'baustatik/querschnitte/querschnittswerte': () => updateRechteck(),
+  'baustatik/querschnitte/querschnittswerte': () => { updateRechteck(); updateSteiner(); },
+  'baustatik/balkentafeln/durchlauf': () => updateDLT(),
+  'baustatik/balkentafeln/einflusslinien': () => updateEL(),
+  'baustatik/tragwerke/fachwerk': () => updateFW(),
+  'baustatik/tragwerke/dreigelenk': () => updateDGR(),
+  'baustatik/arbeitssatz/kraftgroessen': () => updateKGV(),
   'mathematik/algebra/gleichungen': () => updateGauss(),
   'mathematik/geometrie/neigung': () => updateNeigung(),
   'wasserbau/gerinne/normalabfluss': () => updateManning(),
   'wasserbau/hydrodynamik/rohr': () => updateRohrR(),
   'wasserbau/gerinne/wehr': () => updatePoleni(),
+  'mauerwerk/baustoffe/massordnung': () => updateMass(),
+  'mauerwerk/baustoffe/festigkeit': () => updateFk(),
+  'mauerwerk/bemessung/knicklaenge': () => updateHef(),
+  'mauerwerk/bemessung/wand': () => updateMWD(),
+  'mauerwerk/bemessung/teilflaeche': () => updateMWT(),
+  'mauerwerk/bemessung/keller': () => updateMWK(),
+  'mauerwerk/bemessung/schub': () => updateMWS(),
   'wasserbau/grundlagen/kennzahlen': () => updateKZ(),
   'wasserbau/hydrodynamik/ausfluss': () => updateAusfl(),
   'wasserbau/hydrodynamik/pumpen': () => updatePumpe(),
@@ -7590,8 +8683,9 @@ Object.assign(AFTER, {
   'wasserbau/gerinne/teilfuellung': () => updateTeil(),
   'wasserbau/grundwasser/brunnen': () => updateBrunnen(),
   'wasserbau/hydrologie/regen': () => updateRegen(),
-  'lastannahmen/lasten/schnee': () => updateSchnee(),
-  'lastannahmen/lasten/wind': () => updateWind(),
+  'lastannahmen/lasten/schnee': () => { updateSchnee(); updateHS(); },
+  'lastannahmen/lasten/wind': () => { updateWind(); updateWB(); },
+  'lastannahmen/lasten/lastabtrag': () => updateLW(),
   'grundbau/erddruck/beiwerte': () => updateErd(),
   'stahlbau/nachweise/biegeknicken': () => updateKnick(),
   'stahlbau/profile/walzprofile': () => updateSteckbrief(),
@@ -7794,6 +8888,20 @@ function viewThema(){
 let SEARCH_INDEX = null;
 // Zusätzlicher Suchtext für Themen, deren Inhalt nicht vollständig sichtbar ist (z. B. gefilterte Tabellen)
 const SEARCH_EXTRA = {
+  'lastannahmen/lasten/schnee': () => 'Verwehung Höhensprung Schneesack Schneeüberhang Schneefanggitter Satteldach',
+  'lastannahmen/lasten/wind': () => 'cpe Außendruckbeiwert Innendruck Flachdach Sog Bereich F G H I Attika',
+  'lastannahmen/lasten/lastabtrag': () => 'Lastzusammenstellung Lastabtrag Einzugsbreite Einflussfläche Geschoss Fundament',
+  'baustatik/tragwerke/fachwerk': () => 'Ritterschnitt Knotenpunktverfahren Nullstab Obergurt Untergurt Diagonale Pfosten Parallelträger',
+  'baustatik/tragwerke/dreigelenk': () => 'Dreigelenkbogen Horizontalschub Stützlinie Rahmenecke Gelenk',
+  'baustatik/arbeitssatz/kraftgroessen': () => 'statisch unbestimmt Überzählige Verträglichkeit delta Dreimomentengleichung Clapeyron Grundsystem',
+  'baustatik/balkentafeln/einflusslinien': () => 'wandernde Last Verkehrslast Müller-Breslau Laststellung',
+  'baustatik/balkentafeln/durchlauf': () => 'Laststellung Schachbrett feldweise Beiwerte Zweifeldträger Dreifeldträger Vierfeldträger',
+  'baustatik/querschnitte/querschnittswerte': () => 'Steiner Schwerpunkt Trägheitsmoment Flächenmoment Widerstandsmoment T-Querschnitt',
+  'mauerwerk/baustoffe/steine': () => 'Ziegel Kalksandstein Porenbeton Leichtbeton HLz KS DF NF 2DF 3DF Format Steinfestigkeitsklasse',
+  'mauerwerk/baustoffe/massordnung': () => 'Achtelmeter Kopfmaß Außenmaß Öffnungsmaß Anbaumaß Schichthöhe DIN 4172',
+  'mauerwerk/baustoffe/moertel': () => 'Normalmörtel Dünnbettmörtel Leichtmörtel NM IIa NM III Überbindemaß Läuferverband Blockverband',
+  'mauerwerk/baustoffe/festigkeit': () => 'fk fd E-Modul Kriechen Schwinden Haftscherfestigkeit EC6',
+  'mauerwerk/bemessung/wand': () => 'Phi Abminderungsfaktor Endauflager Deckenverdrehung NRd EC6 DIN EN 1996-3',
   'wasserbau/grundlagen/stoffwerte': () => 'Dichte Viskosität Zähigkeit Dampfdruck Oberflächenspannung Temperatur',
   'wasserbau/grundlagen/kennzahlen': () => 'Reynoldszahl Reynolds Froudezahl Froude Weber laminar turbulent Ähnlichkeit',
   'wasserbau/hydrodynamik/rohr': () => 'Moody Colebrook Darcy-Weisbach Swamee-Jain Rauheit Zeta Verlustbeiwert',

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.14 -->
+<!-- Statiq v0.8.15 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -489,14 +489,14 @@
       <div class="formula-box">
         ΣM<sub>A</sub> = 0 → V<sub>B</sub><br>
         ΣV = 0 → V<sub>A</sub><br>
-        M<sub>G</sub> = 0 (left part) → H<sub>A</sub><br>
+        M<sub>G</sub> = 0 <span id="mfs3lp">(left part)</span> → H<sub>A</sub><br>
         ΣH = 0 → H<sub>B</sub>
       </div>
       <p id="mfs3e"></p>
       <div class="formula-box">
         V<sub>A</sub> = V<sub>B</sub> = q·b/2<br>
         H = q·b² / (8·h)<br>
-        M<sub>corner</sub> = −H·h = −q·b²/8
+        M<sub id="mfs3cn">corner</sub> = −H·h = −q·b²/8
         <div class="comment" id="mfs3c"></div>
       </div>
     </div>
@@ -518,7 +518,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.14</span>
+    <span class="version">v0.8.15</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -990,7 +990,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.14';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.15';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -4316,24 +4316,24 @@ const calcTranslations = {
   fr: {
     toSize:'Dimensionner →',
     spanWord:'Travée', loadsWord:'Charges', eiRatio:'rapport de rigidité', eiRef:'EI de référence', endSupports:'Appuis d’extrémité et consoles', leftEnd:'Appui gauche', rightEnd:'Appui droit', overhangL:'Console gauche', overhangR:'Console droite', pointMoments:'Moments ponctuels', addMoment:'＋ Ajouter un moment', supPin:'Appui fixe △', supRoller:'Appui mobile ○', supFixed:'Encastrement ⊞',
-    tabs: ['Poutre Simple', 'Console', 'Poutre Continue', 'Portique'],
+    tabs: ['Poutre simple', 'Console', 'Poutre continue', 'Portique'],
     system: 'Système', span: 'Portée L', length: 'Longueur L',
-    pointLoads: 'Charges Ponctuelles', distLoads: 'Charges Réparties',
-    horizLoads: 'Charges Horizontales & Moments',
+    pointLoads: 'Charges ponctuelles', distLoads: 'Charges réparties',
+    horizLoads: 'Charges horizontales & moments',
     addPoint: '＋ Ajouter charge ponctuelle', addDist: '＋ Ajouter charge répartie',
     addHoriz: '＋ Ajouter H / Mₑ', calculate: 'Calculer',
     reactionA: 'Réaction A', reactionB: 'Réaction B',
     reactionVA: 'Réaction Vₐ', reactionVB: 'Réaction V_B',
     reactionHA: 'Réaction Hₐ', momentMA: 'Moment Mₐ',
     Mmax: 'M max', Qmax: 'Q max', Nmax: 'N max',
-    shearForce: 'Effort Tranchant T(x)', bendingMoment: 'Moment Fléchissant M(x)',
-    normalForce: 'Effort Normal N(x)', deflection: 'Flèche w — mm',
+    shearForce: 'Effort tranchant T(x)', bendingMoment: 'Moment fléchissant M(x)',
+    normalForce: 'Effort normal N(x)', deflection: 'Flèche w — mm',
     tensionBottom: 'traction en bas', tensionTop: 'traction en haut',
     diagramOnStructure: 'Diagramme sur la structure',
-    supportReactions: 'Réactions aux Appuis',
+    supportReactions: 'Réactions aux appuis',
     supportA: 'Appui A (gauche)', supportB: 'Appui B (droite)',
     internalHinges: 'Rotules', addHinge: '＋ Ajouter rotule',
-    vertLoads: 'Charges Réparties', horizLoadsCols: 'Charges Ponctuelles & Horizontales',
+    vertLoads: 'Charges réparties', horizLoadsCols: 'Charges ponctuelles & horizontales',
     addVertLoad: '＋ Ajouter charge répartie', addHorizLoad: '＋ Ajouter charge / H',
     width: 'Largeur b', height: 'Hauteur h',
     free: 'libre', degree: 'hyperstat.',
@@ -4342,25 +4342,25 @@ const calcTranslations = {
     spans: 'Travées', addSpan: '＋', removeSpan: '−',
     fixed: 'Encastrement ⊞', pinned: 'Appui △', roller: 'Appui mobile ○',
     on: 'Actif', off: 'Inactif',
-    modalBeamTitle: 'Poutre Simple — Théorie',
-    modalCantTitle: 'Console — Théorie',
-    modalContTitle: 'Poutre Continue — Théorie',
-    modalFrameTitle: 'Portique — Théorie',
+    modalBeamTitle: 'Poutre simple — théorie',
+    modalCantTitle: 'Console — théorie',
+    modalContTitle: 'Poutre continue — théorie',
+    modalFrameTitle: 'Portique — théorie',
     modalBeamS1h: 'Système',
     modalBeamS1p: "Une poutre simple est appuyée en A (appui fixe, bloqué en x et y) et en B (appui mobile, bloqué en y). Le système est isostatique avec 3 équations d'équilibre.",
-    modalBeamS2h: 'Équilibre — Réactions',
-    modalBeamS3h: 'Effort Tranchant T(x)',
+    modalBeamS2h: 'Équilibre — réactions',
+    modalBeamS3h: 'Effort tranchant T(x)',
     modalBeamS3p: "L'effort tranchant en x est la somme de toutes les forces verticales à gauche de la section:",
-    modalBeamS4h: 'Moment Fléchissant M(x)',
+    modalBeamS4h: 'Moment fléchissant M(x)',
     modalBeamS4p: "Le moment fléchissant est l'intégrale de l'effort tranchant. Convention traction en bas: M positif affiché vers le bas.",
-    modalBeamS5h: 'Charges Inclinées',
+    modalBeamS5h: 'Charges inclinées',
     modalBeamS5p: 'Une charge inclinée F à l\'angle α (par rapport à la verticale) est décomposée en:',
     modalCantS1h: 'Système',
     modalCantS1p: "La console est encastrée à une extrémité (appui A) et libre à l'autre. L'encastrement fournit V_A, H_A et le moment d'encastrement M_A.",
     modalCantS2h: 'Réactions en A',
-    modalCantS3h: 'Effort Tranchant T(x)',
+    modalCantS3h: 'Effort tranchant T(x)',
     modalCantS3p: "Calculé depuis l'encastrement (x = 0) vers l'extrémité libre:",
-    modalCantS4h: 'Moment Fléchissant M(x)',
+    modalCantS4h: 'Moment fléchissant M(x)',
     modalCantS4p: "Maximum à l'encastrement (x = 0), nul à l'extrémité libre. Traction en haut.",
     modalFrameS1h: 'Système',
     framePresets: 'Type de portique',
@@ -4375,24 +4375,24 @@ const calcTranslations = {
   es: {
     toSize:'Dimensionar →',
     spanWord:'Vano', loadsWord:'Cargas', eiRatio:'relación de rigidez', eiRef:'EI de referencia', endSupports:'Apoyos extremos y voladizos', leftEnd:'Apoyo izquierdo', rightEnd:'Apoyo derecho', overhangL:'Voladizo izquierdo', overhangR:'Voladizo derecho', pointMoments:'Momentos puntuales', addMoment:'＋ Añadir momento', supPin:'Apoyo fijo △', supRoller:'Apoyo móvil ○', supFixed:'Empotramiento ⊞',
-    tabs: ['Viga Biapoyada', 'Ménsula', 'Viga Continua', 'Pórtico'],
+    tabs: ['Viga biapoyada', 'Ménsula', 'Viga continua', 'Pórtico'],
     system: 'Sistema', span: 'Luz L', length: 'Longitud L',
-    pointLoads: 'Cargas Puntuales', distLoads: 'Cargas Distribuidas',
-    horizLoads: 'Cargas Horizontales & Momentos',
+    pointLoads: 'Cargas puntuales', distLoads: 'Cargas distribuidas',
+    horizLoads: 'Cargas horizontales & momentos',
     addPoint: '＋ Añadir carga puntual', addDist: '＋ Añadir carga distribuida',
     addHoriz: '＋ Añadir H / Mₑ', calculate: 'Calcular',
     reactionA: 'Reacción A', reactionB: 'Reacción B',
     reactionVA: 'Reacción Vₐ', reactionVB: 'Reacción V_B',
     reactionHA: 'Reacción Hₐ', momentMA: 'Momento Mₐ',
     Mmax: 'M máx', Qmax: 'Q máx', Nmax: 'N máx',
-    shearForce: 'Fuerza Cortante Q(x)', bendingMoment: 'Momento Flector M(x)',
-    normalForce: 'Fuerza Normal N(x)', deflection: 'Flecha w — mm',
+    shearForce: 'Fuerza cortante Q(x)', bendingMoment: 'Momento flector M(x)',
+    normalForce: 'Fuerza normal N(x)', deflection: 'Flecha w — mm',
     tensionBottom: 'tracción abajo', tensionTop: 'tracción arriba',
-    diagramOnStructure: 'Diagrama en Estructura',
-    supportReactions: 'Reacciones en Apoyos',
+    diagramOnStructure: 'Diagrama en estructura',
+    supportReactions: 'Reacciones en apoyos',
     supportA: 'Apoyo A (izquierda)', supportB: 'Apoyo B (derecha)',
     internalHinges: 'Rótulas', addHinge: '＋ Añadir rótula',
-    vertLoads: 'Cargas Distribuidas', horizLoadsCols: 'Cargas Puntuales & Horizontales',
+    vertLoads: 'Cargas distribuidas', horizLoadsCols: 'Cargas puntuales & horizontales',
     addVertLoad: '＋ Añadir carga distribuida', addHorizLoad: '＋ Añadir carga / H',
     width: 'Ancho b', height: 'Altura h',
     free: 'libre', degree: 'hiperestat.',
@@ -4401,25 +4401,25 @@ const calcTranslations = {
     spans: 'Vanos', addSpan: '＋', removeSpan: '−',
     fixed: 'Empotramiento ⊞', pinned: 'Articulación △', roller: 'Apoyo móvil ○',
     on: 'Activo', off: 'Inactivo',
-    modalBeamTitle: 'Viga Biapoyada — Teoría',
-    modalCantTitle: 'Ménsula — Teoría',
-    modalContTitle: 'Viga Continua — Teoría',
-    modalFrameTitle: 'Pórtico — Teoría',
+    modalBeamTitle: 'Viga biapoyada — teoría',
+    modalCantTitle: 'Ménsula — teoría',
+    modalContTitle: 'Viga continua — teoría',
+    modalFrameTitle: 'Pórtico — teoría',
     modalBeamS1h: 'Sistema',
     modalBeamS1p: 'Una viga biapoyada está apoyada en A (apoyo fijo, bloqueado en x e y) y en B (apoyo móvil, bloqueado en y). El sistema es isostático con 3 ecuaciones de equilibrio.',
-    modalBeamS2h: 'Equilibrio — Reacciones',
-    modalBeamS3h: 'Fuerza Cortante Q(x)',
+    modalBeamS2h: 'Equilibrio — reacciones',
+    modalBeamS3h: 'Fuerza cortante Q(x)',
     modalBeamS3p: 'La fuerza cortante en x es la suma de todas las fuerzas verticales a la izquierda de la sección:',
-    modalBeamS4h: 'Momento Flector M(x)',
+    modalBeamS4h: 'Momento flector M(x)',
     modalBeamS4p: 'El momento flector es la integral de la fuerza cortante. Convención tracción abajo: M positivo mostrado hacia abajo.',
-    modalBeamS5h: 'Cargas Inclinadas',
+    modalBeamS5h: 'Cargas inclinadas',
     modalBeamS5p: 'Una carga inclinada F con ángulo α (respecto a la vertical) se descompone en:',
     modalCantS1h: 'Sistema',
     modalCantS1p: 'La ménsula está empotrada en un extremo (apoyo A) y libre en el otro. El empotramiento proporciona V_A, H_A y el momento de empotramiento M_A.',
     modalCantS2h: 'Reacciones en A',
-    modalCantS3h: 'Fuerza Cortante Q(x)',
+    modalCantS3h: 'Fuerza cortante Q(x)',
     modalCantS3p: 'Calculada desde el empotramiento (x = 0) hacia el extremo libre:',
-    modalCantS4h: 'Momento Flector M(x)',
+    modalCantS4h: 'Momento flector M(x)',
     modalCantS4p: 'Máximo en el empotramiento (x = 0), cero en el extremo libre. Tracción arriba.',
     modalFrameS1h: 'Sistema',
     framePresets: 'Tipo de pórtico',
@@ -4870,6 +4870,8 @@ const I18N_UI = {
 };
 Object.assign(I18N_UI.fr, {"modCalcSub": "Efforts internes &amp; déformations", "modSizeSub": "Dimensionnement selon les Eurocodes", "modRefSub": "Profilés, tableaux, Eurocodes", "savedSub": "Calculs &amp; rapports", "modalFrameS1p": "Un portique se compose de deux poteaux et d’une traverse. Les appuis (encastrement, appui fixe, appui mobile), un appui en tête et des rotules dans chaque barre se choisissent librement. Le degré d’hyperstaticité résulte du critère de comptage :", "modalFrameS1c": "a — nombre de réactions d’appui (encastrement 3, appui fixe 2, appui mobile 1, appui en tête 1 ou 2) · g — rotules effectives (une rotule directement au pied articulé ne compte pas). n &lt; 0 : mécanisme · n = 0 : isostatique · n &gt; 0 : hyperstatique.", "modalFrameS2t": "Portique à trois articulations : appui fixe + appui fixe + rotule dans la traverse → n = 4 − 3 − 1 = 0<br>Portique à deux articulations : appui fixe + appui fixe → n = 1<br>Portique à pieds encastrés : encastrement + encastrement → n = 3<div class=\"comment\">Les trois se règlent avec les boutons « Type de portique ».</div>", "modalFrameS3p": "Quatre réactions inconnues, trois équations d’équilibre et la condition de rotule (moment nul dans la rotule G) :", "modalFrameS3e": "Exemple : charge uniforme q sur la traverse, rotule à mi-portée, deux poteaux de hauteur h :", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, moment d’angle −31,25 kNm (traction à l’extérieur).", "modalFrameS4p": "calc utilise la méthode des déplacements sous forme matricielle (méthode de rigidité directe) pour toute combinaison d’appuis, de rotules et de charges : équations de rigidité K·u = F, puis réactions d’appui et efforts aux extrémités des barres. M, Q et N découlent exactement de l’équilibre de chaque partie de barre ; les déformations viennent directement des déplacements nodaux. Les déformations axiales sont pratiquement supprimées (EA très grand), comme dans un calcul à la main.", "modalFrameS5t": "M &gt; 0 : traction à l’intérieur (fibre en pointillés) · Q = dM/ds le long de la barre · N &gt; 0 : traction<br>Réactions d’appui : H → +, V ↑ +, M ↺ + (forces de l’appui sur le portique)"});
 Object.assign(I18N_UI.es, {"modCalcSub": "Esfuerzos &amp; deformaciones", "modSizeSub": "Dimensionado según Eurocódigos", "modRefSub": "Perfiles, tablas, Eurocódigos", "savedSub": "Cálculos &amp; informes", "modalFrameS1p": "Un pórtico consta de dos pilares y un dintel. Los apoyos (empotramiento, apoyo fijo, apoyo móvil), un apoyo en cabeza y rótulas en cualquier barra se eligen libremente. El grado de hiperestaticidad resulta del criterio de recuento:", "modalFrameS1c": "a — número de reacciones (empotramiento 3, apoyo fijo 2, apoyo móvil 1, apoyo en cabeza 1 o 2) · g — rótulas efectivas (una rótula justo en un pie articulado no cuenta). n &lt; 0: mecanismo · n = 0: isostático · n &gt; 0: hiperestático.", "modalFrameS2t": "Pórtico triarticulado: apoyo fijo + apoyo fijo + rótula en el dintel → n = 4 − 3 − 1 = 0<br>Pórtico biarticulado: apoyo fijo + apoyo fijo → n = 1<br>Pórtico con pies empotrados: empotramiento + empotramiento → n = 3<div class=\"comment\">Los tres se ajustan con los botones «Tipo de pórtico».</div>", "modalFrameS3p": "Cuatro reacciones desconocidas, tres ecuaciones de equilibrio y la condición de rótula (momento nulo en la rótula G):", "modalFrameS3e": "Ejemplo: carga uniforme q en el dintel, rótula en el centro del vano, ambos pilares de altura h:", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, momento en esquina −31,25 kNm (tracción exterior).", "modalFrameS4p": "calc utiliza el método de los desplazamientos en forma matricial (método de rigidez directa) para cualquier combinación de apoyos, rótulas y cargas: ecuaciones de rigidez K·u = F, luego reacciones y esfuerzos en los extremos de las barras. M, Q y N resultan exactamente del equilibrio de cada tramo de barra; las deformaciones salen directamente de los desplazamientos nodales. Las deformaciones axiales se suprimen prácticamente (EA muy grande), como en un cálculo a mano.", "modalFrameS5t": "M &gt; 0: tracción en el interior (fibra discontinua) · Q = dM/ds a lo largo de la barra · N &gt; 0: tracción<br>Reacciones: H → +, V ↑ +, M ↺ + (fuerzas del apoyo sobre el pórtico)"});
+Object.assign(I18N_UI.en,{modalFrameLeftPart:'(left part)',modalFrameCorner:'corner'}); Object.assign(I18N_UI.de,{modalFrameLeftPart:'(linker Teil)',modalFrameCorner:'Ecke'});
+Object.assign(I18N_UI.fr,{modalFrameLeftPart:'(partie gauche)',modalFrameCorner:'angle'}); Object.assign(I18N_UI.es,{modalFrameLeftPart:'(parte izquierda)',modalFrameCorner:'esquina'});
 Object.keys(I18N_UI).forEach(l=>{ calcTranslations[l] = Object.assign(calcTranslations[l]||{}, I18N_UI[l]); });
 const trf = (key, ...a) => tr(key).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const LOCALE = () => ({en:'en-GB', de:'de-DE', fr:'fr-FR', es:'es-ES'})[calcLang] || 'en-GB';
@@ -4893,7 +4895,7 @@ function applyCalcTranslations(){
   setT('mbs1h','modalBeamS1h'); setT('mbs1p','modalBeamS1p');
   [['mfs1h','modalFrameS1h'],['mfs1p','modalFrameS1p'],['mfs1c','modalFrameS1c'],['mfs2h','modalFrameS2h'],['mfs2t','modalFrameS2t'],
    ['mfs3h','modalFrameS3h'],['mfs3p','modalFrameS3p'],['mfs3e','modalFrameS3e'],['mfs3c','modalFrameS3c'],
-   ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t']].forEach(([id,k])=>setT(id,k));
+   ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t'],['mfs3lp','modalFrameLeftPart'],['mfs3cn','modalFrameCorner']].forEach(([id,k])=>setT(id,k));
   document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.textContent = `Statiq v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]}`; });
   ['beam','cant','cont','frame'].forEach(sys=>{ const l=document.getElementById('diag-label-'+sys); if(l) l.textContent = tr('diag'+((typeof diagMode!=='undefined' && diagMode[sys])||'M')); });
   document.querySelectorAll('.lang-pick button').forEach(b=>b.classList.toggle('active', b.dataset.lang===calcLang));
@@ -5000,7 +5002,7 @@ const RWT = {
     hinge:'Mit Gelenken wird der Durchlaufträger über das Weggrößenverfahren (Steifigkeitsmatrix) gelöst; hier stehen Ergebnis und Gleichgewichtskontrolle.',
     span:'Feld', ovh:'Kragarm', known:'bekannt aus dem Kragarm', frDet:'Bestimmtheit n = a − 3 − g', frLoad:'Resultierende aller Lasten', frReac:'Auflagerkräfte (Lösung über das Weggrößenverfahren)', frEq:'Gleichgewichtskontrolle am Gesamtsystem',
     frMeth:'n > 0: Lösung mit der Steifigkeitsmatrix (Weggrößenverfahren). Die Gleichgewichtskontrolle zeigt, dass Lasten und Auflagerkräfte zusammenpassen.',
-    frMeth0:'n = 0: statisch bestimmt — die Auflagerkräfte folgen allein aus Gleichgewicht (und M = 0 im Gelenk).', head:'Kopfhalterung' },
+    frMeth0:'n = 0: statisch bestimmt — die Auflagerkräfte folgen allein aus Gleichgewicht (und M = 0 im Gelenk).', cutLeft:'Anteil links vom Schnitt', with:'mit', spans:'Felder', left:'links', right:'rechts', kNote:'(k = I/I₀; bei Gleichlast über das ganze Feld: R = L = q·l³/4)', head:'Kopfhalterung' },
   en:{ title:'Solution — step by step', sys:'System and static determinacy', loads:'Loads and their resultants', none:'no loads',
     momA:'Moment equilibrium about A (↺ positive) gives B<sub>V</sub>', sumV:'Sum of vertical forces gives A<sub>V</sub>', sumH:'Sum of horizontal forces gives A<sub>H</sub>',
     clamp:'Equilibrium at the fixed support A', mmax:'Largest moment: cut at x₀, equilibrium of the left part', at:'at', from:'from', to:'to',
@@ -5011,7 +5013,9 @@ const RWT = {
     hinge:'With hinges the beam is solved with the stiffness method; result and equilibrium check are shown.',
     span:'Span', ovh:'Overhang', known:'known from the overhang', frDet:'Determinacy n = a − 3 − g', frLoad:'Resultant of all loads', frReac:'Reactions (stiffness method)', frEq:'Equilibrium check of the whole system',
     frMeth:'n > 0: solved with the stiffness method. The equilibrium check shows that loads and reactions match.',
-    frMeth0:'n = 0: statically determinate — reactions follow from equilibrium alone (and M = 0 at the hinge).', head:'head support' } };
+    frMeth0:'n = 0: statically determinate — reactions follow from equilibrium alone (and M = 0 at the hinge).', cutLeft:'part left of the cut', with:'with', spans:'spans', left:'left', right:'right', kNote:'(k = I/I₀; full uniform load: R = L = q·l³/4)', head:'head support' },
+  fr:{"title": "Étapes de calcul — pas à pas", "sys": "Système et degré d’hyperstaticité", "loads": "Charges et leurs résultantes", "none": "aucune charge", "momA": "L’équilibre des moments autour de A (↺ positif) donne B<sub>V</sub>", "sumV": "La somme des forces verticales donne A<sub>V</sub>", "sumH": "La somme des forces horizontales donne A<sub>H</sub>", "clamp": "Équilibre à l’encastrement A", "mmax": "Moment maximal : coupe en x₀, équilibre de la partie gauche", "at": "en", "from": "de", "to": "à", "detBeam": "Appui fixe A + appui mobile B : 3 réactions, 3 équations d’équilibre → isostatique", "detCant": "Encastrement A : 3 réactions, 3 équations d’équilibre → isostatique", "vzero": "l’effort tranchant y change de signe", "check": "Contrôle", "cont1": "Hyperstatique : moments sur appuis inconnus", "cw": "(↻)", "clap": "Équation des trois moments (Clapeyron) pour chaque appui intermédiaire", "clapFix": "encastrement", "lt": "Termes de charge issus du moment M₀ de la poutre sur deux appuis", "solve": "Résoudre le système → moments sur appuis", "reac": "Réactions : part de la poutre sur deux appuis + part des moments sur appuis", "field": "Moments en travée : M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l", "hinge": "Avec des articulations, la poutre continue est résolue par la méthode des déplacements (matrice de rigidité) ; le résultat et le contrôle d’équilibre sont indiqués ici.", "span": "Travée", "ovh": "Console", "known": "connu à partir de la console", "frDet": "Degré d’hyperstaticité n = a − 3 − g", "frLoad": "Résultante de toutes les charges", "frReac": "Réactions d’appui (méthode des déplacements)", "frEq": "Contrôle d’équilibre du système complet", "frMeth": "n > 0 : résolution avec la matrice de rigidité (méthode des déplacements). Le contrôle d’équilibre montre que charges et réactions concordent.", "frMeth0": "n = 0 : isostatique — les réactions découlent de l’équilibre seul (et M = 0 dans l’articulation).", "head": "appui en tête", "cutLeft": "part à gauche de la coupe", "with": "avec", "spans": "travées", "left": "gauche", "right": "droite", "kNote": "(k = I/I₀ ; charge uniforme sur toute la travée : R = L = q·l³/4)"},
+  es:{"title": "Desarrollo del cálculo — paso a paso", "sys": "Sistema y grado de hiperestatismo", "loads": "Cargas y sus resultantes", "none": "sin cargas", "momA": "El equilibrio de momentos respecto a A (↺ positivo) da B<sub>V</sub>", "sumV": "La suma de fuerzas verticales da A<sub>V</sub>", "sumH": "La suma de fuerzas horizontales da A<sub>H</sub>", "clamp": "Equilibrio en el empotramiento A", "mmax": "Momento máximo: corte en x₀, equilibrio de la parte izquierda", "at": "en", "from": "de", "to": "a", "detBeam": "Apoyo fijo A + apoyo móvil B: 3 reacciones, 3 ecuaciones de equilibrio → isostático", "detCant": "Empotramiento A: 3 reacciones, 3 ecuaciones de equilibrio → isostático", "vzero": "el cortante cambia ahí de signo", "check": "Comprobación", "cont1": "Hiperestático: momentos en apoyos desconocidos", "cw": "(↻)", "clap": "Ecuación de los tres momentos (Clapeyron) en cada apoyo intermedio", "clapFix": "empotramiento", "lt": "Términos de carga a partir del momento M₀ de la viga biapoyada", "solve": "Resolver el sistema → momentos en apoyos", "reac": "Reacciones: parte de la viga biapoyada + parte de los momentos en apoyos", "field": "Momentos en vano: M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l", "hinge": "Con articulaciones, la viga continua se resuelve por el método de rigidez (matriz de rigidez); aquí se muestran el resultado y la comprobación de equilibrio.", "span": "Vano", "ovh": "Voladizo", "known": "conocido del voladizo", "frDet": "Grado de hiperestatismo n = a − 3 − g", "frLoad": "Resultante de todas las cargas", "frReac": "Reacciones (método de rigidez)", "frEq": "Comprobación del equilibrio del sistema completo", "frMeth": "n > 0: resolución con la matriz de rigidez (método de rigidez). La comprobación de equilibrio muestra que cargas y reacciones coinciden.", "frMeth0": "n = 0: isostático — las reacciones resultan solo del equilibrio (y M = 0 en la articulación).", "head": "apoyo en cabeza", "cutLeft": "parte a la izquierda del corte", "with": "con", "spans": "vanos", "left": "izquierda", "right": "derecha", "kNote": "(k = I/I₀; carga uniforme en todo el vano: R = L = q·l³/4)"} };
 const rwT = k => (RWT[calcLang]||RWT.en)[k] ?? RWT.en[k];
 const nf = (v, d=2) => { const x = Math.abs(v)<5*10**(-d-1) ? 0 : v; const s = x.toFixed(d); return calcLang==='en' ? s : s.replace('.', ','); };
 const nfp = (v, d=2) => v<0 ? `(${nf(v,d)})` : nf(v,d);
@@ -5066,7 +5070,7 @@ function rwMmaxSteps(L, AV, MA, P, D, sol){
   const clean = s => s.replace(/^\+ /,'').replace(/^− /,'−');
   const S=[`x₀ = ${nf(x0)} m${x0>1e-6 && x0<L-1e-6 ? ` (${rwT('vzero')})` : ''}`,
     `M(x₀) = ${clean(terms.join(' '))} = ${clean(nums.join(' '))} = <b>${nf(mx.M)} kNm</b>`];
-  D.forEach(d=>{ const r=rwPart(d,x0); if(r && d.b>x0+1e-9) S.splice(1,0,`${calcLang==='de'?'Anteil links vom Schnitt':'part left of the cut'}: R'<sub>${d.lab}</sub> = ${nf(r.R)} kN · x'<sub>R</sub> = ${nf(r.xr)} m`); });
+  D.forEach(d=>{ const r=rwPart(d,x0); if(r && d.b>x0+1e-9) S.splice(1,0,`${rwT('cutLeft')}: R'<sub>${d.lab}</sub> = ${nf(r.R)} kN · x'<sub>R</sub> = ${nf(r.xr)} m`); });
   return {S, mx};
 }
 function rwBeam(sys){
@@ -5097,7 +5101,7 @@ function rwBeam(sys){
 // ── Durchlaufträger: Dreimomentengleichung ──
 function rwContData(){
   const lay=contLayout(), P=[], D=[];
-  lay.segs.forEach(sg=>{ const sp=contSeg(sg.key), tag = typeof sg.key==='string' ? (sg.key==='L'?rwT('ovh')+' '+(calcLang==='de'?'links':'left'):rwT('ovh')+' '+(calcLang==='de'?'rechts':'right')) : `${rwT('span')} ${sg.key+1}`;
+  lay.segs.forEach(sg=>{ const sp=contSeg(sg.key), tag = typeof sg.key==='string' ? (sg.key==='L'?rwT('ovh')+' '+(rwT('left')):rwT('ovh')+' '+(rwT('right'))) : `${rwT('span')} ${sg.key+1}`;
     (sp.point||[]).forEach((pl,i)=>{ if(!pl.enabled || !(pl.values.F)) return; P.push({x:sg.x0+Math.min(Math.max(+pl.values.a||0,0),sg.L), Fy:pl.values.F, Fx:0, Me:0, lab:`${tag}·F${i+1}`}); });
     (sp.mom||[]).forEach((ml,i)=>{ if(!ml.enabled || !(ml.values.M)) return; P.push({x:sg.x0+Math.min(Math.max(+ml.values.a||0,0),sg.L), Fy:0, Fx:0, Me:ml.values.M, lab:`${tag}·M${i+1}`, mlab:`${tag}·M${i+1}`}); });
     (sp.dist||[]).forEach((dl,i)=>{ if(!dl.enabled) return; const d=cutRange([], '', dl.values.a, dl.values.b, dl.values.qa, dl.values.qb, sg.L); if(d && (d.qa||d.qb)) D.push({a:sg.x0+d.a, b:sg.x0+d.b, qa:d.qa, qb:d.qb, lab:`${tag}·q${i+1}`}); }); });
@@ -5127,7 +5131,7 @@ function rwCont(){
   const {lay, P, D}=rwContData(), xs=lay.xs, n=xs.length-1, names='ABCDEFGH', S=[];
   const segs = lay.segs.filter(s=>typeof s.key==='number'), Lk = segs.map(s=>s.L/s.k);
   const fixL = lay.supports[0].type==='fixed', fixR = lay.supports[n].type==='fixed';
-  S.push('§'+rwT('sys'), `${n} ${calcLang==='de'?'Felder':'spans'}: ${segs.map((s,i)=>`l<sub>${i+1}</sub> = ${nf(s.L)} m${s.k!==1?` (I/I₀ = ${nf(s.k)})`:''}`).join(' · ')}`);
+  S.push('§'+rwT('sys'), `${n} ${rwT('spans')}: ${segs.map((s,i)=>`l<sub>${i+1}</sub> = ${nf(s.L)} m${s.k!==1?` (I/I₀ = ${nf(s.k)})`:''}`).join(' · ')}`);
   S.push('§'+rwT('loads'), ...rwLoadLines(P, D));
   if(lay.hinges.length){ S.push('§'+rwT('cont1'), rwT('hinge')); return {S, ok:false}; }
   // Kragarmmomente (bekannt)
@@ -5145,7 +5149,7 @@ function rwCont(){
   if(!fixL && lay.oL) S.push(`M<sub>A</sub> = ${nf(M[0])} kNm (${rwT('known')})`);
   if(!fixR && lay.oR) S.push(`M<sub>${names[n]}</sub> = ${nf(M[n])} kNm (${rwT('known')})`);
   S.push('§'+rwT('lt'), ...SS.flatMap((s,i)=>[`${rwT('span')} ${i+1}: R<sub>${i+1}</sub> = 6/(k·l)·∫M₀·x dx = <b>${nf(s.R,3)}</b> · L<sub>${i+1}</sub> = 6/(k·l)·∫M₀·(l − x) dx = <b>${nf(s.Lt,3)}</b>`]),
-    calcLang==='de'?'(k = I/I₀; bei Gleichlast über das ganze Feld: R = L = q·l³/4)':'(k = I/I₀; full uniform load: R = L = q·l³/4)');
+    rwT('kNote'));
   const A=[], b=[], eqs=[], col=j=>unk.indexOf(j);
   const term=(j,c)=>{ if(Math.abs(c)<1e-12) return; return [j,c]; };
   const addEq=(pairs, rhs, label)=>{ const row=new Array(unk.length).fill(0); let r=rhs; const txt=[];
@@ -5154,17 +5158,17 @@ function rwCont(){
   if(fixL) addEq([[0,2*Lk[0]],[1,Lk[0]]], -SS[0].Lt, `${rwT('clapFix')} A`);
   for(let j=1;j<n;j++) addEq([[j-1,Lk[j-1]],[j,2*(Lk[j-1]+Lk[j])],[j+1,Lk[j]]], -(SS[j-1].R+SS[j].Lt), names[j]);
   if(fixR) addEq([[n-1,Lk[n-1]],[n,2*Lk[n-1]]], -SS[n-1].R, `${rwT('clapFix')} ${names[n]}`);
-  S.push('§'+rwT('clap'), 'M<sub>i−1</sub>·l\'<sub>i</sub> + 2·M<sub>i</sub>·(l\'<sub>i</sub> + l\'<sub>i+1</sub>) + M<sub>i+1</sub>·l\'<sub>i+1</sub> = −(R<sub>i</sub> + L<sub>i+1</sub>) mit l\' = l/k', ...eqs);
+  S.push('§'+rwT('clap'), 'M<sub>i−1</sub>·l\'<sub>i</sub> + 2·M<sub>i</sub>·(l\'<sub>i</sub> + l\'<sub>i+1</sub>) + M<sub>i+1</sub>·l\'<sub>i+1</sub> = −(R<sub>i</sub> + L<sub>i+1</sub>) '+rwT('with')+' l\' = l/k', ...eqs);
   const x = rwSolve(A, b); if(!x) return {S, ok:false};
   unk.forEach((j,k)=>M[j]=x[k]);
   S.push('§'+rwT('solve'), M.map((m,j)=>`M<sub>${names[j]}</sub> = <b>${nf(m)} kNm</b>`).join(' · '));
   // Auflagerkräfte
   const V=new Array(n+1).fill(0), lines=[];
   SS.forEach((s,i)=>{ const dl=(M[i+1]-M[i])/s.L, Al=s.A0+dl, Br=s.B0-dl; V[i]+=Al; V[i+1]+=Br;
-    lines.push(`${rwT('span')} ${i+1} ${calcLang==='de'?'links':'left'}: V = A<sub>0</sub> + (M<sub>r</sub> − M<sub>l</sub>)/l = ${nf(s.A0)} + (${nf(M[i+1])} − ${nfp(M[i])})/${nf(s.L)} = ${nf(Al)} kN`,
-      `${rwT('span')} ${i+1} ${calcLang==='de'?'rechts':'right'}: V = B<sub>0</sub> − (M<sub>r</sub> − M<sub>l</sub>)/l = ${nf(s.B0)} − ${nfp(dl)} = ${nf(Br)} kN`); });
-  if(lay.oL){ const t=P.filter(p=>p.x<xs[0]-1e-9).reduce((s,p)=>s+p.Fy,0)+D.reduce((s,d)=>{ const r=rwPart(d,xs[0]); return s+(r?r.R:0); },0); V[0]+=t; lines.push(`${rwT('ovh')} ${calcLang==='de'?'links':'left'}: ΣF = ${nf(t)} kN → A`); }
-  if(lay.oR){ const x0=xs[n]; const t=P.filter(p=>p.x>x0+1e-9).reduce((s,p)=>s+p.Fy,0)+D.reduce((s,d)=>{ const a=Math.max(d.a,x0); if(d.b<=a+1e-12) return s; const q=u=>d.qa+(d.qb-d.qa)*(u-d.a)/(d.b-d.a); return s+(q(a)+q(d.b))/2*(d.b-a); },0); V[n]+=t; lines.push(`${rwT('ovh')} ${calcLang==='de'?'rechts':'right'}: ΣF = ${nf(t)} kN → ${names[n]}`); }
+    lines.push(`${rwT('span')} ${i+1} ${rwT('left')}: V = A<sub>0</sub> + (M<sub>r</sub> − M<sub>l</sub>)/l = ${nf(s.A0)} + (${nf(M[i+1])} − ${nfp(M[i])})/${nf(s.L)} = ${nf(Al)} kN`,
+      `${rwT('span')} ${i+1} ${rwT('right')}: V = B<sub>0</sub> − (M<sub>r</sub> − M<sub>l</sub>)/l = ${nf(s.B0)} − ${nfp(dl)} = ${nf(Br)} kN`); });
+  if(lay.oL){ const t=P.filter(p=>p.x<xs[0]-1e-9).reduce((s,p)=>s+p.Fy,0)+D.reduce((s,d)=>{ const r=rwPart(d,xs[0]); return s+(r?r.R:0); },0); V[0]+=t; lines.push(`${rwT('ovh')} ${rwT('left')}: ΣF = ${nf(t)} kN → A`); }
+  if(lay.oR){ const x0=xs[n]; const t=P.filter(p=>p.x>x0+1e-9).reduce((s,p)=>s+p.Fy,0)+D.reduce((s,d)=>{ const a=Math.max(d.a,x0); if(d.b<=a+1e-12) return s; const q=u=>d.qa+(d.qb-d.qa)*(u-d.a)/(d.b-d.a); return s+(q(a)+q(d.b))/2*(d.b-a); },0); V[n]+=t; lines.push(`${rwT('ovh')} ${rwT('right')}: ΣF = ${nf(t)} kN → ${names[n]}`); }
   P.forEach(p=>{ const j=xs.findIndex(x=>Math.abs(x-p.x)<1e-9); if(j>=0 && p.Fy){ V[j]+=p.Fy; lines.push(`${p.lab} = ${nf(p.Fy)} kN ${rwT('at')} ${names[j]}`); } });
   S.push('§'+rwT('reac'), ...lines, V.map((v,j)=>`${names[j]} = <b>${nf(v)} kN</b>`).join(' · '));
   // Feldmomente

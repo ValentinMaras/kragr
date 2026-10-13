@@ -47,22 +47,15 @@
     .module-card:hover { background:#f3f3f5; }
     .module-card:active { background:#ececef; transform:scale(0.985); box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); }
     .module-card:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-    .module-card + .saved-link, .saved-link + .module-card { }
     .card-top { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
     .card-id { font-size:13px; font-weight:600; color:var(--text3); }
-    .card-badge { font-size:11px; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text); }
-    .badge-new { color:var(--accent); }
-    .badge-live::first-letter { color:#16a34a; }
+    .card-badge { font-size:13px; font-weight:500; color:var(--text3); }
     .card-title { font-size:clamp(32px, 9vw, 72px); font-weight:800; letter-spacing:-0.045em; line-height:1.12; margin-bottom:0; display:inline-flex; align-items:baseline; gap:14px; }
     .card-desc, .card-tags { display:none; }
     .card-desc-x { font-size:16px; line-height:1.6; color:var(--text2); max-width:620px; margin-bottom:14px; }
     .card-tags { font-size:13px; font-weight:500; color:var(--text3); line-height:1.7; }
     .tag { display:inline-block; margin-right:14px; white-space:nowrap; }
     .card-arrow { display:none; }
-    .saved-link { display:flex; justify-content:space-between; align-items:center; text-decoration:none; margin:-6px 0 24px; padding:4px 0;
-      font-size:15px; font-weight:600; color:var(--text); }
-    .saved-link .mono { font-size:13px; font-weight:500; color:var(--text3); }
-    .saved-link:hover #saved-text { text-decoration: underline; text-underline-offset: 4px; }
 
     /* Fußzeile */
     .footer { max-width:760px; margin:0 auto; padding:32px 24px 48px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
@@ -70,11 +63,11 @@
     .footer-meta { font-size:12px; color:var(--text3); }
 
     /* sanftes Einblenden */
-    .hero, .module-card, .saved-link { animation: fadeUp .45s ease both; }
-    .module-card:nth-of-type(2) { animation-delay:.06s; } .module-card:nth-of-type(3) { animation-delay:.12s; }
+    .hero, .module-card { animation: fadeUp .45s ease both; }
+    .module-card:nth-of-type(2) { animation-delay:.06s; } .module-card:nth-of-type(3) { animation-delay:.12s; } .module-card:nth-of-type(4) { animation-delay:.18s; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
     @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
-    @media (max-width:560px){ .hero{ padding:36px 20px 24px; } .modules{ padding:8px 20px 40px; } .header,.footer{ padding-left:20px; padding-right:20px; } .card-desc{ font-size:15px; } .module-card{ padding:16px 16px 20px; margin:0 -16px 12px; border-radius:14px; } .saved-link .mono{ display:none; } }
+    @media (max-width:560px){ .hero{ padding:36px 20px 24px; } .modules{ padding:8px 20px 40px; } .header,.footer{ padding-left:20px; padding-right:20px; } .card-desc{ font-size:15px; } .module-card{ padding:16px 16px 20px; margin:0 -16px 12px; border-radius:14px; } }
   </style>
 </head>
 <body>
@@ -112,7 +105,6 @@
   <a class="module-card active" href="calc.html" style="--card-accent:#1e3a8a;">
     <div class="card-top">
       <div class="card-id">statiq·calc</div>
-      <div class="card-badge badge-live" id="badge-live">● LIVE</div>
     </div>
     <div class="card-title" id="calc-title">Internal Forces</div>
     <div class="card-desc" id="calc-desc">Shear forces, bending moments, normal forces, reactions and deflections for beams and frames. Diagrams drawn on the structure, printable report.</div>
@@ -128,15 +120,11 @@
     </div>
     <div class="card-arrow">→</div>
   </a>
-  <a class="saved-link" href="calc.html#saved" id="saved-link">
-    <span id="saved-text">Saved calculations &amp; reports</span><span class="mono">statiq·calc</span>
-  </a>
 
   <!-- size -->
   <a class="module-card active" href="size.html" style="--card-accent:#2563eb;">
     <div class="card-top">
       <div class="card-id">statiq·size</div>
-      <div class="card-badge badge-new" id="badge-new">BETA</div>
     </div>
     <div class="card-title" id="size-title">Design & Sizing</div>
     <div class="card-desc" id="size-desc">Design reinforced concrete beams, slabs and columns (EC2), rolled steel sections and bolted/welded connections (EC3) and timber members (EC5) — every check step by step, printable report.</div>
@@ -156,7 +144,6 @@
   <a class="module-card active" href="ref.html" style="--card-accent:#3b6fd4;">
     <div class="card-top">
       <div class="card-id">statiq·ref</div>
-      <div class="card-badge badge-live" id="badge-live-2">● LIVE</div>
     </div>
     <div class="card-title" id="ref-title">Theory & Tables</div>
     <div class="card-desc" id="ref-desc">Formulas, tables and design checks from structural analysis to geotechnics and building physics, with calculators and examples — your digital reference handbook.</div>
@@ -173,11 +160,21 @@
   <div class="card-arrow">→</div>
   </a>
 
+  <!-- gespeicherte Berechnungen -->
+  <a class="module-card active" href="calc.html#saved" id="saved-card" style="--card-accent:#64748b;">
+    <div class="card-top">
+      <div class="card-id" id="saved-from">from calc &amp; size</div>
+      <div class="card-badge" id="saved-count"></div>
+    </div>
+    <div class="card-title" id="saved-title">Saved</div>
+    <div class="card-arrow">→</div>
+  </a>
+
 </section>
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · calc v0.8.14 · ref v0.3.19 · size v0.5.16</div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · calc v0.8.14 · ref v0.3.19 · size v0.5.17</div>
 </footer>
 
 <script>
@@ -198,7 +195,8 @@ const translations = {
     ref_title: 'Theory & Tables',
     ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics and building physics, with calculators and examples — your digital reference handbook.',
     footer: 'Valentin Maras',
-    saved: 'Saved calculations &amp; reports',
+    saved_from: 'from calc &amp; size',
+    saved: 'Saved', saved_n: '{n} entries',
     size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Building physics", "Buckling", "Torsion", "Report"],
     ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Masonry EC6", "Geotechnics", "Hydraulics", "Building physics", "Maths", "Search"],
     tags: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame', 'Trapezoidal Loads', 'Wind on Columns', 'Exact Deflection', 'PDF Report'],
@@ -216,7 +214,8 @@ const translations = {
     ref_title: 'Theorie & Tafeln',
     ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zu Grund-, Wasserbau und Bauphysik, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
     footer: 'Valentin Maras',
-    saved: 'Gespeicherte Berechnungen &amp; Berichte',
+    saved_from: 'aus calc &amp; size',
+    saved: 'Gespeichert', saved_n: '{n} Einträge',
     size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Bauphysik", "Stabilität", "Torsion", "Bericht"],
     ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Mauerwerk EC6", "Grundbau", "Wasserbau", "Bauphysik", "Mathematik", "Suche"],
     tags: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen', 'Trapezlasten', 'Wind auf Stielen', 'Exakte Durchbiegung', 'Bericht als PDF'],
@@ -234,7 +233,8 @@ const translations = {
     ref_title: 'Théorie & Tables',
     ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique et à la physique du bâtiment, avec calculateurs et exemples — votre manuel de référence numérique.',
     footer: 'Valentin Maras',
-    saved: 'Calculs &amp; rapports enregistrés',
+    saved_from: 'de calc &amp; size',
+    saved: 'Enregistré', saved_n: '{n} entrées',
     size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Physique du bâtiment", "Stabilité", "Torsion", "Note de calcul"],
     ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Maçonnerie EC6", "Géotechnique", "Hydraulique", "Physique du bâtiment", "Mathématiques", "Recherche"],
     tags: ['Poutre simple', 'Console', 'Poutre continue', 'Portique', 'Charges trapézoïdales', 'Vent sur poteaux', 'Flèche exacte', 'Rapport PDF'],
@@ -252,7 +252,8 @@ const translations = {
     ref_title: 'Teoría y Tablas',
     ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia y la física de la construcción, con calculadoras y ejemplos — tu manual de referencia digital.',
     footer: 'Valentin Maras',
-    saved: 'Cálculos e informes guardados',
+    saved_from: 'de calc y size',
+    saved: 'Guardado', saved_n: '{n} entradas',
     size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Física de la construcción", "Estabilidad", "Torsión", "Informe"],
     ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Fábrica EC6", "Geotecnia", "Hidráulica", "Física de la construcción", "Matemáticas", "Búsqueda"],
     tags: ['Viga biapoyada', 'Ménsula', 'Viga continua', 'Pórtico', 'Cargas trapezoidales', 'Viento en pilares', 'Flecha exacta', 'Informe PDF'],
@@ -282,9 +283,6 @@ function setLang(lang){
 function applyLang(lang){
   const t = translations[lang] || translations.en;
   document.getElementById('subline').innerHTML = t.subline.replace(/\n/g, '<br>');
-  document.getElementById('badge-live').textContent = t.live;
-  document.getElementById('badge-new').textContent = 'BETA';
-  document.getElementById('badge-live-2').textContent = t.live;
   document.getElementById('calc-title').textContent = t.calc_title;
   document.getElementById('calc-desc').textContent = t.calc_desc;
   document.getElementById('size-title').textContent = t.size_title;
@@ -292,17 +290,29 @@ function applyLang(lang){
   document.getElementById('ref-title').textContent = t.ref_title;
   document.getElementById('ref-desc').textContent = t.ref_desc;
   document.getElementById('footer-meta').textContent = t.footer;
-  document.getElementById('saved-text').innerHTML = t.saved;
+  document.getElementById('saved-title').textContent = t.saved;
+  document.getElementById('saved-from').innerHTML = t.saved_from;
+  savedCount(t);
   const tagHtml = arr => arr.map(x=>`<span class="tag">${x.replace(/&/g,'&amp;')}</span>`).join('');
   document.getElementById('calc-tags').innerHTML = tagHtml(t.tags);
   document.getElementById('size-tags').innerHTML = tagHtml(t.size_tags);
   document.getElementById('ref-tags').innerHTML  = tagHtml(t.ref_tags);
 }
 
+// Gespeicherte Berechnungen zählen (calc: statiq_sdf_*, size: Positionen) — nur im selben Browser
+function savedCount(t){
+  let n=0;
+  try{
+    for(let i=0;i<localStorage.length;i++){ if((localStorage.key(i)||'').startsWith('statiq_sdf_')) n++; }
+    n += (JSON.parse(localStorage.getItem('statiq-size-positionen')||'[]')||[]).length;
+  }catch(e){}
+  const el=document.getElementById('saved-count'); if(el) el.textContent = n>0 ? t.saved_n.replace('{n}', n) : '';
+}
+
 // Init
 window.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('current-flag').textContent = flags[currentLang];
-  if(currentLang !== 'en') applyLang(currentLang);
+  if(currentLang !== 'en') applyLang(currentLang); else savedCount(translations.en);
   document.querySelectorAll('.lang-option').forEach(o=>{
     o.classList.toggle('active', o.dataset.lang===currentLang);
   });

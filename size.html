@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.20 -->
+<!-- Statiq·size v0.5.21 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -334,6 +334,8 @@
         <button data-typ="durchstanzen" onclick="setTyp('durchstanzen')" data-i18n="dsBtn">Durchstanzen</button>
         <button data-typ="torsion" onclick="setTyp('torsion')" data-i18n="pa130">Torsion</button>
         <button data-typ="stoss" onclick="setTyp('stoss')" data-i18n="pa131">Stoß</button>
+        <button data-typ="brandschutz" onclick="setTyp('brandschutz')" data-i18n="pb087">Brandschutz</button>
+        <button data-typ="zugkraft" onclick="setTyp('zugkraft')" data-i18n="pb088">Zugkraftdeckung</button>
       </div>
       <div class="grid2">
         <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="in-name" value="Pos. 1 — Balken" oninput="run()"></div>
@@ -426,6 +428,39 @@
       <div class="hint" data-i18n="pa026">σ<sub>sd</sub> = f<sub>yd</sub>·A<sub>s,erf</sub>/A<sub>s,vorh</sub> — bei reichlich Bewehrung kürzer. Ein Stoß gilt als im selben Schnitt, wenn sich die Stoßmitten um weniger als 1,3·l<sub>0</sub> unterscheiden. Beton aus der Karte „Baustoffe“.</div>
     </div>
     </div>
+    <div id="beton-fb" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb012">Brandschutz: Bauteil und Bewehrung</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="pb003">Bauteil</label><select id="fb-art" onchange="run()"><option value="balken" selected data-i18n="pb001">Balken, statisch bestimmt (Tab. 5.5)</option><option value="platte" data-i18n="pb002">Platte, einachsig gespannt (Tab. 5.8)</option></select></div>
+        <div class="field"><label data-i18n="pb004">Feuerwiderstand</label><select id="fb-R" onchange="run()"><option value="30">R 30</option><option value="60" selected>R 60</option><option value="90">R 90</option><option value="120">R 120</option><option value="180">R 180</option><option value="240">R 240</option></select></div>
+        <div class="field"><label data-i18n="pb005">Ø Längsbewehrung [mm]</label><select id="fb-ds" onchange="run()"><option value="8">Ø 8</option><option value="10">Ø 10</option><option value="12">Ø 12</option><option value="14">Ø 14</option><option value="16">Ø 16</option><option value="20" selected>Ø 20</option><option value="25">Ø 25</option><option value="28">Ø 28</option></select></div>
+        <div class="field"><label data-i18n="pb006">Ø Bügel [mm] (Balken)</label><select id="fb-dsw" onchange="run()"><option value="6">Ø 6</option><option value="8" selected>Ø 8</option><option value="10">Ø 10</option><option value="12">Ø 12</option></select></div>
+        <div class="field"><label data-i18n="pb009">Bewehrungslagen (Balken)</label><select id="fb-lagen" onchange="run()"><option value="1" selected data-i18n="pb007">einlagig</option><option value="2" data-i18n="pb008">mehrlagig</option></select></div>
+        <div class="field full"><label data-i18n="pb010">Verlegemaß c<sub>v</sub> [mm] (0 = aus Expositionsklasse)</label><input type="number" step="any" id="fb-cv" value="0" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb011">Breite b und Höhe h aus der Karte „Bauteil“. Der Achsabstand a ergibt sich aus Verlegemaß, Bügel und halbem Stabdurchmesser; bei einlagiger Balkenbewehrung gilt für Eckstäbe a + 10 mm, solange b kleiner als die Breite der letzten Tabellenspalte ist.</div>
+    </div>
+    </div>
+    <div id="beton-zk" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb025">Durchlaufträger: Feld und Bewehrung</div>
+      <div class="grid2">
+        <div class="field"><label data-i18n="pb013">Stützweite l [m]</label><input type="number" step="any" id="zk-l" value="6.0" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb014">q<sub>Ed</sub> [kN/m] (Gleichstreckenlast)</label><input type="number" step="any" id="zk-q" value="40" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb015">|M<sub>A</sub>| [kNm] (Stützmoment links, 0 = Endauflager)</label><input type="number" step="any" id="zk-MA" value="0" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb016">|M<sub>B</sub>| [kNm] (Stützmoment rechts)</label><input type="number" step="any" id="zk-MB" value="150" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb017">cot θ (wie Querkraftbemessung)</label><input type="number" step="any" id="zk-cot" value="1.2" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb018">Ø Bügel [mm]</label><select id="zk-dsw" onchange="run()"><option value="6">Ø 6</option><option value="8" selected>Ø 8</option><option value="10">Ø 10</option><option value="12">Ø 12</option></select></div>
+        <div class="field"><label data-i18n="pb019">Ø Feldbewehrung unten [mm]</label><select id="zk-ds" onchange="run()"><option value="10">Ø 10</option><option value="12">Ø 12</option><option value="14">Ø 14</option><option value="16" selected>Ø 16</option><option value="20">Ø 20</option><option value="25">Ø 25</option><option value="28">Ø 28</option></select></div>
+        <div class="field"><label data-i18n="pb020">Stäbe unten durchlaufend</label><input type="number" step="1" id="zk-nd" value="2" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb021">Stäbe unten gestaffelt</label><input type="number" step="1" id="zk-ng" value="2" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb022">Ø Stützbewehrung oben [mm]</label><select id="zk-dso" onchange="run()"><option value="10">Ø 10</option><option value="12">Ø 12</option><option value="14">Ø 14</option><option value="16" selected>Ø 16</option><option value="20">Ø 20</option><option value="25">Ø 25</option><option value="28">Ø 28</option></select></div>
+        <div class="field"><label data-i18n="pb023">Stäbe oben über den Stützen</label><input type="number" step="1" id="zk-no" value="4" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb024">Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit statiq·calc (Durchlaufträger). b, h und Beton aus den Karten oben.</div>
+    </div>
+    </div>
     <div id="beton-stuetze" style="display:none">
     <div class="card">
       <div class="card-title" data-i18n="z027">Stütze: System und Schnittgrößen</div>
@@ -516,6 +551,8 @@
         <button data-st="anschluss" onclick="setStMode('anschluss')" data-i18n="z077">Anschluss</button>
         <button data-st="fuss" onclick="setStMode('fuss')" data-i18n="fpBtn">Stützenfuß</button>
         <button data-st="schweiss" onclick="setStMode('schweiss')" data-i18n="swBtn">Schweißnaht</button>
+        <button data-st="zugstab" onclick="setStMode('zugstab')" data-i18n="pb089">Zugstab</button>
+        <button data-st="stumpf" onclick="setStMode('stumpf')" data-i18n="pb090">Stumpfnaht</button>
       </div>
       <div id="st-traeger">
     <div class="card">
@@ -603,6 +640,42 @@
       <div class="hint" data-i18n="fpHint">Gelenkiger Stützenfuß: Die Druckkraft geht über Kontakt in die Platte, die Kehlnähte übertragen die Querkraft. Mörtelfuge ≤ 0,2·min(B<sub>p</sub>; L<sub>p</sub>) und f<sub>ck,Mörtel</sub> ≥ 0,2·f<sub>ck</sub> → β<sub>j</sub> = 2/3.</div>
     </div>
       </div>
+    <div id="st-zugstab" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb037">Zugstab mit Schraubenanschluss</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="zb-name" value="Zugband Z1 — Flachstahl" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb026">Stahlgüte</label><select id="zb-st" onchange="run()"><option value="S235" selected>S235</option><option value="S275">S275</option><option value="S355">S355</option><option value="S460">S460</option></select></div>
+        <div class="field"><label data-i18n="pb027">Breite b [mm]</label><input type="number" step="any" id="zb-b" value="160" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb028">Dicke t [mm]</label><input type="number" step="any" id="zb-t" value="12" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb029">Lochdurchmesser d<sub>0</sub> [mm]</label><input type="number" step="any" id="zb-d0" value="22" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb030">Reihen in Kraftrichtung n<sub>1</sub></label><input type="number" step="1" id="zb-n1" value="3" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb031">Schrauben je Reihe quer n<sub>2</sub></label><input type="number" step="1" id="zb-n2" value="2" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb032">Randabstand e<sub>1</sub> [mm] (in Kraftrichtung)</label><input type="number" step="any" id="zb-e1" value="50" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb033">Lochabstand p<sub>1</sub> [mm] (in Kraftrichtung)</label><input type="number" step="any" id="zb-p1" value="70" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb034">Lochabstand p<sub>2</sub> [mm] (quer)</label><input type="number" step="any" id="zb-p2" value="80" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb035">N<sub>Ed</sub> [kN] (Zug)</label><input type="number" step="any" id="zb-N" value="330" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb036">Der Randabstand quer ergibt sich aus der Breite: e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2. Die Schrauben selbst (Abscheren, Lochleibung) im Modus Anschluss nachweisen.</div>
+    </div>
+    </div>
+    <div id="st-stumpf" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb048">Stumpfnaht (Blechstoß)</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="bw-name" value="Blechstoß B1 — Stumpfnaht" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb026">Stahlgüte</label><select id="bw-st" onchange="run()"><option value="S235" selected>S235</option><option value="S275">S275</option><option value="S355">S355</option><option value="S460">S460</option></select></div>
+        <div class="field"><label data-i18n="pb040">Nahtart</label><select id="bw-art" onchange="run()"><option value="voll" selected data-i18n="pb038">durchgeschweißt</option><option value="teil" data-i18n="pb039">nicht durchgeschweißt</option></select></div>
+        <div class="field"><label data-i18n="pb041">Nahtdicke a [mm] (nur nicht durchgeschweißt)</label><input type="number" step="any" id="bw-a" value="8" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb042">Blechdicke t [mm]</label><input type="number" step="any" id="bw-t" value="15" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb043">Nahtlänge l [mm] (= Blechbreite)</label><input type="number" step="any" id="bw-l" value="200" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb044">N [kN] (rechtwinklig zur Naht)</label><input type="number" step="any" id="bw-N" value="500" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb045">V [kN] (längs der Naht)</label><input type="number" step="any" id="bw-V" value="100" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb046">M [kNm] (Biegung in Blechebene)</label><input type="number" step="any" id="bw-M" value="5" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb047">Durchgeschweißte Stumpfnähte tragen so viel wie das schwächere der verbundenen Bleche — nachgewiesen wird deshalb der Blechquerschnitt in der Naht.</div>
+    </div>
+    </div>
       <div id="st-schweiss" style="display:none">
     <div class="card">
       <div class="card-title"><span data-i18n="swT1">Schweißverbindung</span></div>
@@ -914,8 +987,9 @@
       <button data-mw="teil" onclick="setMwMode('teil')" data-i18n="mwTeil">Teilfläche</button>
       <button data-mw="keller" onclick="setMwMode('keller')" data-i18n="mwKeller">Kellerwand</button>
       <button data-mw="schub" onclick="setMwMode('schub')" data-i18n="mwSchub">Schubwand</button>
+      <button data-mw="ausfach" onclick="setMwMode('ausfach')" data-i18n="pb094">Ausfachung</button>
     </div>
-    <div class="card">
+    <div class="card" id="mw-mat-card">
       <div class="card-title"><span data-i18n="mwBaustoffT">Mauerwerk</span></div>
       <div class="grid2">
         <div class="field full"><label><span data-i18n="mwArt">Steinart</span></label><select id="mw-art" onchange="run()">
@@ -981,6 +1055,20 @@
         <div class="field"><label>n<sub><span data-i18n="z489">Ed,min</span></sub> [kN/m] <span data-i18n="mkNmin">(1,0·G, oben in der Wand)</span></label><input type="number" step="any" id="mk-Nmin" value="85" oninput="run()"></div>
       </div>
       <div class="hint" data-i18n="mkHint">Vereinfachter Nachweis nach DIN EN 1996-3, 4.5: Die Auflast muss groß genug sein, damit sich in der Wand ein Druckbogen gegen den Erddruck bilden kann — aber nicht so groß, dass das Mauerwerk versagt.</div>
+    </div>
+    </div>
+    <div id="mw-ausfach" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb086">Ausfachungswand (nichttragend)</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="af-name" value="Ausfachung Achse 3 — Erdgeschoss" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb075">Wanddicke</label><select id="af-t" onchange="run()"><option value="115">115 mm</option><option value="175" selected>175 mm</option><option value="240">240 mm</option><option value="300">≥ 300 mm</option></select></div>
+        <div class="field"><label data-i18n="pb078">Halterung</label><select id="af-halt" onchange="run()"><option value="4" selected data-i18n="pb076">vierseitig</option><option value="3" data-i18n="pb077">dreiseitig (ein senkrechter Rand frei)</option></select></div>
+        <div class="field"><label data-i18n="pb079">Höhe der Ausfachung h [m]</label><input type="number" step="any" id="af-h" value="2.75" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb080">Länge der Ausfachung l [m]</label><input type="number" step="any" id="af-l" value="5.0" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb084">Höhe über Gelände</label><select id="af-z" onchange="run()"><option value="8" selected data-i18n="pb081">bis 8 m</option><option value="20" data-i18n="pb082">8 … 20 m</option><option value="100" data-i18n="pb083">20 … 100 m</option></select></div>
+      </div>
+      <div class="hint" data-i18n="pb085">Für Wände, die nur Wind auf ihre eigene Fläche abtragen und am Rand gehalten sind. Die Steinart der Karte „Mauerwerk“ spielt hier keine Rolle.</div>
     </div>
     </div>
     <div id="mw-schub" style="display:none">
@@ -1251,6 +1339,9 @@
       <button data-ho="versatz" onclick="setHoMode('versatz')" data-i18n="z380">Versatz</button>
       <button data-ho="brand" onclick="setHoMode('brand')" data-i18n="pa132">Abbrand</button>
       <button data-ho="schwingung" onclick="setHoMode('schwingung')" data-i18n="pa133">Schwingung</button>
+      <button data-ho="querzug" onclick="setHoMode('querzug')" data-i18n="pb091">Querzug</button>
+      <button data-ho="durchbruch" onclick="setHoMode('durchbruch')" data-i18n="pb092">Durchbruch</button>
+      <button data-ho="doppel" onclick="setHoMode('doppel')" data-i18n="pb093">Doppelbiegung</button>
     </div>
     <div id="ho-verb" style="display:none">
     <div class="card">
@@ -1394,6 +1485,54 @@
         <div class="field full"><label data-i18n="pa051">Anforderung (Deckenklasse)</label><select id="sv-kl" onchange="run()"><option value="1" selected data-i18n="pa049">Klasse I — zwischen Nutzungseinheiten (Wohnungstrenndecke)</option><option value="2" data-i18n="pa050">Klasse II — innerhalb einer Nutzungseinheit</option></select></div>
       </div>
       <div class="hint" data-i18n="pa052">Einfeldträger, gelenkig gelagert. Klasse I: f<sub>1</sub> ≥ 8 Hz und w(1 kN) ≤ 0,5 mm; Klasse II: f<sub>1</sub> ≥ 6 Hz und w(1 kN) ≤ 1,0 mm. E-Modul Zementestrich als Anhaltswert; ohne Estrich wirkt nur ein Balken.</div>
+    </div>
+    </div>
+    <div id="ho-qz" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb056">Queranschluss (Last quer zur Faser)</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="qz-name" value="Nebenträger am Hauptträger HT 1" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb049">Trägerbreite b [mm]</label><input type="number" step="any" id="qz-b" value="120" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb050">Trägerhöhe h [mm]</label><input type="number" step="any" id="qz-h" value="400" oninput="run()"></div>
+        <div class="field full"><label data-i18n="pb051">Abstand a [mm] (beanspruchter Rand bis fernstes Verbindungsmittel)</label><input type="number" step="any" id="qz-a" value="200" oninput="run()"></div>
+        <div class="field full"><label data-i18n="pb052">Anschlussbreite a<sub>r</sub> [mm] (äußere Verbindungsmittel in Faserrichtung)</label><input type="number" step="any" id="qz-ar" value="100" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb053">wirksame Anschlusstiefe t<sub>ef</sub> [mm]</label><input type="number" step="any" id="qz-tef" value="120" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb054">F<sub>90,Ed</sub> [kN] (Kraft quer zur Faser)</label><input type="number" step="any" id="qz-F" value="12" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb055">Holz und Nutzung aus der Karte oben. t<sub>ef</sub>: Einbindetiefe der Verbindungsmittel, höchstens die Trägerbreite (bei beidseitigem Anschluss zusammen); Anhaltswert nach NA.</div>
+    </div>
+    </div>
+    <div id="ho-db" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb067">Durchbruch im Träger</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="db-name" value="BSH-Träger mit Leitungsdurchbruch" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb059">Form</label><select id="db-form" onchange="run()"><option value="k" selected data-i18n="pb057">rund</option><option value="r" data-i18n="pb058">rechteckig</option></select></div>
+        <div class="field"><label data-i18n="pb049">Trägerbreite b [mm]</label><input type="number" step="any" id="db-b" value="140" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb050">Trägerhöhe h [mm]</label><input type="number" step="any" id="db-h" value="500" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb060">Höhe bzw. Durchmesser h<sub>d</sub> [mm]</label><input type="number" step="any" id="db-hd" value="150" oninput="run()"></div>
+        <div class="field db-a"><label data-i18n="pb061">Länge a [mm] (rechteckig)</label><input type="number" step="any" id="db-a" value="300" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb062">Restquerschnitt oben h<sub>ro</sub> [mm]</label><input type="number" step="any" id="db-hro" value="175" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb063">Abstand zum Auflager l<sub>v</sub> [mm]</label><input type="number" step="any" id="db-lv" value="600" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb064">V<sub>d</sub> [kN] (am Durchbruchrand)</label><input type="number" step="any" id="db-V" value="20" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb065">M<sub>d</sub> [kNm] (am Durchbruchrand)</label><input type="number" step="any" id="db-M" value="25" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb066">Unverstärkte Durchbrüche in Brettschichtholz; Schnittgrößen am Rand des Durchbruchs, der näher am Auflager liegt.</div>
+    </div>
+    </div>
+    <div id="ho-dp" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="pb074">Pfette (senkrecht zur Dachfläche)</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="dp-name" value="Mittelpfette — Doppelbiegung" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb027">Breite b [mm]</label><input type="number" step="any" id="dp-b" value="120" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb068">Höhe h [mm]</label><input type="number" step="any" id="dp-h" value="240" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb069">Stützweite l [m] (Einfeldträger)</label><input type="number" step="any" id="dp-L" value="4.5" oninput="run()"></div>
+        <div class="field"><label data-i18n="pb070">Dachneigung α [°]</label><input type="number" step="any" id="dp-al" value="30" oninput="run()"></div>
+        <div class="field full"><label data-i18n="pb071">q<sub>v</sub> [kN/m] lotrecht (g, s — Bemessungswert)</label><input type="number" step="any" id="dp-qv" value="3.0" oninput="run()"></div>
+        <div class="field full"><label data-i18n="pb072">q<sub>n</sub> [kN/m] rechtwinklig zur Dachfläche (Wind)</label><input type="number" step="any" id="dp-qn" value="0.5" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="pb073">Die Pfette ist um die Dachneigung gekippt eingebaut. Holz und Nutzung (KLED der kürzesten Last) aus der Karte oben.</div>
     </div>
     </div>
     <div id="ho-bauteil">
@@ -2316,7 +2455,101 @@ const I18N = {
   "pa137": "Druckstoß",
   "pa138": "Pumpe",
   "pa139": "Teilfüllung",
-  "pa140": "Gebäudeklasse"
+  "pa140": "Gebäudeklasse",
+  "pb001": "Balken, statisch bestimmt (Tab. 5.5)",
+  "pb002": "Platte, einachsig gespannt (Tab. 5.8)",
+  "pb003": "Bauteil",
+  "pb004": "Feuerwiderstand",
+  "pb005": "Ø Längsbewehrung [mm]",
+  "pb006": "Ø Bügel [mm] (Balken)",
+  "pb007": "einlagig",
+  "pb008": "mehrlagig",
+  "pb009": "Bewehrungslagen (Balken)",
+  "pb010": "Verlegemaß c<sub>v</sub> [mm] (0 = aus Expositionsklasse)",
+  "pb011": "Breite b und Höhe h aus der Karte „Bauteil“. Der Achsabstand a ergibt sich aus Verlegemaß, Bügel und halbem Stabdurchmesser; bei einlagiger Balkenbewehrung gilt für Eckstäbe a + 10 mm, solange b kleiner als die Breite der letzten Tabellenspalte ist.",
+  "pb012": "Brandschutz: Bauteil und Bewehrung",
+  "pb013": "Stützweite l [m]",
+  "pb014": "q<sub>Ed</sub> [kN/m] (Gleichstreckenlast)",
+  "pb015": "|M<sub>A</sub>| [kNm] (Stützmoment links, 0 = Endauflager)",
+  "pb016": "|M<sub>B</sub>| [kNm] (Stützmoment rechts)",
+  "pb017": "cot θ (wie Querkraftbemessung)",
+  "pb018": "Ø Bügel [mm]",
+  "pb019": "Ø Feldbewehrung unten [mm]",
+  "pb020": "Stäbe unten durchlaufend",
+  "pb021": "Stäbe unten gestaffelt",
+  "pb022": "Ø Stützbewehrung oben [mm]",
+  "pb023": "Stäbe oben über den Stützen",
+  "pb024": "Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit statiq·calc (Durchlaufträger). b, h und Beton aus den Karten oben.",
+  "pb025": "Durchlaufträger: Feld und Bewehrung",
+  "pb026": "Stahlgüte",
+  "pb027": "Breite b [mm]",
+  "pb028": "Dicke t [mm]",
+  "pb029": "Lochdurchmesser d<sub>0</sub> [mm]",
+  "pb030": "Reihen in Kraftrichtung n<sub>1</sub>",
+  "pb031": "Schrauben je Reihe quer n<sub>2</sub>",
+  "pb032": "Randabstand e<sub>1</sub> [mm] (in Kraftrichtung)",
+  "pb033": "Lochabstand p<sub>1</sub> [mm] (in Kraftrichtung)",
+  "pb034": "Lochabstand p<sub>2</sub> [mm] (quer)",
+  "pb035": "N<sub>Ed</sub> [kN] (Zug)",
+  "pb036": "Der Randabstand quer ergibt sich aus der Breite: e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2. Die Schrauben selbst (Abscheren, Lochleibung) im Modus Anschluss nachweisen.",
+  "pb037": "Zugstab mit Schraubenanschluss",
+  "pb038": "durchgeschweißt",
+  "pb039": "nicht durchgeschweißt",
+  "pb040": "Nahtart",
+  "pb041": "Nahtdicke a [mm] (nur nicht durchgeschweißt)",
+  "pb042": "Blechdicke t [mm]",
+  "pb043": "Nahtlänge l [mm] (= Blechbreite)",
+  "pb044": "N [kN] (rechtwinklig zur Naht)",
+  "pb045": "V [kN] (längs der Naht)",
+  "pb046": "M [kNm] (Biegung in Blechebene)",
+  "pb047": "Durchgeschweißte Stumpfnähte tragen so viel wie das schwächere der verbundenen Bleche — nachgewiesen wird deshalb der Blechquerschnitt in der Naht.",
+  "pb048": "Stumpfnaht (Blechstoß)",
+  "pb049": "Trägerbreite b [mm]",
+  "pb050": "Trägerhöhe h [mm]",
+  "pb051": "Abstand a [mm] (beanspruchter Rand bis fernstes Verbindungsmittel)",
+  "pb052": "Anschlussbreite a<sub>r</sub> [mm] (äußere Verbindungsmittel in Faserrichtung)",
+  "pb053": "wirksame Anschlusstiefe t<sub>ef</sub> [mm]",
+  "pb054": "F<sub>90,Ed</sub> [kN] (Kraft quer zur Faser)",
+  "pb055": "Holz und Nutzung aus der Karte oben. t<sub>ef</sub>: Einbindetiefe der Verbindungsmittel, höchstens die Trägerbreite (bei beidseitigem Anschluss zusammen); Anhaltswert nach NA.",
+  "pb056": "Queranschluss (Last quer zur Faser)",
+  "pb057": "rund",
+  "pb058": "rechteckig",
+  "pb059": "Form",
+  "pb060": "Höhe bzw. Durchmesser h<sub>d</sub> [mm]",
+  "pb061": "Länge a [mm] (rechteckig)",
+  "pb062": "Restquerschnitt oben h<sub>ro</sub> [mm]",
+  "pb063": "Abstand zum Auflager l<sub>v</sub> [mm]",
+  "pb064": "V<sub>d</sub> [kN] (am Durchbruchrand)",
+  "pb065": "M<sub>d</sub> [kNm] (am Durchbruchrand)",
+  "pb066": "Unverstärkte Durchbrüche in Brettschichtholz; Schnittgrößen am Rand des Durchbruchs, der näher am Auflager liegt.",
+  "pb067": "Durchbruch im Träger",
+  "pb068": "Höhe h [mm]",
+  "pb069": "Stützweite l [m] (Einfeldträger)",
+  "pb070": "Dachneigung α [°]",
+  "pb071": "q<sub>v</sub> [kN/m] lotrecht (g, s — Bemessungswert)",
+  "pb072": "q<sub>n</sub> [kN/m] rechtwinklig zur Dachfläche (Wind)",
+  "pb073": "Die Pfette ist um die Dachneigung gekippt eingebaut. Holz und Nutzung (KLED der kürzesten Last) aus der Karte oben.",
+  "pb074": "Pfette (senkrecht zur Dachfläche)",
+  "pb075": "Wanddicke",
+  "pb076": "vierseitig",
+  "pb077": "dreiseitig (ein senkrechter Rand frei)",
+  "pb078": "Halterung",
+  "pb079": "Höhe der Ausfachung h [m]",
+  "pb080": "Länge der Ausfachung l [m]",
+  "pb081": "bis 8 m",
+  "pb082": "8 … 20 m",
+  "pb083": "20 … 100 m",
+  "pb084": "Höhe über Gelände",
+  "pb085": "Für Wände, die nur Wind auf ihre eigene Fläche abtragen und am Rand gehalten sind. Die Steinart der Karte „Mauerwerk“ spielt hier keine Rolle.",
+  "pb086": "Ausfachungswand (nichttragend)",
+  "pb087": "Brandschutz",
+  "pb088": "Zugkraftdeckung",
+  "pb089": "Zugstab",
+  "pb090": "Stumpfnaht",
+  "pb091": "Querzug",
+  "pb092": "Durchbruch",
+  "pb093": "Doppelbiegung",
+  "pb094": "Ausfachung"
  },
  "en": {
   "z001": "Enter internal forces by hand, e.g. from <a href=\"calc.html\">statiq·calc</a>.",
@@ -3155,7 +3388,101 @@ const I18N = {
   "pa137": "Water hammer",
   "pa138": "Pump",
   "pa139": "Partly full pipe",
-  "pa140": "Building class"
+  "pa140": "Building class",
+  "pb001": "Beam, simply supported (Tab. 5.5)",
+  "pb002": "Slab, spanning one way (Tab. 5.8)",
+  "pb003": "Member",
+  "pb004": "Fire resistance",
+  "pb005": "Ø longitudinal bars [mm]",
+  "pb006": "Ø stirrups [mm] (beam)",
+  "pb007": "one layer",
+  "pb008": "several layers",
+  "pb009": "Reinforcement layers (beam)",
+  "pb010": "Cover to stirrup c<sub>v</sub> [mm] (0 = from exposure class)",
+  "pb011": "Width b and depth h from the “Member” card. The axis distance a follows from cover, stirrup and half the bar diameter; with one layer in beams, corner bars need a + 10 mm while b is smaller than the width in the last table column.",
+  "pb012": "Fire design: member and reinforcement",
+  "pb013": "Span l [m]",
+  "pb014": "q<sub>Ed</sub> [kN/m] (uniform load)",
+  "pb015": "|M<sub>A</sub>| [kNm] (left support moment, 0 = end support)",
+  "pb016": "|M<sub>B</sub>| [kNm] (right support moment)",
+  "pb017": "cot θ (as in shear design)",
+  "pb018": "Ø stirrups [mm]",
+  "pb019": "Ø span bars bottom [mm]",
+  "pb020": "Bottom bars running through",
+  "pb021": "Bottom bars curtailed",
+  "pb022": "Ø support bars top [mm]",
+  "pb023": "Top bars over the supports",
+  "pb024": "Support moments from the structural analysis, e.g. with statiq·calc (continuous beam). b, h and concrete from the cards above.",
+  "pb025": "Continuous beam: span and reinforcement",
+  "pb026": "Steel grade",
+  "pb027": "Width b [mm]",
+  "pb028": "Thickness t [mm]",
+  "pb029": "Hole diameter d<sub>0</sub> [mm]",
+  "pb030": "Rows in load direction n<sub>1</sub>",
+  "pb031": "Bolts per row across n<sub>2</sub>",
+  "pb032": "End distance e<sub>1</sub> [mm] (in load direction)",
+  "pb033": "Spacing p<sub>1</sub> [mm] (in load direction)",
+  "pb034": "Spacing p<sub>2</sub> [mm] (across)",
+  "pb035": "N<sub>Ed</sub> [kN] (tension)",
+  "pb036": "The edge distance across follows from the width: e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2. Check the bolts themselves (shear, bearing) in the Connection mode.",
+  "pb037": "Tension member with bolted connection",
+  "pb038": "full penetration",
+  "pb039": "partial penetration",
+  "pb040": "Weld type",
+  "pb041": "Throat a [mm] (partial penetration only)",
+  "pb042": "Plate thickness t [mm]",
+  "pb043": "Weld length l [mm] (= plate width)",
+  "pb044": "N [kN] (perpendicular to the weld)",
+  "pb045": "V [kN] (along the weld)",
+  "pb046": "M [kNm] (in-plane bending)",
+  "pb047": "Full penetration butt welds carry as much as the weaker of the joined plates — so the plate cross-section in the weld is checked.",
+  "pb048": "Butt weld (plate splice)",
+  "pb049": "Beam width b [mm]",
+  "pb050": "Beam depth h [mm]",
+  "pb051": "Distance a [mm] (loaded edge to the most distant fastener)",
+  "pb052": "Connection width a<sub>r</sub> [mm] (outer fasteners along the grain)",
+  "pb053": "Effective connection depth t<sub>ef</sub> [mm]",
+  "pb054": "F<sub>90,Ed</sub> [kN] (force perpendicular to the grain)",
+  "pb055": "Timber and service conditions from the card above. t<sub>ef</sub>: embedment depth of the fasteners, at most the beam width (both sides together for two-sided connections); guide value per NA.",
+  "pb056": "Connection loaded perpendicular to the grain",
+  "pb057": "circular",
+  "pb058": "rectangular",
+  "pb059": "Shape",
+  "pb060": "Height or diameter h<sub>d</sub> [mm]",
+  "pb061": "Length a [mm] (rectangular)",
+  "pb062": "Remaining depth above h<sub>ro</sub> [mm]",
+  "pb063": "Distance to the support l<sub>v</sub> [mm]",
+  "pb064": "V<sub>d</sub> [kN] (at the hole edge)",
+  "pb065": "M<sub>d</sub> [kNm] (at the hole edge)",
+  "pb066": "Unreinforced holes in glulam; internal forces at the edge of the hole nearer to the support.",
+  "pb067": "Hole in the beam",
+  "pb068": "Depth h [mm]",
+  "pb069": "Span l [m] (single span)",
+  "pb070": "Roof pitch α [°]",
+  "pb071": "q<sub>v</sub> [kN/m] vertical (g, s — design value)",
+  "pb072": "q<sub>n</sub> [kN/m] perpendicular to the roof (wind)",
+  "pb073": "The purlin is installed tilted by the roof pitch. Timber and service conditions (load duration of the shortest load) from the card above.",
+  "pb074": "Purlin (perpendicular to the roof)",
+  "pb075": "Wall thickness",
+  "pb076": "four sides",
+  "pb077": "three sides (one vertical edge free)",
+  "pb078": "Support",
+  "pb079": "Height of the panel h [m]",
+  "pb080": "Length of the panel l [m]",
+  "pb081": "up to 8 m",
+  "pb082": "8 … 20 m",
+  "pb083": "20 … 100 m",
+  "pb084": "Height above ground",
+  "pb085": "For walls that only carry wind on their own area and are restrained at their edges. The masonry unit of the “Masonry” card does not matter here.",
+  "pb086": "Infill wall (non-load-bearing)",
+  "pb087": "Fire",
+  "pb088": "Curtailment",
+  "pb089": "Tension member",
+  "pb090": "Butt weld",
+  "pb091": "Transverse tension",
+  "pb092": "Hole",
+  "pb093": "Biaxial bending",
+  "pb094": "Infill wall"
  },
  "fr": {
   "langNotice": "<b>statiq·size</b> n’est pour l’instant disponible qu’en allemand — la traduction suivra. Les vérifications suivent l’Annexe nationale allemande (DIN EN … /NA)."
@@ -5269,7 +5596,278 @@ const TTX = { en: {
 "Sickerweg L > t": "seepage path L > t",
 "Steifigkeitskriterium (Durchbiegung unter 1 kN)": "Stiffness criterion (deflection under 1 kN)",
 "Zeitfaktor": "Time factor",
-"Zubringerleitung DN 300": "Feeder main DN 300"
+"Zubringerleitung DN 300": "Feeder main DN 300",
+"(Durchbruch mittig)": "(hole on the axis)",
+"(eine Verbindungsmittelreihe parallel zur Faser)": "(one row of fasteners parallel to the grain)",
+"(in der Dachebene, schwache Achse)": "(in the roof plane, weak axis)",
+"(rechtwinklig zur Dachfläche, starke Achse)": "(perpendicular to the roof, strong axis)",
+"0 < a < h": "0 < a < h",
+"0 < a < t": "0 < a < t",
+"0 < h_d < h": "0 < h_d < h",
+"0 < t_ef ≤ b": "0 < t_ef ≤ b",
+"0 ≤ α < 80°": "0 ≤ α < 80°",
+"Abstand zum Auflager l_v ≥ h": "distance to the support l_v ≥ h",
+"Achsabstand der Bewehrung": "Axis distance of the reinforcement",
+"Achsabstand der Längsbewehrung zur beflammten Oberfläche": "Axis distance of the longitudinal bars to the exposed surface",
+"Anschluss höher setzen (größeres a), breiter auseinanderziehen (a<sub>r</sub>), größere wirksame Tiefe, Querzugverstärkung (Vollgewindeschrauben) oder einen höheren Träger.": "Place the connection higher (larger a), spread it wider (a<sub>r</sub>), larger effective depth, reinforcement against transverse tension (fully threaded screws) or a deeper beam.",
+"Ansicht des Trägers": "Elevation of the beam",
+"Ansicht des Trägers mit Queranschluss": "Elevation of the beam with the transverse connection",
+"Ansicht und Nahtquerschnitt": "Elevation and weld section",
+"Ausfachung Achse 3 — Erdgeschoss": "Infill panel grid 3 — ground floor",
+"Ausfachungswand": "Infill wall",
+"Außerhalb der Grenzen nur mit Verstärkung (eingeklebte Gewindestangen, Vollgewindeschrauben, aufgeklebte Platten).": "Outside these limits only with reinforcement (glued-in rods, fully threaded screws, glued-on panels).",
+"BSH-Träger mit Leitungsdurchbruch": "Glulam beam with service hole",
+"Balken verbreitern oder eine Brandschutzbekleidung vorsehen.": "Widen the beam or provide fire protection cladding.",
+"Balken, statisch bestimmt": "Beam, simply supported",
+"Balkenquerschnitt": "Beam cross-section",
+"Baustoff und Querschnittsflächen": "Material and cross-sectional areas",
+"Bei Zug quer zur Walzrichtung Doppelungen ausschließen (Terrassenbruch, Z-Güte).": "For tension perpendicular to the rolling direction exclude laminations (lamellar tearing, Z quality).",
+"Beiwerte für die Anschlussbreite und die Anzahl der Reihen": "Factors for the connection width and the number of rows",
+"Bemessungswert der Querzugtragfähigkeit": "Design value of the splitting capacity",
+"Bewehrung bis zu den Auflagern (9.2.1.4 und 9.2.1.5)": "Reinforcement to the supports (9.2.1.4 and 9.2.1.5)",
+"Biegung im geschwächten Querschnitt": "Bending in the weakened section",
+"Blau: geschwächter Querschnitt durch die erste Lochreihe. Orange gestrichelt: Block, der beim Blockversagen ausreißt.": "Blue: section weakened by the first row of holes. Orange dashed: block that tears out in block tearing.",
+"Blechstoß B1 — Stumpfnaht": "Plate splice B1 — butt weld",
+"Block innen (zwischen den äußeren Lochreihen)": "Inner block (between the outer rows of holes)",
+"Blockversagen (Blockscheren)": "Block tearing",
+"Brandschutz (Stahlbeton)": "Fire design (reinforced concrete)",
+"Brandschutz nach Tabellen": "Fire design by tables",
+"Brandschutz: Achsabstand": "Fire design: axis distance",
+"Bruch im Lochquerschnitt": "fracture in the net section",
+"Bruttoquerschnitt, Nettoquerschnitt und Blockversagen am geschraubten Zugstab nach DIN EN 1993-1-1 und 1-8 mit deutschem NA, dazu Rand- und Lochabstände.": "Gross section, net section and block tearing of a bolted tension member to DIN EN 1993-1-1 and 1-8 with the German NA, plus end and edge distances.",
+"DIN EN 1992-1-1 mit NA, 9.2.1.3 bis 9.2.1.5": "DIN EN 1992-1-1 with NA, 9.2.1.3 to 9.2.1.5",
+"DIN EN 1992-1-2 mit NA, 5.6 und 5.7": "DIN EN 1992-1-2 with NA, 5.6 and 5.7",
+"DIN EN 1993-1-1, 6.2.3 und DIN EN 1993-1-8, 3.10.2 mit NA": "DIN EN 1993-1-1, 6.2.3 and DIN EN 1993-1-8, 3.10.2 with NA",
+"DIN EN 1993-1-8 mit NA, 4.7": "DIN EN 1993-1-8 with NA, 4.7",
+"DIN EN 1995-1-1 mit NA, 6.1.6 und 6.1.7": "DIN EN 1995-1-1 with NA, 6.1.6 and 6.1.7",
+"DIN EN 1995-1-1 mit NA, 8.1.4 (NCI)": "DIN EN 1995-1-1 with NA, 8.1.4 (NCI)",
+"DIN EN 1995-1-1 mit NA, NCI NA.6.7": "DIN EN 1995-1-1 with NA, NCI NA.6.7",
+"DIN EN 1996-3/NA, Anhang NA.C bzw. DIN 1053-1, Tab. 9 (Anhaltswerte)": "DIN EN 1996-3/NA, annex NA.C or DIN 1053-1, Tab. 9 (guide values)",
+"Dachfläche": "Roof surface",
+"Der Achsabstand a schützt die Bewehrung: je dicker die Betonschicht, desto länger bleibt der Stahl unter der kritischen Temperatur.": "The axis distance a protects the reinforcement: the thicker the concrete layer, the longer the steel stays below the critical temperature.",
+"Der Balken ist für die geforderte Feuerwiderstandsdauer zu schmal — er heizt sich von den Seiten zu schnell durch.": "The beam is too narrow for the required fire resistance — it heats through from the sides too quickly.",
+"Der Durchbruch liegt außerhalb der Grenzen für unverstärkte Durchbrüche.": "The hole lies outside the limits for unreinforced holes.",
+"Der Queranschluss sitzt zu nah am beanspruchten Rand — das Holz spaltet unter der Querzugkraft.": "The connection sits too close to the loaded edge — the timber splits under the transverse tension.",
+"Der Restquerschnitt neben dem Durchbruch ist für die Querkraft zu klein.": "The remaining section next to the hole is too small for the shear force.",
+"Der geschwächte Querschnitt ist für das Biegemoment zu klein.": "The weakened section is too small for the bending moment.",
+"Dickere Platte oder ein nichtbrennbarer Estrich (zählt zur Dicke h<sub>s</sub>).": "Thicker slab or a non-combustible screed (counts towards the thickness h<sub>s</sub>).",
+"Dickere Wand, zusätzliche Halterung (Stütze oder Riegel teilt die Fläche) oder ein rechnerischer Nachweis für Wind.": "Thicker wall, an additional support (a column or rail divides the area) or a calculated wind check.",
+"Dickeres oder breiteres Blech bzw. höhere Stahlgüte — die Naht trägt nie mehr als das Blech.": "Thicker or wider plate or a higher steel grade — the weld never carries more than the plate.",
+"Dickeres oder breiteres Blech, weniger Schrauben in einer Lochreihe oder kleinere Löcher; eine höhere Stahlgüte hebt f<sub>u</sub>.": "Thicker or wider plate, fewer bolts in one row or smaller holes; a higher steel grade raises f<sub>u</sub>.",
+"Die Ausfachungsfläche ist für diese Wanddicke, Halterung und Höhe über Gelände zu groß.": "The infill area is too large for this wall thickness, support and height above ground.",
+"Die Betonüberdeckung der Bewehrung ist zu dünn: der Stahl erreicht im Brand zu früh die kritische Temperatur.": "The concrete cover to the reinforcement is too thin: the steel reaches the critical temperature too early in fire.",
+"Die Biegespannungen um beide Achsen zusammen übersteigen die Biegefestigkeit.": "The bending stresses about both axes together exceed the bending strength.",
+"Die Feldbewehrung reicht für die größte Zugkraft im Feld nicht aus.": "The span reinforcement is not sufficient for the largest tensile force in the span.",
+"Die Platte ist zu dünn für die geforderte Feuerwiderstandsdauer (Raumabschluss und Temperatur auf der Oberseite).": "The slab is too thin for the required fire resistance (separating function and temperature on the top surface).",
+"Die Querzugkraft an den Ecken des Durchbruchs ist größer als die Querzugfestigkeit des Holzes dort.": "The transverse tension at the corners of the hole is larger than the tensile strength perpendicular to the grain there.",
+"Die Schubspannungen aus beiden Richtungen zusammen übersteigen die Schubfestigkeit.": "The shear stresses from both directions together exceed the shear strength.",
+"Die Spannungen in der Naht sind größer als ihre Tragfähigkeit.": "The stresses in the weld are larger than its resistance.",
+"Die Zugkraft ist größer als die Fließkraft des ungeschwächten Blechs.": "The tensile force is larger than the yield resistance of the unweakened plate.",
+"Die lotrechte Last (Eigengewicht, Schnee) wirkt schräg zu den Hauptachsen der Pfette und biegt sie um beide Achsen.": "The vertical load (self-weight, snow) acts at an angle to the principal axes of the purlin and bends it about both axes.",
+"Die obere Bewehrung über der Stütze reicht für das Stützmoment nicht aus.": "The top reinforcement over the support is not sufficient for the support moment.",
+"Doppelbiegung": "Biaxial bending",
+"Doppelbiegung (6.17 und 6.18)": "Biaxial bending (6.17 and 6.18)",
+"Draufsicht auf das Blech (Kraft nach rechts)": "Plan view of the plate (force to the right)",
+"Durchbruch": "Hole",
+"Durchbruch (Holz)": "Hole (timber)",
+"Durchbruch im Holzträger": "Hole in a timber beam",
+"Durchgeschweißte Stumpfnaht": "Full penetration butt weld",
+"Durchgeschweißte Stumpfnaht als Grundwerkstoff und nicht durchgeschweißte Stumpfnaht wie eine Kehlnaht nach DIN EN 1993-1-8, 4.7.": "Full penetration butt weld as parent metal and partial penetration butt weld like a fillet weld to DIN EN 1993-1-8, 4.7.",
+"Durchgeschweißte Stumpfnaht: Tragfähigkeit wie der schwächere Grundwerkstoff (4.7.1) — Nachweis als Blechquerschnitt": "Full penetration butt weld: resistance as the weaker parent metal (4.7.1) — checked as the plate section",
+"Ein Blechblock um die Schrauben reißt aus (Zug quer, Schub entlang der Lochreihen).": "A block of plate around the bolts tears out (tension across, shear along the rows of holes).",
+"Ein Block reißt aus: Zug auf der Querfläche A<sub>nt</sub>, Schub entlang der Lochreihen A<sub>nv</sub> (zentrische Last)": "A block tears out: tension on the transverse area A<sub>nt</sub>, shear along the rows of holes A<sub>nv</sub> (concentric load)",
+"Einseitig nicht durchgeschweißte Nähte nicht durch Biegung um die Nahtlängsachse beanspruchen (Wurzel klafft).": "Do not load single-sided partial penetration welds in bending about the weld axis (the root opens).",
+"Einzellasten und ungünstige Laststellungen (Momentengrenzlinie aus mehreren Lastfällen), Schrägstäbe, die Verankerung am Endauflager (Modus Balken), Druckbewehrung und das Abstufen der Stützbewehrung in mehreren Stufen.": "Point loads and unfavourable load arrangements (moment envelope from several load cases), bent-up bars, anchorage at the end support (Beam mode), compression reinforcement and curtailing the support reinforcement in several steps.",
+"Feld": "Span",
+"Feldbewehrung (größte Zugkraft unten)": "Span reinforcement (largest tension at the bottom)",
+"Fließen im Bruttoquerschnitt": "yielding of the gross section",
+"Geometrie (NA, NCI NA.6.7, Anhaltswerte für unverstärkte Durchbrüche)": "Geometry (NA, NCI NA.6.7, guide values for unreinforced holes)",
+"Geometrie des Anschlusses": "Geometry of the connection",
+"Grau gestrichelt: M/z. Orange: um a<sub>l</sub> verschobene Zugkraftlinie. Blau: Deckungslinie der gewählten Stäbe mit Verankerung über l<sub>bd</sub> — sie muss die orange Linie überall umschließen.": "Grey dashed: M/z. Orange: tensile force line shifted by a<sub>l</sub>. Blue: resistance line of the chosen bars with anchorage over l<sub>bd</sub> — it must enclose the orange line everywhere.",
+"Grau: Halterungen an Decke, Boden und Stützen. Die Wand trägt nur Wind auf ihre eigene Fläche ab — die Tabelle ersetzt den rechnerischen Nachweis.": "Grey: restraints at floor, ceiling and columns. The wall only carries wind on its own area — the table replaces the calculation.",
+"Grenzen für unverstärkte Durchbrüche": "Limits for unreinforced holes",
+"Größere Betondeckung (Verlegemaß) oder eine Bekleidung von unten.": "Larger concrete cover or a cladding from below.",
+"Größere Betondeckung (Verlegemaß), breiterer Balken (kleinerer Tabellenwert) oder eine Bekleidung, z. B. Putz.": "Larger concrete cover, a wider beam (smaller table value) or a cladding, e.g. plaster.",
+"Größere Einbrandtiefe a, durchschweißen oder längere Naht.": "Deeper penetration a, full penetration or a longer weld.",
+"Größerer Querschnitt — bei großer Dachneigung lohnt vor allem eine breitere Pfette (W<sub>z</sub> ~ b²) oder eine Zange/Aussteifung in der Dachebene.": "Larger section — with a steep roof a wider purlin pays off most (W<sub>z</sub> ~ b²) or a tie/bracing in the roof plane.",
+"Hebelarm, Versatzmaß und Verankerungslängen": "Lever arm, shift rule and anchorage lengths",
+"Holz — Durchbruch im Träger": "Timber — hole in the beam",
+"Holz — Pfette mit Doppelbiegung": "Timber — purlin in biaxial bending",
+"Holz — Querzug am Queranschluss": "Timber — transverse tension at a connection",
+"Hängt eine Last unten am Träger, zieht sie die Fasern quer auseinander — je näher der Anschluss am unteren Rand liegt, desto eher spaltet das Holz.": "A load hanging from the bottom of a beam pulls the fibres apart — the closer the connection is to the bottom edge, the sooner the timber splits.",
+"Höhe h > 0": "Depth h > 0",
+"Höhe und Länge > 0": "Height and length > 0",
+"Im durch die Löcher geschwächten Querschnitt reißt das Blech, bevor die Zugkraft erreicht ist.": "In the section weakened by the holes the plate fractures before the tensile force is reached.",
+"Keine Tabellenzeile für diese Breite — erst die Mindestbreite einhalten.": "No table row for this width — first satisfy the minimum width.",
+"Keine gestaffelten Stäbe eingegeben — die durchlaufenden Stäbe reichen dann nicht.": "No curtailed bars entered — the continuous bars are then not sufficient.",
+"Kippen der Pfette (Modus Träger/Stütze), Durchlaufpfetten und Gerberpfetten, Normalkraft aus Windverband, Durchbiegung in zwei Richtungen und Anschlüsse (Pfettenstoß, Auflager).": "Lateral torsional buckling of the purlin (Beam/column mode), continuous and Gerber purlins, axial force from wind bracing, deflection in two directions and connections (purlin splice, supports).",
+"Kleinerer Durchbruch, Lage näher an der Trägerachse und weiter weg vom Auflager (kleineres V), höherer Träger oder Verstärkung.": "Smaller hole, closer to the beam axis and further from the support (smaller V), deeper beam or reinforcement.",
+" (gestaffelt {} … {} m)": " (curtailed {} … {} m)",
+" · oben {} Ø{}": " · top {} Ø{}",
+", Bügel Ø{}, {}": ", stirrups Ø{}, {}",
+"A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = ({} − {}·{})·{} = {} mm² (Lochreihe quer zur Kraft, nicht versetzt)": "A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = ({} − {}·{})·{} = {} mm² (row of holes across the force, not staggered)",
+"A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0,5)·d<sub>0</sub>)·t = 2·{}·{} = {} mm²": "A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0.5)·d<sub>0</sub>)·t = 2·{}·{} = {} mm²",
+"Blech {} × {} mm, {}, {} × {} Löcher d₀ = {} mm · N<sub>u,Rd</sub> = {} kN · V<sub>eff,1,Rd</sub> = {} kN": "Plate {} × {} mm, {}, {} × {} holes d₀ = {} mm · N<sub>u,Rd</sub> = {} kN · V<sub>eff,1,Rd</sub> = {} kN",
+"Brand R {}": "Fire R {}",
+"Die {} durchlaufenden Stäbe (F<sub>Rd</sub> = {} kN) decken die verschobene Zugkraftlinie überall — gestaffelte Stäbe sind rechnerisch nicht nötig.": "The {} continuous bars (F<sub>Rd</sub> = {} kN) cover the shifted tensile force line everywhere — curtailed bars are not required.",
+"F<sub>90,Rk</sub> = 14·b·w·√(h<sub>e</sub>/(1 − h<sub>e</sub>/h)) = {} kN → F<sub>90,Rd</sub> = k<sub>mod</sub>·F<sub>90,Rk</sub>/γ<sub>M</sub> = {} kN": "F<sub>90,Rk</sub> = 14·b·w·√(h<sub>e</sub>/(1 − h<sub>e</sub>/h)) = {} kN → F<sub>90,Rd</sub> = k<sub>mod</sub>·F<sub>90,Rk</sub>/γ<sub>M</sub> = {} kN",
+"R {}, einachsig gespannt, statisch bestimmt, von unten beflammt": "R {}, spanning one way, simply supported, exposed from below",
+"R {}, statisch bestimmt gelagert, dreiseitig beflammt — mögliche Kombinationen b<sub>min</sub>/a": "R {}, simply supported, exposed on three sides — possible combinations b<sub>min</sub>/a",
+"Randabstand quer e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = {} mm": "Edge distance across e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = {} mm",
+"Restquerschnitt h<sub>ro</sub> = {} mm, h<sub>ru</sub> = {} mm": "Remaining depth h<sub>ro</sub> = {} mm, h<sub>ru</sub> = {} mm",
+"Tabellenwerte für t = {} mm, Höhe über Gelände bis {} m (vierseitig gehalten)": "Table values for t = {} mm, height above ground up to {} m (supported on four sides)",
+"Verlegemaß aus der Expositionsklasse {}: c<sub>v</sub> = {} mm": "Cover from exposure class {}: c<sub>v</sub> = {} mm",
+"a = {} mm {} a<sub>erf</sub> = {} mm": "a = {} mm {} a<sub>req</sub> = {} mm",
+"aufnehmbar {} Ø{}: F<sub>Rd</sub> = <b>{} kN</b> {} {} kN": "resistance {} Ø{}: F<sub>Rd</sub> = <b>{} kN</b> {} {} kN",
+"aufnehmbar {} Ø{}: F<sub>Rd</sub> = {}·{}·{} = <b>{} kN</b> {} {} kN": "resistance {} Ø{}: F<sub>Rd</sub> = {}·{}·{} = <b>{} kN</b> {} {} kN",
+"b = {} cm, h = {} cm, {}, Bügel Ø{}": "b = {} cm, h = {} cm, {}, stirrups Ø{}",
+"b = {} mm → a<sub>erf</sub> = <b>{} mm</b>": "b = {} mm → a<sub>req</sub> = <b>{} mm</b>",
+"b = {} mm, h = {} mm, l = {} m, Dachneigung α = {}°": "b = {} mm, h = {} mm, l = {} m, roof pitch α = {}°",
+"dreiseitig gehalten (ein freier senkrechter Rand): halber Tabellenwert → <b>{} m²</b>": "supported on three sides (one free vertical edge): half the table value → <b>{} m²</b>",
+"durchlaufend {} Ø{}: F<sub>Rd</sub> = {} kN": "continuous {} Ø{}: F<sub>Rd</sub> = {} kN",
+"gestaffelte Stäbe ({} Ø{}) mit l<sub>bd</sub> = {} mm verlängert: von x = <b>{} m</b> bis <b>{} m</b> (Länge {} m)": "curtailed bars ({} Ø{}) extended by l<sub>bd</sub> = {} mm: from x = <b>{} m</b> to <b>{} m</b> (length {} m)",
+"h<sub>s,min</sub> = {} mm (Rohdecke mit Estrich) · a = {} mm": "h<sub>s,min</sub> = {} mm (slab with screed) · a = {} mm",
+"l = {} m · unten {} + {} Ø{}{}{} · a<sub>l</sub> = {} mm": "l = {} m · bottom {} + {} Ø{}{}{} · a<sub>l</sub> = {} mm",
+"l = {} m, q<sub>Ed</sub> = {} kN/m, |M<sub>A</sub>| = {} kNm, |M<sub>B</sub>| = {} kNm, cot θ = {}": "l = {} m, q<sub>Ed</sub> = {} kN/m, |M<sub>A</sub>| = {} kNm, |M<sub>B</sub>| = {} kNm, cot θ = {}",
+"maßgebend N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = {} kN ({})": "governing N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = {} kN ({})",
+"mindestens 25 % der Feldbewehrung bis über die Auflager führen: {}/{} = {} % {} 25 %": "at least 25 % of the span reinforcement taken over the supports: {}/{} = {} % {} 25 %",
+"nicht durchgeschweißt, a = {} mm": "partial penetration, a = {} mm",
+"oben Ø{} ({}): l<sub>b,rqd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>": "top Ø{} ({}): l<sub>b,rqd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>",
+"q<sub>v</sub> = {} kN/m lotrecht, q<sub>n</sub> = {} kN/m rechtwinklig zur Dachfläche": "q<sub>v</sub> = {} kN/m vertical, q<sub>n</sub> = {} kN/m perpendicular to the roof",
+"rechteckig {} × {} mm": "rectangular {} × {} mm",
+"rechts: Zugkraft endet bei x = {} m → Stablänge ab Achse B ≥ <b>{} m</b>": "right: tension ends at x = {} m → bar length from axis B ≥ <b>{} m</b>",
+"rund Ø {} mm": "circular Ø {} mm",
+"t = {} mm, l = {} m, h = {} m, {} gehalten, Höhe über Gelände bis {} m": "t = {} mm, l = {} m, h = {} m, supported on {}, height above ground up to {} m",
+"t = {} mm, {} × {} m, {} gehalten · A = {} m², zulässig {} m²": "t = {} mm, {} × {} m, supported on {} · A = {} m², permissible {} m²",
+"unten {} Ø{} durchlaufend + {} Ø{} gestaffelt, oben {} Ø{}": "bottom {} Ø{} continuous + {} Ø{} curtailed, top {} Ø{}",
+"unten Ø{} (guter Verbund): l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>": "bottom Ø{} (good bond): l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>",
+"unten: d = {} mm, z = 0,9·d = {} mm · oben: d = {} mm, z = {} mm": "bottom: d = {} mm, z = 0.9·d = {} mm · top: d = {} mm, z = {} mm",
+"verschobene Zugkraftlinie > {} kN zwischen x = {} m und {} m": "shifted tensile force line > {} kN between x = {} m and {} m",
+"zulässig {} m²": "permissible {} m²",
+"{} R {} · a = {} mm (erforderlich {} mm)": "{} R {} · a = {} mm (required {} mm)",
+"{} Reihen in Kraftrichtung × {} quer, d<sub>0</sub> = {} mm, e<sub>1</sub> = {}, p<sub>1</sub> = {}, p<sub>2</sub> = {} mm": "{} rows in load direction × {} across, d<sub>0</sub> = {} mm, e<sub>1</sub> = {}, p<sub>1</sub> = {}, p<sub>2</sub> = {} mm",
+"{} {}/{} mm, l = {} m, α = {}° · M<sub>y</sub> = {} kNm, M<sub>z</sub> = {} kNm": "{} {}/{} mm, l = {} m, α = {}° · M<sub>y</sub> = {} kNm, M<sub>z</sub> = {} kNm",
+"{}, Blech t = {} mm, l = {} mm, {}": "{}, plate t = {} mm, l = {} mm, {}",
+"{}, Nutzungsklasse {}, KLED „{}“": "{}, service class {}, load duration “{}”",
+"{}, Nutzungsklasse {}, KLED „{}“, k<sub>mod</sub> = {}": "{}, service class {}, load duration “{}”, k<sub>mod</sub> = {}",
+"{}, h<sub>d</sub> = {} mm{}, h<sub>ro</sub> = {} mm, l<sub>v</sub> = {} mm, Träger {} × {} mm": "{}, h<sub>d</sub> = {} mm{}, h<sub>ro</sub> = {} mm, l<sub>v</sub> = {} mm, beam {} × {} mm",
+"Ø{}{}, Expositionsklasse {}": "Ø{}{}, exposure class {}",
+"ε = 1,0: {} m² · ε ≥ 2,0: {} m² → bei ε = {} linear: <b>{} m²</b>": "ε = 1.0: {} m² · ε ≥ 2.0: {} m² → at ε = {} linear: <b>{} m²</b>",
+"Lage des Anschlusses: Abstand des am weitesten vom beanspruchten Rand entfernten Verbindungsmittels": "Position of the connection: distance of the fastener furthest from the loaded edge",
+"Lastaufteilung auf die Hauptachsen": "Load split onto the principal axes",
+"Lasten (Bemessungswerte)": "Loads (design values)",
+"Liegt das Verbindungsmittel in den oberen 30 % der Höhe (vom beanspruchten Rand aus gesehen weit weg), wird der Querzug sicher abgetragen.": "If the fastener lies in the upper 30 % of the depth (far from the loaded edge), the transverse tension is carried safely.",
+"Länge der oberen Stäbe ab Auflagerachse (Zugkraftlinie verschoben, plus l<sub>bd</sub>)": "Length of the top bars from the support axis (shifted tensile force line, plus l<sub>bd</sub>)",
+"Längeres Schraubenbild in Kraftrichtung (e<sub>1</sub>, p<sub>1</sub>, mehr Reihen), dickeres Blech oder größerer Abstand p<sub>2</sub>.": "Longer bolt pattern in load direction (e<sub>1</sub>, p<sub>1</sub>, more rows), thicker plate or larger spacing p<sub>2</sub>.",
+"Mauerwerk — Ausfachungswand": "Masonry — infill wall",
+"Mehr oder dickere Stäbe unten; mit der Biegebemessung im Modus Balken abgleichen.": "More or larger bars at the bottom; compare with the bending design in the Beam mode.",
+"Mehr oder dickere Stäbe über der Stütze.": "More or larger bars over the support.",
+"Mehrere Verbindungsmittelreihen (k<sub>r</sub> < 1), Anschlüsse beidseitig des Trägers, Querzugverstärkungen und die Tragfähigkeit der Verbindungsmittel selbst (Modus Verbindung).": "Several rows of fasteners (k<sub>r</sub> < 1), connections on both sides of the beam, reinforcement against transverse tension and the capacity of the fasteners themselves (Connection mode).",
+"Mindestbreite": "Minimum width",
+"Mindestdicke": "Minimum thickness",
+"Mittelpfette — Doppelbiegung": "Intermediate purlin — biaxial bending",
+"Mitwirkende Länge und Volumenbeiwert": "Effective length and volume factor",
+"Momentenlinie aus Gleichstreckenlast und Stützmomenten": "Moment diagram from uniform load and support moments",
+"Nachweis nach DIN EN 1992-1-2 mit deutschem NA über Mindestabmessungen und Achsabstand der Bewehrung (Tab. 5.5 für Balken, Tab. 5.8 für Platten).": "Verification to DIN EN 1992-1-2 with the German NA by minimum dimensions and axis distance of the reinforcement (Tab. 5.5 for beams, Tab. 5.8 for slabs).",
+"Naht": "Weld",
+"Nahtmitte: Normalspannung aus N und größte Schubspannung (Parabel)": "Weld centre: normal stress from N and maximum shear stress (parabola)",
+"Nebenträger am Hauptträger HT 1": "Secondary beam on main beam HT 1",
+"Nettoquerschnitt": "Net section",
+"Nicht durchgeschweißte Stumpfnaht": "Partial penetration butt weld",
+"Nicht durchgeschweißte Stumpfnaht: wie eine Kehlnaht mit tief eingebranntem Wurzelmaß a (4.7.2)": "Partial penetration butt weld: like a fillet weld with a deep-penetration throat a (4.7.2)",
+"Nichttragende Ausfachungswand": "Non-load-bearing infill wall",
+"Nichttragende Ausfachungswand ohne rechnerischen Nachweis: zulässige Fläche nach Wanddicke, Seitenverhältnis, Halterung und Höhe über Gelände.": "Non-load-bearing infill wall without calculation: permissible area by wall thickness, aspect ratio, support and height above ground.",
+"Orange: Querzug an den gegenüberliegenden Ecken — dort reißt ein unverstärkter Träger zuerst.": "Orange: transverse tension at opposite corners — an unreinforced beam cracks there first.",
+"Pfette": "Purlin",
+"Pfette mit Doppelbiegung": "Purlin in biaxial bending",
+"Pfette senkrecht zur Dachfläche eingebaut: die lotrechte Last zerfällt in zwei Anteile": "Purlin installed perpendicular to the roof: the vertical load splits into two components",
+"Platte, einachsig gespannt": "Slab, spanning one way",
+"Plattenstreifen": "Slab strip",
+"Pos. 11 — Unterzug, Feuerwiderstand": "Item 11 — downstand beam, fire resistance",
+"Pos. 12 — Endfeld eines Durchlaufträgers": "Item 12 — end span of a continuous beam",
+"Querschnitt, um α gedreht": "Cross-section, rotated by α",
+"Querzug": "Transverse tension",
+"Querzug (Holz)": "Transverse tension (timber)",
+"Querzug am Durchbruchrand": "Transverse tension at the edge of the hole",
+"Querzug am Queranschluss": "Transverse tension at a connection",
+"Querzugkraft aus Querkraft und Moment": "Transverse tension force from shear and moment",
+"Querzugtragfähigkeit (NA, NCI zu 8.1.4)": "Splitting capacity (NA, NCI to 8.1.4)",
+"Querzugtragfähigkeit eines Anschlusses quer zur Faser nach DIN EN 1995-1-1 mit NA (NCI zu 8.1.4), Vergleich mit der Formel der Grundnorm.": "Splitting capacity of a connection loaded perpendicular to the grain to DIN EN 1995-1-1 with NA (NCI to 8.1.4), compared with the formula of the main standard.",
+"Rand der Naht: Normalspannung aus N und M (Schub dort null)": "Weld end: normal stress from N and M (shear zero there)",
+"Randstreifen außen (zwischen Lochreihe und Blechrand)": "Outer edge strips (between row of holes and plate edge)",
+"Rechts: Normalspannung über die Nahtlänge aus Normalkraft und Biegung in Blechebene.": "Right: normal stress along the weld from axial force and in-plane bending.",
+"Restquerschnitt oben und unten > 0": "Remaining depth above and below > 0",
+"Richtungsbezogenes Verfahren (4.5.3.2) mit β<sub>w</sub>": "Directional method (4.5.3.2) with β<sub>w</sub>",
+"Schnittgrößen am Durchbruch": "Internal forces at the hole",
+"Schnittgrößen am Einfeldträger": "Internal forces of the single span",
+"Schraubenbild passt nicht in die Breite b": "Bolt pattern does not fit into the width b",
+"Schub aus zwei Richtungen": "Shear in two directions",
+"Schub im Restquerschnitt": "Shear in the remaining section",
+"Seitenverhältnis und Fläche": "Aspect ratio and area",
+"Spaltgefahr": "risk of splitting",
+"Spannungen in der Nahtfläche (senkrecht zur Kraft): σ⊥ aus N und M, τ∥ aus V": "Stresses in the weld area (perpendicular to the force): σ⊥ from N and M, τ∥ from V",
+"Staffelung der Feldbewehrung": "Curtailment of the span reinforcement",
+"Stahl — Stumpfnaht": "Steel — butt weld",
+"Stahl — Zugstab mit Lochschwächung": "Steel — tension member with holes",
+"Stahlbeton — Brandschutz nach Tabellen": "Reinforced concrete — fire design by tables",
+"Stahlbeton — Zugkraftdeckung am Durchlaufträger": "Reinforced concrete — curtailment in a continuous beam",
+"Statische Nutzhöhe und innerer Hebelarm": "Effective depth and lever arm",
+"Stumpfnaht": "Butt weld",
+"Stumpfnähte an Profilen (Stegnaht und Gurtnähte getrennt), unterschiedliche Blechdicken mit Abschrägung, Ermüdung (Kerbfälle), Prüfumfang und Bewertungsgruppen nach DIN EN ISO 5817 sowie T-Stöße mit Kehlnaht-Stumpfnaht-Kombination.": "Butt welds on sections (web and flange welds separately), different plate thicknesses with tapers, fatigue (detail categories), inspection and quality levels to DIN EN ISO 5817 and T-joints combining fillet and butt welds.",
+"Stützbewehrung oben": "Top support reinforcement",
+"Stützen (Methode A, Tab. 5.2a), Wände, Durchlaufträger und -platten (Tab. 5.6/5.9), zweiachsig gespannte Platten, Flachdecken, Spannbeton, die vereinfachten und allgemeinen Rechenverfahren und Abplatzungen bei hochfestem Beton.": "Columns (method A, Tab. 5.2a), walls, continuous beams and slabs (Tab. 5.6/5.9), two-way slabs, flat slabs, prestressed concrete, the simplified and advanced calculation methods and spalling of high-strength concrete.",
+"Stützweite > 0": "Span > 0",
+"Tabellenwerte für Balken (EN 1992-1-2, Tab. 5.5)": "Table values for beams (EN 1992-1-2, Tab. 5.5)",
+"Tabellenwerte für Platten (EN 1992-1-2, Tab. 5.8)": "Table values for slabs (EN 1992-1-2, Tab. 5.8)",
+"Unverstärkte Durchbrüche nur in den Nutzungsklassen 1 und 2; Ecken rechteckiger Durchbrüche mit r ≥ 15 mm ausrunden.": "Unreinforced holes only in service classes 1 and 2; round off the corners of rectangular holes with r ≥ 15 mm.",
+"Unverstärkter runder oder rechteckiger Durchbruch nach NA, NCI NA.6.7: Grenzen, Querzug aus Querkraft und Moment, Schub und Biegung im Restquerschnitt.": "Unreinforced circular or rectangular hole per NA, NCI NA.6.7: limits, transverse tension from shear and moment, shear and bending in the remaining section.",
+"Verankerungslänge über den Punkt hinaus, an dem der Stab rechnerisch nicht mehr gebraucht wird": "Anchorage length beyond the point where the bar is no longer required",
+"Verlegemaß ≥ 0": "Cover ≥ 0",
+"Versatzmaß, verschobene Zugkraftlinie, Staffelung der Feldbewehrung, Länge der Stützbewehrung und Mindestbewehrung an den Auflagern nach DIN EN 1992-1-1 mit NA, 9.2.1.": "Shift rule, shifted tensile force line, curtailment of the span reinforcement, length of the support reinforcement and minimum reinforcement at the supports to DIN EN 1992-1-1 with NA, 9.2.1.",
+"Versatzmaß: die Zugkraftlinie wird um a<sub>l</sub> in die ungünstige Richtung verschoben (Fachwerkmodell, senkrechte Bügel)": "Shift rule: the tensile force line is shifted by a<sub>l</sub> in the unfavourable direction (truss model, vertical stirrups)",
+"Versetzte Lochreihen (s²/4p), Winkel mit einem Schenkel angeschlossen (β-Werte 3.10.3), exzentrische Blockversagen (V<sub>eff,2,Rd</sub>), die Schrauben selbst (Abscheren, Lochleibung — Modus Anschluss) und Ermüdung.": "Staggered rows of holes (s²/4p), angles connected by one leg (β values 3.10.3), eccentric block tearing (V<sub>eff,2,Rd</sub>), the bolts themselves (shear, bearing — Connection mode) and fatigue.",
+"Verstärkte Durchbrüche (innen und außen liegende Verstärkungen), mehrere Durchbrüche (Abstand l<sub>z</sub>), Durchbrüche in Vollholz und in der Nähe von Ausklinkungen sowie die Durchbiegung mit geschwächtem Querschnitt.": "Reinforced holes (internal and external reinforcement), several holes (spacing l<sub>z</sub>), holes in solid timber and near notches and the deflection of the weakened section.",
+"Voraussetzungen: Steinfestigkeitsklasse ≥ 12, Normalmauermörtel ≥ M 5 (NM IIa) oder Dünnbettmörtel, Halterungen am Rand kraftschlüssig.": "Requirements: unit strength class ≥ 12, general purpose mortar ≥ M 5 (NM IIa) or thin-layer mortar, edges restrained with force transfer.",
+"Zu wenige Stäbe laufen bis über die Auflager — dort fehlt die Mindestbewehrung.": "Too few bars continue over the supports — the minimum reinforcement is missing there.",
+"Zugband Z1 — Flachstahl": "Tie Z1 — flat bar",
+"Zugkraftdeckung": "Curtailment",
+"Zugkraftdeckung (Durchlaufträger)": "Curtailment (continuous beam)",
+"Zugkraftdeckung am Durchlaufträger": "Curtailment in a continuous beam",
+"Zugkraftlinie und Deckungslinie (unten: Feld, oben: Stützen)": "Tensile force line and resistance line (bottom: span, top: supports)",
+"Zugstab mit Lochschwächung": "Tension member with holes",
+"Zugstab mit Schraubenanschluss": "Tension member with bolted connection",
+"Zugtragfähigkeit Bruttoquerschnitt (Fließen)": "Tension resistance of the gross section (yielding)",
+"Zugtragfähigkeit Nettoquerschnitt (Bruch)": "Tension resistance of the net section (fracture)",
+"Zulässige Ausfachungsfläche": "Permissible infill area",
+"Zum Vergleich: Formel der Grundnorm EN 1995-1-1, Gl. (8.4), im NA ersetzt": "For comparison: formula of the main standard EN 1995-1-1, eq. (8.4), replaced in the NA",
+"Zweiachsige Biegung mit km = 0,7 und Schub aus zwei Richtungen nach DIN EN 1995-1-1, 6.1.6 und 6.1.7, für eine senkrecht zur Dachfläche eingebaute Pfette.": "Biaxial bending with km = 0.7 and shear from two directions to DIN EN 1995-1-1, 6.1.6 and 6.1.7, for a purlin installed perpendicular to the roof.",
+"Zweiseitig gehaltene Wände, Wände mit Öffnungen, Ausfachungen mit Wanddicken zwischen den Tabellenwerten (hier auf den kleineren Wert abrunden), Wind über 100 m Höhe und der rechnerische Nachweis auf Plattenbiegung.": "Walls supported on two sides, walls with openings, infill walls with thicknesses between the table values (round down to the smaller value), wind above 100 m height and the calculation for plate bending.",
+"Zwischenwerte dürfen linear eingeschaltet werden": "Intermediate values may be interpolated linearly",
+"a ≤ h": "a ≤ h",
+"beanspruchter Rand": "loaded edge",
+"bei": "at",
+"durchgeschweißt": "full penetration",
+"einlagig": "one layer",
+"frei": "free",
+"gestaffelte Stäbe ≥ 0": "curtailed bars ≥ 0",
+"größere/kleinere Seite": "longer/shorter side",
+"guter Verbund, h ≤ 300 mm": "good bond, h ≤ 300 mm",
+"h_d ≤ 0,4·h": "h_d ≤ 0.4·h",
+"h_ro, h_ru ≥ 0,25·h": "h_ro, h_ru ≥ 0.25·h",
+"k<sub>m</sub> = 0,7 für Rechteckquerschnitte: die größten Spannungen treffen nur an einer Ecke zusammen": "k<sub>m</sub> = 0.7 for rectangular sections: the largest stresses only coincide at one corner",
+"kein Nachweis nötig": "no check required",
+"mehrlagig": "several layers",
+"mindestens 1 Schraube je Richtung": "at least 1 bolt in each direction",
+"mindestens 2 durchlaufende Stäbe": "at least 2 continuous bars",
+"mäßiger Verbund, h > 300 mm": "poor bond, h > 300 mm",
+"obere Stäbe über den Stützen ≥ 2": "top bars over the supports ≥ 2",
+"rechteckig": "rectangular",
+"rund": "circular",
+"Verlegemaß vorgegeben: c<sub>v</sub> = {} mm (aus der Expositionsklasse {}: {} mm)": "Cover given: c<sub>v</sub> = {} mm (from exposure class {}: {} mm)",
+"b = {} mm < {} mm — kleiner als die kleinste Tabellenbreite": "b = {} mm < {} mm — smaller than the smallest table width",
+"einlagige Bewehrung und b < {} mm: Eckstäbe a<sub>sd</sub> = a + 10 mm → <b>{} mm</b>": "one layer of reinforcement and b < {} mm: corner bars a<sub>sd</sub> = a + 10 mm → <b>{} mm</b>",
+"links: Zugkraft endet bei x = {} m → Stablänge ab Achse A ≥ <b>{} m</b>": "left: tension ends at x = {} m → bar length from axis A ≥ <b>{} m</b>",
+" > 0,7 → Querzugnachweis nach NA nicht erforderlich": " > 0.7 → no splitting check required per NA"
 } };
 const TTR = { en: [[/^Baustoff Schicht (\d+)$/,'Material, layer $1'],[/ der Schicht (\d+)/,' of layer $1'],[/Schicht (\d+)/,'layer $1'],[/^Dicke /,'Thickness '],[/ \(wegen γ′\)/,' (because of γ′)']] };
 const tt = s => { if(LANG==='de' || typeof s!=='string') return s; return TTX[LANG]?.[s] ?? s; };
@@ -5292,7 +5890,7 @@ function showLangNotice(){
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
 }
 
-const SIZE_VERSION = '0.5.20';
+const SIZE_VERSION = '0.5.21';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -5414,9 +6012,9 @@ function showTyp(t){
   $('in-b').disabled = t==='platte';
   $('lab-b').innerHTML = tt(t==='unterzug' ? tt('Stegbreite b<sub>w</sub> [cm]') : tt('Breite b [cm]'));
   $('hint-balken').style.display = t!=='platte' ? '' : 'none';
-  const su = t==='stuetze', ds = t==='durchstanzen', to = t==='torsion', so = t==='stoss', ex = su||ds||to||so;
+  const su = t==='stuetze', ds = t==='durchstanzen', to = t==='torsion', so = t==='stoss', fb = t==='brandschutz', zk = t==='zugkraft', ex = su||ds||to||so||fb||zk;
   $('beton-stuetze').style.display = su ? '' : 'none'; $('beton-ds').style.display = ds ? '' : 'none'; $('beton-beam').style.display = ex ? 'none' : '';
-  $('beton-to').style.display = to ? '' : 'none'; $('beton-so').style.display = so ? '' : 'none';
+  $('beton-to').style.display = to ? '' : 'none'; $('beton-so').style.display = so ? '' : 'none'; $('beton-fb').style.display = fb ? '' : 'none'; $('beton-zk').style.display = zk ? '' : 'none';
   document.querySelectorAll('.beam-only').forEach(e=>e.style.display = ex ? 'none' : '');
   $('in-b').closest('.field').style.display = ds||so ? 'none' : ''; $('in-h').closest('.field').style.display = so ? 'none' : '';
   if(ds) $('lab-h').innerHTML = tt('Plattendicke h [cm]');
@@ -5432,6 +6030,8 @@ function setTyp(t){
   else if(t==='stuetze'){ $('in-b').value = 30; $('in-h').value = 30; $('in-name').value=tt('Pos. 4 — Innenstütze'); }
   else if(t==='torsion'){ $('in-b').value = 30; $('in-h').value = 50; $('in-name').value=tt('Pos. 8 — Randträger mit Kragplatte (Torsion)'); }
   else if(t==='stoss'){ $('in-name').value=tt('Pos. 9 — Stoß der Feldbewehrung'); }
+  else if(t==='brandschutz'){ $('in-b').value = 30; $('in-h').value = 60; $('in-name').value=tt('Pos. 11 — Unterzug, Feuerwiderstand'); }
+  else if(t==='zugkraft'){ $('in-b').value = 30; $('in-h').value = 60; $('in-name').value=tt('Pos. 12 — Endfeld eines Durchlaufträgers'); }
   else if(t==='durchstanzen'){ $('in-h').value = 24; $('in-name').value=tt('Pos. 6 — Flachdecke über Innenstütze'); }
   else if(was!=='balken'){ $('in-b').value = 30; $('in-h').value = 60; $('in-name').value=tt('Pos. 1 — Balken');
     $('in-M').value=220; $('in-V').value=160; $('in-Mqp').value=110; $('in-Ms').value=0; $('in-Mqps').value=0; $('in-l').value=6.0; }
@@ -6720,7 +7320,7 @@ function showMat(){
   document.querySelectorAll('#seg-wb button').forEach(b=>b.classList.toggle('active', b.dataset.wb===WBMODE));
   ['druck','schwimm','rohr','gerinne','wehr','druckstoss','pumpe','teil'].forEach(m=>$('wb-'+m).style.display = WBMODE===m ? '' : 'none');
   document.querySelectorAll('#seg-mw button').forEach(b=>b.classList.toggle('active', b.dataset.mw===MWMODE));
-  ['druck','teil','keller','schub'].forEach(m=>$('mw-'+m).style.display = MWMODE===m ? '' : 'none');
+  ['druck','teil','keller','schub','ausfach'].forEach(m=>$('mw-'+m).style.display = MWMODE===m ? '' : 'none'); $('mw-mat-card').style.display = MWMODE==='ausfach' ? 'none' : '';
   document.querySelectorAll('#seg-gr button').forEach(b=>b.classList.toggle('active', b.dataset.gr===GRMODE));
   ['flach','setzung','wand','upl','gleit','hyd','zeit','boesch'].forEach(m=>$('gr-'+m).style.display = GRMODE===m ? '' : 'none');
   $('gr-boden-card').style.display = ['upl','setzung','hyd','zeit'].includes(GRMODE) ? 'none' : '';
@@ -6728,14 +7328,14 @@ function showMat(){
   document.querySelectorAll('#seg-ho button').forEach(b=>b.classList.toggle('active', b.dataset.ho===HOMODE));
   $('ho-bauteil').style.display = HOMODE==='bauteil' ? '' : 'none';
   $('ho-verb').style.display = HOMODE==='verbindung' ? '' : 'none';
-  const hx = ['ausklink','sattel','versatz','brand','schwingung'].includes(HOMODE); $('ho-x').style.display = hx ? '' : 'none';
-  $('ho-ak').style.display = HOMODE==='ausklink' ? '' : 'none'; $('ho-br').style.display = HOMODE==='brand' ? '' : 'none'; $('ho-sv').style.display = HOMODE==='schwingung' ? '' : 'none';
+  const hx = ['ausklink','sattel','versatz','brand','schwingung','querzug','durchbruch','doppel'].includes(HOMODE); $('ho-x').style.display = hx ? '' : 'none';
+  $('ho-ak').style.display = HOMODE==='ausklink' ? '' : 'none'; $('ho-br').style.display = HOMODE==='brand' ? '' : 'none'; $('ho-sv').style.display = HOMODE==='schwingung' ? '' : 'none'; $('ho-qz').style.display = HOMODE==='querzug' ? '' : 'none'; $('ho-db').style.display = HOMODE==='durchbruch' ? '' : 'none'; $('ho-dp').style.display = HOMODE==='doppel' ? '' : 'none';
   ['hx-nkl','hx-kled'].forEach(id=>$(id).closest('.field').style.display = ['brand','schwingung'].includes(HOMODE) ? 'none' : ''); $('ho-sd').style.display = HOMODE==='sattel' ? '' : 'none'; $('ho-vs').style.display = HOMODE==='versatz' ? '' : 'none';
   document.querySelectorAll('#seg-st button').forEach(b=>b.classList.toggle('active', b.dataset.st===STMODE));
   $('st-traeger').style.display = STMODE==='traeger' ? '' : 'none';
   $('st-anschluss').style.display = STMODE==='anschluss' ? '' : 'none';
   $('st-fuss').style.display = STMODE==='fuss' ? '' : 'none';
-  $('st-schweiss').style.display = STMODE==='schweiss' ? '' : 'none';
+  $('st-schweiss').style.display = STMODE==='schweiss' ? '' : 'none'; $('st-zugstab').style.display = STMODE==='zugstab' ? '' : 'none'; $('st-stumpf').style.display = STMODE==='stumpf' ? '' : 'none';
   const T = { beton:[tt('Stahlbeton — Balken, Platten, Stützen, Durchstanzen'),tt('Bemessung nach DIN EN 1992-1-1 mit deutschem NA: Biegung (auch mit Druckbewehrung), Querkraft, Gurtanschluss, Verankerung, Zugkraftdeckung, Rissbreite, Biegeschlankheit, Stützen nach dem Modellstützenverfahren und Durchstanzen.'),tt('Querschnitt')],
     stahl: STMODE==='schweiss'
       ? [tt('Stahl — Schweißverbindungen'),tt('Bemessung nach DIN EN 1993-1-8 mit deutschem NA, 4.5: Kehlnähte nach dem richtungsbezogenen Verfahren (σ⊥, τ⊥, τ∥) mit Vergleich zum vereinfachten Verfahren, lange Nähte und konstruktive Regeln.'),tt('Nahtbild')]
@@ -6770,7 +7370,7 @@ function showMat(){
       : HOMODE==='verbindung'
       ? [tt('Holz — Verbindungen mit Stabdübeln, Nägeln und Schrauben'),tt('Bemessung nach DIN EN 1995-1-1 mit deutschem NA, Abschnitt 8: Lochleibung, Fließmoment, alle Versagensmodi nach Johansen, Einhängeeffekt, wirksame Anzahl und Mindestabstände.'),tt('Verbindung')]
       : [tt('Holz — Vollholz und Brettschichtholz'),tt('Bemessung nach DIN EN 1995-1-1 mit deutschem NA: Biegung, Schub, Auflagerpressung, Kippen, Knicken und Durchbiegung.'),tt('Querschnitt')] }[MAT];
-  const PT = PA_HEAD[MAT+'/'+({beton:TYP, holz:HOMODE, grund:GRMODE, wasser:WBMODE, bauph:BPMODE})[MAT]] || T;
+  const PT = PA_HEAD[MAT+'/'+({beton:TYP, stahl:STMODE, holz:HOMODE, grund:GRMODE, mauer:MWMODE, wasser:WBMODE, bauph:BPMODE})[MAT]] || T;
   $('page-title').textContent = tt(PT[0]); $('page-sub').textContent = tt(PT[1]); $('fig-title').textContent = tt(PT[2]);
   $('page-calc').style.display = MAT==='wasser' || MAT==='bauph' ? 'none' : '';
 }
@@ -7243,6 +7843,7 @@ function fillProfile(){
   if(!list.some(p=>p[0]===cur)) $('sn-prof').value = list[Math.min(6,list.length-1)][0];
 }
 function runStahl(){
+  if(PA['stahl/'+STMODE]) return runPA('stahl/'+STMODE);
   const I=readStahl(), bad=validateStahl(I);
   $('sn-prof').disabled = I.auto;
   document.querySelectorAll('.sn-psi').forEach(e=>e.style.display = I.mv==='lin' ? '' : 'none');
@@ -8696,6 +9297,7 @@ function figMH(I, res){
 const MW_NAME = { druck:'md-name', teil:'mt-name', keller:'mk-name', schub:'mh-name' };
 const MW_FN = { druck:[readMD,validateMD,nachweiseMD,figMD], teil:[readMT,validateMT,nachweiseMT,figMT], keller:[readMK,validateMK,nachweiseMK,figMK], schub:[readMH,validateMH,nachweiseMH,figMH] };
 function runMauer(){
+  if(PA['mauer/'+MWMODE]) return runPA('mauer/'+MWMODE);
   const own=$('mw-own').checked, dm=$('mw-m').value==='dm';
   document.querySelectorAll('.mw-fkown').forEach(e=>e.style.display = own ? '' : 'none');
   document.querySelectorAll('.mw-fm').forEach(e=>e.style.display = dm || own ? 'none' : '');
@@ -10467,9 +11069,515 @@ Object.assign(GR_NAME, { hyd:'hy-name', zeit:'zs-name', boesch:'bo-name' });
 Object.assign(WB_NAME, { druckstoss:'wj-name', pumpe:'wp-name', teil:'wt-name' });
 
 // ══════════════════════════════════════════════════
+// PAKET B (v0.5.21): Brandschutz Stahlbeton (Tabellen), Zugkraftdeckung am Durchlaufträger, Zugstab mit Lochschwächung
+// und Blockversagen, Stumpfnaht, Querzug (Holz), Durchbruch (Holz), Pfette mit Doppelbiegung, Ausfachungswand
+// ══════════════════════════════════════════════════
+
+// ── Stahlbeton: Brandschutz nach Tabellen (EN 1992-1-2, 5.6 und 5.7) ──
+// Balken, statisch bestimmt gelagert (Tab. 5.5): je Feuerwiderstand vier Kombinationen [b_min, a] in mm
+const FB_BALKEN = { 30:[[80,25],[120,20],[160,15],[200,15]], 60:[[120,40],[160,35],[200,30],[300,25]], 90:[[150,55],[200,45],[300,40],[400,35]],
+  120:[[200,65],[240,60],[300,55],[500,50]], 180:[[240,80],[300,70],[400,65],[600,60]], 240:[[280,90],[350,80],[500,75],[700,70]] };
+// Platten, einachsig gespannt, statisch bestimmt (Tab. 5.8): [h_s,min, a] in mm
+const FB_PLATTE = { 30:[60,10], 60:[80,20], 90:[100,30], 120:[120,40], 180:[150,55], 240:[175,65] };
+function fbAreq(R, b){         // erforderlicher Achsabstand bei Balkenbreite b (linear zwischen den Spalten)
+  const T=FB_BALKEN[R]; if(b<T[0][0]) return null;
+  for(let i=1;i<T.length;i++) if(b<=T[i][0]) return T[i-1][1] + (T[i][1]-T[i-1][1])*(b-T[i-1][0])/(T[i][0]-T[i-1][0]);
+  return T[T.length-1][1];
+}
+function readFB(){ return { typ:'brandschutz', name:$('in-name').value, b:num('in-b'), h:num('in-h'), beton:$('in-beton').value, expo:$('in-expo').value,
+  art:$('fb-art').value, R:+$('fb-R').value, ds:+$('fb-ds').value, dsw:+$('fb-dsw').value, lagen:$('fb-lagen').value, cv:num('fb-cv')||0 }; }
+function validateFB(I){ const bad=[]; if(I.art==='balken' && !(I.b>0)) bad.push(tt('Breite b > 0')); if(!(I.h>0)) bad.push(tt('Höhe h > 0')); if(!(I.cv>=0)) bad.push(tt('Verlegemaß ≥ 0')); return bad; }
+function nachweiseFB(I){
+  const C=[], balken=I.art==='balken', b=I.b*10, h=I.h*10;
+  const cw=deckung(I.expo, I.dsw), cl=deckung(I.expo, I.ds);
+  const cvA = balken ? Math.max(cw.cnom, cl.cnom-I.dsw) : cl.cnom, cv = I.cv>0 ? I.cv : cvA;
+  const a = balken ? cv+I.dsw+I.ds/2 : cv+I.ds/2;
+  const S0=[H(tt('Achsabstand der Längsbewehrung zur beflammten Oberfläche')),
+    I.cv>0 ? _L`Verlegemaß vorgegeben: c<sub>v</sub> = ${deNum(cv,0)} mm (aus der Expositionsklasse ${I.expo}: ${deNum(cvA,0)} mm)` : _L`Verlegemaß aus der Expositionsklasse ${I.expo}: c<sub>v</sub> = ${deNum(cv,0)} mm`,
+    balken ? `a = c<sub>v</sub> + Ø<sub>w</sub> + Ø/2 = ${deNum(cv,0)} + ${I.dsw} + ${deNum(I.ds/2,1)} = <b>${deNum(a,1)} mm</b>` : `a = c<sub>v</sub> + Ø/2 = ${deNum(cv,0)} + ${deNum(I.ds/2,1)} = <b>${deNum(a,1)} mm</b>`];
+  let res;
+  if(balken){
+    const T=FB_BALKEN[I.R], areq0=fbAreq(I.R,b), ecke = I.lagen==='1' && b<T[3][0], areq = areq0==null ? null : areq0+(ecke?10:0);
+    C.push({ id:'fbtab', title:tt('Tabellenwerte für Balken (EN 1992-1-2, Tab. 5.5)'), eta:0, ok:true, info:true, steps:[
+      H(_L`R ${I.R}, statisch bestimmt gelagert, dreiseitig beflammt — mögliche Kombinationen b<sub>min</sub>/a`),
+      T.map(([bb,aa])=>`${bb}/${aa}`).join(' · ')+' mm',
+      H(tt('Zwischenwerte dürfen linear eingeschaltet werden')),
+      areq0==null ? _L`b = ${deNum(b,0)} mm < ${T[0][0]} mm — kleiner als die kleinste Tabellenbreite` : _L`b = ${deNum(b,0)} mm → a<sub>erf</sub> = <b>${deNum(areq0,1)} mm</b>`,
+      ...(ecke ? [_L`einlagige Bewehrung und b < ${T[3][0]} mm: Eckstäbe a<sub>sd</sub> = a + 10 mm → <b>${deNum(areq,1)} mm</b>`] : []), ...S0] });
+    C.push({ id:'fbb', title:tt('Mindestbreite'), eta:T[0][0]/b, ok:b>=T[0][0], steps:[`b = ${deNum(b,0)} mm ${paGe(b>=T[0][0])} b<sub>min</sub> = ${T[0][0]} mm (R ${I.R})`],
+      note: b<T[0][0] ? tt('Balken verbreitern oder eine Brandschutzbekleidung vorsehen.') : '' });
+    C.push({ id:'fba', title:tt('Achsabstand der Bewehrung'), eta: areq==null ? 9.99 : areq/a, ok: areq!=null && a>=areq, steps:[
+      areq==null ? tt('Keine Tabellenzeile für diese Breite — erst die Mindestbreite einhalten.') : _L`a = ${deNum(a,1)} mm ${paGe(a>=areq)} a<sub>erf</sub> = ${deNum(areq,1)} mm`],
+      note: areq!=null && a<areq ? tt('Größere Betondeckung (Verlegemaß), breiterer Balken (kleinerer Tabellenwert) oder eine Bekleidung, z. B. Putz.') : '' });
+    res={ a, cv, areq0, areq, ecke, bmin:T[0][0] };
+  } else {
+    const [hmin, areq]=FB_PLATTE[I.R];
+    C.push({ id:'fbtab', title:tt('Tabellenwerte für Platten (EN 1992-1-2, Tab. 5.8)'), eta:0, ok:true, info:true, steps:[
+      H(_L`R ${I.R}, einachsig gespannt, statisch bestimmt, von unten beflammt`), _L`h<sub>s,min</sub> = ${hmin} mm (Rohdecke mit Estrich) · a = ${areq} mm`, ...S0] });
+    C.push({ id:'fbh', title:tt('Mindestdicke'), eta:hmin/h, ok:h>=hmin, steps:[`h = ${deNum(h,0)} mm ${paGe(h>=hmin)} h<sub>s,min</sub> = ${hmin} mm`],
+      note: h<hmin ? tt('Dickere Platte oder ein nichtbrennbarer Estrich (zählt zur Dicke h<sub>s</sub>).') : '' });
+    C.push({ id:'fba', title:tt('Achsabstand der Bewehrung'), eta:areq/a, ok:a>=areq, steps:[_L`a = ${deNum(a,1)} mm ${paGe(a>=areq)} a<sub>erf</sub> = ${areq} mm`],
+      note: a<areq ? tt('Größere Betondeckung (Verlegemaß) oder eine Bekleidung von unten.') : '' });
+    res={ a, cv, areq, hmin };
+  }
+  return { C, ok:C.every(c=>c.ok), ...res };
+}
+function figFB(I, res){
+  const balken=I.art==='balken', b=balken?I.b*10:600, h=I.h*10, sc=Math.min(200/b, 200/h, 1.2), x0=60, y0=40, W=b*sc, Hh=h*sc, a=res.a*sc;
+  let s=paSvg(470, 290, tt('Brandschutz: Achsabstand'));
+  s+=svgT(x0+W/2, 18, balken ? tt('Balkenquerschnitt') : tt('Plattenstreifen'), 'middle', '#6b7280', 9.5);
+  s+=`<rect x="${x0}" y="${y0}" width="${W}" height="${Hh}" fill="#e5e7eb" stroke="#111" stroke-width="1.3"/>`;
+  const n = balken ? 3 : 5; for(let i=0;i<n;i++){ const x = balken ? x0+a+(W-2*a)*i/(n-1) : x0+W*(i+0.5)/n; s+=`<circle cx="${x}" cy="${y0+Hh-a}" r="${Math.max(2.5,I.ds/2*sc)}" fill="#111"/>`; }
+  const xa = balken ? x0+a : x0+W*0.5/n;
+  s+=paDim(x0+W+14, y0+Hh-a, x0+W+14, y0+Hh, `a = ${deNum(res.a,0)}`, 6, 3, 'start');
+  if(balken) s+=paDim(x0, y0+Hh-a, xa, y0+Hh-a, '', 0, 0);
+  for(let i=0;i<7;i++){ const xx=x0+(i+0.5)*W/7; s+=svgArrow(xx, y0+Hh+26, xx, y0+Hh+6, C_EW, false, 1.4); }
+  if(balken){ s+=svgArrow(x0-26, y0+Hh*0.6, x0-6, y0+Hh*0.6, C_EW, false, 1.4)+svgArrow(x0+W+56, y0+Hh*0.4, x0+W+36, y0+Hh*0.4, C_EW, false, 1.4); }
+  s+=svgT(x0+W/2, y0+Hh+42, _L`Brand R ${I.R}`, 'middle', C_EW, 9);
+  const tx=320; s+=svgT(tx, 60, balken ? `b = ${deNum(b,0)} mm` : `h = ${deNum(h,0)} mm`, 'start', '#111', 10)+svgT(tx, 80, `a = ${deNum(res.a,1)} mm`, 'start', '#111', 10);
+  if(res.areq!=null) s+=svgT(tx, 100, `a_erf = ${deNum(res.areq,1)} mm`, 'start', res.a>=res.areq?C_IN:C_EW, 10);
+  s+='</svg>';
+  return s + figLegend([], [], tt('Der Achsabstand a schützt die Bewehrung: je dicker die Betonschicht, desto länger bleibt der Stahl unter der kritischen Temperatur.'));
+}
+PA['beton/brandschutz'] = { rd:readFB, va:validateFB, na:nachweiseFB, fg:figFB, ref:'ref.html#/stahlbeton',
+  line:(I,r)=>_L`${I.art==='balken'?tt('Balken'):tt('Platte')} R ${I.R} · a = ${deNum(r.a,1)} mm (erforderlich ${r.areq==null?'—':deNum(r.areq,1)} mm)`,
+  nicht:'Stützen (Methode A, Tab. 5.2a), Wände, Durchlaufträger und -platten (Tab. 5.6/5.9), zweiachsig gespannte Platten, Flachdecken, Spannbeton, die vereinfachten und allgemeinen Rechenverfahren und Abplatzungen bei hochfestem Beton.',
+  title:()=>tt('Brandschutz nach Tabellen'), norm:tt('DIN EN 1992-1-2 mit NA, 5.6 und 5.7'),
+  rows:(I,r)=>repRow(tt('Bauteil'), _L`${I.art==='balken'?tt('Balken, statisch bestimmt'):tt('Platte, einachsig gespannt')}, ${I.art==='balken'?`b = ${deNum(I.b,0)} cm, `:''}h = ${deNum(I.h,0)} cm, R ${I.R}`)
+    + repRow(tt('Bewehrung'), _L`Ø${I.ds}${I.art==='balken'?_L`, Bügel Ø${I.dsw}, ${I.lagen==='1'?tt('einlagig'):tt('mehrlagig')}`:''}, Expositionsklasse ${I.expo}`) };
+
+// ── Stahlbeton: Zugkraftdeckung am Durchlaufträger (EN 1992-1-1, 9.2.1.3 mit NA) ──
+function readZK(){ return { typ:'zugkraft', name:$('in-name').value, b:num('in-b'), h:num('in-h'), beton:$('in-beton').value, expo:$('in-expo').value,
+  l:num('zk-l'), q:num('zk-q'), MA:Math.abs(num('zk-MA')||0), MB:Math.abs(num('zk-MB')||0), cot:num('zk-cot'), ds:+$('zk-ds').value, nd:Math.round(num('zk-nd')), ng:Math.round(num('zk-ng')||0),
+  dso:+$('zk-dso').value, no:Math.round(num('zk-no')||0), dsw:+$('zk-dsw').value }; }
+function validateZK(I){ const bad=[]; if(!(I.b>0 && I.h>0)) bad.push('b, h > 0'); if(!(I.l>0)) bad.push(tt('Stützweite > 0')); if(!(I.q>0)) bad.push('q_Ed > 0');
+  if(!(I.cot>=1 && I.cot<=3)) bad.push(tt('1,0 ≤ cot θ ≤ 3,0')); if(!(I.nd>=2)) bad.push(tt('mindestens 2 durchlaufende Stäbe')); if(!(I.ng>=0)) bad.push(tt('gestaffelte Stäbe ≥ 0'));
+  if((I.MA>0 || I.MB>0) && !(I.no>=2)) bad.push(tt('obere Stäbe über den Stützen ≥ 2')); return bad; }
+function nachweiseZK(I){
+  const C=[], B=betonRow(I.beton), fctk=B[5], fyd=SB.fyd, h=I.h*10, L=I.l*1000;
+  const cw=deckung(I.expo, I.dsw), cu=Math.max(cw.cnom, deckung(I.expo,I.ds).cnom-I.dsw), co=Math.max(cw.cnom, deckung(I.expo,I.dso).cnom-I.dsw);
+  const du=h-cu-I.dsw-I.ds/2, dob=h-co-I.dsw-I.dso/2, zu=0.9*du, zo=0.9*dob, al=zu*I.cot/2;
+  const fbd=g=>2.25*(g?1:0.7)*fctk/SB.gc, topGut = h<=300, lb=(ds,g)=>{ const r=ds/4*fyd/fbd(g); return { r, d:Math.max(r, 0.3*r, 10*ds, 100) }; };
+  const lbu=lb(I.ds,true), lbo=lb(I.dso,topGut);
+  const M = x => -I.MA*(1-x/L) - I.MB*x/L + I.q*x*(L-x)/2/1e6;     // kNm, x in mm
+  const N=600, X=[...Array(N+1)].map((_,i)=>i*L/N), Mv=X.map(M);
+  const env=(sign,z)=>X.map((x,i)=>{ let m=0; for(let j=0;j<=N;j++){ if(Math.abs(X[j]-x)<=al+1e-9){ const v=sign*Mv[j]; if(v>m) m=v; } } return m*1e6/z/1000; });   // kN
+  const Fu=env(1,zu), Fo=env(-1,zo), Fu0=Mv.map(m=>Math.max(m,0)*1e6/zu/1000), Fo0=Mv.map(m=>Math.max(-m,0)*1e6/zo/1000);
+  const Ab=areaBar(I.ds), Fd=I.nd*Ab*fyd/1000, Fges=(I.nd+I.ng)*Ab*fyd/1000, Fo_R=I.no*areaBar(I.dso)*fyd/1000;
+  const Fumax=Math.max(...Fu), Mmax=Math.max(...Mv), xm=X[Mv.indexOf(Mmax)];
+  // gestaffelte Stäbe: Bereich, in dem die durchlaufenden Stäbe allein nicht reichen, plus l_bd
+  let x1=null, x2=null; Fu.forEach((f,i)=>{ if(f>Fd+1e-9){ if(x1===null) x1=X[i]; x2=X[i]; } });
+  const g1 = x1===null ? null : Math.max(0, x1-lbu.d), g2 = x2===null ? null : Math.min(L, x2+lbu.d);
+  // obere Stäbe: von der Stütze bis zum Ende der verschobenen Zugkraftlinie plus l_bd
+  let eA=0; for(let i=0;i<=N && Fo[i]>1e-9;i++) eA=X[i]; let eB=L; for(let i=N;i>=0 && Fo[i]>1e-9;i--) eB=X[i];
+  const lenA = I.MA>0 ? eA+lbo.d : 0, lenB = I.MB>0 ? (L-eB)+lbo.d : 0;
+  C.push({ id:'zkgrund', title:tt('Hebelarm, Versatzmaß und Verankerungslängen'), eta:0, ok:true, info:true, steps:[
+    H(tt('Statische Nutzhöhe und innerer Hebelarm')),
+    _L`unten: d = ${deNum(du,1)} mm, z = 0,9·d = ${deNum(zu,1)} mm · oben: d = ${deNum(dob,1)} mm, z = ${deNum(zo,1)} mm`,
+    H(tt('Versatzmaß: die Zugkraftlinie wird um a<sub>l</sub> in die ungünstige Richtung verschoben (Fachwerkmodell, senkrechte Bügel)')),
+    `a<sub>l</sub> = z·cot θ/2 = ${deNum(zu,1)}·${deNum(I.cot,2)}/2 = <b>${deNum(al,0)} mm</b>`,
+    H(tt('Verankerungslänge über den Punkt hinaus, an dem der Stab rechnerisch nicht mehr gebraucht wird')),
+    _L`unten Ø${I.ds} (guter Verbund): l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = ${deNum(lbu.r,0)} mm → l<sub>bd</sub> = <b>${deNum(lbu.d,0)} mm</b>`,
+    _L`oben Ø${I.dso} (${topGut?tt('guter Verbund, h ≤ 300 mm'):tt('mäßiger Verbund, h > 300 mm')}): l<sub>b,rqd</sub> = ${deNum(lbo.r,0)} mm → l<sub>bd</sub> = <b>${deNum(lbo.d,0)} mm</b>`] });
+  C.push({ id:'zkfeld', title:tt('Feldbewehrung (größte Zugkraft unten)'), eta:Fumax/Fges, ok:Fumax<=Fges, steps:[
+    H(tt('Momentenlinie aus Gleichstreckenlast und Stützmomenten')),
+    `M(x) = −|M<sub>A</sub>|·(1 − x/l) − |M<sub>B</sub>|·x/l + q·x·(l − x)/2 → max M = <b>${deNum(Mmax,1)} kNm</b> ${tt('bei')} x = ${deNum(xm/1000,2)} m`,
+    `F<sub>sd,max</sub> = max M/z = ${deNum(Mmax,1)}/${deNum(zu/1000,3)} = <b>${deNum(Fumax,1)} kN</b>`,
+    _L`aufnehmbar ${I.nd + I.ng} Ø${I.ds}: F<sub>Rd</sub> = ${I.nd+I.ng}·${deNum(Ab,0)}·${deNum(fyd,1)} = <b>${deNum(Fges,1)} kN</b> ${paGe(Fumax<=Fges)} ${deNum(Fumax,1)} kN`],
+    note: Fumax>Fges ? tt('Mehr oder dickere Stäbe unten; mit der Biegebemessung im Modus Balken abgleichen.') : '' });
+  C.push({ id:'zkstaffel', title:tt('Staffelung der Feldbewehrung'), eta:0, ok:true, info:true, steps: x1===null ? [
+    _L`Die ${I.nd} durchlaufenden Stäbe (F<sub>Rd</sub> = ${deNum(Fd,1)} kN) decken die verschobene Zugkraftlinie überall — gestaffelte Stäbe sind rechnerisch nicht nötig.`] : [
+    _L`durchlaufend ${I.nd} Ø${I.ds}: F<sub>Rd</sub> = ${deNum(Fd,1)} kN`,
+    _L`verschobene Zugkraftlinie > ${deNum(Fd,1)} kN zwischen x = ${deNum(x1/1000,2)} m und ${deNum(x2/1000,2)} m`,
+    _L`gestaffelte Stäbe (${I.ng} Ø${I.ds}) mit l<sub>bd</sub> = ${deNum(lbu.d,0)} mm verlängert: von x = <b>${deNum(g1/1000,2)} m</b> bis <b>${deNum(g2/1000,2)} m</b> (Länge ${deNum((g2-g1)/1000,2)} m)`,
+    ...(I.ng===0 ? [tt('Keine gestaffelten Stäbe eingegeben — die durchlaufenden Stäbe reichen dann nicht.')] : [])] });
+  const anteil = I.nd/(I.nd+I.ng);
+  C.push({ id:'zkauf', title:tt('Bewehrung bis zu den Auflagern (9.2.1.4 und 9.2.1.5)'), eta:0.25/anteil, ok:anteil>=0.25-1e-9, steps:[
+    _L`mindestens 25 % der Feldbewehrung bis über die Auflager führen: ${I.nd}/${I.nd+I.ng} = ${deNum(anteil*100,0)} % ${paGe(anteil>=0.25-1e-9)} 25 %`] });
+  if(I.MA>0 || I.MB>0){
+    const FoS=Math.max(Fo[0], Fo[N]), eta=FoS/Fo_R;
+    C.push({ id:'zkstuetz', title:tt('Stützbewehrung oben'), eta, ok:eta<=1, steps:[
+      `F<sub>sd</sub> = |M<sub>Stütze</sub>|/z = ${deNum(Math.max(I.MA,I.MB),1)}/${deNum(zo/1000,3)} = <b>${deNum(FoS,1)} kN</b>`,
+      _L`aufnehmbar ${I.no} Ø${I.dso}: F<sub>Rd</sub> = <b>${deNum(Fo_R,1)} kN</b> ${paGe(eta<=1)} ${deNum(FoS,1)} kN`,
+      H(tt('Länge der oberen Stäbe ab Auflagerachse (Zugkraftlinie verschoben, plus l<sub>bd</sub>)')),
+      ...(I.MA>0 ? [_L`links: Zugkraft endet bei x = ${deNum(eA/1000,2)} m → Stablänge ab Achse A ≥ <b>${deNum(lenA/1000,2)} m</b>`] : []),
+      ...(I.MB>0 ? [_L`rechts: Zugkraft endet bei x = ${deNum(eB/1000,2)} m → Stablänge ab Achse B ≥ <b>${deNum(lenB/1000,2)} m</b>`] : [])],
+      note: eta>1 ? tt('Mehr oder dickere Stäbe über der Stütze.') : '' });
+  }
+  return { C, ok:C.every(c=>c.ok), du, dob, zu, zo, al, lbu, lbo, X, Mv, Fu, Fo, Fu0, Fo0, Fd, Fges, Fo_R, Fumax, Mmax, x1, x2, g1, g2, eA, eB, lenA, lenB, L };
+}
+function figZK(I, res){
+  const ox=40, ow=400, oy=34, oh=222, L=res.L, fB=Math.max(res.Fges, res.Fumax, 1), fT=(I.MA>0||I.MB>0) ? Math.max(res.Fo_R, ...res.Fo) : 0;
+  const sc=oh/(fB+fT)/1.08, y0=oy+fT*sc*1.04+4, X=x=>ox+x/L*ow, Yu=f=>y0+f*sc, Yo=f=>y0-f*sc;
+  let s=paSvg(470, 290, tt('Zugkraftdeckung'));
+  s+=svgT(235, 16, tt('Zugkraftlinie und Deckungslinie (unten: Feld, oben: Stützen)'), 'middle', '#6b7280', 9.5);
+  s+=`<line x1="${ox}" y1="${y0}" x2="${ox+ow}" y2="${y0}" stroke="#111" stroke-width="1.4"/>`+`<polygon points="${ox},${y0} ${ox-6},${y0+10} ${ox+6},${y0+10}" fill="none" stroke="#111"/><polygon points="${ox+ow},${y0} ${ox+ow-6},${y0+10} ${ox+ow+6},${y0+10}" fill="none" stroke="#111"/>`;
+  const line=(arr,Y,col,dash,w)=>`<polyline points="${arr.map((f,i)=>`${X(res.X[i]).toFixed(1)},${Y(f).toFixed(1)}`).join(' ')}" fill="none" stroke="${col}" stroke-width="${w}" ${dash?'stroke-dasharray="4 3"':''}/>`;
+  s+=line(res.Fu0, Yu, '#94a3b8', true, 1.2)+line(res.Fu, Yu, C_EW, false, 1.8);
+  if(Math.max(...res.Fo)>0) s+=line(res.Fo0, Yo, '#94a3b8', true, 1.2)+line(res.Fo, Yo, C_EW, false, 1.8);
+  // Deckungslinie unten: durchlaufende Stäbe + gestaffelte (Anstieg über l_bd)
+  const P=[]; for(let i=0;i<=200;i++){ const x=L*i/200; let F=res.Fd;
+    if(res.g1!=null && I.ng>0){ const a=res.g1, b=res.g2, l=res.lbu.d, Fg=res.Fges-res.Fd;
+      if(x>a && x<b) F += Fg*Math.min(1, (x-a)/l, (b-x)/l); }
+    P.push(`${X(x).toFixed(1)},${Yu(F).toFixed(1)}`); }
+  s+=`<polyline points="${P.join(' ')}" fill="none" stroke="${C_IN}" stroke-width="1.8"/>`;
+  if(I.MA>0 || I.MB>0){ const Q=[]; for(let i=0;i<=200;i++){ const x=L*i/200; let F=0;
+      if(I.MA>0 && x<res.lenA) F=Math.max(F, res.Fo_R*Math.min(1,(res.lenA-x)/res.lbo.d));
+      if(I.MB>0 && x>L-res.lenB) F=Math.max(F, res.Fo_R*Math.min(1,(x-(L-res.lenB))/res.lbo.d));
+      Q.push(`${X(x).toFixed(1)},${Yo(F).toFixed(1)}`); }
+    s+=`<polyline points="${Q.join(' ')}" fill="none" stroke="${C_IN}" stroke-width="1.8"/>`; }
+  s+=svgT(ox+ow, y0-4, `l = ${deNum(I.l,2)} m`, 'end', '#111', 8.5);
+  s+=svgT(X(res.X[res.Mv.indexOf(res.Mmax)]), Yu(res.Fumax)+12, `F = ${deNum(res.Fumax,0)} kN`, 'middle', C_EW, 8.5);
+  s+='</svg>';
+  return s + figLegend([], [`a<sub>l</sub> = ${deNum(res.al,0)} mm`, `l<sub>bd</sub> = ${deNum(res.lbu.d,0)} mm`], tt('Grau gestrichelt: M/z. Orange: um a<sub>l</sub> verschobene Zugkraftlinie. Blau: Deckungslinie der gewählten Stäbe mit Verankerung über l<sub>bd</sub> — sie muss die orange Linie überall umschließen.'));
+}
+PA['beton/zugkraft'] = { rd:readZK, va:validateZK, na:nachweiseZK, fg:figZK, ref:'ref.html#/stahlbeton',
+  line:(I,r)=>_L`l = ${deNum(I.l,2)} m · unten ${I.nd} + ${I.ng} Ø${I.ds}${r.g1!=null && I.ng>0 ? _L` (gestaffelt ${deNum(r.g1/1000,2)} … ${deNum(r.g2/1000,2)} m)` : ''}${I.MA>0||I.MB>0 ? _L` · oben ${I.no} Ø${I.dso}` : ''} · a<sub>l</sub> = ${deNum(r.al,0)} mm`,
+  nicht:'Einzellasten und ungünstige Laststellungen (Momentengrenzlinie aus mehreren Lastfällen), Schrägstäbe, die Verankerung am Endauflager (Modus Balken), Druckbewehrung und das Abstufen der Stützbewehrung in mehreren Stufen.',
+  title:()=>tt('Zugkraftdeckung am Durchlaufträger'), norm:tt('DIN EN 1992-1-1 mit NA, 9.2.1.3 bis 9.2.1.5'),
+  rows:(I,r)=>repRow(tt('Feld'), _L`l = ${deNum(I.l,2)} m, q<sub>Ed</sub> = ${deNum(I.q,1)} kN/m, |M<sub>A</sub>| = ${deNum(I.MA,1)} kNm, |M<sub>B</sub>| = ${deNum(I.MB,1)} kNm, cot θ = ${deNum(I.cot,2)}`)
+    + repRow(tt('Querschnitt'), _L`b = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm, ${betonRow(I.beton)[0]}, Bügel Ø${I.dsw}`)
+    + repRow(tt('Bewehrung'), _L`unten ${I.nd} Ø${I.ds} durchlaufend + ${I.ng} Ø${I.ds} gestaffelt, oben ${I.no} Ø${I.dso}`) };
+
+// ── Stahl: Zugstab mit Schraubenanschluss — Lochschwächung und Blockversagen (EN 1993-1-1, 6.2.3; EN 1993-1-8, 3.10.2) ──
+const stahlFyFu = (name, t) => { const r=STAHL.find(x=>x[0]===name)||STAHL[0]; return t<=40 ? { fy:r[1], fu:r[2], r } : { fy:r[3], fu:r[4], r }; };
+function readZB(){ return { name:$('zb-name').value, st:$('zb-st').value, b:num('zb-b'), t:num('zb-t'), d0:num('zb-d0'), n1:Math.round(num('zb-n1')), n2:Math.round(num('zb-n2')),
+  e1:num('zb-e1'), p1:num('zb-p1')||0, p2:num('zb-p2')||0, N:num('zb-N') }; }
+function validateZB(I){ const bad=[]; if(!(I.b>0 && I.t>0)) bad.push('b, t > 0'); if(!(I.d0>0)) bad.push('d₀ > 0'); if(!(I.n1>=1 && I.n2>=1)) bad.push(tt('mindestens 1 Schraube je Richtung'));
+  if(!(I.e1>0)) bad.push('e₁ > 0'); if(I.n1>1 && !(I.p1>0)) bad.push('p₁ > 0'); if(I.n2>1 && !(I.p2>0)) bad.push('p₂ > 0');
+  if(!(I.b-(I.n2-1)*I.p2>2*I.d0)) bad.push(tt('Schraubenbild passt nicht in die Breite b')); if(!(I.N>0)) bad.push('N_Ed > 0'); return bad; }
+function nachweiseZB(I){
+  const C=[], {fy,fu}=stahlFyFu(I.st, I.t), N=I.N*1000, e2=(I.b-(I.n2-1)*I.p2)/2;
+  const A=I.b*I.t, Anet=(I.b-I.n2*I.d0)*I.t, Npl=A*fy/ST.gM0, Nu=0.9*Anet*fu/gM2, NtRd=Math.min(Npl,Nu);
+  const Lv=I.e1+(I.n1-1)*I.p1-(I.n1-0.5)*I.d0, Anv=2*Lv*I.t;
+  const AntI = I.n2>1 ? ((I.n2-1)*I.p2-(I.n2-1)*I.d0)*I.t : 0, AntA=2*(e2-0.5*I.d0)*I.t;
+  const VI = I.n2>1 ? (fu*AntI/gM2 + fy*Anv/(Math.sqrt(3)*ST.gM0)) : Infinity, VA = fu*AntA/gM2 + fy*Anv/(Math.sqrt(3)*ST.gM0), Veff=Math.min(VI,VA);
+  C.push({ id:'zbgeo', title:tt('Baustoff und Querschnittsflächen'), eta:0, ok:true, info:true, steps:[
+    _L`${I.st}, t = ${deNum(I.t,0)} mm ≤ 40 mm: f<sub>y</sub> = ${fy} N/mm², f<sub>u</sub> = ${fu} N/mm² · γ<sub>M0</sub> = 1,00, γ<sub>M2</sub> = 1,25`,
+    `A = b·t = ${deNum(I.b,0)}·${deNum(I.t,0)} = ${deNum(A,0)} mm²`,
+    _L`A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = (${deNum(I.b,0)} − ${I.n2}·${deNum(I.d0,0)})·${deNum(I.t,0)} = ${deNum(Anet,0)} mm² (Lochreihe quer zur Kraft, nicht versetzt)`,
+    _L`Randabstand quer e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = ${deNum(e2,1)} mm`] });
+  C.push({ id:'zbpl', title:tt('Zugtragfähigkeit Bruttoquerschnitt (Fließen)'), eta:N/Npl, ok:N<=Npl, steps:[
+    `N<sub>pl,Rd</sub> = A·f<sub>y</sub>/γ<sub>M0</sub> = ${deNum(A,0)}·${fy}/1,0 = <b>${deNum(Npl/1000,1)} kN</b> ${paGe(N<=Npl)} N<sub>Ed</sub> = ${deNum(I.N,1)} kN`] });
+  C.push({ id:'zbnet', title:tt('Zugtragfähigkeit Nettoquerschnitt (Bruch)'), eta:N/Nu, ok:N<=Nu, steps:[
+    `N<sub>u,Rd</sub> = 0,9·A<sub>net</sub>·f<sub>u</sub>/γ<sub>M2</sub> = 0,9·${deNum(Anet,0)}·${fu}/1,25 = <b>${deNum(Nu/1000,1)} kN</b> ${paGe(N<=Nu)} ${deNum(I.N,1)} kN`,
+    _L`maßgebend N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = ${deNum(NtRd/1000,1)} kN (${Nu<Npl?tt('Bruch im Lochquerschnitt'):tt('Fließen im Bruttoquerschnitt')})`],
+    note: N>Nu ? tt('Dickeres oder breiteres Blech, weniger Schrauben in einer Lochreihe oder kleinere Löcher; eine höhere Stahlgüte hebt f<sub>u</sub>.') : '' });
+  const S=[H(tt('Ein Block reißt aus: Zug auf der Querfläche A<sub>nt</sub>, Schub entlang der Lochreihen A<sub>nv</sub> (zentrische Last)')),
+    _L`A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0,5)·d<sub>0</sub>)·t = 2·${deNum(Lv,1)}·${deNum(I.t,0)} = ${deNum(Anv,0)} mm²`];
+  if(I.n2>1) S.push(H(tt('Block innen (zwischen den äußeren Lochreihen)')),
+    `A<sub>nt</sub> = (n<sub>2</sub> − 1)·(p<sub>2</sub> − d<sub>0</sub>)·t = ${deNum(AntI,0)} mm² → V<sub>eff,1,Rd</sub> = f<sub>u</sub>·A<sub>nt</sub>/γ<sub>M2</sub> + f<sub>y</sub>·A<sub>nv</sub>/(√3·γ<sub>M0</sub>) = <b>${deNum(VI/1000,1)} kN</b>`);
+  S.push(H(tt('Randstreifen außen (zwischen Lochreihe und Blechrand)')),
+    `A<sub>nt</sub> = 2·(e<sub>2</sub> − d<sub>0</sub>/2)·t = ${deNum(AntA,0)} mm² → V<sub>eff,1,Rd</sub> = <b>${deNum(VA/1000,1)} kN</b>`,
+    `min V<sub>eff,1,Rd</sub> = <b>${deNum(Veff/1000,1)} kN</b> ${paGe(N<=Veff)} N<sub>Ed</sub> = ${deNum(I.N,1)} kN`);
+  C.push({ id:'zbblock', title:tt('Blockversagen (Blockscheren)'), eta:N/Veff, ok:N<=Veff, steps:S,
+    note: N>Veff ? tt('Längeres Schraubenbild in Kraftrichtung (e<sub>1</sub>, p<sub>1</sub>, mehr Reihen), dickeres Blech oder größerer Abstand p<sub>2</sub>.') : '' });
+  const lim=[['e₁',I.e1,1.2*I.d0],['e₂',e2,1.2*I.d0],...(I.n1>1?[['p₁',I.p1,2.2*I.d0]]:[]),...(I.n2>1?[['p₂',I.p2,2.4*I.d0]]:[])], etaA=Math.max(...lim.map(([,v,m])=>m/v));
+  C.push({ id:'zbabst', title:tt('Rand- und Lochabstände (Tab. 3.3)'), eta:etaA, ok:etaA<=1, steps: lim.map(([n,v,m])=>`${n} = ${deNum(v,1)} mm ${paGe(v>=m)} ${deNum(m,1)} mm`) });
+  return { C, ok:C.every(c=>c.ok), fy, fu, e2, A, Anet, Npl, Nu, Anv, AntI, AntA, VI, VA, Veff };
+}
+function figZB(I, res){
+  const len=I.e1+(I.n1-1)*I.p1+120, sc=Math.min(280/len, 170/I.b), x0=80, yc=150, W=len*sc, Bh=I.b*sc, y0=yc-Bh/2;
+  let s=paSvg(470, 290, tt('Zugstab mit Schraubenanschluss'));
+  s+=svgT(235, 16, tt('Draufsicht auf das Blech (Kraft nach rechts)'), 'middle', '#6b7280', 9.5);
+  s+=`<rect x="${x0}" y="${y0}" width="${W}" height="${Bh}" fill="#e5e7eb" stroke="#111" stroke-width="1.2"/>`;
+  const hx=i=>x0+(I.e1+i*I.p1)*sc, hy=j=>y0+(res.e2+j*I.p2)*sc;
+  // Block innen und Randstreifen
+  if(I.n2>1){ const ya=hy(0), yb=hy(I.n2-1), xe=hx(I.n1-1); s+=`<polygon points="${x0},${ya} ${xe},${ya} ${xe},${yb} ${x0},${yb}" fill="${C_EW}" fill-opacity="0.13" stroke="${C_EW}" stroke-dasharray="4 3"/>`; }
+  for(let i=0;i<I.n1;i++) for(let j=0;j<I.n2;j++) s+=`<circle cx="${hx(i)}" cy="${hy(j)}" r="${Math.max(3,I.d0/2*sc)}" fill="#fff" stroke="#111" stroke-width="1.2"/>`;
+  s+=`<line x1="${hx(0)}" y1="${y0}" x2="${hx(0)}" y2="${y0+Bh}" stroke="${C_IN}" stroke-width="1.4" stroke-dasharray="6 3"/>`+svgT(hx(0)+4, y0+Bh+14, tt('Nettoquerschnitt'), 'start', C_IN, 8.5);
+  s+=svgArrow(x0+W, yc, x0+W+40, yc, C_EW, false, 2)+svgT(x0+W+4, yc+16, `N = ${deNum(I.N,0)} kN`, 'start', C_EW, 9);
+  s+=paDim(x0, y0-12, hx(0), y0-12, `e₁ = ${deNum(I.e1,0)}`, 0, -5);
+  if(I.n1>1) s+=paDim(hx(0), y0-12, hx(1), y0-12, `p₁ = ${deNum(I.p1,0)}`, 0, -5);
+  s+=paDim(x0-14, y0, x0-14, y0+Bh, `b = ${deNum(I.b,0)}`, -4, 3, 'end');
+  s+='</svg>';
+  return s + figLegend([`N<sub>Ed</sub> = ${deNum(I.N,1)} kN`], [`N<sub>u,Rd</sub> = ${deNum(res.Nu/1000,1)} kN`, `V<sub>eff,1,Rd</sub> = ${deNum(res.Veff/1000,1)} kN`], tt('Blau: geschwächter Querschnitt durch die erste Lochreihe. Orange gestrichelt: Block, der beim Blockversagen ausreißt.'));
+}
+PA['stahl/zugstab'] = { rd:readZB, va:validateZB, na:nachweiseZB, fg:figZB, ref:'ref.html#/stahlbau',
+  line:(I,r)=>_L`Blech ${deNum(I.b,0)} × ${deNum(I.t,0)} mm, ${I.st}, ${I.n1} × ${I.n2} Löcher d₀ = ${deNum(I.d0,0)} mm · N<sub>u,Rd</sub> = ${deNum(r.Nu/1000,1)} kN · V<sub>eff,1,Rd</sub> = ${deNum(r.Veff/1000,1)} kN`,
+  nicht:'Versetzte Lochreihen (s²/4p), Winkel mit einem Schenkel angeschlossen (β-Werte 3.10.3), exzentrische Blockversagen (V<sub>eff,2,Rd</sub>), die Schrauben selbst (Abscheren, Lochleibung — Modus Anschluss) und Ermüdung.',
+  title:()=>tt('Zugstab mit Lochschwächung'), norm:tt('DIN EN 1993-1-1, 6.2.3 und DIN EN 1993-1-8, 3.10.2 mit NA'),
+  rows:(I,r)=>repRow(tt('Blech'), `${I.st}, b = ${deNum(I.b,0)} mm, t = ${deNum(I.t,0)} mm`)
+    + repRow(tt('Schraubenbild'), _L`${I.n1} Reihen in Kraftrichtung × ${I.n2} quer, d<sub>0</sub> = ${deNum(I.d0,0)} mm, e<sub>1</sub> = ${deNum(I.e1,0)}, p<sub>1</sub> = ${deNum(I.p1,0)}, p<sub>2</sub> = ${deNum(I.p2,0)} mm`)
+    + repRow(tt('Einwirkung'), `N<sub>Ed</sub> = ${deNum(I.N,1)} kN`) };
+
+// ── Stahl: Stumpfnaht (EN 1993-1-8, 4.7) ──
+const BW_BETA = { S235:0.8, S275:0.85, S355:0.9, S460:1.0 };
+function readBW(){ return { name:$('bw-name').value, st:$('bw-st').value, art:$('bw-art').value, t:num('bw-t'), l:num('bw-l'), a:num('bw-a')||0, N:num('bw-N')||0, V:num('bw-V')||0, M:num('bw-M')||0 }; }
+function validateBW(I){ const bad=[]; if(!(I.t>0 && I.l>0)) bad.push('t, l > 0'); if(I.art==='teil' && !(I.a>0 && I.a<I.t)) bad.push(tt('0 < a < t'));
+  if(!(Math.abs(I.N)+Math.abs(I.V)+Math.abs(I.M)>0)) bad.push(tt('mindestens eine Schnittgröße')); return bad; }
+function nachweiseBW(I){
+  const C=[], {fy,fu}=stahlFyFu(I.st, I.t), bw=BW_BETA[I.st]||0.9, voll=I.art==='voll', tw=voll?I.t:I.a, Aw=tw*I.l, Ww=tw*I.l*I.l/6;
+  const sN=I.N*1000/Aw, sM=Math.abs(I.M)*1e6/Ww, sR=Math.abs(sN)+sM;
+  let eta, S;
+  if(voll){
+    const tau=1.5*Math.abs(I.V)*1000/Aw, vR=sR, vM=Math.sqrt(sN*sN+3*tau*tau), sv=Math.max(vR,vM), R=fy/ST.gM0; eta=sv/R;
+    S=[H(tt('Durchgeschweißte Stumpfnaht: Tragfähigkeit wie der schwächere Grundwerkstoff (4.7.1) — Nachweis als Blechquerschnitt')),
+      `A<sub>w</sub> = t·l = ${deNum(I.t,0)}·${deNum(I.l,0)} = ${deNum(Aw,0)} mm² · W<sub>w</sub> = t·l²/6 = ${deNum(Ww/1000,1)}·10³ mm³`,
+      H(tt('Rand der Naht: Normalspannung aus N und M (Schub dort null)')),
+      `σ = N/A<sub>w</sub> + M/W<sub>w</sub> = ${deNum(sN,1)} + ${deNum(sM,1)} = <b>${deNum(sR,1)} N/mm²</b>`,
+      H(tt('Nahtmitte: Normalspannung aus N und größte Schubspannung (Parabel)')),
+      `τ = 1,5·V/A<sub>w</sub> = ${deNum(tau,1)} N/mm² → σ<sub>v</sub> = √(σ<sub>N</sub>² + 3τ²) = <b>${deNum(vM,1)} N/mm²</b>`,
+      `max σ<sub>v</sub> = ${deNum(sv,1)} N/mm² ${paLe(eta<=1)} f<sub>y</sub>/γ<sub>M0</sub> = ${deNum(R,0)} N/mm²`];
+    C.push({ id:'bwnaht', title:tt('Durchgeschweißte Stumpfnaht'), eta, ok:eta<=1, steps:S,
+      note: eta>1 ? tt('Dickeres oder breiteres Blech bzw. höhere Stahlgüte — die Naht trägt nie mehr als das Blech.') : tt('Bei Zug quer zur Walzrichtung Doppelungen ausschließen (Terrassenbruch, Z-Güte).') });
+    return { C, ok:C.every(c=>c.ok), fy, fu, bw, Aw, Ww, sN, sM, sR, tau, vM, sv, R };
+  }
+  const tpar=Math.abs(I.V)*1000/Aw, sv=Math.sqrt(sR*sR+3*tpar*tpar), R1=fu/(bw*gM2), R2=0.9*fu/gM2; eta=Math.max(sv/R1, sR/R2);
+  S=[H(tt('Nicht durchgeschweißte Stumpfnaht: wie eine Kehlnaht mit tief eingebranntem Wurzelmaß a (4.7.2)')),
+    `A<sub>w</sub> = a·l = ${deNum(I.a,1)}·${deNum(I.l,0)} = ${deNum(Aw,0)} mm² · W<sub>w</sub> = a·l²/6 = ${deNum(Ww/1000,1)}·10³ mm³`,
+    H(tt('Spannungen in der Nahtfläche (senkrecht zur Kraft): σ⊥ aus N und M, τ∥ aus V')),
+    `σ<sub>⊥</sub> = ${deNum(sN,1)} + ${deNum(sM,1)} = ${deNum(sR,1)} N/mm² · τ<sub>∥</sub> = V/A<sub>w</sub> = ${deNum(tpar,1)} N/mm²`,
+    H(tt('Richtungsbezogenes Verfahren (4.5.3.2) mit β<sub>w</sub>')),
+    _L`√(σ<sub>⊥</sub>² + 3·τ<sub>∥</sub>²) = <b>${deNum(sv,1)} N/mm²</b> ${paLe(sv<=R1)} f<sub>u</sub>/(β<sub>w</sub>·γ<sub>M2</sub>) = ${fu}/(${deNum(bw,2)}·1,25) = ${deNum(R1,1)} N/mm²`,
+    `σ<sub>⊥</sub> = ${deNum(sR,1)} N/mm² ${paLe(sR<=R2)} 0,9·f<sub>u</sub>/γ<sub>M2</sub> = ${deNum(R2,1)} N/mm²`];
+  C.push({ id:'bwnaht', title:tt('Nicht durchgeschweißte Stumpfnaht'), eta, ok:eta<=1, steps:S,
+    note: eta>1 ? tt('Größere Einbrandtiefe a, durchschweißen oder längere Naht.') : tt('Einseitig nicht durchgeschweißte Nähte nicht durch Biegung um die Nahtlängsachse beanspruchen (Wurzel klafft).') });
+  return { C, ok:C.every(c=>c.ok), fy, fu, bw, Aw, Ww, sN, sM, sR, tpar, sv, R1, R2 };
+}
+function figBW(I, res){
+  let s=paSvg(470, 280, tt('Stumpfnaht'));
+  s+=svgT(235, 16, tt('Ansicht und Nahtquerschnitt'), 'middle', '#6b7280', 9.5);
+  const x0=80, w=230, yc=140, h=Math.min(170, I.l*0.4), tY=20;
+  s+=`<rect x="${x0}" y="${yc-h/2}" width="${w/2-3}" height="${h}" fill="#e5e7eb" stroke="#111"/><rect x="${x0+w/2+3}" y="${yc-h/2}" width="${w/2-3}" height="${h}" fill="#e5e7eb" stroke="#111"/>`;
+  s+=`<rect x="${x0+w/2-3}" y="${yc-h/2}" width="6" height="${h}" fill="${C_IN}" fill-opacity="0.6"/>`+svgT(x0+w/2, yc-h/2-6, I.art==='voll'?tt('durchgeschweißt'):_L`a = ${deNum(I.a,1)} mm`, 'middle', C_IN, 9);
+  if(I.N) s+=svgArrow(x0+w, yc, x0+w+36, yc, C_EW, false, 2)+svgT(x0+w+4, yc-8, `N = ${deNum(I.N,0)} kN`, 'start', C_EW, 9);
+  if(I.V) s+=svgArrow(x0+w-30, yc+h/2+30, x0+w-30, yc+h/2+6, C_EW, false, 2)+svgT(x0+w-26, yc+h/2+28, `V = ${deNum(I.V,0)} kN`, 'start', C_EW, 9);
+  s+=paDim(x0-12, yc-h/2, x0-12, yc+h/2, `l = ${deNum(I.l,0)}`, -4, 3, 'end');
+  // Spannungsbild
+  const ox=395, oh=h, mx=Math.max(Math.abs(res.sN)+res.sM, 1), k=55/mx;
+  s+=`<line x1="${ox}" y1="${yc-oh/2}" x2="${ox}" y2="${yc+oh/2}" stroke="#111"/>`;
+  s+=`<polygon points="${ox},${yc-oh/2} ${ox+(res.sN+res.sM)*k},${yc-oh/2} ${ox+(res.sN-res.sM)*k},${yc+oh/2} ${ox},${yc+oh/2}" fill="${C_EW}" fill-opacity="0.2" stroke="${C_EW}"/>`;
+  s+=svgT(ox+4, yc-oh/2-6, `σ = ${deNum(res.sR,0)} N/mm²`, 'start', C_EW, 9);
+  s+='</svg>';
+  return s + figLegend([`N = ${deNum(I.N,1)} kN`, `V = ${deNum(I.V,1)} kN`, `M = ${deNum(I.M,1)} kNm`], [], tt('Rechts: Normalspannung über die Nahtlänge aus Normalkraft und Biegung in Blechebene.'));
+}
+PA['stahl/stumpf'] = { rd:readBW, va:validateBW, na:nachweiseBW, fg:figBW, ref:'ref.html#/stahlbau',
+  line:(I,r)=>_L`${I.art==='voll'?tt('durchgeschweißt'):_L`nicht durchgeschweißt, a = ${deNum(I.a,1)} mm`}, t = ${deNum(I.t,0)} mm, l = ${deNum(I.l,0)} mm, ${I.st} · σ = ${deNum(r.sR,1)} N/mm²`,
+  nicht:'Stumpfnähte an Profilen (Stegnaht und Gurtnähte getrennt), unterschiedliche Blechdicken mit Abschrägung, Ermüdung (Kerbfälle), Prüfumfang und Bewertungsgruppen nach DIN EN ISO 5817 sowie T-Stöße mit Kehlnaht-Stumpfnaht-Kombination.',
+  title:()=>tt('Stumpfnaht'), norm:tt('DIN EN 1993-1-8 mit NA, 4.7'),
+  rows:(I,r)=>repRow(tt('Naht'), _L`${I.art==='voll'?tt('durchgeschweißt'):_L`nicht durchgeschweißt, a = ${deNum(I.a,1)} mm`}, Blech t = ${deNum(I.t,0)} mm, l = ${deNum(I.l,0)} mm, ${I.st}`)
+    + repRow(tt('Schnittgrößen'), `N = ${deNum(I.N,1)} kN, V = ${deNum(I.V,1)} kN, M = ${deNum(I.M,1)} kNm`) };
+
+// ── Holz: Querzug bei Anschlüssen quer zur Faser (EN 1995-1-1, 8.1.4 mit NA) ──
+function readQZ(){ return { M:hxMat(), name:$('qz-name').value, b:num('qz-b'), h:num('qz-h'), a:num('qz-a'), ar:num('qz-ar')||0, tef:num('qz-tef'), F:num('qz-F') }; }
+function validateQZ(I){ const bad=[]; if(!(I.b>0 && I.h>0)) bad.push('b, h > 0'); if(!(I.a>0 && I.a<I.h)) bad.push(tt('0 < a < h')); if(!(I.ar>=0)) bad.push('a_r ≥ 0');
+  if(!(I.tef>0 && I.tef<=I.b)) bad.push(tt('0 < t_ef ≤ b')); if(!(I.F>0)) bad.push('F_90,Ed > 0'); return bad; }
+function nachweiseQZ(I){
+  const M=I.M, C=[], al=I.a/I.h, ks=Math.max(1, 0.7+1.4*I.ar/I.h), kr=1, R=ks*kr*(6.5+18*al*al)*(I.tef*I.h)**0.8*M.ft90d/1000;
+  const w=1, F90Rk=14*I.b*w*Math.sqrt(I.a/(1-I.a/I.h))/1000, F90RdEN=M.kmod*F90Rk/gMH, frei=al>0.7;
+  C.push({ id:'qzgeo', title:tt('Geometrie des Anschlusses'), eta:0, ok:true, info:true, steps:hxMatSteps(M, [
+    H(tt('Lage des Anschlusses: Abstand des am weitesten vom beanspruchten Rand entfernten Verbindungsmittels')),
+    `α = a/h = ${deNum(I.a,0)}/${deNum(I.h,0)} = <b>${deNum(al,3)}</b>${frei?_L` > 0,7 → Querzugnachweis nach NA nicht erforderlich`:''}`]) });
+  C.push({ id:'qznw', title:tt('Querzugtragfähigkeit (NA, NCI zu 8.1.4)'), eta: frei ? 0 : I.F/R, ok: frei || I.F<=R, info:frei, steps: frei ? [
+    tt('Liegt das Verbindungsmittel in den oberen 30 % der Höhe (vom beanspruchten Rand aus gesehen weit weg), wird der Querzug sicher abgetragen.')] : [
+    H(tt('Beiwerte für die Anschlussbreite und die Anzahl der Reihen')),
+    `k<sub>s</sub> = max(1; 0,7 + 1,4·a<sub>r</sub>/h) = max(1; 0,7 + 1,4·${deNum(I.ar,0)}/${deNum(I.h,0)}) = ${deNum(ks,3)} · k<sub>r</sub> = 1 ${tt('(eine Verbindungsmittelreihe parallel zur Faser)')}`,
+    H(tt('Bemessungswert der Querzugtragfähigkeit')),
+    `F<sub>90,Rd</sub> = k<sub>s</sub>·k<sub>r</sub>·(6,5 + 18·α²)·(t<sub>ef</sub>·h)<sup>0,8</sup>·f<sub>t,90,d</sub> = ${deNum(ks,3)}·(6,5 + 18·${deNum(al,3)}²)·(${deNum(I.tef,0)}·${deNum(I.h,0)})<sup>0,8</sup>·${deNum(M.ft90d,3)} = <b>${deNum(R,2)} kN</b>`,
+    `F<sub>90,Ed</sub> = ${deNum(I.F,2)} kN ${paLe(I.F<=R)} F<sub>90,Rd</sub> = ${deNum(R,2)} kN`,
+    H(tt('Zum Vergleich: Formel der Grundnorm EN 1995-1-1, Gl. (8.4), im NA ersetzt')),
+    _L`F<sub>90,Rk</sub> = 14·b·w·√(h<sub>e</sub>/(1 − h<sub>e</sub>/h)) = ${deNum(F90Rk,2)} kN → F<sub>90,Rd</sub> = k<sub>mod</sub>·F<sub>90,Rk</sub>/γ<sub>M</sub> = ${deNum(F90RdEN,2)} kN`],
+    note: !frei && I.F>R ? tt('Anschluss höher setzen (größeres a), breiter auseinanderziehen (a<sub>r</sub>), größere wirksame Tiefe, Querzugverstärkung (Vollgewindeschrauben) oder einen höheren Träger.') : '' });
+  return { C, ok:C.every(c=>c.ok), al, ks, kr, R, F90Rk, F90RdEN, frei };
+}
+function figQZ(I, res){
+  const sc=Math.min(150/I.h, 1), x0=80, W=320, y0=60, Hh=I.h*sc, ya=y0+Hh-I.a*sc, xc=x0+W/2, ar=Math.max(I.ar*sc, 0);
+  let s=paSvg(470, 280, tt('Querzug'));
+  s+=svgT(235, 16, tt('Ansicht des Trägers mit Queranschluss'), 'middle', '#6b7280', 9.5);
+  s+=`<rect x="${x0}" y="${y0}" width="${W}" height="${Hh}" fill="#e7c9a0" stroke="#111" stroke-width="1.2"/>`;
+  s+=`<rect x="${xc-ar/2-14}" y="${ya-12}" width="${ar+28}" height="${y0+Hh-ya+40}" fill="#cbd5e1" fill-opacity="0.8" stroke="#475569"/>`;
+  const n=Math.max(2, Math.round(ar/25)+1); for(let i=0;i<n;i++){ const x=xc-ar/2+ar*i/(n-1||1); s+=`<circle cx="${x}" cy="${ya}" r="3" fill="#111"/>`; }
+  s+=svgArrow(xc, y0+Hh+30, xc, y0+Hh+64, C_EW, false, 2)+svgT(xc+6, y0+Hh+58, `F₉₀ = ${deNum(I.F,1)} kN`, 'start', C_EW, 9);
+  s+=paDim(x0+W+14, y0+Hh, x0+W+14, ya, `a = ${deNum(I.a,0)}`, 6, 3, 'start');
+  s+=paDim(x0-14, y0, x0-14, y0+Hh, `h = ${deNum(I.h,0)}`, -4, 3, 'end');
+  if(!res.frei) s+=`<path d="M ${xc-60} ${ya+4} Q ${xc} ${ya+28} ${xc+60} ${ya+4}" fill="none" stroke="${C_EW}" stroke-dasharray="4 3"/>`+svgT(xc+64, ya+12, tt('Spaltgefahr'), 'start', C_EW, 8.5);
+  s+=svgT(x0+4, y0+Hh+14, tt('beanspruchter Rand'), 'start', '#6b7280', 8.5);
+  s+='</svg>';
+  return s + figLegend([`F<sub>90,Ed</sub> = ${deNum(I.F,2)} kN`], res.frei?[]:[`F<sub>90,Rd</sub> = ${deNum(res.R,2)} kN`], tt('Hängt eine Last unten am Träger, zieht sie die Fasern quer auseinander — je näher der Anschluss am unteren Rand liegt, desto eher spaltet das Holz.'));
+}
+PA['holz/querzug'] = { rd:readQZ, va:validateQZ, na:nachweiseQZ, fg:figQZ, ref:'ref.html#/holzbau',
+  line:(I,r)=>_L`${I.M.kl} ${deNum(I.b,0)} × ${deNum(I.h,0)} mm, a/h = ${deNum(r.al,2)} · ${r.frei?tt('kein Nachweis nötig'):_L`F<sub>90,Rd</sub> = ${deNum(r.R,2)} kN`}`,
+  nicht:'Mehrere Verbindungsmittelreihen (k<sub>r</sub> < 1), Anschlüsse beidseitig des Trägers, Querzugverstärkungen und die Tragfähigkeit der Verbindungsmittel selbst (Modus Verbindung).',
+  title:()=>tt('Querzug am Queranschluss'), norm:tt('DIN EN 1995-1-1 mit NA, 8.1.4 (NCI)'),
+  rows:(I,r)=>repRow(tt('Holz, Nutzung'), _L`${I.M.kl}, Nutzungsklasse ${I.M.nkl}, KLED „${KLED_[I.M.kled]}“, k<sub>mod</sub> = ${deNum(I.M.kmod,2)}`)
+    + repRow(tt('Geometrie'), `b = ${deNum(I.b,0)} mm, h = ${deNum(I.h,0)} mm, a = ${deNum(I.a,0)} mm, a<sub>r</sub> = ${deNum(I.ar,0)} mm, t<sub>ef</sub> = ${deNum(I.tef,0)} mm`)
+    + repRow(tt('Last'), `F<sub>90,Ed</sub> = ${deNum(I.F,2)} kN`) };
+
+// ── Holz: Durchbruch im Träger (NA, NCI NA.6.7) ──
+function readDB(){ return { M:hxMat(), name:$('db-name').value, form:$('db-form').value, b:num('db-b'), h:num('db-h'), hd:num('db-hd'), a:num('db-a')||0, hro:num('db-hro'), lv:num('db-lv')||0, V:num('db-V')||0, Md:num('db-M')||0 }; }
+function validateDB(I){ const bad=[]; if(!(I.b>0 && I.h>0)) bad.push('b, h > 0'); if(!(I.hd>0 && I.hd<I.h)) bad.push(tt('0 < h_d < h')); if(I.form==='r' && !(I.a>0)) bad.push(tt('Länge a > 0'));
+  if(!(I.hro>0 && I.hro+I.hd<I.h)) bad.push(tt('Restquerschnitt oben und unten > 0')); if(!(Math.abs(I.V)+Math.abs(I.Md)>0)) bad.push('V, M'); return bad; }
+function nachweiseDB(I){
+  const M=I.M, C=[], rund=I.form==='k', hru=I.h-I.hro-I.hd, hr=Math.min(I.hro,hru)+(rund?0.15*I.hd:0);
+  const FtV=Math.abs(I.V)*I.hd/(4*I.h)*(3-I.hd*I.hd/(I.h*I.h)), FtM=0.008*Math.abs(I.Md)*1000/hr, Ft=FtV+FtM;      // kN (M in kNm → kN·mm/1000)
+  const lt=rund ? 0.35*I.hd+0.5*I.h : 0.5*(I.hd+I.h), kt=Math.min(1, Math.sqrt(450/I.h)), R=0.5*lt*I.b*kt*M.ft90d/1000, eta=Ft/R;
+  const geo=[[tt('h_d ≤ 0,4·h'), I.hd, 0.4*I.h, 'le'], [tt('h_ro, h_ru ≥ 0,25·h'), Math.min(I.hro,hru), 0.25*I.h, 'ge'], ...(rund?[]:[[tt('a ≤ h'), I.a, I.h, 'le']]), [tt('Abstand zum Auflager l_v ≥ h'), I.lv, I.h, 'ge']];
+  const etaG=Math.max(...geo.map(([,v,m,o])=>o==='le' ? v/m : m/Math.max(v,1e-9)));
+  const bn=I.h-I.hd, kcr=M.kcr, tau=1.5*Math.abs(I.V)*1000/(kcr*I.b*bn), etaV=tau/M.fvd;
+  const Wn=I.b*(I.h**3-I.hd**3)/(6*I.h), sm=Math.abs(I.Md)*1e6/Wn, etaM=sm/(M.fmd*M.kh(I.h));
+  C.push({ id:'dbgeo', title:tt('Grenzen für unverstärkte Durchbrüche'), eta:etaG, ok:etaG<=1, steps:[...hxMatSteps(M),
+    H(tt('Geometrie (NA, NCI NA.6.7, Anhaltswerte für unverstärkte Durchbrüche)')),
+    _L`Restquerschnitt h<sub>ro</sub> = ${deNum(I.hro,0)} mm, h<sub>ru</sub> = ${deNum(hru,0)} mm`,
+    ...geo.map(([n,v,m,o])=>`${n.replace('h_d','h<sub>d</sub>').replace('h_ro','h<sub>ro</sub>').replace('h_ru','h<sub>ru</sub>').replace('l_v','l<sub>v</sub>')}: ${deNum(v,0)} ${o==='le'?paLe(v<=m):paGe(v>=m)} ${deNum(m,0)} mm`)],
+    note: etaG>1 ? tt('Außerhalb der Grenzen nur mit Verstärkung (eingeklebte Gewindestangen, Vollgewindeschrauben, aufgeklebte Platten).') : tt('Unverstärkte Durchbrüche nur in den Nutzungsklassen 1 und 2; Ecken rechteckiger Durchbrüche mit r ≥ 15 mm ausrunden.') });
+  C.push({ id:'dbft', title:tt('Querzug am Durchbruchrand'), eta, ok:eta<=1, steps:[
+    H(tt('Querzugkraft aus Querkraft und Moment')),
+    `F<sub>t,V,d</sub> = V<sub>d</sub>·h<sub>d</sub>/(4·h)·(3 − h<sub>d</sub>²/h²) = ${deNum(Math.abs(I.V),1)}·${deNum(I.hd,0)}/(4·${deNum(I.h,0)})·(3 − ${deNum((I.hd/I.h)**2,3)}) = ${deNum(FtV,2)} kN`,
+    `h<sub>r</sub> = ${rund?'min(h<sub>ro</sub>; h<sub>ru</sub>) + 0,15·h<sub>d</sub>':'min(h<sub>ro</sub>; h<sub>ru</sub>)'} = ${deNum(hr,1)} mm → F<sub>t,M,d</sub> = 0,008·M<sub>d</sub>/h<sub>r</sub> = 0,008·${deNum(Math.abs(I.Md),1)}·10³/${deNum(hr,1)} = ${deNum(FtM,2)} kN`,
+    `F<sub>t,90,d</sub> = ${deNum(FtV,2)} + ${deNum(FtM,2)} = <b>${deNum(Ft,2)} kN</b>`,
+    H(tt('Mitwirkende Länge und Volumenbeiwert')),
+    `l<sub>t,90</sub> = ${rund?'0,35·h<sub>d</sub> + 0,5·h':'0,5·(h<sub>d</sub> + h)'} = ${deNum(lt,1)} mm · k<sub>t,90</sub> = min(1; (450/h)<sup>0,5</sup>) = ${deNum(kt,3)}`,
+    `F<sub>t,90,Rd</sub> = 0,5·l<sub>t,90</sub>·b·k<sub>t,90</sub>·f<sub>t,90,d</sub> = 0,5·${deNum(lt,1)}·${deNum(I.b,0)}·${deNum(kt,3)}·${deNum(M.ft90d,3)} = <b>${deNum(R,2)} kN</b>`,
+    `${deNum(Ft,2)} ${paLe(eta<=1)} ${deNum(R,2)} kN → η = ${deNum(eta,3)}`],
+    note: eta>1 ? tt('Kleinerer Durchbruch, Lage näher an der Trägerachse und weiter weg vom Auflager (kleineres V), höherer Träger oder Verstärkung.') : '' });
+  C.push({ id:'dbv', title:tt('Schub im Restquerschnitt'), eta:etaV, ok:etaV<=1, steps:[
+    `τ<sub>d</sub> = 1,5·V<sub>d</sub>/(k<sub>cr</sub>·b·(h − h<sub>d</sub>)) = 1,5·${deNum(Math.abs(I.V)*1000,0)}/(${deNum(kcr,3)}·${deNum(I.b,0)}·${deNum(bn,0)}) = <b>${deNum(tau,2)} N/mm²</b> ${paLe(etaV<=1)} f<sub>v,d</sub> = ${deNum(M.fvd,2)} N/mm²`] });
+  C.push({ id:'dbm', title:tt('Biegung im geschwächten Querschnitt'), eta:etaM, ok:etaM<=1, steps:[
+    `W<sub>net</sub> = b·(h³ − h<sub>d</sub>³)/(6·h) = ${deNum(Wn/1e3,0)}·10³ mm³ ${tt('(Durchbruch mittig)')}`,
+    `σ<sub>m,d</sub> = M<sub>d</sub>/W<sub>net</sub> = <b>${deNum(sm,2)} N/mm²</b> ${paLe(etaM<=1)} k<sub>h</sub>·f<sub>m,d</sub> = ${deNum(M.kh(I.h),3)}·${deNum(M.fmd,2)} = ${deNum(M.fmd*M.kh(I.h),2)} N/mm²`] });
+  return { C, ok:C.every(c=>c.ok), hru, hr, FtV, FtM, Ft, lt, kt, R, eta, tau, sm, etaG };
+}
+function figDB(I, res){
+  const sc=Math.min(200/I.h, 0.6), x0=40, W=340, y0=50, Hh=I.h*sc, xc=x0+W*0.55;
+  let s=paSvg(470, 290, tt('Durchbruch'));
+  s+=svgT(235, 16, tt('Ansicht des Trägers'), 'middle', '#6b7280', 9.5);
+  s+=`<rect x="${x0}" y="${y0}" width="${W}" height="${Hh}" fill="#e7c9a0" stroke="#111" stroke-width="1.2"/>`;
+  s+=`<polygon points="${x0},${y0+Hh} ${x0-8},${y0+Hh+14} ${x0+8},${y0+Hh+14}" fill="none" stroke="#111"/>`;
+  const yt=y0+I.hro*sc, hd=I.hd*sc;
+  s+= I.form==='k' ? `<circle cx="${xc}" cy="${yt+hd/2}" r="${hd/2}" fill="#fff" stroke="#111" stroke-width="1.2"/>`
+                   : `<rect x="${xc-I.a*sc/2}" y="${yt}" width="${I.a*sc}" height="${hd}" rx="4" fill="#fff" stroke="#111" stroke-width="1.2"/>`;
+  const xl = I.form==='k' ? xc-hd/2 : xc-I.a*sc/2;
+  // Querzugbereiche an den Ecken
+  s+=svgArrow(xl+8, yt+2, xl+8, yt-24, C_EW, false, 1.6)+svgArrow(xl+8+ (I.form==='k'?hd-16:I.a*sc-16), yt+hd-2, xl+8+(I.form==='k'?hd-16:I.a*sc-16), yt+hd+24, C_EW, false, 1.6);
+  s+=paDim(x0+W+12, y0, x0+W+12, y0+Hh, `h = ${deNum(I.h,0)}`, 6, 3, 'start');
+  s+=paDim(xc+ (I.form==='k'?hd/2:I.a*sc/2)+10, yt, xc+(I.form==='k'?hd/2:I.a*sc/2)+10, yt+hd, `h_d = ${deNum(I.hd,0)}`, 4, 3, 'start');
+  s+=paDim(x0, y0+Hh+26, xl, y0+Hh+26, `l_v = ${deNum(I.lv,0)}`, 0, 12);
+  s+='</svg>';
+  return s + figLegend([`V<sub>d</sub> = ${deNum(I.V,1)} kN`, `M<sub>d</sub> = ${deNum(I.Md,1)} kNm`], [`F<sub>t,90,d</sub> = ${deNum(res.Ft,2)} kN`], tt('Orange: Querzug an den gegenüberliegenden Ecken — dort reißt ein unverstärkter Träger zuerst.'));
+}
+PA['holz/durchbruch'] = { rd:readDB, va:validateDB, na:nachweiseDB, fg:figDB, ref:'ref.html#/holzbau',
+  line:(I,r)=>_L`${I.form==='k'?_L`rund Ø ${deNum(I.hd,0)} mm`:_L`rechteckig ${deNum(I.a,0)} × ${deNum(I.hd,0)} mm`} in ${deNum(I.b,0)} × ${deNum(I.h,0)} mm · F<sub>t,90,d</sub> = ${deNum(r.Ft,2)} kN / F<sub>t,90,Rd</sub> = ${deNum(r.R,2)} kN`,
+  nicht:'Verstärkte Durchbrüche (innen und außen liegende Verstärkungen), mehrere Durchbrüche (Abstand l<sub>z</sub>), Durchbrüche in Vollholz und in der Nähe von Ausklinkungen sowie die Durchbiegung mit geschwächtem Querschnitt.',
+  title:()=>tt('Durchbruch im Holzträger'), norm:tt('DIN EN 1995-1-1 mit NA, NCI NA.6.7'),
+  rows:(I,r)=>repRow(tt('Holz, Nutzung'), _L`${I.M.kl}, Nutzungsklasse ${I.M.nkl}, KLED „${KLED_[I.M.kled]}“`)
+    + repRow(tt('Durchbruch'), _L`${I.form==='k'?tt('rund'):tt('rechteckig')}, h<sub>d</sub> = ${deNum(I.hd,0)} mm${I.form==='r'?`, a = ${deNum(I.a,0)} mm`:''}, h<sub>ro</sub> = ${deNum(I.hro,0)} mm, l<sub>v</sub> = ${deNum(I.lv,0)} mm, Träger ${deNum(I.b,0)} × ${deNum(I.h,0)} mm`)
+    + repRow(tt('Schnittgrößen am Durchbruch'), `V<sub>d</sub> = ${deNum(I.V,1)} kN, M<sub>d</sub> = ${deNum(I.Md,1)} kNm`) };
+
+// ── Holz: Pfette mit Doppelbiegung (EN 1995-1-1, 6.1.6 und 6.1.7) ──
+function readDP(){ return { M:hxMat(), name:$('dp-name').value, b:num('dp-b'), h:num('dp-h'), L:num('dp-L'), qv:num('dp-qv')||0, qn:num('dp-qn')||0, al:num('dp-al')||0 }; }
+function validateDP(I){ const bad=[]; if(!(I.b>0 && I.h>0)) bad.push('b, h > 0'); if(!(I.L>0)) bad.push(tt('Stützweite > 0')); if(!(I.al>=0 && I.al<80)) bad.push(tt('0 ≤ α < 80°'));
+  if(!(Math.abs(I.qv)+Math.abs(I.qn)>0)) bad.push('q > 0'); return bad; }
+function nachweiseDP(I){
+  const M=I.M, C=[], a=rad(I.al), qz=I.qv*Math.cos(a)+I.qn, qy=I.qv*Math.sin(a), L=I.L;
+  const My=Math.abs(qz)*L*L/8, Mz=Math.abs(qy)*L*L/8, Vz=Math.abs(qz)*L/2, Vy=Math.abs(qy)*L/2;
+  const Wy=I.b*I.h*I.h/6, Wz=I.h*I.b*I.b/6, sy=My*1e6/Wy, sz=Mz*1e6/Wz, khy=M.kh(I.h), khz=M.kh(I.b), fy=M.fmd*khy, fz=M.fmd*khz, km=0.7;
+  const e1=sy/fy+km*sz/fz, e2=km*sy/fy+sz/fz, eM=Math.max(e1,e2);
+  const ty=1.5*Vz*1000/(M.kcr*I.b*I.h), tz=1.5*Vy*1000/(M.kcr*I.b*I.h), eV=(ty/M.fvd)**2+(tz/M.fvd)**2;
+  C.push({ id:'dpq', title:tt('Lastaufteilung auf die Hauptachsen'), eta:0, ok:true, info:true, steps:[...hxMatSteps(M),
+    H(tt('Pfette senkrecht zur Dachfläche eingebaut: die lotrechte Last zerfällt in zwei Anteile')),
+    `q<sub>z</sub> = q<sub>v</sub>·cos α + q<sub>n</sub> = ${deNum(I.qv,2)}·${deNum(Math.cos(a),4)} + ${deNum(I.qn,2)} = <b>${deNum(qz,3)} kN/m</b> ${tt('(rechtwinklig zur Dachfläche, starke Achse)')}`,
+    `q<sub>y</sub> = q<sub>v</sub>·sin α = ${deNum(I.qv,2)}·${deNum(Math.sin(a),4)} = <b>${deNum(qy,3)} kN/m</b> ${tt('(in der Dachebene, schwache Achse)')}`,
+    H(tt('Schnittgrößen am Einfeldträger')),
+    `M<sub>y</sub> = q<sub>z</sub>·l²/8 = ${deNum(My,2)} kNm · M<sub>z</sub> = q<sub>y</sub>·l²/8 = ${deNum(Mz,2)} kNm · V<sub>z</sub> = ${deNum(Vz,2)} kN · V<sub>y</sub> = ${deNum(Vy,2)} kN`] });
+  C.push({ id:'dpm', title:tt('Doppelbiegung (6.17 und 6.18)'), eta:eM, ok:eM<=1, steps:[
+    `σ<sub>m,y,d</sub> = M<sub>y</sub>/W<sub>y</sub> = ${deNum(My*1e6,0)}/${deNum(Wy,0)} = ${deNum(sy,2)} N/mm² · f<sub>m,y,d</sub> = k<sub>h</sub>(h)·f<sub>m,d</sub> = ${deNum(khy,3)}·${deNum(M.fmd,2)} = ${deNum(fy,2)} N/mm²`,
+    `σ<sub>m,z,d</sub> = M<sub>z</sub>/W<sub>z</sub> = ${deNum(Mz*1e6,0)}/${deNum(Wz,0)} = ${deNum(sz,2)} N/mm² · f<sub>m,z,d</sub> = k<sub>h</sub>(b)·f<sub>m,d</sub> = ${deNum(khz,3)}·${deNum(M.fmd,2)} = ${deNum(fz,2)} N/mm²`,
+    H(tt('k<sub>m</sub> = 0,7 für Rechteckquerschnitte: die größten Spannungen treffen nur an einer Ecke zusammen')),
+    `(6.17): σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + k<sub>m</sub>·σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> = ${deNum(sy/fy,3)} + 0,7·${deNum(sz/fz,3)} = <b>${deNum(e1,3)}</b>`,
+    `(6.18): k<sub>m</sub>·σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> = 0,7·${deNum(sy/fy,3)} + ${deNum(sz/fz,3)} = <b>${deNum(e2,3)}</b> ${paLe(eM<=1)} 1`],
+    note: eM>1 ? tt('Größerer Querschnitt — bei großer Dachneigung lohnt vor allem eine breitere Pfette (W<sub>z</sub> ~ b²) oder eine Zange/Aussteifung in der Dachebene.') : '' });
+  C.push({ id:'dpv', title:tt('Schub aus zwei Richtungen'), eta:eV, ok:eV<=1, steps:[
+    `τ<sub>y,d</sub> = 1,5·V<sub>z</sub>/(k<sub>cr</sub>·b·h) = ${deNum(ty,3)} N/mm² · τ<sub>z,d</sub> = 1,5·V<sub>y</sub>/(k<sub>cr</sub>·b·h) = ${deNum(tz,3)} N/mm² (k<sub>cr</sub> = ${deNum(M.kcr,3)})`,
+    `(τ<sub>y,d</sub>/f<sub>v,d</sub>)² + (τ<sub>z,d</sub>/f<sub>v,d</sub>)² = (${deNum(ty,3)}/${deNum(M.fvd,2)})² + (${deNum(tz,3)}/${deNum(M.fvd,2)})² = <b>${deNum(eV,3)}</b> ${paLe(eV<=1)} 1`] });
+  return { C, ok:C.every(c=>c.ok), qz, qy, My, Mz, Vz, Vy, sy, sz, fy, fz, e1, e2, eM, ty, tz, eV };
+}
+function figDP(I, res){
+  let s=paSvg(470, 280, tt('Pfette mit Doppelbiegung'));
+  s+=svgT(150, 16, tt('Querschnitt, um α gedreht'), 'middle', '#6b7280', 9.5);
+  const cx=150, cy=150, sc=Math.min(150/I.h, 150/I.b, 0.8), a=rad(I.al), w=I.b*sc, h=I.h*sc;
+  s+=`<g transform="rotate(${-I.al} ${cx} ${cy})"><line x1="${cx-120}" y1="${cy-h/2}" x2="${cx+120}" y2="${cy-h/2}" stroke="#94a3b8" stroke-dasharray="5 4"/>`
+    + `<rect x="${cx-w/2}" y="${cy-h/2}" width="${w}" height="${h}" fill="#e7c9a0" stroke="#111" stroke-width="1.3"/>`
+    + `<line x1="${cx}" y1="${cy-h/2-30}" x2="${cx}" y2="${cy+h/2+20}" stroke="#111" stroke-width="0.6" stroke-dasharray="6 3"/>`
+    + `<line x1="${cx-w/2-30}" y1="${cy}" x2="${cx+w/2+30}" y2="${cy}" stroke="#111" stroke-width="0.6" stroke-dasharray="6 3"/></g>`;
+  s+=svgT(cx-118, cy-h/2*Math.cos(a)+118*Math.sin(a)-6, tt('Dachfläche'), 'start', '#6b7280', 8.5);
+  s+=svgArrow(cx+80, cy-80, cx+80, cy-30, C_EW, false, 2)+svgT(cx+86, cy-60, `q_v = ${deNum(I.qv,2)}`, 'start', C_EW, 9);
+  // Komponenten
+  const ex=Math.sin(a), ey=Math.cos(a);
+  s+=svgArrow(cx, cy, cx-ex*55, cy+ey*55, C_IN, false, 1.6)+svgT(cx-ex*55-4, cy+ey*55+12, `q_z = ${deNum(res.qz,2)}`, 'end', C_IN, 9);
+  s+=svgArrow(cx, cy, cx+ey*45, cy+ex*45, C_IN, false, 1.6)+svgT(cx+ey*45+6, cy+ex*45+4, `q_y = ${deNum(res.qy,2)}`, 'start', C_IN, 9);
+  s+=svgT(380, 80, `η = ${deNum(res.eM,2)}`, 'middle', res.eM<=1?C_IN:C_EW, 18)+svgT(380, 100, tt('Doppelbiegung'), 'middle', '#111', 9);
+  s+=svgT(380, 130, `σ_y = ${deNum(res.sy,1)} N/mm²`, 'middle', '#111', 9)+svgT(380, 146, `σ_z = ${deNum(res.sz,1)} N/mm²`, 'middle', '#111', 9);
+  s+='</svg>';
+  return s + figLegend([`q<sub>v</sub> = ${deNum(I.qv,2)} kN/m`, `q<sub>n</sub> = ${deNum(I.qn,2)} kN/m`], [`M<sub>y</sub> = ${deNum(res.My,2)} kNm`, `M<sub>z</sub> = ${deNum(res.Mz,2)} kNm`], tt('Die lotrechte Last (Eigengewicht, Schnee) wirkt schräg zu den Hauptachsen der Pfette und biegt sie um beide Achsen.'));
+}
+PA['holz/doppel'] = { rd:readDP, va:validateDP, na:nachweiseDP, fg:figDP, ref:'ref.html#/holzbau',
+  line:(I,r)=>_L`${I.M.kl} ${deNum(I.b,0)}/${deNum(I.h,0)} mm, l = ${deNum(I.L,2)} m, α = ${deNum(I.al,1)}° · M<sub>y</sub> = ${deNum(r.My,2)} kNm, M<sub>z</sub> = ${deNum(r.Mz,2)} kNm`,
+  nicht:'Kippen der Pfette (Modus Träger/Stütze), Durchlaufpfetten und Gerberpfetten, Normalkraft aus Windverband, Durchbiegung in zwei Richtungen und Anschlüsse (Pfettenstoß, Auflager).',
+  title:()=>tt('Pfette mit Doppelbiegung'), norm:tt('DIN EN 1995-1-1 mit NA, 6.1.6 und 6.1.7'),
+  rows:(I,r)=>repRow(tt('Holz, Nutzung'), _L`${I.M.kl}, Nutzungsklasse ${I.M.nkl}, KLED „${KLED_[I.M.kled]}“, k<sub>mod</sub> = ${deNum(I.M.kmod,2)}`)
+    + repRow(tt('Pfette'), _L`b = ${deNum(I.b,0)} mm, h = ${deNum(I.h,0)} mm, l = ${deNum(I.L,2)} m, Dachneigung α = ${deNum(I.al,1)}°`)
+    + repRow(tt('Lasten (Bemessungswerte)'), _L`q<sub>v</sub> = ${deNum(I.qv,2)} kN/m lotrecht, q<sub>n</sub> = ${deNum(I.qn,2)} kN/m rechtwinklig zur Dachfläche`) };
+
+// ── Mauerwerk: nichttragende Ausfachungswand (Tabelle der zulässigen Ausfachungsflächen) ──
+// [Wanddicke] → je Höhe über Gelände (≤ 8 m, ≤ 20 m, ≤ 100 m): [Fläche bei ε = 1,0, bei ε ≥ 2,0] in m², vierseitig gehalten
+const AF_TAB = { 115:[[12,8],[8,5],[6,4]], 175:[[20,14],[13,9],[9,6]], 240:[[36,25],[23,16],[16,12]], 300:[[50,33],[35,23],[25,17]] };
+const AF_Z = [8,20,100];
+function readAF(){ return { name:$('af-name').value, t:+$('af-t').value, h:num('af-h'), l:num('af-l'), z:+$('af-z').value, halt:+$('af-halt').value }; }
+function validateAF(I){ const bad=[]; if(!(I.h>0 && I.l>0)) bad.push(tt('Höhe und Länge > 0')); return bad; }
+function nachweiseAF(I){
+  const C=[], A=I.h*I.l, eps=Math.max(I.h,I.l)/Math.min(I.h,I.l), iz=AF_Z.indexOf(I.z), [a1,a2]=AF_TAB[I.t][iz];
+  const k=Math.min(Math.max(eps-1,0),1), Az4=a1+(a2-a1)*k, Azul=I.halt===3 ? Az4/2 : Az4, eta=A/Azul;
+  C.push({ id:'afe', title:tt('Seitenverhältnis und Fläche'), eta:0, ok:true, info:true, steps:[
+    `A = h·l = ${deNum(I.h,2)}·${deNum(I.l,2)} = <b>${deNum(A,2)} m²</b>`,
+    `ε = ${tt('größere/kleinere Seite')} = ${deNum(eps,2)}`] });
+  C.push({ id:'afa', title:tt('Zulässige Ausfachungsfläche'), eta, ok:eta<=1, steps:[
+    H(_L`Tabellenwerte für t = ${I.t} mm, Höhe über Gelände bis ${I.z} m (vierseitig gehalten)`),
+    _L`ε = 1,0: ${a1} m² · ε ≥ 2,0: ${a2} m² → bei ε = ${deNum(eps,2)} linear: <b>${deNum(Az4,2)} m²</b>`,
+    ...(I.halt===3 ? [_L`dreiseitig gehalten (ein freier senkrechter Rand): halber Tabellenwert → <b>${deNum(Azul,2)} m²</b>`] : []),
+    `A = ${deNum(A,2)} m² ${paLe(eta<=1)} A<sub>zul</sub> = ${deNum(Azul,2)} m²`],
+    note: eta>1 ? tt('Dickere Wand, zusätzliche Halterung (Stütze oder Riegel teilt die Fläche) oder ein rechnerischer Nachweis für Wind.') : tt('Voraussetzungen: Steinfestigkeitsklasse ≥ 12, Normalmauermörtel ≥ M 5 (NM IIa) oder Dünnbettmörtel, Halterungen am Rand kraftschlüssig.') });
+  return { C, ok:C.every(c=>c.ok), A, eps, a1, a2, Az4, Azul, eta };
+}
+function figAF(I, res){
+  const sc=Math.min(240/I.l, 170/I.h), x0=40, y0=50, W=I.l*sc, Hh=I.h*sc;
+  let s=paSvg(470, 280, tt('Ausfachungswand'));
+  s+=svgT(150, 16, tt('Ansicht'), 'middle', '#6b7280', 9.5);
+  s+=`<rect x="${x0}" y="${y0}" width="${W}" height="${Hh}" fill="#f3e8dc" stroke="#111"/>`;
+  for(let y=y0+8;y<y0+Hh;y+=8) s+=`<line x1="${x0}" y1="${y}" x2="${x0+W}" y2="${y}" stroke="#d6c3ae" stroke-width="0.6"/>`;
+  s+=`<rect x="${x0-8}" y="${y0-8}" width="${W+16}" height="8" fill="#94a3b8"/><rect x="${x0-8}" y="${y0+Hh}" width="${W+16}" height="8" fill="#94a3b8"/><rect x="${x0-8}" y="${y0}" width="8" height="${Hh}" fill="#94a3b8"/>`;
+  if(I.halt===4) s+=`<rect x="${x0+W}" y="${y0}" width="8" height="${Hh}" fill="#94a3b8"/>`; else s+=`<line x1="${x0+W}" y1="${y0}" x2="${x0+W}" y2="${y0+Hh}" stroke="${C_EW}" stroke-width="2" stroke-dasharray="5 3"/>`+svgT(x0+W+4, y0+Hh/2, tt('frei'), 'start', C_EW, 9);
+  s+=paDim(x0, y0+Hh+24, x0+W, y0+Hh+24, `l = ${deNum(I.l,2)} m`, 0, 12)+paDim(x0+W+(I.halt===4?22:36), y0, x0+W+(I.halt===4?22:36), y0+Hh, `h = ${deNum(I.h,2)} m`, 4, 3, 'start');
+  s+=svgT(390, 80, `${deNum(res.A,1)} m²`, 'middle', res.eta<=1?C_IN:C_EW, 18)+svgT(390, 100, _L`zulässig ${deNum(res.Azul,1)} m²`, 'middle', '#111', 9.5);
+  s+='</svg>';
+  return s + figLegend([], [], tt('Grau: Halterungen an Decke, Boden und Stützen. Die Wand trägt nur Wind auf ihre eigene Fläche ab — die Tabelle ersetzt den rechnerischen Nachweis.'));
+}
+PA['mauer/ausfach'] = { rd:readAF, va:validateAF, na:nachweiseAF, fg:figAF, ref:'ref.html',
+  line:(I,r)=>_L`t = ${I.t} mm, ${deNum(I.l,2)} × ${deNum(I.h,2)} m, ${I.halt===4?tt('vierseitig'):tt('dreiseitig')} gehalten · A = ${deNum(r.A,2)} m², zulässig ${deNum(r.Azul,2)} m²`,
+  nicht:'Zweiseitig gehaltene Wände, Wände mit Öffnungen, Ausfachungen mit Wanddicken zwischen den Tabellenwerten (hier auf den kleineren Wert abrunden), Wind über 100 m Höhe und der rechnerische Nachweis auf Plattenbiegung.',
+  title:()=>tt('Nichttragende Ausfachungswand'), norm:tt('DIN EN 1996-3/NA, Anhang NA.C bzw. DIN 1053-1, Tab. 9 (Anhaltswerte)'),
+  rows:(I,r)=>repRow(tt('Wand'), _L`t = ${I.t} mm, l = ${deNum(I.l,2)} m, h = ${deNum(I.h,2)} m, ${I.halt===4?tt('vierseitig'):tt('dreiseitig')} gehalten, Höhe über Gelände bis ${I.z} m`) };
+
+// ── Verknüpfung (Paket B) ──
+Object.assign(PA_HEAD, {
+  'beton/brandschutz': ['Stahlbeton — Brandschutz nach Tabellen','Nachweis nach DIN EN 1992-1-2 mit deutschem NA über Mindestabmessungen und Achsabstand der Bewehrung (Tab. 5.5 für Balken, Tab. 5.8 für Platten).','Querschnitt'],
+  'beton/zugkraft': ['Stahlbeton — Zugkraftdeckung am Durchlaufträger','Versatzmaß, verschobene Zugkraftlinie, Staffelung der Feldbewehrung, Länge der Stützbewehrung und Mindestbewehrung an den Auflagern nach DIN EN 1992-1-1 mit NA, 9.2.1.','Zugkraftdeckung'],
+  'stahl/zugstab': ['Stahl — Zugstab mit Lochschwächung','Bruttoquerschnitt, Nettoquerschnitt und Blockversagen am geschraubten Zugstab nach DIN EN 1993-1-1 und 1-8 mit deutschem NA, dazu Rand- und Lochabstände.','Blech'],
+  'stahl/stumpf': ['Stahl — Stumpfnaht','Durchgeschweißte Stumpfnaht als Grundwerkstoff und nicht durchgeschweißte Stumpfnaht wie eine Kehlnaht nach DIN EN 1993-1-8, 4.7.','Naht'],
+  'holz/querzug': ['Holz — Querzug am Queranschluss','Querzugtragfähigkeit eines Anschlusses quer zur Faser nach DIN EN 1995-1-1 mit NA (NCI zu 8.1.4), Vergleich mit der Formel der Grundnorm.','Anschluss'],
+  'holz/durchbruch': ['Holz — Durchbruch im Träger','Unverstärkter runder oder rechteckiger Durchbruch nach NA, NCI NA.6.7: Grenzen, Querzug aus Querkraft und Moment, Schub und Biegung im Restquerschnitt.','Träger'],
+  'holz/doppel': ['Holz — Pfette mit Doppelbiegung','Zweiachsige Biegung mit km = 0,7 und Schub aus zwei Richtungen nach DIN EN 1995-1-1, 6.1.6 und 6.1.7, für eine senkrecht zur Dachfläche eingebaute Pfette.','Pfette'],
+  'mauer/ausfach': ['Mauerwerk — Ausfachungswand','Nichttragende Ausfachungswand ohne rechnerischen Nachweis: zulässige Fläche nach Wanddicke, Seitenverhältnis, Halterung und Höhe über Gelände.','Wand'],
+});
+Object.assign(HX_NAME, { querzug:'qz-name', durchbruch:'db-name', doppel:'dp-name' });
+Object.assign(MW_NAME, { ausfach:'af-name' });
+PA['beton/brandschutz'].pre = paBetonHint; PA['beton/zugkraft'].pre = paBetonHint;
+PA['holz/durchbruch'].pre = () => { document.querySelectorAll('.db-a').forEach(e=>e.style.display = $('db-form').value==='r' ? '' : 'none'); };
+
+// ══════════════════════════════════════════════════
 // Bericht
 // ══════════════════════════════════════════════════
-const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall', bauph_uwert:'U-Wert (Bauphysik)', bauph_glaser:'Tauwasser (Glaser)', bauph_schall:'Schallschutz', torsion:'Torsion (Stahlbeton)', stoss:'Übergreifungsstoß', holz_brand:'Abbrand (Holz, Brandfall)', holz_schwingung:'Schwingung Holzbalkendecke', grund_hyd:'Hydraulischer Grundbruch', grund_zeit:'Zeitsetzung', grund_boesch:'Böschungsbruch', wasser_druckstoss:'Druckstoß', wasser_pumpe:'Pumpe (NPSH)', wasser_teil:'Teilgefülltes Kreisrohr', bauph_gk:'Gebäudeklasse' };
+const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall', bauph_uwert:'U-Wert (Bauphysik)', bauph_glaser:'Tauwasser (Glaser)', bauph_schall:'Schallschutz', torsion:'Torsion (Stahlbeton)', stoss:'Übergreifungsstoß', holz_brand:'Abbrand (Holz, Brandfall)', holz_schwingung:'Schwingung Holzbalkendecke', grund_hyd:'Hydraulischer Grundbruch', grund_zeit:'Zeitsetzung', grund_boesch:'Böschungsbruch', wasser_druckstoss:'Druckstoß', wasser_pumpe:'Pumpe (NPSH)', wasser_teil:'Teilgefülltes Kreisrohr', bauph_gk:'Gebäudeklasse', brandschutz:'Brandschutz (Stahlbeton)', zugkraft:'Zugkraftdeckung (Durchlaufträger)', stahl_zugstab:'Zugstab mit Lochschwächung', stahl_stumpf:'Stumpfnaht', holz_querzug:'Querzug (Holz)', holz_durchbruch:'Durchbruch (Holz)', holz_doppel:'Pfette mit Doppelbiegung', mauer_ausfach:'Ausfachungswand' };
 function reportChecks(C){
   return C.map((c,i)=>`<section><h2>${i+1}. ${c.title}</h2><div class="steps">${stepsHtml(c.steps)}</div>
       ${c.info?'':_L`<p>Ausnutzung η = ${deNum(c.eta,2)} — <span class="${c.ok?'ok':'bad'}">${c.ok?tt('Nachweis erfüllt'):tt('Nachweis nicht erfüllt')}</span></p>`}
@@ -10601,7 +11709,8 @@ const SFIELDS=['bs-fl','bf-S','bf-d','bf-dR','bf-m1','bf-l1','bf-a1','bf-m2','bf
   'mw-art','mw-m','mw-fb','mw-fm','mw-fk','md-name','md-t','md-h','md-l','md-lage','md-decke','md-a','md-lf','md-N','mt-name','mt-t','mt-hc','mt-lb','mt-bb','mt-a1','mt-lw','mt-N','mk-name','mk-t','mk-h','mk-he','mk-bc','mk-rho','mk-q','mk-Nmax','mk-Nmin','mh-name','mh-l','mh-t','mh-h','mh-lag','mh-N','mh-V',
   'wd-name','wd-alpha','wd-b','wd-to','wd-L','wd-hu','ws-name','ws-form','ws-L','ws-B','ws-Bu','ws-H','ws-D','ws-G','ws-zg','ws-f','ws-w','wr-name','wr-Q','wr-D','wr-L','wr-mat','wr-k','wr-zeta','wr-dh','wr-nu','wg-name','wg-Q','wg-I','wg-b','wg-m','wg-mat','wg-kst','wg-H','wg-f','ww-name','ww-Q','ww-b','ww-form','ww-mu','ww-w','ww-hmax',
   'hx-art','hx-kl','hx-nkl','hx-kled','ak-name','ak-lage','ak-b','ak-h','ak-hef','ak-x','ak-i','ak-V','sd-name','sd-form','sd-L','sd-b','sd-h0','sd-hap','sd-q','vs-name','vs-art','vs-gam','vs-b','vs-h','vs-tv','vs-lv','vs-S','vs-kc90',
-  'to-T','to-V','to-cot','to-dsw','to-sw','to-dsl','to-nl','so-ds','so-ssd','so-art','so-verb','so-ant','so-haken','so-l0','so-a','so-dst','so-st','br-name','br-b','br-h','br-t','br-s','br-M','br-V','sv-name','sv-b','sv-h','sv-e','sv-L','sv-B','sv-g','sv-tE','sv-EE','sv-kl','hy-name','hy-dh','hy-t','hy-gs','hy-gH','hy-ans','hy-L','zs-name','zs-s','zs-H','zs-cv','zs-dr','zs-tN','zs-zul','bo-name','bo-b','bo-z','bo-w','bo-gr','bo-bs','wj-name','wj-Q','wj-D','wj-s','wj-E','wj-L','wj-ts','wj-p0','wj-PN','wp-name','wp-Q','wp-Hg','wp-hv','wp-eta','wp-pa','wp-hs','wp-hvs','wp-T','wp-npshr','wt-name','wt-Q','wt-D','wt-I','wt-k','wt-hD','wt-vmin','gk-name','gk-h','gk-n','gk-a','gk-frei','gk-lage','gk-fw'];
+  'to-T','to-V','to-cot','to-dsw','to-sw','to-dsl','to-nl','so-ds','so-ssd','so-art','so-verb','so-ant','so-haken','so-l0','so-a','so-dst','so-st','br-name','br-b','br-h','br-t','br-s','br-M','br-V','sv-name','sv-b','sv-h','sv-e','sv-L','sv-B','sv-g','sv-tE','sv-EE','sv-kl','hy-name','hy-dh','hy-t','hy-gs','hy-gH','hy-ans','hy-L','zs-name','zs-s','zs-H','zs-cv','zs-dr','zs-tN','zs-zul','bo-name','bo-b','bo-z','bo-w','bo-gr','bo-bs','wj-name','wj-Q','wj-D','wj-s','wj-E','wj-L','wj-ts','wj-p0','wj-PN','wp-name','wp-Q','wp-Hg','wp-hv','wp-eta','wp-pa','wp-hs','wp-hvs','wp-T','wp-npshr','wt-name','wt-Q','wt-D','wt-I','wt-k','wt-hD','wt-vmin','gk-name','gk-h','gk-n','gk-a','gk-frei','gk-lage','gk-fw',
+  'fb-art','fb-R','fb-ds','fb-dsw','fb-lagen','fb-cv','zk-l','zk-q','zk-MA','zk-MB','zk-cot','zk-dsw','zk-ds','zk-nd','zk-ng','zk-dso','zk-no','zb-name','zb-st','zb-b','zb-t','zb-d0','zb-n1','zb-n2','zb-e1','zb-p1','zb-p2','zb-N','bw-name','bw-st','bw-art','bw-a','bw-t','bw-l','bw-N','bw-V','bw-M','qz-name','qz-b','qz-h','qz-a','qz-ar','qz-tef','qz-F','db-name','db-form','db-b','db-h','db-hd','db-a','db-hro','db-lv','db-V','db-M','dp-name','dp-b','dp-h','dp-L','dp-al','dp-qv','dp-qn','af-name','af-t','af-halt','af-h','af-l','af-z'];
 const snapshot = () => { const o={typ:TYP, mat:MAT, stmode:STMODE, homode:HOMODE, grmode:GRMODE, mwmode:MWMODE, wbmode:WBMODE, bpmode:BPMODE}; [...FIELDS,...SFIELDS].forEach(f=>o[f]=$(f).value); CHECKS.forEach(f=>o[f]=$(f).checked); return o; };
 function apply(o){
   if(o['sn-reihe']){ $('sn-reihe').value=o['sn-reihe']; fillProfile(); }
@@ -10617,7 +11726,7 @@ function apply(o){
   if(o['hv-art']){ $('hv-art').value=o['hv-art']; fillHvKlassen(); }
   if(o['hx-art']){ $('hx-art').value=o['hx-art']; fillHxKlassen(); }
   [...FIELDS,...SFIELDS].forEach(f=>{ if(o[f]!=null) $(f).value=o[f]; }); CHECKS.forEach(f=>{ if(o[f]!=null) $(f).checked=o[f]; });
-  if(o.typ && ['balken','unterzug','platte','stuetze','durchstanzen','torsion','stoss'].includes(o.typ)){ TYP=o.typ; showTyp(TYP); }
+  if(o.typ && ['balken','unterzug','platte','stuetze','durchstanzen','torsion','stoss','brandschutz','zugkraft'].includes(o.typ)){ TYP=o.typ; showTyp(TYP); }
   if(o.mat){ MAT=o.mat; showMat(); }
 }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(snapshot())); }catch(e){} }
@@ -10631,7 +11740,7 @@ function posMsg(t){ $('pos-msg').textContent = t; }
 function savePos(){
   const name = ($(nameField()).value || '').trim() || tx('noName');
   const list = posRead(), i = list.findIndex(p=>p.name===name);
-  const entry = { name, typ: MAT==='beton' ? TYP : MAT==='stahl' && STMODE==='anschluss' ? 'anschluss' : MAT==='stahl' && STMODE==='fuss' ? 'fuss' : MAT==='stahl' && STMODE==='schweiss' ? 'schweiss' : MAT==='holz' && HOMODE==='verbindung' ? 'holzverb' : MAT==='holz' && HOMODE!=='bauteil' ? 'holz_'+HOMODE : MAT==='grund' ? 'grund_'+GRMODE : MAT==='mauer' ? 'mauer_'+MWMODE : MAT==='wasser' ? 'wasser_'+WBMODE : MAT==='bauph' ? 'bauph_'+BPMODE : MAT, ok: !!LAST?.res?.ok, date: new Date().toISOString(), data: snapshot() };
+  const entry = { name, typ: MAT==='beton' ? TYP : MAT==='stahl' && PA['stahl/'+STMODE] ? 'stahl_'+STMODE : MAT==='stahl' && STMODE==='anschluss' ? 'anschluss' : MAT==='stahl' && STMODE==='fuss' ? 'fuss' : MAT==='stahl' && STMODE==='schweiss' ? 'schweiss' : MAT==='holz' && HOMODE==='verbindung' ? 'holzverb' : MAT==='holz' && HOMODE!=='bauteil' ? 'holz_'+HOMODE : MAT==='grund' ? 'grund_'+GRMODE : MAT==='mauer' ? 'mauer_'+MWMODE : MAT==='wasser' ? 'wasser_'+WBMODE : MAT==='bauph' ? 'bauph_'+BPMODE : MAT, ok: !!LAST?.res?.ok, date: new Date().toISOString(), data: snapshot() };
   if(i>=0) list[i]=entry; else list.push(entry);
   if(!posWrite(list)){ posMsg(tx('posFail')); return; }
   posMsg(tx(i>=0 ? 'posUpd' : 'posSaved', name)); renderPos();
@@ -10650,7 +11759,7 @@ function renderPos(){
       <button class="btn small danger${_armed===i?' armed':''}" onclick="delPos(${i}, this)">${_armed===i?tx('delConfirm'):tx('del')}</button></div>`).join('')
     : `<div class="hint" style="margin-top:0">${tx('posNone')}</div>`;
 }
-function nameField(){ return MAT==='bauph' ? (BPMODE==='gk' ? 'gk-name' : 'bp-name') : MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : 'sn-name') : 'in-name'; }
+function nameField(){ return MAT==='bauph' ? (BPMODE==='gk' ? 'gk-name' : 'bp-name') : MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : STMODE==='zugstab' ? 'zb-name' : STMODE==='stumpf' ? 'bw-name' : 'sn-name') : 'in-name'; }
 function syncK(){ const f=$('in-feld').value; $('in-K').value = f==='0.85' ? '1.3' : f==='0.7' ? '1.5' : '1.0'; }
 
 
@@ -11108,6 +12217,38 @@ Object.assign(FIX_WHY, {
   'wasser:wth': 'Der Abfluss füllt das Rohr höher als zulässig bzw. ist größer als seine Leistungsfähigkeit.',
   'wasser:wtvm': 'Die Fließgeschwindigkeit ist zu klein — Ablagerungen setzen sich ab.',
   'bauph:gkfw': 'Der Feuerwiderstand des Bauteils ist kleiner als nach der Gebäudeklasse gefordert.',
+});
+// Abhilfe für die Nachweise aus Paket B (v0.5.21)
+Object.assign(FIX_LEVERS, {
+  'beton/brandschutz': () => [fxN('fb-cv',1,5,100), fxN('in-b',1,1,100), fxN('in-h',1,1,100)],
+  'beton/zugkraft':  () => [fxN('zk-ng',1,1,20), fxS('zk-ds'), fxN('zk-nd',1,1,20), fxN('zk-no',1,1,20), fxS('zk-dso')],
+  'stahl/zugstab':   () => [fxN('zb-t',1,1,60), fxN('zb-b',1,5,1000), fxS('zb-st'), fxN('zb-e1',1,5,300), fxN('zb-p1',1,5,300)],
+  'stahl/stumpf':    () => [fxN('bw-t',1,1,80), fxN('bw-l',1,5,2000), fxS('bw-st'), fxN('bw-a',1,0.5,60)],
+  'holz/querzug':    () => [fxN('qz-a',1,5,2000), fxN('qz-ar',1,5,2000), fxN('qz-h',1,10,3000), fxS('hx-kl')],
+  'holz/durchbruch': () => [fxN('db-hd',-1,5,10), fxN('db-h',1,10,3000), fxN('db-b',1,10,400), fxS('hx-kl')],
+  'holz/doppel':     () => [fxN('dp-b',1,10,400), fxN('dp-h',1,10,1000), fxS('hx-kl')],
+  'mauer/ausfach':   () => [fxS('af-t'), fxN('af-l',-1,0.05,0.5)],
+});
+Object.assign(FIX_WHY, {
+  'beton:fbb': 'Der Balken ist für die geforderte Feuerwiderstandsdauer zu schmal — er heizt sich von den Seiten zu schnell durch.',
+  'beton:fba': 'Die Betonüberdeckung der Bewehrung ist zu dünn: der Stahl erreicht im Brand zu früh die kritische Temperatur.',
+  'beton:fbh': 'Die Platte ist zu dünn für die geforderte Feuerwiderstandsdauer (Raumabschluss und Temperatur auf der Oberseite).',
+  'beton:zkfeld': 'Die Feldbewehrung reicht für die größte Zugkraft im Feld nicht aus.',
+  'beton:zkauf': 'Zu wenige Stäbe laufen bis über die Auflager — dort fehlt die Mindestbewehrung.',
+  'beton:zkstuetz': 'Die obere Bewehrung über der Stütze reicht für das Stützmoment nicht aus.',
+  'stahl:zbpl': 'Die Zugkraft ist größer als die Fließkraft des ungeschwächten Blechs.',
+  'stahl:zbnet': 'Im durch die Löcher geschwächten Querschnitt reißt das Blech, bevor die Zugkraft erreicht ist.',
+  'stahl:zbblock': 'Ein Blechblock um die Schrauben reißt aus (Zug quer, Schub entlang der Lochreihen).',
+  'stahl:zbabst': 'Rand- oder Lochabstände sind kleiner als die Mindestwerte nach Tab. 3.3.',
+  'stahl:bwnaht': 'Die Spannungen in der Naht sind größer als ihre Tragfähigkeit.',
+  'holz:qznw': 'Der Queranschluss sitzt zu nah am beanspruchten Rand — das Holz spaltet unter der Querzugkraft.',
+  'holz:dbgeo': 'Der Durchbruch liegt außerhalb der Grenzen für unverstärkte Durchbrüche.',
+  'holz:dbft': 'Die Querzugkraft an den Ecken des Durchbruchs ist größer als die Querzugfestigkeit des Holzes dort.',
+  'holz:dbv': 'Der Restquerschnitt neben dem Durchbruch ist für die Querkraft zu klein.',
+  'holz:dbm': 'Der geschwächte Querschnitt ist für das Biegemoment zu klein.',
+  'holz:dpm': 'Die Biegespannungen um beide Achsen zusammen übersteigen die Biegefestigkeit.',
+  'holz:dpv': 'Die Schubspannungen aus beiden Richtungen zusammen übersteigen die Schubfestigkeit.',
+  'mauer:afa': 'Die Ausfachungsfläche ist für diese Wanddicke, Halterung und Höhe über Gelände zu groß.',
 });
 function initUX(){
   // Projekt-Menü: Positionen und calc-Import wandern aus der Eingabespalte in ein Fenster unter der Kopfzeile

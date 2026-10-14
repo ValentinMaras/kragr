@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- Statiq·projekt v0.1.1 -->
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Statiq — Meine Projekte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --card:#f6f6f7; --accent:#2563eb;
+    --ok:#047857; --ok-bg:#e7f6ee; --bad:#b91c1c; --bad-bg:#fdecec; --warn:#b45309; --warn-bg:#fff4e5; --calc-bg:#e8eefc; --calc:#1d4ed8; }
+  body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  .app-header { display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; text-decoration:none; }
+  .logo span { color:var(--accent); }
+  .links { display:flex; align-items:center; gap:16px; font-size:14px; font-weight:600; color:var(--text3); }
+  .links a { text-decoration:none; } .links a:hover { color:var(--text); }
+  .links .cur { color:var(--text); } .version { font-weight:500; font-size:13px; }
+  .lang-sel { font:inherit; font-size:13px; font-weight:700; border:none; background:#f1f1f3; border-radius:8px; padding:5px 8px; }
+  .wrap { max-width:1100px; margin:0 auto; padding:8px 24px 60px; }
+  .top { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin:10px 0 18px; }
+  .pname { font-size:clamp(26px,4.4vw,40px); font-weight:800; letter-spacing:-0.035em; border:none; background:none; font-family:inherit; width:100%; max-width:640px; outline:none; border-radius:8px; padding:2px 4px; margin-left:-4px; }
+  .pname:hover, .pname:focus { background:#f6f6f7; }
+  .sumline { font-size:13px; color:var(--text3); margin-top:2px; }
+  .acts { display:flex; gap:8px; flex-wrap:wrap; }
+  .btn { font:inherit; font-size:13px; font-weight:700; border-radius:10px; padding:8px 14px; border:1px solid #d4d4d8; background:#fff; color:var(--text); cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .btn:hover { background:#f6f6f7; } .btn.k { background:#111; border-color:#111; color:#fff; } .btn.k:hover { background:#333; }
+  .btn.p { background:var(--accent); border-color:var(--accent); color:#fff; } .btn.sm { font-size:12px; padding:5px 10px; border-radius:8px; }
+  .btn.warn { border-color:#f1c27d; background:var(--warn-bg); color:var(--warn); }
+  .btn.x { border:none; background:none; color:var(--text3); padding:5px 6px; } .btn.x:hover { color:var(--bad); background:none; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; border-radius:6px; padding:2px 7px; background:var(--calc-bg); color:var(--calc); white-space:nowrap; }
+  .tag.s { background:var(--ok-bg); color:var(--ok); } .tag.b { background:var(--bad-bg); color:var(--bad); } .tag.w { background:var(--warn-bg); color:var(--warn); } .tag.n { background:#f1f1f3; color:var(--text3); }
+  .tag.size { background:#eef7f2; color:#047857; }
+  .pos { background:var(--card); border-radius:16px; padding:14px 16px; margin-bottom:12px; }
+  .pos-h { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .pos-nr { font-weight:800; font-size:17px; white-space:nowrap; }
+  .pos-t { font:inherit; font-weight:800; font-size:17px; border:none; background:none; flex:1; min-width:180px; outline:none; border-radius:6px; padding:2px 4px; }
+  .pos-t:hover, .pos-t:focus { background:#fff; }
+  .pos-body { display:grid; grid-template-columns:1fr 240px; gap:14px; margin-top:10px; }
+  .items { border-left:2px solid #e2e2e6; padding-left:12px; }
+  .it { display:flex; align-items:center; gap:10px; padding:6px 0; font-size:13.5px; flex-wrap:wrap; }
+  .it .d { flex:1; min-width:200px; } .it .d small { display:block; color:var(--text3); font-size:12px; }
+  .it .when { color:var(--text3); font-size:12px; white-space:nowrap; }
+  .it .r { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; margin-left:auto; }
+  .thumb { background:#fff; border-radius:12px; padding:6px; display:flex; align-items:center; justify-content:center; min-height:110px; }
+  .thumb svg { width:100%; height:auto; max-height:150px; }
+  .thumb .none { font-size:12px; color:var(--text3); text-align:center; padding:10px; }
+  .empty { font-size:13px; color:var(--text3); padding:4px 0; }
+  .sec-t { font-size:13px; font-weight:700; color:var(--text3); margin:26px 0 8px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .loose { background:#fff; border:1.5px dashed #e2e2e6; border-radius:16px; padding:8px 16px; }
+  .sel { font:inherit; font-size:12px; border:1px solid #d4d4d8; border-radius:8px; padding:4px 6px; background:#fff; max-width:220px; }
+  .hint { font-size:12.5px; color:var(--text3); line-height:1.55; margin-top:22px; max-width:760px; }
+  .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#111; color:#fff; font-size:13px; padding:9px 16px; border-radius:10px; z-index:99; }
+  @media (max-width:720px){ .pos-body { grid-template-columns:1fr; } .thumb { display:none; } .app-header,.wrap { padding-left:16px; padding-right:16px; } }
+  /* Gesamtbericht */
+  #report-view { display:none; max-width:860px; margin:0 auto; padding:16px; }
+  body.show-report #report-view { display:block; } body.show-report .app-header, body.show-report .wrap { display:none; }
+  .rep-acts { display:flex; gap:8px; margin-bottom:12px; }
+  .report { background:#fff; border:1px solid #d4d4d8; padding:30px 36px; font-size:12.5px; line-height:1.55; color:#111; }
+  .report h1 { font-size:20px; margin-bottom:2px; } .report .cover { padding:40px 0 30px; border-bottom:2px solid #111; margin-bottom:16px; }
+  .report .cover h1 { font-size:30px; letter-spacing:-0.02em; }
+  .report h2 { font-size:13px; text-transform:uppercase; letter-spacing:1px; font-family:'DM Mono', monospace; color:#333; margin:18px 0 6px; border-bottom:1px solid #999; padding-bottom:3px; }
+  .report h3 { font-size:15px; margin:22px 0 4px; }
+  .report .meta { font-family:'DM Mono', monospace; font-size:11px; color:#555; }
+  .report table { width:100%; border-collapse:collapse; margin:4px 0; }
+  .report td, .report th { border-bottom:1px solid #ddd; padding:4px 6px; text-align:left; vertical-align:top; }
+  .report th { font-size:11px; color:#555; font-weight:600; }
+  .report .ok { color:var(--ok); font-weight:600; } .report .bad { color:var(--bad); font-weight:600; }
+  .report .figure svg, .report .sysfig svg { max-width:460px; height:auto; }
+  .report .posblock { break-before:page; padding-top:6px; }
+  .report .sub { border-left:3px solid #e2e2e6; padding-left:12px; margin:10px 0 14px; }
+  .report .steps { font-size:11.5px; } .report .st { margin-bottom:6px; } .report .st-h { font-size:12px; }
+  /* Rechenschritte aus den size-Berichten (wie in size) */
+  .report .steps { font-family:'DM Mono', monospace; font-size:11.5px; line-height:1.75; color:#222; } .report .steps b { color:#111; }
+  .report .st { margin:0 0 6px; } .report .st-h { font-family:'Inter', sans-serif; font-size:12px; font-weight:500; color:#111; display:flex; gap:8px; align-items:baseline; line-height:1.45; }
+  .report .st-n { flex:none; font-family:'DM Mono', monospace; font-size:10px; color:#8a8a8a; border:1px solid #a1a1aa; border-radius:50%; width:17px; height:17px; display:inline-flex; align-items:center; justify-content:center; }
+  .report .st-f { padding-left:25px; line-height:1.6; } .report .st-f > div { padding-left:0.9em; text-indent:-0.9em; }
+  .report .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; } .report .st-f > div.eq { padding-left:0; text-indent:0; }
+  .report .eq-r, .report .eq-w { padding-left:0.9em; text-indent:-0.9em; } .report .eq-w { grid-column:1 / -1; }
+  .report .fig-legend { font-size:11px; color:#666; line-height:1.5; margin-top:6px; text-align:center; } .report .figure { display:flex; flex-direction:column; align-items:center; }
+  .report .note { font-size:12px; color:#333; background:#eff6ff; border-left:3px solid var(--accent); padding:6px 10px; margin-top:6px; }
+  .old { opacity:.55; }
+  @media print { body.show-report .rep-acts { display:none; } #report-view { max-width:none; padding:0; } .report { border:none; padding:0; } .report h2 { break-after:avoid; } .report section { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<header class="app-header">
+  <a class="logo" href="index.html">stat<span>iq</span></a>
+  <nav class="links">
+    <a href="calc.html">calc</a><a href="size.html">size</a><a href="ref.html">ref</a><span class="cur" data-t="navProj">Meine Projekte</span>
+    <span class="version" id="ver"></span>
+    <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setLang(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="top">
+    <div style="flex:1;min-width:280px">
+      <input class="pname" id="pname" onchange="setName(this.value)" aria-label="Projektname">
+      <div class="sumline" id="sum"></div>
+    </div>
+    <div class="acts">
+      <button class="btn" onclick="showReport()" data-t="report">Gesamtbericht</button>
+      <button class="btn" onclick="exportFile()" data-t="export">Projekt als Datei sichern</button>
+      <label class="btn"><span data-t="import">Datei laden</span><input type="file" accept=".json,.statiq,application/json" style="display:none" onchange="importFile(this)"></label>
+      <button class="btn k" onclick="addPos()" data-t="addPos">＋ Position</button>
+    </div>
+  </div>
+  <div id="list"></div>
+  <div class="sec-t"><span data-t="loose">Ohne Position</span><span class="sumline" data-t="looseHint" style="margin:0">Gespeichertes aus calc und size, das noch keiner Position zugeordnet ist.</span></div>
+  <div class="loose" id="loose"></div>
+  <p class="hint" data-t="hint">Eine Position bündelt das System aus calc und die Nachweise aus size. Wird in size „aus calc übernehmen“ benutzt, landet der Nachweis automatisch bei der Position der calc-Berechnung. Speichert man in calc eine neuere Berechnung zur Position, zeigt der Nachweis „neu rechnen“. Alles bleibt in diesem Browser — mit „Projekt als Datei sichern“ lässt es sich übertragen und aufbewahren.</p>
+</div>
+
+<div id="report-view">
+  <div class="rep-acts"><button class="btn" onclick="hideReport()" data-t="back">← Zurück</button><button class="btn p" onclick="window.print()" data-t="print">Drucken / PDF</button></div>
+  <div class="report" id="report"></div>
+</div>
+
+<script>
+const PROJ_VERSION = '0.1.1';
+const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
+const T = {
+ de:{ sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
+  looseHint:'Gespeichertes aus calc und size, das noch keiner Position zugeordnet ist.', hint:'Eine Position bündelt das System aus calc und die Nachweise aus size. Wird in size „aus calc übernehmen“ benutzt, landet der Nachweis automatisch bei der Position der calc-Berechnung. Speichert man in calc eine neuere Berechnung zur Position, zeigt der Nachweis „neu rechnen“. Alles bleibt in diesem Browser — mit „Projekt als Datei sichern“ lässt es sich übertragen und aufbewahren.',
+  back:'← Zurück', print:'Drucken / PDF', defName:'Mein Projekt', pos:'Pos.', newPos:'neue Position', posTitle:'Bezeichnung',
+  sum:'{0} Positionen · {1} nicht erfüllt · {2} veraltet', none:'Noch nichts gespeichert. In calc „Berechnung speichern“ oder in size unter „Meine Projekte“ eine Position speichern.',
+  noneLoose:'Alles ist zugeordnet.', emptyPos:'Noch leer — unten unter „Ohne Position“ etwas zuordnen oder in calc/size speichern.',
+  allOk:'alle erfüllt', notOk:'nicht erfüllt', stale:'veraltet', empty:'leer', open:'Öffnen', recalc:'Neu rechnen', toPos:'Zuordnen …', newFrom:'Neue Position', remove:'Aus Position lösen',
+  delPos:'Position löschen', delAsk:'Löschen?', staleWhy:'calc geändert — neu rechnen', srcGone:'calc-Berechnung nicht mehr vorhanden', fromCalc:'aus calc',
+  noSys:'kein System aus calc', calcItem:'calc', sizeItem:'size', util:'{0} %', saved:'gespeichert {0}',
+  types:{ beam:'Einfeldträger', cantilever:'Kragarm', cont:'Durchlaufträger', frame:'Rahmen' },
+  repOverview:'Positionsübersicht', repParts:'Bestandteile', repStatus:'Status', repSystem:'System aus calc', repResults:'Größtwerte',
+  repNoRep:'Für diesen Nachweis ist kein Bericht gespeichert — in size öffnen und erneut speichern.', repDate:'Stand {0}',
+  repNote:'Lernwerkzeug — ersetzt keine geprüfte Statik.', exported:'Projektdatei gespeichert.', imported:'Projektdatei geladen: {0} Einträge.', badFile:'Die Datei ist keine statiq-Projektdatei.',
+  reac:'Auflagerkräfte', moved:'Zugeordnet.' },
+ en:{ sum1:'1 item · {1} not satisfied · {2} out of date', older:'earlier version', navProj:'My projects', report:'Full report', export:'Save project as file', import:'Load file', addPos:'＋ Item', loose:'Not assigned',
+  looseHint:'Saved results from calc and size that are not yet assigned to an item.', hint:'An item bundles the system from calc with the design checks from size. When you use “import from calc” in size, the check is filed under the item of that calc calculation automatically. If you save a newer calculation in calc for the item, the check shows “recalculate”. Everything stays in this browser — “Save project as file” lets you move and keep it.',
+  back:'← Back', print:'Print / PDF', defName:'My project', pos:'Item', newPos:'new item', posTitle:'Description',
+  sum:'{0} items · {1} not satisfied · {2} out of date', none:'Nothing saved yet. Use “Save calculation” in calc or save an item under “My projects” in size.',
+  noneLoose:'Everything is assigned.', emptyPos:'Empty — assign something below under “Not assigned” or save in calc/size.',
+  allOk:'all satisfied', notOk:'not satisfied', stale:'out of date', empty:'empty', open:'Open', recalc:'Recalculate', toPos:'Assign …', newFrom:'New item', remove:'Detach from item',
+  delPos:'Delete item', delAsk:'Delete?', staleWhy:'calc changed — recalculate', srcGone:'calc calculation no longer exists', fromCalc:'from calc',
+  noSys:'no system from calc', calcItem:'calc', sizeItem:'size', util:'{0} %', saved:'saved {0}',
+  types:{ beam:'Simply supported beam', cantilever:'Cantilever', cont:'Continuous beam', frame:'Frame' },
+  repOverview:'Overview of items', repParts:'Contents', repStatus:'Status', repSystem:'System from calc', repResults:'Maximum values',
+  repNoRep:'No report is stored for this check — open it in size and save again.', repDate:'As of {0}',
+  repNote:'Learning tool — does not replace a checked structural design.', exported:'Project file saved.', imported:'Project file loaded: {0} entries.', badFile:'This file is not a statiq project file.',
+  reac:'Support reactions', moved:'Assigned.' },
+ fr:{ sum1:'1 position · {1} non vérifiée(s) · {2} périmée(s)', older:'version antérieure', navProj:'Mes projets', report:'Rapport complet', export:'Enregistrer le projet (fichier)', import:'Charger un fichier', addPos:'＋ Position', loose:'Sans position',
+  looseHint:'Éléments enregistrés dans calc et size qui ne sont encore affectés à aucune position.', hint:'Une position regroupe le système de calc et les vérifications de size. En utilisant « reprendre de calc » dans size, la vérification est rangée automatiquement dans la position du calcul calc. Si l’on enregistre dans calc un calcul plus récent pour la position, la vérification affiche « recalculer ». Tout reste dans ce navigateur — « Enregistrer le projet (fichier) » permet de le transférer et de le conserver.',
+  back:'← Retour', print:'Imprimer / PDF', defName:'Mon projet', pos:'Pos.', newPos:'nouvelle position', posTitle:'Désignation',
+  sum:'{0} positions · {1} non vérifiée(s) · {2} périmée(s)', none:'Rien d’enregistré pour l’instant. Utiliser « Enregistrer le calcul » dans calc ou enregistrer une position sous « Mes projets » dans size.',
+  noneLoose:'Tout est affecté.', emptyPos:'Vide — affecter un élément ci-dessous sous « Sans position » ou enregistrer dans calc/size.',
+  allOk:'toutes vérifiées', notOk:'non vérifiée', stale:'périmée', empty:'vide', open:'Ouvrir', recalc:'Recalculer', toPos:'Affecter …', newFrom:'Nouvelle position', remove:'Retirer de la position',
+  delPos:'Supprimer la position', delAsk:'Supprimer ?', staleWhy:'calc modifié — recalculer', srcGone:'le calcul calc n’existe plus', fromCalc:'de calc',
+  noSys:'pas de système calc', calcItem:'calc', sizeItem:'size', util:'{0} %', saved:'enregistré {0}',
+  types:{ beam:'Poutre sur deux appuis', cantilever:'Console', cont:'Poutre continue', frame:'Portique' },
+  repOverview:'Liste des positions', repParts:'Contenu', repStatus:'État', repSystem:'Système de calc', repResults:'Valeurs maximales',
+  repNoRep:'Aucun rapport enregistré pour cette vérification — l’ouvrir dans size et l’enregistrer à nouveau.', repDate:'État au {0}',
+  repNote:'Outil pédagogique — ne remplace pas une note de calcul vérifiée.', exported:'Fichier de projet enregistré.', imported:'Fichier de projet chargé : {0} éléments.', badFile:'Ce fichier n’est pas un fichier de projet statiq.',
+  reac:'Réactions d’appui', moved:'Affecté.' },
+ es:{ sum1:'1 posición · {1} no cumple(n) · {2} desactualizada(s)', older:'versión anterior', navProj:'Mis proyectos', report:'Informe completo', export:'Guardar proyecto (archivo)', import:'Cargar archivo', addPos:'＋ Posición', loose:'Sin posición',
+  looseHint:'Elementos guardados en calc y size que aún no están asignados a ninguna posición.', hint:'Una posición agrupa el sistema de calc y las comprobaciones de size. Al usar «tomar de calc» en size, la comprobación se archiva automáticamente en la posición del cálculo de calc. Si se guarda en calc un cálculo más reciente para la posición, la comprobación muestra «recalcular». Todo se queda en este navegador — «Guardar proyecto (archivo)» permite trasladarlo y conservarlo.',
+  back:'← Volver', print:'Imprimir / PDF', defName:'Mi proyecto', pos:'Pos.', newPos:'nueva posición', posTitle:'Denominación',
+  sum:'{0} posiciones · {1} no cumple(n) · {2} desactualizada(s)', none:'Aún no hay nada guardado. Usar «Guardar cálculo» en calc o guardar una posición en «Mis proyectos» de size.',
+  noneLoose:'Todo está asignado.', emptyPos:'Vacía — asignar algo abajo en «Sin posición» o guardar en calc/size.',
+  allOk:'todas cumplen', notOk:'no cumple', stale:'desactualizada', empty:'vacía', open:'Abrir', recalc:'Recalcular', toPos:'Asignar …', newFrom:'Nueva posición', remove:'Quitar de la posición',
+  delPos:'Eliminar posición', delAsk:'¿Eliminar?', staleWhy:'calc modificado — recalcular', srcGone:'el cálculo de calc ya no existe', fromCalc:'de calc',
+  noSys:'sin sistema de calc', calcItem:'calc', sizeItem:'size', util:'{0} %', saved:'guardado {0}',
+  types:{ beam:'Viga biapoyada', cantilever:'Voladizo', cont:'Viga continua', frame:'Pórtico' },
+  repOverview:'Lista de posiciones', repParts:'Contenido', repStatus:'Estado', repSystem:'Sistema de calc', repResults:'Valores máximos',
+  repNoRep:'No hay informe guardado para esta comprobación — abrirla en size y guardar de nuevo.', repDate:'Estado a {0}',
+  repNote:'Herramienta didáctica — no sustituye un cálculo estructural revisado.', exported:'Archivo de proyecto guardado.', imported:'Archivo de proyecto cargado: {0} elementos.', badFile:'El archivo no es un archivo de proyecto de statiq.',
+  reac:'Reacciones', moved:'Asignado.' } };
+const t = (k, ...a) => String(((T[LANG]||T.de)[k] ?? T.de[k] ?? k)).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
+const tTyp = k => ((T[LANG]||T.de).types||T.de.types)[k] || k;
+const LOC = ({ de:'de-DE', en:'en-GB', fr:'fr-FR', es:'es-ES' })[LANG] || 'de-DE';
+const nf = (v,d=1) => { const s=(+v).toFixed(d); return LANG==='en' ? s : s.replace('.', ','); };
+const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const dShort = iso => { try{ return new Date(iso).toLocaleString(LOC, {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'}); }catch(e){ return ''; } };
+
+// ── Speicher ─────────────────────────────────────
+const PSTORE='statiq-projekt', POS_STORE='statiq-size-positionen', REP='statiq-size-bericht:';
+const lsGet = (k, d) => { try{ const v=localStorage.getItem(k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } };
+const lsSet = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } };
+function proj(){ const p=lsGet(PSTORE, null) || {}; p.v=1; p.name=p.name||t('defName'); p.pos=p.pos||[]; p.asg=p.asg||{}; return p; }
+function save(p){ lsSet(PSTORE, p); }
+function calcItems(){ const out=[];
+  try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k || !k.startsWith('statiq_sdf_')) continue;
+    const o=lsGet(k, null); if(!o || !o.sdf || (o.sdf.module && o.sdf.module!=='calc')) continue; out.push({ kind:'c', id:'c:'+k, key:k, name:o.name||k, sdf:o.sdf, ts:o.sdf.timestamp||'' }); } }catch(e){}
+  return out.sort((a,b)=>a.ts<b.ts?1:-1); }
+function sizeItems(){ return (lsGet(POS_STORE, [])||[]).map(p=>({ kind:'s', id:'s:'+p.name, name:p.name, p, ts:p.date||'' })); }
+function allItems(){ return [...calcItems(), ...sizeItems()]; }
+// Position eines Eintrags: ausdrücklich zugeordnet, sonst (size) über die calc-Quelle
+function posOf(P, it, cmap){ if(P.asg[it.id]!=null) return P.asg[it.id]; if(it.kind==='s' && it.p.src?.key){ const c=P.asg['c:'+it.p.src.key]; if(c!=null) return c; } return null; }
+function grouped(){ const P=proj(), items=allItems(), by={}, loose=[];
+  P.pos.forEach(q=>by[q.id]=[]);
+  items.forEach(it=>{ const id=posOf(P, it); if(id!=null && by[id]) by[id].push(it); else loose.push(it); });
+  return { P, by, loose, items }; }
+// veraltet: in der Position gibt es eine neuere calc-Berechnung als die, aus der der Nachweis stammt
+function staleOf(it, list){ if(it.kind!=='s' || !it.p.src?.key) return null;
+  const calcs=list.filter(x=>x.kind==='c'); const newest=calcs[0];
+  if(newest && newest.key!==it.p.src.key && newest.ts > (it.p.src.ts||'')) return { why:'stale', key:newest.key };
+  if(!lsGet(it.p.src.key, null)) return { why:'gone' };
+  return null; }
+function etaTag(e, ok){ if(e==null || !isFinite(e)) return `<span class="tag ${ok?'s':'b'}">${t(ok?'allOk':'notOk')}</span>`;
+  return `<span class="tag ${ok?'s':'b'}">${t('util', nf(e*100,0))}</span>`; }
+function calcDesc(c){ const r=c.sdf.results||{}, ty=c.sdf.system?.type; const M=r.Mmax!=null ? `M<sub>max</sub> = ${nf(r.Mmax,1)} kNm` : '';
+  const Q=r.Qmax!=null ? ` · Q<sub>max</sub> = ${nf(r.Qmax,1)} kN` : ''; return `${esc(tTyp(ty))}<small>${M}${Q}</small>`; }
+function sizeDesc(s){ const p=s.p; return `${esc(p.label||p.typ||'')}${p.src?`<small>${t('fromCalc')}${p.src.name?': '+esc(p.src.name):''}</small>`:''}`; }
+
+// ── Darstellung ──────────────────────────────────
+function render(){
+  const { P, by, loose, items } = grouped();
+  document.getElementById('pname').value = P.name;
+  let nBad=0, nStale=0;
+  const sel = (it, cur) => `<select class="sel" onchange="assign('${esc(it.id)}', this.value)"><option value="">${t('toPos')}</option>${P.pos.map(q=>`<option value="${q.id}"${q.id===cur?' selected':''}>${t('pos')} ${esc(q.nr)} — ${esc(q.title)}</option>`).join('')}<option value="__new">${t('newFrom')}</option>${cur!=null?`<option value="__none">${t('remove')}</option>`:''}</select>`;
+  const row = (it, list, posId) => {
+    if(it.kind==='c'){ const old = posId!=null && list.filter(x=>x.kind==='c')[0]?.key!==it.key;
+      return `<div class="it${old?' old':''}"><span class="tag">${t('calcItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${calcDesc(it)}</div><div class="r">${old?`<span class="tag n">${t('older')}</span>`:''}<span class="when">${dShort(it.ts)}</span>
+      <a class="btn sm" href="calc.html#report=${encodeURIComponent(it.key)}">${t('open')}</a>${sel(it, posId)}</div></div>`; }
+    const st = staleOf(it, list);
+    const recalc = st?.why==='stale' ? `<a class="btn sm warn" href="size.html#pos=${encodeURIComponent(it.name)}&calc=${encodeURIComponent(st.key)}${it.p.src?.part?'&part='+it.p.src.part:''}">${t('recalc')}</a>` : '';
+    return `<div class="it"><span class="tag size">${t('sizeItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${sizeDesc(it)}</div><div class="r">${etaTag(it.p.eta, it.p.ok)}${st?`<span class="tag w">${t(st.why==='stale'?'staleWhy':'srcGone')}</span>`:''}<span class="when">${dShort(it.ts)}</span>
+      <a class="btn sm" href="size.html#pos=${encodeURIComponent(it.name)}">${t('open')}</a>${recalc}${sel(it, posId)}</div></div>`; };
+  const posHtml = [...P.pos].sort((a,b)=>String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true})).map(q=>{
+    const list = by[q.id]||[], calcs=list.filter(x=>x.kind==='c'), sizes=list.filter(x=>x.kind==='s');
+    const bad = sizes.some(s=>!s.p.ok), stale = sizes.some(s=>staleOf(s, list)?.why==='stale');
+    if(bad) nBad++; if(stale) nStale++;
+    const status = !list.length ? `<span class="tag n">${t('empty')}</span>` : stale ? `<span class="tag w">${t('staleWhy')}</span>` : bad ? `<span class="tag b">${t('notOk')}</span>` : sizes.length ? `<span class="tag s">${t('allOk')}</span>` : '';
+    const thumb = calcs[0]?.sdf?.system?.svgSnapshot ? calcs[0].sdf.system.svgSnapshot : `<div class="none">${t('noSys')}</div>`;
+    return `<div class="pos" data-id="${q.id}"><div class="pos-h"><span class="pos-nr">${t('pos')} <input class="pos-t" style="width:3.2em;flex:none;min-width:0" value="${esc(q.nr)}" onchange="setPos('${q.id}','nr',this.value)" aria-label="Nr."></span>
+        <input class="pos-t" value="${esc(q.title)}" onchange="setPos('${q.id}','title',this.value)" aria-label="${t('posTitle')}">${status}
+        <button class="btn x" onclick="delPos('${q.id}', this)">${t('delPos')}</button></div>
+      <div class="pos-body"><div class="items">${list.length ? [...calcs, ...sizes].map(it=>row(it, list, q.id)).join('') : `<div class="empty">${t('emptyPos')}</div>`}</div><div class="thumb">${thumb}</div></div></div>`; }).join('');
+  document.getElementById('list').innerHTML = posHtml || (items.length ? '' : `<div class="empty" style="padding:10px 0 4px">${t('none')}</div>`);
+  document.getElementById('loose').innerHTML = loose.length ? loose.map(it=>row(it, [it], null)).join('') : `<div class="empty">${t('noneLoose')}</div>`;
+  document.getElementById('sum').textContent = t(P.pos.length===1?'sum1':'sum', P.pos.length, nBad, nStale);
+}
+// ── Aktionen ─────────────────────────────────────
+function nextNr(P){ const n=P.pos.map(q=>parseInt(q.nr,10)).filter(isFinite); return String(n.length ? Math.max(...n)+1 : 1); }
+function addPos(title){ const P=proj(), id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); P.pos.push({ id, nr:nextNr(P), title: title || t('newPos') }); save(P); render(); return id; }
+function setPos(id, f, v){ const P=proj(), q=P.pos.find(x=>x.id===id); if(!q) return; q[f]=String(v).trim() || q[f]; save(P); render(); }
+function setName(v){ const P=proj(); P.name=String(v).trim() || P.name; save(P); render(); }
+let armed=null;
+function delPos(id, btn){ if(armed!==id){ armed=id; btn.textContent=t('delAsk'); setTimeout(()=>{ if(armed===id){ armed=null; render(); } }, 3000); return; }
+  const P=proj(); P.pos=P.pos.filter(q=>q.id!==id); Object.keys(P.asg).forEach(k=>{ if(P.asg[k]===id) delete P.asg[k]; }); armed=null; save(P); render(); }
+function assign(itemId, v){ const P=proj();
+  if(v==='__new'){ const it=allItems().find(x=>x.id===itemId); const id=addPos(it ? it.name : ''); const P2=proj(); P2.asg[itemId]=id; save(P2); render(); toast(t('moved')); return; }
+  if(v==='__none'){ P.asg[itemId]=null; } else if(v) P.asg[itemId]=v;
+  // calc-Quelle mitnehmen: size-Einträge folgen ihrer calc-Berechnung, solange sie nicht eigens zugeordnet sind
+  save(P); render(); if(v) toast(t('moved')); }
+function toast(m){ document.querySelectorAll('.toast').forEach(x=>x.remove()); const d=document.createElement('div'); d.className='toast'; d.textContent=m; document.body.appendChild(d); setTimeout(()=>d.remove(), 2600); }
+// ── Datei sichern / laden ────────────────────────
+function exportFile(){
+  const P=proj(), calc={}, reps={};
+  calcItems().forEach(c=>calc[c.key]={ name:c.name, sdf:c.sdf });
+  sizeItems().forEach(s=>{ try{ const r=localStorage.getItem(REP+s.name); if(r) reps[s.name]=r; }catch(e){} });
+  const data={ statiq:'projekt', version:PROJ_VERSION, saved:new Date().toISOString(), project:P, calc, size:lsGet(POS_STORE, []), reports:reps };
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data)], {type:'application/json'}));
+  a.download=(P.name||'projekt').replace(/[^\wäöüÄÖÜß\- ]+/g,'').trim().replace(/\s+/g,'_')+'.statiq.json'; document.body.appendChild(a); a.click(); a.remove(); toast(t('exported'));
+}
+function importData(d){
+  if(!d || d.statiq!=='projekt') { toast(t('badFile')); return 0; }
+  let n=0; Object.entries(d.calc||{}).forEach(([k,v])=>{ if(lsSet(k, v)) n++; });
+  const cur=lsGet(POS_STORE, []); (d.size||[]).forEach(s=>{ const i=cur.findIndex(x=>x.name===s.name); if(i>=0) cur[i]=s; else cur.push(s); n++; }); lsSet(POS_STORE, cur);
+  Object.entries(d.reports||{}).forEach(([k,v])=>{ try{ localStorage.setItem(REP+k, v); }catch(e){} });
+  if(d.project) lsSet(PSTORE, d.project);
+  render(); toast(t('imported', n)); return n;
+}
+function importFile(inp){ const f=inp.files && inp.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ importData(JSON.parse(r.result)); }catch(e){ toast(t('badFile')); } inp.value=''; }; r.readAsText(f); }
+// ── Gesamtbericht ────────────────────────────────
+function buildReport(){
+  const { P, by } = grouped(), date=new Date().toLocaleDateString(LOC);
+  const pos=[...P.pos].sort((a,b)=>String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true}));
+  const stTxt = list => { const s=list.filter(x=>x.kind==='s'); if(!s.length) return '—'; const bad=s.some(x=>!x.p.ok), st=s.some(x=>staleOf(x,list)?.why==='stale');
+    return st ? t('stale') : bad ? `<span class="bad">${t('notOk')}</span>` : `<span class="ok">${t('allOk')}</span>`; };
+  let h=`<div class="cover"><div class="meta">statiq · ${t('navProj')}</div><h1>${esc(P.name)}</h1><div class="meta">${t('repDate', date)}</div></div>`;
+  h+=`<section><h2>${t('repOverview')}</h2><table><tr><th>${t('pos')}</th><th>${t('posTitle')}</th><th>${t('repParts')}</th><th>${t('repStatus')}</th></tr>`
+    + pos.map(q=>{ const l=by[q.id]||[]; return `<tr><td>${esc(q.nr)}</td><td>${esc(q.title)}</td><td>${l.map(x=>esc(x.name)).join('<br>')||'—'}</td><td>${stTxt(l)}</td></tr>`; }).join('') + `</table></section>`;
+  pos.forEach(q=>{ const l=by[q.id]||[]; if(!l.length) return;
+    h+=`<div class="posblock"><h1>${t('pos')} ${esc(q.nr)} — ${esc(q.title)}</h1>`;
+    l.filter(x=>x.kind==='c').slice(0,1).forEach(c=>{ const r=c.sdf.results||{};
+      h+=`<div class="sub"><h3>${t('repSystem')}: ${esc(c.name)}</h3><div class="meta">${esc(tTyp(c.sdf.system?.type))} · ${dShort(c.ts)}</div><div class="sysfig">${c.sdf.system?.svgSnapshot||''}</div>
+        <table><tr><th>${t('repResults')}</th><td>M<sub>max</sub> = ${nf(r.Mmax??0,2)} kNm · Q<sub>max</sub> = ${nf(r.Qmax??0,2)} kN · N<sub>max</sub> = ${nf(r.Nmax??0,2)} kN</td></tr>
+        ${(r.reactions||[]).length?`<tr><th>${t('reac')}</th><td>${r.reactions.map(reacTxt).join('<br>')}</td></tr>`:''}</table></div>`; });
+    l.filter(x=>x.kind==='s').forEach(s=>{ let r=null; try{ r=localStorage.getItem(REP+s.name); }catch(e){}
+      h+=`<div class="sub">${r || `<h3>${esc(s.name)}</h3><p class="meta">${t('repNoRep')}</p>`}</div>`; });
+    h+=`</div>`; });
+  h+=`<p class="meta" style="margin-top:20px">${t('repNote')}</p>`;
+  return h; }
+function reacTxt(x){ const v=(k,u)=>{ const n=parseFloat(x[k]); return isFinite(n) && Math.abs(n)>1e-9 ? `${k}<sub>${esc(x.support||'')}</sub> = ${nf(n,2)} ${u}` : ''; };
+  return [v('V','kN'), v('H','kN'), v('M','kNm')].filter(Boolean).join(' · ') || `${esc(x.support||'')}: —`; }
+function showReport(){ document.getElementById('report').innerHTML = buildReport(); document.body.classList.add('show-report'); window.scrollTo(0,0); }
+function hideReport(){ document.body.classList.remove('show-report'); }
+// ── Sprache ──────────────────────────────────────
+function setLang(l){ try{ localStorage.setItem('statiq-lang', l); }catch(e){} location.reload(); }
+function applyLang(){ document.documentElement.lang=LANG; document.querySelectorAll('[data-t]').forEach(e=>{ e.innerHTML=t(e.dataset.t); }); const s=document.getElementById('lang-sel'); if(s) s.value=LANG; document.title=`Statiq — ${t('navProj')}`; }
+document.getElementById('ver').textContent='v'+PROJ_VERSION;
+applyLang(); render();
+window.addEventListener('storage', render); window.addEventListener('focus', render);
+</script>
+</body>
+</html>

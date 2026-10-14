@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.15 -->
+<!-- Statiq v0.8.16 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -518,7 +518,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.15</span>
+    <span class="version">v0.8.16</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -535,7 +535,7 @@
   <div id="saved-list-view" style="padding:16px">
     <div style="display:flex;gap:8px;margin-bottom:16px">
       <button onclick="saveFilterTab('calc')" id="sf-calc" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:white;cursor:pointer;font-family:DM Mono,monospace;font-weight:600">calc</button>
-      <button onclick="saveFilterTab('size')" id="sf-size" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-family:DM Mono,monospace">size</button>
+      <a href="projekt.html" id="sf-proj" data-i18n="projLink" style="font-size:12px;padding:5px 4px;color:var(--accent);font-weight:600;text-decoration:none;align-self:center;margin-left:auto">Project overview →</a>
     </div>
     <div id="saved-calcs-list"></div>
     <div id="saved-empty" style="color:var(--text-muted);font-size:12px;font-family:DM Mono,monospace;padding:40px 20px;text-align:center"></div>
@@ -990,7 +990,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.15';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.16';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -4872,6 +4872,8 @@ Object.assign(I18N_UI.fr, {"modCalcSub": "Efforts internes &amp; déformations",
 Object.assign(I18N_UI.es, {"modCalcSub": "Esfuerzos &amp; deformaciones", "modSizeSub": "Dimensionado según Eurocódigos", "modRefSub": "Perfiles, tablas, Eurocódigos", "savedSub": "Cálculos &amp; informes", "modalFrameS1p": "Un pórtico consta de dos pilares y un dintel. Los apoyos (empotramiento, apoyo fijo, apoyo móvil), un apoyo en cabeza y rótulas en cualquier barra se eligen libremente. El grado de hiperestaticidad resulta del criterio de recuento:", "modalFrameS1c": "a — número de reacciones (empotramiento 3, apoyo fijo 2, apoyo móvil 1, apoyo en cabeza 1 o 2) · g — rótulas efectivas (una rótula justo en un pie articulado no cuenta). n &lt; 0: mecanismo · n = 0: isostático · n &gt; 0: hiperestático.", "modalFrameS2t": "Pórtico triarticulado: apoyo fijo + apoyo fijo + rótula en el dintel → n = 4 − 3 − 1 = 0<br>Pórtico biarticulado: apoyo fijo + apoyo fijo → n = 1<br>Pórtico con pies empotrados: empotramiento + empotramiento → n = 3<div class=\"comment\">Los tres se ajustan con los botones «Tipo de pórtico».</div>", "modalFrameS3p": "Cuatro reacciones desconocidas, tres ecuaciones de equilibrio y la condición de rótula (momento nulo en la rótula G):", "modalFrameS3e": "Ejemplo: carga uniforme q en el dintel, rótula en el centro del vano, ambos pilares de altura h:", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, momento en esquina −31,25 kNm (tracción exterior).", "modalFrameS4p": "calc utiliza el método de los desplazamientos en forma matricial (método de rigidez directa) para cualquier combinación de apoyos, rótulas y cargas: ecuaciones de rigidez K·u = F, luego reacciones y esfuerzos en los extremos de las barras. M, Q y N resultan exactamente del equilibrio de cada tramo de barra; las deformaciones salen directamente de los desplazamientos nodales. Las deformaciones axiales se suprimen prácticamente (EA muy grande), como en un cálculo a mano.", "modalFrameS5t": "M &gt; 0: tracción en el interior (fibra discontinua) · Q = dM/ds a lo largo de la barra · N &gt; 0: tracción<br>Reacciones: H → +, V ↑ +, M ↺ + (fuerzas del apoyo sobre el pórtico)"});
 Object.assign(I18N_UI.en,{modalFrameLeftPart:'(left part)',modalFrameCorner:'corner'}); Object.assign(I18N_UI.de,{modalFrameLeftPart:'(linker Teil)',modalFrameCorner:'Ecke'});
 Object.assign(I18N_UI.fr,{modalFrameLeftPart:'(partie gauche)',modalFrameCorner:'angle'}); Object.assign(I18N_UI.es,{modalFrameLeftPart:'(parte izquierda)',modalFrameCorner:'esquina'});
+Object.assign(I18N_UI.en,{projLink:'Project overview with all items →'}); Object.assign(I18N_UI.de,{projLink:'Projektübersicht mit allen Positionen →'});
+Object.assign(I18N_UI.fr,{projLink:'Vue d’ensemble du projet →'}); Object.assign(I18N_UI.es,{projLink:'Vista general del proyecto →'});
 Object.keys(I18N_UI).forEach(l=>{ calcTranslations[l] = Object.assign(calcTranslations[l]||{}, I18N_UI[l]); });
 const trf = (key, ...a) => tr(key).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const LOCALE = () => ({en:'en-GB', de:'de-DE', fr:'fr-FR', es:'es-ES'})[calcLang] || 'en-GB';
@@ -5393,6 +5395,8 @@ if(UX_ON){ buildCols(); compactLoads();
   updatePick(); liveCalc(true); }
 // Direkt in einen Bereich springen, z. B. calc.html#saved (Link von der Startseite)
 if(['#saved','#beam','#cantilever','#cont','#frame'].includes(location.hash)) showTab(location.hash.slice(1));
+// Projektübersicht: #report=Schlüssel öffnet den Bericht einer gespeicherten Berechnung (seit v0.8.16)
+{ const m=String((typeof location!=='undefined' && location.hash) || '').match(/^#report=(.+)$/); if(m){ const k=decodeURIComponent(m[1]); showTab('saved'); if(localStorage.getItem(k)) openReport(k); history.replaceState(null,'',location.pathname); } }
 </script>
 </body>
 </html>

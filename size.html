@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.31 -->
+<!-- Statiq·size v0.5.33 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -271,6 +271,7 @@
     .bf-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 112px; gap: 6px; } .bf-row input, .bf-row select { width: 100%; min-width: 0; padding: 6px 6px; font-size: 13px; border: 1px solid var(--border-dark, #d1d5db); border-radius: 6px; background: var(--surface, #fff); color: inherit; }
     .bp-head { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
     .bp-head span:first-child { display: none; }
+  .page-head { display:none; }   /* seit v0.5.33: kein Seitentitel, die Auswahl steht oben; Beschreibung in der Karte „Umfang und Grundlagen“ am Ende */
 </style>
 </head>
 <body>
@@ -2430,6 +2431,7 @@ const I18N = {
   "tagOk": "erfüllt",
   "tagBad": "nicht erf.",
   "notIncl": "Nicht enthalten",
+  "scopeT": "Umfang und Grundlagen",
   "refFormulas": "Formeln dazu im",
   "refBook": "Nachschlagewerk statiq·ref",
   "calcSteps": "Rechenschritte",
@@ -3478,6 +3480,7 @@ const I18N = {
   "tagOk": "satisfied",
   "tagBad": "not satisf.",
   "notIncl": "Not included",
+  "scopeT": "Scope and basis",
   "refFormulas": "Formulas in the",
   "refBook": "statiq·ref reference",
   "calcSteps": "Calculation steps",
@@ -4513,6 +4516,7 @@ const I18N = {
   "tagOk": "vérifié",
   "tagBad": "non vér.",
   "notIncl": "Non inclus",
+  "scopeT": "Portée et bases",
   "refFormulas": "Formules dans le",
   "refBook": "ouvrage de référence statiq·ref",
   "calcSteps": "Étapes de calcul",
@@ -5561,6 +5565,7 @@ const I18N = {
   "tagOk": "cumple",
   "tagBad": "no cumple",
   "notIncl": "No incluido",
+  "scopeT": "Alcance y bases",
   "refFormulas": "Fórmulas en el",
   "refBook": "manual de consulta statiq·ref",
   "calcSteps": "Desarrollo del cálculo",
@@ -8644,6 +8649,7 @@ const trFig = h => { if(LANG==='de' || typeof h!=='string') return h;
 const dLoc = () => ({ de:'de-DE', en:'en-GB', fr:'fr-FR', es:'es-ES' })[LANG] || 'de-DE';
 // Hinweis für andere Sprachen: Seite ist bisher nur deutsch
 function showLangNotice(){
+  return;   // seit v0.5.33 kein Sprachhinweis mehr (Wunsch Valentin)
   if(LANG==='de' || !I18N[LANG]?.langNotice || document.querySelector('.lang-notice')) return;
   const d=document.createElement('div'); d.className='lang-notice'; d.setAttribute('role','note'); d.innerHTML=tx('langNotice'); const y0=window.scrollY;
   d.style.cssText='grid-column:1/-1;margin:0;max-width:none'; document.querySelector('main.main').prepend(d); if(y0===0) requestAnimationFrame(()=>window.scrollTo(0,0));   // Scroll-Anker des Browsers ausgleichen
@@ -8660,7 +8666,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.5.31';
+const SIZE_VERSION = '0.5.33';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -10067,7 +10073,8 @@ function renderOut(C, ok, fig, line, nicht, refLink){
   $('details').innerHTML = trFig(C.map(c=>`<div class="card" id="n-${c.id}">
       <div class="card-title"><span>${c.title}</span>${c.info?'':`<span class="tag ${c.ok?'ok':'bad'}">η = ${deNum(c.eta,2)}</span>`}</div>
       <div class="steps">${stepsHtml(c.steps)}</div>${c.note?`<div class="note warn">${c.note}</div>`:''}</div>`).join('')
-    + `<div class="card"><div class="card-title">${tx('notIncl')}</div><div class="hint" style="margin-top:0">${tt(nicht)} ${tx('refFormulas')}
+    + `<div class="card" id="scope-card"><div class="card-title">${tx('scopeT')}</div><div class="hint" style="margin-top:0">${$('page-sub').innerHTML}${$('page-calc').style.display==='none' ? '' : ' '+tx('z001')}</div>
+      <div class="card-title" style="margin-top:14px">${tx('notIncl')}</div><div class="hint" style="margin-top:0">${tt(nicht)} ${tx('refFormulas')}
       <a href="${refLink}">${tx('refBook')}</a>.</div></div>`);
   if(typeof foldDetails==='function') foldDetails();
   if(typeof scheduleFix==='function') scheduleFix(C);

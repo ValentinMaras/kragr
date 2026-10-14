@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.28 -->
+<!-- Statiq·size v0.5.29 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -278,7 +278,7 @@
 <header class="app-header">
   <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">stat<span>iq</span></a>
   <nav class="header-links">
-    <button class="proj-btn" id="proj-btn" onclick="toggleProj(event)" data-i18n="projBtn">Projekt</button>
+    <button class="proj-btn" id="proj-btn" onclick="toggleProj(event)" data-i18n="projBtn">Meine Projekte</button>
     <span class="module-name">size</span>
     <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
     <a href="calc.html">calc</a>
@@ -300,7 +300,7 @@
       <div class="card-title"><span data-i18n="posTitle">Positionen</span><span class="btn-row"><button class="btn small" onclick="savePos()" data-i18n="save">Speichern</button></span></div>
       <div id="pos-msg" class="hint" style="margin-top:0"></div>
       <div id="pos-list"></div>
-      <a class="proj-link" href="projekt.html" data-i18n="projLink">Projektübersicht mit allen Positionen →</a>
+      <a class="proj-link" href="projekt.html" data-i18n="projLink">Alle Positionen in „Meine Projekte“ →</a>
     </div>
     <div class="card" id="calc-import">
       <div class="card-title"><span data-i18n="ciTitle">Schnittgrößen aus statiq·calc</span></div>
@@ -2109,7 +2109,7 @@ const I18N = {
   "gfT2": "Lasten auf der Fundamentoberkante (charakteristisch)",
   "gfHint2": "Bemessungssituation BS-P nach DIN 1054: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (Grundbruch), γ<sub>R,h</sub> = 1,10 (Gleiten). H und M wirken in Richtung b.",
   "matGrund": "Grundbau",
-  "projBtn": "Projekt",
+  "projBtn": "Meine Projekte",
   "wbDruck": "Wasserdruck",
   "wbSchwimm": "Schwimmen",
   "wbRohr": "Rohr",
@@ -2808,7 +2808,7 @@ const I18N = {
   "pc106": "Pfahl",
   "pc107": "Brunnen",
   "pc108": "Sommerlicher Wärmeschutz",
-  "projLink": "Projektübersicht mit allen Positionen →",
+  "projLink": "Alle Positionen in „Meine Projekte“ →",
   "posMissing": "Position „{0}“ nicht gefunden.",
   "posRecalc": "„{0}“ mit der neueren calc-Berechnung neu gerechnet und gespeichert."
  },
@@ -3152,7 +3152,7 @@ const I18N = {
   "gfT2": "Loads on top of the footing (characteristic)",
   "gfHint2": "Design situation BS-P to DIN 1054: γ<sub>G</sub> = 1.35, γ<sub>Q</sub> = 1.50, γ<sub>R,v</sub> = 1.40 (bearing), γ<sub>R,h</sub> = 1.10 (sliding). H and M act in direction b.",
   "matGrund": "Geotechnics",
-  "projBtn": "Project",
+  "projBtn": "My projects",
   "wbDruck": "Water pressure",
   "wbSchwimm": "Floating",
   "wbRohr": "Pipe",
@@ -3852,7 +3852,7 @@ const I18N = {
   "pc106": "Pile",
   "pc107": "Wells",
   "pc108": "Summer heat",
-  "projLink": "Project overview with all items →",
+  "projLink": "All items in “My projects” →",
   "posMissing": "Item “{0}” not found.",
   "posRecalc": "“{0}” recalculated with the newer calc calculation and saved."
  },
@@ -4188,7 +4188,7 @@ const I18N = {
   "gfT2": "Charges en tête de fondation (caractéristiques)",
   "gfHint2": "Situation de projet BS-P selon DIN 1054 : γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (capacité portante), γ<sub>R,h</sub> = 1,10 (glissement). H et M agissent dans la direction b.",
   "matGrund": "Géotechnique",
-  "projBtn": "Projet",
+  "projBtn": "Mes projets",
   "wbDruck": "Pression de l'eau",
   "wbSchwimm": "Flottaison",
   "wbRohr": "Conduite",
@@ -4880,7 +4880,7 @@ const I18N = {
   "z108": "Torsion",
   "pa130": "Torsion",
   "tagInfo": "Info",
-  "projLink": "Vue d’ensemble du projet →",
+  "projLink": "Toutes les positions dans « Mes projets » →",
   "posMissing": "Position « {0} » introuvable.",
   "posRecalc": "« {0} » recalculée avec le calcul calc plus récent et enregistrée.",
   "z085": "M<sub>y,Ed</sub> [kNm]",
@@ -5232,7 +5232,7 @@ const I18N = {
   "gfT2": "Cargas sobre la cara superior de la cimentación (características)",
   "gfHint2": "Situación de proyecto BS-P según DIN 1054: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (hundimiento), γ<sub>R,h</sub> = 1,10 (deslizamiento). H y M actúan en la dirección b.",
   "matGrund": "Geotecnia",
-  "projBtn": "Proyecto",
+  "projBtn": "Mis proyectos",
   "wbDruck": "Presión del agua",
   "wbSchwimm": "Flotación",
   "wbRohr": "Tubería",
@@ -5924,7 +5924,7 @@ const I18N = {
   "z108": "Torsión",
   "pa130": "Torsión",
   "tagInfo": "Info",
-  "projLink": "Vista general del proyecto →",
+  "projLink": "Todas las posiciones en «Mis proyectos» →",
   "posMissing": "Posición «{0}» no encontrada.",
   "posRecalc": "«{0}» recalculada con el cálculo de calc más reciente y guardada.",
   "z085": "M<sub>y,Ed</sub> [kNm]",
@@ -8643,7 +8643,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.5.28';
+const SIZE_VERSION = '0.5.29';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════

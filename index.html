@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Statiq — The Structural Engineer's Toolkit</title>
   <meta name="description" content="Structural analysis tools for engineers and students. Calculate, reference, and design." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="fonts/fonts.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --accent:#2563eb; }
@@ -61,6 +60,8 @@
     .footer { max-width:760px; margin:0 auto; padding:32px 24px 48px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
     .footer-logo { font-size:15px; font-weight:800; letter-spacing:-0.4px; }
     .footer-meta { font-size:12px; color:var(--text3); }
+    .footer-meta a { color:inherit; }
+    .footer-note { flex-basis:100%; font-size:12px; color:var(--text3); }
 
     /* sanftes Einblenden */
     .hero, .module-card { animation: fadeUp .45s ease both; }
@@ -174,7 +175,8 @@
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · calc v0.8.17 · ref v0.3.22 · size v0.5.29 · projekt v0.1.1</div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a> · calc v0.8.19 · ref v0.3.24 · size v0.5.31 · projekt v0.1.2</div>
+  <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>
 
 <script>
@@ -194,7 +196,7 @@ const translations = {
     size_desc: 'Design in reinforced concrete, steel, timber and masonry, plus geotechnics, hydraulics and building physics — every check step by step, printable report.',
     ref_title: 'Theory & Tables',
     ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics and building physics, with calculators and examples — your digital reference handbook.',
-    footer: 'Valentin Maras',
+    footer: 'Valentin Maras', legal: 'Legal notice · Privacy', note: 'Learning tool for students — does not replace a checked structural calculation.',
     saved_from: 'items from calc &amp; size',
     saved: 'My projects', saved_n: '{n} entries', saved_p: '{p} items · {n} entries', saved_p1: '1 item · {n} entries',
     size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Building physics", "Buckling", "Torsion", "Report"],
@@ -213,7 +215,7 @@ const translations = {
     size_desc: 'Bemessung in Stahlbeton, Stahl, Holz und Mauerwerk, dazu Grundbau, Wasserbau und Bauphysik — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
     ref_title: 'Theorie & Tafeln',
     ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zu Grund-, Wasserbau und Bauphysik, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
-    footer: 'Valentin Maras',
+    footer: 'Valentin Maras', legal: 'Impressum · Datenschutz', note: 'Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung.',
     saved_from: 'Positionen aus calc &amp; size',
     saved: 'Meine Projekte', saved_n: '{n} Einträge', saved_p: '{p} Positionen · {n} Einträge', saved_p1: '1 Position · {n} Einträge',
     size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Bauphysik", "Stabilität", "Torsion", "Bericht"],
@@ -232,7 +234,7 @@ const translations = {
     size_desc: 'Dimensionnement en béton armé, acier, bois et maçonnerie, ainsi que géotechnique, hydraulique et physique du bâtiment — chaque vérification pas à pas, note de calcul.',
     ref_title: 'Théorie & Tables',
     ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique et à la physique du bâtiment, avec calculateurs et exemples — votre manuel de référence numérique.',
-    footer: 'Valentin Maras',
+    footer: 'Valentin Maras', legal: 'Mentions légales · Confidentialité', note: 'Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée.',
     saved_from: 'positions de calc &amp; size',
     saved: 'Mes projets', saved_n: '{n} entrées', saved_p: '{p} positions · {n} entrées', saved_p1: '1 position · {n} entrées',
     size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Physique du bâtiment", "Stabilité", "Torsion", "Note de calcul"],
@@ -251,7 +253,7 @@ const translations = {
     size_desc: 'Dimensionado en hormigón armado, acero, madera y fábrica, además de geotecnia, hidráulica y física de la construcción — cada comprobación paso a paso, informe imprimible.',
     ref_title: 'Teoría y Tablas',
     ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia y la física de la construcción, con calculadoras y ejemplos — tu manual de referencia digital.',
-    footer: 'Valentin Maras',
+    footer: 'Valentin Maras', legal: 'Aviso legal · Privacidad', note: 'Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado.',
     saved_from: 'posiciones de calc y size',
     saved: 'Mis proyectos', saved_n: '{n} entradas', saved_p: '{p} posiciones · {n} entradas', saved_p1: '1 posición · {n} entradas',
     size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Física de la construcción", "Estabilidad", "Torsión", "Informe"],
@@ -290,6 +292,8 @@ function applyLang(lang){
   document.getElementById('ref-title').textContent = t.ref_title;
   document.getElementById('ref-desc').textContent = t.ref_desc;
   document.getElementById('footer-meta').textContent = t.footer;
+  document.getElementById('footer-legal').textContent = t.legal;
+  document.getElementById('footer-note').textContent = t.note;
   document.getElementById('saved-title').textContent = t.saved;
   document.getElementById('saved-from').innerHTML = t.saved_from;
   savedCount(t);
@@ -318,6 +322,27 @@ window.addEventListener('DOMContentLoaded', ()=>{
     o.classList.toggle('active', o.dataset.lang===currentLang);
   });
 });
+</script>
+<script>
+// Link auf „Meine Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
+(function(){
+  if(typeof document==='undefined' || !document.addEventListener) return;
+  const MSG={de:'„Meine Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
+    en:'“My projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
+    fr:'« Mes projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
+    es:'«Mis proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
+  function hint(){ let l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
+    let d=document.getElementById('proj-missing'); if(!d){ d=document.createElement('div'); d.id='proj-missing'; d.setAttribute('role','alert');
+      d.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:min(560px,calc(100vw - 32px));background:#7f1d1d;color:#fff;padding:12px 16px;border-radius:10px;font:14px/1.45 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:9999;cursor:pointer';
+      d.onclick=()=>d.remove(); document.body.appendChild(d); }
+    d.textContent=MSG[l]||MSG.de; clearTimeout(d._t); d._t=setTimeout(()=>d.remove(),9000); }
+  document.addEventListener('click', e=>{
+    const a=e.target.closest && e.target.closest('a[href="projekt.html"]');
+    if(!a || !/^https?:$/.test(location.protocol) || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    e.preventDefault();
+    fetch('projekt.html',{method:'HEAD',cache:'no-store'}).then(r=>{ if(r.ok) location.href=a.href; else hint(); }).catch(()=>{ location.href=a.href; });
+  });
+})();
 </script>
 </body>
 </html>

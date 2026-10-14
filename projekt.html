@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!-- Statiq·projekt v0.1.1 -->
+<!-- Statiq·projekt v0.1.2 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Statiq — Meine Projekte</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="fonts/fonts.css" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --card:#f6f6f7; --accent:#2563eb;
@@ -121,7 +120,7 @@
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.1';
+const PROJ_VERSION = '0.1.2';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
@@ -295,7 +294,7 @@ function buildReport(){
   return h; }
 function reacTxt(x){ const v=(k,u)=>{ const n=parseFloat(x[k]); return isFinite(n) && Math.abs(n)>1e-9 ? `${k}<sub>${esc(x.support||'')}</sub> = ${nf(n,2)} ${u}` : ''; };
   return [v('V','kN'), v('H','kN'), v('M','kNm')].filter(Boolean).join(' · ') || `${esc(x.support||'')}: —`; }
-function showReport(){ document.getElementById('report').innerHTML = buildReport(); document.body.classList.add('show-report'); window.scrollTo(0,0); }
+function showReport(){ document.getElementById('report').innerHTML = buildReport() + (typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : ''); document.body.classList.add('show-report'); window.scrollTo(0,0); }
 function hideReport(){ document.body.classList.remove('show-report'); }
 // ── Sprache ──────────────────────────────────────
 function setLang(l){ try{ localStorage.setItem('statiq-lang', l); }catch(e){} location.reload(); }
@@ -303,6 +302,24 @@ function applyLang(){ document.documentElement.lang=LANG; document.querySelector
 document.getElementById('ver').textContent='v'+PROJ_VERSION;
 applyLang(); render();
 window.addEventListener('storage', render); window.addEventListener('focus', render);
+</script>
+<script>
+// Fußleiste mit Haftungshinweis und Link zu Impressum/Datenschutz (Sprache folgt <html lang>)
+(function(){
+  if(typeof document==='undefined' || !document.body || !document.createElement || !document.documentElement) return;
+  const TX={de:['Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung. Werte nach den genannten Normen, ohne Gewähr.','Impressum · Datenschutz · Hinweise'],
+    en:['Learning tool for students — does not replace a checked structural calculation. Values to the standards cited, without warranty.','Legal notice · Privacy · Disclaimer'],
+    fr:['Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée. Valeurs selon les normes citées, sans garantie.','Mentions légales · Confidentialité · Avertissement'],
+    es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención']};
+  window.statiqDisclaimer=()=>{ const l=(document.documentElement.lang||'de').slice(0,2); return (TX[l]||TX.de)[0]; };
+  const d=document.createElement('div'); d.className='legal-bar'; d.setAttribute('role','contentinfo');
+  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Inter,system-ui,sans-serif;color:#8a8a8a;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
+  const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
+    d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
+  upd(); document.body.appendChild(d);
+  const st=document.createElement('style'); st.textContent='@media print{.legal-bar{display:none!important}}'; (document.head||document.body).appendChild(st);
+  if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+})();
 </script>
 </body>
 </html>

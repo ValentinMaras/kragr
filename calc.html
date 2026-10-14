@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.17 -->
+<!-- Statiq v0.8.19 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Statiq — Structural Analysis</title>
   <meta name="description" content="Structural analysis app for civil engineering students — calculate shear forces, bending moments and section properties." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="fonts/fonts.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -518,7 +517,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.17</span>
+    <span class="version">v0.8.19</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -990,7 +989,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.17';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.19';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -2744,6 +2743,7 @@ function renderReport(name, sdf){
         <div class="rep-dia"><div class="rep-dia-t" style="color:#7c3aed">${S.type==='frame'?tr('repUW'):tr('repW')} [mm]</div><svg id="report-svg-w"></svg></div>
       </div>
 
+      ${(typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : '')}
       <div class="rep-foot">
         <span>statiq·calc · valentinmaras.github.io/statiq</span>
         <span>${date}</span>
@@ -5397,6 +5397,43 @@ if(UX_ON){ buildCols(); compactLoads();
 if(['#saved','#beam','#cantilever','#cont','#frame'].includes(location.hash)) showTab(location.hash.slice(1));
 // Projektübersicht: #report=Schlüssel öffnet den Bericht einer gespeicherten Berechnung (seit v0.8.16)
 { const m=String((typeof location!=='undefined' && location.hash) || '').match(/^#report=(.+)$/); if(m){ const k=decodeURIComponent(m[1]); showTab('saved'); if(localStorage.getItem(k)) openReport(k); history.replaceState(null,'',location.pathname); } }
+
+// Fußleiste mit Haftungshinweis und Link zu Impressum/Datenschutz (Sprache folgt <html lang>)
+(function(){
+  if(typeof document==='undefined' || !document.body || !document.createElement || !document.documentElement) return;
+  const TX={de:['Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung. Werte nach den genannten Normen, ohne Gewähr.','Impressum · Datenschutz · Hinweise'],
+    en:['Learning tool for students — does not replace a checked structural calculation. Values to the standards cited, without warranty.','Legal notice · Privacy · Disclaimer'],
+    fr:['Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée. Valeurs selon les normes citées, sans garantie.','Mentions légales · Confidentialité · Avertissement'],
+    es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención']};
+  window.statiqDisclaimer=()=>{ const l=(document.documentElement.lang||'de').slice(0,2); return (TX[l]||TX.de)[0]; };
+  const d=document.createElement('div'); d.className='legal-bar'; d.setAttribute('role','contentinfo');
+  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Inter,system-ui,sans-serif;color:#8a8a8a;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
+  const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
+    d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
+  upd(); document.body.appendChild(d);
+  const st=document.createElement('style'); st.textContent='@media print{.legal-bar{display:none!important}}'; (document.head||document.body).appendChild(st);
+  if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+})();
+
+// Link auf „Meine Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
+(function(){
+  if(typeof document==='undefined' || !document.addEventListener) return;
+  const MSG={de:'„Meine Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
+    en:'“My projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
+    fr:'« Mes projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
+    es:'«Mis proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
+  function hint(){ let l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
+    let d=document.getElementById('proj-missing'); if(!d){ d=document.createElement('div'); d.id='proj-missing'; d.setAttribute('role','alert');
+      d.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:min(560px,calc(100vw - 32px));background:#7f1d1d;color:#fff;padding:12px 16px;border-radius:10px;font:14px/1.45 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:9999;cursor:pointer';
+      d.onclick=()=>d.remove(); document.body.appendChild(d); }
+    d.textContent=MSG[l]||MSG.de; clearTimeout(d._t); d._t=setTimeout(()=>d.remove(),9000); }
+  document.addEventListener('click', e=>{
+    const a=e.target.closest && e.target.closest('a[href="projekt.html"]');
+    if(!a || !/^https?:$/.test(location.protocol) || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    e.preventDefault();
+    fetch('projekt.html',{method:'HEAD',cache:'no-store'}).then(r=>{ if(r.ok) location.href=a.href; else hint(); }).catch(()=>{ location.href=a.href; });
+  });
+})();
 </script>
 </body>
 </html>

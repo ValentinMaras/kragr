@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq·size v0.5.33 -->
+<!-- Statiq·size v0.5.34 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -272,6 +272,11 @@
     .bp-head { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
     .bp-head span:first-child { display: none; }
   .page-head { display:none; }   /* seit v0.5.33: kein Seitentitel, die Auswahl steht oben; Beschreibung in der Karte „Umfang und Grundlagen“ am Ende */
+    /* v0.5.34: gleicher Rahmen wie calc (Breite 1180 px, Spalten 1 : 1,2, Abstand oben 16 px, Kopfzeile 58 px) */
+    .app-header { min-height:58px; box-sizing:border-box; }
+    .main { padding-top:6px; }
+    @media (min-width:1000px){ .main { max-width:1180px; padding:6px 20px 20px; gap:20px; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); } }
+    @media (max-width:560px){ .main { padding:6px 20px 14px; } }
 </style>
 </head>
 <body>
@@ -8666,7 +8671,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.5.33';
+const SIZE_VERSION = '0.5.34';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════

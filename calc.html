@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.19 -->
+<!-- Statiq v0.8.20 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -371,7 +371,9 @@
     .st-f > div.eq { padding-left:0; text-indent:0; }
     .eq-r { padding-left:0.9em; text-indent:-0.9em; }
     .eq-w { grid-column:1 / -1; padding-left:0.9em; text-indent:-0.9em; }
-  </style>
+      /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
+    .app-header { min-height:58px; box-sizing:border-box; }
+</style>
 </head>
 <body>
 
@@ -517,7 +519,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.19</span>
+    <span class="version">v0.8.20</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -989,7 +991,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.19';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.20';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;

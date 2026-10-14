@@ -1,11 +1,11 @@
-# Statiq — Übergabe für neuen Chat (calc v0.8.19 · ref v0.3.24 · size v0.5.33 · projekt v0.1.2 · rechtliches v0.1.0 · Startseite)
+# Statiq — Übergabe für neuen Chat (calc v0.8.20 · ref v0.3.26 · size v0.5.34 · projekt v0.1.2 · rechtliches v0.1.0 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.19, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.20, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Statiq·projekt v0.1.2, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.24, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Statiq·size v0.5.33, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.26, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Statiq·size v0.5.34, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Statiq·rechtliches v0.1.0)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
@@ -566,6 +566,17 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## calc v0.8.20 · size v0.5.34 · ref v0.3.26 — gleicher Rahmen, keine Pfadleiste
+
+- size übernimmt den Rahmen von calc: ab 1000 px `max-width:1180px`, Innenabstand `6px 20px 20px`, Spalten `minmax(0,1fr) minmax(0,1.2fr)`, Abstand 20 px; am Handy Seitenrand 20 px. Kopfzeile in beiden `min-height:58px`. Die Auswahl beginnt in beiden bei 64 px, Eingabe- und Ergebnisspalte liegen pixelgleich.
+- ref: Pfadleiste `#breadcrumb` ausgeblendet (Startseite und Themen); zurück zur Startseite über das Logo, am Handy über „☰ Alle Themen“.
+- Tests: `test_layout_rahmen.py` neu (1100/1440/1920 px), `test_ref.py` angepasst.
+
+## ref v0.3.25 — Startseite ohne Titel
+
+- Titel „Nachschlagewerk“ und Untertitel (`refTitle`, `refSub`) auf der Startseite entfernt; das Suchfeld (`.home-search`) steht direkt unter dem Pfad. Themenseiten behalten ihren Titel.
+- Tests: test_ref.py (Startseite über Suche/Kacheln erkannt), test_fres.py (Startseite über das übersetzte Suchfeld).
+
 ## size v0.5.33 — Kopf entfernt
 
 - Kein Seitentitel mehr (`.page-head` ausgeblendet; `#page-title`/`#page-sub` bleiben im DOM, weil `renderOut()` die Beschreibung für die Karte „Umfang und Grundlagen“ daraus liest). Oben steht direkt die Auswahl (`#pick`).
@@ -847,7 +858,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1406/1406 grün**.
+Stand: **1417/1417 grün**.
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

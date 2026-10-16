@@ -6,6 +6,14 @@
   <title>Statiq — The Structural Engineer's Toolkit</title>
   <meta name="description" content="Structural analysis tools for engineers and students. Calculate, reference, and design." />
     <link href="fonts/fonts.css" rel="stylesheet" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Statiq" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --accent:#2563eb; }
@@ -69,7 +77,15 @@
     @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
     @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
     @media (max-width:560px){ .hero{ padding:36px 20px 24px; } .modules{ padding:8px 20px 40px; } .header,.footer{ padding-left:20px; padding-right:20px; } .card-desc{ font-size:15px; } .module-card{ padding:16px 16px 20px; margin:0 -16px 12px; border-radius:14px; } }
-  </style>
+      .install { display:flex; align-items:center; gap:14px; margin:4px -22px 0; padding:14px 22px; border-radius:18px; border:1.5px dashed #e2e2e6; }
+    .install[hidden] { display:none; }
+    .install img { border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,.08); flex:none; }
+    .install-txt { flex:1; display:flex; flex-direction:column; gap:2px; font-size:13.5px; color:var(--text3); line-height:1.45; }
+    .install-txt b { color:var(--text); font-size:14.5px; }
+    .install-btn { font:inherit; font-size:13px; font-weight:700; border:none; border-radius:10px; padding:9px 14px; background:#111; color:#fff; cursor:pointer; flex:none; }
+    .install-btn[hidden] { display:none; }
+    @media (max-width:560px){ .install { margin:4px -16px 0; padding:14px 16px; } }
+</style>
 </head>
 <body>
 
@@ -171,11 +187,16 @@
     <div class="card-arrow">→</div>
   </a>
 
+  <div class="install" id="install" hidden>
+    <img src="icons/icon-192.png" alt="" width="40" height="40">
+    <div class="install-txt"><b id="install-title">Statiq as an app</b><span id="install-sub">Install on your home screen — works offline too.</span></div>
+    <button type="button" class="install-btn" id="install-btn">Install</button>
+  </div>
 </section>
 
 <footer class="footer">
   <div class="footer-logo">stat<span>iq</span></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a> · calc v0.8.20 · ref v0.3.26 · size v0.5.34 · projekt v0.1.2</div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a> · calc v0.8.22 · ref v0.3.28 · size v0.5.36 · projekt v0.1.3</div>
   <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>
 
@@ -196,6 +217,7 @@ const translations = {
     size_desc: 'Design in reinforced concrete, steel, timber and masonry, plus geotechnics, hydraulics and building physics — every check step by step, printable report.',
     ref_title: 'Theory & Tables',
     ref_desc: 'Formulas, tables and design checks from structural analysis to geotechnics and building physics, with calculators and examples — your digital reference handbook.',
+    install_t: "Statiq as an app", install_s: "Install on your home screen — works offline too.", install_ios: "On iPhone/iPad: tap the Share icon, then “Add to Home Screen”.", install_b: "Install",
     footer: 'Valentin Maras', legal: 'Legal notice · Privacy', note: 'Learning tool for students — does not replace a checked structural calculation.',
     saved_from: 'items from calc &amp; size',
     saved: 'My projects', saved_n: '{n} entries', saved_p: '{p} items · {n} entries', saved_p1: '1 item · {n} entries',
@@ -215,6 +237,7 @@ const translations = {
     size_desc: 'Bemessung in Stahlbeton, Stahl, Holz und Mauerwerk, dazu Grundbau, Wasserbau und Bauphysik — jeder Nachweis Schritt für Schritt, mit Druckbericht.',
     ref_title: 'Theorie & Tafeln',
     ref_desc: 'Formeln, Tabellen und Nachweise von der Baustatik bis zu Grund-, Wasserbau und Bauphysik, mit Rechnern und Beispielen — dein digitales Nachschlagewerk.',
+    install_t: "Statiq als App", install_s: "Auf dem Startbildschirm installieren — funktioniert auch offline.", install_ios: "Auf iPhone/iPad: Teilen-Symbol antippen, dann „Zum Home-Bildschirm“.", install_b: "Installieren",
     footer: 'Valentin Maras', legal: 'Impressum · Datenschutz', note: 'Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung.',
     saved_from: 'Positionen aus calc &amp; size',
     saved: 'Meine Projekte', saved_n: '{n} Einträge', saved_p: '{p} Positionen · {n} Einträge', saved_p1: '1 Position · {n} Einträge',
@@ -234,6 +257,7 @@ const translations = {
     size_desc: 'Dimensionnement en béton armé, acier, bois et maçonnerie, ainsi que géotechnique, hydraulique et physique du bâtiment — chaque vérification pas à pas, note de calcul.',
     ref_title: 'Théorie & Tables',
     ref_desc: 'Formules, tableaux et vérifications de la statique à la géotechnique et à la physique du bâtiment, avec calculateurs et exemples — votre manuel de référence numérique.',
+    install_t: "Statiq en application", install_s: "Installer sur l’écran d’accueil — fonctionne aussi hors ligne.", install_ios: "Sur iPhone/iPad : touchez l’icône Partager, puis « Sur l’écran d’accueil ».", install_b: "Installer",
     footer: 'Valentin Maras', legal: 'Mentions légales · Confidentialité', note: 'Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée.',
     saved_from: 'positions de calc &amp; size',
     saved: 'Mes projets', saved_n: '{n} entrées', saved_p: '{p} positions · {n} entrées', saved_p1: '1 position · {n} entrées',
@@ -253,6 +277,7 @@ const translations = {
     size_desc: 'Dimensionado en hormigón armado, acero, madera y fábrica, además de geotecnia, hidráulica y física de la construcción — cada comprobación paso a paso, informe imprimible.',
     ref_title: 'Teoría y Tablas',
     ref_desc: 'Fórmulas, tablas y comprobaciones desde la estática hasta la geotecnia y la física de la construcción, con calculadoras y ejemplos — tu manual de referencia digital.',
+    install_t: "Statiq como app", install_s: "Instálala en la pantalla de inicio — también funciona sin conexión.", install_ios: "En iPhone/iPad: toca el icono Compartir y luego «Añadir a pantalla de inicio».", install_b: "Instalar",
     footer: 'Valentin Maras', legal: 'Aviso legal · Privacidad', note: 'Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado.',
     saved_from: 'posiciones de calc y size',
     saved: 'Mis proyectos', saved_n: '{n} entradas', saved_p: '{p} posiciones · {n} entradas', saved_p1: '1 posición · {n} entradas',
@@ -294,6 +319,8 @@ function applyLang(lang){
   document.getElementById('footer-meta').textContent = t.footer;
   document.getElementById('footer-legal').textContent = t.legal;
   document.getElementById('footer-note').textContent = t.note;
+  document.getElementById('install-title').textContent = t.install_t; document.getElementById('install-btn').textContent = t.install_b;
+  document.getElementById('install-sub').textContent = window.__statiqIOS ? t.install_ios : t.install_s;
   document.getElementById('saved-title').textContent = t.saved;
   document.getElementById('saved-from').innerHTML = t.saved_from;
   savedCount(t);
@@ -342,6 +369,24 @@ window.addEventListener('DOMContentLoaded', ()=>{
     e.preventDefault();
     fetch('projekt.html',{method:'HEAD',cache:'no-store'}).then(r=>{ if(r.ok) location.href=a.href; else hint(); }).catch(()=>{ location.href=a.href; });
   });
+})();
+
+// Offline-Nutzung und Installation als App (Service Worker, nur über http/https)
+if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!=='undefined' && /^https?:$/.test(location.protocol||'')) navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+// Installation als App: Chrome/Edge/Android über beforeinstallprompt, iPhone/iPad mit Hinweis; als App geöffnet → nichts anzeigen
+(function(){
+  if(typeof window==='undefined' || !document.getElementById('install')) return;
+  const box=document.getElementById('install'), btn=document.getElementById('install-btn');
+  const standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone===true;
+  if(standalone) return;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  let deferred=null;
+  window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferred=e; box.hidden=false; btn.hidden=false; });
+  btn.addEventListener('click', async ()=>{ if(!deferred) return; deferred.prompt(); try{ await deferred.userChoice; }catch(e){} deferred=null; box.hidden=true; });
+  window.addEventListener('appinstalled', ()=>{ box.hidden=true; });
+  if(ios && /^https?:$/.test(location.protocol)){ window.__statiqIOS=true; btn.hidden=true; box.hidden=false;
+    const t=(typeof translations!=='undefined' && translations[currentLang]) || null; if(t) document.getElementById('install-sub').textContent=t.install_ios; }
 })();
 </script>
 </body>

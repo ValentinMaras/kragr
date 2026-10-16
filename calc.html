@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.20 -->
+<!-- Statiq v0.8.22 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,14 @@
   <title>Statiq — Structural Analysis</title>
   <meta name="description" content="Structural analysis app for civil engineering students — calculate shear forces, bending moments and section properties." />
     <link href="fonts/fonts.css" rel="stylesheet" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Statiq" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -444,7 +452,7 @@
       <div class="formula-box">
         Mᵢ₋₁·Lᵢ + 2Mᵢ·(Lᵢ+Lᵢ₊₁) + Mᵢ₊₁·Lᵢ₊₁ = −6·(Aᵢ·āᵢ/Lᵢ + Aᵢ₊₁·b̄ᵢ₊₁/Lᵢ₊₁)
         <div class="comment" data-i18n="mc3mC1">Lᵢ = span length i, Aᵢ = area of M₀ diagram in span i</div>
-        <div class="comment" data-i18n="mc3mC2">āᵢ = distance of centroid from left support</div>
+        <div class="comment" data-i18n="mc3mC2">āᵢ = distance of its centroid from the left support of span i, b̄ᵢ₊₁ = distance of the centroid in span i+1 from its right support; EI constant within each span</div>
       </div>
     </div>
     <div class="modal-section">
@@ -519,7 +527,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.20</span>
+    <span class="version">v0.8.22</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -565,7 +573,7 @@
       <div class="card-title" data-i18n="system">System</div>
       <button class="info-btn" onclick="openModal('beam')">i</button>
     </div>
-    <div class="beam-svg-wrap"><svg id="beam-svg" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style="width:100%"></svg></div>
+    <div class="beam-svg-wrap"><svg id="beam-svg" viewBox="0 0 320 128" xmlns="http://www.w3.org/2000/svg" style="width:100%"></svg></div>
     <div class="field"><label><span data-i18n="span">Span L</span> <span class="unit">m</span></label>
       <input type="number" id="bL" value="5" step="0.1" min="0.1" oninput="drawBeam()"></div>
   </div>
@@ -700,7 +708,7 @@
       <button class="info-btn" onclick="openModal('cont')">i</button>
     </div>
     <div class="beam-svg-wrap" style="overflow-x:auto">
-      <svg id="cont-svg" xmlns="http://www.w3.org/2000/svg" style="display:block;height:90px;min-width:280px"></svg>
+      <svg id="cont-svg" xmlns="http://www.w3.org/2000/svg" style="display:block;height:104px;min-width:280px"></svg>
     </div>
     <!-- Span count control -->
     <div class="span-controls">
@@ -991,7 +999,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.20';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.22';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -1476,13 +1484,13 @@ function drawBeam() {
 
   // Supports
   h+=`<polygon points="${x0},${bY+8} ${x0-8},${bY+20} ${x0+8},${bY+20}" fill="#1a1a18"/>`;
-  h+=`<text x="${x0}" y="${bY+30}" text-anchor="middle" font-size="9" fill="#6b6a65">A</text>`;
+  h+=`<text x="${x0}" y="${bY+36}" text-anchor="middle" font-size="9" fill="#6b6a65">A</text>`;
   h+=`<polygon points="${x1},${bY+8} ${x1-8},${bY+20} ${x1+8},${bY+20}" fill="#1a1a18"/>`;
   h+=`<circle cx="${x1}" cy="${bY+22}" r="3" fill="none" stroke="#1a1a18" stroke-width="1.2"/>`;
-  h+=`<text x="${x1}" y="${bY+30}" text-anchor="middle" font-size="9" fill="#6b6a65">B</text>`;
-  h+=`<line x1="${x0}" y1="${bY+38}" x2="${x1}" y2="${bY+38}" stroke="#a8a7a2" stroke-width="0.8"/>`;
-  h+=`<text x="${(x0+x1)/2}" y="${bY+49}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="DM Mono,monospace">L = ${L} m</text>`;
-  svg.setAttribute('viewBox','0 0 320 110');
+  h+=`<text x="${x1}" y="${bY+36}" text-anchor="middle" font-size="9" fill="#6b6a65">B</text>`;
+  h+=`<line x1="${x0}" y1="${bY+42}" x2="${x1}" y2="${bY+42}" stroke="#a8a7a2" stroke-width="0.8"/>`;
+  h+=`<text x="${(x0+x1)/2}" y="${bY+53}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="DM Mono,monospace">L = ${L} m</text>`;
+  svg.setAttribute('viewBox','0 0 320 128');   // Höhe reicht für die Längenangabe unter dem Träger
   svg.innerHTML=mkDefs('b')+h;
 }
 
@@ -1528,7 +1536,7 @@ function drawCantilever() {
     h+=momentSVG(ax,bY-14,hl.values.Me,`Me=${hl.values.Me}kNm`,mi);
   });
 
-  h+=`<text x="${x1+4}" y="${bY+16}" font-size="9" fill="#a8a7a2">free</text>`;
+  h+=`<text x="${x1+4}" y="${bY+16}" font-size="9" fill="#a8a7a2">${tr('free')}</text>`;
   h+=`<line x1="${x0}" y1="${bY+26}" x2="${x1}" y2="${bY+26}" stroke="#a8a7a2" stroke-width="0.8"/>`;
   h+=`<text x="${(x0+x1)/2}" y="${bY+37}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="DM Mono,monospace">L = ${L} m</text>`;
   svg.setAttribute('viewBox','0 0 320 110');
@@ -1554,7 +1562,7 @@ function drawContinuous() {
   const PAD=24, bY=52, beamH=7;
   const svgW=Math.max(280, PAD*2+lay.segs.length*60);
   svg.setAttribute('width', svgW);
-  svg.setAttribute('viewBox', `0 0 ${svgW} 90`);
+  svg.setAttribute('viewBox', `0 0 ${svgW} 104`);   // Platz für die Feldlängen unter den Lagern
   const bW=svgW-PAD*2, X = x => PAD + x/Ltotal*bW;
   let h='';
   const maxF=globalMaxLoad('cont');
@@ -3756,6 +3764,9 @@ function renderDiagram(sys, data){
     // Zero line (member)
     h+=`<line x1="${mem.x0.toFixed(1)}" y1="${mem.y0.toFixed(1)}" x2="${mem.x1.toFixed(1)}" y2="${mem.y1.toFixed(1)}" stroke="#1a1a18" stroke-width="${mem.thick||3}" stroke-linecap="round"/>`;
 
+    // Balken: Momente mit Vorzeichen der Baustatik (unten gezogen = positiv, Momentenfläche unter dem Träger),
+    // Querkräfte wie bisher als Betrag
+    const beamTxt = (v, ly) => mode!=='M' ? Math.abs(v).toFixed(1) : (Math.abs(v)<0.05 ? '0' : ((ly > (mem.y0+mem.y1)/2 ? 1 : -1)*Math.abs(v)).toFixed(1));
     // Maximalwert — bei Rahmenstützen zeichnet cornerLabelsFn die Werte.
     // Bei (nahezu) konstantem Verlauf: die Stelle nahe der Stabmitte nehmen,
     // damit das Label nicht auf dem Ecklabel landet.
@@ -3792,9 +3803,20 @@ function renderDiagram(sys, data){
       // Rahmen: Rahmenmitte außerhalb des Diagramms beschriften
       const side = off(v)*ny >= 0 ? 11 : -3;
       if(Math.abs(v)>maxVal*0.05){
-        labels.push({x:lx, y:ly+(isFrame?side:-3), text:(isFrame ? (Math.abs(v)<0.05?'0':v.toFixed(1)) : Math.abs(v).toFixed(1)),
+        labels.push({x:lx, y:ly+(isFrame?side:-3), text:(isFrame ? (Math.abs(v)<0.05?'0':v.toFixed(1)) : beamTxt(v, ly)),
                      color, anchor:'middle', size:8, weight:600, prio:1});
       }
+      }
+      // Balken im M-Modus: zusätzlich alle inneren Extremwerte beschriften (Feldmomente beim Durchlaufträger, Stützmomente)
+      if(!isFrame && mode==='M'){
+        for(let i=1;i<n;i++){
+          if(Math.abs(i-maxIdx)<=2) continue;
+          const a=Math.abs(vals[i]); if(a < maxVal*0.1) continue;
+          let ext=true; for(let k=1;k<=4;k++){ const l=vals[Math.max(0,i-k)], r=vals[Math.min(n,i+k)]; if(Math.abs(l)>a+1e-9 || Math.abs(r)>a+1e-9) { ext=false; break; } }
+          if(!ext || (Math.abs(vals[i-1])>=a-1e-9 && Math.abs(vals[i+1])>=a-1e-9)) continue;
+          const v=vals[i], [lx,ly]=ptAt(i,v), sd = off(v)*ny >= 0 ? 11 : -3;
+          labels.push({x:lx, y:ly+sd, text:beamTxt(v, ly), color, anchor:'middle', size:8, weight:600, prio:1});
+        }
       }
     }
   });
@@ -3813,6 +3835,9 @@ function renderDiagram(sys, data){
     labels.push(...data.cornerLabelsFn(mode, diagColors2[mode]||'#666', SCALE));
   }
   h += placeLabels(labels, W, H, data.blocked||[]);
+  // Einheit der Werte einmal in der Ecke
+  const unit = {M:'M [kNm]', Q:'Q [kN]', N:'N [kN]'}[mode];
+  if(unit) h += `<text x="4" y="10" font-size="7.5" fill="${color}" font-family="DM Mono,monospace">${unit}</text>`;
 
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.setAttribute('height', H);
@@ -4026,7 +4051,7 @@ function renderContDiagram(Ls, Qv_all, Mv_all, ex={}){
   lay.hinges.forEach(x=>{ ov += `<circle cx="${X(x)}" cy="${bY}" r="3" fill="#fff" stroke="#1a1a18" stroke-width="1.2"/>`; });
   lay.segs.forEach(sg=>{
     const lbl = sg.key==='L'||sg.key==='R' ? `ü=${sg.L}m` : `L${sg.key+1}=${sg.L}m`;
-    ov += `<text x="${X(sg.x0+sg.L/2)}" y="${bY+28}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">${lbl}</text>`;
+    ov += `<text x="${X(sg.x0+sg.L/2)}" y="${SVG_H-4}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">${lbl}</text>`;   // unten am Rand, nicht in der Momentenfläche
   });
 
   const data = {
@@ -4532,7 +4557,7 @@ const I18N_UI = {
   "mc3mH": "Three-moment equation (Clapeyron)",
   "mc3mP": "For each intermediate support i, the compatibility condition relates the moments at supports i−1, i and i+1:",
   "mc3mC1": "Lᵢ = span length i, Aᵢ = area of the M₀ diagram in span i",
-  "mc3mC2": "āᵢ = distance of the centroid from the left support",
+  "mc3mC2": "āᵢ = distance of its centroid from the left support of span i, b̄ᵢ₊₁ = distance of the centroid in span i+1 from its right support; EI constant within each span",
   "mcBcH": "Boundary conditions",
   "mcBcT": "Pin / roller end: &nbsp; M = 0<br>Fixed end: &nbsp; M unknown (one more equation)<br>Free end (cantilever): &nbsp; Q = 0, M = 0",
   "mcSupH": "Superposition (by hand)",
@@ -4638,7 +4663,7 @@ const I18N_UI = {
   "mc3mH": "Dreimomentengleichung (Clapeyron)",
   "mc3mP": "Für jede Zwischenstütze i verknüpft die Verträglichkeitsbedingung die Momente an den Stützen i−1, i und i+1:",
   "mc3mC1": "Lᵢ = Länge von Feld i, Aᵢ = Fläche der M₀-Linie in Feld i",
-  "mc3mC2": "āᵢ = Abstand des Schwerpunkts vom linken Auflager",
+  "mc3mC2": "āᵢ = Abstand ihres Schwerpunkts vom linken Auflager des Feldes i, b̄ᵢ₊₁ = Abstand des Schwerpunkts im Feld i+1 von dessen rechtem Auflager; EI je Feld konstant",
   "mcBcH": "Randbedingungen",
   "mcBcT": "Fest-/Loslager am Ende: &nbsp; M = 0<br>Einspannung: &nbsp; M unbekannt (eine Gleichung mehr)<br>Freies Ende (Kragarm): &nbsp; Q = 0, M = 0",
   "mcSupH": "Superposition (Handrechnung)",
@@ -4744,7 +4769,7 @@ const I18N_UI = {
   "mc3mH": "Équation des trois moments (Clapeyron)",
   "mc3mP": "Pour chaque appui intermédiaire i, la condition de compatibilité relie les moments aux appuis i−1, i et i+1 :",
   "mc3mC1": "Lᵢ = longueur de la travée i, Aᵢ = aire du diagramme M₀ dans la travée i",
-  "mc3mC2": "āᵢ = distance du centre de gravité à l’appui gauche",
+  "mc3mC2": "āᵢ = distance de son centre de gravité à l’appui gauche de la travée i, b̄ᵢ₊₁ = distance du centre de gravité dans la travée i+1 à son appui droit ; EI constant par travée",
   "mcBcH": "Conditions aux limites",
   "mcBcT": "Appui fixe / mobile en extrémité : &nbsp; M = 0<br>Encastrement : &nbsp; M inconnu (une équation de plus)<br>Extrémité libre (console) : &nbsp; Q = 0, M = 0",
   "mcSupH": "Superposition (calcul à la main)",
@@ -4854,7 +4879,7 @@ const I18N_UI = {
   "mc3mH": "Ecuación de los tres momentos (Clapeyron)",
   "mc3mP": "Para cada apoyo intermedio i, la condición de compatibilidad relaciona los momentos en los apoyos i−1, i e i+1:",
   "mc3mC1": "Lᵢ = longitud del vano i, Aᵢ = área del diagrama M₀ en el vano i",
-  "mc3mC2": "āᵢ = distancia del centro de gravedad al apoyo izquierdo",
+  "mc3mC2": "āᵢ = distancia de su centro de gravedad al apoyo izquierdo del vano i, b̄ᵢ₊₁ = distancia del centro de gravedad en el vano i+1 a su apoyo derecho; EI constante en cada vano",
   "mcBcH": "Condiciones de contorno",
   "mcBcT": "Apoyo fijo / móvil en el extremo: &nbsp; M = 0<br>Empotramiento: &nbsp; M desconocido (una ecuación más)<br>Extremo libre (voladizo): &nbsp; Q = 0, M = 0",
   "mcSupH": "Superposición (cálculo a mano)",
@@ -5416,6 +5441,9 @@ if(['#saved','#beam','#cantilever','#cont','#frame'].includes(location.hash)) sh
   const st=document.createElement('style'); st.textContent='@media print{.legal-bar{display:none!important}}'; (document.head||document.body).appendChild(st);
   if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
+
+// Offline-Nutzung und Installation als App (Service Worker, nur über http/https)
+if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!=='undefined' && /^https?:$/.test(location.protocol||'')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 // Link auf „Meine Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
 (function(){

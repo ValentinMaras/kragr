@@ -1,12 +1,13 @@
-# Statiq — Übergabe für neuen Chat (calc v0.8.20 · ref v0.3.26 · size v0.5.34 · projekt v0.1.2 · rechtliches v0.1.0 · Startseite)
+# Statiq — Übergabe für neuen Chat (calc v0.8.22 · ref v0.3.28 · size v0.5.36 · projekt v0.1.3 · rechtliches v0.1.1 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.20, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Statiq·projekt v0.1.2, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.26, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Statiq·size v0.5.34, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Statiq·rechtliches v0.1.0)
+- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.22, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Statiq·projekt v0.1.3, Test von Variante C)
+- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.28, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Statiq·size v0.5.36, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Statiq·rechtliches v0.1.1)
+- `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
 
@@ -566,6 +567,24 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Skizzen-Durchsicht — calc v0.8.22 · size v0.5.36 · ref v0.3.28
+
+Alle Skizzen (ref 107, size 64 Modi, calc 4 Systeme mit Schnittgrößenlinien) als Bild gerendert und in zwei Runden geprüft.
+- **Fachlich korrigiert:** ref Euler Fall 3 (Knickfigur war gespiegelt; oben jetzt seitliches Rolllager bzw. Parallelführung), ref Biegung (ε_cu2 statt ε_c2, F_cd zeigt in Druckrichtung), size Doppelbiegung (q_z/q_y in die gedrehten Achsen), Zugstab (Nettoquerschnitt an der lastnahen Lochreihe), Kellerwand (Druckbogen wölbt sich zur Erdseite), Böschung (z lotrecht wie in τ = γ·z·sinβ·cosβ), Wasserdruck (Gegendruck aus γ_w·(h_u − (L−a)·sin α)), Stirnplatte (h_r sichtbar, Momentenpaar), Schwimmen/Ponton (F_G und F_A auf der Wirkungslinie), Torsion (h in cm), Verbindung Holz (Schnitt in Kraftrichtung mit a₁).
+- **Beschriftung:** Indizes werden in Skizzen automatisch tiefgestellt (`subIdx` in ref `T()`, `svgSub` in size `svgT()`); Einheiten an Maßen; Sohldruck beide Randwerte; Legenden und Bezeichnungen vereinheitlicht (G_k, Q_k,N …); Trigonometrie jetzt a gegenüber α (sin α = a/c) wie bei Pythagoras.
+- **Layout:** `sv()` in ref hat 6 px Rand oben und unten; viele Überlappungen verschoben; calc Einfeld- und Durchlaufträger zeigen die Längen wieder vollständig (viewBox 128 bzw. 104).
+- **calc Schnittgrößen:** Momente am Balken mit baustatischem Vorzeichen (unten gezogen positiv, `beamTxt`), alle inneren Extremwerte beschriftet (Feldmomente beim Durchlaufträger), Einheit „M [kNm]“ in der Ecke; Theorie-Fenster erklärt ā und b̄.
+- Neuer Test `test_skizzen_klarheit.py`: keine Beschriftung ragt aus einer Skizze (alle ref-Themen, alle size-Modi, calc), dazu Stichproben der fachlichen Korrekturen.
+
+## PWA — calc v0.8.21 · size v0.5.35 · ref v0.3.27 · projekt v0.1.3 · rechtliches v0.1.1
+
+- **Installierbar:** `manifest.json` (Name „Statiq“, start_url `./index.html`, standalone, weiß), Symbole in `icons/` (Monogramm „st.“ in Inter 800, Punkt blau; erzeugt aus HTML mit Playwright). Alle sechs Seiten binden Manifest, Favicon, Apple-Symbol und Apple-Meta-Tags ein.
+- **Offline:** `sw.js` legt beim ersten Besuch alle Seiten, Schriften, Symbole und das Manifest ab. HTML: zuerst Netz (Updates kommen sofort), offline aus dem Speicher; Schriften/Symbole: zuerst Speicher. **Bei geänderten Schriften oder Symbolen `VERSION` in sw.js hochzählen**; neue Dateien in `FILES` eintragen. Registrierung nur über http/https (nicht bei file://), in calc im Hauptskript (Node-Harness).
+- **Startseite:** Karte „Statiq als App“ unter den Modulen: in Chrome/Edge/Android mit Knopf „Installieren“ (beforeinstallprompt), auf iPhone/iPad mit Anleitung „Teilen → Zum Home-Bildschirm“, als installierte App verborgen. DE/EN/FR/ES (`install_t/_s/_ios/_b`).
+- **rechtliches.html:** Abschnitt „Offline-Nutzung und Installation“ in der Datenschutzerklärung.
+- **Hosting:** Service Worker brauchen HTTPS. Hochladen: alle HTML-Dateien, `manifest.json`, `sw.js`, `fonts/`, `icons/`.
+- Test: `test_pwa.py` (lokaler Server, Installierbarkeit über Chrome-CDP, offline alle Seiten, calc/size rechnen offline, Installationskarte Chrome und iPhone).
+
 ## calc v0.8.20 · size v0.5.34 · ref v0.3.26 — gleicher Rahmen, keine Pfadleiste
 
 - size übernimmt den Rahmen von calc: ab 1000 px `max-width:1180px`, Innenabstand `6px 20px 20px`, Spalten `minmax(0,1fr) minmax(0,1.2fr)`, Abstand 20 px; am Handy Seitenrand 20 px. Kopfzeile in beiden `min-height:58px`. Die Auswahl beginnt in beiden bei 64 px, Eingabe- und Ergebnisspalte liegen pixelgleich.
@@ -858,7 +877,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1417/1417 grün**.
+Stand: **1449/1449 grün** (inklusive `test_skizzen_klarheit.py`, 16 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

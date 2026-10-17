@@ -576,7 +576,8 @@ Valentin hat sich für den Namen **Muly** entschieden (DPMA-Prüfung ohne Treffe
 - **Absichtlich unverändert**, damit nichts verloren geht: alle `localStorage`-Schlüssel (`statiq-lang`, `statiq-size-positionen`, `statiq-projekt` …), das Feld `statiq:'projekt'` in Projektdateien, der Präfix `statiq-` der Service-Worker-Speicher (alte werden beim Update gelöscht), Konstante `STATIQ_VERSION`, Ordner `statiq-tests/`, `statiq-tools/`, diese Datei. Projektdateien werden jetzt als `*.muly.json` gespeichert, alte `*.statiq.json` lassen sich weiter laden.
 - Die Adresse `valentinmaras.github.io/statiq` in der calc-Berichtsfußzeile bleibt, bis das GitHub-Repository umbenannt ist.
 - calc: Versionsanzeige im Kopf (`<span class="version">`) zeigte noch v0.8.22 → korrigiert; der neue Test prüft, dass sie zu `STATIQ_VERSION` passt.
-- sw.js `VERSION = 'statiq-2026-10-17-1'`.
+- sw.js `VERSION = 'statiq-2026-10-17-2'`.
+- Startseite: Schriftzug „muly“ war zu eng (Rückmeldung Valentin) → `.headline` letter-spacing −0,055 em → −0,03 em.
 - Tests: neu `test_marke_muly.py` (24 Prüfungen: kein sichtbares „Statiq“ in 6 Seiten × 4 Sprachen, Logo mit hochgestelltem μ, Manifest, Symbole, alte Schlüssel und Projektdateien). Angepasst: `test_pwa.py`, `test_projekt.py`, `test_size_import.py`, `test_calc_fres.py`, `test_rechtliches.py`. Stand 1473/1473 grün.
 
 ## Skizzen-Durchsicht — calc v0.8.22 · size v0.5.36 · ref v0.3.28

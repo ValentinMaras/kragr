@@ -1,12 +1,12 @@
-# Statiq — Übergabe für neuen Chat (calc v0.8.22 · ref v0.3.28 · size v0.5.36 · projekt v0.1.3 · rechtliches v0.1.1 · Startseite)
+# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.29 · size v0.5.37 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Statiq·calc v0.8.22, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Statiq·projekt v0.1.3, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Statiq·ref v0.3.28, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Statiq·size v0.5.36, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Statiq·rechtliches v0.1.1)
+- `calc.html` — Schnittgrößen-App (Muly·calc v0.8.23, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
+- `ref.html` — Nachschlagewerk (Muly·ref v0.3.29, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Muly·size v0.5.37, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.2)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
@@ -567,6 +567,18 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Neuer Markenname Muly — calc v0.8.23 · size v0.5.37 · ref v0.3.29 · projekt v0.1.4 · rechtliches v0.1.2
+
+Valentin hat sich für den Namen **Muly** entschieden (DPMA-Prüfung ohne Treffer). Logo: Schriftzug „muly“ mit blauem μ als Exponent (Entwurf E2). App-Symbol: blaues Quadrat mit weißem „μ.ly“ (Entwurf D).
+- **Sichtbar umbenannt:** Seitentitel, Startbildschirm-Name (`apple-mobile-web-app-title`), Manifest (`name`, `short_name`), Kopfzeilen-Logo aller Seiten (`muly<span>μ</span>`), großer Schriftzug der Startseite (`muly<span class="iq">μ</span>`), Modulnamen `muly·calc`, `muly·size`, `muly·ref`, Fußnoten und Berichtsköpfe (calc, size, ref, projekt), Installationshinweis, alle Texte in rechtliches.html (DE/EN/FR/ES), Übersetzungsschlüssel in ref/size mit umbenannt.
+- **Logo-CSS:** je Seite ein `<style>` direkt vor `</head>`: `.logo span` 0,58 em, `vertical-align: .85em`; `.headline .iq` 0,44 em, `vertical-align: 1.05em` (wie Entwurf E2), `line-height: 0`, damit die Zeilenhöhe gleich bleibt.
+- **App-Symbole neu** (`icons/`): 192 und 512 mit runden Ecken (transparent), maskable 512 und Apple 180 vollflächig blau (Schrift im sicheren Bereich), Favicon 32. Erzeugt mit Inter 800, Text „μ.ly“ in Weiß auf #2563eb.
+- **Absichtlich unverändert**, damit nichts verloren geht: alle `localStorage`-Schlüssel (`statiq-lang`, `statiq-size-positionen`, `statiq-projekt` …), das Feld `statiq:'projekt'` in Projektdateien, der Präfix `statiq-` der Service-Worker-Speicher (alte werden beim Update gelöscht), Konstante `STATIQ_VERSION`, Ordner `statiq-tests/`, `statiq-tools/`, diese Datei. Projektdateien werden jetzt als `*.muly.json` gespeichert, alte `*.statiq.json` lassen sich weiter laden.
+- Die Adresse `valentinmaras.github.io/statiq` in der calc-Berichtsfußzeile bleibt, bis das GitHub-Repository umbenannt ist.
+- calc: Versionsanzeige im Kopf (`<span class="version">`) zeigte noch v0.8.22 → korrigiert; der neue Test prüft, dass sie zu `STATIQ_VERSION` passt.
+- sw.js `VERSION = 'statiq-2026-10-17-1'`.
+- Tests: neu `test_marke_muly.py` (24 Prüfungen: kein sichtbares „Statiq“ in 6 Seiten × 4 Sprachen, Logo mit hochgestelltem μ, Manifest, Symbole, alte Schlüssel und Projektdateien). Angepasst: `test_pwa.py`, `test_projekt.py`, `test_size_import.py`, `test_calc_fres.py`, `test_rechtliches.py`. Stand 1473/1473 grün.
+
 ## Skizzen-Durchsicht — calc v0.8.22 · size v0.5.36 · ref v0.3.28
 
 Alle Skizzen (ref 107, size 64 Modi, calc 4 Systeme mit Schnittgrößenlinien) als Bild gerendert und in zwei Runden geprüft.
@@ -877,7 +889,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1449/1449 grün** (inklusive `test_skizzen_klarheit.py`, 16 Prüfungen).
+Stand: **1473/1473 grün** (inklusive `test_skizzen_klarheit.py`, 16 Prüfungen, und `test_marke_muly.py`, 24 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

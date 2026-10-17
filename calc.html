@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Statiq v0.8.22 -->
+<!-- Muly v0.8.23 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Statiq — Structural Analysis</title>
+  <title>Muly — Structural Analysis</title>
   <meta name="description" content="Structural analysis app for civil engineering students — calculate shear forces, bending moments and section properties." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Statiq" />
+<meta name="apple-mobile-web-app-title" content="Muly" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -382,6 +382,7 @@
       /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
     .app-header { min-height:58px; box-sizing:border-box; }
 </style>
+<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:1px;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}</style>
 </head>
 <body>
 
@@ -522,12 +523,12 @@
 
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="app-header">
-  <a class="logo" href="index.html" title="Startseite">stat<span>iq</span></a>
+  <a class="logo" href="index.html" title="Startseite">muly<span>μ</span></a>
   <div class="header-links">
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.22</span>
+    <span class="version">v0.8.23</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -630,7 +631,7 @@
       <div class="diagram-label" id="diag-label-beam">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="0">Statiq</div>
+  <div class="footnote" data-foot="0">Muly</div>
 </main>
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
@@ -697,7 +698,7 @@
       <div class="diagram-label" id="diag-label-cant">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="1">Statiq</div>
+  <div class="footnote" data-foot="1">Muly</div>
 </main>
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
@@ -766,7 +767,7 @@
       <div class="diagram-label" id="diag-label-cont">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="2">Statiq</div>
+  <div class="footnote" data-foot="2">Muly</div>
 </main>
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
@@ -911,7 +912,7 @@
       <div class="diagram-label" id="diag-label-frame">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="3">Statiq</div>
+  <div class="footnote" data-foot="3">Muly</div>
 </main>
 
 <script>
@@ -999,7 +1000,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.22';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.23';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -2365,7 +2366,7 @@ function refreshFrameInputs(){
 }
 
 // ── STATIQ DATA FORMAT (SDF) — Save/Load ─────────────────────────
-// Standard format for sharing data between statiq·calc and statiq·size
+// Standard format for sharing data between muly·calc and muly·size
 function buildSDF(){
   // Stand der letzten Berechnung (lastCalc.frame); ohne Berechnung: aktuelle Eingaben
   const lc = lastCalc.frame;
@@ -2394,7 +2395,7 @@ function buildSDF(){
   if(diagData.frame?.members){
     const mems = diagData.frame.members;
     ['left_col','rafter','right_col'].forEach((name,i)=>{
-      // gleichmäßige Arrays (NP+1 Werte) — so erwartet sie der Bericht/statiq·size
+      // gleichmäßige Arrays (NP+1 Werte) — so erwartet sie der Bericht/muly·size
       const u = mems[i]?.uni;
       if(mems[i]) memberData[name]={
         M: u ? u.M : mems[i].M,
@@ -2450,7 +2451,7 @@ function saveCalc(sys){
   const results = {Mmax:lc.maxima.Mmax, Qmax:lc.maxima.Qmax, Nmax:lc.maxima.Nmax, w:lc.maxima.w,
                    reactions:lc.reactions, supportMoments:lc.supportMoments||null};
 
-  // gleichmäßige Arrays je Stab (für statiq·size und ältere Berichte)
+  // gleichmäßige Arrays je Stab (für muly·size und ältere Berichte)
   const memberData={};
   data.members.forEach((mem,i)=>{
     const u=mem.uni;
@@ -2575,7 +2576,7 @@ function renderSavedTab(){
       <div style="display:flex;gap:8px">
         <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif">${tr('report')}</button>
         ${sdf.system?.type==='frame' ? `<button onclick="loadSDF('${k}')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600">${tr('load')}</button>` : ''}
-        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in statiq·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:DM Sans,sans-serif">${tr('toSize')}</a>` : ''}
+        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in muly·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:DM Sans,sans-serif">${tr('toSize')}</a>` : ''}
         <button onclick="exportSDF('${k}')" style="padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-size:12px">↓</button>
       </div>
     </div>
@@ -2755,7 +2756,7 @@ function renderReport(name, sdf){
 
       ${(typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : '')}
       <div class="rep-foot">
-        <span>statiq·calc · valentinmaras.github.io/statiq</span>
+        <span>muly·calc · valentinmaras.github.io/statiq</span>
         <span>${date}</span>
       </div>
     </div>
@@ -4515,7 +4516,7 @@ const I18N_UI = {
   "supRollerW": "Roller",
   "wLeft": "left",
   "wRight": "right",
-  "repSub": "statiq·calc · calculation report",
+  "repSub": "muly·calc · calculation report",
   "repType": "Type",
   "repGeom": "Geometry",
   "repSupports": "Supports",
@@ -4621,7 +4622,7 @@ const I18N_UI = {
   "supRollerW": "Loslager",
   "wLeft": "links",
   "wRight": "rechts",
-  "repSub": "statiq·calc · Berechnungsprotokoll",
+  "repSub": "muly·calc · Berechnungsprotokoll",
   "repType": "Typ",
   "repGeom": "Geometrie",
   "repSupports": "Lagerung",
@@ -4727,7 +4728,7 @@ const I18N_UI = {
   "supRollerW": "Appui mobile",
   "wLeft": "gauche",
   "wRight": "droite",
-  "repSub": "statiq·calc · note de calcul",
+  "repSub": "muly·calc · note de calcul",
   "repType": "Type",
   "repGeom": "Géométrie",
   "repSupports": "Appuis",
@@ -4837,7 +4838,7 @@ const I18N_UI = {
   "supRollerW": "Apoyo móvil",
   "wLeft": "izquierda",
   "wRight": "derecha",
-  "repSub": "statiq·calc · memoria de cálculo",
+  "repSub": "muly·calc · memoria de cálculo",
   "repType": "Tipo",
   "repGeom": "Geometría",
   "repSupports": "Apoyos",
@@ -4925,7 +4926,7 @@ function applyCalcTranslations(){
   [['mfs1h','modalFrameS1h'],['mfs1p','modalFrameS1p'],['mfs1c','modalFrameS1c'],['mfs2h','modalFrameS2h'],['mfs2t','modalFrameS2t'],
    ['mfs3h','modalFrameS3h'],['mfs3p','modalFrameS3p'],['mfs3e','modalFrameS3e'],['mfs3c','modalFrameS3c'],
    ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t'],['mfs3lp','modalFrameLeftPart'],['mfs3cn','modalFrameCorner']].forEach(([id,k])=>setT(id,k));
-  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.textContent = `Statiq v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]}`; });
+  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.textContent = `Muly v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]}`; });
   ['beam','cant','cont','frame'].forEach(sys=>{ const l=document.getElementById('diag-label-'+sys); if(l) l.textContent = tr('diag'+((typeof diagMode!=='undefined' && diagMode[sys])||'M')); });
   document.querySelectorAll('.lang-pick button').forEach(b=>b.classList.toggle('active', b.dataset.lang===calcLang));
   const active=['beam','cantilever','cont','frame','saved'].find(x=>!document.getElementById('tab-'+x)?.classList.contains('hidden'))||'beam';
@@ -5018,7 +5019,7 @@ function eqLine(line){
 }
 
 // ══════════════════════════════════════════════════
-// RECHENWEG (v0.8.13): Schritt-für-Schritt-Lösung zu jedem System, Darstellung wie in statiq·size
+// RECHENWEG (v0.8.13): Schritt-für-Schritt-Lösung zu jedem System, Darstellung wie in muly·size
 // ══════════════════════════════════════════════════
 const RWT = {
   de:{ title:'Rechenweg — Schritt für Schritt', sys:'System und statische Bestimmtheit', loads:'Lasten und ihre Resultierenden', none:'keine Lasten',

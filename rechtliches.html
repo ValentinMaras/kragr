@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Statiq·rechtliches v0.1.1 -->
+<!-- Muly·rechtliches v0.1.2 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Statiq — Impressum, Datenschutz, Hinweise</title>
+<title>Muly — Impressum, Datenschutz, Hinweise</title>
 <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
 <meta name="theme-color" content="#ffffff" />
@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Statiq" />
+<meta name="apple-mobile-web-app-title" content="Muly" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,10 +38,11 @@
   footer { max-width:900px; margin:0 auto; padding:0 24px 40px; font-size:12.5px; color:var(--text3); }
   @media (max-width:720px){ .app-header,.wrap,footer { padding-left:16px; padding-right:16px; } section { padding:16px; } }
 </style>
+<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:1px;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}</style>
 </head>
 <body>
 <header class="app-header">
-  <a class="logo" href="index.html">Statiq<span>.</span></a>
+  <a class="logo" href="index.html">muly<span>μ</span></a>
   <select class="lang-sel" id="lang" onchange="setLang(this.value)" aria-label="Sprache">
     <option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option>
   </select>
@@ -58,7 +59,7 @@ const PH = {
 const ph = k => `<span class="ph">${PH[k]}</span>`;
 const T = {
 de:{ title:'Impressum, Datenschutz und Hinweise',
-  lead:'Statiq ist ein Lernwerkzeug für das Bauingenieurstudium. Diese Seite enthält die Anbieterkennzeichnung, die Datenschutzerklärung, den Haftungsausschluss und Hinweise zu Normen und Quellen.',
+  lead:'Muly ist ein Lernwerkzeug für das Bauingenieurstudium. Diese Seite enthält die Anbieterkennzeichnung, die Datenschutzerklärung, den Haftungsausschluss und Hinweise zu Normen und Quellen.',
   toc:['Impressum','Haftung','Normen und Quellen','Datenschutz','Lizenzen'],
   imp:`<h2 id="impressum">Impressum</h2>
     <p>Angaben gemäß § 5 DDG</p>
@@ -67,27 +68,27 @@ de:{ title:'Impressum, Datenschutz und Hinweise',
     <h3>Umsatzsteuer</h3><p>${ph('vat')}</p>
     <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3><p>${ph('name')}, Anschrift wie oben</p>`,
   haft:`<h2 id="haftung">Haftung</h2>
-    <p><b>Statiq ist ein Lern- und Übungswerkzeug.</b> Die Ergebnisse ersetzen keine statische Berechnung durch eine fachkundige Person und keinen geprüften Standsicherheitsnachweis. Sie dürfen nicht ungeprüft für die Bemessung, Ausführung oder Prüfung von Bauwerken verwendet werden.</p>
+    <p><b>Muly ist ein Lern- und Übungswerkzeug.</b> Die Ergebnisse ersetzen keine statische Berechnung durch eine fachkundige Person und keinen geprüften Standsicherheitsnachweis. Sie dürfen nicht ungeprüft für die Bemessung, Ausführung oder Prüfung von Bauwerken verwendet werden.</p>
     <p>Die Rechenwege und Werte wurden sorgfältig erstellt und mit unabhängigen Tests geprüft. Fehler, vereinfachte Annahmen und veraltete Werte lassen sich trotzdem nicht ausschließen. Normen und Nationale Anhänge ändern sich; maßgebend ist immer die bauaufsichtlich eingeführte Fassung.</p>
     <p>Für Schäden, die aus der Nutzung der Inhalte entstehen, wird keine Haftung übernommen, soweit sie nicht auf Vorsatz oder grober Fahrlässigkeit beruhen. Die Haftung für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit bleibt unberührt.</p>
     <h3>Links</h3><p>Für die Inhalte verlinkter fremder Seiten sind deren Betreiber verantwortlich.</p>`,
   norm:`<h2 id="normen">Normen und Quellen</h2>
-    <p>Statiq enthält keine Normtexte. Formeln, Rechenwerte und Beiwerte werden in eigenen Worten und eigener Darstellung wiedergegeben, meist nur als Auszug für die Werte, die ein Rechner braucht. Die Fundstelle steht jeweils dabei, zum Beispiel „nach DIN EN 1992-1-1, Tab. 3.1“.</p>
+    <p>Muly enthält keine Normtexte. Formeln, Rechenwerte und Beiwerte werden in eigenen Worten und eigener Darstellung wiedergegeben, meist nur als Auszug für die Werte, die ein Rechner braucht. Die Fundstelle steht jeweils dabei, zum Beispiel „nach DIN EN 1992-1-1, Tab. 3.1“.</p>
     <p>Die vollständigen Normen mit den Nationalen Anhängen sind bei DIN Media erhältlich. Hochschulbibliotheken stellen sie in der Regel kostenlos bereit. Für eine Bemessung sind immer die vollständigen, aktuell gültigen Normen heranzuziehen.</p>
-    <p>„DIN“ ist eine eingetragene Marke des DIN Deutsches Institut für Normung e. V. Statiq steht in keiner Verbindung zum DIN.</p>
-    <h3>Urheberrecht</h3><p>Texte, Abbildungen und Programmcode von Statiq sind urheberrechtlich geschützt. Eine Weitergabe oder Veröffentlichung, auch auszugsweise, bedarf der Zustimmung. Das Herunterladen und Verwenden für das eigene Studium ist erlaubt.</p>`,
+    <p>„DIN“ ist eine eingetragene Marke des DIN Deutsches Institut für Normung e. V. Muly steht in keiner Verbindung zum DIN.</p>
+    <h3>Urheberrecht</h3><p>Texte, Abbildungen und Programmcode von Muly sind urheberrechtlich geschützt. Eine Weitergabe oder Veröffentlichung, auch auszugsweise, bedarf der Zustimmung. Das Herunterladen und Verwenden für das eigene Studium ist erlaubt.</p>`,
   ds:`<h2 id="datenschutz">Datenschutz</h2>
     <h3>Verantwortlicher</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, E-Mail: ${ph('mail')}</p>
-    <h3>Keine Konten, kein Tracking</h3><p>Statiq verlangt keine Anmeldung, setzt keine Cookies zu Werbe- oder Analysezwecken und bindet keine Inhalte Dritter ein. Schriften werden vom eigenen Server geladen.</p>
-    <h3>Speicherung im Browser</h3><p>Gespeicherte Berechnungen, Positionen, Projekte und die Spracheinstellung legt Statiq im lokalen Speicher deines Browsers ab (localStorage). Diese Daten verlassen dein Gerät nicht und werden nicht an den Anbieter übertragen. Du kannst sie jederzeit über die Browsereinstellungen oder in „Meine Projekte“ löschen.</p>
-    <h3>Offline-Nutzung und Installation</h3><p>Damit Statiq ohne Internet funktioniert und sich als App installieren lässt, legt dein Browser eine Kopie der Programmdateien (Seiten, Schriften, Symbole) auf deinem Gerät ab (Service Worker). Dabei werden keine personenbezogenen Daten gespeichert oder übertragen. Die Kopie verschwindet, wenn du die Websitedaten im Browser löschst oder die App deinstallierst.</p>
+    <h3>Keine Konten, kein Tracking</h3><p>Muly verlangt keine Anmeldung, setzt keine Cookies zu Werbe- oder Analysezwecken und bindet keine Inhalte Dritter ein. Schriften werden vom eigenen Server geladen.</p>
+    <h3>Speicherung im Browser</h3><p>Gespeicherte Berechnungen, Positionen, Projekte und die Spracheinstellung legt Muly im lokalen Speicher deines Browsers ab (localStorage). Diese Daten verlassen dein Gerät nicht und werden nicht an den Anbieter übertragen. Du kannst sie jederzeit über die Browsereinstellungen oder in „Meine Projekte“ löschen.</p>
+    <h3>Offline-Nutzung und Installation</h3><p>Damit Muly ohne Internet funktioniert und sich als App installieren lässt, legt dein Browser eine Kopie der Programmdateien (Seiten, Schriften, Symbole) auf deinem Gerät ab (Service Worker). Dabei werden keine personenbezogenen Daten gespeichert oder übertragen. Die Kopie verschwindet, wenn du die Websitedaten im Browser löschst oder die App deinstallierst.</p>
     <h3>Server-Logdateien</h3><p>Beim Aufruf der Seiten verarbeitet der Hosting-Anbieter technisch notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browserkennung), um die Seiten auszuliefern und die Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: ${ph('host')}. Die Logdateien werden nach den Vorgaben des Anbieters gelöscht.</p>
     <h3>Deine Rechte</h3><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO) sowie das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>`,
   lic:`<h2 id="lizenzen">Lizenzen</h2>
     <p>Verwendete Schriften: Inter, DM Sans, DM Mono und Bebas Neue, jeweils unter der SIL Open Font License 1.1. Die Lizenztexte liegen im Ordner fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>).</p>`,
   stand:'Stand: Oktober 2026', back:'Zurück zur Startseite' },
 en:{ title:'Legal notice, privacy and disclaimer',
-  lead:'Statiq is a learning tool for civil engineering students. This page contains the legal notice, the privacy policy, the disclaimer and notes on standards and sources. The German version is authoritative.',
+  lead:'Muly is a learning tool for civil engineering students. This page contains the legal notice, the privacy policy, the disclaimer and notes on standards and sources. The German version is authoritative.',
   toc:['Legal notice','Liability','Standards and sources','Privacy','Licences'],
   imp:`<h2 id="impressum">Legal notice</h2>
     <p>Information pursuant to § 5 DDG (German Digital Services Act)</p>
@@ -96,27 +97,27 @@ en:{ title:'Legal notice, privacy and disclaimer',
     <h3>VAT</h3><p>${ph('vat')}</p>
     <h3>Responsible for content under § 18 (2) MStV</h3><p>${ph('name')}, address as above</p>`,
   haft:`<h2 id="haftung">Liability</h2>
-    <p><b>Statiq is a learning and practice tool.</b> Its results do not replace a structural calculation by a qualified person or a checked structural safety verification. They must not be used unchecked for the design, construction or checking of structures.</p>
+    <p><b>Muly is a learning and practice tool.</b> Its results do not replace a structural calculation by a qualified person or a checked structural safety verification. They must not be used unchecked for the design, construction or checking of structures.</p>
     <p>The calculation steps and values were prepared carefully and verified with independent tests. Errors, simplifying assumptions and outdated values can nevertheless not be ruled out. Standards and National Annexes change; the officially adopted version always governs.</p>
     <p>No liability is accepted for damage arising from the use of the content unless it is based on intent or gross negligence. Liability for injury to life, body or health remains unaffected.</p>
     <h3>Links</h3><p>The operators of linked external pages are responsible for their content.</p>`,
   norm:`<h2 id="normen">Standards and sources</h2>
-    <p>Statiq contains no text of standards. Formulas, design values and coefficients are given in our own words and presentation, mostly only as an extract of the values a calculator needs. The reference is always stated, e.g. “to DIN EN 1992-1-1, Table 3.1”.</p>
+    <p>Muly contains no text of standards. Formulas, design values and coefficients are given in our own words and presentation, mostly only as an extract of the values a calculator needs. The reference is always stated, e.g. “to DIN EN 1992-1-1, Table 3.1”.</p>
     <p>The complete standards with their National Annexes are available from DIN Media; university libraries usually provide them free of charge. For any design, always use the complete standards currently in force.</p>
-    <p>“DIN” is a registered trademark of DIN Deutsches Institut für Normung e. V. Statiq is not affiliated with DIN.</p>
-    <h3>Copyright</h3><p>Texts, figures and program code of Statiq are protected by copyright. Redistribution or publication, even in part, requires permission. Downloading and using Statiq for your own studies is permitted.</p>`,
+    <p>“DIN” is a registered trademark of DIN Deutsches Institut für Normung e. V. Muly is not affiliated with DIN.</p>
+    <h3>Copyright</h3><p>Texts, figures and program code of Muly are protected by copyright. Redistribution or publication, even in part, requires permission. Downloading and using Muly for your own studies is permitted.</p>`,
   ds:`<h2 id="datenschutz">Privacy</h2>
     <h3>Controller</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, email: ${ph('mail')}</p>
-    <h3>No accounts, no tracking</h3><p>Statiq requires no sign-in, sets no advertising or analytics cookies and embeds no third-party content. Fonts are loaded from our own server.</p>
+    <h3>No accounts, no tracking</h3><p>Muly requires no sign-in, sets no advertising or analytics cookies and embeds no third-party content. Fonts are loaded from our own server.</p>
     <h3>Storage in your browser</h3><p>Saved calculations, positions, projects and the language setting are stored in your browser’s local storage. This data does not leave your device and is not transmitted to the provider. You can delete it at any time in your browser settings or in “My projects”.</p>
-    <h3>Offline use and installation</h3><p>So that Statiq works without internet and can be installed as an app, your browser keeps a copy of the program files (pages, fonts, icons) on your device (service worker). No personal data is stored or transmitted in the process. The copy is removed when you clear the site data in your browser or uninstall the app.</p>
+    <h3>Offline use and installation</h3><p>So that Muly works without internet and can be installed as an app, your browser keeps a copy of the program files (pages, fonts, icons) on your device (service worker). No personal data is stored or transmitted in the process. The copy is removed when you clear the site data in your browser or uninstall the app.</p>
     <h3>Server log files</h3><p>When pages are requested, the hosting provider processes technically necessary data (IP address, date and time, requested file, browser identifier) to deliver the pages and keep them secure. Legal basis: Art. 6(1)(f) GDPR. Hosting provider: ${ph('host')}. Log files are deleted according to the provider’s rules.</p>
     <h3>Your rights</h3><p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a data protection authority.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
     <p>Fonts used: Inter, DM Sans, DM Mono and Bebas Neue, each under the SIL Open Font License 1.1. The licence texts are in the fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>) folder.</p>`,
   stand:'As of October 2026', back:'Back to the start page' },
 fr:{ title:'Mentions légales, confidentialité et avertissement',
-  lead:'Statiq est un outil d’apprentissage pour les études de génie civil. Cette page contient les mentions légales, la politique de confidentialité, l’avertissement et des remarques sur les normes et les sources. La version allemande fait foi.',
+  lead:'Muly est un outil d’apprentissage pour les études de génie civil. Cette page contient les mentions légales, la politique de confidentialité, l’avertissement et des remarques sur les normes et les sources. La version allemande fait foi.',
   toc:['Mentions légales','Responsabilité','Normes et sources','Confidentialité','Licences'],
   imp:`<h2 id="impressum">Mentions légales</h2>
     <p>Informations selon le § 5 DDG (loi allemande sur les services numériques)</p>
@@ -125,27 +126,27 @@ fr:{ title:'Mentions légales, confidentialité et avertissement',
     <h3>TVA</h3><p>${ph('vat')}</p>
     <h3>Responsable du contenu selon le § 18 al. 2 MStV</h3><p>${ph('name')}, adresse ci-dessus</p>`,
   haft:`<h2 id="haftung">Responsabilité</h2>
-    <p><b>Statiq est un outil d’apprentissage et d’exercice.</b> Ses résultats ne remplacent ni une note de calcul établie par une personne qualifiée ni une justification de stabilité contrôlée. Ils ne doivent pas être utilisés sans vérification pour le dimensionnement, l’exécution ou le contrôle d’ouvrages.</p>
+    <p><b>Muly est un outil d’apprentissage et d’exercice.</b> Ses résultats ne remplacent ni une note de calcul établie par une personne qualifiée ni une justification de stabilité contrôlée. Ils ne doivent pas être utilisés sans vérification pour le dimensionnement, l’exécution ou le contrôle d’ouvrages.</p>
     <p>Les calculs et les valeurs ont été établis avec soin et vérifiés par des tests indépendants. Des erreurs, des hypothèses simplificatrices et des valeurs dépassées ne peuvent toutefois pas être exclues. Les normes et les annexes nationales évoluent ; seule la version officiellement introduite fait foi.</p>
     <p>Aucune responsabilité n’est assumée pour les dommages résultant de l’utilisation du contenu, sauf faute intentionnelle ou négligence grave. La responsabilité en cas d’atteinte à la vie, au corps ou à la santé reste inchangée.</p>
     <h3>Liens</h3><p>Les exploitants des pages externes liées sont responsables de leur contenu.</p>`,
   norm:`<h2 id="normen">Normes et sources</h2>
-    <p>Statiq ne contient aucun texte de norme. Les formules, valeurs de calcul et coefficients sont présentés avec nos propres mots et dans notre propre présentation, le plus souvent sous forme d’extrait des valeurs dont un calculateur a besoin. La référence est toujours indiquée, p. ex. « selon DIN EN 1992-1-1, tab. 3.1 ».</p>
+    <p>Muly ne contient aucun texte de norme. Les formules, valeurs de calcul et coefficients sont présentés avec nos propres mots et dans notre propre présentation, le plus souvent sous forme d’extrait des valeurs dont un calculateur a besoin. La référence est toujours indiquée, p. ex. « selon DIN EN 1992-1-1, tab. 3.1 ».</p>
     <p>Les normes complètes avec leurs annexes nationales sont disponibles auprès de DIN Media ; les bibliothèques universitaires les mettent généralement à disposition gratuitement. Pour tout dimensionnement, utilisez toujours les normes complètes en vigueur.</p>
-    <p>« DIN » est une marque déposée du DIN Deutsches Institut für Normung e. V. Statiq n’a aucun lien avec le DIN.</p>
-    <h3>Droit d’auteur</h3><p>Les textes, figures et le code de Statiq sont protégés par le droit d’auteur. Toute diffusion ou publication, même partielle, nécessite une autorisation. Le téléchargement et l’utilisation pour vos propres études sont autorisés.</p>`,
+    <p>« DIN » est une marque déposée du DIN Deutsches Institut für Normung e. V. Muly n’a aucun lien avec le DIN.</p>
+    <h3>Droit d’auteur</h3><p>Les textes, figures et le code de Muly sont protégés par le droit d’auteur. Toute diffusion ou publication, même partielle, nécessite une autorisation. Le téléchargement et l’utilisation pour vos propres études sont autorisés.</p>`,
   ds:`<h2 id="datenschutz">Confidentialité</h2>
     <h3>Responsable du traitement</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, e-mail : ${ph('mail')}</p>
-    <h3>Pas de compte, pas de suivi</h3><p>Statiq ne demande aucune inscription, ne dépose aucun cookie publicitaire ou d’analyse et n’intègre aucun contenu tiers. Les polices sont chargées depuis notre propre serveur.</p>
+    <h3>Pas de compte, pas de suivi</h3><p>Muly ne demande aucune inscription, ne dépose aucun cookie publicitaire ou d’analyse et n’intègre aucun contenu tiers. Les polices sont chargées depuis notre propre serveur.</p>
     <h3>Stockage dans le navigateur</h3><p>Les calculs, positions, projets enregistrés et le choix de la langue sont stockés dans le stockage local de votre navigateur. Ces données ne quittent pas votre appareil et ne sont pas transmises au fournisseur. Vous pouvez les supprimer à tout moment dans les réglages du navigateur ou dans « Mes projets ».</p>
-    <h3>Utilisation hors ligne et installation</h3><p>Pour que Statiq fonctionne sans internet et puisse être installé comme application, votre navigateur conserve une copie des fichiers du programme (pages, polices, icônes) sur votre appareil (service worker). Aucune donnée personnelle n’est enregistrée ni transmise. La copie disparaît lorsque vous effacez les données du site dans le navigateur ou désinstallez l’application.</p>
+    <h3>Utilisation hors ligne et installation</h3><p>Pour que Muly fonctionne sans internet et puisse être installé comme application, votre navigateur conserve une copie des fichiers du programme (pages, polices, icônes) sur votre appareil (service worker). Aucune donnée personnelle n’est enregistrée ni transmise. La copie disparaît lorsque vous effacez les données du site dans le navigateur ou désinstallez l’application.</p>
     <h3>Journaux du serveur</h3><p>Lors de l’appel des pages, l’hébergeur traite les données techniquement nécessaires (adresse IP, date et heure, fichier demandé, identifiant du navigateur) pour délivrer les pages et assurer leur sécurité. Base juridique : art. 6, par. 1, point f du RGPD. Hébergeur : ${ph('host')}. Les journaux sont supprimés selon les règles de l’hébergeur.</p>
     <h3>Vos droits</h3><p>Vous disposez des droits d’accès, de rectification, d’effacement, de limitation, de portabilité et d’opposition (art. 15 à 21 du RGPD) ainsi que du droit d’introduire une réclamation auprès d’une autorité de contrôle.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
     <p>Polices utilisées : Inter, DM Sans, DM Mono et Bebas Neue, chacune sous SIL Open Font License 1.1. Les textes des licences se trouvent dans le dossier fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>).</p>`,
   stand:'Mise à jour : octobre 2026', back:'Retour à l’accueil' },
 es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
-  lead:'Statiq es una herramienta de aprendizaje para estudiantes de ingeniería civil. Esta página contiene el aviso legal, la política de privacidad, la exención de responsabilidad y notas sobre normas y fuentes. La versión alemana es la vinculante.',
+  lead:'Muly es una herramienta de aprendizaje para estudiantes de ingeniería civil. Esta página contiene el aviso legal, la política de privacidad, la exención de responsabilidad y notas sobre normas y fuentes. La versión alemana es la vinculante.',
   toc:['Aviso legal','Responsabilidad','Normas y fuentes','Privacidad','Licencias'],
   imp:`<h2 id="impressum">Aviso legal</h2>
     <p>Información conforme al § 5 DDG (ley alemana de servicios digitales)</p>
@@ -154,20 +155,20 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
     <h3>IVA</h3><p>${ph('vat')}</p>
     <h3>Responsable del contenido según el § 18, apdo. 2 MStV</h3><p>${ph('name')}, dirección arriba indicada</p>`,
   haft:`<h2 id="haftung">Responsabilidad</h2>
-    <p><b>Statiq es una herramienta de aprendizaje y práctica.</b> Sus resultados no sustituyen un cálculo estructural realizado por una persona cualificada ni una justificación de estabilidad revisada. No deben utilizarse sin comprobación para el dimensionamiento, la ejecución o la revisión de estructuras.</p>
+    <p><b>Muly es una herramienta de aprendizaje y práctica.</b> Sus resultados no sustituyen un cálculo estructural realizado por una persona cualificada ni una justificación de estabilidad revisada. No deben utilizarse sin comprobación para el dimensionamiento, la ejecución o la revisión de estructuras.</p>
     <p>Los cálculos y valores se han elaborado con cuidado y verificado con pruebas independientes. Aun así, no pueden descartarse errores, hipótesis simplificadas ni valores desactualizados. Las normas y los anejos nacionales cambian; siempre rige la versión oficialmente implantada.</p>
     <p>No se asume responsabilidad por daños derivados del uso del contenido, salvo dolo o negligencia grave. Queda intacta la responsabilidad por daños a la vida, la integridad física o la salud.</p>
     <h3>Enlaces</h3><p>Los responsables de las páginas externas enlazadas responden de su contenido.</p>`,
   norm:`<h2 id="normen">Normas y fuentes</h2>
-    <p>Statiq no contiene textos de normas. Las fórmulas, valores de cálculo y coeficientes se presentan con palabras y formato propios, casi siempre como extracto de los valores que necesita una calculadora. Siempre se indica la referencia, p. ej. «según DIN EN 1992-1-1, tabla 3.1».</p>
+    <p>Muly no contiene textos de normas. Las fórmulas, valores de cálculo y coeficientes se presentan con palabras y formato propios, casi siempre como extracto de los valores que necesita una calculadora. Siempre se indica la referencia, p. ej. «según DIN EN 1992-1-1, tabla 3.1».</p>
     <p>Las normas completas con sus anejos nacionales pueden adquirirse en DIN Media; las bibliotecas universitarias suelen ofrecerlas gratuitamente. Para cualquier dimensionamiento deben utilizarse siempre las normas completas vigentes.</p>
-    <p>«DIN» es una marca registrada de DIN Deutsches Institut für Normung e. V. Statiq no tiene relación con DIN.</p>
-    <h3>Derechos de autor</h3><p>Los textos, figuras y el código de Statiq están protegidos por derechos de autor. Su difusión o publicación, incluso parcial, requiere autorización. Se permite descargar y utilizar Statiq para los propios estudios.</p>`,
+    <p>«DIN» es una marca registrada de DIN Deutsches Institut für Normung e. V. Muly no tiene relación con DIN.</p>
+    <h3>Derechos de autor</h3><p>Los textos, figuras y el código de Muly están protegidos por derechos de autor. Su difusión o publicación, incluso parcial, requiere autorización. Se permite descargar y utilizar Muly para los propios estudios.</p>`,
   ds:`<h2 id="datenschutz">Privacidad</h2>
     <h3>Responsable</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, correo: ${ph('mail')}</p>
-    <h3>Sin cuentas, sin seguimiento</h3><p>Statiq no requiere registro, no instala cookies publicitarias ni analíticas y no integra contenido de terceros. Las fuentes se cargan desde nuestro propio servidor.</p>
+    <h3>Sin cuentas, sin seguimiento</h3><p>Muly no requiere registro, no instala cookies publicitarias ni analíticas y no integra contenido de terceros. Las fuentes se cargan desde nuestro propio servidor.</p>
     <h3>Almacenamiento en el navegador</h3><p>Los cálculos, posiciones y proyectos guardados y el idioma elegido se almacenan en el almacenamiento local de tu navegador. Estos datos no salen de tu dispositivo ni se transmiten al proveedor. Puedes borrarlos en cualquier momento en los ajustes del navegador o en «Mis proyectos».</p>
-    <h3>Uso sin conexión e instalación</h3><p>Para que Statiq funcione sin internet y pueda instalarse como app, tu navegador guarda una copia de los archivos del programa (páginas, fuentes, iconos) en tu dispositivo (service worker). No se almacenan ni transmiten datos personales. La copia desaparece al borrar los datos del sitio en el navegador o al desinstalar la app.</p>
+    <h3>Uso sin conexión e instalación</h3><p>Para que Muly funcione sin internet y pueda instalarse como app, tu navegador guarda una copia de los archivos del programa (páginas, fuentes, iconos) en tu dispositivo (service worker). No se almacenan ni transmiten datos personales. La copia desaparece al borrar los datos del sitio en el navegador o al desinstalar la app.</p>
     <h3>Registros del servidor</h3><p>Al acceder a las páginas, el proveedor de alojamiento trata datos técnicamente necesarios (dirección IP, fecha y hora, archivo solicitado, identificador del navegador) para entregar las páginas y garantizar su seguridad. Base jurídica: art. 6.1.f RGPD. Proveedor de alojamiento: ${ph('host')}. Los registros se eliminan según las normas del proveedor.</p>
     <h3>Tus derechos</h3><p>Tienes derecho de acceso, rectificación, supresión, limitación, portabilidad y oposición (arts. 15–21 RGPD) y derecho a presentar una reclamación ante una autoridad de protección de datos.</p>`,
   lic:`<h2 id="lizenzen">Licencias</h2>
@@ -176,7 +177,7 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
 };
 const IDS=['impressum','haftung','normen','datenschutz','lizenzen'];
 function render(l){
-  const t=T[l]||T.de; document.documentElement.lang=l; document.title='Statiq — '+t.title;
+  const t=T[l]||T.de; document.documentElement.lang=l; document.title='Muly — '+t.title;
   document.getElementById('content').innerHTML = `<h1>${t.title}</h1><p class="lead">${t.lead}</p>
     <nav class="toc">${t.toc.map((x,i)=>`<a href="#${IDS[i]}">${x}</a>`).join('')}</nav>
     <section>${t.imp}</section><section>${t.haft}</section><section>${t.norm}</section><section>${t.ds}</section><section>${t.lic}</section>`;

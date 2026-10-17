@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Statiq·projekt v0.1.3 -->
+<!-- Muly·projekt v0.1.4 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Statiq — Meine Projekte</title>
+<title>Muly — Meine Projekte</title>
 <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
 <meta name="theme-color" content="#ffffff" />
@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Statiq" />
+<meta name="apple-mobile-web-app-title" content="Muly" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,10 +92,11 @@
   .old { opacity:.55; }
   @media print { body.show-report .rep-acts { display:none; } #report-view { max-width:none; padding:0; } .report { border:none; padding:0; } .report h2 { break-after:avoid; } .report section { break-inside:avoid; } }
 </style>
+<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:1px;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}</style>
 </head>
 <body>
 <header class="app-header">
-  <a class="logo" href="index.html">stat<span>iq</span></a>
+  <a class="logo" href="index.html">muly<span>μ</span></a>
   <nav class="links">
     <a href="calc.html">calc</a><a href="size.html">size</a><a href="ref.html">ref</a><span class="cur" data-t="navProj">Meine Projekte</span>
     <span class="version" id="ver"></span>
@@ -112,7 +113,7 @@
     <div class="acts">
       <button class="btn" onclick="showReport()" data-t="report">Gesamtbericht</button>
       <button class="btn" onclick="exportFile()" data-t="export">Projekt als Datei sichern</button>
-      <label class="btn"><span data-t="import">Datei laden</span><input type="file" accept=".json,.statiq,application/json" style="display:none" onchange="importFile(this)"></label>
+      <label class="btn"><span data-t="import">Datei laden</span><input type="file" accept=".json,.statiq,.muly,application/json" style="display:none" onchange="importFile(this)"></label>
       <button class="btn k" onclick="addPos()" data-t="addPos">＋ Position</button>
     </div>
   </div>
@@ -128,7 +129,7 @@
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.3';
+const PROJ_VERSION = '0.1.4';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
@@ -142,7 +143,7 @@ const T = {
   types:{ beam:'Einfeldträger', cantilever:'Kragarm', cont:'Durchlaufträger', frame:'Rahmen' },
   repOverview:'Positionsübersicht', repParts:'Bestandteile', repStatus:'Status', repSystem:'System aus calc', repResults:'Größtwerte',
   repNoRep:'Für diesen Nachweis ist kein Bericht gespeichert — in size öffnen und erneut speichern.', repDate:'Stand {0}',
-  repNote:'Lernwerkzeug — ersetzt keine geprüfte Statik.', exported:'Projektdatei gespeichert.', imported:'Projektdatei geladen: {0} Einträge.', badFile:'Die Datei ist keine statiq-Projektdatei.',
+  repNote:'Lernwerkzeug — ersetzt keine geprüfte Statik.', exported:'Projektdatei gespeichert.', imported:'Projektdatei geladen: {0} Einträge.', badFile:'Die Datei ist keine Muly-Projektdatei.',
   reac:'Auflagerkräfte', moved:'Zugeordnet.' },
  en:{ sum1:'1 item · {1} not satisfied · {2} out of date', older:'earlier version', navProj:'My projects', report:'Full report', export:'Save project as file', import:'Load file', addPos:'＋ Item', loose:'Not assigned',
   looseHint:'Saved results from calc and size that are not yet assigned to an item.', hint:'An item bundles the system from calc with the design checks from size. When you use “import from calc” in size, the check is filed under the item of that calc calculation automatically. If you save a newer calculation in calc for the item, the check shows “recalculate”. Everything stays in this browser — “Save project as file” lets you move and keep it.',
@@ -155,7 +156,7 @@ const T = {
   types:{ beam:'Simply supported beam', cantilever:'Cantilever', cont:'Continuous beam', frame:'Frame' },
   repOverview:'Overview of items', repParts:'Contents', repStatus:'Status', repSystem:'System from calc', repResults:'Maximum values',
   repNoRep:'No report is stored for this check — open it in size and save again.', repDate:'As of {0}',
-  repNote:'Learning tool — does not replace a checked structural design.', exported:'Project file saved.', imported:'Project file loaded: {0} entries.', badFile:'This file is not a statiq project file.',
+  repNote:'Learning tool — does not replace a checked structural design.', exported:'Project file saved.', imported:'Project file loaded: {0} entries.', badFile:'This file is not a Muly project file.',
   reac:'Support reactions', moved:'Assigned.' },
  fr:{ sum1:'1 position · {1} non vérifiée(s) · {2} périmée(s)', older:'version antérieure', navProj:'Mes projets', report:'Rapport complet', export:'Enregistrer le projet (fichier)', import:'Charger un fichier', addPos:'＋ Position', loose:'Sans position',
   looseHint:'Éléments enregistrés dans calc et size qui ne sont encore affectés à aucune position.', hint:'Une position regroupe le système de calc et les vérifications de size. En utilisant « reprendre de calc » dans size, la vérification est rangée automatiquement dans la position du calcul calc. Si l’on enregistre dans calc un calcul plus récent pour la position, la vérification affiche « recalculer ». Tout reste dans ce navigateur — « Enregistrer le projet (fichier) » permet de le transférer et de le conserver.',
@@ -168,7 +169,7 @@ const T = {
   types:{ beam:'Poutre sur deux appuis', cantilever:'Console', cont:'Poutre continue', frame:'Portique' },
   repOverview:'Liste des positions', repParts:'Contenu', repStatus:'État', repSystem:'Système de calc', repResults:'Valeurs maximales',
   repNoRep:'Aucun rapport enregistré pour cette vérification — l’ouvrir dans size et l’enregistrer à nouveau.', repDate:'État au {0}',
-  repNote:'Outil pédagogique — ne remplace pas une note de calcul vérifiée.', exported:'Fichier de projet enregistré.', imported:'Fichier de projet chargé : {0} éléments.', badFile:'Ce fichier n’est pas un fichier de projet statiq.',
+  repNote:'Outil pédagogique — ne remplace pas une note de calcul vérifiée.', exported:'Fichier de projet enregistré.', imported:'Fichier de projet chargé : {0} éléments.', badFile:'Ce fichier n’est pas un fichier de projet Muly.',
   reac:'Réactions d’appui', moved:'Affecté.' },
  es:{ sum1:'1 posición · {1} no cumple(n) · {2} desactualizada(s)', older:'versión anterior', navProj:'Mis proyectos', report:'Informe completo', export:'Guardar proyecto (archivo)', import:'Cargar archivo', addPos:'＋ Posición', loose:'Sin posición',
   looseHint:'Elementos guardados en calc y size que aún no están asignados a ninguna posición.', hint:'Una posición agrupa el sistema de calc y las comprobaciones de size. Al usar «tomar de calc» en size, la comprobación se archiva automáticamente en la posición del cálculo de calc. Si se guarda en calc un cálculo más reciente para la posición, la comprobación muestra «recalcular». Todo se queda en este navegador — «Guardar proyecto (archivo)» permite trasladarlo y conservarlo.',
@@ -181,7 +182,7 @@ const T = {
   types:{ beam:'Viga biapoyada', cantilever:'Voladizo', cont:'Viga continua', frame:'Pórtico' },
   repOverview:'Lista de posiciones', repParts:'Contenido', repStatus:'Estado', repSystem:'Sistema de calc', repResults:'Valores máximos',
   repNoRep:'No hay informe guardado para esta comprobación — abrirla en size y guardar de nuevo.', repDate:'Estado a {0}',
-  repNote:'Herramienta didáctica — no sustituye un cálculo estructural revisado.', exported:'Archivo de proyecto guardado.', imported:'Archivo de proyecto cargado: {0} elementos.', badFile:'El archivo no es un archivo de proyecto de statiq.',
+  repNote:'Herramienta didáctica — no sustituye un cálculo estructural revisado.', exported:'Archivo de proyecto guardado.', imported:'Archivo de proyecto cargado: {0} elementos.', badFile:'El archivo no es un archivo de proyecto de Muly.',
   reac:'Reacciones', moved:'Asignado.' } };
 const t = (k, ...a) => String(((T[LANG]||T.de)[k] ?? T.de[k] ?? k)).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const tTyp = k => ((T[LANG]||T.de).types||T.de.types)[k] || k;
@@ -269,7 +270,7 @@ function exportFile(){
   sizeItems().forEach(s=>{ try{ const r=localStorage.getItem(REP+s.name); if(r) reps[s.name]=r; }catch(e){} });
   const data={ statiq:'projekt', version:PROJ_VERSION, saved:new Date().toISOString(), project:P, calc, size:lsGet(POS_STORE, []), reports:reps };
   const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data)], {type:'application/json'}));
-  a.download=(P.name||'projekt').replace(/[^\wäöüÄÖÜß\- ]+/g,'').trim().replace(/\s+/g,'_')+'.statiq.json'; document.body.appendChild(a); a.click(); a.remove(); toast(t('exported'));
+  a.download=(P.name||'projekt').replace(/[^\wäöüÄÖÜß\- ]+/g,'').trim().replace(/\s+/g,'_')+'.muly.json'; document.body.appendChild(a); a.click(); a.remove(); toast(t('exported'));
 }
 function importData(d){
   if(!d || d.statiq!=='projekt') { toast(t('badFile')); return 0; }
@@ -286,7 +287,7 @@ function buildReport(){
   const pos=[...P.pos].sort((a,b)=>String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true}));
   const stTxt = list => { const s=list.filter(x=>x.kind==='s'); if(!s.length) return '—'; const bad=s.some(x=>!x.p.ok), st=s.some(x=>staleOf(x,list)?.why==='stale');
     return st ? t('stale') : bad ? `<span class="bad">${t('notOk')}</span>` : `<span class="ok">${t('allOk')}</span>`; };
-  let h=`<div class="cover"><div class="meta">statiq · ${t('navProj')}</div><h1>${esc(P.name)}</h1><div class="meta">${t('repDate', date)}</div></div>`;
+  let h=`<div class="cover"><div class="meta">muly · ${t('navProj')}</div><h1>${esc(P.name)}</h1><div class="meta">${t('repDate', date)}</div></div>`;
   h+=`<section><h2>${t('repOverview')}</h2><table><tr><th>${t('pos')}</th><th>${t('posTitle')}</th><th>${t('repParts')}</th><th>${t('repStatus')}</th></tr>`
     + pos.map(q=>{ const l=by[q.id]||[]; return `<tr><td>${esc(q.nr)}</td><td>${esc(q.title)}</td><td>${l.map(x=>esc(x.name)).join('<br>')||'—'}</td><td>${stTxt(l)}</td></tr>`; }).join('') + `</table></section>`;
   pos.forEach(q=>{ const l=by[q.id]||[]; if(!l.length) return;
@@ -306,7 +307,7 @@ function showReport(){ document.getElementById('report').innerHTML = buildReport
 function hideReport(){ document.body.classList.remove('show-report'); }
 // ── Sprache ──────────────────────────────────────
 function setLang(l){ try{ localStorage.setItem('statiq-lang', l); }catch(e){} location.reload(); }
-function applyLang(){ document.documentElement.lang=LANG; document.querySelectorAll('[data-t]').forEach(e=>{ e.innerHTML=t(e.dataset.t); }); const s=document.getElementById('lang-sel'); if(s) s.value=LANG; document.title=`Statiq — ${t('navProj')}`; }
+function applyLang(){ document.documentElement.lang=LANG; document.querySelectorAll('[data-t]').forEach(e=>{ e.innerHTML=t(e.dataset.t); }); const s=document.getElementById('lang-sel'); if(s) s.value=LANG; document.title=`Muly — ${t('navProj')}`; }
 document.getElementById('ver').textContent='v'+PROJ_VERSION;
 applyLang(); render();
 window.addEventListener('storage', render); window.addEventListener('focus', render);

@@ -1,11 +1,11 @@
-# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.29 · size v0.5.37 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
+# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.29 · size v0.5.38 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
 - `calc.html` — Schnittgrößen-App (Muly·calc v0.8.23, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
 - `ref.html` — Nachschlagewerk (Muly·ref v0.3.29, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Muly·size v0.5.37, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (Muly·size v0.5.38, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.2)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,18 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## size v0.5.38 — Stahlträger: eigener Querkraftnachweis und Schubbeulen
+
+Anlass: Valentin hat den Schubnachweis bei Stahl › Träger/Stütze vermisst. Bisher steckte V_Ed/V_pl,Rd nur im η der Querschnittskarte, Schubbeulen wurde nur angekündigt, und die Grenze rechnete mit 72·ε (η = 1,0) — das war zu großzügig, richtig ist 72·ε/η mit η = 1,2.
+- `nachweiseStahl`: neue Karte `id:'qv'` („Querkraft“) direkt nach `qs`. Inhalt: Schubfläche A_v,z (η = 1,0 in der Fläche, sichere Seite), V_pl,z,Rd (6.2.6), Nachweis V_Ed ≤ V_pl,z,Rd, Schlankheitsgrenze h_w/t_w ≤ 72·ε/η mit η = 1,2 für S235–S460 (sonst 1,0).
+- Bei Überschreitung: Schubbeulen nach EN 1993-1-5, 5.2/5.3 mit Steifen nur an den Auflagern (k_τ = 5,34 → λ̄_w = h_w/(86,4·t_w·ε)), verformbarer Endpfosten (Tab. 5.1: χ_w = η bzw. 0,83/λ̄_w), V_bw,Rd mit γ_M1 = 1,1, Gurtanteil V_bf,Rd nicht angesetzt, V_b,Rd ≤ η·f_y·h_w·t_w/(√3·γ_M1). Interaktion M–V nach 7.1 bei η̄_3 > 0,5 und η̄_1 ≥ M_f,Rd/M_pl,Rd; M_f,Rd mit Abminderung für N.
+- Hinweis im Rechenweg: V und M werden im selben Schnitt angesetzt (beide Größtwerte = sichere Seite).
+- Querschnittskarte `qs`: η ohne Querkraft; die Abminderung von M_Rd für V > 0,5·V_pl,Rd bleibt dort. Alte Schubbeulen-Zeile entfernt.
+- Ergebnisse der Karte zusätzlich als `C[].qv` (V, Vpl, hwt, lim, etaS, beul, lw, chi, Vbw, Vb, mv) für Tests.
+- Abhilfe: `FIX_WHY['stahl:qv']`. „Nicht enthalten“: jetzt „Schubbeulen mit Zwischensteifen und Mitwirkung der Gurte“ statt „Plattenbeulen bei Schub“. Alle neuen Texte EN/FR/ES.
+- Vier alte Übersetzungsschlüssel der früheren Schubbeulen-Zeile entfernt (test_size_i18n verlangt, dass jeder Schlüssel im Code vorkommt).
+- Test neu: `test_size_schub.py` (19 Prüfungen, Sollwerte unabhängig in Python: IPE 300 S235, IPE 600 S460 mit und ohne Interaktion, mit N, IPE 600 S355 knapp unter der Grenze, Abhilfe, Umfang, EN/FR/ES).
+
 ## Neuer Markenname Muly — calc v0.8.23 · size v0.5.37 · ref v0.3.29 · projekt v0.1.4 · rechtliches v0.1.2
 
 Valentin hat sich für den Namen **Muly** entschieden (DPMA-Prüfung ohne Treffer). Logo: Schriftzug „muly“ mit blauem μ als Exponent (Entwurf E2). App-Symbol: blaues Quadrat mit weißem „μ.ly“ (Entwurf D).
@@ -576,7 +588,7 @@ Valentin hat sich für den Namen **Muly** entschieden (DPMA-Prüfung ohne Treffe
 - **Absichtlich unverändert**, damit nichts verloren geht: alle `localStorage`-Schlüssel (`statiq-lang`, `statiq-size-positionen`, `statiq-projekt` …), das Feld `statiq:'projekt'` in Projektdateien, der Präfix `statiq-` der Service-Worker-Speicher (alte werden beim Update gelöscht), Konstante `STATIQ_VERSION`, Ordner `statiq-tests/`, `statiq-tools/`, diese Datei. Projektdateien werden jetzt als `*.muly.json` gespeichert, alte `*.statiq.json` lassen sich weiter laden.
 - Die Adresse `valentinmaras.github.io/statiq` in der calc-Berichtsfußzeile bleibt, bis das GitHub-Repository umbenannt ist.
 - calc: Versionsanzeige im Kopf (`<span class="version">`) zeigte noch v0.8.22 → korrigiert; der neue Test prüft, dass sie zu `STATIQ_VERSION` passt.
-- sw.js `VERSION = 'statiq-2026-10-17-2'`.
+- sw.js `VERSION = 'statiq-2026-10-18-1'` (size v0.5.38).
 - Startseite: Schriftzug „muly“ war zu eng (Rückmeldung Valentin) → `.headline` letter-spacing −0,055 em → −0,03 em.
 - Tests: neu `test_marke_muly.py` (24 Prüfungen: kein sichtbares „Statiq“ in 6 Seiten × 4 Sprachen, Logo mit hochgestelltem μ, Manifest, Symbole, alte Schlüssel und Projektdateien). Angepasst: `test_pwa.py`, `test_projekt.py`, `test_size_import.py`, `test_calc_fres.py`, `test_rechtliches.py`. Stand 1473/1473 grün.
 
@@ -890,7 +902,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1473/1473 grün** (inklusive `test_skizzen_klarheit.py`, 16 Prüfungen, und `test_marke_muly.py`, 24 Prüfungen).
+Stand: **1492/1492 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24 und `test_size_schub.py` 19 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

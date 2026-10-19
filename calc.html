@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Muly v0.8.24 -->
+<!-- Muly v0.8.25 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -382,7 +382,22 @@
       /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
     .app-header { min-height:58px; box-sizing:border-box; }
 </style>
-<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
+<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}  /* Übungsmodus */
+  .ueb-tog { border:none; background:#efeff1; border-radius:10px; padding:7px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); margin:0 0 10px; }
+  .ueb-tog.on { background:var(--accent,#2563eb); color:#fff; }
+  body.uebung .results-grid { display:none !important; }
+  body.uebung:not(.ueb-dia) .diagram-svg-wrap, body.uebung:not(.ueb-dia) .diagram-label, body.uebung:not(.ueb-dia) .diagram-toggle-row { display:none !important; }
+  .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#404040); background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:0 0 12px; }
+  .ueb-diabtn { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:2px 0 6px; }
+  .st.ueb-hid { display:none; }
+  .ueb-box { background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
+  .ueb-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .ueb-box input { width:150px; padding:6px 8px; font:inherit; font-size:13px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
+  .ueb-box button { border:none; background:#fff; border-radius:8px; padding:6px 10px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text,#0a0a0a); }
+  .ueb-box button:disabled { opacity:.45; cursor:default; }
+  .ueb-cnt { font-size:12px; color:var(--text3,#8a8a8a); }
+  .ueb-msg { font-size:13px; } .ueb-msg:empty { display:none; } .ueb-msg.ok { color:#15803d; } .ueb-msg.bad { color:#b91c1c; }
+  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #2563eb); }
 </style>
 </head>
@@ -530,7 +545,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.24</span>
+    <span class="version">v0.8.25</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1002,7 +1017,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.24';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.25';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -4520,6 +4535,20 @@ const I18N_UI = {
   "wRight": "right",
   "repSub": "muly·calc · calculation report",
   "errRep": "Found an error? Please report it.",
+  "uebTog": "Practice mode",
+  "uebEnd": "End practice mode",
+  "uebHint": "Practice mode: work out reactions and internal forces yourself. Check your result below or reveal the calculation step by step.",
+  "uebShowDia": "Show diagram",
+  "uebHideDia": "Hide diagram",
+  "uebPh": "your result",
+  "uebChk": "Check",
+  "uebNext": "Next step",
+  "uebAll": "Show solution",
+  "uebCnt": "Step {} of {}",
+  "uebNum": "Please enter a number.",
+  "uebOkM": "Correct: {} = {}",
+  "uebOkS": "Correct: this value appears in step {}.",
+  "uebNo": "Does not match any result. Tip: reveal the next step.",
   "repType": "Type",
   "repGeom": "Geometry",
   "repSupports": "Supports",
@@ -4627,6 +4656,20 @@ const I18N_UI = {
   "wRight": "rechts",
   "repSub": "muly·calc · Berechnungsprotokoll",
   "errRep": "Fehler gefunden? Bitte melden.",
+  "uebTog": "Übungsmodus",
+  "uebEnd": "Übungsmodus beenden",
+  "uebHint": "Übungsmodus: Rechne Auflagerkräfte und Schnittgrößen selbst. Prüfe dein Ergebnis unten oder decke den Rechenweg Schritt für Schritt auf.",
+  "uebShowDia": "Schnittgrößen zeigen",
+  "uebHideDia": "Schnittgrößen ausblenden",
+  "uebPh": "dein Ergebnis",
+  "uebChk": "Prüfen",
+  "uebNext": "Nächster Schritt",
+  "uebAll": "Lösung zeigen",
+  "uebCnt": "Schritt {} von {}",
+  "uebNum": "Bitte eine Zahl eingeben.",
+  "uebOkM": "Richtig: {} = {}",
+  "uebOkS": "Stimmt: Dieser Wert steht in Schritt {}.",
+  "uebNo": "Stimmt mit keinem Ergebnis überein. Tipp: Decke den nächsten Schritt auf.",
   "repType": "Typ",
   "repGeom": "Geometrie",
   "repSupports": "Lagerung",
@@ -4734,6 +4777,20 @@ const I18N_UI = {
   "wRight": "droite",
   "repSub": "muly·calc · note de calcul",
   "errRep": "Une erreur ? Merci de la signaler.",
+  "uebTog": "Mode exercice",
+  "uebEnd": "Quitter le mode exercice",
+  "uebHint": "Mode exercice : calcule toi-même les réactions et les efforts internes. Contrôle ton résultat ci-dessous ou dévoile le calcul étape par étape.",
+  "uebShowDia": "Afficher les efforts",
+  "uebHideDia": "Masquer les efforts",
+  "uebPh": "ton résultat",
+  "uebChk": "Vérifier",
+  "uebNext": "Étape suivante",
+  "uebAll": "Afficher la solution",
+  "uebCnt": "Étape {} sur {}",
+  "uebNum": "Merci de saisir un nombre.",
+  "uebOkM": "Exact : {} = {}",
+  "uebOkS": "Exact : cette valeur figure à l’étape {}.",
+  "uebNo": "Ne correspond à aucun résultat. Astuce : dévoile l’étape suivante.",
   "repType": "Type",
   "repGeom": "Géométrie",
   "repSupports": "Appuis",
@@ -4845,6 +4902,20 @@ const I18N_UI = {
   "wRight": "derecha",
   "repSub": "muly·calc · memoria de cálculo",
   "errRep": "¿Has encontrado un error? Avísanos.",
+  "uebTog": "Modo práctica",
+  "uebEnd": "Salir del modo práctica",
+  "uebHint": "Modo práctica: calcula tú mismo las reacciones y los esfuerzos. Comprueba tu resultado abajo o descubre el cálculo paso a paso.",
+  "uebShowDia": "Mostrar esfuerzos",
+  "uebHideDia": "Ocultar esfuerzos",
+  "uebPh": "tu resultado",
+  "uebChk": "Comprobar",
+  "uebNext": "Siguiente paso",
+  "uebAll": "Mostrar solución",
+  "uebCnt": "Paso {} de {}",
+  "uebNum": "Introduce un número.",
+  "uebOkM": "Correcto: {} = {}",
+  "uebOkS": "Correcto: este valor aparece en el paso {}.",
+  "uebNo": "No coincide con ningún resultado. Consejo: descubre el siguiente paso.",
   "repType": "Tipo",
   "repGeom": "Geometría",
   "repSupports": "Apoyos",
@@ -5249,6 +5320,7 @@ function rwCard(sys){
   let res=null; try{ res = sys==='beam'||sys==='cant' ? rwBeam(sys) : sys==='cont' ? rwCont() : rwFrame(); }catch(e){ console.error(e); }
   card.style.display = res ? '' : 'none';
   if(res) card.querySelector('.rw-body').innerHTML = rwSteps(res.S);
+  if(typeof cUebApply==='function') cUebApply(sys, card, !!res);
   return res;
 }
 function rwSteps(S){
@@ -5258,6 +5330,55 @@ function rwSteps(S){
     else { const e=eqLine(s); out += e || `<div>${s}</div>`; }
   }
   return out + (open?'</div></div>':'');
+}
+
+// ══════════════════════════════════════════════════
+// ÜBUNGSMODUS (v0.8.25): Ergebniswerte, Schnittgrößenbild und Rechenweg verdeckt — selbst rechnen, Ergebnis prüfen,
+// Rechenweg Schritt für Schritt aufdecken. Gleicher Schalter wie in size (localStorage „muly-uebung“).
+// ══════════════════════════════════════════════════
+let C_UEB = (()=>{ try{ return localStorage.getItem('muly-uebung')==='1'; }catch(e){ return false; } })();
+let C_REV = {}, C_KEY = {};
+const cUebNum = t => { const s=String(t).replace(/−/g,'-').replace(/\s/g,''); const m=s.match(/-?\d+(?:[.,]\d+)?/); if(!m) return NaN; const v=parseFloat(m[0].replace(',','.')); return /%/.test(s) ? v/100 : v; };
+const cUebHit = (v, x) => isFinite(x) && Math.abs(Math.abs(v)-Math.abs(x)) <= Math.max(0.01*Math.abs(x), 0.05);   // Vorzeichen frei: Richtung je nach Konvention
+function cUebToggle(){ C_UEB=!C_UEB; try{ localStorage.setItem('muly-uebung', C_UEB?'1':'0'); }catch(e){} C_REV={}; document.body.classList.remove('ueb-dia'); if(typeof liveCalc==='function') liveCalc(true); else document.querySelectorAll('.rw-card').forEach(c=>cUebApply(c.id.slice(3), c, true)); }
+function cUebShow(sys){
+  const card=document.getElementById('rw-'+sys); if(!card) return;
+  const st=[...card.querySelectorAll('.rw-body > .st')], k=Math.min(C_REV[sys]||0, st.length);
+  st.forEach((e,i)=>e.classList.toggle('ueb-hid', C_UEB && i>=k));
+  const lab=card.querySelector('.ueb-cnt'); if(lab) lab.textContent=tr('uebCnt').replace('{}',k).replace('{}',st.length);
+  const nx=card.querySelector('.ueb-next'); if(nx) nx.disabled = k>=st.length;
+}
+function cUebStep(sys, all){ const n=document.querySelectorAll('#rw-'+sys+' .rw-body > .st').length; C_REV[sys] = all ? n : Math.min(n,(C_REV[sys]||0)+1); cUebShow(sys); }
+function cUebCheck(sys){
+  const card=document.getElementById('rw-'+sys), msg=card.querySelector('.ueb-msg'), v=cUebNum(card.querySelector('.ueb-in').value);
+  if(!isFinite(v)){ msg.className='ueb-msg bad'; msg.textContent=tr('uebNum'); return; }
+  const tab=card.closest('[id^="tab-"]');
+  for(const m of tab.querySelectorAll('.results-grid .metric')){ const x=cUebNum(m.querySelector('.m-value')?.textContent); if(cUebHit(v,x)){ msg.className='ueb-msg ok';
+    msg.innerHTML=tr('uebOkM').replace('{}',m.querySelector('.m-label').innerHTML).replace('{}',m.querySelector('.m-value').textContent+' '+(m.querySelector('.m-unit')?.textContent||'')); return; } }
+  const st=[...card.querySelectorAll('.rw-body > .st')];
+  for(let i=0;i<st.length;i++){ const vals=st[i].textContent.replace(/−/g,'-').split(/[=≈]/).slice(1).map(p=>{ const m=p.trim().match(/^-?\d+(?:[.,]\d+)?/); return m?parseFloat(m[0].replace(',','.')):NaN; });
+    if(vals.some(x=>cUebHit(v,x))){ msg.className='ueb-msg ok'; msg.textContent=tr('uebOkS').replace('{}',i+1); return; } }
+  msg.className='ueb-msg bad'; msg.textContent=tr('uebNo');
+}
+function cUebApply(sys, card, ok){
+  document.body.classList.toggle('uebung', C_UEB);
+  const out=card.closest('.col-out'); if(!out) return;
+  let tg=out.querySelector('.ueb-tog');
+  if(!tg){ tg=document.createElement('button'); tg.type='button'; tg.className='ueb-tog'; tg.onclick=cUebToggle; const note=out.querySelector('.live-note'); note ? note.after(tg) : out.prepend(tg); }
+  tg.textContent = C_UEB ? tr('uebEnd') : tr('uebTog'); tg.classList.toggle('on', C_UEB);
+  out.querySelector('.ueb-hint')?.remove(); card.querySelector('.ueb-box')?.remove(); out.querySelector('.ueb-diabtn')?.remove();
+  if(!C_UEB){ cUebShow(sys); return; }
+  const key=[...card.closest('[id^="tab-"]').querySelectorAll('.col-in input, .col-in select')].map(e=>e.type==='checkbox'?e.checked:e.value).join('|');
+  if(key!==C_KEY[sys]){ C_REV[sys]=0; C_KEY[sys]=key; }
+  tg.insertAdjacentHTML('afterend', `<div class="ueb-hint">${tr('uebHint')}</div>`);
+  const dia=out.querySelector('.diagram-svg-wrap')?.closest('.card');
+  if(dia) dia.querySelector('.card-title').insertAdjacentHTML('afterend', `<button type="button" class="ueb-diabtn" onclick="document.body.classList.toggle('ueb-dia'); document.querySelectorAll('.ueb-diabtn').forEach(b=>b.textContent=document.body.classList.contains('ueb-dia')?tr('uebHideDia'):tr('uebShowDia'))">${document.body.classList.contains('ueb-dia')?tr('uebHideDia'):tr('uebShowDia')}</button>`);
+  card.classList.remove('closed');
+  const box=document.createElement('div'); box.className='ueb-box';
+  box.innerHTML=`<div class="ueb-row"><input class="ueb-in" type="text" aria-label="${tr('uebPh')}" placeholder="${tr('uebPh')}" onkeydown="if(event.key==='Enter') cUebCheck('${sys}')"><button type="button" onclick="cUebCheck('${sys}')">${tr('uebChk')}</button></div>
+    <div class="ueb-row"><button type="button" class="ueb-next" onclick="cUebStep('${sys}')">${tr('uebNext')}</button><button type="button" onclick="cUebStep('${sys}',true)">${tr('uebAll')}</button><span class="ueb-cnt"></span></div><div class="ueb-msg"></div>`;
+  card.querySelector('.rw-title').after(box);
+  cUebShow(sys);
 }
 
 // ══════════════════════════════════════════════════

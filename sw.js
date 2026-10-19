@@ -2,8 +2,8 @@
 // Seiten (HTML): zuerst aus dem Netz (immer aktuell), offline aus dem Speicher.
 // Schriften und Symbole: zuerst aus dem Speicher.
 // Bei jeder neuen Version VERSION hochzählen, dann werden alte Speicher gelöscht.
-const VERSION = 'statiq-2026-10-20-1';
-const FILES = ["./", "index.html", "calc.html", "size.html", "ref.html", "projekt.html", "rechtliches.html", "manifest.json", "fonts/fonts.css", "fonts/bebas-neue-latin-400-normal.woff2", "fonts/bebas-neue-latin-ext-400-normal.woff2", "fonts/dm-mono-latin-400-normal.woff2", "fonts/dm-mono-latin-500-normal.woff2", "fonts/dm-mono-latin-ext-400-normal.woff2", "fonts/dm-mono-latin-ext-500-normal.woff2", "fonts/dm-sans-latin-ext-wght-normal.woff2", "fonts/dm-sans-latin-wght-normal.woff2", "fonts/inter-greek-wght-normal.woff2", "fonts/inter-latin-ext-wght-normal.woff2", "fonts/inter-latin-wght-normal.woff2", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png"];
+const VERSION = 'statiq-2026-10-20-4';
+const FILES = ["./", "index.html", "calc.html", "size.html", "ref.html", "projekt.html", "rechtliches.html", "manifest.json", "lang/size.en.js", "lang/size.fr.js", "lang/size.es.js", "lang/ref.en.js", "lang/ref.fr.js", "lang/ref.es.js", "fonts/fonts.css", "fonts/bebas-neue-latin-400-normal.woff2", "fonts/bebas-neue-latin-ext-400-normal.woff2", "fonts/dm-mono-latin-400-normal.woff2", "fonts/dm-mono-latin-500-normal.woff2", "fonts/dm-mono-latin-ext-400-normal.woff2", "fonts/dm-mono-latin-ext-500-normal.woff2", "fonts/dm-sans-latin-ext-wght-normal.woff2", "fonts/dm-sans-latin-wght-normal.woff2", "fonts/inter-greek-wght-normal.woff2", "fonts/inter-latin-ext-wght-normal.woff2", "fonts/inter-latin-wght-normal.woff2", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png"];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });

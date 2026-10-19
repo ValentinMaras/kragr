@@ -1,13 +1,14 @@
-# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.24 · ref v0.3.32 · size v0.5.41 · projekt v0.1.4 · rechtliches v0.1.3 · Startseite)
+# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.25 · ref v0.3.33 · size v0.5.43 · projekt v0.1.4 · rechtliches v0.1.3 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Muly·calc v0.8.24, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (Muly·calc v0.8.25, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Muly·ref v0.3.32, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Muly·size v0.5.41, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `ref.html` — Nachschlagewerk (Muly·ref v0.3.33, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Muly·size v0.5.43, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.3)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
+- `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
 
@@ -567,6 +568,34 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Übungsmodus in calc — calc v0.8.25
+
+- Gleicher Schalter wie size (`localStorage['muly-uebung']`): Knopf `.ueb-tog` oben in der rechten Spalte jedes Systems (unter „Ergebnisse werden laufend berechnet“).
+- Verdeckt: Kennwerte (`.results-grid`), Schnittgrößenbild (`.diagram-svg-wrap`, Umschalter, Beschriftung; Knopf „Schnittgrößen zeigen“, `body.ueb-dia`) und alle Schritte des Rechenwegs (`#rw-<sys> .st.ueb-hid`, sys = beam/cant/cont/frame).
+- Prüfen (`cUebCheck`): zuerst gegen die Kennwerte (Auflagerkräfte, M/Q/N max …) → „Richtig: V_A = 17,5 kN“, dann gegen jede Zahl hinter „=“ im Rechenweg → „Stimmt: Schritt k“. Toleranz 1 % bzw. 0,05, **Vorzeichen frei** (Richtungskonventionen unterscheiden sich).
+- Aufdecken: „Nächster Schritt“, „Lösung zeigen“, Zähler. Neue Aufgabe (Eingaben links geändert) → wieder verdeckt.
+- Code: Abschnitt „ÜBUNGSMODUS (v0.8.25)“ nach `rwSteps`, Aufruf `cUebApply(sys, card, ok)` am Ende von `rwCard`. Texte als Schlüssel `ueb…` in den vier calc-Wörterbüchern.
+- Test neu: `test_calc_uebung.py` (15 Prüfungen). sw.js `VERSION = 'statiq-2026-10-20-4'`.
+
+## Übungsmodus — size v0.5.43
+
+- **Schalter** „Übungsmodus“ in der Leiste „Rechenschritte“ (`.det-bar .ueb-tog`, der alte Knopf heißt jetzt `.det-all`), gemerkt in `localStorage['muly-uebung']`. Gilt für alle Fächer und Modi von size.
+- **Verdeckt:** Zusammenfassung, Nachweistabelle, Ergebniszeile, Handy-Statusleiste (CSS `body.uebung`), die Abbildung (Knopf „Abbildung zeigen“, `body.ueb-fig`), in jeder Karte η-Anzeige, Hinweise, Abhilfe und alle Rechenschritte (`.st.ueb-hid`).
+- **Je Karte** (`.ueb-box`, nach dem Titel): Eingabe „η oder Zwischenwert“ + „Prüfen“ (nicht bei Info-Karten), „Nächster Schritt“, „Lösung zeigen“, Zähler „Schritt k von n“. Prüfen: Toleranz 1 % bzw. 0,005; Eingabe mit Komma, Punkt oder „%“. Trifft der Wert η → „Richtig … erfüllt/nicht erfüllt“ und η wird sichtbar; trifft er eine Zahl direkt hinter einem „=“ in einem Schritt → „Stimmt: Dieser Wert steht in Schritt k“.
+- **Neue Aufgabe:** Ändert sich eine Eingabe links (Schlüssel aus Modus + allen Feldern von `.col-in`), werden die Schritte wieder verdeckt.
+- Code: `uebApply(C)` am Ende von `renderOut`, dazu `uebToggle`, `uebCheck`, `uebStep`, `uebShow` (Abschnitt „ÜBUNGSMODUS“ vor „ABHILFE“). Texte EN/FR/ES in `lang/size.*.js`.
+- Noch nicht: Übungsmodus für die Beispielrechnungen in ref.
+- Test neu: `test_size_uebung.py` (16 Prüfungen); `test_size_ux.py`, `test_size_i18n.py` klicken jetzt `.det-bar .det-all`. sw.js `VERSION = 'statiq-2026-10-20-3'`.
+
+## Ladezeit — size v0.5.42 · ref v0.3.33: Übersetzungen in eigene Dateien
+
+- **Aufbau:** EN/FR/ES von size und ref liegen in `lang/<app>.<sprache>.js` als `window.MULY_LANG = { "i18n": {…}, "ttx": {…} };` (ein Schlüssel je Zeile, gültiges JSON zwischen den äußeren Klammern). In der Seite bleibt nur Deutsch: `const I18N = { "de": … }`, `const TTX = {}`; danach `I18N[LANG] = MULY_LANG.i18n`, `TTX[LANG] = MULY_LANG.ttx`, wenn nicht Deutsch. `TTR` (Regex-Übersetzungen für „Schicht 2“ usw.) bleibt in size.
+- **Laden:** ein kleines `<script>` vor dem Hauptskript schreibt per `document.write` `<script src="lang/<app>.<l>.js">`, nur für en/fr/es. Sprachwechsel lädt die Seite neu (wie bisher), Deutsch lädt keine Datei.
+- **Größen:** size.html 2,30 → 1,04 MB (gzip 682 → 300 kB), ref.html 2,89 → 0,77 MB (gzip 769 → 238 kB). Sprachdateien gzip 123–180 kB. Gedrosselter Handy-Prozessor (4×): ref DE bis DOMContentLoaded 1214 → ~360 ms.
+- sw.js: die sechs Sprachdateien im Offline-Speicher, `VERSION = 'statiq-2026-10-20-2'`.
+- **Neue Übersetzungen** gehören jetzt in die Sprachdateien (Schlüssel = deutscher Text, oben einfügen). Die alten Werkzeuge in `statiq-tools/` (fres-i18n, ref-i18n, size-i18n) schreiben noch in die HTML-Dateien und sind damit veraltet.
+- Tests angepasst (lesen die Sprachdateien statt der Seite): `test_size_i18n.py`, `test_ref_i18n_code.py`, `test_fres.py`. Neu: `test_sprachdateien.py` (16 Prüfungen: DE lädt nichts, jede Sprache genau ihre Datei, Größenlimits, sw.js).
+
 ## Vertrauen und Seriosität — calc v0.8.24 · size v0.5.41 · ref v0.3.32 · rechtliches v0.1.3
 
 Erster Block aus Valentins Optimierungsliste (Reihenfolge: 1 Vertrauen, 4 Handy-Eingabe, 2 Ladezeit, dann Dunkelmodus, Übungsmodus).
@@ -938,7 +967,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1529/1529 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1576/1576 grün** (inklusive `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

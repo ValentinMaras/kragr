@@ -1,0 +1,13 @@
+{'ok': 100, 'mech_both': 44, 'fail': 6}
+28 rel. Abw. 0.0024 
+    {"A": "pin", "B": "roller", "b": 6.26, "hA": 4.07, "hB": 4.07, "hinges": [], "q": [{"member": "left", "qa": 3.19, "qb": -2.47, "a": 0.79, "b": 2.06, "dir": "h"}], "F": [], "head": "left", "headType": "pin", "IR": 20, "IS": 15}
+49 rel. Abw. 0.0053 
+    {"A": "roller", "B": "pin", "b": 3.98, "hA": 5.31, "hB": 5.31, "hinges": [], "q": [{"member": "right", "qa": 7.51, "qb": -3.46, "a": 1.04, "b": 2.12, "dir": "h"}], "F": [], "head": "right", "headType": "pin", "IR": 20, "IS": 10}
+73 rel. Abw. 0.0022 
+    {"A": "fixed", "B": "fixed", "b": 7.56, "hA": 5.22, "hB": 3.11, "hinges": [{"member": "rafter", "pos": 5.13}, {"member": "rafter", "pos": 5.94}], "q": [{"member": "right", "qa": 12.78, "qb": -2.97, "a": 1.32, "b": 2.28, "dir": "h"}], "F": [{"member": "left", "F": 17.22, "H": -0.69, "z": 0.92}, {"member": "left", "F": 1.64, "H": -1.46, "z": 3.62}, {"member": "left", "F": 0.22, "H": 0, "z": 4.58}], 
+76 rel. Abw. 0.0032 
+    {"A": "pin", "B": "fixed", "b": 7.76, "hA": 2.89, "hB": 2.89, "hinges": [{"member": "left", "pos": 1.14}], "q": [{"member": "rafter", "qa": 5.76, "qb": 14.28, "a": 0.75, "b": 2.16}, {"member": "rafter", "qa": -2.4, "qb": -2.32, "a": 0.46, "b": 4.85}], "F": [{"member": "right", "F": 11.75, "H": 0, "z": 1.66}, {"member": "rafter", "F": -5.65, "H": 0, "z": 5.08}], "head": "right", "headType": "roller
+77 rel. Abw. 0.0074 
+    {"A": "pin", "B": "roller", "b": 3.67, "hA": 4.14, "hB": 4.14, "hinges": [], "q": [{"member": "left", "qa": -4.4, "qb": 4.24, "a": 2.04, "b": 3.03, "dir": "h"}, {"member": "rafter", "qa": -4.9, "qb": 8.94, "a": 0.38, "b": 3.4}], "F": [], "head": "left", "headType": "roller", "IR": 10, "IS": 10}
+125 rel. Abw. 0.0025 
+    {"A": "fixed", "B": "fixed", "b": 6.76, "hA": 3.3, "hB": 4.54, "hinges": [], "q": [{"member": "rafter", "qa": 12.68, "qb": -3.45, "a": 3.38, "b": 6.69}, {"member": "rafter", "qa": -1.91, "qb": -2.35, "a": 1.88, "b": 6.17}, {"member": "rafter", "qa": 1.6, "qb": -2.41, "a": 2.07, "b": 5.58}], "F": [], "head": "none", "headType": "roller", "IR": 30, "IS": 15}

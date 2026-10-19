@@ -1,11 +1,11 @@
-# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.30 · size v0.5.39 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
+# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.31 · size v0.5.40 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
 - `calc.html` — Schnittgrößen-App (Muly·calc v0.8.23, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Muly·ref v0.3.30, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Muly·size v0.5.39, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `ref.html` — Nachschlagewerk (Muly·ref v0.3.31, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Muly·size v0.5.40, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.2)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,16 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## size v0.5.40 · ref v0.3.31 — Baustoffe in Gruppen, 37 neue Einträge, Luftschichten
+
+- **`BP_MAT` (gleich in size und ref) ab Index 28 erweitert** — nur angehängt, alte Indizes und Speicherstände bleiben: Leichtputz, Lehmputz, Wärmedämmputz, Calciumsulfat- und Gussasphaltestrich, gefügedichter Leichtbeton, Hochlochziegel mit Dämmstofffüllung, Leichtbeton-Hohlblock, Klinker, Sandstein, Granit, MW 040, Schaumglas, Phenolharz, VIP, Kork, Hanf/Flachs, BSH, BSP, Laubholz, Spanplatte, MDF, Sperrholz, Gipsfaser, Faserzement, Unterdeckbahn, Alu-Dampfsperre, Kunststoff-Dachabdichtung, Fliesen, Parkett, Teppich, Linoleum, Aluminiumblech, Kies; Index 62–64 Luftschichten (ruhend / schwach / stark belüftet, λ = 0 als Kennung). Werte: Anhaltswerte DIN 4108-4 / DIN EN ISO 10456 bzw. Herstellerwerte → Prüfliste.
+- **`BP_GRP`**: 8 Gruppen (Putze und Estriche, Beton, Mauerwerk und Naturstein, Dämmstoffe, Holz und Plattenwerkstoffe, Bahnen und Folien, Beläge und Bekleidungen, Luftschichten). size: `<optgroup data-i18n-label="bgN">`, Übersetzer setzt `el.label`; neue Namen als Schlüssel `bm28`–`bm64` in den vier Wörterbüchern. ref: `bpSel()` baut die Gruppen, Namen über TTX.
+- **Luftschichten (DIN EN ISO 6946)**: `bpLuftR(dmm, dir)` Tab. 8 (auf/hor/ab, linear, ab 300 mm gedeckelt); `bpMitLuft(L, art)` liefert gleichwertige Schichten (λ = d/R) und `W`: ruhend R aus Tab. 8; schwach belüftet R_T = ½·R_T,u + ½·R_T,v (A_v ≈ 1000 mm²/m) und gleichwertiges R der Luftschicht; stark belüftet: Luftschicht und alles außerhalb entfällt, R_se = R_si. Richtung: dach → auf, boden → ab, sonst horizontal.
+- **Glaser**: `glaser(L, rse=GL.Rse)`; bei stark belüfteter Luftschicht Schichten außerhalb weg und R_se = 0,08 (DIN 4108-3, hinterlüftet). Randbedingungszeile in size mit Platzhalter für R_se, in ref eigene Hinweiszeile.
+- size: λ-Feld der Luftschicht gesperrt (Platzhalter „R nach Tabelle“), `bpDStd` mit Dicken für die neuen Baustoffe (Luft 4 cm, Klinker 11,5 cm, Bahnen 0,04–0,15 cm …), Farben für Luft und neue Dämmstoffe. Schall: Luftschicht trennt die Schalen, angesetzt bleibt die schwerere.
+- Test neu: `test_size_luftschicht.py` (12 Prüfungen, Sollwerte unabhängig in Python).
+- sw.js `VERSION = 'statiq-2026-10-19-2'`.
+
 ## size v0.5.39 · ref v0.3.30 — Bauphysik auf Plausibilität geprüft
 
 Anlass: Valentins Kommentare — ρ ändert im U-Wert nichts; Rohdichte steht doppelt (im Namen und in der Spalte ρ), ebenso beim Tauwasser.
@@ -918,7 +928,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1508/1508 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19 und `test_size_bauph_plaus.py` 16 Prüfungen).
+Stand: **1520/1520 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16 und `test_size_luftschicht.py` 12 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

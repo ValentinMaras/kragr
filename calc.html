@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Muly v0.8.23 -->
+<!-- Muly v0.8.24 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -382,7 +382,9 @@
       /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
     .app-header { min-height:58px; box-sizing:border-box; }
 </style>
-<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}</style>
+<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
+  .fehler-link:hover { color: var(--accent, #2563eb); }
+</style>
 </head>
 <body>
 
@@ -528,7 +530,7 @@
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.23</span>
+    <span class="version">v0.8.24</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1000,7 +1002,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.23';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.24';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -4517,6 +4519,7 @@ const I18N_UI = {
   "wLeft": "left",
   "wRight": "right",
   "repSub": "muly·calc · calculation report",
+  "errRep": "Found an error? Please report it.",
   "repType": "Type",
   "repGeom": "Geometry",
   "repSupports": "Supports",
@@ -4623,6 +4626,7 @@ const I18N_UI = {
   "wLeft": "links",
   "wRight": "rechts",
   "repSub": "muly·calc · Berechnungsprotokoll",
+  "errRep": "Fehler gefunden? Bitte melden.",
   "repType": "Typ",
   "repGeom": "Geometrie",
   "repSupports": "Lagerung",
@@ -4729,6 +4733,7 @@ const I18N_UI = {
   "wLeft": "gauche",
   "wRight": "droite",
   "repSub": "muly·calc · note de calcul",
+  "errRep": "Une erreur ? Merci de la signaler.",
   "repType": "Type",
   "repGeom": "Géométrie",
   "repSupports": "Appuis",
@@ -4839,6 +4844,7 @@ const I18N_UI = {
   "wLeft": "izquierda",
   "wRight": "derecha",
   "repSub": "muly·calc · memoria de cálculo",
+  "errRep": "¿Has encontrado un error? Avísanos.",
   "repType": "Tipo",
   "repGeom": "Geometría",
   "repSupports": "Apoyos",
@@ -4926,7 +4932,7 @@ function applyCalcTranslations(){
   [['mfs1h','modalFrameS1h'],['mfs1p','modalFrameS1p'],['mfs1c','modalFrameS1c'],['mfs2h','modalFrameS2h'],['mfs2t','modalFrameS2t'],
    ['mfs3h','modalFrameS3h'],['mfs3p','modalFrameS3p'],['mfs3e','modalFrameS3e'],['mfs3c','modalFrameS3c'],
    ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t'],['mfs3lp','modalFrameLeftPart'],['mfs3cn','modalFrameCorner']].forEach(([id,k])=>setT(id,k));
-  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.textContent = `Muly v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]}`; });
+  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.innerHTML = `Muly v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]} · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('calc',STATIQ_VERSION,'${['beam','cantilever','cont','frame'][+fn.dataset.foot]||''}')">${t.errRep}</a>`; });
   ['beam','cant','cont','frame'].forEach(sys=>{ const l=document.getElementById('diag-label-'+sys); if(l) l.textContent = tr('diag'+((typeof diagMode!=='undefined' && diagMode[sys])||'M')); });
   document.querySelectorAll('.lang-pick button').forEach(b=>b.classList.toggle('active', b.dataset.lang===calcLang));
   const active=['beam','cantilever','cont','frame','saved'].find(x=>!document.getElementById('tab-'+x)?.classList.contains('hidden'))||'beam';
@@ -5465,6 +5471,15 @@ if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!
     fetch('projekt.html',{method:'HEAD',cache:'no-store'}).then(r=>{ if(r.ok) location.href=a.href; else hint(); }).catch(()=>{ location.href=a.href; });
   });
 })();
+
+// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von muly.eu.
+const MULY_MAIL = 'kontakt@muly.eu';
+function mulyFehlerHref(app, ver, extra){
+  let lang='de'; try{ lang=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
+  let body=`Seite: ${location.href}\nModul: Muly·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
+  if(extra) body+=('---\n'+extra).slice(0,1400);
+  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in Muly·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
+}
 </script>
 </body>
 </html>

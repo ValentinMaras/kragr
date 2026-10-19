@@ -1,12 +1,12 @@
-# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.31 · size v0.5.40 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
+# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.24 · ref v0.3.32 · size v0.5.41 · projekt v0.1.4 · rechtliches v0.1.3 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Muly·calc v0.8.23, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (Muly·calc v0.8.24, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Muly·ref v0.3.31, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Muly·size v0.5.40, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.2)
+- `ref.html` — Nachschlagewerk (Muly·ref v0.3.32, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Muly·size v0.5.41, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.3)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
@@ -567,6 +567,16 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Vertrauen und Seriosität — calc v0.8.24 · size v0.5.41 · ref v0.3.32 · rechtliches v0.1.3
+
+Erster Block aus Valentins Optimierungsliste (Reihenfolge: 1 Vertrauen, 4 Handy-Eingabe, 2 Ladezeit, dann Dunkelmodus, Übungsmodus).
+- **Fehler melden:** in calc (alle vier Fußnoten), size (Karte „Umfang und Grundlagen“) und ref (Fußnote jedes Themas) ein dezenter Link `.fehler-link`. `mulyFehlerHref(app, ver, extra)` (am Ende des letzten Skripts von calc/size/ref — kein eigener `<script>`-Block, sonst bricht der Node-Harness, der calc per Regex vom ersten `<script>` bis zum letzten `</script>` liest) baut eine mailto-Adresse mit Seite, Modul, Version, Sprache; size hängt `fixMode()` und `LAST.I` an (gekürzt auf 1400 Zeichen), ref den Hash des Themas. **`MULY_MAIL = 'kontakt@muly.eu'` ist ein Platzhalter**, bis Valentin die Adresse anlegt (in allen drei Dateien gleich).
+- **Startseite:** Fußzeile mit aktuellen Versionen (stand noch auf calc 0.8.22 / ref 0.3.28 / size 0.5.36 / projekt 0.1.3) und neuer Zeile `#footer-check` „Jeder Rechenweg wird gegen unabhängige Nachrechnungen geprüft — derzeit über 1.500 automatische Prüfungen“ (DE/EN/FR/ES, Schlüssel `check`).
+- **Impressum (rechtliches.html):** Name Valentin Maras eingetragen; Hosting GitHub, Inc. (GitHub Pages) mit Hinweis auf mögliche Übermittlung in die USA (4 Sprachen). Offen und markiert: Anschrift, E-Mail `[kontakt@muly.eu]`, USt-IdNr. `ph()` markiert nur noch Werte in eckigen Klammern.
+- **Normstand:** Umfang-Karten ohne Norm ergänzt — Platte zweiachsig (DIN EN 1992-1-1 mit NA), Holz Durchbruch (DIN EN 1995-1-1 mit NA), Spundwand (DIN 1054, DIN 4085), Ausfachung (DIN EN 1996-3 mit NA, Anhang NA.C). Wasserbau-Modi nennen Verfahren (Darcy-Weisbach, Manning-Strickler …) und bleiben so.
+- **Handy-Eingabe geprüft, bewusst nicht geändert:** `inputmode="decimal"` hätte auf dem iPhone keine Minustaste — viele Felder brauchen negative Werte (θ_e, Momente, N). `type="number"` bleibt. Dezimalkomma in Safari auf einem echten iPhone prüfen (Prüfliste).
+- Test neu: `test_vertrauen.py` (9 Prüfungen). sw.js `VERSION = 'statiq-2026-10-20-1'`.
+
 ## size v0.5.40 · ref v0.3.31 — Baustoffe in Gruppen, 37 neue Einträge, Luftschichten
 
 - **`BP_MAT` (gleich in size und ref) ab Index 28 erweitert** — nur angehängt, alte Indizes und Speicherstände bleiben: Leichtputz, Lehmputz, Wärmedämmputz, Calciumsulfat- und Gussasphaltestrich, gefügedichter Leichtbeton, Hochlochziegel mit Dämmstofffüllung, Leichtbeton-Hohlblock, Klinker, Sandstein, Granit, MW 040, Schaumglas, Phenolharz, VIP, Kork, Hanf/Flachs, BSH, BSP, Laubholz, Spanplatte, MDF, Sperrholz, Gipsfaser, Faserzement, Unterdeckbahn, Alu-Dampfsperre, Kunststoff-Dachabdichtung, Fliesen, Parkett, Teppich, Linoleum, Aluminiumblech, Kies; Index 62–64 Luftschichten (ruhend / schwach / stark belüftet, λ = 0 als Kennung). Werte: Anhaltswerte DIN 4108-4 / DIN EN ISO 10456 bzw. Herstellerwerte → Prüfliste.
@@ -928,7 +938,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1520/1520 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16 und `test_size_luftschicht.py` 12 Prüfungen).
+Stand: **1529/1529 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

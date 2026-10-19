@@ -1,11 +1,11 @@
-# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.29 · size v0.5.38 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
+# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.23 · ref v0.3.30 · size v0.5.39 · projekt v0.1.4 · rechtliches v0.1.2 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
 - `calc.html` — Schnittgrößen-App (Muly·calc v0.8.23, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Muly·ref v0.3.29, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Muly·size v0.5.38, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `ref.html` — Nachschlagewerk (Muly·ref v0.3.30, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (Muly·size v0.5.39, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.2)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,21 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## size v0.5.39 · ref v0.3.30 — Bauphysik auf Plausibilität geprüft
+
+Anlass: Valentins Kommentare — ρ ändert im U-Wert nichts; Rohdichte steht doppelt (im Namen und in der Spalte ρ), ebenso beim Tauwasser.
+- **Spalten je Modus** (`#bp-lay-card.bpm-<modus>`, Eingaben mit `data-c="d|l|u|r"`): U-Wert d, λ, ρ · Tauwasser d, λ, μ · Schall d, ρ. Hinweiszeile `#bp-lay-mode` sagt, was zählt.
+- **ρ wirkt im U-Wert:** Mindestwärmeschutz mit m′ = Σρ·d; m′ < 100 kg/m² → leichtes Bauteil, R_min = max(Tab. 3; 1,75) nach DIN 4108-2, 5.1.2.2. Karte `bumin` trägt `Rmin`, `mF`. Gleiche Regel im ref-Rechner U-Wert und in der Legende der Anforderungstabelle.
+- **Baustoffnamen in size ohne Rohdichte/λ/Dicke:** Optionen z211–z217, z227–z229 neu (DE/EN/FR/ES), z. B. „Kalksandstein“, „PE-Folie“. `BP_MAT` bleibt unverändert (gleich mit ref, Test). KS 2,0 (Index 6) ist `hidden`, alte Speicherstände laden weiter. Schicht hat jetzt `label` (übersetzter Optionstext) für Rechenweg und Bericht; `name` bleibt deutsch für Farben/Logik.
+- **Folien:** `bpDStd()` setzt beim Wählen übliche Dicken (Folie/Dampfbremse 0,02 cm, Bitumenbahn 0,4, GK 1,25, Putz/OSB 1,5, Estrich 5, sonst 10). Vorher 10 cm → PE-Folie s_d = 50 000 m. Dicken < 1 cm im Rechenweg mit vier Stellen (`bpDm`).
+- **Schall: Massegesetz nur für die massive Schale** (`bpSchale`: zusammenhängende Schichten mit ρ ≥ 300 kg/m³ um die schwerste). Dämmung und Putz auf der Dämmung (WDVS) zählen nicht, Hinweis „Nicht angesetzt …“ mit Verweis auf ΔR_w nach DIN 4109-34. Standardwand: m′ 355,8 → 333,0 kg/m². Trittschall nutzt dieselbe Masse.
+- „(DIN 4109-32, einschalig massiv)“ jetzt übersetzt.
+- **ref-Fehler gefunden:** U-Wert- und Glaser-Rechner zeigten in EN/FR/ES „Bitte Schicht eingeben“, weil die Vorgaben mit `tt(name)` kamen und `bpMatIdx` nur den deutschen Namen suchte → `bpMatIdx` sucht jetzt beide. Alle 132 Themen in 4 Sprachen ohne leere Rechner. „EPS WLS 032 (grau)“ in ref übersetzt.
+- Ohne Befund geprüft: U-Wert (R_si/R_se, GEG-Referenz- und Bestandswerte, f_Rsi mit R_si = 0,25), Glaser-Randbedingungen, Massegesetz und Flankenformeln, Trittschall (L_n,eq, ΔL_w, K), Gebäudeklassen, Sonneneintrag (S1 Tab. 8, S2 = 0,060 − 0,231·f_WG).
+- Legende der ref-Anforderungstabelle ohne `<sub>` (Textknoten-Übersetzung trFig findet sonst keinen Schlüssel).
+- Test neu: `test_size_bauph_plaus.py` (16 Prüfungen).
+- sw.js `VERSION = 'statiq-2026-10-19-1'`.
+
 ## size v0.5.38 — Stahlträger: eigener Querkraftnachweis und Schubbeulen
 
 Anlass: Valentin hat den Schubnachweis bei Stahl › Träger/Stütze vermisst. Bisher steckte V_Ed/V_pl,Rd nur im η der Querschnittskarte, Schubbeulen wurde nur angekündigt, und die Grenze rechnete mit 72·ε (η = 1,0) — das war zu großzügig, richtig ist 72·ε/η mit η = 1,2.
@@ -903,7 +918,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1492/1492 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24 und `test_size_schub.py` 19 Prüfungen).
+Stand: **1508/1508 grün** (inklusive `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19 und `test_size_bauph_plaus.py` 16 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

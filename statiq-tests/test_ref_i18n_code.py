@@ -6,8 +6,8 @@ fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:66}', str(info)[:150])
 s=open(BASE+'/ref.html',encoding='utf-8').read()
-a=s.index('const TTX = { en: ')+len('const TTX = { en: '); b=s.index(' };\nconst tt = ',a)
-T=json.loads(s[a:b]); code=s[b:]
+lf=open(BASE+'/lang/ref.en.js',encoding='utf-8').read(); T=json.loads(lf[lf.index('{'):lf.rindex('}')+1])['ttx']   # Sprachdatei
+code=s[s.index('const TTX = {}'):]
 miss=[]
 for m in re.finditer(r"\btt\('((?:[^'\\]|\\.)*)'\)",code):
     k=m.group(1).replace("\\'","'")

@@ -1,7 +1,7 @@
 # statiq·size v0.5.17/0.5.18 Sprachen: Englisch vollständig (Oberfläche, Rechenwege, Abbildungen, Bericht), Deutsch unverändert.
 # Prüft Schlüssel (DE/EN vollständig, Platzhalter gleich), den deutschen Ausgangstext im HTML gegen I18N.de,
 # alle Bereiche/Modi auf Englisch ohne deutsche Reste in der Oberfläche und dynamische Meldungen. Ohne Playwright: SKIP.
-import os, sys, re, asyncio
+import os, json, sys, re, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); BASE=os.path.abspath(os.path.join(HERE,'..'))
 HTML='file://'+BASE+'/size.html'
 try:
@@ -27,13 +27,16 @@ TEXTS2 = r"""(sel) => { const out=[]; document.querySelectorAll(sel).forEach(R=>
   while(w.nextNode()){ const n=w.currentNode, p=n.parentElement; if(!p || ['SCRIPT','STYLE','SUB','SUP'].includes(p.tagName)) continue;
     const t=n.textContent.trim(); if(t && /[A-Za-zÄÖÜäöüß]{3,}/.test(t)) out.push(t); } }); return out; }"""
 
+def langfile(app, l):   # Sprachdatei lang/<app>.<l>.js (window.MULY_LANG = {...};)
+    t=open(os.path.join(BASE,'lang',f'{app}.{l}.js'),encoding='utf-8').read(); return json.loads(t[t.index('{'):t.rindex('}')+1])
+
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch()
         # 1) Schlüssel
         pg=await br.new_page(); errs=[]; pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(HTML); await pg.evaluate("localStorage.clear()"); await pg.reload(); await pg.wait_for_timeout(200)
-        de=await pg.evaluate('I18N.de'); en=await pg.evaluate('I18N.en')
+        de=await pg.evaluate('I18N.de'); LF=langfile('size','en'); en=LF['i18n']
         miss=[k for k in de if not str(en.get(k,'')).strip()]
         check(f'I18N.en hat alle {len(de)} deutschen Schlüssel', not miss, miss[:8])
         extra=[k for k in en if k not in de and k!='langNotice']
@@ -45,7 +48,7 @@ async def main():
         src=open(os.path.join(BASE,'size.html'),encoding='utf-8').read()
         i0=src.index('const TTX = {'); src=src[:i0]+src[src.index('const TTR',i0):]   # Wörterbuch selbst nicht mitzählen
         if '/*FRES*/' in src: f0=src.index('/*FRES*/'); src=src[:f0]+src[src.index('/*/FRES*/',f0):]   # FR/ES-Wörterbuch ebenso
-        ttx=await pg.evaluate('TTX.en'); stale=[k for k in ttx if ("'"+k+"'") not in src and ('`'+k) not in src and ('"'+k+'"') not in src and ('>'+k+'<') not in src
+        ttx=LF['ttx']; stale=[k for k in ttx if ("'"+k+"'") not in src and ('`'+k) not in src and ('"'+k+'"') not in src and ('>'+k+'<') not in src
                and not ('{}' in k and all(p in src for p in k.split('{}') if p.strip()))]   # Rechenwege: Textteile zwischen den Werten
         check(f'TTX.en: alle {len(ttx)} deutschen Texte kommen im Code vor', not stale, stale[:5])
         # 2) Deutsche Ausgangstexte im HTML = I18N.de (Deutsch bleibt unverändert)
@@ -91,7 +94,7 @@ async def main():
         check('EN: Seitentitel (ausgeblendet, Text übersetzt)', (await pg.evaluate("document.getElementById('page-title').textContent")).strip()=='Reinforced concrete — beams, slabs, columns, punching')
         check('EN: Kennzeichen „satisfied“', 'satisfied' in await pg.inner_text('#chk-table'))
         bar=await pg.inner_text('.det-bar'); check('EN: Leiste Rechenschritte', 'Calculation steps' in bar and 'Expand all' in bar, bar)
-        await pg.click('.det-bar button'); check('EN: Knopf „Collapse all“', 'Collapse all' in await pg.inner_text('.det-bar'))
+        await pg.click('.det-bar .det-all'); check('EN: Knopf „Collapse all“', 'Collapse all' in await pg.inner_text('.det-bar'))
         opt=await pg.evaluate("$('in-expo').options[2].text"); check('EN: Expositionsklasse übersetzt', opt=='XC3 — moderate humidity', opt)
         await pg.fill('#in-l','0'); await pg.dispatch_event('#in-l','input'); await pg.wait_for_timeout(60)
         s=await pg.inner_text('#summary'); check('EN: Eingabefehler englisch', s.startswith('Please check the input') and not GER.search(s), s)

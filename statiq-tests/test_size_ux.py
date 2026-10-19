@@ -61,8 +61,8 @@ async def main():
         await pg.evaluate("$('in-h').value=30; $('in-M').value=600; run()"); await pg.wait_for_timeout(100)
         st=await pg.evaluate("[...document.querySelectorAll('#details .dfold')].map(c=>[c.id, c.classList.contains('closed'), !!c.querySelector('.card-title .tag.bad')])")
         check('Nicht erfüllte Nachweise offen, erfüllte zu', all(cl==(not b) for _,cl,b in st) and any(b for *_,b in st), st[:3])
-        await pg.click('.det-bar button'); check('„Alle aufklappen“', await pg.evaluate("[...document.querySelectorAll('#details .dfold')].every(c=>!c.classList.contains('closed'))"))
-        await pg.click('.det-bar button'); await pg.evaluate("$('in-h').value=60; $('in-M').value=220; run()")
+        await pg.click('.det-bar .det-all'); check('„Alle aufklappen“', await pg.evaluate("[...document.querySelectorAll('#details .dfold')].every(c=>!c.classList.contains('closed'))"))
+        await pg.click('.det-bar .det-all'); await pg.evaluate("$('in-h').value=60; $('in-M').value=220; run()")
         await pg.click('#chk-table a[href="#n-quer"]') if await pg.evaluate("!!document.querySelector('#chk-table a[href=\"#n-quer\"]')") else None
         check('Klick in der Ergebnisliste öffnet den Nachweis', await pg.evaluate("!document.getElementById('n-quer') || !document.getElementById('n-quer').classList.contains('closed')"))
         await pg.evaluate("run()"); check('Geöffneter Nachweis bleibt bei neuer Rechnung offen', await pg.evaluate("!document.getElementById('n-quer') || !document.getElementById('n-quer').classList.contains('closed')"))

@@ -24,22 +24,25 @@ SET={'beton':'setTyp','stahl':'setStMode','holz':'setHoMode','mauer':'setMwMode'
 MODES=[('beton',['balken','unterzug','platte','stuetze','durchstanzen']),('stahl',['traeger','anschluss','fuss','schweiss']),
  ('holz',['bauteil','verbindung','ausklink','sattel','versatz']),('mauer',['druck','teil','keller','schub']),
  ('grund',['flach','setzung','wand','upl','gleit']),('wasser',['druck','schwimm','rohr','gerinne','wehr']),('bauph',['uwert','glaser','schall'])]
+def langfile(app, l):   # Sprachdatei lang/<app>.<l>.js
+    t=open(os.path.join(BASE,'lang',f'{app}.{l}.js'),encoding='utf-8').read(); return json.loads(t[t.index('{'):t.rindex('}')+1])
+
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
         # ── size
         pg=await br.new_page(); pg.on('pageerror', lambda e: errs.append('size: '+str(e)))
         await pg.goto('file://'+BASE+'/size.html'); await pg.evaluate("localStorage.clear()"); await pg.reload(); await pg.wait_for_timeout(200)
-        de=await pg.evaluate('I18N.de'); en_t=await pg.evaluate('Object.keys(TTX.en)')
+        de=await pg.evaluate('I18N.de'); EN=langfile('size','en')['ttx']; en_t=list(EN)
         pa=await pg.evaluate('Object.keys(PA)')
         modes=[(m,x) for m,xs in MODES for x in xs]+[tuple(k.split('/')) for k in pa]
         for L in ('fr','es'):
-            ui=await pg.evaluate(f'I18N.{L}'); tt=await pg.evaluate(f'TTX.{L}')
+            LFL=langfile('size',L); ui=LFL['i18n']; tt=LFL['ttx']
             miss=[k for k in de if not str(ui.get(k,'')).strip()]
             check(f'size {L}: I18N.{L} hat alle {len(de)} Schlüssel', not miss, miss[:6])
             ph=[k for k in de if k in ui and sorted(re.findall(r'\{\d\}',de[k]))!=sorted(re.findall(r'\{\d\}',ui[k]))]
             check(f'size {L}: Platzhalter {{0}}… wie im Deutschen', not ph, ph[:5])
-            m2=[k for k in en_t if k not in tt and re.search(r'[a-zäöü]{3}',re.sub(r'<[^>]+>','',k)) and (await pg.evaluate("k=>TTX.en[k]!==k", k))]
+            m2=[k for k in en_t if k not in tt and re.search(r'[a-zäöü]{3}',re.sub(r'<[^>]+>','',k)) and EN[k]!=k]
             check(f'size {L}: TTX.{L} deckt TTX.en ab ({len(tt)})', not m2, m2[:4])
         for L,word,word2 in (('en','All checks','Calculation steps'),('fr','Toutes les vérifications','Étapes de calcul'),('es','Todas las comprobaciones','Desarrollo del cálculo')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.reload(); await pg.wait_for_timeout(250)
@@ -64,7 +67,7 @@ async def main():
         pg=await br.new_page(); pg.on('pageerror', lambda e: errs.append('ref: '+str(e)))
         await pg.goto('file://'+BASE+'/ref.html'); await pg.evaluate("localStorage.clear()"); await pg.reload(); await pg.wait_for_timeout(200)
         for L in ('fr','es'):
-            m2=await pg.evaluate(f"Object.keys(TTX.en).filter(k=>TTX.en[k]!==k && /[a-zäöü]{{3}}/.test(k.replace(/<[^>]+>/g,'')) && !(k in TTX.{L}))")
+            RE=langfile('ref','en')['ttx']; RL=langfile('ref',L)['ttx']; m2=[k for k in RE if RE[k]!=k and re.search(r'[a-zäöü]{3}',re.sub(r'<[^>]+>','',k)) and k not in RL]
             check(f'ref {L}: TTX.{L} deckt TTX.en ab', not m2, m2[:4])
         for L,home,srch,hit in (('en','Reference','snow','Snow'),('fr','Aide-mémoire','neige','Neige'),('es','Prontuario','nieve','Nieve')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.reload(); await pg.wait_for_timeout(250)

@@ -1,19 +1,69 @@
 <!DOCTYPE html>
-<!-- Muly·ref v0.3.33 -->
+<!-- kragr·ref v0.3.39 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+<script data-theme>
+// Erscheinungsbild (Oktober 2026): automatisch (System), hell, dunkel — localStorage „muly-theme“.
+// Dunkel = ganze Seite invertiert und Farbton zurückgedreht; Bilder und Druckvorschau bleiben wie sie sind.
+(function(){
+  var L={de:['Erscheinungsbild: automatisch','Erscheinungsbild: hell','Erscheinungsbild: dunkel'],en:['Appearance: automatic','Appearance: light','Appearance: dark'],
+         fr:['Apparence : automatique','Apparence : clair','Apparence : sombre'],es:['Apariencia: automática','Apariencia: claro','Apariencia: oscuro']};
+  var mq=window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  function get(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } }
+  function apply(){ var t=get(), d=t==='dark'||(t==='auto'&&mq&&mq.matches), h=document.documentElement; h.classList.toggle('dark',d); h.dataset.theme=t;
+    var b=document.getElementById('theme-btn'); if(b) draw(b,t); }
+  function lang(){ try{ return L[localStorage.getItem('statiq-lang')]||L.de; }catch(e){ return L.de; } }
+  var ICON={auto:'<circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/>',
+    light:'<circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 1.8v2M10 16.2v2M1.8 10h2M16.2 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4"/></g>',
+    dark:'<path d="M15.5 12.6A6.5 6.5 0 0 1 7.4 4.5a6.5 6.5 0 1 0 8.1 8.1z" fill="currentColor"/>'};
+  function draw(b,t){ var i={auto:0,light:1,dark:2}[t]||0; b.innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">'+ICON[t]+'</svg>'; b.title=lang()[i]; b.setAttribute('aria-label',lang()[i]); }
+  window.mulyTheme=function(){ var n={auto:'dark',dark:'light',light:'auto'}[get()]||'auto'; try{ localStorage.setItem('muly-theme',n); }catch(e){} apply(); };
+  window.mulyThemeButton=function(anchor, where){ if(!anchor||document.getElementById('theme-btn')) return; var b=document.createElement('button'); b.type='button'; b.id='theme-btn'; b.className='theme-btn'; b.onclick=window.mulyTheme;
+    where==='before' ? anchor.parentNode.insertBefore(b,anchor) : anchor.parentNode.insertBefore(b,anchor.nextSibling); draw(b,get()); };
+  if(mq&&mq.addEventListener) mq.addEventListener('change',apply);
+  apply();
+})();
+</script>
+<style data-theme>
+  html.dark { filter: invert(.92) hue-rotate(180deg); background:#fff; }
+  html.dark img, html.dark video, html.dark .no-invert { filter: invert(1) hue-rotate(180deg); }
+  .theme-btn { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; padding:0; border:none; border-radius:8px; background:transparent; color:inherit; opacity:.7; cursor:pointer; vertical-align:middle; }
+  .theme-btn:hover { opacity:1; background:rgba(0,0,0,.06); }
+  @media print { html.dark, html.dark img, html.dark .no-invert { filter:none !important; } .theme-btn { display:none !important; } }
+</style>
+<style data-glass>
+  /* Glasleiste (Oktober 2026): Kopfzeile durchscheinend, Inhalt darunter weichgezeichnet, unterer Rand läuft weich aus. */
+  .glass { background:transparent !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; border-bottom-color:transparent !important; isolation:isolate; }
+  .glass::before { content:''; position:absolute; left:0; right:0; top:0; bottom:-16px; z-index:-1; pointer-events:none;
+    background:linear-gradient(to bottom, rgba(255,255,255,.82) 0%, rgba(255,255,255,.6) 70%, rgba(255,255,255,0) 100%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%); backdrop-filter:blur(14px) saturate(160%);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 68%,transparent 100%); mask-image:linear-gradient(to bottom,#000 0%,#000 68%,transparent 100%); }
+  .glass.glass-flat::before { bottom:0; -webkit-mask-image:none; mask-image:none; background:rgba(255,255,255,.72); }
+  @media print { .glass::before { display:none; } }
+  #breadcrumb { top:var(--hdr-h,54px) !important; }  /* Pfadleiste direkt unter der Kopfzeile */
+</style>
+<style data-hdr>
+  /* Kopfzeile wie in calc und size (ref v0.3.36): Reihenfolge calc · size · ref, Sprachwahl rechts */
+  .app-header .header-links { gap:16px; white-space:nowrap; }
+  .app-header { min-height:58px; box-sizing:border-box; }
+  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#0a0a0a); cursor:pointer;
+    background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
+  .lang-sel:hover { background-color:#e4e4e7; }
+  @media (max-width:560px){ .app-header .header-links { gap:12px; } .header-links .version { display:none; } }
+</style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muly·ref — Nachschlagewerk</title>
+  <title>kragr·ref — Nachschlagewerk</title>
   <meta name="description" content="Nachschlagewerk für Studierende im Bauingenieurwesen — Baustoffkennwerte, Beiwerte und Nachweise nach Eurocode." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" />
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Muly" />
+<meta name="apple-mobile-web-app-title" content="kragr" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -73,7 +123,8 @@
     .card-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-family: 'DM Mono', monospace; margin-bottom: 12px; }
 
     /* Tile grid for navigation */
-    .tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tile-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+    .tile-grid .tile { overflow-wrap:anywhere; hyphens:auto; }
     .tile { display: block; background: rgba(255,255,255,0.92); border: 1px solid var(--border-dark); border-radius: var(--radius); padding: 16px 14px; text-align: left; text-decoration: none; color: inherit; font-family:'DM Sans', sans-serif; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.15s; }
     a.tile:hover { border-color: var(--accent); background: var(--accent-bg); transform: translateY(-1px); }
     .tile.soon { opacity: 0.55; }
@@ -303,7 +354,7 @@
       .sidebar.open { display:block; position:fixed; inset:0 auto 0 0; width:min(320px, 88vw); background:#fff; z-index:80; padding:16px 14px 30px; overflow:auto; box-shadow:0 0 0 100vmax rgba(0,0,0,0.25); }
     }
     .figure:not(.sk) svg { max-width:520px; margin:0 auto; }
-    /* Nachweisablauf: nummerierte Schritte, Gleichungen untereinander (wie muly·size) */
+    /* Nachweisablauf: nummerierte Schritte, Gleichungen untereinander (wie kragr·size) */
     .ablauf { background:#fff; border-radius:14px; padding:14px 16px 6px; margin:10px 0 12px; }
     .ablauf-t { font-size:13px; font-weight:800; margin-bottom:10px; color:var(--text); }
     .steps { font-family:'DM Mono', monospace; font-size:12.5px; line-height:1.85; color:var(--text2); }
@@ -326,23 +377,24 @@
     .data-table-wrap.tall table.data thead th { position:sticky; top:0; z-index:2; }
       #breadcrumb { display:none !important; }   /* v0.3.26: Pfadleiste entfernt (Wunsch Valentin) */
 </style>
-<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #2563eb); }
 </style>
 </head>
 <body>
 
-<header class="app-header">
-  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">muly<span>μ</span></a>
+<header class="app-header glass">
+  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
   <div class="header-links">
-    <a href="#/" class="module-name">ref</a>
-    <a href="size.html">size</a>
     <a href="calc.html">calc</a>
+    <a href="size.html">size</a>
+    <a href="#/" class="module-name">ref</a>
     <span class="version" id="ref-version"></span>
+    <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="try{localStorage.setItem('statiq-lang',this.value)}catch(e){} location.reload()"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
 
-<nav class="nav" id="breadcrumb" aria-label="Navigation"></nav>
+<nav class="nav glass" id="breadcrumb" aria-label="Navigation"></nav>
 
 <div class="layout"><aside class="sidebar" id="sidebar" aria-label="Themen"></aside><main class="main" id="main"></main><aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside></div>
 
@@ -473,7 +525,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.33';
+const REF_VERSION = '0.3.39';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -3737,7 +3789,7 @@ function updateSohldruck(){
   out.innerHTML = ablauf(tt('Sohlspannung'), S);
 }
 
-// ── Grundbruch DIN 4017 (wie muly·size) ──
+// ── Grundbruch DIN 4017 (wie kragr·size) ──
 function gb4017(o){   // b, a (Infinity = Streifen), d, phi, c, g1, g2, V, H, e
   const ph=radG(o.phi), tp=Math.tan(ph), strip=!isFinite(o.a);
   const bp=o.b-2*o.e, ap=strip?1:o.a, A=bp*ap, bs = strip ? bp : Math.min(bp,ap), r = strip ? 0 : Math.min(bp,ap)/Math.max(bp,ap);
@@ -4043,7 +4095,7 @@ function updatePoleni(){
 
 // ══════════════════════════════════════════════════
 // MAUERWERK (ref v0.3.15): Steine, Maßordnung, Mörtel, f_k, Knicklänge, Wand (vereinfachtes Verfahren),
-// Teilflächenpressung, Kellerwand, Schubwand — Rechenkerne wie in muly·size (γ_M = 1,5, ζ = 0,85)
+// Teilflächenpressung, Kellerwand, Schubwand — Rechenkerne wie in kragr·size (γ_M = 1,5, ζ = 0,85)
 // ══════════════════════════════════════════════════
 const MWR = { gM:1.5, zeta:0.85 };
 const MWR_ART = { z1:{t:'z',g:1,n:'Ziegel, Vollstein (Gr. 1)'}, z2:{t:'z',g:2,n:'Hochlochziegel (Gr. 2)'}, k1:{t:'k',g:1,n:'Kalksandstein, Voll-/Blockstein (Gr. 1)'},
@@ -4625,7 +4677,7 @@ function updateLW(){
 }
 
 // ══════════════════════════════════════════════════
-// BAUPHYSIK — Rechenkerne (gleich in muly·ref und muly·size)
+// BAUPHYSIK — Rechenkerne (gleich in kragr·ref und kragr·size)
 // Wärme: DIN EN ISO 6946 · Feuchte: DIN 4108-3 (Glaser) · Schall: DIN 4109-32/-34 · Brand: MBO
 // ══════════════════════════════════════════════════
 // Baustoffe: [Name, λ W/(mK), μ (Rechenwert), ρ kg/m³]  — Bemessungswerte nach DIN 4108-4 / EN ISO 10456 (Anhaltswerte)
@@ -5006,7 +5058,7 @@ function textTable(cols, rows){
     <tbody>${rows.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')}</tbody></table></div>`
     + (cols.length>=5 && !wrap ? '<div class="table-hint">waagerecht scrollbar</div>' : '');
 }
-const sizeSoon = txt => `<span class="applink soon" title="muly·size ist in Vorbereitung">${txt} — muly·size folgt</span>`;
+const sizeSoon = txt => `<span class="applink soon" title="kragr·size ist in Vorbereitung">${txt} — kragr·size folgt</span>`;
 
 // ── Rechner: Bemessungswerte der Festigkeit f_d = kmod · f_k / γM ──
 // Für Vollholz und BSH. Nicht enthalten: k_h (Höhenfaktor), k_cr (Rissfaktor
@@ -5502,7 +5554,7 @@ const CONTENT = {
         ['k<sub>crit</sub>','Kippen','1,0 / 1,56 − 0,75 λ<sub>rel,m</sub> / 1/λ<sub>rel,m</sub>²'],
         ['k<sub>sys</sub>','Systemfestigkeit (mehrere gleichartige, verbundene Träger)','1,1'],
         ['k<sub>shape</sub>','Torsion','Rechteck min(1 + 0,05 · h/b; 1,3) · Kreis 1,2'],
-        ['k<sub>v</sub>','Ausklinkung am Auflager','siehe muly·size (Holz › Ausklinkung)'],
+        ['k<sub>v</sub>','Ausklinkung am Auflager','siehe kragr·size (Holz › Ausklinkung)'],
         ['k<sub>fi</sub>','Brandfall: 20%-Fraktile','VH 1,25 · BSH 1,15 · LVL 1,10'],
       ])}
     </div>
@@ -5642,7 +5694,7 @@ const CONTENT = {
         Die EN 1995-1-1 nennt nur Bereiche (z. B. w<sub>inst</sub> ℓ/300 bis ℓ/500); verbindlich sind in
         Deutschland die Werte des NA. Für untergeordnete Bauteile erlaubt der NA größere Werte.
       </div>
-      <a class="applink" href="calc.html">→ Durchbiegung in muly·calc berechnen</a>
+      <a class="applink" href="calc.html">→ Durchbiegung in kragr·calc berechnen</a>
     </div>
 
     <div class="card">
@@ -5941,7 +5993,7 @@ Object.assign(CONTENT, {
         [tt('Dreigelenkrahmen'),'4','1','0'],
         [tt('Festlager + Loslager + Riegelgelenk'),'3','1',tt('−1 (Mechanismus)')],
       ])}
-      <a class="applink" href="calc.html#frame">→ Rahmen in muly·calc untersuchen</a>
+      <a class="applink" href="calc.html#frame">→ Rahmen in kragr·calc untersuchen</a>
     </div>
   `,
 
@@ -5974,7 +6026,7 @@ Object.assign(CONTENT, {
       ])}
       <div class="info-banner">Das Biegemoment ist dort extremal, wo die Querkraft null ist (oder das Vorzeichen wechselt).
         So findet man das Feldmoment.</div>
-      <a class="applink" href="calc.html#beam">→ Verläufe in muly·calc ansehen</a>
+      <a class="applink" href="calc.html#beam">→ Verläufe in kragr·calc ansehen</a>
     </div>
   `,
 
@@ -5997,7 +6049,7 @@ Object.assign(CONTENT, {
       <div class="info-banner">
         Beispiel: q = 10 kN/m, L = 5 m → A = B = 25 kN, max M = 10·5²/8 = <b>31,25 kNm</b>.
       </div>
-      <a class="applink" href="calc.html#beam">→ Eigene Lastfälle in muly·calc</a>
+      <a class="applink" href="calc.html#beam">→ Eigene Lastfälle in kragr·calc</a>
     </div>
   `,
 
@@ -6015,7 +6067,7 @@ Object.assign(CONTENT, {
         [tt('Dreieckslast (q an der Einspannung, 0 am Ende)'),'qL/2','−qL²/6','qL⁴/(30EI)','qL³/(24EI)'],
       ])}
       <div class="legend">M_A als Schnittmoment an der Einspannung (Zug oben → negativ).</div>
-      <a class="applink" href="calc.html#cantilever">→ Kragarm in muly·calc</a>
+      <a class="applink" href="calc.html#cantilever">→ Kragarm in kragr·calc</a>
     </div>
   `,
 
@@ -6063,7 +6115,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="info-banner">Beispiel Zweifeldträger, q = 10 kN/m, L = 5 m:
         M_B = −0,125·10·25 = <b>−31,25 kNm</b>, B = 1,25·10·5 = <b>62,5 kN</b>.</div>
-      <a class="applink" href="calc.html#cont">→ Beliebige Felder in muly·calc</a>
+      <a class="applink" href="calc.html#cont">→ Beliebige Felder in kragr·calc</a>
     </div>
     <div class="card">
       <div class="card-title">Beiwerte für 2 bis 5 gleiche Felder mit Laststellungen</div>
@@ -6311,7 +6363,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="dgr-out"></div>
       <div id="dgr-fig"></div>
-      <a class="applink" href="calc.html#frame">→ Rahmen mit beliebigen Lasten in muly·calc</a>
+      <a class="applink" href="calc.html#frame">→ Rahmen mit beliebigen Lasten in kragr·calc</a>
     </div>
   `,
 
@@ -6343,7 +6395,7 @@ Object.assign(CONTENT, {
         ${field(tt('Einzellast F<sub>2</sub> in Feldmitte [kN]'), inp('kgv-F2', 20, 'updateKGV()'))}
       </div>
       <div class="calc-out" id="kgv-out"></div>
-      <a class="applink" href="calc.html#cont">→ Momentenlinie in muly·calc</a>
+      <a class="applink" href="calc.html#cont">→ Momentenlinie in kragr·calc</a>
     </div>
   `,
 
@@ -6784,7 +6836,7 @@ Object.assign(CONTENT, {
         ${field(tt('N<sub>Ed</sub> [kN] auf die Länge l'), inp('mwd-N', 300, 'updateMWD()'))}
       </div>
       <div class="calc-out" id="mwd-out"></div>
-      <a class="applink" href="size.html">→ Mit Skizze und Bericht in muly·size (Mauerwerk → Wand)</a>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in kragr·size (Mauerwerk → Wand)</a>
     </div>
   `,
 
@@ -6841,7 +6893,7 @@ Object.assign(CONTENT, {
         ${field('n<sub>Ed,min</sub> [kN/m]', inp('mwk-Nmin', 60, 'updateMWK()'))}
       </div>
       <div class="calc-out" id="mwk-out"></div>
-      <a class="applink" href="size.html">→ Mit Skizze in muly·size (Mauerwerk → Kellerwand)</a>
+      <a class="applink" href="size.html">→ Mit Skizze in kragr·size (Mauerwerk → Kellerwand)</a>
     </div>
   `,
 
@@ -6936,7 +6988,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="uw-out"></div>
       <div id="uw-fig"></div>
-      <a class="applink" href="size.html">→ U-Wert-Nachweis mit Bericht in muly·size (Bauphysik)</a>
+      <a class="applink" href="size.html">→ U-Wert-Nachweis mit Bericht in kragr·size (Bauphysik)</a>
     </div>
   `,
 
@@ -7000,7 +7052,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="gl-out"></div>
       <div id="gl-fig"></div>
-      <a class="applink" href="size.html">→ Glaser-Nachweis mit Bericht in muly·size (Bauphysik)</a>
+      <a class="applink" href="size.html">→ Glaser-Nachweis mit Bericht in kragr·size (Bauphysik)</a>
     </div>
   `,
 
@@ -7079,7 +7131,7 @@ Object.assign(CONTENT, {
         ${flFelder('fl-', 'updateFL()')}
       </div>
       <div class="calc-out" id="fl-out"></div>
-      <a class="applink" href="size.html">→ Nachweis mit Bericht in muly·size (Bauphysik → Schallschutz, genauer Nachweis)</a>
+      <a class="applink" href="size.html">→ Nachweis mit Bericht in kragr·size (Bauphysik → Schallschutz, genauer Nachweis)</a>
     </div>
   `,
 
@@ -7742,7 +7794,7 @@ Object.assign(CONTENT, {
         ${field(tt('Schichtdicke Δz [m]'), inp('st2-dz', 0.5, 'updateSetz()'))}
       </div>
       <div class="calc-out" id="st2-out"></div>
-      <div class="legend">Für geschichteten Boden mit mehreren Steifemoduln: muly·size › Grundbau › Setzung.</div>
+      <div class="legend">Für geschichteten Boden mit mehreren Steifemoduln: kragr·size › Grundbau › Setzung.</div>
     </div>
   `,
 
@@ -8084,7 +8136,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="info-banner">Beispiel: Schütz 1 × 2 m (l = 2 m in Neigungsrichtung), α = 60°, Oberkante bei y = 1,0 m.<br>
         y<sub>s</sub> = 2,0 m, h<sub>s</sub> = 2,0 · sin 60° = 1,73 m → F = 10 · 1,73 · 2,0 = <b>34,6 kN</b> · y<sub>D</sub> = 2,0 + (1·2³/12)/(2,0·2,0) = <b>2,17 m</b></div>
-      <a class="applink" href="size.html">→ Wasserdruck mit Gegendruck in muly·size (Wasserbau)</a>
+      <a class="applink" href="size.html">→ Wasserdruck mit Gegendruck in kragr·size (Wasserbau)</a>
     </div>
   `,
 
@@ -8119,7 +8171,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="info-banner">Beispiel: Ponton 10 × 6 m, t = 0,80 m, G in 1,20 m Höhe.<br>
         V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3,75 m · e = 1,20 − 0,40 = 0,80 m → h<sub>M</sub> = <b>2,95 m</b> > 0 → stabil</div>
-      <a class="applink" href="#/grundbau/flach/sohldruck">→ Auftrieb bei Bauwerken: Nachweis UPL in muly·size (Grundbau)</a>
+      <a class="applink" href="#/grundbau/flach/sohldruck">→ Auftrieb bei Bauwerken: Nachweis UPL in kragr·size (Grundbau)</a>
     </div>
   `,
 
@@ -8169,7 +8221,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="wbr-out"></div>
       <div id="wbr-fig"></div>
-      <a class="applink" href="size.html">→ Mit Energie- und Drucklinie in muly·size (Wasserbau → Rohr)</a>
+      <a class="applink" href="size.html">→ Mit Energie- und Drucklinie in kragr·size (Wasserbau → Rohr)</a>
     </div>
   `,
 
@@ -8220,7 +8272,7 @@ Object.assign(CONTENT, {
         ${field('k<sub>St</sub> [m<sup>1/3</sup>/s]', inp('wbg-k', 60, 'updateManning()'))}
       </div>
       <div class="calc-out" id="wbg-out"></div>
-      <a class="applink" href="size.html">→ Normalwassertiefe für gegebenes Q in muly·size (Wasserbau → Gerinne)</a>
+      <a class="applink" href="size.html">→ Normalwassertiefe für gegebenes Q in kragr·size (Wasserbau → Gerinne)</a>
     </div>
   `,
 
@@ -8265,7 +8317,7 @@ Object.assign(CONTENT, {
         ${field(tt('Beiwert μ'), inp('wbw-mu', 0.75, 'updatePoleni()'))}
       </div>
       <div class="calc-out" id="wbw-out"></div>
-      <a class="applink" href="size.html">→ Überfallhöhe für gegebenes Q in muly·size (Wasserbau → Wehr)</a>
+      <a class="applink" href="size.html">→ Überfallhöhe für gegebenes Q in kragr·size (Wasserbau → Wehr)</a>
     </div>
   `,
 
@@ -8461,7 +8513,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="section-note"><b>Gauß-Verfahren</b> für größere Systeme: Gleichungen so kombinieren, dass
         unterhalb der Diagonale Nullen entstehen (Dreiecksform), dann von unten nach oben rückwärts einsetzen.
-        So löst auch muly·calc die Steifigkeitsgleichung K·u = F.</div>
+        So löst auch kragr·calc die Steifigkeitsgleichung K·u = F.</div>
       <div class="formula-box">
         Determinante 3×3 (Sarrus):<br>
         det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ − a₁₃a₂₂a₃₁ − a₁₁a₂₃a₃₂ − a₁₂a₂₁a₃₃
@@ -8914,7 +8966,7 @@ Object.assign(CONTENT, {
       ${textTable([tt('Klasse'),'f<sub>ck</sub>','f<sub>cm</sub>','f<sub>ctm</sub>','f<sub>ctk;0,05</sub>','E<sub>cm</sub> [GPa]','ε<sub>c2</sub> [‰]','ε<sub>cu2</sub> [‰]','n'], HOCHFEST.map(([k,fck,cube,fcm,fctm,fctk,Ecm])=>{
         return [k, fck, fcm, deNum(fctm,1), deNum(fctk,1), Ecm, deNum(2+0.085*(fck-50)**0.53,2), deNum(2.6+35*((90-fck)/100)**4,2), deNum(1.4+23.4*((90-fck)/100)**4,2)]; }))}
       <div class="legend">Ab C55/67: f<sub>ctm</sub> = 2,12 · ln(1 + f<sub>cm</sub>/10) · ε<sub>c2</sub> = 2,0 + 0,085 · (f<sub>ck</sub> − 50)<sup>0,53</sup> · ε<sub>cu2</sub> = 2,6 + 35 · ((90 − f<sub>ck</sub>)/100)⁴ · n = 1,4 + 23,4 · ((90 − f<sub>ck</sub>)/100)⁴.
-        Bis C50/60: ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Die Rechner in muly·ref gelten bis C50/60.</div>
+        Bis C50/60: ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Die Rechner in kragr·ref gelten bis C50/60.</div>
     </div>
   `,
 
@@ -9511,10 +9563,10 @@ function render(){
 }
 function pageTitle(){
   const {fach,kapitel,thema} = navState;
-  if(thema) return FAECHER[fach].kapitel[kapitel].themen[thema].title + tt(' — Muly·ref');
-  if(kapitel) return FAECHER[fach].kapitel[kapitel].title + tt(' — Muly·ref');
-  if(fach) return FAECHER[fach].title + tt(' — Muly·ref');
-  return tt('Muly·ref — Nachschlagewerk');
+  if(thema) return FAECHER[fach].kapitel[kapitel].themen[thema].title + tt(' — kragr·ref');
+  if(kapitel) return FAECHER[fach].kapitel[kapitel].title + tt(' — kragr·ref');
+  if(fach) return FAECHER[fach].title + tt(' — kragr·ref');
+  return tt('kragr·ref — Nachschlagewerk');
 }
 
 function renderBreadcrumb(){
@@ -9534,7 +9586,7 @@ function renderBreadcrumb(){
   bc.innerHTML = html;
 }
 
-const footnote = extra => _L`<div class="footnote">Muly·ref v${REF_VERSION}${extra ? ' — '+extra : ''}</div>`.replace('</div>', ` · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('ref',REF_VERSION,location.hash)">${tt('Fehler gefunden? Bitte melden.')}</a></div>`);
+const footnote = extra => _L`<div class="footnote">kragr·ref v${REF_VERSION}${extra ? ' — '+extra : ''}</div>`.replace('</div>', ` · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('ref',REF_VERSION,location.hash)">${tt('Fehler gefunden? Bitte melden.')}</a></div>`);
 
 // ── Start: Fächer + Suche ──────────────────────────
 function viewFaecher(){
@@ -9867,6 +9919,7 @@ const filterBox = (id, ph=tt('Filtern …')) => `<div class="tbl-filter"><input 
 
 // ── Start ──────────────────────────────────────────
 document.getElementById('ref-version').textContent = 'v' + REF_VERSION;
+{ const ls=document.getElementById('lang-sel'); if(ls) ls.value=LANG; }
 window.addEventListener('hashchange', ()=>{ render(); window.scrollTo(0,0); });
 applyI18n(); showLangNotice();
 render();
@@ -9892,14 +9945,16 @@ render();
 // Offline-Nutzung und Installation als App (Service Worker, nur über http/https)
 if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!=='undefined' && /^https?:$/.test(location.protocol||'')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 
-// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von muly.eu.
-const MULY_MAIL = 'kontakt@muly.eu';
+// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von kragr.eu.
+const MULY_MAIL = 'kontakt@kragr.eu';
 function mulyFehlerHref(app, ver, extra){
   let lang='de'; try{ lang=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
-  let body=`Seite: ${location.href}\nModul: Muly·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
+  let body=`Seite: ${location.href}\nModul: kragr·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
   if(extra) body+=('---\n'+extra).slice(0,1400);
-  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in Muly·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in kragr·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
 }
 </script>
+<script data-theme>window.mulyThemeButton && mulyThemeButton(document.getElementById('ref-version'), 'after');</script>
+<script data-theme>(function(){var h=document.querySelector('.app-header'); function s(){ document.documentElement.style.setProperty('--hdr-h', h.offsetHeight+'px'); } s(); addEventListener('resize', s); if(window.ResizeObserver) new ResizeObserver(s).observe(h); })();</script>
 </body>
 </html>

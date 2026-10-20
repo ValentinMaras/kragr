@@ -1,19 +1,191 @@
 <!DOCTYPE html>
-<!-- Muly v0.8.25 -->
+<!-- kragr v0.8.32 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+<script data-theme>
+// Erscheinungsbild (Oktober 2026): automatisch (System), hell, dunkel — localStorage „muly-theme“.
+// Dunkel = ganze Seite invertiert und Farbton zurückgedreht; Bilder und Druckvorschau bleiben wie sie sind.
+(function(){
+  var L={de:['Erscheinungsbild: automatisch','Erscheinungsbild: hell','Erscheinungsbild: dunkel'],en:['Appearance: automatic','Appearance: light','Appearance: dark'],
+         fr:['Apparence : automatique','Apparence : clair','Apparence : sombre'],es:['Apariencia: automática','Apariencia: claro','Apariencia: oscuro']};
+  var mq=window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  function get(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } }
+  function apply(){ var t=get(), d=t==='dark'||(t==='auto'&&mq&&mq.matches), h=document.documentElement; h.classList.toggle('dark',d); h.dataset.theme=t;
+    var b=document.getElementById('theme-btn'); if(b) draw(b,t); }
+  function lang(){ try{ return L[localStorage.getItem('statiq-lang')]||L.de; }catch(e){ return L.de; } }
+  var ICON={auto:'<circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/>',
+    light:'<circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 1.8v2M10 16.2v2M1.8 10h2M16.2 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4"/></g>',
+    dark:'<path d="M15.5 12.6A6.5 6.5 0 0 1 7.4 4.5a6.5 6.5 0 1 0 8.1 8.1z" fill="currentColor"/>'};
+  function draw(b,t){ var i={auto:0,light:1,dark:2}[t]||0; b.innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">'+ICON[t]+'</svg>'; b.title=lang()[i]; b.setAttribute('aria-label',lang()[i]); }
+  window.mulyTheme=function(){ var n={auto:'dark',dark:'light',light:'auto'}[get()]||'auto'; try{ localStorage.setItem('muly-theme',n); }catch(e){} apply(); };
+  window.mulyThemeButton=function(anchor, where){ if(!anchor||document.getElementById('theme-btn')) return; var b=document.createElement('button'); b.type='button'; b.id='theme-btn'; b.className='theme-btn'; b.onclick=window.mulyTheme;
+    where==='before' ? anchor.parentNode.insertBefore(b,anchor) : anchor.parentNode.insertBefore(b,anchor.nextSibling); draw(b,get()); };
+  if(mq&&mq.addEventListener) mq.addEventListener('change',apply);
+  apply();
+})();
+</script>
+<style data-theme>
+  html.dark { filter: invert(.92) hue-rotate(180deg); background:#fff; }
+  html.dark img, html.dark video, html.dark .no-invert { filter: invert(1) hue-rotate(180deg); }
+  .theme-btn { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; padding:0; border:none; border-radius:8px; background:transparent; color:inherit; opacity:.7; cursor:pointer; vertical-align:middle; }
+  .theme-btn:hover { opacity:1; background:rgba(0,0,0,.06); }
+  @media print { html.dark, html.dark img, html.dark .no-invert { filter:none !important; } .theme-btn { display:none !important; } }
+</style>
+<style data-glass>
+  /* Glasleiste (Oktober 2026): Kopfzeile durchscheinend, Inhalt darunter weichgezeichnet, unterer Rand läuft weich aus. */
+  .glass { background:transparent !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; border-bottom-color:transparent !important; isolation:isolate; }
+  .glass::before { content:''; position:absolute; left:0; right:0; top:0; bottom:-16px; z-index:-1; pointer-events:none;
+    background:linear-gradient(to bottom, rgba(255,255,255,.82) 0%, rgba(255,255,255,.6) 70%, rgba(255,255,255,0) 100%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%); backdrop-filter:blur(14px) saturate(160%);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 68%,transparent 100%); mask-image:linear-gradient(to bottom,#000 0%,#000 68%,transparent 100%); }
+  .glass.glass-flat::before { bottom:0; -webkit-mask-image:none; mask-image:none; background:rgba(255,255,255,.72); }
+  @media print { .glass::before { display:none; } }
+</style>
+<style data-proj>
+  /* Kopfzeile und Projekt-Menü — identisch in calc und size (calc v0.8.28 · size v0.5.46) */
+  .app-header .header-links { gap:16px; white-space:nowrap; }
+  .proj-btn { position:relative; display:inline-flex; align-items:center; gap:7px; height:30px; padding:0 11px 0 9px; border:none; border-radius:9px; background:#efeff1;
+    font-family:inherit; font-size:13px; font-weight:650; line-height:1; color:var(--text,#0a0a0a); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
+  .proj-btn::after { content:none !important; }
+  .proj-btn:hover { background:#e4e4e7; }
+  .proj-btn svg { flex:none; }
+  .proj-btn .pb-dot { width:7px; height:7px; border-radius:50%; background:#b8b8bd; flex:none; }
+  .proj-btn[data-st="saved"] .pb-dot { background:#16a34a; } .proj-btn[data-st="changed"] .pb-dot, .proj-btn[data-st="new"] .pb-dot { background:#f59e0b; }
+  .proj-btn[data-st="none"] .pb-dot { display:none; }
+  .proj-btn.open { background:#0a0a0a; color:#fff; }
+  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#0a0a0a); cursor:pointer;
+    background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
+  .lang-sel:hover { background-color:#e4e4e7; }
+  @media (max-width:560px){ .app-header .header-links { gap:12px; } .header-links .version { display:none; }
+    .proj-btn { padding:0 9px; } .proj-btn .pb-tx { display:none; } .proj-btn .pb-dot { position:absolute; top:5px; right:5px; width:6px; height:6px; box-shadow:0 0 0 2px #efeff1; } }
+  @media (max-width:380px){ .app-header .header-links { gap:9px; } }
+  .proj-panel { display:none; position:fixed; z-index:60; top:calc(var(--hdr-h,58px) + 4px); right:16px; width:min(420px, calc(100vw - 32px)); max-height:calc(100vh - var(--hdr-h,58px) - 24px);
+    overflow:auto; background:#fff; border-radius:18px; padding:8px; box-shadow:0 18px 48px rgba(0,0,0,.16), 0 2px 8px rgba(0,0,0,.06); font-family:Inter, system-ui, -apple-system, sans-serif; color:#0a0a0a; }
+  .proj-panel.open { display:block; }
+  @media (max-width:560px){ .proj-panel { left:12px; right:12px; width:auto; } }
+  .proj-panel .pp-sec { background:#f6f6f7; border:none; border-radius:12px; padding:12px 14px; margin:0 0 6px; box-shadow:none; }
+  .proj-panel .pp-h { display:block; font-size:12px; font-weight:700; color:#8a8a8a; margin:0 0 6px; padding:0; letter-spacing:0; text-transform:none; }
+  .proj-panel .pp-row { display:flex; align-items:center; gap:10px; }
+  .proj-panel .pp-name { flex:1; min-width:0; font-size:15px; font-weight:750; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .proj-panel .pp-st { display:flex; align-items:center; gap:6px; margin-top:4px; font-size:12.5px; color:#6b6b6b; }
+  .proj-panel .pp-st i { width:7px; height:7px; border-radius:50%; background:#f59e0b; flex:none; }
+  .proj-panel .pp-st.saved i { background:#16a34a; } .proj-panel .pp-st.none { display:none; }
+  .proj-panel .pp-msg { font-size:12.5px; color:#3f3f46; margin-top:6px; } .proj-panel .pp-msg:empty { display:none; }
+  .proj-panel .pp-btn { display:inline-flex; align-items:center; border:none; border-radius:9px; padding:7px 13px; font-family:inherit; font-size:13px; font-weight:700; line-height:1.2;
+    background:#0a0a0a; color:#fff; cursor:pointer; white-space:nowrap; text-decoration:none; flex:none; }
+  .proj-panel .pp-btn:disabled { opacity:.35; cursor:default; }
+  .proj-panel .pp-btn.small { padding:5px 10px; font-size:12px; }
+  .proj-panel .pp-btn.sec { background:#e6e6e9; color:#0a0a0a; } .proj-panel .pp-btn.sec:hover { background:#dcdce0; }
+  .proj-panel .pp-btn.danger { background:transparent; color:#b42318; } .proj-panel .pp-btn.danger.armed { background:#b42318; color:#fff; }
+  .proj-panel .pp-item { display:flex; align-items:center; gap:6px; padding:8px 0; border-top:1px solid #e7e7ea; background:none; margin:0; }
+  .proj-panel .pp-item:first-child { border-top:none; padding-top:2px; }
+  .proj-panel .pp-iname { flex:1; min-width:0; font-size:13.5px; font-weight:650; overflow-wrap:anywhere; }
+  .proj-panel .pp-item.current .pp-iname::before { content:'●'; color:var(--accent,#2563eb); font-size:9px; vertical-align:2px; margin-right:6px; }
+  .proj-panel .pp-meta { display:block; font-size:12px; font-weight:500; color:#8a8a8a; margin-top:2px; }
+  .proj-panel .pp-empty { font-size:12.5px; color:#8a8a8a; line-height:1.45; }
+  .proj-panel .pp-more { display:inline-block; margin-top:6px; border:none; background:none; padding:0; font-family:inherit; font-size:12.5px; font-weight:650; color:#52525b; cursor:pointer; }
+  .proj-panel .pp-foot { display:block; padding:8px 8px 4px; font-size:13px; font-weight:650; color:var(--accent,#2563eb); text-decoration:none; }
+  @media print { .proj-panel { display:none !important; } }
+</style>
+<script data-proj>
+// Gemeinsames Projekt-Menü (calc und size): Grundgerüst, Speicherstand am Knopf, Öffnen/Schließen. Die Inhalte füllt jede App selbst.
+window.mulyProj = {
+  skeleton: function(T){
+    var p=document.createElement('div'); p.id='proj-panel'; p.className='proj-panel'; p.setAttribute('role','dialog');
+    p.innerHTML='<section class="pp-sec pp-cur"><div class="pp-h" id="pp-h-cur"></div><div class="pp-row"><div class="pp-name" id="pp-name"></div><span id="pp-act"></span></div>'
+      +'<div class="pp-st none" id="pp-st"><i></i><span></span></div><div class="pp-msg" id="pp-msg"></div></section>'
+      +'<section class="pp-sec pp-saved"><div class="pp-h" id="pp-h-list"></div><div id="pp-list"></div></section><div id="pp-extra"></div>'
+      +'<a class="pp-foot proj-link" id="pp-foot" href="projekt.html"></a>';
+    document.body.appendChild(p); return p;
+  },
+  state: function(st, text){   // st: none | new | changed | saved
+    var b=document.getElementById('proj-btn'), s=document.getElementById('pp-st');
+    if(b){ b.dataset.st=st; var l=(b.querySelector('.pb-tx')||{}).textContent||''; b.title = text ? l+' — '+text : l; b.setAttribute('aria-label', b.title); }
+    if(s){ s.className='pp-st '+st; s.querySelector('span').textContent=text||''; }
+  },
+  fmt: function(iso, loc){ try{ var d=new Date(iso); return d.toLocaleDateString(loc,{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
+};
+</script>
+<script data-proj>
+// calc: Projekt-Menü wie in size (v0.8.28). Aktuelle Berechnung mit Speicherstand, gespeicherte Berechnungen mit „→ size“,
+// keine doppelten Kopien derselben Berechnung. Läuft nach dem Hauptskript (DOMContentLoaded), nutzt dessen globale Namen.
+(function(){
+  var MAX=6;
+  function L(k){ try{ return tr(k); }catch(e){ return k; } }
+  function sysOf(t){ var sid=t==='cantilever'?'cant':t, lc=(typeof lastCalc!=='undefined')&&lastCalc[sid]; if(!lc) return null;
+    return {type:t, geometry:lc.geometry, supports:lc.supports, loads:lc.loads, stiffness:lc.stiffness, hinges:lc.hinges}; }
+  function sig(s){ if(!s||!s.geometry) return ''; var fr=s.type==='frame', g=s.geometry, l=s.loads||{};
+    return JSON.stringify([s.type, fr?[g.b,g.h,g.hA,g.hB]:g, s.supports||null, fr?[l.vertical||[],l.horizontal||[]]:l, s.stiffness||null, (s.hinges&&s.hinges.length)?s.hinges:null]); }
+  function entries(){ var out=[]; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k||k.indexOf('statiq_sdf_')!==0) continue;
+      try{ var e=JSON.parse(localStorage.getItem(k)); if(e&&e.sdf&&e.sdf.module==='calc') out.push({key:k, name:e.name, sdf:e.sdf}); }catch(_){} } }catch(_){}
+    return out.sort(function(a,b){ return b.key.localeCompare(a.key); }); }
+  function savedKey(t){ var s=sig(sysOf(t)); if(!s) return null; var E=entries(); for(var i=0;i<E.length;i++) if(sig(E[i].sdf.system)===s) return E[i]; return null; }
+  function curName(t){ var s=sysOf(t), tabs=(calcTranslations[calcLang]||calcTranslations.en).tabs, lab={beam:tabs[0],cantilever:tabs[1],cont:tabs[2],frame:tabs[3]}[t]||t;
+    if(!s) return lab; var g=s.geometry;
+    if(t==='cont') return trf('nameSpans', lab, g.spans.length, g.spans.join('/'));
+    if(t==='frame') return lab+' '+supW(s.supports.A)+'/'+supW(s.supports.B)+' b='+g.b+'m h='+g.hA+'/'+g.hB+'m';
+    return lab+' L='+(g.L||'?')+'m'; }
+  function esc(x){ return String(x).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function state(){
+    if(!document.getElementById('pp-name')) return;
+    var t=curTab(), sv=document.getElementById('pp-save');
+    if(t==='saved'){ document.getElementById('pp-name').textContent=L('ppNoSys'); sv.disabled=true; mulyProj.state('none',''); return; }
+    sv.disabled=false; document.getElementById('pp-name').textContent=curName(t);
+    var e=savedKey(t);
+    e ? mulyProj.state('saved', trf('ppSaved', mulyProj.fmt(e.sdf.timestamp, LOCALE()))) : mulyProj.state('new', L('ppNew'));
+  }
+  function list(){
+    var E=entries(), cur=savedKey(curTab()), el=document.getElementById('pp-list');
+    el.innerHTML = E.length ? E.slice(0,MAX).map(function(e){
+        return '<div class="pp-item'+(cur&&cur.key===e.key?' current':'')+'"><div class="pp-iname">'+esc(e.name)+'<span class="pp-meta">'+esc(mulyProj.fmt(e.sdf.timestamp, LOCALE()))+'</span></div>'
+          +'<a class="pp-btn small sec" href="size.html#calc='+encodeURIComponent(e.key)+'" title="'+esc(L('ppToSizeT'))+'">→ size</a></div>'; }).join('')
+        +'<button type="button" class="pp-more" onclick="closeProj(); showTab(\'saved\'); renderSavedTab();">'+esc(L('ppAllCalc'))+(E.length>MAX?' ('+E.length+')':'')+'</button>'
+      : '<div class="pp-empty">'+esc(L('ppNone'))+'</div>';
+  }
+  function render(){
+    document.querySelector('#proj-btn .pb-tx').textContent=L('projBtn');
+    document.getElementById('pp-h-cur').textContent=L('ppCur'); document.getElementById('pp-h-list').textContent=L('ppList');
+    document.getElementById('pp-foot').textContent=L('ppAllPos'); document.getElementById('pp-save').textContent=L('ppSave');
+    state(); list();
+  }
+  function msg(t){ var m=document.getElementById('pp-msg'); if(m) m.textContent=t||''; }
+  window.toggleProj=function(e){ e&&e.stopPropagation(); var o=!document.getElementById('proj-panel').classList.contains('open'); if(o){ msg(''); render(); }
+    document.getElementById('proj-panel').classList.toggle('open',o); document.getElementById('proj-btn').classList.toggle('open',o); };
+  window.closeProj=function(){ var p=document.getElementById('proj-panel'); if(p) p.classList.remove('open'); var b=document.getElementById('proj-btn'); if(b) b.classList.remove('open'); };
+  window.projCalcState=state;
+  document.addEventListener('DOMContentLoaded', function(){
+    if(typeof saveCalc!=='function' || !document.getElementById('proj-btn')) return;
+    mulyProj.skeleton();
+    var b=document.createElement('button'); b.type='button'; b.className='pp-btn'; b.id='pp-save'; document.getElementById('pp-act').appendChild(b);
+    b.onclick=function(){ var t=curTab(); if(t==='saved') return; if(savedKey(t)){ msg(L('ppAlready')); return; }
+      var n=entries().length; navSave(); var ok=entries().length>n; msg(ok?trf('ppSavedMsg', curName(t)):''); render(); };
+    // keine doppelte Kopie derselben Berechnung (auch über die Knöpfe „Speichern“ unter dem Rechenweg)
+    var _sc=window.saveCalc, _sf=window.saveFrameCalc;
+    function dupe(t, btnSel){ var e=savedKey(t); if(!e) return false; var btn=document.querySelector(btnSel);
+      if(btn){ var o=btn.innerHTML; btn.textContent=L('ppAlreadyS'); setTimeout(function(){ btn.innerHTML=o; },1500); } return true; }
+    window.saveCalc=function(sys){ if(sys!=='frame' && dupe(sys, '[onclick="saveCalc(\''+sys+'\')"]')) return; var r=_sc.apply(this, arguments); state(); return r; };
+    window.saveFrameCalc=function(){ if(dupe('frame', '[onclick="saveFrameCalc()"]')) return; var r=_sf.apply(this, arguments); state(); return r; };
+    document.addEventListener('click', function(e){ if(!e.target.closest('#proj-panel') && !e.target.closest('#proj-btn')) closeProj(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeProj(); });
+    var h=document.querySelector('.app-header'); function hh(){ document.documentElement.style.setProperty('--hdr-h', h.offsetHeight+'px'); } hh(); addEventListener('resize', hh);
+    var _sl=window.setCalcLang; if(_sl) window.setCalcLang=function(){ var r=_sl.apply(this, arguments); render(); return r; };
+    render(); setInterval(function(){ if(!document.hidden) state(); }, 1200);
+  });
+})();
+</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muly — Structural Analysis</title>
+  <title>kragr — Structural Analysis</title>
   <meta name="description" content="Structural analysis app for civil engineering students — calculate shear forces, bending moments and section properties." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" />
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Muly" />
+<meta name="apple-mobile-web-app-title" content="kragr" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -136,6 +308,37 @@
     .rep-dia-t { font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; margin-bottom: 4px; }
     .rep-dia svg { display: block; width: 100%; height: auto; }
     .rep-foot { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 20px; display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; }
+    /* Bericht als Rechenblatt (calc v0.8.29): Schriftfeld, Abschnitte mit Linie, Rechenweg auf zartem Karo, Ergebnisse doppelt unterstrichen, Schnittgrößen schraffiert */
+    .rb { max-width:760px; margin:0 auto; font-family:Inter, 'DM Sans', sans-serif; color:#111; }
+    .rb-sf { display:grid; grid-template-columns:auto 1.6fr 1fr 1fr; border:1.4px solid #111; font-size:10px; color:#555; }
+    .rb-sf > div { padding:5px 9px; border-right:1px solid #111; min-width:0; }
+    .rb-sf > div:last-child { border-right:none; }
+    .rb-sf b { display:block; font-size:12.5px; color:#111; font-weight:700; margin-top:1px; overflow-wrap:anywhere; }
+    .rb-logo { display:flex; align-items:center; gap:7px; font-weight:800; font-size:16px; letter-spacing:-.03em; color:#111; }
+    .rb-logo svg { flex:none; }
+    .rb-title { font-size:22px; font-weight:800; letter-spacing:-.02em; margin:18px 0 2px; }
+    .rb-subt { font-size:12px; color:#666; margin-bottom:6px; }
+    .rb-h { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin:20px 0 8px; padding-bottom:4px; border-bottom:1.2px solid #111; break-after:avoid; }
+    .rb-sys { margin:4px 0 8px; } .rb .rb-sys.rep-sys-img { background:none; border:none; padding:0; } .rb-sys svg { max-width:560px; margin:0 auto; display:block; }
+    .rb-mono { font-family:'DM Mono', monospace; font-size:12.5px; line-height:1.85; }
+    .rb-mono .k { color:#666; display:inline-block; min-width:9.5em; }
+    .rb-dim { color:#777; font-size:11px; }
+    .rb-grid { background-image:linear-gradient(#e8edf4 1px,transparent 1px),linear-gradient(90deg,#e8edf4 1px,transparent 1px); background-size:12px 12px; padding:8px 10px; margin:0 -10px; }
+    .rb .steps { color:#222; font-size:12px; }
+    .rb .steps b, .rb-res { color:#111; font-weight:700; border-bottom:3px double #111; padding:0 1px; }
+    .rb .st { break-inside:avoid; }
+    .rb .st-n { border-color:#111; color:#111; }
+    .rb-tab { width:100%; border-collapse:collapse; font-family:'DM Mono', monospace; font-size:12.5px; margin-top:4px; }
+    .rb-tab th { text-align:right; font-weight:700; padding:5px 8px; border-bottom:1.2px solid #111; }
+    .rb-tab td { text-align:right; padding:5px 8px; border-bottom:1px solid #ddd; }
+    .rb-tab th:first-child, .rb-tab td:first-child { text-align:left; }
+    .rb-note { font-size:11px; color:#666; margin-top:6px; line-height:1.5; }
+    .rb-dias { display:grid; grid-template-columns:1fr; gap:14px; }
+    @media (min-width:1000px) { .rb-dias { grid-template-columns:1fr 1fr; } }
+    .rb-dia { break-inside:avoid; } .rb-dia-t { font-family:'DM Mono', monospace; font-size:11.5px; font-weight:700; margin-bottom:2px; }
+    .rb-dia svg { display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+    .rb-foot { display:flex; justify-content:space-between; gap:12px; font-size:10px; color:#777; border-top:1px solid #ccc; margin-top:22px; padding-top:6px; }
+    @media print { .rb { max-width:none; } .rb-dias { grid-template-columns:1fr 1fr; } .rb-grid { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .rb-h { break-after:avoid; } .rb-dia, .rb-tab, .rb .st { break-inside:avoid; } }
     /* Umschalter (Lager, Kopfhalterung) — hatten bisher keinen Stil */
     .toggle-btn { padding: 6px 10px; margin: 0 4px 4px 0; font-size: 12px; font-family: 'DM Sans', sans-serif;
                   border: 1px solid var(--border); border-radius: var(--radius-sm, 6px); background: var(--surface);
@@ -382,7 +585,7 @@
       /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
     .app-header { min-height:58px; box-sizing:border-box; }
 </style>
-<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}  /* Übungsmodus */
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  /* Übungsmodus */
   .ueb-tog { border:none; background:#efeff1; border-radius:10px; padding:7px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); margin:0 0 10px; }
   .ueb-tog.on { background:var(--accent,#2563eb); color:#fff; }
   body.uebung .results-grid { display:none !important; }
@@ -539,13 +742,14 @@
 </div>
 
 <!-- ═══════════════ HEADER ═══════════════ -->
-<header class="app-header">
-  <a class="logo" href="index.html" title="Startseite">muly<span>μ</span></a>
+<header class="app-header glass">
+  <a class="logo" href="index.html" title="Startseite">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
   <div class="header-links">
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.25</span>
+    <span class="version">v0.8.32</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -648,7 +852,7 @@
       <div class="diagram-label" id="diag-label-beam">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="0">Muly</div>
+  <div class="footnote" data-foot="0">kragr</div>
 </main>
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
@@ -715,7 +919,7 @@
       <div class="diagram-label" id="diag-label-cant">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="1">Muly</div>
+  <div class="footnote" data-foot="1">kragr</div>
 </main>
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
@@ -784,7 +988,7 @@
       <div class="diagram-label" id="diag-label-cont">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="2">Muly</div>
+  <div class="footnote" data-foot="2">kragr</div>
 </main>
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
@@ -929,7 +1133,7 @@
       <div class="diagram-label" id="diag-label-frame">Bending Moment M — kNm</div>
     </div>
 
-  <div class="footnote" data-foot="3">Muly</div>
+  <div class="footnote" data-foot="3">kragr</div>
 </main>
 
 <script>
@@ -1017,7 +1221,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.25';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.32';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -2383,7 +2587,7 @@ function refreshFrameInputs(){
 }
 
 // ── STATIQ DATA FORMAT (SDF) — Save/Load ─────────────────────────
-// Standard format for sharing data between muly·calc and muly·size
+// Standard format for sharing data between kragr·calc and kragr·size
 function buildSDF(){
   // Stand der letzten Berechnung (lastCalc.frame); ohne Berechnung: aktuelle Eingaben
   const lc = lastCalc.frame;
@@ -2412,7 +2616,7 @@ function buildSDF(){
   if(diagData.frame?.members){
     const mems = diagData.frame.members;
     ['left_col','rafter','right_col'].forEach((name,i)=>{
-      // gleichmäßige Arrays (NP+1 Werte) — so erwartet sie der Bericht/muly·size
+      // gleichmäßige Arrays (NP+1 Werte) — so erwartet sie der Bericht/kragr·size
       const u = mems[i]?.uni;
       if(mems[i]) memberData[name]={
         M: u ? u.M : mems[i].M,
@@ -2468,7 +2672,7 @@ function saveCalc(sys){
   const results = {Mmax:lc.maxima.Mmax, Qmax:lc.maxima.Qmax, Nmax:lc.maxima.Nmax, w:lc.maxima.w,
                    reactions:lc.reactions, supportMoments:lc.supportMoments||null};
 
-  // gleichmäßige Arrays je Stab (für muly·size und ältere Berichte)
+  // gleichmäßige Arrays je Stab (für kragr·size und ältere Berichte)
   const memberData={};
   data.members.forEach((mem,i)=>{
     const u=mem.uni;
@@ -2485,7 +2689,8 @@ function saveCalc(sys){
     module:'calc',
     system:{type:sys, geometry:geom, supports:lc.supports, loads:lc.loads, stiffness:lc.stiffness, svgSnapshot, ...(lc.hinges&&lc.hinges.length?{hinges:lc.hinges}:{})},
     results,
-    plot: lc.plot            // exakte Verläufe für den Bericht (ab v0.8.2)
+    plot: lc.plot,           // exakte Verläufe für den Bericht (ab v0.8.2)
+    rw: rwForSave(sys)       // Rechenweg für den Bericht (ab v0.8.29)
   };
   const name = sys==='cont'
     ? trf('nameSpans', sysLabels[sys], geom.spans.length, geom.spans.join('/'))
@@ -2498,8 +2703,11 @@ function saveCalc(sys){
   }catch(e){ showCalcMsgs(sid,[{type:'error', text:msgText('storageFull')}]); }
 }
 
+// Rechenweg zum Stand der Berechnung (Bericht als Rechenblatt, v0.8.29)
+function rwForSave(sys){ try{ const r = sys==='beam' ? rwBeam('beam') : sys==='cantilever' ? rwBeam('cant') : sys==='cont' ? rwCont() : rwFrame(); return r && r.S ? r.S : null; }catch(e){ return null; } }
+
 function saveFrameCalc(){
-  const sdf = buildSDF();
+  const sdf = buildSDF(); sdf.rw = rwForSave('frame');
   if(sdf.results.Mmax===0 && sdf.results.Qmax===0){
     showCalcMsgs('frame',[{type:'error', text:msgText('calcFirst')}]);
     return;
@@ -2593,7 +2801,7 @@ function renderSavedTab(){
       <div style="display:flex;gap:8px">
         <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif">${tr('report')}</button>
         ${sdf.system?.type==='frame' ? `<button onclick="loadSDF('${k}')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600">${tr('load')}</button>` : ''}
-        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in muly·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:DM Sans,sans-serif">${tr('toSize')}</a>` : ''}
+        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in kragr·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:DM Sans,sans-serif">${tr('toSize')}</a>` : ''}
         <button onclick="exportSDF('${k}')" style="padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-size:12px">↓</button>
       </div>
     </div>
@@ -2622,7 +2830,7 @@ function closeReport(){
 // der App am Tragwerk gezeichnet. Ältere Speicherungen: Ersatzdarstellung.
 const supW = t => ({fixed:tr('supFixedW'), pin:tr('supPinW'), roller:tr('supRollerW')})[t] || t || '—';
 const memW = m => ({rafter:tr('rafter'), left:tr('leftCol'), right:tr('rightCol')})[m] || m;
-const num = v => { const n=+v; return Number.isFinite(n) ? +n.toFixed(3) : v; };
+const num = v => { const n=+v; return Number.isFinite(n) ? (+n.toFixed(3)).toLocaleString(LOCALE(), {maximumFractionDigits:3, useGrouping:false}) : v; };   // Dezimalkomma je Sprache (v0.8.29)
 
 // ids in einem gespeicherten SVG eindeutig machen (Pfeilspitzen, Muster), sonst
 // greifen gleichnamige ids aus ausgeblendeten Tabs und die Pfeile fehlen
@@ -2716,69 +2924,87 @@ function renderReport(name, sdf){
     : (r.w!=null ? `w = ${fmt2(r.w)} mm` : null);
   const maxCard = (lbl, val, unit, col) => `<div class="rep-max" style="--c:${col}"><div class="rep-max-l">${lbl}</div><div class="rep-max-v">${val}</div><div class="rep-max-u">${unit}</div></div>`;
 
-  const reactionRows=(r.reactions||[]).map(rx=>`<tr><td>${escapeHtml(rx.support)}</td><td>${escapeHtml(rx.H??'—')}</td><td>${escapeHtml(rx.V??'—')}</td><td>${escapeHtml(rx.M??'—')}</td></tr>`).join('');
+  const rxv = v => (v==null || v==='' || !isFinite(+v)) ? escapeHtml(v??'—') : (+v).toLocaleString(LOCALE(), {minimumFractionDigits:2, maximumFractionDigits:2});
+  const reactionRows=(r.reactions||[]).map(rx=>`<tr><td>${escapeHtml(rx.support)}</td><td>${rxv(rx.H)}</td><td>${rxv(rx.V)}</td><td>${rxv(rx.M)}</td></tr>`).join('');
   const supM = (r.supportMoments||[]).map(m=>`M<sub>${m.support}</sub> = ${fmt2(m.M)} kNm`).join(', ');
   const snapshot = S.svgSnapshot ? uniquifySvgIds(S.svgSnapshot.replace(/<svg /,'<svg style="width:100%;height:auto;display:block" '), 'rep-sys') : '';
   const stiff = reportStiffness(S);
   const showN = !(S.type==='cont') && (legacy || Math.max(0,...(sdf.plot?.N||sdf.plot?.allN||[0]).map(Math.abs))>1e-6);
 
+  const nfR = v => (+v||0).toLocaleString(LOCALE(), {minimumFractionDigits:2, maximumFractionDigits:2});
+  const ICO = '<svg width="24" height="24" viewBox="0 0 110 110" aria-hidden="true"><rect x="1" y="1" width="108" height="108" rx="24" fill="#fff" stroke="#111" stroke-width="3"/><g transform="translate(-6 5)"><rect x="30" y="36" width="18" height="56" fill="#0a0a0a"/><rect x="30" y="36" width="60" height="15" rx="2" fill="#0a0a0a"/><line x1="83" y1="8" x2="83" y2="26" stroke="#0a0a0a" stroke-width="5"/><path d="M74 23 L83 35 L92 23 Z" fill="#0a0a0a"/></g></svg>';
+  const row = (k, v) => `<div><span class="k">${k}</span>${v}</div>`;
+  const res = (lbl, v, unit) => `<div><span class="k">${lbl}</span>= <span class="rb-res">${v} ${unit}</span></div>`;
+  const dia = (k, title) => `<div class="rb-dia"><div class="rb-dia-t">${title}</div><svg id="report-svg-${k}"></svg></div>`;
   document.getElementById('report-content').innerHTML=`
-    <div class="rep">
-      <div class="rep-head">
-        <div>
-          <div class="rep-brand">STATIQ</div>
-          <div class="rep-sub">${tr('repSub')}</div>
-        </div>
-        <div class="rep-meta"><div>${date}</div><div>v${escapeHtml(sdf.statiq_version||'—')}</div></div>
+    <div class="rep rb">
+      <div class="rb-sf">
+        <div class="rb-logo">${ICO}${REP_BRAND}·calc</div>
+        <div>${tr('repPosLbl')}<b>${escapeHtml(name)}</b></div>
+        <div>${tr('repDateLbl')}<b>${date}</b></div>
+        <div>${tr('repVerLbl')}<b>calc v${escapeHtml(sdf.statiq_version||'—')}</b></div>
       </div>
-      <div class="rep-title">${escapeHtml(name)}</div>
+      <div class="rb-title">${escapeHtml(sysLabel)}</div>
+      <div class="rb-subt">${tr('repSub').split(' · ').pop()} · ${reportGeometry(S)}</div>
 
-      ${sec(tr('repSystem'))}
-      <div class="rep-sys">
-        ${snapshot ? `<div class="rep-sys-img">${snapshot}</div>` : ''}
-        <div class="rep-grid">
-          ${card(tr('repType'), sysLabel)}
-          ${card(tr('repGeom'), reportGeometry(S))}
-          ${card(tr('repSupports'), lines(reportSupports(S)))}
-          ${stiff ? card(tr('repStiff'), lines(stiff)) : ''}
-        </div>
+      <div class="rb-h">${tr('repSystem')}</div>
+      ${snapshot ? `<div class="rb-sys rep-sys-img">${snapshot}</div>` : ''}
+      <div class="rb-mono">
+        ${row(tr('repType'), sysLabel)}
+        ${row(tr('repGeom'), reportGeometry(S))}
+        ${reportSupports(S).map((x,i)=>row(i?'':tr('repSupports'), x)).join('')}
+        ${stiff ? stiff.map((x,i)=>row(i?'':tr('repStiff'), x)).join('') : ''}
       </div>
 
-      ${sec(tr('repActions'))}
-      <div class="rep-loads">${lines(reportLoads(S))}</div>
+      <div class="rb-h">${tr('repActions')}</div>
+      <div class="rb-mono">${lines(reportLoads(S))}</div>
 
-      ${sec(tr('repMax'))}
-      <div class="rep-maxrow">
-        ${maxCard('|M|<sub>max</sub>', (+r.Mmax||0).toFixed(2), 'kNm', '#2d6a4f')}
-        ${maxCard('|Q|<sub>max</sub>', (+r.Qmax||0).toFixed(2), 'kN', '#1d4ed8')}
-        ${maxCard('|N|<sub>max</sub>', (+r.Nmax||0).toFixed(2), 'kN', '#92400e')}
-        ${defo ? maxCard(tr('repDefo'), `<span style="font-size:15px">${defo}</span>`, '', '#7c3aed') : ''}
+      ${sdf.rw && sdf.rw.length ? `<div class="rb-h">${rwT('title')}</div><div class="rb-grid"><div class="steps">${rwSteps(sdf.rw)}</div></div>` : ''}
+
+      <div class="rb-h">${tr('repMax')}</div>
+      <div class="rb-mono">
+        ${res('|M|<sub>max</sub>', nfR(r.Mmax), 'kNm')}
+        ${res('|Q|<sub>max</sub>', nfR(r.Qmax), 'kN')}
+        ${res('|N|<sub>max</sub>', nfR(r.Nmax), 'kN')}
+        ${S.type==='frame' ? (r.u!=null ? res('u<sub>max</sub>', nfR(r.u), 'mm')+res('w<sub>max</sub>', nfR(r.w), 'mm') : '') : (r.w!=null ? res('w<sub>max</sub>', nfR(r.w), 'mm') : '')}
       </div>
 
-      ${reactionRows ? `<div class="rep-block">${sec(tr('repReactions'))}
-      <table class="rep-table">
+      ${reactionRows ? `<div class="rep-block"><div class="rb-h">${tr('repReactions')}</div>
+      <table class="rb-tab">
         <thead><tr><th>${tr('thSupport')}</th><th>H [kN]</th><th>V [kN]</th><th>M [kNm]</th></tr></thead>
         <tbody>${reactionRows}</tbody>
       </table>
-      <div class="rep-note">${tr('repSign')}${supM ? '<br>'+tr('repSupM')+': '+supM : ''}</div></div>` : ''}
+      <div class="rb-note">${tr('repSign')}${supM ? '<br>'+tr('repSupM')+': '+supM : ''}</div></div>` : ''}
 
-      ${sec(tr('repDiagrams'))}
-      ${legacy ? `<div class="rep-note">${tr('repLegacy')}</div>` : ''}
-      <div id="report-diagrams" class="rep-diagrams">
-        <div class="rep-dia"><div class="rep-dia-t" style="color:#2d6a4f">${tr('repM')}</div><svg id="report-svg-M"></svg></div>
-        <div class="rep-dia"><div class="rep-dia-t" style="color:#1d4ed8">${tr('repQ')}</div><svg id="report-svg-Q"></svg></div>
-        ${showN ? `<div class="rep-dia"><div class="rep-dia-t" style="color:#92400e">${tr('repN')}</div><svg id="report-svg-N"></svg></div>` : ''}
-        <div class="rep-dia"><div class="rep-dia-t" style="color:#7c3aed">${S.type==='frame'?tr('repUW'):tr('repW')} [mm]</div><svg id="report-svg-w"></svg></div>
+      <div class="rb-h">${tr('repDiagrams')}</div>
+      ${legacy ? `<div class="rb-note">${tr('repLegacy')}</div>` : ''}
+      <div id="report-diagrams" class="rb-dias">
+        ${dia('M', tr('repM'))}${dia('Q', tr('repQ'))}${showN ? dia('N', tr('repN')) : ''}${dia('w', (S.type==='frame'?tr('repUW'):tr('repW'))+' [mm]')}
       </div>
 
-      ${(typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : '')}
-      <div class="rep-foot">
-        <span>muly·calc · valentinmaras.github.io/statiq</span>
-        <span>${date}</span>
-      </div>
+      ${(typeof statiqDisclaimer==='function' ? '<div class="rb-note" style="margin-top:20px">'+statiqDisclaimer()+'</div>' : '')}
+      <div class="rb-foot"><span>${REP_BRAND}·calc · valentinmaras.github.io/statiq</span><span>${date} · calc v${escapeHtml(sdf.statiq_version||'—')}</span></div>
     </div>
   `;
-  setTimeout(()=>renderReportDiagrams(sdf), 0);
+  setTimeout(()=>{ renderReportDiagrams(sdf); repMono(); }, 0);
+}
+
+// Bericht als Rechenblatt: Diagramme schwarz-weiß, Flächen schraffiert (senkrecht zur Stabachse), kein Raster
+const REP_BRAND = 'kragr';
+function repMono(){
+  const host=document.getElementById('report-diagrams'); if(!host) return;
+  const COL=Object.values(diagColors).concat(['#2d6a4f','#1d4ed8','#92400e','#7c3aed']).map(c=>c.toLowerCase()), FILL=Object.values(diagFill);
+  host.querySelectorAll('svg').forEach((svg,k)=>{
+    const NS='http://www.w3.org/2000/svg', id='rbh'+k;
+    let defs=svg.querySelector('defs'); if(!defs){ defs=document.createElementNS(NS,'defs'); svg.insertBefore(defs, svg.firstChild); }
+    defs.insertAdjacentHTML('beforeend', `<pattern id="${id}v" width="5" height="5" patternUnits="userSpaceOnUse"><line x1="2.5" y1="0" x2="2.5" y2="5" stroke="#111" stroke-width=".7"/></pattern><pattern id="${id}h" width="5" height="5" patternUnits="userSpaceOnUse"><line x1="0" y1="2.5" x2="5" y2="2.5" stroke="#111" stroke-width=".7"/></pattern>`);
+    svg.querySelectorAll('[fill]').forEach(el=>{ const f=(el.getAttribute('fill')||'').toLowerCase();
+      if(/^url\(#w?grid/.test(f) || f==='#f8fdf8'){ el.setAttribute('fill', f==='#f8fdf8' ? '#fff' : 'none'); return; }
+      if(FILL.includes(el.getAttribute('fill'))){ let bb={width:1,height:0}; try{ bb=el.getBBox(); }catch(e){}
+        el.setAttribute('fill', `url(#${id}${bb.height>bb.width*1.4?'h':'v'})`); el.setAttribute('stroke','none'); return; }
+      if(COL.includes(f)) el.setAttribute('fill','#111'); });
+    svg.querySelectorAll('[stroke]').forEach(el=>{ if(COL.includes((el.getAttribute('stroke')||'').toLowerCase())) el.setAttribute('stroke','#111'); });
+  });
 }
 
 // Diagramme im Bericht: mit den App-Funktionen am Tragwerk zeichnen
@@ -4533,7 +4759,7 @@ const I18N_UI = {
   "supRollerW": "Roller",
   "wLeft": "left",
   "wRight": "right",
-  "repSub": "muly·calc · calculation report",
+  "repSub": "kragr·calc · calculation report",
   "errRep": "Found an error? Please report it.",
   "uebTog": "Practice mode",
   "uebEnd": "End practice mode",
@@ -4654,7 +4880,7 @@ const I18N_UI = {
   "supRollerW": "Loslager",
   "wLeft": "links",
   "wRight": "rechts",
-  "repSub": "muly·calc · Berechnungsprotokoll",
+  "repSub": "kragr·calc · Berechnungsprotokoll",
   "errRep": "Fehler gefunden? Bitte melden.",
   "uebTog": "Übungsmodus",
   "uebEnd": "Übungsmodus beenden",
@@ -4775,7 +5001,7 @@ const I18N_UI = {
   "supRollerW": "Appui mobile",
   "wLeft": "gauche",
   "wRight": "droite",
-  "repSub": "muly·calc · note de calcul",
+  "repSub": "kragr·calc · note de calcul",
   "errRep": "Une erreur ? Merci de la signaler.",
   "uebTog": "Mode exercice",
   "uebEnd": "Quitter le mode exercice",
@@ -4900,7 +5126,7 @@ const I18N_UI = {
   "supRollerW": "Apoyo móvil",
   "wLeft": "izquierda",
   "wRight": "derecha",
-  "repSub": "muly·calc · memoria de cálculo",
+  "repSub": "kragr·calc · memoria de cálculo",
   "errRep": "¿Has encontrado un error? Avísanos.",
   "uebTog": "Modo práctica",
   "uebEnd": "Salir del modo práctica",
@@ -4979,6 +5205,15 @@ Object.assign(I18N_UI.en,{modalFrameLeftPart:'(left part)',modalFrameCorner:'cor
 Object.assign(I18N_UI.fr,{modalFrameLeftPart:'(partie gauche)',modalFrameCorner:'angle'}); Object.assign(I18N_UI.es,{modalFrameLeftPart:'(parte izquierda)',modalFrameCorner:'esquina'});
 Object.assign(I18N_UI.en,{projLink:'My projects →'}); Object.assign(I18N_UI.de,{projLink:'Meine Projekte →'});
 Object.assign(I18N_UI.fr,{projLink:'Mes projets →'}); Object.assign(I18N_UI.es,{projLink:'Mis proyectos →'});
+// Projekt-Menü (v0.8.28)
+Object.assign(I18N_UI.de,{"repPosLbl": "Position", "repDateLbl": "Datum", "repVerLbl": "Version"});
+Object.assign(I18N_UI.en,{"repPosLbl": "Item", "repDateLbl": "Date", "repVerLbl": "Version"});
+Object.assign(I18N_UI.fr,{"repPosLbl": "Position", "repDateLbl": "Date", "repVerLbl": "Version"});
+Object.assign(I18N_UI.es,{"repPosLbl": "Posición", "repDateLbl": "Fecha", "repVerLbl": "Versión"});
+Object.assign(I18N_UI.de,{"projBtn": "Meine Projekte", "ppCur": "Aktuelle Berechnung", "ppList": "Gespeichert", "ppNew": "Noch nicht gespeichert", "ppSaved": "Gespeichert · {0}", "ppSave": "Speichern", "ppSavedMsg": "„{0}“ gespeichert.", "ppAlready": "Schon gespeichert — keine Kopie angelegt.", "ppAlreadyS": "✓ Schon gespeichert", "ppNoSys": "Kein System geöffnet", "ppNone": "Noch nichts gespeichert. „Speichern“ legt die aktuelle Berechnung ab — size kann sie dann übernehmen.", "ppToSizeT": "In kragr·size bemessen", "ppAllCalc": "Alle Berechnungen und Berichte", "ppAllPos": "Alle Positionen in „Meine Projekte“ →"});
+Object.assign(I18N_UI.en,{"projBtn": "My projects", "ppCur": "Current calculation", "ppList": "Saved", "ppNew": "Not saved yet", "ppSaved": "Saved · {0}", "ppSave": "Save", "ppSavedMsg": "“{0}” saved.", "ppAlready": "Already saved — no copy created.", "ppAlreadyS": "✓ Already saved", "ppNoSys": "No system open", "ppNone": "Nothing saved yet. “Save” stores the current calculation — size can then import it.", "ppToSizeT": "Design in kragr·size", "ppAllCalc": "All calculations and reports", "ppAllPos": "All items in “My projects” →"});
+Object.assign(I18N_UI.fr,{"projBtn": "Mes projets", "ppCur": "Calcul actuel", "ppList": "Enregistré", "ppNew": "Pas encore enregistré", "ppSaved": "Enregistré · {0}", "ppSave": "Enregistrer", "ppSavedMsg": "« {0} » enregistré.", "ppAlready": "Déjà enregistré — aucune copie créée.", "ppAlreadyS": "✓ Déjà enregistré", "ppNoSys": "Aucun système ouvert", "ppNone": "Rien d’enregistré pour l’instant. « Enregistrer » conserve le calcul actuel — size peut ensuite le reprendre.", "ppToSizeT": "Dimensionner dans kragr·size", "ppAllCalc": "Tous les calculs et rapports", "ppAllPos": "Toutes les positions dans « Mes projets » →"});
+Object.assign(I18N_UI.es,{"projBtn": "Mis proyectos", "ppCur": "Cálculo actual", "ppList": "Guardado", "ppNew": "Aún no guardado", "ppSaved": "Guardado · {0}", "ppSave": "Guardar", "ppSavedMsg": "«{0}» guardado.", "ppAlready": "Ya guardado — no se creó ninguna copia.", "ppAlreadyS": "✓ Ya guardado", "ppNoSys": "Ningún sistema abierto", "ppNone": "Todavía no hay nada guardado. «Guardar» almacena el cálculo actual; size puede importarlo después.", "ppToSizeT": "Dimensionar en kragr·size", "ppAllCalc": "Todos los cálculos e informes", "ppAllPos": "Todas las posiciones en «Mis proyectos» →"});
 Object.keys(I18N_UI).forEach(l=>{ calcTranslations[l] = Object.assign(calcTranslations[l]||{}, I18N_UI[l]); });
 const trf = (key, ...a) => tr(key).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const LOCALE = () => ({en:'en-GB', de:'de-DE', fr:'fr-FR', es:'es-ES'})[calcLang] || 'en-GB';
@@ -5003,7 +5238,7 @@ function applyCalcTranslations(){
   [['mfs1h','modalFrameS1h'],['mfs1p','modalFrameS1p'],['mfs1c','modalFrameS1c'],['mfs2h','modalFrameS2h'],['mfs2t','modalFrameS2t'],
    ['mfs3h','modalFrameS3h'],['mfs3p','modalFrameS3p'],['mfs3e','modalFrameS3e'],['mfs3c','modalFrameS3c'],
    ['mfs4h','modalFrameS4h'],['mfs4p','modalFrameS4p'],['mfs5h','modalFrameS5h'],['mfs5t','modalFrameS5t'],['mfs3lp','modalFrameLeftPart'],['mfs3cn','modalFrameCorner']].forEach(([id,k])=>setT(id,k));
-  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.innerHTML = `Muly v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]} · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('calc',STATIQ_VERSION,'${['beam','cantilever','cont','frame'][+fn.dataset.foot]||''}')">${t.errRep}</a>`; });
+  document.querySelectorAll('.footnote[data-foot]').forEach(fn=>{ fn.innerHTML = `kragr v${STATIQ_VERSION} · ${t.tabs[+fn.dataset.foot]} · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('calc',STATIQ_VERSION,'${['beam','cantilever','cont','frame'][+fn.dataset.foot]||''}')">${t.errRep}</a>`; });
   ['beam','cant','cont','frame'].forEach(sys=>{ const l=document.getElementById('diag-label-'+sys); if(l) l.textContent = tr('diag'+((typeof diagMode!=='undefined' && diagMode[sys])||'M')); });
   document.querySelectorAll('.lang-pick button').forEach(b=>b.classList.toggle('active', b.dataset.lang===calcLang));
   const active=['beam','cantilever','cont','frame','saved'].find(x=>!document.getElementById('tab-'+x)?.classList.contains('hidden'))||'beam';
@@ -5096,7 +5331,7 @@ function eqLine(line){
 }
 
 // ══════════════════════════════════════════════════
-// RECHENWEG (v0.8.13): Schritt-für-Schritt-Lösung zu jedem System, Darstellung wie in muly·size
+// RECHENWEG (v0.8.13): Schritt-für-Schritt-Lösung zu jedem System, Darstellung wie in kragr·size
 // ══════════════════════════════════════════════════
 const RWT = {
   de:{ title:'Rechenweg — Schritt für Schritt', sys:'System und statische Bestimmtheit', loads:'Lasten und ihre Resultierenden', none:'keine Lasten',
@@ -5593,14 +5828,16 @@ if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!
   });
 })();
 
-// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von muly.eu.
-const MULY_MAIL = 'kontakt@muly.eu';
+// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von kragr.eu.
+const MULY_MAIL = 'kontakt@kragr.eu';
 function mulyFehlerHref(app, ver, extra){
   let lang='de'; try{ lang=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
-  let body=`Seite: ${location.href}\nModul: Muly·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
+  let body=`Seite: ${location.href}\nModul: kragr·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
   if(extra) body+=('---\n'+extra).slice(0,1400);
-  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in Muly·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in kragr·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
 }
+
+window.mulyThemeButton && mulyThemeButton(document.querySelector('.app-header .version'), 'after');
 </script>
 </body>
 </html>

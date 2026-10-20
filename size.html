@@ -1,19 +1,125 @@
 <!DOCTYPE html>
-<!-- Muly·size v0.5.43 -->
+<!-- kragr·size v0.5.49 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+<script data-theme>
+// Erscheinungsbild (Oktober 2026): automatisch (System), hell, dunkel — localStorage „muly-theme“.
+// Dunkel = ganze Seite invertiert und Farbton zurückgedreht; Bilder und Druckvorschau bleiben wie sie sind.
+(function(){
+  var L={de:['Erscheinungsbild: automatisch','Erscheinungsbild: hell','Erscheinungsbild: dunkel'],en:['Appearance: automatic','Appearance: light','Appearance: dark'],
+         fr:['Apparence : automatique','Apparence : clair','Apparence : sombre'],es:['Apariencia: automática','Apariencia: claro','Apariencia: oscuro']};
+  var mq=window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  function get(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } }
+  function apply(){ var t=get(), d=t==='dark'||(t==='auto'&&mq&&mq.matches), h=document.documentElement; h.classList.toggle('dark',d); h.dataset.theme=t;
+    var b=document.getElementById('theme-btn'); if(b) draw(b,t); }
+  function lang(){ try{ return L[localStorage.getItem('statiq-lang')]||L.de; }catch(e){ return L.de; } }
+  var ICON={auto:'<circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/>',
+    light:'<circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 1.8v2M10 16.2v2M1.8 10h2M16.2 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4"/></g>',
+    dark:'<path d="M15.5 12.6A6.5 6.5 0 0 1 7.4 4.5a6.5 6.5 0 1 0 8.1 8.1z" fill="currentColor"/>'};
+  function draw(b,t){ var i={auto:0,light:1,dark:2}[t]||0; b.innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">'+ICON[t]+'</svg>'; b.title=lang()[i]; b.setAttribute('aria-label',lang()[i]); }
+  window.mulyTheme=function(){ var n={auto:'dark',dark:'light',light:'auto'}[get()]||'auto'; try{ localStorage.setItem('muly-theme',n); }catch(e){} apply(); };
+  window.mulyThemeButton=function(anchor, where){ if(!anchor||document.getElementById('theme-btn')) return; var b=document.createElement('button'); b.type='button'; b.id='theme-btn'; b.className='theme-btn'; b.onclick=window.mulyTheme;
+    where==='before' ? anchor.parentNode.insertBefore(b,anchor) : anchor.parentNode.insertBefore(b,anchor.nextSibling); draw(b,get()); };
+  if(mq&&mq.addEventListener) mq.addEventListener('change',apply);
+  apply();
+})();
+</script>
+<style data-theme>
+  html.dark { filter: invert(.92) hue-rotate(180deg); background:#fff; }
+  html.dark img, html.dark video, html.dark .no-invert { filter: invert(1) hue-rotate(180deg); }
+  .theme-btn { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; padding:0; border:none; border-radius:8px; background:transparent; color:inherit; opacity:.7; cursor:pointer; vertical-align:middle; }
+  .theme-btn:hover { opacity:1; background:rgba(0,0,0,.06); }
+  @media print { html.dark, html.dark img, html.dark .no-invert { filter:none !important; } .theme-btn { display:none !important; } }
+  @media (max-width:440px) { .theme-btn { width:26px; } }
+</style>
+<style data-glass>
+  /* Glasleiste (Oktober 2026): Kopfzeile durchscheinend, Inhalt darunter weichgezeichnet, unterer Rand läuft weich aus. */
+  .glass { background:transparent !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important; border-bottom-color:transparent !important; isolation:isolate; }
+  .glass::before { content:''; position:absolute; left:0; right:0; top:0; bottom:-16px; z-index:-1; pointer-events:none;
+    background:linear-gradient(to bottom, rgba(255,255,255,.82) 0%, rgba(255,255,255,.6) 70%, rgba(255,255,255,0) 100%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%); backdrop-filter:blur(14px) saturate(160%);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 68%,transparent 100%); mask-image:linear-gradient(to bottom,#000 0%,#000 68%,transparent 100%); }
+  .glass.glass-flat::before { bottom:0; -webkit-mask-image:none; mask-image:none; background:rgba(255,255,255,.72); }
+  @media print { .glass::before { display:none; } }
+</style>
+<style data-proj>
+  /* Kopfzeile und Projekt-Menü — identisch in calc und size (calc v0.8.28 · size v0.5.46) */
+  .app-header .header-links { gap:16px; white-space:nowrap; }
+  .proj-btn { position:relative; display:inline-flex; align-items:center; gap:7px; height:30px; padding:0 11px 0 9px; border:none; border-radius:9px; background:#efeff1;
+    font-family:inherit; font-size:13px; font-weight:650; line-height:1; color:var(--text,#0a0a0a); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
+  .proj-btn::after { content:none !important; }
+  .proj-btn:hover { background:#e4e4e7; }
+  .proj-btn svg { flex:none; }
+  .proj-btn .pb-dot { width:7px; height:7px; border-radius:50%; background:#b8b8bd; flex:none; }
+  .proj-btn[data-st="saved"] .pb-dot { background:#16a34a; } .proj-btn[data-st="changed"] .pb-dot, .proj-btn[data-st="new"] .pb-dot { background:#f59e0b; }
+  .proj-btn[data-st="none"] .pb-dot { display:none; }
+  .proj-btn.open { background:#0a0a0a; color:#fff; }
+  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#0a0a0a); cursor:pointer;
+    background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
+  .lang-sel:hover { background-color:#e4e4e7; }
+  @media (max-width:560px){ .app-header .header-links { gap:12px; } .header-links .version { display:none; }
+    .proj-btn { padding:0 9px; } .proj-btn .pb-tx { display:none; } .proj-btn .pb-dot { position:absolute; top:5px; right:5px; width:6px; height:6px; box-shadow:0 0 0 2px #efeff1; } }
+  @media (max-width:380px){ .app-header .header-links { gap:9px; } }
+  .proj-panel { display:none; position:fixed; z-index:60; top:calc(var(--hdr-h,58px) + 4px); right:16px; width:min(420px, calc(100vw - 32px)); max-height:calc(100vh - var(--hdr-h,58px) - 24px);
+    overflow:auto; background:#fff; border-radius:18px; padding:8px; box-shadow:0 18px 48px rgba(0,0,0,.16), 0 2px 8px rgba(0,0,0,.06); font-family:Inter, system-ui, -apple-system, sans-serif; color:#0a0a0a; }
+  .proj-panel.open { display:block; }
+  @media (max-width:560px){ .proj-panel { left:12px; right:12px; width:auto; } }
+  .proj-panel .pp-sec { background:#f6f6f7; border:none; border-radius:12px; padding:12px 14px; margin:0 0 6px; box-shadow:none; }
+  .proj-panel .pp-h { display:block; font-size:12px; font-weight:700; color:#8a8a8a; margin:0 0 6px; padding:0; letter-spacing:0; text-transform:none; }
+  .proj-panel .pp-row { display:flex; align-items:center; gap:10px; }
+  .proj-panel .pp-name { flex:1; min-width:0; font-size:15px; font-weight:750; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .proj-panel .pp-st { display:flex; align-items:center; gap:6px; margin-top:4px; font-size:12.5px; color:#6b6b6b; }
+  .proj-panel .pp-st i { width:7px; height:7px; border-radius:50%; background:#f59e0b; flex:none; }
+  .proj-panel .pp-st.saved i { background:#16a34a; } .proj-panel .pp-st.none { display:none; }
+  .proj-panel .pp-msg { font-size:12.5px; color:#3f3f46; margin-top:6px; } .proj-panel .pp-msg:empty { display:none; }
+  .proj-panel .pp-btn { display:inline-flex; align-items:center; border:none; border-radius:9px; padding:7px 13px; font-family:inherit; font-size:13px; font-weight:700; line-height:1.2;
+    background:#0a0a0a; color:#fff; cursor:pointer; white-space:nowrap; text-decoration:none; flex:none; }
+  .proj-panel .pp-btn:disabled { opacity:.35; cursor:default; }
+  .proj-panel .pp-btn.small { padding:5px 10px; font-size:12px; }
+  .proj-panel .pp-btn.sec { background:#e6e6e9; color:#0a0a0a; } .proj-panel .pp-btn.sec:hover { background:#dcdce0; }
+  .proj-panel .pp-btn.danger { background:transparent; color:#b42318; } .proj-panel .pp-btn.danger.armed { background:#b42318; color:#fff; }
+  .proj-panel .pp-item { display:flex; align-items:center; gap:6px; padding:8px 0; border-top:1px solid #e7e7ea; background:none; margin:0; }
+  .proj-panel .pp-item:first-child { border-top:none; padding-top:2px; }
+  .proj-panel .pp-iname { flex:1; min-width:0; font-size:13.5px; font-weight:650; overflow-wrap:anywhere; }
+  .proj-panel .pp-item.current .pp-iname::before { content:'●'; color:var(--accent,#2563eb); font-size:9px; vertical-align:2px; margin-right:6px; }
+  .proj-panel .pp-meta { display:block; font-size:12px; font-weight:500; color:#8a8a8a; margin-top:2px; }
+  .proj-panel .pp-empty { font-size:12.5px; color:#8a8a8a; line-height:1.45; }
+  .proj-panel .pp-more { display:inline-block; margin-top:6px; border:none; background:none; padding:0; font-family:inherit; font-size:12.5px; font-weight:650; color:#52525b; cursor:pointer; }
+  .proj-panel .pp-foot { display:block; padding:8px 8px 4px; font-size:13px; font-weight:650; color:var(--accent,#2563eb); text-decoration:none; }
+  @media print { .proj-panel { display:none !important; } }
+</style>
+<script data-proj>
+// Gemeinsames Projekt-Menü (calc und size): Grundgerüst, Speicherstand am Knopf, Öffnen/Schließen. Die Inhalte füllt jede App selbst.
+window.mulyProj = {
+  skeleton: function(T){
+    var p=document.createElement('div'); p.id='proj-panel'; p.className='proj-panel'; p.setAttribute('role','dialog');
+    p.innerHTML='<section class="pp-sec pp-cur"><div class="pp-h" id="pp-h-cur"></div><div class="pp-row"><div class="pp-name" id="pp-name"></div><span id="pp-act"></span></div>'
+      +'<div class="pp-st none" id="pp-st"><i></i><span></span></div><div class="pp-msg" id="pp-msg"></div></section>'
+      +'<section class="pp-sec pp-saved"><div class="pp-h" id="pp-h-list"></div><div id="pp-list"></div></section><div id="pp-extra"></div>'
+      +'<a class="pp-foot proj-link" id="pp-foot" href="projekt.html"></a>';
+    document.body.appendChild(p); return p;
+  },
+  state: function(st, text){   // st: none | new | changed | saved
+    var b=document.getElementById('proj-btn'), s=document.getElementById('pp-st');
+    if(b){ b.dataset.st=st; var l=(b.querySelector('.pb-tx')||{}).textContent||''; b.title = text ? l+' — '+text : l; b.setAttribute('aria-label', b.title); }
+    if(s){ s.className='pp-st '+st; s.querySelector('span').textContent=text||''; }
+  },
+  fmt: function(iso, loc){ try{ var d=new Date(iso); return d.toLocaleDateString(loc,{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
+};
+</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muly·size — Bemessung</title>
+  <title>kragr·size — Bemessung</title>
   <meta name="description" content="Bemessung von Stahlbetonbalken und -platten nach DIN EN 1992-1-1 mit NA — mit Nachweisbericht." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" />
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Muly" />
+<meta name="apple-mobile-web-app-title" content="kragr" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,11 +149,14 @@
 
     .main { padding: 1rem; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 380px 1fr; gap: 1rem; align-items: start; }
     @media (max-width: 860px) { .main { grid-template-columns: 1fr; } }
-    /* Mobil: Ergebnis-Kurzinfo unter der Kopfzeile, Tipp springt zum Ergebnis */
-    #mob-status { display: none; position: sticky; top: 49px; z-index: 9; padding: 8px 1rem; font-size: 13px; font-weight: 500; cursor: pointer;
-      border-bottom: 1px solid var(--border-dark); }
-    #mob-status.ok { background: var(--ok-bg); color: var(--ok); } #mob-status.bad { background: var(--bad-bg); color: var(--bad); }
-    @media (max-width: 860px) { #mob-status { display: block; } body.show-report #mob-status { display: none; } }
+    /* Mobil: kleine Ergebnis-Plakette unten mittig; Tipp springt zum Ergebnis; ausgeblendet, solange das Ergebnis im Bild ist (v0.5.46) */
+    #mob-status { display: none; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 40; transform: translateX(-50%);
+      align-items: center; gap: 7px; padding: 8px 14px 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 650; white-space: nowrap; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08); transition: opacity .2s, transform .2s; -webkit-tap-highlight-color: transparent; }
+    #mob-status.ok { background: #e7f5ee; color: #0f6b46; } #mob-status.bad { background: #fdecec; color: #b42318; }
+    #mob-status .ms-ic { font-size: 12px; } #mob-status .ms-ar { opacity: .65; }
+    #mob-status.away { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+    @media (max-width: 860px) { #mob-status { display: inline-flex; } body.show-report #mob-status { display: none; } }
     .page-head { grid-column: 1 / -1; }
     .page-title { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
     .page-sub { font-size: 13px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
@@ -213,7 +322,6 @@
     .seg:not(.seg-mat) button { flex:1 1 auto; padding:7px 9px; font-size:13px; white-space:nowrap; }
     .main > * { min-width:0; }
     @media (max-width:560px){ .seg-mat { gap:3px; padding:3px; background:#efeff1; } .seg-mat button { background:transparent; } .seg-mat button.active { background:#fff; } .main{ padding:14px 16px; } }
-    #mob-status { border-bottom:none; font-weight:600; }
     .summary { border-radius:12px; font-weight:700; }
     .pos-item { border-bottom-color:#ececee; }
     .ci-note { border-left:none; border-radius:10px; }
@@ -249,14 +357,6 @@
     .pick-item.active { background:#fff; color:var(--text); font-weight:700; box-shadow:0 1px 2px rgba(0,0,0,0.06); }
     .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2563eb; }
     .ux-hide { display:none !important; }
-    .proj-btn { border:none; background:#efeff1; border-radius:10px; padding:7px 12px; font-family:inherit; font-size:13px; font-weight:700; color:var(--text); cursor:pointer; }
-    .proj-btn::after { content:' ▾'; font-size:10px; color:var(--text3); }
-    .proj-btn.open { background:#0a0a0a; color:#fff; } .proj-btn.open::after { color:#bbb; }
-    .proj-panel { display:none; position:fixed; z-index:60; top:58px; right:16px; width:min(440px, calc(100vw - 32px)); max-height:calc(100vh - 80px); overflow:auto; background:#fff; border-radius:20px; padding:10px;
-      box-shadow:0 18px 48px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04); }
-    .proj-panel.open { display:block; }
-    .proj-panel .card { margin-bottom:8px; }
-    .proj-panel .card:last-child { margin-bottom:0; }
     .fold > .card-title { cursor:pointer; user-select:none; margin-bottom:0; }
     .fold > .card-title::after { content:'▾'; font-size:12px; color:var(--text3); margin-left:auto; transition:transform .18s; }
     .fold.closed > .card-title::after { transform:rotate(-90deg); }
@@ -305,19 +405,20 @@
     @media (min-width:1000px){ .main { max-width:1180px; padding:6px 20px 20px; gap:20px; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); } }
     @media (max-width:560px){ .main { padding:6px 20px 14px; } }
 </style>
-<style>/* Marke Muly: μ als Exponent */ .logo span,.footer-logo span{font-size:.58em;vertical-align:.85em;line-height:0;margin-left:.12em;letter-spacing:0;color:var(--accent,#2563eb)} .headline .iq{font-size:.44em;vertical-align:1.05em;line-height:0;margin-left:.02em;letter-spacing:0}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #2563eb); }
 </style>
 </head>
 <body>
-<header class="app-header">
-  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">muly<span>μ</span></a>
+<header class="app-header glass">
+  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
   <nav class="header-links">
-    <button class="proj-btn" id="proj-btn" onclick="toggleProj(event)" data-i18n="projBtn">Meine Projekte</button>
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+    <a href="calc.html">calc</a>
     <span class="module-name">size</span>
     <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
-    <a href="calc.html">calc</a>
     <span class="version" id="ver"></span>
+    <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </nav>
 </header>
 
@@ -326,7 +427,7 @@
   <div class="page-head">
     <div class="page-title" id="page-title"><span data-i18n="z477">Stahlbeton — Balken, Platten, Stützen, Durchstanzen</span></div>
     <div class="page-sub"><span id="page-sub"><span data-i18n="z478">Bemessung nach DIN EN 1992-1-1 mit deutschem NA: Biegung (auch mit Druckbewehrung), Querkraft, Gurtanschluss, Verankerung, Zugkraftdeckung, Rissbreite, Biegeschlankheit, Stützen nach dem Modellstützenverfahren und Durchstanzen.</span></span>
-      <span id="page-calc" data-i18n="z001">Schnittgrößen von Hand eingeben, z. B. aus <a href="calc.html">muly·calc</a>.</span></div>
+      <span id="page-calc" data-i18n="z001">Schnittgrößen von Hand eingeben, z. B. aus <a href="calc.html">kragr·calc</a>.</span></div>
   </div>
 
   <!-- ── Eingaben ── -->
@@ -338,7 +439,7 @@
       <a class="proj-link" href="projekt.html" data-i18n="projLink">Alle Positionen in „Meine Projekte“ →</a>
     </div>
     <div class="card" id="calc-import">
-      <div class="card-title"><span data-i18n="ciTitle">Schnittgrößen aus muly·calc</span></div>
+      <div class="card-title"><span data-i18n="ciTitle">Schnittgrößen aus kragr·calc</span></div>
       <div id="ci-form">
         <div class="grid2">
           <div class="field full"><label data-i18n="ciSaved">Gespeicherte Berechnung</label><select id="ci-sel" onchange="ciSelChange()"></select></div>
@@ -497,7 +598,7 @@
         <div class="field"><label data-i18n="pb022">Ø Stützbewehrung oben [mm]</label><select id="zk-dso" onchange="run()"><option value="10">Ø 10</option><option value="12">Ø 12</option><option value="14">Ø 14</option><option value="16" selected>Ø 16</option><option value="20">Ø 20</option><option value="25">Ø 25</option><option value="28">Ø 28</option></select></div>
         <div class="field"><label data-i18n="pb023">Stäbe oben über den Stützen</label><input type="number" step="1" id="zk-no" value="4" oninput="run()"></div>
       </div>
-      <div class="hint" data-i18n="pb024">Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit muly·calc (Durchlaufträger). b, h und Beton aus den Karten oben.</div>
+      <div class="hint" data-i18n="pb024">Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit kragr·calc (Durchlaufträger). b, h und Beton aus den Karten oben.</div>
     </div>
     </div>
     <div id="beton-sz" style="display:none">
@@ -888,7 +989,7 @@
         <div class="field"><label>γ [kN/m³] <span data-i18n="grGam">(über der Sohle)</span></label><input type="number" step="any" id="gr-g1" value="18.5" oninput="grEigen(); run()"></div>
         <div class="field"><label>γ<sub>2</sub> [kN/m³] <span data-i18n="grGam2">(unter der Sohle, γ′ bei Grundwasser)</span></label><input type="number" step="any" id="gr-g2" value="18.5" oninput="grEigen(); run()"></div>
       </div>
-      <div class="hint" data-i18n="grBodenHint">Anhaltswerte wie in muly·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.</div>
+      <div class="hint" data-i18n="grBodenHint">Anhaltswerte wie in kragr·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.</div>
     </div>
     <div id="gr-flach">
     <div class="card">
@@ -969,7 +1070,7 @@
         <div class="field"><label>E<sub>s</sub> [MN/m²]</label><input type="number" step="any" id="gs-E4" value="100" oninput="$('gs-b4').value='x'; run()"></div>
       </div>
       </div>
-      <div class="hint" data-i18n="gsHint2">Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in muly·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.</div>
+      <div class="hint" data-i18n="gsHint2">Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in kragr·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.</div>
     </div>
     </div>
     <div id="gr-wand" style="display:none">
@@ -1337,7 +1438,7 @@
         <div class="field"><label data-i18n="pa105">Wassertemperatur [°C]</label><input type="number" step="any" id="wp-T" value="10" oninput="run()"></div>
         <div class="field"><label data-i18n="pa106">NPSH<sub>R</sub> [m] (Herstellerangabe)</label><input type="number" step="any" id="wp-npshr" value="3.5" oninput="run()"></div>
       </div>
-      <div class="hint" data-i18n="pa107">Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in muly·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.</div>
+      <div class="hint" data-i18n="pa107">Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in kragr·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.</div>
     </div>
     </div>
     <div id="wb-teil" style="display:none">
@@ -1410,7 +1511,7 @@
       <div class="bp-lay"><select id="bl-m5" onchange="bpPick(5)" aria-label="Baustoff Schicht 5"><option value="-" selected>—</option><optgroup label="Putze und Estriche" data-i18n-label="bg0"><option value="0" data-i18n="z206">Gipsputz</option><option value="1" data-i18n="z207">Kalkzementputz</option><option value="28" data-i18n="bm28">Leichtputz</option><option value="29" data-i18n="bm29">Lehmputz</option><option value="30" data-i18n="bm30">Wärmedämmputz WLS 070</option><option value="2" data-i18n="z208">Zementestrich</option><option value="31" data-i18n="bm31">Calciumsulfatestrich</option><option value="32" data-i18n="bm32">Gussasphaltestrich</option></optgroup><optgroup label="Beton" data-i18n-label="bg1"><option value="3" data-i18n="matBeton">Stahlbeton</option><option value="4" data-i18n="z210">Normalbeton (unbewehrt)</option><option value="33" data-i18n="bm33">Leichtbeton, gefügedicht</option></optgroup><optgroup label="Mauerwerk und Naturstein" data-i18n-label="bg2"><option value="5" data-i18n="z211">Kalksandstein</option><option value="6" hidden data-i18n="z212">Kalksandstein</option><option value="7" data-i18n="z213">Vollziegel</option><option value="8" data-i18n="z214">Hochlochziegel</option><option value="34" data-i18n="bm34">Hochlochziegel mit Dämmstofffüllung</option><option value="9" data-i18n="z215">Planziegel, wärmedämmend</option><option value="10" data-i18n="z216">Porenbeton</option><option value="11" data-i18n="z217">Leichtbeton-Vollblock</option><option value="35" data-i18n="bm35">Leichtbeton-Hohlblockstein</option><option value="36" data-i18n="bm36">Klinker (Vormauerschale)</option><option value="37" data-i18n="bm37">Sandstein</option><option value="38" data-i18n="bm38">Granit</option></optgroup><optgroup label="Dämmstoffe" data-i18n-label="bg3"><option value="12" data-i18n="z218">Mineralwolle WLS 035</option><option value="13" data-i18n="z219">Mineralwolle WLS 032</option><option value="39" data-i18n="bm39">Mineralwolle WLS 040</option><option value="14">EPS WLS 035</option><option value="15" data-i18n="z220">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="40" data-i18n="bm40">Schaumglas WLS 045</option><option value="41" data-i18n="bm41">Phenolharz WLS 022</option><option value="42" data-i18n="bm42">Vakuumdämmplatte (VIP)</option><option value="18" data-i18n="z221">Holzfaserdämmung WLS 040</option><option value="19" data-i18n="z222">Zellulose WLS 040</option><option value="43" data-i18n="bm43">Kork WLS 045</option><option value="44" data-i18n="bm44">Hanf / Flachs WLS 045</option></optgroup><optgroup label="Holz und Plattenwerkstoffe" data-i18n-label="bg4"><option value="20" data-i18n="z223">Nadelholz</option><option value="45" data-i18n="bm45">Brettschichtholz</option><option value="46" data-i18n="bm46">Brettsperrholz</option><option value="47" data-i18n="bm47">Laubholz (Eiche, Buche)</option><option value="21" data-i18n="z224">OSB-Platte</option><option value="48" data-i18n="bm48">Spanplatte</option><option value="49" data-i18n="bm49">MDF-Platte</option><option value="50" data-i18n="bm50">Sperrholz</option><option value="22" data-i18n="z225">Gipskartonplatte</option><option value="51" data-i18n="bm51">Gipsfaserplatte</option><option value="23" data-i18n="z226">Holzwolle-Leichtbauplatte</option><option value="52" data-i18n="bm52">Faserzementplatte</option></optgroup><optgroup label="Bahnen und Folien" data-i18n-label="bg5"><option value="24" data-i18n="z227">PE-Folie</option><option value="25" data-i18n="z228">Dampfbremse</option><option value="54" data-i18n="bm54">Dampfsperre mit Alu-Einlage</option><option value="53" data-i18n="bm53">Unterdeckbahn, diffusionsoffen</option><option value="26" data-i18n="z229">Bitumen-Dachbahn</option><option value="55" data-i18n="bm55">Kunststoff-Dachabdichtung</option></optgroup><optgroup label="Beläge und Bekleidungen" data-i18n-label="bg6"><option value="56" data-i18n="bm56">Fliesen (Keramik)</option><option value="57" data-i18n="bm57">Parkett</option><option value="58" data-i18n="bm58">Teppich</option><option value="59" data-i18n="bm59">Linoleum</option><option value="27" data-i18n="z230">Dachziegel</option><option value="60" data-i18n="bm60">Aluminiumblech</option><option value="61" data-i18n="bm61">Kies</option></optgroup><optgroup label="Luftschichten (DIN EN ISO 6946)" data-i18n-label="bg7"><option value="62" data-i18n="bm62">Luftschicht, ruhend</option><option value="63" data-i18n="bm63">Luftschicht, schwach belüftet</option><option value="64" data-i18n="bm64">Luftschicht, stark belüftet</option></optgroup></select><input type="number" step="any" id="bl-d5" data-c="d" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l5" data-c="l" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u5" data-c="u" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r5" data-c="r" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
       <div class="bp-lay"><select id="bl-m6" onchange="bpPick(6)" aria-label="Baustoff Schicht 6"><option value="-" selected>—</option><optgroup label="Putze und Estriche" data-i18n-label="bg0"><option value="0" data-i18n="z206">Gipsputz</option><option value="1" data-i18n="z207">Kalkzementputz</option><option value="28" data-i18n="bm28">Leichtputz</option><option value="29" data-i18n="bm29">Lehmputz</option><option value="30" data-i18n="bm30">Wärmedämmputz WLS 070</option><option value="2" data-i18n="z208">Zementestrich</option><option value="31" data-i18n="bm31">Calciumsulfatestrich</option><option value="32" data-i18n="bm32">Gussasphaltestrich</option></optgroup><optgroup label="Beton" data-i18n-label="bg1"><option value="3" data-i18n="matBeton">Stahlbeton</option><option value="4" data-i18n="z210">Normalbeton (unbewehrt)</option><option value="33" data-i18n="bm33">Leichtbeton, gefügedicht</option></optgroup><optgroup label="Mauerwerk und Naturstein" data-i18n-label="bg2"><option value="5" data-i18n="z211">Kalksandstein</option><option value="6" hidden data-i18n="z212">Kalksandstein</option><option value="7" data-i18n="z213">Vollziegel</option><option value="8" data-i18n="z214">Hochlochziegel</option><option value="34" data-i18n="bm34">Hochlochziegel mit Dämmstofffüllung</option><option value="9" data-i18n="z215">Planziegel, wärmedämmend</option><option value="10" data-i18n="z216">Porenbeton</option><option value="11" data-i18n="z217">Leichtbeton-Vollblock</option><option value="35" data-i18n="bm35">Leichtbeton-Hohlblockstein</option><option value="36" data-i18n="bm36">Klinker (Vormauerschale)</option><option value="37" data-i18n="bm37">Sandstein</option><option value="38" data-i18n="bm38">Granit</option></optgroup><optgroup label="Dämmstoffe" data-i18n-label="bg3"><option value="12" data-i18n="z218">Mineralwolle WLS 035</option><option value="13" data-i18n="z219">Mineralwolle WLS 032</option><option value="39" data-i18n="bm39">Mineralwolle WLS 040</option><option value="14">EPS WLS 035</option><option value="15" data-i18n="z220">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="40" data-i18n="bm40">Schaumglas WLS 045</option><option value="41" data-i18n="bm41">Phenolharz WLS 022</option><option value="42" data-i18n="bm42">Vakuumdämmplatte (VIP)</option><option value="18" data-i18n="z221">Holzfaserdämmung WLS 040</option><option value="19" data-i18n="z222">Zellulose WLS 040</option><option value="43" data-i18n="bm43">Kork WLS 045</option><option value="44" data-i18n="bm44">Hanf / Flachs WLS 045</option></optgroup><optgroup label="Holz und Plattenwerkstoffe" data-i18n-label="bg4"><option value="20" data-i18n="z223">Nadelholz</option><option value="45" data-i18n="bm45">Brettschichtholz</option><option value="46" data-i18n="bm46">Brettsperrholz</option><option value="47" data-i18n="bm47">Laubholz (Eiche, Buche)</option><option value="21" data-i18n="z224">OSB-Platte</option><option value="48" data-i18n="bm48">Spanplatte</option><option value="49" data-i18n="bm49">MDF-Platte</option><option value="50" data-i18n="bm50">Sperrholz</option><option value="22" data-i18n="z225">Gipskartonplatte</option><option value="51" data-i18n="bm51">Gipsfaserplatte</option><option value="23" data-i18n="z226">Holzwolle-Leichtbauplatte</option><option value="52" data-i18n="bm52">Faserzementplatte</option></optgroup><optgroup label="Bahnen und Folien" data-i18n-label="bg5"><option value="24" data-i18n="z227">PE-Folie</option><option value="25" data-i18n="z228">Dampfbremse</option><option value="54" data-i18n="bm54">Dampfsperre mit Alu-Einlage</option><option value="53" data-i18n="bm53">Unterdeckbahn, diffusionsoffen</option><option value="26" data-i18n="z229">Bitumen-Dachbahn</option><option value="55" data-i18n="bm55">Kunststoff-Dachabdichtung</option></optgroup><optgroup label="Beläge und Bekleidungen" data-i18n-label="bg6"><option value="56" data-i18n="bm56">Fliesen (Keramik)</option><option value="57" data-i18n="bm57">Parkett</option><option value="58" data-i18n="bm58">Teppich</option><option value="59" data-i18n="bm59">Linoleum</option><option value="27" data-i18n="z230">Dachziegel</option><option value="60" data-i18n="bm60">Aluminiumblech</option><option value="61" data-i18n="bm61">Kies</option></optgroup><optgroup label="Luftschichten (DIN EN ISO 6946)" data-i18n-label="bg7"><option value="62" data-i18n="bm62">Luftschicht, ruhend</option><option value="63" data-i18n="bm63">Luftschicht, schwach belüftet</option><option value="64" data-i18n="bm64">Luftschicht, stark belüftet</option></optgroup></select><input type="number" step="any" id="bl-d6" data-c="d" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l6" data-c="l" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u6" data-c="u" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r6" data-c="r" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
       <div class="hint" id="bp-lay-mode"></div>
-      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in muly·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.</span></div>
+      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.</span></div>
     </div>
     <div id="bp-gk" style="display:none">
     <div class="card">
@@ -1788,7 +1889,7 @@
   </div>
 </main>
 
-<div id="report-view">
+<div id="report-view" class="no-invert">
   <div class="report-actions">
     <button class="btn" onclick="window.print()" data-i18n="print">Drucken / als PDF speichern</button>
     <button class="btn secondary" onclick="hideReport()" data-i18n="back">Zurück zur Eingabe</button>
@@ -1809,7 +1910,7 @@
 // Neue Texte bitte gleich als Schlüssel anlegen (data-i18n="…" bzw. tx('…')).
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const I18N = { "de": {
-"z001":"Schnittgrößen von Hand eingeben, z. B. aus <a href=\"calc.html\">muly·calc</a>.",
+"z001":"Schnittgrößen von Hand eingeben, z. B. aus <a href=\"calc.html\">kragr·calc</a>.",
 "z003":"Balken",
 "z004":"Unterzug",
 "z005":"Platte",
@@ -2179,7 +2280,7 @@ const I18N = { "de": {
 "grBx":"eigene Werte",
 "grGam":"(über der Sohle)",
 "grGam2":"(unter der Sohle, γ′ bei Grundwasser)",
-"grBodenHint":"Anhaltswerte wie in muly·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.",
+"grBodenHint":"Anhaltswerte wie in kragr·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.",
 "gfT1":"Fundament",
 "gfName":"Bezeichnung",
 "gfForm":"Form",
@@ -2265,7 +2366,7 @@ const I18N = { "de": {
 "bpLayT":"Bauteilaufbau (innen → außen)",
 "bpName":"Bezeichnung",
 "bpMat":"Baustoff",
-"bpLayHint":"Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in muly·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.",
+"bpLayHint":"Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.",
 "buT":"Randbedingungen",
 "buArt":"Bauteil",
 "buTi":"Innentemperatur θ<sub>i</sub> [°C]",
@@ -2308,7 +2409,7 @@ const I18N = { "de": {
 "gsSchicht2":"Schicht 2",
 "gsSchicht3":"Schicht 3",
 "gsSchicht4":"Schicht 4",
-"gsHint2":"Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in muly·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.",
+"gsHint2":"Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in kragr·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.",
 "mwDruck":"Wand auf Druck",
 "mwTeil":"Teilfläche",
 "mwKeller":"Kellerwand",
@@ -2489,7 +2590,7 @@ const I18N = { "de": {
 "load":"Laden",
 "del":"Löschen",
 "delConfirm":"Wirklich?",
-"ciTitle":"Schnittgrößen aus muly·calc",
+"ciTitle":"Schnittgrößen aus kragr·calc",
 "ciSaved":"Gespeicherte Berechnung",
 "ciPart":"Bauteil des Rahmens",
 "ciRiegel":"Riegel",
@@ -2506,6 +2607,13 @@ const I18N = { "de": {
 "checkInput":"Bitte Eingaben prüfen",
 "sumOk":"Alle Nachweise erfüllt · größte Ausnutzung {0} %",
 "mobOk":"Alle Nachweise erfüllt · max. {0} %",
+"mobOkS":"max. {0} %",
+"ppCur":"Aktuelle Berechnung",
+"ppList":"Gespeichert",
+"ppNew":"Noch nicht gespeichert",
+"ppSaved":"Gespeichert · {0}",
+"ppChanged":"Geändert — noch nicht gespeichert",
+"mobBadS":"{0} nicht erfüllt",
 "nBad1":"{0} Nachweis nicht erfüllt",
 "nBadN":"{0} Nachweise nicht erfüllt",
 "toResult":" — zum Ergebnis ↓",
@@ -2517,7 +2625,7 @@ const I18N = { "de": {
 "notIncl":"Nicht enthalten",
 "scopeT":"Umfang und Grundlagen",
 "refFormulas":"Formeln dazu im",
-"refBook":"Nachschlagewerk muly·ref",
+"refBook":"Nachschlagewerk kragr·ref",
 "calcSteps":"Rechenschritte",
 "expandAll":"Alle aufklappen",
 "collapseAll":"Alle zuklappen",
@@ -2531,7 +2639,7 @@ const I18N = { "de": {
 "posNotAll":"nicht alle erfüllt",
 "posNone":"Noch keine Positionen gespeichert. Die Bezeichnung oben dient als Name.",
 "nTopics":"{0} Themen",
-"ciNone":"Noch keine Berechnung gespeichert. In <a href=\"calc.html\">muly·calc</a> rechnen und „Berechnung speichern“ — dann lassen sich M, V und N hier übernehmen.",
+"ciNone":"Noch keine Berechnung gespeichert. In <a href=\"calc.html\">kragr·calc</a> rechnen und „Berechnung speichern“ — dann lassen sich M, V und N hier übernehmen.",
 "ciFrom":"<b>Übernommen aus calc:</b>",
 "ciRiegelN":"Normalkraft im Riegel N = {0} kN (Druck).",
 "ciMauer":"Für Mauerwerk bitte die Lasten von Hand eingeben. Auflagerkraft aus calc: {0} kN (z. B. als N<sub>Edc</sub> für die Teilflächenpressung).",
@@ -2657,7 +2765,7 @@ const I18N = { "de": {
 "pa104":"Verluste der Saugleitung h<sub>v,s</sub> [m]",
 "pa105":"Wassertemperatur [°C]",
 "pa106":"NPSH<sub>R</sub> [m] (Herstellerangabe)",
-"pa107":"Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in muly·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.",
+"pa107":"Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in kragr·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.",
 "pa108":"Pumpenanlage und Kavitation",
 "pa109":"Sohlgefälle I [‰]",
 "pa110":"zulässiger Füllungsgrad h/D",
@@ -2714,7 +2822,7 @@ const I18N = { "de": {
 "pb021":"Stäbe unten gestaffelt",
 "pb022":"Ø Stützbewehrung oben [mm]",
 "pb023":"Stäbe oben über den Stützen",
-"pb024":"Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit muly·calc (Durchlaufträger). b, h und Beton aus den Karten oben.",
+"pb024":"Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit kragr·calc (Durchlaufträger). b, h und Beton aus den Karten oben.",
 "pb025":"Durchlaufträger: Feld und Bewehrung",
 "pb026":"Stahlgüte",
 "pb027":"Breite b [mm]",
@@ -2952,7 +3060,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.5.43';
+const SIZE_VERSION = '0.5.49';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -2965,7 +3073,7 @@ const esc = v => String(v).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'
 const areaBar = ds => Math.PI*ds*ds/4;   // mm²
 
 // ══════════════════════════════════════════════════
-// Normwerte (gleiche Daten und Formeln wie muly·ref, Fach Stahlbeton)
+// Normwerte (gleiche Daten und Formeln wie kragr·ref, Fach Stahlbeton)
 // ══════════════════════════════════════════════════
 // EN 1992-1-1, Tab. 3.1: Klasse, f_ck, f_ck,cube, f_cm, f_ctm, f_ctk;0,05 [N/mm²], E_cm [GPa]
 const BETON = [
@@ -3923,7 +4031,7 @@ function showBad(bad){
   if(PROBE){ PROBE.C=null; return; }
   if(typeof FIX_GEN!=='undefined') FIX_GEN++;
   $('summary').innerHTML = `<div class="summary bad">${tx('checkInput')}: ${bad.map(ttBad).join(', ')}</div>`;
-  $('mob-status').className='bad'; $('mob-status').textContent=tx('checkInput');
+  $('mob-status').className='bad'; $('mob-status').textContent=tx('checkInput'); $('mob-status').title=tx('checkInput');
   $('chk-table').innerHTML=''; $('details').innerHTML=''; $('fig').innerHTML=''; $('reinf-line').innerHTML=''; LAST=null;
 }
 function runBeton(){
@@ -4350,9 +4458,12 @@ function renderOut(C, ok, fig, line, nicht, refLink){
   if(PROBE){ PROBE.C=C; return; }   // Abhilfe-Suche: nur die Nachweise merken
   const nBad = C.filter(c=>!c.ok).length, maxEta = Math.max(0, ...C.filter(c=>!c.info).map(c=>c.eta));
   const ms=$('mob-status'); ms.className = ok?'ok':'bad';
-  ms.textContent = (ok ? tx('mobOk', deNum(maxEta*100,0)) : tx(nBad>1?'nBadN':'nBad1', nBad)) + tx('toResult');
+  // kompakte Plakette unten (v0.5.46): kurzer Text sichtbar, voller Text als Titel/Vorlesetext
   const nChk = C.filter(c=>!c.info).length;
-  if(ok && !nChk){ ms.textContent = tx('resDone') + tx('toResult'); }
+  const full = (ok && !nChk) ? tx('resDone') : ok ? tx('mobOk', deNum(maxEta*100,0)) : tx(nBad>1?'nBadN':'nBad1', nBad);
+  const short = (ok && !nChk) ? tx('resDone') : ok ? tx('mobOkS', deNum(maxEta*100,0)) : tx('mobBadS', nBad);
+  ms.innerHTML = `<span class="ms-ic" aria-hidden="true">${ok?'✓':'✕'}</span><span class="ms-tx">${short}</span><span class="ms-ar" aria-hidden="true">↓</span>`;
+  ms.title = full + tx('toResult'); ms.setAttribute('aria-label', ms.title);
   $('summary').innerHTML = ok && !nChk ? `<div class="summary ok">${tx('resDoneNo')}</div>` : ok
     ? `<div class="summary ok">${tx('sumOk', deNum(maxEta*100,0))}</div>`
     : `<div class="summary bad">${tx(nBad>1?'nBadN':'nBad1', nBad)}</div>`;
@@ -4451,7 +4562,7 @@ function showMat(){
 // ══════════════════════════════════════════════════
 // STAHL — Walzprofile nach DIN EN 1993-1-1 mit NA
 // ══════════════════════════════════════════════════
-// Profilwerte wie in muly·ref (aus Nennmaßen, Abweichung zu Herstellerwerten ≤ 0,3 %)
+// Profilwerte wie in kragr·ref (aus Nennmaßen, Abweichung zu Herstellerwerten ≤ 0,3 %)
 // Spalten: Name, h, b, t_w, t_f, r [mm], A [cm²], G [kg/m], I_y [cm⁴], W_el,y, W_pl,y [cm³], i_y [cm], I_z [cm⁴], W_el,z, W_pl,z [cm³], i_z [cm]
 const PROFILE = [["IPE 80", 80, 46, 3.8, 5.2, 5, 7.6, 6.0, 80, 20.0, 23.2, 3.24, 8.5, 3.7, 5.8, 1.05], ["IPE 100", 100, 55, 4.1, 5.7, 7, 10.3, 8.1, 171, 34.2, 39.4, 4.07, 15.9, 5.8, 9.1, 1.24], ["IPE 120", 120, 64, 4.4, 6.3, 7, 13.2, 10.4, 318, 53.0, 60.7, 4.9, 27.7, 8.6, 13.6, 1.45], ["IPE 140", 140, 73, 4.7, 6.9, 7, 16.4, 12.9, 541, 77.3, 88.3, 5.74, 44.9, 12.3, 19.2, 1.65], ["IPE 160", 160, 82, 5.0, 7.4, 9, 20.1, 15.8, 869, 108.7, 123.9, 6.58, 68.3, 16.7, 26.1, 1.84], ["IPE 180", 180, 91, 5.3, 8.0, 9, 23.9, 18.8, 1317, 146.3, 166.4, 7.42, 100.9, 22.2, 34.6, 2.05], ["IPE 200", 200, 100, 5.6, 8.5, 12, 28.5, 22.4, 1943, 194.3, 220.6, 8.26, 142.4, 28.5, 44.6, 2.24], ["IPE 220", 220, 110, 5.9, 9.2, 12, 33.4, 26.2, 2772, 252.0, 285.4, 9.11, 204.9, 37.3, 58.1, 2.48], ["IPE 240", 240, 120, 6.2, 9.8, 15, 39.1, 30.7, 3892, 324.3, 366.6, 9.97, 283.6, 47.3, 73.9, 2.69], ["IPE 270", 270, 135, 6.6, 10.2, 15, 45.9, 36.1, 5790, 428.9, 484.0, 11.23, 419.9, 62.2, 97.0, 3.02], ["IPE 300", 300, 150, 7.1, 10.7, 15, 53.8, 42.2, 8356, 557.1, 628.4, 12.46, 603.8, 80.5, 125.2, 3.35], ["IPE 330", 330, 160, 7.5, 11.5, 18, 62.6, 49.1, 11767, 713.1, 804.3, 13.71, 788.1, 98.5, 153.7, 3.55], ["IPE 360", 360, 170, 8.0, 12.7, 18, 72.7, 57.1, 16266, 903.6, 1019.1, 14.95, 1043, 122.8, 191.1, 3.79], ["IPE 400", 400, 180, 8.6, 13.5, 21, 84.5, 66.3, 23128, 1156.4, 1307.1, 16.55, 1318, 146.4, 229.0, 3.95], ["IPE 450", 450, 190, 9.4, 14.6, 21, 98.8, 77.6, 33743, 1499.7, 1701.8, 18.48, 1676, 176.4, 276.4, 4.12], ["IPE 500", 500, 200, 10.2, 16.0, 21, 115.5, 90.7, 48199, 1927.9, 2194.1, 20.43, 2142, 214.2, 335.9, 4.31], ["IPE 550", 550, 210, 11.1, 17.2, 24, 134.4, 105.5, 67116, 2440.6, 2787.0, 22.35, 2668, 254.1, 400.5, 4.45], ["IPE 600", 600, 220, 12.0, 19.0, 24, 156.0, 122.4, 92083, 3069.4, 3512.4, 24.3, 3387, 307.9, 485.6, 4.66], ["HEA 100", 96, 100, 5, 8, 12, 21.2, 16.7, 349, 72.8, 83.0, 4.06, 133.8, 26.8, 41.1, 2.51], ["HEA 120", 114, 120, 5, 8, 12, 25.3, 19.9, 606, 106.3, 119.5, 4.89, 230.9, 38.5, 58.9, 3.02], ["HEA 140", 133, 140, 5.5, 8.5, 12, 31.4, 24.7, 1033, 155.4, 173.5, 5.73, 389.3, 55.6, 84.8, 3.52], ["HEA 160", 152, 160, 6, 9, 15, 38.8, 30.4, 1673, 220.1, 245.1, 6.57, 615.6, 76.9, 117.6, 3.98], ["HEA 180", 171, 180, 6, 9.5, 15, 45.3, 35.5, 2510, 293.6, 324.9, 7.45, 924.6, 102.7, 156.5, 4.52], ["HEA 200", 190, 200, 6.5, 10, 18, 53.8, 42.3, 3692, 388.6, 429.5, 8.28, 1336, 133.6, 203.8, 4.98], ["HEA 220", 210, 220, 7, 11, 18, 64.3, 50.5, 5410, 515.2, 568.5, 9.17, 1955, 177.7, 270.6, 5.51], ["HEA 240", 230, 240, 7.5, 12, 21, 76.8, 60.3, 7763, 675.1, 744.6, 10.05, 2769, 230.7, 351.7, 6.0], ["HEA 260", 250, 260, 7.5, 12.5, 24, 86.8, 68.2, 10455, 836.4, 919.8, 10.97, 3668, 282.1, 430.2, 6.5], ["HEA 280", 270, 280, 8, 13, 24, 97.3, 76.4, 13673, 1012.8, 1112.2, 11.86, 4763, 340.2, 518.1, 7.0], ["HEA 300", 290, 300, 8.5, 14, 27, 112.5, 88.3, 18263, 1259.5, 1383.3, 12.74, 6310, 420.6, 641.2, 7.49], ["HEA 320", 310, 300, 9, 15.5, 27, 124.4, 97.6, 22929, 1479.3, 1628.1, 13.58, 6985, 465.7, 709.7, 7.49], ["HEA 340", 330, 300, 9.5, 16.5, 27, 133.5, 104.8, 27693, 1678.4, 1850.5, 14.4, 7436, 495.7, 755.9, 7.46], ["HEA 360", 350, 300, 10, 17.5, 27, 142.8, 112.1, 33090, 1890.8, 2088.5, 15.22, 7887, 525.8, 802.3, 7.43], ["HEA 400", 390, 300, 11, 19, 27, 159.0, 124.8, 45069, 2311.2, 2561.8, 16.84, 8564, 570.9, 872.9, 7.34], ["HEA 450", 440, 300, 11.5, 21, 27, 178.0, 139.8, 63722, 2896.4, 3215.9, 18.92, 9465, 631.0, 965.5, 7.29], ["HEA 500", 490, 300, 12, 23, 27, 197.5, 155.1, 86975, 3550.0, 3948.9, 20.98, 10367, 691.1, 1058.5, 7.24], ["HEB 100", 100, 100, 6, 10, 12, 26.0, 20.4, 450, 89.9, 104.2, 4.16, 167.3, 33.5, 51.4, 2.53], ["HEB 120", 120, 120, 6.5, 11, 12, 34.0, 26.7, 864, 144.1, 165.2, 5.04, 317.5, 52.9, 81.0, 3.06], ["HEB 140", 140, 140, 7, 12, 12, 43.0, 33.7, 1509, 215.6, 245.4, 5.93, 549.7, 78.5, 119.8, 3.58], ["HEB 160", 160, 160, 8, 13, 15, 54.3, 42.6, 2492, 311.5, 354.0, 6.78, 889.2, 111.2, 170.0, 4.05], ["HEB 180", 180, 180, 8.5, 14, 15, 65.3, 51.2, 3831, 425.7, 481.4, 7.66, 1363, 151.4, 231.0, 4.57], ["HEB 200", 200, 200, 9, 15, 18, 78.1, 61.3, 5696, 569.6, 642.5, 8.54, 2003, 200.3, 305.8, 5.07], ["HEB 220", 220, 220, 9.5, 16, 18, 91.0, 71.5, 8091, 735.5, 827.0, 9.43, 2843, 258.5, 393.9, 5.59], ["HEB 240", 240, 240, 10, 17, 21, 106.0, 83.2, 11259, 938.3, 1053.1, 10.31, 3923, 326.9, 498.4, 6.08], ["HEB 260", 260, 260, 10, 17.5, 24, 118.4, 93.0, 14919, 1147.6, 1282.9, 11.22, 5135, 395.0, 602.2, 6.58], ["HEB 280", 280, 280, 10.5, 18, 24, 131.4, 103.1, 19270, 1376.4, 1534.4, 12.11, 6595, 471.0, 717.6, 7.09], ["HEB 300", 300, 300, 11, 19, 27, 149.1, 117.0, 25166, 1677.7, 1868.7, 12.99, 8563, 570.9, 870.1, 7.58], ["HEB 320", 320, 300, 11.5, 20.5, 27, 161.3, 126.7, 30824, 1926.5, 2149.2, 13.82, 9239, 615.9, 939.1, 7.57], ["HEB 340", 340, 300, 12, 21.5, 27, 170.9, 134.2, 36656, 2156.3, 2408.1, 14.65, 9690, 646.0, 985.7, 7.53], ["HEB 360", 360, 300, 12.5, 22.5, 27, 180.6, 141.8, 43193, 2399.6, 2683.0, 15.46, 10141, 676.1, 1032.5, 7.49], ["HEB 400", 400, 300, 13.5, 24, 27, 197.8, 155.3, 57680, 2884.0, 3231.7, 17.08, 10819, 721.3, 1104.0, 7.4], ["HEB 450", 450, 300, 14, 26, 27, 218.0, 171.1, 79888, 3550.6, 3982.4, 19.14, 11721, 781.4, 1197.7, 7.33], ["HEB 500", 500, 300, 14.5, 28, 27, 238.6, 187.3, 107176, 4287.0, 4814.6, 21.19, 12624, 841.6, 1291.6, 7.27]];
 // Stahlsorten EN 1993-1-1, Tab. 3.1: Sorte, f_y, f_u (t ≤ 40 mm), f_y, f_u (40 < t ≤ 80 mm)
@@ -5272,7 +5383,7 @@ function runAnschluss(){
 // ══════════════════════════════════════════════════
 // HOLZ — Rechteckquerschnitte aus Vollholz und BSH nach DIN EN 1995-1-1 mit NA
 // ══════════════════════════════════════════════════
-// Festigkeiten [N/mm²], E/G [kN/mm²], ρ [kg/m³] — gleiche Tabellen wie muly·ref
+// Festigkeiten [N/mm²], E/G [kN/mm²], ρ [kg/m³] — gleiche Tabellen wie kragr·ref
 // Spalten: Klasse, f_m,k, f_t,0,k, f_t,90,k, f_c,0,k, f_c,90,k, f_v,k, E_0,mean, E_0,05, G_mean, ρ_k, ρ_mean
 const HOLZ_VH = [
     ['C14', 14, 7.2, 0.4, 16, 2.0, 3.0, 7.0, 4.7, 0.44, 290, 350],
@@ -5835,7 +5946,7 @@ function buildReportSW(){
 // ══════════════════════════════════════════════════
 let GRMODE = 'flach';
 function setGrMode(m){ GRMODE=m; showMat(); run(); }
-// Anhaltswerte (wie muly·ref): γ, φ′, c′, E_s
+// Anhaltswerte (wie kragr·ref): γ, φ′, c′, E_s
 const GR_BODEN = { sl:[17.5,30,0,20], sm:[18.5,32.5,0,45], sd:[19.5,35,0,100], ki:[20.5,35,0,120], su:[19.5,27.5,3,10], ts:[19.5,22.5,15,12], th:[20.5,25,30,20] };
 function grBodenPreset(){ const v=GR_BODEN[$('gr-boden').value]; if(!v) return; $('gr-g1').value=v[0]; $('gr-g2').value=v[0]; $('gr-phi').value=v[1]; $('gr-c').value=v[2]; }
 function grEigen(){ $('gr-boden').value='x'; }
@@ -5976,7 +6087,7 @@ function runGF(){
   const res=nachweiseGF(I);
   LAST={ mat:'grund', mode:'flach', I, res, date:new Date() };
   renderOut(res.C, res.ok, figGF(I,res), `${I.form==='streifen'?tt('Streifen'):tt('Fundament')} b = ${deNum(I.b,2)} m${I.form==='streifen'?'':` × a = ${deNum(I.a,2)} m`}, d = ${deNum(I.d,2)} m · φ′ = ${deNum(I.phi,1)}°, c′ = ${deNum(I.c,1)} kN/m² · R<sub>n,d</sub> = ${deNum(res.Rnd,0)} kN${I.form==='streifen'?'/m':''}`,
-    tt('Grundwasser in der Gründungssohle (γ′ von Hand eingeben), geneigte Sohle oder Gelände, geschichteter Baugrund, Momente in beiden Richtungen, Setzung (eigener Reiter), Bemessung des Fundaments in Stahlbeton (Biegung, Durchstanzen) und der vereinfachte Nachweis mit Sohlwiderstandstabellen (muly·ref).'), 'ref.html#/grundbau/flach/grundbruch');
+    tt('Grundwasser in der Gründungssohle (γ′ von Hand eingeben), geneigte Sohle oder Gelände, geschichteter Baugrund, Momente in beiden Richtungen, Setzung (eigener Reiter), Bemessung des Fundaments in Stahlbeton (Biegung, Durchstanzen) und der vereinfachte Nachweis mit Sohlwiderstandstabellen (kragr·ref).'), 'ref.html#/grundbau/flach/grundbruch');
 }
 function buildReportGF(){
   const {I,res}=LAST, st=I.form==='streifen', u=st?'/m':'';
@@ -6947,7 +7058,7 @@ function buildReportWasser(){
 }
 
 // ══════════════════════════════════════════════════
-// BAUPHYSIK — Rechenkerne (gleich in muly·ref und muly·size)
+// BAUPHYSIK — Rechenkerne (gleich in kragr·ref und kragr·size)
 // Wärme: DIN EN ISO 6946 · Feuchte: DIN 4108-3 (Glaser) · Schall: DIN 4109-32/-34 · Brand: MBO
 // ══════════════════════════════════════════════════
 // Baustoffe: [Name, λ W/(mK), μ (Rechenwert), ρ kg/m³]  — Bemessungswerte nach DIN 4108-4 / EN ISO 10456 (Anhaltswerte)
@@ -7757,7 +7868,7 @@ function buildReportHX(){
 
 // ══════════════════════════════════════════════════
 // PAKET A (v0.5.20): Torsion, Übergreifungsstoß, Abbrand, Deckenschwingung, hydraulischer Grundbruch, Zeitsetzung,
-// Böschungsbruch, Druckstoß, Pumpe (NPSH), Teilfüllung, Gebäudeklasse — gleiche Formeln wie muly·ref
+// Böschungsbruch, Druckstoß, Pumpe (NPSH), Teilfüllung, Gebäudeklasse — gleiche Formeln wie kragr·ref
 // ══════════════════════════════════════════════════
 // Je Modus: rd (Eingaben), va (Prüfung), na (Nachweise), fg (Abbildung), line (Kurzzeile), nicht, title, norm, rows (Bericht), ref
 const PA = {};
@@ -9475,7 +9586,7 @@ function buildReportStahl(){
   const {I,res,date}=LAST, P=res.P, MV=mvWerte(I.mv,I.psi);
   const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
   return _L`<h1>${esc(I.name||tt('Stahlträger'))}</h1>
-    <div class="meta">Muly·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1993-1-1 mit NA</div>
+    <div class="meta">kragr·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1993-1-1 mit NA</div>
     <section><h2>Eingaben</h2><table>
       ${row(tt('Profil, Werkstoff'), `${P.name}, ${I.sorte} (f<sub>y</sub> = ${res.fy} N/mm²)${I.auto?tt(' — leichtestes Profil der Reihe automatisch gewählt'):''}`)}
       ${row(tt('Querschnittswerte'), `A = ${deNum(P.A,1)} cm², I<sub>y</sub> = ${deNum(P.Iy,0)} cm⁴, W<sub>pl,y</sub> = ${deNum(P.Wply,1)} cm³, I<sub>z</sub> = ${deNum(P.Iz,1)} cm⁴, I<sub>T</sub> = ${deNum(P.It,2)} cm⁴, I<sub>w</sub> = ${deNum(P.Iw/1000,1)}·10³ cm⁶`)}
@@ -9492,7 +9603,7 @@ function buildReportStahl(){
       <p class="meta" style="margin-top:8px">I<sub>T</sub> aus Nennmaßen (Herstellerformel mit Ausrundung), Abweichung zu Tabellenwerten bis etwa 3 %. Lernwerkzeug — ersetzt keine geprüfte Statik.</p></section>`;
 }
 const repHead = (name, norm) => { const d=LAST.date; return _L`<h1>${esc(name)}</h1>
-    <div class="meta">Muly·size v${SIZE_VERSION} · ${d.toLocaleDateString(dLoc())} ${d.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · ${norm}</div>`; };
+    <div class="meta">kragr·size v${SIZE_VERSION} · ${d.toLocaleDateString(dLoc())} ${d.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · ${norm}</div>`; };
 const repRow = (a,b) => `<tr><td>${a}</td><td>${b}</td></tr>`;
 const repEnd = txt => _L`<p class="meta" style="margin-top:8px">${txt} Lernwerkzeug — ersetzt keine geprüfte Statik.</p></section>`;
 function buildReportAnschluss(){
@@ -9523,7 +9634,7 @@ function buildReportStuetze(){
   const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
   const lag={1:'gelenkig – gelenkig', 0.7:'eingespannt – gelenkig', 0.5:'beidseitig eingespannt', 2:tt('Kragstütze')}[I.beta];
   return _L`<h1>${esc(I.name||tt('Stahlbetonstütze'))}</h1>
-    <div class="meta">Muly·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA, Modellstützenverfahren</div>
+    <div class="meta">kragr·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA, Modellstützenverfahren</div>
     <section><h2>Eingaben</h2><table>
       ${row(tt('Bauteil'), TYP_NAME.stuetze)}
       ${row(tt('Querschnitt'), _L`b = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm (h in der Momentenebene)`)}
@@ -9555,7 +9666,7 @@ function buildReport(){
   const {I,res,date}=LAST, B=res.B, ex=deckung(I.expo,10).e, u=I.typ==='platte'?'/m':'';
   const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
   return _L`<h1>${esc(I.name||tt('Stahlbetonbauteil'))}</h1>
-    <div class="meta">Muly·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA</div>
+    <div class="meta">kragr·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA</div>
     <section><h2>Eingaben</h2><table>
       ${row(tt('Bauteil'), TYP_NAME[I.typ])}
       ${row(tt('Querschnitt'), I.typ==='unterzug' ? `b<sub>w</sub> = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm, h<sub>f</sub> = ${deNum(I.hf,0)} cm, b₁ = ${deNum(I.b1,0)} cm, b₂ = ${deNum(I.b2,0)} cm` : `b = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm`)}
@@ -9648,18 +9759,30 @@ function delPos(i, btn){
 }
 function renderPos(){
   const list=posRead(), cur=($(nameField()).value||'').trim();
-  $('pos-list').innerHTML = list.length ? list.map((p,i)=>`<div class="pos-item${p.name===cur?' current':''}">
-      <div class="pos-name">${esc(p.name)}<span class="pos-meta">${tt(TYP_NAME[p.typ]||'')} · ${new Date(p.date).toLocaleDateString(dLoc())} · ${tx(p.ok?'posAllOk':'posNotAll')}</span></div>
-      <button class="btn small secondary" onclick="loadPos(${i})">${tx('load')}</button>
-      <button class="btn small danger${_armed===i?' armed':''}" onclick="delPos(${i}, this)">${_armed===i?tx('delConfirm'):tx('del')}</button></div>`).join('')
-    : `<div class="hint" style="margin-top:0">${tx('posNone')}</div>`;
+  $('pos-list').innerHTML = list.length ? list.map((p,i)=>`<div class="pos-item pp-item${p.name===cur?' current':''}">
+      <div class="pp-iname">${esc(p.name)}<span class="pp-meta">${tt(TYP_NAME[p.typ]||'')} · ${new Date(p.date).toLocaleDateString(dLoc())} · ${tx(p.ok?'posAllOk':'posNotAll')}</span></div>
+      <button class="pp-btn small sec" onclick="loadPos(${i})">${tx('load')}</button>
+      <button class="pp-btn small danger${_armed===i?' armed':''}" onclick="delPos(${i}, this)">${_armed===i?tx('delConfirm'):tx('del')}</button></div>`).join('')
+    : `<div class="pp-empty">${tx('posNone')}</div>`;
+  projState();
 }
+// Speicherstand der aktuellen Eingaben am Knopf „Meine Projekte“ (v0.5.46): grün = gespeichert, orange = neu oder geändert
+function projState(){
+  if(!$('pp-name')) return;
+  const name=($(nameField())?.value||'').trim()||tx('noName'), p=posRead().find(x=>x.name===name);
+  $('pp-name').textContent=name;
+  const st = !p ? 'new' : JSON.stringify(snapshot())===JSON.stringify(p.data) ? 'saved' : 'changed';
+  if(st!=='saved' && projState.last==='saved') posMsg('');   // Meldung „gespeichert“ passt nicht mehr
+  projState.last=st;
+  mulyProj.state(st, st==='new' ? tx('ppNew') : st==='saved' ? tx('ppSaved', mulyProj.fmt(p.date, dLoc())) : tx('ppChanged'));
+}
+function mulyLangSwitch(l){ try{ localStorage.setItem('statiq-lang', l); }catch(e){} location.reload(); }
 function nameField(){ return MAT==='bauph' ? (BPMODE==='gk' ? 'gk-name' : BPMODE==='sommer' ? 'sx-name' : 'bp-name') : MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : STMODE==='zugstab' ? 'zb-name' : STMODE==='stumpf' ? 'bw-name' : STMODE==='stirnplatte' ? 'sp-name' : 'sn-name') : 'in-name'; }
 function syncK(){ const f=$('in-feld').value; $('in-K').value = f==='0.85' ? '1.3' : f==='0.7' ? '1.5' : '1.0'; }
 
 
 // ══════════════════════════════════════════════════
-// Schnittgrößen aus muly·calc übernehmen (gespeicherte Berechnungen im selben Browser)
+// Schnittgrößen aus kragr·calc übernehmen (gespeicherte Berechnungen im selben Browser)
 // ══════════════════════════════════════════════════
 const r2 = v => Math.round(v*100)/100;
 function calcEntries(){
@@ -10265,9 +10388,16 @@ Object.assign(FIX_WHY, {
 });
 function initUX(){
   // Projekt-Menü: Positionen und calc-Import wandern aus der Eingabespalte in ein Fenster unter der Kopfzeile
-  const panel=document.createElement('div'); panel.id='proj-panel'; panel.className='proj-panel';
-  const posCard=$('pos-msg').closest('.card'); panel.appendChild(posCard); panel.appendChild($('calc-import'));
-  document.body.appendChild(panel);
+  // gleiches Grundgerüst wie in calc (mulyProj, v0.5.46): Aktuelle Berechnung · Gespeichert · Schnittgrößen aus calc · Link
+  const posCard=$('pos-msg').closest('.card'), saveBtn=posCard.querySelector('.btn-row .btn');
+  const panel=mulyProj.skeleton();
+  $('pp-h-cur').textContent=tx('ppCur'); $('pp-h-list').textContent=tx('ppList'); $('pp-foot').textContent=tx('projLink');
+  saveBtn.className='pp-btn'; $('pp-act').appendChild(saveBtn);
+  $('pp-msg').replaceWith($('pos-msg')); $('pos-msg').className='pp-msg';
+  $('pp-list').replaceWith($('pos-list'));
+  const ci=$('calc-import'); ci.className='pp-sec pp-ci'; const cit=ci.querySelector('.card-title'); if(cit) cit.className='pp-h';
+  $('pp-extra').appendChild(ci); posCard.remove();
+  projState(); setInterval(()=>{ if(!document.hidden) projState(); }, 1200);
   PICK_GROUPS.forEach(([,seg])=>$(seg).classList.add('ux-hide')); $('seg-mat').classList.add('ux-hide');
   initFold(); updatePick(); updateFoldSums();
 }
@@ -10280,6 +10410,7 @@ fillFpProfile(); $('fp-prof').value='HEB 200';
 $('sw-st').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');
 fillSwProfile(); $('sw-prof').value='IPE 300';
 applyI18n(); showLangNotice();
+if($('lang-sel')) $('lang-sel').value=LANG;
 initUX();
 load(); run();
 // Aufruf aus calc: size.html#calc=<Schlüssel der gespeicherten Berechnung>
@@ -10340,14 +10471,17 @@ if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!
   });
 })();
 
-// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von muly.eu.
-const MULY_MAIL = 'kontakt@muly.eu';
+// Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von kragr.eu.
+const MULY_MAIL = 'kontakt@kragr.eu';
 function mulyFehlerHref(app, ver, extra){
   let lang='de'; try{ lang=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
-  let body=`Seite: ${location.href}\nModul: Muly·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
+  let body=`Seite: ${location.href}\nModul: kragr·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;
   if(extra) body+=('---\n'+extra).slice(0,1400);
-  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in Muly·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${MULY_MAIL}?subject=${encodeURIComponent('Fehler in kragr·'+app+' v'+ver)}&body=${encodeURIComponent(body)}`;
 }
 </script>
+<script data-theme>window.mulyThemeButton && mulyThemeButton(document.getElementById('ver'), 'after');</script>
+<script data-theme>(function(){var ms=document.getElementById('mob-status'), r=document.getElementById('results'); if(ms&&r&&window.IntersectionObserver) new IntersectionObserver(function(e){ ms.classList.toggle('away', e[0].isIntersecting); },{rootMargin:'0px 0px -35% 0px'}).observe(r); })();</script>
+<script data-theme>(function(){var h=document.querySelector('.app-header'); function s(){ document.documentElement.style.setProperty('--hdr-h', h.offsetHeight+'px'); } s(); addEventListener('resize', s); if(window.ResizeObserver) new ResizeObserver(s).observe(h); })();</script>
 </body>
 </html>

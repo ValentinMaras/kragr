@@ -57,7 +57,7 @@ async def main():
         await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         check('alte Speicherstände ohne Verläufe → Hinweis', 'älteren calc-Version' in await pg.inner_text('#ci-msg'))
         await pg.evaluate("localStorage.clear(); renderCalcImport()")
-        check('ohne gespeicherte Berechnungen → Hinweis mit Link zu calc', 'muly·calc' in await pg.inner_text('#calc-import') and not await pg.is_visible('#ci-form'))
+        check('ohne gespeicherte Berechnungen → Hinweis mit Link zu calc', 'kragr·calc' in await pg.inner_text('#calc-import') and not await pg.is_visible('#ci-form'))
         check('keine Skriptfehler', not errs, errs)
         await br.close()
 asyncio.run(main())

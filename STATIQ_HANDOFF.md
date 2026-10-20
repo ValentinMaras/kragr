@@ -1,12 +1,12 @@
-# Muly (vormals Statiq) — Übergabe für neuen Chat (calc v0.8.25 · ref v0.3.33 · size v0.5.43 · projekt v0.1.4 · rechtliches v0.1.3 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.8.32 · ref v0.3.39 · size v0.5.49 · projekt v0.1.9 · rechtliches v0.1.8 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (Muly·calc v0.8.25, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (Muly·projekt v0.1.4, Test von Variante C)
-- `ref.html` — Nachschlagewerk (Muly·ref v0.3.33, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (Muly·size v0.5.43, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (Muly·rechtliches v0.1.3)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.8.32, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.9, Test von Variante C)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.39, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.5.49, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.8)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -568,6 +568,57 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Neue Marke kragr — calc v0.8.30 · size v0.5.47 · ref v0.3.37 · projekt v0.1.7 · rechtliches v0.1.6
+
+- Anlass: „Muly“ als Marke in China (Klasse 41) und als Android-App vergeben; „lastr“ als Sport-App vergeben. Valentin hat sich für **kragr** entschieden (von Kragarm). Prüfung TMview (DE/EU, Klassen 9, 41, 42), App-Stores und Domains kragr.de/.eu/.app steht noch aus; die App-Store-Suche nach „kragr“ fand nur eine ähnliche Statik-App („Balkenrechner: Statik“, schwarzes Symbol, grün-weiße Karten) — deshalb bewusst eigener Stil (Rechenblatt).
+- Logo-Höhe in ex statt em (calc v0.8.32 · size v0.5.49 · ref v0.3.39 · projekt v0.1.9 · rechtliches v0.1.8): `.logo-r` 1,45 × 1,934 ex — der Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch wenn statt Inter eine Ersatzschrift greift (vorher in em: bei Arial zu hoch). sw.js `statiq-2026-10-20-12`.
+- Logo flacher (Wunsch Valentin, calc v0.8.31 · size v0.5.48 · ref v0.3.38 · projekt v0.1.8 · rechtliches v0.1.7): Kragarm-r endet auf x-Höhe (Oberkante 0,55 em wie r/a/g), nur der Lastpfeil ragt darüber; Rechtecke ab y = 50 im viewBox, Arm 11 hoch. sw.js `statiq-2026-10-20-11`.
+- Schriftzug D: „krag“ in Inter 800 + `svg.logo-r` (blaues Kragarm-r, Last an der Spitze, viewBox `182 12 60 80`, Breite .79em, Höhe 1.053em, Unterkante auf der Grundlinie). Gleich in Kopfzeilen aller Seiten, Startseite (`#headline`) und Fußzeile. CSS-Kommentar „Marke kragr“ ersetzt die alten μ-Regeln.
+- App-Symbol (Wunsch Valentin): weißer Grund, schwarzes Kragarm-r mit schwarzem Pfeil. `icons/` neu erzeugt (192, 512 mit runden transparenten Ecken, maskable 512 vollflächig mit Zeichen auf 78 %, Apple 180 vollflächig, Favicon 32 mit grauem Rand). Erzeuger: Skript im Chat (Playwright rendert SVG).
+- Texte: alle sichtbaren „Muly“/„muly·“ → „kragr“/„kragr·“ (Seiten, Sprachdateien, Titel, Manifest, Startbildschirm-Name, Fehler-Mail, Impressum). Platzhalter-E-Mail `kontakt@kragr.eu`. Projektdatei-Export `.kragr.json`, Import nimmt weiter `.json`, `.statiq`, `.muly`, `.kragr`.
+- Unverändert (interne Namen, damit keine Daten verloren gehen): `localStorage`-Schlüssel `statiq-*`, `muly-theme`, `muly-uebung`, `muly-install-aus`, Funktionsnamen `mulyProj`, `mulyTheme…`, `mulyFehlerHref`, `MULY_LANG`, `MULY_MAIL`.
+- Bericht (calc): `REP_BRAND = 'kragr'`, Symbol im Schriftfeld weiß mit schwarzem Rand.
+- Test `test_marke_muly.py` → `test_marke_kragr.py` (kein sichtbares „Statiq“ oder „Muly“, Logo, Symbole); `test_pwa`, `test_projekt`, `test_size_import`, `test_calc_fres` angepasst. sw.js `VERSION = 'statiq-2026-10-20-10'`.
+
+## Bericht als Rechenblatt — calc v0.8.29
+
+- Wunsch Valentin: Stil „A · Rechenblatt“ für den PDF-Bericht (Entwürfe `design-richtungen.png`, `bericht-rechenblatt.png`). Arbeitsname der neuen Marke: „kragr“ (Prüfung TMview/Stores/Domains offen). Im Bericht steht die Marke in `REP_BRAND` (zurzeit 'muly'), das Symbol ist schon das Kragarm-„r“ (Variante 3a mit blauem Pfeil).
+- `renderReport` neu (Klassen `.rb-*`): Schriftfeld (Logo · Position · Datum · Version), Titel, Abschnitte mit Linie in Großbuchstaben, System (Bild + Kennwerte in DM Mono), Einwirkungen, Rechenweg auf zartem Karo (`.rb-grid`, fette Ergebnisse doppelt unterstrichen), maximale Schnittgrößen doppelt unterstrichen, Auflagertabelle, Schnittgrößenverläufe, Haftungshinweis, Fußzeile.
+- Rechenweg wird beim Speichern mitgenommen: `sdf.rw = rwForSave(sys)` (Schritte wie in der App, `rwBeam`/`rwCont`/`rwFrame`). Ältere Speicherungen: Abschnitt entfällt.
+- `repMono()` nach dem Zeichnen: Diagramme schwarz-weiß, Flächen mit Schraffur (`pattern rbh…v/h`, Richtung aus der Bounding-Box: Stiele waagerecht), Raster und Hintergrund entfernt.
+- `num()` formatiert jetzt mit Dezimalkomma je Sprache (auch Geometrie und Lasten im Bericht); Auflagertabelle ebenso.
+- Test neu: `test_bericht_rechenblatt.py` (9); `runtests_report.py` erwartet „x = 1,73 m“. sw.js `VERSION = 'statiq-2026-10-20-9'`.
+- Nächste Stufe: size-Bericht (`buildReport`) und Gesamtbericht in projekt im selben Stil.
+
+## Projekt-Menü vereinheitlicht, Ergebnis-Plakette — calc v0.8.28 · size v0.5.46 · ref v0.3.36
+
+- Wunsch Valentin: „Nur vereinheitlichen“ (Ablauf bleibt), dazu: Knopf weniger wuchtig, sichtbar machen, ob gespeichert ist.
+- Gemeinsamer Block in calc und size direkt nach `<style data-glass>`: `<style data-proj>` (Knopf, Sprachwahl, Fenster `.proj-panel` mit `.pp-*`) und `<script data-proj>` mit `mulyProj.skeleton()` (Aktuelle Berechnung · Gespeichert · `#pp-extra` · Link `#pp-foot.proj-link`), `mulyProj.state(st, text)` (`none|new|changed|saved` → `#proj-btn[data-st]`, Punkt orange/grün, Titel) und `mulyProj.fmt`. Beide Blöcke müssen in calc und size gleich bleiben.
+- Knopf `#proj-btn`: Ordnersymbol + „Meine Projekte“ (`.pb-tx`) + Punkt (`.pb-dot`), einzeilig 30 px; unter 561 px nur Symbol mit Punkt. Kopfzeile in calc, size, ref: Knopf · calc · size · ref · Version · Hell/Dunkel · Sprachwahl (`#lang-sel`; size/ref speichern `statiq-lang` und laden neu). Version unter 561 px ausgeblendet. Kopfzeile überall 58 px.
+- size: `initUX` baut das Fenster aus `mulyProj.skeleton()` und hängt Speichern-Knopf, `#pos-msg`, `#pos-list` (Einträge `.pos-item.pp-item`, Knöpfe `.pp-btn`) und `#calc-import` (`.pp-sec`) ein. `projState()` vergleicht `snapshot()` mit der Position gleichen Namens (alle 1,2 s und nach `renderPos`); Meldung „gespeichert“ wird bei Änderung geleert. Neue Texte `ppCur`, `ppList`, `ppNew`, `ppSaved`, `ppChanged` (I18N + lang-Dateien).
+- calc: Anpassung im Kopf (`<script data-proj>`, läuft bei DOMContentLoaded, nicht im Hauptskript wegen der Node-Harnesses). Signatur aus Typ, Geometrie, Lagern, Lasten, Steifigkeit, Gelenken; gleiche Signatur gespeichert → grün. `saveCalc`/`saveFrameCalc` sind umhüllt: dieselbe Berechnung wird nicht doppelt abgelegt („✓ Schon gespeichert“). Liste der letzten 6 Berechnungen mit „→ size“ (`size.html#calc=…`) und „Alle Berechnungen und Berichte“ (Ansicht „Gespeichert“). Texte `pp…` in `I18N_UI` (vier Sprachen).
+- size Handy: Ergebniszeile `#mob-status` jetzt kleine Plakette unten mittig (`✓ max. 97 %` / `✕ 3 nicht erfüllt`, voller Text als Titel, Texte `mobOkS`, `mobBadS`), blendet aus, solange `#results` im Bild ist (IntersectionObserver).
+- ref: Kachelraster `minmax(0,1fr)` (vorher bei 360 px 4 px zu breit).
+- Tests neu: `test_projekt_menue.py` (13), `test_size_plakette.py` (8); `test_projekt.py` speichert die „neuere“ calc-Berechnung jetzt mit geänderter Steifigkeit. sw.js `VERSION = 'statiq-2026-10-20-8'`.
+
+## Startseite auf einem Bildschirm, Glasleiste — calc v0.8.27 · size v0.5.45 · ref v0.3.35 · projekt v0.1.6 · rechtliches v0.1.5
+
+- Startseite (`<style data-fit>` am Ende des Kopfs): ab 481 px Fensterhöhe Spaltenlayout über `100dvh`; Logo, Kacheltitel, Abstände und Fußzeile wachsen mit der Höhe (`min(…vw, …dvh, …px)`), kein Scrollen. Unter 481 px Höhe (Handy quer) bleibt das alte Layout mit Scrollen.
+- Handy: Kopfzeile niedriger, Logo direkt darunter (Abstand oben ~40–64 px statt ~110 px). Fußzeile: kleines Logo entfällt (großes steht oben), Versionen (`.fm-ver`) nur ab 561 px Breite, Prüfhinweis unter 621 px Höhe ausgeblendet. Hell/Dunkel-Schalter jetzt direkt neben der Sprachwahl (vorher mittig).
+- Hinweis „als App“ kompakt, mit × (`#install-x`, `localStorage['muly-install-aus']`, Text `install_x` in vier Sprachen); solange er sichtbar ist, rücken Logo und Kacheln enger (`:has`).
+- Glasleiste auf allen sechs Seiten (`<style data-glass>` nach dem Theme-Block, Klasse `glass` am `<header>`): Leiste selbst transparent, `::before` mit `backdrop-filter: blur(14px) saturate(160%)`, Verlauf weiß .82 → .6 und 16 px Auslauf nach unten (Maske) — der Inhalt verschwimmt weich unter der Leiste. Startseite: `glass-flat` (ohne Auslauf, damit das Logo scharf bleibt). size: Ergebniszeile `#mob-status` haftet jetzt genau unter der Kopfzeile (`--hdr-h` per ResizeObserver; vorher bei zweizeiliger Kopfzeile 21 px darunter versteckt), ref ebenso für `#breadcrumb` (zurzeit ausgeblendet). projekt und rechtliches haften jetzt ebenfalls oben, über die ganze Breite. Druck ohne Glasfläche. Im dunklen Modus wirkt die Invertierung mit.
+- Test neu: `test_startseite_glas.py` (11 Prüfungen: 9 Bildschirmgrößen × 4 Sprachen × mit/ohne App-Hinweis, Handy quer, Schalterlage, ×, Glas auf allen Seiten, Druck). sw.js `VERSION = 'statiq-2026-10-20-6'`.
+
+## Dunkles Erscheinungsbild — calc v0.8.26 · size v0.5.44 · ref v0.3.34 · projekt v0.1.5 · rechtliches v0.1.4
+
+- Alle sechs Seiten (auch Startseite): Schalter `#theme-btn` (Symbol Halbkreis/Sonne/Mond), Folge Automatisch → Dunkel → Hell. Auswahl in `localStorage['muly-theme']` (`auto|light|dark`), gilt seitenübergreifend; Automatisch folgt `prefers-color-scheme` (auch bei Wechsel zur Laufzeit).
+- Umsetzung ohne zweite Farbpalette: `<script data-theme>` direkt nach `<head>` setzt `html.dark` vor dem ersten Zeichnen (kein Aufblitzen). `<style data-theme>`: `html.dark { filter: invert(.92) hue-rotate(180deg) }`, Bilder, Videos und `.no-invert` werden zurückgedreht (size: `#report-view` bleibt papierweiß). Druck: Filter aus, Schalter ausgeblendet.
+- Einbau des Knopfs am Seitenende: `mulyThemeButton(anker, 'after'|'before')` — calc hinter `.app-header .version`, size hinter `#ver`, ref hinter `#ref-version`, projekt hinter `#ver`, Startseite vor `#langSwitcher`, rechtliches vor `#lang`. Beschriftung (title/aria-label) DE/EN/FR/ES aus `statiq-lang`.
+- Wichtig: zusätzliche Skriptblöcke immer mit Attribut (`<script data-theme>`), weil die Node-Harnesses calc über `/<script>([\s\S]*)<\/script>/` lesen.
+- `theme-color` für hell (#ffffff) und dunkel (#141414) in index, calc, projekt.
+- Handy: size-Kopfzeile unter 440 px enger (gap 12 px), projekt unter 720 px enger und ohne Versionsnummer (vorher schon 16 px zu breit).
+- Test neu: `test_dunkel.py` (14 Prüfungen, auch Handy 390 px). sw.js `VERSION = 'statiq-2026-10-20-5'`.
+
 ## Übungsmodus in calc — calc v0.8.25
 
 - Gleicher Schalter wie size (`localStorage['muly-uebung']`): Knopf `.ueb-tog` oben in der rechten Spalte jedes Systems (unter „Ergebnisse werden laufend berechnet“).
@@ -967,7 +1018,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1576/1576 grün** (inklusive `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1634/1634 grün** (inklusive `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 13, `test_size_plakette.py` 8, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

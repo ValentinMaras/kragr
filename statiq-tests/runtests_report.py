@@ -28,7 +28,7 @@ CHANGE = {'beam':"document.getElementById('bL').value=9; loads.beam.point[0].val
           'cantilever':"document.getElementById('cL').value=9",
           'cont':"spanData[0].L=9",
           'frame':"document.getElementById('fB').value=9; frameLoads.horiz[0].values.F=99"}
-EXPECT = {'beam':['Einfeldträger','L = 5 m','A: Festlager, B: Loslager','F1 = 20 kN, x = 1.73 m','q1 = 5 kN/m'],
+EXPECT = {'beam':['Einfeldträger','L = 5 m','A: Festlager, B: Loslager','F1 = 20 kN, x = 1,73 m','q1 = 5 kN/m'],
           'cantilever':['Kragarm','L = 3 m','Einspannung','F1 = 10 kN'],
           'cont':['Durchlaufträger','L<sub>1</sub> = 4 m, L<sub>2</sub> = 6 m','Feld 2: F1 = 20 kN','Stützmomente'],
           'frame':['Rahmen','b = 5 m','A: Einspannung, B: Festlager','Gelenk 1: Riegel, x = 2 m','P1: F = 20 kN','Linker Stiel','horizontal']}

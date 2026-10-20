@@ -70,7 +70,7 @@ async def main():
             await pg.goto(U+'size.html'); await pg.evaluate(f"localStorage.setItem('statiq-lang','{lang}')"); await pg.reload(); await pg.wait_for_timeout(400)
             await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(300)
             r=await pg.evaluate("[getComputedStyle(document.querySelector('.page-head')).display, document.getElementById('scope-card').innerText, document.getElementById('page-sub').textContent, [...document.querySelectorAll('#details > .card')].pop().id]")
-            check(f'size {lang.upper()}: Kopf (Titel, Beschreibung) ausgeblendet, Beschreibung unten in „{title}“ vor „Nicht enthalten“', r[0]=='none' and title in r[1] and r[2].strip()[:40] in r[1] and 'muly·calc' in r[1] and r[3]=='scope-card', r[1][:80])
+            check(f'size {lang.upper()}: Kopf (Titel, Beschreibung) ausgeblendet, Beschreibung unten in „{title}“ vor „Nicht enthalten“', r[0]=='none' and title in r[1] and r[2].strip()[:40] in r[1] and 'kragr·calc' in r[1] and r[3]=='scope-card', r[1][:80])
         await pg.goto(U+'size.html'); await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(400)
         first=await pg.evaluate("(()=>{ const m=document.querySelector('main.main'); const vis=[...m.querySelectorAll('*')].find(e=>e.offsetParent!==null && e.getBoundingClientRect().height>0); return [!!document.querySelector('.lang-notice'), document.getElementById('pick-btn').getBoundingClientRect().top < 140]; })()")
         check('size EN: kein Sprachhinweis, Auswahl steht oben', first==[False, True], first)

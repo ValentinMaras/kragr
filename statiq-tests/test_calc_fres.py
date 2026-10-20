@@ -11,7 +11,7 @@ def check(name, ok, info=''):
 import os
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/calc.html'
 ENG=re.compile(r"\b(the|and|with|is|are|from|support|supports|load|loads|span|spans|left|right|reactions?|shear|check|beam|beams|frame|frames|column|columns|rafter|hinge|hinges|fixed|roller|please|calculate|calculation|saved?|deflection|step|steps|solution|sum|equilibrium|cantilever|continuous|member|node|nodes|stiffness|determinate|indeterminate|unknown|equation|equations|results?|delete|export|import|report|height|width|length|distributed|uniform|inside|outside|this|that|only|yes|add|remove|new|open|close|show|hide|print|value|values)\b",re.I)
-OKW=['Clapeyron','statiq','Statiq','muly','Muly','calc','size','ref','SDF','kN','kNm','EI','Gerber','PDF','JSON']
+OKW=['Clapeyron','statiq','Statiq','muly','Muly','kragr','calc','size','ref','SDF','kN','kNm','EI','Gerber','PDF','JSON']
 TX=r"""() => { const out=[]; const w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   while(w.nextNode()){ const n=w.currentNode, p=n.parentElement; if(!p || ['SCRIPT','STYLE'].includes(p.tagName)) continue; const t=n.textContent.trim(); if(t && /[A-Za-z]{3,}/.test(t)) out.push([t, p.closest('[id]')?.id||'']); }
   document.querySelectorAll('[placeholder],[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{ const v=e.getAttribute(a); if(v) out.push([v,'@'+a+':'+(e.id||'')]); }));

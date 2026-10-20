@@ -19,7 +19,7 @@ PAGES=['index.html','calc.html','size.html','ref.html','projekt.html','rechtlich
 
 async def main():
     m=json.load(open(os.path.join(BASE,'manifest.json'),encoding='utf-8'))
-    check('Manifest: Name, start_url, scope, display standalone', m['short_name']=='Muly' and m['start_url']=='./index.html' and m['scope']=='./' and m['display']=='standalone')
+    check('Manifest: Name, start_url, scope, display standalone', m['short_name']=='kragr' and m['start_url']=='./index.html' and m['scope']=='./' and m['display']=='standalone')
     sizes={i['src']:(png_size(os.path.join(BASE,i['src'])), i.get('purpose','any')) for i in m['icons']}
     check('Symbole 192 und 512 px vorhanden, dazu maskable', sizes.get('icons/icon-192.png',[None])[0]==(192,192) and sizes.get('icons/icon-512.png',[None])[0]==(512,512) and ((512,512),'maskable') in sizes.values(), sizes)
     check('apple-touch-icon 180 px und favicon 32 px', png_size(os.path.join(BASE,'icons/apple-touch-icon.png'))==(180,180) and png_size(os.path.join(BASE,'icons/favicon-32.png'))==(32,32))

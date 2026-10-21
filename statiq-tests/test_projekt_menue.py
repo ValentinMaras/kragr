@@ -23,7 +23,7 @@ async def main():
         await pg.mouse.move(5,700); sc=await pg.evaluate(STY); await pg.click('#proj-btn'); await pg.wait_for_timeout(200); pc=await pg.evaluate(PAN)
         await pg.goto(B+'size.html'); await pg.wait_for_timeout(600)
         await pg.mouse.move(5,700); ss=await pg.evaluate(STY); await pg.click('#proj-btn'); await pg.wait_for_timeout(200); ps=await pg.evaluate(PAN)
-        check('calc und size: Knopf gleich (Farbe, Höhe, Schrift, Rundung)', sc==ss and sc[1]==30, (sc, ss))
+        check('calc und size: Knopf gleich (Farbe, Höhe, Schrift, Rundung)', sc==ss and sc[1]==40, (sc, ss))
         check('calc und size: Fenster gleich aufgebaut (Aktuelle Berechnung · Gespeichert · Link)', pc==ps and pc[0]=='Aktuelle Berechnung' and pc[1]=='Gespeichert' and 'Meine Projekte' in pc[2], (pc, ps))
         o={}
         for f in ['calc','size','ref']:

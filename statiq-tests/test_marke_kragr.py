@@ -57,7 +57,7 @@ async def main():
         await pg.goto(U+'index.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(300)
         R="(sel)=>{const l=document.querySelector(sel), s=l&&l.querySelector('svg.logo-r'); if(!l||!s) return null; const r=s.getBoundingClientRect(), fs=parseFloat(getComputedStyle(l).fontSize); return [l.textContent.trim(), s.querySelectorAll('rect').length, s.querySelector('rect').getAttribute('fill'), +(r.height/fs).toFixed(2), l.getAttribute('href')]}"
         r=await pg.evaluate(R, '#headline')
-        check('Startseite: Schriftzug „krag“ + blaues Kragarm-r mit Last', r and r[0]=='krag' and r[1]==2 and r[2]=='#2563eb' and 0.9<r[3]<1.2, r)
+        check('Startseite: Schriftzug „krag“ + blaues Kragarm-r mit Last', r and r[0]=='krag' and r[1]==2 and r[2]=='#5468ad' and 0.9<r[3]<1.2, r)
         xh=await pg.evaluate("""(()=>{ const h=document.getElementById('headline'), cs=getComputedStyle(h), c=document.createElement('canvas').getContext('2d'); c.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
           const fs=parseFloat(cs.fontSize), st=h.querySelector('svg rect').getBoundingClientRect(); return [+(c.measureText('g').actualBoundingBoxAscent/fs).toFixed(3), +((st.bottom-st.top)/fs).toFixed(3)]; })()""")
         check('Kragarm-r endet auf der Oberkante des g, nur der Pfeil ragt darüber', 0<=xh[0]-xh[1]<0.01, xh)

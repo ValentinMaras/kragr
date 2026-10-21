@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.8.35 -->
+<!-- kragr v0.9.0 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -70,27 +70,27 @@
 <style data-proj>
   /* Kopfzeile und Projekt-Menü — identisch in calc und size (calc v0.8.28 · size v0.5.46) */
   .app-header .header-links { gap:16px; white-space:nowrap; }
-  .proj-btn { position:relative; display:inline-flex; align-items:center; gap:7px; height:30px; padding:0 11px 0 9px; border:none; border-radius:9px; background:#efeff1;
-    font-family:inherit; font-size:13px; font-weight:650; line-height:1; color:var(--text,#0a0a0a); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
+  .proj-btn { position:relative; display:inline-flex; align-items:center; gap:7px; height:30px; padding:0 11px 0 9px; border:none; border-radius:9px; background:#f1f2f4;
+    font-family:inherit; font-size:13px; font-weight:650; line-height:1; color:var(--text,#111114); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
   .proj-btn::after { content:none !important; }
   .proj-btn:hover { background:#e4e4e7; }
   .proj-btn svg { flex:none; }
   .proj-btn .pb-dot { width:7px; height:7px; border-radius:50%; background:#b8b8bd; flex:none; }
   .proj-btn[data-st="saved"] .pb-dot { background:#16a34a; } .proj-btn[data-st="changed"] .pb-dot, .proj-btn[data-st="new"] .pb-dot { background:#f59e0b; }
   .proj-btn[data-st="none"] .pb-dot { display:none; }
-  .proj-btn.open { background:#0a0a0a; color:#fff; }
-  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#0a0a0a); cursor:pointer;
+  .proj-btn.open { background:#111114; color:#fff; }
+  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#f1f2f4; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#111114); cursor:pointer;
     background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
   .lang-sel:hover { background-color:#e4e4e7; }
   @media (max-width:560px){ .app-header .header-links { gap:12px; } .header-links .version { display:none; }
-    .proj-btn { padding:0 9px; } .proj-btn .pb-tx { display:none; } .proj-btn .pb-dot { position:absolute; top:5px; right:5px; width:6px; height:6px; box-shadow:0 0 0 2px #efeff1; } }
+    .proj-btn { padding:0 9px; } .proj-btn .pb-tx { display:none; } .proj-btn .pb-dot { position:absolute; top:5px; right:5px; width:6px; height:6px; box-shadow:0 0 0 2px #f1f2f4; } }
   @media (max-width:380px){ .app-header .header-links { gap:9px; } }
   .proj-panel { display:none; position:fixed; z-index:60; top:calc(var(--hdr-h,58px) + 4px); right:16px; width:min(420px, calc(100vw - 32px)); max-height:calc(100vh - var(--hdr-h,58px) - 24px);
-    overflow:auto; background:#fff; border-radius:18px; padding:8px; box-shadow:0 18px 48px rgba(0,0,0,.16), 0 2px 8px rgba(0,0,0,.06); font-family:Inter, system-ui, -apple-system, sans-serif; color:#0a0a0a; }
+    overflow:auto; background:#fff; border-radius:18px; padding:8px; box-shadow:0 18px 48px rgba(0,0,0,.16), 0 2px 8px rgba(0,0,0,.06); font-family:Figtree, system-ui, -apple-system, sans-serif; color:#111114; }
   .proj-panel.open { display:block; }
   @media (max-width:560px){ .proj-panel { left:12px; right:12px; width:auto; } }
   .proj-panel .pp-sec { background:#f6f6f7; border:none; border-radius:12px; padding:12px 14px; margin:0 0 6px; box-shadow:none; }
-  .proj-panel .pp-h { display:block; font-size:12px; font-weight:700; color:#8a8a8a; margin:0 0 6px; padding:0; letter-spacing:0; text-transform:none; }
+  .proj-panel .pp-h { display:block; font-size:12px; font-weight:700; color:#5c5e66; margin:0 0 6px; padding:0; letter-spacing:0; text-transform:none; }
   .proj-panel .pp-row { display:flex; align-items:center; gap:10px; }
   .proj-panel .pp-name { flex:1; min-width:0; font-size:15px; font-weight:750; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .proj-panel .pp-st { display:flex; align-items:center; gap:6px; margin-top:4px; font-size:12.5px; color:#6b6b6b; }
@@ -98,19 +98,19 @@
   .proj-panel .pp-st.saved i { background:#16a34a; } .proj-panel .pp-st.none { display:none; }
   .proj-panel .pp-msg { font-size:12.5px; color:#3f3f46; margin-top:6px; } .proj-panel .pp-msg:empty { display:none; }
   .proj-panel .pp-btn { display:inline-flex; align-items:center; border:none; border-radius:9px; padding:7px 13px; font-family:inherit; font-size:13px; font-weight:700; line-height:1.2;
-    background:#0a0a0a; color:#fff; cursor:pointer; white-space:nowrap; text-decoration:none; flex:none; }
+    background:#111114; color:#fff; cursor:pointer; white-space:nowrap; text-decoration:none; flex:none; }
   .proj-panel .pp-btn:disabled { opacity:.35; cursor:default; }
   .proj-panel .pp-btn.small { padding:5px 10px; font-size:12px; }
-  .proj-panel .pp-btn.sec { background:#e6e6e9; color:#0a0a0a; } .proj-panel .pp-btn.sec:hover { background:#dcdce0; }
+  .proj-panel .pp-btn.sec { background:#e6e6e9; color:#111114; } .proj-panel .pp-btn.sec:hover { background:#dcdce0; }
   .proj-panel .pp-btn.danger { background:transparent; color:#b42318; } .proj-panel .pp-btn.danger.armed { background:#b42318; color:#fff; }
   .proj-panel .pp-item { display:flex; align-items:center; gap:6px; padding:8px 0; border-top:1px solid #e7e7ea; background:none; margin:0; }
   .proj-panel .pp-item:first-child { border-top:none; padding-top:2px; }
   .proj-panel .pp-iname { flex:1; min-width:0; font-size:13.5px; font-weight:650; overflow-wrap:anywhere; }
-  .proj-panel .pp-item.current .pp-iname::before { content:'●'; color:var(--accent,#2563eb); font-size:9px; vertical-align:2px; margin-right:6px; }
-  .proj-panel .pp-meta { display:block; font-size:12px; font-weight:500; color:#8a8a8a; margin-top:2px; }
-  .proj-panel .pp-empty { font-size:12.5px; color:#8a8a8a; line-height:1.45; }
+  .proj-panel .pp-item.current .pp-iname::before { content:'●'; color:var(--accent,#5468ad); font-size:9px; vertical-align:2px; margin-right:6px; }
+  .proj-panel .pp-meta { display:block; font-size:12px; font-weight:500; color:#5c5e66; margin-top:2px; }
+  .proj-panel .pp-empty { font-size:12.5px; color:#5c5e66; line-height:1.45; }
   .proj-panel .pp-more { display:inline-block; margin-top:6px; border:none; background:none; padding:0; font-family:inherit; font-size:12.5px; font-weight:650; color:#52525b; cursor:pointer; }
-  .proj-panel .pp-foot { display:block; padding:8px 8px 4px; font-size:13px; font-weight:650; color:var(--accent,#2563eb); text-decoration:none; }
+  .proj-panel .pp-foot { display:block; padding:8px 8px 4px; font-size:13px; font-weight:650; color:var(--accent,#5468ad); text-decoration:none; }
   @media print { .proj-panel { display:none !important; } }
 </style>
 <script data-proj>
@@ -121,13 +121,15 @@ window.mulyProj = {
     p.innerHTML='<section class="pp-sec pp-cur"><div class="pp-h" id="pp-h-cur"></div><div class="pp-row"><div class="pp-name" id="pp-name"></div><span id="pp-act"></span></div>'
       +'<div class="pp-st none" id="pp-st"><i></i><span></span></div><div class="pp-msg" id="pp-msg"></div></section>'
       +'<section class="pp-sec pp-saved"><div class="pp-h" id="pp-h-list"></div><div id="pp-list"></div></section><div id="pp-extra"></div>'
-      +'<a class="pp-foot proj-link" id="pp-foot" href="projekt.html"></a>';
+      +'<a class="pp-foot proj-link" id="pp-foot" href="projekt.html"></a><span class="pp-ver" id="pp-ver"></span>';
     document.body.appendChild(p); return p;
   },
   state: function(st, text){   // st: none | new | changed | saved
     var b=document.getElementById('proj-btn'), s=document.getElementById('pp-st');
     if(b){ b.dataset.st=st; var l=(b.querySelector('.pb-tx')||{}).textContent||''; b.title = text ? l+' — '+text : l; b.setAttribute('aria-label', b.title); }
     if(s){ s.className='pp-st '+st; s.querySelector('span').textContent=text||''; }
+    var v=document.getElementById('pp-ver'), hv=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name');
+    if(v && hv) v.textContent='kragr·'+(m?m.textContent.trim():'')+' '+hv.textContent;   // Version steht hier statt in der Kopfzeile
   },
   fmt: function(iso, loc){ try{ var d=new Date(iso); return d.toLocaleDateString(loc,{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
 };
@@ -218,12 +220,12 @@ window.mulyProj = {
       --bg: #f0f1f3; --surface: #ffffff; --surface2: #e8eaed;
       --border: #cbd5e1; --border-dark: #94a3b8;
       --text: #111827; --text2: #374151; --text3: #9ca3af;
-      --accent: #2563eb; --accent-bg: #eff6ff;
-      --red: #d85a30; --blue: #2563eb; --green: #0f6e56;
+      --accent: #5468ad; --accent-bg: #eceff8;
+      --red: #d85a30; --blue: #5468ad; --green: #0f6e56;
       --radius: 4px; --radius-sm: 3px;
       --wire: #cbd5e1;
     }
-    body { font-family:DM Sans, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 3rem; position: relative; }
+    body { font-family:Figtree, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 3rem; position: relative; }
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -240,39 +242,39 @@ window.mulyProj = {
     .app-header { background: rgba(240,241,243,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-dark); padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; overflow: visible; }
     .logo { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); text-decoration: none; }
     .logo span { color: var(--accent); }
-    .version { font-size: 11px; color: var(--text3); font-family:DM Mono, monospace; }
+    .version { font-size: 11px; color: var(--text3); font-family:JetBrains Mono, monospace; }
 
     .nav { background: rgba(240,241,243,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-dark); display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 1rem; }
     .nav::-webkit-scrollbar { display: none; }
-    .nav-tab { padding: 11px 16px; font-size: 13px; font-weight: 500; color: var(--text2); border: none; background: none; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; font-family:DM Sans, sans-serif; letter-spacing: 0.1px; }
+    .nav-tab { padding: 11px 16px; font-size: 13px; font-weight: 500; color: var(--text2); border: none; background: none; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; font-family:Figtree, sans-serif; letter-spacing: 0.1px; }
     .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-    .nd-item { display:flex;align-items:center;width:100%;text-align:left;padding:9px 10px;border-radius:8px;border:none;background:none;cursor:pointer;font-size:13px;color:var(--text);font-family:DM Sans,sans-serif;margin-bottom:2px;transition:background 0.1s; }
+    .nd-item { display:flex;align-items:center;width:100%;text-align:left;padding:9px 10px;border-radius:8px;border:none;background:none;cursor:pointer;font-size:13px;color:var(--text);font-family:Figtree,sans-serif;margin-bottom:2px;transition:background 0.1s; }
     .nd-item:hover { background:var(--border); }
     .lang-pick { display:flex; gap:6px; }
-    .lang-pick button { flex:1; padding:7px 0; border:1px solid var(--border); border-radius:8px; background:none; cursor:pointer; font-family:DM Mono,monospace; font-size:12px; color:var(--text2); }
+    .lang-pick button { flex:1; padding:7px 0; border:1px solid var(--border); border-radius:8px; background:none; cursor:pointer; font-family:JetBrains Mono,monospace; font-size:12px; color:var(--text2); }
     .lang-pick button.active { background:var(--accent); border-color:var(--accent); color:#fff; }
-    .nd-item.active { color:var(--accent);font-weight:600;background:rgba(37,99,235,0.08); }
+    .nd-item.active { color:var(--accent);font-weight:600;background:rgba(84,104,173,0.08); }
     .nd-module { padding:12px 10px;gap:12px; }
     .nd-module-icon { font-size:20px;width:32px;text-align:center;flex-shrink:0; }
-    .nd-mono-tag { width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-family:DM Mono,monospace;flex-shrink:0;letter-spacing:0.5px; }
+    .nd-mono-tag { width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-family:JetBrains Mono,monospace;flex-shrink:0;letter-spacing:0.5px; }
     .nd-sys-icon { display:inline-block;width:55px;text-align:center;font-size:15px;flex-shrink:0;color:var(--text2); }
-    .nd-sys-label { font-size:13px;color:var(--text);font-family:DM Sans,sans-serif; }
+    .nd-sys-label { font-size:13px;color:var(--text);font-family:Figtree,sans-serif; }
 
     .main { padding: 1rem; max-width: 480px; margin: 0 auto; }
     .card { background: rgba(255,255,255,0.88); border: 1px solid var(--border-dark); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9); }
     .card-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .card-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-family: DM Mono, monospace; }
-    .info-btn { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); background: transparent; color: var(--text3); font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-family:DM Sans, sans-serif; }
+    .card-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-family: JetBrains Mono, monospace; }
+    .info-btn { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); background: transparent; color: var(--text3); font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-family:Figtree, sans-serif; }
     .info-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 
     .field { margin-bottom: 10px; }
     .field:last-child { margin-bottom: 0; }
     .field label { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 4px; margin-bottom: 5px; }
-    .field label .unit { font-size: 11px; color: var(--text3); font-family:DM Mono, monospace; }
-    .field select { width: 100%; padding: 9px 10px; font-size: 14px; font-family:'DM Sans', sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
+    .field label .unit { font-size: 11px; color: var(--text3); font-family:JetBrains Mono, monospace; }
+    .field select { width: 100%; padding: 9px 10px; font-size: 14px; font-family:Figtree, sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
     .field select:focus { outline: none; border-color: var(--accent); }
-    .field input { width: 100%; padding: 9px 12px; font-size: 14px; font-family:DM Mono, monospace; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); transition: border-color 0.15s; }
-    .field input:focus { outline: none; border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+    .field input { width: 100%; padding: 9px 12px; font-size: 14px; font-family:JetBrains Mono, monospace; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); transition: border-color 0.15s; }
+    .field input:focus { outline: none; border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(84,104,173,0.08); }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .field-row-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; }
@@ -281,7 +283,7 @@ window.mulyProj = {
     .load-item { border: 1px solid var(--border-dark); border-radius: var(--radius-sm); overflow: hidden; transition: opacity 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
     .load-item.disabled { opacity: 0.4; }
     .load-item-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: var(--surface2); border-bottom: 1px solid var(--border); }
-    .load-item-label { font-size: 11px; font-weight: 500; color: var(--text2); font-family:DM Mono, monospace; letter-spacing: 0.5px; }
+    .load-item-label { font-size: 11px; font-weight: 500; color: var(--text2); font-family:JetBrains Mono, monospace; letter-spacing: 0.5px; }
     .load-item-actions { display: flex; gap: 5px; }
     .load-action-btn { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: background 0.15s; color: var(--text2); }
     .load-action-btn:hover { background: var(--border); }
@@ -299,42 +301,42 @@ window.mulyProj = {
              display: flex; gap: 8px; align-items: center; transition: opacity 0.25s; }
 .toast.error { background: #9a3412; color: #fff; } .toast.ok { background: #1f6b3f; color: #fff; }
     /* Bericht */
-    .rep { max-width: 720px; margin: 0 auto; font-family: 'DM Sans', sans-serif; color: var(--text); }
+    .rep { max-width: 720px; margin: 0 auto; font-family: Figtree, sans-serif; color: var(--text); }
     .rep-head { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 10px; }
-    .rep-brand { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); letter-spacing: 3px; line-height: 1; }
-    .rep-sub, .rep-meta { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
+    .rep-brand { font-family: Figtree, sans-serif; font-size: 28px; color: var(--accent); letter-spacing: 3px; line-height: 1; }
+    .rep-sub, .rep-meta { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
     .rep-meta { text-align: right; }
     .rep-title { font-size: 15px; font-weight: 600; margin-bottom: 18px; }
-    .rep-sec { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--text3); font-family: 'DM Mono', monospace; margin: 20px 0 8px; }
+    .rep-sec { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--text3); font-family: 'JetBrains Mono', monospace; margin: 20px 0 8px; }
     .rep-sys { display: grid; grid-template-columns: 1fr; gap: 10px; }
     .rep-sys-img { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 6px; }
     .rep-sys-img svg { max-width: 520px; margin: 0 auto; }
     .rep-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
     @media (min-width: 520px) { .rep-grid { grid-template-columns: 1fr 1fr; } }
     .rep-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
-    .rep-card-t { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; margin-bottom: 2px; }
+    .rep-card-t { font-size: 10px; color: var(--text3); font-family: 'JetBrains Mono', monospace; margin-bottom: 2px; }
     .rep-card-b { font-size: 12.5px; line-height: 1.5; }
     .rep-dim { color: var(--text3); font-size: 11px; }
-    .rep-loads { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.7; font-family: 'DM Mono', monospace; }
+    .rep-loads { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.7; font-family: 'JetBrains Mono', monospace; }
     .rep-maxrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
     .rep-max { border: 1.5px solid var(--c); border-radius: 8px; padding: 10px; text-align: center; color: var(--c); background: color-mix(in srgb, var(--c) 7%, transparent); }
-    .rep-max-l { font-size: 10px; font-family: 'DM Mono', monospace; font-weight: 700; margin-bottom: 4px; }
+    .rep-max-l { font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; margin-bottom: 4px; }
     .rep-max-v { font-size: 22px; font-weight: 700; line-height: 1.2; }
     .rep-max-u { font-size: 11px; }
     .rep-table { width: 100%; border-collapse: collapse; font-size: 12px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .rep-table th { background: var(--surface); font-family: 'DM Mono', monospace; font-weight: 700; padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--border); }
-    .rep-table td { padding: 6px 10px; text-align: right; font-family: 'DM Mono', monospace; border-bottom: 1px solid var(--border); }
+    .rep-table th { background: var(--surface); font-family: 'JetBrains Mono', monospace; font-weight: 700; padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+    .rep-table td { padding: 6px 10px; text-align: right; font-family: 'JetBrains Mono', monospace; border-bottom: 1px solid var(--border); }
     .rep-table th:first-child, .rep-table td:first-child { text-align: left; font-weight: 600; }
     .rep-note { font-size: 11px; color: var(--text3); margin-top: 6px; line-height: 1.5; }
     .rep-diagrams { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
     @media (min-width: 1000px) { .rep-diagrams { grid-template-columns: 1fr 1fr; } }
     .rep-dia svg { max-width: 560px; margin: 0 auto; }
     .rep-dia { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; break-inside: avoid; }
-    .rep-dia-t { font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; margin-bottom: 4px; }
+    .rep-dia-t { font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px; }
     .rep-dia svg { display: block; width: 100%; height: auto; }
-    .rep-foot { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 20px; display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; }
+    .rep-foot { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 20px; display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
     /* Bericht als Rechenblatt (calc v0.8.29): Schriftfeld, Abschnitte mit Linie, Rechenweg auf zartem Karo, Ergebnisse doppelt unterstrichen, Schnittgrößen schraffiert */
-    .rb { max-width:760px; margin:0 auto; font-family:Inter, 'DM Sans', sans-serif; color:#111; }
+    .rb { max-width:760px; margin:0 auto; font-family:Figtree, Figtree, sans-serif; color:#111; }
     .rb-sf { display:grid; grid-template-columns:auto 1.6fr 1fr 1fr; border:1.4px solid #111; font-size:10px; color:#555; }
     .rb-sf > div { padding:5px 9px; border-right:1px solid #111; min-width:0; }
     .rb-sf > div:last-child { border-right:none; }
@@ -345,7 +347,7 @@ window.mulyProj = {
     .rb-subt { font-size:12px; color:#666; margin-bottom:6px; }
     .rb-h { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin:20px 0 8px; padding-bottom:4px; border-bottom:1.2px solid #111; break-after:avoid; }
     .rb-sys { margin:4px 0 8px; } .rb .rb-sys.rep-sys-img { background:none; border:none; padding:0; } .rb-sys svg { max-width:560px; margin:0 auto; display:block; }
-    .rb-mono { font-family:'DM Mono', monospace; font-size:12.5px; line-height:1.85; }
+    .rb-mono { font-family:'JetBrains Mono', monospace; font-size:12.5px; line-height:1.85; }
     .rb-mono .k { color:#666; display:inline-block; min-width:9.5em; }
     .rb-dim { color:#777; font-size:11px; }
     .rb-grid { background-image:linear-gradient(#e8edf4 1px,transparent 1px),linear-gradient(90deg,#e8edf4 1px,transparent 1px); background-size:12px 12px; padding:8px 10px; margin:0 -10px; }
@@ -353,19 +355,19 @@ window.mulyProj = {
     .rb .steps b, .rb-res { color:#111; font-weight:700; border-bottom:3px double #111; padding:0 1px; }
     .rb .st { break-inside:avoid; }
     .rb .st-n { border-color:#111; color:#111; }
-    .rb-tab { width:100%; border-collapse:collapse; font-family:'DM Mono', monospace; font-size:12.5px; margin-top:4px; }
+    .rb-tab { width:100%; border-collapse:collapse; font-family:'JetBrains Mono', monospace; font-size:12.5px; margin-top:4px; }
     .rb-tab th { text-align:right; font-weight:700; padding:5px 8px; border-bottom:1.2px solid #111; }
     .rb-tab td { text-align:right; padding:5px 8px; border-bottom:1px solid #ddd; }
     .rb-tab th:first-child, .rb-tab td:first-child { text-align:left; }
     .rb-note { font-size:11px; color:#666; margin-top:6px; line-height:1.5; }
     .rb-dias { display:grid; grid-template-columns:1fr; gap:14px; }
     @media (min-width:1000px) { .rb-dias { grid-template-columns:1fr 1fr; } }
-    .rb-dia { break-inside:avoid; } .rb-dia-t { font-family:'DM Mono', monospace; font-size:11.5px; font-weight:700; margin-bottom:2px; }
+    .rb-dia { break-inside:avoid; } .rb-dia-t { font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; margin-bottom:2px; }
     .rb-dia svg { display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
     .rb-foot { display:flex; justify-content:space-between; gap:12px; font-size:10px; color:#777; border-top:1px solid #ccc; margin-top:22px; padding-top:6px; }
     @media print { .rb { max-width:none; } .rb-dias { grid-template-columns:1fr 1fr; } .rb-grid { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .rb-h { break-after:avoid; } .rb-dia, .rb-tab, .rb .st { break-inside:avoid; } }
     /* Umschalter (Lager, Kopfhalterung) — hatten bisher keinen Stil */
-    .toggle-btn { padding: 6px 10px; margin: 0 4px 4px 0; font-size: 12px; font-family: 'DM Sans', sans-serif;
+    .toggle-btn { padding: 6px 10px; margin: 0 4px 4px 0; font-size: 12px; font-family: Figtree, sans-serif;
                   border: 1px solid var(--border); border-radius: var(--radius-sm, 6px); background: var(--surface);
                   color: var(--text2); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
     .toggle-btn:hover { background: var(--border); }
@@ -373,39 +375,39 @@ window.mulyProj = {
     .load-action-btn.delete { color: var(--red); }
     .load-item-body { padding: 10px; background: var(--surface); }
 
-    .add-load-btn { width: 100%; padding: 9px; font-size: 11px; font-weight: 500; font-family:DM Mono, monospace; border: 1px dashed var(--border-dark); border-radius: var(--radius-sm); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.15s; margin-top: 8px; letter-spacing: 0.5px; }
+    .add-load-btn { width: 100%; padding: 9px; font-size: 11px; font-weight: 500; font-family:JetBrains Mono, monospace; border: 1px dashed var(--border-dark); border-radius: var(--radius-sm); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.15s; margin-top: 8px; letter-spacing: 0.5px; }
     .add-load-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); border-style: solid; }
 
     .beam-svg-wrap { background: var(--surface2); border-radius: var(--radius-sm); padding: 0.75rem; margin-bottom: 0.75rem; overflow-x: auto; }
     .beam-svg-wrap svg { height: auto; display: block; }
 
-    .calc-btn { width: 100%; padding: 13px; font-size: 13px; font-weight: 600; font-family:DM Mono, monospace; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; margin-bottom: 0.75rem; transition: all 0.15s; letter-spacing: 1.5px; text-transform: uppercase; }
-    .calc-btn:hover { background: #1d4ed8; }
+    .calc-btn { width: 100%; padding: 13px; font-size: 13px; font-weight: 600; font-family:JetBrains Mono, monospace; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; margin-bottom: 0.75rem; transition: all 0.15s; letter-spacing: 1.5px; text-transform: uppercase; }
+    .calc-btn:hover { background: #45589a; }
     .calc-btn:active { transform: scale(0.98); }
 
     .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0.75rem; }
     .metric { background: var(--surface); border: 1px solid var(--border-dark); border-radius: var(--radius-sm); padding: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); }
-    .metric .m-label { font-size: 9px; color: var(--text3); margin-bottom: 3px; font-family: DM Mono, monospace; letter-spacing: 1px; text-transform: uppercase; }
+    .metric .m-label { font-size: 9px; color: var(--text3); margin-bottom: 3px; font-family: JetBrains Mono, monospace; letter-spacing: 1px; text-transform: uppercase; }
     .metric .m-value { font-size: 20px; font-weight: 600; color: var(--text); line-height: 1.1; }
-    .metric .m-unit { font-size: 10px; color: var(--text3); font-family:DM Mono, monospace; margin-top: 2px; }
+    .metric .m-unit { font-size: 10px; color: var(--text3); font-family:JetBrains Mono, monospace; margin-top: 2px; }
 
     /* Reactions table */
     .reactions-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 0.75rem; }
     .reactions-table th { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--border); }
-    .reactions-table td { padding: 8px 10px; border-bottom: 1px solid var(--surface2); color: var(--text); font-family:DM Mono, monospace; font-size: 13px; }
+    .reactions-table td { padding: 8px 10px; border-bottom: 1px solid var(--surface2); color: var(--text); font-family:JetBrains Mono, monospace; font-size: 13px; }
     .reactions-table tr:last-child td { border-bottom: none; }
 
     .chart-block { margin-bottom: 1rem; }
     .chart-block:last-child { margin-bottom: 0; }
     .chart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
     .chart-title { font-size: 12px; font-weight: 600; color: var(--text2); }
-    .chart-badge { font-size: 10px; font-family:DM Mono, monospace; color: var(--text3); }
+    .chart-badge { font-size: 10px; font-family:JetBrains Mono, monospace; color: var(--text3); }
     .chart-wrap { position: relative; height: 150px; }
     .chart-divider { height: 1px; background: var(--border); margin: 1rem 0; }
 
     /* Span controls */
     .span-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-    .span-count-btn { width: 32px; height: 32px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-family:DM Sans, sans-serif; line-height: 1; }
+    .span-count-btn { width: 32px; height: 32px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-family:Figtree, sans-serif; line-height: 1; }
     .span-count-btn:hover { border-color: var(--accent); color: var(--accent); }
     .span-count-btn:disabled { opacity: 0.3; cursor: default; }
     .span-count-label { font-size: 13px; color: var(--text2); flex: 1; }
@@ -413,7 +415,7 @@ window.mulyProj = {
 
     /* Span cards */
     .span-card { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; overflow: hidden; }
-    .span-card-header { background: var(--surface2); padding: 8px 12px; font-size: 12px; font-weight: 600; color: var(--text2); font-family:DM Mono, monospace; }
+    .span-card-header { background: var(--surface2); padding: 8px 12px; font-size: 12px; font-weight: 600; color: var(--text2); font-family:JetBrains Mono, monospace; }
     .span-card-body { padding: 10px 12px; background: var(--surface); }
 
     /* Modal */
@@ -427,7 +429,7 @@ window.mulyProj = {
     .modal-section { margin-bottom: 1.25rem; }
     .modal-section h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .modal-section p { font-size: 13px; color: var(--text2); line-height: 1.65; }
-    .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; margin: 8px 0; font-family:DM Mono, monospace; font-size: 12px; color: var(--text); line-height: 1.9; }
+    .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; margin: 8px 0; font-family:JetBrains Mono, monospace; font-size: 12px; color: var(--text); line-height: 1.9; }
     .formula-box .comment { color: var(--text3); font-size: 11px; }
 
     .hidden { display: none; }
@@ -439,14 +441,14 @@ window.mulyProj = {
 
     /* Diagram on structure */
     .diagram-toggle-row { display: flex; gap: 6px; margin-bottom: 10px; }
-    .diagram-toggle-btn { flex: 1; padding: 7px; font-size: 12px; font-weight: 600; font-family:DM Mono, monospace; border: 1px solid var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.15s; }
+    .diagram-toggle-btn { flex: 1; padding: 7px; font-size: 12px; font-weight: 600; font-family:JetBrains Mono, monospace; border: 1px solid var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.15s; }
     .diagram-toggle-btn.active-M { background: #e8f5f1; color: #0f6e56; border-color: #0f6e56; }
     .diagram-toggle-btn.active-Q { background: #e6f1fb; color: #185fa5; border-color: #185fa5; }
     .diagram-toggle-btn.active-N { background: #f5ede9; color: #8b3a1e; border-color: #8b3a1e; }
     .diagram-toggle-btn.active-W { background: #f5f0ff; color: #7c3aed; border-color: #7c3aed; }
     .diagram-svg-wrap { background: var(--surface2); border-radius: var(--radius-sm); overflow: auto; min-height: 140px; }
     .diagram-svg-wrap svg { display: block; }
-    .diagram-label { font-size: 11px; color: var(--text3); font-family:DM Mono, monospace; text-align: center; margin-top: 6px; }
+    .diagram-label { font-size: 11px; color: var(--text3); font-family:JetBrains Mono, monospace; text-align: center; margin-top: 6px; }
   
     @media print {
       nav, #nav-overlay, #nav-drawer,
@@ -469,9 +471,9 @@ window.mulyProj = {
     }
   
     /* ══ Design 2026 (wie die Startseite): weiß, Inter, ohne Rahmen und Raster ══ */
-    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f1f3; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
-      --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --accent:#2563eb; --accent-bg:#eef3ff; --radius:18px; --radius-sm:10px; --card:#f8f8f9; }
-    body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
+    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f2f4; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
+      --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --accent:#5468ad; --accent-bg:#eceff8; --radius:18px; --radius-sm:10px; --card:#f5f6f8; }
+    body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
     body::before { display:none; }
     .app-header { background:rgba(255,255,255,0.92); border-bottom:none; padding:14px 24px; backdrop-filter:blur(10px); }
     .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; color:var(--text); }
@@ -488,15 +490,15 @@ window.mulyProj = {
     .field label, .calc-field label { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
     .field input, .field select, .calc-field input, .calc-field select, .search input { border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; background:#fff; padding:9px 11px; font-family:inherit; font-size:14px; }
     .field input:focus, .field select:focus, .calc-field input:focus, .search input:focus { outline:2px solid var(--accent); outline-offset:0; box-shadow:none; }
-    .field input:disabled, .field select:disabled { background:#f1f1f3; box-shadow:none; }
-    .seg { border:none; background:#efeff1; padding:3px; border-radius:12px; gap:3px; }
+    .field input:disabled, .field select:disabled { background:#f1f2f4; box-shadow:none; }
+    .seg { border:none; background:#f1f2f4; padding:3px; border-radius:12px; gap:3px; }
     .seg button { background:transparent; border-radius:9px; color:var(--text2); font-family:inherit; font-weight:600; transition:background .15s, box-shadow .15s; }
     .seg button + button { border-left:none; }
     .seg button:hover { color:var(--text); }
     .seg button.active { background:#fff; color:var(--text); font-weight:800; box-shadow:0 1px 3px rgba(0,0,0,0.10); }
-    .btn { border:none; border-radius:12px; background:#0a0a0a; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
+    .btn { border:none; border-radius:12px; background:#111114; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
     .btn:hover { background:#262626; } .btn:active { transform:scale(0.98); }
-    .btn.secondary { background:#efeff1; color:var(--text); }
+    .btn.secondary { background:#f1f2f4; color:var(--text); }
     .btn.danger { background:#fff; box-shadow:inset 0 0 0 1px var(--bad, #b42318); }
     .hint { color:var(--text3); }
     .formula-box { background:#fff; border:none; border-radius:12px; }
@@ -505,35 +507,35 @@ window.mulyProj = {
     .nav { background:rgba(255,255,255,0.92); border-bottom:none; padding:0 16px; gap:4px; }
     .nav-tab { font-family:inherit; font-weight:600; color:var(--text3); border-bottom:none; border-radius:10px; padding:9px 14px; margin:4px 0 8px; }
     .nav-tab:hover { color:var(--text); }
-    .nav-tab.active { color:var(--text); background:#efeff1; font-weight:800; }
+    .nav-tab.active { color:var(--text); background:#f1f2f4; font-weight:800; }
     .main { padding:20px 20px; max-width:520px; }
     .field label { font-size:13px; font-weight:500; color:var(--text2); }
-    .field input { font-family:'DM Mono', monospace; }
+    .field input { font-family:'JetBrains Mono', monospace; }
     .load-item { border:none; border-radius:14px; box-shadow:none; background:#fff; }
-    .load-item-header { background:#fff; border-bottom:1px solid #f1f1f3; }
+    .load-item-header { background:#fff; border-bottom:1px solid #f1f2f4; }
     .load-item-label { font-family:inherit; font-weight:800; font-size:13px; color:var(--text); }
     .load-item-body { background:#fff; }
     .add-load-btn { border:1.5px dashed #d4d4d8; border-radius:12px; font-family:inherit; font-weight:600; font-size:13px; }
-    .add-load-btn:hover { background:#fff; border-color:#0a0a0a; color:var(--text); border-style:dashed; }
-    .calc-btn { background:#0a0a0a; border-radius:14px; font-family:inherit; font-weight:800; font-size:15px; letter-spacing:-0.1px; }
+    .add-load-btn:hover { background:#fff; border-color:#111114; color:var(--text); border-style:dashed; }
+    .calc-btn { background:#111114; border-radius:14px; font-family:inherit; font-weight:800; font-size:15px; letter-spacing:-0.1px; }
     .calc-btn:hover { background:#262626; }
-    .toggle-btn, .diagram-toggle-btn { border:none !important; background:#efeff1; border-radius:10px; font-family:inherit; font-weight:600; }
-    .toggle-btn.active, .diagram-toggle-btn.active { background:#0a0a0a !important; color:#fff !important; }
+    .toggle-btn, .diagram-toggle-btn { border:none !important; background:#f1f2f4; border-radius:10px; font-family:inherit; font-weight:600; }
+    .toggle-btn.active, .diagram-toggle-btn.active { background:#111114 !important; color:#fff !important; }
     .metric { background:#fff; border:none; border-radius:14px; box-shadow:none; }
     .metric .m-label { font-family:inherit; font-size:11px; font-weight:600; letter-spacing:0.2px; text-transform:none; }
     .metric .m-value { font-weight:800; letter-spacing:-0.4px; }
-    .span-count-btn, .modal-close { border:none; background:#efeff1; border-radius:10px; }
-    .info-btn { border:none; background:#efeff1; color:var(--text2); }
+    .span-count-btn, .modal-close { border:none; background:#f1f2f4; border-radius:10px; }
+    .info-btn { border:none; background:#f1f2f4; color:var(--text2); }
     .info-btn:hover { background:#e4e4e7; color:var(--text); }
     .modal { border-radius:20px 20px 0 0; }
     .modal-title { font-weight:800; font-size:18px; letter-spacing:-0.3px; }
-    .lang-pick button { border:none; background:#efeff1; border-radius:10px; font-family:inherit; font-weight:700; }
-    .lang-pick button.active { background:#0a0a0a; color:#fff; }
-    .nd-item.active { color:var(--text); background:#efeff1; font-weight:800; }
+    .lang-pick button { border:none; background:#f1f2f4; border-radius:10px; font-family:inherit; font-weight:700; }
+    .lang-pick button.active { background:#111114; color:#fff; }
+    .nd-item.active { color:var(--text); background:#f1f2f4; font-weight:800; }
     .nd-item:hover { background:#f4f4f5; }
     .header-links { display:flex; align-items:center; }
     .header-links a { text-decoration:none; }
-    .load-action-btn { border:none; background:#efeff1; border-radius:8px; }
+    .load-action-btn { border:none; background:#f1f2f4; border-radius:8px; }
     .diagram-toggle-btn { border-radius:10px; }
     .beam-svg-wrap, .diagram-svg-wrap { background:#fff; border-radius:12px; }
     /* ── UX 2026 (calc v0.8.12): Auswahlmenü, zwei Spalten, kompakte Lasten, Live-Ergebnis ── */
@@ -541,7 +543,7 @@ window.mulyProj = {
     .pick { position:relative; flex:1; min-width:0; }
     .pick.in-col { margin-bottom:14px; }
     .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:14px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
-    .pick-btn:hover { background:#f1f1f3; } .pick-btn:active { transform:scale(0.99); }
+    .pick-btn:hover { background:#f1f2f4; } .pick-btn:active { transform:scale(0.99); }
     .pick-txt { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
     .pick-g { font-size:12px; font-weight:600; color:var(--text3); }
     .pick-t { font-size:20px; font-weight:800; letter-spacing:-0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -556,7 +558,7 @@ window.mulyProj = {
     .pick-hn { flex:1; font-size:15px; font-weight:700; }
     .pick-hc { font-size:12px; font-weight:600; color:var(--text3); max-width:55%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .pick-hv { font-size:11px; color:var(--text3); transition:transform .18s; }
-    .pick-group.open { background:#f8f8f9; }
+    .pick-group.open { background:#f5f6f8; }
     .pick-group.open .pick-head:hover { background:transparent; }
     .pick-group.open .pick-hv { transform:rotate(180deg); }
     .pick-body { display:none; flex-direction:column; padding:0 6px 8px; }
@@ -564,13 +566,13 @@ window.mulyProj = {
     .pick-item { text-align:left; border:none; background:none; cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; color:var(--text2); padding:8px 12px 8px 22px; border-radius:9px; position:relative; }
     .pick-item:hover { background:#fff; color:var(--text); }
     .pick-item.active { background:#fff; color:var(--text); font-weight:700; box-shadow:0 1px 2px rgba(0,0,0,0.06); }
-    .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2563eb; }
-    .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text); cursor:pointer;
+    .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#5468ad; }
+    .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#f1f2f4; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text); cursor:pointer;
       background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
     .lang-sel:hover { background-color:#e4e4e7; }
     @media (max-width:420px){ .header-links .version { display:none; } }
     .menu-btn { border:none; background:var(--card); border-radius:18px; width:56px; cursor:pointer; font-size:20px; color:var(--text2); }
-    .menu-btn:hover { background:#f1f1f3; color:var(--text); }
+    .menu-btn:hover { background:#f1f2f4; color:var(--text); }
     /* zwei Spalten: links Eingaben, rechts Ergebnis (mitlaufend) */
     .cols { display:block; }
     .col-out .calc-btn.run-btn { display:none; }
@@ -587,7 +589,7 @@ window.mulyProj = {
     .load-item.cmp .load-item-header { cursor:pointer; gap:10px; }
     .load-item.cmp .load-item-header:hover { background:#fafafa; }
     .load-item.cmp .load-item-label { display:flex; align-items:baseline; gap:10px; min-width:0; flex:1; }
-    .load-sum { font-family:'DM Mono', monospace; font-size:12px; font-weight:500; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+    .load-sum { font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:500; color:var(--text2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
     .load-chev { font-size:10px; color:var(--text3); transition:transform .18s; margin-right:2px; }
     .load-item.cmp:not(.open) .load-item-body { display:none; }
     .load-item.cmp:not(.open) .load-item-header { border-bottom:none; }
@@ -598,11 +600,11 @@ window.mulyProj = {
     .rw-chev { font-size:12px; color:var(--text3); transition:transform .18s; }
     .rw-card.closed .rw-chev { transform:rotate(-90deg); }
     .rw-card.closed .rw-body { display:none; } .rw-card.closed .rw-title { margin-bottom:0; }
-    .steps { font-family:'DM Mono', monospace; font-size:12px; line-height:1.85; color:var(--text2); }
+    .steps { font-family:'JetBrains Mono', monospace; font-size:12px; line-height:1.85; color:var(--text2); }
     .steps b { color:var(--text); }
     .st { margin:0 0 9px; }
-    .st-h { font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text); display:flex; gap:8px; align-items:baseline; line-height:1.45; font-family:'DM Sans', system-ui, sans-serif; }
-    .st-n { flex:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--text3); border:1px solid #d4d4d8; border-radius:50%; width:17px; height:17px; display:inline-flex; align-items:center; justify-content:center; transform:translateY(-1px); }
+    .st-h { font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text); display:flex; gap:8px; align-items:baseline; line-height:1.45; font-family:Figtree, system-ui, sans-serif; }
+    .st-n { flex:none; font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--text3); border:1px solid #d4d4d8; border-radius:50%; width:17px; height:17px; display:inline-flex; align-items:center; justify-content:center; transform:translateY(-1px); }
     .st-f { padding-left:25px; line-height:1.75; }
     .st-f > div { padding-left:0.9em; text-indent:-0.9em; }
     .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; }
@@ -612,26 +614,69 @@ window.mulyProj = {
       /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
     .app-header { min-height:58px; box-sizing:border-box; }
 </style>
-<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  /* Übungsmodus */
-  .ueb-tog { border:none; background:#efeff1; border-radius:10px; padding:7px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); margin:0 0 10px; }
-  .ueb-tog.on { background:var(--accent,#2563eb); color:#fff; }
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  /* Übungsmodus */
+  .ueb-tog { border:none; background:#f1f2f4; border-radius:10px; padding:7px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); margin:0 0 10px; }
+  .ueb-tog.on { background:var(--accent,#5468ad); color:#fff; }
   body.uebung .results-grid { display:none !important; }
   body.uebung:not(.ueb-dia) .diagram-svg-wrap, body.uebung:not(.ueb-dia) .diagram-label, body.uebung:not(.ueb-dia) .diagram-toggle-row { display:none !important; }
-  .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#404040); background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:0 0 12px; }
-  .ueb-diabtn { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:2px 0 6px; }
+  .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#3d3f45); background:var(--accent-bg,#eceff8); border-radius:10px; padding:10px 12px; margin:0 0 12px; }
+  .ueb-diabtn { border:none; background:#f1f2f4; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:2px 0 6px; }
   .st.ueb-hid .st-h { cursor:pointer; }
-  .st.ueb-hid .st-h::after { content:attr(data-rev); margin-left:auto; padding-left:10px; font-size:11.5px; font-weight:650; color:var(--accent,#2563eb); white-space:nowrap; }
+  .st.ueb-hid .st-h::after { content:attr(data-rev); margin-left:auto; padding-left:10px; font-size:11.5px; font-weight:650; color:var(--accent,#5468ad); white-space:nowrap; }
   .ueb-gap { display:inline-block; min-width:1.4em; text-align:center; color:#9ca3af; border-bottom:1.5px dotted #9ca3af; line-height:1.15; margin:0 1px; font-weight:400; }
   .st.ueb-hid .st-f b { border-bottom:none; }
-  .ueb-box { background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
+  .ueb-box { background:var(--accent-bg,#eceff8); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
   .ueb-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
   .ueb-box input { width:150px; padding:6px 8px; font:inherit; font-size:13px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
-  .ueb-box button { border:none; background:#fff; border-radius:8px; padding:6px 10px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text,#0a0a0a); }
+  .ueb-box button { border:none; background:#fff; border-radius:8px; padding:6px 10px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text,#111114); }
   .ueb-box button:disabled { opacity:.45; cursor:default; }
-  .ueb-cnt { font-size:12px; color:var(--text3,#8a8a8a); }
+  .ueb-cnt { font-size:12px; color:var(--text3,#5c5e66); }
   .ueb-msg { font-size:13px; } .ueb-msg:empty { display:none; } .ueb-msg.ok { color:#15803d; } .ueb-msg.bad { color:#b91c1c; }
   .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
-  .fehler-link:hover { color: var(--accent, #2563eb); }
+  .fehler-link:hover { color: var(--accent, #5468ad); }
+</style>
+<style data-kragr>
+  /* kragr-Design (Übergabe vom 21.10.2026), Stufe 1: Farben, Schrift, Kopfzeile, Ergebnisleiste. Identisch in calc und size. */
+  :root { --k-accent:#5468ad; --k-tint:#eceff8; --k-card:#f5f6f8; --k-ctl:#f1f2f4; --k-ctl-h:#e6e7ea; --k-text:#111114; --k-text2:#3d3f45; --k-muted:#5c5e66;
+    --k-line:#c3c5cc; --k-input:#d5d7dc; --k-point:#e8590c; --k-unsaved:#f59e0b; --k-bar:#111114; --k-ok:#86efac; --k-bad:#fca5a5; --k-err:#b42318;
+    --k-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
+    --accent:var(--k-accent); --accent-bg:var(--k-tint); --text:var(--k-text); --text2:var(--k-text2); --text3:var(--k-muted); --card:var(--k-card); --surface2:var(--k-ctl); }
+  body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; color:var(--k-text); }
+  :focus-visible { outline:2px solid var(--k-accent); outline-offset:2px; }
+  .field input, .field select, .calc-field input, .calc-field select { box-shadow:inset 0 0 0 1px var(--k-input); }
+  /* Kopfzeile einzeilig: Logo · calc size ref · Projekte, Erscheinungsbild, Sprache */
+  .app-header { display:flex; align-items:center; justify-content:flex-start; gap:6px; padding:12px 20px 12px 24px; }
+  .app-header .logo { flex:none; font-size:24px; letter-spacing:-0.04em; line-height:1; }
+  .app-header .header-links { display:flex; align-items:center; gap:0; margin-left:auto; font-size:15px; font-weight:500; }
+  .app-header .header-links > a, .app-header .header-links > .module-name { display:flex; align-items:center; min-height:44px; padding:0 8px; }
+  .app-header .header-links > a { color:var(--k-muted); } .app-header .header-links > a:hover { color:var(--k-text); }
+  .app-header .header-links > .module-name { color:var(--k-text); font-weight:800; }
+  .hdr-tools { flex:none; display:flex; align-items:center; gap:2px; margin-left:6px; }
+  .hdr-tools .version { display:none; }   /* Version steht im Projekt-Fenster unten */
+  .proj-btn { height:40px; min-width:40px; border-radius:10px; background:var(--k-ctl); padding:0 13px 0 11px; font-size:14px; font-weight:700; color:var(--k-text); gap:8px; }
+  .proj-btn:hover { background:var(--k-ctl-h); }
+  .proj-btn svg { width:18px; height:18px; }
+  .proj-btn .pb-dot { width:8px; height:8px; box-shadow:none; }
+  .proj-btn[data-st="changed"] .pb-dot, .proj-btn[data-st="new"] .pb-dot { background:var(--k-unsaved); }
+  .theme-btn { width:36px; height:44px; border-radius:10px; opacity:1; color:var(--k-text); }
+  .theme-btn svg { width:20px; height:20px; }
+  .lang-sel { height:40px; border-radius:10px; background-color:var(--k-ctl); font-size:13px; font-weight:700; padding:0 24px 0 10px; color:var(--k-text); }
+  .lang-sel:hover { background-color:var(--k-ctl-h); }
+  .pp-ver { display:block; padding:2px 8px 6px; font-family:var(--k-mono); font-size:11px; color:var(--k-muted); }
+  @media (max-width:999px) {
+    .proj-btn { width:40px; padding:0; justify-content:center; }
+    .proj-btn .pb-tx { display:none; }
+    .proj-btn .pb-dot { position:absolute; top:7px; right:6px; }
+    .proj-btn[data-st="saved"] .pb-dot { display:none; }   /* am Symbol nur der orange Punkt: „noch nicht gespeichert“ */
+  }
+  @media (max-width:560px) {
+    .app-header { padding:7px 6px 7px 16px; gap:4px; }
+    .app-header .header-links { gap:0; }
+    .app-header .header-links > a, .app-header .header-links > .module-name { padding:0 7px; }
+    .hdr-tools { margin-left:2px; }
+  }
+  @media (max-width:360px) { .app-header .header-links > a, .app-header .header-links > .module-name { padding:0 5px; } .theme-btn { width:32px; } }
+  @media print { .hdr-tools { display:none !important; } }
 </style>
 </head>
 <body>
@@ -773,13 +818,15 @@ window.mulyProj = {
 
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="app-header glass">
-  <a class="logo" href="index.html" title="Startseite">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
-  <div class="header-links">
-    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+  <a class="logo" href="index.html" title="Startseite">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
+  <nav class="header-links" aria-label="Module">
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.35</span>
+  </nav>
+  <div class="hdr-tools">
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+    <span class="version">v0.9.0</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -795,11 +842,11 @@ window.mulyProj = {
   <!-- List view -->
   <div id="saved-list-view" style="padding:16px">
     <div style="display:flex;gap:8px;margin-bottom:16px">
-      <button onclick="saveFilterTab('calc')" id="sf-calc" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:white;cursor:pointer;font-family:DM Mono,monospace;font-weight:600">calc</button>
+      <button onclick="saveFilterTab('calc')" id="sf-calc" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:white;cursor:pointer;font-family:JetBrains Mono,monospace;font-weight:600">calc</button>
       <a href="projekt.html" id="sf-proj" data-i18n="projLink" style="font-size:12px;padding:5px 4px;color:var(--accent);font-weight:600;text-decoration:none;align-self:center;margin-left:auto">My projects →</a>
     </div>
     <div id="saved-calcs-list"></div>
-    <div id="saved-empty" style="color:var(--text-muted);font-size:12px;font-family:DM Mono,monospace;padding:40px 20px;text-align:center"></div>
+    <div id="saved-empty" style="color:var(--text-muted);font-size:12px;font-family:JetBrains Mono,monospace;padding:40px 20px;text-align:center"></div>
   </div>
 
   <!-- Report view (shown when a calc is opened) -->
@@ -808,7 +855,7 @@ window.mulyProj = {
     <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10">
       <button onclick="closeReport()" style="background:none;border:none;cursor:pointer;font-size:18px;color:var(--text2);padding:4px;line-height:1">←</button>
       <span id="report-title-bar" style="font-size:13px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span>
-      <button onclick="window.print()" style="background:var(--accent);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif">↓ PDF</button>
+      <button onclick="window.print()" style="background:var(--accent);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif">↓ PDF</button>
     </div>
 
     <!-- Printable report content -->
@@ -846,7 +893,7 @@ window.mulyProj = {
   </div>
   <button class="calc-btn" onclick="calculateBeam()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-beam" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('beam')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#f1f2f4;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('beam')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
   <div id="beam-results" class="hidden">
     <div class="results-grid">
       <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVA">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="b-res-A">—</div><div class="m-unit">kN</div></div>
@@ -913,7 +960,7 @@ window.mulyProj = {
   </div>
   <button class="calc-btn" onclick="calculateCantilever()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-cant" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('cantilever')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#f1f2f4;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('cantilever')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
   <div id="cant-results" class="hidden">
     <div class="results-grid">
       <div class="metric"><div class="m-label" data-i18n-title="tipReaction" data-i18n="resVA">Reaction V<sub>A</sub> ↑</div><div class="m-value" id="c-res-V">—</div><div class="m-unit">kN</div></div>
@@ -977,7 +1024,7 @@ window.mulyProj = {
 
   <button class="calc-btn" onclick="calculateContinuous()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-cont" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('cont')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#f1f2f4;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveCalc('cont')"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
 
   <div id="cont-results" class="hidden">
     <div class="results-grid">
@@ -1092,7 +1139,7 @@ window.mulyProj = {
       <button class="add-load-btn" onclick="addFrameHinge()" data-i18n="addHinge">＋ Add Hinge</button>
     </div>
     <!-- Indeterminacy indicator -->
-    <div id="frame-indet-info" style="margin-top:10px;padding:8px 10px;background:var(--surface2);border-radius:var(--radius-sm);font-size:12px;color:var(--text2);font-family:DM Mono,monospace;"></div>
+    <div id="frame-indet-info" style="margin-top:10px;padding:8px 10px;background:var(--surface2);border-radius:var(--radius-sm);font-size:12px;color:var(--text2);font-family:JetBrains Mono,monospace;"></div>
   </div>
 
   <!-- All frame loads -->
@@ -1109,7 +1156,7 @@ window.mulyProj = {
 
   <button class="calc-btn" onclick="calculateFrame()" data-i18n="calculate">Calculate</button>
   <div class="calc-msg" id="msg-frame" role="status" aria-live="polite"></div>
-  <button class="calc-btn" style="margin-top:8px;background:#efeff1;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveFrameCalc()"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
+  <button class="calc-btn" style="margin-top:8px;background:#f1f2f4;color:var(--text);border:none;font-size:13px;padding:11px" onclick="saveFrameCalc()"><span class="btn-icon" data-icon="save"></span><span data-i18n="save">Save Calculation</span></button>
 
   <div id="frame-results" class="hidden">
     <div class="results-grid">
@@ -1142,14 +1189,14 @@ window.mulyProj = {
         <button class="diagram-toggle-btn" id="diag-btn-W-frame" onclick="setDiagMode('frame','W')">w</button>
       </div>
       <div id="ei-input-frame" style="display:none;margin-bottom:8px;">
-        <div style="font-size:10px;font-family:DM Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="rafter">Rafter</div>
+        <div style="font-size:10px;font-family:JetBrains Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="rafter">Rafter</div>
         <div class="field-row" style="margin-bottom:6px;">
           <div class="field"><label>E <span class="unit">&#xD7;10&#x2076; kN/m&#xB2;</span></label>
             <input type="number" id="frame-E-raf" value="210" step="1" oninput="if(diagData.frame)calculateFrame()"></div>
           <div class="field"><label>I<sub>y</sub> <span class="unit">&#xD7;10&#xB3; cm&#x2074;</span></label>
             <input type="number" id="frame-Iy-raf" value="10" step="0.1" oninput="if(diagData.frame)calculateFrame()"></div>
         </div>
-        <div style="font-size:10px;font-family:DM Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="columnsLbl">Columns</div>
+        <div style="font-size:10px;font-family:JetBrains Mono,monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="columnsLbl">Columns</div>
         <div class="field-row">
           <div class="field"><label>E <span class="unit">&#xD7;10&#x2076; kN/m&#xB2;</span></label>
             <input type="number" id="frame-E-col" value="210" step="1" oninput="if(diagData.frame)calculateFrame()"></div>
@@ -1251,7 +1298,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.35';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.9.0';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -1621,7 +1668,7 @@ function arrowSVG(tipX, tipY, F, alpha, maxF, label, row, prefix) {
   return `<line x1="${tailX.toFixed(1)}" y1="${tailY.toFixed(1)}" x2="${tipX.toFixed(1)}" y2="${(tipY-1).toFixed(1)}"
     stroke="${CLR.F}" stroke-width="2" marker-end="url(#${mid})"/>
   <text x="${tipX.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="middle" font-size="8"
-    fill="${CLR.F}" font-family="DM Mono,monospace">${label}</text>`;
+    fill="${CLR.F}" font-family="JetBrains Mono,monospace">${label}</text>`;
 }
 
 // Draw a horizontal load arrow (orange, dashed)
@@ -1632,7 +1679,7 @@ function horizArrowSVG(fromX, toX, y, F, label, row) {
   return `<line x1="${fromX.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(toX-dir*2).toFixed(1)}" y2="${y.toFixed(1)}"
     stroke="${CLR.H}" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#${mid})"/>
   <text x="${((fromX+toX)/2).toFixed(1)}" y="${(y-4-row*10).toFixed(1)}" text-anchor="middle" font-size="8"
-    fill="${CLR.H}" font-family="DM Mono,monospace">${label}</text>`;
+    fill="${CLR.H}" font-family="JetBrains Mono,monospace">${label}</text>`;
 }
 
 // Draw a moment arc (purple, curved arrow)
@@ -1646,7 +1693,7 @@ function momentSVG(cx, cy, Me, label, row) {
   return `<path d="M ${x1.toFixed(1)} ${y1.toFixed(1)} A ${r} ${r} 0 1 ${sweep} ${x2.toFixed(1)} ${y2.toFixed(1)}"
     fill="none" stroke="${CLR.Me}" stroke-width="1.8" marker-end="url(#mearr)"/>
   <text x="${cx}" y="${(cy-r-4-row*10).toFixed(1)}" text-anchor="middle" font-size="8"
-    fill="${CLR.Me}" font-family="DM Mono,monospace">${label}</text>`;
+    fill="${CLR.Me}" font-family="JetBrains Mono,monospace">${label}</text>`;
 }
 
 // Draw distributed load (scaled arrows + trapezoid top line)
@@ -1671,7 +1718,7 @@ function distSVG(xa, xb, qa, qb, maxF, bY, label, di, prefix) {
   const lbl=isTrap?`${label}:${qa}→${qb}kN/m`:`${label}=${qa}kN/m`;
   const labelY=Math.min(ya,yb)-4-di*10;
   h+=`<text x="${((xa+xb)/2).toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="middle"
-    font-size="8" fill="${CLR.q}" font-family="DM Mono,monospace">${lbl}</text>`;
+    font-size="8" fill="${CLR.q}" font-family="JetBrains Mono,monospace">${lbl}</text>`;
   return h;
 }
 
@@ -1741,7 +1788,7 @@ function drawBeam() {
   h+=`<circle cx="${x1}" cy="${bY+22}" r="3" fill="none" stroke="#1a1a18" stroke-width="1.2"/>`;
   h+=`<text x="${x1}" y="${bY+36}" text-anchor="middle" font-size="9" fill="#6b6a65">B</text>`;
   h+=`<line x1="${x0}" y1="${bY+42}" x2="${x1}" y2="${bY+42}" stroke="#a8a7a2" stroke-width="0.8"/>`;
-  h+=`<text x="${(x0+x1)/2}" y="${bY+53}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="DM Mono,monospace">L = ${L} m</text>`;
+  h+=`<text x="${(x0+x1)/2}" y="${bY+53}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="JetBrains Mono,monospace">L = ${L} m</text>`;
   svg.setAttribute('viewBox','0 0 320 128');   // Höhe reicht für die Längenangabe unter dem Träger
   svg.innerHTML=mkDefs('b')+h;
 }
@@ -1790,7 +1837,7 @@ function drawCantilever() {
 
   h+=`<text x="${x1+4}" y="${bY+16}" font-size="9" fill="#a8a7a2">${tr('free')}</text>`;
   h+=`<line x1="${x0}" y1="${bY+26}" x2="${x1}" y2="${bY+26}" stroke="#a8a7a2" stroke-width="0.8"/>`;
-  h+=`<text x="${(x0+x1)/2}" y="${bY+37}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="DM Mono,monospace">L = ${L} m</text>`;
+  h+=`<text x="${(x0+x1)/2}" y="${bY+37}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="JetBrains Mono,monospace">L = ${L} m</text>`;
   svg.setAttribute('viewBox','0 0 320 110');
   svg.innerHTML=mkDefs('c')+h;
 }
@@ -1853,7 +1900,7 @@ function drawContinuous() {
   // Feldbeschriftung
   lay.segs.forEach(sg=>{
     const lbl = sg.key==='L'||sg.key==='R' ? `ü=${sg.L}m` : `L${sg.key+1}=${sg.L}m${sg.k!==1?` ·${sg.k}I`:''}`;
-    h+=`<text x="${((X(sg.x0)+X(sg.x0+sg.L))/2).toFixed(1)}" y="${bY+beamH+38}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="DM Mono,monospace">${lbl}</text>`;
+    h+=`<text x="${((X(sg.x0)+X(sg.x0+sg.L))/2).toFixed(1)}" y="${bY+beamH+38}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="JetBrains Mono,monospace">${lbl}</text>`;
   });
   svg.innerHTML=mkDefs('co')+h;
 }
@@ -2223,7 +2270,7 @@ function renderFrameHinges(){
       <div class="load-item-body">
         <div class="field-row">
           <div class="field"><label>${tr('member')}</label>
-            <select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif"
+            <select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:Figtree,sans-serif"
               onchange="updateHingeVal(${hg.id},'member',this.value)">
               <option value="left" ${hg.member==='left'?'selected':''}>${tr('leftCol')}</option>
               <option value="rafter" ${hg.member==='rafter'?'selected':''}>${tr('rafter')}</option>
@@ -2307,7 +2354,7 @@ function renderFrameLoads(type){
     const rdir=l.values.rdir||'v';
     const rdirSel=(type==='vert'&&mem==='rafter')?
       '<div class="field" style="margin-top:6px"><label>'+tr('direction')+'</label>'+
-      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif" '+
+      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:Figtree,sans-serif" '+
       'onchange="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;rdir&quot;,this.value);renderFrameLoads(&quot;vert&quot;)">'+
       '<option value="v"'+(rdir==='v'?' selected':'')+'>'+tr('rdirV')+'</option>'+
       '<option value="n"'+(rdir==='n'?' selected':'')+'>'+tr('rdirN')+'</option>'+
@@ -2315,14 +2362,14 @@ function renderFrameLoads(type){
       '</select>'+(rdir==='n'?'<div style="font-size:11px;color:var(--text3);margin-top:4px">'+tr('rdirNote')+'</div>':'')+'</div>':'';
     const dirSel=(type==='vert'&&mem!=='rafter')?
       '<div class="field" style="margin-top:6px"><label>'+tr('direction')+'</label>'+
-      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif" '+
+      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:Figtree,sans-serif" '+
       'onchange="updateFrameVal(&quot;vert&quot;,'+l.id+',&quot;dir&quot;,this.value)">'+
       '<option value="h"'+(l.values.dir==='h'?' selected':'')+'>'+tr('dirH')+'</option>'+
       '<option value="ax"'+(l.values.dir!=='h'?' selected':'')+'>'+tr('dirAx')+'</option>'+
       '</select></div>':'';
     // Member selector (same for both types)
     const memSel='<div class="field"><label>'+tr('member')+'</label>'+
-      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:DM Sans,sans-serif" '+
+      '<select style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-family:Figtree,sans-serif" '+
       'onchange="updateFrameVal(&quot;'+type+'&quot;,'+l.id+',&quot;member&quot;,this.value);renderFrameLoads(&quot;'+type+'&quot;)">'+
       '<option value="left"'+(mem==='left'?' selected':'')+'>'+tr('leftCol')+'</option>'+
       '<option value="rafter"'+(mem==='rafter'?' selected':'')+'>'+tr('rafter')+'</option>'+
@@ -2567,7 +2614,7 @@ function drawFrame(){
   }
 
   // Dimension labels
-  html+=`<text x="${(col_L+col_R)/2}" y="${col_bot+45}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="DM Mono,monospace">b = ${b} m</text>`;
+  html+=`<text x="${(col_L+col_R)/2}" y="${col_bot+45}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="JetBrains Mono,monospace">b = ${b} m</text>`;
   labels.push({x:col_L-8, y:(col_bot+col_topA)/2+4, text:`hA=${hA}m`, color:'#a8a7a2', anchor:'end', size:8, prio:1.5, bg:false,
     cands:[{x:col_L-8, y:(col_bot+col_topA)/2+4, anchor:'end'},{x:col_L-8, y:col_bot-6, anchor:'end'},{x:col_L+8, y:col_bot-6, anchor:'start'}]});
   labels.push({x:col_R+8, y:(col_bot+col_topB)/2+4, text:`hB=${hB}m`, color:'#a8a7a2', anchor:'start', size:8, prio:1.5, bg:false,
@@ -2806,32 +2853,32 @@ function renderSavedTab(){
       <div style="display:flex;align-items:start;gap:8px;margin-bottom:8px">
         <div style="flex:1">
           <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">${escapeHtml(name)}</div>
-          <div style="font-size:10px;color:var(--text-muted);font-family:DM Mono,monospace">${new Date(sdf.timestamp).toLocaleString(LOCALE())}</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace">${new Date(sdf.timestamp).toLocaleString(LOCALE())}</div>
         </div>
         <button onclick="deleteSDF('${k}',this.closest('div[style*=border-radius]'))" style="background:none;border:none;color:#e74c3c;cursor:pointer;font-size:16px;padding:0;line-height:1">✕</button>
       </div>
       ${sdf.system.svgSnapshot ? `<div style="background:var(--bg);border-radius:8px;padding:8px 4px;margin-bottom:10px;overflow:hidden;display:flex;align-items:center;justify-content:center">${uniquifySvgIds(sdf.system.svgSnapshot.replace(/<svg /, '<svg style="width:100%;height:auto;display:block" '), 'card-'+k.replace(/\W/g,''))}</div>` : ''}
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px">
         <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
-          <div style="font-size:10px;color:var(--text-muted);font-family:DM Mono,monospace">M<sub>max</sub></div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace">M<sub>max</sub></div>
           <div style="font-size:15px;font-weight:700;color:var(--text)">${sdf.results.Mmax.toFixed(1)}</div>
           <div style="font-size:10px;color:var(--text-muted)">kNm</div>
         </div>
         <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
-          <div style="font-size:10px;color:var(--text-muted);font-family:DM Mono,monospace">Q<sub>max</sub></div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace">Q<sub>max</sub></div>
           <div style="font-size:15px;font-weight:700;color:var(--text)">${sdf.results.Qmax.toFixed(1)}</div>
           <div style="font-size:10px;color:var(--text-muted)">kN</div>
         </div>
         <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center">
-          <div style="font-size:10px;color:var(--text-muted);font-family:DM Mono,monospace">N<sub>max</sub></div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace">N<sub>max</sub></div>
           <div style="font-size:15px;font-weight:700;color:var(--text)">${sdf.results.Nmax.toFixed(1)}</div>
           <div style="font-size:10px;color:var(--text-muted)">kN</div>
         </div>
       </div>
       <div style="display:flex;gap:8px">
-        <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif">${tr('report')}</button>
+        <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:Figtree,sans-serif">${tr('report')}</button>
         ${sdf.system?.type==='frame' ? `<button onclick="loadSDF('${k}')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600">${tr('load')}</button>` : ''}
-        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in kragr·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:DM Sans,sans-serif">${tr('toSize')}</a>` : ''}
+        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in kragr·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:Figtree,sans-serif">${tr('toSize')}</a>` : ''}
         <button onclick="exportSDF('${k}')" style="padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-size:12px">↓</button>
       </div>
     </div>
@@ -2962,7 +3009,7 @@ function renderReport(name, sdf){
   const showN = !(S.type==='cont') && (legacy || Math.max(0,...(sdf.plot?.N||sdf.plot?.allN||[0]).map(Math.abs))>1e-6);
 
   const nfR = v => (+v||0).toLocaleString(LOCALE(), {minimumFractionDigits:2, maximumFractionDigits:2});
-  const ICO = '<svg width="24" height="24" viewBox="0 0 110 110" aria-hidden="true"><rect x="1" y="1" width="108" height="108" rx="24" fill="#fff" stroke="#111" stroke-width="3"/><g transform="translate(-6 5)"><rect x="30" y="36" width="18" height="56" fill="#0a0a0a"/><rect x="30" y="36" width="60" height="15" rx="2" fill="#0a0a0a"/><line x1="83" y1="8" x2="83" y2="26" stroke="#0a0a0a" stroke-width="5"/><path d="M74 23 L83 35 L92 23 Z" fill="#0a0a0a"/></g></svg>';
+  const ICO = '<svg width="24" height="24" viewBox="0 0 110 110" aria-hidden="true"><rect x="1" y="1" width="108" height="108" rx="24" fill="#fff" stroke="#111" stroke-width="3"/><g transform="translate(-6 5)"><rect x="30" y="36" width="18" height="56" fill="#111114"/><rect x="30" y="36" width="60" height="15" rx="2" fill="#111114"/><line x1="83" y1="8" x2="83" y2="26" stroke="#111114" stroke-width="5"/><path d="M74 23 L83 35 L92 23 Z" fill="#111114"/></g></svg>';
   const row = (k, v) => `<div><span class="k">${k}</span>${v}</div>`;
   const res = (lbl, v, unit) => `<div><span class="k">${lbl}</span>= <span class="rb-res">${v} ${unit}</span></div>`;
   const dia = (k, title) => `<div class="rb-dia"><div class="rb-dia-t">${title}</div><svg id="report-svg-${k}"></svg></div>`;
@@ -3023,7 +3070,7 @@ function renderReport(name, sdf){
 const REP_BRAND = 'kragr';
 function repMono(){
   const host=document.getElementById('report-diagrams'); if(!host) return;
-  const COL=Object.values(diagColors).concat(['#2d6a4f','#1d4ed8','#92400e','#7c3aed']).map(c=>c.toLowerCase()), FILL=Object.values(diagFill);
+  const COL=Object.values(diagColors).concat(['#2d6a4f','#45589a','#92400e','#7c3aed']).map(c=>c.toLowerCase()), FILL=Object.values(diagFill);
   host.querySelectorAll('svg').forEach((svg,k)=>{
     const NS='http://www.w3.org/2000/svg', id='rbh'+k;
     let defs=svg.querySelector('defs'); if(!defs){ defs=document.createElementNS(NS,'defs'); svg.insertBefore(defs, svg.firstChild); }
@@ -3064,7 +3111,7 @@ function renderReportDiagramsLegacy(sdf){
   const members = sdf.results?.members;
   if(!members) return;
 
-  const colors = {M:'#2d6a4f', Q:'#1d4ed8', N:'#92400e', w:'#7c3aed'};
+  const colors = {M:'#2d6a4f', Q:'#45589a', N:'#92400e', w:'#7c3aed'};
   const fills  = {M:'rgba(45,106,79,0.12)', Q:'rgba(29,78,216,0.12)', N:'rgba(146,64,14,0.12)', w:'rgba(124,58,237,0.12)'};
 
   // Detect structure: frame has left_col/rafter/right_col, others have member_0/1/...
@@ -3136,8 +3183,8 @@ function renderReportDiagramsLegacy(sdf){
       ${grid}
       <path d="${fillD}" fill="${fills[mode]}" stroke="none"/>
       <path d="${lineD}" fill="none" stroke="${colors[mode]}" stroke-width="1.8" stroke-linejoin="round"/>
-      <text x="${W-PAD}" y="${PAD-4}" text-anchor="end" font-size="9" fill="${colors[mode]}" font-family="DM Mono,monospace" font-weight="600">${maxLabel}</text>
-      <text x="${W-PAD}" y="${H-4}" text-anchor="end" font-size="9" fill="${colors[mode]}" font-family="DM Mono,monospace" font-weight="600">−${maxLabel}</text>
+      <text x="${W-PAD}" y="${PAD-4}" text-anchor="end" font-size="9" fill="${colors[mode]}" font-family="JetBrains Mono,monospace" font-weight="600">${maxLabel}</text>
+      <text x="${W-PAD}" y="${H-4}" text-anchor="end" font-size="9" fill="${colors[mode]}" font-family="JetBrains Mono,monospace" font-weight="600">−${maxLabel}</text>
     `;
   });
 
@@ -3145,8 +3192,8 @@ function renderReportDiagramsLegacy(sdf){
   const svgW=document.getElementById('report-svg-w');
   if(svgW){
     svgW.setAttribute('viewBox','0 0 300 140'); svgW.style.width='100%'; svgW.style.height='auto';
-    svgW.innerHTML=`<text x="150" y="66" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="DM Sans,sans-serif">${tr('repNotIncl')}</text>
-      <text x="150" y="82" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="DM Sans,sans-serif">Bitte neu berechnen und speichern.</text>`;
+    svgW.innerHTML=`<text x="150" y="66" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Figtree,sans-serif">${tr('repNotIncl')}</text>
+      <text x="150" y="82" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Figtree,sans-serif">Bitte neu berechnen und speichern.</text>`;
   }
 }
 
@@ -3863,7 +3910,7 @@ function placeLabels(list, W, H, blocked=[], Y0=0){
     placed.push(bx);
     if(l.bg!==false) out += `<rect x="${bx.x0.toFixed(1)}" y="${bx.y0.toFixed(1)}" width="${(bx.x1-bx.x0).toFixed(1)}" height="${(bx.y1-bx.y0).toFixed(1)}" rx="2" fill="white" opacity="0.85"/>`;
     const tr = l.rot ? ` transform="rotate(${l.rot} ${x.toFixed(1)} ${y.toFixed(1)})"` : '';
-    out += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${l.rot?'middle':anchor}"${tr} font-size="${size}" fill="${l.color}"${l.weight?` font-weight="${l.weight}"`:''} font-family="DM Mono,monospace">${l.text}</text>`;
+    out += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${l.rot?'middle':anchor}"${tr} font-size="${size}" fill="${l.color}"${l.weight?` font-weight="${l.weight}"`:''} font-family="JetBrains Mono,monospace">${l.text}</text>`;
   });
   return out;
 }
@@ -4105,13 +4152,13 @@ function renderDiagram(sys, data){
 
   // Eckwerte (Rahmen) mit höchster Priorität, dann Maxima, dann Sprünge
   if(data.cornerLabelsFn && (mode==='M'||mode==='Q'||mode==='N')){
-    const diagColors2 = {M:'#2d6a4f',Q:'#1d4ed8',N:'#92400e'};
+    const diagColors2 = {M:'#2d6a4f',Q:'#45589a',N:'#92400e'};
     labels.push(...data.cornerLabelsFn(mode, diagColors2[mode]||'#666', SCALE));
   }
   h += placeLabels(labels, W, H, data.blocked||[]);
   // Einheit der Werte einmal in der Ecke
   const unit = {M:'M [kNm]', Q:'Q [kN]', N:'N [kN]'}[mode];
-  if(unit) h += `<text x="4" y="10" font-size="7.5" fill="${color}" font-family="DM Mono,monospace">${unit}</text>`;
+  if(unit) h += `<text x="4" y="10" font-size="7.5" fill="${color}" font-family="JetBrains Mono,monospace">${unit}</text>`;
 
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.setAttribute('height', H);
@@ -4172,7 +4219,7 @@ function renderFrameDeflection(data, svg, W, H, color, fill, idp='frame'){
   const lineStr = allPts.map((p,i)=>(i===0?'M':'L')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
   h+=`<path d="${lineStr}" fill="none" stroke="${color}" stroke-width="1.8" stroke-dasharray="5,3" stroke-linejoin="round"/>`;
   if(data.overlay) h+=data.overlay;
-  h+=`<text x="${W-6}" y="${H-6}" text-anchor="end" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">u → +, w ↑ +</text>`;
+  h+=`<text x="${W-6}" y="${H-6}" text-anchor="end" font-size="7" fill="#a8a7a2" font-family="JetBrains Mono,monospace">u → +, w ↑ +</text>`;
   h += placeLabels(labels, W, H, data.blocked||[]);
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   svg.setAttribute('height', H);
@@ -4242,7 +4289,7 @@ function renderDeflectionDiagram(sys, data, svg, W, H, color, fill, idp=sys){
     const offset=-wVals[maxIdx]*SCALE;          // gleiche Richtung wie die Kurve
     const lx=bx+offset*nx, ly=by+offset*ny+(offset*ny>0?13:0);
     h+=`<rect x="${(lx-20).toFixed(1)}" y="${(ly-11).toFixed(1)}" width="40" height="11" rx="2" fill="white" opacity="0.85"/>`;
-    h+=`<text x="${lx.toFixed(1)}" y="${(ly-2).toFixed(1)}" text-anchor="middle" font-size="8" fill="${color}" font-weight="600" font-family="DM Mono,monospace">w=${wVals[maxIdx].toFixed(2)}mm</text>`;
+    h+=`<text x="${lx.toFixed(1)}" y="${(ly-2).toFixed(1)}" text-anchor="middle" font-size="8" fill="${color}" font-weight="600" font-family="JetBrains Mono,monospace">w=${wVals[maxIdx].toFixed(2)}mm</text>`;
   });
 
   // Biegelinie
@@ -4271,7 +4318,7 @@ function renderBeamDiagram(L, Qv, Mv, xs, Nv=null, ex={}){
   ov += `<circle cx="${x1}" cy="${bY+20}" r="2.5" fill="none" stroke="#1a1a18" stroke-width="1"/>`;
   ov += `<text x="${x0}" y="${bY+30}" text-anchor="middle" font-size="8" fill="#6b6a65">A</text>`;
   ov += `<text x="${x1}" y="${bY+30}" text-anchor="middle" font-size="8" fill="#6b6a65">B</text>`;
-  ov += `<text x="${(x0+x1)/2}" y="${bY+30}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="DM Mono,monospace">L=${L}m</text>`;
+  ov += `<text x="${(x0+x1)/2}" y="${bY+30}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="JetBrains Mono,monospace">L=${L}m</text>`;
 
   const data = {
     svgW: SVG_W, svgH: SVG_H, pad: PAD, overlay: ov,
@@ -4293,7 +4340,7 @@ function renderCantDiagram(L, Qv, Mv, Nv=null, ex={}){
   let ov = '';
   ov += `<rect x="10" y="${bY-14}" width="36" height="28" rx="2" fill="#e0dfd8"/>`;
   ov += `<rect x="38" y="${bY-10}" width="4" height="20" fill="#1a1a18"/>`;
-  ov += `<text x="${(x0+x1)/2}" y="${bY+20}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="DM Mono,monospace">L=${L}m</text>`;
+  ov += `<text x="${(x0+x1)/2}" y="${bY+20}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="JetBrains Mono,monospace">L=${L}m</text>`;
 
   const data = {
     svgW: SVG_W, svgH: SVG_H, overlay: ov,
@@ -4325,7 +4372,7 @@ function renderContDiagram(Ls, Qv_all, Mv_all, ex={}){
   lay.hinges.forEach(x=>{ ov += `<circle cx="${X(x)}" cy="${bY}" r="3" fill="#fff" stroke="#1a1a18" stroke-width="1.2"/>`; });
   lay.segs.forEach(sg=>{
     const lbl = sg.key==='L'||sg.key==='R' ? `ü=${sg.L}m` : `L${sg.key+1}=${sg.L}m`;
-    ov += `<text x="${X(sg.x0+sg.L/2)}" y="${SVG_H-4}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">${lbl}</text>`;   // unten am Rand, nicht in der Momentenfläche
+    ov += `<text x="${X(sg.x0+sg.L/2)}" y="${SVG_H-4}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="JetBrains Mono,monospace">${lbl}</text>`;   // unten am Rand, nicht in der Momentenfläche
   });
 
   const data = {
@@ -4384,9 +4431,9 @@ function renderFrameDiagram(b, h, allM, allQ, allN, NP, supA, supB, rafHingeIdx=
   }
   drawSup(col_L, col_bot, supA, 'A');
   drawSup(col_R, col_bot, supB, 'B');
-  ov+=`<text x="${(col_L+col_R)/2}" y="${col_bot+35}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">b=${b}m</text>`;
-  ov+=`<text x="${col_L-28}" y="${(col_bot+col_topA)/2}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">h=${hA}m</text>`;
-  if(hB!==hA) ov+=`<text x="${col_R+28}" y="${(col_bot+col_topB)/2}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="DM Mono,monospace">h=${hB}m</text>`;
+  ov+=`<text x="${(col_L+col_R)/2}" y="${col_bot+35}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="JetBrains Mono,monospace">b=${b}m</text>`;
+  ov+=`<text x="${col_L-28}" y="${(col_bot+col_topA)/2}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="JetBrains Mono,monospace">h=${hA}m</text>`;
+  if(hB!==hA) ov+=`<text x="${col_R+28}" y="${(col_bot+col_topB)/2}" text-anchor="middle" font-size="7" fill="#a8a7a2" font-family="JetBrains Mono,monospace">h=${hB}m</text>`;
   blocked.push({x0:col_L-44, x1:col_L-12, y0:(col_bot+col_topA)/2-8, y1:(col_bot+col_topA)/2+2});
 
   // Gelenke im Diagramm markieren (Momentennullpunkt sichtbar machen)
@@ -5864,7 +5911,7 @@ if(['#saved','#beam','#cantilever','#cont','#frame'].includes(location.hash)) sh
     es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención']};
   window.statiqDisclaimer=()=>{ const l=(document.documentElement.lang||'de').slice(0,2); return (TX[l]||TX.de)[0]; };
   const d=document.createElement('div'); d.className='legal-bar'; d.setAttribute('role','contentinfo');
-  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Inter,system-ui,sans-serif;color:#8a8a8a;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
+  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Figtree,system-ui,sans-serif;color:#5c5e66;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
   const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
     d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
   upd(); document.body.appendChild(d);

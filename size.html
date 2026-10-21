@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.5.52 -->
+<!-- kragr·size v0.6.0 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -71,27 +71,27 @@
 <style data-proj>
   /* Kopfzeile und Projekt-Menü — identisch in calc und size (calc v0.8.28 · size v0.5.46) */
   .app-header .header-links { gap:16px; white-space:nowrap; }
-  .proj-btn { position:relative; display:inline-flex; align-items:center; gap:7px; height:30px; padding:0 11px 0 9px; border:none; border-radius:9px; background:#efeff1;
-    font-family:inherit; font-size:13px; font-weight:650; line-height:1; color:var(--text,#0a0a0a); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
+  .proj-btn { position:relative; display:inline-flex; align-items:center; gap:7px; height:30px; padding:0 11px 0 9px; border:none; border-radius:9px; background:#f1f2f4;
+    font-family:inherit; font-size:13px; font-weight:650; line-height:1; color:var(--text,#111114); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent; }
   .proj-btn::after { content:none !important; }
   .proj-btn:hover { background:#e4e4e7; }
   .proj-btn svg { flex:none; }
   .proj-btn .pb-dot { width:7px; height:7px; border-radius:50%; background:#b8b8bd; flex:none; }
   .proj-btn[data-st="saved"] .pb-dot { background:#16a34a; } .proj-btn[data-st="changed"] .pb-dot, .proj-btn[data-st="new"] .pb-dot { background:#f59e0b; }
   .proj-btn[data-st="none"] .pb-dot { display:none; }
-  .proj-btn.open { background:#0a0a0a; color:#fff; }
-  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#efeff1; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#0a0a0a); cursor:pointer;
+  .proj-btn.open { background:#111114; color:#fff; }
+  .lang-sel { appearance:none; -webkit-appearance:none; border:none; background:#f1f2f4; border-radius:9px; padding:5px 22px 5px 10px; font-family:inherit; font-size:12px; font-weight:700; color:var(--text,#111114); cursor:pointer;
     background-image:linear-gradient(45deg, transparent 50%, #71717a 50%), linear-gradient(135deg, #71717a 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
   .lang-sel:hover { background-color:#e4e4e7; }
   @media (max-width:560px){ .app-header .header-links { gap:12px; } .header-links .version { display:none; }
-    .proj-btn { padding:0 9px; } .proj-btn .pb-tx { display:none; } .proj-btn .pb-dot { position:absolute; top:5px; right:5px; width:6px; height:6px; box-shadow:0 0 0 2px #efeff1; } }
+    .proj-btn { padding:0 9px; } .proj-btn .pb-tx { display:none; } .proj-btn .pb-dot { position:absolute; top:5px; right:5px; width:6px; height:6px; box-shadow:0 0 0 2px #f1f2f4; } }
   @media (max-width:380px){ .app-header .header-links { gap:9px; } }
   .proj-panel { display:none; position:fixed; z-index:60; top:calc(var(--hdr-h,58px) + 4px); right:16px; width:min(420px, calc(100vw - 32px)); max-height:calc(100vh - var(--hdr-h,58px) - 24px);
-    overflow:auto; background:#fff; border-radius:18px; padding:8px; box-shadow:0 18px 48px rgba(0,0,0,.16), 0 2px 8px rgba(0,0,0,.06); font-family:Inter, system-ui, -apple-system, sans-serif; color:#0a0a0a; }
+    overflow:auto; background:#fff; border-radius:18px; padding:8px; box-shadow:0 18px 48px rgba(0,0,0,.16), 0 2px 8px rgba(0,0,0,.06); font-family:Figtree, system-ui, -apple-system, sans-serif; color:#111114; }
   .proj-panel.open { display:block; }
   @media (max-width:560px){ .proj-panel { left:12px; right:12px; width:auto; } }
   .proj-panel .pp-sec { background:#f6f6f7; border:none; border-radius:12px; padding:12px 14px; margin:0 0 6px; box-shadow:none; }
-  .proj-panel .pp-h { display:block; font-size:12px; font-weight:700; color:#8a8a8a; margin:0 0 6px; padding:0; letter-spacing:0; text-transform:none; }
+  .proj-panel .pp-h { display:block; font-size:12px; font-weight:700; color:#5c5e66; margin:0 0 6px; padding:0; letter-spacing:0; text-transform:none; }
   .proj-panel .pp-row { display:flex; align-items:center; gap:10px; }
   .proj-panel .pp-name { flex:1; min-width:0; font-size:15px; font-weight:750; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .proj-panel .pp-st { display:flex; align-items:center; gap:6px; margin-top:4px; font-size:12.5px; color:#6b6b6b; }
@@ -99,19 +99,19 @@
   .proj-panel .pp-st.saved i { background:#16a34a; } .proj-panel .pp-st.none { display:none; }
   .proj-panel .pp-msg { font-size:12.5px; color:#3f3f46; margin-top:6px; } .proj-panel .pp-msg:empty { display:none; }
   .proj-panel .pp-btn { display:inline-flex; align-items:center; border:none; border-radius:9px; padding:7px 13px; font-family:inherit; font-size:13px; font-weight:700; line-height:1.2;
-    background:#0a0a0a; color:#fff; cursor:pointer; white-space:nowrap; text-decoration:none; flex:none; }
+    background:#111114; color:#fff; cursor:pointer; white-space:nowrap; text-decoration:none; flex:none; }
   .proj-panel .pp-btn:disabled { opacity:.35; cursor:default; }
   .proj-panel .pp-btn.small { padding:5px 10px; font-size:12px; }
-  .proj-panel .pp-btn.sec { background:#e6e6e9; color:#0a0a0a; } .proj-panel .pp-btn.sec:hover { background:#dcdce0; }
+  .proj-panel .pp-btn.sec { background:#e6e6e9; color:#111114; } .proj-panel .pp-btn.sec:hover { background:#dcdce0; }
   .proj-panel .pp-btn.danger { background:transparent; color:#b42318; } .proj-panel .pp-btn.danger.armed { background:#b42318; color:#fff; }
   .proj-panel .pp-item { display:flex; align-items:center; gap:6px; padding:8px 0; border-top:1px solid #e7e7ea; background:none; margin:0; }
   .proj-panel .pp-item:first-child { border-top:none; padding-top:2px; }
   .proj-panel .pp-iname { flex:1; min-width:0; font-size:13.5px; font-weight:650; overflow-wrap:anywhere; }
-  .proj-panel .pp-item.current .pp-iname::before { content:'●'; color:var(--accent,#2563eb); font-size:9px; vertical-align:2px; margin-right:6px; }
-  .proj-panel .pp-meta { display:block; font-size:12px; font-weight:500; color:#8a8a8a; margin-top:2px; }
-  .proj-panel .pp-empty { font-size:12.5px; color:#8a8a8a; line-height:1.45; }
+  .proj-panel .pp-item.current .pp-iname::before { content:'●'; color:var(--accent,#5468ad); font-size:9px; vertical-align:2px; margin-right:6px; }
+  .proj-panel .pp-meta { display:block; font-size:12px; font-weight:500; color:#5c5e66; margin-top:2px; }
+  .proj-panel .pp-empty { font-size:12.5px; color:#5c5e66; line-height:1.45; }
   .proj-panel .pp-more { display:inline-block; margin-top:6px; border:none; background:none; padding:0; font-family:inherit; font-size:12.5px; font-weight:650; color:#52525b; cursor:pointer; }
-  .proj-panel .pp-foot { display:block; padding:8px 8px 4px; font-size:13px; font-weight:650; color:var(--accent,#2563eb); text-decoration:none; }
+  .proj-panel .pp-foot { display:block; padding:8px 8px 4px; font-size:13px; font-weight:650; color:var(--accent,#5468ad); text-decoration:none; }
   @media print { .proj-panel { display:none !important; } }
 </style>
 <script data-proj>
@@ -122,13 +122,15 @@ window.mulyProj = {
     p.innerHTML='<section class="pp-sec pp-cur"><div class="pp-h" id="pp-h-cur"></div><div class="pp-row"><div class="pp-name" id="pp-name"></div><span id="pp-act"></span></div>'
       +'<div class="pp-st none" id="pp-st"><i></i><span></span></div><div class="pp-msg" id="pp-msg"></div></section>'
       +'<section class="pp-sec pp-saved"><div class="pp-h" id="pp-h-list"></div><div id="pp-list"></div></section><div id="pp-extra"></div>'
-      +'<a class="pp-foot proj-link" id="pp-foot" href="projekt.html"></a>';
+      +'<a class="pp-foot proj-link" id="pp-foot" href="projekt.html"></a><span class="pp-ver" id="pp-ver"></span>';
     document.body.appendChild(p); return p;
   },
   state: function(st, text){   // st: none | new | changed | saved
     var b=document.getElementById('proj-btn'), s=document.getElementById('pp-st');
     if(b){ b.dataset.st=st; var l=(b.querySelector('.pb-tx')||{}).textContent||''; b.title = text ? l+' — '+text : l; b.setAttribute('aria-label', b.title); }
     if(s){ s.className='pp-st '+st; s.querySelector('span').textContent=text||''; }
+    var v=document.getElementById('pp-ver'), hv=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name');
+    if(v && hv) v.textContent='kragr·'+(m?m.textContent.trim():'')+' '+hv.textContent;   // Version steht hier statt in der Kopfzeile
   },
   fmt: function(iso, loc){ try{ var d=new Date(iso); return d.toLocaleDateString(loc,{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
 };
@@ -152,21 +154,21 @@ window.mulyProj = {
       --bg: #f0f1f3; --surface: #ffffff; --surface2: #e8eaed;
       --border: #cbd5e1; --border-dark: #94a3b8;
       --text: #111827; --text2: #374151; --text3: #6b7280;
-      --accent: #2563eb; --accent-bg: #eff6ff;
+      --accent: #5468ad; --accent-bg: #eceff8;
       --ok: #0f6e56; --ok-bg: #e6f4ef; --bad: #b42318; --bad-bg: #fdecea; --warn: #9a6700; --warn-bg: #fff6dd;
       --radius: 4px; --radius-sm: 3px; --wire: #cbd5e1;
     }
-    body { font-family:'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 3rem; position: relative; }
+    body { font-family:Figtree, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 3rem; position: relative; }
     body::before { content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.45;
       background-image: linear-gradient(var(--wire) 1px, transparent 1px), linear-gradient(90deg, var(--wire) 1px, transparent 1px); background-size: 40px 40px; }
     .app-header, .main, #report-view { position: relative; z-index: 1; }
     a { color: inherit; }
-    .mono { font-family:'DM Mono', monospace; }
+    .mono { font-family:'JetBrains Mono', monospace; }
 
     .app-header { background: rgba(240,241,243,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-dark); padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: sticky; top: 0; z-index: 10; }
     .logo { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); text-decoration: none; }
     .logo span { color: var(--accent); }
-    .header-links { display: flex; align-items: center; gap: 12px; font-size: 11px; font-family:'DM Mono', monospace; }
+    .header-links { display: flex; align-items: center; gap: 12px; font-size: 11px; font-family:'JetBrains Mono', monospace; }
     .header-links a { color: var(--text2); text-decoration: none; }
     .header-links a:hover { color: var(--accent); }
     .header-links .module-name { color: var(--accent); font-weight: 500; }
@@ -174,14 +176,26 @@ window.mulyProj = {
 
     .main { padding: 1rem; max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 380px 1fr; gap: 1rem; align-items: start; }
     @media (max-width: 860px) { .main { grid-template-columns: 1fr; } }
-    /* Mobil: kleine Ergebnis-Plakette unten mittig; Tipp springt zum Ergebnis; ausgeblendet, solange das Ergebnis im Bild ist (v0.5.46) */
-    #mob-status { display: none; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 40; transform: translateX(-50%);
-      align-items: center; gap: 7px; padding: 8px 14px 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 650; white-space: nowrap; cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08); transition: opacity .2s, transform .2s; -webkit-tap-highlight-color: transparent; }
-    #mob-status.ok { background: #e7f5ee; color: #0f6b46; } #mob-status.bad { background: #fdecec; color: #b42318; }
-    #mob-status .ms-ic { font-size: 12px; } #mob-status .ms-ar { opacity: .65; }
-    #mob-status.away { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
-    @media (max-width: 860px) { #mob-status { display: inline-flex; } body.show-report #mob-status { display: none; } }
+    /* Mobil: Ergebnisleiste unten (kragr-Design, v0.6.0): max η mit Status, maßgebender Nachweis, Balken. Tipp springt zum Ergebnis;
+       ausgeblendet, solange das Ergebnis im Bild ist. */
+    #mob-status { display: none; position: fixed; left: 10px; right: 10px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 40; max-width: 560px; margin: 0 auto;
+      flex-direction: column; gap: 8px; padding: 10px 12px 12px 16px; border-radius: 16px; background: var(--k-bar, #111114); color: #fff; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(17,17,20,.22); transition: opacity .2s, transform .2s; -webkit-tap-highlight-color: transparent; }
+    #mob-status .rb-row { display: flex; align-items: center; gap: 8px; }
+    #mob-status .rb-cols { flex: 1; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; }
+    #mob-status .rb-c { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    #mob-status .rb-l { font-size: 11px; font-weight: 700; color: #c3c5cc; }
+    #mob-status .rb-v { font-family: var(--k-mono); font-size: 15px; font-weight: 600; white-space: nowrap; }
+    #mob-status .rb-g { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #mob-status .rb-t { font-family: Figtree, sans-serif; font-size: 11px; font-weight: 700; margin-left: 4px; }
+    #mob-status.ok .rb-t { color: var(--k-ok, #86efac); } #mob-status.bad .rb-t { color: var(--k-bad, #fca5a5); }
+    #mob-status .rb-bar { height: 6px; border-radius: 3px; background: #3d3f45; overflow: hidden; }
+    #mob-status .rb-bar i { display: block; height: 100%; border-radius: 3px; background: var(--k-accent, #5468ad); }
+    #mob-status.bad .rb-bar i { background: #ef4444; }
+    #mob-status .rb-msg { font-size: 14px; font-weight: 700; }
+    #mob-status .rb-ar { flex: none; }
+    #mob-status.away { opacity: 0; transform: translateY(12px); pointer-events: none; }
+    @media (max-width: 860px) { #mob-status { display: flex; } body.show-report #mob-status { display: none; } .main { padding-bottom: 110px; } }
     .page-head { grid-column: 1 / -1; }
     .page-title { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
     .page-sub { font-size: 13px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
@@ -192,18 +206,18 @@ window.mulyProj = {
     .ci-note b { color: var(--text); }
     @media (max-width: 860px) { .card, #results { scroll-margin-top: 100px; } }
     .card { background: rgba(255,255,255,0.94); border: 1px solid var(--border-dark); border-radius: var(--radius); padding: 1rem 1.15rem; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .card-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-family:'DM Mono', monospace; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .card-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; font-family:'JetBrains Mono', monospace; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
     .field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
     .field.full { grid-column: 1 / -1; }
-    .field label { font-size: 10.5px; color: var(--text3); font-family:'DM Mono', monospace; }
-    .field input, .field select { width: 100%; padding: 7px 8px; font-size: 13px; font-family:'DM Sans', sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
+    .field label { font-size: 10.5px; color: var(--text3); font-family:'JetBrains Mono', monospace; }
+    .field input, .field select { width: 100%; padding: 7px 8px; font-size: 13px; font-family:Figtree, sans-serif; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }
     .field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
     .field input:disabled, .field select:disabled { background: var(--surface2); color: var(--text3); }
     .hint { font-size: 11px; color: var(--text3); line-height: 1.5; margin-top: 8px; }
     .seg { display: flex; border: 1px solid var(--border-dark); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 10px; }
-    .seg button { flex: 1; padding: 8px; font-size: 13px; font-family:'DM Sans', sans-serif; background: var(--surface); border: none; cursor: pointer; color: var(--text2); }
+    .seg button { flex: 1; padding: 8px; font-size: 13px; font-family:Figtree, sans-serif; background: var(--surface); border: none; cursor: pointer; color: var(--text2); }
     .seg button + button { border-left: 1px solid var(--border-dark); }
     .seg button.active { background: var(--accent); color: #fff; }
     .seg-mat { background: var(--surface); margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
@@ -213,7 +227,7 @@ window.mulyProj = {
     .check { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text2); grid-column: 1 / -1; cursor: pointer; }
     .check input { width: 15px; height: 15px; }
 
-    .btn { padding: 9px 14px; font-size: 13px; font-family:'DM Sans', sans-serif; font-weight: 500; border-radius: var(--radius-sm); border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+    .btn { padding: 9px 14px; font-size: 13px; font-family:Figtree, sans-serif; font-weight: 500; border-radius: var(--radius-sm); border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
     .btn.secondary { background: var(--surface); color: var(--accent); }
     .btn.small { padding: 5px 10px; font-size: 12px; }
     .btn.danger { background: var(--surface); color: var(--bad); border-color: var(--bad); }
@@ -221,7 +235,7 @@ window.mulyProj = {
     .pos-item { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--surface2); font-size: 13px; }
     .pos-item:last-child { border-bottom: none; }
     .pos-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .pos-meta { font-size: 10.5px; color: var(--text3); font-family:'DM Mono', monospace; display: block; }
+    .pos-meta { font-size: 10.5px; color: var(--text3); font-family:'JetBrains Mono', monospace; display: block; }
     .pos-item.current .pos-name { color: var(--accent); font-weight: 500; }
     .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
@@ -234,25 +248,25 @@ window.mulyProj = {
     .chk-table tr:last-child td { border-bottom: none; }
     .chk-name a { text-decoration: none; color: var(--text); }
     .chk-name a:hover { color: var(--accent); }
-    .chk-eta { font-family:'DM Mono', monospace; text-align: right; white-space: nowrap; width: 64px; }
+    .chk-eta { font-family:'JetBrains Mono', monospace; text-align: right; white-space: nowrap; width: 64px; }
     .bar { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; width: 100%; min-width: 60px; }
     .bar > i { display: block; height: 100%; background: var(--ok); }
     .bar.bad > i { background: var(--bad); }
-    .tag { display: inline-block; font-family:'DM Mono', monospace; font-size: 10.5px; padding: 2px 7px; border-radius: 10px; }
+    .tag { display: inline-block; font-family:'JetBrains Mono', monospace; font-size: 10.5px; padding: 2px 7px; border-radius: 10px; }
     .card-title .tag { text-transform: none; letter-spacing: 0; }
     .tag.ok { background: var(--ok-bg); color: var(--ok); }
     .tag.bad { background: var(--bad-bg); color: var(--bad); }
     .tag.info { background: var(--surface2); color: var(--text3); }
 
     /* Nachweisdetails */
-    .steps { font-family:'DM Mono', monospace; font-size: 12px; line-height: 1.85; color: var(--text2); }
+    .steps { font-family:'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; color: var(--text2); }
     .steps b { color: var(--text); }
     .steps .res { color: var(--text); }
     /* Rechenschritte: Überschrift in Worten, darunter die Formel mit Zahlen */
     .st { margin: 0 0 9px; }
     .st:last-child { margin-bottom: 0; }
-    .st-h { font-family:'DM Sans', sans-serif; font-size: 12.5px; font-weight: 500; color: var(--text); display: flex; gap: 8px; align-items: baseline; line-height: 1.45; }
-    .st-n { flex: none; font-family:'DM Mono', monospace; font-size: 10px; color: var(--text3); border: 1px solid var(--border-dark); border-radius: 50%; width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center; transform: translateY(-1px); }
+    .st-h { font-family:Figtree, sans-serif; font-size: 12.5px; font-weight: 500; color: var(--text); display: flex; gap: 8px; align-items: baseline; line-height: 1.45; }
+    .st-n { flex: none; font-family:'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); border: 1px solid var(--border-dark); border-radius: 50%; width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center; transform: translateY(-1px); }
     .st-f { padding-left: 25px; line-height: 1.75; }
     .st-f > div { padding-left: 0.9em; text-indent: -0.9em; }
     .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; }
@@ -275,7 +289,7 @@ window.mulyProj = {
     .fixrep { font-size:12px; }
     .figure { display: flex; flex-direction: column; align-items: center; }
     .figure svg { max-width: 100%; height: auto; }
-    .reinf-line { font-family:'DM Mono', monospace; font-size: 13px; margin-top: 6px; text-align: center; color: var(--text); }
+    .reinf-line { font-family:'JetBrains Mono', monospace; font-size: 13px; margin-top: 6px; text-align: center; color: var(--text); }
 
     /* Bericht */
     #report-view { display: none; max-width: 820px; margin: 0 auto; padding: 1rem; }
@@ -283,8 +297,8 @@ window.mulyProj = {
     body.show-report #report-view { display: block; }
     .report { background: #fff; border: 1px solid var(--border-dark); padding: 28px 34px; font-size: 12.5px; line-height: 1.55; color: #111; }
     .report h1 { font-size: 18px; margin-bottom: 2px; }
-    .report h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-family:'DM Mono', monospace; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #999; padding-bottom: 3px; }
-    .report .meta { font-family:'DM Mono', monospace; font-size: 11px; color: #555; }
+    .report h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-family:'JetBrains Mono', monospace; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #999; padding-bottom: 3px; }
+    .report .meta { font-family:'JetBrains Mono', monospace; font-size: 11px; color: #555; }
     .report table { width: 100%; border-collapse: collapse; margin: 4px 0; }
     .report td, .report th { border-bottom: 1px solid #ddd; padding: 4px 6px; text-align: left; vertical-align: top; }
     .report th { font-size: 11px; color: #555; font-weight: 600; }
@@ -306,9 +320,9 @@ window.mulyProj = {
     }
   
     /* ══ Design 2026 (wie die Startseite): weiß, Inter, ohne Rahmen und Raster ══ */
-    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f1f3; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
-      --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --accent:#2563eb; --accent-bg:#eef3ff; --radius:18px; --radius-sm:10px; --card:#f8f8f9; }
-    body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
+    :root { --bg:#ffffff; --surface:#ffffff; --surface2:#f1f2f4; --border:#e6e6e9; --border-dark:#e6e6e9; --wire:transparent;
+      --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --accent:#5468ad; --accent-bg:#eceff8; --radius:18px; --radius-sm:10px; --card:#f5f6f8; }
+    body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; -webkit-font-smoothing:antialiased; }
     body::before { display:none; }
     .app-header { background:rgba(255,255,255,0.92); border-bottom:none; padding:14px 24px; backdrop-filter:blur(10px); }
     .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; color:var(--text); }
@@ -325,28 +339,28 @@ window.mulyProj = {
     .field label, .calc-field label { font-family:inherit; font-size:12px; font-weight:500; color:var(--text3); }
     .field input, .field select, .calc-field input, .calc-field select, .search input { border:none; box-shadow:inset 0 0 0 1px #e4e4e7; border-radius:10px; background:#fff; padding:9px 11px; font-family:inherit; font-size:14px; }
     .field input:focus, .field select:focus, .calc-field input:focus, .search input:focus { outline:2px solid var(--accent); outline-offset:0; box-shadow:none; }
-    .field input:disabled, .field select:disabled { background:#f1f1f3; box-shadow:none; }
-    .seg { border:none; background:#efeff1; padding:3px; border-radius:12px; gap:3px; }
+    .field input:disabled, .field select:disabled { background:#f1f2f4; box-shadow:none; }
+    .seg { border:none; background:#f1f2f4; padding:3px; border-radius:12px; gap:3px; }
     .seg button { background:transparent; border-radius:9px; color:var(--text2); font-family:inherit; font-weight:600; transition:background .15s, box-shadow .15s; }
     .seg button + button { border-left:none; }
     .seg button:hover { color:var(--text); }
     .seg button.active { background:#fff; color:var(--text); font-weight:800; box-shadow:0 1px 3px rgba(0,0,0,0.10); }
-    .btn { border:none; border-radius:12px; background:#0a0a0a; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
+    .btn { border:none; border-radius:12px; background:#111114; color:#fff; font-family:inherit; font-weight:700; transition:transform .1s, background .15s; }
     .btn:hover { background:#262626; } .btn:active { transform:scale(0.98); }
-    .btn.secondary { background:#efeff1; color:var(--text); }
+    .btn.secondary { background:#f1f2f4; color:var(--text); }
     .btn.danger { background:#fff; box-shadow:inset 0 0 0 1px var(--bad, #b42318); }
     .hint { color:var(--text3); }
     .formula-box { background:#fff; border:none; border-radius:12px; }
     .footnote { font-family:inherit; color:var(--text3); }
     @media (max-width:560px){ .app-header{ padding:12px 16px; } .card{ padding:16px; border-radius:16px; } }
     .main { gap:18px; padding:20px 24px; }
-    .seg-mat, .seg-sub { background:#efeff1; box-shadow:none; }
+    .seg-mat, .seg-sub { background:#f1f2f4; box-shadow:none; }
     .seg-mat { display:grid; grid-template-columns:repeat(3,1fr); }
     .seg-mat button { font-size:14px; padding:9px 6px; }
     .seg:not(.seg-mat) { flex-wrap:wrap; }
     .seg:not(.seg-mat) button { flex:1 1 auto; padding:7px 9px; font-size:13px; white-space:nowrap; }
     .main > * { min-width:0; }
-    @media (max-width:560px){ .seg-mat { gap:3px; padding:3px; background:#efeff1; } .seg-mat button { background:transparent; } .seg-mat button.active { background:#fff; } .main{ padding:14px 16px; } }
+    @media (max-width:560px){ .seg-mat { gap:3px; padding:3px; background:#f1f2f4; } .seg-mat button { background:transparent; } .seg-mat button.active { background:#fff; } .main{ padding:14px 16px; } }
     .summary { border-radius:12px; font-weight:700; }
     .pos-item { border-bottom-color:#ececee; }
     .ci-note { border-left:none; border-radius:10px; }
@@ -357,7 +371,7 @@ window.mulyProj = {
     /* ══ Übersicht: Auswahlmenü, Projekt-Menü, aufklappbare Karten ══ */
     .pick { position:relative; margin-bottom:14px; }
     .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:14px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
-    .pick-btn:hover { background:#f1f1f3; } .pick-btn:active { transform:scale(0.99); }
+    .pick-btn:hover { background:#f1f2f4; } .pick-btn:active { transform:scale(0.99); }
     .pick-txt { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
     .pick-g { font-size:12px; font-weight:600; color:var(--text3); }
     .pick-t { font-size:20px; font-weight:800; letter-spacing:-0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -372,7 +386,7 @@ window.mulyProj = {
     .pick-hn { flex:1; font-size:15px; font-weight:700; letter-spacing:-0.1px; }
     .pick-hc { font-size:12px; font-weight:600; color:var(--text3); max-width:55%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .pick-hv { font-size:11px; color:var(--text3); transition:transform .18s; }
-    .pick-group.open { background:#f8f8f9; }
+    .pick-group.open { background:#f5f6f8; }
     .pick-group.open .pick-head:hover { background:transparent; }
     .pick-group.open .pick-hv { transform:rotate(180deg); }
     .pick-body { display:none; flex-direction:column; padding:0 6px 8px; }
@@ -380,7 +394,7 @@ window.mulyProj = {
     .pick-item { text-align:left; border:none; background:none; cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; color:var(--text2); padding:8px 12px 8px 22px; border-radius:9px; position:relative; }
     .pick-item:hover { background:#fff; color:var(--text); }
     .pick-item.active { background:#fff; color:var(--text); font-weight:700; box-shadow:0 1px 2px rgba(0,0,0,0.06); }
-    .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2563eb; }
+    .pick-item.active::before { content:''; position:absolute; left:10px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#5468ad; }
     .ux-hide { display:none !important; }
     .fold > .card-title { cursor:pointer; user-select:none; margin-bottom:0; }
     .fold > .card-title::after { content:'▾'; font-size:12px; color:var(--text3); margin-left:auto; transition:transform .18s; }
@@ -397,25 +411,25 @@ window.mulyProj = {
     #details .card.dfold { padding-top:16px; padding-bottom:16px; margin-bottom:8px; }
     .det-bar { display:flex; justify-content:space-between; align-items:center; margin:6px 2px 10px; }
     .det-bar span { font-size:15px; font-weight:800; }
-    .det-bar button { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); }
+    .det-bar button { border:none; background:#f1f2f4; border-radius:10px; padding:6px 12px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); }
     /* Übungsmodus */
     .det-btns { display:flex; gap:6px; }
-    .det-bar button.ueb-tog.on { background:var(--accent,#2563eb); color:#fff; }
+    .det-bar button.ueb-tog.on { background:var(--accent,#5468ad); color:#fff; }
     body.uebung #summary, body.uebung #chk-table, body.uebung #reinf-line, body.uebung #mob-status { display:none !important; }
     body.uebung:not(.ueb-fig) #fig { display:none; }
-    .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#404040); background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; }
-    .ueb-figbtn { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:4px 0 8px; }
+    .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#3d3f45); background:var(--accent-bg,#eceff8); border-radius:10px; padding:10px 12px; }
+    .ueb-figbtn { border:none; background:#f1f2f4; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:4px 0 8px; }
     .card.ueb:not(.ueb-done) > .card-title .tag, .card.ueb:not(.ueb-done) > .note, .card.ueb:not(.ueb-done) .fixbox { display:none !important; }
   .st.ueb-hid .st-h { cursor:pointer; }
-  .st.ueb-hid .st-h::after { content:attr(data-rev); margin-left:auto; padding-left:10px; font-size:11.5px; font-weight:650; color:var(--accent,#2563eb); white-space:nowrap; }
+  .st.ueb-hid .st-h::after { content:attr(data-rev); margin-left:auto; padding-left:10px; font-size:11.5px; font-weight:650; color:var(--accent,#5468ad); white-space:nowrap; }
   .ueb-gap { display:inline-block; min-width:1.4em; text-align:center; color:#9ca3af; border-bottom:1.5px dotted #9ca3af; line-height:1.15; margin:0 1px; font-weight:400; }
   .st.ueb-hid .st-f b { border-bottom:none; }
-    .ueb-box { background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
+    .ueb-box { background:var(--accent-bg,#eceff8); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
     .ueb-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
     .ueb-box input { width:150px; padding:6px 8px; font:inherit; font-size:13px; border:1px solid var(--border-dark,#d1d5db); border-radius:8px; background:#fff; }
-    .ueb-box button { border:none; background:#fff; border-radius:8px; padding:6px 10px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text,#0a0a0a); }
+    .ueb-box button { border:none; background:#fff; border-radius:8px; padding:6px 10px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text,#111114); }
     .ueb-box button:disabled { opacity:.45; cursor:default; }
-    .ueb-cnt { font-size:12px; color:var(--text3,#8a8a8a); }
+    .ueb-cnt { font-size:12px; color:var(--text3,#5c5e66); }
     .ueb-msg { font-size:13px; } .ueb-msg:empty { display:none; } .ueb-msg.ok { color:var(--ok,#15803d); } .ueb-msg.bad { color:var(--bad,#b91c1c); }
       .bp-lay { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 4px 6px; margin-bottom: 8px; }
     .bp-lay select { grid-column: 1 / -1; }
@@ -427,9 +441,9 @@ window.mulyProj = {
     .ml-h { display:flex; align-items:center; gap:10px; padding:9px 8px 9px 12px; cursor:pointer; font-size:13.5px; -webkit-tap-highlight-color:transparent; }
     .ml-n { flex:none; width:20px; height:20px; border-radius:50%; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#52525b; }
     .ml-s { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
-    .ml-s i { font-style:normal; font-weight:500; color:var(--text3,#8a8a8a); }
-    .ml-c { flex:none; color:var(--text3,#8a8a8a); font-size:10px; transition:transform .15s; } .ml-it.open .ml-c { transform:rotate(180deg); }
-    .ml-x { flex:none; border:none; background:none; font-size:18px; line-height:1; color:var(--text3,#8a8a8a); cursor:pointer; padding:3px 7px; border-radius:7px; }
+    .ml-s i { font-style:normal; font-weight:500; color:var(--text3,#5c5e66); }
+    .ml-c { flex:none; color:var(--text3,#5c5e66); font-size:10px; transition:transform .15s; } .ml-it.open .ml-c { transform:rotate(180deg); }
+    .ml-x { flex:none; border:none; background:none; font-size:18px; line-height:1; color:var(--text3,#5c5e66); cursor:pointer; padding:3px 7px; border-radius:7px; }
     .ml-x:hover { background:#e4e4e7; color:#b42318; }
     .ml-b { display:none; padding:2px 12px 12px; } .ml-it.open .ml-b { display:block; } .ml-it.open .ml-b.grid2 { display:grid; }
     .ml-b .bp-lay { margin-bottom:0; } .ml-b .bp-head { margin:8px 0 3px; }
@@ -437,7 +451,7 @@ window.mulyProj = {
     .ml .gs-L { margin-top:0 !important; padding-top:0 !important; border-top:none !important; }
     .ml-add { align-self:flex-start; border:1.5px dashed #d4d4d8; background:none; border-radius:10px; padding:8px 13px; font-family:inherit; font-size:13px; font-weight:650; color:#3f3f46; cursor:pointer; }
     .ml-add:hover { background:#f4f4f6; }
-    .bp-head { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
+    .bp-head { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
     .bp-head span:first-child { display: none; }
     #bp-lay-card.bpm-uwert .bp-lay, #bp-lay-card.bpm-glaser .bp-lay { grid-template-columns: repeat(3, minmax(0,1fr)); }
     #bp-lay-card.bpm-schall .bp-lay { grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -449,21 +463,66 @@ window.mulyProj = {
     @media (min-width:1000px){ .main { max-width:1180px; padding:6px 20px 20px; gap:20px; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); } }
     @media (max-width:560px){ .main { padding:6px 20px 14px; } }
 </style>
-<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
-  .fehler-link:hover { color: var(--accent, #2563eb); }
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
+  .fehler-link:hover { color: var(--accent, #5468ad); }
+</style>
+<style data-kragr>
+  /* kragr-Design (Übergabe vom 21.10.2026), Stufe 1: Farben, Schrift, Kopfzeile, Ergebnisleiste. Identisch in calc und size. */
+  :root { --k-accent:#5468ad; --k-tint:#eceff8; --k-card:#f5f6f8; --k-ctl:#f1f2f4; --k-ctl-h:#e6e7ea; --k-text:#111114; --k-text2:#3d3f45; --k-muted:#5c5e66;
+    --k-line:#c3c5cc; --k-input:#d5d7dc; --k-point:#e8590c; --k-unsaved:#f59e0b; --k-bar:#111114; --k-ok:#86efac; --k-bad:#fca5a5; --k-err:#b42318;
+    --k-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
+    --accent:var(--k-accent); --accent-bg:var(--k-tint); --text:var(--k-text); --text2:var(--k-text2); --text3:var(--k-muted); --card:var(--k-card); --surface2:var(--k-ctl); }
+  body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; color:var(--k-text); }
+  :focus-visible { outline:2px solid var(--k-accent); outline-offset:2px; }
+  .field input, .field select, .calc-field input, .calc-field select { box-shadow:inset 0 0 0 1px var(--k-input); }
+  /* Kopfzeile einzeilig: Logo · calc size ref · Projekte, Erscheinungsbild, Sprache */
+  .app-header { display:flex; align-items:center; justify-content:flex-start; gap:6px; padding:12px 20px 12px 24px; }
+  .app-header .logo { flex:none; font-size:24px; letter-spacing:-0.04em; line-height:1; }
+  .app-header .header-links { display:flex; align-items:center; gap:0; margin-left:auto; font-size:15px; font-weight:500; }
+  .app-header .header-links > a, .app-header .header-links > .module-name { display:flex; align-items:center; min-height:44px; padding:0 8px; }
+  .app-header .header-links > a { color:var(--k-muted); } .app-header .header-links > a:hover { color:var(--k-text); }
+  .app-header .header-links > .module-name { color:var(--k-text); font-weight:800; }
+  .hdr-tools { flex:none; display:flex; align-items:center; gap:2px; margin-left:6px; }
+  .hdr-tools .version { display:none; }   /* Version steht im Projekt-Fenster unten */
+  .proj-btn { height:40px; min-width:40px; border-radius:10px; background:var(--k-ctl); padding:0 13px 0 11px; font-size:14px; font-weight:700; color:var(--k-text); gap:8px; }
+  .proj-btn:hover { background:var(--k-ctl-h); }
+  .proj-btn svg { width:18px; height:18px; }
+  .proj-btn .pb-dot { width:8px; height:8px; box-shadow:none; }
+  .proj-btn[data-st="changed"] .pb-dot, .proj-btn[data-st="new"] .pb-dot { background:var(--k-unsaved); }
+  .theme-btn { width:36px; height:44px; border-radius:10px; opacity:1; color:var(--k-text); }
+  .theme-btn svg { width:20px; height:20px; }
+  .lang-sel { height:40px; border-radius:10px; background-color:var(--k-ctl); font-size:13px; font-weight:700; padding:0 24px 0 10px; color:var(--k-text); }
+  .lang-sel:hover { background-color:var(--k-ctl-h); }
+  .pp-ver { display:block; padding:2px 8px 6px; font-family:var(--k-mono); font-size:11px; color:var(--k-muted); }
+  @media (max-width:999px) {
+    .proj-btn { width:40px; padding:0; justify-content:center; }
+    .proj-btn .pb-tx { display:none; }
+    .proj-btn .pb-dot { position:absolute; top:7px; right:6px; }
+    .proj-btn[data-st="saved"] .pb-dot { display:none; }   /* am Symbol nur der orange Punkt: „noch nicht gespeichert“ */
+  }
+  @media (max-width:560px) {
+    .app-header { padding:7px 6px 7px 16px; gap:4px; }
+    .app-header .header-links { gap:0; }
+    .app-header .header-links > a, .app-header .header-links > .module-name { padding:0 7px; }
+    .hdr-tools { margin-left:2px; }
+  }
+  @media (max-width:360px) { .app-header .header-links > a, .app-header .header-links > .module-name { padding:0 5px; } .theme-btn { width:32px; } }
+  @media print { .hdr-tools { display:none !important; } }
 </style>
 </head>
 <body>
 <header class="app-header glass">
-  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
-  <nav class="header-links">
-    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+  <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
+  <nav class="header-links" aria-label="Module">
     <a href="calc.html">calc</a>
     <span class="module-name">size</span>
     <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
+  </nav>
+  <div class="hdr-tools">
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <span class="version" id="ver"></span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
-  </nav>
+  </div>
 </header>
 
 <div id="mob-status" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})"></div>
@@ -2652,6 +2711,7 @@ const I18N = { "de": {
 "sumOk":"Alle Nachweise erfüllt · größte Ausnutzung {0} %",
 "mobOk":"Alle Nachweise erfüllt · max. {0} %",
 "mobOkS":"max. {0} %",
+"mobGov":"maßgebend",
 "mlAdd":"Schicht hinzufügen",
 "mlDel":"Schicht entfernen",
 "mlPick":"Baustoff wählen",
@@ -3107,7 +3167,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.5.52';
+const SIZE_VERSION = '0.6.0';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -3881,10 +3941,10 @@ function stirrups(I, r){
 // Darstellung
 // ══════════════════════════════════════════════════
 // ── Zeichenhilfen für Kräfte: orange = Einwirkungen (Schnittgrößen), blau = innere Kräfte ──
-const C_EW = '#c2410c', C_IN = '#2563eb';
+const C_EW = '#c2410c', C_IN = '#5468ad';
 // Indizes in Skizzen: „q_z“, „R_c,d“, „h_ü“ → tiefgestellt (nur reiner Text ohne Tags)
 const svgSub = t => String(t).includes('<') ? t : String(t).replace(/([A-Za-zα-ωΑ-Ω])_([A-Za-z0-9,äöüß]+)/g, '$1<tspan font-size="0.78em" dy="2">$2</tspan><tspan dy="-2">\u200a</tspan>');
-const svgT = (x,y,t,a='middle',c='#111',fs=10)=>`<text x="${x}" y="${y}" font-size="${fs}" font-family="DM Mono,monospace" fill="${c}" text-anchor="${a}">${svgSub(t)}</text>`;
+const svgT = (x,y,t,a='middle',c='#111',fs=10)=>`<text x="${x}" y="${y}" font-size="${fs}" font-family="JetBrains Mono,monospace" fill="${c}" text-anchor="${a}">${svgSub(t)}</text>`;
 const sub = (m, i) => `${m}<tspan font-size="7.5" dy="2.5">${i}</tspan><tspan dy="-2.5"></tspan>`;
 function svgArrow(x1,y1,x2,y2,c,dbl=false,w=1.7){       // Pfeilspitze bei (x2,y2); dbl: Doppelpfeil (Momentenvektor)
   const L=Math.hypot(x2-x1,y2-y1)||1, ux=(x2-x1)/L, uy=(y2-y1)/L, hs=7.5, hw=3.6;
@@ -3924,11 +3984,11 @@ function figQuerschnitt(I, res){
     const xl=x0, yf=y0+hf*sc;
     s+=`<path d="M ${xl} ${y0} H ${xr} V ${yf} H ${xw+bw} V ${y0+hh} H ${xw} V ${yf} H ${xl} Z" fill="#eceff3" stroke="#111" stroke-width="1.4"/>`;
     const be=res.BF.beff*sc;
-    s+=`<line x1="${xw+bw/2-be/2}" y1="${y0-6}" x2="${xw+bw/2+be/2}" y2="${y0-6}" stroke="#2563eb" stroke-width="1.2"/>`+`<text x="${xw+bw/2}" y="${y0-9}" font-size="9.5" font-family="DM Mono,monospace" fill="#2563eb" text-anchor="middle">${svgSub('b_eff')} = ${deNum(res.BF.beff/10,0)} cm</text>`;
+    s+=`<line x1="${xw+bw/2-be/2}" y1="${y0-6}" x2="${xw+bw/2+be/2}" y2="${y0-6}" stroke="#5468ad" stroke-width="1.2"/>`+`<text x="${xw+bw/2}" y="${y0-9}" font-size="9.5" font-family="JetBrains Mono,monospace" fill="#5468ad" text-anchor="middle">${svgSub('b_eff')} = ${deNum(res.BF.beff/10,0)} cm</text>`;
   } else s+=`<rect x="${xw}" y="${y0}" width="${bw}" height="${hh}" fill="#eceff3" stroke="#111" stroke-width="1.4"/>`;
   // Druckzone (hellblau) und Nulllinie im Querschnitt
   if(BI){
-    const xs=BI.x*sc, fill='fill="#2563eb" fill-opacity="0.13"';
+    const xs=BI.x*sc, fill='fill="#5468ad" fill-opacity="0.13"';
     if(uz){ const be=res.BF.beff*sc; s+=`<rect x="${xw+bw/2-be/2}" y="${y0}" width="${be}" height="${Math.min(BI.x,hf)*sc}" ${fill}/>`;
       if(BI.x>hf) s+=`<rect x="${xw}" y="${y0+hf*sc}" width="${bw}" height="${(BI.x-hf)*sc}" ${fill}/>`; }
     else s+=`<rect x="${xw}" y="${y0}" width="${bw}" height="${xs}" ${fill}/>`;
@@ -3962,7 +4022,7 @@ function figQuerschnitt(I, res){
     }
   }
   s+=`<line x1="${xw}" y1="${y0+hh+14}" x2="${xw+bw}" y2="${y0+hh+14}" stroke="#111" stroke-width="0.7"/>`+T(xw+bw/2, y0+hh+27, `${uz?'b_w':'b'} = ${deNum(b/10,0)} cm`);
-  s+=`<line x1="${x0-14}" y1="${y0}" x2="${x0-14}" y2="${y0+hh}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-18}" y="${y0+hh/2}" font-size="10" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-18} ${y0+hh/2})">h = ${deNum(h/10,0)} cm</text>`;
+  s+=`<line x1="${x0-14}" y1="${y0}" x2="${x0-14}" y2="${y0+hh}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-18}" y="${y0+hh/2}" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-18} ${y0+hh/2})">h = ${deNum(h/10,0)} cm</text>`;
   s+=`<line x1="${xr+12}" y1="${y0}" x2="${xr+12}" y2="${yb}" stroke="#111" stroke-width="0.7"/>`+T(xr+16, y0+(yb-y0)/2+3, `d = ${deNum(d/10,1)} cm`,'start');
   // Plattendicke h_f mit eigener Maßlinie (außen neben d)
   if(uz) s+=`<line x1="${xr+28}" y1="${y0}" x2="${xr+28}" y2="${y0+hf*sc}" stroke="#111" stroke-width="0.7"/><line x1="${xr+24}" y1="${y0+hf*sc}" x2="${xr+32}" y2="${y0+hf*sc}" stroke="#111" stroke-width="0.7"/>`+T(xr+33, y0+hf*sc/2+3, `h_f = ${deNum(hf/10,0)} cm`,'start');
@@ -3974,7 +4034,7 @@ function figQuerschnitt(I, res){
     +`<path d="M ${xs0} ${y0} l -5 ${hp*0.3} l 8 ${hp*0.2} l -8 ${hp*0.2} l 5 ${hp*0.3}" fill="none" stroke="#111" stroke-width="0.8"/>`;
   if(BI){
     const yx=y0+BI.x*sp, yc=y0+(d-BI.z)*sp, ys=y0+d*sp;
-    s+=`<rect x="${xs0}" y="${y0}" width="66" height="${BI.x*sp}" fill="#2563eb" fill-opacity="0.13"/>`
+    s+=`<rect x="${xs0}" y="${y0}" width="66" height="${BI.x*sp}" fill="#5468ad" fill-opacity="0.13"/>`
       +`<line x1="${xs0}" y1="${yx}" x2="${xF+4}" y2="${yx}" stroke="${C_IN}" stroke-width="1" stroke-dasharray="4 3"/>`;
     s+=`<line x1="${xs0+4}" y1="${ys}" x2="${xF}" y2="${ys}" stroke="#111" stroke-width="1.6"/>`;   // Bewehrung
     s+=svgArrow(xF+56, yc, xF+2, yc, C_IN)+svgArrow(xF+2, ys, xF+56, ys, C_IN);
@@ -4459,7 +4519,7 @@ function figStuetze(I, res){
   s+=svgPunkt(x0+w/2, y0+hh/2, C_EW, false)+T(x0+w/2+10, y0+hh/2-8, 'N', 'start', C_EW);
   s+=svgArrow(x0+w+16, y0+hh/2, x0+w+60, y0+hh/2, C_EW, true)+T(x0+w+38, y0+hh/2-7, 'M', 'middle', C_EW);
   s+=`<line x1="${x0}" y1="${y0+hh+14}" x2="${x0+w}" y2="${y0+hh+14}" stroke="#111" stroke-width="0.7"/>`+T(x0+w/2, y0+hh+27, `b = ${deNum(b/10,0)} cm`);
-  s+=`<line x1="${x0-14}" y1="${y0}" x2="${x0-14}" y2="${y0+hh}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-18}" y="${y0+hh/2}" font-size="10" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-18} ${y0+hh/2})">h = ${deNum(h/10,0)} cm</text>`;
+  s+=`<line x1="${x0-14}" y1="${y0}" x2="${x0-14}" y2="${y0+hh}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-18}" y="${y0+hh/2}" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-18} ${y0+hh/2})">h = ${deNum(h/10,0)} cm</text>`;
   // Ansicht: Stab, Lager, Biegelinie (überhöht)
   const beta=I.beta, et = SM.e0+SM.ei+SM.e2, amp = Math.min(34, 10 + 24*Math.min(1, et/h));
   s+=`<line x1="${xc0}" y1="${yt}" x2="${xc0}" y2="${yb}" stroke="#94a3b8" stroke-width="7" stroke-linecap="butt"/>`;
@@ -4471,7 +4531,7 @@ function figStuetze(I, res){
   const pin = (y, up) => `<path d="M ${xc0} ${y} l -8 ${up?-12:12} h 16 Z" fill="#fff" stroke="#111" stroke-width="1.2"/>`;
   s+= beta===2 ? fix(yb) : beta===0.5 ? fix(yb)+fix(yt) : beta===0.7 ? fix(yb)+pin(yt,true) : pin(yb,false)+pin(yt,true);
   s+=svgArrow(xc0+(beta===2?amp:0), yt-30, xc0+(beta===2?amp:0), yt-(beta===0.5||beta===0.7||beta===1?13:2), C_EW)+T(xc0+(beta===2?amp:0)+8, yt-20, sub('N','Ed'), 'start', C_EW);
-  s+=`<line x1="${xc0-46}" y1="${yt}" x2="${xc0-46}" y2="${yb}" stroke="#111" stroke-width="0.7"/>`+`<text x="${xc0-50}" y="${(yt+yb)/2}" font-size="10" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${xc0-50} ${(yt+yb)/2})">l = ${deNum(I.l,2)} m</text>`;
+  s+=`<line x1="${xc0-46}" y1="${yt}" x2="${xc0-46}" y2="${yb}" stroke="#111" stroke-width="0.7"/>`+`<text x="${xc0-50}" y="${(yt+yb)/2}" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${xc0-50} ${(yt+yb)/2})">l = ${deNum(I.l,2)} m</text>`;
   s+=T(xc0+44, (yt+yb)/2-6, `l₀ = ${deNum(SM.l0/1000,2)} m`, 'start', C_IN)+T(xc0+44, (yt+yb)/2+8, `λ = ${deNum(SM.lam,1)}`, 'start', C_IN);
   s+='</svg>';
   return s + figLegend([_L`N<sub>Ed</sub> = ${deNum(I.N,0)} kN (Druck, ⊗)`, `M<sub>02</sub> = ${deNum(I.M02,1)} kNm`, `M<sub>01</sub> = ${deNum(I.M01,1)} kNm`],
@@ -4505,11 +4565,15 @@ function renderOut(C, ok, fig, line, nicht, refLink){
   if(PROBE){ PROBE.C=C; return; }   // Abhilfe-Suche: nur die Nachweise merken
   const nBad = C.filter(c=>!c.ok).length, maxEta = Math.max(0, ...C.filter(c=>!c.info).map(c=>c.eta));
   const ms=$('mob-status'); ms.className = ok?'ok':'bad';
-  // kompakte Plakette unten (v0.5.46): kurzer Text sichtbar, voller Text als Titel/Vorlesetext
-  const nChk = C.filter(c=>!c.info).length;
+  // Ergebnisleiste unten (v0.6.0): max η mit Status, maßgebender Nachweis, Balken; voller Text als Titel/Vorlesetext
+  const nChk = C.filter(c=>!c.info).length, gov = C.filter(c=>!c.info).reduce((x,c)=>(!x||c.eta>x.eta)?c:x, null);
   const full = (ok && !nChk) ? tx('resDone') : ok ? tx('mobOk', deNum(maxEta*100,0)) : tx(nBad>1?'nBadN':'nBad1', nBad);
   const short = (ok && !nChk) ? tx('resDone') : ok ? tx('mobOkS', deNum(maxEta*100,0)) : tx('mobBadS', nBad);
-  ms.innerHTML = `<span class="ms-ic" aria-hidden="true">${ok?'✓':'✕'}</span><span class="ms-tx">${short}</span><span class="ms-ar" aria-hidden="true">↓</span>`;
+  const AR = '<svg class="rb-ar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>';
+  ms.innerHTML = !nChk ? `<span class="rb-row"><span class="rb-msg">${short}</span><span style="flex:1"></span>${AR}</span>`
+    : `<span class="rb-row"><span class="rb-cols"><span class="rb-c"><span class="rb-l">max η</span><span class="rb-v">${deNum(maxEta*100,0)}&#8239;%<span class="rb-t">${ok?tx('tagOk'):tx('mobBadS', nBad)}</span></span></span>`
+    + `<span class="rb-c"><span class="rb-l">${tx('mobGov')}</span><span class="rb-g">${gov.title}</span></span></span>${AR}</span>`
+    + `<span class="rb-bar" aria-hidden="true"><i style="width:${Math.min(100, maxEta*100).toFixed(1)}%"></i></span>`;
   ms.title = full + tx('toResult'); ms.setAttribute('aria-label', ms.title);
   $('summary').innerHTML = ok && !nChk ? `<div class="summary ok">${tx('resDoneNo')}</div>` : ok
     ? `<div class="summary ok">${tx('sumOk', deNum(maxEta*100,0))}</div>`
@@ -5238,7 +5302,7 @@ function figProfil(P, K, I){
   s+=`<line x1="${xr+8}" y1="${y0+tf+r}" x2="${xr+8}" y2="${yb-tf-r}" stroke="#64748b" stroke-width="1.3"/>`+T(xr+12, y0+tf+r+(ym-14-y0-tf-r)/2+3, `c = ${deNum(K.cw,1)} mm`, 'start', '#64748b');
   s+=`<line x1="${xr+r}" y1="${y0-6}" x2="${x0+b}" y2="${y0-6}" stroke="#64748b" stroke-width="1.3"/>`+T((xr+r+x0+b)/2, y0-10, `c = ${deNum(K.cf,1)} mm`, 'middle', '#64748b');
   // Maße
-  s+=`<line x1="${x0-14}" y1="${y0}" x2="${x0-14}" y2="${yb}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-18}" y="${y0+h/2}" font-size="10" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-18} ${y0+h/2})">h = ${P.h} mm</text>`;
+  s+=`<line x1="${x0-14}" y1="${y0}" x2="${x0-14}" y2="${yb}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-18}" y="${y0+h/2}" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-18} ${y0+h/2})">h = ${P.h} mm</text>`;
   s+=`<line x1="${x0}" y1="${yb+14}" x2="${x0+b}" y2="${yb+14}" stroke="#111" stroke-width="0.7"/>`+T(cx-(hasMz?30:0), yb+27, `b = ${P.b} mm`);
   s+=T(x0+b+8, y0+tf/2+4, `t_f = ${dk(P.tf)} mm`, 'start')+T(xr+14, ym+40, `t_w = ${dk(P.tw)} mm`, 'start')+T(x0+b+8, yb-tf/2+4, `r = ${P.r} mm`, 'start');
   // Schnittgrößen (orange)
@@ -5611,7 +5675,7 @@ function figHolz(I, h){
   for(let i=1;i<6;i++) s+=`<path d="M ${x0+w*0.2} ${y0+hh*i/6} q ${w*0.3} ${-hh*0.03} ${w*0.6} 0" fill="none" stroke="#b07c3a" stroke-width="0.6" opacity="0.6"/>`;
   s+=`<path d="M ${x0-8} ${ym} H ${x0+w+86}" stroke="#9ca3af" stroke-width="0.7" stroke-dasharray="6 3 1.5 3"/>`+T(x0+w+90, ym+3.5, 'y', 'start', '#6b7280');
   s+=`<line x1="${x0}" y1="${y0+hh+14}" x2="${x0+w}" y2="${y0+hh+14}" stroke="#111" stroke-width="0.7"/>`+T(cx, y0+hh+28, `b = ${b}`);
-  s+=`<line x1="${x0-16}" y1="${y0}" x2="${x0-16}" y2="${y0+hh}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-20}" y="${ym}" font-size="10" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-20} ${ym})">h = ${h}</text>`;
+  s+=`<line x1="${x0-16}" y1="${y0}" x2="${x0-16}" y2="${y0+hh}" stroke="#111" stroke-width="0.7"/>`+`<text x="${x0-20}" y="${ym}" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${x0-20} ${ym})">h = ${h}</text>`;
   if(I.M>0) s+=svgArrow(x0+w+18, ym-9, x0+w+64, ym-9, C_EW, true)+T(x0+w+41, ym-15, sub('M','y'), 'middle', C_EW);
   if(I.V>0){ const l=Math.min(hh*0.2, 30); s+=svgArrow(x0+w+30, ym+8, x0+w+30, ym+8+2*l, C_EW)+T(x0+w+36, ym+8+l+4, sub('V','z'), 'start', C_EW); }
   if(I.N>0) s+=svgPunkt(cx, ym, C_EW, false)+T(cx+10, ym-8, 'N', 'start', C_EW);
@@ -5750,7 +5814,7 @@ function figFP(I, res){
   // Profil
   s+=`<path d="M ${X(-P.b/2)} ${Y(P.h/2)} H ${X(P.b/2)} V ${Y(P.h/2-P.tf)} H ${X(P.tw/2)} V ${Y(-P.h/2+P.tf)} H ${X(P.b/2)} V ${Y(-P.h/2)} H ${X(-P.b/2)} V ${Y(-P.h/2+P.tf)} H ${X(-P.tw/2)} V ${Y(P.h/2-P.tf)} H ${X(-P.b/2)} Z" fill="#475569" stroke="#111"/>`;
   s+=`<line x1="${X(-I.B/2)}" y1="${Y(-I.L/2)+14}" x2="${X(I.B/2)}" y2="${Y(-I.L/2)+14}" stroke="#111" stroke-width="0.7"/>`+svgT(cx, Y(-I.L/2)+27, `B<tspan font-size="7" dy="2">p</tspan><tspan dy="-2"> = ${deNum(I.B,0)} mm</tspan>`);
-  s+=`<line x1="${X(-I.B/2)-14}" y1="${Y(I.L/2)}" x2="${X(-I.B/2)-14}" y2="${Y(-I.L/2)}" stroke="#111" stroke-width="0.7"/>`+`<text x="${X(-I.B/2)-18}" y="${cy}" font-size="10" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${X(-I.B/2)-18} ${cy})">${svgSub('L_p')} = ${deNum(I.L,0)} mm</text>`;
+  s+=`<line x1="${X(-I.B/2)-14}" y1="${Y(I.L/2)}" x2="${X(-I.B/2)-14}" y2="${Y(-I.L/2)}" stroke="#111" stroke-width="0.7"/>`+`<text x="${X(-I.B/2)-18}" y="${cy}" font-size="10" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${X(-I.B/2)-18} ${cy})">${svgSub('L_p')} = ${deNum(I.L,0)} mm</text>`;
   s+=`<line x1="${X(P.b/2)}" y1="${Y(P.h/2)-6}" x2="${X(P.b/2+c)}" y2="${Y(P.h/2)-6}" stroke="${C_IN}" stroke-width="1"/>`+svgT(X(P.b/2+c/2), Y(P.h/2)-9, 'c', 'middle', C_IN, 9);
   // Ansicht
   const ax=x0+I.B*sc+60, aw=170, ay=y0+20, tp=Math.max(6, I.t*sc), colw=P.b*sc*0.6;
@@ -6228,7 +6292,7 @@ function figGS(I, res){
   I.L.forEach(l=>{ if(l.z0>=zmax) return; s+=`<rect x="10" y="${Y(l.z0)}" width="450" height="${Y(l.z1)-Y(l.z0)}" fill="${GS_COL[l.bod]||GS_COL.x}"/>`;
     if(l.z0>0) s+=`<line x1="10" y1="${Y(l.z0)}" x2="460" y2="${Y(l.z0)}" stroke="#8b6b3e" stroke-width="0.8"/>`;
     s+=svgT(16, Y(l.z0)+12, `${l.i}: ${l.name}`, 'start', '#5b4a32', 8.5)+svgT(16, Y(l.z0)+23, `E<tspan font-size="7" dy="2">s</tspan><tspan dy="-2"> = ${f1(l.Es)} MN/m²</tspan>`, 'start', '#6b7280', 8); });
-  if(I.gw){ const zwS=I.zw-I.d; if(zwS>=0 && zwS<zmax){ s+=`<line x1="10" y1="${Y(zwS)}" x2="190" y2="${Y(zwS)}" stroke="#2563eb" stroke-width="1.2"/>`+svgT(160, Y(zwS)-3, 'GW ▽', 'end', '#2563eb', 9); } else if(zwS<0) s+=svgT(186, top-4, tt('GW über der Sohle'), 'end', '#2563eb', 8.5); }
+  if(I.gw){ const zwS=I.zw-I.d; if(zwS>=0 && zwS<zmax){ s+=`<line x1="10" y1="${Y(zwS)}" x2="190" y2="${Y(zwS)}" stroke="#5468ad" stroke-width="1.2"/>`+svgT(160, Y(zwS)-3, 'GW ▽', 'end', '#5468ad', 9); } else if(zwS<0) s+=svgT(186, top-4, tt('GW über der Sohle'), 'end', '#5468ad', 8.5); }
   const fw=Math.min(120, I.b*40), fx=110;
   s+=`<rect x="${fx-fw/2}" y="${top-16}" width="${fw}" height="16" fill="#cbd5e1" stroke="#111"/>`+svgArrow(fx, top-42, fx, top-18, C_EW)+svgT(fx+6, top-30, sub('V','k'), 'start', C_EW);
   s+=svgT(fx, top-46, `b = ${f2(I.b)} m`, 'middle', '#111', 9);
@@ -6490,7 +6554,7 @@ function figGU(I, res){
   const f1=x=>deNum(x,1), f2=x=>deNum(x,2), Ht=I.ts+I.hwand+I.td, sc=Math.min(300/I.B, 190/Math.max(Ht, I.hw)), x0=235-I.B*sc/2, yb=250, X=x=>x0+x*sc, Y=z=>yb-z*sc;
   let s=`<svg viewBox="0 0 505 290" width="505" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Auftrieb">`;
   s+=svgT(235, 14, tt('Querschnitt'), 'middle', '#6b7280', 9.5);
-  s+=`<rect x="10" y="${Y(I.hw)}" width="485" height="${I.hw*sc+30}" fill="#dbeafe"/>`+`<line x1="10" y1="${Y(I.hw)}" x2="495" y2="${Y(I.hw)}" stroke="#2563eb" stroke-width="1.2"/>`+svgT(16, Y(I.hw)-4, 'GW', 'start', '#2563eb', 9);
+  s+=`<rect x="10" y="${Y(I.hw)}" width="485" height="${I.hw*sc+30}" fill="#dfe3f2"/>`+`<line x1="10" y1="${Y(I.hw)}" x2="495" y2="${Y(I.hw)}" stroke="#5468ad" stroke-width="1.2"/>`+svgT(16, Y(I.hw)-4, 'GW', 'start', '#5468ad', 9);
   // Innenraum der Wanne ist trocken: Wasser nur außen und unter der Sohle
   if(I.hwand>0) s+=`<rect x="${X(I.tw)}" y="${Y(I.ts+I.hwand)}" width="${(I.B-2*I.tw)*sc}" height="${I.hwand*sc}" fill="#ffffff"/>`;
   s+=`<rect x="${X(0)}" y="${Y(I.ts)}" width="${I.B*sc}" height="${I.ts*sc}" fill="#cbd5e1" stroke="#111"/>`;
@@ -6595,7 +6659,7 @@ function figMD(I, res){
   // Knickfigur
   const bow=res.lam*0.9;
   s+=`<path d="M ${cx} ${y0} Q ${cx+bow} ${(y0+y1)/2} ${cx} ${y1}" fill="none" stroke="${C_IN}" stroke-dasharray="5 4" stroke-width="1.4"/>`;
-  s+=`<line x1="${cx-tw/2-30}" y1="${y0}" x2="${cx-tw/2-30}" y2="${y1}" stroke="#111" stroke-width="0.7"/>`+`<text x="${cx-tw/2-35}" y="${(y0+y1)/2}" font-size="9" font-family="DM Mono,monospace" text-anchor="middle" transform="rotate(-90 ${cx-tw/2-35} ${(y0+y1)/2})">h = ${f2(I.h)} m</text>`;
+  s+=`<line x1="${cx-tw/2-30}" y1="${y0}" x2="${cx-tw/2-30}" y2="${y1}" stroke="#111" stroke-width="0.7"/>`+`<text x="${cx-tw/2-35}" y="${(y0+y1)/2}" font-size="9" font-family="JetBrains Mono,monospace" text-anchor="middle" transform="rotate(-90 ${cx-tw/2-35} ${(y0+y1)/2})">h = ${f2(I.h)} m</text>`;
   s+=svgT(cx, y1+slab+16, `t = ${I.t} mm${I.lage!=='zw'?` · a = ${I.a} mm`:''}`, 'middle', '#111', 9);
   // Φ-Balken
   const bx=320, bw=120;
@@ -6812,10 +6876,10 @@ function figWD(I, res){
   const [xt,yt]=P(0), [xb,yb]=P(I.L);
   const k=70/Math.max(1,res.O.p2);
   // Oberwasser links der Fläche
-  s_+=`<polygon points="20,${Y(0)} ${xt},${Y(0)} ${xt},${yt} ${xb},${yb} 20,${yb}" fill="#dbeafe"/>`;
-  s_+=`<line x1="20" y1="${Y(0)}" x2="${xt}" y2="${Y(0)}" stroke="#2563eb" stroke-width="1.3"/>`+svgT(26, Y(0)-4, tt('Wasserspiegel ▽'), 'start', '#2563eb', 9);
+  s_+=`<polygon points="20,${Y(0)} ${xt},${Y(0)} ${xt},${yt} ${xb},${yb} 20,${yb}" fill="#dfe3f2"/>`;
+  s_+=`<line x1="20" y1="${Y(0)}" x2="${xt}" y2="${Y(0)}" stroke="#5468ad" stroke-width="1.3"/>`+svgT(26, Y(0)-4, tt('Wasserspiegel ▽'), 'start', '#5468ad', 9);
   if(res.U.F>0){ const yu=Y(I.to+I.L*s-I.hu), Nu=(a,p)=>{ const [x,y]=P(a); return [x + s*p*k, y + c*p*k]; };
-    s_+=`<polygon points="${P(res.U.a0)[0]},${yu} 460,${yu} 460,${yb} ${xb},${yb}" fill="#e0ecff"/>`+`<line x1="${P(res.U.a0)[0]}" y1="${yu}" x2="460" y2="${yu}" stroke="#2563eb"/>`+svgT(454, yu-4, tt('Unterwasser ▽'), 'end', '#2563eb', 9); s_+=`<polygon points="${[P(res.U.a0), ...Array.from({length:11},(_,i)=>{ const a=res.U.a0+i/10*(I.L-res.U.a0); return Nu(a, WB.gw*Math.max(0, I.hu-(I.L-a)*s)); }   /* Tiefe unter dem Unterwasserspiegel */), P(I.L)].map(p=>p.join(',')).join(' ')}" fill="${C_EW}" fill-opacity="0.12" stroke="${C_EW}" stroke-dasharray="3 3"/>`; /* Gegendruck über der Unterwasserfläche zeichnen */ }
+    s_+=`<polygon points="${P(res.U.a0)[0]},${yu} 460,${yu} 460,${yb} ${xb},${yb}" fill="#e0ecff"/>`+`<line x1="${P(res.U.a0)[0]}" y1="${yu}" x2="460" y2="${yu}" stroke="#5468ad"/>`+svgT(454, yu-4, tt('Unterwasser ▽'), 'end', '#5468ad', 9); s_+=`<polygon points="${[P(res.U.a0), ...Array.from({length:11},(_,i)=>{ const a=res.U.a0+i/10*(I.L-res.U.a0); return Nu(a, WB.gw*Math.max(0, I.hu-(I.L-a)*s)); }   /* Tiefe unter dem Unterwasserspiegel */), P(I.L)].map(p=>p.join(',')).join(' ')}" fill="${C_EW}" fill-opacity="0.12" stroke="${C_EW}" stroke-dasharray="3 3"/>`; /* Gegendruck über der Unterwasserfläche zeichnen */ }
   s_+=`<line x1="${xt}" y1="${yt}" x2="${xb}" y2="${yb}" stroke="#111" stroke-width="5"/>`;
   // Druckfigur (rechtwinklig zur Fläche, auf der Wasserseite)
   const N=(a,p)=>{ const [x,y]=P(a); return [x - s*p*k, y - c*p*k]; };   // senkrecht zur Fläche, zur Wasserseite
@@ -6904,7 +6968,7 @@ function figWS(I, res){
   let s=`<svg viewBox="0 0 470 290" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schwimmkörper">`;
   s+=svgT(cx, 14, F==='zylS'?tt('Ansicht'):tt('Querschnitt'), 'middle', '#6b7280', 9.5);
   const wl=Y(Math.min(res.T, g.Hg));
-  s+=`<rect x="10" y="${wl}" width="450" height="${yb-wl+30}" fill="#dbeafe"/>`+`<line x1="10" y1="${wl}" x2="460" y2="${wl}" stroke="#2563eb" stroke-width="1.2"/>`+svgT(456, wl-4, 'WL ▽', 'end', '#2563eb', 9);
+  s+=`<rect x="10" y="${wl}" width="450" height="${yb-wl+30}" fill="#dfe3f2"/>`+`<line x1="10" y1="${wl}" x2="460" y2="${wl}" stroke="#5468ad" stroke-width="1.2"/>`+svgT(456, wl-4, 'WL ▽', 'end', '#5468ad', 9);
   const st='fill="#cbd5e1" fill-opacity="0.85" stroke="#111" stroke-width="1.2"';
   if(F==='quader') s+=`<rect x="${X(-I.B/2)}" y="${Y(I.H)}" width="${I.B*sc}" height="${I.H*sc}" ${st}/>`;
   else if(F==='trapez') s+=`<polygon points="${X(-I.Bu/2)},${Y(0)} ${X(I.Bu/2)},${Y(0)} ${X(I.B/2)},${Y(I.H)} ${X(-I.B/2)},${Y(I.H)}" ${st}/>`;
@@ -6913,12 +6977,12 @@ function figWS(I, res){
   if(!res.sinkt){
     const pt=(z,lab,col)=>`<circle cx="${cx}" cy="${Y(z)}" r="3.5" fill="${col}"/>`+svgT(cx+8, Y(z)+3, lab, 'start', col, 9);
     // Höhen über der Unterkante (Kiel K): KB, KG, KM
-    s+=pt(res.zB,`B · KB = ${f3(res.zB)} m`, '#2563eb')+pt(I.zg,`G · KG = ${f3(I.zg)} m`, C_EW)+pt(res.KM,`M · KM = ${f3(res.KM)} m`, res.GM>0?'#047857':'#b91c1c');
+    s+=pt(res.zB,`B · KB = ${f3(res.zB)} m`, '#5468ad')+pt(I.zg,`G · KG = ${f3(I.zg)} m`, C_EW)+pt(res.KM,`M · KM = ${f3(res.KM)} m`, res.GM>0?'#047857':'#b91c1c');
     s+=`<line x1="${cx}" y1="${Y(res.KM)}" x2="${cx}" y2="${Y(res.zB)}" stroke="#6b7280" stroke-dasharray="3 3"/>`;
     // Gewicht und Auftrieb auf derselben lotrechten Wirkungslinie (aufrechte Lage): F_G im Schwerpunkt G nach unten, F_A von unten durch B
     const lg=Math.max(10, Math.min(28, Math.abs(Y(res.zB)-Y(I.zg))-8));
     s+=svgArrow(cx, Y(I.zg)+4, cx, Y(I.zg)+4+lg, C_EW)+svgT(cx-6, Y(I.zg)+4+lg*0.7, 'F_G', 'end', C_EW);
-    s+=svgArrow(cx, yb+28, cx, yb+3, '#2563eb')+svgT(cx-6, yb+20, 'F_A', 'end', '#2563eb');
+    s+=svgArrow(cx, yb+28, cx, yb+3, '#5468ad')+svgT(cx-6, yb+20, 'F_A', 'end', '#5468ad');
     s+=`<line x1="${X(Wd/2)+20}" y1="${yb}" x2="${X(Wd/2)+20}" y2="${wl}" stroke="#111" stroke-width="0.7"/>`+svgT(X(Wd/2)+24, (yb+wl)/2+3, `T = ${f3(res.T)} m`, 'start', '#111', 9);
   }
   s+=svgT(X(Wd/2), yb+18, F==='quader'?`B = ${f2(I.B)} m`:F==='trapez'?`B<tspan font-size="7" dy="2">u</tspan><tspan dy="-2"> = ${f2(I.Bu)} m, B</tspan><tspan font-size="7" dy="2">o</tspan><tspan dy="-2"> = ${f2(I.B)} m</tspan>`:`D = ${f2(I.D)} m`, 'end', '#111', 9);
@@ -6967,7 +7031,7 @@ function figWR(I, res){
   let s=`<svg viewBox="0 0 470 280" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Energielinie der Rohrleitung">`;
   s+=svgT(235, 14, tt('Energie- und Drucklinie (Höhen über dem unteren Wasserspiegel)'), 'middle', '#6b7280', 9.5);
   const yO=Y(I.dh), yU=Y(0), pipeY=yU+40;
-  s+=`<rect x="10" y="${yO}" width="${x0-10}" height="${pipeY-yO+20}" fill="#dbeafe" stroke="#94a3b8"/>`+`<rect x="${x1}" y="${yU}" width="${460-x1}" height="${pipeY-yU+20}" fill="#dbeafe" stroke="#94a3b8"/>`;
+  s+=`<rect x="10" y="${yO}" width="${x0-10}" height="${pipeY-yO+20}" fill="#dfe3f2" stroke="#94a3b8"/>`+`<rect x="${x1}" y="${yU}" width="${460-x1}" height="${pipeY-yU+20}" fill="#dfe3f2" stroke="#94a3b8"/>`;
   s+=`<line x1="${x0}" y1="${pipeY}" x2="${x1}" y2="${pipeY}" stroke="#475569" stroke-width="7"/>`;
   // Energielinie: Start Oberwasserspiegel, Einlaufverlust anteilig, linear Reibung, Auslauf
   const ein=0.5*res.hv2g>res.ho?res.ho:0.5*res.hv2g, aus=res.ho-ein;
@@ -6976,7 +7040,7 @@ function figWR(I, res){
   s+=`<polyline points="${x0},${Y(E1-res.hv2g)} ${x1},${Y(E2-res.hv2g)}" fill="none" stroke="${C_IN}" stroke-width="1.4" stroke-dasharray="6 4"/>`;
   s+=svgT(x0+6, Y(E1)-5, tt('Energielinie'), 'start', C_EW, 9)+svgT(x0+6, Y(E1-res.hv2g)+24, tt('Drucklinie'), 'start', C_IN, 9);
   if(I.dh-res.hv>0.01){ s+=`<line x1="${x1}" y1="${Y(E2-aus)}" x2="${x1}" y2="${yU}" stroke="${C_EW}" stroke-width="1.8" stroke-dasharray="3 3"/>`+svgT(x1-4, (Y(E2-aus)+yU)/2+3, _L`Reserve ${f2(I.dh-res.hv)} m`, 'end', C_EW, 8.5); }
-  s+=`<line x1="${x1+20}" y1="${yU}" x2="460" y2="${yU}" stroke="#2563eb"/>`;
+  s+=`<line x1="${x1+20}" y1="${yU}" x2="460" y2="${yU}" stroke="#5468ad"/>`;
   s+=`<line x1="${(x0+x1)/2}" y1="${yO}" x2="${(x0+x1)/2}" y2="${yU}" stroke="#111" stroke-width="0.6"/>`+svgT((x0+x1)/2+4, (yO+yU)/2+30, `Δh = ${f2(I.dh)} m`, 'start', '#111', 9);
   s+=svgT((x0+x1)/2, pipeY+20, `D = ${I.D} mm · L = ${f2(I.L)} m · v = ${f2(res.v)} m/s`, 'middle', '#111', 9);
   s+='</svg>';
@@ -7017,10 +7081,10 @@ function figWG(I, res){
   let s=`<svg viewBox="0 0 470 290" width="470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gerinne">`;
   s+=svgT(cx, 14, tt('Querschnitt'), 'middle', '#6b7280', 9.5);
   const hl=Math.min(res.hn, I.H);
-  s+=`<polygon points="${X(-I.b/2-I.m*hl)},${Y(hl)} ${X(I.b/2+I.m*hl)},${Y(hl)} ${X(I.b/2)},${Y(0)} ${X(-I.b/2)},${Y(0)}" fill="#bfdbfe"/>`;
+  s+=`<polygon points="${X(-I.b/2-I.m*hl)},${Y(hl)} ${X(I.b/2+I.m*hl)},${Y(hl)} ${X(I.b/2)},${Y(0)} ${X(-I.b/2)},${Y(0)}" fill="#c9d0e8"/>`;
   s+=`<polyline points="${X(-I.b/2-I.m*I.H)},${Y(I.H)} ${X(-I.b/2)},${Y(0)} ${X(I.b/2)},${Y(0)} ${X(I.b/2+I.m*I.H)},${Y(I.H)}" fill="none" stroke="#111" stroke-width="2"/>`;
   s+=`<line x1="${X(-I.b/2-I.m*res.hg)}" y1="${Y(res.hg)}" x2="${X(I.b/2+I.m*res.hg)}" y2="${Y(res.hg)}" stroke="${C_EW}" stroke-dasharray="5 3"/>`+svgT(X(I.b/2+I.m*res.hg)+4, Y(res.hg)+3, `h_gr = ${f3(res.hg)} m`, 'start', C_EW, 8.5);
-  s+=svgT(cx, Y(hl)-5, `h_n = ${f3(res.hn)} m ▽`, 'middle', '#2563eb', 9);
+  s+=svgT(cx, Y(hl)-5, `h_n = ${f3(res.hn)} m ▽`, 'middle', '#5468ad', 9);
   s+=`<line x1="${X(-I.b/2-I.m*(I.H-I.f))}" y1="${Y(I.H-I.f)}" x2="${X(I.b/2+I.m*(I.H-I.f))}" y2="${Y(I.H-I.f)}" stroke="#6b7280" stroke-dasharray="2 3"/>`;
   s+=svgT(cx, yb+16, `b = ${f2(I.b)} m · 1 : ${deNum(I.m,1)}`, 'middle', '#111', 9);
   // spezifische Energie E(h)
@@ -7031,7 +7095,7 @@ function figWG(I, res){
   const pts=[]; for(let i=1;i<=80;i++){ const h=hmax*i/80, e=Ef(h); if(e<=Emax) pts.push(`${ex(e)},${ey(h)}`); }
   s+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${C_IN}" stroke-width="1.6"/>`+`<line x1="${ox}" y1="${oy+oh}" x2="${ex(hmax)}" y2="${ey(hmax)}" stroke="#94a3b8" stroke-dasharray="3 3"/>`;
   s+=`<circle cx="${ex(res.Emin)}" cy="${ey(res.hg)}" r="3.5" fill="${C_EW}"/>`+svgT(ex(res.Emin)+6, ey(res.hg)+3, 'h_gr', 'start', C_EW, 8.5);
-  s+=`<circle cx="${ex(res.E)}" cy="${ey(res.hn)}" r="3.5" fill="#2563eb"/>`+svgT(ex(res.E)+6, ey(res.hn)+3, 'h_n', 'start', '#2563eb', 8.5);
+  s+=`<circle cx="${ex(res.E)}" cy="${ey(res.hn)}" r="3.5" fill="#5468ad"/>`+svgT(ex(res.E)+6, ey(res.hn)+3, 'h_n', 'start', '#5468ad', 8.5);
   s+='</svg>';
   return s + figLegend([`Q = ${deNum(I.Q,2)} m³/s`, `I = ${deNum(I.I,2)} ‰`], [`h<sub>n</sub> = ${f3(res.hn)} m`, `v = ${f2(res.v)} m/s`, `Fr = ${f3(res.Fr)}`], tt('Blau: Normalabflusstiefe, orange gestrichelt: Grenztiefe, grau punktiert: Freibordgrenze. Rechts: E = h + v²/(2g), grau die Winkelhalbierende E = h.'));
 }
@@ -7060,14 +7124,14 @@ function figWW(I, res){
   const hu=res.hu, crest=Y(I.w), ow=Y(res.OW);
   // Wasserfläche und Spiegellinie aus demselben Pfad (Überfallstrahl)
   const wsp=`M 10 ${ow} H ${xw-0.6*hu*sc} Q ${xw} ${ow} ${xw+ww*0.3} ${crest-hu*sc*0.7} Q ${xw+ww+20} ${crest-hu*sc*0.5} ${xw+ww+40} ${yb-24} L 460 ${yb-18}`;
-  s+=`<path d="${wsp} L 460 ${yb} L 10 ${yb} Z" fill="#dbeafe"/>`;
-  s+=`<path d="${wsp}" fill="none" stroke="#2563eb" stroke-width="1.3"/>`;
+  s+=`<path d="${wsp} L 460 ${yb} L 10 ${yb} Z" fill="#dfe3f2"/>`;
+  s+=`<path d="${wsp}" fill="none" stroke="#5468ad" stroke-width="1.3"/>`;
   s+=`<path d="M ${xw} ${yb} V ${crest+4} Q ${xw+ww/2} ${crest-6} ${xw+ww} ${crest+4} Q ${xw+ww+10} ${yb-40} ${xw+ww+40} ${yb} Z" fill="#cbd5e1" stroke="#111"/>`;
   s+=`<line x1="10" y1="${yb}" x2="460" y2="${yb}" stroke="#111" stroke-width="1.5"/>`;
   s+=`<line x1="${xw-40}" y1="${crest}" x2="${xw-40}" y2="${ow}" stroke="#111" stroke-width="0.7"/>`+svgT(xw-44, (crest+ow)/2+3, `h_ü = ${f3(hu)}`, 'end', '#111', 9);
   s+=`<line x1="${xw-120}" y1="${yb}" x2="${xw-120}" y2="${crest}" stroke="#111" stroke-width="0.7"/>`+svgT(xw-124, (yb+crest)/2, `w = ${deNum(I.w,2)} m`, 'end', '#111', 9);
   s+=`<line x1="10" y1="${Y(I.hmax)}" x2="${xw}" y2="${Y(I.hmax)}" stroke="${C_EW}" stroke-dasharray="5 3"/>`+svgT(14, Y(I.hmax)-4, _L`zulässig ${deNum(I.hmax,2)} m`, 'start', C_EW, 8.5);
-  s+=svgT(14, ow-4+ (Math.abs(ow-Y(I.hmax))<12?16:0), `OW ▽ ${f3(res.OW)} m`, 'start', '#2563eb', 9);
+  s+=svgT(14, ow-4+ (Math.abs(ow-Y(I.hmax))<12?16:0), `OW ▽ ${f3(res.OW)} m`, 'start', '#5468ad', 9);
   s+='</svg>';
   return s + figLegend([_L`Q = ${deNum(I.Q,2)} m³/s auf b = ${deNum(I.b,2)} m`], [`h<sub>ü</sub> = ${f3(hu)} m`, `μ = ${f3(I.mu)}`], tt('Vollkommener Überfall über die Wehrkrone.'));
 }
@@ -7272,7 +7336,7 @@ function bpSchale(L){
 }
 function validateBpLayers(L, bad){ if(!L.length) bad.push(tt('mindestens eine Schicht mit d > 0')); L.forEach((s,i)=>{ if(!s.luft && !(s.lam>0)) bad.push(_L`λ der Schicht ${i+1} > 0`); if(!(s.mu>0)) bad.push(_L`μ der Schicht ${i+1} > 0`); if(!(s.rho>=0)) bad.push(_L`ρ der Schicht ${i+1} ≥ 0`); }); }
 const bpF = (v,n=2) => deNum(Math.abs(v)<1e-12?0:v,n).replace(/^-/,'−');
-const BPC = n => /Luftschicht/.test(n) ? '#f0f9ff' : /Gipsfaser|Faserzement/.test(n) ? '#e5e7eb' : /wolle|EPS|XPS|PUR|faser|Zellulose|Schaumglas|Phenol|Vakuum|Kork|Hanf/.test(n) ? '#fde68a' : /holz|OSB|Holz/i.test(n) ? '#e7c9a0' : /Folie|bremse|Bitumen/.test(n) ? '#93c5fd' : /putz|estrich|karton/i.test(n) ? '#e5e7eb' : /beton/i.test(n) ? '#cbd5e1' : '#e7c9b0';
+const BPC = n => /Luftschicht/.test(n) ? '#f0f9ff' : /Gipsfaser|Faserzement/.test(n) ? '#e5e7eb' : /wolle|EPS|XPS|PUR|faser|Zellulose|Schaumglas|Phenol|Vakuum|Kork|Hanf/.test(n) ? '#fde68a' : /holz|OSB|Holz/i.test(n) ? '#e7c9a0' : /Folie|bremse|Bitumen/.test(n) ? '#aab5d9' : /putz|estrich|karton/i.test(n) ? '#e5e7eb' : /beton/i.test(n) ? '#cbd5e1' : '#e7c9b0';
 // ── U-Wert ──
 function readBU(){ return { name:$('bp-name').value, L:bpLayersRead(), art:$('bp-art').value, ti:num('bp-ti'), te:num('bp-te') }; }
 function validateBU(I){ const bad=[]; validateBpLayers(I.L,bad); if(!(I.ti>I.te)) bad.push('θ_i > θ_e'); return bad; }
@@ -8247,8 +8311,8 @@ function figHY(I, res){
   let s=paSvg(470, 290, tt('Hydraulischer Grundbruch'));
   s+=svgT(235, 16, tt('Schnitt (Baugrube mit Spundwand)'), 'middle', '#6b7280', 9.5);
   s+=`<rect x="10" y="${yGW-10}" width="${xw-10}" height="${280-yGW+10}" fill="#efe7da"/><rect x="${xw}" y="${ys}" width="${460-xw}" height="${280-ys}" fill="#efe7da"/>`;
-  s+=`<line x1="10" y1="${yGW}" x2="${xw}" y2="${yGW}" stroke="#2563eb" stroke-width="1.4"/>`+svgT(16, yGW-4, tt('Grundwasser außen ▽'), 'start', '#2563eb', 8.5);
-  s+=`<line x1="${xw}" y1="${ys}" x2="460" y2="${ys}" stroke="#2563eb" stroke-width="1.4"/>`+svgT(454, ys-4, tt('Baugrubensohle, Wasser ▽'), 'end', '#2563eb', 8.5);
+  s+=`<line x1="10" y1="${yGW}" x2="${xw}" y2="${yGW}" stroke="#5468ad" stroke-width="1.4"/>`+svgT(16, yGW-4, tt('Grundwasser außen ▽'), 'start', '#5468ad', 8.5);
+  s+=`<line x1="${xw}" y1="${ys}" x2="460" y2="${ys}" stroke="#5468ad" stroke-width="1.4"/>`+svgT(454, ys-4, tt('Baugrubensohle, Wasser ▽'), 'end', '#5468ad', 8.5);
   s+=`<rect x="${xw-3}" y="${yGW-24}" width="6" height="${Y(I.t)-yGW+24}" fill="#475569"/>`;
   s+=`<rect x="${xw+3}" y="${ys}" width="${I.t*sc/2}" height="${I.t*sc}" fill="${C_EW}" fill-opacity="0.15" stroke="${C_EW}" stroke-dasharray="4 3"/>`;
   s+=`<path d="M ${xw-40} ${yGW+20} C ${xw-40} ${Y(I.t)+30}, ${xw+40} ${Y(I.t)+30}, ${xw+40} ${ys+8}" fill="none" stroke="${C_IN}" stroke-width="1.4" marker-end="url(#hy-ar)"/>`;
@@ -8352,7 +8416,7 @@ function figBO(I, res){
   s+=`<polygon points="${x0-60},${y0} ${x0},${y0} ${X1},${Y1} ${X1+60},${Y1} ${X1+60},${y0+40} ${x0-60},${y0+40}" fill="#efe7da"/>`;
   s+=`<polyline points="${x0-60},${y0} ${x0},${y0} ${X1},${Y1} ${X1+60},${Y1}" fill="none" stroke="#8b6b3e" stroke-width="1.6"/>`;
   s+=`<line x1="${x0+nx}" y1="${y0+ny}" x2="${X1+nx}" y2="${Y1+ny}" stroke="${C_EW}" stroke-width="1.6" stroke-dasharray="6 4"/>`+svgT((x0+X1)/2+nx+8, (y0+Y1)/2+ny+12, tt('Gleitfläche'), 'start', C_EW, 9);
-  if(I.w==='s') s+=`<line x1="${x0}" y1="${y0}" x2="${X1}" y2="${Y1}" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 3" transform="translate(${nx*0.15} ${ny*0.15})"/>`+svgT(X1-30, Y1+ny*0.15+16, tt('Grundwasser hangparallel'), 'end', '#2563eb', 8.5);
+  if(I.w==='s') s+=`<line x1="${x0}" y1="${y0}" x2="${X1}" y2="${Y1}" stroke="#5468ad" stroke-width="1" stroke-dasharray="2 3" transform="translate(${nx*0.15} ${ny*0.15})"/>`+svgT(X1-30, Y1+ny*0.15+16, tt('Grundwasser hangparallel'), 'end', '#5468ad', 8.5);
   const mx=(x0+X1)/2, my=(y0+Y1)/2; s+=`<line x1="${mx}" y1="${my}" x2="${mx+nx}" y2="${my+ny}" stroke="#111" stroke-width="0.8"/>`+svgT(mx+nx/2-6, my+ny/2, `z = ${deNum(I.z,2)} m`, 'end', '#111', 9);
   s+=`<path d="M ${x0+40} ${y0} A 40 40 0 0 0 ${x0+40*Math.cos(B)} ${y0-40*Math.sin(B)}" fill="none" stroke="#111"/>`+svgT(x0+46, y0-8, `β = ${deNum(I.b,1)}°`, 'start', '#111', 9);
   s+='</svg>';
@@ -8450,14 +8514,14 @@ function figWP(I, res){
   let s=paSvg(470, 290, tt('Pumpenanlage'));
   s+=svgT(150, 16, tt('Anlage (schematisch)'), 'middle', '#6b7280', 9.5);
   const yW=200, sc=Math.min(100/Math.max(Math.abs(I.hs),0.5), 14), yP=yW-I.hs*sc, xP=150, yO=Math.max(30, yP-Math.min(130, Math.max(40, I.Hg*4)));
-  s+=`<rect x="20" y="${yW}" width="90" height="60" fill="#dbeafe" stroke="#94a3b8"/>`+`<line x1="20" y1="${yW}" x2="110" y2="${yW}" stroke="#2563eb" stroke-width="1.4"/>`+svgT(24, yW-4, '▽', 'start', '#2563eb', 9);
+  s+=`<rect x="20" y="${yW}" width="90" height="60" fill="#dfe3f2" stroke="#94a3b8"/>`+`<line x1="20" y1="${yW}" x2="110" y2="${yW}" stroke="#5468ad" stroke-width="1.4"/>`+svgT(24, yW-4, '▽', 'start', '#5468ad', 9);
   s+=`<polyline points="70,${yW+40} 70,${yP} ${xP-14},${yP}" fill="none" stroke="#475569" stroke-width="5"/>`;
   s+=`<circle cx="${xP}" cy="${yP}" r="14" fill="#fff" stroke="#111" stroke-width="1.6"/>`+`<path d="M ${xP-6} ${yP+8} L ${xP+10} ${yP} L ${xP-6} ${yP-8}" fill="none" stroke="#111"/>`;
-  s+=`<polyline points="${xP+14},${yP} 250,${yP} 250,${yO}" fill="none" stroke="#475569" stroke-width="5"/>`+`<rect x="240" y="${yO-20}" width="40" height="20" fill="#dbeafe" stroke="#94a3b8"/>`;
+  s+=`<polyline points="${xP+14},${yP} 250,${yP} 250,${yO}" fill="none" stroke="#475569" stroke-width="5"/>`+`<rect x="240" y="${yO-20}" width="40" height="20" fill="#dfe3f2" stroke="#94a3b8"/>`;
   if(Math.abs(I.hs)>0.01) s+=paDim(120, yW, 120, yP, `h_s = ${deNum(I.hs,2)} m`, 6, 3, 'start');
   // Oberwasserspiegel im oberen Behälter und geodätische Förderhöhe H_geo (Unterwasser- bis Oberwasserspiegel)
   const yOW=yO-12;
-  s+=`<line x1="240" y1="${yOW}" x2="280" y2="${yOW}" stroke="#2563eb" stroke-width="1.4"/>`+svgT(276, yOW-3, '▽', 'end', '#2563eb', 9);
+  s+=`<line x1="240" y1="${yOW}" x2="280" y2="${yOW}" stroke="#5468ad" stroke-width="1.4"/>`+svgT(276, yOW-3, '▽', 'end', '#5468ad', 9);
   s+=`<line x1="110" y1="${yW}" x2="230" y2="${yW}" stroke="#94a3b8" stroke-width="0.6" stroke-dasharray="3 3"/><line x1="226" y1="${yOW}" x2="240" y2="${yOW}" stroke="#94a3b8" stroke-width="0.6" stroke-dasharray="3 3"/>`;
   s+=paDim(226, yW, 226, yOW, `H_geo = ${deNum(I.Hg,2)} m`, -4, -6, 'end');
   // NPSH-Balken
@@ -8510,8 +8574,8 @@ function figWT(I, res){
   const cx=110, cy=140, r=85, hD=res.over?1:res.x, yw=cy+r-2*r*hD;
   s+=svgT(cx, 18, tt('Querschnitt'), 'middle', '#6b7280', 9.5);
   s+=`<defs><clipPath id="wt-clip"><rect x="${cx-r-2}" y="${yw}" width="${2*r+4}" height="${cy+r-yw+2}"/></clipPath></defs>`;
-  s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#bfdbfe" clip-path="url(#wt-clip)"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#111" stroke-width="2.4"/>`;
-  if(!res.over) s+=`<line x1="${cx-r}" y1="${yw}" x2="${cx+r}" y2="${yw}" stroke="#2563eb" stroke-width="1.2"/>`+svgT(cx, yw-4, '▽', 'middle', '#2563eb', 9);
+  s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#c9d0e8" clip-path="url(#wt-clip)"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#111" stroke-width="2.4"/>`;
+  if(!res.over) s+=`<line x1="${cx-r}" y1="${yw}" x2="${cx+r}" y2="${yw}" stroke="#5468ad" stroke-width="1.2"/>`+svgT(cx, yw-4, '▽', 'middle', '#5468ad', 9);
   const yz=cy+r-2*r*I.hD; s+=`<line x1="${cx-r-8}" y1="${yz}" x2="${cx+r+8}" y2="${yz}" stroke="${C_EW}" stroke-dasharray="5 3"/>`+svgT(cx+r+10, yz+3, _L`zul. ${deNum(I.hD,2)}`, 'start', C_EW, 8.5);
   s+=svgT(cx, cy+r+22, `DN ${I.D} · h/D = ${res.over?'> 1':deNum(res.x,3)}`, 'middle', '#111', 9.5);
   // Teilfüllungskurven
@@ -9539,15 +9603,15 @@ function figGB(I, res){
   let s=paSvg(470, 290, tt('Grundwasserabsenkung'));
   const L=Math.min(res.R, 6*I.A), sc=200/L, cx=235, yH=60, scY=150/I.H, Y=h=>yH+(I.H-h)*scY, yb=yH+I.H*scY;
   s+=svgT(235, 18, tt('Schnitt durch zwei gegenüberliegende Brunnen'), 'middle', '#6b7280', 9.5);
-  s+=`<rect x="30" y="${yH}" width="410" height="${yb-yH}" fill="#dbeafe" fill-opacity="0.5"/><line x1="30" y1="${yb}" x2="440" y2="${yb}" stroke="#111" stroke-width="1.4"/>`;
+  s+=`<rect x="30" y="${yH}" width="410" height="${yb-yH}" fill="#dfe3f2" fill-opacity="0.5"/><line x1="30" y1="${yb}" x2="440" y2="${yb}" stroke="#111" stroke-width="1.4"/>`;
   const P=[]; for(let i=-100;i<=100;i++){ const x=i/100*L; let sum=0; let v=I.H*I.H; for(let j=0;j<I.n;j++){ const ang=2*Math.PI*j/I.n, wx=I.A*Math.cos(ang), wy=I.A*Math.sin(ang), r=Math.max(Math.hypot(x-wx,wy), I.rw); v-= I.Q/1000/(Math.PI*I.k)*Math.log(Math.max(res.R/r,1)); }
     const h=v>0?Math.sqrt(v):0; P.push(`${(cx+x*sc).toFixed(1)},${Y(Math.min(h,I.H)).toFixed(1)}`); }
-  s+=`<polyline points="${P.join(' ')}" fill="none" stroke="#2563eb" stroke-width="1.8"/>`;
-  s+=`<line x1="30" y1="${yH}" x2="440" y2="${yH}" stroke="#2563eb" stroke-dasharray="4 3"/>`+svgT(34, yH-4, tt('Ruhewasserspiegel'), 'start', '#2563eb', 8.5);
+  s+=`<polyline points="${P.join(' ')}" fill="none" stroke="#5468ad" stroke-width="1.8"/>`;
+  s+=`<line x1="30" y1="${yH}" x2="440" y2="${yH}" stroke="#5468ad" stroke-dasharray="4 3"/>`+svgT(34, yH-4, tt('Ruhewasserspiegel'), 'start', '#5468ad', 8.5);
   [-I.A, I.A].forEach(x=>{ s+=`<rect x="${cx+x*sc-3}" y="${yH-14}" width="6" height="${yb-yH+14}" fill="#475569"/>`; });
   // Zielabsenkung in der Mitte zwischen den Brunnen; Beschriftung rechts neben dem rechten Brunnen
   s+=`<line x1="${cx-I.A*sc+4}" y1="${Y(I.H-I.sz)}" x2="${cx+I.A*sc-4}" y2="${Y(I.H-I.sz)}" stroke="${C_EW}" stroke-dasharray="4 3"/>`+svgT(cx, Y(I.H-I.sz)-5, _L`Ziel s = ${deNum(I.sz,2)} m`, 'middle', C_EW, 8.5);
-  s+=svgT(cx, Y(res.h0)-6, `s = ${deNum(res.s,2)} m`, 'middle', '#2563eb', 9);
+  s+=svgT(cx, Y(res.h0)-6, `s = ${deNum(res.s,2)} m`, 'middle', '#5468ad', 9);
   s+='</svg>';
   return s + figLegend([_L`${I.n} × Q = ${deNum(I.Q,2)} l/s`], [`R = ${deNum(res.R,0)} m`, `s = ${deNum(res.s,3)} m`], tt('Absenkungstrichter aller Brunnen überlagert; die Brunnen stehen auf einem Kreis um die Baugrube.'));
 }
@@ -10557,7 +10621,7 @@ window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':
     es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención']};
   window.statiqDisclaimer=()=>{ const l=(document.documentElement.lang||'de').slice(0,2); return (TX[l]||TX.de)[0]; };
   const d=document.createElement('div'); d.className='legal-bar'; d.setAttribute('role','contentinfo');
-  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Inter,system-ui,sans-serif;color:#8a8a8a;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
+  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Figtree,system-ui,sans-serif;color:#5c5e66;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
   const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
     d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
   upd(); document.body.appendChild(d);

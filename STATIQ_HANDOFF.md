@@ -1,15 +1,15 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.8.35 · ref v0.3.40 · size v0.5.52 · projekt v0.1.10 · rechtliches v0.1.9 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.0 · ref v0.3.42 · size v0.6.0 · projekt v0.1.12 · rechtliches v0.1.11 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.8.35, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.10, Test von Variante C)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.40, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.5.52, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.9)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.0, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.12, Test von Variante C)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.42, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.6.0, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.11)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
-- `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
+- `fonts/` — Figtree (Text), JetBrains Mono (Zahlen/Formeln) und Inter (nur griechische Buchstaben, unter dem Namen Figtree) als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
 - `statiq-tests/` — alle Tests, `python3 statiq-tests/run_all.py`
 
 **Versionierung (Wunsch von Valentin):** in kleinen Schritten weiterzählen (0.8.1 → 0.8.2 …).
@@ -568,6 +568,18 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## kragr-Design, Stufe 1: Farben, Schrift, Kopfzeile, Ergebnisleiste — calc v0.9.0 · size v0.6.0 · ref v0.3.42 · projekt v0.1.12 · rechtliches v0.1.11
+
+Grundlage ist die Design-Übergabe vom 21.10.2026 (`kragr-design-uebergabe.md`, Entwürfe App-Calc-v2 und App-Size). Valentin hat den Plan in vier Stufen bestätigt, ebenso den Sprung auf calc 0.9.0 und size 0.6.0. Die App bleibt DE/EN/FR/ES; „bleibt Englisch“ bezieht sich nur auf die Texte im Entwurf.
+
+- **Schrift:** Figtree (Text) und JetBrains Mono (Zahlen, Formeln, Kurzfassungen), lokal aus `@fontsource-variable` (OFL), kein Google-CDN. Figtree hat keine griechischen Buchstaben: Inter Greek ist in `fonts.css` unter dem Namen `Figtree` mit eigener `unicode-range` eingetragen. DM Sans, DM Mono, Bebas Neue und Inter Latin sind entfernt (alle Seiten, auch SVG-Texte). Lizenzen `LICENSE-Figtree.txt`, `LICENSE-JetBrainsMono.txt`, `LICENSE-Inter.txt`; Rechtsseite (4 Sprachen) angepasst. sw.js `statiq-2026-10-21-5` mit den neuen Dateien.
+- **Farben (alle Seiten):** Akzent #2563eb → #5468ad (auch Logo-r, Bericht, Skizzen), Abstufungen #1d4ed8 → #45589a, #dbeafe → #dfe3f2, #eff6ff/#eef3ff → #eceff8, rgba(37,99,235) → rgba(84,104,173). Neutrale Töne: #0a0a0a → #111114, #efeff1/#f1f1f3 → #f1f2f4, #f8f8f9 → #f5f6f8 (Karte), #404040 → #3d3f45, #8a8a8a → #5c5e66 (gedämpft, besserer Kontrast). Das App-Symbol bleibt schwarz auf weiß.
+- **`<style data-kragr>`** (identisch in calc und size, letzter Stilblock im head): Design-Tokens `--k-*` (accent, tint, card, ctl, text, text2, muted, line, input, point #e8590c, unsaved #f59e0b, bar #111114, ok/bad), `--accent`/`--text*`/`--card` darauf umgelegt, Eingaberahmen #d5d7dc, Fokusring im Akzent.
+- **Kopfzeile calc und size:** Logo · `<nav class="header-links">` calc size ref · `<div class="hdr-tools">` Projekte, Erscheinungsbild, Sprache. Projekte-Knopf 40 px hoch, unter 1000 px nur Symbol 40 × 40 mit orangem Punkt bei „neu/geändert“ (gespeichert: kein Punkt), ab 1000 px mit Text. Modul-Links mit 44 px Trefferfläche, Handy-Kopfzeile 58 px. Die Version ist aus dem Kopf verschwunden (`.version` bleibt versteckt im DOM, Anker für den Theme-Knopf) und steht unten im Projekt-Fenster (`#pp-ver`, „kragr·calc v0.9.0“, gesetzt in `mulyProj.state`).
+- **size, Ergebnisleiste am Handy (≤ 860 px):** `#mob-status` ist jetzt die schwarze Leiste aus dem Entwurf (fest unten, 10 px Rand, Radius 16): „max η“ mit Prozent und Status (erfüllt / n nicht erfüllt), „maßgebend“ mit dem Nachweis der größten Ausnutzung, Ausnutzungsbalken (Akzent, rot bei nicht erfüllt). Tippen springt weiterhin zum Ergebnis, ausgeblendet, solange das Ergebnis im Bild ist; im Übungsmodus und im Bericht aus. Neuer Schlüssel `mobGov` (maßgebend / governs / déterminant / determinante).
+- Tests: neu `test_design_kragr.py` (Schriften und Farben in allen Dateien, Offline-Speicher, Kopfzeile Handy/Rechner, Punkt, Version im Fenster); angepasst `test_size_plakette.py` (Ergebnisleiste), `test_projekt_menue.py` (Knopf 40 px), `test_marke_kragr.py` (#5468ad), `test_pwa.py` (Figtree geladen), `test_rechtliches.py` (Lizenzen).
+- Nächste Stufen: 2 calc (System-Karte mit Skizze, Chips, M/V/N, eine Lasten-Karte mit „+“, Winkel α, Ergebnisleiste max M · A_v · B_v, Übungsschalter), 3 size (Querschnitt-Pills, Schnittgrößen mit „+“ und „Aus calc übernehmen“, je Nachweisgruppe), 4 Desktop zweispaltig, Dunkelmodus, ref/projekt angleichen.
+
 ## Indizes wie im Lehrbuch — calc v0.8.35 · size v0.5.52 · ref v0.3.40 · projekt v0.1.10 · rechtliches v0.1.9
 
 - Wunsch Valentin: „f_yd“ ohne Unterstrich, Index klein tiefgestellt.
@@ -596,6 +608,7 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Neue Marke kragr — calc v0.8.30 · size v0.5.47 · ref v0.3.37 · projekt v0.1.7 · rechtliches v0.1.6
 
 - Anlass: „Muly“ als Marke in China (Klasse 41) und als Android-App vergeben; „lastr“ als Sport-App vergeben. Valentin hat sich für **kragr** entschieden (von Kragarm). Prüfung TMview (DE/EU, Klassen 9, 41, 42), App-Stores und Domains kragr.de/.eu/.app steht noch aus; die App-Store-Suche nach „kragr“ fand nur eine ähnliche Statik-App („Balkenrechner: Statik“, schwarzes Symbol, grün-weiße Karten) — deshalb bewusst eigener Stil (Rechenblatt).
+- Kragarm im Logo schmaler (calc v0.8.36 · size v0.5.53 · ref v0.3.41 · projekt v0.1.11 · rechtliches v0.1.10): Arm 45 statt 52 Einheiten, viewBox `182 12 53 80`, Breite 1,281 ex, Pfeil bei x = 223. sw.js `statiq-2026-10-21-4`.
 - Logo-Höhe in ex statt em (calc v0.8.32 · size v0.5.49 · ref v0.3.39 · projekt v0.1.9 · rechtliches v0.1.8): `.logo-r` 1,45 × 1,934 ex — der Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch wenn statt Inter eine Ersatzschrift greift (vorher in em: bei Arial zu hoch). sw.js `statiq-2026-10-20-12`.
 - Logo flacher (Wunsch Valentin, calc v0.8.31 · size v0.5.48 · ref v0.3.38 · projekt v0.1.8 · rechtliches v0.1.7): Kragarm-r endet auf x-Höhe (Oberkante 0,55 em wie r/a/g), nur der Lastpfeil ragt darüber; Rechtecke ab y = 50 im viewBox, Arm 11 hoch. sw.js `statiq-2026-10-20-11`.
 - Schriftzug D: „krag“ in Inter 800 + `svg.logo-r` (blaues Kragarm-r, Last an der Spitze, viewBox `182 12 60 80`, Breite .79em, Höhe 1.053em, Unterkante auf der Grundlinie). Gleich in Kopfzeilen aller Seiten, Startseite (`#headline`) und Fußzeile. CSS-Kommentar „Marke kragr“ ersetzt die alten μ-Regeln.
@@ -1043,7 +1056,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1674/1674 grün** (inklusive `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 13, `test_size_plakette.py` 8, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1695/1695 grün** (inklusive `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

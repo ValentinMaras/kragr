@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.10 -->
+<!-- kragr·projekt v0.1.12 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -83,9 +83,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --card:#f6f6f7; --accent:#2563eb;
-    --ok:#047857; --ok-bg:#e7f6ee; --bad:#b91c1c; --bad-bg:#fdecec; --warn:#b45309; --warn-bg:#fff4e5; --calc-bg:#e8eefc; --calc:#1d4ed8; }
-  body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  :root { --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --line:#ececec; --card:#f6f6f7; --accent:#5468ad;
+    --ok:#047857; --ok-bg:#e7f6ee; --bad:#b91c1c; --bad-bg:#fdecec; --warn:#b45309; --warn-bg:#fff4e5; --calc-bg:#e8eefc; --calc:#45589a; }
+  body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
   a { color:inherit; }
   .app-header { display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 24px; max-width:1100px; margin:0 auto; }
   .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; text-decoration:none; }
@@ -93,7 +93,7 @@
   .links { display:flex; align-items:center; gap:16px; font-size:14px; font-weight:600; color:var(--text3); }
   .links a { text-decoration:none; } .links a:hover { color:var(--text); }
   .links .cur { color:var(--text); } .version { font-weight:500; font-size:13px; }
-  .lang-sel { font:inherit; font-size:13px; font-weight:700; border:none; background:#f1f1f3; border-radius:8px; padding:5px 8px; }
+  .lang-sel { font:inherit; font-size:13px; font-weight:700; border:none; background:#f1f2f4; border-radius:8px; padding:5px 8px; }
   .wrap { max-width:1100px; margin:0 auto; padding:8px 24px 60px; }
   .top { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin:10px 0 18px; }
   .pname { font-size:clamp(26px,4.4vw,40px); font-weight:800; letter-spacing:-0.035em; border:none; background:none; font-family:inherit; width:100%; max-width:640px; outline:none; border-radius:8px; padding:2px 4px; margin-left:-4px; }
@@ -106,7 +106,7 @@
   .btn.warn { border-color:#f1c27d; background:var(--warn-bg); color:var(--warn); }
   .btn.x { border:none; background:none; color:var(--text3); padding:5px 6px; } .btn.x:hover { color:var(--bad); background:none; }
   .tag { display:inline-block; font-size:11px; font-weight:700; border-radius:6px; padding:2px 7px; background:var(--calc-bg); color:var(--calc); white-space:nowrap; }
-  .tag.s { background:var(--ok-bg); color:var(--ok); } .tag.b { background:var(--bad-bg); color:var(--bad); } .tag.w { background:var(--warn-bg); color:var(--warn); } .tag.n { background:#f1f1f3; color:var(--text3); }
+  .tag.s { background:var(--ok-bg); color:var(--ok); } .tag.b { background:var(--bad-bg); color:var(--bad); } .tag.w { background:var(--warn-bg); color:var(--warn); } .tag.n { background:#f1f2f4; color:var(--text3); }
   .tag.size { background:#eef7f2; color:#047857; }
   .pos { background:var(--card); border-radius:16px; padding:14px 16px; margin-bottom:12px; }
   .pos-h { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
@@ -136,9 +136,9 @@
   .report { background:#fff; border:1px solid #d4d4d8; padding:30px 36px; font-size:12.5px; line-height:1.55; color:#111; }
   .report h1 { font-size:20px; margin-bottom:2px; } .report .cover { padding:40px 0 30px; border-bottom:2px solid #111; margin-bottom:16px; }
   .report .cover h1 { font-size:30px; letter-spacing:-0.02em; }
-  .report h2 { font-size:13px; text-transform:uppercase; letter-spacing:1px; font-family:'DM Mono', monospace; color:#333; margin:18px 0 6px; border-bottom:1px solid #999; padding-bottom:3px; }
+  .report h2 { font-size:13px; text-transform:uppercase; letter-spacing:1px; font-family:'JetBrains Mono', monospace; color:#333; margin:18px 0 6px; border-bottom:1px solid #999; padding-bottom:3px; }
   .report h3 { font-size:15px; margin:22px 0 4px; }
-  .report .meta { font-family:'DM Mono', monospace; font-size:11px; color:#555; }
+  .report .meta { font-family:'JetBrains Mono', monospace; font-size:11px; color:#555; }
   .report table { width:100%; border-collapse:collapse; margin:4px 0; }
   .report td, .report th { border-bottom:1px solid #ddd; padding:4px 6px; text-align:left; vertical-align:top; }
   .report th { font-size:11px; color:#555; font-weight:600; }
@@ -148,22 +148,22 @@
   .report .sub { border-left:3px solid #e2e2e6; padding-left:12px; margin:10px 0 14px; }
   .report .steps { font-size:11.5px; } .report .st { margin-bottom:6px; } .report .st-h { font-size:12px; }
   /* Rechenschritte aus den size-Berichten (wie in size) */
-  .report .steps { font-family:'DM Mono', monospace; font-size:11.5px; line-height:1.75; color:#222; } .report .steps b { color:#111; }
-  .report .st { margin:0 0 6px; } .report .st-h { font-family:'Inter', sans-serif; font-size:12px; font-weight:500; color:#111; display:flex; gap:8px; align-items:baseline; line-height:1.45; }
-  .report .st-n { flex:none; font-family:'DM Mono', monospace; font-size:10px; color:#8a8a8a; border:1px solid #a1a1aa; border-radius:50%; width:17px; height:17px; display:inline-flex; align-items:center; justify-content:center; }
+  .report .steps { font-family:'JetBrains Mono', monospace; font-size:11.5px; line-height:1.75; color:#222; } .report .steps b { color:#111; }
+  .report .st { margin:0 0 6px; } .report .st-h { font-family:Figtree, sans-serif; font-size:12px; font-weight:500; color:#111; display:flex; gap:8px; align-items:baseline; line-height:1.45; }
+  .report .st-n { flex:none; font-family:'JetBrains Mono', monospace; font-size:10px; color:#5c5e66; border:1px solid #a1a1aa; border-radius:50%; width:17px; height:17px; display:inline-flex; align-items:center; justify-content:center; }
   .report .st-f { padding-left:25px; line-height:1.6; } .report .st-f > div { padding-left:0.9em; text-indent:-0.9em; }
   .report .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; } .report .st-f > div.eq { padding-left:0; text-indent:0; }
   .report .eq-r, .report .eq-w { padding-left:0.9em; text-indent:-0.9em; } .report .eq-w { grid-column:1 / -1; }
   .report .fig-legend { font-size:11px; color:#666; line-height:1.5; margin-top:6px; text-align:center; } .report .figure { display:flex; flex-direction:column; align-items:center; }
-  .report .note { font-size:12px; color:#333; background:#eff6ff; border-left:3px solid var(--accent); padding:6px 10px; margin-top:6px; }
+  .report .note { font-size:12px; color:#333; background:#eceff8; border-left:3px solid var(--accent); padding:6px 10px; margin-top:6px; }
   .old { opacity:.55; }
   @media print { body.show-report .rep-acts { display:none; } #report-view { max-width:none; padding:0; } .report { border:none; padding:0; } .report h2 { break-after:avoid; } .report section { break-inside:avoid; } }
 </style>
-<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
 </head>
 <body>
 <header class="app-header glass">
-  <a class="logo" href="index.html">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
+  <a class="logo" href="index.html">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <nav class="links">
     <a href="calc.html">calc</a><a href="size.html">size</a><a href="ref.html">ref</a><span class="cur" data-t="navProj">Meine Projekte</span>
     <span class="version" id="ver"></span>
@@ -196,7 +196,7 @@
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.10';
+const PROJ_VERSION = '0.1.12';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
@@ -389,7 +389,7 @@ window.addEventListener('storage', render); window.addEventListener('focus', ren
     es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención']};
   window.statiqDisclaimer=()=>{ const l=(document.documentElement.lang||'de').slice(0,2); return (TX[l]||TX.de)[0]; };
   const d=document.createElement('div'); d.className='legal-bar'; d.setAttribute('role','contentinfo');
-  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Inter,system-ui,sans-serif;color:#8a8a8a;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
+  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Figtree,system-ui,sans-serif;color:#5c5e66;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
   const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
     d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
   upd(); document.body.appendChild(d);

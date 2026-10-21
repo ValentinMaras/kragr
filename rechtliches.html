@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·rechtliches v0.1.9 -->
+<!-- kragr·rechtliches v0.1.11 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -82,18 +82,18 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --card:#f6f6f7; --accent:#2563eb; --warn:#b45309; --warn-bg:#fff4e5; }
-  body { font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  :root { --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --line:#ececec; --card:#f6f6f7; --accent:#5468ad; --warn:#b45309; --warn-bg:#fff4e5; }
+  body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
   a { color:var(--accent); }
   .app-header { display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 24px; max-width:900px; margin:0 auto; }
   .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; text-decoration:none; color:var(--text); }
   .logo span { color:var(--accent); }
-  .lang-sel { font:inherit; font-size:13px; font-weight:700; border:none; background:#f1f1f3; border-radius:8px; padding:5px 8px; }
+  .lang-sel { font:inherit; font-size:13px; font-weight:700; border:none; background:#f1f2f4; border-radius:8px; padding:5px 8px; }
   .wrap { max-width:900px; margin:0 auto; padding:8px 24px 60px; }
   h1 { font-size:clamp(26px,4.4vw,36px); font-weight:800; letter-spacing:-0.03em; margin:10px 0 6px; }
   .lead { color:var(--text2); font-size:15px; line-height:1.6; margin-bottom:18px; max-width:720px; }
   nav.toc { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
-  nav.toc a { font-size:13px; font-weight:700; text-decoration:none; background:#f1f1f3; color:var(--text); border-radius:8px; padding:6px 10px; }
+  nav.toc a { font-size:13px; font-weight:700; text-decoration:none; background:#f1f2f4; color:var(--text); border-radius:8px; padding:6px 10px; }
   section { background:var(--card); border-radius:16px; padding:18px 20px; margin-bottom:14px; }
   h2 { font-size:18px; font-weight:800; letter-spacing:-0.01em; margin-bottom:8px; }
   h3 { font-size:14px; font-weight:700; margin:12px 0 4px; }
@@ -104,11 +104,11 @@
   footer { max-width:900px; margin:0 auto; padding:0 24px 40px; font-size:12.5px; color:var(--text3); }
   @media (max-width:720px){ .app-header,.wrap,footer { padding-left:16px; padding-right:16px; } section { padding:16px; } }
 </style>
-<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
 </head>
 <body>
 <header class="app-header glass">
-  <a class="logo" href="index.html">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></a>
+  <a class="logo" href="index.html">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <select class="lang-sel" id="lang" onchange="setLang(this.value)" aria-label="Sprache">
     <option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option>
   </select>
@@ -151,7 +151,7 @@ de:{ title:'Impressum, Datenschutz und Hinweise',
     <h3>Server-Logdateien</h3><p>Beim Aufruf der Seiten verarbeitet der Hosting-Anbieter technisch notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browserkennung), um die Seiten auszuliefern und die Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: ${ph('host')}. Dabei können Daten in die USA übermittelt werden. Die Logdateien werden nach den Vorgaben des Anbieters gelöscht.</p>
     <h3>Deine Rechte</h3><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO) sowie das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>`,
   lic:`<h2 id="lizenzen">Lizenzen</h2>
-    <p>Verwendete Schriften: Inter, DM Sans, DM Mono und Bebas Neue, jeweils unter der SIL Open Font License 1.1. Die Lizenztexte liegen im Ordner fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>).</p>`,
+    <p>Verwendete Schriften: Figtree, JetBrains Mono und Inter (nur griechische Buchstaben), jeweils unter der SIL Open Font License 1.1. Die Lizenztexte liegen im Ordner fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>`,
   stand:'Stand: Oktober 2026', back:'Zurück zur Startseite' },
 en:{ title:'Legal notice, privacy and disclaimer',
   lead:'kragr is a learning tool for civil engineering students. This page contains the legal notice, the privacy policy, the disclaimer and notes on standards and sources. The German version is authoritative.',
@@ -180,7 +180,7 @@ en:{ title:'Legal notice, privacy and disclaimer',
     <h3>Server log files</h3><p>When pages are requested, the hosting provider processes technically necessary data (IP address, date and time, requested file, browser identifier) to deliver the pages and keep them secure. Legal basis: Art. 6(1)(f) GDPR. Hosting provider: ${ph('host')}. Data may be transferred to the USA in the process. Log files are deleted according to the provider’s rules.</p>
     <h3>Your rights</h3><p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a data protection authority.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
-    <p>Fonts used: Inter, DM Sans, DM Mono and Bebas Neue, each under the SIL Open Font License 1.1. The licence texts are in the fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>) folder.</p>`,
+    <p>Fonts used: Figtree, JetBrains Mono and Inter (Greek letters only), each under the SIL Open Font License 1.1. The licence texts are in the fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>) folder.</p>`,
   stand:'As of October 2026', back:'Back to the start page' },
 fr:{ title:'Mentions légales, confidentialité et avertissement',
   lead:'kragr est un outil d’apprentissage pour les études de génie civil. Cette page contient les mentions légales, la politique de confidentialité, l’avertissement et des remarques sur les normes et les sources. La version allemande fait foi.',
@@ -209,7 +209,7 @@ fr:{ title:'Mentions légales, confidentialité et avertissement',
     <h3>Journaux du serveur</h3><p>Lors de l’appel des pages, l’hébergeur traite les données techniquement nécessaires (adresse IP, date et heure, fichier demandé, identifiant du navigateur) pour délivrer les pages et assurer leur sécurité. Base juridique : art. 6, par. 1, point f du RGPD. Hébergeur : ${ph('host')}. Des données peuvent alors être transférées aux États-Unis. Les journaux sont supprimés selon les règles de l’hébergeur.</p>
     <h3>Vos droits</h3><p>Vous disposez des droits d’accès, de rectification, d’effacement, de limitation, de portabilité et d’opposition (art. 15 à 21 du RGPD) ainsi que du droit d’introduire une réclamation auprès d’une autorité de contrôle.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
-    <p>Polices utilisées : Inter, DM Sans, DM Mono et Bebas Neue, chacune sous SIL Open Font License 1.1. Les textes des licences se trouvent dans le dossier fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>).</p>`,
+    <p>Polices utilisées : Figtree, JetBrains Mono et Inter (lettres grecques uniquement), chacune sous SIL Open Font License 1.1. Les textes des licences se trouvent dans le dossier fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>`,
   stand:'Mise à jour : octobre 2026', back:'Retour à l’accueil' },
 es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
   lead:'kragr es una herramienta de aprendizaje para estudiantes de ingeniería civil. Esta página contiene el aviso legal, la política de privacidad, la exención de responsabilidad y notas sobre normas y fuentes. La versión alemana es la vinculante.',
@@ -238,7 +238,7 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
     <h3>Registros del servidor</h3><p>Al acceder a las páginas, el proveedor de alojamiento trata datos técnicamente necesarios (dirección IP, fecha y hora, archivo solicitado, identificador del navegador) para entregar las páginas y garantizar su seguridad. Base jurídica: art. 6.1.f RGPD. Proveedor de alojamiento: ${ph('host')}. En este proceso pueden transferirse datos a EE. UU. Los registros se eliminan según las normas del proveedor.</p>
     <h3>Tus derechos</h3><p>Tienes derecho de acceso, rectificación, supresión, limitación, portabilidad y oposición (arts. 15–21 RGPD) y derecho a presentar una reclamación ante una autoridad de protección de datos.</p>`,
   lic:`<h2 id="lizenzen">Licencias</h2>
-    <p>Fuentes utilizadas: Inter, DM Sans, DM Mono y Bebas Neue, todas bajo SIL Open Font License 1.1. Los textos de las licencias están en la carpeta fonts (<a href="fonts/LICENSE-Inter.txt">Inter</a>, <a href="fonts/LICENSE-DMSans.txt">DM Sans</a>, <a href="fonts/LICENSE-DMMono.txt">DM Mono</a>, <a href="fonts/LICENSE-BebasNeue.txt">Bebas Neue</a>).</p>`,
+    <p>Fuentes utilizadas: Figtree, JetBrains Mono e Inter (solo letras griegas), todas bajo SIL Open Font License 1.1. Los textos de las licencias están en la carpeta fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>`,
   stand:'Actualizado: octubre de 2026', back:'Volver al inicio' }
 };
 const IDS=['impressum','haftung','normen','datenschutz','lizenzen'];

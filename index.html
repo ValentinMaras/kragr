@@ -81,9 +81,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --text:#0a0a0a; --text2:#404040; --text3:#8a8a8a; --line:#ececec; --accent:#2563eb; }
+    :root { --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --line:#ececec; --accent:#5468ad; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
+    body { font-family: Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
     a { color: inherit; }
 
     /* Kopfzeile */
@@ -151,7 +151,7 @@
     .install-btn[hidden] { display:none; }
     @media (max-width:560px){ .install { margin:4px -16px 0; padding:14px 16px; } }
 </style>
-<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.45ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
+<style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
 <style data-fit>
 /* Startseite passt auf einen Bildschirm (Oktober 2026): Größen wachsen mit der Bildschirmhöhe (dvh), kein Scrollen.
    Nur bei sehr flachen Fenstern (Handy quer) darf wieder gescrollt werden. */
@@ -191,7 +191,7 @@
   .module-card { padding:clamp(7px,1.4dvh,16px) 16px clamp(9px,1.7dvh,20px); margin:0 -16px clamp(6px,1.2dvh,12px); }
   .install { padding:clamp(8px,1.4dvh,14px) 16px; }
   .footer { padding-left:20px; padding-right:20px; }
-  .fm-ver { display:none; }  /* Versionen stehen in jeder App oben rechts */
+  .fm-ver { display:none; }  /* Versionen stehen in jeder App (calc/size: im Projekt-Fenster) */
 }
 @media (min-height:481px) and (max-height:620px){ #footer-check { display:none; } .header { height:40px; } .hero { padding-top:0; } .module-card { margin-bottom:5px !important; } }
 /* Glasleiste: über die ganze Breite, Inhalt nur 760 px */
@@ -223,7 +223,7 @@
 <!-- Hero -->
 <section class="hero">
 
-  <h1 class="headline" id="headline">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></h1>
+  <h1 class="headline" id="headline">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></h1>
 
   <p class="subline" id="subline">Eurocode 0 · 1 · 2 · 3 · 5 · 6 · 7</p>
 
@@ -234,7 +234,7 @@
 <section class="modules">
 
   <!-- calc -->
-  <a class="module-card active" href="calc.html" style="--card-accent:#1e3a8a;">
+  <a class="module-card active" href="calc.html" style="--card-accent:#34437a;">
     <div class="card-top">
       <div class="card-id">kragr·calc</div>
     </div>
@@ -254,7 +254,7 @@
   </a>
 
   <!-- size -->
-  <a class="module-card active" href="size.html" style="--card-accent:#2563eb;">
+  <a class="module-card active" href="size.html" style="--card-accent:#5468ad;">
     <div class="card-top">
       <div class="card-id">kragr·size</div>
     </div>
@@ -311,8 +311,8 @@
 </section>
 
 <footer class="footer">
-  <div class="footer-logo">krag<svg class="logo-r" viewBox="182 12 60 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#2563eb"/><rect x="184" y="50" width="52" height="11" rx="2" fill="#2563eb"/><line x1="230" y1="20" x2="230" y2="40" stroke="#2563eb" stroke-width="4"/><path d="M222 37 L230 48 L238 37 Z" fill="#2563eb"/></svg></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · calc v0.8.35 · ref v0.3.40 · size v0.5.52 · projekt v0.1.10</span></div>
+  <div class="footer-logo">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · calc v0.9.0 · ref v0.3.42 · size v0.6.0 · projekt v0.1.12</span></div>
   <div class="footer-note" id="footer-check">Every calculation path is tested against independent recalculations — currently more than 1,500 automated checks.</div>
   <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>

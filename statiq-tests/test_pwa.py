@@ -61,8 +61,8 @@ async def main():
         check('offline: calc rechnet (Auflagerkraft 17,50 kN)', '17.50' in t or '17,50' in t)
         await pg.goto(U+'size.html'); await pg.wait_for_timeout(400)
         check('offline: size rechnet und zeigt das Ergebnis', 'Nachweise' in await pg.evaluate("document.getElementById('summary').innerText"))
-        fam=await pg.evaluate("document.fonts.ready.then(()=>[...document.fonts].some(f=>f.family.replace(/\"/g,'')==='Inter' && f.status==='loaded'))")
-        check('offline: Schrift Inter aus dem Speicher geladen', fam)
+        fam=await pg.evaluate("document.fonts.ready.then(()=>[...document.fonts].some(f=>f.family.replace(/\"/g,'')==='Figtree' && f.status==='loaded'))")
+        check('offline: Schrift Figtree aus dem Speicher geladen', fam)
         await ctx.set_offline(False)
         # Installationshinweis: Desktop ohne Angebot verborgen, iPhone mit Anleitung
         await pg.goto(U+'index.html'); await pg.wait_for_timeout(300)

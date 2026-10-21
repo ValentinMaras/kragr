@@ -16,7 +16,7 @@ async def main():
     css=open(os.path.join(BASE,'fonts','fonts.css'),encoding='utf-8').read()
     files=re.findall(r'url\(([^)]+)\)',css)
     check(f'fonts.css: {len(files)} Schriftdateien vorhanden', files and all(os.path.exists(os.path.join(BASE,'fonts',f)) for f in files), [f for f in files if not os.path.exists(os.path.join(BASE,'fonts',f))])
-    check('Lizenztexte der Schriften (OFL) liegen bei', all(os.path.exists(os.path.join(BASE,'fonts',f'LICENSE-{n}.txt')) for n in ['Inter','DMSans','DMMono','BebasNeue']))
+    check('Lizenztexte der Schriften (OFL) liegen bei', all(os.path.exists(os.path.join(BASE,'fonts',f'LICENSE-{n}.txt')) for n in ['Figtree','JetBrainsMono','Inter']))
     srcs={p:open(os.path.join(BASE,p),encoding='utf-8').read() for p in PAGES}
     check('kein Verweis auf fonts.googleapis.com / gstatic in allen Seiten', not any(('googleapis' in t or 'gstatic' in t) for t in srcs.values()), [p for p,t in srcs.items() if 'googleapis' in t])
     async with async_playwright() as p:

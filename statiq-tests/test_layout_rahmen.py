@@ -9,7 +9,7 @@ fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:72}', str(info)[:170])
 JS="""(()=>{ const r=s=>{const e=document.querySelector(s); const b=e.getBoundingClientRect(); return [Math.round(b.left),Math.round(b.top),Math.round(b.width)]};
-  return {head:Math.round(document.querySelector('.app-header').getBoundingClientRect().height), pick:r('#pick'), cin:r('.col-in'), cout:r('.col-out')} })()"""
+  return {head:Math.round(document.querySelector('.app-header').getBoundingClientRect().height), pick:r('#pick'), cin:r('.col-in'), cout:r('.col-out'), ctop:Math.round([...document.querySelectorAll('.col-out')].find(e=>e.offsetParent).getBoundingClientRect().top)} })()"""
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch()
@@ -20,7 +20,8 @@ async def main():
                 m[f]=await pg.evaluate(JS)
             c,s=m['calc.html'],m['size.html']
             check(f'{w} px: Kopfzeile gleich hoch ({c["head"]} / {s["head"]})', c['head']==s['head'])
-            check(f'{w} px: Auswahl beginnt auf gleicher Höhe und links bündig', abs(c['pick'][1]-s['pick'][1])<=2 and c['pick'][0]==s['pick'][0], (c['pick'], s['pick']))
+            check(f'{w} px: Auswahl gleich gesetzt und gleich breit (wie size in der Eingabespalte)', c['pick']==s['pick'] and c['pick'][2]==c['cin'][2], (c['pick'], s['pick'], c['cin']))
+            check(f'{w} px: Ergebnisspalte beginnt auf gleicher Höhe', abs(c['ctop']-s['ctop'])<=1, (c['ctop'], s['ctop']))
             check(f'{w} px: Eingabe- und Ergebnisspalte gleich breit und gleich gesetzt', c['cin'][0]==s['cin'][0] and c['cin'][2]==s['cin'][2] and c['cout'][0]==s['cout'][0] and c['cout'][2]==s['cout'][2], (c['cin'],s['cin'],c['cout'],s['cout']))
             await pg.close()
         pg=await br.new_page(viewport={'width':1440,'height':900})

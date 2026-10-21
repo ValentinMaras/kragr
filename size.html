@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.5.49 -->
+<!-- kragr·size v0.5.52 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -43,6 +43,31 @@
   .glass.glass-flat::before { bottom:0; -webkit-mask-image:none; mask-image:none; background:rgba(255,255,255,.72); }
   @media print { .glass::before { display:none; } }
 </style>
+<script data-sub>
+// Indizes wie im Lehrbuch (Oktober 2026): „f_yd“ im angezeigten Text wird zu f<sub>yd</sub> (kleiner, tiefgestellt, ohne Unterstrich).
+// Wirkt auf alles, was die Seite anzeigt (auch nachträglich erzeugte Inhalte); nicht in Eingabefeldern, Auswahllisten, Skizzen (SVG) und Code.
+(function(){
+  var RX=/(^|[^\w\/\\.@#\-])([A-Za-zα-ωΑ-ΩΣΔ]{1,3}′?)_\{?([A-Za-z0-9α-ωΑ-Ω]+(?:[,;][A-Za-z0-9α-ωΑ-Ω]+)*)\}?/g, SKIP='script,style,textarea,input,select,option,svg,code,pre,[contenteditable],.no-sub';
+  function fix(root){
+    if(!root || root.nodeType===3 && !root.parentElement) return;
+    var list=[];
+    if(root.nodeType===3){ list=[root]; }
+    else if(root.nodeType===1){ if(!(root.closest && root.closest(SKIP))){ var w=document.createTreeWalker(root,4); while(w.nextNode()) list.push(w.currentNode); } }
+    if(root.nodeType===1) [root].concat([].slice.call(root.querySelectorAll('[title*="_"],[aria-label*="_"],[placeholder*="_"],option'))).forEach(function(e){   // Auswahllisten und Hinweise: ohne Tiefstellung, Index direkt angehängt (s_d → sd)
+      if(!e.getAttribute) return; ['title','aria-label','placeholder'].forEach(function(a){ var v=e.getAttribute(a); if(v && v.indexOf('_')>=0) e.setAttribute(a, v.replace(RX,'$1$2$3')); });
+      if(e.nodeName==='OPTION' && e.textContent.indexOf('_')>=0 && !e.children.length) e.textContent=e.textContent.replace(RX,'$1$2$3'); });
+    list.forEach(function(n){ var v=n.nodeValue; if(!v || v.indexOf('_')<0) return; var p=n.parentElement; if(!p || p.closest(SKIP)) return;
+      RX.lastIndex=0; if(!RX.test(v)) return; RX.lastIndex=0;
+      var f=document.createElement('span'), last=0, m;   // eine Klammer um alles: in Flex-/Grid-Zeilen bleibt es ein Element
+      while((m=RX.exec(v))){ var s=m.index+m[1].length; f.appendChild(document.createTextNode(v.slice(last,s)+m[2])); var sb=document.createElement('sub'); sb.textContent=m[3]; f.appendChild(sb); last=m.index+m[0].length; }
+      f.appendChild(document.createTextNode(v.slice(last))); n.parentNode.replaceChild(f,n); });
+  }
+  window.mulySubFix=fix;
+  function start(){ fix(document.body); new MutationObserver(function(ms){ ms.forEach(function(m){ if(m.type==='characterData') fix(m.target); else m.addedNodes.forEach(fix); }); })
+    .observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
 <style data-proj>
   /* Kopfzeile und Projekt-Menü — identisch in calc und size (calc v0.8.28 · size v0.5.46) */
   .app-header .header-links { gap:16px; white-space:nowrap; }
@@ -381,7 +406,10 @@ window.mulyProj = {
     .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#404040); background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; }
     .ueb-figbtn { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:4px 0 8px; }
     .card.ueb:not(.ueb-done) > .card-title .tag, .card.ueb:not(.ueb-done) > .note, .card.ueb:not(.ueb-done) .fixbox { display:none !important; }
-    .st.ueb-hid { display:none; }
+  .st.ueb-hid .st-h { cursor:pointer; }
+  .st.ueb-hid .st-h::after { content:attr(data-rev); margin-left:auto; padding-left:10px; font-size:11.5px; font-weight:650; color:var(--accent,#2563eb); white-space:nowrap; }
+  .ueb-gap { display:inline-block; min-width:1.4em; text-align:center; color:#9ca3af; border-bottom:1.5px dotted #9ca3af; line-height:1.15; margin:0 1px; font-weight:400; }
+  .st.ueb-hid .st-f b { border-bottom:none; }
     .ueb-box { background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
     .ueb-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
     .ueb-box input { width:150px; padding:6px 8px; font:inherit; font-size:13px; border:1px solid var(--border-dark,#d1d5db); border-radius:8px; background:#fff; }
@@ -393,6 +421,22 @@ window.mulyProj = {
     .bp-lay select { grid-column: 1 / -1; }
     .bp-lay select, .bp-lay input { width: 100%; min-width: 0; padding: 6px 6px; font-size: 13px; border: 1px solid var(--border-dark, #d1d5db); border-radius: 6px; background: var(--surface, #fff); color: inherit; }
     .bf-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) 112px; gap: 6px; } .bf-row input, .bf-row select { width: 100%; min-width: 0; padding: 6px 6px; font-size: 13px; border: 1px solid var(--border-dark, #d1d5db); border-radius: 6px; background: var(--surface, #fff); color: inherit; }
+    /* Listen mit „+“ (v0.5.50): Schichten kompakt, aufklappbar, hinzufügen und entfernen */
+    .ml { display:flex; flex-direction:column; gap:6px; margin:6px 0 4px; grid-column:1 / -1; }
+    .ml-it { background:#f4f4f6; border-radius:12px; }
+    .ml-h { display:flex; align-items:center; gap:10px; padding:9px 8px 9px 12px; cursor:pointer; font-size:13.5px; -webkit-tap-highlight-color:transparent; }
+    .ml-n { flex:none; width:20px; height:20px; border-radius:50%; background:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#52525b; }
+    .ml-s { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
+    .ml-s i { font-style:normal; font-weight:500; color:var(--text3,#8a8a8a); }
+    .ml-c { flex:none; color:var(--text3,#8a8a8a); font-size:10px; transition:transform .15s; } .ml-it.open .ml-c { transform:rotate(180deg); }
+    .ml-x { flex:none; border:none; background:none; font-size:18px; line-height:1; color:var(--text3,#8a8a8a); cursor:pointer; padding:3px 7px; border-radius:7px; }
+    .ml-x:hover { background:#e4e4e7; color:#b42318; }
+    .ml-b { display:none; padding:2px 12px 12px; } .ml-it.open .ml-b { display:block; } .ml-it.open .ml-b.grid2 { display:grid; }
+    .ml-b .bp-lay { margin-bottom:0; } .ml-b .bp-head { margin:8px 0 3px; }
+    .ml-b > select { width:100%; min-width:0; padding:6px 6px; font-size:13px; border:1px solid var(--border-dark, #d1d5db); border-radius:6px; background:var(--surface, #fff); color:inherit; }
+    .ml .gs-L { margin-top:0 !important; padding-top:0 !important; border-top:none !important; }
+    .ml-add { align-self:flex-start; border:1.5px dashed #d4d4d8; background:none; border-radius:10px; padding:8px 13px; font-family:inherit; font-size:13px; font-weight:650; color:#3f3f46; cursor:pointer; }
+    .ml-add:hover { background:#f4f4f6; }
     .bp-head { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3, #6b7280); margin-bottom: 2px; }
     .bp-head span:first-child { display: none; }
     #bp-lay-card.bpm-uwert .bp-lay, #bp-lay-card.bpm-glaser .bp-lay { grid-template-columns: repeat(3, minmax(0,1fr)); }
@@ -1511,7 +1555,7 @@ window.mulyProj = {
       <div class="bp-lay"><select id="bl-m5" onchange="bpPick(5)" aria-label="Baustoff Schicht 5"><option value="-" selected>—</option><optgroup label="Putze und Estriche" data-i18n-label="bg0"><option value="0" data-i18n="z206">Gipsputz</option><option value="1" data-i18n="z207">Kalkzementputz</option><option value="28" data-i18n="bm28">Leichtputz</option><option value="29" data-i18n="bm29">Lehmputz</option><option value="30" data-i18n="bm30">Wärmedämmputz WLS 070</option><option value="2" data-i18n="z208">Zementestrich</option><option value="31" data-i18n="bm31">Calciumsulfatestrich</option><option value="32" data-i18n="bm32">Gussasphaltestrich</option></optgroup><optgroup label="Beton" data-i18n-label="bg1"><option value="3" data-i18n="matBeton">Stahlbeton</option><option value="4" data-i18n="z210">Normalbeton (unbewehrt)</option><option value="33" data-i18n="bm33">Leichtbeton, gefügedicht</option></optgroup><optgroup label="Mauerwerk und Naturstein" data-i18n-label="bg2"><option value="5" data-i18n="z211">Kalksandstein</option><option value="6" hidden data-i18n="z212">Kalksandstein</option><option value="7" data-i18n="z213">Vollziegel</option><option value="8" data-i18n="z214">Hochlochziegel</option><option value="34" data-i18n="bm34">Hochlochziegel mit Dämmstofffüllung</option><option value="9" data-i18n="z215">Planziegel, wärmedämmend</option><option value="10" data-i18n="z216">Porenbeton</option><option value="11" data-i18n="z217">Leichtbeton-Vollblock</option><option value="35" data-i18n="bm35">Leichtbeton-Hohlblockstein</option><option value="36" data-i18n="bm36">Klinker (Vormauerschale)</option><option value="37" data-i18n="bm37">Sandstein</option><option value="38" data-i18n="bm38">Granit</option></optgroup><optgroup label="Dämmstoffe" data-i18n-label="bg3"><option value="12" data-i18n="z218">Mineralwolle WLS 035</option><option value="13" data-i18n="z219">Mineralwolle WLS 032</option><option value="39" data-i18n="bm39">Mineralwolle WLS 040</option><option value="14">EPS WLS 035</option><option value="15" data-i18n="z220">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="40" data-i18n="bm40">Schaumglas WLS 045</option><option value="41" data-i18n="bm41">Phenolharz WLS 022</option><option value="42" data-i18n="bm42">Vakuumdämmplatte (VIP)</option><option value="18" data-i18n="z221">Holzfaserdämmung WLS 040</option><option value="19" data-i18n="z222">Zellulose WLS 040</option><option value="43" data-i18n="bm43">Kork WLS 045</option><option value="44" data-i18n="bm44">Hanf / Flachs WLS 045</option></optgroup><optgroup label="Holz und Plattenwerkstoffe" data-i18n-label="bg4"><option value="20" data-i18n="z223">Nadelholz</option><option value="45" data-i18n="bm45">Brettschichtholz</option><option value="46" data-i18n="bm46">Brettsperrholz</option><option value="47" data-i18n="bm47">Laubholz (Eiche, Buche)</option><option value="21" data-i18n="z224">OSB-Platte</option><option value="48" data-i18n="bm48">Spanplatte</option><option value="49" data-i18n="bm49">MDF-Platte</option><option value="50" data-i18n="bm50">Sperrholz</option><option value="22" data-i18n="z225">Gipskartonplatte</option><option value="51" data-i18n="bm51">Gipsfaserplatte</option><option value="23" data-i18n="z226">Holzwolle-Leichtbauplatte</option><option value="52" data-i18n="bm52">Faserzementplatte</option></optgroup><optgroup label="Bahnen und Folien" data-i18n-label="bg5"><option value="24" data-i18n="z227">PE-Folie</option><option value="25" data-i18n="z228">Dampfbremse</option><option value="54" data-i18n="bm54">Dampfsperre mit Alu-Einlage</option><option value="53" data-i18n="bm53">Unterdeckbahn, diffusionsoffen</option><option value="26" data-i18n="z229">Bitumen-Dachbahn</option><option value="55" data-i18n="bm55">Kunststoff-Dachabdichtung</option></optgroup><optgroup label="Beläge und Bekleidungen" data-i18n-label="bg6"><option value="56" data-i18n="bm56">Fliesen (Keramik)</option><option value="57" data-i18n="bm57">Parkett</option><option value="58" data-i18n="bm58">Teppich</option><option value="59" data-i18n="bm59">Linoleum</option><option value="27" data-i18n="z230">Dachziegel</option><option value="60" data-i18n="bm60">Aluminiumblech</option><option value="61" data-i18n="bm61">Kies</option></optgroup><optgroup label="Luftschichten (DIN EN ISO 6946)" data-i18n-label="bg7"><option value="62" data-i18n="bm62">Luftschicht, ruhend</option><option value="63" data-i18n="bm63">Luftschicht, schwach belüftet</option><option value="64" data-i18n="bm64">Luftschicht, stark belüftet</option></optgroup></select><input type="number" step="any" id="bl-d5" data-c="d" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l5" data-c="l" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u5" data-c="u" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r5" data-c="r" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
       <div class="bp-lay"><select id="bl-m6" onchange="bpPick(6)" aria-label="Baustoff Schicht 6"><option value="-" selected>—</option><optgroup label="Putze und Estriche" data-i18n-label="bg0"><option value="0" data-i18n="z206">Gipsputz</option><option value="1" data-i18n="z207">Kalkzementputz</option><option value="28" data-i18n="bm28">Leichtputz</option><option value="29" data-i18n="bm29">Lehmputz</option><option value="30" data-i18n="bm30">Wärmedämmputz WLS 070</option><option value="2" data-i18n="z208">Zementestrich</option><option value="31" data-i18n="bm31">Calciumsulfatestrich</option><option value="32" data-i18n="bm32">Gussasphaltestrich</option></optgroup><optgroup label="Beton" data-i18n-label="bg1"><option value="3" data-i18n="matBeton">Stahlbeton</option><option value="4" data-i18n="z210">Normalbeton (unbewehrt)</option><option value="33" data-i18n="bm33">Leichtbeton, gefügedicht</option></optgroup><optgroup label="Mauerwerk und Naturstein" data-i18n-label="bg2"><option value="5" data-i18n="z211">Kalksandstein</option><option value="6" hidden data-i18n="z212">Kalksandstein</option><option value="7" data-i18n="z213">Vollziegel</option><option value="8" data-i18n="z214">Hochlochziegel</option><option value="34" data-i18n="bm34">Hochlochziegel mit Dämmstofffüllung</option><option value="9" data-i18n="z215">Planziegel, wärmedämmend</option><option value="10" data-i18n="z216">Porenbeton</option><option value="11" data-i18n="z217">Leichtbeton-Vollblock</option><option value="35" data-i18n="bm35">Leichtbeton-Hohlblockstein</option><option value="36" data-i18n="bm36">Klinker (Vormauerschale)</option><option value="37" data-i18n="bm37">Sandstein</option><option value="38" data-i18n="bm38">Granit</option></optgroup><optgroup label="Dämmstoffe" data-i18n-label="bg3"><option value="12" data-i18n="z218">Mineralwolle WLS 035</option><option value="13" data-i18n="z219">Mineralwolle WLS 032</option><option value="39" data-i18n="bm39">Mineralwolle WLS 040</option><option value="14">EPS WLS 035</option><option value="15" data-i18n="z220">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="40" data-i18n="bm40">Schaumglas WLS 045</option><option value="41" data-i18n="bm41">Phenolharz WLS 022</option><option value="42" data-i18n="bm42">Vakuumdämmplatte (VIP)</option><option value="18" data-i18n="z221">Holzfaserdämmung WLS 040</option><option value="19" data-i18n="z222">Zellulose WLS 040</option><option value="43" data-i18n="bm43">Kork WLS 045</option><option value="44" data-i18n="bm44">Hanf / Flachs WLS 045</option></optgroup><optgroup label="Holz und Plattenwerkstoffe" data-i18n-label="bg4"><option value="20" data-i18n="z223">Nadelholz</option><option value="45" data-i18n="bm45">Brettschichtholz</option><option value="46" data-i18n="bm46">Brettsperrholz</option><option value="47" data-i18n="bm47">Laubholz (Eiche, Buche)</option><option value="21" data-i18n="z224">OSB-Platte</option><option value="48" data-i18n="bm48">Spanplatte</option><option value="49" data-i18n="bm49">MDF-Platte</option><option value="50" data-i18n="bm50">Sperrholz</option><option value="22" data-i18n="z225">Gipskartonplatte</option><option value="51" data-i18n="bm51">Gipsfaserplatte</option><option value="23" data-i18n="z226">Holzwolle-Leichtbauplatte</option><option value="52" data-i18n="bm52">Faserzementplatte</option></optgroup><optgroup label="Bahnen und Folien" data-i18n-label="bg5"><option value="24" data-i18n="z227">PE-Folie</option><option value="25" data-i18n="z228">Dampfbremse</option><option value="54" data-i18n="bm54">Dampfsperre mit Alu-Einlage</option><option value="53" data-i18n="bm53">Unterdeckbahn, diffusionsoffen</option><option value="26" data-i18n="z229">Bitumen-Dachbahn</option><option value="55" data-i18n="bm55">Kunststoff-Dachabdichtung</option></optgroup><optgroup label="Beläge und Bekleidungen" data-i18n-label="bg6"><option value="56" data-i18n="bm56">Fliesen (Keramik)</option><option value="57" data-i18n="bm57">Parkett</option><option value="58" data-i18n="bm58">Teppich</option><option value="59" data-i18n="bm59">Linoleum</option><option value="27" data-i18n="z230">Dachziegel</option><option value="60" data-i18n="bm60">Aluminiumblech</option><option value="61" data-i18n="bm61">Kies</option></optgroup><optgroup label="Luftschichten (DIN EN ISO 6946)" data-i18n-label="bg7"><option value="62" data-i18n="bm62">Luftschicht, ruhend</option><option value="63" data-i18n="bm63">Luftschicht, schwach belüftet</option><option value="64" data-i18n="bm64">Luftschicht, stark belüftet</option></optgroup></select><input type="number" step="any" id="bl-d6" data-c="d" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l6" data-c="l" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u6" data-c="u" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r6" data-c="r" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
       <div class="hint" id="bp-lay-mode"></div>
-      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.</span></div>
+      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Eine Schicht antippen zum Bearbeiten, „+“ fügt eine hinzu, „×“ entfernt sie.</span></div>
     </div>
     <div id="bp-gk" style="display:none">
     <div class="card">
@@ -2366,7 +2410,7 @@ const I18N = { "de": {
 "bpLayT":"Bauteilaufbau (innen → außen)",
 "bpName":"Bezeichnung",
 "bpMat":"Baustoff",
-"bpLayHint":"Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.",
+"bpLayHint":"Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Eine Schicht antippen zum Bearbeiten, „+“ fügt eine hinzu, „×“ entfernt sie.",
 "buT":"Randbedingungen",
 "buArt":"Bauteil",
 "buTi":"Innentemperatur θ<sub>i</sub> [°C]",
@@ -2608,6 +2652,9 @@ const I18N = { "de": {
 "sumOk":"Alle Nachweise erfüllt · größte Ausnutzung {0} %",
 "mobOk":"Alle Nachweise erfüllt · max. {0} %",
 "mobOkS":"max. {0} %",
+"mlAdd":"Schicht hinzufügen",
+"mlDel":"Schicht entfernen",
+"mlPick":"Baustoff wählen",
 "ppCur":"Aktuelle Berechnung",
 "ppList":"Gespeichert",
 "ppNew":"Noch nicht gespeichert",
@@ -3060,7 +3107,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.5.49';
+const SIZE_VERSION = '0.5.52';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -3354,8 +3401,8 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
   let Asmin, Asmax, AsErf, BQ=null, st=null, mu=null, DZ=null;
   {
     const S = [H(tt('Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)')),
-      `f<sub>cd</sub> = 0,85 · ${fck} / 1,5 = ${deNum(fcd)} N/mm²`,
-      `f<sub>yd</sub> = 500 / 1,15 = ${deNum(SB.fyd,1)} N/mm²`];
+      `f<sub>cd</sub> = α<sub>cc</sub>·f<sub>ck</sub>/γ<sub>c</sub> = 0,85 · ${fck} / 1,5 = ${deNum(fcd)} N/mm²`,
+      `f<sub>yd</sub> = f<sub>yk</sub>/γ<sub>s</sub> = 500 / 1,15 = ${deNum(SB.fyd,1)} N/mm²`];
     let note='', eta;
     if(uz){
       const T=tSection(BF.beff, hf, b, h);
@@ -4025,7 +4072,7 @@ const NICHT_ENTHALTEN = 'Zugkraftdeckung bei Durchlaufträgern und Einzellasten,
 let LAST = null;
 let MAT = 'beton';
 let STMODE = 'traeger';
-function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else if(MAT==='bauph') runBauph(); else runBeton(); save(); renderPos(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
+function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else if(MAT==='bauph') runBauph(); else runBeton(); save(); renderPos(); if(typeof mlRefresh==='function') mlRefresh(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
 function setStMode(m){ STMODE=m; showMat(); run(); }
 function showBad(bad){
   if(PROBE){ PROBE.C=null; return; }
@@ -5654,7 +5701,7 @@ function nachweiseFP(I){
   const FA = fpFlaeche(P, I.B, I.L, c), NRd = FA.A*fjd/1000;
   {
     const S=[H(tt('Festigkeit der Fuge unter der Platte: Beton unter Teilflächenpressung (EN 1992-1-1, 6.7)')),
-      `f<sub>cd</sub> = 0,85·${fck}/1,5 = ${deNum(fcd,2)} N/mm²`,
+      `f<sub>cd</sub> = α<sub>cc</sub>·f<sub>ck</sub>/γ<sub>c</sub> = 0,85·${fck}/1,5 = ${deNum(fcd,2)} N/mm²`,
       _L`A<sub>c1</sub>/A<sub>c0</sub>: Seitenverhältnis min(B<sub>f</sub>/B<sub>p</sub>; L<sub>f</sub>/L<sub>p</sub>; 3) = min(${deNum(I.Bf/I.B,2)}; ${deNum(I.Lf/I.L,2)}; 3) = ${deNum(s1,2)} → k<sub>j</sub> = √(A<sub>c1</sub>/A<sub>c0</sub>) = ${deNum(kj,2)}`,
       `f<sub>jd</sub> = β<sub>j</sub>·k<sub>j</sub>·f<sub>cd</sub> = 2/3·${deNum(kj,2)}·${deNum(fcd,2)} = <b>${deNum(fjd,2)} N/mm²</b>`,
       H(tt('Wie weit die Platte die Last über das Profil hinaus verteilt: zusätzliche Breite c (Platte als Kragarm, elastisch)')),
@@ -10048,9 +10095,30 @@ let UEB_REV = {}, UEB_KEY = '';                 // aufgedeckte Schritte je Karte
 function uebToggle(){ UEB=!UEB; try{ localStorage.setItem('muly-uebung', UEB?'1':'0'); }catch(e){} UEB_REV={}; document.body.classList.remove('ueb-fig'); run(); }
 const uebNum = t => { const s=String(t).replace(/−/g,'-').replace(/\s/g,''); const m=s.match(/-?\d+(?:[.,]\d+)?/); if(!m) return NaN; const v=parseFloat(m[0].replace(',','.')); return /%/.test(s) ? v/100 : v; };
 const uebHit = (v, x) => isFinite(x) && Math.abs(v-x) <= Math.max(0.01*Math.abs(x), 0.005);
+// Übungsmodus „Lernpfad“ (calc v0.8.34 · size v0.5.51): noch nicht aufgedeckte Schritte zeigen Überschrift und Formeln,
+// alle Zahlenwerte der Rechnung sind als Lücke „…“ ausgeblendet (Indizes, Bezeichnungen wie F1 und ganze Zahlen in Formeln bleiben).
+const UEB_ANY = /(^|[^\p{L}\p{N}_'’′.,])([−-]?\d+(?:[.,]\d+)?)/gu, UEB_DEC = /(^|[^\p{L}\p{N}_'’′.,])([−-]?\d+[.,]\d+)/gu;
+function uebMaskHTML(html){
+  const box=document.createElement('div'); box.innerHTML=html;
+  const w=document.createTreeWalker(box, 4), nodes=[]; while(w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n=>{ const p=n.parentElement; if(!p || p.closest('sub,sup')) return;
+    const r=p.closest('.eq-r'); let any=false;
+    if(r){ const rs=[...r.parentElement.querySelectorAll(':scope > .eq-r')]; any = rs.indexOf(r)>0 || /\d[.,]\d/.test(r.textContent); }
+    const re=any?UEB_ANY:UEB_DEC, t=n.nodeValue; re.lastIndex=0; if(!re.test(t)) return; re.lastIndex=0;
+    const pow = n.nextSibling && n.nextSibling.nodeName==='SUP';   // Zehnerpotenz (10⁶) bleibt stehen
+    const s=document.createElement('span'); s.innerHTML=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(re,(m,a,num,off,str)=> num==='10' && ((pow && off+m.length===str.length) || /[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/.test(str[off+m.length]||'')) ? m : a+'<span class="ueb-gap">…</span>');
+    n.replaceWith(...s.childNodes); });
+  return box.innerHTML;
+}
+function uebMaskStep(st, on){ const f=st.querySelector(':scope > .st-f'); if(!f) return;
+  if(on){ if(st.dataset.orig==null){ st.dataset.orig=f.innerHTML; f.innerHTML=uebMaskHTML(f.innerHTML); } }
+  else if(st.dataset.orig!=null){ f.innerHTML=st.dataset.orig; delete st.dataset.orig; } }
+function uebStepText(st){ const h=st.querySelector(':scope > .st-h'), f=st.querySelector(':scope > .st-f');
+  if(st.dataset.orig==null) return st.textContent; const d=document.createElement('div'); d.innerHTML=st.dataset.orig; return (h?h.textContent:'')+' '+d.textContent; }
 function uebShow(card){
   const st=[...card.querySelectorAll(':scope > .steps > .st')], k=Math.min(UEB_REV[card.id]||0, st.length);
-  st.forEach((e,i)=>e.classList.toggle('ueb-hid', i>=k));
+  st.forEach((e,i)=>{ const m=i>=k; e.classList.toggle('ueb-hid', m); uebMaskStep(e, m); const h=e.querySelector(':scope > .st-h');
+    if(h){ h.dataset.rev = m ? tt('Schritt zeigen') : ''; h.onclick = m ? ()=>{ UEB_REV[card.id]=i+1; uebShow(card); } : null; } });
   const done = k>=st.length || UEB_REV[card.id+'!'];
   card.classList.toggle('ueb-done', !!done);
   const lab=card.querySelector('.ueb-cnt'); if(lab) lab.textContent = tt('Schritt {} von {}').replace('{}',k).replace('{}',st.length);
@@ -10062,7 +10130,7 @@ function uebCheck(id){
   if(c && !c.info && uebHit(v, c.eta)){ UEB_REV[id+'!']=1; msg.className='ueb-msg ok'; msg.textContent=(c.ok?tt('Richtig: η = {} — der Nachweis ist erfüllt.'):tt('Richtig: η = {} — der Nachweis ist nicht erfüllt.')).replace('{}',deNum(c.eta,2)); uebShow(card); return; }
   const st=[...card.querySelectorAll(':scope > .steps > .st')];
   // Zwischenwerte: jede Zahl direkt hinter einem „=“ im Rechenweg (Ergebnisse der Teilschritte)
-  for(let i=0;i<st.length;i++){ const vals=st[i].textContent.replace(/\u2212/g,'-').split(/[=≈]/).slice(1).map(p=>{ const m=p.trim().match(/^-?\d+(?:[.,]\d+)?/); return m?parseFloat(m[0].replace(',','.')):NaN; });
+  for(let i=0;i<st.length;i++){ const vals=uebStepText(st[i]).replace(/\u2212/g,'-').split(/[=≈]/).slice(1).map(p=>{ const m=p.trim().match(/^-?\d+(?:[.,]\d+)?/); return m?parseFloat(m[0].replace(',','.')):NaN; });
     if(vals.some(x=>uebHit(v,x))){ msg.className='ueb-msg ok'; msg.textContent=tt('Stimmt: Dieser Wert steht in Schritt {}.').replace('{}',i+1); return; } }
   msg.className='ueb-msg bad'; msg.textContent=tt('Stimmt nicht mit dem Rechenweg überein. Tipp: Decke den nächsten Schritt auf.');
 }
@@ -10073,7 +10141,7 @@ function uebApply(C){
   $('ueb-hint')?.remove(); $('ueb-figbtn')?.remove();
   if(!UEB) return;
   const key = fixMode()+'|'+[...document.querySelectorAll('.col-in input, .col-in select')].map(e=>e.type==='checkbox'?e.checked:e.value).join('|'); if(key!==UEB_KEY){ UEB_REV={}; UEB_KEY=key; }
-  $('results').insertAdjacentHTML('beforeend', `<div class="ueb-hint" id="ueb-hint">${tt('Übungsmodus: Rechne die Nachweise selbst. Prüfe dein Ergebnis in den Karten unten oder decke den Rechenweg Schritt für Schritt auf.')}</div>`);
+  $('results').insertAdjacentHTML('beforeend', `<div class="ueb-hint" id="ueb-hint">${tt('Übungsmodus: Jeder Schritt zeigt, welche Formel du in welcher Reihenfolge anwendest – die Zahlenwerte sind als „…“ ausgeblendet. Rechne selbst, prüfe dein Ergebnis in den Karten unten oder decke Schritt für Schritt auf.')}</div>`);
   $('fig').insertAdjacentHTML('beforebegin', `<button type="button" class="ueb-figbtn" id="ueb-figbtn" onclick="document.body.classList.toggle('ueb-fig'); this.textContent=document.body.classList.contains('ueb-fig')?tt('Abbildung ausblenden'):tt('Abbildung zeigen')">${document.body.classList.contains('ueb-fig')?tt('Abbildung ausblenden'):tt('Abbildung zeigen')}</button>`);
   document.querySelectorAll('#details > .card[id^="n-"]').forEach(card=>{
     const c=C.find(x=>'n-'+x.id===card.id); card.classList.add('ueb'); card.classList.remove('closed');
@@ -10386,6 +10454,55 @@ Object.assign(FIX_WHY, {
   'wasser:gbq': 'Der Brunnen kann die geplante Wassermenge nicht aufnehmen (Fassungsvermögen nach Sichardt).',
   'bauph:sxnw': 'Durch die Fenster gelangt zu viel Sonnenenergie in den Raum — er überhitzt im Sommer.',
 });
+// ══ Listen mit „+“ (v0.5.50): Bauteilschichten, Bodenschichten, Pfahlschichten — kompakt, eine Schicht aufgeklappt ══
+const ML = {};
+function mlMake(key, cfg){
+  const wrap=document.createElement('div'); wrap.className='ml'; wrap.dataset.ml=key;
+  cfg.before.parentNode.insertBefore(wrap, cfg.before);
+  cfg.items.forEach((els,k)=>{ const it=document.createElement('div'); it.className='ml-it'; it.dataset.i=k+1;
+    it.innerHTML='<div class="ml-h" role="button" tabindex="0"><span class="ml-n">'+(k+1)+'</span><span class="ml-s"></span><span class="ml-c">▾</span><button type="button" class="ml-x">×</button></div><div class="ml-b'+(cfg.bodyClass?' '+cfg.bodyClass:'')+'"></div>';
+    const b=it.querySelector('.ml-b'); els.forEach(e=>b.appendChild(e)); wrap.appendChild(it);
+    const h=it.querySelector('.ml-h'); h.onclick=e=>{ if(e.target.closest('.ml-x')) return; ML[key].open = ML[key].open===k+1 ? 0 : k+1; mlRefresh(); };
+    h.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); h.click(); } };
+    it.querySelector('.ml-x').onclick=e=>{ e.stopPropagation(); mlDel(key, k+1); }; });
+  const add=document.createElement('button'); add.type='button'; add.className='ml-add'; add.onclick=()=>mlAdd(key); wrap.appendChild(add);
+  ML[key]=Object.assign({min:1, open:0, extra:0}, cfg, {wrap});
+}
+function mlN(L){ return Math.min(L.max, Math.max(L.min, L.count(), L.extra||0)); }
+function mlAdd(key){ const L=ML[key], n=mlN(L); if(n>=L.max) return; L.clear(n+1); L.extra=n+1; if(L.setN) L.setN(n+1); L.open=n+1; run();
+  const f=L.wrap.querySelector('.ml-it[data-i="'+(n+1)+'"] select, .ml-it[data-i="'+(n+1)+'"] input'); if(f) try{ f.focus({preventScroll:true}); }catch(e){} }
+function mlDel(key, i){ const L=ML[key], n=mlN(L); if(n<=L.min) return; for(let j=i;j<n;j++) L.move(j+1,j); L.clear(n); L.extra=0; if(L.setN) L.setN(n-1);
+  L.open = L.open===i ? 0 : L.open>i ? L.open-1 : L.open; run(); }
+function mlRefresh(){ Object.values(ML).forEach(L=>{ const n=mlN(L); if(L.extra>n) L.extra=0;
+  L.wrap.querySelectorAll('.ml-it').forEach(it=>{ const i=+it.dataset.i, on=i<=n; it.style.display=on?'':'none'; it.classList.toggle('open', on && L.open===i);
+    it.querySelector('.ml-s').innerHTML = on ? L.sum(i) : ''; const x=it.querySelector('.ml-x'); x.style.visibility = n>L.min ? '' : 'hidden'; x.title=tx(L.delKey||'mlDel'); x.setAttribute('aria-label', x.title); });
+  const a=L.wrap.querySelector('.ml-add'); a.textContent='+ '+tx(L.addKey||'mlAdd'); a.style.display = n<L.max ? '' : 'none'; }); }
+const mlVal = id => { const v=num(id); if(!isFinite(v)) return '—'; const s=deNum(v, Math.abs(v)<0.1 && v ? 3 : 2); return s.replace(/([.,]\d*?)0+$/,'$1').replace(/[.,]$/,''); };
+function initLists(){
+  // Bauteilaufbau (U-Wert, Tauwasser, Schall): bis 6 Schichten
+  const head=document.querySelector('#bp-lay-card .bp-head'), rows=[...document.querySelectorAll('#bp-lay-card .bp-lay:not(.bp-head)')];
+  const F=['m','d','l','u','r'];
+  mlMake('bp', { before:rows[0], max:rows.length, items:rows.map(r=>[r.querySelector('select'), head.cloneNode(true), r]),
+    count:()=>{ let n=0; for(let i=1;i<=rows.length;i++) if($('bl-m'+i).value!=='-') n=i; return n; },
+    sum:i=>{ const s=$('bl-m'+i); if(s.value==='-') return '<i>'+tx('mlPick')+'</i>'; return esc(s.selectedOptions[0]?.textContent.trim()||'')+' <i>· '+mlVal('bl-d'+i)+' cm</i>'; },
+    move:(a,b)=>{ F.forEach(f=>{ $('bl-'+f+b).value=$('bl-'+f+a).value; }); $('bl-l'+b).disabled=$('bl-l'+a).disabled; },
+    clear:i=>{ $('bl-m'+i).value='-'; $('bl-d'+i).value='0'; ['l','u','r'].forEach(f=>$('bl-'+f+i).value=''); $('bl-l'+i).disabled=false; } });
+  head.style.display='none';
+  // Setzung: bis 4 Bodenschichten (Anzahl im versteckten Feld gs-n)
+  const gsL=[1,2,3,4].map(i=>document.querySelector('.gs-L'+i)), G=['b','h','g','E'];
+  mlMake('gs', { before:gsL[0], max:4, items:gsL.map(e=>[e]), count:()=>+$('gs-n').value, setN:n=>{ $('gs-n').value=String(n); },
+    sum:i=>{ const n=+$('gs-n').value, s=$('gs-b'+i); return esc(s.selectedOptions[0]?.textContent.trim()||'')+' <i>· '+(i<n ? mlVal('gs-h'+i)+' m · ' : '')+'E<sub>s</sub> '+mlVal('gs-E'+i)+' MN/m²</i>'; },
+    move:(a,b)=>G.forEach(f=>{ $('gs-'+f+b).value=$('gs-'+f+a).value; }), clear:i=>{ $('gs-b'+i).value='sm'; gsPreset(i); $('gs-h'+i).value='2.0'; } });
+  $('gs-n').closest('.field').style.display='none';
+  // Pfahl: bis 3 Schichten für die Mantelreibung (Dicke 0 = keine)
+  const pfI=[1,2,3].map(i=>[$('pf-t'+i).closest('.field'), $('pf-q'+i).closest('.field')]);
+  mlMake('pf', { before:pfI[0][0], max:3, bodyClass:'grid2', items:pfI,
+    count:()=>{ let n=0; for(let i=1;i<=3;i++) if(num('pf-t'+i)>0) n=i; return n; },
+    sum:i=>mlVal('pf-t'+i)+' m <i>· q<sub>s,k</sub> = '+mlVal('pf-q'+i)+' kN/m²</i>',
+    move:(a,b)=>['t','q'].forEach(f=>{ $('pf-'+f+b).value=$('pf-'+f+a).value; }), clear:i=>{ $('pf-t'+i).value='0'; $('pf-q'+i).value='0'; } });
+  { const _ap=apply; apply=function(...a){ Object.values(ML).forEach(L=>{ L.extra=0; L.open=0; }); return _ap.apply(this, a); }; }
+  mlRefresh();
+}
 function initUX(){
   // Projekt-Menü: Positionen und calc-Import wandern aus der Eingabespalte in ein Fenster unter der Kopfzeile
   // gleiches Grundgerüst wie in calc (mulyProj, v0.5.46): Aktuelle Berechnung · Gespeichert · Schnittgrößen aus calc · Link
@@ -10399,7 +10516,7 @@ function initUX(){
   $('pp-extra').appendChild(ci); posCard.remove();
   projState(); setInterval(()=>{ if(!document.hidden) projState(); }, 1200);
   PICK_GROUPS.forEach(([,seg])=>$(seg).classList.add('ux-hide')); $('seg-mat').classList.add('ux-hide');
-  initFold(); updatePick(); updateFoldSums();
+  initLists(); initFold(); updatePick(); updateFoldSums();
 }
 $('an-k').innerHTML = SKLASSEN.map(r=>`<option${r[0]==='8.8'?' selected':''}>${r[0]}</option>`).join('');
 $('an-st').innerHTML = STAHL.map(r=>`<option${r[0]==='S235'?' selected':''}>${r[0]}</option>`).join('');

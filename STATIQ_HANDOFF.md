@@ -1,12 +1,12 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.8.32 · ref v0.3.39 · size v0.5.49 · projekt v0.1.9 · rechtliches v0.1.8 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.8.35 · ref v0.3.40 · size v0.5.52 · projekt v0.1.10 · rechtliches v0.1.9 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.8.32, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.9, Test von Variante C)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.39, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.5.49, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.8)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.8.35, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.10, Test von Variante C)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.40, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.5.52, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.9)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Inter, DM Sans, DM Mono, Bebas Neue als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -568,6 +568,31 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Indizes wie im Lehrbuch — calc v0.8.35 · size v0.5.52 · ref v0.3.40 · projekt v0.1.10 · rechtliches v0.1.9
+
+- Wunsch Valentin: „f_yd“ ohne Unterstrich, Index klein tiefgestellt.
+- `<script data-sub>` in allen sechs Seiten (nach dem Glas-Block): wandelt im angezeigten Text `X_Y` (1–3 Zeichen Basis, Index mit „,“/„;“ z. B. f_ck,cube, f_ctk;0,05) in `X<sub>Y</sub>` um — beim Laden und für alle später erzeugten Inhalte (MutationObserver). Ersetzung in einem `<span>` (sonst zerfällt Text in Flex-Zeilen). Ausgenommen: script, style, Eingaben, `select/option`, SVG, code/pre, `.no-sub`. In `option`, `title`, `aria-label`, `placeholder` wird der Index ohne Unterstrich angehängt (s_d → sd). `window.mulySubFix(el)` für Handaufrufe.
+- calc `loadSummary` liest Beschriftungen mit tiefgestelltem Index als „q_a“ (Klon, `sub` → „_“+Text).
+- Quelltexte bleiben unverändert (Schlüssel, Tests, Daten); Skizzen in ref behalten `subIdx` (tspan).
+- Tests: neu `test_indizes.py` (7, alle size-Modi, calc-Systeme und ref-Themen in DE und EN); `test_size_holz2.py` prüft `<sub>ap</sub>`. sw.js `statiq-2026-10-21-3`.
+
+## Übungsmodus als Lernpfad — calc v0.8.34 · size v0.5.51
+
+- Wunsch Valentin: Reihenfolge und zu benutzende Formeln sollen sichtbar sein, Aufklappen zeigt dann Schritt für Schritt das Vorgehen.
+- Noch nicht aufgedeckte Schritte (`.st.ueb-hid`) werden nicht mehr ausgeblendet, sondern „maskiert“: Überschrift und Formeln bleiben, Zahlenwerte werden zu Lücken `<span class="ueb-gap">…</span>` (`uebMaskHTML`, `uebMaskStep`; Original in `st.dataset.orig`). Regeln: in Rechenketten (`.eq-r` ab der zweiten Zeile oder mit Dezimalzahl) alle Zahlen, sonst nur Dezimalzahlen; Indizes (`sub`/`sup`), Bezeichnungen wie F1, ganze Zahlen in Formeln und Zehnerpotenzen (10⁶) bleiben.
+- Antippen einer Schrittüberschrift („Schritt zeigen“, `data-rev`) deckt bis zu diesem Schritt auf; „Nächster Schritt“ und „Lösung zeigen“ wie bisher. Prüfen sucht Zwischenwerte im Original (`uebStepText`), also auch in noch verdeckten Schritten.
+- Gleicher Block in calc (`cUebShow`) und size (`uebShow`). Hinweistexte angepasst (calc `uebHint`, size per `tt`), neu `uebRevStep` (calc) bzw. „Schritt zeigen“ (size, TTX).
+- f_cd und f_yd im Stahlbeton (Balken, Platte) jetzt mit Formel in Buchstaben (α_cc·f_ck/γ_c, f_yk/γ_s). Prüfung über alle size-Modi: 517 maskierte Schritte, 9 ohne erkennbare Formel (meist Info-/Bildschritte: Zugkraftdeckungsbild, Doppelbiegung k_m, Verbindung, Verbund, Pfahl, Wasserdruck) — bei Gelegenheit ergänzen.
+- Tests: neu `test_uebung_lernpfad.py` (12); `test_size_uebung.py` prüft „Schritte ohne Zahlenwerte“ statt „ausgeblendet“. sw.js `statiq-2026-10-21-2`.
+
+## Einheitliche Auswahl, Listen mit „+“ — calc v0.8.33 · size v0.5.50
+
+- calc: Systemauswahl `#pick` steht am Rechner (ab 1000 px) wie in size oben in der Eingabespalte (`placePick()`, verschiebt das Element bei Tab-Wechsel und Breitenänderung; leere `.nav.calc-top` dann `.pick-out` ausgeblendet). Abstand oben 6 px wie size, `pick-btn` Innenabstand 14 px. Gleiche Lage, Breite (509 px bei 1440) und Höhe in beiden Apps; Ergebnisspalte beginnt gleich hoch.
+- calc: Menügruppe „Meine Projekte › Gespeichert“ entfernt; „Gespeichert“ nur noch über den Knopf oben („Alle Berechnungen und Berichte“). In der Ansicht „Gespeichert“ zeigt die Auswahl „Meine Projekte · Gespeichert“.
+- size: Listen mit „+“ (`mlMake`, `mlAdd`, `mlDel`, `mlRefresh`, `initLists`): Schichten als kompakte Zeilen mit Kurzfassung (Nummer, Baustoff/Boden, Dicke), Antippen klappt eine Schicht auf, „+ Schicht hinzufügen“, „×“ entfernt und rückt die folgenden Werte nach. Die Felder (`bl-*1…6`, `gs-*1…4` mit verstecktem `gs-n`, `pf-t/q1…3`) bleiben die Datenquelle; Rechnung und Speicherstände unverändert. Gilt für U-Wert, Tauwasser, Schall (Bauteilaufbau), Setzung (Bodenschichten) und Pfahl (Mantelreibung). Beim Laden einer Position folgt die Liste den Daten (`apply` umhüllt).
+- Texte `mlAdd`, `mlDel`, `mlPick` (I18N + lang-Dateien), Hinweis `bpLayHint` angepasst („+“/„×“ statt „Dicke 0 oder —“).
+- Tests: neu `test_size_listen.py` (17); `test_calc_ux.py` (Menü ohne Projektgruppe), `test_layout_rahmen.py` (Auswahl gleich breit, Ergebnisspalte gleich hoch), `test_size_bauph_plaus.py` (klappt Schicht 2 auf). sw.js `statiq-2026-10-21-1`.
+
 ## Neue Marke kragr — calc v0.8.30 · size v0.5.47 · ref v0.3.37 · projekt v0.1.7 · rechtliches v0.1.6
 
 - Anlass: „Muly“ als Marke in China (Klasse 41) und als Android-App vergeben; „lastr“ als Sport-App vergeben. Valentin hat sich für **kragr** entschieden (von Kragarm). Prüfung TMview (DE/EU, Klassen 9, 41, 42), App-Stores und Domains kragr.de/.eu/.app steht noch aus; die App-Store-Suche nach „kragr“ fand nur eine ähnliche Statik-App („Balkenrechner: Statik“, schwarzes Symbol, grün-weiße Karten) — deshalb bewusst eigener Stil (Rechenblatt).
@@ -1018,7 +1043,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1634/1634 grün** (inklusive `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 13, `test_size_plakette.py` 8, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1674/1674 grün** (inklusive `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 13, `test_size_plakette.py` 8, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

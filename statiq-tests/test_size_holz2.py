@@ -89,7 +89,7 @@ async def main():
         check('x_max Satteldach = L·h₀/(2·h_ap)', abs(sattel('GL24h',1,2,'sattel',15,160,600,1200,12)['xm']-15*600/2400)<1e-6)
         check('x_max Pultdach = L·h₀/(h₀ + h_ap)', abs(sattel('GL24h',1,2,'pult',10,140,400,900,8)['xm']-10*400/1300)<1e-6)
         await pg.evaluate("$('sd-h0').value=600; $('sd-hap').value=550; run()")
-        check('h_ap ≤ h₀ wird abgelehnt', await pg.evaluate("!LAST || LAST.I.hap!==550") and 'h_ap' in await pg.inner_text('#summary'))
+        check('h_ap ≤ h₀ wird abgelehnt', await pg.evaluate("!LAST || LAST.I.hap!==550") and 'hap' in await pg.inner_text('#summary') and '<sub>ap</sub>' in await pg.inner_html('#summary'))
         # ── Versatz ──
         await pg.evaluate("setHoMode('versatz'); $('sd-hap').value=1200; $('sd-form').value='sattel'")
         s=await pg.inner_text('#summary'); check('Standard Versatz erfüllt', 'Alle Nachweise erfüllt' in s, s)

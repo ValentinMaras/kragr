@@ -25,7 +25,7 @@ async def main():
         # 1) nur Eingaben, die in die Rechnung eingehen
         exp={'uwert':'dlr','glaser':'dlu','schall':'dr'}
         for mode,e in exp.items():
-            await pg.evaluate(f"setBpMode('{mode}')"); await pg.wait_for_timeout(200); v=await vis()
+            await pg.evaluate(f"setBpMode('{mode}'); ML.bp.open=2; mlRefresh()"); await pg.wait_for_timeout(200); v=await vis()   # Schicht 2 aufgeklappt (seit v0.5.50 Liste)
             check(f'{mode}: sichtbar nur die wirksamen Spalten ({e})', v==e, v)
         # 2) ρ wirkt im U-Wert über m′ (DIN 4108-2, 5.1.2.2)
         await pg.evaluate("setBpMode('uwert')"); await pg.wait_for_timeout(200)

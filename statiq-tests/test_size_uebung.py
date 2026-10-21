@@ -20,9 +20,9 @@ async def main():
         await pg.click('.det-bar .ueb-tog'); await pg.wait_for_timeout(300)
         r=await pg.evaluate("""[document.querySelectorAll('#details > .card[id^="n-"]').length, document.querySelectorAll('.ueb-box').length,
           getComputedStyle($('summary')).display, getComputedStyle($('chk-table')).display, getComputedStyle($('fig')).display,
-          [...document.querySelectorAll('#details .card.ueb .st')].every(s=>getComputedStyle(s).display==='none'),
+          [...document.querySelectorAll('#details .card.ueb .st')].every(s=>{ const f=s.querySelector('.st-f'); if(!f) return s.classList.contains('ueb-hid'); const c=f.cloneNode(true); c.querySelectorAll('sub,sup').forEach(x=>x.remove()); return s.classList.contains('ueb-hid') && !/(^|[^\w.])\d+[.,]\d/.test(c.textContent); }),
           [...document.querySelectorAll('#details .card.ueb > .card-title .tag')].every(t=>getComputedStyle(t).display==='none')]""")
-        check('an: jede Karte mit Übungsfeld; Ergebnis, Tabelle, Abbildung, Schritte und η verdeckt', r[0]==r[1]>0 and r[2]==r[3]==r[4]=='none' and r[5] and r[6], r)
+        check('an: jede Karte mit Übungsfeld; Ergebnis, Tabelle, Abbildung und η verdeckt, Schritte ohne Zahlenwerte', r[0]==r[1]>0 and r[2]==r[3]==r[4]=='none' and r[5] and r[6], r)
         eta=await pg.evaluate("UEB_C.find(c=>c.id==='qs').eta")
         await pg.fill('#n-qs .ueb-in', f"{eta:.2f}".replace('.',',')); await pg.click('#n-qs .ueb-row button')
         m=await pg.inner_text('#n-qs .ueb-msg'); shown=await pg.evaluate("getComputedStyle(document.querySelector('#n-qs > .card-title .tag')).display!=='none'")

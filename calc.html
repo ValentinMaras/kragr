@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.8.32 -->
+<!-- kragr v0.8.35 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -42,6 +42,31 @@
   .glass.glass-flat::before { bottom:0; -webkit-mask-image:none; mask-image:none; background:rgba(255,255,255,.72); }
   @media print { .glass::before { display:none; } }
 </style>
+<script data-sub>
+// Indizes wie im Lehrbuch (Oktober 2026): „f_yd“ im angezeigten Text wird zu f<sub>yd</sub> (kleiner, tiefgestellt, ohne Unterstrich).
+// Wirkt auf alles, was die Seite anzeigt (auch nachträglich erzeugte Inhalte); nicht in Eingabefeldern, Auswahllisten, Skizzen (SVG) und Code.
+(function(){
+  var RX=/(^|[^\w\/\\.@#\-])([A-Za-zα-ωΑ-ΩΣΔ]{1,3}′?)_\{?([A-Za-z0-9α-ωΑ-Ω]+(?:[,;][A-Za-z0-9α-ωΑ-Ω]+)*)\}?/g, SKIP='script,style,textarea,input,select,option,svg,code,pre,[contenteditable],.no-sub';
+  function fix(root){
+    if(!root || root.nodeType===3 && !root.parentElement) return;
+    var list=[];
+    if(root.nodeType===3){ list=[root]; }
+    else if(root.nodeType===1){ if(!(root.closest && root.closest(SKIP))){ var w=document.createTreeWalker(root,4); while(w.nextNode()) list.push(w.currentNode); } }
+    if(root.nodeType===1) [root].concat([].slice.call(root.querySelectorAll('[title*="_"],[aria-label*="_"],[placeholder*="_"],option'))).forEach(function(e){   // Auswahllisten und Hinweise: ohne Tiefstellung, Index direkt angehängt (s_d → sd)
+      if(!e.getAttribute) return; ['title','aria-label','placeholder'].forEach(function(a){ var v=e.getAttribute(a); if(v && v.indexOf('_')>=0) e.setAttribute(a, v.replace(RX,'$1$2$3')); });
+      if(e.nodeName==='OPTION' && e.textContent.indexOf('_')>=0 && !e.children.length) e.textContent=e.textContent.replace(RX,'$1$2$3'); });
+    list.forEach(function(n){ var v=n.nodeValue; if(!v || v.indexOf('_')<0) return; var p=n.parentElement; if(!p || p.closest(SKIP)) return;
+      RX.lastIndex=0; if(!RX.test(v)) return; RX.lastIndex=0;
+      var f=document.createElement('span'), last=0, m;   // eine Klammer um alles: in Flex-/Grid-Zeilen bleibt es ein Element
+      while((m=RX.exec(v))){ var s=m.index+m[1].length; f.appendChild(document.createTextNode(v.slice(last,s)+m[2])); var sb=document.createElement('sub'); sb.textContent=m[3]; f.appendChild(sb); last=m.index+m[0].length; }
+      f.appendChild(document.createTextNode(v.slice(last))); n.parentNode.replaceChild(f,n); });
+  }
+  window.mulySubFix=fix;
+  function start(){ fix(document.body); new MutationObserver(function(ms){ ms.forEach(function(m){ if(m.type==='characterData') fix(m.target); else m.addedNodes.forEach(fix); }); })
+    .observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
 <style data-proj>
   /* Kopfzeile und Projekt-Menü — identisch in calc und size (calc v0.8.28 · size v0.5.46) */
   .app-header .header-links { gap:16px; white-space:nowrap; }
@@ -514,7 +539,8 @@ window.mulyProj = {
     /* ── UX 2026 (calc v0.8.12): Auswahlmenü, zwei Spalten, kompakte Lasten, Live-Ergebnis ── */
     .nav.calc-top { z-index:30; overflow:visible; background:transparent; padding:6px 20px 0; max-width:1180px; margin:0 auto; display:flex; align-items:stretch; gap:10px; }
     .pick { position:relative; flex:1; min-width:0; }
-    .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:13px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
+    .pick.in-col { margin-bottom:14px; }
+    .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:14px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
     .pick-btn:hover { background:#f1f1f3; } .pick-btn:active { transform:scale(0.99); }
     .pick-txt { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
     .pick-g { font-size:12px; font-weight:600; color:var(--text3); }
@@ -552,7 +578,8 @@ window.mulyProj = {
     .live-note { font-size:12px; color:var(--text3); margin:2px 2px 10px; display:flex; align-items:center; gap:6px; }
     .live-note::before { content:''; width:7px; height:7px; border-radius:50%; background:#16a34a; }
     @media (min-width:1000px){
-      .main:not(#tab-saved) { max-width:1180px; padding:16px 20px 20px; }
+      .main:not(#tab-saved) { max-width:1180px; padding:6px 20px 20px; }
+      .nav.calc-top.pick-out { display:none; }
       .cols { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:20px; align-items:start; }
       .col-out { position:sticky; top:12px; max-height:calc(100vh - 24px); overflow:auto; padding-bottom:4px; scrollbar-width:thin; }
     }
@@ -592,7 +619,10 @@ window.mulyProj = {
   body.uebung:not(.ueb-dia) .diagram-svg-wrap, body.uebung:not(.ueb-dia) .diagram-label, body.uebung:not(.ueb-dia) .diagram-toggle-row { display:none !important; }
   .ueb-hint { font-size:13px; line-height:1.5; color:var(--text2,#404040); background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:0 0 12px; }
   .ueb-diabtn { border:none; background:#efeff1; border-radius:10px; padding:6px 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; margin:2px 0 6px; }
-  .st.ueb-hid { display:none; }
+  .st.ueb-hid .st-h { cursor:pointer; }
+  .st.ueb-hid .st-h::after { content:attr(data-rev); margin-left:auto; padding-left:10px; font-size:11.5px; font-weight:650; color:var(--accent,#2563eb); white-space:nowrap; }
+  .ueb-gap { display:inline-block; min-width:1.4em; text-align:center; color:#9ca3af; border-bottom:1.5px dotted #9ca3af; line-height:1.15; margin:0 1px; font-weight:400; }
+  .st.ueb-hid .st-f b { border-bottom:none; }
   .ueb-box { background:var(--accent-bg,#eff6ff); border-radius:10px; padding:10px 12px; margin:4px 0 10px; display:flex; flex-direction:column; gap:8px; }
   .ueb-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
   .ueb-box input { width:150px; padding:6px 8px; font:inherit; font-size:13px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
@@ -749,7 +779,7 @@ window.mulyProj = {
     <span class="module-name">calc</span>
     <a href="size.html">size</a>
     <a href="ref.html">ref</a>
-    <span class="version">v0.8.32</span>
+    <span class="version">v0.8.35</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1221,7 +1251,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.8.32';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.8.35';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -4763,7 +4793,7 @@ const I18N_UI = {
   "errRep": "Found an error? Please report it.",
   "uebTog": "Practice mode",
   "uebEnd": "End practice mode",
-  "uebHint": "Practice mode: work out reactions and internal forces yourself. Check your result below or reveal the calculation step by step.",
+  "uebHint": "Practice mode: each step shows which formula to apply and in which order – the numbers are hidden as “…”. Work it out yourself, check your result below or reveal the steps one by one.",
   "uebShowDia": "Show diagram",
   "uebHideDia": "Hide diagram",
   "uebPh": "your result",
@@ -4884,7 +4914,7 @@ const I18N_UI = {
   "errRep": "Fehler gefunden? Bitte melden.",
   "uebTog": "Übungsmodus",
   "uebEnd": "Übungsmodus beenden",
-  "uebHint": "Übungsmodus: Rechne Auflagerkräfte und Schnittgrößen selbst. Prüfe dein Ergebnis unten oder decke den Rechenweg Schritt für Schritt auf.",
+  "uebHint": "Übungsmodus: Jeder Schritt zeigt, welche Formel du in welcher Reihenfolge anwendest – die Zahlenwerte sind als „…“ ausgeblendet. Rechne selbst, prüfe dein Ergebnis unten oder decke Schritt für Schritt auf.",
   "uebShowDia": "Schnittgrößen zeigen",
   "uebHideDia": "Schnittgrößen ausblenden",
   "uebPh": "dein Ergebnis",
@@ -5005,7 +5035,7 @@ const I18N_UI = {
   "errRep": "Une erreur ? Merci de la signaler.",
   "uebTog": "Mode exercice",
   "uebEnd": "Quitter le mode exercice",
-  "uebHint": "Mode exercice : calcule toi-même les réactions et les efforts internes. Contrôle ton résultat ci-dessous ou dévoile le calcul étape par étape.",
+  "uebHint": "Mode exercice : chaque étape indique quelle formule appliquer et dans quel ordre – les valeurs sont masquées par « … ». Calcule toi-même, contrôle ton résultat ci-dessous ou dévoile les étapes une à une.",
   "uebShowDia": "Afficher les efforts",
   "uebHideDia": "Masquer les efforts",
   "uebPh": "ton résultat",
@@ -5130,7 +5160,7 @@ const I18N_UI = {
   "errRep": "¿Has encontrado un error? Avísanos.",
   "uebTog": "Modo práctica",
   "uebEnd": "Salir del modo práctica",
-  "uebHint": "Modo práctica: calcula tú mismo las reacciones y los esfuerzos. Comprueba tu resultado abajo o descubre el cálculo paso a paso.",
+  "uebHint": "Modo práctica: cada paso muestra qué fórmula aplicar y en qué orden; los valores numéricos están ocultos como «…». Calcula tú mismo, comprueba tu resultado abajo o descubre los pasos uno a uno.",
   "uebShowDia": "Mostrar esfuerzos",
   "uebHideDia": "Ocultar esfuerzos",
   "uebPh": "tu resultado",
@@ -5205,6 +5235,11 @@ Object.assign(I18N_UI.en,{modalFrameLeftPart:'(left part)',modalFrameCorner:'cor
 Object.assign(I18N_UI.fr,{modalFrameLeftPart:'(partie gauche)',modalFrameCorner:'angle'}); Object.assign(I18N_UI.es,{modalFrameLeftPart:'(parte izquierda)',modalFrameCorner:'esquina'});
 Object.assign(I18N_UI.en,{projLink:'My projects →'}); Object.assign(I18N_UI.de,{projLink:'Meine Projekte →'});
 Object.assign(I18N_UI.fr,{projLink:'Mes projets →'}); Object.assign(I18N_UI.es,{projLink:'Mis proyectos →'});
+// Übungsmodus Lernpfad (v0.8.34)
+Object.assign(I18N_UI.de,{uebRevStep:"Schritt zeigen"});
+Object.assign(I18N_UI.en,{uebRevStep:"Show step"});
+Object.assign(I18N_UI.fr,{uebRevStep:"Afficher l’étape"});
+Object.assign(I18N_UI.es,{uebRevStep:"Mostrar paso"});
 // Projekt-Menü (v0.8.28)
 Object.assign(I18N_UI.de,{"repPosLbl": "Position", "repDateLbl": "Datum", "repVerLbl": "Version"});
 Object.assign(I18N_UI.en,{"repPosLbl": "Item", "repDateLbl": "Date", "repVerLbl": "Version"});
@@ -5576,10 +5611,31 @@ let C_REV = {}, C_KEY = {};
 const cUebNum = t => { const s=String(t).replace(/−/g,'-').replace(/\s/g,''); const m=s.match(/-?\d+(?:[.,]\d+)?/); if(!m) return NaN; const v=parseFloat(m[0].replace(',','.')); return /%/.test(s) ? v/100 : v; };
 const cUebHit = (v, x) => isFinite(x) && Math.abs(Math.abs(v)-Math.abs(x)) <= Math.max(0.01*Math.abs(x), 0.05);   // Vorzeichen frei: Richtung je nach Konvention
 function cUebToggle(){ C_UEB=!C_UEB; try{ localStorage.setItem('muly-uebung', C_UEB?'1':'0'); }catch(e){} C_REV={}; document.body.classList.remove('ueb-dia'); if(typeof liveCalc==='function') liveCalc(true); else document.querySelectorAll('.rw-card').forEach(c=>cUebApply(c.id.slice(3), c, true)); }
+// Übungsmodus „Lernpfad“ (calc v0.8.34 · size v0.5.51): noch nicht aufgedeckte Schritte zeigen Überschrift und Formeln,
+// alle Zahlenwerte der Rechnung sind als Lücke „…“ ausgeblendet (Indizes, Bezeichnungen wie F1 und ganze Zahlen in Formeln bleiben).
+const UEB_ANY = /(^|[^\p{L}\p{N}_'’′.,])([−-]?\d+(?:[.,]\d+)?)/gu, UEB_DEC = /(^|[^\p{L}\p{N}_'’′.,])([−-]?\d+[.,]\d+)/gu;
+function uebMaskHTML(html){
+  const box=document.createElement('div'); box.innerHTML=html;
+  const w=document.createTreeWalker(box, 4), nodes=[]; while(w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n=>{ const p=n.parentElement; if(!p || p.closest('sub,sup')) return;
+    const r=p.closest('.eq-r'); let any=false;
+    if(r){ const rs=[...r.parentElement.querySelectorAll(':scope > .eq-r')]; any = rs.indexOf(r)>0 || /\d[.,]\d/.test(r.textContent); }
+    const re=any?UEB_ANY:UEB_DEC, t=n.nodeValue; re.lastIndex=0; if(!re.test(t)) return; re.lastIndex=0;
+    const pow = n.nextSibling && n.nextSibling.nodeName==='SUP';   // Zehnerpotenz (10⁶) bleibt stehen
+    const s=document.createElement('span'); s.innerHTML=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(re,(m,a,num,off,str)=> num==='10' && ((pow && off+m.length===str.length) || /[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]/.test(str[off+m.length]||'')) ? m : a+'<span class="ueb-gap">…</span>');
+    n.replaceWith(...s.childNodes); });
+  return box.innerHTML;
+}
+function uebMaskStep(st, on){ const f=st.querySelector(':scope > .st-f'); if(!f) return;
+  if(on){ if(st.dataset.orig==null){ st.dataset.orig=f.innerHTML; f.innerHTML=uebMaskHTML(f.innerHTML); } }
+  else if(st.dataset.orig!=null){ f.innerHTML=st.dataset.orig; delete st.dataset.orig; } }
+function uebStepText(st){ const h=st.querySelector(':scope > .st-h'), f=st.querySelector(':scope > .st-f');
+  if(st.dataset.orig==null) return st.textContent; const d=document.createElement('div'); d.innerHTML=st.dataset.orig; return (h?h.textContent:'')+' '+d.textContent; }
 function cUebShow(sys){
   const card=document.getElementById('rw-'+sys); if(!card) return;
   const st=[...card.querySelectorAll('.rw-body > .st')], k=Math.min(C_REV[sys]||0, st.length);
-  st.forEach((e,i)=>e.classList.toggle('ueb-hid', C_UEB && i>=k));
+  st.forEach((e,i)=>{ const m=C_UEB && i>=k; e.classList.toggle('ueb-hid', m); uebMaskStep(e, m); const h=e.querySelector(':scope > .st-h');
+    if(h){ h.dataset.rev = m ? tr('uebRevStep') : ''; h.onclick = m ? ()=>{ C_REV[sys]=i+1; cUebShow(sys); } : null; } });
   const lab=card.querySelector('.ueb-cnt'); if(lab) lab.textContent=tr('uebCnt').replace('{}',k).replace('{}',st.length);
   const nx=card.querySelector('.ueb-next'); if(nx) nx.disabled = k>=st.length;
 }
@@ -5591,7 +5647,7 @@ function cUebCheck(sys){
   for(const m of tab.querySelectorAll('.results-grid .metric')){ const x=cUebNum(m.querySelector('.m-value')?.textContent); if(cUebHit(v,x)){ msg.className='ueb-msg ok';
     msg.innerHTML=tr('uebOkM').replace('{}',m.querySelector('.m-label').innerHTML).replace('{}',m.querySelector('.m-value').textContent+' '+(m.querySelector('.m-unit')?.textContent||'')); return; } }
   const st=[...card.querySelectorAll('.rw-body > .st')];
-  for(let i=0;i<st.length;i++){ const vals=st[i].textContent.replace(/−/g,'-').split(/[=≈]/).slice(1).map(p=>{ const m=p.trim().match(/^-?\d+(?:[.,]\d+)?/); return m?parseFloat(m[0].replace(',','.')):NaN; });
+  for(let i=0;i<st.length;i++){ const vals=uebStepText(st[i]).replace(/−/g,'-').split(/[=≈]/).slice(1).map(p=>{ const m=p.trim().match(/^-?\d+(?:[.,]\d+)?/); return m?parseFloat(m[0].replace(',','.')):NaN; });
     if(vals.some(x=>cUebHit(v,x))){ msg.className='ueb-msg ok'; msg.textContent=tr('uebOkS').replace('{}',i+1); return; } }
   msg.className='ueb-msg bad'; msg.textContent=tr('uebNo');
 }
@@ -5630,16 +5686,18 @@ function pickGroups(){
   const t = calcTranslations[calcLang]||calcTranslations.en;
   return [
     { key:'beams', name:ux('beams'), items:[['beam',t.tabs[0]],['cantilever',t.tabs[1]],['cont',t.tabs[2]]] },
-    { key:'frames', name:ux('frames'), items:[['frame:three',tr('presetThree')],['frame:two',tr('presetTwo')],['frame:fixed',tr('presetFixed')]] },
-    { key:'project', name:ux('project'), items:[['saved',tr('saved')]] } ];
+    { key:'frames', name:ux('frames'), items:[['frame:three',tr('presetThree')],['frame:two',tr('presetTwo')],['frame:fixed',tr('presetFixed')]] } ];   // „Meine Projekte“ nur noch über den Knopf oben (v0.8.33)
 }
 function pickCurrent(){ const tab=curTab(); return tab==='frame' ? 'frame:'+(framePresetNow()||'') : tab; }
 function updatePick(){
   if(!document.getElementById('pick-t')) return;
-  const cur=pickCurrent(), G=pickGroups(), g=G.find(g=>g.items.some(i=>i[0]===cur)) || (cur.startsWith('frame') ? G[1] : G[0]);
+  const cur=pickCurrent(), G=pickGroups();
+  if(cur==='saved'){ document.getElementById('pick-g').textContent=ux('project'); document.getElementById('pick-t').textContent=tr('saved'); placePick(); return; }
+  const g=G.find(g=>g.items.some(i=>i[0]===cur)) || (cur.startsWith('frame') ? G[1] : G[0]);
   const it=g.items.find(i=>i[0]===cur);
   document.getElementById('pick-g').textContent = g.name;
   document.getElementById('pick-t').textContent = it ? it[1] : ux('frame');
+  placePick();
 }
 function buildPick(){
   const cur=pickCurrent(), m=document.getElementById('pick-menu');
@@ -5650,6 +5708,14 @@ function buildPick(){
     m.querySelectorAll('.pick-group').forEach(x=>{ x.classList.toggle('open', x===g && o); x.querySelector('.pick-head').setAttribute('aria-expanded', x===g && o); }); });
   m.querySelectorAll('.pick-item').forEach(el=>el.onclick=e=>{ e.stopPropagation(); const [tab,preset]=el.dataset.k.split(':');
     showTab(tab); if(preset) applyFramePreset(preset); closePick(); updatePick(); liveCalc(true); });
+}
+// Auswahl wie in size (v0.8.33): am Rechner oben in der Eingabespalte, sonst über der Seite
+function placePick(){
+  const p=document.getElementById('pick'), nav=document.querySelector('.nav.calc-top'); if(!p || !nav || typeof matchMedia!=='function') return;
+  const cin = matchMedia('(min-width:1000px)').matches ? document.querySelector('#tab-'+curTab()+' .col-in') : null;
+  if(cin){ if(cin.firstElementChild!==p) cin.insertBefore(p, cin.firstChild); p.classList.add('in-col'); }
+  else if(p.parentElement!==nav){ nav.appendChild(p); p.classList.remove('in-col'); }
+  nav.classList.toggle('pick-out', !!cin);
 }
 function togglePick(e){ e && e.stopPropagation(); const p=document.getElementById('pick'), o=!p.classList.contains('open'); if(o) buildPick(); p.classList.toggle('open', o); }
 function closePick(){ document.getElementById('pick')?.classList.remove('open'); }
@@ -5678,7 +5744,8 @@ const LOAD_OPEN = new Set();
 const fmtV = v => { const n=parseFloat(String(v).replace(',','.')); return isFinite(n) ? String(+n.toFixed(3)).replace('.', calcLang==='en'?'.':',') : v; };
 function loadSummary(item){
   const F={}; item.querySelectorAll('.load-item-body .field').forEach(f=>{ const inp=f.querySelector('input,select'); if(!inp) return;
-    const lab=(f.querySelector('label')?.childNodes[0]?.textContent||'').trim(), unit=(f.querySelector('label .unit')?.textContent||'').trim();
+    const lb=f.querySelector('label'), lc=lb ? lb.cloneNode(true) : null; if(lc){ lc.querySelectorAll('.unit').forEach(x=>x.remove()); lc.querySelectorAll('sub').forEach(s=>s.replaceWith('_'+s.textContent)); }
+    const lab=(lc?.textContent||'').trim(), unit=(f.querySelector('label .unit')?.textContent||'').trim();   // Index (tiefgestellt) als „_“ lesen
     F[lab]={ v: inp.tagName==='SELECT' ? inp.options[inp.selectedIndex]?.text : inp.value, u:unit }; });
   const g=k=>F[k], txt=[];
   const from=g(tr('from')), to=g(tr('to'));
@@ -5780,7 +5847,7 @@ if(UX_ON) (()=>{ const orig=window.updatePresetButtons; if(orig) window.updatePr
   const it=e.target.closest('.load-item'); if(it){ const s=it.querySelector('.load-sum'); if(s) s.textContent=loadSummary(it); }
   liveCalc(); }));
 
-if(UX_ON){ buildCols(); compactLoads();
+if(UX_ON){ buildCols(); compactLoads(); if(typeof matchMedia==='function') matchMedia('(min-width:1000px)').addEventListener('change', placePick);
   ['tab-beam','tab-cantilever','tab-cont','tab-frame'].forEach(id=>cmpObs.observe(document.getElementById(id), {childList:true, subtree:true}));
   updatePick(); liveCalc(true); }
 // Direkt in einen Bereich springen, z. B. calc.html#saved (Link von der Startseite)

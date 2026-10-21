@@ -688,6 +688,7 @@ window.MULY_LANG = {
 "sumOk":"Toutes les vérifications satisfaites · taux de travail max. {0} %",
 "mobOk":"Toutes les vérifications satisfaites · max. {0} %",
 "mobOkS":"max. {0} %",
+"mobGov":"déterminant",
 "mlAdd":"Ajouter une couche",
 "mlDel":"Supprimer la couche",
 "mlPick":"Choisir un matériau",

@@ -688,6 +688,7 @@ window.MULY_LANG = {
 "sumOk":"Todas las comprobaciones cumplen · aprovechamiento máx. {0} %",
 "mobOk":"Todas las comprobaciones cumplen · máx. {0} %",
 "mobOkS":"máx. {0} %",
+"mobGov":"determinante",
 "mlAdd":"Añadir capa",
 "mlDel":"Eliminar capa",
 "mlPick":"Elegir material",

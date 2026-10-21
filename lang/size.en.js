@@ -700,6 +700,7 @@ window.MULY_LANG = {
 "sumOk":"All checks satisfied · max. utilisation {0} %",
 "mobOk":"All checks satisfied · max. {0} %",
 "mobOkS":"max. {0} %",
+"mobGov":"governs",
 "mlAdd":"Add layer",
 "mlDel":"Remove layer",
 "mlPick":"Choose a material",

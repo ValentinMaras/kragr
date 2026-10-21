@@ -1,0 +1,710 @@
+{
+"14-0": {
+"fr": "L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K&nbsp;&nbsp;&nbsp; L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>dalle</sub>)&nbsp;&nbsp; (DIN 4109-32)<br> Chape ciment sur isolant de bruit d'impact :&nbsp; ΔL<sub>w</sub> = 13 · lg(m′<sub>chape</sub>) − 14,2 · lg(s′) + 20,8 dB",
+"es": "L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K&nbsp;&nbsp;&nbsp; L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>forjado</sub>)&nbsp;&nbsp; (DIN 4109-32)<br> Recrecido de cemento sobre aislamiento a ruido de impacto:&nbsp; ΔL<sub>w</sub> = 13 · lg(m′<sub>recrecido</sub>) − 14,2 · lg(s′) + 20,8 dB"
+},
+"14-1": {
+"fr": "M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) avec m′<sub>⊥</sub> = élément séparatif · jonction en croix : K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · jonction en T : K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²",
+"es": "M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) con m′<sub>⊥</sub> = elemento separador · unión en cruz: K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · unión en T: K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²"
+},
+"14-2": {
+"fr": "Loi de masse : les éléments lourds isolent bien. Doubler la masse apporte environ 9 dB. Trous, prises électriques dos à dos et joints verticaux ouverts dégradent nettement le résultat.",
+"es": "Ley de masa: los elementos pesados aíslan bien. Duplicar la masa aporta unos 9 dB. Los huecos, los enchufes enfrentados y las juntas abiertas empeoran claramente el resultado."
+},
+"14-3": {
+"fr": "Augmentation de masse ≤ 5 % resp. 3 %",
+"es": "Aumento de masa ≤ 5 % o 3 %"
+},
+"14-4": {
+"fr": "Dalle massive avec chape flottante",
+"es": "Forjado macizo con recrecido flotante"
+},
+"14-5": {
+"fr": "Exigences minimales selon DIN 4109-1 (valeurs indicatives). Une isolation acoustique renforcée doit faire l'objet d'un accord contractuel.",
+"es": "Requisitos mínimos según DIN 4109-1 (valores orientativos). El aislamiento acústico reforzado debe acordarse contractualmente."
+},
+"14-6": {
+"fr": "Valeur minimale K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) avec S<sub>f</sub> = l<sub>f</sub> · profondeur du local",
+"es": "Valor mínimo K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) con S<sub>f</sub> = l<sub>f</sub> · profundidad del recinto"
+},
+"14-7": {
+"fr": "Protection thermique minimale DIN 4108-2 (mur extérieur): R = 4,79 ≥ 1,20 m²K/W ✓",
+"es": "Protección térmica mínima DIN 4108-2 (muro exterior): R = 4,79 ≥ 1,20 m²K/W ✓"
+},
+"14-8": {
+"fr": "Protection thermique minimale et loi sur les bâtiments économes en énergie (GEG)",
+"es": "Protección térmica mínima y Ley de Energía de Edificios (GEG)"
+},
+"14-9": {
+"fr": "Laine minérale WLS 032",
+"es": "Lana mineral WLS 032"
+},
+"14-10": {
+"fr": "Laine minérale WLS 035",
+"es": "Lana mineral WLS 035"
+},
+"14-11": {
+"fr": "Laine minérale WLS 035 : s<sub>d</sub> = 0,060 m",
+"es": "Lana mineral WLS 035: s<sub>d</sub> = 0,060 m"
+},
+"14-12": {
+"fr": "minutes",
+"es": "minutos"
+},
+"14-13": {
+"fr": "Bois résineux",
+"es": "Madera de conífera"
+},
+"14-14": {
+"fr": "Béton courant (non armé)",
+"es": "Hormigón normal (en masa)"
+},
+"14-15": {
+"fr": "Panneau OSB",
+"es": "Tablero OSB"
+},
+"14-16": {
+"fr": "Film PE 0,2 mm (s_d = 100 m)",
+"es": "Lámina de PE 0,2 mm (s_d = 100 m)"
+},
+"14-17": {
+"fr": "Niveaux et isolation acoustique",
+"es": "Niveles y aislamiento acústico"
+},
+"14-18": {
+"fr": "Brique rectifiée isolante (λ 0,09)",
+"es": "Ladrillo rectificado termoaislante (λ 0,09)"
+},
+"14-19": {
+"fr": "Béton cellulaire autoclavé RDK 0,35",
+"es": "Hormigón celular autoclavado RDK 0,35"
+},
+"14-20": {
+"fr": "R — capacité portante · E — étanchéité au feu (intégrité) · I — isolation thermique · M — sollicitation mécanique. Dimensionnement en situation d'incendie : bois voir carbonisation, béton armé par dimensions minimales (distance d'axe des armatures).",
+"es": "R — capacidad portante · E — integridad · I — aislamiento térmico · M — acción mecánica. Dimensionamiento en situación de incendio: madera véase carbonización, hormigón armado mediante dimensiones mínimas (distancia al eje de la armadura)."
+},
+"14-21": {
+"fr": "R<sub>w</sub> = 30,9 · lg(m′ / (1 kg/m²)) − 22,2 dB&nbsp;&nbsp;&nbsp; (DIN 4109-32, 65 ≤ m′ ≤ 720 kg/m²)&nbsp;&nbsp;&nbsp; m′ = Σ ρ<sub>i</sub> · d<sub>i</sub> enduit inclus",
+"es": "R<sub>w</sub> = 30,9 · lg(m′ / (1 kg/m²)) − 22,2 dB&nbsp;&nbsp;&nbsp; (DIN 4109-32, 65 ≤ m′ ≤ 720 kg/m²)&nbsp;&nbsp;&nbsp; m′ = Σ ρ<sub>i</sub> · d<sub>i</sub> incluido el revoco"
+},
+"14-22": {
+"fr": "Profondeur du local (pour K<sub>ij,min</sub>) [m]",
+"es": "Profundidad del recinto (para K<sub>ij,min</sub>) [m]"
+},
+"14-23": {
+"fr": "Règle : plus étanche à l'intérieur qu'à l'extérieur. Le frein-vapeur se place du côté chaud de l'isolant ; à l'extérieur, les couches doivent être perméables à la vapeur — sinon la vapeur s'accumule devant la couche extérieure froide.",
+"es": "Regla: más estanco en el interior que en el exterior. El freno de vapor va en el lado cálido del aislamiento; en el exterior las capas deben ser permeables al vapor; de lo contrario, el vapor se acumula ante la capa exterior fría."
+},
+"14-24": {
+"fr": "Fréquence de résonance :&nbsp; f<sub>0</sub> = 160 · √(s′ · (1/m′<sub>1</sub> + 1/m′<sub>2</sub>))&nbsp;&nbsp; [Hz]&nbsp;&nbsp;&nbsp; Objectif : f<sub>0</sub> ≤ 100 Hz (mieux ≤ 80 Hz)",
+"es": "Frecuencia de resonancia:&nbsp; f<sub>0</sub> = 160 · √(s′ · (1/m′<sub>1</sub> + 1/m′<sub>2</sub>))&nbsp;&nbsp; [Hz]&nbsp;&nbsp;&nbsp; Objetivo: f<sub>0</sub> ≤ 100 Hz (mejor ≤ 80 Hz)"
+},
+"14-25": {
+"fr": "Dalle brute m′ [kg/m²]",
+"es": "Forjado en bruto m′ [kg/m²]"
+},
+"14-26": {
+"fr": "R′<sub>w</sub> = −10 · lg( 10<sup>−R<sub>Dd,w</sub>/10</sup> + Σ<sub>F=f</sub> 10<sup>−R<sub>Ff,w</sub>/10</sup> + Σ<sub>f</sub> 10<sup>−R<sub>Df,w</sub>/10</sup> + Σ<sub>F</sub> 10<sup>−R<sub>Fd,w</sub>/10</sup> )<br> R<sub>ij,w</sub> = (R<sub>i,w</sub> + R<sub>j,w</sub>)/2 + ΔR<sub>ij,w</sub> + K<sub>ij</sub> + 10 · lg(S<sub>s</sub> / (l<sub>0</sub> · l<sub>f</sub>))&nbsp;&nbsp;&nbsp; l<sub>0</sub> = 1 m<br> Indice de réduction des vibrations des jonctions rigides, M = lg(m′<sub>⊥</sub>/m′<sub>i</sub>):&nbsp; jonction en croix K<sub>13</sub> = 8,7 + 17,1M + 5,7M², K<sub>12</sub> = 8,7 + 5,7M² · jonction en T K<sub>13</sub> = 5,7 + 14,1M + 5,7M², K<sub>12</sub> = 5,7 + 5,7M²<br> Vérification :&nbsp; R′<sub>w</sub> − u<sub>prog</sub> ≥ req. R′<sub>w</sub>&nbsp;&nbsp; avec u<sub>prog</sub> = 2 dB",
+"es": "R′<sub>w</sub> = −10 · lg( 10<sup>−R<sub>Dd,w</sub>/10</sup> + Σ<sub>F=f</sub> 10<sup>−R<sub>Ff,w</sub>/10</sup> + Σ<sub>f</sub> 10<sup>−R<sub>Df,w</sub>/10</sup> + Σ<sub>F</sub> 10<sup>−R<sub>Fd,w</sub>/10</sup> )<br> R<sub>ij,w</sub> = (R<sub>i,w</sub> + R<sub>j,w</sub>)/2 + ΔR<sub>ij,w</sub> + K<sub>ij</sub> + 10 · lg(S<sub>s</sub> / (l<sub>0</sub> · l<sub>f</sub>))&nbsp;&nbsp;&nbsp; l<sub>0</sub> = 1 m<br> Índice de reducción de vibraciones de uniones rígidas, M = lg(m′<sub>⊥</sub>/m′<sub>i</sub>):&nbsp; unión en cruz K<sub>13</sub> = 8,7 + 17,1M + 5,7M², K<sub>12</sub> = 8,7 + 5,7M² · unión en T K<sub>13</sub> = 5,7 + 14,1M + 5,7M², K<sub>12</sub> = 5,7 + 5,7M²<br> Comprobación:&nbsp; R′<sub>w</sub> − u<sub>prog</sub> ≥ nec. R′<sub>w</sub>&nbsp;&nbsp; con u<sub>prog</sub> = 2 dB"
+},
+"14-27": {
+"fr": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) sur 13 chemins = 57,7 dB",
+"es": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) por 13 vías = 57,7 dB"
+},
+"14-28": {
+"fr": "R′<sub>w</sub> − u<sub>prog</sub> = 57,7 − 2 = 55,7 dB ≥ req. R′<sub>w</sub> = 53 dB ✓",
+"es": "R′<sub>w</sub> − u<sub>prog</sub> = 57,7 − 2 = 55,7 dB ≥ nec. R′<sub>w</sub> = 53 dB ✓"
+},
+"14-29": {
+"fr": "Le bruit ne passe pas seulement directement à travers la cloison séparative (Dd), mais aussi par les éléments adjacents : le long du flanc (Ff) et par l'angle (Df, Fd). Trois chemins par flanc, soit douze pour quatre flancs.",
+"es": "El ruido no pasa solo directamente a través del tabique separador (Dd), sino también por los elementos contiguos: a lo largo del flanco (Ff) y por la esquina (Df, Fd). Tres vías por flanco, doce para cuatro flancos."
+},
+"14-30": {
+"fr": "Niveau de pression acoustique :&nbsp; L = 20 · lg(p / p<sub>0</sub>)&nbsp;&nbsp; (p<sub>0</sub> = 20 μPa)&nbsp;&nbsp;&nbsp; Addition :&nbsp; L<sub>tot</sub> = 10 · lg(Σ 10<sup>L<sub>i</sub>/10</sup>)<br> deux sources de même niveau : + 3 dB&nbsp;&nbsp;&nbsp; dix sources de même niveau : + 10 dB&nbsp;&nbsp;&nbsp; + 10 dB sont perçus comme « deux fois plus fort »<br> Indice d'affaiblissement acoustique :&nbsp; R = L<sub>1</sub> − L<sub>2</sub> + 10 · lg(S / A)&nbsp;&nbsp;&nbsp; R′ (avec apostrophe) : in situ, avec transmission latérale",
+"es": "Nivel de presión sonora:&nbsp; L = 20 · lg(p / p<sub>0</sub>)&nbsp;&nbsp; (p<sub>0</sub> = 20 μPa)&nbsp;&nbsp;&nbsp; Suma:&nbsp; L<sub>tot</sub> = 10 · lg(Σ 10<sup>L<sub>i</sub>/10</sup>)<br> dos fuentes de igual nivel: + 3 dB&nbsp;&nbsp;&nbsp; diez fuentes de igual nivel: + 10 dB&nbsp;&nbsp;&nbsp; + 10 dB se perciben como «el doble de fuerte»<br> Índice de reducción acústica:&nbsp; R = L<sub>1</sub> − L<sub>2</sub> + 10 · lg(S / A)&nbsp;&nbsp;&nbsp; R′ (con apóstrofo): en obra, con transmisión por flancos"
+},
+"14-31": {
+"fr": "Couche",
+"es": "Capa"
+},
+"14-32": {
+"fr": "Couche (intérieur → extérieur)",
+"es": "Capa (interior → exterior)"
+},
+"14-33": {
+"fr": "Couche 1 (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa 1 (interior → exterior): material / d [cm]"
+},
+"14-34": {
+"fr": "Couche 2 (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa 2 (interior → exterior): material / d [cm]"
+},
+"14-35": {
+"fr": "Couche 3 (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa 3 (interior → exterior): material / d [cm]"
+},
+"14-36": {
+"fr": "Couche 4 (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa 4 (interior → exterior): material / d [cm]"
+},
+"14-37": {
+"fr": "Couche 5 (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa 5 (interior → exterior): material / d [cm]"
+},
+"14-38": {
+"fr": "Couche 6 (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa 6 (interior → exterior): material / d [cm]"
+},
+"14-39": {
+"fr": "Moisissure : f<sub>Rsi</sub> = 1 − U · 0,25 = 0,950 ≥ 0,70 ✓ (zone courante, R<sub>si</sub> = 0,25)",
+"es": "Moho: f<sub>Rsi</sub> = 1 − U · 0,25 = 0,950 ≥ 0,70 ✓ (zona no perturbada, R<sub>si</sub> = 0,25)"
+},
+"14-40": {
+"fr": "Protection contre le bruit extérieur",
+"es": "Protección contra el ruido exterior"
+},
+"14-41": {
+"fr": "Local d'émission",
+"es": "Recinto emisor"
+},
+"14-42": {
+"fr": "Emplacement",
+"es": "Ubicación"
+},
+"14-43": {
+"fr": "Pression de vapeur saturante (DIN 4108-3):&nbsp; p<sub>s</sub> = 610,5 · e<sup>17,269 · θ / (237,3 + θ)</sup>&nbsp; (θ ≥ 0 °C)&nbsp;&nbsp;&nbsp; p<sub>s</sub> = 610,5 · e<sup>21,875 · θ / (265,5 + θ)</sup>&nbsp; (θ &lt; 0 °C)<br> Pression partielle de vapeur d'eau :&nbsp; p = φ · p<sub>s</sub>(θ)&nbsp;&nbsp;&nbsp; Point de rosée θ<sub>s</sub> : température pour laquelle p<sub>s</sub>(θ<sub>s</sub>) = p",
+"es": "Presión de vapor saturante (DIN 4108-3):&nbsp; p<sub>s</sub> = 610,5 · e<sup>17,269 · θ / (237,3 + θ)</sup>&nbsp; (θ ≥ 0 °C)&nbsp;&nbsp;&nbsp; p<sub>s</sub> = 610,5 · e<sup>21,875 · θ / (265,5 + θ)</sup>&nbsp; (θ &lt; 0 °C)<br> Presión parcial de vapor de agua:&nbsp; p = φ · p<sub>s</sub>(θ)&nbsp;&nbsp;&nbsp; Punto de rocío θ<sub>s</sub>: temperatura a la que p<sub>s</sub>(θ<sub>s</sub>) = p"
+},
+"14-44": {
+"fr": "Point de rosée et température de surface",
+"es": "Punto de rocío y temperatura superficial"
+},
+"14-45": {
+"fr": "Condensation",
+"es": "Condensación"
+},
+"14-46": {
+"fr": "Condensation dans l'élément — méthode de Glaser (DIN 4108-3)",
+"es": "Condensación en el elemento — método de Glaser (DIN 4108-3)"
+},
+"14-47": {
+"fr": "Masse de condensat m<sub>W,T</sub>",
+"es": "Masa de condensado m<sub>W,T</sub>"
+},
+"14-48": {
+"fr": "Facteur de température :&nbsp; f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) ≥ 0,70&nbsp;&nbsp;&nbsp; (θ<sub>i</sub> = 20 °C, θ<sub>e</sub> = −5 °C → θ<sub>si</sub> ≥ 12,6 °C)<br> Majoration pour ponts thermiques (GEG) :&nbsp; ΔU<sub>WB</sub> = 0,10 W/(m²K) forfaitaire · 0,05 selon DIN 4108 Beiblatt 2 (catégorie A) · 0,03 (catégorie B) · sinon vérification détaillée avec les valeurs ψ",
+"es": "Factor de temperatura:&nbsp; f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) ≥ 0,70&nbsp;&nbsp;&nbsp; (θ<sub>i</sub> = 20 °C, θ<sub>e</sub> = −5 °C → θ<sub>si</sub> ≥ 12,6 °C)<br> Suplemento por puentes térmicos (GEG):&nbsp; ΔU<sub>WB</sub> = 0,10 W/(m²K) a tanto alzado · 0,05 según DIN 4108 Beiblatt 2 (categoría A) · 0,03 (categoría B) · en otro caso, comprobación detallada con valores ψ"
+},
+"14-49": {
+"fr": "Élément séparatif m′ = 504 kg/m², S = 10,4 m²",
+"es": "Elemento separador m′ = 504 kg/m², S = 10,4 m²"
+},
+"14-50": {
+"fr": "Élément séparatif m′ [kg/m²]",
+"es": "Elemento separador m′ [kg/m²]"
+},
+"14-51": {
+"fr": "Surface séparative S<sub>s</sub> [m²]",
+"es": "Superficie de separación S<sub>s</sub> [m²]"
+},
+"14-52": {
+"fr": "Cloison séparative D/d, flancs F (local d'émission) et f (local de réception)",
+"es": "Tabique separador D/d, flancos F (recinto emisor) y f (recinto receptor)"
+},
+"14-53": {
+"fr": "Cloison séparative à quatre flancs",
+"es": "Tabique separador con cuatro flancos"
+},
+"14-54": {
+"fr": "Bruit d'impact — dalle massive avec chape flottante",
+"es": "Ruido de impacto — forjado macizo con recrecido flotante"
+},
+"14-55": {
+"fr": "Isolant de bruit d'impact s′ [MN/m³]",
+"es": "Aislamiento a ruido de impacto s′ [MN/m³]"
+},
+"14-56": {
+"fr": "U GEG bâtiment de référence [W/(m²K)]",
+"es": "U GEG edificio de referencia [W/(m²K)]"
+},
+"14-57": {
+"fr": "U GEG modification de l'existant [W/(m²K)]",
+"es": "U GEG reforma en edificio existente [W/(m²K)]"
+},
+"14-58": {
+"fr": "Coefficient U du mur extérieur [W/(m²K)] (facultatif)",
+"es": "Transmitancia U del muro exterior [W/(m²K)] (opcional)"
+},
+"14-59": {
+"fr": "Calculer le coefficient U et le profil de température",
+"es": "Calcular la transmitancia U y el perfil de temperatura"
+},
+"14-60": {
+"fr": "Amélioration ΔR<sub>Dd</sub> (contre-cloison) [dB]",
+"es": "Mejora ΔR<sub>Dd</sub> (trasdosado) [dB]"
+},
+"14-61": {
+"fr": "Brique pleine RDK 1,8",
+"es": "Ladrillo macizo RDK 1,8"
+},
+"14-62": {
+"fr": "À l'horizontale, la résistance à la diffusion s<sub>d</sub> : les couches étanches (films) deviennent larges. Rouge : pression de vapeur saturante, bleu : pression de vapeur — si la ligne bleue touche la rouge, il y a condensation.",
+"es": "En horizontal, la resistencia a la difusión s<sub>d</sub>: las capas estancas (láminas) se ensanchan. Rojo: presión de vapor saturante, azul: presión de vapor; si la línea azul toca la roja, se produce condensación."
+},
+"14-63": {
+"fr": "L'air chaud peut contenir plus de vapeur d'eau. S'il se refroidit au contact d'une surface froide, l'humidité relative augmente — à 100 %, il y a condensation.",
+"es": "El aire cálido puede contener más vapor de agua. Si se enfría en una superficie fría, la humedad relativa aumenta; al llegar al 100 % se produce condensación."
+},
+"14-64": {
+"fr": "Ponts thermiques et moisissures",
+"es": "Puentes térmicos y moho"
+},
+"14-65": {
+"fr": "Résistance thermique d'une couche :&nbsp; R = d / λ&nbsp;&nbsp; [m²K/W]<br> Résistance thermique totale :&nbsp; R<sub>T</sub> = R<sub>si</sub> + Σ d<sub>i</sub>/λ<sub>i</sub> + R<sub>se</sub>&nbsp;&nbsp;&nbsp; U = 1 / R<sub>T</sub>&nbsp;&nbsp; [W/(m²K)]<br> Densité de flux thermique :&nbsp; q = U · (θ<sub>i</sub> − θ<sub>e</sub>)&nbsp;&nbsp;&nbsp; Chute de température par couche :&nbsp; Δθ<sub>j</sub> = q · R<sub>j</sub><br> Déperdition thermique par transmission :&nbsp; H<sub>T</sub> = Σ U<sub>i</sub> · A<sub>i</sub> + ΔU<sub>WB</sub> · ΣA&nbsp;&nbsp; [W/K]",
+"es": "Resistencia térmica de una capa:&nbsp; R = d / λ&nbsp;&nbsp; [m²K/W]<br> Resistencia térmica total:&nbsp; R<sub>T</sub> = R<sub>si</sub> + Σ d<sub>i</sub>/λ<sub>i</sub> + R<sub>se</sub>&nbsp;&nbsp;&nbsp; U = 1 / R<sub>T</sub>&nbsp;&nbsp; [W/(m²K)]<br> Densidad de flujo térmico:&nbsp; q = U · (θ<sub>i</sub> − θ<sub>e</sub>)&nbsp;&nbsp;&nbsp; Salto de temperatura por capa:&nbsp; Δθ<sub>j</sub> = q · R<sub>j</sub><br> Pérdida de calor por transmisión:&nbsp; H<sub>T</sub> = Σ U<sub>i</sub> · A<sub>i</sub> + ΔU<sub>WB</sub> · ΣA&nbsp;&nbsp; [W/K]"
+},
+"14-66": {
+"fr": "Conduction thermique à travers un élément",
+"es": "Conducción de calor a través de un elemento"
+},
+"14-67": {
+"fr": "Cellulose WLS 040",
+"es": "Celulosa WLS 040"
+},
+"14-68": {
+"fr": "Chape ciment",
+"es": "Recrecido de cemento"
+},
+"14-69": {
+"fr": "Complément s1–s3 : production de fumée · d0–d2 : gouttelettes enflammées.",
+"es": "Adicional s1–s3: producción de humo · d0–d2: gotas o partículas en llamas."
+},
+"14-70": {
+"fr": "Éléments à double paroi et contre-cloisons",
+"es": "Elementos de doble hoja y trasdosados"
+},
+"14-71": {
+"fr": "Élément à double paroi / contre-cloison",
+"es": "Elemento de doble hoja / trasdosado"
+},
+"14-72": {
+"fr": "extérieur (air)",
+"es": "exterior (aire)"
+},
+"14-73": {
+"fr": "bois traité, panneaux légers de laine de bois",
+"es": "madera tratada, paneles ligeros de lana de madera"
+},
+"14-74": {
+"fr": "épaisseur d'air équivalente à la diffusion :&nbsp; s<sub>d</sub> = μ · d&nbsp;&nbsp; [m]<br> Densité de flux de diffusion :&nbsp; g = Δp / (1,5 · 10⁶ · s<sub>d</sub>)&nbsp;&nbsp; [kg/(m²h)]<br> Quantité de condensat :&nbsp; m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>) · t<sub>T</sub>&nbsp;&nbsp;&nbsp; Évaporation :&nbsp; m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>) · t<sub>V</sub>",
+"es": "espesor de aire equivalente a la difusión:&nbsp; s<sub>d</sub> = μ · d&nbsp;&nbsp; [m]<br> Densidad de flujo de difusión:&nbsp; g = Δp / (1,5 · 10⁶ · s<sub>d</sub>)&nbsp;&nbsp; [kg/(m²h)]<br> Cantidad de condensado:&nbsp; m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>) · t<sub>T</sub>&nbsp;&nbsp;&nbsp; Evaporación:&nbsp; m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>) · t<sub>V</sub>"
+},
+"14-75": {
+"fr": "masse doublée → + 9,3 dB",
+"es": "masa doble → + 9,3 dB"
+},
+"14-76": {
+"fr": "rigidité dynamique s′ [MN/m³]",
+"es": "rigidez dinámica s′ [MN/m³]"
+},
+"14-77": {
+"fr": "req. R′<sub>w,tot</sub> = L<sub>a</sub> − K<sub>type de local</sub>&nbsp;&nbsp; ≥ 30 dB<br> K<sub>type de local</sub> = 30 dB (pièces de séjour des logements, salles de classe) · 35 dB (bureaux) · 25 dB (chambres de patients en hôpital)",
+"es": "nec. R′<sub>w,tot</sub> = L<sub>a</sub> − K<sub>tipo de recinto</sub>&nbsp;&nbsp; ≥ 30 dB<br> K<sub>tipo de recinto</sub> = 30 dB (estancias en viviendas, aulas) · 35 dB (oficinas) · 25 dB (habitaciones de hospitalización)"
+},
+"14-78": {
+"fr": "req. R′<sub>w</sub> [dB]",
+"es": "nec. R′<sub>w</sub> [dB]"
+},
+"14-79": {
+"fr": "req. R′<sub>w</sub> ≥ 53 dB · R<sub>w</sub> − req = 8,3 dB de réserve pour la transmission latérale (R′<sub>w</sub> &lt; R<sub>w</sub>) et la marge de sécurité u<sub>prog</sub> = 2 dB — suffit en général",
+"es": "nec. R′<sub>w</sub> ≥ 53 dB · R<sub>w</sub> − nec = 8,3 dB de reserva para la transmisión por flancos (R′<sub>w</sub> &lt; R<sub>w</sub>) y el margen de seguridad u<sub>prog</sub> = 2 dB; suele bastar"
+},
+"14-80": {
+"fr": "résistant au feu 90 min / résistant au feu 90 min",
+"es": "resistente al fuego 90 min / resistente al fuego 90 min"
+},
+"14-81": {
+"fr": "résistant au feu 30 min / résistant au feu 90 min",
+"es": "resistente al fuego 30 min / resistente al fuego 90 min"
+},
+"14-82": {
+"fr": "résistant au feu 30 min ≈ F 30 / R 30 · résistant au feu 60 min ≈ F 60 / R 60 · résistant au feu 90 min ≈ F 90 / R 90 (tenir compte du code du bâtiment du Land)",
+"es": "resistente al fuego 30 min ≈ F 30 / R 30 · resistente al fuego 60 min ≈ F 60 / R 60 · resistente al fuego 90 min ≈ F 90 / R 90 (tener en cuenta la normativa de edificación del Land)"
+},
+"14-83": {
+"fr": "f₀ &gt; 100 Hz : la résonance tombe dans le domaine audible à partir de 100 Hz — isolant plus souple (s′ plus petit) ou paroi plus lourde",
+"es": "f₀ &gt; 100 Hz: la resonancia cae en el rango audible a partir de 100 Hz; aislamiento más blando (s′ menor) u hoja más pesada"
+},
+"14-84": {
+"fr": "h = niveau supérieur du plancher du dernier étage comportant une pièce de séjour, au-dessus de la surface du terrain en moyenne. Le code du bâtiment du Land fait foi.",
+"es": "h = cota superior del suelo de la planta más alta con estancia habitable sobre la superficie del terreno, en promedio. Rige la normativa de edificación del Land."
+},
+"14-85": {
+"fr": "h ≤ 7 m, mais plus d'unités ou de surface → GK 3",
+"es": "h ≤ 7 m, pero más unidades o superficie → GK 3"
+},
+"14-86": {
+"fr": "résistant au feu 60 min / résistant au feu 90 min",
+"es": "resistente al fuego 60 min / resistente al fuego 90 min"
+},
+"14-87": {
+"fr": "intérieur (air)",
+"es": "interior (aire)"
+},
+"14-88": {
+"fr": "intérieur 20 °C / 50 % → p<sub>i</sub> = 1168 Pa · extérieur −5 °C / 80 % → p<sub>e</sub> = 321 Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h",
+"es": "interior 20 °C / 50 % → p<sub>i</sub> = 1168 Pa · exterior −5 °C / 80 % → p<sub>e</sub> = 321 Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h"
+},
+"14-89": {
+"fr": "plus la dalle est lourde par rapport aux murs, plus le bruit d'impact passe par les murs ; K ≥ 0",
+"es": "cuanto más pesado es el forjado respecto a los muros, más ruido de impacto se transmite por los muros; K ≥ 0"
+},
+"14-90": {
+"fr": "chaque couche : Δθ = q · R<sub>i</sub> — la température chute le plus là où la résistance est grande (isolant)",
+"es": "cada capa: Δθ = q · R<sub>i</sub>; la temperatura cae más donde la resistencia es grande (aislamiento)"
+},
+"14-91": {
+"fr": "aucune exigence / résistant au feu 30 min",
+"es": "sin requisito / resistente al fuego 30 min"
+},
+"14-92": {
+"fr": "m<sub>W,T</sub> &gt; m<sub>W,V</sub> = 3,055 kg/m² ✗ l'humidité s'accumule",
+"es": "m<sub>W,T</sub> &gt; m<sub>W,V</sub> = 3,055 kg/m² ✗ la humedad se acumula"
+},
+"14-93": {
+"fr": "m<sub>W,T</sub> = 5,919 &gt; 1,0 kg/m² ✗ (0,5 kg/m² aux interfaces non absorbantes ; bois : augmentation de masse ≤ 5 %)",
+"es": "m<sub>W,T</sub> = 5,919 &gt; 1,0 kg/m² ✗ (0,5 kg/m² en interfaces no absorbentes; madera: aumento de masa ≤ 5 %)"
+},
+"14-94": {
+"fr": "masse moyenne des murs latéraux m′<sub>f,m</sub> [kg/m²] (0 = K saisi à la main)",
+"es": "masa media de los muros de flanco m′<sub>f,m</sub> [kg/m²] (0 = K manual)"
+},
+"14-95": {
+"fr": "m′<sub>chape</sub> = ρ · d = 2.000 · 0,050 = 100,0 kg/m²",
+"es": "m′<sub>recrecido</sub> = ρ · d = 2.000 · 0,050 = 100,0 kg/m²"
+},
+"14-96": {
+"fr": "étages hors sol : résistant au feu 30 min · sous-sol : résistant au feu 90 min",
+"es": "plantas sobre rasante: resistente al fuego 30 min · sótano: resistente al fuego 90 min"
+},
+"14-97": {
+"fr": "sans vérification",
+"es": "sin comprobación"
+},
+"14-98": {
+"fr": "p<sub>s</sub> resp. p [Pa]",
+"es": "p<sub>s</sub> o p [Pa]"
+},
+"14-99": {
+"fr": "humidité relative φ [%]",
+"es": "humedad relativa φ [%]"
+},
+"14-100": {
+"fr": "autres (jusqu'à la limite des immeubles de grande hauteur de 22 m)",
+"es": "otros (hasta el límite de edificio de gran altura de 22 m)"
+},
+"14-101": {
+"fr": "s′ — rigidité dynamique de la couche intermédiaire [MN/m³] · m′<sub>1</sub>, m′<sub>2</sub> — masses surfaciques des parois [kg/m²]. En dessous de f<sub>0</sub>, les deux parois vibrent ensemble ; au-dessus, la séparation agit.",
+"es": "s′ — rigidez dinámica de la capa intermedia [MN/m³] · m′<sub>1</sub>, m′<sub>2</sub> — masas por unidad de superficie de las hojas [kg/m²]. Por debajo de f<sub>0</sub> ambas hojas vibran juntas; por encima actúa la separación."
+},
+"14-102": {
+"fr": "éléments porteurs (hors sol / sous-sol)",
+"es": "elementos portantes (sobre rasante / sótano)"
+},
+"14-103": {
+"fr": "papier non traité — inadmissible en construction",
+"es": "papel sin tratar — no admisible en construcción"
+},
+"14-104": {
+"fr": "adm. L′<sub>n,w</sub> = 50 dB: 44,7 ≤ 50 ✓ — pour le bruit d'impact, plus petit est meilleur",
+"es": "adm. L′<sub>n,w</sub> = 50 dB: 44,7 ≤ 50 ✓ — para el ruido de impacto, cuanto menor, mejor"
+},
+"14-105": {
+"fr": "adm. L′<sub>n,w</sub> [dB]",
+"es": "adm. L′<sub>n,w</sub> [dB]"
+},
+"14-106": {
+"fr": "Chemins de transmission Dd, Ff, Df, Fd pour un flanc",
+"es": "Vías de transmisión Dd, Ff, Df, Fd en un flanco"
+},
+"14-107": {
+"fr": "au-dessus du point de rosée ✓ · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = 0,700 ≥ 0,70 ✓",
+"es": "por encima del punto de rocío ✓ · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = 0,700 ≥ 0,70 ✓"
+},
+"14-108": {
+"fr": "λ — conductivité thermique (valeur de calcul) · R<sub>si</sub>, R<sub>se</sub> — résistances superficielles intérieure et extérieure (couche d'air à la surface)",
+"es": "λ — conductividad térmica (valor de cálculo) · R<sub>si</sub>, R<sub>se</sub> — resistencias superficiales interior y exterior (capa de aire en la superficie)"
+},
+"14-109": {
+"fr": "≤ 1,0 kg/m² (≤ 0,5 kg/m² pour les couches non capillaires, incapables d'absorber l'eau)",
+"es": "≤ 1,0 kg/m² (≤ 0,5 kg/m² en capas sin capacidad de absorción de agua por capilaridad)"
+},
+"14-110": {
+"fr": "Couche {} (intérieur → extérieur) : matériau / d [cm]",
+"es": "Capa {} (interior → exterior): material / d [cm]"
+},
+"14-111": {
+"fr": "<div class=\"calc-field\"><label>Température intérieure θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"uw-ti\" value=\"20\" step=\"any\" oninput=\"updateUW()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura interior θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"uw-ti\" value=\"20\" step=\"any\" oninput=\"updateUW()\"></div>"
+},
+"14-112": {
+"fr": "<div class=\"calc-field\"><label>Température extérieure θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"uw-te\" value=\"-5\" step=\"any\" oninput=\"updateUW()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura exterior θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"uw-te\" value=\"-5\" step=\"any\" oninput=\"updateUW()\"></div>"
+},
+"14-113": {
+"fr": "§Résistance thermique totale",
+"es": "§Resistencia térmica total"
+},
+"14-114": {
+"fr": "§Coefficient de transmission thermique",
+"es": "§Transmitancia térmica"
+},
+"14-115": {
+"fr": "§Flux thermique et températures",
+"es": "§Flujo de calor y temperaturas"
+},
+"14-116": {
+"fr": "!chaque couche : Δθ = q · R<sub>i</sub> — la température chute le plus là où la résistance est grande (isolant)",
+"es": "!cada capa: Δθ = q · R<sub>i</sub>; la temperatura cae más donde la resistencia es grande (aislamiento)"
+},
+"14-117": {
+"fr": "§Exigences (valeurs indicatives)",
+"es": "§Requisitos (valores orientativos)"
+},
+"14-118": {
+"fr": "!Protection thermique minimale DIN 4108-2 ({}) : R = {} {} {} m²K/W {}",
+"es": "!Protección térmica mínima DIN 4108-2 ({}): R = {} {} {} m²K/W {}"
+},
+"14-119": {
+"fr": "!GEG bâtiment de référence (neuf) : U = {} {} {} W/(m²K) {} · élément renouvelé dans l'existant : {} {} {}",
+"es": "!GEG edificio de referencia (nueva construcción): U = {} {} {} W/(m²K) {} · elemento renovado en edificio existente: {} {} {}"
+},
+"14-120": {
+"fr": "!Moisissure : f<sub>Rsi</sub> = 1 − U · 0,25 = {} {} 0,70 {} (zone courante, R<sub>si</sub> = 0,25)",
+"es": "!Moho: f<sub>Rsi</sub> = 1 − U · 0,25 = {} {} 0,70 {} (zona no perturbada, R<sub>si</sub> = 0,25)"
+},
+"14-121": {
+"fr": "<div class=\"calc-field\"><label>Température de l'air θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"tp-t\" value=\"20\" step=\"any\" oninput=\"updateTP()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura del aire θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"tp-t\" value=\"20\" step=\"any\" oninput=\"updateTP()\"></div>"
+},
+"14-122": {
+"fr": "<div class=\"calc-field\"><label>humidité relative φ [%]</label><input type=\"number\" id=\"tp-phi\" value=\"50\" step=\"any\" oninput=\"updateTP()\"></div>",
+"es": "<div class=\"calc-field\"><label>humedad relativa φ [%]</label><input type=\"number\" id=\"tp-phi\" value=\"50\" step=\"any\" oninput=\"updateTP()\"></div>"
+},
+"14-123": {
+"fr": "<div class=\"calc-field\"><label>Coefficient U du mur extérieur [W/(m²K)] (facultatif)</label><input type=\"number\" id=\"tp-U\" value=\"1.2\" step=\"any\" oninput=\"updateTP()\"></div>",
+"es": "<div class=\"calc-field\"><label>Transmitancia U del muro exterior [W/(m²K)] (opcional)</label><input type=\"number\" id=\"tp-U\" value=\"1.2\" step=\"any\" oninput=\"updateTP()\"></div>"
+},
+"14-124": {
+"fr": "<div class=\"calc-field\"><label>Température extérieure θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"tp-te\" value=\"-5\" step=\"any\" oninput=\"updateTP()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura exterior θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"tp-te\" value=\"-5\" step=\"any\" oninput=\"updateTP()\"></div>"
+},
+"14-125": {
+"fr": "§Pression de vapeur saturante (formule de Magnus)",
+"es": "§Presión de vapor saturante (fórmula de Magnus)"
+},
+"14-126": {
+"fr": "§Pression de vapeur de l'air",
+"es": "§Presión de vapor del aire"
+},
+"14-127": {
+"fr": "!Toute surface plus froide que {} °C devient humide (condensation). Les moisissures menacent dès 80 % d'humidité en surface : θ ≤ {} °C",
+"es": "!Toda superficie más fría que {} °C se moja (condensación). El moho amenaza ya a partir del 80 % de humedad en la superficie: θ ≤ {} °C"
+},
+"14-128": {
+"fr": "§Surface intérieure d'un élément (R<sub>si</sub> = 0,25)",
+"es": "§Superficie interior de un elemento (R<sub>si</sub> = 0,25)"
+},
+"14-129": {
+"fr": "!{} le point de rosée {} · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = {} {}",
+"es": "!{} el punto de rocío {} · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = {} {}"
+},
+"14-130": {
+"fr": "Air {} °C, {} %",
+"es": "Aire {} °C, {} %"
+},
+"14-131": {
+"fr": "Interface {}/{}",
+"es": "Límite {}/{}"
+},
+"14-132": {
+"fr": "§Conditions aux limites, période de condensation (DIN 4108-3)",
+"es": "§Condiciones de contorno, periodo de condensación (DIN 4108-3)"
+},
+"14-133": {
+"fr": "!intérieur 20 °C / 50 % → p<sub>i</sub> = {} Pa · extérieur −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h",
+"es": "!interior 20 °C / 50 % → p<sub>i</sub> = {} Pa · exterior −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h"
+},
+"14-134": {
+"fr": "à l'interface {}/{} (s<sub>d</sub> = {} m)",
+"es": "en el límite {}/{} (s<sub>d</sub> = {} m)"
+},
+"14-135": {
+"fr": "!La ligne de pression de vapeur touche p<sub>s</sub> {}",
+"es": "!La línea de presión de vapor toca p<sub>s</sub> {}"
+},
+"14-136": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 0,160 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 0,160 m)"
+},
+"14-140": {
+"fr": "à l'interface 1/2 (s<sub>d</sub> = 0,060 m)",
+"es": "en el límite 1/2 (s<sub>d</sub> = 0,060 m)"
+},
+"14-141": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 0,185 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 0,185 m)"
+},
+"14-142": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 0,310 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 0,310 m)"
+},
+"14-143": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 0,435 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 0,435 m)"
+},
+"14-144": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 1,310 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 1,310 m)"
+},
+"14-145": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 0,248 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 0,248 m)"
+},
+"14-146": {
+"fr": "à l'interface 1/2 (s<sub>d</sub> = 0,100 m)",
+"es": "en el límite 1/2 (s<sub>d</sub> = 0,100 m)"
+},
+"14-151": {
+"fr": "à l'interface 2/3 (s<sub>d</sub> = 0,700 m)",
+"es": "en el límite 2/3 (s<sub>d</sub> = 0,700 m)"
+},
+"14-137": {
+"fr": "§Période d'évaporation (intérieur 20 °C / 50 %, extérieur 12 °C / 70 %, 2160 h)",
+"es": "§Periodo de evaporación (interior 20 °C / 50 %, exterior 12 °C / 70 %, 2160 h)"
+},
+"14-138": {
+"fr": "!m<sub>W,T</sub> = {} {} 1,0 kg/m² {} (0,5 kg/m² aux interfaces non absorbantes ; bois : augmentation de masse ≤ 5 %)",
+"es": "!m<sub>W,T</sub> = {} {} 1,0 kg/m² {} (0,5 kg/m² en interfaces no absorbentes; madera: aumento de masa ≤ 5 %)"
+},
+"14-139": {
+"fr": "✗ l'humidité s'accumule",
+"es": "✗ la humedad se acumula"
+},
+"14-147": {
+"fr": "✓ sèche à nouveau en été",
+"es": "✓ se seca de nuevo en verano"
+},
+"14-148": {
+"fr": "n (plage)",
+"es": "n (rango)"
+},
+"14-149": {
+"fr": "entre s<sub>d</sub> = {} et {} m",
+"es": "entre s<sub>d</sub> = {} y {} m"
+},
+"14-150": {
+"fr": "entre s<sub>d</sub> = 0,100 et 0,700 m",
+"es": "entre s<sub>d</sub> = 0,100 y 0,700 m"
+},
+"14-152": {
+"fr": "!La droite de p<sub>i</sub> à p<sub>e</sub> reste partout sous p<sub>s</sub> → pas de condensation dans l'élément ✓",
+"es": "!La recta de p<sub>i</sub> a p<sub>e</sub> queda en todo punto por debajo de p<sub>s</sub> → sin condensación en el elemento ✓"
+},
+"14-153": {
+"fr": "<div class=\"calc-field\"><label>rigidité dynamique s′ [MN/m³]</label><input type=\"number\" id=\"ls-sp\" value=\"10\" step=\"any\" oninput=\"updateLS()\"></div>",
+"es": "<div class=\"calc-field\"><label>rigidez dinámica s′ [MN/m³]</label><input type=\"number\" id=\"ls-sp\" value=\"10\" step=\"any\" oninput=\"updateLS()\"></div>"
+},
+"14-154": {
+"fr": "§Masse surfacique",
+"es": "§Masa por unidad de superficie"
+},
+"14-155": {
+"fr": "§Indice d'affaiblissement acoustique pondéré (DIN 4109-32, loi de masse)",
+"es": "§Índice de reducción acústica ponderado (DIN 4109-32, ley de masa)"
+},
+"14-156": {
+"fr": "!masse doublée → + 9,3 dB",
+"es": "!masa doble → + 9,3 dB"
+},
+"14-157": {
+"fr": "§Comparaison avec l'exigence ({})",
+"es": "§Comparación con el requisito ({})"
+},
+"14-158": {
+"fr": "— suffit en général",
+"es": "— suele bastar"
+},
+"14-159": {
+"fr": "!req. R′<sub>w</sub> ≥ {} dB · R<sub>w</sub> − req = {} dB de réserve pour la transmission latérale (R′<sub>w</sub> < R<sub>w</sub>) et la marge de sécurité u<sub>prog</sub> = 2 dB {}",
+"es": "!nec. R′<sub>w</sub> ≥ {} dB · R<sub>w</sub> − nec = {} dB de reserva para la transmisión por flancos (R′<sub>w</sub> < R<sub>w</sub>) y el margen de seguridad u<sub>prog</sub> = 2 dB {}"
+},
+"14-160": {
+"fr": "f₀ > 100 Hz : la résonance tombe dans le domaine audible à partir de 100 Hz — isolant plus souple (s′ plus petit) ou paroi plus lourde",
+"es": "f₀ > 100 Hz: la resonancia cae en el rango audible a partir de 100 Hz; aislamiento más blando (s′ menor) u hoja más pesada"
+},
+"14-161": {
+"fr": "Veuillez saisir au moins une couche.",
+"es": "Introduzca al menos una capa."
+},
+"14-162": {
+"fr": "— ne suffit pas",
+"es": "— no basta"
+},
+"14-163": {
+"fr": "Flanc {} : {} — m′ [kg/m²] / l<sub>f</sub> [m] / jonction",
+"es": "Flanco {}: {} — m′ [kg/m²] / l<sub>f</sub> [m] / unión"
+},
+"14-164": {
+"fr": "<div class=\"calc-field\"><label>Élément séparatif m′ [kg/m²]</label><input type=\"number\" id=\"fl-mD\" value=\"504\" step=\"any\" oninput=\"updateFL()\"></div>",
+"es": "<div class=\"calc-field\"><label>Elemento separador m′ [kg/m²]</label><input type=\"number\" id=\"fl-mD\" value=\"504\" step=\"any\" oninput=\"updateFL()\"></div>"
+},
+"14-165": {
+"fr": "<div class=\"calc-field\"><label>Surface séparative S<sub>s</sub> [m²]</label><input type=\"number\" id=\"fl-S\" value=\"10.4\" step=\"any\" oninput=\"updateFL()\"></div>",
+"es": "<div class=\"calc-field\"><label>Superficie de separación S<sub>s</sub> [m²]</label><input type=\"number\" id=\"fl-S\" value=\"10.4\" step=\"any\" oninput=\"updateFL()\"></div>"
+},
+"14-166": {
+"fr": "<div class=\"calc-field\"><label>Profondeur du local (pour K<sub>ij,min</sub>) [m]</label><input type=\"number\" id=\"fl-d\" value=\"4.5\" step=\"any\" oninput=\"updateFL()\"></div>",
+"es": "<div class=\"calc-field\"><label>Profundidad del recinto (para K<sub>ij,min</sub>) [m]</label><input type=\"number\" id=\"fl-d\" value=\"4.5\" step=\"any\" oninput=\"updateFL()\"></div>"
+},
+"14-167": {
+"fr": "<div class=\"calc-field\"><label>Amélioration ΔR<sub>Dd</sub> (contre-cloison) [dB]</label><input type=\"number\" id=\"fl-dR\" value=\"0\" step=\"any\" oninput=\"updateFL()\"></div>",
+"es": "<div class=\"calc-field\"><label>Mejora ΔR<sub>Dd</sub> (trasdosado) [dB]</label><input type=\"number\" id=\"fl-dR\" value=\"0\" step=\"any\" oninput=\"updateFL()\"></div>"
+},
+"14-168": {
+"fr": "Élément séparatif m′ = {} kg/m², S = {} m²",
+"es": "Elemento separador m′ = {} kg/m², S = {} m²"
+},
+"14-169": {
+"fr": "§Transmission directe",
+"es": "§Transmisión directa"
+},
+"14-170": {
+"fr": "§Indice de réduction des vibrations aux jonctions (DIN 4109-32, jonctions rigides)",
+"es": "§Índice de reducción de vibraciones en uniones (DIN 4109-32, uniones rígidas)"
+},
+"14-171": {
+"fr": "!M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) avec m′<sub>⊥</sub> = élément séparatif · jonction en croix : K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · jonction en T : K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²",
+"es": "!M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) con m′<sub>⊥</sub> = elemento separador · unión en cruz: K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · unión en T: K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²"
+},
+"14-172": {
+"fr": "!Valeur minimale K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) avec S<sub>f</sub> = l<sub>f</sub> · profondeur du local",
+"es": "!Valor mínimo K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) con S<sub>f</sub> = l<sub>f</sub> · profundidad del recinto"
+},
+"14-173": {
+"fr": "§Chemins latéraux par flanc",
+"es": "§Vías de flanco por flanco"
+},
+"14-174": {
+"fr": "§Indice d'affaiblissement acoustique in situ",
+"es": "§Índice de reducción acústica in situ"
+},
+"14-175": {
+"fr": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) sur 13 chemins = {} dB",
+"es": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) por 13 vías = {} dB"
+},
+"14-176": {
+"fr": "!Parts de l'énergie sonore transmise : direct (Dd) {} %, tous les chemins latéraux {} % · chemin latéral principal {} via {} avec {} % · sans flancs, R′<sub>w</sub> = R<sub>Dd</sub> = {} dB",
+"es": "!Proporciones de la energía sonora transmitida: directa (Dd) {} %, todas las vías de flanco {} % · vía de flanco principal {} a través de {} con {} % · sin flancos, R′<sub>w</sub> = R<sub>Dd</sub> = {} dB"
+}
+}

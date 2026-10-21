@@ -1,0 +1,887 @@
+[
+ {
+  "id": "28-0",
+  "de": "<div class=\"calc-field\"><label>Scherfugen je Schraube</label><select id=\"sr-m\" onchange=\"updateSchraube()\"><option value=\"1\" selected>1 (einschnittig)</option><option value=\"2\">2 (zweischnittig)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Shear planes per bolt</label><select id=\"sr-m\" onchange=\"updateSchraube()\"><option value=\"1\" selected>1 (single shear)</option><option value=\"2\">2 (double shear)</option></select></div>"
+ },
+ {
+  "id": "28-1",
+  "de": "<div class=\"calc-field\"><label>Blechdicke t [mm] (maßgebend)</label><input type=\"number\" id=\"sr-t\" value=\"10\" step=\"any\" oninput=\"updateSchraube()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Plate thickness t [mm] (governing)</label><input type=\"number\" id=\"sr-t\" value=\"10\" step=\"any\" oninput=\"updateSchraube()\"></div>"
+ },
+ {
+  "id": "28-2",
+  "de": "<div class=\"calc-field\"><label>Blech</label><select id=\"sr-st\" onchange=\"updateSchraube()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Plate</label><select id=\"sr-st\" onchange=\"updateSchraube()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "28-3",
+  "de": "<div class=\"calc-field\"><label>Schrauben in Kraftrichtung n<sub>1</sub></label><input type=\"number\" id=\"sr-n1\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bolts in direction of load n<sub>1</sub></label><input type=\"number\" id=\"sr-n1\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>"
+ },
+ {
+  "id": "28-4",
+  "de": "<div class=\"calc-field\"><label>Schrauben quer n<sub>2</sub></label><input type=\"number\" id=\"sr-n2\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bolts perpendicular n<sub>2</sub></label><input type=\"number\" id=\"sr-n2\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>"
+ },
+ {
+  "id": "28-5",
+  "de": "§Schraube und Blech",
+  "en": "§Bolt and plate"
+ },
+ {
+  "id": "28-6",
+  "de": "!{} {}: d = {} mm, d<sub>0</sub> = {} mm, A = {} mm², A<sub>s</sub> = {} mm², f<sub>ub</sub> = {} N/mm² · Blech {}, t = {} mm, f<sub>u</sub> = {} N/mm²",
+  "en": "!{} {}: d = {} mm, d<sub>0</sub> = {} mm, A = {} mm², A<sub>s</sub> = {} mm², f<sub>ub</sub> = {} N/mm² · plate {}, t = {} mm, f<sub>u</sub> = {} N/mm²"
+ },
+ {
+  "id": "28-7",
+  "de": "§Rand- und Lochabstände (Tab. 3.3, Mindestwerte)",
+  "en": "§End, edge distances and spacings (Tab. 3.3, minimum values)"
+ },
+ {
+  "id": "28-8",
+  "de": "§Abscheren je Schraube",
+  "en": "§Shear per bolt"
+ },
+ {
+  "id": "28-9",
+  "de": "Gewinde → A = A<sub>s</sub>",
+  "en": "thread → A = A<sub>s</sub>"
+ },
+ {
+  "id": "28-10",
+  "de": "!Scherfuge im {}, α<sub>v</sub> = {}, {} Scherfuge{}",
+  "en": "!Shear plane through the {}, α<sub>v</sub> = {}, {} shear plane{}"
+ },
+ {
+  "id": "28-11",
+  "de": "!α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) mit f<sub>ub</sub>/f<sub>u</sub> = {}/{} = {}",
+  "en": "!α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) with f<sub>ub</sub>/f<sub>u</sub> = {}/{} = {}"
+ },
+ {
+  "id": "28-12",
+  "de": "α<sub>d</sub> (Endschraube) = e<sub>1</sub> / (3 · d<sub>0</sub>) = {} / (3 · {}) = {} → α<sub>b</sub> = {}",
+  "en": "α<sub>d</sub> (end bolt) = e<sub>1</sub> / (3 · d<sub>0</sub>) = {} / (3 · {}) = {} → α<sub>b</sub> = {}"
+ },
+ {
+  "id": "28-13",
+  "de": "α<sub>d</sub> (innere Schraube) = p<sub>1</sub> / (3 · d<sub>0</sub>) − 1/4 = {} / (3 · {}) − 0,25 = {} → α<sub>b</sub> = {}",
+  "en": "α<sub>d</sub> (inner bolt) = p<sub>1</sub> / (3 · d<sub>0</sub>) − 1/4 = {} / (3 · {}) − 0.25 = {} → α<sub>b</sub> = {}"
+ },
+ {
+  "id": "28-14",
+  "de": "k<sub>1</sub> (Randreihe) = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7{}; 2,5) = {}",
+  "en": "k<sub>1</sub> (edge row) = min(2.8 · e<sub>2</sub>/d<sub>0</sub> − 1.7{}; 2.5) = {}"
+ },
+ {
+  "id": "28-15",
+  "de": "Randreihe",
+  "en": "Edge row"
+ },
+ {
+  "id": "28-16",
+  "de": "§Tragfähigkeit der Verbindung (3.7)",
+  "en": "§Resistance of the connection (3.7)"
+ },
+ {
+  "id": "28-17",
+  "de": "!F<sub>v,Rd</sub> < F<sub>b,Rd</sub> bei mindestens einer Schraube → n · kleinster Einzelwiderstand",
+  "en": "!F<sub>v,Rd</sub> < F<sub>b,Rd</sub> for at least one bolt → n · smallest individual resistance"
+ },
+ {
+  "id": "28-18",
+  "de": "F<sub>Rd</sub> = {} kN ({} Schrauben)",
+  "en": "F<sub>Rd</sub> = {} kN ({} bolts)"
+ },
+ {
+  "id": "28-19",
+  "de": "Schraubenverbindung {} × {} {} {}",
+  "en": "Bolted connection {} × {} {} {}"
+ },
+ {
+  "id": "28-20",
+  "de": "!F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> für alle Schrauben → Summe der Lochleibungswiderstände",
+  "en": "!F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> for all bolts → sum of the bearing resistances"
+ },
+ {
+  "id": "28-21",
+  "de": "Schaft → A = Schaftquerschnitt",
+  "en": "shank → A = shank area"
+ },
+ {
+  "id": "28-22",
+  "de": "l > 150a: Abminderung β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1",
+  "en": "l > 150a: reduction β<sub>Lw</sub> = 1.2 − 0.2 · l / (150a) ≤ 1"
+ },
+ {
+  "id": "28-23",
+  "de": "§Vereinfachtes Verfahren (4.5.3.3)",
+  "en": "§Simplified method (4.5.3.3)"
+ },
+ {
+  "id": "28-24",
+  "de": "!F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (je Längeneinheit) mit f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)",
+  "en": "!F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (per unit length) with f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)"
+ },
+ {
+  "id": "28-25",
+  "de": "§Richtungsbezogenes Verfahren (4.5.3.2)",
+  "en": "§Directional method (4.5.3.2)"
+ },
+ {
+  "id": "28-26",
+  "de": "!√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) und σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>",
+  "en": "!√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) and σ<sub>⊥</sub> ≤ 0.9 · f<sub>u</sub> / γ<sub>M2</sub>"
+ },
+ {
+  "id": "28-27",
+  "de": "!σ<sub>⊥</sub>, τ<sub>⊥</sub> — Spannungen senkrecht zur Nahtachse in der Kehlfläche a · l · τ<sub>∥</sub> — parallel zur Nahtachse",
+  "en": "!σ<sub>⊥</sub>, τ<sub>⊥</sub> — stresses perpendicular to the weld axis in the throat plane a · l · τ<sub>∥</sub> — parallel to the weld axis"
+ },
+ {
+  "id": "28-28",
+  "de": "§Doppelkehlnaht unter Querzug F (Kraft senkrecht zur Naht, 45°)",
+  "en": "§Double fillet weld under transverse tension F (force perpendicular to the weld, 45°)"
+ },
+ {
+  "id": "28-29",
+  "de": "§Stumpfnähte mit voller Durchschweißung",
+  "en": "§Full-penetration butt welds"
+ },
+ {
+  "id": "28-30",
+  "de": "!Tragfähigkeit wie das schwächere der verbundenen Bleche — kein gesonderter Nachweis",
+  "en": "!Resistance equal to the weaker of the connected plates — no separate check"
+ },
+ {
+  "id": "28-31",
+  "de": "<div class=\"calc-field\"><label>Stahl</label><select id=\"kw-st\" onchange=\"updateKehl()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel</label><select id=\"kw-st\" onchange=\"updateKehl()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "28-32",
+  "de": "<div class=\"calc-field\"><label>Nahtdicke a [mm]</label><input type=\"number\" id=\"kw-a\" value=\"4\" step=\"any\" oninput=\"updateKehl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Throat thickness a [mm]</label><input type=\"number\" id=\"kw-a\" value=\"4\" step=\"any\" oninput=\"updateKehl()\"></div>"
+ },
+ {
+  "id": "28-33",
+  "de": "<div class=\"calc-field\"><label>Nahtlänge l [mm] je Naht</label><input type=\"number\" id=\"kw-l\" value=\"150\" step=\"any\" oninput=\"updateKehl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Weld length l [mm] per weld</label><input type=\"number\" id=\"kw-l\" value=\"150\" step=\"any\" oninput=\"updateKehl()\"></div>"
+ },
+ {
+  "id": "28-34",
+  "de": "<div class=\"calc-field\"><label>Anzahl Nähte</label><input type=\"number\" id=\"kw-n\" value=\"2\" step=\"any\" oninput=\"updateKehl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Number of welds</label><input type=\"number\" id=\"kw-n\" value=\"2\" step=\"any\" oninput=\"updateKehl()\"></div>"
+ },
+ {
+  "id": "28-35",
+  "de": "<div class=\"calc-field\"><label>Blechdicke t<sub>1</sub> [mm]</label><input type=\"number\" id=\"kw-t1\" value=\"10\" step=\"any\" oninput=\"updateKehl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Plate thickness t<sub>1</sub> [mm]</label><input type=\"number\" id=\"kw-t1\" value=\"10\" step=\"any\" oninput=\"updateKehl()\"></div>"
+ },
+ {
+  "id": "28-36",
+  "de": "<div class=\"calc-field\"><label>Blechdicke t<sub>2</sub> [mm]</label><input type=\"number\" id=\"kw-t2\" value=\"12\" step=\"any\" oninput=\"updateKehl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Plate thickness t<sub>2</sub> [mm]</label><input type=\"number\" id=\"kw-t2\" value=\"12\" step=\"any\" oninput=\"updateKehl()\"></div>"
+ },
+ {
+  "id": "28-37",
+  "de": "§Grenzwerte der Nahtdicke",
+  "en": "§Limits for the throat thickness"
+ },
+ {
+  "id": "28-38",
+  "de": "§Festigkeit der Naht",
+  "en": "§Weld strength"
+ },
+ {
+  "id": "28-39",
+  "de": "Kehlnaht a = {} mm",
+  "en": "Fillet weld a = {} mm"
+ },
+ {
+  "id": "28-40",
+  "de": "&gt; 100 mm und &gt; 7 · Ø",
+  "en": "&gt; 100 mm and &gt; 7 · Ø"
+ },
+ {
+  "id": "28-41",
+  "de": "&gt; 50 mm und &gt; 3 · Ø",
+  "en": "&gt; 50 mm and &gt; 3 · Ø"
+ },
+ {
+  "id": "28-42",
+  "de": "(25,0/89,3)² + (150,0/946,7)² = 0,104 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "(25.0/89.3)² + (150.0/946.7)² = 0.104 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "28-43",
+  "de": "0,25·h, höchstens 200 mm",
+  "en": "0.25·h, at most 200 mm"
+ },
+ {
+  "id": "28-44",
+  "de": "0,3 mm + besondere Maßnahmen (z. B. Beschichtung)",
+  "en": "0.3 mm + special measures (e.g. coating)"
+ },
+ {
+  "id": "28-45",
+  "de": "0,5·h, höchstens 300 mm",
+  "en": "0.5·h, at most 300 mm"
+ },
+ {
+  "id": "28-46",
+  "de": "0,7·h, höchstens 300 mm",
+  "en": "0.7·h, at most 300 mm"
+ },
+ {
+  "id": "28-47",
+  "de": "1,0 ≤ cot θ ≤ 3,0 (aus V<sub>Rd,cc</sub>)",
+  "en": "1.0 ≤ cot θ ≤ 3.0 (from V<sub>Rd,cc</sub>)"
+ },
+ {
+  "id": "28-48",
+  "de": "1.&nbsp; μ<sub>Eds</sub> = M<sub>Eds</sub> / (b · d² · f<sub>cd</sub>)<br> 2.&nbsp; ω, ξ, ζ aus der Tabelle (μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = 0,296)<br> 3.&nbsp; A<sub>s1</sub> = ω · b · d · f<sub>cd</sub> / f<sub>yd</sub>&nbsp;&nbsp;(+ N<sub>Ed</sub> / f<sub>yd</sub> bei Normalkraft)",
+  "en": "1.&nbsp; μ<sub>Eds</sub> = M<sub>Eds</sub> / (b · d² · f<sub>cd</sub>)<br> 2.&nbsp; ω, ξ, ζ from the table (μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = 0.296)<br> 3.&nbsp; A<sub>s1</sub> = ω · b · d · f<sub>cd</sub> / f<sub>yd</sub>&nbsp;&nbsp;(+ N<sub>Ed</sub> / f<sub>yd</sub> with axial force)"
+ },
+ {
+  "id": "28-49",
+  "de": "200 mm (Ortbeton, stehend hergestellt), 120 mm (Fertigteil, liegend)",
+  "en": "200 mm (cast in situ, cast vertically), 120 mm (precast, cast horizontally)"
+ },
+ {
+  "id": "28-50",
+  "de": "<a class=\"applink\" href=\"#/stahlbeton/stuetzen/bemessung\">→ Stütze bemessen</a>",
+  "en": "<a class=\"applink\" href=\"#/stahlbeton/stuetzen/bemessung\">→ Design a column</a>"
+ },
+ {
+  "id": "28-51",
+  "de": "<b>Durchstanzbewehrung erforderlich</b> (Bügel oder Dübelleisten)",
+  "en": "<b>Punching shear reinforcement required</b> (links or stud rails)"
+ },
+ {
+  "id": "28-52",
+  "de": "<b>Fall 1 — Nulllinie in der Platte</b> (x ≤ h<sub>f</sub>): Der Querschnitt wirkt wie ein Rechteck der Breite b<sub>eff</sub>. Bemessung mit dem ω-Verfahren, μ<sub>Eds</sub> mit b<sub>eff</sub>.<br> <b>Fall 2 — Nulllinie im Steg</b> (x &gt; h<sub>f</sub>): Bei breiten Gurten (b<sub>eff</sub>/b<sub>w</sub> ≥ 5) darf man die Druckkraft in Plattenmitte annehmen und den Steg vernachlässigen:",
+  "en": "<b>Case 1 — neutral axis in the flange</b> (x ≤ h<sub>f</sub>): the section acts like a rectangle of width b<sub>eff</sub>. Design with the ω method, μ<sub>Eds</sub> with b<sub>eff</sub>.<br> <b>Case 2 — neutral axis in the web</b> (x &gt; h<sub>f</sub>): for wide flanges (b<sub>eff</sub>/b<sub>w</sub> ≥ 5) the compressive force may be assumed at mid-depth of the flange and the web neglected:"
+ },
+ {
+  "id": "28-53",
+  "de": "<b>Guter Verbund</b>: Stäbe mit 45° … 90° zur Waagerechten und waagerechte Stäbe in Bauteilen bis 300 mm Höhe sowie in dickeren Bauteilen in der unteren Hälfte bzw. mehr als 300 mm unter der Oberseite.<br> <b>Mäßiger Verbund</b>: alle anderen — typisch die obere Bewehrung dicker Decken und Balken, weil sich unter den Stäben beim Betonieren Wasser und Luft sammeln.",
+  "en": "<b>Good bond</b>: bars at 45° … 90° to the horizontal, and horizontal bars in members up to 300 mm deep, or in deeper members in the lower half or more than 300 mm below the top face.<br> <b>Poor bond</b>: all others — typically the top reinforcement of thick slabs and beams, because water and air collect under the bars during concreting."
+ },
+ {
+  "id": "28-54",
+  "de": "<b>Kriechen</b>: Unter Dauerlast wächst die Verformung mit der Zeit — die Endverformung ist etwa (1 + φ)-mal so groß wie die elastische. <b>Schwinden</b>: Beton verkürzt sich beim Austrocknen (Trocknungsschwinden) und durch die Hydratation (autogenes Schwinden), auch ganz ohne Last.",
+  "en": "<b>Creep</b>: under sustained load the deformation grows with time — the final deformation is about (1 + φ) times the elastic one. <b>Shrinkage</b>: concrete shortens as it dries (drying shrinkage) and through hydration (autogenous shrinkage), even without any load."
+ },
+ {
+  "id": "28-55",
+  "de": "<span class=\"st-n\">1</span><span>Baustoffe</span>",
+  "en": "<span class=\"st-n\">1</span><span>Materials</span>"
+ },
+ {
+  "id": "28-56",
+  "de": "<span class=\"st-n\">1</span><span>Eingangswert</span>",
+  "en": "<span class=\"st-n\">1</span><span>Input value</span>"
+ },
+ {
+  "id": "28-57",
+  "de": "<span class=\"st-n\">1</span><span>Ersatzhohlkasten</span>",
+  "en": "<span class=\"st-n\">1</span><span>Equivalent thin-walled section</span>"
+ },
+ {
+  "id": "28-58",
+  "de": "<span class=\"st-n\">1</span><span>Mindestdeckung aus Verbund und Dauerhaftigkeit</span>",
+  "en": "<span class=\"st-n\">1</span><span>Minimum cover for bond and durability</span>"
+ },
+ {
+  "id": "28-59",
+  "de": "<span class=\"st-n\">1</span><span>Mitwirkende Breite (5.3.2.1)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Effective width (5.3.2.1)</span>"
+ },
+ {
+  "id": "28-60",
+  "de": "<span class=\"st-n\">1</span><span>Nutzhöhe und Längsbewehrung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Effective depth and longitudinal reinforcement</span>"
+ },
+ {
+  "id": "28-61",
+  "de": "<span class=\"st-n\">1</span><span>Ohne Querkraftbewehrung (6.2.2)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Without shear reinforcement (6.2.2)</span>"
+ },
+ {
+  "id": "28-62",
+  "de": "<span class=\"st-n\">1</span><span>Schlankheit</span>",
+  "en": "<span class=\"st-n\">1</span><span>Slenderness</span>"
+ },
+ {
+  "id": "28-63",
+  "de": "<span class=\"st-n\">1</span><span>Stahlspannung im Zustand II</span>",
+  "en": "<span class=\"st-n\">1</span><span>Steel stress in the cracked state (state II)</span>"
+ },
+ {
+  "id": "28-64",
+  "de": "<span class=\"st-n\">1</span><span>Verbundspannung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Bond stress</span>"
+ },
+ {
+  "id": "28-65",
+  "de": "<span class=\"st-n\">1</span><span>Vorhandene Schlankheit</span>",
+  "en": "<span class=\"st-n\">1</span><span>Actual slenderness</span>"
+ },
+ {
+  "id": "28-66",
+  "de": "<span class=\"st-n\">1</span><span>Wirksame Bauteildicke</span>",
+  "en": "<span class=\"st-n\">1</span><span>Notional size</span>"
+ },
+ {
+  "id": "28-67",
+  "de": "<span class=\"st-n\">2</span><span>Bemessung als Rechteck mit b<sub>eff</sub></span>",
+  "en": "<span class=\"st-n\">2</span><span>Design as a rectangle with b<sub>eff</sub></span>"
+ },
+ {
+  "id": "28-68",
+  "de": "<span class=\"st-n\">2</span><span>Druckstrebe (6.2.3)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Compression strut (6.2.3)</span>"
+ },
+ {
+  "id": "28-69",
+  "de": "<span class=\"st-n\">2</span><span>Druckstrebe (NA: Vollquerschnitt ν = 0,525 · ν<sub>2</sub>)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Compression strut (NA: solid section ν = 0.525 · ν<sub>2</sub>)</span>"
+ },
+ {
+  "id": "28-70",
+  "de": "<span class=\"st-n\">2</span><span>Druckstrebe</span>",
+  "en": "<span class=\"st-n\">2</span><span>Compression strut</span>"
+ },
+ {
+  "id": "28-71",
+  "de": "<span class=\"st-n\">2</span><span>Endkriechzahl φ(∞, t<sub>0</sub>) = φ<sub>RH</sub> · β(f<sub>cm</sub>) · β(t<sub>0</sub>) (Anhang B)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Final creep coefficient φ(∞, t<sub>0</sub>) = φ<sub>RH</sub> · β(f<sub>cm</sub>) · β(t<sub>0</sub>) (Annex B)</span>"
+ },
+ {
+  "id": "28-72",
+  "de": "<span class=\"st-n\">2</span><span>Grenzwerte (DIN EN 1992-1-1/NA, 7.4.2)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Limit values (DIN EN 1992-1-1/NA, 7.4.2)</span>"
+ },
+ {
+  "id": "28-73",
+  "de": "<span class=\"st-n\">2</span><span>Grundwert</span>",
+  "en": "<span class=\"st-n\">2</span><span>Basic value</span>"
+ },
+ {
+  "id": "28-74",
+  "de": "<span class=\"st-n\">2</span><span>Kriechzahl</span>",
+  "en": "<span class=\"st-n\">2</span><span>Creep coefficient</span>"
+ },
+ {
+  "id": "28-75",
+  "de": "<span class=\"st-n\">2</span><span>Kritischer Rundschnitt im Abstand 2d (Innenstütze)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Basic control perimeter at a distance of 2d (interior column)</span>"
+ },
+ {
+  "id": "28-76",
+  "de": "<span class=\"st-n\">2</span><span>Lastausmitten</span>",
+  "en": "<span class=\"st-n\">2</span><span>Eccentricities</span>"
+ },
+ {
+  "id": "28-77",
+  "de": "<span class=\"st-n\">2</span><span>Rissabstand</span>",
+  "en": "<span class=\"st-n\">2</span><span>Crack spacing</span>"
+ },
+ {
+  "id": "28-78",
+  "de": "<span class=\"st-n\">2</span><span>Statische Nutzhöhe</span>",
+  "en": "<span class=\"st-n\">2</span><span>Effective depth</span>"
+ },
+ {
+  "id": "28-79",
+  "de": "<span class=\"st-n\">2</span><span>Tafelwert</span>",
+  "en": "<span class=\"st-n\">2</span><span>Table value</span>"
+ },
+ {
+  "id": "28-80",
+  "de": "<span class=\"st-n\">2</span><span>Vorhaltemaß</span>",
+  "en": "<span class=\"st-n\">2</span><span>Allowance for deviation</span>"
+ },
+ {
+  "id": "28-81",
+  "de": "<span class=\"st-n\">3</span><span>Bemessungsmoment</span>",
+  "en": "<span class=\"st-n\">3</span><span>Design moment</span>"
+ },
+ {
+  "id": "28-82",
+  "de": "<span class=\"st-n\">3</span><span>Bewehrung</span>",
+  "en": "<span class=\"st-n\">3</span><span>Reinforcement</span>"
+ },
+ {
+  "id": "28-83",
+  "de": "<span class=\"st-n\">3</span><span>Bezogenes Moment</span>",
+  "en": "<span class=\"st-n\">3</span><span>Relative moment</span>"
+ },
+ {
+  "id": "28-84",
+  "de": "<span class=\"st-n\">3</span><span>Bügel</span>",
+  "en": "<span class=\"st-n\">3</span><span>Links</span>"
+ },
+ {
+  "id": "28-85",
+  "de": "<span class=\"st-n\">3</span><span>Dehnungsdifferenz (Langzeit, k<sub>t</sub> = 0,4)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Strain difference (long-term, k<sub>t</sub> = 0.4)</span>"
+ },
+ {
+  "id": "28-86",
+  "de": "<span class=\"st-n\">3</span><span>Einwirkung</span>",
+  "en": "<span class=\"st-n\">3</span><span>Action</span>"
+ },
+ {
+  "id": "28-87",
+  "de": "<span class=\"st-n\">3</span><span>Mindestwert (Zugstab)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Minimum value (tension bar)</span>"
+ },
+ {
+  "id": "28-88",
+  "de": "<span class=\"st-n\">3</span><span>Nennmaß = Verlegemaß</span>",
+  "en": "<span class=\"st-n\">3</span><span>Nominal cover = placing dimension</span>"
+ },
+ {
+  "id": "28-89",
+  "de": "<span class=\"st-n\">3</span><span>Schwinden</span>",
+  "en": "<span class=\"st-n\">3</span><span>Shrinkage</span>"
+ },
+ {
+  "id": "28-90",
+  "de": "<span class=\"st-n\">3</span><span>Torsionsbewehrung</span>",
+  "en": "<span class=\"st-n\">3</span><span>Torsion reinforcement</span>"
+ },
+ {
+  "id": "28-91",
+  "de": "<span class=\"st-n\">3</span><span>Trocknungsschwinden ε<sub>cd,∞</sub> = k<sub>h</sub> · ε<sub>cd,0</sub></span>",
+  "en": "<span class=\"st-n\">3</span><span>Drying shrinkage ε<sub>cd,∞</sub> = k<sub>h</sub> · ε<sub>cd,0</sub></span>"
+ },
+ {
+  "id": "28-92",
+  "de": "<span class=\"st-n\">4</span><span>Autogenes Schwinden</span>",
+  "en": "<span class=\"st-n\">4</span><span>Autogenous shrinkage</span>"
+ },
+ {
+  "id": "28-93",
+  "de": "<span class=\"st-n\">4</span><span>Beiwerte aus dem Parabel-Rechteck-Diagramm (Tabelle oben, interpoliert)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Coefficients from the parabola-rectangle diagram (table above, interpolated)</span>"
+ },
+ {
+  "id": "28-94",
+  "de": "<span class=\"st-n\">4</span><span>Bemessungswert</span>",
+  "en": "<span class=\"st-n\">4</span><span>Design value</span>"
+ },
+ {
+  "id": "28-95",
+  "de": "<span class=\"st-n\">4</span><span>Bewehrung (Dehnungsebenen, Parabel-Rechteck, symmetrisch)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Reinforcement (strain planes, parabola-rectangle, symmetrical)</span>"
+ },
+ {
+  "id": "28-96",
+  "de": "<span class=\"st-n\">4</span><span>Rissbreite</span>",
+  "en": "<span class=\"st-n\">4</span><span>Crack width</span>"
+ },
+ {
+  "id": "28-97",
+  "de": "<span class=\"st-n\">4</span><span>Widerstand ohne Durchstanzbewehrung</span>",
+  "en": "<span class=\"st-n\">4</span><span>Resistance without punching shear reinforcement</span>"
+ },
+ {
+  "id": "28-98",
+  "de": "<span class=\"st-n\">5</span><span>Bewehrung</span>",
+  "en": "<span class=\"st-n\">5</span><span>Reinforcement</span>"
+ },
+ {
+  "id": "28-99",
+  "de": "<span class=\"st-n\">5</span><span>Gesamtschwinden</span>",
+  "en": "<span class=\"st-n\">5</span><span>Total shrinkage</span>"
+ },
+ {
+  "id": "28-100",
+  "de": "<span class=\"st-n\">6</span><span>Mindestbewehrung (Rissmoment)</span>",
+  "en": "<span class=\"st-n\">6</span><span>Minimum reinforcement (cracking moment)</span>"
+ },
+ {
+  "id": "28-101",
+  "de": "= 0,800 % (≤ 2 % und ≤ 0,5 · f<sub>cd</sub>/f<sub>yd</sub>)",
+  "en": "= 0.800 % (≤ 2 % and ≤ 0.5 · f<sub>cd</sub>/f<sub>yd</sub>)"
+ },
+ {
+  "id": "28-102",
+  "de": "= 2,37 cm (Modellstützenverfahren)",
+  "en": "= 2.37 cm (model column method)"
+ },
+ {
+  "id": "28-103",
+  "de": "A<sub>c</sub> = 200.000 mm² · u = 2.000 mm (Platte, oben und unten trocknend)",
+  "en": "A<sub>c</sub> = 200.000 mm² · u = 2.000 mm (slab, drying on top and bottom)"
+ },
+ {
+  "id": "28-104",
+  "de": "A<sub>s,erf</sub>",
+  "en": "A<sub>s,req</sub>"
+ },
+ {
+  "id": "28-105",
+  "de": "A<sub>s,max</sub> = 0,09 · A<sub>c</sub>, auch im Stoßbereich",
+  "en": "A<sub>s,max</sub> = 0.09 · A<sub>c</sub>, also at laps"
+ },
+ {
+  "id": "28-106",
+  "de": "A<sub>s,min</sub> (Robustheit, DIN EN 1992-1-1/NA 9.2.1.1) hier aus dem Rissmoment: A<sub>s,min</sub> = f<sub>ctm</sub> · W<sub>c</sub> / (f<sub>yk</sub> · 0,9·d) mit W<sub>c</sub> = b·h²/6. Höchstbewehrung: A<sub>s</sub> ≤ 0,08·A<sub>c</sub> (auch im Stoßbereich).",
+  "en": "A<sub>s,min</sub> (robustness, DIN EN 1992-1-1/NA 9.2.1.1) here from the cracking moment: A<sub>s,min</sub> = f<sub>ctm</sub> · W<sub>c</sub> / (f<sub>yk</sub> · 0.9·d) with W<sub>c</sub> = b·h²/6. Maximum reinforcement: A<sub>s</sub> ≤ 0.08·A<sub>c</sub> (also at laps)."
+ },
+ {
+  "id": "28-107",
+  "de": "A<sub>s,tot,erf</sub> = 7,34 cm² (iterativ, bis M<sub>Rd</sub>(N<sub>Ed</sub>) = M<sub>Ed</sub>)",
+  "en": "A<sub>s,tot,req</sub> = 7.34 cm² (iterative, until M<sub>Rd</sub>(N<sub>Ed</sub>) = M<sub>Ed</sub>)"
+ },
+ {
+  "id": "28-108",
+  "de": "A<sub>s</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · f<sub>yd</sub>)&nbsp;&nbsp; mit Kontrolle&nbsp; σ<sub>cd</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · b<sub>eff</sub> · h<sub>f</sub>) ≤ f<sub>cd</sub>",
+  "en": "A<sub>s</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · f<sub>yd</sub>)&nbsp;&nbsp; with check&nbsp; σ<sub>cd</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · b<sub>eff</sub> · h<sub>f</sub>) ≤ f<sub>cd</sub>"
+ },
+ {
+  "id": "28-109",
+  "de": "A<sub>s</sub> = n · π · Ø² / 4 · Gewicht G = A · 7,85 kg/dm³",
+  "en": "A<sub>s</sub> = n · π · Ø² / 4 · weight G = A · 7.85 kg/dm³"
+ },
+ {
+  "id": "28-110",
+  "de": "A<sub>s</sub> [cm²] = k<sub>s</sub> · M<sub>Eds</sub> [kNm] / d [cm] (+ N<sub>Ed</sub>/f<sub>yd</sub> bei Normalkraft)",
+  "en": "A<sub>s</sub> [cm²] = k<sub>s</sub> · M<sub>Eds</sub> [kNm] / d [cm] (+ N<sub>Ed</sub>/f<sub>yd</sub> with axial force)"
+ },
+ {
+  "id": "28-111",
+  "de": "A<sub>sl</sub> zählt nur, wenn die Bewehrung mindestens (l<sub>bd</sub> + d) über den betrachteten Schnitt hinaus verankert ist.",
+  "en": "A<sub>sl</sub> only counts if the reinforcement is anchored at least (l<sub>bd</sub> + d) beyond the section considered."
+ },
+ {
+  "id": "28-112",
+  "de": "Ab C55/67: f<sub>ctm</sub> = 2,12 · ln(1 + f<sub>cm</sub>/10) · ε<sub>c2</sub> = 2,0 + 0,085 · (f<sub>ck</sub> − 50)<sup>0,53</sup> · ε<sub>cu2</sub> = 2,6 + 35 · ((90 − f<sub>ck</sub>)/100)⁴ · n = 1,4 + 23,4 · ((90 − f<sub>ck</sub>)/100)⁴. Bis C50/60: ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Die Rechner in statiq·ref gelten bis C50/60.",
+  "en": "From C55/67: f<sub>ctm</sub> = 2.12 · ln(1 + f<sub>cm</sub>/10) · ε<sub>c2</sub> = 2.0 + 0.085 · (f<sub>ck</sub> − 50)<sup>0.53</sup> · ε<sub>cu2</sub> = 2.6 + 35 · ((90 − f<sub>ck</sub>)/100)⁴ · n = 1.4 + 23.4 · ((90 − f<sub>ck</sub>)/100)⁴. Up to C50/60: ε<sub>c2</sub> = 2.0 ‰, ε<sub>cu2</sub> = 3.5 ‰, n = 2. The calculators in statiq·ref apply up to C50/60."
+ },
+ {
+  "id": "28-113",
+  "de": "Achsabstand Längsstäbe c [cm]",
+  "en": "Axis distance of longitudinal bars c [cm]"
+ },
+ {
+  "id": "28-114",
+  "de": "Anteil gestoßener Stäbe ≤ 33 %",
+  "en": "Proportion of lapped bars ≤ 33 %"
+ },
+ {
+  "id": "28-115",
+  "de": "Ausgesteifte Geschossstützen werden meist mit β = 1,0 auf der sicheren Seite angesetzt.",
+  "en": "Braced storey columns are usually taken with β = 1.0, on the safe side."
+ },
+ {
+  "id": "28-116",
+  "de": "Ausnutzung V_Ed / V_Rd,max",
+  "en": "Utilisation V_Ed / V_Rd,max"
+ },
+ {
+  "id": "28-117",
+  "de": "Außenbauteile in Küstennähe",
+  "en": "External members near the coast"
+ },
+ {
+  "id": "28-118",
+  "de": "Außenbauteile mit direkter Beregnung",
+  "en": "External members exposed to direct rain"
+ },
+ {
+  "id": "28-119",
+  "de": "Außenbauteile vor Regen geschützt, offene Hallen, Feuchträume",
+  "en": "External members sheltered from rain, open halls, damp rooms"
+ },
+ {
+  "id": "28-120",
+  "de": "Bauteile im Sprühnebelbereich von Verkehrsflächen, Einzelgaragen",
+  "en": "Members in the spray zone of traffic areas, single garages"
+ },
+ {
+  "id": "28-121",
+  "de": "Bauteile mit Querkraftbewehrung (lotrechte Bügel) — 6.2.3",
+  "en": "Members with shear reinforcement (vertical links) — 6.2.3"
+ },
+ {
+  "id": "28-122",
+  "de": "Bauteile ohne Querkraftbewehrung — DIN EN 1992-1-1/NA, 6.2.2",
+  "en": "Members without shear reinforcement — DIN EN 1992-1-1/NA, 6.2.2"
+ },
+ {
+  "id": "28-123",
+  "de": "Begrenzung der Biegeschlankheit — DIN EN 1992-1-1/NA, 7.4.2",
+  "en": "Limiting the span-to-depth ratio — DIN EN 1992-1-1/NA, 7.4.2"
+ },
+ {
+  "id": "28-124",
+  "de": "Bei Balken, die mit einer Decke verbunden sind, wirkt ein Teil der Platte als Druckgurt mit. Wie breit, hängt vom Abstand der Momentennullpunkte l<sub>0</sub> ab.",
+  "en": "In beams connected to a slab, part of the slab acts as a compression flange. How wide it is depends on the distance between points of zero moment l<sub>0</sub>."
+ },
+ {
+  "id": "28-125",
+  "de": "Bei Bügeln gilt die Deckung für den Bügel (äußerste Lage). Die Längsbewehrung liegt um den Bügeldurchmesser tiefer.",
+  "en": "With links, the cover applies to the link (outermost layer). The longitudinal reinforcement lies deeper by the link diameter."
+ },
+ {
+  "id": "28-126",
+  "de": "Bei Flachdecken ohne Unterzüge konzentriert sich die Stützenlast auf eine kleine Fläche. Versagt die Decke, stanzt die Stütze einen kegelförmigen Bruchkörper aus der Platte — schlagartig und ohne Vorankündigung. Nachgewiesen wird die Schubspannung in einem <b>kritischen Rundschnitt u<sub>1</sub></b> im Abstand 2,0·d vom Stützenrand.",
+  "en": "In flat slabs without downstand beams, the column load is concentrated on a small area. If the slab fails, the column punches a cone-shaped body out of the slab — suddenly and without warning. The shear stress is verified on a <b>basic control perimeter u<sub>1</sub></b> at a distance of 2.0·d from the column face."
+ },
+ {
+  "id": "28-127",
+  "de": "Bei negativen Momenten (über der Stütze) liegt die Platte in der Zugzone: Dann rechnet man ein Rechteck mit der Stegbreite b<sub>w</sub> und verteilt die Zugbewehrung über die mitwirkende Breite.",
+  "en": "For negative moments (over the support) the slab lies in the tension zone: then design a rectangle with the web width b<sub>w</sub> and distribute the tension reinforcement over the effective width."
+ },
+ {
+  "id": "28-128",
+  "de": "Beispiel Einfeldplatte l = 5,0 m mit Trennwänden: l/d ≤ 1² · 150/5 = 30 → d ≥ 500/30 = 16,7 cm, h ≈ d + 3 cm = 20 cm",
+  "en": "Example single-span slab l = 5.0 m with partitions: l/d ≤ 1² · 150/5 = 30 → d ≥ 500/30 = 16.7 cm, h ≈ d + 3 cm = 20 cm"
+ },
+ {
+  "id": "28-129",
+  "de": "Belastungsbeginn t<sub>0</sub> [Tage]",
+  "en": "Age at loading t<sub>0</sub> [days]"
+ },
+ {
+  "id": "28-130",
+  "de": "Bemessung für positive Momente (Platte gedrückt)",
+  "en": "Design for positive moments (slab in compression)"
+ },
+ {
+  "id": "28-131",
+  "de": "Bemessung mit dem ω-Verfahren (Rechteck, ohne Druckbewehrung)",
+  "en": "Design with the ω method (rectangle, without compression reinforcement)"
+ },
+ {
+  "id": "28-132",
+  "de": "Bemessungswert der Verankerungslänge",
+  "en": "Design anchorage length"
+ },
+ {
+  "id": "28-133",
+  "de": "Bemessungswerte und Teilsicherheitsbeiwerte",
+  "en": "Design values and partial safety factors"
+ },
+ {
+  "id": "28-134",
+  "de": "Berechnet mit dem Parabel-Rechteck-Diagramm (C12/15 bis C50/60), B500 mit horizontalem Ast, ε<sub>s</sub> ≤ 25 ‰. Tabellen mit ansteigendem Stahlast liefern bei großem μ etwas kleinere ω (sichere Seite hier).",
+  "en": "Calculated with the parabola-rectangle diagram (C12/15 to C50/60), B500 with horizontal branch, ε<sub>s</sub> ≤ 25 ‰. Tables with an inclined steel branch give slightly smaller ω for large μ (safe side here)."
+ },
+ {
+  "id": "28-135",
+  "de": "Berechnet mit dem Parabel-Rechteck-Diagramm, α<sub>cc</sub> = 0,85, Stahl mit horizontalem Ast (ε<sub>s</sub> ≤ 25 ‰), Zeilen für μ<sub>Eds</sub> = 0,01 … 0,29 (Ende bei ξ = 0,45). Zwischenwerte linear interpolieren.",
+  "en": "Calculated with the parabola-rectangle diagram, α<sub>cc</sub> = 0.85, steel with horizontal branch (ε<sub>s</sub> ≤ 25 ‰), rows for μ<sub>Eds</sub> = 0.01 … 0.29 (ending at ξ = 0.45). Interpolate linearly between values."
+ },
+ {
+  "id": "28-136",
+  "de": "Beton",
+  "en": "Concrete"
+ },
+ {
+  "id": "28-137",
+  "de": "Betondeckung XC3, Ø 12 mm",
+  "en": "Concrete cover XC3, Ø 12 mm"
+ },
+ {
+  "id": "28-138",
+  "de": "Betondeckung bestimmen",
+  "en": "Determine concrete cover"
+ },
+ {
+  "id": "28-139",
+  "de": "Betondeckung — DIN EN 1992-1-1/NA, 4.4.1",
+  "en": "Concrete cover — DIN EN 1992-1-1/NA, 4.4.1"
+ },
+ {
+  "id": "28-140",
+  "de": "Betonstahl B500 — EN 1992-1-1, Anhang C und DIN 488",
+  "en": "Reinforcing steel B500 — EN 1992-1-1, Annex C and DIN 488"
+ },
+ {
+  "id": "28-141",
+  "de": "Biegebemessung 30/60 cm, C30/37, M<sub>Ed</sub> = 250,0 kNm",
+  "en": "Bending design 30/60 cm, C30/37, M<sub>Ed</sub> = 250.0 kNm"
+ },
+ {
+  "id": "28-142",
+  "de": "Biegebemessung Rechteckquerschnitt",
+  "en": "Bending design of a rectangular section"
+ },
+ {
+  "id": "28-143",
+  "de": "Biegeform",
+  "en": "Bend shape"
+ },
+ {
+  "id": "28-144",
+  "de": "Biegerollendurchmesser — DIN EN 1992-1-1/NA, Tab. 8.1DE",
+  "en": "Mandrel diameter — DIN EN 1992-1-1/NA, Tab. 8.1DE"
+ },
+ {
+  "id": "28-145",
+  "de": "Biegeschlankheit l = 5,00 m, d = 17,0 cm",
+  "en": "Span-to-depth ratio l = 5.00 m, d = 17.0 cm"
+ },
+ {
+  "id": "28-146",
+  "de": "Biegung mit Längszug",
+  "en": "Bending with axial tension"
+ },
+ {
+  "id": "28-147",
+  "de": "Bügel: A<sub>sw</sub>/s = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) · Längsbewehrung: ΣA<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>)",
+  "en": "Links: A<sub>sw</sub>/s = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) · Longitudinal reinforcement: ΣA<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>)"
+ },
+ {
+  "id": "28-148",
+  "de": "Bügel: a<sub>sw</sub> = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) = 25000000 / (2 · 100.000 · 434,8 · 1,00) = 2,88 cm²/m (je Schenkel, außen)",
+  "en": "Links: a<sub>sw</sub> = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) = 25000000 / (2 · 100.000 · 434.8 · 1.00) = 2.88 cm²/m (per leg, outer)"
+ },
+ {
+  "id": "28-149",
+  "de": "Bügelabstand verringert",
+  "en": "Link spacing reduced"
+ },
+ {
+  "id": "28-150",
+  "de": "Bügeldurchmesser",
+  "en": "Link diameter"
+ },
+ {
+  "id": "28-151",
+  "de": "Dehnung unter Höchstlast ε_uk",
+  "en": "Strain at maximum load ε_uk"
+ },
+ {
+  "id": "28-152",
+  "de": "Der Beton nimmt den Druck, der Betonstahl den Zug. Gesucht ist die Bewehrung, bei der das innere Kräftepaar F<sub>cd</sub> · z dem Moment standhält. Ohne Normalkraft gilt M<sub>Eds</sub> = M<sub>Ed</sub>.",
+  "en": "The concrete takes the compression, the reinforcing steel the tension. We are looking for the reinforcement at which the internal couple F<sub>cd</sub> · z resists the moment. Without axial force, M<sub>Eds</sub> = M<sub>Ed</sub>."
+ },
+ {
+  "id": "28-153",
+  "de": "Der Vollquerschnitt wird als dünnwandiger Ersatzhohlkasten mit der Wanddicke t<sub>ef</sub> betrachtet. Das Torsionsmoment läuft als Schubfluss um die Kernfläche A<sub>k</sub>; Bügel und Längsstäbe bilden ein räumliches Fachwerk.",
+  "en": "The solid section is treated as an equivalent thin-walled box section with wall thickness t<sub>ef</sub>. The torsional moment flows as shear flow around the enclosed area A<sub>k</sub>; links and longitudinal bars form a space truss."
+ },
+ {
+  "id": "28-154",
+  "de": "Deutscher NA: Stahldehnung in der Bemessung begrenzt auf ε<sub>ud</sub> = 25 ‰",
+  "en": "German NA: steel strain in design limited to ε<sub>ud</sub> = 25 ‰"
+ },
+ {
+  "id": "28-155",
+  "de": "Direkte Berechnung — 7.3.4 mit deutschem NA",
+  "en": "Direct calculation — 7.3.4 with German NA"
+ },
+ {
+  "id": "28-156",
+  "de": "Draufsicht Innenstütze: u<sub>1</sub> verläuft im Abstand 2d um die Stütze, an den Ecken als Viertelkreis.",
+  "en": "Plan view of interior column: u<sub>1</sub> runs around the column at a distance of 2d, with quarter circles at the corners."
+ },
+ {
+  "id": "28-157",
+  "de": "Druckbewehrung (μ<sub>Eds</sub> &gt; μ<sub>lim</sub>)",
+  "en": "Compression reinforcement (μ<sub>Eds</sub> &gt; μ<sub>lim</sub>)"
+ },
+ {
+  "id": "28-158",
+  "de": "Druckgurt",
+  "en": "Compression chord"
+ },
+ {
+  "id": "28-159",
+  "de": "Durchstanzbewehrung (Bügel oder Dübelleisten mit Zulassung)",
+  "en": "Punching shear reinforcement (links or approved stud rails)"
+ },
+ {
+  "id": "28-160",
+  "de": "Durchstanzen Innenstütze",
+  "en": "Punching shear at interior column"
+ },
+ {
+  "id": "28-161",
+  "de": "Durchstanznachweis Flachdecke",
+  "en": "Punching shear verification of a flat slab"
+ },
+ {
+  "id": "28-162",
+  "de": "E<sub>s</sub> = 200 000 N/mm² · Wichte wie Baustahl (78,5 kN/m³)",
+  "en": "E<sub>s</sub> = 200 000 N/mm² · unit weight as structural steel (78.5 kN/m³)"
+ },
+ {
+  "id": "28-163",
+  "de": "Eckstütze (β = 1,50)",
+  "en": "Corner column (β = 1.50)"
+ },
+ {
+  "id": "28-164",
+  "de": "Effektiver E-Modul für Langzeitverformungen: E<sub>c,eff</sub> = E<sub>cm</sub> / (1 + φ(∞, t<sub>0</sub>))",
+  "en": "Effective modulus for long-term deformations: E<sub>c,eff</sub> = E<sub>cm</sub> / (1 + φ(∞, t<sub>0</sub>))"
+ },
+ {
+  "id": "28-165",
+  "de": "Einfeldträger (l₀ = l)",
+  "en": "Simply supported beam (l₀ = l)"
+ },
+ {
+  "id": "28-166",
+  "de": "Einfeldträger, gelenkig gelagerte Platte",
+  "en": "Simply supported beam, simply supported slab"
+ },
+ {
+  "id": "28-167",
+  "de": "Einwirkungskombination",
+  "en": "Combination of actions"
+ },
+ {
+  "id": "28-168",
+  "de": "Endfeld (0,85·l)",
+  "en": "End span (0.85·l)"
+ },
+ {
+  "id": "28-169",
+  "de": "Endfeld eines Durchlaufträgers",
+  "en": "End span of a continuous beam"
+ },
+ {
+  "id": "28-170",
+  "de": "Ersatzlänge und Schlankheit",
+  "en": "Effective length and slenderness"
+ },
+ {
+  "id": "28-171",
+  "de": "Expositionsklassen für Bewehrungskorrosion",
+  "en": "Exposure classes for reinforcement corrosion"
+ },
+ {
+  "id": "28-172",
+  "de": "Fachwerkmodell",
+  "en": "Truss model"
+ },
+ {
+  "id": "28-173",
+  "de": "Fachwerkmodell: Die Querkraft wird über geneigte Betondruckstreben (Winkel θ) und lotrechte Bügel als Zugpfosten abgetragen.",
+  "en": "Truss model: the shear force is carried by inclined concrete compression struts (angle θ) and vertical links acting as tension ties."
+ },
+ {
+  "id": "28-174",
+  "de": "Festigkeiten in N/mm² · C25/30: Zylinderfestigkeit 25, Würfelfestigkeit 30 · f_cd mit α<sub>cc</sub> = 0,85 und γ<sub>c</sub> = 1,5",
+  "en": "Strengths in N/mm² · C25/30: cylinder strength 25, cube strength 30 · f_cd with α<sub>cc</sub> = 0.85 and γ<sub>c</sub> = 1.5"
+ },
+ {
+  "id": "28-175",
+  "de": "Festigkeitsklassen — EN 1992-1-1, Tab. 3.1",
+  "en": "Strength classes — EN 1992-1-1, Tab. 3.1"
+ },
+ {
+  "id": "28-176",
+  "de": "Flachdecke (auf Stützen, größere Spannweite)",
+  "en": "Flat slab (on columns, larger span)"
+ }
+]

@@ -1,0 +1,1007 @@
+[
+ {
+  "id": "29-0",
+  "de": "Flachdecke: C<sub>Rd,c</sub> = 0,18/γ<sub>c</sub> · Innenstütze mit u<sub>0</sub>/d &lt; 4: C<sub>Rd,c</sub> = 0,18/γ<sub>c</sub> · (0,1·u<sub>0</sub>/d + 0,6)<br> Fundamente und Bodenplatten: C<sub>Rd,c</sub> = 0,15/γ<sub>c</sub> (Bodenpressung innerhalb des Rundschnitts darf abgezogen werden)<br> k = 1 + √(200/d) ≤ 2,0 · ρ<sub>l</sub> = √(ρ<sub>lx</sub>·ρ<sub>ly</sub>) ≤ min(0,02; 0,5·f<sub>cd</sub>/f<sub>yd</sub>) · v<sub>min</sub> wie bei der Querkraft",
+  "en": "Flat slab: C<sub>Rd,c</sub> = 0.18/γ<sub>c</sub> · interior column with u<sub>0</sub>/d &lt; 4: C<sub>Rd,c</sub> = 0.18/γ<sub>c</sub> · (0.1·u<sub>0</sub>/d + 0.6)<br> Foundations and ground slabs: C<sub>Rd,c</sub> = 0.15/γ<sub>c</sub> (soil pressure within the control perimeter may be deducted)<br> k = 1 + √(200/d) ≤ 2.0 · ρ<sub>l</sub> = √(ρ<sub>lx</sub>·ρ<sub>ly</sub>) ≤ min(0.02; 0.5·f<sub>cd</sub>/f<sub>yd</sub>) · v<sub>min</sub> as for shear"
+ },
+ {
+  "id": "29-1",
+  "de": "Folge",
+  "en": "Consequence"
+ },
+ {
+  "id": "29-2",
+  "de": "Gerechnet mit Parabel-Rechteck-Diagramm, B500 mit horizontalem Ast und je einer Bewehrungslage oben und unten. Die vom Stahl verdrängte Betonfläche ist nicht abgezogen. Nur einachsige Biegung.",
+  "en": "Calculated with the parabola-rectangle diagram, B500 with horizontal branch and one layer of reinforcement each at top and bottom. The concrete area displaced by the steel is not deducted. Uniaxial bending only."
+ },
+ {
+  "id": "29-3",
+  "de": "Gesamthöhe h [cm]",
+  "en": "Overall depth h [cm]"
+ },
+ {
+  "id": "29-4",
+  "de": "Gilt für Durchlaufträger mit ähnlichen Stützweiten (Verhältnis benachbarter Felder 2/3 … 1,5) und Kragarm ≤ halbes Nachbarfeld.",
+  "en": "Applies to continuous beams with similar spans (ratio of adjacent spans 2/3 … 1.5) and cantilever ≤ half the adjacent span."
+ },
+ {
+  "id": "29-5",
+  "de": "Grenzdehnungen bis C50/60: ε<sub>c2</sub> = 2,0 ‰ (Ende der Parabel), ε<sub>cu2</sub> = 3,5 ‰ (Bruchstauchung).",
+  "en": "Limit strains up to C50/60: ε<sub>c2</sub> = 2.0 ‰ (end of parabola), ε<sub>cu2</sub> = 3.5 ‰ (ultimate compressive strain)."
+ },
+ {
+  "id": "29-6",
+  "de": "Gründungsbauteile",
+  "en": "Foundation members"
+ },
+ {
+  "id": "29-7",
+  "de": "Guter und mäßiger Verbund",
+  "en": "Good and poor bond"
+ },
+ {
+  "id": "29-8",
+  "de": "Haken, Winkelhaken, Schlaufen, Bügel",
+  "en": "Hooks, bends, loops, links"
+ },
+ {
+  "id": "29-9",
+  "de": "Hochfester Beton — Kennwerte und Grenzdehnungen",
+  "en": "High-strength concrete — properties and limit strains"
+ },
+ {
+  "id": "29-10",
+  "de": "Höchstbewehrung",
+  "en": "Maximum reinforcement"
+ },
+ {
+  "id": "29-11",
+  "de": "Höhe h [cm] (Biegerichtung)",
+  "en": "Depth h [cm] (bending direction)"
+ },
+ {
+  "id": "29-12",
+  "de": "Innenfeld",
+  "en": "Interior span"
+ },
+ {
+  "id": "29-13",
+  "de": "Innenfeld (0,70·l)",
+  "en": "Interior span (0.70·l)"
+ },
+ {
+  "id": "29-14",
+  "de": "Innenfeld eines Durchlaufträgers",
+  "en": "Interior span of a continuous beam"
+ },
+ {
+  "id": "29-15",
+  "de": "Innenräume RH ≈ 50 %, außen RH ≈ 80 %. Endwerte (t → ∞), ohne Temperatureinfluss.",
+  "en": "Indoors RH ≈ 50 %, outdoors RH ≈ 80 %. Final values (t → ∞), without temperature effects."
+ },
+ {
+  "id": "29-16",
+  "de": "Innenräume, Bauteile unter Wasser",
+  "en": "Interiors, members under water"
+ },
+ {
+  "id": "29-17",
+  "de": "Innenstütze (β = 1,10)",
+  "en": "Interior column (β = 1.10)"
+ },
+ {
+  "id": "29-18",
+  "de": "Interaktion mit Querkraft (kompakter Querschnitt): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1 mit V<sub>Rd,max</sub> = 946,7 kN",
+  "en": "Interaction with shear (compact section): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1 with V<sub>Rd,max</sub> = 946.7 kN"
+ },
+ {
+  "id": "29-19",
+  "de": "K<sub>1</sub> = λ/10 − 2,5 für 25 ≤ λ ≤ 35, K<sub>1</sub> = 1 für λ &gt; 35 · 1/r auf der sicheren Seite mit K<sub>r</sub> = 1 und ohne Kriechen (K<sub>φ</sub> = 1)<br> Bei veränderlichem Moment entlang der Stütze: e<sub>0</sub> = 0,6·e<sub>01</sub> + 0,4·e<sub>02</sub> ≥ 0,4·e<sub>02</sub> (|e<sub>02</sub>| ≥ |e<sub>01</sub>|)",
+  "en": "K<sub>1</sub> = λ/10 − 2.5 for 25 ≤ λ ≤ 35, K<sub>1</sub> = 1 for λ &gt; 35 · 1/r on the safe side with K<sub>r</sub> = 1 and without creep (K<sub>φ</sub> = 1)<br> For a moment varying along the column: e<sub>0</sub> = 0.6·e<sub>01</sub> + 0.4·e<sub>02</sub> ≥ 0.4·e<sub>02</sub> (|e<sub>02</sub>| ≥ |e<sub>01</sub>|)"
+ },
+ {
+  "id": "29-20",
+  "de": "Kaimauern",
+  "en": "Quay walls"
+ },
+ {
+  "id": "29-21",
+  "de": "Kennwert",
+  "en": "Property"
+ },
+ {
+  "id": "29-22",
+  "de": "Konstruktive Regeln — DIN EN 1992-1-1/NA, 9.5",
+  "en": "Detailing rules — DIN EN 1992-1-1/NA, 9.5"
+ },
+ {
+  "id": "29-23",
+  "de": "Kontrolle über den Hebelarm: A<sub>s</sub> = M<sub>Ed</sub>/(z · f<sub>yd</sub>) = 11,51 cm²",
+  "en": "Check via the lever arm: A<sub>s</sub> = M<sub>Ed</sub>/(z · f<sub>yd</sub>) = 11.51 cm²"
+ },
+ {
+  "id": "29-24",
+  "de": "Kragarm (an der Stütze)",
+  "en": "Cantilever (at the support)"
+ },
+ {
+  "id": "29-25",
+  "de": "Kragstütze (β = 2,0)",
+  "en": "Cantilever column (β = 2.0)"
+ },
+ {
+  "id": "29-26",
+  "de": "Kragstütze: unten eingespannt, oben frei",
+  "en": "Cantilever column: fixed at the bottom, free at the top"
+ },
+ {
+  "id": "29-27",
+  "de": "Kriechen und Schwinden C30/37",
+  "en": "Creep and shrinkage C30/37"
+ },
+ {
+  "id": "29-28",
+  "de": "Kriechen und Schwinden — EN 1992-1-1, 3.1.4 und Anhang B",
+  "en": "Creep and shrinkage — EN 1992-1-1, 3.1.4 and Annex B"
+ },
+ {
+  "id": "29-29",
+  "de": "Kriechen vergrößert die Krümmung. Für Stützen mit hohem Dauerlastanteil und λ &gt; 50 ist K<sub>φ</sub> = 1 + β·φ<sub>ef</sub> zu berücksichtigen.",
+  "en": "Creep increases the curvature. For columns with a high proportion of sustained load and λ &gt; 50, K<sub>φ</sub> = 1 + β·φ<sub>ef</sub> must be taken into account."
+ },
+ {
+  "id": "29-30",
+  "de": "Kriechzahl und Schwindmaß berechnen",
+  "en": "Calculate creep coefficient and shrinkage strain"
+ },
+ {
+  "id": "29-31",
+  "de": "Kritischer Rundschnitt",
+  "en": "Basic control perimeter"
+ },
+ {
+  "id": "29-32",
+  "de": "Lage der Stütze",
+  "en": "Column position"
+ },
+ {
+  "id": "29-33",
+  "de": "Lagermatten (Anhaltswerte)",
+  "en": "Stock meshes (guide values)"
+ },
+ {
+  "id": "29-34",
+  "de": "Lagerung (Eulerfall)",
+  "en": "Support conditions (Euler case)"
+ },
+ {
+  "id": "29-35",
+  "de": "Lastausmitten (Verfahren mit Nennkrümmung)",
+  "en": "Eccentricities (nominal curvature method)"
+ },
+ {
+  "id": "29-36",
+  "de": "Längsbewehrung A<sub>sl</sub> [cm²]",
+  "en": "Longitudinal reinforcement A<sub>sl</sub> [cm²]"
+ },
+ {
+  "id": "29-37",
+  "de": "Längsstäbe",
+  "en": "Longitudinal bars"
+ },
+ {
+  "id": "29-38",
+  "de": "Längsstäbe: A<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>) = 4,03 cm² (über den Umfang verteilt)",
+  "en": "Longitudinal bars: A<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>) = 4.03 cm² (distributed around the perimeter)"
+ },
+ {
+  "id": "29-39",
+  "de": "M quasi-ständig [kNm]",
+  "en": "M quasi-permanent [kNm]"
+ },
+ {
+  "id": "29-40",
+  "de": "M<sub>0Ed</sub> [kNm] (1. Ordnung)",
+  "en": "M<sub>0Ed</sub> [kNm] (first order)"
+ },
+ {
+  "id": "29-41",
+  "de": "M<sub>Ed</sub> = N<sub>Ed</sub> · (e<sub>0</sub> + e<sub>i</sub> + e<sub>2</sub>)<br> e<sub>0</sub> = M<sub>0Ed</sub> / N<sub>Ed</sub> ≥ max(h/30; 20 mm)<br> e<sub>i</sub> = θ<sub>i</sub> · l<sub>0</sub>/2&nbsp; mit&nbsp; θ<sub>i</sub> = α<sub>h</sub>/200,&nbsp; α<sub>h</sub> = 2/√l,&nbsp; 2/3 ≤ α<sub>h</sub> ≤ 1&nbsp; (l in m)<br> e<sub>2</sub> = K<sub>1</sub> · (1/r) · l<sub>0</sub>² / 10&nbsp; mit&nbsp; 1/r = ε<sub>yd</sub> / (0,45·d)",
+  "en": "M<sub>Ed</sub> = N<sub>Ed</sub> · (e<sub>0</sub> + e<sub>i</sub> + e<sub>2</sub>)<br> e<sub>0</sub> = M<sub>0Ed</sub> / N<sub>Ed</sub> ≥ max(h/30; 20 mm)<br> e<sub>i</sub> = θ<sub>i</sub> · l<sub>0</sub>/2&nbsp; with&nbsp; θ<sub>i</sub> = α<sub>h</sub>/200,&nbsp; α<sub>h</sub> = 2/√l,&nbsp; 2/3 ≤ α<sub>h</sub> ≤ 1&nbsp; (l in m)<br> e<sub>2</sub> = K<sub>1</sub> · (1/r) · l<sub>0</sub>² / 10&nbsp; with&nbsp; 1/r = ε<sub>yd</sub> / (0.45·d)"
+ },
+ {
+  "id": "29-42",
+  "de": "Matte",
+  "en": "Mesh"
+ },
+ {
+  "id": "29-43",
+  "de": "Matten, Ringware (kaltverformt)",
+  "en": "Meshes, coils (cold-worked)"
+ },
+ {
+  "id": "29-44",
+  "de": "Mindestbetonfestigkeit für XC3: <b>C20/25</b>",
+  "en": "Minimum concrete strength for XC3: <b>C20/25</b>"
+ },
+ {
+  "id": "29-45",
+  "de": "Mindestbewehrung",
+  "en": "Minimum reinforcement"
+ },
+ {
+  "id": "29-46",
+  "de": "Mindestbewehrung für Zwang — 7.3.2",
+  "en": "Minimum reinforcement for restraint — 7.3.2"
+ },
+ {
+  "id": "29-47",
+  "de": "Mindestbügel (Balken): ρ<sub>w,min</sub> = 0,16 · f<sub>ctm</sub> / f<sub>yk</sub>&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,min</sub> = ρ<sub>w,min</sub> · b<sub>w</sub>",
+  "en": "Minimum links (beams): ρ<sub>w,min</sub> = 0.16 · f<sub>ctm</sub> / f<sub>yk</sub>&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,min</sub> = ρ<sub>w,min</sub> · b<sub>w</sub>"
+ },
+ {
+  "id": "29-48",
+  "de": "Mindestfestigkeit",
+  "en": "Minimum strength"
+ },
+ {
+  "id": "29-49",
+  "de": "Mindestwert D<sub>min</sub>",
+  "en": "Minimum value D<sub>min</sub>"
+ },
+ {
+  "id": "29-50",
+  "de": "Mit dem k<sub>d</sub>-Verfahren bemessen",
+  "en": "Designed with the k<sub>d</sub> method"
+ },
+ {
+  "id": "29-51",
+  "de": "Mitwirkende Plattenbreite — EN 1992-1-1, 5.3.2.1",
+  "en": "Effective flange width — EN 1992-1-1, 5.3.2.1"
+ },
+ {
+  "id": "29-52",
+  "de": "Nach DIN EN 1992-1-1/NA, Tab. 7.1DE. Bei X0/XC1 dient die Begrenzung nur dem Aussehen.",
+  "en": "According to DIN EN 1992-1-1/NA, Tab. 7.1DE. For X0/XC1 the limit serves appearance only."
+ },
+ {
+  "id": "29-53",
+  "de": "Nach DIN EN 1992-1-1/NA, Tab. NA.9.1",
+  "en": "According to DIN EN 1992-1-1/NA, Tab. NA.9.1"
+ },
+ {
+  "id": "29-54",
+  "de": "Nulllinie in der Platte → Rechteckquerschnitt mit b<sub>eff</sub> zulässig",
+  "en": "Neutral axis in the flange → rectangular section with b<sub>eff</sub> permitted"
+ },
+ {
+  "id": "29-55",
+  "de": "Nutzhöhe d [cm]",
+  "en": "Effective depth d [cm]"
+ },
+ {
+  "id": "29-56",
+  "de": "Ohne direkte Berechnung: Grenzdurchmesser — Tab. 7.2DE",
+  "en": "Without direct calculation: maximum bar diameter — Tab. 7.2DE"
+ },
+ {
+  "id": "29-57",
+  "de": "Parkdecks, Brückenteile mit Spritzwasser",
+  "en": "Car parks, bridge parts exposed to splash water"
+ },
+ {
+  "id": "29-58",
+  "de": "Platte: oben und unten",
+  "en": "Slab: top and bottom"
+ },
+ {
+  "id": "29-59",
+  "de": "Platten dürfen ohne Querkraftbewehrung bleiben, wenn V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>. Balken erhalten immer mindestens die Mindestbügel.",
+  "en": "Slabs may be left without shear reinforcement if V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>. Beams always receive at least the minimum links."
+ },
+ {
+  "id": "29-60",
+  "de": "Platten — konstruktive Regeln (NA 9.3.1)",
+  "en": "Slabs — detailing rules (NA 9.3.1)"
+ },
+ {
+  "id": "29-61",
+  "de": "Plattenbalken berechnen",
+  "en": "Calculate a T-beam"
+ },
+ {
+  "id": "29-62",
+  "de": "Plattenbalken, C30/37, M<sub>Ed</sub> = 450,0 kNm",
+  "en": "T-beam, C30/37, M<sub>Ed</sub> = 450.0 kNm"
+ },
+ {
+  "id": "29-63",
+  "de": "Plattendicke h<sub>f</sub> [cm]",
+  "en": "Flange thickness h<sub>f</sub> [cm]"
+ },
+ {
+  "id": "29-64",
+  "de": "Plattenüberstand b₁ [cm]",
+  "en": "Flange overhang b₁ [cm]"
+ },
+ {
+  "id": "29-65",
+  "de": "Plattenüberstand b₂ [cm]",
+  "en": "Flange overhang b₂ [cm]"
+ },
+ {
+  "id": "29-66",
+  "de": "Prinzip der Biegebemessung",
+  "en": "Principle of bending design"
+ },
+ {
+  "id": "29-67",
+  "de": "Q-Matten: in beiden Richtungen gleich (zweiachsig gespannte Platten). R-Matten: Hauptrichtung längs. a<sub>s</sub> = π · Ø²/4 · 1000/s. Für die Ausführung gelten die aktuellen Herstellerlisten.",
+  "en": "Q meshes: equal in both directions (two-way spanning slabs). R meshes: main direction longitudinal. a<sub>s</sub> = π · Ø²/4 · 1000/s. For execution, the current manufacturer lists apply."
+ },
+ {
+  "id": "29-68",
+  "de": "Querbewehrung",
+  "en": "Transverse reinforcement"
+ },
+ {
+  "id": "29-69",
+  "de": "Querkraft b<sub>w</sub> = 30 cm, d = 55,0 cm, C30/37",
+  "en": "Shear b<sub>w</sub> = 30 cm, d = 55.0 cm, C30/37"
+ },
+ {
+  "id": "29-70",
+  "de": "Querkraftnachweis Rechteckquerschnitt",
+  "en": "Shear verification of a rectangular section"
+ },
+ {
+  "id": "29-71",
+  "de": "Querschnitt, Dehnungen (eben, Bernoulli) und Betondruckspannungen (Parabel-Rechteck). Gleichgewicht: F<sub>cd</sub> = F<sub>sd</sub>, M<sub>Eds</sub> = F<sub>sd</sub>·z.",
+  "en": "Cross-section, strains (plane, Bernoulli) and concrete compressive stresses (parabola-rectangle). Equilibrium: F<sub>cd</sub> = F<sub>sd</sub>, M<sub>Eds</sub> = F<sub>sd</sub>·z."
+ },
+ {
+  "id": "29-72",
+  "de": "Querschnittsbemessung bei Biegung mit Längsdruck",
+  "en": "Section design for bending with axial compression"
+ },
+ {
+  "id": "29-73",
+  "de": "Querschnittsfläche A<sub>s</sub> [cm²] für n Stäbe",
+  "en": "Cross-sectional area A<sub>s</sub> [cm²] for n bars"
+ },
+ {
+  "id": "29-74",
+  "de": "Querschnittsfläche a<sub>s</sub> [cm²/m] je Meter (Platten, Bügel)",
+  "en": "Cross-sectional area a<sub>s</sub> [cm²/m] per metre (slabs, links)"
+ },
+ {
+  "id": "29-75",
+  "de": "Randabstand Druckbewehrung d₂ [cm]",
+  "en": "Edge distance of compression reinforcement d₂ [cm]"
+ },
+ {
+  "id": "29-76",
+  "de": "Randabstand d₁ [cm]",
+  "en": "Edge distance d₁ [cm]"
+ },
+ {
+  "id": "29-77",
+  "de": "Randstütze (β = 1,40)",
+  "en": "Edge column (β = 1.40)"
+ },
+ {
+  "id": "29-78",
+  "de": "Rechteckquerschnitt mit Dehnungsverteilung und Parabel-Rechteck-Spannungsblock",
+  "en": "Rectangular section with strain distribution and parabola-rectangle stress block"
+ },
+ {
+  "id": "29-79",
+  "de": "Reicht die Betondruckzone nicht, hält man die Nulllinie bei ξ = 0,45 fest und legt das restliche Moment Δμ auf ein Stahl-Kräftepaar aus Druckbewehrung A<sub>s2</sub> (oben) und zusätzlicher Zugbewehrung (unten) mit dem Hebelarm d − d₂.",
+  "en": "If the concrete compression zone is not sufficient, the neutral axis is fixed at ξ = 0.45 and the remaining moment Δμ is assigned to a steel couple of compression reinforcement A<sub>s2</sub> (top) and additional tension reinforcement (bottom) with the lever arm d − d₂."
+ },
+ {
+  "id": "29-80",
+  "de": "Rissbreite berechnen (Rechteck, reine Biegung)",
+  "en": "Calculate crack width (rectangle, pure bending)"
+ },
+ {
+  "id": "29-81",
+  "de": "Rissbreite, M = 45,0 kNm (quasi-ständig)",
+  "en": "Crack width, M = 45.0 kNm (quasi-permanent)"
+ },
+ {
+  "id": "29-82",
+  "de": "Schlankheit prüfen",
+  "en": "Check slenderness"
+ },
+ {
+  "id": "29-83",
+  "de": "Schrägstäbe und andere gebogene Stäbe — Betondeckung ⊥ zur Krümmungsebene",
+  "en": "Bent-up bars and other bent bars — concrete cover ⊥ to the plane of curvature"
+ },
+ {
+  "id": "29-84",
+  "de": "Solebäder, Bauteile in chloridhaltigem Industriewasser",
+  "en": "Brine baths, members in chloride-containing industrial water"
+ },
+ {
+  "id": "29-85",
+  "de": "Stab-Ø [mm]",
+  "en": "Bar Ø [mm]"
+ },
+ {
+  "id": "29-86",
+  "de": "Stabdurchmesser Ø [mm]",
+  "en": "Bar diameter Ø [mm]"
+ },
+ {
+  "id": "29-87",
+  "de": "Stabstahl, Matten (warmgewalzt)",
+  "en": "Bars, meshes (hot-rolled)"
+ },
+ {
+  "id": "29-88",
+  "de": "Stahlbeton reißt planmäßig: Erst im gerissenen Zustand trägt der Stahl die Zugkraft. Zu breite Risse lassen aber Wasser und Chloride an die Bewehrung und sehen schlecht aus. Begrenzt wird die rechnerische Rissbreite w<sub>k</sub>.",
+  "en": "Reinforced concrete is designed to crack: only in the cracked state does the steel carry the tensile force. However, cracks that are too wide let water and chlorides reach the reinforcement and look unsightly. The calculated crack width w<sub>k</sub> is therefore limited."
+ },
+ {
+  "id": "29-89",
+  "de": "Statt die Durchbiegung zu berechnen, darf man bei Decken und Balken des üblichen Hochbaus die Schlankheit l/d begrenzen. Das ist der schnellste Weg zur erforderlichen Deckendicke.",
+  "en": "Instead of calculating the deflection, for slabs and beams in ordinary building construction you may limit the slenderness l/d. This is the quickest way to the required slab thickness."
+ },
+ {
+  "id": "29-90",
+  "de": "Streckgrenze f_yk",
+  "en": "Yield strength f_yk"
+ },
+ {
+  "id": "29-91",
+  "de": "Stütze 30/30 cm, l = 3,50 m, N<sub>Ed</sub> = 1200 kN",
+  "en": "Column 30/30 cm, l = 3.50 m, N<sub>Ed</sub> = 1200 kN"
+ },
+ {
+  "id": "29-92",
+  "de": "Stütze bemessen (Rechteck, symmetrisch bewehrt)",
+  "en": "Design a column (rectangle, symmetrically reinforced)"
+ },
+ {
+  "id": "29-93",
+  "de": "Stützen werden meist symmetrisch bewehrt (A<sub>s1</sub> = A<sub>s2</sub>), weil das Moment je nach Lastfall die Richtung wechselt. Die Bemessung sucht die Dehnungsebene, bei der die innere Normalkraft N<sub>Ed</sub> entspricht, und prüft, ob das aufnehmbare Moment M<sub>Rd</sub> ≥ M<sub>Ed</sub> ist. Von Hand nutzt man dafür Interaktionsdiagramme (ν–μ-Diagramme).",
+  "en": "Columns are usually reinforced symmetrically (A<sub>s1</sub> = A<sub>s2</sub>) because the moment changes direction depending on the load case. The design searches for the strain plane at which the internal axial force equals N<sub>Ed</sub>, and checks whether the resisting moment M<sub>Rd</sub> ≥ M<sub>Ed</sub>. By hand, interaction diagrams (ν–μ diagrams) are used for this."
+ },
+ {
+  "id": "29-94",
+  "de": "Stützenform",
+  "en": "Column shape"
+ },
+ {
+  "id": "29-95",
+  "de": "Stützenlänge l [m]",
+  "en": "Column length l [m]"
+ },
+ {
+  "id": "29-96",
+  "de": "Stützweite l [m]",
+  "en": "Span l [m]"
+ },
+ {
+  "id": "29-97",
+  "de": "T<sub>Rd,max</sub> = 2 · ν · α<sub>cw</sub> · f<sub>cd</sub> · A<sub>k</sub> · t<sub>ef</sub> · sin θ · cos θ mit ν = 0,525 · ν<sub>2</sub> (Vollquerschnitt, NA), ν<sub>2</sub> = 1,1 − f<sub>ck</sub>/500 ≤ 1",
+  "en": "T<sub>Rd,max</sub> = 2 · ν · α<sub>cw</sub> · f<sub>cd</sub> · A<sub>k</sub> · t<sub>ef</sub> · sin θ · cos θ with ν = 0.525 · ν<sub>2</sub> (solid section, NA), ν<sub>2</sub> = 1.1 − f<sub>ck</sub>/500 ≤ 1"
+ },
+ {
+  "id": "29-98",
+  "de": "Tide-, Spritzwasser- und Sprühnebelbereich",
+  "en": "Tidal, splash and spray zones"
+ },
+ {
+  "id": "29-99",
+  "de": "Torsion Rechteck 30/60 cm, C30/37",
+  "en": "Torsion rectangle 30/60 cm, C30/37"
+ },
+ {
+  "id": "29-100",
+  "de": "Torsion Rechteckquerschnitt berechnen",
+  "en": "Calculate torsion of a rectangular section"
+ },
+ {
+  "id": "29-101",
+  "de": "Torsion — EN 1992-1-1, 6.3 mit NA",
+  "en": "Torsion — EN 1992-1-1, 6.3 with NA"
+ },
+ {
+  "id": "29-102",
+  "de": "Tragsystem",
+  "en": "Structural system"
+ },
+ {
+  "id": "29-103",
+  "de": "Umgebung",
+  "en": "Environment"
+ },
+ {
+  "id": "29-104",
+  "de": "V<sub>Rd,s</sub> = a<sub>sw</sub> · z · f<sub>ywd</sub> · cot θ&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,erf</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ)<br> V<sub>Rd,max</sub> = b<sub>w</sub> · z · ν<sub>1</sub> · f<sub>cd</sub> / (cot θ + tan θ)",
+  "en": "V<sub>Rd,s</sub> = a<sub>sw</sub> · z · f<sub>ywd</sub> · cot θ&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,req</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ)<br> V<sub>Rd,max</sub> = b<sub>w</sub> · z · ν<sub>1</sub> · f<sub>cd</sub> / (cot θ + tan θ)"
+ },
+ {
+  "id": "29-105",
+  "de": "Verankerung Ø 16, C25/30, guter Verbund",
+  "en": "Anchorage Ø 16, C25/30, good bond"
+ },
+ {
+  "id": "29-106",
+  "de": "Verankerungslänge berechnen",
+  "en": "Calculate anchorage length"
+ },
+ {
+  "id": "29-107",
+  "de": "Verbundspannung und Grundwert der Verankerungslänge — 8.4",
+  "en": "Bond stress and basic anchorage length — 8.4"
+ },
+ {
+  "id": "29-108",
+  "de": "Verhältnis (f_t / f_y)_k",
+  "en": "Ratio (f_t / f_y)_k"
+ },
+ {
+  "id": "29-109",
+  "de": "Verkürzung eines 10 m langen Bauteils ohne Behinderung: 4,6 mm",
+  "en": "Shortening of a 10 m long unrestrained member: 4.6 mm"
+ },
+ {
+  "id": "29-110",
+  "de": "Verlegemaß c<sub>v,l</sub> [cm]",
+  "en": "Placing dimension c<sub>v,l</sub> [cm]"
+ },
+ {
+  "id": "29-111",
+  "de": "Wandecke",
+  "en": "Wall corner"
+ },
+ {
+  "id": "29-112",
+  "de": "Wandende",
+  "en": "Wall end"
+ },
+ {
+  "id": "29-113",
+  "de": "Wann ist eine Stütze schlank? — DIN EN 1992-1-1/NA, 5.8.3.1",
+  "en": "When is a column slender? — DIN EN 1992-1-1/NA, 5.8.3.1"
+ },
+ {
+  "id": "29-114",
+  "de": "Warum Risse begrenzen?",
+  "en": "Why limit cracks?"
+ },
+ {
+  "id": "29-115",
+  "de": "Was ist Durchstanzen?",
+  "en": "What is punching shear?"
+ },
+ {
+  "id": "29-116",
+  "de": "Widerstand ohne Durchstanzbewehrung — DIN EN 1992-1-1/NA, 6.4.4",
+  "en": "Resistance without punching shear reinforcement — DIN EN 1992-1-1/NA, 6.4.4"
+ },
+ {
+  "id": "29-117",
+  "de": "Woher die Werte kommen",
+  "en": "Where the values come from"
+ },
+ {
+  "id": "29-118",
+  "de": "X0: kein Angriffsrisiko (unbewehrter Beton im Trockenen) · Zusätzlich gibt es Klassen für Betonangriff (XF Frost, XA chemisch, XM Verschleiß); sie beeinflussen die Betonzusammensetzung, nicht die Betondeckung.",
+  "en": "X0: no risk of attack (unreinforced concrete in dry conditions) · There are additional classes for concrete attack (XF freeze-thaw, XA chemical, XM abrasion); they affect the concrete composition, not the concrete cover."
+ },
+ {
+  "id": "29-119",
+  "de": "XC1 — trocken oder ständig nass",
+  "en": "XC1 — dry or permanently wet"
+ },
+ {
+  "id": "29-120",
+  "de": "XC3 — mäßige Feuchte",
+  "en": "XC3 — moderate humidity"
+ },
+ {
+  "id": "29-121",
+  "de": "XC4 — wechselnd nass und trocken",
+  "en": "XC4 — cyclic wet and dry"
+ },
+ {
+  "id": "29-122",
+  "de": "XD1 — mäßige Feuchte + Chlorid",
+  "en": "XD1 — moderate humidity + chloride"
+ },
+ {
+  "id": "29-123",
+  "de": "XD2 — nass, selten trocken + Chlorid",
+  "en": "XD2 — wet, rarely dry + chloride"
+ },
+ {
+  "id": "29-124",
+  "de": "XD3 — wechselnd nass und trocken + Chlorid",
+  "en": "XD3 — cyclic wet and dry + chloride"
+ },
+ {
+  "id": "29-125",
+  "de": "XS1 — salzhaltige Luft",
+  "en": "XS1 — airborne salt"
+ },
+ {
+  "id": "29-126",
+  "de": "XS2 — unter Meerwasser",
+  "en": "XS2 — permanently submerged in seawater"
+ },
+ {
+  "id": "29-127",
+  "de": "XS3 — Tide-, Spritzwasser- und Sprühnebelbereich",
+  "en": "XS3 — tidal, splash and spray zones"
+ },
+ {
+  "id": "29-128",
+  "de": "Zement",
+  "en": "Cement"
+ },
+ {
+  "id": "29-129",
+  "de": "Zement N (normal, 32,5 R / 42,5 N): t<sub>0</sub> = t<sub>0,T</sub> · (9/(2 + t<sub>0,T</sub><sup>1,2</sup>) + 1)<sup>α</sup> mit α = 0 → t<sub>0</sub> = 28,00 Tage",
+  "en": "Cement N (normal, 32.5 R / 42.5 N): t<sub>0</sub> = t<sub>0,T</sub> · (9/(2 + t<sub>0,T</sub><sup>1.2</sup>) + 1)<sup>α</sup> with α = 0 → t<sub>0</sub> = 28.00 days"
+ },
+ {
+  "id": "29-130",
+  "de": "Zuggurt (Längsbewehrung)",
+  "en": "Tension chord (longitudinal reinforcement)"
+ },
+ {
+  "id": "29-131",
+  "de": "Zum Vergleich ohne direkte Berechnung (Tab. 7.2DE): Ø* · f<sub>ct,eff</sub>/2,9 = 11,4 mm &lt; Ø = 12 mm",
+  "en": "For comparison without direct calculation (Tab. 7.2DE): Ø* · f<sub>ct,eff</sub>/2.9 = 11.4 mm &lt; Ø = 12 mm"
+ },
+ {
+  "id": "29-132",
+  "de": "Zur Querkraftbewehrung addieren; die Bügel müssen geschlossen sein (Übergreifung oder Haken).",
+  "en": "Add to the shear reinforcement; the links must be closed (lapped or hooked)."
+ },
+ {
+  "id": "29-133",
+  "de": "Zusammenhang mit dem ω-Verfahren: μ<sub>Eds</sub> = 10 / (k<sub>d</sub>² · f<sub>cd</sub>), k<sub>s</sub> = 1000 / (ζ · f<sub>yd</sub>)",
+  "en": "Relation to the ω method: μ<sub>Eds</sub> = 10 / (k<sub>d</sub>² · f<sub>cd</sub>), k<sub>s</sub> = 1000 / (ζ · f<sub>yd</sub>)"
+ },
+ {
+  "id": "29-134",
+  "de": "a<sub>s</sub> = A<sub>Stab</sub> · 100 / s (s in cm) · Bei zweischnittigen Bügeln den Wert verdoppeln.",
+  "en": "a<sub>s</sub> = A<sub>bar</sub> · 100 / s (s in cm) · For two-legged links, double the value."
+ },
+ {
+  "id": "29-135",
+  "de": "a<sub>sw,erf</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ) = 200000 / (480 · 434,8 · 1,20) · 1000 / 100 = 7,99 cm²/m",
+  "en": "a<sub>sw,req</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ) = 200000 / (480 · 434.8 · 1.20) · 1000 / 100 = 7.99 cm²/m"
+ },
+ {
+  "id": "29-136",
+  "de": "allgemein:&nbsp; l / d ≤ K · 35<br> mit leichten Trennwänden (Schadensgefahr):&nbsp; l / d ≤ K² · 150 / l&nbsp;&nbsp;(l in m)",
+  "en": "general:&nbsp; l / d ≤ K · 35<br> with light partitions (risk of damage):&nbsp; l / d ≤ K² · 150 / l&nbsp;&nbsp;(l in m)"
+ },
+ {
+  "id": "29-137",
+  "de": "außergewöhnlich",
+  "en": "accidental"
+ },
+ {
+  "id": "29-138",
+  "de": "b [mm] (Platte: 1000)",
+  "en": "b [mm] (slab: 1000)"
+ },
+ {
+  "id": "29-139",
+  "de": "b<sub>eff</sub> = Σ b<sub>eff,i</sub> + b<sub>w</sub> ≤ b<br> b<sub>eff,i</sub> = 0,2·b<sub>i</sub> + 0,1·l<sub>0</sub> ≤ 0,2·l<sub>0</sub>&nbsp; und&nbsp; ≤ b<sub>i</sub>",
+  "en": "b<sub>eff</sub> = Σ b<sub>eff,i</sub> + b<sub>w</sub> ≤ b<br> b<sub>eff,i</sub> = 0.2·b<sub>i</sub> + 0.1·l<sub>0</sub> ≤ 0.2·l<sub>0</sub>&nbsp; and&nbsp; ≤ b<sub>i</sub>"
+ },
+ {
+  "id": "29-140",
+  "de": "b<sub>w</sub> — Stegbreite · b<sub>i</sub> — halber lichter Abstand zum Nachbarsteg (bzw. Plattenüberstand am Rand)",
+  "en": "b<sub>w</sub> — web width · b<sub>i</sub> — half the clear distance to the adjacent web (or flange overhang at the edge)"
+ },
+ {
+  "id": "29-141",
+  "de": "c<sub>min,b</sub> — Verbund: ≥ Stabdurchmesser Ø · c<sub>min,dur</sub> — Dauerhaftigkeit (Tab. 4.4DE) · Δc<sub>dev</sub> — Vorhaltemaß für Ausführungstoleranzen",
+  "en": "c<sub>min,b</sub> — bond: ≥ bar diameter Ø · c<sub>min,dur</sub> — durability (Tab. 4.4DE) · Δc<sub>dev</sub> — allowance for execution tolerances"
+ },
+ {
+  "id": "29-142",
+  "de": "c<sub>x</sub> bzw. D [cm]",
+  "en": "c<sub>x</sub> or D [cm]"
+ },
+ {
+  "id": "29-143",
+  "de": "d — statische Nutzhöhe (Abstand Druckrand bis Schwerpunkt der Zugbewehrung) · ξ = x/d · ζ = z/d<br> μ<sub>lim</sub> gehört zu ξ = 0,45: Bis dahin verformt sich der Querschnitt duktil, darüber Druckbewehrung oder größerer Querschnitt.",
+  "en": "d — effective depth (distance from the compression face to the centroid of the tension reinforcement) · ξ = x/d · ζ = z/d<br> μ<sub>lim</sub> belongs to ξ = 0.45: up to this point the section deforms in a ductile manner; beyond it, use compression reinforcement or a larger section."
+ },
+ {
+  "id": "29-144",
+  "de": "d<sub>g</sub> — Größtkorn der Gesteinskörnung",
+  "en": "d<sub>g</sub> — maximum aggregate size"
+ },
+ {
+  "id": "29-145",
+  "de": "drei Seiten",
+  "en": "three sides"
+ },
+ {
+  "id": "29-146",
+  "de": "f<sub>bd</sub> = 2,25 · η<sub>1</sub> · η<sub>2</sub> · f<sub>ctd</sub>&nbsp;&nbsp;mit&nbsp; f<sub>ctd</sub> = f<sub>ctk;0,05</sub> / γ<sub>c</sub><br> l<sub>b,rqd</sub> = (Ø / 4) · σ<sub>sd</sub> / f<sub>bd</sub>",
+  "en": "f<sub>bd</sub> = 2.25 · η<sub>1</sub> · η<sub>2</sub> · f<sub>ctd</sub>&nbsp;&nbsp;with&nbsp; f<sub>ctd</sub> = f<sub>ctk;0.05</sub> / γ<sub>c</sub><br> l<sub>b,rqd</sub> = (Ø / 4) · σ<sub>sd</sub> / f<sub>bd</sub>"
+ },
+ {
+  "id": "29-147",
+  "de": "f<sub>bd</sub> in N/mm² · l<sub>b,rqd</sub> für volle Ausnutzung σ<sub>sd</sub> = f<sub>yd</sub>",
+  "en": "f<sub>bd</sub> in N/mm² · l<sub>b,rqd</sub> for full utilisation σ<sub>sd</sub> = f<sub>yd</sub>"
+ },
+ {
+  "id": "29-148",
+  "de": "f_bd mäßig",
+  "en": "f_bd poor"
+ },
+ {
+  "id": "29-149",
+  "de": "genauer Nachweis",
+  "en": "detailed verification"
+ },
+ {
+  "id": "29-150",
+  "de": "größter Abstand Hauptbewehrung",
+  "en": "maximum spacing of main reinforcement"
+ },
+ {
+  "id": "29-151",
+  "de": "größter Bügelabstand längs (bis C50/60)",
+  "en": "maximum longitudinal link spacing (up to C50/60)"
+ },
+ {
+  "id": "29-152",
+  "de": "gültig bis C50/60 · Die Tabelle rundet diese Formeln.",
+  "en": "valid up to C50/60 · The table rounds these formulas."
+ },
+ {
+  "id": "29-153",
+  "de": "h — Seitenlänge in Richtung der Ausbiegung",
+  "en": "h — side length in the direction of buckling"
+ },
+ {
+  "id": "29-154",
+  "de": "h<sub>0</sub> = 2 · A<sub>c</sub> / u (u = Umfang, der der Trocknung ausgesetzt ist)",
+  "en": "h<sub>0</sub> = 2 · A<sub>c</sub> / u (u = perimeter exposed to drying)"
+ },
+ {
+  "id": "29-155",
+  "de": "k = 1 + √(200/d) ≤ 2,0 (d in mm) · ρ<sub>l</sub> = A<sub>sl</sub> / (b<sub>w</sub>·d) ≤ 0,02 · σ<sub>cp</sub> — Betonlängsspannung (Druck +)<br> v<sub>min</sub> = (0,0525/γ<sub>c</sub>) · k<sup>3/2</sup> · f<sub>ck</sub><sup>1/2</sup> für d ≤ 600 mm, (0,0375/γ<sub>c</sub>) · … für d &gt; 800 mm, dazwischen interpolieren",
+  "en": "k = 1 + √(200/d) ≤ 2.0 (d in mm) · ρ<sub>l</sub> = A<sub>sl</sub> / (b<sub>w</sub>·d) ≤ 0.02 · σ<sub>cp</sub> — longitudinal concrete stress (compression +)<br> v<sub>min</sub> = (0.0525/γ<sub>c</sub>) · k<sup>3/2</sup> · f<sub>ck</sub><sup>1/2</sup> for d ≤ 600 mm, (0.0375/γ<sub>c</sub>) · … for d &gt; 800 mm, interpolate in between"
+ },
+ {
+  "id": "29-156",
+  "de": "k<sub>c</sub> = 0,4 für Biegung (Rechteck), 1,0 für zentrischen Zug · k = 0,8 für h ≤ 300 mm, 0,5 für h ≥ 800 mm (interpolieren) · A<sub>ct</sub> — Zugzone vor der Rissbildung · f<sub>ct,eff</sub> = f<sub>ctm</sub> zum Zeitpunkt der Rissbildung, ohne genauen Nachweis ≥ 3,0 N/mm²<br> σ<sub>s</sub> aus dem Grenzdurchmesser: σ<sub>s</sub> = √(w<sub>k</sub> · 3,48·10⁶ / Ø*<sub>s</sub>)&nbsp; mit Ø*<sub>s</sub> = Ø<sub>s</sub> · 2,9 / f<sub>ct,eff</sub>",
+  "en": "k<sub>c</sub> = 0.4 for bending (rectangle), 1.0 for pure tension · k = 0.8 for h ≤ 300 mm, 0.5 for h ≥ 800 mm (interpolate) · A<sub>ct</sub> — tension zone before cracking · f<sub>ct,eff</sub> = f<sub>ctm</sub> at the time of cracking, without detailed verification ≥ 3.0 N/mm²<br> σ<sub>s</sub> from the maximum bar diameter: σ<sub>s</sub> = √(w<sub>k</sub> · 3.48·10⁶ / Ø*<sub>s</sub>)&nbsp; with Ø*<sub>s</sub> = Ø<sub>s</sub> · 2.9 / f<sub>ct,eff</sub>"
+ },
+ {
+  "id": "29-157",
+  "de": "k<sub>d</sub> = d [cm] / √(M<sub>Eds</sub> [kNm] / b [m]) → aus der Tafel k<sub>s</sub>, ξ, ζ",
+  "en": "k<sub>d</sub> = d [cm] / √(M<sub>Eds</sub> [kNm] / b [m]) → from the table k<sub>s</sub>, ξ, ζ"
+ },
+ {
+  "id": "29-158",
+  "de": "k<sub>d</sub>-Tafel für B500, ohne Druckbewehrung",
+  "en": "k<sub>d</sub> table for B500, without compression reinforcement"
+ },
+ {
+  "id": "29-159",
+  "de": "k<sub>d</sub>-Verfahren C25/30",
+  "en": "k<sub>d</sub> method C25/30"
+ },
+ {
+  "id": "29-160",
+  "de": "k<sub>d</sub>-Verfahren — dimensionsgebundene Bemessungstafel",
+  "en": "k<sub>d</sub> method — dimensional design table"
+ },
+ {
+  "id": "29-161",
+  "de": "keine Durchstanzbewehrung nötig",
+  "en": "no punching shear reinforcement needed"
+ },
+ {
+  "id": "29-162",
+  "de": "kleinste Querschnittsabmessung",
+  "en": "smallest cross-sectional dimension"
+ },
+ {
+  "id": "29-163",
+  "de": "kleinster lichter Stababstand",
+  "en": "minimum clear bar spacing"
+ },
+ {
+  "id": "29-164",
+  "de": "l — Stützweite (bei Kragträgern die Kraglänge) · d — statische Nutzhöhe",
+  "en": "l — span (for cantilevers the cantilever length) · d — effective depth"
+ },
+ {
+  "id": "29-165",
+  "de": "l<sub>0</sub> / 2 mit α<sub>h</sub>",
+  "en": "l<sub>0</sub> / 2 with α<sub>h</sub>"
+ },
+ {
+  "id": "29-166",
+  "de": "l<sub>0</sub> = β · l&nbsp;&nbsp;·&nbsp;&nbsp;λ = l<sub>0</sub> / i&nbsp;&nbsp;mit&nbsp; i = √(I/A) = h/√12 ≈ 0,289·h (Rechteck)",
+  "en": "l<sub>0</sub> = β · l&nbsp;&nbsp;·&nbsp;&nbsp;λ = l<sub>0</sub> / i&nbsp;&nbsp;with&nbsp; i = √(I/A) = h/√12 ≈ 0.289·h (rectangle)"
+ },
+ {
+  "id": "29-167",
+  "de": "l<sub>bd</sub> = α<sub>1</sub> · α<sub>2</sub> · α<sub>3</sub> · α<sub>4</sub> · α<sub>5</sub> · l<sub>b,rqd</sub> · (A<sub>s,erf</sub> / A<sub>s,vorh</sub>) ≥ l<sub>b,min</sub><br> l<sub>b,min</sub> = max { 0,3 · l<sub>b,rqd</sub> ;&nbsp; 10·Ø ;&nbsp; 100 mm }&nbsp;&nbsp;(Zugstab)",
+  "en": "l<sub>bd</sub> = α<sub>1</sub> · α<sub>2</sub> · α<sub>3</sub> · α<sub>4</sub> · α<sub>5</sub> · l<sub>b,rqd</sub> · (A<sub>s,req</sub> / A<sub>s,prov</sub>) ≥ l<sub>b,min</sub><br> l<sub>b,min</sub> = max { 0.3 · l<sub>b,rqd</sub> ;&nbsp; 10·Ø ;&nbsp; 100 mm }&nbsp;&nbsp;(tension bar)"
+ },
+ {
+  "id": "29-168",
+  "de": "l_b,rqd mäßig",
+  "en": "l_b,rqd poor"
+ },
+ {
+  "id": "29-169",
+  "de": "längs Ø/Abstand",
+  "en": "longitudinal Ø/spacing"
+ },
+ {
+  "id": "29-170",
+  "de": "maßgebend <b>11,51 cm²</b> · Vorschlag: 8 Ø 14 = 12,32 cm² · 6 Ø 16 = 12,06 cm² · 4 Ø 20 = 12,57 cm² · 3 Ø 25 = 14,73 cm²",
+  "en": "governing <b>11.51 cm²</b> · suggestion: 8 Ø 14 = 12.32 cm² · 6 Ø 16 = 12.06 cm² · 4 Ø 20 = 12.57 cm² · 3 Ø 25 = 14.73 cm²"
+ },
+ {
+  "id": "29-171",
+  "de": "maßgebend <b>7,34 cm² gesamt</b>, je Seite 3,67 cm²",
+  "en": "governing <b>7.34 cm² in total</b>, 3.67 cm² per side"
+ },
+ {
+  "id": "29-172",
+  "de": "maßgebend <b>7,99 cm²/m</b> (zweischnittige Bügel: je Schenkel die Hälfte)",
+  "en": "governing <b>7.99 cm²/m</b> (two-legged links: half per leg)"
+ },
+ {
+  "id": "29-173",
+  "de": "mit Haken oder Winkelhaken (α<sub>1</sub> = 0,7): l<sub>bd</sub> = max(0,7 · 644; 193) = 451 mm",
+  "en": "with hook or bend (α<sub>1</sub> = 0.7): l<sub>bd</sub> = max(0.7 · 644; 193) = 451 mm"
+ },
+ {
+  "id": "29-174",
+  "de": "mit Querkraft (kompakter Querschnitt, NA): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1",
+  "en": "with shear (compact section, NA): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1"
+ },
+ {
+  "id": "29-175",
+  "de": "mit verformungsempfindlichen Ausbauteilen:",
+  "en": "with finishes sensitive to deformation:"
+ },
+ {
+  "id": "29-176",
+  "de": "mäßig",
+  "en": "poor"
+ },
+ {
+  "id": "29-177",
+  "de": "nicht ausführbar: Decke dicker, Stütze größer oder Stützenkopf",
+  "en": "not feasible: thicker slab, larger column or column head"
+ },
+ {
+  "id": "29-178",
+  "de": "reine Biegung oder Biegung mit Längsdruck",
+  "en": "pure bending or bending with axial compression"
+ },
+ {
+  "id": "29-179",
+  "de": "relative Luftfeuchte RH [%]",
+  "en": "relative humidity RH [%]"
+ },
+ {
+  "id": "29-180",
+  "de": "ringsum (Stütze, Balken)",
+  "en": "all round (column, beam)"
+ },
+ {
+  "id": "29-181",
+  "de": "ständig und vorübergehend",
+  "en": "persistent and transient"
+ },
+ {
+  "id": "29-182",
+  "de": "ständig überflutete Bauteile im Hafen",
+  "en": "permanently submerged members in harbours"
+ },
+ {
+  "id": "29-183",
+  "de": "t<sub>ef</sub> = A/u ≥ 2 · Achsabstand der Längsstäbe vom Rand · A<sub>k</sub>, u<sub>k</sub> auf der Mittellinie der Wände",
+  "en": "t<sub>ef</sub> = A/u ≥ 2 · axis distance of the longitudinal bars from the edge · A<sub>k</sub>, u<sub>k</sub> on the centre line of the walls"
+ },
+ {
+  "id": "29-184",
+  "de": "trocknende Flächen",
+  "en": "drying surfaces"
+ },
+ {
+  "id": "29-185",
+  "de": "typische Lieferform",
+  "en": "typical delivery form"
+ },
+ {
+  "id": "29-186",
+  "de": "unten eingespannt, oben gelenkig",
+  "en": "fixed at the bottom, pinned at the top"
+ },
+ {
+  "id": "29-187",
+  "de": "v<sub>Ed</sub> = β · V<sub>Ed</sub> / (u<sub>1</sub> · d)&nbsp;&nbsp; mit&nbsp; d = (d<sub>x</sub> + d<sub>y</sub>) / 2<br> Rechteckstütze c<sub>x</sub> × c<sub>y</sub>:&nbsp; u<sub>1</sub> = 2·(c<sub>x</sub> + c<sub>y</sub>) + 2·π·2d&nbsp;&nbsp;·&nbsp;&nbsp;Rundstütze D:&nbsp; u<sub>1</sub> = π·(D + 4d)",
+  "en": "v<sub>Ed</sub> = β · V<sub>Ed</sub> / (u<sub>1</sub> · d)&nbsp;&nbsp; with&nbsp; d = (d<sub>x</sub> + d<sub>y</sub>) / 2<br> Rectangular column c<sub>x</sub> × c<sub>y</sub>:&nbsp; u<sub>1</sub> = 2·(c<sub>x</sub> + c<sub>y</sub>) + 2·π·2d&nbsp;&nbsp;·&nbsp;&nbsp;Circular column D:&nbsp; u<sub>1</sub> = π·(D + 4d)"
+ },
+ {
+  "id": "29-188",
+  "de": "vereinfacht θ = 45° (cot θ = 1,0) bei reiner Torsion; mit Querkraft denselben Winkel wie dort verwenden",
+  "en": "simplified θ = 45° (cot θ = 1.0) for pure torsion; with shear, use the same angle as there"
+ },
+ {
+  "id": "29-189",
+  "de": "w_max (Stahlbeton)",
+  "en": "w_max (reinforced concrete)"
+ },
+ {
+  "id": "29-190",
+  "de": "wechselnd nass und trocken + Chlorid",
+  "en": "cyclic wet and dry + chloride"
+ },
+ {
+  "id": "29-191",
+  "de": "× 0,6 unmittelbar über und unter Balken/Platten (Bereich = größte Seitenlänge) und bei Übergreifungsstößen mit Ø &gt; 14 mm",
+  "en": "× 0.6 directly above and below beams/slabs (zone = largest side length) and at lap splices with Ø &gt; 14 mm"
+ },
+ {
+  "id": "29-192",
+  "de": "Ø ≥ 12 mm, in jeder Ecke ein Stab, Rundstützen mind. 6 Stäbe",
+  "en": "Ø ≥ 12 mm, one bar in each corner, circular columns at least 6 bars"
+ },
+ {
+  "id": "29-193",
+  "de": "Ø*<sub>s</sub> = w<sub>k</sub> · 3,48·10⁶ / σ<sub>s</sub>² in mm (Grundwert für f<sub>ct,0</sub> = 2,9 N/mm²) · Für Lastbeanspruchung: Ø<sub>s</sub> = Ø*<sub>s</sub> · σ<sub>s</sub>·A<sub>s</sub> / (4·(h − d)·b·2,9) ≥ Ø*<sub>s</sub> · f<sub>ct,eff</sub>/2,9 · Der gewählte Stabdurchmesser muss ≤ Ø<sub>s</sub> sein.",
+  "en": "Ø*<sub>s</sub> = w<sub>k</sub> · 3.48·10⁶ / σ<sub>s</sub>² in mm (basic value for f<sub>ct,0</sub> = 2.9 N/mm²) · For load-induced cracking: Ø<sub>s</sub> = Ø*<sub>s</sub> · σ<sub>s</sub>·A<sub>s</sub> / (4·(h − d)·b·2.9) ≥ Ø*<sub>s</sub> · f<sub>ct,eff</sub>/2.9 · The chosen bar diameter must be ≤ Ø<sub>s</sub>."
+ },
+ {
+  "id": "29-194",
+  "de": "Übergreifungsstöße — l<sub>0</sub> = α<sub>6</sub> · l<sub>bd</sub>",
+  "en": "Lap splices — l<sub>0</sub> = α<sub>6</sub> · l<sub>bd</sub>"
+ },
+ {
+  "id": "29-195",
+  "de": "über der Innenstütze",
+  "en": "over the interior support"
+ },
+ {
+  "id": "29-196",
+  "de": "Δc<sub>dev</sub> = 15 mm (Regelfall)",
+  "en": "Δc<sub>dev</sub> = 15 mm (standard case)"
+ },
+ {
+  "id": "29-197",
+  "de": "Δc<sub>dev</sub> = 15 mm, bei XC1 sowie bei c<sub>min</sub> = c<sub>min,b</sub> 10 mm. Mit Qualitätskontrolle darf um 5 mm reduziert werden. Die Bewehrung wird auf das <b>Verlegemaß</b> c<sub>v</sub> = c<sub>nom</sub> verlegt (Abstandhalter).",
+  "en": "Δc<sub>dev</sub> = 15 mm, 10 mm for XC1 and where c<sub>min</sub> = c<sub>min,b</sub>. With quality control it may be reduced by 5 mm. The reinforcement is placed at the <b>placing dimension</b> c<sub>v</sub> = c<sub>nom</sub> (spacers)."
+ },
+ {
+  "id": "29-198",
+  "de": "Δμ = μ<sub>Eds</sub> − μ<sub>lim</sub>&nbsp;&nbsp;(μ<sub>lim</sub> = 0,296, ω<sub>lim</sub> = 0,364)<br> A<sub>s1</sub> = (ω<sub>lim</sub> + Δμ / (1 − d₂/d)) · b·d·f<sub>cd</sub> / f<sub>yd</sub><br> A<sub>s2</sub> = Δμ / (1 − d₂/d) · b·d·f<sub>cd</sub> / σ<sub>s2</sub>&nbsp;&nbsp;mit&nbsp; ε<sub>s2</sub> = 3,5 ‰ · (ξ − d₂/d) / ξ",
+  "en": "Δμ = μ<sub>Eds</sub> − μ<sub>lim</sub>&nbsp;&nbsp;(μ<sub>lim</sub> = 0.296, ω<sub>lim</sub> = 0.364)<br> A<sub>s1</sub> = (ω<sub>lim</sub> + Δμ / (1 − d₂/d)) · b·d·f<sub>cd</sub> / f<sub>yd</sub><br> A<sub>s2</sub> = Δμ / (1 − d₂/d) · b·d·f<sub>cd</sub> / σ<sub>s2</sub>&nbsp;&nbsp;with&nbsp; ε<sub>s2</sub> = 3.5 ‰ · (ξ − d₂/d) / ξ"
+ },
+ {
+  "id": "29-199",
+  "de": "α<sub>1</sub> = 0,7 für Haken, Winkelhaken und Schlaufen (Betondeckung senkrecht zur Krümmungsebene ≥ 3·Ø), sonst 1,0 · α<sub>2</sub> … α<sub>5</sub> vereinfacht 1,0 (sichere Seite)",
+  "en": "α<sub>1</sub> = 0.7 for hooks, bends and loops (concrete cover perpendicular to the plane of curvature ≥ 3·Ø), otherwise 1.0 · α<sub>2</sub> … α<sub>5</sub> simplified 1.0 (safe side)"
+ },
+ {
+  "id": "29-200",
+  "de": "α<sub>2</sub> mit α<sub>1</sub>",
+  "en": "α<sub>2</sub> with α<sub>1</sub>"
+ }
+]

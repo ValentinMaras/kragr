@@ -1,0 +1,1227 @@
+[
+ {
+  "id": "15-0",
+  "de": "R′<sub>w</sub> − u<sub>prog</sub> = {} − 2 = {} dB {} erf. R′<sub>w</sub> = {} dB {}",
+  "en": "R′<sub>w</sub> − u<sub>prog</sub> = {} − 2 = {} dB {} req. R′<sub>w</sub> = {} dB {}"
+ },
+ {
+  "id": "15-1",
+  "de": "<div class=\"calc-field\"><label>Rohdecke m′ [kg/m²]</label><input type=\"number\" id=\"ts-mD\" value=\"440\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Structural slab m′ [kg/m²]</label><input type=\"number\" id=\"ts-mD\" value=\"440\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-2",
+  "de": "<div class=\"calc-field\"><label>Estrichdicke d [cm]</label><input type=\"number\" id=\"ts-dE\" value=\"5\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Screed thickness d [cm]</label><input type=\"number\" id=\"ts-dE\" value=\"5\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-3",
+  "de": "<div class=\"calc-field\"><label>Estrich ρ [kg/m³]</label><input type=\"number\" id=\"ts-rE\" value=\"2000\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Screed ρ [kg/m³]</label><input type=\"number\" id=\"ts-rE\" value=\"2000\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-4",
+  "de": "<div class=\"calc-field\"><label>Trittschalldämmung s′ [MN/m³]</label><input type=\"number\" id=\"ts-s\" value=\"20\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Impact sound insulation s′ [MN/m³]</label><input type=\"number\" id=\"ts-s\" value=\"20\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-5",
+  "de": "<div class=\"calc-field\"><label>Korrektur K [dB] (wenn m′<sub>f,m</sub> = 0)</label><input type=\"number\" id=\"ts-K\" value=\"2\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Correction K [dB] (if m′<sub>f,m</sub> = 0)</label><input type=\"number\" id=\"ts-K\" value=\"2\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-6",
+  "de": "<div class=\"calc-field\"><label>mittlere Masse der flankierenden Wände m′<sub>f,m</sub> [kg/m²] (0 = K von Hand)</label><input type=\"number\" id=\"ts-mf\" value=\"300\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>mean mass of the flanking walls m′<sub>f,m</sub> [kg/m²] (0 = K manually)</label><input type=\"number\" id=\"ts-mf\" value=\"300\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-7",
+  "de": "<div class=\"calc-field\"><label>zul. L′<sub>n,w</sub> [dB]</label><input type=\"number\" id=\"ts-zul\" value=\"50\" step=\"any\" oninput=\"updateTS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>perm. L′<sub>n,w</sub> [dB]</label><input type=\"number\" id=\"ts-zul\" value=\"50\" step=\"any\" oninput=\"updateTS()\"></div>"
+ },
+ {
+  "id": "15-8",
+  "de": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>) = 164 − 35 · lg({}) = {} dB",
+  "en": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>slab</sub>) = 164 − 35 · lg({}) = {} dB"
+ },
+ {
+  "id": "15-9",
+  "de": "§Schwimmender Estrich",
+  "en": "§Floating screed"
+ },
+ {
+  "id": "15-10",
+  "de": "m′<sub>Estrich</sub> = ρ · d = {} · {} = {} kg/m²",
+  "en": "m′<sub>screed</sub> = ρ · d = {} · {} = {} kg/m²"
+ },
+ {
+  "id": "15-11",
+  "de": "§Korrekturwert für die Flanken (DIN 4109-2)",
+  "en": "§Correction for the flanks (DIN 4109-2)"
+ },
+ {
+  "id": "15-12",
+  "de": "K = 0,6 + 5,5 · lg(m′<sub>Decke</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg({} / {}) = {} dB",
+  "en": "K = 0.6 + 5.5 · lg(m′<sub>slab</sub> / m′<sub>f,m</sub>) = 0.6 + 5.5 · lg({} / {}) = {} dB"
+ },
+ {
+  "id": "15-13",
+  "de": "!je schwerer die Decke im Verhältnis zu den Wänden, desto mehr Trittschall geht über die Wände; K ≥ 0",
+  "en": "!the heavier the floor relative to the walls, the more impact sound travels via the walls; K ≥ 0"
+ },
+ {
+  "id": "15-14",
+  "de": "§Bewerteter Norm-Trittschallpegel",
+  "en": "§Weighted normalised impact sound pressure level"
+ },
+ {
+  "id": "15-15",
+  "de": "!zul. L′<sub>n,w</sub> = {} dB: {} {} {} {} — beim Trittschall gilt: kleiner ist besser",
+  "en": "!perm. L′<sub>n,w</sub> = {} dB: {} {} {} {} — for impact sound, smaller is better"
+ },
+ {
+  "id": "15-16",
+  "de": "<div class=\"calc-field\"><label>Anzahl Nutzungseinheiten</label><input type=\"number\" id=\"gk-n\" value=\"4\" step=\"1\" oninput=\"updateGK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Number of units</label><input type=\"number\" id=\"gk-n\" value=\"4\" step=\"1\" oninput=\"updateGK()\"></div>"
+ },
+ {
+  "id": "15-17",
+  "de": "<div class=\"calc-field\"><label>Fläche je Nutzungseinheit [m²]</label><input type=\"number\" id=\"gk-a\" value=\"85\" step=\"any\" oninput=\"updateGK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Area per unit [m²]</label><input type=\"number\" id=\"gk-a\" value=\"85\" step=\"any\" oninput=\"updateGK()\"></div>"
+ },
+ {
+  "id": "15-18",
+  "de": "Gebäudeklasse {}",
+  "en": "Building class {}"
+ },
+ {
+  "id": "15-19",
+  "de": "§Einordnung nach MBO § 2 (3)",
+  "en": "§Classification to MBO § 2 (3)"
+ },
+ {
+  "id": "15-20",
+  "de": "!Höhe h = {} m (Fußboden des höchsten Geschosses mit Aufenthaltsraum über Gelände im Mittel) · {} Nutzungseinheit{} à {} m² = {} m²{}",
+  "en": "!Height h = {} m (floor of the highest storey with a habitable room above mean ground level) · {} unit(s)<!--{}--> of {} m² = {} m²{}"
+ },
+ {
+  "id": "15-21",
+  "de": "§Anforderungen an tragende Wände, Stützen und Decken (MBO §§ 27, 31)",
+  "en": "§Requirements for load-bearing walls, columns and floors (MBO §§ 27, 31)"
+ },
+ {
+  "id": "15-22",
+  "de": "!oberirdische Geschosse: {} · Kellergeschoss: {}",
+  "en": "!above-ground storeys: {} · basement: {}"
+ },
+ {
+  "id": "15-23",
+  "de": "!feuerhemmend ≈ F 30 / R 30 · hochfeuerhemmend ≈ F 60 / R 60 · feuerbeständig ≈ F 90 / R 90 (Landesbauordnung beachten)",
+  "en": "!fire-retardant ≈ F 30 / R 30 · highly fire-retardant ≈ F 60 / R 60 · fire-resistant ≈ F 90 / R 90 (observe the state building code)"
+ },
+ {
+  "id": "15-24",
+  "de": "1,5 · V/A (in der Schwerachse)",
+  "en": "1.5 · V/A (at the centroidal axis)"
+ },
+ {
+  "id": "15-25",
+  "de": "2 Felder",
+  "en": "2 spans"
+ },
+ {
+  "id": "15-26",
+  "de": "3 Felder",
+  "en": "3 spans"
+ },
+ {
+  "id": "15-27",
+  "de": "3-Feldträger, L = 5,00 m",
+  "en": "3-span beam, L = 5.00 m"
+ },
+ {
+  "id": "15-28",
+  "de": "4 Felder",
+  "en": "4 spans"
+ },
+ {
+  "id": "15-29",
+  "de": "5 Felder",
+  "en": "5 spans"
+ },
+ {
+  "id": "15-30",
+  "de": "5FL/32 (unter F)",
+  "en": "5FL/32 (under F)"
+ },
+ {
+  "id": "15-31",
+  "de": "9qL²/128 bei x = 5L/8",
+  "en": "9qL²/128 at x = 5L/8"
+ },
+ {
+  "id": "15-32",
+  "de": "<b>Extremwerte aus Laststellungen</b> (max Auflager, min Stützmoment, max Feldmoment)",
+  "en": "<b>Extreme values from load arrangements</b> (max support, min support moment, max span moment)"
+ },
+ {
+  "id": "15-33",
+  "de": "<b>Volllast</b> (alle Felder belastet)",
+  "en": "<b>Full load</b> (all spans loaded)"
+ },
+ {
+  "id": "15-34",
+  "de": "<span class=\"st-n\">1</span><span>Auflagerkräfte</span>",
+  "en": "<span class=\"st-n\">1</span><span>Support reactions</span>"
+ },
+ {
+  "id": "15-35",
+  "de": "<span class=\"st-n\">1</span><span>Bemessungslasten</span>",
+  "en": "<span class=\"st-n\">1</span><span>Design loads</span>"
+ },
+ {
+  "id": "15-36",
+  "de": "<span class=\"st-n\">1</span><span>Grundsystem und Überzählige</span>",
+  "en": "<span class=\"st-n\">1</span><span>Primary system and redundants</span>"
+ },
+ {
+  "id": "15-37",
+  "de": "<span class=\"st-n\">1</span><span>Ordinaten der Einflusslinien</span>",
+  "en": "<span class=\"st-n\">1</span><span>Ordinates of the influence lines</span>"
+ },
+ {
+  "id": "15-38",
+  "de": "<span class=\"st-n\">1</span><span>Schwerpunkt (von der Oberkante)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Centroid (from the top edge)</span>"
+ },
+ {
+  "id": "15-39",
+  "de": "<span class=\"st-n\">1</span><span>Senkrechte Auflagerkräfte (Momente um A bzw. B)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Vertical support reactions (moments about A and B)</span>"
+ },
+ {
+  "id": "15-40",
+  "de": "<span class=\"st-n\">2</span><span>Feldmoment im Endfeld</span>",
+  "en": "<span class=\"st-n\">2</span><span>Span moment in the end span</span>"
+ },
+ {
+  "id": "15-41",
+  "de": "<span class=\"st-n\">2</span><span>Flächenmoment 2. Grades (Steiner)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Second moment of area (parallel-axis theorem)</span>"
+ },
+ {
+  "id": "15-42",
+  "de": "<span class=\"st-n\">2</span><span>Größtes Moment M(x₀)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Maximum moment M(x₀)</span>"
+ },
+ {
+  "id": "15-43",
+  "de": "<span class=\"st-n\">2</span><span>Horizontalkräfte (Gelenkbedingung M<sub>G</sub> = 0 am rechten Teil)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Horizontal forces (hinge condition M<sub>G</sub> = 0 on the right part)</span>"
+ },
+ {
+  "id": "15-44",
+  "de": "<span class=\"st-n\">2</span><span>Momentenlinien im Grundsystem</span>",
+  "en": "<span class=\"st-n\">2</span><span>Moment diagrams in the primary system</span>"
+ },
+ {
+  "id": "15-45",
+  "de": "<span class=\"st-n\">2</span><span>Ritterschnitt durch Feld 3 (links der Mitte)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Section through panel 3 (left of centre)</span>"
+ },
+ {
+  "id": "15-46",
+  "de": "<span class=\"st-n\">3</span><span>Formänderungswerte mit der Koppeltafel (EI · δ)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Flexibility coefficients with the integration table (EI · δ)</span>"
+ },
+ {
+  "id": "15-47",
+  "de": "<span class=\"st-n\">3</span><span>Größte Querkräfte Q(x₀)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Maximum shear forces Q(x₀)</span>"
+ },
+ {
+  "id": "15-48",
+  "de": "<span class=\"st-n\">3</span><span>Pfosten (Gleichgewicht am Obergurtknoten)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Vertical (equilibrium at the top chord node)</span>"
+ },
+ {
+  "id": "15-49",
+  "de": "<span class=\"st-n\">3</span><span>Rahmeneckmomente</span>",
+  "en": "<span class=\"st-n\">3</span><span>Corner moments of the frame</span>"
+ },
+ {
+  "id": "15-50",
+  "de": "<span class=\"st-n\">3</span><span>Stützmoment über der ersten Innenstütze</span>",
+  "en": "<span class=\"st-n\">3</span><span>Support moment over the first interior support</span>"
+ },
+ {
+  "id": "15-51",
+  "de": "<span class=\"st-n\">3</span><span>Widerstandsmomente</span>",
+  "en": "<span class=\"st-n\">3</span><span>Section moduli</span>"
+ },
+ {
+  "id": "15-52",
+  "de": "<span class=\"st-n\">4</span><span>Auflagerkräfte (Maximalwerte)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Support reactions (maximum values)</span>"
+ },
+ {
+  "id": "15-53",
+  "de": "<span class=\"st-n\">4</span><span>Riegel</span>",
+  "en": "<span class=\"st-n\">4</span><span>Beam</span>"
+ },
+ {
+  "id": "15-54",
+  "de": "<span class=\"st-n\">4</span><span>Verträglichkeit: kein Knick über B</span>",
+  "en": "<span class=\"st-n\">4</span><span>Compatibility: no kink over B</span>"
+ },
+ {
+  "id": "15-55",
+  "de": "<span class=\"st-n\">5</span><span>Auflagerkräfte (Einfeldträger + Stützmoment)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Support reactions (simply supported beam + support moment)</span>"
+ },
+ {
+  "id": "15-56",
+  "de": "<span class=\"st-n\">6</span><span>Feldmomente</span>",
+  "en": "<span class=\"st-n\">6</span><span>Span moments</span>"
+ },
+ {
+  "id": "15-57",
+  "de": "<span>M Feld</span><b>FL/8</b>",
+  "en": "<span>M span</span><b>FL/8</b>"
+ },
+ {
+  "id": "15-58",
+  "de": "<span>M Feld</span><b>qL²/24</b>",
+  "en": "<span>M span</span><b>qL²/24</b>"
+ },
+ {
+  "id": "15-59",
+  "de": "<span>M unter F</span><b>5FL/32</b>",
+  "en": "<span>M under F</span><b>5FL/32</b>"
+ },
+ {
+  "id": "15-60",
+  "de": "<span>max M Feld</span><b>9qL²/128</b>",
+  "en": "<span>max M span</span><b>9qL²/128</b>"
+ },
+ {
+  "id": "15-61",
+  "de": "= −20,00 kN (Mittelpfosten, keine Diagonale am oberen Knoten)",
+  "en": "= −20.00 kN (middle vertical, no diagonal at the top node)"
+ },
+ {
+  "id": "15-62",
+  "de": "= −60,00 kN (Endpfosten über dem Auflager)",
+  "en": "= −60.00 kN (end vertical above the support)"
+ },
+ {
+  "id": "15-63",
+  "de": "A: Gerade von 1 (über A) bis 0 (über B) · Q(x₀): Sprung um 1 bei x₀ · M(x₀): Dreieck mit der Spitze unter x₀",
+  "en": "A: straight line from 1 (over A) to 0 (over B) · Q(x₀): jump of 1 at x₀ · M(x₀): triangle with its peak under x₀"
+ },
+ {
+  "id": "15-64",
+  "de": "Abzählkriterium",
+  "en": "Counting criterion"
+ },
+ {
+  "id": "15-65",
+  "de": "Abzählkriterium an drei Systemen",
+  "en": "Counting criterion on three systems"
+ },
+ {
+  "id": "15-66",
+  "de": "Am rechten Ufer des linken Teils (positives Ufer) zeigen N nach außen, Q nach unten und M dreht linksherum. Am gegenüberliegenden Ufer wirken sie entgegengesetzt (actio = reactio).",
+  "en": "On the right face of the left part (positive face) N points outwards, Q downwards and M turns anticlockwise. On the opposite face they act in the opposite direction (actio = reactio)."
+ },
+ {
+  "id": "15-67",
+  "de": "Anzahl Felder",
+  "en": "Number of spans"
+ },
+ {
+  "id": "15-68",
+  "de": "Anzahl Felder n (gerade)",
+  "en": "Number of panels n (even)"
+ },
+ {
+  "id": "15-69",
+  "de": "Auflager A, B, C …",
+  "en": "Supports A, B, C …"
+ },
+ {
+  "id": "15-70",
+  "de": "Balkentafel",
+  "en": "Beam table"
+ },
+ {
+  "id": "15-71",
+  "de": "Bedeutung",
+  "en": "Meaning"
+ },
+ {
+  "id": "15-72",
+  "de": "Bedingung",
+  "en": "Condition"
+ },
+ {
+  "id": "15-73",
+  "de": "Bei Volllast wäre Q(x₀) = q · (L/2 − x₀) (ohne F) = 20,00 kN — Teilbelastung ist hier ungünstiger",
+  "en": "With full load Q(x₀) = q · (L/2 − x₀) (without F) = 20.00 kN — partial loading is more unfavourable here"
+ },
+ {
+  "id": "15-74",
+  "de": "Bei der Dreieckslast liegt max M bei x = L/√3 ≈ 0,577·L von A.",
+  "en": "For the triangular load max M lies at x = L/√3 ≈ 0.577·L from A."
+ },
+ {
+  "id": "15-75",
+  "de": "Beidseitig eingespannter Träger",
+  "en": "Beam fixed at both ends"
+ },
+ {
+  "id": "15-76",
+  "de": "Beispiel T-Querschnitt: Flansch 200 × 20 mm oben, Steg 20 × 180 mm (Höhe gesamt 200 mm).<br> A = 4000 + 3600 = 7600 mm² · z<sub>s</sub> = (4000·10 + 3600·110)/7600 = <b>57,4 mm</b> von oben<br> I<sub>y</sub> = 200·20³/12 + 4000·47,4² + 20·180³/12 + 3600·52,6² ≈ <b>2880 cm⁴</b><br> W oben = 2880/5,74 ≈ 502 cm³ · W unten = 2880/14,26 ≈ 202 cm³",
+  "en": "Example T-section: flange 200 × 20 mm at the top, web 20 × 180 mm (total depth 200 mm).<br> A = 4000 + 3600 = 7600 mm² · z<sub>s</sub> = (4000·10 + 3600·110)/7600 = <b>57.4 mm</b> from the top<br> I<sub>y</sub> = 200·20³/12 + 4000·47.4² + 20·180³/12 + 3600·52.6² ≈ <b>2880 cm⁴</b><br> W top = 2880/5.74 ≈ 502 cm³ · W bottom = 2880/14.26 ≈ 202 cm³"
+ },
+ {
+  "id": "15-77",
+  "de": "Beispiel Zweifeldträger, q = 10 kN/m, L = 5 m: M_B = −0,125·10·25 = <b>−31,25 kNm</b>, B = 1,25·10·5 = <b>62,5 kN</b>.",
+  "en": "Example two-span beam, q = 10 kN/m, L = 5 m: M_B = −0.125·10·25 = <b>−31.25 kNm</b>, B = 1.25·10·5 = <b>62.5 kN</b>."
+ },
+ {
+  "id": "15-78",
+  "de": "Beispiel: Beim Dreigelenkrahmen (zwei Festlager + Gelenk im Riegel) stehen 4 Lagerreaktionen 3 + 1 = 4 Gleichungen gegenüber, das System ist statisch bestimmt.",
+  "en": "Example: for the three-hinged frame (two pinned supports + hinge in the beam) 4 support reactions face 3 + 1 = 4 equations, the system is statically determinate."
+ },
+ {
+  "id": "15-79",
+  "de": "Beispiel: Einfeldträger mit Gleichlast, Durchbiegung in Feldmitte. M ist eine Parabel mit Stich qL²/8, M̄ ein Dreieck mit Spitze L/4 in der Mitte. Koppeltafel: 5/12 · L · i · k<br> w = (1/EI) · 5/12 · L · qL²/8 · L/4 = <b>5qL⁴/(384EI)</b>",
+  "en": "Example: simply supported beam with uniform load, deflection at midspan. M is a parabola with rise qL²/8, M̄ a triangle with peak L/4 at the centre. Integration table: 5/12 · L · i · k<br> w = (1/EI) · 5/12 · L · qL²/8 · L/4 = <b>5qL⁴/(384EI)</b>"
+ },
+ {
+  "id": "15-80",
+  "de": "Beispiel: q = 10 kN/m, L = 5 m → A = B = 25 kN, max M = 10·5²/8 = <b>31,25 kNm</b>.",
+  "en": "Example: q = 10 kN/m, L = 5 m → A = B = 25 kN, max M = 10·5²/8 = <b>31.25 kNm</b>."
+ },
+ {
+  "id": "15-81",
+  "de": "Beiwerte für 2 bis 5 gleiche Felder mit Laststellungen",
+  "en": "Coefficients for 2 to 5 equal spans with load arrangements"
+ },
+ {
+  "id": "15-82",
+  "de": "Beiwerte: Auflagerkraft = Beiwert · qL, Moment = Beiwert · qL².",
+  "en": "Coefficients: support reaction = coefficient · qL, moment = coefficient · qL²."
+ },
+ {
+  "id": "15-83",
+  "de": "Belastung",
+  "en": "Loading"
+ },
+ {
+  "id": "15-84",
+  "de": "Bis zu vier Rechtecke, symmetrisch zur senkrechten Achse; z = Abstand der Oberkante des Teils von der Oberkante des Querschnitts. Breite 0 = Teil nicht vorhanden.",
+  "en": "Up to four rectangles, symmetrical about the vertical axis; z = distance of the top of the part from the top of the cross-section. Width 0 = part not present."
+ },
+ {
+  "id": "15-85",
+  "de": "Blau: Zugstab, rot: Druckstab, grau: Nullstab. Bei Volllast ist der Obergurt gedrückt, der Untergurt gezogen, die zur Mitte fallenden Diagonalen sind Zugstäbe.",
+  "en": "Blue: tension member, red: compression member, grey: zero-force member. Under full load the top chord is in compression, the bottom chord in tension, the diagonals falling towards the centre are tension members."
+ },
+ {
+  "id": "15-86",
+  "de": "Das Biegemoment ist dort extremal, wo die Querkraft null ist (oder das Vorzeichen wechselt). So findet man das Feldmoment.",
+  "en": "The bending moment is extreme where the shear force is zero (or changes sign). That is how to find the span moment."
+ },
+ {
+  "id": "15-87",
+  "de": "Das ist das Kraftgrößenverfahren mit den Stützmomenten als Überzähligen — für jede Innenstütze eine Gleichung.",
+  "en": "This is the force method with the support moments as redundants — one equation for each interior support."
+ },
+ {
+  "id": "15-88",
+  "de": "Diagonale D [kN]",
+  "en": "Diagonal D [kN]"
+ },
+ {
+  "id": "15-89",
+  "de": "Die Einspannung „zieht“ Moment aus dem Feld: Beim beidseitig eingespannten Träger ist das Feldmoment qL²/24 nur ein Drittel des Einfeldträgers (qL²/8), die Durchbiegung ein Fünftel.",
+  "en": "The fixity “draws” moment out of the span: for the beam fixed at both ends the span moment qL²/24 is only a third of that of the simply supported beam (qL²/8), the deflection a fifth."
+ },
+ {
+  "id": "15-90",
+  "de": "Die Gleichlast nur dort ansetzen, wo die Einflusslinie das gewünschte Vorzeichen hat. Für die Querkraft in Feldmitte ist eine halbseitige Belastung ungünstiger als die Volllast.",
+  "en": "Apply the uniform load only where the influence line has the desired sign. For the shear force at midspan, loading half the span is more unfavourable than full load."
+ },
+ {
+  "id": "15-91",
+  "de": "Die Spannung verläuft linear über die Höhe. Die Nulllinie liegt bei reiner Biegung in der Schwerachse, bei zusätzlicher Normalkraft verschoben.",
+  "en": "The stress varies linearly over the depth. In pure bending the neutral axis lies at the centroidal axis; with an additional axial force it is shifted."
+ },
+ {
+  "id": "15-92",
+  "de": "Die Tabelle gilt für Volllast auf allen Feldern (typisch: Eigenlast). Für veränderliche Lasten sind die ungünstigsten Laststellungen zu untersuchen: Das größte Feldmoment entsteht, wenn nur jedes zweite Feld belastet ist, das größte Stützmoment bei Last auf den beiden angrenzenden Feldern.",
+  "en": "The table applies to full load on all spans (typically self-weight). For variable loads the most unfavourable load arrangements have to be investigated: the maximum span moment occurs when only every second span is loaded, the maximum support moment with load on the two adjacent spans."
+ },
+ {
+  "id": "15-93",
+  "de": "Die Verträglichkeitsbedingung sagt: An der gelösten Bindung darf sich im wirklichen Tragwerk nichts verschieben oder verdrehen.",
+  "en": "The compatibility condition says: at the released restraint nothing may displace or rotate in the real structure."
+ },
+ {
+  "id": "15-94",
+  "de": "Die allgemeine Formel für lineare Verläufe. Dreiecke und Rechtecke sind Sonderfälle.",
+  "en": "The general formula for linear diagrams. Triangles and rectangles are special cases."
+ },
+ {
+  "id": "15-95",
+  "de": "Differentielle Zusammenhänge",
+  "en": "Differential relationships"
+ },
+ {
+  "id": "15-96",
+  "de": "Drehpunkt: Obergurtknoten 2",
+  "en": "Pivot: top chord node 2"
+ },
+ {
+  "id": "15-97",
+  "de": "Drehpunkt: Untergurtknoten 3 (dort schneiden sich D und U)",
+  "en": "Pivot: bottom chord node 3 (where D and U intersect)"
+ },
+ {
+  "id": "15-98",
+  "de": "Dreieck (Basis b, Höhe h)",
+  "en": "Triangle (base b, height h)"
+ },
+ {
+  "id": "15-99",
+  "de": "Dreieck Mitte k",
+  "en": "Triangle peak k"
+ },
+ {
+  "id": "15-100",
+  "de": "Dreieck i (gegensinnig)",
+  "en": "Triangle i (opposite)"
+ },
+ {
+  "id": "15-101",
+  "de": "Dreieck i (gleichsinnig)",
+  "en": "Triangle i (same direction)"
+ },
+ {
+  "id": "15-102",
+  "de": "Dreieck k",
+  "en": "Triangle k"
+ },
+ {
+  "id": "15-103",
+  "de": "Dreieckslast",
+  "en": "Triangular load"
+ },
+ {
+  "id": "15-104",
+  "de": "Dreieckslast (q an der Einspannung, 0 am Ende)",
+  "en": "Triangular load (q at the fixed end, 0 at the free end)"
+ },
+ {
+  "id": "15-105",
+  "de": "Dreieckslast 0 → q",
+  "en": "Triangular load 0 → q"
+ },
+ {
+  "id": "15-106",
+  "de": "Dreieckslast 0 → q (bei B)",
+  "en": "Triangular load 0 → q (at B)"
+ },
+ {
+  "id": "15-107",
+  "de": "Dreieckslast q → 0",
+  "en": "Triangular load q → 0"
+ },
+ {
+  "id": "15-108",
+  "de": "Dreifeldträger",
+  "en": "Three-span beam"
+ },
+ {
+  "id": "15-109",
+  "de": "Dreigelenkrahmen",
+  "en": "Three-hinged frame"
+ },
+ {
+  "id": "15-110",
+  "de": "Dreigelenkrahmen berechnen",
+  "en": "Calculate a three-hinged frame"
+ },
+ {
+  "id": "15-111",
+  "de": "Dreigelenkrahmen l = 10,00 m, h = 4,00 m",
+  "en": "Three-hinged frame l = 10.00 m, h = 4.00 m"
+ },
+ {
+  "id": "15-112",
+  "de": "Dreigelenkrahmen und Dreigelenkbogen",
+  "en": "Three-hinged frame and three-hinged arch"
+ },
+ {
+  "id": "15-113",
+  "de": "Dreigelenkrahmen: System und Momentenlinie",
+  "en": "Three-hinged frame: system and moment diagram"
+ },
+ {
+  "id": "15-114",
+  "de": "Durchlaufträger mit g und q bemessen",
+  "en": "Design a continuous beam with g and q"
+ },
+ {
+  "id": "15-115",
+  "de": "Durchlaufträger, gleiche Stützweiten L, Gleichlast q auf allen Feldern",
+  "en": "Continuous beam, equal spans L, uniform load q on all spans"
+ },
+ {
+  "id": "15-116",
+  "de": "Durchlaufträger: Laststellung und Momentenlinie",
+  "en": "Continuous beam: load arrangement and moment diagram"
+ },
+ {
+  "id": "15-117",
+  "de": "Ein <b>Momentengelenk</b> verbindet zwei Tragwerksteile so, dass sie sich gegeneinander verdrehen können: Es überträgt Normal- und Querkraft, aber <b>kein Moment</b>. Damit entsteht eine zusätzliche Gleichgewichtsbedingung (M = 0 am Gelenk), die eine unbekannte Reaktion bestimmen kann. Im Momentenverlauf erkennt man ein Gelenk am Nulldurchgang von M.",
+  "en": "A <b>moment hinge</b> connects two parts of a structure so that they can rotate relative to each other: it transfers axial and shear force, but <b>no moment</b>. This provides an additional equilibrium condition (M = 0 at the hinge) that can determine one unknown reaction. In the moment diagram a hinge is recognised by the zero crossing of M."
+ },
+ {
+  "id": "15-118",
+  "de": "Ein Bogen in Form der Stützlinie trägt nur über Druck. Beim Rahmen weicht die Stabachse von der Stützlinie ab: Das Moment ist H mal Abstand von der Stützlinie — an den Ecken am größten.",
+  "en": "An arch in the shape of the line of thrust carries load in compression only. In a frame the member axis deviates from the line of thrust: the moment is H times the distance from the line of thrust — largest at the corners."
+ },
+ {
+  "id": "15-119",
+  "de": "Ein Lager verhindert Bewegungen und überträgt dafür Kräfte (Auflagerreaktionen). Die <b>Wertigkeit</b> ist die Anzahl der Reaktionen, die ein Lager aufnehmen kann. Jede verhinderte Bewegung erzeugt genau eine Reaktion.",
+  "en": "A support prevents movements and transfers forces in return (support reactions). The <b>degree</b> is the number of reactions a support can take. Each prevented movement produces exactly one reaction."
+ },
+ {
+  "id": "15-120",
+  "de": "Eine Einflusslinie zeigt, wie groß eine bestimmte Größe (Auflagerkraft, Querkraft oder Moment an <b>einer festen Stelle</b> x₀) wird, wenn eine Einzellast „1“ an der Stelle x steht. Sie beantwortet die Frage: Wo muss die Verkehrslast stehen, damit die Größe am größten wird?",
+  "en": "An influence line shows how large a certain quantity (support reaction, shear force or moment at <b>a fixed point</b> x₀) becomes when a unit load “1” stands at point x. It answers the question: where must the traffic load stand so that the quantity becomes largest?"
+ },
+ {
+  "id": "15-121",
+  "de": "Eine Einzellast „1“ wandert über den Träger: Die Ordinate zeigt den Wert der Größe, wenn die Last dort steht.",
+  "en": "A unit load “1” moves across the beam: the ordinate shows the value of the quantity when the load stands there."
+ },
+ {
+  "id": "15-122",
+  "de": "Einfeldträger (Festlager + Loslager)",
+  "en": "Simply supported beam (pinned + roller support)"
+ },
+ {
+  "id": "15-123",
+  "de": "Einfeldträger L = 8,00 m, Schnitt bei x₀ = 2,00 m",
+  "en": "Simply supported beam L = 8.00 m, section at x₀ = 2.00 m"
+ },
+ {
+  "id": "15-124",
+  "de": "Einfeldträger — Festlager A, Loslager B, Stützweite L",
+  "en": "Simply supported beam — pinned support A, roller support B, span L"
+ },
+ {
+  "id": "15-125",
+  "de": "Einflusslinien A, Q(x₀), M(x₀) am Einfeldträger",
+  "en": "Influence lines A, Q(x₀), M(x₀) on the simply supported beam"
+ },
+ {
+  "id": "15-126",
+  "de": "Einflusslinien — wandernde Lasten",
+  "en": "Influence lines — moving loads"
+ },
+ {
+  "id": "15-127",
+  "de": "Einseitig eingespannt (A eingespannt, B gelenkig)",
+  "en": "Propped cantilever (A fixed, B pinned)"
+ },
+ {
+  "id": "15-128",
+  "de": "Einspannung",
+  "en": "Fixed support"
+ },
+ {
+  "id": "15-129",
+  "de": "Einzellast F",
+  "en": "Point load F"
+ },
+ {
+  "id": "15-130",
+  "de": "Einzellast F [kN]",
+  "en": "Point load F [kN]"
+ },
+ {
+  "id": "15-131",
+  "de": "Einzellast F am Ende",
+  "en": "Point load F at the end"
+ },
+ {
+  "id": "15-132",
+  "de": "Einzellast F bei a",
+  "en": "Point load F at a"
+ },
+ {
+  "id": "15-133",
+  "de": "Einzellast F bei a (b = L − a)",
+  "en": "Point load F at a (b = L − a)"
+ },
+ {
+  "id": "15-134",
+  "de": "Einzellast F in der Mitte",
+  "en": "Point load F at the centre"
+ },
+ {
+  "id": "15-135",
+  "de": "Einzellast F<sub>1</sub> in Feldmitte [kN]",
+  "en": "Point load F<sub>1</sub> at midspan [kN]"
+ },
+ {
+  "id": "15-136",
+  "de": "Einzellast F<sub>2</sub> in Feldmitte [kN]",
+  "en": "Point load F<sub>2</sub> at midspan [kN]"
+ },
+ {
+  "id": "15-137",
+  "de": "Einzellast genau über x₀, Gleichlast über die ganze Länge (Fläche der Einflusslinie = η<sub>M,max</sub> · L / 2)",
+  "en": "Point load directly over x₀, uniform load over the whole length (area of the influence line = η<sub>M,max</sub> · L / 2)"
+ },
+ {
+  "id": "15-138",
+  "de": "Einzelmoment",
+  "en": "Point moment"
+ },
+ {
+  "id": "15-139",
+  "de": "Ergebnis",
+  "en": "Result"
+ },
+ {
+  "id": "15-140",
+  "de": "Eulerfall",
+  "en": "Euler case"
+ },
+ {
+  "id": "15-141",
+  "de": "Eulerfälle",
+  "en": "Euler cases"
+ },
+ {
+  "id": "15-142",
+  "de": "Extremwerte an der Stelle x₀",
+  "en": "Extreme values at the point x₀"
+ },
+ {
+  "id": "15-143",
+  "de": "Fachwerk 6 × 2,50 m, h = 2,00 m",
+  "en": "Truss 6 × 2.50 m, h = 2.00 m"
+ },
+ {
+  "id": "15-144",
+  "de": "Fachwerk: Stabkräfte (Strichstärke ∝ Kraft)",
+  "en": "Truss: member forces (line width ∝ force)"
+ },
+ {
+  "id": "15-145",
+  "de": "Fall 1",
+  "en": "Case 1"
+ },
+ {
+  "id": "15-146",
+  "de": "Fall 2",
+  "en": "Case 2"
+ },
+ {
+  "id": "15-147",
+  "de": "Fall 3",
+  "en": "Case 3"
+ },
+ {
+  "id": "15-148",
+  "de": "Fall 4",
+  "en": "Case 4"
+ },
+ {
+  "id": "15-149",
+  "de": "Faser unten",
+  "en": "Bottom fibre"
+ },
+ {
+  "id": "15-150",
+  "de": "Feld 1: max M = 16,96 kNm bei x = 1,84 m von A · Feld 2: max M = 23,54 kNm bei x = 2,00 m von C",
+  "en": "Span 1: max M = 16.96 kNm at x = 1.84 m from A · span 2: max M = 23.54 kNm at x = 2.00 m from C"
+ },
+ {
+  "id": "15-151",
+  "de": "Feldmomente",
+  "en": "Span moments"
+ },
+ {
+  "id": "15-152",
+  "de": "Feldmomente 1, 2, 3 …",
+  "en": "Span moments 1, 2, 3 …"
+ },
+ {
+  "id": "15-153",
+  "de": "Feldweite a [m]",
+  "en": "Panel width a [m]"
+ },
+ {
+  "id": "15-154",
+  "de": "Festlager",
+  "en": "Pinned support"
+ },
+ {
+  "id": "15-155",
+  "de": "Festlager (festes Gelenklager)",
+  "en": "Pinned support (fixed hinge)"
+ },
+ {
+  "id": "15-156",
+  "de": "Festlager + Loslager + Riegelgelenk",
+  "en": "Pinned support + roller support + hinge in the beam"
+ },
+ {
+  "id": "15-157",
+  "de": "F·a·b/L (unter F)",
+  "en": "F·a·b/L (under F)"
+ },
+ {
+  "id": "15-158",
+  "de": "Für ein ebenes, zusammenhängendes Tragwerk vergleicht man die Anzahl der Unbekannten (Lagerreaktionen) mit der Anzahl der Gleichgewichtsbedingungen (3 je Tragwerk, +1 je Gelenk):",
+  "en": "For a plane, connected structure one compares the number of unknowns (support reactions) with the number of equilibrium conditions (3 per structure, +1 per hinge):"
+ },
+ {
+  "id": "15-159",
+  "de": "Gelenk",
+  "en": "Hinge"
+ },
+ {
+  "id": "15-160",
+  "de": "Gelenke im Tragwerk",
+  "en": "Hinges in the structure"
+ },
+ {
+  "id": "15-161",
+  "de": "Gerade Stäbe, in den Knoten gelenkig verbunden, Lasten nur in den Knoten → die Stäbe tragen nur Normalkräfte (Zug oder Druck).",
+  "en": "Straight members, pin-jointed at the nodes, loads only at the nodes → the members carry axial forces only (tension or compression)."
+ },
+ {
+  "id": "15-162",
+  "de": "Gilt für den ideal geraden, elastischen Stab. Reale Stäbe haben Imperfektionen und Eigenspannungen → Bemessung mit Abminderungsbeiwerten (χ im Stahlbau, k<sub>c</sub> im Holzbau).",
+  "en": "Applies to the perfectly straight, elastic member. Real members have imperfections and residual stresses → design with reduction factors (χ in steel, k<sub>c</sub> in timber)."
+ },
+ {
+  "id": "15-163",
+  "de": "Gleichlast q",
+  "en": "Uniform load q"
+ },
+ {
+  "id": "15-164",
+  "de": "Gleichlast q [kN/m]",
+  "en": "Uniform load q [kN/m]"
+ },
+ {
+  "id": "15-165",
+  "de": "Gleichlast q auf dem Riegel [kN/m]",
+  "en": "Uniform load q on the beam [kN/m]"
+ },
+ {
+  "id": "15-166",
+  "de": "Gleichlast q<sub>1</sub> [kN/m]",
+  "en": "Uniform load q<sub>1</sub> [kN/m]"
+ },
+ {
+  "id": "15-167",
+  "de": "Gleichlast q<sub>2</sub> [kN/m]",
+  "en": "Uniform load q<sub>2</sub> [kN/m]"
+ },
+ {
+  "id": "15-168",
+  "de": "Gleichlast: max w ≈ qL⁴/(185EI).",
+  "en": "Uniform load: max w ≈ qL⁴/(185EI)."
+ },
+ {
+  "id": "15-169",
+  "de": "Grundformen",
+  "en": "Basic shapes"
+ },
+ {
+  "id": "15-170",
+  "de": "Größe",
+  "en": "Quantity"
+ },
+ {
+  "id": "15-171",
+  "de": "Halbkreis, Radius r (Achse durch S, parallel zum Durchmesser)",
+  "en": "Semicircle, radius r (axis through S, parallel to the diameter)"
+ },
+ {
+  "id": "15-172",
+  "de": "Horizontallast W am linken Eck [kN]",
+  "en": "Horizontal load W at the left corner [kN]"
+ },
+ {
+  "id": "15-173",
+  "de": "I (Schwerachse)",
+  "en": "I (centroidal axis)"
+ },
+ {
+  "id": "15-174",
+  "de": "I-Profil (näherungsweise)",
+  "en": "I-section (approximate)"
+ },
+ {
+  "id": "15-175",
+  "de": "I<sub>i</sub> — Eigenträgheitsmoment des Teils um seine eigene Schwerachse<br> A<sub>i</sub>·(z<sub>i</sub> − z<sub>s</sub>)² — Steiner-Anteil (immer ≥ 0)",
+  "en": "I<sub>i</sub> — second moment of area of the part about its own centroidal axis<br> A<sub>i</sub>·(z<sub>i</sub> − z<sub>s</sub>)² — parallel-axis (Steiner) term (always ≥ 0)"
+ },
+ {
+  "id": "15-176",
+  "de": "Ideales Fachwerk",
+  "en": "Ideal truss"
+ },
+ {
+  "id": "15-177",
+  "de": "Integral abschnittsweise mit der Koppeltafel auswerten, durch EI teilen",
+  "en": "Evaluate the integral segment by segment with the integration table, divide by EI"
+ },
+ {
+  "id": "15-178",
+  "de": "Integraltafel ∫₀ᴸ M · M̄ dx",
+  "en": "Integration table ∫₀ᴸ M · M̄ dx"
+ },
+ {
+  "id": "15-179",
+  "de": "Kinematische Konstruktion (Müller-Breslau): Die Einflusslinie ist die Biegelinie, wenn man an der gesuchten Stelle die Bindung löst (Gelenk für M, Querkraftgelenk für Q) und dort eine Verschiebung bzw. Verdrehung „1“ aufbringt.",
+  "en": "Kinematic construction (Müller-Breslau): the influence line is the deflected shape obtained by releasing the restraint at the point considered (hinge for M, shear hinge for Q) and applying a unit displacement or rotation “1” there."
+ },
+ {
+  "id": "15-180",
+  "de": "Knick",
+  "en": "Kink"
+ },
+ {
+  "id": "15-181",
+  "de": "Knickfiguren der vier Eulerfälle: L<sub>cr</sub> = β·L ist der Abstand der Wendepunkte (Halbwelle der Sinuslinie).",
+  "en": "Buckled shapes of the four Euler cases: L<sub>cr</sub> = β·L is the distance between the points of inflection (half-wave of the sine curve)."
+ },
+ {
+  "id": "15-182",
+  "de": "Knotenlast F [kN]",
+  "en": "Node load F [kN]"
+ },
+ {
+  "id": "15-183",
+  "de": "Kragarm (Einspannung)",
+  "en": "Cantilever (fixed support)"
+ },
+ {
+  "id": "15-184",
+  "de": "Kragarm — Einspannung bei A, freies Ende, Länge L",
+  "en": "Cantilever — fixed at A, free end, length L"
+ },
+ {
+  "id": "15-185",
+  "de": "Kreis",
+  "en": "Circle"
+ },
+ {
+  "id": "15-186",
+  "de": "Kreis d",
+  "en": "Circle d"
+ },
+ {
+  "id": "15-187",
+  "de": "Kreis, Durchmesser d",
+  "en": "Circle, diameter d"
+ },
+ {
+  "id": "15-188",
+  "de": "Kreisring",
+  "en": "Annulus"
+ },
+ {
+  "id": "15-189",
+  "de": "Kreisring D / d",
+  "en": "Annulus D / d"
+ },
+ {
+  "id": "15-190",
+  "de": "Kritische Last nach Euler",
+  "en": "Critical load after Euler"
+ },
+ {
+  "id": "15-191",
+  "de": "Lager",
+  "en": "Support"
+ },
+ {
+  "id": "15-192",
+  "de": "Lagerarten und ihre Wertigkeit",
+  "en": "Types of support and their degree"
+ },
+ {
+  "id": "15-193",
+  "de": "Lagersymbole: Loslager, Festlager, Einspannung, Gelenk",
+  "en": "Support symbols: roller support, pinned support, fixed support, hinge"
+ },
+ {
+  "id": "15-194",
+  "de": "Lagerung",
+  "en": "Support conditions"
+ },
+ {
+  "id": "15-195",
+  "de": "Lastfall",
+  "en": "Load case"
+ },
+ {
+  "id": "15-196",
+  "de": "Laststellung für das größte Feldmoment im Endfeld (q auf ■□■), Momentenlinie in Vielfachen von qL².",
+  "en": "Load arrangement for the maximum span moment in the end span (q on ■□■), moment diagram in multiples of qL²."
+ },
+ {
+  "id": "15-197",
+  "de": "Laststellung für q: ■■□ (beide angrenzenden Felder) · Beiwerte g: −0,1000, q: −0,1167",
+  "en": "Load arrangement for q: ■■□ (both adjacent spans) · coefficients g: −0.1000, q: −0.1167"
+ },
+ {
+  "id": "15-198",
+  "de": "Laststellung für q: ■□■ (jedes zweite Feld) · Beiwerte g: 0,0800, q: 0,1013",
+  "en": "Load arrangement for q: ■□■ (every second span) · coefficients g: 0.0800, q: 0.1013"
+ },
+ {
+  "id": "15-199",
+  "de": "Loslager",
+  "en": "Roller support"
+ },
+ {
+  "id": "15-200",
+  "de": "Loslager (verschiebliches Gelenklager)",
+  "en": "Roller support (sliding hinge)"
+ },
+ {
+  "id": "15-201",
+  "de": "M (Biegemoment)",
+  "en": "M (bending moment)"
+ },
+ {
+  "id": "15-202",
+  "de": "M Feld",
+  "en": "M span"
+ },
+ {
+  "id": "15-203",
+  "de": "M — Momentenverlauf aus der tatsächlichen Last<br> M̄ — Momentenverlauf aus einer virtuellen „1“ an der gesuchten Stelle",
+  "en": "M — moment diagram from the actual load<br> M̄ — moment diagram from a virtual “1” at the point considered"
+ },
+ {
+  "id": "15-204",
+  "de": "M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = 0,00 kNm (Gelenk)",
+  "en": "M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = 0.00 kNm (hinge)"
+ },
+ {
+  "id": "15-205",
+  "de": "M-Verlauf aus der äußeren Last bestimmen",
+  "en": "Determine the M diagram from the external load"
+ },
+ {
+  "id": "15-206",
+  "de": "M<sub>0</sub>: Parabeln mit Stich q · l² / 8 und Dreiecke F · l / 4 (Einzellast in Feldmitte) · M<sub>1</sub>: Dreieck mit dem Wert 1 über B",
+  "en": "M<sub>0</sub>: parabolas with rise q · l² / 8 and triangles F · l / 4 (point load at midspan) · M<sub>1</sub>: triangle with the value 1 over B"
+ },
+ {
+  "id": "15-207",
+  "de": "M<sub>2</sub> = 200,00 kNm (Momente des Ersatzbalkens an den Knoten)",
+  "en": "M<sub>2</sub> = 200.00 kNm (moments of the equivalent beam at the nodes)"
+ },
+ {
+  "id": "15-208",
+  "de": "M<sub>B</sub> = −32,92 kNm (Zug oben)",
+  "en": "M<sub>B</sub> = −32.92 kNm (tension at the top)"
+ },
+ {
+  "id": "15-209",
+  "de": "M<sub>C</sub> = −A<sub>h</sub> · h = −134,00 kNm (links)",
+  "en": "M<sub>C</sub> = −A<sub>h</sub> · h = −134.00 kNm (left)"
+ },
+ {
+  "id": "15-210",
+  "de": "M<sub>D</sub> = B<sub>h</sub> · h = −166,00 kNm (rechts)",
+  "en": "M<sub>D</sub> = B<sub>h</sub> · h = −166.00 kNm (right)"
+ },
+ {
+  "id": "15-211",
+  "de": "M<sub>F1,d</sub> = max M(x) für g<sub>d</sub> überall + q<sub>d</sub> auf ■□■ = 44,23 kNm bei x = 2,11 m",
+  "en": "M<sub>F1,d</sub> = max M(x) for g<sub>d</sub> everywhere + q<sub>d</sub> on ■□■ = 44.23 kNm at x = 2.11 m"
+ },
+ {
+  "id": "15-212",
+  "de": "M_A als Schnittmoment an der Einspannung (Zug oben → negativ).",
+  "en": "M_A as internal moment at the fixed support (tension at the top → negative)."
+ },
+ {
+  "id": "15-213",
+  "de": "Mit dem Prinzip der virtuellen Kräfte (Arbeitssatz) berechnet man die Verschiebung oder Verdrehung an einer beliebigen Stelle. Bei Biegeträgern überwiegt der Biegeanteil:",
+  "en": "With the principle of virtual forces (virtual work) one calculates the displacement or rotation at any point. For beams in bending the bending part dominates:"
+ },
+ {
+  "id": "15-214",
+  "de": "Momente in qL²",
+  "en": "Moments in qL²"
+ },
+ {
+  "id": "15-215",
+  "de": "Momentenlinie [kNm]",
+  "en": "Moment diagram [kNm]"
+ },
+ {
+  "id": "15-216",
+  "de": "Momentenlinie auf der Zugseite; am Gelenk ist M = 0.",
+  "en": "Moment diagram on the tension side; at the hinge M = 0."
+ },
+ {
+  "id": "15-217",
+  "de": "M̄-Verlauf aus dieser „1“ bestimmen",
+  "en": "Determine the M̄ diagram from this “1”"
+ },
+ {
+  "id": "15-218",
+  "de": "N (Normalkraft)",
+  "en": "N (axial force)"
+ },
+ {
+  "id": "15-219",
+  "de": "Normalspannungen (Navier)",
+  "en": "Normal stresses (Navier)"
+ },
+ {
+  "id": "15-220",
+  "de": "Nulllinie",
+  "en": "Neutral axis"
+ },
+ {
+  "id": "15-221",
+  "de": "Nullstab-Regel",
+  "en": "Zero-force member rules"
+ },
+ {
+  "id": "15-222",
+  "de": "Oben: tatsächliche Last und M · unten: virtuelle „1“ an der gesuchten Stelle und M̄",
+  "en": "Top: actual load and M · bottom: virtual “1” at the point considered and M̄"
+ },
+ {
+  "id": "15-223",
+  "de": "Obergurt O [kN]",
+  "en": "Top chord O [kN]"
+ },
+ {
+  "id": "15-224",
+  "de": "Obergurtknoten: F an den inneren Knoten, F/2 an den Endknoten",
+  "en": "Top chord nodes: F at the inner nodes, F/2 at the end nodes"
+ },
+ {
+  "id": "15-225",
+  "de": "Ohne Laststellungen (alles Volllast): M<sub>F1</sub> = 39,60 kNm, M<sub>B</sub> = −49,50 kNm — das Feldmoment wäre um 12 % zu klein",
+  "en": "Without load arrangements (full load everywhere): M<sub>F1</sub> = 39.60 kNm, M<sub>B</sub> = −49.50 kNm — the span moment would be 12 % too small"
+ },
+ {
+  "id": "15-226",
+  "de": "Parabel i",
+  "en": "Parabola i"
+ },
+ {
+  "id": "15-227",
+  "de": "Parabel × Dreieck (Spitze am Ende): ⅓ · l · i · k · Dreieck (Spitze Mitte) × Dreieck (Spitze am Ende): ¼ · l · i · k",
+  "en": "Parabola × triangle (peak at the end): ⅓ · l · i · k · triangle (peak at the centre) × triangle (peak at the end): ¼ · l · i · k"
+ },
+ {
+  "id": "15-228",
+  "de": "Parallelträger berechnen",
+  "en": "Calculate a parallel-chord truss"
+ },
+ {
+  "id": "15-229",
+  "de": "Parallelträger: Gurtkraft = ∓ M / h (M des Ersatzbalkens am Drehpunkt), Diagonalkraft = Q / sin α, Pfostenkraft aus dem Knotengleichgewicht.",
+  "en": "Parallel-chord truss: chord force = ∓ M / h (M of the equivalent beam at the pivot), diagonal force = Q / sin α, vertical force from node equilibrium."
+ },
+ {
+  "id": "15-230",
+  "de": "Pfosten (Knoten)",
+  "en": "Vertical (node)"
+ },
+ {
+  "id": "15-231",
+  "de": "Q (Querkraft)",
+  "en": "Q (shear force)"
+ },
+ {
+  "id": "15-232",
+  "de": "Querkraft Q",
+  "en": "Shear force Q"
+ },
+ {
+  "id": "15-233",
+  "de": "Querkraft im Feld = A minus Lasten links des Schnitts",
+  "en": "Shear force in the span = A minus loads to the left of the section"
+ },
+ {
+  "id": "15-234",
+  "de": "Querschnitt aus Rechtecken berechnen (cm)",
+  "en": "Calculate a cross-section from rectangles (cm)"
+ },
+ {
+  "id": "15-235",
+  "de": "Rahmen, beide Füße eingespannt",
+  "en": "Frame, both feet fixed"
+ },
+ {
+  "id": "15-236",
+  "de": "Randspannungen: σ = N/A ± M/W",
+  "en": "Edge stresses: σ = N/A ± M/W"
+ },
+ {
+  "id": "15-237",
+  "de": "Reaktionen",
+  "en": "Reactions"
+ },
+ {
+  "id": "15-238",
+  "de": "Rechteck",
+  "en": "Rectangle"
+ },
+ {
+  "id": "15-239",
+  "de": "Rechteck b × h",
+  "en": "Rectangle b × h"
+ },
+ {
+  "id": "15-240",
+  "de": "Rechteck berechnen (Eingabe in cm)",
+  "en": "Calculate a rectangle (input in cm)"
+ },
+ {
+  "id": "15-241",
+  "de": "Rechteck i",
+  "en": "Rectangle i"
+ },
+ {
+  "id": "15-242",
+  "de": "Rechteck k",
+  "en": "Rectangle k"
+ },
+ {
+  "id": "15-243",
+  "de": "Rechteck plastisch: W<sub>pl</sub> = b·h²/4 = 1,5·W<sub>el</sub>. Dreieck: Schwerpunkt bei h/3 über der Basis.",
+  "en": "Rectangle plastic: W<sub>pl</sub> = b·h²/4 = 1.5·W<sub>el</sub>. Triangle: centroid at h/3 above the base."
+ },
+ {
+  "id": "15-244",
+  "de": "Rechteck unter Biegung: σ linear (Druck oben, Zug unten), τ parabolisch mit dem Maximum in der Schwerachse",
+  "en": "Rectangle in bending: σ linear (compression at the top, tension at the bottom), τ parabolic with the maximum at the centroidal axis"
+ }
+]

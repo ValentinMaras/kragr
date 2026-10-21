@@ -1,0 +1,1372 @@
+[
+ {
+  "id": "13-0",
+  "de": "Bitte mindestens eine Schicht und θ<sub>i</sub> > θ<sub>e</sub> eingeben.",
+  "en": "Please enter at least one layer and θ<sub>i</sub> > θ<sub>e</sub>."
+ },
+ {
+  "id": "13-1",
+  "de": "!Massegesetz gilt für 65 … 720 kg/m² — hier außerhalb",
+  "en": "!The mass law applies for 65 … 720 kg/m² — outside that range here"
+ },
+ {
+  "id": "13-2",
+  "de": "!Höhe h = {} m (Fußboden des höchsten Geschosses mit Aufenthaltsraum über Gelände im Mittel) · {} {} à {} m² = {} m²{}",
+  "en": "!Height h = {} m (floor of the highest storey with a habitable room above mean ground level) · {} {} of {} m² = {} m²{}"
+ },
+ {
+  "id": "13-3",
+  "de": "Nutzungseinheit",
+  "en": "unit"
+ },
+ {
+  "id": "13-4",
+  "de": " · freistehend",
+  "en": " · detached"
+ },
+ {
+  "id": "13-5",
+  "de": "freistehend: GK 1",
+  "en": "detached: BC 1"
+ },
+ {
+  "id": "13-6",
+  "de": "h ≤ 13 m und jede Nutzungseinheit ≤ 400 m² → GK 4",
+  "en": "h ≤ 13 m and each unit ≤ 400 m² → BC 4"
+ },
+ {
+  "id": "13-7",
+  "de": "!Scherfuge im {}, α<sub>v</sub> = {}, {} {}",
+  "en": "!Shear plane through the {}, α<sub>v</sub> = {}, {} {}"
+ },
+ {
+  "id": "13-8",
+  "de": "Scherfugen",
+  "en": "shear planes"
+ },
+ {
+  "id": "13-9",
+  "de": "§Baustoff {}, NKL {}, KLED {}",
+  "en": "§Material {}, SC {}, load duration {}"
+ },
+ {
+  "id": "13-10",
+  "de": "§Baustoff {} ({}), NKL {}, γ<sub>M</sub> = 1,3",
+  "en": "§Material {} ({}), SC {}, γ<sub>M</sub> = 1.3"
+ },
+ {
+  "id": "13-11",
+  "de": "§Querschnitt {} × {} mm",
+  "en": "§Cross-section {} × {} mm"
+ },
+ {
+  "id": "13-12",
+  "de": "§Nachweis ({})",
+  "en": "§Verification ({})"
+ },
+ {
+  "id": "13-13",
+  "de": "Wind (Mittel kurz/sehr kurz)",
+  "en": "wind (between short-term and instantaneous)"
+ },
+ {
+  "id": "13-14",
+  "de": "!<b>Querschnitt reicht auch mit 9 % Bewehrung nicht</b> — größer wählen oder höhere Betonklasse",
+  "en": "!<b>Cross-section insufficient even with 9 % reinforcement</b> — choose a larger section or a higher concrete class"
+ },
+ {
+  "id": "13-15",
+  "de": "!Anschlusslänge L<sub>j</sub> = {} mm > 15 d → Abminderung β<sub>Lf</sub> für lange Anschlüsse (3.8) beachten",
+  "en": "!Joint length L<sub>j</sub> = {} mm > 15 d → apply reduction β<sub>Lf</sub> for long joints (3.8)"
+ },
+ {
+  "id": "13-16",
+  "de": "!Nulllinie im Steg → Näherung: die Platte nimmt die Druckkraft, Hebelarm bis Plattenmitte",
+  "en": "!Neutral axis in the web → approximation: the flange carries the compression force, lever arm to mid-flange"
+ },
+ {
+  "id": "13-17",
+  "de": "!Pivot null → Zeile {} und {} tauschen",
+  "en": "!Pivot zero → swap rows {} and {}"
+ },
+ {
+  "id": "13-18",
+  "de": "!V<sub>Ed</sub> = {} kN ≤ V<sub>Rd,c</sub> → rechnerisch keine Querkraftbewehrung (Balken: Mindestbügel)",
+  "en": "!V<sub>Ed</sub> = {} kN ≤ V<sub>Rd,c</sub> → no shear reinforcement required by calculation (beams: minimum links)"
+ },
+ {
+  "id": "13-19",
+  "de": "!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub>: zusätzlich Vergleichsspannung σ<sub>v</sub> = √(σ² + 3τ²) nachweisen",
+  "en": "!V<sub>Ed</sub> > 0.5 · V<sub>pl,Rd</sub>: additionally verify the equivalent stress σ<sub>v</sub> = √(σ² + 3τ²)"
+ },
+ {
+  "id": "13-20",
+  "de": "!f<sub>m</sub> wird begrenzt auf min(20; 2·f<sub>b</sub>) = {} N/mm²",
+  "en": "!f<sub>m</sub> is limited to min(20; 2·f<sub>b</sub>) = {} N/mm²"
+ },
+ {
+  "id": "13-21",
+  "de": "!kurze Wand (A = {} m² < 0,1 m²): f<sub>d</sub> · 0,8 = {} N/mm²",
+  "en": "!short wall (A = {} m² < 0.1 m²): f<sub>d</sub> · 0.8 = {} N/mm²"
+ },
+ {
+  "id": "13-22",
+  "de": "!l = {} m ≥ 30 · t = {} m → die Querwände wirken nicht, Wand wie zweiseitig gehalten",
+  "en": "!l = {} m ≥ 30 · t = {} m → the cross walls are ineffective; treat the wall as restrained on two sides"
+ },
+ {
+  "id": "13-23",
+  "de": "!l<sub>eff</sub> > 150 a: Abminderung β<sub>Lw</sub> für lange Nähte (4.11) beachten",
+  "en": "!l<sub>eff</sub> > 150 a: apply reduction β<sub>Lw</sub> for long welds (4.11)"
+ },
+ {
+  "id": "13-24",
+  "de": "!unteres Dach kürzer als l<sub>s</sub>: am Dachrand μ = {} (Keil abgeschnitten)",
+  "en": "!lower roof shorter than l<sub>s</sub>: at the roof edge μ = {} (drift truncated)"
+ },
+ {
+  "id": "13-25",
+  "de": "!λ̄ ≤ 0,2 → χ = 1,000 (kein Stabilitätsverlust maßgebend)",
+  "en": "!λ̄ ≤ 0.2 → χ = 1.000 (buckling not governing)"
+ },
+ {
+  "id": "13-26",
+  "de": "!λ̄<sub>LT</sub> ≤ 0,4 → χ<sub>LT</sub> = 1 (kein Biegedrillknicken)",
+  "en": "!λ̄<sub>LT</sub> ≤ 0.4 → χ<sub>LT</sub> = 1 (no lateral-torsional buckling)"
+ },
+ {
+  "id": "13-27",
+  "de": "Breite {} m > 2 m: −10 % je m (× {})",
+  "en": "Width {} m > 2 m: −10 % per m (× {})"
+ },
+ {
+  "id": "13-28",
+  "de": "Grundwasser {} m unter Sohle (< b): −{} %",
+  "en": "Groundwater {} m below base (< b): −{} %"
+ },
+ {
+  "id": "13-29",
+  "de": "Horizontallast H/V = {}: × (1 − H/V)² = {}",
+  "en": "Horizontal load H/V = {}: × (1 − H/V)² = {}"
+ },
+ {
+  "id": "13-30",
+  "de": "Klasse 1: 36ε / α = 36 · {} / {} = {}",
+  "en": "Class 1: 36ε / α = 36 · {} / {} = {}"
+ },
+ {
+  "id": "13-31",
+  "de": "Klasse 2: 41,5ε / α = {}",
+  "en": "Class 2: 41.5ε / α = {}"
+ },
+ {
+  "id": "13-32",
+  "de": "Klasse 3: 62ε · (1 − ψ) · √(−ψ) = {}",
+  "en": "Class 3: 62ε · (1 − ψ) · √(−ψ) = {}"
+ },
+ {
+  "id": "13-33",
+  "de": "Klasse {} → W<sub>y</sub> = W<sub>el,y</sub>",
+  "en": "Class {} → W<sub>y</sub> = W<sub>el,y</sub>"
+ },
+ {
+  "id": "13-34",
+  "de": "c = b/2 − e = {} − {} = {} m · überdrückte Länge 3c = {} m",
+  "en": "c = b/2 − e = {} − {} = {} m · length in compression 3c = {} m"
+ },
+ {
+  "id": "13-35",
+  "de": "h ≤ 7 m, höchstens 2 Nutzungseinheiten mit zusammen ≤ 400 m² → {}",
+  "en": "h ≤ 7 m, at most 2 units totalling ≤ 400 m² → {}"
+ },
+ {
+  "id": "13-36",
+  "de": "k<sub>1</sub> (innere Reihe) = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) = {}",
+  "en": "k<sub>1</sub> (inner row) = min(1.4 · p<sub>2</sub>/d<sub>0</sub> − 1.7; 2.5) = {}"
+ },
+ {
+  "id": "13-37",
+  "de": "{} Zeilen",
+  "en": "{} rows"
+ },
+ {
+  "id": "13-38",
+  "de": "§Elastischer Nachweis (Klasse 3, 6.2.1 (7))",
+  "en": "§Elastic verification (class 3, 6.2.1 (7))"
+ },
+ {
+  "id": "13-39",
+  "de": "§Klaffende Fuge (e > b/6)",
+  "en": "§Gaping joint (e > b/6)"
+ },
+ {
+  "id": "13-40",
+  "de": "§Plastizität und Konsistenz (bindig)",
+  "en": "§Plasticity and consistency (cohesive)"
+ },
+ {
+  "id": "13-41",
+  "de": " (> 1: Eingaben prüfen)",
+  "en": " (> 1: check inputs)"
+ },
+ {
+  "id": "13-42",
+  "de": " (fließt nicht)",
+  "en": " (does not yield)"
+ },
+ {
+  "id": "13-43",
+  "de": " (v<sub>min</sub> maßgebend)",
+  "en": " (v<sub>min</sub> governs)"
+ },
+ {
+  "id": "13-44",
+  "de": " — <b>über 0,08·A<sub>c</sub></b>, Querschnitt vergrößern",
+  "en": " — <b>above 0.08·A<sub>c</sub></b>, enlarge the cross-section"
+ },
+ {
+  "id": "13-45",
+  "de": " — Klasse 4: wirksamer Querschnitt nötig (hier nur elastischer Wert angegeben)",
+  "en": " — class 4: effective cross-section required (only the elastic value is given here)"
+ },
+ {
+  "id": "13-46",
+  "de": " — Scherfuge zählt nicht",
+  "en": " — shear plane does not count"
+ },
+ {
+  "id": "13-47",
+  "de": " — keine Axialkraft ansetzen",
+  "en": " — do not apply an axial force"
+ },
+ {
+  "id": "13-48",
+  "de": "!<b>Platte überlastet</b> — genauere Bemessung oder dickere Platte.",
+  "en": "!<b>Slab overloaded</b> — more accurate design or a thicker slab."
+ },
+ {
+  "id": "13-49",
+  "de": "!Der Querschnitt ist vollständig abgebrannt.",
+  "en": "!The cross-section has burnt away completely."
+ },
+ {
+  "id": "13-50",
+  "de": "!Der Zufluss ist nicht schießend — es entsteht kein Wechselsprung.",
+  "en": "!The inflow is not supercritical — no hydraulic jump occurs."
+ },
+ {
+  "id": "13-51",
+  "de": "!Keine eindeutige Lösung (Determinante 0)",
+  "en": "!No unique solution (determinant 0)"
+ },
+ {
+  "id": "13-52",
+  "de": "!Klasse 4: wirksamer Querschnitt nach EN 1993-1-5 nötig — hier nicht abgedeckt.",
+  "en": "!Class 4: effective cross-section to EN 1993-1-5 required — not covered here."
+ },
+ {
+  "id": "13-53",
+  "de": "!Querschnitt Klasse 4 — nicht abgedeckt.",
+  "en": "!Cross-section class 4 — not covered."
+ },
+ {
+  "id": "13-54",
+  "de": "!a₃₃ = 0 → keine eindeutige Lösung",
+  "en": "!a₃₃ = 0 → no unique solution"
+ },
+ {
+  "id": "13-55",
+  "de": "!b<sub>eff</sub>/b<sub>w</sub> < 5 — die Näherung liegt auf der unsicheren Seite; genauer mit Bemessungstafeln für Plattenbalken.",
+  "en": "!b<sub>eff</sub>/b<sub>w</sub> < 5 — the approximation is on the unsafe side; use design tables for T-beams for a more accurate result."
+ },
+ {
+  "id": "13-56",
+  "de": "!e ≥ b/2: Resultierende außerhalb der Sohle — Fundament kippt.",
+  "en": "!e ≥ b/2: resultant outside the base — the footing overturns."
+ },
+ {
+  "id": "13-57",
+  "de": ", hier außerhalb des Gültigkeitsbereichs Re ≥ 5000, 10⁻⁶ ≤ k/d ≤ 10⁻²",
+  "en": ", here outside the range of validity Re ≥ 5000, 10⁻⁶ ≤ k/d ≤ 10⁻²"
+ },
+ {
+  "id": "13-58",
+  "de": "< 0 → Lager A muss verankert werden",
+  "en": "< 0 → support A must be anchored"
+ },
+ {
+  "id": "13-59",
+  "de": "< 0,70 ✗ Schimmelgefahr",
+  "en": "< 0.70 ✗ risk of mould"
+ },
+ {
+  "id": "13-60",
+  "de": "<b>Kavitationsgefahr</b> — Pumpe tiefer setzen oder Saugleitung verbessern",
+  "en": "<b>Risk of cavitation</b> — set the pump lower or improve the suction line"
+ },
+ {
+  "id": "13-61",
+  "de": "<b>nicht eingehalten</b>",
+  "en": "<b>not met</b>"
+ },
+ {
+  "id": "13-62",
+  "de": "> 2 → Knicklinie c",
+  "en": "> 2 → buckling curve c"
+ },
+ {
+  "id": "13-63",
+  "de": "BSH: k<sub>h</sub> = min((600/h)<sup>0,1</sup>; 1,1) für h < 600 mm",
+  "en": "Glulam: k<sub>h</sub> = min((600/h)<sup>0.1</sup>; 1.1) for h < 600 mm"
+ },
+ {
+  "id": "13-64",
+  "de": "Biegebemessung",
+  "en": "Bending design"
+ },
+ {
+  "id": "13-65",
+  "de": "Biegung und Druck",
+  "en": "Bending and compression"
+ },
+ {
+  "id": "13-66",
+  "de": "Bitte 0 < φ′ < 50° und β < φ′ eingeben.",
+  "en": "Please enter 0 < φ′ < 50° and β < φ′."
+ },
+ {
+  "id": "13-67",
+  "de": "Bitte 0° ≤ α ≤ 90° eingeben.",
+  "en": "Please enter 0° ≤ α ≤ 90°."
+ },
+ {
+  "id": "13-68",
+  "de": "Bitte 1 … 8 Geschosse, Stützweiten > 0 und Lasten ≥ 0 eingeben.",
+  "en": "Please enter 1 … 8 storeys, spans > 0 and loads ≥ 0."
+ },
+ {
+  "id": "13-69",
+  "de": "Bitte Abmessungen, Sohlspannung, γ, E<sub>s</sub> > 0 und Δz ≥ 0,1 m eingeben.",
+  "en": "Please enter dimensions, base pressure, γ, E<sub>s</sub> > 0 and Δz ≥ 0.1 m."
+ },
+ {
+  "id": "13-70",
+  "de": "Bitte D, I, k<sub>St</sub> > 0 und 0 < h/D ≤ 1 eingeben.",
+  "en": "Please enter D, I, k<sub>St</sub> > 0 and 0 < h/D ≤ 1."
+ },
+ {
+  "id": "13-71",
+  "de": "Bitte Flächen und Regenspende r > 0 eingeben.",
+  "en": "Please enter areas and rainfall intensity r > 0."
+ },
+ {
+  "id": "13-72",
+  "de": "Bitte Höhe ≥ 0, mindestens eine Nutzungseinheit und deren Fläche eingeben.",
+  "en": "Please enter height ≥ 0, at least one unit and its floor area."
+ },
+ {
+  "id": "13-73",
+  "de": "Bitte Höhen und Breiten > 0 eingeben.",
+  "en": "Please enter heights and widths > 0."
+ },
+ {
+  "id": "13-74",
+  "de": "Bitte Knicklängen > 0 eingeben.",
+  "en": "Please enter buckling lengths > 0."
+ },
+ {
+  "id": "13-75",
+  "de": "Bitte L > 0 eingeben.",
+  "en": "Please enter L > 0."
+ },
+ {
+  "id": "13-76",
+  "de": "Bitte L > 0 und g, q ≥ 0 eingeben.",
+  "en": "Please enter L > 0 and g, q ≥ 0."
+ },
+ {
+  "id": "13-77",
+  "de": "Bitte L > 0 und q ≥ 0 eingeben.",
+  "en": "Please enter L > 0 and q ≥ 0."
+ },
+ {
+  "id": "13-78",
+  "de": "Bitte L > 0, 0 ≤ x₀ ≤ L und Lasten ≥ 0 eingeben.",
+  "en": "Please enter L > 0, 0 ≤ x₀ ≤ L and loads ≥ 0."
+ },
+ {
+  "id": "13-79",
+  "de": "Bitte Länge, Höhe und Schichthöhe > 0 eingeben.",
+  "en": "Please enter length, height and course height > 0."
+ },
+ {
+  "id": "13-80",
+  "de": "Bitte Maße > 0 und n<sub>max</sub> ≥ n<sub>min</sub> ≥ 0 eingeben.",
+  "en": "Please enter dimensions > 0 and n<sub>max</sub> ≥ n<sub>min</sub> ≥ 0."
+ },
+ {
+  "id": "13-81",
+  "de": "Bitte Maße > 0, Auflagerbreite ≤ t und das Auflager innerhalb der Wand eingeben.",
+  "en": "Please enter dimensions > 0, bearing width ≤ t and a bearing within the wall."
+ },
+ {
+  "id": "13-82",
+  "de": "Bitte Q > 0 und 0 < η ≤ 100 % eingeben.",
+  "en": "Please enter Q > 0 and 0 < η ≤ 100 %."
+ },
+ {
+  "id": "13-83",
+  "de": "Bitte Q > 0 und b bzw. m > 0 eingeben.",
+  "en": "Please enter Q > 0 and b or m > 0."
+ },
+ {
+  "id": "13-84",
+  "de": "Bitte Q, d, L > 0 und 0 … 100 °C eingeben.",
+  "en": "Please enter Q, d, L > 0 and 0 … 100 °C."
+ },
+ {
+  "id": "13-85",
+  "de": "Bitte Schichtdicken, γ, γ<sub>r</sub> und GW-Tiefe eingeben.",
+  "en": "Please enter layer thicknesses, γ, γ<sub>r</sub> and groundwater depth."
+ },
+ {
+  "id": "13-86",
+  "de": "Bitte Stützweiten > 0 und Lasten ≥ 0 eingeben.",
+  "en": "Please enter spans > 0 and loads ≥ 0."
+ },
+ {
+  "id": "13-87",
+  "de": "Bitte Zahlen eingeben (N<sub>Ed</sub> als Druck > 0).",
+  "en": "Please enter numbers (N<sub>Ed</sub> as compression > 0)."
+ },
+ {
+  "id": "13-88",
+  "de": "Bitte Zahlen eingeben (d < h).",
+  "en": "Please enter numbers (d < h)."
+ },
+ {
+  "id": "13-89",
+  "de": "Bitte Zahlen eingeben (h > d₁, M > 0).",
+  "en": "Please enter numbers (h > d₁, M > 0)."
+ },
+ {
+  "id": "13-90",
+  "de": "Bitte Zahlen eingeben.",
+  "en": "Please enter numbers."
+ },
+ {
+  "id": "13-91",
+  "de": "Bitte a, b, V > 0 eingeben.",
+  "en": "Please enter a, b, V > 0."
+ },
+ {
+  "id": "13-92",
+  "de": "Bitte a, l, t<sub>1</sub>, t<sub>2</sub> > 0 eingeben.",
+  "en": "Please enter a, l, t<sub>1</sub>, t<sub>2</sub> > 0."
+ },
+ {
+  "id": "13-93",
+  "de": "Bitte alle 12 Zahlen eingeben.",
+  "en": "Please enter all 12 numbers."
+ },
+ {
+  "id": "13-94",
+  "de": "Bitte alle Abmessungen > 0 eingeben.",
+  "en": "Please enter all dimensions > 0."
+ },
+ {
+  "id": "13-95",
+  "de": "Bitte alle Massen, Längen und Flächen > 0 eingeben.",
+  "en": "Please enter all masses, lengths and areas > 0."
+ },
+ {
+  "id": "13-96",
+  "de": "Bitte alle Schichtwerte und die GW-Tiefe eingeben.",
+  "en": "Please enter all layer values and the groundwater depth."
+ },
+ {
+  "id": "13-97",
+  "de": "Bitte alle Werte > 0 eingeben.",
+  "en": "Please enter all values > 0."
+ },
+ {
+  "id": "13-98",
+  "de": "Bitte alle Werte > 0 und a ≤ t eingeben.",
+  "en": "Please enter all values > 0 and a ≤ t."
+ },
+ {
+  "id": "13-99",
+  "de": "Bitte b und h > 0 eingeben.",
+  "en": "Please enter b and h > 0."
+ },
+ {
+  "id": "13-100",
+  "de": "Bitte b, d, M > 0 eingeben.",
+  "en": "Please enter b, d, M > 0."
+ },
+ {
+  "id": "13-101",
+  "de": "Bitte b, d, h > 0 (h ≤ 25 m) und die Lasteinzugsfläche A > 0 eingeben.",
+  "en": "Please enter b, d, h > 0 (h ≤ 25 m) and the loaded area A > 0."
+ },
+ {
+  "id": "13-102",
+  "de": "Bitte b, h > 0 und t ≥ 0 eingeben.",
+  "en": "Please enter b, h > 0 and t ≥ 0."
+ },
+ {
+  "id": "13-103",
+  "de": "Bitte b, h > 0, RH 40 … 100 % und t<sub>0</sub> ≥ 1 Tag eingeben.",
+  "en": "Please enter b, h > 0, RH 40 … 100 % and t<sub>0</sub> ≥ 1 day."
+ },
+ {
+  "id": "13-104",
+  "de": "Bitte b, h und Knicklängen > 0 eingeben.",
+  "en": "Please enter b, h and buckling lengths > 0."
+ },
+ {
+  "id": "13-105",
+  "de": "Bitte b, h, Achsabstand > 0, T > 0 und 1,0 ≤ cot θ ≤ 3,0 eingeben.",
+  "en": "Please enter b, h, axis distance > 0, T > 0 and 1.0 ≤ cot θ ≤ 3.0."
+ },
+ {
+  "id": "13-106",
+  "de": "Bitte b, h, I und k<sub>St</sub> > 0 eingeben.",
+  "en": "Please enter b, h, I and k<sub>St</sub> > 0."
+ },
+ {
+  "id": "13-107",
+  "de": "Bitte b, h, L > 0 eingeben.",
+  "en": "Please enter b, h, L > 0."
+ },
+ {
+  "id": "13-108",
+  "de": "Bitte b, h, L, Auflagerlänge > 0 eingeben.",
+  "en": "Please enter b, h, L, bearing length > 0."
+ },
+ {
+  "id": "13-109",
+  "de": "Bitte b, h<sub>ü</sub>, μ > 0 eingeben.",
+  "en": "Please enter b, h<sub>ü</sub>, μ > 0."
+ },
+ {
+  "id": "13-110",
+  "de": "Bitte c<sub>v</sub>, H > 0 und t ≥ 0 eingeben.",
+  "en": "Please enter c<sub>v</sub>, H > 0 and t ≥ 0."
+ },
+ {
+  "id": "13-111",
+  "de": "Bitte d, μ, h<sub>1</sub> > h<sub>2</sub> ≥ 0 eingeben.",
+  "en": "Please enter d, μ, h<sub>1</sub> > h<sub>2</sub> ≥ 0."
+ },
+ {
+  "id": "13-112",
+  "de": "Bitte eine Knicklänge > 0 eingeben.",
+  "en": "Please enter a buckling length > 0."
+ },
+ {
+  "id": "13-113",
+  "de": "Bitte eine gerade Feldzahl 2 … 12, a, h > 0 und Lasten eingeben.",
+  "en": "Please enter an even number of panels 2 … 12, a, h > 0 and loads."
+ },
+ {
+  "id": "13-114",
+  "de": "Bitte f<sub>b</sub> (und bei Normalmörtel f<sub>m</sub>) > 0 eingeben.",
+  "en": "Please enter f<sub>b</sub> (and for general-purpose mortar f<sub>m</sub>) > 0."
+ },
+ {
+  "id": "13-115",
+  "de": "Bitte gültige Werte eingeben (0 < φ′ ≤ 45°, e < b/2).",
+  "en": "Please enter valid values (0 < φ′ ≤ 45°, e < b/2)."
+ },
+ {
+  "id": "13-116",
+  "de": "Bitte gültige Werte eingeben (0° < φ′ < 60°).",
+  "en": "Please enter valid values (0° < φ′ < 60°)."
+ },
+ {
+  "id": "13-117",
+  "de": "Bitte gültige Werte eingeben.",
+  "en": "Please enter valid values."
+ },
+ {
+  "id": "13-118",
+  "de": "Bitte h, t (und l) > 0 eingeben.",
+  "en": "Please enter h, t (and l) > 0."
+ },
+ {
+  "id": "13-119",
+  "de": "Bitte k, H, r > 0 und 0 < s < H eingeben.",
+  "en": "Please enter k, H, r > 0 and 0 < s < H."
+ },
+ {
+  "id": "13-120",
+  "de": "Bitte k, L, A, γ′ > 0 eingeben.",
+  "en": "Please enter k, L, A, γ′ > 0."
+ },
+ {
+  "id": "13-121",
+  "de": "Bitte l, h > 0 und Lasten ≥ 0 eingeben.",
+  "en": "Please enter l, h > 0 and loads ≥ 0."
+ },
+ {
+  "id": "13-122",
+  "de": "Bitte l, t, h, N > 0 und V ≥ 0 eingeben.",
+  "en": "Please enter l, t, h, N > 0 and V ≥ 0."
+ },
+ {
+  "id": "13-123",
+  "de": "Bitte m ≥ m<sub>d</sub> > 0, V > 0 und ρ<sub>s</sub> > 0 eingeben.",
+  "en": "Please enter m ≥ m<sub>d</sub> > 0, V > 0 and ρ<sub>s</sub> > 0."
+ },
+ {
+  "id": "13-124",
+  "de": "Bitte mindestens ein Rechteck mit b, h > 0 und z ≥ 0 eingeben.",
+  "en": "Please enter at least one rectangle with b, h > 0 and z ≥ 0."
+ },
+ {
+  "id": "13-125",
+  "de": "Bitte p ≥ 0 eingeben.",
+  "en": "Please enter p ≥ 0."
+ },
+ {
+  "id": "13-126",
+  "de": "Bitte q, h<sub>1</sub> > 0 eingeben.",
+  "en": "Please enter q, h<sub>1</sub> > 0."
+ },
+ {
+  "id": "13-127",
+  "de": "Bitte s′, m′<sub>1</sub>, m′<sub>2</sub> > 0 eingeben.",
+  "en": "Please enter s′, m′<sub>1</sub>, m′<sub>2</sub> > 0."
+ },
+ {
+  "id": "13-128",
+  "de": "Bitte t, e<sub>1</sub>, e<sub>2</sub> > 0 eingeben.",
+  "en": "Please enter t, e<sub>1</sub>, e<sub>2</sub> > 0."
+ },
+ {
+  "id": "13-129",
+  "de": "Bitte v, L > 0 und 0 ≤ T ≤ 100 °C eingeben.",
+  "en": "Please enter v, L > 0 and 0 ≤ T ≤ 100 °C."
+ },
+ {
+  "id": "13-130",
+  "de": "Bitte w<sub>L</sub> > w<sub>P</sub> ≥ 0 eingeben.",
+  "en": "Please enter w<sub>L</sub> > w<sub>P</sub> ≥ 0."
+ },
+ {
+  "id": "13-131",
+  "de": "Bitte zwei Versuche mit σ<sub>1</sub> > σ<sub>3</sub> und unterschiedlichem σ<sub>3</sub> eingeben.",
+  "en": "Please enter two tests with σ<sub>1</sub> > σ<sub>3</sub> and different σ<sub>3</sub>."
+ },
+ {
+  "id": "13-132",
+  "de": "Bitte −30 … 60 °C und 0 < φ ≤ 100 % eingeben.",
+  "en": "Please enter −30 … 60 °C and 0 < φ ≤ 100 %."
+ },
+ {
+  "id": "13-133",
+  "de": "Das vereinfachte Verfahren gilt nur bis h = 25 m.",
+  "en": "The simplified method applies only up to h = 25 m."
+ },
+ {
+  "id": "13-134",
+  "de": "Die Werte ergeben keinen gültigen Porenanteil (0 < n < 1).",
+  "en": "The values do not give a valid porosity (0 < n < 1)."
+ },
+ {
+  "id": "13-135",
+  "de": "Querschnittsnachweis",
+  "en": "Cross-section check"
+ },
+ {
+  "id": "13-136",
+  "de": "Rechteck/Kreis mit a/b < 2: +20 %",
+  "en": "Rectangle/circle with a/b < 2: +20 %"
+ },
+ {
+  "id": "13-137",
+  "de": "TL/UL (Übergangsbereich)",
+  "en": "TL/UL (transition range)"
+ },
+ {
+  "id": "13-138",
+  "de": "Tabellenbereich: Einbindetiefe 0,5 … 2,0 m und Breite 0,5 … 2,0 m.",
+  "en": "Table range: embedment depth 0.5 … 2.0 m and width 0.5 … 2.0 m."
+ },
+ {
+  "id": "13-139",
+  "de": "Tabellenbereich: Einbindetiefe 0,5 … 2,0 m und Breite 0,5 … 5,0 m.",
+  "en": "Table range: embedment depth 0.5 … 2.0 m and width 0.5 … 5.0 m."
+ },
+ {
+  "id": "13-140",
+  "de": "cot θ muss zwischen 1,0 und 3,0 liegen.",
+  "en": "cot θ must lie between 1.0 and 3.0."
+ },
+ {
+  "id": "13-141",
+  "de": "flüssig",
+  "en": "liquid"
+ },
+ {
+  "id": "13-142",
+  "de": "f₀ ≤ 100 Hz: in Ordnung",
+  "en": "f₀ ≤ 100 Hz: acceptable"
+ },
+ {
+  "id": "13-143",
+  "de": "f₀ ≤ 80 Hz: sehr gut — die Resonanz liegt unter dem bauakustischen Bereich",
+  "en": "f₀ ≤ 80 Hz: very good — the resonance lies below the building-acoustics range"
+ },
+ {
+  "id": "13-144",
+  "de": "h > 13 m oder Nutzungseinheiten > 400 m² → GK 5 (Hochhaus ab 22 m: Sonderbau)",
+  "en": "h > 13 m or units > 400 m² → BC 5 (high-rise from 22 m: special building)"
+ },
+ {
+  "id": "13-145",
+  "de": "halbfest bis fest",
+  "en": "semi-solid to solid"
+ },
+ {
+  "id": "13-146",
+  "de": "innere Reihe",
+  "en": "inner row"
+ },
+ {
+  "id": "13-147",
+  "de": "nicht freistehend: GK 2",
+  "en": "not detached: BC 2"
+ },
+ {
+  "id": "13-148",
+  "de": "Übergangsbereich (2320 … 10⁴)",
+  "en": "transition range (2320 … 10⁴)"
+ },
+ {
+  "id": "13-149",
+  "de": "überschritten ✗",
+  "en": "exceeded ✗"
+ },
+ {
+  "id": "13-150",
+  "de": "λ<sub>rel,m</sub> ≤ 0,75 → k<sub>crit</sub> = 1 (kein Kippen)",
+  "en": "λ<sub>rel,m</sub> ≤ 0.75 → k<sub>crit</sub> = 1 (no lateral buckling)"
+ },
+ {
+  "id": "13-151",
+  "de": "— knapp, Flanken genau nachweisen",
+  "en": "— marginal, verify flanking transmission in detail"
+ },
+ {
+  "id": "13-152",
+  "de": "✗ Tauwasser",
+  "en": "✗ condensation"
+ },
+ {
+  "id": "13-153",
+  "de": "langsames Schließen: Δp ≈ Δp<sub>J</sub> · T<sub>r</sub>/t<sub>s</sub> = {} bar (Näherung nach Michaud)",
+  "en": "slow closure: Δp ≈ Δp<sub>J</sub> · T<sub>r</sub>/t<sub>s</sub> = {} bar (Michaud approximation)"
+ },
+ {
+  "id": "13-154",
+  "de": "1. Gipsputz",
+  "en": "1. Gypsum plaster"
+ },
+ {
+  "id": "13-155",
+  "de": "2. Kalksandstein RDK 1,8",
+  "en": "2. Calcium silicate masonry RDK 1.8"
+ },
+ {
+  "id": "13-156",
+  "de": "3. Mineralwolle WLS 035",
+  "en": "3. Mineral wool WLS 035"
+ },
+ {
+  "id": "13-157",
+  "de": "4. Kalkzementputz",
+  "en": "4. Lime-cement plaster"
+ },
+ {
+  "id": "13-158",
+  "de": "90 + Stoß",
+  "en": "90 + junction"
+ },
+ {
+  "id": "13-159",
+  "de": "<a class=\"applink\" href=\"#/bauphysik/feuchte/luft\">→ Taupunkt und Oberflächentemperatur berechnen</a>",
+  "en": "<a class=\"applink\" href=\"#/bauphysik/feuchte/luft\">→ Calculate dew point and surface temperature</a>"
+ },
+ {
+  "id": "13-160",
+  "de": "<a class=\"applink\" href=\"#/holzbau/gzt/brand\">→ Abbrand im Holzbau</a>",
+  "en": "<a class=\"applink\" href=\"#/holzbau/gzt/brand\">→ Charring in timber construction</a>"
+ },
+ {
+  "id": "13-161",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Glaser-Nachweis mit Bericht in statiq·size (Bauphysik)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ Glaser verification with report in statiq·size (Building physics)</a>"
+ },
+ {
+  "id": "13-162",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Nachweis mit Bericht in statiq·size (Bauphysik → Schallschutz, genauer Nachweis)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ Verification with report in statiq·size (Building physics → Sound insulation, detailed verification)</a>"
+ },
+ {
+  "id": "13-163",
+  "de": "<a class=\"applink\" href=\"size.html\">→ U-Wert-Nachweis mit Bericht in statiq·size (Bauphysik)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ U-value verification with report in statiq·size (Building physics)</a>"
+ },
+ {
+  "id": "13-164",
+  "de": "<span class=\"st-n\">1</span><span>Bau-Schalldämmmaß</span>",
+  "en": "<span class=\"st-n\">1</span><span>Apparent sound reduction index</span>"
+ },
+ {
+  "id": "13-165",
+  "de": "<span class=\"st-n\">1</span><span>Direkte Übertragung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Direct transmission</span>"
+ },
+ {
+  "id": "13-166",
+  "de": "<span class=\"st-n\">1</span><span>Einordnung nach MBO § 2 (3)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Classification to MBO § 2 (3)</span>"
+ },
+ {
+  "id": "13-167",
+  "de": "<span class=\"st-n\">1</span><span>Flächenbezogene Masse</span>",
+  "en": "<span class=\"st-n\">1</span><span>Mass per unit area</span>"
+ },
+ {
+  "id": "13-168",
+  "de": "<span class=\"st-n\">1</span><span>Randbedingungen Tauperiode (DIN 4108-3)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Boundary conditions, condensation period (DIN 4108-3)</span>"
+ },
+ {
+  "id": "13-169",
+  "de": "<span class=\"st-n\">1</span><span>Rohdecke</span>",
+  "en": "<span class=\"st-n\">1</span><span>Structural slab</span>"
+ },
+ {
+  "id": "13-170",
+  "de": "<span class=\"st-n\">1</span><span>Sättigungsdampfdruck (Magnus-Formel)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Saturation vapour pressure (Magnus formula)</span>"
+ },
+ {
+  "id": "13-171",
+  "de": "<span class=\"st-n\">1</span><span>Wärmedurchgangswiderstand</span>",
+  "en": "<span class=\"st-n\">1</span><span>Total thermal resistance</span>"
+ },
+ {
+  "id": "13-172",
+  "de": "<span class=\"st-n\">2</span><span>Anforderungen an tragende Wände, Stützen und Decken (MBO §§ 27, 31)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Requirements for load-bearing walls, columns and floors (MBO §§ 27, 31)</span>"
+ },
+ {
+  "id": "13-173",
+  "de": "<span class=\"st-n\">2</span><span>Bewertetes Schalldämmmaß (DIN 4109-32, Massegesetz)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Weighted sound reduction index (DIN 4109-32, mass law)</span>"
+ },
+ {
+  "id": "13-174",
+  "de": "<span class=\"st-n\">2</span><span>Dampfdruck der Luft</span>",
+  "en": "<span class=\"st-n\">2</span><span>Vapour pressure of the air</span>"
+ },
+ {
+  "id": "13-175",
+  "de": "<span class=\"st-n\">2</span><span>Diffusionswiderstand</span>",
+  "en": "<span class=\"st-n\">2</span><span>Diffusion resistance</span>"
+ },
+ {
+  "id": "13-176",
+  "de": "<span class=\"st-n\">2</span><span>Nachweis (Wohnungstrennwand)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Verification (separating wall between dwellings)</span>"
+ },
+ {
+  "id": "13-177",
+  "de": "<span class=\"st-n\">2</span><span>Schwimmender Estrich</span>",
+  "en": "<span class=\"st-n\">2</span><span>Floating screed</span>"
+ },
+ {
+  "id": "13-178",
+  "de": "<span class=\"st-n\">2</span><span>Stoßstellendämmmaß (DIN 4109-32, starre Stöße)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Vibration reduction index (DIN 4109-32, rigid junctions)</span>"
+ },
+ {
+  "id": "13-179",
+  "de": "<span class=\"st-n\">2</span><span>Wärmedurchgangskoeffizient</span>",
+  "en": "<span class=\"st-n\">2</span><span>Thermal transmittance</span>"
+ },
+ {
+  "id": "13-180",
+  "de": "<span class=\"st-n\">3</span><span>Flankenwege je Flanke</span>",
+  "en": "<span class=\"st-n\">3</span><span>Flanking paths per flank</span>"
+ },
+ {
+  "id": "13-181",
+  "de": "<span class=\"st-n\">3</span><span>Korrekturwert für die Flanken (DIN 4109-2)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Correction for the flanks (DIN 4109-2)</span>"
+ },
+ {
+  "id": "13-182",
+  "de": "<span class=\"st-n\">3</span><span>Taupunkttemperatur</span>",
+  "en": "<span class=\"st-n\">3</span><span>Dew point temperature</span>"
+ },
+ {
+  "id": "13-183",
+  "de": "<span class=\"st-n\">3</span><span>Tauwasserebene</span>",
+  "en": "<span class=\"st-n\">3</span><span>Condensation plane</span>"
+ },
+ {
+  "id": "13-184",
+  "de": "<span class=\"st-n\">3</span><span>Vergleich mit der Anforderung (Wohnungstrennwand)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Comparison with the requirement (separating wall between dwellings)</span>"
+ },
+ {
+  "id": "13-185",
+  "de": "<span class=\"st-n\">3</span><span>Wärmestrom und Temperaturen</span>",
+  "en": "<span class=\"st-n\">3</span><span>Heat flow and temperatures</span>"
+ },
+ {
+  "id": "13-186",
+  "de": "<span class=\"st-n\">4</span><span>Anforderungen (Anhaltswerte)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Requirements (guide values)</span>"
+ },
+ {
+  "id": "13-187",
+  "de": "<span class=\"st-n\">4</span><span>Bewerteter Norm-Trittschallpegel</span>",
+  "en": "<span class=\"st-n\">4</span><span>Weighted normalised impact sound pressure level</span>"
+ },
+ {
+  "id": "13-188",
+  "de": "<span class=\"st-n\">4</span><span>Innenoberfläche eines Bauteils (R<sub>si</sub> = 0,25)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Inner surface of a component (R<sub>si</sub> = 0.25)</span>"
+ },
+ {
+  "id": "13-189",
+  "de": "<span class=\"st-n\">4</span><span>Verdunstungsperiode (innen 20 °C / 50 %, außen 12 °C / 70 %, 2160 h)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Evaporation period (inside 20 °C / 50 %, outside 12 °C / 70 %, 2160 h)</span>"
+ },
+ {
+  "id": "13-190",
+  "de": "<span class=\"st-n\">5</span><span>Nachweis</span>",
+  "en": "<span class=\"st-n\">5</span><span>Verification</span>"
+ },
+ {
+  "id": "13-191",
+  "de": "An Wärmebrücken (Ecken, Deckenauflager, Balkonplatten, Fensteranschlüsse) ist die Innenoberfläche kälter als im Regelquerschnitt. Bei 50 % Raumluftfeuchte beginnt Schimmel bei etwa 12,6 °C (80 % Feuchte an der Oberfläche).",
+  "en": "At thermal bridges (corners, slab supports, balcony slabs, window junctions) the inner surface is colder than in the standard cross-section. At 50 % room humidity, mould starts at about 12.6 °C (80 % humidity at the surface)."
+ },
+ {
+  "id": "13-192",
+  "de": "Anhaltswerte. Der Mindestwärmeschutz gilt für jedes Bauteil (Schutz vor Tauwasser und Schimmel), das GEG regelt den Energiebedarf des ganzen Gebäudes über ein Referenzgebäude. Im Projekt die aktuelle Fassung von GEG und DIN 4108-2 verwenden.",
+  "en": "Guide values. Minimum thermal insulation applies to every component (protection against condensation and mould); the GEG governs the energy demand of the whole building via a reference building. In a project use the current versions of the GEG and DIN 4108-2."
+ },
+ {
+  "id": "13-193",
+  "de": "Anteile an der übertragenen Schallenergie: direkt (Dd) 43 %, alle Flankenwege 57 % · größter Flankenweg Ff über Innenwand mit 8 % · ohne Flanken wäre R′<sub>w</sub> = R<sub>Dd</sub> = 61,3 dB",
+  "en": "Shares of the transmitted sound energy: direct (Dd) 43 %, all flanking paths 57 % · largest flanking path Ff via internal wall with 8 % · without flanks R′<sub>w</sub> = R<sub>Dd</sub> = 61.3 dB"
+ },
+ {
+  "id": "13-194",
+  "de": "Anzahl Nutzungseinheiten",
+  "en": "Number of units"
+ },
+ {
+  "id": "13-195",
+  "de": "Austrocknung",
+  "en": "Drying out"
+ },
+ {
+  "id": "13-196",
+  "de": "Außentemperatur θ<sub>e</sub> [°C]",
+  "en": "External temperature θ<sub>e</sub> [°C]"
+ },
+ {
+  "id": "13-197",
+  "de": "Außentür",
+  "en": "External door"
+ },
+ {
+  "id": "13-198",
+  "de": "Bau-Schalldämmmaß mit Flankenübertragung (DIN 4109-2, Massivbau)",
+  "en": "Apparent sound reduction index with flanking transmission (DIN 4109-2, solid construction)"
+ },
+ {
+  "id": "13-199",
+  "de": "Baustoff suchen …",
+  "en": "Search material …"
+ },
+ {
+  "id": "13-200",
+  "de": "Baustoffkennwerte",
+  "en": "Material properties"
+ },
+ {
+  "id": "13-201",
+  "de": "Baustoffklassen (Brandverhalten)",
+  "en": "Reaction-to-fire classes"
+ },
+ {
+  "id": "13-202",
+  "de": "Bauteil (Mehrfamilienhaus)",
+  "en": "Component (apartment building)"
+ },
+ {
+  "id": "13-203",
+  "de": "Bauteil / Wärmestrom",
+  "en": "Component / heat flow"
+ },
+ {
+  "id": "13-204",
+  "de": "Bauteile nach DIN 4108-3, 5.3 (z. B. Außenwand mit WDVS auf Mauerwerk)",
+  "en": "Components to DIN 4108-3, 5.3 (e.g. external wall with ETICS on masonry)"
+ },
+ {
+  "id": "13-205",
+  "de": "Bauteilschnitt mit Temperaturverlauf",
+  "en": "Component section with temperature profile"
+ },
+ {
+  "id": "13-206",
+  "de": "Beispiel: Innendämmung ohne Dampfbremse — die Dämmung ist innen offen, das Mauerwerk außen vergleichsweise dicht.",
+  "en": "Example: internal insulation without a vapour retarder — the insulation is open on the inside, the masonry outside is comparatively tight."
+ },
+ {
+  "id": "13-207",
+  "de": "Beispiele",
+  "en": "Examples"
+ },
+ {
+  "id": "13-208",
+  "de": "Bemessungswerte nach DIN 4108-4 bzw. DIN EN ISO 10456 (Anhaltswerte). Dämmstoffe: λ aus der Wärmeleitstufe (WLS 035 → λ = 0,035). Im Projekt gelten die Werte der Zulassung bzw. Leistungserklärung. μ ist die Wasserdampf-Diffusionswiderstandszahl (s<sub>d</sub> = μ · d).",
+  "en": "Design values to DIN 4108-4 or DIN EN ISO 10456 (guide values). Insulation: λ from the thermal conductivity grade (WLS 035 → λ = 0.035). In a project the values of the approval or declaration of performance apply. μ is the water vapour diffusion resistance factor (s<sub>d</sub> = μ · d)."
+ },
+ {
+  "id": "13-209",
+  "de": "Beton, Mauerwerk, Stahl, Mineralwolle (meist)",
+  "en": "Concrete, masonry, steel, mineral wool (mostly)"
+ },
+ {
+  "id": "13-210",
+  "de": "Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)",
+  "en": "Bituminous roofing membrane 4 mm (s_d ≈ 200 m)"
+ },
+ {
+  "id": "13-211",
+  "de": "Brandwand",
+  "en": "Fire wall"
+ },
+ {
+  "id": "13-212",
+  "de": "DIN EN 13501-2 (tragend / raumabschließend)",
+  "en": "DIN EN 13501-2 (load-bearing / separating)"
+ },
+ {
+  "id": "13-213",
+  "de": "Dachflächenfenster",
+  "en": "Roof window"
+ },
+ {
+  "id": "13-214",
+  "de": "Dachziegel",
+  "en": "Roof tiles"
+ },
+ {
+  "id": "13-215",
+  "de": "Dampfbremse 0,2 mm (s_d = 2 m)",
+  "en": "Vapour retarder 0.2 mm (s_d = 2 m)"
+ },
+ {
+  "id": "13-216",
+  "de": "Der Temperaturverlauf ist in jeder Schicht eine Gerade. Die Neigung ist umgekehrt proportional zu λ: In der Dämmung fällt die Temperatur steil ab.",
+  "en": "The temperature profile is a straight line in each layer. Its slope is inversely proportional to λ: in the insulation the temperature drops steeply."
+ },
+ {
+  "id": "13-217",
+  "de": "Diagramm mit s<sub>d</sub> auf der waagerechten Achse: Der Dampfdruck p verläuft dann als Gerade von p<sub>i</sub> nach p<sub>e</sub>. Schneidet die Gerade die Kurve des Sättigungsdampfdrucks p<sub>s</sub>, ersetzt man sie durch Tangenten — an den Berührpunkten fällt Tauwasser aus.",
+  "en": "Diagram with s<sub>d</sub> on the horizontal axis: the vapour pressure p then runs as a straight line from p<sub>i</sub> to p<sub>e</sub>. If the line crosses the saturation vapour pressure curve p<sub>s</sub>, it is replaced by tangents — condensation occurs at the points of contact."
+ },
+ {
+  "id": "13-218",
+  "de": "Die Dampfdrucklinie berührt p<sub>s</sub> an der Grenze 2/3 (s<sub>d</sub> = 0,160 m)",
+  "en": "The vapour pressure line touches p<sub>s</sub> at boundary 2/3 (s<sub>d</sub> = 0.160 m)"
+ },
+ {
+  "id": "13-219",
+  "de": "Einschaliges massives Bauteil",
+  "en": "Single-leaf solid component"
+ },
+ {
+  "id": "13-220",
+  "de": "Empfangsraum",
+  "en": "Receiving room"
+ },
+ {
+  "id": "13-221",
+  "de": "Estrich ρ [kg/m³]",
+  "en": "Screed ρ [kg/m³]"
+ },
+ {
+  "id": "13-222",
+  "de": "Estrichdicke d [cm]",
+  "en": "Screed thickness d [cm]"
+ },
+ {
+  "id": "13-223",
+  "de": "Fenster (Referenzgebäude)",
+  "en": "Window (reference building)"
+ },
+ {
+  "id": "13-224",
+  "de": "Feuerwiderstand von Bauteilen",
+  "en": "Fire resistance of components"
+ },
+ {
+  "id": "13-225",
+  "de": "Flanke",
+  "en": "Flank"
+ },
+ {
+  "id": "13-226",
+  "de": "Flanke 1: Decke oben — m′ [kg/m²] / l<sub>f</sub> [m] / Stoß",
+  "en": "Flank 1: ceiling above — m′ [kg/m²] / l<sub>f</sub> [m] / junction"
+ },
+ {
+  "id": "13-227",
+  "de": "Flanke 2: Boden unten — m′ [kg/m²] / l<sub>f</sub> [m] / Stoß",
+  "en": "Flank 2: floor below — m′ [kg/m²] / l<sub>f</sub> [m] / junction"
+ },
+ {
+  "id": "13-228",
+  "de": "Flanke 3: Außenwand — m′ [kg/m²] / l<sub>f</sub> [m] / Stoß",
+  "en": "Flank 3: external wall — m′ [kg/m²] / l<sub>f</sub> [m] / junction"
+ },
+ {
+  "id": "13-229",
+  "de": "Flanke 4: Innenwand — m′ [kg/m²] / l<sub>f</sub> [m] / Stoß",
+  "en": "Flank 4: internal wall — m′ [kg/m²] / l<sub>f</sub> [m] / junction"
+ },
+ {
+  "id": "13-230",
+  "de": "Fläche je Nutzungseinheit [m²]",
+  "en": "Area per unit [m²]"
+ },
+ {
+  "id": "13-231",
+  "de": "Für Tauwasser- und Schimmelnachweise gilt innen R<sub>si</sub> = 0,25 m²K/W (ungünstig, Ecken und hinter Möbeln). Hinterlüftete Fassade: R<sub>se</sub> wie R<sub>si</sub>, Schichten außerhalb der Luftschicht entfallen.",
+  "en": "For condensation and mould checks, R<sub>si</sub> = 0.25 m²K/W applies inside (unfavourable, corners and behind furniture). Ventilated facade: R<sub>se</sub> as R<sub>si</sub>, layers outside the air gap are ignored."
+ },
+ {
+  "id": "13-232",
+  "de": "GEG Referenzgebäude (Neubau): U = 0,202 ≤ 0,28 W/(m²K) ✓ · Bauteil im Bestand erneuert: ≤ 0,24 ✓",
+  "en": "GEG reference building (new build): U = 0.202 ≤ 0.28 W/(m²K) ✓ · component renewed in existing building: ≤ 0.24 ✓"
+ },
+ {
+  "id": "13-233",
+  "de": "Gebäudeklasse 3",
+  "en": "Building class 3"
+ },
+ {
+  "id": "13-234",
+  "de": "Gebäudeklasse bestimmen",
+  "en": "Determine building class"
+ },
+ {
+  "id": "13-235",
+  "de": "Gebäudeklassen (Musterbauordnung § 2)",
+  "en": "Building classes (Model Building Code § 2)"
+ },
+ {
+  "id": "13-236",
+  "de": "Gipskarton (teilweise), Mineralwolle mit Bindemittel",
+  "en": "Plasterboard (partly), mineral wool with binder"
+ },
+ {
+  "id": "13-237",
+  "de": "Gipskartonplatte",
+  "en": "Plasterboard"
+ },
+ {
+  "id": "13-238",
+  "de": "Gipskartonplatte: s<sub>d</sub> = 0,100 m",
+  "en": "Plasterboard: s<sub>d</sub> = 0.100 m"
+ },
+ {
+  "id": "13-239",
+  "de": "Gipsputz",
+  "en": "Gypsum plaster"
+ },
+ {
+  "id": "13-240",
+  "de": "Glaser-Diagramm (Tauperiode)",
+  "en": "Glaser diagram (condensation period)"
+ },
+ {
+  "id": "13-241",
+  "de": "Glaser-Nachweis führen",
+  "en": "Carry out Glaser verification"
+ },
+ {
+  "id": "13-242",
+  "de": "Glaser-Verfahren",
+  "en": "Glaser method"
+ },
+ {
+  "id": "13-243",
+  "de": "Grenze",
+  "en": "Limit"
+ },
+ {
+  "id": "13-244",
+  "de": "Grenze 1/2",
+  "en": "Boundary 1/2"
+ },
+ {
+  "id": "13-245",
+  "de": "Grenze 2/3",
+  "en": "Boundary 2/3"
+ },
+ {
+  "id": "13-246",
+  "de": "Grenze 3/4",
+  "en": "Boundary 3/4"
+ },
+ {
+  "id": "13-247",
+  "de": "Hochlochziegel RDK 0,8",
+  "en": "Vertically perforated brick RDK 0.8"
+ },
+ {
+  "id": "13-248",
+  "de": "Holz und Holzwerkstoffe",
+  "en": "Timber and wood-based materials"
+ },
+ {
+  "id": "13-249",
+  "de": "Holz, Holzwerkstoffe, EPS",
+  "en": "Timber, wood-based materials, EPS"
+ },
+ {
+  "id": "13-250",
+  "de": "Holzfaserdämmung WLS 040",
+  "en": "Wood fibre insulation WLS 040"
+ },
+ {
+  "id": "13-251",
+  "de": "Holzwolle-Leichtbauplatte",
+  "en": "Wood wool board"
+ },
+ {
+  "id": "13-252",
+  "de": "Höhe h = 6,50 m (Fußboden des höchsten Geschosses mit Aufenthaltsraum über Gelände im Mittel) · 4 Nutzungseinheiten à 85 m² = 340 m² · freistehend",
+  "en": "Height h = 6.50 m (floor of the highest storey with a habitable room above mean ground level) · 4 units of 85 m² = 340 m² · detached"
+ },
+ {
+  "id": "13-253",
+  "de": "Höhe h [m]",
+  "en": "Height h [m]"
+ },
+ {
+  "id": "13-254",
+  "de": "Innentemperatur θ<sub>i</sub> [°C]",
+  "en": "Internal temperature θ<sub>i</sub> [°C]"
+ },
+ {
+  "id": "13-255",
+  "de": "Jede Oberfläche, die kälter als 9,3 °C ist, wird nass (Tauwasser). Schimmel droht schon ab 80 % Feuchte an der Oberfläche: θ ≤ 12,6 °C",
+  "en": "Every surface colder than 9.3 °C gets wet (condensation). Mould is a risk from 80 % humidity at the surface: θ ≤ 12.6 °C"
+ },
+ {
+  "id": "13-256",
+  "de": "K = 0,6 + 5,5 · lg(m′<sub>Decke</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg(440 / 300) = 1,5 dB",
+  "en": "K = 0.6 + 5.5 · lg(m′<sub>slab</sub> / m′<sub>f,m</sub>) = 0.6 + 5.5 · lg(440 / 300) = 1.5 dB"
+ },
+ {
+  "id": "13-257",
+  "de": "K = 0,6 + 5,5 · lg(m′<sub>Decke</sub> / m′<sub>f,m</sub>) ≥ 0 — Korrekturwert für die Übertragung über die flankierenden Wände (DIN 4109-2; m′<sub>f,m</sub> — Mittel der flankierenden Wände im unteren Raum). Der Estrich muss ringsum mit Randdämmstreifen vom Bauwerk getrennt sein — eine einzige Schallbrücke macht ΔL<sub>w</sub> zunichte.",
+  "en": "K = 0.6 + 5.5 · lg(m′<sub>slab</sub> / m′<sub>f,m</sub>) ≥ 0 — correction for transmission via the flanking walls (DIN 4109-2; m′<sub>f,m</sub> — mean of the flanking walls in the room below). The screed must be separated from the structure all round with edge insulation strips — a single sound bridge cancels ΔL<sub>w</sub>."
+ },
+ {
+  "id": "13-258",
+  "de": "K<sub>13</sub> gilt für den Weg geradeaus entlang der Flanke (Ff), K<sub>12</sub> für den Weg um die Ecke (Df, Fd). Eine schwere Trennwand an einer leichten Flanke erhöht K<sub>13</sub> — die Flanke wird am Stoß „abgeriegelt“. Leichte, durchlaufende Flanken (z. B. leichte Außenwand) sind oft der Schwachpunkt.",
+  "en": "K<sub>13</sub> applies to the straight path along the flank (Ff), K<sub>12</sub> to the path round the corner (Df, Fd). A heavy separating wall on a light flank increases K<sub>13</sub> — the flank is “blocked” at the junction. Light, continuous flanks (e.g. a lightweight external wall) are often the weak point."
+ },
+ {
+  "id": "13-259",
+  "de": "Kalksandstein RDK 1,8",
+  "en": "Calcium silicate masonry RDK 1.8"
+ },
+ {
+  "id": "13-260",
+  "de": "Kalksandstein RDK 1,8: s<sub>d</sub> = 2,625 m",
+  "en": "Calcium silicate masonry RDK 1.8: s<sub>d</sub> = 2.625 m"
+ },
+ {
+  "id": "13-261",
+  "de": "Kalksandstein RDK 2,0",
+  "en": "Calcium silicate masonry RDK 2.0"
+ },
+ {
+  "id": "13-262",
+  "de": "Kalkzementputz",
+  "en": "Lime-cement plaster"
+ },
+ {
+  "id": "13-263",
+  "de": "Kalkzementputz: s<sub>d</sub> = 0,400 m",
+  "en": "Lime-cement plaster: s<sub>d</sub> = 0.400 m"
+ },
+ {
+  "id": "13-264",
+  "de": "Klasse",
+  "en": "Class"
+ },
+ {
+  "id": "13-265",
+  "de": "Korrektur K [dB] (wenn m′<sub>f,m</sub> = 0)",
+  "en": "Correction K [dB] (if m′<sub>f,m</sub> = 0)"
+ },
+ {
+  "id": "13-266",
+  "de": "L<sub>a</sub> — maßgeblicher Außenlärmpegel aus Straßen-, Schienen- und Gewerbelärm. R′<sub>w,ges</sub> gilt für die ganze Fassade aus Wand, Fenster und Rollladenkasten.",
+  "en": "L<sub>a</sub> — relevant external noise level from road, rail and industrial noise. R′<sub>w,tot</sub> applies to the whole facade of wall, window and roller-shutter box."
+ },
+ {
+  "id": "13-267",
+  "de": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>) = 164 − 35 · lg(440) = 71,5 dB",
+  "en": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>slab</sub>) = 164 − 35 · lg(440) = 71.5 dB"
+ },
+ {
+  "id": "13-268",
+  "de": "Leichtbeton-Vollblock RDK 0,8",
+  "en": "Lightweight concrete solid block RDK 0.8"
+ },
+ {
+  "id": "13-269",
+  "de": "Luft 20,0 °C, 50 %",
+  "en": "Air 20.0 °C, 50 %"
+ },
+ {
+  "id": "13-270",
+  "de": "Luftfeuchte, Sättigung und Taupunkt",
+  "en": "Humidity, saturation and dew point"
+ },
+ {
+  "id": "13-271",
+  "de": "Luftschall: Wände und Decken sollen ein großes R′<sub>w</sub> haben. Trittschall: der Pegel L′<sub>n,w</sub> unter der Decke soll klein sein.",
+  "en": "Airborne sound: walls and floors should have a large R′<sub>w</sub>. Impact sound: the level L′<sub>n,w</sub> below the floor should be small."
+ },
+ {
+  "id": "13-272",
+  "de": "Luftschalldämmung einschaliger Massivbauteile",
+  "en": "Airborne sound insulation of single-leaf solid components"
+ },
+ {
+  "id": "13-273",
+  "de": "Lufttemperatur θ<sub>i</sub> [°C]",
+  "en": "Air temperature θ<sub>i</sub> [°C]"
+ }
+]

@@ -1,0 +1,810 @@
+{
+ "18-0": {
+  "fr": "Valeur du tableau : 520 kN/m²<br>σ<sub>R,d</sub> = <b>520 kN/m²</b><br><span style=\"color:#555\">Vérification : σ<sub>E,d</sub> = V<sub>d</sub> / (a′·b′) ≤ σ<sub>R,d</sub></span>",
+  "es": "Valor de la tabla: 520 kN/m²<br>σ<sub>R,d</sub> = <b>520 kN/m²</b><br><span style=\"color:#555\">Comprobación: σ<sub>E,d</sub> = V<sub>d</sub> / (a′·b′) ≤ σ<sub>R,d</sub></span>"
+ },
+ "18-1": {
+  "fr": "Coefficients partiels — DIN 1054, Tab. A 2.1 et A 2.3",
+  "es": "Coeficientes parciales — DIN 1054, Tab. A 2.1 y A 2.3"
+ },
+ "18-2": {
+  "fr": "Profondeur de la surface de glissement z [m]",
+  "es": "Profundidad de la superficie de deslizamiento z [m]"
+ },
+ "18-3": {
+  "fr": "Tourbe",
+  "es": "Turba"
+ },
+ "18-4": {
+  "fr": "Tourbes, vases",
+  "es": "Turbas, limos orgánicos (fangos)"
+ },
+ "18-5": {
+  "fr": "Essai triaxial CD",
+  "es": "Ensayo triaxial CD"
+ },
+ "18-6": {
+  "fr": "Essai triaxial CU",
+  "es": "Ensayo triaxial CU"
+ },
+ "18-7": {
+  "fr": "Essai triaxial UU, essai de compression simple",
+  "es": "Ensayo triaxial UU, ensayo de compresión simple"
+ },
+ "18-8": {
+  "fr": "U = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup> avec M = π/2 · (2m + 1), m = 0, 1, 2 …",
+  "es": "U = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup> con M = π/2 · (2m + 1), m = 0, 1, 2 …"
+ },
+ "18-9": {
+  "fr": "Calculer le talus infini",
+  "es": "Calcular el talud infinito"
+ },
+ "18-10": {
+  "fr": "Talus infini β = 26,6°",
+  "es": "Talud infinito β = 26,6°"
+ },
+ "18-11": {
+  "fr": "Coefficient d'uniformité C<sub>U</sub> = d<sub>60</sub> / d<sub>10</sub> · coefficient de courbure C<sub>C</sub> = d<sub>30</sub>² / (d<sub>10</sub> · d<sub>60</sub>)",
+  "es": "Coeficiente de uniformidad C<sub>U</sub> = d<sub>60</sub> / d<sub>10</sub> · coeficiente de curvatura C<sub>C</sub> = d<sub>30</sub>² / (d<sub>10</sub> · d<sub>60</sub>)"
+ },
+ "18-12": {
+  "fr": "Terrain d'assise (sol)",
+  "es": "Terreno"
+ },
+ "18-13": {
+  "fr": "V et H ici caractéristiques (pour les coefficients d'inclinaison), V<sub>d</sub> comme valeur de calcul pour la vérification.",
+  "es": "V y H aquí característicos (para los coeficientes de inclinación), V<sub>d</sub> como valor de cálculo para la comprobación."
+ },
+ "18-14": {
+  "fr": "Essai",
+  "es": "Ensayo"
+ },
+ "18-15": {
+  "fr": "Essai 1 : σ′<sub>1</sub> à la rupture [kN/m²]",
+  "es": "Ensayo 1: σ′<sub>1</sub> en rotura [kN/m²]"
+ },
+ "18-16": {
+  "fr": "Essai 1 : σ′<sub>3</sub> [kN/m²]",
+  "es": "Ensayo 1: σ′<sub>3</sub> [kN/m²]"
+ },
+ "18-17": {
+  "fr": "Essai 2 : σ′<sub>1</sub> à la rupture [kN/m²]",
+  "es": "Ensayo 2: σ′<sub>1</sub> en rotura [kN/m²]"
+ },
+ "18-18": {
+  "fr": "Essai 2 : σ′<sub>3</sub> [kN/m²]",
+  "es": "Ensayo 2: σ′<sub>3</sub> [kN/m²]"
+ },
+ "18-19": {
+  "fr": "Contraintes verticales jusqu'à 8,00 m",
+  "es": "Tensiones verticales hasta 8,00 m"
+ },
+ "18-20": {
+  "fr": "Volume V [cm³]",
+  "es": "Volumen V [cm³]"
+ },
+ "18-21": {
+  "fr": "Condition requise",
+  "es": "Requisito"
+ },
+ "18-22": {
+  "fr": "W = 31,25 kN/m, point d'application à 0,83 m au-dessus de la base",
+  "es": "W = 31,25 kN/m, punto de aplicación a 0,83 m sobre la base"
+ },
+ "18-23": {
+  "fr": "Hauteur du mur h [m]",
+  "es": "Altura del muro h [m]"
+ },
+ "18-24": {
+  "fr": "Inclinaison du mur α [°]",
+  "es": "Inclinación del muro α [°]"
+ },
+ "18-25": {
+  "fr": "Frottement sur le mur",
+  "es": "Rozamiento muro-terreno"
+ },
+ "18-26": {
+  "fr": "Frottement sur le mur δ<sub>a</sub>",
+  "es": "Rozamiento muro-terreno δ<sub>a</sub>"
+ },
+ "18-27": {
+  "fr": "Quand peut-on utiliser les tableaux ? — DIN 1054, A 6.10",
+  "es": "¿Cuándo pueden utilizarse las tablas? — DIN 1054, A 6.10"
+ },
+ "18-28": {
+  "fr": "Teneur en eau w = m<sub>w</sub> / m<sub>d</sub> · masse volumique ρ = m / V · masse volumique sèche ρ<sub>d</sub> = m<sub>d</sub> / V = ρ / (1 + w)",
+  "es": "Contenido de agua w = m<sub>w</sub> / m<sub>d</sub> · densidad ρ = m / V · densidad seca ρ<sub>d</sub> = m<sub>d</sub> / V = ρ / (1 + w)"
+ },
+ "18-29": {
+  "fr": "Valeurs pour la situation de projet durable (BS-P) · δ<sub>S,k</sub> = φ′ pour les semelles en béton coulé en place",
+  "es": "Valores para la situación de proyecto persistente (BS-P) · δ<sub>S,k</sub> = φ′ en zapatas de hormigón in situ"
+ },
+ "18-30": {
+  "fr": "Poids volumique γ [kN/m³]",
+  "es": "Peso específico γ [kN/m³]"
+ },
+ "18-31": {
+  "fr": "Temps t [années]",
+  "es": "Tiempo t [años]"
+ },
+ "18-32": {
+  "fr": "Facteur temps T<sub>v</sub> = c<sub>v</sub> · t / H<sub>dr</sub>² avec coefficient de consolidation c<sub>v</sub> = k · E<sub>s</sub> / γ<sub>w</sub>",
+  "es": "Factor tiempo T<sub>v</sub> = c<sub>v</sub> · t / H<sub>dr</sub>² con coeficiente de consolidación c<sub>v</sub> = k · E<sub>s</sub> / γ<sub>w</sub>"
+ },
+ "18-33": {
+  "fr": "Évolution du tassement dans le temps — consolidation selon Terzaghi",
+  "es": "Evolución del asiento en el tiempo — consolidación según Terzaghi"
+ },
+ "18-34": {
+  "fr": "Calculer le tassement dans le temps",
+  "es": "Calcular el asiento en el tiempo"
+ },
+ "18-35": {
+  "fr": "Tassement dans le temps selon Terzaghi",
+  "es": "Asiento en el tiempo según Terzaghi"
+ },
+ "18-36": {
+  "fr": "Deux cercles de rupture ; la droite de rupture (Mohr-Coulomb) les touche tous deux.",
+  "es": "Dos círculos de rotura; la recta de rotura (Mohr-Coulomb) es tangente a ambos."
+ },
+ "18-37": {
+  "fr": "Interpoler linéairement entre les valeurs. Dans le Tab. A 6.2, σ<sub>R,d</sub> diminue de nouveau à partir de b ≈ 1 m : les semelles larges sollicitent des couches de sol plus profondes et tassent davantage.",
+  "es": "Interpolar linealmente entre los valores. En la Tab. A 6.2, σ<sub>R,d</sub> vuelve a disminuir a partir de b ≈ 1 m: las zapatas anchas solicitan capas de terreno más profundas y asientan más."
+ },
+ "18-38": {
+  "fr": "a — longueur de la semelle, b — largeur dans la direction de l'excentricité",
+  "es": "a — longitud de la zapata, b — ancho en la dirección de la excentricidad"
+ },
+ "18-39": {
+  "fr": "actif :&nbsp; K<sub>a</sub> = tan²(45° − φ′/2)<br> passif :&nbsp; K<sub>p</sub> = tan²(45° + φ′/2) = 1/K<sub>a</sub><br> au repos :&nbsp; K<sub>0</sub> = 1 − sin φ′",
+  "es": "activo:&nbsp; K<sub>a</sub> = tan²(45° − φ′/2)<br> pasivo:&nbsp; K<sub>p</sub> = tan²(45° + φ′/2) = 1/K<sub>a</sub><br> en reposo:&nbsp; K<sub>0</sub> = 1 − sin φ′"
+ },
+ "18-40": {
+  "fr": "tous les tableaux",
+  "es": "todas las tablas"
+ },
+ "18-41": {
+  "fr": "approximativement horizontal",
+  "es": "aproximadamente horizontal"
+ },
+ "18-42": {
+  "fr": "a′ = a − 2e<sub>a</sub>, b′ = b − 2e<sub>b</sub> — pour une charge excentrée, l'aire de calcul (réduite)",
+  "es": "a′ = a − 2e<sub>a</sub>, b′ = b − 2e<sub>b</sub> — para carga excéntrica, el área de cálculo (reducida)"
+ },
+ "18-43": {
+  "fr": "a′ = a − 2e<sub>a</sub>, b′ = b − 2e<sub>b</sub> — aire de calcul de la semelle · d — profondeur d'encastrement<br> γ₁ — poids volumique au-dessus de la base, γ₂ — sous la base · N — facteurs de capacité portante (avec facteurs de forme et d'inclinaison, ici pour la semelle filante sans inclinaison)",
+  "es": "a′ = a − 2e<sub>a</sub>, b′ = b − 2e<sub>b</sub> — área de cálculo de la zapata · d — profundidad de empotramiento<br> γ₁ — peso específico sobre la base, γ₂ — bajo la base · N — factores de capacidad portante (con factores de forma e inclinación, aquí para la zapata corrida sin inclinación)"
+ },
+ "18-44": {
+  "fr": "point quelconque : décomposer la surface en rectangles ayant un coin commun et superposer (centre : 4 · i pour a/2 × b/2)",
+  "es": "punto cualquiera: descomponer el área en rectángulos con una esquina común y superponer (centro: 4 · i para a/2 × b/2)"
+ },
+ "18-45": {
+  "fr": "cohérent : consistance",
+  "es": "cohesivo: consistencia"
+ },
+ "18-46": {
+  "fr": "sol cohérent : la zone de traction théorique jusqu'à z<sub>0</sub> = 2c′ / (γ · √K<sub>a</sub>) n'est pas prise en compte ; respecter la poussée minimale selon DIN 4085",
+  "es": "suelo cohesivo: no se considera la zona de tracción teórica hasta z<sub>0</sub> = 2c′ / (γ · √K<sub>a</sub>); observar el empuje mínimo según DIN 4085"
+ },
+ "18-47": {
+  "fr": "jusqu'à +50 %",
+  "es": "hasta +50 %"
+ },
+ "18-48": {
+  "fr": "jusqu'à −40 % (nappe au niveau de la base), linéaire jusqu'à 0 à la distance b",
+  "es": "hasta −40 % (nivel freático a la cota de la base), lineal hasta 0 a la distancia b"
+ },
+ "18-49": {
+  "fr": "c′, φ′ (et φ′<sub>r</sub>)",
+  "es": "c′, φ′ (y φ′<sub>r</sub>)"
+ },
+ "18-50": {
+  "fr": "c′, φ′ et c<sub>u</sub>",
+  "es": "c′, φ′ y c<sub>u</sub>"
+ },
+ "18-51": {
+  "fr": "état dense démontré (p. ex. essai de pénétration statique)",
+  "es": "compacidad densa demostrada (p. ej. ensayo de penetración estática)"
+ },
+ "18-52": {
+  "fr": "essai de cisaillement direct",
+  "es": "ensayo de corte directo"
+ },
+ "18-53": {
+  "fr": "drainé",
+  "es": "drenado"
+ },
+ "18-54": {
+  "fr": "drainé (contraintes effectives) : τ<sub>f</sub> = c′ + σ′ · tan φ′",
+  "es": "drenado (tensiones efectivas): τ<sub>f</sub> = c′ + σ′ · tan φ′"
+ },
+ "18-55": {
+  "fr": "e &gt; b/6 : joint ouvert",
+  "es": "e &gt; b/6: junta abierta"
+ },
+ "18-56": {
+  "fr": "e ≤ b/3 : le joint s'ouvre au plus jusqu'au milieu",
+  "es": "e ≤ b/3: la junta se abre como máximo hasta el centro"
+ },
+ "18-57": {
+  "fr": "e ≤ b/6 : trapèze",
+  "es": "e ≤ b/6: trapecio"
+ },
+ "18-58": {
+  "fr": "e ≤ b/6 : pas de joint ouvert",
+  "es": "e ≤ b/6: sin junta abierta"
+ },
+ "18-59": {
+  "fr": "e<sub>agh</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> + pression d'eau · frottement sur le mur usuel δ<sub>a</sub> = 2/3 · φ′ (mur rugueux), 0 (lisse)",
+  "es": "e<sub>agh</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> + presión de agua · rozamiento muro-terreno habitual δ<sub>a</sub> = 2/3 · φ′ (muro rugoso), 0 (liso)"
+ },
+ "18-60": {
+  "fr": "e<sub>ah</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> ≥ 0 · σ′<sub>v</sub> = q + Σ γ · h (sous la nappe γ′) · pression d'eau w = γ<sub>w</sub> · (z − z<sub>w</sub>) avec γ<sub>w</sub> = 10 kN/m³",
+  "es": "e<sub>ah</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> ≥ 0 · σ′<sub>v</sub> = q + Σ γ · h (bajo el nivel freático γ′) · presión de agua w = γ<sub>w</sub> · (z − z<sub>w</sub>) con γ<sub>w</sub> = 10 kN/m³"
+ },
+ "18-61": {
+  "fr": "granulométrie serrée C<sub>U</sub> &lt; 6 · granulométrie étalée C<sub>U</sub> ≥ 6 et 1 ≤ C<sub>C</sub> ≤ 3 · discontinue : C<sub>U</sub> ≥ 6, C<sub>C</sub> hors de 1 … 3",
+  "es": "granulometría uniforme C<sub>U</sub> &lt; 6 · granulometría bien graduada C<sub>U</sub> ≥ 6 y 1 ≤ C<sub>C</sub> ≤ 3 · discontinua: C<sub>U</sub> ≥ 6, C<sub>C</sub> fuera de 1 … 3"
+ },
+ "18-62": {
+  "fr": "graves à granulométrie serrée",
+  "es": "gravas de granulometría uniforme"
+ },
+ "18-63": {
+  "fr": "sables à granulométrie serrée",
+  "es": "arenas de granulometría uniforme"
+ },
+ "18-64": {
+  "fr": "sol mixte, dur (Tab. A 6.6)",
+  "es": "suelo mixto, duro (Tab. A 6.6)"
+ },
+ "18-65": {
+  "fr": "sol mixte, dur — A 6.6",
+  "es": "suelo mixto, duro — A 6.6"
+ },
+ "18-66": {
+  "fr": "sol mixte, très raide (Tab. A 6.6)",
+  "es": "suelo mixto, muy firme (Tab. A 6.6)"
+ },
+ "18-67": {
+  "fr": "sol mixte, très raide — A 6.6",
+  "es": "suelo mixto, muy firme — A 6.6"
+ },
+ "18-68": {
+  "fr": "sol mixte, raide (Tab. A 6.6)",
+  "es": "suelo mixto, firme (Tab. A 6.6)"
+ },
+ "18-69": {
+  "fr": "sol mixte, raide — A 6.6",
+  "es": "suelo mixto, firme — A 6.6"
+ },
+ "18-70": {
+  "fr": "valable pour",
+  "es": "válido para"
+ },
+ "18-71": {
+  "fr": "portance équivalente : pulvérulent au moins moyennement dense, cohérent au moins raide",
+  "es": "capacidad portante equivalente: granular al menos medianamente denso, cohesivo al menos firme"
+ },
+ "18-72": {
+  "fr": "coefficient de sécurité global à titre de comparaison : η = τ<sub>f,k</sub> / τ = 1,272 (sans cohésion : tan φ′/tan β)",
+  "es": "coeficiente de seguridad global a título comparativo: η = τ<sub>f,k</sub> / τ = 1,272 (sin cohesión: tan φ′/tan β)"
+ },
+ "18-73": {
+  "fr": "favorable (γ<sub>H</sub> = 1,35)",
+  "es": "favorable (γ<sub>H</sub> = 1,35)"
+ },
+ "18-74": {
+  "fr": "écoulement parallèle à la pente",
+  "es": "flujo paralelo al talud"
+ },
+ "18-75": {
+  "fr": "soulèvement hydraulique (HYD) : S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub> avec γ<sub>H</sub> = 1,35 (terrain favorable) resp. 1,80 (terrain défavorable), γ<sub>G,stb</sub> = 0,90 (BS-P)",
+  "es": "sifonamiento hidráulico (HYD): S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub> con γ<sub>H</sub> = 1,35 (terreno favorable) o 1,80 (terreno desfavorable), γ<sub>G,stb</sub> = 0,90 (BS-P)"
+ },
+ "18-76": {
+  "fr": "i(z) = 1/(2π) · [arctan(a·b/(z·R<sub>3</sub>)) + a·b·z/R<sub>3</sub> · (1/R<sub>1</sub>² + 1/R<sub>2</sub>²)] avec R<sub>1</sub> = √(a² + z²), R<sub>2</sub> = √(b² + z²), R<sub>3</sub> = √(a² + b² + z²)",
+  "es": "i(z) = 1/(2π) · [arctan(a·b/(z·R<sub>3</sub>)) + a·b·z/R<sub>3</sub> · (1/R<sub>1</sub>² + 1/R<sub>2</sub>²)] con R<sub>1</sub> = √(a² + z²), R<sub>2</sub> = √(b² + z²), R<sub>3</sub> = √(a² + b² + z²)"
+ },
+ "18-77": {
+  "fr": "dans l'espace des contraintes principales : σ′<sub>1</sub> = σ′<sub>3</sub> · tan²(45° + φ′/2) + 2c′ · tan(45° + φ′/2)",
+  "es": "en el espacio de tensiones principales: σ′<sub>1</sub> = σ′<sub>3</sub> · tan²(45° + φ′/2) + 2c′ · tan(45° + φ′/2)"
+ },
+ "18-78": {
+  "fr": "mélanges grave-sable à granulométrie discontinue",
+  "es": "mezclas grava-arena de granulometría discontinua"
+ },
+ "18-79": {
+  "fr": "mélanges sable-grave à granulométrie discontinue",
+  "es": "mezclas arena-grava de granulometría discontinua"
+ },
+ "18-80": {
+  "fr": "par unité de volume du massif de sol traversé par l'écoulement : S′ = γ<sub>w</sub> · i, G′ = γ′",
+  "es": "por unidad de volumen del terreno atravesado por el flujo: S′ = γ<sub>w</sub> · i, G′ = γ′"
+ },
+ "18-81": {
+  "fr": "selon le matériau",
+  "es": "según el material"
+ },
+ "18-82": {
+  "fr": "consolidé, drainé",
+  "es": "consolidado, drenado"
+ },
+ "18-83": {
+  "fr": "consolidé, non drainé, avec mesure de la pression interstitielle",
+  "es": "consolidado, no drenado, con medición de la presión intersticial"
+ },
+ "18-84": {
+  "fr": "gradient critique sans coefficients de sécurité : i<sub>crit</sub> = γ′/γ<sub>w</sub> = 1,000",
+  "es": "gradiente crítico sin coeficientes de seguridad: i<sub>crit</sub> = γ′/γ<sub>w</sub> = 1,000"
+ },
+ "18-85": {
+  "fr": "limons peu / moyennement / très plastiques",
+  "es": "limos de plasticidad baja / media / alta"
+ },
+ "18-86": {
+  "fr": "argiles peu / moyennement / très plastiques",
+  "es": "arcillas de plasticidad baja / media / alta"
+ },
+ "18-87": {
+  "fr": "ne convient pas comme terrain de fondation",
+  "es": "no apto como terreno de cimentación"
+ },
+ "18-88": {
+  "fr": "pulvérulent — tassement limité à 1–2 cm (Tab. A 6.2)",
+  "es": "granular — asiento limitado a 1–2 cm (Tab. A 6.2)"
+ },
+ "18-89": {
+  "fr": "pulvérulent — sans limitation du tassement (Tab. A 6.1)",
+  "es": "granular — sin limitación del asiento (Tab. A 6.1)"
+ },
+ "18-90": {
+  "fr": "pulvérulent ≥ 0,30 m, cohérent ≥ 0,50 m (tableaux à partir de 0,5 m)",
+  "es": "granular ≥ 0,30 m, cohesivo ≥ 0,50 m (tablas a partir de 0,5 m)"
+ },
+ "18-91": {
+  "fr": "pulvérulent : compacité",
+  "es": "granular: compacidad"
+ },
+ "18-92": {
+  "fr": "d'un seul côté",
+  "es": "solo por un lado"
+ },
+ "18-93": {
+  "fr": "permanente uniquement",
+  "es": "solo permanente"
+ },
+ "18-94": {
+  "fr": "charges permanentes uniquement",
+  "es": "solo cargas permanentes"
+ },
+ "18-95": {
+  "fr": "en haut et en bas",
+  "es": "arriba y abajo"
+ },
+ "18-96": {
+  "fr": "limons et argiles organiques, sols humifères et calcaires",
+  "es": "limos y arcillas orgánicos, suelos húmicos y calcáreos"
+ },
+ "18-97": {
+  "fr": "sol organique",
+  "es": "suelo orgánico"
+ },
+ "18-98": {
+  "fr": "limon pur, raide à très raide (Tab. A 6.5)",
+  "es": "limo puro, firme a muy firme (Tab. A 6.5)"
+ },
+ "18-99": {
+  "fr": "limon pur, raide à très raide — A 6.5",
+  "es": "limo puro, firme a muy firme — A 6.5"
+ },
+ "18-100": {
+  "fr": "faible perméabilité",
+  "es": "baja permeabilidad"
+ },
+ "18-101": {
+  "fr": "très faible perméabilité",
+  "es": "muy baja permeabilidad"
+ },
+ "18-102": {
+  "fr": "très forte perméabilité",
+  "es": "muy alta permeabilidad"
+ },
+ "18-103": {
+  "fr": "forte à moyenne perméabilité",
+  "es": "alta a media permeabilidad"
+ },
+ "18-104": {
+  "fr": "semelle rigide : environ s<sub>rigide</sub> ≈ 0,75 · s<sub>centre</sub> = 12,5 mm (point caractéristique)",
+  "es": "zapata rígida: aproximadamente s<sub>rígida</sub> ≈ 0,75 · s<sub>centro</sub> = 12,5 mm (punto característico)"
+ },
+ "18-105": {
+  "fr": "permanentes + variables",
+  "es": "permanente + variable"
+ },
+ "18-106": {
+  "fr": "charges permanentes + variables",
+  "es": "cargas permanentes + variables"
+ },
+ "18-107": {
+  "fr": "charges permanentes + variables : e ≤ b/3 → 0,250 ≤ 0,667 m <b class=\"ok-t\">✓ vérifié</b>",
+  "es": "cargas permanentes + variables: e ≤ b/3 → 0,250 ≤ 0,667 m <b class=\"ok-t\">✓ cumple</b>"
+ },
+ "18-108": {
+  "fr": "contrainte verticale totale σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (sous la nappe avec γ<sub>r</sub>)",
+  "es": "tensión vertical total σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (bajo el nivel freático con γ<sub>r</sub>)"
+ },
+ "18-109": {
+  "fr": "sec, c′ = 0 : η = tan φ′ / tan β · écoulement parallèle à la pente : η = γ′/γ<sub>r</sub> · tan φ′ / tan β (≈ moitié de la sécurité)",
+  "es": "seco, c′ = 0: η = tan φ′ / tan β · flujo paralelo al talud: η = γ′/γ<sub>r</sub> · tan φ′ / tan β (≈ la mitad de seguridad)"
+ },
+ "18-110": {
+  "fr": "non drainé (sol cohérent saturé, chargement rapide) : τ<sub>f</sub> = c<sub>u</sub>, φ<sub>u</sub> = 0",
+  "es": "no drenado (suelo cohesivo saturado, carga rápida): τ<sub>f</sub> = c<sub>u</sub>, φ<sub>u</sub> = 0"
+ },
+ "18-111": {
+  "fr": "défavorable (γ<sub>H</sub> = 1,80)",
+  "es": "desfavorable (γ<sub>H</sub> = 1,80)"
+ },
+ "18-112": {
+  "fr": "non consolidé, non drainé",
+  "es": "no consolidado, no drenado"
+ },
+ "18-113": {
+  "fr": "w — teneur en eau · w<sub>L</sub> — limite de liquidité · w<sub>P</sub> — limite de plasticité. Plus il y a d'eau, plus le sol est mou.",
+  "es": "w — contenido de agua · w<sub>L</sub> — límite líquido · w<sub>P</sub> — límite plástico. Cuanta más agua, más blando."
+ },
+ "18-114": {
+  "fr": "mélanges grave-sable bien gradués",
+  "es": "mezclas grava-arena bien graduadas"
+ },
+ "18-115": {
+  "fr": "mélanges sable-grave bien gradués",
+  "es": "mezclas arena-grava bien graduadas"
+ },
+ "18-116": {
+  "fr": "z — profondeur sous le terrain · q — surcharge uniforme · les valeurs négatives (traction) ne sont pas prises en compte",
+  "es": "z — profundidad bajo el terreno · q — sobrecarga uniforme · los valores negativos (tracción) no se consideran"
+ },
+ "18-117": {
+  "fr": "à titre de comparaison, sans frottement sur le mur et horizontal (Rankine) : K<sub>a</sub> = tan²(45° − φ′/2) = 0,3333",
+  "es": "a título comparativo, sin rozamiento muro-terreno y horizontal (Rankine): K<sub>a</sub> = tan²(45° − φ′/2) = 0,3333"
+ },
+ "18-118": {
+  "fr": "× (1 − H/V)², resp. × (1 − H/V) si H est parallèle au grand côté et a/b ≥ 2",
+  "es": "× (1 − H/V)², o × (1 − H/V) si H es paralela al lado largo y a/b ≥ 2"
+ },
+ "18-119": {
+  "fr": "principalement statique, pas de charges dynamiques",
+  "es": "predominantemente estático, sin cargas dinámicas"
+ },
+ "18-120": {
+  "fr": "Δσ(z) = σ<sub>1</sub> · 4 · i · σ<sub>ü</sub>(z) = γ · (d + z) · couche jusqu'à la profondeur limite Δσ = 0,2 · σ<sub>ü</sub>",
+  "es": "Δσ(z) = σ<sub>1</sub> · 4 · i · σ<sub>ü</sub>(z) = γ · (d + z) · capa hasta la profundidad límite Δσ = 0,2 · σ<sub>ü</sub>"
+ },
+ "18-121": {
+  "fr": "Δσ<sub>z</sub> — contrainte supplémentaire due à l'ouvrage dans la couche (diminue avec la profondeur)<br> Δh — épaisseur de la couche · E<sub>s</sub> — module oedométrique (issu de l'essai oedométrique)",
+  "es": "Δσ<sub>z</sub> — tensión adicional debida a la obra en la capa (disminuye con la profundidad)<br> Δh — espesor de la capa · E<sub>s</sub> — módulo edométrico (del ensayo edométrico)"
+ },
+ "18-122": {
+  "fr": "α inclinaison du mur (positive : le mur penche vers le sol), β pente du terrain, δ angle de frottement sur le mur",
+  "es": "α inclinación del muro (positiva: el muro se inclina hacia el terreno), β pendiente del terreno, δ ángulo de rozamiento muro-terreno"
+ },
+ "18-123": {
+  "fr": "β = 26,6° correspond à une pente de 1 : 2.",
+  "es": "β = 26,6° corresponde a una pendiente de 1 : 2."
+ },
+ "18-124": {
+  "fr": "γ = ρ · g · γ<sub>r</sub> = ((1 − n) · ρ<sub>s</sub> + n · ρ<sub>w</sub>) · g (saturé) · γ′ = γ<sub>r</sub> − γ<sub>w</sub> (sous la poussée d'Archimède)",
+  "es": "γ = ρ · g · γ<sub>r</sub> = ((1 − n) · ρ<sub>s</sub> + n · ρ<sub>w</sub>) · g (saturado) · γ′ = γ<sub>r</sub> − γ<sub>w</sub> (sumergido)"
+ },
+ "18-125": {
+  "fr": "γ<sub>1</sub> au-dessus de la base [kN/m³]",
+  "es": "γ<sub>1</sub> sobre la base [kN/m³]"
+ },
+ "18-126": {
+  "fr": "γ<sub>2</sub> sous la base [kN/m³]",
+  "es": "γ<sub>2</sub> bajo la base [kN/m³]"
+ },
+ "18-127": {
+  "fr": "γ_G permanente (STR/GEO-2)",
+  "es": "γ_G permanente (STR/GEO-2)"
+ },
+ "18-128": {
+  "fr": "γ_Q variable (STR/GEO-2)",
+  "es": "γ_Q variable (STR/GEO-2)"
+ },
+ "18-129": {
+  "fr": "γ_R,e butée",
+  "es": "γ_R,e empuje pasivo"
+ },
+ "18-130": {
+  "fr": "γ_R,h glissement",
+  "es": "γ_R,h deslizamiento"
+ },
+ "18-131": {
+  "fr": "γ_R,v rupture par défaut de capacité portante",
+  "es": "γ_R,v hundimiento"
+ },
+ "18-132": {
+  "fr": "γ′ — poids volumique déjaugé (γ<sub>r</sub> − γ<sub>w</sub>, γ<sub>w</sub> = 10 kN/m³) · φ′ — angle de frottement effectif · c′ — cohésion effective",
+  "es": "γ′ — peso específico sumergido (γ<sub>r</sub> − γ<sub>w</sub>, γ<sub>w</sub> = 10 kN/m³) · φ′ — ángulo de rozamiento efectivo · c′ — cohesión efectiva"
+ },
+ "18-133": {
+  "fr": "η = Σ (c′ · b + (G − u · b) · tan φ′) / m<sub>α</sub> / Σ G · sin α avec m<sub>α</sub> = cos α + tan φ′ · sin α / η (Bishop)",
+  "es": "η = Σ (c′ · b + (G − u · b) · tan φ′) / m<sub>α</sub> / Σ G · sin α con m<sub>α</sub> = cos α + tan φ′ · sin α / η (Bishop)"
+ },
+ "18-134": {
+  "fr": "σ<sub>1</sub> = σ<sub>0</sub> − γ · d = 250,0 − 19,0 · 1,00 = 231,0 kN/m² (décharge due à l'excavation déduite)",
+  "es": "σ<sub>1</sub> = σ<sub>0</sub> − γ · d = 250,0 − 19,0 · 1,00 = 231,0 kN/m² (descontada la descarga por excavación)"
+ },
+ "18-135": {
+  "fr": "σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (au-dessus de la nappe γ, en dessous γ<sub>r</sub>) · u = γ<sub>w</sub> · (z − z<sub>w</sub>) avec γ<sub>w</sub> = 10 kN/m³ · σ′<sub>v</sub> = σ<sub>v</sub> − u",
+  "es": "σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (sobre el nivel freático γ, bajo él γ<sub>r</sub>) · u = γ<sub>w</sub> · (z − z<sub>w</sub>) con γ<sub>w</sub> = 10 kN/m³ · σ′<sub>v</sub> = σ<sub>v</sub> − u"
+ },
+ "18-136": {
+  "fr": "σ<sub>z</sub> = 3F / (2π) · z³ / R⁵ avec R = √(r² + z²)",
+  "es": "σ<sub>z</sub> = 3F / (2π) · z³ / R⁵ con R = √(r² + z²)"
+ },
+ "18-137": {
+  "fr": "φ′ = 30,0° · inclinaison du mur α = 0,0° · pente du terrain β = 10,0° · frottement sur le mur δ<sub>a</sub> = 20,00°",
+  "es": "φ′ = 30,0° · inclinación del muro α = 0,0° · pendiente del terreno β = 10,0° · rozamiento muro-terreno δ<sub>a</sub> = 20,00°"
+ },
+ "18-138": {
+  "fr": "φ′<sub>d</sub> = arctan(tan φ′<sub>k</sub> / γ<sub>φ</sub>) · c′<sub>d</sub> = c′<sub>k</sub> / γ<sub>c</sub> avec γ<sub>φ</sub> = γ<sub>c</sub> = 1,25 (BS-P), 1,15 (BS-T), 1,10 (BS-A) · vérification du taux de sollicitation μ ≤ 1",
+  "es": "φ′<sub>d</sub> = arctan(tan φ′<sub>k</sub> / γ<sub>φ</sub>) · c′<sub>d</sub> = c′<sub>k</sub> / γ<sub>c</sub> con γ<sub>φ</sub> = γ<sub>c</sub> = 1,25 (BS-P), 1,15 (BS-T), 1,10 (BS-A) · comprobación del grado de aprovechamiento μ ≤ 1"
+ },
+ "18-139": {
+  "fr": "ϑ<sub>a</sub> ≈ 45° + φ′/2 = 60,0° par rapport à l'horizontale (pour α = β = δ = 0)",
+  "es": "ϑ<sub>a</sub> ≈ 45° + φ′/2 = 60,0° respecto a la horizontal (para α = β = δ = 0)"
+ },
+ "18-140": {
+  "fr": "−10 % par mètre au-delà de 2 m",
+  "es": "−10 % por metro por encima de 2 m"
+ },
+ "18-141": {
+  "fr": "≤ 1 <b class=\"ok-t\">✓ vérifié</b>",
+  "es": "≤ 1 <b class=\"ok-t\">✓ cumple</b>"
+ },
+ "18-142": {
+  "fr": "§Paramètres de la granulométrie",
+  "es": "§Parámetros de la granulometría"
+ },
+ "18-143": {
+  "fr": "!Coefficient d'uniformité C<sub>U</sub> = d<sub>60</sub> / d<sub>10</sub> · coefficient de courbure C<sub>C</sub> = d<sub>30</sub>² / (d<sub>10</sub> · d<sub>60</sub>)",
+  "es": "!Coeficiente de uniformidad C<sub>U</sub> = d<sub>60</sub> / d<sub>10</sub> · coeficiente de curvatura C<sub>C</sub> = d<sub>30</sub>² / (d<sub>10</sub> · d<sub>60</sub>)"
+ },
+ "18-144": {
+  "fr": "!granulométrie serrée C<sub>U</sub> &lt; 6 · granulométrie étalée C<sub>U</sub> ≥ 6 et 1 ≤ C<sub>C</sub> ≤ 3 · discontinue : C<sub>U</sub> ≥ 6, C<sub>C</sub> hors de 1 … 3",
+  "es": "!granulometría uniforme C<sub>U</sub> &lt; 6 · granulometría bien graduada C<sub>U</sub> ≥ 6 y 1 ≤ C<sub>C</sub> ≤ 3 · discontinua: C<sub>U</sub> ≥ 6, C<sub>C</sub> fuera de 1 … 3"
+ },
+ "18-145": {
+  "fr": "<div class=\"calc-field\"><label>Limite de liquidité w<sub>L</sub> [%]</label><input type=\"number\" id=\"pd-wL\" value=\"42\" step=\"any\" oninput=\"updatePlast()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Límite líquido w<sub>L</sub> [%]</label><input type=\"number\" id=\"pd-wL\" value=\"42\" step=\"any\" oninput=\"updatePlast()\"></div>"
+ },
+ "18-146": {
+  "fr": "<div class=\"calc-field\"><label>Limite de plasticité w<sub>P</sub> [%]</label><input type=\"number\" id=\"pd-wP\" value=\"20\" step=\"any\" oninput=\"updatePlast()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Límite plástico w<sub>P</sub> [%]</label><input type=\"number\" id=\"pd-wP\" value=\"20\" step=\"any\" oninput=\"updatePlast()\"></div>"
+ },
+ "18-147": {
+  "fr": "!Plasticité d'après w<sub>L</sub> : {} · {} la ligne A",
+  "es": "!Plasticidad según w<sub>L</sub>: {} · {} la línea A"
+ },
+ "18-148": {
+  "fr": "§Grandeurs de base",
+  "es": "§Magnitudes básicas"
+ },
+ "18-149": {
+  "fr": "!Teneur en eau w = m<sub>w</sub> / m<sub>d</sub> · masse volumique ρ = m / V · masse volumique sèche ρ<sub>d</sub> = m<sub>d</sub> / V = ρ / (1 + w)",
+  "es": "!Contenido de agua w = m<sub>w</sub> / m<sub>d</sub> · densidad ρ = m / V · densidad seca ρ<sub>d</sub> = m<sub>d</sub> / V = ρ / (1 + w)"
+ },
+ "18-150": {
+  "fr": "!Porosité n = V<sub>p</sub> / V = 1 − ρ<sub>d</sub> / ρ<sub>s</sub> · indice des vides e = V<sub>p</sub> / V<sub>s</sub> = n / (1 − n)",
+  "es": "!Porosidad n = V<sub>p</sub> / V = 1 − ρ<sub>d</sub> / ρ<sub>s</sub> · índice de poros e = V<sub>p</sub> / V<sub>s</sub> = n / (1 − n)"
+ },
+ "18-151": {
+  "fr": "!Degré de saturation S<sub>r</sub> = w · ρ<sub>s</sub> / (e · ρ<sub>w</sub>) (0 sec … 1 saturé)",
+  "es": "!Grado de saturación S<sub>r</sub> = w · ρ<sub>s</sub> / (e · ρ<sub>w</sub>) (0 seco … 1 saturado)"
+ },
+ "18-152": {
+  "fr": "!γ = ρ · g · γ<sub>r</sub> = ((1 − n) · ρ<sub>s</sub> + n · ρ<sub>w</sub>) · g (saturé) · γ′ = γ<sub>r</sub> − γ<sub>w</sub> (sous la poussée d'Archimède)",
+  "es": "!γ = ρ · g · γ<sub>r</sub> = ((1 − n) · ρ<sub>s</sub> + n · ρ<sub>w</sub>) · g (saturado) · γ′ = γ<sub>r</sub> − γ<sub>w</sub> (sumergido)"
+ },
+ "18-153": {
+  "fr": "!Indice de densité I<sub>D</sub> = (e<sub>max</sub> − e) / (e<sub>max</sub> − e<sub>min</sub>) · indice de plasticité I<sub>P</sub> = w<sub>L</sub> − w<sub>P</sub> · indice de consistance I<sub>C</sub> = (w<sub>L</sub> − w) / I<sub>P</sub>",
+  "es": "!Densidad relativa I<sub>D</sub> = (e<sub>max</sub> − e) / (e<sub>max</sub> − e<sub>min</sub>) · índice de plasticidad I<sub>P</sub> = w<sub>L</sub> − w<sub>P</sub> · índice de consistencia I<sub>C</sub> = (w<sub>L</sub> − w) / I<sub>P</sub>"
+ },
+ "18-154": {
+  "fr": "<div class=\"calc-field\"><label>Masse humide m [g]</label><input type=\"number\" id=\"bp-m\" value=\"1985\" step=\"any\" oninput=\"updatePhasen()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Masa húmeda m [g]</label><input type=\"number\" id=\"bp-m\" value=\"1985\" step=\"any\" oninput=\"updatePhasen()\"></div>"
+ },
+ "18-155": {
+  "fr": "<div class=\"calc-field\"><label>Masse sèche m<sub>d</sub> [g]</label><input type=\"number\" id=\"bp-md\" value=\"1730\" step=\"any\" oninput=\"updatePhasen()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Masa seca m<sub>d</sub> [g]</label><input type=\"number\" id=\"bp-md\" value=\"1730\" step=\"any\" oninput=\"updatePhasen()\"></div>"
+ },
+ "18-156": {
+  "fr": "<div class=\"calc-field\"><label>Volume V [cm³]</label><input type=\"number\" id=\"bp-V\" value=\"1000\" step=\"any\" oninput=\"updatePhasen()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Volumen V [cm³]</label><input type=\"number\" id=\"bp-V\" value=\"1000\" step=\"any\" oninput=\"updatePhasen()\"></div>"
+ },
+ "18-157": {
+  "fr": "<div class=\"calc-field\"><label>Masse volumique des grains ρ<sub>s</sub> [g/cm³]</label><input type=\"number\" id=\"bp-rs\" value=\"2.65\" step=\"any\" oninput=\"updatePhasen()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Densidad de las partículas ρ<sub>s</sub> [g/cm³]</label><input type=\"number\" id=\"bp-rs\" value=\"2.65\" step=\"any\" oninput=\"updatePhasen()\"></div>"
+ },
+ "18-158": {
+  "fr": "§Teneur en eau et masses volumiques",
+  "es": "§Contenido de agua y densidades"
+ },
+ "18-159": {
+  "fr": "§Porosité et indice des vides",
+  "es": "§Porosidad e índice de poros"
+ },
+ "18-160": {
+  "fr": "§Indice de densité (pulvérulent)",
+  "es": "§Densidad relativa (granular)"
+ },
+ "18-161": {
+  "fr": "!drainé (contraintes effectives) : τ<sub>f</sub> = c′ + σ′ · tan φ′",
+  "es": "!drenado (tensiones efectivas): τ<sub>f</sub> = c′ + σ′ · tan φ′"
+ },
+ "18-162": {
+  "fr": "!non drainé (sol cohérent saturé, chargement rapide) : τ<sub>f</sub> = c<sub>u</sub>, φ<sub>u</sub> = 0",
+  "es": "!no drenado (suelo cohesivo saturado, carga rápida): τ<sub>f</sub> = c<sub>u</sub>, φ<sub>u</sub> = 0"
+ },
+ "18-163": {
+  "fr": "!dans l'espace des contraintes principales : σ′<sub>1</sub> = σ′<sub>3</sub> · tan²(45° + φ′/2) + 2c′ · tan(45° + φ′/2)",
+  "es": "!en el espacio de tensiones principales: σ′<sub>1</sub> = σ′<sub>3</sub> · tan²(45° + φ′/2) + 2c′ · tan(45° + φ′/2)"
+ },
+ "18-164": {
+  "fr": "!Résistance au cisaillement résiduelle φ′<sub>r</sub> après de grands déplacements (surfaces de glissement, argile) nettement inférieure à φ′",
+  "es": "!Resistencia al corte residual φ′<sub>r</sub> tras grandes desplazamientos (superficies de deslizamiento, arcilla) claramente inferior a φ′"
+ },
+ "18-165": {
+  "fr": "<div class=\"calc-field\"><label>Essai 1 : σ′<sub>3</sub> [kN/m²]</label><input type=\"number\" id=\"mo-s3a\" value=\"50\" step=\"any\" oninput=\"updateMohr()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Ensayo 1: σ′<sub>3</sub> [kN/m²]</label><input type=\"number\" id=\"mo-s3a\" value=\"50\" step=\"any\" oninput=\"updateMohr()\"></div>"
+ },
+ "18-166": {
+  "fr": "<div class=\"calc-field\"><label>Essai 1 : σ′<sub>1</sub> à la rupture [kN/m²]</label><input type=\"number\" id=\"mo-s1a\" value=\"190\" step=\"any\" oninput=\"updateMohr()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Ensayo 1: σ′<sub>1</sub> en rotura [kN/m²]</label><input type=\"number\" id=\"mo-s1a\" value=\"190\" step=\"any\" oninput=\"updateMohr()\"></div>"
+ },
+ "18-167": {
+  "fr": "<div class=\"calc-field\"><label>Essai 2 : σ′<sub>3</sub> [kN/m²]</label><input type=\"number\" id=\"mo-s3b\" value=\"150\" step=\"any\" oninput=\"updateMohr()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Ensayo 2: σ′<sub>3</sub> [kN/m²]</label><input type=\"number\" id=\"mo-s3b\" value=\"150\" step=\"any\" oninput=\"updateMohr()\"></div>"
+ },
+ "18-168": {
+  "fr": "<div class=\"calc-field\"><label>Essai 2 : σ′<sub>1</sub> à la rupture [kN/m²]</label><input type=\"number\" id=\"mo-s1b\" value=\"480\" step=\"any\" oninput=\"updateMohr()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Ensayo 2: σ′<sub>1</sub> en rotura [kN/m²]</label><input type=\"number\" id=\"mo-s1b\" value=\"480\" step=\"any\" oninput=\"updateMohr()\"></div>"
+ },
+ "18-169": {
+  "fr": "§Centres p et rayons q des cercles",
+  "es": "§Centros p y radios q de los círculos"
+ },
+ "18-170": {
+  "fr": "!Angle de rupture par rapport au plan principal majeur : θ = 45° + φ′/2 = {}°",
+  "es": "!Ángulo de rotura respecto al plano principal mayor: θ = 45° + φ′/2 = {}°"
+ },
+ "18-171": {
+  "fr": "!Darcy : v = k · i avec gradient hydraulique i = Δh / L · débit Q = k · i · A",
+  "es": "!Darcy: v = k · i con gradiente hidráulico i = Δh / L · caudal Q = k · i · A"
+ },
+ "18-172": {
+  "fr": "!Force d'écoulement par unité de volume : s = γ<sub>w</sub> · i (dans le sens de l'écoulement) · dirigée vers le haut, elle réduit la contrainte effective",
+  "es": "!Fuerza de filtración por unidad de volumen: s = γ<sub>w</sub> · i (en el sentido del flujo) · dirigida hacia arriba, reduce la tensión efectiva"
+ },
+ "18-173": {
+  "fr": "!soulèvement hydraulique (HYD) : S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub> avec γ<sub>H</sub> = 1,35 (terrain favorable) resp. 1,80 (terrain défavorable), γ<sub>G,stb</sub> = 0,90 (BS-P)",
+  "es": "!sifonamiento hidráulico (HYD): S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub> con γ<sub>H</sub> = 1,35 (terreno favorable) o 1,80 (terreno desfavorable), γ<sub>G,stb</sub> = 0,90 (BS-P)"
+ },
+ "18-174": {
+  "fr": "<div class=\"calc-field\"><label>Perméabilité k [m/s]</label><input type=\"number\" id=\"da-k\" value=\"0.0001\" step=\"any\" oninput=\"updateDarcy()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Permeabilidad k [m/s]</label><input type=\"number\" id=\"da-k\" value=\"0.0001\" step=\"any\" oninput=\"updateDarcy()\"></div>"
+ },
+ "18-175": {
+  "fr": "<div class=\"calc-field\"><label>Différence de charge Δh [m]</label><input type=\"number\" id=\"da-dh\" value=\"1.5\" step=\"any\" oninput=\"updateDarcy()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Diferencia de altura piezométrica Δh [m]</label><input type=\"number\" id=\"da-dh\" value=\"1.5\" step=\"any\" oninput=\"updateDarcy()\"></div>"
+ },
+ "18-176": {
+  "fr": "<div class=\"calc-field\"><label>Chemin d'infiltration L [m]</label><input type=\"number\" id=\"da-L\" value=\"4\" step=\"any\" oninput=\"updateDarcy()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Recorrido de filtración L [m]</label><input type=\"number\" id=\"da-L\" value=\"4\" step=\"any\" oninput=\"updateDarcy()\"></div>"
+ },
+ "18-177": {
+  "fr": "<div class=\"calc-field\"><label>Section A [m²]</label><input type=\"number\" id=\"da-A\" value=\"10\" step=\"any\" oninput=\"updateDarcy()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Sección A [m²]</label><input type=\"number\" id=\"da-A\" value=\"10\" step=\"any\" oninput=\"updateDarcy()\"></div>"
+ },
+ "18-178": {
+  "fr": "<div class=\"calc-field\"><label>Terrain</label><select id=\"da-gH\" onchange=\"updateDarcy()\"><option value=\"1.35\" selected>favorable (γ<sub>H</sub> = 1,35)</option><option value=\"1.8\">défavorable (γ<sub>H</sub> = 1,80)</option></select></div>",
+  "es": "<div class=\"calc-field\"><label>Terreno</label><select id=\"da-gH\" onchange=\"updateDarcy()\"><option value=\"1.35\" selected>favorable (γ<sub>H</sub> = 1,35)</option><option value=\"1.8\">desfavorable (γ<sub>H</sub> = 1,80)</option></select></div>"
+ },
+ "18-179": {
+  "fr": "§Loi de Darcy",
+  "es": "§Ley de Darcy"
+ },
+ "18-180": {
+  "fr": "§Force d'écoulement par unité de volume",
+  "es": "§Fuerza de filtración por unidad de volumen"
+ },
+ "18-181": {
+  "fr": "§Soulèvement hydraulique (HYD, DIN 1054) : S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub>",
+  "es": "§Sifonamiento hidráulico (HYD, DIN 1054): S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub>"
+ },
+ "18-182": {
+  "fr": "!par unité de volume du massif de sol traversé par l'écoulement : S′ = γ<sub>w</sub> · i, G′ = γ′",
+  "es": "!por unidad de volumen del terreno atravesado por el flujo: S′ = γ<sub>w</sub> · i, G′ = γ′"
+ },
+ "18-183": {
+  "fr": "<b class=\"ok-t\">✓ vérifié</b>",
+  "es": "<b class=\"ok-t\">✓ cumple</b>"
+ },
+ "18-184": {
+  "fr": "!gradient critique sans coefficients de sécurité : i<sub>crit</sub> = γ′/γ<sub>w</sub> = {}",
+  "es": "!gradiente crítico sin coeficientes de seguridad: i<sub>crit</sub> = γ′/γ<sub>w</sub> = {}"
+ },
+ "18-185": {
+  "fr": "!contrainte verticale totale σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (sous la nappe avec γ<sub>r</sub>)",
+  "es": "!tensión vertical total σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (bajo el nivel freático con γ<sub>r</sub>)"
+ },
+ "18-186": {
+  "fr": "!Pression interstitielle u = γ<sub>w</sub> · h<sub>w</sub> · contrainte effective (Terzaghi) σ′<sub>v</sub> = σ<sub>v</sub> − u = q + Σ γ · h + Σ γ′ · h",
+  "es": "!Presión intersticial u = γ<sub>w</sub> · h<sub>w</sub> · tensión efectiva (Terzaghi) σ′<sub>v</sub> = σ<sub>v</sub> − u = q + Σ γ · h + Σ γ′ · h"
+ },
+ "18-187": {
+  "fr": "!Contrainte horizontale au repos σ′<sub>h</sub> = K<sub>0</sub> · σ′<sub>v</sub> avec K<sub>0</sub> = 1 − sin φ′",
+  "es": "!Tensión horizontal en reposo σ′<sub>h</sub> = K<sub>0</sub> · σ′<sub>v</sub> con K<sub>0</sub> = 1 − sin φ′"
+ },
+ "18-188": {
+  "fr": "Couche {} : épaisseur [m]",
+  "es": "Capa {}: espesor [m]"
+ },
+ "18-189": {
+  "fr": "§Charge ponctuelle (Boussinesq)",
+  "es": "§Carga puntual (Boussinesq)"
+ },
+ "18-190": {
+  "fr": "!σ<sub>z</sub> = 3F / (2π) · z³ / R⁵ avec R = √(r² + z²)",
+  "es": "!σ<sub>z</sub> = 3F / (2π) · z³ / R⁵ con R = √(r² + z²)"
+ },
+ "18-191": {
+  "fr": "§Charge rectangulaire répartie, sous l'angle (Steinbrenner)",
+  "es": "§Carga rectangular repartida, bajo la esquina (Steinbrenner)"
+ },
+ "18-192": {
+  "fr": "!point quelconque : décomposer la surface en rectangles ayant un coin commun et superposer (centre : 4 · i pour a/2 × b/2)",
+  "es": "!punto cualquiera: descomponer el área en rectángulos con una esquina común y superponer (centro: 4 · i para a/2 × b/2)"
+ },
+ "18-193": {
+  "fr": "§Approximation",
+  "es": "§Aproximación"
+ },
+ "18-194": {
+  "fr": "<div class=\"calc-field\"><label>Nappe sous le terrain z<sub>w</sub> [m]</label><input type=\"number\" id=\"bs2-zw\" value=\"2.5\" step=\"any\" oninput=\"updateSpann()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Nivel freático bajo el terreno z<sub>w</sub> [m]</label><input type=\"number\" id=\"bs2-zw\" value=\"2.5\" step=\"any\" oninput=\"updateSpann()\"></div>"
+ },
+ "18-195": {
+  "fr": "<div class=\"calc-field\"><label>Surcharge q [kN/m²]</label><input type=\"number\" id=\"bs2-q\" value=\"10\" step=\"any\" oninput=\"updateSpann()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Sobrecarga q [kN/m²]</label><input type=\"number\" id=\"bs2-q\" value=\"10\" step=\"any\" oninput=\"updateSpann()\"></div>"
+ },
+ "18-196": {
+  "fr": "!σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (au-dessus de la nappe γ, en dessous γ<sub>r</sub>) · u = γ<sub>w</sub> · (z − z<sub>w</sub>) avec γ<sub>w</sub> = 10 kN/m³ · σ′<sub>v</sub> = σ<sub>v</sub> − u",
+  "es": "!σ<sub>v</sub> = q + Σ γ<sub>i</sub> · h<sub>i</sub> (sobre el nivel freático γ, bajo él γ<sub>r</sub>) · u = γ<sub>w</sub> · (z − z<sub>w</sub>) con γ<sub>w</sub> = 10 kN/m³ · σ′<sub>v</sub> = σ<sub>v</sub> − u"
+ },
+ "18-197": {
+  "fr": "§Contraintes aux limites de couches et au niveau de la nappe",
+  "es": "§Tensiones en los límites de capa y en el nivel freático"
+ },
+ "18-198": {
+  "fr": "Contraintes verticales jusqu'à {} m",
+  "es": "Tensiones verticales hasta {} m"
+ },
+ "18-199": {
+  "fr": "<div class=\"calc-field\"><label>Longueur a [m]</label><input type=\"number\" id=\"st2-a\" value=\"3\" step=\"any\" oninput=\"updateSetz()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Longitud a [m]</label><input type=\"number\" id=\"st2-a\" value=\"3\" step=\"any\" oninput=\"updateSetz()\"></div>"
+ },
+ "18-200": {
+  "fr": "<div class=\"calc-field\"><label>Largeur b [m]</label><input type=\"number\" id=\"st2-b\" value=\"2\" step=\"any\" oninput=\"updateSetz()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Ancho b [m]</label><input type=\"number\" id=\"st2-b\" value=\"2\" step=\"any\" oninput=\"updateSetz()\"></div>"
+ },
+ "18-201": {
+  "fr": "<div class=\"calc-field\"><label>Profondeur de fondation d [m]</label><input type=\"number\" id=\"st2-d\" value=\"1\" step=\"any\" oninput=\"updateSetz()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Profundidad de cimentación d [m]</label><input type=\"number\" id=\"st2-d\" value=\"1\" step=\"any\" oninput=\"updateSetz()\"></div>"
+ }
+}

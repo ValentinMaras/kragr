@@ -1,0 +1,1947 @@
+[
+ {
+  "id": "02-0",
+  "de": "geodätische Förderhöhe H<sub>geo</sub> [m]",
+  "en": "Static head H<sub>geo</sub> [m]"
+ },
+ {
+  "id": "02-1",
+  "de": "Verluste der Anlage h<sub>v</sub> [m] (Saug- und Druckseite)",
+  "en": "Losses of the plant h<sub>v</sub> [m] (suction and delivery)"
+ },
+ {
+  "id": "02-2",
+  "de": "Wirkungsgrad η [%]",
+  "en": "Efficiency η [%]"
+ },
+ {
+  "id": "02-3",
+  "de": "Luftdruck p<sub>a</sub> [kPa] (am Saugspiegel)",
+  "en": "Air pressure p<sub>a</sub> [kPa] (at the suction level)"
+ },
+ {
+  "id": "02-4",
+  "de": "Saughöhe h<sub>s,geo</sub> [m] (Pumpe über Wasserspiegel, Zulauf negativ)",
+  "en": "Suction lift h<sub>s,geo</sub> [m] (pump above water level, flooded suction negative)"
+ },
+ {
+  "id": "02-5",
+  "de": "Verluste der Saugleitung h<sub>v,s</sub> [m]",
+  "en": "Suction pipe losses h<sub>v,s</sub> [m]"
+ },
+ {
+  "id": "02-6",
+  "de": "Wassertemperatur [°C]",
+  "en": "Water temperature [°C]"
+ },
+ {
+  "id": "02-7",
+  "de": "NPSH<sub>R</sub> [m] (Herstellerangabe)",
+  "en": "NPSH<sub>R</sub> [m] (manufacturer)"
+ },
+ {
+  "id": "02-8",
+  "de": "Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in statiq·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.",
+  "en": "Density and vapour pressure of water depend on temperature (table as in statiq·ref). Air pressure at sea level 101.3 kPa, about 1.2 kPa less per 100 m altitude."
+ },
+ {
+  "id": "02-9",
+  "de": "Pumpenanlage und Kavitation",
+  "en": "Pumping plant and cavitation"
+ },
+ {
+  "id": "02-10",
+  "de": "Sohlgefälle I [‰]",
+  "en": "Bed slope I [‰]"
+ },
+ {
+  "id": "02-11",
+  "de": "zulässiger Füllungsgrad h/D",
+  "en": "Permissible filling ratio h/D"
+ },
+ {
+  "id": "02-12",
+  "de": "Mindestgeschwindigkeit v<sub>min</sub> [m/s] (0 = ohne)",
+  "en": "Minimum velocity v<sub>min</sub> [m/s] (0 = none)"
+ },
+ {
+  "id": "02-13",
+  "de": "k<sub>St</sub>: Kunststoff etwa 85 … 95, Beton 70 … 85, ältere Kanäle 60 … 70 m<sup>1/3</sup>/s. Füllungsgrad z. B. Schmutzwasser h/D ≤ 0,5 … 0,7 (Lüftung), Regenwasser bis Vollfüllung.",
+  "en": "k<sub>St</sub>: plastic about 85 … 95, concrete 70 … 85, older sewers 60 … 70 m<sup>1/3</sup>/s. Filling ratio e.g. foul sewer h/D ≤ 0.5 … 0.7 (ventilation), storm sewer up to full flow."
+ },
+ {
+  "id": "02-14",
+  "de": "Teilgefülltes Kreisrohr (Freispiegelleitung)",
+  "en": "Partly filled circular pipe (gravity sewer)"
+ },
+ {
+  "id": "02-15",
+  "de": "Höhe h [m] (Fußboden oberstes Geschoss mit Aufenthaltsraum)",
+  "en": "Height h [m] (floor of the top storey with habitable rooms)"
+ },
+ {
+  "id": "02-16",
+  "de": "Anzahl Nutzungseinheiten",
+  "en": "Number of units"
+ },
+ {
+  "id": "02-17",
+  "de": "größte Nutzungseinheit [m²]",
+  "en": "Largest unit [m²]"
+ },
+ {
+  "id": "02-18",
+  "de": "freistehend",
+  "en": "detached"
+ },
+ {
+  "id": "02-19",
+  "de": "nicht freistehend (z. B. Reihenhaus)",
+  "en": "not detached (e.g. terraced)"
+ },
+ {
+  "id": "02-20",
+  "de": "Lage des Gebäudes",
+  "en": "Position of the building"
+ },
+ {
+  "id": "02-21",
+  "de": "tragende Wände/Stützen oberirdisch",
+  "en": "load-bearing walls/columns above ground"
+ },
+ {
+  "id": "02-22",
+  "de": "tragende Wände/Stützen im Keller",
+  "en": "load-bearing walls/columns in the basement"
+ },
+ {
+  "id": "02-23",
+  "de": "Bauteil",
+  "en": "Member"
+ },
+ {
+  "id": "02-24",
+  "de": "ohne",
+  "en": "none"
+ },
+ {
+  "id": "02-25",
+  "de": "R 30 / F 30 (feuerhemmend)",
+  "en": "R 30 / F 30 (fire-retardant)"
+ },
+ {
+  "id": "02-26",
+  "de": "R 60 / F 60 (hochfeuerhemmend)",
+  "en": "R 60 / F 60 (highly fire-retardant)"
+ },
+ {
+  "id": "02-27",
+  "de": "R 90 / F 90 (feuerbeständig)",
+  "en": "R 90 / F 90 (fire-resistant)"
+ },
+ {
+  "id": "02-28",
+  "de": "Feuerwiderstand des Bauteils",
+  "en": "Fire resistance of the member"
+ },
+ {
+  "id": "02-29",
+  "de": "Nach Musterbauordnung (MBO); die Landesbauordnungen weichen teils ab. Flächen der Nutzungseinheiten als Brutto-Grundfläche ohne Keller.",
+  "en": "According to the German model building code (MBO); the state building codes differ in places. Unit areas as gross floor area excluding basements."
+ },
+ {
+  "id": "02-30",
+  "de": "Gebäudeklasse und Feuerwiderstand",
+  "en": "Building class and fire resistance"
+ },
+ {
+  "id": "02-31",
+  "de": "Stoß",
+  "en": "Lap"
+ },
+ {
+  "id": "02-32",
+  "de": "Abbrand",
+  "en": "Charring"
+ },
+ {
+  "id": "02-33",
+  "de": "Schwingung",
+  "en": "Vibration"
+ },
+ {
+  "id": "02-34",
+  "de": "Hydr. Grundbruch",
+  "en": "Hydraulic heave"
+ },
+ {
+  "id": "02-35",
+  "de": "Zeitsetzung",
+  "en": "Consolidation"
+ },
+ {
+  "id": "02-36",
+  "de": "Böschung",
+  "en": "Slope"
+ },
+ {
+  "id": "02-37",
+  "de": "Druckstoß",
+  "en": "Water hammer"
+ },
+ {
+  "id": "02-38",
+  "de": "Pumpe",
+  "en": "Pump"
+ },
+ {
+  "id": "02-39",
+  "de": "Teilfüllung",
+  "en": "Partly full pipe"
+ },
+ {
+  "id": "02-40",
+  "de": "Gebäudeklasse",
+  "en": "Building class"
+ },
+ {
+  "id": "02-41",
+  "de": "Balken, statisch bestimmt (Tab. 5.5)",
+  "en": "Beam, simply supported (Tab. 5.5)"
+ },
+ {
+  "id": "02-42",
+  "de": "Platte, einachsig gespannt (Tab. 5.8)",
+  "en": "Slab, spanning one way (Tab. 5.8)"
+ },
+ {
+  "id": "02-43",
+  "de": "Bauteil",
+  "en": "Member"
+ },
+ {
+  "id": "02-44",
+  "de": "Feuerwiderstand",
+  "en": "Fire resistance"
+ },
+ {
+  "id": "02-45",
+  "de": "Ø Längsbewehrung [mm]",
+  "en": "Ø longitudinal bars [mm]"
+ },
+ {
+  "id": "02-46",
+  "de": "Ø Bügel [mm] (Balken)",
+  "en": "Ø stirrups [mm] (beam)"
+ },
+ {
+  "id": "02-47",
+  "de": "einlagig",
+  "en": "one layer"
+ },
+ {
+  "id": "02-48",
+  "de": "mehrlagig",
+  "en": "several layers"
+ },
+ {
+  "id": "02-49",
+  "de": "Bewehrungslagen (Balken)",
+  "en": "Reinforcement layers (beam)"
+ },
+ {
+  "id": "02-50",
+  "de": "Verlegemaß c<sub>v</sub> [mm] (0 = aus Expositionsklasse)",
+  "en": "Cover to stirrup c<sub>v</sub> [mm] (0 = from exposure class)"
+ },
+ {
+  "id": "02-51",
+  "de": "Breite b und Höhe h aus der Karte „Bauteil“. Der Achsabstand a ergibt sich aus Verlegemaß, Bügel und halbem Stabdurchmesser; bei einlagiger Balkenbewehrung gilt für Eckstäbe a + 10 mm, solange b kleiner als die Breite der letzten Tabellenspalte ist.",
+  "en": "Width b and depth h from the “Member” card. The axis distance a follows from cover, stirrup and half the bar diameter; with one layer in beams, corner bars need a + 10 mm while b is smaller than the width in the last table column."
+ },
+ {
+  "id": "02-52",
+  "de": "Brandschutz: Bauteil und Bewehrung",
+  "en": "Fire design: member and reinforcement"
+ },
+ {
+  "id": "02-53",
+  "de": "Stützweite l [m]",
+  "en": "Span l [m]"
+ },
+ {
+  "id": "02-54",
+  "de": "q<sub>Ed</sub> [kN/m] (Gleichstreckenlast)",
+  "en": "q<sub>Ed</sub> [kN/m] (uniform load)"
+ },
+ {
+  "id": "02-55",
+  "de": "|M<sub>A</sub>| [kNm] (Stützmoment links, 0 = Endauflager)",
+  "en": "|M<sub>A</sub>| [kNm] (left support moment, 0 = end support)"
+ },
+ {
+  "id": "02-56",
+  "de": "|M<sub>B</sub>| [kNm] (Stützmoment rechts)",
+  "en": "|M<sub>B</sub>| [kNm] (right support moment)"
+ },
+ {
+  "id": "02-57",
+  "de": "cot θ (wie Querkraftbemessung)",
+  "en": "cot θ (as in shear design)"
+ },
+ {
+  "id": "02-58",
+  "de": "Ø Bügel [mm]",
+  "en": "Ø stirrups [mm]"
+ },
+ {
+  "id": "02-59",
+  "de": "Ø Feldbewehrung unten [mm]",
+  "en": "Ø span bars bottom [mm]"
+ },
+ {
+  "id": "02-60",
+  "de": "Stäbe unten durchlaufend",
+  "en": "Bottom bars running through"
+ },
+ {
+  "id": "02-61",
+  "de": "Stäbe unten gestaffelt",
+  "en": "Bottom bars curtailed"
+ },
+ {
+  "id": "02-62",
+  "de": "Ø Stützbewehrung oben [mm]",
+  "en": "Ø support bars top [mm]"
+ },
+ {
+  "id": "02-63",
+  "de": "Stäbe oben über den Stützen",
+  "en": "Top bars over the supports"
+ },
+ {
+  "id": "02-64",
+  "de": "Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit statiq·calc (Durchlaufträger). b, h und Beton aus den Karten oben.",
+  "en": "Support moments from the structural analysis, e.g. with statiq·calc (continuous beam). b, h and concrete from the cards above."
+ },
+ {
+  "id": "02-65",
+  "de": "Durchlaufträger: Feld und Bewehrung",
+  "en": "Continuous beam: span and reinforcement"
+ },
+ {
+  "id": "02-66",
+  "de": "Stahlgüte",
+  "en": "Steel grade"
+ },
+ {
+  "id": "02-67",
+  "de": "Breite b [mm]",
+  "en": "Width b [mm]"
+ },
+ {
+  "id": "02-68",
+  "de": "Dicke t [mm]",
+  "en": "Thickness t [mm]"
+ },
+ {
+  "id": "02-69",
+  "de": "Lochdurchmesser d<sub>0</sub> [mm]",
+  "en": "Hole diameter d<sub>0</sub> [mm]"
+ },
+ {
+  "id": "02-70",
+  "de": "Reihen in Kraftrichtung n<sub>1</sub>",
+  "en": "Rows in load direction n<sub>1</sub>"
+ },
+ {
+  "id": "02-71",
+  "de": "Schrauben je Reihe quer n<sub>2</sub>",
+  "en": "Bolts per row across n<sub>2</sub>"
+ },
+ {
+  "id": "02-72",
+  "de": "Randabstand e<sub>1</sub> [mm] (in Kraftrichtung)",
+  "en": "End distance e<sub>1</sub> [mm] (in load direction)"
+ },
+ {
+  "id": "02-73",
+  "de": "Lochabstand p<sub>1</sub> [mm] (in Kraftrichtung)",
+  "en": "Spacing p<sub>1</sub> [mm] (in load direction)"
+ },
+ {
+  "id": "02-74",
+  "de": "Lochabstand p<sub>2</sub> [mm] (quer)",
+  "en": "Spacing p<sub>2</sub> [mm] (across)"
+ },
+ {
+  "id": "02-75",
+  "de": "N<sub>Ed</sub> [kN] (Zug)",
+  "en": "N<sub>Ed</sub> [kN] (tension)"
+ },
+ {
+  "id": "02-76",
+  "de": "Der Randabstand quer ergibt sich aus der Breite: e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2. Die Schrauben selbst (Abscheren, Lochleibung) im Modus Anschluss nachweisen.",
+  "en": "The edge distance across follows from the width: e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2. Check the bolts themselves (shear, bearing) in the Connection mode."
+ },
+ {
+  "id": "02-77",
+  "de": "Zugstab mit Schraubenanschluss",
+  "en": "Tension member with bolted connection"
+ },
+ {
+  "id": "02-78",
+  "de": "durchgeschweißt",
+  "en": "full penetration"
+ },
+ {
+  "id": "02-79",
+  "de": "nicht durchgeschweißt",
+  "en": "partial penetration"
+ },
+ {
+  "id": "02-80",
+  "de": "Nahtart",
+  "en": "Weld type"
+ },
+ {
+  "id": "02-81",
+  "de": "Nahtdicke a [mm] (nur nicht durchgeschweißt)",
+  "en": "Throat a [mm] (partial penetration only)"
+ },
+ {
+  "id": "02-82",
+  "de": "Blechdicke t [mm]",
+  "en": "Plate thickness t [mm]"
+ },
+ {
+  "id": "02-83",
+  "de": "Nahtlänge l [mm] (= Blechbreite)",
+  "en": "Weld length l [mm] (= plate width)"
+ },
+ {
+  "id": "02-84",
+  "de": "N [kN] (rechtwinklig zur Naht)",
+  "en": "N [kN] (perpendicular to the weld)"
+ },
+ {
+  "id": "02-85",
+  "de": "V [kN] (längs der Naht)",
+  "en": "V [kN] (along the weld)"
+ },
+ {
+  "id": "02-86",
+  "de": "M [kNm] (Biegung in Blechebene)",
+  "en": "M [kNm] (in-plane bending)"
+ },
+ {
+  "id": "02-87",
+  "de": "Durchgeschweißte Stumpfnähte tragen so viel wie das schwächere der verbundenen Bleche — nachgewiesen wird deshalb der Blechquerschnitt in der Naht.",
+  "en": "Full penetration butt welds carry as much as the weaker of the joined plates — so the plate cross-section in the weld is checked."
+ },
+ {
+  "id": "02-88",
+  "de": "Stumpfnaht (Blechstoß)",
+  "en": "Butt weld (plate splice)"
+ },
+ {
+  "id": "02-89",
+  "de": "Trägerbreite b [mm]",
+  "en": "Beam width b [mm]"
+ },
+ {
+  "id": "02-90",
+  "de": "Trägerhöhe h [mm]",
+  "en": "Beam depth h [mm]"
+ },
+ {
+  "id": "02-91",
+  "de": "Abstand a [mm] (beanspruchter Rand bis fernstes Verbindungsmittel)",
+  "en": "Distance a [mm] (loaded edge to the most distant fastener)"
+ },
+ {
+  "id": "02-92",
+  "de": "Anschlussbreite a<sub>r</sub> [mm] (äußere Verbindungsmittel in Faserrichtung)",
+  "en": "Connection width a<sub>r</sub> [mm] (outer fasteners along the grain)"
+ },
+ {
+  "id": "02-93",
+  "de": "wirksame Anschlusstiefe t<sub>ef</sub> [mm]",
+  "en": "Effective connection depth t<sub>ef</sub> [mm]"
+ },
+ {
+  "id": "02-94",
+  "de": "F<sub>90,Ed</sub> [kN] (Kraft quer zur Faser)",
+  "en": "F<sub>90,Ed</sub> [kN] (force perpendicular to the grain)"
+ },
+ {
+  "id": "02-95",
+  "de": "Holz und Nutzung aus der Karte oben. t<sub>ef</sub>: Einbindetiefe der Verbindungsmittel, höchstens die Trägerbreite (bei beidseitigem Anschluss zusammen); Anhaltswert nach NA.",
+  "en": "Timber and service conditions from the card above. t<sub>ef</sub>: embedment depth of the fasteners, at most the beam width (both sides together for two-sided connections); guide value per NA."
+ },
+ {
+  "id": "02-96",
+  "de": "Queranschluss (Last quer zur Faser)",
+  "en": "Connection loaded perpendicular to the grain"
+ },
+ {
+  "id": "02-97",
+  "de": "rund",
+  "en": "circular"
+ },
+ {
+  "id": "02-98",
+  "de": "rechteckig",
+  "en": "rectangular"
+ },
+ {
+  "id": "02-99",
+  "de": "Form",
+  "en": "Shape"
+ },
+ {
+  "id": "02-100",
+  "de": "Höhe bzw. Durchmesser h<sub>d</sub> [mm]",
+  "en": "Height or diameter h<sub>d</sub> [mm]"
+ },
+ {
+  "id": "02-101",
+  "de": "Länge a [mm] (rechteckig)",
+  "en": "Length a [mm] (rectangular)"
+ },
+ {
+  "id": "02-102",
+  "de": "Restquerschnitt oben h<sub>ro</sub> [mm]",
+  "en": "Remaining depth above h<sub>ro</sub> [mm]"
+ },
+ {
+  "id": "02-103",
+  "de": "Abstand zum Auflager l<sub>v</sub> [mm]",
+  "en": "Distance to the support l<sub>v</sub> [mm]"
+ },
+ {
+  "id": "02-104",
+  "de": "V<sub>d</sub> [kN] (am Durchbruchrand)",
+  "en": "V<sub>d</sub> [kN] (at the hole edge)"
+ },
+ {
+  "id": "02-105",
+  "de": "M<sub>d</sub> [kNm] (am Durchbruchrand)",
+  "en": "M<sub>d</sub> [kNm] (at the hole edge)"
+ },
+ {
+  "id": "02-106",
+  "de": "Unverstärkte Durchbrüche in Brettschichtholz; Schnittgrößen am Rand des Durchbruchs, der näher am Auflager liegt.",
+  "en": "Unreinforced holes in glulam; internal forces at the edge of the hole nearer to the support."
+ },
+ {
+  "id": "02-107",
+  "de": "Durchbruch im Träger",
+  "en": "Hole in the beam"
+ },
+ {
+  "id": "02-108",
+  "de": "Höhe h [mm]",
+  "en": "Depth h [mm]"
+ },
+ {
+  "id": "02-109",
+  "de": "Stützweite l [m] (Einfeldträger)",
+  "en": "Span l [m] (single span)"
+ },
+ {
+  "id": "02-110",
+  "de": "Dachneigung α [°]",
+  "en": "Roof pitch α [°]"
+ },
+ {
+  "id": "02-111",
+  "de": "q<sub>v</sub> [kN/m] lotrecht (g, s — Bemessungswert)",
+  "en": "q<sub>v</sub> [kN/m] vertical (g, s — design value)"
+ },
+ {
+  "id": "02-112",
+  "de": "q<sub>n</sub> [kN/m] rechtwinklig zur Dachfläche (Wind)",
+  "en": "q<sub>n</sub> [kN/m] perpendicular to the roof (wind)"
+ },
+ {
+  "id": "02-113",
+  "de": "Die Pfette ist um die Dachneigung gekippt eingebaut. Holz und Nutzung (KLED der kürzesten Last) aus der Karte oben.",
+  "en": "The purlin is installed tilted by the roof pitch. Timber and service conditions (load duration of the shortest load) from the card above."
+ },
+ {
+  "id": "02-114",
+  "de": "Pfette (senkrecht zur Dachfläche)",
+  "en": "Purlin (perpendicular to the roof)"
+ },
+ {
+  "id": "02-115",
+  "de": "Wanddicke",
+  "en": "Wall thickness"
+ },
+ {
+  "id": "02-116",
+  "de": "vierseitig",
+  "en": "four sides"
+ },
+ {
+  "id": "02-117",
+  "de": "dreiseitig (ein senkrechter Rand frei)",
+  "en": "three sides (one vertical edge free)"
+ },
+ {
+  "id": "02-118",
+  "de": "Halterung",
+  "en": "Support"
+ },
+ {
+  "id": "02-119",
+  "de": "Höhe der Ausfachung h [m]",
+  "en": "Height of the panel h [m]"
+ },
+ {
+  "id": "02-120",
+  "de": "Länge der Ausfachung l [m]",
+  "en": "Length of the panel l [m]"
+ },
+ {
+  "id": "02-121",
+  "de": "bis 8 m",
+  "en": "up to 8 m"
+ },
+ {
+  "id": "02-122",
+  "de": "Höhe über Gelände",
+  "en": "Height above ground"
+ },
+ {
+  "id": "02-123",
+  "de": "Für Wände, die nur Wind auf ihre eigene Fläche abtragen und am Rand gehalten sind. Die Steinart der Karte „Mauerwerk“ spielt hier keine Rolle.",
+  "en": "For walls that only carry wind on their own area and are restrained at their edges. The masonry unit of the “Masonry” card does not matter here."
+ },
+ {
+  "id": "02-124",
+  "de": "Ausfachungswand (nichttragend)",
+  "en": "Infill wall (non-load-bearing)"
+ },
+ {
+  "id": "02-125",
+  "de": "Brandschutz",
+  "en": "Fire"
+ },
+ {
+  "id": "02-126",
+  "de": "Zugkraftdeckung",
+  "en": "Curtailment"
+ },
+ {
+  "id": "02-127",
+  "de": "Zugstab",
+  "en": "Tension member"
+ },
+ {
+  "id": "02-128",
+  "de": "Stumpfnaht",
+  "en": "Butt weld"
+ },
+ {
+  "id": "02-129",
+  "de": "Querzug",
+  "en": "Transverse tension"
+ },
+ {
+  "id": "02-130",
+  "de": "Durchbruch",
+  "en": "Hole"
+ },
+ {
+  "id": "02-131",
+  "de": "Doppelbiegung",
+  "en": "Biaxial bending"
+ },
+ {
+  "id": "02-132",
+  "de": "Ausfachung",
+  "en": "Infill wall"
+ },
+ {
+  "id": "02-133",
+  "de": "N<sub>Ed</sub> [kN] (Druck)",
+  "en": "N<sub>Ed</sub> [kN] (compression)"
+ },
+ {
+  "id": "02-134",
+  "de": "M<sub>Ed,y</sub> [kNm] (um y, h in der Momentenebene)",
+  "en": "M<sub>Ed,y</sub> [kNm] (about y, h in the bending plane)"
+ },
+ {
+  "id": "02-135",
+  "de": "M<sub>Ed,z</sub> [kNm] (um z, b in der Momentenebene)",
+  "en": "M<sub>Ed,z</sub> [kNm] (about z, b in the bending plane)"
+ },
+ {
+  "id": "02-136",
+  "de": "Stäbe je Seite (mit Eckstäben)",
+  "en": "Bars per side (incl. corner bars)"
+ },
+ {
+  "id": "02-137",
+  "de": "Ø Längsstab [mm]",
+  "en": "Ø longitudinal bar [mm]"
+ },
+ {
+  "id": "02-138",
+  "de": "Ø Bügel [mm]",
+  "en": "Ø stirrups [mm]"
+ },
+ {
+  "id": "02-139",
+  "de": "Momente einschließlich Imperfektion und Theorie II. Ordnung je Richtung, z. B. aus dem Modus Stütze. Gleich viele Stäbe auf allen vier Seiten.",
+  "en": "Moments including imperfection and second-order effects in each direction, e.g. from the Column mode. Same number of bars on all four sides."
+ },
+ {
+  "id": "02-140",
+  "de": "Stütze: Schnittgrößen und Bewehrung",
+  "en": "Column: internal forces and reinforcement"
+ },
+ {
+  "id": "02-141",
+  "de": "Spannweite l<sub>x</sub> [m]",
+  "en": "Span l<sub>x</sub> [m]"
+ },
+ {
+  "id": "02-142",
+  "de": "Spannweite l<sub>y</sub> [m]",
+  "en": "Span l<sub>y</sub> [m]"
+ },
+ {
+  "id": "02-143",
+  "de": "q<sub>Ed</sub> [kN/m²] (Gleichflächenlast, GZT)",
+  "en": "q<sub>Ed</sub> [kN/m²] (uniform load, ULS)"
+ },
+ {
+  "id": "02-144",
+  "de": "Ø x-Richtung [mm] (untere Lage)",
+  "en": "Ø x direction [mm] (bottom layer)"
+ },
+ {
+  "id": "02-145",
+  "de": "Abstand s<sub>x</sub> [cm]",
+  "en": "Spacing s<sub>x</sub> [cm]"
+ },
+ {
+  "id": "02-146",
+  "de": "Ø y-Richtung [mm] (zweite Lage)",
+  "en": "Ø y direction [mm] (second layer)"
+ },
+ {
+  "id": "02-147",
+  "de": "Abstand s<sub>y</sub> [cm]",
+  "en": "Spacing s<sub>y</sub> [cm]"
+ },
+ {
+  "id": "02-148",
+  "de": "Allseitig gelenkig gelagert, Ecken gegen Abheben gesichert. Die kürzere Spannweite wird automatisch als l<sub>x</sub> genommen und erhält die untere Bewehrungslage. Plattendicke h aus der Karte „Bauteil“.",
+  "en": "Simply supported on all edges, corners held down. The shorter span is taken as l<sub>x</sub> automatically and gets the bottom layer. Slab depth h from the “Member” card."
+ },
+ {
+  "id": "02-149",
+  "de": "Platte: Spannweiten, Last und Bewehrung",
+  "en": "Slab: spans, load and reinforcement"
+ },
+ {
+  "id": "02-150",
+  "de": "Profil",
+  "en": "Section"
+ },
+ {
+  "id": "02-151",
+  "de": "Stahlgüte",
+  "en": "Steel grade"
+ },
+ {
+  "id": "02-152",
+  "de": "Stirnplattendicke t<sub>p</sub> [mm]",
+  "en": "End plate thickness t<sub>p</sub> [mm]"
+ },
+ {
+  "id": "02-153",
+  "de": "Stirnplattenbreite b<sub>p</sub> [mm]",
+  "en": "End plate width b<sub>p</sub> [mm]"
+ },
+ {
+  "id": "02-154",
+  "de": "Schrauben",
+  "en": "Bolts"
+ },
+ {
+  "id": "02-155",
+  "de": "Festigkeitsklasse",
+  "en": "Property class"
+ },
+ {
+  "id": "02-156",
+  "de": "Schraubenabstand quer w [mm]",
+  "en": "Bolt gauge w [mm]"
+ },
+ {
+  "id": "02-157",
+  "de": "Abstand Schraube–Flansch p<sub>f</sub> [mm]",
+  "en": "Bolt to flange distance p<sub>f</sub> [mm]"
+ },
+ {
+  "id": "02-158",
+  "de": "Stegnaht a<sub>w</sub> [mm]",
+  "en": "Web weld a<sub>w</sub> [mm]"
+ },
+ {
+  "id": "02-159",
+  "de": "Zwei gleiche Stirnplatten, je eine Schraubenreihe (2 Schrauben) unter dem Zugflansch und über dem Druckflansch. Vereinfachte wirksame Längen auf der sicheren Seite.",
+  "en": "Two identical end plates, one bolt row (2 bolts) below the tension flange and one above the compression flange. Simplified effective lengths on the safe side."
+ },
+ {
+  "id": "02-160",
+  "de": "Stirnplattenstoß (bündig)",
+  "en": "End plate splice (flush)"
+ },
+ {
+  "id": "02-161",
+  "de": "Beton der Platte",
+  "en": "Concrete of the slab"
+ },
+ {
+  "id": "02-162",
+  "de": "mitwirkende Plattenbreite b<sub>1</sub> [mm]",
+  "en": "Effective slab width b<sub>1</sub> [mm]"
+ },
+ {
+  "id": "02-163",
+  "de": "Plattendicke h<sub>1</sub> [mm]",
+  "en": "Slab thickness h<sub>1</sub> [mm]"
+ },
+ {
+  "id": "02-164",
+  "de": "Balkenbreite b<sub>2</sub> [mm]",
+  "en": "Beam width b<sub>2</sub> [mm]"
+ },
+ {
+  "id": "02-165",
+  "de": "Balkenhöhe h<sub>2</sub> [mm]",
+  "en": "Beam depth h<sub>2</sub> [mm]"
+ },
+ {
+  "id": "02-166",
+  "de": "Stützweite l [m]",
+  "en": "Span l [m]"
+ },
+ {
+  "id": "02-167",
+  "de": "Verschiebungsmodul K<sub>u</sub> [N/mm] je Verbinder",
+  "en": "Slip modulus K<sub>u</sub> [N/mm] per connector"
+ },
+ {
+  "id": "02-168",
+  "de": "Verbinderabstand s [mm]",
+  "en": "Connector spacing s [mm]"
+ },
+ {
+  "id": "02-169",
+  "de": "F<sub>v,Rd</sub> [kN] je Verbinder",
+  "en": "F<sub>v,Rd</sub> [kN] per connector"
+ },
+ {
+  "id": "02-170",
+  "de": "Holz und Nutzung aus der Karte oben. K<sub>u</sub> = 2/3·K<sub>ser</sub> für den Grenzzustand der Tragfähigkeit; Kennwerte der Verbinder aus der Zulassung.",
+  "en": "Timber and service conditions from the card above. K<sub>u</sub> = 2/3·K<sub>ser</sub> for the ultimate limit state; connector values from the approval."
+ },
+ {
+  "id": "02-171",
+  "de": "Holz-Beton-Verbund (γ-Verfahren)",
+  "en": "Timber-concrete composite (γ method)"
+ },
+ {
+  "id": "02-172",
+  "de": "Aushubtiefe h [m]",
+  "en": "Excavation depth h [m]"
+ },
+ {
+  "id": "02-173",
+  "de": "Auflast q [kN/m²] (veränderlich)",
+  "en": "Surcharge q [kN/m²] (variable)"
+ },
+ {
+  "id": "02-174",
+  "de": "Bemessungssituation",
+  "en": "Design situation"
+ },
+ {
+  "id": "02-175",
+  "de": "vorhandene Einbindetiefe t [m]",
+  "en": "Provided embedment depth t [m]"
+ },
+ {
+  "id": "02-176",
+  "de": "Widerstandsmoment W [cm³/m]",
+  "en": "Section modulus W [cm³/m]"
+ },
+ {
+  "id": "02-177",
+  "de": "Stahlsorte",
+  "en": "Steel grade"
+ },
+ {
+  "id": "02-178",
+  "de": "φ′ und γ aus der Karte „Baugrund“, nichtbindiger Boden ohne Grundwasser.",
+  "en": "φ′ and γ from the “Ground” card, cohesionless soil without groundwater."
+ },
+ {
+  "id": "02-179",
+  "de": "Spundwand (nicht verankert)",
+  "en": "Sheet pile wall (cantilever)"
+ },
+ {
+  "id": "02-180",
+  "de": "Durchmesser D [m]",
+  "en": "Diameter D [m]"
+ },
+ {
+  "id": "02-181",
+  "de": "Schicht 1: Dicke [m]",
+  "en": "Layer 1: thickness [m]"
+ },
+ {
+  "id": "02-182",
+  "de": "Schicht 1: q<sub>s,k</sub> [kN/m²]",
+  "en": "Layer 1: q<sub>s,k</sub> [kN/m²]"
+ },
+ {
+  "id": "02-183",
+  "de": "Schicht 2: Dicke [m]",
+  "en": "Layer 2: thickness [m]"
+ },
+ {
+  "id": "02-184",
+  "de": "Schicht 2: q<sub>s,k</sub> [kN/m²]",
+  "en": "Layer 2: q<sub>s,k</sub> [kN/m²]"
+ },
+ {
+  "id": "02-185",
+  "de": "Schicht 3: Dicke [m] (0 = keine)",
+  "en": "Layer 3: thickness [m] (0 = none)"
+ },
+ {
+  "id": "02-186",
+  "de": "Schicht 3: q<sub>s,k</sub> [kN/m²]",
+  "en": "Layer 3: q<sub>s,k</sub> [kN/m²]"
+ },
+ {
+  "id": "02-187",
+  "de": "Spitzenwiderstand q<sub>b,k</sub> [kN/m²]",
+  "en": "Base resistance q<sub>b,k</sub> [kN/m²]"
+ },
+ {
+  "id": "02-188",
+  "de": "Nur die tragfähigen Schichten eingeben; die Deckschicht darüber trägt nicht mit. Erfahrungswerte für Bohrpfähle in Sand etwa q<sub>s,k</sub> = 50 … 120 kN/m², q<sub>b,k</sub> = 1500 … 3500 kN/m² (bei s = 0,1·D).",
+  "en": "Enter only the bearing layers; the top layer above does not contribute. Guide values for bored piles in sand about q<sub>s,k</sub> = 50 … 120 kN/m², q<sub>b,k</sub> = 1500 … 3500 kN/m² (at s = 0.1·D)."
+ },
+ {
+  "id": "02-189",
+  "de": "Bohrpfahl (axial)",
+  "en": "Bored pile (axial)"
+ },
+ {
+  "id": "02-190",
+  "de": "Durchlässigkeit k [m/s]",
+  "en": "Permeability k [m/s]"
+ },
+ {
+  "id": "02-191",
+  "de": "Grundwassermächtigkeit H [m] (über der Sohlschicht)",
+  "en": "Aquifer thickness H [m] (above the impermeable base)"
+ },
+ {
+  "id": "02-192",
+  "de": "Anzahl Brunnen",
+  "en": "Number of wells"
+ },
+ {
+  "id": "02-193",
+  "de": "Radius des Brunnenkreises A [m]",
+  "en": "Radius of the well circle A [m]"
+ },
+ {
+  "id": "02-194",
+  "de": "Brunnenradius r<sub>w</sub> [m]",
+  "en": "Well radius r<sub>w</sub> [m]"
+ },
+ {
+  "id": "02-195",
+  "de": "Entnahme je Brunnen Q [l/s]",
+  "en": "Discharge per well Q [l/s]"
+ },
+ {
+  "id": "02-196",
+  "de": "Ziel-Absenkung in der Mitte s [m]",
+  "en": "Target drawdown at the centre s [m]"
+ },
+ {
+  "id": "02-197",
+  "de": "Freier (ungespannter) Grundwasserleiter, vollkommene Brunnen bis zur Sohlschicht, stationärer Zustand.",
+  "en": "Unconfined aquifer, fully penetrating wells down to the base, steady state."
+ },
+ {
+  "id": "02-198",
+  "de": "Grundwasserabsenkung mit Brunnen",
+  "en": "Dewatering with wells"
+ },
+ {
+  "id": "02-199",
+  "de": "Nettogrundfläche A<sub>G</sub> [m²]",
+  "en": "Net floor area A<sub>G</sub> [m²]"
+ },
+ {
+  "id": "02-200",
+  "de": "Fensterfläche A<sub>w</sub> [m²]",
+  "en": "Window area A<sub>w</sub> [m²]"
+ },
+ {
+  "id": "02-201",
+  "de": "g-Wert der Verglasung",
+  "en": "g value of the glazing"
+ },
+ {
+  "id": "02-202",
+  "de": "ohne (1,0)",
+  "en": "none (1.0)"
+ },
+ {
+  "id": "02-203",
+  "de": "innen, hell (0,65)",
+  "en": "inside, light (0.65)"
+ },
+ {
+  "id": "02-204",
+  "de": "außen, Rollladen (0,30)",
+  "en": "outside, roller shutter (0.30)"
+ },
+ {
+  "id": "02-205",
+  "de": "außen, Jalousie drehbar (0,25)",
+  "en": "outside, adjustable louvres (0.25)"
+ },
+ {
+  "id": "02-206",
+  "de": "Markise, belüftet (0,40)",
+  "en": "awning, ventilated (0.40)"
+ },
+ {
+  "id": "02-207",
+  "de": "eigener Wert",
+  "en": "own value"
+ },
+ {
+  "id": "02-208",
+  "de": "Sonnenschutz F<sub>C</sub>",
+  "en": "Solar shading F<sub>C</sub>"
+ },
+ {
+  "id": "02-209",
+  "de": "Ost, Süd oder West",
+  "en": "east, south or west"
+ },
+ {
+  "id": "02-210",
+  "de": "Nord (NW bis NO)",
+  "en": "north (NW to NE)"
+ },
+ {
+  "id": "02-211",
+  "de": "Orientierung",
+  "en": "Orientation"
+ },
+ {
+  "id": "02-212",
+  "de": "A (sommerkühl)",
+  "en": "A (cool summers)"
+ },
+ {
+  "id": "02-213",
+  "de": "B (gemäßigt)",
+  "en": "B (moderate)"
+ },
+ {
+  "id": "02-214",
+  "de": "C (sommerheiß)",
+  "en": "C (hot summers)"
+ },
+ {
+  "id": "02-215",
+  "de": "Sommer-Klimaregion",
+  "en": "Summer climate region"
+ },
+ {
+  "id": "02-216",
+  "de": "leicht",
+  "en": "light"
+ },
+ {
+  "id": "02-217",
+  "de": "mittel",
+  "en": "medium"
+ },
+ {
+  "id": "02-218",
+  "de": "schwer",
+  "en": "heavy"
+ },
+ {
+  "id": "02-219",
+  "de": "Bauart",
+  "en": "Construction"
+ },
+ {
+  "id": "02-220",
+  "de": "ohne",
+  "en": "none"
+ },
+ {
+  "id": "02-221",
+  "de": "erhöht (n ≥ 2 h⁻¹)",
+  "en": "increased (n ≥ 2 h⁻¹)"
+ },
+ {
+  "id": "02-222",
+  "de": "hoch (n ≥ 5 h⁻¹)",
+  "en": "high (n ≥ 5 h⁻¹)"
+ },
+ {
+  "id": "02-223",
+  "de": "Nachtlüftung",
+  "en": "Night ventilation"
+ },
+ {
+  "id": "02-224",
+  "de": "nein",
+  "en": "no"
+ },
+ {
+  "id": "02-225",
+  "de": "ja",
+  "en": "yes"
+ },
+ {
+  "id": "02-226",
+  "de": "Sonnenschutzglas (g ≤ 0,4)",
+  "en": "Solar control glass (g ≤ 0.4)"
+ },
+ {
+  "id": "02-227",
+  "de": "passive Kühlung",
+  "en": "Passive cooling"
+ },
+ {
+  "id": "02-228",
+  "de": "Nachweis für den kritischen Raum. Die Tabellenwerte S<sub>1</sub> bis S<sub>6</sub> und F<sub>C</sub> sind Anhaltswerte — mit DIN 4108-2 abgleichen.",
+  "en": "Check for the critical room. The table values S<sub>1</sub> to S<sub>6</sub> and F<sub>C</sub> are guide values — compare with DIN 4108-2."
+ },
+ {
+  "id": "02-229",
+  "de": "Sommerlicher Wärmeschutz (Wohngebäude)",
+  "en": "Summer thermal protection (residential)"
+ },
+ {
+  "id": "02-230",
+  "de": "Stütze zweiachsig",
+  "en": "Biaxial column"
+ },
+ {
+  "id": "02-231",
+  "de": "Platte zweiachsig",
+  "en": "Two-way slab"
+ },
+ {
+  "id": "02-232",
+  "de": "Stirnplatte",
+  "en": "End plate"
+ },
+ {
+  "id": "02-233",
+  "de": "Verbund",
+  "en": "Composite"
+ },
+ {
+  "id": "02-234",
+  "de": "Spundwand",
+  "en": "Sheet piling"
+ },
+ {
+  "id": "02-235",
+  "de": "Pfahl",
+  "en": "Pile"
+ },
+ {
+  "id": "02-236",
+  "de": "Brunnen",
+  "en": "Wells"
+ },
+ {
+  "id": "02-237",
+  "de": "Sommerlicher Wärmeschutz",
+  "en": "Summer heat"
+ },
+ {
+  "id": "02-238",
+  "de": "Pos. 1 — Balken",
+  "en": "Item 1 — Beam"
+ },
+ {
+  "id": "02-239",
+  "de": "Pos. 4 — Deckenträger",
+  "en": "Item 4 — Floor beam"
+ },
+ {
+  "id": "02-240",
+  "de": "Stützenfuß S1",
+  "en": "Column base S1"
+ },
+ {
+  "id": "02-241",
+  "de": "Schweißnaht W1 — Träger an Stirnplatte",
+  "en": "Weld W1 — Beam to end plate"
+ },
+ {
+  "id": "02-242",
+  "de": "Anschluss A1 — Fahnenblech",
+  "en": "Connection A1 — Fin plate"
+ },
+ {
+  "id": "02-243",
+  "de": "Einzelfundament F1",
+  "en": "Pad footing F1"
+ },
+ {
+  "id": "02-244",
+  "de": "Setzung Fundament F1",
+  "en": "Settlement footing F1"
+ },
+ {
+  "id": "02-245",
+  "de": "Stützwand W1",
+  "en": "Retaining wall W1"
+ },
+ {
+  "id": "02-246",
+  "de": "Keller K1 — Auftrieb",
+  "en": "Basement K1 — Uplift"
+ },
+ {
+  "id": "02-247",
+  "de": "Fundament F2 — Gleiten",
+  "en": "Footing F2 — Sliding"
+ },
+ {
+  "id": "02-248",
+  "de": "Außenwand EG, Achse A",
+  "en": "External wall GF, axis A"
+ },
+ {
+  "id": "02-249",
+  "de": "Sturzauflager Pos. 12",
+  "en": "Lintel bearing item 12"
+ },
+ {
+  "id": "02-250",
+  "de": "Kelleraußenwand Nord",
+  "en": "Basement wall north"
+ },
+ {
+  "id": "02-251",
+  "de": "Aussteifungswand W3",
+  "en": "Bracing wall W3"
+ },
+ {
+  "id": "02-252",
+  "de": "Stauwand / Schütz",
+  "en": "Retaining wall / sluice gate"
+ },
+ {
+  "id": "02-253",
+  "de": "Arbeitsponton",
+  "en": "Work pontoon"
+ },
+ {
+  "id": "02-254",
+  "de": "Druckleitung DN 200",
+  "en": "Pressure pipe DN 200"
+ },
+ {
+  "id": "02-255",
+  "de": "Entwässerungsgraben",
+  "en": "Drainage ditch"
+ },
+ {
+  "id": "02-256",
+  "de": "Streichwehr",
+  "en": "Side weir"
+ },
+ {
+  "id": "02-257",
+  "de": "Außenwand KS mit WDVS",
+  "en": "External wall CS with ETICS"
+ },
+ {
+  "id": "02-258",
+  "de": "Anschluss V1 — Zugstoß",
+  "en": "Connection V1 — Tension splice"
+ },
+ {
+  "id": "02-259",
+  "de": "Pos. 7 — Deckenbalken, Auflager A",
+  "en": "Item 7 — Floor joist, support A"
+ },
+ {
+  "id": "02-260",
+  "de": "Hallenbinder B1",
+  "en": "Hall girder B1"
+ },
+ {
+  "id": "02-261",
+  "de": "Sparrenfuß auf Deckenbalken",
+  "en": "Rafter foot on floor joist"
+ },
+ {
+  "id": "02-262",
+  "de": "Pos. 5 — Deckenbalken",
+  "en": "Item 5 — Floor joist"
+ },
+ {
+  "id": "02-263",
+  "de": "Dicke d [cm]",
+  "en": "Thickness d [cm]"
+ },
+ {
+  "id": "02-264",
+  "de": "Stegbreite b<sub>w</sub> [cm]",
+  "en": "Web width b<sub>w</sub> [cm]"
+ },
+ {
+  "id": "02-265",
+  "de": "Breite b [cm]",
+  "en": "Width b [cm]"
+ },
+ {
+  "id": "02-266",
+  "de": "Durchmesser D [cm]",
+  "en": "Diameter D [cm]"
+ },
+ {
+  "id": "02-267",
+  "de": "Stahlbeton — Balken, Platten, Stützen, Durchstanzen",
+  "en": "Reinforced concrete — beams, slabs, columns, punching"
+ },
+ {
+  "id": "02-268",
+  "de": "Bemessung nach DIN EN 1992-1-1 mit deutschem NA: Biegung (auch mit Druckbewehrung), Querkraft, Gurtanschluss, Verankerung, Zugkraftdeckung, Rissbreite, Biegeschlankheit, Stützen nach dem Modellstützenverfahren und Durchstanzen.",
+  "en": "Design to DIN EN 1992-1-1 with the German NA: bending (also with compression reinforcement), shear, flange connection, anchorage, curtailment, crack width, slenderness limits, columns with the model-column method and punching shear."
+ },
+ {
+  "id": "02-269",
+  "de": "Querschnitt",
+  "en": "Cross-section"
+ },
+ {
+  "id": "02-270",
+  "de": "Stahl — Schweißverbindungen",
+  "en": "Steel — welded connections"
+ },
+ {
+  "id": "02-271",
+  "de": "Bemessung nach DIN EN 1993-1-8 mit deutschem NA, 4.5: Kehlnähte nach dem richtungsbezogenen Verfahren (σ⊥, τ⊥, τ∥) mit Vergleich zum vereinfachten Verfahren, lange Nähte und konstruktive Regeln.",
+  "en": "Design to DIN EN 1993-1-8 with the German NA, 4.5: fillet welds with the directional method (σ⊥, τ⊥, τ∥) compared with the simplified method, long welds and detailing rules."
+ },
+ {
+  "id": "02-272",
+  "de": "Nahtbild",
+  "en": "Weld layout"
+ },
+ {
+  "id": "02-273",
+  "de": "Stahl — gelenkiger Stützenfuß",
+  "en": "Steel — pinned column base"
+ },
+ {
+  "id": "02-274",
+  "de": "Bemessung nach DIN EN 1993-1-8 mit deutschem NA, 6.2.5: Fugenfestigkeit unter Teilflächenpressung, T-Stummel mit wirksamer Breite c, Querkraft über Reibung und Kehlnähte.",
+  "en": "Design to DIN EN 1993-1-8 with the German NA, 6.2.5: joint strength under concentrated bearing, T-stub with effective width c, shear via friction and fillet welds."
+ },
+ {
+  "id": "02-275",
+  "de": "Stützenfuß",
+  "en": "Column base"
+ },
+ {
+  "id": "02-276",
+  "de": "Stahl — Schrauben und Kehlnähte",
+  "en": "Steel — bolts and fillet welds"
+ },
+ {
+  "id": "02-277",
+  "de": "Bemessung nach DIN EN 1993-1-8 mit deutschem NA: Rand- und Lochabstände, Abscheren, Lochleibung, Zug in den Schrauben und Kehlnähte.",
+  "en": "Design to DIN EN 1993-1-8 with the German NA: edge distances and spacings, shear, bearing, tension in the bolts and fillet welds."
+ },
+ {
+  "id": "02-278",
+  "de": "Schraubenbild",
+  "en": "Bolt layout"
+ },
+ {
+  "id": "02-279",
+  "de": "Stahl — Walzprofile IPE, HEA, HEB",
+  "en": "Steel — rolled sections IPE, HEA, HEB"
+ },
+ {
+  "id": "02-280",
+  "de": "Bemessung nach DIN EN 1993-1-1 und 1-5 mit deutschem NA: Klassifizierung (auch Klasse 4), Querschnitt, zweiachsige Biegung, Torsion, Lasteinleitung, Knicken, Biegedrillknicken und Durchbiegung.",
+  "en": "Design to DIN EN 1993-1-1 and 1-5 with the German NA: classification (also class 4), cross-section, biaxial bending, torsion, load introduction, flexural buckling, lateral-torsional buckling and deflection."
+ },
+ {
+  "id": "02-281",
+  "de": "Profil",
+  "en": "Section"
+ },
+ {
+  "id": "02-282",
+  "de": "Wasserbau — Wasserdruck auf ebene Flächen",
+  "en": "Hydraulics — water pressure on plane surfaces"
+ },
+ {
+  "id": "02-283",
+  "de": "Hydrostatik: Druckverteilung, Druckkraft, Druckmittelpunkt (auch mit Steiner), Gegendruck aus Unterwasser und Moment am Fuß.",
+  "en": "Hydrostatics: pressure distribution, resultant force, centre of pressure (also with the parallel-axis theorem), counter-pressure from tailwater and moment at the base."
+ },
+ {
+  "id": "02-284",
+  "de": "Druckfigur",
+  "en": "Pressure diagram"
+ },
+ {
+  "id": "02-285",
+  "de": "Wasserbau — Schwimmkörper",
+  "en": "Hydraulics — floating bodies"
+ },
+ {
+  "id": "02-286",
+  "de": "Hydrostatik: Auftrieb nach Archimedes, Tiefgang, Freibord, Metazentrum und Schwimmstabilität — Quader, Trapezprisma, stehender und liegender Zylinder, Kugel.",
+  "en": "Hydrostatics: buoyancy after Archimedes, draught, freeboard, metacentre and floating stability — box, trapezoidal prism, vertical and horizontal cylinder, sphere."
+ },
+ {
+  "id": "02-287",
+  "de": "Wasserbau — Rohrleitung",
+  "en": "Hydraulics — pipeline"
+ },
+ {
+  "id": "02-288",
+  "de": "Hydrodynamik: Kontinuität, Reynolds-Zahl, Reibungsbeiwert nach Colebrook-White, Verluste nach Darcy-Weisbach, Energie- und Drucklinie.",
+  "en": "Hydrodynamics: continuity, Reynolds number, friction factor after Colebrook-White, losses after Darcy-Weisbach, energy and hydraulic grade line."
+ },
+ {
+  "id": "02-289",
+  "de": "Energielinie",
+  "en": "Energy line"
+ },
+ {
+  "id": "02-290",
+  "de": "Wasserbau — Offenes Gerinne",
+  "en": "Hydraulics — open channel"
+ },
+ {
+  "id": "02-291",
+  "de": "Hydrodynamik: Normalabfluss nach Gauckler-Manning-Strickler, Froude-Zahl, Grenztiefe und spezifische Energie im Rechteck- oder Trapezgerinne.",
+  "en": "Hydrodynamics: uniform flow after Gauckler-Manning-Strickler, Froude number, critical depth and specific energy in rectangular or trapezoidal channels."
+ },
+ {
+  "id": "02-292",
+  "de": "Gerinne",
+  "en": "Channel"
+ },
+ {
+  "id": "02-293",
+  "de": "Wasserbau — Wehrüberfall",
+  "en": "Hydraulics — weir overflow"
+ },
+ {
+  "id": "02-294",
+  "de": "Hydrodynamik: vollkommener Überfall nach Poleni, Überfallhöhe und Oberwasserstand.",
+  "en": "Hydrodynamics: free overflow after Poleni, overflow head and headwater level."
+ },
+ {
+  "id": "02-295",
+  "de": "Wehr",
+  "en": "Weir"
+ },
+ {
+  "id": "02-296",
+  "de": "Bauphysik — Wärmeschutz und U-Wert",
+  "en": "Building physics — thermal insulation and U-value"
+ },
+ {
+  "id": "02-297",
+  "de": "Wärmedurchgangskoeffizient nach DIN EN ISO 6946 mit Temperaturverlauf, Mindestwärmeschutz nach DIN 4108-2, Vergleich mit dem GEG-Referenzgebäude und Temperaturfaktor gegen Schimmel.",
+  "en": "Thermal transmittance to DIN EN ISO 6946 with temperature profile, minimum thermal insulation to DIN 4108-2, comparison with the GEG reference building and temperature factor against mould."
+ },
+ {
+  "id": "02-298",
+  "de": "Schnitt",
+  "en": "Section"
+ },
+ {
+  "id": "02-299",
+  "de": "Bauphysik — Tauwasser (Glaser-Verfahren)",
+  "en": "Building physics — condensation (Glaser method)"
+ },
+ {
+  "id": "02-300",
+  "de": "Wasserdampfdiffusion nach DIN 4108-3: Sättigungs- und Partialdampfdruck im Bauteil, Tauwassermasse in der Tauperiode und Austrocknung in der Verdunstungsperiode.",
+  "en": "Water vapour diffusion to DIN 4108-3: saturation and partial vapour pressure in the element, condensate mass in the condensation period and drying out in the evaporation period."
+ },
+ {
+  "id": "02-301",
+  "de": "Glaser-Diagramm",
+  "en": "Glaser diagram"
+ },
+ {
+  "id": "02-302",
+  "de": "Bauphysik — Schallschutz",
+  "en": "Building physics — sound insulation"
+ },
+ {
+  "id": "02-303",
+  "de": "Luftschalldämmung einschaliger Massivbauteile nach dem Massegesetz (DIN 4109-32) und Trittschall von Massivdecken mit schwimmendem Estrich, verglichen mit DIN 4109-1.",
+  "en": "Airborne sound insulation of single-leaf solid elements with the mass law (DIN 4109-32) and impact sound of solid floors with floating screed, compared with DIN 4109-1."
+ },
+ {
+  "id": "02-304",
+  "de": "Massegesetz",
+  "en": "Mass law"
+ },
+ {
+  "id": "02-305",
+  "de": "Mauerwerk — Wand auf Druck",
+  "en": "Masonry — wall in compression"
+ },
+ {
+  "id": "02-306",
+  "de": "Vereinfachtes Verfahren nach DIN EN 1996-3 mit deutschem NA: Knicklänge, Abminderung Φ aus Knicken und Deckenverdrehung und Tragfähigkeit der Wand.",
+  "en": "Simplified method to DIN EN 1996-3 with the German NA: effective height, reduction factor Φ from buckling and floor rotation and resistance of the wall."
+ },
+ {
+  "id": "02-307",
+  "de": "Wand",
+  "en": "Wall"
+ },
+ {
+  "id": "02-308",
+  "de": "Mauerwerk — Teilflächenpressung",
+  "en": "Masonry — concentrated load"
+ },
+ {
+  "id": "02-309",
+  "de": "Einzellast auf Mauerwerk nach DIN EN 1996-1-1, 6.1.3: Lastausbreitung, Erhöhungsfaktor β und Tragfähigkeit unter der Einzellast.",
+  "en": "Concentrated load on masonry to DIN EN 1996-1-1, 6.1.3: load spread, enhancement factor β and resistance under the concentrated load."
+ },
+ {
+  "id": "02-310",
+  "de": "Auflager",
+  "en": "Bearing"
+ },
+ {
+  "id": "02-311",
+  "de": "Mauerwerk — Kellerwand",
+  "en": "Masonry — basement wall"
+ },
+ {
+  "id": "02-312",
+  "de": "Vereinfachter Nachweis nach DIN EN 1996-3, 4.5: Mindestauflast für die Bogenwirkung gegen den Erddruck und Höchstauflast.",
+  "en": "Simplified check to DIN EN 1996-3, 4.5: minimum vertical load for arching against the earth pressure and maximum vertical load."
+ },
+ {
+  "id": "02-313",
+  "de": "Kellerwand",
+  "en": "Basement wall"
+ },
+ {
+  "id": "02-314",
+  "de": "Mauerwerk — Schubwand",
+  "en": "Masonry — shear wall"
+ },
+ {
+  "id": "02-315",
+  "de": "Schub in Wandebene nach DIN EN 1996-1-1, 6.2: überdrückte Länge, Schubfestigkeit aus Haftscherfestigkeit und Reibung, Randdruck.",
+  "en": "In-plane shear to DIN EN 1996-1-1, 6.2: compressed length, shear strength from initial shear strength and friction, edge compression."
+ },
+ {
+  "id": "02-316",
+  "de": "Wandscheibe",
+  "en": "Shear wall"
+ },
+ {
+  "id": "02-317",
+  "de": "Grundbau — Flachgründung",
+  "en": "Geotechnics — shallow foundation"
+ },
+ {
+  "id": "02-318",
+  "de": "Nachweise nach DIN EN 1997-1 mit DIN 1054 (BS-P): Lage der Resultierenden (klaffende Fuge), Grundbruch nach DIN 4017 mit Form- und Neigungsbeiwerten und Gleiten.",
+  "en": "Checks to DIN EN 1997-1 with DIN 1054 (BS-P): position of the resultant (gaping joint), bearing resistance to DIN 4017 with shape and inclination factors, and sliding."
+ },
+ {
+  "id": "02-319",
+  "de": "Fundament",
+  "en": "Footing"
+ },
+ {
+  "id": "02-320",
+  "de": "Grundbau — Setzung",
+  "en": "Geotechnics — settlement"
+ },
+ {
+  "id": "02-321",
+  "de": "Setzung eines Rechteckfundaments nach DIN 4019: Spannungsausbreitung nach Steinbrenner, Grenztiefe und Summe der Schichtsetzungen mit dem Steifemodul.",
+  "en": "Settlement of a rectangular footing to DIN 4019: stress distribution after Steinbrenner, limiting depth and sum of the layer settlements with the oedometric modulus."
+ },
+ {
+  "id": "02-322",
+  "de": "Spannungen und Setzung",
+  "en": "Stresses and settlement"
+ },
+ {
+  "id": "02-323",
+  "de": "Grundbau — Winkelstützmauer",
+  "en": "Geotechnics — cantilever retaining wall"
+ },
+ {
+  "id": "02-324",
+  "de": "Erddruck nach Coulomb und Nachweise nach DIN 1054 (BS-P): Gleiten, Lage der Resultierenden und Grundbruch nach DIN 4017.",
+  "en": "Earth pressure after Coulomb and checks to DIN 1054 (BS-P): sliding, position of the resultant and bearing resistance to DIN 4017."
+ },
+ {
+  "id": "02-325",
+  "de": "Stützwand",
+  "en": "Retaining wall"
+ },
+ {
+  "id": "02-326",
+  "de": "Grundbau — Auftrieb",
+  "en": "Geotechnics — uplift"
+ },
+ {
+  "id": "02-327",
+  "de": "Nachweis der Auftriebssicherheit (UPL) nach DIN EN 1997-1 mit DIN 1054 für Keller, Wannen und Becken im Grundwasser.",
+  "en": "Check of safety against uplift (UPL) to DIN EN 1997-1 with DIN 1054 for basements, tanks and basins in groundwater."
+ },
+ {
+  "id": "02-328",
+  "de": "Auftrieb",
+  "en": "Uplift"
+ },
+ {
+  "id": "02-329",
+  "de": "Grundbau — Gleiten",
+  "en": "Geotechnics — sliding"
+ },
+ {
+  "id": "02-330",
+  "de": "Gleitsicherheit in der Sohlfuge nach DIN EN 1997-1 mit DIN 1054 (BS-P, BS-T, BS-A): Sohlreibung dräniert oder undräniert, wahlweise mit abgemindertem Erdwiderstand.",
+  "en": "Sliding resistance in the base joint to DIN EN 1997-1 with DIN 1054 (BS-P, BS-T, BS-A): base friction drained or undrained, optionally with reduced passive earth pressure."
+ },
+ {
+  "id": "02-331",
+  "de": "Gleiten",
+  "en": "Sliding"
+ },
+ {
+  "id": "02-332",
+  "de": "Holz — Ausklinkung am Auflager",
+  "en": "Timber — notched beam end"
+ },
+ {
+  "id": "02-333",
+  "de": "Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.5.2: Schub im Restquerschnitt mit dem Abminderungsbeiwert kv für die Kerbwirkung an der einspringenden Ecke.",
+  "en": "Design to DIN EN 1995-1-1 with the German NA, 6.5.2: shear in the residual cross-section with the reduction factor kv for the notch effect at the re-entrant corner."
+ },
+ {
+  "id": "02-334",
+  "de": "Trägerende",
+  "en": "Beam end"
+ },
+ {
+  "id": "02-335",
+  "de": "Holz — Satteldach- und Pultdachträger",
+  "en": "Timber — double-tapered and single-tapered beams"
+ },
+ {
+  "id": "02-336",
+  "de": "Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.4: Biegung am angeschnittenen Rand (km,α), Firstquerschnitt (kl), Querzug im First (kp, kvol, kdis) und Schub am Auflager.",
+  "en": "Design to DIN EN 1995-1-1 with the German NA, 6.4: bending at the tapered edge (km,α), apex cross-section (kl), tension perpendicular to the grain at the apex (kp, kvol, kdis) and shear at the support."
+ },
+ {
+  "id": "02-337",
+  "de": "Träger",
+  "en": "Beam"
+ },
+ {
+  "id": "02-338",
+  "de": "Holz — Versatz (Druck schräg zur Faser)",
+  "en": "Timber — step joint (compression at an angle to the grain)"
+ },
+ {
+  "id": "02-339",
+  "de": "Bemessung nach DIN EN 1995-1-1 mit deutschem NA, 6.2.2: Stirn- und Fersenversatz mit fc,α,d, Grenzen der Versatztiefe und Abscheren des Vorholzes.",
+  "en": "Design to DIN EN 1995-1-1 with the German NA, 6.2.2: front and heel step joint with fc,α,d, limits of the notch depth and shear of the heel."
+ },
+ {
+  "id": "02-340",
+  "de": "Versatz",
+  "en": "Step joint"
+ },
+ {
+  "id": "02-341",
+  "de": "Holz — Verbindungen mit Stabdübeln, Nägeln und Schrauben",
+  "en": "Timber — connections with dowels, nails and screws"
+ },
+ {
+  "id": "02-342",
+  "de": "Bemessung nach DIN EN 1995-1-1 mit deutschem NA, Abschnitt 8: Lochleibung, Fließmoment, alle Versagensmodi nach Johansen, Einhängeeffekt, wirksame Anzahl und Mindestabstände.",
+  "en": "Design to DIN EN 1995-1-1 with the German NA, section 8: embedment strength, yield moment, all failure modes after Johansen, rope effect, effective number and minimum spacings."
+ },
+ {
+  "id": "02-343",
+  "de": "Verbindung",
+  "en": "Connection"
+ },
+ {
+  "id": "02-344",
+  "de": "Holz — Vollholz und Brettschichtholz",
+  "en": "Timber — solid timber and glulam"
+ },
+ {
+  "id": "02-345",
+  "de": "Bemessung nach DIN EN 1995-1-1 mit deutschem NA: Biegung, Schub, Auflagerpressung, Kippen, Knicken und Durchbiegung.",
+  "en": "Design to DIN EN 1995-1-1 with the German NA: bending, shear, bearing, lateral-torsional buckling, flexural buckling and deflection."
+ },
+ {
+  "id": "02-346",
+  "de": "Breite b",
+  "en": "Width b"
+ },
+ {
+  "id": "02-347",
+  "de": "Höhe h",
+  "en": "Depth h"
+ },
+ {
+  "id": "02-348",
+  "de": "Stützweite l",
+  "en": "Span l"
+ },
+ {
+  "id": "02-349",
+  "de": "M_Ed,Stütze ≥ 0",
+  "en": "M_Ed,support ≥ 0"
+ },
+ {
+  "id": "02-350",
+  "de": "M_qp,Stütze ≥ 0",
+  "en": "M_qp,support ≥ 0"
+ },
+ {
+  "id": "02-351",
+  "de": "cot θ zwischen 1,0 und 3,0",
+  "en": "cot θ between 1.0 and 3.0"
+ },
+ {
+  "id": "02-352",
+  "de": "Plattendicke 0 < h_f < h",
+  "en": "Slab thickness 0 < h_f < h"
+ },
+ {
+  "id": "02-353",
+  "de": "Plattenbreiten b₁, b₂ ≥ 0",
+  "en": "Flange widths b₁, b₂ ≥ 0"
+ },
+ {
+  "id": "02-354",
+  "de": "Auflagertiefe",
+  "en": "Support depth"
+ },
+ {
+  "id": "02-355",
+  "de": "mindestens 2 Längsstäbe",
+  "en": "at least 2 longitudinal bars"
+ },
+ {
+  "id": "02-356",
+  "de": "2. Lage: höchstens so viele Stäbe wie in der 1. Lage, unten mindestens 2",
+  "en": "2nd layer: at most as many bars as in the 1st layer, at least 2 at the bottom"
+ },
+ {
+  "id": "02-357",
+  "de": "mindestens 2 Stäbe oben im Feld",
+  "en": "at least 2 bars at the top in the span"
+ },
+ {
+  "id": "02-358",
+  "de": "Bügelabstand",
+  "en": "Stirrup spacing"
+ },
+ {
+  "id": "02-359",
+  "de": "mindestens 2 Stäbe oben",
+  "en": "at least 2 bars at the top"
+ },
+ {
+  "id": "02-360",
+  "de": "Stababstand",
+  "en": "Bar spacing"
+ },
+ {
+  "id": "02-361",
+  "de": "Stababstand oben",
+  "en": "Bar spacing at the top"
+ },
+ {
+  "id": "02-362",
+  "de": "Plattendicke h ≥ 12 cm",
+  "en": "Slab thickness h ≥ 12 cm"
+ },
+ {
+  "id": "02-363",
+  "de": "Stababstände",
+  "en": "Bar spacings"
+ },
+ {
+  "id": "02-364",
+  "de": "Dicke h",
+  "en": "Thickness h"
+ },
+ {
+  "id": "02-365",
+  "de": "Stützenlänge l",
+  "en": "Column length l"
+ },
+ {
+  "id": "02-366",
+  "de": "N_Ed > 0 (Druck)",
+  "en": "N_Ed > 0 (compression)"
+ },
+ {
+  "id": "02-367",
+  "de": "φef zwischen 0 und 4",
+  "en": "φef between 0 and 4"
+ },
+ {
+  "id": "02-368",
+  "de": "mindestens 2 Stäbe je Seite",
+  "en": "at least 2 bars per side"
+ },
+ {
+  "id": "02-369",
+  "de": "Stützweite L",
+  "en": "Span L"
+ },
+ {
+  "id": "02-370",
+  "de": "mindestens eine Schnittgröße",
+  "en": "at least one internal force"
+ },
+ {
+  "id": "02-371",
+  "de": "Torsionsmoment ≥ 0",
+  "en": "Torsional moment ≥ 0"
+ },
+ {
+  "id": "02-372",
+  "de": "Lasteinleitungslänge",
+  "en": "Load introduction length"
+ },
+ {
+  "id": "02-373",
+  "de": "Abstand c ≥ 0",
+  "en": "Distance c ≥ 0"
+ },
+ {
+  "id": "02-374",
+  "de": "ψ zwischen −1 und 1",
+  "en": "ψ between −1 and 1"
+ },
+ {
+  "id": "02-375",
+  "de": "Schraubenanzahl",
+  "en": "Number of bolts"
+ },
+ {
+  "id": "02-376",
+  "de": "Blechdicke",
+  "en": "Plate thickness"
+ },
+ {
+  "id": "02-377",
+  "de": "Randabstände e₁, e₂",
+  "en": "Edge distances e₁, e₂"
+ },
+ {
+  "id": "02-378",
+  "de": "Lochabstand p₁",
+  "en": "Spacing p₁"
+ },
+ {
+  "id": "02-379",
+  "de": "Lochabstand p₂",
+  "en": "Spacing p₂"
+ },
+ {
+  "id": "02-380",
+  "de": "Kehlnaht: a, l, Anzahl",
+  "en": "Fillet weld: a, l, number"
+ },
+ {
+  "id": "02-381",
+  "de": "Querschnitt b, h",
+  "en": "Cross-section b, h"
+ },
+ {
+  "id": "02-382",
+  "de": "Auflagerkraft ≥ 0",
+  "en": "Support reaction ≥ 0"
+ },
+ {
+  "id": "02-383",
+  "de": "Auflagerlänge",
+  "en": "Bearing length"
+ },
+ {
+  "id": "02-384",
+  "de": "Kipplänge ≥ 0",
+  "en": "Buckling length ≥ 0"
+ },
+ {
+  "id": "02-385",
+  "de": "ψ₂ zwischen 0 und 1",
+  "en": "ψ₂ between 0 and 1"
+ },
+ {
+  "id": "02-386",
+  "de": "Durchmesser d",
+  "en": "Diameter d"
+ },
+ {
+  "id": "02-387",
+  "de": "Blechdicke t_s",
+  "en": "Plate thickness t_s"
+ },
+ {
+  "id": "02-388",
+  "de": "Kerndurchmesser 0 < d_k < d",
+  "en": "Core diameter 0 < d_k < d"
+ }
+]

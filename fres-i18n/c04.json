@@ -1,0 +1,1117 @@
+[
+ {
+  "id": "04-0",
+  "de": "Zugstrebe: erforderlicher Bügelquerschnitt je Meter Balkenlänge",
+  "en": "Tie: required stirrup area per metre of beam length"
+ },
+ {
+  "id": "04-1",
+  "de": "a<sub>sw,erf</sub> = V<sub>Ed</sub>/(z·f<sub>yd</sub>·cot θ) = {} cm²/m",
+  "en": "a<sub>sw,req</sub> = V<sub>Ed</sub>/(z·f<sub>yd</sub>·cot θ) = {} cm²/m"
+ },
+ {
+  "id": "04-2",
+  "de": "Mindestwert ρ<sub>w,min</sub>·b<sub>w</sub> = {} cm²/m",
+  "en": "Minimum value ρ<sub>w,min</sub>·b<sub>w</sub> = {} cm²/m"
+ },
+ {
+  "id": "04-3",
+  "de": "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,16·f<sub>ctm</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m",
+  "en": "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: minimum stirrups a<sub>sw,min</sub> = 0.16·f<sub>ctm</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m"
+ },
+ {
+  "id": "04-4",
+  "de": "Nachweis der gewählten Bügel (zwei Schenkel je Bügel)",
+  "en": "Check of the chosen stirrups (two legs per stirrup)"
+ },
+ {
+  "id": "04-5",
+  "de": "gewählt Bügel Ø{}/{} cm, zweischnittig: a<sub>sw,vorh</sub> = <b>{} cm²/m</b> ≥ {} cm²/m",
+  "en": "chosen stirrups Ø{}/{} cm, two legs: a<sub>sw,prov</sub> = <b>{} cm²/m</b> ≥ {} cm²/m"
+ },
+ {
+  "id": "04-6",
+  "de": "Größter Bügelabstand — je höher die Ausnutzung, desto enger",
+  "en": "Maximum stirrup spacing — the higher the utilisation, the closer"
+ },
+ {
+  "id": "04-7",
+  "de": "größter Bügelabstand (Tab. NA.9.1, V<sub>Ed</sub>/V<sub>Rd,max</sub> = {}): s<sub>max</sub> = {} mm ≥ {} mm",
+  "en": "maximum stirrup spacing (Tab. NA.9.1, V<sub>Ed</sub>/V<sub>Rd,max</sub> = {}): s<sub>max</sub> = {} mm ≥ {} mm"
+ },
+ {
+  "id": "04-8",
+  "de": "Querkraft (GZT)",
+  "en": "Shear (ULS)"
+ },
+ {
+  "id": "04-9",
+  "de": "Druckstrebe in der Platte",
+  "en": "Strut in the flange"
+ },
+ {
+  "id": "04-10",
+  "de": "Druckstrebe (Druckgurt cot θ<sub>f</sub> = 1,2): v<sub>Rd,max</sub> = ν<sub>1</sub>·f<sub>cd</sub>·sin θ<sub>f</sub>·cos θ<sub>f</sub> = {} N/mm² ≥ v<sub>Ed</sub>",
+  "en": "Strut (compression flange cot θ<sub>f</sub> = 1.2): v<sub>Rd,max</sub> = ν<sub>1</sub>·f<sub>cd</sub>·sin θ<sub>f</sub>·cos θ<sub>f</sub> = {} N/mm² ≥ v<sub>Ed</sub>"
+ },
+ {
+  "id": "04-11",
+  "de": "Zugstrebe: Querbewehrung in der Platte",
+  "en": "Tie: transverse reinforcement in the flange"
+ },
+ {
+  "id": "04-12",
+  "de": "v<sub>Ed</sub> ≤ 0,4·f<sub>ctd</sub> = {} N/mm²: keine rechnerische Anschlussbewehrung, Plattenbewehrung genügt",
+  "en": "v<sub>Ed</sub> ≤ 0.4·f<sub>ctd</sub> = {} N/mm²: no calculated connection reinforcement, the slab reinforcement is sufficient"
+ },
+ {
+  "id": "04-13",
+  "de": "a<sub>sf,erf</sub> = v<sub>Ed</sub>·h<sub>f</sub>/(f<sub>yd</sub>·cot θ<sub>f</sub>) = <b>{} cm²/m</b> Querbewehrung in der Platte, je zur Hälfte oben und unten",
+  "en": "a<sub>sf,req</sub> = v<sub>Ed</sub>·h<sub>f</sub>/(f<sub>yd</sub>·cot θ<sub>f</sub>) = <b>{} cm²/m</b> transverse reinforcement in the flange, half at the top and half at the bottom"
+ },
+ {
+  "id": "04-14",
+  "de": "Die Anschlussbewehrung ist mit der Biegebewehrung der Platte quer zum Unterzug zu überlagern: maßgebend ist der größere Wert aus a<sub>sf</sub> und ½·a<sub>sf</sub> + Plattenbewehrung (6.2.4(5)).",
+  "en": "The connection reinforcement is to be combined with the bending reinforcement of the slab across the beam: the larger of a<sub>sf</sub> and ½·a<sub>sf</sub> + slab reinforcement governs (6.2.4(5))."
+ },
+ {
+  "id": "04-15",
+  "de": "Anschluss Gurt–Steg (GZT)",
+  "en": "Flange–web connection (ULS)"
+ },
+ {
+  "id": "04-16",
+  "de": "Aufhängebewehrung: die Last muss im stützenden Träger nach oben gehängt werden",
+  "en": "Suspension reinforcement: the load must be hung up in the supporting beam"
+ },
+ {
+  "id": "04-17",
+  "de": "Aufhängebewehrung im stützenden Träger: A<sub>s,h</sub> = V<sub>Ed</sub>/f<sub>yd</sub> = <b>{} cm²</b> als Bügel im Kreuzungsbereich, überwiegend im stützenden Träger",
+  "en": "Suspension reinforcement in the supporting beam: A<sub>s,h</sub> = V<sub>Ed</sub>/f<sub>yd</sub> = <b>{} cm²</b> as stirrups in the intersection zone, mainly in the supporting beam"
+ },
+ {
+  "id": "04-18",
+  "de": "Verankerung am Endauflager (indirekt)",
+  "en": "Anchorage at the end support (indirect)"
+ },
+ {
+  "id": "04-19",
+  "de": "Verankerung am Endauflager",
+  "en": "Anchorage at the end support"
+ },
+ {
+  "id": "04-20",
+  "de": "Verankerungslänge reicht nicht: Haken bzw. Winkelhaken, kleineren Durchmesser oder tieferes Auflager wählen.",
+  "en": "Anchorage length not sufficient: choose a hook or bend, a smaller diameter or a deeper support."
+ },
+ {
+  "id": "04-21",
+  "de": "Staffelung",
+  "en": "Curtailment"
+ },
+ {
+  "id": "04-22",
+  "de": "{} Stäbe: mindestens 2 Stäbe müssen bis zum Auflager laufen — keine Staffelung möglich",
+  "en": "{} bars: at least 2 bars must run to the support — no curtailment possible"
+ },
+ {
+  "id": "04-23",
+  "de": "Staffelung: {} von {} Stäben enden vor dem Auflager, {} laufen durch",
+  "en": "Curtailment: {} of {} bars end before the support, {} run through"
+ },
+ {
+  "id": "04-24",
+  "de": "aufnehmbare Kraft der durchlaufenden Stäbe F<sub>Rd,{}</sub> = {}·{}·{}/10³ = {} kN",
+  "en": "resistance of the continuing bars F<sub>Rd,{}</sub> = {}·{}·{}/10³ = {} kN"
+ },
+ {
+  "id": "04-25",
+  "de": "Die durchlaufenden Stäbe decken schon die ganze Zugkraftlinie — die übrigen Stäbe werden nur aus Mindestgründen gebraucht.",
+  "en": "The continuing bars already cover the whole tensile force line — the other bars are only needed for minimum requirements."
+ },
+ {
+  "id": "04-26",
+  "de": "Rechnerischer Endpunkt E: dort reicht die verschobene Zugkraftlinie gerade noch für die durchlaufenden Stäbe",
+  "en": "Theoretical end point E: there the shifted tensile force line is just covered by the continuing bars"
+ },
+ {
+  "id": "04-27",
+  "de": "x<sub>E</sub> = u − a<sub>l</sub> = {} − {} = <b>{} m</b> vom Auflager",
+  "en": "x<sub>E</sub> = u − a<sub>l</sub> = {} − {} = <b>{} m</b> from the support"
+ },
+ {
+  "id": "04-28",
+  "de": "Ab E müssen die endenden Stäbe noch um die Verankerungslänge weitergeführt werden (voll ausgenutzt, σ<sub>sd</sub> = f<sub>yd</sub>)",
+  "en": "From E the ending bars must be extended by the anchorage length (fully utilised, σ<sub>sd</sub> = f<sub>yd</sub>)"
+ },
+ {
+  "id": "04-29",
+  "de": "l<sub>bd</sub> = max(Ø/4·f<sub>yd</sub>/f<sub>bd</sub>; 10·Ø; 100) = max({}; {}; 100) = <b>{} mm</b> (gerade, guter Verbund)",
+  "en": "l<sub>bd</sub> = max(Ø/4·f<sub>yd</sub>/f<sub>bd</sub>; 10·Ø; 100) = max({}; {}; 100) = <b>{} mm</b> (straight, good bond)"
+ },
+ {
+  "id": "04-30",
+  "de": "x<sub>E</sub> − l<sub>bd</sub> = {} m ≤ 0 → die Stäbe reichen ohnehin bis zum Auflager, Staffelung bringt nichts",
+  "en": "x<sub>E</sub> − l<sub>bd</sub> = {} m ≤ 0 → the bars reach the support anyway, curtailment brings nothing"
+ },
+ {
+  "id": "04-31",
+  "de": "Ende der gestaffelten Stäbe und deren Länge",
+  "en": "End of the curtailed bars and their length"
+ },
+ {
+  "id": "04-32",
+  "de": "Stabende bei x = x<sub>E</sub> − l<sub>bd</sub> = <b>{} m</b> vom Auflager (beidseitig)",
+  "en": "Bar end at x = x<sub>E</sub> − l<sub>bd</sub> = <b>{} m</b> from the support (both ends)"
+ },
+ {
+  "id": "04-33",
+  "de": "Länge der gestaffelten Stäbe ≥ l − 2·{} = <b>{} m</b> → Ersparnis ≈ {} kg Betonstahl",
+  "en": "Length of the curtailed bars ≥ l − 2·{} = <b>{} m</b> → saving ≈ {} kg reinforcing steel"
+ },
+ {
+  "id": "04-34",
+  "de": "Zugkraftdeckungsbild: die blaue Deckungslinie muss überall über der orangen Zugkraftlinie liegen",
+  "en": "Tensile force diagram: the blue resistance line must lie above the orange tensile force line everywhere"
+ },
+ {
+  "id": "04-35",
+  "de": "<span style=\"color:{}\">orange</span>: F<sub>sd</sub> um a<sub>l</sub> verschoben · grau gestrichelt: M/z · <span style=\"color:{}\">blau</span>: aufnehmbare Kraft F<sub>Rd</sub> (zwischen A und E steigt sie über l<sub>bd</sub> an)",
+  "en": "<span style=\"color:{}\">orange</span>: F<sub>sd</sub> shifted by a<sub>l</sub> · grey dashed: M/z · <span style=\"color:{}\">blue</span>: resistance F<sub>Rd</sub> (between A and E it rises over l<sub>bd</sub>)"
+ },
+ {
+  "id": "04-36",
+  "de": "Zugkraftdeckung und Staffelung",
+  "en": "Tensile force coverage and curtailment"
+ },
+ {
+  "id": "04-37",
+  "de": "Annahme Einfeldträger mit Gleichlast. Mindestens ¼ der Feldbewehrung (hier mindestens 2 Stäbe) ist bis über das Auflager zu führen; die Verankerung dort ist im Nachweis „Verankerung am Endauflager“ enthalten.",
+  "en": "Assumption: simply supported beam with uniform load. At least ¼ of the span reinforcement (here at least 2 bars) must be taken over the support; the anchorage there is included in the check “Anchorage at the end support”."
+ },
+ {
+  "id": "04-38",
+  "de": "Zwang (z. B. Schwinden, Temperatur): zulässige Stahlspannung aus dem Grenzdurchmesser",
+  "en": "Restraint (e.g. shrinkage, temperature): permissible steel stress from the limiting bar diameter"
+ },
+ {
+  "id": "04-39",
+  "de": "Zwang: f<sub>ct,eff</sub> = {} N/mm² · Ø*<sub>s</sub> = Ø·2,9/f<sub>ct,eff</sub> = {} mm",
+  "en": "Restraint: f<sub>ct,eff</sub> = {} N/mm² · Ø*<sub>s</sub> = Ø·2.9/f<sub>ct,eff</sub> = {} mm"
+ },
+ {
+  "id": "04-40",
+  "de": "Mindestbewehrung für Zwang: muss die Risskraft der Zugzone aufnehmen",
+  "en": "Minimum reinforcement for restraint: must carry the cracking force of the tension zone"
+ },
+ {
+  "id": "04-41",
+  "de": " (A<sub>ct</sub> vereinfacht für den Steg)",
+  "en": " (A<sub>ct</sub> simplified for the web)"
+ },
+ {
+  "id": "04-42",
+  "de": "A<sub>s,min</sub> = k<sub>c</sub>·k·f<sub>ct,eff</sub>·A<sub>ct</sub>/σ<sub>s</sub> = 0,4·{}·{}·{}/{} = <b>{} cm²{}</b> ≤ A<sub>s,vorh</sub>{}",
+  "en": "A<sub>s,min</sub> = k<sub>c</sub>·k·f<sub>ct,eff</sub>·A<sub>ct</sub>/σ<sub>s</sub> = 0.4·{}·{}·{}/{} = <b>{} cm²{}</b> ≤ A<sub>s,prov</sub>{}"
+ },
+ {
+  "id": "04-43",
+  "de": "Rissbreite im Feld (GZG)",
+  "en": "Crack width at midspan (SLS)"
+ },
+ {
+  "id": "04-44",
+  "de": "Rissbreite über der Stütze (GZG)",
+  "en": "Crack width over the support (SLS)"
+ },
+ {
+  "id": "04-45",
+  "de": "Mehr oder dünnere Stäbe oben wählen.",
+  "en": "Choose more or thinner bars at the top."
+ },
+ {
+  "id": "04-46",
+  "de": "mit verformungsempfindlichen Trennwänden: l/d ≤ K²·150/l = {}",
+  "en": "with partitions sensitive to deflection: l/d ≤ K²·150/l = {}"
+ },
+ {
+  "id": "04-47",
+  "de": "Nachweis mit dem kleineren Grenzwert",
+  "en": "Check with the smaller limit"
+ },
+ {
+  "id": "04-48",
+  "de": "maßgebend: l/d ≤ <b>{}</b> → d<sub>erf</sub> = {} mm",
+  "en": "governing: l/d ≤ <b>{}</b> → d<sub>req</sub> = {} mm"
+ },
+ {
+  "id": "04-49",
+  "de": "Biegeschlankheit (GZG)",
+  "en": "Slenderness limit (SLS)"
+ },
+ {
+  "id": "04-50",
+  "de": "Bauteil dicker wählen oder die Durchbiegung genauer nachweisen.",
+  "en": "Choose a thicker member or check the deflection more accurately."
+ },
+ {
+  "id": "04-51",
+  "de": "Mindestdeckung: der größere Wert aus Dauerhaftigkeit ({}) und Verbund (c<sub>min,b</sub> = Stabdurchmesser)",
+  "en": "Minimum cover: the larger value from durability ({}) and bond (c<sub>min,b</sub> = bar diameter)"
+ },
+ {
+  "id": "04-52",
+  "de": "Nennmaß: Vorhaltemaß Δc<sub>dev</sub> für Ungenauigkeiten auf der Baustelle addieren",
+  "en": "Nominal cover: add the allowance Δc<sub>dev</sub> for deviations on site"
+ },
+ {
+  "id": "04-53",
+  "de": "Nennmaß für den Bügel (äußerster Stab)",
+  "en": "Nominal cover for the stirrup (outermost bar)"
+ },
+ {
+  "id": "04-54",
+  "de": "Nennmaß für den Längsstab — der Bügel liegt außen, deshalb zählt er mit",
+  "en": "Nominal cover for the longitudinal bar — the stirrup lies outside, so it counts"
+ },
+ {
+  "id": "04-55",
+  "de": "Verlegemaß: der größere der beiden Werte, gemessen bis zur Bügelaußenkante",
+  "en": "Cover to the stirrup: the larger of the two values, measured to the outer face of the stirrup"
+ },
+ {
+  "id": "04-56",
+  "de": "Verlegemaß Bügel c<sub>v</sub> = max({}; {}) = <b>{} mm</b>",
+  "en": "Stirrup cover c<sub>v</sub> = max({}; {}) = <b>{} mm</b>"
+ },
+ {
+  "id": "04-57",
+  "de": "Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)",
+  "en": "Design values of the materials (partial factors γ<sub>c</sub> = 1.5, γ<sub>s</sub> = 1.15)"
+ },
+ {
+  "id": "04-58",
+  "de": "b<sub>eff,Stütze</sub>",
+  "en": "b<sub>eff,sup</sub>"
+ },
+ {
+  "id": "04-59",
+  "de": "Tragfähigkeit ohne Querkraftbewehrung V<sub>Rd,c</sub> — Beiwerte",
+  "en": "Resistance without shear reinforcement V<sub>Rd,c</sub> — coefficients"
+ },
+ {
+  "id": "04-60",
+  "de": "Maßstabsfaktor k = 1 + √(200/d) = {} ≤ 2",
+  "en": "Size factor k = 1 + √(200/d) = {} ≤ 2"
+ },
+ {
+  "id": "04-61",
+  "de": "Längsbewehrungsgrad ρ<sub>l</sub> = A<sub>sl</sub>/(b<sub>w</sub>·d) = {} % ≤ 2 %",
+  "en": "Longitudinal reinforcement ratio ρ<sub>l</sub> = A<sub>sl</sub>/(b<sub>w</sub>·d) = {} % ≤ 2 %"
+ },
+ {
+  "id": "04-62",
+  "de": "Schubspannung, die der Beton allein aufnehmen kann (der größere Wert gilt)",
+  "en": "Shear stress the concrete alone can carry (the larger value applies)"
+ },
+ {
+  "id": "04-63",
+  "de": "Querkrafttragfähigkeit des Betons: Spannung × Fläche",
+  "en": "Shear resistance of the concrete: stress × area"
+ },
+ {
+  "id": "04-64",
+  "de": "keine Querkraftbewehrung nötig",
+  "en": "no shear reinforcement required"
+ },
+ {
+  "id": "04-65",
+  "de": "nur Mindestbügel nötig",
+  "en": "only minimum stirrups required"
+ },
+ {
+  "id": "04-66",
+  "de": "Querkraftbewehrung erforderlich",
+  "en": "shear reinforcement required"
+ },
+ {
+  "id": "04-67",
+  "de": "Fachwerkmodell: innerer Hebelarm, Abminderung der Betonfestigkeit, Strebenneigung",
+  "en": "Truss model: lever arm, reduction of the concrete strength, strut inclination"
+ },
+ {
+  "id": "04-68",
+  "de": "Druckstrebe: der Beton zwischen den Schubrissen darf nicht zerdrückt werden",
+  "en": "Strut: the concrete between the shear cracks must not be crushed"
+ },
+ {
+  "id": "04-69",
+  "de": "Druckkraft, die im seitlich abstehenden Plattenteil wirkt",
+  "en": "Compression force acting in the outstanding part of the flange"
+ },
+ {
+  "id": "04-70",
+  "de": "Druckkraft im abstehenden Gurtteil (b<sub>eff,i</sub> = {} mm): F<sub>ca</sub> = {} kN",
+  "en": "Compression force in the outstanding flange (b<sub>eff,i</sub> = {} mm): F<sub>ca</sub> = {} kN"
+ },
+ {
+  "id": "04-71",
+  "de": "Diese Kraft baut sich auf der Länge Δx auf und muss vom Steg in die Platte übertragen werden",
+  "en": "This force builds up over the length Δx and must be transferred from the web into the flange"
+ },
+ {
+  "id": "04-72",
+  "de": "ΔF<sub>d</sub> = 0,75·F<sub>ca</sub> = {} kN (Gleichlast: M(l₀/4) = 0,75·M<sub>max</sub>)",
+  "en": "ΔF<sub>d</sub> = 0.75·F<sub>ca</sub> = {} kN (uniform load: M(l₀/4) = 0.75·M<sub>max</sub>)"
+ },
+ {
+  "id": "04-73",
+  "de": "Längsschubspannung im Anschnitt Platte–Steg",
+  "en": "Longitudinal shear stress at the flange–web junction"
+ },
+ {
+  "id": "04-74",
+  "de": "Zugkraft, die am Auflager noch in der unteren Bewehrung steckt (Versatzmaß a<sub>l</sub>)",
+  "en": "Tensile force still in the bottom reinforcement at the support (shift rule a<sub>l</sub>)"
+ },
+ {
+  "id": "04-75",
+  "de": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z mit a<sub>l</sub> = d (ohne Querkraftbewehrung): {}·{}/{} = <b>{} kN</b>",
+  "en": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z with a<sub>l</sub> = d (without shear reinforcement): {}·{}/{} = <b>{} kN</b>"
+ },
+ {
+  "id": "04-76",
+  "de": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z mit a<sub>l</sub> = z·cot θ/2: F<sub>Ed</sub> = V<sub>Ed</sub>·cot θ/2 = <b>{} kN</b>",
+  "en": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z with a<sub>l</sub> = z·cot θ/2: F<sub>Ed</sub> = V<sub>Ed</sub>·cot θ/2 = <b>{} kN</b>"
+ },
+ {
+  "id": "04-77",
+  "de": "Bewehrung, die bis über das Auflager geführt werden muss",
+  "en": "Reinforcement to be taken over the support"
+ },
+ {
+  "id": "04-78",
+  "de": "A<sub>s,erf</sub> = max(F<sub>Ed</sub>/f<sub>yd</sub>; {}·A<sub>s,Feld</sub>) = {} cm²{} ≤ A<sub>s,vorh</sub> = {} cm²{} (Feldbewehrung bis zum Auflager geführt)",
+  "en": "A<sub>s,req</sub> = max(F<sub>Ed</sub>/f<sub>yd</sub>; {}·A<sub>s,span</sub>) = {} cm²{} ≤ A<sub>s,prov</sub> = {} cm²{} (span reinforcement taken to the support)"
+ },
+ {
+  "id": "04-79",
+  "de": "Stahlspannung am Auflager und Verbundspannung zwischen Stab und Beton",
+  "en": "Steel stress at the support and bond stress between bar and concrete"
+ },
+ {
+  "id": "04-80",
+  "de": "σ<sub>sd</sub> = F<sub>Ed</sub>/A<sub>s,vorh</sub> = {} N/mm²",
+  "en": "σ<sub>sd</sub> = F<sub>Ed</sub>/A<sub>s,prov</sub> = {} N/mm²"
+ },
+ {
+  "id": "04-81",
+  "de": "f<sub>bd</sub> = 2,25·f<sub>ctk;0,05</sub>/γ<sub>c</sub> = {} N/mm² (guter Verbund)",
+  "en": "f<sub>bd</sub> = 2.25·f<sub>ctk;0.05</sub>/γ<sub>c</sub> = {} N/mm² (good bond)"
+ },
+ {
+  "id": "04-82",
+  "de": "Grundwert der Verankerungslänge: Länge, auf der die Stabkraft über Verbund in den Beton geht",
+  "en": "Basic anchorage length: length over which the bar force is transferred into the concrete by bond"
+ },
+ {
+  "id": "04-83",
+  "de": "Verankerungslänge am indirekten Auflager (kein Querdruck)",
+  "en": "Anchorage length at the indirect support (no transverse pressure)"
+ },
+ {
+  "id": "04-84",
+  "de": "Verankerungslänge am direkten Auflager (Querdruck verbessert den Verbund → ⅔)",
+  "en": "Anchorage length at the direct support (transverse pressure improves bond → ⅔)"
+ },
+ {
+  "id": "04-85",
+  "de": "l<sub>bd,ind</sub> = max(α₁·l<sub>b,rqd</sub>; 0,3·α₁·l<sub>b,rqd</sub>; 10·Ø; 100 mm) = max({}; {}; {}; 100) = <b>{} mm</b> (α₁ = {}, ohne Querdruck)",
+  "en": "l<sub>bd,ind</sub> = max(α₁·l<sub>b,rqd</sub>; 0.3·α₁·l<sub>b,rqd</sub>; 10·Ø; 100 mm) = max({}; {}; {}; 100) = <b>{} mm</b> (α₁ = {}, without transverse pressure)"
+ },
+ {
+  "id": "04-86",
+  "de": "Nachweis: vorhandene Länge hinter der Auflagervorderkante",
+  "en": "Check: available length behind the front face of the support"
+ },
+ {
+  "id": "04-87",
+  "de": "Breite des stützenden Trägers",
+  "en": "Width of the supporting beam"
+ },
+ {
+  "id": "04-88",
+  "de": "Zugkraftlinie: Stabkraft aus dem Moment, F<sub>sd</sub>(x) = M<sub>Ed</sub>(x)/z",
+  "en": "Tensile force line: bar force from the moment, F<sub>sd</sub>(x) = M<sub>Ed</sub>(x)/z"
+ },
+ {
+  "id": "04-89",
+  "de": "Einfeldträger mit Gleichlast: M(x) = 4·M<sub>Ed</sub>·x/l·(1 − x/l), max F<sub>sd</sub> = {}·10³/{} = <b>{} kN</b>",
+  "en": "Simply supported beam with uniform load: M(x) = 4·M<sub>Ed</sub>·x/l·(1 − x/l), max F<sub>sd</sub> = {}·10³/{} = <b>{} kN</b>"
+ },
+ {
+  "id": "04-90",
+  "de": "Versatzmaß: wegen der schrägen Druckstreben ist die Zugkraft größer als M/z — die Linie wird um a<sub>l</sub> zum Auflager hin verschoben",
+  "en": "Shift rule: because of the inclined struts the tensile force is larger than M/z — the line is shifted by a<sub>l</sub> towards the support"
+ },
+ {
+  "id": "04-91",
+  "de": "Gerissener Querschnitt (Zustand II): Nulllinie und Hebelarm",
+  "en": "Cracked section (state II): neutral axis and lever arm"
+ },
+ {
+  "id": "04-92",
+  "de": " (Druckzone mit b<sub>eff</sub>)",
+  "en": " (compression zone with b<sub>eff</sub>)"
+ },
+ {
+  "id": "04-93",
+  "de": "Stahlspannung unter der quasi-ständigen Last",
+  "en": "Steel stress under the quasi-permanent load"
+ },
+ {
+  "id": "04-94",
+  "de": "Wirksame Zugzone um die Bewehrung und deren Bewehrungsgrad",
+  "en": "Effective tension area around the reinforcement and its reinforcement ratio"
+ },
+ {
+  "id": "04-95",
+  "de": "Größter Rissabstand",
+  "en": "Maximum crack spacing"
+ },
+ {
+  "id": "04-96",
+  "de": "Mittlere Dehnungsdifferenz Stahl–Beton zwischen zwei Rissen",
+  "en": "Mean strain difference steel–concrete between two cracks"
+ },
+ {
+  "id": "04-97",
+  "de": "Rissbreite = Rissabstand × Dehnungsdifferenz",
+  "en": "Crack width = crack spacing × strain difference"
+ },
+ {
+  "id": "04-98",
+  "de": "Gerissener Querschnitt: Zug oben, Druckzone unten",
+  "en": "Cracked section: tension at the top, compression zone at the bottom"
+ },
+ {
+  "id": "04-99",
+  "de": "Zugseite oben, Druckzone unten mit b{} = {} mm",
+  "en": "Tension side at the top, compression zone at the bottom with b{} = {} mm"
+ },
+ {
+  "id": "04-100",
+  "de": "Stahlspannung der oberen Bewehrung",
+  "en": "Steel stress of the top reinforcement"
+ },
+ {
+  "id": "04-101",
+  "de": "σ<sub>s</sub> = M<sub>qp,St</sub>/(A<sub>s,oben</sub>·z) = {}·10⁶ / ({}·{}) = <b>{} N/mm²</b>",
+  "en": "σ<sub>s</sub> = M<sub>qp,sup</sub>/(A<sub>s,top</sub>·z) = {}·10⁶ / ({}·{}) = <b>{} N/mm²</b>"
+ },
+ {
+  "id": "04-102",
+  "de": "Wirksame Zugzone und Bewehrungsgrad",
+  "en": "Effective tension area and reinforcement ratio"
+ },
+ {
+  "id": "04-103",
+  "de": "Rissabstand und Dehnungsdifferenz",
+  "en": "Crack spacing and strain difference"
+ },
+ {
+  "id": "04-104",
+  "de": "Vorhandene Biegeschlankheit: Stützweite durch Nutzhöhe",
+  "en": "Actual slenderness: span divided by effective depth"
+ },
+ {
+  "id": "04-105",
+  "de": "Ansicht am Schnitt",
+  "en": "Elevation at the section"
+ },
+ {
+  "id": "04-106",
+  "de": " (Druck)",
+  "en": " (compr.)"
+ },
+ {
+  "id": "04-107",
+  "de": "M<sub>Ed</sub> = {} kNm{} (Feld, Zug unten)",
+  "en": "M<sub>Ed</sub> = {} kNm{} (span, tension at the bottom)"
+ },
+ {
+  "id": "04-108",
+  "de": "M<sub>Ed,St</sub> = {} kNm{} (Stütze, Zug oben)",
+  "en": "M<sub>Ed,sup</sub> = {} kNm{} (support, tension at the top)"
+ },
+ {
+  "id": "04-109",
+  "de": "x = {} cm (Nulllinie gestrichelt)",
+  "en": "x = {} cm (neutral axis dashed)"
+ },
+ {
+  "id": "04-110",
+  "de": "Das Kräftepaar F<sub>cd</sub>·z ist das innere Moment, es hält M<sub>Ed</sub> das Gleichgewicht.",
+  "en": "The force couple F<sub>cd</sub>·z is the internal moment; it balances M<sub>Ed</sub>."
+ },
+ {
+  "id": "04-111",
+  "de": "unten Ø{}/{} cm = {} cm²/m",
+  "en": "bottom Ø{}/{} cm = {} cm²/m"
+ },
+ {
+  "id": "04-112",
+  "de": " · oben (Stütze) Ø{}/{} cm = {} cm²/m",
+  "en": " · top (support) Ø{}/{} cm = {} cm²/m"
+ },
+ {
+  "id": "04-113",
+  "de": " ({} + {} in zwei Lagen)",
+  "en": " ({} + {} in two layers)"
+ },
+ {
+  "id": "04-114",
+  "de": "unten {} Ø {} = {} cm²{}",
+  "en": "bottom {} Ø {} = {} cm²{}"
+ },
+ {
+  "id": "04-115",
+  "de": " (Druckbewehrung)",
+  "en": " (compression reinforcement)"
+ },
+ {
+  "id": "04-116",
+  "de": " · oben {} Ø {}{}",
+  "en": " · top {} Ø {}{}"
+ },
+ {
+  "id": "04-117",
+  "de": " · Bügel Ø{}/{} cm",
+  "en": " · stirrups Ø{}/{} cm"
+ },
+ {
+  "id": "04-118",
+  "de": " · oben (Stütze) {} Ø {} = {} cm²",
+  "en": " · top (support) {} Ø {} = {} cm²"
+ },
+ {
+  "id": "04-119",
+  "de": "Folgerung",
+  "en": "Conclusion"
+ },
+ {
+  "id": "04-120",
+  "de": "Nutzhöhe und Bewehrungsgrad",
+  "en": "Effective depth and reinforcement ratio"
+ },
+ {
+  "id": "04-121",
+  "de": "Durchstanzen ohne Bewehrung",
+  "en": "Punching without reinforcement"
+ },
+ {
+  "id": "04-122",
+  "de": "Mit Durchstanzbewehrung tragfähig — siehe nächster Nachweis.",
+  "en": "Resistant with punching shear reinforcement — see the next check."
+ },
+ {
+  "id": "04-123",
+  "de": "Erforderliche Durchstanzbewehrung je Reihe (lotrechte Bügel, Reihenabstand s<sub>r</sub> = 0,75d)",
+  "en": "Required punching shear reinforcement per row (vertical stirrups, row spacing s<sub>r</sub> = 0.75d)"
+ },
+ {
+  "id": "04-124",
+  "de": "NA: 1. Reihe (0,3d … 0,5d vom Stützenrand) A<sub>sw,1</sub> = 2,5·A<sub>sw</sub> = <b>{} cm²</b>, 2. Reihe A<sub>sw,2</sub> = 1,4·A<sub>sw</sub> = <b>{} cm²</b>, weitere Reihen {} cm²",
+  "en": "NA: 1st row (0.3d … 0.5d from the column face) A<sub>sw,1</sub> = 2.5·A<sub>sw</sub> = <b>{} cm²</b>, 2nd row A<sub>sw,2</sub> = 1.4·A<sub>sw</sub> = <b>{} cm²</b>, further rows {} cm²"
+ },
+ {
+  "id": "04-125",
+  "de": "Äußerer Rundschnitt: dort muss der Beton wieder allein tragen (NA: C<sub>Rd,c</sub> = 0,15/γ<sub>c</sub>)",
+  "en": "Outer control perimeter: there the concrete must again carry the load alone (NA: C<sub>Rd,c</sub> = 0.15/γ<sub>c</sub>)"
+ },
+ {
+  "id": "04-126",
+  "de": "u<sub>out</sub> = β·V<sub>Ed</sub>/(v<sub>Rd,c,out</sub>·d) = {}·{}·10³/({}·{}) = {} mm → Abstand vom Stützenrand {} mm",
+  "en": "u<sub>out</sub> = β·V<sub>Ed</sub>/(v<sub>Rd,c,out</sub>·d) = {}·{}·10³/({}·{}) = {} mm → distance from the column face {} mm"
+ },
+ {
+  "id": "04-127",
+  "de": "letzte Bewehrungsreihe höchstens 1,5d innerhalb: {} mm vom Stützenrand → <b>{} Reihen</b> im Abstand {} mm",
+  "en": "last row of reinforcement at most 1.5d inside: {} mm from the column face → <b>{} rows</b> at a spacing of {} mm"
+ },
+ {
+  "id": "04-128",
+  "de": "Mindestbewehrung je Schenkel A<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·s<sub>r</sub>·s<sub>t</sub>/1,5 beachten; tangentialer Abstand innerhalb 2d ≤ 1,5d.",
+  "en": "Observe the minimum reinforcement per leg A<sub>sw,min</sub> = 0.08·√f<sub>ck</sub>/f<sub>yk</sub>·s<sub>r</sub>·s<sub>t</sub>/1.5; tangential spacing within 2d ≤ 1.5d."
+ },
+ {
+  "id": "04-129",
+  "de": "Keine Durchstanzbewehrung erforderlich.",
+  "en": "No punching shear reinforcement required."
+ },
+ {
+  "id": "04-130",
+  "de": "v<sub>Ed</sub> > v<sub>Rd,max</sub>: Platte dicker, Stütze größer, Stützenkopf/Pilz oder höhere Betonklasse.",
+  "en": "v<sub>Ed</sub> > v<sub>Rd,max</sub>: thicker slab, larger column, column head/drop panel or higher concrete class."
+ },
+ {
+  "id": "04-131",
+  "de": "Durchstanzbewehrung",
+  "en": "Punching shear reinforcement"
+ },
+ {
+  "id": "04-132",
+  "de": "Höchstwert der Durchstanztragfähigkeit",
+  "en": "Maximum punching shear resistance"
+ },
+ {
+  "id": "04-133",
+  "de": "Mittlere Nutzhöhe aus beiden Bewehrungsrichtungen",
+  "en": "Mean effective depth from both reinforcement directions"
+ },
+ {
+  "id": "04-134",
+  "de": "Längsbewehrungsgrad (geometrisches Mittel beider Richtungen)",
+  "en": "Longitudinal reinforcement ratio (geometric mean of both directions)"
+ },
+ {
+  "id": "04-135",
+  "de": "ohne Durchstanzbewehrung",
+  "en": "without punching shear reinforcement"
+ },
+ {
+  "id": "04-136",
+  "de": "Kritischer Rundschnitt im Abstand 2d um die Stütze (Bruchkegel unter etwa 26,6°)",
+  "en": "Basic control perimeter at a distance 2d around the column (failure cone at about 26.6°)"
+ },
+ {
+  "id": "04-137",
+  "de": ", am Rand begrenzt",
+  "en": ", limited at the edge"
+ },
+ {
+  "id": "04-138",
+  "de": "Einwirkende Schubspannung im kritischen Rundschnitt (β erfasst die ungleichmäßige Verteilung durch Momente)",
+  "en": "Acting shear stress at the basic control perimeter (β accounts for the uneven distribution due to moments)"
+ },
+ {
+  "id": "04-139",
+  "de": "Widerstand ohne Durchstanzbewehrung (NA: C<sub>Rd,c</sub> bei Innenstützen abhängig von u<sub>0</sub>/d)",
+  "en": "Resistance without punching shear reinforcement (NA: C<sub>Rd,c</sub> for interior columns depends on u<sub>0</sub>/d)"
+ },
+ {
+  "id": "04-140",
+  "de": "Obergrenze mit Durchstanzbewehrung (NA: v<sub>Rd,max</sub> = 1,4·v<sub>Rd,c</sub>)",
+  "en": "Upper limit with punching shear reinforcement (NA: v<sub>Rd,max</sub> = 1.4·v<sub>Rd,c</sub>)"
+ },
+ {
+  "id": "04-141",
+  "de": "Draufsicht",
+  "en": "Plan view"
+ },
+ {
+  "id": "04-142",
+  "de": "freier Rand",
+  "en": "free edge"
+ },
+ {
+  "id": "04-143",
+  "de": "Deckenlast",
+  "en": "slab load"
+ },
+ {
+  "id": "04-144",
+  "de": "d = {} mm · u₁ im Abstand 2d = {} mm",
+  "en": "d = {} mm · u₁ at a distance 2d = {} mm"
+ },
+ {
+  "id": "04-145",
+  "de": "Orange: kritischer Rundschnitt u₁. ",
+  "en": "Orange: basic control perimeter u₁. "
+ },
+ {
+  "id": "04-146",
+  "de": "Grau: Reihen der Durchstanzbewehrung, blau gestrichelt: äußerer Rundschnitt u<sub>out</sub>.",
+  "en": "Grey: rows of punching shear reinforcement, blue dashed: outer control perimeter u<sub>out</sub>."
+ },
+ {
+  "id": "04-147",
+  "de": "h = {} cm, d = {} mm · oben Ø{}/{} und Ø{}/{} cm · {}",
+  "en": "h = {} cm, d = {} mm · top Ø{}/{} and Ø{}/{} cm · {}"
+ },
+ {
+  "id": "04-148",
+  "de": "Öffnungen in Stützennähe, Stützenkopfverstärkungen, genaue β-Ermittlung aus Momenten, Fundamente, Bügelanordnung im Detail und Mindestbewehrung für Momente (6.4.4 und 9.4.3).",
+  "en": "Openings near the column, column head enlargements, exact determination of β from moments, foundations, detailed stirrup layout and minimum reinforcement for moments (6.4.4 and 9.4.3)."
+ },
+ {
+  "id": "04-149",
+  "de": "nicht ausführbar — Platte verstärken",
+  "en": "not feasible — strengthen the slab"
+ },
+ {
+  "id": "04-150",
+  "de": "Durchstanzen",
+  "en": "Punching shear"
+ },
+ {
+  "id": "04-151",
+  "de": "DIN EN 1992-1-1 mit NA, 6.4",
+  "en": "DIN EN 1992-1-1 with NA, 6.4"
+ },
+ {
+  "id": "04-152",
+  "de": "Platte",
+  "en": "Slab"
+ },
+ {
+  "id": "04-153",
+  "de": "h = {} cm, {}, Expositionsklasse {}, c<sub>nom</sub> = {} mm",
+  "en": "h = {} cm, {}, exposure class {}, c<sub>nom</sub> = {} mm"
+ },
+ {
+  "id": "04-154",
+  "de": "Stütze",
+  "en": "Column"
+ },
+ {
+  "id": "04-155",
+  "de": "Biegebewehrung oben",
+  "en": "Flexural reinforcement at the top"
+ },
+ {
+  "id": "04-156",
+  "de": "Einwirkung",
+  "en": "Action"
+ },
+ {
+  "id": "04-157",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Rundschnitte</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Control perimeters</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "04-158",
+  "de": "Betondeckung und Abmessungen",
+  "en": "Concrete cover and dimensions"
+ },
+ {
+  "id": "04-159",
+  "de": "Stehend betonierte Ortbetonstützen brauchen mindestens 20 cm Dicke.",
+  "en": "Cast-in-place columns concreted vertically need a thickness of at least 20 cm."
+ },
+ {
+  "id": "04-160",
+  "de": "Schlankheit",
+  "en": "Slenderness"
+ },
+ {
+  "id": "04-161",
+  "de": "Sehr schlanke Stütze (λ > 140): das Modellstützenverfahren ist hier nicht mehr sinnvoll — Querschnitt vergrößern.",
+  "en": "Very slender column (λ > 140): the model-column method is no longer meaningful here — enlarge the cross-section."
+ },
+ {
+  "id": "04-162",
+  "de": "Krümmung im Grenzzustand: beide Bewehrungslagen fließen gerade",
+  "en": "Curvature at the limit state: both reinforcement layers just yield"
+ },
+ {
+  "id": "04-163",
+  "de": "K<sub>r</sub> = (n<sub>u</sub> − n)/(n<sub>u</sub> − n<sub>bal</sub>) ≤ 1 mit n<sub>u</sub> = 1 + ω = {}, n<sub>bal</sub> = 0,4 → K<sub>r</sub> = {}",
+  "en": "K<sub>r</sub> = (n<sub>u</sub> − n)/(n<sub>u</sub> − n<sub>bal</sub>) ≤ 1 with n<sub>u</sub> = 1 + ω = {}, n<sub>bal</sub> = 0.4 → K<sub>r</sub> = {}"
+ },
+ {
+  "id": "04-164",
+  "de": "K<sub>φ</sub> = 1 + β·φ<sub>ef</sub> ≥ 1 mit β = 0,35 + f<sub>ck</sub>/200 − λ/150 = {} → K<sub>φ</sub> = {}",
+  "en": "K<sub>φ</sub> = 1 + β·φ<sub>ef</sub> ≥ 1 with β = 0.35 + f<sub>ck</sub>/200 − λ/150 = {} → K<sub>φ</sub> = {}"
+ },
+ {
+  "id": "04-165",
+  "de": "Zusatzausmitte aus der Verformung (II. Ordnung), sinusförmige Biegelinie",
+  "en": "Additional eccentricity from deformation (second order), sinusoidal deflected shape"
+ },
+ {
+  "id": "04-166",
+  "de": "Gesamtausmitte und Bemessungsmoment in Stützenmitte",
+  "en": "Total eccentricity and design moment at mid-height"
+ },
+ {
+  "id": "04-167",
+  "de": "Gedrungene Stütze: maßgebend ist das Stützenende",
+  "en": "Stocky column: the column end governs"
+ },
+ {
+  "id": "04-168",
+  "de": "Mindestmoment aus Mindestausmitte e<sub>0</sub> ≥ max(h/30; 20 mm)",
+  "en": "Minimum moment from minimum eccentricity e<sub>0</sub> ≥ max(h/30; 20 mm)"
+ },
+ {
+  "id": "04-169",
+  "de": "Bemessungsmoment = größter Wert",
+  "en": "Design moment = largest value"
+ },
+ {
+  "id": "04-170",
+  "de": "<b>M<sub>Ed</sub> = {} kNm</b> mit N<sub>Ed</sub> = {} kN",
+  "en": "<b>M<sub>Ed</sub> = {} kNm</b> with N<sub>Ed</sub> = {} kN"
+ },
+ {
+  "id": "04-171",
+  "de": "Bemessungsmoment (Modellstützenverfahren)",
+  "en": "Design moment (model-column method)"
+ },
+ {
+  "id": "04-172",
+  "de": "Dehnungsebene suchen, bei der die inneren Kräfte gerade N<sub>Ed</sub> ergeben",
+  "en": "Find the strain plane for which the internal forces just give N<sub>Ed</sub>"
+ },
+ {
+  "id": "04-173",
+  "de": "außerhalb (Querschnitt ganz gedrückt)",
+  "en": "outside (whole section in compression)"
+ },
+ {
+  "id": "04-174",
+  "de": "Nulllinie x = {} · ε<sub>c,Rand</sub> = −{} ‰ · ε<sub>s2</sub> = {} ‰ · ε<sub>s1</sub> = {} ‰",
+  "en": "Neutral axis x = {} · ε<sub>c,edge</sub> = −{} ‰ · ε<sub>s2</sub> = {} ‰ · ε<sub>s1</sub> = {} ‰"
+ },
+ {
+  "id": "04-175",
+  "de": "Aufnehmbares Moment bei dieser Normalkraft (um die Schwerachse)",
+  "en": "Moment resistance at this axial force (about the centroidal axis)"
+ },
+ {
+  "id": "04-176",
+  "de": "Erforderliche Gesamtbewehrung (mit K<sub>r</sub> passend zu A<sub>s</sub> iteriert)",
+  "en": "Required total reinforcement (iterated with K<sub>r</sub> matching A<sub>s</sub>)"
+ },
+ {
+  "id": "04-177",
+  "de": "A<sub>s,tot,erf</sub> = <b>{} cm²</b> ≤ A<sub>s,tot,vorh</sub> = {} cm²",
+  "en": "A<sub>s,tot,req</sub> = <b>{} cm²</b> ≤ A<sub>s,tot,prov</sub> = {} cm²"
+ },
+ {
+  "id": "04-178",
+  "de": "Auch mit 20 % Bewehrung nicht möglich — Querschnitt vergrößern.",
+  "en": "Not possible even with 20 % reinforcement — enlarge the cross-section."
+ },
+ {
+  "id": "04-179",
+  "de": "Interaktionsdiagramm: alle (M; N)-Paare, die der Querschnitt tragen kann — der Bemessungspunkt muss innen liegen",
+  "en": "Interaction diagram: all (M; N) pairs the cross-section can carry — the design point must lie inside"
+ },
+ {
+  "id": "04-180",
+  "de": "Druck und Biegung (Querschnitt)",
+  "en": "Compression and bending (cross-section)"
+ },
+ {
+  "id": "04-181",
+  "de": "Mehr Längsbewehrung, dickere Stütze oder höhere Betonklasse wählen.",
+  "en": "Choose more longitudinal reinforcement, a thicker column or a higher concrete class."
+ },
+ {
+  "id": "04-182",
+  "de": "Bewehrungsregeln",
+  "en": "Detailing rules"
+ },
+ {
+  "id": "04-183",
+  "de": "Bügelabstand unmittelbar über und unter Balken oder Platten sowie im Stoßbereich der Längsstäbe auf 0,6·s<sub>cl,t,max</sub> verringern.",
+  "en": "Reduce the stirrup spacing to 0.6·s<sub>cl,t,max</sub> directly above and below beams or slabs and in the lap zone of the longitudinal bars."
+ },
+ {
+  "id": "04-184",
+  "de": " Seitenflächen > 30 cm: zusätzliche konstruktive Längsstäbe (Abstand ≤ 300 mm) anordnen.",
+  "en": " Side faces > 30 cm: arrange additional longitudinal bars for detailing (spacing ≤ 300 mm)."
+ },
+ {
+  "id": "04-185",
+  "de": "Nennmaß der Betondeckung für Bügel und Längsstab",
+  "en": "Nominal concrete cover for stirrup and longitudinal bar"
+ },
+ {
+  "id": "04-186",
+  "de": "Randabstand der Bewehrung und statische Nutzhöhe",
+  "en": "Edge distance of the reinforcement and effective depth"
+ },
+ {
+  "id": "04-187",
+  "de": "Mindestmaß einer stehend betonierten Ortbetonstütze (NA 9.5.1)",
+  "en": "Minimum dimension of a cast-in-place column concreted vertically (NA 9.5.1)"
+ },
+ {
+  "id": "04-188",
+  "de": "Mindestbetonfestigkeit für die Expositionsklasse",
+  "en": "Minimum concrete strength for the exposure class"
+ },
+ {
+  "id": "04-189",
+  "de": "Knicklänge aus der Lagerung",
+  "en": "Effective length from the support conditions"
+ },
+ {
+  "id": "04-190",
+  "de": "Schlankheit: Knicklänge durch Trägheitsradius",
+  "en": "Slenderness: effective length divided by radius of gyration"
+ },
+ {
+  "id": "04-191",
+  "de": "Grenzschlankheit nach NA: hängt von der bezogenen Normalkraft ab",
+  "en": "Limiting slenderness to the NA: depends on the relative axial force"
+ },
+ {
+  "id": "04-192",
+  "de": "Ersatzmoment I. Ordnung: ungleiche Endmomente werden auf ein gleichwertiges konstantes Moment umgerechnet",
+  "en": "Equivalent first-order moment: unequal end moments are converted into an equivalent constant moment"
+ },
+ {
+  "id": "04-193",
+  "de": "Imperfektion: die Stütze ist nie ganz gerade — Schiefstellung θ<sub>i</sub>",
+  "en": "Imperfection: the column is never perfectly straight — inclination θ<sub>i</sub>"
+ },
+ {
+  "id": "04-194",
+  "de": "θ<sub>i</sub> = α<sub>h</sub>/200 mit α<sub>h</sub> = 2/√l ≤ 1 = {} → θ<sub>i</sub> = 1/{}",
+  "en": "θ<sub>i</sub> = α<sub>h</sub>/200 with α<sub>h</sub> = 2/√l ≤ 1 = {} → θ<sub>i</sub> = 1/{}"
+ },
+ {
+  "id": "04-195",
+  "de": "Gewählte Bewehrung (symmetrisch, je Seite gleich)",
+  "en": "Chosen reinforcement (symmetrical, equal on each side)"
+ },
+ {
+  "id": "04-196",
+  "de": "mechanischer Bewehrungsgrad ω = A<sub>s,tot</sub>·f<sub>yd</sub>/(A<sub>c</sub>·f<sub>cd</sub>) = {}",
+  "en": "mechanical reinforcement ratio ω = A<sub>s,tot</sub>·f<sub>yd</sub>/(A<sub>c</sub>·f<sub>cd</sub>) = {}"
+ },
+ {
+  "id": "04-197",
+  "de": "Größte Druckkraft ohne Moment (Beton und Stahl bei 2 ‰ gestaucht)",
+  "en": "Maximum compression force without moment (concrete and steel compressed to 2 ‰)"
+ },
+ {
+  "id": "04-198",
+  "de": "Längsstäbe: Mindestdurchmesser und Mindest-/Höchstbewehrung (NA 9.5.2)",
+  "en": "Longitudinal bars: minimum diameter and minimum/maximum reinforcement (NA 9.5.2)"
+ },
+ {
+  "id": "04-199",
+  "de": "A<sub>s,max</sub> = 0,09·A<sub>c</sub> = {} cm² ≥ {} cm² (auch im Stoßbereich)",
+  "en": "A<sub>s,max</sub> = 0.09·A<sub>c</sub> = {} cm² ≥ {} cm² (also in the lap zone)"
+ },
+ {
+  "id": "04-200",
+  "de": "Abstände der Längsstäbe je Seite",
+  "en": "Spacing of the longitudinal bars per side"
+ },
+ {
+  "id": "04-201",
+  "de": "Bügel: halten die Längsstäbe gegen Ausknicken (NA 9.5.3)",
+  "en": "Stirrups: hold the longitudinal bars against buckling (NA 9.5.3)"
+ },
+ {
+  "id": "04-202",
+  "de": "N [kN] (Druck +)",
+  "en": "N [kN] (compression +)"
+ },
+ {
+  "id": "04-203",
+  "de": "Ansicht (Ersatzstab)",
+  "en": "Elevation (model column)"
+ },
+ {
+  "id": "04-204",
+  "de": "N<sub>Ed</sub> = {} kN (Druck, ⊗)",
+  "en": "N<sub>Ed</sub> = {} kN (compression, ⊗)"
+ },
+ {
+  "id": "04-205",
+  "de": " und e<sub>2</sub>",
+  "en": " and e<sub>2</sub>"
+ },
+ {
+  "id": "04-206",
+  "de": "M<sub>Ed</sub> = {} kNm (mit e<sub>i</sub>{})",
+  "en": "M<sub>Ed</sub> = {} kNm (with e<sub>i</sub>{})"
+ },
+ {
+  "id": "04-207",
+  "de": "Gestrichelt: Knickfigur (stark überhöht). Doppelpfeil = Momentenvektor.",
+  "en": "Dashed: buckled shape (strongly exaggerated). Double arrow = moment vector."
+ },
+ {
+  "id": "04-208",
+  "de": "konstantes Moment",
+  "en": "constant moment"
+ },
+ {
+  "id": "04-209",
+  "de": "Biegung um z: Gurte nach Tab. 5.2 wie oben (gleichmäßiger Druck, sichere Seite) → W<sub>{},z</sub> = {} cm³",
+  "en": "Bending about z: flanges to Tab. 5.2 as above (uniform compression, safe side) → W<sub>{},z</sub> = {} cm³"
+ },
+ {
+  "id": "04-210",
+  "de": "Querschnittsklassifizierung",
+  "en": "Cross-section classification"
+ },
+ {
+  "id": "04-211",
+  "de": "Klasse 4: Teile beulen vor Erreichen der Streckgrenze. size rechnet mit wirksamen Querschnittswerten (nächster Nachweis).",
+  "en": "Class 4: parts buckle before reaching the yield strength. size uses effective section properties (next check)."
+ },
+ {
+  "id": "04-212",
+  "de": "Wirksamer Querschnitt (Klasse 4)",
+  "en": "Effective cross-section (class 4)"
+ },
+ {
+  "id": "04-213",
+  "de": "Querkraft: ist sie so groß, dass sie den Steg für die Biegung schwächt?",
+  "en": "Shear: is it large enough to weaken the web for bending?"
+ },
+ {
+  "id": "04-214",
+  "de": " > 0,5 → Momentenwiderstand abmindern",
+  "en": " > 0.5 → reduce the moment resistance"
+ },
+ {
+  "id": "04-215",
+  "de": " ≤ 0,5 → keine Abminderung",
+  "en": " ≤ 0.5 → no reduction"
+ },
+ {
+  "id": "04-216",
+  "de": "Querkraft: V<sub>Ed</sub>/V<sub>pl,Rd</sub> = {}{}",
+  "en": "Shear: V<sub>Ed</sub>/V<sub>pl,Rd</sub> = {}{}"
+ },
+ {
+  "id": "04-217",
+  "de": "Normalkraft: abmindern des Biegewiderstands, wenn N groß ist",
+  "en": "Axial force: reduce the bending resistance if N is large"
+ },
+ {
+  "id": "04-218",
+  "de": "N<sub>Ed</sub> ≤ 0,25·N<sub>pl,Rd</sub> und ≤ 0,5·h<sub>w</sub>·t<sub>w</sub>·f<sub>y</sub>: keine Abminderung des Moments um y",
+  "en": "N<sub>Ed</sub> ≤ 0.25·N<sub>pl,Rd</sub> and ≤ 0.5·h<sub>w</sub>·t<sub>w</sub>·f<sub>y</sub>: no reduction of the moment about y"
+ },
+ {
+  "id": "04-219",
+  "de": "Zweiachsige Biegung: beide Ausnutzungen zusammen (Interaktion 6.41)",
+  "en": "Biaxial bending: both utilisations together (interaction 6.41)"
+ },
+ {
+  "id": "04-220",
+  "de": "Nachweis Biegung",
+  "en": "Bending check"
+ },
+ {
+  "id": "04-221",
+  "de": "Biegung: M<sub>y,Ed</sub> = {} kNm ≤ M<sub>Rd</sub> = <b>{} kNm</b>",
+  "en": "Bending: M<sub>y,Ed</sub> = {} kNm ≤ M<sub>Rd</sub> = <b>{} kNm</b>"
+ },
+ {
+  "id": "04-222",
+  "de": "Elastischer Nachweis: Randspannung aus allen Schnittgrößen",
+  "en": "Elastic check: edge stress from all internal forces"
+ }
+]

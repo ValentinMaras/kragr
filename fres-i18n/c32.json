@@ -1,0 +1,782 @@
+[
+ {
+  "id": "32-0",
+  "de": "h<sub>v,R</sub> = λ · L/d · v²/(2g)&nbsp;&nbsp;&nbsp; Re = v · d / ν&nbsp;&nbsp; (ν ≈ 1,31·10⁻⁶ m²/s bei 10 °C, siehe Stoffwerte)<br> laminar (Re &lt; 2320):&nbsp; λ = 64 / Re<br> turbulent (Colebrook-White):&nbsp; 1/√λ = −2 · lg( 2,51/(Re·√λ) + k/(3,71·d) )<br> örtliche Verluste:&nbsp; h<sub>v,ö</sub> = Σζ · v²/(2g)",
+  "en": "h<sub>v,R</sub> = λ · L/d · v²/(2g)&nbsp;&nbsp;&nbsp; Re = v · d / ν&nbsp;&nbsp; (ν ≈ 1.31·10⁻⁶ m²/s at 10 °C, see properties)<br> laminar (Re &lt; 2320):&nbsp; λ = 64 / Re<br> turbulent (Colebrook-White):&nbsp; 1/√λ = −2 · lg( 2.51/(Re·√λ) + k/(3.71·d) )<br> local losses:&nbsp; h<sub>v,ö</sub> = Σζ · v²/(2g)"
+ },
+ {
+  "id": "32-1",
+  "de": "hydraulische Leistung P<sub>h</sub> = ρ · g · Q · H · Wellenleistung P = P<sub>h</sub> / η · Motorleistung mit 10 … 20 % Reserve",
+  "en": "hydraulic power P<sub>h</sub> = ρ · g · Q · H · shaft power P = P<sub>h</sub> / η · motor power with 10 … 20 % reserve"
+ },
+ {
+  "id": "32-2",
+  "de": "kaum Energieumwandlung",
+  "en": "hardly any energy dissipation"
+ },
+ {
+  "id": "32-3",
+  "de": "kurzes Rohrstück",
+  "en": "short pipe section"
+ },
+ {
+  "id": "32-4",
+  "de": "mittlere Tiefe h<sub>m</sub> [m] (Gerinne)",
+  "en": "mean depth h<sub>m</sub> [m] (open channel)"
+ },
+ {
+  "id": "32-5",
+  "de": "natürlicher Bach, steinig",
+  "en": "natural stream, stony"
+ },
+ {
+  "id": "32-6",
+  "de": "pendelnder Sprung",
+  "en": "oscillating jump"
+ },
+ {
+  "id": "32-7",
+  "de": "r<sub>D,T</sub> [l/(s·ha)] aus KOSTRA-DWD für Dauer D und Jährlichkeit T (z. B. 5-min-Regen, T = 2 a für Dachentwässerung nach DIN 1986-100)",
+  "en": "r<sub>D,T</sub> [l/(s·ha)] from KOSTRA-DWD for duration D and return period T (e.g. 5-min rainfall, T = 2 a for roof drainage to DIN 1986-100)"
+ },
+ {
+  "id": "32-8",
+  "de": "relative Rauheit k/d = 0,000500 · Colebrook-White iterativ: 1/√λ = −2 · lg(2,51/(Re · √λ) + k/(3,71 · d))",
+  "en": "relative roughness k/d = 0.000500 · Colebrook-White iterative: 1/√λ = −2 · lg(2.51/(Re · √λ) + k/(3.71 · d))"
+ },
+ {
+  "id": "32-9",
+  "de": "scharfkantig (Blende)",
+  "en": "sharp-edged (orifice)"
+ },
+ {
+  "id": "32-10",
+  "de": "schießend (Wildbach, Schussrinne)",
+  "en": "supercritical (torrent, chute)"
+ },
+ {
+  "id": "32-11",
+  "de": "schießend, Fr₁ &gt; 1",
+  "en": "supercritical, Fr₁ &gt; 1"
+ },
+ {
+  "id": "32-12",
+  "de": "schwacher Sprung",
+  "en": "weak jump"
+ },
+ {
+  "id": "32-13",
+  "de": "sehr hohe Belastung der Sohle",
+  "en": "very high load on the bed"
+ },
+ {
+  "id": "32-14",
+  "de": "spezifischer Abfluss q = Q / b = 0,783 m²/s · Grenztiefe auf der Krone h<sub>gr</sub> = ∛(q²/g) = 0,397 m",
+  "en": "specific discharge q = Q / b = 0.783 m²/s · critical depth on the crest h<sub>gr</sub> = ∛(q²/g) = 0.397 m"
+ },
+ {
+  "id": "32-15",
+  "de": "spezifischer Abfluss q [m²/s]",
+  "en": "specific discharge q [m²/s]"
+ },
+ {
+  "id": "32-16",
+  "de": "stabiler Sprung",
+  "en": "steady jump"
+ },
+ {
+  "id": "32-17",
+  "de": "starker Sprung",
+  "en": "strong jump"
+ },
+ {
+  "id": "32-18",
+  "de": "strömend &lt; 1, schießend &gt; 1 · h<sub>m</sub> = A / B",
+  "en": "subcritical &lt; 1, supercritical &gt; 1 · h<sub>m</sub> = A / B"
+ },
+ {
+  "id": "32-19",
+  "de": "strömend (Flachlandfluss)",
+  "en": "subcritical (lowland river)"
+ },
+ {
+  "id": "32-20",
+  "de": "strömend, Fr₂ &lt; 1",
+  "en": "subcritical, Fr₂ &lt; 1"
+ },
+ {
+  "id": "32-21",
+  "de": "unruhig, Wellen ins Unterwasser — vermeiden",
+  "en": "rough, waves travel downstream — avoid"
+ },
+ {
+  "id": "32-22",
+  "de": "v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; R = A / U<br> Trapez:&nbsp; A = (b + m·h)·h&nbsp;&nbsp;&nbsp; U = b + 2·h·√(1 + m²)&nbsp;&nbsp;&nbsp; Rechteck: m = 0",
+  "en": "v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; R = A / U<br> Trapezoid:&nbsp; A = (b + m·h)·h&nbsp;&nbsp;&nbsp; U = b + 2·h·√(1 + m²)&nbsp;&nbsp;&nbsp; Rectangle: m = 0"
+ },
+ {
+  "id": "32-23",
+  "de": "vollkommen: das Unterwasser liegt so tief, dass es den Überfall nicht beeinflusst · b — Wehrbreite",
+  "en": "free: the tailwater is low enough not to affect the overflow · b — weir width"
+ },
+ {
+  "id": "32-24",
+  "de": "vorhandene Tiefe h [m] (optional)",
+  "en": "actual depth h [m] (optional)"
+ },
+ {
+  "id": "32-25",
+  "de": "wassergebundene Decke, Kies",
+  "en": "water-bound surface, gravel"
+ },
+ {
+  "id": "32-26",
+  "de": "wichtig bei kleinen Modellen und Tropfen",
+  "en": "important for small models and droplets"
+ },
+ {
+  "id": "32-27",
+  "de": "y wird in der Ebene der Fläche ab dem Wasserspiegel gemessen. Der Druckmittelpunkt D liegt immer tiefer als der Schwerpunkt S.",
+  "en": "y is measured in the plane of the surface from the water level. The centre of pressure D always lies lower than the centroid S."
+ },
+ {
+  "id": "32-28",
+  "de": "z — Lagehöhe · p/(ρg) — Druckhöhe · v²/(2g) — Geschwindigkeitshöhe, alle in m",
+  "en": "z — elevation head · p/(ρg) — pressure head · v²/(2g) — velocity head, all in m"
+ },
+ {
+  "id": "32-29",
+  "de": "Öffnung",
+  "en": "Opening"
+ },
+ {
+  "id": "32-30",
+  "de": "Öffnung d [mm]",
+  "en": "Opening d [mm]"
+ },
+ {
+  "id": "32-31",
+  "de": "Überfall berechnen",
+  "en": "Calculate overflow"
+ },
+ {
+  "id": "32-32",
+  "de": "Überfallhöhe h<sub>ü</sub> [m]",
+  "en": "Overflow head h<sub>ü</sub> [m]"
+ },
+ {
+  "id": "32-33",
+  "de": "Überfallhöhe h<sub>ü</sub> über der Wehrkrone, Wehrhöhe w über der Sohle.",
+  "en": "Overflow head h<sub>ü</sub> above the weir crest, weir height w above the bed."
+ },
+ {
+  "id": "32-34",
+  "de": "Übergangsbereich (Re · k/d · √(λ/8) = 5,9)",
+  "en": "Transition zone (Re · k/d · √(λ/8) = 5.9)"
+ },
+ {
+  "id": "32-35",
+  "de": "Δp = ρ · a · Δv = 1000 · 1236 · 1,50 / 10⁵ = 18,54 bar (189,0 m Wassersäule)",
+  "en": "Δp = ρ · a · Δv = 1000 · 1236 · 1.50 / 10⁵ = 18.54 bar (189.0 m water column)"
+ },
+ {
+  "id": "32-36",
+  "de": "θ = 2 · arccos(1 − 2·h/D)&nbsp;&nbsp;&nbsp; A = D²/8 · (θ − sin θ)&nbsp;&nbsp;&nbsp; U = D/2 · θ&nbsp;&nbsp;&nbsp; R = A / U<br> v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; (θ im Bogenmaß)",
+  "en": "θ = 2 · arccos(1 − 2·h/D)&nbsp;&nbsp;&nbsp; A = D²/8 · (θ − sin θ)&nbsp;&nbsp;&nbsp; U = D/2 · θ&nbsp;&nbsp;&nbsp; R = A / U<br> v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; (θ in radians)"
+ },
+ {
+  "id": "32-37",
+  "de": "λ = 0,01849 (explizit nach Swamee-Jain zum Vergleich: 0,01862)",
+  "en": "λ = 0.01849 (explicit after Swamee-Jain for comparison: 0.01862)"
+ },
+ {
+  "id": "32-38",
+  "de": "μ = α · φ — Ausflussbeiwert aus Strahleinschnürung α und Geschwindigkeitsbeiwert φ",
+  "en": "μ = α · φ — discharge coefficient from jet contraction α and velocity coefficient φ"
+ },
+ {
+  "id": "32-39",
+  "de": "ν kinematische, μ = ρ · ν dynamische Viskosität · p<sub>D</sub> Dampfdruck (Kavitation) · σ Oberflächenspannung. Kompressionsmodul K ≈ 2,1 · 10⁹ N/m² · Wichte in der Praxis γ<sub>w</sub> = 10 kN/m³ (genauer ρ · g = 9,81 kN/m³).",
+  "en": "ν kinematic, μ = ρ · ν dynamic viscosity · p<sub>D</sub> vapour pressure (cavitation) · σ surface tension. Bulk modulus K ≈ 2.1 · 10⁹ N/m² · unit weight in practice γ<sub>w</sub> = 10 kN/m³ (more precisely ρ · g = 9.81 kN/m³)."
+ },
+ {
+  "id": "32-40",
+  "de": "→ strömend",
+  "en": "→ subcritical"
+ },
+ {
+  "id": "32-41",
+  "de": "Rohr: laminar < 2320, turbulent > 10⁴ · Gerinne mit L = 4R",
+  "en": "Pipe: laminar < 2320, turbulent > 10⁴ · open channel with L = 4R"
+ },
+ {
+  "id": "32-42",
+  "de": "strömend < 1, schießend > 1 · h<sub>m</sub> = A / B",
+  "en": "subcritical < 1, supercritical > 1 · h<sub>m</sub> = A / B"
+ },
+ {
+  "id": "32-43",
+  "de": "<div class=\"calc-field\"><label>Strömung</label><select id=\"kz-art\" onchange=\"updateKZ()\"><option value=\"rohr\" selected>Rohr (L = d)</option><option value=\"gerinne\">Gerinne (L = 4R)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Flow</label><select id=\"kz-art\" onchange=\"updateKZ()\"><option value=\"rohr\" selected>Pipe (L = d)</option><option value=\"gerinne\">Open channel (L = 4R)</option></select></div>"
+ },
+ {
+  "id": "32-44",
+  "de": "<div class=\"calc-field\"><label>Geschwindigkeit v [m/s]</label><input type=\"number\" id=\"kz-v\" value=\"1.2\" step=\"any\" oninput=\"updateKZ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Velocity v [m/s]</label><input type=\"number\" id=\"kz-v\" value=\"1.2\" step=\"any\" oninput=\"updateKZ()\"></div>"
+ },
+ {
+  "id": "32-45",
+  "de": "<div class=\"calc-field\"><label>Länge L [m] (d bzw. 4R)</label><input type=\"number\" id=\"kz-L\" value=\"0.2\" step=\"any\" oninput=\"updateKZ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Length L [m] (d or 4R)</label><input type=\"number\" id=\"kz-L\" value=\"0.2\" step=\"any\" oninput=\"updateKZ()\"></div>"
+ },
+ {
+  "id": "32-46",
+  "de": "<div class=\"calc-field\"><label>Wassertemperatur T [°C]</label><input type=\"number\" id=\"kz-T\" value=\"10\" step=\"any\" oninput=\"updateKZ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Water temperature T [°C]</label><input type=\"number\" id=\"kz-T\" value=\"10\" step=\"any\" oninput=\"updateKZ()\"></div>"
+ },
+ {
+  "id": "32-47",
+  "de": "<div class=\"calc-field\"><label>mittlere Tiefe h<sub>m</sub> [m] (Gerinne)</label><input type=\"number\" id=\"kz-h\" value=\"1\" step=\"any\" oninput=\"updateKZ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>mean depth h<sub>m</sub> [m] (open channel)</label><input type=\"number\" id=\"kz-h\" value=\"1\" step=\"any\" oninput=\"updateKZ()\"></div>"
+ },
+ {
+  "id": "32-48",
+  "de": "§Stoffwerte bei {} °C (interpoliert)",
+  "en": "§Properties at {} °C (interpolated)"
+ },
+ {
+  "id": "32-49",
+  "de": "§Reynolds-Zahl (Trägheit / Zähigkeit)",
+  "en": "§Reynolds number (inertia / viscosity)"
+ },
+ {
+  "id": "32-50",
+  "de": "!Gerinne (L = 4R bzw. R mit Re<sub>R</sub> < 580 laminar): Re<sub>4R</sub> = {} → {}",
+  "en": "!Open channel (L = 4R, or R with Re<sub>R</sub> < 580 laminar): Re<sub>4R</sub> = {} → {}"
+ },
+ {
+  "id": "32-51",
+  "de": "§Froude-Zahl (Trägheit / Schwere)",
+  "en": "§Froude number (inertia / gravity)"
+ },
+ {
+  "id": "32-52",
+  "de": "strömend (Fr < 1)",
+  "en": "subcritical (Fr < 1)"
+ },
+ {
+  "id": "32-53",
+  "de": "<div class=\"calc-field\"><label>Durchfluss Q [l/s]</label><input type=\"number\" id=\"wbr-Q\" value=\"50\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Flow rate Q [l/s]</label><input type=\"number\" id=\"wbr-Q\" value=\"50\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+ },
+ {
+  "id": "32-54",
+  "de": "<div class=\"calc-field\"><label>Innendurchmesser d [mm]</label><input type=\"number\" id=\"wbr-d\" value=\"200\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Internal diameter d [mm]</label><input type=\"number\" id=\"wbr-d\" value=\"200\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+ },
+ {
+  "id": "32-55",
+  "de": "<div class=\"calc-field\"><label>Länge L [m]</label><input type=\"number\" id=\"wbr-L\" value=\"500\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Length L [m]</label><input type=\"number\" id=\"wbr-L\" value=\"500\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+ },
+ {
+  "id": "32-56",
+  "de": "<div class=\"calc-field\"><label>Rauheit k [mm]</label><input type=\"number\" id=\"wbr-k\" value=\"0.1\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Roughness k [mm]</label><input type=\"number\" id=\"wbr-k\" value=\"0.1\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+ },
+ {
+  "id": "32-57",
+  "de": "<div class=\"calc-field\"><label>Wassertemperatur T [°C]</label><input type=\"number\" id=\"wbr-T\" value=\"10\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Water temperature T [°C]</label><input type=\"number\" id=\"wbr-T\" value=\"10\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+ },
+ {
+  "id": "32-58",
+  "de": "<div class=\"calc-field\"><label>Summe Verlustbeiwerte Σζ</label><input type=\"number\" id=\"wbr-z\" value=\"1.5\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Sum of loss coefficients Σζ</label><input type=\"number\" id=\"wbr-z\" value=\"1.5\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+ },
+ {
+  "id": "32-59",
+  "de": "§Fließgeschwindigkeit",
+  "en": "§Flow velocity"
+ },
+ {
+  "id": "32-60",
+  "de": "!relative Rauheit k/d = {} · Colebrook-White iterativ: 1/√λ = −2 · lg(2,51/(Re · √λ) + k/(3,71 · d))",
+  "en": "!relative roughness k/d = {} · Colebrook-White iterative: 1/√λ = −2 · lg(2.51/(Re · √λ) + k/(3.71 · d))"
+ },
+ {
+  "id": "32-61",
+  "de": "λ = {} (explizit nach Swamee-Jain zum Vergleich: {}{})",
+  "en": "λ = {} (explicit after Swamee-Jain for comparison: {}{})"
+ },
+ {
+  "id": "32-62",
+  "de": "Übergangsbereich",
+  "en": "Transition zone"
+ },
+ {
+  "id": "32-63",
+  "de": "§Verlusthöhen",
+  "en": "§Head losses"
+ },
+ {
+  "id": "32-64",
+  "de": "Rohrleitung DN {}, Q = {} l/s",
+  "en": "Pipeline DN {}, Q = {} l/s"
+ },
+ {
+  "id": "32-65",
+  "de": "!Entleerung eines Behälters mit konstanter Grundfläche A<sub>B</sub> von h<sub>1</sub> auf h<sub>2</sub>: aus A<sub>B</sub> · dh = −Q · dt folgt t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)",
+  "en": "!Emptying a tank with constant base area A<sub>B</sub> from h<sub>1</sub> to h<sub>2</sub>: from A<sub>B</sub> · dh = −Q · dt it follows that t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)"
+ },
+ {
+  "id": "32-66",
+  "de": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Entleerung eines Behälters mit konstanter Grundfläche A<sub>B</sub> von h<sub>1</sub> auf h<sub>2</sub>: aus A<sub>B</sub> · dh = −Q · dt folgt t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)</div></div></div>",
+  "en": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Emptying a tank with constant base area A<sub>B</sub> from h<sub>1</sub> to h<sub>2</sub>: from A<sub>B</sub> · dh = −Q · dt it follows that t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)</div></div></div>"
+ },
+ {
+  "id": "32-67",
+  "de": "<div class=\"calc-field\"><label>Öffnung d [mm]</label><input type=\"number\" id=\"af-d\" value=\"100\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Opening d [mm]</label><input type=\"number\" id=\"af-d\" value=\"100\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+ },
+ {
+  "id": "32-68",
+  "de": "<div class=\"calc-field\"><label>Ausflussbeiwert μ</label><input type=\"number\" id=\"af-mu\" value=\"0.62\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Discharge coefficient μ</label><input type=\"number\" id=\"af-mu\" value=\"0.62\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+ },
+ {
+  "id": "32-69",
+  "de": "<div class=\"calc-field\"><label>Wasserstand h<sub>1</sub> [m]</label><input type=\"number\" id=\"af-h1\" value=\"2\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Water level h<sub>1</sub> [m]</label><input type=\"number\" id=\"af-h1\" value=\"2\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+ },
+ {
+  "id": "32-70",
+  "de": "<div class=\"calc-field\"><label>Endwasserstand h<sub>2</sub> [m]</label><input type=\"number\" id=\"af-h2\" value=\"0\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Final water level h<sub>2</sub> [m]</label><input type=\"number\" id=\"af-h2\" value=\"0\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+ },
+ {
+  "id": "32-71",
+  "de": "<div class=\"calc-field\"><label>Behältergrundfläche A<sub>B</sub> [m²] (0 = ohne)</label><input type=\"number\" id=\"af-A\" value=\"10\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Tank base area A<sub>B</sub> [m²] (0 = none)</label><input type=\"number\" id=\"af-A\" value=\"10\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+ },
+ {
+  "id": "32-72",
+  "de": "§Ausfluss bei h<sub>1</sub> = {} m",
+  "en": "§Outflow at h<sub>1</sub> = {} m"
+ },
+ {
+  "id": "32-73",
+  "de": "§Entleerung eines prismatischen Behälters (Grundfläche A<sub>B</sub> = {} m²)",
+  "en": "§Emptying a prismatic tank (base area A<sub>B</sub> = {} m²)"
+ },
+ {
+  "id": "32-74",
+  "de": "!Anlagenkennlinie H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (Verluste wachsen mit Q²) · Betriebspunkt = Schnitt mit der Pumpenkennlinie",
+  "en": "!System curve H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (losses grow with Q²) · operating point = intersection with the pump curve"
+ },
+ {
+  "id": "32-75",
+  "de": "!hydraulische Leistung P<sub>h</sub> = ρ · g · Q · H · Wellenleistung P = P<sub>h</sub> / η · Motorleistung mit 10 … 20 % Reserve",
+  "en": "!hydraulic power P<sub>h</sub> = ρ · g · Q · H · shaft power P = P<sub>h</sub> / η · motor power with 10 … 20 % reserve"
+ },
+ {
+  "id": "32-76",
+  "de": "!Kavitation: NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0,5 m (h<sub>s,geo</sub> > 0 bei Saugbetrieb)",
+  "en": "!Cavitation: NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0.5 m (h<sub>s,geo</sub> > 0 for suction lift)"
+ },
+ {
+  "id": "32-77",
+  "de": "!Affinitätsgesetze bei Drehzahländerung: Q ~ n · H ~ n² · P ~ n³",
+  "en": "!Affinity laws for a change in speed: Q ~ n · H ~ n² · P ~ n³"
+ },
+ {
+  "id": "32-78",
+  "de": "<div class=\"calc-field\"><label>Förderstrom Q [l/s]</label><input type=\"number\" id=\"pu-Q\" value=\"30\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Pump flow rate Q [l/s]</label><input type=\"number\" id=\"pu-Q\" value=\"30\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-79",
+  "de": "<div class=\"calc-field\"><label>geodätische Förderhöhe H<sub>geo</sub> [m]</label><input type=\"number\" id=\"pu-Hg\" value=\"25\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>static head H<sub>geo</sub> [m]</label><input type=\"number\" id=\"pu-Hg\" value=\"25\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-80",
+  "de": "<div class=\"calc-field\"><label>Verlusthöhe h<sub>v</sub> [m]</label><input type=\"number\" id=\"pu-hv\" value=\"4.5\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Head loss h<sub>v</sub> [m]</label><input type=\"number\" id=\"pu-hv\" value=\"4.5\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-81",
+  "de": "<div class=\"calc-field\"><label>Wirkungsgrad η [%]</label><input type=\"number\" id=\"pu-eta\" value=\"72\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Efficiency η [%]</label><input type=\"number\" id=\"pu-eta\" value=\"72\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-82",
+  "de": "<div class=\"calc-field\"><label>Luftdruck p<sub>a</sub> [kPa]</label><input type=\"number\" id=\"pu-pa\" value=\"101.3\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Atmospheric pressure p<sub>a</sub> [kPa]</label><input type=\"number\" id=\"pu-pa\" value=\"101.3\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-83",
+  "de": "<div class=\"calc-field\"><label>Saughöhe h<sub>s,geo</sub> [m] (Zulauf: negativ)</label><input type=\"number\" id=\"pu-hs\" value=\"3\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Suction lift h<sub>s,geo</sub> [m] (flooded suction: negative)</label><input type=\"number\" id=\"pu-hs\" value=\"3\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-84",
+  "de": "<div class=\"calc-field\"><label>Verluste Saugseite h<sub>v,s</sub> [m]</label><input type=\"number\" id=\"pu-hvs\" value=\"0.6\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Suction-side losses h<sub>v,s</sub> [m]</label><input type=\"number\" id=\"pu-hvs\" value=\"0.6\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-85",
+  "de": "<div class=\"calc-field\"><label>Wassertemperatur T [°C]</label><input type=\"number\" id=\"pu-T\" value=\"15\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Water temperature T [°C]</label><input type=\"number\" id=\"pu-T\" value=\"15\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-86",
+  "de": "<div class=\"calc-field\"><label>NPSH<sub>R</sub> der Pumpe [m]</label><input type=\"number\" id=\"pu-npsh\" value=\"3.5\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+  "en": "<div class=\"calc-field\"><label>NPSH<sub>R</sub> of the pump [m]</label><input type=\"number\" id=\"pu-npsh\" value=\"3.5\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+ },
+ {
+  "id": "32-87",
+  "de": "§Förderhöhe der Anlage",
+  "en": "§System head"
+ },
+ {
+  "id": "32-88",
+  "de": "P<sub>Welle</sub> = P<sub>hydr</sub> / η = {} / {} = {} kW",
+  "en": "P<sub>shaft</sub> = P<sub>hydr</sub> / η = {} / {} = {} kW"
+ },
+ {
+  "id": "32-89",
+  "de": "keine Kavitation zu erwarten",
+  "en": "no cavitation expected"
+ },
+ {
+  "id": "32-90",
+  "de": "!NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0,5 m Sicherheit: {} {} {} m → {}",
+  "en": "!NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0.5 m safety margin: {} {} {} m → {}"
+ },
+ {
+  "id": "32-91",
+  "de": "!a ≈ 1400 m/s in starren Rohren (Stahl), 300 … 500 m/s in PE-Rohren",
+  "en": "!a ≈ 1400 m/s in rigid pipes (steel), 300 … 500 m/s in PE pipes"
+ },
+ {
+  "id": "32-92",
+  "de": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Δp = ρ · a · Δv · a = √((K/ρ) / (1 + K · d / (E · s))) · T<sub>r</sub> = 2L / a</div><div class=\"st-note\">a ≈ 1400 m/s in starren Rohren (Stahl), 300 … 500 m/s in PE-Rohren</div></div></div>",
+  "en": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Δp = ρ · a · Δv · a = √((K/ρ) / (1 + K · d / (E · s))) · T<sub>r</sub> = 2L / a</div><div class=\"st-note\">a ≈ 1400 m/s in rigid pipes (steel), 300 … 500 m/s in PE pipes</div></div></div>"
+ },
+ {
+  "id": "32-93",
+  "de": "<div class=\"calc-field\"><label>Innendurchmesser d [mm]</label><input type=\"number\" id=\"dst-d\" value=\"300\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Internal diameter d [mm]</label><input type=\"number\" id=\"dst-d\" value=\"300\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+ },
+ {
+  "id": "32-94",
+  "de": "<div class=\"calc-field\"><label>Wanddicke s [mm]</label><input type=\"number\" id=\"dst-s\" value=\"8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall thickness s [mm]</label><input type=\"number\" id=\"dst-s\" value=\"8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+ },
+ {
+  "id": "32-95",
+  "de": "<div class=\"calc-field\"><label>E-Modul Rohr [GN/m²]</label><input type=\"number\" id=\"dst-E\" value=\"210\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Elastic modulus of pipe [GN/m²]</label><input type=\"number\" id=\"dst-E\" value=\"210\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+ },
+ {
+  "id": "32-96",
+  "de": "<div class=\"calc-field\"><label>Leitungslänge L [m]</label><input type=\"number\" id=\"dst-L\" value=\"800\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Pipeline length L [m]</label><input type=\"number\" id=\"dst-L\" value=\"800\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+ },
+ {
+  "id": "32-97",
+  "de": "<div class=\"calc-field\"><label>Geschwindigkeitsänderung Δv [m/s]</label><input type=\"number\" id=\"dst-dv\" value=\"1.5\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Change in velocity Δv [m/s]</label><input type=\"number\" id=\"dst-dv\" value=\"1.5\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+ },
+ {
+  "id": "32-98",
+  "de": "<div class=\"calc-field\"><label>Schließzeit t<sub>s</sub> [s]</label><input type=\"number\" id=\"dst-ts\" value=\"0.8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Closing time t<sub>s</sub> [s]</label><input type=\"number\" id=\"dst-ts\" value=\"0.8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+ },
+ {
+  "id": "32-99",
+  "de": "§Druckstoß (Joukowsky)",
+  "en": "§Water hammer (Joukowsky)"
+ },
+ {
+  "id": "32-100",
+  "de": "Δp = ρ · a · Δv = 1000 · {} · {} / 10⁵ = {} bar ({} m Wassersäule)",
+  "en": "Δp = ρ · a · Δv = 1000 · {} · {} / 10⁵ = {} bar ({} m water column)"
+ },
+ {
+  "id": "32-101",
+  "de": "schnelles Schließen: voller Joukowsky-Stoß",
+  "en": "rapid closure: full Joukowsky surge"
+ },
+ {
+  "id": "32-102",
+  "de": "!Schließzeit t<sub>s</sub> = {} s {} T<sub>r</sub> → {}",
+  "en": "!Closing time t<sub>s</sub> = {} s {} T<sub>r</sub> → {}"
+ },
+ {
+  "id": "32-103",
+  "de": "<div class=\"calc-field\"><label>Sohlbreite b [m]</label><input type=\"number\" id=\"wbg-b\" value=\"3\" step=\"any\" oninput=\"updateManning()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bed width b [m]</label><input type=\"number\" id=\"wbg-b\" value=\"3\" step=\"any\" oninput=\"updateManning()\"></div>"
+ },
+ {
+  "id": "32-104",
+  "de": "<div class=\"calc-field\"><label>Wassertiefe h [m]</label><input type=\"number\" id=\"wbg-h\" value=\"1.2\" step=\"any\" oninput=\"updateManning()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Water depth h [m]</label><input type=\"number\" id=\"wbg-h\" value=\"1.2\" step=\"any\" oninput=\"updateManning()\"></div>"
+ },
+ {
+  "id": "32-105",
+  "de": "<div class=\"calc-field\"><label>Böschung m (0 = Rechteck)</label><input type=\"number\" id=\"wbg-m\" value=\"0\" step=\"any\" oninput=\"updateManning()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Side slope m (0 = rectangle)</label><input type=\"number\" id=\"wbg-m\" value=\"0\" step=\"any\" oninput=\"updateManning()\"></div>"
+ },
+ {
+  "id": "32-106",
+  "de": "<div class=\"calc-field\"><label>Gefälle I [‰]</label><input type=\"number\" id=\"wbg-I\" value=\"0.5\" step=\"any\" oninput=\"updateManning()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Gradient I [‰]</label><input type=\"number\" id=\"wbg-I\" value=\"0.5\" step=\"any\" oninput=\"updateManning()\"></div>"
+ },
+ {
+  "id": "32-107",
+  "de": "Gerinne b = {} m, h = {} m, m = {}",
+  "en": "Channel b = {} m, h = {} m, m = {}"
+ },
+ {
+  "id": "32-108",
+  "de": "§Fließgeschwindigkeit und Abfluss",
+  "en": "§Flow velocity and discharge"
+ },
+ {
+  "id": "32-109",
+  "de": "§Fließzustand",
+  "en": "§Flow regime"
+ },
+ {
+  "id": "32-110",
+  "de": "schießend (Fr > 1)",
+  "en": "supercritical (Fr > 1)"
+ },
+ {
+  "id": "32-111",
+  "de": "<div class=\"calc-field\"><label>Abfluss Q [m³/s]</label><input type=\"number\" id=\"gt-Q\" value=\"6\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Discharge Q [m³/s]</label><input type=\"number\" id=\"gt-Q\" value=\"6\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+ },
+ {
+  "id": "32-112",
+  "de": "<div class=\"calc-field\"><label>Sohlbreite b [m]</label><input type=\"number\" id=\"gt-b\" value=\"3\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bed width b [m]</label><input type=\"number\" id=\"gt-b\" value=\"3\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+ },
+ {
+  "id": "32-113",
+  "de": "<div class=\"calc-field\"><label>Böschung m (0 = Rechteck)</label><input type=\"number\" id=\"gt-m\" value=\"0\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Side slope m (0 = rectangle)</label><input type=\"number\" id=\"gt-m\" value=\"0\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+ },
+ {
+  "id": "32-114",
+  "de": "<div class=\"calc-field\"><label>vorhandene Tiefe h [m] (optional)</label><input type=\"number\" id=\"gt-h\" value=\"1.2\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>actual depth h [m] (optional)</label><input type=\"number\" id=\"gt-h\" value=\"1.2\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+ },
+ {
+  "id": "32-115",
+  "de": "§Grenzzustand: Fr = 1 bzw. Q² · B / (g · A³) = 1",
+  "en": "§Critical state: Fr = 1, i.e. Q² · B / (g · A³) = 1"
+ },
+ {
+  "id": "32-116",
+  "de": "§Zustand bei h = {} m",
+  "en": "§State at h = {} m"
+ },
+ {
+  "id": "32-117",
+  "de": "<div class=\"calc-field\"><label>Wehrbreite b [m]</label><input type=\"number\" id=\"wbw-b\" value=\"5\" step=\"any\" oninput=\"updatePoleni()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Weir width b [m]</label><input type=\"number\" id=\"wbw-b\" value=\"5\" step=\"any\" oninput=\"updatePoleni()\"></div>"
+ },
+ {
+  "id": "32-118",
+  "de": "<div class=\"calc-field\"><label>Überfallhöhe h<sub>ü</sub> [m]</label><input type=\"number\" id=\"wbw-h\" value=\"0.5\" step=\"any\" oninput=\"updatePoleni()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Overflow head h<sub>ü</sub> [m]</label><input type=\"number\" id=\"wbw-h\" value=\"0.5\" step=\"any\" oninput=\"updatePoleni()\"></div>"
+ },
+ {
+  "id": "32-119",
+  "de": "<div class=\"calc-field\"><label>Beiwert μ</label><input type=\"number\" id=\"wbw-mu\" value=\"0.75\" step=\"any\" oninput=\"updatePoleni()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Coefficient μ</label><input type=\"number\" id=\"wbw-mu\" value=\"0.75\" step=\"any\" oninput=\"updatePoleni()\"></div>"
+ },
+ {
+  "id": "32-120",
+  "de": "!spezifischer Abfluss q = Q / b = {} m²/s · Grenztiefe auf der Krone h<sub>gr</sub> = ∛(q²/g) = {} m",
+  "en": "!specific discharge q = Q / b = {} m²/s · critical depth on the crest h<sub>gr</sub> = ∛(q²/g) = {} m"
+ },
+ {
+  "id": "32-121",
+  "de": "schießend, Fr₁ > 1",
+  "en": "supercritical, Fr₁ > 1"
+ },
+ {
+  "id": "32-122",
+  "de": "strömend, Fr₂ < 1",
+  "en": "subcritical, Fr₂ < 1"
+ },
+ {
+  "id": "32-123",
+  "de": "!Impulssatz (Rechteckgerinne): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)",
+  "en": "!Momentum equation (rectangular channel): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)"
+ },
+ {
+  "id": "32-124",
+  "de": "!Energieverlust ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · Länge L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)",
+  "en": "!Energy loss ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · length L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)"
+ },
+ {
+  "id": "32-125",
+  "de": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Impulssatz (Rechteckgerinne): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)</div><div class=\"st-note\">Energieverlust ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · Länge L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)</div></div></div>",
+  "en": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Momentum equation (rectangular channel): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)</div><div class=\"st-note\">Energy loss ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · length L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)</div></div></div>"
+ },
+ {
+  "id": "32-126",
+  "de": "<div class=\"calc-field\"><label>spezifischer Abfluss q [m²/s]</label><input type=\"number\" id=\"ws2-q\" value=\"4\" step=\"any\" oninput=\"updateSprung()\"></div>",
+  "en": "<div class=\"calc-field\"><label>specific discharge q [m²/s]</label><input type=\"number\" id=\"ws2-q\" value=\"4\" step=\"any\" oninput=\"updateSprung()\"></div>"
+ },
+ {
+  "id": "32-127",
+  "de": "<div class=\"calc-field\"><label>Zuflusstiefe h<sub>1</sub> [m]</label><input type=\"number\" id=\"ws2-h1\" value=\"0.4\" step=\"any\" oninput=\"updateSprung()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Inflow depth h<sub>1</sub> [m]</label><input type=\"number\" id=\"ws2-h1\" value=\"0.4\" step=\"any\" oninput=\"updateSprung()\"></div>"
+ },
+ {
+  "id": "32-128",
+  "de": "§Zufluss (schießend)",
+  "en": "§Inflow (supercritical)"
+ },
+ {
+  "id": "32-129",
+  "de": "§Konjugierte Wassertiefe (Impulssatz)",
+  "en": "§Conjugate depth (momentum equation)"
+ },
+ {
+  "id": "32-130",
+  "de": "ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) = {}³ / (4 · {} · {}) = {} m ({} % von E<sub>1</sub>)",
+  "en": "ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) = {}³ / (4 · {} · {}) = {} m ({} % of E<sub>1</sub>)"
+ },
+ {
+  "id": "32-131",
+  "de": "stabiler Sprung (günstig)",
+  "en": "steady jump (favourable)"
+ },
+ {
+  "id": "32-132",
+  "de": "!Sprunglänge (Anhalt für das Tosbecken) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = {} m · {}",
+  "en": "!Jump length (guide value for the stilling basin) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = {} m · {}"
+ },
+ {
+  "id": "32-133",
+  "de": "<div class=\"calc-field\"><label>Durchmesser D [mm]</label><input type=\"number\" id=\"tf-D\" value=\"400\" step=\"any\" oninput=\"updateTeil()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Diameter D [mm]</label><input type=\"number\" id=\"tf-D\" value=\"400\" step=\"any\" oninput=\"updateTeil()\"></div>"
+ },
+ {
+  "id": "32-134",
+  "de": "<div class=\"calc-field\"><label>Gefälle I [‰]</label><input type=\"number\" id=\"tf-I\" value=\"5\" step=\"any\" oninput=\"updateTeil()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Gradient I [‰]</label><input type=\"number\" id=\"tf-I\" value=\"5\" step=\"any\" oninput=\"updateTeil()\"></div>"
+ },
+ {
+  "id": "32-135",
+  "de": "<div class=\"calc-field\"><label>Füllungsgrad h/D</label><input type=\"number\" id=\"tf-hD\" value=\"0.6\" step=\"any\" oninput=\"updateTeil()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Filling ratio h/D</label><input type=\"number\" id=\"tf-hD\" value=\"0.6\" step=\"any\" oninput=\"updateTeil()\"></div>"
+ },
+ {
+  "id": "32-136",
+  "de": "Kreisrohr DN {}, I = {} ‰",
+  "en": "Circular pipe DN {}, I = {} ‰"
+ },
+ {
+  "id": "32-137",
+  "de": "§Vollfüllung",
+  "en": "§Full flow"
+ },
+ {
+  "id": "32-138",
+  "de": "§Teilfüllung h/D = {} (h = {} mm)",
+  "en": "§Partial filling h/D = {} (h = {} mm)"
+ },
+ {
+  "id": "32-139",
+  "de": "!{} % von v<sub>v</sub>",
+  "en": "!{} % of v<sub>v</sub>"
+ },
+ {
+  "id": "32-140",
+  "de": "!{} % von Q<sub>v</sub>",
+  "en": "!{} % of Q<sub>v</sub>"
+ },
+ {
+  "id": "32-141",
+  "de": "!größter Abfluss bei h/D ≈ {}: Q<sub>max</sub> = {} l/s = {} % von Q<sub>v</sub>; größte Geschwindigkeit bei h/D ≈ 0,81",
+  "en": "!maximum discharge at h/D ≈ {}: Q<sub>max</sub> = {} l/s = {} % of Q<sub>v</sub>; maximum velocity at h/D ≈ 0.81"
+ },
+ {
+  "id": "32-142",
+  "de": "!freies Grundwasser: Q = π · k · (H² − h²) / ln(R/r)",
+  "en": "!unconfined groundwater: Q = π · k · (H² − h²) / ln(R/r)"
+ },
+ {
+  "id": "32-143",
+  "de": "!gespanntes Grundwasser (Mächtigkeit M): Q = 2π · k · M · s / ln(R/r)",
+  "en": "!confined groundwater (thickness M): Q = 2π · k · M · s / ln(R/r)"
+ },
+ {
+  "id": "32-144",
+  "de": "!Reichweite nach Sichardt R = 3000 · s · √k (s in m, k in m/s) — Erfahrungswert, nur für Vorbemessung",
+  "en": "!Radius of influence after Sichardt R = 3000 · s · √k (s in m, k in m/s) — empirical value, for preliminary design only"
+ },
+ {
+  "id": "32-145",
+  "de": "!Fassungsvermögen eines Brunnens nach Sichardt: q<sub>max</sub> = 2π · r · h · √k / 15 (Grenze der Eintrittsgeschwindigkeit)",
+  "en": "!Capacity of a well after Sichardt: q<sub>max</sub> = 2π · r · h · √k / 15 (limit of the entrance velocity)"
+ },
+ {
+  "id": "32-146",
+  "de": "<div class=\"calc-field\"><label>Durchlässigkeit k [m/s]</label><input type=\"number\" id=\"br-k\" value=\"0.0005\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Permeability k [m/s]</label><input type=\"number\" id=\"br-k\" value=\"0.0005\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+ },
+ {
+  "id": "32-147",
+  "de": "<div class=\"calc-field\"><label>Grundwassermächtigkeit H [m]</label><input type=\"number\" id=\"br-H\" value=\"12\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Aquifer thickness H [m]</label><input type=\"number\" id=\"br-H\" value=\"12\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+ },
+ {
+  "id": "32-148",
+  "de": "<div class=\"calc-field\"><label>Absenkung s [m]</label><input type=\"number\" id=\"br-s\" value=\"3\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Drawdown s [m]</label><input type=\"number\" id=\"br-s\" value=\"3\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+ },
+ {
+  "id": "32-149",
+  "de": "<div class=\"calc-field\"><label>Brunnenradius r [m]</label><input type=\"number\" id=\"br-r\" value=\"0.3\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Well radius r [m]</label><input type=\"number\" id=\"br-r\" value=\"0.3\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+ },
+ {
+  "id": "32-150",
+  "de": "<div class=\"calc-field\"><label>Groundwater</label><select id=\"br-art\" onchange=\"updateBrunnen()\"><option value=\"frei\" selected>frei (ungespannt)</option><option value=\"gesp\">gespannt</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Groundwater</label><select id=\"br-art\" onchange=\"updateBrunnen()\"><option value=\"frei\" selected>unconfined (free)</option><option value=\"gesp\">confined</option></select></div>"
+ },
+ {
+  "id": "32-151",
+  "de": "<div class=\"calc-field\"><label>Mächtigkeit M [m] (gespannt)</label><input type=\"number\" id=\"br-M\" value=\"8\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Thickness M [m] (confined)</label><input type=\"number\" id=\"br-M\" value=\"8\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+ },
+ {
+  "id": "32-152",
+  "de": "Brunnen, {} Grundwasser",
+  "en": "Well, {} groundwater"
+ },
+ {
+  "id": "32-153",
+  "de": "§Reichweite (Sichardt)",
+  "en": "§Radius of influence (Sichardt)"
+ },
+ {
+  "id": "32-154",
+  "de": "§Förderrate (Dupuit-Thiem)",
+  "en": "§Pumping rate (Dupuit-Thiem)"
+ },
+ {
+  "id": "32-155",
+  "de": "!= {} m³/h · Absenkung im Brunnen s = {} m, Wasserstand im Brunnen h = {} m",
+  "en": "!= {} m³/h · drawdown in the well s = {} m, water level in the well h = {} m"
+ }
+]

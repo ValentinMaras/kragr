@@ -1,0 +1,687 @@
+[
+ {
+  "id": "30-0",
+  "de": "α<sub>6</sub> nach DIN EN 1992-1-1/NA, 8.7.3 · l<sub>0</sub> ≥ l<sub>0,min</sub> = max(0,3 · α<sub>6</sub> · l<sub>b,rqd</sub>; 15 · Ø; 200 mm) · Querbewehrung im Stoßbereich beachten.",
+  "en": "α<sub>6</sub> according to DIN EN 1992-1-1/NA, 8.7.3 · l<sub>0</sub> ≥ l<sub>0,min</sub> = max(0.3 · α<sub>6</sub> · l<sub>b,rqd</sub>; 15 · Ø; 200 mm) · Observe transverse reinforcement in the lap zone."
+ },
+ {
+  "id": "30-1",
+  "de": "α<sub>cc</sub> = 0,85 berücksichtigt Langzeitwirkungen (deutscher NA) · Beispiel C30/37: 0,85 · 30 / 1,5 = 17,0 N/mm²",
+  "en": "α<sub>cc</sub> = 0.85 accounts for long-term effects (German NA) · Example C30/37: 0.85 · 30 / 1.5 = 17.0 N/mm²"
+ },
+ {
+  "id": "30-2",
+  "de": "β erfasst die ungleichmäßige Schubverteilung aus Momenten. Die vereinfachten Werte gelten für unverschiebliche Systeme mit Stützweitenverhältnis 0,8 ≤ l₁/l₂ ≤ 1,25. Bei Rand- und Eckstützen wird u<sub>1</sub> nur über die Plattenseite geführt (Rand: halber Kreisbogen π·2d, Ecke: Viertelkreis π·d).",
+  "en": "β accounts for the non-uniform shear distribution due to moments. The simplified values apply to braced systems with span ratios 0.8 ≤ l₁/l₂ ≤ 1.25. For edge and corner columns, u<sub>1</sub> is taken only along the slab side (edge: half circular arc π·2d, corner: quarter circle π·d)."
+ },
+ {
+  "id": "30-3",
+  "de": "β(f<sub>cm</sub>) = 16,8 / √f<sub>cm</sub> · β(t<sub>0</sub>) = 1 / (0,1 + t<sub>0</sub><sup>0,20</sup>), t<sub>0</sub> mit Zementart angepasst",
+  "en": "β(f<sub>cm</sub>) = 16.8 / √f<sub>cm</sub> · β(t<sub>0</sub>) = 1 / (0.1 + t<sub>0</sub><sup>0.20</sup>), t<sub>0</sub> adjusted for cement type"
+ },
+ {
+  "id": "30-4",
+  "de": "γ_c (Beton)",
+  "en": "γ_c (concrete)"
+ },
+ {
+  "id": "30-5",
+  "de": "γ_s (Betonstahl)",
+  "en": "γ_s (reinforcing steel)"
+ },
+ {
+  "id": "30-6",
+  "de": "η<sub>1</sub> = 1,0 bei gutem Verbund, 0,7 bei mäßigem Verbund · η<sub>2</sub> = 1,0 für Ø ≤ 32 mm · σ<sub>sd</sub> ≤ f<sub>yd</sub> = 435 N/mm²",
+  "en": "η<sub>1</sub> = 1.0 for good bond, 0.7 for poor bond · η<sub>2</sub> = 1.0 for Ø ≤ 32 mm · σ<sub>sd</sub> ≤ f<sub>yd</sub> = 435 N/mm²"
+ },
+ {
+  "id": "30-7",
+  "de": "λ ≤ λ<sub>lim</sub>: Auswirkungen nach Theorie II. Ordnung dürfen vernachlässigt werden.",
+  "en": "λ ≤ λ<sub>lim</sub>: second-order effects may be ignored."
+ },
+ {
+  "id": "30-8",
+  "de": "λ<sub>lim</sub> = 25&nbsp; für |n| ≥ 0,41&nbsp;&nbsp;·&nbsp;&nbsp;λ<sub>lim</sub> = 16 / √|n|&nbsp; für |n| &lt; 0,41&nbsp;&nbsp; mit&nbsp; n = N<sub>Ed</sub> / (A<sub>c</sub> · f<sub>cd</sub>)",
+  "en": "λ<sub>lim</sub> = 25&nbsp; for |n| ≥ 0.41&nbsp;&nbsp;·&nbsp;&nbsp;λ<sub>lim</sub> = 16 / √|n|&nbsp; for |n| &lt; 0.41&nbsp;&nbsp; with&nbsp; n = N<sub>Ed</sub> / (A<sub>c</sub> · f<sub>cd</sub>)"
+ },
+ {
+  "id": "30-9",
+  "de": "μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = 0,296 → ohne Druckbewehrung",
+  "en": "μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = 0.296 → no compression reinforcement"
+ },
+ {
+  "id": "30-10",
+  "de": "ν<sub>1</sub> = 0,75 · ν<sub>2</sub> mit ν<sub>2</sub> = 1,1 − f<sub>ck</sub>/500 ≤ 1,0 · z = 0,9·d, aber höchstens max{d − 2·c<sub>v,l</sub>; d − c<sub>v,l</sub> − 30 mm} (c<sub>v,l</sub> — Verlegemaß der Längsbewehrung)",
+  "en": "ν<sub>1</sub> = 0.75 · ν<sub>2</sub> with ν<sub>2</sub> = 1.1 − f<sub>ck</sub>/500 ≤ 1.0 · z = 0.9·d, but at most max{d − 2·c<sub>v,l</sub>; d − c<sub>v,l</sub> − 30 mm} (c<sub>v,l</sub> — placing dimension of the longitudinal reinforcement)"
+ },
+ {
+  "id": "30-11",
+  "de": "ν<sub>Ed</sub> = N<sub>Ed</sub> / (b·h·f<sub>cd</sub>)&nbsp;&nbsp;·&nbsp;&nbsp;μ<sub>Ed</sub> = M<sub>Ed</sub> / (b·h²·f<sub>cd</sub>)&nbsp;&nbsp;→&nbsp;&nbsp;ω<sub>tot</sub> aus dem Diagramm<br> A<sub>s,tot</sub> = ω<sub>tot</sub> · b·h · f<sub>cd</sub> / f<sub>yd</sub>",
+  "en": "ν<sub>Ed</sub> = N<sub>Ed</sub> / (b·h·f<sub>cd</sub>)&nbsp;&nbsp;·&nbsp;&nbsp;μ<sub>Ed</sub> = M<sub>Ed</sub> / (b·h²·f<sub>cd</sub>)&nbsp;&nbsp;→&nbsp;&nbsp;ω<sub>tot</sub> from the diagram<br> A<sub>s,tot</sub> = ω<sub>tot</sub> · b·h · f<sub>cd</sub> / f<sub>yd</sub>"
+ },
+ {
+  "id": "30-12",
+  "de": "ρ<sub>l</sub> ist die Biegezugbewehrung (oben) im Bereich Stützenbreite + 3·d je Seite. Randstütze: freier Rand parallel zu c<sub>y</sub>, u<sub>1</sub> = 2·c<sub>x</sub> + c<sub>y</sub> + π·2d · Eckstütze: u<sub>1</sub> = c<sub>x</sub> + c<sub>y</sub> + π·d (Abstand zum Plattenrand ≈ 0). Mindestmomente nach NA 6.4.5 und Durchstanzbewehrung selbst sind hier nicht enthalten.",
+  "en": "ρ<sub>l</sub> is the flexural tension reinforcement (top) within the column width + 3·d on each side. Edge column: free edge parallel to c<sub>y</sub>, u<sub>1</sub> = 2·c<sub>x</sub> + c<sub>y</sub> + π·2d · Corner column: u<sub>1</sub> = c<sub>x</sub> + c<sub>y</sub> + π·d (distance to the slab edge ≈ 0). Minimum moments according to NA 6.4.5 and the punching shear reinforcement itself are not included here."
+ },
+ {
+  "id": "30-13",
+  "de": "ρ<sub>p,eff</sub> = A<sub>s</sub> / (b · h<sub>c,ef</sub>) mit h<sub>c,ef</sub> = min{2,5·(h − d); (h − x)/3; h/2} · k<sub>t</sub> = 0,4 (Langzeit) · α<sub>e</sub> = E<sub>s</sub>/E<sub>cm</sub>",
+  "en": "ρ<sub>p,eff</sub> = A<sub>s</sub> / (b · h<sub>c,ef</sub>) with h<sub>c,ef</sub> = min{2.5·(h − d); (h − x)/3; h/2} · k<sub>t</sub> = 0.4 (long-term) · α<sub>e</sub> = E<sub>s</sub>/E<sub>cm</sub>"
+ },
+ {
+  "id": "30-14",
+  "de": "σ<sub>s2</sub> = f<sub>yd</sub>, solange d₂/d ≤ 0,17 (ε<sub>s2</sub> ≥ 2,17 ‰). Druckstäbe mit Bügeln gegen Ausknicken sichern (Abstand ≤ 12·Ø).",
+  "en": "σ<sub>s2</sub> = f<sub>yd</sub> as long as d₂/d ≤ 0.17 (ε<sub>s2</sub> ≥ 2.17 ‰). Restrain compression bars against buckling with links (spacing ≤ 12·Ø)."
+ },
+ {
+  "id": "30-15",
+  "de": "σ<sub>s</sub> aus dem gerissenen Querschnitt (Zustand II, linear-elastisch, α<sub>e</sub> mit E<sub>cm</sub>); f<sub>ct,eff</sub> = f<sub>ctm</sub> (Rissbildung nach 28 Tagen).",
+  "en": "σ<sub>s</sub> from the cracked section (state II, linear elastic, α<sub>e</sub> with E<sub>cm</sub>); f<sub>ct,eff</sub> = f<sub>ctm</sub> (cracking after 28 days)."
+ },
+ {
+  "id": "30-16",
+  "de": "φ<sub>RH</sub> = 1 + (1 − RH/100) / (0,1 · h<sub>0</sub><sup>1/3</sup>) für f<sub>cm</sub> ≤ 35 N/mm² (sonst mit α<sub>1</sub>, α<sub>2</sub>)",
+  "en": "φ<sub>RH</sub> = 1 + (1 − RH/100) / (0.1 · h<sub>0</sub><sup>1/3</sup>) for f<sub>cm</sub> ≤ 35 N/mm² (otherwise with α<sub>1</sub>, α<sub>2</sub>)"
+ },
+ {
+  "id": "30-17",
+  "de": "— Bügel (Zug) - - Druckstreben",
+  "en": "— Links (tension) - - Compression struts"
+ },
+ {
+  "id": "30-18",
+  "de": "→ <b>schlank</b>, Theorie II. Ordnung",
+  "en": "→ <b>slender</b>, second-order theory"
+ },
+ {
+  "id": "30-19",
+  "de": "≤ 50 mm oder ≤ 3 · Ø",
+  "en": "≤ 50 mm or ≤ 3 · Ø"
+ },
+ {
+  "id": "30-20",
+  "de": "≤ min(12 · kleinster Längsstab-Ø; kleinste Seitenlänge; 300 mm)",
+  "en": "≤ min(12 · smallest longitudinal bar Ø; smallest side length; 300 mm)"
+ },
+ {
+  "id": "30-21",
+  "de": "≥ 20 % der Hauptbewehrung, Abstand ≤ 250 mm",
+  "en": "≥ 20 % of the main reinforcement, spacing ≤ 250 mm"
+ },
+ {
+  "id": "30-22",
+  "de": "≥ 6 mm und ≥ ¼ · größter Längsstab-Ø (Matten ≥ 5 mm)",
+  "en": "≥ 6 mm and ≥ ¼ · largest longitudinal bar Ø (meshes ≥ 5 mm)"
+ },
+ {
+  "id": "30-23",
+  "de": "§Wirksame Bauteildicke",
+  "en": "§Notional size"
+ },
+ {
+  "id": "30-24",
+  "de": "!h<sub>0</sub> = 2 · A<sub>c</sub> / u (u = Umfang, der der Trocknung ausgesetzt ist)",
+  "en": "!h<sub>0</sub> = 2 · A<sub>c</sub> / u (u = perimeter exposed to drying)"
+ },
+ {
+  "id": "30-25",
+  "de": "!φ<sub>RH</sub> = 1 + (1 − RH/100) / (0,1 · h<sub>0</sub><sup>1/3</sup>) für f<sub>cm</sub> ≤ 35 N/mm² (sonst mit α<sub>1</sub>, α<sub>2</sub>)",
+  "en": "!φ<sub>RH</sub> = 1 + (1 − RH/100) / (0.1 · h<sub>0</sub><sup>1/3</sup>) for f<sub>cm</sub> ≤ 35 N/mm² (otherwise with α<sub>1</sub>, α<sub>2</sub>)"
+ },
+ {
+  "id": "30-26",
+  "de": "!β(f<sub>cm</sub>) = 16,8 / √f<sub>cm</sub> · β(t<sub>0</sub>) = 1 / (0,1 + t<sub>0</sub><sup>0,20</sup>), t<sub>0</sub> mit Zementart angepasst",
+  "en": "!β(f<sub>cm</sub>) = 16.8 / √f<sub>cm</sub> · β(t<sub>0</sub>) = 1 / (0.1 + t<sub>0</sub><sup>0.20</sup>), t<sub>0</sub> adjusted for cement type"
+ },
+ {
+  "id": "30-27",
+  "de": "!Effektiver E-Modul für Langzeitverformungen: E<sub>c,eff</sub> = E<sub>cm</sub> / (1 + φ(∞, t<sub>0</sub>))",
+  "en": "!Effective modulus for long-term deformations: E<sub>c,eff</sub> = E<sub>cm</sub> / (1 + φ(∞, t<sub>0</sub>))"
+ },
+ {
+  "id": "30-28",
+  "de": "<div class=\"calc-field\"><label>Zement</label><select id=\"ks-z\" onchange=\"updateKS()\"><option value=\"S\">S (langsam, 32,5 N)</option><option value=\"N\" selected>N (normal, 32,5 R / 42,5 N)</option><option value=\"R\">R (schnell, 42,5 R / 52,5)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Cement</label><select id=\"ks-z\" onchange=\"updateKS()\"><option value=\"S\">S (slow, 32.5 N)</option><option value=\"N\" selected>N (normal, 32.5 R / 42.5 N)</option><option value=\"R\">R (rapid, 42.5 R / 52.5)</option></select></div>"
+ },
+ {
+  "id": "30-29",
+  "de": "<div class=\"calc-field\"><label>b [mm] (Platte: 1000)</label><input type=\"number\" id=\"ks-b\" value=\"1000\" step=\"any\" oninput=\"updateKS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>b [mm] (slab: 1000)</label><input type=\"number\" id=\"ks-b\" value=\"1000\" step=\"any\" oninput=\"updateKS()\"></div>"
+ },
+ {
+  "id": "30-30",
+  "de": "<div class=\"calc-field\"><label>trocknende Flächen</label><select id=\"ks-s\" onchange=\"updateKS()\"><option value=\"platte\" selected>Platte: oben und unten</option><option value=\"alle\">ringsum (Stütze, Balken)</option><option value=\"drei\">drei Seiten</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Drying surfaces</label><select id=\"ks-s\" onchange=\"updateKS()\"><option value=\"platte\" selected>Slab: top and bottom</option><option value=\"alle\">All round (column, beam)</option><option value=\"drei\">Three sides</option></select></div>"
+ },
+ {
+  "id": "30-31",
+  "de": "<div class=\"calc-field\"><label>relative Luftfeuchte RH [%]</label><input type=\"number\" id=\"ks-RH\" value=\"50\" step=\"any\" oninput=\"updateKS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Relative humidity RH [%]</label><input type=\"number\" id=\"ks-RH\" value=\"50\" step=\"any\" oninput=\"updateKS()\"></div>"
+ },
+ {
+  "id": "30-32",
+  "de": "<div class=\"calc-field\"><label>Belastungsbeginn t<sub>0</sub> [Tage]</label><input type=\"number\" id=\"ks-t0\" value=\"28\" step=\"any\" oninput=\"updateKS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Age at loading t<sub>0</sub> [days]</label><input type=\"number\" id=\"ks-t0\" value=\"28\" step=\"any\" oninput=\"updateKS()\"></div>"
+ },
+ {
+  "id": "30-33",
+  "de": "Platte, oben und unten trocknend",
+  "en": "Slab, drying on top and bottom"
+ },
+ {
+  "id": "30-34",
+  "de": "§Endkriechzahl φ(∞, t<sub>0</sub>) = φ<sub>RH</sub> · β(f<sub>cm</sub>) · β(t<sub>0</sub>) (Anhang B)",
+  "en": "§Final creep coefficient φ(∞, t<sub>0</sub>) = φ<sub>RH</sub> · β(f<sub>cm</sub>) · β(t<sub>0</sub>) (Annex B)"
+ },
+ {
+  "id": "30-35",
+  "de": "φ<sub>RH</sub> = [1 + (1 − RH/100) / (0,1 · h<sub>0</sub><sup>1/3</sup>) · α<sub>1</sub>] · α<sub>2</sub> mit α<sub>1</sub> = (35/f<sub>cm</sub>)<sup>0,7</sup> = {}, α<sub>2</sub> = (35/f<sub>cm</sub>)<sup>0,2</sup> = {} → {}",
+  "en": "φ<sub>RH</sub> = [1 + (1 − RH/100) / (0.1 · h<sub>0</sub><sup>1/3</sup>) · α<sub>1</sub>] · α<sub>2</sub> with α<sub>1</sub> = (35/f<sub>cm</sub>)<sup>0.7</sup> = {}, α<sub>2</sub> = (35/f<sub>cm</sub>)<sup>0.2</sup> = {} → {}"
+ },
+ {
+  "id": "30-36",
+  "de": "!Zement {}: t<sub>0</sub> = t<sub>0,T</sub> · (9/(2 + t<sub>0,T</sub><sup>1,2</sup>) + 1)<sup>α</sup> mit α = {} → t<sub>0</sub> = {} Tage",
+  "en": "!Cement {}: t<sub>0</sub> = t<sub>0,T</sub> · (9/(2 + t<sub>0,T</sub><sup>1.2</sup>) + 1)<sup>α</sup> with α = {} → t<sub>0</sub> = {} days"
+ },
+ {
+  "id": "30-37",
+  "de": "§Autogenes Schwinden",
+  "en": "§Autogenous shrinkage"
+ },
+ {
+  "id": "30-38",
+  "de": "!Verkürzung eines 10 m langen Bauteils ohne Behinderung: {} mm",
+  "en": "!Shortening of a 10 m long unrestrained member: {} mm"
+ },
+ {
+  "id": "30-39",
+  "de": "Kriechen und Schwinden {}",
+  "en": "Creep and shrinkage {}"
+ },
+ {
+  "id": "30-40",
+  "de": "drei Seiten trocknend",
+  "en": "drying on three sides"
+ },
+ {
+  "id": "30-41",
+  "de": "<div class=\"calc-field\"><label>Stabdurchmesser Ø [mm]</label><input type=\"number\" id=\"dk-ds\" value=\"12\" step=\"any\" oninput=\"updateDeckung()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bar diameter Ø [mm]</label><input type=\"number\" id=\"dk-ds\" value=\"12\" step=\"any\" oninput=\"updateDeckung()\"></div>"
+ },
+ {
+  "id": "30-42",
+  "de": "Betondeckung {}, Ø {} mm",
+  "en": "Concrete cover {}, Ø {} mm"
+ },
+ {
+  "id": "30-43",
+  "de": "§Mindestdeckung aus Verbund und Dauerhaftigkeit",
+  "en": "§Minimum cover for bond and durability"
+ },
+ {
+  "id": "30-44",
+  "de": "§Vorhaltemaß",
+  "en": "§Allowance for deviation"
+ },
+ {
+  "id": "30-45",
+  "de": "(Regelfall)",
+  "en": "(standard case)"
+ },
+ {
+  "id": "30-46",
+  "de": "§Nennmaß = Verlegemaß",
+  "en": "§Nominal cover = placing dimension"
+ },
+ {
+  "id": "30-47",
+  "de": "!Mindestbetonfestigkeit für {}: <b>{}</b>",
+  "en": "!Minimum concrete strength for {}: <b>{}</b>"
+ },
+ {
+  "id": "30-48",
+  "de": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">Querschnitt, Dehnungen (eben, Bernoulli) und Betondruckspannungen\n    (Parabel-Rechteck). Gleichgewicht: F<sub>cd</sub> = F<sub>sd</sub>, M<sub>Eds</sub> = F<sub>sd</sub>·z.</div>",
+  "en": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">Cross-section, strains (plane, Bernoulli) and concrete compressive stresses\n    (parabola-rectangle). Equilibrium: F<sub>cd</sub> = F<sub>sd</sub>, M<sub>Eds</sub> = F<sub>sd</sub>·z.</div>"
+ },
+ {
+  "id": "30-49",
+  "de": "<div class=\"calc-field\"><label>Randabstand d₁ [cm]</label><input type=\"number\" id=\"bg-d1\" value=\"5\" step=\"any\" oninput=\"updateBiegung()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Edge distance d₁ [cm]</label><input type=\"number\" id=\"bg-d1\" value=\"5\" step=\"any\" oninput=\"updateBiegung()\"></div>"
+ },
+ {
+  "id": "30-50",
+  "de": "<div class=\"calc-field\"><label>Randabstand Druckbewehrung d₂ [cm]</label><input type=\"number\" id=\"bg-d2\" value=\"5\" step=\"any\" oninput=\"updateBiegung()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Edge distance of compression reinforcement d₂ [cm]</label><input type=\"number\" id=\"bg-d2\" value=\"5\" step=\"any\" oninput=\"updateBiegung()\"></div>"
+ },
+ {
+  "id": "30-51",
+  "de": "§Statische Nutzhöhe",
+  "en": "§Effective depth"
+ },
+ {
+  "id": "30-52",
+  "de": "§Bezogenes Moment",
+  "en": "§Relative moment"
+ },
+ {
+  "id": "30-53",
+  "de": "!μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = {} → ohne Druckbewehrung",
+  "en": "!μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = {} → no compression reinforcement"
+ },
+ {
+  "id": "30-54",
+  "de": "§Beiwerte aus dem Parabel-Rechteck-Diagramm (Tabelle oben, interpoliert)",
+  "en": "§Coefficients from the parabola-rectangle diagram (table above, interpolated)"
+ },
+ {
+  "id": "30-55",
+  "de": "A<sub>s,erf</sub> = ω · b · d · f<sub>cd</sub> / f<sub>yd</sub> = {} · {} · {} · {} / 434,8 = {} cm²",
+  "en": "A<sub>s,req</sub> = ω · b · d · f<sub>cd</sub> / f<sub>yd</sub> = {} · {} · {} · {} / 434.8 = {} cm²"
+ },
+ {
+  "id": "30-56",
+  "de": "!Kontrolle über den Hebelarm: A<sub>s</sub> = M<sub>Ed</sub>/(z · f<sub>yd</sub>) = {} cm²",
+  "en": "!Check via the lever arm: A<sub>s</sub> = M<sub>Ed</sub>/(z · f<sub>yd</sub>) = {} cm²"
+ },
+ {
+  "id": "30-57",
+  "de": "§Mindestbewehrung (Rissmoment)",
+  "en": "§Minimum reinforcement (cracking moment)"
+ },
+ {
+  "id": "30-58",
+  "de": "!maßgebend <b>{} cm²</b> · Vorschlag: {}",
+  "en": "!governing <b>{} cm²</b> · suggestion: {}"
+ },
+ {
+  "id": "30-59",
+  "de": "Biegebemessung {}/{} cm, {}, M<sub>Ed</sub> = {} kNm",
+  "en": "Bending design {}/{} cm, {}, M<sub>Ed</sub> = {} kNm"
+ },
+ {
+  "id": "30-60",
+  "de": "!μ<sub>Eds</sub> = {} > μ<sub>lim</sub> = {} → <b>Druckbewehrung</b> nötig (ξ = 0,45 festgehalten)",
+  "en": "!μ<sub>Eds</sub> = {} > μ<sub>lim</sub> = {} → <b>compression reinforcement</b> needed (ξ = 0.45 fixed)"
+ },
+ {
+  "id": "30-61",
+  "de": "!Zug A<sub>s1</sub> = <b>{} cm²</b>, Druck A<sub>s2</sub> = <b>{} cm²</b>{}",
+  "en": "!Tension A<sub>s1</sub> = <b>{} cm²</b>, compression A<sub>s2</sub> = <b>{} cm²</b>{}"
+ },
+ {
+  "id": "30-62",
+  "de": "!k<sub>d</sub> = d [cm] / √(M<sub>Eds</sub> [kNm] / b [m]) → aus der Tafel k<sub>s</sub>, ξ, ζ",
+  "en": "!k<sub>d</sub> = d [cm] / √(M<sub>Eds</sub> [kNm] / b [m]) → from the table k<sub>s</sub>, ξ, ζ"
+ },
+ {
+  "id": "30-63",
+  "de": "!A<sub>s</sub> [cm²] = k<sub>s</sub> · M<sub>Eds</sub> [kNm] / d [cm] (+ N<sub>Ed</sub>/f<sub>yd</sub> bei Normalkraft)",
+  "en": "!A<sub>s</sub> [cm²] = k<sub>s</sub> · M<sub>Eds</sub> [kNm] / d [cm] (+ N<sub>Ed</sub>/f<sub>yd</sub> with axial force)"
+ },
+ {
+  "id": "30-64",
+  "de": "!Zusammenhang mit dem ω-Verfahren: μ<sub>Eds</sub> = 10 / (k<sub>d</sub>² · f<sub>cd</sub>), k<sub>s</sub> = 1000 / (ζ · f<sub>yd</sub>)",
+  "en": "!Relation to the ω method: μ<sub>Eds</sub> = 10 / (k<sub>d</sub>² · f<sub>cd</sub>), k<sub>s</sub> = 1000 / (ζ · f<sub>yd</sub>)"
+ },
+ {
+  "id": "30-65",
+  "de": "<div class=\"calc-field\"><label>Breite b [m]</label><input type=\"number\" id=\"kd-b\" value=\"0.3\" step=\"any\" oninput=\"updateKD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Width b [m]</label><input type=\"number\" id=\"kd-b\" value=\"0.3\" step=\"any\" oninput=\"updateKD()\"></div>"
+ },
+ {
+  "id": "30-66",
+  "de": "<div class=\"calc-field\"><label>Nutzhöhe d [cm]</label><input type=\"number\" id=\"kd-d\" value=\"45\" step=\"any\" oninput=\"updateKD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Effective depth d [cm]</label><input type=\"number\" id=\"kd-d\" value=\"45\" step=\"any\" oninput=\"updateKD()\"></div>"
+ },
+ {
+  "id": "30-67",
+  "de": "!k<sub>d</sub> kleiner als der Tafelendwert (μ > μ<sub>lim</sub>) → Druckbewehrung oder größerer Querschnitt",
+  "en": "!k<sub>d</sub> smaller than the last table value (μ > μ<sub>lim</sub>) → compression reinforcement or larger section"
+ },
+ {
+  "id": "30-68",
+  "de": "<div class=\"calc-field\"><label>Stegbreite b<sub>w</sub> [cm]</label><input type=\"number\" id=\"pb-bw\" value=\"30\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Web width b<sub>w</sub> [cm]</label><input type=\"number\" id=\"pb-bw\" value=\"30\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-69",
+  "de": "<div class=\"calc-field\"><label>Plattenüberstand b₁ [cm]</label><input type=\"number\" id=\"pb-b1\" value=\"135\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Flange overhang b₁ [cm]</label><input type=\"number\" id=\"pb-b1\" value=\"135\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-70",
+  "de": "<div class=\"calc-field\"><label>Plattenüberstand b₂ [cm]</label><input type=\"number\" id=\"pb-b2\" value=\"135\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Flange overhang b₂ [cm]</label><input type=\"number\" id=\"pb-b2\" value=\"135\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-71",
+  "de": "<div class=\"calc-field\"><label>Plattendicke h<sub>f</sub> [cm]</label><input type=\"number\" id=\"pb-hf\" value=\"18\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Flange thickness h<sub>f</sub> [cm]</label><input type=\"number\" id=\"pb-hf\" value=\"18\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-72",
+  "de": "<div class=\"calc-field\"><label>Gesamthöhe h [cm]</label><input type=\"number\" id=\"pb-h\" value=\"60\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Overall depth h [cm]</label><input type=\"number\" id=\"pb-h\" value=\"60\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-73",
+  "de": "<div class=\"calc-field\"><label>Randabstand d₁ [cm]</label><input type=\"number\" id=\"pb-d1\" value=\"6\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Edge distance d₁ [cm]</label><input type=\"number\" id=\"pb-d1\" value=\"6\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-74",
+  "de": "<div class=\"calc-field\"><label>Stützweite l [m]</label><input type=\"number\" id=\"pb-l\" value=\"7.5\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span l [m]</label><input type=\"number\" id=\"pb-l\" value=\"7.5\" step=\"any\" oninput=\"updatePlattenbalken()\"></div>"
+ },
+ {
+  "id": "30-75",
+  "de": "<div class=\"calc-field\"><label>Zone</label><select id=\"pb-l0\" onchange=\"updatePlattenbalken()\"><option value=\"1\" selected>Einfeldträger (l₀ = l)</option><option value=\"0.85\">Endfeld (0,85·l)</option><option value=\"0.7\">Innenfeld (0,70·l)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Zone</label><select id=\"pb-l0\" onchange=\"updatePlattenbalken()\"><option value=\"1\" selected>Simply supported beam (l₀ = l)</option><option value=\"0.85\">End span (0.85·l)</option><option value=\"0.7\">Interior span (0.70·l)</option></select></div>"
+ },
+ {
+  "id": "30-76",
+  "de": "§Mitwirkende Breite (5.3.2.1)",
+  "en": "§Effective width (5.3.2.1)"
+ },
+ {
+  "id": "30-77",
+  "de": "§Bemessung als Rechteck mit b<sub>eff</sub>",
+  "en": "§Design as a rectangle with b<sub>eff</sub>"
+ },
+ {
+  "id": "30-78",
+  "de": "!Nulllinie in der Platte → Rechteckquerschnitt mit b<sub>eff</sub> zulässig",
+  "en": "!Neutral axis in the flange → rectangular section with b<sub>eff</sub> permitted"
+ },
+ {
+  "id": "30-79",
+  "de": "Plattenbalken, {}, M<sub>Ed</sub> = {} kNm",
+  "en": "T-beam, {}, M<sub>Ed</sub> = {} kNm"
+ },
+ {
+  "id": "30-80",
+  "de": "— Bügel (Zug)   - - Druckstreben",
+  "en": "— Links (tension)   - - Compression struts"
+ },
+ {
+  "id": "30-81",
+  "de": "<div class=\"calc-field\"><label>Stegbreite b<sub>w</sub> [cm]</label><input type=\"number\" id=\"qk-bw\" value=\"30\" step=\"any\" oninput=\"updateQuerkraft()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Web width b<sub>w</sub> [cm]</label><input type=\"number\" id=\"qk-bw\" value=\"30\" step=\"any\" oninput=\"updateQuerkraft()\"></div>"
+ },
+ {
+  "id": "30-82",
+  "de": "<div class=\"calc-field\"><label>Nutzhöhe d [cm]</label><input type=\"number\" id=\"qk-d\" value=\"55\" step=\"any\" oninput=\"updateQuerkraft()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Effective depth d [cm]</label><input type=\"number\" id=\"qk-d\" value=\"55\" step=\"any\" oninput=\"updateQuerkraft()\"></div>"
+ },
+ {
+  "id": "30-83",
+  "de": "<div class=\"calc-field\"><label>Längsbewehrung A<sub>sl</sub> [cm²]</label><input type=\"number\" id=\"qk-As\" value=\"12.57\" step=\"any\" oninput=\"updateQuerkraft()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Longitudinal reinforcement A<sub>sl</sub> [cm²]</label><input type=\"number\" id=\"qk-As\" value=\"12.57\" step=\"any\" oninput=\"updateQuerkraft()\"></div>"
+ },
+ {
+  "id": "30-84",
+  "de": "<div class=\"calc-field\"><label>Verlegemaß c<sub>v,l</sub> [cm]</label><input type=\"number\" id=\"qk-cv\" value=\"4\" step=\"any\" oninput=\"updateQuerkraft()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Placing dimension c<sub>v,l</sub> [cm]</label><input type=\"number\" id=\"qk-cv\" value=\"4\" step=\"any\" oninput=\"updateQuerkraft()\"></div>"
+ },
+ {
+  "id": "30-85",
+  "de": "§Ohne Querkraftbewehrung (6.2.2)",
+  "en": "§Without shear reinforcement (6.2.2)"
+ },
+ {
+  "id": "30-86",
+  "de": "§Bügel",
+  "en": "§Links"
+ },
+ {
+  "id": "30-87",
+  "de": "a<sub>sw,erf</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ) = {} / ({} · 434,8 · {}) · 1000 / 100 = {} cm²/m",
+  "en": "a<sub>sw,req</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ) = {} / ({} · 434.8 · {}) · 1000 / 100 = {} cm²/m"
+ },
+ {
+  "id": "30-88",
+  "de": "!maßgebend <b>{} cm²/m</b> (zweischnittige Bügel: je Schenkel die Hälfte)",
+  "en": "!governing <b>{} cm²/m</b> (two-legged links: half per leg)"
+ },
+ {
+  "id": "30-89",
+  "de": "Querkraft b<sub>w</sub> = {} cm, d = {} cm, {}",
+  "en": "Shear b<sub>w</sub> = {} cm, d = {} cm, {}"
+ },
+ {
+  "id": "30-90",
+  "de": "<div class=\"calc-field\"><label>Stützenform</label><select id=\"ds-form\" onchange=\"updateDurchstanzen()\"><option value=\"rechteck\" selected>Rectangle</option><option value=\"rund\">rund</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Column shape</label><select id=\"ds-form\" onchange=\"updateDurchstanzen()\"><option value=\"rechteck\" selected>Rectangle</option><option value=\"rund\">Circular</option></select></div>"
+ },
+ {
+  "id": "30-91",
+  "de": "<div class=\"calc-field\"><label>Lage</label><select id=\"ds-beta\" onchange=\"updateDurchstanzen()\"><option value=\"1.10\" selected>Innenstütze (β = 1,10)</option><option value=\"1.40\">Randstütze (β = 1,40)</option><option value=\"1.50\">Eckstütze (β = 1,50)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Position</label><select id=\"ds-beta\" onchange=\"updateDurchstanzen()\"><option value=\"1.10\" selected>Interior column (β = 1.10)</option><option value=\"1.40\">Edge column (β = 1.40)</option><option value=\"1.50\">Corner column (β = 1.50)</option></select></div>"
+ },
+ {
+  "id": "30-92",
+  "de": "<div class=\"calc-field\"><label>c<sub>x</sub> bzw. D [cm]</label><input type=\"number\" id=\"ds-cx\" value=\"40\" step=\"any\" oninput=\"updateDurchstanzen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>c<sub>x</sub> or D [cm]</label><input type=\"number\" id=\"ds-cx\" value=\"40\" step=\"any\" oninput=\"updateDurchstanzen()\"></div>"
+ },
+ {
+  "id": "30-93",
+  "de": "§Nutzhöhe und Längsbewehrung",
+  "en": "§Effective depth and longitudinal reinforcement"
+ },
+ {
+  "id": "30-94",
+  "de": "ρ<sub>l</sub> = √(ρ<sub>lx</sub> · ρ<sub>ly</sub>) = √({} · {}) % = {} % (≤ 2 % und ≤ 0,5 · f<sub>cd</sub>/f<sub>yd</sub>)",
+  "en": "ρ<sub>l</sub> = √(ρ<sub>lx</sub> · ρ<sub>ly</sub>) = √({} · {}) % = {} % (≤ 2 % and ≤ 0.5 · f<sub>cd</sub>/f<sub>yd</sub>)"
+ },
+ {
+  "id": "30-95",
+  "de": "§Kritischer Rundschnitt im Abstand 2d ({})",
+  "en": "§Basic control perimeter at a distance of 2d ({})"
+ },
+ {
+  "id": "30-96",
+  "de": "§Widerstand ohne Durchstanzbewehrung",
+  "en": "§Resistance without punching shear reinforcement"
+ },
+ {
+  "id": "30-97",
+  "de": "!<b>Durchstanzbewehrung erforderlich</b> (Bügel oder Dübelleisten)",
+  "en": "!<b>Punching shear reinforcement required</b> (links or stud rails)"
+ },
+ {
+  "id": "30-98",
+  "de": "Durchstanzen {}",
+  "en": "Punching shear {}"
+ },
+ {
+  "id": "30-99",
+  "de": "!v<sub>Ed</sub> = {} > 1,4 · v<sub>Rd,c</sub> = {} N/mm²: <b>auch mit Bewehrung nicht möglich</b> — Decke dicker, Stütze größer, Stützenkopf oder höhere Betonklasse",
+  "en": "!v<sub>Ed</sub> = {} > 1.4 · v<sub>Rd,c</sub> = {} N/mm²: <b>not possible even with reinforcement</b> — thicker slab, larger column, column head or higher concrete class"
+ },
+ {
+  "id": "30-100",
+  "de": "!<b>keine Durchstanzbewehrung</b> erforderlich",
+  "en": "!<b>no punching shear reinforcement</b> required"
+ },
+ {
+  "id": "30-101",
+  "de": "!t<sub>ef</sub> = A/u ≥ 2 · Achsabstand der Längsstäbe vom Rand · A<sub>k</sub>, u<sub>k</sub> auf der Mittellinie der Wände",
+  "en": "!t<sub>ef</sub> = A/u ≥ 2 · axis distance of the longitudinal bars from the edge · A<sub>k</sub>, u<sub>k</sub> on the centre line of the walls"
+ },
+ {
+  "id": "30-102",
+  "de": "!T<sub>Rd,max</sub> = 2 · ν · α<sub>cw</sub> · f<sub>cd</sub> · A<sub>k</sub> · t<sub>ef</sub> · sin θ · cos θ mit ν = 0,525 · ν<sub>2</sub> (Vollquerschnitt, NA), ν<sub>2</sub> = 1,1 − f<sub>ck</sub>/500 ≤ 1",
+  "en": "!T<sub>Rd,max</sub> = 2 · ν · α<sub>cw</sub> · f<sub>cd</sub> · A<sub>k</sub> · t<sub>ef</sub> · sin θ · cos θ with ν = 0.525 · ν<sub>2</sub> (solid section, NA), ν<sub>2</sub> = 1.1 − f<sub>ck</sub>/500 ≤ 1"
+ },
+ {
+  "id": "30-103",
+  "de": "!mit Querkraft (kompakter Querschnitt, NA): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1",
+  "en": "!with shear (compact section, NA): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1"
+ },
+ {
+  "id": "30-104",
+  "de": "!Bügel: A<sub>sw</sub>/s = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) · Längsbewehrung: ΣA<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>)",
+  "en": "!Links: A<sub>sw</sub>/s = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) · Longitudinal reinforcement: ΣA<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>)"
+ },
+ {
+  "id": "30-105",
+  "de": "!vereinfacht θ = 45° (cot θ = 1,0) bei reiner Torsion; mit Querkraft denselben Winkel wie dort verwenden",
+  "en": "!simplified θ = 45° (cot θ = 1.0) for pure torsion; with shear, use the same angle as there"
+ },
+ {
+  "id": "30-106",
+  "de": "<div class=\"calc-field\"><label>Achsabstand Längsstäbe c [cm]</label><input type=\"number\" id=\"to-c\" value=\"5\" step=\"any\" oninput=\"updateTor()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Axis distance of longitudinal bars c [cm]</label><input type=\"number\" id=\"to-c\" value=\"5\" step=\"any\" oninput=\"updateTor()\"></div>"
+ },
+ {
+  "id": "30-107",
+  "de": "Torsion Rechteck {}/{} cm, {}",
+  "en": "Torsion rectangle {}/{} cm, {}"
+ },
+ {
+  "id": "30-108",
+  "de": "§Druckstrebe (NA: Vollquerschnitt ν = 0,525 · ν<sub>2</sub>)",
+  "en": "§Compression strut (NA: solid section ν = 0.525 · ν<sub>2</sub>)"
+ },
+ {
+  "id": "30-109",
+  "de": "!Interaktion mit Querkraft (kompakter Querschnitt): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1 mit V<sub>Rd,max</sub> = {} kN",
+  "en": "!Interaction with shear (compact section): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1 with V<sub>Rd,max</sub> = {} kN"
+ },
+ {
+  "id": "30-110",
+  "de": "Bügel: a<sub>sw</sub> = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) = {} / (2 · {} · 434,8 · {}) = {} cm²/m (je Schenkel, außen)",
+  "en": "Links: a<sub>sw</sub> = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) = {} / (2 · {} · 434.8 · {}) = {} cm²/m (per leg, outer)"
+ },
+ {
+  "id": "30-111",
+  "de": "Längsstäbe: A<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>) = {} cm² (über den Umfang verteilt)",
+  "en": "Longitudinal bars: A<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>) = {} cm² (distributed around the perimeter)"
+ },
+ {
+  "id": "30-112",
+  "de": "!Zur Querkraftbewehrung addieren; die Bügel müssen geschlossen sein (Übergreifung oder Haken).",
+  "en": "!Add to the shear reinforcement; the links must be closed (lapped or hooked)."
+ },
+ {
+  "id": "30-113",
+  "de": "<div class=\"calc-field\"><label>Verbund</label><select id=\"va-v\" onchange=\"updateVerankerung()\"><option value=\"gut\" selected>gut</option><option value=\"maessig\">mäßig</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Bond</label><select id=\"va-v\" onchange=\"updateVerankerung()\"><option value=\"gut\" selected>good</option><option value=\"maessig\">poor</option></select></div>"
+ },
+ {
+  "id": "30-114",
+  "de": "Verankerung Ø {}, {}, {} Verbund",
+  "en": "Anchorage Ø {}, {}, {} bond"
+ },
+ {
+  "id": "30-115",
+  "de": "§Mindestwert (Zugstab)",
+  "en": "§Minimum value (tension bar)"
+ },
+ {
+  "id": "30-116",
+  "de": "mit Haken oder Winkelhaken (α<sub>1</sub> = 0,7): l<sub>bd</sub> = max(0,7 · {}; {}) = {} mm",
+  "en": "with hook or bend (α<sub>1</sub> = 0.7): l<sub>bd</sub> = max(0.7 · {}; {}) = {} mm"
+ },
+ {
+  "id": "30-117",
+  "de": "mäßiger",
+  "en": "poor"
+ },
+ {
+  "id": "30-118",
+  "de": "> 100 mm und > 7 · Ø",
+  "en": "> 100 mm and > 7 · Ø"
+ },
+ {
+  "id": "30-119",
+  "de": "> 50 mm und > 3 · Ø",
+  "en": "> 50 mm and > 3 · Ø"
+ },
+ {
+  "id": "30-120",
+  "de": "× 0,6 unmittelbar über und unter Balken/Platten (Bereich = größte Seitenlänge) und bei Übergreifungsstößen mit Ø > 14 mm",
+  "en": "× 0.6 directly above and below beams/slabs (zone = largest side length) and at lap splices with Ø > 14 mm"
+ },
+ {
+  "id": "30-121",
+  "de": "<div class=\"calc-field\"><label>Höhe h [cm] (Biegerichtung)</label><input type=\"number\" id=\"st-h\" value=\"30\" step=\"any\" oninput=\"updateStuetze()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Depth h [cm] (bending direction)</label><input type=\"number\" id=\"st-h\" value=\"30\" step=\"any\" oninput=\"updateStuetze()\"></div>"
+ },
+ {
+  "id": "30-122",
+  "de": "<div class=\"calc-field\"><label>Randabstand d₁ [cm]</label><input type=\"number\" id=\"st-d1\" value=\"5\" step=\"any\" oninput=\"updateStuetze()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Edge distance d₁ [cm]</label><input type=\"number\" id=\"st-d1\" value=\"5\" step=\"any\" oninput=\"updateStuetze()\"></div>"
+ },
+ {
+  "id": "30-123",
+  "de": "<div class=\"calc-field\"><label>Stützenlänge l [m]</label><input type=\"number\" id=\"st-l\" value=\"3.5\" step=\"any\" oninput=\"updateStuetze()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Column length l [m]</label><input type=\"number\" id=\"st-l\" value=\"3.5\" step=\"any\" oninput=\"updateStuetze()\"></div>"
+ },
+ {
+  "id": "30-124",
+  "de": "<div class=\"calc-field\"><label>Supports</label><select id=\"st-beta\" onchange=\"updateStuetze()\"><option value=\"1\" selected>beidseitig gelenkig (β = 1,0)</option><option value=\"0.7\">eingespannt/gelenkig (β = 0,7)</option><option value=\"0.5\">beidseitig eingespannt (β = 0,5)</option><option value=\"2\">Kragstütze (β = 2,0)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Supports</label><select id=\"st-beta\" onchange=\"updateStuetze()\"><option value=\"1\" selected>Pinned at both ends (β = 1.0)</option><option value=\"0.7\">Fixed/pinned (β = 0.7)</option><option value=\"0.5\">Fixed at both ends (β = 0.5)</option><option value=\"2\">Cantilever column (β = 2.0)</option></select></div>"
+ },
+ {
+  "id": "30-125",
+  "de": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (Druck)</label><input type=\"number\" id=\"st-N\" value=\"1200\" step=\"any\" oninput=\"updateStuetze()\"></div>",
+  "en": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression)</label><input type=\"number\" id=\"st-N\" value=\"1200\" step=\"any\" oninput=\"updateStuetze()\"></div>"
+ },
+ {
+  "id": "30-126",
+  "de": "<div class=\"calc-field\"><label>M<sub>0Ed</sub> [kNm] (1. Ordnung)</label><input type=\"number\" id=\"st-M\" value=\"20\" step=\"any\" oninput=\"updateStuetze()\"></div>",
+  "en": "<div class=\"calc-field\"><label>M<sub>0Ed</sub> [kNm] (first order)</label><input type=\"number\" id=\"st-M\" value=\"20\" step=\"any\" oninput=\"updateStuetze()\"></div>"
+ },
+ {
+  "id": "30-127",
+  "de": "<b>schlank</b>, Theorie II. Ordnung",
+  "en": "<b>slender</b>, second-order theory"
+ },
+ {
+  "id": "30-128",
+  "de": "e<sub>i</sub> = α<sub>h</sub> / 200 · l<sub>0</sub> / 2 mit α<sub>h</sub> = 2/√l = {} → e<sub>i</sub> = {} cm",
+  "en": "e<sub>i</sub> = α<sub>h</sub> / 200 · l<sub>0</sub> / 2 with α<sub>h</sub> = 2/√l = {} → e<sub>i</sub> = {} cm"
+ },
+ {
+  "id": "30-129",
+  "de": "e<sub>2</sub> = K<sub>1</sub> · (1/r) · l<sub>0</sub>² / 10 = {} cm (Modellstützenverfahren)",
+  "en": "e<sub>2</sub> = K<sub>1</sub> · (1/r) · l<sub>0</sub>² / 10 = {} cm (model column method)"
+ },
+ {
+  "id": "30-130",
+  "de": "§Bewehrung (Dehnungsebenen, Parabel-Rechteck, symmetrisch)",
+  "en": "§Reinforcement (strain planes, parabola-rectangle, symmetrical)"
+ },
+ {
+  "id": "30-131",
+  "de": "!A<sub>s,tot,erf</sub> = {} cm² (iterativ, bis M<sub>Rd</sub>(N<sub>Ed</sub>) = M<sub>Ed</sub>)",
+  "en": "!A<sub>s,tot,req</sub> = {} cm² (iterative, until M<sub>Rd</sub>(N<sub>Ed</sub>) = M<sub>Ed</sub>)"
+ },
+ {
+  "id": "30-132",
+  "de": "!maßgebend <b>{} cm² gesamt</b>, je Seite {} cm²",
+  "en": "!governing <b>{} cm² in total</b>, {} cm² per side"
+ },
+ {
+  "id": "30-133",
+  "de": "Stütze {}/{} cm, l = {} m, N<sub>Ed</sub> = {} kN",
+  "en": "Column {}/{} cm, l = {} m, N<sub>Ed</sub> = {} kN"
+ },
+ {
+  "id": "30-134",
+  "de": "gedrungen, ohne Theorie II. Ordnung",
+  "en": "stocky, no second-order effects"
+ },
+ {
+  "id": "30-135",
+  "de": "<div class=\"calc-field\"><label>Stützweite l [m]</label><input type=\"number\" id=\"bs-l\" value=\"5\" step=\"any\" oninput=\"updateSchlank()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span l [m]</label><input type=\"number\" id=\"bs-l\" value=\"5\" step=\"any\" oninput=\"updateSchlank()\"></div>"
+ },
+ {
+  "id": "30-136",
+  "de": "<div class=\"calc-field\"><label>Nutzhöhe d [cm]</label><input type=\"number\" id=\"bs-d\" value=\"17\" step=\"any\" oninput=\"updateSchlank()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Effective depth d [cm]</label><input type=\"number\" id=\"bs-d\" value=\"17\" step=\"any\" oninput=\"updateSchlank()\"></div>"
+ }
+]

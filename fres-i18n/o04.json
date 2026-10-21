@@ -1,0 +1,894 @@
+{
+"04-0": {
+"fr": "Bielle tendue : section d'étriers requise par mètre de longueur de poutre",
+"es": "Tirante: sección de estribos necesaria por metro de longitud de viga"
+},
+"04-1": {
+"fr": "a<sub>sw,req</sub> = V<sub>Ed</sub>/(z·f<sub>yd</sub>·cot θ) = {} cm²/m",
+"es": "a<sub>sw,nec</sub> = V<sub>Ed</sub>/(z·f<sub>yd</sub>·cot θ) = {} cm²/m"
+},
+"04-2": {
+"fr": "Valeur minimale ρ<sub>w,min</sub>·b<sub>w</sub> = {} cm²/m",
+"es": "Valor mínimo ρ<sub>w,min</sub>·b<sub>w</sub> = {} cm²/m"
+},
+"04-3": {
+"fr": "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub> : étriers minimaux a<sub>sw,min</sub> = 0,16·f<sub>ctm</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m",
+"es": "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: estribos mínimos a<sub>sw,min</sub> = 0,16·f<sub>ctm</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m"
+},
+"04-4": {
+"fr": "Vérification des étriers choisis (deux brins par étrier)",
+"es": "Comprobación de los estribos elegidos (dos ramas por estribo)"
+},
+"04-5": {
+"fr": "étriers choisis Ø{}/{} cm, à deux brins : a<sub>sw,exist</sub> = <b>{} cm²/m</b> ≥ {} cm²/m",
+"es": "estribos elegidos Ø{}/{} cm, de dos ramas: a<sub>sw,exist</sub> = <b>{} cm²/m</b> ≥ {} cm²/m"
+},
+"04-6": {
+"fr": "Espacement maximal des étriers — plus le taux de travail est élevé, plus il est serré",
+"es": "Separación máxima de los estribos — cuanto mayor es el aprovechamiento, menor es la separación"
+},
+"04-7": {
+"fr": "espacement maximal des étriers (Tab. NA.9.1, V<sub>Ed</sub>/V<sub>Rd,max</sub> = {}) : s<sub>max</sub> = {} mm ≥ {} mm",
+"es": "separación máxima de los estribos (Tab. NA.9.1, V<sub>Ed</sub>/V<sub>Rd,max</sub> = {}): s<sub>max</sub> = {} mm ≥ {} mm"
+},
+"04-8": {
+"fr": "Effort tranchant (ELU)",
+"es": "Esfuerzo cortante (ELU)"
+},
+"04-9": {
+"fr": "Bielle comprimée dans la dalle",
+"es": "Biela comprimida en el ala"
+},
+"04-10": {
+"fr": "Bielle (membrure comprimée cot θ<sub>f</sub> = 1,2) : v<sub>Rd,max</sub> = ν<sub>1</sub>·f<sub>cd</sub>·sin θ<sub>f</sub>·cos θ<sub>f</sub> = {} N/mm² ≥ v<sub>Ed</sub>",
+"es": "Biela (ala comprimida cot θ<sub>f</sub> = 1,2): v<sub>Rd,max</sub> = ν<sub>1</sub>·f<sub>cd</sub>·sin θ<sub>f</sub>·cos θ<sub>f</sub> = {} N/mm² ≥ v<sub>Ed</sub>"
+},
+"04-11": {
+"fr": "Tirant : armatures transversales dans la dalle",
+"es": "Tirante: armadura transversal en el ala"
+},
+"04-12": {
+"fr": "v<sub>Ed</sub> ≤ 0,4·f<sub>ctd</sub> = {} N/mm² : pas d'armature de liaison nécessaire par le calcul, les armatures de la dalle suffisent",
+"es": "v<sub>Ed</sub> ≤ 0,4·f<sub>ctd</sub> = {} N/mm²: no se requiere armadura de conexión por cálculo, basta con la armadura de la losa"
+},
+"04-13": {
+"fr": "a<sub>sf,req</sub> = v<sub>Ed</sub>·h<sub>f</sub>/(f<sub>yd</sub>·cot θ<sub>f</sub>) = <b>{} cm²/m</b> d'armatures transversales dans la dalle, moitié en haut et moitié en bas",
+"es": "a<sub>sf,nec</sub> = v<sub>Ed</sub>·h<sub>f</sub>/(f<sub>yd</sub>·cot θ<sub>f</sub>) = <b>{} cm²/m</b> de armadura transversal en el ala, la mitad arriba y la mitad abajo"
+},
+"04-14": {
+"fr": "L'armature de liaison doit être superposée à l'armature de flexion de la dalle transversale à la poutre : la valeur la plus grande entre a<sub>sf</sub> et ½·a<sub>sf</sub> + armatures de la dalle est déterminante (6.2.4(5)).",
+"es": "La armadura de conexión debe superponerse a la armadura de flexión de la losa transversal a la viga: es determinante el mayor valor entre a<sub>sf</sub> y ½·a<sub>sf</sub> + armadura de la losa (6.2.4(5))."
+},
+"04-15": {
+"fr": "Liaison membrure–âme (ELU)",
+"es": "Unión ala–alma (ELU)"
+},
+"04-16": {
+"fr": "Armatures de suspension : la charge doit être suspendue vers le haut dans la poutre porteuse",
+"es": "Armadura de suspensión: la carga debe colgarse hacia arriba en la viga de apoyo"
+},
+"04-17": {
+"fr": "Armatures de suspension dans la poutre porteuse : A<sub>s,h</sub> = V<sub>Ed</sub>/f<sub>yd</sub> = <b>{} cm²</b> sous forme d'étriers dans la zone d'intersection, principalement dans la poutre porteuse",
+"es": "Armadura de suspensión en la viga de apoyo: A<sub>s,h</sub> = V<sub>Ed</sub>/f<sub>yd</sub> = <b>{} cm²</b> en forma de estribos en la zona de cruce, principalmente en la viga de apoyo"
+},
+"04-18": {
+"fr": "Ancrage à l'appui d'extrémité (indirect)",
+"es": "Anclaje en el apoyo extremo (indirecto)"
+},
+"04-19": {
+"fr": "Ancrage à l'appui d'extrémité",
+"es": "Anclaje en el apoyo extremo"
+},
+"04-20": {
+"fr": "Longueur d'ancrage insuffisante : choisir un crochet ou un coude, un diamètre plus petit ou un appui plus profond.",
+"es": "Longitud de anclaje insuficiente: elija un gancho o una patilla, un diámetro menor o un apoyo más profundo."
+},
+"04-21": {
+"fr": "Décalage des arrêts de barres",
+"es": "Escalonamiento"
+},
+"04-22": {
+"fr": "{} barres : au moins 2 barres doivent aller jusqu'à l'appui — décalage impossible",
+"es": "{} barras: al menos 2 barras deben llegar hasta el apoyo — no es posible escalonar"
+},
+"04-23": {
+"fr": "Décalage : {} barres sur {} s'arrêtent avant l'appui, {} se poursuivent",
+"es": "Escalonamiento: {} de {} barras terminan antes del apoyo, {} continúan"
+},
+"04-24": {
+"fr": "résistance des barres prolongées F<sub>Rd,{}</sub> = {}·{}·{}/10³ = {} kN",
+"es": "resistencia de las barras que continúan F<sub>Rd,{}</sub> = {}·{}·{}/10³ = {} kN"
+},
+"04-25": {
+"fr": "Les barres prolongées couvrent déjà toute la courbe des efforts de traction — les autres barres ne sont nécessaires que pour des raisons de minimum.",
+"es": "Las barras que continúan ya cubren toda la envolvente de tracciones — las demás barras solo se necesitan por razones de mínimos."
+},
+"04-26": {
+"fr": "Point d'arrêt théorique E : là, la courbe décalée des efforts de traction est tout juste couverte par les barres prolongées",
+"es": "Punto de corte teórico E: allí la envolvente de tracciones decalada queda justo cubierta por las barras que continúan"
+},
+"04-27": {
+"fr": "x<sub>E</sub> = u − a<sub>l</sub> = {} − {} = <b>{} m</b> à partir de l'appui",
+"es": "x<sub>E</sub> = u − a<sub>l</sub> = {} − {} = <b>{} m</b> desde el apoyo"
+},
+"04-28": {
+"fr": "À partir de E, les barres arrêtées doivent être prolongées de la longueur d'ancrage (pleinement sollicitées, σ<sub>sd</sub> = f<sub>yd</sub>)",
+"es": "A partir de E, las barras que terminan deben prolongarse la longitud de anclaje (plenamente aprovechadas, σ<sub>sd</sub> = f<sub>yd</sub>)"
+},
+"04-29": {
+"fr": "l<sub>bd</sub> = max(Ø/4·f<sub>yd</sub>/f<sub>bd</sub> ; 10·Ø ; 100) = max({} ; {} ; 100) = <b>{} mm</b> (droite, bonnes conditions d'adhérence)",
+"es": "l<sub>bd</sub> = max(Ø/4·f<sub>yd</sub>/f<sub>bd</sub>; 10·Ø; 100) = max({}; {}; 100) = <b>{} mm</b> (recta, buenas condiciones de adherencia)"
+},
+"04-30": {
+"fr": "x<sub>E</sub> − l<sub>bd</sub> = {} m ≤ 0 → les barres atteignent de toute façon l'appui, le décalage n'apporte rien",
+"es": "x<sub>E</sub> − l<sub>bd</sub> = {} m ≤ 0 → las barras llegan de todos modos hasta el apoyo, el escalonamiento no aporta nada"
+},
+"04-31": {
+"fr": "Arrêt des barres décalées et leur longueur",
+"es": "Extremo de las barras escalonadas y su longitud"
+},
+"04-32": {
+"fr": "Arrêt de barre en x = x<sub>E</sub> − l<sub>bd</sub> = <b>{} m</b> à partir de l'appui (des deux côtés)",
+"es": "Extremo de barra en x = x<sub>E</sub> − l<sub>bd</sub> = <b>{} m</b> desde el apoyo (en ambos lados)"
+},
+"04-33": {
+"fr": "Longueur des barres décalées ≥ l − 2·{} = <b>{} m</b> → économie ≈ {} kg d'acier d'armature",
+"es": "Longitud de las barras escalonadas ≥ l − 2·{} = <b>{} m</b> → ahorro ≈ {} kg de acero de armar"
+},
+"04-34": {
+"fr": "Épure de décalage des efforts de traction : la ligne bleue de résistance doit se situer partout au-dessus de la ligne orange des efforts de traction",
+"es": "Diagrama de cobertura de tracciones: la línea azul de resistencia debe quedar en todas partes por encima de la línea naranja de tracciones"
+},
+"04-35": {
+"fr": "<span style=\"color:{}\">orange</span> : F<sub>sd</sub> décalé de a<sub>l</sub> · gris en tirets : M/z · <span style=\"color:{}\">bleu</span> : résistance F<sub>Rd</sub> (entre A et E, elle croît sur l<sub>bd</sub>)",
+"es": "<span style=\"color:{}\">naranja</span>: F<sub>sd</sub> decalada a<sub>l</sub> · gris discontinuo: M/z · <span style=\"color:{}\">azul</span>: resistencia F<sub>Rd</sub> (entre A y E crece a lo largo de l<sub>bd</sub>)"
+},
+"04-36": {
+"fr": "Couverture des efforts de traction et décalage des arrêts",
+"es": "Cobertura de tracciones y escalonamiento"
+},
+"04-37": {
+"fr": "Hypothèse : poutre sur deux appuis sous charge uniforme. Au moins ¼ des armatures de travée (ici au moins 2 barres) doit être prolongé au-delà de l'appui ; l'ancrage correspondant est inclus dans la vérification « Ancrage à l'appui d'extrémité ».",
+"es": "Hipótesis: viga biapoyada con carga uniforme. Al menos ¼ de la armadura de vano (aquí al menos 2 barras) debe prolongarse más allá del apoyo; el anclaje allí está incluido en la comprobación «Anclaje en el apoyo extremo»."
+},
+"04-38": {
+"fr": "Déformation gênée (p. ex. retrait, température) : contrainte admissible de l'acier à partir du diamètre limite",
+"es": "Deformación impedida (p. ej. retracción, temperatura): tensión admisible del acero a partir del diámetro límite"
+},
+"04-39": {
+"fr": "Déformation gênée : f<sub>ct,eff</sub> = {} N/mm² · Ø*<sub>s</sub> = Ø·2,9/f<sub>ct,eff</sub> = {} mm",
+"es": "Deformación impedida: f<sub>ct,eff</sub> = {} N/mm² · Ø*<sub>s</sub> = Ø·2,9/f<sub>ct,eff</sub> = {} mm"
+},
+"04-40": {
+"fr": "Armature minimale pour déformation gênée : doit reprendre l'effort de fissuration de la zone tendue",
+"es": "Armadura mínima para deformación impedida: debe resistir la fuerza de fisuración de la zona traccionada"
+},
+"04-41": {
+"fr": " (A<sub>ct</sub> simplifiée pour l'âme)",
+"es": " (A<sub>ct</sub> simplificada para el alma)"
+},
+"04-42": {
+"fr": "A<sub>s,min</sub> = k<sub>c</sub>·k·f<sub>ct,eff</sub>·A<sub>ct</sub>/σ<sub>s</sub> = 0,4·{}·{}·{}/{} = <b>{} cm²{}</b> ≤ A<sub>s,exist</sub>{}",
+"es": "A<sub>s,min</sub> = k<sub>c</sub>·k·f<sub>ct,eff</sub>·A<sub>ct</sub>/σ<sub>s</sub> = 0,4·{}·{}·{}/{} = <b>{} cm²{}</b> ≤ A<sub>s,exist</sub>{}"
+},
+"04-43": {
+"fr": "Ouverture des fissures en travée (ELS)",
+"es": "Abertura de fisuras en el vano (ELS)"
+},
+"04-44": {
+"fr": "Ouverture des fissures sur appui (ELS)",
+"es": "Abertura de fisuras sobre el apoyo (ELS)"
+},
+"04-45": {
+"fr": "Choisir davantage de barres, ou des barres plus fines, en partie supérieure.",
+"es": "Elija más barras, o más delgadas, en la parte superior."
+},
+"04-46": {
+"fr": "avec cloisons sensibles aux déformations : l/d ≤ K²·150/l = {}",
+"es": "con tabiques sensibles a las deformaciones: l/d ≤ K²·150/l = {}"
+},
+"04-47": {
+"fr": "Vérification avec la limite la plus faible",
+"es": "Comprobación con el límite menor"
+},
+"04-48": {
+"fr": "déterminant : l/d ≤ <b>{}</b> → d<sub>req</sub> = {} mm",
+"es": "determinante: l/d ≤ <b>{}</b> → d<sub>nec</sub> = {} mm"
+},
+"04-49": {
+"fr": "Élancement en flexion (ELS)",
+"es": "Esbeltez a flexión (ELS)"
+},
+"04-50": {
+"fr": "Choisir un élément plus épais ou vérifier la flèche de manière plus précise.",
+"es": "Elija un elemento más grueso o compruebe la flecha de forma más precisa."
+},
+"04-51": {
+"fr": "Enrobage minimal : la plus grande des valeurs entre durabilité ({}) et adhérence (c<sub>min,b</sub> = diamètre de la barre)",
+"es": "Recubrimiento mínimo: el mayor de los valores de durabilidad ({}) y adherencia (c<sub>min,b</sub> = diámetro de la barra)"
+},
+"04-52": {
+"fr": "Enrobage nominal : ajouter la marge Δc<sub>dev</sub> pour les imprécisions de chantier",
+"es": "Recubrimiento nominal: añada el margen Δc<sub>dev</sub> por las imprecisiones de obra"
+},
+"04-53": {
+"fr": "Enrobage nominal pour l'étrier (barre la plus extérieure)",
+"es": "Recubrimiento nominal para el estribo (barra más exterior)"
+},
+"04-54": {
+"fr": "Enrobage nominal pour la barre longitudinale — l'étrier se trouve à l'extérieur, il est donc pris en compte",
+"es": "Recubrimiento nominal para la barra longitudinal — el estribo queda por fuera, por eso se tiene en cuenta"
+},
+"04-55": {
+"fr": "Enrobage nominal à la pose : la plus grande des deux valeurs, mesurée jusqu'à la face extérieure de l'étrier",
+"es": "Recubrimiento nominal de colocación: el mayor de los dos valores, medido hasta la cara exterior del estribo"
+},
+"04-56": {
+"fr": "Enrobage nominal de l'étrier c<sub>v</sub> = max({} ; {}) = <b>{} mm</b>",
+"es": "Recubrimiento nominal del estribo c<sub>v</sub> = max({}; {}) = <b>{} mm</b>"
+},
+"04-57": {
+"fr": "Valeurs de calcul des matériaux (coefficients partiels γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)",
+"es": "Valores de cálculo de los materiales (coeficientes parciales γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)"
+},
+"04-58": {
+"fr": "b<sub>eff,appui</sub>",
+"es": "b<sub>eff,apoyo</sub>"
+},
+"04-59": {
+"fr": "Résistance sans armatures d'effort tranchant V<sub>Rd,c</sub> — coefficients",
+"es": "Resistencia sin armadura de cortante V<sub>Rd,c</sub> — coeficientes"
+},
+"04-60": {
+"fr": "Facteur d'échelle k = 1 + √(200/d) = {} ≤ 2",
+"es": "Factor de escala k = 1 + √(200/d) = {} ≤ 2"
+},
+"04-61": {
+"fr": "Taux d'armatures longitudinales ρ<sub>l</sub> = A<sub>sl</sub>/(b<sub>w</sub>·d) = {} % ≤ 2 %",
+"es": "Cuantía de armadura longitudinal ρ<sub>l</sub> = A<sub>sl</sub>/(b<sub>w</sub>·d) = {} % ≤ 2 %"
+},
+"04-62": {
+"fr": "Contrainte de cisaillement que le béton seul peut reprendre (la plus grande valeur s'applique)",
+"es": "Tensión tangencial que el hormigón puede resistir por sí solo (se aplica el mayor valor)"
+},
+"04-63": {
+"fr": "Résistance du béton à l'effort tranchant : contrainte × aire",
+"es": "Resistencia a cortante del hormigón: tensión × área"
+},
+"04-64": {
+"fr": "aucune armature d'effort tranchant nécessaire",
+"es": "no se necesita armadura de cortante"
+},
+"04-65": {
+"fr": "seuls des étriers minimaux sont nécessaires",
+"es": "solo se necesitan estribos mínimos"
+},
+"04-66": {
+"fr": "armatures d'effort tranchant nécessaires",
+"es": "se necesita armadura de cortante"
+},
+"04-67": {
+"fr": "Modèle de treillis : bras de levier interne, réduction de la résistance du béton, inclinaison des bielles",
+"es": "Modelo de celosía: brazo mecánico interno, reducción de la resistencia del hormigón, inclinación de las bielas"
+},
+"04-68": {
+"fr": "Bielle comprimée : le béton entre les fissures de cisaillement ne doit pas être écrasé",
+"es": "Biela comprimida: el hormigón entre las fisuras de cortante no debe aplastarse"
+},
+"04-69": {
+"fr": "Force de compression agissant dans la partie latérale en saillie de la dalle",
+"es": "Fuerza de compresión que actúa en la parte saliente lateral del ala"
+},
+"04-70": {
+"fr": "Force de compression dans la partie de membrure en saillie (b<sub>eff,i</sub> = {} mm) : F<sub>ca</sub> = {} kN",
+"es": "Fuerza de compresión en la parte saliente del ala (b<sub>eff,i</sub> = {} mm): F<sub>ca</sub> = {} kN"
+},
+"04-71": {
+"fr": "Cette force se développe sur la longueur Δx et doit être transmise de l'âme à la dalle",
+"es": "Esta fuerza se desarrolla a lo largo de la longitud Δx y debe transmitirse del alma al ala"
+},
+"04-72": {
+"fr": "ΔF<sub>d</sub> = 0,75·F<sub>ca</sub> = {} kN (charge uniforme : M(l₀/4) = 0,75·M<sub>max</sub>)",
+"es": "ΔF<sub>d</sub> = 0,75·F<sub>ca</sub> = {} kN (carga uniforme: M(l₀/4) = 0,75·M<sub>max</sub>)"
+},
+"04-73": {
+"fr": "Contrainte de cisaillement longitudinal à la jonction dalle–âme",
+"es": "Tensión tangencial longitudinal en la unión ala–alma"
+},
+"04-74": {
+"fr": "Effort de traction encore présent dans les armatures inférieures à l'appui (décalage a<sub>l</sub>)",
+"es": "Fuerza de tracción que aún hay en la armadura inferior en el apoyo (decalaje a<sub>l</sub>)"
+},
+"04-75": {
+"fr": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z avec a<sub>l</sub> = d (sans armatures d'effort tranchant) : {}·{}/{} = <b>{} kN</b>",
+"es": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z con a<sub>l</sub> = d (sin armadura de cortante): {}·{}/{} = <b>{} kN</b>"
+},
+"04-76": {
+"fr": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z avec a<sub>l</sub> = z·cot θ/2 : F<sub>Ed</sub> = V<sub>Ed</sub>·cot θ/2 = <b>{} kN</b>",
+"es": "F<sub>Ed</sub> = V<sub>Ed</sub>·a<sub>l</sub>/z con a<sub>l</sub> = z·cot θ/2: F<sub>Ed</sub> = V<sub>Ed</sub>·cot θ/2 = <b>{} kN</b>"
+},
+"04-77": {
+"fr": "Armatures à prolonger au-delà de l'appui",
+"es": "Armadura que debe prolongarse más allá del apoyo"
+},
+"04-78": {
+"fr": "A<sub>s,req</sub> = max(F<sub>Ed</sub>/f<sub>yd</sub> ; {}·A<sub>s,travée</sub>) = {} cm²{} ≤ A<sub>s,exist</sub> = {} cm²{} (armatures de travée prolongées jusqu'à l'appui)",
+"es": "A<sub>s,nec</sub> = max(F<sub>Ed</sub>/f<sub>yd</sub>; {}·A<sub>s,vano</sub>) = {} cm²{} ≤ A<sub>s,exist</sub> = {} cm²{} (armadura de vano prolongada hasta el apoyo)"
+},
+"04-79": {
+"fr": "Contrainte de l'acier à l'appui et contrainte d'adhérence entre la barre et le béton",
+"es": "Tensión del acero en el apoyo y tensión de adherencia entre la barra y el hormigón"
+},
+"04-80": {
+"fr": "σ<sub>sd</sub> = F<sub>Ed</sub>/A<sub>s,exist</sub> = {} N/mm²",
+"es": "σ<sub>sd</sub> = F<sub>Ed</sub>/A<sub>s,exist</sub> = {} N/mm²"
+},
+"04-81": {
+"fr": "f<sub>bd</sub> = 2,25·f<sub>ctk;0,05</sub>/γ<sub>c</sub> = {} N/mm² (bonnes conditions d'adhérence)",
+"es": "f<sub>bd</sub> = 2,25·f<sub>ctk;0,05</sub>/γ<sub>c</sub> = {} N/mm² (buenas condiciones de adherencia)"
+},
+"04-82": {
+"fr": "Valeur de base de la longueur d'ancrage : longueur sur laquelle l'effort de la barre est transmis au béton par adhérence",
+"es": "Valor básico de la longitud de anclaje: longitud en la que la fuerza de la barra se transmite al hormigón por adherencia"
+},
+"04-83": {
+"fr": "Longueur d'ancrage à l'appui indirect (sans pression transversale)",
+"es": "Longitud de anclaje en el apoyo indirecto (sin presión transversal)"
+},
+"04-84": {
+"fr": "Longueur d'ancrage à l'appui direct (la pression transversale améliore l'adhérence → ⅔)",
+"es": "Longitud de anclaje en el apoyo directo (la presión transversal mejora la adherencia → ⅔)"
+},
+"04-85": {
+"fr": "l<sub>bd,ind</sub> = max(α₁·l<sub>b,rqd</sub> ; 0,3·α₁·l<sub>b,rqd</sub> ; 10·Ø ; 100 mm) = max({} ; {} ; {} ; 100) = <b>{} mm</b> (α₁ = {}, sans pression transversale)",
+"es": "l<sub>bd,ind</sub> = max(α₁·l<sub>b,rqd</sub>; 0,3·α₁·l<sub>b,rqd</sub>; 10·Ø; 100 mm) = max({}; {}; {}; 100) = <b>{} mm</b> (α₁ = {}, sin presión transversal)"
+},
+"04-86": {
+"fr": "Vérification : longueur disponible derrière le nu avant de l'appui",
+"es": "Comprobación: longitud disponible detrás de la cara anterior del apoyo"
+},
+"04-87": {
+"fr": "Largeur de la poutre porteuse",
+"es": "Anchura de la viga de apoyo"
+},
+"04-88": {
+"fr": "Courbe des efforts de traction : effort de la barre déduit du moment, F<sub>sd</sub>(x) = M<sub>Ed</sub>(x)/z",
+"es": "Envolvente de tracciones: fuerza de la barra a partir del momento, F<sub>sd</sub>(x) = M<sub>Ed</sub>(x)/z"
+},
+"04-89": {
+"fr": "Poutre sur deux appuis sous charge uniforme : M(x) = 4·M<sub>Ed</sub>·x/l·(1 − x/l), F<sub>sd</sub> max = {}·10³/{} = <b>{} kN</b>",
+"es": "Viga biapoyada con carga uniforme: M(x) = 4·M<sub>Ed</sub>·x/l·(1 − x/l), F<sub>sd</sub> máx = {}·10³/{} = <b>{} kN</b>"
+},
+"04-90": {
+"fr": "Décalage : en raison de l'inclinaison des bielles comprimées, l'effort de traction est supérieur à M/z — la courbe est décalée de a<sub>l</sub> vers l'appui",
+"es": "Decalaje: debido a la inclinación de las bielas comprimidas, la tracción es mayor que M/z — la línea se desplaza a<sub>l</sub> hacia el apoyo"
+},
+"04-91": {
+"fr": "Section fissurée (état II) : axe neutre et bras de levier",
+"es": "Sección fisurada (estado II): fibra neutra y brazo mecánico"
+},
+"04-92": {
+"fr": " (zone comprimée avec b<sub>eff</sub>)",
+"es": " (zona comprimida con b<sub>eff</sub>)"
+},
+"04-93": {
+"fr": "Contrainte de l'acier sous la charge quasi permanente",
+"es": "Tensión del acero bajo la carga cuasipermanente"
+},
+"04-94": {
+"fr": "Zone tendue efficace autour des armatures et son taux d'armatures",
+"es": "Zona traccionada efectiva alrededor de la armadura y su cuantía"
+},
+"04-95": {
+"fr": "Espacement maximal des fissures",
+"es": "Separación máxima entre fisuras"
+},
+"04-96": {
+"fr": "Différence moyenne de déformation acier–béton entre deux fissures",
+"es": "Diferencia media de deformación acero–hormigón entre dos fisuras"
+},
+"04-97": {
+"fr": "Ouverture de fissure = espacement des fissures × différence de déformation",
+"es": "Abertura de fisura = separación entre fisuras × diferencia de deformación"
+},
+"04-98": {
+"fr": "Section fissurée : traction en haut, zone comprimée en bas",
+"es": "Sección fisurada: tracción arriba, zona comprimida abajo"
+},
+"04-99": {
+"fr": "Côté tendu en haut, zone comprimée en bas avec b{} = {} mm",
+"es": "Lado traccionado arriba, zona comprimida abajo con b{} = {} mm"
+},
+"04-100": {
+"fr": "Contrainte de l'acier des armatures supérieures",
+"es": "Tensión del acero de la armadura superior"
+},
+"04-101": {
+"fr": "σ<sub>s</sub> = M<sub>qp,appui</sub>/(A<sub>s,sup</sub>·z) = {}·10⁶ / ({}·{}) = <b>{} N/mm²</b>",
+"es": "σ<sub>s</sub> = M<sub>qp,apoyo</sub>/(A<sub>s,sup</sub>·z) = {}·10⁶ / ({}·{}) = <b>{} N/mm²</b>"
+},
+"04-102": {
+"fr": "Zone tendue efficace et taux d'armatures",
+"es": "Zona traccionada efectiva y cuantía de armadura"
+},
+"04-103": {
+"fr": "Espacement des fissures et différence de déformation",
+"es": "Separación entre fisuras y diferencia de deformación"
+},
+"04-104": {
+"fr": "Élancement en flexion existant : portée divisée par la hauteur utile",
+"es": "Esbeltez a flexión existente: luz dividida por el canto útil"
+},
+"04-105": {
+"fr": "Vue en coupe",
+"es": "Vista en sección"
+},
+"04-106": {
+"fr": " (compr.)",
+"es": " (compr.)"
+},
+"04-107": {
+"fr": "M<sub>Ed</sub> = {} kNm{} (travée, traction en bas)",
+"es": "M<sub>Ed</sub> = {} kNm{} (vano, tracción abajo)"
+},
+"04-108": {
+"fr": "M<sub>Ed,appui</sub> = {} kNm{} (appui, traction en haut)",
+"es": "M<sub>Ed,apoyo</sub> = {} kNm{} (apoyo, tracción arriba)"
+},
+"04-109": {
+"fr": "x = {} cm (axe neutre en tirets)",
+"es": "x = {} cm (fibra neutra discontinua)"
+},
+"04-110": {
+"fr": "Le couple de forces F<sub>cd</sub>·z est le moment interne ; il équilibre M<sub>Ed</sub>.",
+"es": "El par de fuerzas F<sub>cd</sub>·z es el momento interno; equilibra M<sub>Ed</sub>."
+},
+"04-111": {
+"fr": "en bas Ø{}/{} cm = {} cm²/m",
+"es": "abajo Ø{}/{} cm = {} cm²/m"
+},
+"04-112": {
+"fr": " · en haut (appui) Ø{}/{} cm = {} cm²/m",
+"es": " · arriba (apoyo) Ø{}/{} cm = {} cm²/m"
+},
+"04-113": {
+"fr": " ({} + {} en deux lits)",
+"es": " ({} + {} en dos capas)"
+},
+"04-114": {
+"fr": "en bas {} Ø {} = {} cm²{}",
+"es": "abajo {} Ø {} = {} cm²{}"
+},
+"04-115": {
+"fr": " (armatures comprimées)",
+"es": " (armadura de compresión)"
+},
+"04-116": {
+"fr": " · en haut {} Ø {}{}",
+"es": " · arriba {} Ø {}{}"
+},
+"04-117": {
+"fr": " · étriers Ø{}/{} cm",
+"es": " · estribos Ø{}/{} cm"
+},
+"04-118": {
+"fr": " · en haut (appui) {} Ø {} = {} cm²",
+"es": " · arriba (apoyo) {} Ø {} = {} cm²"
+},
+"04-119": {
+"fr": "Conclusion",
+"es": "Conclusión"
+},
+"04-120": {
+"fr": "Hauteur utile et taux d'armatures",
+"es": "Canto útil y cuantía de armadura"
+},
+"04-121": {
+"fr": "Poinçonnement sans armatures",
+"es": "Punzonamiento sin armadura"
+},
+"04-122": {
+"fr": "Résistant avec armatures de poinçonnement — voir la vérification suivante.",
+"es": "Resiste con armadura de punzonamiento — véase la comprobación siguiente."
+},
+"04-123": {
+"fr": "Armatures de poinçonnement requises par rang (étriers verticaux, espacement des rangs s<sub>r</sub> = 0,75d)",
+"es": "Armadura de punzonamiento necesaria por fila (estribos verticales, separación entre filas s<sub>r</sub> = 0,75d)"
+},
+"04-124": {
+"fr": "AN : 1er rang (0,3d … 0,5d du nu du poteau) A<sub>sw,1</sub> = 2,5·A<sub>sw</sub> = <b>{} cm²</b>, 2e rang A<sub>sw,2</sub> = 1,4·A<sub>sw</sub> = <b>{} cm²</b>, rangs suivants {} cm²",
+"es": "AN: 1.ª fila (0,3d … 0,5d de la cara del pilar) A<sub>sw,1</sub> = 2,5·A<sub>sw</sub> = <b>{} cm²</b>, 2.ª fila A<sub>sw,2</sub> = 1,4·A<sub>sw</sub> = <b>{} cm²</b>, filas siguientes {} cm²"
+},
+"04-125": {
+"fr": "Contour de contrôle extérieur : là, le béton doit de nouveau reprendre seul la charge (AN : C<sub>Rd,c</sub> = 0,15/γ<sub>c</sub>)",
+"es": "Perímetro de control exterior: allí el hormigón debe volver a resistir solo la carga (AN: C<sub>Rd,c</sub> = 0,15/γ<sub>c</sub>)"
+},
+"04-126": {
+"fr": "u<sub>out</sub> = β·V<sub>Ed</sub>/(v<sub>Rd,c,out</sub>·d) = {}·{}·10³/({}·{}) = {} mm → distance au nu du poteau {} mm",
+"es": "u<sub>out</sub> = β·V<sub>Ed</sub>/(v<sub>Rd,c,out</sub>·d) = {}·{}·10³/({}·{}) = {} mm → distancia a la cara del pilar {} mm"
+},
+"04-127": {
+"fr": "dernier rang d'armatures au plus à 1,5d à l'intérieur : {} mm du nu du poteau → <b>{} rangs</b> espacés de {} mm",
+"es": "última fila de armadura como máximo a 1,5d hacia el interior: {} mm de la cara del pilar → <b>{} filas</b> con separación de {} mm"
+},
+"04-128": {
+"fr": "Respecter l'armature minimale par brin A<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·s<sub>r</sub>·s<sub>t</sub>/1,5 ; espacement tangentiel dans 2d ≤ 1,5d.",
+"es": "Respete la armadura mínima por rama A<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·s<sub>r</sub>·s<sub>t</sub>/1,5; separación tangencial dentro de 2d ≤ 1,5d."
+},
+"04-129": {
+"fr": "Aucune armature de poinçonnement n'est nécessaire.",
+"es": "No se necesita armadura de punzonamiento."
+},
+"04-130": {
+"fr": "v<sub>Ed</sub> > v<sub>Rd,max</sub> : dalle plus épaisse, poteau plus grand, chapiteau/champignon ou classe de béton supérieure.",
+"es": "v<sub>Ed</sub> > v<sub>Rd,max</sub>: losa más gruesa, pilar mayor, capitel/ábaco o clase de hormigón superior."
+},
+"04-131": {
+"fr": "Armatures de poinçonnement",
+"es": "Armadura de punzonamiento"
+},
+"04-132": {
+"fr": "Valeur maximale de la résistance au poinçonnement",
+"es": "Valor máximo de la resistencia a punzonamiento"
+},
+"04-133": {
+"fr": "Hauteur utile moyenne des deux directions d'armatures",
+"es": "Canto útil medio de ambas direcciones de armadura"
+},
+"04-134": {
+"fr": "Taux d'armatures longitudinales (moyenne géométrique des deux directions)",
+"es": "Cuantía de armadura longitudinal (media geométrica de ambas direcciones)"
+},
+"04-135": {
+"fr": "sans armatures de poinçonnement",
+"es": "sin armadura de punzonamiento"
+},
+"04-136": {
+"fr": "Contour de contrôle de référence à une distance 2d autour du poteau (cône de rupture à environ 26,6°)",
+"es": "Perímetro de control básico a una distancia 2d alrededor del pilar (cono de rotura de aproximadamente 26,6°)"
+},
+"04-137": {
+"fr": ", limité au bord",
+"es": ", limitado en el borde"
+},
+"04-138": {
+"fr": "Contrainte de cisaillement agissante sur le contour de contrôle de référence (β tient compte de la répartition non uniforme due aux moments)",
+"es": "Tensión tangencial actuante en el perímetro de control básico (β tiene en cuenta la distribución no uniforme debida a los momentos)"
+},
+"04-139": {
+"fr": "Résistance sans armatures de poinçonnement (AN : C<sub>Rd,c</sub> pour les poteaux intérieurs dépend de u<sub>0</sub>/d)",
+"es": "Resistencia sin armadura de punzonamiento (AN: C<sub>Rd,c</sub> en pilares interiores depende de u<sub>0</sub>/d)"
+},
+"04-140": {
+"fr": "Limite supérieure avec armatures de poinçonnement (AN : v<sub>Rd,max</sub> = 1,4·v<sub>Rd,c</sub>)",
+"es": "Límite superior con armadura de punzonamiento (AN: v<sub>Rd,max</sub> = 1,4·v<sub>Rd,c</sub>)"
+},
+"04-141": {
+"fr": "Vue en plan",
+"es": "Vista en planta"
+},
+"04-142": {
+"fr": "bord libre",
+"es": "borde libre"
+},
+"04-143": {
+"fr": "charge de plancher",
+"es": "carga del forjado"
+},
+"04-144": {
+"fr": "d = {} mm · u₁ à une distance 2d = {} mm",
+"es": "d = {} mm · u₁ a una distancia 2d = {} mm"
+},
+"04-145": {
+"fr": "Orange : contour de contrôle de référence u₁. ",
+"es": "Naranja: perímetro de control básico u₁. "
+},
+"04-146": {
+"fr": "Gris : rangs d'armatures de poinçonnement, bleu en tirets : contour de contrôle extérieur u<sub>out</sub>.",
+"es": "Gris: filas de armadura de punzonamiento, azul discontinuo: perímetro de control exterior u<sub>out</sub>."
+},
+"04-147": {
+"fr": "h = {} cm, d = {} mm · en haut Ø{}/{} et Ø{}/{} cm · {}",
+"es": "h = {} cm, d = {} mm · arriba Ø{}/{} y Ø{}/{} cm · {}"
+},
+"04-148": {
+"fr": "Ouvertures près du poteau, renforcements de tête de poteau, détermination exacte de β à partir des moments, fondations, disposition détaillée des étriers et armature minimale pour les moments (6.4.4 et 9.4.3).",
+"es": "Huecos cerca del pilar, refuerzos del capitel del pilar, determinación exacta de β a partir de los momentos, cimentaciones, disposición detallada de los estribos y armadura mínima para momentos (6.4.4 y 9.4.3)."
+},
+"04-149": {
+"fr": "non réalisable — renforcer la dalle",
+"es": "no ejecutable — refuerce la losa"
+},
+"04-150": {
+"fr": "Poinçonnement",
+"es": "Punzonamiento"
+},
+"04-151": {
+"fr": "DIN EN 1992-1-1 avec AN, 6.4",
+"es": "DIN EN 1992-1-1 con AN, 6.4"
+},
+"04-152": {
+"fr": "Dalle",
+"es": "Losa"
+},
+"04-153": {
+"fr": "h = {} cm, {}, classe d'exposition {}, c<sub>nom</sub> = {} mm",
+"es": "h = {} cm, {}, clase de exposición {}, c<sub>nom</sub> = {} mm"
+},
+"04-154": {
+"fr": "Poteau",
+"es": "Pilar"
+},
+"04-155": {
+"fr": "Armatures de flexion en haut",
+"es": "Armadura de flexión superior"
+},
+"04-156": {
+"fr": "Action",
+"es": "Acción"
+},
+"04-157": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Contours de contrôle</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Perímetros de control</h2><div class=\"figure\">{}</div></section>"
+},
+"04-158": {
+"fr": "Enrobage et dimensions",
+"es": "Recubrimiento y dimensiones"
+},
+"04-159": {
+"fr": "Les poteaux coulés en place et bétonnés à la verticale nécessitent une épaisseur d'au moins 20 cm.",
+"es": "Los pilares hormigonados in situ en posición vertical requieren un espesor de al menos 20 cm."
+},
+"04-160": {
+"fr": "Élancement",
+"es": "Esbeltez"
+},
+"04-161": {
+"fr": "Poteau très élancé (λ > 140) : la méthode du poteau modèle n'a plus de sens ici — augmenter la section.",
+"es": "Pilar muy esbelto (λ > 140): el método del pilar modelo ya no es adecuado aquí — aumente la sección."
+},
+"04-162": {
+"fr": "Courbure à l'état limite : les deux lits d'armatures plastifient tout juste",
+"es": "Curvatura en el estado límite: ambas capas de armadura alcanzan justo la plastificación"
+},
+"04-163": {
+"fr": "K<sub>r</sub> = (n<sub>u</sub> − n)/(n<sub>u</sub> − n<sub>bal</sub>) ≤ 1 avec n<sub>u</sub> = 1 + ω = {}, n<sub>bal</sub> = 0,4 → K<sub>r</sub> = {}",
+"es": "K<sub>r</sub> = (n<sub>u</sub> − n)/(n<sub>u</sub> − n<sub>bal</sub>) ≤ 1 con n<sub>u</sub> = 1 + ω = {}, n<sub>bal</sub> = 0,4 → K<sub>r</sub> = {}"
+},
+"04-164": {
+"fr": "K<sub>φ</sub> = 1 + β·φ<sub>ef</sub> ≥ 1 avec β = 0,35 + f<sub>ck</sub>/200 − λ/150 = {} → K<sub>φ</sub> = {}",
+"es": "K<sub>φ</sub> = 1 + β·φ<sub>ef</sub> ≥ 1 con β = 0,35 + f<sub>ck</sub>/200 − λ/150 = {} → K<sub>φ</sub> = {}"
+},
+"04-165": {
+"fr": "Excentricité supplémentaire due à la déformation (second ordre), déformée sinusoïdale",
+"es": "Excentricidad adicional por la deformación (segundo orden), deformada sinusoidal"
+},
+"04-166": {
+"fr": "Excentricité totale et moment de calcul à mi-hauteur du poteau",
+"es": "Excentricidad total y momento de cálculo a media altura del pilar"
+},
+"04-167": {
+"fr": "Poteau trapu : l'extrémité du poteau est déterminante",
+"es": "Pilar corto: es determinante el extremo del pilar"
+},
+"04-168": {
+"fr": "Moment minimal issu de l'excentricité minimale e<sub>0</sub> ≥ max(h/30 ; 20 mm)",
+"es": "Momento mínimo a partir de la excentricidad mínima e<sub>0</sub> ≥ max(h/30; 20 mm)"
+},
+"04-169": {
+"fr": "Moment de calcul = valeur la plus grande",
+"es": "Momento de cálculo = valor mayor"
+},
+"04-170": {
+"fr": "<b>M<sub>Ed</sub> = {} kNm</b> avec N<sub>Ed</sub> = {} kN",
+"es": "<b>M<sub>Ed</sub> = {} kNm</b> con N<sub>Ed</sub> = {} kN"
+},
+"04-171": {
+"fr": "Moment de calcul (méthode du poteau modèle)",
+"es": "Momento de cálculo (método del pilar modelo)"
+},
+"04-172": {
+"fr": "Rechercher le plan de déformation pour lequel les efforts internes donnent tout juste N<sub>Ed</sub>",
+"es": "Buscar el plano de deformación para el que las fuerzas internas dan justo N<sub>Ed</sub>"
+},
+"04-173": {
+"fr": "à l'extérieur (section entièrement comprimée)",
+"es": "fuera (sección totalmente comprimida)"
+},
+"04-174": {
+"fr": "Axe neutre x = {} · ε<sub>c,bord</sub> = −{} ‰ · ε<sub>s2</sub> = {} ‰ · ε<sub>s1</sub> = {} ‰",
+"es": "Fibra neutra x = {} · ε<sub>c,borde</sub> = −{} ‰ · ε<sub>s2</sub> = {} ‰ · ε<sub>s1</sub> = {} ‰"
+},
+"04-175": {
+"fr": "Moment résistant pour cet effort normal (autour de l'axe passant par le centre de gravité)",
+"es": "Momento resistente para este esfuerzo axil (respecto al eje baricéntrico)"
+},
+"04-176": {
+"fr": "Armatures totales requises (itérées avec K<sub>r</sub> correspondant à A<sub>s</sub>)",
+"es": "Armadura total necesaria (iterada con K<sub>r</sub> correspondiente a A<sub>s</sub>)"
+},
+"04-177": {
+"fr": "A<sub>s,tot,req</sub> = <b>{} cm²</b> ≤ A<sub>s,tot,exist</sub> = {} cm²",
+"es": "A<sub>s,tot,nec</sub> = <b>{} cm²</b> ≤ A<sub>s,tot,exist</sub> = {} cm²"
+},
+"04-178": {
+"fr": "Impossible même avec 20 % d'armatures — augmenter la section.",
+"es": "No es posible ni siquiera con un 20 % de armadura — aumente la sección."
+},
+"04-179": {
+"fr": "Diagramme d'interaction : tous les couples (M ; N) que la section peut reprendre — le point de calcul doit se situer à l'intérieur",
+"es": "Diagrama de interacción: todos los pares (M; N) que la sección puede resistir — el punto de cálculo debe quedar en el interior"
+},
+"04-180": {
+"fr": "Compression et flexion (section)",
+"es": "Compresión y flexión (sección)"
+},
+"04-181": {
+"fr": "Choisir davantage d'armatures longitudinales, un poteau plus épais ou une classe de béton supérieure.",
+"es": "Elija más armadura longitudinal, un pilar más grueso o una clase de hormigón superior."
+},
+"04-182": {
+"fr": "Dispositions constructives des armatures",
+"es": "Reglas de armado"
+},
+"04-183": {
+"fr": "Réduire l'espacement des étriers à 0,6·s<sub>cl,t,max</sub> immédiatement au-dessus et au-dessous des poutres ou dalles ainsi que dans la zone de recouvrement des barres longitudinales.",
+"es": "Reduzca la separación de los estribos a 0,6·s<sub>cl,t,max</sub> inmediatamente por encima y por debajo de vigas o losas, así como en la zona de solape de las barras longitudinales."
+},
+"04-184": {
+"fr": " Faces latérales > 30 cm : disposer des barres longitudinales constructives supplémentaires (espacement ≤ 300 mm).",
+"es": " Caras laterales > 30 cm: disponga barras longitudinales constructivas adicionales (separación ≤ 300 mm)."
+},
+"04-185": {
+"fr": "Enrobage nominal du béton pour l'étrier et la barre longitudinale",
+"es": "Recubrimiento nominal del hormigón para el estribo y la barra longitudinal"
+},
+"04-186": {
+"fr": "Distance des armatures au bord et hauteur utile statique",
+"es": "Distancia de la armadura al borde y canto útil estático"
+},
+"04-187": {
+"fr": "Dimension minimale d'un poteau coulé en place bétonné à la verticale (NA 9.5.1)",
+"es": "Dimensión mínima de un pilar hormigonado in situ en posición vertical (NA 9.5.1)"
+},
+"04-188": {
+"fr": "Résistance minimale du béton pour la classe d'exposition",
+"es": "Resistencia mínima del hormigón para la clase de exposición"
+},
+"04-189": {
+"fr": "Longueur de flambement selon les conditions d'appui",
+"es": "Longitud de pandeo según las condiciones de apoyo"
+},
+"04-190": {
+"fr": "Élancement : longueur de flambement divisée par le rayon de giration",
+"es": "Esbeltez: longitud de pandeo dividida por el radio de giro"
+},
+"04-191": {
+"fr": "Élancement limite selon l'AN : dépend de l'effort normal réduit",
+"es": "Esbeltez límite según el AN: depende del axil reducido"
+},
+"04-192": {
+"fr": "Moment équivalent du premier ordre : les moments d'extrémité inégaux sont convertis en un moment constant équivalent",
+"es": "Momento equivalente de primer orden: los momentos extremos desiguales se convierten en un momento constante equivalente"
+},
+"04-193": {
+"fr": "Imperfection : le poteau n'est jamais parfaitement droit — inclinaison θ<sub>i</sub>",
+"es": "Imperfección: el pilar nunca es perfectamente recto — inclinación θ<sub>i</sub>"
+},
+"04-194": {
+"fr": "θ<sub>i</sub> = α<sub>h</sub>/200 avec α<sub>h</sub> = 2/√l ≤ 1 = {} → θ<sub>i</sub> = 1/{}",
+"es": "θ<sub>i</sub> = α<sub>h</sub>/200 con α<sub>h</sub> = 2/√l ≤ 1 = {} → θ<sub>i</sub> = 1/{}"
+},
+"04-195": {
+"fr": "Armatures choisies (symétriques, identiques de chaque côté)",
+"es": "Armadura elegida (simétrica, igual en cada lado)"
+},
+"04-196": {
+"fr": "taux mécanique d'armatures ω = A<sub>s,tot</sub>·f<sub>yd</sub>/(A<sub>c</sub>·f<sub>cd</sub>) = {}",
+"es": "cuantía mecánica de armadura ω = A<sub>s,tot</sub>·f<sub>yd</sub>/(A<sub>c</sub>·f<sub>cd</sub>) = {}"
+},
+"04-197": {
+"fr": "Effort de compression maximal sans moment (béton et acier raccourcis à 2 ‰)",
+"es": "Fuerza de compresión máxima sin momento (hormigón y acero comprimidos al 2 ‰)"
+},
+"04-198": {
+"fr": "Barres longitudinales : diamètre minimal et armatures minimales/maximales (NA 9.5.2)",
+"es": "Barras longitudinales: diámetro mínimo y armadura mínima/máxima (NA 9.5.2)"
+},
+"04-199": {
+"fr": "A<sub>s,max</sub> = 0,09·A<sub>c</sub> = {} cm² ≥ {} cm² (également dans la zone de recouvrement)",
+"es": "A<sub>s,max</sub> = 0,09·A<sub>c</sub> = {} cm² ≥ {} cm² (también en la zona de solape)"
+},
+"04-200": {
+"fr": "Espacements des barres longitudinales par côté",
+"es": "Separaciones de las barras longitudinales por lado"
+},
+"04-201": {
+"fr": "Étriers : maintiennent les barres longitudinales contre le flambement (NA 9.5.3)",
+"es": "Estribos: sujetan las barras longitudinales frente al pandeo (NA 9.5.3)"
+},
+"04-202": {
+"fr": "N [kN] (compression +)",
+"es": "N [kN] (compresión +)"
+},
+"04-203": {
+"fr": "Vue (poteau de remplacement)",
+"es": "Vista (pilar modelo)"
+},
+"04-204": {
+"fr": "N<sub>Ed</sub> = {} kN (compression, ⊗)",
+"es": "N<sub>Ed</sub> = {} kN (compresión, ⊗)"
+},
+"04-205": {
+"fr": " et e<sub>2</sub>",
+"es": " y e<sub>2</sub>"
+},
+"04-206": {
+"fr": "M<sub>Ed</sub> = {} kNm (avec e<sub>i</sub>{})",
+"es": "M<sub>Ed</sub> = {} kNm (con e<sub>i</sub>{})"
+},
+"04-207": {
+"fr": "En tirets : déformée de flambement (fortement exagérée). Double flèche = vecteur moment.",
+"es": "Discontinua: deformada de pandeo (muy exagerada). Flecha doble = vector momento."
+},
+"04-208": {
+"fr": "moment constant",
+"es": "momento constante"
+},
+"04-209": {
+"fr": "Flexion autour de z : semelles selon Tab. 5.2 comme ci-dessus (compression uniforme, côté sécurité) → W<sub>{},z</sub> = {} cm³",
+"es": "Flexión respecto a z: alas según Tab. 5.2 como arriba (compresión uniforme, del lado de la seguridad) → W<sub>{},z</sub> = {} cm³"
+},
+"04-210": {
+"fr": "Classification de la section",
+"es": "Clasificación de la sección"
+},
+"04-211": {
+"fr": "Classe 4 : des parties voilent avant d'atteindre la limite d'élasticité. size utilise des caractéristiques de section efficace (vérification suivante).",
+"es": "Clase 4: partes de la sección abollan antes de alcanzar el límite elástico. size utiliza las propiedades de la sección eficaz (comprobación siguiente)."
+},
+"04-212": {
+"fr": "Section efficace (classe 4)",
+"es": "Sección eficaz (clase 4)"
+},
+"04-213": {
+"fr": "Effort tranchant : est-il assez grand pour affaiblir l'âme en flexion ?",
+"es": "Esfuerzo cortante: ¿es lo bastante grande para debilitar el alma a flexión?"
+},
+"04-214": {
+"fr": " > 0,5 → réduire le moment résistant",
+"es": " > 0,5 → reducir el momento resistente"
+},
+"04-215": {
+"fr": " ≤ 0,5 → aucune réduction",
+"es": " ≤ 0,5 → sin reducción"
+},
+"04-216": {
+"fr": "Effort tranchant : V<sub>Ed</sub>/V<sub>pl,Rd</sub> = {}{}",
+"es": "Esfuerzo cortante: V<sub>Ed</sub>/V<sub>pl,Rd</sub> = {}{}"
+},
+"04-217": {
+"fr": "Effort normal : réduire la résistance en flexion lorsque N est élevé",
+"es": "Esfuerzo axil: reducir la resistencia a flexión cuando N es grande"
+},
+"04-218": {
+"fr": "N<sub>Ed</sub> ≤ 0,25·N<sub>pl,Rd</sub> et ≤ 0,5·h<sub>w</sub>·t<sub>w</sub>·f<sub>y</sub> : pas de réduction du moment autour de y",
+"es": "N<sub>Ed</sub> ≤ 0,25·N<sub>pl,Rd</sub> y ≤ 0,5·h<sub>w</sub>·t<sub>w</sub>·f<sub>y</sub>: sin reducción del momento respecto a y"
+},
+"04-219": {
+"fr": "Flexion biaxiale : les deux taux de travail combinés (interaction 6.41)",
+"es": "Flexión biaxial: ambos aprovechamientos combinados (interacción 6.41)"
+},
+"04-220": {
+"fr": "Vérification en flexion",
+"es": "Comprobación a flexión"
+},
+"04-221": {
+"fr": "Flexion : M<sub>y,Ed</sub> = {} kNm ≤ M<sub>Rd</sub> = <b>{} kNm</b>",
+"es": "Flexión: M<sub>y,Ed</sub> = {} kNm ≤ M<sub>Rd</sub> = <b>{} kNm</b>"
+},
+"04-222": {
+"fr": "Vérification élastique : contrainte de bord due à tous les efforts internes",
+"es": "Comprobación elástica: tensión en el borde debida a todos los esfuerzos internos"
+}
+}

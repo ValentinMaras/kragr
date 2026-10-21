@@ -1,0 +1,914 @@
+{
+"06-0": {
+"fr": "Contraintes élastiques dans la platine au droit de la semelle du poteau (contrainte équivalente, 6.2.1(5))",
+"es": "Tensiones elásticas en la chapa en el ala del pilar (tensión equivalente, 6.2.1(5))"
+},
+"06-1": {
+"fr": "σ<sub>v</sub> = √(σ² + 3τ²) = <b>{} N/mm²</b> {} f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm² (du côté de la sécurité : σ et τ<sub>max</sub> au même point)",
+"es": "σ<sub>v</sub> = √(σ² + 3τ²) = <b>{} N/mm²</b> {} f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm² (del lado de la seguridad: σ y τ<sub>max</sub> en el mismo punto)"
+},
+"06-2": {
+"fr": "Vérifier séparément la stabilité de la platine (déversement/voilement) pour les consoles longues et minces.",
+"es": "Comprobar por separado la estabilidad de la chapa (pandeo lateral/abolladura) en ménsulas largas y esbeltas."
+},
+"06-3": {
+"fr": "Soudure de la console",
+"es": "Soldadura de la ménsula"
+},
+"06-4": {
+"fr": "au bord extérieur de la semelle",
+"es": "en el borde exterior del ala"
+},
+"06-5": {
+"fr": "à l'extrémité de la soudure d'âme",
+"es": "en el extremo de la soldadura del alma"
+},
+"06-6": {
+"fr": "Résistance par mm² de section de gorge selon la méthode directionnelle",
+"es": "Resistencia por mm² de área de garganta según el método direccional"
+},
+"06-7": {
+"fr": "Cordon frontal (effort perpendiculaire au cordon) : σ<sub>⊥</sub> = τ<sub>⊥</sub> = σ<sub>w</sub>/√2 → √(σ<sub>⊥</sub>² + 3τ<sub>⊥</sub>²) = √2·σ<sub>w</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → σ<sub>w,Rd</sub> = {}/(√2·{}·1,25) = <b>{} N/mm²</b>",
+"es": "Cordón frontal (fuerza perpendicular al cordón): σ<sub>⊥</sub> = τ<sub>⊥</sub> = σ<sub>w</sub>/√2 → √(σ<sub>⊥</sub>² + 3τ<sub>⊥</sub>²) = √2·σ<sub>w</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → σ<sub>w,Rd</sub> = {}/(√2·{}·1,25) = <b>{} N/mm²</b>"
+},
+"06-8": {
+"fr": "Cordon latéral (effort parallèle au cordon) : √3·τ<sub>∥</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → τ<sub>∥,Rd</sub> = {}/(√3·{}·1,25) = <b>{} N/mm²</b> (les cordons frontaux reprennent donc {} fois plus)",
+"es": "Cordón lateral (fuerza paralela al cordón): √3·τ<sub>∥</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → τ<sub>∥,Rd</sub> = {}/(√3·{}·1,25) = <b>{} N/mm²</b> (los cordones frontales resisten, por tanto, {} veces más)"
+},
+"06-9": {
+"fr": "à l'extrémité supérieure de la soudure",
+"es": "en el extremo superior de la soldadura"
+},
+"06-10": {
+"fr": "Disposition des soudures (vue sur la platine d'about)",
+"es": "Disposición de las soldaduras (vista de la chapa frontal)"
+},
+"06-11": {
+"fr": "σ<sub>w</sub> extérieur = {} N/mm²",
+"es": "σ<sub>w</sub> exterior = {} N/mm²"
+},
+"06-12": {
+"fr": "Orange : soudures d'angle (largeur à l'échelle de la gorge a).",
+"es": "Naranja: soldaduras en ángulo (ancho a escala con el espesor de garganta a)."
+},
+"06-13": {
+"fr": "Gousset",
+"es": "Cartela"
+},
+"06-14": {
+"fr": " (cordons latéraux et frontaux)",
+"es": " (cordones laterales y frontales)"
+},
+"06-15": {
+"fr": " (cordons latéraux seulement)",
+"es": " (solo cordones laterales)"
+},
+"06-16": {
+"fr": "Orange : soudures d'angle a = {} mm{}.",
+"es": "Naranja: soldaduras en ángulo a = {} mm{}."
+},
+"06-17": {
+"fr": "F<sub>Ed</sub> = {} kN à la distance e = {} mm",
+"es": "F<sub>Ed</sub> = {} kN a la distancia e = {} mm"
+},
+"06-18": {
+"fr": "Orange : deux soudures d'angle de part et d'autre de la platine.",
+"es": "Naranja: dos soldaduras en ángulo a ambos lados de la chapa."
+},
+"06-19": {
+"fr": "Soudures bout à bout (pleine pénétration = métal de base), soudures soumises à la fatigue, profils creux, vérification du métal de base dans la zone d'assemblage (platine d'about, semelle du poteau) et séquence de soudage/déformations.",
+"es": "Soldaduras a tope (penetración completa = material base), soldaduras sometidas a fatiga, perfiles huecos, comprobación del material base en la zona de la unión (chapa frontal, ala del pilar) y secuencia de soldeo/distorsión."
+},
+"06-20": {
+"fr": " + cordon frontal",
+"es": " + cordón frontal"
+},
+"06-21": {
+"fr": "Assemblage soudé",
+"es": "Unión soldada"
+},
+"06-22": {
+"fr": "DIN EN 1993-1-8 avec AN, 4.5",
+"es": "DIN EN 1993-1-8 con AN, 4.5"
+},
+"06-23": {
+"fr": "Cas",
+"es": "Caso"
+},
+"06-24": {
+"fr": "Caractéristiques",
+"es": "Valores característicos"
+},
+"06-25": {
+"fr": "<section><h2>Données</h2><table>\n      {}{}\n      {}\n    </table></section><section><h2>Disposition des soudures</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}{}\n      {}\n    </table></section><section><h2>Disposición de las soldaduras</h2><div class=\"figure\">{}</div></section>"
+},
+"06-26": {
+"fr": "Soudures d'angle selon la méthode directionnelle.",
+"es": "Soldaduras en ángulo según el método direccional."
+},
+"06-27": {
+"fr": "Profilé, platine",
+"es": "Perfil, chapa"
+},
+"06-28": {
+"fr": ", cordon frontal ",
+"es": ", cordón frontal "
+},
+"06-29": {
+"fr": "Surface efficace : la charge est ramenée au centre d'une surface réduite (b′ = b − 2e)",
+"es": "Área efectiva: la carga se sitúa centrada sobre un área reducida (b′ = b − 2e)"
+},
+"06-30": {
+"fr": " (bande, par m)",
+"es": " (corrida, por m)"
+},
+"06-31": {
+"fr": "Facteurs de capacité portante (DIN 4017)",
+"es": "Factores de capacidad portante (DIN 4017)"
+},
+"06-32": {
+"fr": "Facteurs de forme : semelle filante → ν<sub>b</sub> = ν<sub>d</sub> = ν<sub>c</sub> = 1",
+"es": "Factores de forma: zapata corrida → ν<sub>b</sub> = ν<sub>d</sub> = ν<sub>c</sub> = 1"
+},
+"06-33": {
+"fr": "Facteurs de forme avec b′/a′ = {} : ν<sub>b</sub> = 1 − 0,3·b′/a′ = {} · ν<sub>d</sub> = 1 + b′/a′·sin φ = {} · ν<sub>c</sub> = {}",
+"es": "Factores de forma con b′/a′ = {}: ν<sub>b</sub> = 1 − 0,3·b′/a′ = {} · ν<sub>d</sub> = 1 + b′/a′·sin φ = {} · ν<sub>c</sub> = {}"
+},
+"06-34": {
+"fr": "Facteurs d'inclinaison (H parallèle à b′, m = {}) : H/(V + A′·c′·cot φ) = {}/({} + {}·{}·{}) = {} → i<sub>d</sub> = (1 − {})<sup>m</sup> = {} · i<sub>b</sub> = (1 − {})<sup>m+1</sup> = {} · i<sub>c</sub> = {}",
+"es": "Factores de inclinación (H paralela a b′, m = {}): H/(V + A′·c′·cot φ) = {}/({} + {}·{}·{}) = {} → i<sub>d</sub> = (1 − {})<sup>m</sup> = {} · i<sub>b</sub> = (1 − {})<sup>m+1</sup> = {} · i<sub>c</sub> = {}"
+},
+"06-35": {
+"fr": "Pas d'effort horizontal : i<sub>b</sub> = i<sub>d</sub> = i<sub>c</sub> = 1",
+"es": "Sin fuerza horizontal: i<sub>b</sub> = i<sub>d</sub> = i<sub>c</sub> = 1"
+},
+"06-36": {
+"fr": "Résistance à la rupture par défaut de capacité portante : termes de largeur, de profondeur et de cohésion",
+"es": "Resistencia al hundimiento: términos de ancho, de profundidad y de cohesión"
+},
+"06-37": {
+"fr": "Charges au niveau de la base de la fondation",
+"es": "Cargas en la base de la zapata"
+},
+"06-38": {
+"fr": "Poids propre de la semelle et du remblai",
+"es": "Peso propio de la zapata y del relleno"
+},
+"06-39": {
+"fr": "Résultante caractéristique à la base (H s'applique en tête → bras de levier h<sub>f</sub>)",
+"es": "Resultante característica en la base (H actúa en la cara superior → brazo de palanca h<sub>f</sub>)"
+},
+"06-40": {
+"fr": "Contrainte sous la fondation (caractéristique, répartition linéaire)",
+"es": "Presión sobre el terreno (característica, distribución lineal)"
+},
+"06-41": {
+"fr": "e > b/6 (décollement) : σ<sub>max</sub> = 2V/(3·(b/2 − e)·a) = <b>{} kN/m²</b>",
+"es": "e > b/6 (despegue parcial): σ<sub>max</sub> = 2V/(3·(b/2 − e)·a) = <b>{} kN/m²</b>"
+},
+"06-42": {
+"fr": "Position de la résultante (décollement)",
+"es": "Posición de la resultante (despegue parcial)"
+},
+"06-43": {
+"fr": "Charges permanentes seules : pas de décollement, résultante dans le noyau central (e ≤ b/6)",
+"es": "Solo cargas permanentes: sin despegue, resultante dentro del núcleo central (e ≤ b/6)"
+},
+"06-44": {
+"fr": "Charges permanentes et variables : le décollement ne dépasse pas le milieu de la base (e ≤ b/3). Cas défavorable : moment total, charge verticale permanente seule",
+"es": "Cargas permanentes y variables: el despegue llega como máximo hasta el centro (e ≤ b/3). Caso desfavorable: momento total, solo carga vertical permanente"
+},
+"06-45": {
+"fr": "Selon la DIN 1054, cette vérification remplace la vérification au renversement (EQU) pour les fondations superficielles.",
+"es": "Según la DIN 1054, esta comprobación sustituye a la comprobación al vuelco (EQU) en cimentaciones superficiales."
+},
+"06-46": {
+"fr": "Rupture par défaut de capacité portante (DIN 4017)",
+"es": "Hundimiento (DIN 4017)"
+},
+"06-47": {
+"fr": "H dépasse la résistance au frottement de la base : la capacité portante ne peut pas être vérifiée.",
+"es": "H supera la resistencia por rozamiento de la base: no es posible comprobar el hundimiento. "
+},
+"06-48": {
+"fr": "Augmenter les dimensions de la semelle ou la fonder plus profondément.",
+"es": "Aumentar las dimensiones de la zapata o cimentarla a mayor profundidad. "
+},
+"06-49": {
+"fr": "Facteurs d'inclinaison avec les charges caractéristiques ; vérifier séparément le cas « charge verticale permanente seule » lorsque H est grand.",
+"es": "Factores de inclinación con cargas características; comprobar por separado el caso «solo carga vertical permanente» cuando H es grande."
+},
+"06-50": {
+"fr": "Résistance au glissement à la base (béton coulé en place : δ<sub>S</sub> = φ′), avec la seule charge verticale permanente",
+"es": "Resistencia al deslizamiento en la base (hormigón in situ: δ<sub>S</sub> = φ′), solo con carga vertical permanente"
+},
+"06-51": {
+"fr": "La butée devant la semelle n'est pas prise en compte (du côté de la sécurité). Pour les éléments préfabriqués, δ<sub>S</sub> = 2/3·φ′.",
+"es": "No se considera el empuje pasivo delante de la zapata (del lado de la seguridad). En elementos prefabricados, δ<sub>S</sub> = 2/3·φ′."
+},
+"06-52": {
+"fr": "Valeur de calcul de la résultante des pressions sous la fondation",
+"es": "Valor de cálculo de la resultante de la presión sobre el terreno"
+},
+"06-53": {
+"fr": "Semelle filante (par m)",
+"es": "Zapata corrida (por m)"
+},
+"06-54": {
+"fr": "M<sub>k</sub> = {} kNm (à la base)",
+"es": "M<sub>k</sub> = {} kNm (en la base)"
+},
+"06-55": {
+"fr": "Bleu : pression sous la fondation et surface efficace A′ (charge centrée sur celle-ci). ",
+"es": "Azul: presión sobre el terreno y área efectiva A′ (carga centrada sobre ella). "
+},
+"06-56": {
+"fr": "Toutes les valeurs par m de longueur de semelle.",
+"es": "Todos los valores por m de longitud de zapata."
+},
+"06-57": {
+"fr": "Semelle filante",
+"es": "Zapata corrida"
+},
+"06-58": {
+"fr": "Nappe au niveau de la base (saisir γ′ manuellement), base ou terrain inclinés, sol stratifié, moments dans les deux directions, tassement (onglet dédié), dimensionnement de la semelle en béton armé (flexion, poinçonnement) et vérification simplifiée avec tableaux de résistance du sol (statiq·ref).",
+"es": "Agua subterránea en la base de cimentación (introducir γ′ manualmente), base o terreno inclinados, terreno estratificado, momentos en ambas direcciones, asiento (pestaña propia), dimensionamiento de la zapata en hormigón armado (flexión, punzonamiento) y comprobación simplificada con tablas de resistencia del terreno (statiq·ref)."
+},
+"06-59": {
+"fr": "DIN EN 1997-1 avec DIN 1054 (BS-P), DIN 4017",
+"es": "DIN EN 1997-1 con DIN 1054 (BS-P), DIN 4017"
+},
+"06-60": {
+"fr": "Semelle filante",
+"es": "Zapata corrida"
+},
+"06-61": {
+"fr": "Semelle isolée",
+"es": "Zapata aislada"
+},
+"06-62": {
+"fr": "{} b = {} m{}, h<sub>f</sub> = {} m, profondeur d'encastrement d = {} m",
+"es": "{} b = {} m{}, h<sub>f</sub> = {} m, profundidad de cimentación d = {} m"
+},
+"06-63": {
+"fr": "Sol",
+"es": "Terreno"
+},
+"06-64": {
+"fr": "Charges (caractéristiques, face supérieure de la semelle)",
+"es": "Cargas (características, cara superior de la zapata)"
+},
+"06-65": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Semelle</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Zapata</h2><div class=\"figure\">{}</div></section>"
+},
+"06-66": {
+"fr": "Fondation superficielle, situation de projet BS-P.",
+"es": "Cimentación superficial, situación de proyecto BS-P."
+},
+"06-67": {
+"fr": "Épaisseur de la couche {} > 0",
+"es": "Espesor de la capa {} > 0"
+},
+"06-68": {
+"fr": "γ couche {}{}",
+"es": "γ capa {}{}"
+},
+"06-69": {
+"fr": "E_s couche {} > 0",
+"es": "E_s capa {} > 0"
+},
+"06-70": {
+"fr": "Contrainte génératrice de tassement",
+"es": "Tensión que genera asiento"
+},
+"06-71": {
+"fr": "Pression sous la fondation et décharge due à l'excavation",
+"es": "Presión sobre el terreno y descarga por la excavación"
+},
+"06-72": {
+"fr": "Excavation avec nappe au-dessus de la base : σ′<sub>ü,0</sub> = {}·{} + {}·{} = {} kN/m²",
+"es": "Excavación con nivel freático por encima de la base: σ′<sub>ü,0</sub> = {}·{} + {}·{} = {} kN/m²"
+},
+"06-73": {
+"fr": "Décharge d'excavation σ<sub>ü,0</sub> = γ·d = {}·{} = {} kN/m²",
+"es": "Descarga por excavación σ<sub>ü,0</sub> = γ·d = {}·{} = {} kN/m²"
+},
+"06-74": {
+"fr": "Contrainte à la profondeur z (Steinbrenner, charge flexible, superposition de 4 rectangles)",
+"es": "Tensión a la profundidad z (Steinbrenner, carga flexible, superposición de 4 rectángulos)"
+},
+"06-75": {
+"fr": "σ<sub>z</sub> = i(z)·σ<sub>1</sub> avec i pour le coin : i = 1/(2π)·[arctan(ab/(zR)) + abz/R·(1/(a²+z²) + 1/(b²+z²))], R = √(a² + b² + z²)",
+"es": "σ<sub>z</sub> = i(z)·σ<sub>1</sub> con i para la esquina: i = 1/(2π)·[arctan(ab/(zR)) + abz/R·(1/(a²+z²) + 1/(b²+z²))], R = √(a² + b² + z²)"
+},
+"06-76": {
+"fr": "Point caractéristique (semelle rigide) : 0,13·a resp. 0,13·b du bord, soit x = {} m, y = {} m depuis le centre",
+"es": "Punto característico (zapata rígida): 0,13·a o 0,13·b desde el borde, es decir x = {} m, y = {} m desde el centro"
+},
+"06-77": {
+"fr": "Profondeur limite",
+"es": "Profundidad límite"
+},
+"06-78": {
+"fr": "Contrainte de recouvrement par couche (effective : sous la nappe avec γ′ = γ − 10 kN/m³)",
+"es": "Tensión por peso de tierras capa a capa (efectiva: bajo el nivel freático con γ′ = γ − 10 kN/m³)"
+},
+"06-79": {
+"fr": "sous",
+"es": "bajo"
+},
+"06-80": {
+"fr": "au-dessus",
+"es": "sobre"
+},
+"06-81": {
+"fr": " · Nappe à {} m sous le terrain = {} m {} la base",
+"es": " · Nivel freático a {} m bajo el terreno = {} m {} la base"
+},
+"06-82": {
+"fr": "Profondeur limite : à cette profondeur, la contrainte supplémentaire est retombée à 20 % de la contrainte de recouvrement",
+"es": "Profundidad límite: a esa profundidad la tensión adicional ha disminuido al 20 % de la tensión por peso de tierras"
+},
+"06-83": {
+"fr": "z<sub>s</sub> = <b>{} m</b> sous la base (dans la couche {}, {}) : σ<sub>z</sub> = {} kN/m², 0,2·σ<sub>ü</sub> = {} kN/m²",
+"es": "z<sub>s</sub> = <b>{} m</b> bajo la base (en la capa {}, {}): σ<sub>z</sub> = {} kN/m², 0,2·σ<sub>ü</sub> = {} kN/m²"
+},
+"06-84": {
+"fr": "Couche {} {} (z = {} … {} m, E<sub>s</sub> = {} MN/m²) : Δs = <b>{} cm</b>",
+"es": "Capa {} {} (z = {} … {} m, E<sub>s</sub> = {} MN/m²): Δs = <b>{} cm</b>"
+},
+"06-85": {
+"fr": "Couche {} {} : située sous la profondeur limite → Δs = 0",
+"es": "Capa {} {}: situada bajo la profundidad límite → Δs = 0"
+},
+"06-86": {
+"fr": "s (point caractéristique) = <b>{} cm</b> · à titre de comparaison, centre de la charge flexible : {} cm",
+"es": "s (punto característico) = <b>{} cm</b> · como comparación, centro de la carga flexible: {} cm"
+},
+"06-87": {
+"fr": "s = {} cm {} s<sub>adm</sub> = {} cm",
+"es": "s = {} cm {} s<sub>adm</sub> = {} cm"
+},
+"06-88": {
+"fr": "Les calculs de tassement sont des estimations (±25 % et plus). E<sub>s</sub> est valable pour le domaine de contraintes considéré ; examiner séparément les tassements différentiels avec les semelles voisines.",
+"es": "Los cálculos de asientos son estimaciones (±25 % o más). E<sub>s</sub> es válido para el rango de tensiones considerado; analizar por separado los asientos diferenciales respecto a zapatas vecinas."
+},
+"06-89": {
+"fr": "Tassement comme somme des compressions des couches jusqu'à la profondeur limite : s = Σ ∫ σ<sub>z</sub>/E<sub>s</sub> dz (intégration numérique)",
+"es": "Asiento como suma de las compresiones de las capas hasta la profundidad límite: s = Σ ∫ σ<sub>z</sub>/E<sub>s</sub> dz (integración numérica)"
+},
+"06-90": {
+"fr": "Nappe au-dessus de la base",
+"es": "Agua subterránea sobre la base"
+},
+"06-91": {
+"fr": "V<sub>k</sub> = {} kN sur {} × {} m",
+"es": "V<sub>k</sub> = {} kN sobre {} × {} m"
+},
+"06-92": {
+"fr": "Bleu : contrainte supplémentaire σ<sub>z</sub> sous le point caractéristique, gris en pointillés : 20 % de la contrainte de recouvrement effective.",
+"es": "Azul: tensión adicional σ<sub>z</sub> bajo el punto característico, gris discontinuo: 20 % de la tensión efectiva por peso de tierras."
+},
+"06-93": {
+"fr": "Semelle {} × {} m · {} couche{} · σ<sub>1</sub> = {} kN/m² · profondeur limite {} m · s = {} cm",
+"es": "Zapata {} × {} m · {} capa{} · σ<sub>1</sub> = {} kN/m² · profundidad límite {} m · s = {} cm"
+},
+"06-94": {
+"fr": "DIN 4019 (Steinbrenner, point caractéristique)",
+"es": "DIN 4019 (Steinbrenner, punto característico)"
+},
+"06-95": {
+"fr": "a = {} m, b = {} m, d = {} m, V<sub>k</sub> = {} kN ; γ au-dessus de la base = {} kN/m³",
+"es": "a = {} m, b = {} m, d = {} m, V<sub>k</sub> = {} kN; γ sobre la base = {} kN/m³"
+},
+"06-96": {
+"fr": "Nappe",
+"es": "Agua subterránea"
+},
+"06-97": {
+"fr": "{} m sous le terrain (γ′ = γ − 10 kN/m³)",
+"es": "{} m bajo el terreno (γ′ = γ − 10 kN/m³)"
+},
+"06-98": {
+"fr": "non prise en compte",
+"es": "no considerada"
+},
+"06-99": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Couches de sol</h2><table><tr><th>N°</th><th>Sol</th><th>z sous la base [m]</th><th>γ [kN/m³]</th><th>E<sub>s</sub> [MN/m²]</th><th>Δs [cm]</th></tr>{}\n      <tr><td></td><td><b>Somme</b></td><td>Profondeur limite {} m</td><td></td><td></td><td><b>{}</b></td></tr></table></section>\n    <section><h2>Évolution des contraintes</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Capas de terreno</h2><table><tr><th>N.º</th><th>Terreno</th><th>z bajo la base [m]</th><th>γ [kN/m³]</th><th>E<sub>s</sub> [MN/m²]</th><th>Δs [cm]</th></tr>{}\n      <tr><td></td><td><b>Suma</b></td><td>Profundidad límite {} m</td><td></td><td></td><td><b>{}</b></td></tr></table></section>\n    <section><h2>Evolución de las tensiones</h2><div class=\"figure\">{}</div></section>"
+},
+"06-100": {
+"fr": "Tassement, charges permanentes caractéristiques.",
+"es": "Asiento, cargas permanentes características."
+},
+"06-101": {
+"fr": "E<sub>av,G</sub> (frottement sur l'écran)",
+"es": "E<sub>av,G</sub> (rozamiento en el muro)"
+},
+"06-102": {
+"fr": "Poussée des terres et poids propres",
+"es": "Empuje de tierras y pesos propios"
+},
+"06-103": {
+"fr": "Coefficient de poussée active (Coulomb, écran vertical, terrain horizontal)",
+"es": "Coeficiente de empuje activo (Coulomb, muro vertical, terreno horizontal)"
+},
+"06-104": {
+"fr": "Poussée des terres sur l'écran fictif de hauteur H (par m)",
+"es": "Empuje de tierras sobre el muro ficticio de altura H (por m)"
+},
+"06-105": {
+"fr": "Charges verticales permanentes (par m) et position x depuis le bord avant",
+"es": "Cargas verticales permanentes (por m) y posición x desde el borde delantero"
+},
+"06-106": {
+"fr": "{} : {} kN/m à x = {} m",
+"es": "{}: {} kN/m en x = {} m"
+},
+"06-107": {
+"fr": "Moment par rapport au milieu de la semelle (positif = renversement vers l'avant)",
+"es": "Momento respecto al centro de la zapata (positivo = vuelco hacia delante)"
+},
+"06-108": {
+"fr": "Position de la résultante (renversement)",
+"es": "Posición de la resultante (vuelco)"
+},
+"06-109": {
+"fr": "Charges permanentes seules : pas de décollement (e ≤ B/6)",
+"es": "Solo cargas permanentes: sin despegue (e ≤ B/6)"
+},
+"06-110": {
+"fr": "Avec surcharge : le décollement ne dépasse pas le milieu (e ≤ B/3), cas défavorable sans la composante verticale de q",
+"es": "Con sobrecarga: el despegue llega como máximo hasta el centro (e ≤ B/3), caso desfavorable sin la componente vertical de q"
+},
+"06-111": {
+"fr": "Élargir la semelle, surtout le talon arrière (plus de terre en charge à l'arrière).",
+"es": "Ensanchar la zapata, sobre todo el talón trasero (más tierra sobre él, en la parte posterior)."
+},
+"06-112": {
+"fr": "Résistance au glissement à la base (béton coulé en place : δ<sub>S</sub> = φ′), charges verticales permanentes seules",
+"es": "Resistencia al deslizamiento en la base (hormigón in situ: δ<sub>S</sub> = φ′), solo cargas verticales permanentes"
+},
+"06-113": {
+"fr": "La butée devant le patin avant n'est pas prise en compte (du côté de la sécurité). Une bêche sous la semelle peut aider si nécessaire.",
+"es": "No se considera el empuje pasivo delante de la puntera (del lado de la seguridad). Si es necesario, ayuda un tacón (dentellón) bajo la zapata."
+},
+"06-114": {
+"fr": "Terre au-dessus du talon arrière",
+"es": "Tierra sobre el talón trasero"
+},
+"06-115": {
+"fr": "Terre au-dessus du patin avant",
+"es": "Tierra sobre la puntera delantera"
+},
+"06-116": {
+"fr": "Coupe (par m)",
+"es": "Sección (por m)"
+},
+"06-117": {
+"fr": "Orange : poussée des terres sur l'écran fictif (en pointillés), bleu : pression sous la fondation (caractéristique).",
+"es": "Naranja: empuje de tierras sobre el muro ficticio (discontinuo), azul: presión sobre el terreno (característica)."
+},
+"06-118": {
+"fr": "Mur de soutènement en L H = {} m, B = {} m · K<sub>ah</sub> = {} · E<sub>ah</sub> = {} kN/m",
+"es": "Muro de contención en L H = {} m, B = {} m · K<sub>ah</sub> = {} · E<sub>ah</sub> = {} kN/m"
+},
+"06-119": {
+"fr": "Nappe et pression de l'eau, terrain incliné, cohésion dans la poussée des terres, poussée due au compactage, pression des terres au repos pour parois indéformables, rupture de pente, dimensionnement du voile et de la semelle en béton armé.",
+"es": "Agua subterránea y presión del agua, terreno inclinado, cohesión en el empuje de tierras, empuje por compactación, empuje en reposo en muros indeformables, rotura de talud, dimensionamiento del muro y de la zapata en hormigón armado."
+},
+"06-120": {
+"fr": "DIN EN 1997-1 avec DIN 1054 (BS-P), DIN 4085, DIN 4017",
+"es": "DIN EN 1997-1 con DIN 1054 (BS-P), DIN 4085, DIN 4017"
+},
+"06-121": {
+"fr": "H = {} m, B = {} m, patin avant {} m, t<sub>w</sub> = {} m, t<sub>s</sub> = {} m, encastrement d = {} m",
+"es": "H = {} m, B = {} m, puntera {} m, t<sub>w</sub> = {} m, t<sub>s</sub> = {} m, empotramiento d = {} m"
+},
+"06-122": {
+"fr": "Sol / remblai",
+"es": "Terreno / relleno"
+},
+"06-123": {
+"fr": "φ′<sub>k</sub> = {}°, c′<sub>k</sub> = {} kN/m², γ = {} kN/m³, δ<sub>a</sub> = {}° ; surcharge q<sub>k</sub> = {} kN/m²",
+"es": "φ′<sub>k</sub> = {}°, c′<sub>k</sub> = {} kN/m², γ = {} kN/m³, δ<sub>a</sub> = {}°; sobrecarga q<sub>k</sub> = {} kN/m²"
+},
+"06-124": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Mur de soutènement</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Muro de contención</h2><div class=\"figure\">{}</div></section>"
+},
+"06-125": {
+"fr": "Mur de soutènement en L, situation de projet BS-P.",
+"es": "Muro de contención en L, situación de proyecto BS-P."
+},
+"06-126": {
+"fr": "Action parallèle à la base",
+"es": "Acción paralela a la base"
+},
+"06-127": {
+"fr": "Situation de projet BS-{} : γ<sub>G</sub> = {}, γ<sub>Q</sub> = {} (DIN 1054, tab. A 2.1)",
+"es": "Situación de proyecto BS-{}: γ<sub>G</sub> = {}, γ<sub>Q</sub> = {} (DIN 1054, tabla A 2.1)"
+},
+"06-128": {
+"fr": "Charge verticale favorable : seule la part permanente, caractéristique (γ = 1,0)",
+"es": "Carga vertical favorable: solo la parte permanente, característica (γ = 1,0)"
+},
+"06-129": {
+"fr": "V<sub>k</sub> = V<sub>G,k</sub> = <b>{} kN</b> · surface de la base A = a·b = {}·{} = {} m²",
+"es": "V<sub>k</sub> = V<sub>G,k</sub> = <b>{} kN</b> · área de la base A = a·b = {}·{} = {} m²"
+},
+"06-130": {
+"fr": "État drainé : frottement à la base, la cohésion n'est pas prise en compte",
+"es": "Estado drenado: rozamiento en la base, no se considera la cohesión"
+},
+"06-131": {
+"fr": " → limité à 35°",
+"es": " → limitado a 35°"
+},
+"06-132": {
+"fr": "béton coulé en place",
+"es": "hormigón in situ"
+},
+"06-133": {
+"fr": "élément préfabriqué lisse",
+"es": "elemento prefabricado liso"
+},
+"06-134": {
+"fr": "État non drainé (sol cohérent saturé, chargement rapide)",
+"es": "Estado sin drenaje (suelo cohesivo saturado, carga rápida)"
+},
+"06-135": {
+"fr": " → déterminant ici si le joint n'est pas étanche",
+"es": " → determinante aquí si la junta no es estanca"
+},
+"06-136": {
+"fr": "Limitation lorsque de l'eau ou de l'air peut pénétrer dans l'interface de base : R<sub>t,k</sub> ≤ 0,4·V<sub>k</sub> = {} kN{}",
+"es": "Limitación cuando puede entrar agua o aire en la interfaz de la base: R<sub>t,k</sub> ≤ 0,4·V<sub>k</sub> = {} kN{}"
+},
+"06-137": {
+"fr": "Résistance au glissement à la base",
+"es": "Resistencia al deslizamiento en la base"
+},
+"06-138": {
+"fr": "Butée devant la fondation",
+"es": "Empuje pasivo delante de la cimentación"
+},
+"06-139": {
+"fr": "Butée (Rankine, δ<sub>p</sub> = 0, terrain horizontal)",
+"es": "Empuje pasivo (Rankine, δ<sub>p</sub> = 0, terreno horizontal)"
+},
+"06-140": {
+"fr": "Réduction à 50 % (compatibilité des déplacements) et coefficient partiel",
+"es": "Reducción al 50 % (compatibilidad de desplazamientos) y coeficiente parcial"
+},
+"06-141": {
+"fr": "Vérification au glissement",
+"es": "Comprobación al deslizamiento"
+},
+"06-142": {
+"fr": "{} {} {}{} = <b>{} kN</b> → taux de sollicitation η = {}",
+"es": "{} {} {}{} = <b>{} kN</b> → grado de aprovechamiento η = {}"
+},
+"06-143": {
+"fr": "Requis sans butée : V<sub>G,k</sub> ≥ H<sub>d</sub>·γ<sub>R,h</sub>/tan δ = {} kN",
+"es": "Necesario sin empuje pasivo: V<sub>G,k</sub> ≥ H<sub>d</sub>·γ<sub>R,h</sub>/tan δ = {} kN"
+},
+"06-144": {
+"fr": "Remèdes : bêche sous la semelle, base inclinée, plus de charge permanente, interface plus rugueuse (béton coulé en place plutôt que préfabriqué), butée seulement si elle est assurée.",
+"es": "Remedios: tacón bajo la zapata, base inclinada, más carga permanente, interfaz más rugosa (hormigón in situ en lugar de prefabricado), empuje pasivo solo si está garantizado."
+},
+"06-145": {
+"fr": "Vérifier en outre la rupture par défaut de capacité portante et la position de la résultante (mode fondation superficielle).",
+"es": "Comprobar además el hundimiento y la posición de la resultante (modo cimentación superficial)."
+},
+"06-146": {
+"fr": "Orange : action, vert : résistances à la base et devant la fondation.",
+"es": "Naranja: acción, verde: resistencias en la base y delante de la cimentación."
+},
+"06-147": {
+"fr": "Base {} × {} m · H<sub>d</sub> = {} kN, R<sub>d</sub> = {} kN",
+"es": "Base {} × {} m · H<sub>d</sub> = {} kN, R<sub>d</sub> = {} kN"
+},
+"06-148": {
+"fr": "Base inclinée, bêche, glissement dans des couches plus profondes (rupture de pente), rupture par défaut de capacité portante et renversement (mode fondation superficielle).",
+"es": "Base inclinada, tacón, deslizamiento en capas más profundas (rotura de talud), hundimiento y vuelco (modo cimentación superficial)."
+},
+"06-149": {
+"fr": "DIN EN 1997-1 avec DIN 1054, glissement (GEO-2)",
+"es": "DIN EN 1997-1 con DIN 1054, deslizamiento (GEO-2)"
+},
+"06-150": {
+"fr": "Élément préfabriqué",
+"es": "Elemento prefabricado"
+},
+"06-151": {
+"fr": "Charges",
+"es": "Cargas"
+},
+"06-152": {
+"fr": "Sol",
+"es": "Terreno"
+},
+"06-153": {
+"fr": "drainé, φ′<sub>k</sub> = {}°",
+"es": "drenado, φ′<sub>k</sub> = {}°"
+},
+"06-154": {
+"fr": "non drainé, c<sub>u,k</sub> = {} kN/m²",
+"es": "sin drenaje, c<sub>u,k</sub> = {} kN/m²"
+},
+"06-155": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Coupe</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Sección</h2><div class=\"figure\">{}</div></section>"
+},
+"06-156": {
+"fr": "Vérification au glissement.",
+"es": "Comprobación al deslizamiento."
+},
+"06-157": {
+"fr": "Poids propre et poussée d'Archimède",
+"es": "Peso propio y empuje de flotación"
+},
+"06-158": {
+"fr": "Charges permanentes stabilisatrices (béton 25 kN/m³)",
+"es": "Cargas permanentes estabilizadoras (hormigón 25 kN/m³)"
+},
+"06-159": {
+"fr": "Radier {}·{}·{}·25 = {} kN · murs extérieurs (L·B − (L − 2t<sub>w</sub>)(B − 2t<sub>w</sub>))·{}·25 = {} kN",
+"es": "Losa de fondo {}·{}·{}·25 = {} kN · muros exteriores (L·B − (L − 2t<sub>w</sub>)(B − 2t<sub>w</sub>))·{}·25 = {} kN"
+},
+"06-160": {
+"fr": "Dalle haute {}·{}·{}·25 = {} kN · autre charge permanente {}·{} = {} kN",
+"es": "Losa de cubierta {}·{}·{}·25 = {} kN · otra carga permanente {}·{} = {} kN"
+},
+"06-161": {
+"fr": "Poussée d'Archimède : pression de l'eau sous la face inférieure du radier",
+"es": "Empuje de flotación: presión del agua bajo la cara inferior de la losa de fondo"
+},
+"06-162": {
+"fr": "A<sub>k</sub> = γ<sub>w</sub>·h<sub>w</sub>·L·B = 10·{}·{} = <b>{} kN</b> (pression de l'eau en bas {} kN/m²)",
+"es": "A<sub>k</sub> = γ<sub>w</sub>·h<sub>w</sub>·L·B = 10·{}·{} = <b>{} kN</b> (presión del agua en la base {} kN/m²)"
+},
+"06-163": {
+"fr": "Sécurité à la poussée d'Archimède (UPL)",
+"es": "Seguridad frente a la flotación (UPL)"
+},
+"06-164": {
+"fr": "Coefficients partiels {} : γ<sub>G,dst</sub> = {} (poussée d'Archimède), γ<sub>G,stb</sub> = {} (poids propre)",
+"es": "Coeficientes parciales {}: γ<sub>G,dst</sub> = {} (flotación), γ<sub>G,stb</sub> = {} (peso propio)"
+},
+"06-165": {
+"fr": "Sécurité globale à titre de comparaison : G/A = {} (requis {})",
+"es": "Seguridad global como comparación: G/A = {} (necesario {})"
+},
+"06-166": {
+"fr": "Épaisseur de radier requise, l'ouvrage restant par ailleurs identique",
+"es": "Espesor de losa de fondo necesario, manteniendo igual el resto de la estructura"
+},
+"06-167": {
+"fr": "t<sub>s,req</sub> = (A<sub>d</sub>/γ<sub>G,stb</sub> − G<sub>reste</sub>)/(25·L·B) = <b>{} m</b>",
+"es": "t<sub>s,nec</sub> = (A<sub>d</sub>/γ<sub>G,stb</sub> − G<sub>resto</sub>)/(25·L·B) = <b>{} m</b>"
+},
+"06-168": {
+"fr": "Remèdes : radier plus épais, débord du radier avec remblai en charge, pieux ou tirants d'ancrage tendus, lest ; en phase de construction, rabattre la nappe ou prévoir des ouvertures de mise en eau.",
+"es": "Remedios: losa de fondo más gruesa, voladizo de la losa con tierra encima, pilotes o anclajes a tracción, lastre; en fase de construcción, rebajar el nivel freático o prever aberturas de inundación."
+},
+"06-169": {
+"fr": "Vérifier séparément la phase de construction (sans dalle haute ni finitions) : choisir pour cela BS-T et omettre la dalle haute/les charges.",
+"es": "Comprobar por separado la fase de construcción (sin losa de cubierta ni acabados): para ello elegir BS-T y omitir la losa de cubierta/las cargas."
+},
+"06-170": {
+"fr": "Poussée d'Archimède A<sub>k</sub> = {} kN",
+"es": "Empuje de flotación A<sub>k</sub> = {} kN"
+},
+"06-171": {
+"fr": "Coupe transversale (largeur B = {} m), longueur L = {} m.",
+"es": "Sección transversal (ancho B = {} m), longitud L = {} m."
+},
+"06-172": {
+"fr": "Cuve {} × {} m, h<sub>w</sub> = {} m · A<sub>d</sub> = {} kN, G<sub>stb,d</sub> = {} kN",
+"es": "Cuba {} × {} m, h<sub>w</sub> = {} m · A<sub>d</sub> = {} kN, G<sub>stb,d</sub> = {} kN"
+},
+"06-173": {
+"fr": "Rupture hydraulique (HYD) et érosion, frottement sur les parois et remblai en charge sur les débords du radier, pieux/tirants tendus (effet de groupe), flexion du radier sous la pression de l'eau.",
+"es": "Sifonamiento (HYD) y erosión, rozamiento en los muros y tierra sobre los voladizos de la losa de fondo, pilotes/anclajes a tracción (efecto de grupo), flexión de la losa de fondo bajo la presión del agua."
+},
+"06-174": {
+"fr": "DIN EN 1997-1 avec DIN 1054, UPL",
+"es": "DIN EN 1997-1 con DIN 1054, UPL"
+},
+"06-175": {
+"fr": "Ouvrage",
+"es": "Estructura"
+},
+"06-176": {
+"fr": "L = {} m, B = {} m, radier {} m, murs {} m × {} m, dalle haute {} m, g<sub>k</sub> = {} kN/m²",
+"es": "L = {} m, B = {} m, losa de fondo {} m, muros {} m × {} m, losa de cubierta {} m, g<sub>k</sub> = {} kN/m²"
+},
+"06-177": {
+"fr": "Eau",
+"es": "Agua"
+},
+"06-178": {
+"fr": "h<sub>w</sub> = {} m au-dessus de la sous-face du radier, situation de projet BS-{}",
+"es": "h<sub>w</sub> = {} m sobre la cara inferior de la losa de fondo, situación de proyecto BS-{}"
+},
+"06-179": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Section</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Sección</h2><div class=\"figure\">{}</div></section>"
+},
+"06-180": {
+"fr": "Vérification à la poussée d'Archimède.",
+"es": "Comprobación a la flotación."
+},
+"06-181": {
+"fr": "f<sub>k</sub> = K·f<sub>b</sub><sup>0,85</sup> = {}·{}<sup>0,85</sup> = {} N/mm² (éq. 3.2, mortier-colle)",
+"es": "f<sub>k</sub> = K·f<sub>b</sub><sup>0,85</sup> = {}·{}<sup>0,85</sup> = {} N/mm² (ec. 3.2, mortero de junta delgada)"
+},
+"06-182": {
+"fr": "f<sub>k</sub> = K·f<sub>b</sub><sup>0,7</sup> = {}·{}<sup>0,7</sup> = {} N/mm² (éq. 3.3, mortier-colle, briques perforées)",
+"es": "f<sub>k</sub> = K·f<sub>b</sub><sup>0,7</sup> = {}·{}<sup>0,7</sup> = {} N/mm² (ec. 3.3, mortero de junta delgada, piezas perforadas)"
+},
+"06-183": {
+"fr": "Matériau : résistance caractéristique en compression et valeur de calcul",
+"es": "Material: resistencia característica a compresión y valor de cálculo"
+},
+"06-184": {
+"fr": "f<sub>d</sub> = ζ·f<sub>k</sub>/γ<sub>M</sub> = 0,85·{}/1,5 = <b>{} N/mm²</b> (ζ = 0,85 tient compte de la résistance sous charge de longue durée)",
+"es": "f<sub>d</sub> = ζ·f<sub>k</sub>/γ<sub>M</sub> = 0,85·{}/1,5 = <b>{} N/mm²</b> (ζ = 0,85 tiene en cuenta la resistencia bajo carga de larga duración)"
+},
+"06-185": {
+"fr": "Limites d'application de la méthode simplifiée",
+"es": "Límites de aplicación del método simplificado"
+},
+"06-186": {
+"fr": "Conditions (extrait ; en outre hauteur du bâtiment ≤ 20 m, charge d'exploitation ≤ 5 kN/m²)",
+"es": "Condiciones (extracto; además altura del edificio ≤ 20 m, sobrecarga de uso ≤ 5 kN/m²)"
+},
+"06-187": {
+"fr": "Hors de ces limites : utiliser la méthode plus précise de la DIN EN 1996-1-1.",
+"es": "Fuera de estos límites: utilizar el método más preciso de la DIN EN 1996-1-1."
+},
+"06-188": {
+"fr": "Mur court (A = {} m² < 0,1 m²) : f<sub>d</sub>·0,8 = <b>{} N/mm²</b>",
+"es": "Muro corto (A = {} m² < 0,1 m²): f<sub>d</sub>·0,8 = <b>{} N/mm²</b>"
+},
+"06-189": {
+"fr": "Longueur de flambement : mur tenu sur deux côtés",
+"es": "Longitud de pandeo: muro arriostrado en dos lados"
+},
+"06-190": {
+"fr": "Plancher à poutres en bois → ρ<sub>2</sub> = 1,0",
+"es": "Forjado de viguetas de madera → ρ<sub>2</sub> = 1,0"
+},
+"06-191": {
+"fr": "Plancher en béton armé, t = {} mm → ρ<sub>2</sub> = {} (0,75 pour t ≤ 175 mm, 0,90 jusqu'à 250 mm, sinon 1,0)",
+"es": "Forjado de hormigón armado, t = {} mm → ρ<sub>2</sub> = {} (0,75 para t ≤ 175 mm, 0,90 hasta 250 mm, en otro caso 1,0)"
+},
+"06-192": {
+"fr": "Réduction Φ<sub>2</sub> à mi-hauteur du mur (flambement et excentricité de la charge due à la profondeur d'appui)",
+"es": "Reducción Φ<sub>2</sub> a media altura del muro (pandeo y excentricidad de la carga por la profundidad de apoyo)"
+},
+"06-193": {
+"fr": "Réduction Φ<sub>1</sub> en tête/pied du mur (rotation du plancher à l'appui d'extrémité)",
+"es": "Reducción Φ<sub>1</sub> en la cabeza/pie del muro (giro del forjado en el apoyo extremo)"
+},
+"06-194": {
+"fr": "Appui intermédiaire (mur intérieur) : les rotations des planchers se compensent en grande partie → pas de Φ<sub>1</sub>",
+"es": "Apoyo intermedio (muro interior): los giros de los forjados se compensan en gran medida → sin Φ<sub>1</sub>"
+},
+"06-195": {
+"fr": "Appui d'extrémité sous le plancher de toiture (charge très faible, grande rotation) : Φ<sub>1</sub> = <b>0,333</b>",
+"es": "Apoyo extremo bajo el forjado de cubierta (carga mínima, giro grande): Φ<sub>1</sub> = <b>0,333</b>"
+},
+"06-196": {
+"fr": "Résistance du mur",
+"es": "Resistencia del muro"
+},
+"06-197": {
+"fr": "Résistance en compression",
+"es": "Resistencia a compresión"
+},
+"06-198": {
+"fr": "Φ ≤ 0 : mur trop élancé ou profondeur d'appui trop faible.",
+"es": "Φ ≤ 0: muro demasiado esbelto o profundidad de apoyo demasiado pequeña."
+},
+"06-199": {
+"fr": "Mur plus épais, éléments ou mortier plus résistants, portée de plancher plus courte (Φ<sub>1</sub>) ou appui de plancher complet (a = t).",
+"es": "Muro más grueso, piezas o mortero más resistentes, luz del forjado menor (Φ<sub>1</sub>) o apoyo completo del forjado (a = t)."
+},
+"06-200": {
+"fr": "Élancement h<sub>ef</sub>/t = {} ≤ 27",
+"es": "Esbeltez h<sub>ef</sub>/t = {} ≤ 27"
+},
+"06-201": {
+"fr": "Réduction Φ",
+"es": "Reducción Φ"
+},
+"06-202": {
+"fr": "N<sub>Ed</sub> = {} kN sur l = {} m",
+"es": "N<sub>Ed</sub> = {} kN sobre l = {} m"
+},
+"06-203": {
+"fr": "Bleu en pointillés : déformée du mur (flambement sur h<sub>ef</sub>).",
+"es": "Azul discontinuo: deformada del muro (pandeo sobre h<sub>ef</sub>)."
+},
+"06-204": {
+"fr": "Pression localisée",
+"es": "Carga concentrada"
+},
+"06-205": {
+"fr": "Allonger l'appui, prévoir une poutre ou plaque de répartition des charges ou des éléments plus résistants (ou un élément de résistance supérieure sous l'appui). ",
+"es": "Alargar el apoyo, disponer una viga o placa de reparto de cargas o piezas más resistentes (o una pieza de mayor resistencia bajo el apoyo). "
+},
+"06-206": {
+"fr": "Vérifier en outre le mur situé dessous (avec la charge répartie à mi-hauteur) comme mur comprimé.",
+"es": "Comprobar además el muro inferior (con la carga repartida a media altura) como muro comprimido."
+},
+"06-207": {
+"fr": "Diffusion de la charge à 60° jusqu'à mi-hauteur du mur",
+"es": "Dispersión de la carga a 60° hasta la mitad de la altura del muro"
+},
+"06-208": {
+"fr": "Diffusion de chaque côté h<sub>c</sub>/(2·tan 60°) = {} mm, limitée à gauche par a<sub>1</sub> = {} mm, à droite par l'extrémité du mur → l<sub>efm</sub> = {} + {} + {} = <b>{} mm</b>",
+"es": "Dispersión por cada lado h<sub>c</sub>/(2·tan 60°) = {} mm, limitada a la izquierda por a<sub>1</sub> = {} mm y a la derecha por el extremo del muro → l<sub>efm</sub> = {} + {} + {} = <b>{} mm</b>"
+},
+"06-209": {
+"fr": "Facteur d'augmentation pour pression localisée (éq. 6.10)",
+"es": "Factor de incremento para carga concentrada (ec. 6.10)"
+},
+"06-210": {
+"fr": " — briques perforées (groupe 2) : β = 1",
+"es": " — piezas perforadas (grupo 2): β = 1"
+},
+"06-211": {
+"fr": "Élévation du mur",
+"es": "Alzado del muro"
+},
+"06-212": {
+"fr": "N<sub>Edc</sub> = {} kN sur {} × {} mm",
+"es": "N<sub>Edc</sub> = {} kN sobre {} × {} mm"
+},
+"06-213": {
+"fr": "Bleu : diffusion de la charge à 60° jusqu'à mi-hauteur du mur.",
+"es": "Azul: dispersión de la carga a 60° hasta la mitad de la altura del muro."
+},
+"06-214": {
+"fr": "Conditions d'application",
+"es": "Condiciones de aplicación"
+},
+"06-215": {
+"fr": "Conditions (extrait ; en outre terrain non ascendant, pas de pression d'eau, plancher du sous-sol faisant office de diaphragme)",
+"es": "Condiciones (extracto; además terreno no ascendente, sin presión de agua, forjado del sótano actuando como diafragma)"
+},
+"06-216": {
+"fr": "Charge verticale minimale (effet d'arc)",
+"es": "Carga vertical mínima (efecto arco)"
+},
+"06-217": {
+"fr": "Coefficient β selon l'espacement des murs de contreventement transversaux",
+"es": "Coeficiente β según la separación de los muros transversales de arriostramiento"
+},
+"06-218": {
+"fr": "Charge verticale requise pour qu'un arc de compression se forme sur la hauteur du mur",
+"es": "Carga vertical necesaria para que se forme un arco de compresión en la altura del muro"
+},
+"06-219": {
+"fr": "n<sub>Ed,min,req</sub> = ρ<sub>e</sub>·h·h<sub>e</sub>²/(β·t) = {}·{}·{}²/({}·{}) = <b>{} kN/m</b> {} n<sub>Ed,min</sub> = {} kN/m",
+"es": "n<sub>Ed,min,nec</sub> = ρ<sub>e</sub>·h·h<sub>e</sub>²/(β·t) = {}·{}·{}²/({}·{}) = <b>{} kN/m</b> {} n<sub>Ed,min</sub> = {} kN/m"
+},
+"06-220": {
+"fr": "Charge verticale insuffisante : mur plus épais, murs transversaux plus rapprochés, remblai moins haut ou vérification en tant que mur fléchi.",
+"es": "Carga vertical insuficiente: muro más grueso, muros transversales más próximos, menor relleno o comprobación como muro sometido a flexión."
+},
+"06-221": {
+"fr": "Charge verticale maximale",
+"es": "Carga vertical máxima"
+},
+"06-222": {
+"fr": "La charge verticale ne doit pas surcharger la maçonnerie",
+"es": "La carga vertical no debe sobrecargar la fábrica"
+},
+"06-223": {
+"fr": "n<sub>Ed,max,adm</sub> = t·f<sub>d</sub>/3 = {}·{}/3 = <b>{} kN/m</b> {} n<sub>Ed,max</sub> = {} kN/m",
+"es": "n<sub>Ed,max,adm</sub> = t·f<sub>d</sub>/3 = {}·{}/3 = <b>{} kN/m</b> {} n<sub>Ed,max</sub> = {} kN/m"
+},
+"06-224": {
+"fr": "Arc de compression",
+"es": "Arco de compresión"
+},
+"06-225": {
+"fr": "Poussée des terres due à ρ<sub>e</sub> = {} kN/m³",
+"es": "Empuje de tierras debido a ρ<sub>e</sub> = {} kN/m³"
+},
+"06-226": {
+"fr": "n<sub>min,req</sub> = {} kN/m",
+"es": "n<sub>min,nec</sub> = {} kN/m"
+},
+"06-227": {
+"fr": "n<sub>max,adm</sub> = {} kN/m",
+"es": "n<sub>max,adm</sub> = {} kN/m"
+}
+}

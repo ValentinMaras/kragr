@@ -1,0 +1,42 @@
+[
+ {
+  "id": "33-0",
+  "de": "!Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) mit r in l/(s·ha) und A in ha (bzw. /10000 bei m²)",
+  "en": "!Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) with r in l/(s·ha) and A in ha (or /10000 for m²)"
+ },
+ {
+  "id": "33-1",
+  "de": "!Regenspende r<sub>D,T</sub> aus KOSTRA-DWD (Dauer D, Wiederkehrzeit T); Dachentwässerung DIN 1986-100: r<sub>5,2</sub> und Notentwässerung r<sub>5,100</sub>",
+  "en": "!Rainfall intensity r<sub>D,T</sub> from KOSTRA-DWD (duration D, return period T); roof drainage DIN 1986-100: r<sub>5.2</sub> and emergency drainage r<sub>5.100</sub>"
+ },
+ {
+  "id": "33-2",
+  "de": "Fläche {} [m²] / ψ",
+  "en": "Area {} [m²] / ψ"
+ },
+ {
+  "id": "33-3",
+  "de": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) mit r in l/(s·ha) und A in ha (bzw. /10000 bei m²)</div><div class=\"st-note\">Regenspende r<sub>D,T</sub> aus KOSTRA-DWD (Dauer D, Wiederkehrzeit T); Dachentwässerung DIN 1986-100: r<sub>5,2</sub> und Notentwässerung r<sub>5,100</sub></div></div></div>",
+  "en": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) with r in l/(s·ha) and A in ha (or /10000 for m²)</div><div class=\"st-note\">Rainfall intensity r<sub>D,T</sub> from KOSTRA-DWD (duration D, return period T); roof drainage DIN 1986-100: r<sub>5.2</sub> and emergency drainage r<sub>5.100</sub></div></div></div>"
+ },
+ {
+  "id": "33-4",
+  "de": "<div class=\"calc-field\"><label>Regenspende r<sub>D,T</sub> [l/(s·ha)]</label><input type=\"number\" id=\"rg-r\" value=\"300\" step=\"any\" oninput=\"updateRegen()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Rainfall intensity r<sub>D,T</sub> [l/(s·ha)]</label><input type=\"number\" id=\"rg-r\" value=\"300\" step=\"any\" oninput=\"updateRegen()\"></div>"
+ },
+ {
+  "id": "33-5",
+  "de": "§Abflusswirksame Fläche",
+  "en": "§Effective runoff area"
+ },
+ {
+  "id": "33-6",
+  "de": "!Fläche {}: {} m² · ψ = {} → {} m²",
+  "en": "!Area {}: {} m² · ψ = {} → {} m²"
+ },
+ {
+  "id": "33-7",
+  "de": "!r<sub>D,T</sub> [l/(s·ha)] aus KOSTRA-DWD für Dauer D und Jährlichkeit T (z. B. 5-min-Regen, T = 2 a für Dachentwässerung nach DIN 1986-100)",
+  "en": "!r<sub>D,T</sub> [l/(s·ha)] from KOSTRA-DWD for duration D and return period T (e.g. 5-min rainfall, T = 2 a for roof drainage to DIN 1986-100)"
+ }
+]

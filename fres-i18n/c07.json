@@ -1,0 +1,1297 @@
+[
+ {
+  "id": "07-0",
+  "de": "Die Auflast überdrückt die Wand so, dass sie den Erddruck über einen Druckbogen zwischen Decke und Bodenplatte abträgt.",
+  "en": "The vertical load compresses the wall so that it carries the earth pressure via a compression arch between ceiling and base slab."
+ },
+ {
+  "id": "07-1",
+  "de": "Lage der Normalkraft (klaffende Fuge)",
+  "en": "Position of the axial force (gaping joint)"
+ },
+ {
+  "id": "07-2",
+  "de": "Moment am Wandfuß und Ausmitte der Normalkraft",
+  "en": "Moment at the wall base and eccentricity of the axial force"
+ },
+ {
+  "id": "07-3",
+  "de": "Die Fuge darf höchstens bis zur Wandmitte aufreißen: e ≤ l/3 = {} m {}",
+  "en": "The joint may open at most up to the middle of the wall: e ≤ l/3 = {} m {}"
+ },
+ {
+  "id": "07-4",
+  "de": "Überdrückte Wandlänge (lineare Spannungsverteilung, keine Zugspannung)",
+  "en": "Compressed wall length (linear stress distribution, no tensile stress)"
+ },
+ {
+  "id": "07-5",
+  "de": "e ≤ l/6: ganze Länge überdrückt → l<sub>c</sub> = <b>{} m</b>",
+  "en": "e ≤ l/6: whole length compressed → l<sub>c</sub> = <b>{} m</b>"
+ },
+ {
+  "id": "07-6",
+  "de": "Druck am Wandrand",
+  "en": "Compression at the wall edge"
+ },
+ {
+  "id": "07-7",
+  "de": "Schub in Wandebene",
+  "en": "In-plane shear"
+ },
+ {
+  "id": "07-8",
+  "de": "Schubfestigkeit: Haftscherfestigkeit plus Reibung aus der Auflast (EN 1996-1-1, 3.6.2)",
+  "en": "Shear strength: initial shear strength plus friction from the vertical load (EN 1996-1-1, 3.6.2)"
+ },
+ {
+  "id": "07-9",
+  "de": " · Stoßfugen unvermörtelt: 0,5·f<sub>vk0</sub> = {} N/mm²",
+  "en": " · head joints unfilled: 0.5·f<sub>vk0</sub> = {} N/mm²"
+ },
+ {
+  "id": "07-10",
+  "de": "Schubtragfähigkeit über die überdrückte Länge",
+  "en": "Shear resistance over the compressed length"
+ },
+ {
+  "id": "07-11",
+  "de": "Das deutsche NA ergänzt Nachweise für Steinzugversagen und die Schubschlankheit — die Werte hier folgen den Empfehlungen von EN 1996-1-1.",
+  "en": "The German NA adds checks for unit tensile failure and shear slenderness — the values here follow the recommendations of EN 1996-1-1."
+ },
+ {
+  "id": "07-12",
+  "de": "Blau: Druckspannung in der Lagerfuge am Wandfuß; nur der überdrückte Teil l<sub>c</sub> trägt Schub.",
+  "en": "Blue: compressive stress in the bed joint at the wall base; only the compressed part l<sub>c</sub> carries shear."
+ },
+ {
+  "id": "07-13",
+  "de": "Genaueres Verfahren nach DIN EN 1996-1-1 (Knicken mit Kriechen, Lastausmitten), drei- und vierseitig gehaltene Wände, Bewehrtes Mauerwerk, Biegung senkrecht zur Wandebene aus Wind, Brandschutz und die Festigkeitstabellen des deutschen NA.",
+  "en": "More accurate method to DIN EN 1996-1-1 (buckling with creep, load eccentricities), walls restrained on three and four sides, reinforced masonry, out-of-plane bending from wind, fire protection and the strength tables of the German NA."
+ },
+ {
+  "id": "07-14",
+  "de": "Normalmörtel",
+  "en": "General-purpose mortar"
+ },
+ {
+  "id": "07-15",
+  "de": "Mauerwerk",
+  "en": "Masonry"
+ },
+ {
+  "id": "07-16",
+  "de": "Normalmauermörtel",
+  "en": "General-purpose masonry mortar"
+ },
+ {
+  "id": "07-17",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}{}\n    </table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}{}\n    </table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "07-18",
+  "de": "Mauerwerkswand unter Druck",
+  "en": "Masonry wall in compression"
+ },
+ {
+  "id": "07-19",
+  "de": "DIN EN 1996-3/NA, vereinfachtes Verfahren",
+  "en": "DIN EN 1996-3/NA, simplified method"
+ },
+ {
+  "id": "07-20",
+  "de": ", Stoßfugen unvermörtelt",
+  "en": ", head joints unfilled"
+ },
+ {
+  "id": "07-21",
+  "de": "Wasserdruck von oben (Oberwasser)",
+  "en": "Water pressure from above (headwater)"
+ },
+ {
+  "id": "07-22",
+  "de": "Hydrostatischer Druck wächst linear mit der Tiefe: p = γ<sub>w</sub>·z",
+  "en": "Hydrostatic pressure grows linearly with depth: p = γ<sub>w</sub>·z"
+ },
+ {
+  "id": "07-23",
+  "de": "Tiefe Oberkante z<sub>1</sub> = {} m → p<sub>1</sub> = 9,81·{} = {} kN/m² · Unterkante z<sub>2</sub> = t<sub>o</sub> + L·sin α = {} m → p<sub>2</sub> = <b>{} kN/m²</b>",
+  "en": "Depth of the top edge z<sub>1</sub> = {} m → p<sub>1</sub> = 9.81·{} = {} kN/m² · bottom edge z<sub>2</sub> = t<sub>o</sub> + L·sin α = {} m → p<sub>2</sub> = <b>{} kN/m²</b>"
+ },
+ {
+  "id": "07-24",
+  "de": "Druckkraft = Fläche der Druckfigur (Trapez) × Breite",
+  "en": "Resultant force = area of the pressure diagram (trapezoid) × width"
+ },
+ {
+  "id": "07-25",
+  "de": "Zerlegt: waagerecht F<sub>H</sub> = F·sin α = {} kN · senkrecht F<sub>V</sub> = F·cos α = {} kN",
+  "en": "Components: horizontal F<sub>H</sub> = F·sin α = {} kN · vertical F<sub>V</sub> = F·cos α = {} kN"
+ },
+ {
+  "id": "07-26",
+  "de": "Druckmittelpunkt: Schwerpunkt der Druckfigur (liegt immer unter dem Flächenschwerpunkt)",
+  "en": "Centre of pressure: centroid of the pressure diagram (always below the centroid of the surface)"
+ },
+ {
+  "id": "07-27",
+  "de": "Abstand von der Oberkante e = L·(p<sub>1</sub> + 2p<sub>2</sub>)/(3·(p<sub>1</sub> + p<sub>2</sub>)) = <b>{} m</b>",
+  "en": "Distance from the top edge e = L·(p<sub>1</sub> + 2p<sub>2</sub>)/(3·(p<sub>1</sub> + p<sub>2</sub>)) = <b>{} m</b>"
+ },
+ {
+  "id": "07-28",
+  "de": "Kontrolle mit Steiner: y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub>/(y<sub>s</sub>·A) = {} + {}/({}·{}) = {} m ab Wasserspiegel (in Flächenrichtung) → {} m ab Oberkante",
+  "en": "Check with the parallel-axis theorem: y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub>/(y<sub>s</sub>·A) = {} + {}/({}·{}) = {} m from the water level (along the surface) → {} m from the top edge"
+ },
+ {
+  "id": "07-29",
+  "de": "Unterwasser {} m über der Unterkante, benetzte Länge {} m → F<sub>u</sub> = <b>{} kN</b>, {} m über der Unterkante",
+  "en": "Tailwater {} m above the bottom edge, wetted length {} m → F<sub>u</sub> = <b>{} kN</b>, {} m above the bottom edge"
+ },
+ {
+  "id": "07-30",
+  "de": "Kein Unterwasser: die Fläche ist auf der anderen Seite trocken.",
+  "en": "No tailwater: the surface is dry on the other side."
+ },
+ {
+  "id": "07-31",
+  "de": "Resultierende und Moment um die Unterkante (z. B. Einspannmoment einer Stauwand)",
+  "en": "Resultant and moment about the bottom edge (e.g. fixed-end moment of a retaining wall)"
+ },
+ {
+  "id": "07-32",
+  "de": " → Resultierende {} m über der Unterkante",
+  "en": " → resultant {} m above the bottom edge"
+ },
+ {
+  "id": "07-33",
+  "de": "M<sub>Fuß</sub> = F·(L − e) − F<sub>u</sub>·(L − e<sub>u</sub>) = <b>{} kNm</b>{}",
+  "en": "M<sub>base</sub> = F·(L − e) − F<sub>u</sub>·(L − e<sub>u</sub>) = <b>{} kNm</b>{}"
+ },
+ {
+  "id": "07-34",
+  "de": "Gegendruck und Resultierende",
+  "en": "Counter-pressure and resultant"
+ },
+ {
+  "id": "07-35",
+  "de": "Charakteristische Werte. Für die Bemessung der Wand mit γ<sub>G</sub> bzw. γ<sub>Q</sub> beaufschlagen (Wasserdruck je nach Situation ständig oder veränderlich).",
+  "en": "Characteristic values. For the design of the wall apply γ<sub>G</sub> or γ<sub>Q</sub> (water pressure permanent or variable depending on the situation)."
+ },
+ {
+  "id": "07-36",
+  "de": "Gegendruck von der anderen Seite (Unterwasser)",
+  "en": "Counter-pressure from the other side (tailwater)"
+ },
+ {
+  "id": "07-37",
+  "de": "Wasserspiegel ▽",
+  "en": "Water level ▽"
+ },
+ {
+  "id": "07-38",
+  "de": "Unterwasser ▽",
+  "en": "Tailwater ▽"
+ },
+ {
+  "id": "07-39",
+  "de": "Wasser γ<sub>w</sub> = 9,81 kN/m³, Breite b = {} m",
+  "en": "Water γ<sub>w</sub> = 9.81 kN/m³, width b = {} m"
+ },
+ {
+  "id": "07-40",
+  "de": "M<sub>Fuß</sub> = {} kNm",
+  "en": "M<sub>base</sub> = {} kNm"
+ },
+ {
+  "id": "07-41",
+  "de": "Orange: Druckfigur senkrecht zur Fläche, blau: Resultierende im Druckmittelpunkt.",
+  "en": "Orange: pressure diagram perpendicular to the surface, blue: resultant at the centre of pressure."
+ },
+ {
+  "id": "07-42",
+  "de": "Tiefgang und Freibord",
+  "en": "Draught and freeboard"
+ },
+ {
+  "id": "07-43",
+  "de": "Archimedes: Auftrieb = Gewicht der verdrängten Wassermenge",
+  "en": "Archimedes: buoyancy = weight of the displaced water"
+ },
+ {
+  "id": "07-44",
+  "de": "V<sub>verdr</sub> = G/γ<sub>w</sub> = {}/{} = <b>{} m³</b> · größtes Volumen des Körpers V<sub>max</sub> = {} m³",
+  "en": "V<sub>displ</sub> = G/γ<sub>w</sub> = {}/{} = <b>{} m³</b> · largest volume of the body V<sub>max</sub> = {} m³"
+ },
+ {
+  "id": "07-45",
+  "de": "Tiefgang ({})",
+  "en": "Draught ({})"
+ },
+ {
+  "id": "07-46",
+  "de": "V<sub>verdr</sub> > V<sub>max</sub> → <b>der Körper geht unter</b>",
+  "en": "V<sub>displ</sub> > V<sub>max</sub> → <b>the body sinks</b>"
+ },
+ {
+  "id": "07-47",
+  "de": "Kontrolle: V(T) = {} m³ = V<sub>verdr</sub> ✓",
+  "en": "Check: V(T) = {} m³ = V<sub>displ</sub> ✓"
+ },
+ {
+  "id": "07-48",
+  "de": "Freibord H − T = {} − {} = {} m {} f<sub>min</sub> = {} m",
+  "en": "Freeboard H − T = {} − {} = {} m {} f<sub>min</sub> = {} m"
+ },
+ {
+  "id": "07-49",
+  "de": "Mehr Volumen (größere Abmessungen) oder weniger Gewicht.",
+  "en": "More volume (larger dimensions) or less weight."
+ },
+ {
+  "id": "07-50",
+  "de": "Schwimmstabilität (Metazentrum)",
+  "en": "Floating stability (metacentre)"
+ },
+ {
+  "id": "07-51",
+  "de": "Auftriebsmittelpunkt B: Schwerpunkt des verdrängten Volumens",
+  "en": "Centre of buoyancy B: centroid of the displaced volume"
+ },
+ {
+  "id": "07-52",
+  "de": "{} = <b>{} m</b> über Unterkante",
+  "en": "{} = <b>{} m</b> above the bottom"
+ },
+ {
+  "id": "07-53",
+  "de": "Metazentrum M: Schnittpunkt der Auftriebswirkungslinie bei kleiner Neigung",
+  "en": "Metacentre M: intersection of the line of action of buoyancy at a small heel"
+ },
+ {
+  "id": "07-54",
+  "de": "{} = {} m⁴ (Wasserlinienfläche um die Kippachse)",
+  "en": "{} = {} m⁴ (waterplane area about the tilt axis)"
+ },
+ {
+  "id": "07-55",
+  "de": "der Kugel",
+  "en": "the sphere"
+ },
+ {
+  "id": "07-56",
+  "de": "kreisförmigem Querschnitt",
+  "en": "a circular cross-section"
+ },
+ {
+  "id": "07-57",
+  "de": "Kontrolle: bei {} liegt M im Mittelpunkt, z<sub>M</sub> = R = {} m ✓",
+  "en": "Check: for {} M lies at the centre, z<sub>M</sub> = R = {} m ✓"
+ },
+ {
+  "id": "07-58",
+  "de": "Metazentrische Höhe: positiv = stabil (aufrichtendes Moment)",
+  "en": "Metacentric height: positive = stable (righting moment)"
+ },
+ {
+  "id": "07-59",
+  "de": "≤ 0 → instabil, der Körper kippt",
+  "en": "≤ 0 → unstable, the body capsizes"
+ },
+ {
+  "id": "07-60",
+  "de": "Aufrichtendes Moment bei {}° Krängung (kleine Winkel): M = G·GM·sin φ = {} kNm",
+  "en": "Righting moment at {}° heel (small angles): M = G·GM·sin φ = {} kNm"
+ },
+ {
+  "id": "07-61",
+  "de": "GM klein: der Körper schwimmt zwar stabil, rollt aber stark — für Arbeitspontons üblich GM ≥ 0,3 … 1 m.",
+  "en": "GM small: the body floats stably but rolls heavily — for work pontoons GM ≥ 0.3 … 1 m is usual."
+ },
+ {
+  "id": "07-62",
+  "de": "Beim runden Querschnitt liegt M im Mittelpunkt: stabil nur, wenn der Schwerpunkt G darunter liegt (Ballast unten).",
+  "en": "For a circular cross-section M lies at the centre: stable only if the centre of gravity G lies below it (ballast at the bottom)."
+ },
+ {
+  "id": "07-63",
+  "de": "Stehende Zylinder sind nur bei kleiner Höhe oder tiefem Schwerpunkt stabil — Ballast im Fuß oder größerer Durchmesser.",
+  "en": "Vertical cylinders are stable only for a small height or a low centre of gravity — ballast at the bottom or a larger diameter."
+ },
+ {
+  "id": "07-64",
+  "de": "Schwerpunkt tiefer legen (Ballast) oder breiter bauen (BM wächst mit der dritten Potenz der Breite).",
+  "en": "Lower the centre of gravity (ballast) or build wider (BM grows with the cube of the width)."
+ },
+ {
+  "id": "07-65",
+  "de": "V(T) = L·(B<sub>u</sub> + b(T))/2·T mit b(T) = B<sub>u</sub> + k·T, k = (B<sub>o</sub> − B<sub>u</sub>)/H = {} → {}",
+  "en": "V(T) = L·(B<sub>u</sub> + b(T))/2·T with b(T) = B<sub>u</sub> + k·T, k = (B<sub>o</sub> − B<sub>u</sub>)/H = {} → {}"
+ },
+ {
+  "id": "07-66",
+  "de": "V(T) = L·A<sub>Seg</sub>(T) mit A<sub>Seg</sub> = R²·arccos((R − T)/R) − (R − T)·√(2RT − T²), R = {} m → T iterativ",
+  "en": "V(T) = L·A<sub>seg</sub>(T) with A<sub>seg</sub> = R²·arccos((R − T)/R) − (R − T)·√(2RT − T²), R = {} m → T iteratively"
+ },
+ {
+  "id": "07-67",
+  "de": "V(T) = π·T²·(3R − T)/3 (Kugelkappe), R = {} m → T iterativ",
+  "en": "V(T) = π·T²·(3R − T)/3 (spherical cap), R = {} m → T iteratively"
+ },
+ {
+  "id": "07-68",
+  "de": "z<sub>B</sub> = T/3·(B<sub>u</sub> + 2b)/(B<sub>u</sub> + b) mit b = b(T) = {} m",
+  "en": "z<sub>B</sub> = T/3·(B<sub>u</sub> + 2b)/(B<sub>u</sub> + b) with b = b(T) = {} m"
+ },
+ {
+  "id": "07-69",
+  "de": "z<sub>B</sub> = R − s³/(12·A<sub>Seg</sub>) mit Sehne s = 2·√(T·(2R − T)) = {} m, A<sub>Seg</sub> = {} m²",
+  "en": "z<sub>B</sub> = R − s³/(12·A<sub>seg</sub>) with chord s = 2·√(T·(2R − T)) = {} m, A<sub>seg</sub> = {} m²"
+ },
+ {
+  "id": "07-70",
+  "de": "I<sub>W</sub> = π·r<sub>W</sub>⁴/4 mit r<sub>W</sub> = √(T·(2R − T)) = {} m",
+  "en": "I<sub>W</sub> = π·r<sub>W</sub>⁴/4 with r<sub>W</sub> = √(T·(2R − T)) = {} m"
+ },
+ {
+  "id": "07-71",
+  "de": "geht unter",
+  "en": "sinks"
+ },
+ {
+  "id": "07-72",
+  "de": "Auftrieb A = G",
+  "en": "Buoyancy A = G"
+ },
+ {
+  "id": "07-73",
+  "de": "{} · Höhen über der Unterkante.",
+  "en": "{} · heights above the bottom."
+ },
+ {
+  "id": "07-74",
+  "de": "Fließgeschwindigkeit und Strömungsart",
+  "en": "Flow velocity and flow regime"
+ },
+ {
+  "id": "07-75",
+  "de": "Kontinuität: Q = v·A",
+  "en": "Continuity: Q = v·A"
+ },
+ {
+  "id": "07-76",
+  "de": " (hoch — Druckstoß und Abrieb beachten, üblich 0,5 … 2 m/s)",
+  "en": " (high — consider water hammer and abrasion, usual 0.5 … 2 m/s)"
+ },
+ {
+  "id": "07-77",
+  "de": " (niedrig — Ablagerungen möglich)",
+  "en": " (low — deposits possible)"
+ },
+ {
+  "id": "07-78",
+  "de": "Reynolds-Zahl: laminar bis Re ≈ 2320, darüber turbulent",
+  "en": "Reynolds number: laminar up to Re ≈ 2320, turbulent above"
+ },
+ {
+  "id": "07-79",
+  "de": "Verlusthöhe",
+  "en": "Head loss"
+ },
+ {
+  "id": "07-80",
+  "de": "Reibungsbeiwert λ",
+  "en": "Friction factor λ"
+ },
+ {
+  "id": "07-81",
+  "de": "Colebrook-White: 1/√λ = −2·lg(2,51/(Re·√λ) + (k/D)/3,71) mit k/D = {} → iterativ ({} Schritte) λ = <b>{}</b>",
+  "en": "Colebrook-White: 1/√λ = −2·lg(2.51/(Re·√λ) + (k/D)/3.71) with k/D = {} → iteratively ({} steps) λ = <b>{}</b>"
+ },
+ {
+  "id": "07-82",
+  "de": "Verluste nach Darcy-Weisbach: Rohrreibung und örtliche Verluste",
+  "en": "Losses after Darcy-Weisbach: pipe friction and local losses"
+ },
+ {
+  "id": "07-83",
+  "de": "Geschwindigkeitshöhe v²/(2g) = {} m",
+  "en": "Velocity head v²/(2g) = {} m"
+ },
+ {
+  "id": "07-84",
+  "de": "Umgekehrt gefragt: welcher Durchfluss ist mit Δh möglich?",
+  "en": "The other way round: which discharge is possible with Δh?"
+ },
+ {
+  "id": "07-85",
+  "de": "Q<sub>max</sub> = <b>{} l/s</b> (Verlusthöhe = Δh, iterativ)",
+  "en": "Q<sub>max</sub> = <b>{} l/s</b> (head loss = Δh, iteratively)"
+ },
+ {
+  "id": "07-86",
+  "de": "Δh reicht nicht: größerer Durchmesser (h<sub>v</sub> ~ 1/D⁵), glatteres Rohr, weniger Formstücke oder eine Pumpe.",
+  "en": "Δh is not sufficient: larger diameter (h<sub>v</sub> ~ 1/D⁵), smoother pipe, fewer fittings or a pump."
+ },
+ {
+  "id": "07-87",
+  "de": "Energie- und Drucklinie (Höhen über dem unteren Wasserspiegel)",
+  "en": "Energy and hydraulic grade line (heights above the lower water level)"
+ },
+ {
+  "id": "07-88",
+  "de": "Drucklinie",
+  "en": "Hydraulic grade line"
+ },
+ {
+  "id": "07-89",
+  "de": "Die Energielinie fällt um die Verluste; die Drucklinie liegt um v²/(2g) darunter.",
+  "en": "The energy line falls by the losses; the hydraulic grade line lies v²/(2g) below it."
+ },
+ {
+  "id": "07-90",
+  "de": "Normalabflusstiefe",
+  "en": "Normal depth"
+ },
+ {
+  "id": "07-91",
+  "de": "Querschnitt in Abhängigkeit der Wassertiefe h (Trapez mit Böschung 1 : m)",
+  "en": "Cross-section as a function of the water depth h (trapezoid with side slope 1 : m)"
+ },
+ {
+  "id": "07-92",
+  "de": "Normalabfluss nach Gauckler-Manning-Strickler, h iterativ",
+  "en": "Uniform flow after Gauckler-Manning-Strickler, h iteratively"
+ },
+ {
+  "id": "07-93",
+  "de": "A = {} m², U = {} m, R = {} m · Kontrolle: {}·{}·{}<sup>2/3</sup>·{}<sup>1/2</sup> = {} m³/s",
+  "en": "A = {} m², P = {} m, R = {} m · check: {}·{}·{}<sup>2/3</sup>·{}<sup>1/2</sup> = {} m³/s"
+ },
+ {
+  "id": "07-94",
+  "de": " (für Rasen/Kies hoch — Erosion prüfen)",
+  "en": " (high for grass/gravel — check erosion)"
+ },
+ {
+  "id": "07-95",
+  "de": "Strömungszustand und Grenztiefe",
+  "en": "Flow regime and critical depth"
+ },
+ {
+  "id": "07-96",
+  "de": "Froude-Zahl: Verhältnis von Fließ- zu Wellengeschwindigkeit",
+  "en": "Froude number: ratio of flow velocity to wave velocity"
+ },
+ {
+  "id": "07-97",
+  "de": "strömend (Fr &lt; 1)",
+  "en": "subcritical (Fr &lt; 1)"
+ },
+ {
+  "id": "07-98",
+  "de": "schießend (Fr &gt; 1)",
+  "en": "supercritical (Fr &gt; 1)"
+ },
+ {
+  "id": "07-99",
+  "de": "Grenztiefe: kleinste spezifische Energie, Fr = 1 ⇔ Q²·B<sub>sp</sub>/(g·A³) = 1",
+  "en": "Critical depth: minimum specific energy, Fr = 1 ⇔ Q²·B<sub>s</sub>/(g·A³) = 1"
+ },
+ {
+  "id": "07-100",
+  "de": "h<sub>gr</sub> = <b>{} m</b> · E<sub>min</sub> = h<sub>gr</sub> + v<sub>gr</sub>²/(2g) = {} m · bei h<sub>n</sub>: E = {} m",
+  "en": "h<sub>c</sub> = <b>{} m</b> · E<sub>min</sub> = h<sub>c</sub> + v<sub>c</sub>²/(2g) = {} m · at h<sub>n</sub>: E = {} m"
+ },
+ {
+  "id": "07-101",
+  "de": "h<sub>n</sub> > h<sub>gr</sub>: Fließwechsel nur an Bauwerken (z. B. Wechselsprung unterhalb eines Wehrs).",
+  "en": "h<sub>n</sub> > h<sub>c</sub>: change of flow regime only at structures (e.g. hydraulic jump below a weir)."
+ },
+ {
+  "id": "07-102",
+  "de": "h<sub>n</sub> < h<sub>gr</sub>: schießender Abfluss — Wechselsprung und Energieumwandlung am Ende einplanen.",
+  "en": "h<sub>n</sub> < h<sub>c</sub>: supercritical flow — plan a hydraulic jump and energy dissipation at the end."
+ },
+ {
+  "id": "07-103",
+  "de": "Freibord",
+  "en": "Freeboard"
+ },
+ {
+  "id": "07-104",
+  "de": "Gerinne breiter oder tiefer, glattere Auskleidung oder größeres Gefälle.",
+  "en": "Make the channel wider or deeper, use a smoother lining or a steeper slope."
+ },
+ {
+  "id": "07-105",
+  "de": "spezifische Energie E(h)",
+  "en": "specific energy E(h)"
+ },
+ {
+  "id": "07-106",
+  "de": "Blau: Normalabflusstiefe, orange gestrichelt: Grenztiefe, grau punktiert: Freibordgrenze. Rechts: E = h + v²/(2g), grau die Winkelhalbierende E = h.",
+  "en": "Blue: normal depth, orange dashed: critical depth, grey dotted: freeboard limit. Right: E = h + v²/(2g), grey the bisector E = h."
+ },
+ {
+  "id": "07-107",
+  "de": "Überfallhöhe (Poleni)",
+  "en": "Overflow head (Poleni)"
+ },
+ {
+  "id": "07-108",
+  "de": "Überfallformel nach Poleni, nach der Überfallhöhe aufgelöst",
+  "en": "Weir formula after Poleni, solved for the overflow head"
+ },
+ {
+  "id": "07-109",
+  "de": "spezifischer Abfluss q = Q/b = {} m³/(s·m)",
+  "en": "specific discharge q = Q/b = {} m³/(s·m)"
+ },
+ {
+  "id": "07-110",
+  "de": "Kontrolle der vernachlässigten Zulaufgeschwindigkeit",
+  "en": "Check of the neglected approach velocity"
+ },
+ {
+  "id": "07-111",
+  "de": " — nicht mehr vernachlässigbar, h<sub>ü</sub> wird leicht überschätzt",
+  "en": " — no longer negligible, h<sub>ü</sub> is slightly overestimated"
+ },
+ {
+  "id": "07-112",
+  "de": "v<sub>0</sub> = Q/(b·(w + h<sub>ü</sub>)) = {} m/s → v<sub>0</sub>²/(2g) = {} m ({} % von h<sub>ü</sub>{})",
+  "en": "v<sub>0</sub> = Q/(b·(w + h<sub>ü</sub>)) = {} m/s → v<sub>0</sub>²/(2g) = {} m ({} % of h<sub>ü</sub>{})"
+ },
+ {
+  "id": "07-113",
+  "de": "Oberwasserstand",
+  "en": "Headwater level"
+ },
+ {
+  "id": "07-114",
+  "de": "Oberwasserstand über der Sohle = w + h<sub>ü</sub> = {} + {} = <b>{} m</b> {} {} m",
+  "en": "Headwater level above the bed = w + h<sub>ü</sub> = {} + {} = <b>{} m</b> {} {} m"
+ },
+ {
+  "id": "07-115",
+  "de": "Wehr verbreitern, Krone absenken oder eine günstigere Kronenform (größeres μ) wählen.",
+  "en": "Widen the weir, lower the crest or choose a more favourable crest shape (larger μ)."
+ },
+ {
+  "id": "07-116",
+  "de": "Längsschnitt",
+  "en": "Longitudinal section"
+ },
+ {
+  "id": "07-117",
+  "de": "zulässig {} m",
+  "en": "permissible {} m"
+ },
+ {
+  "id": "07-118",
+  "de": "Q = {} m³/s auf b = {} m",
+  "en": "Q = {} m³/s on b = {} m"
+ },
+ {
+  "id": "07-119",
+  "de": "Vollkommener Überfall über die Wehrkrone.",
+  "en": "Free overflow over the weir crest."
+ },
+ {
+  "id": "07-120",
+  "de": "Gekrümmte Flächen (Segmentschütz), Wasserdruck mit Strömung, Wellen und Eis, Sohlwasserdruck unter Bauwerken.",
+  "en": "Curved surfaces (radial gate), water pressure with flow, waves and ice, uplift pressure under structures."
+ },
+ {
+  "id": "07-121",
+  "de": "Große Krängungswinkel (Hebelarmkurve), freie Oberflächen in Tanks, Längsstabilität, Wind- und Wellenlasten.",
+  "en": "Large heel angles (righting lever curve), free surfaces in tanks, longitudinal stability, wind and wave loads."
+ },
+ {
+  "id": "07-122",
+  "de": "Ungleichförmiger Abfluss (Staukurven), gegliederte Querschnitte mit Vorland, Geschiebetransport, Krümmungen.",
+  "en": "Non-uniform flow (backwater curves), compound sections with floodplains, sediment transport, bends."
+ },
+ {
+  "id": "07-123",
+  "de": "Unvollkommener (rückgestauter) Überfall, Seitenkontraktion an Pfeilern, Energieumwandlung im Tosbecken, Zulaufgeschwindigkeit.",
+  "en": "Submerged (backed-up) overflow, side contraction at piers, energy dissipation in the stilling basin, approach velocity."
+ },
+ {
+  "id": "07-124",
+  "de": "<section><h2>Eingaben</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "07-125",
+  "de": "Hydrostatik (Archimedes, Metazentrum)",
+  "en": "Hydrostatics (Archimedes, metacentre)"
+ },
+ {
+  "id": "07-126",
+  "de": "Hydrodynamik (Darcy-Weisbach, Colebrook-White)",
+  "en": "Hydrodynamics (Darcy-Weisbach, Colebrook-White)"
+ },
+ {
+  "id": "07-127",
+  "de": "Hydrodynamik (Gauckler-Manning-Strickler)",
+  "en": "Hydrodynamics (Gauckler-Manning-Strickler)"
+ },
+ {
+  "id": "07-128",
+  "de": "Hydrodynamik (Poleni)",
+  "en": "Hydrodynamics (Poleni)"
+ },
+ {
+  "id": "07-129",
+  "de": "λ der Schicht {} > 0",
+  "en": "λ of layer {} > 0"
+ },
+ {
+  "id": "07-130",
+  "de": "μ der Schicht {} > 0",
+  "en": "μ of layer {} > 0"
+ },
+ {
+  "id": "07-131",
+  "de": "ρ der Schicht {} ≥ 0",
+  "en": "ρ of layer {} ≥ 0"
+ },
+ {
+  "id": "07-132",
+  "de": "Wärmedurchgangskoeffizient",
+  "en": "Thermal transmittance"
+ },
+ {
+  "id": "07-133",
+  "de": "Wärmedurchlasswiderstände der Schichten (R = d/λ)",
+  "en": "Thermal resistances of the layers (R = d/λ)"
+ },
+ {
+  "id": "07-134",
+  "de": "Mindestwärmeschutz DIN 4108-2 ({})",
+  "en": "Minimum thermal insulation DIN 4108-2 ({})"
+ },
+ {
+  "id": "07-135",
+  "de": "Mehr oder bessere Dämmung (kleineres λ).",
+  "en": "More or better insulation (smaller λ)."
+ },
+ {
+  "id": "07-136",
+  "de": "GEG — U-Wert des Referenzgebäudes",
+  "en": "GEG — U-value of the reference building"
+ },
+ {
+  "id": "07-137",
+  "de": "U = {} {} U<sub>Ref</sub> = {} W/(m²K) (Neubau, Referenzwert)",
+  "en": "U = {} {} U<sub>ref</sub> = {} W/(m²K) (new building, reference value)"
+ },
+ {
+  "id": "07-138",
+  "de": "Änderung im Bestand: U ≤ {} W/(m²K) {}",
+  "en": "Alteration of existing buildings: U ≤ {} W/(m²K) {}"
+ },
+ {
+  "id": "07-139",
+  "de": "Das GEG verlangt den Nachweis für das ganze Gebäude; der Referenzwert zeigt, ob das Bauteil auf dem üblichen Niveau liegt.",
+  "en": "The GEG requires the check for the whole building; the reference value shows whether the element is at the usual level."
+ },
+ {
+  "id": "07-140",
+  "de": "Schimmel — Temperaturfaktor f<sub>Rsi</sub>",
+  "en": "Mould — temperature factor f<sub>Rsi</sub>"
+ },
+ {
+  "id": "07-141",
+  "de": "f<sub>Rsi</sub> = 1 − U·R<sub>si</sub> = 1 − {}·0,25 = <b>{}</b> {} 0,70 (θ<sub>si</sub> bei 20/−5 °C = {} °C)",
+  "en": "f<sub>Rsi</sub> = 1 − U·R<sub>si</sub> = 1 − {}·0.25 = <b>{}</b> {} 0.70 (θ<sub>si</sub> at 20/−5 °C = {} °C)"
+ },
+ {
+  "id": "07-142",
+  "de": "Gilt für den ungestörten Bereich. An Wärmebrücken (Ecken, Auflager) gesondert nachweisen.",
+  "en": "Applies to the undisturbed area. Check thermal bridges (corners, supports) separately."
+ },
+ {
+  "id": "07-143",
+  "de": "außen",
+  "en": "outside"
+ },
+ {
+  "id": "07-144",
+  "de": "Schichtdicken in cm",
+  "en": "Layer thicknesses in cm"
+ },
+ {
+  "id": "07-145",
+  "de": "Schnitt mit Temperaturverlauf",
+  "en": "Section with temperature profile"
+ },
+ {
+  "id": "07-146",
+  "de": "Diffusion in der Tauperiode",
+  "en": "Diffusion in the condensation period"
+ },
+ {
+  "id": "07-147",
+  "de": "Randbedingungen (DIN 4108-3)",
+  "en": "Boundary conditions (DIN 4108-3)"
+ },
+ {
+  "id": "07-148",
+  "de": "innen 20 °C / 50 % → p<sub>i</sub> = {} Pa · außen −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 m²K/W · 2160 h",
+  "en": "inside 20 °C / 50 % → p<sub>i</sub> = {} Pa · outside −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0.25, R<sub>se</sub> = 0.04 m²K/W · 2160 h"
+ },
+ {
+  "id": "07-149",
+  "de": "Temperaturen und Sättigungsdampfdrücke",
+  "en": "Temperatures and saturation vapour pressures"
+ },
+ {
+  "id": "07-150",
+  "de": "Tauwasser im Bauteil",
+  "en": "Condensation in the element"
+ },
+ {
+  "id": "07-151",
+  "de": "Die Dampfdrucklinie bleibt überall unter dem Sättigungsdampfdruck: <b>kein Tauwasser</b>.",
+  "en": "The vapour pressure line stays below the saturation vapour pressure everywhere: <b>no condensation</b>."
+ },
+ {
+  "id": "07-152",
+  "de": "Tauwassermasse",
+  "en": "Condensate mass"
+ },
+ {
+  "id": "07-153",
+  "de": "in der Ebene ",
+  "en": "in the plane "
+ },
+ {
+  "id": "07-154",
+  "de": "im Bereich s<sub>d</sub> = ",
+  "en": "in the zone s<sub>d</sub> = "
+ },
+ {
+  "id": "07-155",
+  "de": "Tauwasser {}",
+  "en": "Condensation {}"
+ },
+ {
+  "id": "07-156",
+  "de": "Dampfbremse auf der warmen Seite der Dämmung oder diffusionsoffenere Außenschichten.",
+  "en": "Vapour retarder on the warm side of the insulation or more vapour-open outer layers."
+ },
+ {
+  "id": "07-157",
+  "de": "Austrocknung in der Verdunstungsperiode",
+  "en": "Drying out in the evaporation period"
+ },
+ {
+  "id": "07-158",
+  "de": "innen 20 °C / 50 %, außen 12 °C / 70 %, 2160 h",
+  "en": "inside 20 °C / 50 %, outside 12 °C / 70 %, 2160 h"
+ },
+ {
+  "id": "07-159",
+  "de": "Oberfläche innen",
+  "en": "Inner surface"
+ },
+ {
+  "id": "07-160",
+  "de": "Oberfläche außen",
+  "en": "Outer surface"
+ },
+ {
+  "id": "07-161",
+  "de": " · Tauwasser m<sub>W,T</sub> = {} kg/m²",
+  "en": " · condensate m<sub>W,T</sub> = {} kg/m²"
+ },
+ {
+  "id": "07-162",
+  "de": " · kein Tauwasser",
+  "en": " · no condensation"
+ },
+ {
+  "id": "07-163",
+  "de": "<span style=\"color:{}\">p<sub>s</sub> — Sättigungsdampfdruck</span> · <span style=\"color:{}\">p — Wasserdampfdruck</span>{}",
+  "en": "<span style=\"color:{}\">p<sub>s</sub> — saturation vapour pressure</span> · <span style=\"color:{}\">p — water vapour pressure</span>{}"
+ },
+ {
+  "id": "07-164",
+  "de": "Glaser-Diagramm (Tauperiode), waagerecht s_d",
+  "en": "Glaser diagram (condensation period), horizontal s_d"
+ },
+ {
+  "id": "07-165",
+  "de": "Decke oben",
+  "en": "Ceiling above"
+ },
+ {
+  "id": "07-166",
+  "de": "Boden unten",
+  "en": "Floor below"
+ },
+ {
+  "id": "07-167",
+  "de": "Außenwand",
+  "en": "External wall"
+ },
+ {
+  "id": "07-168",
+  "de": "Innenwand",
+  "en": "Internal wall"
+ },
+ {
+  "id": "07-169",
+  "de": "Flächenbezogene Masse und R<sub>w</sub>",
+  "en": "Mass per unit area and R<sub>w</sub>"
+ },
+ {
+  "id": "07-170",
+  "de": " — außerhalb 65 … 720 kg/m², Massegesetz nur als Anhalt",
+  "en": " — outside 65 … 720 kg/m², mass law only as a guide"
+ },
+ {
+  "id": "07-171",
+  "de": "Flankenübertragung (DIN 4109-2)",
+  "en": "Flanking transmission (DIN 4109-2)"
+ },
+ {
+  "id": "07-172",
+  "de": "Direkt und je Flanke drei Wege (Ff, Df, Fd)",
+  "en": "Direct path and three paths per flank (Ff, Df, Fd)"
+ },
+ {
+  "id": "07-173",
+  "de": "Kreuzstoß",
+  "en": "Cross junction"
+ },
+ {
+  "id": "07-174",
+  "de": "T-Stoß",
+  "en": "T-junction"
+ },
+ {
+  "id": "07-175",
+  "de": "R′<sub>w</sub> = −10·lg(Σ 10<sup>−R<sub>ij</sub>/10</sup>) über 13 Wege = <b>{} dB</b>",
+  "en": "R′<sub>w</sub> = −10·lg(Σ 10<sup>−R<sub>ij</sub>/10</sup>) over 13 paths = <b>{} dB</b>"
+ },
+ {
+  "id": "07-176",
+  "de": "Anteile: direkt {} %, Flanken {} % · größter Flankenweg {} über {} ({} %)",
+  "en": "Shares: direct {} %, flanks {} % · largest flanking path {} via {} ({} %)"
+ },
+ {
+  "id": "07-177",
+  "de": "Luftschall — {}",
+  "en": "Airborne sound — {}"
+ },
+ {
+  "id": "07-178",
+  "de": "R′<sub>w</sub> = {} dB aus dem Flankennachweis",
+  "en": "R′<sub>w</sub> = {} dB from the flanking calculation"
+ },
+ {
+  "id": "07-179",
+  "de": "R′<sub>w</sub> ≈ R<sub>w</sub> − Abschlag Flankenübertragung = {} − {} = {} dB",
+  "en": "R′<sub>w</sub> ≈ R<sub>w</sub> − deduction for flanking transmission = {} − {} = {} dB"
+ },
+ {
+  "id": "07-180",
+  "de": "R′<sub>w</sub> − u<sub>prog</sub> = {} − {} = <b>{} dB</b> {} erf. R′<sub>w</sub> = {} dB",
+  "en": "R′<sub>w</sub> − u<sub>prog</sub> = {} − {} = <b>{} dB</b> {} req. R′<sub>w</sub> = {} dB"
+ },
+ {
+  "id": "07-181",
+  "de": "Vereinfachung: Der genaue Nachweis nach DIN 4109-2 bestimmt R′<sub>w</sub> aus dem Trennbauteil und allen Flankenwegen. ",
+  "en": "Simplification: the exact method to DIN 4109-2 determines R′<sub>w</sub> from the separating element and all flanking paths. "
+ },
+ {
+  "id": "07-182",
+  "de": "Schwereres Trennbauteil, schwerere Flanken (vor allem die mit dem größten Anteil) oder biegeweiche Vorsatzschale.",
+  "en": "Heavier separating element, heavier flanks (above all the one with the largest share) or a flexible lining."
+ },
+ {
+  "id": "07-183",
+  "de": "Trittschall — schwimmender Estrich",
+  "en": "Impact sound — floating screed"
+ },
+ {
+  "id": "07-184",
+  "de": "L<sub>n,eq,0,w</sub> = 164 − 35·lg({}) = {} dB · m′<sub>Estrich</sub> = {}·{} = {} kg/m²",
+  "en": "L<sub>n,eq,0,w</sub> = 164 − 35·lg({}) = {} dB · m′<sub>screed</sub> = {}·{} = {} kg/m²"
+ },
+ {
+  "id": "07-185",
+  "de": "K = 0,6 + 5,5·lg(m′<sub>Decke</sub>/m′<sub>f,m</sub>) = 0,6 + 5,5·lg({}/{}) = {} dB (m′<sub>f,m</sub> — Mittel der vier Flanken)",
+  "en": "K = 0.6 + 5.5·lg(m′<sub>floor</sub>/m′<sub>f,m</sub>) = 0.6 + 5.5·lg({}/{}) = {} dB (m′<sub>f,m</sub> — mean of the four flanks)"
+ },
+ {
+  "id": "07-186",
+  "de": "L′<sub>n,w</sub> + u<sub>prog</sub> = {} dB {} zul. {} dB",
+  "en": "L′<sub>n,w</sub> + u<sub>prog</sub> = {} dB {} perm. {} dB"
+ },
+ {
+  "id": "07-187",
+  "de": "Weichere Trittschalldämmung (kleineres s′), schwererer Estrich oder schwerere Rohdecke.",
+  "en": "Softer impact sound insulation (smaller s′), heavier screed or heavier floor slab."
+ },
+ {
+  "id": "07-188",
+  "de": "erf. R′w = {} dB",
+  "en": "req. R′w = {} dB"
+ },
+ {
+  "id": "07-189",
+  "de": " (mit Flanken)",
+  "en": " (with flanks)"
+ },
+ {
+  "id": "07-190",
+  "de": "Massegesetz R_w = 30,9·lg m′ − 22,2",
+  "en": "Mass law R_w = 30.9·lg m′ − 22.2"
+ },
+ {
+  "id": "07-191",
+  "de": "kein Tauwasser · s<sub>d</sub> = {} m",
+  "en": "no condensation · s<sub>d</sub> = {} m"
+ },
+ {
+  "id": "07-192",
+  "de": "Wärmebrücken (ψ-Werte), inhomogene Schichten (Holzständer, Sparren — Gefache anteilig), Luftschichten, Bauteile gegen Erdreich nach DIN EN ISO 13370, sommerlicher Wärmeschutz.",
+  "en": "Thermal bridges (ψ values), inhomogeneous layers (timber studs, rafters — infill proportionally), air layers, elements in contact with the ground to DIN EN ISO 13370, summer thermal protection."
+ },
+ {
+  "id": "07-193",
+  "de": "Instationäre Feuchte (WUFI), Holz-Massezunahme, Dachbegrünung, Flachdächer mit Sonderklima, Kapillartransport.",
+  "en": "Transient moisture (WUFI), increase in timber moisture mass, green roofs, flat roofs with special climate, capillary transport."
+ },
+ {
+  "id": "07-194",
+  "de": "Flanken mit Vorsatzschalen (ΔR<sub>ij</sub>), leichte und zweischalige Bauteile, elastische Stöße, Holzbalkendecken, Außenlärm mit Fenstern.",
+  "en": "Flanks with linings (ΔR<sub>ij</sub>), lightweight and double-leaf elements, elastic junctions, timber joist floors, external noise with windows."
+ },
+ {
+  "id": "07-195",
+  "de": "<section><h2>Bauteilaufbau (innen → außen)</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Build-up (inside → outside)</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "07-196",
+  "de": "Wärmeschutz — U-Wert",
+  "en": "Thermal insulation — U-value"
+ },
+ {
+  "id": "07-197",
+  "de": "Feuchteschutz — Glaser-Verfahren",
+  "en": "Moisture protection — Glaser method"
+ },
+ {
+  "id": "07-198",
+  "de": "Flanken nach DIN 4109-2",
+  "en": "Flanks to DIN 4109-2"
+ },
+ {
+  "id": "07-199",
+  "de": "Abschlag Flanken ",
+  "en": "Flanking deduction "
+ },
+ {
+  "id": "07-200",
+  "de": "Lochleibung in Holz 1",
+  "en": "embedment in timber 1"
+ },
+ {
+  "id": "07-201",
+  "de": "Lochleibung in Holz 2",
+  "en": "embedment in timber 2"
+ },
+ {
+  "id": "07-202",
+  "de": "Lochleibung in beiden Hölzern, Stab dreht sich",
+  "en": "embedment in both members, fastener rotates"
+ },
+ {
+  "id": "07-203",
+  "de": "ein Fließgelenk in Holz 2",
+  "en": "one plastic hinge in timber 2"
+ },
+ {
+  "id": "07-204",
+  "de": "ein Fließgelenk in Holz 1",
+  "en": "one plastic hinge in timber 1"
+ },
+ {
+  "id": "07-205",
+  "de": "zwei Fließgelenke",
+  "en": "two plastic hinges"
+ },
+ {
+  "id": "07-206",
+  "de": "Lochleibung in den Seitenhölzern",
+  "en": "embedment in the side members"
+ },
+ {
+  "id": "07-207",
+  "de": "Lochleibung im Mittelholz",
+  "en": "embedment in the central member"
+ },
+ {
+  "id": "07-208",
+  "de": "ein Fließgelenk je Scherfuge",
+  "en": "one plastic hinge per shear plane"
+ },
+ {
+  "id": "07-209",
+  "de": "zwei Fließgelenke je Scherfuge",
+  "en": "two plastic hinges per shear plane"
+ },
+ {
+  "id": "07-210",
+  "de": "ein Fließgelenk im Blech",
+  "en": "one plastic hinge in the plate"
+ },
+ {
+  "id": "07-211",
+  "de": "drei Fließgelenke",
+  "en": "three plastic hinges"
+ },
+ {
+  "id": "07-212",
+  "de": "Lochleibung im Mittelholz (dünnes Blech)",
+  "en": "embedment in the central member (thin plate)"
+ },
+ {
+  "id": "07-213",
+  "de": "Fließgelenke (dünnes Blech)",
+  "en": "plastic hinges (thin plate)"
+ },
+ {
+  "id": "07-214",
+  "de": "Lochleibung im Holz (dünnes Blech)",
+  "en": "embedment in the timber (thin plate)"
+ },
+ {
+  "id": "07-215",
+  "de": "Lochleibung im Mittelholz (dickes Blech)",
+  "en": "embedment in the central member (thick plate)"
+ },
+ {
+  "id": "07-216",
+  "de": "Fließgelenke (dickes Blech)",
+  "en": "plastic hinges (thick plate)"
+ },
+ {
+  "id": "07-217",
+  "de": "ein Fließgelenk am Blech (dickes Blech)",
+  "en": "one plastic hinge at the plate (thick plate)"
+ },
+ {
+  "id": "07-218",
+  "de": "zwei Fließgelenke (dickes Blech)",
+  "en": "two plastic hinges (thick plate)"
+ },
+ {
+  "id": "07-219",
+  "de": "Lochleibung im Holz (dickes Blech)",
+  "en": "embedment in the timber (thick plate)"
+ },
+ {
+  "id": "07-220",
+  "de": "Tab. 8.2, nicht vorgebohrt",
+  "en": "Tab. 8.2, not pre-drilled"
+ },
+ {
+  "id": "07-221",
+  "de": "Tab. 8.5 (Stabdübel)",
+  "en": "Tab. 8.5 (dowels)"
+ },
+ {
+  "id": "07-222",
+  "de": "F<sub>ax,Rk</sub> = {} kN (Zulassung), Einhängeeffekt bis 100 % des Johansen-Anteils",
+  "en": "F<sub>ax,Rk</sub> = {} kN (approval), rope effect up to 100 % of the Johansen part"
+ },
+ {
+  "id": "07-223",
+  "de": "glattschaftig: f<sub>ax,k</sub> = 20·10⁻⁶·ρ<sub>k</sub>² = {} N/mm², f<sub>head,k</sub> = 70·10⁻⁶·ρ<sub>k</sub>² = {} N/mm² (d<sub>h</sub> ≈ 2d) → F<sub>ax,Rk</sub> = {} kN, angerechnet höchstens 15 %",
+  "en": "smooth shank: f<sub>ax,k</sub> = 20·10⁻⁶·ρ<sub>k</sub>² = {} N/mm², f<sub>head,k</sub> = 70·10⁻⁶·ρ<sub>k</sub>² = {} N/mm² (d<sub>h</sub> ≈ 2d) → F<sub>ax,Rk</sub> = {} kN, counted at most 15 %"
+ },
+ {
+  "id": "07-224",
+  "de": "Stabdübel: kein Einhängeeffekt (glatte Stäbe ohne Kopf)",
+  "en": "Dowels: no rope effect (smooth bars without head)"
+ },
+ {
+  "id": "07-225",
+  "de": "k<sub>90</sub> = 1,35 + 0,015·d = {} (Nadelholz)",
+  "en": "k<sub>90</sub> = 1.35 + 0.015·d = {} (softwood)"
+ },
+ {
+  "id": "07-226",
+  "de": "Ausziehtragfähigkeit für den Einhängeeffekt (der Stift wird bei Schrägstellung zusätzlich gezogen)",
+  "en": "Withdrawal capacity for the rope effect (the fastener is additionally pulled when it tilts)"
+ },
+ {
+  "id": "07-227",
+  "de": "dünnes Blech (t<sub>s</sub> ≤ 0,5·d)",
+  "en": "thin plate (t<sub>s</sub> ≤ 0.5·d)"
+ },
+ {
+  "id": "07-228",
+  "de": "dickes Blech (t<sub>s</sub> ≥ d)",
+  "en": "thick plate (t<sub>s</sub> ≥ d)"
+ },
+ {
+  "id": "07-229",
+  "de": "zwischen dünn und dick: geradlinig interpoliert",
+  "en": "between thin and thick: interpolated linearly"
+ },
+ {
+  "id": "07-230",
+  "de": "Modi für dünnes Blech",
+  "en": "Modes for a thin plate"
+ },
+ {
+  "id": "07-231",
+  "de": "Modi für dickes Blech",
+  "en": "Modes for a thick plate"
+ },
+ {
+  "id": "07-232",
+  "de": "Bemessungswert (Holz bestimmt das Verhalten: k<sub>mod</sub> und γ<sub>M</sub> = 1,3)",
+  "en": "Design value (timber governs the behaviour: k<sub>mod</sub> and γ<sub>M</sub> = 1.3)"
+ },
+ {
+  "id": "07-233",
+  "de": "F<sub>v,Rd</sub> = k<sub>mod</sub>·F<sub>v,Rk</sub>/γ<sub>M</sub> = {}·{}/1,3 = <b>{} kN</b> je Scherfuge",
+  "en": "F<sub>v,Rd</sub> = k<sub>mod</sub>·F<sub>v,Rk</sub>/γ<sub>M</sub> = {}·{}/1.3 = <b>{} kN</b> per shear plane"
+ },
+ {
+  "id": "07-234",
+  "de": "Tragfähigkeit je Verbindungsmittel (Johansen)",
+  "en": "Resistance per fastener (Johansen)"
+ },
+ {
+  "id": "07-235",
+  "de": "Maßgebend: Modus ({}) — {}.",
+  "en": "Governing: mode ({}) — {}."
+ },
+ {
+  "id": "07-236",
+  "de": "Nägel in einer Reihe: k<sub>ef</sub> = {} (Tab. 8.1, a<sub>1</sub> = {}·d) → n<sub>ef</sub> = n<sup>k<sub>ef</sub></sup> = {}<sup>{}</sup> = <b>{}</b>",
+  "en": "Nails in a row: k<sub>ef</sub> = {} (Tab. 8.1, a<sub>1</sub> = {}·d) → n<sub>ef</sub> = n<sup>k<sub>ef</sub></sup> = {}<sup>{}</sup> = <b>{}</b>"
+ },
+ {
+  "id": "07-237",
+  "de": " → für α = {}° zwischen n<sub>ef</sub> (0°) und n (90°) interpoliert: <b>{}</b>",
+  "en": " → for α = {}° interpolated between n<sub>ef</sub> (0°) and n (90°): <b>{}</b>"
+ },
+ {
+  "id": "07-238",
+  "de": "Tragfähigkeit der Verbindung",
+  "en": "Resistance of the connection"
+ },
+ {
+  "id": "07-239",
+  "de": "Mehr oder dickere Verbindungsmittel, größere Abstände a<sub>1</sub> (höheres n<sub>ef</sub>) oder dickere Hölzer wählen.",
+  "en": "Choose more or thicker fasteners, larger spacings a<sub>1</sub> (higher n<sub>ef</sub>) or thicker members."
+ },
+ {
+  "id": "07-240",
+  "de": "Nicht vorgebohrte Nägel: Mindestholzdicke gegen Aufspalten und Einbindetiefe der Spitze",
+  "en": "Nails not pre-drilled: minimum timber thickness against splitting and penetration depth of the point"
+ },
+ {
+  "id": "07-241",
+  "de": "Einbindetiefe t<sub>pen</sub> = {} mm ≥ 8·d = {} mm {}",
+  "en": "Penetration depth t<sub>pen</sub> = {} mm ≥ 8·d = {} mm {}"
+ },
+ {
+  "id": "07-242",
+  "de": "Stabdübel: 6 mm ≤ d ≤ 30 mm ✗",
+  "en": "Dowels: 6 mm ≤ d ≤ 30 mm ✗"
+ },
+ {
+  "id": "07-243",
+  "de": "Abstände und Mindestdicken",
+  "en": "Spacings and minimum thicknesses"
+ },
+ {
+  "id": "07-244",
+  "de": "Abstände vergrößern oder dünnere Verbindungsmittel wählen.",
+  "en": "Increase the spacings or choose thinner fasteners."
+ },
+ {
+  "id": "07-245",
+  "de": " · im Gewinde d<sub>ef</sub> = 1,1·d<sub>k</sub> = 1,1·{} = {} mm",
+  "en": " · in the thread d<sub>ef</sub> = 1.1·d<sub>k</sub> = 1.1·{} = {} mm"
+ },
+ {
+  "id": "07-246",
+  "de": "nagelartig (d ≤ 6 mm): Lochleibung ohne Winkeleinfluss, Mindestabstände wie Nägel",
+  "en": "nail-like (d ≤ 6 mm): embedment without angle influence, minimum spacings as for nails"
+ },
+ {
+  "id": "07-247",
+  "de": "stabdübelartig: Lochleibung abhängig vom Kraft-Faser-Winkel",
+  "en": "dowel-like: embedment depends on the load-to-grain angle"
+ },
+ {
+  "id": "07-248",
+  "de": "Fließmoment des Stifts: Widerstand gegen das Ausbilden eines Fließgelenks",
+  "en": "Yield moment of the fastener: resistance against forming a plastic hinge"
+ },
+ {
+  "id": "07-249",
+  "de": "Lochleibungsfestigkeit: wie stark das Holz ({}, ρ<sub>k</sub> = {} kg/m³) unter dem Stift gedrückt werden kann",
+  "en": "Embedment strength: how strongly the timber ({}, ρ<sub>k</sub> = {} kg/m³) can be pressed under the fastener"
+ },
+ {
+  "id": "07-250",
+  "de": "Tragfähigkeit je Scherfuge und Verbindungsmittel: der kleinste Wert aller Versagensmodi ({})",
+  "en": "Resistance per shear plane and fastener: the smallest value of all failure modes ({})"
+ },
+ {
+  "id": "07-251",
+  "de": "</b> ← maßgebend",
+  "en": "</b> ← governing"
+ },
+ {
+  "id": "07-252",
+  "de": "Mehrere Stifte hintereinander tragen weniger als die Summe (Spaltgefahr) → wirksame Anzahl je Reihe",
+  "en": "Several fasteners in a row carry less than the sum (risk of splitting) → effective number per row"
+ },
+ {
+  "id": "07-253",
+  "de": "Tragfähigkeit der Verbindung: Reihen × wirksame Anzahl × Scherfugen × F<sub>v,Rd</sub>",
+  "en": "Resistance of the connection: rows × effective number × shear planes × F<sub>v,Rd</sub>"
+ },
+ {
+  "id": "07-254",
+  "de": "Schnitt quer zur Faser ({} Reihe{}, Modus {})",
+  "en": "Section across the grain ({0} row(s), mode {2})"
+ },
+ {
+  "id": "07-255",
+  "de": "Draufsicht (Faser →)",
+  "en": "Plan view (grain →)"
+ },
+ {
+  "id": "07-256",
+  "de": "maßgebend: Modus ({}) — {}",
+  "en": "governing: mode ({}) — {}"
+ },
+ {
+  "id": "07-257",
+  "de": "Schnitt: rötlich = Holz mit Lochleibungsversagen, blaue Kreise = Fließgelenke im Stift, Pfeile = Kraftrichtung der Teile. Draufsicht: belastetes Hirnholzende rechts.",
+  "en": "Section: reddish = timber with embedment failure, blue circles = plastic hinges in the fastener, arrows = direction of force of the members. Plan view: loaded end grain on the right."
+ },
+ {
+  "id": "07-258",
+  "de": "{} {} Ø {} mm, {}-schnittig · {} · F<sub>v,Rd</sub> = {} kN je Scherfuge",
+  "en": "{} {} Ø {} mm, {} shear plane(s) · {} · F<sub>v,Rd</sub> = {} kN per shear plane"
+ }
+]

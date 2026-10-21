@@ -1,0 +1,1142 @@
+[
+ {
+  "id": "06-0",
+  "de": "Elastische Spannungen im Blech am Stützengurt (Vergleichsspannung, 6.2.1(5))",
+  "en": "Elastic stresses in the plate at the column flange (equivalent stress, 6.2.1(5))"
+ },
+ {
+  "id": "06-1",
+  "de": "σ<sub>v</sub> = √(σ² + 3τ²) = <b>{} N/mm²</b> {} f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm² (auf der sicheren Seite: σ und τ<sub>max</sub> am selben Punkt)",
+  "en": "σ<sub>v</sub> = √(σ² + 3τ²) = <b>{} N/mm²</b> {} f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm² (on the safe side: σ and τ<sub>max</sub> at the same point)"
+ },
+ {
+  "id": "06-2",
+  "de": "Stabilität des Blechs (Kippen/Beulen) bei langen, dünnen Konsolen gesondert prüfen.",
+  "en": "Check the stability of the plate (lateral buckling/plate buckling) separately for long, thin brackets."
+ },
+ {
+  "id": "06-3",
+  "de": "Konsolnaht",
+  "en": "Bracket weld"
+ },
+ {
+  "id": "06-4",
+  "de": "am äußeren Gurtrand",
+  "en": "at the outer flange edge"
+ },
+ {
+  "id": "06-5",
+  "de": "am Ende der Stegnaht",
+  "en": "at the end of the web weld"
+ },
+ {
+  "id": "06-6",
+  "de": "Tragfähigkeit je mm² Nahtfläche aus dem richtungsbezogenen Verfahren",
+  "en": "Resistance per mm² of throat area from the directional method"
+ },
+ {
+  "id": "06-7",
+  "de": "Stirnnaht (Kraft quer zur Naht): σ<sub>⊥</sub> = τ<sub>⊥</sub> = σ<sub>w</sub>/√2 → √(σ<sub>⊥</sub>² + 3τ<sub>⊥</sub>²) = √2·σ<sub>w</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → σ<sub>w,Rd</sub> = {}/(√2·{}·1,25) = <b>{} N/mm²</b>",
+  "en": "End weld (force transverse to the weld): σ<sub>⊥</sub> = τ<sub>⊥</sub> = σ<sub>w</sub>/√2 → √(σ<sub>⊥</sub>² + 3τ<sub>⊥</sub>²) = √2·σ<sub>w</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → σ<sub>w,Rd</sub> = {}/(√2·{}·1.25) = <b>{} N/mm²</b>"
+ },
+ {
+  "id": "06-8",
+  "de": "Flankennaht (Kraft längs der Naht): √3·τ<sub>∥</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → τ<sub>∥,Rd</sub> = {}/(√3·{}·1,25) = <b>{} N/mm²</b> (Stirnnähte tragen also {}-mal so viel)",
+  "en": "Side weld (force along the weld): √3·τ<sub>∥</sub> ≤ f<sub>u</sub>/(β<sub>w</sub>γ<sub>M2</sub>) → τ<sub>∥,Rd</sub> = {}/(√3·{}·1.25) = <b>{} N/mm²</b> (so end welds carry {} times as much)"
+ },
+ {
+  "id": "06-9",
+  "de": "am oberen Nahtende",
+  "en": "at the top end of the weld"
+ },
+ {
+  "id": "06-10",
+  "de": "Nahtbild (Blick auf die Stirnplatte)",
+  "en": "Weld layout (view on the end plate)"
+ },
+ {
+  "id": "06-11",
+  "de": "σ<sub>w</sub> außen = {} N/mm²",
+  "en": "σ<sub>w</sub> outside = {} N/mm²"
+ },
+ {
+  "id": "06-12",
+  "de": "Orange: Kehlnähte (Breite maßstäblich zur Nahtdicke a).",
+  "en": "Orange: fillet welds (width to scale with the throat thickness a)."
+ },
+ {
+  "id": "06-13",
+  "de": "Knotenblech",
+  "en": "Gusset plate"
+ },
+ {
+  "id": "06-14",
+  "de": " (Flanken- und Stirnnähte)",
+  "en": " (side and end welds)"
+ },
+ {
+  "id": "06-15",
+  "de": " (nur Flankennähte)",
+  "en": " (side welds only)"
+ },
+ {
+  "id": "06-16",
+  "de": "Orange: Kehlnähte a = {} mm{}.",
+  "en": "Orange: fillet welds a = {} mm{}."
+ },
+ {
+  "id": "06-17",
+  "de": "F<sub>Ed</sub> = {} kN im Abstand e = {} mm",
+  "en": "F<sub>Ed</sub> = {} kN at a distance e = {} mm"
+ },
+ {
+  "id": "06-18",
+  "de": "Orange: zwei Kehlnähte beidseitig am Blech.",
+  "en": "Orange: two fillet welds on both sides of the plate."
+ },
+ {
+  "id": "06-19",
+  "de": "Stumpfnähte (durchgeschweißt = Grundwerkstoff), Schweißnähte unter Ermüdung, Hohlprofile, Nachweis des Grundwerkstoffs im Anschlussbereich (Stirnplatte, Stützengurt) und Schweißfolge/Verzug.",
+  "en": "Butt welds (full penetration = parent metal), welds under fatigue, hollow sections, check of the parent metal in the connection zone (end plate, column flange) and welding sequence/distortion."
+ },
+ {
+  "id": "06-20",
+  "de": " + Stirnnaht",
+  "en": " + end weld"
+ },
+ {
+  "id": "06-21",
+  "de": "Schweißverbindung",
+  "en": "Welded connection"
+ },
+ {
+  "id": "06-22",
+  "de": "DIN EN 1993-1-8 mit NA, 4.5",
+  "en": "DIN EN 1993-1-8 with NA, 4.5"
+ },
+ {
+  "id": "06-23",
+  "de": "Fall",
+  "en": "Case"
+ },
+ {
+  "id": "06-24",
+  "de": "Kennwerte",
+  "en": "Properties"
+ },
+ {
+  "id": "06-25",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}{}\n      {}\n    </table></section><section><h2>Nahtbild</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}{}\n      {}\n    </table></section><section><h2>Weld layout</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "06-26",
+  "de": "Kehlnähte nach dem richtungsbezogenen Verfahren.",
+  "en": "Fillet welds with the directional method."
+ },
+ {
+  "id": "06-27",
+  "de": "Profil, Platte",
+  "en": "Section, plate"
+ },
+ {
+  "id": "06-28",
+  "de": ", Stirnnaht ",
+  "en": ", end weld "
+ },
+ {
+  "id": "06-29",
+  "de": "Wirksame Fläche: Die Last wird mittig auf eine kleinere Fläche gestellt (b′ = b − 2e)",
+  "en": "Effective area: the load is placed centrally on a smaller area (b′ = b − 2e)"
+ },
+ {
+  "id": "06-30",
+  "de": " (Streifen, je m)",
+  "en": " (strip, per m)"
+ },
+ {
+  "id": "06-31",
+  "de": "Tragfähigkeitsbeiwerte (DIN 4017)",
+  "en": "Bearing capacity factors (DIN 4017)"
+ },
+ {
+  "id": "06-32",
+  "de": "Formbeiwerte: Streifen → ν<sub>b</sub> = ν<sub>d</sub> = ν<sub>c</sub> = 1",
+  "en": "Shape factors: strip → ν<sub>b</sub> = ν<sub>d</sub> = ν<sub>c</sub> = 1"
+ },
+ {
+  "id": "06-33",
+  "de": "Formbeiwerte mit b′/a′ = {}: ν<sub>b</sub> = 1 − 0,3·b′/a′ = {} · ν<sub>d</sub> = 1 + b′/a′·sin φ = {} · ν<sub>c</sub> = {}",
+  "en": "Shape factors with b′/a′ = {}: ν<sub>b</sub> = 1 − 0.3·b′/a′ = {} · ν<sub>d</sub> = 1 + b′/a′·sin φ = {} · ν<sub>c</sub> = {}"
+ },
+ {
+  "id": "06-34",
+  "de": "Neigungsbeiwerte (H parallel zu b′, m = {}): H/(V + A′·c′·cot φ) = {}/({} + {}·{}·{}) = {} → i<sub>d</sub> = (1 − {})<sup>m</sup> = {} · i<sub>b</sub> = (1 − {})<sup>m+1</sup> = {} · i<sub>c</sub> = {}",
+  "en": "Inclination factors (H parallel to b′, m = {}): H/(V + A′·c′·cot φ) = {}/({} + {}·{}·{}) = {} → i<sub>d</sub> = (1 − {})<sup>m</sup> = {} · i<sub>b</sub> = (1 − {})<sup>m+1</sup> = {} · i<sub>c</sub> = {}"
+ },
+ {
+  "id": "06-35",
+  "de": "Keine Horizontalkraft: i<sub>b</sub> = i<sub>d</sub> = i<sub>c</sub> = 1",
+  "en": "No horizontal force: i<sub>b</sub> = i<sub>d</sub> = i<sub>c</sub> = 1"
+ },
+ {
+  "id": "06-36",
+  "de": "Grundbruchwiderstand: Breiten-, Tiefen- und Kohäsionsglied",
+  "en": "Bearing resistance: width, depth and cohesion terms"
+ },
+ {
+  "id": "06-37",
+  "de": "Lasten in der Sohlfuge",
+  "en": "Loads in the base joint"
+ },
+ {
+  "id": "06-38",
+  "de": "Eigengewicht von Fundament und Überschüttung",
+  "en": "Self-weight of footing and backfill"
+ },
+ {
+  "id": "06-39",
+  "de": "Charakteristische Resultierende in der Sohlfuge (H greift an der Oberkante an → Hebelarm h<sub>f</sub>)",
+  "en": "Characteristic resultant in the base joint (H acts at the top edge → lever arm h<sub>f</sub>)"
+ },
+ {
+  "id": "06-40",
+  "de": "Sohldruck (charakteristisch, linear verteilt)",
+  "en": "Base pressure (characteristic, linearly distributed)"
+ },
+ {
+  "id": "06-41",
+  "de": "e > b/6 (klaffende Fuge): σ<sub>max</sub> = 2V/(3·(b/2 − e)·a) = <b>{} kN/m²</b>",
+  "en": "e > b/6 (gaping joint): σ<sub>max</sub> = 2V/(3·(b/2 − e)·a) = <b>{} kN/m²</b>"
+ },
+ {
+  "id": "06-42",
+  "de": "Lage der Resultierenden (klaffende Fuge)",
+  "en": "Position of the resultant (gaping joint)"
+ },
+ {
+  "id": "06-43",
+  "de": "Nur ständige Lasten: keine klaffende Fuge, Resultierende im 1. Kern (e ≤ b/6)",
+  "en": "Permanent loads only: no gaping joint, resultant in the 1st core (e ≤ b/6)"
+ },
+ {
+  "id": "06-44",
+  "de": "Ständige und veränderliche Lasten: Fuge klafft höchstens bis zur Mitte (e ≤ b/3). Ungünstig: volles Moment, nur ständige Vertikallast",
+  "en": "Permanent and variable loads: the joint gapes at most up to the centre (e ≤ b/3). Unfavourable: full moment, permanent vertical load only"
+ },
+ {
+  "id": "06-45",
+  "de": "Dieser Nachweis ersetzt nach DIN 1054 den Kippnachweis (EQU) für Flachgründungen.",
+  "en": "According to DIN 1054 this check replaces the overturning check (EQU) for shallow foundations."
+ },
+ {
+  "id": "06-46",
+  "de": "Grundbruch (DIN 4017)",
+  "en": "Bearing resistance (DIN 4017)"
+ },
+ {
+  "id": "06-47",
+  "de": "H ist größer als der Reibungswiderstand der Sohle — Grundbruch nicht nachweisbar. ",
+  "en": "H is larger than the friction resistance of the base — bearing resistance cannot be verified. "
+ },
+ {
+  "id": "06-48",
+  "de": "Fundament größer oder tiefer gründen. ",
+  "en": "Make the footing larger or found it deeper. "
+ },
+ {
+  "id": "06-49",
+  "de": "Neigungsbeiwerte mit charakteristischen Lasten; den Fall „nur ständige Vertikallast“ bei großem H gesondert prüfen.",
+  "en": "Inclination factors with characteristic loads; check the case “permanent vertical load only” separately for large H."
+ },
+ {
+  "id": "06-50",
+  "de": "Gleitwiderstand in der Sohlfuge (Ortbeton: δ<sub>S</sub> = φ′), nur mit ständiger Vertikallast",
+  "en": "Sliding resistance in the base joint (cast in place: δ<sub>S</sub> = φ′), with permanent vertical load only"
+ },
+ {
+  "id": "06-51",
+  "de": "Erdwiderstand vor dem Fundament ist nicht angesetzt (auf der sicheren Seite). Bei Fertigteilen δ<sub>S</sub> = 2/3·φ′.",
+  "en": "Passive earth pressure in front of the footing is not taken into account (on the safe side). For precast elements δ<sub>S</sub> = 2/3·φ′."
+ },
+ {
+  "id": "06-52",
+  "de": "Bemessungswert der Sohldruckkraft",
+  "en": "Design value of the base force"
+ },
+ {
+  "id": "06-53",
+  "de": "Streifen (je m)",
+  "en": "Strip (per m)"
+ },
+ {
+  "id": "06-54",
+  "de": "M<sub>k</sub> = {} kNm (in der Sohle)",
+  "en": "M<sub>k</sub> = {} kNm (in the base)"
+ },
+ {
+  "id": "06-55",
+  "de": "Blau: Sohldruck und wirksame Fläche A′ (Last mittig darauf). ",
+  "en": "Blue: base pressure and effective area A′ (load placed centrally on it). "
+ },
+ {
+  "id": "06-56",
+  "de": "Alle Werte je m Fundamentlänge.",
+  "en": "All values per m of footing length."
+ },
+ {
+  "id": "06-57",
+  "de": "Streifen",
+  "en": "Strip"
+ },
+ {
+  "id": "06-58",
+  "de": "Grundwasser in der Gründungssohle (γ′ von Hand eingeben), geneigte Sohle oder Gelände, geschichteter Baugrund, Momente in beiden Richtungen, Setzung (eigener Reiter), Bemessung des Fundaments in Stahlbeton (Biegung, Durchstanzen) und der vereinfachte Nachweis mit Sohlwiderstandstabellen (statiq·ref).",
+  "en": "Groundwater at foundation level (enter γ′ by hand), inclined base or ground, layered subsoil, moments in both directions, settlement (own tab), design of the footing in reinforced concrete (bending, punching) and the simplified check with bearing resistance tables (statiq·ref)."
+ },
+ {
+  "id": "06-59",
+  "de": "DIN EN 1997-1 mit DIN 1054 (BS-P), DIN 4017",
+  "en": "DIN EN 1997-1 with DIN 1054 (BS-P), DIN 4017"
+ },
+ {
+  "id": "06-60",
+  "de": "Streifenfundament",
+  "en": "Strip footing"
+ },
+ {
+  "id": "06-61",
+  "de": "Einzelfundament",
+  "en": "Pad footing"
+ },
+ {
+  "id": "06-62",
+  "de": "{} b = {} m{}, h<sub>f</sub> = {} m, Einbindetiefe d = {} m",
+  "en": "{} b = {} m{}, h<sub>f</sub> = {} m, embedment depth d = {} m"
+ },
+ {
+  "id": "06-63",
+  "de": "Baugrund",
+  "en": "Ground"
+ },
+ {
+  "id": "06-64",
+  "de": "Lasten (charakteristisch, OK Fundament)",
+  "en": "Loads (characteristic, top of footing)"
+ },
+ {
+  "id": "06-65",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Fundament</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Footing</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "06-66",
+  "de": "Flachgründung, Bemessungssituation BS-P.",
+  "en": "Shallow foundation, design situation BS-P."
+ },
+ {
+  "id": "06-67",
+  "de": "Dicke Schicht {} > 0",
+  "en": "Thickness layer {} > 0"
+ },
+ {
+  "id": "06-68",
+  "de": "γ Schicht {}{}",
+  "en": "γ layer {}{}"
+ },
+ {
+  "id": "06-69",
+  "de": "E_s Schicht {} > 0",
+  "en": "E_s layer {} > 0"
+ },
+ {
+  "id": "06-70",
+  "de": "Setzungswirksame Spannung",
+  "en": "Stress causing settlement"
+ },
+ {
+  "id": "06-71",
+  "de": "Sohldruck und Entlastung durch den Aushub",
+  "en": "Base pressure and relief from excavation"
+ },
+ {
+  "id": "06-72",
+  "de": "Aushub mit Grundwasser über der Sohle: σ′<sub>ü,0</sub> = {}·{} + {}·{} = {} kN/m²",
+  "en": "Excavation with groundwater above the base: σ′<sub>ü,0</sub> = {}·{} + {}·{} = {} kN/m²"
+ },
+ {
+  "id": "06-73",
+  "de": "Aushubentlastung σ<sub>ü,0</sub> = γ·d = {}·{} = {} kN/m²",
+  "en": "Excavation relief σ<sub>ü,0</sub> = γ·d = {}·{} = {} kN/m²"
+ },
+ {
+  "id": "06-74",
+  "de": "Spannung in der Tiefe z (Steinbrenner, schlaffe Last, Überlagerung von 4 Rechtecken)",
+  "en": "Stress at depth z (Steinbrenner, flexible load, superposition of 4 rectangles)"
+ },
+ {
+  "id": "06-75",
+  "de": "σ<sub>z</sub> = i(z)·σ<sub>1</sub> mit i für die Ecke: i = 1/(2π)·[arctan(ab/(zR)) + abz/R·(1/(a²+z²) + 1/(b²+z²))], R = √(a² + b² + z²)",
+  "en": "σ<sub>z</sub> = i(z)·σ<sub>1</sub> with i for the corner: i = 1/(2π)·[arctan(ab/(zR)) + abz/R·(1/(a²+z²) + 1/(b²+z²))], R = √(a² + b² + z²)"
+ },
+ {
+  "id": "06-76",
+  "de": "Kennzeichnender Punkt (starres Fundament): 0,13·a bzw. 0,13·b vom Rand, also x = {} m, y = {} m von der Mitte",
+  "en": "Characteristic point (rigid footing): 0.13·a and 0.13·b from the edge, i.e. x = {} m, y = {} m from the centre"
+ },
+ {
+  "id": "06-77",
+  "de": "Grenztiefe",
+  "en": "Limiting depth"
+ },
+ {
+  "id": "06-78",
+  "de": "Überlagerungsspannung schichtweise (wirksam: unter Grundwasser mit γ′ = γ − 10 kN/m³)",
+  "en": "Overburden stress layer by layer (effective: below groundwater with γ′ = γ − 10 kN/m³)"
+ },
+ {
+  "id": "06-79",
+  "de": "unter",
+  "en": "below"
+ },
+ {
+  "id": "06-80",
+  "de": "über",
+  "en": "above"
+ },
+ {
+  "id": "06-81",
+  "de": " · Grundwasser {} m unter Gelände = {} m {} der Sohle",
+  "en": " · groundwater {} m below ground = {} m {} the base"
+ },
+ {
+  "id": "06-82",
+  "de": "Grenztiefe: dort ist die Zusatzspannung auf 20 % der Überlagerungsspannung abgeklungen",
+  "en": "Limiting depth: there the additional stress has decayed to 20 % of the overburden stress"
+ },
+ {
+  "id": "06-83",
+  "de": "z<sub>s</sub> = <b>{} m</b> unter der Sohle (in Schicht {}, {}): σ<sub>z</sub> = {} kN/m², 0,2·σ<sub>ü</sub> = {} kN/m²",
+  "en": "z<sub>s</sub> = <b>{} m</b> below the base (in layer {}, {}): σ<sub>z</sub> = {} kN/m², 0.2·σ<sub>ü</sub> = {} kN/m²"
+ },
+ {
+  "id": "06-84",
+  "de": "Schicht {} {} (z = {} … {} m, E<sub>s</sub> = {} MN/m²): Δs = <b>{} cm</b>",
+  "en": "Layer {} {} (z = {} … {} m, E<sub>s</sub> = {} MN/m²): Δs = <b>{} cm</b>"
+ },
+ {
+  "id": "06-85",
+  "de": "Schicht {} {}: liegt unter der Grenztiefe → Δs = 0",
+  "en": "Layer {} {}: lies below the limiting depth → Δs = 0"
+ },
+ {
+  "id": "06-86",
+  "de": "s (kennzeichnender Punkt) = <b>{} cm</b> · zum Vergleich Mitte der schlaffen Last: {} cm",
+  "en": "s (characteristic point) = <b>{} cm</b> · for comparison centre of the flexible load: {} cm"
+ },
+ {
+  "id": "06-87",
+  "de": "s = {} cm {} s<sub>zul</sub> = {} cm",
+  "en": "s = {} cm {} s<sub>perm</sub> = {} cm"
+ },
+ {
+  "id": "06-88",
+  "de": "Setzungsrechnungen sind Abschätzungen (±25 % und mehr). E<sub>s</sub> gilt für den jeweiligen Spannungsbereich; Setzungsdifferenzen zu Nachbarfundamenten gesondert betrachten.",
+  "en": "Settlement calculations are estimates (±25 % and more). E<sub>s</sub> applies to the respective stress range; consider differential settlements to neighbouring footings separately."
+ },
+ {
+  "id": "06-89",
+  "de": "Setzung als Summe der Schichtstauchungen bis zur Grenztiefe: s = Σ ∫ σ<sub>z</sub>/E<sub>s</sub> dz (numerisch integriert)",
+  "en": "Settlement as the sum of the layer compressions down to the limiting depth: s = Σ ∫ σ<sub>z</sub>/E<sub>s</sub> dz (integrated numerically)"
+ },
+ {
+  "id": "06-90",
+  "de": "GW über der Sohle",
+  "en": "GW above the base"
+ },
+ {
+  "id": "06-91",
+  "de": "V<sub>k</sub> = {} kN auf {} × {} m",
+  "en": "V<sub>k</sub> = {} kN on {} × {} m"
+ },
+ {
+  "id": "06-92",
+  "de": "Blau: Zusatzspannung σ<sub>z</sub> unter dem kennzeichnenden Punkt, grau gestrichelt: 20 % der wirksamen Überlagerungsspannung.",
+  "en": "Blue: additional stress σ<sub>z</sub> below the characteristic point, grey dashed: 20 % of the effective overburden stress."
+ },
+ {
+  "id": "06-93",
+  "de": "Fundament {} × {} m · {} Schicht{} · σ<sub>1</sub> = {} kN/m² · Grenztiefe {} m · s = {} cm",
+  "en": "Footing {0} × {1} m · {2} layer(s) · σ<sub>1</sub> = {4} kN/m² · limiting depth {5} m · s = {6} cm"
+ },
+ {
+  "id": "06-94",
+  "de": "DIN 4019 (Steinbrenner, kennzeichnender Punkt)",
+  "en": "DIN 4019 (Steinbrenner, characteristic point)"
+ },
+ {
+  "id": "06-95",
+  "de": "a = {} m, b = {} m, d = {} m, V<sub>k</sub> = {} kN; γ über der Sohle = {} kN/m³",
+  "en": "a = {} m, b = {} m, d = {} m, V<sub>k</sub> = {} kN; γ above the base = {} kN/m³"
+ },
+ {
+  "id": "06-96",
+  "de": "Grundwasser",
+  "en": "Groundwater"
+ },
+ {
+  "id": "06-97",
+  "de": "{} m unter Gelände (γ′ = γ − 10 kN/m³)",
+  "en": "{} m below ground (γ′ = γ − 10 kN/m³)"
+ },
+ {
+  "id": "06-98",
+  "de": "nicht angesetzt",
+  "en": "not taken into account"
+ },
+ {
+  "id": "06-99",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Bodenschichten</h2><table><tr><th>Nr.</th><th>Boden</th><th>z unter Sohle [m]</th><th>γ [kN/m³]</th><th>E<sub>s</sub> [MN/m²]</th><th>Δs [cm]</th></tr>{}\n      <tr><td></td><td><b>Summe</b></td><td>Grenztiefe {} m</td><td></td><td></td><td><b>{}</b></td></tr></table></section>\n    <section><h2>Spannungsverlauf</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Soil layers</h2><table><tr><th>No.</th><th>Soil</th><th>z below base [m]</th><th>γ [kN/m³]</th><th>E<sub>s</sub> [MN/m²]</th><th>Δs [cm]</th></tr>{}\n      <tr><td></td><td><b>Total</b></td><td>Limiting depth {} m</td><td></td><td></td><td><b>{}</b></td></tr></table></section>\n    <section><h2>Stress distribution</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "06-100",
+  "de": "Setzung, charakteristische Dauerlasten.",
+  "en": "Settlement, characteristic sustained loads."
+ },
+ {
+  "id": "06-101",
+  "de": "E<sub>av,G</sub> (Wandreibung)",
+  "en": "E<sub>av,G</sub> (wall friction)"
+ },
+ {
+  "id": "06-102",
+  "de": "Erddruck und Eigengewichte",
+  "en": "Earth pressure and self-weights"
+ },
+ {
+  "id": "06-103",
+  "de": "Aktiver Erddruckbeiwert (Coulomb, lotrechte Wand, waagerechtes Gelände)",
+  "en": "Active earth pressure coefficient (Coulomb, vertical wall, level ground)"
+ },
+ {
+  "id": "06-104",
+  "de": "Erddruck auf die Ersatzwand der Höhe H (je m)",
+  "en": "Earth pressure on the virtual back of height H (per m)"
+ },
+ {
+  "id": "06-105",
+  "de": "Ständige Vertikallasten (je m) und Lage x vom vorderen Rand",
+  "en": "Permanent vertical loads (per m) and position x from the front edge"
+ },
+ {
+  "id": "06-106",
+  "de": "{}: {} kN/m bei x = {} m",
+  "en": "{}: {} kN/m at x = {} m"
+ },
+ {
+  "id": "06-107",
+  "de": "Moment um die Sohlmitte (positiv = Kippen nach vorn)",
+  "en": "Moment about the centre of the base (positive = overturning forwards)"
+ },
+ {
+  "id": "06-108",
+  "de": "Lage der Resultierenden (Kippen)",
+  "en": "Position of the resultant (overturning)"
+ },
+ {
+  "id": "06-109",
+  "de": "Nur ständige Lasten: keine klaffende Fuge (e ≤ B/6)",
+  "en": "Permanent loads only: no gaping joint (e ≤ B/6)"
+ },
+ {
+  "id": "06-110",
+  "de": "Mit Auflast: Fuge klafft höchstens bis zur Mitte (e ≤ B/3), ungünstig ohne Vertikalanteil von q",
+  "en": "With surcharge: the joint gapes at most up to the centre (e ≤ B/3), unfavourable without the vertical part of q"
+ },
+ {
+  "id": "06-111",
+  "de": "Sohle verbreitern, vor allem den hinteren Sporn (mehr Erdauflast hinten).",
+  "en": "Widen the base, above all the heel (more soil load at the back)."
+ },
+ {
+  "id": "06-112",
+  "de": "Gleitwiderstand in der Sohlfuge (Ortbeton: δ<sub>S</sub> = φ′), nur ständige Vertikallasten",
+  "en": "Sliding resistance in the base joint (cast in place: δ<sub>S</sub> = φ′), permanent vertical loads only"
+ },
+ {
+  "id": "06-113",
+  "de": "Erdwiderstand vor dem vorderen Sporn nicht angesetzt (auf der sicheren Seite). Hilft bei Bedarf ein Sporn unter der Sohle.",
+  "en": "Passive earth pressure in front of the toe not taken into account (on the safe side). If needed, a shear key under the base helps."
+ },
+ {
+  "id": "06-114",
+  "de": "Erde über hinterem Sporn",
+  "en": "Soil above the heel"
+ },
+ {
+  "id": "06-115",
+  "de": "Erde über vorderem Sporn",
+  "en": "Soil above the toe"
+ },
+ {
+  "id": "06-116",
+  "de": "Schnitt (je m)",
+  "en": "Section (per m)"
+ },
+ {
+  "id": "06-117",
+  "de": "Orange: Erddruck auf die Ersatzwand (gestrichelt), blau: Sohldruck (charakteristisch).",
+  "en": "Orange: earth pressure on the virtual back (dashed), blue: base pressure (characteristic)."
+ },
+ {
+  "id": "06-118",
+  "de": "Winkelstützmauer H = {} m, B = {} m · K<sub>ah</sub> = {} · E<sub>ah</sub> = {} kN/m",
+  "en": "Cantilever retaining wall H = {} m, B = {} m · K<sub>ah</sub> = {} · E<sub>ah</sub> = {} kN/m"
+ },
+ {
+  "id": "06-119",
+  "de": "Grundwasser und Wasserdruck, geneigtes Gelände, Kohäsion im Erddruck, Verdichtungserddruck, Erdruhedruck bei unnachgiebigen Wänden, Geländebruch, Bemessung der Wand und Sohle in Stahlbeton.",
+  "en": "Groundwater and water pressure, inclined ground, cohesion in the earth pressure, compaction earth pressure, earth pressure at rest for unyielding walls, slope failure, design of wall and base in reinforced concrete."
+ },
+ {
+  "id": "06-120",
+  "de": "DIN EN 1997-1 mit DIN 1054 (BS-P), DIN 4085, DIN 4017",
+  "en": "DIN EN 1997-1 with DIN 1054 (BS-P), DIN 4085, DIN 4017"
+ },
+ {
+  "id": "06-121",
+  "de": "H = {} m, B = {} m, Sporn vorn {} m, t<sub>w</sub> = {} m, t<sub>s</sub> = {} m, Einbindung d = {} m",
+  "en": "H = {} m, B = {} m, toe {} m, t<sub>w</sub> = {} m, t<sub>s</sub> = {} m, embedment d = {} m"
+ },
+ {
+  "id": "06-122",
+  "de": "Baugrund / Hinterfüllung",
+  "en": "Ground / backfill"
+ },
+ {
+  "id": "06-123",
+  "de": "φ′<sub>k</sub> = {}°, c′<sub>k</sub> = {} kN/m², γ = {} kN/m³, δ<sub>a</sub> = {}°; Auflast q<sub>k</sub> = {} kN/m²",
+  "en": "φ′<sub>k</sub> = {}°, c′<sub>k</sub> = {} kN/m², γ = {} kN/m³, δ<sub>a</sub> = {}°; surcharge q<sub>k</sub> = {} kN/m²"
+ },
+ {
+  "id": "06-124",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Stützwand</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Retaining wall</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "06-125",
+  "de": "Winkelstützmauer, Bemessungssituation BS-P.",
+  "en": "Cantilever retaining wall, design situation BS-P."
+ },
+ {
+  "id": "06-126",
+  "de": "Einwirkung parallel zur Sohle",
+  "en": "Action parallel to the base"
+ },
+ {
+  "id": "06-127",
+  "de": "Bemessungssituation BS-{}: γ<sub>G</sub> = {}, γ<sub>Q</sub> = {} (DIN 1054, Tab. A 2.1)",
+  "en": "Design situation BS-{}: γ<sub>G</sub> = {}, γ<sub>Q</sub> = {} (DIN 1054, Tab. A 2.1)"
+ },
+ {
+  "id": "06-128",
+  "de": "Günstige Vertikallast: nur der ständige Anteil, charakteristisch (γ = 1,0)",
+  "en": "Favourable vertical load: permanent part only, characteristic (γ = 1.0)"
+ },
+ {
+  "id": "06-129",
+  "de": "V<sub>k</sub> = V<sub>G,k</sub> = <b>{} kN</b> · Sohlfläche A = a·b = {}·{} = {} m²",
+  "en": "V<sub>k</sub> = V<sub>G,k</sub> = <b>{} kN</b> · base area A = a·b = {}·{} = {} m²"
+ },
+ {
+  "id": "06-130",
+  "de": "Dränierter Zustand: Reibung in der Sohlfuge, Kohäsion wird nicht angesetzt",
+  "en": "Drained condition: friction in the base joint, cohesion is not taken into account"
+ },
+ {
+  "id": "06-131",
+  "de": " → begrenzt auf 35°",
+  "en": " → limited to 35°"
+ },
+ {
+  "id": "06-132",
+  "de": "Ortbeton",
+  "en": "cast in place"
+ },
+ {
+  "id": "06-133",
+  "de": "glattes Fertigteil",
+  "en": "smooth precast element"
+ },
+ {
+  "id": "06-134",
+  "de": "Undränierter Zustand (wassergesättigter bindiger Boden, schnelle Belastung)",
+  "en": "Undrained condition (saturated cohesive soil, rapid loading)"
+ },
+ {
+  "id": "06-135",
+  "de": " → hier maßgebend, falls die Fuge nicht dicht ist",
+  "en": " → governing here if the joint is not tight"
+ },
+ {
+  "id": "06-136",
+  "de": "Begrenzung, wenn Wasser oder Luft in die Sohlfuge gelangen kann: R<sub>t,k</sub> ≤ 0,4·V<sub>k</sub> = {} kN{}",
+  "en": "Limit if water or air can get into the base joint: R<sub>t,k</sub> ≤ 0.4·V<sub>k</sub> = {} kN{}"
+ },
+ {
+  "id": "06-137",
+  "de": "Gleitwiderstand in der Sohlfuge",
+  "en": "Sliding resistance in the base joint"
+ },
+ {
+  "id": "06-138",
+  "de": "Erdwiderstand vor dem Fundament",
+  "en": "Passive earth pressure in front of the footing"
+ },
+ {
+  "id": "06-139",
+  "de": "Passiver Erddruck (Rankine, δ<sub>p</sub> = 0, waagerechtes Gelände)",
+  "en": "Passive earth pressure (Rankine, δ<sub>p</sub> = 0, level ground)"
+ },
+ {
+  "id": "06-140",
+  "de": "Abminderung auf 50 % (Verträglichkeit der Verschiebungen) und Teilsicherheit",
+  "en": "Reduction to 50 % (compatibility of displacements) and partial factor"
+ },
+ {
+  "id": "06-141",
+  "de": "Nachweis Gleiten",
+  "en": "Sliding check"
+ },
+ {
+  "id": "06-142",
+  "de": "{} {} {}{} = <b>{} kN</b> → Ausnutzung η = {}",
+  "en": "{} {} {}{} = <b>{} kN</b> → utilisation η = {}"
+ },
+ {
+  "id": "06-143",
+  "de": "Erforderlich ohne Erdwiderstand: V<sub>G,k</sub> ≥ H<sub>d</sub>·γ<sub>R,h</sub>/tan δ = {} kN",
+  "en": "Required without passive earth pressure: V<sub>G,k</sub> ≥ H<sub>d</sub>·γ<sub>R,h</sub>/tan δ = {} kN"
+ },
+ {
+  "id": "06-144",
+  "de": "Abhilfe: Sporn unter der Sohle, Sohle geneigt ausführen, mehr ständige Auflast, rauere Fuge (Ortbeton statt Fertigteil), Erdwiderstand nur wenn gesichert.",
+  "en": "Remedy: shear key under the base, inclined base, more permanent load, rougher joint (cast in place instead of precast), passive earth pressure only if secured."
+ },
+ {
+  "id": "06-145",
+  "de": "Zusätzlich Grundbruch und Lage der Resultierenden nachweisen (Modus Flachgründung).",
+  "en": "Additionally check bearing resistance and position of the resultant (mode shallow foundation)."
+ },
+ {
+  "id": "06-146",
+  "de": "Orange: Einwirkung, grün: Widerstände in der Sohlfuge und vor dem Fundament.",
+  "en": "Orange: action, green: resistances in the base joint and in front of the footing."
+ },
+ {
+  "id": "06-147",
+  "de": "Sohle {} × {} m · H<sub>d</sub> = {} kN, R<sub>d</sub> = {} kN",
+  "en": "Base {} × {} m · H<sub>d</sub> = {} kN, R<sub>d</sub> = {} kN"
+ },
+ {
+  "id": "06-148",
+  "de": "Geneigte Sohlfuge, Sporn, Gleiten in tieferen Schichten (Geländebruch), Grundbruch und Kippen (Modus Flachgründung).",
+  "en": "Inclined base joint, shear key, sliding in deeper layers (slope failure), bearing resistance and overturning (mode shallow foundation)."
+ },
+ {
+  "id": "06-149",
+  "de": "DIN EN 1997-1 mit DIN 1054, Gleiten (GEO-2)",
+  "en": "DIN EN 1997-1 with DIN 1054, sliding (GEO-2)"
+ },
+ {
+  "id": "06-150",
+  "de": "Fertigteil",
+  "en": "Precast element"
+ },
+ {
+  "id": "06-151",
+  "de": "Lasten",
+  "en": "Loads"
+ },
+ {
+  "id": "06-152",
+  "de": "Boden",
+  "en": "Soil"
+ },
+ {
+  "id": "06-153",
+  "de": "dräniert, φ′<sub>k</sub> = {}°",
+  "en": "drained, φ′<sub>k</sub> = {}°"
+ },
+ {
+  "id": "06-154",
+  "de": "undräniert, c<sub>u,k</sub> = {} kN/m²",
+  "en": "undrained, c<sub>u,k</sub> = {} kN/m²"
+ },
+ {
+  "id": "06-155",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Schnitt</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Section</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "06-156",
+  "de": "Gleitnachweis.",
+  "en": "Sliding check."
+ },
+ {
+  "id": "06-157",
+  "de": "Eigengewicht und Auftrieb",
+  "en": "Self-weight and uplift"
+ },
+ {
+  "id": "06-158",
+  "de": "Ständige, stabilisierende Lasten (Beton 25 kN/m³)",
+  "en": "Permanent stabilising loads (concrete 25 kN/m³)"
+ },
+ {
+  "id": "06-159",
+  "de": "Sohlplatte {}·{}·{}·25 = {} kN · Außenwände (L·B − (L − 2t<sub>w</sub>)(B − 2t<sub>w</sub>))·{}·25 = {} kN",
+  "en": "Base slab {}·{}·{}·25 = {} kN · external walls (L·B − (L − 2t<sub>w</sub>)(B − 2t<sub>w</sub>))·{}·25 = {} kN"
+ },
+ {
+  "id": "06-160",
+  "de": "Decke {}·{}·{}·25 = {} kN · weitere ständige Last {}·{} = {} kN",
+  "en": "Roof slab {}·{}·{}·25 = {} kN · further permanent load {}·{} = {} kN"
+ },
+ {
+  "id": "06-161",
+  "de": "Auftrieb: Wasserdruck auf die Sohlunterseite",
+  "en": "Uplift: water pressure on the underside of the base"
+ },
+ {
+  "id": "06-162",
+  "de": "A<sub>k</sub> = γ<sub>w</sub>·h<sub>w</sub>·L·B = 10·{}·{} = <b>{} kN</b> (Wasserdruck unten {} kN/m²)",
+  "en": "A<sub>k</sub> = γ<sub>w</sub>·h<sub>w</sub>·L·B = 10·{}·{} = <b>{} kN</b> (water pressure at the bottom {} kN/m²)"
+ },
+ {
+  "id": "06-163",
+  "de": "Auftriebssicherheit (UPL)",
+  "en": "Safety against uplift (UPL)"
+ },
+ {
+  "id": "06-164",
+  "de": "Teilsicherheitsbeiwerte {}: γ<sub>G,dst</sub> = {} (Auftrieb), γ<sub>G,stb</sub> = {} (Eigengewicht)",
+  "en": "Partial factors {}: γ<sub>G,dst</sub> = {} (uplift), γ<sub>G,stb</sub> = {} (self-weight)"
+ },
+ {
+  "id": "06-165",
+  "de": "Globale Sicherheit zum Vergleich: G/A = {} (erforderlich {})",
+  "en": "Global safety for comparison: G/A = {} (required {})"
+ },
+ {
+  "id": "06-166",
+  "de": "Erforderliche Sohldicke bei sonst gleichem Bauwerk",
+  "en": "Required base thickness with the structure otherwise unchanged"
+ },
+ {
+  "id": "06-167",
+  "de": "t<sub>s,erf</sub> = (A<sub>d</sub>/γ<sub>G,stb</sub> − G<sub>übrig</sub>)/(25·L·B) = <b>{} m</b>",
+  "en": "t<sub>s,req</sub> = (A<sub>d</sub>/γ<sub>G,stb</sub> − G<sub>rest</sub>)/(25·L·B) = <b>{} m</b>"
+ },
+ {
+  "id": "06-168",
+  "de": "Abhilfe: dickere Sohle, Sohlüberstand mit Erdauflast, Zugpfähle oder -anker, Ballast; im Bauzustand Grundwasser absenken bzw. Flutöffnungen.",
+  "en": "Remedy: thicker base slab, base projection with soil load, tension piles or anchors, ballast; during construction lower the groundwater or provide flooding openings."
+ },
+ {
+  "id": "06-169",
+  "de": "Im Bauzustand (ohne Decke und Ausbau) gesondert nachweisen — dafür BS-T wählen und Decke/Lasten weglassen.",
+  "en": "Check the construction stage (without roof slab and finishes) separately — choose BS-T and omit the roof slab/loads."
+ },
+ {
+  "id": "06-170",
+  "de": "Auftrieb A<sub>k</sub> = {} kN",
+  "en": "Uplift A<sub>k</sub> = {} kN"
+ },
+ {
+  "id": "06-171",
+  "de": "Schnitt quer (Breite B = {} m), Länge L = {} m.",
+  "en": "Cross-section (width B = {} m), length L = {} m."
+ },
+ {
+  "id": "06-172",
+  "de": "Wanne {} × {} m, h<sub>w</sub> = {} m · A<sub>d</sub> = {} kN, G<sub>stb,d</sub> = {} kN",
+  "en": "Tank {} × {} m, h<sub>w</sub> = {} m · A<sub>d</sub> = {} kN, G<sub>stb,d</sub> = {} kN"
+ },
+ {
+  "id": "06-173",
+  "de": "Hydraulischer Grundbruch (HYD) und Erosion, Wandreibung und Erdauflast auf Sohlüberständen, Zugpfähle/-anker (Gruppenwirkung), Biegung der Sohlplatte unter Wasserdruck.",
+  "en": "Hydraulic heave (HYD) and erosion, wall friction and soil load on base projections, tension piles/anchors (group effect), bending of the base slab under water pressure."
+ },
+ {
+  "id": "06-174",
+  "de": "DIN EN 1997-1 mit DIN 1054, UPL",
+  "en": "DIN EN 1997-1 with DIN 1054, UPL"
+ },
+ {
+  "id": "06-175",
+  "de": "Bauwerk",
+  "en": "Structure"
+ },
+ {
+  "id": "06-176",
+  "de": "L = {} m, B = {} m, Sohle {} m, Wände {} m × {} m, Decke {} m, g<sub>k</sub> = {} kN/m²",
+  "en": "L = {} m, B = {} m, base {} m, walls {} m × {} m, roof slab {} m, g<sub>k</sub> = {} kN/m²"
+ },
+ {
+  "id": "06-177",
+  "de": "Wasser",
+  "en": "Water"
+ },
+ {
+  "id": "06-178",
+  "de": "h<sub>w</sub> = {} m über UK Sohle, Bemessungssituation BS-{}",
+  "en": "h<sub>w</sub> = {} m above the underside of the base, design situation BS-{}"
+ },
+ {
+  "id": "06-179",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Querschnitt</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n    </table></section><section><h2>Cross-section</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "06-180",
+  "de": "Auftriebsnachweis.",
+  "en": "Uplift check."
+ },
+ {
+  "id": "06-181",
+  "de": "f<sub>k</sub> = K·f<sub>b</sub><sup>0,85</sup> = {}·{}<sup>0,85</sup> = {} N/mm² (Gl. 3.2, Dünnbettmörtel)",
+  "en": "f<sub>k</sub> = K·f<sub>b</sub><sup>0.85</sup> = {}·{}<sup>0.85</sup> = {} N/mm² (eq. 3.2, thin-layer mortar)"
+ },
+ {
+  "id": "06-182",
+  "de": "f<sub>k</sub> = K·f<sub>b</sub><sup>0,7</sup> = {}·{}<sup>0,7</sup> = {} N/mm² (Gl. 3.3, Dünnbettmörtel, Lochsteine)",
+  "en": "f<sub>k</sub> = K·f<sub>b</sub><sup>0.7</sup> = {}·{}<sup>0.7</sup> = {} N/mm² (eq. 3.3, thin-layer mortar, perforated units)"
+ },
+ {
+  "id": "06-183",
+  "de": "Baustoff: charakteristische Druckfestigkeit und Bemessungswert",
+  "en": "Material: characteristic compressive strength and design value"
+ },
+ {
+  "id": "06-184",
+  "de": "f<sub>d</sub> = ζ·f<sub>k</sub>/γ<sub>M</sub> = 0,85·{}/1,5 = <b>{} N/mm²</b> (ζ = 0,85 berücksichtigt die Dauerstandfestigkeit)",
+  "en": "f<sub>d</sub> = ζ·f<sub>k</sub>/γ<sub>M</sub> = 0.85·{}/1.5 = <b>{} N/mm²</b> (ζ = 0.85 accounts for long-term strength)"
+ },
+ {
+  "id": "06-185",
+  "de": "Anwendungsgrenzen des vereinfachten Verfahrens",
+  "en": "Scope of the simplified method"
+ },
+ {
+  "id": "06-186",
+  "de": "Voraussetzungen (Auszug; außerdem Gebäudehöhe ≤ 20 m, Nutzlast ≤ 5 kN/m²)",
+  "en": "Conditions (extract; also building height ≤ 20 m, imposed load ≤ 5 kN/m²)"
+ },
+ {
+  "id": "06-187",
+  "de": "Außerhalb der Grenzen: genaueres Verfahren nach DIN EN 1996-1-1 verwenden.",
+  "en": "Outside the limits: use the more accurate method to DIN EN 1996-1-1."
+ },
+ {
+  "id": "06-188",
+  "de": "Kurze Wand (A = {} m² < 0,1 m²): f<sub>d</sub>·0,8 = <b>{} N/mm²</b>",
+  "en": "Short wall (A = {} m² < 0.1 m²): f<sub>d</sub>·0.8 = <b>{} N/mm²</b>"
+ },
+ {
+  "id": "06-189",
+  "de": "Knicklänge: zweiseitig gehaltene Wand",
+  "en": "Effective height: wall restrained at top and bottom"
+ },
+ {
+  "id": "06-190",
+  "de": "Holzbalkendecke → ρ<sub>2</sub> = 1,0",
+  "en": "Timber joist floor → ρ<sub>2</sub> = 1.0"
+ },
+ {
+  "id": "06-191",
+  "de": "Stahlbetondecke, t = {} mm → ρ<sub>2</sub> = {} (0,75 für t ≤ 175 mm, 0,90 bis 250 mm, sonst 1,0)",
+  "en": "Reinforced concrete slab, t = {} mm → ρ<sub>2</sub> = {} (0.75 for t ≤ 175 mm, 0.90 up to 250 mm, otherwise 1.0)"
+ },
+ {
+  "id": "06-192",
+  "de": "Abminderung Φ<sub>2</sub> in Wandmitte (Knicken und Lastausmitte aus der Auflagertiefe)",
+  "en": "Reduction Φ<sub>2</sub> at mid-height (buckling and eccentricity from the bearing depth)"
+ },
+ {
+  "id": "06-193",
+  "de": "Abminderung Φ<sub>1</sub> am Wandkopf/-fuß (Verdrehung der Decke am Endauflager)",
+  "en": "Reduction Φ<sub>1</sub> at the top/bottom of the wall (rotation of the floor at the end support)"
+ },
+ {
+  "id": "06-194",
+  "de": "Zwischenauflager (Innenwand): Deckenverdrehungen heben sich weitgehend auf → kein Φ<sub>1</sub>",
+  "en": "Intermediate support (internal wall): the floor rotations largely cancel out → no Φ<sub>1</sub>"
+ },
+ {
+  "id": "06-195",
+  "de": "Endauflager unter der Dachdecke (kaum Auflast, große Verdrehung): Φ<sub>1</sub> = <b>0,333</b>",
+  "en": "End support below the roof slab (hardly any vertical load, large rotation): Φ<sub>1</sub> = <b>0.333</b>"
+ },
+ {
+  "id": "06-196",
+  "de": "Tragfähigkeit der Wand",
+  "en": "Resistance of the wall"
+ },
+ {
+  "id": "06-197",
+  "de": "Tragfähigkeit unter Druck",
+  "en": "Resistance in compression"
+ },
+ {
+  "id": "06-198",
+  "de": "Φ ≤ 0: Wand zu schlank oder Auflagertiefe zu klein.",
+  "en": "Φ ≤ 0: wall too slender or bearing depth too small."
+ },
+ {
+  "id": "06-199",
+  "de": "Dickere Wand, festere Steine oder Mörtel, kürzere Deckenstützweite (Φ<sub>1</sub>) bzw. volles Deckenauflager (a = t).",
+  "en": "Thicker wall, stronger units or mortar, shorter floor span (Φ<sub>1</sub>) or full floor bearing (a = t)."
+ },
+ {
+  "id": "06-200",
+  "de": "Schlankheit h<sub>ef</sub>/t = {} ≤ 27",
+  "en": "Slenderness h<sub>ef</sub>/t = {} ≤ 27"
+ },
+ {
+  "id": "06-201",
+  "de": "Abminderung Φ",
+  "en": "Reduction Φ"
+ },
+ {
+  "id": "06-202",
+  "de": "N<sub>Ed</sub> = {} kN auf l = {} m",
+  "en": "N<sub>Ed</sub> = {} kN on l = {} m"
+ },
+ {
+  "id": "06-203",
+  "de": "Blau gestrichelt: Ausbiegung der Wand (Knicken über h<sub>ef</sub>).",
+  "en": "Blue dashed: deflection of the wall (buckling over h<sub>ef</sub>)."
+ },
+ {
+  "id": "06-204",
+  "de": "Teilflächenpressung",
+  "en": "Concentrated load"
+ },
+ {
+  "id": "06-205",
+  "de": "Auflager verlängern, Lastverteilungsbalken/-platte oder festere Steine (bzw. ein Stein höherer Festigkeit unter dem Auflager). ",
+  "en": "Lengthen the bearing, use a spreader beam/plate or stronger units (or one unit of higher strength under the bearing). "
+ },
+ {
+  "id": "06-206",
+  "de": "Die Wand darunter (mit der verteilten Last in halber Höhe) zusätzlich als Druckwand nachweisen.",
+  "en": "Additionally check the wall below as a wall in compression (with the spread load at mid-height)."
+ },
+ {
+  "id": "06-207",
+  "de": "Lastausbreitung unter 60° bis zur halben Wandhöhe",
+  "en": "Load spread at 60° down to half the wall height"
+ },
+ {
+  "id": "06-208",
+  "de": "Ausbreitung je Seite h<sub>c</sub>/(2·tan 60°) = {} mm, links begrenzt durch a<sub>1</sub> = {} mm, rechts durch das Wandende → l<sub>efm</sub> = {} + {} + {} = <b>{} mm</b>",
+  "en": "Spread per side h<sub>c</sub>/(2·tan 60°) = {} mm, limited on the left by a<sub>1</sub> = {} mm, on the right by the wall end → l<sub>efm</sub> = {} + {} + {} = <b>{} mm</b>"
+ },
+ {
+  "id": "06-209",
+  "de": "Erhöhungsfaktor für Teilflächenpressung (Gl. 6.10)",
+  "en": "Enhancement factor for concentrated loads (eq. 6.10)"
+ },
+ {
+  "id": "06-210",
+  "de": " — Lochsteine (Gruppe 2): β = 1",
+  "en": " — perforated units (group 2): β = 1"
+ },
+ {
+  "id": "06-211",
+  "de": "Ansicht der Wand",
+  "en": "Elevation of the wall"
+ },
+ {
+  "id": "06-212",
+  "de": "N<sub>Edc</sub> = {} kN auf {} × {} mm",
+  "en": "N<sub>Edc</sub> = {} kN on {} × {} mm"
+ },
+ {
+  "id": "06-213",
+  "de": "Blau: Lastausbreitung unter 60° bis zur halben Wandhöhe.",
+  "en": "Blue: load spread at 60° down to half the wall height."
+ },
+ {
+  "id": "06-214",
+  "de": "Anwendungsbedingungen",
+  "en": "Conditions of application"
+ },
+ {
+  "id": "06-215",
+  "de": "Voraussetzungen (Auszug; außerdem Gelände nicht ansteigend, kein Wasserdruck, Kellerdecke als Scheibe)",
+  "en": "Conditions (extract; also ground not rising, no water pressure, basement ceiling acting as a diaphragm)"
+ },
+ {
+  "id": "06-216",
+  "de": "Mindestauflast (Bogenwirkung)",
+  "en": "Minimum vertical load (arching)"
+ },
+ {
+  "id": "06-217",
+  "de": "Beiwert β aus dem Abstand der aussteifenden Querwände",
+  "en": "Factor β from the spacing of the bracing cross walls"
+ },
+ {
+  "id": "06-218",
+  "de": "Erforderliche Auflast, damit sich ein Druckbogen über die Wandhöhe bildet",
+  "en": "Required vertical load so that a compression arch forms over the wall height"
+ },
+ {
+  "id": "06-219",
+  "de": "n<sub>Ed,min,erf</sub> = ρ<sub>e</sub>·h·h<sub>e</sub>²/(β·t) = {}·{}·{}²/({}·{}) = <b>{} kN/m</b> {} n<sub>Ed,min</sub> = {} kN/m",
+  "en": "n<sub>Ed,min,req</sub> = ρ<sub>e</sub>·h·h<sub>e</sub>²/(β·t) = {}·{}·{}²/({}·{}) = <b>{} kN/m</b> {} n<sub>Ed,min</sub> = {} kN/m"
+ },
+ {
+  "id": "06-220",
+  "de": "Zu wenig Auflast: dickere Wand, enger stehende Querwände, geringere Anschüttung oder Nachweis als biegebeanspruchte Wand.",
+  "en": "Too little vertical load: thicker wall, cross walls closer together, lower backfill or check as a wall in bending."
+ },
+ {
+  "id": "06-221",
+  "de": "Höchstauflast",
+  "en": "Maximum vertical load"
+ },
+ {
+  "id": "06-222",
+  "de": "Die Auflast darf das Mauerwerk nicht überlasten",
+  "en": "The vertical load must not overload the masonry"
+ },
+ {
+  "id": "06-223",
+  "de": "n<sub>Ed,max,zul</sub> = t·f<sub>d</sub>/3 = {}·{}/3 = <b>{} kN/m</b> {} n<sub>Ed,max</sub> = {} kN/m",
+  "en": "n<sub>Ed,max,perm</sub> = t·f<sub>d</sub>/3 = {}·{}/3 = <b>{} kN/m</b> {} n<sub>Ed,max</sub> = {} kN/m"
+ },
+ {
+  "id": "06-224",
+  "de": "Druckbogen",
+  "en": "Compression arch"
+ },
+ {
+  "id": "06-225",
+  "de": "Erddruck aus ρ<sub>e</sub> = {} kN/m³",
+  "en": "Earth pressure from ρ<sub>e</sub> = {} kN/m³"
+ },
+ {
+  "id": "06-226",
+  "de": "n<sub>min,erf</sub> = {} kN/m",
+  "en": "n<sub>min,req</sub> = {} kN/m"
+ },
+ {
+  "id": "06-227",
+  "de": "n<sub>max,zul</sub> = {} kN/m",
+  "en": "n<sub>max,perm</sub> = {} kN/m"
+ }
+]

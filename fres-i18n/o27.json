@@ -1,0 +1,558 @@
+{
+"27-0": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"sb-st\" onchange=\"updateSteckbrief()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"sb-st\" onchange=\"updateSteckbrief()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-8": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"qk-st\" onchange=\"updateQK()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"qk-st\" onchange=\"updateQK()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-18": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"zq-st\" onchange=\"updateZQ()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"zq-st\" onchange=\"updateZQ()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-61": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"qn-st\" onchange=\"updateQN()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"qn-st\" onchange=\"updateQN()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-80": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"kn-st\" onchange=\"updateKnick()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"kn-st\" onchange=\"updateKnick()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-97": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"bd-st\" onchange=\"updateBDK()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"bd-st\" onchange=\"updateBDK()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-113": {
+"fr": "<div class=\"calc-field\"><label>Nuance d'acier</label><select id=\"in-st\" onchange=\"updateNMI()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Calidad del acero</label><select id=\"in-st\" onchange=\"updateNMI()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"27-1": {
+"fr": "Résistances {}, {}",
+"es": "Resistencias {}, {}"
+},
+"27-2": {
+"fr": "!Flexion autour de y : semelle c/t = {}, âme c/t = {} → <b>classe {}</b> · compression simple : âme c/t = {} → <b>classe {}</b>",
+"es": "!Flexión respecto a y: ala c/t = {}, alma c/t = {} → <b>clase {}</b> · compresión simple: alma c/t = {} → <b>clase {}</b>"
+},
+"27-3": {
+"fr": "§Tube circulaire (D extérieur, t épaisseur de paroi, d = D − 2t)",
+"es": "§Tubo circular (D exterior, t espesor de pared, d = D − 2t)"
+},
+"27-4": {
+"fr": "§Profilé creux rectangulaire (ligne moyenne, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)",
+"es": "§Perfil hueco rectangular (línea media, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)"
+},
+"27-5": {
+"fr": "!I et W<sub>pl</sub> : rectangle extérieur moins rectangle intérieur, chacun avec les carrés d'angle retirés et les quarts de cercle ajoutés",
+"es": "!I y W<sub>pl</sub>: rectángulo exterior menos rectángulo interior, cada uno con los cuadrados de esquina restados y los cuartos de círculo añadidos"
+},
+"27-6": {
+"fr": "Partie interne en flexion + compression, α > 0,5",
+"es": "Parte interna en flexión + compresión, α > 0,5"
+},
+"27-7": {
+"fr": "42ε / (0,67 + 0,33ψ) pour ψ > −1",
+"es": "42ε / (0,67 + 0,33ψ) para ψ > −1"
+},
+"27-9": {
+"fr": "<div class=\"calc-field\"><label>Sollicitation</label><select id=\"qk-art\" onchange=\"updateQK()\"><option value=\"biegung\">Flexion autour de y</option><option value=\"druck\">Compression simple</option><option value=\"nm\" selected>Compression + flexion</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Solicitación</label><select id=\"qk-art\" onchange=\"updateQK()\"><option value=\"biegung\">Flexión respecto a y</option><option value=\"druck\">Compresión simple</option><option value=\"nm\" selected>Compresión + flexión</option></select></div>"
+},
+"27-10": {
+"fr": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression)</label><input type=\"number\" id=\"qk-N\" value=\"400\" step=\"any\" oninput=\"updateQK()\"></div>",
+"es": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compresión)</label><input type=\"number\" id=\"qk-N\" value=\"400\" step=\"any\" oninput=\"updateQK()\"></div>"
+},
+"27-11": {
+"fr": "<div class=\"calc-field\"><label>Semelle supérieure b<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-bo\" value=\"250\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Ala superior b<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-bo\" value=\"250\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-12": {
+"fr": "<div class=\"calc-field\"><label>Semelle supérieure t<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-to\" value=\"15\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Ala superior t<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-to\" value=\"15\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-13": {
+"fr": "<div class=\"calc-field\"><label>Âme h<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-hw\" value=\"600\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Alma h<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-hw\" value=\"600\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-14": {
+"fr": "<div class=\"calc-field\"><label>Âme t<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-tw\" value=\"10\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Alma t<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-tw\" value=\"10\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-15": {
+"fr": "<div class=\"calc-field\"><label>Semelle inférieure b<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-bu\" value=\"300\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Ala inferior b<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-bu\" value=\"300\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-16": {
+"fr": "<div class=\"calc-field\"><label>Semelle inférieure t<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-tu\" value=\"20\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Ala inferior t<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-tu\" value=\"20\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-17": {
+"fr": "<div class=\"calc-field\"><label>Soudure âme-semelle a [mm]</label><input type=\"number\" id=\"zq-a\" value=\"5\" step=\"any\" oninput=\"updateZQ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Soldadura alma-ala a [mm]</label><input type=\"number\" id=\"zq-a\" value=\"5\" step=\"any\" oninput=\"updateZQ()\"></div>"
+},
+"27-19": {
+"fr": "!Semelle (console, compression) : c = (b − t<sub>w</sub> − 2r) / 2",
+"es": "!Ala (saliente, compresión): c = (b − t<sub>w</sub> − 2r) / 2"
+},
+"27-20": {
+"fr": "!Limites {} → semelle classe {}",
+"es": "!Límites {} → ala clase {}"
+},
+"27-21": {
+"fr": "!Âme (partie interne) : c = h − 2t<sub>f</sub> − 2r",
+"es": "!Alma (parte interna): c = h − 2t<sub>f</sub> − 2r"
+},
+"27-22": {
+"fr": "!Limites {} → âme classe {}",
+"es": "!Límites {} → alma clase {}"
+},
+"27-23": {
+"fr": "!La section prend la classe la plus défavorable : <b>classe {}</b>",
+"es": "!La sección adopta la clase más desfavorable: <b>clase {}</b>"
+},
+"27-24": {
+"fr": "!ψ (élastique) = σ<sub>2</sub> / σ<sub>1</sub> aux extrémités de l'âme avec σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = {}",
+"es": "!ψ (elástico) = σ<sub>2</sub> / σ<sub>1</sub> en los extremos del alma con σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = {}"
+},
+"27-25": {
+"fr": "analyse et dimensionnement plastiques (rotules plastiques possibles)",
+"es": "análisis y dimensionamiento plásticos (rótulas plásticas posibles)"
+},
+"27-26": {
+"fr": "résistance plastique de la section (W<sub>pl</sub>), sans redistribution",
+"es": "resistencia plástica de la sección (W<sub>pl</sub>), sin redistribución"
+},
+"27-27": {
+"fr": "résistance élastique de la section (W<sub>el</sub>)",
+"es": "resistencia elástica de la sección (W<sub>el</sub>)"
+},
+"27-28": {
+"fr": "voilement local avant d'atteindre f<sub>y</sub> → sections efficaces selon EN 1993-1-5",
+"es": "abolladura local antes de alcanzar f<sub>y</sub> → secciones eficaces según EN 1993-1-5"
+},
+"27-29": {
+"fr": "<div class=\"info-banner\">Classe {}: {}</div>",
+"es": "<div class=\"info-banner\">Clase {}: {}</div>"
+},
+"27-30": {
+"fr": "§Caractéristiques de la section (soudures négligées, z mesuré depuis le bord supérieur)",
+"es": "§Características de la sección (soldaduras despreciadas, z desde el borde superior)"
+},
+"27-31": {
+"fr": "§Axe neutre plastique : divise l'aire en deux parties égales",
+"es": "§Eje neutro plástico: divide el área en dos mitades"
+},
+"27-32": {
+"fr": "(dans l'âme : {} + {} · (z<sub>pl</sub> − {}) = {})",
+"es": "(en el alma: {} + {} · (z<sub>pl</sub> − {}) = {})"
+},
+"27-33": {
+"fr": "W<sub>pl</sub> = S<sub>haut</sub> + S<sub>bas</sub> (moments statiques par rapport à l'axe neutre plastique) = {} cm³",
+"es": "W<sub>pl</sub> = S<sub>sup</sub> + S<sub>inf</sub> (momentos estáticos respecto al eje neutro plástico) = {} cm³"
+},
+"27-34": {
+"fr": "§Semelle supérieure (console, compression)",
+"es": "§Ala superior (saliente, compresión)"
+},
+"27-35": {
+"fr": "!Limites 9ε = {} · 10ε = {} · 14ε = {} → semelle supérieure classe {}",
+"es": "!Límites 9ε = {} · 10ε = {} · 14ε = {} → ala superior clase {}"
+},
+"27-36": {
+"fr": "§Âme (partie interne, flexion avec axe neutre décalé)",
+"es": "§Alma (parte interna, flexión con eje neutro desplazado)"
+},
+"27-37": {
+"fr": "!plastique : partie comprimée de l'âme α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = {} mm → α = {} / {} = {}",
+"es": "!plástico: parte comprimida del alma α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = {} mm → α = {} / {} = {}"
+},
+"27-38": {
+"fr": "Classe 1 : 396ε / (13α − 1) = 396 · {} / (13 · {} − 1) = {}",
+"es": "Clase 1: 396ε / (13α − 1) = 396 · {} / (13 · {} − 1) = {}"
+},
+"27-39": {
+"fr": "Classe 2 : 456ε / (13α − 1) = {}",
+"es": "Clase 2: 456ε / (13α − 1) = {}"
+},
+"27-40": {
+"fr": "!élastique : ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>bas</sub>) / (z<sub>s</sub> − z<sub>haut</sub>) = ({} − {}) / ({} − {}) = {}",
+"es": "!elástico: ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>inf</sub>) / (z<sub>s</sub> − z<sub>sup</sub>) = ({} − {}) / ({} − {}) = {}"
+},
+"27-41": {
+"fr": "Classe 3 : 42ε / (0,67 + 0,33ψ) = 42 · {} / (0,67 + 0,33 · {}) = {}",
+"es": "Clase 3: 42ε / (0,67 + 0,33ψ) = 42 · {} / (0,67 + 0,33 · {}) = {}"
+},
+"27-42": {
+"fr": "!c/t = {} → âme classe {}",
+"es": "!c/t = {} → alma clase {}"
+},
+"27-43": {
+"fr": "!se situe dans la zone tendue → pas de limite c/t (classe 1)",
+"es": "!se encuentra en la zona traccionada → sin límite c/t (clase 1)"
+},
+"27-44": {
+"fr": "!Section <b>classe {}</b> → résistance en flexion {}{}",
+"es": "!Sección <b>clase {}</b> → resistencia a flexión {}{}"
+},
+"27-45": {
+"fr": "Profilé en I soudé {}×{} / {}×{} / {}×{}, {}",
+"es": "Perfil en I soldado {}×{} / {}×{} / {}×{}, {}"
+},
+"27-46": {
+"fr": "!N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) avec N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> et N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>",
+"es": "!N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) con N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> y N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>"
+},
+"27-47": {
+"fr": "!N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (classe 1–3) ou A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 4)",
+"es": "!N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (clase 1–3) o A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 4)"
+},
+"27-48": {
+"fr": "!M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 4)",
+"es": "!M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 4)"
+},
+"27-49": {
+"fr": "!V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · vérifier le voilement par cisaillement si h<sub>w</sub>/t<sub>w</sub> > 72 · ε / η (η = 1,2)",
+"es": "!V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · comprobar la abolladura por cortante si h<sub>w</sub>/t<sub>w</sub> > 72 · ε / η (η = 1,2)"
+},
+"27-50": {
+"fr": "§Flexion et effort tranchant (6.2.8)",
+"es": "§Flexión y esfuerzo cortante (6.2.8)"
+},
+"27-51": {
+"fr": "!V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub>: pas de réduction · sinon ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²",
+"es": "!V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub>: sin reducción · en caso contrario ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²"
+},
+"27-52": {
+"fr": "!M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> avec A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>",
+"es": "!M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> con A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>"
+},
+"27-53": {
+"fr": "§Flexion et effort normal (6.2.9, classe 1 et 2, profilés en I)",
+"es": "§Flexión y esfuerzo axil (6.2.9, clase 1 y 2, perfiles en I)"
+},
+"27-54": {
+"fr": "!pas de réduction autour de y si N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> et N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>",
+"es": "!sin reducción respecto a y si N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> y N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>"
+},
+"27-55": {
+"fr": "!M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> pour n ≤ a · sinon M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]",
+"es": "!M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> para n ≤ a · en caso contrario M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]"
+},
+"27-56": {
+"fr": "!biaxial : (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 avec α = 2, β = 5n ≥ 1",
+"es": "!biaxial: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 con α = 2, β = 5n ≥ 1"
+},
+"27-57": {
+"fr": "!σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · contrainte équivalente de von Mises (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²",
+"es": "!σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · tensión de comparación de von Mises (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²"
+},
+"27-58": {
+"fr": "§Section brute (plastification)",
+"es": "§Sección bruta (plastificación)"
+},
+"27-59": {
+"fr": "§Section nette (rupture)",
+"es": "§Sección neta (rotura)"
+},
+"27-60": {
+"fr": "N<sub>Ed</sub> [kN] (compression > 0, traction < 0)",
+"es": "N<sub>Ed</sub> [kN] (compresión > 0, tracción < 0)"
+},
+"27-62": {
+"fr": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression > 0, traction < 0)</label><input type=\"number\" id=\"qn-N\" value=\"250\" step=\"any\" oninput=\"updateQN()\"></div>",
+"es": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compresión > 0, tracción < 0)</label><input type=\"number\" id=\"qn-N\" value=\"250\" step=\"any\" oninput=\"updateQN()\"></div>"
+},
+"27-63": {
+"fr": "<div class=\"calc-field\"><label>V<sub>z,Ed</sub> [kN] (au même endroit)</label><input type=\"number\" id=\"qn-V\" value=\"190\" step=\"any\" oninput=\"updateQN()\"></div>",
+"es": "<div class=\"calc-field\"><label>V<sub>z,Ed</sub> [kN] (en la misma sección)</label><input type=\"number\" id=\"qn-V\" value=\"190\" step=\"any\" oninput=\"updateQN()\"></div>"
+},
+"27-64": {
+"fr": "§Matériau et profilé",
+"es": "§Material y perfil"
+},
+"27-65": {
+"fr": "compression et flexion",
+"es": "compresión y flexión"
+},
+"27-66": {
+"fr": "!Classe de section pour {} : semelle c/t = {} (cl. {}), âme c/t = {} (cl. {}) → <b>classe {}</b>",
+"es": "!Clase de sección para {}: ala c/t = {} (cl. {}), alma c/t = {} (cl. {}) → <b>clase {}</b>"
+},
+"27-67": {
+"fr": "pas de vérification du voilement nécessaire",
+"es": "no es necesaria la comprobación de abolladura"
+},
+"27-68": {
+"fr": "!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub> → réduction de la résistance en flexion (6.2.8)",
+"es": "!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub> → reducción de la resistencia a flexión (6.2.8)"
+},
+"27-69": {
+"fr": "§Effort normal et flexion (6.2.9.1)",
+"es": "§Esfuerzo axil y flexión (6.2.9.1)"
+},
+"27-70": {
+"fr": "!simplifié : réductions dues à l'effort tranchant et à l'effort normal appliquées successivement",
+"es": "!simplificado: reducciones por cortante y por axil aplicadas sucesivamente"
+},
+"27-71": {
+"fr": "Vérification de la section {}, {}",
+"es": "Comprobación de la sección {}, {}"
+},
+"27-72": {
+"fr": "<div class=\"info-banner\">Taux de travail déterminant : <b>{} %</b></div>",
+"es": "<div class=\"info-banner\">Aprovechamiento determinante: <b>{} %</b></div>"
+},
+"27-73": {
+"fr": "!V<sub>Ed</sub> = {} kN ≤ 0,5 · V<sub>pl,Rd</sub> = {} kN → pas de réduction due à l'effort tranchant",
+"es": "!V<sub>Ed</sub> = {} kN ≤ 0,5 · V<sub>pl,Rd</sub> = {} kN → sin reducción por cortante"
+},
+"27-74": {
+"fr": "!|N<sub>Ed</sub>| ≤ 0,25 · N<sub>pl,Rd</sub> = {} kN et ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub> = {} kN → l'effort normal peut être négligé pour M<sub>y</sub>",
+"es": "!|N<sub>Ed</sub>| ≤ 0,25 · N<sub>pl,Rd</sub> = {} kN y ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub> = {} kN → el axil puede despreciarse para M<sub>y</sub>"
+},
+"27-75": {
+"fr": "§Effort normal critique élastique et élancement",
+"es": "§Axil crítico elástico y esbeltez"
+},
+"27-76": {
+"fr": "!N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² avec L<sub>cr</sub> = β · L",
+"es": "!N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² con L<sub>cr</sub> = β · L"
+},
+"27-77": {
+"fr": "!λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) avec λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε",
+"es": "!λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) con λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε"
+},
+"27-78": {
+"fr": "!χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · pour λ̄ ≤ 0,2 ou N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04 χ = 1",
+"es": "!χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · para λ̄ ≤ 0,2 o N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04 χ = 1"
+},
+"27-79": {
+"fr": "!N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (classe 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1",
+"es": "!N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (clase 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1"
+},
+"27-81": {
+"fr": "<div class=\"calc-field\"><label>Longueur de flambement L<sub>cr</sub> [m]</label><input type=\"number\" id=\"kn-L\" value=\"4\" step=\"any\" oninput=\"updateKnick()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud de pandeo L<sub>cr</sub> [m]</label><input type=\"number\" id=\"kn-L\" value=\"4\" step=\"any\" oninput=\"updateKnick()\"></div>"
+},
+"27-82": {
+"fr": "<div class=\"calc-field\"><label>Flambement autour de</label><select id=\"kn-ax\" onchange=\"updateKnick()\"><option value=\"z\" selected>axe faible z–z</option><option value=\"y\">axe fort y–y</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Pandeo respecto a</label><select id=\"kn-ax\" onchange=\"updateKnick()\"><option value=\"z\" selected>eje débil z–z</option><option value=\"y\">eje fuerte y–y</option></select></div>"
+},
+"27-83": {
+"fr": "§Caractéristiques de la section {} (axe {}–{})",
+"es": "§Características de la sección {} (eje {}–{})"
+},
+"27-84": {
+"fr": "!Contrôle via N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = {} kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = {}",
+"es": "!Control mediante N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = {} kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = {}"
+},
+"27-85": {
+"fr": "§Courbe de flambement et réduction",
+"es": "§Curva de pandeo y reducción"
+},
+"27-86": {
+"fr": "!h/b = {} {}, t<sub>f</sub> = {} mm, {} → courbe de flambement <b>{}</b>, α = {}",
+"es": "!h/b = {} {}, t<sub>f</sub> = {} mm, {} → curva de pandeo <b>{}</b>, α = {}"
+},
+"27-87": {
+"fr": "Flambement par flexion {}, {}, L<sub>cr</sub> = {} m",
+"es": "Pandeo por flexión {}, {}, L<sub>cr</sub> = {} m"
+},
+"27-88": {
+"fr": "§Moment critique élastique de déversement (appuis à fourche aux deux extrémités)",
+"es": "§Momento crítico elástico de pandeo lateral (apoyos en horquilla en ambos extremos)"
+},
+"27-89": {
+"fr": "!z<sub>g</sub> — distance du point d'application de la charge au centre de cisaillement, positive vers le haut (semelle supérieure : défavorable)",
+"es": "!z<sub>g</sub> — distancia del punto de aplicación de la carga al centro de esfuerzos cortantes, positiva hacia arriba (ala superior: desfavorable)"
+},
+"27-90": {
+"fr": "§Élancement réduit",
+"es": "§Esbeltez adimensional"
+},
+"27-91": {
+"fr": "!λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) avec W<sub>y</sub> = W<sub>pl,y</sub> (classe 1, 2) ou W<sub>el,y</sub> (classe 3)",
+"es": "!λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) con W<sub>y</sub> = W<sub>pl,y</sub> (clase 1, 2) o W<sub>el,y</sub> (clase 3)"
+},
+"27-92": {
+"fr": "§Réduction — cas général (6.3.2.2)",
+"es": "§Reducción — caso general (6.3.2.2)"
+},
+"27-93": {
+"fr": "§Réduction — profilés laminés et profilés soudés équivalents (6.3.2.3, AN)",
+"es": "§Reducción — perfiles laminados y soldados equivalentes (6.3.2.3, AN)"
+},
+"27-94": {
+"fr": "!Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) avec λ̄<sub>LT,0</sub> = 0,4 et β = 0,75",
+"es": "!Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) con λ̄<sub>LT,0</sub> = 0,4 y β = 0,75"
+},
+"27-95": {
+"fr": "!χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 et ≤ 1/λ̄<sub>LT</sub>²",
+"es": "!χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 y ≤ 1/λ̄<sub>LT</sub>²"
+},
+"27-96": {
+"fr": "!M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · pour λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> aucune vérification",
+"es": "!M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · para λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> no se requiere comprobación"
+},
+"27-98": {
+"fr": "<div class=\"calc-field\"><label>Distance entre appuis à fourche L [m]</label><input type=\"number\" id=\"bd-L\" value=\"6\" step=\"any\" oninput=\"updateBDK()\"></div>",
+"es": "<div class=\"calc-field\"><label>Distancia entre apoyos en horquilla L [m]</label><input type=\"number\" id=\"bd-L\" value=\"6\" step=\"any\" oninput=\"updateBDK()\"></div>"
+},
+"27-99": {
+"fr": "<div class=\"calc-field\"><label>Diagramme des moments</label><select id=\"bd-fall\" onchange=\"updateBDK()\"><option value=\"M\">moment constant</option><option value=\"q\" selected>charge uniformément répartie</option><option value=\"F\">charge ponctuelle à mi-travée</option><option value=\"psi\">linearer Diagramme des moments ψ</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Diagrama de momentos</label><select id=\"bd-fall\" onchange=\"updateBDK()\"><option value=\"M\">momento constante</option><option value=\"q\" selected>carga uniformemente repartida</option><option value=\"F\">carga puntual en el centro del vano</option><option value=\"psi\">linearer Diagrama de momentos ψ</option></select></div>"
+},
+"27-100": {
+"fr": "<div class=\"calc-field\"><label>Point d'application de la charge</label><select id=\"bd-zg\" onchange=\"updateBDK()\"><option value=\"o\" selected>semelle supérieure</option><option value=\"s\">centre de cisaillement</option><option value=\"u\">semelle inférieure</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Punto de aplicación de la carga</label><select id=\"bd-zg\" onchange=\"updateBDK()\"><option value=\"o\" selected>ala superior</option><option value=\"s\">centro de esfuerzos cortantes</option><option value=\"u\">ala inferior</option></select></div>"
+},
+"27-101": {
+"fr": "Classe {} → W<sub>y</sub> = W<sub>pl,y</sub>",
+"es": "Clase {} → W<sub>y</sub> = W<sub>pl,y</sub>"
+},
+"27-102": {
+"fr": "§Moment critique élastique M<sub>cr</sub> (appuis à fourche, k = k<sub>w</sub> = 1)",
+"es": "§Momento crítico elástico M<sub>cr</sub> (apoyos en horquilla, k = k<sub>w</sub> = 1)"
+},
+"27-103": {
+"fr": "(semelle supérieure, défavorable)",
+"es": "(ala superior, desfavorable)"
+},
+"27-104": {
+"fr": "!{}{} → C<sub>1</sub> = {}, C<sub>2</sub> = {} · point d'application de la charge z<sub>g</sub> = {} cm {}",
+"es": "!{}{} → C<sub>1</sub> = {}, C<sub>2</sub> = {} · punto de aplicación de la carga z<sub>g</sub> = {} cm {}"
+},
+"27-105": {
+"fr": "§Élancement et réduction (6.3.2.3, profilés laminés)",
+"es": "§Esbeltez y reducción (6.3.2.3, perfiles laminados)"
+},
+"27-106": {
+"fr": "≤ 2 → courbe de flambement b",
+"es": "≤ 2 → curva de pandeo b"
+},
+"27-107": {
+"fr": "Déversement {}, L = {} m",
+"es": "Pandeo lateral {}, L = {} m"
+},
+"27-108": {
+"fr": "(centre de cisaillement)",
+"es": "(centro de esfuerzos cortantes)"
+},
+"27-109": {
+"fr": "(semelle inférieure, favorable)",
+"es": "(ala inferior, favorable)"
+},
+"27-110": {
+"fr": "§Équations de vérification (classe 1–3)",
+"es": "§Ecuaciones de comprobación (clase 1–3)"
+},
+"27-111": {
+"fr": "!N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 pour les éléments non sensibles au déversement (p. ex. profilés creux)",
+"es": "!N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 para elementos no susceptibles de pandeo lateral (p. ej. perfiles huecos)"
+},
+"27-112": {
+"fr": "§Coefficients d'interaction — Annexe B, classe 1 et 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> de façon analogue)",
+"es": "§Coeficientes de interacción — Anexo B, clase 1 y 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> análogamente)"
+},
+"27-114": {
+"fr": "<div class=\"calc-field\"><label>L<sub>cr,z</sub> = distance entre appuis à fourche [m]</label><input type=\"number\" id=\"in-Lz\" value=\"5\" step=\"any\" oninput=\"updateNMI()\"></div>",
+"es": "<div class=\"calc-field\"><label>L<sub>cr,z</sub> = distancia entre apoyos en horquilla [m]</label><input type=\"number\" id=\"in-Lz\" value=\"5\" step=\"any\" oninput=\"updateNMI()\"></div>"
+},
+"27-115": {
+"fr": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression)</label><input type=\"number\" id=\"in-N\" value=\"500\" step=\"any\" oninput=\"updateNMI()\"></div>",
+"es": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compresión)</label><input type=\"number\" id=\"in-N\" value=\"500\" step=\"any\" oninput=\"updateNMI()\"></div>"
+},
+"27-116": {
+"fr": "<div class=\"calc-field\"><label>Diagramme des moments</label><select id=\"in-fall\" onchange=\"updateNMI()\"><option value=\"psi\" selected>linéaire (moments d'extrémité)</option><option value=\"q\">Charge uniformément répartie</option><option value=\"F\">Charge ponctuelle</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Diagrama de momentos</label><select id=\"in-fall\" onchange=\"updateNMI()\"><option value=\"psi\" selected>lineal (momentos en los extremos)</option><option value=\"q\">Carga uniformemente repartida</option><option value=\"F\">Carga puntual</option></select></div>"
+},
+"27-117": {
+"fr": "!{}, {} : f<sub>y</sub> = {} N/mm² · classe {} → W<sub>y</sub> = {} = {} cm³",
+"es": "!{}, {}: f<sub>y</sub> = {} N/mm² · clase {} → W<sub>y</sub> = {} = {} cm³"
+},
+"27-118": {
+"fr": "§Déversement (L = L<sub>cr,z</sub>, charge au centre de cisaillement)",
+"es": "§Pandeo lateral (L = L<sub>cr,z</sub>, carga en el centro de esfuerzos cortantes)"
+},
+"27-119": {
+"fr": "§Coefficients de moment et d'interaction (Annexe B, Tab. B.2 et B.3)",
+"es": "§Coeficientes de momento y de interacción (Anexo B, Tab. B.2 y B.3)"
+},
+"27-120": {
+"fr": "§Vérifications (6.61) et (6.62)",
+"es": "§Comprobaciones (6.61) y (6.62)"
+},
+"27-121": {
+"fr": "Flexion et compression {}",
+"es": "Flexión y compresión {}"
+},
+"27-122": {
+"fr": "<div class=\"calc-field\"><label>Valeur limite</label><select id=\"db-lim\" onchange=\"updateDurchb()\"><option value=\"300\" selected>L / 300</option><option value=\"250\">L / 250</option><option value=\"200\">L / 200</option><option value=\"500\">L / 500</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Valor límite</label><select id=\"db-lim\" onchange=\"updateDurchb()\"><option value=\"300\" selected>L / 300</option><option value=\"250\">L / 250</option><option value=\"200\">L / 200</option><option value=\"500\">L / 500</option></select></div>"
+},
+"27-123": {
+"fr": "Poutre sur deux appuis {}, L = {} m",
+"es": "Viga biapoyada {}, L = {} m"
+},
+"27-124": {
+"fr": "§Flèche à mi-travée (charge caractéristique)",
+"es": "§Flecha en el centro del vano (carga característica)"
+},
+"27-125": {
+"fr": "w<sub>adm</sub> = L / {} = {} / {} = {} mm",
+"es": "w<sub>adm</sub> = L / {} = {} / {} = {} mm"
+},
+"27-126": {
+"fr": "w / w<sub>adm</sub> = {} / {} = {} ≤ 1 {}",
+"es": "w / w<sub>adm</sub> = {} / {} = {} ≤ 1 {}"
+},
+"27-127": {
+"fr": "§Cisaillement par plan de cisaillement",
+"es": "§Corte por plano de corte"
+},
+"27-128": {
+"fr": "!F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> avec α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)",
+"es": "!F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> con α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)"
+},
+"27-129": {
+"fr": "!dans la direction de l'effort : α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (boulon d'extrémité) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (boulon intérieur)",
+"es": "!en la dirección de la fuerza: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (tornillo de extremo) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (tornillo interior)"
+},
+"27-130": {
+"fr": "!perpendiculairement à l'effort : k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (rangée de rive) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (rangée intérieure)",
+"es": "!perpendicular a la fuerza: k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (fila de borde) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (fila interior)"
+},
+"27-131": {
+"fr": "§Traction et poinçonnement",
+"es": "§Tracción y punzonamiento"
+},
+"27-132": {
+"fr": "!F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> avec k<sub>2</sub> = 0,9 (0,63 pour boulons à tête fraisée)",
+"es": "!F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> con k<sub>2</sub> = 0,9 (0,63 para tornillos de cabeza avellanada)"
+},
+"27-133": {
+"fr": "§Cisaillement et traction combinés",
+"es": "§Cortante y tracción combinados"
+},
+"27-134": {
+"fr": "§Groupe d'organes d'assemblage (3.7)",
+"es": "§Grupo de elementos de unión (3.7)"
+},
+"27-135": {
+"fr": "!Somme des F<sub>b,Rd</sub> si F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> pour chaque boulon ; sinon n · plus petite résistance individuelle",
+"es": "!Suma de los F<sub>b,Rd</sub> si F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> en cada tornillo; en caso contrario n · menor resistencia individual"
+},
+"27-136": {
+"fr": "<div class=\"calc-field\"><label>Boulon</label><select id=\"sr-d\" onchange=\"updateSchraube()\"><option value=\"M12\">M12</option><option value=\"M16\">M16</option><option value=\"M20\" selected>M20</option><option value=\"M22\">M22</option><option value=\"M24\">M24</option><option value=\"M27\">M27</option><option value=\"M30\">M30</option><option value=\"M36\">M36</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Tornillo</label><select id=\"sr-d\" onchange=\"updateSchraube()\"><option value=\"M12\">M12</option><option value=\"M16\">M16</option><option value=\"M20\" selected>M20</option><option value=\"M22\">M22</option><option value=\"M24\">M24</option><option value=\"M27\">M27</option><option value=\"M30\">M30</option><option value=\"M36\">M36</option></select></div>"
+},
+"27-137": {
+"fr": "<div class=\"calc-field\"><label>Classe de résistance</label><select id=\"sr-kl\" onchange=\"updateSchraube()\"><option value=\"4.6\">4.6</option><option value=\"5.6\">5.6</option><option value=\"8.8\" selected>8.8</option><option value=\"10.9\">10.9</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Clase de resistencia</label><select id=\"sr-kl\" onchange=\"updateSchraube()\"><option value=\"4.6\">4.6</option><option value=\"5.6\">5.6</option><option value=\"8.8\" selected>8.8</option><option value=\"10.9\">10.9</option></select></div>"
+},
+"27-138": {
+"fr": "<div class=\"calc-field\"><label>Plan de cisaillement dans le</label><select id=\"sr-fuge\" onchange=\"updateSchraube()\"><option value=\"g\" selected>filetage</option><option value=\"s\">tige</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Plano de corte en la</label><select id=\"sr-fuge\" onchange=\"updateSchraube()\"><option value=\"g\" selected>rosca</option><option value=\"s\">caña</option></select></div>"
+}
+}

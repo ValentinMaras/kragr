@@ -1,0 +1,1072 @@
+[
+ {
+  "id": "21-0",
+  "de": "f<sub>d,fi</sub> = k<sub>mod,fi</sub> · k<sub>fi</sub> · f<sub>k</sub> / γ<sub>M,fi</sub> mit k<sub>mod,fi</sub> = 1,0 und γ<sub>M,fi</sub> = 1,0",
+  "en": "f<sub>d,fi</sub> = k<sub>mod,fi</sub> · k<sub>fi</sub> · f<sub>k</sub> / γ<sub>M,fi</sub> with k<sub>mod,fi</sub> = 1.0 and γ<sub>M,fi</sub> = 1.0"
+ },
+ {
+  "id": "21-1",
+  "de": "f<sub>u,k</sub> — char. Zugfestigkeit des Stahlstifts (z. B. S235: 360 N/mm²)",
+  "en": "f<sub>u,k</sub> — char. tensile strength of the steel fastener (e.g. S235: 360 N/mm²)"
+ },
+ {
+  "id": "21-2",
+  "de": "f_u — Zugfestigkeit des Nageldrahts, mindestens 600 N/mm²",
+  "en": "f_u — tensile strength of the nail wire, at least 600 N/mm²"
+ },
+ {
+  "id": "21-3",
+  "de": "g<sub>k</sub> [kN/m] (mit Eigengewicht)",
+  "en": "g<sub>k</sub> [kN/m] (incl. self-weight)"
+ },
+ {
+  "id": "21-4",
+  "de": "ideelle Abbrandrate β<sub>n</sub> = 0,7 mm/min (BSH, Tab. 3.1)",
+  "en": "notional charring rate β<sub>n</sub> = 0.7 mm/min (glulam, Table 3.1)"
+ },
+ {
+  "id": "21-5",
+  "de": "k<sub>0</sub> = t/20 für t &lt; 20 min, sonst 1,0 (ungeschützte Flächen)",
+  "en": "k<sub>0</sub> = t/20 for t &lt; 20 min, otherwise 1.0 (unprotected surfaces)"
+ },
+ {
+  "id": "21-6",
+  "de": "k<sub>90</sub> = 1,35 + 0,015·d (Nadelholz)",
+  "en": "k<sub>90</sub> = 1.35 + 0.015·d (softwood)"
+ },
+ {
+  "id": "21-7",
+  "de": "k<sub>def</sub> — Verformungsbeiwert (EN 1995-1-1, Tab. 3.2). „—“: in dieser Nutzungsklasse nicht zulässig.",
+  "en": "k<sub>def</sub> — deformation factor (EN 1995-1-1, Table 3.2). “—”: not permitted in this service class."
+ },
+ {
+  "id": "21-8",
+  "de": "k<sub>mod</sub> berücksichtigt den Einfluss von Lasteinwirkungsdauer und Holzfeuchte (Nutzungsklasse) auf die Festigkeit. Gilt für Vollholz, BSH und LVL.",
+  "en": "k<sub>mod</sub> accounts for the effect of load duration and moisture content (service class) on strength. Applies to solid timber, glulam and LVL."
+ },
+ {
+  "id": "21-9",
+  "de": "k<sub>mod</sub> — Modifikationsbeiwert (Lasteinwirkungsdauer + Nutzungsklasse)<br> γ<sub>M</sub> — Teilsicherheitsbeiwert (nach NA Deutschland: 1,30)",
+  "en": "k<sub>mod</sub> — modification factor (load duration + service class)<br> γ<sub>M</sub> — partial factor (German NA: 1.30)"
+ },
+ {
+  "id": "21-10",
+  "de": "kurz/sehr kurz (Wind)",
+  "en": "short-term/instantaneous (wind)"
+ },
+ {
+  "id": "21-11",
+  "de": "maßgebend: <b>ständig + Nutzlast Kat. A/B (Wohnen, Büro)</b> mit q<sub>d</sub> = 6,45 kN/m und k<sub>mod</sub> = 0,80",
+  "en": "governing: <b>permanent + imposed load cat. A/B (residential, office)</b> with q<sub>d</sub> = 6.45 kN/m and k<sub>mod</sub> = 0.80"
+ },
+ {
+  "id": "21-12",
+  "de": "oben (Druckrand)",
+  "en": "top (compression edge)"
+ },
+ {
+  "id": "21-13",
+  "de": "quasi-ständig",
+  "en": "quasi-permanent"
+ },
+ {
+  "id": "21-14",
+  "de": "rechts beanspruchtes Hirnholzende (t), links unbeanspruchtes (c)",
+  "en": "loaded end on the right (t), unloaded on the left (c)"
+ },
+ {
+  "id": "21-15",
+  "de": "runder Draht",
+  "en": "round wire"
+ },
+ {
+  "id": "21-16",
+  "de": "siehe statiq·size (Holz › Ausklinkung)",
+  "en": "see statiq·size (Timber › Notch)"
+ },
+ {
+  "id": "21-17",
+  "de": "statiq·size ist in Vorbereitung",
+  "en": "statiq·size is in preparation"
+ },
+ {
+  "id": "21-18",
+  "de": "unten (Zugrand)",
+  "en": "bottom (tension edge)"
+ },
+ {
+  "id": "21-19",
+  "de": "veränderliche Last",
+  "en": "variable load"
+ },
+ {
+  "id": "21-20",
+  "de": "voll ab",
+  "en": "full from"
+ },
+ {
+  "id": "21-21",
+  "de": "zweiachsige Biegung",
+  "en": "biaxial bending"
+ },
+ {
+  "id": "21-22",
+  "de": "Übersicht der Beiwerte — DIN EN 1995-1-1 mit NA",
+  "en": "Overview of factors — DIN EN 1995-1-1 with NA"
+ },
+ {
+  "id": "21-23",
+  "de": "Übliche Durchmesser",
+  "en": "Common diameters"
+ },
+ {
+  "id": "21-24",
+  "de": "α = 0°: f<sub>c,0,d</sub> · α = 90°: k<sub>c,90</sub> · f<sub>c,90,d</sub> · dazwischen stetiger Übergang (Versatz, Strebenanschluss, Sparrenkerve)",
+  "en": "α = 0°: f<sub>c,0,d</sub> · α = 90°: k<sub>c,90</sub> · f<sub>c,90,d</sub> · in between a smooth transition (step joint, strut connection, birdsmouth)"
+ },
+ {
+  "id": "21-25",
+  "de": "β<sub>c</sub> = 0,2 für Vollholz · 0,1 für BSH und LVL<br> Bei λ<sub>rel</sub> ≤ 0,3 ist kein Knicknachweis nötig (k<sub>c</sub> = 1).",
+  "en": "β<sub>c</sub> = 0.2 for solid timber · 0.1 for glulam and LVL<br> For λ<sub>rel</sub> ≤ 0.3 no buckling check is needed (k<sub>c</sub> = 1)."
+ },
+ {
+  "id": "21-26",
+  "de": "β<sub>n</sub> [mm/min] (ideell, mit Kanten)",
+  "en": "β<sub>n</sub> [mm/min] (notional, incl. corners)"
+ },
+ {
+  "id": "21-27",
+  "de": "γ<sub>G</sub> = 1,35 (ungünstig) bzw. 1,00 (günstig) · γ<sub>Q</sub> = 1,50 · ψ<sub>0</sub> — Kombinationsbeiwert<br> Q<sub>k,1</sub> ist die Leiteinwirkung; jede veränderliche Last muss einmal als Leiteinwirkung untersucht werden.",
+  "en": "γ<sub>G</sub> = 1.35 (unfavourable) or 1.00 (favourable) · γ<sub>Q</sub> = 1.50 · ψ<sub>0</sub> — combination factor<br> Q<sub>k,1</sub> is the leading action; every variable load must be checked once as the leading action."
+ },
+ {
+  "id": "21-28",
+  "de": "γ<sub>M</sub> deckt Streuungen der Materialeigenschaften und Modellunsicherheiten ab. Er steht im Nenner des Bemessungswerts der Festigkeit.",
+  "en": "γ<sub>M</sub> covers scatter in material properties and model uncertainties. It appears in the denominator of the design strength."
+ },
+ {
+  "id": "21-29",
+  "de": "λ = ℓ<sub>ef</sub> / i&nbsp;&nbsp;&nbsp; mit&nbsp; i = √(I / A)<br><br> bezogene Schlankheit:<br> λ<sub>rel</sub> = (λ / π) · √( f<sub>c,0,k</sub> / E<sub>0,05</sub> )",
+  "en": "λ = ℓ<sub>ef</sub> / i&nbsp;&nbsp;&nbsp; with&nbsp; i = √(I / A)<br><br> relative slenderness:<br> λ<sub>rel</sub> = (λ / π) · √( f<sub>c,0,k</sub> / E<sub>0.05</sub> )"
+ },
+ {
+  "id": "21-30",
+  "de": "ρ<sub>k</sub> in kg/m³ · Für spaltempfindliche Holzarten (z. B. Douglasie): t ≥ max { 14·d ; (13·d − 30) · ρ<sub>k</sub> / 200 }.",
+  "en": "ρ<sub>k</sub> in kg/m³ · For species sensitive to splitting (e.g. Douglas fir): t ≥ max { 14·d ; (13·d − 30) · ρ<sub>k</sub> / 200 }."
+ },
+ {
+  "id": "21-31",
+  "de": "σ<sub>c,0,d</sub> = N<sub>c,d</sub> / A ≤ f<sub>c,0,d</sub> (gedrungene Stäbe, sonst Knicken)",
+  "en": "σ<sub>c,0,d</sub> = N<sub>c,d</sub> / A ≤ f<sub>c,0,d</sub> (stocky members, otherwise buckling)"
+ },
+ {
+  "id": "21-32",
+  "de": "σ<sub>c,90,d</sub> / (k<sub>c,90</sub> · f<sub>c,90,d</sub>) = 0,83 / (1,50 · 1,54) = 0,358 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "σ<sub>c,90,d</sub> / (k<sub>c,90</sub> · f<sub>c,90,d</sub>) = 0.83 / (1.50 · 1.54) = 0.358 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "21-33",
+  "de": "σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + k<sub>m</sub> · σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1 und k<sub>m</sub> · σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1",
+  "en": "σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + k<sub>m</sub> · σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1 and k<sub>m</sub> · σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1"
+ },
+ {
+  "id": "21-34",
+  "de": "σ<sub>t,0,d</sub> = N<sub>t,d</sub> / A<sub>n</sub> ≤ k<sub>h</sub> · f<sub>t,0,d</sub> (A<sub>n</sub> = Nettoquerschnitt, Löcher abziehen; k<sub>h</sub> mit der größeren Querschnittsseite)",
+  "en": "σ<sub>t,0,d</sub> = N<sub>t,d</sub> / A<sub>n</sub> ≤ k<sub>h</sub> · f<sub>t,0,d</sub> (A<sub>n</sub> = net cross-section, deduct holes; k<sub>h</sub> with the larger cross-section dimension)"
+ },
+ {
+  "id": "21-35",
+  "de": "τ<sub>d</sub> = 1,5 · V<sub>d</sub> / (b<sub>ef</sub> · h) ≤ f<sub>v,d</sub> mit b<sub>ef</sub> = k<sub>cr</sub> · b",
+  "en": "τ<sub>d</sub> = 1.5 · V<sub>d</sub> / (b<sub>ef</sub> · h) ≤ f<sub>v,d</sub> with b<sub>ef</sub> = k<sub>cr</sub> · b"
+ },
+ {
+  "id": "21-36",
+  "de": "τ<sub>tor,d</sub> ≤ k<sub>shape</sub> · f<sub>v,d</sub> mit k<sub>shape</sub> = min(1 + 0,15 · h/b; 2,0)",
+  "en": "τ<sub>tor,d</sub> ≤ k<sub>shape</sub> · f<sub>v,d</sub> with k<sub>shape</sub> = min(1 + 0.15 · h/b; 2.0)"
+ },
+ {
+  "id": "21-37",
+  "de": "„beansprucht“ (t): Die Kraft drückt das Verbindungsmittel zum Ende bzw. Rand hin.",
+  "en": "“loaded” (t): the force pushes the fastener towards the end or edge."
+ },
+ {
+  "id": "21-38",
+  "de": "ℓ<sub>ef</sub> — Knicklänge (abhängig von der Lagerung, siehe unten)<br> i — Trägheitsradius des Querschnitts",
+  "en": "ℓ<sub>ef</sub> — effective length (depends on support conditions, see below)<br> i — radius of gyration of the cross-section"
+ },
+ {
+  "id": "21-39",
+  "de": "ℓ<sub>ef</sub> — wirksame Kipplänge (abhängig von Lagerung und Lastangriffspunkt) · I<sub>tor</sub> — Torsionsträgheitsmoment",
+  "en": "ℓ<sub>ef</sub> — effective length for lateral buckling (depends on supports and point of load application) · I<sub>tor</sub> — torsion constant"
+ },
+ {
+  "id": "21-40",
+  "de": "∥ Faser:&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,0</sub> / γ<sub>M</sub><br> ⊥ Faser:&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,90</sub> / γ<sub>M</sub>",
+  "en": "∥ grain:&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,0</sub> / γ<sub>M</sub><br> ⊥ grain:&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,90</sub> / γ<sub>M</sub>"
+ },
+ {
+  "id": "21-41",
+  "de": "≤ 1 <b class=\"bad-t\">✗ nicht erfüllt</b>",
+  "en": "≤ 1 <b class=\"bad-t\">✗ not satisfied</b>"
+ },
+ {
+  "id": "21-42",
+  "de": "<option value=\"0\">ständig</option><option value=\"1\">lang</option><option value=\"2\" selected>mittel</option><option value=\"3\">kurz</option><option value=\"4\">sehr kurz</option>",
+  "en": "<option value=\"0\">permanent</option><option value=\"1\">long-term</option><option value=\"2\" selected>medium-term</option><option value=\"3\">short-term</option><option value=\"4\">instantaneous</option>"
+ },
+ {
+  "id": "21-43",
+  "de": "<option value=\"wind\">Wind (kurz/sehr kurz)</option>",
+  "en": "<option value=\"wind\">Wind (short-term/instantaneous)</option>"
+ },
+ {
+  "id": "21-44",
+  "de": "<option value=\"na\" selected>1,30 (NA Deutschland)</option>",
+  "en": "<option value=\"na\" selected>1.30 (German NA)</option>"
+ },
+ {
+  "id": "21-45",
+  "de": "<option value=\"en\">1,30 (EN-Empfehlung)</option>",
+  "en": "<option value=\"en\">1.30 (EN recommendation)</option>"
+ },
+ {
+  "id": "21-46",
+  "de": "<div class=\"table-hint\">Werte in N/mm²</div>",
+  "en": "<div class=\"table-hint\">Values in N/mm²</div>"
+ },
+ {
+  "id": "21-47",
+  "de": "<option value=\"en\">1,25 (EN-Empfehlung)</option>",
+  "en": "<option value=\"en\">1.25 (EN recommendation)</option>"
+ },
+ {
+  "id": "21-48",
+  "de": "<tr><th>Nutzungsklasse</th><th>ständig</th><th>lang</th><th>mittel</th><th>kurz</th><th>sehr kurz</th></tr>",
+  "en": "<tr><th>Service class</th><th>permanent</th><th>long-term</th><th>medium-term</th><th>short-term</th><th>instantaneous</th></tr>"
+ },
+ {
+  "id": "21-49",
+  "de": " (Vollholz)",
+  "en": " (solid timber)"
+ },
+ {
+  "id": "21-50",
+  "de": "ständig + {}",
+  "en": "permanent + {}"
+ },
+ {
+  "id": "21-51",
+  "de": "§Maßgebende Lastkombination (Bemessungslast geteilt durch k<sub>mod</sub>)",
+  "en": "§Governing load combination (design load divided by k<sub>mod</sub>)"
+ },
+ {
+  "id": "21-52",
+  "de": "!maßgebend: <b>{}</b> mit q<sub>d</sub> = {} kN/m und k<sub>mod</sub> = {}",
+  "en": "!governing: <b>{}</b> with q<sub>d</sub> = {} kN/m and k<sub>mod</sub> = {}"
+ },
+ {
+  "id": "21-53",
+  "de": "ständig + Nutzlast Kat. A/B (Wohnen, Büro)",
+  "en": "permanent + imposed load cat. A/B (residential, office)"
+ },
+ {
+  "id": "21-54",
+  "de": "Vollholz: k<sub>h</sub> = min((150/h)<sup>0,2</sup>; 1,3) für h < 150 mm",
+  "en": "Solid timber: k<sub>h</sub> = min((150/h)<sup>0.2</sup>; 1.3) for h < 150 mm"
+ },
+ {
+  "id": "21-55",
+  "de": "!Höhenbeiwert {} → k<sub>h</sub> = {}",
+  "en": "!Depth factor {} → k<sub>h</sub> = {}"
+ },
+ {
+  "id": "21-56",
+  "de": "§Schub (6.1.7 mit Rissbeiwert k<sub>cr</sub>)",
+  "en": "§Shear (6.1.7 with crack factor k<sub>cr</sub>)"
+ },
+ {
+  "id": "21-57",
+  "de": "!Endauflager, Länge l = {} mm, wirksam l<sub>ef</sub> = l + 30 mm = {} mm · k<sub>c,90</sub> = {} ({}, Einzelauflager)",
+  "en": "!End support, length l = {} mm, effective l<sub>ef</sub> = l + 30 mm = {} mm · k<sub>c,90</sub> = {} ({}, discrete support)"
+ },
+ {
+  "id": "21-58",
+  "de": "§Durchbiegung (GZG, ohne Schubverformung, k<sub>def</sub> = {}, ψ<sub>2</sub> = {})",
+  "en": "§Deflection (SLS, without shear deformation, k<sub>def</sub> = {}, ψ<sub>2</sub> = {})"
+ },
+ {
+  "id": "21-59",
+  "de": "Einfeldträger {} {}/{}, L = {} m",
+  "en": "Simply supported beam {} {}/{}, L = {} m"
+ },
+ {
+  "id": "21-60",
+  "de": "ständig + Nutzlast Kat. C/D",
+  "en": "permanent + imposed load cat. C/D"
+ },
+ {
+  "id": "21-61",
+  "de": "ständig + Schnee (bis 1000 m)",
+  "en": "permanent + snow (up to 1000 m)"
+ },
+ {
+  "id": "21-62",
+  "de": "ständig + Wind",
+  "en": "permanent + wind"
+ },
+ {
+  "id": "21-63",
+  "de": "§Festigkeit unter dem Winkel α = {}° (Hankinson-ähnliche Formel 6.16)",
+  "en": "§Strength at angle α = {}° (Hankinson-type formula 6.16)"
+ },
+ {
+  "id": "21-64",
+  "de": "Druck unter {}° zur Faser",
+  "en": "Compression at {}° to the grain"
+ },
+ {
+  "id": "21-65",
+  "de": "§Ausknicken um y (in Richtung h)",
+  "en": "§Buckling about y (in direction h)"
+ },
+ {
+  "id": "21-66",
+  "de": "§Ausknicken um z (in Richtung b)",
+  "en": "§Buckling about z (in direction b)"
+ },
+ {
+  "id": "21-67",
+  "de": "§Nachweise (6.23) und (6.24), k<sub>m</sub> = 0,7",
+  "en": "§Checks (6.23) and (6.24), k<sub>m</sub> = 0.7"
+ },
+ {
+  "id": "21-68",
+  "de": "Druckstab {} {}/{}",
+  "en": "Compression member {} {}/{}"
+ },
+ {
+  "id": "21-69",
+  "de": "§Wirksame Kipplänge (Tab. 6.1)",
+  "en": "§Effective length for lateral buckling (Table 6.1)"
+ },
+ {
+  "id": "21-70",
+  "de": "am Druckrand (oben, ungünstig)",
+  "en": "on the compression edge (top, unfavourable)"
+ },
+ {
+  "id": "21-71",
+  "de": "!{}; Last {}",
+  "en": "!{}; load {}"
+ },
+ {
+  "id": "21-72",
+  "de": "§Kritische Biegespannung",
+  "en": "§Critical bending stress"
+ },
+ {
+  "id": "21-73",
+  "de": "!BSH: allgemeine Formel mit G<sub>0,05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = {} · 10⁶ mm⁴",
+  "en": "!Glulam: general formula with G<sub>0.05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = {} · 10⁶ mm⁴"
+ },
+ {
+  "id": "21-74",
+  "de": "Kippen {} {}/{}, L = {} m",
+  "en": "Lateral-torsional buckling {} {}/{}, L = {} m"
+ },
+ {
+  "id": "21-75",
+  "de": "!Nadelvollholz, Rechteck: vereinfachte Formel (6.32)",
+  "en": "!Softwood solid timber, rectangle: simplified formula (6.32)"
+ },
+ {
+  "id": "21-76",
+  "de": "in der Schwerachse",
+  "en": "at the centroidal axis"
+ },
+ {
+  "id": "21-77",
+  "de": "am Zugrand (unten, günstig)",
+  "en": "on the tension edge (bottom, favourable)"
+ },
+ {
+  "id": "21-78",
+  "de": "§Abbrandtiefe nach t = {} min",
+  "en": "§Charring depth after t = {} min"
+ },
+ {
+  "id": "21-79",
+  "de": "!ideelle Abbrandrate β<sub>n</sub> = {} mm/min ({}, Tab. 3.1)",
+  "en": "!notional charring rate β<sub>n</sub> = {} mm/min ({}, Table 3.1)"
+ },
+ {
+  "id": "21-80",
+  "de": "dreiseitig, Oberseite geschützt",
+  "en": "three sides, top protected"
+ },
+ {
+  "id": "21-81",
+  "de": "§Festigkeit im Brandfall (k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0)",
+  "en": "§Strength in the fire situation (k<sub>mod,fi</sub> = 1.0, γ<sub>M,fi</sub> = 1.0)"
+ },
+ {
+  "id": "21-82",
+  "de": "Abbrand {} {}/{}, R {}",
+  "en": "Charring {} {}/{}, R {}"
+ },
+ {
+  "id": "21-83",
+  "de": "<div class=\"figure\">{}</div>\n    <div class=\"figure-cap\">Die Kraft zeigt zum rechten Ende und zum oberen Rand: dort liegen das\n      <b>beanspruchte</b> Hirnholzende (a<sub>3,t</sub>) und der <b>beanspruchte</b> Rand (a<sub>4,t</sub>).\n      Auf der Gegenseite gelten die kleineren Werte für <b>unbeanspruchte</b> Enden und Ränder (a<sub>3,c</sub>, a<sub>4,c</sub>).</div>",
+  "en": "<div class=\"figure\">{}</div>\n    <div class=\"figure-cap\">The force points to the right end and to the top edge: this is where the\n      <b>loaded</b> end (a<sub>3,t</sub>) and the <b>loaded</b> edge (a<sub>4,t</sub>) are.\n      On the opposite side the smaller values for <b>unloaded</b> ends and edges apply (a<sub>3,c</sub>, a<sub>4,c</sub>).</div>"
+ },
+ {
+  "id": "21-84",
+  "de": "Abscheren (t<sub>req</sub> = 9·d = {} mm): Faktor <b>{}</b>{}",
+  "en": "Shear (t<sub>req</sub> = 9·d = {} mm): factor <b>{}</b>{}"
+ },
+ {
+  "id": "21-85",
+  "de": "{}<br>Herausziehen: Faktor <b>{}</b>{}<br>",
+  "en": "{}<br>Withdrawal: factor <b>{}</b>{}<br>"
+ },
+ {
+  "id": "21-86",
+  "de": "Abscheren (t<sub>req</sub> = 9·d = 27,9 mm): Faktor <b>0,90</b>",
+  "en": "Shear (t<sub>req</sub> = 9·d = 27.9 mm): factor <b>0.90</b>"
+ },
+ {
+  "id": "21-87",
+  "de": "Mindestholzdicke ohne Vorbohren: <b>{} mm</b>",
+  "en": "Minimum timber thickness without pre-drilling: <b>{} mm</b>"
+ },
+ {
+  "id": "21-88",
+  "de": "Abscheren: Werte aus der Zulassung des Sondernagels",
+  "en": "Shear: values from the approval of the special nail"
+ },
+ {
+  "id": "21-89",
+  "de": "(i) beide Seiten μ₁(α) · s<sub>k</sub> · (ii) und (iii) eine Seite voll, die andere 0,5 · μ₁ — die ungünstigste Anordnung ist maßgebend",
+  "en": "(i) both sides μ₁(α) · s<sub>k</sub> · (ii) and (iii) one side full, the other 0.5 · μ₁ — the most unfavourable arrangement governs"
+ },
+ {
+  "id": "21-90",
+  "de": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/kombinationen\">→ Kombinationsregeln</a>",
+  "en": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/kombinationen\">→ Combination rules</a>"
+ },
+ {
+  "id": "21-91",
+  "de": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/psi\">→ Kombinationsbeiwerte ψ</a>",
+  "en": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/psi\">→ Combination factors ψ</a>"
+ },
+ {
+  "id": "21-92",
+  "de": "<a class=\"applink\" href=\"#/mauerwerk/bemessung/wand\">→ Wand mit n<sub>Ed</sub> nachweisen (Mauerwerk)</a>",
+  "en": "<a class=\"applink\" href=\"#/mauerwerk/bemessung/wand\">→ Check the wall with n<sub>Ed</sub> (masonry)</a>"
+ },
+ {
+  "id": "21-93",
+  "de": "<b>maßgebend: N<sub>Ed</sub> = 445,5 kN</b> mit Schnee als Leiteinwirkung — nicht unbedingt die größte Einzellast!",
+  "en": "<b>governing: N<sub>Ed</sub> = 445.5 kN</b> with snow as leading action — not necessarily the largest single load!"
+ },
+ {
+  "id": "21-94",
+  "de": "<b>ψ₀</b> verkleinert die <i>Begleiteinwirkungen</i> im GZT: Es ist unwahrscheinlich, dass Schnee, Wind und volle Nutzlast gleichzeitig ihren charakteristischen Wert erreichen.<br> <b>ψ₁</b> beschreibt den Wert, der häufig auftritt (z. B. für Schwingungen und Rissbreiten).<br> <b>ψ₂</b> beschreibt den Anteil, der praktisch immer vorhanden ist — maßgebend für Kriechen und Langzeitdurchbiegung. Darum ist ψ₂ für Schnee und Wind in Lagen bis 1000 m null: Im Mittel liegt dort kein Schnee und weht kein Sturm.",
+  "en": "<b>ψ₀</b> reduces the <i>accompanying actions</i> at ULS: it is unlikely that snow, wind and full imposed load reach their characteristic values at the same time.<br> <b>ψ₁</b> describes the frequent value (e.g. for vibrations and crack widths).<br> <b>ψ₂</b> describes the part that is practically always present — governing for creep and long-term deflection. That is why ψ₂ for snow and wind is zero at altitudes up to 1000 m: on average there is no snow and no storm there."
+ },
+ {
+  "id": "21-95",
+  "de": "<span class=\"st-n\">1</span><span>Charakteristische Werte am Stützenkopf</span>",
+  "en": "<span class=\"st-n\">1</span><span>Characteristic values at the column head</span>"
+ },
+ {
+  "id": "21-96",
+  "de": "<span class=\"st-n\">1</span><span>Gegeben</span>",
+  "en": "<span class=\"st-n\">1</span><span>Given</span>"
+ },
+ {
+  "id": "21-97",
+  "de": "<span class=\"st-n\">1</span><span>Geschwindigkeitsdruck (vereinfacht)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Peak velocity pressure (simplified)</span>"
+ },
+ {
+  "id": "21-98",
+  "de": "<span class=\"st-n\">1</span><span>Lasteinzugsbreite der Mittelwand</span>",
+  "en": "<span class=\"st-n\">1</span><span>Tributary width of the middle wall</span>"
+ },
+ {
+  "id": "21-99",
+  "de": "<span class=\"st-n\">1</span><span>Schneelast auf dem Boden</span>",
+  "en": "<span class=\"st-n\">1</span><span>Snow load on the ground</span>"
+ },
+ {
+  "id": "21-100",
+  "de": "<span class=\"st-n\">2</span><span>Bezugsmaß e</span>",
+  "en": "<span class=\"st-n\">2</span><span>Reference length e</span>"
+ },
+ {
+  "id": "21-101",
+  "de": "<span class=\"st-n\">2</span><span>Charakteristische Lasten am Wandfuß</span>",
+  "en": "<span class=\"st-n\">2</span><span>Characteristic loads at the wall base</span>"
+ },
+ {
+  "id": "21-102",
+  "de": "<span class=\"st-n\">2</span><span>GZT — jede veränderliche Einwirkung einmal als Leiteinwirkung (γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50)</span>",
+  "en": "<span class=\"st-n\">2</span><span>ULS — each variable action once as leading action (γ<sub>G</sub> = 1.35, γ<sub>Q</sub> = 1.50)</span>"
+ },
+ {
+  "id": "21-103",
+  "de": "<span class=\"st-n\">2</span><span>Größtes Feldmoment (STR): q nur im Feld, Kragarm nur ständig</span>",
+  "en": "<span class=\"st-n\">2</span><span>Maximum span moment (STR): q only in the span, cantilever permanent only</span>"
+ },
+ {
+  "id": "21-104",
+  "de": "<span class=\"st-n\">2</span><span>Verwehungsanteil μ<sub>w</sub></span>",
+  "en": "<span class=\"st-n\">2</span><span>Drift part μ<sub>w</sub></span>"
+ },
+ {
+  "id": "21-105",
+  "de": "<span class=\"st-n\">3</span><span>Abrutschen vom oberen Dach μ<sub>s</sub></span>",
+  "en": "<span class=\"st-n\">3</span><span>Sliding from the upper roof μ<sub>s</sub></span>"
+ },
+ {
+  "id": "21-106",
+  "de": "<span class=\"st-n\">3</span><span>Außendruckbeiwerte für A = 10,00 m²</span>",
+  "en": "<span class=\"st-n\">3</span><span>External pressure coefficients for A = 10.00 m²</span>"
+ },
+ {
+  "id": "21-107",
+  "de": "<span class=\"st-n\">3</span><span>Bemessungswert (GZT, STR)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Design value (ULS, STR)</span>"
+ },
+ {
+  "id": "21-108",
+  "de": "<span class=\"st-n\">3</span><span>GZG — charakteristische Kombination (irreversibel)</span>",
+  "en": "<span class=\"st-n\">3</span><span>SLS — characteristic combination (irreversible)</span>"
+ },
+ {
+  "id": "21-109",
+  "de": "<span class=\"st-n\">3</span><span>Stützmoment über B (STR): q auf dem Kragarm</span>",
+  "en": "<span class=\"st-n\">3</span><span>Support moment over B (STR): q on the cantilever</span>"
+ },
+ {
+  "id": "21-110",
+  "de": "<span class=\"st-n\">4</span><span>Abheben am Lager A (EQU): γ<sub>G,stb</sub> = 0,90 im Feld, γ<sub>G,dst</sub> = 1,10 und q auf dem Kragarm</span>",
+  "en": "<span class=\"st-n\">4</span><span>Uplift at support A (EQU): γ<sub>G,stb</sub> = 0.90 in the span, γ<sub>G,dst</sub> = 1.10 and q on the cantilever</span>"
+ },
+ {
+  "id": "21-111",
+  "de": "<span class=\"st-n\">4</span><span>Formbeiwert am Höhensprung</span>",
+  "en": "<span class=\"st-n\">4</span><span>Shape coefficient at the change in roof height</span>"
+ },
+ {
+  "id": "21-112",
+  "de": "<span class=\"st-n\">4</span><span>GZG — häufige Kombination (reversibel)</span>",
+  "en": "<span class=\"st-n\">4</span><span>SLS — frequent combination (reversible)</span>"
+ },
+ {
+  "id": "21-113",
+  "de": "<span class=\"st-n\">5</span><span>GZG — quasi-ständige Kombination (Langzeit)</span>",
+  "en": "<span class=\"st-n\">5</span><span>SLS — quasi-permanent combination (long-term)</span>"
+ },
+ {
+  "id": "21-114",
+  "de": "<span class=\"st-n\">5</span><span>Schneelasten</span>",
+  "en": "<span class=\"st-n\">5</span><span>Snow loads</span>"
+ },
+ {
+  "id": "21-115",
+  "de": "= A<sub>d</sub> / w<sub>Feld</sub>",
+  "en": "= A<sub>d</sub> / w<sub>span</sub>"
+ },
+ {
+  "id": "21-116",
+  "de": "= A<sub>d</sub>² / (2 · w<sub>Feld</sub>)",
+  "en": "= A<sub>d</sub>² / (2 · w<sub>span</sub>)"
+ },
+ {
+  "id": "21-117",
+  "de": "= w<sub>Feld</sub> · l/2 − w<sub>Krag</sub> · a²/(2l)",
+  "en": "= w<sub>span</sub> · l/2 − w<sub>cant</sub> · a²/(2l)"
+ },
+ {
+  "id": "21-118",
+  "de": "A — Geländehöhe über NN [m] · Zonen 1a und 2a: Werte der Zone 1 bzw. 2 (auch die Mindestwerte) × 1,25",
+  "en": "A — altitude above sea level [m] · zones 1a and 2a: values of zone 1 or 2 (also the minimum values) × 1.25"
+ },
+ {
+  "id": "21-119",
+  "de": "A, B, C — Seitenwände (vom Luv-Rand aus) · D — angeströmte Wand · E — Rückwand · Zwischenwerte linear interpolieren",
+  "en": "A, B, C — side walls (from the windward edge) · D — windward wall · E — leeward wall · interpolate intermediate values linearly"
+ },
+ {
+  "id": "21-120",
+  "de": "Abgehängte Decke",
+  "en": "Suspended ceiling"
+ },
+ {
+  "id": "21-121",
+  "de": "Am Höhensprung sammelt sich Schnee aus Verwehung und vom oberen Dach abrutschendem Schnee.",
+  "en": "At a change in roof height, snow accumulates from drifting and from snow sliding off the upper roof."
+ },
+ {
+  "id": "21-122",
+  "de": "Am Luv-Rand und an den Ecken ist der Sog am größten (F, A). Die Bereichsgrößen hängen von e = min(b; 2h) ab.",
+  "en": "Suction is largest at the windward edge and at the corners (F, A). The zone sizes depend on e = min(b; 2h)."
+ },
+ {
+  "id": "21-123",
+  "de": "Ansatz",
+  "en": "Approach"
+ },
+ {
+  "id": "21-124",
+  "de": "Anzahl Geschossdecken n",
+  "en": "Number of floors n"
+ },
+ {
+  "id": "21-125",
+  "de": "Außendruckbeiwerte c<sub>pe,10</sub> für senkrechte Wände (Rechteckgrundriss, Lasteinzugsfläche ≥ 10 m²):",
+  "en": "External pressure coefficients c<sub>pe,10</sub> for vertical walls (rectangular plan, loaded area ≥ 10 m²):"
+ },
+ {
+  "id": "21-126",
+  "de": "Außenputz mit WDVS",
+  "en": "External render with ETICS"
+ },
+ {
+  "id": "21-127",
+  "de": "Außergewöhnlich: E<sub>dA</sub> = Σ G<sub>k</sub> ⊕ A<sub>d</sub> ⊕ ψ<sub>1,1</sub> bzw. ψ<sub>2,1</sub>·Q<sub>k,1</sub> ⊕ Σ ψ<sub>2,i</sub>·Q<sub>k,i</sub>",
+  "en": "Accidental: E<sub>dA</sub> = Σ G<sub>k</sub> ⊕ A<sub>d</sub> ⊕ ψ<sub>1.1</sub> or ψ<sub>2.1</sub>·Q<sub>k,1</sub> ⊕ Σ ψ<sub>2,i</sub>·Q<sub>k,i</sub>"
+ },
+ {
+  "id": "21-128",
+  "de": "Baugrundsetzungen",
+  "en": "Ground settlements"
+ },
+ {
+  "id": "21-129",
+  "de": "Baustahl",
+  "en": "Structural steel"
+ },
+ {
+  "id": "21-130",
+  "de": "Beim Satteldach zusätzlich einseitige Verteilungen (halbe Last auf einer Seite) untersuchen. Verwehungen an Höhensprüngen und Aufbauten gesondert.",
+  "en": "For duopitch roofs additionally investigate one-sided distributions (half the load on one side). Drifts at changes in height and at roof superstructures separately."
+ },
+ {
+  "id": "21-131",
+  "de": "Beispiel 1: Innenstütze unter Dach und Bürodecke",
+  "en": "Example 1: interior column under roof and office floor"
+ },
+ {
+  "id": "21-132",
+  "de": "Beispiel 1: Kombinationen für eine Stütze",
+  "en": "Example 1: combinations for a column"
+ },
+ {
+  "id": "21-133",
+  "de": "Beispiel 2: Günstig und ungünstig — Träger mit Kragarm",
+  "en": "Example 2: favourable and unfavourable — beam with cantilever"
+ },
+ {
+  "id": "21-134",
+  "de": "Beispiel 2: Träger mit Kragarm — Lastanordnung für günstig und ungünstig",
+  "en": "Example 2: beam with cantilever — load arrangement for favourable and unfavourable"
+ },
+ {
+  "id": "21-135",
+  "de": "Beispiel Bürodecke: g<sub>k</sub> = 5,0 kN/m², q<sub>k</sub> = 2,0 kN/m² (Kat. B)<br> quasi-ständig: 5,0 + 0,3 · 2,0 = <b>5,6 kN/m²</b>&nbsp;&nbsp;·&nbsp;&nbsp;GZT: 1,35 · 5,0 + 1,5 · 2,0 = <b>9,75 kN/m²</b>",
+  "en": "Example office floor: g<sub>k</sub> = 5.0 kN/m², q<sub>k</sub> = 2.0 kN/m² (cat. B)<br> quasi-permanent: 5.0 + 0.3 · 2.0 = <b>5.6 kN/m²</b>&nbsp;&nbsp;·&nbsp;&nbsp;ULS: 1.35 · 5.0 + 1.5 · 2.0 = <b>9.75 kN/m²</b>"
+ },
+ {
+  "id": "21-136",
+  "de": "Beispiel Wohnung mit leichten Trennwänden (≤ 3 kN/m): q<sub>k</sub> = 1,5 + 0,8 = <b>2,3 kN/m²</b>",
+  "en": "Example flat with light partitions (≤ 3 kN/m): q<sub>k</sub> = 1.5 + 0.8 = <b>2.3 kN/m²</b>"
+ },
+ {
+  "id": "21-137",
+  "de": "Beispiel: Stahlbetondecke d = 20 cm → 25 · 0,20 = 5,0 kN/m²",
+  "en": "Example: reinforced concrete slab d = 20 cm → 25 · 0.20 = 5.0 kN/m²"
+ },
+ {
+  "id": "21-138",
+  "de": "Beton: + 1 kN/m³ für üblichen Bewehrungsgehalt, + 1 kN/m³ im Frischzustand. Holz: γ ≈ ρ<sub>mean</sub> · g (EN 338 bzw. EN 14080), z. B. C24 mit ρ<sub>mean</sub> = 420 kg/m³ → 4,2 kN/m³.",
+  "en": "Concrete: + 1 kN/m³ for normal reinforcement content, + 1 kN/m³ when fresh. Timber: γ ≈ ρ<sub>mean</sub> · g (EN 338 or EN 14080), e.g. C24 with ρ<sub>mean</sub> = 420 kg/m³ → 4.2 kN/m³."
+ },
+ {
+  "id": "21-139",
+  "de": "Breite oberes Dach b<sub>1</sub> [m]",
+  "en": "Width of the upper roof b<sub>1</sub> [m]"
+ },
+ {
+  "id": "21-140",
+  "de": "Breite quer zum Wind b [m]",
+  "en": "Width perpendicular to the wind b [m]"
+ },
+ {
+  "id": "21-141",
+  "de": "Breite unteres Dach b<sub>2</sub> [m]",
+  "en": "Width of the lower roof b<sub>2</sub> [m]"
+ },
+ {
+  "id": "21-142",
+  "de": "Brettschichtholz GL24h / GL28h",
+  "en": "Glulam GL24h / GL28h"
+ },
+ {
+  "id": "21-143",
+  "de": "Büroflächen, Flure in Bürogebäuden, Arztpraxen ohne schweres Gerät",
+  "en": "Office areas, corridors in office buildings, medical practices without heavy equipment"
+ },
+ {
+  "id": "21-144",
+  "de": "Dach g<sub>k</sub> [kN/m²]",
+  "en": "Roof g<sub>k</sub> [kN/m²]"
+ },
+ {
+  "id": "21-145",
+  "de": "Dachneigung α",
+  "en": "Roof pitch α"
+ },
+ {
+  "id": "21-146",
+  "de": "Dachneigung α [°]",
+  "en": "Roof pitch α [°]"
+ },
+ {
+  "id": "21-147",
+  "de": "Dachnutzlast H wird nicht mit Schnee oder Wind kombiniert. Kategorie F: Q_k als Achslast auf zwei Aufstandsflächen.",
+  "en": "Roof imposed load H is not combined with snow or wind. Category F: Q_k as axle load on two contact areas."
+ },
+ {
+  "id": "21-148",
+  "de": "Decke g<sub>k</sub> [kN/m²] (inkl. Aufbau)",
+  "en": "Floor g<sub>k</sub> [kN/m²] (incl. build-up)"
+ },
+ {
+  "id": "21-149",
+  "de": "Deckenaufbau berechnen",
+  "en": "Calculate a floor build-up"
+ },
+ {
+  "id": "21-150",
+  "de": "Dicke [cm]",
+  "en": "Thickness [cm]"
+ },
+ {
+  "id": "21-151",
+  "de": "Die Durchlaufwirkung erhöht die Last auf der ersten Innenstütze/-wand und entlastet die Endauflager. Bei Mauerwerk gehen die Wandeigenlasten aller Geschosse darüber ein.",
+  "en": "Continuity increases the load on the first interior column/wall and relieves the end supports. For masonry the self-weights of all walls above are added."
+ },
+ {
+  "id": "21-152",
+  "de": "Die Nutzlast wird nur dort angesetzt, wo sie die gesuchte Größe vergrößert. Für das Abheben (EQU) wirkt die ständige Last im Feld stabilisierend (0,9), auf dem Kragarm destabilisierend (1,1).",
+  "en": "The imposed load is applied only where it increases the quantity sought. For uplift (EQU) the permanent load in the span acts stabilising (0.9), on the cantilever destabilising (1.1)."
+ },
+ {
+  "id": "21-153",
+  "de": "Durchlaufwirkung",
+  "en": "Continuity"
+ },
+ {
+  "id": "21-154",
+  "de": "Durchlaufwirkung (Zweifeldträger, Gleichlast): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = −2,844 m² je kN/m²",
+  "en": "Continuity (two-span beam, uniform load): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = −2.844 m² per kN/m²"
+ },
+ {
+  "id": "21-155",
+  "de": "Dächer und Parkflächen",
+  "en": "Roofs and parking areas"
+ },
+ {
+  "id": "21-156",
+  "de": "EPS-Dämmung (Polystyrol, geschäumt)",
+  "en": "EPS insulation (expanded polystyrene)"
+ },
+ {
+  "id": "21-157",
+  "de": "Einfeldträger mit Kragarm",
+  "en": "Simply supported beam with cantilever"
+ },
+ {
+  "id": "21-158",
+  "de": "Einfeldträger-Annahme: halbe Spannweiten links und rechts",
+  "en": "Simple-beam assumption: half the spans to the left and right"
+ },
+ {
+  "id": "21-159",
+  "de": "Einzelhandelsgeschäfte und Warenhäuser",
+  "en": "Retail shops and department stores"
+ },
+ {
+  "id": "21-160",
+  "de": "Endwand unter einachsig gespannter Decke",
+  "en": "End wall under a one-way spanning slab"
+ },
+ {
+  "id": "21-161",
+  "de": "F<sub>s</sub> = s · b · sin α (b — Abstand der Halter)",
+  "en": "F<sub>s</sub> = s · b · sin α (b — spacing of the brackets)"
+ },
+ {
+  "id": "21-162",
+  "de": "Fabriken und Werkstätten mit leichtem Betrieb, Großviehställe",
+  "en": "Factories and workshops with light operation, large livestock stables"
+ },
+ {
+  "id": "21-163",
+  "de": "Fabriken und Werkstätten mit mittlerem oder schwerem Betrieb",
+  "en": "Factories and workshops with medium or heavy operation"
+ },
+ {
+  "id": "21-164",
+  "de": "Flachdach",
+  "en": "Flat roof"
+ },
+ {
+  "id": "21-165",
+  "de": "Flachdach (α ≤ 5°) mit scharfkantigem Traufbereich, EN 1991-1-4 Tab. 7.2. Attika, abgerundete oder abgeschrägte Traufen verringern den Sog in F bis H.",
+  "en": "Flat roof (α ≤ 5°) with sharp eaves, EN 1991-1-4 Tab. 7.2. Parapets, curved or mansard eaves reduce the suction in F to H."
+ },
+ {
+  "id": "21-166",
+  "de": "Flachdach, kleine Lasteinzugsflächen, Innendruck",
+  "en": "Flat roof, small loaded areas, internal pressure"
+ },
+ {
+  "id": "21-167",
+  "de": "Flure und Küchen in Krankenhäusern, Hotels, Altenheimen; Kellerräume in Wohngebäuden",
+  "en": "Corridors and kitchens in hospitals, hotels, care homes; basement rooms in residential buildings"
+ },
+ {
+  "id": "21-168",
+  "de": "Flächen mit Tischen: Schulräume, Cafés, Restaurants, Lesesäle",
+  "en": "Areas with tables: classrooms, cafés, restaurants, reading rooms"
+ },
+ {
+  "id": "21-169",
+  "de": "Flächen mit fester Bestuhlung: Kirchen, Theater, Kinos, Hörsäle",
+  "en": "Areas with fixed seats: churches, theatres, cinemas, lecture halls"
+ },
+ {
+  "id": "21-170",
+  "de": "Flächenlast",
+  "en": "Area load"
+ },
+ {
+  "id": "21-171",
+  "de": "Flächenlast einer Schicht: g<sub>k</sub> = γ · d&nbsp;&nbsp; [kN/m²]",
+  "en": "Area load of a layer: g<sub>k</sub> = γ · d&nbsp;&nbsp; [kN/m²]"
+ },
+ {
+  "id": "21-172",
+  "de": "Formbeiwert Schnee",
+  "en": "Snow shape coefficient"
+ },
+ {
+  "id": "21-173",
+  "de": "Formel",
+  "en": "Formula"
+ },
+ {
+  "id": "21-174",
+  "de": "Für Gebäude bis 25 m Höhe darf q über die ganze Höhe konstant angesetzt werden:",
+  "en": "For buildings up to 25 m high q may be taken as constant over the whole height:"
+ },
+ {
+  "id": "21-175",
+  "de": "G<sub>k</sub> = 180 kN (Eigengewicht) · Q<sub>k,N</sub> = 90 kN (Nutzlast (Kat. B)) · Q<sub>k,S</sub> = 60 kN (Schnee, Ort bis NN + 1000 m) · Q<sub>k,W</sub> = 20 kN (Wind, Druck aufs Dach)",
+  "en": "G<sub>k</sub> = 180 kN (self-weight) · Q<sub>k,N</sub> = 90 kN (imposed load (cat. B)) · Q<sub>k,S</sub> = 60 kN (snow, site up to 1000 m a.s.l.) · Q<sub>k,W</sub> = 20 kN (wind, pressure on the roof)"
+ },
+ {
+  "id": "21-176",
+  "de": "Gebrauchstauglichkeit (GZG)",
+  "en": "Serviceability (SLS)"
+ },
+ {
+  "id": "21-177",
+  "de": "Gebäude 20,00 × 12,00 m, h = 8,00 m",
+  "en": "Building 20.00 × 12.00 m, h = 8.00 m"
+ },
+ {
+  "id": "21-178",
+  "de": "Gebäudehöhe h [m]",
+  "en": "Building height h [m]"
+ },
+ {
+  "id": "21-179",
+  "de": "Geländehöhe A [m]",
+  "en": "Altitude A [m]"
+ },
+ {
+  "id": "21-180",
+  "de": "Geschwindigkeitsdruck bestimmen",
+  "en": "Determine the peak velocity pressure"
+ },
+ {
+  "id": "21-181",
+  "de": "Geschwindigkeitsdruck — vereinfachtes Verfahren (DIN EN 1991-1-4/NA, Tab. NA.B.3)",
+  "en": "Peak velocity pressure — simplified method (DIN EN 1991-1-4/NA, Tab. NA.B.3)"
+ },
+ {
+  "id": "21-182",
+  "de": "Glas (Scheiben)",
+  "en": "Glass (panes)"
+ },
+ {
+  "id": "21-183",
+  "de": "Grenze aus der Schneehöhe: μ<sub>w</sub> ≤ γ · h / s<sub>k</sub> = 2,0 · 3,00 / 0,890 = 6,740 · Grenzen 0,8 ≤ μ<sub>w</sub> ≤ 2,4 → μ<sub>w</sub> = 2,400",
+  "en": "Limit from the snow depth: μ<sub>w</sub> ≤ γ · h / s<sub>k</sub> = 2.0 · 3.00 / 0.890 = 6.740 · limits 0.8 ≤ μ<sub>w</sub> ≤ 2.4 → μ<sub>w</sub> = 2.400"
+ },
+ {
+  "id": "21-184",
+  "de": "Grenzzustand der Tragfähigkeit (GZT) — EN 1990",
+  "en": "Ultimate limit state (ULS) — EN 1990"
+ },
+ {
+  "id": "21-185",
+  "de": "Gussasphalt",
+  "en": "Mastic asphalt"
+ },
+ {
+  "id": "21-186",
+  "de": "Holzwerkstoffe: OSB, Spanplatte",
+  "en": "Wood-based panels: OSB, chipboard"
+ },
+ {
+  "id": "21-187",
+  "de": "Höhe des Sprungs h [m]",
+  "en": "Height of the step h [m]"
+ },
+ {
+  "id": "21-188",
+  "de": "Höhensprung h = 3,00 m, Zone 2",
+  "en": "Change in roof height h = 3.00 m, zone 2"
+ },
+ {
+  "id": "21-189",
+  "de": "Höhensprung, Aufbauten, Brüstungen",
+  "en": "Changes in height, roof superstructures, parapets"
+ },
+ {
+  "id": "21-190",
+  "de": "Innenputz je Seite",
+  "en": "Internal plaster per side"
+ },
+ {
+  "id": "21-191",
+  "de": "Innenwand im Geschossbau",
+  "en": "Internal wall in multi-storey buildings"
+ },
+ {
+  "id": "21-192",
+  "de": "Innenwand unter 3 Decken + Dach",
+  "en": "Internal wall under 3 floors + roof"
+ },
+ {
+  "id": "21-193",
+  "de": "Jede Decke gibt ihre Auflagerkraft an die Wand darunter ab; im untersten Geschoss summieren sich alle Decken, das Dach und die Wandeigenlasten.",
+  "en": "Each floor transfers its support reaction to the wall below; in the lowest storey all floors, the roof and the wall self-weights add up."
+ },
+ {
+  "id": "21-194",
+  "de": "Kalk-, Kalkgips- und Gipssandputz",
+  "en": "Lime, lime-gypsum and gypsum-sand plaster"
+ },
+ {
+  "id": "21-195",
+  "de": "Kalksandstein-Mauerwerk (RDK 1,8)",
+  "en": "Calcium silicate masonry (density class 1.8)"
+ },
+ {
+  "id": "21-196",
+  "de": "Kalkzementmörtel",
+  "en": "Lime-cement mortar"
+ },
+ {
+  "id": "21-197",
+  "de": "Kombinationsbeiwerte ψ<sub>0</sub> / ψ<sub>1</sub> / ψ<sub>2</sub>: Nutzlast 0,7 / 0,5 / 0,3 · Schnee 0,5 / 0,2 / 0 · Wind 0,6 / 0,2 / 0",
+  "en": "Combination factors ψ<sub>0</sub> / ψ<sub>1</sub> / ψ<sub>2</sub>: imposed load 0.7 / 0.5 / 0.3 · snow 0.5 / 0.2 / 0 · wind 0.6 / 0.2 / 0"
+ },
+ {
+  "id": "21-198",
+  "de": "Kombinationsbeiwerte — DIN EN 1990/NA, Tab. NA.A.1.1",
+  "en": "Combination factors — DIN EN 1990/NA, Tab. NA.A.1.1"
+ },
+ {
+  "id": "21-199",
+  "de": "Kupfer",
+  "en": "Copper"
+ },
+ {
+  "id": "21-200",
+  "de": "Lagesicherheit (EQU, z. B. Abheben, Kippen eines starren Körpers) — DIN EN 1990/NA, Tab. NA.A.1.2(A):",
+  "en": "Static equilibrium (EQU, e.g. uplift, overturning of a rigid body) — DIN EN 1990/NA, Tab. NA.A.1.2(A):"
+ },
+ {
+  "id": "21-201",
+  "de": "Langzeit (Kriechen, Aussehen)",
+  "en": "Long-term (creep, appearance)"
+ },
+ {
+  "id": "21-202",
+  "de": "Lastanordnungen und Sonderfälle",
+  "en": "Load arrangements and special cases"
+ },
+ {
+  "id": "21-203",
+  "de": "Lastanteil",
+  "en": "Load share"
+ },
+ {
+  "id": "21-204",
+  "de": "Lasteinzugsfläche A [m²]",
+  "en": "Loaded area A [m²]"
+ },
+ {
+  "id": "21-205",
+  "de": "Lasten werden von oben nach unten „eingesammelt“: Jedes Bauteil gibt seine Auflagerkräfte an das tragende Bauteil darunter weiter. Für eine Wand rechnet man mit Linienlasten in kN/m, für eine Stütze mit Einzellasten aus der Einflussfläche.",
+  "en": "Loads are “collected” from top to bottom: each element passes its support reactions on to the supporting element below. For a wall one works with line loads in kN/m, for a column with point loads from the tributary area."
+ },
+ {
+  "id": "21-206",
+  "de": "Lastfallkombination 1: Nutzlast (Kat. B) führend, Schnee und Wind mit ψ<sub>0</sub>",
+  "en": "Load combination 1: imposed load (cat. B) leading, snow and wind with ψ<sub>0</sub>"
+ },
+ {
+  "id": "21-207",
+  "de": "Lastfallkombination 2: Schnee führend, Nutzlast (Kat. B) und Wind mit ψ<sub>0</sub>",
+  "en": "Load combination 2: snow leading, imposed load (cat. B) and wind with ψ<sub>0</sub>"
+ },
+ {
+  "id": "21-208",
+  "de": "Lastfallkombination 3: Wind führend, Nutzlast (Kat. B) und Schnee mit ψ<sub>0</sub>",
+  "en": "Load combination 3: wind leading, imposed load (cat. B) and snow with ψ<sub>0</sub>"
+ },
+ {
+  "id": "21-209",
+  "de": "Lastpfad",
+  "en": "Load path"
+ },
+ {
+  "id": "21-210",
+  "de": "Lastweiterleitung durch die Geschosse",
+  "en": "Load transfer through the storeys"
+ },
+ {
+  "id": "21-211",
+  "de": "Lastweiterleitung — vom Dach bis zum Fundament",
+  "en": "Load transfer — from the roof to the foundation"
+ },
+ {
+  "id": "21-212",
+  "de": "Laubholz D30 / D40",
+  "en": "Hardwood D30 / D40"
+ },
+ {
+  "id": "21-213",
+  "de": "Leichtbeton (Rohdichteklasse 1,0 … 2,0)",
+  "en": "Lightweight concrete (density class 1.0 … 2.0)"
+ }
+]

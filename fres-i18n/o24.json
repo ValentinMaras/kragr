@@ -1,0 +1,910 @@
+{
+"24-0": {
+"fr": "Excentricité :&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; longueur comprimée :&nbsp; l<sub>c</sub> = l (e ≤ l/6) ou l<sub>c</sub> = 3 · (l/2 − e)<br> f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> ≤ 0,065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br> V<sub>Ed</sub> ≤ V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub>&nbsp;&nbsp;&nbsp; f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub>",
+"es": "Excentricidad:&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; longitud comprimida:&nbsp; l<sub>c</sub> = l (e ≤ l/6) o l<sub>c</sub> = 3 · (l/2 − e)<br> f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> ≤ 0,065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br> V<sub>Ed</sub> ≤ V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub>&nbsp;&nbsp;&nbsp; f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub>"
+},
+"24-1": {
+"fr": "Extrait ; en outre épaisseurs minimales selon le type de mur et absence de flexion prévue (p. ex. poussée des terres → mur de sous-sol).",
+"es": "Extracto; además, espesores mínimos según el tipo de muro y ausencia de flexión prevista (p. ej. empuje de tierras → muro de sótano)."
+},
+"24-2": {
+"fr": "Cote extérieure",
+"es": "Medida exterior"
+},
+"24-3": {
+"fr": "Cote extérieure (pilier, tronçon de mur) : n = 11 → 137,5 − 1 = <b>136,5 cm</b>",
+"es": "Medida exterior (pilar, tramo de muro): n = 11 → 137,5 − 1 = <b>136,5 cm</b>"
+},
+"24-4": {
+"fr": "Cote extérieure (n = 4)",
+"es": "Medida exterior (n = 4)"
+},
+"24-5": {
+"fr": "Cote de coordination = n · 12,5 cm&nbsp;&nbsp;&nbsp; (n = nombre de modules)<br> Cote extérieure (pilier, longueur de mur entre deux extrémités) :&nbsp; A = n · 12,5 − 1 cm<br> Cote d'ouverture (fenêtre, porte, niche) :&nbsp; Ö = n · 12,5 + 1 cm<br> Cote de raccordement (saillie, mur contre mur) :&nbsp; V = n · 12,5 cm",
+"es": "Medida nominal = n · 12,5 cm&nbsp;&nbsp;&nbsp; (n = número de módulos)<br> Medida exterior (pilar, longitud de muro entre dos extremos):&nbsp; A = n · 12,5 − 1 cm<br> Medida de hueco (ventana, puerta, nicho):&nbsp; Ö = n · 12,5 + 1 cm<br> Medida de encuentro (resalto, muro contra muro):&nbsp; V = n · 12,5 cm"
+},
+"24-6": {
+"fr": "Exemple",
+"es": "Ejemplo"
+},
+"24-7": {
+"fr": "Béton (bloc creux, bloc plein)",
+"es": "Hormigón (bloque hueco, pieza maciza)"
+},
+"24-8": {
+"fr": "Appareil en boutisses",
+"es": "Aparejo a tizón"
+},
+"24-9": {
+"fr": "Appareil anglais",
+"es": "Aparejo inglés"
+},
+"24-10": {
+"fr": "Résistance caractéristique en compression f<sub>k</sub> (EN 1996-1-1, 3.6.1.2)",
+"es": "Resistencia característica a compresión f<sub>k</sub> (EN 1996-1-1, 3.6.1.2)"
+},
+"24-11": {
+"fr": "DF = format mince (Dünnformat). Tous les formats reposent sur le huitième de mètre : élément de 11,5 cm + joint de 1 cm = 12,5 cm.",
+"es": "DF = formato delgado (Dünnformat). Todos los formatos se basan en el octavo de metro: pieza de 11,5 cm + junta de 1 cm = 12,5 cm."
+},
+"24-12": {
+"fr": "Flèche du plancher →",
+"es": "Flecha del forjado →"
+},
+"24-13": {
+"fr": "Portée du plancher l<sub>f</sub> = 5,00 m ≤ 6,0 m ✓",
+"es": "Luz del forjado l<sub>f</sub> = 5,00 m ≤ 6,0 m ✓"
+},
+"24-14": {
+"fr": "Portée du plancher l<sub>f</sub> [m]",
+"es": "Luz del forjado l<sub>f</sub> [m]"
+},
+"24-15": {
+"fr": "Le 1 cm correspond à un joint vertical : un tronçon de mur a un joint de moins que de modules, une ouverture un de plus.",
+"es": "El 1 cm corresponde a una llaga: un tramo de muro tiene una junta menos que módulos y un hueco una más."
+},
+"24-16": {
+"fr": "Le plancher en béton armé encastre partiellement le mur en tête et en pied — c'est pourquoi ρ<sub>2</sub> &lt; 1. Pour les murs épais, l'encastrement est relativement plus faible.",
+"es": "El forjado de hormigón armado empotra parcialmente el muro en cabeza y pie — por eso ρ<sub>2</sub> &lt; 1. En muros gruesos el empotramiento es relativamente menor."
+},
+"24-17": {
+"fr": "Les joints verticaux de deux assises doivent être décalés de ü afin que l'appareil répartisse les charges et puisse transmettre la traction dans le sens longitudinal.",
+"es": "Las llagas de dos hiladas deben estar desplazadas ü para que el aparejo reparta las cargas y pueda transmitir tracción en sentido longitudinal."
+},
+"24-18": {
+"fr": "Le nombre après M est la résistance en compression en N/mm². Joints verticaux avec mortier courant ≈ 10 mm.",
+"es": "El número tras M es la resistencia a compresión en N/mm². Llagas con mortero de uso general ≈ 10 mm."
+},
+"24-19": {
+"fr": "Mortier de joint mince DM",
+"es": "Mortero de junta fina DM"
+},
+"24-20": {
+"fr": "Utilisation",
+"es": "Uso"
+},
+"24-21": {
+"fr": "Charge concentrée sur 200 × 175 mm",
+"es": "Carga concentrada sobre 200 × 175 mm"
+},
+"24-22": {
+"fr": "Appui d'extrémité (mur extérieur)",
+"es": "Apoyo extremo (muro exterior)"
+},
+"24-23": {
+"fr": "Coefficient de fluage final φ<sub>∞</sub> = 1,5 · retrait final ε<sub>∞</sub> = −0,2 mm/m · α<sub>t</sub> = 8 · 10⁻⁶ /K",
+"es": "Coeficiente de fluencia final φ<sub>∞</sub> = 1,5 · retracción final ε<sub>∞</sub> = −0,2 mm/m · α<sub>t</sub> = 8 · 10⁻⁶ /K"
+},
+"24-24": {
+"fr": "Classe de résistance",
+"es": "Clase de resistencia"
+},
+"24-25": {
+"fr": "Classes de résistance (usuelles)",
+"es": "Clases de resistencia (habituales)"
+},
+"24-26": {
+"fr": "Pour V<sub>Rd</sub>, prendre l'effort normal le plus faible ; pour la compression de bord, le plus grand. L'AN allemand ajoute la rupture par traction de l'élément et l'élancement en cisaillement — ici, les recommandations de l'EN.",
+"es": "Para V<sub>Rd</sub> se adopta el axil más pequeño; para la compresión en el borde, el mayor. El AN alemán añade el fallo por tracción de la pieza y la esbeltez a cortante — aquí, las recomendaciones de la EN."
+},
+"24-27": {
+"fr": "Hauteur du bâtiment au-dessus du terrain",
+"es": "Altura del edificio sobre el terreno"
+},
+"24-28": {
+"fr": "Surcharge à côté du mur",
+"es": "Sobrecarga junto al muro"
+},
+"24-29": {
+"fr": "Surcharge q<sub>k</sub> [kN/m²]",
+"es": "Sobrecarga q<sub>k</sub> [kN/m²]"
+},
+"24-30": {
+"fr": "Limite 0,065 · f<sub>b</sub> = 1,625 N/mm² → f<sub>vk</sub> = 0,344 N/mm²",
+"es": "Límite 0,065 · f<sub>b</sub> = 1,625 N/mm² → f<sub>vk</sub> = 0,344 N/mm²"
+},
+"24-31": {
+"fr": "Limite 0,9 · a/t = 0,771 → Φ<sub>1</sub> = 0,767",
+"es": "Límite 0,9 · a/t = 0,771 → Φ<sub>1</sub> = 0,767"
+},
+"24-32": {
+"fr": "Limite h<sub>ef</sub>/t ≤ 27 : respectée ✓",
+"es": "Límite h<sub>ef</sub>/t ≤ 27: cumplido ✓"
+},
+"24-33": {
+"fr": "Limites 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2h<sub>c</sub>) ; 1,5) = 1,310 → β = 1,310",
+"es": "Límites 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2h<sub>c</sub>); 1,5) = 1,310 → β = 1,310"
+},
+"24-34": {
+"fr": "Résistance initiale au cisaillement f<sub>vk0</sub> [N/mm²] selon le tableau 3.4 (recommandation). Joints verticaux non remplis : moitié de la valeur.",
+"es": "Resistencia inicial a cortante f<sub>vk0</sub> [N/mm²] según la tabla 3.4 (recomendación). Llagas sin mortero: la mitad del valor."
+},
+"24-35": {
+"fr": "Maintien",
+"es": "Sujeción"
+},
+"24-36": {
+"fr": "Brique à perforations verticales (gr. 2)",
+"es": "Ladrillo perforado vertical (gr. 2)"
+},
+"24-37": {
+"fr": "Brique à perforations verticales, bloc perforé silico-calcaire",
+"es": "Ladrillo perforado vertical, pieza perforada silicocalcárea"
+},
+"24-38": {
+"fr": "Hauteur H [cm]",
+"es": "Altura H [cm]"
+},
+"24-39": {
+"fr": "En Allemagne, les valeurs f<sub>k</sub> figurent dans des tableaux de l'AN (par type d'élément, classe de résistance et mortier). La formule avec les valeurs recommandées montre de quoi dépend f<sub>k</sub> — pour le dimensionnement, utiliser le tableau de l'AN ou l'agrément technique.",
+"es": "En Alemania, los valores f<sub>k</sub> figuran en tablas del AN (según tipo de pieza, clase de resistencia y mortero). La fórmula con los valores recomendados muestra de qué depende f<sub>k</sub> — para el dimensionamiento úsese la tabla del AN o la aprobación técnica."
+},
+"24-40": {
+"fr": "Les formules de l'EN 1996-1-1 utilisent f<sub>b</sub> (résistance normalisée en compression de l'élément) ; l'AN allemand calcule avec f<sub>st</sub>.",
+"es": "Las fórmulas de la EN 1996-1-1 emplean f<sub>b</sub> (resistencia a compresión normalizada de la pieza); el AN alemán calcula con f<sub>st</sub>."
+},
+"24-41": {
+"fr": "K (mortier de joint mince)",
+"es": "K (mortero de junta fina)"
+},
+"24-42": {
+"fr": "K (mortier courant)",
+"es": "K (mortero de uso general)"
+},
+"24-43": {
+"fr": "K = 0,80 pour silico-calcaire, élément plein/bloc (gr. 1) (tab. 3.3, recommandation)",
+"es": "K = 0,80 para silicocalcáreo, pieza maciza/bloque (gr. 1) (tabla 3.3, recomendación)"
+},
+"24-44": {
+"fr": "Silico-calcaire",
+"es": "Silicocalcáreo"
+},
+"24-45": {
+"fr": "Silico-calcaire (élément plein, perforé, bloc, à joints minces)",
+"es": "Silicocalcáreo (pieza maciza, perforada, bloque, rectificada)"
+},
+"24-46": {
+"fr": "Silico-calcaire, béton, béton cellulaire autoclavé",
+"es": "Silicocalcáreo, hormigón, hormigón celular curado en autoclave"
+},
+"24-47": {
+"fr": "Silico-calcaire, élément perforé (gr. 2)",
+"es": "Silicocalcáreo, pieza perforada (gr. 2)"
+},
+"24-48": {
+"fr": "Silico-calcaire, élément plein/bloc (gr. 1)",
+"es": "Silicocalcáreo, pieza maciza/bloque (gr. 1)"
+},
+"24-49": {
+"fr": "Silico-calcaire, élément plein/bloc (gr. 1), mortier de joint mince",
+"es": "Silicocalcáreo, pieza maciza/bloque (gr. 1), mortero de junta fina"
+},
+"24-50": {
+"fr": "Plancher haut du sous-sol",
+"es": "Forjado de sótano"
+},
+"24-51": {
+"fr": "Mur de sous-sol avec poussée des terres (DIN EN 1996-3, 4.5)",
+"es": "Muro de sótano con empuje de tierras (DIN EN 1996-3, 4.5)"
+},
+"24-52": {
+"fr": "Vérifier le mur de sous-sol",
+"es": "Comprobar el muro de sótano"
+},
+"24-53": {
+"fr": "Mur de sous-sol sans vérification explicite à la flexion",
+"es": "Muro de sótano sin comprobación explícita a flexión"
+},
+"24-54": {
+"fr": "Calculer la hauteur efficace",
+"es": "Calcular la altura efectiva"
+},
+"24-55": {
+"fr": "Hauteur efficace h<sub>ef</sub> = ρ<sub>n</sub> · h",
+"es": "Altura efectiva h<sub>ef</sub> = ρ<sub>n</sub> · h"
+},
+"24-56": {
+"fr": "Voile console (libre en tête)",
+"es": "Muro en voladizo (libre en cabeza)"
+},
+"24-57": {
+"fr": "Appareil anglais croisé",
+"es": "Aparejo inglés cruzado"
+},
+"24-58": {
+"fr": "Coefficient de fluage φ<sub>∞</sub>",
+"es": "Coeficiente de fluencia φ<sub>∞</sub>"
+},
+"24-59": {
+"fr": "Symbole",
+"es": "Símbolo"
+},
+"24-60": {
+"fr": "Position",
+"es": "Posición"
+},
+"24-61": {
+"fr": "Joint horizontal",
+"es": "Tendel"
+},
+"24-62": {
+"fr": "Brique à perforations horizontales",
+"es": "Ladrillo de perforación horizontal"
+},
+"24-63": {
+"fr": "Béton léger",
+"es": "Hormigón ligero"
+},
+"24-64": {
+"fr": "Béton léger (bloc creux, bloc plein, bloc massif)",
+"es": "Hormigón ligero (bloque hueco, pieza maciza, bloque macizo)"
+},
+"24-65": {
+"fr": "Béton léger, élément plein (gr. 1)",
+"es": "Hormigón ligero, pieza maciza (gr. 1)"
+},
+"24-66": {
+"fr": "Mortier léger LM 21 / LM 36",
+"es": "Mortero ligero LM 21 / LM 36"
+},
+"24-67": {
+"fr": "Perforation",
+"es": "Perforación"
+},
+"24-68": {
+"fr": "Longueur L [cm]",
+"es": "Longitud L [cm]"
+},
+"24-69": {
+"fr": "Assises de panneresses et de boutisses en alternance",
+"es": "Hiladas alternas de soga y tizón"
+},
+"24-70": {
+"fr": "Appareil en panneresses",
+"es": "Aparejo a soga"
+},
+"24-71": {
+"fr": "Mortier de maçonnerie (DIN EN 998-2, DIN 20000-412)",
+"es": "Mortero de fábrica (DIN EN 998-2, DIN 20000-412)"
+},
+"24-72": {
+"fr": "La maçonnerie ne peut guère reprendre de traction par flexion. La charge verticale comprime le mur au point de former, entre le plancher du sous-sol et la dalle de fond, une voûte de compression qui reprend la poussée des terres. Une charge verticale trop faible — par exemple sous une fenêtre ou avec une toiture légère — est le cas critique.",
+"es": "La fábrica apenas puede resistir tracción por flexión. La carga vertical comprime el muro tanto que entre el forjado de sótano y la solera se forma un arco de compresión que transmite el empuje de tierras. Una carga vertical demasiado baja — por ejemplo bajo una ventana o con una cubierta ligera — es el caso crítico."
+},
+"24-73": {
+"fr": "Brique",
+"es": "Ladrillo"
+},
+"24-74": {
+"fr": "Brique (pleine, à perforations verticales, à joints minces)",
+"es": "Ladrillo (macizo, perforado vertical, rectificado)"
+},
+"24-75": {
+"fr": "Vérifier la cote",
+"es": "Comprobar la medida"
+},
+"24-76": {
+"fr": "Coordination modulaire pour 136,5 cm",
+"es": "Coordinación modular para 136,5 cm"
+},
+"24-77": {
+"fr": "Charge verticale minimale :&nbsp; n<sub>Ed,min</sub> ≥ ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t)<br> β = 20 (b<sub>c</sub> ≥ 2h)&nbsp;&nbsp; β = 60 − 20 · b<sub>c</sub>/h (h &lt; b<sub>c</sub> &lt; 2h)&nbsp;&nbsp; β = 40 (b<sub>c</sub> ≤ h)<br> Charge verticale maximale :&nbsp; n<sub>Ed,max</sub> ≤ t · f<sub>d</sub> / 3",
+"es": "Carga vertical mínima:&nbsp; n<sub>Ed,min</sub> ≥ ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t)<br> β = 20 (b<sub>c</sub> ≥ 2h)&nbsp;&nbsp; β = 60 − 20 · b<sub>c</sub>/h (h &lt; b<sub>c</sub> &lt; 2h)&nbsp;&nbsp; β = 40 (b<sub>c</sub> ≤ h)<br> Carga vertical máxima:&nbsp; n<sub>Ed,max</sub> ≤ t · f<sub>d</sub> / 3"
+},
+"24-78": {
+"fr": "Mortier",
+"es": "Mortero"
+},
+"24-79": {
+"fr": "N<sub>Ed</sub> / N<sub>Rd</sub> = 300,0 / 469,3 = 0,639 <b class=\"ok-t\">✓ vérifié</b>",
+"es": "N<sub>Ed</sub> / N<sub>Rd</sub> = 300,0 / 469,3 = 0,639 <b class=\"ok-t\">✓ cumple</b>"
+},
+"24-80": {
+"fr": "N<sub>Ed</sub> [kN] sur la longueur l",
+"es": "N<sub>Ed</sub> [kN] sobre la longitud l"
+},
+"24-81": {
+"fr": "N<sub>Ed</sub> ≤ N<sub>Rd</sub> = Φ · f<sub>d</sub> · A&nbsp;&nbsp;&nbsp; Φ = min(Φ<sub>1</sub> ; Φ<sub>2</sub>)<br> Mi-hauteur du mur :&nbsp; Φ<sub>2</sub> = 0,85 · a/t − 0,0011 · (h<sub>ef</sub>/t)²<br> Appui d'extrémité :&nbsp; Φ<sub>1</sub> = 1,6 − l<sub>f</sub>/6 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> ≥ 1,8 N/mm²)&nbsp;&nbsp; ou&nbsp; 1,6 − l<sub>f</sub>/5 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> &lt; 1,8)<br> Plancher de toiture (dernier niveau) :&nbsp; Φ<sub>1</sub> = 0,333&nbsp;&nbsp;&nbsp; Appui intermédiaire : pas de Φ<sub>1</sub>",
+"es": "N<sub>Ed</sub> ≤ N<sub>Rd</sub> = Φ · f<sub>d</sub> · A&nbsp;&nbsp;&nbsp; Φ = min(Φ<sub>1</sub>; Φ<sub>2</sub>)<br> Mitad de la altura del muro:&nbsp; Φ<sub>2</sub> = 0,85 · a/t − 0,0011 · (h<sub>ef</sub>/t)²<br> Apoyo extremo:&nbsp; Φ<sub>1</sub> = 1,6 − l<sub>f</sub>/6 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> ≥ 1,8 N/mm²)&nbsp;&nbsp; o&nbsp; 1,6 − l<sub>f</sub>/5 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> &lt; 1,8)<br> Forjado de cubierta (planta superior):&nbsp; Φ<sub>1</sub> = 0,333&nbsp;&nbsp;&nbsp; Apoyo intermedio: sin Φ<sub>1</sub>"
+},
+"24-82": {
+"fr": "N<sub>Edc</sub> / N<sub>Rdc</sub> = 110,0 / 154,2 = 0,714 <b class=\"ok-t\">✓ vérifié</b> — vérifier en plus le mur situé en dessous comme mur comprimé",
+"es": "N<sub>Edc</sub> / N<sub>Rdc</sub> = 110,0 / 154,2 = 0,714 <b class=\"ok-t\">✓ cumple</b> — comprobar además el muro inferior como muro comprimido"
+},
+"24-83": {
+"fr": "N<sub>Edc</sub> ≤ N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub><br> β = (1 + 0,3 · a<sub>1</sub>/h<sub>c</sub>) · (1,5 − 1,1 · A<sub>b</sub>/A<sub>ef</sub>)&nbsp;&nbsp;&nbsp; 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2 · h<sub>c</sub>) ; 1,5)<br> A<sub>ef</sub> = l<sub>efm</sub> · t&nbsp;&nbsp;&nbsp; l<sub>efm</sub> — longueur à mi-hauteur du mur avec diffusion de la charge à 60°",
+"es": "N<sub>Edc</sub> ≤ N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub><br> β = (1 + 0,3 · a<sub>1</sub>/h<sub>c</sub>) · (1,5 − 1,1 · A<sub>b</sub>/A<sub>ef</sub>)&nbsp;&nbsp;&nbsp; 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2 · h<sub>c</sub>); 1,5)<br> A<sub>ef</sub> = l<sub>efm</sub> · t&nbsp;&nbsp;&nbsp; l<sub>efm</sub> — longitud a media altura del muro con dispersión de la carga a 60°"
+},
+"24-84": {
+"fr": "Béton normal",
+"es": "Hormigón normal"
+},
+"24-85": {
+"fr": "Mortier de maçonnerie courant NM II",
+"es": "Mortero de uso general NM II"
+},
+"24-86": {
+"fr": "Mortier courant :&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup>&nbsp;&nbsp; avec f<sub>m</sub> ≤ min(20 ; 2 · f<sub>b</sub>)<br> Mortier de joint mince, groupe 1 :&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup>&nbsp;&nbsp;&nbsp; Éléments perforés :&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup><br> Valeur de calcul :&nbsp; f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub>&nbsp;&nbsp; avec ζ = 0,85 (résistance de longue durée), γ<sub>M</sub> = 1,5",
+"es": "Mortero de uso general:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup>&nbsp;&nbsp; con f<sub>m</sub> ≤ min(20; 2 · f<sub>b</sub>)<br> Mortero de junta fina, grupo 1:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup>&nbsp;&nbsp;&nbsp; Piezas perforadas:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup><br> Valor de cálculo:&nbsp; f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub>&nbsp;&nbsp; con ζ = 0,85 (resistencia de larga duración), γ<sub>M</sub> = 1,5"
+},
+"24-87": {
+"fr": "Charge d'exploitation q<sub>k</sub> (y c. majoration pour cloisons)",
+"es": "Sobrecarga de uso q<sub>k</sub> (incl. suplemento por tabiquería)"
+},
+"24-88": {
+"fr": "Coordination modulaire octamétrique (DIN 4172)",
+"es": "Coordinación modular octamétrica (DIN 4172)"
+},
+"24-89": {
+"fr": "Les éléments à joints minces font 249 mm de haut (assise de 25 cm). Grands éléments silico-calcaires jusqu'à 998 × 623 mm.",
+"es": "Las piezas rectificadas para junta fina tienen 249 mm de altura (hilada de 25 cm). Elementos silicocalcáreos de gran formato hasta 998 × 623 mm."
+},
+"24-90": {
+"fr": "Éléments à joints minces, éléments rectifiés",
+"es": "Piezas rectificadas, elementos rectificados"
+},
+"24-91": {
+"fr": "Béton cellulaire autoclavé",
+"es": "Hormigón celular curado en autoclave"
+},
+"24-92": {
+"fr": "Béton cellulaire autoclavé (gr. 1)",
+"es": "Hormigón celular curado en autoclave (gr. 1)"
+},
+"24-93": {
+"fr": "Béton cellulaire autoclavé (éléments à joints minces, éléments rectifiés)",
+"es": "Hormigón celular curado en autoclave (piezas rectificadas, elementos rectificados)"
+},
+"24-94": {
+"fr": "Entraxe des murs transversaux b<sub>c</sub> [m]",
+"es": "Distancia entre muros transversales b<sub>c</sub> [m]"
+},
+"24-95": {
+"fr": "Entraxe des murs transversaux l [m]",
+"es": "Distancia entre muros transversales l [m]"
+},
+"24-96": {
+"fr": "Valeurs de calcul pour les déformations (AN, valeurs indicatives)",
+"es": "Valores de cálculo para deformaciones (AN, valores orientativos)"
+},
+"24-97": {
+"fr": "Classes de masse volumique",
+"es": "Clases de densidad"
+},
+"24-98": {
+"fr": "Assises",
+"es": "Hiladas"
+},
+"24-99": {
+"fr": "Assises par mètre",
+"es": "Hiladas por metro"
+},
+"24-100": {
+"fr": "Hauteur d'assise",
+"es": "Altura de hilada"
+},
+"24-101": {
+"fr": "Hauteur d'assise avec joint",
+"es": "Altura de hilada con junta"
+},
+"24-102": {
+"fr": "Hauteur d'assise s [cm]",
+"es": "Altura de hilada s [cm]"
+},
+"24-103": {
+"fr": "Élancement h<sub>ef</sub>/t",
+"es": "Esbeltez h<sub>ef</sub>/t"
+},
+"24-104": {
+"fr": "Vérifier le voile de contreventement",
+"es": "Comprobar el muro de cortante"
+},
+"24-105": {
+"fr": "Voile de contreventement — contreventement dans le plan du mur (EN 1996-1-1, 6.2)",
+"es": "Muro de cortante — arriostramiento en el plano del muro (EN 1996-1-1, 6.2)"
+},
+"24-106": {
+"fr": "Retrait ε<sub>∞</sub> [mm/m]",
+"es": "Retracción ε<sub>∞</sub> [mm/m]"
+},
+"24-107": {
+"fr": "Maçonnerie apparente",
+"es": "Fábrica vista"
+},
+"24-108": {
+"fr": "Plancher en béton armé, t = 175 mm → ρ<sub>2</sub> = 0,75 (0,75 jusqu'à 175 mm, 0,90 jusqu'à 250 mm, au-delà 1,0)",
+"es": "Forjado de hormigón armado, t = 175 mm → ρ<sub>2</sub> = 0,75 (0,75 hasta 175 mm, 0,90 hasta 250 mm, por encima 1,0)"
+},
+"24-109": {
+"fr": "Type d'élément",
+"es": "Tipo de pieza"
+},
+"24-110": {
+"fr": "Types d'éléments",
+"es": "Tipos de pieza"
+},
+"24-111": {
+"fr": "Formats d'éléments",
+"es": "Formatos de pieza"
+},
+"24-112": {
+"fr": "Groupes d'éléments et résistance des éléments",
+"es": "Grupos de piezas y resistencia de las piezas"
+},
+"24-113": {
+"fr": "Dimensions des éléments et coordination modulaire octamétrique",
+"es": "Dimensiones de las piezas y coordinación modular octamétrica"
+},
+"24-114": {
+"fr": "Joints verticaux",
+"es": "Llagas"
+},
+"24-115": {
+"fr": "Portée du plancher appuyé l<sub>f</sub>",
+"es": "Luz del forjado apoyado l<sub>f</sub>"
+},
+"24-116": {
+"fr": "Charges concentrées (EN 1996-1-1, 6.1.3)",
+"es": "Cargas concentradas (EN 1996-1-1, 6.1.3)"
+},
+"24-117": {
+"fr": "Vérifier la charge concentrée",
+"es": "Comprobar la carga concentrada"
+},
+"24-118": {
+"fr": "Sous l'appui, la maçonnerie environnante non chargée soutient latéralement la surface chargée — la contrainte peut donc y dépasser f<sub>d</sub>. En extrémité de mur, ce soutien manque d'un côté (a<sub>1</sub> petit).",
+"es": "Bajo el apoyo, la fábrica circundante sin cargar sujeta lateralmente la superficie cargada — por eso la tensión puede superar allí f<sub>d</sub>. En el extremo del muro falta este apoyo lateral por un lado (a<sub>1</sub> pequeño)."
+},
+"24-119": {
+"fr": "Un retrait et un fluage différents (p. ex. cloison intérieure silico-calcaire sur mur extérieur en brique) provoquent des fissures — ne pas mélanger les types d'éléments dans un même ouvrage.",
+"es": "La retracción y la fluencia diferentes (p. ej. muro interior silicocalcáreo sobre muro exterior de ladrillo) provocan fisuras — no mezclar tipos de pieza en un mismo elemento."
+},
+"24-120": {
+"fr": "V<sub>Ed</sub> / V<sub>Rd</sub> = 25,0 / 95,4 = 0,262 <b class=\"ok-t\">✓ vérifié</b>",
+"es": "V<sub>Ed</sub> / V<sub>Rd</sub> = 25,0 / 95,4 = 0,262 <b class=\"ok-t\">✓ cumple</b>"
+},
+"24-121": {
+"fr": "Appareil",
+"es": "Aparejo"
+},
+"24-122": {
+"fr": "Règles d'appareillage",
+"es": "Reglas de aparejo"
+},
+"24-123": {
+"fr": "Rotation à l'appui",
+"es": "Giro en el apoyo"
+},
+"24-124": {
+"fr": "Éléments pleins, proportion de vides ≤ 25 %",
+"es": "Piezas macizas, proporción de huecos ≤ 25 %"
+},
+"24-125": {
+"fr": "Brique pleine, élément plein silico-calcaire, béton cellulaire autoclavé",
+"es": "Ladrillo macizo, pieza maciza silicocalcárea, hormigón celular curado en autoclave"
+},
+"24-126": {
+"fr": "Mur maintenu sur 4 côtés, t = 175 mm",
+"es": "Muro sujeto en 4 lados, t = 175 mm"
+},
+"24-127": {
+"fr": "Mur à l'appui d'extrémité d'un plancher : Φ₁ en tête et en pied, Φ₂ à mi-hauteur",
+"es": "Muro en el apoyo extremo de un forjado: Φ₁ en cabeza y pie, Φ₂ a media altura"
+},
+"24-128": {
+"fr": "Vérifier le mur",
+"es": "Comprobar el muro"
+},
+"24-129": {
+"fr": "Mur t = 175 mm, h = 2,60 m, l = 1,00 m",
+"es": "Muro t = 175 mm, h = 2,60 m, l = 1,00 m"
+},
+"24-130": {
+"fr": "Mur comprimé — méthode simplifiée (DIN EN 1996-3/NA)",
+"es": "Muro comprimido — método simplificado (DIN EN 1996-3/NA)"
+},
+"24-131": {
+"fr": "Épaisseur du mur (panneresse)",
+"es": "Espesor del muro (soga)"
+},
+"24-132": {
+"fr": "Épaisseur du mur t",
+"es": "Espesor del muro t"
+},
+"24-133": {
+"fr": "Épaisseur du mur t [mm]",
+"es": "Espesor del muro t [mm]"
+},
+"24-134": {
+"fr": "Hauteur du mur h<sub>c</sub> [m]",
+"es": "Altura del muro h<sub>c</sub> [m]"
+},
+"24-135": {
+"fr": "Longueur du mur [m]",
+"es": "Longitud del muro [m]"
+},
+"24-136": {
+"fr": "Longueur du mur l [m]",
+"es": "Longitud del muro l [m]"
+},
+"24-137": {
+"fr": "Voile l = 2,50 m, t = 175 mm",
+"es": "Muro de cortante l = 2,50 m, t = 175 mm"
+},
+"24-138": {
+"fr": "Poids volumique du sol ρ<sub>e</sub> [kN/m³]",
+"es": "Peso específico del terreno ρ<sub>e</sub> [kN/m³]"
+},
+"24-139": {
+"fr": "Brique",
+"es": "Ladrillo"
+},
+"24-140": {
+"fr": "Brique, élément plein (gr. 1)",
+"es": "Ladrillo, pieza maciza (gr. 1)"
+},
+"24-141": {
+"fr": "Appui intermédiaire (mur intérieur)",
+"es": "Apoyo intermedio (muro interior)"
+},
+"24-142": {
+"fr": "a — profondeur d'appui du plancher · l<sub>f</sub> — portée du plancher adjacent (la plus courte pour les planchers portant dans deux directions) · section de mur A &lt; 0,1 m² : f<sub>d</sub> · 0,8 ; A &lt; 0,04 m² : pas comme mur porteur",
+"es": "a — profundidad de apoyo del forjado · l<sub>f</sub> — luz del forjado contiguo (la menor en forjados bidireccionales) · sección de muro A &lt; 0,1 m²: f<sub>d</sub> · 0,8; A &lt; 0,04 m²: no como muro portante"
+},
+"24-143": {
+"fr": "a<sub>1</sub> — distance de la surface chargée à l'extrémité du mur · h<sub>c</sub> — hauteur du mur jusqu'à la surface chargée · A<sub>b</sub> — surface chargée. Éléments perforés (groupes 2 à 4) et maçonnerie avec mortier en bandes : β = 1.",
+"es": "a<sub>1</sub> — distancia de la superficie cargada al extremo del muro · h<sub>c</sub> — altura del muro hasta la superficie cargada · A<sub>b</sub> — superficie cargada. Piezas perforadas (grupos 2 a 4) y fábrica con mortero en cordones: β = 1."
+},
+"24-144": {
+"fr": "en outre hauteur du bâtiment ≤ 20 m et charge d'exploitation ≤ 5 kN/m²",
+"es": "además altura del edificio ≤ 20 m y sobrecarga de uso ≤ 5 kN/m²"
+},
+"24-145": {
+"fr": "en outre : terrain non ascendant, pas de pression d'eau, plancher du sous-sol faisant office de diaphragme",
+"es": "además: terreno no ascendente, sin presión de agua, forjado de sótano actuando como diafragma"
+},
+"24-146": {
+"fr": "f<sub>b</sub> ou f<sub>st</sub> [N/mm²]",
+"es": "f<sub>b</sub> o f<sub>st</sub> [N/mm²]"
+},
+"24-147": {
+"fr": "f<sub>k</sub> = 7,99 N/mm² ≥ 1,8 N/mm² → dénominateur 6",
+"es": "f<sub>k</sub> = 7,99 N/mm² ≥ 1,8 N/mm² → denominador 6"
+},
+"24-148": {
+"fr": "f<sub>m</sub> [N/mm²] (mortier courant uniquement)",
+"es": "f<sub>m</sub> [N/mm²] (solo mortero de uso general)"
+},
+"24-149": {
+"fr": "f<sub>st</sub> = 1,25 · classe de résistance de l'élément&nbsp;&nbsp;&nbsp; (résistance moyenne convertie en compression de l'élément selon l'AN)",
+"es": "f<sub>st</sub> = 1,25 · clase de resistencia de la pieza&nbsp;&nbsp;&nbsp; (resistencia media convertida a compresión de la pieza según el AN)"
+},
+"24-150": {
+"fr": "f<sub>vk0</sub> = 0,40 N/mm² (tab. 3.4) · joints verticaux non remplis : moitié de la valeur 0,200 N/mm²",
+"es": "f<sub>vk0</sub> = 0,40 N/mm² (tabla 3.4) · llagas sin mortero: la mitad del valor 0,200 N/mm²"
+},
+"24-151": {
+"fr": "fortement chargé, sous-sols",
+"es": "muy cargado, sótanos"
+},
+"24-152": {
+"fr": "piliers fortement chargés",
+"es": "pilares muy cargados"
+},
+"24-153": {
+"fr": "joint ouvert au plus jusqu'au milieu du mur : e ≤ l/3 = 0,833 m ✓",
+"es": "junta abierta como máximo hasta el centro del muro: e ≤ l/3 = 0,833 m ✓"
+},
+"24-154": {
+"fr": "l — distance du mur transversal de contreventement au bord libre (trois côtés) ou entre les murs transversaux (quatre côtés). Les murs transversaux ne sont efficaces que jusqu'à l &lt; 15 · t (trois côtés) ou l &lt; 30 · t (quatre côtés). Élancement h<sub>ef</sub>/t ≤ 27.",
+"es": "l — distancia del muro transversal de arriostramiento al borde libre (tres lados) o entre los muros transversales (cuatro lados). Los muros transversales solo son eficaces hasta l &lt; 15 · t (tres lados) o l &lt; 30 · t (cuatro lados). Esbeltez h<sub>ef</sub>/t ≤ 27."
+},
+"24-155": {
+"fr": "hauteur libre h [m]",
+"es": "altura libre h [m]"
+},
+"24-156": {
+"fr": "hauteur libre du sous-sol h",
+"es": "altura libre del sótano h"
+},
+"24-157": {
+"fr": "hauteur libre du mur h = 2,60 m ≤ 2,75 m ✓",
+"es": "altura libre del muro h = 2,60 m ≤ 2,75 m ✓"
+},
+"24-158": {
+"fr": "hauteur libre du mur, t &lt; 240 mm",
+"es": "altura libre del muro, t &lt; 240 mm"
+},
+"24-159": {
+"fr": "hauteur libre du mur, t ≥ 240 mm",
+"es": "altura libre del muro, t ≥ 240 mm"
+},
+"24-160": {
+"fr": "limitée à gauche par a<sub>1</sub> = 300 mm, à droite par l'extrémité du mur",
+"es": "limitada a la izquierda por a<sub>1</sub> = 300 mm, a la derecha por el extremo del muro"
+},
+"24-161": {
+"fr": "n = nombre de modules ; cote de coordination = n · 12,5 cm",
+"es": "n = número de módulos; medida nominal = n · 12,5 cm"
+},
+"24-162": {
+"fr": "n<sub>Ed,max,adm</sub>",
+"es": "n<sub>Ed,max,adm</sub>"
+},
+"24-163": {
+"fr": "n<sub>Ed,max</sub> / n<sub>adm</sub> = 140,0 / 414,0 = 0,338 <b class=\"ok-t\">✓ vérifié</b>",
+"es": "n<sub>Ed,max</sub> / n<sub>adm</sub> = 140,0 / 414,0 = 0,338 <b class=\"ok-t\">✓ cumple</b>"
+},
+"24-164": {
+"fr": "n<sub>Ed,min,req</sub>",
+"es": "n<sub>Ed,min,nec</sub>"
+},
+"24-165": {
+"fr": "non ascendant, pas de pression d'eau",
+"es": "no ascendente, sin presión de agua"
+},
+"24-166": {
+"fr": "boutisses uniquement, décalage ¼ d'élément",
+"es": "solo tizones, desfase ¼ de pieza"
+},
+"24-167": {
+"fr": "panneresses uniquement, décalage ½ élément",
+"es": "solo sogas, desfase ½ pieza"
+},
+"24-168": {
+"fr": "encastré en tête (M = V·h/2)",
+"es": "empotrado en cabeza (M = V·h/2)"
+},
+"24-169": {
+"fr": "perforation verticale, limites selon le matériau (tab. 3.1)",
+"es": "perforación vertical, límites según el material (tabla 3.1)"
+},
+"24-170": {
+"fr": "sous le plancher de toiture",
+"es": "bajo el forjado de cubierta"
+},
+"24-171": {
+"fr": "secondaire, bâti ancien",
+"es": "secundario, edificios existentes"
+},
+"24-172": {
+"fr": "non rempli",
+"es": "sin mortero"
+},
+"24-173": {
+"fr": "rempli",
+"es": "con mortero"
+},
+"24-174": {
+"fr": "perforation horizontale",
+"es": "perforación horizontal"
+},
+"24-175": {
+"fr": "comme l'appareil anglais, assises de panneresses décalées d'½ élément",
+"es": "como el aparejo inglés, hiladas de soga desfasadas ½ pieza"
+},
+"24-176": {
+"fr": "fait office de voile",
+"es": "actúa como diafragma"
+},
+"24-177": {
+"fr": "maçonnerie isolante thermiquement",
+"es": "fábrica de aislamiento térmico"
+},
+"24-178": {
+"fr": "maintenu sur deux côtés (plancher en haut et en bas) :&nbsp; ρ<sub>2</sub> = 0,75 (t ≤ 175 mm) · 0,90 (175 &lt; t ≤ 250 mm) · 1,00 (t &gt; 250 mm, plancher à solives en bois)<br> trois côtés (h ≤ 3,5 · l) :&nbsp; ρ<sub>3</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / (3 · l))²)&nbsp;&nbsp;&nbsp; (h &gt; 3,5 · l) :&nbsp; ρ<sub>3</sub> = 1,5 · l / h<br> quatre côtés (h ≤ 1,15 · l) :&nbsp; ρ<sub>4</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / l)²)&nbsp;&nbsp;&nbsp; (h &gt; 1,15 · l) :&nbsp; ρ<sub>4</sub> = 0,5 · l / h",
+"es": "sujeto en dos lados (forjado arriba y abajo):&nbsp; ρ<sub>2</sub> = 0,75 (t ≤ 175 mm) · 0,90 (175 &lt; t ≤ 250 mm) · 1,00 (t &gt; 250 mm, forjado de viguetas de madera)<br> tres lados (h ≤ 3,5 · l):&nbsp; ρ<sub>3</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / (3 · l))²)&nbsp;&nbsp;&nbsp; (h &gt; 3,5 · l):&nbsp; ρ<sub>3</sub> = 1,5 · l / h<br> cuatro lados (h ≤ 1,15 · l):&nbsp; ρ<sub>4</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / l)²)&nbsp;&nbsp;&nbsp; (h &gt; 1,15 · l):&nbsp; ρ<sub>4</sub> = 0,5 · l / h"
+},
+"24-179": {
+"fr": "Cote d'ouverture",
+"es": "Medida de hueco"
+},
+"24-180": {
+"fr": "Cote d'ouverture (fenêtre, porte) : n = 10 → 125,0 + 1 = <b>126,0 cm</b> · n = 11 → 137,5 + 1 = <b>138,5 cm</b>",
+"es": "Medida de hueco (ventana, puerta): n = 10 → 125,0 + 1 = <b>126,0 cm</b> · n = 11 → 137,5 + 1 = <b>138,5 cm</b>"
+},
+"24-181": {
+"fr": "Cote d'ouverture (n = 3)",
+"es": "Medida de hueco (n = 3)"
+},
+"24-182": {
+"fr": "Recouvrement :&nbsp; ü ≥ 0,4 · h<sub>u</sub>&nbsp; et&nbsp; ü ≥ 45 mm&nbsp;&nbsp; (h<sub>u</sub> — hauteur de l'élément)",
+"es": "Solape:&nbsp; ü ≥ 0,4 · h<sub>u</sub>&nbsp; y&nbsp; ü ≥ 45 mm&nbsp;&nbsp; (h<sub>u</sub> — altura de la pieza)"
+},
+"24-183": {
+"fr": "maçonnerie courante",
+"es": "fábrica habitual"
+},
+"24-184": {
+"fr": "Φ₂ : flambement à mi-hauteur",
+"es": "Φ₂: pandeo a media altura"
+},
+"24-185": {
+"fr": "ζ = 0,85 tient compte de la résistance plus faible sous charge de longue durée ; γ<sub>M</sub> = 1,5 pour la maçonnerie selon l'AN",
+"es": "ζ = 0,85 recoge la menor resistencia bajo carga de larga duración; γ<sub>M</sub> = 1,5 para fábrica según el AN"
+},
+"24-186": {
+"fr": "ρ<sub>e</sub> — poids volumique du remblai · h — hauteur libre du sous-sol · h<sub>e</sub> — hauteur de remblai · b<sub>c</sub> — entraxe des murs transversaux de contreventement · n<sub>Ed,min</sub> avec γ<sub>G</sub> = 1,0 (charge permanente favorable)",
+"es": "ρ<sub>e</sub> — peso específico del relleno · h — altura libre del sótano · h<sub>e</sub> — altura de relleno · b<sub>c</sub> — distancia entre los muros transversales de arriostramiento · n<sub>Ed,min</sub> con γ<sub>G</sub> = 1,0 (carga permanente favorable)"
+},
+"24-187": {
+"fr": "σ<sub>max</sub> / f<sub>d</sub> = 0,103 <b class=\"ok-t\">✓ vérifié</b>",
+"es": "σ<sub>max</sub> / f<sub>d</sub> = 0,103 <b class=\"ok-t\">✓ cumple</b>"
+},
+"24-188": {
+"fr": "<div class=\"calc-field\"><label>Longueur L [cm]</label><input type=\"number\" id=\"ms-L\" value=\"136.5\" step=\"any\" oninput=\"updateMass()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud L [cm]</label><input type=\"number\" id=\"ms-L\" value=\"136.5\" step=\"any\" oninput=\"updateMass()\"></div>"
+},
+"24-189": {
+"fr": "<div class=\"calc-field\"><label>Hauteur H [cm]</label><input type=\"number\" id=\"ms-H\" value=\"262.5\" step=\"any\" oninput=\"updateMass()\"></div>",
+"es": "<div class=\"calc-field\"><label>Altura H [cm]</label><input type=\"number\" id=\"ms-H\" value=\"262.5\" step=\"any\" oninput=\"updateMass()\"></div>"
+},
+"24-190": {
+"fr": "<div class=\"calc-field\"><label>Hauteur d'assise s [cm]</label><select id=\"ms-s\" onchange=\"updateMass()\"><option value=\"6.25\">6,25 (DF)</option><option value=\"8.3333333\">8,33 (NF)</option><option value=\"12.5\" selected>12,5 (2DF …)</option><option value=\"25\">25 (8DF, éléments rectifiés)</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Altura de hilada s [cm]</label><select id=\"ms-s\" onchange=\"updateMass()\"><option value=\"6.25\">6,25 (DF)</option><option value=\"8.3333333\">8,33 (NF)</option><option value=\"12.5\" selected>12,5 (2DF …)</option><option value=\"25\">25 (8DF, piezas rectificadas)</option></select></div>"
+},
+"24-191": {
+"fr": "Coordination modulaire pour {} cm",
+"es": "Coordinación modular para {} cm"
+},
+"24-192": {
+"fr": "§Longueur sur la trame du huitième de mètre (12,5 cm)",
+"es": "§Longitud sobre la trama del octavo de metro (12,5 cm)"
+},
+"24-193": {
+"fr": "!n = nombre de modules ; cote de coordination = n · 12,5 cm",
+"es": "!n = número de módulos; medida nominal = n · 12,5 cm"
+},
+"24-194": {
+"fr": "Cote extérieure (pilier, tronçon de mur)",
+"es": "Medida exterior (pilar, tramo de muro)"
+},
+"24-195": {
+"fr": "Cote d'ouverture (fenêtre, porte)",
+"es": "Medida de hueco (ventana, puerta)"
+},
+"24-196": {
+"fr": "Cote de raccordement (saillie)",
+"es": "Medida de encuentro (resalto)"
+},
+"24-197": {
+"fr": "§Hauteur sur la hauteur d'assise {} cm",
+"es": "§Altura sobre la altura de hilada {} cm"
+},
+"24-198": {
+"fr": "Assises = H / s = {} / {} = {}",
+"es": "Hiladas = H / s = {} / {} = {}"
+},
+"24-199": {
+"fr": "{} assises tombent juste",
+"es": "{} hiladas encajan exactamente"
+},
+"24-200": {
+"fr": "{} assises = {} cm ou {} assises = {} cm",
+"es": "{} hiladas = {} cm o {} hiladas = {} cm"
+},
+"24-201": {
+"fr": "§Résistance caractéristique en compression (EN 1996-1-1, 3.6.1.2)",
+"es": "§Resistencia característica a compresión (EN 1996-1-1, 3.6.1.2)"
+},
+"24-202": {
+"fr": "!K = {} pour {} (tab. 3.3, recommandation)",
+"es": "!K = {} para {} (tabla 3.3, recomendación)"
+},
+"24-203": {
+"fr": "!ζ = 0,85 tient compte de la résistance plus faible sous charge de longue durée ; γ<sub>M</sub> = 1,5 pour la maçonnerie selon l'AN",
+"es": "!ζ = 0,85 recoge la menor resistencia bajo carga de larga duración; γ<sub>M</sub> = 1,5 para fábrica según el AN"
+},
+"24-204": {
+"fr": "§Caractéristiques de déformation (AN, valeurs indicatives)",
+"es": "§Propiedades de deformación (AN, valores orientativos)"
+},
+"24-205": {
+"fr": "!Coefficient de fluage final φ<sub>∞</sub> = {} · retrait final ε<sub>∞</sub> = {} mm/m · α<sub>t</sub> = {} · 10⁻⁶ /K",
+"es": "!Coeficiente de fluencia final φ<sub>∞</sub> = {} · retracción final ε<sub>∞</sub> = {} mm/m · α<sub>t</sub> = {} · 10⁻⁶ /K"
+},
+"24-206": {
+"fr": "§Résistance initiale au cisaillement (tab. 3.4, recommandation)",
+"es": "§Resistencia inicial a cortante (tabla 3.4, recomendación)"
+},
+"24-207": {
+"fr": "maintenu sur {} côtés (bleu : planchers{})",
+"es": "sujeto en {} lados (azul: forjados{})"
+},
+"24-208": {
+"fr": "Mur maintenu sur {} côtés",
+"es": "Muro sujeto en {} lados"
+},
+"24-209": {
+"fr": " et murs transversaux",
+"es": " y muros transversales"
+},
+"24-210": {
+"fr": "<div class=\"calc-field\"><label>hauteur libre h [m]</label><input type=\"number\" id=\"hef-h\" value=\"2.6\" step=\"any\" oninput=\"updateHef()\"></div>",
+"es": "<div class=\"calc-field\"><label>altura libre h [m]</label><input type=\"number\" id=\"hef-h\" value=\"2.6\" step=\"any\" oninput=\"updateHef()\"></div>"
+},
+"24-211": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur du mur t [mm]</label><input type=\"number\" id=\"hef-t\" value=\"175\" step=\"any\" oninput=\"updateHef()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor del muro t [mm]</label><input type=\"number\" id=\"hef-t\" value=\"175\" step=\"any\" oninput=\"updateHef()\"></div>"
+},
+"24-212": {
+"fr": "<div class=\"calc-field\"><label>Maintien</label><select id=\"hef-n\" onchange=\"updateHef()\"><option value=\"2\">sur deux côtés</option><option value=\"3\">sur trois côtés</option><option value=\"4\" selected>sur quatre côtés</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Sujeción</label><select id=\"hef-n\" onchange=\"updateHef()\"><option value=\"2\">en dos lados</option><option value=\"3\">en tres lados</option><option value=\"4\" selected>en cuatro lados</option></select></div>"
+},
+"24-213": {
+"fr": "<div class=\"calc-field\"><label>Entraxe des murs transversaux l [m]</label><input type=\"number\" id=\"hef-l\" value=\"3.5\" step=\"any\" oninput=\"updateHef()\"></div>",
+"es": "<div class=\"calc-field\"><label>Distancia entre muros transversales l [m]</label><input type=\"number\" id=\"hef-l\" value=\"3.5\" step=\"any\" oninput=\"updateHef()\"></div>"
+},
+"24-214": {
+"fr": "<div class=\"calc-field\"><label>Plancher</label><select id=\"hef-d\" onchange=\"updateHef()\"><option value=\"sb\" selected>Plancher en béton armé</option><option value=\"hb\">Plancher à solives en bois</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Forjado</label><select id=\"hef-d\" onchange=\"updateHef()\"><option value=\"sb\" selected>Forjado de hormigón armado</option><option value=\"hb\">Forjado de viguetas de madera</option></select></div>"
+},
+"24-215": {
+"fr": "§Réduction pour maintien sur deux côtés",
+"es": "§Reducción para sujeción en dos lados"
+},
+"24-216": {
+"fr": "!Plancher en béton armé, t = {} mm → ρ<sub>2</sub> = {} (0,75 jusqu'à 175 mm, 0,90 jusqu'à 250 mm, au-delà 1,0)",
+"es": "!Forjado de hormigón armado, t = {} mm → ρ<sub>2</sub> = {} (0,75 hasta 175 mm, 0,90 hasta 250 mm, por encima 1,0)"
+},
+"24-217": {
+"fr": "§Hauteur efficace et élancement",
+"es": "§Altura efectiva y esbeltez"
+},
+"24-218": {
+"fr": "§Réduction à mi-hauteur (appui complet du plancher a = t)",
+"es": "§Reducción a media altura (apoyo completo del forjado a = t)"
+},
+"24-219": {
+"fr": "Mur maintenu sur {} côtés, t = {} mm",
+"es": "Muro sujeto en {} lados, t = {} mm"
+},
+"24-220": {
+"fr": "§Maintenu sur trois côtés (un bord vertical libre)",
+"es": "§Sujeto en tres lados (un borde vertical libre)"
+},
+"24-221": {
+"fr": "!l = {} m ≥ 15 · t = {} m → le mur transversal n'est pas efficace, mur traité comme maintenu sur deux côtés",
+"es": "!l = {} m ≥ 15 · t = {} m → el muro transversal no es eficaz, muro tratado como sujeto en dos lados"
+},
+"24-222": {
+"fr": "!Plancher à solives en bois : pas d'effet d'encastrement → ρ<sub>2</sub> = 1,0",
+"es": "!Forjado de viguetas de madera: sin efecto de empotramiento → ρ<sub>2</sub> = 1,0"
+},
+"24-223": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur du mur t [mm]</label><input type=\"number\" id=\"mwd-t\" value=\"175\" step=\"any\" oninput=\"updateMWD()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor del muro t [mm]</label><input type=\"number\" id=\"mwd-t\" value=\"175\" step=\"any\" oninput=\"updateMWD()\"></div>"
+},
+"24-224": {
+"fr": "<div class=\"calc-field\"><label>hauteur libre h [m]</label><input type=\"number\" id=\"mwd-h\" value=\"2.6\" step=\"any\" oninput=\"updateMWD()\"></div>",
+"es": "<div class=\"calc-field\"><label>altura libre h [m]</label><input type=\"number\" id=\"mwd-h\" value=\"2.6\" step=\"any\" oninput=\"updateMWD()\"></div>"
+},
+"24-225": {
+"fr": "<div class=\"calc-field\"><label>Longueur du mur l [m]</label><input type=\"number\" id=\"mwd-l\" value=\"1\" step=\"any\" oninput=\"updateMWD()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud del muro l [m]</label><input type=\"number\" id=\"mwd-l\" value=\"1\" step=\"any\" oninput=\"updateMWD()\"></div>"
+},
+"24-226": {
+"fr": "<div class=\"calc-field\"><label>Position</label><select id=\"mwd-lage\" onchange=\"updateMWD()\"><option value=\"end\" selected>Appui d'extrémité (mur extérieur)</option><option value=\"zw\">Appui intermédiaire (mur intérieur)</option><option value=\"dach\">sous le plancher de toiture</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Posición</label><select id=\"mwd-lage\" onchange=\"updateMWD()\"><option value=\"end\" selected>Apoyo extremo (muro exterior)</option><option value=\"zw\">Apoyo intermedio (muro interior)</option><option value=\"dach\">bajo el forjado de cubierta</option></select></div>"
+}
+}

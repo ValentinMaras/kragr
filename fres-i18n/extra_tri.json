@@ -1,0 +1,272 @@
+{
+ "Zug": {
+  "en": "tension",
+  "fr": "traction",
+  "es": "tracción"
+ },
+ "Zug ∥": {
+  "en": "Tension ∥",
+  "fr": "Traction ∥",
+  "es": "Tracción ∥"
+ },
+ "Zug ⊥": {
+  "en": "Tension ⊥",
+  "fr": "Traction ⊥",
+  "es": "Tracción ⊥"
+ },
+ "§Zug (6.2.3)": {
+  "en": "§Tension (6.2.3)",
+  "fr": "§Traction (6.2.3)",
+  "es": "§Tracción (6.2.3)"
+ },
+ "Zug, Ø < 16 mm": {
+  "en": "Tension, Ø < 16 mm",
+  "fr": "Traction, Ø < 16 mm",
+  "es": "Tracción, Ø < 16 mm"
+ },
+ "Zug, Ø ≥ 16 mm": {
+  "en": "Tension, Ø ≥ 16 mm",
+  "fr": "Traction, Ø ≥ 16 mm",
+  "es": "Tracción, Ø ≥ 16 mm"
+ },
+ "!Schicht {}: {} … {} m, γ = {}, γ<sub>r</sub> = {} kN/m³": {
+  "en": "!Layer {}: {} … {} m, γ = {}, γ<sub>r</sub> = {} kN/m³",
+  "fr": "!Couche {} : {} … {} m, γ = {}, γ<sub>r</sub> = {} kN/m³",
+  "es": "!Capa {}: {} … {} m, γ = {}, γ<sub>r</sub> = {} kN/m³"
+ },
+ "!Schicht {}: K<sub>agh</sub> = {}, K<sub>ach</sub> = {} (φ′ = {}°, c′ = {} kN/m²)": {
+  "en": "!Layer {}: K<sub>agh</sub> = {}, K<sub>ach</sub> = {} (φ′ = {}°, c′ = {} kN/m²)",
+  "fr": "!Couche {} : K<sub>agh</sub> = {}, K<sub>ach</sub> = {} (φ′ = {}°, c′ = {} kN/m²)",
+  "es": "!Capa {}: K<sub>agh</sub> = {}, K<sub>ach</sub> = {} (φ′ = {}°, c′ = {} kN/m²)"
+ },
+ "Schicht": {
+  "en": "Layer",
+  "fr": "Couche",
+  "es": "Capa"
+ },
+ "oberes Dach b₁": {
+  "en": null,
+  "fr": null,
+  "es": "cubierta alta b₁"
+ },
+ "Seitenansicht mit Belastung und Momentenlinie": {
+  "en": "Side view with loading and bending moment diagram",
+  "fr": "Vue latérale avec charges et diagramme des moments",
+  "es": "Vista lateral con cargas y ley de momentos"
+ },
+ "Seitenansicht: Abschnitt zwischen den seitlichen Halterungen": {
+  "en": "Side view: segment between the lateral restraints",
+  "fr": "Vue latérale : tronçon entre les maintiens latéraux",
+  "es": "Vista lateral: tramo entre las sujeciones laterales"
+ },
+ "Seitenansicht: Druckgurt durchgehend gehalten": {
+  "en": "Side view: compression flange continuously restrained",
+  "fr": "Vue latérale : semelle comprimée maintenue en continu",
+  "es": "Vista lateral: ala comprimida arriostrada de forma continua"
+ },
+ "Seitenansicht": {
+  "en": "Side view",
+  "fr": "Vue latérale",
+  "es": "Vista lateral"
+ },
+ "Gabellager": {
+  "en": "fork support",
+  "fr": "appui à fourche",
+  "es": "apoyo en horquilla"
+ },
+ "Lastangriff: {}": {
+  "en": "Load applied at: {}",
+  "fr": "Point d’application : {}",
+  "es": "Punto de aplicación: {}"
+ },
+ "M₂ = 0": {
+  "en": "M₂ = 0",
+  "fr": "M₂ = 0",
+  "es": "M₂ = 0"
+ },
+ "Zwischen den Halterungen greift keine Querlast an: Die Endmomente kommen aus anschließenden Bauteilen, z. B. Durchlaufträger über der Stütze, Rahmenecke oder Kragarm.": {
+  "en": "No transverse load acts between the restraints: the end moments come from adjoining members, e.g. a continuous beam over the support, a frame corner or a cantilever.",
+  "fr": "Aucune charge transversale n’agit entre les maintiens : les moments d’extrémité proviennent des éléments adjacents, p. ex. poutre continue sur appui, angle de portique ou console.",
+  "es": "Entre las sujeciones no actúa ninguna carga transversal: los momentos en los extremos proceden de los elementos contiguos, p. ej. viga continua sobre el apoyo, esquina de pórtico o voladizo."
+ },
+ "Gleich große Endmomente: Über die ganze Länge wirkt dasselbe Moment — für das Biegedrillknicken der ungünstigste Fall (C₁ = 1).": {
+  "en": "Equal end moments: the same moment acts over the whole length — the most unfavourable case for lateral-torsional buckling (C₁ = 1).",
+  "fr": "Moments d’extrémité égaux : le même moment agit sur toute la longueur — le cas le plus défavorable pour le déversement (C₁ = 1).",
+  "es": "Momentos extremos iguales: actúa el mismo momento en toda la longitud — el caso más desfavorable para el pandeo lateral (C₁ = 1)."
+ },
+ "Eine Last am Obergurt wirkt beim Kippen zusätzlich destabilisierend, am Untergurt stabilisierend.": {
+  "en": "A load on the top flange has an additional destabilising effect on lateral-torsional buckling; on the bottom flange it stabilises.",
+  "fr": "Une charge sur la semelle supérieure est en plus déstabilisante vis-à-vis du déversement ; sur la semelle inférieure, elle est stabilisante.",
+  "es": "Una carga sobre el ala superior es además desestabilizadora frente al pandeo lateral; sobre el ala inferior es estabilizadora."
+ },
+ "Blau: gedrückter Gurt — er will seitlich ausweichen (Biegedrillknicken); je kürzer der gedrückte Bereich, desto größer C₁.": {
+  "en": "Blue: compression flange — it tends to deflect sideways (lateral-torsional buckling); the shorter the compressed zone, the larger C₁.",
+  "fr": "Bleu : semelle comprimée — elle tend à se dérober latéralement (déversement) ; plus la zone comprimée est courte, plus C₁ est grand.",
+  "es": "Azul: ala comprimida — tiende a desplazarse lateralmente (pandeo lateral); cuanto más corta es la zona comprimida, mayor es C₁."
+ },
+ "Der Druckgurt ist durchgehend seitlich gehalten (z. B. durch eine aufliegende Decke) — kein Biegedrillknicken.": {
+  "en": "The compression flange is continuously restrained laterally (e.g. by a slab resting on it) — no lateral-torsional buckling.",
+  "fr": "La semelle comprimée est maintenue latéralement en continu (p. ex. par une dalle posée dessus) — pas de déversement.",
+  "es": "El ala comprimida está arriostrada lateralmente de forma continua (p. ej. por un forjado apoyado) — sin pandeo lateral."
+ },
+ "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1993-1-1 mit NA</div>\n    <section><h2>Eingaben</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Profil</h2><div class=\"figure\">{}</div></section>\n    <section><h2>{}</h2><div class=\"figure\">{}</div></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">I<sub>T</sub> aus Nennmaßen (Herstellerformel mit Ausrundung), Abweichung zu Tabellenwerten bis etwa 3 %. Lernwerkzeug — ersetzt keine geprüfte Statik.</p></section>": {
+  "en": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1993-1-1 with NA</div>\n    <section><h2>Input</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Section</h2><div class=\"figure\">{}</div></section>\n    <section><h2>{}</h2><div class=\"figure\">{}</div></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">I<sub>T</sub> from nominal dimensions (manufacturer formula with root radius), deviation from table values up to about 3 %. Learning tool — does not replace a checked structural design.</p></section>",
+  "fr": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1993-1-1 avec AN</div>\n    <section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Profilé</h2><div class=\"figure\">{}</div></section>\n    <section><h2>{}</h2><div class=\"figure\">{}</div></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">I<sub>T</sub> déterminé à partir des dimensions nominales (formule du fabricant avec congé de raccordement), écart par rapport aux valeurs des tableaux jusqu'à environ 3 %. Outil pédagogique — ne remplace pas une note de calcul vérifiée.</p></section>",
+  "es": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1993-1-1 con AN</div>\n    <section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Perfil</h2><div class=\"figure\">{}</div></section>\n    <section><h2>{}</h2><div class=\"figure\">{}</div></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">I<sub>T</sub> obtenido a partir de las dimensiones nominales (fórmula del fabricante con radio de acuerdo), desviación respecto a los valores de las tablas de hasta aproximadamente el 3 %. Herramienta didáctica — no sustituye un cálculo verificado.</p></section>"
+ },
+ "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Querschnitt</h2><div class=\"figure\">{}</div></section>{}": {
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Cross-section</h2><div class=\"figure\">{}</div></section>{}",
+  "fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Section</h2><div class=\"figure\">{}</div></section>{}",
+  "es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Sección</h2><div class=\"figure\">{}</div></section>{}"
+ },
+ "Seitenansicht: Druckrand durchgehend gehalten": {
+  "en": "Side view: compression edge continuously restrained",
+  "fr": "Vue latérale : rive comprimée maintenue en continu",
+  "es": "Vista lateral: borde comprimido arriostrado de forma continua"
+ },
+ "oberer Rand": {
+  "en": "top edge",
+  "fr": "rive supérieure",
+  "es": "borde superior"
+ },
+ "unterer Rand": {
+  "en": "bottom edge",
+  "fr": "rive inférieure",
+  "es": "borde inferior"
+ },
+ "Beton": {
+  "en": "concrete",
+  "fr": "béton",
+  "es": "hormigón"
+ },
+ "Konstantes Moment: ungünstigster Fall für das Kippen, wirksame Kipplänge l<sub>ef</sub> = 1,0·L<sub>K</sub>.": {
+  "en": "Constant moment: the most unfavourable case for lateral-torsional buckling, effective length l<sub>ef</sub> = 1.0·L<sub>K</sub>.",
+  "fr": "Moment constant : cas le plus défavorable pour le déversement, longueur efficace l<sub>ef</sub> = 1,0·L<sub>K</sub>.",
+  "es": "Momento constante: el caso más desfavorable para el vuelco lateral, longitud eficaz l<sub>ef</sub> = 1,0·L<sub>K</sub>."
+ },
+ "Eine Last am oberen Rand verlängert die wirksame Kipplänge (+ 2h), am unteren Rand verkürzt sie sie (− 0,5h).": {
+  "en": "A load on the top edge increases the effective length (+ 2h); on the bottom edge it reduces it (− 0.5h).",
+  "fr": "Une charge sur la rive supérieure augmente la longueur efficace de déversement (+ 2h), sur la rive inférieure elle la réduit (− 0,5h).",
+  "es": "Una carga en el borde superior aumenta la longitud eficaz de vuelco (+ 2h); en el borde inferior la reduce (− 0,5h)."
+ },
+ "Blau: gedrückter Rand — er will seitlich ausweichen (Kippen).": {
+  "en": "Blue: compression edge — it tends to deflect sideways (lateral-torsional buckling).",
+  "fr": "Bleu : rive comprimée — elle tend à se dérober latéralement (déversement).",
+  "es": "Azul: borde comprimido — tiende a desplazarse lateralmente (vuelco lateral)."
+ },
+ "Der Druckrand ist durchgehend seitlich gehalten (z. B. durch Schalung oder Pfetten) — kein Kippen.": {
+  "en": "The compression edge is continuously restrained laterally (e.g. by sheathing or purlins) — no lateral-torsional buckling.",
+  "fr": "La rive comprimée est maintenue latéralement en continu (p. ex. par un voligeage ou des pannes) — pas de déversement.",
+  "es": "El borde comprimido está arriostrado lateralmente de forma continua (p. ej. por un entablado o correas) — sin vuelco lateral."
+ },
+ "Längsansicht mit Querkraft und Verbinderkräften": {
+  "en": "Longitudinal view with shear force and connector forces",
+  "fr": "Vue longitudinale avec effort tranchant et efforts dans les connecteurs",
+  "es": "Vista longitudinal con cortante y fuerzas en los conectores"
+ },
+ "Längsansicht (Einfeldträger, Gleichlast, schematisch)": {
+  "en": "Longitudinal view (simply supported beam, uniform load, schematic)",
+  "fr": "Vue longitudinale (poutre sur deux appuis, charge uniforme, schématique)",
+  "es": "Vista longitudinal (viga biapoyada, carga uniforme, esquemática)"
+ },
+ "V = 0: kaum Schub in der Fuge": {
+  "en": "V = 0: hardly any shear in the joint",
+  "fr": "V = 0 : presque pas de cisaillement dans le joint",
+  "es": "V = 0: apenas cortante en la junta"
+ },
+ "Die Schubkraft in der Fuge folgt der Querkraft: an den Auflagern am größten, in Feldmitte null. Orange: stark beanspruchte Verbinder — dort setzt man sie oft enger. Der Verbund wirkt umso besser, je länger der Träger ist (γ₁ wächst mit l²).": {
+  "en": "The shear flow in the joint follows the shear force: largest at the supports, zero at midspan. Orange: highly stressed connectors — they are often spaced more closely there. The longer the beam, the more effective the composite action (γ₁ grows with l²).",
+  "fr": "Le flux de cisaillement dans le joint suit l’effort tranchant : maximal aux appuis, nul à mi-travée. Orange : connecteurs fortement sollicités — on les rapproche souvent à cet endroit. Plus la poutre est longue, plus la liaison est efficace (γ₁ croît avec l²).",
+  "es": "El flujo de cortante en la junta sigue al esfuerzo cortante: máximo en los apoyos, nulo en el centro del vano. Naranja: conectores muy solicitados — allí suelen colocarse más juntos. Cuanto más larga es la viga, más eficaz es la conexión (γ₁ crece con l²)."
+ },
+ "Fuß": {
+  "en": "foot",
+  "fr": "pied",
+  "es": "pie"
+ },
+ "Kopf": {
+  "en": "head",
+  "fr": "tête",
+  "es": "cabeza"
+ },
+ "Rahmenecke": {
+  "en": "frame corner",
+  "fr": "angle de portique",
+  "es": "esquina de pórtico"
+ },
+ "Druck unten": {
+  "en": "compression at the bottom",
+  "fr": "compression en bas",
+  "es": "compresión abajo"
+ },
+ "Druck oben": {
+  "en": "compression at the top",
+  "fr": "compression en haut",
+  "es": "compresión arriba"
+ },
+ "M<sub>y,Ed</sub> = {} kNm ({})": {
+  "en": "M<sub>y,Ed</sub> = {} kNm ({})",
+  "fr": "M<sub>y,Ed</sub> = {} kNm ({})",
+  "es": "M<sub>y,Ed</sub> = {} kNm ({})"
+ },
+ "Seitenansicht aus calc: {}{}": {
+  "en": "Side view from calc: {}{}",
+  "fr": "Vue latérale issue de calc : {}{}",
+  "es": "Vista lateral desde calc: {}{}"
+ },
+ "Blau: gedrückter Rand (oben bei Feldmomenten, unten bei Stütz- und Kragmomenten).": {
+  "en": "Blue: compression edge (top for span moments, bottom for support and cantilever moments).",
+  "fr": "Bleu : rive comprimée (en haut pour les moments en travée, en bas pour les moments sur appui et de console).",
+  "es": "Azul: borde comprimido (arriba con momentos de vano, abajo con momentos en apoyos y voladizos)."
+ },
+ "Blau: gedrückter Gurt (oben bei Feldmomenten, unten bei Stütz- und Kragmomenten).": {
+  "en": "Blue: compression flange (top for span moments, bottom for support and cantilever moments).",
+  "fr": "Bleu : semelle comprimée (en haut pour les moments en travée, en bas pour les moments sur appui et de console).",
+  "es": "Azul: ala comprimida (arriba con momentos de vano, abajo con momentos en apoyos y voladizos)."
+ },
+ "Lager, Lasten und Momentenlinie aus calc. Der Nachweis rechnet mit dem größten Betrag M = {} kNm und dem gewählten Momentenverlauf „{}“ — prüfen, ob er zum Verlauf aus calc passt.": {
+  "en": "Supports, loads and bending moment diagram from calc. The check uses the largest absolute value M = {} kNm and the selected moment distribution “{}” — check that it matches the distribution from calc.",
+  "fr": "Appuis, charges et diagramme des moments issus de calc. La vérification utilise la plus grande valeur absolue M = {} kNm et la distribution de moments choisie « {} » — vérifier qu’elle correspond à celle de calc.",
+  "es": "Apoyos, cargas y ley de momentos desde calc. La comprobación usa el mayor valor absoluto M = {} kNm y la distribución de momentos elegida «{}» — comprobar que coincide con la de calc."
+ },
+ "Abstand der seitlichen Halterungen L<sub>LT</sub> = Stützweite angenommen — bitte anpassen, wenn Nebenträger oder ein Verband den Druckgurt halten.": {
+  "en": "Distance between lateral restraints L<sub>LT</sub> taken as the span — adjust it if secondary beams or bracing restrain the compression flange.",
+  "fr": "Distance entre maintiens latéraux L<sub>LT</sub> prise égale à la portée — à ajuster si des solives ou un contreventement maintiennent la semelle comprimée.",
+  "es": "Distancia entre sujeciones laterales L<sub>LT</sub> igual a la luz — ajustarla si vigas secundarias o un arriostramiento sujetan el ala comprimida."
+ },
+ "linear, ψ = {}": {
+  "en": "linear, ψ = {}",
+  "fr": "linéaire, ψ = {}",
+  "es": "lineal, ψ = {}"
+ },
+ "im Abschnitt keine Querlast, ψ aus den Endmomenten": {
+  "en": "no transverse load in the segment, ψ from the end moments",
+  "fr": "pas de charge transversale dans le tronçon, ψ issu des moments d’extrémité",
+  "es": "sin carga transversal en el tramo, ψ a partir de los momentos extremos"
+ },
+ "Feld ohne Endmomente": {
+  "en": "span without end moments",
+  "fr": "travée sans moments d’extrémité",
+  "es": "vano sin momentos extremos"
+ },
+ "Kragarm: C₁ für gabelgelagerte Träger gilt nicht — konstantes Moment auf der sicheren Seite": {
+  "en": "cantilever: C₁ for fork-supported beams does not apply — constant moment on the safe side",
+  "fr": "console : C₁ des poutres à appuis à fourche ne s’applique pas — moment constant, du côté de la sécurité",
+  "es": "voladizo: C₁ de vigas con apoyos en horquilla no es aplicable — momento constante, del lado de la seguridad"
+ },
+ "Querlast und Endmomente: konstantes Moment, C₁ = 1 als untere Grenze (sichere Seite)": {
+  "en": "transverse load and end moments: constant moment, C₁ = 1 as lower bound (safe side)",
+  "fr": "charge transversale et moments d’extrémité : moment constant, C₁ = 1 comme borne inférieure (côté sécurité)",
+  "es": "carga transversal y momentos extremos: momento constante, C₁ = 1 como límite inferior (lado de la seguridad)"
+ },
+ "Momentenverlauf aus calc: {} ({}), Abschnitt {} … {} m.": {
+  "en": "Moment distribution from calc: {} ({}), segment {} … {} m.",
+  "fr": "Distribution des moments issue de calc : {} ({}), tronçon {} … {} m.",
+  "es": "Distribución de momentos desde calc: {} ({}), tramo {} … {} m."
+ },
+ "Abschnitt für den Nachweis": {
+  "en": "segment used in the check",
+  "fr": "tronçon pris pour la vérification",
+  "es": "tramo usado en la comprobación"
+ }
+}

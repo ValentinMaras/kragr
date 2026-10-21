@@ -1,0 +1,974 @@
+{
+"08-0": {
+"fr": "Cisaillement de bloc et rupture en traction de la section nette (annexe A), traction perpendiculaire au fil pour une force inclinée par rapport au fil (8.1.4), vis sollicitées axialement, renforcements et sécurité incendie.",
+"es": "Desgarro de bloque y rotura por tracción de la sección neta (anejo A), tracción perpendicular a la fibra para fuerzas inclinadas respecto a la fibra (8.1.4), tornillos solicitados axialmente, refuerzos y protección contra incendios."
+},
+"08-1": {
+"fr": "Assemblage de bois",
+"es": "Unión de madera"
+},
+"08-2": {
+"fr": "DIN EN 1995-1-1 avec AN, section 8",
+"es": "DIN EN 1995-1-1 con AN, apartado 8"
+},
+"08-3": {
+"fr": "Clou, tige lisse",
+"es": "Clavo, vástago liso"
+},
+"08-4": {
+"fr": "Disposition",
+"es": "Disposición"
+},
+"08-5": {
+"fr": "Bois, service",
+"es": "Madera, servicio"
+},
+"08-6": {
+"fr": "{}, classe de service {}, classe de durée de chargement “{}”, k<sub>mod</sub> = {}, γ<sub>M</sub> = 1,3 ; α<sub>1</sub> = {}°{}",
+"es": "{}, clase de servicio {}, clase de duración de la carga “{}”, k<sub>mod</sub> = {}, γ<sub>M</sub> = 1,3; α<sub>1</sub> = {}°{}"
+},
+"08-7": {
+"fr": "Nombre, entraxes",
+"es": "Número, separaciones"
+},
+"08-8": {
+"fr": "{} rangée(s) × {} ; a<sub>1</sub> = {}, a<sub>2</sub> = {}, a<sub>3</sub> = {}, a<sub>4</sub> = {} mm",
+"es": "{} fila(s) × {}; a<sub>1</sub> = {}, a<sub>2</sub> = {}, a<sub>3</sub> = {}, a<sub>4</sub> = {} mm"
+},
+"08-9": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Assemblage</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Unión</h2><div class=\"figure\">{}</div></section>"
+},
+"08-10": {
+"fr": "Équations de Johansen (8.6)–(8.13), nombre efficace (8.34) ou Tab. 8.1, entraxes minimaux Tab. 8.2/8.5.",
+"es": "Ecuaciones de Johansen (8.6)–(8.13), número efectivo (8.34) o Tab. 8.1, separaciones mínimas Tab. 8.2/8.5."
+},
+"08-11": {
+"fr": "Bois – bois, simple cisaillement",
+"es": "Madera – madera, simple cortadura"
+},
+"08-12": {
+"fr": "Bois – bois – bois, double cisaillement",
+"es": "Madera – madera – madera, doble cortadura"
+},
+"08-13": {
+"fr": "Platine métallique insérée, double cisaillement",
+"es": "Chapa metálica interior (ranurada), doble cortadura"
+},
+"08-14": {
+"fr": "Platines métalliques extérieures, double cisaillement",
+"es": "Chapas metálicas exteriores, doble cortadura"
+},
+"08-15": {
+"fr": "Platine métallique – bois, simple cisaillement",
+"es": "Chapa metálica – madera, simple cortadura"
+},
+"08-16": {
+"fr": "{} × {} mm, {} · k<sub>mod</sub> = {} · {} kN/m de poids propre",
+"es": "{} × {} mm, {} · k<sub>mod</sub> = {} · {} kN/m de peso propio"
+},
+"08-17": {
+"fr": "Valeurs de calcul : f<sub>d</sub> = k<sub>mod</sub>·f<sub>k</sub>/γ<sub>M</sub>",
+"es": "Valores de cálculo: f<sub>d</sub> = k<sub>mod</sub>·f<sub>k</sub>/γ<sub>M</sub>"
+},
+"08-18": {
+"fr": "f<sub>m,d</sub> = {} (sans k<sub>h</sub>) · f<sub>v,d</sub> = {} · f<sub>c,0,d</sub> = {} · f<sub>c,90,d</sub> = {} · f<sub>t,90,d</sub> = {} N/mm²",
+"es": "f<sub>m,d</sub> = {} (sin k<sub>h</sub>) · f<sub>v,d</sub> = {} · f<sub>c,0,d</sub> = {} · f<sub>c,90,d</sub> = {} · f<sub>t,90,d</sub> = {} N/mm²"
+},
+"08-19": {
+"fr": "Fissures : largeur efficace pour le cisaillement",
+"es": "Fisuras: anchura efectiva para el cortante"
+},
+"08-20": {
+"fr": "Réduction k<sub>v</sub> pour l'entaille en partie basse (éq. 6.62)",
+"es": "Reducción k<sub>v</sub> para la entalladura inferior (ec. 6.62)"
+},
+"08-21": {
+"fr": "5 (bois massif)",
+"es": "5 (madera maciza)"
+},
+"08-22": {
+"fr": "Entaille en partie haute (à l'opposé de l'appui)",
+"es": "Entalladura superior (en el lado opuesto al apoyo)"
+},
+"08-23": {
+"fr": "L'angle rentrant se trouve dans la zone comprimée — pas de réduction : k<sub>v</sub> = 1,0",
+"es": "La esquina entrante está en la zona comprimida — sin reducción: k<sub>v</sub> = 1,0"
+},
+"08-24": {
+"fr": "Contrainte de cisaillement dans la section résiduelle",
+"es": "Tensión tangencial en la sección residual"
+},
+"08-25": {
+"fr": "Vérification (éq. 6.60)",
+"es": "Comprobación (ec. 6.60)"
+},
+"08-26": {
+"fr": "Cisaillement à l'entaille",
+"es": "Cortante en la entalladura"
+},
+"08-27": {
+"fr": "Rendre l'entaille moins profonde (h<sub>ef</sub> plus grand), la biseauter (i &gt; 0), rapprocher l'appui de l'angle (x plus petit) ou renforcer l'angle avec des vis à filetage total.",
+"es": "Hacer la entalladura menos profunda (h<sub>ef</sub> mayor), achaflanarla (i &gt; 0), acercar el apoyo a la esquina (x menor) o reforzar la esquina con tornillos de rosca total."
+},
+"08-28": {
+"fr": "Augmenter la hauteur résiduelle h<sub>ef</sub> ou la largeur.",
+"es": "Aumentar el canto residual h<sub>ef</sub> o el ancho."
+},
+"08-29": {
+"fr": " · longueur du biseau i·(h − h<sub>ef</sub>) = {} mm",
+"es": " · longitud del chaflán i·(h − h<sub>ef</sub>) = {} mm"
+},
+"08-30": {
+"fr": "Profondeur de l'entaille h − h<sub>ef</sub> = {} mm{}",
+"es": "Profundidad de la entalladura h − h<sub>ef</sub> = {} mm{}"
+},
+"08-31": {
+"fr": "Remarques constructives",
+"es": "Observaciones constructivas"
+},
+"08-32": {
+"fr": "α &lt; 0,5 : l'entaille est très profonde. Prévoir un renforcement contre la traction perpendiculaire au fil (par ex. vis à filetage total) ou modifier la section.",
+"es": "α &lt; 0,5: la entalladura es muy profunda. Prever un refuerzo contra la tracción perpendicular a la fibra (p. ej. tornillos de rosca total) o modificar la sección."
+},
+"08-33": {
+"fr": "Géométrie de l'entaille",
+"es": "Geometría de la entalladura"
+},
+"08-34": {
+"fr": "Règles constructives (pratique courante, par ex. d'après DIN 1052 / littérature technique)",
+"es": "Reglas constructivas (práctica habitual, p. ej. según DIN 1052 / bibliografía técnica)"
+},
+"08-35": {
+"fr": "Risque de fissuration",
+"es": "Riesgo de fisuración"
+},
+"08-36": {
+"fr": "Une traction perpendiculaire au fil s'exerce à l'angle rentrant d'une entaille en partie basse — c'est là que le bois se fend en premier.",
+"es": "En la esquina entrante de una entalladura inferior actúa tracción perpendicular a la fibra — ahí es donde la madera se fisura primero."
+},
+"08-37": {
+"fr": "Entaille en partie haute : l'angle se trouve dans la zone comprimée.",
+"es": "Entalladura superior: la esquina está en la zona comprimida."
+},
+"08-38": {
+"fr": "Matériau, géométrie et valeurs de calcul",
+"es": "Material, geometría y valores de cálculo"
+},
+"08-39": {
+"fr": "Inclinaison du bord biseauté",
+"es": "Inclinación del borde achaflanado"
+},
+"08-40": {
+"fr": "Flexion au bord biseauté",
+"es": "Flexión en el borde achaflanado"
+},
+"08-41": {
+"fr": "Section déterminante : du fait de la hauteur variable, elle ne se situe pas à mi-portée",
+"es": "Sección determinante: debido al canto variable, no se encuentra en el centro del vano"
+},
+"08-42": {
+"fr": "contrainte maximale de rive à x = {} m de l'appui (charge uniforme : x = {} = {} m)",
+"es": "tensión máxima en el borde a x = {} m del apoyo (carga uniforme: x = {} = {} m)"
+},
+"08-43": {
+"fr": "Contrainte de flexion au bord (éq. 6.37)",
+"es": "Tensión de flexión en el borde (ec. 6.37)"
+},
+"08-44": {
+"fr": "Réduction k<sub>m,α</sub> pour le bord biseauté comprimé (éq. 6.40)",
+"es": "Reducción k<sub>m,α</sub> para el borde achaflanado comprimido (ec. 6.40)"
+},
+"08-45": {
+"fr": "Vérification (éq. 6.38)",
+"es": "Comprobación (ec. 6.38)"
+},
+"08-46": {
+"fr": "Inclinaison supérieure à 10° : k<sub>m,α</sub> chute fortement — envisager une pente de toiture plus faible ou une poutre à deux versants à intrados courbe.",
+"es": "Inclinación superior a 10°: k<sub>m,α</sub> disminuye mucho — considerar una pendiente de cubierta menor o una viga de doble pendiente con cordón inferior curvo."
+},
+"08-47": {
+"fr": "Flexion dans la section au faîte",
+"es": "Flexión en la sección de la cumbre"
+},
+"08-48": {
+"fr": "Moment au faîte",
+"es": "Momento en la cumbre"
+},
+"08-49": {
+"fr": "Augmentation de contrainte au faîte : déviation du fil (éq. 6.42, 6.43 ; intrados droit → k<sub>l</sub> = k<sub>1</sub>)",
+"es": "Aumento de tensión en la cumbre: desviación de la fibra (ec. 6.42, 6.43; cordón inferior recto → k<sub>l</sub> = k<sub>1</sub>)"
+},
+"08-50": {
+"fr": "Vérification (éq. 6.41, k<sub>r</sub> = 1)",
+"es": "Comprobación (ec. 6.41, k<sub>r</sub> = 1)"
+},
+"08-51": {
+"fr": "Traction perpendiculaire au fil dans la zone du faîte",
+"es": "Tracción perpendicular a la fibra en la zona de la cumbre"
+},
+"08-52": {
+"fr": "Contrainte de traction perpendiculaire au fil au faîte (éq. 6.54, intrados droit → k<sub>p</sub> = k<sub>5</sub>)",
+"es": "Tensión de tracción perpendicular a la fibra en la cumbre (ec. 6.54, cordón inferior recto → k<sub>p</sub> = k<sub>5</sub>)"
+},
+"08-53": {
+"fr": "Effet de volume : plus le volume sollicité est grand, plus un défaut dans le bois est probable",
+"es": "Efecto del volumen: cuanto mayor es el volumen solicitado, más probable es un defecto en la madera"
+},
+"08-54": {
+"fr": "k<sub>vol</sub> = (V<sub>0</sub>/V)<sup>0,2</sup> = (0,01/{})<sup>0,2</sup> = {} · k<sub>dis</sub> = 1,4 (poutre à deux versants)",
+"es": "k<sub>vol</sub> = (V<sub>0</sub>/V)<sup>0,2</sup> = (0,01/{})<sup>0,2</sup> = {} · k<sub>dis</sub> = 1,4 (viga de doble pendiente)"
+},
+"08-55": {
+"fr": "Vérification (éq. 6.50)",
+"es": "Comprobación (ec. 6.50)"
+},
+"08-56": {
+"fr": "Traction perpendiculaire au fil trop élevée au faîte : renforcement (tiges filetées collées, vis à filetage total) ou clé de faîte rapportée.",
+"es": "Tracción perpendicular a la fibra excesiva en la cumbre: refuerzo (barras roscadas encoladas, tornillos de rosca total) o cuña de cumbre añadida."
+},
+"08-57": {
+"fr": "Pour les poutres à deux versants, tenir également compte des contraintes de traction perpendiculaire au fil d'origine climatique — les renforcements au faîte sont courants en pratique.",
+"es": "En vigas de doble pendiente, considerar además las tensiones de tracción perpendicular a la fibra de origen climático — los refuerzos en la cumbre son habituales en la práctica."
+},
+"08-58": {
+"fr": "Cisaillement à l'appui",
+"es": "Cortante en el apoyo"
+},
+"08-59": {
+"fr": "Zone du faîte",
+"es": "Zona de la cumbre"
+},
+"08-60": {
+"fr": "σ<sub>m,α,d</sub> = {} N/mm² à x = {} m · k<sub>m,α</sub> = {}",
+"es": "σ<sub>m,α,d</sub> = {} N/mm² en x = {} m · k<sub>m,α</sub> = {}"
+},
+"08-61": {
+"fr": "Hauteurs représentées exagérées. Bleu en tirets : section déterminante au bord biseauté.",
+"es": "Cantos representados exagerados. Azul discontinuo: sección determinante en el borde achaflanado."
+},
+"08-62": {
+"fr": "Compression oblique par rapport au fil sur la surface d'embrèvement",
+"es": "Compresión oblicua a la fibra en la superficie de la unión a diente"
+},
+"08-63": {
+"fr": "Embrèvement frontal : la surface divise l'angle obtus en deux — la force et le fil forment l'angle γ/2 dans la membrure et la diagonale",
+"es": "Ensamble a diente frontal: la superficie biseca el ángulo obtuso — la fuerza y la fibra forman el ángulo γ/2 en el cordón y en la diagonal"
+},
+"08-64": {
+"fr": "Embrèvement à talon : la surface est perpendiculaire à la diagonale — dans la membrure, la force agit sous l'angle γ par rapport au fil",
+"es": "Ensamble a diente de talón: la superficie es perpendicular a la diagonal — en el cordón la fuerza actúa con el ángulo γ respecto a la fibra"
+},
+"08-65": {
+"fr": "Force sur la surface F = S·cos(γ/2), surface A = b·t<sub>v</sub>/cos(γ/2)",
+"es": "Fuerza sobre la superficie F = S·cos(γ/2), superficie A = b·t<sub>v</sub>/cos(γ/2)"
+},
+"08-66": {
+"fr": "Force sur la surface F = S, surface A = b·t<sub>v</sub>/cos γ",
+"es": "Fuerza sobre la superficie F = S, superficie A = b·t<sub>v</sub>/cos γ"
+},
+"08-67": {
+"fr": "Résistance en compression sous l'angle α = {}° (éq. 6.16)",
+"es": "Resistencia a compresión con el ángulo α = {}° (ec. 6.16)"
+},
+"08-68": {
+"fr": "Augmenter la profondeur d'embrèvement (respecter la limite), choisir une section plus large ou réaliser un double embrèvement.",
+"es": "Aumentar la profundidad del diente (respetando el límite), elegir una sección más ancha o ejecutar un diente doble."
+},
+"08-69": {
+"fr": "Profondeur d'embrèvement",
+"es": "Profundidad del diente"
+},
+"08-70": {
+"fr": "L'embrèvement affaiblit la membrure — la profondeur est limitée",
+"es": "El diente debilita el cordón — la profundidad está limitada"
+},
+"08-71": {
+"fr": "Cisaillement du talon (bois d'about)",
+"es": "Cortante del talón (madera de testa)"
+},
+"08-72": {
+"fr": "La composante horizontale de l'effort dans la diagonale cisaille le talon",
+"es": "La componente horizontal de la fuerza de la diagonal cizalla el talón"
+},
+"08-73": {
+"fr": "longueur efficace du talon l<sub>v,ef</sub> = min(l<sub>v</sub> ; 8·t<sub>v</sub>) = min({} ; {}) = {} mm",
+"es": "longitud efectiva del talón l<sub>v,ef</sub> = min(l<sub>v</sub>; 8·t<sub>v</sub>) = min({}; {}) = {} mm"
+},
+"08-74": {
+"fr": "Sans réduction pour fissuration k<sub>cr</sub> (pas de contrainte de cisaillement due à la flexion). Le maintien en position (boulons, agrafes) est à concevoir séparément.",
+"es": "Sin reducción por fisuración k<sub>cr</sub> (sin tensión tangencial por flexión). La fijación de posición (pernos, grapas) debe proyectarse por separado."
+},
+"08-75": {
+"fr": "Plan de cisaillement",
+"es": "Plano de corte"
+},
+"08-76": {
+"fr": "τ dans le talon = {} N/mm²",
+"es": "τ en el talón = {} N/mm²"
+},
+"08-77": {
+"fr": "Bleu : surface d'embrèvement comprimée. Orange en tirets : plan de cisaillement du talon. Schématique, hors échelle.",
+"es": "Azul: superficie del diente comprimida. Naranja discontinuo: plano de corte del talón. Esquemático, sin escala."
+},
+"08-78": {
+"fr": "Renforcements par vis à filetage total (DIN EN 1995-1-1/NA, NA.6.8), percements, entailles en about de poutre sans appui et entailles inclinées avec interaction effort tranchant–flexion.",
+"es": "Refuerzos con tornillos de rosca total (DIN EN 1995-1-1/NA, NA.6.8), perforaciones, entalladuras en el extremo de la viga sin apoyo y entalladuras inclinadas con interacción de cortante y flexión."
+},
+"08-79": {
+"fr": "poutres courbes et poutres à deux versants à intrados courbe (k<sub>r</sub>, k<sub>2</sub>…k<sub>7</sub>), déversement, renforcement contre la traction perpendiculaire au fil, flèche avec déformation due à l'effort tranchant et contraintes de traction perpendiculaire au fil d'origine climatique.",
+"es": "vigas curvas y vigas de doble pendiente con cordón inferior curvo (k<sub>r</sub>, k<sub>2</sub>…k<sub>7</sub>), pandeo lateral, refuerzo contra la tracción perpendicular a la fibra, flecha con deformación por cortante y tensiones de tracción perpendicular a la fibra de origen climático."
+},
+"08-80": {
+"fr": "double embrèvement, embrèvement avec tenon, vérification de la section affaiblie de la membrure (traction et flexion dans la section nette) et maintien en position.",
+"es": "diente doble, diente con espiga, comprobación de la sección debilitada del cordón (tracción y flexión en la sección neta) y fijación de posición."
+},
+"08-81": {
+"fr": "Bois lamellé-collé (BLC)",
+"es": "Madera laminada encolada (MLE)"
+},
+"08-82": {
+"fr": "{} ({}), classe de service {}, classe de durée de chargement “{}”, k<sub>mod</sub> = {}, γ<sub>M</sub> = 1,3",
+"es": "{} ({}), clase de servicio {}, clase de duración de la carga “{}”, k<sub>mod</sub> = {}, γ<sub>M</sub> = 1,3"
+},
+"08-83": {
+"fr": "DIN EN 1995-1-1 avec AN, 6.5.2",
+"es": "DIN EN 1995-1-1 con AN, 6.5.2"
+},
+"08-84": {
+"fr": "DIN EN 1995-1-1 avec AN, 6.4",
+"es": "DIN EN 1995-1-1 con AN, 6.4"
+},
+"08-85": {
+"fr": "DIN EN 1995-1-1 avec AN, 6.2.2",
+"es": "DIN EN 1995-1-1 con AN, 6.2.2"
+},
+"08-86": {
+"fr": "Vérification satisfaite",
+"es": "La comprobación cumple"
+},
+"08-87": {
+"fr": "Vérification non satisfaite",
+"es": "La comprobación no cumple"
+},
+"08-88": {
+"fr": "<p>Taux de travail η = {} — <span class=\"{}\">{}</span></p>",
+"es": "<p>Aprovechamiento η = {} — <span class=\"{}\">{}</span></p>"
+},
+"08-89": {
+"fr": "vérifié",
+"es": "cumple"
+},
+"08-90": {
+"fr": "non vérifié",
+"es": "no cumple"
+},
+"08-91": {
+"fr": "<section><h2>Récapitulatif</h2><table><tr><th>Vérification</th><th>η</th><th>Résultat</th></tr>\n      {}</table>",
+"es": "<section><h2>Resumen</h2><table><tr><th>Comprobación</th><th>η</th><th>Resultado</th></tr>\n      {}</table>"
+},
+"08-92": {
+"fr": "Poutre en acier",
+"es": "Viga de acero"
+},
+"08-93": {
+"fr": "Profilé, matériau",
+"es": "Perfil, material"
+},
+"08-94": {
+"fr": " — profilé le plus léger de la série choisi automatiquement",
+"es": " — perfil más ligero de la serie elegido automáticamente"
+},
+"08-95": {
+"fr": "semelle supérieure",
+"es": "ala superior"
+},
+"08-96": {
+"fr": "semelle inférieure",
+"es": "ala inferior"
+},
+"08-97": {
+"fr": "centre de gravité",
+"es": "centro de gravedad"
+},
+"08-98": {
+"fr": "L = {} m, β<sub>y</sub> = {}, β<sub>z</sub> = {}, L<sub>LT</sub> = {} m, point d'application de la charge {}",
+"es": "L = {} m, β<sub>y</sub> = {}, β<sub>z</sub> = {}, L<sub>LT</sub> = {} m, punto de aplicación de la carga {}"
+},
+"08-99": {
+"fr": "Efforts internes (ELU)",
+"es": "Esfuerzos internos (ELU)"
+},
+"08-100": {
+"fr": "M<sub>y,Ed</sub> = {} kNm{}, V<sub>z,Ed</sub> = {} kN, N<sub>Ed</sub> = {} kN · allure du moment : {}",
+"es": "M<sub>y,Ed</sub> = {} kNm{}, V<sub>z,Ed</sub> = {} kN, N<sub>Ed</sub> = {} kN · distribución del momento: {}"
+},
+"08-101": {
+"fr": "Introduction de la charge",
+"es": "Introducción de la carga"
+},
+"08-102": {
+"fr": "en travée",
+"es": "en el vano"
+},
+"08-103": {
+"fr": "à l'extrémité de la poutre, c = {} mm",
+"es": "en el extremo de la viga, c = {} mm"
+},
+"08-104": {
+"fr": "Aptitude au service",
+"es": "Aptitud al servicio"
+},
+"08-105": {
+"fr": "M<sub>y,k</sub> = {} kNm, limite L/{}",
+"es": "M<sub>y,k</sub> = {} kNm, límite L/{}"
+},
+"08-106": {
+"fr": "Coefficients partiels",
+"es": "Coeficientes parciales"
+},
+"08-107": {
+"fr": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1993-1-1 avec AN</div>\n    <section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Profilé</h2><div class=\"figure\">{}</div></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">I<sub>T</sub> déterminé à partir des dimensions nominales (formule du fabricant avec congé de raccordement), écart par rapport aux valeurs des tableaux jusqu'à environ 3 %. Outil pédagogique — ne remplace pas une note de calcul vérifiée.</p></section>",
+"es": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1993-1-1 con AN</div>\n    <section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Perfil</h2><div class=\"figure\">{}</div></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">I<sub>T</sub> obtenido a partir de las dimensiones nominales (fórmula del fabricante con radio de acuerdo), desviación respecto a los valores de las tablas de hasta aproximadamente el 3 %. Herramienta didáctica — no sustituye un cálculo verificado.</p></section>"
+},
+"08-108": {
+"fr": "<p class=\"meta\" style=\"margin-top:8px\">{} Outil pédagogique — ne remplace pas une note de calcul vérifiée.</p></section>",
+"es": "<p class=\"meta\" style=\"margin-top:8px\">{} Herramienta didáctica — no sustituye un cálculo verificado.</p></section>"
+},
+"08-109": {
+"fr": "Assemblage",
+"es": "Unión"
+},
+"08-110": {
+"fr": "DIN EN 1993-1-8 avec AN",
+"es": "DIN EN 1993-1-8 con AN"
+},
+"08-111": {
+"fr": "Boulons",
+"es": "Tornillos"
+},
+"08-112": {
+"fr": "filetage",
+"es": "rosca"
+},
+"08-113": {
+"fr": "tige",
+"es": "caña"
+},
+"08-114": {
+"fr": "{} × {} {} ({} rangées × {} colonnes), {} plan(s) de cisaillement, {} dans le plan de cisaillement",
+"es": "{} × {} {} ({} filas × {} columnas), {} plano(s) de corte, {} en el plano de corte"
+},
+"08-115": {
+"fr": "Entraxes et pinces",
+"es": "Distancias"
+},
+"08-116": {
+"fr": "Platine",
+"es": "Chapa"
+},
+"08-117": {
+"fr": "Coefficient partiel",
+"es": "Coeficiente parcial"
+},
+"08-118": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Disposition des boulons</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Disposición de los tornillos</h2><div class=\"figure\">{}</div></section>"
+},
+"08-119": {
+"fr": "Élément en bois",
+"es": "Elemento de madera"
+},
+"08-120": {
+"fr": "DIN EN 1995-1-1 avec AN",
+"es": "DIN EN 1995-1-1 con AN"
+},
+"08-121": {
+"fr": "Section, matériau",
+"es": "Sección, material"
+},
+"08-122": {
+"fr": " — hauteur choisie automatiquement",
+"es": " — canto elegido automáticamente"
+},
+"08-123": {
+"fr": "L = {} m, {}, longueur de flambement {} m, β<sub>y</sub> = {}, β<sub>z</sub> = {}",
+"es": "L = {} m, {}, longitud de pandeo {} m, β<sub>y</sub> = {}, β<sub>z</sub> = {}"
+},
+"08-124": {
+"fr": "Service",
+"es": "Servicio"
+},
+"08-125": {
+"fr": "Classe de service {}, classe de durée de chargement “{}”, k<sub>mod</sub> = {}, γ<sub>M</sub> = 1,3",
+"es": "Clase de servicio {}, clase de duración de la carga “{}”, k<sub>mod</sub> = {}, γ<sub>M</sub> = 1,3"
+},
+"08-126": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Section</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section><section><h2>Sección</h2><div class=\"figure\">{}</div></section>"
+},
+"08-127": {
+"fr": "Déformation due à l'effort tranchant négligée.",
+"es": "Deformación por cortante despreciada."
+},
+"08-128": {
+"fr": "b = {} cm, h = {} cm (h dans le plan de flexion)",
+"es": "b = {} cm, h = {} cm (h en el plano de flexión)"
+},
+"08-129": {
+"fr": "Matériaux",
+"es": "Materiales"
+},
+"08-130": {
+"fr": "{} (f<sub>ck</sub> = {} N/mm²), B500 · granulat max. {} mm",
+"es": "{} (f<sub>ck</sub> = {} N/mm²), B500 · tamaño máximo del árido {} mm"
+},
+"08-131": {
+"fr": "Classe d'exposition",
+"es": "Clase de exposición"
+},
+"08-132": {
+"fr": "Efforts internes (1er ordre)",
+"es": "Esfuerzos internos (1.er orden)"
+},
+"08-133": {
+"fr": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1992-1-1 avec AN, méthode de la colonne modèle</div>\n    <section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Armatures choisies</h2><div class=\"figure\">{}</div><p style=\"text-align:center\">{}</p></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">Non pris en compte : {} Outil pédagogique — ne remplace pas une note de calcul vérifiée.</p></section>",
+"es": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1992-1-1 con AN, método del pilar modelo</div>\n    <section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Armadura elegida</h2><div class=\"figure\">{}</div><p style=\"text-align:center\">{}</p></section>\n    {}\n      <p class=\"meta\" style=\"margin-top:8px\">No incluido: {} Herramienta didáctica — no sustituye un cálculo verificado.</p></section>"
+},
+"08-134": {
+"fr": "<p>Aucun calcul valide.</p>",
+"es": "<p>No hay un cálculo válido.</p>"
+},
+"08-135": {
+"fr": "Élément en béton armé",
+"es": "Elemento de hormigón armado"
+},
+"08-136": {
+"fr": "Portée, système",
+"es": "Luz, sistema"
+},
+"08-137": {
+"fr": ", cloisons sensibles aux déformations",
+"es": ", tabiques sensibles a las deformaciones"
+},
+"08-138": {
+"fr": "Efforts internes",
+"es": "Esfuerzos internos"
+},
+"08-139": {
+"fr": ", |M<sub>qp,app</sub>| = {} kNm{}",
+"es": ", |M<sub>qp,ap</sub>| = {} kNm{}"
+},
+"08-140": {
+"fr": ", |M<sub>Ed,app</sub>| = {} kNm{}{}",
+"es": ", |M<sub>Ed,ap</sub>| = {} kNm{}{}"
+},
+"08-141": {
+"fr": "Effort tranchant",
+"es": "Esfuerzo cortante"
+},
+"08-142": {
+"fr": "indirect, largeur de la poutre porteuse {} cm",
+"es": "indirecto, ancho de la viga de apoyo {} cm"
+},
+"08-143": {
+"fr": "direct, longueur d'appui t = {} cm",
+"es": "directo, profundidad de apoyo t = {} cm"
+},
+"08-144": {
+"fr": "Crochet/coude",
+"es": "Gancho/patilla"
+},
+"08-145": {
+"fr": "extrémité de barre droite",
+"es": "extremo de barra recto"
+},
+"08-146": {
+"fr": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1992-1-1 avec AN</div>\n    <section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Armatures choisies</h2>\n      <div class=\"figure\">{}</div><p style=\"text-align:center\">{}</p></section>\n    {}\n    <section><h2>Récapitulatif</h2><table><tr><th>Vérification</th><th>η</th><th>Résultat</th></tr>\n      {}</table>\n      <p class=\"meta\" style=\"margin-top:8px\">Non pris en compte : {} Outil pédagogique — ne remplace pas une note de calcul vérifiée.</p></section>",
+"es": "<h1>{}</h1>\n    <div class=\"meta\">Statiq·size v{} · {} {} · DIN EN 1992-1-1 con AN</div>\n    <section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n      {}\n    </table></section>\n    <section><h2>Armadura elegida</h2>\n      <div class=\"figure\">{}</div><p style=\"text-align:center\">{}</p></section>\n    {}\n    <section><h2>Resumen</h2><table><tr><th>Comprobación</th><th>η</th><th>Resultado</th></tr>\n      {}</table>\n      <p class=\"meta\" style=\"margin-top:8px\">No incluido: {} Herramienta didáctica — no sustituye un cálculo verificado.</p></section>"
+},
+"08-147": {
+"fr": "Veuillez définir vous-même la longueur de flambement (conditions d'appui) et le coefficient de fluage. Les moments sont des valeurs selon la théorie du 1er ordre.",
+"es": "Defina usted mismo la longitud de pandeo (condiciones de apoyo) y el coeficiente de fluencia. Los momentos son valores según la teoría de primer orden."
+},
+"08-148": {
+"fr": " · |M<sub>Ed,app</sub>| = {} kNm",
+"es": " · |M<sub>Ed,ap</sub>| = {} kNm"
+},
+"08-149": {
+"fr": "(traction)",
+"es": "(tracción)"
+},
+"08-150": {
+"fr": "(compression)",
+"es": "(compresión)"
+},
+"08-151": {
+"fr": "Flexion déviée (biaxiale), effort tranchant, portiques à nœuds déplaçables (système global), sécurité incendie et recouvrements des armatures longitudinales.",
+"es": "Flexión biaxial (flexión esviada), esfuerzo cortante, pórticos con nudos desplazables (sistema global), protección contra incendios y solapes de la armadura longitudinal."
+},
+"08-152": {
+"fr": "Mur (flux de chaleur horizontal)",
+"es": "Muro (flujo de calor horizontal)"
+},
+"08-153": {
+"fr": "Toiture, plafond donnant sur l'extérieur (flux de chaleur ascendant)",
+"es": "Cubierta, techo hacia el exterior (flujo de calor ascendente)"
+},
+"08-154": {
+"fr": "Plancher sur l'extérieur (flux de chaleur descendant)",
+"es": "Forjado sobre aire exterior (flujo de calor descendente)"
+},
+"08-155": {
+"fr": "Élément en contact avec le sol",
+"es": "Elemento en contacto con el terreno"
+},
+"08-156": {
+"fr": "Mur donnant sur un local non chauffé",
+"es": "Muro hacia un local no calefactado"
+},
+"08-157": {
+"fr": "Toiture / plancher haut du dernier niveau",
+"es": "Cubierta / forjado del último piso"
+},
+"08-158": {
+"fr": "Plancher sur l'extérieur",
+"es": "Forjado sobre aire exterior"
+},
+"08-159": {
+"fr": "Pos. 2 — Dalle de plancher",
+"es": "Pos. 2 — Losa de forjado"
+},
+"08-160": {
+"fr": "Pos. 3 — Retombée de poutre",
+"es": "Pos. 3 — Viga descolgada"
+},
+"08-161": {
+"fr": "Pos. 4 — Poteau intérieur",
+"es": "Pos. 4 — Pilar interior"
+},
+"08-162": {
+"fr": "Pos. 6 — Dalle plate sur poteau intérieur",
+"es": "Pos. 6 — Losa plana sobre pilar interior"
+},
+"08-163": {
+"fr": "(z) et τ",
+"es": "(z) y τ"
+},
+"08-164": {
+"fr": "N/mm², traction positive",
+"es": "N/mm², tracción positiva"
+},
+"08-165": {
+"fr": " (traction)",
+"es": " (tracción)"
+},
+"08-166": {
+"fr": " dans la soudure",
+"es": " en el cordón de soldadura"
+},
+"08-167": {
+"fr": "permanente",
+"es": "permanente"
+},
+"08-168": {
+"fr": "long terme",
+"es": "larga duración"
+},
+"08-169": {
+"fr": "moyen terme",
+"es": "media duración"
+},
+"08-170": {
+"fr": "court terme",
+"es": "corta duración"
+},
+"08-171": {
+"fr": "instantanée",
+"es": "instantánea"
+},
+"08-172": {
+"fr": "Sable, lâche",
+"es": "Arena, suelta"
+},
+"08-173": {
+"fr": "Sable, moyennement dense",
+"es": "Arena, medianamente densa"
+},
+"08-174": {
+"fr": "Sable, dense / sable graveleux",
+"es": "Arena, densa / arena con grava"
+},
+"08-175": {
+"fr": "Gravier",
+"es": "Grava"
+},
+"08-176": {
+"fr": "Limon, raide",
+"es": "Limo, firme"
+},
+"08-177": {
+"fr": "Argile, raide",
+"es": "Arcilla, firme"
+},
+"08-178": {
+"fr": "Argile, très raide",
+"es": "Arcilla, muy firme"
+},
+"08-179": {
+"fr": "sol personnalisé",
+"es": "suelo propio"
+},
+"08-180": {
+"fr": "Mur séparatif entre logements",
+"es": "Muro separador entre viviendas"
+},
+"08-181": {
+"fr": "Mur de cage d'escalier",
+"es": "Muro de caja de escalera"
+},
+"08-182": {
+"fr": "Plancher séparatif entre logements",
+"es": "Forjado separador entre viviendas"
+},
+"08-183": {
+"fr": "Plancher sur cave/passage",
+"es": "Forjado sobre sótano/paso"
+},
+"08-184": {
+"fr": "Volée et palier d'escalier",
+"es": "Tramo y rellano de escalera"
+},
+"08-185": {
+"fr": "Mur mitoyen de maison en bande (niveau le plus bas)",
+"es": "Muro medianero de vivienda adosada (planta más baja)"
+},
+"08-186": {
+"fr": "Mur mitoyen de maison en bande (au-dessus)",
+"es": "Muro medianero de vivienda adosada (por encima)"
+},
+"08-187": {
+"fr": "La classe de résistance du béton choisie est trop faible pour la classe d'exposition (durabilité, EN 1992-1-1 Tab. E.1DE).",
+"es": "La clase de resistencia del hormigón elegida es demasiado baja para la clase de exposición (durabilidad, EN 1992-1-1 Tab. E.1DE)."
+},
+"08-188": {
+"fr": "Le moment est supérieur à ce que la zone comprimée et les armatures tendues peuvent reprendre avec le bras de levier interne.",
+"es": "El momento es mayor que el que pueden resistir la zona comprimida y la armadura traccionada con el brazo mecánico."
+},
+"08-189": {
+"fr": "Les barres ne tiennent pas dans la section avec les entraxes requis, ou sont trop espacées.",
+"es": "Las barras no caben en la sección con las separaciones necesarias, o están demasiado separadas."
+},
+"08-190": {
+"fr": "L'effort tranchant dépasse la résistance des étriers (tirant) ou des bielles de béton comprimées.",
+"es": "El esfuerzo cortante supera la resistencia de los estribos (tirante) o de las bielas de hormigón comprimidas."
+},
+"08-191": {
+"fr": "Le cisaillement longitudinal entre l'âme et la membrure est trop élevé pour les bielles comprimées ou les armatures transversales de la dalle.",
+"es": "El rasante entre el alma y el ala es demasiado grande para las bielas comprimidas o la armadura transversal de la losa."
+},
+"08-192": {
+"fr": "Les armatures ne peuvent pas ancrer leur effort de traction résiduel sur la longueur d'appui disponible.",
+"es": "La armadura no puede anclar su fuerza de tracción residual en la profundidad de apoyo disponible."
+},
+"08-193": {
+"fr": "La contrainte dans l'acier sous charge quasi permanente est trop élevée, l'ouverture calculée des fissures dépasse w<sub>max</sub>.",
+"es": "La tensión en el acero bajo carga cuasipermanente es demasiado alta; la abertura de fisura calculada supera w<sub>max</sub>."
+},
+"08-194": {
+"fr": "La contrainte dans l'acier sur appui est trop élevée, l'ouverture calculée des fissures dépasse w<sub>max</sub>.",
+"es": "La tensión en el acero sobre el apoyo es demasiado alta; la abertura de fisura calculada supera w<sub>max</sub>."
+},
+"08-195": {
+"fr": "L'élément est trop mince par rapport à sa portée (l/d supérieur à la limite) — la flèche serait trop grande.",
+"es": "El elemento es demasiado esbelto para su luz (l/d por encima del límite) — la flecha sería excesiva."
+},
+"08-196": {
+"fr": "Le moment sur appui est supérieur à ce que la zone comprimée inférieure et les armatures supérieures peuvent reprendre.",
+"es": "El momento sobre el apoyo es mayor que el que pueden resistir la zona comprimida inferior y la armadura superior."
+},
+"08-197": {
+"fr": "L'effort normal et le moment (avec le moment additionnel dû à la déformation) se situent en dehors du diagramme d'interaction de la section.",
+"es": "El esfuerzo axil y el momento (incluido el momento adicional por deformación) quedan fuera del diagrama de interacción de la sección."
+},
+"08-198": {
+"fr": "La contrainte de cisaillement sur le contour de contrôle de base dépasse la résistance de la dalle sans armatures de poinçonnement.",
+"es": "La tensión tangencial en el perímetro de control básico supera la resistencia de la losa sin armadura de punzonamiento."
+},
+"08-199": {
+"fr": "La contrainte de cisaillement dépasse même la résistance maximale avec armatures de poinçonnement (v<sub>Rd,max</sub>).",
+"es": "La tensión tangencial supera incluso la resistencia máxima con armadura de punzonamiento (v<sub>Rd,max</sub>)."
+},
+"08-200": {
+"fr": "La section est élancée (classe 4) : des parties voilent avant que la limite d'élasticité ne soit atteinte.",
+"es": "La sección es esbelta (clase 4): partes de ella abollan antes de alcanzar el límite elástico."
+},
+"08-201": {
+"fr": "Les efforts internes dépassent la résistance plastique ou élastique de la section.",
+"es": "Los esfuerzos internos superan la resistencia plástica o elástica de la sección."
+},
+"08-202": {
+"fr": "La barre flambe avant que la section ne soit pleinement utilisée (réduction χ).",
+"es": "La barra pandea antes de que la sección se aproveche por completo (reducción χ)."
+},
+"08-203": {
+"fr": "La semelle comprimée se dérobe latéralement et le profilé se tord (déversement) avant que M<sub>Rd</sub> ne soit atteint.",
+"es": "El ala comprimida se desplaza lateralmente y el perfil gira (pandeo lateral) antes de alcanzar M<sub>Rd</sub>."
+},
+"08-204": {
+"fr": "La compression et la flexion combinées dépassent la stabilité de la barre (interaction 6.61/6.62).",
+"es": "La compresión y la flexión combinadas superan la estabilidad de la barra (interacción 6.61/6.62)."
+},
+"08-205": {
+"fr": "Les contraintes dues à la torsion (part de gauchissement et part de Saint-Venant) combinées à la flexion sont trop élevées.",
+"es": "Las tensiones debidas a la torsión (parte de alabeo y parte de Saint-Venant) combinadas con la flexión son demasiado grandes."
+},
+"08-206": {
+"fr": "La charge ponctuelle surcharge l'âme (écrasement local de l'âme) au point d'introduction de la charge.",
+"es": "La carga puntual sobrecarga el alma (aplastamiento del alma) en el punto de introducción de la carga."
+},
+"08-207": {
+"fr": "La flèche due à la charge caractéristique dépasse la valeur limite.",
+"es": "La flecha debida a la carga característica supera el valor límite."
+},
+"08-208": {
+"fr": "Les pinces ou entraxes des trous sont inférieurs aux valeurs minimales du Tab. 3.3.",
+"es": "Las distancias a bordes o entre agujeros son menores que los valores mínimos de la Tab. 3.3."
+},
+"08-209": {
+"fr": "L'effort par boulon est supérieur à sa résistance au cisaillement ou à la pression diamétrale.",
+"es": "La fuerza por tornillo es mayor que su resistencia a cortante o a aplastamiento."
+},
+"08-210": {
+"fr": "L'effort de traction par boulon est supérieur à sa résistance à la traction.",
+"es": "La fuerza de tracción por tornillo es mayor que su resistencia a tracción."
+},
+"08-211": {
+"fr": "L'effort par mm de soudure d'angle est supérieur à la résistance de la soudure.",
+"es": "La fuerza por mm de soldadura en ángulo es mayor que la resistencia de la soldadura."
+},
+"08-212": {
+"fr": "L'effort de compression est supérieur à la résistance du joint sous la surface efficace de la platine.",
+"es": "La fuerza de compresión es mayor que la resistencia de la junta bajo la superficie efectiva de la chapa."
+},
+"08-213": {
+"fr": "Le frottement entre la platine et le mortier de calage ne suffit pas pour l'effort tranchant.",
+"es": "El rozamiento entre la chapa y el mortero de nivelación no es suficiente para el esfuerzo cortante."
+},
+"08-214": {
+"fr": "Les soudures d'angle sur l'âme sont trop faibles pour l'effort tranchant.",
+"es": "Las soldaduras en ángulo del alma son demasiado débiles para el esfuerzo cortante."
+},
+"08-215": {
+"fr": "La contrainte normale à la semelle (due à M et N) dépasse la résistance de la soudure de semelle.",
+"es": "La tensión normal en el ala (debida a M y N) supera la resistencia de la soldadura del ala."
+},
+"08-216": {
+"fr": "Le cisaillement et la contrainte normale à l'extrémité de la soudure d'âme dépassent sa résistance.",
+"es": "El cortante y la tensión normal en el extremo de la soldadura del alma superan su resistencia."
+},
+"08-217": {
+"fr": "La gorge ou la longueur de la soudure ne respectent pas les valeurs minimales constructives.",
+"es": "El espesor de garganta o la longitud del cordón no cumplen los valores mínimos constructivos."
+},
+"08-218": {
+"fr": "Les contraintes dans les soudures d'angle dépassent leur résistance.",
+"es": "Las tensiones en las soldaduras en ángulo superan su resistencia."
+},
+"08-219": {
+"fr": "La platine elle-même est trop faible (résistance à la traction ou contrainte équivalente à la section d'encastrement sur le poteau).",
+"es": "La propia chapa es demasiado débil (resistencia a tracción o tensión equivalente en la sección de arranque junto al pilar)."
+},
+"08-220": {
+"fr": "La contrainte de flexion est supérieure à la résistance de calcul en flexion.",
+"es": "La tensión de flexión es mayor que la resistencia de cálculo a flexión."
+},
+"08-221": {
+"fr": "La contrainte de cisaillement (avec le coefficient de fissuration k<sub>cr</sub>) est supérieure à la résistance au cisaillement.",
+"es": "La tensión tangencial (con el factor de fisuración k<sub>cr</sub>) es mayor que la resistencia a cortante."
+},
+"08-222": {
+"fr": "La contrainte de compression perpendiculaire au fil à l'appui est trop élevée — le bois est écrasé.",
+"es": "La tensión de compresión perpendicular a la fibra en el apoyo es demasiado alta — la madera se aplasta."
+},
+"08-223": {
+"fr": "La barre flambe sous compression et flexion avant que la résistance ne soit atteinte.",
+"es": "La barra pandea bajo compresión y flexión antes de alcanzar la resistencia."
+},
+"08-224": {
+"fr": "La poutre se dérobe latéralement (déversement) avant que la résistance à la flexion ne soit atteinte.",
+"es": "La viga pandea lateralmente antes de alcanzar la resistencia a flexión."
+},
+"08-225": {
+"fr": "La flèche (avec fluage) dépasse les valeurs limites.",
+"es": "La flecha (con fluencia) supera los valores límite."
+},
+"08-226": {
+"fr": "L'effort est supérieur à la résistance de tous les organes d'assemblage (nombre efficace × plans de cisaillement × F<sub>v,Rd</sub>).",
+"es": "La fuerza es mayor que la resistencia de todos los medios de unión (número efectivo × planos de corte × F<sub>v,Rd</sub>)."
+},
+"08-227": {
+"fr": "Les entraxes ou les épaisseurs de bois sont inférieurs aux valeurs minimales — le bois pourrait se fendre.",
+"es": "Las separaciones o los espesores de madera son menores que los valores mínimos — la madera podría hendirse."
+},
+"08-228": {
+"fr": "L'effet d'entaille à l'angle rentrant (k<sub>v</sub>) réduit trop la résistance au cisaillement de la section résiduelle.",
+"es": "El efecto de entalla en la esquina entrante (k<sub>v</sub>) reduce demasiado la resistencia a cortante de la sección residual."
+},
+"08-229": {
+"fr": "L'entaille est trop profonde pour l'exécution usuelle sans renforcement.",
+"es": "La entalladura es demasiado profunda para la ejecución habitual sin refuerzo."
+},
+"08-230": {
+"fr": "La contrainte de flexion au bord biseauté (avec k<sub>m,α</sub>) est trop élevée.",
+"es": "La tensión de flexión en el borde achaflanado (con k<sub>m,α</sub>) es demasiado alta."
+},
+"08-231": {
+"fr": "La contrainte de flexion dans la section au faîte (avec l'augmentation de contrainte k<sub>l</sub>) est trop élevée.",
+"es": "La tensión de flexión en la sección de la cumbre (con el aumento de tensión k<sub>l</sub>) es demasiado alta."
+},
+"08-232": {
+"fr": "La contrainte de traction perpendiculaire au fil dans la zone du faîte est supérieure à la résistance réduite en traction perpendiculaire.",
+"es": "La tensión de tracción perpendicular a la fibra en la zona de la cumbre es mayor que la resistencia reducida a tracción perpendicular."
+},
+"08-233": {
+"fr": "La contrainte de cisaillement à l'appui est trop élevée.",
+"es": "La tensión tangencial en el apoyo es demasiado alta."
+},
+"08-234": {
+"fr": "La contrainte de compression oblique par rapport au fil sur la surface d'embrèvement est trop élevée.",
+"es": "La tensión de compresión oblicua a la fibra en la superficie del diente es demasiado alta."
+},
+"08-235": {
+"fr": "La profondeur d'embrèvement dépasse l'affaiblissement admissible de la membrure.",
+"es": "La profundidad del diente supera el debilitamiento admisible del cordón."
+},
+"08-236": {
+"fr": "Le talon est trop court : l'effort horizontal de la diagonale le cisaille.",
+"es": "El talón es demasiado corto: la fuerza horizontal de la diagonal lo cizalla."
+},
+"08-237": {
+"fr": "L'effort normal est supérieur à la résistance réduite du mur (Φ·f<sub>d</sub>·A).",
+"es": "El esfuerzo axil es mayor que la resistencia reducida del muro (Φ·f<sub>d</sub>·A)."
+},
+"08-238": {
+"fr": "La charge ponctuelle est supérieure à la résistance sous la surface partielle chargée.",
+"es": "La carga puntual es mayor que la resistencia bajo la superficie parcial cargada."
+},
+"08-239": {
+"fr": "La charge verticale est trop faible : sans compression suffisante, aucune voûte de compression ne se forme contre la poussée des terres.",
+"es": "La carga vertical es demasiado pequeña: sin compresión suficiente no se forma un arco de compresión frente al empuje del terreno."
+},
+"08-240": {
+"fr": "La charge verticale est si grande que la maçonnerie est surchargée.",
+"es": "La carga vertical es tan grande que la fábrica se sobrecarga."
+},
+"08-241": {
+"fr": "Le moment dû à l'effort horizontal est trop grand par rapport à la charge verticale — le joint s'ouvre trop.",
+"es": "El momento debido a la fuerza horizontal es demasiado grande en relación con la carga vertical — la junta se abre demasiado."
+},
+"08-242": {
+"fr": "La contrainte de compression au bord du mur dépasse la résistance à la compression.",
+"es": "La tensión de compresión en el borde del muro supera la resistencia a compresión."
+}
+}

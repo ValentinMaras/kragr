@@ -1,0 +1,926 @@
+{
+ "26-0": {
+  "fr": "Pour les sections absentes des tableaux, l'aire, le centre de gravité, le moment d'inertie et l'axe neutre plastique se calculent soi-même. Avec des semelles inégales, l'axe neutre se déplace — la partie comprimée de l'âme α·c n'est alors plus la moitié de la hauteur de l'âme. Dans l'exemple, la semelle large se trouve en bas, en zone tendue : l'axe neutre descend, une plus grande part de l'âme est comprimée, et l'âme passe en classe 3. Pour les sections soudées, c est la longueur libre jusqu'au pied du cordon (gorge a, côté √2·a).",
+  "es": "Para las secciones que no figuran en ninguna tabla, el área, el centro de gravedad, el momento de inercia y el eje neutro plástico se calculan uno mismo. Con alas desiguales el eje neutro se desplaza: la parte comprimida del alma α·c ya no es la mitad de la altura del alma. En el ejemplo el ala ancha está abajo, en la zona traccionada: el eje neutro baja, una mayor parte del alma está comprimida y el alma pasa a clase 3. En secciones soldadas, c es la longitud libre hasta el pie del cordón (garganta a, lado √2·a)."
+ },
+ "26-1": {
+  "fr": "Section en I soudée 250×15 / 600×10 / 300×20, S355",
+  "es": "Sección en I soldada 250×15 / 600×10 / 300×20, S355"
+ },
+ "26-2": {
+  "fr": "Cornières à ailes égales L b × t",
+  "es": "Angulares de lados iguales L b × t"
+ },
+ "26-3": {
+  "fr": "Charge uniformément répartie",
+  "es": "Carga uniformemente distribuida"
+ },
+ "26-4": {
+  "fr": "Charge uniformément répartie → C<sub>1</sub> = 1,120, C<sub>2</sub> = 0,45 · point d'application de la charge z<sub>g</sub> = 15,00 cm (semelle supérieure, défavorable)",
+  "es": "Carga uniformemente distribuida → C<sub>1</sub> = 1,120, C<sub>2</sub> = 0,45 · punto de aplicación de la carga z<sub>g</sub> = 15,00 cm (ala superior, desfavorable)"
+ },
+ "26-5": {
+  "fr": "Limites",
+  "es": "Límites"
+ },
+ "26-6": {
+  "fr": "Limites 9ε = 7,3 · 10ε = 8,1 · 14ε = 11,4 → semelle classe 1",
+  "es": "Límites 9ε = 7,3 · 10ε = 8,1 · 14ε = 11,4 → ala clase 1"
+ },
+ "26-7": {
+  "fr": "Limites 9ε = 7,32 · 10ε = 8,14 · 14ε = 11,39 → semelle supérieure classe 2",
+  "es": "Límites 9ε = 7,32 · 10ε = 8,14 · 14ε = 11,39 → ala superior clase 2"
+ },
+ "26-8": {
+  "fr": "Limites α = 0,819 : cl. 1 ≤ 33,4 · cl. 2 ≤ 38,4 · ψ = -0,412 : cl. 3 ≤ 64,0 → âme classe 2",
+  "es": "Límites α = 0,819: cl. 1 ≤ 33,4 · cl. 2 ≤ 38,4 · ψ = -0,412: cl. 3 ≤ 64,0 → alma clase 2"
+ },
+ "26-9": {
+  "fr": "Valeur limite",
+  "es": "Valor límite"
+ },
+ "26-10": {
+  "fr": "H / 150 à H / 300",
+  "es": "H / 150 a H / 300"
+ },
+ "26-11": {
+  "fr": "HEB 200, S235 : f<sub>y</sub> = 235 N/mm² · classe 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 642,5 cm³",
+  "es": "HEB 200, S235: f<sub>y</sub> = 235 N/mm² · clase 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 642,5 cm³"
+ },
+ "26-12": {
+  "fr": "Soudure âme-semelle a [mm]",
+  "es": "Soldadura alma-ala a [mm]"
+ },
+ "26-13": {
+  "fr": "Profilé creux, fini à chaud",
+  "es": "Perfil hueco, acabado en caliente"
+ },
+ "26-14": {
+  "fr": "Profilés creux formés à froid",
+  "es": "Perfiles huecos conformados en frío"
+ },
+ "26-15": {
+  "fr": "Les profilés creux sont rigides en torsion (section fermée) et donc pratiquement insensibles au déversement. Ils conviennent pour les poteaux, les treillis et les portiques. Courbe de flambement <b>a</b> (finis à chaud) ou <b>c</b> (formés à froid, EN 10219).",
+  "es": "Los perfiles huecos son rígidos a torsión (sección cerrada) y, por tanto, prácticamente no sufren pandeo lateral. Son adecuados para pilares, celosías y pórticos. Curva de pandeo <b>a</b> (acabado en caliente) o <b>c</b> (conformado en frío, EN 10219)."
+ },
+ "26-16": {
+  "fr": "Profilés creux finis à chaud",
+  "es": "Perfiles huecos acabados en caliente"
+ },
+ "26-17": {
+  "fr": "Profilés creux — finis à chaud selon EN 10210-2",
+  "es": "Perfiles huecos — acabados en caliente según EN 10210-2"
+ },
+ "26-18": {
+  "fr": "Épaisseur maximale (règle usuelle)",
+  "es": "Espesor máximo (regla habitual)"
+ },
+ "26-19": {
+  "fr": "I et W<sub>pl</sub> : rectangle extérieur moins rectangle intérieur, chacun avec les carrés d'angle retranchés et les quarts de cercle ajoutés",
+  "es": "I y W<sub>pl</sub>: rectángulo exterior menos rectángulo interior, cada uno con los cuadrados de esquina restados y los cuartos de círculo añadidos"
+ },
+ "26-20": {
+  "fr": "Profilé en I de dimensions h, b, t_w, t_f, r",
+  "es": "Perfil en I de dimensiones h, b, t_w, t_f, r"
+ },
+ "26-21": {
+  "fr": "I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ avec D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)",
+  "es": "I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ con D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)"
+ },
+ "26-22": {
+  "fr": "I<sub>y</sub>, W<sub>y</sub> : flexion autour de l'axe fort y–y · I<sub>z</sub>, W<sub>z</sub> : flexion autour de l'axe faible z–z",
+  "es": "I<sub>y</sub>, W<sub>y</sub>: flexión respecto al eje fuerte y–y · I<sub>z</sub>, W<sub>z</sub>: flexión respecto al eje débil z–z"
+ },
+ "26-23": {
+  "fr": "I<sub>z</sub> = 603,8 cm⁴ · I<sub>t</sub> = 20,12 cm⁴ · I<sub>w</sub> = 125.934 cm⁶ · classe 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 628,4 cm³ · f<sub>y</sub> = 235 N/mm²",
+  "es": "I<sub>z</sub> = 603,8 cm⁴ · I<sub>t</sub> = 20,12 cm⁴ · I<sub>w</sub> = 125.934 cm⁶ · clase 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 628,4 cm³ · f<sub>y</sub> = 235 N/mm²"
+ },
+ "26-24": {
+  "fr": "Les IPE relèvent de h/b &gt; 1,2 ; les HEA et HEB jusqu'à 300 de h/b ≤ 1,2 ; les HEA/HEB hauts à partir de 400 et les HEM à partir de 340 de h/b &gt; 1,2.",
+  "es": "Los IPE pertenecen a h/b &gt; 1,2; los HEA y HEB hasta 300 a h/b ≤ 1,2; los HEA/HEB altos desde 400 y los HEM desde 340 a h/b &gt; 1,2."
+ },
+ "26-25": {
+  "fr": "Facteur d'imperfection α",
+  "es": "Coeficiente de imperfección α"
+ },
+ "26-26": {
+  "fr": "Partie interne (âme) en flexion",
+  "es": "Elemento interno (alma) a flexión"
+ },
+ "26-27": {
+  "fr": "Partie interne en flexion + compression, α &gt; 0,5",
+  "es": "Elemento interno a flexión + compresión, α &gt; 0,5"
+ },
+ "26-28": {
+  "fr": "Partie interne en flexion + compression, α ≤ 0,5",
+  "es": "Elemento interno a flexión + compresión, α ≤ 0,5"
+ },
+ "26-29": {
+  "fr": "Partie interne en compression",
+  "es": "Elemento interno a compresión"
+ },
+ "26-30": {
+  "fr": "Soudure d'angle a = 4,0 mm",
+  "es": "Soldadura en ángulo a = 4,0 mm"
+ },
+ "26-31": {
+  "fr": "Calculer la soudure d'angle (soudures longitudinales, méthode simplifiée)",
+  "es": "Calcular la soldadura en ángulo (soldaduras longitudinales, método simplificado)"
+ },
+ "26-32": {
+  "fr": "Soudures d'angle — EN 1993-1-8, 4.5",
+  "es": "Soldaduras en ángulo — EN 1993-1-8, 4.5"
+ },
+ "26-33": {
+  "fr": "Classe 1",
+  "es": "Clase 1"
+ },
+ "26-34": {
+  "fr": "Classe 1 :",
+  "es": "Clase 1:"
+ },
+ "26-35": {
+  "fr": "Classe 2",
+  "es": "Clase 2"
+ },
+ "26-36": {
+  "fr": "Classe 2 : 456ε / (13α − 1) = 46,4",
+  "es": "Clase 2: 456ε / (13α − 1) = 46,4"
+ },
+ "26-37": {
+  "fr": "Classe 2 : résistance plastique de la section (W<sub>pl</sub>), sans redistribution",
+  "es": "Clase 2: resistencia plástica de la sección (W<sub>pl</sub>), sin redistribución"
+ },
+ "26-38": {
+  "fr": "Classe 3",
+  "es": "Clase 3"
+ },
+ "26-39": {
+  "fr": "Classe 3 :",
+  "es": "Clase 3:"
+ },
+ "26-40": {
+  "fr": "Courbe de flambement",
+  "es": "Curva de pandeo"
+ },
+ "26-41": {
+  "fr": "Courbe de flambement b → χ<sub>y</sub> = 0,825",
+  "es": "Curva de pandeo b → χ<sub>y</sub> = 0,825"
+ },
+ "26-42": {
+  "fr": "Courbe de flambement c → χ<sub>z</sub> = 0,511",
+  "es": "Curva de pandeo c → χ<sub>z</sub> = 0,511"
+ },
+ "26-43": {
+  "fr": "Courbes de flambement",
+  "es": "Curvas de pandeo"
+ },
+ "26-44": {
+  "fr": "Courbes de flambement pour le déversement",
+  "es": "Curvas de pandeo para el pandeo lateral"
+ },
+ "26-45": {
+  "fr": "Longueur de flambement L<sub>cr</sub> [m]",
+  "es": "Longitud de pandeo L<sub>cr</sub> [m]"
+ },
+ "26-46": {
+  "fr": "Coefficients de longueur de flambement β (cas d'Euler)",
+  "es": "Coeficientes de longitud de pandeo β (casos de Euler)"
+ },
+ "26-47": {
+  "fr": "Calculer la résistance au flambement",
+  "es": "Calcular la resistencia al pandeo"
+ },
+ "26-48": {
+  "fr": "Contrôle via N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = 2.595 kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = 0,841",
+  "es": "Comprobación mediante N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = 2.595 kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = 0,841"
+ },
+ "26-49": {
+  "fr": "Console, charge ponctuelle F à l'extrémité libre",
+  "es": "Voladizo, carga puntual F en el extremo libre"
+ },
+ "26-50": {
+  "fr": "Console, charge uniforme q",
+  "es": "Voladizo, carga uniforme q"
+ },
+ "26-51": {
+  "fr": "Poutres de chemin de roulement (vertical)",
+  "es": "Vigas carril de puente grúa (vertical)"
+ },
+ "26-52": {
+  "fr": "L / 200 à L / 250",
+  "es": "L / 200 a L / 250"
+ },
+ "26-53": {
+  "fr": "L / 500 à L / 1000",
+  "es": "L / 500 a L / 1000"
+ },
+ "26-54": {
+  "fr": "Cornières",
+  "es": "Angulares"
+ },
+ "26-55": {
+  "fr": "L<sub>cr,z</sub> = distance entre appuis à fourche [m]",
+  "es": "L<sub>cr,z</sub> = distancia entre apoyos de horquilla [m]"
+ },
+ "26-56": {
+  "fr": "Calculer l'assemblage à couvre-joints (cisaillement et pression diamétrale)",
+  "es": "Calcular la unión con cubrejuntas (cortante y aplastamiento)"
+ },
+ "26-57": {
+  "fr": "Entre trous dans la direction de l'effort",
+  "es": "Entre agujeros en la dirección de la fuerza"
+ },
+ "26-58": {
+  "fr": "Entre trous perpendiculairement à l'effort",
+  "es": "Entre agujeros perpendicularmente a la fuerza"
+ },
+ "26-59": {
+  "fr": "M20 8.8 : d = 20 mm, d<sub>0</sub> = 22 mm, A = 314 mm², A<sub>s</sub> = 245,0 mm², f<sub>ub</sub> = 800 N/mm² · tôle S235, t = 10,0 mm, f<sub>u</sub> = 360 N/mm²",
+  "es": "M20 8.8: d = 20 mm, d<sub>0</sub> = 22 mm, A = 314 mm², A<sub>s</sub> = 245,0 mm², f<sub>ub</sub> = 800 N/mm² · chapa S235, t = 10,0 mm, f<sub>u</sub> = 360 N/mm²"
+ },
+ "26-60": {
+  "fr": "M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> pour n ≤ a · sinon M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]",
+  "es": "M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> para n ≤ a · en otro caso M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]"
+ },
+ "26-61": {
+  "fr": "M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · pour λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> aucune vérification",
+  "es": "M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · para λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> no se requiere comprobación"
+ },
+ "26-62": {
+  "fr": "M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 4)",
+  "es": "M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 4)"
+ },
+ "26-63": {
+  "fr": "M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> avec A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>",
+  "es": "M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> con A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>"
+ },
+ "26-64": {
+  "fr": "Maximum (acier sans protection contre les intempéries)",
+  "es": "Máximo (acero sin protección frente a la intemperie)"
+ },
+ "26-65": {
+  "fr": "Taux de travail déterminant : <b>75 %</b>",
+  "es": "Grado de aprovechamiento determinante: <b>75 %</b>"
+ },
+ "26-66": {
+  "fr": "À l'échelle, d'après les données. Bleu : axe neutre élastique passant par le centre de gravité S, orange : axe neutre plastique (partage de l'aire en deux moitiés égales), barre orange : partie comprimée de l'âme α·c.",
+  "es": "A escala, según los datos. Azul: eje neutro elástico por el centro de gravedad S, naranja: eje neutro plástico (divide el área en dos mitades iguales), barra naranja: parte comprimida del alma α·c."
+ },
+ "26-67": {
+  "fr": "Coefficients de moment C<sub>1</sub>, C<sub>2</sub> et facteur de correction k<sub>c</sub>",
+  "es": "Coeficientes de momento C<sub>1</sub>, C<sub>2</sub> y factor de corrección k<sub>c</sub>"
+ },
+ "26-68": {
+  "fr": "Diagramme des moments",
+  "es": "Diagrama de momentos"
+ },
+ "26-69": {
+  "fr": "Diagramme des moments linéaire (moments d'extrémité), ψ = 0,00 : C<sub>m</sub> = 0,6 + 0,4 · ψ ≥ 0,4 → C<sub>my</sub> = C<sub>mLT</sub> = 0,600",
+  "es": "Diagrama de momentos lineal (momentos en los extremos), ψ = 0,00: C<sub>m</sub> = 0,6 + 0,4 · ψ ≥ 0,4 → C<sub>my</sub> = C<sub>mLT</sub> = 0,600"
+ },
+ "26-70": {
+  "fr": "N<sub>Ed</sub> [kN] (compression &gt; 0, traction &lt; 0)",
+  "es": "N<sub>Ed</sub> [kN] (compresión &gt; 0, tracción &lt; 0)"
+ },
+ "26-71": {
+  "fr": "N<sub>Ed</sub> [kN] (compression)",
+  "es": "N<sub>Ed</sub> [kN] (compresión)"
+ },
+ "26-72": {
+  "fr": "N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 pour les éléments non sensibles au déversement (p. ex. profilés creux)",
+  "es": "N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 para elementos no sensibles al pandeo lateral (p. ej. perfiles huecos)"
+ },
+ "26-73": {
+  "fr": "N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (classe 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1",
+  "es": "N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (clase 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1"
+ },
+ "26-74": {
+  "fr": "N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (classe 1–3) ou A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (classe 4)",
+  "es": "N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (clase 1–3) o A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (clase 4)"
+ },
+ "26-75": {
+  "fr": "N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² avec L<sub>cr</sub> = β · L",
+  "es": "N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² con L<sub>cr</sub> = β · L"
+ },
+ "26-76": {
+  "fr": "N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub> ; N<sub>u,Rd</sub>) avec N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> et N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>",
+  "es": "N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) con N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> y N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>"
+ },
+ "26-77": {
+  "fr": "Selon EN 10056-1 ; calculé numériquement à partir de la géométrie avec le congé de raccordement r<sub>1</sub> et l'arrondi de bord r<sub>2</sub>. e — distance du centre de gravité à la face extérieure de l'aile. W<sub>el,y</sub> rapporté à l'extrémité de l'aile.",
+  "es": "Según EN 10056-1; calculado numéricamente a partir de la geometría con radio de acuerdo r<sub>1</sub> y radio de borde r<sub>2</sub>. e — distancia del centro de gravedad a la cara exterior del lado. W<sub>el,y</sub> referido a la punta del lado."
+ },
+ "26-78": {
+  "fr": "Calculer la vérification (profilé en I, N + M<sub>y</sub>)",
+  "es": "Calcular la comprobación (perfil en I, N + M<sub>y</sub>)"
+ },
+ "26-79": {
+  "fr": "Méthode de vérification",
+  "es": "Método de comprobación"
+ },
+ "26-80": {
+  "fr": "Gorge a [mm]",
+  "es": "Garganta a [mm]"
+ },
+ "26-81": {
+  "fr": "Longueur de cordon l [mm] par cordon",
+  "es": "Longitud del cordón l [mm] por cordón"
+ },
+ "26-82": {
+  "fr": "Section nette en traction (rupture), boulons, soudures, tôles en pression diamétrale",
+  "es": "Sección neta a tracción (rotura), tornillos, soldaduras, chapas a aplastamiento"
+ },
+ "26-83": {
+  "fr": "Flambement par flexion uniquement. Déversement et interaction avec la flexion : sujets distincts.",
+  "es": "Solo pandeo por flexión. Pandeo lateral e interacción con la flexión: temas aparte."
+ },
+ "26-84": {
+  "fr": "Semelle supérieure b<sub>o</sub> [mm]",
+  "es": "Ala superior b<sub>o</sub> [mm]"
+ },
+ "26-85": {
+  "fr": "Semelle supérieure t<sub>o</sub> [mm]",
+  "es": "Ala superior t<sub>o</sub> [mm]"
+ },
+ "26-86": {
+  "fr": "Semelle supérieure : A<sub>1</sub> = 250 · 15 = 3.750 mm², z<sub>1</sub> = 7,5 mm",
+  "es": "Ala superior: A<sub>1</sub> = 250 · 15 = 3.750 mm², z<sub>1</sub> = 7,5 mm"
+ },
+ "26-87": {
+  "fr": "Rechercher un profilé, p. ex. 300",
+  "es": "Buscar un perfil, p. ej. 300"
+ },
+ "26-88": {
+  "fr": "Fiche du profilé avec résistances",
+  "es": "Ficha del perfil con resistencias"
+ },
+ "26-89": {
+  "fr": "QRO carré, RRO rectangulaire, RO circulaire. Angles des profilés finis à chaud : extérieur r<sub>o</sub> = 1,5 t, intérieur r<sub>i</sub> = 1,0 t.",
+  "es": "QRO cuadrado, RRO rectangular, RO circular. Esquinas de perfiles acabados en caliente: exterior r<sub>o</sub> = 1,5 t, interior r<sub>i</sub> = 1,0 t."
+ },
+ "26-90": {
+  "fr": "Profilé creux carré, rectangulaire et circulaire",
+  "es": "Perfil hueco cuadrado, rectangular y circular"
+ },
+ "26-91": {
+  "fr": "Coefficient de Poisson ν",
+  "es": "Coeficiente de Poisson ν"
+ },
+ "26-92": {
+  "fr": "Charge transversale (ponctuelle), moments d'extrémité nuls",
+  "es": "Carga transversal (puntual), momentos en los extremos nulos"
+ },
+ "26-93": {
+  "fr": "Charge transversale (uniforme), moments d'extrémité nuls",
+  "es": "Carga transversal (uniforme), momentos en los extremos nulos"
+ },
+ "26-94": {
+  "fr": "Charge transversale avec moments d'extrémité",
+  "es": "Carga transversal con momentos en los extremos"
+ },
+ "26-95": {
+  "fr": "Section <b>classe 3</b> → résistance élastique à la flexion",
+  "es": "Sección <b>clase 3</b> → resistencia elástica a flexión"
+ },
+ "26-96": {
+  "fr": "Classer la section",
+  "es": "Clasificar la sección"
+ },
+ "26-97": {
+  "fr": "Classe de section pour compression et flexion : semelle c/t = 5,28 (cl. 1), âme c/t = 35,01 (cl. 1) → <b>Classe 1</b>",
+  "es": "Clase de sección para compresión y flexión: ala c/t = 5,28 (cl. 1), alma c/t = 35,01 (cl. 1) → <b>Clase 1</b>"
+ },
+ "26-98": {
+  "fr": "Vérification de la section IPE 300, S235",
+  "es": "Comprobación de la sección IPE 300, S235"
+ },
+ "26-99": {
+  "fr": "Calculer la vérification de la section",
+  "es": "Calcular la comprobación de la sección"
+ },
+ "26-100": {
+  "fr": "Vérifications de section (plastification)",
+  "es": "Comprobaciones de sección (plastificación)"
+ },
+ "26-101": {
+  "fr": "Élément de section",
+  "es": "Parte de la sección"
+ },
+ "26-102": {
+  "fr": "Bord dans la direction de l'effort",
+  "es": "Borde en la dirección de la fuerza"
+ },
+ "26-103": {
+  "fr": "Bord perpendiculaire à l'effort",
+  "es": "Borde perpendicular a la fuerza"
+ },
+ "26-104": {
+  "fr": "Moments d'extrémité, linéaires (ψ = M<sub>2</sub>/M<sub>1</sub>)",
+  "es": "Momentos en los extremos, lineales (ψ = M<sub>2</sub>/M<sub>1</sub>)"
+ },
+ "26-105": {
+  "fr": "Méthode de calcul",
+  "es": "Método de cálculo"
+ },
+ "26-106": {
+  "fr": "Direction",
+  "es": "Dirección"
+ },
+ "26-107": {
+  "fr": "Tube circulaire d/t (compression et flexion)",
+  "es": "Tubo circular d/t (compresión y flexión)"
+ },
+ "26-108": {
+  "fr": "Tige dans le plan de cisaillement : α<sub>v</sub> = 0,6 pour toutes les classes, A = section de la tige.",
+  "es": "Vástago en el plano de corte: α<sub>v</sub> = 0,6 para todas las clases, A = sección del vástago."
+ },
+ "26-109": {
+  "fr": "Plan de cisaillement dans",
+  "es": "Plano de corte en"
+ },
+ "26-110": {
+  "fr": "Plan de cisaillement dans le filetage → A = A<sub>s</sub>, α<sub>v</sub> = 0,6, 1 plan de cisaillement",
+  "es": "Plano de corte en la rosca → A = A<sub>s</sub>, α<sub>v</sub> = 0,6, 1 plano de corte"
+ },
+ "26-111": {
+  "fr": "Plans de cisaillement par boulon",
+  "es": "Planos de corte por tornillo"
+ },
+ "26-112": {
+  "fr": "Boulon",
+  "es": "Tornillo"
+ },
+ "26-113": {
+  "fr": "Boulons dans la direction de l'effort n<sub>1</sub>",
+  "es": "Tornillos en la dirección de la fuerza n<sub>1</sub>"
+ },
+ "26-114": {
+  "fr": "Boulons en travers n<sub>2</sub>",
+  "es": "Tornillos en sentido transversal n<sub>2</sub>"
+ },
+ "26-115": {
+  "fr": "Boulons — classes de qualité (EN 1993-1-8, Tab. 3.1)",
+  "es": "Tornillos — clases de resistencia (EN 1993-1-8, Tab. 3.1)"
+ },
+ "26-116": {
+  "fr": "Assemblage boulonné 2 × 2 M20 8.8",
+  "es": "Unión atornillada 2 × 2 M20 8.8"
+ },
+ "26-117": {
+  "fr": "Voilement par cisaillement : h<sub>w</sub>/t<sub>w</sub> = 278,6 / 7,1 = 39,2 ≤ 72ε/η = 60,0 (η = 1,2) → vérification au voilement inutile",
+  "es": "Abolladura por cortante: h<sub>w</sub>/t<sub>w</sub> = 278,6 / 7,1 = 39,2 ≤ 72ε/η = 60,0 (η = 1,2) → no es necesaria la comprobación de abolladura"
+ },
+ "26-118": {
+  "fr": "Centre de cisaillement",
+  "es": "Centro de esfuerzos cortantes"
+ },
+ "26-119": {
+  "fr": "Module de cisaillement G = E / (2 · (1 + ν))",
+  "es": "Módulo de elasticidad transversal G = E / (2 · (1 + ν))"
+ },
+ "26-120": {
+  "fr": "Comment les valeurs sont calculées",
+  "es": "Cómo se calculan los valores"
+ },
+ "26-121": {
+  "fr": "Stabilité : flambement par flexion, déversement",
+  "es": "Estabilidad: pandeo por flexión, pandeo lateral"
+ },
+ "26-122": {
+  "fr": "Acier",
+  "es": "Acero"
+ },
+ "26-123": {
+  "fr": "Nuance d'acier",
+  "es": "Calidad del acero"
+ },
+ "26-124": {
+  "fr": "Âme",
+  "es": "Alma"
+ },
+ "26-125": {
+  "fr": "Âme (partie interne) : c = h − 2t<sub>f</sub> − 2r",
+  "es": "Alma (elemento interno): c = h − 2t<sub>f</sub> − 2r"
+ },
+ "26-126": {
+  "fr": "Âme / semelle",
+  "es": "Alma / ala"
+ },
+ "26-127": {
+  "fr": "Âme h<sub>w</sub> [mm]",
+  "es": "Alma h<sub>w</sub> [mm]"
+ },
+ "26-128": {
+  "fr": "Âme t<sub>w</sub> [mm]",
+  "es": "Alma t<sub>w</sub> [mm]"
+ },
+ "26-129": {
+  "fr": "Âme : A<sub>2</sub> = 10 · 600 = 6.000 mm², z<sub>2</sub> = 315,0 mm",
+  "es": "Alma: A<sub>2</sub> = 10 · 600 = 6.000 mm², z<sub>2</sub> = 315,0 mm"
+ },
+ "26-130": {
+  "fr": "Tête de poteau, horizontal (halles industrielles)",
+  "es": "Cabeza de pilar, horizontal (naves industriales)"
+ },
+ "26-131": {
+  "fr": "Somme des F<sub>b,Rd</sub> si F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> pour chaque boulon ; sinon n · plus petite résistance individuelle",
+  "es": "Suma de los F<sub>b,Rd</sub> si F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> en cada tornillo; en otro caso n · menor resistencia individual"
+ },
+ "26-132": {
+  "fr": "Coefficients partiels γM — DIN EN 1993-1-1/NA et 1993-1-8",
+  "es": "Coeficientes parciales γM — DIN EN 1993-1-1/NA y 1993-1-8"
+ },
+ "26-133": {
+  "fr": "Résistance",
+  "es": "Resistencia"
+ },
+ "26-134": {
+  "fr": "Résistance égale à celle de la plus faible des tôles assemblées — pas de vérification distincte",
+  "es": "Resistencia igual a la de la más débil de las chapas unidas — sin comprobación aparte"
+ },
+ "26-135": {
+  "fr": "Résistances par boulon (Tab. 3.4)",
+  "es": "Resistencias por tornillo (Tab. 3.4)"
+ },
+ "26-136": {
+  "fr": "Sections en U, en T et pleines",
+  "es": "Secciones en U, en T y macizas"
+ },
+ "26-137": {
+  "fr": "Profilé en U avec dimensions et centre de gravité",
+  "es": "Perfil en U con dimensiones y centro de gravedad"
+ },
+ "26-138": {
+  "fr": "Profilés en U : UPN et UPE",
+  "es": "Perfiles en U: UPN y UPE"
+ },
+ "26-139": {
+  "fr": "UPE : semelles parallèles",
+  "es": "UPE: alas paralelas"
+ },
+ "26-140": {
+  "fr": "UPN : semelle à face intérieure inclinée",
+  "es": "UPN: ala con cara interior inclinada"
+ },
+ "26-141": {
+  "fr": "Semelle inférieure b<sub>u</sub> [mm]",
+  "es": "Ala inferior b<sub>u</sub> [mm]"
+ },
+ "26-142": {
+  "fr": "Semelle inférieure t<sub>u</sub> [mm]",
+  "es": "Ala inferior t<sub>u</sub> [mm]"
+ },
+ "26-143": {
+  "fr": "Semelle inférieure : A<sub>3</sub> = 300 · 20 = 6.000 mm², z<sub>3</sub> = 625,0 mm",
+  "es": "Ala inferior: A<sub>3</sub> = 300 · 20 = 6.000 mm², z<sub>3</sub> = 625,0 mm"
+ },
+ "26-144": {
+  "fr": "V<sub>Ed</sub> &gt; 0,5 · V<sub>pl,Rd</sub> → réduction de la résistance à la flexion (6.2.8)",
+  "es": "V<sub>Ed</sub> &gt; 0,5 · V<sub>pl,Rd</sub> → reducción de la resistencia a flexión (6.2.8)"
+ },
+ "26-145": {
+  "fr": "V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub> : pas de réduction · sinon ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²",
+  "es": "V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub>: sin reducción · en otro caso ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²"
+ },
+ "26-146": {
+  "fr": "V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · vérifier le voilement par cisaillement si h<sub>w</sub>/t<sub>w</sub> &gt; 72 · ε / η (η = 1,2)",
+  "es": "V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · comprobar la abolladura por cortante si h<sub>w</sub>/t<sub>w</sub> &gt; 72 · ε / η (η = 1,2)"
+ },
+ "26-147": {
+  "fr": "V<sub>z,Ed</sub> [kN] (au même endroit)",
+  "es": "V<sub>z,Ed</sub> [kN] (en el mismo punto)"
+ },
+ "26-148": {
+  "fr": "Méthode 2 (Annexe B), Tab. B.2 pour les éléments sensibles à la déformation en torsion, classe 1–3 ; M<sub>z</sub> = 0.",
+  "es": "Método 2 (Anexo B), Tab. B.2 para elementos susceptibles de deformación por torsión, clase 1–3; M<sub>z</sub> = 0."
+ },
+ "26-149": {
+  "fr": "Précontrainte des boulons à haute résistance",
+  "es": "Pretensado de tornillos de alta resistencia"
+ },
+ "26-150": {
+  "fr": "W<sub>el</sub> = I / (distance à la fibre extrême), i = √(I / A)",
+  "es": "W<sub>el</sub> = I / (distancia a la fibra extrema), i = √(I / A)"
+ },
+ "26-151": {
+  "fr": "W<sub>pl</sub> = S<sub>haut</sub> + S<sub>bas</sub> (moments statiques par rapport à l'axe neutre plastique) = 3786,6 cm³",
+  "es": "W<sub>pl</sub> = S<sub>sup</sub> + S<sub>inf</sub> (momentos estáticos respecto al eje neutro plástico) = 3786,6 cm³"
+ },
+ "26-152": {
+  "fr": "Ce que signifie la classe de section",
+  "es": "Qué significa la clase de sección"
+ },
+ "26-153": {
+  "fr": "Caractéristiques des matériaux",
+  "es": "Propiedades del material"
+ },
+ "26-154": {
+  "fr": "Valeurs pour appuis à fourche (k = k<sub>w</sub> = 1). ψ = −1 (double courbure) → C<sub>1</sub> = 2,70 (plafonné).",
+  "es": "Valores para apoyos de horquilla (k = k<sub>w</sub> = 1). ψ = −1 (doble curvatura) → C<sub>1</sub> = 2,70 (limitado)."
+ },
+ "26-155": {
+  "fr": "Module de flexion",
+  "es": "Módulo resistente"
+ },
+ "26-156": {
+  "fr": "Résistances IPE 300, S235",
+  "es": "Resistencias IPE 300, S235"
+ },
+ "26-157": {
+  "fr": "Résistances des sections — EN 1993-1-1, 6.2",
+  "es": "Resistencias de las secciones — EN 1993-1-1, 6.2"
+ },
+ "26-158": {
+  "fr": "Cornière avec axes principaux",
+  "es": "Angular con ejes principales"
+ },
+ "26-159": {
+  "fr": "Coefficient de dilatation thermique α<sub>T</sub>",
+  "es": "Coeficiente de dilatación térmica α<sub>T</sub>"
+ },
+ "26-160": {
+  "fr": "Choix des courbes de flambement — EN 1993-1-1, Tab. 6.2",
+  "es": "Asignación de las curvas de pandeo — EN 1993-1-1, Tab. 6.2"
+ },
+ "26-161": {
+  "fr": "autres sections",
+  "es": "otras secciones"
+ },
+ "26-162": {
+  "fr": "c = b − 3t (ou h − 3t)",
+  "es": "c = b − 3t (o h − 3t)"
+ },
+ "26-163": {
+  "fr": "c/t = 58,59 → âme classe 3",
+  "es": "c/t = 58,59 → alma clase 3"
+ },
+ "26-164": {
+  "fr": "Valeurs limites c/t — EN 1993-1-1, Tab. 5.2",
+  "es": "Valores límite c/t — EN 1993-1-1, Tab. 5.2"
+ },
+ "26-165": {
+  "fr": "d<sub>0</sub> — diamètre du trou, jeu normal (EN 1090-2 : +1 mm jusqu'à M14, +2 mm jusqu'à M24, +3 mm à partir de M27) · A<sub>s</sub> — section résistante",
+  "es": "d<sub>0</sub> — diámetro del agujero, holgura normal (EN 1090-2: +1 mm hasta M14, +2 mm hasta M24, +3 mm desde M27) · A<sub>s</sub> — área resistente a tracción"
+ },
+ "26-166": {
+  "fr": "élastique jusqu'à f<sub>y</sub> en fibre extrême",
+  "es": "elástico hasta f<sub>y</sub> en la fibra extrema"
+ },
+ "26-167": {
+  "fr": "élastique : ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>bas</sub>) / (z<sub>s</sub> − z<sub>haut</sub>) = (359,9 − 607,9) / (359,9 − 22,1) = -0,734",
+  "es": "elástico: ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>inf</sub>) / (z<sub>s</sub> − z<sub>sup</sub>) = (359,9 − 607,9) / (359,9 − 22,1) = -0,734"
+ },
+ "26-168": {
+  "fr": "efforts internes élastiques",
+  "es": "esfuerzos internos elásticos"
+ },
+ "26-169": {
+  "fr": "profilés en I soudés",
+  "es": "perfiles en I soldados"
+ },
+ "26-170": {
+  "fr": "sections en caisson soudées",
+  "es": "secciones en cajón soldadas"
+ },
+ "26-171": {
+  "fr": "profilé en I soudé",
+  "es": "perfil en I soldado"
+ },
+ "26-172": {
+  "fr": "profilés en I laminés",
+  "es": "perfiles en I laminados"
+ },
+ "26-173": {
+  "fr": "profilés en I laminés, h/b &gt; 1,2",
+  "es": "perfiles en I laminados, h/b &gt; 1,2"
+ },
+ "26-174": {
+  "fr": "profilés en I laminés, h/b ≤ 1,2",
+  "es": "perfiles en I laminados, h/b ≤ 1,2"
+ },
+ "26-175": {
+  "fr": "profilé en I laminé",
+  "es": "perfil en I laminado"
+ },
+ "26-176": {
+  "fr": "assemblages résistant au glissement (ELS)",
+  "es": "uniones resistentes al deslizamiento (ELS)"
+ },
+ "26-177": {
+  "fr": "assemblages résistant au glissement (ELU)",
+  "es": "uniones resistentes al deslizamiento (ELU)"
+ },
+ "26-178": {
+  "fr": "h/b = 1,00 ≤ 1,2, t<sub>f</sub> = 15,0 mm, S235 → courbe de flambement <b>c</b>, α = 0,49",
+  "es": "h/b = 1,00 ≤ 1,2, t<sub>f</sub> = 15,0 mm, S235 → curva de pandeo <b>c</b>, α = 0,49"
+ },
+ "26-179": {
+  "fr": "h/b = 2,00 ≤ 2 → courbe de flambement b, α<sub>LT</sub> = 0,34 · λ̄<sub>LT,0</sub> = 0,4 · β = 0,75",
+  "es": "h/b = 2,00 ≤ 2 → curva de pandeo b, α<sub>LT</sub> = 0,34 · λ̄<sub>LT,0</sub> = 0,4 · β = 0,75"
+ },
+ "26-180": {
+  "fr": "dans la direction de l'effort : α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (boulon d'extrémité) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (boulon intérieur)",
+  "es": "en la dirección de la fuerza: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (tornillo extremo) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (tornillo interior)"
+ },
+ "26-181": {
+  "fr": "k<sub>1</sub> (rangée de rive)",
+  "es": "k<sub>1</sub> (fila de borde)"
+ },
+ "26-182": {
+  "fr": "k<sub>zz</sub> = C<sub>mz</sub> · (1 + (2λ̄<sub>z</sub> − 0,6) · n<sub>z</sub>) ≤ C<sub>mz</sub> · (1 + 1,4 · n<sub>z</sub>) (profilés en I) · k<sub>yz</sub> = 0,6 · k<sub>zz</sub>",
+  "es": "k<sub>zz</sub> = C<sub>mz</sub> · (1 + (2λ̄<sub>z</sub> − 0,6) · n<sub>z</sub>) ≤ C<sub>mz</sub> · (1 + 1,4 · n<sub>z</sub>) (perfiles en I) · k<sub>yz</sub> = 0,6 · k<sub>zz</sub>"
+ },
+ "26-183": {
+  "fr": "pas de réduction autour de y si N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> et N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>",
+  "es": "sin reducción respecto a y si N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> y N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>"
+ },
+ "26-184": {
+  "fr": "l &gt; 150a : réduction β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1",
+  "es": "l &gt; 150a: reducción β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1"
+ },
+ "26-185": {
+  "fr": "l<sub>eff</sub> = l − 2a (sans cratères d'extrémité) ; l<sub>eff</sub> ≥ max(30 mm ; 6a)",
+  "es": "l<sub>eff</sub> = l − 2a (sin cráteres de extremo); l<sub>eff</sub> ≥ max(30 mm; 6a)"
+ },
+ "26-186": {
+  "fr": "cordons longs",
+  "es": "cordones largos"
+ },
+ "26-187": {
+  "fr": "longueur libre moins la gorge √2·a",
+  "es": "longitud libre menos la garganta √2·a"
+ },
+ "26-188": {
+  "fr": "se trouve en zone tendue → pas de limite c/t (classe 1)",
+  "es": "está en la zona traccionada → sin límite c/t (clase 1)"
+ },
+ "26-189": {
+  "fr": "linéaire (moments d'extrémité)",
+  "es": "lineal (momentos en los extremos)"
+ },
+ "26-190": {
+  "fr": "linéaire entre les moments d'extrémité M et ψ·M (−1 ≤ ψ ≤ 1)",
+  "es": "lineal entre los momentos en los extremos M y ψ·M (−1 ≤ ψ ≤ 1)"
+ },
+ "26-191": {
+  "fr": "diagramme des moments linéaire ψ",
+  "es": "diagrama de momentos lineal ψ"
+ },
+ "26-192": {
+  "fr": "plastique, avec capacité de rotation",
+  "es": "plástico, con capacidad de rotación"
+ },
+ "26-193": {
+  "fr": "plastique, sans capacité de rotation",
+  "es": "plástico, sin capacidad de rotación"
+ },
+ "26-194": {
+  "fr": "plastique : partie comprimée de l'âme α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = 405,4 mm → α = 405,4 / 585,9 = 0,692",
+  "es": "plástico: parte comprimida del alma α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = 405,4 mm → α = 405,4 / 585,9 = 0,692"
+ },
+ "26-195": {
+  "fr": "perpendiculairement à l'effort : k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7 ; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7 ; 2,5) (rangée de rive) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7 ; 2,5) (rangée intérieure)",
+  "es": "perpendicularmente a la fuerza: k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (fila de borde) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (fila interior)"
+ },
+ "26-196": {
+  "fr": "compression pure",
+  "es": "compresión pura"
+ },
+ "26-197": {
+  "fr": "axe faible z–z",
+  "es": "eje débil z–z"
+ },
+ "26-198": {
+  "fr": "axe fort y–y",
+  "es": "eje fuerte y–y"
+ },
+ "26-199": {
+  "fr": "t — épaisseur nominale de l'élément (pour les profilés laminés : épaisseur de semelle t<sub>f</sub>). S235–S355 selon EN 10025-2, S420 selon EN 10025-4, S460 selon EN 10025-3/4. Pour les profilés creux (EN 10210 / 10219), les mêmes valeurs s'appliquent à S235H, S275H, S355H.",
+  "es": "t — espesor nominal del elemento (en perfiles laminados: espesor del ala t<sub>f</sub>). S235–S355 según EN 10025-2, S420 según EN 10025-4, S460 según EN 10025-3/4. Para perfiles huecos (EN 10210 / 10219) rigen los mismos valores para S235H, S275H, S355H."
+ },
+ "26-200": {
+  "fr": "encastré en pied, libre en tête (poteau console)",
+  "es": "empotrado en la base, libre en la cabeza (pilar en voladizo)"
+ },
+ "26-201": {
+  "fr": "simplifié : réductions dues à l'effort tranchant et à l'effort normal appliquées successivement",
+  "es": "simplificado: reducciones por esfuerzo cortante y esfuerzo axil aplicadas una tras otra"
+ },
+ "26-202": {
+  "fr": "w / w<sub>adm</sub>",
+  "es": "w / w<sub>adm</sub>"
+ },
+ "26-203": {
+  "fr": "w<sub>adm</sub>",
+  "es": "w<sub>adm</sub>"
+ },
+ "26-204": {
+  "fr": "longueur efficace",
+  "es": "longitud efectiva"
+ },
+ "26-205": {
+  "fr": "sections efficaces (EN 1993-1-5)",
+  "es": "secciones eficaces (EN 1993-1-5)"
+ },
+ "26-206": {
+  "fr": "y et z sont parallèles aux ailes et passent par le centre de gravité. Les axes principaux u (fort) et v (faible) sont inclinés à 45°. Pour le flambement, i<sub>v</sub> est en général déterminant.",
+  "es": "y y z son paralelos a los lados y pasan por el centro de gravedad. Los ejes principales u (fuerte) y v (débil) forman 45°. Para el pandeo suele ser determinante i<sub>v</sub>."
+ },
+ "26-207": {
+  "fr": "z<sub>g</sub> — distance du point d'application de la charge au centre de cisaillement, positive au-dessus (semelle supérieure : défavorable)",
+  "es": "z<sub>g</sub> — distancia del punto de aplicación de la carga al centro de esfuerzos cortantes, positiva por encima (ala superior: desfavorable)"
+ },
+ "26-208": {
+  "fr": "section en I composée",
+  "es": "sección en I compuesta"
+ },
+ "26-209": {
+  "fr": "biaxial : (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 avec α = 2, β = 5n ≥ 1",
+  "es": "biaxial: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 con α = 2, β = 5n ≥ 1"
+ },
+ "26-210": {
+  "fr": "Coefficients de moment uniforme équivalent C<sub>m</sub> — Annexe B, Tab. B.3",
+  "es": "Coeficientes de momento uniforme equivalente C<sub>m</sub> — Anexo B, Tab. B.3"
+ },
+ "26-211": {
+  "fr": "Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) avec λ̄<sub>LT,0</sub> = 0,4 et β = 0,75",
+  "es": "Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) con λ̄<sub>LT,0</sub> = 0,4 y β = 0,75"
+ },
+ "26-212": {
+  "fr": "α<sub>b</sub> = min(α<sub>d</sub> ; f<sub>ub</sub>/f<sub>u</sub> ; 1) avec f<sub>ub</sub>/f<sub>u</sub> = 800/360 = 2,222",
+  "es": "α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) con f<sub>ub</sub>/f<sub>u</sub> = 800/360 = 2,222"
+ },
+ "26-213": {
+  "fr": "α<sub>d</sub> (boulon d'extrémité)",
+  "es": "α<sub>d</sub> (tornillo extremo)"
+ },
+ "26-214": {
+  "fr": "α<sub>d</sub> (boulon intérieur)",
+  "es": "α<sub>d</sub> (tornillo interior)"
+ },
+ "26-215": {
+  "fr": "α<sub>v</sub> (filetage dans le plan de cisaillement)",
+  "es": "α<sub>v</sub> (rosca en el plano de corte)"
+ },
+ "26-216": {
+  "fr": "ε = √(235/f<sub>y</sub>) · α — fraction comprimée de la partie interne (plastique) · ψ = σ<sub>2</sub>/σ<sub>1</sub> (élastique, compression positive)",
+  "es": "ε = √(235/f<sub>y</sub>) · α — fracción comprimida del elemento interno (plástico) · ψ = σ<sub>2</sub>/σ<sub>1</sub> (elástico, compresión positiva)"
+ },
+ "26-217": {
+  "fr": "λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) avec λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε",
+  "es": "λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) con λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε"
+ },
+ "26-218": {
+  "fr": "λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) avec W<sub>y</sub> = W<sub>pl,y</sub> (classe 1, 2) ou W<sub>el,y</sub> (classe 3)",
+  "es": "λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) con W<sub>y</sub> = W<sub>pl,y</sub> (clase 1, 2) o W<sub>el,y</sub> (clase 3)"
+ },
+ "26-219": {
+  "fr": "σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · contrainte équivalente de von Mises (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²",
+  "es": "σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · tensión equivalente de von Mises (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²"
+ },
+ "26-220": {
+  "fr": "σ<sub>⊥</sub>, τ<sub>⊥</sub> — contraintes perpendiculaires à l'axe du cordon dans la section de gorge a · l · τ<sub>∥</sub> — parallèle à l'axe du cordon",
+  "es": "σ<sub>⊥</sub>, τ<sub>⊥</sub> — tensiones perpendiculares al eje del cordón en la sección de garganta a · l · τ<sub>∥</sub> — paralela al eje del cordón"
+ },
+ "26-221": {
+  "fr": "χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · pour λ̄ ≤ 0,2 ou N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04, χ = 1",
+  "es": "χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · para λ̄ ≤ 0,2 o N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04, χ = 1"
+ },
+ "26-222": {
+  "fr": "χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 et ≤ 1/λ̄<sub>LT</sub>²",
+  "es": "χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 y ≤ 1/λ̄<sub>LT</sub>²"
+ },
+ "26-223": {
+  "fr": "ψ (élastique) = σ<sub>2</sub> / σ<sub>1</sub> aux extrémités de l'âme avec σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = -0,412",
+  "es": "ψ (elástico) = σ<sub>2</sub> / σ<sub>1</sub> en los extremos del alma con σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = -0,412"
+ },
+ "26-224": {
+  "fr": "√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) et σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>",
+  "es": "√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) y σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>"
+ },
+ "26-225": {
+  "fr": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">I<sub>y</sub>, W<sub>y</sub> : flexion autour de l'axe fort y–y ·\n    I<sub>z</sub>, W<sub>z</sub> : flexion autour de l'axe faible z–z</div>",
+  "es": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">I<sub>y</sub>, W<sub>y</sub>: flexión respecto al eje fuerte y–y ·\n    I<sub>z</sub>, W<sub>z</sub>: flexión respecto al eje débil z–z</div>"
+ },
+ "26-226": {
+  "fr": "§Aire et moments d'inertie (h<sub>w</sub> = h − 2t<sub>f</sub>)",
+  "es": "§Área y momentos de inercia (h<sub>w</sub> = h − 2t<sub>f</sub>)"
+ },
+ "26-227": {
+  "fr": "§Modules plastiques de flexion",
+  "es": "§Módulos resistentes plásticos"
+ },
+ "26-228": {
+  "fr": "§Cisaillement, torsion, gauchissement",
+  "es": "§Cortante, torsión, alabeo"
+ },
+ "26-229": {
+  "fr": "!I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ avec D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)",
+  "es": "!I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ con D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)"
+ },
+ "26-230": {
+  "fr": "!W<sub>el</sub> = I / (distance à la fibre extrême), i = √(I / A)",
+  "es": "!W<sub>el</sub> = I / (distancia a la fibra extrema), i = √(I / A)"
+ }
+}

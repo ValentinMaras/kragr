@@ -1,0 +1,1242 @@
+[
+ {
+  "id": "05-0",
+  "de": "Klasse {}: σ = N/A{} + M<sub>y</sub>/W<sub>{},y</sub>{} = <b>{} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm²",
+  "en": "Class {}: σ = N/A{} + M<sub>y</sub>/W<sub>{},y</sub>{} = <b>{} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm²"
+ },
+ {
+  "id": "05-1",
+  "de": "Schubbeulen des Stegs",
+  "en": "Shear buckling of the web"
+ },
+ {
+  "id": "05-2",
+  "de": "kein Nachweis erforderlich",
+  "en": "no check required"
+ },
+ {
+  "id": "05-3",
+  "de": "Schubbeulen nach EN 1993-1-5 nachweisen",
+  "en": "check shear buckling to EN 1993-1-5"
+ },
+ {
+  "id": "05-4",
+  "de": "Schubbeulen: h<sub>w</sub>/t<sub>w</sub> = {} ≤ 72·ε/η = {} → {}",
+  "en": "Shear buckling: h<sub>w</sub>/t<sub>w</sub> = {} ≤ 72·ε/η = {} → {}"
+ },
+ {
+  "id": "05-5",
+  "de": "Querschnittstragfähigkeit",
+  "en": "Cross-section resistance"
+ },
+ {
+  "id": "05-6",
+  "de": "Biegeknicken",
+  "en": "Flexural buckling"
+ },
+ {
+  "id": "05-7",
+  "de": "L<sub>LT</sub> = 0: Druckgurt durchgehend seitlich gehalten → χ<sub>LT</sub> = 1, kein Biegedrillknicken",
+  "en": "L<sub>LT</sub> = 0: compression flange laterally restrained throughout → χ<sub>LT</sub> = 1, no lateral-torsional buckling"
+ },
+ {
+  "id": "05-8",
+  "de": "Biegedrillknicken",
+  "en": "Lateral-torsional buckling"
+ },
+ {
+  "id": "05-9",
+  "de": "Torsionswerte des Profils und Beiwerte für den Momentenverlauf",
+  "en": "Torsional properties of the section and coefficients for the moment diagram"
+ },
+ {
+  "id": "05-10",
+  "de": "Momentenverlauf {}: C<sub>1</sub> = {}, C<sub>2</sub> = {} (NCCI SN003)",
+  "en": "Moment diagram {}: C<sub>1</sub> = {}, C<sub>2</sub> = {} (NCCI SN003)"
+ },
+ {
+  "id": "05-11",
+  "de": "Lastangriffspunkt: Last oben wirkt destabilisierend",
+  "en": "Point of load application: a load on top destabilises"
+ },
+ {
+  "id": "05-12",
+  "de": "Last am Obergurt",
+  "en": "Load at the top flange"
+ },
+ {
+  "id": "05-13",
+  "de": "Last am Untergurt",
+  "en": "Load at the bottom flange"
+ },
+ {
+  "id": "05-14",
+  "de": "Last im Schwerpunkt",
+  "en": "Load at the shear centre"
+ },
+ {
+  "id": "05-15",
+  "de": ", ohne Querlast nicht maßgebend",
+  "en": ", not relevant without transverse load"
+ },
+ {
+  "id": "05-16",
+  "de": "Ideales Kippmoment M<sub>cr</sub> (elastische Verzweigungslast)",
+  "en": "Elastic critical moment M<sub>cr</sub> (elastic bifurcation load)"
+ },
+ {
+  "id": "05-17",
+  "de": "Schlankheitsgrad: plastisches Moment im Verhältnis zum Kippmoment",
+  "en": "Slenderness: plastic moment relative to the critical moment"
+ },
+ {
+  "id": "05-18",
+  "de": "Knicklinie {} (h/b {} 2), α<sub>LT</sub> = {}",
+  "en": "Buckling curve {} (h/b {} 2), α<sub>LT</sub> = {}"
+ },
+ {
+  "id": "05-19",
+  "de": "Abminderungsfaktor χ<sub>LT</sub>",
+  "en": "Reduction factor χ<sub>LT</sub>"
+ },
+ {
+  "id": "05-20",
+  "de": "λ̄<sub>LT</sub> ≤ 0,4 bzw. M<sub>Ed</sub>/M<sub>cr</sub> ≤ 0,16 → χ<sub>LT</sub> = 1",
+  "en": "λ̄<sub>LT</sub> ≤ 0.4 or M<sub>Ed</sub>/M<sub>cr</sub> ≤ 0.16 → χ<sub>LT</sub> = 1"
+ },
+ {
+  "id": "05-21",
+  "de": "Walzprofil (6.3.2.3, λ̄<sub>LT,0</sub> = 0,4, β = 0,75): χ<sub>LT</sub> = {}",
+  "en": "Rolled section (6.3.2.3, λ̄<sub>LT,0</sub> = 0.4, β = 0.75): χ<sub>LT</sub> = {}"
+ },
+ {
+  "id": "05-22",
+  "de": "Korrektur für den Momentenverlauf: k<sub>c</sub> = {} · f = {}",
+  "en": "Correction for the moment diagram: k<sub>c</sub> = {} · f = {}"
+ },
+ {
+  "id": "05-23",
+  "de": "Seitliche Halterungen ergänzen (kleineres L<sub>LT</sub>), Last nicht am Obergurt angreifen lassen oder breiteres Profil (HEA/HEB) wählen.",
+  "en": "Add lateral restraints (smaller L<sub>LT</sub>), do not apply the load at the top flange or choose a wider section (HEA/HEB)."
+ },
+ {
+  "id": "05-24",
+  "de": "Druck und Biegung (Stabilität)",
+  "en": "Compression and bending (stability)"
+ },
+ {
+  "id": "05-25",
+  "de": "Zweiachsige Biegung (Stabilität)",
+  "en": "Biaxial bending (stability)"
+ },
+ {
+  "id": "05-26",
+  "de": "Torsion (elastisch)",
+  "en": "Torsion (elastic)"
+ },
+ {
+  "id": "05-27",
+  "de": "Elastischer Nachweis der Spannungen. Die Wechselwirkung von Torsion und Biegedrillknicken ist im Eurocode nicht geregelt und hier nicht enthalten.",
+  "en": "Elastic stress check. The interaction of torsion and lateral-torsional buckling is not covered by the Eurocode and not included here."
+ },
+ {
+  "id": "05-28",
+  "de": "Lasteinleitung (Stegkrüppeln)",
+  "en": "Load introduction (web crippling)"
+ },
+ {
+  "id": "05-29",
+  "de": "Lasteinleitungssteifen anordnen, längere Lasteinleitung oder Profil mit dickerem Steg wählen.",
+  "en": "Add load-bearing stiffeners, use a longer load introduction length or choose a section with a thicker web."
+ },
+ {
+  "id": "05-30",
+  "de": "Durchbiegung (GZG)",
+  "en": "Deflection (SLS)"
+ },
+ {
+  "id": "05-31",
+  "de": "Profil mit größerem I<sub>y</sub> wählen oder Überhöhung vorsehen.",
+  "en": "Choose a section with a larger I<sub>y</sub> or provide a precamber."
+ },
+ {
+  "id": "05-32",
+  "de": "Materialbeiwert ε: höhere Festigkeit → strengere Grenzen für die Schlankheit c/t",
+  "en": "Material factor ε: higher strength → stricter limits for the slenderness c/t"
+ },
+ {
+  "id": "05-33",
+  "de": "ε = √(235/f<sub>y</sub>) = √(235/{}) = {} (f<sub>y</sub> = {} N/mm² für t<sub>f</sub> = {} mm ≤ 40 mm)",
+  "en": "ε = √(235/f<sub>y</sub>) = √(235/{}) = {} (f<sub>y</sub> = {} N/mm² for t<sub>f</sub> = {} mm ≤ 40 mm)"
+ },
+ {
+  "id": "05-34",
+  "de": "Gurt: einseitig gestütztes Blech unter Druck — Schlankheit c/t",
+  "en": "Flange: outstand plate in compression — slenderness c/t"
+ },
+ {
+  "id": "05-35",
+  "de": "Steg: beidseitig gestütztes Blech — Schlankheit c/t",
+  "en": "Web: internal plate — slenderness c/t"
+ },
+ {
+  "id": "05-36",
+  "de": "Spannungsverteilung im Steg: wie viel davon ist gedrückt?",
+  "en": "Stress distribution in the web: how much of it is in compression?"
+ },
+ {
+  "id": "05-37",
+  "de": "Spannungsverteilung im Steg: reine Biegung, halb gedrückt",
+  "en": "Stress distribution in the web: pure bending, half in compression"
+ },
+ {
+  "id": "05-38",
+  "de": "plastische Nulllinie: α = ½·(1 + N<sub>Ed</sub>/(f<sub>y</sub>·c·t<sub>w</sub>)) = {}",
+  "en": "plastic neutral axis: α = ½·(1 + N<sub>Ed</sub>/(f<sub>y</sub>·c·t<sub>w</sub>)) = {}"
+ },
+ {
+  "id": "05-39",
+  "de": "reine Biegung: α = 0,5 · ψ = −1",
+  "en": "pure bending: α = 0.5 · ψ = −1"
+ },
+ {
+  "id": "05-40",
+  "de": "Der ungünstigere Querschnittsteil bestimmt die Klasse",
+  "en": "The less favourable part determines the class"
+ },
+ {
+  "id": "05-41",
+  "de": "Querschnittsklasse = max(Gurt; Steg) = <b>{}</b> → {}",
+  "en": "Cross-section class = max(flange; web) = <b>{}</b> → {}"
+ },
+ {
+  "id": "05-42",
+  "de": "plastische Bemessung mit W<sub>pl</sub>",
+  "en": "plastic design with W<sub>pl</sub>"
+ },
+ {
+  "id": "05-43",
+  "de": "elastische Bemessung mit W<sub>el</sub>",
+  "en": "elastic design with W<sub>el</sub>"
+ },
+ {
+  "id": "05-44",
+  "de": "wirksamer Querschnitt nach EN 1993-1-5",
+  "en": "effective cross-section to EN 1993-1-5"
+ },
+ {
+  "id": "05-45",
+  "de": "Gurt: Beulschlankheit des Blechs und Abminderungsfaktor ρ",
+  "en": "Flange: plate slenderness and reduction factor ρ"
+ },
+ {
+  "id": "05-46",
+  "de": "Gurt (einseitig, k<sub>σ</sub> = 0,43): λ̄<sub>p</sub> = (c/t)/(28,4·ε·√k<sub>σ</sub>) = {} → ρ = {}",
+  "en": "Flange (outstand, k<sub>σ</sub> = 0.43): λ̄<sub>p</sub> = (c/t)/(28.4·ε·√k<sub>σ</sub>) = {} → ρ = {}"
+ },
+ {
+  "id": "05-47",
+  "de": "Steg unter reinem Druck → wirksame Fläche für die Normalkraft",
+  "en": "Web in pure compression → effective area for the axial force"
+ },
+ {
+  "id": "05-48",
+  "de": "Steg (ψ = 1, k<sub>σ</sub> = 4,0): λ̄<sub>p</sub> = {} → ρ = {}",
+  "en": "Web (ψ = 1, k<sub>σ</sub> = 4.0): λ̄<sub>p</sub> = {} → ρ = {}"
+ },
+ {
+  "id": "05-49",
+  "de": "Steg unter Biegung → wirksame Breiten der Druckzone (iterativ, da sich der Schwerpunkt verschiebt)",
+  "en": "Web in bending → effective widths of the compression zone (iterative, since the centroid shifts)"
+ },
+ {
+  "id": "05-50",
+  "de": "Wirksames Widerstandsmoment",
+  "en": "Effective section modulus"
+ },
+ {
+  "id": "05-51",
+  "de": "Schwerpunkt wirksam z<sub>s</sub> = {} mm von oben · I<sub>eff</sub> = {} cm⁴",
+  "en": "Effective centroid z<sub>s</sub> = {} mm from the top · I<sub>eff</sub> = {} cm⁴"
+ },
+ {
+  "id": "05-52",
+  "de": "Verwendung in den folgenden Nachweisen",
+  "en": "Use in the following checks"
+ },
+ {
+  "id": "05-53",
+  "de": "Für Druck und Biegung: N<sub>Ed</sub>/(A<sub>eff</sub>·f<sub>y</sub>) + M<sub>y,Ed</sub>/(W<sub>eff</sub>·f<sub>y</sub>) ≤ 1 (6.44, e<sub>N</sub> = 0 bei doppeltsymmetrischem Querschnitt)",
+  "en": "For compression and bending: N<sub>Ed</sub>/(A<sub>eff</sub>·f<sub>y</sub>) + M<sub>y,Ed</sub>/(W<sub>eff</sub>·f<sub>y</sub>) ≤ 1 (6.44, e<sub>N</sub> = 0 for a doubly symmetric section)"
+ },
+ {
+  "id": "05-54",
+  "de": "Schubfläche A<sub>v,z</sub> = A − 2b·t<sub>f</sub> + (t<sub>w</sub> + 2r)·t<sub>f</sub> ≥ h<sub>w</sub>·t<sub>w</sub> = {} cm²",
+  "en": "Shear area A<sub>v,z</sub> = A − 2b·t<sub>f</sub> + (t<sub>w</sub> + 2r)·t<sub>f</sub> ≥ h<sub>w</sub>·t<sub>w</sub> = {} cm²"
+ },
+ {
+  "id": "05-55",
+  "de": "Widerstände des Querschnitts (γ<sub>M0</sub> = 1,0)",
+  "en": "Resistances of the cross-section (γ<sub>M0</sub> = 1.0)"
+ },
+ {
+  "id": "05-56",
+  "de": "Bezugsschlankheit und Knicklinien (abhängig von Profilform und Ausweichrichtung)",
+  "en": "Non-dimensional slenderness and buckling curves (depending on section shape and buckling direction)"
+ },
+ {
+  "id": "05-57",
+  "de": " · Klasse 4: λ̄ mit √(A<sub>eff</sub>/A) = ",
+  "en": " · Class 4: λ̄ with √(A<sub>eff</sub>/A) = "
+ },
+ {
+  "id": "05-58",
+  "de": "Ausweichen um die starke Achse y",
+  "en": "Buckling about the major axis y"
+ },
+ {
+  "id": "05-59",
+  "de": "Ausweichen um die schwache Achse z",
+  "en": "Buckling about the minor axis z"
+ },
+ {
+  "id": "05-60",
+  "de": "Nachweis mit dem kleineren Wert",
+  "en": "Check with the smaller value"
+ },
+ {
+  "id": "05-61",
+  "de": "Einzelausnutzungen, jeweils mit dem Stabilitätsbeiwert χ",
+  "en": "Individual utilisations, each with the stability factor χ"
+ },
+ {
+  "id": "05-62",
+  "de": "Momentenbeiwert: berücksichtigt die Form des Momentenverlaufs",
+  "en": "Moment factor: accounts for the shape of the moment diagram"
+ },
+ {
+  "id": "05-63",
+  "de": ", gleicher Verlauf für M<sub>z</sub> angenommen",
+  "en": ", same diagram assumed for M<sub>z</sub>"
+ },
+ {
+  "id": "05-64",
+  "de": "Interaktionsbeiwerte k (Anhang B, {})",
+  "en": "Interaction factors k (Annex B, {})"
+ },
+ {
+  "id": "05-65",
+  "de": "Nachweis für Ausweichen um y (6.61) und um z (6.62)",
+  "en": "Check for buckling about y (6.61) and about z (6.62)"
+ },
+ {
+  "id": "05-66",
+  "de": "Abklingzahl: Verhältnis von St.-Venant- zu Wölbsteifigkeit",
+  "en": "Decay factor: ratio of St. Venant to warping stiffness"
+ },
+ {
+  "id": "05-67",
+  "de": "Aufteilung des Torsionsmoments am Auflager in zwei Anteile",
+  "en": "Splitting of the torsional moment at the support into two parts"
+ },
+ {
+  "id": "05-68",
+  "de": "Auflager: primäres (St. Venant) T<sub>t</sub> = {} kNm",
+  "en": "Support: primary (St. Venant) T<sub>t</sub> = {} kNm"
+ },
+ {
+  "id": "05-69",
+  "de": "sekundäres (Wölb-) T<sub>w</sub> = {} kNm",
+  "en": "secondary (warping) T<sub>w</sub> = {} kNm"
+ },
+ {
+  "id": "05-70",
+  "de": "Wölbbimoment in Feldmitte: verbiegt die Gurte gegenläufig",
+  "en": "Bimoment at midspan: bends the flanges in opposite directions"
+ },
+ {
+  "id": "05-71",
+  "de": "Feldmitte: Wölbbimoment B = <b>{} kNm²</b>",
+  "en": "Midspan: bimoment B = <b>{} kNm²</b>"
+ },
+ {
+  "id": "05-72",
+  "de": "Wölbnormalspannung an der Gurtkante",
+  "en": "Warping normal stress at the flange tip"
+ },
+ {
+  "id": "05-73",
+  "de": "σ<sub>w</sub> = B·ω<sub>max</sub>/I<sub>w</sub> mit ω<sub>max</sub> = (h − t<sub>f</sub>)·b/4 = {} mm² → σ<sub>w</sub> = {} N/mm² (Gurtkante)",
+  "en": "σ<sub>w</sub> = B·ω<sub>max</sub>/I<sub>w</sub> with ω<sub>max</sub> = (h − t<sub>f</sub>)·b/4 = {} mm² → σ<sub>w</sub> = {} N/mm² (flange tip)"
+ },
+ {
+  "id": "05-74",
+  "de": "Normalspannungen addieren (Feldmitte, Gurtkante)",
+  "en": "Add the normal stresses (midspan, flange tip)"
+ },
+ {
+  "id": "05-75",
+  "de": "Feldmitte, Gurtkante: σ = N/A + M<sub>y</sub>/W<sub>el,y</sub>{} + σ<sub>w</sub> = {} + {} = <b>{} N/mm²</b> ≤ f<sub>y</sub> = {} N/mm²",
+  "en": "Midspan, flange tip: σ = N/A + M<sub>y</sub>/W<sub>el,y</sub>{} + σ<sub>w</sub> = {} + {} = <b>{} N/mm²</b> ≤ f<sub>y</sub> = {} N/mm²"
+ },
+ {
+  "id": "05-76",
+  "de": "Schubspannungen addieren (Auflager)",
+  "en": "Add the shear stresses (support)"
+ },
+ {
+  "id": "05-77",
+  "de": "Steg: τ = V/(h<sub>w</sub>·t<sub>w</sub>) + T<sub>t</sub>·t<sub>w</sub>/I<sub>T</sub> = {} + {} = {} N/mm²",
+  "en": "Web: τ = V/(h<sub>w</sub>·t<sub>w</sub>) + T<sub>t</sub>·t<sub>w</sub>/I<sub>T</sub> = {} + {} = {} N/mm²"
+ },
+ {
+  "id": "05-78",
+  "de": "Gurt: τ = T<sub>t</sub>·t<sub>f</sub>/I<sub>T</sub> + T<sub>w</sub>·S<sub>ω</sub>/(I<sub>w</sub>·t<sub>f</sub>) = {} + {} = {} N/mm²",
+  "en": "Flange: τ = T<sub>t</sub>·t<sub>f</sub>/I<sub>T</sub> + T<sub>w</sub>·S<sub>ω</sub>/(I<sub>w</sub>·t<sub>f</sub>) = {} + {} = {} N/mm²"
+ },
+ {
+  "id": "05-79",
+  "de": "Fließbedingung für Schub",
+  "en": "Yield criterion for shear"
+ },
+ {
+  "id": "05-80",
+  "de": "Lastfall und Abmessungen",
+  "en": "Load case and dimensions"
+ },
+ {
+  "id": "05-81",
+  "de": "Typ a — Last über den Gurt in den Steg, im Feld",
+  "en": "Type a — load through the flange into the web, in the span"
+ },
+ {
+  "id": "05-82",
+  "de": "Typ c — Last am Trägerende",
+  "en": "Type c — load at the beam end"
+ },
+ {
+  "id": "05-83",
+  "de": "Beulwert und kritische Last des Stegs",
+  "en": "Buckling coefficient and critical load of the web"
+ },
+ {
+  "id": "05-84",
+  "de": "6 (ohne Quersteifen)",
+  "en": "6 (without transverse stiffeners)"
+ },
+ {
+  "id": "05-85",
+  "de": "Wirksame Lastausbreitungslänge l<sub>y</sub> (der Gurt verteilt die Last)",
+  "en": "Effective loaded length l<sub>y</sub> (the flange spreads the load)"
+ },
+ {
+  "id": "05-86",
+  "de": "Schlankheit und Abminderung",
+  "en": "Slenderness and reduction"
+ },
+ {
+  "id": "05-87",
+  "de": "Tragfähigkeit des Stegs",
+  "en": "Resistance of the web"
+ },
+ {
+  "id": "05-88",
+  "de": "Zusammenwirken mit dem Biegemoment",
+  "en": "Interaction with the bending moment"
+ },
+ {
+  "id": "05-89",
+  "de": "mit Biegung (EN 1993-1-5, 7.2): η<sub>2</sub> + 0,8·η<sub>1</sub> = {} + 0,8·{} = <b>{}</b> ≤ 1,4",
+  "en": "with bending (EN 1993-1-5, 7.2): η<sub>2</sub> + 0.8·η<sub>1</sub> = {} + 0.8·{} = <b>{}</b> ≤ 1.4"
+ },
+ {
+  "id": "05-90",
+  "de": "Durchbiegung aus dem charakteristischen Moment (elastisch)",
+  "en": "Deflection from the characteristic moment (elastic)"
+ },
+ {
+  "id": "05-91",
+  "de": "w = c·M<sub>y,k</sub>·L²/(E·I<sub>y</sub>) mit c = {} ({})",
+  "en": "w = c·M<sub>y,k</sub>·L²/(E·I<sub>y</sub>) with c = {} ({})"
+ },
+ {
+  "id": "05-92",
+  "de": "M<sub>y,Ed</sub> = {} kNm (Druck oben)",
+  "en": "M<sub>y,Ed</sub> = {} kNm (compression at the top)"
+ },
+ {
+  "id": "05-93",
+  "de": "Druck",
+  "en": "Compression"
+ },
+ {
+  "id": "05-94",
+  "de": "F<sub>Ed</sub> = {} kN auf dem Obergurt",
+  "en": "F<sub>Ed</sub> = {} kN on the top flange"
+ },
+ {
+  "id": "05-95",
+  "de": "Doppelpfeil = Momentenvektor (Rechte-Hand-Regel: Daumen in Pfeilrichtung, die Finger zeigen den Drehsinn) · ⊙ Zug aus der Ebene heraus, ⊗ Druck in die Ebene hinein",
+  "en": "Double arrow = moment vector (right-hand rule: thumb in the arrow direction, the fingers show the sense of rotation) · ⊙ tension out of the plane, ⊗ compression into the plane"
+ },
+ {
+  "id": "05-96",
+  "de": "{}, {} · Querschnittsklasse {} · {} kg/m",
+  "en": "{}, {} · cross-section class {} · {} kg/m"
+ },
+ {
+  "id": "05-97",
+  "de": "Querkraft V<sub>y</sub>, Plattenbeulen bei Schub, Lasteinleitung mit Steifen, Wechselwirkung Torsion/Biegedrillknicken, Klasse 4 unter M<sub>z</sub>.",
+  "en": "Shear force V<sub>y</sub>, plate buckling in shear, load introduction with stiffeners, interaction torsion/lateral-torsional buckling, class 4 under M<sub>z</sub>."
+ },
+ {
+  "id": "05-98",
+  "de": "Rand- und Lochabstände (Tab. 3.3)",
+  "en": "Edge distances and spacings (Tab. 3.3)"
+ },
+ {
+  "id": "05-99",
+  "de": "Abscheren und Lochleibung",
+  "en": "Shear and bearing"
+ },
+ {
+  "id": "05-100",
+  "de": "Zug in den Schrauben",
+  "en": "Tension in the bolts"
+ },
+ {
+  "id": "05-101",
+  "de": "Durchstanzen des Blechs unter Kopf und Mutter (B<sub>p,Rd</sub>) und Abstützkräfte (Stirnplatte) sind hier nicht enthalten.",
+  "en": "Punching shear of the plate under head and nut (B<sub>p,Rd</sub>) and prying forces (end plate) are not included here."
+ },
+ {
+  "id": "05-102",
+  "de": "Kehlnaht",
+  "en": "Fillet weld"
+ },
+ {
+  "id": "05-103",
+  "de": "Vereinfachtes Verfahren: Kraft je Längeneinheit unabhängig von der Richtung. Die Nahtlänge l ist die wirksame Länge (ohne Endkrater).",
+  "en": "Simplified method: force per unit length independent of direction. The weld length l is the effective length (without end craters)."
+ },
+ {
+  "id": "05-104",
+  "de": "Schraube und Lochdurchmesser",
+  "en": "Bolt and hole diameter"
+ },
+ {
+  "id": "05-105",
+  "de": "Mindestabstände: genug Blech vor und zwischen den Löchern, damit es nicht ausreißt",
+  "en": "Minimum distances: enough plate in front of and between the holes so that it does not tear out"
+ },
+ {
+  "id": "05-106",
+  "de": "Abscheren: der Schraubenschaft wird in jeder Scherfuge abgeschert",
+  "en": "Shear: the bolt shank is sheared in every shear plane"
+ },
+ {
+  "id": "05-107",
+  "de": "Abscheren: F<sub>v,Rd</sub> = m·α<sub>v</sub>·f<sub>ub</sub>·A/γ<sub>M2</sub> = {}·{}·{}·{}/1,25 = <b>{} kN</b> je Schraube",
+  "en": "Shear: F<sub>v,Rd</sub> = m·α<sub>v</sub>·f<sub>ub</sub>·A/γ<sub>M2</sub> = {}·{}·{}·{}/1.25 = <b>{} kN</b> per bolt"
+ },
+ {
+  "id": "05-108",
+  "de": "Gewinde in der Scherfuge, A = A<sub>s</sub>",
+  "en": "thread in the shear plane, A = A<sub>s</sub>"
+ },
+ {
+  "id": "05-109",
+  "de": "Schaft in der Scherfuge, A = π·d²/4",
+  "en": "shank in the shear plane, A = π·d²/4"
+ },
+ {
+  "id": "05-110",
+  "de": "Lochleibung: die Schraube drückt gegen die Lochwand des Blechs (t = {} mm, f<sub>u</sub> = {} N/mm²)",
+  "en": "Bearing: the bolt presses against the hole wall of the plate (t = {} mm, f<sub>u</sub> = {} N/mm²)"
+ },
+ {
+  "id": "05-111",
+  "de": "maßgebende Schraube: α<sub>d</sub> = {}",
+  "en": "governing bolt: α<sub>d</sub> = {}"
+ },
+ {
+  "id": "05-112",
+  "de": "F<sub>b,Rd</sub> = k<sub>1</sub>·α<sub>b</sub>·f<sub>u</sub>·d·t/γ<sub>M2</sub> = <b>{} kN</b> (kleinster Wert; End- und Randschrauben getrennt ermittelt)",
+  "en": "F<sub>b,Rd</sub> = k<sub>1</sub>·α<sub>b</sub>·f<sub>u</sub>·d·t/γ<sub>M2</sub> = <b>{} kN</b> (smallest value; end and edge bolts determined separately)"
+ },
+ {
+  "id": "05-113",
+  "de": "Tragfähigkeit der Schraubengruppe",
+  "en": "Resistance of the bolt group"
+ },
+ {
+  "id": "05-114",
+  "de": "F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> für alle Schrauben → Gruppe = Σ F<sub>b,Rd</sub> = <b>{} kN</b> (EN 1993-1-8, 3.7)",
+  "en": "F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> for all bolts → group = Σ F<sub>b,Rd</sub> = <b>{} kN</b> (EN 1993-1-8, 3.7)"
+ },
+ {
+  "id": "05-115",
+  "de": "Gruppe = n·min(F<sub>v,Rd</sub>; F<sub>b,Rd</sub>) = {}·{} = <b>{} kN</b>",
+  "en": "group = n·min(F<sub>v,Rd</sub>; F<sub>b,Rd</sub>) = {}·{} = <b>{} kN</b>"
+ },
+ {
+  "id": "05-116",
+  "de": "Zugtragfähigkeit einer Schraube (Spannungsquerschnitt im Gewinde)",
+  "en": "Tension resistance of one bolt (tensile stress area in the thread)"
+ },
+ {
+  "id": "05-117",
+  "de": "Zugkraft je Schraube (gleichmäßig verteilt)",
+  "en": "Tensile force per bolt (evenly distributed)"
+ },
+ {
+  "id": "05-118",
+  "de": "Abscheren und Zug gleichzeitig: beide Ausnutzungen addieren",
+  "en": "Shear and tension at the same time: add both utilisations"
+ },
+ {
+  "id": "05-119",
+  "de": "Abscheren und Zug (Tab. 3.4): F<sub>v,Ed</sub>/F<sub>v,Rd</sub> + F<sub>t,Ed</sub>/(1,4·F<sub>t,Rd</sub>) = {} + {} = <b>{}</b> ≤ 1",
+  "en": "Shear and tension (Tab. 3.4): F<sub>v,Ed</sub>/F<sub>v,Rd</sub> + F<sub>t,Ed</sub>/(1.4·F<sub>t,Rd</sub>) = {} + {} = <b>{}</b> ≤ 1"
+ },
+ {
+  "id": "05-120",
+  "de": "nur Zug: F<sub>t,Ed</sub>/F<sub>t,Rd</sub> = {}",
+  "en": "tension only: F<sub>t,Ed</sub>/F<sub>t,Rd</sub> = {}"
+ },
+ {
+  "id": "05-121",
+  "de": "Scherfestigkeit des Schweißguts",
+  "en": "Shear strength of the weld metal"
+ },
+ {
+  "id": "05-122",
+  "de": "Tragfähigkeit je mm Naht (Festigkeit × Nahtdicke)",
+  "en": "Resistance per mm of weld (strength × throat thickness)"
+ },
+ {
+  "id": "05-123",
+  "de": "Beanspruchung je mm Naht",
+  "en": "Load per mm of weld"
+ },
+ {
+  "id": "05-124",
+  "de": "Konstruktive Regeln für Dicke und Länge",
+  "en": "Detailing rules for thickness and length"
+ },
+ {
+  "id": "05-125",
+  "de": "Mindestdicke: a ≥ max(3 mm; √t<sub>max</sub> − 0,5){} · gewählt a = {} mm",
+  "en": "Minimum thickness: a ≥ max(3 mm; √t<sub>max</sub> − 0.5){} · chosen a = {} mm"
+ },
+ {
+  "id": "05-126",
+  "de": "Mindestlänge: l ≥ max(30 mm; 6·a) = {} mm · vorhanden {} mm",
+  "en": "Minimum length: l ≥ max(30 mm; 6·a) = {} mm · provided {} mm"
+ },
+ {
+  "id": "05-127",
+  "de": "e₁ = {}{} (in Kraftrichtung)",
+  "en": "e₁ = {}{} (in load direction)"
+ },
+ {
+  "id": "05-128",
+  "de": "freies Blechende (e₁)",
+  "en": "free plate end (e₁)"
+ },
+ {
+  "id": "05-129",
+  "de": "V<sub>Ed</sub> = {} kN → je Schraube {} kN (Abscheren, Pfeile)",
+  "en": "V<sub>Ed</sub> = {} kN → per bolt {} kN (shear, arrows)"
+ },
+ {
+  "id": "05-130",
+  "de": "N<sub>Ed</sub> = {} kN → je Schraube {} kN (Zug in Schraubenachse, ⊙)",
+  "en": "N<sub>Ed</sub> = {} kN → per bolt {} kN (tension along the bolt axis, ⊙)"
+ },
+ {
+  "id": "05-131",
+  "de": "Kehlnaht F<sub>w,Ed</sub> = {} kN",
+  "en": "Fillet weld F<sub>w,Ed</sub> = {} kN"
+ },
+ {
+  "id": "05-132",
+  "de": "Die Schraube drückt in Kraftrichtung gegen die Lochwand — deshalb zählt der Abstand e₁ zum freien Blechende.",
+  "en": "The bolt presses against the hole wall in the load direction — that is why the distance e₁ to the free plate end counts."
+ },
+ {
+  "id": "05-133",
+  "de": " · Kehlnaht a = {} mm",
+  "en": " · fillet weld a = {} mm"
+ },
+ {
+  "id": "05-134",
+  "de": "{} × {} {}, {}-schnittig · Blech {} mm {}{}",
+  "en": "{} × {} {}, {} shear plane(s) · plate {} mm {}{}"
+ },
+ {
+  "id": "05-135",
+  "de": "Blockversagen, Nettoquerschnitt des Blechs, Durchstanzen, Abstützkräfte, Momentenanschlüsse (Komponentenmethode) und HV-Verbindungen (gleitfest).",
+  "en": "Block tearing, net section of the plate, punching shear, prying forces, moment connections (component method) and slip-resistant connections."
+ },
+ {
+  "id": "05-136",
+  "de": "Baustoff und Bemessungswerte",
+  "en": "Material and design values"
+ },
+ {
+  "id": "05-137",
+  "de": "Biegung",
+  "en": "Bending"
+ },
+ {
+  "id": "05-138",
+  "de": "Schub",
+  "en": "Shear"
+ },
+ {
+  "id": "05-139",
+  "de": "Auflagerpressung (Querdruck)",
+  "en": "Bearing (compression perpendicular to the grain)"
+ },
+ {
+  "id": "05-140",
+  "de": "Kipplänge 0: Druckrand durchgehend gehalten → k<sub>crit</sub> = 1",
+  "en": "Buckling length 0: compression edge restrained throughout → k<sub>crit</sub> = 1"
+ },
+ {
+  "id": "05-141",
+  "de": "Kippen",
+  "en": "Lateral-torsional buckling"
+ },
+ {
+  "id": "05-142",
+  "de": "Wirksame Kipplänge: hängt vom Momentenverlauf und vom Lastangriff ab",
+  "en": "Effective length: depends on the moment diagram and the point of load application"
+ },
+ {
+  "id": "05-143",
+  "de": " + 2h (Last am oberen Rand)",
+  "en": " + 2h (load at the top edge)"
+ },
+ {
+  "id": "05-144",
+  "de": " − 0,5h (Last am unteren Rand)",
+  "en": " − 0.5h (load at the bottom edge)"
+ },
+ {
+  "id": "05-145",
+  "de": "Kritische Biegespannung (ideales Kippen eines Rechteckquerschnitts)",
+  "en": "Critical bending stress (elastic lateral buckling of a rectangular section)"
+ },
+ {
+  "id": "05-146",
+  "de": "Bezogener Kippschlankheitsgrad und Kippbeiwert",
+  "en": "Relative slenderness for bending and factor k<sub>crit</sub>"
+ },
+ {
+  "id": "05-147",
+  "de": "Nachweis: Biegespannung ≤ abgeminderte Biegefestigkeit",
+  "en": "Check: bending stress ≤ reduced bending strength"
+ },
+ {
+  "id": "05-148",
+  "de": "Seitliche Halterungen (Pfetten, Verband) näher setzen oder breiteren Querschnitt wählen.",
+  "en": "Place lateral restraints (purlins, bracing) closer or choose a wider cross-section."
+ },
+ {
+  "id": "05-149",
+  "de": "Nachweis zusammen mit dem Druck (siehe Knicken)",
+  "en": "Check together with the compression (see buckling)"
+ },
+ {
+  "id": "05-150",
+  "de": "Zusätzlich mit Kippen",
+  "en": "Additionally with lateral-torsional buckling"
+ },
+ {
+  "id": "05-151",
+  "de": "mit Kippen (6.35): (σ<sub>m</sub>/(k<sub>crit</sub>·f<sub>m,d</sub>))² + σ<sub>c</sub>/(k<sub>c,z</sub>·f<sub>c,0,d</sub>) = <b>{}</b> ≤ 1",
+  "en": "with lateral-torsional buckling (6.35): (σ<sub>m</sub>/(k<sub>crit</sub>·f<sub>m,d</sub>))² + σ<sub>c</sub>/(k<sub>c,z</sub>·f<sub>c,0,d</sub>) = <b>{}</b> ≤ 1"
+ },
+ {
+  "id": "05-152",
+  "de": "Druck und Biegung (Knicken)",
+  "en": "Compression and bending (buckling)"
+ },
+ {
+  "id": "05-153",
+  "de": "Knicken",
+  "en": "Flexural buckling"
+ },
+ {
+  "id": "05-154",
+  "de": "Schubverformung vernachlässigt (bei kurzen, hohen BSH-Trägern berücksichtigen).",
+  "en": "Shear deformation neglected (consider it for short, deep glulam beams)."
+ },
+ {
+  "id": "05-155",
+  "de": "Brettschichtholz, EN 14080",
+  "en": "Glulam, EN 14080"
+ },
+ {
+  "id": "05-156",
+  "de": "Vollholz Nadelholz, EN 338",
+  "en": "Solid softwood, EN 338"
+ },
+ {
+  "id": "05-157",
+  "de": "Modifikationsbeiwert k<sub>mod</sub>: Holz ist unter kurzer Last fester, unter Dauerlast und Feuchte schwächer",
+  "en": "Modification factor k<sub>mod</sub>: timber is stronger under short-term load, weaker under permanent load and moisture"
+ },
+ {
+  "id": "05-158",
+  "de": "Höhenbeiwert k<sub>h</sub>: niedrige Querschnitte dürfen etwas höher ausgenutzt werden",
+  "en": "Depth factor k<sub>h</sub>: shallow sections may be utilised slightly higher"
+ },
+ {
+  "id": "05-159",
+  "de": "Bemessungswerte der Festigkeiten",
+  "en": "Design values of the strengths"
+ },
+ {
+  "id": "05-160",
+  "de": "Randspannung aus dem Biegemoment",
+  "en": "Edge stress from the bending moment"
+ },
+ {
+  "id": "05-161",
+  "de": "Schwindrisse verringern die wirksame Breite",
+  "en": "Shrinkage cracks reduce the effective width"
+ },
+ {
+  "id": "05-162",
+  "de": "Größte Schubspannung in der Querschnittsmitte (1,5-fache mittlere Spannung)",
+  "en": "Maximum shear stress at mid-depth (1.5 times the mean stress)"
+ },
+ {
+  "id": "05-163",
+  "de": "Wirksame Auflagerlänge: die Pressung breitet sich etwas ins Holz aus",
+  "en": "Effective bearing length: the pressure spreads a little into the timber"
+ },
+ {
+  "id": "05-164",
+  "de": "wirksame Länge l<sub>ef</sub> = l + 30 mm (Überstand nur zur Feldseite, Endauflager) = {} + 30 = {} mm",
+  "en": "effective length l<sub>ef</sub> = l + 30 mm (extension towards the span only, end support) = {} + 30 = {} mm"
+ },
+ {
+  "id": "05-165",
+  "de": "Druckspannung quer zur Faser",
+  "en": "Compressive stress perpendicular to the grain"
+ },
+ {
+  "id": "05-166",
+  "de": "Querdruckbeiwert k<sub>c,90</sub>: Eindrückungen sind bis zu einem gewissen Maß zulässig",
+  "en": "Factor k<sub>c,90</sub>: indentations are acceptable to a certain degree"
+ },
+ {
+  "id": "05-167",
+  "de": "Spannungen aus Normalkraft und Moment",
+  "en": "Stresses from axial force and moment"
+ },
+ {
+  "id": "05-168",
+  "de": "Knicken um y (L<sub>cr</sub> = {} m, i = h/√12)",
+  "en": "Buckling about y (L<sub>cr</sub> = {} m, i = h/√12)"
+ },
+ {
+  "id": "05-169",
+  "de": "Knicken um z (L<sub>cr</sub> = {} m, i = b/√12)",
+  "en": "Buckling about z (L<sub>cr</sub> = {} m, i = b/√12)"
+ },
+ {
+  "id": "05-170",
+  "de": "Interaktion Druck + Biegung für beide Richtungen",
+  "en": "Interaction compression + bending for both directions"
+ },
+ {
+  "id": "05-171",
+  "de": "Elastische Anfangsdurchbiegung getrennt für ständige und veränderliche Last",
+  "en": "Instantaneous elastic deflection, separately for permanent and variable load"
+ },
+ {
+  "id": "05-172",
+  "de": "Anfangsdurchbiegung",
+  "en": "Instantaneous deflection"
+ },
+ {
+  "id": "05-173",
+  "de": "Kriechen: Holz verformt sich unter Dauerlast weiter (k<sub>def</sub> = {}, NKL {})",
+  "en": "Creep: timber continues to deform under permanent load (k<sub>def</sub> = {}, SC {})"
+ },
+ {
+  "id": "05-174",
+  "de": "Sichtbare Enddurchbiegung aus der quasi-ständigen Last",
+  "en": "Visible final deflection from the quasi-permanent load"
+ },
+ {
+  "id": "05-175",
+  "de": "w<sub>net,fin</sub> = (w<sub>G</sub> + ψ<sub>2</sub>·w<sub>Q</sub>)·(1 + k<sub>def</sub>) = <b>{} mm</b> ≤ L/300 = {} mm (ohne Überhöhung)",
+  "en": "w<sub>net,fin</sub> = (w<sub>G</sub> + ψ<sub>2</sub>·w<sub>Q</sub>)·(1 + k<sub>def</sub>) = <b>{} mm</b> ≤ L/300 = {} mm (without precamber)"
+ },
+ {
+  "id": "05-176",
+  "de": " (Auflager)",
+  "en": " (support)"
+ },
+ {
+  "id": "05-177",
+  "de": "F<sub>Ed</sub> = {} kN drückt quer zur Faser von unten",
+  "en": "F<sub>Ed</sub> = {} kN presses perpendicular to the grain from below"
+ },
+ {
+  "id": "05-178",
+  "de": "Doppelpfeil = Momentenvektor (Rechte-Hand-Regel)",
+  "en": "Double arrow = moment vector (right-hand rule)"
+ },
+ {
+  "id": "05-179",
+  "de": "Druck auf die Fuge (T-Stummel)",
+  "en": "Compression on the joint (T-stub)"
+ },
+ {
+  "id": "05-180",
+  "de": "Dickere oder größere Platte (größeres c bzw. A<sub>eff</sub>), höhere Betonklasse oder größeres Fundament (k<sub>j</sub>) wählen.",
+  "en": "Choose a thicker or larger plate (larger c or A<sub>eff</sub>), a higher concrete class or a larger foundation (k<sub>j</sub>)."
+ },
+ {
+  "id": "05-181",
+  "de": "Querkraft (Reibung)",
+  "en": "Shear (friction)"
+ },
+ {
+  "id": "05-182",
+  "de": "Reibung reicht nicht: Schubknagge oder Anker für die Querkraft anordnen. ",
+  "en": "Friction is not sufficient: provide a shear key or anchors for the shear force. "
+ },
+ {
+  "id": "05-183",
+  "de": "Reibung nur ansetzen, wenn N<sub>Ed</sub> in derselben Einwirkungskombination sicher vorhanden ist.",
+  "en": "Apply friction only if N<sub>Ed</sub> is reliably present in the same combination of actions."
+ },
+ {
+  "id": "05-184",
+  "de": "Kehlnähte Stütze–Platte",
+  "en": "Fillet welds column–plate"
+ },
+ {
+  "id": "05-185",
+  "de": "Festigkeit der Fuge unter der Platte: Beton unter Teilflächenpressung (EN 1992-1-1, 6.7)",
+  "en": "Strength of the joint under the plate: concrete under concentrated bearing (EN 1992-1-1, 6.7)"
+ },
+ {
+  "id": "05-186",
+  "de": "A<sub>c1</sub>/A<sub>c0</sub>: Seitenverhältnis min(B<sub>f</sub>/B<sub>p</sub>; L<sub>f</sub>/L<sub>p</sub>; 3) = min({}; {}; 3) = {} → k<sub>j</sub> = √(A<sub>c1</sub>/A<sub>c0</sub>) = {}",
+  "en": "A<sub>c1</sub>/A<sub>c0</sub>: aspect ratio min(B<sub>f</sub>/B<sub>p</sub>; L<sub>f</sub>/L<sub>p</sub>; 3) = min({}; {}; 3) = {} → k<sub>j</sub> = √(A<sub>c1</sub>/A<sub>c0</sub>) = {}"
+ },
+ {
+  "id": "05-187",
+  "de": "Wie weit die Platte die Last über das Profil hinaus verteilt: zusätzliche Breite c (Platte als Kragarm, elastisch)",
+  "en": "How far the plate spreads the load beyond the section: additional width c (plate as cantilever, elastic)"
+ },
+ {
+  "id": "05-188",
+  "de": "Wirksame Fläche: Streifen der Breite c rund um Gurte und Steg (T-Stummel), begrenzt auf die Platte",
+  "en": "Effective area: strips of width c around flanges and web (T-stub), limited to the plate"
+ },
+ {
+  "id": "05-189",
+  "de": "Steg zu kurz (h − 2t<sub>f</sub> ≤ 2c): ein Rechteck (b + 2c)·(h + 2c), auf die Platte begrenzt → A<sub>eff</sub> = {} cm²",
+  "en": "Web too short (h − 2t<sub>f</sub> ≤ 2c): one rectangle (b + 2c)·(h + 2c), limited to the plate → A<sub>eff</sub> = {} cm²"
+ },
+ {
+  "id": "05-190",
+  "de": "je Gurt (b + 2c)·(t<sub>f</sub> + 2c) = {} cm² · Steg (t<sub>w</sub> + 2c)·(h − 2t<sub>f</sub> − 2c) = {} cm²",
+  "en": "per flange (b + 2c)·(t<sub>f</sub> + 2c) = {} cm² · web (t<sub>w</sub> + 2c)·(h − 2t<sub>f</sub> − 2c) = {} cm²"
+ },
+ {
+  "id": "05-191",
+  "de": "Tragfähigkeit des Stützenfußes unter Druck",
+  "en": "Resistance of the column base in compression"
+ },
+ {
+  "id": "05-192",
+  "de": "Querkraft über Reibung zwischen Platte und Mörtel (6.2.2(6), C<sub>f,d</sub> = 0,2)",
+  "en": "Shear via friction between plate and grout (6.2.2(6), C<sub>f,d</sub> = 0.2)"
+ },
+ {
+  "id": "05-193",
+  "de": "Kehlnähte am Steg übertragen die Querkraft (vereinfachtes Verfahren, 4.5.3.3)",
+  "en": "Fillet welds at the web transfer the shear force (simplified method, 4.5.3.3)"
+ },
+ {
+  "id": "05-194",
+  "de": "Nahtlänge am Steg beidseitig l = 2·(h − 2t<sub>f</sub> − 2r) = {} mm → F<sub>w,Ed</sub> = V<sub>Ed</sub>/l = <b>{} N/mm</b>",
+  "en": "Weld length at the web, both sides l = 2·(h − 2t<sub>f</sub> − 2r) = {} mm → F<sub>w,Ed</sub> = V<sub>Ed</sub>/l = <b>{} N/mm</b>"
+ },
+ {
+  "id": "05-195",
+  "de": "Mindestdicke a ≥ max(3; √t<sub>max</sub> − 0,5) = {} mm {}",
+  "en": "Minimum thickness a ≥ max(3; √t<sub>max</sub> − 0.5) = {} mm {}"
+ },
+ {
+  "id": "05-196",
+  "de": "Ansicht",
+  "en": "Elevation"
+ },
+ {
+  "id": "05-197",
+  "de": "Pressung f<sub>jd</sub> = {} N/mm² auf A<sub>eff</sub> = {} cm² (blau)",
+  "en": "Bearing pressure f<sub>jd</sub> = {} N/mm² on A<sub>eff</sub> = {} cm² (blue)"
+ },
+ {
+  "id": "05-198",
+  "de": "{} auf Fußplatte {} × {} × {} mm {} · {} · N<sub>j,Rd</sub> = {} kN",
+  "en": "{} on base plate {} × {} × {} mm {} · {} · N<sub>j,Rd</sub> = {} kN"
+ },
+ {
+  "id": "05-199",
+  "de": "Eingespannte Stützenfüße (Moment, Anker auf Zug), Schubknaggen und Anker für Querkraft, Durchstanzen des Fundaments, Mörtelfuge im Detail. Die Stütze selbst (Knicken) unter „Träger / Stütze“.",
+  "en": "Fixed column bases (moment, anchors in tension), shear keys and anchors for shear, punching of the foundation, grout joint in detail. The column itself (buckling) under “Beam / column”."
+ },
+ {
+  "id": "05-200",
+  "de": "DIN EN 1993-1-8 mit NA, 6.2.5",
+  "en": "DIN EN 1993-1-8 with NA, 6.2.5"
+ },
+ {
+  "id": "05-201",
+  "de": "Stütze, Platte",
+  "en": "Column, plate"
+ },
+ {
+  "id": "05-202",
+  "de": "{}; Fußplatte {} × {} × {} mm, {}",
+  "en": "{}; base plate {} × {} × {} mm, {}"
+ },
+ {
+  "id": "05-203",
+  "de": "Kräfte",
+  "en": "Forces"
+ },
+ {
+  "id": "05-204",
+  "de": "N<sub>Ed</sub> = {} kN (Druck), V<sub>Ed</sub> = {} kN; Kehlnaht a = {} mm",
+  "en": "N<sub>Ed</sub> = {} kN (compression), V<sub>Ed</sub> = {} kN; fillet weld a = {} mm"
+ },
+ {
+  "id": "05-205",
+  "de": "<section><h2>Eingaben</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Stützenfuß</h2><div class=\"figure\">{}</div></section>",
+  "en": "<section><h2>Input</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Column base</h2><div class=\"figure\">{}</div></section>"
+ },
+ {
+  "id": "05-206",
+  "de": "Gelenkiger Fuß unter Druck.",
+  "en": "Pinned base in compression."
+ },
+ {
+  "id": "05-207",
+  "de": "Spannungen in der Kehlnahtfläche {} (Nahtfläche in die Anschlussebene geklappt)",
+  "en": "Stresses in the fillet weld throat area {} (throat area rotated into the connection plane)"
+ },
+ {
+  "id": "05-208",
+  "de": "Richtungsbezogenes Verfahren (4.5.3.2): Vergleichsspannung und Normalspannung",
+  "en": "Directional method (4.5.3.2): equivalent stress and normal stress"
+ },
+ {
+  "id": "05-209",
+  "de": "Zum Vergleich vereinfachtes Verfahren (4.5.3.3): √({}² + {}²) = {} N/mm² {} f<sub>vw,d</sub> = {} N/mm² ({} % statt {} %)",
+  "en": "For comparison, simplified method (4.5.3.3): √({}² + {}²) = {} N/mm² {} f<sub>vw,d</sub> = {} N/mm² ({} % instead of {} %)"
+ },
+ {
+  "id": "05-210",
+  "de": "(überschritten)",
+  "en": "(exceeded)"
+ },
+ {
+  "id": "05-211",
+  "de": "{}: a = {} mm · a<sub>min</sub> = max(3; √{} − 0,5) = {} {} · Empfehlung a ≤ 0,7·t<sub>min</sub> = {} {}{}",
+  "en": "{}: a = {} mm · a<sub>min</sub> = max(3; √{} − 0.5) = {} {} · recommendation a ≤ 0.7·t<sub>min</sub> = {} {}{}"
+ },
+ {
+  "id": "05-212",
+  "de": "Konstruktive Regeln der Nähte",
+  "en": "Detailing rules for the welds"
+ },
+ {
+  "id": "05-213",
+  "de": "Nahtdicke erhöhen (zu dünne Nähte an dicken Blechen kühlen zu schnell ab und verspröden) bzw. Naht verlängern. ",
+  "en": "Increase the throat thickness (welds that are too thin on thick plates cool too fast and become brittle) or lengthen the weld. "
+ },
+ {
+  "id": "05-214",
+  "de": "Nahtdicke über 0,7·t<sub>min</sub>: mehr Schweißgut als das dünnere Blech übertragen kann — meist unwirtschaftlich, kein Nachweisversagen.",
+  "en": "Throat thickness above 0.7·t<sub>min</sub>: more weld metal than the thinner plate can transfer — usually uneconomical, not a failure of the check."
+ },
+ {
+  "id": "05-215",
+  "de": "Mindest- und Höchstdicke der Kehlnähte, Mindestlänge (4.5.2, NA)",
+  "en": "Minimum and maximum thickness of the fillet welds, minimum length (4.5.2, NA)"
+ },
+ {
+  "id": "05-216",
+  "de": "Nahtbild und Querschnittswerte",
+  "en": "Weld layout and properties"
+ },
+ {
+  "id": "05-217",
+  "de": "Nahtlängen (Stegnähte ohne Ausrundung r, innere Gurtnähte je Seite (b − t<sub>w</sub> − 2r)/2)",
+  "en": "Weld lengths (web welds without root radius r, inner flange welds per side (b − t<sub>w</sub> − 2r)/2)"
+ },
+ {
+  "id": "05-218",
+  "de": "(2 Stücke je ",
+  "en": "(2 pieces of "
+ },
+ {
+  "id": "05-219",
+  "de": "— je Stück ",
+  "en": "— per piece "
+ },
+ {
+  "id": "05-220",
+  "de": " mm < max(30; 6a): nicht angesetzt",
+  "en": " mm < max(30; 6a): not taken into account"
+ },
+ {
+  "id": "05-221",
+  "de": "Gurt außen l<sub>o</sub> = b = {} mm · Gurt innen l<sub>i</sub> = {} mm {} · Steg l<sub>w</sub> = h − 2t<sub>f</sub> − 2r = {} mm",
+  "en": "Flange outside l<sub>o</sub> = b = {} mm · flange inside l<sub>i</sub> = {} mm {} · web l<sub>w</sub> = h − 2t<sub>f</sub> − 2r = {} mm"
+ },
+ {
+  "id": "05-222",
+  "de": "Schwerpunktabstände der Nahtflächen (Mitte der Nahtdicke)",
+  "en": "Centroid distances of the throat areas (middle of the throat thickness)"
+ },
+ {
+  "id": "05-223",
+  "de": "Nahtfläche und Trägheitsmoment des Nahtbilds",
+  "en": "Throat area and second moment of area of the weld layout"
+ },
+ {
+  "id": "05-224",
+  "de": "Spannungen in der Anschlussebene",
+  "en": "Stresses in the connection plane"
+ },
+ {
+  "id": "05-225",
+  "de": "Größte Normalspannung am äußeren Rand des Gurts",
+  "en": "Maximum normal stress at the outer edge of the flange"
+ },
+ {
+  "id": "05-226",
+  "de": "Gurtnaht (außen)",
+  "en": "Flange weld (outside)"
+ },
+ {
+  "id": "05-227",
+  "de": "Stegnaht am Ende (z = ± l<sub>w</sub>/2): Normalspannung und Schub treffen zusammen",
+  "en": "Web weld at its end (z = ± l<sub>w</sub>/2): normal stress and shear coincide"
+ },
+ {
+  "id": "05-228",
+  "de": "Stegnaht (Ende)",
+  "en": "Web weld (end)"
+ },
+ {
+  "id": "05-229",
+  "de": "Gurtnaht",
+  "en": "Flange weld"
+ },
+ {
+  "id": "05-230",
+  "de": "Stegnaht",
+  "en": "Web weld"
+ },
+ {
+  "id": "05-231",
+  "de": "Lange Nähte: Abminderung ab l > 150a (4.11)",
+  "en": "Long welds: reduction for l > 150a (4.11)"
+ },
+ {
+  "id": "05-232",
+  "de": "Tragfähigkeit des Anschlusses (Annahme: alle Nähte erreichen gemeinsam ihre Tragfähigkeit, ausreichend verformbar)",
+  "en": "Resistance of the connection (assumption: all welds reach their resistance together, sufficient ductility)"
+ },
+ {
+  "id": "05-233",
+  "de": "Stirnnaht a·b·σ<sub>w,Rd</sub> = {}·{}·{}/1000 = {} kN · ",
+  "en": "End weld a·b·σ<sub>w,Rd</sub> = {}·{}·{}/1000 = {} kN · "
+ },
+ {
+  "id": "05-234",
+  "de": "Flankennähte 2·a·l·β<sub>Lw</sub>·τ<sub>∥,Rd</sub> = 2·{}·{}·{}·{}/1000 = {} kN",
+  "en": "Side welds 2·a·l·β<sub>Lw</sub>·τ<sub>∥,Rd</sub> = 2·{}·{}·{}·{}/1000 = {} kN"
+ },
+ {
+  "id": "05-235",
+  "de": "Zum Vergleich vereinfachtes Verfahren: f<sub>vw,d</sub>·a·Σl = {}·{}·{}/1000 = {} kN ({} %)",
+  "en": "For comparison, simplified method: f<sub>vw,d</sub>·a·Σl = {}·{}·{}/1000 = {} kN ({} %)"
+ },
+ {
+  "id": "05-236",
+  "de": "Kehlnähte Flachstahl–Knotenblech",
+  "en": "Fillet welds flat bar–gusset plate"
+ },
+ {
+  "id": "05-237",
+  "de": "Nur Flankennähte: Die Kraft fließt über die Ränder ein — Flankennähte möglichst mindestens so lang wie die Breite b ausführen.",
+  "en": "Side welds only: the force enters along the edges — make the side welds at least as long as the width b if possible."
+ },
+ {
+  "id": "05-238",
+  "de": "Flachstahl auf Zug",
+  "en": "Flat bar in tension"
+ },
+ {
+  "id": "05-239",
+  "de": "Plastische Zugtragfähigkeit des Flachstahls (ohne Löcher, 6.2.3)",
+  "en": "Plastic tension resistance of the flat bar (without holes, 6.2.3)"
+ },
+ {
+  "id": "05-240",
+  "de": "Flankennaht",
+  "en": "Side weld"
+ },
+ {
+  "id": "05-241",
+  "de": "Stirnnaht",
+  "en": "End weld"
+ },
+ {
+  "id": "05-242",
+  "de": "Nahtbild und Spannungen",
+  "en": "Weld layout and stresses"
+ },
+ {
+  "id": "05-243",
+  "de": "Zwei senkrechte Kehlnähte, Nahtfläche in die Anschlussebene geklappt",
+  "en": "Two vertical fillet welds, throat area rotated into the connection plane"
+ },
+ {
+  "id": "05-244",
+  "de": "Schnittgrößen in der Anschlussebene",
+  "en": "Internal forces in the connection plane"
+ },
+ {
+  "id": "05-245",
+  "de": "σ<sub>w</sub> = M/W<sub>w</sub> = <b>{} N/mm²</b> (oben Zug, unten Druck) · τ<sub>∥</sub> = F/A<sub>w</sub> = <b>{} N/mm²</b> (gleichmäßig verteilt angenommen)",
+  "en": "σ<sub>w</sub> = M/W<sub>w</sub> = <b>{} N/mm²</b> (tension at the top, compression at the bottom) · τ<sub>∥</sub> = F/A<sub>w</sub> = <b>{} N/mm²</b> (assumed evenly distributed)"
+ },
+ {
+  "id": "05-246",
+  "de": "Kehlnähte (oberes Nahtende)",
+  "en": "Fillet welds (top end of weld)"
+ },
+ {
+  "id": "05-247",
+  "de": "Konsolblech im Anschnitt",
+  "en": "Bracket plate at the column face"
+ }
+]

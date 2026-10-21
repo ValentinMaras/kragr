@@ -1,0 +1,1187 @@
+[
+ {
+  "id": "17-0",
+  "de": "Trapez (i₁, i₂) × Trapez (k₁, k₂):<br> L/6 · (2·i₁·k₁ + 2·i₂·k₂ + i₁·k₂ + i₂·k₁)",
+  "en": "Trapezoid (i₁, i₂) × trapezoid (k₁, k₂):<br> L/6 · (2·i₁·k₁ + 2·i₂·k₂ + i₁·k₂ + i₂·k₁)"
+ },
+ {
+  "id": "17-1",
+  "de": "statisch bestimmt, wenn:&nbsp; s + a = 2 · k&nbsp;&nbsp;&nbsp; (s Stäbe, a Lagerwertigkeiten, k Knoten)<br> Knotenpunktverfahren:&nbsp; je Knoten ΣF<sub>x</sub> = 0, ΣF<sub>z</sub> = 0 (höchstens zwei Unbekannte je Knoten)<br> Ritterschnitt:&nbsp; Schnitt durch drei Stäbe, die nicht alle durch einen Punkt gehen; Momentengleichgewicht um den Schnittpunkt zweier Stäbe liefert den dritten",
+  "en": "statically determinate if:&nbsp; s + a = 2 · k&nbsp;&nbsp;&nbsp; (s members, a support degrees, k nodes)<br> Method of joints:&nbsp; at each node ΣF<sub>x</sub> = 0, ΣF<sub>z</sub> = 0 (at most two unknowns per node)<br> Method of sections (Ritter):&nbsp; cut through three members that do not all pass through one point; moment equilibrium about the intersection of two members gives the third"
+ },
+ {
+  "id": "17-2",
+  "de": "symmetrisch, Gleichlast q auf der Spannweite l, Gelenk in der Mitte, Stich bzw. Höhe f:<br> A<sub>v</sub> = B<sub>v</sub> = q · l / 2&nbsp;&nbsp;&nbsp; H = q · l² / (8 · f)&nbsp;&nbsp;&nbsp; (= M<sub>0</sub> / f mit dem Feldmoment des Ersatzbalkens)<br> Parabelbogen y = 4f · x · (l − x) / l²:&nbsp; M(x) = M<sub>0</sub>(x) − H · y(x) = 0 überall — die Parabel ist die <b>Stützlinie</b> der Gleichlast",
+  "en": "symmetrical, uniform load q over the span l, hinge at the centre, rise or height f:<br> A<sub>v</sub> = B<sub>v</sub> = q · l / 2&nbsp;&nbsp;&nbsp; H = q · l² / (8 · f)&nbsp;&nbsp;&nbsp; (= M<sub>0</sub> / f with the span moment of the equivalent beam)<br> Parabolic arch y = 4f · x · (l − x) / l²:&nbsp; M(x) = M<sub>0</sub>(x) − H · y(x) = 0 everywhere — the parabola is the <b>line of thrust</b> of the uniform load"
+ },
+ {
+  "id": "17-3",
+  "de": "+ 1,4 × Bodenentlastung aus der Mehrtiefe",
+  "en": "+ 1.4 × soil unloading from the additional depth"
+ },
+ {
+  "id": "17-4",
+  "de": "1. Kernweite b/6 = 0,333 m · 2. Kernweite b/3 = 0,667 m",
+  "en": "1st kern width b/6 = 0.333 m · 2nd kern width b/3 = 0.667 m"
+ },
+ {
+  "id": "17-5",
+  "de": "3,75 · 1,35 / (10,00 · 0,90) = 0,563 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "3.75 · 1.35 / (10.00 · 0.90) = 0.563 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "17-6",
+  "de": "<a class=\"applink\" href=\"#/grundbau/flach/grundbruch\">→ Grundbruch genauer nach DIN 4017</a>",
+  "en": "<a class=\"applink\" href=\"#/grundbau/flach/grundbruch\">→ Bearing resistance in detail to DIN 4017</a>"
+ },
+ {
+  "id": "17-7",
+  "de": "<b>Nichtbindige Böden</b> (Sand, Kies) tragen über Reibung, c′ ≈ 0. Wasser fließt schnell ab, Setzungen treten fast sofort ein.<br> <b>Bindige Böden</b> (Schluff, Ton) haben Kohäsion, sind wasserempfindlich und setzen sich zeitverzögert (Konsolidation), oft über Jahre.",
+  "en": "<b>Cohesionless soils</b> (sand, gravel) carry load through friction, c′ ≈ 0. Water drains quickly and settlements occur almost immediately.<br> <b>Cohesive soils</b> (silt, clay) have cohesion, are sensitive to water and settle with a time delay (consolidation), often over years."
+ },
+ {
+  "id": "17-8",
+  "de": "<span class=\"st-n\">1</span><span>Ansatz (senkrechte Wand, waagerechtes Gelände, δ<sub>a</sub> = 2/3 · φ′)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Assumptions (vertical wall, horizontal ground surface, δ<sub>a</sub> = 2/3 · φ′)</span>"
+ },
+ {
+  "id": "17-9",
+  "de": "<span class=\"st-n\">1</span><span>Ansatz</span>",
+  "en": "<span class=\"st-n\">1</span><span>Assumptions</span>"
+ },
+ {
+  "id": "17-10",
+  "de": "<span class=\"st-n\">1</span><span>Ausmitte</span>",
+  "en": "<span class=\"st-n\">1</span><span>Eccentricity</span>"
+ },
+ {
+  "id": "17-11",
+  "de": "<span class=\"st-n\">1</span><span>Bemessungswerte der Scherfestigkeit (GEO-3, BS-P: γ<sub>φ</sub> = γ<sub>c</sub> = 1,25)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Design values of shear strength (GEO-3, BS-P: γ<sub>φ</sub> = γ<sub>c</sub> = 1.25)</span>"
+ },
+ {
+  "id": "17-12",
+  "de": "<span class=\"st-n\">1</span><span>Dränweg</span>",
+  "en": "<span class=\"st-n\">1</span><span>Drainage path</span>"
+ },
+ {
+  "id": "17-13",
+  "de": "<span class=\"st-n\">1</span><span>Eingangswerte</span>",
+  "en": "<span class=\"st-n\">1</span><span>Input values</span>"
+ },
+ {
+  "id": "17-14",
+  "de": "<span class=\"st-n\">1</span><span>Einzellast (Boussinesq)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Point load (Boussinesq)</span>"
+ },
+ {
+  "id": "17-15",
+  "de": "<span class=\"st-n\">1</span><span>Ergebnis</span>",
+  "en": "<span class=\"st-n\">1</span><span>Result</span>"
+ },
+ {
+  "id": "17-16",
+  "de": "<span class=\"st-n\">1</span><span>Gesetz von Darcy</span>",
+  "en": "<span class=\"st-n\">1</span><span>Darcy's law</span>"
+ },
+ {
+  "id": "17-17",
+  "de": "<span class=\"st-n\">1</span><span>Grundgrößen</span>",
+  "en": "<span class=\"st-n\">1</span><span>Basic quantities</span>"
+ },
+ {
+  "id": "17-18",
+  "de": "<span class=\"st-n\">1</span><span>Kennzahlen der Kornverteilung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Grading parameters</span>"
+ },
+ {
+  "id": "17-19",
+  "de": "<span class=\"st-n\">1</span><span>Kreismittelpunkte p und Radien q</span>",
+  "en": "<span class=\"st-n\">1</span><span>Circle centres p and radii q</span>"
+ },
+ {
+  "id": "17-20",
+  "de": "<span class=\"st-n\">1</span><span>Setzungswirksame Spannung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Net stress causing settlement</span>"
+ },
+ {
+  "id": "17-21",
+  "de": "<span class=\"st-n\">1</span><span>Unendlich lange Böschung (Gleitfläche parallel zur Oberfläche)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Infinite slope (slip surface parallel to the surface)</span>"
+ },
+ {
+  "id": "17-22",
+  "de": "<span class=\"st-n\">1</span><span>Wassergehalt und Dichten</span>",
+  "en": "<span class=\"st-n\">1</span><span>Water content and densities</span>"
+ },
+ {
+  "id": "17-23",
+  "de": "<span class=\"st-n\">1</span><span>Wirksame Fläche</span>",
+  "en": "<span class=\"st-n\">1</span><span>Effective area</span>"
+ },
+ {
+  "id": "17-24",
+  "de": "<span class=\"st-n\">2</span><span>Aktiver Erddruck, horizontale Komponente</span>",
+  "en": "<span class=\"st-n\">2</span><span>Active earth pressure, horizontal component</span>"
+ },
+ {
+  "id": "17-25",
+  "de": "<span class=\"st-n\">2</span><span>Bruchbedingung q = c′ · cos φ′ + p · sin φ′</span>",
+  "en": "<span class=\"st-n\">2</span><span>Failure criterion q = c′ · cos φ′ + p · sin φ′</span>"
+ },
+ {
+  "id": "17-26",
+  "de": "<span class=\"st-n\">2</span><span>Endliche Böschung: Lamellenverfahren</span>",
+  "en": "<span class=\"st-n\">2</span><span>Finite slope: method of slices</span>"
+ },
+ {
+  "id": "17-27",
+  "de": "<span class=\"st-n\">2</span><span>Ordinaten (oben/unten je Schicht)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Ordinates (top/bottom of each layer)</span>"
+ },
+ {
+  "id": "17-28",
+  "de": "<span class=\"st-n\">2</span><span>Porenanteil und Porenzahl</span>",
+  "en": "<span class=\"st-n\">2</span><span>Porosity and void ratio</span>"
+ },
+ {
+  "id": "17-29",
+  "de": "<span class=\"st-n\">2</span><span>Rechteckige Flächenlast, unter der Ecke (Steinbrenner)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Rectangular area load, below the corner (Steinbrenner)</span>"
+ },
+ {
+  "id": "17-30",
+  "de": "<span class=\"st-n\">2</span><span>Spannungen in den Schichtgrenzen und am Grundwasserspiegel</span>",
+  "en": "<span class=\"st-n\">2</span><span>Stresses at layer boundaries and at the groundwater table</span>"
+ },
+ {
+  "id": "17-31",
+  "de": "<span class=\"st-n\">2</span><span>Spannungen in der Gleitfläche in der Tiefe z = 2,00 m</span>",
+  "en": "<span class=\"st-n\">2</span><span>Stresses on the slip surface at depth z = 2.00 m</span>"
+ },
+ {
+  "id": "17-32",
+  "de": "<span class=\"st-n\">2</span><span>Spannungsausbreitung (Steinbrenner, Mittelpunkt = 4 Eckrechtecke a/2 × b/2)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Stress distribution (Steinbrenner, centre = 4 corner rectangles a/2 × b/2)</span>"
+ },
+ {
+  "id": "17-33",
+  "de": "<span class=\"st-n\">2</span><span>Strömungskraft je Volumen</span>",
+  "en": "<span class=\"st-n\">2</span><span>Seepage force per unit volume</span>"
+ },
+ {
+  "id": "17-34",
+  "de": "<span class=\"st-n\">2</span><span>Tragfähigkeitsbeiwerte</span>",
+  "en": "<span class=\"st-n\">2</span><span>Bearing capacity factors</span>"
+ },
+ {
+  "id": "17-35",
+  "de": "<span class=\"st-n\">2</span><span>Trapezförmige Sohlspannung (e ≤ b/6)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Trapezoidal base pressure (e ≤ b/6)</span>"
+ },
+ {
+  "id": "17-36",
+  "de": "<span class=\"st-n\">2</span><span>Wichten</span>",
+  "en": "<span class=\"st-n\">2</span><span>Unit weights</span>"
+ },
+ {
+  "id": "17-37",
+  "de": "<span class=\"st-n\">2</span><span>Zeitfaktor</span>",
+  "en": "<span class=\"st-n\">2</span><span>Time factor</span>"
+ },
+ {
+  "id": "17-38",
+  "de": "<span class=\"st-n\">3</span><span>Formbeiwerte</span>",
+  "en": "<span class=\"st-n\">3</span><span>Shape factors</span>"
+ },
+ {
+  "id": "17-39",
+  "de": "<span class=\"st-n\">3</span><span>Gleitflächenwinkel</span>",
+  "en": "<span class=\"st-n\">3</span><span>Slip surface angle</span>"
+ },
+ {
+  "id": "17-40",
+  "de": "<span class=\"st-n\">3</span><span>Hydraulischer Grundbruch (HYD, DIN 1054): S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub></span>",
+  "en": "<span class=\"st-n\">3</span><span>Hydraulic heave (HYD, DIN 1054): S′<sub>k</sub> · γ<sub>H</sub> ≤ G′<sub>k</sub> · γ<sub>G,stb</sub></span>"
+ },
+ {
+  "id": "17-41",
+  "de": "<span class=\"st-n\">3</span><span>Konsolidationsgrad</span>",
+  "en": "<span class=\"st-n\">3</span><span>Degree of consolidation</span>"
+ },
+ {
+  "id": "17-42",
+  "de": "<span class=\"st-n\">3</span><span>Lage der Resultierenden (DIN 1054)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Position of the resultant (DIN 1054)</span>"
+ },
+ {
+  "id": "17-43",
+  "de": "<span class=\"st-n\">3</span><span>Nachweis</span>",
+  "en": "<span class=\"st-n\">3</span><span>Verification</span>"
+ },
+ {
+  "id": "17-44",
+  "de": "<span class=\"st-n\">3</span><span>Näherung</span>",
+  "en": "<span class=\"st-n\">3</span><span>Approximation</span>"
+ },
+ {
+  "id": "17-45",
+  "de": "<span class=\"st-n\">3</span><span>Resultierende je m Wand</span>",
+  "en": "<span class=\"st-n\">3</span><span>Resultant per m of wall</span>"
+ },
+ {
+  "id": "17-46",
+  "de": "<span class=\"st-n\">3</span><span>Schichtweise Setzung Δs = Δσ · Δz / E<sub>s</sub> (E<sub>s</sub> = 30,0 MN/m²)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Layer-by-layer settlement Δs = Δσ · Δz / E<sub>s</sub> (E<sub>s</sub> = 30.0 MN/m²)</span>"
+ },
+ {
+  "id": "17-47",
+  "de": "<span class=\"st-n\">3</span><span>Teilsicherheiten (GEO-3)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Partial factors (GEO-3)</span>"
+ },
+ {
+  "id": "17-48",
+  "de": "<span class=\"st-n\">3</span><span>Wichten (g = 9,81 m/s², γ<sub>w</sub> = 9,81 kN/m³)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Unit weights (g = 9.81 m/s², γ<sub>w</sub> = 9.81 kN/m³)</span>"
+ },
+ {
+  "id": "17-49",
+  "de": "<span class=\"st-n\">3</span><span>Zustand</span>",
+  "en": "<span class=\"st-n\">3</span><span>State</span>"
+ },
+ {
+  "id": "17-50",
+  "de": "<span class=\"st-n\">4</span><span>Bezogene Lagerungsdichte (nichtbindig)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Density index (cohesionless)</span>"
+ },
+ {
+  "id": "17-51",
+  "de": "<span class=\"st-n\">4</span><span>Kennzeiten</span>",
+  "en": "<span class=\"st-n\">4</span><span>Characteristic times</span>"
+ },
+ {
+  "id": "17-52",
+  "de": "<span class=\"st-n\">4</span><span>Neigungsbeiwerte (H in Richtung b)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Inclination factors (H in direction b)</span>"
+ },
+ {
+  "id": "17-53",
+  "de": "<span class=\"st-n\">4</span><span>Passiver Erddruck (δ<sub>p</sub> = 0)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Passive earth pressure (δ<sub>p</sub> = 0)</span>"
+ },
+ {
+  "id": "17-54",
+  "de": "<span class=\"st-n\">4</span><span>Wirksame Fläche für den Grundbruch</span>",
+  "en": "<span class=\"st-n\">4</span><span>Effective area for bearing resistance</span>"
+ },
+ {
+  "id": "17-55",
+  "de": "<span class=\"st-n\">5</span><span>Grundbruchspannung</span>",
+  "en": "<span class=\"st-n\">5</span><span>Ultimate bearing pressure</span>"
+ },
+ {
+  "id": "17-56",
+  "de": "<span class=\"st-n\">5</span><span>Kohäsion (α = β = 0)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Cohesion (α = β = 0)</span>"
+ },
+ {
+  "id": "17-57",
+  "de": "<span class=\"st-n\">6</span><span>Widerstand und Nachweis (BS-P, γ<sub>R,v</sub> = 1,40)</span>",
+  "en": "<span class=\"st-n\">6</span><span>Resistance and verification (BS-P, γ<sub>R,v</sub> = 1.40)</span>"
+ },
+ {
+  "id": "17-58",
+  "de": "= 0,89 Jahre",
+  "en": "= 0.89 years"
+ },
+ {
+  "id": "17-59",
+  "de": "= 16,6 mm (schlaffe Last, Mittelpunkt)",
+  "en": "= 16.6 mm (flexible load, centre)"
+ },
+ {
+  "id": "17-60",
+  "de": "= 3,82 Jahre",
+  "en": "= 3.82 years"
+ },
+ {
+  "id": "17-61",
+  "de": "A-Linie",
+  "en": "A-line"
+ },
+ {
+  "id": "17-62",
+  "de": "A-Linie:",
+  "en": "A-line:"
+ },
+ {
+  "id": "17-63",
+  "de": "Aktiver Erddruck auf eine Stützwand",
+  "en": "Active earth pressure on a retaining wall"
+ },
+ {
+  "id": "17-64",
+  "de": "Aktiver Erddruck ohne Kohäsion und Auflast: dreieckförmig, Resultierende E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> im unteren Drittelpunkt.",
+  "en": "Active earth pressure without cohesion or surcharge: triangular, resultant E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> at the lower third point."
+ },
+ {
+  "id": "17-65",
+  "de": "Aktiver Erddruck: Wand gibt nach (kleinster Druck). Passiv: Wand wird gegen den Boden gedrückt (größter Widerstand). Ruhedruck: Wand bewegt sich nicht.",
+  "en": "Active earth pressure: the wall yields (smallest pressure). Passive: the wall is pushed into the soil (largest resistance). At rest: the wall does not move."
+ },
+ {
+  "id": "17-66",
+  "de": "Anhaltswerte für Vorbemessung und Übungen",
+  "en": "Guide values for preliminary design and exercises"
+ },
+ {
+  "id": "17-67",
+  "de": "Auffüllung",
+  "en": "Fill"
+ },
+ {
+  "id": "17-68",
+  "de": "Auflast q [kN/m²]",
+  "en": "Surcharge q [kN/m²]"
+ },
+ {
+  "id": "17-69",
+  "de": "Ausmitte",
+  "en": "Eccentricity"
+ },
+ {
+  "id": "17-70",
+  "de": "Ausmitte e [m] (in Richtung b)",
+  "en": "Eccentricity e [m] (in direction b)"
+ },
+ {
+  "id": "17-71",
+  "de": "Ausmitte: e = M / V<br> e ≤ b/6:&nbsp; σ = V/(a·b) · (1 ± 6e/b)&nbsp;&nbsp; (Trapez, ganze Sohle drückt)<br> e &gt; b/6:&nbsp; σ<sub>max</sub> = 2V / (3·a·c)&nbsp; mit c = b/2 − e&nbsp;&nbsp; (klaffende Fuge)",
+  "en": "Eccentricity: e = M / V<br> e ≤ b/6:&nbsp; σ = V/(a·b) · (1 ± 6e/b)&nbsp;&nbsp; (trapezoid, whole base in compression)<br> e &gt; b/6:&nbsp; σ<sub>max</sub> = 2V / (3·a·c)&nbsp; with c = b/2 − e&nbsp;&nbsp; (open joint)"
+ },
+ {
+  "id": "17-72",
+  "de": "Ausrollgrenze w<sub>P</sub> [%]",
+  "en": "Plastic limit w<sub>P</sub> [%]"
+ },
+ {
+  "id": "17-73",
+  "de": "BS-P ständig · BS-T vorübergehend (Bauzustand) · BS-A außergewöhnlich",
+  "en": "BS-P persistent · BS-T transient (construction stage) · BS-A accidental"
+ },
+ {
+  "id": "17-74",
+  "de": "Baugrund bis 2·b unter Sohle (mind. 2 m)",
+  "en": "Subsoil down to 2·b below the base (at least 2 m)"
+ },
+ {
+  "id": "17-75",
+  "de": "Bedeutung (Rechteck)",
+  "en": "Meaning (rectangle)"
+ },
+ {
+  "id": "17-76",
+  "de": "Beiwert",
+  "en": "Factor"
+ },
+ {
+  "id": "17-77",
+  "de": "Bemessungssituation",
+  "en": "Design situation"
+ },
+ {
+  "id": "17-78",
+  "de": "Benennung",
+  "en": "Name"
+ },
+ {
+  "id": "17-79",
+  "de": "Bewertung (DIN 18130)",
+  "en": "Classification (DIN 18130)"
+ },
+ {
+  "id": "17-80",
+  "de": "Bindiger Boden — σ<sub>R,d</sub> [kN/m²] für Streifenfundamente, b = 0,5 … 2,0 m",
+  "en": "Cohesive soil — σ<sub>R,d</sub> [kN/m²] for strip footings, b = 0.5 … 2.0 m"
+ },
+ {
+  "id": "17-81",
+  "de": "Boden (Konsistenz)",
+  "en": "Soil (consistency)"
+ },
+ {
+  "id": "17-82",
+  "de": "Boden γ, φ′",
+  "en": "Soil γ, φ′"
+ },
+ {
+  "id": "17-83",
+  "de": "Bodengruppe aus den Zustandsgrenzen",
+  "en": "Soil group from the consistency limits"
+ },
+ {
+  "id": "17-84",
+  "de": "Bodengruppe: <b>TM</b>",
+  "en": "Soil group: <b>TM</b>"
+ },
+ {
+  "id": "17-85",
+  "de": "Bodengruppen — DIN 18196",
+  "en": "Soil groups — DIN 18196"
+ },
+ {
+  "id": "17-86",
+  "de": "Bodenkenngrößen aus dem Versuch",
+  "en": "Soil parameters from the test"
+ },
+ {
+  "id": "17-87",
+  "de": "Bodenkenngrößen aus einer Probe berechnen",
+  "en": "Calculate soil parameters from a sample"
+ },
+ {
+  "id": "17-88",
+  "de": "Breite b = 2 … 5 m",
+  "en": "Width b = 2 … 5 m"
+ },
+ {
+  "id": "17-89",
+  "de": "Breite b [m]",
+  "en": "Width b [m]"
+ },
+ {
+  "id": "17-90",
+  "de": "Breite b [m] (Richtung von M)",
+  "en": "Width b [m] (direction of M)"
+ },
+ {
+  "id": "17-91",
+  "de": "Breite b [m] (kurze Seite)",
+  "en": "Width b [m] (short side)"
+ },
+ {
+  "id": "17-92",
+  "de": "Bruchkörper nach Prandtl (einseitig ausgebildet): Der Boden unter dem Fundament wird verdrängt und seitlich hochgedrückt.",
+  "en": "Prandtl failure mechanism (one-sided): the soil beneath the footing is displaced and pushed up at the side."
+ },
+ {
+  "id": "17-93",
+  "de": "Bruchwinkel gegen die Hauptebene: θ = 45° + φ′/2 = 59,6°",
+  "en": "Failure angle to the major principal plane: θ = 45° + φ′/2 = 59.6°"
+ },
+ {
+  "id": "17-94",
+  "de": "Böschungswinkel β [°]",
+  "en": "Slope angle β [°]"
+ },
+ {
+  "id": "17-95",
+  "de": "Darcy: v = k · i mit hydraulischem Gefälle i = Δh / L · Durchfluss Q = k · i · A",
+  "en": "Darcy: v = k · i with hydraulic gradient i = Δh / L · discharge Q = k · i · A"
+ },
+ {
+  "id": "17-96",
+  "de": "Die Kernweiten-Regeln ersetzen bei üblichen Flachgründungen den Kippnachweis.",
+  "en": "For ordinary shallow foundations the kern width rules replace the overturning check."
+ },
+ {
+  "id": "17-97",
+  "de": "Die Tabellenwerte entsprechen dem 1,4-fachen des früheren zulässigen Sohldrucks der DIN 1054:2005. Die Zeilen „steif“ (gemischtkörnig, tonig-schluffig) und nichtbindig d = b = 1 m sind gegen Baugrundgutachten bzw. Programmbeispiele abgeglichen. Weitere Sonderfälle (Einbindetiefe 0,3–0,5 m, b &gt; 2 m bei nichtbindigem Boden) in DIN 1054, A 6.10.",
+  "en": "The table values equal 1.4 times the former allowable bearing pressure of DIN 1054:2005. The rows “stiff” (mixed-grained, clayey-silty) and cohesionless d = b = 1 m have been checked against geotechnical reports and software examples. Further special cases (embedment depth 0.3–0.5 m, b &gt; 2 m in cohesionless soil) in DIN 1054, A 6.10."
+ },
+ {
+  "id": "17-98",
+  "de": "Die Werte führen bei nichtbindigen Böden (Tab. A 6.2) zu Setzungen bis etwa 1–2 cm, bei bindigen Böden zu etwa 2–4 cm. Im Projekt gelten die Angaben aus dem Baugrundgutachten.",
+  "en": "The values lead to settlements of up to about 1–2 cm in cohesionless soils (Tab. A 6.2) and about 2–4 cm in cohesive soils. On a project, the values from the geotechnical report apply."
+ },
+ {
+  "id": "17-99",
+  "de": "Dreiphasensystem: Feststoff, Wasser, Luft",
+  "en": "Three-phase system: solids, water, air"
+ },
+ {
+  "id": "17-100",
+  "de": "Durchlässigkeit k [m/s]",
+  "en": "Permeability k [m/s]"
+ },
+ {
+  "id": "17-101",
+  "de": "Durchlässigkeit und Strömung",
+  "en": "Permeability and seepage"
+ },
+ {
+  "id": "17-102",
+  "de": "Durchströmung und hydraulischer Grundbruch",
+  "en": "Seepage and hydraulic heave"
+ },
+ {
+  "id": "17-103",
+  "de": "Durchströmung und hydraulischer Grundbruch berechnen",
+  "en": "Calculate seepage and hydraulic heave"
+ },
+ {
+  "id": "17-104",
+  "de": "E<sub>ah</sub> = 65,94 kN/m, Angriff 2,13 m über dem Fuß",
+  "en": "E<sub>ah</sub> = 65.94 kN/m, acting 2.13 m above the base"
+ },
+ {
+  "id": "17-105",
+  "de": "E<sub>s</sub> — Steifemodul (stark spannungsabhängig, hier für übliche Fundamentlasten) · k — Durchlässigkeitsbeiwert",
+  "en": "E<sub>s</sub> — constrained (oedometer) modulus (strongly stress-dependent, here for typical foundation loads) · k — coefficient of permeability"
+ },
+ {
+  "id": "17-106",
+  "de": "Einbindetiefe d",
+  "en": "Embedment depth d"
+ },
+ {
+  "id": "17-107",
+  "de": "Einbindetiefe d &gt; 2 m",
+  "en": "Embedment depth d &gt; 2 m"
+ },
+ {
+  "id": "17-108",
+  "de": "Einbindetiefe d [m]",
+  "en": "Embedment depth d [m]"
+ },
+ {
+  "id": "17-109",
+  "de": "Einwirkungen",
+  "en": "Actions"
+ },
+ {
+  "id": "17-110",
+  "de": "Endsetzung s<sub>∞</sub> [mm] (optional)",
+  "en": "Final settlement s<sub>∞</sub> [mm] (optional)"
+ },
+ {
+  "id": "17-111",
+  "de": "Entwässerung",
+  "en": "Drainage"
+ },
+ {
+  "id": "17-112",
+  "de": "Erddruck auf 5,50 m Wandhöhe",
+  "en": "Earth pressure on 5.50 m wall height"
+ },
+ {
+  "id": "17-113",
+  "de": "Erddruck bei geschichtetem Boden mit Grundwasser",
+  "en": "Earth pressure in layered soil with groundwater"
+ },
+ {
+  "id": "17-114",
+  "de": "Erddruck berechnen (c′ = 0)",
+  "en": "Calculate earth pressure (c′ = 0)"
+ },
+ {
+  "id": "17-115",
+  "de": "Erddruck nach Coulomb — DIN 4085",
+  "en": "Earth pressure after Coulomb — DIN 4085"
+ },
+ {
+  "id": "17-116",
+  "de": "Erddruckbeiwerte (Rankine)",
+  "en": "Earth pressure coefficients (Rankine)"
+ },
+ {
+  "id": "17-117",
+  "de": "Erddruckbeiwerte nach Coulomb",
+  "en": "Earth pressure coefficients after Coulomb"
+ },
+ {
+  "id": "17-118",
+  "de": "Erddruckverteilung",
+  "en": "Earth pressure distribution"
+ },
+ {
+  "id": "17-119",
+  "de": "Erhöhungen und Abminderungen",
+  "en": "Increases and reductions"
+ },
+ {
+  "id": "17-120",
+  "de": "F1 nicht",
+  "en": "F1 not"
+ },
+ {
+  "id": "17-121",
+  "de": "F2 gering bis mittel",
+  "en": "F2 low to medium"
+ },
+ {
+  "id": "17-122",
+  "de": "Feinkornanteil",
+  "en": "Fines content"
+ },
+ {
+  "id": "17-123",
+  "de": "Feinkörnige Böden: Plastizitätsdiagramm",
+  "en": "Fine-grained soils: plasticity chart"
+ },
+ {
+  "id": "17-124",
+  "de": "Fellenius / Bishop: Gleitkreis in Lamellen teilen, Momentengleichgewicht um den Kreismittelpunkt; Bishop ist genauer (iterativ, η steht beidseitig)",
+  "en": "Fellenius / Bishop: divide the slip circle into slices, moment equilibrium about the circle centre; Bishop is more accurate (iterative, η appears on both sides)"
+ },
+ {
+  "id": "17-125",
+  "de": "Fließgrenze w<sub>L</sub> [%]",
+  "en": "Liquid limit w<sub>L</sub> [%]"
+ },
+ {
+  "id": "17-126",
+  "de": "Flügelsondierung",
+  "en": "Vane shear test"
+ },
+ {
+  "id": "17-127",
+  "de": "Form",
+  "en": "Shape"
+ },
+ {
+  "id": "17-128",
+  "de": "Frostempfindlichkeit",
+  "en": "Frost susceptibility"
+ },
+ {
+  "id": "17-129",
+  "de": "Für einfache Flachgründungen darf der Bemessungswert des Sohlwiderstands σ<sub>R,d</sub> aus Tabellen abgelesen werden — ohne Grundbruch- und Setzungsberechnung. Die Werte enthalten bereits die Teilsicherheiten. Man vergleicht sie deshalb mit der <b>Bemessungs</b>-Sohlspannung:",
+  "en": "For simple shallow foundations the design value of the bearing resistance σ<sub>R,d</sub> may be taken from tables — without bearing capacity and settlement calculations. The values already include the partial factors, so they are compared with the <b>design</b> base pressure:"
+ },
+ {
+  "id": "17-130",
+  "de": "Für geschichteten Boden mit mehreren Steifemoduln: statiq·size › Grundbau › Setzung.",
+  "en": "For layered soil with several constrained moduli: statiq·size › Geotechnics › Settlement."
+ },
+ {
+  "id": "17-131",
+  "de": "G Kies · S Sand · U Schluff · T Ton · O organisch · H Torf · E eng, W weit, I intermittierend gestuft · L, M, A: Fließgrenze &lt; 35 %, 35 … 50 %, &gt; 50 %. Frostempfindlichkeitsklassen F1–F3 nach ZTV E-StB (Anhaltswerte; Grenzfälle über die Kornverteilung entscheiden).",
+  "en": "G gravel · S sand · U silt · T clay · O organic · H peat · E uniformly, W well, I gap-graded · L, M, A: liquid limit &lt; 35 %, 35 … 50 %, &gt; 50 %. Frost susceptibility classes F1–F3 to ZTV E-StB (guide values; borderline cases are decided by the grading)."
+ },
+ {
+  "id": "17-132",
+  "de": "Gelände",
+  "en": "Ground"
+ },
+ {
+  "id": "17-133",
+  "de": "Gelände und Schichtgrenzen",
+  "en": "Ground and layer boundaries"
+ },
+ {
+  "id": "17-134",
+  "de": "Geländeneigung β [°]",
+  "en": "Ground slope β [°]"
+ },
+ {
+  "id": "17-135",
+  "de": "Grau: totale Spannung σ<sub>v</sub>, blau: Porenwasserdruck u, orange: wirksame Spannung σ′<sub>v</sub> (alle in kN/m²).",
+  "en": "Grey: total stress σ<sub>v</sub>, blue: pore water pressure u, orange: effective stress σ′<sub>v</sub> (all in kN/m²)."
+ },
+ {
+  "id": "17-136",
+  "de": "Grenztiefe z<sub>gr</sub> ≈ 5,0 m unter Sohle",
+  "en": "Limiting depth z<sub>gr</sub> ≈ 5.0 m below the base"
+ },
+ {
+  "id": "17-137",
+  "de": "Grundbruch Einzelfundament b = 2,00 m",
+  "en": "Bearing resistance, pad footing b = 2.00 m"
+ },
+ {
+  "id": "17-138",
+  "de": "Grundbruch berechnen (DIN 4017 mit Form- und Neigungsbeiwerten)",
+  "en": "Calculate bearing resistance (DIN 4017 with shape and inclination factors)"
+ },
+ {
+  "id": "17-139",
+  "de": "Grundbruch:&nbsp; V<sub>d</sub> ≤ R<sub>n,k</sub> / γ<sub>R,v</sub>&nbsp;&nbsp; mit γ<sub>R,v</sub> = 1,40<br> Gleiten:&nbsp; H<sub>d</sub> ≤ R<sub>t,k</sub> / γ<sub>R,h</sub>&nbsp;&nbsp; mit γ<sub>R,h</sub> = 1,10 und R<sub>t,k</sub> = V<sub>k</sub> · tan δ<sub>S,k</sub>",
+  "en": "Bearing resistance:&nbsp; V<sub>d</sub> ≤ R<sub>n,k</sub> / γ<sub>R,v</sub>&nbsp;&nbsp; with γ<sub>R,v</sub> = 1.40<br> Sliding:&nbsp; H<sub>d</sub> ≤ R<sub>t,k</sub> / γ<sub>R,h</sub>&nbsp;&nbsp; with γ<sub>R,h</sub> = 1.10 and R<sub>t,k</sub> = V<sub>k</sub> · tan δ<sub>S,k</sub>"
+ },
+ {
+  "id": "17-140",
+  "de": "Grundbruchkörper",
+  "en": "Failure mechanism"
+ },
+ {
+  "id": "17-141",
+  "de": "Grundbruchwiderstand — DIN 4017",
+  "en": "Bearing resistance — DIN 4017"
+ },
+ {
+  "id": "17-142",
+  "de": "Grundwasser unter GOK z<sub>w</sub> [m]",
+  "en": "Groundwater below ground level z<sub>w</sub> [m]"
+ },
+ {
+  "id": "17-143",
+  "de": "Grundwasser unter Sohle [m] (leer = tief)",
+  "en": "Groundwater below base [m] (empty = deep)"
+ },
+ {
+  "id": "17-144",
+  "de": "Grundwasser unter der Sohle näher als b",
+  "en": "Groundwater closer than b below the base"
+ },
+ {
+  "id": "17-145",
+  "de": "Gruppe",
+  "en": "Group"
+ },
+ {
+  "id": "17-146",
+  "de": "Gründungstiefe d [m]",
+  "en": "Foundation depth d [m]"
+ },
+ {
+  "id": "17-147",
+  "de": "H<sub>dr</sub> = H bei einseitiger, H/2 bei beidseitiger Entwässerung",
+  "en": "H<sub>dr</sub> = H for one-way, H/2 for two-way drainage"
+ },
+ {
+  "id": "17-148",
+  "de": "H<sub>dr</sub> = H/2 (oben und unten dränierend) = 3,00 m",
+  "en": "H<sub>dr</sub> = H/2 (drained at top and bottom) = 3.00 m"
+ },
+ {
+  "id": "17-149",
+  "de": "H<sub>k</sub> [kN] (in Richtung b)",
+  "en": "H<sub>k</sub> [kN] (in direction b)"
+ },
+ {
+  "id": "17-150",
+  "de": "Horizontallast",
+  "en": "Horizontal load"
+ },
+ {
+  "id": "17-151",
+  "de": "Horizontalspannung im Ruhezustand σ′<sub>h</sub> = K<sub>0</sub> · σ′<sub>v</sub> mit K<sub>0</sub> = 1 − sin φ′",
+  "en": "Horizontal stress at rest σ′<sub>h</sub> = K<sub>0</sub> · σ′<sub>v</sub> with K<sub>0</sub> = 1 − sin φ′"
+ },
+ {
+  "id": "17-152",
+  "de": "I aktiver Keil · II Übergangszone (log. Spirale) · III passiver Keil",
+  "en": "I active wedge · II transition zone (log spiral) · III passive wedge"
+ },
+ {
+  "id": "17-153",
+  "de": "Im Projekt gelten immer die Werte aus dem <b>Baugrundgutachten</b>. Die Tabelle zeigt nur typische Größenordnungen.",
+  "en": "On a project, the values from the <b>geotechnical report</b> always apply. The table only shows typical orders of magnitude."
+ },
+ {
+  "id": "17-154",
+  "de": "In wassergesättigten bindigen Böden muss das Porenwasser erst abfließen, bevor sich der Boden zusammendrückt. Die Setzung läuft deshalb über Monate bis Jahre ab.",
+  "en": "In saturated cohesive soils the pore water must drain away before the soil can compress. Settlement therefore develops over months to years."
+ },
+ {
+  "id": "17-155",
+  "de": "K<sub>a</sub> = <b>0,333</b> &nbsp;·&nbsp; K<sub>p</sub> = <b>3,000</b> &nbsp;·&nbsp; K<sub>0</sub> = <b>0,500</b><br> e<sub>a</sub> am Wandfuß = (γ·h + q)·K<sub>a</sub> = <b>19,67 kN/m²</b><br> E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> + q·h·K<sub>a</sub> = 27,00 + 5,00 = <b>32,00 kN/m</b>, Angriff 1,08 m über dem Fuß",
+  "en": "K<sub>a</sub> = <b>0.333</b> &nbsp;·&nbsp; K<sub>p</sub> = <b>3.000</b> &nbsp;·&nbsp; K<sub>0</sub> = <b>0.500</b><br> e<sub>a</sub> at the wall base = (γ·h + q)·K<sub>a</sub> = <b>19.67 kN/m²</b><br> E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> + q·h·K<sub>a</sub> = 27.00 + 5.00 = <b>32.00 kN/m</b>, acting 1.08 m above the base"
+ },
+ {
+  "id": "17-156",
+  "de": "Kennwerte: T<sub>v</sub>(U = 50 %) = 0,197 · T<sub>v</sub>(90 %) = 0,848",
+  "en": "Characteristic values: T<sub>v</sub>(U = 50 %) = 0.197 · T<sub>v</sub>(90 %) = 0.848"
+ },
+ {
+  "id": "17-157",
+  "de": "Kies, mitteldicht bis dicht",
+  "en": "Gravel, medium dense to dense"
+ },
+ {
+  "id": "17-158",
+  "de": "Kies-Schluff- bzw. Kies-Ton-Gemische",
+  "en": "Gravel-silt or gravel-clay mixtures"
+ },
+ {
+  "id": "17-159",
+  "de": "Konsistenzzahl I_c",
+  "en": "Consistency index I_c"
+ },
+ {
+  "id": "17-160",
+  "de": "Konsolidationsgrad U(T<sub>v</sub>) = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup>, M = π/2 · (2m + 1) · Näherung U ≈ √(4 T<sub>v</sub> / π) für U &lt; 0,6",
+  "en": "Degree of consolidation U(T<sub>v</sub>) = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup>, M = π/2 · (2m + 1) · approximation U ≈ √(4 T<sub>v</sub> / π) for U &lt; 0.6"
+ },
+ {
+  "id": "17-161",
+  "de": "Korndichte ρ<sub>s</sub> [g/cm³]",
+  "en": "Particle density ρ<sub>s</sub> [g/cm³]"
+ },
+ {
+  "id": "17-162",
+  "de": "Lage der Sohldruckresultierenden (DIN 1054)",
+  "en": "Position of the base pressure resultant (DIN 1054)"
+ },
+ {
+  "id": "17-163",
+  "de": "Lagerungsdichte D",
+  "en": "Relative density D"
+ },
+ {
+  "id": "17-164",
+  "de": "Lagerungsdichte I<sub>D</sub> = (e<sub>max</sub> − e) / (e<sub>max</sub> − e<sub>min</sub>) · Plastizitätszahl I<sub>P</sub> = w<sub>L</sub> − w<sub>P</sub> · Konsistenzzahl I<sub>C</sub> = (w<sub>L</sub> − w) / I<sub>P</sub>",
+  "en": "Density index I<sub>D</sub> = (e<sub>max</sub> − e) / (e<sub>max</sub> − e<sub>min</sub>) · plasticity index I<sub>P</sub> = w<sub>L</sub> − w<sub>P</sub> · consistency index I<sub>C</sub> = (w<sub>L</sub> − w) / I<sub>P</sub>"
+ },
+ {
+  "id": "17-165",
+  "de": "Lagerungsdichte und Konsistenz",
+  "en": "Relative density and consistency"
+ },
+ {
+  "id": "17-166",
+  "de": "Lastausbreitung 2 : 1 — σ<sub>z</sub> = σ<sub>0</sub> · a · b / ((a + z) · (b + z))",
+  "en": "Load spread 2 : 1 — σ<sub>z</sub> = σ<sub>0</sub> · a · b / ((a + z) · (b + z))"
+ },
+ {
+  "id": "17-167",
+  "de": "Lastneigung",
+  "en": "Load inclination"
+ },
+ {
+  "id": "17-168",
+  "de": "Länge a [m]",
+  "en": "Length a [m]"
+ },
+ {
+  "id": "17-169",
+  "de": "Länge a [m] (0 = Streifen)",
+  "en": "Length a [m] (0 = strip)"
+ },
+ {
+  "id": "17-170",
+  "de": "Man rechnet bis zur <b>Grenztiefe</b>, in der die Zusatzspannung nur noch etwa 20 % der Überlagerungsspannung aus Eigengewicht beträgt. Die Spannungsausbreitung unter dem Fundament folgt aus Tabellen (z. B. nach Steinbrenner) oder vereinfacht mit einer Lastausbreitung unter etwa 2:1.",
+  "en": "The calculation is carried down to the <b>limiting depth</b>, at which the additional stress is only about 20 % of the overburden stress from self-weight. The stress distribution beneath the footing is taken from tables (e.g. after Steinbrenner) or, simplified, from a load spread of about 2:1."
+ },
+ {
+  "id": "17-171",
+  "de": "Masse feucht m [g]",
+  "en": "Wet mass m [g]"
+ },
+ {
+  "id": "17-172",
+  "de": "Masse trocken m<sub>d</sub> [g]",
+  "en": "Dry mass m<sub>d</sub> [g]"
+ },
+ {
+  "id": "17-173",
+  "de": "Maßgebend für Schäden sind meist nicht die absoluten Setzungen, sondern <b>Setzungsunterschiede</b> zwischen Fundamenten (Winkelverdrehung).",
+  "en": "Damage is usually governed not by absolute settlements but by <b>differential settlements</b> between footings (angular distortion)."
+ },
+ {
+  "id": "17-174",
+  "de": "Mineral / Boden",
+  "en": "Mineral / soil"
+ },
+ {
+  "id": "17-175",
+  "de": "Mit Wandreibung (δ ≠ 0) und geneigtem Gelände werden die Beiwerte nach Coulomb bzw. DIN 4085 bestimmt; K<sub>a</sub> wird dann kleiner, K<sub>p</sub> größer.",
+  "en": "With wall friction (δ ≠ 0) and sloping ground the coefficients are determined after Coulomb or DIN 4085; K<sub>a</sub> then becomes smaller and K<sub>p</sub> larger."
+ },
+ {
+  "id": "17-176",
+  "de": "Mohrsche Spannungskreise mit Bruchgerade",
+  "en": "Mohr circles of stress with failure envelope"
+ },
+ {
+  "id": "17-177",
+  "de": "Nachweise (GEO-2, DIN 1054)",
+  "en": "Verifications (GEO-2, DIN 1054)"
+ },
+ {
+  "id": "17-178",
+  "de": "Nichtbindig und bindig",
+  "en": "Cohesionless and cohesive"
+ },
+ {
+  "id": "17-179",
+  "de": "Nichtbindiger Boden — σ<sub>R,d</sub> [kN/m²] für Streifenfundamente",
+  "en": "Cohesionless soil — σ<sub>R,d</sub> [kN/m²] for strip footings"
+ },
+ {
+  "id": "17-180",
+  "de": "Ohne Setzungsbegrenzung (nur Grundbruch maßgebend), Tab. A 6.1:",
+  "en": "Without settlement limit (bearing resistance governs only), Tab. A 6.1:"
+ },
+ {
+  "id": "17-181",
+  "de": "Orange: aktiver Erddruck e<sub>ah</sub>, blau: Wasserdruck. Sprünge entstehen an Schichtgrenzen durch das andere K<sub>agh</sub>.",
+  "en": "Orange: active earth pressure e<sub>ah</sub>, blue: water pressure. Jumps occur at layer boundaries because of the different K<sub>agh</sub>."
+ },
+ {
+  "id": "17-182",
+  "de": "Plastizität nach w<sub>L</sub>: mittel (35 … 50 %) · über der A-Linie",
+  "en": "Plasticity from w<sub>L</sub>: medium (35 … 50 %) · above the A-line"
+ },
+ {
+  "id": "17-183",
+  "de": "Plastizitätsdiagramm nach DIN 18196",
+  "en": "Plasticity chart to DIN 18196"
+ },
+ {
+  "id": "17-184",
+  "de": "Porenanteil n = V<sub>p</sub> / V = 1 − ρ<sub>d</sub> / ρ<sub>s</sub> · Porenzahl e = V<sub>p</sub> / V<sub>s</sub> = n / (1 − n)",
+  "en": "Porosity n = V<sub>p</sub> / V = 1 − ρ<sub>d</sub> / ρ<sub>s</sub> · void ratio e = V<sub>p</sub> / V<sub>s</sub> = n / (1 − n)"
+ },
+ {
+  "id": "17-185",
+  "de": "Porenwasserdruck u = γ<sub>w</sub> · h<sub>w</sub> · wirksame Spannung (Terzaghi) σ′<sub>v</sub> = σ<sub>v</sub> − u = q + Σ γ · h + Σ γ′ · h",
+  "en": "Pore water pressure u = γ<sub>w</sub> · h<sub>w</sub> · effective stress (Terzaghi) σ′<sub>v</sub> = σ<sub>v</sub> − u = q + Σ γ · h + Σ γ′ · h"
+ },
+ {
+  "id": "17-186",
+  "de": "Potentialdifferenz Δh [m]",
+  "en": "Head difference Δh [m]"
+ },
+ {
+  "id": "17-187",
+  "de": "Punkt: dein Boden. Über der A-Linie Tone (T), darunter Schluffe (U); L/M/A nach der Fließgrenze 35 % und 50 %.",
+  "en": "Point: your soil. Clays (T) above the A-line, silts (U) below; L/M/A by the liquid limit 35 % and 50 %."
+ },
+ {
+  "id": "17-188",
+  "de": "Quarzsand, Kies",
+  "en": "Quartz sand, gravel"
+ },
+ {
+  "id": "17-189",
+  "de": "Querschnitt A [m²]",
+  "en": "Cross-section A [m²]"
+ },
+ {
+  "id": "17-190",
+  "de": "Rechteck- oder Kreisfundament mit a/b &lt; 2",
+  "en": "Rectangular or circular footing with a/b &lt; 2"
+ },
+ {
+  "id": "17-191",
+  "de": "Regel",
+  "en": "Rule"
+ },
+ {
+  "id": "17-192",
+  "de": "Reibungswinkel φ′ [°]",
+  "en": "Friction angle φ′ [°]"
+ },
+ {
+  "id": "17-193",
+  "de": "Reiner Schluff: UL nach DIN 18196 · gemischtkörnig: SU*, ST, ST*, GU*, GT* · tonig-schluffig: UM, TL, TM · Ton: TA",
+  "en": "Pure silt: UL to DIN 18196 · mixed-grained: SU*, ST, ST*, GU*, GT* · clayey-silty: UM, TL, TM · clay: TA"
+ },
+ {
+  "id": "17-194",
+  "de": "Restscherfestigkeit φ′<sub>r</sub> nach großen Verschiebungen (Rutschflächen, Ton) deutlich kleiner als φ′",
+  "en": "Residual shear strength φ′<sub>r</sub> after large displacements (slip surfaces, clay) much lower than φ′"
+ },
+ {
+  "id": "17-195",
+  "de": "Resultierende in der 1. Kernweite",
+  "en": "Resultant within the 1st kern width"
+ },
+ {
+  "id": "17-196",
+  "de": "Resultierende in der 2. Kernweite",
+  "en": "Resultant within the 2nd kern width"
+ },
+ {
+  "id": "17-197",
+  "de": "Resultierende in der zulässigen Kernweite (siehe Sohldruck)",
+  "en": "Resultant within the permitted kern width (see base pressure)"
+ },
+ {
+  "id": "17-198",
+  "de": "Sand-Schluff- bzw. Sand-Ton-Gemische",
+  "en": "Sand-silt or sand-clay mixtures"
+ },
+ {
+  "id": "17-199",
+  "de": "Scherfestigkeit nach Mohr-Coulomb",
+  "en": "Mohr-Coulomb shear strength"
+ },
+ {
+  "id": "17-200",
+  "de": "Scherparameter aus zwei Triaxialversuchen",
+  "en": "Shear parameters from two triaxial tests"
+ },
+ {
+  "id": "17-201",
+  "de": "Scherparameter aus zwei Versuchen",
+  "en": "Shear parameters from two tests"
+ },
+ {
+  "id": "17-202",
+  "de": "Schicht 1",
+  "en": "Layer 1"
+ },
+ {
+  "id": "17-203",
+  "de": "Schicht 1: 0,00 … 2,00 m, γ = 18,0, γ<sub>r</sub> = 20,0 kN/m³",
+  "en": "Layer 1: 0.00 … 2.00 m, γ = 18.0, γ<sub>r</sub> = 20.0 kN/m³"
+ },
+ {
+  "id": "17-204",
+  "de": "Schicht 1: Dicke [m]",
+  "en": "Layer 1: thickness [m]"
+ },
+ {
+  "id": "17-205",
+  "de": "Schicht 1: K<sub>agh</sub> = 0,2506, K<sub>ach</sub> = 0,8657 (φ′ = 32,5°, c′ = 0,0 kN/m²)",
+  "en": "Layer 1: K<sub>agh</sub> = 0.2506, K<sub>ach</sub> = 0.8657 (φ′ = 32.5°, c′ = 0.0 kN/m²)"
+ },
+ {
+  "id": "17-206",
+  "de": "Schicht 2",
+  "en": "Layer 2"
+ },
+ {
+  "id": "17-207",
+  "de": "Schicht 2: 2,00 … 5,00 m, γ = 19,0, γ<sub>r</sub> = 21,0 kN/m³",
+  "en": "Layer 2: 2.00 … 5.00 m, γ = 19.0, γ<sub>r</sub> = 21.0 kN/m³"
+ },
+ {
+  "id": "17-208",
+  "de": "Schicht 2: Dicke [m]",
+  "en": "Layer 2: thickness [m]"
+ },
+ {
+  "id": "17-209",
+  "de": "Schicht 2: K<sub>agh</sub> = 0,3457, K<sub>ach</sub> = 1,0431 (φ′ = 25,0°, c′ = 10,0 kN/m²)",
+  "en": "Layer 2: K<sub>agh</sub> = 0.3457, K<sub>ach</sub> = 1.0431 (φ′ = 25.0°, c′ = 10.0 kN/m²)"
+ },
+ {
+  "id": "17-210",
+  "de": "Schicht 3",
+  "en": "Layer 3"
+ },
+ {
+  "id": "17-211",
+  "de": "Schicht 3: 5,00 … 8,00 m, γ = 20,0, γ<sub>r</sub> = 21,0 kN/m³",
+  "en": "Layer 3: 5.00 … 8.00 m, γ = 20.0, γ<sub>r</sub> = 21.0 kN/m³"
+ },
+ {
+  "id": "17-212",
+  "de": "Schicht 3: Dicke [m]",
+  "en": "Layer 3: thickness [m]"
+ },
+ {
+  "id": "17-213",
+  "de": "Schichtdicke H [m]",
+  "en": "Layer thickness H [m]"
+ },
+ {
+  "id": "17-214",
+  "de": "Schichtdicke Δz [m]",
+  "en": "Sublayer thickness Δz [m]"
+ },
+ {
+  "id": "17-215",
+  "de": "Schluff",
+  "en": "Silt"
+ },
+ {
+  "id": "17-216",
+  "de": "Senkrechte, glatte Wand (δ = 0), waagerechtes Gelände:",
+  "en": "Vertical, smooth wall (δ = 0), horizontal ground surface:"
+ },
+ {
+  "id": "17-217",
+  "de": "Setzung Mittelpunkt 3,00 × 2,00 m",
+  "en": "Settlement at centre 3.00 × 2.00 m"
+ },
+ {
+  "id": "17-218",
+  "de": "Setzung aus Steifemodul",
+  "en": "Settlement from constrained modulus"
+ },
+ {
+  "id": "17-219",
+  "de": "Setzung begrenzt auf 1–2 cm (für setzungsempfindliche Bauwerke), Tab. A 6.2:",
+  "en": "Settlement limited to 1–2 cm (for settlement-sensitive structures), Tab. A 6.2:"
+ },
+ {
+  "id": "17-220",
+  "de": "Setzung eines Rechteckfundaments berechnen (homogener Boden)",
+  "en": "Calculate the settlement of a rectangular footing (homogeneous soil)"
+ },
+ {
+  "id": "17-221",
+  "de": "Sickerweg L [m]",
+  "en": "Seepage path L [m]"
+ },
+ {
+  "id": "17-222",
+  "de": "Sohldruckverteilung",
+  "en": "Base pressure distribution"
+ },
+ {
+  "id": "17-223",
+  "de": "Sohlspannung",
+  "en": "Base pressure"
+ },
+ {
+  "id": "17-224",
+  "de": "Sohlspannung bei ausmittiger Last",
+  "en": "Base pressure under eccentric load"
+ },
+ {
+  "id": "17-225",
+  "de": "Sohlspannung berechnen",
+  "en": "Calculate base pressure"
+ },
+ {
+  "id": "17-226",
+  "de": "Sohlspannung σ<sub>0</sub> [kN/m²]",
+  "en": "Base pressure σ<sub>0</sub> [kN/m²]"
+ },
+ {
+  "id": "17-227",
+  "de": "Sohlwiderstand ermitteln",
+  "en": "Determine bearing resistance"
+ },
+ {
+  "id": "17-228",
+  "de": "Spannungen aus Eigengewicht und Grundwasser",
+  "en": "Stresses from self-weight and groundwater"
+ },
+ {
+  "id": "17-229",
+  "de": "Spannungsausbreitung unter Lasten",
+  "en": "Stress distribution under loads"
+ },
+ {
+  "id": "17-230",
+  "de": "Spannungsverlauf mit der Tiefe",
+  "en": "Stress variation with depth"
+ },
+ {
+  "id": "17-231",
+  "de": "Standsicherheit von Böschungen — DIN 4084",
+  "en": "Slope stability — DIN 4084"
+ },
+ {
+  "id": "17-232",
+  "de": "Steifemodul E<sub>s</sub> [MN/m²]",
+  "en": "Constrained modulus E<sub>s</sub> [MN/m²]"
+ },
+ {
+  "id": "17-233",
+  "de": "Streifenfundament (je m)",
+  "en": "Strip footing (per m)"
+ },
+ {
+  "id": "17-234",
+  "de": "Strömungskraft je Volumen: s = γ<sub>w</sub> · i (in Fließrichtung) · nach oben gerichtet verringert sie die wirksame Spannung",
+  "en": "Seepage force per unit volume: s = γ<sub>w</sub> · i (in the flow direction) · acting upwards it reduces the effective stress"
+ },
+ {
+  "id": "17-235",
+  "de": "Summe E<sub>ah</sub> + W = 97,19 kN/m",
+  "en": "Total E<sub>ah</sub> + W = 97.19 kN/m"
+ },
+ {
+  "id": "17-236",
+  "de": "Sättigungszahl S<sub>r</sub> = w · ρ<sub>s</sub> / (e · ρ<sub>w</sub>) (0 trocken … 1 wassergesättigt)",
+  "en": "Degree of saturation S<sub>r</sub> = w · ρ<sub>s</sub> / (e · ρ<sub>w</sub>) (0 dry … 1 saturated)"
+ }
+]

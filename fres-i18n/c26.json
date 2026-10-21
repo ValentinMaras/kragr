@@ -1,0 +1,1157 @@
+[
+ {
+  "id": "26-0",
+  "de": "Für Querschnitte, die in keiner Tabelle stehen, werden Fläche, Schwerpunkt, Trägheitsmoment und die plastische Nulllinie selbst berechnet. Bei ungleichen Gurten verschiebt sich die Nulllinie — der gedrückte Stegteil α·c ist dann nicht mehr die halbe Steghöhe. Im Beispiel liegt der breite Gurt unten in der Zugzone: Die Nulllinie wandert nach unten, mehr Steg ist gedrückt, und der Steg wird Klasse 3. Bei geschweißten Querschnitten zählt als c die freie Länge bis zum Nahtfuß (Nahtdicke a, Schenkel √2·a).",
+  "en": "For cross-sections not listed in any table, you calculate the area, centroid, second moment of area and plastic neutral axis yourself. With unequal flanges the neutral axis shifts — the compressed part of the web α·c is then no longer half the web depth. In the example the wide flange is at the bottom in the tension zone: the neutral axis moves down, more of the web is in compression, and the web becomes class 3. For welded sections c is the clear length up to the weld toe (throat thickness a, leg length √2·a)."
+ },
+ {
+  "id": "26-1",
+  "de": "Geschweißter I-Querschnitt 250×15 / 600×10 / 300×20, S355",
+  "en": "Welded I-section 250×15 / 600×10 / 300×20, S355"
+ },
+ {
+  "id": "26-2",
+  "de": "Gleichschenklige Winkel L b × t",
+  "en": "Equal-leg angles L b × t"
+ },
+ {
+  "id": "26-3",
+  "de": "Gleichstreckenlast",
+  "en": "Uniformly distributed load"
+ },
+ {
+  "id": "26-4",
+  "de": "Gleichstreckenlast → C<sub>1</sub> = 1,120, C<sub>2</sub> = 0,45 · Lastangriff z<sub>g</sub> = 15,00 cm (Obergurt, ungünstig)",
+  "en": "Uniformly distributed load → C<sub>1</sub> = 1.120, C<sub>2</sub> = 0.45 · load application z<sub>g</sub> = 15.00 cm (top flange, unfavourable)"
+ },
+ {
+  "id": "26-5",
+  "de": "Grenzen",
+  "en": "Limits"
+ },
+ {
+  "id": "26-6",
+  "de": "Grenzen 9ε = 7,3 · 10ε = 8,1 · 14ε = 11,4 → Flansch Klasse 1",
+  "en": "Limits 9ε = 7.3 · 10ε = 8.1 · 14ε = 11.4 → flange class 1"
+ },
+ {
+  "id": "26-7",
+  "de": "Grenzen 9ε = 7,32 · 10ε = 8,14 · 14ε = 11,39 → Obergurt Klasse 2",
+  "en": "Limits 9ε = 7.32 · 10ε = 8.14 · 14ε = 11.39 → top flange class 2"
+ },
+ {
+  "id": "26-8",
+  "de": "Grenzen α = 0,819: Kl. 1 ≤ 33,4 · Kl. 2 ≤ 38,4 · ψ = -0,412: Kl. 3 ≤ 64,0 → Steg Klasse 2",
+  "en": "Limits α = 0.819: cl. 1 ≤ 33.4 · cl. 2 ≤ 38.4 · ψ = -0.412: cl. 3 ≤ 64.0 → web class 2"
+ },
+ {
+  "id": "26-9",
+  "de": "Grenzwert",
+  "en": "Limit value"
+ },
+ {
+  "id": "26-10",
+  "de": "H / 150 bis H / 300",
+  "en": "H / 150 to H / 300"
+ },
+ {
+  "id": "26-11",
+  "de": "HEB 200, S235: f<sub>y</sub> = 235 N/mm² · Klasse 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 642,5 cm³",
+  "en": "HEB 200, S235: f<sub>y</sub> = 235 N/mm² · class 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 642.5 cm³"
+ },
+ {
+  "id": "26-12",
+  "de": "Halsnaht a [mm]",
+  "en": "Flange-to-web weld a [mm]"
+ },
+ {
+  "id": "26-13",
+  "de": "Hohlprofil, warmgefertigt",
+  "en": "Hollow section, hot-finished"
+ },
+ {
+  "id": "26-14",
+  "de": "Hohlprofile kaltgefertigt",
+  "en": "Hollow sections, cold-formed"
+ },
+ {
+  "id": "26-15",
+  "de": "Hohlprofile sind torsionssteif (geschlossener Querschnitt) und daher praktisch nicht kippgefährdet. Sie eignen sich für Stützen, Fachwerke und Rahmen. Knicklinie <b>a</b> (warmgefertigt) bzw. <b>c</b> (kaltgefertigt, EN 10219).",
+  "en": "Hollow sections are torsionally stiff (closed cross-section) and therefore practically not susceptible to lateral-torsional buckling. They suit columns, trusses and frames. Buckling curve <b>a</b> (hot-finished) or <b>c</b> (cold-formed, EN 10219)."
+ },
+ {
+  "id": "26-16",
+  "de": "Hohlprofile warmgefertigt",
+  "en": "Hollow sections, hot-finished"
+ },
+ {
+  "id": "26-17",
+  "de": "Hohlprofile — warmgefertigt nach EN 10210-2",
+  "en": "Hollow sections — hot-finished to EN 10210-2"
+ },
+ {
+  "id": "26-18",
+  "de": "Höchstdicke (übliche Regel)",
+  "en": "Maximum thickness (usual rule)"
+ },
+ {
+  "id": "26-19",
+  "de": "I und W<sub>pl</sub>: Rechteck außen minus Rechteck innen, jeweils mit abgezogenen Eckquadraten und hinzugefügten Viertelkreisen",
+  "en": "I and W<sub>pl</sub>: outer rectangle minus inner rectangle, each with the corner squares removed and quarter circles added"
+ },
+ {
+  "id": "26-20",
+  "de": "I-Profil mit Abmessungen h, b, t_w, t_f, r",
+  "en": "I-section with dimensions h, b, t_w, t_f, r"
+ },
+ {
+  "id": "26-21",
+  "de": "I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ mit D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)",
+  "en": "I<sub>t</sub> = 2/3 · (b − 0.63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0.145 + 0.1 · r/t<sub>f</sub>) · D⁴ with D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)"
+ },
+ {
+  "id": "26-22",
+  "de": "I<sub>y</sub>, W<sub>y</sub>: Biegung um die starke Achse y–y · I<sub>z</sub>, W<sub>z</sub>: Biegung um die schwache Achse z–z",
+  "en": "I<sub>y</sub>, W<sub>y</sub>: bending about the strong axis y–y · I<sub>z</sub>, W<sub>z</sub>: bending about the weak axis z–z"
+ },
+ {
+  "id": "26-23",
+  "de": "I<sub>z</sub> = 603,8 cm⁴ · I<sub>t</sub> = 20,12 cm⁴ · I<sub>w</sub> = 125.934 cm⁶ · Klasse 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 628,4 cm³ · f<sub>y</sub> = 235 N/mm²",
+  "en": "I<sub>z</sub> = 603.8 cm⁴ · I<sub>t</sub> = 20.12 cm⁴ · I<sub>w</sub> = 125.934 cm⁶ · class 1 → W<sub>y</sub> = W<sub>pl,y</sub> = 628.4 cm³ · f<sub>y</sub> = 235 N/mm²"
+ },
+ {
+  "id": "26-24",
+  "de": "IPE gehören zu h/b &gt; 1,2; HEA und HEB bis 300 zu h/b ≤ 1,2, die hohen HEA/HEB ab 400 und HEM ab 340 zu h/b &gt; 1,2.",
+  "en": "IPE sections belong to h/b &gt; 1.2; HEA and HEB up to 300 to h/b ≤ 1.2; the deep HEA/HEB from 400 and HEM from 340 to h/b &gt; 1.2."
+ },
+ {
+  "id": "26-25",
+  "de": "Imperfektionsbeiwert α",
+  "en": "Imperfection factor α"
+ },
+ {
+  "id": "26-26",
+  "de": "Innenteil (Steg) auf Biegung",
+  "en": "Internal part (web) in bending"
+ },
+ {
+  "id": "26-27",
+  "de": "Innenteil Biegung + Druck, α &gt; 0,5",
+  "en": "Internal part bending + compression, α &gt; 0.5"
+ },
+ {
+  "id": "26-28",
+  "de": "Innenteil Biegung + Druck, α ≤ 0,5",
+  "en": "Internal part bending + compression, α ≤ 0.5"
+ },
+ {
+  "id": "26-29",
+  "de": "Innenteil auf Druck",
+  "en": "Internal part in compression"
+ },
+ {
+  "id": "26-30",
+  "de": "Kehlnaht a = 4,0 mm",
+  "en": "Fillet weld a = 4.0 mm"
+ },
+ {
+  "id": "26-31",
+  "de": "Kehlnaht berechnen (Längsnähte, vereinfachtes Verfahren)",
+  "en": "Calculate fillet weld (longitudinal welds, simplified method)"
+ },
+ {
+  "id": "26-32",
+  "de": "Kehlnähte — EN 1993-1-8, 4.5",
+  "en": "Fillet welds — EN 1993-1-8, 4.5"
+ },
+ {
+  "id": "26-33",
+  "de": "Klasse 1",
+  "en": "Class 1"
+ },
+ {
+  "id": "26-34",
+  "de": "Klasse 1:",
+  "en": "Class 1:"
+ },
+ {
+  "id": "26-35",
+  "de": "Klasse 2",
+  "en": "Class 2"
+ },
+ {
+  "id": "26-36",
+  "de": "Klasse 2: 456ε / (13α − 1) = 46,4",
+  "en": "Class 2: 456ε / (13α − 1) = 46.4"
+ },
+ {
+  "id": "26-37",
+  "de": "Klasse 2: plastische Querschnittstragfähigkeit (W<sub>pl</sub>), keine Umlagerung",
+  "en": "Class 2: plastic cross-section resistance (W<sub>pl</sub>), no redistribution"
+ },
+ {
+  "id": "26-38",
+  "de": "Klasse 3",
+  "en": "Class 3"
+ },
+ {
+  "id": "26-39",
+  "de": "Klasse 3:",
+  "en": "Class 3:"
+ },
+ {
+  "id": "26-40",
+  "de": "Knicklinie",
+  "en": "Buckling curve"
+ },
+ {
+  "id": "26-41",
+  "de": "Knicklinie b → χ<sub>y</sub> = 0,825",
+  "en": "Buckling curve b → χ<sub>y</sub> = 0.825"
+ },
+ {
+  "id": "26-42",
+  "de": "Knicklinie c → χ<sub>z</sub> = 0,511",
+  "en": "Buckling curve c → χ<sub>z</sub> = 0.511"
+ },
+ {
+  "id": "26-43",
+  "de": "Knicklinien",
+  "en": "Buckling curves"
+ },
+ {
+  "id": "26-44",
+  "de": "Knicklinien für Biegedrillknicken",
+  "en": "Buckling curves for lateral-torsional buckling"
+ },
+ {
+  "id": "26-45",
+  "de": "Knicklänge L<sub>cr</sub> [m]",
+  "en": "Buckling length L<sub>cr</sub> [m]"
+ },
+ {
+  "id": "26-46",
+  "de": "Knicklängenbeiwerte β (Eulerfälle)",
+  "en": "Effective length factors β (Euler cases)"
+ },
+ {
+  "id": "26-47",
+  "de": "Knicktragfähigkeit berechnen",
+  "en": "Calculate buckling resistance"
+ },
+ {
+  "id": "26-48",
+  "de": "Kontrolle über N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = 2.595 kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = 0,841",
+  "en": "Check via N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = 2.595 kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = 0.841"
+ },
+ {
+  "id": "26-49",
+  "de": "Kragträger, Einzellast F am Ende",
+  "en": "Cantilever, point load F at the free end"
+ },
+ {
+  "id": "26-50",
+  "de": "Kragträger, Gleichlast q",
+  "en": "Cantilever, uniform load q"
+ },
+ {
+  "id": "26-51",
+  "de": "Kranbahnträger (vertikal)",
+  "en": "Crane runway girders (vertical)"
+ },
+ {
+  "id": "26-52",
+  "de": "L / 200 bis L / 250",
+  "en": "L / 200 to L / 250"
+ },
+ {
+  "id": "26-53",
+  "de": "L / 500 bis L / 1000",
+  "en": "L / 500 to L / 1000"
+ },
+ {
+  "id": "26-54",
+  "de": "L-Profile",
+  "en": "Angle sections"
+ },
+ {
+  "id": "26-55",
+  "de": "L<sub>cr,z</sub> = Gabellagerabstand [m]",
+  "en": "L<sub>cr,z</sub> = distance between fork supports [m]"
+ },
+ {
+  "id": "26-56",
+  "de": "Laschenstoß berechnen (Abscheren und Lochleibung)",
+  "en": "Calculate spliced joint (shear and bearing)"
+ },
+ {
+  "id": "26-57",
+  "de": "Loch zu Loch in Kraftrichtung",
+  "en": "Hole to hole in direction of load"
+ },
+ {
+  "id": "26-58",
+  "de": "Loch zu Loch quer zur Kraft",
+  "en": "Hole to hole perpendicular to load"
+ },
+ {
+  "id": "26-59",
+  "de": "M20 8.8: d = 20 mm, d<sub>0</sub> = 22 mm, A = 314 mm², A<sub>s</sub> = 245,0 mm², f<sub>ub</sub> = 800 N/mm² · Blech S235, t = 10,0 mm, f<sub>u</sub> = 360 N/mm²",
+  "en": "M20 8.8: d = 20 mm, d<sub>0</sub> = 22 mm, A = 314 mm², A<sub>s</sub> = 245.0 mm², f<sub>ub</sub> = 800 N/mm² · plate S235, t = 10.0 mm, f<sub>u</sub> = 360 N/mm²"
+ },
+ {
+  "id": "26-60",
+  "de": "M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> für n ≤ a · sonst M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]",
+  "en": "M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> for n ≤ a · otherwise M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]"
+ },
+ {
+  "id": "26-61",
+  "de": "M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · für λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> kein Nachweis",
+  "en": "M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · for λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> no check required"
+ },
+ {
+  "id": "26-62",
+  "de": "M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 4)",
+  "en": "M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 4)"
+ },
+ {
+  "id": "26-63",
+  "de": "M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> mit A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>",
+  "en": "M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> with A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>"
+ },
+ {
+  "id": "26-64",
+  "de": "Maximum (Stahl ohne Witterungsschutz)",
+  "en": "Maximum (steel without weather protection)"
+ },
+ {
+  "id": "26-65",
+  "de": "Maßgebende Ausnutzung: <b>75 %</b>",
+  "en": "Governing utilisation: <b>75 %</b>"
+ },
+ {
+  "id": "26-66",
+  "de": "Maßstäblich nach den Eingaben. Blau: elastische Nulllinie durch den Schwerpunkt S, orange: plastische (flächenhalbierende) Nulllinie, orange Balken: gedrückter Stegteil α·c.",
+  "en": "To scale from the inputs. Blue: elastic neutral axis through the centroid S, orange: plastic (equal-area) neutral axis, orange bar: compressed part of the web α·c."
+ },
+ {
+  "id": "26-67",
+  "de": "Momentenbeiwerte C<sub>1</sub>, C<sub>2</sub> und Korrekturbeiwert k<sub>c</sub>",
+  "en": "Moment factors C<sub>1</sub>, C<sub>2</sub> and correction factor k<sub>c</sub>"
+ },
+ {
+  "id": "26-68",
+  "de": "Momentenverlauf",
+  "en": "Bending moment diagram"
+ },
+ {
+  "id": "26-69",
+  "de": "Momentenverlauf linear (Randmomente), ψ = 0,00: C<sub>m</sub> = 0,6 + 0,4 · ψ ≥ 0,4 → C<sub>my</sub> = C<sub>mLT</sub> = 0,600",
+  "en": "Linear moment diagram (end moments), ψ = 0.00: C<sub>m</sub> = 0.6 + 0.4 · ψ ≥ 0.4 → C<sub>my</sub> = C<sub>mLT</sub> = 0.600"
+ },
+ {
+  "id": "26-70",
+  "de": "N<sub>Ed</sub> [kN] (Druck &gt; 0, Zug &lt; 0)",
+  "en": "N<sub>Ed</sub> [kN] (compression &gt; 0, tension &lt; 0)"
+ },
+ {
+  "id": "26-71",
+  "de": "N<sub>Ed</sub> [kN] (Druck)",
+  "en": "N<sub>Ed</sub> [kN] (compression)"
+ },
+ {
+  "id": "26-72",
+  "de": "N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 für nicht kippgefährdete Bauteile (z. B. Hohlprofile)",
+  "en": "N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 for members not susceptible to lateral-torsional buckling (e.g. hollow sections)"
+ },
+ {
+  "id": "26-73",
+  "de": "N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (Klasse 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1",
+  "en": "N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (class 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1"
+ },
+ {
+  "id": "26-74",
+  "de": "N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 1–3) bzw. A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 4)",
+  "en": "N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (class 1–3) or A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 4)"
+ },
+ {
+  "id": "26-75",
+  "de": "N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² mit L<sub>cr</sub> = β · L",
+  "en": "N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² with L<sub>cr</sub> = β · L"
+ },
+ {
+  "id": "26-76",
+  "de": "N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) mit N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> und N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>",
+  "en": "N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) with N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> and N<sub>u,Rd</sub> = 0.9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>"
+ },
+ {
+  "id": "26-77",
+  "de": "Nach EN 10056-1; aus der Geometrie mit Ausrundung r<sub>1</sub> und Kantenrundung r<sub>2</sub> numerisch berechnet. e — Schwerpunktabstand von der Schenkelaußenseite. W<sub>el,y</sub> bezogen auf die Schenkelspitze.",
+  "en": "To EN 10056-1; calculated numerically from the geometry with root radius r<sub>1</sub> and toe radius r<sub>2</sub>. e — distance of the centroid from the outside of the leg. W<sub>el,y</sub> refers to the leg tip."
+ },
+ {
+  "id": "26-78",
+  "de": "Nachweis berechnen (I-Profil, N + M<sub>y</sub>)",
+  "en": "Calculate check (I-section, N + M<sub>y</sub>)"
+ },
+ {
+  "id": "26-79",
+  "de": "Nachweisverfahren",
+  "en": "Verification method"
+ },
+ {
+  "id": "26-80",
+  "de": "Nahtdicke a [mm]",
+  "en": "Throat thickness a [mm]"
+ },
+ {
+  "id": "26-81",
+  "de": "Nahtlänge l [mm] je Naht",
+  "en": "Weld length l [mm] per weld"
+ },
+ {
+  "id": "26-82",
+  "de": "Nettoquerschnitt auf Zug (Bruch), Schrauben, Schweißnähte, Bleche auf Lochleibung",
+  "en": "Net section in tension (fracture), bolts, welds, plates in bearing"
+ },
+ {
+  "id": "26-83",
+  "de": "Nur Biegeknicken. Biegedrillknicken und Interaktion mit Biegung: eigene Themen.",
+  "en": "Flexural buckling only. Lateral-torsional buckling and interaction with bending: separate topics."
+ },
+ {
+  "id": "26-84",
+  "de": "Obergurt b<sub>o</sub> [mm]",
+  "en": "Top flange b<sub>o</sub> [mm]"
+ },
+ {
+  "id": "26-85",
+  "de": "Obergurt t<sub>o</sub> [mm]",
+  "en": "Top flange t<sub>o</sub> [mm]"
+ },
+ {
+  "id": "26-86",
+  "de": "Obergurt: A<sub>1</sub> = 250 · 15 = 3.750 mm², z<sub>1</sub> = 7,5 mm",
+  "en": "Top flange: A<sub>1</sub> = 250 · 15 = 3.750 mm², z<sub>1</sub> = 7.5 mm"
+ },
+ {
+  "id": "26-87",
+  "de": "Profil suchen, z. B. 300",
+  "en": "Search section, e.g. 300"
+ },
+ {
+  "id": "26-88",
+  "de": "Profil-Steckbrief mit Widerständen",
+  "en": "Section profile sheet with resistances"
+ },
+ {
+  "id": "26-89",
+  "de": "QRO quadratisch, RRO rechteckig, RO rund. Ecken warmgefertigter Profile: außen r<sub>o</sub> = 1,5 t, innen r<sub>i</sub> = 1,0 t.",
+  "en": "SHS square, RHS rectangular, CHS circular. Corners of hot-finished sections: outside r<sub>o</sub> = 1.5 t, inside r<sub>i</sub> = 1.0 t."
+ },
+ {
+  "id": "26-90",
+  "de": "Quadratisches, rechteckiges und rundes Hohlprofil",
+  "en": "Square, rectangular and circular hollow section"
+ },
+ {
+  "id": "26-91",
+  "de": "Querdehnzahl ν",
+  "en": "Poisson's ratio ν"
+ },
+ {
+  "id": "26-92",
+  "de": "Querlast (Einzellast), Randmomente null",
+  "en": "Transverse load (point load), end moments zero"
+ },
+ {
+  "id": "26-93",
+  "de": "Querlast (Gleichlast), Randmomente null",
+  "en": "Transverse load (uniform load), end moments zero"
+ },
+ {
+  "id": "26-94",
+  "de": "Querlast mit Randmomenten",
+  "en": "Transverse load with end moments"
+ },
+ {
+  "id": "26-95",
+  "de": "Querschnitt <b>Klasse 3</b> → elastische Biegetragfähigkeit",
+  "en": "Cross-section <b>class 3</b> → elastic bending resistance"
+ },
+ {
+  "id": "26-96",
+  "de": "Querschnitt einstufen",
+  "en": "Classify cross-section"
+ },
+ {
+  "id": "26-97",
+  "de": "Querschnittsklasse für Druck und Biegung: Flansch c/t = 5,28 (Kl. 1), Steg c/t = 35,01 (Kl. 1) → <b>Klasse 1</b>",
+  "en": "Cross-section class for compression and bending: flange c/t = 5.28 (cl. 1), web c/t = 35.01 (cl. 1) → <b>Class 1</b>"
+ },
+ {
+  "id": "26-98",
+  "de": "Querschnittsnachweis IPE 300, S235",
+  "en": "Cross-section check IPE 300, S235"
+ },
+ {
+  "id": "26-99",
+  "de": "Querschnittsnachweis berechnen",
+  "en": "Calculate cross-section check"
+ },
+ {
+  "id": "26-100",
+  "de": "Querschnittsnachweise (Fließen)",
+  "en": "Cross-section checks (yielding)"
+ },
+ {
+  "id": "26-101",
+  "de": "Querschnittsteil",
+  "en": "Cross-section part"
+ },
+ {
+  "id": "26-102",
+  "de": "Rand in Kraftrichtung",
+  "en": "Edge in direction of load"
+ },
+ {
+  "id": "26-103",
+  "de": "Rand quer zur Kraft",
+  "en": "Edge perpendicular to load"
+ },
+ {
+  "id": "26-104",
+  "de": "Randmomente, linear (ψ = M<sub>2</sub>/M<sub>1</sub>)",
+  "en": "End moments, linear (ψ = M<sub>2</sub>/M<sub>1</sub>)"
+ },
+ {
+  "id": "26-105",
+  "de": "Rechenverfahren",
+  "en": "Calculation method"
+ },
+ {
+  "id": "26-106",
+  "de": "Richtung",
+  "en": "Direction"
+ },
+ {
+  "id": "26-107",
+  "de": "Rundrohr d/t (Druck und Biegung)",
+  "en": "Circular tube d/t (compression and bending)"
+ },
+ {
+  "id": "26-108",
+  "de": "Schaft in der Scherfuge: α<sub>v</sub> = 0,6 für alle Klassen, A = Schaftquerschnitt.",
+  "en": "Shank in the shear plane: α<sub>v</sub> = 0.6 for all classes, A = shank area."
+ },
+ {
+  "id": "26-109",
+  "de": "Scherfuge im",
+  "en": "Shear plane through the"
+ },
+ {
+  "id": "26-110",
+  "de": "Scherfuge im Gewinde → A = A<sub>s</sub>, α<sub>v</sub> = 0,6, 1 Scherfuge",
+  "en": "Shear plane through the thread → A = A<sub>s</sub>, α<sub>v</sub> = 0.6, 1 shear plane"
+ },
+ {
+  "id": "26-111",
+  "de": "Scherfugen je Schraube",
+  "en": "Shear planes per bolt"
+ },
+ {
+  "id": "26-112",
+  "de": "Schraube",
+  "en": "Bolt"
+ },
+ {
+  "id": "26-113",
+  "de": "Schrauben in Kraftrichtung n<sub>1</sub>",
+  "en": "Bolts in direction of load n<sub>1</sub>"
+ },
+ {
+  "id": "26-114",
+  "de": "Schrauben quer n<sub>2</sub>",
+  "en": "Bolts perpendicular n<sub>2</sub>"
+ },
+ {
+  "id": "26-115",
+  "de": "Schrauben — Festigkeitsklassen (EN 1993-1-8, Tab. 3.1)",
+  "en": "Bolts — property classes (EN 1993-1-8, Tab. 3.1)"
+ },
+ {
+  "id": "26-116",
+  "de": "Schraubenverbindung 2 × 2 M20 8.8",
+  "en": "Bolted connection 2 × 2 M20 8.8"
+ },
+ {
+  "id": "26-117",
+  "de": "Schubbeulen: h<sub>w</sub>/t<sub>w</sub> = 278,6 / 7,1 = 39,2 ≤ 72ε/η = 60,0 (η = 1,2) → kein Beulnachweis nötig",
+  "en": "Shear buckling: h<sub>w</sub>/t<sub>w</sub> = 278.6 / 7.1 = 39.2 ≤ 72ε/η = 60.0 (η = 1.2) → no shear buckling check required"
+ },
+ {
+  "id": "26-118",
+  "de": "Schubmittelpunkt",
+  "en": "Shear centre"
+ },
+ {
+  "id": "26-119",
+  "de": "Schubmodul G = E / (2 · (1 + ν))",
+  "en": "Shear modulus G = E / (2 · (1 + ν))"
+ },
+ {
+  "id": "26-120",
+  "de": "So werden die Werte berechnet",
+  "en": "How the values are calculated"
+ },
+ {
+  "id": "26-121",
+  "de": "Stabilität: Biegeknicken, Biegedrillknicken",
+  "en": "Stability: flexural buckling, lateral-torsional buckling"
+ },
+ {
+  "id": "26-122",
+  "de": "Stahl",
+  "en": "Steel"
+ },
+ {
+  "id": "26-123",
+  "de": "Stahlsorte",
+  "en": "Steel grade"
+ },
+ {
+  "id": "26-124",
+  "de": "Steg",
+  "en": "Web"
+ },
+ {
+  "id": "26-125",
+  "de": "Steg (beidseitig gestützt): c = h − 2t<sub>f</sub> − 2r",
+  "en": "Web (internal part): c = h − 2t<sub>f</sub> − 2r"
+ },
+ {
+  "id": "26-126",
+  "de": "Steg / Flansch",
+  "en": "Web / flange"
+ },
+ {
+  "id": "26-127",
+  "de": "Steg h<sub>w</sub> [mm]",
+  "en": "Web h<sub>w</sub> [mm]"
+ },
+ {
+  "id": "26-128",
+  "de": "Steg t<sub>w</sub> [mm]",
+  "en": "Web t<sub>w</sub> [mm]"
+ },
+ {
+  "id": "26-129",
+  "de": "Steg: A<sub>2</sub> = 10 · 600 = 6.000 mm², z<sub>2</sub> = 315,0 mm",
+  "en": "Web: A<sub>2</sub> = 10 · 600 = 6.000 mm², z<sub>2</sub> = 315.0 mm"
+ },
+ {
+  "id": "26-130",
+  "de": "Stützenkopf horizontal (Hallen)",
+  "en": "Column head, horizontal (industrial halls)"
+ },
+ {
+  "id": "26-131",
+  "de": "Summe der F<sub>b,Rd</sub>, wenn F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> bei jeder Schraube; sonst n · kleinster Einzelwiderstand",
+  "en": "Sum of F<sub>b,Rd</sub> if F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> for every bolt; otherwise n · smallest individual resistance"
+ },
+ {
+  "id": "26-132",
+  "de": "Teilsicherheitsbeiwerte γM — DIN EN 1993-1-1/NA und 1993-1-8",
+  "en": "Partial factors γM — DIN EN 1993-1-1/NA and 1993-1-8"
+ },
+ {
+  "id": "26-133",
+  "de": "Tragfähigkeit",
+  "en": "Resistance"
+ },
+ {
+  "id": "26-134",
+  "de": "Tragfähigkeit wie das schwächere der verbundenen Bleche — kein gesonderter Nachweis",
+  "en": "Resistance equal to the weaker of the connected plates — no separate check"
+ },
+ {
+  "id": "26-135",
+  "de": "Tragfähigkeiten je Schraube (Tab. 3.4)",
+  "en": "Resistances per bolt (Tab. 3.4)"
+ },
+ {
+  "id": "26-136",
+  "de": "U-, T- und Vollquerschnitte",
+  "en": "Channel, T- and solid sections"
+ },
+ {
+  "id": "26-137",
+  "de": "U-Profil mit Abmessungen und Schwerpunkt",
+  "en": "Channel section with dimensions and centroid"
+ },
+ {
+  "id": "26-138",
+  "de": "U-Profile: UPN und UPE",
+  "en": "Channel sections: UPN and UPE"
+ },
+ {
+  "id": "26-139",
+  "de": "UPE: Flansche parallel",
+  "en": "UPE: parallel flanges"
+ },
+ {
+  "id": "26-140",
+  "de": "UPN: Flansch innen geneigt",
+  "en": "UPN: tapered inner flange"
+ },
+ {
+  "id": "26-141",
+  "de": "Untergurt b<sub>u</sub> [mm]",
+  "en": "Bottom flange b<sub>u</sub> [mm]"
+ },
+ {
+  "id": "26-142",
+  "de": "Untergurt t<sub>u</sub> [mm]",
+  "en": "Bottom flange t<sub>u</sub> [mm]"
+ },
+ {
+  "id": "26-143",
+  "de": "Untergurt: A<sub>3</sub> = 300 · 20 = 6.000 mm², z<sub>3</sub> = 625,0 mm",
+  "en": "Bottom flange: A<sub>3</sub> = 300 · 20 = 6.000 mm², z<sub>3</sub> = 625.0 mm"
+ },
+ {
+  "id": "26-144",
+  "de": "V<sub>Ed</sub> &gt; 0,5 · V<sub>pl,Rd</sub> → Abminderung der Biegetragfähigkeit (6.2.8)",
+  "en": "V<sub>Ed</sub> &gt; 0.5 · V<sub>pl,Rd</sub> → reduction of the bending resistance (6.2.8)"
+ },
+ {
+  "id": "26-145",
+  "de": "V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub>: keine Abminderung · sonst ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²",
+  "en": "V<sub>Ed</sub> ≤ 0.5 · V<sub>pl,Rd</sub>: no reduction · otherwise ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²"
+ },
+ {
+  "id": "26-146",
+  "de": "V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · Schubbeulen nachweisen, wenn h<sub>w</sub>/t<sub>w</sub> &gt; 72 · ε / η (η = 1,2)",
+  "en": "V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · check shear buckling if h<sub>w</sub>/t<sub>w</sub> &gt; 72 · ε / η (η = 1.2)"
+ },
+ {
+  "id": "26-147",
+  "de": "V<sub>z,Ed</sub> [kN] (an derselben Stelle)",
+  "en": "V<sub>z,Ed</sub> [kN] (at the same location)"
+ },
+ {
+  "id": "26-148",
+  "de": "Verfahren 2 (Anhang B), Tab. B.2 für verdrehweiche Bauteile, Klasse 1–3; M<sub>z</sub> = 0.",
+  "en": "Method 2 (Annex B), Tab. B.2 for members susceptible to torsional deformation, class 1–3; M<sub>z</sub> = 0."
+ },
+ {
+  "id": "26-149",
+  "de": "Vorspannung hochfester Schrauben",
+  "en": "Preloading of high-strength bolts"
+ },
+ {
+  "id": "26-150",
+  "de": "W<sub>el</sub> = I / (Randabstand), i = √(I / A)",
+  "en": "W<sub>el</sub> = I / (extreme fibre distance), i = √(I / A)"
+ },
+ {
+  "id": "26-151",
+  "de": "W<sub>pl</sub> = S<sub>oben</sub> + S<sub>unten</sub> (statische Momente um die plastische NL) = 3786,6 cm³",
+  "en": "W<sub>pl</sub> = S<sub>top</sub> + S<sub>bottom</sub> (first moments of area about the plastic NA) = 3786.6 cm³"
+ },
+ {
+  "id": "26-152",
+  "de": "Was die Querschnittsklasse bedeutet",
+  "en": "What the cross-section class means"
+ },
+ {
+  "id": "26-153",
+  "de": "Werkstoffkennwerte",
+  "en": "Material properties"
+ },
+ {
+  "id": "26-154",
+  "de": "Werte für Gabellagerung (k = k<sub>w</sub> = 1). ψ = −1 (Doppelkrümmung) → C<sub>1</sub> = 2,70 (begrenzt).",
+  "en": "Values for fork supports (k = k<sub>w</sub> = 1). ψ = −1 (double curvature) → C<sub>1</sub> = 2.70 (capped)."
+ },
+ {
+  "id": "26-155",
+  "de": "Widerstandsmoment",
+  "en": "Section modulus"
+ },
+ {
+  "id": "26-156",
+  "de": "Widerstände IPE 300, S235",
+  "en": "Resistances IPE 300, S235"
+ },
+ {
+  "id": "26-157",
+  "de": "Widerstände des Querschnitts — EN 1993-1-1, 6.2",
+  "en": "Resistance of cross-sections — EN 1993-1-1, 6.2"
+ },
+ {
+  "id": "26-158",
+  "de": "Winkelprofil mit Hauptachsen",
+  "en": "Angle section with principal axes"
+ },
+ {
+  "id": "26-159",
+  "de": "Wärmedehnzahl α<sub>T</sub>",
+  "en": "Coefficient of thermal expansion α<sub>T</sub>"
+ },
+ {
+  "id": "26-160",
+  "de": "Zuordnung der Knicklinien — EN 1993-1-1, Tab. 6.2",
+  "en": "Selection of buckling curves — EN 1993-1-1, Tab. 6.2"
+ },
+ {
+  "id": "26-161",
+  "de": "andere Querschnitte",
+  "en": "other cross-sections"
+ },
+ {
+  "id": "26-162",
+  "de": "c = b − 3t (bzw. h − 3t)",
+  "en": "c = b − 3t (or h − 3t)"
+ },
+ {
+  "id": "26-163",
+  "de": "c/t = 58,59 → Steg Klasse 3",
+  "en": "c/t = 58.59 → web class 3"
+ },
+ {
+  "id": "26-164",
+  "de": "c/t-Grenzwerte — EN 1993-1-1, Tab. 5.2",
+  "en": "c/t limits — EN 1993-1-1, Tab. 5.2"
+ },
+ {
+  "id": "26-165",
+  "de": "d<sub>0</sub> — Lochdurchmesser normales Lochspiel (EN 1090-2: +1 mm bis M14, +2 mm bis M24, +3 mm ab M27) · A<sub>s</sub> — Spannungsquerschnitt",
+  "en": "d<sub>0</sub> — hole diameter, normal clearance (EN 1090-2: +1 mm up to M14, +2 mm up to M24, +3 mm from M27) · A<sub>s</sub> — tensile stress area"
+ },
+ {
+  "id": "26-166",
+  "de": "elastisch bis f<sub>y</sub> am Rand",
+  "en": "elastic up to f<sub>y</sub> at the extreme fibre"
+ },
+ {
+  "id": "26-167",
+  "de": "elastisch: ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>unten</sub>) / (z<sub>s</sub> − z<sub>oben</sub>) = (359,9 − 607,9) / (359,9 − 22,1) = -0,734",
+  "en": "elastic: ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>bottom</sub>) / (z<sub>s</sub> − z<sub>top</sub>) = (359.9 − 607.9) / (359.9 − 22.1) = -0.734"
+ },
+ {
+  "id": "26-168",
+  "de": "elastische Schnittgrößen",
+  "en": "elastic internal forces"
+ },
+ {
+  "id": "26-169",
+  "de": "geschweißte I-Profile",
+  "en": "welded I-sections"
+ },
+ {
+  "id": "26-170",
+  "de": "geschweißte Kastenquerschnitte",
+  "en": "welded box sections"
+ },
+ {
+  "id": "26-171",
+  "de": "geschweißtes I-Profil",
+  "en": "welded I-section"
+ },
+ {
+  "id": "26-172",
+  "de": "gewalzte I-Profile",
+  "en": "rolled I-sections"
+ },
+ {
+  "id": "26-173",
+  "de": "gewalzte I-Profile, h/b &gt; 1,2",
+  "en": "rolled I-sections, h/b &gt; 1.2"
+ },
+ {
+  "id": "26-174",
+  "de": "gewalzte I-Profile, h/b ≤ 1,2",
+  "en": "rolled I-sections, h/b ≤ 1.2"
+ },
+ {
+  "id": "26-175",
+  "de": "gewalztes I-Profil",
+  "en": "rolled I-section"
+ },
+ {
+  "id": "26-176",
+  "de": "gleitfeste Verbindungen (GZG)",
+  "en": "slip-resistant connections (SLS)"
+ },
+ {
+  "id": "26-177",
+  "de": "gleitfeste Verbindungen (GZT)",
+  "en": "slip-resistant connections (ULS)"
+ },
+ {
+  "id": "26-178",
+  "de": "h/b = 1,00 ≤ 1,2, t<sub>f</sub> = 15,0 mm, S235 → Knicklinie <b>c</b>, α = 0,49",
+  "en": "h/b = 1.00 ≤ 1.2, t<sub>f</sub> = 15.0 mm, S235 → buckling curve <b>c</b>, α = 0.49"
+ },
+ {
+  "id": "26-179",
+  "de": "h/b = 2,00 ≤ 2 → Knicklinie b, α<sub>LT</sub> = 0,34 · λ̄<sub>LT,0</sub> = 0,4 · β = 0,75",
+  "en": "h/b = 2.00 ≤ 2 → buckling curve b, α<sub>LT</sub> = 0.34 · λ̄<sub>LT,0</sub> = 0.4 · β = 0.75"
+ },
+ {
+  "id": "26-180",
+  "de": "in Kraftrichtung: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (Endschraube) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (innere Schraube)",
+  "en": "in direction of load: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (end bolt) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (inner bolt)"
+ },
+ {
+  "id": "26-181",
+  "de": "k<sub>1</sub> (Randreihe)",
+  "en": "k<sub>1</sub> (edge row)"
+ },
+ {
+  "id": "26-182",
+  "de": "k<sub>zz</sub> = C<sub>mz</sub> · (1 + (2λ̄<sub>z</sub> − 0,6) · n<sub>z</sub>) ≤ C<sub>mz</sub> · (1 + 1,4 · n<sub>z</sub>) (I-Profile) · k<sub>yz</sub> = 0,6 · k<sub>zz</sub>",
+  "en": "k<sub>zz</sub> = C<sub>mz</sub> · (1 + (2λ̄<sub>z</sub> − 0.6) · n<sub>z</sub>) ≤ C<sub>mz</sub> · (1 + 1.4 · n<sub>z</sub>) (I-sections) · k<sub>yz</sub> = 0.6 · k<sub>zz</sub>"
+ },
+ {
+  "id": "26-183",
+  "de": "keine Abminderung um y, wenn N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> und N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>",
+  "en": "no reduction about y if N<sub>Ed</sub> ≤ 0.25 · N<sub>pl,Rd</sub> and N<sub>Ed</sub> ≤ 0.5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>"
+ },
+ {
+  "id": "26-184",
+  "de": "l &gt; 150a: Abminderung β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1",
+  "en": "l &gt; 150a: reduction β<sub>Lw</sub> = 1.2 − 0.2 · l / (150a) ≤ 1"
+ },
+ {
+  "id": "26-185",
+  "de": "l<sub>eff</sub> = l − 2a (ohne Endkrater); l<sub>eff</sub> ≥ max(30 mm; 6a)",
+  "en": "l<sub>eff</sub> = l − 2a (without end craters); l<sub>eff</sub> ≥ max(30 mm; 6a)"
+ },
+ {
+  "id": "26-186",
+  "de": "lange Nähte",
+  "en": "long welds"
+ },
+ {
+  "id": "26-187",
+  "de": "lichte Länge abzüglich Nahtdicke √2·a",
+  "en": "clear length minus throat dimension √2·a"
+ },
+ {
+  "id": "26-188",
+  "de": "liegt in der Zugzone → keine c/t-Begrenzung (Klasse 1)",
+  "en": "lies in the tension zone → no c/t limit (class 1)"
+ },
+ {
+  "id": "26-189",
+  "de": "linear (Randmomente)",
+  "en": "linear (end moments)"
+ },
+ {
+  "id": "26-190",
+  "de": "linear zwischen Randmomenten M und ψ·M (−1 ≤ ψ ≤ 1)",
+  "en": "linear between end moments M and ψ·M (−1 ≤ ψ ≤ 1)"
+ },
+ {
+  "id": "26-191",
+  "de": "linearer Momentenverlauf ψ",
+  "en": "linear moment diagram ψ"
+ },
+ {
+  "id": "26-192",
+  "de": "plastisch, mit Rotationskapazität",
+  "en": "plastic, with rotation capacity"
+ },
+ {
+  "id": "26-193",
+  "de": "plastisch, ohne Rotationskapazität",
+  "en": "plastic, without rotation capacity"
+ },
+ {
+  "id": "26-194",
+  "de": "plastisch: gedrückter Stegteil α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = 405,4 mm → α = 405,4 / 585,9 = 0,692",
+  "en": "plastic: compressed part of the web α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = 405.4 mm → α = 405.4 / 585.9 = 0.692"
+ },
+ {
+  "id": "26-195",
+  "de": "quer zur Kraft: k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (Randreihe) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (innere Reihe)",
+  "en": "perpendicular to load: k<sub>1</sub> = min(2.8 · e<sub>2</sub>/d<sub>0</sub> − 1.7; 1.4 · p<sub>2</sub>/d<sub>0</sub> − 1.7; 2.5) (edge row) · k<sub>1</sub> = min(1.4 · p<sub>2</sub>/d<sub>0</sub> − 1.7; 2.5) (inner row)"
+ },
+ {
+  "id": "26-196",
+  "de": "reiner Druck",
+  "en": "pure compression"
+ },
+ {
+  "id": "26-197",
+  "de": "schwache Achse z–z",
+  "en": "weak axis z–z"
+ },
+ {
+  "id": "26-198",
+  "de": "starke Achse y–y",
+  "en": "strong axis y–y"
+ },
+ {
+  "id": "26-199",
+  "de": "t — Erzeugnisdicke (bei Walzprofilen: Flanschdicke t<sub>f</sub>). S235–S355 nach EN 10025-2, S420 nach EN 10025-4, S460 nach EN 10025-3/4. Für Hohlprofile (EN 10210 / 10219) gelten bei S235H, S275H, S355H dieselben Werte.",
+  "en": "t — nominal thickness of the element (for rolled sections: flange thickness t<sub>f</sub>). S235–S355 to EN 10025-2, S420 to EN 10025-4, S460 to EN 10025-3/4. For hollow sections (EN 10210 / 10219) the same values apply to S235H, S275H, S355H."
+ },
+ {
+  "id": "26-200",
+  "de": "unten eingespannt, oben frei (Kragstütze)",
+  "en": "fixed at the base, free at the top (cantilever column)"
+ },
+ {
+  "id": "26-201",
+  "de": "vereinfacht: Abminderung aus Querkraft und Normalkraft nacheinander angesetzt",
+  "en": "simplified: reductions for shear and axial force applied one after the other"
+ },
+ {
+  "id": "26-202",
+  "de": "w / w<sub>zul</sub>",
+  "en": "w / w<sub>perm</sub>"
+ },
+ {
+  "id": "26-203",
+  "de": "w<sub>zul</sub>",
+  "en": "w<sub>perm</sub>"
+ },
+ {
+  "id": "26-204",
+  "de": "wirksame Länge",
+  "en": "effective length"
+ },
+ {
+  "id": "26-205",
+  "de": "wirksame Querschnitte (EN 1993-1-5)",
+  "en": "effective cross-sections (EN 1993-1-5)"
+ },
+ {
+  "id": "26-206",
+  "de": "y und z laufen parallel zu den Schenkeln durch den Schwerpunkt. Die Hauptachsen u (stark) und v (schwach) liegen unter 45°. Für Knicken ist meist i<sub>v</sub> maßgebend.",
+  "en": "y and z run parallel to the legs through the centroid. The principal axes u (strong) and v (weak) lie at 45°. For buckling i<sub>v</sub> usually governs."
+ },
+ {
+  "id": "26-207",
+  "de": "z<sub>g</sub> — Abstand des Lastangriffs vom Schubmittelpunkt, positiv oberhalb (Obergurt: ungünstig)",
+  "en": "z<sub>g</sub> — distance of the load application point from the shear centre, positive above (top flange: unfavourable)"
+ },
+ {
+  "id": "26-208",
+  "de": "zusammengesetzter I-Querschnitt",
+  "en": "built-up I-section"
+ },
+ {
+  "id": "26-209",
+  "de": "zweiachsig: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 mit α = 2, β = 5n ≥ 1",
+  "en": "biaxial: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 with α = 2, β = 5n ≥ 1"
+ },
+ {
+  "id": "26-210",
+  "de": "Äquivalente Momentenbeiwerte C<sub>m</sub> — Anhang B, Tab. B.3",
+  "en": "Equivalent uniform moment factors C<sub>m</sub> — Annex B, Tab. B.3"
+ },
+ {
+  "id": "26-211",
+  "de": "Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) mit λ̄<sub>LT,0</sub> = 0,4 und β = 0,75",
+  "en": "Φ<sub>LT</sub> = 0.5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) with λ̄<sub>LT,0</sub> = 0.4 and β = 0.75"
+ },
+ {
+  "id": "26-212",
+  "de": "α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) mit f<sub>ub</sub>/f<sub>u</sub> = 800/360 = 2,222",
+  "en": "α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) with f<sub>ub</sub>/f<sub>u</sub> = 800/360 = 2.222"
+ },
+ {
+  "id": "26-213",
+  "de": "α<sub>d</sub> (Endschraube)",
+  "en": "α<sub>d</sub> (end bolt)"
+ },
+ {
+  "id": "26-214",
+  "de": "α<sub>d</sub> (innere Schraube)",
+  "en": "α<sub>d</sub> (inner bolt)"
+ },
+ {
+  "id": "26-215",
+  "de": "α<sub>v</sub> (Gewinde in der Scherfuge)",
+  "en": "α<sub>v</sub> (thread in the shear plane)"
+ },
+ {
+  "id": "26-216",
+  "de": "ε = √(235/f<sub>y</sub>) · α — gedrückter Anteil des Innenteils (plastisch) · ψ = σ<sub>2</sub>/σ<sub>1</sub> (elastisch, Druck positiv)",
+  "en": "ε = √(235/f<sub>y</sub>) · α — compressed fraction of the internal part (plastic) · ψ = σ<sub>2</sub>/σ<sub>1</sub> (elastic, compression positive)"
+ },
+ {
+  "id": "26-217",
+  "de": "λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) mit λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε",
+  "en": "λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) with λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93.9 · ε"
+ },
+ {
+  "id": "26-218",
+  "de": "λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) mit W<sub>y</sub> = W<sub>pl,y</sub> (Klasse 1, 2) bzw. W<sub>el,y</sub> (Klasse 3)",
+  "en": "λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) with W<sub>y</sub> = W<sub>pl,y</sub> (class 1, 2) or W<sub>el,y</sub> (class 3)"
+ },
+ {
+  "id": "26-219",
+  "de": "σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · Vergleichsspannung (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²",
+  "en": "σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · von Mises stress (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²"
+ },
+ {
+  "id": "26-220",
+  "de": "σ<sub>⊥</sub>, τ<sub>⊥</sub> — Spannungen senkrecht zur Nahtachse in der Kehlfläche a · l · τ<sub>∥</sub> — parallel zur Nahtachse",
+  "en": "σ<sub>⊥</sub>, τ<sub>⊥</sub> — stresses perpendicular to the weld axis in the throat plane a · l · τ<sub>∥</sub> — parallel to the weld axis"
+ },
+ {
+  "id": "26-221",
+  "de": "χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · für λ̄ ≤ 0,2 oder N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04 ist χ = 1",
+  "en": "χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · for λ̄ ≤ 0.2 or N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0.04, χ = 1"
+ },
+ {
+  "id": "26-222",
+  "de": "χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 und ≤ 1/λ̄<sub>LT</sub>²",
+  "en": "χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 and ≤ 1/λ̄<sub>LT</sub>²"
+ },
+ {
+  "id": "26-223",
+  "de": "ψ (elastisch) = σ<sub>2</sub> / σ<sub>1</sub> an den Stegenden mit σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = -0,412",
+  "en": "ψ (elastic) = σ<sub>2</sub> / σ<sub>1</sub> at the ends of the web with σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = -0.412"
+ },
+ {
+  "id": "26-224",
+  "de": "√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) und σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>",
+  "en": "√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) and σ<sub>⊥</sub> ≤ 0.9 · f<sub>u</sub> / γ<sub>M2</sub>"
+ },
+ {
+  "id": "26-225",
+  "de": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">I<sub>y</sub>, W<sub>y</sub>: Biegung um die starke Achse y–y ·\n    I<sub>z</sub>, W<sub>z</sub>: Biegung um die schwache Achse z–z</div>",
+  "en": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">I<sub>y</sub>, W<sub>y</sub>: bending about the strong axis y–y ·\n    I<sub>z</sub>, W<sub>z</sub>: bending about the weak axis z–z</div>"
+ },
+ {
+  "id": "26-226",
+  "de": "§Fläche und Trägheitsmomente (h<sub>w</sub> = h − 2t<sub>f</sub>)",
+  "en": "§Area and second moments of area (h<sub>w</sub> = h − 2t<sub>f</sub>)"
+ },
+ {
+  "id": "26-227",
+  "de": "§Plastische Widerstandsmomente",
+  "en": "§Plastic section moduli"
+ },
+ {
+  "id": "26-228",
+  "de": "§Schub, Torsion, Wölbung",
+  "en": "§Shear, torsion, warping"
+ },
+ {
+  "id": "26-229",
+  "de": "!I<sub>t</sub> = 2/3 · (b − 0,63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0,145 + 0,1 · r/t<sub>f</sub>) · D⁴ mit D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)",
+  "en": "!I<sub>t</sub> = 2/3 · (b − 0.63 · t<sub>f</sub>) · t<sub>f</sub>³ + 1/3 · h<sub>w</sub> · t<sub>w</sub>³ + 2 · (t<sub>w</sub>/t<sub>f</sub>) · (0.145 + 0.1 · r/t<sub>f</sub>) · D⁴ with D = [(r + t<sub>w</sub>/2)² + (r + t<sub>f</sub>)² − r²] / (2r + t<sub>f</sub>)"
+ },
+ {
+  "id": "26-230",
+  "de": "!W<sub>el</sub> = I / (Randabstand), i = √(I / A)",
+  "en": "!W<sub>el</sub> = I / (extreme fibre distance), i = √(I / A)"
+ }
+]

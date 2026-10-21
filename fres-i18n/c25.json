@@ -1,0 +1,977 @@
+[
+ {
+  "id": "25-0",
+  "de": "<div class=\"calc-field\"><label>Decke</label><select id=\"mwd-d\" onchange=\"updateMWD()\"><option value=\"sb\" selected>Stahlbetondecke</option><option value=\"hb\">Holzbalkendecke</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Floor</label><select id=\"mwd-d\" onchange=\"updateMWD()\"><option value=\"sb\" selected>Reinforced concrete floor</option><option value=\"hb\">Timber joist floor</option></select></div>"
+ },
+ {
+  "id": "25-1",
+  "de": "<div class=\"calc-field\"><label>Auflagertiefe a [mm]</label><input type=\"number\" id=\"mwd-a\" value=\"150\" step=\"any\" oninput=\"updateMWD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bearing depth a [mm]</label><input type=\"number\" id=\"mwd-a\" value=\"150\" step=\"any\" oninput=\"updateMWD()\"></div>"
+ },
+ {
+  "id": "25-2",
+  "de": "<div class=\"calc-field\"><label>Deckenstützweite l<sub>f</sub> [m]</label><input type=\"number\" id=\"mwd-lf\" value=\"5\" step=\"any\" oninput=\"updateMWD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Floor span l<sub>f</sub> [m]</label><input type=\"number\" id=\"mwd-lf\" value=\"5\" step=\"any\" oninput=\"updateMWD()\"></div>"
+ },
+ {
+  "id": "25-3",
+  "de": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] auf die Länge l</label><input type=\"number\" id=\"mwd-N\" value=\"300\" step=\"any\" oninput=\"updateMWD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] over the length l</label><input type=\"number\" id=\"mwd-N\" value=\"300\" step=\"any\" oninput=\"updateMWD()\"></div>"
+ },
+ {
+  "id": "25-4",
+  "de": "§Anwendungsgrenzen (Auszug)",
+  "en": "§Limits of application (extract)"
+ },
+ {
+  "id": "25-5",
+  "de": "!außerdem Gebäudehöhe ≤ 20 m und Nutzlast ≤ 5 kN/m²",
+  "en": "!also building height ≤ 20 m and imposed load ≤ 5 kN/m²"
+ },
+ {
+  "id": "25-6",
+  "de": "§Knicklänge (zweiseitig gehalten)",
+  "en": "§Effective height (supported on two sides)"
+ },
+ {
+  "id": "25-7",
+  "de": "§Abminderung Φ<sub>2</sub> in Wandmitte",
+  "en": "§Reduction Φ<sub>2</sub> at mid-height"
+ },
+ {
+  "id": "25-8",
+  "de": "§Abminderung Φ<sub>1</sub> am Wandkopf und -fuß",
+  "en": "§Reduction Φ<sub>1</sub> at the top and bottom of the wall"
+ },
+ {
+  "id": "25-9",
+  "de": "!f<sub>k</sub> = {} N/mm² {} 1,8 N/mm² → Nenner {}",
+  "en": "!f<sub>k</sub> = {} N/mm² {} 1.8 N/mm² → denominator {}"
+ },
+ {
+  "id": "25-10",
+  "de": "§Tragfähigkeit",
+  "en": "§Resistance"
+ },
+ {
+  "id": "25-11",
+  "de": "Wand t = {} mm, h = {} m, l = {} m",
+  "en": "Wall t = {} mm, h = {} m, l = {} m"
+ },
+ {
+  "id": "25-12",
+  "de": "!Zwischenauflager: Die Verdrehungen der Deckenfelder heben sich auf → kein Φ<sub>1</sub>",
+  "en": "!Intermediate support: the rotations of the floor spans cancel out → no Φ<sub>1</sub>"
+ },
+ {
+  "id": "25-13",
+  "de": "!Endauflager unter der Dachdecke (wenig Auflast, große Verdrehung): Φ<sub>1</sub> = 0,333",
+  "en": "!End support below the roof slab (little vertical load, large rotation): Φ<sub>1</sub> = 0.333"
+ },
+ {
+  "id": "25-14",
+  "de": "<div class=\"calc-field\"><label>Wanddicke t [mm]</label><input type=\"number\" id=\"mwt-t\" value=\"240\" step=\"any\" oninput=\"updateMWT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall thickness t [mm]</label><input type=\"number\" id=\"mwt-t\" value=\"240\" step=\"any\" oninput=\"updateMWT()\"></div>"
+ },
+ {
+  "id": "25-15",
+  "de": "<div class=\"calc-field\"><label>Wandhöhe h<sub>c</sub> [m]</label><input type=\"number\" id=\"mwt-hc\" value=\"2.5\" step=\"any\" oninput=\"updateMWT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall height h<sub>c</sub> [m]</label><input type=\"number\" id=\"mwt-hc\" value=\"2.5\" step=\"any\" oninput=\"updateMWT()\"></div>"
+ },
+ {
+  "id": "25-16",
+  "de": "<div class=\"calc-field\"><label>Wandlänge [m]</label><input type=\"number\" id=\"mwt-lw\" value=\"3\" step=\"any\" oninput=\"updateMWT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall length [m]</label><input type=\"number\" id=\"mwt-lw\" value=\"3\" step=\"any\" oninput=\"updateMWT()\"></div>"
+ },
+ {
+  "id": "25-17",
+  "de": "<div class=\"calc-field\"><label>Auflagerlänge [mm]</label><input type=\"number\" id=\"mwt-lb\" value=\"200\" step=\"any\" oninput=\"updateMWT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bearing length [mm]</label><input type=\"number\" id=\"mwt-lb\" value=\"200\" step=\"any\" oninput=\"updateMWT()\"></div>"
+ },
+ {
+  "id": "25-18",
+  "de": "<div class=\"calc-field\"><label>Auflagerbreite [mm]</label><input type=\"number\" id=\"mwt-bb\" value=\"175\" step=\"any\" oninput=\"updateMWT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bearing width [mm]</label><input type=\"number\" id=\"mwt-bb\" value=\"175\" step=\"any\" oninput=\"updateMWT()\"></div>"
+ },
+ {
+  "id": "25-19",
+  "de": "<div class=\"calc-field\"><label>Abstand vom Wandende a<sub>1</sub> [mm]</label><input type=\"number\" id=\"mwt-a1\" value=\"300\" step=\"any\" oninput=\"updateMWT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Distance from the wall end a<sub>1</sub> [mm]</label><input type=\"number\" id=\"mwt-a1\" value=\"300\" step=\"any\" oninput=\"updateMWT()\"></div>"
+ },
+ {
+  "id": "25-20",
+  "de": "Einzellast auf {} × {} mm",
+  "en": "Concentrated load on {} × {} mm"
+ },
+ {
+  "id": "25-21",
+  "de": "§Lastausbreitung unter 60° bis zur halben Wandhöhe",
+  "en": "§Load spread at 60° down to mid-height of the wall"
+ },
+ {
+  "id": "25-22",
+  "de": "Ausbreitung je Seite = h<sub>c</sub> / (2 · tan 60°) = {} / 3,464 = {} mm",
+  "en": "Spread per side = h<sub>c</sub> / (2 · tan 60°) = {} / 3.464 = {} mm"
+ },
+ {
+  "id": "25-23",
+  "de": "!links begrenzt durch a<sub>1</sub> = {} mm, rechts durch das Wandende",
+  "en": "!limited on the left by a<sub>1</sub> = {} mm, on the right by the wall end"
+ },
+ {
+  "id": "25-24",
+  "de": "§Erhöhungsfaktor (EN 1996-1-1, Gl. 6.10)",
+  "en": "§Enhancement factor (EN 1996-1-1, Eq. 6.10)"
+ },
+ {
+  "id": "25-25",
+  "de": "!N<sub>Edc</sub> / N<sub>Rdc</sub> = {} / {} = {} {} — die Wand darunter zusätzlich als Druckwand nachweisen",
+  "en": "!N<sub>Edc</sub> / N<sub>Rdc</sub> = {} / {} = {} {} — also check the wall below as a wall in compression"
+ },
+ {
+  "id": "25-26",
+  "de": " · Lochsteine (Gruppe 2): β = 1",
+  "en": " · perforated units (Group 2): β = 1"
+ },
+ {
+  "id": "25-27",
+  "de": "<div class=\"calc-field\"><label>Wanddicke t [mm]</label><input type=\"number\" id=\"mwk-t\" value=\"300\" step=\"any\" oninput=\"updateMWK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall thickness t [mm]</label><input type=\"number\" id=\"mwk-t\" value=\"300\" step=\"any\" oninput=\"updateMWK()\"></div>"
+ },
+ {
+  "id": "25-28",
+  "de": "<div class=\"calc-field\"><label>lichte Höhe h [m]</label><input type=\"number\" id=\"mwk-h\" value=\"2.5\" step=\"any\" oninput=\"updateMWK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>clear height h [m]</label><input type=\"number\" id=\"mwk-h\" value=\"2.5\" step=\"any\" oninput=\"updateMWK()\"></div>"
+ },
+ {
+  "id": "25-29",
+  "de": "<div class=\"calc-field\"><label>Anschütthöhe h<sub>e</sub> [m]</label><input type=\"number\" id=\"mwk-he\" value=\"2\" step=\"any\" oninput=\"updateMWK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Backfill height h<sub>e</sub> [m]</label><input type=\"number\" id=\"mwk-he\" value=\"2\" step=\"any\" oninput=\"updateMWK()\"></div>"
+ },
+ {
+  "id": "25-30",
+  "de": "<div class=\"calc-field\"><label>Querwandabstand b<sub>c</sub> [m]</label><input type=\"number\" id=\"mwk-bc\" value=\"4\" step=\"any\" oninput=\"updateMWK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Cross-wall spacing b<sub>c</sub> [m]</label><input type=\"number\" id=\"mwk-bc\" value=\"4\" step=\"any\" oninput=\"updateMWK()\"></div>"
+ },
+ {
+  "id": "25-31",
+  "de": "<div class=\"calc-field\"><label>Wichte Boden ρ<sub>e</sub> [kN/m³]</label><input type=\"number\" id=\"mwk-rho\" value=\"19\" step=\"any\" oninput=\"updateMWK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Unit weight of soil ρ<sub>e</sub> [kN/m³]</label><input type=\"number\" id=\"mwk-rho\" value=\"19\" step=\"any\" oninput=\"updateMWK()\"></div>"
+ },
+ {
+  "id": "25-32",
+  "de": "<div class=\"calc-field\"><label>Geländelast q<sub>k</sub> [kN/m²]</label><input type=\"number\" id=\"mwk-q\" value=\"5\" step=\"any\" oninput=\"updateMWK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Surcharge q<sub>k</sub> [kN/m²]</label><input type=\"number\" id=\"mwk-q\" value=\"5\" step=\"any\" oninput=\"updateMWK()\"></div>"
+ },
+ {
+  "id": "25-33",
+  "de": "§Anwendungsbedingungen (Auszug)",
+  "en": "§Conditions of application (extract)"
+ },
+ {
+  "id": "25-34",
+  "de": "!außerdem: Gelände nicht ansteigend, kein Wasserdruck, Kellerdecke als Scheibe",
+  "en": "!also: ground not sloping upwards, no water pressure, basement ceiling acting as a diaphragm"
+ },
+ {
+  "id": "25-35",
+  "de": "§Beiwert β aus dem Querwandabstand",
+  "en": "§Factor β from the cross-wall spacing"
+ },
+ {
+  "id": "25-36",
+  "de": "§Mindestauflast (Druckbogen gegen den Erddruck)",
+  "en": "§Minimum vertical load (arching against earth pressure)"
+ },
+ {
+  "id": "25-37",
+  "de": "n<sub>Ed,min,erf</sub> = ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t) = {} · {} · {}² / ({} · {}) = {} kN/m",
+  "en": "n<sub>Ed,min,req</sub> = ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t) = {} · {} · {}² / ({} · {}) = {} kN/m"
+ },
+ {
+  "id": "25-38",
+  "de": "§Höchstauflast",
+  "en": "§Maximum vertical load"
+ },
+ {
+  "id": "25-39",
+  "de": "n<sub>Ed,max,zul</sub> = t · f<sub>d</sub> / 3 = {} · {} / 3 = {} kN/m",
+  "en": "n<sub>Ed,max,perm</sub> = t · f<sub>d</sub> / 3 = {} · {} / 3 = {} kN/m"
+ },
+ {
+  "id": "25-40",
+  "de": "!n<sub>Ed,max</sub> / n<sub>zul</sub> = {} / {} = {} {}",
+  "en": "!n<sub>Ed,max</sub> / n<sub>perm</sub> = {} / {} = {} {}"
+ },
+ {
+  "id": "25-41",
+  "de": "<div class=\"calc-field\"><label>Wandlänge l [m]</label><input type=\"number\" id=\"mws-l\" value=\"2.5\" step=\"any\" oninput=\"updateMWS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall length l [m]</label><input type=\"number\" id=\"mws-l\" value=\"2.5\" step=\"any\" oninput=\"updateMWS()\"></div>"
+ },
+ {
+  "id": "25-42",
+  "de": "<div class=\"calc-field\"><label>Wanddicke t [mm]</label><input type=\"number\" id=\"mws-t\" value=\"175\" step=\"any\" oninput=\"updateMWS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall thickness t [mm]</label><input type=\"number\" id=\"mws-t\" value=\"175\" step=\"any\" oninput=\"updateMWS()\"></div>"
+ },
+ {
+  "id": "25-43",
+  "de": "<div class=\"calc-field\"><label>Wandhöhe h [m]</label><input type=\"number\" id=\"mws-h\" value=\"2.75\" step=\"any\" oninput=\"updateMWS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall height h [m]</label><input type=\"number\" id=\"mws-h\" value=\"2.75\" step=\"any\" oninput=\"updateMWS()\"></div>"
+ },
+ {
+  "id": "25-44",
+  "de": "<div class=\"calc-field\"><label>Supports</label><select id=\"mws-lag\" onchange=\"updateMWS()\"><option value=\"krag\" selected>Kragscheibe (oben frei)</option><option value=\"eing\">oben eingespannt (M = V·h/2)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Supports</label><select id=\"mws-lag\" onchange=\"updateMWS()\"><option value=\"krag\" selected>Cantilever shear wall (free at the top)</option><option value=\"eing\">restrained at the top (M = V·h/2)</option></select></div>"
+ },
+ {
+  "id": "25-45",
+  "de": "<div class=\"calc-field\"><label>Stoßfugen</label><select id=\"mws-st\" onchange=\"updateMWS()\"><option value=\"0\">vermörtelt</option><option value=\"1\" selected>unvermörtelt</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Perpend joints</label><select id=\"mws-st\" onchange=\"updateMWS()\"><option value=\"0\">filled</option><option value=\"1\" selected>unfilled</option></select></div>"
+ },
+ {
+  "id": "25-46",
+  "de": "Wandscheibe l = {} m, t = {} mm",
+  "en": "Shear wall l = {} m, t = {} mm"
+ },
+ {
+  "id": "25-47",
+  "de": "§Moment am Wandfuß und Ausmitte",
+  "en": "§Moment at the wall base and eccentricity"
+ },
+ {
+  "id": "25-48",
+  "de": "!klaffende Fuge höchstens bis Wandmitte: e ≤ l/3 = {} m {}",
+  "en": "!open joint at most up to the wall centre: e ≤ l/3 = {} m {}"
+ },
+ {
+  "id": "25-49",
+  "de": "§Überdrückte Länge",
+  "en": "§Compressed length"
+ },
+ {
+  "id": "25-50",
+  "de": " · Stoßfugen unvermörtelt: halber Wert {} N/mm²",
+  "en": " · unfilled perpend joints: half the value {} N/mm²"
+ },
+ {
+  "id": "25-51",
+  "de": "§Schubtragfähigkeit",
+  "en": "§Shear resistance"
+ },
+ {
+  "id": "25-52",
+  "de": "!e ≤ l/6 = {} m: ganze Länge überdrückt, l<sub>c</sub> = {} m",
+  "en": "!e ≤ l/6 = {} m: full length in compression, l<sub>c</sub> = {} m"
+ },
+ {
+  "id": "25-53",
+  "de": "(6.61): 0,363 + 0,692 · 40,0 / 137,3 = 0,565 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "(6.61): 0.363 + 0.692 · 40.0 / 137.3 = 0.565 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "25-54",
+  "de": "(6.62): 0,587 + 0,832 · 40,0 / 137,3 = 0,829 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "(6.62): 0.587 + 0.832 · 40.0 / 137.3 = 0.829 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "25-55",
+  "de": "0,2 + 0,8α<sub>s</sub> ≥ 0,4 bzw. 0,95 + 0,05α<sub>h</sub> (je nach Verlauf, siehe Tab. B.3)",
+  "en": "0.2 + 0.8α<sub>s</sub> ≥ 0.4 or 0.95 + 0.05α<sub>h</sub> (depending on the diagram, see Tab. B.3)"
+ },
+ {
+  "id": "25-56",
+  "de": "16 Profile · Zeile antippen zum Markieren · waagerecht scrollbar",
+  "en": "16 sections · tap a row to highlight · scrolls horizontally"
+ },
+ {
+  "id": "25-57",
+  "de": "18 Profile · Zeile antippen zum Markieren · waagerecht scrollbar",
+  "en": "18 sections · tap a row to highlight · scrolls horizontally"
+ },
+ {
+  "id": "25-58",
+  "de": "22 Profile · Zeile antippen zum Markieren · waagerecht scrollbar",
+  "en": "22 sections · tap a row to highlight · scrolls horizontally"
+ },
+ {
+  "id": "25-59",
+  "de": "34 Profile · Zeile antippen zum Markieren · waagerecht scrollbar",
+  "en": "34 sections · tap a row to highlight · scrolls horizontally"
+ },
+ {
+  "id": "25-60",
+  "de": "42ε / (0,67 + 0,33ψ) für ψ &gt; −1",
+  "en": "42ε / (0.67 + 0.33ψ) for ψ &gt; −1"
+ },
+ {
+  "id": "25-61",
+  "de": "62ε · (1 − ψ) · √(−ψ) für ψ ≤ −1",
+  "en": "62ε · (1 − ψ) · √(−ψ) for ψ ≤ −1"
+ },
+ {
+  "id": "25-62",
+  "de": "7850 kg/m³ (Wichte 78,5 kN/m³)",
+  "en": "7850 kg/m³ (unit weight 78.5 kN/m³)"
+ },
+ {
+  "id": "25-63",
+  "de": "<a class=\"applink\" href=\"#/baustatik/querschnitte/euler\">→ Eulerfälle mit Knickfiguren</a>",
+  "en": "<a class=\"applink\" href=\"#/baustatik/querschnitte/euler\">→ Euler cases with buckling shapes</a>"
+ },
+ {
+  "id": "25-64",
+  "de": "<b>IPE</b> — schmale I-Träger mit parallelen Flanschen, typisch für Biegeträger (Deckenträger, Pfetten). <b>HEA / HEB / HEM</b> — Breitflanschträger, typisch für Stützen und hoch belastete Träger: HEA ist die leichte, HEB die normale und HEM die verstärkte Reihe. Bis zur Nennhöhe 300 ist die Flanschbreite b = Nennhöhe, darüber bleibt b ≈ 300 mm.",
+  "en": "<b>IPE</b> — narrow I-beams with parallel flanges, typical for beams in bending (floor beams, purlins). <b>HEA / HEB / HEM</b> — wide-flange beams, typical for columns and heavily loaded beams: HEA is the light, HEB the standard and HEM the heavy series. Up to a nominal depth of 300 the flange width b = nominal depth; above that b stays ≈ 300 mm."
+ },
+ {
+  "id": "25-65",
+  "de": "<b>UPN</b> (DIN 1026-1) — Flanschinnenseite geneigt: 8 % bis h = 300, darüber 5 %; Ausrundung r<sub>1</sub> = t<sub>f</sub>, Flanschkante r<sub>2</sub> = t<sub>f</sub>/2. <b>UPE</b> (DIN 1026-2) — parallele Flansche, einfacher anzuschließen, etwas höhere Biegesteifigkeit um z.",
+  "en": "<b>UPN</b> (DIN 1026-1) — tapered inner flange faces: 8 % up to h = 300, 5 % above; root radius r<sub>1</sub> = t<sub>f</sub>, flange edge r<sub>2</sub> = t<sub>f</sub>/2. <b>UPE</b> (DIN 1026-2) — parallel flanges, easier to connect, slightly higher bending stiffness about z."
+ },
+ {
+  "id": "25-66",
+  "de": "<span class=\"st-n\">1</span><span>Abscheren je Scherfuge</span>",
+  "en": "<span class=\"st-n\">1</span><span>Shear per shear plane</span>"
+ },
+ {
+  "id": "25-67",
+  "de": "<span class=\"st-n\">1</span><span>Bruttoquerschnitt (Fließen)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Gross cross-section (yielding)</span>"
+ },
+ {
+  "id": "25-68",
+  "de": "<span class=\"st-n\">1</span><span>Durchbiegung in Feldmitte (charakteristische Last)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Midspan deflection (characteristic load)</span>"
+ },
+ {
+  "id": "25-69",
+  "de": "<span class=\"st-n\">1</span><span>Fläche und Trägheitsmomente (h<sub>w</sub> = h − 2t<sub>f</sub>)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Area and second moments of area (h<sub>w</sub> = h − 2t<sub>f</sub>)</span>"
+ },
+ {
+  "id": "25-70",
+  "de": "<span class=\"st-n\">1</span><span>Grenzwerte der Nahtdicke</span>",
+  "en": "<span class=\"st-n\">1</span><span>Limits for the throat thickness</span>"
+ },
+ {
+  "id": "25-71",
+  "de": "<span class=\"st-n\">1</span><span>Ideale Verzweigungslast und Schlankheit</span>",
+  "en": "<span class=\"st-n\">1</span><span>Elastic critical force and slenderness</span>"
+ },
+ {
+  "id": "25-72",
+  "de": "<span class=\"st-n\">1</span><span>Ideales Kippmoment (Gabellagerung an beiden Enden)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Elastic critical moment (fork supports at both ends)</span>"
+ },
+ {
+  "id": "25-73",
+  "de": "<span class=\"st-n\">1</span><span>Nachweisgleichungen (Klasse 1–3)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Verification equations (class 1–3)</span>"
+ },
+ {
+  "id": "25-74",
+  "de": "<span class=\"st-n\">1</span><span>Querschnitt</span>",
+  "en": "<span class=\"st-n\">1</span><span>Cross-section</span>"
+ },
+ {
+  "id": "25-75",
+  "de": "<span class=\"st-n\">1</span><span>Querschnittsklasse (EN 1993-1-1, Tab. 5.2) — N<sub>Ed</sub> = 400 kN, M<sub>y,Ed</sub> = 120 kNm</span>",
+  "en": "<span class=\"st-n\">1</span><span>Cross-section class (EN 1993-1-1, Tab. 5.2) — N<sub>Ed</sub> = 400 kN, M<sub>y,Ed</sub> = 120 kNm</span>"
+ },
+ {
+  "id": "25-76",
+  "de": "<span class=\"st-n\">1</span><span>Querschnittswerte (Schweißnähte vernachlässigt, z von Oberkante)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Section properties (welds neglected, z from the top edge)</span>"
+ },
+ {
+  "id": "25-77",
+  "de": "<span class=\"st-n\">1</span><span>Querschnittswerte HEB 200 (Achse z–z)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Section properties HEB 200 (axis z–z)</span>"
+ },
+ {
+  "id": "25-78",
+  "de": "<span class=\"st-n\">1</span><span>Querschnittswerte IPE 300, S235</span>",
+  "en": "<span class=\"st-n\">1</span><span>Section properties IPE 300, S235</span>"
+ },
+ {
+  "id": "25-79",
+  "de": "<span class=\"st-n\">1</span><span>Rundrohr (D außen, t Wand, d = D − 2t)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Circular tube (D outside, t wall, d = D − 2t)</span>"
+ },
+ {
+  "id": "25-80",
+  "de": "<span class=\"st-n\">1</span><span>Schraube und Blech</span>",
+  "en": "<span class=\"st-n\">1</span><span>Bolt and plate</span>"
+ },
+ {
+  "id": "25-81",
+  "de": "<span class=\"st-n\">1</span><span>Streckgrenze</span>",
+  "en": "<span class=\"st-n\">1</span><span>Yield strength</span>"
+ },
+ {
+  "id": "25-82",
+  "de": "<span class=\"st-n\">1</span><span>Vereinfachtes Verfahren (4.5.3.3)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Simplified method (4.5.3.3)</span>"
+ },
+ {
+  "id": "25-83",
+  "de": "<span class=\"st-n\">1</span><span>Werkstoff und Profil</span>",
+  "en": "<span class=\"st-n\">1</span><span>Material and section</span>"
+ },
+ {
+  "id": "25-84",
+  "de": "<span class=\"st-n\">2</span><span>Abminderungsbeiwert</span>",
+  "en": "<span class=\"st-n\">2</span><span>Reduction factor</span>"
+ },
+ {
+  "id": "25-85",
+  "de": "<span class=\"st-n\">2</span><span>Bezogener Schlankheitsgrad</span>",
+  "en": "<span class=\"st-n\">2</span><span>Non-dimensional slenderness</span>"
+ },
+ {
+  "id": "25-86",
+  "de": "<span class=\"st-n\">2</span><span>Biegeknicken</span>",
+  "en": "<span class=\"st-n\">2</span><span>Flexural buckling</span>"
+ },
+ {
+  "id": "25-87",
+  "de": "<span class=\"st-n\">2</span><span>Druck (6.2.4)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Compression (6.2.4)</span>"
+ },
+ {
+  "id": "25-88",
+  "de": "<span class=\"st-n\">2</span><span>Festigkeit der Naht</span>",
+  "en": "<span class=\"st-n\">2</span><span>Weld strength</span>"
+ },
+ {
+  "id": "25-89",
+  "de": "<span class=\"st-n\">2</span><span>Grenzwert</span>",
+  "en": "<span class=\"st-n\">2</span><span>Limit value</span>"
+ },
+ {
+  "id": "25-90",
+  "de": "<span class=\"st-n\">2</span><span>Ideales Kippmoment M<sub>cr</sub> (Gabellagerung, k = k<sub>w</sub> = 1)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Elastic critical moment M<sub>cr</sub> (fork supports, k = k<sub>w</sub> = 1)</span>"
+ },
+ {
+  "id": "25-91",
+  "de": "<span class=\"st-n\">2</span><span>Interaktionsbeiwerte — Anhang B, Klasse 1 und 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> analog)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Interaction factors — Annex B, class 1 and 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> similarly)</span>"
+ },
+ {
+  "id": "25-92",
+  "de": "<span class=\"st-n\">2</span><span>Lochleibung</span>",
+  "en": "<span class=\"st-n\">2</span><span>Bearing</span>"
+ },
+ {
+  "id": "25-93",
+  "de": "<span class=\"st-n\">2</span><span>Nettoquerschnitt (Bruch)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Net cross-section (fracture)</span>"
+ },
+ {
+  "id": "25-94",
+  "de": "<span class=\"st-n\">2</span><span>Plastische Nulllinie: halbiert die Fläche</span>",
+  "en": "<span class=\"st-n\">2</span><span>Plastic neutral axis: halves the area</span>"
+ },
+ {
+  "id": "25-95",
+  "de": "<span class=\"st-n\">2</span><span>Plastische Widerstandsmomente</span>",
+  "en": "<span class=\"st-n\">2</span><span>Plastic section moduli</span>"
+ },
+ {
+  "id": "25-96",
+  "de": "<span class=\"st-n\">2</span><span>Querkraft (6.2.6)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Shear force (6.2.6)</span>"
+ },
+ {
+  "id": "25-97",
+  "de": "<span class=\"st-n\">2</span><span>Querschnittsklasse</span>",
+  "en": "<span class=\"st-n\">2</span><span>Cross-section class</span>"
+ },
+ {
+  "id": "25-98",
+  "de": "<span class=\"st-n\">2</span><span>Rand- und Lochabstände (Tab. 3.3, Mindestwerte)</span>",
+  "en": "<span class=\"st-n\">2</span><span>End, edge distances and spacings (Tab. 3.3, minimum values)</span>"
+ },
+ {
+  "id": "25-99",
+  "de": "<span class=\"st-n\">2</span><span>Rechteck-Hohlprofil (Mittellinie, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Rectangular hollow section (centreline, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)</span>"
+ },
+ {
+  "id": "25-100",
+  "de": "<span class=\"st-n\">2</span><span>Richtungsbezogenes Verfahren (4.5.3.2)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Directional method (4.5.3.2)</span>"
+ },
+ {
+  "id": "25-101",
+  "de": "<span class=\"st-n\">2</span><span>Schlankheit</span>",
+  "en": "<span class=\"st-n\">2</span><span>Slenderness</span>"
+ },
+ {
+  "id": "25-102",
+  "de": "<span class=\"st-n\">3</span><span>Abminderung — allgemeiner Fall (6.3.2.2)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Reduction — general case (6.3.2.2)</span>"
+ },
+ {
+  "id": "25-103",
+  "de": "<span class=\"st-n\">3</span><span>Abscheren je Schraube</span>",
+  "en": "<span class=\"st-n\">3</span><span>Shear per bolt</span>"
+ },
+ {
+  "id": "25-104",
+  "de": "<span class=\"st-n\">3</span><span>Biegedrillknicken (L = L<sub>cr,z</sub>, Last im Schubmittelpunkt)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Lateral-torsional buckling (L = L<sub>cr,z</sub>, load at the shear centre)</span>"
+ },
+ {
+  "id": "25-105",
+  "de": "<span class=\"st-n\">3</span><span>Biegung (6.2.5)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Bending (6.2.5)</span>"
+ },
+ {
+  "id": "25-106",
+  "de": "<span class=\"st-n\">3</span><span>Doppelkehlnaht unter Querzug F (Kraft senkrecht zur Naht, 45°)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Double fillet weld under transverse tension F (force perpendicular to the weld, 45°)</span>"
+ },
+ {
+  "id": "25-107",
+  "de": "<span class=\"st-n\">3</span><span>Ergebnis</span>",
+  "en": "<span class=\"st-n\">3</span><span>Result</span>"
+ },
+ {
+  "id": "25-108",
+  "de": "<span class=\"st-n\">3</span><span>Knicklinie und Abminderung</span>",
+  "en": "<span class=\"st-n\">3</span><span>Buckling curve and reduction</span>"
+ },
+ {
+  "id": "25-109",
+  "de": "<span class=\"st-n\">3</span><span>Normalkraft</span>",
+  "en": "<span class=\"st-n\">3</span><span>Axial force</span>"
+ },
+ {
+  "id": "25-110",
+  "de": "<span class=\"st-n\">3</span><span>Schlankheit und Abminderung (6.3.2.3, gewalzte Profile)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Slenderness and reduction (6.3.2.3, rolled sections)</span>"
+ },
+ {
+  "id": "25-111",
+  "de": "<span class=\"st-n\">3</span><span>Schub, Torsion, Wölbung</span>",
+  "en": "<span class=\"st-n\">3</span><span>Shear, torsion, warping</span>"
+ },
+ {
+  "id": "25-112",
+  "de": "<span class=\"st-n\">3</span><span>Tragfähigkeit</span>",
+  "en": "<span class=\"st-n\">3</span><span>Resistance</span>"
+ },
+ {
+  "id": "25-113",
+  "de": "<span class=\"st-n\">3</span><span>Werkstoff</span>",
+  "en": "<span class=\"st-n\">3</span><span>Material</span>"
+ },
+ {
+  "id": "25-114",
+  "de": "<span class=\"st-n\">3</span><span>Zug und Durchstanzen</span>",
+  "en": "<span class=\"st-n\">3</span><span>Tension and punching shear</span>"
+ },
+ {
+  "id": "25-115",
+  "de": "<span class=\"st-n\">4</span><span>Abminderung — gewalzte und gleichartige geschweißte Profile (6.3.2.3, NA)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Reduction — rolled and equivalent welded sections (6.3.2.3, NA)</span>"
+ },
+ {
+  "id": "25-116",
+  "de": "<span class=\"st-n\">4</span><span>Abscheren und Zug gleichzeitig</span>",
+  "en": "<span class=\"st-n\">4</span><span>Combined shear and tension</span>"
+ },
+ {
+  "id": "25-117",
+  "de": "<span class=\"st-n\">4</span><span>Biegung</span>",
+  "en": "<span class=\"st-n\">4</span><span>Bending</span>"
+ },
+ {
+  "id": "25-118",
+  "de": "<span class=\"st-n\">4</span><span>Lochleibung (Tab. 3.4)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Bearing (Tab. 3.4)</span>"
+ },
+ {
+  "id": "25-119",
+  "de": "<span class=\"st-n\">4</span><span>Momentenbeiwerte und Interaktionsbeiwerte (Anhang B, Tab. B.2 und B.3)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Moment factors and interaction factors (Annex B, Tab. B.2 and B.3)</span>"
+ },
+ {
+  "id": "25-120",
+  "de": "<span class=\"st-n\">4</span><span>Nachweis</span>",
+  "en": "<span class=\"st-n\">4</span><span>Verification</span>"
+ },
+ {
+  "id": "25-121",
+  "de": "<span class=\"st-n\">4</span><span>Normalkraft und Biegung (6.2.9.1)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Axial force and bending (6.2.9.1)</span>"
+ },
+ {
+  "id": "25-122",
+  "de": "<span class=\"st-n\">4</span><span>Obergurt (einseitig gestützt, Druck)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Top flange (outstand, compression)</span>"
+ },
+ {
+  "id": "25-123",
+  "de": "<span class=\"st-n\">4</span><span>Querkraft (6.2.6)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Shear force (6.2.6)</span>"
+ },
+ {
+  "id": "25-124",
+  "de": "<span class=\"st-n\">4</span><span>Stumpfnähte mit voller Durchschweißung</span>",
+  "en": "<span class=\"st-n\">4</span><span>Full-penetration butt welds</span>"
+ },
+ {
+  "id": "25-125",
+  "de": "<span class=\"st-n\">5</span><span>Biegung und Querkraft (6.2.8)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Bending and shear (6.2.8)</span>"
+ },
+ {
+  "id": "25-126",
+  "de": "<span class=\"st-n\">5</span><span>Gruppe von Verbindungsmitteln (3.7)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Group of fasteners (3.7)</span>"
+ },
+ {
+  "id": "25-127",
+  "de": "<span class=\"st-n\">5</span><span>Nachweise (6.61) und (6.62)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Checks (6.61) and (6.62)</span>"
+ },
+ {
+  "id": "25-128",
+  "de": "<span class=\"st-n\">5</span><span>Querkraft</span>",
+  "en": "<span class=\"st-n\">5</span><span>Shear force</span>"
+ },
+ {
+  "id": "25-129",
+  "de": "<span class=\"st-n\">5</span><span>Steg (beidseitig gestützt, Biegung mit verschobener Nulllinie)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Web (internal part, bending with shifted neutral axis)</span>"
+ },
+ {
+  "id": "25-130",
+  "de": "<span class=\"st-n\">5</span><span>Tragfähigkeit der Verbindung (3.7)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Resistance of the connection (3.7)</span>"
+ },
+ {
+  "id": "25-131",
+  "de": "<span class=\"st-n\">6</span><span>Biegung und Normalkraft (6.2.9, Klasse 1 und 2, I-Profile)</span>",
+  "en": "<span class=\"st-n\">6</span><span>Bending and axial force (6.2.9, class 1 and 2, I-sections)</span>"
+ },
+ {
+  "id": "25-132",
+  "de": "<span class=\"st-n\">6</span><span>Untergurt</span>",
+  "en": "<span class=\"st-n\">6</span><span>Bottom flange</span>"
+ },
+ {
+  "id": "25-133",
+  "de": "<span class=\"st-n\">7</span><span>Ergebnis</span>",
+  "en": "<span class=\"st-n\">7</span><span>Result</span>"
+ },
+ {
+  "id": "25-134",
+  "de": "<span class=\"st-n\">7</span><span>Klasse 3: elastisch (6.2.1)</span>",
+  "en": "<span class=\"st-n\">7</span><span>Class 3: elastic (6.2.1)</span>"
+ },
+ {
+  "id": "25-135",
+  "de": "A/2 = 7.875 mm² oberhalb → z<sub>pl</sub> = 427,5 mm (im Steg: 3.750 + 10 · (z<sub>pl</sub> − 15) = 7.875)",
+  "en": "A/2 = 7.875 mm² above → z<sub>pl</sub> = 427.5 mm (in the web: 3.750 + 10 · (z<sub>pl</sub> − 15) = 7.875)"
+ },
+ {
+  "id": "25-136",
+  "de": "Abmessungen",
+  "en": "Dimensions"
+ },
+ {
+  "id": "25-137",
+  "de": "Abminderungsbeiwert χ über dem bezogenen Schlankheitsgrad λ̄. Bei großer Schlankheit nähern sich alle Kurven der Euler-Hyperbel.",
+  "en": "Reduction factor χ plotted against the non-dimensional slenderness λ̄. At high slenderness all curves approach the Euler hyperbola."
+ },
+ {
+  "id": "25-138",
+  "de": "Abstand der Gabellager L [m]",
+  "en": "Distance between fork supports L [m]"
+ },
+ {
+  "id": "25-139",
+  "de": "Anwendung",
+  "en": "Application"
+ },
+ {
+  "id": "25-140",
+  "de": "Anzahl Nähte",
+  "en": "Number of welds"
+ },
+ {
+  "id": "25-141",
+  "de": "Aus den Nennmaßen einschließlich Ausrundungen berechnet (Formeln unten); Abweichung zu Herstellertabellen ≤ 0,3 %. G = Masse je Meter (ρ = 7850 kg/m³) · A<sub>vz</sub> = Schubfläche für Querkraft in z (η = 1,0) · I<sub>t</sub> = Torsionsträgheitsmoment · I<sub>w</sub> = Wölbwiderstand.",
+  "en": "Calculated from the nominal dimensions including root radii (formulas below); deviation from manufacturer tables ≤ 0.3 %. G = mass per metre (ρ = 7850 kg/m³) · A<sub>vz</sub> = shear area for shear force in z (η = 1.0) · I<sub>t</sub> = torsion constant · I<sub>w</sub> = warping constant."
+ },
+ {
+  "id": "25-142",
+  "de": "Aus der Geometrie (Polygon mit Ausrundungen) numerisch berechnet; Abweichung zu Herstellertabellen ≤ 1 %. e<sub>z</sub> — Schwerpunktabstand vom Steg-Rücken. W<sub>el,z</sub> bezogen auf die Flanschspitze.",
+  "en": "Calculated numerically from the geometry (polygon with root radii); deviation from manufacturer tables ≤ 1 %. e<sub>z</sub> — distance of the centroid from the back of the web. W<sub>el,z</sub> refers to the flange tip."
+ },
+ {
+  "id": "25-143",
+  "de": "Ausweichen",
+  "en": "Buckling direction"
+ },
+ {
+  "id": "25-144",
+  "de": "Ausweichen um",
+  "en": "Buckling about"
+ },
+ {
+  "id": "25-145",
+  "de": "Bei gleichschenkligen Winkeln ist I<sub>y</sub> = I<sub>z</sub>, die Hauptachsen liegen deshalb genau unter 45°.",
+  "en": "For equal-leg angles I<sub>y</sub> = I<sub>z</sub>, so the principal axes lie at exactly 45°."
+ },
+ {
+  "id": "25-146",
+  "de": "Beispiel: Flachstahl 100 × 10, S235, eine Bohrung d<sub>0</sub> = 18 mm im Querschnitt",
+  "en": "Example: flat bar 100 × 10, S235, one hole d<sub>0</sub> = 18 mm in the cross-section"
+ },
+ {
+  "id": "25-147",
+  "de": "Beispiel: zusammengesetzter (geschweißter) Querschnitt",
+  "en": "Example: built-up (welded) cross-section"
+ },
+ {
+  "id": "25-148",
+  "de": "Beiwert ε für die Querschnittsklassen",
+  "en": "Factor ε for the cross-section classes"
+ },
+ {
+  "id": "25-149",
+  "de": "Beulen vor f<sub>y</sub>",
+  "en": "Local buckling before f<sub>y</sub>"
+ },
+ {
+  "id": "25-150",
+  "de": "Bezeichnungen",
+  "en": "Notation"
+ },
+ {
+  "id": "25-151",
+  "de": "Biegedrillknicken (Kippen) — EN 1993-1-1, 6.3.2",
+  "en": "Lateral-torsional buckling — EN 1993-1-1, 6.3.2"
+ },
+ {
+  "id": "25-152",
+  "de": "Biegedrillknicken IPE 300, L = 6,00 m",
+  "en": "Lateral-torsional buckling IPE 300, L = 6.00 m"
+ },
+ {
+  "id": "25-153",
+  "de": "Biegeknicken HEB 200, S235, L<sub>cr</sub> = 4,00 m",
+  "en": "Flexural buckling HEB 200, S235, L<sub>cr</sub> = 4.00 m"
+ },
+ {
+  "id": "25-154",
+  "de": "Biegeknicken — EN 1993-1-1, 6.3.1",
+  "en": "Flexural buckling — EN 1993-1-1, 6.3.1"
+ },
+ {
+  "id": "25-155",
+  "de": "Biegung um y",
+  "en": "Bending about y"
+ },
+ {
+  "id": "25-156",
+  "de": "Biegung um y: Flansch c/t = 5,28, Steg c/t = 35,01 → <b>Klasse 1</b> · reiner Druck: Steg c/t = 35,01 → <b>Klasse 2</b>",
+  "en": "Bending about y: flange c/t = 5.28, web c/t = 35.01 → <b>Class 1</b> · pure compression: web c/t = 35.01 → <b>Class 2</b>"
+ },
+ {
+  "id": "25-157",
+  "de": "Biegung und Druck HEB 200",
+  "en": "Bending and compression HEB 200"
+ },
+ {
+  "id": "25-158",
+  "de": "Biegung und Druck — Ersatzstabverfahren (6.3.3)",
+  "en": "Bending and compression — equivalent member method (6.3.3)"
+ },
+ {
+  "id": "25-159",
+  "de": "Blechdicke t [mm] (maßgebend)",
+  "en": "Plate thickness t [mm] (governing)"
+ },
+ {
+  "id": "25-160",
+  "de": "Blechdicke t<sub>1</sub> [mm]",
+  "en": "Plate thickness t<sub>1</sub> [mm]"
+ },
+ {
+  "id": "25-161",
+  "de": "Blechdicke t<sub>2</sub> [mm]",
+  "en": "Plate thickness t<sub>2</sub> [mm]"
+ },
+ {
+  "id": "25-162",
+  "de": "Dachträger, Pfetten",
+  "en": "Roof beams, purlins"
+ },
+ {
+  "id": "25-163",
+  "de": "Deckenträger allgemein",
+  "en": "Floor beams in general"
+ },
+ {
+  "id": "25-164",
+  "de": "Deckenträger unter spröden Trennwänden",
+  "en": "Floor beams supporting brittle partitions"
+ },
+ {
+  "id": "25-165",
+  "de": "Der Querschnitt hat die ungünstigere Klasse: <b>Klasse 2</b>",
+  "en": "The cross-section takes the less favourable class: <b>Class 2</b>"
+ },
+ {
+  "id": "25-166",
+  "de": "Der Schwerpunkt S liegt außerhalb der Stegmitte (Abstand e<sub>z</sub> vom Steg-Rücken). Der Schubmittelpunkt liegt auf der anderen Seite des Stegs — Querlast im Steg erzeugt Torsion.",
+  "en": "The centroid S lies off the web centreline (distance e<sub>z</sub> from the back of the web). The shear centre lies on the other side of the web — a transverse load applied in the web causes torsion."
+ },
+ {
+  "id": "25-167",
+  "de": "Dichte ρ",
+  "en": "Density ρ"
+ },
+ {
+  "id": "25-168",
+  "de": "Die Grenzwerte sind in DIN EN 1993-1-1/NA nicht verbindlich festgelegt, sondern mit dem Bauherrn zu vereinbaren. Übliche Anhaltswerte (charakteristische Lastkombination):",
+  "en": "DIN EN 1993-1-1/NA does not prescribe binding limits; they are to be agreed with the client. Usual guide values (characteristic load combination):"
+ },
+ {
+  "id": "25-169",
+  "de": "Druck + Biegung",
+  "en": "Compression + bending"
+ },
+ {
+  "id": "25-170",
+  "de": "Druck oben (positives Moment) · Maße in mm",
+  "en": "Compression at the top (positive moment) · dimensions in mm"
+ },
+ {
+  "id": "25-171",
+  "de": "Durchbiegung berechnen",
+  "en": "Calculate deflection"
+ },
+ {
+  "id": "25-172",
+  "de": "Durchbiegung im Grenzzustand der Gebrauchstauglichkeit",
+  "en": "Deflection in the serviceability limit state"
+ },
+ {
+  "id": "25-173",
+  "de": "Ein auf Biegung um die starke Achse beanspruchter Träger kann seitlich ausweichen und sich gleichzeitig verdrehen. Gefährdet sind offene, schlanke Profile (IPE, hohe HEA) mit großem Abstand der seitlichen Halterungen. Hohlprofile kippen praktisch nicht.",
+  "en": "A beam bent about its strong axis can deflect sideways and twist at the same time. Open, slender sections (IPE, deep HEA) with widely spaced lateral restraints are at risk. Hollow sections practically never buckle laterally."
+ },
+ {
+  "id": "25-174",
+  "de": "Einfeldträger IPE 300, L = 6,00 m",
+  "en": "Simply supported beam IPE 300, L = 6.00 m"
+ },
+ {
+  "id": "25-175",
+  "de": "Einfeldträger, Einzellast F in Feldmitte",
+  "en": "Simply supported beam, point load F at midspan"
+ },
+ {
+  "id": "25-176",
+  "de": "Einfeldträger, Gleichlast q",
+  "en": "Simply supported beam, uniform load q"
+ },
+ {
+  "id": "25-177",
+  "de": "Einfeldträger, Gleichstreckenlast",
+  "en": "Simply supported beam, uniformly distributed load"
+ },
+ {
+  "id": "25-178",
+  "de": "Einfeldträger, zwei Einzellasten in den Drittelspunkten",
+  "en": "Simply supported beam, two point loads at the third points"
+ },
+ {
+  "id": "25-179",
+  "de": "Einzellast",
+  "en": "Point load"
+ },
+ {
+  "id": "25-180",
+  "de": "Elastizitätsmodul E",
+  "en": "Modulus of elasticity E"
+ },
+ {
+  "id": "25-181",
+  "de": "Empfehlung nach Blechdicke",
+  "en": "Recommendation by plate thickness"
+ },
+ {
+  "id": "25-182",
+  "de": "F<sub>Rd</sub> = 349,1 kN (4 Schrauben)",
+  "en": "F<sub>Rd</sub> = 349.1 kN (4 bolts)"
+ },
+ {
+  "id": "25-183",
+  "de": "F<sub>b,Rd</sub> (Endschraube, Randreihe) = 2,500 · 0,606 · 360 · 20 · 10,0 / 1,25 = 87,3 kN",
+  "en": "F<sub>b,Rd</sub> (end bolt, edge row) = 2.500 · 0.606 · 360 · 20 · 10.0 / 1.25 = 87.3 kN"
+ },
+ {
+  "id": "25-184",
+  "de": "F<sub>b,Rd</sub> (innereschraube, Randreihe) = 2,500 · 0,811 · 360 · 20 · 10,0 / 1,25 = 116,7 kN",
+  "en": "F<sub>b,Rd</sub> (inner bolt, edge row) = 2.500 · 0.811 · 360 · 20 · 10.0 / 1.25 = 116.7 kN"
+ },
+ {
+  "id": "25-185",
+  "de": "F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> mit α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)",
+  "en": "F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> with α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)"
+ },
+ {
+  "id": "25-186",
+  "de": "F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> mit k<sub>2</sub> = 0,9 (0,63 bei Senkschrauben)",
+  "en": "F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> with k<sub>2</sub> = 0.9 (0.63 for countersunk bolts)"
+ },
+ {
+  "id": "25-187",
+  "de": "F<sub>v,Rd</sub> &lt; F<sub>b,Rd</sub> bei mindestens einer Schraube → n · kleinster Einzelwiderstand",
+  "en": "F<sub>v,Rd</sub> &lt; F<sub>b,Rd</sub> for at least one bolt → n · smallest individual resistance"
+ },
+ {
+  "id": "25-188",
+  "de": "F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (je Längeneinheit) mit f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)",
+  "en": "F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (per unit length) with f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)"
+ },
+ {
+  "id": "25-189",
+  "de": "Festigkeiten — EN 1993-1-1, Tab. 3.1",
+  "en": "Strengths — EN 1993-1-1, Tab. 3.1"
+ },
+ {
+  "id": "25-190",
+  "de": "Flansch (einseitig gestützt, Druck): c = (b − t<sub>w</sub> − 2r) / 2",
+  "en": "Flange (outstand, compression): c = (b − t<sub>w</sub> − 2r) / 2"
+ },
+ {
+  "id": "25-191",
+  "de": "Flansch (halbe Breite)",
+  "en": "Flange (half width)"
+ },
+ {
+  "id": "25-192",
+  "de": "Flansch einseitig gestützt, Druck",
+  "en": "Outstand flange, compression"
+ },
+ {
+  "id": "25-193",
+  "de": "Fließgelenktheorie zulässig",
+  "en": "Plastic hinge analysis permitted"
+ },
+ {
+  "id": "25-194",
+  "de": "Formeln",
+  "en": "Formulas"
+ }
+]

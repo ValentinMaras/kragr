@@ -1,0 +1,887 @@
+[
+ {
+  "id": "14-0",
+  "de": "L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K&nbsp;&nbsp;&nbsp; L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>Decke</sub>)&nbsp;&nbsp; (DIN 4109-32)<br> Zementestrich auf Trittschalldämmung:&nbsp; ΔL<sub>w</sub> = 13 · lg(m′<sub>Estrich</sub>) − 14,2 · lg(s′) + 20,8 dB",
+  "en": "L′<sub>n,w</sub> = L<sub>n,eq,0,w</sub> − ΔL<sub>w</sub> + K&nbsp;&nbsp;&nbsp; L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>slab</sub>)&nbsp;&nbsp; (DIN 4109-32)<br> Cement screed on impact sound insulation:&nbsp; ΔL<sub>w</sub> = 13 · lg(m′<sub>screed</sub>) − 14.2 · lg(s′) + 20.8 dB"
+ },
+ {
+  "id": "14-1",
+  "de": "M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) mit m′<sub>⊥</sub> = Trennbauteil · Kreuzstoß: K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · T-Stoß: K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²",
+  "en": "M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) with m′<sub>⊥</sub> = separating element · cross junction: K<sub>13</sub> = 8.7 + 17.1·M + 5.7·M², K<sub>12</sub> = 8.7 + 5.7·M² · T-junction: K<sub>13</sub> = 5.7 + 14.1·M + 5.7·M², K<sub>12</sub> = 5.7 + 5.7·M²"
+ },
+ {
+  "id": "14-2",
+  "de": "Massegesetz: Schwere Bauteile dämmen gut. Doppelte Masse bringt rund 9 dB. Löcher, Steckdosen gegenüber und offene Stoßfugen verschlechtern das Ergebnis deutlich.",
+  "en": "Mass law: heavy components insulate well. Doubling the mass gains about 9 dB. Holes, back-to-back sockets and open joints worsen the result considerably."
+ },
+ {
+  "id": "14-3",
+  "de": "Massezunahme ≤ 5 % bzw. 3 %",
+  "en": "Mass increase ≤ 5 % or 3 %"
+ },
+ {
+  "id": "14-4",
+  "de": "Massivdecke mit schwimmendem Estrich",
+  "en": "Solid floor with floating screed"
+ },
+ {
+  "id": "14-5",
+  "de": "Mindestanforderungen nach DIN 4109-1 (Anhaltswerte). Erhöhter Schallschutz ist vertraglich zu vereinbaren.",
+  "en": "Minimum requirements to DIN 4109-1 (guide values). Enhanced sound insulation must be agreed contractually."
+ },
+ {
+  "id": "14-6",
+  "de": "Mindestwert K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) mit S<sub>f</sub> = l<sub>f</sub> · Raumtiefe",
+  "en": "Minimum value K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) with S<sub>f</sub> = l<sub>f</sub> · room depth"
+ },
+ {
+  "id": "14-7",
+  "de": "Mindestwärmeschutz DIN 4108-2 (Außenwand): R = 4,79 ≥ 1,20 m²K/W ✓",
+  "en": "Minimum thermal insulation DIN 4108-2 (external wall): R = 4.79 ≥ 1.20 m²K/W ✓"
+ },
+ {
+  "id": "14-8",
+  "de": "Mindestwärmeschutz und Gebäudeenergiegesetz",
+  "en": "Minimum thermal insulation and Building Energy Act (GEG)"
+ },
+ {
+  "id": "14-9",
+  "de": "Mineralwolle WLS 032",
+  "en": "Mineral wool WLS 032"
+ },
+ {
+  "id": "14-10",
+  "de": "Mineralwolle WLS 035",
+  "en": "Mineral wool WLS 035"
+ },
+ {
+  "id": "14-11",
+  "de": "Mineralwolle WLS 035: s<sub>d</sub> = 0,060 m",
+  "en": "Mineral wool WLS 035: s<sub>d</sub> = 0.060 m"
+ },
+ {
+  "id": "14-12",
+  "de": "Minuten",
+  "en": "minutes"
+ },
+ {
+  "id": "14-13",
+  "de": "Nadelholz",
+  "en": "Softwood"
+ },
+ {
+  "id": "14-14",
+  "de": "Normalbeton (unbewehrt)",
+  "en": "Normal-weight concrete (unreinforced)"
+ },
+ {
+  "id": "14-15",
+  "de": "OSB-Platte",
+  "en": "OSB board"
+ },
+ {
+  "id": "14-16",
+  "de": "PE-Folie 0,2 mm (s_d = 100 m)",
+  "en": "PE film 0.2 mm (s_d = 100 m)"
+ },
+ {
+  "id": "14-17",
+  "de": "Pegel und Schalldämmung",
+  "en": "Levels and sound insulation"
+ },
+ {
+  "id": "14-18",
+  "de": "Planziegel wärmedämmend (λ 0,09)",
+  "en": "Thermally insulating precision brick (λ 0.09)"
+ },
+ {
+  "id": "14-19",
+  "de": "Porenbeton RDK 0,35",
+  "en": "Autoclaved aerated concrete RDK 0.35"
+ },
+ {
+  "id": "14-20",
+  "de": "R — Tragfähigkeit · E — Raumabschluss · I — Wärmedämmung · M — mechanische Beanspruchung. Bemessung im Brandfall: Holz siehe Abbrand, Stahlbeton über Mindestmaße (Achsabstand der Bewehrung).",
+  "en": "R — load-bearing capacity · E — integrity · I — insulation · M — mechanical action. Fire design: for timber see charring, for reinforced concrete via minimum dimensions (axis distance of the reinforcement)."
+ },
+ {
+  "id": "14-21",
+  "de": "R<sub>w</sub> = 30,9 · lg(m′ / (1 kg/m²)) − 22,2 dB&nbsp;&nbsp;&nbsp; (DIN 4109-32, 65 ≤ m′ ≤ 720 kg/m²)&nbsp;&nbsp;&nbsp; m′ = Σ ρ<sub>i</sub> · d<sub>i</sub> inkl. Putz",
+  "en": "R<sub>w</sub> = 30.9 · lg(m′ / (1 kg/m²)) − 22.2 dB&nbsp;&nbsp;&nbsp; (DIN 4109-32, 65 ≤ m′ ≤ 720 kg/m²)&nbsp;&nbsp;&nbsp; m′ = Σ ρ<sub>i</sub> · d<sub>i</sub> incl. plaster"
+ },
+ {
+  "id": "14-22",
+  "de": "Raumtiefe (für K<sub>ij,min</sub>) [m]",
+  "en": "Room depth (for K<sub>ij,min</sub>) [m]"
+ },
+ {
+  "id": "14-23",
+  "de": "Regel: innen dichter als außen. Die Dampfbremse gehört auf die warme Seite der Dämmung, außen sollten die Schichten diffusionsoffen sein — sonst staut sich der Dampf vor der kalten Außenschicht.",
+  "en": "Rule: tighter inside than outside. The vapour retarder belongs on the warm side of the insulation; the outer layers should be vapour-permeable — otherwise vapour builds up in front of the cold outer layer."
+ },
+ {
+  "id": "14-24",
+  "de": "Resonanzfrequenz:&nbsp; f<sub>0</sub> = 160 · √(s′ · (1/m′<sub>1</sub> + 1/m′<sub>2</sub>))&nbsp;&nbsp; [Hz]&nbsp;&nbsp;&nbsp; Ziel: f<sub>0</sub> ≤ 100 Hz (besser ≤ 80 Hz)",
+  "en": "Resonance frequency:&nbsp; f<sub>0</sub> = 160 · √(s′ · (1/m′<sub>1</sub> + 1/m′<sub>2</sub>))&nbsp;&nbsp; [Hz]&nbsp;&nbsp;&nbsp; Target: f<sub>0</sub> ≤ 100 Hz (better ≤ 80 Hz)"
+ },
+ {
+  "id": "14-25",
+  "de": "Rohdecke m′ [kg/m²]",
+  "en": "Structural slab m′ [kg/m²]"
+ },
+ {
+  "id": "14-26",
+  "de": "R′<sub>w</sub> = −10 · lg( 10<sup>−R<sub>Dd,w</sub>/10</sup> + Σ<sub>F=f</sub> 10<sup>−R<sub>Ff,w</sub>/10</sup> + Σ<sub>f</sub> 10<sup>−R<sub>Df,w</sub>/10</sup> + Σ<sub>F</sub> 10<sup>−R<sub>Fd,w</sub>/10</sup> )<br> R<sub>ij,w</sub> = (R<sub>i,w</sub> + R<sub>j,w</sub>)/2 + ΔR<sub>ij,w</sub> + K<sub>ij</sub> + 10 · lg(S<sub>s</sub> / (l<sub>0</sub> · l<sub>f</sub>))&nbsp;&nbsp;&nbsp; l<sub>0</sub> = 1 m<br> Stoßstellendämmmaß starrer Stöße, M = lg(m′<sub>⊥</sub>/m′<sub>i</sub>):&nbsp; Kreuzstoß K<sub>13</sub> = 8,7 + 17,1M + 5,7M², K<sub>12</sub> = 8,7 + 5,7M² · T-Stoß K<sub>13</sub> = 5,7 + 14,1M + 5,7M², K<sub>12</sub> = 5,7 + 5,7M²<br> Nachweis:&nbsp; R′<sub>w</sub> − u<sub>prog</sub> ≥ erf. R′<sub>w</sub>&nbsp;&nbsp; mit u<sub>prog</sub> = 2 dB",
+  "en": "R′<sub>w</sub> = −10 · lg( 10<sup>−R<sub>Dd,w</sub>/10</sup> + Σ<sub>F=f</sub> 10<sup>−R<sub>Ff,w</sub>/10</sup> + Σ<sub>f</sub> 10<sup>−R<sub>Df,w</sub>/10</sup> + Σ<sub>F</sub> 10<sup>−R<sub>Fd,w</sub>/10</sup> )<br> R<sub>ij,w</sub> = (R<sub>i,w</sub> + R<sub>j,w</sub>)/2 + ΔR<sub>ij,w</sub> + K<sub>ij</sub> + 10 · lg(S<sub>s</sub> / (l<sub>0</sub> · l<sub>f</sub>))&nbsp;&nbsp;&nbsp; l<sub>0</sub> = 1 m<br> Vibration reduction index of rigid junctions, M = lg(m′<sub>⊥</sub>/m′<sub>i</sub>):&nbsp; cross junction K<sub>13</sub> = 8.7 + 17.1M + 5.7M², K<sub>12</sub> = 8.7 + 5.7M² · T-junction K<sub>13</sub> = 5.7 + 14.1M + 5.7M², K<sub>12</sub> = 5.7 + 5.7M²<br> Verification:&nbsp; R′<sub>w</sub> − u<sub>prog</sub> ≥ req. R′<sub>w</sub>&nbsp;&nbsp; with u<sub>prog</sub> = 2 dB"
+ },
+ {
+  "id": "14-27",
+  "de": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) über 13 Wege = 57,7 dB",
+  "en": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) over 13 paths = 57.7 dB"
+ },
+ {
+  "id": "14-28",
+  "de": "R′<sub>w</sub> − u<sub>prog</sub> = 57,7 − 2 = 55,7 dB ≥ erf. R′<sub>w</sub> = 53 dB ✓",
+  "en": "R′<sub>w</sub> − u<sub>prog</sub> = 57.7 − 2 = 55.7 dB ≥ req. R′<sub>w</sub> = 53 dB ✓"
+ },
+ {
+  "id": "14-29",
+  "de": "Schall geht nicht nur direkt durch die Trennwand (Dd), sondern auch über die angrenzenden Bauteile: entlang der Flanke (Ff) und um die Ecke (Df, Fd). Je Flanke drei Wege, bei vier Flanken zwölf.",
+  "en": "Sound passes not only directly through the separating wall (Dd) but also via the adjoining components: along the flank (Ff) and round the corner (Df, Fd). Three paths per flank, twelve for four flanks."
+ },
+ {
+  "id": "14-30",
+  "de": "Schalldruckpegel:&nbsp; L = 20 · lg(p / p<sub>0</sub>)&nbsp;&nbsp; (p<sub>0</sub> = 20 μPa)&nbsp;&nbsp;&nbsp; Addition:&nbsp; L<sub>ges</sub> = 10 · lg(Σ 10<sup>L<sub>i</sub>/10</sup>)<br> zwei gleich laute Quellen: + 3 dB&nbsp;&nbsp;&nbsp; zehn gleich laute Quellen: + 10 dB&nbsp;&nbsp;&nbsp; + 10 dB werden als „doppelt so laut“ empfunden<br> Schalldämmmaß:&nbsp; R = L<sub>1</sub> − L<sub>2</sub> + 10 · lg(S / A)&nbsp;&nbsp;&nbsp; R′ (mit Apostroph): im Bau, mit Flankenübertragung",
+  "en": "Sound pressure level:&nbsp; L = 20 · lg(p / p<sub>0</sub>)&nbsp;&nbsp; (p<sub>0</sub> = 20 μPa)&nbsp;&nbsp;&nbsp; Addition:&nbsp; L<sub>tot</sub> = 10 · lg(Σ 10<sup>L<sub>i</sub>/10</sup>)<br> two equally loud sources: + 3 dB&nbsp;&nbsp;&nbsp; ten equally loud sources: + 10 dB&nbsp;&nbsp;&nbsp; + 10 dB is perceived as “twice as loud”<br> Sound reduction index:&nbsp; R = L<sub>1</sub> − L<sub>2</sub> + 10 · lg(S / A)&nbsp;&nbsp;&nbsp; R′ (with prime): in the building, with flanking transmission"
+ },
+ {
+  "id": "14-31",
+  "de": "Schicht",
+  "en": "Layer"
+ },
+ {
+  "id": "14-32",
+  "de": "Schicht (innen → außen)",
+  "en": "Layer (inside → outside)"
+ },
+ {
+  "id": "14-33",
+  "de": "Schicht 1 (innen → außen): Baustoff / d [cm]",
+  "en": "Layer 1 (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-34",
+  "de": "Schicht 2 (innen → außen): Baustoff / d [cm]",
+  "en": "Layer 2 (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-35",
+  "de": "Schicht 3 (innen → außen): Baustoff / d [cm]",
+  "en": "Layer 3 (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-36",
+  "de": "Schicht 4 (innen → außen): Baustoff / d [cm]",
+  "en": "Layer 4 (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-37",
+  "de": "Schicht 5 (innen → außen): Baustoff / d [cm]",
+  "en": "Layer 5 (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-38",
+  "de": "Schicht 6 (innen → außen): Baustoff / d [cm]",
+  "en": "Layer 6 (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-39",
+  "de": "Schimmel: f<sub>Rsi</sub> = 1 − U · 0,25 = 0,950 ≥ 0,70 ✓ (ungestörter Bereich, R<sub>si</sub> = 0,25)",
+  "en": "Mould: f<sub>Rsi</sub> = 1 − U · 0.25 = 0.950 ≥ 0.70 ✓ (undisturbed area, R<sub>si</sub> = 0.25)"
+ },
+ {
+  "id": "14-40",
+  "de": "Schutz gegen Außenlärm",
+  "en": "Protection against external noise"
+ },
+ {
+  "id": "14-41",
+  "de": "Senderaum",
+  "en": "Source room"
+ },
+ {
+  "id": "14-42",
+  "de": "Stelle",
+  "en": "Location"
+ },
+ {
+  "id": "14-43",
+  "de": "Sättigungsdampfdruck (DIN 4108-3):&nbsp; p<sub>s</sub> = 610,5 · e<sup>17,269 · θ / (237,3 + θ)</sup>&nbsp; (θ ≥ 0 °C)&nbsp;&nbsp;&nbsp; p<sub>s</sub> = 610,5 · e<sup>21,875 · θ / (265,5 + θ)</sup>&nbsp; (θ &lt; 0 °C)<br> Wasserdampfpartialdruck:&nbsp; p = φ · p<sub>s</sub>(θ)&nbsp;&nbsp;&nbsp; Taupunkt θ<sub>s</sub>: die Temperatur, bei der p<sub>s</sub>(θ<sub>s</sub>) = p",
+  "en": "Saturation vapour pressure (DIN 4108-3):&nbsp; p<sub>s</sub> = 610.5 · e<sup>17.269 · θ / (237.3 + θ)</sup>&nbsp; (θ ≥ 0 °C)&nbsp;&nbsp;&nbsp; p<sub>s</sub> = 610.5 · e<sup>21.875 · θ / (265.5 + θ)</sup>&nbsp; (θ &lt; 0 °C)<br> Water vapour partial pressure:&nbsp; p = φ · p<sub>s</sub>(θ)&nbsp;&nbsp;&nbsp; Dew point θ<sub>s</sub>: the temperature at which p<sub>s</sub>(θ<sub>s</sub>) = p"
+ },
+ {
+  "id": "14-44",
+  "de": "Taupunkt und Oberflächentemperatur",
+  "en": "Dew point and surface temperature"
+ },
+ {
+  "id": "14-45",
+  "de": "Tauwasser",
+  "en": "Condensation"
+ },
+ {
+  "id": "14-46",
+  "de": "Tauwasser im Bauteil — Glaser-Verfahren (DIN 4108-3)",
+  "en": "Condensation within the component — Glaser method (DIN 4108-3)"
+ },
+ {
+  "id": "14-47",
+  "de": "Tauwassermasse m<sub>W,T</sub>",
+  "en": "Condensate mass m<sub>W,T</sub>"
+ },
+ {
+  "id": "14-48",
+  "de": "Temperaturfaktor:&nbsp; f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) ≥ 0,70&nbsp;&nbsp;&nbsp; (θ<sub>i</sub> = 20 °C, θ<sub>e</sub> = −5 °C → θ<sub>si</sub> ≥ 12,6 °C)<br> Wärmebrückenzuschlag (GEG):&nbsp; ΔU<sub>WB</sub> = 0,10 W/(m²K) pauschal · 0,05 nach DIN 4108 Beiblatt 2 (Kategorie A) · 0,03 (Kategorie B) · sonst genauer Nachweis mit ψ-Werten",
+  "en": "Temperature factor:&nbsp; f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) ≥ 0.70&nbsp;&nbsp;&nbsp; (θ<sub>i</sub> = 20 °C, θ<sub>e</sub> = −5 °C → θ<sub>si</sub> ≥ 12.6 °C)<br> Thermal bridge allowance (GEG):&nbsp; ΔU<sub>WB</sub> = 0.10 W/(m²K) flat rate · 0.05 to DIN 4108 Supplement 2 (category A) · 0.03 (category B) · otherwise detailed verification with ψ-values"
+ },
+ {
+  "id": "14-49",
+  "de": "Trennbauteil m′ = 504 kg/m², S = 10,4 m²",
+  "en": "Separating element m′ = 504 kg/m², S = 10.4 m²"
+ },
+ {
+  "id": "14-50",
+  "de": "Trennbauteil m′ [kg/m²]",
+  "en": "Separating element m′ [kg/m²]"
+ },
+ {
+  "id": "14-51",
+  "de": "Trennfläche S<sub>s</sub> [m²]",
+  "en": "Separating area S<sub>s</sub> [m²]"
+ },
+ {
+  "id": "14-52",
+  "de": "Trennwand D/d, Flanken F (Senderaum) und f (Empfangsraum)",
+  "en": "Separating wall D/d, flanks F (source room) and f (receiving room)"
+ },
+ {
+  "id": "14-53",
+  "de": "Trennwand mit vier Flanken",
+  "en": "Separating wall with four flanks"
+ },
+ {
+  "id": "14-54",
+  "de": "Trittschall — Massivdecke mit schwimmendem Estrich",
+  "en": "Impact sound — solid floor with floating screed"
+ },
+ {
+  "id": "14-55",
+  "de": "Trittschalldämmung s′ [MN/m³]",
+  "en": "Impact sound insulation s′ [MN/m³]"
+ },
+ {
+  "id": "14-56",
+  "de": "U GEG Referenzgebäude [W/(m²K)]",
+  "en": "U GEG reference building [W/(m²K)]"
+ },
+ {
+  "id": "14-57",
+  "de": "U GEG Änderung im Bestand [W/(m²K)]",
+  "en": "U GEG alteration of existing building [W/(m²K)]"
+ },
+ {
+  "id": "14-58",
+  "de": "U-Wert der Außenwand [W/(m²K)] (optional)",
+  "en": "U-value of the external wall [W/(m²K)] (optional)"
+ },
+ {
+  "id": "14-59",
+  "de": "U-Wert und Temperaturverlauf berechnen",
+  "en": "Calculate U-value and temperature profile"
+ },
+ {
+  "id": "14-60",
+  "de": "Verbesserung ΔR<sub>Dd</sub> (Vorsatzschale) [dB]",
+  "en": "Improvement ΔR<sub>Dd</sub> (lining) [dB]"
+ },
+ {
+  "id": "14-61",
+  "de": "Vollziegel RDK 1,8",
+  "en": "Solid brick RDK 1.8"
+ },
+ {
+  "id": "14-62",
+  "de": "Waagerecht der Diffusionswiderstand s<sub>d</sub>: Dichte Schichten (Folien) werden breit. Rot: Sättigungsdampfdruck, blau: Dampfdruck — berührt die blaue Linie die rote, fällt Tauwasser aus.",
+  "en": "Horizontally the diffusion resistance s<sub>d</sub>: tight layers (films) become wide. Red: saturation vapour pressure, blue: vapour pressure — where the blue line touches the red one, condensation occurs."
+ },
+ {
+  "id": "14-63",
+  "de": "Warme Luft kann mehr Wasserdampf tragen. Kühlt sie an einer kalten Oberfläche ab, steigt die relative Feuchte — bei 100 % fällt Tauwasser aus.",
+  "en": "Warm air can hold more water vapour. If it cools at a cold surface, the relative humidity rises — at 100 % condensation occurs."
+ },
+ {
+  "id": "14-64",
+  "de": "Wärmebrücken und Schimmel",
+  "en": "Thermal bridges and mould"
+ },
+ {
+  "id": "14-65",
+  "de": "Wärmedurchlasswiderstand einer Schicht:&nbsp; R = d / λ&nbsp;&nbsp; [m²K/W]<br> Wärmedurchgangswiderstand:&nbsp; R<sub>T</sub> = R<sub>si</sub> + Σ d<sub>i</sub>/λ<sub>i</sub> + R<sub>se</sub>&nbsp;&nbsp;&nbsp; U = 1 / R<sub>T</sub>&nbsp;&nbsp; [W/(m²K)]<br> Wärmestromdichte:&nbsp; q = U · (θ<sub>i</sub> − θ<sub>e</sub>)&nbsp;&nbsp;&nbsp; Temperatursprung je Schicht:&nbsp; Δθ<sub>j</sub> = q · R<sub>j</sub><br> Transmissionswärmeverlust:&nbsp; H<sub>T</sub> = Σ U<sub>i</sub> · A<sub>i</sub> + ΔU<sub>WB</sub> · ΣA&nbsp;&nbsp; [W/K]",
+  "en": "Thermal resistance of a layer:&nbsp; R = d / λ&nbsp;&nbsp; [m²K/W]<br> Total thermal resistance:&nbsp; R<sub>T</sub> = R<sub>si</sub> + Σ d<sub>i</sub>/λ<sub>i</sub> + R<sub>se</sub>&nbsp;&nbsp;&nbsp; U = 1 / R<sub>T</sub>&nbsp;&nbsp; [W/(m²K)]<br> Heat flux density:&nbsp; q = U · (θ<sub>i</sub> − θ<sub>e</sub>)&nbsp;&nbsp;&nbsp; Temperature drop per layer:&nbsp; Δθ<sub>j</sub> = q · R<sub>j</sub><br> Transmission heat loss:&nbsp; H<sub>T</sub> = Σ U<sub>i</sub> · A<sub>i</sub> + ΔU<sub>WB</sub> · ΣA&nbsp;&nbsp; [W/K]"
+ },
+ {
+  "id": "14-66",
+  "de": "Wärmeleitung durch ein Bauteil",
+  "en": "Heat conduction through a component"
+ },
+ {
+  "id": "14-67",
+  "de": "Zellulose WLS 040",
+  "en": "Cellulose WLS 040"
+ },
+ {
+  "id": "14-68",
+  "de": "Zementestrich",
+  "en": "Cement screed"
+ },
+ {
+  "id": "14-69",
+  "de": "Zusatz s1–s3: Rauchentwicklung · d0–d2: brennendes Abtropfen.",
+  "en": "Additional s1–s3: smoke production · d0–d2: flaming droplets."
+ },
+ {
+  "id": "14-70",
+  "de": "Zweischalige Bauteile und Vorsatzschalen",
+  "en": "Double-leaf components and linings"
+ },
+ {
+  "id": "14-71",
+  "de": "Zweischaliges Bauteil / Vorsatzschale",
+  "en": "Double-leaf component / lining"
+ },
+ {
+  "id": "14-72",
+  "de": "außen (Luft)",
+  "en": "outside (air)"
+ },
+ {
+  "id": "14-73",
+  "de": "behandeltes Holz, Holzwolle-Leichtbauplatten",
+  "en": "treated timber, wood wool boards"
+ },
+ {
+  "id": "14-74",
+  "de": "diffusionsäquivalente Luftschichtdicke:&nbsp; s<sub>d</sub> = μ · d&nbsp;&nbsp; [m]<br> Diffusionsstromdichte:&nbsp; g = Δp / (1,5 · 10⁶ · s<sub>d</sub>)&nbsp;&nbsp; [kg/(m²h)]<br> Tauwassermenge:&nbsp; m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>) · t<sub>T</sub>&nbsp;&nbsp;&nbsp; Verdunstung:&nbsp; m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>) · t<sub>V</sub>",
+  "en": "equivalent air layer thickness:&nbsp; s<sub>d</sub> = μ · d&nbsp;&nbsp; [m]<br> Diffusion flux density:&nbsp; g = Δp / (1.5 · 10⁶ · s<sub>d</sub>)&nbsp;&nbsp; [kg/(m²h)]<br> Condensate amount:&nbsp; m<sub>W,T</sub> = (g<sub>i</sub> − g<sub>e</sub>) · t<sub>T</sub>&nbsp;&nbsp;&nbsp; Evaporation:&nbsp; m<sub>W,V</sub> = (g<sub>i,V</sub> + g<sub>e,V</sub>) · t<sub>V</sub>"
+ },
+ {
+  "id": "14-75",
+  "de": "doppelte Masse → + 9,3 dB",
+  "en": "double mass → + 9.3 dB"
+ },
+ {
+  "id": "14-76",
+  "de": "dynamische Steifigkeit s′ [MN/m³]",
+  "en": "dynamic stiffness s′ [MN/m³]"
+ },
+ {
+  "id": "14-77",
+  "de": "erf. R′<sub>w,ges</sub> = L<sub>a</sub> − K<sub>Raumart</sub>&nbsp;&nbsp; ≥ 30 dB<br> K<sub>Raumart</sub> = 30 dB (Aufenthaltsräume in Wohnungen, Unterrichtsräume) · 35 dB (Büros) · 25 dB (Bettenräume in Krankenhäusern)",
+  "en": "req. R′<sub>w,tot</sub> = L<sub>a</sub> − K<sub>room type</sub>&nbsp;&nbsp; ≥ 30 dB<br> K<sub>room type</sub> = 30 dB (habitable rooms in dwellings, classrooms) · 35 dB (offices) · 25 dB (wards in hospitals)"
+ },
+ {
+  "id": "14-78",
+  "de": "erf. R′<sub>w</sub> [dB]",
+  "en": "req. R′<sub>w</sub> [dB]"
+ },
+ {
+  "id": "14-79",
+  "de": "erf. R′<sub>w</sub> ≥ 53 dB · R<sub>w</sub> − erf = 8,3 dB Reserve für Flankenübertragung (R′<sub>w</sub> &lt; R<sub>w</sub>) und Sicherheitsbeiwert u<sub>prog</sub> = 2 dB — reicht in der Regel",
+  "en": "req. R′<sub>w</sub> ≥ 53 dB · R<sub>w</sub> − req = 8.3 dB reserve for flanking transmission (R′<sub>w</sub> &lt; R<sub>w</sub>) and safety margin u<sub>prog</sub> = 2 dB — usually sufficient"
+ },
+ {
+  "id": "14-80",
+  "de": "feuerbeständig / feuerbeständig",
+  "en": "fire-resistant / fire-resistant"
+ },
+ {
+  "id": "14-81",
+  "de": "feuerhemmend / feuerbeständig",
+  "en": "fire-retardant / fire-resistant"
+ },
+ {
+  "id": "14-82",
+  "de": "feuerhemmend ≈ F 30 / R 30 · hochfeuerhemmend ≈ F 60 / R 60 · feuerbeständig ≈ F 90 / R 90 (Landesbauordnung beachten)",
+  "en": "fire-retardant ≈ F 30 / R 30 · highly fire-retardant ≈ F 60 / R 60 · fire-resistant ≈ F 90 / R 90 (observe the state building code)"
+ },
+ {
+  "id": "14-83",
+  "de": "f₀ &gt; 100 Hz: die Resonanz fällt in den Hörbereich ab 100 Hz — weichere Dämmung (kleineres s′) oder schwerere Schale",
+  "en": "f₀ &gt; 100 Hz: the resonance falls within the audible range from 100 Hz — softer insulation (smaller s′) or heavier leaf"
+ },
+ {
+  "id": "14-84",
+  "de": "h = Fußbodenoberkante des höchstgelegenen Geschosses mit Aufenthaltsraum über der Geländeoberfläche im Mittel. Maßgebend ist die Landesbauordnung.",
+  "en": "h = top of floor of the highest storey with a habitable room above mean ground level. The state building code governs."
+ },
+ {
+  "id": "14-85",
+  "de": "h ≤ 7 m, aber mehr Einheiten oder Fläche → GK 3",
+  "en": "h ≤ 7 m, but more units or area → BC 3"
+ },
+ {
+  "id": "14-86",
+  "de": "hochfeuerhemmend / feuerbeständig",
+  "en": "highly fire-retardant / fire-resistant"
+ },
+ {
+  "id": "14-87",
+  "de": "innen (Luft)",
+  "en": "inside (air)"
+ },
+ {
+  "id": "14-88",
+  "de": "innen 20 °C / 50 % → p<sub>i</sub> = 1168 Pa · außen −5 °C / 80 % → p<sub>e</sub> = 321 Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h",
+  "en": "inside 20 °C / 50 % → p<sub>i</sub> = 1168 Pa · outside −5 °C / 80 % → p<sub>e</sub> = 321 Pa · R<sub>si</sub> = 0.25, R<sub>se</sub> = 0.04 · 2160 h"
+ },
+ {
+  "id": "14-89",
+  "de": "je schwerer die Decke im Verhältnis zu den Wänden, desto mehr Trittschall geht über die Wände; K ≥ 0",
+  "en": "the heavier the floor relative to the walls, the more impact sound travels via the walls; K ≥ 0"
+ },
+ {
+  "id": "14-90",
+  "de": "jede Schicht: Δθ = q · R<sub>i</sub> — die Temperatur fällt dort am stärksten, wo der Widerstand groß ist (Dämmung)",
+  "en": "each layer: Δθ = q · R<sub>i</sub> — the temperature drops most where the resistance is high (insulation)"
+ },
+ {
+  "id": "14-91",
+  "de": "keine Anforderung / feuerhemmend",
+  "en": "no requirement / fire-retardant"
+ },
+ {
+  "id": "14-92",
+  "de": "m<sub>W,T</sub> &gt; m<sub>W,V</sub> = 3,055 kg/m² ✗ Feuchte reichert sich an",
+  "en": "m<sub>W,T</sub> &gt; m<sub>W,V</sub> = 3.055 kg/m² ✗ moisture accumulates"
+ },
+ {
+  "id": "14-93",
+  "de": "m<sub>W,T</sub> = 5,919 &gt; 1,0 kg/m² ✗ (0,5 kg/m² an nicht saugenden Grenzflächen; Holz: Massezunahme ≤ 5 %)",
+  "en": "m<sub>W,T</sub> = 5.919 &gt; 1.0 kg/m² ✗ (0.5 kg/m² at non-absorbent interfaces; timber: mass increase ≤ 5 %)"
+ },
+ {
+  "id": "14-94",
+  "de": "mittlere Masse der flankierenden Wände m′<sub>f,m</sub> [kg/m²] (0 = K von Hand)",
+  "en": "mean mass of the flanking walls m′<sub>f,m</sub> [kg/m²] (0 = K manually)"
+ },
+ {
+  "id": "14-95",
+  "de": "m′<sub>Estrich</sub> = ρ · d = 2.000 · 0,050 = 100,0 kg/m²",
+  "en": "m′<sub>screed</sub> = ρ · d = 2.000 · 0.050 = 100.0 kg/m²"
+ },
+ {
+  "id": "14-96",
+  "de": "oberirdische Geschosse: feuerhemmend · Kellergeschoss: feuerbeständig",
+  "en": "above-ground storeys: fire-retardant · basement: fire-resistant"
+ },
+ {
+  "id": "14-97",
+  "de": "ohne Nachweis",
+  "en": "no verification"
+ },
+ {
+  "id": "14-98",
+  "de": "p<sub>s</sub> bzw. p [Pa]",
+  "en": "p<sub>s</sub> or p [Pa]"
+ },
+ {
+  "id": "14-99",
+  "de": "relative Feuchte φ [%]",
+  "en": "relative humidity φ [%]"
+ },
+ {
+  "id": "14-100",
+  "de": "sonstige (bis Hochhausgrenze 22 m)",
+  "en": "other (up to the high-rise limit of 22 m)"
+ },
+ {
+  "id": "14-101",
+  "de": "s′ — dynamische Steifigkeit der Zwischenschicht [MN/m³] · m′<sub>1</sub>, m′<sub>2</sub> — flächenbezogene Massen der Schalen [kg/m²]. Unterhalb von f<sub>0</sub> schwingen beide Schalen gemeinsam, oberhalb wirkt die Trennung.",
+  "en": "s′ — dynamic stiffness of the interlayer [MN/m³] · m′<sub>1</sub>, m′<sub>2</sub> — masses per unit area of the leaves [kg/m²]. Below f<sub>0</sub> both leaves vibrate together; above it the separation takes effect."
+ },
+ {
+  "id": "14-102",
+  "de": "tragende Bauteile (oberirdisch / Keller)",
+  "en": "load-bearing components (above ground / basement)"
+ },
+ {
+  "id": "14-103",
+  "de": "unbehandeltes Papier — im Bauwesen unzulässig",
+  "en": "untreated paper — not permitted in construction"
+ },
+ {
+  "id": "14-104",
+  "de": "zul. L′<sub>n,w</sub> = 50 dB: 44,7 ≤ 50 ✓ — beim Trittschall gilt: kleiner ist besser",
+  "en": "perm. L′<sub>n,w</sub> = 50 dB: 44.7 ≤ 50 ✓ — for impact sound, smaller is better"
+ },
+ {
+  "id": "14-105",
+  "de": "zul. L′<sub>n,w</sub> [dB]",
+  "en": "perm. L′<sub>n,w</sub> [dB]"
+ },
+ {
+  "id": "14-106",
+  "de": "Übertragungswege Dd, Ff, Df, Fd an einer Flanke",
+  "en": "Transmission paths Dd, Ff, Df, Fd at one flank"
+ },
+ {
+  "id": "14-107",
+  "de": "über dem Taupunkt ✓ · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = 0,700 ≥ 0,70 ✓",
+  "en": "above the dew point ✓ · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = 0.700 ≥ 0.70 ✓"
+ },
+ {
+  "id": "14-108",
+  "de": "λ — Wärmeleitfähigkeit (Bemessungswert) · R<sub>si</sub>, R<sub>se</sub> — Wärmeübergangswiderstände innen und außen (Luftschicht an der Oberfläche)",
+  "en": "λ — thermal conductivity (design value) · R<sub>si</sub>, R<sub>se</sub> — internal and external surface resistances (air layer at the surface)"
+ },
+ {
+  "id": "14-109",
+  "de": "≤ 1,0 kg/m² (≤ 0,5 kg/m² an kapillar nicht wasseraufnahmefähigen Schichten)",
+  "en": "≤ 1.0 kg/m² (≤ 0.5 kg/m² for layers that cannot absorb water by capillary action)"
+ },
+ {
+  "id": "14-110",
+  "de": "Schicht {} (innen → außen): Baustoff / d [cm]",
+  "en": "Layer {} (inside → outside): material / d [cm]"
+ },
+ {
+  "id": "14-111",
+  "de": "<div class=\"calc-field\"><label>Innentemperatur θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"uw-ti\" value=\"20\" step=\"any\" oninput=\"updateUW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Internal temperature θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"uw-ti\" value=\"20\" step=\"any\" oninput=\"updateUW()\"></div>"
+ },
+ {
+  "id": "14-112",
+  "de": "<div class=\"calc-field\"><label>Außentemperatur θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"uw-te\" value=\"-5\" step=\"any\" oninput=\"updateUW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>External temperature θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"uw-te\" value=\"-5\" step=\"any\" oninput=\"updateUW()\"></div>"
+ },
+ {
+  "id": "14-113",
+  "de": "§Wärmedurchgangswiderstand",
+  "en": "§Total thermal resistance"
+ },
+ {
+  "id": "14-114",
+  "de": "§Wärmedurchgangskoeffizient",
+  "en": "§Thermal transmittance"
+ },
+ {
+  "id": "14-115",
+  "de": "§Wärmestrom und Temperaturen",
+  "en": "§Heat flow and temperatures"
+ },
+ {
+  "id": "14-116",
+  "de": "!jede Schicht: Δθ = q · R<sub>i</sub> — die Temperatur fällt dort am stärksten, wo der Widerstand groß ist (Dämmung)",
+  "en": "!each layer: Δθ = q · R<sub>i</sub> — the temperature drops most where the resistance is high (insulation)"
+ },
+ {
+  "id": "14-117",
+  "de": "§Anforderungen (Anhaltswerte)",
+  "en": "§Requirements (guide values)"
+ },
+ {
+  "id": "14-118",
+  "de": "!Mindestwärmeschutz DIN 4108-2 ({}): R = {} {} {} m²K/W {}",
+  "en": "!Minimum thermal insulation DIN 4108-2 ({}): R = {} {} {} m²K/W {}"
+ },
+ {
+  "id": "14-119",
+  "de": "!GEG Referenzgebäude (Neubau): U = {} {} {} W/(m²K) {} · Bauteil im Bestand erneuert: {} {} {}",
+  "en": "!GEG reference building (new build): U = {} {} {} W/(m²K) {} · component renewed in existing building: {} {} {}"
+ },
+ {
+  "id": "14-120",
+  "de": "!Schimmel: f<sub>Rsi</sub> = 1 − U · 0,25 = {} {} 0,70 {} (ungestörter Bereich, R<sub>si</sub> = 0,25)",
+  "en": "!Mould: f<sub>Rsi</sub> = 1 − U · 0.25 = {} {} 0.70 {} (undisturbed area, R<sub>si</sub> = 0.25)"
+ },
+ {
+  "id": "14-121",
+  "de": "<div class=\"calc-field\"><label>Lufttemperatur θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"tp-t\" value=\"20\" step=\"any\" oninput=\"updateTP()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Air temperature θ<sub>i</sub> [°C]</label><input type=\"number\" id=\"tp-t\" value=\"20\" step=\"any\" oninput=\"updateTP()\"></div>"
+ },
+ {
+  "id": "14-122",
+  "de": "<div class=\"calc-field\"><label>relative Feuchte φ [%]</label><input type=\"number\" id=\"tp-phi\" value=\"50\" step=\"any\" oninput=\"updateTP()\"></div>",
+  "en": "<div class=\"calc-field\"><label>relative humidity φ [%]</label><input type=\"number\" id=\"tp-phi\" value=\"50\" step=\"any\" oninput=\"updateTP()\"></div>"
+ },
+ {
+  "id": "14-123",
+  "de": "<div class=\"calc-field\"><label>U-Wert der Außenwand [W/(m²K)] (optional)</label><input type=\"number\" id=\"tp-U\" value=\"1.2\" step=\"any\" oninput=\"updateTP()\"></div>",
+  "en": "<div class=\"calc-field\"><label>U-value of the external wall [W/(m²K)] (optional)</label><input type=\"number\" id=\"tp-U\" value=\"1.2\" step=\"any\" oninput=\"updateTP()\"></div>"
+ },
+ {
+  "id": "14-124",
+  "de": "<div class=\"calc-field\"><label>Außentemperatur θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"tp-te\" value=\"-5\" step=\"any\" oninput=\"updateTP()\"></div>",
+  "en": "<div class=\"calc-field\"><label>External temperature θ<sub>e</sub> [°C]</label><input type=\"number\" id=\"tp-te\" value=\"-5\" step=\"any\" oninput=\"updateTP()\"></div>"
+ },
+ {
+  "id": "14-125",
+  "de": "§Sättigungsdampfdruck (Magnus-Formel)",
+  "en": "§Saturation vapour pressure (Magnus formula)"
+ },
+ {
+  "id": "14-126",
+  "de": "§Dampfdruck der Luft",
+  "en": "§Vapour pressure of the air"
+ },
+ {
+  "id": "14-127",
+  "de": "!Jede Oberfläche, die kälter als {} °C ist, wird nass (Tauwasser). Schimmel droht schon ab 80 % Feuchte an der Oberfläche: θ ≤ {} °C",
+  "en": "!Every surface colder than {} °C gets wet (condensation). Mould is a risk from 80 % humidity at the surface: θ ≤ {} °C"
+ },
+ {
+  "id": "14-128",
+  "de": "§Innenoberfläche eines Bauteils (R<sub>si</sub> = 0,25)",
+  "en": "§Inner surface of a component (R<sub>si</sub> = 0.25)"
+ },
+ {
+  "id": "14-129",
+  "de": "!{} dem Taupunkt {} · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = {} {}",
+  "en": "!{} the dew point {} · f<sub>Rsi</sub> = (θ<sub>si</sub> − θ<sub>e</sub>) / (θ<sub>i</sub> − θ<sub>e</sub>) = {} {}"
+ },
+ {
+  "id": "14-130",
+  "de": "Luft {} °C, {} %",
+  "en": "Air {} °C, {} %"
+ },
+ {
+  "id": "14-131",
+  "de": "Grenze {}/{}",
+  "en": "Boundary {}/{}"
+ },
+ {
+  "id": "14-132",
+  "de": "§Randbedingungen Tauperiode (DIN 4108-3)",
+  "en": "§Boundary conditions, condensation period (DIN 4108-3)"
+ },
+ {
+  "id": "14-133",
+  "de": "!innen 20 °C / 50 % → p<sub>i</sub> = {} Pa · außen −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 · 2160 h",
+  "en": "!inside 20 °C / 50 % → p<sub>i</sub> = {} Pa · outside −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0.25, R<sub>se</sub> = 0.04 · 2160 h"
+ },
+ {
+  "id": "14-134",
+  "de": "an der Grenze {}/{} (s<sub>d</sub> = {} m)",
+  "en": "at boundary {}/{} (s<sub>d</sub> = {} m)"
+ },
+ {
+  "id": "14-135",
+  "de": "!Die Dampfdrucklinie berührt p<sub>s</sub> {}",
+  "en": "!The vapour pressure line touches p<sub>s</sub> {}"
+ },
+ {
+  "id": "14-136",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 0,160 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 0.160 m)"
+ },
+ {
+  "id": "14-137",
+  "de": "§Verdunstungsperiode (innen 20 °C / 50 %, außen 12 °C / 70 %, 2160 h)",
+  "en": "§Evaporation period (inside 20 °C / 50 %, outside 12 °C / 70 %, 2160 h)"
+ },
+ {
+  "id": "14-138",
+  "de": "!m<sub>W,T</sub> = {} {} 1,0 kg/m² {} (0,5 kg/m² an nicht saugenden Grenzflächen; Holz: Massezunahme ≤ 5 %)",
+  "en": "!m<sub>W,T</sub> = {} {} 1.0 kg/m² {} (0.5 kg/m² at non-absorbent interfaces; timber: mass increase ≤ 5 %)"
+ },
+ {
+  "id": "14-139",
+  "de": "✗ Feuchte reichert sich an",
+  "en": "✗ moisture accumulates"
+ },
+ {
+  "id": "14-140",
+  "de": "an der Grenze 1/2 (s<sub>d</sub> = 0,060 m)",
+  "en": "at boundary 1/2 (s<sub>d</sub> = 0.060 m)"
+ },
+ {
+  "id": "14-141",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 0,185 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 0.185 m)"
+ },
+ {
+  "id": "14-142",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 0,310 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 0.310 m)"
+ },
+ {
+  "id": "14-143",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 0,435 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 0.435 m)"
+ },
+ {
+  "id": "14-144",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 1,310 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 1.310 m)"
+ },
+ {
+  "id": "14-145",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 0,248 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 0.248 m)"
+ },
+ {
+  "id": "14-146",
+  "de": "an der Grenze 1/2 (s<sub>d</sub> = 0,100 m)",
+  "en": "at boundary 1/2 (s<sub>d</sub> = 0.100 m)"
+ },
+ {
+  "id": "14-147",
+  "de": "✓ trocknet im Sommer wieder aus",
+  "en": "✓ dries out again in summer"
+ },
+ {
+  "id": "14-148",
+  "de": "n (Bereich)",
+  "en": "s (range)"
+ },
+ {
+  "id": "14-149",
+  "de": "zwischen s<sub>d</sub> = {} und {} m",
+  "en": "between s<sub>d</sub> = {} and {} m"
+ },
+ {
+  "id": "14-150",
+  "de": "zwischen s<sub>d</sub> = 0,100 und 0,700 m",
+  "en": "between s<sub>d</sub> = 0.100 and 0.700 m"
+ },
+ {
+  "id": "14-151",
+  "de": "an der Grenze 2/3 (s<sub>d</sub> = 0,700 m)",
+  "en": "at boundary 2/3 (s<sub>d</sub> = 0.700 m)"
+ },
+ {
+  "id": "14-152",
+  "de": "!Die Gerade von p<sub>i</sub> nach p<sub>e</sub> bleibt überall unter p<sub>s</sub> → kein Tauwasser im Bauteil ✓",
+  "en": "!The line from p<sub>i</sub> to p<sub>e</sub> stays below p<sub>s</sub> everywhere → no condensation within the component ✓"
+ },
+ {
+  "id": "14-153",
+  "de": "<div class=\"calc-field\"><label>dynamische Steifigkeit s′ [MN/m³]</label><input type=\"number\" id=\"ls-sp\" value=\"10\" step=\"any\" oninput=\"updateLS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>dynamic stiffness s′ [MN/m³]</label><input type=\"number\" id=\"ls-sp\" value=\"10\" step=\"any\" oninput=\"updateLS()\"></div>"
+ },
+ {
+  "id": "14-154",
+  "de": "§Flächenbezogene Masse",
+  "en": "§Mass per unit area"
+ },
+ {
+  "id": "14-155",
+  "de": "§Bewertetes Schalldämmmaß (DIN 4109-32, Massegesetz)",
+  "en": "§Weighted sound reduction index (DIN 4109-32, mass law)"
+ },
+ {
+  "id": "14-156",
+  "de": "!doppelte Masse → + 9,3 dB",
+  "en": "!double mass → + 9.3 dB"
+ },
+ {
+  "id": "14-157",
+  "de": "§Vergleich mit der Anforderung ({})",
+  "en": "§Comparison with the requirement ({})"
+ },
+ {
+  "id": "14-158",
+  "de": "— reicht in der Regel",
+  "en": "— usually sufficient"
+ },
+ {
+  "id": "14-159",
+  "de": "!erf. R′<sub>w</sub> ≥ {} dB · R<sub>w</sub> − erf = {} dB Reserve für Flankenübertragung (R′<sub>w</sub> < R<sub>w</sub>) und Sicherheitsbeiwert u<sub>prog</sub> = 2 dB {}",
+  "en": "!req. R′<sub>w</sub> ≥ {} dB · R<sub>w</sub> − req = {} dB reserve for flanking transmission (R′<sub>w</sub> < R<sub>w</sub>) and safety margin u<sub>prog</sub> = 2 dB {}"
+ },
+ {
+  "id": "14-160",
+  "de": "f₀ > 100 Hz: die Resonanz fällt in den Hörbereich ab 100 Hz — weichere Dämmung (kleineres s′) oder schwerere Schale",
+  "en": "f₀ > 100 Hz: the resonance falls within the audible range from 100 Hz — softer insulation (smaller s′) or heavier leaf"
+ },
+ {
+  "id": "14-161",
+  "de": "Bitte mindestens eine Schicht eingeben.",
+  "en": "Please enter at least one layer."
+ },
+ {
+  "id": "14-162",
+  "de": "— reicht nicht",
+  "en": "— not sufficient"
+ },
+ {
+  "id": "14-163",
+  "de": "Flanke {}: {} — m′ [kg/m²] / l<sub>f</sub> [m] / Stoß",
+  "en": "Flank {}: {} — m′ [kg/m²] / l<sub>f</sub> [m] / junction"
+ },
+ {
+  "id": "14-164",
+  "de": "<div class=\"calc-field\"><label>Trennbauteil m′ [kg/m²]</label><input type=\"number\" id=\"fl-mD\" value=\"504\" step=\"any\" oninput=\"updateFL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Separating element m′ [kg/m²]</label><input type=\"number\" id=\"fl-mD\" value=\"504\" step=\"any\" oninput=\"updateFL()\"></div>"
+ },
+ {
+  "id": "14-165",
+  "de": "<div class=\"calc-field\"><label>Trennfläche S<sub>s</sub> [m²]</label><input type=\"number\" id=\"fl-S\" value=\"10.4\" step=\"any\" oninput=\"updateFL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Separating area S<sub>s</sub> [m²]</label><input type=\"number\" id=\"fl-S\" value=\"10.4\" step=\"any\" oninput=\"updateFL()\"></div>"
+ },
+ {
+  "id": "14-166",
+  "de": "<div class=\"calc-field\"><label>Raumtiefe (für K<sub>ij,min</sub>) [m]</label><input type=\"number\" id=\"fl-d\" value=\"4.5\" step=\"any\" oninput=\"updateFL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Room depth (for K<sub>ij,min</sub>) [m]</label><input type=\"number\" id=\"fl-d\" value=\"4.5\" step=\"any\" oninput=\"updateFL()\"></div>"
+ },
+ {
+  "id": "14-167",
+  "de": "<div class=\"calc-field\"><label>Verbesserung ΔR<sub>Dd</sub> (Vorsatzschale) [dB]</label><input type=\"number\" id=\"fl-dR\" value=\"0\" step=\"any\" oninput=\"updateFL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Improvement ΔR<sub>Dd</sub> (lining) [dB]</label><input type=\"number\" id=\"fl-dR\" value=\"0\" step=\"any\" oninput=\"updateFL()\"></div>"
+ },
+ {
+  "id": "14-168",
+  "de": "Trennbauteil m′ = {} kg/m², S = {} m²",
+  "en": "Separating element m′ = {} kg/m², S = {} m²"
+ },
+ {
+  "id": "14-169",
+  "de": "§Direkte Übertragung",
+  "en": "§Direct transmission"
+ },
+ {
+  "id": "14-170",
+  "de": "§Stoßstellendämmmaß (DIN 4109-32, starre Stöße)",
+  "en": "§Vibration reduction index (DIN 4109-32, rigid junctions)"
+ },
+ {
+  "id": "14-171",
+  "de": "!M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) mit m′<sub>⊥</sub> = Trennbauteil · Kreuzstoß: K<sub>13</sub> = 8,7 + 17,1·M + 5,7·M², K<sub>12</sub> = 8,7 + 5,7·M² · T-Stoß: K<sub>13</sub> = 5,7 + 14,1·M + 5,7·M², K<sub>12</sub> = 5,7 + 5,7·M²",
+  "en": "!M = lg(m′<sub>⊥</sub> / m′<sub>i</sub>) with m′<sub>⊥</sub> = separating element · cross junction: K<sub>13</sub> = 8.7 + 17.1·M + 5.7·M², K<sub>12</sub> = 8.7 + 5.7·M² · T-junction: K<sub>13</sub> = 5.7 + 14.1·M + 5.7·M², K<sub>12</sub> = 5.7 + 5.7·M²"
+ },
+ {
+  "id": "14-172",
+  "de": "!Mindestwert K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) mit S<sub>f</sub> = l<sub>f</sub> · Raumtiefe",
+  "en": "!Minimum value K<sub>ij,min</sub> = 10 · lg(l<sub>f</sub> · (1/S<sub>i</sub> + 1/S<sub>j</sub>)) with S<sub>f</sub> = l<sub>f</sub> · room depth"
+ },
+ {
+  "id": "14-173",
+  "de": "§Flankenwege je Flanke",
+  "en": "§Flanking paths per flank"
+ },
+ {
+  "id": "14-174",
+  "de": "§Bau-Schalldämmmaß",
+  "en": "§Apparent sound reduction index"
+ },
+ {
+  "id": "14-175",
+  "de": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) über 13 Wege = {} dB",
+  "en": "R′<sub>w</sub> = −10 · lg(10<sup>−R<sub>Dd</sub>/10</sup> + Σ 10<sup>−R<sub>ij</sub>/10</sup>) over 13 paths = {} dB"
+ },
+ {
+  "id": "14-176",
+  "de": "!Anteile an der übertragenen Schallenergie: direkt (Dd) {} %, alle Flankenwege {} % · größter Flankenweg {} über {} mit {} % · ohne Flanken wäre R′<sub>w</sub> = R<sub>Dd</sub> = {} dB",
+  "en": "!Shares of the transmitted sound energy: direct (Dd) {} %, all flanking paths {} % · largest flanking path {} via {} with {} % · without flanks R′<sub>w</sub> = R<sub>Dd</sub> = {} dB"
+ }
+]

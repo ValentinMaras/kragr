@@ -1,0 +1,792 @@
+[
+ {
+  "id": "19-0",
+  "de": "<div class=\"calc-field\"><label>Sohlspannung σ<sub>0</sub> [kN/m²]</label><input type=\"number\" id=\"st2-s0\" value=\"250\" step=\"any\" oninput=\"updateSetz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Base pressure σ<sub>0</sub> [kN/m²]</label><input type=\"number\" id=\"st2-s0\" value=\"250\" step=\"any\" oninput=\"updateSetz()\"></div>"
+ },
+ {
+  "id": "19-1",
+  "de": "<div class=\"calc-field\"><label>Steifemodul E<sub>s</sub> [MN/m²]</label><input type=\"number\" id=\"st2-Es\" value=\"30\" step=\"any\" oninput=\"updateSetz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Constrained modulus E<sub>s</sub> [MN/m²]</label><input type=\"number\" id=\"st2-Es\" value=\"30\" step=\"any\" oninput=\"updateSetz()\"></div>"
+ },
+ {
+  "id": "19-2",
+  "de": "<div class=\"calc-field\"><label>Schichtdicke Δz [m]</label><input type=\"number\" id=\"st2-dz\" value=\"0.5\" step=\"any\" oninput=\"updateSetz()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Sublayer thickness Δz [m]</label><input type=\"number\" id=\"st2-dz\" value=\"0.5\" step=\"any\" oninput=\"updateSetz()\"></div>"
+ },
+ {
+  "id": "19-3",
+  "de": "Setzung Mittelpunkt {} × {} m",
+  "en": "Settlement at centre {} × {} m"
+ },
+ {
+  "id": "19-4",
+  "de": "§Setzungswirksame Spannung",
+  "en": "§Net stress causing settlement"
+ },
+ {
+  "id": "19-5",
+  "de": "σ<sub>1</sub> = σ<sub>0</sub> − γ · d = {} − {} · {} = {} kN/m² (Aushubentlastung abgezogen)",
+  "en": "σ<sub>1</sub> = σ<sub>0</sub> − γ · d = {} − {} · {} = {} kN/m² (excavation unloading deducted)"
+ },
+ {
+  "id": "19-6",
+  "de": "§Spannungsausbreitung (Steinbrenner, Mittelpunkt = 4 Eckrechtecke a/2 × b/2)",
+  "en": "§Stress distribution (Steinbrenner, centre = 4 corner rectangles a/2 × b/2)"
+ },
+ {
+  "id": "19-7",
+  "de": "!i(z) = 1/(2π) · [arctan(a·b/(z·R<sub>3</sub>)) + a·b·z/R<sub>3</sub> · (1/R<sub>1</sub>² + 1/R<sub>2</sub>²)] mit R<sub>1</sub> = √(a² + z²), R<sub>2</sub> = √(b² + z²), R<sub>3</sub> = √(a² + b² + z²)",
+  "en": "!i(z) = 1/(2π) · [arctan(a·b/(z·R<sub>3</sub>)) + a·b·z/R<sub>3</sub> · (1/R<sub>1</sub>² + 1/R<sub>2</sub>²)] with R<sub>1</sub> = √(a² + z²), R<sub>2</sub> = √(b² + z²), R<sub>3</sub> = √(a² + b² + z²)"
+ },
+ {
+  "id": "19-8",
+  "de": "!Δσ(z) = σ<sub>1</sub> · 4 · i · σ<sub>ü</sub>(z) = γ · (d + z) · Schicht bis zur Grenztiefe Δσ = 0,2 · σ<sub>ü</sub>",
+  "en": "!Δσ(z) = σ<sub>1</sub> · 4 · i · σ<sub>ü</sub>(z) = γ · (d + z) · layer down to the limiting depth Δσ = 0.2 · σ<sub>ü</sub>"
+ },
+ {
+  "id": "19-9",
+  "de": "§Schichtweise Setzung Δs = Δσ · Δz / E<sub>s</sub> (E<sub>s</sub> = {} MN/m²)",
+  "en": "§Layer-by-layer settlement Δs = Δσ · Δz / E<sub>s</sub> (E<sub>s</sub> = {} MN/m²)"
+ },
+ {
+  "id": "19-10",
+  "de": "!Grenztiefe z<sub>gr</sub> ≈ {} m unter Sohle",
+  "en": "!Limiting depth z<sub>gr</sub> ≈ {} m below the base"
+ },
+ {
+  "id": "19-11",
+  "de": "s = Σ Δs = {} mm (schlaffe Last, Mittelpunkt)",
+  "en": "s = Σ Δs = {} mm (flexible load, centre)"
+ },
+ {
+  "id": "19-12",
+  "de": "!starres Fundament: etwa s<sub>starr</sub> ≈ 0,75 · s<sub>Mitte</sub> = {} mm (kennzeichnender Punkt)",
+  "en": "!rigid footing: approx. s<sub>rigid</sub> ≈ 0.75 · s<sub>centre</sub> = {} mm (characteristic point)"
+ },
+ {
+  "id": "19-13",
+  "de": "!Zeitfaktor T<sub>v</sub> = c<sub>v</sub> · t / H<sub>dr</sub>² mit Konsolidationsbeiwert c<sub>v</sub> = k · E<sub>s</sub> / γ<sub>w</sub>",
+  "en": "!Time factor T<sub>v</sub> = c<sub>v</sub> · t / H<sub>dr</sub>² with coefficient of consolidation c<sub>v</sub> = k · E<sub>s</sub> / γ<sub>w</sub>"
+ },
+ {
+  "id": "19-14",
+  "de": "!H<sub>dr</sub> = H bei einseitiger, H/2 bei beidseitiger Entwässerung",
+  "en": "!H<sub>dr</sub> = H for one-way, H/2 for two-way drainage"
+ },
+ {
+  "id": "19-15",
+  "de": "!Konsolidationsgrad U(T<sub>v</sub>) = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup>, M = π/2 · (2m + 1) · Näherung U ≈ √(4 T<sub>v</sub> / π) für U < 0,6",
+  "en": "!Degree of consolidation U(T<sub>v</sub>) = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup>, M = π/2 · (2m + 1) · approximation U ≈ √(4 T<sub>v</sub> / π) for U < 0,6"
+ },
+ {
+  "id": "19-16",
+  "de": "<div class=\"calc-field\"><label>Schichtdicke H [m]</label><input type=\"number\" id=\"ko-H\" value=\"6\" step=\"any\" oninput=\"updateKons()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Layer thickness H [m]</label><input type=\"number\" id=\"ko-H\" value=\"6\" step=\"any\" oninput=\"updateKons()\"></div>"
+ },
+ {
+  "id": "19-17",
+  "de": "<div class=\"calc-field\"><label>Entwässerung</label><select id=\"ko-dr\" onchange=\"updateKons()\"><option value=\"2\" selected>oben und unten</option><option value=\"1\">nur einseitig</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Drainage</label><select id=\"ko-dr\" onchange=\"updateKons()\"><option value=\"2\" selected>top and bottom</option><option value=\"1\">one side only</option></select></div>"
+ },
+ {
+  "id": "19-18",
+  "de": "<div class=\"calc-field\"><label>Zeit t [Jahre]</label><input type=\"number\" id=\"ko-t\" value=\"1\" step=\"any\" oninput=\"updateKons()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Time t [years]</label><input type=\"number\" id=\"ko-t\" value=\"1\" step=\"any\" oninput=\"updateKons()\"></div>"
+ },
+ {
+  "id": "19-19",
+  "de": "<div class=\"calc-field\"><label>Endsetzung s<sub>∞</sub> [mm] (optional)</label><input type=\"number\" id=\"ko-s\" value=\"40\" step=\"any\" oninput=\"updateKons()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Final settlement s<sub>∞</sub> [mm] (optional)</label><input type=\"number\" id=\"ko-s\" value=\"40\" step=\"any\" oninput=\"updateKons()\"></div>"
+ },
+ {
+  "id": "19-20",
+  "de": "§Dränweg",
+  "en": "§Drainage path"
+ },
+ {
+  "id": "19-21",
+  "de": "!U = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup> mit M = π/2 · (2m + 1), m = 0, 1, 2 …",
+  "en": "!U = 1 − Σ 2/M² · e<sup>−M² · T<sub>v</sub></sup> with M = π/2 · (2m + 1), m = 0, 1, 2 …"
+ },
+ {
+  "id": "19-22",
+  "de": "t<sub>50</sub> = T<sub>50</sub> · H<sub>dr</sub>² / c<sub>v</sub> = 0,197 · {}² / {} = {} Jahre",
+  "en": "t<sub>50</sub> = T<sub>50</sub> · H<sub>dr</sub>² / c<sub>v</sub> = 0.197 · {}² / {} = {} years"
+ },
+ {
+  "id": "19-23",
+  "de": "t<sub>90</sub> = T<sub>90</sub> · H<sub>dr</sub>² / c<sub>v</sub> = 0,848 · {}² / {} = {} Jahre",
+  "en": "t<sub>90</sub> = T<sub>90</sub> · H<sub>dr</sub>² / c<sub>v</sub> = 0.848 · {}² / {} = {} years"
+ },
+ {
+  "id": "19-24",
+  "de": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">Aktiver Erddruck ohne Kohäsion und Auflast: dreieckförmig,\n    Resultierende E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> im unteren Drittelpunkt.</div>",
+  "en": "<div class=\"figure\">{}</svg></div><div class=\"figure-cap\">Active earth pressure without cohesion or surcharge: triangular,\n    resultant E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> at the lower third point.</div>"
+ },
+ {
+  "id": "19-25",
+  "de": "<div class=\"calc-field\"><label>Reibungswinkel φ′ [°]</label><input type=\"number\" id=\"ed-phi\" value=\"30\" step=\"any\" oninput=\"updateErd()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Friction angle φ′ [°]</label><input type=\"number\" id=\"ed-phi\" value=\"30\" step=\"any\" oninput=\"updateErd()\"></div>"
+ },
+ {
+  "id": "19-26",
+  "de": "<div class=\"calc-field\"><label>Wandhöhe h [m]</label><input type=\"number\" id=\"ed-h\" value=\"3\" step=\"any\" oninput=\"updateErd()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall height h [m]</label><input type=\"number\" id=\"ed-h\" value=\"3\" step=\"any\" oninput=\"updateErd()\"></div>"
+ },
+ {
+  "id": "19-27",
+  "de": "<div class=\"calc-field\"><label>Auflast q [kN/m²]</label><input type=\"number\" id=\"ed-q\" value=\"5\" step=\"any\" oninput=\"updateErd()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Surcharge q [kN/m²]</label><input type=\"number\" id=\"ed-q\" value=\"5\" step=\"any\" oninput=\"updateErd()\"></div>"
+ },
+ {
+  "id": "19-28",
+  "de": "K<sub>a</sub> = <b>{}</b> &nbsp;·&nbsp; K<sub>p</sub> = <b>{}</b> &nbsp;·&nbsp; K<sub>0</sub> = <b>{}</b><br>\n    e<sub>a</sub> am Wandfuß = (γ·h + q)·K<sub>a</sub> = <b>{} kN/m²</b><br>\n    E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> + q·h·K<sub>a</sub> = {} + {} = <b>{} kN/m</b>, Angriff {} m über dem Fuß",
+  "en": "K<sub>a</sub> = <b>{}</b> &nbsp;·&nbsp; K<sub>p</sub> = <b>{}</b> &nbsp;·&nbsp; K<sub>0</sub> = <b>{}</b><br>\n    e<sub>a</sub> at the wall base = (γ·h + q)·K<sub>a</sub> = <b>{} kN/m²</b><br>\n    E<sub>a</sub> = ½·γ·h²·K<sub>a</sub> + q·h·K<sub>a</sub> = {} + {} = <b>{} kN/m</b>, acting {} m above the base"
+ },
+ {
+  "id": "19-29",
+  "de": "!e<sub>agh</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> + Wasserdruck · Wandreibung üblich δ<sub>a</sub> = 2/3 · φ′ (raue Wand), 0 (glatt)",
+  "en": "!e<sub>agh</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> + water pressure · usual wall friction δ<sub>a</sub> = 2/3 · φ′ (rough wall), 0 (smooth)"
+ },
+ {
+  "id": "19-30",
+  "de": "!α Wandneigung (positiv: Wand neigt sich zum Erdreich hin über), β Geländeneigung, δ Wandreibungswinkel",
+  "en": "!α wall inclination (positive: wall leans over towards the soil), β ground slope, δ wall friction angle"
+ },
+ {
+  "id": "19-31",
+  "de": "!bindiger Boden: rechnerische Zugzone bis z<sub>0</sub> = 2c′ / (γ · √K<sub>a</sub>) wird nicht angesetzt; Mindesterddruck nach DIN 4085 beachten",
+  "en": "!cohesive soil: the theoretical tension zone down to z<sub>0</sub> = 2c′ / (γ · √K<sub>a</sub>) is ignored; observe the minimum earth pressure to DIN 4085"
+ },
+ {
+  "id": "19-32",
+  "de": "<div class=\"calc-field\"><label>Wandneigung α [°]</label><input type=\"number\" id=\"cb-a\" value=\"0\" step=\"any\" oninput=\"updateCoulomb()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall inclination α [°]</label><input type=\"number\" id=\"cb-a\" value=\"0\" step=\"any\" oninput=\"updateCoulomb()\"></div>"
+ },
+ {
+  "id": "19-33",
+  "de": "<div class=\"calc-field\"><label>Geländeneigung β [°]</label><input type=\"number\" id=\"cb-b\" value=\"10\" step=\"any\" oninput=\"updateCoulomb()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Ground slope β [°]</label><input type=\"number\" id=\"cb-b\" value=\"10\" step=\"any\" oninput=\"updateCoulomb()\"></div>"
+ },
+ {
+  "id": "19-34",
+  "de": "<div class=\"calc-field\"><label>Wandreibung δ<sub>a</sub></label><select id=\"cb-d\" onchange=\"updateCoulomb()\"><option value=\"0\">0 (glatt)</option><option value=\"13\">φ′/3</option><option value=\"12\">φ′/2</option><option value=\"23\" selected>2/3 · φ′ (rau)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Wall friction δ<sub>a</sub></label><select id=\"cb-d\" onchange=\"updateCoulomb()\"><option value=\"0\">0 (smooth)</option><option value=\"13\">φ′/3</option><option value=\"12\">φ′/2</option><option value=\"23\" selected>2/3 · φ′ (rough)</option></select></div>"
+ },
+ {
+  "id": "19-35",
+  "de": "<div class=\"calc-field\"><label>Grundwasser unter GOK z<sub>w</sub> [m]</label><input type=\"number\" id=\"es-zw\" value=\"3\" step=\"any\" oninput=\"updateErdS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Groundwater below ground level z<sub>w</sub> [m]</label><input type=\"number\" id=\"es-zw\" value=\"3\" step=\"any\" oninput=\"updateErdS()\"></div>"
+ },
+ {
+  "id": "19-36",
+  "de": "<div class=\"calc-field\"><label>Auflast q [kN/m²]</label><input type=\"number\" id=\"es-q\" value=\"10\" step=\"any\" oninput=\"updateErdS()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Surcharge q [kN/m²]</label><input type=\"number\" id=\"es-q\" value=\"10\" step=\"any\" oninput=\"updateErdS()\"></div>"
+ },
+ {
+  "id": "19-37",
+  "de": "<div class=\"calc-field\"><label>Wandreibung</label><select id=\"es-df\" onchange=\"updateErdS()\"><option value=\"0\">δ = 0</option><option value=\"0.5\">δ = φ′/2</option><option value=\"0.6666666666666666\" selected>δ = 2/3 · φ′</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Wall friction</label><select id=\"es-df\" onchange=\"updateErdS()\"><option value=\"0\">δ = 0</option><option value=\"0.5\">δ = φ′/2</option><option value=\"0.6666666666666666\" selected>δ = 2/3 · φ′</option></select></div>"
+ },
+ {
+  "id": "19-38",
+  "de": "!φ′ = {}° · Wandneigung α = {}° · Geländeneigung β = {}° · Wandreibung δ<sub>a</sub> = {}°",
+  "en": "!φ′ = {}° · wall inclination α = {}° · ground slope β = {}° · wall friction δ<sub>a</sub> = {}°"
+ },
+ {
+  "id": "19-39",
+  "de": "§Aktiver Erddruck, horizontale Komponente",
+  "en": "§Active earth pressure, horizontal component"
+ },
+ {
+  "id": "19-40",
+  "de": "!zum Vergleich ohne Wandreibung und waagerecht (Rankine): K<sub>a</sub> = tan²(45° − φ′/2) = {}",
+  "en": "!for comparison without wall friction and horizontal (Rankine): K<sub>a</sub> = tan²(45° − φ′/2) = {}"
+ },
+ {
+  "id": "19-41",
+  "de": "§Gleitflächenwinkel",
+  "en": "§Slip surface angle"
+ },
+ {
+  "id": "19-42",
+  "de": "!ϑ<sub>a</sub> ≈ 45° + φ′/2 = {}° gegen die Waagerechte (für α = β = δ = 0)",
+  "en": "!ϑ<sub>a</sub> ≈ 45° + φ′/2 = {}° to the horizontal (for α = β = δ = 0)"
+ },
+ {
+  "id": "19-43",
+  "de": "§Passiver Erddruck (δ<sub>p</sub> = 0)",
+  "en": "§Passive earth pressure (δ<sub>p</sub> = 0)"
+ },
+ {
+  "id": "19-44",
+  "de": "§Kohäsion (α = β = 0)",
+  "en": "§Cohesion (α = β = 0)"
+ },
+ {
+  "id": "19-45",
+  "de": "§Ansatz (senkrechte Wand, waagerechtes Gelände, δ<sub>a</sub> = {})",
+  "en": "§Assumptions (vertical wall, horizontal ground surface, δ<sub>a</sub> = {})"
+ },
+ {
+  "id": "19-46",
+  "de": "!e<sub>ah</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> ≥ 0 · σ′<sub>v</sub> = q + Σ γ · h (unter GW γ′) · Wasserdruck w = γ<sub>w</sub> · (z − z<sub>w</sub>) mit γ<sub>w</sub> = 10 kN/m³",
+  "en": "!e<sub>ah</sub>(z) = σ′<sub>v</sub>(z) · K<sub>agh</sub> − c′ · K<sub>ach</sub> ≥ 0 · σ′<sub>v</sub> = q + Σ γ · h (below GW γ′) · water pressure w = γ<sub>w</sub> · (z − z<sub>w</sub>) with γ<sub>w</sub> = 10 kN/m³"
+ },
+ {
+  "id": "19-47",
+  "de": "§Ordinaten (oben/unten je Schicht)",
+  "en": "§Ordinates (top/bottom of each layer)"
+ },
+ {
+  "id": "19-48",
+  "de": "§Resultierende je m Wand",
+  "en": "§Resultant per m of wall"
+ },
+ {
+  "id": "19-49",
+  "de": "E<sub>ah</sub> = {} kN/m, Angriff {} m über dem Fuß",
+  "en": "E<sub>ah</sub> = {} kN/m, acting {} m above the base"
+ },
+ {
+  "id": "19-50",
+  "de": "W = {} kN/m, Angriff {} m über dem Fuß",
+  "en": "W = {} kN/m, acting {} m above the base"
+ },
+ {
+  "id": "19-51",
+  "de": "Summe E<sub>ah</sub> + W = {} kN/m",
+  "en": "Total E<sub>ah</sub> + W = {} kN/m"
+ },
+ {
+  "id": "19-52",
+  "de": "Erddruck auf {} m Wandhöhe",
+  "en": "Earth pressure on {} m wall height"
+ },
+ {
+  "id": "19-53",
+  "de": "e > b/6: klaffende Fuge",
+  "en": "e > b/6: open joint"
+ },
+ {
+  "id": "19-54",
+  "de": "<div class=\"calc-field\"><label>Länge a [m]</label><input type=\"number\" id=\"sd-a\" value=\"2.5\" step=\"any\" oninput=\"updateSohldruck()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Length a [m]</label><input type=\"number\" id=\"sd-a\" value=\"2.5\" step=\"any\" oninput=\"updateSohldruck()\"></div>"
+ },
+ {
+  "id": "19-55",
+  "de": "<div class=\"calc-field\"><label>Breite b [m] (Richtung von M)</label><input type=\"number\" id=\"sd-b\" value=\"2\" step=\"any\" oninput=\"updateSohldruck()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Width b [m] (direction of M)</label><input type=\"number\" id=\"sd-b\" value=\"2\" step=\"any\" oninput=\"updateSohldruck()\"></div>"
+ },
+ {
+  "id": "19-56",
+  "de": "<div class=\"calc-field\"><label>Lasten</label><select id=\"sd-art\" onchange=\"updateSohldruck()\"><option value=\"g\">nur ständig</option><option value=\"q\" selected>ständig + veränderlich</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Loads</label><select id=\"sd-art\" onchange=\"updateSohldruck()\"><option value=\"g\">permanent only</option><option value=\"q\" selected>permanent + variable</option></select></div>"
+ },
+ {
+  "id": "19-57",
+  "de": "!1. Kernweite b/6 = {} m · 2. Kernweite b/3 = {} m",
+  "en": "!1st kern width b/6 = {} m · 2nd kern width b/3 = {} m"
+ },
+ {
+  "id": "19-58",
+  "de": "§Trapezförmige Sohlspannung (e ≤ b/6)",
+  "en": "§Trapezoidal base pressure (e ≤ b/6)"
+ },
+ {
+  "id": "19-59",
+  "de": "§Lage der Resultierenden (DIN 1054)",
+  "en": "§Position of the resultant (DIN 1054)"
+ },
+ {
+  "id": "19-60",
+  "de": "ständige + veränderliche Lasten: e ≤ b/3",
+  "en": "permanent + variable loads: e ≤ b/3"
+ },
+ {
+  "id": "19-61",
+  "de": "§Wirksame Fläche für den Grundbruch",
+  "en": "§Effective area for bearing resistance"
+ },
+ {
+  "id": "19-62",
+  "de": "nur ständige Lasten: e ≤ b/6",
+  "en": "permanent loads only: e ≤ b/6"
+ },
+ {
+  "id": "19-63",
+  "de": "<div class=\"calc-field\"><label>Form</label><select id=\"gb-form\" onchange=\"updateGB()\"><option value=\"r\" selected>Einzelfundament</option><option value=\"s\">Streifenfundament (je m)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Shape</label><select id=\"gb-form\" onchange=\"updateGB()\"><option value=\"r\" selected>Pad footing</option><option value=\"s\">Strip footing (per m)</option></select></div>"
+ },
+ {
+  "id": "19-64",
+  "de": "<div class=\"calc-field\"><label>Breite b [m]</label><input type=\"number\" id=\"gb-b\" value=\"2\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Width b [m]</label><input type=\"number\" id=\"gb-b\" value=\"2\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-65",
+  "de": "<div class=\"calc-field\"><label>Länge a [m]</label><input type=\"number\" id=\"gb-a\" value=\"3\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Length a [m]</label><input type=\"number\" id=\"gb-a\" value=\"3\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-66",
+  "de": "<div class=\"calc-field\"><label>Einbindetiefe d [m]</label><input type=\"number\" id=\"gb-d\" value=\"1\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Embedment depth d [m]</label><input type=\"number\" id=\"gb-d\" value=\"1\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-67",
+  "de": "<div class=\"calc-field\"><label>γ<sub>1</sub> über Sohle [kN/m³]</label><input type=\"number\" id=\"gb-g1\" value=\"18\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>γ<sub>1</sub> above base [kN/m³]</label><input type=\"number\" id=\"gb-g1\" value=\"18\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-68",
+  "de": "<div class=\"calc-field\"><label>γ<sub>2</sub> unter Sohle [kN/m³]</label><input type=\"number\" id=\"gb-g2\" value=\"19\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>γ<sub>2</sub> below base [kN/m³]</label><input type=\"number\" id=\"gb-g2\" value=\"19\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-69",
+  "de": "<div class=\"calc-field\"><label>H<sub>k</sub> [kN] (in Richtung b)</label><input type=\"number\" id=\"gb-H\" value=\"80\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>H<sub>k</sub> [kN] (in direction b)</label><input type=\"number\" id=\"gb-H\" value=\"80\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-70",
+  "de": "<div class=\"calc-field\"><label>Ausmitte e [m] (in Richtung b)</label><input type=\"number\" id=\"gb-e\" value=\"0.15\" step=\"any\" oninput=\"updateGB()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Eccentricity e [m] (in direction b)</label><input type=\"number\" id=\"gb-e\" value=\"0.15\" step=\"any\" oninput=\"updateGB()\"></div>"
+ },
+ {
+  "id": "19-71",
+  "de": "§Wirksame Fläche",
+  "en": "§Effective area"
+ },
+ {
+  "id": "19-72",
+  "de": "§Tragfähigkeitsbeiwerte",
+  "en": "§Bearing capacity factors"
+ },
+ {
+  "id": "19-73",
+  "de": "§Neigungsbeiwerte (H in Richtung b)",
+  "en": "§Inclination factors (H in direction b)"
+ },
+ {
+  "id": "19-74",
+  "de": "§Widerstand und Nachweis (BS-P, γ<sub>R,v</sub> = 1,40)",
+  "en": "§Resistance and verification (BS-P, γ<sub>R,v</sub> = 1.40)"
+ },
+ {
+  "id": "19-75",
+  "de": "!V und H hier charakteristisch (für die Neigungsbeiwerte), V<sub>d</sub> als Bemessungswert für den Nachweis.",
+  "en": "!V and H characteristic here (for the inclination factors), V<sub>d</sub> as design value for the verification."
+ },
+ {
+  "id": "19-76",
+  "de": "Grundbruch {} b = {} m",
+  "en": "Bearing resistance, {} b = {} m"
+ },
+ {
+  "id": "19-77",
+  "de": "2 (Streifen)",
+  "en": "2 (strip)"
+ },
+ {
+  "id": "19-78",
+  "de": "<b class=\"bad-t\">✗ nicht erfüllt</b>",
+  "en": "<b class=\"bad-t\">✗ not satisfied</b>"
+ },
+ {
+  "id": "19-79",
+  "de": "Rechteck- oder Kreisfundament mit a/b < 2",
+  "en": "Rectangular or circular footing with a/b < 2"
+ },
+ {
+  "id": "19-80",
+  "de": "Einbindetiefe d > 2 m",
+  "en": "Embedment depth d > 2 m"
+ },
+ {
+  "id": "19-81",
+  "de": "<div class=\"calc-field\"><label>Einbindetiefe d [m]</label><input type=\"number\" id=\"sw-d\" value=\"1\" step=\"any\" oninput=\"updateSohl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Embedment depth d [m]</label><input type=\"number\" id=\"sw-d\" value=\"1\" step=\"any\" oninput=\"updateSohl()\"></div>"
+ },
+ {
+  "id": "19-82",
+  "de": "<div class=\"calc-field\"><label>Breite b [m] (kurze Seite)</label><input type=\"number\" id=\"sw-b\" value=\"1\" step=\"any\" oninput=\"updateSohl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Width b [m] (short side)</label><input type=\"number\" id=\"sw-b\" value=\"1\" step=\"any\" oninput=\"updateSohl()\"></div>"
+ },
+ {
+  "id": "19-83",
+  "de": "<div class=\"calc-field\"><label>Länge a [m] (0 = Streifen)</label><input type=\"number\" id=\"sw-a\" value=\"0\" step=\"any\" oninput=\"updateSohl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Length a [m] (0 = strip)</label><input type=\"number\" id=\"sw-a\" value=\"0\" step=\"any\" oninput=\"updateSohl()\"></div>"
+ },
+ {
+  "id": "19-84",
+  "de": "<div class=\"calc-field\"><label>Grundwasser unter Sohle [m] (leer = tief)</label><input type=\"number\" id=\"sw-gw\" value=\"\" step=\"any\" oninput=\"updateSohl()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Groundwater below base [m] (empty = deep)</label><input type=\"number\" id=\"sw-gw\" value=\"\" step=\"any\" oninput=\"updateSohl()\"></div>"
+ },
+ {
+  "id": "19-85",
+  "de": "<div class=\"calc-field\"><label>Supports</label><select id=\"sw-dicht\" onchange=\"updateSohl()\"><option value=\"0\" selected>mitteldicht</option><option value=\"1\">dicht (nachgewiesen)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Density</label><select id=\"sw-dicht\" onchange=\"updateSohl()\"><option value=\"0\" selected>medium dense</option><option value=\"1\">dense (proven)</option></select></div>"
+ },
+ {
+  "id": "19-86",
+  "de": "Tabellenwert",
+  "en": "Table value"
+ },
+ {
+  "id": "19-87",
+  "de": "<br><span style=\"color:#555\">Nachweis: σ<sub>E,d</sub> = V<sub>d</sub> / (a′·b′) ≤ σ<sub>R,d</sub></span>",
+  "en": "<br><span style=\"color:#555\">Verification: σ<sub>E,d</sub> = V<sub>d</sub> / (a′·b′) ≤ σ<sub>R,d</sub></span>"
+ },
+ {
+  "id": "19-88",
+  "de": "dichte Lagerung nachgewiesen: +50 %",
+  "en": "dense state proven: +50 %"
+ },
+ {
+  "id": "19-89",
+  "de": "§Unendlich lange Böschung (Gleitfläche parallel zur Oberfläche)",
+  "en": "§Infinite slope (slip surface parallel to the surface)"
+ },
+ {
+  "id": "19-90",
+  "de": "!trocken, c′ = 0: η = tan φ′ / tan β · hangparallel durchströmt: η = γ′/γ<sub>r</sub> · tan φ′ / tan β (≈ halbe Sicherheit)",
+  "en": "!dry, c′ = 0: η = tan φ′ / tan β · seepage parallel to slope: η = γ′/γ<sub>r</sub> · tan φ′ / tan β (≈ half the safety)"
+ },
+ {
+  "id": "19-91",
+  "de": "§Endliche Böschung: Lamellenverfahren",
+  "en": "§Finite slope: method of slices"
+ },
+ {
+  "id": "19-92",
+  "de": "!Fellenius / Bishop: Gleitkreis in Lamellen teilen, Momentengleichgewicht um den Kreismittelpunkt; Bishop ist genauer (iterativ, η steht beidseitig)",
+  "en": "!Fellenius / Bishop: divide the slip circle into slices, moment equilibrium about the circle centre; Bishop is more accurate (iterative, η appears on both sides)"
+ },
+ {
+  "id": "19-93",
+  "de": "!η = Σ (c′ · b + (G − u · b) · tan φ′) / m<sub>α</sub> / Σ G · sin α mit m<sub>α</sub> = cos α + tan φ′ · sin α / η (Bishop)",
+  "en": "!η = Σ (c′ · b + (G − u · b) · tan φ′) / m<sub>α</sub> / Σ G · sin α with m<sub>α</sub> = cos α + tan φ′ · sin α / η (Bishop)"
+ },
+ {
+  "id": "19-94",
+  "de": "!φ′<sub>d</sub> = arctan(tan φ′<sub>k</sub> / γ<sub>φ</sub>) · c′<sub>d</sub> = c′<sub>k</sub> / γ<sub>c</sub> mit γ<sub>φ</sub> = γ<sub>c</sub> = 1,25 (BS-P), 1,15 (BS-T), 1,10 (BS-A) · Nachweis Ausnutzung μ ≤ 1",
+  "en": "!φ′<sub>d</sub> = arctan(tan φ′<sub>k</sub> / γ<sub>φ</sub>) · c′<sub>d</sub> = c′<sub>k</sub> / γ<sub>c</sub> with γ<sub>φ</sub> = γ<sub>c</sub> = 1.25 (BS-P), 1.15 (BS-T), 1.10 (BS-A) · verification utilisation μ ≤ 1"
+ },
+ {
+  "id": "19-95",
+  "de": "<div class=\"calc-field\"><label>Böschungswinkel β [°]</label><input type=\"number\" id=\"bo-b\" value=\"26.6\" step=\"any\" oninput=\"updateBoesch()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Slope angle β [°]</label><input type=\"number\" id=\"bo-b\" value=\"26.6\" step=\"any\" oninput=\"updateBoesch()\"></div>"
+ },
+ {
+  "id": "19-96",
+  "de": "<div class=\"calc-field\"><label>Tiefe der Gleitfläche z [m]</label><input type=\"number\" id=\"bo-z\" value=\"2\" step=\"any\" oninput=\"updateBoesch()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Depth of slip surface z [m]</label><input type=\"number\" id=\"bo-z\" value=\"2\" step=\"any\" oninput=\"updateBoesch()\"></div>"
+ },
+ {
+  "id": "19-97",
+  "de": "<div class=\"calc-field\"><label>Water</label><select id=\"bo-w\" onchange=\"updateBoesch()\"><option value=\"t\" selected>trocken</option><option value=\"s\">hangparallel durchströmt</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Water</label><select id=\"bo-w\" onchange=\"updateBoesch()\"><option value=\"t\" selected>dry</option><option value=\"s\">seepage parallel to slope</option></select></div>"
+ },
+ {
+  "id": "19-98",
+  "de": "<div class=\"calc-field\"><label>Bemessungssituation</label><select id=\"bo-bs\" onchange=\"updateBoesch()\"><option value=\"P\" selected>BS-P</option><option value=\"T\">BS-T</option><option value=\"A\">BS-A</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Design situation</label><select id=\"bo-bs\" onchange=\"updateBoesch()\"><option value=\"P\" selected>BS-P</option><option value=\"T\">BS-T</option><option value=\"A\">BS-A</option></select></div>"
+ },
+ {
+  "id": "19-99",
+  "de": "Unendliche Böschung β = {}°{}",
+  "en": "Infinite slope β = {}°{}"
+ },
+ {
+  "id": "19-100",
+  "de": "§Bemessungswerte der Scherfestigkeit (GEO-3, BS-{}: γ<sub>φ</sub> = γ<sub>c</sub> = {})",
+  "en": "§Design values of shear strength (GEO-3, BS-{}: γ<sub>φ</sub> = γ<sub>c</sub> = {})"
+ },
+ {
+  "id": "19-101",
+  "de": "§Spannungen in der Gleitfläche in der Tiefe z = {} m",
+  "en": "§Stresses on the slip surface at depth z = {} m"
+ },
+ {
+  "id": "19-102",
+  "de": "!globale Sicherheit zum Vergleich: η = τ<sub>f,k</sub> / τ = {}{}",
+  "en": "!global factor of safety for comparison: η = τ<sub>f,k</sub> / τ = {}{}"
+ },
+ {
+  "id": "19-103",
+  "de": " (ohne Kohäsion: tan φ′/tan β)",
+  "en": " (without cohesion: tan φ′/tan β)"
+ },
+ {
+  "id": "19-104",
+  "de": ", hangparallel durchströmt",
+  "en": ", seepage parallel to slope"
+ },
+ {
+  "id": "19-105",
+  "de": " (γ′ = γ<sub>r</sub> − γ<sub>w</sub>, Strömungskraft hangparallel)",
+  "en": " (γ′ = γ<sub>r</sub> − γ<sub>w</sub>, seepage force parallel to slope)"
+ },
+ {
+  "id": "19-106",
+  "de": " (ohne Kohäsion: γ′/γ<sub>r</sub> · tan φ′/tan β)",
+  "en": " (without cohesion: γ′/γ<sub>r</sub> · tan φ′/tan β)"
+ },
+ {
+  "id": "19-107",
+  "de": "(6.23): σ<sub>c</sub>/(k<sub>c,y</sub> · f<sub>c,0,d</sub>) + σ<sub>m,y</sub>/f<sub>m,y,d</sub> = 4,08/(0,507 · 12,92) + 4,37/14,97 = 0,915 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "(6.23): σ<sub>c</sub>/(k<sub>c,y</sub> · f<sub>c,0,d</sub>) + σ<sub>m,y</sub>/f<sub>m,y,d</sub> = 4.08/(0.507 · 12.92) + 4.37/14.97 = 0.915 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "19-108",
+  "de": "(6.24): σ<sub>c</sub>/(k<sub>c,z</sub> · f<sub>c,0,d</sub>) + k<sub>m</sub> · σ<sub>m,y</sub>/f<sub>m,y,d</sub> = 4,08/(0,507 · 12,92) + 0,7 · 4,37/14,97 = 0,828 ≤ 1 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "(6.24): σ<sub>c</sub>/(k<sub>c,z</sub> · f<sub>c,0,d</sub>) + k<sub>m</sub> · σ<sub>m,y</sub>/f<sub>m,y,d</sub> = 4.08/(0.507 · 12.92) + 0.7 · 4.37/14.97 = 0.828 ≤ 1 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "19-109",
+  "de": "(EI)<sub>ℓ</sub> — Biegesteifigkeit in Spannrichtung je Meter Breite [Nm²/m]<br> m — Masse je Flächeneinheit [kg/m²] · ℓ — Spannweite [m]<br> Gilt für die frei drehbar gelagerte Einfelddecke.",
+  "en": "(EI)<sub>ℓ</sub> — bending stiffness in the span direction per metre width [Nm²/m]<br> m — mass per unit area [kg/m²] · ℓ — span [m]<br> Applies to a simply supported single-span floor."
+ },
+ {
+  "id": "19-110",
+  "de": "0,50 … 1,10 (Tabelle unter Baustoffe)",
+  "en": "0.50 … 1.10 (table under Materials)"
+ },
+ {
+  "id": "19-111",
+  "de": "0,7 Rechteck (VH, BSH, LVL) · 1,0 andere Querschnitte",
+  "en": "0.7 rectangle (solid timber, glulam, LVL) · 1.0 other cross-sections"
+ },
+ {
+  "id": "19-112",
+  "de": "1,0 allgemein · Einzelauflager (l<sub>1</sub> ≥ 2h): VH 1,5, BSH 1,75 · Schwelle: VH 1,25, BSH 1,5",
+  "en": "1.0 general · discrete support (l<sub>1</sub> ≥ 2h): solid timber 1.5, glulam 1.75 · sill: solid timber 1.25, glulam 1.5"
+ },
+ {
+  "id": "19-113",
+  "de": "1,25 (EN-Empfehlung)",
+  "en": "1.25 (EN recommendation)"
+ },
+ {
+  "id": "19-114",
+  "de": "1,30 (EN-Empfehlung)",
+  "en": "1.30 (EN recommendation)"
+ },
+ {
+  "id": "19-115",
+  "de": "1,30 (NA Deutschland)",
+  "en": "1.30 (German NA)"
+ },
+ {
+  "id": "19-116",
+  "de": "1. Eigenfrequenz",
+  "en": "1. Natural frequency"
+ },
+ {
+  "id": "19-117",
+  "de": "1. Kritische Biegespannung",
+  "en": "1. Critical bending stress"
+ },
+ {
+  "id": "19-118",
+  "de": "1. Schlankheit",
+  "en": "1. Slenderness"
+ },
+ {
+  "id": "19-119",
+  "de": "2. Bezogene Kippschlankheit",
+  "en": "2. Relative slenderness for bending"
+ },
+ {
+  "id": "19-120",
+  "de": "2. Knickbeiwert k_c",
+  "en": "2. Buckling factor k_c"
+ },
+ {
+  "id": "19-121",
+  "de": "2. Steifigkeitskriterium (f₁ &gt; 8 Hz)",
+  "en": "2. Stiffness criterion (f₁ &gt; 8 Hz)"
+ },
+ {
+  "id": "19-122",
+  "de": "27 Querschnitte · waagerecht scrollbar",
+  "en": "27 cross-sections · scroll horizontally"
+ },
+ {
+  "id": "19-123",
+  "de": "3. Kippbeiwert k_crit",
+  "en": "3. Lateral buckling factor k_crit"
+ },
+ {
+  "id": "19-124",
+  "de": "3. Nachweis",
+  "en": "3. Verification"
+ },
+ {
+  "id": "19-125",
+  "de": "3. Schwinggeschwindigkeit (f₁ &gt; 8 Hz)",
+  "en": "3. Velocity response (f₁ &gt; 8 Hz)"
+ },
+ {
+  "id": "19-126",
+  "de": "4. Nachweis",
+  "en": "4. Verification"
+ },
+ {
+  "id": "19-127",
+  "de": "75 Querschnitte · waagerecht scrollbar",
+  "en": "75 cross-sections · scroll horizontally"
+ },
+ {
+  "id": "19-128",
+  "de": "90° … 150° und 210° … 270°",
+  "en": "90° … 150° and 210° … 270°"
+ },
+ {
+  "id": "19-129",
+  "de": "<a class=\"applink\" href=\"#/holzbau/verbindungen/abstaende\">→ Mindestabstände für Nägel</a>",
+  "en": "<a class=\"applink\" href=\"#/holzbau/verbindungen/abstaende\">→ Minimum spacings for nails</a>"
+ },
+ {
+  "id": "19-130",
+  "de": "<a class=\"applink\" href=\"#/holzbau/verbindungen/abstaende\">→ Mindestabstände</a>",
+  "en": "<a class=\"applink\" href=\"#/holzbau/verbindungen/abstaende\">→ Minimum spacings</a>"
+ },
+ {
+  "id": "19-131",
+  "de": "<a class=\"applink\" href=\"calc.html\">→ Durchbiegung in statiq·calc berechnen</a>",
+  "en": "<a class=\"applink\" href=\"calc.html\">→ Calculate deflection in statiq·calc</a>"
+ },
+ {
+  "id": "19-132",
+  "de": "<b>NKL 1</b> — beheizte Innenräume, Holzfeuchte ≤ 12 %<br> <b>NKL 2</b> — überdachte, offene Bauten, Holzfeuchte ≤ 20 %<br> <b>NKL 3</b> — frei bewittert, Holzfeuchte &gt; 20 %",
+  "en": "<b>SC 1</b> — heated interiors, moisture content ≤ 12 %<br> <b>SC 2</b> — covered, open structures, moisture content ≤ 20 %<br> <b>SC 3</b> — fully exposed to weather, moisture content &gt; 20 %"
+ },
+ {
+  "id": "19-133",
+  "de": "<b>Nicht vorgebohrt, 420 &lt; ρ<sub>k</sub> ≤ 500 kg/m³</b>",
+  "en": "<b>Not pre-drilled, 420 &lt; ρ<sub>k</sub> ≤ 500 kg/m³</b>"
+ },
+ {
+  "id": "19-134",
+  "de": "<b>Nicht vorgebohrt, ρ<sub>k</sub> ≤ 420 kg/m³</b>",
+  "en": "<b>Not pre-drilled, ρ<sub>k</sub> ≤ 420 kg/m³</b>"
+ },
+ {
+  "id": "19-135",
+  "de": "<b>Vorgebohrt</b>",
+  "en": "<b>Pre-drilled</b>"
+ },
+ {
+  "id": "19-136",
+  "de": "<b>f_m,k</b> Biegung · <b>f_t,0,k</b> Zug ∥ Faser · <b>f_t,90,k</b> Zug ⊥ Faser<br> <b>f_c,0,k</b> Druck ∥ Faser · <b>f_c,90,k</b> Druck ⊥ Faser · <b>f_v,k</b> Schub<br> <b>E_0,mean</b> Elastizitätsmodul ∥ · <b>G_mean</b> Schubmodul · <b>ρ_k</b> Rohdichte (5%-Quantil)",
+  "en": "<b>f_m,k</b> bending · <b>f_t,0,k</b> tension ∥ grain · <b>f_t,90,k</b> tension ⊥ grain<br> <b>f_c,0,k</b> compression ∥ grain · <b>f_c,90,k</b> compression ⊥ grain · <b>f_v,k</b> shear<br> <b>E_0,mean</b> modulus of elasticity ∥ · <b>G_mean</b> shear modulus · <b>ρ_k</b> density (5% fractile)"
+ },
+ {
+  "id": "19-137",
+  "de": "<b>ständig</b> &gt; 10 Jahre (Eigenlast) · <b>lang</b> 6 Monate – 10 Jahre (Lagergut)<br> <b>mittel</b> 1 Woche – 6 Monate (Nutzlasten) · <b>kurz</b> &lt; 1 Woche<br> <b>sehr kurz</b> Anprall, außergewöhnliche Einwirkungen",
+  "en": "<b>permanent</b> &gt; 10 years (self-weight) · <b>long-term</b> 6 months – 10 years (storage)<br> <b>medium-term</b> 1 week – 6 months (imposed loads) · <b>short-term</b> &lt; 1 week<br> <b>instantaneous</b> impact, accidental actions"
+ },
+ {
+  "id": "19-138",
+  "de": "<b>w_inst</b> elastische Anfangsdurchbiegung · <b>w_fin</b> Enddurchbiegung mit Kriechen<br> <b>w_c</b> Überhöhung · <b>w_net,fin</b> = w_fin − w_c (Enddurchbiegung abzüglich Überhöhung)",
+  "en": "<b>w_inst</b> instantaneous elastic deflection · <b>w_fin</b> final deflection including creep<br> <b>w_c</b> precamber · <b>w_net,fin</b> = w_fin − w_c (final deflection minus precamber)"
+ },
+ {
+  "id": "19-139",
+  "de": "<span class=\"applink soon\" title=\"statiq·size ist in Vorbereitung\">→ Abscher-Nachweis führen — statiq·size folgt</span>",
+  "en": "<span class=\"applink soon\" title=\"statiq·size is in preparation\">→ Run shear check — statiq·size coming soon</span>"
+ },
+ {
+  "id": "19-140",
+  "de": "<span class=\"applink soon\" title=\"statiq·size ist in Vorbereitung\">→ Knicknachweis führen — statiq·size folgt</span>",
+  "en": "<span class=\"applink soon\" title=\"statiq·size is in preparation\">→ Run buckling check — statiq·size coming soon</span>"
+ },
+ {
+  "id": "19-141",
+  "de": "<span class=\"applink soon\" title=\"statiq·size ist in Vorbereitung\">→ Nachweis führen — statiq·size folgt</span>",
+  "en": "<span class=\"applink soon\" title=\"statiq·size is in preparation\">→ Run check — statiq·size coming soon</span>"
+ },
+ {
+  "id": "19-142",
+  "de": "<span class=\"st-n\">1</span><span>Abbrandtiefe nach t = 30 min</span>",
+  "en": "<span class=\"st-n\">1</span><span>Charring depth after t = 30 min</span>"
+ },
+ {
+  "id": "19-143",
+  "de": "<span class=\"st-n\">1</span><span>Baustoff C24 (EN 338), NKL 1, γ<sub>M</sub> = 1,3</span>",
+  "en": "<span class=\"st-n\">1</span><span>Material C24 (EN 338), SC 1, γ<sub>M</sub> = 1.3</span>"
+ },
+ {
+  "id": "19-144",
+  "de": "<span class=\"st-n\">1</span><span>Baustoff C24, NKL 1, KLED mittel</span>",
+  "en": "<span class=\"st-n\">1</span><span>Material C24, SC 1, load duration medium-term</span>"
+ },
+ {
+  "id": "19-145",
+  "de": "<span class=\"st-n\">1</span><span>Bemessungsfestigkeiten (C24, k<sub>mod</sub> = 0,80)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Design strengths (C24, k<sub>mod</sub> = 0.80)</span>"
+ },
+ {
+  "id": "19-146",
+  "de": "<span class=\"st-n\">1</span><span>Einachsige Biegung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Uniaxial bending</span>"
+ },
+ {
+  "id": "19-147",
+  "de": "<span class=\"st-n\">1</span><span>Schub (Rechteck)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Shear (rectangle)</span>"
+ },
+ {
+  "id": "19-148",
+  "de": "<span class=\"st-n\">1</span><span>Wirksame Abbrandtiefe</span>",
+  "en": "<span class=\"st-n\">1</span><span>Effective charring depth</span>"
+ },
+ {
+  "id": "19-149",
+  "de": "<span class=\"st-n\">1</span><span>Wirksame Kipplänge (Tab. 6.1)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Effective length for lateral buckling (Table 6.1)</span>"
+ },
+ {
+  "id": "19-150",
+  "de": "<span class=\"st-n\">2</span><span>Bemessungswert im Brandfall</span>",
+  "en": "<span class=\"st-n\">2</span><span>Design value in the fire situation</span>"
+ },
+ {
+  "id": "19-151",
+  "de": "<span class=\"st-n\">2</span><span>Festigkeit unter dem Winkel α = 30,0° (Hankinson-ähnliche Formel 6.16)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Strength at angle α = 30.0° (Hankinson-type formula 6.16)</span>"
+ },
+ {
+  "id": "19-152",
+  "de": "<span class=\"st-n\">2</span><span>Kritische Biegespannung</span>",
+  "en": "<span class=\"st-n\">2</span><span>Critical bending stress</span>"
+ },
+ {
+  "id": "19-153",
+  "de": "<span class=\"st-n\">2</span><span>Querschnitt 120 × 240 mm</span>",
+  "en": "<span class=\"st-n\">2</span><span>Cross-section 120 × 240 mm</span>"
+ },
+ {
+  "id": "19-154",
+  "de": "<span class=\"st-n\">2</span><span>Querschnitt 140 × 140 mm</span>",
+  "en": "<span class=\"st-n\">2</span><span>Cross-section 140 × 140 mm</span>"
+ },
+ {
+  "id": "19-155",
+  "de": "<span class=\"st-n\">2</span><span>Restquerschnitt (dreiseitig, Oberseite geschützt)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Residual cross-section (three sides, top protected)</span>"
+ },
+ {
+  "id": "19-156",
+  "de": "<span class=\"st-n\">2</span><span>Zweiachsige Biegung (6.11), (6.12)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Biaxial bending (6.11), (6.12)</span>"
+ },
+ {
+  "id": "19-157",
+  "de": "<span class=\"st-n\">3</span><span>Ausknicken um y (in Richtung h)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Buckling about y (in direction h)</span>"
+ }
+]

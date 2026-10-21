@@ -1,0 +1,882 @@
+{
+"09-0": {
+"fr": "La force horizontale est supérieure à la résistance au cisaillement de la longueur de voile comprimée.",
+"es": "La fuerza horizontal es mayor que la resistencia a cortante de la longitud comprimida del muro."
+},
+"09-1": {
+"fr": "La résultante est trop excentrée — le joint de la base s'ouvre trop.",
+"es": "La resultante queda demasiado hacia el exterior: la junta de la base se abre en exceso."
+},
+"09-2": {
+"fr": "La pression sous la base est supérieure à la résistance de portance du sol.",
+"es": "La presión sobre el terreno es mayor que la resistencia al hundimiento del terreno."
+},
+"09-3": {
+"fr": "La force horizontale est supérieure à la résistance au glissement dans le joint de base.",
+"es": "La fuerza horizontal es mayor que la resistencia al deslizamiento en la junta de la base."
+},
+"09-4": {
+"fr": "Le tassement calculé dépasse le tassement admissible.",
+"es": "El asiento calculado supera el asiento admisible."
+},
+"09-5": {
+"fr": "La résultante est trop excentrée — le mur risque de se renverser vers l'avant.",
+"es": "La resultante queda demasiado hacia el exterior: el muro tiende a volcar hacia delante."
+},
+"09-6": {
+"fr": "La poussée des terres est supérieure à la résistance au glissement dans le joint de base.",
+"es": "El empuje del terreno es mayor que la resistencia al deslizamiento en la junta de la base."
+},
+"09-7": {
+"fr": "La poussée d'Archimède est supérieure au poids propre stabilisateur (avec coefficients partiels).",
+"es": "La flotación es mayor que el peso propio estabilizador (con coeficientes parciales)."
+},
+"09-8": {
+"fr": "La force horizontale est supérieure à la résistance au glissement (frottement de base et, le cas échéant, butée).",
+"es": "La fuerza horizontal es mayor que la resistencia al deslizamiento (rozamiento en la base y, en su caso, empuje pasivo)."
+},
+"09-9": {
+"fr": "Le corps s'enfonce trop — la revanche est trop faible ou il coule.",
+"es": "El cuerpo se sumerge demasiado: el francobordo es demasiado pequeño o se hunde."
+},
+"09-10": {
+"fr": "Le métacentre est trop bas au-dessus du centre de gravité — le corps ne flotte pas de façon stable.",
+"es": "El metacentro queda demasiado bajo sobre el centro de gravedad: el cuerpo no flota de forma estable."
+},
+"09-11": {
+"fr": "Les pertes de charge dans la conduite sont supérieures à la différence de hauteur disponible.",
+"es": "Las pérdidas en la tubería son mayores que la diferencia de altura disponible."
+},
+"09-12": {
+"fr": "Le niveau d'eau en régime uniforme ne laisse pas une revanche suffisante jusqu'au bord supérieur.",
+"es": "El nivel de agua en flujo uniforme no deja suficiente francobordo hasta el borde superior."
+},
+"09-13": {
+"fr": "Le niveau amont au-dessus du déversoir est plus élevé que l'admissible.",
+"es": "El nivel aguas arriba sobre el vertedero es mayor que el admisible."
+},
+"09-14": {
+"fr": "La résistance thermique est inférieure à la valeur minimale de la DIN 4108-2.",
+"es": "La resistencia térmica es menor que el valor mínimo de la DIN 4108-2."
+},
+"09-15": {
+"fr": "Le coefficient U est supérieur à la valeur du bâtiment de référence du GEG.",
+"es": "La transmitancia U es mayor que el valor del edificio de referencia del GEG."
+},
+"09-16": {
+"fr": "La surface intérieure devient trop froide (f<sub>Rsi</sub> < 0,70) — risque de moisissure.",
+"es": "La superficie interior resulta demasiado fría (f<sub>Rsi</sub> < 0,70): riesgo de moho."
+},
+"09-17": {
+"fr": "Pendant la période de condensation, il se forme plus de condensat que l'admissible, ou il ne sèche pas à nouveau.",
+"es": "Durante el periodo de condensación se forma más condensación de la admisible o esta no vuelve a secarse."
+},
+"09-18": {
+"fr": "L'indice d'affaiblissement acoustique apparent R′<sub>w</sub> (avec transmission latérale et marge de sécurité) est inférieur à l'exigence.",
+"es": "El índice de reducción acústica aparente R′<sub>w</sub> (con transmisión por flancos y margen de seguridad) es menor que el exigido."
+},
+"09-19": {
+"fr": "Le niveau de bruit de choc L′<sub>n,w</sub> est supérieur à l'admissible.",
+"es": "El nivel de ruido de impacto L′<sub>n,w</sub> es mayor que el admisible."
+},
+"09-20": {
+"fr": " (négatif : la pompe doit être située sous le niveau d'eau — alimentation en charge)",
+"es": " (negativo: la bomba debe situarse por debajo del nivel de agua — aspiración en carga)"
+},
+"09-21": {
+"fr": " (γ′ = γ<sub>r</sub> − γ<sub>w</sub>, écoulement parallèle à la pente)",
+"es": " (γ′ = γ<sub>r</sub> − γ<sub>w</sub>, flujo paralelo a la pendiente)"
+},
+"09-22": {
+"fr": " → dépression jusqu'à la pression de vapeur : cavitation et rupture de la colonne d'eau possibles",
+"es": " → depresión hasta la presión de vapor: posible cavitación y rotura de la columna de agua"
+},
+"09-23": {
+"fr": "0 < h/D adm. ≤ 1",
+"es": "0 < h/D adm. ≤ 1"
+},
+"09-24": {
+"fr": "0,7 (mauvaises conditions d'adhérence)",
+"es": "0,7 (malas condiciones de adherencia)"
+},
+"09-25": {
+"fr": "Carbonisation et section résiduelle",
+"es": "Carbonización y sección residual"
+},
+"09-26": {
+"fr": "Carbonisation et capacité portante résiduelle",
+"es": "Carbonización y capacidad portante residual"
+},
+"09-27": {
+"fr": "Carbonisation : section résiduelle",
+"es": "Carbonización: sección residual"
+},
+"09-28": {
+"fr": "Réduction de la résistance en compression (AN : section pleine ν = 0,525·ν<sub>2</sub>)",
+"es": "Reducción de la resistencia a compresión (AN: sección completa ν = 0,525·ν<sub>2</sub>)"
+},
+"09-29": {
+"fr": "Espacement des barres transversales > 0",
+"es": "Separación de las barras transversales > 0"
+},
+"09-30": {
+"fr": "Exigence avec marge de sécurité de 0,5 m",
+"es": "Requisito con margen de seguridad de 0,5 m"
+},
+"09-31": {
+"fr": "Installation",
+"es": "Instalación"
+},
+"09-32": {
+"fr": "Installation (schématique)",
+"es": "Instalación (esquemático)"
+},
+"09-33": {
+"fr": "Disposition : la moitié dans chacun des tiers extérieurs du recouvrement ; si plus de 50 % des barres sont recouvertes et a ≤ 10Ø, avec armatures de type cadre (boucles ou étriers).",
+"es": "Disposición: la mitad en cada uno de los tercios exteriores del solape; si se solapa más del 50 % y a ≤ 10Ø, en forma de cercos (lazos o estribos)."
+},
+"09-34": {
+"fr": "Vue (schématique)",
+"es": "Vista (esquemático)"
+},
+"09-35": {
+"fr": "Proportion de barres recouvertes 1 … 100 %",
+"es": "Proporción de barras solapadas 1 … 100 %"
+},
+"09-36": {
+"fr": "Exécution",
+"es": "Ejecución"
+},
+"09-37": {
+"fr": "Solive",
+"es": "Vigueta"
+},
+"09-38": {
+"fr": "Fouille",
+"es": "Excavación"
+},
+"09-39": {
+"fr": "Physique du bâtiment — classe de bâtiment et résistance au feu",
+"es": "Física de la edificación — clase de edificio y resistencia al fuego"
+},
+"09-40": {
+"fr": "Éléments au sous-sol",
+"es": "Elementos en la planta sótano"
+},
+"09-41": {
+"fr": "Coefficients α<sub>3</sub> et α<sub>5</sub> (armatures transversales, pression transversale — ici 1,0 côté sécurité), recouvrements de treillis soudés (8.7.5), paquets de barres, coupleurs mécaniques et position des recouvrements dans l'élément.",
+"es": "Coeficientes α<sub>3</sub> y α<sub>5</sub> (armadura transversal, presión transversal — aquí 1,0 del lado de la seguridad), solapes de mallas electrosoldadas (8.7.5), grupos de barras, acopladores mecánicos y posición de los solapes en el elemento."
+},
+"09-42": {
+"fr": "Dimensionnement selon DIN EN 1992-1-1 avec l'AN allemand, 6.3 : caisson creux équivalent, bielles sous torsion et effort tranchant (interaction), étriers et armatures longitudinales, dispositions constructives.",
+"es": "Dimensionamiento según DIN EN 1992-1-1 con el AN alemán, 6.3: sección hueca equivalente, bielas bajo torsión y cortante (interacción), estribos y armadura longitudinal, y reglas de armado."
+},
+"09-43": {
+"fr": "Dimensionnement selon DIN EN 1992-1-1 avec l'AN allemand, 8.4 et 8.7 : contrainte d'adhérence, longueur d'ancrage de base, longueur de recouvrement avec α₁ et α₆, longueur minimale et armatures transversales dans la zone de recouvrement.",
+"es": "Dimensionamiento según DIN EN 1992-1-1 con el AN alemán, 8.4 y 8.7: tensión de adherencia, longitud básica de anclaje, longitud de solape con α₁ y α₆, longitud mínima y armadura transversal en la zona de solape."
+},
+"09-44": {
+"fr": "Valeur de calcul de la contrainte d'adhérence",
+"es": "Valor de cálculo de la tensión de adherencia"
+},
+"09-45": {
+"fr": "Valeurs de calcul de la résistance au cisaillement",
+"es": "Valores de cálculo de la resistencia a cortante"
+},
+"09-46": {
+"fr": "Béton, contrainte de l'acier",
+"es": "Hormigón, tensión del acero"
+},
+"09-47": {
+"fr": "Enrobage et caisson creux équivalent",
+"es": "Recubrimiento y sección hueca equivalente"
+},
+"09-48": {
+"fr": "Armatures",
+"es": "Armadura"
+},
+"09-49": {
+"fr": "Rigidité en flexion dans le sens de la portée (solives, par m de largeur de plancher)",
+"es": "Rigidez a flexión en el sentido de la luz (viguetas, por m de ancho de forjado)"
+},
+"09-50": {
+"fr": "Rigidité en flexion transversale (chape, par m de longueur de plancher)",
+"es": "Rigidez a flexión transversal (solera, por m de longitud de forjado)"
+},
+"09-51": {
+"fr": "Flexion en situation d'incendie",
+"es": "Flexión en situación de incendio"
+},
+"09-52": {
+"fr": "À la mise en service, la consolidation n'est pas assez avancée — le tassement résiduel est trop important.",
+"es": "Al inicio del uso la consolidación no ha avanzado lo suficiente: el asiento residual es demasiado grande."
+},
+"09-53": {
+"fr": "Bleu : ligne moyenne du caisson creux équivalent (épaisseur t<sub>ef</sub>, tirets gris à l'intérieur). Noir : étrier fermé et barres longitudinales de torsion.",
+"es": "Azul: línea media de la sección hueca equivalente (espesor t<sub>ef</sub>, trazos grises en el interior). Negro: estribo cerrado y barras longitudinales de torsión."
+},
+"09-54": {
+"fr": "Bleu : chemin de percolation autour du pied du voile. Orange : massif de sol devant le pied du voile, que l'écoulement pousse vers le haut.",
+"es": "Azul: recorrido de filtración alrededor del pie del muro. Naranja: cuerpo de terreno delante del pie del muro que el flujo empuja hacia arriba."
+},
+"09-55": {
+"fr": "Massif de sol t/2 × t",
+"es": "Cuerpo de terreno t/2 × t"
+},
+"09-56": {
+"fr": "Sécurité incendie selon DIN EN 1995-1-2 avec l'AN allemand : profondeur de carbonisation, méthode de la section réduite, flexion et cisaillement en situation d'incendie.",
+"es": "Protección contra incendios según DIN EN 1995-1-2 con el AN alemán: profundidad de carbonización, método de la sección reducida, flexión y cortante en situación de incendio."
+},
+"09-57": {
+"fr": "Revêtements de protection incendie (t<sub>ch</sub>, carbonisation après rupture du revêtement), assemblages en situation d'incendie, flambement et déversement de la section résiduelle, méthode générale (champ de température) et angles arrondis pour le bois massif.",
+"es": "Revestimientos de protección contra incendios (t<sub>ch</sub>, carbonización tras el fallo del revestimiento), uniones en situación de incendio, pandeo y pandeo lateral de la sección residual, método general (campo de temperaturas) y esquinas redondeadas en madera maciza."
+},
+"09-58": {
+"fr": "Talus",
+"es": "Talud"
+},
+"09-59": {
+"fr": "Talus de la fouille, côté nord",
+"es": "Talud de la excavación, lado norte"
+},
+"09-60": {
+"fr": "Adoucir la pente du talus, abaisser la nappe ou intercepter l'écoulement (drainage en pied de talus), ou le conforter (clouage, ouvrage de soutènement).",
+"es": "Tender el talud, rebajar el nivel freático o interceptar el flujo (drenaje al pie) o estabilizarlo (claveteado, estructura de contención)."
+},
+"09-61": {
+"fr": "Rupture de talus",
+"es": "Inestabilidad de talud"
+},
+"09-62": {
+"fr": "Rupture de talus (surface de glissement parallèle à la surface)",
+"es": "Inestabilidad de talud (superficie de deslizamiento paralela a la superficie)"
+},
+"09-63": {
+"fr": "Rupture de talus (talus infini)",
+"es": "Inestabilidad de talud (talud infinito)"
+},
+"09-64": {
+"fr": "Les étriers ou les barres longitudinales sont plus espacés que ne le permet 9.2.3.",
+"es": "Los estribos o las barras longitudinales están más separados de lo que permite 9.2.3."
+},
+"09-65": {
+"fr": "Espacement des étriers > 0",
+"es": "Separación de los estribos > 0"
+},
+"09-66": {
+"fr": "Étriers (torsion + effort tranchant)",
+"es": "Estribos (torsión + cortante)"
+},
+"09-67": {
+"fr": "Méthode des caractéristiques avec frottement, arrêt de pompe (courbe de ralentissement), rupture de la colonne d'eau, réservoirs d'air et volants d'inertie, conduites ramifiées et tronçons de diamètres différents.",
+"es": "Método de las características con rozamiento, parada de bomba (curva de descenso), rotura de la columna de agua, calderines y volantes de inercia, tuberías ramificadas y tramos de tubería distintos."
+},
+"09-68": {
+"fr": "DIN EN 1992-1-1 avec AN, 6.3",
+"es": "DIN EN 1992-1-1 con AN, 6.3"
+},
+"09-69": {
+"fr": "DIN EN 1992-1-1 avec AN, 8.4 et 8.7",
+"es": "DIN EN 1992-1-1 con AN, 8.4 y 8.7"
+},
+"09-70": {
+"fr": "DIN EN 1995-1-1, 7.3 avec classes de planchers selon Hamm/Richter (valeurs indicatives)",
+"es": "DIN EN 1995-1-1, 7.3 con clases de forjado según Hamm/Richter (valores orientativos)"
+},
+"09-71": {
+"fr": "DIN EN 1995-1-2 avec AN, 4.2.2",
+"es": "DIN EN 1995-1-2 con AN, 4.2.2"
+},
+"09-72": {
+"fr": "DIN EN 1997-1 avec DIN 1054 et DIN 4084, GEO-3",
+"es": "DIN EN 1997-1 con DIN 1054 y DIN 4084, GEO-3"
+},
+"09-73": {
+"fr": "DIN EN 1997-1 avec DIN 1054, état limite HYD",
+"es": "DIN EN 1997-1 con DIN 1054, estado límite HYD"
+},
+"09-74": {
+"fr": "Plancher",
+"es": "Forjado"
+},
+"09-75": {
+"fr": "Le débit remplit la conduite plus que l'admissible ou dépasse sa capacité.",
+"es": "El caudal llena la tubería más de lo admisible o supera su capacidad."
+},
+"09-76": {
+"fr": "L'incendie carbonise le bois par l'extérieur ; la couche carbonisée protège le cœur, qui conserve sa résistance.",
+"es": "El fuego carboniza la madera desde el exterior; la capa carbonizada protege el núcleo, que conserva su resistencia."
+},
+"09-77": {
+"fr": "La pression à l'entrée de la pompe ne reste pas suffisamment au-dessus de la pression de vapeur — risque de cavitation.",
+"es": "La presión a la entrada de la bomba no se mantiene suficientemente por encima de la presión de vapor: riesgo de cavitación."
+},
+"09-78": {
+"fr": "Le coup de bélier à la fermeture est si important que la pression maximale dépasse la pression nominale de la conduite.",
+"es": "El golpe de ariete al cerrar es tan grande que la presión máxima supera la presión nominal de la tubería."
+},
+"09-79": {
+"fr": "La résistance au feu de l'élément est inférieure à celle exigée par la classe de bâtiment.",
+"es": "La resistencia al fuego del elemento es menor que la exigida por la clase de edificio."
+},
+"09-80": {
+"fr": "La section est entièrement carbonisée.",
+"es": "La sección se ha carbonizado por completo."
+},
+"09-81": {
+"fr": "La section résiduelle après carbonisation est trop petite pour le moment fléchissant en situation d'incendie.",
+"es": "La sección residual tras la carbonización es demasiado pequeña para el momento flector en situación de incendio."
+},
+"09-82": {
+"fr": "La section résiduelle après carbonisation est trop petite pour l'effort tranchant en situation d'incendie.",
+"es": "La sección residual tras la carbonización es demasiado pequeña para el esfuerzo cortante en situación de incendio."
+},
+"09-83": {
+"fr": "L'approche simplifiée sous-estime le gradient juste au droit du voile pour les fouilles étroites — utiliser alors un réseau d'écoulement.",
+"es": "El planteamiento simplificado subestima el gradiente justo junto al muro en excavaciones estrechas: en ese caso, calcule con una red de flujo."
+},
+"09-84": {
+"fr": "Les étriers ne reprennent pas ensemble les efforts de traction dus à la torsion (par branche) et à l'effort tranchant.",
+"es": "Los estribos no absorben conjuntamente los esfuerzos de tracción debidos a la torsión (por rama) y al cortante."
+},
+"09-85": {
+"fr": "Le plancher fléchit trop sous une charge ponctuelle (pas).",
+"es": "El forjado se deforma demasiado bajo una carga puntual (pisada)."
+},
+"09-86": {
+"fr": "Les bielles sont défaillantes : augmenter la section (A<sub>k</sub> et t<sub>ef</sub> augmentent) ou choisir une résistance du béton plus élevée. Plus d'armatures n'aide pas ici.",
+"es": "Las bielas fallan: aumente la sección (A<sub>k</sub> y t<sub>ef</sub> crecen) o elija una resistencia del hormigón mayor. Más armadura no ayuda aquí."
+},
+"09-87": {
+"fr": "L'onde de pression fait des allers-retours entre la vanne et le réservoir ; en réalité, le frottement l'amortit progressivement.",
+"es": "La onda de presión oscila entre la válvula y el depósito; en realidad, el rozamiento la amortigua poco a poco."
+},
+"09-88": {
+"fr": "La fréquence propre du plancher est trop basse — la marche l'excite de façon perceptible.",
+"es": "La frecuencia propia del forjado es demasiado baja: al caminar vibra de forma perceptible."
+},
+"09-89": {
+"fr": "La vitesse d'écoulement est trop faible — des dépôts se forment.",
+"es": "La velocidad del flujo es demasiado baja: se producen sedimentaciones."
+},
+"09-90": {
+"fr": "Les barres longitudinales sont insuffisantes pour l'effort de traction longitudinal dû à la torsion.",
+"es": "Las barras longitudinales no bastan para la tracción longitudinal debida a la torsión."
+},
+"09-91": {
+"fr": "Les armatures transversales dans la zone de recouvrement ne reprennent pas les forces de fendage des grosses barres.",
+"es": "La armadura transversal en la zona de solape no absorbe las fuerzas de hendimiento de las barras gruesas."
+},
+"09-92": {
+"fr": "La contrainte de cisaillement dans la surface de glissement est supérieure à la résistance au cisaillement du sol (valeur de calcul).",
+"es": "La tensión tangencial en la superficie de deslizamiento es mayor que la resistencia a cortante del terreno (valor de cálculo)."
+},
+"09-93": {
+"fr": "Le tassement augmente tant que l'eau interstitielle s'échappe de la couche cohérente ; le tassement restant après la mise en service est déterminant pour l'ouvrage et ses raccordements.",
+"es": "El asiento aumenta mientras el agua intersticial sale de la capa cohesiva; el asiento restante tras el inicio del uso es determinante para la estructura y sus conexiones."
+},
+"09-94": {
+"fr": "La longueur de recouvrement est inférieure à la longueur de recouvrement requise — l'effort ne peut pas être transmis par adhérence.",
+"es": "La longitud de solape es menor que la longitud de solape necesaria: la fuerza no puede transmitirse por adherencia."
+},
+"09-95": {
+"fr": "Les armatures longitudinales de torsion s'ajoutent aux armatures tendues de flexion ; dans la zone comprimée, elles peuvent être réduites de l'effort de compression.",
+"es": "La armadura longitudinal de torsión se suma a la armadura traccionada de flexión; en la zona comprimida puede reducirse en la fuerza de compresión."
+},
+"09-96": {
+"fr": "Le tassement total est inférieur au tassement résiduel admissible.",
+"es": "El asiento total es menor que el asiento residual admisible."
+},
+"09-97": {
+"fr": "La force d'écoulement ascendante devant le pied du voile est supérieure au poids déjaugé du sol (avec coefficients partiels).",
+"es": "La fuerza de filtración ascendente delante del pie del muro es mayor que el peso sumergido del terreno (con coeficientes parciales)."
+},
+"09-98": {
+"fr": "Pression à la vanne en fonction du temps (schématique, sans amortissement)",
+"es": "Presión en la válvula a lo largo del tiempo (esquemático, sin amortiguamiento)"
+},
+"09-99": {
+"fr": "Écoulement en charge — voir taux de remplissage.",
+"es": "Flujo a presión — véase grado de llenado."
+},
+"09-100": {
+"fr": "Surpression selon Joukowsky (fermeture rapide)",
+"es": "Sobrepresión según Joukowsky (cierre rápido)"
+},
+"09-101": {
+"fr": "Coup de bélier",
+"es": "Golpe de ariete"
+},
+"09-102": {
+"fr": "Coup de bélier et pression maximale",
+"es": "Golpe de ariete y presión máxima"
+},
+"09-103": {
+"fr": "Recouvrement en compression : armatures transversales comme pour un recouvrement en traction, plus une barre transversale au-delà de chaque extrémité du recouvrement, à une distance ≤ 4Ø (effet de pointe).",
+"es": "Solape en compresión: armadura transversal como en un solape en tracción, más una barra transversal más allá de cada extremo del solape a una distancia ≤ 4Ø (apoyo de punta)."
+},
+"09-104": {
+"fr": "Bielles : torsion et effort tranchant",
+"es": "Bielas: torsión y cortante"
+},
+"09-105": {
+"fr": "Célérité de l'onde et temps de réflexion",
+"es": "Celeridad de la onda y tiempo de reflexión"
+},
+"09-106": {
+"fr": "Chemin de drainage : plus long trajet de l'eau interstitielle vers une couche perméable",
+"es": "Recorrido de drenaje: trayecto más largo del agua intersticial hasta una capa permeable"
+},
+"09-107": {
+"fr": "Fréquence propre de la poutre sur deux appuis (articulée)",
+"es": "Frecuencia propia de la viga biapoyada (apoyos articulados)"
+},
+"09-108": {
+"fr": "Classement selon le règlement-type de construction allemand (MBO § 2) et exigence de résistance au feu qui en découle pour les murs et poteaux porteurs (§ 27).",
+"es": "Clasificación según el reglamento modelo de edificación alemán (MBO § 2) y la exigencia resultante de resistencia al fuego para muros y pilares portantes (§ 27)."
+},
+"09-109": {
+"fr": "Caisson creux équivalent : la torsion est reprise par un caisson à paroi mince en périphérie",
+"es": "Sección hueca equivalente: la torsión la absorbe una caja de pared delgada en el perímetro"
+},
+"09-110": {
+"fr": "Résistance en situation d'incendie : k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0, fractile à 20 % via k<sub>fi</sub>",
+"es": "Resistencia en situación de incendio: k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0, fractil del 20 % mediante k<sub>fi</sub>"
+},
+"09-111": {
+"fr": "Résistance au feu des murs et poteaux porteurs (MBO § 27)",
+"es": "Resistencia al fuego de muros y pilares portantes (MBO § 27)"
+},
+"09-112": {
+"fr": "Vitesse d'écoulement avant la fermeture",
+"es": "Velocidad del flujo antes del cierre"
+},
+"09-113": {
+"fr": "Aire > 0",
+"es": "Área > 0"
+},
+"09-114": {
+"fr": "Écoulement à surface libre selon Gauckler-Manning-Strickler : pleine section, hauteur d'eau en remplissage partiel, taux de remplissage et vitesse minimale.",
+"es": "Flujo en lámina libre según Gauckler-Manning-Strickler: sección llena, calado en llenado parcial, grado de llenado y velocidad mínima."
+},
+"09-115": {
+"fr": "Hauteur manométrique de l'installation",
+"es": "Altura manométrica de la instalación"
+},
+"09-116": {
+"fr": "Hauteur manométrique et puissance",
+"es": "Altura manométrica y potencia"
+},
+"09-117": {
+"fr": "Hauteur manométrique, puissance hydraulique et puissance sur l'arbre, ainsi que charge nette absolue à l'aspiration NPSH de l'installation avec la hauteur d'aspiration admissible.",
+"es": "Altura manométrica, potencia hidráulica y potencia en el eje, así como la altura neta de aspiración positiva NPSH de la instalación con la altura de aspiración admisible."
+},
+"09-118": {
+"fr": "Taux de remplissage",
+"es": "Grado de llenado"
+},
+"09-119": {
+"fr": "Aptitude au service selon DIN EN 1995-1-1, 7.3 : fréquence propre (critère de fréquence) et flèche sous 1 kN (critère de rigidité) avec répartition transversale par la chape.",
+"es": "Aptitud al servicio según DIN EN 1995-1-1, 7.3: frecuencia propia (criterio de frecuencia) y flecha bajo 1 kN (criterio de rigidez) con reparto transversal por la solera."
+},
+"09-120": {
+"fr": "Bâtiment",
+"es": "Edificio"
+},
+"09-121": {
+"fr": "Classe de bâtiment",
+"es": "Clase de edificio"
+},
+"09-122": {
+"fr": "Classe de bâtiment (MBO § 2 al. 3)",
+"es": "Clase de edificio (MBO § 2 apdo. 3)"
+},
+"09-123": {
+"fr": "Classe de bâtiment et résistance au feu",
+"es": "Clase de edificio y resistencia al fuego"
+},
+"09-124": {
+"fr": "Jaune : étage le plus haut avec pièce de séjour ; h se mesure du niveau moyen du terrain jusqu'à son plancher.",
+"es": "Amarillo: planta más alta con estancia habitable; h se mide desde el nivel medio del terreno hasta su suelo."
+},
+"09-125": {
+"fr": "Surface de glissement",
+"es": "Superficie de deslizamiento"
+},
+"09-126": {
+"fr": "Cercles de glissement (Bishop, Krey), méthode des tranches et mécanismes de rupture à lignes de glissement droites, talus avec risbermes ou plusieurs couches, surcharges en crête de talus et séismes.",
+"es": "Círculos de deslizamiento (Bishop, Krey), método de las rebanadas y mecanismos de rotura con líneas de deslizamiento rectas, taludes con bermas o varias capas, sobrecargas en la coronación y sismo."
+},
+"09-127": {
+"fr": "État limite HYD : force d'écoulement déstabilisatrice ≤ poids déjaugé stabilisateur",
+"es": "Estado límite HYD: fuerza de filtración desestabilizadora ≤ peso sumergido estabilizador"
+},
+"09-128": {
+"fr": "Géotechnique — rupture de talus",
+"es": "Geotecnia — inestabilidad de talud"
+},
+"09-129": {
+"fr": "Géotechnique — tassement de consolidation",
+"es": "Geotecnia — asiento por consolidación"
+},
+"09-130": {
+"fr": "Nappe à l'extérieur ▽",
+"es": "Nivel freático exterior ▽"
+},
+"09-131": {
+"fr": "Nappe parallèle à la pente",
+"es": "Nivel freático paralelo a la pendiente"
+},
+"09-132": {
+"fr": "Longueur d'ancrage de base pour la contrainte de l'acier σ<sub>sd</sub>",
+"es": "Longitud básica de anclaje para la tensión del acero σ<sub>sd</sub>"
+},
+"09-133": {
+"fr": "Diamètre plus grand ou pente plus forte ; des conduites plus lisses (k<sub>St</sub> plus grand) aident peu.",
+"es": "Mayor diámetro o más pendiente; tuberías más lisas (k<sub>St</sub> mayor) ayudan poco."
+},
+"09-134": {
+"fr": "H (drainage d'un seul côté)",
+"es": "H (drenaje por un solo lado)"
+},
+"09-135": {
+"fr": "H/2 (drainage en haut et en bas)",
+"es": "H/2 (drenaje por arriba y por abajo)"
+},
+"09-136": {
+"fr": "crochet",
+"es": "gancho"
+},
+"09-137": {
+"fr": "crochet ou similaire, enrobage perpendiculaire au plan du crochet ≥ 3Ø",
+"es": "gancho o similar, recubrimiento perpendicular al plano del gancho ≥ 3Ø"
+},
+"09-138": {
+"fr": "Charge nette absolue à l'aspiration de l'installation : pression à l'entrée de la pompe au-dessus de la pression de vapeur",
+"es": "Altura neta de aspiración positiva de la instalación: presión a la entrada de la bomba por encima de la presión de vapor"
+},
+"09-139": {
+"fr": "Les immeubles de grande hauteur sont hors du champ de cette vérification.",
+"es": "Los edificios de gran altura quedan fuera de esta comprobación."
+},
+"09-140": {
+"fr": "Bois",
+"es": "Madera"
+},
+"09-141": {
+"fr": "Bois — carbonisation et capacité portante résiduelle",
+"es": "Madera — carbonización y capacidad portante residual"
+},
+"09-142": {
+"fr": "Bois — vibrations d'un plancher à solives en bois",
+"es": "Madera — vibraciones de un forjado de viguetas de madera"
+},
+"09-143": {
+"fr": "Plancher à solives en bois au-dessus du rez-de-chaussée",
+"es": "Forjado de viguetas de madera sobre la planta baja"
+},
+"09-144": {
+"fr": "Hydrodynamique, NPSH selon DIN EN ISO 9906 (valeur indicative : marge de 0,5 m)",
+"es": "Hidrodinámica, NPSH según DIN EN ISO 9906 (valor orientativo: margen de 0,5 m)"
+},
+"09-145": {
+"fr": "Hydrodynamique : célérité de l'onde, temps de réflexion, coup de bélier selon Joukowsky ou Michaud et comparaison avec la pression nominale.",
+"es": "Hidrodinámica: celeridad de la onda, tiempo de reflexión, golpe de ariete según Joukowsky o Michaud y comparación con la presión nominal."
+},
+"09-146": {
+"fr": "Pression maximale et minimale dans la conduite",
+"es": "Presión máxima y mínima en la tubería"
+},
+"09-147": {
+"fr": "Solives plus hautes (f<sub>1</sub> ~ h<sup>1,5</sup>), entraxe des solives plus faible, portée plus courte ou classe de résistance plus rigide. Plus de masse abaisse la fréquence.",
+"es": "Viguetas de mayor canto (f<sub>1</sub> ~ h<sup>1,5</sup>), menor separación entre viguetas, luz más corta o una clase resistente más rígida. Más masa reduce la frecuencia."
+},
+"09-148": {
+"fr": "Interaction pour sections compactes (AN, quadratique)",
+"es": "Interacción para secciones compactas (AN, cuadrática)"
+},
+"09-149": {
+"fr": "La cavitation apparaît lorsque la pression à l'entrée de la pompe tombe sous la pression de vapeur — d'autant plus tôt que la pompe est haute au-dessus du niveau d'eau.",
+"es": "La cavitación aparece cuando la presión a la entrada de la bomba cae por debajo de la presión de vapor; cuanto más alta está la bomba sobre el nivel de agua, antes ocurre."
+},
+"09-150": {
+"fr": "Aucun caisson creux équivalent possible : augmenter la section.",
+"es": "No es posible una sección hueca equivalente: aumente la sección."
+},
+"09-151": {
+"fr": "Consolidation selon Terzaghi : chemin de drainage, facteur temps, degré de consolidation, tassement à la mise en service et tassement résiduel.",
+"es": "Consolidación según Terzaghi: recorrido de drenaje, factor tiempo, grado de consolidación, asiento al inicio del uso y asiento residual."
+},
+"09-152": {
+"fr": "Degré de consolidation (solution en série de Terzaghi)",
+"es": "Grado de consolidación (solución en serie de Terzaghi)"
+},
+"09-153": {
+"fr": "Degré de consolidation à la mise en service",
+"es": "Grado de consolidación al inicio del uso"
+},
+"09-154": {
+"fr": "Théorie de la consolidation selon Terzaghi, DIN 4019",
+"es": "Teoría de la consolidación según Terzaghi, DIN 4019"
+},
+"09-155": {
+"fr": "Conduite circulaire",
+"es": "Tubería circular"
+},
+"09-156": {
+"fr": "Critères",
+"es": "Criterios"
+},
+"09-157": {
+"fr": " (sans cohésion : {}tan φ′/tan β)",
+"es": " (sin cohesión: {}tan φ′/tan β)"
+},
+"09-158": {
+"fr": "(h/D)<sub>adm</sub> = {}, v<sub>min</sub> = {} m/s",
+"es": "(h/D)<sub>adm</sub> = {}, v<sub>min</sub> = {} m/s"
+},
+"09-159": {
+"fr": "Profondeur de carbonisation après t = {} min de feu normalisé",
+"es": "Profundidad de carbonización tras t = {} min de fuego normalizado"
+},
+"09-160": {
+"fr": "Réaliser l'élément au moins R {} (section, enrobage, revêtement).",
+"es": "Ejecute el elemento al menos R {} (sección, recubrimiento, revestimiento)."
+},
+"09-161": {
+"fr": "Étriers Ø{}/{} cm, barres longitudinales {} Ø {}",
+"es": "Estribos Ø{}/{} cm, barras longitudinales {} Ø {}"
+},
+"09-162": {
+"fr": "Étriers Ø{} : c<sub>nom</sub> = {} mm · barre longitudinale Ø{} : c<sub>nom</sub> = {} mm → enrobage nominal des étriers c<sub>v</sub> = {} mm",
+"es": "Estribos Ø{}: c<sub>nom</sub> = {} mm · barra longitudinal Ø{}: c<sub>nom</sub> = {} mm → recubrimiento nominal de los estribos c<sub>v</sub> = {} mm"
+},
+"09-163": {
+"fr": "GEO-3, BS-{} : coefficients partiels sur les paramètres de cisaillement γ<sub>φ</sub> = γ<sub>c</sub> = {}",
+"es": "GEO-3, BS-{}: coeficientes parciales sobre los parámetros de resistencia al corte γ<sub>φ</sub> = γ<sub>c</sub> = {}"
+},
+"09-164": {
+"fr": "Classe de bâtiment {} · éléments porteurs {} : {}",
+"es": "Clase de edificio {} · elementos portantes {}: {}"
+},
+"09-165": {
+"fr": "Classe de bâtiment {} : <b>{}</b>{}",
+"es": "Clase de edificio {}: <b>{}</b>{}"
+},
+"09-166": {
+"fr": "Tirets : valeurs limites de la classe de plancher {} (f ≥ {} Hz, w ≤ {} mm). Bleu : vérifié, orange : non vérifié.",
+"es": "Trazos: valores límite de la clase de forjado {} (f ≥ {} Hz, w ≤ {} mm). Azul: cumple, naranja: no cumple."
+},
+"09-167": {
+"fr": "H = {} m, c<sub>v</sub> = {} m²/a · U({} a) = {} % · reste {} cm",
+"es": "H = {} m, c<sub>v</sub> = {} m²/a · U({} a) = {} % · resto {} cm"
+},
+"09-168": {
+"fr": "Utilisation à partir de {} a",
+"es": "Uso a partir de {} a"
+},
+"09-169": {
+"fr": "Q = {} l/s > Q<sub>max</sub> = {} l/s → la conduite est pleine et déborde (écoulement en charge).",
+"es": "Q = {} l/s > Q<sub>max</sub> = {} l/s → la tubería se llena y entra en carga (flujo a presión)."
+},
+"09-170": {
+"fr": "Section après R {}",
+"es": "Sección tras R {}"
+},
+"09-171": {
+"fr": "Reste {} cm",
+"es": "Resto {} cm"
+},
+"09-172": {
+"fr": "Temps de fermeture pour p<sub>max</sub> = PN : t<sub>s</sub> ≥ <b>{} s</b>",
+"es": "Tiempo de cierre para p<sub>max</sub> = PN: t<sub>s</sub> ≥ <b>{} s</b>"
+},
+"09-173": {
+"fr": "Temps de fermeture t<sub>s</sub> = {} s, pression de service p<sub>0</sub> = {} bar, PN {}",
+"es": "Tiempo de cierre t<sub>s</sub> = {} s, presión de servicio p<sub>0</sub> = {} bar, PN {}"
+},
+"09-174": {
+"fr": "Contraintes dans la surface de glissement à la profondeur z = {} m",
+"es": "Tensiones en la superficie de deslizamiento a la profundidad z = {} m"
+},
+"09-175": {
+"fr": "Allonger le recouvrement à au moins {} cm, recouvrir moins de barres dans une même section (décalage de 1,3·l<sub>0</sub>) ou réduire la contrainte de l'acier par davantage d'armatures.",
+"es": "Alargue el solape al menos hasta {} cm, solape menos barras en una misma sección (decalado en 1,3·l<sub>0</sub>) o reduzca la tensión del acero con más armadura."
+},
+"09-176": {
+"fr": "U = 1 − Σ 2/M²·e<sup>−M²·T<sub>v</sub></sup> avec M = π/2·(2m + 1) → U = <b>{} %</b>",
+"es": "U = 1 − Σ 2/M²·e<sup>−M²·T<sub>v</sub></sup> con M = π/2·(2m + 1) → U = <b>{} %</b>"
+},
+"09-177": {
+"fr": "U ≥ 1 − Δs<sub>adm</sub>/s<sub>∞</sub> = {} % → T<sub>v</sub> = {} → t ≥ <b>{} ans</b>",
+"es": "U ≥ 1 − Δs<sub>adm</sub>/s<sub>∞</sub> = {} % → T<sub>v</sub> = {} → t ≥ <b>{} años</b>"
+},
+"09-178": {
+"fr": "Recouvrement en traction, Ø {} 16 mm, {} % {} 33 % des barres recouvertes dans une même section",
+"es": "Solape en tracción, Ø {} 16 mm, {} % {} 33 % de las barras solapadas en una misma sección"
+},
+"09-179": {
+"fr": "d'après le réseau d'écoulement ou donné : L = <b>{} m</b>",
+"es": "según la red de flujo o dato: L = <b>{} m</b>"
+},
+"09-180": {
+"fr": "choisi : {} {} R {}",
+"es": "elegido: {} {} R {}"
+},
+"09-181": {
+"fr": "coefficient de sécurité global à titre de comparaison : η = τ<sub>f,k</sub>/τ = {}{}",
+"es": "coeficiente de seguridad global a título comparativo: η = τ<sub>f,k</sub>/τ = {}{}"
+},
+"09-182": {
+"fr": "hauteur d'aspiration maximale admissible : h<sub>s,geo</sub> ≤ <b>{} m</b>{}",
+"es": "altura de aspiración máxima admisible: h<sub>s,geo</sub> ≤ <b>{} m</b>{}"
+},
+"09-183": {
+"fr": "débit maximal pour h/D ≈ {} : Q<sub>max</sub> = {} l/s ({} % de Q<sub>v</sub>)",
+"es": "caudal máximo para h/D ≈ {}: Q<sub>max</sub> = {} l/s ({} % de Q<sub>v</sub>)"
+},
+"09-184": {
+"fr": "h = {} m, {} unités d'usage, la plus grande {} m², {}",
+"es": "h = {} m, {} unidades de uso, la mayor {} m², {}"
+},
+"09-185": {
+"fr": "traversé par l'écoulement parallèlement à la pente, γ<sub>r</sub> = {} kN/m³",
+"es": "con flujo paralelo a la pendiente, γ<sub>r</sub> = {} kN/m³"
+},
+"09-186": {
+"fr": "k<sub>cr</sub> = {}/f<sub>v,k</sub> = {} (fissures, prises en compte comme à température normale)",
+"es": "k<sub>cr</sub> = {}/f<sub>v,k</sub> = {} (fisuras, consideradas como a temperatura normal)"
+},
+"09-187": {
+"fr": "l<sub>0,exist</sub> = {} cm, distance libre a = {} mm, barres transversales Ø{}/{} cm",
+"es": "l<sub>0,exist</sub> = {} cm, distancia libre a = {} mm, barras transversales Ø{}/{} cm"
+},
+"09-188": {
+"fr": "l₀,req = {} cm",
+"es": "l₀,nec = {} cm"
+},
+"09-189": {
+"fr": "s<sub>∞</sub> = {} cm, mise en service après {} ans, tassement résiduel admissible {} cm",
+"es": "s<sub>∞</sub> = {} cm, inicio del uso tras {} años, asiento residual admisible {} cm"
+},
+"09-190": {
+"fr": "pente admissible maximale à cette profondeur : β ≤ <b>{}°</b> (1 : {})",
+"es": "pendiente máxima admisible a esta profundidad: β ≤ <b>{}°</b> (1 : {})"
+},
+"09-191": {
+"fr": "t [ans]",
+"es": "t [años]"
+},
+"09-192": {
+"fr": "t<sub>50</sub> = 0,197·H<sub>dr</sub>²/c<sub>v</sub> = {} ans · t<sub>90</sub> = 0,848·H<sub>dr</sub>²/c<sub>v</sub> = {} ans",
+"es": "t<sub>50</sub> = 0,197·H<sub>dr</sub>²/c<sub>v</sub> = {} años · t<sub>90</sub> = 0,848·H<sub>dr</sub>²/c<sub>v</sub> = {} años"
+},
+"09-193": {
+"fr": "t<sub>s</sub> = {} s > T<sub>r</sub> = {} s → fermeture lente (Michaud) : Δp ≈ Δp<sub>J</sub>·T<sub>r</sub>/t<sub>s</sub> = <b>{} bar</b>",
+"es": "t<sub>s</sub> = {} s > T<sub>r</sub> = {} s → cierre lento (Michaud): Δp ≈ Δp<sub>J</sub>·T<sub>r</sub>/t<sub>s</sub> = <b>{} bar</b>"
+},
+"09-194": {
+"fr": "t<sub>s</sub> = {} s ≤ T<sub>r</sub> = {} s → fermeture rapide : coup de Joukowsky complet, Δp = <b>{} bar</b>",
+"es": "t<sub>s</sub> = {} s ≤ T<sub>r</sub> = {} s → cierre rápido: golpe de Joukowsky completo, Δp = <b>{} bar</b>"
+},
+"09-195": {
+"fr": "murs et poteaux porteurs {}, choisi {}",
+"es": "muros y pilares portantes {}, elegido {}"
+},
+"09-196": {
+"fr": "perte de charge uniforme simplifiée : L = Δh + 2·t = {} + 2·{} = <b>{} m</b>",
+"es": "pérdida de carga uniforme simplificada: L = Δh + 2·t = {} + 2·{} = <b>{} m</b>"
+},
+"09-197": {
+"fr": "existant Ø{}/{} cm : a<sub>sw</sub> = {}/{} = <b>{} cm²/m</b> {} {} cm²/m",
+"es": "existente Ø{}/{} cm: a<sub>sw</sub> = {}/{} = <b>{} cm²/m</b> {} {} cm²/m"
+},
+"09-198": {
+"fr": "adm. {}",
+"es": "adm. {}"
+},
+"09-199": {
+"fr": "à titre de comparaison : gradient critique sans coefficients de sécurité i<sub>crit</sub> = γ′/γ<sub>w</sub> = {}",
+"es": "a título comparativo: gradiente crítico sin coeficientes de seguridad i<sub>crit</sub> = γ′/γ<sub>w</sub> = {}"
+},
+"09-200": {
+"fr": "{} {} × {} mm ({} % de la surface)",
+"es": "{} {} × {} mm ({} % del área)"
+},
+"09-201": {
+"fr": "{} → <b>classe de bâtiment {}</b>",
+"es": "{} → <b>clase de edificio {}</b>"
+},
+"09-202": {
+"fr": "{}/{} cm · étriers Ø{}/{} cm (req. {} cm²/m par branche) · {} Ø {} (req. {} cm²)",
+"es": "{}/{} cm · estribos Ø{}/{} cm (nec. {} cm²/m por rama) · {} Ø {} (nec. {} cm²)"
+},
+"09-203": {
+"fr": "Ø{}, {}, {} % recouvert · l<sub>0,req</sub> = {} cm, existant {} cm",
+"es": "Ø{}, {}, {} % solapado · l<sub>0,nec</sub> = {} cm, existente {} cm"
+},
+"09-204": {
+"fr": "Ø{}, {}, {}, {} % recouvert, {}",
+"es": "Ø{}, {}, {}, {} % solapado, {}"
+},
+"09-205": {
+"fr": "β = {}°, profondeur de la surface de glissement z = {} m, {}, BS-{}",
+"es": "β = {}°, profundidad de la superficie de deslizamiento z = {} m, {}, BS-{}"
+},
+"09-206": {
+"fr": "→ limité à la largeur du plancher B = {} m",
+"es": "→ limitado al ancho del forjado B = {} m"
+},
+"09-207": {
+"fr": "Codes de la construction des Länder (écarts par rapport à la MBO), bâtiments spéciaux, murs coupe-feu et cages d'escalier, planchers et toitures, voies d'évacuation et la vérification de la résistance au feu elle-même (dimensionnement en situation d'incendie, p. ex. mode carbonisation).",
+"es": "Reglamentos de edificación de los Länder (desviaciones respecto a la MBO), edificios especiales, muros cortafuegos y cajas de escalera, forjados y cubiertas, vías de evacuación y la propia comprobación de la resistencia al fuego (dimensionamiento en situación de incendio, p. ej. modo carbonización)."
+},
+"09-208": {
+"fr": "Fermer plus lentement (temps de fermeture nettement supérieur à T<sub>r</sub>), réduire la vitesse d'écoulement (diamètre plus grand), prévoir un réservoir d'air ou un anti-bélier, ou choisir une pression nominale plus élevée.",
+"es": "Cierre más despacio (tiempo de cierre claramente superior a T<sub>r</sub>), reduzca la velocidad del flujo (mayor diámetro), prevea un calderín o un amortiguador de golpe de ariete, o elija una presión nominal mayor."
+},
+"09-209": {
+"fr": "Capacité à pleine section",
+"es": "Capacidad a sección llena"
+},
+"09-210": {
+"fr": "Distance libre entre barres recouvertes supérieure à 4Ø",
+"es": "Distancia libre entre barras solapadas superior a 4Ø"
+},
+"09-211": {
+"fr": "Attendre plus longtemps ou accélérer la consolidation : drains verticaux (chemin de drainage plus court), préchargement ou surcharge, drainage des deux côtés.",
+"es": "Espere más tiempo o acelere la consolidación: drenes verticales (recorrido de drenaje más corto), precarga o sobrecarga, drenaje por ambos lados."
+},
+"09-212": {
+"fr": "Barres longitudinales : une dans chaque angle, espacement maximal 350 mm",
+"es": "Barras longitudinales: una en cada esquina, separación máxima 350 mm"
+},
+"09-213": {
+"fr": "Effort de traction longitudinal dû à la torsion, réparti sur le périmètre u<sub>k</sub>",
+"es": "Tracción longitudinal debida a la torsión, repartida en el perímetro u<sub>k</sub>"
+},
+"09-214": {
+"fr": "M_d,fi ou V_d,fi > 0",
+"es": "M_d,fi o V_d,fi > 0"
+},
+"09-215": {
+"fr": "Hauteur déterminante : plancher de l'étage le plus haut avec pièce de séjour au-dessus du niveau moyen du terrain",
+"es": "Altura determinante: suelo de la planta más alta con estancia habitable sobre el nivel medio del terreno"
+},
+"09-216": {
+"fr": "Choisir une pente plus forte ; un diamètre plus petit augmente la vitesse en remplissage partiel, mais aussi le taux de remplissage.",
+"es": "Elija más pendiente; un diámetro menor aumenta la velocidad en llenado parcial, pero también el grado de llenado."
+},
+"09-217": {
+"fr": "Armatures minimales pour faible torsion (T<sub>Ed</sub> ≤ V<sub>Ed</sub>·b<sub>w</sub>/4,5), θ exact selon éq. (6.7aDE) avec flux de cisaillement de torsion et d'effort tranchant, sections composées (décomposition en rectangles), torsion gauchie et armatures de flexion.",
+"es": "Armadura mínima para torsión pequeña (T<sub>Ed</sub> ≤ V<sub>Ed</sub>·b<sub>w</sub>/4,5), θ exacto según ec. (6.7aDE) con flujo tangencial de torsión y cortante, secciones compuestas (división en rectángulos), torsión de alabeo y la armadura de flexión."
+},
+"09-218": {
+"fr": "Gradient hydraulique moyen dans le massif de sol traversé devant le pied du voile",
+"es": "Gradiente hidráulico medio en el cuerpo de terreno atravesado delante del pie del muro"
+},
+"09-219": {
+"fr": "Largeur participante : la chape répartit la charge ponctuelle transversalement sur plusieurs solives",
+"es": "Ancho colaborante: la solera reparte la carga puntual transversalmente entre varias viguetas"
+}
+}

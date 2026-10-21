@@ -1,0 +1,982 @@
+{
+"15-0": {
+"fr": "R′<sub>w</sub> − u<sub>prog</sub> = {} − 2 = {} dB {} R′<sub>w</sub> requis = {} dB {}",
+"es": "R′<sub>w</sub> − u<sub>prog</sub> = {} − 2 = {} dB {} R′<sub>w</sub> nec. = {} dB {}"
+},
+"15-1": {
+"fr": "<div class=\"calc-field\"><label>Dalle brute m′ [kg/m²]</label><input type=\"number\" id=\"ts-mD\" value=\"440\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>Forjado estructural m′ [kg/m²]</label><input type=\"number\" id=\"ts-mD\" value=\"440\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-2": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur de la chape d [cm]</label><input type=\"number\" id=\"ts-dE\" value=\"5\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor del mortero de nivelación d [cm]</label><input type=\"number\" id=\"ts-dE\" value=\"5\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-3": {
+"fr": "<div class=\"calc-field\"><label>Chape ρ [kg/m³]</label><input type=\"number\" id=\"ts-rE\" value=\"2000\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>Mortero de nivelación ρ [kg/m³]</label><input type=\"number\" id=\"ts-rE\" value=\"2000\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-4": {
+"fr": "<div class=\"calc-field\"><label>Isolant aux bruits de choc s′ [MN/m³]</label><input type=\"number\" id=\"ts-s\" value=\"20\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>Aislamiento a ruido de impacto s′ [MN/m³]</label><input type=\"number\" id=\"ts-s\" value=\"20\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-5": {
+"fr": "<div class=\"calc-field\"><label>Correction K [dB] (si m′<sub>f,m</sub> = 0)</label><input type=\"number\" id=\"ts-K\" value=\"2\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>Corrección K [dB] (si m′<sub>f,m</sub> = 0)</label><input type=\"number\" id=\"ts-K\" value=\"2\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-6": {
+"fr": "<div class=\"calc-field\"><label>masse moyenne des murs latéraux m′<sub>f,m</sub> [kg/m²] (0 = K saisi manuellement)</label><input type=\"number\" id=\"ts-mf\" value=\"300\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>masa media de los muros de flanco m′<sub>f,m</sub> [kg/m²] (0 = K manual)</label><input type=\"number\" id=\"ts-mf\" value=\"300\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-7": {
+"fr": "<div class=\"calc-field\"><label>L′<sub>n,w</sub> adm. [dB]</label><input type=\"number\" id=\"ts-zul\" value=\"50\" step=\"any\" oninput=\"updateTS()\"></div>",
+"es": "<div class=\"calc-field\"><label>L′<sub>n,w</sub> adm. [dB]</label><input type=\"number\" id=\"ts-zul\" value=\"50\" step=\"any\" oninput=\"updateTS()\"></div>"
+},
+"15-8": {
+"fr": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>dalle</sub>) = 164 − 35 · lg({}) = {} dB",
+"es": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>forjado</sub>) = 164 − 35 · lg({}) = {} dB"
+},
+"15-9": {
+"fr": "§Chape flottante",
+"es": "§Solera flotante"
+},
+"15-10": {
+"fr": "m′<sub>chape</sub> = ρ · d = {} · {} = {} kg/m²",
+"es": "m′<sub>solera</sub> = ρ · d = {} · {} = {} kg/m²"
+},
+"15-11": {
+"fr": "§Correction pour les transmissions latérales (DIN 4109-2)",
+"es": "§Corrección por transmisión por flancos (DIN 4109-2)"
+},
+"15-12": {
+"fr": "K = 0,6 + 5,5 · lg(m′<sub>dalle</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg({} / {}) = {} dB",
+"es": "K = 0,6 + 5,5 · lg(m′<sub>forjado</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg({} / {}) = {} dB"
+},
+"15-13": {
+"fr": "!plus la dalle est lourde par rapport aux murs, plus le bruit de choc se transmet par les murs ; K ≥ 0",
+"es": "!cuanto más pesado es el forjado respecto a los muros, más ruido de impacto se transmite por los muros; K ≥ 0"
+},
+"15-14": {
+"fr": "§Niveau de pression acoustique de choc normalisé pondéré",
+"es": "§Nivel global de presión de ruido de impacto normalizado"
+},
+"15-15": {
+"fr": "!L′<sub>n,w</sub> adm. = {} dB : {} {} {} {} — pour le bruit de choc, plus petit est meilleur",
+"es": "!L′<sub>n,w</sub> adm. = {} dB: {} {} {} {} — para el ruido de impacto, cuanto menor, mejor"
+},
+"15-16": {
+"fr": "<div class=\"calc-field\"><label>Nombre d'unités d'usage</label><input type=\"number\" id=\"gk-n\" value=\"4\" step=\"1\" oninput=\"updateGK()\"></div>",
+"es": "<div class=\"calc-field\"><label>Número de unidades de uso</label><input type=\"number\" id=\"gk-n\" value=\"4\" step=\"1\" oninput=\"updateGK()\"></div>"
+},
+"15-17": {
+"fr": "<div class=\"calc-field\"><label>Surface par unité d'usage [m²]</label><input type=\"number\" id=\"gk-a\" value=\"85\" step=\"any\" oninput=\"updateGK()\"></div>",
+"es": "<div class=\"calc-field\"><label>Superficie por unidad de uso [m²]</label><input type=\"number\" id=\"gk-a\" value=\"85\" step=\"any\" oninput=\"updateGK()\"></div>"
+},
+"15-18": {
+"fr": "Classe de bâtiment {}",
+"es": "Clase de edificio {}"
+},
+"15-19": {
+"fr": "§Classement selon MBO § 2 (3)",
+"es": "§Clasificación según MBO § 2 (3)"
+},
+"15-20": {
+"fr": "!Hauteur h = {} m (plancher du dernier niveau comportant une pièce de séjour, au-dessus du terrain moyen) · {} unité(s) d'usage<!--{}--> de {} m² = {} m²{}",
+"es": "!Altura h = {} m (suelo de la última planta con una estancia habitable sobre el terreno medio) · {} unidad(es) de uso<!--{}--> de {} m² = {} m²{}"
+},
+"15-21": {
+"fr": "§Exigences pour murs porteurs, poteaux et planchers (MBO §§ 27, 31)",
+"es": "§Requisitos para muros portantes, pilares y forjados (MBO §§ 27, 31)"
+},
+"15-22": {
+"fr": "!niveaux hors sol : {} · sous-sol : {}",
+"es": "!plantas sobre rasante: {} · sótano: {}"
+},
+"15-23": {
+"fr": "!feuerhemmend ≈ F 30 / R 30 (résistant au feu 30 min) · hochfeuerhemmend ≈ F 60 / R 60 (résistant au feu 60 min) · feuerbeständig ≈ F 90 / R 90 (résistant au feu 90 min) (tenir compte du code de la construction du Land)",
+"es": "!feuerhemmend ≈ F 30 / R 30 (resistente al fuego 30 min) · hochfeuerhemmend ≈ F 60 / R 60 (resistente al fuego 60 min) · feuerbeständig ≈ F 90 / R 90 (resistente al fuego 90 min) (tener en cuenta el código de edificación del Land)"
+},
+"15-24": {
+"fr": "1,5 · V/A (sur l’axe passant par le centre de gravité)",
+"es": "1,5 · V/A (en el eje del centro de gravedad)"
+},
+"15-25": {
+"fr": "2 travées",
+"es": "2 vanos"
+},
+"15-26": {
+"fr": "3 travées",
+"es": "3 vanos"
+},
+"15-27": {
+"fr": "poutre à 3 travées, L = 5,00 m",
+"es": "viga de 3 vanos, L = 5,00 m"
+},
+"15-28": {
+"fr": "4 travées",
+"es": "4 vanos"
+},
+"15-29": {
+"fr": "5 travées",
+"es": "5 vanos"
+},
+"15-30": {
+"fr": "5FL/32 (sous F)",
+"es": "5FL/32 (bajo F)"
+},
+"15-31": {
+"fr": "9qL²/128 à x = 5L/8",
+"es": "9qL²/128 en x = 5L/8"
+},
+"15-32": {
+"fr": "<b>Valeurs extrêmes selon les dispositions de charges</b> (réaction d’appui max, moment sur appui min, moment en travée max)",
+"es": "<b>Valores extremos según las disposiciones de carga</b> (reacción de apoyo máx., momento en apoyo mín., momento en vano máx.)"
+},
+"15-33": {
+"fr": "<b>Charge totale</b> (toutes les travées chargées)",
+"es": "<b>Carga total</b> (todos los vanos cargados)"
+},
+"15-34": {
+"fr": "<span class=\"st-n\">1</span><span>Réactions d'appui</span>",
+"es": "<span class=\"st-n\">1</span><span>Reacciones en los apoyos</span>"
+},
+"15-35": {
+"fr": "<span class=\"st-n\">1</span><span>Charges de calcul</span>",
+"es": "<span class=\"st-n\">1</span><span>Cargas de cálculo</span>"
+},
+"15-36": {
+"fr": "<span class=\"st-n\">1</span><span>Système de base et inconnues hyperstatiques</span>",
+"es": "<span class=\"st-n\">1</span><span>Sistema base e incógnitas hiperestáticas</span>"
+},
+"15-37": {
+"fr": "<span class=\"st-n\">1</span><span>Ordonnées des lignes d'influence</span>",
+"es": "<span class=\"st-n\">1</span><span>Ordenadas de las líneas de influencia</span>"
+},
+"15-38": {
+"fr": "<span class=\"st-n\">1</span><span>Centre de gravité (depuis la fibre supérieure)</span>",
+"es": "<span class=\"st-n\">1</span><span>Centro de gravedad (desde la cara superior)</span>"
+},
+"15-39": {
+"fr": "<span class=\"st-n\">1</span><span>Réactions d'appui verticales (moments par rapport à A et B)</span>",
+"es": "<span class=\"st-n\">1</span><span>Reacciones verticales en los apoyos (momentos respecto a A y B)</span>"
+},
+"15-40": {
+"fr": "<span class=\"st-n\">2</span><span>Moment en travée dans la travée de rive</span>",
+"es": "<span class=\"st-n\">2</span><span>Momento en el vano extremo</span>"
+},
+"15-41": {
+"fr": "<span class=\"st-n\">2</span><span>Moment quadratique (Steiner)</span>",
+"es": "<span class=\"st-n\">2</span><span>Momento de inercia (teorema de Steiner)</span>"
+},
+"15-42": {
+"fr": "<span class=\"st-n\">2</span><span>Moment maximal M(x₀)</span>",
+"es": "<span class=\"st-n\">2</span><span>Momento máximo M(x₀)</span>"
+},
+"15-43": {
+"fr": "<span class=\"st-n\">2</span><span>Forces horizontales (condition de l'articulation M<sub>G</sub> = 0 sur la partie droite)</span>",
+"es": "<span class=\"st-n\">2</span><span>Fuerzas horizontales (condición de la rótula M<sub>G</sub> = 0 en la parte derecha)</span>"
+},
+"15-44": {
+"fr": "<span class=\"st-n\">2</span><span>Diagrammes des moments dans le système de base</span>",
+"es": "<span class=\"st-n\">2</span><span>Diagramas de momentos en el sistema base</span>"
+},
+"15-45": {
+"fr": "<span class=\"st-n\">2</span><span>Coupe de Ritter dans la maille 3 (à gauche du milieu)</span>",
+"es": "<span class=\"st-n\">2</span><span>Corte de Ritter en el panel 3 (a la izquierda del centro)</span>"
+},
+"15-46": {
+"fr": "<span class=\"st-n\">3</span><span>Coefficients de flexibilité avec le tableau d'intégration (EI · δ)</span>",
+"es": "<span class=\"st-n\">3</span><span>Coeficientes de flexibilidad con la tabla de integración (EI · δ)</span>"
+},
+"15-47": {
+"fr": "<span class=\"st-n\">3</span><span>Efforts tranchants maximaux Q(x₀)</span>",
+"es": "<span class=\"st-n\">3</span><span>Esfuerzos cortantes máximos Q(x₀)</span>"
+},
+"15-48": {
+"fr": "<span class=\"st-n\">3</span><span>Montant (équilibre au nœud de la membrure supérieure)</span>",
+"es": "<span class=\"st-n\">3</span><span>Montante (equilibrio en el nudo del cordón superior)</span>"
+},
+"15-49": {
+"fr": "<span class=\"st-n\">3</span><span>Moments aux angles du portique</span>",
+"es": "<span class=\"st-n\">3</span><span>Momentos en las esquinas del pórtico</span>"
+},
+"15-50": {
+"fr": "<span class=\"st-n\">3</span><span>Moment sur appui au-dessus du premier appui intermédiaire</span>",
+"es": "<span class=\"st-n\">3</span><span>Momento en el primer apoyo intermedio</span>"
+},
+"15-51": {
+"fr": "<span class=\"st-n\">3</span><span>Modules de flexion</span>",
+"es": "<span class=\"st-n\">3</span><span>Módulos resistentes</span>"
+},
+"15-52": {
+"fr": "<span class=\"st-n\">4</span><span>Réactions d'appui (valeurs maximales)</span>",
+"es": "<span class=\"st-n\">4</span><span>Reacciones en los apoyos (valores máximos)</span>"
+},
+"15-53": {
+"fr": "<span class=\"st-n\">4</span><span>Traverse</span>",
+"es": "<span class=\"st-n\">4</span><span>Dintel</span>"
+},
+"15-54": {
+"fr": "<span class=\"st-n\">4</span><span>Compatibilité : pas de rotation brusque au droit de B</span>",
+"es": "<span class=\"st-n\">4</span><span>Compatibilidad: sin quiebro sobre B</span>"
+},
+"15-55": {
+"fr": "<span class=\"st-n\">5</span><span>Réactions d'appui (poutre sur deux appuis + moment sur appui)</span>",
+"es": "<span class=\"st-n\">5</span><span>Reacciones en los apoyos (viga biapoyada + momento en apoyo)</span>"
+},
+"15-56": {
+"fr": "<span class=\"st-n\">6</span><span>Moments en travée</span>",
+"es": "<span class=\"st-n\">6</span><span>Momentos en vano</span>"
+},
+"15-57": {
+"fr": "<span>M travée</span><b>FL/8</b>",
+"es": "<span>M vano</span><b>FL/8</b>"
+},
+"15-58": {
+"fr": "<span>M travée</span><b>qL²/24</b>",
+"es": "<span>M vano</span><b>qL²/24</b>"
+},
+"15-59": {
+"fr": "<span>M sous F</span><b>5FL/32</b>",
+"es": "<span>M bajo F</span><b>5FL/32</b>"
+},
+"15-60": {
+"fr": "<span>M travée max</span><b>9qL²/128</b>",
+"es": "<span>M vano máx.</span><b>9qL²/128</b>"
+},
+"15-61": {
+"fr": "= −20,00 kN (montant central, pas de diagonale au nœud supérieur)",
+"es": "= −20,00 kN (montante central, sin diagonal en el nudo superior)"
+},
+"15-62": {
+"fr": "= −60,00 kN (montant d'extrémité au-dessus de l'appui)",
+"es": "= −60,00 kN (montante extremo sobre el apoyo)"
+},
+"15-63": {
+"fr": "A : droite de 1 (au droit de A) à 0 (au droit de B) · Q(x₀) : saut de 1 en x₀ · M(x₀) : triangle de sommet sous x₀",
+"es": "A: recta de 1 (sobre A) a 0 (sobre B) · Q(x₀): salto de 1 en x₀ · M(x₀): triángulo con el vértice bajo x₀"
+},
+"15-64": {
+"fr": "Critère de dénombrement",
+"es": "Criterio de conteo"
+},
+"15-65": {
+"fr": "Critère de dénombrement sur trois systèmes",
+"es": "Criterio de conteo en tres sistemas"
+},
+"15-66": {
+"fr": "Sur la face droite de la partie gauche (face positive), N est dirigé vers l'extérieur, Q vers le bas et M tourne dans le sens anti-horaire. Sur la face opposée, ils agissent en sens inverse (action = réaction).",
+"es": "En la cara derecha de la parte izquierda (cara positiva), N apunta hacia fuera, Q hacia abajo y M gira en sentido antihorario. En la cara opuesta actúan en sentido contrario (acción = reacción)."
+},
+"15-67": {
+"fr": "Nombre de travées",
+"es": "Número de vanos"
+},
+"15-68": {
+"fr": "Nombre de mailles n (pair)",
+"es": "Número de paneles n (par)"
+},
+"15-69": {
+"fr": "Appuis A, B, C …",
+"es": "Apoyos A, B, C …"
+},
+"15-70": {
+"fr": "Tableau de poutres",
+"es": "Tabla de vigas"
+},
+"15-71": {
+"fr": "Signification",
+"es": "Significado"
+},
+"15-72": {
+"fr": "Condition",
+"es": "Condición"
+},
+"15-73": {
+"fr": "Sous charge totale, on aurait Q(x₀) = q · (L/2 − x₀) (sans F) = 20,00 kN — la charge partielle est ici plus défavorable",
+"es": "Con carga total sería Q(x₀) = q · (L/2 − x₀) (sin F) = 20,00 kN — la carga parcial es aquí más desfavorable"
+},
+"15-74": {
+"fr": "Pour la charge triangulaire, max M se situe à x = L/√3 ≈ 0,577·L de A.",
+"es": "Para la carga triangular, max M se sitúa en x = L/√3 ≈ 0,577·L desde A."
+},
+"15-75": {
+"fr": "Poutre encastrée aux deux extrémités",
+"es": "Viga empotrada en ambos extremos"
+},
+"15-76": {
+"fr": "Exemple de section en T : semelle 200 × 20 mm en haut, âme 20 × 180 mm (hauteur totale 200 mm).<br> A = 4000 + 3600 = 7600 mm² · z<sub>s</sub> = (4000·10 + 3600·110)/7600 = <b>57,4 mm</b> depuis le haut<br> I<sub>y</sub> = 200·20³/12 + 4000·47,4² + 20·180³/12 + 3600·52,6² ≈ <b>2880 cm⁴</b><br> W haut = 2880/5,74 ≈ 502 cm³ · W bas = 2880/14,26 ≈ 202 cm³",
+"es": "Ejemplo de sección en T: ala 200 × 20 mm arriba, alma 20 × 180 mm (canto total 200 mm).<br> A = 4000 + 3600 = 7600 mm² · z<sub>s</sub> = (4000·10 + 3600·110)/7600 = <b>57,4 mm</b> desde arriba<br> I<sub>y</sub> = 200·20³/12 + 4000·47,4² + 20·180³/12 + 3600·52,6² ≈ <b>2880 cm⁴</b><br> W superior = 2880/5,74 ≈ 502 cm³ · W inferior = 2880/14,26 ≈ 202 cm³"
+},
+"15-77": {
+"fr": "Exemple de poutre à deux travées, q = 10 kN/m, L = 5 m : M_B = −0,125·10·25 = <b>−31,25 kNm</b>, B = 1,25·10·5 = <b>62,5 kN</b>.",
+"es": "Ejemplo de viga de dos vanos, q = 10 kN/m, L = 5 m: M_B = −0,125·10·25 = <b>−31,25 kNm</b>, B = 1,25·10·5 = <b>62,5 kN</b>."
+},
+"15-78": {
+"fr": "Exemple : pour le portique à trois articulations (deux appuis fixes + articulation dans la traverse), 4 réactions d'appui s'opposent à 3 + 1 = 4 équations ; le système est isostatique.",
+"es": "Ejemplo: en el pórtico triarticulado (dos apoyos fijos + rótula en el dintel), 4 reacciones en los apoyos se enfrentan a 3 + 1 = 4 ecuaciones; el sistema es isostático."
+},
+"15-79": {
+"fr": "Exemple : poutre sur deux appuis sous charge uniforme, flèche à mi-portée. M est une parabole de flèche qL²/8, M̄ un triangle de sommet L/4 au milieu. Tableau d'intégration : 5/12 · L · i · k<br> w = (1/EI) · 5/12 · L · qL²/8 · L/4 = <b>5qL⁴/(384EI)</b>",
+"es": "Ejemplo: viga biapoyada con carga uniforme, flecha en el centro del vano. M es una parábola de flecha qL²/8, M̄ un triángulo con vértice L/4 en el centro. Tabla de integración: 5/12 · L · i · k<br> w = (1/EI) · 5/12 · L · qL²/8 · L/4 = <b>5qL⁴/(384EI)</b>"
+},
+"15-80": {
+"fr": "Exemple : q = 10 kN/m, L = 5 m → A = B = 25 kN, max M = 10·5²/8 = <b>31,25 kNm</b>.",
+"es": "Ejemplo: q = 10 kN/m, L = 5 m → A = B = 25 kN, max M = 10·5²/8 = <b>31,25 kNm</b>."
+},
+"15-81": {
+"fr": "Coefficients pour 2 à 5 travées égales avec dispositions de charges",
+"es": "Coeficientes para 2 a 5 vanos iguales con disposiciones de carga"
+},
+"15-82": {
+"fr": "Coefficients : réaction d'appui = coefficient · qL, moment = coefficient · qL².",
+"es": "Coeficientes: reacción en el apoyo = coeficiente · qL, momento = coeficiente · qL²."
+},
+"15-83": {
+"fr": "Chargement",
+"es": "Carga"
+},
+"15-84": {
+"fr": "Jusqu'à quatre rectangles, symétriques par rapport à l'axe vertical ; z = distance de la face supérieure de la partie à la face supérieure de la section. Largeur 0 = partie absente.",
+"es": "Hasta cuatro rectángulos, simétricos respecto al eje vertical; z = distancia de la cara superior de la parte a la cara superior de la sección. Ancho 0 = parte inexistente."
+},
+"15-85": {
+"fr": "Bleu : barre tendue, rouge : barre comprimée, gris : barre à effort nul. Sous charge totale, la membrure supérieure est comprimée, la membrure inférieure tendue, et les diagonales descendant vers le milieu sont tendues.",
+"es": "Azul: barra traccionada, rojo: barra comprimida, gris: barra de esfuerzo nulo. Con carga total, el cordón superior está comprimido, el inferior traccionado, y las diagonales que descienden hacia el centro están traccionadas."
+},
+"15-86": {
+"fr": "Le moment fléchissant est extrême là où l'effort tranchant est nul (ou change de signe). C'est ainsi que l'on trouve le moment en travée.",
+"es": "El momento flector es extremo donde el esfuerzo cortante es nulo (o cambia de signo). Así se obtiene el momento en el vano."
+},
+"15-87": {
+"fr": "C'est la méthode des forces avec les moments sur appuis comme inconnues hyperstatiques — une équation pour chaque appui intermédiaire.",
+"es": "Es el método de las fuerzas con los momentos en los apoyos como incógnitas hiperestáticas — una ecuación por cada apoyo intermedio."
+},
+"15-88": {
+"fr": "Diagonale D [kN]",
+"es": "Diagonal D [kN]"
+},
+"15-89": {
+"fr": "L'encastrement « tire » du moment hors de la travée : pour la poutre encastrée aux deux extrémités, le moment en travée qL²/24 n'est que le tiers de celui de la poutre sur deux appuis (qL²/8), et la flèche le cinquième.",
+"es": "El empotramiento « retira » momento del vano: en la viga empotrada en ambos extremos, el momento en el vano qL²/24 es solo un tercio del de la viga biapoyada (qL²/8) y la flecha un quinto."
+},
+"15-90": {
+"fr": "N'appliquer la charge uniforme que là où la ligne d'influence a le signe voulu. Pour l'effort tranchant à mi-portée, un chargement sur une moitié est plus défavorable que la charge totale.",
+"es": "Aplicar la carga uniforme solo donde la línea de influencia tiene el signo deseado. Para el esfuerzo cortante en el centro del vano, cargar la mitad es más desfavorable que la carga total."
+},
+"15-91": {
+"fr": "La contrainte varie linéairement sur la hauteur. En flexion pure, l'axe neutre coïncide avec l'axe passant par le centre de gravité ; avec un effort normal supplémentaire, il est décalé.",
+"es": "La tensión varía linealmente con el canto. En flexión pura, el eje neutro coincide con el eje del centro de gravedad; con un axil adicional, se desplaza."
+},
+"15-92": {
+"fr": "Le tableau est valable pour la charge totale sur toutes les travées (typiquement : poids propre). Pour les charges variables, il faut étudier les dispositions de charges les plus défavorables : le moment maximal en travée apparaît lorsqu'une travée sur deux seulement est chargée, le moment maximal sur appui lorsque les deux travées adjacentes sont chargées.",
+"es": "La tabla es válida para carga total en todos los vanos (típicamente: peso propio). Para cargas variables hay que estudiar las disposiciones de carga más desfavorables: el momento máximo en vano se produce cuando solo se carga un vano de cada dos; el momento máximo en apoyo, con carga en los dos vanos adyacentes."
+},
+"15-93": {
+"fr": "La condition de compatibilité dit : au niveau de la liaison supprimée, rien ne doit se déplacer ni tourner dans la structure réelle.",
+"es": "La condición de compatibilidad dice: en la ligadura liberada, nada puede desplazarse ni girar en la estructura real."
+},
+"15-94": {
+"fr": "La formule générale pour des diagrammes linéaires. Les triangles et les rectangles en sont des cas particuliers.",
+"es": "La fórmula general para diagramas lineales. Los triángulos y rectángulos son casos particulares."
+},
+"15-95": {
+"fr": "Relations différentielles",
+"es": "Relaciones diferenciales"
+},
+"15-96": {
+"fr": "Centre de rotation : nœud 2 de la membrure supérieure",
+"es": "Centro de giro: nudo 2 del cordón superior"
+},
+"15-97": {
+"fr": "Centre de rotation : nœud 3 de la membrure inférieure (D et U s'y coupent)",
+"es": "Centro de giro: nudo 3 del cordón inferior (allí se cortan D y U)"
+},
+"15-98": {
+"fr": "Triangle (base b, hauteur h)",
+"es": "Triángulo (base b, altura h)"
+},
+"15-99": {
+"fr": "Triangle sommet k",
+"es": "Triángulo vértice k"
+},
+"15-100": {
+"fr": "Triangle i (de sens opposé)",
+"es": "Triángulo i (de signo contrario)"
+},
+"15-101": {
+"fr": "Triangle i (de même sens)",
+"es": "Triángulo i (del mismo signo)"
+},
+"15-102": {
+"fr": "Triangle k",
+"es": "Triángulo k"
+},
+"15-103": {
+"fr": "Charge triangulaire",
+"es": "Carga triangular"
+},
+"15-104": {
+"fr": "Charge triangulaire (q à l'encastrement, 0 à l'extrémité)",
+"es": "Carga triangular (q en el empotramiento, 0 en el extremo)"
+},
+"15-105": {
+"fr": "Charge triangulaire 0 → q",
+"es": "Carga triangular 0 → q"
+},
+"15-106": {
+"fr": "Charge triangulaire 0 → q (en B)",
+"es": "Carga triangular 0 → q (en B)"
+},
+"15-107": {
+"fr": "Charge triangulaire q → 0",
+"es": "Carga triangular q → 0"
+},
+"15-108": {
+"fr": "Poutre à trois travées",
+"es": "Viga de tres vanos"
+},
+"15-109": {
+"fr": "Portique à trois articulations",
+"es": "Pórtico triarticulado"
+},
+"15-110": {
+"fr": "Calculer un portique à trois articulations",
+"es": "Calcular un pórtico triarticulado"
+},
+"15-111": {
+"fr": "Portique à trois articulations l = 10,00 m, h = 4,00 m",
+"es": "Pórtico triarticulado l = 10,00 m, h = 4,00 m"
+},
+"15-112": {
+"fr": "Portique et arc à trois articulations",
+"es": "Pórtico y arco triarticulados"
+},
+"15-113": {
+"fr": "Portique à trois articulations : système et diagramme des moments",
+"es": "Pórtico triarticulado: sistema y diagrama de momentos"
+},
+"15-114": {
+"fr": "Dimensionner une poutre continue avec g et q",
+"es": "Dimensionar una viga continua con g y q"
+},
+"15-115": {
+"fr": "Poutre continue, portées égales L, charge uniforme q sur toutes les travées",
+"es": "Viga continua, luces iguales L, carga uniforme q en todos los vanos"
+},
+"15-116": {
+"fr": "Poutre continue : disposition de charges et diagramme des moments",
+"es": "Viga continua: disposición de cargas y diagrama de momentos"
+},
+"15-117": {
+"fr": "Une <b>articulation</b> relie deux parties d'une structure de sorte qu'elles puissent tourner l'une par rapport à l'autre : elle transmet l'effort normal et l'effort tranchant, mais <b>aucun moment</b>. Il en résulte une condition d'équilibre supplémentaire (M = 0 à l'articulation), qui permet de déterminer une réaction inconnue. Sur le diagramme des moments, on reconnaît une articulation au passage de M par zéro.",
+"es": "Una <b>rótula</b> une dos partes de una estructura de modo que puedan girar una respecto a la otra: transmite esfuerzo axil y cortante, pero <b>ningún momento</b>. Así se obtiene una condición de equilibrio adicional (M = 0 en la rótula), que permite determinar una reacción incógnita. En el diagrama de momentos, una rótula se reconoce por el paso de M por cero."
+},
+"15-118": {
+"fr": "Un arc ayant la forme de la courbe des pressions ne travaille qu'en compression. Dans un portique, l'axe de la barre s'écarte de la courbe des pressions : le moment vaut H fois la distance à la courbe des pressions — maximal aux angles.",
+"es": "Un arco con la forma de la línea de presiones solo trabaja a compresión. En un pórtico, el eje de la barra se aparta de la línea de presiones: el momento es H por la distancia a la línea de presiones — máximo en las esquinas."
+},
+"15-119": {
+"fr": "Un appui empêche des mouvements et transmet pour cela des forces (réactions d'appui). Le <b>degré</b> est le nombre de réactions qu'un appui peut reprendre. Chaque mouvement empêché produit exactement une réaction.",
+"es": "Un apoyo impide movimientos y para ello transmite fuerzas (reacciones en los apoyos). El <b>grado</b> es el número de reacciones que puede absorber un apoyo. Cada movimiento impedido produce exactamente una reacción."
+},
+"15-120": {
+"fr": "Une ligne d'influence montre la valeur que prend une grandeur donnée (réaction d'appui, effort tranchant ou moment en <b>un point fixe</b> x₀) lorsqu'une charge unitaire « 1 » se trouve au point x. Elle répond à la question : où la charge d'exploitation doit-elle se trouver pour que la grandeur soit maximale ?",
+"es": "Una línea de influencia muestra el valor que alcanza una magnitud determinada (reacción en un apoyo, esfuerzo cortante o momento en <b>un punto fijo</b> x₀) cuando una carga unitaria « 1 » está en el punto x. Responde a la pregunta: ¿dónde debe situarse la sobrecarga para que la magnitud sea máxima?"
+},
+"15-121": {
+"fr": "Une charge unitaire « 1 » se déplace sur la poutre : l'ordonnée donne la valeur de la grandeur lorsque la charge se trouve à cet endroit.",
+"es": "Una carga unitaria « 1 » recorre la viga: la ordenada indica el valor de la magnitud cuando la carga está en ese punto."
+},
+"15-122": {
+"fr": "Poutre sur deux appuis (appui fixe + appui mobile)",
+"es": "Viga biapoyada (apoyo fijo + apoyo móvil)"
+},
+"15-123": {
+"fr": "Poutre sur deux appuis L = 8,00 m, coupe en x₀ = 2,00 m",
+"es": "Viga biapoyada L = 8,00 m, corte en x₀ = 2,00 m"
+},
+"15-124": {
+"fr": "Poutre sur deux appuis — appui fixe A, appui mobile B, portée L",
+"es": "Viga biapoyada — apoyo fijo A, apoyo móvil B, luz L"
+},
+"15-125": {
+"fr": "Lignes d'influence A, Q(x₀), M(x₀) sur la poutre sur deux appuis",
+"es": "Líneas de influencia A, Q(x₀), M(x₀) en la viga biapoyada"
+},
+"15-126": {
+"fr": "Lignes d'influence — charges mobiles",
+"es": "Líneas de influencia — cargas móviles"
+},
+"15-127": {
+"fr": "Encastrée d'un côté (A encastré, B articulé)",
+"es": "Empotrada en un extremo (A empotrado, B articulado)"
+},
+"15-128": {
+"fr": "Encastrement",
+"es": "Empotramiento"
+},
+"15-129": {
+"fr": "Charge ponctuelle F",
+"es": "Carga puntual F"
+},
+"15-130": {
+"fr": "Charge ponctuelle F [kN]",
+"es": "Carga puntual F [kN]"
+},
+"15-131": {
+"fr": "Charge ponctuelle F à l'extrémité",
+"es": "Carga puntual F en el extremo"
+},
+"15-132": {
+"fr": "Charge ponctuelle F en a",
+"es": "Carga puntual F en a"
+},
+"15-133": {
+"fr": "Charge ponctuelle F en a (b = L − a)",
+"es": "Carga puntual F en a (b = L − a)"
+},
+"15-134": {
+"fr": "Charge ponctuelle F au milieu",
+"es": "Carga puntual F en el centro"
+},
+"15-135": {
+"fr": "Charge ponctuelle F<sub>1</sub> à mi-travée [kN]",
+"es": "Carga puntual F<sub>1</sub> en el centro del vano [kN]"
+},
+"15-136": {
+"fr": "Charge ponctuelle F<sub>2</sub> à mi-travée [kN]",
+"es": "Carga puntual F<sub>2</sub> en el centro del vano [kN]"
+},
+"15-137": {
+"fr": "Charge ponctuelle exactement au droit de x₀, charge uniforme sur toute la longueur (aire de la ligne d'influence = η<sub>M,max</sub> · L / 2)",
+"es": "Carga puntual exactamente sobre x₀, carga uniforme en toda la longitud (área de la línea de influencia = η<sub>M,max</sub> · L / 2)"
+},
+"15-138": {
+"fr": "Moment ponctuel",
+"es": "Momento puntual"
+},
+"15-139": {
+"fr": "Résultat",
+"es": "Resultado"
+},
+"15-140": {
+"fr": "Cas d'Euler",
+"es": "Caso de Euler"
+},
+"15-141": {
+"fr": "Cas d'Euler",
+"es": "Casos de Euler"
+},
+"15-142": {
+"fr": "Valeurs extrêmes au point x₀",
+"es": "Valores extremos en el punto x₀"
+},
+"15-143": {
+"fr": "Treillis 6 × 2,50 m, h = 2,00 m",
+"es": "Celosía 6 × 2,50 m, h = 2,00 m"
+},
+"15-144": {
+"fr": "Treillis : efforts dans les barres (épaisseur du trait ∝ effort)",
+"es": "Celosía: esfuerzos en las barras (grosor de línea ∝ esfuerzo)"
+},
+"15-145": {
+"fr": "Cas 1",
+"es": "Caso 1"
+},
+"15-146": {
+"fr": "Cas 2",
+"es": "Caso 2"
+},
+"15-147": {
+"fr": "Cas 3",
+"es": "Caso 3"
+},
+"15-148": {
+"fr": "Cas 4",
+"es": "Caso 4"
+},
+"15-149": {
+"fr": "Fibre inférieure",
+"es": "Fibra inferior"
+},
+"15-150": {
+"fr": "Travée 1 : max M = 16,96 kNm à x = 1,84 m de A · travée 2 : max M = 23,54 kNm à x = 2,00 m de C",
+"es": "Vano 1: max M = 16,96 kNm en x = 1,84 m desde A · vano 2: max M = 23,54 kNm en x = 2,00 m desde C"
+},
+"15-151": {
+"fr": "Moments en travée",
+"es": "Momentos en vano"
+},
+"15-152": {
+"fr": "Moments en travée 1, 2, 3 …",
+"es": "Momentos en vano 1, 2, 3 …"
+},
+"15-153": {
+"fr": "Largeur de maille a [m]",
+"es": "Ancho de panel a [m]"
+},
+"15-154": {
+"fr": "Appui fixe",
+"es": "Apoyo fijo"
+},
+"15-155": {
+"fr": "Appui fixe (appui articulé fixe)",
+"es": "Apoyo fijo (apoyo articulado fijo)"
+},
+"15-156": {
+"fr": "Appui fixe + appui mobile + articulation dans la traverse",
+"es": "Apoyo fijo + apoyo móvil + rótula en el dintel"
+},
+"15-157": {
+"fr": "F·a·b/L (sous F)",
+"es": "F·a·b/L (bajo F)"
+},
+"15-158": {
+"fr": "Pour une structure plane et connexe, on compare le nombre d'inconnues (réactions d'appui) au nombre de conditions d'équilibre (3 par structure, +1 par articulation) :",
+"es": "Para una estructura plana y conexa se compara el número de incógnitas (reacciones en los apoyos) con el número de condiciones de equilibrio (3 por estructura, +1 por rótula):"
+},
+"15-159": {
+"fr": "Articulation",
+"es": "Rótula"
+},
+"15-160": {
+"fr": "Articulations dans la structure",
+"es": "Rótulas en la estructura"
+},
+"15-161": {
+"fr": "Barres droites, assemblées en articulation aux nœuds, charges uniquement aux nœuds → les barres ne reprennent que des efforts normaux (traction ou compression).",
+"es": "Barras rectas, unidas con articulaciones en los nudos, cargas solo en los nudos → las barras solo soportan esfuerzos axiles (tracción o compresión)."
+},
+"15-162": {
+"fr": "Valable pour la barre élastique idéalement droite. Les barres réelles présentent des imperfections et des contraintes résiduelles → dimensionnement avec des coefficients de réduction (χ en construction métallique, k<sub>c</sub> en construction bois).",
+"es": "Válido para la barra elástica idealmente recta. Las barras reales tienen imperfecciones y tensiones residuales → dimensionamiento con coeficientes de reducción (χ en estructuras de acero, k<sub>c</sub> en estructuras de madera)."
+},
+"15-163": {
+"fr": "Charge uniforme q",
+"es": "Carga uniforme q"
+},
+"15-164": {
+"fr": "Charge uniforme q [kN/m]",
+"es": "Carga uniforme q [kN/m]"
+},
+"15-165": {
+"fr": "Charge uniforme q sur la traverse [kN/m]",
+"es": "Carga uniforme q en el dintel [kN/m]"
+},
+"15-166": {
+"fr": "Charge uniforme q<sub>1</sub> [kN/m]",
+"es": "Carga uniforme q<sub>1</sub> [kN/m]"
+},
+"15-167": {
+"fr": "Charge uniforme q<sub>2</sub> [kN/m]",
+"es": "Carga uniforme q<sub>2</sub> [kN/m]"
+},
+"15-168": {
+"fr": "Charge uniforme : max w ≈ qL⁴/(185EI).",
+"es": "Carga uniforme: max w ≈ qL⁴/(185EI)."
+},
+"15-169": {
+"fr": "Formes de base",
+"es": "Formas básicas"
+},
+"15-170": {
+"fr": "Grandeur",
+"es": "Magnitud"
+},
+"15-171": {
+"fr": "Demi-cercle, rayon r (axe passant par S, parallèle au diamètre)",
+"es": "Semicírculo, radio r (eje por S, paralelo al diámetro)"
+},
+"15-172": {
+"fr": "Charge horizontale W à l'angle gauche [kN]",
+"es": "Carga horizontal W en la esquina izquierda [kN]"
+},
+"15-173": {
+"fr": "I (axe passant par le centre de gravité)",
+"es": "I (eje del centro de gravedad)"
+},
+"15-174": {
+"fr": "Profilé en I (approximation)",
+"es": "Perfil en I (aproximado)"
+},
+"15-175": {
+"fr": "I<sub>i</sub> — moment quadratique propre de la partie par rapport à son propre axe passant par le centre de gravité<br> A<sub>i</sub>·(z<sub>i</sub> − z<sub>s</sub>)² — terme de Steiner (toujours ≥ 0)",
+"es": "I<sub>i</sub> — momento de inercia propio de la parte respecto a su propio eje del centro de gravedad<br> A<sub>i</sub>·(z<sub>i</sub> − z<sub>s</sub>)² — término de Steiner (siempre ≥ 0)"
+},
+"15-176": {
+"fr": "Treillis idéal",
+"es": "Celosía ideal"
+},
+"15-177": {
+"fr": "Évaluer l'intégrale tronçon par tronçon avec le tableau d'intégration, diviser par EI",
+"es": "Evaluar la integral tramo a tramo con la tabla de integración y dividir por EI"
+},
+"15-178": {
+"fr": "Tableau d'intégrales ∫₀ᴸ M · M̄ dx",
+"es": "Tabla de integrales ∫₀ᴸ M · M̄ dx"
+},
+"15-179": {
+"fr": "Construction cinématique (Müller-Breslau) : la ligne d'influence est la déformée obtenue en supprimant la liaison au point considéré (articulation pour M, articulation à effort tranchant pour Q) et en y imposant un déplacement ou une rotation « 1 ».",
+"es": "Construcción cinemática (Müller-Breslau): la línea de influencia es la deformada que resulta de liberar la ligadura en el punto considerado (rótula para M, rótula de cortante para Q) y de imponer allí un desplazamiento o un giro « 1 »."
+},
+"15-180": {
+"fr": "Rotation brusque (coude)",
+"es": "Quiebro"
+},
+"15-181": {
+"fr": "Modes de flambement des quatre cas d'Euler : L<sub>cr</sub> = β·L est la distance entre les points d'inflexion (demi-onde de la sinusoïde).",
+"es": "Modos de pandeo de los cuatro casos de Euler: L<sub>cr</sub> = β·L es la distancia entre los puntos de inflexión (media onda de la sinusoide)."
+},
+"15-182": {
+"fr": "Charge nodale F [kN]",
+"es": "Carga en el nudo F [kN]"
+},
+"15-183": {
+"fr": "Console (encastrement)",
+"es": "Voladizo (empotramiento)"
+},
+"15-184": {
+"fr": "Console — encastrement en A, extrémité libre, longueur L",
+"es": "Voladizo — empotramiento en A, extremo libre, longitud L"
+},
+"15-185": {
+"fr": "Cercle",
+"es": "Círculo"
+},
+"15-186": {
+"fr": "Cercle d",
+"es": "Círculo d"
+},
+"15-187": {
+"fr": "Cercle, diamètre d",
+"es": "Círculo, diámetro d"
+},
+"15-188": {
+"fr": "Couronne circulaire",
+"es": "Corona circular"
+},
+"15-189": {
+"fr": "Couronne circulaire D / d",
+"es": "Corona circular D / d"
+},
+"15-190": {
+"fr": "Charge critique d’Euler",
+"es": "Carga crítica de Euler"
+},
+"15-191": {
+"fr": "Appui",
+"es": "Apoyo"
+},
+"15-192": {
+"fr": "Types d’appuis et leur degré",
+"es": "Tipos de apoyos y su grado"
+},
+"15-193": {
+"fr": "Symboles d’appuis : appui mobile, appui fixe, encastrement, articulation",
+"es": "Símbolos de apoyos: apoyo móvil, apoyo fijo, empotramiento, rótula"
+},
+"15-194": {
+"fr": "Conditions d’appui",
+"es": "Condiciones de apoyo"
+},
+"15-195": {
+"fr": "Cas de charge",
+"es": "Hipótesis de carga"
+},
+"15-196": {
+"fr": "Disposition de charges pour le moment maximal en travée dans la travée de rive (q sur ■□■), diagramme des moments en multiples de qL².",
+"es": "Disposición de cargas para el máximo momento en el vano extremo (q sobre ■□■), diagrama de momentos en múltiplos de qL²."
+},
+"15-197": {
+"fr": "Disposition de charges pour q : ■■□ (les deux travées adjacentes) · coefficients g : −0,1000, q : −0,1167",
+"es": "Disposición de cargas para q: ■■□ (ambos vanos adyacentes) · coeficientes g: −0,1000, q: −0,1167"
+},
+"15-198": {
+"fr": "Disposition de charges pour q : ■□■ (une travée sur deux) · coefficients g : 0,0800, q : 0,1013",
+"es": "Disposición de cargas para q: ■□■ (un vano de cada dos) · coeficientes g: 0,0800, q: 0,1013"
+},
+"15-199": {
+"fr": "Appui mobile",
+"es": "Apoyo móvil"
+},
+"15-200": {
+"fr": "Appui mobile (appui articulé coulissant)",
+"es": "Apoyo móvil (apoyo articulado deslizante)"
+},
+"15-201": {
+"fr": "M (moment fléchissant)",
+"es": "M (momento flector)"
+},
+"15-202": {
+"fr": "M travée",
+"es": "M vano"
+},
+"15-203": {
+"fr": "M — diagramme des moments dû à la charge réelle<br> M̄ — diagramme des moments dû à une « 1 » virtuelle au point considéré",
+"es": "M — diagrama de momentos debido a la carga real<br> M̄ — diagrama de momentos debido a una « 1 » virtual en el punto considerado"
+},
+"15-204": {
+"fr": "M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = 0,00 kNm (articulation)",
+"es": "M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = 0,00 kNm (rótula)"
+},
+"15-205": {
+"fr": "Déterminer le diagramme M dû à la charge extérieure",
+"es": "Determinar el diagrama M debido a la carga exterior"
+},
+"15-206": {
+"fr": "M<sub>0</sub> : paraboles de flèche q · l² / 8 et triangles F · l / 4 (charge ponctuelle à mi-travée) · M<sub>1</sub> : triangle de valeur 1 au droit de B",
+"es": "M<sub>0</sub>: parábolas de flecha q · l² / 8 y triángulos F · l / 4 (carga puntual en el centro del vano) · M<sub>1</sub>: triángulo de valor 1 sobre B"
+},
+"15-207": {
+"fr": "M<sub>2</sub> = 200,00 kNm (moments de la poutre de remplacement aux nœuds)",
+"es": "M<sub>2</sub> = 200,00 kNm (momentos de la viga equivalente en los nudos)"
+},
+"15-208": {
+"fr": "M<sub>B</sub> = −32,92 kNm (traction en haut)",
+"es": "M<sub>B</sub> = −32,92 kNm (tracción arriba)"
+},
+"15-209": {
+"fr": "M<sub>C</sub> = −A<sub>h</sub> · h = −134,00 kNm (à gauche)",
+"es": "M<sub>C</sub> = −A<sub>h</sub> · h = −134,00 kNm (izquierda)"
+},
+"15-210": {
+"fr": "M<sub>D</sub> = B<sub>h</sub> · h = −166,00 kNm (à droite)",
+"es": "M<sub>D</sub> = B<sub>h</sub> · h = −166,00 kNm (derecha)"
+},
+"15-211": {
+"fr": "M<sub>F1,d</sub> = max M(x) pour g<sub>d</sub> partout + q<sub>d</sub> sur ■□■ = 44,23 kNm à x = 2,11 m",
+"es": "M<sub>F1,d</sub> = max M(x) para g<sub>d</sub> en todas partes + q<sub>d</sub> sobre ■□■ = 44,23 kNm en x = 2,11 m"
+},
+"15-212": {
+"fr": "M_A comme moment de coupe à l'encastrement (traction en haut → négatif).",
+"es": "M_A como momento de sección en el empotramiento (tracción arriba → negativo)."
+},
+"15-213": {
+"fr": "Le principe des forces virtuelles (théorème du travail) permet de calculer le déplacement ou la rotation en un point quelconque. Pour les poutres fléchies, la part de flexion prédomine :",
+"es": "Con el principio de las fuerzas virtuales (teorema del trabajo) se calcula el desplazamiento o el giro en un punto cualquiera. En vigas flectadas predomina la parte de flexión:"
+},
+"15-214": {
+"fr": "Moments en qL²",
+"es": "Momentos en qL²"
+},
+"15-215": {
+"fr": "Diagramme des moments [kNm]",
+"es": "Diagrama de momentos [kNm]"
+},
+"15-216": {
+"fr": "Diagramme des moments du côté tendu ; à l'articulation, M = 0.",
+"es": "Diagrama de momentos en el lado traccionado; en la rótula, M = 0."
+},
+"15-217": {
+"fr": "Déterminer le diagramme M̄ dû à cette « 1 »",
+"es": "Determinar el diagrama M̄ debido a esta « 1 »"
+},
+"15-218": {
+"fr": "N (effort normal)",
+"es": "N (esfuerzo axil)"
+},
+"15-219": {
+"fr": "Contraintes normales (Navier)",
+"es": "Tensiones normales (Navier)"
+},
+"15-220": {
+"fr": "Axe neutre",
+"es": "Eje neutro"
+},
+"15-221": {
+"fr": "Règles des barres à effort nul",
+"es": "Reglas de las barras de esfuerzo nulo"
+},
+"15-222": {
+"fr": "En haut : charge réelle et M · en bas : « 1 » virtuelle au point considéré et M̄",
+"es": "Arriba: carga real y M · abajo: « 1 » virtual en el punto considerado y M̄"
+},
+"15-223": {
+"fr": "Membrure supérieure O [kN]",
+"es": "Cordón superior O [kN]"
+},
+"15-224": {
+"fr": "Nœuds de la membrure supérieure : F aux nœuds intérieurs, F/2 aux nœuds d'extrémité",
+"es": "Nudos del cordón superior: F en los nudos interiores, F/2 en los nudos extremos"
+},
+"15-225": {
+"fr": "Sans dispositions de charges (charge totale partout) : M<sub>F1</sub> = 39,60 kNm, M<sub>B</sub> = −49,50 kNm — le moment en travée serait sous-estimé de 12 %",
+"es": "Sin disposiciones de carga (carga total en todas partes): M<sub>F1</sub> = 39,60 kNm, M<sub>B</sub> = −49,50 kNm — el momento en el vano quedaría un 12 % por debajo"
+},
+"15-226": {
+"fr": "Parabole i",
+"es": "Parábola i"
+},
+"15-227": {
+"fr": "Parabole × triangle (sommet à l'extrémité) : ⅓ · l · i · k · Triangle (sommet au milieu) × triangle (sommet à l'extrémité) : ¼ · l · i · k",
+"es": "Parábola × triángulo (vértice en el extremo): ⅓ · l · i · k · Triángulo (vértice en el centro) × triángulo (vértice en el extremo): ¼ · l · i · k"
+},
+"15-228": {
+"fr": "Calculer un treillis à membrures parallèles",
+"es": "Calcular una celosía de cordones paralelos"
+},
+"15-229": {
+"fr": "Treillis à membrures parallèles : effort dans la membrure = ∓ M / h (M de la poutre de remplacement au centre de rotation), effort dans la diagonale = Q / sin α, effort dans le montant par équilibre du nœud.",
+"es": "Celosía de cordones paralelos: esfuerzo en el cordón = ∓ M / h (M de la viga equivalente en el centro de giro), esfuerzo en la diagonal = Q / sen α, esfuerzo en el montante por equilibrio del nudo."
+},
+"15-230": {
+"fr": "Montant (nœud)",
+"es": "Montante (nudo)"
+},
+"15-231": {
+"fr": "Q (effort tranchant)",
+"es": "Q (esfuerzo cortante)"
+},
+"15-232": {
+"fr": "Effort tranchant Q",
+"es": "Esfuerzo cortante Q"
+},
+"15-233": {
+"fr": "Effort tranchant en travée = A moins les charges à gauche de la coupe",
+"es": "Esfuerzo cortante en el vano = A menos las cargas a la izquierda del corte"
+},
+"15-234": {
+"fr": "Calculer une section composée de rectangles (cm)",
+"es": "Calcular una sección formada por rectángulos (cm)"
+},
+"15-235": {
+"fr": "Portique, les deux pieds encastrés",
+"es": "Pórtico, ambos pies empotrados"
+},
+"15-236": {
+"fr": "Contraintes de bord : σ = N/A ± M/W",
+"es": "Tensiones en los bordes: σ = N/A ± M/W"
+},
+"15-237": {
+"fr": "Réactions",
+"es": "Reacciones"
+},
+"15-238": {
+"fr": "Rectangle",
+"es": "Rectángulo"
+},
+"15-239": {
+"fr": "Rectangle b × h",
+"es": "Rectángulo b × h"
+},
+"15-240": {
+"fr": "Calculer un rectangle (saisie en cm)",
+"es": "Calcular un rectángulo (entrada en cm)"
+},
+"15-241": {
+"fr": "Rectangle i",
+"es": "Rectángulo i"
+},
+"15-242": {
+"fr": "Rectangle k",
+"es": "Rectángulo k"
+},
+"15-243": {
+"fr": "Rectangle plastique : W<sub>pl</sub> = b·h²/4 = 1,5·W<sub>el</sub>. Triangle : centre de gravité à h/3 au-dessus de la base.",
+"es": "Rectángulo plástico: W<sub>pl</sub> = b·h²/4 = 1,5·W<sub>el</sub>. Triángulo: centro de gravedad a h/3 sobre la base."
+},
+"15-244": {
+"fr": "Rectangle en flexion : σ linéaire (compression en haut, traction en bas), τ parabolique avec le maximum sur l'axe passant par le centre de gravité",
+"es": "Rectángulo a flexión: σ lineal (compresión arriba, tracción abajo), τ parabólico con el máximo en el eje del centro de gravedad"
+}
+}

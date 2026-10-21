@@ -1,0 +1,950 @@
+{
+"11-0": {
+"fr": "Bois — panne en flexion déviée",
+"es": "Madera — correa con flexión desviada"
+},
+"11-1": {
+"fr": "Bois — traction perpendiculaire à un assemblage transversal",
+"es": "Madera — tracción perpendicular en una unión transversal"
+},
+"11-2": {
+"fr": "Lorsqu’une charge est suspendue au bas de la poutre, elle écarte les fibres transversalement — plus l’assemblage est proche du bord inférieur, plus le bois risque de se fendre.",
+"es": "Cuando una carga cuelga de la parte inferior de la viga, separa las fibras en sentido transversal: cuanto más cerca del borde inferior está la unión, antes se raja la madera."
+},
+"11-3": {
+"fr": "Hauteur h > 0",
+"es": "Canto h > 0"
+},
+"11-4": {
+"fr": "Hauteur et longueur > 0",
+"es": "Altura y longitud > 0"
+},
+"11-5": {
+"fr": "Dans la section affaiblie par les trous, la plaque rompt avant que l’effort de traction ne soit atteint.",
+"es": "En la sección debilitada por los agujeros, la chapa rompe antes de alcanzar el esfuerzo de tracción."
+},
+"11-6": {
+"fr": "Aucune ligne du tableau pour cette largeur — respecter d’abord la largeur minimale.",
+"es": "No hay fila en la tabla para este ancho: primero se debe respetar el ancho mínimo."
+},
+"11-7": {
+"fr": "Aucune barre arrêtée saisie — les barres continues ne suffisent alors pas.",
+"es": "No se han introducido barras escalonadas: las barras continuas no son entonces suficientes."
+},
+"11-8": {
+"fr": "Déversement de la panne (mode poutre/poteau), pannes continues et pannes Gerber, effort normal dû au contreventement de toiture, flèche dans deux directions et assemblages (jonction de pannes, appuis).",
+"es": "Pandeo lateral de la correa (modo viga/pilar), correas continuas y correas Gerber, esfuerzo axil del arriostramiento de cubierta, flecha en dos direcciones y uniones (empalme de correas, apoyos)."
+},
+"11-9": {
+"fr": "Percement plus petit, position plus proche de l’axe de la poutre et plus éloignée de l’appui (V plus petit), poutre plus haute ou renforcement.",
+"es": "Perforación más pequeña, situada más cerca del eje de la viga y más lejos del apoyo (V menor), viga de mayor canto o refuerzo."
+},
+"11-10": {
+"fr": " (arrêtées {} … {} m)",
+"es": " (escalonadas {} … {} m)"
+},
+"11-11": {
+"fr": " · en haut {} Ø{}",
+"es": " · arriba {} Ø{}"
+},
+"11-12": {
+"fr": ", étriers Ø{}, {}",
+"es": ", estribos Ø{}, {}"
+},
+"11-13": {
+"fr": "A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = ({} − {}·{})·{} = {} mm² (file de trous perpendiculaire à l’effort, non décalée)",
+"es": "A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = ({} − {}·{})·{} = {} mm² (fila de agujeros perpendicular al esfuerzo, no al tresbolillo)"
+},
+"11-14": {
+"fr": "A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0,5)·d<sub>0</sub>)·t = 2·{}·{} = {} mm²",
+"es": "A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0,5)·d<sub>0</sub>)·t = 2·{}·{} = {} mm²"
+},
+"11-15": {
+"fr": "Plaque {} × {} mm, {}, {} × {} trous d₀ = {} mm · N<sub>u,Rd</sub> = {} kN · V<sub>eff,1,Rd</sub> = {} kN",
+"es": "Chapa {} × {} mm, {}, {} × {} agujeros d₀ = {} mm · N<sub>u,Rd</sub> = {} kN · V<sub>eff,1,Rd</sub> = {} kN"
+},
+"11-16": {
+"fr": "Incendie R {}",
+"es": "Fuego R {}"
+},
+"11-17": {
+"fr": "Les {} barres continues (F<sub>Rd</sub> = {} kN) couvrent partout la courbe décalée des efforts de traction — des barres arrêtées ne sont pas nécessaires par le calcul.",
+"es": "Las {} barras continuas (F<sub>Rd</sub> = {} kN) cubren en todos los puntos la ley de tracciones decalada: no se necesitan barras escalonadas según el cálculo."
+},
+"11-18": {
+"fr": "R {}, portant dans un sens, isostatique, exposé au feu par le dessous",
+"es": "R {}, armada en una dirección, isostática, expuesta al fuego por la cara inferior"
+},
+"11-19": {
+"fr": "R {}, isostatique, exposé au feu sur trois faces — combinaisons possibles b<sub>min</sub>/a",
+"es": "R {}, isostática, expuesta al fuego por tres caras — combinaciones posibles b<sub>min</sub>/a"
+},
+"11-20": {
+"fr": "Distance au bord transversale e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = {} mm",
+"es": "Distancia al borde transversal e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = {} mm"
+},
+"11-21": {
+"fr": "Hauteur résiduelle h<sub>ro</sub> = {} mm, h<sub>ru</sub> = {} mm",
+"es": "Canto residual h<sub>ro</sub> = {} mm, h<sub>ru</sub> = {} mm"
+},
+"11-22": {
+"fr": "Valeurs du tableau pour t = {} mm, hauteur au-dessus du sol jusqu’à {} m (tenu sur quatre côtés)",
+"es": "Valores de la tabla para t = {} mm, altura sobre el terreno hasta {} m (sujeto en los cuatro lados)"
+},
+"11-23": {
+"fr": "Enrobage nominal selon la classe d’exposition {} : c<sub>v</sub> = {} mm",
+"es": "Recubrimiento nominal según la clase de exposición {}: c<sub>v</sub> = {} mm"
+},
+"11-24": {
+"fr": "a = {} mm {} a<sub>req</sub> = {} mm",
+"es": "a = {} mm {} a<sub>nec</sub> = {} mm"
+},
+"11-25": {
+"fr": "résistance de {} Ø{} : F<sub>Rd</sub> = <b>{} kN</b> {} {} kN",
+"es": "resistencia de {} Ø{}: F<sub>Rd</sub> = <b>{} kN</b> {} {} kN"
+},
+"11-26": {
+"fr": "résistance de {} Ø{} : F<sub>Rd</sub> = {}·{}·{} = <b>{} kN</b> {} {} kN",
+"es": "resistencia de {} Ø{}: F<sub>Rd</sub> = {}·{}·{} = <b>{} kN</b> {} {} kN"
+},
+"11-27": {
+"fr": "b = {} cm, h = {} cm, {}, étriers Ø{}",
+"es": "b = {} cm, h = {} cm, {}, estribos Ø{}"
+},
+"11-28": {
+"fr": "b = {} mm → a<sub>req</sub> = <b>{} mm</b>",
+"es": "b = {} mm → a<sub>nec</sub> = <b>{} mm</b>"
+},
+"11-29": {
+"fr": "b = {} mm, h = {} mm, l = {} m, pente de toiture α = {}°",
+"es": "b = {} mm, h = {} mm, l = {} m, pendiente de cubierta α = {}°"
+},
+"11-30": {
+"fr": "tenu sur trois côtés (un bord vertical libre) : moitié de la valeur du tableau → <b>{} m²</b>",
+"es": "sujeto en tres lados (un borde vertical libre): la mitad del valor de la tabla → <b>{} m²</b>"
+},
+"11-31": {
+"fr": "continues {} Ø{} : F<sub>Rd</sub> = {} kN",
+"es": "continuas {} Ø{}: F<sub>Rd</sub> = {} kN"
+},
+"11-32": {
+"fr": "barres arrêtées ({} Ø{}) prolongées de l<sub>bd</sub> = {} mm : de x = <b>{} m</b> à <b>{} m</b> (longueur {} m)",
+"es": "barras escalonadas ({} Ø{}) prolongadas l<sub>bd</sub> = {} mm: de x = <b>{} m</b> a <b>{} m</b> (longitud {} m)"
+},
+"11-33": {
+"fr": "h<sub>s,min</sub> = {} mm (dalle brute avec chape) · a = {} mm",
+"es": "h<sub>s,min</sub> = {} mm (losa en bruto con solera) · a = {} mm"
+},
+"11-34": {
+"fr": "l = {} m · en bas {} + {} Ø{}{}{} · a<sub>l</sub> = {} mm",
+"es": "l = {} m · abajo {} + {} Ø{}{}{} · a<sub>l</sub> = {} mm"
+},
+"11-35": {
+"fr": "déterminant N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub> ; N<sub>u,Rd</sub>) = {} kN ({})",
+"es": "determinante N<sub>t,Rd</sub> = mín(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = {} kN ({})"
+},
+"11-36": {
+"fr": "prolonger au moins 25 % des armatures de travée au-delà des appuis : {}/{} = {} % {} 25 %",
+"es": "prolongar al menos el 25 % de la armadura de vano sobre los apoyos: {}/{} = {} % {} 25 %"
+},
+"11-37": {
+"fr": "à pénétration partielle, a = {} mm",
+"es": "de penetración parcial, a = {} mm"
+},
+"11-38": {
+"fr": "en haut Ø{} ({}) : l<sub>b,rqd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>",
+"es": "arriba Ø{} ({}): l<sub>b,rqd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>"
+},
+"11-39": {
+"fr": "q<sub>v</sub> = {} kN/m verticale, q<sub>n</sub> = {} kN/m perpendiculaire au plan de toiture",
+"es": "q<sub>v</sub> = {} kN/m vertical, q<sub>n</sub> = {} kN/m perpendicular al plano de cubierta"
+},
+"11-40": {
+"fr": "rectangulaire {} × {} mm",
+"es": "rectangular {} × {} mm"
+},
+"11-41": {
+"fr": "à droite : la traction s’arrête en x = {} m → longueur de barre à partir de l’axe B ≥ <b>{} m</b>",
+"es": "derecha: la tracción termina en x = {} m → longitud de barra desde el eje B ≥ <b>{} m</b>"
+},
+"11-42": {
+"fr": "circulaire Ø {} mm",
+"es": "circular Ø {} mm"
+},
+"11-43": {
+"fr": "t = {} mm, l = {} m, h = {} m, tenu sur {}, hauteur au-dessus du sol jusqu’à {} m",
+"es": "t = {} mm, l = {} m, h = {} m, sujeto en {}, altura sobre el terreno hasta {} m"
+},
+"11-44": {
+"fr": "t = {} mm, {} × {} m, tenu sur {} · A = {} m², admissible {} m²",
+"es": "t = {} mm, {} × {} m, sujeto en {} · A = {} m², admisible {} m²"
+},
+"11-45": {
+"fr": "en bas {} Ø{} continues + {} Ø{} arrêtées, en haut {} Ø{}",
+"es": "abajo {} Ø{} continuas + {} Ø{} escalonadas, arriba {} Ø{}"
+},
+"11-46": {
+"fr": "en bas Ø{} (bonnes conditions d’adhérence) : l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>",
+"es": "abajo Ø{} (buenas condiciones de adherencia): l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>"
+},
+"11-47": {
+"fr": "en bas : d = {} mm, z = 0,9·d = {} mm · en haut : d = {} mm, z = {} mm",
+"es": "abajo: d = {} mm, z = 0,9·d = {} mm · arriba: d = {} mm, z = {} mm"
+},
+"11-48": {
+"fr": "courbe décalée des efforts de traction > {} kN entre x = {} m et {} m",
+"es": "ley de tracciones decalada > {} kN entre x = {} m y {} m"
+},
+"11-49": {
+"fr": "admissible {} m²",
+"es": "admisible {} m²"
+},
+"11-50": {
+"fr": "{} R {} · a = {} mm (requis {} mm)",
+"es": "{} R {} · a = {} mm (necesario {} mm)"
+},
+"11-51": {
+"fr": "{} rangées dans la direction de l’effort × {} transversalement, d<sub>0</sub> = {} mm, e<sub>1</sub> = {}, p<sub>1</sub> = {}, p<sub>2</sub> = {} mm",
+"es": "{} filas en la dirección del esfuerzo × {} transversalmente, d<sub>0</sub> = {} mm, e<sub>1</sub> = {}, p<sub>1</sub> = {}, p<sub>2</sub> = {} mm"
+},
+"11-52": {
+"fr": "{}, plaque t = {} mm, l = {} mm, {}",
+"es": "{}, chapa t = {} mm, l = {} mm, {}"
+},
+"11-53": {
+"fr": "{}, classe de service {}, KLED « {} »",
+"es": "{}, clase de servicio {}, KLED «{}»"
+},
+"11-54": {
+"fr": "{}, classe de service {}, KLED « {} », k<sub>mod</sub> = {}",
+"es": "{}, clase de servicio {}, KLED «{}», k<sub>mod</sub> = {}"
+},
+"11-55": {
+"fr": "{}, h<sub>d</sub> = {} mm{}, h<sub>ro</sub> = {} mm, l<sub>v</sub> = {} mm, poutre {} × {} mm",
+"es": "{}, h<sub>d</sub> = {} mm{}, h<sub>ro</sub> = {} mm, l<sub>v</sub> = {} mm, viga {} × {} mm"
+},
+"11-56": {
+"fr": "Ø{}{}, classe d’exposition {}",
+"es": "Ø{}{}, clase de exposición {}"
+},
+"11-57": {
+"fr": "ε = 1,0 : {} m² · ε ≥ 2,0 : {} m² → pour ε = {} par interpolation linéaire : <b>{} m²</b>",
+"es": "ε = 1,0: {} m² · ε ≥ 2,0: {} m² → para ε = {} por interpolación lineal: <b>{} m²</b>"
+},
+"11-58": {
+"fr": "Position de l’assemblage : distance de l’organe d’assemblage le plus éloigné du bord sollicité",
+"es": "Posición de la unión: distancia del medio de unión más alejado del borde solicitado"
+},
+"11-59": {
+"fr": "Répartition de la charge selon les axes principaux",
+"es": "Reparto de la carga según los ejes principales"
+},
+"11-60": {
+"fr": "Charges (valeurs de calcul)",
+"es": "Cargas (valores de cálculo)"
+},
+"11-61": {
+"fr": "Si l’organe d’assemblage se situe dans les 30 % supérieurs de la hauteur (loin du bord sollicité), la traction perpendiculaire est reprise en toute sécurité.",
+"es": "Si el medio de unión está en el 30 % superior del canto (lejos del borde solicitado), la tracción perpendicular se resiste con seguridad."
+},
+"11-62": {
+"fr": "Longueur des barres supérieures à partir de l’axe d’appui (courbe des efforts de traction décalée, plus l<sub>bd</sub>)",
+"es": "Longitud de las barras superiores desde el eje del apoyo (ley de tracciones decalada, más l<sub>bd</sub>)"
+},
+"11-63": {
+"fr": "Plan de boulonnage plus long dans la direction de l’effort (e<sub>1</sub>, p<sub>1</sub>, plus de rangées), plaque plus épaisse ou entraxe p<sub>2</sub> plus grand.",
+"es": "Disposición de tornillos más larga en la dirección del esfuerzo (e<sub>1</sub>, p<sub>1</sub>, más filas), chapa más gruesa o separación p<sub>2</sub> mayor."
+},
+"11-64": {
+"fr": "Maçonnerie — mur de remplissage",
+"es": "Fábrica — muro de relleno"
+},
+"11-65": {
+"fr": "Plus de barres ou des barres plus grosses en partie inférieure ; comparer avec le dimensionnement en flexion du mode poutre.",
+"es": "Más barras o de mayor diámetro abajo; comparar con el dimensionamiento a flexión del modo viga."
+},
+"11-66": {
+"fr": "Plus de barres ou des barres plus grosses sur l’appui.",
+"es": "Más barras o de mayor diámetro sobre el apoyo."
+},
+"11-67": {
+"fr": "Plusieurs rangées d’organes d’assemblage (k<sub>r</sub> < 1), assemblages des deux côtés de la poutre, renforcements contre la traction perpendiculaire et résistance des organes d’assemblage eux-mêmes (mode assemblage).",
+"es": "Varias filas de medios de unión (k<sub>r</sub> < 1), uniones a ambos lados de la viga, refuerzos frente a la tracción perpendicular y la resistencia de los propios medios de unión (modo unión)."
+},
+"11-68": {
+"fr": "Largeur minimale",
+"es": "Ancho mínimo"
+},
+"11-69": {
+"fr": "Épaisseur minimale",
+"es": "Espesor mínimo"
+},
+"11-70": {
+"fr": "Panne intermédiaire — flexion déviée",
+"es": "Correa intermedia — flexión desviada"
+},
+"11-71": {
+"fr": "Longueur efficace et coefficient de volume",
+"es": "Longitud efectiva y factor de volumen"
+},
+"11-72": {
+"fr": "Diagramme des moments dû à la charge uniformément répartie et aux moments sur appuis",
+"es": "Diagrama de momentos por carga uniforme y momentos en apoyos"
+},
+"11-73": {
+"fr": "Vérification selon DIN EN 1992-1-2 avec l’AN allemand par dimensions minimales et distance d’axe des armatures (tab. 5.5 pour les poutres, tab. 5.8 pour les dalles).",
+"es": "Comprobación según DIN EN 1992-1-2 con el AN alemán mediante dimensiones mínimas y distancia al eje de la armadura (tab. 5.5 para vigas, tab. 5.8 para losas)."
+},
+"11-74": {
+"fr": "Soudure",
+"es": "Soldadura"
+},
+"11-75": {
+"fr": "Milieu de la soudure : contrainte normale due à N et contrainte de cisaillement maximale (parabole)",
+"es": "Centro de la soldadura: tensión normal debida a N y tensión tangencial máxima (parábola)"
+},
+"11-76": {
+"fr": "Solive sur poutre principale HT 1",
+"es": "Viga secundaria sobre viga principal HT 1"
+},
+"11-77": {
+"fr": "Section nette",
+"es": "Sección neta"
+},
+"11-78": {
+"fr": "Soudure bout à bout à pénétration partielle",
+"es": "Soldadura a tope de penetración parcial"
+},
+"11-79": {
+"fr": "Soudure bout à bout à pénétration partielle : comme une soudure d’angle avec une gorge a à pénétration profonde (4.7.2)",
+"es": "Soldadura a tope de penetración parcial: como una soldadura en ángulo con garganta a de penetración profunda (4.7.2)"
+},
+"11-80": {
+"fr": "Mur de remplissage non porteur",
+"es": "Muro de relleno no portante"
+},
+"11-81": {
+"fr": "Mur de remplissage non porteur sans vérification par le calcul : surface admissible selon l’épaisseur du mur, le rapport des côtés, les appuis et la hauteur au-dessus du sol.",
+"es": "Muro de relleno no portante sin comprobación de cálculo: superficie admisible según el espesor del muro, la relación de lados, la sujeción y la altura sobre el terreno."
+},
+"11-82": {
+"fr": "Orange : traction perpendiculaire aux angles opposés — c’est là qu’une poutre non renforcée se fissure en premier.",
+"es": "Naranja: tracción perpendicular en las esquinas opuestas; allí se fisura primero una viga sin refuerzo."
+},
+"11-83": {
+"fr": "Panne",
+"es": "Correa"
+},
+"11-84": {
+"fr": "Panne en flexion déviée",
+"es": "Correa con flexión desviada"
+},
+"11-85": {
+"fr": "Panne posée perpendiculairement au plan de toiture : la charge verticale se décompose en deux composantes",
+"es": "Correa colocada perpendicular al plano de cubierta: la carga vertical se descompone en dos componentes"
+},
+"11-86": {
+"fr": "Dalle portant dans un sens",
+"es": "Losa armada en una dirección"
+},
+"11-87": {
+"fr": "Bande de dalle",
+"es": "Banda de losa"
+},
+"11-88": {
+"fr": "Pos. 11 — poutre en retombée, résistance au feu",
+"es": "Pos. 11 — viga de canto (descolgada), resistencia al fuego"
+},
+"11-89": {
+"fr": "Pos. 12 — travée de rive d’une poutre continue",
+"es": "Pos. 12 — vano extremo de una viga continua"
+},
+"11-90": {
+"fr": "Section tournée de α",
+"es": "Sección girada un ángulo α"
+},
+"11-91": {
+"fr": "Traction perpendiculaire",
+"es": "Tracción perpendicular"
+},
+"11-92": {
+"fr": "Traction perpendiculaire (bois)",
+"es": "Tracción perpendicular (madera)"
+},
+"11-93": {
+"fr": "Traction perpendiculaire au bord du percement",
+"es": "Tracción perpendicular en el borde de la perforación"
+},
+"11-94": {
+"fr": "Traction perpendiculaire à un assemblage transversal",
+"es": "Tracción perpendicular en una unión transversal"
+},
+"11-95": {
+"fr": "Effort de traction perpendiculaire dû à l’effort tranchant et au moment",
+"es": "Esfuerzo de tracción perpendicular debido al cortante y al momento"
+},
+"11-96": {
+"fr": "Résistance à la traction perpendiculaire (AN, NCI relatif à 8.1.4)",
+"es": "Resistencia a tracción perpendicular (AN, NCI a 8.1.4)"
+},
+"11-97": {
+"fr": "Résistance à la fente d’un assemblage chargé perpendiculairement au fil selon DIN EN 1995-1-1 avec AN (NCI relatif à 8.1.4), comparée à la formule de la norme de base.",
+"es": "Resistencia a tracción perpendicular de una unión cargada perpendicularmente a la fibra según DIN EN 1995-1-1 con AN (NCI a 8.1.4), comparada con la fórmula de la norma base."
+},
+"11-98": {
+"fr": "Extrémité de la soudure : contrainte normale due à N et M (cisaillement nul à cet endroit)",
+"es": "Extremo de la soldadura: tensión normal debida a N y M (tangencial nula allí)"
+},
+"11-99": {
+"fr": "Bandes de rive extérieures (entre la file de trous et le bord de la plaque)",
+"es": "Franjas de borde exteriores (entre la fila de agujeros y el borde de la chapa)"
+},
+"11-100": {
+"fr": "À droite : contrainte normale le long de la soudure due à l’effort normal et à la flexion dans le plan de la plaque.",
+"es": "Derecha: tensión normal a lo largo de la soldadura debida al esfuerzo axil y a la flexión en el plano de la chapa."
+},
+"11-101": {
+"fr": "Hauteur résiduelle en haut et en bas > 0",
+"es": "Canto residual arriba y abajo > 0"
+},
+"11-102": {
+"fr": "Méthode directionnelle (4.5.3.2) avec β<sub>w</sub>",
+"es": "Método direccional (4.5.3.2) con β<sub>w</sub>"
+},
+"11-103": {
+"fr": "Efforts internes au droit du percement",
+"es": "Esfuerzos internos en la perforación"
+},
+"11-104": {
+"fr": "Efforts internes de la poutre sur deux appuis",
+"es": "Esfuerzos internos de la viga biapoyada"
+},
+"11-105": {
+"fr": "Le plan de boulonnage ne tient pas dans la largeur b",
+"es": "La disposición de tornillos no cabe en el ancho b"
+},
+"11-106": {
+"fr": "Cisaillement dans deux directions",
+"es": "Cortante en dos direcciones"
+},
+"11-107": {
+"fr": "Cisaillement dans la section résiduelle",
+"es": "Cortante en la sección residual"
+},
+"11-108": {
+"fr": "Rapport des côtés et surface",
+"es": "Relación de lados y superficie"
+},
+"11-109": {
+"fr": "risque de fendage",
+"es": "riesgo de rajado"
+},
+"11-110": {
+"fr": "Contraintes dans la surface de la soudure (perpendiculaire à l’effort) : σ⊥ due à N et M, τ∥ due à V",
+"es": "Tensiones en la superficie de la soldadura (perpendicular al esfuerzo): σ⊥ debida a N y M, τ∥ debida a V"
+},
+"11-111": {
+"fr": "Arrêt des armatures de travée",
+"es": "Escalonamiento de la armadura de vano"
+},
+"11-112": {
+"fr": "Acier — soudure bout à bout",
+"es": "Acero — soldadura a tope"
+},
+"11-113": {
+"fr": "Acier — tirant avec affaiblissement par trous",
+"es": "Acero — tirante con debilitamiento por agujeros"
+},
+"11-114": {
+"fr": "Béton armé — sécurité incendie par tableaux",
+"es": "Hormigón armado — protección contra incendios por tablas"
+},
+"11-115": {
+"fr": "Béton armé — couverture de la force de traction d’une poutre continue",
+"es": "Hormigón armado — cobertura de la ley de tracciones en una viga continua"
+},
+"11-116": {
+"fr": "Hauteur utile et bras de levier interne",
+"es": "Canto útil y brazo mecánico"
+},
+"11-117": {
+"fr": "Soudure bout à bout",
+"es": "Soldadura a tope"
+},
+"11-118": {
+"fr": "Soudures bout à bout sur profilés (soudure d’âme et soudures de semelles séparées), épaisseurs de tôle différentes avec chanfrein, fatigue (catégories de détail), étendue des contrôles et niveaux de qualité selon DIN EN ISO 5817 ainsi que les assemblages en T combinant soudure d’angle et soudure bout à bout.",
+"es": "Soldaduras a tope en perfiles (soldadura del alma y de las alas por separado), espesores de chapa distintos con transición en pendiente, fatiga (categorías de detalle), alcance de la inspección y niveles de calidad según DIN EN ISO 5817, así como uniones en T con combinación de soldadura en ángulo y a tope."
+},
+"11-119": {
+"fr": "Armature supérieure sur appui",
+"es": "Armadura superior sobre apoyos"
+},
+"11-120": {
+"fr": "Poteaux (méthode A, tab. 5.2a), voiles, poutres et dalles continues (tab. 5.6/5.9), dalles portant dans deux sens, planchers-dalles, béton précontraint, méthodes de calcul simplifiées et avancées et écaillage du béton à haute résistance.",
+"es": "Pilares (método A, tab. 5.2a), muros, vigas y losas continuas (tab. 5.6/5.9), losas armadas en dos direcciones, forjados sin vigas, hormigón pretensado, los métodos de cálculo simplificados y avanzados y el desconchado del hormigón de alta resistencia."
+},
+"11-121": {
+"fr": "Portée > 0",
+"es": "Luz > 0"
+},
+"11-122": {
+"fr": "Valeurs du tableau pour les poutres (EN 1992-1-2, tab. 5.5)",
+"es": "Valores de la tabla para vigas (EN 1992-1-2, tab. 5.5)"
+},
+"11-123": {
+"fr": "Valeurs du tableau pour les dalles (EN 1992-1-2, tab. 5.8)",
+"es": "Valores de la tabla para losas (EN 1992-1-2, tab. 5.8)"
+},
+"11-124": {
+"fr": "Percements non renforcés uniquement dans les classes de service 1 et 2 ; arrondir les angles des percements rectangulaires avec r ≥ 15 mm.",
+"es": "Perforaciones sin refuerzo solo en las clases de servicio 1 y 2; redondear las esquinas de las perforaciones rectangulares con r ≥ 15 mm."
+},
+"11-125": {
+"fr": "Percement circulaire ou rectangulaire non renforcé selon l’AN, NCI NA.6.7 : limites, traction perpendiculaire due à l’effort tranchant et au moment, cisaillement et flexion dans la section résiduelle.",
+"es": "Perforación circular o rectangular sin refuerzo según el AN, NCI NA.6.7: límites, tracción perpendicular debida al cortante y al momento, cortante y flexión en la sección residual."
+},
+"11-126": {
+"fr": "Longueur d’ancrage au-delà du point où la barre n’est plus nécessaire par le calcul",
+"es": "Longitud de anclaje más allá del punto donde la barra ya no es necesaria según el cálculo"
+},
+"11-127": {
+"fr": "Enrobage nominal ≥ 0",
+"es": "Recubrimiento nominal ≥ 0"
+},
+"11-128": {
+"fr": "Règle de décalage, courbe des efforts de traction décalée, arrêt des armatures de travée, longueur des armatures sur appui et armature minimale aux appuis selon DIN EN 1992-1-1 avec AN, 9.2.1.",
+"es": "Regla de decalaje, ley de tracciones decalada, escalonamiento de la armadura de vano, longitud de la armadura sobre apoyos y armadura mínima en los apoyos según DIN EN 1992-1-1 con AN, 9.2.1."
+},
+"11-129": {
+"fr": "Règle de décalage : la courbe des efforts de traction est décalée de a<sub>l</sub> dans le sens défavorable (modèle en treillis, étriers verticaux)",
+"es": "Regla de decalaje: la ley de tracciones se desplaza a<sub>l</sub> en el sentido desfavorable (modelo de celosía, estribos verticales)"
+},
+"11-130": {
+"fr": "Files de trous décalées (s²/4p), cornières assemblées par une aile (valeurs β 3.10.3), arrachement de bloc excentré (V<sub>eff,2,Rd</sub>), les boulons eux-mêmes (cisaillement, pression diamétrale — mode assemblage) et fatigue.",
+"es": "Filas de agujeros al tresbolillo (s²/4p), angulares unidos por un ala (valores β 3.10.3), desgarro de bloque excéntrico (V<sub>eff,2,Rd</sub>), los propios tornillos (corte, aplastamiento — modo unión) y fatiga."
+},
+"11-131": {
+"fr": "Percements renforcés (renforts intérieurs et extérieurs), plusieurs percements (distance l<sub>z</sub>), percements dans le bois massif et à proximité d’entailles, ainsi que la flèche avec section affaiblie.",
+"es": "Perforaciones reforzadas (refuerzos internos y externos), varias perforaciones (separación l<sub>z</sub>), perforaciones en madera maciza y cerca de entalladuras, así como la flecha con sección debilitada."
+},
+"11-132": {
+"fr": "Conditions : classe de résistance des éléments ≥ 12, mortier courant ≥ M 5 (NM IIa) ou mortier de joint mince, appuis en rive avec transmission des efforts.",
+"es": "Requisitos: clase de resistencia de las piezas ≥ 12, mortero ordinario ≥ M 5 (NM IIa) o mortero de junta delgada, sujeciones en el borde con transmisión de fuerzas."
+},
+"11-133": {
+"fr": "Trop peu de barres se prolongent au-delà des appuis — l’armature minimale y fait défaut.",
+"es": "Muy pocas barras continúan sobre los apoyos: allí falta la armadura mínima."
+},
+"11-134": {
+"fr": "Tirant Z1 — fer plat",
+"es": "Tirante Z1 — pletina"
+},
+"11-135": {
+"fr": "Couverture de la force de traction",
+"es": "Cobertura de la ley de tracciones"
+},
+"11-136": {
+"fr": "Couverture de la force de traction (poutre continue)",
+"es": "Cobertura de la ley de tracciones (viga continua)"
+},
+"11-137": {
+"fr": "Couverture de la force de traction d’une poutre continue",
+"es": "Cobertura de la ley de tracciones en una viga continua"
+},
+"11-138": {
+"fr": "Courbe des efforts de traction et courbe de résistance (en bas : travée, en haut : appuis)",
+"es": "Ley de tracciones y ley resistente (abajo: vano, arriba: apoyos)"
+},
+"11-139": {
+"fr": "Tirant avec affaiblissement par trous",
+"es": "Tirante con debilitamiento por agujeros"
+},
+"11-140": {
+"fr": "Tirant avec assemblage boulonné",
+"es": "Tirante con unión atornillada"
+},
+"11-141": {
+"fr": "Résistance à la traction de la section brute (plastification)",
+"es": "Resistencia a tracción de la sección bruta (plastificación)"
+},
+"11-142": {
+"fr": "Résistance à la traction de la section nette (rupture)",
+"es": "Resistencia a tracción de la sección neta (rotura)"
+},
+"11-143": {
+"fr": "Surface de remplissage admissible",
+"es": "Superficie de relleno admisible"
+},
+"11-144": {
+"fr": "À titre de comparaison : formule de la norme de base EN 1995-1-1, éq. (8.4), remplacée dans l’AN",
+"es": "A modo de comparación: fórmula de la norma base EN 1995-1-1, ec. (8.4), sustituida en el AN"
+},
+"11-145": {
+"fr": "Flexion biaxiale avec km = 0,7 et cisaillement dans deux directions selon DIN EN 1995-1-1, 6.1.6 et 6.1.7, pour une panne posée perpendiculairement au plan de toiture.",
+"es": "Flexión biaxial con km = 0,7 y cortante en dos direcciones según DIN EN 1995-1-1, 6.1.6 y 6.1.7, para una correa colocada perpendicular al plano de cubierta."
+},
+"11-146": {
+"fr": "Murs tenus sur deux côtés, murs avec ouvertures, remplissages d’épaisseur comprise entre les valeurs du tableau (arrondir ici à la valeur inférieure), vent au-delà de 100 m de hauteur et vérification par le calcul de la flexion de la dalle.",
+"es": "Muros sujetos en dos lados, muros con huecos, rellenos con espesores intermedios entre los valores de la tabla (aquí se redondea al valor menor), viento por encima de 100 m de altura y la comprobación de cálculo a flexión de placa."
+},
+"11-147": {
+"fr": "Les valeurs intermédiaires peuvent être interpolées linéairement",
+"es": "Los valores intermedios pueden interpolarse linealmente"
+},
+"11-148": {
+"fr": "bord sollicité",
+"es": "borde solicitado"
+},
+"11-149": {
+"fr": "pour",
+"es": "para"
+},
+"11-150": {
+"fr": "à pénétration complète",
+"es": "de penetración total"
+},
+"11-151": {
+"fr": "une couche",
+"es": "una capa"
+},
+"11-152": {
+"fr": "libre",
+"es": "libre"
+},
+"11-153": {
+"fr": "barres arrêtées ≥ 0",
+"es": "barras escalonadas ≥ 0"
+},
+"11-154": {
+"fr": "grand/petit côté",
+"es": "lado mayor/menor"
+},
+"11-155": {
+"fr": "bonnes conditions d’adhérence, h ≤ 300 mm",
+"es": "buenas condiciones de adherencia, h ≤ 300 mm"
+},
+"11-156": {
+"fr": "h_ro, h_ru ≥ 0,25·h",
+"es": "h_ro, h_ru ≥ 0,25·h"
+},
+"11-157": {
+"fr": "k<sub>m</sub> = 0,7 pour les sections rectangulaires : les contraintes maximales ne coïncident qu’à un seul angle",
+"es": "k<sub>m</sub> = 0,7 para secciones rectangulares: las tensiones máximas solo coinciden en una esquina"
+},
+"11-158": {
+"fr": "aucune vérification nécessaire",
+"es": "no se requiere comprobación"
+},
+"11-159": {
+"fr": "plusieurs couches",
+"es": "varias capas"
+},
+"11-160": {
+"fr": "au moins 1 boulon par direction",
+"es": "al menos 1 tornillo por dirección"
+},
+"11-161": {
+"fr": "au moins 2 barres continues",
+"es": "al menos 2 barras continuas"
+},
+"11-162": {
+"fr": "mauvaises conditions d’adhérence, h > 300 mm",
+"es": "malas condiciones de adherencia, h > 300 mm"
+},
+"11-163": {
+"fr": "barres supérieures sur les appuis ≥ 2",
+"es": "barras superiores sobre los apoyos ≥ 2"
+},
+"11-164": {
+"fr": "rectangulaire",
+"es": "rectangular"
+},
+"11-165": {
+"fr": "circulaire",
+"es": "circular"
+},
+"11-166": {
+"fr": "Enrobage nominal imposé : c<sub>v</sub> = {} mm (selon la classe d’exposition {} : {} mm)",
+"es": "Recubrimiento nominal fijado: c<sub>v</sub> = {} mm (según la clase de exposición {}: {} mm)"
+},
+"11-167": {
+"fr": "b = {} mm < {} mm — inférieur à la plus petite largeur du tableau",
+"es": "b = {} mm < {} mm: menor que el ancho mínimo de la tabla"
+},
+"11-168": {
+"fr": "une seule couche d’armatures et b < {} mm : barres d’angle a<sub>sd</sub> = a + 10 mm → <b>{} mm</b>",
+"es": "una sola capa de armadura y b < {} mm: barras de esquina a<sub>sd</sub> = a + 10 mm → <b>{} mm</b>"
+},
+"11-169": {
+"fr": "à gauche : la traction s’arrête en x = {} m → longueur de barre à partir de l’axe A ≥ <b>{} m</b>",
+"es": "izquierda: la tracción termina en x = {} m → longitud de barra desde el eje A ≥ <b>{} m</b>"
+},
+"11-170": {
+"fr": " > 0,7 → vérification de la traction perpendiculaire selon l’AN non nécessaire",
+"es": " > 0,7 → no se requiere la comprobación de tracción perpendicular según el AN"
+},
+"11-171": {
+"fr": ", orientation nord",
+"es": ", orientación norte"
+},
+"11-172": {
+"fr": ", verre de protection solaire",
+"es": ", vidrio de control solar"
+},
+"11-173": {
+"fr": ", refroidissement passif",
+"es": ", refrigeración pasiva"
+},
+"11-174": {
+"fr": "0 < s_Ziel < H",
+"es": "0 < s_objetivo < H"
+},
+"11-175": {
+"fr": "Réduction du terme de Steiner due à la déformabilité des organes d’assemblage",
+"es": "Reducción del término de Steiner por la deformabilidad de los medios de unión"
+},
+"11-176": {
+"fr": "Réduction selon Marcus : la rigidité de torsion de la dalle soulage les bandes",
+"es": "Reducción según Marcus: la rigidez a torsión de la losa descarga las bandas"
+},
+"11-177": {
+"fr": "Rabattement",
+"es": "Descenso del nivel freático"
+},
+"11-178": {
+"fr": "Cônes de rabattement de tous les puits superposés ; les puits sont disposés sur un cercle autour de la fouille.",
+"es": "Conos de descenso de todos los pozos superpuestos; los pozos se sitúan en un círculo alrededor de la excavación."
+},
+"11-179": {
+"fr": "Distances des boulons tendus (rangée sous la semelle tendue)",
+"es": "Distancias de los tornillos traccionados (fila bajo el ala traccionada)"
+},
+"11-180": {
+"fr": "Dalle rectangulaire simplement appuyée sur tout son contour : répartition de la charge et moments en travée selon Marcus, dimensionnement en flexion dans les deux directions avec armature minimale.",
+"es": "Losa rectangular simplemente apoyada en todo su contorno: reparto de la carga y momentos en el vano según Marcus, dimensionamiento a flexión en ambas direcciones con armadura mínima."
+},
+"11-181": {
+"fr": "Composantes de la valeur admissible de l’apport solaire",
+"es": "Componentes del valor admisible de la aportación solar"
+},
+"11-182": {
+"fr": "Profondeur de fouille > 0",
+"es": "Profundidad de excavación > 0"
+},
+"11-183": {
+"fr": "Protection solaire extérieure (F<sub>C</sub> plus petit), verre de protection solaire, fenêtres plus petites, ventilation nocturne accrue ou construction plus lourde.",
+"es": "Protección solar exterior (F<sub>C</sub> menor), vidrio de control solar, ventanas más pequeñas, mayor ventilación nocturna o construcción más pesada."
+},
+"11-184": {
+"fr": "Pieu foré chargé axialement",
+"es": "Pilote perforado cargado axialmente"
+},
+"11-185": {
+"fr": "Physique du bâtiment — protection thermique d’été",
+"es": "Física de la edificación — protección térmica en verano"
+},
+"11-186": {
+"fr": "Béton : compression au bord supérieur",
+"es": "Hormigón: compresión en el borde superior"
+},
+"11-187": {
+"fr": "Armature dans la direction x (couche inférieure, petite portée)",
+"es": "Armadura en dirección x (capa inferior, luz corta)"
+},
+"11-188": {
+"fr": "Armature dans la direction y (couche supérieure de l’armature de travée)",
+"es": "Armadura en dirección y (capa superior de la armadura de vano)"
+},
+"11-189": {
+"fr": "Jonction rigide par platines d’about",
+"es": "Empalme rígido con chapas frontales"
+},
+"11-190": {
+"fr": "Pieu foré",
+"es": "Pilote perforado"
+},
+"11-191": {
+"fr": "Puits",
+"es": "Pozos"
+},
+"11-192": {
+"fr": "Puits sur un cercle autour de la fouille : rayon d’influence selon Sichardt, rabattement par superposition (Dupuit-Thiem) et capacité du puits.",
+"es": "Pozos en un círculo alrededor de la excavación: radio de influencia según Sichardt, descenso por superposición (Dupuit-Thiem) y capacidad del pozo."
+},
+"11-193": {
+"fr": "Jonction par platines d’about affleurantes avec une rangée de boulons tendus selon la méthode des composantes (DIN EN 1993-1-8, 6.2, simplifiée) : té équivalent, âme en traction, semelle en compression.",
+"es": "Empalme con chapas frontales a ras con una fila de tornillos traccionados según el método de los componentes (DIN EN 1993-1-8, 6.2, simplificado): T equivalente, alma a tracción, ala a compresión."
+},
+"11-194": {
+"fr": "Résistance caractéristique du pieu",
+"es": "Resistencia característica del pilote"
+},
+"11-195": {
+"fr": "DIN 4108-2, 8.3 (valeurs caractéristiques d’apport solaire, bâtiments d’habitation)",
+"es": "DIN 4108-2, 8.3 (valores característicos de aportación solar, edificios residenciales)"
+},
+"11-196": {
+"fr": "DIN EN 1992-1-1 avec AN, 5.8.9",
+"es": "DIN EN 1992-1-1 con AN, 5.8.9"
+},
+"11-197": {
+"fr": "DIN EN 1992-1-1 avec AN ; efforts internes selon Marcus (simplement appuyée sur tout le contour)",
+"es": "DIN EN 1992-1-1 con AN; esfuerzos internos según Marcus (simplemente apoyada en todo el contorno)"
+},
+"11-198": {
+"fr": "DIN EN 1993-1-8 avec AN, 6.2 (méthode des composantes, simplifiée)",
+"es": "DIN EN 1993-1-8 con AN, 6.2 (método de los componentes, simplificado)"
+},
+"11-199": {
+"fr": "DIN EN 1995-1-1 avec AN, annexe B (méthode γ)",
+"es": "DIN EN 1995-1-1 con AN, anexo B (método γ)"
+},
+"11-200": {
+"fr": "DIN EN 1997-1 avec DIN 1054, EA-Pfähle (valeurs empiriques)",
+"es": "DIN EN 1997-1 con DIN 1054, EA-Pfähle (valores empíricos)"
+},
+"11-201": {
+"fr": "Le profilé de palplanche est trop faible pour le moment maximal.",
+"es": "El perfil del tablestacado es demasiado débil para el momento máximo."
+},
+"11-202": {
+"fr": "Plan de déformation tel que les efforts internes donnent N<sub>Ed</sub> (comme dans le mode poteau)",
+"es": "Plano de deformación tal que los esfuerzos internos den N<sub>Ed</sub> (como en el modo pilar)"
+},
+"11-203": {
+"fr": "Le puits ne peut pas absorber le débit prévu (capacité selon Sichardt).",
+"es": "El pozo no puede admitir el caudal previsto (capacidad según Sichardt)."
+},
+"11-204": {
+"fr": "Le puits ne peut pas fournir autant d’eau : diamètre de forage plus grand, plus de puits avec un débit moindre par puits.",
+"es": "El pozo no puede suministrar tanta agua: mayor diámetro de perforación, más pozos con menor caudal por pozo."
+},
+"11-205": {
+"fr": "La poutre en bois est trop faible en traction et flexion dans la section mixte.",
+"es": "La viga de madera es demasiado débil para la tracción y la flexión en la sección mixta."
+},
+"11-206": {
+"fr": "L’apport solaire existant doit rester inférieur à la somme des composantes admissibles.",
+"es": "La aportación solar existente debe permanecer por debajo de la suma de los componentes admisibles."
+},
+"11-207": {
+"fr": "Platine d’about plus épaisse, boulons plus près de l’âme (m plus petit), boulons plus gros ou de classe supérieure — ou une platine débordante avec une seconde rangée tendue.",
+"es": "Chapa frontal más gruesa, tornillos más cerca del alma (m menor), tornillos de mayor diámetro o resistencia — o una chapa frontal extendida con una segunda fila traccionada."
+},
+"11-208": {
+"fr": "L’armature dans la direction courte ne suffit pas pour le moment en travée m<sub>x</sub>.",
+"es": "La armadura en la dirección corta no basta para el momento en el vano m<sub>x</sub>."
+},
+"11-209": {
+"fr": "L’armature dans la direction longue ne suffit pas pour le moment en travée m<sub>y</sub>.",
+"es": "La armadura en la dirección larga no basta para el momento en el vano m<sub>y</sub>."
+},
+"11-210": {
+"fr": "Les puits pompent trop peu d’eau pour abaisser suffisamment la nappe au centre.",
+"es": "Los pozos bombean muy poca agua para rebajar lo suficiente el nivel freático en el centro."
+},
+"11-211": {
+"fr": "La contrainte de compression au bord supérieur de la dalle en béton dépasse la résistance du béton.",
+"es": "La tensión de compresión en el borde superior de la losa de hormigón supera la resistencia del hormigón."
+},
+"11-212": {
+"fr": "La détermination des moments du second ordre dans chaque direction (mode poteau), les critères 5.8.9(3) permettant une vérification séparée, les barres latérales dans la résistance, les poteaux circulaires et la méthode exacte avec axe neutre incliné.",
+"es": "La determinación de los momentos de segundo orden en cada dirección (modo pilar), los criterios 5.8.9(3) bajo los cuales se permite comprobar por separado, las barras laterales en la resistencia, los pilares circulares y el método exacto con fibra neutra inclinada."
+},
+"11-213": {
+"fr": "Les moments autour des deux axes combinés dépassent la résistance de la section pour cet effort normal.",
+"es": "Los momentos respecto a ambos ejes conjuntamente superan la resistencia de la sección para este esfuerzo axil."
+},
+"11-214": {
+"fr": "L’effort normal dépasse la résistance de la section — augmenter la section ou les armatures.",
+"es": "El esfuerzo axil supera la resistencia de la sección: aumentar la sección o la armadura."
+},
+"11-215": {
+"fr": "Les boulons de la semelle comprimée ne peuvent pas reprendre l’effort tranchant.",
+"es": "Los tornillos del ala comprimida no pueden resistir el esfuerzo cortante."
+},
+"11-216": {
+"fr": "La contrainte de cisaillement dans la poutre en bois est trop élevée.",
+"es": "La tensión tangencial en la viga de madera es demasiado elevada."
+},
+"11-217": {
+"fr": "Le rideau de palplanches n’est pas assez fiché — la butée devant le pied ne résiste pas à la poussée.",
+"es": "El tablestacado no está suficientemente empotrado: el empuje pasivo delante del pie no equilibra el empuje de tierras."
+},
+"11-218": {
+"fr": "Les connecteurs à l’appui doivent transmettre plus d’effort de cisaillement qu’ils n’en sont capables.",
+"es": "Los conectores en el apoyo deben transmitir más esfuerzo rasante del que pueden."
+},
+"11-219": {
+"fr": "Les organes d’assemblage cèdent : chaque partie fléchit en partie seule (saut de contrainte dans le joint). Bleu : compression dans le béton, orange : traction et flexion dans le bois [N/mm²].",
+"es": "Los medios de unión se deslizan: cada parte flecta en parte por sí sola (salto de tensión en la junta). Azul: compresión en el hormigón, naranja: tracción y flexión en la madera [N/mm²]."
+},
+"11-220": {
+"fr": "La rangée de boulons tendus avec platine d’about ne transmet pas le moment par le bras de levier.",
+"es": "La fila de tornillos traccionados con chapa frontal no transmite el momento mediante el brazo mecánico."
+},
+"11-221": {
+"fr": "La direction la plus courte reprend la plus grande part de la charge. Bleu : bande dans la direction x, orange : dans la direction y.",
+"es": "La dirección más corta resiste la mayor parte de la carga. Azul: banda en dirección x, naranja: en dirección y."
+},
+"11-222": {
+"fr": "Trop d’énergie solaire pénètre dans la pièce par les fenêtres — elle surchauffe en été.",
+"es": "Entra demasiada energía solar en la estancia a través de las ventanas: se sobrecalienta en verano."
+},
+"11-223": {
+"fr": "EAB / DIN 1054, dimensionnement selon Blum (simplifié)",
+"es": "EAB / DIN 1054, dimensionamiento según Blum (simplificado)"
+},
+"11-224": {
+"fr": "Moment résistant uniaxial pour N_Ed",
+"es": "Momento resistente uniaxial para N_Ed"
+},
+"11-225": {
+"fr": "Fiche selon Blum",
+"es": "Profundidad de empotramiento según Blum"
+},
+"11-226": {
+"fr": "Fiche t > 0",
+"es": "Profundidad de empotramiento t > 0"
+},
+"11-227": {
+"fr": "Bords encastrés ou continus (moments sur appuis, tables selon Czerny ou Stiglat/Wippel), armature de torsion dans les angles et soulèvement des coins, effort tranchant, flèche et ouverture des fissures.",
+"es": "Bordes empotrados o continuos (momentos en apoyos, tablas según Czerny o Stiglat/Wippel), armadura de torsión en las esquinas y levantamiento de esquinas, esfuerzo cortante, flecha y ancho de fisura."
+},
+"11-228": {
+"fr": "Espacement des organes d’assemblage plus serré à l’appui ou connecteurs plus résistants (par ex. entailles).",
+"es": "Menor separación de los medios de unión en el apoyo o conectores más resistentes (p. ej., entalladuras)."
+},
+"11-229": {
+"fr": "Espacement des barres plus faible ou diamètre plus grand.",
+"es": "Menor separación entre barras o mayor diámetro."
+},
+"11-230": {
+"fr": "Poussée des terres selon Rankine (mur lisse, δ = 0, terrain horizontal) — du côté de la sécurité pour la butée",
+"es": "Empuje de tierras según Rankine (muro liso, δ = 0, terreno horizontal): del lado de la seguridad para el empuje pasivo"
+},
+"11-231": {
+"fr": "Coefficients de poussée des terres et valeurs de calcul",
+"es": "Coeficientes de empuje de tierras y valores de cálculo"
+},
+"11-232": {
+"fr": "Rabattement atteint",
+"es": "Descenso alcanzado"
+},
+"11-233": {
+"fr": "Exposant a à partir du rapport N<sub>Ed</sub>/N<sub>Rd</sub> (0,1 → 1,0 · 0,7 → 1,5 · 1,0 → 2,0, linéaire entre les deux)",
+"es": "Exponente a a partir de la relación N<sub>Ed</sub>/N<sub>Rd</sub> (0,1 → 1,0 · 0,7 → 1,5 · 1,0 → 2,0, lineal entre medias)"
+},
+"11-234": {
+"fr": "Capacité du puits (Sichardt)",
+"es": "Capacidad del pozo (Sichardt)"
+},
+"11-235": {
+"fr": "Nappe libre, superposition des puits (Dupuit-Thiem)",
+"es": "Nivel freático libre, superposición de los pozos (Dupuit-Thiem)"
+},
+"11-236": {
+"fr": "Géométrie et boulons",
+"es": "Geometría y tornillos"
+}
+}

@@ -1,0 +1,1007 @@
+[
+ {
+  "id": "16-0",
+  "de": "S<sub>y</sub> — statisches Moment der abgeschnittenen Fläche · b — Breite an der Stelle z",
+  "en": "S<sub>y</sub> — first moment of the cut-off area · b — width at the level z"
+ },
+ {
+  "id": "16-1",
+  "de": "Schlankheit: λ = L<sub>cr</sub> / i mit i = √(I/A). Maßgebend ist die Achse mit dem kleineren i.",
+  "en": "Slenderness: λ = L<sub>cr</sub> / i with i = √(I/A). The axis with the smaller i governs."
+ },
+ {
+  "id": "16-2",
+  "de": "Schneidet man einen Stab gedanklich auf, wirken an der Schnittstelle die Schnittgrößen N, Q und M. Die <b>gestrichelte Faser</b> markiert die Unterseite des Stabs.",
+  "en": "If a member is cut in thought, the internal forces N, Q and M act at the cut. The <b>dashed fibre</b> marks the underside of the member."
+ },
+ {
+  "id": "16-3",
+  "de": "Schnitt durch Obergurt O<sub>3</sub>, Diagonale D<sub>3</sub>, Untergurt U<sub>3</sub>; Diagonale fällt zur Mitte, sin α = h/d = 2,00/3,202 = 0,6247",
+  "en": "Section through top chord O<sub>3</sub>, diagonal D<sub>3</sub>, bottom chord U<sub>3</sub>; diagonal falls towards the centre, sin α = h/d = 2.00/3.202 = 0.6247"
+ },
+ {
+  "id": "16-4",
+  "de": "Schnittgrößen am positiven Schnittufer",
+  "en": "Internal forces on the positive face"
+ },
+ {
+  "id": "16-5",
+  "de": "Schritt",
+  "en": "Step"
+ },
+ {
+  "id": "16-6",
+  "de": "Schubspannungen",
+  "en": "Shear stresses"
+ },
+ {
+  "id": "16-7",
+  "de": "Spannungsverteilung",
+  "en": "Stress distribution"
+ },
+ {
+  "id": "16-8",
+  "de": "Spannweite l [m]",
+  "en": "Span l [m]"
+ },
+ {
+  "id": "16-9",
+  "de": "Sprung um F",
+  "en": "Jump of F"
+ },
+ {
+  "id": "16-10",
+  "de": "Sprung um das Moment",
+  "en": "Jump of the moment"
+ },
+ {
+  "id": "16-11",
+  "de": "Stelle x₀ [m]",
+  "en": "Point x₀ [m]"
+ },
+ {
+  "id": "16-12",
+  "de": "Stützlinie",
+  "en": "Line of thrust"
+ },
+ {
+  "id": "16-13",
+  "de": "Stützmoment",
+  "en": "Support moment"
+ },
+ {
+  "id": "16-14",
+  "de": "Stützmomente M<sub>B</sub>, M<sub>C</sub> …",
+  "en": "Support moments M<sub>B</sub>, M<sub>C</sub> …"
+ },
+ {
+  "id": "16-15",
+  "de": "Stützweite L [m]",
+  "en": "Span L [m]"
+ },
+ {
+  "id": "16-16",
+  "de": "Stützweite l<sub>1</sub> [m]",
+  "en": "Span l<sub>1</sub> [m]"
+ },
+ {
+  "id": "16-17",
+  "de": "Stützweite l<sub>2</sub> [m]",
+  "en": "Span l<sub>2</sub> [m]"
+ },
+ {
+  "id": "16-18",
+  "de": "Summe der Beiwerte: (10,80 · 0,0800 + 9,00 · 0,1013) · 5,00² = 44,38 kNm — etwas auf der sicheren Seite, weil die beiden Maxima an verschiedenen Stellen liegen",
+  "en": "Sum of the coefficients: (10.80 · 0.0800 + 9.00 · 0.1013) · 5.00² = 44.38 kNm — slightly on the safe side because the two maxima lie at different points"
+ },
+ {
+  "id": "16-19",
+  "de": "System und Auflagerkräfte",
+  "en": "System and support reactions"
+ },
+ {
+  "id": "16-20",
+  "de": "T-Querschnitt (mm): S₁, S₂ — Teilschwerpunkte, S — Gesamtschwerpunkt im Abstand z<sub>s</sub> von oben",
+  "en": "T-section (mm): S₁, S₂ — centroids of the parts, S — overall centroid at a distance z<sub>s</sub> from the top"
+ },
+ {
+  "id": "16-21",
+  "de": "Teil",
+  "en": "Part"
+ },
+ {
+  "id": "16-22",
+  "de": "Teil 1: b / h / z",
+  "en": "Part 1: b / h / z"
+ },
+ {
+  "id": "16-23",
+  "de": "Teil 2: b / h / z",
+  "en": "Part 2: b / h / z"
+ },
+ {
+  "id": "16-24",
+  "de": "Teil 3: b / h / z",
+  "en": "Part 3: b / h / z"
+ },
+ {
+  "id": "16-25",
+  "de": "Teil 4: b / h / z",
+  "en": "Part 4: b / h / z"
+ },
+ {
+  "id": "16-26",
+  "de": "Trapez (Breiten a oben, b unten, Höhe h)",
+  "en": "Trapezoid (widths a at the top, b at the bottom, height h)"
+ },
+ {
+  "id": "16-27",
+  "de": "Untergurt U [kN]",
+  "en": "Bottom chord U [kN]"
+ },
+ {
+  "id": "16-28",
+  "de": "Verschiebung an einer Stelle berechnen",
+  "en": "Calculate the displacement at a point"
+ },
+ {
+  "id": "16-29",
+  "de": "Verschiebung ⊥ Gleitebene",
+  "en": "Displacement ⊥ sliding plane"
+ },
+ {
+  "id": "16-30",
+  "de": "Verschiebungen und Verdrehung",
+  "en": "Displacements and rotation"
+ },
+ {
+  "id": "16-31",
+  "de": "Virtuelle Last „1“ an der gesuchten Stelle in Richtung der gesuchten Verformung (Kraft für w, Moment für φ)",
+  "en": "Virtual load “1” at the point considered in the direction of the deformation sought (force for w, moment for φ)"
+ },
+ {
+  "id": "16-32",
+  "de": "Vorgehen",
+  "en": "Procedure"
+ },
+ {
+  "id": "16-33",
+  "de": "Vorzeichen beachten: Liegen i und k auf verschiedenen Seiten, wird das Produkt negativ.",
+  "en": "Mind the signs: if i and k lie on different sides, the product becomes negative."
+ },
+ {
+  "id": "16-34",
+  "de": "Werte · qL (Auflager) bzw. · qL² (Momente), aus der Dreimomentengleichung berechnet. Wegen der Symmetrie nur die linke Hälfte.",
+  "en": "Values · qL (supports) or · qL² (moments), calculated with the three-moment equation. Because of symmetry only the left half."
+ },
+ {
+  "id": "16-35",
+  "de": "Wertigkeit",
+  "en": "Degree"
+ },
+ {
+  "id": "16-36",
+  "de": "Zug an der gestrichelten Faser (unten)",
+  "en": "Tension at the dashed fibre (bottom)"
+ },
+ {
+  "id": "16-37",
+  "de": "Zug positiv, Druck negativ. Feld j liegt zwischen den Knoten j − 1 und j; Knoten 0 ist links über dem Festlager.",
+  "en": "Tension positive, compression negative. Panel j lies between nodes j − 1 and j; node 0 is on the left above the pinned support."
+ },
+ {
+  "id": "16-38",
+  "de": "Zusammengesetzte Querschnitte — Satz von Steiner",
+  "en": "Composite cross-sections — parallel-axis theorem"
+ },
+ {
+  "id": "16-39",
+  "de": "Zusammengesetzter Querschnitt",
+  "en": "Composite cross-section"
+ },
+ {
+  "id": "16-40",
+  "de": "Zusatzlast P [kN]",
+  "en": "Additional load P [kN]"
+ },
+ {
+  "id": "16-41",
+  "de": "Zwei Festlager und ein Gelenk: 4 Reaktionen, 3 Gleichgewichtsbedingungen + 1 Gelenkbedingung (M<sub>G</sub> = 0) → statisch bestimmt. Die Füße drücken unter senkrechter Last nach außen — der <b>Horizontalschub</b> muss vom Fundament oder einem Zugband aufgenommen werden.",
+  "en": "Two pinned supports and a hinge: 4 reactions, 3 equilibrium conditions + 1 hinge condition (M<sub>G</sub> = 0) → statically determinate. Under vertical load the feet push outwards — the <b>horizontal thrust</b> must be taken by the foundation or a tie."
+ },
+ {
+  "id": "16-42",
+  "de": "Zweifeldträger",
+  "en": "Two-span beam"
+ },
+ {
+  "id": "16-43",
+  "de": "Zweifeldträger (Fest + 2 Los)",
+  "en": "Two-span beam (pinned + 2 roller)"
+ },
+ {
+  "id": "16-44",
+  "de": "Zweifeldträger 5,00 m + 4,00 m, EI konstant",
+  "en": "Two-span beam 5.00 m + 4.00 m, EI constant"
+ },
+ {
+  "id": "16-45",
+  "de": "Zweifeldträger Schritt für Schritt",
+  "en": "Two-span beam step by step"
+ },
+ {
+  "id": "16-46",
+  "de": "a — Summe der Lagerwertigkeiten · g — Anzahl der Momentengelenke<br> Bei geschlossenen Rahmen kommen je geschlossenem Feld +3 hinzu.",
+  "en": "a — sum of the support degrees · g — number of moment hinges<br> For closed frames add +3 for each closed panel."
+ },
+ {
+  "id": "16-47",
+  "de": "alle Teile mittig auf einer senkrechten Achse — I<sub>z</sub> ohne Steiner-Anteil",
+  "en": "all parts centred on one vertical axis — I<sub>z</sub> without parallel-axis term"
+ },
+ {
+  "id": "16-48",
+  "de": "am Obergurtknoten k",
+  "en": "at top chord node k"
+ },
+ {
+  "id": "16-49",
+  "de": "am positiven Schnittufer in +z-Richtung (nach unten) zeigend",
+  "en": "on the positive face pointing in +z direction (downwards)"
+ },
+ {
+  "id": "16-50",
+  "de": "beide Verschiebungen",
+  "en": "both displacements"
+ },
+ {
+  "id": "16-51",
+  "de": "belasteter Knoten mit zwei Stäben, Last in Richtung eines Stabs → der andere ist ein Nullstab",
+  "en": "loaded node with two members, load in the direction of one member → the other is a zero-force member"
+ },
+ {
+  "id": "16-52",
+  "de": "dünnwandiges Rohr, Radius r, Wand t",
+  "en": "thin-walled tube, radius r, wall t"
+ },
+ {
+  "id": "16-53",
+  "de": "g<sub>d</sub> = γ<sub>G</sub> · g<sub>k</sub> = 1,35 · 8,00 = 10,80 kN/m (alle Felder)",
+  "en": "g<sub>d</sub> = γ<sub>G</sub> · g<sub>k</sub> = 1.35 · 8.00 = 10.80 kN/m (all spans)"
+ },
+ {
+  "id": "16-54",
+  "de": "größtes positives Riegelmoment bei x = A<sub>v</sub> / q = 4,73 m: M = 0,43 kNm",
+  "en": "largest positive beam moment at x = A<sub>v</sub> / q = 4.73 m: M = 0.43 kNm"
+ },
+ {
+  "id": "16-55",
+  "de": "i — Ordinate von M, k — Ordinate von M̄, L — Länge des Abschnitts. „Dreieck“ hat die Spitze am Ende, „Dreieck Mitte“ die Spitze in der Mitte, „Parabel“ ist die quadratische Parabel mit Stich i in der Mitte (Gleichlast).",
+  "en": "i — ordinate of M, k — ordinate of M̄, L — length of the segment. “Triangle” has its peak at the end, “triangle peak k” its peak at the centre, “parabola” is the quadratic parabola with rise i at the centre (uniform load)."
+ },
+ {
+  "id": "16-56",
+  "de": "keine Last",
+  "en": "no load"
+ },
+ {
+  "id": "16-57",
+  "de": "kinematisch verschieblich (Mechanismus), nicht tragfähig",
+  "en": "kinematically unstable (mechanism), cannot carry load"
+ },
+ {
+  "id": "16-58",
+  "de": "löst 1 Bindung",
+  "en": "releases 1 restraint"
+ },
+ {
+  "id": "16-59",
+  "de": "max M Feld",
+  "en": "max M span"
+ },
+ {
+  "id": "16-60",
+  "de": "max M<sub>Feld</sub> 1, 2, 3 …",
+  "en": "max M<sub>span</sub> 1, 2, 3 …"
+ },
+ {
+  "id": "16-61",
+  "de": "n = a − 3 = 4 − 3 = 1-fach statisch unbestimmt. Gelenk über B einfügen → zwei Einfeldträger; Überzählige X<sub>1</sub> = M<sub>B</sub>",
+  "en": "n = a − 3 = 4 − 3 = 1 degree statically indeterminate. Insert a hinge over B → two simply supported beams; redundant X<sub>1</sub> = M<sub>B</sub>"
+ },
+ {
+  "id": "16-62",
+  "de": "n ≥ 0 ist nur notwendig, nicht hinreichend. Auch bei n ≥ 0 kann ein System verschieblich sein, z. B. wenn alle Lagerkräfte durch einen Punkt gehen oder drei Gelenke auf einer Geraden liegen.",
+  "en": "n ≥ 0 is only necessary, not sufficient. Even with n ≥ 0 a system can be unstable, e.g. if all support forces pass through one point or three hinges lie on a straight line."
+ },
+ {
+  "id": "16-63",
+  "de": "n-fach statisch unbestimmt: zusätzlich Verformungsbedingungen nötig",
+  "en": "n degrees statically indeterminate: additional deformation conditions required"
+ },
+ {
+  "id": "16-64",
+  "de": "negativ = Zug außen",
+  "en": "negative = tension outside"
+ },
+ {
+  "id": "16-65",
+  "de": "negativ = nach innen (zur Rahmenmitte) gerichtet",
+  "en": "negative = directed inwards (towards the centre of the frame)"
+ },
+ {
+  "id": "16-66",
+  "de": "negatives Ufer (links)",
+  "en": "negative face (left)"
+ },
+ {
+  "id": "16-67",
+  "de": "nur Gleichlast: Horizontalschub H = q · l² / (8 · h) = 37,50 kN — wie der Bogenschub mit dem Stich h",
+  "en": "uniform load only: horizontal thrust H = q · l² / (8 · h) = 37.50 kN — like the arch thrust with rise h"
+ },
+ {
+  "id": "16-68",
+  "de": "positiv: F knapp rechts von x₀, q nur rechts von x₀ · negativ: F knapp links, q nur links",
+  "en": "positive: F just right of x₀, q only right of x₀ · negative: F just left, q only left"
+ },
+ {
+  "id": "16-69",
+  "de": "positives Ufer (rechts)",
+  "en": "positive face (right)"
+ },
+ {
+  "id": "16-70",
+  "de": "q nach unten positiv",
+  "en": "q downwards positive"
+ },
+ {
+  "id": "16-71",
+  "de": "q<sub>d</sub> = γ<sub>Q</sub> · q<sub>k</sub> = 1,5 · 6,00 = 9,00 kN/m (ungünstige Felder)",
+  "en": "q<sub>d</sub> = γ<sub>Q</sub> · q<sub>k</sub> = 1.5 · 6.00 = 9.00 kN/m (unfavourable spans)"
+ },
+ {
+  "id": "16-72",
+  "de": "qL²/8 (Mitte)",
+  "en": "qL²/8 (centre)"
+ },
+ {
+  "id": "16-73",
+  "de": "quadratische Parabel",
+  "en": "quadratic parabola"
+ },
+ {
+  "id": "16-74",
+  "de": "statisch bestimmt: Reaktionen allein aus dem Gleichgewicht",
+  "en": "statically determinate: reactions from equilibrium alone"
+ },
+ {
+  "id": "16-75",
+  "de": "ständige Last g<sub>k</sub> [kN/m]",
+  "en": "permanent load g<sub>k</sub> [kN/m]"
+ },
+ {
+  "id": "16-76",
+  "de": "unbelasteter Knoten mit drei Stäben, zwei davon auf einer Geraden → der dritte ist ein Nullstab",
+  "en": "unloaded node with three members, two of them on a straight line → the third is a zero-force member"
+ },
+ {
+  "id": "16-77",
+  "de": "unbelasteter Knoten mit zwei Stäben, die nicht auf einer Geraden liegen → beide Nullstäbe",
+  "en": "unloaded node with two members not on a straight line → both are zero-force members"
+ },
+ {
+  "id": "16-78",
+  "de": "unverändert",
+  "en": "unchanged"
+ },
+ {
+  "id": "16-79",
+  "de": "veränderliche Last q<sub>k</sub> [kN/m]",
+  "en": "variable load q<sub>k</sub> [kN/m]"
+ },
+ {
+  "id": "16-80",
+  "de": "w (Ende)",
+  "en": "w (end)"
+ },
+ {
+  "id": "16-81",
+  "de": "z von der Schwerachse, nach unten positiv · Zug positiv",
+  "en": "z from the centroidal axis, downwards positive · tension positive"
+ },
+ {
+  "id": "16-82",
+  "de": "η<sub>Q</sub> = +(1 − x₀/L) = 0,750 rechts · −x₀/L = −0,250 links",
+  "en": "η<sub>Q</sub> = +(1 − x₀/L) = 0.750 right · −x₀/L = −0.250 left"
+ },
+ {
+  "id": "16-83",
+  "de": "φ (Ende)",
+  "en": "φ (end)"
+ },
+ {
+  "id": "16-84",
+  "de": "„Laststellung“: q nur auf den Feldern, die die Größe vergrößern — für das Feldmoment jedes zweite Feld, für das Stützmoment die beiden angrenzenden und dann jedes zweite.",
+  "en": "“Load arrangement”: q only on the spans that increase the quantity — for the span moment every second span, for the support moment the two adjacent spans and then every second one."
+ },
+ {
+  "id": "16-85",
+  "de": "→ Beliebige Felder in statiq·calc",
+  "en": "→ Any spans in statiq·calc"
+ },
+ {
+  "id": "16-86",
+  "de": "→ Biegeknicken im Stahlbau",
+  "en": "→ Flexural buckling in steel"
+ },
+ {
+  "id": "16-87",
+  "de": "→ Eigene Lastfälle in statiq·calc",
+  "en": "→ Own load cases in statiq·calc"
+ },
+ {
+  "id": "16-88",
+  "de": "→ Knicken im Holzbau",
+  "en": "→ Buckling in timber"
+ },
+ {
+  "id": "16-89",
+  "de": "→ Koppeltafel",
+  "en": "→ Integration table"
+ },
+ {
+  "id": "16-90",
+  "de": "→ Kragarm in statiq·calc",
+  "en": "→ Cantilever in statiq·calc"
+ },
+ {
+  "id": "16-91",
+  "de": "→ Momentenlinie in statiq·calc",
+  "en": "→ Moment diagram in statiq·calc"
+ },
+ {
+  "id": "16-92",
+  "de": "→ Rahmen in statiq·calc untersuchen",
+  "en": "→ Analyse frames in statiq·calc"
+ },
+ {
+  "id": "16-93",
+  "de": "→ Rahmen mit beliebigen Lasten in statiq·calc",
+  "en": "→ Frames with any loads in statiq·calc"
+ },
+ {
+  "id": "16-94",
+  "de": "→ Statische Bestimmtheit",
+  "en": "→ Static determinacy"
+ },
+ {
+  "id": "16-95",
+  "de": "→ Verläufe in statiq·calc ansehen",
+  "en": "→ View diagrams in statiq·calc"
+ },
+ {
+  "id": "16-96",
+  "de": "−1 (Mechanismus)",
+  "en": "−1 (mechanism)"
+ },
+ {
+  "id": "16-97",
+  "de": "\n    <button class=\"menu-toggle\" onclick=\"event.stopPropagation(); toggleSideMenu()\">☰ Alle Themen</button>\n    <div class=\"page-head\">\n      <div class=\"page-title\">{}</div>\n      <div class=\"page-sub\">{} · {}</div>\n    </div>\n    {}\n    <div class=\"topic-pager\">{}{}</div>\n    {}\n    {}\n  ",
+  "en": "\n    <button class=\"menu-toggle\" onclick=\"event.stopPropagation(); toggleSideMenu()\">☰ All topics</button>\n    <div class=\"page-head\">\n      <div class=\"page-title\">{}</div>\n      <div class=\"page-sub\">{} · {}</div>\n    </div>\n    {}\n    <div class=\"topic-pager\">{}{}</div>\n    {}\n    {}\n  "
+ },
+ {
+  "id": "16-98",
+  "de": "<div class=\"toc-h\">Auf dieser Seite</div>",
+  "en": "<div class=\"toc-h\">On this page</div>"
+ },
+ {
+  "id": "16-99",
+  "de": "M unter F",
+  "en": "M under F"
+ },
+ {
+  "id": "16-100",
+  "de": "{} Felder",
+  "en": "{} spans"
+ },
+ {
+  "id": "16-101",
+  "de": "<div class=\"calc-field\"><label>Stützweite L [m]</label><input type=\"number\" id=\"dlt-L\" value=\"5\" step=\"any\" oninput=\"updateDLT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span L [m]</label><input type=\"number\" id=\"dlt-L\" value=\"5\" step=\"any\" oninput=\"updateDLT()\"></div>"
+ },
+ {
+  "id": "16-102",
+  "de": "<div class=\"calc-field\"><label>ständige Last g<sub>k</sub> [kN/m]</label><input type=\"number\" id=\"dlt-g\" value=\"8\" step=\"any\" oninput=\"updateDLT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>permanent load g<sub>k</sub> [kN/m]</label><input type=\"number\" id=\"dlt-g\" value=\"8\" step=\"any\" oninput=\"updateDLT()\"></div>"
+ },
+ {
+  "id": "16-103",
+  "de": "<div class=\"calc-field\"><label>veränderliche Last q<sub>k</sub> [kN/m]</label><input type=\"number\" id=\"dlt-q\" value=\"6\" step=\"any\" oninput=\"updateDLT()\"></div>",
+  "en": "<div class=\"calc-field\"><label>variable load q<sub>k</sub> [kN/m]</label><input type=\"number\" id=\"dlt-q\" value=\"6\" step=\"any\" oninput=\"updateDLT()\"></div>"
+ },
+ {
+  "id": "16-104",
+  "de": "g<sub>d</sub> = γ<sub>G</sub> · g<sub>k</sub> = 1,35 · {} = {} kN/m (alle Felder)",
+  "en": "g<sub>d</sub> = γ<sub>G</sub> · g<sub>k</sub> = 1.35 · {} = {} kN/m (all spans)"
+ },
+ {
+  "id": "16-105",
+  "de": "q<sub>d</sub> = γ<sub>Q</sub> · q<sub>k</sub> = 1,5 · {} = {} kN/m (ungünstige Felder)",
+  "en": "q<sub>d</sub> = γ<sub>Q</sub> · q<sub>k</sub> = 1.5 · {} = {} kN/m (unfavourable spans)"
+ },
+ {
+  "id": "16-106",
+  "de": "§Feldmoment im Endfeld",
+  "en": "§Span moment in the end span"
+ },
+ {
+  "id": "16-107",
+  "de": "!Laststellung für q: {} (jedes zweite Feld) · Beiwerte g: {}, q: {}",
+  "en": "!Load arrangement for q: {} (every second span) · coefficients g: {}, q: {}"
+ },
+ {
+  "id": "16-108",
+  "de": "!Summe der Beiwerte: ({} · {} + {} · {}) · {}² = {} kNm — etwas auf der sicheren Seite, weil die beiden Maxima an verschiedenen Stellen liegen",
+  "en": "!Sum of the coefficients: ({} · {} + {} · {}) · {}² = {} kNm — slightly on the safe side because the two maxima lie at different points"
+ },
+ {
+  "id": "16-109",
+  "de": "M<sub>F1,d</sub> = max M(x) für g<sub>d</sub> überall + q<sub>d</sub> auf {} = {} kNm bei x = {} m",
+  "en": "M<sub>F1,d</sub> = max M(x) for g<sub>d</sub> everywhere + q<sub>d</sub> on {} = {} kNm at x = {} m"
+ },
+ {
+  "id": "16-110",
+  "de": "§Stützmoment über der ersten Innenstütze",
+  "en": "§Support moment over the first interior support"
+ },
+ {
+  "id": "16-111",
+  "de": "!Laststellung für q: {} (beide angrenzenden Felder) · Beiwerte g: {}, q: {}",
+  "en": "!Load arrangement for q: {} (both adjacent spans) · coefficients g: {}, q: {}"
+ },
+ {
+  "id": "16-112",
+  "de": "§Auflagerkräfte (Maximalwerte)",
+  "en": "§Support reactions (maximum values)"
+ },
+ {
+  "id": "16-113",
+  "de": "!Ohne Laststellungen (alles Volllast): M<sub>F1</sub> = {} kNm, M<sub>B</sub> = {} kNm — das Feldmoment wäre um {} % zu klein",
+  "en": "!Without load arrangements (full load everywhere): M<sub>F1</sub> = {} kNm, M<sub>B</sub> = {} kNm — the span moment would be {} % too small"
+ },
+ {
+  "id": "16-114",
+  "de": "{}-Feldträger, L = {} m",
+  "en": "{}-span beam, L = {} m"
+ },
+ {
+  "id": "16-115",
+  "de": "Laststellung für das größte Feldmoment im Endfeld (q auf {}), Momentenlinie in Vielfachen von qL².",
+  "en": "Load arrangement for the maximum span moment in the end span (q on {}), moment diagram in multiples of qL²."
+ },
+ {
+  "id": "16-116",
+  "de": " — Nachschlagewerk",
+  "en": " — Reference"
+ },
+ {
+  "id": "16-117",
+  "de": "<div class=\"calc-field\"><label>Stützweite L [m]</label><input type=\"number\" id=\"el-L\" value=\"8\" step=\"any\" oninput=\"updateEL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span L [m]</label><input type=\"number\" id=\"el-L\" value=\"8\" step=\"any\" oninput=\"updateEL()\"></div>"
+ },
+ {
+  "id": "16-118",
+  "de": "<div class=\"calc-field\"><label>Stelle x₀ [m]</label><input type=\"number\" id=\"el-x\" value=\"2\" step=\"any\" oninput=\"updateEL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Point x₀ [m]</label><input type=\"number\" id=\"el-x\" value=\"2\" step=\"any\" oninput=\"updateEL()\"></div>"
+ },
+ {
+  "id": "16-119",
+  "de": "<div class=\"calc-field\"><label>Einzellast F [kN]</label><input type=\"number\" id=\"el-F\" value=\"50\" step=\"any\" oninput=\"updateEL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Point load F [kN]</label><input type=\"number\" id=\"el-F\" value=\"50\" step=\"any\" oninput=\"updateEL()\"></div>"
+ },
+ {
+  "id": "16-120",
+  "de": "<div class=\"calc-field\"><label>Gleichlast q [kN/m]</label><input type=\"number\" id=\"el-q\" value=\"10\" step=\"any\" oninput=\"updateEL()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Uniform load q [kN/m]</label><input type=\"number\" id=\"el-q\" value=\"10\" step=\"any\" oninput=\"updateEL()\"></div>"
+ },
+ {
+  "id": "16-121",
+  "de": "Einfeldträger L = {} m, Schnitt bei x₀ = {} m",
+  "en": "Simply supported beam L = {} m, section at x₀ = {} m"
+ },
+ {
+  "id": "16-122",
+  "de": "§Ordinaten der Einflusslinien",
+  "en": "§Ordinates of the influence lines"
+ },
+ {
+  "id": "16-123",
+  "de": "!A: Gerade von 1 (über A) bis 0 (über B) · Q(x₀): Sprung um 1 bei x₀ · M(x₀): Dreieck mit der Spitze unter x₀",
+  "en": "!A: straight line from 1 (over A) to 0 (over B) · Q(x₀): jump of 1 at x₀ · M(x₀): triangle with its peak under x₀"
+ },
+ {
+  "id": "16-124",
+  "de": "§Größtes Moment M(x₀)",
+  "en": "§Maximum moment M(x₀)"
+ },
+ {
+  "id": "16-125",
+  "de": "!Einzellast genau über x₀, Gleichlast über die ganze Länge (Fläche der Einflusslinie = η<sub>M,max</sub> · L / 2)",
+  "en": "!Point load directly over x₀, uniform load over the whole length (area of the influence line = η<sub>M,max</sub> · L / 2)"
+ },
+ {
+  "id": "16-126",
+  "de": "§Größte Querkräfte Q(x₀)",
+  "en": "§Maximum shear forces Q(x₀)"
+ },
+ {
+  "id": "16-127",
+  "de": "!positiv: F knapp rechts von x₀, q nur rechts von x₀ · negativ: F knapp links, q nur links",
+  "en": "!positive: F just right of x₀, q only right of x₀ · negative: F just left, q only left"
+ },
+ {
+  "id": "16-128",
+  "de": " (ohne F)",
+  "en": " (without F)"
+ },
+ {
+  "id": "16-129",
+  "de": "!Bei Volllast wäre Q(x₀) = q · (L/2 − x₀){} = {} kN — Teilbelastung ist hier ungünstiger",
+  "en": "!With full load Q(x₀) = q · (L/2 − x₀){} = {} kN — partial loading is more unfavourable here"
+ },
+ {
+  "id": "16-130",
+  "de": "<div class=\"calc-field\"><label>Anzahl Felder n (gerade)</label><input type=\"number\" id=\"fw-n\" value=\"6\" step=\"2\" oninput=\"updateFW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Number of panels n (even)</label><input type=\"number\" id=\"fw-n\" value=\"6\" step=\"2\" oninput=\"updateFW()\"></div>"
+ },
+ {
+  "id": "16-131",
+  "de": "<div class=\"calc-field\"><label>Feldweite a [m]</label><input type=\"number\" id=\"fw-a\" value=\"2.5\" step=\"any\" oninput=\"updateFW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Panel width a [m]</label><input type=\"number\" id=\"fw-a\" value=\"2.5\" step=\"any\" oninput=\"updateFW()\"></div>"
+ },
+ {
+  "id": "16-132",
+  "de": "<div class=\"calc-field\"><label>Höhe h [m]</label><input type=\"number\" id=\"fw-h\" value=\"2\" step=\"any\" oninput=\"updateFW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Height h [m]</label><input type=\"number\" id=\"fw-h\" value=\"2\" step=\"any\" oninput=\"updateFW()\"></div>"
+ },
+ {
+  "id": "16-133",
+  "de": "<div class=\"calc-field\"><label>Knotenlast F [kN]</label><input type=\"number\" id=\"fw-F\" value=\"20\" step=\"any\" oninput=\"updateFW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Node load F [kN]</label><input type=\"number\" id=\"fw-F\" value=\"20\" step=\"any\" oninput=\"updateFW()\"></div>"
+ },
+ {
+  "id": "16-134",
+  "de": "<div class=\"calc-field\"><label>Zusatzlast P [kN]</label><input type=\"number\" id=\"fw-P\" value=\"0\" step=\"any\" oninput=\"updateFW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Additional load P [kN]</label><input type=\"number\" id=\"fw-P\" value=\"0\" step=\"any\" oninput=\"updateFW()\"></div>"
+ },
+ {
+  "id": "16-135",
+  "de": "<div class=\"calc-field\"><label>am Obergurtknoten k</label><input type=\"number\" id=\"fw-k\" value=\"2\" step=\"1\" oninput=\"updateFW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>at top chord node k</label><input type=\"number\" id=\"fw-k\" value=\"2\" step=\"1\" oninput=\"updateFW()\"></div>"
+ },
+ {
+  "id": "16-136",
+  "de": "§Auflagerkräfte",
+  "en": "§Support reactions"
+ },
+ {
+  "id": "16-137",
+  "de": "!Obergurtknoten: F an den inneren Knoten, F/2 an den Endknoten{}",
+  "en": "!Top chord nodes: F at the inner nodes, F/2 at the end nodes{}"
+ },
+ {
+  "id": "16-138",
+  "de": "§Ritterschnitt durch Feld {} (links der Mitte)",
+  "en": "§Section through panel {} (left of centre)"
+ },
+ {
+  "id": "16-139",
+  "de": "!Schnitt durch Obergurt O<sub>{}</sub>, Diagonale D<sub>{}</sub>, Untergurt U<sub>{}</sub>; Diagonale fällt zur Mitte, sin α = h/d = {}/{} = {}",
+  "en": "!Section through top chord O<sub>{}</sub>, diagonal D<sub>{}</sub>, bottom chord U<sub>{}</sub>; diagonal falls towards the centre, sin α = h/d = {}/{} = {}"
+ },
+ {
+  "id": "16-140",
+  "de": "M<sub>{}</sub> = {} kNm (Momente des Ersatzbalkens an den Knoten)",
+  "en": "M<sub>{}</sub> = {} kNm (moments of the equivalent beam at the nodes)"
+ },
+ {
+  "id": "16-141",
+  "de": "!Drehpunkt: Untergurtknoten {} (dort schneiden sich D und U)",
+  "en": "!Pivot: bottom chord node {} (where D and U intersect)"
+ },
+ {
+  "id": "16-142",
+  "de": "!Drehpunkt: Obergurtknoten {}",
+  "en": "!Pivot: top chord node {}"
+ },
+ {
+  "id": "16-143",
+  "de": "!Querkraft im Feld = A minus Lasten links des Schnitts",
+  "en": "!Shear force in the panel = A minus loads to the left of the section"
+ },
+ {
+  "id": "16-144",
+  "de": "§Pfosten (Gleichgewicht am Obergurtknoten)",
+  "en": "§Vertical (equilibrium at the top chord node)"
+ },
+ {
+  "id": "16-145",
+  "de": "V<sub>0</sub> = −F<sub>0</sub> − Q<sub>1</sub> = −A = {} kN (Endpfosten über dem Auflager)",
+  "en": "V<sub>0</sub> = −F<sub>0</sub> − Q<sub>1</sub> = −A = {} kN (end vertical above the support)"
+ },
+ {
+  "id": "16-146",
+  "de": "V<sub>{}</sub> = −F<sub>{}</sub> = {} kN (Mittelpfosten, keine Diagonale am oberen Knoten)",
+  "en": "V<sub>{}</sub> = −F<sub>{}</sub> = {} kN (middle vertical, no diagonal at the top node)"
+ },
+ {
+  "id": "16-147",
+  "de": "Fachwerk {} × {} m, h = {} m",
+  "en": "Truss {} × {} m, h = {} m"
+ },
+ {
+  "id": "16-148",
+  "de": "<div class=\"legend\">Zug positiv, Druck negativ. Feld j liegt zwischen den Knoten j − 1 und j; Knoten 0 ist links über dem Festlager.</div>",
+  "en": "<div class=\"legend\">Tension positive, compression negative. Panel j lies between nodes j − 1 and j; node 0 is on the left above the pinned support.</div>"
+ },
+ {
+  "id": "16-149",
+  "de": "<div class=\"calc-field\"><label>Spannweite l [m]</label><input type=\"number\" id=\"dgr-l\" value=\"10\" step=\"any\" oninput=\"updateDGR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span l [m]</label><input type=\"number\" id=\"dgr-l\" value=\"10\" step=\"any\" oninput=\"updateDGR()\"></div>"
+ },
+ {
+  "id": "16-150",
+  "de": "<div class=\"calc-field\"><label>Höhe h [m]</label><input type=\"number\" id=\"dgr-h\" value=\"4\" step=\"any\" oninput=\"updateDGR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Height h [m]</label><input type=\"number\" id=\"dgr-h\" value=\"4\" step=\"any\" oninput=\"updateDGR()\"></div>"
+ },
+ {
+  "id": "16-151",
+  "de": "<div class=\"calc-field\"><label>Gleichlast q auf dem Riegel [kN/m]</label><input type=\"number\" id=\"dgr-q\" value=\"12\" step=\"any\" oninput=\"updateDGR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Uniform load q on the beam [kN/m]</label><input type=\"number\" id=\"dgr-q\" value=\"12\" step=\"any\" oninput=\"updateDGR()\"></div>"
+ },
+ {
+  "id": "16-152",
+  "de": "<div class=\"calc-field\"><label>Horizontallast W am linken Eck [kN]</label><input type=\"number\" id=\"dgr-W\" value=\"8\" step=\"any\" oninput=\"updateDGR()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Horizontal load W at the left corner [kN]</label><input type=\"number\" id=\"dgr-W\" value=\"8\" step=\"any\" oninput=\"updateDGR()\"></div>"
+ },
+ {
+  "id": "16-153",
+  "de": "Dreigelenkrahmen l = {} m, h = {} m",
+  "en": "Three-hinged frame l = {} m, h = {} m"
+ },
+ {
+  "id": "16-154",
+  "de": "§Senkrechte Auflagerkräfte (Momente um A bzw. B)",
+  "en": "§Vertical support reactions (moments about A and B)"
+ },
+ {
+  "id": "16-155",
+  "de": "§Horizontalkräfte (Gelenkbedingung M<sub>G</sub> = 0 am rechten Teil)",
+  "en": "§Horizontal forces (hinge condition M<sub>G</sub> = 0 on the right part)"
+ },
+ {
+  "id": "16-156",
+  "de": "!negativ = nach innen (zur Rahmenmitte) gerichtet",
+  "en": "!negative = directed inwards (towards the centre of the frame)"
+ },
+ {
+  "id": "16-157",
+  "de": "!nur Gleichlast: Horizontalschub H = q · l² / (8 · h) = {} kN — wie der Bogenschub mit dem Stich h",
+  "en": "!uniform load only: horizontal thrust H = q · l² / (8 · h) = {} kN — like the arch thrust with rise h"
+ },
+ {
+  "id": "16-158",
+  "de": "!negativ = Zug außen",
+  "en": "!negative = tension outside"
+ },
+ {
+  "id": "16-159",
+  "de": "M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = {} kNm (Gelenk)",
+  "en": "M(x) = M<sub>C</sub> + A<sub>v</sub> · x − q · x² / 2 → M(l/2) = {} kNm (hinge)"
+ },
+ {
+  "id": "16-160",
+  "de": "!größtes positives Riegelmoment bei x = A<sub>v</sub> / q = {} m: M = {} kNm",
+  "en": "!largest positive beam moment at x = A<sub>v</sub> / q = {} m: M = {} kNm"
+ },
+ {
+  "id": "16-161",
+  "de": "Teil {}: b / h / z",
+  "en": "Part {}: b / h / z"
+ },
+ {
+  "id": "16-162",
+  "de": "<div class=\"calc-field\"><label>Breite b [cm]</label><input type=\"number\" id=\"rq-b\" value=\"12\" step=\"any\" oninput=\"updateRechteck()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Width b [cm]</label><input type=\"number\" id=\"rq-b\" value=\"12\" step=\"any\" oninput=\"updateRechteck()\"></div>"
+ },
+ {
+  "id": "16-163",
+  "de": "<div class=\"calc-field\"><label>Höhe h [cm]</label><input type=\"number\" id=\"rq-h\" value=\"24\" step=\"any\" oninput=\"updateRechteck()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Depth h [cm]</label><input type=\"number\" id=\"rq-h\" value=\"24\" step=\"any\" oninput=\"updateRechteck()\"></div>"
+ },
+ {
+  "id": "16-164",
+  "de": "§Schwerpunkt (von der Oberkante)",
+  "en": "§Centroid (from the top edge)"
+ },
+ {
+  "id": "16-165",
+  "de": "§Flächenmoment 2. Grades (Steiner)",
+  "en": "§Second moment of area (parallel-axis theorem)"
+ },
+ {
+  "id": "16-166",
+  "de": "!alle Teile mittig auf einer senkrechten Achse — I<sub>z</sub> ohne Steiner-Anteil",
+  "en": "!all parts centred on one vertical axis — I<sub>z</sub> without parallel-axis term"
+ },
+ {
+  "id": "16-167",
+  "de": "Fall {}",
+  "en": "Case {}"
+ },
+ {
+  "id": "16-168",
+  "de": "<div class=\"calc-field\"><label>Stützweite l<sub>1</sub> [m]</label><input type=\"number\" id=\"kgv-l1\" value=\"5\" step=\"any\" oninput=\"updateKGV()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span l<sub>1</sub> [m]</label><input type=\"number\" id=\"kgv-l1\" value=\"5\" step=\"any\" oninput=\"updateKGV()\"></div>"
+ },
+ {
+  "id": "16-169",
+  "de": "<div class=\"calc-field\"><label>Stützweite l<sub>2</sub> [m]</label><input type=\"number\" id=\"kgv-l2\" value=\"4\" step=\"any\" oninput=\"updateKGV()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Span l<sub>2</sub> [m]</label><input type=\"number\" id=\"kgv-l2\" value=\"4\" step=\"any\" oninput=\"updateKGV()\"></div>"
+ },
+ {
+  "id": "16-170",
+  "de": "<div class=\"calc-field\"><label>Gleichlast q<sub>1</sub> [kN/m]</label><input type=\"number\" id=\"kgv-q1\" value=\"10\" step=\"any\" oninput=\"updateKGV()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Uniform load q<sub>1</sub> [kN/m]</label><input type=\"number\" id=\"kgv-q1\" value=\"10\" step=\"any\" oninput=\"updateKGV()\"></div>"
+ },
+ {
+  "id": "16-171",
+  "de": "<div class=\"calc-field\"><label>Gleichlast q<sub>2</sub> [kN/m]</label><input type=\"number\" id=\"kgv-q2\" value=\"10\" step=\"any\" oninput=\"updateKGV()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Uniform load q<sub>2</sub> [kN/m]</label><input type=\"number\" id=\"kgv-q2\" value=\"10\" step=\"any\" oninput=\"updateKGV()\"></div>"
+ },
+ {
+  "id": "16-172",
+  "de": "<div class=\"calc-field\"><label>Einzellast F<sub>1</sub> in Feldmitte [kN]</label><input type=\"number\" id=\"kgv-F1\" value=\"0\" step=\"any\" oninput=\"updateKGV()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Point load F<sub>1</sub> at midspan [kN]</label><input type=\"number\" id=\"kgv-F1\" value=\"0\" step=\"any\" oninput=\"updateKGV()\"></div>"
+ },
+ {
+  "id": "16-173",
+  "de": "<div class=\"calc-field\"><label>Einzellast F<sub>2</sub> in Feldmitte [kN]</label><input type=\"number\" id=\"kgv-F2\" value=\"20\" step=\"any\" oninput=\"updateKGV()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Point load F<sub>2</sub> at midspan [kN]</label><input type=\"number\" id=\"kgv-F2\" value=\"20\" step=\"any\" oninput=\"updateKGV()\"></div>"
+ },
+ {
+  "id": "16-174",
+  "de": "Zweifeldträger {} m + {} m, EI konstant",
+  "en": "Two-span beam {} m + {} m, EI constant"
+ },
+ {
+  "id": "16-175",
+  "de": "§Grundsystem und Überzählige",
+  "en": "§Primary system and redundants"
+ },
+ {
+  "id": "16-176",
+  "de": "!n = a − 3 = 4 − 3 = 1-fach statisch unbestimmt. Gelenk über B einfügen → zwei Einfeldträger; Überzählige X<sub>1</sub> = M<sub>B</sub>",
+  "en": "!n = a − 3 = 4 − 3 = 1 degree statically indeterminate. Insert a hinge over B → two simply supported beams; redundant X<sub>1</sub> = M<sub>B</sub>"
+ },
+ {
+  "id": "16-177",
+  "de": "§Momentenlinien im Grundsystem",
+  "en": "§Moment diagrams in the primary system"
+ },
+ {
+  "id": "16-178",
+  "de": " und Dreiecke F · l / 4 (Einzellast in Feldmitte)",
+  "en": " and triangles F · l / 4 (point load at midspan)"
+ },
+ {
+  "id": "16-179",
+  "de": "!M<sub>0</sub>: Parabeln mit Stich q · l² / 8{} · M<sub>1</sub>: Dreieck mit dem Wert 1 über B",
+  "en": "!M<sub>0</sub>: parabolas with rise q · l² / 8{} · M<sub>1</sub>: triangle with the value 1 over B"
+ },
+ {
+  "id": "16-180",
+  "de": "§Formänderungswerte mit der Koppeltafel (EI · δ)",
+  "en": "§Flexibility coefficients with the integration table (EI · δ)"
+ },
+ {
+  "id": "16-181",
+  "de": " · Dreieck (Spitze Mitte) × Dreieck (Spitze am Ende): ¼ · l · i · k",
+  "en": " · triangle (peak at the centre) × triangle (peak at the end): ¼ · l · i · k"
+ },
+ {
+  "id": "16-182",
+  "de": "!Parabel × Dreieck (Spitze am Ende): ⅓ · l · i · k{}",
+  "en": "!Parabola × triangle (peak at the end): ⅓ · l · i · k{}"
+ },
+ {
+  "id": "16-183",
+  "de": "§Verträglichkeit: kein Knick über B",
+  "en": "§Compatibility: no kink over B"
+ },
+ {
+  "id": "16-184",
+  "de": "!M<sub>B</sub> = {} kNm (Zug oben)",
+  "en": "!M<sub>B</sub> = {} kNm (tension at the top)"
+ },
+ {
+  "id": "16-185",
+  "de": "§Auflagerkräfte (Einfeldträger + Stützmoment)",
+  "en": "§Support reactions (simply supported beam + support moment)"
+ },
+ {
+  "id": "16-186",
+  "de": "!Feld 1: max M = {} kNm bei x = {} m von A · Feld 2: max M = {} kNm bei x = {} m von C",
+  "en": "!Span 1: max M = {} kNm at x = {} m from A · span 2: max M = {} kNm at x = {} m from C"
+ },
+ {
+  "id": "16-187",
+  "de": "1. Grad der Unbestimmtheit n bestimmen, n Bindungen lösen → statisch bestimmtes Grundsystem<br> 2. Überzählige X<sub>i</sub> als äußere Lasten ansetzen, Momentenlinien M<sub>0</sub> (Last) und M<sub>i</sub> (X<sub>i</sub> = 1)<br> 3. Formänderungswerte:&nbsp; δ<sub>ik</sub> = ∫ M<sub>i</sub> · M<sub>k</sub> / (EI) dx&nbsp;&nbsp;&nbsp; δ<sub>i0</sub> = ∫ M<sub>i</sub> · M<sub>0</sub> / (EI) dx&nbsp;&nbsp; (Koppeltafel)<br> 4. Verträglichkeit:&nbsp; δ<sub>10</sub> + X<sub>1</sub> · δ<sub>11</sub> = 0&nbsp;&nbsp; (n = 1)&nbsp;&nbsp;&nbsp; allgemein&nbsp; [δ<sub>ik</sub>] · {X} = −{δ<sub>i0</sub>}<br> 5. Endzustand:&nbsp; M = M<sub>0</sub> + Σ X<sub>i</sub> · M<sub>i</sub>",
+  "en": "1. Determine the degree of indeterminacy n, release n restraints → statically determinate primary system<br> 2. Apply the redundants X<sub>i</sub> as external loads, moment diagrams M<sub>0</sub> (load) and M<sub>i</sub> (X<sub>i</sub> = 1)<br> 3. Flexibility coefficients:&nbsp; δ<sub>ik</sub> = ∫ M<sub>i</sub> · M<sub>k</sub> / (EI) dx&nbsp;&nbsp;&nbsp; δ<sub>i0</sub> = ∫ M<sub>i</sub> · M<sub>0</sub> / (EI) dx&nbsp;&nbsp; (integration table)<br> 4. Compatibility:&nbsp; δ<sub>10</sub> + X<sub>1</sub> · δ<sub>11</sub> = 0&nbsp;&nbsp; (n = 1)&nbsp;&nbsp;&nbsp; in general&nbsp; [δ<sub>ik</sub>] · {X} = −{δ<sub>i0</sub>}<br> 5. Final state:&nbsp; M = M<sub>0</sub> + Σ X<sub>i</sub> · M<sub>i</sub>"
+ },
+ {
+  "id": "16-188",
+  "de": "<a class=\"applink\" href=\"#/baustatik/arbeitssatz/koppeltafel\">→ Koppeltafel</a>",
+  "en": "<a class=\"applink\" href=\"#/baustatik/arbeitssatz/koppeltafel\">→ Integration table</a>"
+ },
+ {
+  "id": "16-189",
+  "de": "<a class=\"applink\" href=\"#/baustatik/grundlagen/bestimmtheit\">→ Statische Bestimmtheit</a>",
+  "en": "<a class=\"applink\" href=\"#/baustatik/grundlagen/bestimmtheit\">→ Static determinacy</a>"
+ },
+ {
+  "id": "16-190",
+  "de": "<a class=\"applink\" href=\"#/stahlbau/nachweise/biegeknicken\">→ Biegeknicken im Stahlbau</a> <a class=\"applink\" href=\"#/holzbau/gzt/knicken\">→ Knicken im Holzbau</a>",
+  "en": "<a class=\"applink\" href=\"#/stahlbau/nachweise/biegeknicken\">→ Flexural buckling in steel</a> <a class=\"applink\" href=\"#/holzbau/gzt/knicken\">→ Buckling in timber</a>"
+ },
+ {
+  "id": "16-191",
+  "de": "<a class=\"applink\" href=\"calc.html#beam\">→ Eigene Lastfälle in statiq·calc</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#beam\">→ Own load cases in statiq·calc</a>"
+ },
+ {
+  "id": "16-192",
+  "de": "<a class=\"applink\" href=\"calc.html#beam\">→ Verläufe in statiq·calc ansehen</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#beam\">→ View diagrams in statiq·calc</a>"
+ },
+ {
+  "id": "16-193",
+  "de": "<a class=\"applink\" href=\"calc.html#cantilever\">→ Kragarm in statiq·calc</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#cantilever\">→ Cantilever in statiq·calc</a>"
+ },
+ {
+  "id": "16-194",
+  "de": "<a class=\"applink\" href=\"calc.html#cont\">→ Beliebige Felder in statiq·calc</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#cont\">→ Any spans in statiq·calc</a>"
+ },
+ {
+  "id": "16-195",
+  "de": "<a class=\"applink\" href=\"calc.html#cont\">→ Momentenlinie in statiq·calc</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#cont\">→ Moment diagram in statiq·calc</a>"
+ },
+ {
+  "id": "16-196",
+  "de": "<a class=\"applink\" href=\"calc.html#frame\">→ Rahmen in statiq·calc untersuchen</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#frame\">→ Analyse frames in statiq·calc</a>"
+ },
+ {
+  "id": "16-197",
+  "de": "<a class=\"applink\" href=\"calc.html#frame\">→ Rahmen mit beliebigen Lasten in statiq·calc</a>",
+  "en": "<a class=\"applink\" href=\"calc.html#frame\">→ Frames with any loads in statiq·calc</a>"
+ },
+ {
+  "id": "16-198",
+  "de": "Durchlaufträger (Dreimomentengleichung, EI konstant):&nbsp; M<sub>i−1</sub> · l<sub>i</sub> + 2 · M<sub>i</sub> · (l<sub>i</sub> + l<sub>i+1</sub>) + M<sub>i+1</sub> · l<sub>i+1</sub> = −(q<sub>i</sub> · l<sub>i</sub>³ + q<sub>i+1</sub> · l<sub>i+1</sub>³) / 4",
+  "en": "Continuous beam (three-moment equation, EI constant):&nbsp; M<sub>i−1</sub> · l<sub>i</sub> + 2 · M<sub>i</sub> · (l<sub>i</sub> + l<sub>i+1</sub>) + M<sub>i+1</sub> · l<sub>i+1</sub> = −(q<sub>i</sub> · l<sub>i</sub>³ + q<sub>i+1</sub> · l<sub>i+1</sub>³) / 4"
+ },
+ {
+  "id": "16-199",
+  "de": "Einzellast:&nbsp; S = F · η(x<sub>F</sub>)&nbsp;&nbsp;&nbsp; Gleichlast:&nbsp; S = q · ∫ η dx (Fläche unter der Einflusslinie im belasteten Bereich)<br> Einfeldträger:&nbsp; η<sub>A</sub> = 1 − x/L&nbsp;&nbsp;&nbsp; η<sub>M</sub>(x₀) = Dreieck mit max x₀ · (L − x₀) / L&nbsp;&nbsp;&nbsp; η<sub>Q</sub>(x₀) springt bei x₀ um 1",
+  "en": "Point load:&nbsp; S = F · η(x<sub>F</sub>)&nbsp;&nbsp;&nbsp; uniform load:&nbsp; S = q · ∫ η dx (area under the influence line in the loaded region)<br> Simply supported beam:&nbsp; η<sub>A</sub> = 1 − x/L&nbsp;&nbsp;&nbsp; η<sub>M</sub>(x₀) = triangle with max x₀ · (L − x₀) / L&nbsp;&nbsp;&nbsp; η<sub>Q</sub>(x₀) jumps by 1 at x₀"
+ },
+ {
+  "id": "16-200",
+  "de": "N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>²&nbsp;&nbsp;&nbsp; mit&nbsp; L<sub>cr</sub> = β · L",
+  "en": "N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>²&nbsp;&nbsp;&nbsp; with&nbsp; L<sub>cr</sub> = β · L"
+ }
+]

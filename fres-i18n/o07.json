@@ -1,0 +1,1038 @@
+{
+ "07-0": {
+  "fr": "La charge verticale comprime le voile de sorte qu'il reprend la poussée des terres par un arc de compression entre le plancher et le radier.",
+  "es": "La carga vertical comprime el muro de modo que este transmite el empuje de tierras mediante un arco de compresión entre el forjado y la losa de cimentación."
+ },
+ "07-1": {
+  "fr": "Position de l'effort normal (joint ouvert)",
+  "es": "Posición del esfuerzo axil (junta abierta)"
+ },
+ "07-2": {
+  "fr": "Moment en pied de voile et excentricité de l'effort normal",
+  "es": "Momento en el pie del muro y excentricidad del esfuerzo axil"
+ },
+ "07-3": {
+  "fr": "Le joint ne peut s'ouvrir au maximum que jusqu'au milieu du voile : e ≤ l/3 = {} m {}",
+  "es": "La junta solo puede abrirse como máximo hasta el centro del muro: e ≤ l/3 = {} m {}"
+ },
+ "07-4": {
+  "fr": "Longueur de voile comprimée (répartition linéaire des contraintes, sans traction)",
+  "es": "Longitud comprimida del muro (distribución lineal de tensiones, sin tracción)"
+ },
+ "07-5": {
+  "fr": "e ≤ l/6 : toute la longueur est comprimée → l<sub>c</sub> = <b>{} m</b>",
+  "es": "e ≤ l/6: toda la longitud está comprimida → l<sub>c</sub> = <b>{} m</b>"
+ },
+ "07-6": {
+  "fr": "Compression en rive du voile",
+  "es": "Compresión en el borde del muro"
+ },
+ "07-7": {
+  "fr": "Cisaillement dans le plan du voile",
+  "es": "Cortante en el plano del muro"
+ },
+ "07-8": {
+  "fr": "Résistance au cisaillement : résistance initiale au cisaillement plus frottement dû à la charge verticale (EN 1996-1-1, 3.6.2)",
+  "es": "Resistencia a cortante: resistencia inicial a cortante más rozamiento debido a la carga vertical (EN 1996-1-1, 3.6.2)"
+ },
+ "07-9": {
+  "fr": " · joints verticaux non remplis de mortier : 0,5·f<sub>vk0</sub> = {} N/mm²",
+  "es": " · llagas sin mortero: 0,5·f<sub>vk0</sub> = {} N/mm²"
+ },
+ "07-10": {
+  "fr": "Résistance au cisaillement sur la longueur comprimée",
+  "es": "Resistencia a cortante sobre la longitud comprimida"
+ },
+ "07-11": {
+  "fr": "L'AN allemand ajoute des vérifications pour la rupture de l'élément par traction et pour l'élancement au cisaillement — les valeurs ici suivent les recommandations de l'EN 1996-1-1.",
+  "es": "El Anejo Nacional alemán añade comprobaciones para la rotura por tracción de la pieza y para la esbeltez a cortante; los valores aquí siguen las recomendaciones de la EN 1996-1-1."
+ },
+ "07-12": {
+  "fr": "Bleu : contrainte de compression dans le joint horizontal en pied de voile ; seule la partie comprimée l<sub>c</sub> reprend le cisaillement.",
+  "es": "Azul: tensión de compresión en el tendel en el pie del muro; solo la parte comprimida l<sub>c</sub> resiste el cortante."
+ },
+ "07-13": {
+  "fr": "Méthode plus précise selon DIN EN 1996-1-1 (flambement avec fluage, excentricités des charges), voiles tenus sur trois et quatre côtés, maçonnerie armée, flexion perpendiculaire au plan du voile due au vent, sécurité incendie et tableaux de résistances de l'AN allemand.",
+  "es": "Método más preciso según DIN EN 1996-1-1 (pandeo con fluencia, excentricidades de las cargas), muros arriostrados en tres y cuatro lados, fábrica armada, flexión perpendicular al plano del muro por viento, protección contra incendios y tablas de resistencias del Anejo Nacional alemán."
+ },
+ "07-14": {
+  "fr": "Mortier courant",
+  "es": "Mortero ordinario"
+ },
+ "07-15": {
+  "fr": "Maçonnerie",
+  "es": "Fábrica"
+ },
+ "07-16": {
+  "fr": "Mortier courant de maçonnerie",
+  "es": "Mortero ordinario para fábrica"
+ },
+ "07-17": {
+  "fr": "<section><h2>Données</h2><table>\n      {}{}\n    </table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>",
+  "es": "<section><h2>Datos</h2><table>\n      {}{}\n    </table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>"
+ },
+ "07-18": {
+  "fr": "Voile de maçonnerie en compression",
+  "es": "Muro de fábrica a compresión"
+ },
+ "07-19": {
+  "fr": "DIN EN 1996-3/NA, méthode simplifiée",
+  "es": "DIN EN 1996-3/NA, método simplificado"
+ },
+ "07-20": {
+  "fr": ", joints verticaux non remplis de mortier",
+  "es": ", llagas sin mortero"
+ },
+ "07-21": {
+  "fr": "Pression de l'eau par le dessus (amont)",
+  "es": "Presión del agua por encima (aguas arriba)"
+ },
+ "07-22": {
+  "fr": "La pression hydrostatique croît linéairement avec la profondeur : p = γ<sub>w</sub>·z",
+  "es": "La presión hidrostática crece linealmente con la profundidad: p = γ<sub>w</sub>·z"
+ },
+ "07-23": {
+  "fr": "Profondeur du bord supérieur z<sub>1</sub> = {} m → p<sub>1</sub> = 9,81·{} = {} kN/m² · bord inférieur z<sub>2</sub> = t<sub>o</sub> + L·sin α = {} m → p<sub>2</sub> = <b>{} kN/m²</b>",
+  "es": "Profundidad del borde superior z<sub>1</sub> = {} m → p<sub>1</sub> = 9,81·{} = {} kN/m² · borde inferior z<sub>2</sub> = t<sub>o</sub> + L·sin α = {} m → p<sub>2</sub> = <b>{} kN/m²</b>"
+ },
+ "07-24": {
+  "fr": "Force de pression = aire du diagramme des pressions (trapèze) × largeur",
+  "es": "Fuerza de presión = área del diagrama de presiones (trapecio) × anchura"
+ },
+ "07-25": {
+  "fr": "Décomposée : horizontale F<sub>H</sub> = F·sin α = {} kN · verticale F<sub>V</sub> = F·cos α = {} kN",
+  "es": "Descompuesta: horizontal F<sub>H</sub> = F·sin α = {} kN · vertical F<sub>V</sub> = F·cos α = {} kN"
+ },
+ "07-26": {
+  "fr": "Centre de poussée : centre de gravité du diagramme des pressions (toujours situé sous le centre de gravité de la surface)",
+  "es": "Centro de presiones: centro de gravedad del diagrama de presiones (siempre por debajo del centro de gravedad de la superficie)"
+ },
+ "07-27": {
+  "fr": "Distance depuis le bord supérieur e = L·(p<sub>1</sub> + 2p<sub>2</sub>)/(3·(p<sub>1</sub> + p<sub>2</sub>)) = <b>{} m</b>",
+  "es": "Distancia desde el borde superior e = L·(p<sub>1</sub> + 2p<sub>2</sub>)/(3·(p<sub>1</sub> + p<sub>2</sub>)) = <b>{} m</b>"
+ },
+ "07-28": {
+  "fr": "Contrôle avec Steiner : y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub>/(y<sub>s</sub>·A) = {} + {}/({}·{}) = {} m depuis le plan d'eau (suivant la surface) → {} m depuis le bord supérieur",
+  "es": "Comprobación con Steiner: y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub>/(y<sub>s</sub>·A) = {} + {}/({}·{}) = {} m desde el nivel del agua (según la superficie) → {} m desde el borde superior"
+ },
+ "07-29": {
+  "fr": "Aval à {} m au-dessus du bord inférieur, longueur mouillée {} m → F<sub>u</sub> = <b>{} kN</b>, à {} m au-dessus du bord inférieur",
+  "es": "Aguas abajo a {} m sobre el borde inferior, longitud mojada {} m → F<sub>u</sub> = <b>{} kN</b>, a {} m sobre el borde inferior"
+ },
+ "07-30": {
+  "fr": "Pas d'eau à l'aval : la surface est sèche de l'autre côté.",
+  "es": "Sin agua aguas abajo: la superficie está seca por el otro lado."
+ },
+ "07-31": {
+  "fr": "Résultante et moment par rapport au bord inférieur (p. ex. moment d'encastrement d'un voile de retenue)",
+  "es": "Resultante y momento respecto al borde inferior (p. ej. momento de empotramiento de un muro de contención de agua)"
+ },
+ "07-32": {
+  "fr": " → résultante à {} m au-dessus du bord inférieur",
+  "es": " → resultante a {} m sobre el borde inferior"
+ },
+ "07-33": {
+  "fr": "M<sub>pied</sub> = F·(L − e) − F<sub>u</sub>·(L − e<sub>u</sub>) = <b>{} kNm</b>{}",
+  "es": "M<sub>pie</sub> = F·(L − e) − F<sub>u</sub>·(L − e<sub>u</sub>) = <b>{} kNm</b>{}"
+ },
+ "07-34": {
+  "fr": "Contre-pression et résultante",
+  "es": "Contrapresión y resultante"
+ },
+ "07-35": {
+  "fr": "Valeurs caractéristiques. Pour le dimensionnement du voile, appliquer γ<sub>G</sub> ou γ<sub>Q</sub> (pression de l'eau permanente ou variable selon la situation).",
+  "es": "Valores característicos. Para el dimensionamiento del muro, aplicar γ<sub>G</sub> o γ<sub>Q</sub> (presión del agua permanente o variable según la situación)."
+ },
+ "07-36": {
+  "fr": "Contre-pression de l'autre côté (aval)",
+  "es": "Contrapresión del otro lado (aguas abajo)"
+ },
+ "07-37": {
+  "fr": "Plan d'eau ▽",
+  "es": "Nivel del agua ▽"
+ },
+ "07-38": {
+  "fr": "Aval ▽",
+  "es": "Aguas abajo ▽"
+ },
+ "07-39": {
+  "fr": "Eau γ<sub>w</sub> = 9,81 kN/m³, largeur b = {} m",
+  "es": "Agua γ<sub>w</sub> = 9,81 kN/m³, anchura b = {} m"
+ },
+ "07-40": {
+  "fr": "M<sub>pied</sub> = {} kNm",
+  "es": "M<sub>pie</sub> = {} kNm"
+ },
+ "07-41": {
+  "fr": "Orange : diagramme des pressions perpendiculaire à la surface, bleu : résultante au centre de poussée.",
+  "es": "Naranja: diagrama de presiones perpendicular a la superficie, azul: resultante en el centro de presiones."
+ },
+ "07-42": {
+  "fr": "Tirant d'eau et franc-bord",
+  "es": "Calado y francobordo"
+ },
+ "07-43": {
+  "fr": "Archimède : poussée = poids de l'eau déplacée",
+  "es": "Arquímedes: empuje = peso del agua desplazada"
+ },
+ "07-44": {
+  "fr": "V<sub>dépl</sub> = G/γ<sub>w</sub> = {}/{} = <b>{} m³</b> · plus grand volume du corps V<sub>max</sub> = {} m³",
+  "es": "V<sub>desp</sub> = G/γ<sub>w</sub> = {}/{} = <b>{} m³</b> · mayor volumen del cuerpo V<sub>max</sub> = {} m³"
+ },
+ "07-45": {
+  "fr": "Tirant d'eau ({})",
+  "es": "Calado ({})"
+ },
+ "07-46": {
+  "fr": "V<sub>dépl</sub> > V<sub>max</sub> → <b>le corps coule</b>",
+  "es": "V<sub>desp</sub> > V<sub>max</sub> → <b>el cuerpo se hunde</b>"
+ },
+ "07-47": {
+  "fr": "Contrôle : V(T) = {} m³ = V<sub>dépl</sub> ✓",
+  "es": "Comprobación: V(T) = {} m³ = V<sub>desp</sub> ✓"
+ },
+ "07-48": {
+  "fr": "Franc-bord H − T = {} − {} = {} m {} f<sub>min</sub> = {} m",
+  "es": "Francobordo H − T = {} − {} = {} m {} f<sub>min</sub> = {} m"
+ },
+ "07-49": {
+  "fr": "Plus de volume (dimensions plus grandes) ou moins de poids.",
+  "es": "Más volumen (dimensiones mayores) o menos peso."
+ },
+ "07-50": {
+  "fr": "Stabilité de flottaison (métacentre)",
+  "es": "Estabilidad de flotación (metacentro)"
+ },
+ "07-51": {
+  "fr": "Centre de poussée B : centre de gravité du volume déplacé",
+  "es": "Centro de empuje B: centro de gravedad del volumen desplazado"
+ },
+ "07-52": {
+  "fr": "{} = <b>{} m</b> au-dessus du bord inférieur",
+  "es": "{} = <b>{} m</b> sobre el borde inferior"
+ },
+ "07-53": {
+  "fr": "Métacentre M : intersection de la ligne d'action de la poussée pour une faible inclinaison",
+  "es": "Metacentro M: intersección de la línea de acción del empuje para una escora pequeña"
+ },
+ "07-54": {
+  "fr": "{} = {} m⁴ (aire du plan de flottaison par rapport à l'axe de basculement)",
+  "es": "{} = {} m⁴ (área de la flotación respecto al eje de vuelco)"
+ },
+ "07-55": {
+  "fr": "de la sphère",
+  "es": "de la esfera"
+ },
+ "07-56": {
+  "fr": "d'une section circulaire",
+  "es": "de una sección circular"
+ },
+ "07-57": {
+  "fr": "Contrôle : pour {} M se trouve au centre, z<sub>M</sub> = R = {} m ✓",
+  "es": "Comprobación: para {} M está en el centro, z<sub>M</sub> = R = {} m ✓"
+ },
+ "07-58": {
+  "fr": "Hauteur métacentrique : positive = stable (moment de rappel)",
+  "es": "Altura metacéntrica: positiva = estable (momento recuperador)"
+ },
+ "07-59": {
+  "fr": "≤ 0 → instable, le corps chavire",
+  "es": "≤ 0 → inestable, el cuerpo vuelca"
+ },
+ "07-60": {
+  "fr": "Moment de rappel pour une gîte de {}° (petits angles) : M = G·GM·sin φ = {} kNm",
+  "es": "Momento recuperador para una escora de {}° (ángulos pequeños): M = G·GM·sin φ = {} kNm"
+ },
+ "07-61": {
+  "fr": "GM faible : le corps flotte certes de façon stable, mais roule fortement — pour des pontons de travail, GM ≥ 0,3 … 1 m est usuel.",
+  "es": "GM pequeño: el cuerpo flota de forma estable, pero balancea mucho; para pontonas de trabajo es habitual GM ≥ 0,3 … 1 m."
+ },
+ "07-62": {
+  "fr": "Pour une section circulaire, M se trouve au centre : stable seulement si le centre de gravité G se trouve en dessous (lest en bas).",
+  "es": "En una sección circular M está en el centro: solo es estable si el centro de gravedad G queda por debajo (lastre abajo)."
+ },
+ "07-63": {
+  "fr": "Les cylindres verticaux ne sont stables que pour une faible hauteur ou un centre de gravité bas — lest en pied ou diamètre plus grand.",
+  "es": "Los cilindros verticales solo son estables con poca altura o con el centro de gravedad bajo: lastre en el pie o mayor diámetro."
+ },
+ "07-64": {
+  "fr": "Abaisser le centre de gravité (lest) ou élargir la construction (BM croît avec le cube de la largeur).",
+  "es": "Bajar el centro de gravedad (lastre) o construir más ancho (BM crece con el cubo de la anchura)."
+ },
+ "07-65": {
+  "fr": "V(T) = L·(B<sub>u</sub> + b(T))/2·T avec b(T) = B<sub>u</sub> + k·T, k = (B<sub>o</sub> − B<sub>u</sub>)/H = {} → {}",
+  "es": "V(T) = L·(B<sub>u</sub> + b(T))/2·T con b(T) = B<sub>u</sub> + k·T, k = (B<sub>o</sub> − B<sub>u</sub>)/H = {} → {}"
+ },
+ "07-66": {
+  "fr": "V(T) = L·A<sub>seg</sub>(T) avec A<sub>seg</sub> = R²·arccos((R − T)/R) − (R − T)·√(2RT − T²), R = {} m → T par itération",
+  "es": "V(T) = L·A<sub>seg</sub>(T) con A<sub>seg</sub> = R²·arccos((R − T)/R) − (R − T)·√(2RT − T²), R = {} m → T por iteración"
+ },
+ "07-67": {
+  "fr": "V(T) = π·T²·(3R − T)/3 (calotte sphérique), R = {} m → T par itération",
+  "es": "V(T) = π·T²·(3R − T)/3 (casquete esférico), R = {} m → T por iteración"
+ },
+ "07-68": {
+  "fr": "z<sub>B</sub> = T/3·(B<sub>u</sub> + 2b)/(B<sub>u</sub> + b) avec b = b(T) = {} m",
+  "es": "z<sub>B</sub> = T/3·(B<sub>u</sub> + 2b)/(B<sub>u</sub> + b) con b = b(T) = {} m"
+ },
+ "07-69": {
+  "fr": "z<sub>B</sub> = R − s³/(12·A<sub>seg</sub>) avec la corde s = 2·√(T·(2R − T)) = {} m, A<sub>seg</sub> = {} m²",
+  "es": "z<sub>B</sub> = R − s³/(12·A<sub>seg</sub>) con la cuerda s = 2·√(T·(2R − T)) = {} m, A<sub>seg</sub> = {} m²"
+ },
+ "07-70": {
+  "fr": "I<sub>W</sub> = π·r<sub>W</sub>⁴/4 avec r<sub>W</sub> = √(T·(2R − T)) = {} m",
+  "es": "I<sub>W</sub> = π·r<sub>W</sub>⁴/4 con r<sub>W</sub> = √(T·(2R − T)) = {} m"
+ },
+ "07-71": {
+  "fr": "coule",
+  "es": "se hunde"
+ },
+ "07-72": {
+  "fr": "Poussée A = G",
+  "es": "Empuje A = G"
+ },
+ "07-73": {
+  "fr": "{} · hauteurs au-dessus du bord inférieur.",
+  "es": "{} · alturas sobre el borde inferior."
+ },
+ "07-74": {
+  "fr": "Vitesse d'écoulement et régime d'écoulement",
+  "es": "Velocidad de flujo y régimen de flujo"
+ },
+ "07-75": {
+  "fr": "Continuité : Q = v·A",
+  "es": "Continuidad: Q = v·A"
+ },
+ "07-76": {
+  "fr": " (élevée — attention au coup de bélier et à l'abrasion, usuel 0,5 … 2 m/s)",
+  "es": " (alta: atender al golpe de ariete y a la abrasión, habitual 0,5 … 2 m/s)"
+ },
+ "07-77": {
+  "fr": " (faible — dépôts possibles)",
+  "es": " (baja: posibles sedimentaciones)"
+ },
+ "07-78": {
+  "fr": "Nombre de Reynolds : laminaire jusqu'à Re ≈ 2320, turbulent au-delà",
+  "es": "Número de Reynolds: laminar hasta Re ≈ 2320, turbulento por encima"
+ },
+ "07-79": {
+  "fr": "Perte de charge",
+  "es": "Pérdida de carga"
+ },
+ "07-80": {
+  "fr": "Coefficient de frottement λ",
+  "es": "Coeficiente de fricción λ"
+ },
+ "07-81": {
+  "fr": "Colebrook-White : 1/√λ = −2·lg(2,51/(Re·√λ) + (k/D)/3,71) avec k/D = {} → par itération ({} pas) λ = <b>{}</b>",
+  "es": "Colebrook-White: 1/√λ = −2·lg(2,51/(Re·√λ) + (k/D)/3,71) con k/D = {} → por iteración ({} pasos) λ = <b>{}</b>"
+ },
+ "07-82": {
+  "fr": "Pertes selon Darcy-Weisbach : frottement dans la conduite et pertes singulières",
+  "es": "Pérdidas según Darcy-Weisbach: fricción en la tubería y pérdidas localizadas"
+ },
+ "07-83": {
+  "fr": "Hauteur cinétique v²/(2g) = {} m",
+  "es": "Altura de velocidad v²/(2g) = {} m"
+ },
+ "07-84": {
+  "fr": "Question inverse : quel débit est possible avec Δh ?",
+  "es": "Pregunta inversa: ¿qué caudal es posible con Δh?"
+ },
+ "07-85": {
+  "fr": "Q<sub>max</sub> = <b>{} l/s</b> (perte de charge = Δh, par itération)",
+  "es": "Q<sub>max</sub> = <b>{} l/s</b> (pérdida de carga = Δh, por iteración)"
+ },
+ "07-86": {
+  "fr": "Δh insuffisant : diamètre plus grand (h<sub>v</sub> ~ 1/D⁵), conduite plus lisse, moins de pièces spéciales ou une pompe.",
+  "es": "Δh no es suficiente: mayor diámetro (h<sub>v</sub> ~ 1/D⁵), tubería más lisa, menos piezas especiales o una bomba."
+ },
+ "07-87": {
+  "fr": "Ligne d'énergie et ligne piézométrique (hauteurs au-dessus du plan d'eau inférieur)",
+  "es": "Línea de energía y línea piezométrica (alturas sobre el nivel de agua inferior)"
+ },
+ "07-88": {
+  "fr": "Ligne piézométrique",
+  "es": "Línea piezométrica"
+ },
+ "07-89": {
+  "fr": "La ligne d'énergie descend des pertes ; la ligne piézométrique se situe v²/(2g) en dessous.",
+  "es": "La línea de energía desciende según las pérdidas; la línea piezométrica queda v²/(2g) por debajo."
+ },
+ "07-90": {
+  "fr": "Hauteur normale",
+  "es": "Calado normal"
+ },
+ "07-91": {
+  "fr": "Section en fonction de la hauteur d'eau h (trapèze avec talus 1 : m)",
+  "es": "Sección en función del calado h (trapecio con talud 1 : m)"
+ },
+ "07-92": {
+  "fr": "Écoulement uniforme selon Gauckler-Manning-Strickler, h par itération",
+  "es": "Flujo uniforme según Gauckler-Manning-Strickler, h por iteración"
+ },
+ "07-93": {
+  "fr": "A = {} m², U = {} m, R = {} m · contrôle : {}·{}·{}<sup>2/3</sup>·{}<sup>1/2</sup> = {} m³/s",
+  "es": "A = {} m², U = {} m, R = {} m · comprobación: {}·{}·{}<sup>2/3</sup>·{}<sup>1/2</sup> = {} m³/s"
+ },
+ "07-94": {
+  "fr": " (élevée pour gazon/gravier — vérifier l'érosion)",
+  "es": " (alta para césped/grava: comprobar la erosión)"
+ },
+ "07-95": {
+  "fr": "Régime d'écoulement et hauteur critique",
+  "es": "Régimen de flujo y calado crítico"
+ },
+ "07-96": {
+  "fr": "Nombre de Froude : rapport de la vitesse d'écoulement à la célérité des ondes",
+  "es": "Número de Froude: relación entre la velocidad del flujo y la celeridad de las ondas"
+ },
+ "07-97": {
+  "fr": "fluvial (Fr &lt; 1)",
+  "es": "subcrítico (Fr &lt; 1)"
+ },
+ "07-98": {
+  "fr": "torrentiel (Fr &gt; 1)",
+  "es": "supercrítico (Fr &gt; 1)"
+ },
+ "07-99": {
+  "fr": "Hauteur critique : énergie spécifique minimale, Fr = 1 ⇔ Q²·B<sub>sp</sub>/(g·A³) = 1",
+  "es": "Calado crítico: energía específica mínima, Fr = 1 ⇔ Q²·B<sub>sp</sub>/(g·A³) = 1"
+ },
+ "07-100": {
+  "fr": "h<sub>gr</sub> = <b>{} m</b> · E<sub>min</sub> = h<sub>gr</sub> + v<sub>gr</sub>²/(2g) = {} m · pour h<sub>n</sub> : E = {} m",
+  "es": "h<sub>gr</sub> = <b>{} m</b> · E<sub>min</sub> = h<sub>gr</sub> + v<sub>gr</sub>²/(2g) = {} m · con h<sub>n</sub>: E = {} m"
+ },
+ "07-101": {
+  "fr": "h<sub>n</sub> > h<sub>gr</sub> : changement de régime uniquement au droit d'ouvrages (p. ex. ressaut hydraulique à l'aval d'un déversoir).",
+  "es": "h<sub>n</sub> > h<sub>gr</sub>: cambio de régimen solo en estructuras (p. ej. resalto hidráulico aguas abajo de un vertedero)."
+ },
+ "07-102": {
+  "fr": "h<sub>n</sub> < h<sub>gr</sub> : écoulement torrentiel — prévoir un ressaut hydraulique et une dissipation d'énergie en aval.",
+  "es": "h<sub>n</sub> < h<sub>gr</sub>: flujo supercrítico; prever un resalto hidráulico y la disipación de energía al final."
+ },
+ "07-103": {
+  "fr": "Franc-bord",
+  "es": "Francobordo"
+ },
+ "07-104": {
+  "fr": "Canal plus large ou plus profond, revêtement plus lisse ou pente plus forte.",
+  "es": "Canal más ancho o más profundo, revestimiento más liso o mayor pendiente."
+ },
+ "07-105": {
+  "fr": "énergie spécifique E(h)",
+  "es": "energía específica E(h)"
+ },
+ "07-106": {
+  "fr": "Bleu : hauteur normale, orange en tirets : hauteur critique, gris en pointillés : limite du franc-bord. À droite : E = h + v²/(2g), en gris la bissectrice E = h.",
+  "es": "Azul: calado normal, naranja discontinuo: calado crítico, gris punteado: límite del francobordo. A la derecha: E = h + v²/(2g), en gris la bisectriz E = h."
+ },
+ "07-107": {
+  "fr": "Charge sur le déversoir (Poleni)",
+  "es": "Altura de lámina vertiente (Poleni)"
+ },
+ "07-108": {
+  "fr": "Formule de déversoir selon Poleni, résolue pour la charge sur le déversoir",
+  "es": "Fórmula de vertedero según Poleni, despejada para la altura de lámina vertiente"
+ },
+ "07-109": {
+  "fr": "débit spécifique q = Q/b = {} m³/(s·m)",
+  "es": "caudal específico q = Q/b = {} m³/(s·m)"
+ },
+ "07-110": {
+  "fr": "Contrôle de la vitesse d'approche négligée",
+  "es": "Comprobación de la velocidad de aproximación despreciada"
+ },
+ "07-111": {
+  "fr": " — n'est plus négligeable, h<sub>ü</sub> est légèrement surestimée",
+  "es": " — ya no es despreciable, h<sub>ü</sub> se sobreestima ligeramente"
+ },
+ "07-112": {
+  "fr": "v<sub>0</sub> = Q/(b·(w + h<sub>ü</sub>)) = {} m/s → v<sub>0</sub>²/(2g) = {} m ({} % de h<sub>ü</sub>{})",
+  "es": "v<sub>0</sub> = Q/(b·(w + h<sub>ü</sub>)) = {} m/s → v<sub>0</sub>²/(2g) = {} m ({} % de h<sub>ü</sub>{})"
+ },
+ "07-113": {
+  "fr": "Niveau amont",
+  "es": "Nivel aguas arriba"
+ },
+ "07-114": {
+  "fr": "Niveau amont au-dessus du fond = w + h<sub>ü</sub> = {} + {} = <b>{} m</b> {} {} m",
+  "es": "Nivel aguas arriba sobre el fondo = w + h<sub>ü</sub> = {} + {} = <b>{} m</b> {} {} m"
+ },
+ "07-115": {
+  "fr": "Élargir le déversoir, abaisser la crête ou choisir une forme de crête plus favorable (μ plus grand).",
+  "es": "Ensanchar el vertedero, bajar la coronación o elegir una forma de coronación más favorable (μ mayor)."
+ },
+ "07-116": {
+  "fr": "Coupe longitudinale",
+  "es": "Sección longitudinal"
+ },
+ "07-117": {
+  "fr": "admissible {} m",
+  "es": "admisible {} m"
+ },
+ "07-118": {
+  "fr": "Q = {} m³/s sur b = {} m",
+  "es": "Q = {} m³/s sobre b = {} m"
+ },
+ "07-119": {
+  "fr": "Déversement libre par-dessus la crête du déversoir.",
+  "es": "Vertido libre sobre la coronación del vertedero."
+ },
+ "07-120": {
+  "fr": "Surfaces courbes (vanne segment), pression de l'eau avec écoulement, vagues et glace, sous-pression sous les ouvrages.",
+  "es": "Superficies curvas (compuerta de segmento), presión del agua con flujo, oleaje y hielo, subpresión bajo las estructuras."
+ },
+ "07-121": {
+  "fr": "Grands angles de gîte (courbe des bras de levier), carènes liquides dans les citernes, stabilité longitudinale, charges de vent et de vagues.",
+  "es": "Grandes ángulos de escora (curva de brazos adrizantes), superficies libres en tanques, estabilidad longitudinal, cargas de viento y oleaje."
+ },
+ "07-122": {
+  "fr": "Écoulement non uniforme (courbes de remous), sections composées avec lit majeur, transport solide, courbes.",
+  "es": "Flujo no uniforme (curvas de remanso), secciones compuestas con llanura de inundación, transporte de sedimentos, curvas."
+ },
+ "07-123": {
+  "fr": "Déversement noyé (remous), contraction latérale aux piles, dissipation d'énergie dans le bassin de dissipation, vitesse d'approche.",
+  "es": "Vertido sumergido (con remanso), contracción lateral en pilas, disipación de energía en el cuenco amortiguador, velocidad de aproximación."
+ },
+ "07-124": {
+  "fr": "<section><h2>Données</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>",
+  "es": "<section><h2>Datos</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>"
+ },
+ "07-125": {
+  "fr": "Hydrostatique (Archimède, métacentre)",
+  "es": "Hidrostática (Arquímedes, metacentro)"
+ },
+ "07-126": {
+  "fr": "Hydrodynamique (Darcy-Weisbach, Colebrook-White)",
+  "es": "Hidrodinámica (Darcy-Weisbach, Colebrook-White)"
+ },
+ "07-127": {
+  "fr": "Hydrodynamique (Gauckler-Manning-Strickler)",
+  "es": "Hidrodinámica (Gauckler-Manning-Strickler)"
+ },
+ "07-128": {
+  "fr": "Hydrodynamique (Poleni)",
+  "es": "Hidrodinámica (Poleni)"
+ },
+ "07-129": {
+  "fr": "λ de la couche {} > 0",
+  "es": "λ de la capa {} > 0"
+ },
+ "07-130": {
+  "fr": "μ de la couche {} > 0",
+  "es": "μ de la capa {} > 0"
+ },
+ "07-131": {
+  "fr": "ρ de la couche {} ≥ 0",
+  "es": "ρ de la capa {} ≥ 0"
+ },
+ "07-132": {
+  "fr": "Coefficient de transmission thermique",
+  "es": "Transmitancia térmica"
+ },
+ "07-133": {
+  "fr": "Résistances thermiques des couches (R = d/λ)",
+  "es": "Resistencias térmicas de las capas (R = d/λ)"
+ },
+ "07-134": {
+  "fr": "Protection thermique minimale DIN 4108-2 ({})",
+  "es": "Protección térmica mínima DIN 4108-2 ({})"
+ },
+ "07-135": {
+  "fr": "Plus d'isolant ou isolant plus performant (λ plus petit).",
+  "es": "Más aislamiento o aislamiento mejor (λ menor)."
+ },
+ "07-136": {
+  "fr": "GEG — coefficient U du bâtiment de référence",
+  "es": "GEG — transmitancia U del edificio de referencia"
+ },
+ "07-137": {
+  "fr": "U = {} {} U<sub>Ref</sub> = {} W/(m²K) (bâtiment neuf, valeur de référence)",
+  "es": "U = {} {} U<sub>Ref</sub> = {} W/(m²K) (edificio nuevo, valor de referencia)"
+ },
+ "07-138": {
+  "fr": "Modification dans l'existant : U ≤ {} W/(m²K) {}",
+  "es": "Modificación en edificios existentes: U ≤ {} W/(m²K) {}"
+ },
+ "07-139": {
+  "fr": "Le GEG exige la vérification pour l'ensemble du bâtiment ; la valeur de référence indique si l'élément se situe au niveau usuel.",
+  "es": "El GEG exige la comprobación para todo el edificio; el valor de referencia muestra si el elemento se encuentra en el nivel habitual."
+ },
+ "07-140": {
+  "fr": "Moisissure — facteur de température f<sub>Rsi</sub>",
+  "es": "Moho — factor de temperatura f<sub>Rsi</sub>"
+ },
+ "07-141": {
+  "fr": "f<sub>Rsi</sub> = 1 − U·R<sub>si</sub> = 1 − {}·0,25 = <b>{}</b> {} 0,70 (θ<sub>si</sub> à 20/−5 °C = {} °C)",
+  "es": "f<sub>Rsi</sub> = 1 − U·R<sub>si</sub> = 1 − {}·0,25 = <b>{}</b> {} 0,70 (θ<sub>si</sub> a 20/−5 °C = {} °C)"
+ },
+ "07-142": {
+  "fr": "Valable pour la zone courante. Vérifier séparément aux ponts thermiques (angles, appuis).",
+  "es": "Válido para la zona no perturbada. Comprobar por separado en los puentes térmicos (esquinas, apoyos)."
+ },
+ "07-143": {
+  "fr": "extérieur",
+  "es": "exterior"
+ },
+ "07-144": {
+  "fr": "Épaisseurs des couches en cm",
+  "es": "Espesores de las capas en cm"
+ },
+ "07-145": {
+  "fr": "Coupe avec profil de température",
+  "es": "Sección con perfil de temperatura"
+ },
+ "07-146": {
+  "fr": "Diffusion en période de condensation",
+  "es": "Difusión en el periodo de condensación"
+ },
+ "07-147": {
+  "fr": "Conditions aux limites (DIN 4108-3)",
+  "es": "Condiciones de contorno (DIN 4108-3)"
+ },
+ "07-148": {
+  "fr": "intérieur 20 °C / 50 % → p<sub>i</sub> = {} Pa · extérieur −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 m²K/W · 2160 h",
+  "es": "interior 20 °C / 50 % → p<sub>i</sub> = {} Pa · exterior −5 °C / 80 % → p<sub>e</sub> = {} Pa · R<sub>si</sub> = 0,25, R<sub>se</sub> = 0,04 m²K/W · 2160 h"
+ },
+ "07-149": {
+  "fr": "Températures et pressions de vapeur saturante",
+  "es": "Temperaturas y presiones de vapor de saturación"
+ },
+ "07-150": {
+  "fr": "Condensation dans l'élément",
+  "es": "Condensación en el elemento"
+ },
+ "07-151": {
+  "fr": "La ligne de pression de vapeur reste partout sous la pression de vapeur saturante : <b>pas de condensation</b>.",
+  "es": "La línea de presión de vapor permanece en todo punto por debajo de la presión de vapor de saturación: <b>sin condensación</b>."
+ },
+ "07-152": {
+  "fr": "Masse de condensat",
+  "es": "Masa de condensado"
+ },
+ "07-153": {
+  "fr": "dans le plan ",
+  "es": "en el plano "
+ },
+ "07-154": {
+  "fr": "dans la zone s<sub>d</sub> = ",
+  "es": "en la zona s<sub>d</sub> = "
+ },
+ "07-155": {
+  "fr": "Condensation {}",
+  "es": "Condensación {}"
+ },
+ "07-156": {
+  "fr": "Pare-vapeur du côté chaud de l'isolant ou couches extérieures plus perméables à la vapeur.",
+  "es": "Barrera de vapor en el lado cálido del aislamiento o capas exteriores más abiertas a la difusión."
+ },
+ "07-157": {
+  "fr": "Séchage en période d'évaporation",
+  "es": "Secado en el periodo de evaporación"
+ },
+ "07-158": {
+  "fr": "intérieur 20 °C / 50 %, extérieur 12 °C / 70 %, 2160 h",
+  "es": "interior 20 °C / 50 %, exterior 12 °C / 70 %, 2160 h"
+ },
+ "07-159": {
+  "fr": "Surface intérieure",
+  "es": "Superficie interior"
+ },
+ "07-160": {
+  "fr": "Surface extérieure",
+  "es": "Superficie exterior"
+ },
+ "07-161": {
+  "fr": " · condensat m<sub>W,T</sub> = {} kg/m²",
+  "es": " · condensado m<sub>W,T</sub> = {} kg/m²"
+ },
+ "07-162": {
+  "fr": " · pas de condensation",
+  "es": " · sin condensación"
+ },
+ "07-163": {
+  "fr": "<span style=\"color:{}\">p<sub>s</sub> — pression de vapeur saturante</span> · <span style=\"color:{}\">p — pression de vapeur d'eau</span>{}",
+  "es": "<span style=\"color:{}\">p<sub>s</sub> — presión de vapor de saturación</span> · <span style=\"color:{}\">p — presión de vapor de agua</span>{}"
+ },
+ "07-164": {
+  "fr": "Diagramme de Glaser (période de condensation), horizontalement s_d",
+  "es": "Diagrama de Glaser (periodo de condensación), horizontalmente s_d"
+ },
+ "07-165": {
+  "fr": "Plafond au-dessus",
+  "es": "Techo superior"
+ },
+ "07-166": {
+  "fr": "Plancher en dessous",
+  "es": "Suelo inferior"
+ },
+ "07-167": {
+  "fr": "Mur extérieur",
+  "es": "Muro exterior"
+ },
+ "07-168": {
+  "fr": "Cloison intérieure",
+  "es": "Muro interior"
+ },
+ "07-169": {
+  "fr": "Masse surfacique et R<sub>w</sub>",
+  "es": "Masa por unidad de superficie y R<sub>w</sub>"
+ },
+ "07-170": {
+  "fr": " — hors de 65 … 720 kg/m², loi de masse seulement à titre indicatif",
+  "es": " — fuera de 65 … 720 kg/m², la ley de masa solo es orientativa"
+ },
+ "07-171": {
+  "fr": "Transmission latérale (DIN 4109-2)",
+  "es": "Transmisión por flancos (DIN 4109-2)"
+ },
+ "07-172": {
+  "fr": "Voie directe et trois voies par flanc (Ff, Df, Fd)",
+  "es": "Transmisión directa y tres vías por flanco (Ff, Df, Fd)"
+ },
+ "07-173": {
+  "fr": "Jonction en croix",
+  "es": "Unión en cruz"
+ },
+ "07-174": {
+  "fr": "Jonction en T",
+  "es": "Unión en T"
+ },
+ "07-175": {
+  "fr": "R′<sub>w</sub> = −10·lg(Σ 10<sup>−R<sub>ij</sub>/10</sup>) sur 13 voies = <b>{} dB</b>",
+  "es": "R′<sub>w</sub> = −10·lg(Σ 10<sup>−R<sub>ij</sub>/10</sup>) sobre 13 vías = <b>{} dB</b>"
+ },
+ "07-176": {
+  "fr": "Parts : directe {} %, flancs {} % · voie latérale principale {} via {} ({} %)",
+  "es": "Contribuciones: directa {} %, flancos {} % · mayor vía de flanco {} a través de {} ({} %)"
+ },
+ "07-177": {
+  "fr": "Bruit aérien — {}",
+  "es": "Ruido aéreo — {}"
+ },
+ "07-178": {
+  "fr": "R′<sub>w</sub> = {} dB d'après la vérification des flancs",
+  "es": "R′<sub>w</sub> = {} dB según la comprobación de flancos"
+ },
+ "07-179": {
+  "fr": "R′<sub>w</sub> ≈ R<sub>w</sub> − réduction due à la transmission latérale = {} − {} = {} dB",
+  "es": "R′<sub>w</sub> ≈ R<sub>w</sub> − reducción por transmisión por flancos = {} − {} = {} dB"
+ },
+ "07-180": {
+  "fr": "R′<sub>w</sub> − u<sub>prog</sub> = {} − {} = <b>{} dB</b> {} req. R′<sub>w</sub> = {} dB",
+  "es": "R′<sub>w</sub> − u<sub>prog</sub> = {} − {} = <b>{} dB</b> {} nec. R′<sub>w</sub> = {} dB"
+ },
+ "07-181": {
+  "fr": "Simplification : la vérification exacte selon DIN 4109-2 détermine R′<sub>w</sub> à partir de l'élément séparatif et de toutes les voies latérales. ",
+  "es": "Simplificación: la comprobación exacta según DIN 4109-2 determina R′<sub>w</sub> a partir del elemento separador y de todas las vías de flanco. "
+ },
+ "07-182": {
+  "fr": "Élément séparatif plus lourd, flancs plus lourds (surtout celui qui a la plus grande part) ou doublage souple.",
+  "es": "Elemento separador más pesado, flancos más pesados (sobre todo el de mayor contribución) o trasdosado flexible."
+ },
+ "07-183": {
+  "fr": "Bruit de choc — chape flottante",
+  "es": "Ruido de impacto — solera flotante"
+ },
+ "07-184": {
+  "fr": "L<sub>n,eq,0,w</sub> = 164 − 35·lg({}) = {} dB · m′<sub>chape</sub> = {}·{} = {} kg/m²",
+  "es": "L<sub>n,eq,0,w</sub> = 164 − 35·lg({}) = {} dB · m′<sub>solera</sub> = {}·{} = {} kg/m²"
+ },
+ "07-185": {
+  "fr": "K = 0,6 + 5,5·lg(m′<sub>plancher</sub>/m′<sub>f,m</sub>) = 0,6 + 5,5·lg({}/{}) = {} dB (m′<sub>f,m</sub> — moyenne des quatre flancs)",
+  "es": "K = 0,6 + 5,5·lg(m′<sub>forjado</sub>/m′<sub>f,m</sub>) = 0,6 + 5,5·lg({}/{}) = {} dB (m′<sub>f,m</sub> — media de los cuatro flancos)"
+ },
+ "07-186": {
+  "fr": "L′<sub>n,w</sub> + u<sub>prog</sub> = {} dB {} adm. {} dB",
+  "es": "L′<sub>n,w</sub> + u<sub>prog</sub> = {} dB {} adm. {} dB"
+ },
+ "07-187": {
+  "fr": "Isolation aux bruits de choc plus souple (s′ plus petit), chape plus lourde ou dalle brute plus lourde.",
+  "es": "Aislamiento a ruido de impacto más blando (s′ menor), solera más pesada o forjado base más pesado."
+ },
+ "07-188": {
+  "fr": "R′w nécessaire = {} dB",
+  "es": "R′w nec. = {} dB"
+ },
+ "07-189": {
+  "fr": " (avec flancs)",
+  "es": " (con flancos)"
+ },
+ "07-190": {
+  "fr": "Loi de masse R_w = 30,9·lg m′ − 22,2",
+  "es": "Ley de masa R_w = 30,9·lg m′ − 22,2"
+ },
+ "07-191": {
+  "fr": "pas de condensation · s<sub>d</sub> = {} m",
+  "es": "sin condensación · s<sub>d</sub> = {} m"
+ },
+ "07-192": {
+  "fr": "Ponts thermiques (valeurs ψ), couches inhomogènes (ossature bois, chevrons — parts de remplissage proportionnelles), lames d'air, éléments en contact avec le sol selon DIN EN ISO 13370, protection thermique d'été.",
+  "es": "Puentes térmicos (valores ψ), capas heterogéneas (montantes de madera, cabios: huecos en proporción), cámaras de aire, elementos en contacto con el terreno según DIN EN ISO 13370, protección térmica en verano."
+ },
+ "07-193": {
+  "fr": "Humidité en régime transitoire (WUFI), prise d'humidité du bois, toitures végétalisées, toitures-terrasses à climat particulier, transport capillaire.",
+  "es": "Humedad en régimen transitorio (WUFI), aumento de humedad de la madera, cubiertas ajardinadas, cubiertas planas con clima especial, transporte capilar."
+ },
+ "07-194": {
+  "fr": "Flancs avec doublages (ΔR<sub>ij</sub>), éléments légers et à double paroi, jonctions élastiques, planchers à poutres en bois, bruit extérieur avec fenêtres.",
+  "es": "Flancos con trasdosados (ΔR<sub>ij</sub>), elementos ligeros y de doble hoja, uniones elásticas, forjados de viguetas de madera, ruido exterior con ventanas."
+ },
+ "07-195": {
+  "fr": "<section><h2>Composition de l'élément (intérieur → extérieur)</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>",
+  "es": "<section><h2>Composición del elemento (interior → exterior)</h2><table>{}</table></section><section><h2>{}</h2><div class=\"figure\">{}</div></section>"
+ },
+ "07-196": {
+  "fr": "Protection thermique — coefficient U",
+  "es": "Protección térmica — transmitancia U"
+ },
+ "07-197": {
+  "fr": "Protection contre l'humidité — méthode de Glaser",
+  "es": "Protección contra la humedad — método de Glaser"
+ },
+ "07-198": {
+  "fr": "Flancs selon DIN 4109-2",
+  "es": "Flancos según DIN 4109-2"
+ },
+ "07-199": {
+  "fr": "Réduction due aux flancs ",
+  "es": "Reducción por flancos "
+ },
+ "07-200": {
+  "fr": "pression diamétrale dans le bois 1",
+  "es": "aplastamiento en la madera 1"
+ },
+ "07-201": {
+  "fr": "pression diamétrale dans le bois 2",
+  "es": "aplastamiento en la madera 2"
+ },
+ "07-202": {
+  "fr": "pression diamétrale dans les deux bois, la tige tourne",
+  "es": "aplastamiento en ambas maderas, el elemento de unión gira"
+ },
+ "07-203": {
+  "fr": "une rotule plastique dans le bois 2",
+  "es": "una rótula plástica en la madera 2"
+ },
+ "07-204": {
+  "fr": "une rotule plastique dans le bois 1",
+  "es": "una rótula plástica en la madera 1"
+ },
+ "07-205": {
+  "fr": "deux rotules plastiques",
+  "es": "dos rótulas plásticas"
+ },
+ "07-206": {
+  "fr": "pression diamétrale dans les bois latéraux",
+  "es": "aplastamiento en las maderas laterales"
+ },
+ "07-207": {
+  "fr": "pression diamétrale dans le bois central",
+  "es": "aplastamiento en la madera central"
+ },
+ "07-208": {
+  "fr": "une rotule plastique par plan de cisaillement",
+  "es": "una rótula plástica por plano de corte"
+ },
+ "07-209": {
+  "fr": "deux rotules plastiques par plan de cisaillement",
+  "es": "dos rótulas plásticas por plano de corte"
+ },
+ "07-210": {
+  "fr": "une rotule plastique dans la tôle",
+  "es": "una rótula plástica en la chapa"
+ },
+ "07-211": {
+  "fr": "trois rotules plastiques",
+  "es": "tres rótulas plásticas"
+ },
+ "07-212": {
+  "fr": "pression diamétrale dans le bois central (tôle mince)",
+  "es": "aplastamiento en la madera central (chapa delgada)"
+ },
+ "07-213": {
+  "fr": "rotules plastiques (tôle mince)",
+  "es": "rótulas plásticas (chapa delgada)"
+ },
+ "07-214": {
+  "fr": "pression diamétrale dans le bois (tôle mince)",
+  "es": "aplastamiento en la madera (chapa delgada)"
+ },
+ "07-215": {
+  "fr": "pression diamétrale dans le bois central (tôle épaisse)",
+  "es": "aplastamiento en la madera central (chapa gruesa)"
+ },
+ "07-216": {
+  "fr": "rotules plastiques (tôle épaisse)",
+  "es": "rótulas plásticas (chapa gruesa)"
+ },
+ "07-217": {
+  "fr": "une rotule plastique au niveau de la tôle (tôle épaisse)",
+  "es": "una rótula plástica en la chapa (chapa gruesa)"
+ },
+ "07-218": {
+  "fr": "deux rotules plastiques (tôle épaisse)",
+  "es": "dos rótulas plásticas (chapa gruesa)"
+ },
+ "07-219": {
+  "fr": "pression diamétrale dans le bois (tôle épaisse)",
+  "es": "aplastamiento en la madera (chapa gruesa)"
+ },
+ "07-220": {
+  "fr": "Tab. 8.2, sans préperçage",
+  "es": "Tab. 8.2, sin pretaladrar"
+ },
+ "07-221": {
+  "fr": "Tab. 8.5 (broches)",
+  "es": "Tab. 8.5 (pasadores)"
+ },
+ "07-222": {
+  "fr": "F<sub>ax,Rk</sub> = {} kN (agrément), effet de corde jusqu'à 100 % de la part de Johansen",
+  "es": "F<sub>ax,Rk</sub> = {} kN (aprobación), efecto cuerda hasta el 100 % de la parte de Johansen"
+ },
+ "07-223": {
+  "fr": "tige lisse : f<sub>ax,k</sub> = 20·10⁻⁶·ρ<sub>k</sub>² = {} N/mm², f<sub>head,k</sub> = 70·10⁻⁶·ρ<sub>k</sub>² = {} N/mm² (d<sub>h</sub> ≈ 2d) → F<sub>ax,Rk</sub> = {} kN, pris en compte au maximum à 15 %",
+  "es": "vástago liso: f<sub>ax,k</sub> = 20·10⁻⁶·ρ<sub>k</sub>² = {} N/mm², f<sub>head,k</sub> = 70·10⁻⁶·ρ<sub>k</sub>² = {} N/mm² (d<sub>h</sub> ≈ 2d) → F<sub>ax,Rk</sub> = {} kN, se considera como máximo el 15 %"
+ },
+ "07-224": {
+  "fr": "Broches : pas d'effet de corde (tiges lisses sans tête)",
+  "es": "Pasadores: sin efecto cuerda (barras lisas sin cabeza)"
+ },
+ "07-225": {
+  "fr": "k<sub>90</sub> = 1,35 + 0,015·d = {} (résineux)",
+  "es": "k<sub>90</sub> = 1,35 + 0,015·d = {} (conífera)"
+ },
+ "07-226": {
+  "fr": "Résistance à l'arrachement pour l'effet de corde (la tige est en plus sollicitée en traction lorsqu'elle s'incline)",
+  "es": "Resistencia al arranque para el efecto cuerda (el elemento de unión trabaja además a tracción cuando se inclina)"
+ },
+ "07-227": {
+  "fr": "tôle mince (t<sub>s</sub> ≤ 0,5·d)",
+  "es": "chapa delgada (t<sub>s</sub> ≤ 0,5·d)"
+ },
+ "07-228": {
+  "fr": "tôle épaisse (t<sub>s</sub> ≥ d)",
+  "es": "chapa gruesa (t<sub>s</sub> ≥ d)"
+ },
+ "07-229": {
+  "fr": "entre mince et épaisse : interpolation linéaire",
+  "es": "entre delgada y gruesa: interpolación lineal"
+ },
+ "07-230": {
+  "fr": "Modes pour tôle mince",
+  "es": "Modos para chapa delgada"
+ },
+ "07-231": {
+  "fr": "Modes pour tôle épaisse",
+  "es": "Modos para chapa gruesa"
+ },
+ "07-232": {
+  "fr": "Valeur de calcul (le bois gouverne le comportement : k<sub>mod</sub> et γ<sub>M</sub> = 1,3)",
+  "es": "Valor de cálculo (la madera determina el comportamiento: k<sub>mod</sub> y γ<sub>M</sub> = 1,3)"
+ },
+ "07-233": {
+  "fr": "F<sub>v,Rd</sub> = k<sub>mod</sub>·F<sub>v,Rk</sub>/γ<sub>M</sub> = {}·{}/1,3 = <b>{} kN</b> par plan de cisaillement",
+  "es": "F<sub>v,Rd</sub> = k<sub>mod</sub>·F<sub>v,Rk</sub>/γ<sub>M</sub> = {}·{}/1,3 = <b>{} kN</b> por plano de corte"
+ },
+ "07-234": {
+  "fr": "Résistance par organe d'assemblage (Johansen)",
+  "es": "Resistencia por medio de unión (Johansen)"
+ },
+ "07-235": {
+  "fr": "Déterminant : mode ({}) — {}.",
+  "es": "Determinante: modo ({}) — {}."
+ },
+ "07-236": {
+  "fr": "Pointes en une file : k<sub>ef</sub> = {} (Tab. 8.1, a<sub>1</sub> = {}·d) → n<sub>ef</sub> = n<sup>k<sub>ef</sub></sup> = {}<sup>{}</sup> = <b>{}</b>",
+  "es": "Clavos en una fila: k<sub>ef</sub> = {} (Tab. 8.1, a<sub>1</sub> = {}·d) → n<sub>ef</sub> = n<sup>k<sub>ef</sub></sup> = {}<sup>{}</sup> = <b>{}</b>"
+ },
+ "07-237": {
+  "fr": " → pour α = {}° interpolé entre n<sub>ef</sub> (0°) et n (90°) : <b>{}</b>",
+  "es": " → para α = {}° interpolado entre n<sub>ef</sub> (0°) y n (90°): <b>{}</b>"
+ },
+ "07-238": {
+  "fr": "Résistance de l'assemblage",
+  "es": "Resistencia de la unión"
+ },
+ "07-239": {
+  "fr": "Choisir plus d'organes d'assemblage ou des organes plus gros, des entraxes a<sub>1</sub> plus grands (n<sub>ef</sub> plus élevé) ou des bois plus épais.",
+  "es": "Elegir más medios de unión o de mayor diámetro, separaciones a<sub>1</sub> mayores (n<sub>ef</sub> mayor) o maderas más gruesas."
+ },
+ "07-240": {
+  "fr": "Pointes sans préperçage : épaisseur minimale de bois contre le fendage et pénétration de la pointe",
+  "es": "Clavos sin pretaladrar: espesor mínimo de madera contra la hendidura y penetración de la punta"
+ },
+ "07-241": {
+  "fr": "Pénétration t<sub>pen</sub> = {} mm ≥ 8·d = {} mm {}",
+  "es": "Penetración t<sub>pen</sub> = {} mm ≥ 8·d = {} mm {}"
+ },
+ "07-242": {
+  "fr": "Broches : 6 mm ≤ d ≤ 30 mm ✗",
+  "es": "Pasadores: 6 mm ≤ d ≤ 30 mm ✗"
+ },
+ "07-243": {
+  "fr": "Entraxes et épaisseurs minimales",
+  "es": "Separaciones y espesores mínimos"
+ },
+ "07-244": {
+  "fr": "Augmenter les entraxes ou choisir des organes d'assemblage plus fins.",
+  "es": "Aumentar las separaciones o elegir medios de unión más delgados."
+ },
+ "07-245": {
+  "fr": " · dans le filetage d<sub>ef</sub> = 1,1·d<sub>k</sub> = 1,1·{} = {} mm",
+  "es": " · en la rosca d<sub>ef</sub> = 1,1·d<sub>k</sub> = 1,1·{} = {} mm"
+ },
+ "07-246": {
+  "fr": "type pointe (d ≤ 6 mm) : pression diamétrale sans influence de l'angle, distances minimales comme pour les pointes",
+  "es": "tipo clavo (d ≤ 6 mm): aplastamiento sin influencia del ángulo, distancias mínimas como para clavos"
+ },
+ "07-247": {
+  "fr": "type broche : la pression diamétrale dépend de l'angle effort-fibre",
+  "es": "tipo pasador: el aplastamiento depende del ángulo entre fuerza y fibra"
+ },
+ "07-248": {
+  "fr": "Moment d'écoulement plastique de la tige : résistance à la formation d'une rotule plastique",
+  "es": "Momento plástico del elemento de unión: resistencia a la formación de una rótula plástica"
+ },
+ "07-249": {
+  "fr": "Résistance à la pression diamétrale : intensité avec laquelle le bois ({}, ρ<sub>k</sub> = {} kg/m³) peut être comprimé sous la tige",
+  "es": "Resistencia al aplastamiento: cuánto puede comprimirse la madera ({}, ρ<sub>k</sub> = {} kg/m³) bajo el elemento de unión"
+ },
+ "07-250": {
+  "fr": "Résistance par plan de cisaillement et par organe d'assemblage : la plus petite valeur de tous les modes de rupture ({})",
+  "es": "Resistencia por plano de corte y por medio de unión: el menor valor de todos los modos de fallo ({})"
+ },
+ "07-251": {
+  "fr": "</b> ← déterminant",
+  "es": "</b> ← determinante"
+ },
+ "07-252": {
+  "fr": "Plusieurs tiges en file portent moins que la somme (risque de fendage) → nombre efficace par file",
+  "es": "Varios elementos de unión en fila resisten menos que la suma (riesgo de hendidura) → número eficaz por fila"
+ },
+ "07-253": {
+  "fr": "Résistance de l'assemblage : files × nombre efficace × plans de cisaillement × F<sub>v,Rd</sub>",
+  "es": "Resistencia de la unión: filas × número eficaz × planos de corte × F<sub>v,Rd</sub>"
+ },
+ "07-254": {
+  "fr": "Coupe perpendiculaire aux fibres ({} file{}, mode {})",
+  "es": "Sección perpendicular a la fibra ({} fila{}, modo {})"
+ },
+ "07-255": {
+  "fr": "Vue en plan (fibres →)",
+  "es": "Vista en planta (fibra →)"
+ },
+ "07-256": {
+  "fr": "déterminant : mode ({}) — {}",
+  "es": "determinante: modo ({}) — {}"
+ },
+ "07-257": {
+  "fr": "Coupe : rougeâtre = bois avec rupture par pression diamétrale, cercles bleus = rotules plastiques dans la tige, flèches = direction de l'effort des pièces. Vue en plan : bout de bois de fil chargé à droite.",
+  "es": "Sección: rojizo = madera con fallo por aplastamiento, círculos azules = rótulas plásticas en el elemento de unión, flechas = dirección de la fuerza de las piezas. Vista en planta: testa cargada a la derecha."
+ },
+ "07-258": {
+  "fr": "{} {} Ø {} mm, à {} plan(s) de cisaillement · {} · F<sub>v,Rd</sub> = {} kN par plan de cisaillement",
+  "es": "{} {} Ø {} mm, de {} plano(s) de corte · {} · F<sub>v,Rd</sub> = {} kN por plano de corte"
+ }
+}

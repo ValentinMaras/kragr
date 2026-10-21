@@ -1,0 +1,1187 @@
+[
+ {
+  "id": "11-0",
+  "de": "Holz — Pfette mit Doppelbiegung",
+  "en": "Timber — purlin in biaxial bending"
+ },
+ {
+  "id": "11-1",
+  "de": "Holz — Querzug am Queranschluss",
+  "en": "Timber — transverse tension at a connection"
+ },
+ {
+  "id": "11-2",
+  "de": "Hängt eine Last unten am Träger, zieht sie die Fasern quer auseinander — je näher der Anschluss am unteren Rand liegt, desto eher spaltet das Holz.",
+  "en": "A load hanging from the bottom of a beam pulls the fibres apart — the closer the connection is to the bottom edge, the sooner the timber splits."
+ },
+ {
+  "id": "11-3",
+  "de": "Höhe h > 0",
+  "en": "Depth h > 0"
+ },
+ {
+  "id": "11-4",
+  "de": "Höhe und Länge > 0",
+  "en": "Height and length > 0"
+ },
+ {
+  "id": "11-5",
+  "de": "Im durch die Löcher geschwächten Querschnitt reißt das Blech, bevor die Zugkraft erreicht ist.",
+  "en": "In the section weakened by the holes the plate fractures before the tensile force is reached."
+ },
+ {
+  "id": "11-6",
+  "de": "Keine Tabellenzeile für diese Breite — erst die Mindestbreite einhalten.",
+  "en": "No table row for this width — first satisfy the minimum width."
+ },
+ {
+  "id": "11-7",
+  "de": "Keine gestaffelten Stäbe eingegeben — die durchlaufenden Stäbe reichen dann nicht.",
+  "en": "No curtailed bars entered — the continuous bars are then not sufficient."
+ },
+ {
+  "id": "11-8",
+  "de": "Kippen der Pfette (Modus Träger/Stütze), Durchlaufpfetten und Gerberpfetten, Normalkraft aus Windverband, Durchbiegung in zwei Richtungen und Anschlüsse (Pfettenstoß, Auflager).",
+  "en": "Lateral torsional buckling of the purlin (Beam/column mode), continuous and Gerber purlins, axial force from wind bracing, deflection in two directions and connections (purlin splice, supports)."
+ },
+ {
+  "id": "11-9",
+  "de": "Kleinerer Durchbruch, Lage näher an der Trägerachse und weiter weg vom Auflager (kleineres V), höherer Träger oder Verstärkung.",
+  "en": "Smaller hole, closer to the beam axis and further from the support (smaller V), deeper beam or reinforcement."
+ },
+ {
+  "id": "11-10",
+  "de": " (gestaffelt {} … {} m)",
+  "en": " (curtailed {} … {} m)"
+ },
+ {
+  "id": "11-11",
+  "de": " · oben {} Ø{}",
+  "en": " · top {} Ø{}"
+ },
+ {
+  "id": "11-12",
+  "de": ", Bügel Ø{}, {}",
+  "en": ", stirrups Ø{}, {}"
+ },
+ {
+  "id": "11-13",
+  "de": "A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = ({} − {}·{})·{} = {} mm² (Lochreihe quer zur Kraft, nicht versetzt)",
+  "en": "A<sub>net</sub> = (b − n<sub>2</sub>·d<sub>0</sub>)·t = ({} − {}·{})·{} = {} mm² (row of holes across the force, not staggered)"
+ },
+ {
+  "id": "11-14",
+  "de": "A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0,5)·d<sub>0</sub>)·t = 2·{}·{} = {} mm²",
+  "en": "A<sub>nv</sub> = 2·(e<sub>1</sub> + (n<sub>1</sub> − 1)·p<sub>1</sub> − (n<sub>1</sub> − 0.5)·d<sub>0</sub>)·t = 2·{}·{} = {} mm²"
+ },
+ {
+  "id": "11-15",
+  "de": "Blech {} × {} mm, {}, {} × {} Löcher d₀ = {} mm · N<sub>u,Rd</sub> = {} kN · V<sub>eff,1,Rd</sub> = {} kN",
+  "en": "Plate {} × {} mm, {}, {} × {} holes d₀ = {} mm · N<sub>u,Rd</sub> = {} kN · V<sub>eff,1,Rd</sub> = {} kN"
+ },
+ {
+  "id": "11-16",
+  "de": "Brand R {}",
+  "en": "Fire R {}"
+ },
+ {
+  "id": "11-17",
+  "de": "Die {} durchlaufenden Stäbe (F<sub>Rd</sub> = {} kN) decken die verschobene Zugkraftlinie überall — gestaffelte Stäbe sind rechnerisch nicht nötig.",
+  "en": "The {} continuous bars (F<sub>Rd</sub> = {} kN) cover the shifted tensile force line everywhere — curtailed bars are not required."
+ },
+ {
+  "id": "11-18",
+  "de": "R {}, einachsig gespannt, statisch bestimmt, von unten beflammt",
+  "en": "R {}, spanning one way, simply supported, exposed from below"
+ },
+ {
+  "id": "11-19",
+  "de": "R {}, statisch bestimmt gelagert, dreiseitig beflammt — mögliche Kombinationen b<sub>min</sub>/a",
+  "en": "R {}, simply supported, exposed on three sides — possible combinations b<sub>min</sub>/a"
+ },
+ {
+  "id": "11-20",
+  "de": "Randabstand quer e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = {} mm",
+  "en": "Edge distance across e<sub>2</sub> = (b − (n<sub>2</sub> − 1)·p<sub>2</sub>)/2 = {} mm"
+ },
+ {
+  "id": "11-21",
+  "de": "Restquerschnitt h<sub>ro</sub> = {} mm, h<sub>ru</sub> = {} mm",
+  "en": "Remaining depth h<sub>ro</sub> = {} mm, h<sub>ru</sub> = {} mm"
+ },
+ {
+  "id": "11-22",
+  "de": "Tabellenwerte für t = {} mm, Höhe über Gelände bis {} m (vierseitig gehalten)",
+  "en": "Table values for t = {} mm, height above ground up to {} m (supported on four sides)"
+ },
+ {
+  "id": "11-23",
+  "de": "Verlegemaß aus der Expositionsklasse {}: c<sub>v</sub> = {} mm",
+  "en": "Cover from exposure class {}: c<sub>v</sub> = {} mm"
+ },
+ {
+  "id": "11-24",
+  "de": "a = {} mm {} a<sub>erf</sub> = {} mm",
+  "en": "a = {} mm {} a<sub>req</sub> = {} mm"
+ },
+ {
+  "id": "11-25",
+  "de": "aufnehmbar {} Ø{}: F<sub>Rd</sub> = <b>{} kN</b> {} {} kN",
+  "en": "resistance {} Ø{}: F<sub>Rd</sub> = <b>{} kN</b> {} {} kN"
+ },
+ {
+  "id": "11-26",
+  "de": "aufnehmbar {} Ø{}: F<sub>Rd</sub> = {}·{}·{} = <b>{} kN</b> {} {} kN",
+  "en": "resistance {} Ø{}: F<sub>Rd</sub> = {}·{}·{} = <b>{} kN</b> {} {} kN"
+ },
+ {
+  "id": "11-27",
+  "de": "b = {} cm, h = {} cm, {}, Bügel Ø{}",
+  "en": "b = {} cm, h = {} cm, {}, stirrups Ø{}"
+ },
+ {
+  "id": "11-28",
+  "de": "b = {} mm → a<sub>erf</sub> = <b>{} mm</b>",
+  "en": "b = {} mm → a<sub>req</sub> = <b>{} mm</b>"
+ },
+ {
+  "id": "11-29",
+  "de": "b = {} mm, h = {} mm, l = {} m, Dachneigung α = {}°",
+  "en": "b = {} mm, h = {} mm, l = {} m, roof pitch α = {}°"
+ },
+ {
+  "id": "11-30",
+  "de": "dreiseitig gehalten (ein freier senkrechter Rand): halber Tabellenwert → <b>{} m²</b>",
+  "en": "supported on three sides (one free vertical edge): half the table value → <b>{} m²</b>"
+ },
+ {
+  "id": "11-31",
+  "de": "durchlaufend {} Ø{}: F<sub>Rd</sub> = {} kN",
+  "en": "continuous {} Ø{}: F<sub>Rd</sub> = {} kN"
+ },
+ {
+  "id": "11-32",
+  "de": "gestaffelte Stäbe ({} Ø{}) mit l<sub>bd</sub> = {} mm verlängert: von x = <b>{} m</b> bis <b>{} m</b> (Länge {} m)",
+  "en": "curtailed bars ({} Ø{}) extended by l<sub>bd</sub> = {} mm: from x = <b>{} m</b> to <b>{} m</b> (length {} m)"
+ },
+ {
+  "id": "11-33",
+  "de": "h<sub>s,min</sub> = {} mm (Rohdecke mit Estrich) · a = {} mm",
+  "en": "h<sub>s,min</sub> = {} mm (slab with screed) · a = {} mm"
+ },
+ {
+  "id": "11-34",
+  "de": "l = {} m · unten {} + {} Ø{}{}{} · a<sub>l</sub> = {} mm",
+  "en": "l = {} m · bottom {} + {} Ø{}{}{} · a<sub>l</sub> = {} mm"
+ },
+ {
+  "id": "11-35",
+  "de": "maßgebend N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = {} kN ({})",
+  "en": "governing N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) = {} kN ({})"
+ },
+ {
+  "id": "11-36",
+  "de": "mindestens 25 % der Feldbewehrung bis über die Auflager führen: {}/{} = {} % {} 25 %",
+  "en": "at least 25 % of the span reinforcement taken over the supports: {}/{} = {} % {} 25 %"
+ },
+ {
+  "id": "11-37",
+  "de": "nicht durchgeschweißt, a = {} mm",
+  "en": "partial penetration, a = {} mm"
+ },
+ {
+  "id": "11-38",
+  "de": "oben Ø{} ({}): l<sub>b,rqd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>",
+  "en": "top Ø{} ({}): l<sub>b,rqd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>"
+ },
+ {
+  "id": "11-39",
+  "de": "q<sub>v</sub> = {} kN/m lotrecht, q<sub>n</sub> = {} kN/m rechtwinklig zur Dachfläche",
+  "en": "q<sub>v</sub> = {} kN/m vertical, q<sub>n</sub> = {} kN/m perpendicular to the roof"
+ },
+ {
+  "id": "11-40",
+  "de": "rechteckig {} × {} mm",
+  "en": "rectangular {} × {} mm"
+ },
+ {
+  "id": "11-41",
+  "de": "rechts: Zugkraft endet bei x = {} m → Stablänge ab Achse B ≥ <b>{} m</b>",
+  "en": "right: tension ends at x = {} m → bar length from axis B ≥ <b>{} m</b>"
+ },
+ {
+  "id": "11-42",
+  "de": "rund Ø {} mm",
+  "en": "circular Ø {} mm"
+ },
+ {
+  "id": "11-43",
+  "de": "t = {} mm, l = {} m, h = {} m, {} gehalten, Höhe über Gelände bis {} m",
+  "en": "t = {} mm, l = {} m, h = {} m, supported on {}, height above ground up to {} m"
+ },
+ {
+  "id": "11-44",
+  "de": "t = {} mm, {} × {} m, {} gehalten · A = {} m², zulässig {} m²",
+  "en": "t = {} mm, {} × {} m, supported on {} · A = {} m², permissible {} m²"
+ },
+ {
+  "id": "11-45",
+  "de": "unten {} Ø{} durchlaufend + {} Ø{} gestaffelt, oben {} Ø{}",
+  "en": "bottom {} Ø{} continuous + {} Ø{} curtailed, top {} Ø{}"
+ },
+ {
+  "id": "11-46",
+  "de": "unten Ø{} (guter Verbund): l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>",
+  "en": "bottom Ø{} (good bond): l<sub>b,rqd</sub> = Ø/4·f<sub>yd</sub>/f<sub>bd</sub> = {} mm → l<sub>bd</sub> = <b>{} mm</b>"
+ },
+ {
+  "id": "11-47",
+  "de": "unten: d = {} mm, z = 0,9·d = {} mm · oben: d = {} mm, z = {} mm",
+  "en": "bottom: d = {} mm, z = 0.9·d = {} mm · top: d = {} mm, z = {} mm"
+ },
+ {
+  "id": "11-48",
+  "de": "verschobene Zugkraftlinie > {} kN zwischen x = {} m und {} m",
+  "en": "shifted tensile force line > {} kN between x = {} m and {} m"
+ },
+ {
+  "id": "11-49",
+  "de": "zulässig {} m²",
+  "en": "permissible {} m²"
+ },
+ {
+  "id": "11-50",
+  "de": "{} R {} · a = {} mm (erforderlich {} mm)",
+  "en": "{} R {} · a = {} mm (required {} mm)"
+ },
+ {
+  "id": "11-51",
+  "de": "{} Reihen in Kraftrichtung × {} quer, d<sub>0</sub> = {} mm, e<sub>1</sub> = {}, p<sub>1</sub> = {}, p<sub>2</sub> = {} mm",
+  "en": "{} rows in load direction × {} across, d<sub>0</sub> = {} mm, e<sub>1</sub> = {}, p<sub>1</sub> = {}, p<sub>2</sub> = {} mm"
+ },
+ {
+  "id": "11-52",
+  "de": "{}, Blech t = {} mm, l = {} mm, {}",
+  "en": "{}, plate t = {} mm, l = {} mm, {}"
+ },
+ {
+  "id": "11-53",
+  "de": "{}, Nutzungsklasse {}, KLED „{}“",
+  "en": "{}, service class {}, load duration “{}”"
+ },
+ {
+  "id": "11-54",
+  "de": "{}, Nutzungsklasse {}, KLED „{}“, k<sub>mod</sub> = {}",
+  "en": "{}, service class {}, load duration “{}”, k<sub>mod</sub> = {}"
+ },
+ {
+  "id": "11-55",
+  "de": "{}, h<sub>d</sub> = {} mm{}, h<sub>ro</sub> = {} mm, l<sub>v</sub> = {} mm, Träger {} × {} mm",
+  "en": "{}, h<sub>d</sub> = {} mm{}, h<sub>ro</sub> = {} mm, l<sub>v</sub> = {} mm, beam {} × {} mm"
+ },
+ {
+  "id": "11-56",
+  "de": "Ø{}{}, Expositionsklasse {}",
+  "en": "Ø{}{}, exposure class {}"
+ },
+ {
+  "id": "11-57",
+  "de": "ε = 1,0: {} m² · ε ≥ 2,0: {} m² → bei ε = {} linear: <b>{} m²</b>",
+  "en": "ε = 1.0: {} m² · ε ≥ 2.0: {} m² → at ε = {} linear: <b>{} m²</b>"
+ },
+ {
+  "id": "11-58",
+  "de": "Lage des Anschlusses: Abstand des am weitesten vom beanspruchten Rand entfernten Verbindungsmittels",
+  "en": "Position of the connection: distance of the fastener furthest from the loaded edge"
+ },
+ {
+  "id": "11-59",
+  "de": "Lastaufteilung auf die Hauptachsen",
+  "en": "Load split onto the principal axes"
+ },
+ {
+  "id": "11-60",
+  "de": "Lasten (Bemessungswerte)",
+  "en": "Loads (design values)"
+ },
+ {
+  "id": "11-61",
+  "de": "Liegt das Verbindungsmittel in den oberen 30 % der Höhe (vom beanspruchten Rand aus gesehen weit weg), wird der Querzug sicher abgetragen.",
+  "en": "If the fastener lies in the upper 30 % of the depth (far from the loaded edge), the transverse tension is carried safely."
+ },
+ {
+  "id": "11-62",
+  "de": "Länge der oberen Stäbe ab Auflagerachse (Zugkraftlinie verschoben, plus l<sub>bd</sub>)",
+  "en": "Length of the top bars from the support axis (shifted tensile force line, plus l<sub>bd</sub>)"
+ },
+ {
+  "id": "11-63",
+  "de": "Längeres Schraubenbild in Kraftrichtung (e<sub>1</sub>, p<sub>1</sub>, mehr Reihen), dickeres Blech oder größerer Abstand p<sub>2</sub>.",
+  "en": "Longer bolt pattern in load direction (e<sub>1</sub>, p<sub>1</sub>, more rows), thicker plate or larger spacing p<sub>2</sub>."
+ },
+ {
+  "id": "11-64",
+  "de": "Mauerwerk — Ausfachungswand",
+  "en": "Masonry — infill wall"
+ },
+ {
+  "id": "11-65",
+  "de": "Mehr oder dickere Stäbe unten; mit der Biegebemessung im Modus Balken abgleichen.",
+  "en": "More or larger bars at the bottom; compare with the bending design in the Beam mode."
+ },
+ {
+  "id": "11-66",
+  "de": "Mehr oder dickere Stäbe über der Stütze.",
+  "en": "More or larger bars over the support."
+ },
+ {
+  "id": "11-67",
+  "de": "Mehrere Verbindungsmittelreihen (k<sub>r</sub> < 1), Anschlüsse beidseitig des Trägers, Querzugverstärkungen und die Tragfähigkeit der Verbindungsmittel selbst (Modus Verbindung).",
+  "en": "Several rows of fasteners (k<sub>r</sub> < 1), connections on both sides of the beam, reinforcement against transverse tension and the capacity of the fasteners themselves (Connection mode)."
+ },
+ {
+  "id": "11-68",
+  "de": "Mindestbreite",
+  "en": "Minimum width"
+ },
+ {
+  "id": "11-69",
+  "de": "Mindestdicke",
+  "en": "Minimum thickness"
+ },
+ {
+  "id": "11-70",
+  "de": "Mittelpfette — Doppelbiegung",
+  "en": "Intermediate purlin — biaxial bending"
+ },
+ {
+  "id": "11-71",
+  "de": "Mitwirkende Länge und Volumenbeiwert",
+  "en": "Effective length and volume factor"
+ },
+ {
+  "id": "11-72",
+  "de": "Momentenlinie aus Gleichstreckenlast und Stützmomenten",
+  "en": "Moment diagram from uniform load and support moments"
+ },
+ {
+  "id": "11-73",
+  "de": "Nachweis nach DIN EN 1992-1-2 mit deutschem NA über Mindestabmessungen und Achsabstand der Bewehrung (Tab. 5.5 für Balken, Tab. 5.8 für Platten).",
+  "en": "Verification to DIN EN 1992-1-2 with the German NA by minimum dimensions and axis distance of the reinforcement (Tab. 5.5 for beams, Tab. 5.8 for slabs)."
+ },
+ {
+  "id": "11-74",
+  "de": "Naht",
+  "en": "Weld"
+ },
+ {
+  "id": "11-75",
+  "de": "Nahtmitte: Normalspannung aus N und größte Schubspannung (Parabel)",
+  "en": "Weld centre: normal stress from N and maximum shear stress (parabola)"
+ },
+ {
+  "id": "11-76",
+  "de": "Nebenträger am Hauptträger HT 1",
+  "en": "Secondary beam on main beam HT 1"
+ },
+ {
+  "id": "11-77",
+  "de": "Nettoquerschnitt",
+  "en": "Net section"
+ },
+ {
+  "id": "11-78",
+  "de": "Nicht durchgeschweißte Stumpfnaht",
+  "en": "Partial penetration butt weld"
+ },
+ {
+  "id": "11-79",
+  "de": "Nicht durchgeschweißte Stumpfnaht: wie eine Kehlnaht mit tief eingebranntem Wurzelmaß a (4.7.2)",
+  "en": "Partial penetration butt weld: like a fillet weld with a deep-penetration throat a (4.7.2)"
+ },
+ {
+  "id": "11-80",
+  "de": "Nichttragende Ausfachungswand",
+  "en": "Non-load-bearing infill wall"
+ },
+ {
+  "id": "11-81",
+  "de": "Nichttragende Ausfachungswand ohne rechnerischen Nachweis: zulässige Fläche nach Wanddicke, Seitenverhältnis, Halterung und Höhe über Gelände.",
+  "en": "Non-load-bearing infill wall without calculation: permissible area by wall thickness, aspect ratio, support and height above ground."
+ },
+ {
+  "id": "11-82",
+  "de": "Orange: Querzug an den gegenüberliegenden Ecken — dort reißt ein unverstärkter Träger zuerst.",
+  "en": "Orange: transverse tension at opposite corners — an unreinforced beam cracks there first."
+ },
+ {
+  "id": "11-83",
+  "de": "Pfette",
+  "en": "Purlin"
+ },
+ {
+  "id": "11-84",
+  "de": "Pfette mit Doppelbiegung",
+  "en": "Purlin in biaxial bending"
+ },
+ {
+  "id": "11-85",
+  "de": "Pfette senkrecht zur Dachfläche eingebaut: die lotrechte Last zerfällt in zwei Anteile",
+  "en": "Purlin installed perpendicular to the roof: the vertical load splits into two components"
+ },
+ {
+  "id": "11-86",
+  "de": "Platte, einachsig gespannt",
+  "en": "Slab, spanning one way"
+ },
+ {
+  "id": "11-87",
+  "de": "Plattenstreifen",
+  "en": "Slab strip"
+ },
+ {
+  "id": "11-88",
+  "de": "Pos. 11 — Unterzug, Feuerwiderstand",
+  "en": "Item 11 — downstand beam, fire resistance"
+ },
+ {
+  "id": "11-89",
+  "de": "Pos. 12 — Endfeld eines Durchlaufträgers",
+  "en": "Item 12 — end span of a continuous beam"
+ },
+ {
+  "id": "11-90",
+  "de": "Querschnitt, um α gedreht",
+  "en": "Cross-section, rotated by α"
+ },
+ {
+  "id": "11-91",
+  "de": "Querzug",
+  "en": "Transverse tension"
+ },
+ {
+  "id": "11-92",
+  "de": "Querzug (Holz)",
+  "en": "Transverse tension (timber)"
+ },
+ {
+  "id": "11-93",
+  "de": "Querzug am Durchbruchrand",
+  "en": "Transverse tension at the edge of the hole"
+ },
+ {
+  "id": "11-94",
+  "de": "Querzug am Queranschluss",
+  "en": "Transverse tension at a connection"
+ },
+ {
+  "id": "11-95",
+  "de": "Querzugkraft aus Querkraft und Moment",
+  "en": "Transverse tension force from shear and moment"
+ },
+ {
+  "id": "11-96",
+  "de": "Querzugtragfähigkeit (NA, NCI zu 8.1.4)",
+  "en": "Splitting capacity (NA, NCI to 8.1.4)"
+ },
+ {
+  "id": "11-97",
+  "de": "Querzugtragfähigkeit eines Anschlusses quer zur Faser nach DIN EN 1995-1-1 mit NA (NCI zu 8.1.4), Vergleich mit der Formel der Grundnorm.",
+  "en": "Splitting capacity of a connection loaded perpendicular to the grain to DIN EN 1995-1-1 with NA (NCI to 8.1.4), compared with the formula of the main standard."
+ },
+ {
+  "id": "11-98",
+  "de": "Rand der Naht: Normalspannung aus N und M (Schub dort null)",
+  "en": "Weld end: normal stress from N and M (shear zero there)"
+ },
+ {
+  "id": "11-99",
+  "de": "Randstreifen außen (zwischen Lochreihe und Blechrand)",
+  "en": "Outer edge strips (between row of holes and plate edge)"
+ },
+ {
+  "id": "11-100",
+  "de": "Rechts: Normalspannung über die Nahtlänge aus Normalkraft und Biegung in Blechebene.",
+  "en": "Right: normal stress along the weld from axial force and in-plane bending."
+ },
+ {
+  "id": "11-101",
+  "de": "Restquerschnitt oben und unten > 0",
+  "en": "Remaining depth above and below > 0"
+ },
+ {
+  "id": "11-102",
+  "de": "Richtungsbezogenes Verfahren (4.5.3.2) mit β<sub>w</sub>",
+  "en": "Directional method (4.5.3.2) with β<sub>w</sub>"
+ },
+ {
+  "id": "11-103",
+  "de": "Schnittgrößen am Durchbruch",
+  "en": "Internal forces at the hole"
+ },
+ {
+  "id": "11-104",
+  "de": "Schnittgrößen am Einfeldträger",
+  "en": "Internal forces of the single span"
+ },
+ {
+  "id": "11-105",
+  "de": "Schraubenbild passt nicht in die Breite b",
+  "en": "Bolt pattern does not fit into the width b"
+ },
+ {
+  "id": "11-106",
+  "de": "Schub aus zwei Richtungen",
+  "en": "Shear in two directions"
+ },
+ {
+  "id": "11-107",
+  "de": "Schub im Restquerschnitt",
+  "en": "Shear in the remaining section"
+ },
+ {
+  "id": "11-108",
+  "de": "Seitenverhältnis und Fläche",
+  "en": "Aspect ratio and area"
+ },
+ {
+  "id": "11-109",
+  "de": "Spaltgefahr",
+  "en": "risk of splitting"
+ },
+ {
+  "id": "11-110",
+  "de": "Spannungen in der Nahtfläche (senkrecht zur Kraft): σ⊥ aus N und M, τ∥ aus V",
+  "en": "Stresses in the weld area (perpendicular to the force): σ⊥ from N and M, τ∥ from V"
+ },
+ {
+  "id": "11-111",
+  "de": "Staffelung der Feldbewehrung",
+  "en": "Curtailment of the span reinforcement"
+ },
+ {
+  "id": "11-112",
+  "de": "Stahl — Stumpfnaht",
+  "en": "Steel — butt weld"
+ },
+ {
+  "id": "11-113",
+  "de": "Stahl — Zugstab mit Lochschwächung",
+  "en": "Steel — tension member with holes"
+ },
+ {
+  "id": "11-114",
+  "de": "Stahlbeton — Brandschutz nach Tabellen",
+  "en": "Reinforced concrete — fire design by tables"
+ },
+ {
+  "id": "11-115",
+  "de": "Stahlbeton — Zugkraftdeckung am Durchlaufträger",
+  "en": "Reinforced concrete — curtailment in a continuous beam"
+ },
+ {
+  "id": "11-116",
+  "de": "Statische Nutzhöhe und innerer Hebelarm",
+  "en": "Effective depth and lever arm"
+ },
+ {
+  "id": "11-117",
+  "de": "Stumpfnaht",
+  "en": "Butt weld"
+ },
+ {
+  "id": "11-118",
+  "de": "Stumpfnähte an Profilen (Stegnaht und Gurtnähte getrennt), unterschiedliche Blechdicken mit Abschrägung, Ermüdung (Kerbfälle), Prüfumfang und Bewertungsgruppen nach DIN EN ISO 5817 sowie T-Stöße mit Kehlnaht-Stumpfnaht-Kombination.",
+  "en": "Butt welds on sections (web and flange welds separately), different plate thicknesses with tapers, fatigue (detail categories), inspection and quality levels to DIN EN ISO 5817 and T-joints combining fillet and butt welds."
+ },
+ {
+  "id": "11-119",
+  "de": "Stützbewehrung oben",
+  "en": "Top support reinforcement"
+ },
+ {
+  "id": "11-120",
+  "de": "Stützen (Methode A, Tab. 5.2a), Wände, Durchlaufträger und -platten (Tab. 5.6/5.9), zweiachsig gespannte Platten, Flachdecken, Spannbeton, die vereinfachten und allgemeinen Rechenverfahren und Abplatzungen bei hochfestem Beton.",
+  "en": "Columns (method A, Tab. 5.2a), walls, continuous beams and slabs (Tab. 5.6/5.9), two-way slabs, flat slabs, prestressed concrete, the simplified and advanced calculation methods and spalling of high-strength concrete."
+ },
+ {
+  "id": "11-121",
+  "de": "Stützweite > 0",
+  "en": "Span > 0"
+ },
+ {
+  "id": "11-122",
+  "de": "Tabellenwerte für Balken (EN 1992-1-2, Tab. 5.5)",
+  "en": "Table values for beams (EN 1992-1-2, Tab. 5.5)"
+ },
+ {
+  "id": "11-123",
+  "de": "Tabellenwerte für Platten (EN 1992-1-2, Tab. 5.8)",
+  "en": "Table values for slabs (EN 1992-1-2, Tab. 5.8)"
+ },
+ {
+  "id": "11-124",
+  "de": "Unverstärkte Durchbrüche nur in den Nutzungsklassen 1 und 2; Ecken rechteckiger Durchbrüche mit r ≥ 15 mm ausrunden.",
+  "en": "Unreinforced holes only in service classes 1 and 2; round off the corners of rectangular holes with r ≥ 15 mm."
+ },
+ {
+  "id": "11-125",
+  "de": "Unverstärkter runder oder rechteckiger Durchbruch nach NA, NCI NA.6.7: Grenzen, Querzug aus Querkraft und Moment, Schub und Biegung im Restquerschnitt.",
+  "en": "Unreinforced circular or rectangular hole per NA, NCI NA.6.7: limits, transverse tension from shear and moment, shear and bending in the remaining section."
+ },
+ {
+  "id": "11-126",
+  "de": "Verankerungslänge über den Punkt hinaus, an dem der Stab rechnerisch nicht mehr gebraucht wird",
+  "en": "Anchorage length beyond the point where the bar is no longer required"
+ },
+ {
+  "id": "11-127",
+  "de": "Verlegemaß ≥ 0",
+  "en": "Cover ≥ 0"
+ },
+ {
+  "id": "11-128",
+  "de": "Versatzmaß, verschobene Zugkraftlinie, Staffelung der Feldbewehrung, Länge der Stützbewehrung und Mindestbewehrung an den Auflagern nach DIN EN 1992-1-1 mit NA, 9.2.1.",
+  "en": "Shift rule, shifted tensile force line, curtailment of the span reinforcement, length of the support reinforcement and minimum reinforcement at the supports to DIN EN 1992-1-1 with NA, 9.2.1."
+ },
+ {
+  "id": "11-129",
+  "de": "Versatzmaß: die Zugkraftlinie wird um a<sub>l</sub> in die ungünstige Richtung verschoben (Fachwerkmodell, senkrechte Bügel)",
+  "en": "Shift rule: the tensile force line is shifted by a<sub>l</sub> in the unfavourable direction (truss model, vertical stirrups)"
+ },
+ {
+  "id": "11-130",
+  "de": "Versetzte Lochreihen (s²/4p), Winkel mit einem Schenkel angeschlossen (β-Werte 3.10.3), exzentrische Blockversagen (V<sub>eff,2,Rd</sub>), die Schrauben selbst (Abscheren, Lochleibung — Modus Anschluss) und Ermüdung.",
+  "en": "Staggered rows of holes (s²/4p), angles connected by one leg (β values 3.10.3), eccentric block tearing (V<sub>eff,2,Rd</sub>), the bolts themselves (shear, bearing — Connection mode) and fatigue."
+ },
+ {
+  "id": "11-131",
+  "de": "Verstärkte Durchbrüche (innen und außen liegende Verstärkungen), mehrere Durchbrüche (Abstand l<sub>z</sub>), Durchbrüche in Vollholz und in der Nähe von Ausklinkungen sowie die Durchbiegung mit geschwächtem Querschnitt.",
+  "en": "Reinforced holes (internal and external reinforcement), several holes (spacing l<sub>z</sub>), holes in solid timber and near notches and the deflection of the weakened section."
+ },
+ {
+  "id": "11-132",
+  "de": "Voraussetzungen: Steinfestigkeitsklasse ≥ 12, Normalmauermörtel ≥ M 5 (NM IIa) oder Dünnbettmörtel, Halterungen am Rand kraftschlüssig.",
+  "en": "Requirements: unit strength class ≥ 12, general purpose mortar ≥ M 5 (NM IIa) or thin-layer mortar, edges restrained with force transfer."
+ },
+ {
+  "id": "11-133",
+  "de": "Zu wenige Stäbe laufen bis über die Auflager — dort fehlt die Mindestbewehrung.",
+  "en": "Too few bars continue over the supports — the minimum reinforcement is missing there."
+ },
+ {
+  "id": "11-134",
+  "de": "Zugband Z1 — Flachstahl",
+  "en": "Tie Z1 — flat bar"
+ },
+ {
+  "id": "11-135",
+  "de": "Zugkraftdeckung",
+  "en": "Curtailment"
+ },
+ {
+  "id": "11-136",
+  "de": "Zugkraftdeckung (Durchlaufträger)",
+  "en": "Curtailment (continuous beam)"
+ },
+ {
+  "id": "11-137",
+  "de": "Zugkraftdeckung am Durchlaufträger",
+  "en": "Curtailment in a continuous beam"
+ },
+ {
+  "id": "11-138",
+  "de": "Zugkraftlinie und Deckungslinie (unten: Feld, oben: Stützen)",
+  "en": "Tensile force line and resistance line (bottom: span, top: supports)"
+ },
+ {
+  "id": "11-139",
+  "de": "Zugstab mit Lochschwächung",
+  "en": "Tension member with holes"
+ },
+ {
+  "id": "11-140",
+  "de": "Zugstab mit Schraubenanschluss",
+  "en": "Tension member with bolted connection"
+ },
+ {
+  "id": "11-141",
+  "de": "Zugtragfähigkeit Bruttoquerschnitt (Fließen)",
+  "en": "Tension resistance of the gross section (yielding)"
+ },
+ {
+  "id": "11-142",
+  "de": "Zugtragfähigkeit Nettoquerschnitt (Bruch)",
+  "en": "Tension resistance of the net section (fracture)"
+ },
+ {
+  "id": "11-143",
+  "de": "Zulässige Ausfachungsfläche",
+  "en": "Permissible infill area"
+ },
+ {
+  "id": "11-144",
+  "de": "Zum Vergleich: Formel der Grundnorm EN 1995-1-1, Gl. (8.4), im NA ersetzt",
+  "en": "For comparison: formula of the main standard EN 1995-1-1, eq. (8.4), replaced in the NA"
+ },
+ {
+  "id": "11-145",
+  "de": "Zweiachsige Biegung mit km = 0,7 und Schub aus zwei Richtungen nach DIN EN 1995-1-1, 6.1.6 und 6.1.7, für eine senkrecht zur Dachfläche eingebaute Pfette.",
+  "en": "Biaxial bending with km = 0.7 and shear from two directions to DIN EN 1995-1-1, 6.1.6 and 6.1.7, for a purlin installed perpendicular to the roof."
+ },
+ {
+  "id": "11-146",
+  "de": "Zweiseitig gehaltene Wände, Wände mit Öffnungen, Ausfachungen mit Wanddicken zwischen den Tabellenwerten (hier auf den kleineren Wert abrunden), Wind über 100 m Höhe und der rechnerische Nachweis auf Plattenbiegung.",
+  "en": "Walls supported on two sides, walls with openings, infill walls with thicknesses between the table values (round down to the smaller value), wind above 100 m height and the calculation for plate bending."
+ },
+ {
+  "id": "11-147",
+  "de": "Zwischenwerte dürfen linear eingeschaltet werden",
+  "en": "Intermediate values may be interpolated linearly"
+ },
+ {
+  "id": "11-148",
+  "de": "beanspruchter Rand",
+  "en": "loaded edge"
+ },
+ {
+  "id": "11-149",
+  "de": "bei",
+  "en": "at"
+ },
+ {
+  "id": "11-150",
+  "de": "durchgeschweißt",
+  "en": "full penetration"
+ },
+ {
+  "id": "11-151",
+  "de": "einlagig",
+  "en": "one layer"
+ },
+ {
+  "id": "11-152",
+  "de": "frei",
+  "en": "free"
+ },
+ {
+  "id": "11-153",
+  "de": "gestaffelte Stäbe ≥ 0",
+  "en": "curtailed bars ≥ 0"
+ },
+ {
+  "id": "11-154",
+  "de": "größere/kleinere Seite",
+  "en": "longer/shorter side"
+ },
+ {
+  "id": "11-155",
+  "de": "guter Verbund, h ≤ 300 mm",
+  "en": "good bond, h ≤ 300 mm"
+ },
+ {
+  "id": "11-156",
+  "de": "h_ro, h_ru ≥ 0,25·h",
+  "en": "h_ro, h_ru ≥ 0.25·h"
+ },
+ {
+  "id": "11-157",
+  "de": "k<sub>m</sub> = 0,7 für Rechteckquerschnitte: die größten Spannungen treffen nur an einer Ecke zusammen",
+  "en": "k<sub>m</sub> = 0.7 for rectangular sections: the largest stresses only coincide at one corner"
+ },
+ {
+  "id": "11-158",
+  "de": "kein Nachweis nötig",
+  "en": "no check required"
+ },
+ {
+  "id": "11-159",
+  "de": "mehrlagig",
+  "en": "several layers"
+ },
+ {
+  "id": "11-160",
+  "de": "mindestens 1 Schraube je Richtung",
+  "en": "at least 1 bolt in each direction"
+ },
+ {
+  "id": "11-161",
+  "de": "mindestens 2 durchlaufende Stäbe",
+  "en": "at least 2 continuous bars"
+ },
+ {
+  "id": "11-162",
+  "de": "mäßiger Verbund, h > 300 mm",
+  "en": "poor bond, h > 300 mm"
+ },
+ {
+  "id": "11-163",
+  "de": "obere Stäbe über den Stützen ≥ 2",
+  "en": "top bars over the supports ≥ 2"
+ },
+ {
+  "id": "11-164",
+  "de": "rechteckig",
+  "en": "rectangular"
+ },
+ {
+  "id": "11-165",
+  "de": "rund",
+  "en": "circular"
+ },
+ {
+  "id": "11-166",
+  "de": "Verlegemaß vorgegeben: c<sub>v</sub> = {} mm (aus der Expositionsklasse {}: {} mm)",
+  "en": "Cover given: c<sub>v</sub> = {} mm (from exposure class {}: {} mm)"
+ },
+ {
+  "id": "11-167",
+  "de": "b = {} mm < {} mm — kleiner als die kleinste Tabellenbreite",
+  "en": "b = {} mm < {} mm — smaller than the smallest table width"
+ },
+ {
+  "id": "11-168",
+  "de": "einlagige Bewehrung und b < {} mm: Eckstäbe a<sub>sd</sub> = a + 10 mm → <b>{} mm</b>",
+  "en": "one layer of reinforcement and b < {} mm: corner bars a<sub>sd</sub> = a + 10 mm → <b>{} mm</b>"
+ },
+ {
+  "id": "11-169",
+  "de": "links: Zugkraft endet bei x = {} m → Stablänge ab Achse A ≥ <b>{} m</b>",
+  "en": "left: tension ends at x = {} m → bar length from axis A ≥ <b>{} m</b>"
+ },
+ {
+  "id": "11-170",
+  "de": " > 0,7 → Querzugnachweis nach NA nicht erforderlich",
+  "en": " > 0.7 → no splitting check required per NA"
+ },
+ {
+  "id": "11-171",
+  "de": ", Nordorientierung",
+  "en": ", north orientation"
+ },
+ {
+  "id": "11-172",
+  "de": ", Sonnenschutzglas",
+  "en": ", solar control glass"
+ },
+ {
+  "id": "11-173",
+  "de": ", passive Kühlung",
+  "en": ", passive cooling"
+ },
+ {
+  "id": "11-174",
+  "de": "0 < s_Ziel < H",
+  "en": "0 < s_target < H"
+ },
+ {
+  "id": "11-175",
+  "de": "Abminderung des Steiner-Anteils durch die Nachgiebigkeit der Verbindungsmittel",
+  "en": "Reduction of the parallel-axis term by the slip of the connectors"
+ },
+ {
+  "id": "11-176",
+  "de": "Abminderung nach Marcus: die Drillsteifigkeit der Platte entlastet die Streifen",
+  "en": "Reduction after Marcus: the torsional stiffness of the slab relieves the strips"
+ },
+ {
+  "id": "11-177",
+  "de": "Absenkung",
+  "en": "Drawdown"
+ },
+ {
+  "id": "11-178",
+  "de": "Absenkungstrichter aller Brunnen überlagert; die Brunnen stehen auf einem Kreis um die Baugrube.",
+  "en": "Drawdown cones of all wells superimposed; the wells stand on a circle around the excavation."
+ },
+ {
+  "id": "11-179",
+  "de": "Abstände der Zugschrauben (Reihe unter dem Zugflansch)",
+  "en": "Distances of the tension bolts (row below the tension flange)"
+ },
+ {
+  "id": "11-180",
+  "de": "Allseitig gelenkig gelagerte Rechteckplatte: Lastaufteilung und Feldmomente nach Marcus, Biegebemessung in beiden Richtungen mit Mindestbewehrung.",
+  "en": "Rectangular slab simply supported on all edges: load split and span moments after Marcus, bending design in both directions with minimum reinforcement."
+ },
+ {
+  "id": "11-181",
+  "de": "Anteile des zulässigen Sonneneintragskennwerts",
+  "en": "Components of the permissible solar input value"
+ },
+ {
+  "id": "11-182",
+  "de": "Aushubtiefe > 0",
+  "en": "Excavation depth > 0"
+ },
+ {
+  "id": "11-183",
+  "de": "Außenliegender Sonnenschutz (kleineres F<sub>C</sub>), Sonnenschutzglas, kleinere Fenster, erhöhte Nachtlüftung oder schwerere Bauart.",
+  "en": "External solar shading (smaller F<sub>C</sub>), solar control glass, smaller windows, increased night ventilation or heavier construction."
+ },
+ {
+  "id": "11-184",
+  "de": "Axial belasteter Bohrpfahl",
+  "en": "Axially loaded bored pile"
+ },
+ {
+  "id": "11-185",
+  "de": "Bauphysik — Sommerlicher Wärmeschutz",
+  "en": "Building physics — summer thermal protection"
+ },
+ {
+  "id": "11-186",
+  "de": "Beton: Druck am oberen Rand",
+  "en": "Concrete: compression at the top edge"
+ },
+ {
+  "id": "11-187",
+  "de": "Bewehrung in x-Richtung (untere Lage, kurze Spannweite)",
+  "en": "Reinforcement in x direction (bottom layer, short span)"
+ },
+ {
+  "id": "11-188",
+  "de": "Bewehrung in y-Richtung (obere Lage der Feldbewehrung)",
+  "en": "Reinforcement in y direction (upper layer of the span reinforcement)"
+ },
+ {
+  "id": "11-189",
+  "de": "Biegesteifer Stirnplattenstoß",
+  "en": "Moment-resisting end plate splice"
+ },
+ {
+  "id": "11-190",
+  "de": "Bohrpfahl",
+  "en": "Bored pile"
+ },
+ {
+  "id": "11-191",
+  "de": "Brunnen",
+  "en": "Wells"
+ },
+ {
+  "id": "11-192",
+  "de": "Brunnen auf einem Kreis um die Baugrube: Reichweite nach Sichardt, Absenkung durch Überlagerung (Dupuit-Thiem) und Fassungsvermögen.",
+  "en": "Wells on a circle around the excavation: radius of influence after Sichardt, drawdown by superposition (Dupuit-Thiem) and well capacity."
+ },
+ {
+  "id": "11-193",
+  "de": "Bündiger Stirnplattenstoß mit einer Zugschraubenreihe nach der Komponentenmethode (DIN EN 1993-1-8, 6.2, vereinfacht): T-Stummel, Steg auf Zug, Flansch auf Druck.",
+  "en": "Flush end plate splice with one tension bolt row by the component method (DIN EN 1993-1-8, 6.2, simplified): T-stub, web in tension, flange in compression."
+ },
+ {
+  "id": "11-194",
+  "de": "Charakteristischer Pfahlwiderstand",
+  "en": "Characteristic pile resistance"
+ },
+ {
+  "id": "11-195",
+  "de": "DIN 4108-2, 8.3 (Sonneneintragskennwerte, Wohngebäude)",
+  "en": "DIN 4108-2, 8.3 (solar input values, residential buildings)"
+ },
+ {
+  "id": "11-196",
+  "de": "DIN EN 1992-1-1 mit NA, 5.8.9",
+  "en": "DIN EN 1992-1-1 with NA, 5.8.9"
+ },
+ {
+  "id": "11-197",
+  "de": "DIN EN 1992-1-1 mit NA; Schnittgrößen nach Marcus (allseitig gelenkig)",
+  "en": "DIN EN 1992-1-1 with NA; internal forces after Marcus (simply supported on all edges)"
+ },
+ {
+  "id": "11-198",
+  "de": "DIN EN 1993-1-8 mit NA, 6.2 (Komponentenmethode, vereinfacht)",
+  "en": "DIN EN 1993-1-8 with NA, 6.2 (component method, simplified)"
+ },
+ {
+  "id": "11-199",
+  "de": "DIN EN 1995-1-1 mit NA, Anhang B (γ-Verfahren)",
+  "en": "DIN EN 1995-1-1 with NA, annex B (γ method)"
+ },
+ {
+  "id": "11-200",
+  "de": "DIN EN 1997-1 mit DIN 1054, EA-Pfähle (Erfahrungswerte)",
+  "en": "DIN EN 1997-1 with DIN 1054, EA-Pfähle (empirical values)"
+ },
+ {
+  "id": "11-201",
+  "de": "Das Spundwandprofil ist für das größte Moment zu schwach.",
+  "en": "The sheet pile section is too weak for the maximum moment."
+ },
+ {
+  "id": "11-202",
+  "de": "Dehnungsebene so, dass die inneren Kräfte N<sub>Ed</sub> ergeben (wie im Modus Stütze)",
+  "en": "Strain plane such that the internal forces give N<sub>Ed</sub> (as in the Column mode)"
+ },
+ {
+  "id": "11-203",
+  "de": "Der Brunnen kann die geplante Wassermenge nicht aufnehmen (Fassungsvermögen nach Sichardt).",
+  "en": "The well cannot take the planned discharge (capacity after Sichardt)."
+ },
+ {
+  "id": "11-204",
+  "de": "Der Brunnen kann so viel Wasser nicht zuführen: größerer Bohrdurchmesser, mehr Brunnen mit weniger Entnahme je Brunnen.",
+  "en": "The well cannot supply this much water: larger bore diameter, more wells with less discharge per well."
+ },
+ {
+  "id": "11-205",
+  "de": "Der Holzbalken ist für Zug und Biegung aus dem Verbundquerschnitt zu schwach.",
+  "en": "The timber beam is too weak for tension and bending in the composite section."
+ },
+ {
+  "id": "11-206",
+  "de": "Der vorhandene Sonneneintrag muss kleiner bleiben als die Summe der zulässigen Anteile.",
+  "en": "The solar input must stay smaller than the sum of the permissible components."
+ },
+ {
+  "id": "11-207",
+  "de": "Dickere Stirnplatte, Schrauben enger an den Steg (kleineres m), größere oder festere Schrauben — oder eine überstehende Stirnplatte mit zweiter Zugreihe.",
+  "en": "Thicker end plate, bolts closer to the web (smaller m), larger or stronger bolts — or an extended end plate with a second tension row."
+ },
+ {
+  "id": "11-208",
+  "de": "Die Bewehrung in der kurzen Richtung reicht für das Feldmoment m<sub>x</sub> nicht aus.",
+  "en": "The reinforcement in the short direction is not sufficient for the span moment m<sub>x</sub>."
+ },
+ {
+  "id": "11-209",
+  "de": "Die Bewehrung in der langen Richtung reicht für das Feldmoment m<sub>y</sub> nicht aus.",
+  "en": "The reinforcement in the long direction is not sufficient for the span moment m<sub>y</sub>."
+ },
+ {
+  "id": "11-210",
+  "de": "Die Brunnen fördern zu wenig Wasser, um den Grundwasserspiegel in der Mitte weit genug abzusenken.",
+  "en": "The wells pump too little water to lower the groundwater level at the centre far enough."
+ },
+ {
+  "id": "11-211",
+  "de": "Die Druckspannung am oberen Rand der Betonplatte übersteigt die Betonfestigkeit.",
+  "en": "The compressive stress at the top of the concrete slab exceeds the concrete strength."
+ },
+ {
+  "id": "11-212",
+  "de": "Die Ermittlung der Momente nach Theorie II. Ordnung je Richtung (Modus Stütze), die Kriterien 5.8.9(3), unter denen getrennt nachgewiesen werden darf, Seitenstäbe in der Tragfähigkeit, Rundstützen und das genaue Verfahren mit schräger Nulllinie.",
+  "en": "The second-order moments in each direction (Column mode), the criteria 5.8.9(3) under which separate checks are allowed, side bars in the resistance, circular columns and the exact method with an inclined neutral axis."
+ },
+ {
+  "id": "11-213",
+  "de": "Die Momente um beide Achsen zusammen übersteigen die Tragfähigkeit des Querschnitts bei dieser Normalkraft.",
+  "en": "The moments about both axes together exceed the resistance of the section at this axial force."
+ },
+ {
+  "id": "11-214",
+  "de": "Die Normalkraft ist größer als die Tragfähigkeit des Querschnitts — Querschnitt oder Bewehrung vergrößern.",
+  "en": "The axial force exceeds the resistance of the section — enlarge the section or the reinforcement."
+ },
+ {
+  "id": "11-215",
+  "de": "Die Schrauben am Druckflansch können die Querkraft nicht abscheren.",
+  "en": "The bolts at the compression flange cannot carry the shear force."
+ },
+ {
+  "id": "11-216",
+  "de": "Die Schubspannung im Holzbalken ist zu groß.",
+  "en": "The shear stress in the timber beam is too large."
+ },
+ {
+  "id": "11-217",
+  "de": "Die Spundwand bindet nicht tief genug ein — der Erdwiderstand vor dem Fuß hält dem Erddruck nicht stand.",
+  "en": "The sheet piling is not embedded deep enough — the passive resistance in front of the toe cannot balance the earth pressure."
+ },
+ {
+  "id": "11-218",
+  "de": "Die Verbinder am Auflager müssen mehr Schubkraft übertragen, als sie können.",
+  "en": "The connectors at the support have to transfer more shear than they can."
+ },
+ {
+  "id": "11-219",
+  "de": "Die Verbindungsmittel geben nach: jeder Teil biegt sich zum Teil selbst (Sprung der Spannung in der Fuge). Blau Druck im Beton, orange Zug und Biegung im Holz [N/mm²].",
+  "en": "The connectors slip: each part partly bends on its own (jump of the stress in the joint). Blue compression in the concrete, orange tension and bending in the timber [N/mm²]."
+ },
+ {
+  "id": "11-220",
+  "de": "Die Zugschraubenreihe mit Stirnplatte überträgt das Moment über den Hebelarm nicht.",
+  "en": "The tension bolt row with end plate cannot transfer the moment via the lever arm."
+ },
+ {
+  "id": "11-221",
+  "de": "Die kürzere Richtung trägt den größeren Lastanteil. Blau: Streifen in x-Richtung, orange: in y-Richtung.",
+  "en": "The shorter direction carries the larger share of the load. Blue: strip in x direction, orange: in y direction."
+ },
+ {
+  "id": "11-222",
+  "de": "Durch die Fenster gelangt zu viel Sonnenenergie in den Raum — er überhitzt im Sommer.",
+  "en": "Too much solar energy enters the room through the windows — it overheats in summer."
+ },
+ {
+  "id": "11-223",
+  "de": "EAB / DIN 1054, Bemessung nach Blum (vereinfacht)",
+  "en": "EAB / DIN 1054, design after Blum (simplified)"
+ },
+ {
+  "id": "11-224",
+  "de": "Einachsige Momententragfähigkeit bei N_Ed",
+  "en": "Uniaxial moment resistance at N_Ed"
+ },
+ {
+  "id": "11-225",
+  "de": "Einbindetiefe nach Blum",
+  "en": "Embedment depth after Blum"
+ },
+ {
+  "id": "11-226",
+  "de": "Einbindetiefe t > 0",
+  "en": "Embedment depth t > 0"
+ },
+ {
+  "id": "11-227",
+  "de": "Eingespannte oder durchlaufende Ränder (Stützmomente, Tafeln nach Czerny bzw. Stiglat/Wippel), Drillbewehrung in den Ecken und Eckabheben, Querkraft, Durchbiegung und Rissbreite.",
+  "en": "Fixed or continuous edges (support moments, tables after Czerny or Stiglat/Wippel), torsion reinforcement in the corners and corner uplift, shear, deflection and crack width."
+ },
+ {
+  "id": "11-228",
+  "de": "Engerer Abstand der Verbindungsmittel am Auflager oder tragfähigere Verbinder (z. B. Kerven).",
+  "en": "Closer connector spacing at the support or stronger connectors (e.g. notches)."
+ },
+ {
+  "id": "11-229",
+  "de": "Engerer Stababstand oder größerer Durchmesser.",
+  "en": "Closer bar spacing or larger diameter."
+ },
+ {
+  "id": "11-230",
+  "de": "Erddruck nach Rankine (glatte Wand, δ = 0, waagerechtes Gelände) — für den Erdwiderstand auf der sicheren Seite",
+  "en": "Earth pressure after Rankine (smooth wall, δ = 0, horizontal ground) — on the safe side for the passive resistance"
+ },
+ {
+  "id": "11-231",
+  "de": "Erddruckbeiwerte und Bemessungswerte",
+  "en": "Earth pressure coefficients and design values"
+ },
+ {
+  "id": "11-232",
+  "de": "Erreichte Absenkung",
+  "en": "Achieved drawdown"
+ },
+ {
+  "id": "11-233",
+  "de": "Exponent a aus dem Verhältnis N<sub>Ed</sub>/N<sub>Rd</sub> (0,1 → 1,0 · 0,7 → 1,5 · 1,0 → 2,0, linear dazwischen)",
+  "en": "Exponent a from the ratio N<sub>Ed</sub>/N<sub>Rd</sub> (0.1 → 1.0 · 0.7 → 1.5 · 1.0 → 2.0, linear in between)"
+ },
+ {
+  "id": "11-234",
+  "de": "Fassungsvermögen des Brunnens (Sichardt)",
+  "en": "Well capacity (Sichardt)"
+ },
+ {
+  "id": "11-235",
+  "de": "Freier Grundwasserspiegel, Überlagerung der Brunnen (Dupuit-Thiem)",
+  "en": "Free groundwater surface, superposition of the wells (Dupuit-Thiem)"
+ },
+ {
+  "id": "11-236",
+  "de": "Geometrie und Schrauben",
+  "en": "Geometry and bolts"
+ }
+]

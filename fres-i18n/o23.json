@@ -1,0 +1,990 @@
+{
+"23-0": {
+"fr": "<div class=\"calc-field\"><label>Neige s [kN/m²]</label><input type=\"number\" id=\"lw-s\" value=\"0.68\" step=\"any\" oninput=\"updateLW()\"></div>",
+"es": "<div class=\"calc-field\"><label>Nieve s [kN/m²]</label><input type=\"number\" id=\"lw-s\" value=\"0.68\" step=\"any\" oninput=\"updateLW()\"></div>"
+},
+"23-1": {
+"fr": "<div class=\"calc-field\"><label>Poids propre du mur par niveau [kN/m]</label><input type=\"number\" id=\"lw-gW\" value=\"9\" step=\"any\" oninput=\"updateLW()\"></div>",
+"es": "<div class=\"calc-field\"><label>Peso propio del muro por planta [kN/m]</label><input type=\"number\" id=\"lw-gW\" value=\"9\" step=\"any\" oninput=\"updateLW()\"></div>"
+},
+"23-2": {
+"fr": "<div class=\"calc-field\"><label>Effet de continuité</label><select id=\"lw-dlt\" onchange=\"updateLW()\"><option value=\"1\" selected>prendre en compte</option><option value=\"0\">non (poutre sur deux appuis)</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Efecto de continuidad</label><select id=\"lw-dlt\" onchange=\"updateLW()\"><option value=\"1\" selected>considerar</option><option value=\"0\">no (viga biapoyada)</option></select></div>"
+},
+"23-3": {
+"fr": "Mur intérieur sous {} planchers + toiture",
+"es": "Muro interior bajo {} forjados + cubierta"
+},
+"23-4": {
+"fr": "§Largeur d'influence du mur central",
+"es": "§Ancho tributario del muro central"
+},
+"23-5": {
+"fr": "!Hypothèse de poutre sur deux appuis : demi-portées à gauche et à droite",
+"es": "!Hipótesis de viga biapoyada: semiluces a izquierda y derecha"
+},
+"23-6": {
+"fr": "!Effet de continuité (poutre à deux travées, charge uniforme) : M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = {} m² par kN/m²",
+"es": "!Efecto de continuidad (viga de dos vanos, carga uniforme): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = {} m² por kN/m²"
+},
+"23-7": {
+"fr": "avec effet de continuité",
+"es": "con efecto de continuidad"
+},
+"23-8": {
+"fr": "§Charges caractéristiques en pied de mur",
+"es": "§Cargas características en la base del muro"
+},
+"23-9": {
+"fr": "N<sub>G</sub> = n · g<sub>k</sub> · b<sub>e</sub> + g<sub>toiture</sub> · b<sub>e</sub> + n · g<sub>mur</sub> = {} · {} · {} + {} · {} + {} · {} = {} kN/m",
+"es": "N<sub>G</sub> = n · g<sub>k</sub> · b<sub>e</sub> + g<sub>cubierta</sub> · b<sub>e</sub> + n · g<sub>muro</sub> = {} · {} · {} + {} · {} + {} · {} = {} kN/m"
+},
+"23-10": {
+"fr": "Charge d'exploitation prépondérante : 1,35 · N<sub>G</sub> + 1,5 · N<sub>Q</sub> + 1,5 · 0,5 · N<sub>S</sub> = {} kN/m",
+"es": "Sobrecarga de uso principal: 1,35 · N<sub>G</sub> + 1,5 · N<sub>Q</sub> + 1,5 · 0,5 · N<sub>S</sub> = {} kN/m"
+},
+"23-11": {
+"fr": "Neige prépondérante : 1,35 · N<sub>G</sub> + 1,5 · N<sub>S</sub> + 1,5 · 0,7 · N<sub>Q</sub> = {} kN/m",
+"es": "Nieve principal: 1,35 · N<sub>G</sub> + 1,5 · N<sub>S</sub> + 1,5 · 0,7 · N<sub>Q</sub> = {} kN/m"
+},
+"23-12": {
+"fr": "Charge d'exploitation",
+"es": "Sobrecarga de uso"
+},
+"23-13": {
+"fr": "!déterminant n<sub>Ed</sub> = {} kN/m ({} prépondérante ; ψ<sub>0</sub> = 0,7 pour cat. A, 0,5 pour la neige jusqu'à 1000 m)",
+"es": "!determinante n<sub>Ed</sub> = {} kN/m ({} principal; ψ<sub>0</sub> = 0,7 para cat. A, 0,5 para nieve hasta 1000 m)"
+},
+"23-14": {
+"fr": "sans effet de continuité",
+"es": "sin efecto de continuidad"
+},
+"23-15": {
+"fr": "<a class=\"applink\" href=\"#/baustatik/arbeitssatz/pvk\">→ Alternative : principe des travaux virtuels</a>",
+"es": "<a class=\"applink\" href=\"#/baustatik/arbeitssatz/pvk\">→ Alternativa: principio de los trabajos virtuales</a>"
+},
+"23-16": {
+"fr": "<a class=\"applink\" href=\"#/lastannahmen/lasten/schnee\">→ Pente de toiture et charge de neige</a>",
+"es": "<a class=\"applink\" href=\"#/lastannahmen/lasten/schnee\">→ Pendiente de cubierta y carga de nieve</a>"
+},
+"23-17": {
+"fr": "<a class=\"applink\" href=\"#/mathematik/geometrie/flaechen\">→ Autres surfaces avec centre de gravité et moment d'inertie</a>",
+"es": "<a class=\"applink\" href=\"#/mathematik/geometrie/flaechen\">→ Más superficies con centro de gravedad y momento de inercia</a>"
+},
+"23-18": {
+"fr": "<b>Méthode de Gauss</b> pour les systèmes plus grands : combiner les équations de façon à obtenir des zéros sous la diagonale (forme triangulaire), puis substituer en remontant de bas en haut. C'est ainsi que statiq·calc résout l'équation de rigidité K·u = F.",
+"es": "<b>Método de Gauss</b> para sistemas mayores: combinar las ecuaciones de modo que aparezcan ceros bajo la diagonal (forma triangular) y sustituir hacia atrás de abajo arriba. Así resuelve también statiq·calc la ecuación de rigidez K·u = F."
+},
+"23-19": {
+"fr": "<span class=\"st-n\">1</span><span>Hypothèse : l'axe neutre passe par le centre de gravité de la section homogénéisée</span>",
+"es": "<span class=\"st-n\">1</span><span>Hipótesis: el eje neutro pasa por el centro de gravedad de la sección homogeneizada</span>"
+},
+"23-20": {
+"fr": "<span class=\"st-n\">1</span><span>Matrice augmentée des coefficients (A | b)</span>",
+"es": "<span class=\"st-n\">1</span><span>Matriz ampliada de coeficientes (A | b)</span>"
+},
+"23-21": {
+"fr": "<span class=\"st-n\">1</span><span>Équilibre au nœud (traction positive, F = 10 kN vers le bas)</span>",
+"es": "<span class=\"st-n\">1</span><span>Equilibrio en el nudo (tracción positiva, F = 10 kN hacia abajo)</span>"
+},
+"23-22": {
+"fr": "<span class=\"st-n\">2</span><span>Coefficients</span>",
+"es": "<span class=\"st-n\">2</span><span>Coeficientes</span>"
+},
+"23-23": {
+"fr": "<span class=\"st-n\">2</span><span>Forme normale x² + p · x + q = 0 (diviser par b/2)</span>",
+"es": "<span class=\"st-n\">2</span><span>Forma normal x² + p · x + q = 0 (dividir por b/2)</span>"
+},
+"23-24": {
+"fr": "<span class=\"st-n\">2</span><span>Colonne 1 : zéros sous le pivot a<sub>11</sub> = 2,000</span>",
+"es": "<span class=\"st-n\">2</span><span>Columna 1: ceros bajo el pivote a<sub>11</sub> = 2,000</span>"
+},
+"23-25": {
+"fr": "<span class=\"st-n\">3</span><span>Déterminant</span>",
+"es": "<span class=\"st-n\">3</span><span>Determinante</span>"
+},
+"23-26": {
+"fr": "<span class=\"st-n\">3</span><span>Colonne 2 : zéros sous le pivot a<sub>22</sub> = 0,500</span>",
+"es": "<span class=\"st-n\">3</span><span>Columna 2: ceros bajo el pivote a<sub>22</sub> = 0,500</span>"
+},
+"23-27": {
+"fr": "<span class=\"st-n\">3</span><span>Formule p-q</span>",
+"es": "<span class=\"st-n\">3</span><span>Fórmula p-q</span>"
+},
+"23-28": {
+"fr": "<span class=\"st-n\">4</span><span>Règle de Cramer</span>",
+"es": "<span class=\"st-n\">4</span><span>Regla de Cramer</span>"
+},
+"23-29": {
+"fr": "<span class=\"st-n\">4</span><span>Vérification</span>",
+"es": "<span class=\"st-n\">4</span><span>Comprobación</span>"
+},
+"23-30": {
+"fr": "<span class=\"st-n\">4</span><span>Substitution à rebours</span>",
+"es": "<span class=\"st-n\">4</span><span>Sustitución hacia atrás</span>"
+},
+"23-31": {
+"fr": "<span class=\"st-n\">5</span><span>Contrôle</span>",
+"es": "<span class=\"st-n\">5</span><span>Control</span>"
+},
+"23-32": {
+"fr": "<span class=\"st-n\">5</span><span>Vérification</span>",
+"es": "<span class=\"st-n\">5</span><span>Comprobación</span>"
+},
+"23-33": {
+"fr": "<span>A</span><b>α·r² (α en radians)</b>",
+"es": "<span>A</span><b>α·r² (α en radianes)</b>"
+},
+"23-34": {
+"fr": "<span>Diagonales</span><b>perpendiculaires, se coupent en leur milieu</b>",
+"es": "<span>Diagonales</span><b>perpendiculares, se cortan en su punto medio</b>"
+},
+"23-35": {
+"fr": "<span>Demi-sphère</span><b>V = 2/3 · π · r³</b>",
+"es": "<span>Semiesfera</span><b>V = 2/3 · π · r³</b>"
+},
+"23-36": {
+"fr": "<span>S</span><b>centre (symétrique)</b>",
+"es": "<span>S</span><b>centro (simétrico)</b>"
+},
+"23-37": {
+"fr": "<span>S</span><b>centre</b>",
+"es": "<span>S</span><b>centro</b>"
+},
+"23-38": {
+"fr": "<span>S</span><b>h/3 au-dessus de la base</b>",
+"es": "<span>S</span><b>h/3 sobre la base</b>"
+},
+"23-39": {
+"fr": "<span>S</span><b>h/3 au-dessus du côté</b>",
+"es": "<span>S</span><b>h/3 sobre el lado</b>"
+},
+"23-40": {
+"fr": "<span>Angles</span><b>60° chacun</b>",
+"es": "<span>Ángulos</span><b>60° cada uno</b>"
+},
+"23-41": {
+"fr": "<span>b</span><b>arc 2α·r</b>",
+"es": "<span>b</span><b>arco 2α·r</b>"
+},
+"23-42": {
+"fr": "<span>e</span><b>2h/5 au-dessus de la corde</b>",
+"es": "<span>e</span><b>2h/5 sobre la cuerda</b>"
+},
+"23-43": {
+"fr": "<span>e</span><b>2·a (diamètre sur coins)</b>",
+"es": "<span>e</span><b>2·a (distancia entre vértices)</b>"
+},
+"23-44": {
+"fr": "<span>s</span><b>a·√3 (distance entre faces)</b>",
+"es": "<span>s</span><b>a·√3 (distancia entre caras)</b>"
+},
+"23-45": {
+"fr": "<span>x<sub>S</sub></span><b>¾·b à partir du sommet</b>",
+"es": "<span>x<sub>S</sub></span><b>¾·b desde el vértice</b>"
+},
+"23-46": {
+"fr": "<span>z<sub>S</sub></span><b>3h/10 au-dessus de la base</b>",
+"es": "<span>z<sub>S</sub></span><b>3h/10 sobre la base</b>"
+},
+"23-47": {
+"fr": "Dérivée comme pente",
+"es": "Derivada como pendiente"
+},
+"23-48": {
+"fr": "Dérivée et intégrale",
+"es": "Derivada e integral"
+},
+"23-49": {
+"fr": "Côté adjacent",
+"es": "Cateto adyacente"
+},
+"23-50": {
+"fr": "Application en statique : décomposition d'une force inclinée F d'un angle α par rapport à la verticale : V = F·cos α, H = F·sin α.",
+"es": "Aplicación en estática: descomposición de una fuerza inclinada F con un ángulo α respecto a la vertical: V = F·cos α, H = F·sin α."
+},
+"23-51": {
+"fr": "Application : hauteur d'un toit à une pente à un point intermédiaire. Hauteur de faîtage 3,0 m sur 6,0 m de longueur → à 2,0 m du point bas : 3,0 · 2,0/6,0 = <b>1,0 m</b>.",
+"es": "Aplicación: altura de una cubierta a un agua en un punto intermedio. Altura de cumbrera 3,0 m sobre 6,0 m de longitud → a 2,0 m del punto bajo: 3,0 · 2,0/6,0 = <b>1,0 m</b>."
+},
+"23-52": {
+"fr": "Sur chantier : on peut tracer un angle droit avec un mètre ruban — 3 m, 4 m et 5 m forment un triangle rectangle (3² + 4² = 9 + 16 = 25 = 5²).",
+"es": "En obra: un ángulo recto se puede replantear con una cinta métrica — 3 m, 4 m y 5 m forman un triángulo rectángulo (3² + 4² = 9 + 16 = 25 = 5²)."
+},
+"23-53": {
+"fr": "Condition 1",
+"es": "Condición 1"
+},
+"23-54": {
+"fr": "Condition 2",
+"es": "Condición 2"
+},
+"23-55": {
+"fr": "Les deux positives → les deux barres en traction (le nœud est suspendu aux barres)",
+"es": "Ambas positivas → ambas barras a tracción (el nudo cuelga de las barras)"
+},
+"23-56": {
+"fr": "Exemple 1 : équation du second degré",
+"es": "Ejemplo 1: ecuación de segundo grado"
+},
+"23-57": {
+"fr": "Exemple 2 : système d'équations linéaires 2 × 2",
+"es": "Ejemplo 2: sistema de ecuaciones lineales 2 × 2"
+},
+"23-58": {
+"fr": "Exemple 3 : méthode de Gauss 3 × 3 (valeurs personnalisables)",
+"es": "Ejemplo 3: método de Gauss 3 × 3 (valores propios posibles)"
+},
+"23-59": {
+"fr": "Exemple pieu foré : d = 0,90 m, longueur 12 m → V = π · 0,45² · 12 = <b>7,63 m³</b> de béton (plus surconsommation).",
+"es": "Ejemplo pilote perforado: d = 0,90 m, longitud 12 m → V = π · 0,45² · 12 = <b>7,63 m³</b> de hormigón (más sobreconsumo)."
+},
+"23-60": {
+"fr": "Exemple : hauteur de la zone comprimée x à l'état II (section rectangulaire)",
+"es": "Ejemplo: profundidad de la zona comprimida x en el estado II (sección rectangular)"
+},
+"23-61": {
+"fr": "Exemple : un arc a une portée s = 10 m et une flèche h = 2 m.<br> r = 10²/(8·2) + 2/2 = 6,25 + 1 = <b>7,25 m</b> · φ = 2·arcsin(5/7,25) = 87,2° = 1,522 rad · b = 7,25 · 1,522 = <b>11,03 m</b>",
+"es": "Ejemplo: un arco salva una luz s = 10 m con una flecha h = 2 m.<br> r = 10²/(8·2) + 2/2 = 6,25 + 1 = <b>7,25 m</b> · φ = 2·arcsin(5/7,25) = 87,2° = 1,522 rad · b = 7,25 · 1,522 = <b>11,03 m</b>"
+},
+"23-62": {
+"fr": "Exemple : efforts dans les barres en un nœud (2 équations, 2 inconnues)",
+"es": "Ejemplo: esfuerzos en las barras en un nudo (2 ecuaciones, 2 incógnitas)"
+},
+"23-63": {
+"fr": "Triangle quelconque",
+"es": "Triángulo cualquiera"
+},
+"23-64": {
+"fr": "Triangles particuliers",
+"es": "Triángulos especiales"
+},
+"23-65": {
+"fr": "Déformée",
+"es": "Deformada"
+},
+"23-66": {
+"fr": "Longueur d'arc :&nbsp; b = r · φ&nbsp;&nbsp; (φ en radians)<br> Corde :&nbsp; s = 2 · r · sin(φ/2)<br> Flèche :&nbsp; h = r · (1 − cos(φ/2))<br> Rayon à partir de la corde et de la flèche :&nbsp; r = s²/(8·h) + h/2<br> Secteur circulaire :&nbsp; A = r² · φ / 2&nbsp;&nbsp;&nbsp; Segment circulaire :&nbsp; A = r²/2 · (φ − sin φ)",
+"es": "Longitud de arco:&nbsp; b = r · φ&nbsp;&nbsp; (φ en radianes)<br> Cuerda:&nbsp; s = 2 · r · sin(φ/2)<br> Flecha:&nbsp; h = r · (1 − cos(φ/2))<br> Radio a partir de cuerda y flecha:&nbsp; r = s²/(8·h) + h/2<br> Sector circular:&nbsp; A = r² · φ / 2&nbsp;&nbsp;&nbsp; Segmento circular:&nbsp; A = r²/2 · (φ − sin φ)"
+},
+"23-67": {
+"fr": "Radians",
+"es": "Radianes"
+},
+"23-68": {
+"fr": "D = 0 : aucune solution ou une infinité de solutions (en statique : système mobile)",
+"es": "D = 0: ninguna solución o infinitas soluciones (en estática: sistema hipostático)"
+},
+"23-69": {
+"fr": "Pente de toiture",
+"es": "Pendiente de cubierta"
+},
+"23-70": {
+"fr": "Déterminant 3×3 (Sarrus) :<br> det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ − a₁₃a₂₂a₃₁ − a₁₁a₂₃a₃₂ − a₁₂a₂₁a₃₃",
+"es": "Determinante 3×3 (Sarrus):<br> det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ − a₁₃a₂₂a₃₁ − a₁₁a₂₃a₃₂ − a₁₂a₂₁a₃₃"
+},
+"23-71": {
+"fr": "La dérivée f′(x₀) est la pente de la tangente au point x₀ — limite du taux d'accroissement Δy/Δx.",
+"es": "La derivada f′(x₀) es la pendiente de la tangente en el punto x₀ — límite del cociente incremental Δy/Δx."
+},
+"23-72": {
+"fr": "La somme des aires des carrés construits sur les côtés de l'angle droit est égale à l'aire du carré construit sur l'hypoténuse.",
+"es": "La suma de las áreas de los cuadrados construidos sobre los catetos es igual al área del cuadrado construido sobre la hipotenusa."
+},
+"23-73": {
+"fr": "La hauteur h divise l'hypoténuse c en segments p (sous a) et q (sous b).",
+"es": "La altura h divide la hipotenusa c en los segmentos p (bajo a) y q (bajo b)."
+},
+"23-74": {
+"fr": "Triangle",
+"es": "Triángulo"
+},
+"23-75": {
+"fr": "Poutre sur deux appuis avec charge uniforme : w(x) = q/(24EI) · (L³x − 2Lx³ + x⁴), à mi-portée w = 5qL⁴/(384EI).",
+"es": "Viga biapoyada con carga uniforme: w(x) = q/(24EI) · (L³x − 2Lx³ + x⁴), en el centro del vano w = 5qL⁴/(384EI)."
+},
+"23-76": {
+"fr": "Unités en statique",
+"es": "Unidades en estática"
+},
+"23-77": {
+"fr": "Cercle trigonométrique",
+"es": "Circunferencia unidad"
+},
+"23-78": {
+"fr": "Méthode de Gauss",
+"es": "Método de Gauss"
+},
+"23-79": {
+"fr": "Côté opposé",
+"es": "Cateto opuesto"
+},
+"23-80": {
+"fr": "En face de chaque sommet se trouve le côté de même nom : a en face de A, etc.",
+"es": "Frente a cada vértice está el lado del mismo nombre: a frente a A, etc."
+},
+"23-81": {
+"fr": "Triangle isocèle",
+"es": "Triángulo isósceles"
+},
+"23-82": {
+"fr": "Triangle équilatéral",
+"es": "Triángulo equilátero"
+},
+"23-83": {
+"fr": "Degrés",
+"es": "Grados"
+},
+"23-84": {
+"fr": "Dérivées et primitives usuelles",
+"es": "Derivadas y primitivas básicas"
+},
+"23-85": {
+"fr": "Demi-cercle",
+"es": "Semicírculo"
+},
+"23-86": {
+"fr": "Erreur fréquente : σ = M/W avec M en kNm et W en cm³. Correct : M en kNcm → σ en kN/cm², puis ×10 → N/mm². Exemple : 31,25 kNm = 3125 kNcm ; W = 557 cm³ → σ = 5,61 kN/cm² = <b>56,1 N/mm²</b>.",
+"es": "Error frecuente: σ = M/W con M en kNm y W en cm³. Correcto: M en kNcm → σ en kN/cm², luego ×10 → N/mm². Ejemplo: 31,25 kNm = 3125 kNcm; W = 557 cm³ → σ = 5,61 kN/cm² = <b>56,1 N/mm²</b>."
+},
+"23-87": {
+"fr": "Théorème de la hauteur et théorème du côté",
+"es": "Teorema de la altura y teorema del cateto"
+},
+"23-88": {
+"fr": "I<sub>y</sub> respectivement par rapport à l'axe horizontal passant par le centre de gravité. Pour le secteur circulaire, α est le demi-angle d'ouverture.",
+"es": "I<sub>y</sub> en cada caso respecto al eje centroidal horizontal. En el sector circular, α es la mitad del ángulo de apertura."
+},
+"23-89": {
+"fr": "En statique : la résultante d'une charge linéique est égale à l'aire du diagramme de charge et s'applique en son centre de gravité. Charge triangulaire q, longueur L → R = qL/2 au tiers.",
+"es": "En estática: la resultante de una carga lineal es igual al área del diagrama de carga y actúa en su centro de gravedad. Carga triangular q, longitud L → R = qL/2 en el punto del tercio."
+},
+"23-90": {
+"fr": "Dans tout triangle, la somme des angles est α + β + γ = 180°. Les côtés de même longueur sont marqués d'un trait.",
+"es": "En todo triángulo la suma de los ángulos es α + β + γ = 180°. Los lados de igual longitud se marcan con una raya."
+},
+"23-91": {
+"fr": "Cône",
+"es": "Cono"
+},
+"23-92": {
+"fr": "Nœud d'un treillis : deux efforts inconnus dans les barres, deux conditions d'équilibre.",
+"es": "Nudo de una celosía: dos esfuerzos desconocidos en las barras, dos condiciones de equilibrio."
+},
+"23-93": {
+"fr": "Nœud à deux barres",
+"es": "Nudo con dos barras"
+},
+"23-94": {
+"fr": "Secteur circulaire",
+"es": "Sector circular"
+},
+"23-95": {
+"fr": "Arc de cercle, corde et flèche",
+"es": "Arco de circunferencia, cuerda y flecha"
+},
+"23-96": {
+"fr": "Sphère",
+"es": "Esfera"
+},
+"23-97": {
+"fr": "Appui en rive",
+"es": "Apoyo en el borde"
+},
+"23-98": {
+"fr": "Systèmes d'équations linéaires",
+"es": "Sistemas de ecuaciones lineales"
+},
+"23-99": {
+"fr": "Solution : x<sub>1</sub> = <b>2,0000</b>, x<sub>2</sub> = <b>3,0000</b>, x<sub>3</sub> = <b>-1,0000</b>",
+"es": "Solución: x<sub>1</sub> = <b>2,0000</b>, x<sub>2</sub> = <b>3,0000</b>, x<sub>3</sub> = <b>-1,0000</b>"
+},
+"23-100": {
+"fr": "Masse → poids",
+"es": "Masa → peso"
+},
+"23-101": {
+"fr": "Parabole avec racines",
+"es": "Parábola con raíces"
+},
+"23-102": {
+"fr": "Segment parabolique",
+"es": "Segmento parabólico"
+},
+"23-103": {
+"fr": "Épure parabolique (complément de parabole)",
+"es": "Enjuta parabólica"
+},
+"23-104": {
+"fr": "Parallélogramme",
+"es": "Paralelogramo"
+},
+"23-105": {
+"fr": "Règle du produit :&nbsp; (u·v)′ = u′·v + u·v′<br> Règle du quotient :&nbsp; (u/v)′ = (u′·v − u·v′) / v²<br> Dérivée composée :&nbsp; f(g(x))′ = f′(g(x)) · g′(x)<br> Intégration par parties :&nbsp; ∫ u·v′ dx = u·v − ∫ u′·v dx",
+"es": "Regla del producto:&nbsp; (u·v)′ = u′·v + u·v′<br> Regla del cociente:&nbsp; (u/v)′ = (u′·v − u·v′) / v²<br> Regla de la cadena:&nbsp; f(g(x))′ = f′(g(x)) · g′(x)<br> Integración por partes:&nbsp; ∫ u·v′ dx = u·v − ∫ u′·v dx"
+},
+"23-106": {
+"fr": "Le pourcentage et les degrés ne sont pas proportionnels : 100 % correspondent à 45°, et non à 90°.",
+"es": "El porcentaje y los grados no son proporcionales: 100 % corresponde a 45°, no a 90°."
+},
+"23-107": {
+"fr": "Pythagore :&nbsp; a² + b² = c²&nbsp;&nbsp;&nbsp; c = √(a² + b²)<br> Théorème de la hauteur :&nbsp; h² = p · q<br> Théorème du côté :&nbsp; a² = c · p&nbsp;&nbsp;&nbsp; b² = c · q<br> Aire :&nbsp; A = a · b / 2 = c · h / 2",
+"es": "Pitágoras:&nbsp; a² + b² = c²&nbsp;&nbsp;&nbsp; c = √(a² + b²)<br> Teorema de la altura:&nbsp; h² = p · q<br> Teorema del cateto:&nbsp; a² = c · p&nbsp;&nbsp;&nbsp; b² = c · q<br> Área:&nbsp; A = a · b / 2 = c · h / 2"
+},
+"23-108": {
+"fr": "Parallélépipède rectangle",
+"es": "Ortoedro"
+},
+"23-109": {
+"fr": "Carré",
+"es": "Cuadrado"
+},
+"23-110": {
+"fr": "Équations du second degré",
+"es": "Ecuaciones de segundo grado"
+},
+"23-111": {
+"fr": "Pyramide à base carrée",
+"es": "Pirámide cuadrangular"
+},
+"23-112": {
+"fr": "Losange",
+"es": "Rombo"
+},
+"23-113": {
+"fr": "Triangle rectangle",
+"es": "Triángulo rectángulo"
+},
+"23-114": {
+"fr": "Triangle rectangle — Pythagore, théorèmes de la hauteur et du côté",
+"es": "Triángulo rectángulo — Pitágoras, teoremas de la altura y del cateto"
+},
+"23-115": {
+"fr": "Hexagone régulier",
+"es": "Hexágono regular"
+},
+"23-116": {
+"fr": "Règles",
+"es": "Reglas"
+},
+"23-117": {
+"fr": "Théorème de Pythagore",
+"es": "Teorema de Pitágoras"
+},
+"23-118": {
+"fr": "Sommet (−p/2 | q − p²/4)",
+"es": "Vértice (−p/2 | q − p²/4)"
+},
+"23-119": {
+"fr": "Distance entre faces : un écrou M16 a s = 24 mm. La distance entre coins est e = 2·s/√3 = 2·24/1,732 ≈ <b>27,7 mm</b> — c'est l'espace minimal dont la clé a besoin.",
+"es": "Distancia entre caras: una tuerca M16 tiene s = 24 mm. La distancia entre vértices es e = 2·s/√3 = 2·24/1,732 ≈ <b>27,7 mm</b> — es el espacio mínimo que necesita la llave."
+},
+"23-120": {
+"fr": "Loi des sinus :&nbsp; a / sin α = b / sin β = c / sin γ<br> Loi des cosinus :&nbsp; c² = a² + b² − 2·a·b·cos γ<br> Aire :&nbsp; A = c·h<sub>c</sub>/2 = ½·a·b·sin γ&nbsp;&nbsp;&nbsp; α + β + γ = 180°",
+"es": "Teorema del seno:&nbsp; a / sin α = b / sin β = c / sin γ<br> Teorema del coseno:&nbsp; c² = a² + b² − 2·a·b·cos γ<br> Área:&nbsp; A = c·h<sub>c</sub>/2 = ½·a·b·sin γ&nbsp;&nbsp;&nbsp; α + β + γ = 180°"
+},
+"23-121": {
+"fr": "Contrainte",
+"es": "Tensión"
+},
+"23-122": {
+"fr": "Barre 1 à 30° vers le haut à gauche, barre 2 à 60° vers le haut à droite",
+"es": "Barra 1 a 30° hacia arriba a la izquierda, barra 2 a 60° hacia arriba a la derecha"
+},
+"23-123": {
+"fr": "Exemple de statique : q constant → Q = −q·x + C₁ → M = −q·x²/2 + C₁·x + C₂. Les constantes découlent des conditions aux limites (p. ex. M = 0 aux extrémités articulées).",
+"es": "Ejemplo de estática: q constante → Q = −q·x + C₁ → M = −q·x²/2 + C₁·x + C₂. Las constantes se deducen de las condiciones de contorno (p. ej. M = 0 en los extremos articulados)."
+},
+"23-124": {
+"fr": "Pente",
+"es": "Pendiente"
+},
+"23-125": {
+"fr": "Pente f′(x₀)",
+"es": "Pendiente f′(x₀)"
+},
+"23-126": {
+"fr": "Pente en pourcentage et angle d'inclinaison",
+"es": "Pendiente en porcentaje y ángulo de inclinación"
+},
+"23-127": {
+"fr": "Pente p [%]",
+"es": "Pendiente p [%]"
+},
+"23-128": {
+"fr": "Pente et angle d'inclinaison",
+"es": "Pendiente y ángulo de inclinación"
+},
+"23-129": {
+"fr": "Théorème de Thalès",
+"es": "Teorema de Tales"
+},
+"23-130": {
+"fr": "Charge linéique",
+"es": "Carga lineal"
+},
+"23-131": {
+"fr": "Trapèze",
+"es": "Trapecio"
+},
+"23-132": {
+"fr": "Valeurs usuelles : caniveau d'évacuation 0,5 – 1 % · toiture-terrasse au moins 2 % · rampe accessible au plus 6 % · toit à deux pans généralement 30° – 45°.",
+"es": "Valores típicos: canaleta de drenaje 0,5 – 1 % · cubierta plana al menos 2 % · rampa accesible como máximo 6 % · cubierta a dos aguas normalmente 30° – 45°."
+},
+"23-133": {
+"fr": "Conversion",
+"es": "Conversión"
+},
+"23-134": {
+"fr": "Tableau de conversion",
+"es": "Tabla de conversión"
+},
+"23-135": {
+"fr": "V — volume, O — aire totale, M — aire latérale (sans base ni face supérieure), s — génératrice (apothème), h<sub>s</sub> — hauteur de la face latérale.",
+"es": "V — volumen, O — superficie total, M — superficie lateral (sin base ni cara superior), s — generatriz, h<sub>s</sub> — altura de la cara lateral."
+},
+"23-136": {
+"fr": "Quadrilatères et hexagone régulier",
+"es": "Cuadriláteros y hexágono regular"
+},
+"23-137": {
+"fr": "Intégrer quatre fois, puis déterminer les quatre constantes d'intégration à partir des conditions aux limites :",
+"es": "Integrar cuatro veces y determinar después las cuatro constantes de integración a partir de las condiciones de contorno:"
+},
+"23-138": {
+"fr": "Volume et aire",
+"es": "Volumen y superficie"
+},
+"23-139": {
+"fr": "Longueur horizontale l, dénivelé h, longueur inclinée s.",
+"es": "Longitud horizontal l, desnivel h, longitud inclinada s."
+},
+"23-140": {
+"fr": "Angle",
+"es": "Ángulo"
+},
+"23-141": {
+"fr": "ZA : ZA′ = ZB : ZB′&nbsp;&nbsp;&nbsp; (1er théorème de Thalès)<br> AB : A′B′ = ZA : ZA′&nbsp;&nbsp;&nbsp; (2e théorème de Thalès)",
+"es": "ZA : ZA′ = ZB : ZB′&nbsp;&nbsp;&nbsp; (1.er teorema de Tales)<br> AB : A′B′ = ZA : ZA′&nbsp;&nbsp;&nbsp; (2.º teorema de Tales)"
+},
+"23-142": {
+"fr": "Ligne 1 : 2,00 · 2,000 + 1,00 · 3,000 + -1,00 · -1,000 = 8,000 = b<sub>1</sub> ✓",
+"es": "Fila 1: 2,00 · 2,000 + 1,00 · 3,000 + -1,00 · -1,000 = 8,000 = b<sub>1</sub> ✓"
+},
+"23-143": {
+"fr": "Ligne 2 : -3,00 · 2,000 + -1,00 · 3,000 + 2,00 · -1,000 = -11,000 = b<sub>2</sub> ✓",
+"es": "Fila 2: -3,00 · 2,000 + -1,00 · 3,000 + 2,00 · -1,000 = -11,000 = b<sub>2</sub> ✓"
+},
+"23-144": {
+"fr": "Ligne 3 : -2,00 · 2,000 + 1,00 · 3,000 + 2,00 · -1,000 = -3,000 = b<sub>3</sub> ✓",
+"es": "Fila 3: -2,00 · 2,000 + 1,00 · 3,000 + 2,00 · -1,000 = -3,000 = b<sub>3</sub> ✓"
+},
+"23-145": {
+"fr": "Angle au centre φ, rayon r, arc b (orange), corde s (bleu), flèche h (vert), segment circulaire en bleu clair.",
+"es": "Ángulo central φ, radio r, arco b (naranja), cuerda s (azul), flecha h (verde), segmento circular en azul claro."
+},
+"23-146": {
+"fr": "Décomposition d'une force",
+"es": "Descomposición de una fuerza"
+},
+"23-147": {
+"fr": "Décomposition d'une force en une composante verticale et une composante horizontale",
+"es": "Descomposición de una fuerza en una componente vertical y otra horizontal"
+},
+"23-148": {
+"fr": "Deux demi-droites issues de Z sont coupées par deux droites parallèles.",
+"es": "Dos semirrectas que parten de Z son cortadas por dos rectas paralelas."
+},
+"23-149": {
+"fr": "Cylindre",
+"es": "Cilindro"
+},
+"23-150": {
+"fr": "a<sub>11</sub>·x<sub>1</sub> + a<sub>12</sub>·x<sub>2</sub> + a<sub>13</sub>·x<sub>3</sub> = b<sub>1</sub> etc. Un exemple de manuel de solution (2 ; 3 ; −1) est préréglé.",
+"es": "a<sub>11</sub>·x<sub>1</sub> + a<sub>12</sub>·x<sub>2</sub> + a<sub>13</sub>·x<sub>3</sub> = b<sub>1</sub> etc. Está predefinido un ejemplo de libro de texto con la solución (2; 3; −1)."
+},
+"23-151": {
+"fr": "b = 30 cm, d = 46 cm, A<sub>s</sub> = 12,6 cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = 15 · moment statique de la zone comprimée = moment statique de l'acier",
+"es": "b = 30 cm, d = 46 cm, A<sub>s</sub> = 12,6 cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = 15 · momento estático de la zona comprimida = momento estático del acero"
+},
+"23-152": {
+"fr": "det A = produit des pivots (changer le signe à chaque échange de lignes) = -1,000 ≠ 0 → solution unique",
+"es": "det A = producto de los pivotes (cambiar el signo en cada intercambio de filas) = -1,000 ≠ 0 → solución única"
+},
+"23-153": {
+"fr": "f(x) = x² + p·x + q : les racines sont les points d'intersection avec l'axe des x, le sommet se trouve en x = −p/2.",
+"es": "f(x) = x² + p·x + q: las raíces son los puntos de corte con el eje x; el vértice está en x = −p/2."
+},
+"23-154": {
+"fr": "articulé (appui fixe / appui mobile)",
+"es": "articulado (apoyo fijo / apoyo móvil)"
+},
+"23-155": {
+"fr": "ou angle α [°]",
+"es": "o ángulo α [°]"
+},
+"23-156": {
+"fr": "p = <b>2,00 %</b> &nbsp;·&nbsp; α = <b>1,15°</b> &nbsp;·&nbsp; sur 1 m horizontal : h = 20,0 mm &nbsp;·&nbsp; s/l = 1,0002",
+"es": "p = <b>2,00 %</b> &nbsp;·&nbsp; α = <b>1,15°</b> &nbsp;·&nbsp; por 1 m horizontal: h = 20,0 mm &nbsp;·&nbsp; s/l = 1,0002"
+},
+"23-157": {
+"fr": "tan α = h / l&nbsp;&nbsp;&nbsp; p = h / l · 100 %&nbsp;&nbsp;&nbsp; α = arctan(p / 100)<br> longueur inclinée :&nbsp; s = √(l² + h²) = l / cos α",
+"es": "tan α = h / l&nbsp;&nbsp;&nbsp; p = h / l · 100 %&nbsp;&nbsp;&nbsp; α = arctan(p / 100)<br> longitud inclinada:&nbsp; s = √(l² + h²) = l / cos α"
+},
+"23-158": {
+"fr": "w positif vers le bas · M positif pour traction en partie inférieure · EI constant",
+"es": "w positivo hacia abajo · M positivo con tracción en la fibra inferior · EI constante"
+},
+"23-159": {
+"fr": "x<sub>2</sub> &lt; 0 n'a pas de sens mécanique → <b>x = 18,59 cm</b> (x/d = 0,404)",
+"es": "x<sub>2</sub> &lt; 0 carece de sentido mecánico → <b>x = 18,59 cm</b> (x/d = 0,404)"
+},
+"23-160": {
+"fr": "unité usuelle",
+"es": "unidad habitual"
+},
+"23-161": {
+"fr": "h/3 au-dessus du côté",
+"es": "h/3 sobre el lado"
+},
+"23-162": {
+"fr": "Diagonales",
+"es": "Diagonales"
+},
+"23-163": {
+"fr": "a·√3 (distance entre faces)",
+"es": "a·√3 (distancia entre caras)"
+},
+"23-164": {
+"fr": "2·a (diamètre sur coins)",
+"es": "2·a (distancia entre vértices)"
+},
+"23-165": {
+"fr": "centre",
+"es": "centro"
+},
+"23-166": {
+"fr": "h/3 au-dessus de la base",
+"es": "h/3 sobre la base"
+},
+"23-167": {
+"fr": "α·r² (α en radians)",
+"es": "α·r² (α en radianes)"
+},
+"23-168": {
+"fr": "arc 2α·r",
+"es": "arco 2α·r"
+},
+"23-169": {
+"fr": "2h/5 au-dessus de la corde",
+"es": "2h/5 sobre la cuerda"
+},
+"23-170": {
+"fr": "centre (symétrique)",
+"es": "centro (simétrico)"
+},
+"23-171": {
+"fr": "¾·b à partir du sommet",
+"es": "¾·b desde el vértice"
+},
+"23-172": {
+"fr": "3h/10 au-dessus de la base",
+"es": "3h/10 sobre la base"
+},
+"23-173": {
+"fr": "Demi-sphère",
+"es": "Semiesfera"
+},
+"23-174": {
+"fr": "<div class=\"calc-field\"><label>Pente p [%]</label><input type=\"number\" id=\"ng2-p\" value=\"2\" step=\"any\" oninput=\"updateNeigung()\"></div>",
+"es": "<div class=\"calc-field\"><label>Pendiente p [%]</label><input type=\"number\" id=\"ng2-p\" value=\"2\" step=\"any\" oninput=\"updateNeigung()\"></div>"
+},
+"23-175": {
+"fr": "<div class=\"calc-field\"><label>ou angle α [°]</label><input type=\"number\" id=\"ng2-a\" value=\"\" step=\"any\" oninput=\"updateNeigung(true)\"></div>",
+"es": "<div class=\"calc-field\"><label>o ángulo α [°]</label><input type=\"number\" id=\"ng2-a\" value=\"\" step=\"any\" oninput=\"updateNeigung(true)\"></div>"
+},
+"23-176": {
+"fr": "p = <b>{} %</b> &nbsp;·&nbsp; α = <b>{}°</b> &nbsp;·&nbsp; sur 1 m horizontal : h = {} mm &nbsp;·&nbsp; s/l = {}",
+"es": "p = <b>{} %</b> &nbsp;·&nbsp; α = <b>{}°</b> &nbsp;·&nbsp; por 1 m horizontal: h = {} mm &nbsp;·&nbsp; s/l = {}"
+},
+"23-177": {
+"fr": "§Hypothèse : l'axe neutre passe par le centre de gravité de la section homogénéisée",
+"es": "§Hipótesis: el eje neutro pasa por el centro de gravedad de la sección homogeneizada"
+},
+"23-178": {
+"fr": "!b = {} cm, d = {} cm, A<sub>s</sub> = {} cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = {} · moment statique de la zone comprimée = moment statique de l'acier",
+"es": "!b = {} cm, d = {} cm, A<sub>s</sub> = {} cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = {} · momento estático de la zona comprimida = momento estático del acero"
+},
+"23-179": {
+"fr": "§Équilibre au nœud (traction positive, F = {} kN vers le bas)",
+"es": "§Equilibrio en el nudo (tracción positiva, F = {} kN hacia abajo)"
+},
+"23-180": {
+"fr": "!Barre 1 à 30° vers le haut à gauche, barre 2 à 60° vers le haut à droite",
+"es": "!Barra 1 a 30° hacia arriba a la izquierda, barra 2 a 60° hacia arriba a la derecha"
+},
+"23-181": {
+"fr": "§Règle de Cramer",
+"es": "§Regla de Cramer"
+},
+"23-182": {
+"fr": "!Les deux positives → les deux barres en traction (le nœud est suspendu aux barres)",
+"es": "!Ambas positivas → ambas barras a tracción (el nudo cuelga de las barras)"
+},
+"23-183": {
+"fr": "§Matrice augmentée des coefficients (A | b)",
+"es": "§Matriz ampliada de coeficientes (A | b)"
+},
+"23-184": {
+"fr": "§Colonne {} : zéros sous le pivot a<sub>{}{}</sub> = {}",
+"es": "§Columna {}: ceros bajo el pivote a<sub>{}{}</sub> = {}"
+},
+"23-185": {
+"fr": "§Substitution à rebours",
+"es": "§Sustitución hacia atrás"
+},
+"23-186": {
+"fr": "!det A = produit des pivots (changer le signe à chaque échange de lignes) = {} ≠ 0 → solution unique",
+"es": "!det A = producto de los pivotes (cambiar el signo en cada intercambio de filas) = {} ≠ 0 → solución única"
+},
+"23-187": {
+"fr": "Ligne {} : {} = {} = b<sub>{}</sub> ✓",
+"es": "Fila {}: {} = {} = b<sub>{}</sub> ✓"
+},
+"23-188": {
+"fr": "<div class=\"info-banner\">Solution : x<sub>1</sub> = <b>{}</b>, x<sub>2</sub> = <b>{}</b>, x<sub>3</sub> = <b>{}</b></div>",
+"es": "<div class=\"info-banner\">Solución: x<sub>1</sub> = <b>{}</b>, x<sub>2</sub> = <b>{}</b>, x<sub>3</sub> = <b>{}</b></div>"
+},
+"23-189": {
+"fr": "(élément de 11,5 cm + joint de 1 cm)",
+"es": "(pieza de 11,5 cm + junta de 1 cm)"
+},
+"23-190": {
+"fr": "murs de 11,5 cm, parement",
+"es": "muros de 11,5 cm, hoja exterior de fachada"
+},
+"23-191": {
+"fr": "2 et 3",
+"es": "2 y 3"
+},
+"23-192": {
+"fr": "maintenu sur 2 côtés (bleu : planchers)",
+"es": "arriostrado en 2 lados (azul: forjados)"
+},
+"23-193": {
+"fr": "Mur maintenu sur 2 côtés",
+"es": "Muro arriostrado en 2 lados"
+},
+"23-194": {
+"fr": "21 assises conviennent exactement",
+"es": "21 hiladas encajan exactamente"
+},
+"23-195": {
+"fr": "murs de 24 et 36,5 cm",
+"es": "muros de 24 y 36,5 cm"
+},
+"23-196": {
+"fr": "murs de 24 cm",
+"es": "muros de 24 cm"
+},
+"23-197": {
+"fr": "25 (8DF, éléments à joints minces)",
+"es": "25 (8DF, piezas rectificadas)"
+},
+"23-198": {
+"fr": "maintenu sur 3 côtés (bleu : planchers et murs transversaux)",
+"es": "arriostrado en 3 lados (azul: forjados y muros transversales)"
+},
+"23-199": {
+"fr": "Mur maintenu sur 3 côtés",
+"es": "Muro arriostrado en 3 lados"
+},
+"23-200": {
+"fr": "maintenu sur 4 côtés (bleu : planchers et murs transversaux)",
+"es": "arriostrado en 4 lados (azul: forjados y muros transversales)"
+},
+"23-201": {
+"fr": "Mur maintenu sur 4 côtés",
+"es": "Muro arriostrado en 4 lados"
+},
+"23-202": {
+"fr": "8DF … 12DF, éléments à joints minces",
+"es": "8DF … 12DF, piezas rectificadas"
+},
+"23-203": {
+"fr": "<a class=\"applink\" href=\"size.html\">→ Avec schéma dans statiq·size (Maçonnerie → Mur de sous-sol)</a>",
+"es": "<a class=\"applink\" href=\"size.html\">→ Con croquis en statiq·size (Fábrica → Muro de sótano)</a>"
+},
+"23-204": {
+"fr": "<a class=\"applink\" href=\"size.html\">→ Avec schéma et rapport dans statiq·size (Maçonnerie → Mur)</a>",
+"es": "<a class=\"applink\" href=\"size.html\">→ Con croquis e informe en statiq·size (Fábrica → Muro)</a>"
+},
+"23-205": {
+"fr": "<span class=\"st-n\">1</span><span>Réduction pour appui sur deux côtés</span>",
+"es": "<span class=\"st-n\">1</span><span>Reducción por arriostramiento en dos lados</span>"
+},
+"23-206": {
+"fr": "<span class=\"st-n\">1</span><span>Conditions d'application (extrait)</span>",
+"es": "<span class=\"st-n\">1</span><span>Condiciones de aplicación (extracto)</span>"
+},
+"23-207": {
+"fr": "<span class=\"st-n\">1</span><span>Limites d'application (extrait)</span>",
+"es": "<span class=\"st-n\">1</span><span>Límites de aplicación (extracto)</span>"
+},
+"23-208": {
+"fr": "<span class=\"st-n\">1</span><span>Matériau</span>",
+"es": "<span class=\"st-n\">1</span><span>Material</span>"
+},
+"23-209": {
+"fr": "<span class=\"st-n\">1</span><span>Résistance caractéristique en compression (EN 1996-1-1, 3.6.1.2)</span>",
+"es": "<span class=\"st-n\">1</span><span>Resistencia característica a compresión (EN 1996-1-1, 3.6.1.2)</span>"
+},
+"23-210": {
+"fr": "<span class=\"st-n\">1</span><span>Longueur sur la trame octamétrique (12,5 cm)</span>",
+"es": "<span class=\"st-n\">1</span><span>Longitud según la trama de octavo de metro (12,5 cm)</span>"
+},
+"23-211": {
+"fr": "<span class=\"st-n\">1</span><span>Moment en pied de mur et excentricité</span>",
+"es": "<span class=\"st-n\">1</span><span>Momento en la base del muro y excentricidad</span>"
+},
+"23-212": {
+"fr": "<span class=\"st-n\">2</span><span>Matériau</span>",
+"es": "<span class=\"st-n\">2</span><span>Material</span>"
+},
+"23-213": {
+"fr": "<span class=\"st-n\">2</span><span>Coefficient β selon l'entraxe des murs transversaux</span>",
+"es": "<span class=\"st-n\">2</span><span>Coeficiente β según la separación de los muros transversales</span>"
+},
+"23-214": {
+"fr": "<span class=\"st-n\">2</span><span>Valeur de calcul</span>",
+"es": "<span class=\"st-n\">2</span><span>Valor de cálculo</span>"
+},
+"23-215": {
+"fr": "<span class=\"st-n\">2</span><span>Hauteur sur la hauteur d'assise 12,50 cm</span>",
+"es": "<span class=\"st-n\">2</span><span>Altura según la altura de hilada 12,50 cm</span>"
+},
+"23-216": {
+"fr": "<span class=\"st-n\">2</span><span>Diffusion de la charge à 60° jusqu'à mi-hauteur du mur</span>",
+"es": "<span class=\"st-n\">2</span><span>Difusión de la carga a 60° hasta la mitad de la altura del muro</span>"
+},
+"23-217": {
+"fr": "<span class=\"st-n\">2</span><span>Maintenu sur quatre côtés</span>",
+"es": "<span class=\"st-n\">2</span><span>Arriostrado en cuatro lados</span>"
+},
+"23-218": {
+"fr": "<span class=\"st-n\">2</span><span>Longueur comprimée</span>",
+"es": "<span class=\"st-n\">2</span><span>Longitud comprimida</span>"
+},
+"23-219": {
+"fr": "<span class=\"st-n\">3</span><span>Facteur de majoration (EN 1996-1-1, éq. 6.10)</span>",
+"es": "<span class=\"st-n\">3</span><span>Factor de incremento (EN 1996-1-1, ec. 6.10)</span>"
+},
+"23-220": {
+"fr": "<span class=\"st-n\">3</span><span>Hauteur efficace (maintenu sur deux côtés)</span>",
+"es": "<span class=\"st-n\">3</span><span>Altura efectiva (arriostrado en dos lados)</span>"
+},
+"23-221": {
+"fr": "<span class=\"st-n\">3</span><span>Hauteur efficace et élancement</span>",
+"es": "<span class=\"st-n\">3</span><span>Altura efectiva y esbeltez</span>"
+},
+"23-222": {
+"fr": "<span class=\"st-n\">3</span><span>Charge verticale minimale (effet de voûte contre la poussée des terres)</span>",
+"es": "<span class=\"st-n\">3</span><span>Carga vertical mínima (efecto arco frente al empuje del terreno)</span>"
+},
+"23-223": {
+"fr": "<span class=\"st-n\">3</span><span>Contrainte de bord</span>",
+"es": "<span class=\"st-n\">3</span><span>Compresión de borde</span>"
+},
+"23-224": {
+"fr": "<span class=\"st-n\">3</span><span>Caractéristiques de déformation (AN, valeurs indicatives)</span>",
+"es": "<span class=\"st-n\">3</span><span>Características de deformación (AN, valores orientativos)</span>"
+},
+"23-225": {
+"fr": "<span class=\"st-n\">4</span><span>Réduction à mi-hauteur du mur (appui complet du plancher a = t)</span>",
+"es": "<span class=\"st-n\">4</span><span>Reducción en el centro del muro (apoyo completo del forjado a = t)</span>"
+},
+"23-226": {
+"fr": "<span class=\"st-n\">4</span><span>Réduction Φ<sub>2</sub> à mi-hauteur du mur</span>",
+"es": "<span class=\"st-n\">4</span><span>Reducción Φ<sub>2</sub> en el centro del muro</span>"
+},
+"23-227": {
+"fr": "<span class=\"st-n\">4</span><span>Résistance initiale au cisaillement (tableau 3.4, recommandation)</span>",
+"es": "<span class=\"st-n\">4</span><span>Resistencia inicial a cortante (tabla 3.4, recomendación)</span>"
+},
+"23-228": {
+"fr": "<span class=\"st-n\">4</span><span>Charge verticale maximale</span>",
+"es": "<span class=\"st-n\">4</span><span>Carga vertical máxima</span>"
+},
+"23-229": {
+"fr": "<span class=\"st-n\">4</span><span>Résistance au cisaillement (EN 1996-1-1, 3.6.2)</span>",
+"es": "<span class=\"st-n\">4</span><span>Resistencia a cortante (EN 1996-1-1, 3.6.2)</span>"
+},
+"23-230": {
+"fr": "<span class=\"st-n\">4</span><span>Résistance</span>",
+"es": "<span class=\"st-n\">4</span><span>Resistencia</span>"
+},
+"23-231": {
+"fr": "<span class=\"st-n\">5</span><span>Réduction Φ<sub>1</sub> en tête et en pied de mur</span>",
+"es": "<span class=\"st-n\">5</span><span>Reducción Φ<sub>1</sub> en la cabeza y en la base del muro</span>"
+},
+"23-232": {
+"fr": "<span class=\"st-n\">5</span><span>Résistance au cisaillement</span>",
+"es": "<span class=\"st-n\">5</span><span>Resistencia a cortante</span>"
+},
+"23-233": {
+"fr": "<span class=\"st-n\">6</span><span>Résistance</span>",
+"es": "<span class=\"st-n\">6</span><span>Resistencia</span>"
+},
+"23-234": {
+"fr": "Distance à l'extrémité du mur a<sub>1</sub> [mm]",
+"es": "Distancia al extremo del muro a<sub>1</sub> [mm]"
+},
+"23-235": {
+"fr": "Octamètre : 1 module = 12,5 cm",
+"es": "Octavo de metro: 1 módulo = 12,5 cm"
+},
+"23-236": {
+"fr": "À l'appui d'extrémité, le plancher tourne et appuie sur le bord intérieur du mur (Φ<sub>1</sub>) ; à mi-hauteur, c'est le flambement qui intervient (Φ<sub>2</sub>).",
+"es": "En un apoyo extremo el forjado gira y presiona sobre el borde interior del muro (Φ<sub>1</sub>); en el centro del muro rige el pandeo (Φ<sub>2</sub>)."
+},
+"23-237": {
+"fr": "Cote de saillie",
+"es": "Cota de saliente"
+},
+"23-238": {
+"fr": "Cote de saillie : n = 10 → 125,0 ± 0 = <b>125,0 cm</b> · n = 11 → 137,5 ± 0 = <b>137,5 cm</b>",
+"es": "Cota de saliente (resalto): n = 10 → 125,0 ± 0 = <b>125,0 cm</b> · n = 11 → 137,5 ± 0 = <b>137,5 cm</b>"
+},
+"23-239": {
+"fr": "Valeurs indicatives — la déclaration de performance du fabricant ou les normes d'application (DIN 20000-401 ff.) font foi.",
+"es": "Valores orientativos — prevalecen la declaración de prestaciones del fabricante o las normas de aplicación (DIN 20000-401 ff.)."
+},
+"23-240": {
+"fr": "Hauteur de remblai h<sub>e</sub>",
+"es": "Altura de relleno h<sub>e</sub>"
+},
+"23-241": {
+"fr": "Hauteur de remblai h<sub>e</sub> [m]",
+"es": "Altura de relleno h<sub>e</sub> [m]"
+},
+"23-242": {
+"fr": "Limite d'application",
+"es": "Límite de aplicación"
+},
+"23-243": {
+"fr": "Composition",
+"es": "Composición"
+},
+"23-244": {
+"fr": "Largeur d'appui [mm]",
+"es": "Ancho de apoyo [mm]"
+},
+"23-245": {
+"fr": "Profondeur d'appui a [mm]",
+"es": "Profundidad de apoyo a [mm]"
+},
+"23-246": {
+"fr": "Diffusion par côté = h<sub>c</sub> / (2 · tan 60°) = 2500 / 3,464 = 721,7 mm",
+"es": "Difusión por lado = h<sub>c</sub> / (2 · tan 60°) = 2500 / 3,464 = 721,7 mm"
+}
+}

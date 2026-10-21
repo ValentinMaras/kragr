@@ -1,0 +1,1630 @@
+{
+"00-0": {
+"fr": "Saisir les efforts internes à la main, par ex. depuis <a href=\"calc.html\">statiq·calc</a>.",
+"es": "Introduzca los esfuerzos internos a mano, p. ej. desde <a href=\"calc.html\">statiq·calc</a>."
+},
+"00-1": {
+"fr": "Poutre",
+"es": "Viga"
+},
+"00-2": {
+"fr": "Poutre retombée",
+"es": "Viga de canto (descolgada)"
+},
+"00-3": {
+"fr": "Dalle",
+"es": "Losa"
+},
+"00-4": {
+"fr": "Poteau",
+"es": "Pilar"
+},
+"00-5": {
+"fr": "Largeur b [cm]",
+"es": "Ancho b [cm]"
+},
+"00-6": {
+"fr": "Hauteur h [cm]",
+"es": "Canto h [cm]"
+},
+"00-7": {
+"fr": "Portée l [m]",
+"es": "Luz l [m]"
+},
+"00-8": {
+"fr": "Système porteur (pour l/d)",
+"es": "Sistema estructural (para l/d)"
+},
+"00-9": {
+"fr": "Poutre en T : la dalle participe à la table de compression en travée.",
+"es": "Viga en T: el forjado actúa como ala comprimida en el vano."
+},
+"00-10": {
+"fr": "Épaisseur de dalle h<sub>f</sub> [cm]",
+"es": "Espesor de la losa h<sub>f</sub> [cm]"
+},
+"00-11": {
+"fr": "Travée (pour l<sub>0</sub>)",
+"es": "Vano (para l<sub>0</sub>)"
+},
+"00-12": {
+"fr": "Poutre sur deux appuis (l₀ = l)",
+"es": "Viga biapoyada (l₀ = l)"
+},
+"00-13": {
+"fr": "Travée de rive (l₀ = 0,85·l)",
+"es": "Vano extremo (l₀ = 0,85·l)"
+},
+"00-14": {
+"fr": "Travée intermédiaire (l₀ = 0,70·l)",
+"es": "Vano interior (l₀ = 0,70·l)"
+},
+"00-15": {
+"fr": "Dalle à gauche b₁ [cm]",
+"es": "Losa a la izquierda b₁ [cm]"
+},
+"00-16": {
+"fr": "Dalle à droite b₂ [cm]",
+"es": "Losa a la derecha b₂ [cm]"
+},
+"00-17": {
+"fr": "b₁, b₂ — demi-distance libre jusqu'à la poutre voisine ou débord de dalle en rive (0 = pas de dalle de ce côté).",
+"es": "b₁, b₂ — mitad de la distancia libre hasta la viga contigua o voladizo de la losa en el borde (0 = sin losa en ese lado)."
+},
+"00-18": {
+"fr": "Matériaux et environnement",
+"es": "Materiales y entorno"
+},
+"00-19": {
+"fr": "Béton",
+"es": "Hormigón"
+},
+"00-20": {
+"fr": "Acier d'armature",
+"es": "Acero de armar"
+},
+"00-21": {
+"fr": "Classe d'exposition",
+"es": "Clase de exposición"
+},
+"00-22": {
+"fr": "Dimension max. des granulats d<sub>g</sub> [mm]",
+"es": "Tamaño máximo del árido d<sub>g</sub> [mm]"
+},
+"00-23": {
+"fr": "cot θ (effort tranchant)",
+"es": "cot θ (cortante)"
+},
+"00-24": {
+"fr": "Poteau : système et efforts internes",
+"es": "Pilar: sistema y esfuerzos internos"
+},
+"00-25": {
+"fr": "Longueur du poteau l [m]",
+"es": "Longitud del pilar l [m]"
+},
+"00-26": {
+"fr": "Conditions d'appui (longueur de flambement l<sub>0</sub> = β·l)",
+"es": "Condiciones de apoyo (longitud de pandeo l<sub>0</sub> = β·l)"
+},
+"00-27": {
+"fr": "articulé – articulé (β = 1,0)",
+"es": "articulado – articulado (β = 1,0)"
+},
+"00-28": {
+"fr": "encastré – articulé (β = 0,7)",
+"es": "empotrado – articulado (β = 0,7)"
+},
+"00-29": {
+"fr": "encastré aux deux extrémités (β = 0,5)",
+"es": "empotrado en ambos extremos (β = 0,5)"
+},
+"00-30": {
+"fr": "Poteau console (β = 2,0)",
+"es": "Pilar en voladizo (β = 2,0)"
+},
+"00-31": {
+"fr": "N<sub>Ed</sub> [kN] (compression)",
+"es": "N<sub>Ed</sub> [kN] (compresión)"
+},
+"00-32": {
+"fr": "Coefficient de fluage φ<sub>ef</sub>",
+"es": "Coeficiente de fluencia φ<sub>ef</sub>"
+},
+"00-33": {
+"fr": "M<sub>02</sub> [kNm] (moment d'extrémité le plus grand)",
+"es": "M<sub>02</sub> [kNm] (momento extremo mayor)"
+},
+"00-34": {
+"fr": "M<sub>01</sub> [kNm] (le plus petit, avec signe)",
+"es": "M<sub>01</sub> [kNm] (el menor, con signo)"
+},
+"00-35": {
+"fr": "Moments selon la théorie du premier ordre autour de l'axe perpendiculaire à h (h est dans le plan du moment). M<sub>01</sub> est positif si les deux moments d'extrémité tendent la même face (courbure simple), négatif en cas de double courbure. Poteau console : M<sub>02</sub> = moment au pied, M<sub>01</sub> = 0. φ<sub>ef</sub> = 0 néglige le fluage (admis entre autres pour φ ≤ 2, λ ≤ 75 et M<sub>0Ed</sub>/N<sub>Ed</sub> ≥ h).",
+"es": "Momentos de primer orden respecto al eje perpendicular a h (h está en el plano del momento). M<sub>01</sub> es positivo si ambos momentos extremos traccionan la misma cara (curvatura simple) y negativo en caso de doble curvatura. Pilar en voladizo: M<sub>02</sub> = momento en la base, M<sub>01</sub> = 0. φ<sub>ef</sub> = 0 desprecia la fluencia (admisible, entre otros casos, para φ ≤ 2, λ ≤ 75 y M<sub>0Ed</sub>/N<sub>Ed</sub> ≥ h)."
+},
+"00-36": {
+"fr": "Armatures du poteau",
+"es": "Armadura del pilar"
+},
+"00-37": {
+"fr": "Barres par face (haut et bas)",
+"es": "Barras por cara (superior e inferior)"
+},
+"00-38": {
+"fr": "Ø barre longitudinale [mm]",
+"es": "Ø barra longitudinal [mm]"
+},
+"00-39": {
+"fr": "Ø étrier [mm]",
+"es": "Ø estribo [mm]"
+},
+"00-40": {
+"fr": "Espacement des étriers s [cm]",
+"es": "Separación de estribos s [cm]"
+},
+"00-41": {
+"fr": "Armatures symétriques : même nombre de barres sur les deux faces dans la direction du moment (A<sub>s1</sub> = A<sub>s2</sub>). Avec « automatique », la plus petite section totale satisfaisant toutes les vérifications est retenue.",
+"es": "Armadura simétrica: mismo número de barras en ambas caras en la dirección del momento (A<sub>s1</sub> = A<sub>s2</sub>). Con «automático» se elige el menor área total que cumple todas las comprobaciones."
+},
+"00-42": {
+"fr": "Efforts internes",
+"es": "Esfuerzos internos"
+},
+"00-43": {
+"fr": "M<sub>Ed</sub> [kNm] (ELU, travée)",
+"es": "M<sub>Ed</sub> [kNm] (ELU, vano)"
+},
+"00-44": {
+"fr": "V<sub>Ed</sub> [kN] (ELU, appui)",
+"es": "V<sub>Ed</sub> [kN] (ELU, apoyo)"
+},
+"00-45": {
+"fr": "M<sub>qp</sub> [kNm] (quasi permanent)",
+"es": "M<sub>qp</sub> [kNm] (cuasipermanente)"
+},
+"00-46": {
+"fr": "|M<sub>Ed,appui</sub>| [kNm] (0 = aucun)",
+"es": "|M<sub>Ed,apoyo</sub>| [kNm] (0 = ninguno)"
+},
+"00-47": {
+"fr": "|M<sub>qp,appui</sub>| [kNm]",
+"es": "|M<sub>qp,apoyo</sub>| [kNm]"
+},
+"00-48": {
+"fr": "Moments en travée positifs, face tendue en bas. V<sub>Ed</sub> pris au nu de l'appui (côté sécurité) — avec appui direct, la valeur à la distance d peut être utilisée. M<sub>qp</sub> = M issu de G<sub>k</sub> + ψ<sub>2</sub>·Q<sub>k</sub>. Le moment sur appui (poutre continue) est saisi en valeur absolue, face tendue en haut.",
+"es": "Momentos positivos en el vano, cara traccionada abajo. V<sub>Ed</sub> se toma en el borde del apoyo (lado seguro); con apoyo directo puede usarse el valor a la distancia d. M<sub>qp</sub> = M debido a G<sub>k</sub> + ψ<sub>2</sub>·Q<sub>k</sub>. El momento en el apoyo (viga continua) se introduce en valor absoluto, cara traccionada arriba."
+},
+"00-49": {
+"fr": "Appui d'extrémité",
+"es": "Apoyo extremo"
+},
+"00-50": {
+"fr": "direct (mur, poteau)",
+"es": "directo (muro, pilar)"
+},
+"00-51": {
+"fr": "indirect (sur poutre)",
+"es": "indirecto (sobre viga)"
+},
+"00-52": {
+"fr": "Largeur d'appui t [cm]",
+"es": "Longitud de apoyo t [cm]"
+},
+"00-53": {
+"fr": "Extrémité de barre",
+"es": "Extremo de la barra"
+},
+"00-54": {
+"fr": "droite",
+"es": "recto"
+},
+"00-55": {
+"fr": "Crochet / équerre",
+"es": "Gancho / patilla"
+},
+"00-56": {
+"fr": "Appui direct : l'ancrage commence à la face avant de l'appui. Appui indirect : la poutre repose dans une autre poutre et nécessite une armature de suspension à cet endroit ; l'ancrage se situe dans sa largeur. Les crochets peuvent être pris avec α₁ = 0,7 si l'enrobage perpendiculaire au plan de courbure est ≥ 3·Ø.",
+"es": "Apoyo directo: el anclaje comienza en la cara frontal del apoyo. Apoyo indirecto: la viga cuelga de otra viga y necesita allí una armadura de suspensión; el anclaje se sitúa dentro de su ancho. Los ganchos pueden considerarse con α₁ = 0,7 si el recubrimiento perpendicular al plano de curvatura es ≥ 3·Ø."
+},
+"00-57": {
+"fr": "Armatures",
+"es": "Armadura"
+},
+"00-58": {
+"fr": "Nombre de barres longitudinales",
+"es": "Número de barras longitudinales"
+},
+"00-59": {
+"fr": "dont en 2e lit : nombre (0 = un seul lit)",
+"es": "de ellas en la 2.ª capa: número (0 = una capa)"
+},
+"00-60": {
+"fr": "Espacement des étriers s<sub>w</sub> [cm]",
+"es": "Separación de estribos s<sub>w</sub> [cm]"
+},
+"00-61": {
+"fr": "Travée en haut : nombre (barres comprimées / de montage)",
+"es": "Vano superior: número (barras comprimidas / de montaje)"
+},
+"00-62": {
+"fr": "Travée en haut : Ø [mm]",
+"es": "Vano superior: Ø [mm]"
+},
+"00-63": {
+"fr": "Appui en haut : nombre",
+"es": "Apoyo superior: número"
+},
+"00-64": {
+"fr": "Appui en haut : Ø [mm]",
+"es": "Apoyo superior: Ø [mm]"
+},
+"00-65": {
+"fr": "Espacement des barres s [cm]",
+"es": "Separación de barras s [cm]"
+},
+"00-66": {
+"fr": "Appui en haut : s [cm]",
+"es": "Apoyo superior: s [cm]"
+},
+"00-67": {
+"fr": "Poutre et poutre retombée : étriers à deux brins, armatures de travée en un lit dans l'âme ; les armatures sur appui d'une poutre retombée sont réparties dans la dalle sur b<sub>eff</sub>.",
+"es": "Viga y viga de canto: estribos de dos ramas, armadura del vano en una capa en el alma; la armadura de apoyo de una viga de canto se distribuye en la losa sobre b<sub>eff</sub>."
+},
+"00-68": {
+"fr": "Assemblage",
+"es": "Unión"
+},
+"00-69": {
+"fr": "Profilé et matériau",
+"es": "Perfil y material"
+},
+"00-70": {
+"fr": "Nuance d'acier",
+"es": "Calidad del acero"
+},
+"00-71": {
+"fr": "Portée L [m]",
+"es": "Luz L [m]"
+},
+"00-72": {
+"fr": "Efforts internes (flexion autour de l'axe fort y)",
+"es": "Esfuerzos internos (flexión respecto al eje fuerte y)"
+},
+"00-73": {
+"fr": "N<sub>Ed</sub> [kN] (compression +)",
+"es": "N<sub>Ed</sub> [kN] (compresión +)"
+},
+"00-74": {
+"fr": "Diagramme des moments",
+"es": "Diagrama de momentos"
+},
+"00-75": {
+"fr": "Charge uniforme (parabole)",
+"es": "Carga uniforme (parábola)"
+},
+"00-76": {
+"fr": "Charge ponctuelle à mi-portée",
+"es": "Carga puntual en el centro del vano"
+},
+"00-77": {
+"fr": "constant",
+"es": "constante"
+},
+"00-78": {
+"fr": "linéaire (moments d'extrémité)",
+"es": "lineal (momentos extremos)"
+},
+"00-79": {
+"fr": "Toutes les valeurs sont des valeurs de calcul (ELU). M<sub>y,Ed</sub> est le plus grand moment du tronçon considéré.",
+"es": "Todos los valores son valores de cálculo (ELU). M<sub>y,Ed</sub> es el mayor momento del tramo considerado."
+},
+"00-80": {
+"fr": "Stabilité",
+"es": "Estabilidad"
+},
+"00-81": {
+"fr": "Longueur de flambement y : β<sub>y</sub>",
+"es": "Longitud de pandeo y: β<sub>y</sub>"
+},
+"00-82": {
+"fr": "1,0 (articulé)",
+"es": "1,0 (articulado)"
+},
+"00-83": {
+"fr": "2,0 (poteau console)",
+"es": "2,0 (pilar en voladizo)"
+},
+"00-84": {
+"fr": "Longueur de flambement z : β<sub>z</sub>",
+"es": "Longitud de pandeo z: β<sub>z</sub>"
+},
+"00-85": {
+"fr": "Distance entre maintiens latéraux L<sub>LT</sub> [m]",
+"es": "Distancia entre arriostramientos laterales L<sub>LT</sub> [m]"
+},
+"00-86": {
+"fr": "Point d'application de la charge",
+"es": "Punto de aplicación de la carga"
+},
+"00-87": {
+"fr": "Semelle supérieure (défavorable)",
+"es": "Ala superior (desfavorable)"
+},
+"00-88": {
+"fr": "Centre de gravité",
+"es": "Centro de gravedad"
+},
+"00-89": {
+"fr": "Semelle inférieure (favorable)",
+"es": "Ala inferior (favorable)"
+},
+"00-90": {
+"fr": "L<sub>LT</sub> = 0 : semelle comprimée maintenue latéralement de façon continue (par ex. par une dalle posée dessus) — pas de déversement.",
+"es": "L<sub>LT</sub> = 0: ala comprimida arriostrada lateralmente de forma continua (p. ej. por un forjado apoyado sobre ella); no hay pandeo lateral."
+},
+"00-91": {
+"fr": "Autres actions",
+"es": "Otras acciones"
+},
+"00-92": {
+"fr": "M<sub>z,Ed</sub> [kNm] (axe faible)",
+"es": "M<sub>z,Ed</sub> [kNm] (eje débil)"
+},
+"00-93": {
+"fr": "aucune",
+"es": "ninguna"
+},
+"00-94": {
+"fr": "Moment de torsion concentré à mi-portée",
+"es": "Momento torsor concentrado en el centro del vano"
+},
+"00-95": {
+"fr": "Moment de torsion réparti",
+"es": "Momento torsor distribuido"
+},
+"00-96": {
+"fr": "Charge concentrée sur la semelle F<sub>Ed</sub> [kN] (0 = aucune)",
+"es": "Carga concentrada sobre el ala F<sub>Ed</sub> [kN] (0 = ninguna)"
+},
+"00-97": {
+"fr": "Longueur d'application de la charge s<sub>s</sub> [mm]",
+"es": "Longitud de apoyo de la carga s<sub>s</sub> [mm]"
+},
+"00-98": {
+"fr": "en travée (type a)",
+"es": "en el vano (tipo a)"
+},
+"00-99": {
+"fr": "à l'extrémité de la poutre (type c)",
+"es": "en el extremo de la viga (tipo c)"
+},
+"00-100": {
+"fr": "Distance à l'extrémité de la poutre c [mm]",
+"es": "Distancia al extremo de la viga c [mm]"
+},
+"00-101": {
+"fr": "Torsion : poutre sur deux appuis à fourche, par ex. sous une charge excentrée (T = F·e). Introduction de charge : âme sans raidisseurs transversaux, par ex. appui ou poteau posé dessus.",
+"es": "Torsión: viga biapoyada con apoyos de horquilla, p. ej. por una carga excéntrica (T = F·e). Introducción de carga: alma sin rigidizadores transversales, p. ej. apoyo o pilar apoyado encima."
+},
+"00-102": {
+"fr": "Flèche (ELS)",
+"es": "Flecha (ELS)"
+},
+"00-103": {
+"fr": "M<sub>y,k</sub> [kNm] (caractéristique, 0 = sans)",
+"es": "M<sub>y,k</sub> [kNm] (característico, 0 = sin)"
+},
+"00-104": {
+"fr": "Valeur limite",
+"es": "Valor límite"
+},
+"00-105": {
+"fr": "Flèche à mi-portée due à M<sub>y,k</sub> et au diagramme de moments choisi (poutre sur deux appuis).",
+"es": "Flecha en el centro del vano debida a M<sub>y,k</sub> y al diagrama de momentos elegido (viga biapoyada)."
+},
+"00-106": {
+"fr": "Assemblage boulonné (type cisaillement / pression diamétrale)",
+"es": "Unión atornillada (tipo cortante / aplastamiento)"
+},
+"00-107": {
+"fr": "Boulon",
+"es": "Tornillo"
+},
+"00-108": {
+"fr": "Rangées n₁ (dans la direction de l'effort)",
+"es": "Filas n₁ (en la dirección de la fuerza)"
+},
+"00-109": {
+"fr": "Colonnes n₂ (transversales)",
+"es": "Columnas n₂ (transversales)"
+},
+"00-110": {
+"fr": "Plans de cisaillement m",
+"es": "Planos de corte m"
+},
+"00-111": {
+"fr": "1 (simple cisaillement)",
+"es": "1 (simple cortadura)"
+},
+"00-112": {
+"fr": "2 (double cisaillement)",
+"es": "2 (doble cortadura)"
+},
+"00-113": {
+"fr": "Épaisseur de tôle déterminante t [mm]",
+"es": "Espesor de chapa determinante t [mm]"
+},
+"00-114": {
+"fr": "Tôle",
+"es": "Chapa"
+},
+"00-115": {
+"fr": "e₁, p₁ dans la direction de l'effort, e₂, p₂ perpendiculairement. La première rangée compte comme boulons d'extrémité, les colonnes extérieures comme boulons de rive.",
+"es": "e₁, p₁ en la dirección de la fuerza, e₂, p₂ perpendicularmente a ella. La primera fila cuenta como tornillos de extremo y las columnas exteriores como tornillos de borde."
+},
+"00-116": {
+"fr": "Efforts",
+"es": "Fuerzas"
+},
+"00-117": {
+"fr": "V<sub>Ed</sub> [kN] (cisaillement, total)",
+"es": "V<sub>Ed</sub> [kN] (cortante, total)"
+},
+"00-118": {
+"fr": "N<sub>Ed</sub> [kN] (traction, total)",
+"es": "N<sub>Ed</sub> [kN] (tracción, total)"
+},
+"00-119": {
+"fr": "Soudure d'angle (par ex. platine de liaison sur poteau)",
+"es": "Soldadura en ángulo (p. ej. chapa de cortante en pilar)"
+},
+"00-120": {
+"fr": "Effort F<sub>w,Ed</sub> [kN] (0 = aucun)",
+"es": "Fuerza F<sub>w,Ed</sub> [kN] (0 = ninguna)"
+},
+"00-121": {
+"fr": "Nombre de cordons",
+"es": "Número de cordones"
+},
+"00-122": {
+"fr": "Longueur efficace l [mm]",
+"es": "Longitud efectiva l [mm]"
+},
+"00-123": {
+"fr": "Plus grande épaisseur de tôle t<sub>max</sub> [mm]",
+"es": "Mayor espesor de chapa t<sub>max</sub> [mm]"
+},
+"00-124": {
+"fr": "Glissement",
+"es": "Deslizamiento"
+},
+"00-125": {
+"fr": "<span>Glissement dans le plan de fondation</span>",
+"es": "<span>Deslizamiento en la base de cimentación</span>"
+},
+"00-126": {
+"fr": "<span>Désignation</span>",
+"es": "<span>Denominación</span>"
+},
+"00-127": {
+"fr": "<span>Largeur de base b [m] (direction de H)</span>",
+"es": "<span>Ancho de la base b [m] (dirección de H)</span>"
+},
+"00-128": {
+"fr": "<span>Longueur de base a [m] (transversale, 1 = par m)</span>",
+"es": "<span>Longitud de la base a [m] (transversal, 1 = por m)</span>"
+},
+"00-129": {
+"fr": "V<sub>G,k</sub> [kN] <span>(permanent, poids propre inclus)</span>",
+"es": "V<sub>G,k</sub> [kN] <span>(permanente, incl. peso propio)</span>"
+},
+"00-130": {
+"fr": "<span>Situation de projet</span>",
+"es": "<span>Situación de proyecto</span>"
+},
+"00-131": {
+"fr": "<span>Base de fondation</span>",
+"es": "<span>Base de cimentación</span>"
+},
+"00-132": {
+"fr": "Béton coulé en place (δ = φ′)",
+"es": "Hormigón in situ (δ = φ′)"
+},
+"00-133": {
+"fr": "Préfabriqué, lisse (δ = 2/3·φ′)",
+"es": "Prefabricado, liso (δ = 2/3·φ′)"
+},
+"00-134": {
+"fr": "<span>État</span>",
+"es": "<span>Condición</span>"
+},
+"00-135": {
+"fr": "drainé (frottement, φ′)",
+"es": "drenado (rozamiento, φ′)"
+},
+"00-136": {
+"fr": "non drainé (cohérent, c<sub>u</sub>)",
+"es": "no drenado (cohesivo, c<sub>u</sub>)"
+},
+"00-137": {
+"fr": "<span>Butée devant la fondation</span>",
+"es": "<span>Empuje pasivo delante de la cimentación</span>"
+},
+"00-138": {
+"fr": "ne pas prendre en compte",
+"es": "no considerar"
+},
+"00-139": {
+"fr": "prendre en compte (50 %)",
+"es": "considerar (50 %)"
+},
+"00-140": {
+"fr": "<span>Profondeur d'encastrement d [m]</span>",
+"es": "<span>Profundidad de empotramiento d [m]</span>"
+},
+"00-141": {
+"fr": "Seules les charges verticales permanentes agissent favorablement (γ = 1,0). Valeurs du sol φ′, γ issues de la fiche « Terrain ». La butée exige de grands déplacements — donc au plus la moitié, et seulement si le sol devant la fondation est présent de façon durable.",
+"es": "Solo las cargas verticales permanentes actúan favorablemente (γ = 1,0). Valores del terreno φ′, γ de la ficha «Terreno». El empuje pasivo requiere grandes desplazamientos; por ello, como máximo la mitad y solo si el terreno delante de la cimentación está presente de forma permanente."
+},
+"00-142": {
+"fr": "<span>Corps flottant</span>",
+"es": "<span>Cuerpo flotante</span>"
+},
+"00-143": {
+"fr": "Parallélépipède (ponton)",
+"es": "Prisma rectangular (pontón)"
+},
+"00-144": {
+"fr": "Prisme trapézoïdal (ponton à pans inclinés, coin)",
+"es": "Prisma trapezoidal (pontón con chaflanes, cuña)"
+},
+"00-145": {
+"fr": "Cylindre vertical (bouée, caisson)",
+"es": "Cilindro vertical (boya, cajón)"
+},
+"00-146": {
+"fr": "Cylindre horizontal (tuyau, tube flottant)",
+"es": "Cilindro horizontal (tubo, tubo flotante)"
+},
+"00-147": {
+"fr": "Sphère (bouée)",
+"es": "Esfera (boya)"
+},
+"00-148": {
+"fr": "<span class=\"ws-lB\">Largeur B [m] (axe de basculement longitudinal)</span>",
+"es": "<span class=\"ws-lB\">Ancho B [m] (eje de vuelco longitudinal)</span>"
+},
+"00-149": {
+"fr": "<span>Largeur du fond B<sub>u</sub> [m] (0 = coin)</span>",
+"es": "<span>Ancho del fondo B<sub>u</sub> [m] (0 = cuña)</span>"
+},
+"00-150": {
+"fr": "<span>Diamètre D [m]</span>",
+"es": "<span>Diámetro D [m]</span>"
+},
+"00-151": {
+"fr": "Enduit de plâtre",
+"es": "Enlucido de yeso"
+},
+"00-152": {
+"fr": "Enduit chaux-ciment",
+"es": "Enlucido de cal y cemento"
+},
+"00-153": {
+"fr": "Chape ciment",
+"es": "Solera de cemento"
+},
+"00-154": {
+"fr": "Béton normal (non armé)",
+"es": "Hormigón normal (en masa)"
+},
+"00-155": {
+"fr": "Brique silico-calcaire RDK 1,8",
+"es": "Ladrillo silicocalcáreo RDK 1,8"
+},
+"00-156": {
+"fr": "Brique silico-calcaire RDK 2,0",
+"es": "Ladrillo silicocalcáreo RDK 2,0"
+},
+"00-157": {
+"fr": "Brique pleine RDK 1,8",
+"es": "Ladrillo macizo RDK 1,8"
+},
+"00-158": {
+"fr": "Brique perforée verticalement RDK 0,8",
+"es": "Ladrillo perforado RDK 0,8"
+},
+"00-159": {
+"fr": "Brique rectifiée isolante (λ 0,09)",
+"es": "Bloque cerámico rectificado aislante (λ 0,09)"
+},
+"00-160": {
+"fr": "Béton cellulaire RDK 0,35",
+"es": "Hormigón celular RDK 0,35"
+},
+"00-161": {
+"fr": "Bloc plein en béton léger RDK 0,8",
+"es": "Bloque macizo de hormigón ligero RDK 0,8"
+},
+"00-162": {
+"fr": "Laine minérale WLS 035",
+"es": "Lana mineral WLS 035"
+},
+"00-163": {
+"fr": "Laine minérale WLS 032",
+"es": "Lana mineral WLS 032"
+},
+"00-164": {
+"fr": "PSE WLS 032 (gris)",
+"es": "EPS WLS 032 (gris)"
+},
+"00-165": {
+"fr": "Isolant en fibres de bois WLS 040",
+"es": "Aislamiento de fibra de madera WLS 040"
+},
+"00-166": {
+"fr": "Cellulose WLS 040",
+"es": "Celulosa WLS 040"
+},
+"00-167": {
+"fr": "Bois résineux",
+"es": "Madera de conífera"
+},
+"00-168": {
+"fr": "Panneau OSB",
+"es": "Tablero OSB"
+},
+"00-169": {
+"fr": "Plaque de plâtre cartonnée",
+"es": "Placa de yeso laminado"
+},
+"00-170": {
+"fr": "Panneau de laine de bois",
+"es": "Panel de lana de madera"
+},
+"00-171": {
+"fr": "Film PE 0,2 mm (s_d = 100 m)",
+"es": "Lámina de PE 0,2 mm (s_d = 100 m)"
+},
+"00-172": {
+"fr": "Pare-vapeur 0,2 mm (s_d = 2 m)",
+"es": "Freno de vapor 0,2 mm (s_d = 2 m)"
+},
+"00-173": {
+"fr": "Membrane bitumineuse de toiture 4 mm (s_d ≈ 200 m)",
+"es": "Lámina bituminosa de cubierta 4 mm (s_d ≈ 200 m)"
+},
+"00-174": {
+"fr": "Tuiles",
+"es": "Tejas"
+},
+"00-175": {
+"fr": "Mur (flux de chaleur horizontal)",
+"es": "Muro (flujo de calor horizontal)"
+},
+"00-176": {
+"fr": "Toiture, plafond sous extérieur (flux de chaleur vers le haut)",
+"es": "Cubierta, techo bajo exterior (flujo de calor ascendente)"
+},
+"00-177": {
+"fr": "Plancher sur air extérieur (flux de chaleur vers le bas)",
+"es": "Forjado sobre aire exterior (flujo de calor descendente)"
+},
+"00-178": {
+"fr": "Élément en contact avec le sol",
+"es": "Elemento en contacto con el terreno"
+},
+"00-179": {
+"fr": "Mur donnant sur un local non chauffé",
+"es": "Muro hacia un espacio no calefactado"
+},
+"00-180": {
+"fr": "Mur séparatif de logements (53 dB)",
+"es": "Muro medianero entre viviendas (53 dB)"
+},
+"00-181": {
+"fr": "Mur de cage d'escalier (53 dB)",
+"es": "Muro de caja de escalera (53 dB)"
+},
+"00-182": {
+"fr": "Plancher séparatif de logements (54 dB)",
+"es": "Forjado separador entre viviendas (54 dB)"
+},
+"00-183": {
+"fr": "Plancher sur cave/passage (52 dB)",
+"es": "Forjado sobre sótano/paso (52 dB)"
+},
+"00-184": {
+"fr": "Volée d'escalier (bruits de choc uniquement)",
+"es": "Tramo de escalera (solo ruido de impacto)"
+},
+"00-185": {
+"fr": "Mur mitoyen de maisons en bande, niveau le plus bas (59 dB)",
+"es": "Muro medianero de viviendas adosadas, planta más baja (59 dB)"
+},
+"00-186": {
+"fr": "Mur mitoyen de maisons en bande, niveaux supérieurs (62 dB)",
+"es": "Muro medianero de viviendas adosadas, plantas superiores (62 dB)"
+},
+"00-187": {
+"fr": "exact selon DIN 4109-2 (quatre flancs)",
+"es": "exacto según DIN 4109-2 (cuatro flancos)"
+},
+"00-188": {
+"fr": "simplifié (abattement forfaitaire)",
+"es": "simplificado (reducción a tanto alzado)"
+},
+"00-189": {
+"fr": "Jonction en croix",
+"es": "Encuentro en cruz"
+},
+"00-190": {
+"fr": "Jonction en T",
+"es": "Encuentro en T"
+},
+"00-191": {
+"fr": "Entaille",
+"es": "Entalladura"
+},
+"00-192": {
+"fr": "Poutre à deux versants",
+"es": "Viga de doble pendiente"
+},
+"00-193": {
+"fr": "Embrèvement",
+"es": "Embarbillado"
+},
+"00-194": {
+"fr": "Bois massif (résineux)",
+"es": "Madera maciza (conífera)"
+},
+"00-195": {
+"fr": "Bois lamellé-collé",
+"es": "Madera laminada encolada"
+},
+"00-196": {
+"fr": "t<sub>1</sub> [mm] (pièce latérale)",
+"es": "t<sub>1</sub> [mm] (pieza lateral)"
+},
+"00-197": {
+"fr": "t<sub>2</sub> [mm] (pièce centrale)",
+"es": "t<sub>2</sub> [mm] (pieza central)"
+},
+"00-198": {
+"fr": "permanente",
+"es": "permanente"
+},
+"00-199": {
+"fr": "moyen terme",
+"es": "media duración"
+},
+"00-200": {
+"fr": "instantanée",
+"es": "instantánea"
+},
+"00-201": {
+"fr": "Matériau et utilisation",
+"es": "Material y uso"
+},
+"00-202": {
+"fr": "1 (chauffé, intérieur)",
+"es": "1 (calefactado, interior)"
+},
+"00-203": {
+"fr": "2 (couvert, extérieur)",
+"es": "2 (cubierto, exterior)"
+},
+"00-204": {
+"fr": "3 (exposé aux intempéries)",
+"es": "3 (expuesto a la intemperie)"
+},
+"00-205": {
+"fr": "Classe de durée de chargement (charge la plus brève de la combinaison)",
+"es": "Clase de duración de la carga (carga más corta de la combinación)"
+},
+"00-206": {
+"fr": "moyen terme (charge d'exploitation)",
+"es": "media duración (sobrecarga de uso)"
+},
+"00-207": {
+"fr": "court terme (neige)",
+"es": "corta duración (nieve)"
+},
+"00-208": {
+"fr": "instantanée (vent)",
+"es": "instantánea (viento)"
+},
+"00-209": {
+"fr": "Les poutres à deux versants et à un versant sont fabriquées en bois lamellé-collé — le choix est ici fixé sur BLC.",
+"es": "Las vigas de doble pendiente y de pendiente simple se fabrican con madera laminada encolada; la selección está fijada aquí en MLE."
+},
+"00-210": {
+"fr": "Entaille à l'appui",
+"es": "Entalladura en el apoyo"
+},
+"00-211": {
+"fr": "Position de l'entaille",
+"es": "Posición de la entalladura"
+},
+"00-212": {
+"fr": "en bas, à l'appui (face tendue)",
+"es": "abajo, en el apoyo (cara traccionada)"
+},
+"00-213": {
+"fr": "en haut, à l'opposé de l'appui",
+"es": "arriba, en el lado opuesto al apoyo"
+},
+"00-214": {
+"fr": "Hauteur de la poutre h [mm]",
+"es": "Canto de la viga h [mm]"
+},
+"00-215": {
+"fr": "Hauteur résiduelle h<sub>ef</sub> [mm]",
+"es": "Canto residual h<sub>ef</sub> [mm]"
+},
+"00-216": {
+"fr": "Distance x [mm] (réaction d'appui jusqu'au coin de l'entaille)",
+"es": "Distancia x [mm] (reacción de apoyo hasta la esquina de la entalladura)"
+},
+"00-217": {
+"fr": "Biseau i (horizontal : vertical, 0 = à angle droit)",
+"es": "Chaflán i (horizontal : vertical, 0 = en ángulo recto)"
+},
+"00-218": {
+"fr": "V<sub>Ed</sub> [kN] (réaction d'appui)",
+"es": "V<sub>Ed</sub> [kN] (reacción de apoyo)"
+},
+"00-219": {
+"fr": "EN 1995-1-1, 6.5.2 : une traction perpendiculaire au fil apparaît à l'angle rentrant d'une entaille inférieure — le bois s'y fend. Le coefficient de réduction k<sub>v</sub> en tient compte. Un biseau (i &gt; 0) atténue l'effet d'entaille.",
+"es": "EN 1995-1-1, 6.5.2: en la esquina entrante de una entalladura inferior aparece tracción perpendicular a la fibra y la madera se fisura allí. El coeficiente de reducción k<sub>v</sub> lo tiene en cuenta. Un chaflán (i &gt; 0) atenúa el efecto de entalladura."
+},
+"00-220": {
+"fr": "Poutre à deux versants ou à un versant",
+"es": "Viga de doble pendiente o de pendiente simple"
+},
+"00-221": {
+"fr": "Poutre à deux versants (symétrique)",
+"es": "Viga de doble pendiente (simétrica)"
+},
+"00-222": {
+"fr": "Poutre à un versant",
+"es": "Viga de pendiente simple"
+},
+"00-223": {
+"fr": "Hauteur à l'appui h<sub>0</sub> [mm]",
+"es": "Canto en el apoyo h<sub>0</sub> [mm]"
+},
+"00-224": {
+"fr": "<span class=\"sd-hap-l\">Hauteur au faîtage h<sub>ap</sub> [mm]</span>",
+"es": "<span class=\"sd-hap-l\">Canto en la cumbrera h<sub>ap</sub> [mm]</span>"
+},
+"00-225": {
+"fr": "q<sub>Ed</sub> [kN/m] (charge uniforme, poids propre inclus)",
+"es": "q<sub>Ed</sub> [kN/m] (carga uniforme, incl. peso propio)"
+},
+"00-226": {
+"fr": "EN 1995-1-1, 6.4 : sur le bord incliné (biseauté), les fibres débouchent en biais — outre σ<sub>m</sub>, il y agit du cisaillement et de la compression perpendiculaire au fil. Dans une poutre à deux versants, des contraintes de traction perpendiculaire au fil apparaissent en plus au faîtage. Arête inférieure droite, charge par le dessus.",
+"es": "EN 1995-1-1, 6.4: en el borde inclinado (cortado) las fibras terminan en ángulo; además de σ<sub>m</sub> actúan allí cortante y compresión perpendicular a la fibra. En una viga de doble pendiente aparecen además tensiones de tracción perpendicular a la fibra en la cumbrera. Borde inferior recto, carga desde arriba."
+},
+"00-227": {
+"fr": "Embrèvement (compression oblique au fil)",
+"es": "Embarbillado (compresión oblicua a la fibra)"
+},
+"00-228": {
+"fr": "Type d'embrèvement",
+"es": "Tipo de embarbillado"
+},
+"00-229": {
+"fr": "Embrèvement avant (la face partage l'angle en deux)",
+"es": "Embarbillado frontal (la cara biseca el ángulo)"
+},
+"00-230": {
+"fr": "Embrèvement arrière (face ⊥ diagonale)",
+"es": "Embarbillado posterior (cara ⊥ puntal)"
+},
+"00-231": {
+"fr": "Angle d'assemblage γ [°] (diagonale / membrure)",
+"es": "Ángulo de unión γ [°] (puntal / cordón)"
+},
+"00-232": {
+"fr": "Largeur b [mm] (diagonale = membrure)",
+"es": "Ancho b [mm] (puntal = cordón)"
+},
+"00-233": {
+"fr": "Hauteur de la membrure h [mm]",
+"es": "Canto del cordón h [mm]"
+},
+"00-234": {
+"fr": "Profondeur d'embrèvement t<sub>v</sub> [mm]",
+"es": "Profundidad del embarbillado t<sub>v</sub> [mm]"
+},
+"00-235": {
+"fr": "Longueur de bois en bout l<sub>v</sub> [mm]",
+"es": "Longitud de talón l<sub>v</sub> [mm]"
+},
+"00-236": {
+"fr": "S<sub>Ed</sub> [kN] (compression dans la diagonale)",
+"es": "S<sub>Ed</sub> [kN] (compresión en el puntal)"
+},
+"00-237": {
+"fr": "EN 1995-1-1, 6.2.2 : la résistance en compression dépend de l'angle α entre l'effort et le fil — entre f<sub>c,0</sub> (parallèle) et f<sub>c,90</sub> (perpendiculaire). k<sub>c,90</sub> = 1 est du côté de la sécurité.",
+"es": "EN 1995-1-1, 6.2.2: la resistencia a compresión depende del ángulo α entre la fuerza y la fibra, entre f<sub>c,0</sub> (paralela) y f<sub>c,90</sub> (perpendicular). k<sub>c,90</sub> = 1 queda del lado seguro."
+},
+"00-238": {
+"fr": "Section et matériau",
+"es": "Sección y material"
+},
+"00-239": {
+"fr": "Hauteur h [mm]",
+"es": "Canto h [mm]"
+},
+"00-240": {
+"fr": "Classe de durée de chargement (charge la plus brève de la combinaison)",
+"es": "Clase de duración de la carga (carga más corta de la combinación)"
+},
+"00-241": {
+"fr": "permanente (poids propre seul)",
+"es": "permanente (solo peso propio)"
+},
+"00-242": {
+"fr": "long terme (stockage, archives)",
+"es": "larga duración (almacenes, archivos)"
+},
+"00-243": {
+"fr": "moyen terme (charge d'exploitation habitation, bureaux)",
+"es": "media duración (sobrecarga de uso vivienda, oficinas)"
+},
+"00-244": {
+"fr": "Efforts internes (ELU)",
+"es": "Esfuerzos internos (ELU)"
+},
+"00-245": {
+"fr": "Charge uniforme",
+"es": "Carga uniforme"
+},
+"00-246": {
+"fr": "Réaction d'appui F<sub>Ed</sub> [kN]",
+"es": "Reacción de apoyo F<sub>Ed</sub> [kN]"
+},
+"00-247": {
+"fr": "Longueur d'appui l [mm]",
+"es": "Longitud de apoyo l [mm]"
+},
+"00-248": {
+"fr": "Déversement et flambement",
+"es": "Pandeo lateral y pandeo"
+},
+"00-249": {
+"fr": "Distance entre maintiens latéraux L<sub>K</sub> [m]",
+"es": "Distancia entre arriostramientos laterales L<sub>K</sub> [m]"
+},
+"00-250": {
+"fr": "bord supérieur",
+"es": "borde superior"
+},
+"00-251": {
+"fr": "bord inférieur",
+"es": "borde inferior"
+},
+"00-252": {
+"fr": "L<sub>K</sub> = 0 : bord comprimé maintenu de façon continue, par ex. par le plancher cloué — pas de déversement.",
+"es": "L<sub>K</sub> = 0: borde comprimido arriostrado de forma continua, p. ej. por el forjado clavado; no hay pandeo lateral."
+},
+"00-253": {
+"fr": "Flèche (ELS, caractéristique)",
+"es": "Flecha (ELS, característica)"
+},
+"00-254": {
+"fr": "M<sub>G,k</sub> [kNm] (permanent)",
+"es": "M<sub>G,k</sub> [kNm] (permanente)"
+},
+"00-255": {
+"fr": "M<sub>Q,k</sub> [kNm] (variable)",
+"es": "M<sub>Q,k</sub> [kNm] (variable)"
+},
+"00-256": {
+"fr": "ψ<sub>2</sub> de la charge d'exploitation",
+"es": "ψ<sub>2</sub> de la sobrecarga de uso"
+},
+"00-257": {
+"fr": "Valeurs limites selon l'AN : w<sub>inst</sub> ≤ L/300, w<sub>fin</sub> ≤ L/200, w<sub>net,fin</sub> ≤ L/300.",
+"es": "Valores límite según el AN: w<sub>inst</sub> ≤ L/300, w<sub>fin</sub> ≤ L/200, w<sub>net,fin</sub> ≤ L/300."
+},
+"00-258": {
+"fr": "Béton armé — poutres, dalles, poteaux, poinçonnement",
+"es": "Hormigón armado: vigas, losas, pilares, punzonamiento"
+},
+"00-259": {
+"fr": "Dimensionnement selon DIN EN 1992-1-1 avec l'AN allemande : flexion (y compris avec armatures comprimées), effort tranchant, liaison de la membrure, ancrage, décalage de la courbe des moments, ouverture de fissures, élancement, poteaux par la méthode du poteau modèle et poinçonnement.",
+"es": "Dimensionamiento según DIN EN 1992-1-1 con el AN alemán: flexión (también con armadura de compresión), cortante, unión del ala, anclaje, decalaje de la ley de momentos, ancho de fisura, esbeltez, pilares con el método del pilar modelo y punzonamiento."
+},
+"00-260": {
+"fr": "cloisons sensibles aux déformations (l/d ≤ K²·150/l)",
+"es": "tabiques sensibles a las deformaciones (l/d ≤ K²·150/l)"
+},
+"00-261": {
+"fr": "choisir automatiquement",
+"es": "elegir automáticamente"
+},
+"00-262": {
+"fr": "Déformation gênée possible (armatures minimales pour l'ouverture de fissures)",
+"es": "Coacción posible (armadura mínima para el ancho de fisura)"
+},
+"00-263": {
+"fr": "Vérifier l'ancrage à l'appui d'extrémité",
+"es": "Comprobar el anclaje en el apoyo extremo"
+},
+"00-264": {
+"fr": "Avec « automatique », on choisit les armatures de plus petite section qui satisfont la flexion, les espacements des barres et l'ouverture de fissures.",
+"es": "Con «automático» se elige la armadura de menor área que cumple flexión, separación de barras y ancho de fisura."
+},
+"00-265": {
+"fr": "choisir automatiquement le profilé le plus léger de la série",
+"es": "elegir automáticamente el perfil más ligero de la serie"
+},
+"00-266": {
+"fr": "le filetage se trouve dans le plan de cisaillement",
+"es": "la rosca está en el plano de corte"
+},
+"00-267": {
+"fr": "choisir automatiquement la plus petite hauteur suffisante",
+"es": "elegir automáticamente el menor canto suficiente"
+},
+"00-268": {
+"fr": "Section",
+"es": "Sección"
+},
+"00-269": {
+"fr": "Poteau et position",
+"es": "Pilar y posición"
+},
+"00-270": {
+"fr": "Section du poteau",
+"es": "Sección del pilar"
+},
+"00-271": {
+"fr": "Position",
+"es": "Posición"
+},
+"00-272": {
+"fr": "(effort dans le poteau issu de la dalle, ELU)",
+"es": "(esfuerzo en el pilar procedente del forjado, ELU)"
+},
+"00-273": {
+"fr": "Armatures de flexion de la dalle (en haut, au-dessus du poteau)",
+"es": "Armadura de flexión de la losa (superior, sobre el pilar)"
+},
+"00-274": {
+"fr": "Ø x [mm] (lit inférieur)",
+"es": "Ø x [mm] (capa inferior)"
+},
+"00-275": {
+"fr": "Espacement s<sub>x</sub> [cm]",
+"es": "Separación s<sub>x</sub> [cm]"
+},
+"00-276": {
+"fr": "Ø y [mm] (lit supérieur)",
+"es": "Ø y [mm] (capa superior)"
+},
+"00-277": {
+"fr": "Espacement s<sub>y</sub> [cm]",
+"es": "Separación s<sub>y</sub> [cm]"
+},
+"00-278": {
+"fr": "Poinçonnement",
+"es": "Punzonamiento"
+},
+"00-279": {
+"fr": "rectangulaire",
+"es": "rectangular"
+},
+"00-280": {
+"fr": "circulaire",
+"es": "circular"
+},
+"00-281": {
+"fr": "Poteau intérieur (β = 1,10)",
+"es": "Pilar interior (β = 1,10)"
+},
+"00-282": {
+"fr": "Poteau de rive (β = 1,40)",
+"es": "Pilar de borde (β = 1,40)"
+},
+"00-283": {
+"fr": "Poteau d'angle (β = 1,50)",
+"es": "Pilar de esquina (β = 1,50)"
+},
+"00-284": {
+"fr": "β selon l'AN (simplifié, système à nœuds fixes avec rapport de portées 0,8 … 1,25). Pour les poteaux de rive et d'angle, c<sub>1</sub> est perpendiculaire au bord libre.",
+"es": "β según el AN (simplificado, sistema intraslacional con relación de luces 0,8 … 1,25). En pilares de borde y de esquina, c<sub>1</sub> es perpendicular al borde libre."
+},
+"00-285": {
+"fr": "Les armatures doivent se situer dans la zone ± 3d à côté du poteau. Les lits « inférieur » et « supérieur » se rapportent aux armatures sur appui en partie haute de la dalle : le lit extérieur a la plus grande hauteur utile.",
+"es": "La armadura debe situarse en la zona ± 3d junto al pilar. Las capas «inferior» y «superior» se refieren a la armadura de apoyo en la parte superior de la losa: la capa exterior tiene el mayor canto útil."
+},
+"00-286": {
+"fr": "Poteau et platine d'assise",
+"es": "Pilar y placa base"
+},
+"00-287": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-288": {
+"fr": "Série",
+"es": "Serie"
+},
+"00-289": {
+"fr": "Profilé",
+"es": "Perfil"
+},
+"00-290": {
+"fr": "Largeur de platine B<sub>p</sub> [mm] (dans le sens des semelles)",
+"es": "Ancho de la placa B<sub>p</sub> [mm] (en dirección de las alas)"
+},
+"00-291": {
+"fr": "Longueur de platine L<sub>p</sub> [mm] (dans le sens de l'âme)",
+"es": "Longitud de la placa L<sub>p</sub> [mm] (en dirección del alma)"
+},
+"00-292": {
+"fr": "Épaisseur de platine t<sub>p</sub> [mm]",
+"es": "Espesor de la placa t<sub>p</sub> [mm]"
+},
+"00-293": {
+"fr": "Acier de la platine",
+"es": "Acero de la placa"
+},
+"00-294": {
+"fr": "Fondation et efforts",
+"es": "Cimentación y fuerzas"
+},
+"00-295": {
+"fr": "Béton de la fondation",
+"es": "Hormigón de la cimentación"
+},
+"00-296": {
+"fr": "Fondation B<sub>f</sub> × L<sub>f</sub> [mm]",
+"es": "Cimentación B<sub>f</sub> × L<sub>f</sub> [mm]"
+},
+"00-297": {
+"fr": "(compression)",
+"es": "(compresión)"
+},
+"00-298": {
+"fr": "Soudure d'angle poteau–platine a [mm]",
+"es": "Soldadura en ángulo pilar–placa a [mm]"
+},
+"00-299": {
+"fr": "Pied de poteau",
+"es": "Basa de pilar"
+},
+"00-300": {
+"fr": "Fondation superficielle",
+"es": "Cimentación superficial"
+},
+"00-301": {
+"fr": "Tassement",
+"es": "Asiento"
+},
+"00-302": {
+"fr": "Mur de soutènement",
+"es": "Muro de contención"
+},
+"00-303": {
+"fr": "Poussée d'Archimède",
+"es": "Flotación"
+},
+"00-304": {
+"fr": "Terrain (valeurs caractéristiques)",
+"es": "Terreno (valores característicos)"
+},
+"00-305": {
+"fr": "Sol (valeurs indicatives, remplit les champs)",
+"es": "Suelo (valores orientativos, rellena los campos)"
+},
+"00-306": {
+"fr": "Sable lâche",
+"es": "Arena suelta"
+},
+"00-307": {
+"fr": "Sable moyennement dense",
+"es": "Arena medianamente densa"
+},
+"00-308": {
+"fr": "Sable dense / sable graveleux",
+"es": "Arena densa / arena con grava"
+},
+"00-309": {
+"fr": "Gravier moyennement dense à dense",
+"es": "Grava medianamente densa a densa"
+},
+"00-310": {
+"fr": "Limon raide",
+"es": "Limo firme"
+},
+"00-311": {
+"fr": "Argile raide",
+"es": "Arcilla firme"
+},
+"00-312": {
+"fr": "Argile très raide",
+"es": "Arcilla muy firme"
+},
+"00-313": {
+"fr": "valeurs propres",
+"es": "valores propios"
+},
+"00-314": {
+"fr": "(au-dessus de la base)",
+"es": "(por encima de la base)"
+},
+"00-315": {
+"fr": "(sous la base, γ′ en présence de nappe)",
+"es": "(bajo la base, γ′ con nivel freático)"
+},
+"00-316": {
+"fr": "Valeurs indicatives comme dans statiq·ref (Géotechnique › Paramètres du sol). Dans un projet, ce sont les valeurs du rapport géotechnique qui s'appliquent.",
+"es": "Valores orientativos como en statiq·ref (Geotecnia › Parámetros del suelo). En un proyecto rigen los valores del informe geotécnico."
+},
+"00-317": {
+"fr": "Fondation",
+"es": "Cimentación"
+},
+"00-318": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-319": {
+"fr": "Forme",
+"es": "Forma"
+},
+"00-320": {
+"fr": "Semelle isolée (rectangulaire)",
+"es": "Zapata aislada (rectangular)"
+},
+"00-321": {
+"fr": "Semelle filante (par m)",
+"es": "Zapata corrida (por m)"
+},
+"00-322": {
+"fr": "Largeur b [m] (direction de H et M)",
+"es": "Ancho b [m] (dirección de H y M)"
+},
+"00-323": {
+"fr": "Longueur a [m]",
+"es": "Longitud a [m]"
+},
+"00-324": {
+"fr": "Profondeur d'encastrement d [m]",
+"es": "Profundidad de empotramiento d [m]"
+},
+"00-325": {
+"fr": "Hauteur de la fondation h<sub>f</sub> [m]",
+"es": "Canto de la cimentación h<sub>f</sub> [m]"
+},
+"00-326": {
+"fr": "size ajoute lui-même le poids propre de la fondation (25 kN/m³) et du remblai jusqu'au niveau du terrain.",
+"es": "size añade por sí mismo el peso propio de la cimentación (25 kN/m³) y del relleno hasta la superficie del terreno."
+},
+"00-327": {
+"fr": "Charges en tête de fondation (caractéristiques)",
+"es": "Cargas sobre la cara superior de la cimentación (características)"
+},
+"00-328": {
+"fr": "Situation de projet BS-P selon DIN 1054 : γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (capacité portante), γ<sub>R,h</sub> = 1,10 (glissement). H et M agissent dans la direction b.",
+"es": "Situación de proyecto BS-P según DIN 1054: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (hundimiento), γ<sub>R,h</sub> = 1,10 (deslizamiento). H y M actúan en la dirección b."
+},
+"00-329": {
+"fr": "Géotechnique",
+"es": "Geotecnia"
+},
+"00-330": {
+"fr": "Projet",
+"es": "Proyecto"
+},
+"00-331": {
+"fr": "Pression de l'eau",
+"es": "Presión del agua"
+},
+"00-332": {
+"fr": "Flottaison",
+"es": "Flotación"
+},
+"00-333": {
+"fr": "Conduite",
+"es": "Tubería"
+},
+"00-334": {
+"fr": "Canal",
+"es": "Canal"
+},
+"00-335": {
+"fr": "Déversoir",
+"es": "Vertedero"
+},
+"00-336": {
+"fr": "Surface plane sous pression d'eau",
+"es": "Superficie plana bajo presión de agua"
+},
+"00-337": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-338": {
+"fr": "Inclinaison α par rapport à l'horizontale [°]",
+"es": "Inclinación α respecto a la horizontal [°]"
+},
+"00-339": {
+"fr": "Largeur b [m]",
+"es": "Ancho b [m]"
+},
+"00-340": {
+"fr": "Arête supérieure sous le niveau d'eau t<sub>o</sub> [m]",
+"es": "Borde superior bajo el nivel del agua t<sub>o</sub> [m]"
+},
+"00-341": {
+"fr": "Longueur de la surface L [m] (dans le sens de la surface)",
+"es": "Longitud de la superficie L [m] (a lo largo de la superficie)"
+},
+"00-342": {
+"fr": "Eau aval au-dessus de l'arête inférieure h<sub>u</sub> [m] (0 = sec)",
+"es": "Agua aguas abajo sobre el borde inferior h<sub>u</sub> [m] (0 = seco)"
+},
+"00-343": {
+"fr": "α = 90° : paroi verticale. t<sub>o</sub> = 0 : niveau d'eau à l'arête supérieure (par ex. barrage), t<sub>o</sub> &gt; 0 : surface entièrement immergée (par ex. vanne). Poids volumique γ<sub>w</sub> = ρ·g = 9,81 kN/m³.",
+"es": "α = 90°: pared vertical. t<sub>o</sub> = 0: nivel del agua en el borde superior (p. ej. presa), t<sub>o</sub> &gt; 0: superficie totalmente sumergida (p. ej. compuerta). Peso específico γ<sub>w</sub> = ρ·g = 9,81 kN/m³."
+},
+"00-344": {
+"fr": "Corps flottant parallélépipédique (ponton)",
+"es": "Cuerpo flotante prismático rectangular (pontón)"
+},
+"00-345": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-346": {
+"fr": "Longueur L [m]",
+"es": "Longitud L [m]"
+},
+"00-347": {
+"fr": "Largeur B [m] (axe de basculement longitudinal)",
+"es": "Ancho B [m] (eje de vuelco longitudinal)"
+},
+"00-348": {
+"fr": "Hauteur de bord H [m]",
+"es": "Altura lateral H [m]"
+},
+"00-349": {
+"fr": "Poids G [kN] (avec chargement)",
+"es": "Peso G [kN] (con carga)"
+},
+"00-350": {
+"fr": "Centre de gravité au-dessus du fond z<sub>G</sub> [m]",
+"es": "Centro de gravedad sobre el fondo z<sub>G</sub> [m]"
+},
+"00-351": {
+"fr": "Franc-bord minimal f [m]",
+"es": "Francobordo mínimo f [m]"
+},
+"00-352": {
+"fr": "Eau",
+"es": "Agua"
+},
+"00-353": {
+"fr": "Eau douce (9,81 kN/m³)",
+"es": "Agua dulce (9,81 kN/m³)"
+},
+"00-354": {
+"fr": "Eau de mer (10,05 kN/m³)",
+"es": "Agua de mar (10,05 kN/m³)"
+},
+"00-355": {
+"fr": "Le corps flotte de façon stable si le métacentre M est au-dessus du centre de gravité G (hauteur métacentrique GM &gt; 0). Le basculement se fait autour de l'axe longitudinal (pour les prismes et cylindres horizontaux, la direction étroite). Hauteurs z<sub>G</sub> au-dessus de l'arête inférieure. Au changement de forme, des valeurs d'exemple adaptées sont insérées.",
+"es": "El cuerpo flota de forma estable si el metacentro M está por encima del centro de gravedad G (altura metacéntrica GM &gt; 0). El vuelco se produce alrededor del eje longitudinal (en prismas y cilindros horizontales, la dirección estrecha). Alturas z<sub>G</sub> sobre el borde inferior. Al cambiar de forma se insertan valores de ejemplo adecuados."
+},
+"00-356": {
+"fr": "Conduite entre deux réservoirs",
+"es": "Tubería entre dos depósitos"
+},
+"00-357": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-358": {
+"fr": "Diamètre intérieur D [mm]",
+"es": "Diámetro interior D [mm]"
+},
+"00-359": {
+"fr": "Longueur L [m]",
+"es": "Longitud L [m]"
+},
+"00-360": {
+"fr": "Matériau de la conduite",
+"es": "Material de la tubería"
+},
+"00-361": {
+"fr": "PE / PVC (k = 0,007 mm)",
+"es": "PE / PVC (k = 0,007 mm)"
+},
+"00-362": {
+"fr": "Acier neuf (k = 0,05 mm)",
+"es": "Acero nuevo (k = 0,05 mm)"
+},
+"00-363": {
+"fr": "Fonte revêtue de ciment (k = 0,1 mm)",
+"es": "Fundición con revestimiento de cemento (k = 0,1 mm)"
+},
+"00-364": {
+"fr": "Béton (k = 0,4 mm)",
+"es": "Hormigón (k = 0,4 mm)"
+},
+"00-365": {
+"fr": "conduite ancienne, incrustée (k = 1,0 mm)",
+"es": "tubería antigua, incrustada (k = 1,0 mm)"
+},
+"00-366": {
+"fr": "valeur propre",
+"es": "valor propio"
+},
+"00-367": {
+"fr": "Rugosité k [mm]",
+"es": "Rugosidad k [mm]"
+},
+"00-368": {
+"fr": "Σζ pertes de charge singulières",
+"es": "Σζ pérdidas localizadas"
+},
+"00-369": {
+"fr": "Différence de hauteur disponible Δh [m]",
+"es": "Diferencia de altura disponible Δh [m]"
+},
+"00-370": {
+"fr": "Température de l'eau",
+"es": "Temperatura del agua"
+},
+"00-371": {
+"fr": "Σζ : entrée (≈ 0,5), coudes (≈ 0,2–0,5 chacun), vanne ouverte (≈ 0,2), sortie dans le réservoir (1,0). La différence de hauteur Δh entre les niveaux d'eau doit couvrir toutes les pertes.",
+"es": "Σζ: entrada (≈ 0,5), codos (≈ 0,2–0,5 cada uno), válvula de compuerta abierta (≈ 0,2), salida al depósito (1,0). La diferencia de altura Δh entre los niveles de agua debe cubrir todas las pérdidas."
+},
+"00-372": {
+"fr": "Canal à surface libre (écoulement uniforme)",
+"es": "Canal abierto (flujo uniforme)"
+},
+"00-373": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-374": {
+"fr": "Pente du fond I [‰]",
+"es": "Pendiente del fondo I [‰]"
+},
+"00-375": {
+"fr": "Largeur au fond b [m]",
+"es": "Ancho del fondo b [m]"
+},
+"00-376": {
+"fr": "Talus 1 : m (0 = rectangle)",
+"es": "Talud 1 : m (0 = rectángulo)"
+},
+"00-377": {
+"fr": "Surface",
+"es": "Superficie"
+},
+"00-378": {
+"fr": "Béton lisse (k<sub>St</sub> = 85)",
+"es": "Hormigón liso (k<sub>St</sub> = 85)"
+},
+"00-379": {
+"fr": "Béton rugueux / pavage (k<sub>St</sub> = 65)",
+"es": "Hormigón rugoso / adoquinado (k<sub>St</sub> = 65)"
+},
+"00-380": {
+"fr": "Gazon entretenu (k<sub>St</sub> = 35)",
+"es": "Césped cuidado (k<sub>St</sub> = 35)"
+},
+"00-381": {
+"fr": "Fond en gravier (k<sub>St</sub> = 30)",
+"es": "Fondo de grava (k<sub>St</sub> = 30)"
+},
+"00-382": {
+"fr": "quasi naturel, végétalisé (k<sub>St</sub> = 20)",
+"es": "seminatural, con vegetación (k<sub>St</sub> = 20)"
+},
+"00-383": {
+"fr": "valeur propre",
+"es": "valor propio"
+},
+"00-384": {
+"fr": "Hauteur du canal H [m]",
+"es": "Altura del canal H [m]"
+},
+"00-385": {
+"fr": "Revanche f [m]",
+"es": "Resguardo f [m]"
+},
+"00-386": {
+"fr": "Écoulement uniforme : les pentes du fond, de la surface libre et de la ligne d'énergie sont égales. Formule d'écoulement de Gauckler-Manning-Strickler, v = k<sub>St</sub>·R<sup>2/3</sup>·I<sup>1/2</sup>.",
+"es": "Flujo uniforme: las pendientes del fondo, de la superficie libre y de la línea de energía son iguales. Fórmula de flujo de Gauckler-Manning-Strickler, v = k<sub>St</sub>·R<sup>2/3</sup>·I<sup>1/2</sup>."
+},
+"00-387": {
+"fr": "Déversoir à déversement libre",
+"es": "Vertedero con vertido libre"
+},
+"00-388": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-389": {
+"fr": "Largeur de déversement b [m]",
+"es": "Ancho de vertido b [m]"
+},
+"00-390": {
+"fr": "Type de déversoir",
+"es": "Tipo de vertedero"
+},
+"00-391": {
+"fr": "à crête mince (μ = 0,64)",
+"es": "de cresta afilada (μ = 0,64)"
+},
+"00-392": {
+"fr": "à crête arrondie (μ = 0,75)",
+"es": "de cresta redondeada (μ = 0,75)"
+},
+"00-393": {
+"fr": "à seuil épais (μ = 0,577)",
+"es": "de cresta ancha (μ = 0,577)"
+},
+"00-394": {
+"fr": "valeur propre",
+"es": "valor propio"
+},
+"00-395": {
+"fr": "Coefficient de débit μ",
+"es": "Coeficiente de desagüe μ"
+},
+"00-396": {
+"fr": "Hauteur du déversoir w [m]",
+"es": "Altura del vertedero w [m]"
+},
+"00-397": {
+"fr": "niveau amont admissible au-dessus du fond [m]",
+"es": "nivel aguas arriba admisible sobre el fondo [m]"
+},
+"00-398": {
+"fr": "Physique du bâtiment",
+"es": "Física de la edificación"
+},
+"00-399": {
+"fr": "Composition de l'élément (intérieur → extérieur)",
+"es": "Composición del elemento (interior → exterior)"
+},
+"00-400": {
+"fr": "Désignation",
+"es": "Denominación"
+},
+"00-401": {
+"fr": "Matériau",
+"es": "Material"
+},
+"00-402": {
+"fr": "Le choix du matériau fixe λ, μ et ρ (valeurs indicatives selon DIN 4108-4 et DIN EN ISO 10456, comme dans statiq·ref) ; ces trois valeurs peuvent être remplacées par celles du fabricant. Épaisseur 0 ou « — » : la couche est omise.",
+"es": "La elección del material fija λ, μ y ρ (valores orientativos según DIN 4108-4 y DIN EN ISO 10456, como en statiq·ref); los tres pueden sustituirse por valores del fabricante. Espesor 0 o «—»: se omite la capa."
+},
+"00-403": {
+"fr": "Conditions aux limites",
+"es": "Condiciones de contorno"
+},
+"00-404": {
+"fr": "Élément",
+"es": "Elemento"
+},
+"00-405": {
+"fr": "Température intérieure θ<sub>i</sub> [°C]",
+"es": "Temperatura interior θ<sub>i</sub> [°C]"
+},
+"00-406": {
+"fr": "Température extérieure θ<sub>e</sub> [°C]",
+"es": "Temperatura exterior θ<sub>e</sub> [°C]"
+}
+}

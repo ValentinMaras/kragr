@@ -1,0 +1,1137 @@
+[
+ {
+  "id": "24-0",
+  "de": "Ausmitte:&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; überdrückte Länge:&nbsp; l<sub>c</sub> = l (e ≤ l/6) bzw. l<sub>c</sub> = 3 · (l/2 − e)<br> f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> ≤ 0,065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br> V<sub>Ed</sub> ≤ V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub>&nbsp;&nbsp;&nbsp; f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub>",
+  "en": "Eccentricity:&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; compressed length:&nbsp; l<sub>c</sub> = l (e ≤ l/6) or l<sub>c</sub> = 3 · (l/2 − e)<br> f<sub>vk</sub> = f<sub>vk0</sub> + 0.4 · σ<sub>d</sub> ≤ 0.065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br> V<sub>Ed</sub> ≤ V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub>&nbsp;&nbsp;&nbsp; f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub>"
+ },
+ {
+  "id": "24-1",
+  "de": "Auszug; außerdem Mindestdicken je Wandart und keine planmäßige Biegung (z. B. Erddruck → Kellerwand).",
+  "en": "Extract; also minimum thicknesses per wall type and no intended bending (e.g. earth pressure → basement wall)."
+ },
+ {
+  "id": "24-2",
+  "de": "Außenmaß",
+  "en": "External dimension"
+ },
+ {
+  "id": "24-3",
+  "de": "Außenmaß (Pfeiler, Wandstück): n = 11 → 137,5 − 1 = <b>136,5 cm</b>",
+  "en": "External dimension (pier, wall section): n = 11 → 137.5 − 1 = <b>136.5 cm</b>"
+ },
+ {
+  "id": "24-4",
+  "de": "Außenmaß (n = 4)",
+  "en": "External dimension (n = 4)"
+ },
+ {
+  "id": "24-5",
+  "de": "Baurichtmaß = n · 12,5 cm&nbsp;&nbsp;&nbsp; (n = Anzahl der Köpfe)<br> Außenmaß (Pfeiler, Wandlänge zwischen zwei Enden):&nbsp; A = n · 12,5 − 1 cm<br> Öffnungsmaß (Fenster, Tür, Nische):&nbsp; Ö = n · 12,5 + 1 cm<br> Anbaumaß (Vorsprung, Wand an Wand):&nbsp; V = n · 12,5 cm",
+  "en": "Nominal dimension = n · 12.5 cm&nbsp;&nbsp;&nbsp; (n = number of modules)<br> External dimension (pier, wall length between two ends):&nbsp; A = n · 12.5 − 1 cm<br> Opening dimension (window, door, recess):&nbsp; Ö = n · 12.5 + 1 cm<br> Projection dimension (nib, wall abutting wall):&nbsp; V = n · 12.5 cm"
+ },
+ {
+  "id": "24-6",
+  "de": "Beispiel",
+  "en": "Example"
+ },
+ {
+  "id": "24-7",
+  "de": "Beton (Hohlblock, Vollstein)",
+  "en": "Concrete (hollow block, solid unit)"
+ },
+ {
+  "id": "24-8",
+  "de": "Binderverband",
+  "en": "Header bond"
+ },
+ {
+  "id": "24-9",
+  "de": "Blockverband",
+  "en": "English bond"
+ },
+ {
+  "id": "24-10",
+  "de": "Charakteristische Druckfestigkeit f<sub>k</sub> (EN 1996-1-1, 3.6.1.2)",
+  "en": "Characteristic compressive strength f<sub>k</sub> (EN 1996-1-1, 3.6.1.2)"
+ },
+ {
+  "id": "24-11",
+  "de": "DF = Dünnformat. Alle Formate bauen auf dem Achtelmeter auf: 11,5 cm Stein + 1 cm Fuge = 12,5 cm.",
+  "en": "DF = thin format (Dünnformat). All formats are based on the eighth metre: 11.5 cm unit + 1 cm joint = 12.5 cm."
+ },
+ {
+  "id": "24-12",
+  "de": "Deckendurchbiegung →",
+  "en": "Floor deflection →"
+ },
+ {
+  "id": "24-13",
+  "de": "Deckenstützweite l<sub>f</sub> = 5,00 m ≤ 6,0 m ✓",
+  "en": "Floor span l<sub>f</sub> = 5.00 m ≤ 6.0 m ✓"
+ },
+ {
+  "id": "24-14",
+  "de": "Deckenstützweite l<sub>f</sub> [m]",
+  "en": "Floor span l<sub>f</sub> [m]"
+ },
+ {
+  "id": "24-15",
+  "de": "Die 1 cm ist eine Stoßfuge: Ein Wandstück hat eine Fuge weniger als Köpfe, eine Öffnung eine mehr.",
+  "en": "The 1 cm is a perpend joint: a wall section has one joint fewer than modules, an opening one more."
+ },
+ {
+  "id": "24-16",
+  "de": "Die Stahlbetondecke spannt die Wand am Kopf und Fuß teilweise ein — deshalb ist ρ<sub>2</sub> &lt; 1. Bei dicken Wänden ist die Einspannung im Verhältnis kleiner.",
+  "en": "The reinforced concrete floor partially restrains the wall at top and bottom — that is why ρ<sub>2</sub> &lt; 1. For thick walls the restraint is relatively smaller."
+ },
+ {
+  "id": "24-17",
+  "de": "Die Stoßfugen zweier Schichten müssen um ü versetzt sein, damit der Verband Lasten verteilt und Zug in Längsrichtung übertragen kann.",
+  "en": "The perpend joints of two courses must be offset by ü so that the bond distributes loads and can transfer tension in the longitudinal direction."
+ },
+ {
+  "id": "24-18",
+  "de": "Die Zahl hinter M ist die Druckfestigkeit in N/mm². Stoßfugen bei Normalmörtel ≈ 10 mm.",
+  "en": "The number after M is the compressive strength in N/mm². Perpend joints with general-purpose mortar ≈ 10 mm."
+ },
+ {
+  "id": "24-19",
+  "de": "Dünnbettmörtel DM",
+  "en": "Thin-layer mortar DM"
+ },
+ {
+  "id": "24-20",
+  "de": "Einsatz",
+  "en": "Use"
+ },
+ {
+  "id": "24-21",
+  "de": "Einzellast auf 200 × 175 mm",
+  "en": "Concentrated load on 200 × 175 mm"
+ },
+ {
+  "id": "24-22",
+  "de": "Endauflager (Außenwand)",
+  "en": "End support (external wall)"
+ },
+ {
+  "id": "24-23",
+  "de": "Endkriechzahl φ<sub>∞</sub> = 1,5 · Endschwinden ε<sub>∞</sub> = −0,2 mm/m · α<sub>t</sub> = 8 · 10⁻⁶ /K",
+  "en": "Final creep coefficient φ<sub>∞</sub> = 1.5 · final shrinkage ε<sub>∞</sub> = −0.2 mm/m · α<sub>t</sub> = 8 · 10⁻⁶ /K"
+ },
+ {
+  "id": "24-24",
+  "de": "Festigkeitsklasse",
+  "en": "Property class"
+ },
+ {
+  "id": "24-25",
+  "de": "Festigkeitsklassen (übliche)",
+  "en": "Strength classes (common)"
+ },
+ {
+  "id": "24-26",
+  "de": "Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Das deutsche NA ergänzt Steinzugversagen und Schubschlankheit — hier die Empfehlungen der EN.",
+  "en": "For V<sub>Rd</sub> use the smallest axial force, for edge compression the largest. The German NA adds unit tensile failure and shear slenderness — shown here are the EN recommendations."
+ },
+ {
+  "id": "24-27",
+  "de": "Gebäudehöhe über Gelände",
+  "en": "Building height above ground"
+ },
+ {
+  "id": "24-28",
+  "de": "Geländelast neben der Wand",
+  "en": "Surcharge next to the wall"
+ },
+ {
+  "id": "24-29",
+  "de": "Geländelast q<sub>k</sub> [kN/m²]",
+  "en": "Surcharge q<sub>k</sub> [kN/m²]"
+ },
+ {
+  "id": "24-30",
+  "de": "Grenze 0,065 · f<sub>b</sub> = 1,625 N/mm² → f<sub>vk</sub> = 0,344 N/mm²",
+  "en": "Limit 0.065 · f<sub>b</sub> = 1.625 N/mm² → f<sub>vk</sub> = 0.344 N/mm²"
+ },
+ {
+  "id": "24-31",
+  "de": "Grenze 0,9 · a/t = 0,771 → Φ<sub>1</sub> = 0,767",
+  "en": "Limit 0.9 · a/t = 0.771 → Φ<sub>1</sub> = 0.767"
+ },
+ {
+  "id": "24-32",
+  "de": "Grenze h<sub>ef</sub>/t ≤ 27: eingehalten ✓",
+  "en": "Limit h<sub>ef</sub>/t ≤ 27: met ✓"
+ },
+ {
+  "id": "24-33",
+  "de": "Grenzen 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2h<sub>c</sub>); 1,5) = 1,310 → β = 1,310",
+  "en": "Limits 1.0 ≤ β ≤ min(1.25 + a<sub>1</sub>/(2h<sub>c</sub>); 1.5) = 1.310 → β = 1.310"
+ },
+ {
+  "id": "24-34",
+  "de": "Haftscherfestigkeit f<sub>vk0</sub> [N/mm²] nach Tab. 3.4 (Empfehlung). Unvermörtelte Stoßfugen: halber Wert.",
+  "en": "Initial shear strength f<sub>vk0</sub> [N/mm²] according to Table 3.4 (recommendation). Unfilled perpend joints: half the value."
+ },
+ {
+  "id": "24-35",
+  "de": "Halterung",
+  "en": "Support"
+ },
+ {
+  "id": "24-36",
+  "de": "Hochlochziegel (Gr. 2)",
+  "en": "Vertically perforated clay unit (Gr. 2)"
+ },
+ {
+  "id": "24-37",
+  "de": "Hochlochziegel, KS-Lochstein",
+  "en": "Vertically perforated clay unit, CS perforated unit"
+ },
+ {
+  "id": "24-38",
+  "de": "Höhe H [cm]",
+  "en": "Height H [cm]"
+ },
+ {
+  "id": "24-39",
+  "de": "In Deutschland stehen die f<sub>k</sub>-Werte in Tabellen des NA (je Steinart, Festigkeitsklasse und Mörtel). Die Formel mit den Empfehlungswerten zeigt, wovon f<sub>k</sub> abhängt — für die Bemessung die NA-Tabelle oder die Zulassung verwenden.",
+  "en": "In Germany the f<sub>k</sub> values are given in tables of the NA (per unit type, strength class and mortar). The formula with the recommended values shows what f<sub>k</sub> depends on — for design use the NA table or the technical approval."
+ },
+ {
+  "id": "24-40",
+  "de": "In den Formeln der EN 1996-1-1 steht f<sub>b</sub> (normierte Steindruckfestigkeit); das deutsche NA rechnet mit f<sub>st</sub>.",
+  "en": "The formulae of EN 1996-1-1 use f<sub>b</sub> (normalised unit compressive strength); the German NA uses f<sub>st</sub>."
+ },
+ {
+  "id": "24-41",
+  "de": "K (Dünnbettmörtel)",
+  "en": "K (thin-layer mortar)"
+ },
+ {
+  "id": "24-42",
+  "de": "K (Normalmörtel)",
+  "en": "K (general-purpose mortar)"
+ },
+ {
+  "id": "24-43",
+  "de": "K = 0,80 für Kalksandstein, Voll-/Blockstein (Gr. 1) (Tab. 3.3, Empfehlung)",
+  "en": "K = 0.80 for calcium silicate, solid/block unit (Gr. 1) (Table 3.3, recommendation)"
+ },
+ {
+  "id": "24-44",
+  "de": "Kalksandstein",
+  "en": "Calcium silicate"
+ },
+ {
+  "id": "24-45",
+  "de": "Kalksandstein (Voll-, Loch-, Block-, Planstein)",
+  "en": "Calcium silicate (solid, perforated, block, precision unit)"
+ },
+ {
+  "id": "24-46",
+  "de": "Kalksandstein, Beton, Porenbeton",
+  "en": "Calcium silicate, concrete, autoclaved aerated concrete"
+ },
+ {
+  "id": "24-47",
+  "de": "Kalksandstein, Lochstein (Gr. 2)",
+  "en": "Calcium silicate, perforated unit (Gr. 2)"
+ },
+ {
+  "id": "24-48",
+  "de": "Kalksandstein, Voll-/Blockstein (Gr. 1)",
+  "en": "Calcium silicate, solid/block unit (Gr. 1)"
+ },
+ {
+  "id": "24-49",
+  "de": "Kalksandstein, Voll-/Blockstein (Gr. 1), Dünnbettmörtel",
+  "en": "Calcium silicate, solid/block unit (Gr. 1), thin-layer mortar"
+ },
+ {
+  "id": "24-50",
+  "de": "Kellerdecke",
+  "en": "Basement ceiling"
+ },
+ {
+  "id": "24-51",
+  "de": "Kellerwand mit Erddruck (DIN EN 1996-3, 4.5)",
+  "en": "Basement wall with earth pressure (DIN EN 1996-3, 4.5)"
+ },
+ {
+  "id": "24-52",
+  "de": "Kellerwand nachweisen",
+  "en": "Check basement wall"
+ },
+ {
+  "id": "24-53",
+  "de": "Kellerwand ohne rechnerischen Biegenachweis",
+  "en": "Basement wall without explicit bending check"
+ },
+ {
+  "id": "24-54",
+  "de": "Knicklänge berechnen",
+  "en": "Calculate effective height"
+ },
+ {
+  "id": "24-55",
+  "de": "Knicklänge h<sub>ef</sub> = ρ<sub>n</sub> · h",
+  "en": "Effective height h<sub>ef</sub> = ρ<sub>n</sub> · h"
+ },
+ {
+  "id": "24-56",
+  "de": "Kragscheibe (oben frei)",
+  "en": "Cantilever shear wall (free at the top)"
+ },
+ {
+  "id": "24-57",
+  "de": "Kreuzverband",
+  "en": "English cross bond"
+ },
+ {
+  "id": "24-58",
+  "de": "Kriechzahl φ<sub>∞</sub>",
+  "en": "Creep coefficient φ<sub>∞</sub>"
+ },
+ {
+  "id": "24-59",
+  "de": "Kurzzeichen",
+  "en": "Symbol"
+ },
+ {
+  "id": "24-60",
+  "de": "Lage",
+  "en": "Position"
+ },
+ {
+  "id": "24-61",
+  "de": "Lagerfuge",
+  "en": "Bed joint"
+ },
+ {
+  "id": "24-62",
+  "de": "Langlochziegel",
+  "en": "Horizontally perforated clay unit"
+ },
+ {
+  "id": "24-63",
+  "de": "Leichtbeton",
+  "en": "Lightweight concrete"
+ },
+ {
+  "id": "24-64",
+  "de": "Leichtbeton (Hohlblock, Vollstein, Vollblock)",
+  "en": "Lightweight concrete (hollow block, solid unit, solid block)"
+ },
+ {
+  "id": "24-65",
+  "de": "Leichtbeton, Vollstein (Gr. 1)",
+  "en": "Lightweight concrete, solid unit (Gr. 1)"
+ },
+ {
+  "id": "24-66",
+  "de": "Leichtmauermörtel LM 21 / LM 36",
+  "en": "Lightweight mortar LM 21 / LM 36"
+ },
+ {
+  "id": "24-67",
+  "de": "Lochung",
+  "en": "Perforation"
+ },
+ {
+  "id": "24-68",
+  "de": "Länge L [cm]",
+  "en": "Length L [cm]"
+ },
+ {
+  "id": "24-69",
+  "de": "Läufer- und Binderschicht im Wechsel",
+  "en": "Alternating stretcher and header courses"
+ },
+ {
+  "id": "24-70",
+  "de": "Läuferverband",
+  "en": "Stretcher bond"
+ },
+ {
+  "id": "24-71",
+  "de": "Mauermörtel (DIN EN 998-2, DIN 20000-412)",
+  "en": "Masonry mortar (DIN EN 998-2, DIN 20000-412)"
+ },
+ {
+  "id": "24-72",
+  "de": "Mauerwerk kann kaum Biegezug aufnehmen. Die Auflast überdrückt die Wand so stark, dass sich zwischen Kellerdecke und Bodenplatte ein Druckbogen bildet, der den Erddruck abträgt. Zu wenig Auflast — etwa unter einem Fenster oder bei einem leichten Dach — ist der kritische Fall.",
+  "en": "Masonry can hardly resist flexural tension. The vertical load compresses the wall so strongly that an arch forms between basement ceiling and ground slab, carrying the earth pressure. Too little vertical load — for example below a window or with a light roof — is the critical case."
+ },
+ {
+  "id": "24-73",
+  "de": "Mauerziegel",
+  "en": "Clay unit"
+ },
+ {
+  "id": "24-74",
+  "de": "Mauerziegel (Voll-, Hochlochziegel, Planziegel)",
+  "en": "Clay unit (solid, vertically perforated, precision brick)"
+ },
+ {
+  "id": "24-75",
+  "de": "Maß prüfen",
+  "en": "Check dimension"
+ },
+ {
+  "id": "24-76",
+  "de": "Maßordnung für 136,5 cm",
+  "en": "Modular coordination for 136.5 cm"
+ },
+ {
+  "id": "24-77",
+  "de": "Mindestauflast:&nbsp; n<sub>Ed,min</sub> ≥ ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t)<br> β = 20 (b<sub>c</sub> ≥ 2h)&nbsp;&nbsp; β = 60 − 20 · b<sub>c</sub>/h (h &lt; b<sub>c</sub> &lt; 2h)&nbsp;&nbsp; β = 40 (b<sub>c</sub> ≤ h)<br> Höchstauflast:&nbsp; n<sub>Ed,max</sub> ≤ t · f<sub>d</sub> / 3",
+  "en": "Minimum vertical load:&nbsp; n<sub>Ed,min</sub> ≥ ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t)<br> β = 20 (b<sub>c</sub> ≥ 2h)&nbsp;&nbsp; β = 60 − 20 · b<sub>c</sub>/h (h &lt; b<sub>c</sub> &lt; 2h)&nbsp;&nbsp; β = 40 (b<sub>c</sub> ≤ h)<br> Maximum vertical load:&nbsp; n<sub>Ed,max</sub> ≤ t · f<sub>d</sub> / 3"
+ },
+ {
+  "id": "24-78",
+  "de": "Mörtel",
+  "en": "Mortar"
+ },
+ {
+  "id": "24-79",
+  "de": "N<sub>Ed</sub> / N<sub>Rd</sub> = 300,0 / 469,3 = 0,639 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "N<sub>Ed</sub> / N<sub>Rd</sub> = 300.0 / 469.3 = 0.639 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "24-80",
+  "de": "N<sub>Ed</sub> [kN] auf die Länge l",
+  "en": "N<sub>Ed</sub> [kN] over the length l"
+ },
+ {
+  "id": "24-81",
+  "de": "N<sub>Ed</sub> ≤ N<sub>Rd</sub> = Φ · f<sub>d</sub> · A&nbsp;&nbsp;&nbsp; Φ = min(Φ<sub>1</sub>; Φ<sub>2</sub>)<br> Wandmitte:&nbsp; Φ<sub>2</sub> = 0,85 · a/t − 0,0011 · (h<sub>ef</sub>/t)²<br> Endauflager:&nbsp; Φ<sub>1</sub> = 1,6 − l<sub>f</sub>/6 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> ≥ 1,8 N/mm²)&nbsp;&nbsp; bzw.&nbsp; 1,6 − l<sub>f</sub>/5 ≤ 0,9 · a/t&nbsp; (f<sub>k</sub> &lt; 1,8)<br> Dachdecke (oberstes Geschoss):&nbsp; Φ<sub>1</sub> = 0,333&nbsp;&nbsp;&nbsp; Zwischenauflager: kein Φ<sub>1</sub>",
+  "en": "N<sub>Ed</sub> ≤ N<sub>Rd</sub> = Φ · f<sub>d</sub> · A&nbsp;&nbsp;&nbsp; Φ = min(Φ<sub>1</sub>; Φ<sub>2</sub>)<br> Mid-height:&nbsp; Φ<sub>2</sub> = 0.85 · a/t − 0.0011 · (h<sub>ef</sub>/t)²<br> End support:&nbsp; Φ<sub>1</sub> = 1.6 − l<sub>f</sub>/6 ≤ 0.9 · a/t&nbsp; (f<sub>k</sub> ≥ 1.8 N/mm²)&nbsp;&nbsp; or&nbsp; 1.6 − l<sub>f</sub>/5 ≤ 0.9 · a/t&nbsp; (f<sub>k</sub> &lt; 1.8)<br> Roof slab (top storey):&nbsp; Φ<sub>1</sub> = 0.333&nbsp;&nbsp;&nbsp; Intermediate support: no Φ<sub>1</sub>"
+ },
+ {
+  "id": "24-82",
+  "de": "N<sub>Edc</sub> / N<sub>Rdc</sub> = 110,0 / 154,2 = 0,714 <b class=\"ok-t\">✓ erfüllt</b> — die Wand darunter zusätzlich als Druckwand nachweisen",
+  "en": "N<sub>Edc</sub> / N<sub>Rdc</sub> = 110.0 / 154.2 = 0.714 <b class=\"ok-t\">✓ satisfied</b> — also check the wall below as a wall in compression"
+ },
+ {
+  "id": "24-83",
+  "de": "N<sub>Edc</sub> ≤ N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub><br> β = (1 + 0,3 · a<sub>1</sub>/h<sub>c</sub>) · (1,5 − 1,1 · A<sub>b</sub>/A<sub>ef</sub>)&nbsp;&nbsp;&nbsp; 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2 · h<sub>c</sub>); 1,5)<br> A<sub>ef</sub> = l<sub>efm</sub> · t&nbsp;&nbsp;&nbsp; l<sub>efm</sub> — Länge in halber Wandhöhe bei Lastausbreitung unter 60°",
+  "en": "N<sub>Edc</sub> ≤ N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub><br> β = (1 + 0.3 · a<sub>1</sub>/h<sub>c</sub>) · (1.5 − 1.1 · A<sub>b</sub>/A<sub>ef</sub>)&nbsp;&nbsp;&nbsp; 1.0 ≤ β ≤ min(1.25 + a<sub>1</sub>/(2 · h<sub>c</sub>); 1.5)<br> A<sub>ef</sub> = l<sub>efm</sub> · t&nbsp;&nbsp;&nbsp; l<sub>efm</sub> — length at mid-height of the wall with load spread at 60°"
+ },
+ {
+  "id": "24-84",
+  "de": "Normalbeton",
+  "en": "Normal-weight concrete"
+ },
+ {
+  "id": "24-85",
+  "de": "Normalmauermörtel NM II",
+  "en": "General-purpose mortar NM II"
+ },
+ {
+  "id": "24-86",
+  "de": "Normalmauermörtel:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup>&nbsp;&nbsp; mit f<sub>m</sub> ≤ min(20; 2 · f<sub>b</sub>)<br> Dünnbettmörtel, Gruppe 1:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup>&nbsp;&nbsp;&nbsp; Lochsteine:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup><br> Bemessungswert:&nbsp; f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub>&nbsp;&nbsp; mit ζ = 0,85 (Dauerstandfestigkeit), γ<sub>M</sub> = 1,5",
+  "en": "General-purpose mortar:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0.7</sup> · f<sub>m</sub><sup>0.3</sup>&nbsp;&nbsp; with f<sub>m</sub> ≤ min(20; 2 · f<sub>b</sub>)<br> Thin-layer mortar, Group 1:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0.85</sup>&nbsp;&nbsp;&nbsp; Perforated units:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0.7</sup><br> Design value:&nbsp; f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub>&nbsp;&nbsp; with ζ = 0.85 (sustained-load strength), γ<sub>M</sub> = 1.5"
+ },
+ {
+  "id": "24-87",
+  "de": "Nutzlast q<sub>k</sub> (inkl. Trennwandzuschlag)",
+  "en": "Imposed load q<sub>k</sub> (incl. partition allowance)"
+ },
+ {
+  "id": "24-88",
+  "de": "Oktametrische Maßordnung (DIN 4172)",
+  "en": "Octametric modular coordination (DIN 4172)"
+ },
+ {
+  "id": "24-89",
+  "de": "Plansteine für Dünnbettmörtel haben 249 mm Höhe (Schicht 25 cm). Großformatige KS-Elemente bis 998 × 623 mm.",
+  "en": "Precision units for thin-layer mortar are 249 mm high (25 cm course). Large-format CS elements up to 998 × 623 mm."
+ },
+ {
+  "id": "24-90",
+  "de": "Plansteine, Planelemente",
+  "en": "Precision units, precision elements"
+ },
+ {
+  "id": "24-91",
+  "de": "Porenbeton",
+  "en": "Autoclaved aerated concrete"
+ },
+ {
+  "id": "24-92",
+  "de": "Porenbeton (Gr. 1)",
+  "en": "Autoclaved aerated concrete (Gr. 1)"
+ },
+ {
+  "id": "24-93",
+  "de": "Porenbeton (Plansteine, Planelemente)",
+  "en": "Autoclaved aerated concrete (precision units, precision elements)"
+ },
+ {
+  "id": "24-94",
+  "de": "Querwandabstand b<sub>c</sub> [m]",
+  "en": "Cross-wall spacing b<sub>c</sub> [m]"
+ },
+ {
+  "id": "24-95",
+  "de": "Querwandabstand l [m]",
+  "en": "Cross-wall spacing l [m]"
+ },
+ {
+  "id": "24-96",
+  "de": "Rechenwerte für Verformungen (NA, Anhaltswerte)",
+  "en": "Design values for deformations (NA, guide values)"
+ },
+ {
+  "id": "24-97",
+  "de": "Rohdichteklassen",
+  "en": "Density classes"
+ },
+ {
+  "id": "24-98",
+  "de": "Schichten",
+  "en": "Courses"
+ },
+ {
+  "id": "24-99",
+  "de": "Schichten je 1 m",
+  "en": "Courses per 1 m"
+ },
+ {
+  "id": "24-100",
+  "de": "Schichthöhe",
+  "en": "Course height"
+ },
+ {
+  "id": "24-101",
+  "de": "Schichthöhe mit Fuge",
+  "en": "Course height incl. joint"
+ },
+ {
+  "id": "24-102",
+  "de": "Schichthöhe s [cm]",
+  "en": "Course height s [cm]"
+ },
+ {
+  "id": "24-103",
+  "de": "Schlankheit h<sub>ef</sub>/t",
+  "en": "Slenderness h<sub>ef</sub>/t"
+ },
+ {
+  "id": "24-104",
+  "de": "Schubwand nachweisen",
+  "en": "Check shear wall"
+ },
+ {
+  "id": "24-105",
+  "de": "Schubwand — Aussteifung in Wandebene (EN 1996-1-1, 6.2)",
+  "en": "Shear wall — in-plane bracing (EN 1996-1-1, 6.2)"
+ },
+ {
+  "id": "24-106",
+  "de": "Schwinden ε<sub>∞</sub> [mm/m]",
+  "en": "Shrinkage ε<sub>∞</sub> [mm/m]"
+ },
+ {
+  "id": "24-107",
+  "de": "Sichtmauerwerk",
+  "en": "Fair-faced masonry"
+ },
+ {
+  "id": "24-108",
+  "de": "Stahlbetondecke, t = 175 mm → ρ<sub>2</sub> = 0,75 (0,75 bis 175 mm, 0,90 bis 250 mm, darüber 1,0)",
+  "en": "Reinforced concrete floor, t = 175 mm → ρ<sub>2</sub> = 0.75 (0.75 up to 175 mm, 0.90 up to 250 mm, above that 1.0)"
+ },
+ {
+  "id": "24-109",
+  "de": "Steinart",
+  "en": "Unit type"
+ },
+ {
+  "id": "24-110",
+  "de": "Steinarten",
+  "en": "Unit types"
+ },
+ {
+  "id": "24-111",
+  "de": "Steinformate",
+  "en": "Unit formats"
+ },
+ {
+  "id": "24-112",
+  "de": "Steingruppen und Steinfestigkeit",
+  "en": "Unit groups and unit strength"
+ },
+ {
+  "id": "24-113",
+  "de": "Steinmaße und oktametrische Maßordnung",
+  "en": "Unit dimensions and octametric modular coordination"
+ },
+ {
+  "id": "24-114",
+  "de": "Stoßfugen",
+  "en": "Perpend joints"
+ },
+ {
+  "id": "24-115",
+  "de": "Stützweite der aufliegenden Decke l<sub>f</sub>",
+  "en": "Span of the supported floor l<sub>f</sub>"
+ },
+ {
+  "id": "24-116",
+  "de": "Teilflächenpressung (EN 1996-1-1, 6.1.3)",
+  "en": "Concentrated loads (EN 1996-1-1, 6.1.3)"
+ },
+ {
+  "id": "24-117",
+  "de": "Teilflächenpressung nachweisen",
+  "en": "Check concentrated load"
+ },
+ {
+  "id": "24-118",
+  "de": "Unter dem Auflager stützt das umgebende, nicht belastete Mauerwerk die belastete Fläche seitlich — deshalb darf die Spannung dort höher sein als f<sub>d</sub>. Am Wandende fehlt diese Stützung auf einer Seite (kleines a<sub>1</sub>).",
+  "en": "Below the bearing, the surrounding unloaded masonry supports the loaded area laterally — so the stress there may exceed f<sub>d</sub>. At the wall end this support is missing on one side (small a<sub>1</sub>)."
+ },
+ {
+  "id": "24-119",
+  "de": "Unterschiedliches Schwinden und Kriechen (z. B. KS-Innenwand auf Ziegel-Außenwand) führt zu Rissen — Steinarten in einem Bauteil nicht mischen.",
+  "en": "Different shrinkage and creep (e.g. CS internal wall on a clay external wall) leads to cracking — do not mix unit types within one element."
+ },
+ {
+  "id": "24-120",
+  "de": "V<sub>Ed</sub> / V<sub>Rd</sub> = 25,0 / 95,4 = 0,262 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "V<sub>Ed</sub> / V<sub>Rd</sub> = 25.0 / 95.4 = 0.262 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "24-121",
+  "de": "Verband",
+  "en": "Bond"
+ },
+ {
+  "id": "24-122",
+  "de": "Verbandsregeln",
+  "en": "Bonding rules"
+ },
+ {
+  "id": "24-123",
+  "de": "Verdrehung am Auflager",
+  "en": "Rotation at the support"
+ },
+ {
+  "id": "24-124",
+  "de": "Vollsteine, Lochanteil ≤ 25 %",
+  "en": "Solid units, void ratio ≤ 25 %"
+ },
+ {
+  "id": "24-125",
+  "de": "Vollziegel, KS-Vollstein, Porenbeton",
+  "en": "Solid clay unit, CS solid unit, autoclaved aerated concrete"
+ },
+ {
+  "id": "24-126",
+  "de": "Wand 4-seitig gehalten, t = 175 mm",
+  "en": "Wall supported on 4 sides, t = 175 mm"
+ },
+ {
+  "id": "24-127",
+  "de": "Wand am Endauflager einer Decke: Φ₁ am Kopf und Fuß, Φ₂ in Wandmitte",
+  "en": "Wall at the end support of a floor: Φ₁ at top and bottom, Φ₂ at mid-height"
+ },
+ {
+  "id": "24-128",
+  "de": "Wand nachweisen",
+  "en": "Check wall"
+ },
+ {
+  "id": "24-129",
+  "de": "Wand t = 175 mm, h = 2,60 m, l = 1,00 m",
+  "en": "Wall t = 175 mm, h = 2.60 m, l = 1.00 m"
+ },
+ {
+  "id": "24-130",
+  "de": "Wand unter Druck — vereinfachtes Verfahren (DIN EN 1996-3/NA)",
+  "en": "Wall in compression — simplified method (DIN EN 1996-3/NA)"
+ },
+ {
+  "id": "24-131",
+  "de": "Wanddicke (Läufer)",
+  "en": "Wall thickness (stretcher)"
+ },
+ {
+  "id": "24-132",
+  "de": "Wanddicke t",
+  "en": "Wall thickness t"
+ },
+ {
+  "id": "24-133",
+  "de": "Wanddicke t [mm]",
+  "en": "Wall thickness t [mm]"
+ },
+ {
+  "id": "24-134",
+  "de": "Wandhöhe h<sub>c</sub> [m]",
+  "en": "Wall height h<sub>c</sub> [m]"
+ },
+ {
+  "id": "24-135",
+  "de": "Wandlänge [m]",
+  "en": "Wall length [m]"
+ },
+ {
+  "id": "24-136",
+  "de": "Wandlänge l [m]",
+  "en": "Wall length l [m]"
+ },
+ {
+  "id": "24-137",
+  "de": "Wandscheibe l = 2,50 m, t = 175 mm",
+  "en": "Shear wall l = 2.50 m, t = 175 mm"
+ },
+ {
+  "id": "24-138",
+  "de": "Wichte Boden ρ<sub>e</sub> [kN/m³]",
+  "en": "Unit weight of soil ρ<sub>e</sub> [kN/m³]"
+ },
+ {
+  "id": "24-139",
+  "de": "Ziegel",
+  "en": "Clay"
+ },
+ {
+  "id": "24-140",
+  "de": "Ziegel, Vollstein (Gr. 1)",
+  "en": "Clay, solid unit (Gr. 1)"
+ },
+ {
+  "id": "24-141",
+  "de": "Zwischenauflager (Innenwand)",
+  "en": "Intermediate support (internal wall)"
+ },
+ {
+  "id": "24-142",
+  "de": "a — Auflagertiefe der Decke · l<sub>f</sub> — Stützweite der angrenzenden Decke (bei zweiachsig gespannten Decken die kürzere) · Wandquerschnitt A &lt; 0,1 m²: f<sub>d</sub> · 0,8; A &lt; 0,04 m² nicht als tragende Wand",
+  "en": "a — bearing depth of the floor · l<sub>f</sub> — span of the adjoining floor (the shorter one for two-way spanning floors) · wall cross-section A &lt; 0.1 m²: f<sub>d</sub> · 0.8; A &lt; 0.04 m² not as a loadbearing wall"
+ },
+ {
+  "id": "24-143",
+  "de": "a<sub>1</sub> — Abstand der Lastfläche vom Wandende · h<sub>c</sub> — Wandhöhe bis zur Lastfläche · A<sub>b</sub> — belastete Fläche. Lochsteine (Gruppe 2 bis 4) und Mauerwerk mit Schalenfugen: β = 1.",
+  "en": "a<sub>1</sub> — distance of the loaded area from the wall end · h<sub>c</sub> — wall height to the loaded area · A<sub>b</sub> — loaded area. Perforated units (Groups 2 to 4) and masonry with shell bedding: β = 1."
+ },
+ {
+  "id": "24-144",
+  "de": "außerdem Gebäudehöhe ≤ 20 m und Nutzlast ≤ 5 kN/m²",
+  "en": "also building height ≤ 20 m and imposed load ≤ 5 kN/m²"
+ },
+ {
+  "id": "24-145",
+  "de": "außerdem: Gelände nicht ansteigend, kein Wasserdruck, Kellerdecke als Scheibe",
+  "en": "also: ground not sloping upwards, no water pressure, basement ceiling acting as a diaphragm"
+ },
+ {
+  "id": "24-146",
+  "de": "f<sub>b</sub> bzw. f<sub>st</sub> [N/mm²]",
+  "en": "f<sub>b</sub> or f<sub>st</sub> [N/mm²]"
+ },
+ {
+  "id": "24-147",
+  "de": "f<sub>k</sub> = 7,99 N/mm² ≥ 1,8 N/mm² → Nenner 6",
+  "en": "f<sub>k</sub> = 7.99 N/mm² ≥ 1.8 N/mm² → denominator 6"
+ },
+ {
+  "id": "24-148",
+  "de": "f<sub>m</sub> [N/mm²] (nur Normalmörtel)",
+  "en": "f<sub>m</sub> [N/mm²] (general-purpose mortar only)"
+ },
+ {
+  "id": "24-149",
+  "de": "f<sub>st</sub> = 1,25 · Steinfestigkeitsklasse&nbsp;&nbsp;&nbsp; (umgerechnete mittlere Steindruckfestigkeit nach NA)",
+  "en": "f<sub>st</sub> = 1.25 · unit strength class&nbsp;&nbsp;&nbsp; (converted mean unit compressive strength according to NA)"
+ },
+ {
+  "id": "24-150",
+  "de": "f<sub>vk0</sub> = 0,40 N/mm² (Tab. 3.4) · Stoßfugen unvermörtelt: halber Wert 0,200 N/mm²",
+  "en": "f<sub>vk0</sub> = 0.40 N/mm² (Table 3.4) · unfilled perpend joints: half the value 0.200 N/mm²"
+ },
+ {
+  "id": "24-151",
+  "de": "hoch belastet, Keller",
+  "en": "highly loaded, basements"
+ },
+ {
+  "id": "24-152",
+  "de": "hoch belastete Pfeiler",
+  "en": "highly loaded piers"
+ },
+ {
+  "id": "24-153",
+  "de": "klaffende Fuge höchstens bis Wandmitte: e ≤ l/3 = 0,833 m ✓",
+  "en": "open joint at most up to the wall centre: e ≤ l/3 = 0.833 m ✓"
+ },
+ {
+  "id": "24-154",
+  "de": "l — Abstand der aussteifenden Querwand vom freien Rand (dreiseitig) bzw. zwischen den Querwänden (vierseitig). Querwände wirken nur bis l &lt; 15 · t (dreiseitig) bzw. l &lt; 30 · t (vierseitig). Schlankheit h<sub>ef</sub>/t ≤ 27.",
+  "en": "l — distance of the bracing cross wall from the free edge (three sides) or between the cross walls (four sides). Cross walls are only effective up to l &lt; 15 · t (three sides) or l &lt; 30 · t (four sides). Slenderness h<sub>ef</sub>/t ≤ 27."
+ },
+ {
+  "id": "24-155",
+  "de": "lichte Höhe h [m]",
+  "en": "clear height h [m]"
+ },
+ {
+  "id": "24-156",
+  "de": "lichte Kellerhöhe h",
+  "en": "clear basement height h"
+ },
+ {
+  "id": "24-157",
+  "de": "lichte Wandhöhe h = 2,60 m ≤ 2,75 m ✓",
+  "en": "clear wall height h = 2.60 m ≤ 2.75 m ✓"
+ },
+ {
+  "id": "24-158",
+  "de": "lichte Wandhöhe, t &lt; 240 mm",
+  "en": "clear wall height, t &lt; 240 mm"
+ },
+ {
+  "id": "24-159",
+  "de": "lichte Wandhöhe, t ≥ 240 mm",
+  "en": "clear wall height, t ≥ 240 mm"
+ },
+ {
+  "id": "24-160",
+  "de": "links begrenzt durch a<sub>1</sub> = 300 mm, rechts durch das Wandende",
+  "en": "limited on the left by a<sub>1</sub> = 300 mm, on the right by the wall end"
+ },
+ {
+  "id": "24-161",
+  "de": "n = Anzahl der Köpfe; Baurichtmaß = n · 12,5 cm",
+  "en": "n = number of modules; nominal dimension = n · 12.5 cm"
+ },
+ {
+  "id": "24-162",
+  "de": "n<sub>Ed,max,zul</sub>",
+  "en": "n<sub>Ed,max,perm</sub>"
+ },
+ {
+  "id": "24-163",
+  "de": "n<sub>Ed,max</sub> / n<sub>zul</sub> = 140,0 / 414,0 = 0,338 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "n<sub>Ed,max</sub> / n<sub>perm</sub> = 140.0 / 414.0 = 0.338 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "24-164",
+  "de": "n<sub>Ed,min,erf</sub>",
+  "en": "n<sub>Ed,min,req</sub>"
+ },
+ {
+  "id": "24-165",
+  "de": "nicht ansteigend, kein Wasserdruck",
+  "en": "not sloping upwards, no water pressure"
+ },
+ {
+  "id": "24-166",
+  "de": "nur Binder, Versatz ¼ Stein",
+  "en": "headers only, offset ¼ unit"
+ },
+ {
+  "id": "24-167",
+  "de": "nur Läufer, Versatz ½ Stein",
+  "en": "stretchers only, offset ½ unit"
+ },
+ {
+  "id": "24-168",
+  "de": "oben eingespannt (M = V·h/2)",
+  "en": "restrained at the top (M = V·h/2)"
+ },
+ {
+  "id": "24-169",
+  "de": "senkrechte Lochung, Grenzen je Baustoff (Tab. 3.1)",
+  "en": "vertical perforation, limits per material (Table 3.1)"
+ },
+ {
+  "id": "24-170",
+  "de": "unter der Dachdecke",
+  "en": "below the roof slab"
+ },
+ {
+  "id": "24-171",
+  "de": "untergeordnet, Altbau",
+  "en": "secondary, existing buildings"
+ },
+ {
+  "id": "24-172",
+  "de": "unvermörtelt",
+  "en": "unfilled"
+ },
+ {
+  "id": "24-173",
+  "de": "vermörtelt",
+  "en": "filled"
+ },
+ {
+  "id": "24-174",
+  "de": "waagerechte Lochung",
+  "en": "horizontal perforation"
+ },
+ {
+  "id": "24-175",
+  "de": "wie Block, Läuferschichten um ½ Stein versetzt",
+  "en": "as English bond, stretcher courses offset by ½ unit"
+ },
+ {
+  "id": "24-176",
+  "de": "wirkt als Scheibe",
+  "en": "acts as a diaphragm"
+ },
+ {
+  "id": "24-177",
+  "de": "wärmedämmendes Mauerwerk",
+  "en": "thermally insulating masonry"
+ },
+ {
+  "id": "24-178",
+  "de": "zweiseitig gehalten (Decke oben und unten):&nbsp; ρ<sub>2</sub> = 0,75 (t ≤ 175 mm) · 0,90 (175 &lt; t ≤ 250 mm) · 1,00 (t &gt; 250 mm, Holzbalkendecke)<br> dreiseitig (h ≤ 3,5 · l):&nbsp; ρ<sub>3</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / (3 · l))²)&nbsp;&nbsp;&nbsp; (h &gt; 3,5 · l):&nbsp; ρ<sub>3</sub> = 1,5 · l / h<br> vierseitig (h ≤ 1,15 · l):&nbsp; ρ<sub>4</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / l)²)&nbsp;&nbsp;&nbsp; (h &gt; 1,15 · l):&nbsp; ρ<sub>4</sub> = 0,5 · l / h",
+  "en": "supported on two sides (floor at top and bottom):&nbsp; ρ<sub>2</sub> = 0.75 (t ≤ 175 mm) · 0.90 (175 &lt; t ≤ 250 mm) · 1.00 (t &gt; 250 mm, timber joist floor)<br> three sides (h ≤ 3.5 · l):&nbsp; ρ<sub>3</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / (3 · l))²)&nbsp;&nbsp;&nbsp; (h &gt; 3.5 · l):&nbsp; ρ<sub>3</sub> = 1.5 · l / h<br> four sides (h ≤ 1.15 · l):&nbsp; ρ<sub>4</sub> = ρ<sub>2</sub> / (1 + (ρ<sub>2</sub> · h / l)²)&nbsp;&nbsp;&nbsp; (h &gt; 1.15 · l):&nbsp; ρ<sub>4</sub> = 0.5 · l / h"
+ },
+ {
+  "id": "24-179",
+  "de": "Öffnungsmaß",
+  "en": "Opening dimension"
+ },
+ {
+  "id": "24-180",
+  "de": "Öffnungsmaß (Fenster, Tür): n = 10 → 125,0 + 1 = <b>126,0 cm</b> · n = 11 → 137,5 + 1 = <b>138,5 cm</b>",
+  "en": "Opening dimension (window, door): n = 10 → 125.0 + 1 = <b>126.0 cm</b> · n = 11 → 137.5 + 1 = <b>138.5 cm</b>"
+ },
+ {
+  "id": "24-181",
+  "de": "Öffnungsmaß (n = 3)",
+  "en": "Opening dimension (n = 3)"
+ },
+ {
+  "id": "24-182",
+  "de": "Überbindemaß:&nbsp; ü ≥ 0,4 · h<sub>u</sub>&nbsp; und&nbsp; ü ≥ 45 mm&nbsp;&nbsp; (h<sub>u</sub> — Steinhöhe)",
+  "en": "Overlap:&nbsp; ü ≥ 0.4 · h<sub>u</sub>&nbsp; and&nbsp; ü ≥ 45 mm&nbsp;&nbsp; (h<sub>u</sub> — unit height)"
+ },
+ {
+  "id": "24-183",
+  "de": "übliches Mauerwerk",
+  "en": "standard masonry"
+ },
+ {
+  "id": "24-184",
+  "de": "Φ₂: Knicken in Wandmitte",
+  "en": "Φ₂: buckling at mid-height"
+ },
+ {
+  "id": "24-185",
+  "de": "ζ = 0,85 erfasst die geringere Festigkeit unter Dauerlast; γ<sub>M</sub> = 1,5 für Mauerwerk nach NA",
+  "en": "ζ = 0.85 accounts for the lower strength under sustained load; γ<sub>M</sub> = 1.5 for masonry according to NA"
+ },
+ {
+  "id": "24-186",
+  "de": "ρ<sub>e</sub> — Wichte der Anschüttung · h — lichte Kellerhöhe · h<sub>e</sub> — Anschütthöhe · b<sub>c</sub> — Abstand der aussteifenden Querwände · n<sub>Ed,min</sub> mit γ<sub>G</sub> = 1,0 (günstig wirkende ständige Last)",
+  "en": "ρ<sub>e</sub> — unit weight of the backfill · h — clear basement height · h<sub>e</sub> — backfill height · b<sub>c</sub> — spacing of the bracing cross walls · n<sub>Ed,min</sub> with γ<sub>G</sub> = 1.0 (favourable permanent load)"
+ },
+ {
+  "id": "24-187",
+  "de": "σ<sub>max</sub> / f<sub>d</sub> = 0,103 <b class=\"ok-t\">✓ erfüllt</b>",
+  "en": "σ<sub>max</sub> / f<sub>d</sub> = 0.103 <b class=\"ok-t\">✓ satisfied</b>"
+ },
+ {
+  "id": "24-188",
+  "de": "<div class=\"calc-field\"><label>Länge L [cm]</label><input type=\"number\" id=\"ms-L\" value=\"136.5\" step=\"any\" oninput=\"updateMass()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Length L [cm]</label><input type=\"number\" id=\"ms-L\" value=\"136.5\" step=\"any\" oninput=\"updateMass()\"></div>"
+ },
+ {
+  "id": "24-189",
+  "de": "<div class=\"calc-field\"><label>Höhe H [cm]</label><input type=\"number\" id=\"ms-H\" value=\"262.5\" step=\"any\" oninput=\"updateMass()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Height H [cm]</label><input type=\"number\" id=\"ms-H\" value=\"262.5\" step=\"any\" oninput=\"updateMass()\"></div>"
+ },
+ {
+  "id": "24-190",
+  "de": "<div class=\"calc-field\"><label>Schichthöhe s [cm]</label><select id=\"ms-s\" onchange=\"updateMass()\"><option value=\"6.25\">6,25 (DF)</option><option value=\"8.3333333\">8,33 (NF)</option><option value=\"12.5\" selected>12,5 (2DF …)</option><option value=\"25\">25 (8DF, Plansteine)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Course height s [cm]</label><select id=\"ms-s\" onchange=\"updateMass()\"><option value=\"6.25\">6.25 (DF)</option><option value=\"8.3333333\">8.33 (NF)</option><option value=\"12.5\" selected>12.5 (2DF …)</option><option value=\"25\">25 (8DF, precision units)</option></select></div>"
+ },
+ {
+  "id": "24-191",
+  "de": "Maßordnung für {} cm",
+  "en": "Modular coordination for {} cm"
+ },
+ {
+  "id": "24-192",
+  "de": "§Länge auf das Achtelmeter-Raster (12,5 cm)",
+  "en": "§Length on the eighth-metre grid (12.5 cm)"
+ },
+ {
+  "id": "24-193",
+  "de": "!n = Anzahl der Köpfe; Baurichtmaß = n · 12,5 cm",
+  "en": "!n = number of modules; nominal dimension = n · 12.5 cm"
+ },
+ {
+  "id": "24-194",
+  "de": "Außenmaß (Pfeiler, Wandstück)",
+  "en": "External dimension (pier, wall section)"
+ },
+ {
+  "id": "24-195",
+  "de": "Öffnungsmaß (Fenster, Tür)",
+  "en": "Opening dimension (window, door)"
+ },
+ {
+  "id": "24-196",
+  "de": "Anbaumaß (Vorsprung)",
+  "en": "Projection dimension (nib)"
+ },
+ {
+  "id": "24-197",
+  "de": "§Höhe auf die Schichthöhe {} cm",
+  "en": "§Height on the course height {} cm"
+ },
+ {
+  "id": "24-198",
+  "de": "Schichten = H / s = {} / {} = {}",
+  "en": "Courses = H / s = {} / {} = {}"
+ },
+ {
+  "id": "24-199",
+  "de": "{} Schichten passen genau",
+  "en": "{} courses fit exactly"
+ },
+ {
+  "id": "24-200",
+  "de": "{} Schichten = {} cm oder {} Schichten = {} cm",
+  "en": "{} courses = {} cm or {} courses = {} cm"
+ },
+ {
+  "id": "24-201",
+  "de": "§Charakteristische Druckfestigkeit (EN 1996-1-1, 3.6.1.2)",
+  "en": "§Characteristic compressive strength (EN 1996-1-1, 3.6.1.2)"
+ },
+ {
+  "id": "24-202",
+  "de": "!K = {} für {} (Tab. 3.3, Empfehlung)",
+  "en": "!K = {} for {} (Table 3.3, recommendation)"
+ },
+ {
+  "id": "24-203",
+  "de": "!ζ = 0,85 erfasst die geringere Festigkeit unter Dauerlast; γ<sub>M</sub> = 1,5 für Mauerwerk nach NA",
+  "en": "!ζ = 0.85 accounts for the lower strength under sustained load; γ<sub>M</sub> = 1.5 for masonry according to NA"
+ },
+ {
+  "id": "24-204",
+  "de": "§Verformungskennwerte (NA, Anhaltswerte)",
+  "en": "§Deformation properties (NA, guide values)"
+ },
+ {
+  "id": "24-205",
+  "de": "!Endkriechzahl φ<sub>∞</sub> = {} · Endschwinden ε<sub>∞</sub> = {} mm/m · α<sub>t</sub> = {} · 10⁻⁶ /K",
+  "en": "!Final creep coefficient φ<sub>∞</sub> = {} · final shrinkage ε<sub>∞</sub> = {} mm/m · α<sub>t</sub> = {} · 10⁻⁶ /K"
+ },
+ {
+  "id": "24-206",
+  "de": "§Haftscherfestigkeit (Tab. 3.4, Empfehlung)",
+  "en": "§Initial shear strength (Table 3.4, recommendation)"
+ },
+ {
+  "id": "24-207",
+  "de": "{}-seitig gehalten (blau: Decken{})",
+  "en": "supported on {} sides (blue: floors{})"
+ },
+ {
+  "id": "24-208",
+  "de": "{}-seitig gehaltene Wand",
+  "en": "Wall supported on {} sides"
+ },
+ {
+  "id": "24-209",
+  "de": " und Querwände",
+  "en": " and cross walls"
+ },
+ {
+  "id": "24-210",
+  "de": "<div class=\"calc-field\"><label>lichte Höhe h [m]</label><input type=\"number\" id=\"hef-h\" value=\"2.6\" step=\"any\" oninput=\"updateHef()\"></div>",
+  "en": "<div class=\"calc-field\"><label>clear height h [m]</label><input type=\"number\" id=\"hef-h\" value=\"2.6\" step=\"any\" oninput=\"updateHef()\"></div>"
+ },
+ {
+  "id": "24-211",
+  "de": "<div class=\"calc-field\"><label>Wanddicke t [mm]</label><input type=\"number\" id=\"hef-t\" value=\"175\" step=\"any\" oninput=\"updateHef()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall thickness t [mm]</label><input type=\"number\" id=\"hef-t\" value=\"175\" step=\"any\" oninput=\"updateHef()\"></div>"
+ },
+ {
+  "id": "24-212",
+  "de": "<div class=\"calc-field\"><label>Halterung</label><select id=\"hef-n\" onchange=\"updateHef()\"><option value=\"2\">zweiseitig</option><option value=\"3\">dreiseitig</option><option value=\"4\" selected>vierseitig</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Support</label><select id=\"hef-n\" onchange=\"updateHef()\"><option value=\"2\">two sides</option><option value=\"3\">three sides</option><option value=\"4\" selected>four sides</option></select></div>"
+ },
+ {
+  "id": "24-213",
+  "de": "<div class=\"calc-field\"><label>Querwandabstand l [m]</label><input type=\"number\" id=\"hef-l\" value=\"3.5\" step=\"any\" oninput=\"updateHef()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Cross-wall spacing l [m]</label><input type=\"number\" id=\"hef-l\" value=\"3.5\" step=\"any\" oninput=\"updateHef()\"></div>"
+ },
+ {
+  "id": "24-214",
+  "de": "<div class=\"calc-field\"><label>Decke</label><select id=\"hef-d\" onchange=\"updateHef()\"><option value=\"sb\" selected>Stahlbetondecke</option><option value=\"hb\">Holzbalkendecke</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Floor</label><select id=\"hef-d\" onchange=\"updateHef()\"><option value=\"sb\" selected>Reinforced concrete floor</option><option value=\"hb\">Timber joist floor</option></select></div>"
+ },
+ {
+  "id": "24-215",
+  "de": "§Abminderung für zweiseitige Halterung",
+  "en": "§Reduction for support on two sides"
+ },
+ {
+  "id": "24-216",
+  "de": "!Stahlbetondecke, t = {} mm → ρ<sub>2</sub> = {} (0,75 bis 175 mm, 0,90 bis 250 mm, darüber 1,0)",
+  "en": "!Reinforced concrete floor, t = {} mm → ρ<sub>2</sub> = {} (0.75 up to 175 mm, 0.90 up to 250 mm, above that 1.0)"
+ },
+ {
+  "id": "24-217",
+  "de": "§Knicklänge und Schlankheit",
+  "en": "§Effective height and slenderness"
+ },
+ {
+  "id": "24-218",
+  "de": "§Abminderung in Wandmitte (volles Deckenauflager a = t)",
+  "en": "§Reduction at mid-height (full floor bearing a = t)"
+ },
+ {
+  "id": "24-219",
+  "de": "Wand {}-seitig gehalten, t = {} mm",
+  "en": "Wall supported on {} sides, t = {} mm"
+ },
+ {
+  "id": "24-220",
+  "de": "§Dreiseitig gehalten (ein freier senkrechter Rand)",
+  "en": "§Supported on three sides (one free vertical edge)"
+ },
+ {
+  "id": "24-221",
+  "de": "!l = {} m ≥ 15 · t = {} m → die Querwand wirkt nicht, Wand wie zweiseitig gehalten",
+  "en": "!l = {} m ≥ 15 · t = {} m → the cross wall is not effective, wall treated as supported on two sides"
+ },
+ {
+  "id": "24-222",
+  "de": "!Holzbalkendecke: keine Einspannwirkung → ρ<sub>2</sub> = 1,0",
+  "en": "!Timber joist floor: no restraint → ρ<sub>2</sub> = 1.0"
+ },
+ {
+  "id": "24-223",
+  "de": "<div class=\"calc-field\"><label>Wanddicke t [mm]</label><input type=\"number\" id=\"mwd-t\" value=\"175\" step=\"any\" oninput=\"updateMWD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall thickness t [mm]</label><input type=\"number\" id=\"mwd-t\" value=\"175\" step=\"any\" oninput=\"updateMWD()\"></div>"
+ },
+ {
+  "id": "24-224",
+  "de": "<div class=\"calc-field\"><label>lichte Höhe h [m]</label><input type=\"number\" id=\"mwd-h\" value=\"2.6\" step=\"any\" oninput=\"updateMWD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>clear height h [m]</label><input type=\"number\" id=\"mwd-h\" value=\"2.6\" step=\"any\" oninput=\"updateMWD()\"></div>"
+ },
+ {
+  "id": "24-225",
+  "de": "<div class=\"calc-field\"><label>Wandlänge l [m]</label><input type=\"number\" id=\"mwd-l\" value=\"1\" step=\"any\" oninput=\"updateMWD()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall length l [m]</label><input type=\"number\" id=\"mwd-l\" value=\"1\" step=\"any\" oninput=\"updateMWD()\"></div>"
+ },
+ {
+  "id": "24-226",
+  "de": "<div class=\"calc-field\"><label>Lage</label><select id=\"mwd-lage\" onchange=\"updateMWD()\"><option value=\"end\" selected>Endauflager (Außenwand)</option><option value=\"zw\">Zwischenauflager (Innenwand)</option><option value=\"dach\">unter der Dachdecke</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Position</label><select id=\"mwd-lage\" onchange=\"updateMWD()\"><option value=\"end\" selected>End support (external wall)</option><option value=\"zw\">Intermediate support (internal wall)</option><option value=\"dach\">below the roof slab</option></select></div>"
+ }
+]

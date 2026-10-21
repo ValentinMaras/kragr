@@ -1,0 +1,994 @@
+{
+"05-0": {
+"fr": "Classe {} : σ = N/A{} + M<sub>y</sub>/W<sub>{},y</sub>{} = <b>{} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm²",
+"es": "Clase {}: σ = N/A{} + M<sub>y</sub>/W<sub>{},y</sub>{} = <b>{} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm²"
+},
+"05-1": {
+"fr": "Voilement par cisaillement de l'âme",
+"es": "Abolladura del alma por cortante"
+},
+"05-2": {
+"fr": "aucune vérification requise",
+"es": "no se requiere comprobación"
+},
+"05-3": {
+"fr": "vérifier le voilement par cisaillement selon EN 1993-1-5",
+"es": "comprobar la abolladura por cortante según EN 1993-1-5"
+},
+"05-4": {
+"fr": "Voilement par cisaillement : h<sub>w</sub>/t<sub>w</sub> = {} ≤ 72·ε/η = {} → {}",
+"es": "Abolladura por cortante: h<sub>w</sub>/t<sub>w</sub> = {} ≤ 72·ε/η = {} → {}"
+},
+"05-5": {
+"fr": "Résistance de la section",
+"es": "Resistencia de la sección"
+},
+"05-6": {
+"fr": "Flambement par flexion",
+"es": "Pandeo por flexión"
+},
+"05-7": {
+"fr": "L<sub>LT</sub> = 0 : semelle comprimée maintenue latéralement sur toute sa longueur → χ<sub>LT</sub> = 1, pas de déversement",
+"es": "L<sub>LT</sub> = 0: ala comprimida arriostrada lateralmente en toda su longitud → χ<sub>LT</sub> = 1, sin pandeo lateral"
+},
+"05-8": {
+"fr": "Déversement",
+"es": "Pandeo lateral"
+},
+"05-9": {
+"fr": "Caractéristiques de torsion du profilé et coefficients pour le diagramme des moments",
+"es": "Constantes de torsión del perfil y coeficientes para la ley de momentos"
+},
+"05-10": {
+"fr": "Diagramme des moments {} : C<sub>1</sub> = {}, C<sub>2</sub> = {} (NCCI SN003)",
+"es": "Ley de momentos {}: C<sub>1</sub> = {}, C<sub>2</sub> = {} (NCCI SN003)"
+},
+"05-11": {
+"fr": "Point d'application de la charge : une charge appliquée en partie haute est déstabilisante",
+"es": "Punto de aplicación de la carga: una carga aplicada en la parte superior es desestabilizadora"
+},
+"05-12": {
+"fr": "Charge sur la semelle supérieure",
+"es": "Carga en el ala superior"
+},
+"05-13": {
+"fr": "Charge sur la semelle inférieure",
+"es": "Carga en el ala inferior"
+},
+"05-14": {
+"fr": "Charge au centre de gravité",
+"es": "Carga en el centro de gravedad"
+},
+"05-15": {
+"fr": ", non déterminant sans charge transversale",
+"es": ", no determinante sin carga transversal"
+},
+"05-16": {
+"fr": "Moment critique idéal M<sub>cr</sub> (charge critique élastique de bifurcation)",
+"es": "Momento crítico ideal M<sub>cr</sub> (carga crítica elástica de bifurcación)"
+},
+"05-17": {
+"fr": "Élancement : moment plastique rapporté au moment critique",
+"es": "Esbeltez: momento plástico en relación con el momento crítico"
+},
+"05-18": {
+"fr": "Courbe de flambement {} (h/b {} 2), α<sub>LT</sub> = {}",
+"es": "Curva de pandeo {} (h/b {} 2), α<sub>LT</sub> = {}"
+},
+"05-19": {
+"fr": "Coefficient de réduction χ<sub>LT</sub>",
+"es": "Coeficiente de reducción χ<sub>LT</sub>"
+},
+"05-20": {
+"fr": "λ̄<sub>LT</sub> ≤ 0,4 ou M<sub>Ed</sub>/M<sub>cr</sub> ≤ 0,16 → χ<sub>LT</sub> = 1",
+"es": "λ̄<sub>LT</sub> ≤ 0,4 o M<sub>Ed</sub>/M<sub>cr</sub> ≤ 0,16 → χ<sub>LT</sub> = 1"
+},
+"05-21": {
+"fr": "Profilé laminé (6.3.2.3, λ̄<sub>LT,0</sub> = 0,4, β = 0,75) : χ<sub>LT</sub> = {}",
+"es": "Perfil laminado (6.3.2.3, λ̄<sub>LT,0</sub> = 0,4, β = 0,75): χ<sub>LT</sub> = {}"
+},
+"05-22": {
+"fr": "Correction pour le diagramme des moments : k<sub>c</sub> = {} · f = {}",
+"es": "Corrección por la ley de momentos: k<sub>c</sub> = {} · f = {}"
+},
+"05-23": {
+"fr": "Ajouter des maintiens latéraux (L<sub>LT</sub> plus petit), ne pas appliquer la charge sur la semelle supérieure ou choisir un profilé plus large (HEA/HEB).",
+"es": "Añada arriostramientos laterales (L<sub>LT</sub> menor), no aplique la carga en el ala superior o elija un perfil más ancho (HEA/HEB)."
+},
+"05-24": {
+"fr": "Compression et flexion (stabilité)",
+"es": "Compresión y flexión (estabilidad)"
+},
+"05-25": {
+"fr": "Flexion biaxiale (stabilité)",
+"es": "Flexión biaxial (estabilidad)"
+},
+"05-26": {
+"fr": "Torsion (élastique)",
+"es": "Torsión (elástica)"
+},
+"05-27": {
+"fr": "Vérification élastique des contraintes. L'interaction entre torsion et déversement n'est pas traitée dans l'Eurocode et n'est pas incluse ici.",
+"es": "Comprobación elástica de las tensiones. La interacción entre torsión y pandeo lateral no está regulada en el Eurocódigo y no se incluye aquí."
+},
+"05-28": {
+"fr": "Introduction de charge (écrasement de l'âme)",
+"es": "Introducción de carga (aplastamiento del alma)"
+},
+"05-29": {
+"fr": "Prévoir des raidisseurs d'introduction de charge, une longueur d'application plus grande ou un profilé à âme plus épaisse.",
+"es": "Disponga rigidizadores en la introducción de carga, una longitud de aplicación mayor o un perfil con alma más gruesa."
+},
+"05-30": {
+"fr": "Flèche (ELS)",
+"es": "Flecha (ELS)"
+},
+"05-31": {
+"fr": "Choisir un profilé avec un I<sub>y</sub> plus grand ou prévoir une contreflèche.",
+"es": "Elija un perfil con mayor I<sub>y</sub> o prevea una contraflecha."
+},
+"05-32": {
+"fr": "Coefficient de matériau ε : résistance plus élevée → limites d'élancement c/t plus sévères",
+"es": "Factor de material ε: mayor resistencia → límites más estrictos para la esbeltez c/t"
+},
+"05-33": {
+"fr": "ε = √(235/f<sub>y</sub>) = √(235/{}) = {} (f<sub>y</sub> = {} N/mm² pour t<sub>f</sub> = {} mm ≤ 40 mm)",
+"es": "ε = √(235/f<sub>y</sub>) = √(235/{}) = {} (f<sub>y</sub> = {} N/mm² para t<sub>f</sub> = {} mm ≤ 40 mm)"
+},
+"05-34": {
+"fr": "Semelle : paroi en console comprimée — élancement c/t",
+"es": "Ala: chapa con un borde libre sometida a compresión — esbeltez c/t"
+},
+"05-35": {
+"fr": "Âme : paroi appuyée sur ses deux bords — élancement c/t",
+"es": "Alma: chapa apoyada en ambos bordes — esbeltez c/t"
+},
+"05-36": {
+"fr": "Répartition des contraintes dans l'âme : quelle part est comprimée ?",
+"es": "Distribución de tensiones en el alma: ¿qué parte está comprimida?"
+},
+"05-37": {
+"fr": "Répartition des contraintes dans l'âme : flexion pure, à moitié comprimée",
+"es": "Distribución de tensiones en el alma: flexión pura, comprimida a medias"
+},
+"05-38": {
+"fr": "axe neutre plastique : α = ½·(1 + N<sub>Ed</sub>/(f<sub>y</sub>·c·t<sub>w</sub>)) = {}",
+"es": "eje neutro plástico: α = ½·(1 + N<sub>Ed</sub>/(f<sub>y</sub>·c·t<sub>w</sub>)) = {}"
+},
+"05-39": {
+"fr": "flexion pure : α = 0,5 · ψ = −1",
+"es": "flexión pura: α = 0,5 · ψ = −1"
+},
+"05-40": {
+"fr": "La partie la plus défavorable de la section détermine la classe",
+"es": "La parte más desfavorable de la sección determina la clase"
+},
+"05-41": {
+"fr": "Classe de section = max(semelle ; âme) = <b>{}</b> → {}",
+"es": "Clase de sección = max(ala; alma) = <b>{}</b> → {}"
+},
+"05-42": {
+"fr": "dimensionnement plastique avec W<sub>pl</sub>",
+"es": "dimensionamiento plástico con W<sub>pl</sub>"
+},
+"05-43": {
+"fr": "dimensionnement élastique avec W<sub>el</sub>",
+"es": "dimensionamiento elástico con W<sub>el</sub>"
+},
+"05-44": {
+"fr": "section efficace selon EN 1993-1-5",
+"es": "sección eficaz según EN 1993-1-5"
+},
+"05-45": {
+"fr": "Semelle : élancement de la paroi et coefficient de réduction ρ",
+"es": "Ala: esbeltez de la chapa y coeficiente de reducción ρ"
+},
+"05-46": {
+"fr": "Semelle (en console, k<sub>σ</sub> = 0,43) : λ̄<sub>p</sub> = (c/t)/(28,4·ε·√k<sub>σ</sub>) = {} → ρ = {}",
+"es": "Ala (con un borde libre, k<sub>σ</sub> = 0,43): λ̄<sub>p</sub> = (c/t)/(28,4·ε·√k<sub>σ</sub>) = {} → ρ = {}"
+},
+"05-47": {
+"fr": "Âme en compression pure → aire efficace pour l'effort normal",
+"es": "Alma en compresión pura → área eficaz para el esfuerzo axil"
+},
+"05-48": {
+"fr": "Âme (ψ = 1, k<sub>σ</sub> = 4,0) : λ̄<sub>p</sub> = {} → ρ = {}",
+"es": "Alma (ψ = 1, k<sub>σ</sub> = 4,0): λ̄<sub>p</sub> = {} → ρ = {}"
+},
+"05-49": {
+"fr": "Âme en flexion → largeurs efficaces de la zone comprimée (itératif, car le centre de gravité se déplace)",
+"es": "Alma en flexión → anchos eficaces de la zona comprimida (iterativo, ya que el centro de gravedad se desplaza)"
+},
+"05-50": {
+"fr": "Module de flexion efficace",
+"es": "Módulo resistente eficaz"
+},
+"05-51": {
+"fr": "Centre de gravité efficace z<sub>s</sub> = {} mm depuis le haut · I<sub>eff</sub> = {} cm⁴",
+"es": "Centro de gravedad eficaz z<sub>s</sub> = {} mm desde arriba · I<sub>eff</sub> = {} cm⁴"
+},
+"05-52": {
+"fr": "Utilisation dans les vérifications suivantes",
+"es": "Uso en las comprobaciones siguientes"
+},
+"05-53": {
+"fr": "Pour compression et flexion : N<sub>Ed</sub>/(A<sub>eff</sub>·f<sub>y</sub>) + M<sub>y,Ed</sub>/(W<sub>eff</sub>·f<sub>y</sub>) ≤ 1 (6.44, e<sub>N</sub> = 0 pour une section bisymétrique)",
+"es": "Para compresión y flexión: N<sub>Ed</sub>/(A<sub>eff</sub>·f<sub>y</sub>) + M<sub>y,Ed</sub>/(W<sub>eff</sub>·f<sub>y</sub>) ≤ 1 (6.44, e<sub>N</sub> = 0 para una sección con doble simetría)"
+},
+"05-54": {
+"fr": "Aire de cisaillement A<sub>v,z</sub> = A − 2b·t<sub>f</sub> + (t<sub>w</sub> + 2r)·t<sub>f</sub> ≥ h<sub>w</sub>·t<sub>w</sub> = {} cm²",
+"es": "Área de cortante A<sub>v,z</sub> = A − 2b·t<sub>f</sub> + (t<sub>w</sub> + 2r)·t<sub>f</sub> ≥ h<sub>w</sub>·t<sub>w</sub> = {} cm²"
+},
+"05-55": {
+"fr": "Résistances de la section (γ<sub>M0</sub> = 1,0)",
+"es": "Resistencias de la sección (γ<sub>M0</sub> = 1,0)"
+},
+"05-56": {
+"fr": "Élancement réduit et courbes de flambement (selon la forme du profilé et la direction de flambement)",
+"es": "Esbeltez adimensional y curvas de pandeo (según la forma del perfil y la dirección de pandeo)"
+},
+"05-57": {
+"fr": " · Classe 4 : λ̄ avec √(A<sub>eff</sub>/A) = ",
+"es": " · Clase 4: λ̄ con √(A<sub>eff</sub>/A) = "
+},
+"05-58": {
+"fr": "Flambement autour de l'axe fort y",
+"es": "Pandeo alrededor del eje fuerte y"
+},
+"05-59": {
+"fr": "Flambement autour de l'axe faible z",
+"es": "Pandeo alrededor del eje débil z"
+},
+"05-60": {
+"fr": "Vérification avec la plus petite valeur",
+"es": "Comprobación con el valor menor"
+},
+"05-61": {
+"fr": "Taux de travail individuels, chacun avec le coefficient de stabilité χ",
+"es": "Aprovechamientos individuales, cada uno con el coeficiente de estabilidad χ"
+},
+"05-62": {
+"fr": "Coefficient de moment : tient compte de la forme du diagramme des moments",
+"es": "Coeficiente de momento: tiene en cuenta la forma de la ley de momentos"
+},
+"05-63": {
+"fr": ", même diagramme supposé pour M<sub>z</sub>",
+"es": ", se supone la misma ley para M<sub>z</sub>"
+},
+"05-64": {
+"fr": "Facteurs d'interaction k (Annexe B, {})",
+"es": "Factores de interacción k (Anexo B, {})"
+},
+"05-65": {
+"fr": "Vérification pour le flambement autour de y (6.61) et de z (6.62)",
+"es": "Comprobación para el pandeo alrededor de y (6.61) y de z (6.62)"
+},
+"05-66": {
+"fr": "Coefficient d'atténuation : rapport entre rigidité de Saint-Venant et rigidité de gauchissement",
+"es": "Coeficiente de atenuación: relación entre la rigidez de Saint-Venant y la rigidez de alabeo"
+},
+"05-67": {
+"fr": "Répartition du moment de torsion à l'appui en deux parts",
+"es": "Reparto del momento torsor en el apoyo en dos partes"
+},
+"05-68": {
+"fr": "Appui : primaire (Saint-Venant) T<sub>t</sub> = {} kNm",
+"es": "Apoyo: primario (Saint-Venant) T<sub>t</sub> = {} kNm"
+},
+"05-69": {
+"fr": "secondaire (gauchissement) T<sub>w</sub> = {} kNm",
+"es": "secundario (alabeo) T<sub>w</sub> = {} kNm"
+},
+"05-70": {
+"fr": "Bimoment à mi-travée : fléchit les semelles en sens opposés",
+"es": "Bimomento en el centro del vano: flecta las alas en sentidos opuestos"
+},
+"05-71": {
+"fr": "Mi-travée : bimoment B = <b>{} kNm²</b>",
+"es": "Centro del vano: bimomento B = <b>{} kNm²</b>"
+},
+"05-72": {
+"fr": "Contrainte normale de gauchissement au bord de la semelle",
+"es": "Tensión normal de alabeo en el borde del ala"
+},
+"05-73": {
+"fr": "σ<sub>w</sub> = B·ω<sub>max</sub>/I<sub>w</sub> avec ω<sub>max</sub> = (h − t<sub>f</sub>)·b/4 = {} mm² → σ<sub>w</sub> = {} N/mm² (bord de semelle)",
+"es": "σ<sub>w</sub> = B·ω<sub>max</sub>/I<sub>w</sub> con ω<sub>max</sub> = (h − t<sub>f</sub>)·b/4 = {} mm² → σ<sub>w</sub> = {} N/mm² (borde del ala)"
+},
+"05-74": {
+"fr": "Addition des contraintes normales (mi-travée, bord de semelle)",
+"es": "Suma de las tensiones normales (centro del vano, borde del ala)"
+},
+"05-75": {
+"fr": "Mi-travée, bord de semelle : σ = N/A + M<sub>y</sub>/W<sub>el,y</sub>{} + σ<sub>w</sub> = {} + {} = <b>{} N/mm²</b> ≤ f<sub>y</sub> = {} N/mm²",
+"es": "Centro del vano, borde del ala: σ = N/A + M<sub>y</sub>/W<sub>el,y</sub>{} + σ<sub>w</sub> = {} + {} = <b>{} N/mm²</b> ≤ f<sub>y</sub> = {} N/mm²"
+},
+"05-76": {
+"fr": "Addition des contraintes de cisaillement (appui)",
+"es": "Suma de las tensiones tangenciales (apoyo)"
+},
+"05-77": {
+"fr": "Âme : τ = V/(h<sub>w</sub>·t<sub>w</sub>) + T<sub>t</sub>·t<sub>w</sub>/I<sub>T</sub> = {} + {} = {} N/mm²",
+"es": "Alma: τ = V/(h<sub>w</sub>·t<sub>w</sub>) + T<sub>t</sub>·t<sub>w</sub>/I<sub>T</sub> = {} + {} = {} N/mm²"
+},
+"05-78": {
+"fr": "Semelle : τ = T<sub>t</sub>·t<sub>f</sub>/I<sub>T</sub> + T<sub>w</sub>·S<sub>ω</sub>/(I<sub>w</sub>·t<sub>f</sub>) = {} + {} = {} N/mm²",
+"es": "Ala: τ = T<sub>t</sub>·t<sub>f</sub>/I<sub>T</sub> + T<sub>w</sub>·S<sub>ω</sub>/(I<sub>w</sub>·t<sub>f</sub>) = {} + {} = {} N/mm²"
+},
+"05-79": {
+"fr": "Critère de plasticité pour le cisaillement",
+"es": "Criterio de plastificación para el cortante"
+},
+"05-80": {
+"fr": "Cas de charge et dimensions",
+"es": "Caso de carga y dimensiones"
+},
+"05-81": {
+"fr": "Type a — charge transmise par la semelle à l'âme, en travée",
+"es": "Tipo a — carga transmitida por el ala al alma, en el vano"
+},
+"05-82": {
+"fr": "Type c — charge à l'extrémité de la poutre",
+"es": "Tipo c — carga en el extremo de la viga"
+},
+"05-83": {
+"fr": "Coefficient de voilement et charge critique de l'âme",
+"es": "Coeficiente de abolladura y carga crítica del alma"
+},
+"05-84": {
+"fr": "6 (sans raidisseurs transversaux)",
+"es": "6 (sin rigidizadores transversales)"
+},
+"05-85": {
+"fr": "Longueur d'appui efficace l<sub>y</sub> (la semelle répartit la charge)",
+"es": "Longitud de apoyo eficaz l<sub>y</sub> (el ala reparte la carga)"
+},
+"05-86": {
+"fr": "Élancement et réduction",
+"es": "Esbeltez y reducción"
+},
+"05-87": {
+"fr": "Résistance de l'âme",
+"es": "Resistencia del alma"
+},
+"05-88": {
+"fr": "Interaction avec le moment fléchissant",
+"es": "Interacción con el momento flector"
+},
+"05-89": {
+"fr": "avec flexion (EN 1993-1-5, 7.2) : η<sub>2</sub> + 0,8·η<sub>1</sub> = {} + 0,8·{} = <b>{}</b> ≤ 1,4",
+"es": "con flexión (EN 1993-1-5, 7.2): η<sub>2</sub> + 0,8·η<sub>1</sub> = {} + 0,8·{} = <b>{}</b> ≤ 1,4"
+},
+"05-90": {
+"fr": "Flèche due au moment caractéristique (élastique)",
+"es": "Flecha debida al momento característico (elástica)"
+},
+"05-91": {
+"fr": "w = c·M<sub>y,k</sub>·L²/(E·I<sub>y</sub>) avec c = {} ({})",
+"es": "w = c·M<sub>y,k</sub>·L²/(E·I<sub>y</sub>) con c = {} ({})"
+},
+"05-92": {
+"fr": "M<sub>y,Ed</sub> = {} kNm (compression en haut)",
+"es": "M<sub>y,Ed</sub> = {} kNm (compresión arriba)"
+},
+"05-93": {
+"fr": "Compression",
+"es": "Compresión"
+},
+"05-94": {
+"fr": "F<sub>Ed</sub> = {} kN sur la semelle supérieure",
+"es": "F<sub>Ed</sub> = {} kN sobre el ala superior"
+},
+"05-95": {
+"fr": "Double flèche = vecteur moment (règle de la main droite : pouce dans le sens de la flèche, les doigts indiquent le sens de rotation) · ⊙ traction vers l'extérieur du plan, ⊗ compression vers l'intérieur du plan",
+"es": "Doble flecha = vector momento (regla de la mano derecha: el pulgar en el sentido de la flecha, los dedos indican el sentido de giro) · ⊙ tracción hacia fuera del plano, ⊗ compresión hacia dentro del plano"
+},
+"05-96": {
+"fr": "{}, {} · classe de section {} · {} kg/m",
+"es": "{}, {} · clase de sección {} · {} kg/m"
+},
+"05-97": {
+"fr": "Effort tranchant V<sub>y</sub>, voilement des plaques en cisaillement, introduction de charge avec raidisseurs, interaction torsion/déversement, classe 4 sous M<sub>z</sub>.",
+"es": "Esfuerzo cortante V<sub>y</sub>, abolladura de chapas por cortante, introducción de carga con rigidizadores, interacción torsión/pandeo lateral, clase 4 bajo M<sub>z</sub>."
+},
+"05-98": {
+"fr": "Pinces et entraxes (Tab. 3.3)",
+"es": "Distancias a bordes y entre agujeros (Tab. 3.3)"
+},
+"05-99": {
+"fr": "Cisaillement et pression diamétrale",
+"es": "Corte y aplastamiento"
+},
+"05-100": {
+"fr": "Traction dans les boulons",
+"es": "Tracción en los tornillos"
+},
+"05-101": {
+"fr": "Le poinçonnement de la tôle sous la tête et l'écrou (B<sub>p,Rd</sub>) et les efforts de levier (platine d'about) ne sont pas inclus ici.",
+"es": "El punzonamiento de la chapa bajo la cabeza y la tuerca (B<sub>p,Rd</sub>) y las fuerzas de palanca (chapa frontal) no se incluyen aquí."
+},
+"05-102": {
+"fr": "Soudure d'angle",
+"es": "Soldadura en ángulo"
+},
+"05-103": {
+"fr": "Méthode simplifiée : force par unité de longueur indépendante de la direction. La longueur de cordon l est la longueur efficace (sans cratères d'extrémité).",
+"es": "Método simplificado: fuerza por unidad de longitud independiente de la dirección. La longitud del cordón l es la longitud eficaz (sin cráteres de extremo)."
+},
+"05-104": {
+"fr": "Boulon et diamètre du trou",
+"es": "Tornillo y diámetro del agujero"
+},
+"05-105": {
+"fr": "Distances minimales : assez de tôle devant et entre les trous pour qu'elle ne se déchire pas",
+"es": "Distancias mínimas: suficiente chapa delante y entre los agujeros para que no se desgarre"
+},
+"05-106": {
+"fr": "Cisaillement : la tige du boulon est cisaillée dans chaque plan de cisaillement",
+"es": "Corte: el vástago del tornillo se corta en cada plano de corte"
+},
+"05-107": {
+"fr": "Cisaillement : F<sub>v,Rd</sub> = m·α<sub>v</sub>·f<sub>ub</sub>·A/γ<sub>M2</sub> = {}·{}·{}·{}/1,25 = <b>{} kN</b> par boulon",
+"es": "Corte: F<sub>v,Rd</sub> = m·α<sub>v</sub>·f<sub>ub</sub>·A/γ<sub>M2</sub> = {}·{}·{}·{}/1,25 = <b>{} kN</b> por tornillo"
+},
+"05-108": {
+"fr": "filetage dans le plan de cisaillement, A = A<sub>s</sub>",
+"es": "rosca en el plano de corte, A = A<sub>s</sub>"
+},
+"05-109": {
+"fr": "tige dans le plan de cisaillement, A = π·d²/4",
+"es": "vástago en el plano de corte, A = π·d²/4"
+},
+"05-110": {
+"fr": "Pression diamétrale : le boulon appuie contre la paroi du trou de la tôle (t = {} mm, f<sub>u</sub> = {} N/mm²)",
+"es": "Aplastamiento: el tornillo presiona contra la pared del agujero de la chapa (t = {} mm, f<sub>u</sub> = {} N/mm²)"
+},
+"05-111": {
+"fr": "boulon déterminant : α<sub>d</sub> = {}",
+"es": "tornillo determinante: α<sub>d</sub> = {}"
+},
+"05-112": {
+"fr": "F<sub>b,Rd</sub> = k<sub>1</sub>·α<sub>b</sub>·f<sub>u</sub>·d·t/γ<sub>M2</sub> = <b>{} kN</b> (plus petite valeur ; boulons d'extrémité et de rive déterminés séparément)",
+"es": "F<sub>b,Rd</sub> = k<sub>1</sub>·α<sub>b</sub>·f<sub>u</sub>·d·t/γ<sub>M2</sub> = <b>{} kN</b> (valor menor; tornillos de extremo y de borde determinados por separado)"
+},
+"05-113": {
+"fr": "Résistance du groupe de boulons",
+"es": "Resistencia del grupo de tornillos"
+},
+"05-114": {
+"fr": "F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> pour tous les boulons → groupe = Σ F<sub>b,Rd</sub> = <b>{} kN</b> (EN 1993-1-8, 3.7)",
+"es": "F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> para todos los tornillos → grupo = Σ F<sub>b,Rd</sub> = <b>{} kN</b> (EN 1993-1-8, 3.7)"
+},
+"05-115": {
+"fr": "groupe = n·min(F<sub>v,Rd</sub> ; F<sub>b,Rd</sub>) = {}·{} = <b>{} kN</b>",
+"es": "grupo = n·min(F<sub>v,Rd</sub>; F<sub>b,Rd</sub>) = {}·{} = <b>{} kN</b>"
+},
+"05-116": {
+"fr": "Résistance en traction d'un boulon (section résistante du filetage)",
+"es": "Resistencia a tracción de un tornillo (área resistente de la rosca)"
+},
+"05-117": {
+"fr": "Effort de traction par boulon (réparti uniformément)",
+"es": "Fuerza de tracción por tornillo (repartida uniformemente)"
+},
+"05-118": {
+"fr": "Cisaillement et traction simultanés : additionner les deux taux de travail",
+"es": "Corte y tracción simultáneos: sumar ambos aprovechamientos"
+},
+"05-119": {
+"fr": "Cisaillement et traction (Tab. 3.4) : F<sub>v,Ed</sub>/F<sub>v,Rd</sub> + F<sub>t,Ed</sub>/(1,4·F<sub>t,Rd</sub>) = {} + {} = <b>{}</b> ≤ 1",
+"es": "Corte y tracción (Tab. 3.4): F<sub>v,Ed</sub>/F<sub>v,Rd</sub> + F<sub>t,Ed</sub>/(1,4·F<sub>t,Rd</sub>) = {} + {} = <b>{}</b> ≤ 1"
+},
+"05-120": {
+"fr": "traction seule : F<sub>t,Ed</sub>/F<sub>t,Rd</sub> = {}",
+"es": "solo tracción: F<sub>t,Ed</sub>/F<sub>t,Rd</sub> = {}"
+},
+"05-121": {
+"fr": "Résistance au cisaillement du métal d'apport",
+"es": "Resistencia a cortante del material de aportación"
+},
+"05-122": {
+"fr": "Résistance par mm de cordon (résistance × gorge)",
+"es": "Resistencia por mm de cordón (resistencia × garganta)"
+},
+"05-123": {
+"fr": "Sollicitation par mm de cordon",
+"es": "Solicitación por mm de cordón"
+},
+"05-124": {
+"fr": "Règles constructives pour l'épaisseur et la longueur",
+"es": "Reglas constructivas para el espesor y la longitud"
+},
+"05-125": {
+"fr": "Épaisseur minimale : a ≥ max(3 mm ; √t<sub>max</sub> − 0,5){} · choisi a = {} mm",
+"es": "Espesor mínimo: a ≥ max(3 mm; √t<sub>max</sub> − 0,5){} · elegido a = {} mm"
+},
+"05-126": {
+"fr": "Longueur minimale : l ≥ max(30 mm ; 6·a) = {} mm · existante {} mm",
+"es": "Longitud mínima: l ≥ max(30 mm; 6·a) = {} mm · existente {} mm"
+},
+"05-127": {
+"fr": "e₁ = {}{} (dans la direction de l'effort)",
+"es": "e₁ = {}{} (en la dirección de la fuerza)"
+},
+"05-128": {
+"fr": "extrémité libre de la tôle (e₁)",
+"es": "extremo libre de la chapa (e₁)"
+},
+"05-129": {
+"fr": "V<sub>Ed</sub> = {} kN → par boulon {} kN (cisaillement, flèches)",
+"es": "V<sub>Ed</sub> = {} kN → por tornillo {} kN (corte, flechas)"
+},
+"05-130": {
+"fr": "N<sub>Ed</sub> = {} kN → par boulon {} kN (traction selon l'axe du boulon, ⊙)",
+"es": "N<sub>Ed</sub> = {} kN → por tornillo {} kN (tracción según el eje del tornillo, ⊙)"
+},
+"05-131": {
+"fr": "Soudure d'angle F<sub>w,Ed</sub> = {} kN",
+"es": "Soldadura en ángulo F<sub>w,Ed</sub> = {} kN"
+},
+"05-132": {
+"fr": "Le boulon appuie contre la paroi du trou dans la direction de l'effort — c'est pourquoi la distance e₁ à l'extrémité libre de la tôle compte.",
+"es": "El tornillo presiona contra la pared del agujero en la dirección de la fuerza; por eso cuenta la distancia e₁ al extremo libre de la chapa."
+},
+"05-133": {
+"fr": " · soudure d'angle a = {} mm",
+"es": " · soldadura en ángulo a = {} mm"
+},
+"05-134": {
+"fr": "{} × {} {}, {} plan(s) de cisaillement · tôle {} mm {}{}",
+"es": "{} × {} {}, {} plano(s) de corte · chapa {} mm {}{}"
+},
+"05-135": {
+"fr": "Rupture de bloc, section nette de la tôle, poinçonnement, efforts de levier, assemblages résistant aux moments (méthode des composantes) et assemblages HV (précontraints, résistant au glissement).",
+"es": "Desgarro de bloque, sección neta de la chapa, punzonamiento, fuerzas de palanca, uniones resistentes a momento (método de componentes) y uniones HV (pretensadas, resistentes al deslizamiento)."
+},
+"05-136": {
+"fr": "Matériau et valeurs de calcul",
+"es": "Material y valores de cálculo"
+},
+"05-137": {
+"fr": "Flexion",
+"es": "Flexión"
+},
+"05-138": {
+"fr": "Cisaillement",
+"es": "Cortante"
+},
+"05-139": {
+"fr": "Pression d'appui (compression perpendiculaire aux fibres)",
+"es": "Presión de apoyo (compresión perpendicular a la fibra)"
+},
+"05-140": {
+"fr": "Longueur de déversement 0 : rive comprimée maintenue sur toute sa longueur → k<sub>crit</sub> = 1",
+"es": "Longitud de pandeo lateral 0: borde comprimido arriostrado en toda su longitud → k<sub>crit</sub> = 1"
+},
+"05-141": {
+"fr": "Déversement",
+"es": "Pandeo lateral"
+},
+"05-142": {
+"fr": "Longueur efficace de déversement : dépend du diagramme des moments et du point d'application de la charge",
+"es": "Longitud eficaz de pandeo lateral: depende de la ley de momentos y del punto de aplicación de la carga"
+},
+"05-143": {
+"fr": " + 2h (charge sur la rive supérieure)",
+"es": " + 2h (carga en el borde superior)"
+},
+"05-144": {
+"fr": " − 0,5h (charge sur la rive inférieure)",
+"es": " − 0,5h (carga en el borde inferior)"
+},
+"05-145": {
+"fr": "Contrainte critique de flexion (déversement idéal d'une section rectangulaire)",
+"es": "Tensión crítica de flexión (pandeo lateral ideal de una sección rectangular)"
+},
+"05-146": {
+"fr": "Élancement relatif de déversement et coefficient k<sub>crit</sub>",
+"es": "Esbeltez relativa de pandeo lateral y coeficiente k<sub>crit</sub>"
+},
+"05-147": {
+"fr": "Vérification : contrainte de flexion ≤ résistance en flexion réduite",
+"es": "Comprobación: tensión de flexión ≤ resistencia a flexión reducida"
+},
+"05-148": {
+"fr": "Rapprocher les maintiens latéraux (pannes, contreventement) ou choisir une section plus large.",
+"es": "Acerque los arriostramientos laterales (correas, arriostramiento) o elija una sección más ancha."
+},
+"05-149": {
+"fr": "Vérification avec la compression (voir flambement)",
+"es": "Comprobación conjunta con la compresión (véase pandeo)"
+},
+"05-150": {
+"fr": "En complément avec déversement",
+"es": "Adicionalmente con pandeo lateral"
+},
+"05-151": {
+"fr": "avec déversement (6.35) : (σ<sub>m</sub>/(k<sub>crit</sub>·f<sub>m,d</sub>))² + σ<sub>c</sub>/(k<sub>c,z</sub>·f<sub>c,0,d</sub>) = <b>{}</b> ≤ 1",
+"es": "con pandeo lateral (6.35): (σ<sub>m</sub>/(k<sub>crit</sub>·f<sub>m,d</sub>))² + σ<sub>c</sub>/(k<sub>c,z</sub>·f<sub>c,0,d</sub>) = <b>{}</b> ≤ 1"
+},
+"05-152": {
+"fr": "Compression et flexion (flambement)",
+"es": "Compresión y flexión (pandeo)"
+},
+"05-153": {
+"fr": "Flambement",
+"es": "Pandeo"
+},
+"05-154": {
+"fr": "Déformation due à l'effort tranchant négligée (à prendre en compte pour les poutres BLC courtes et hautes).",
+"es": "Se desprecia la deformación por cortante (téngase en cuenta en vigas de MLE cortas y de gran canto)."
+},
+"05-155": {
+"fr": "Bois lamellé-collé, EN 14080",
+"es": "Madera laminada encolada, EN 14080"
+},
+"05-156": {
+"fr": "Bois massif résineux, EN 338",
+"es": "Madera maciza de conífera, EN 338"
+},
+"05-157": {
+"fr": "Coefficient de modification k<sub>mod</sub> : le bois est plus résistant sous charge de courte durée, moins sous charge permanente et en présence d'humidité",
+"es": "Factor de modificación k<sub>mod</sub>: la madera es más resistente bajo cargas de corta duración y menos bajo cargas permanentes y con humedad"
+},
+"05-158": {
+"fr": "Coefficient de hauteur k<sub>h</sub> : les sections peu hautes peuvent être un peu plus sollicitées",
+"es": "Factor de altura k<sub>h</sub>: las secciones de poco canto pueden aprovecharse algo más"
+},
+"05-159": {
+"fr": "Valeurs de calcul des résistances",
+"es": "Valores de cálculo de las resistencias"
+},
+"05-160": {
+"fr": "Contrainte de rive due au moment fléchissant",
+"es": "Tensión en el borde debida al momento flector"
+},
+"05-161": {
+"fr": "Les fentes de retrait réduisent la largeur efficace",
+"es": "Las fendas de retracción reducen el ancho eficaz"
+},
+"05-162": {
+"fr": "Contrainte de cisaillement maximale à mi-hauteur de la section (1,5 fois la contrainte moyenne)",
+"es": "Tensión tangencial máxima a media altura de la sección (1,5 veces la tensión media)"
+},
+"05-163": {
+"fr": "Longueur d'appui efficace : la pression se diffuse un peu dans le bois",
+"es": "Longitud de apoyo eficaz: la presión se difunde algo en la madera"
+},
+"05-164": {
+"fr": "longueur efficace l<sub>ef</sub> = l + 30 mm (débord uniquement côté travée, appui d'extrémité) = {} + 30 = {} mm",
+"es": "longitud eficaz l<sub>ef</sub> = l + 30 mm (prolongación solo hacia el vano, apoyo extremo) = {} + 30 = {} mm"
+},
+"05-165": {
+"fr": "Contrainte de compression perpendiculaire aux fibres",
+"es": "Tensión de compresión perpendicular a la fibra"
+},
+"05-166": {
+"fr": "Coefficient de compression transversale k<sub>c,90</sub> : un certain enfoncement est admissible",
+"es": "Factor k<sub>c,90</sub>: se admite cierta indentación"
+},
+"05-167": {
+"fr": "Contraintes dues à l'effort normal et au moment",
+"es": "Tensiones debidas al esfuerzo axil y al momento"
+},
+"05-168": {
+"fr": "Flambement autour de y (L<sub>cr</sub> = {} m, i = h/√12)",
+"es": "Pandeo alrededor de y (L<sub>cr</sub> = {} m, i = h/√12)"
+},
+"05-169": {
+"fr": "Flambement autour de z (L<sub>cr</sub> = {} m, i = b/√12)",
+"es": "Pandeo alrededor de z (L<sub>cr</sub> = {} m, i = b/√12)"
+},
+"05-170": {
+"fr": "Interaction compression + flexion pour les deux directions",
+"es": "Interacción compresión + flexión para ambas direcciones"
+},
+"05-171": {
+"fr": "Flèche élastique instantanée, séparément pour la charge permanente et la charge variable",
+"es": "Flecha elástica instantánea, por separado para la carga permanente y la variable"
+},
+"05-172": {
+"fr": "Flèche instantanée",
+"es": "Flecha instantánea"
+},
+"05-173": {
+"fr": "Fluage : le bois continue de se déformer sous charge permanente (k<sub>def</sub> = {}, CS {})",
+"es": "Fluencia: la madera sigue deformándose bajo carga permanente (k<sub>def</sub> = {}, CS {})"
+},
+"05-174": {
+"fr": "Flèche finale visible due à la charge quasi permanente",
+"es": "Flecha final visible debida a la carga casi permanente"
+},
+"05-175": {
+"fr": "w<sub>net,fin</sub> = (w<sub>G</sub> + ψ<sub>2</sub>·w<sub>Q</sub>)·(1 + k<sub>def</sub>) = <b>{} mm</b> ≤ L/300 = {} mm (sans contreflèche)",
+"es": "w<sub>net,fin</sub> = (w<sub>G</sub> + ψ<sub>2</sub>·w<sub>Q</sub>)·(1 + k<sub>def</sub>) = <b>{} mm</b> ≤ L/300 = {} mm (sin contraflecha)"
+},
+"05-176": {
+"fr": " (appui)",
+"es": " (apoyo)"
+},
+"05-177": {
+"fr": "F<sub>Ed</sub> = {} kN comprime perpendiculairement aux fibres par le dessous",
+"es": "F<sub>Ed</sub> = {} kN comprime perpendicularmente a la fibra desde abajo"
+},
+"05-178": {
+"fr": "Double flèche = vecteur moment (règle de la main droite)",
+"es": "Doble flecha = vector momento (regla de la mano derecha)"
+},
+"05-179": {
+"fr": "Compression sur le joint (tronçon en T)",
+"es": "Compresión sobre la junta (T-stub)"
+},
+"05-180": {
+"fr": "Choisir une platine plus épaisse ou plus grande (c ou A<sub>eff</sub> plus grand), une classe de béton supérieure ou une fondation plus grande (k<sub>j</sub>).",
+"es": "Elija una placa más gruesa o más grande (mayor c o A<sub>eff</sub>), una clase de hormigón superior o una cimentación mayor (k<sub>j</sub>)."
+},
+"05-181": {
+"fr": "Effort tranchant (frottement)",
+"es": "Esfuerzo cortante (rozamiento)"
+},
+"05-182": {
+"fr": "Le frottement ne suffit pas : prévoir une bêche ou des ancrages pour l'effort tranchant. ",
+"es": "El rozamiento no basta: disponga un tope de cortante o anclajes para el esfuerzo cortante. "
+},
+"05-183": {
+"fr": "Ne prendre en compte le frottement que si N<sub>Ed</sub> est présent de façon sûre dans la même combinaison d'actions.",
+"es": "Considere el rozamiento solo si N<sub>Ed</sub> está presente con seguridad en la misma combinación de acciones."
+},
+"05-184": {
+"fr": "Soudures d'angle poteau–platine",
+"es": "Soldaduras en ángulo pilar–placa"
+},
+"05-185": {
+"fr": "Résistance du joint sous la platine : béton sous pression localisée (EN 1992-1-1, 6.7)",
+"es": "Resistencia de la junta bajo la placa: hormigón bajo carga concentrada (EN 1992-1-1, 6.7)"
+},
+"05-186": {
+"fr": "A<sub>c1</sub>/A<sub>c0</sub> : rapport des côtés min(B<sub>f</sub>/B<sub>p</sub> ; L<sub>f</sub>/L<sub>p</sub> ; 3) = min({} ; {} ; 3) = {} → k<sub>j</sub> = √(A<sub>c1</sub>/A<sub>c0</sub>) = {}",
+"es": "A<sub>c1</sub>/A<sub>c0</sub>: relación de lados min(B<sub>f</sub>/B<sub>p</sub>; L<sub>f</sub>/L<sub>p</sub>; 3) = min({}; {}; 3) = {} → k<sub>j</sub> = √(A<sub>c1</sub>/A<sub>c0</sub>) = {}"
+},
+"05-187": {
+"fr": "Jusqu'où la platine répartit la charge au-delà du profilé : largeur supplémentaire c (platine en console, élastique)",
+"es": "Hasta dónde reparte la placa la carga más allá del perfil: ancho adicional c (placa como voladizo, elástico)"
+},
+"05-188": {
+"fr": "Aire efficace : bandes de largeur c autour des semelles et de l'âme (tronçon en T), limitées à la platine",
+"es": "Área eficaz: franjas de ancho c alrededor de las alas y del alma (T-stub), limitadas a la placa"
+},
+"05-189": {
+"fr": "Âme trop courte (h − 2t<sub>f</sub> ≤ 2c) : un rectangle (b + 2c)·(h + 2c), limité à la platine → A<sub>eff</sub> = {} cm²",
+"es": "Alma demasiado corta (h − 2t<sub>f</sub> ≤ 2c): un rectángulo (b + 2c)·(h + 2c), limitado a la placa → A<sub>eff</sub> = {} cm²"
+},
+"05-190": {
+"fr": "par semelle (b + 2c)·(t<sub>f</sub> + 2c) = {} cm² · âme (t<sub>w</sub> + 2c)·(h − 2t<sub>f</sub> − 2c) = {} cm²",
+"es": "por ala (b + 2c)·(t<sub>f</sub> + 2c) = {} cm² · alma (t<sub>w</sub> + 2c)·(h − 2t<sub>f</sub> − 2c) = {} cm²"
+},
+"05-191": {
+"fr": "Résistance du pied de poteau en compression",
+"es": "Resistencia de la basa del pilar a compresión"
+},
+"05-192": {
+"fr": "Effort tranchant par frottement entre platine et mortier (6.2.2(6), C<sub>f,d</sub> = 0,2)",
+"es": "Esfuerzo cortante por rozamiento entre placa y mortero (6.2.2(6), C<sub>f,d</sub> = 0,2)"
+},
+"05-193": {
+"fr": "Les soudures d'angle de l'âme transmettent l'effort tranchant (méthode simplifiée, 4.5.3.3)",
+"es": "Las soldaduras en ángulo del alma transmiten el esfuerzo cortante (método simplificado, 4.5.3.3)"
+},
+"05-194": {
+"fr": "Longueur de cordon sur l'âme, des deux côtés l = 2·(h − 2t<sub>f</sub> − 2r) = {} mm → F<sub>w,Ed</sub> = V<sub>Ed</sub>/l = <b>{} N/mm</b>",
+"es": "Longitud de cordón en el alma, por ambos lados l = 2·(h − 2t<sub>f</sub> − 2r) = {} mm → F<sub>w,Ed</sub> = V<sub>Ed</sub>/l = <b>{} N/mm</b>"
+},
+"05-195": {
+"fr": "Épaisseur minimale a ≥ max(3 ; √t<sub>max</sub> − 0,5) = {} mm {}",
+"es": "Espesor mínimo a ≥ max(3; √t<sub>max</sub> − 0,5) = {} mm {}"
+},
+"05-196": {
+"fr": "Vue",
+"es": "Alzado"
+},
+"05-197": {
+"fr": "Pression f<sub>jd</sub> = {} N/mm² sur A<sub>eff</sub> = {} cm² (bleu)",
+"es": "Presión f<sub>jd</sub> = {} N/mm² sobre A<sub>eff</sub> = {} cm² (azul)"
+},
+"05-198": {
+"fr": "{} sur platine d'assise {} × {} × {} mm {} · {} · N<sub>j,Rd</sub> = {} kN",
+"es": "{} sobre placa base {} × {} × {} mm {} · {} · N<sub>j,Rd</sub> = {} kN"
+},
+"05-199": {
+"fr": "Pieds de poteau encastrés (moment, ancrages en traction), bêches et ancrages pour l'effort tranchant, poinçonnement de la fondation, joint de mortier en détail. Le poteau lui-même (flambement) sous « Poutre / poteau ».",
+"es": "Basas de pilar empotradas (momento, anclajes a tracción), topes de cortante y anclajes para el esfuerzo cortante, punzonamiento de la cimentación, junta de mortero en detalle. El propio pilar (pandeo) en «Viga / pilar»."
+},
+"05-200": {
+"fr": "DIN EN 1993-1-8 avec AN, 6.2.5",
+"es": "DIN EN 1993-1-8 con AN, 6.2.5"
+},
+"05-201": {
+"fr": "Poteau, platine",
+"es": "Pilar, placa"
+},
+"05-202": {
+"fr": "{} ; platine d'assise {} × {} × {} mm, {}",
+"es": "{}; placa base {} × {} × {} mm, {}"
+},
+"05-203": {
+"fr": "Efforts",
+"es": "Fuerzas"
+},
+"05-204": {
+"fr": "N<sub>Ed</sub> = {} kN (compression), V<sub>Ed</sub> = {} kN ; soudure d'angle a = {} mm",
+"es": "N<sub>Ed</sub> = {} kN (compresión), V<sub>Ed</sub> = {} kN; soldadura en ángulo a = {} mm"
+},
+"05-205": {
+"fr": "<section><h2>Données</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Pied de poteau</h2><div class=\"figure\">{}</div></section>",
+"es": "<section><h2>Datos</h2><table>\n      {}\n      {}\n      {}\n    </table></section><section><h2>Basa de pilar</h2><div class=\"figure\">{}</div></section>"
+},
+"05-206": {
+"fr": "Pied articulé en compression.",
+"es": "Basa articulada en compresión."
+},
+"05-207": {
+"fr": "Contraintes dans la section de gorge de la soudure d'angle {} (section de gorge rabattue dans le plan de l'assemblage)",
+"es": "Tensiones en el área de garganta de la soldadura en ángulo {} (área de garganta abatida al plano de la unión)"
+},
+"05-208": {
+"fr": "Méthode directionnelle (4.5.3.2) : contrainte équivalente et contrainte normale",
+"es": "Método direccional (4.5.3.2): tensión equivalente y tensión normal"
+},
+"05-209": {
+"fr": "À titre de comparaison, méthode simplifiée (4.5.3.3) : √({}² + {}²) = {} N/mm² {} f<sub>vw,d</sub> = {} N/mm² ({} % au lieu de {} %)",
+"es": "A modo de comparación, método simplificado (4.5.3.3): √({}² + {}²) = {} N/mm² {} f<sub>vw,d</sub> = {} N/mm² ({} % en lugar de {} %)"
+},
+"05-210": {
+"fr": "(dépassée)",
+"es": "(superada)"
+},
+"05-211": {
+"fr": "{} : a = {} mm · a<sub>min</sub> = max(3 ; √{} − 0,5) = {} {} · recommandation a ≤ 0,7·t<sub>min</sub> = {} {}{}",
+"es": "{}: a = {} mm · a<sub>min</sub> = max(3; √{} − 0,5) = {} {} · recomendación a ≤ 0,7·t<sub>min</sub> = {} {}{}"
+},
+"05-212": {
+"fr": "Règles constructives des cordons",
+"es": "Reglas constructivas de los cordones"
+},
+"05-213": {
+"fr": "Augmenter l'épaisseur de gorge (des cordons trop minces sur des tôles épaisses refroidissent trop vite et deviennent fragiles) ou allonger le cordon. ",
+"es": "Aumente el espesor de garganta (los cordones demasiado delgados sobre chapas gruesas se enfrían demasiado rápido y se vuelven frágiles) o alargue el cordón. "
+},
+"05-214": {
+"fr": "Épaisseur de gorge supérieure à 0,7·t<sub>min</sub> : plus de métal d'apport que la tôle la plus mince ne peut transmettre — généralement peu économique, sans défaut de vérification.",
+"es": "Espesor de garganta superior a 0,7·t<sub>min</sub>: más material de aportación del que puede transmitir la chapa más delgada; normalmente antieconómico, no es un fallo de la comprobación."
+},
+"05-215": {
+"fr": "Épaisseur minimale et maximale des soudures d'angle, longueur minimale (4.5.2, AN)",
+"es": "Espesor mínimo y máximo de las soldaduras en ángulo, longitud mínima (4.5.2, AN)"
+},
+"05-216": {
+"fr": "Disposition des cordons et caractéristiques de section",
+"es": "Disposición de los cordones y características de sección"
+},
+"05-217": {
+"fr": "Longueurs de cordon (cordons d'âme sans congé r, cordons intérieurs de semelle par côté (b − t<sub>w</sub> − 2r)/2)",
+"es": "Longitudes de cordón (cordones del alma sin acuerdo r, cordones interiores del ala por lado (b − t<sub>w</sub> − 2r)/2)"
+},
+"05-218": {
+"fr": "(2 pièces de ",
+"es": "(2 piezas de "
+},
+"05-219": {
+"fr": "— par pièce ",
+"es": "— por pieza "
+},
+"05-220": {
+"fr": " mm < max(30 ; 6a) : non pris en compte",
+"es": " mm < max(30; 6a): no se tiene en cuenta"
+},
+"05-221": {
+"fr": "Semelle extérieure l<sub>o</sub> = b = {} mm · semelle intérieure l<sub>i</sub> = {} mm {} · âme l<sub>w</sub> = h − 2t<sub>f</sub> − 2r = {} mm",
+"es": "Ala exterior l<sub>o</sub> = b = {} mm · ala interior l<sub>i</sub> = {} mm {} · alma l<sub>w</sub> = h − 2t<sub>f</sub> − 2r = {} mm"
+},
+"05-222": {
+"fr": "Distances aux centres de gravité des sections de gorge (milieu de l'épaisseur de gorge)",
+"es": "Distancias a los centros de gravedad de las áreas de garganta (mitad del espesor de garganta)"
+},
+"05-223": {
+"fr": "Aire de gorge et moment d'inertie de la disposition des cordons",
+"es": "Área de garganta y momento de inercia de la disposición de cordones"
+},
+"05-224": {
+"fr": "Contraintes dans le plan de l'assemblage",
+"es": "Tensiones en el plano de la unión"
+},
+"05-225": {
+"fr": "Contrainte normale maximale au bord extérieur de la semelle",
+"es": "Tensión normal máxima en el borde exterior del ala"
+},
+"05-226": {
+"fr": "Cordon de semelle (extérieur)",
+"es": "Cordón del ala (exterior)"
+},
+"05-227": {
+"fr": "Cordon d'âme à son extrémité (z = ± l<sub>w</sub>/2) : contrainte normale et cisaillement se cumulent",
+"es": "Cordón del alma en su extremo (z = ± l<sub>w</sub>/2): coinciden la tensión normal y el cortante"
+},
+"05-228": {
+"fr": "Cordon d'âme (extrémité)",
+"es": "Cordón del alma (extremo)"
+},
+"05-229": {
+"fr": "Cordon de semelle",
+"es": "Cordón del ala"
+},
+"05-230": {
+"fr": "Cordon d'âme",
+"es": "Cordón del alma"
+},
+"05-231": {
+"fr": "Cordons longs : réduction à partir de l > 150a (4.11)",
+"es": "Cordones largos: reducción a partir de l > 150a (4.11)"
+},
+"05-232": {
+"fr": "Résistance de l'assemblage (hypothèse : tous les cordons atteignent ensemble leur résistance, ductilité suffisante)",
+"es": "Resistencia de la unión (hipótesis: todos los cordones alcanzan conjuntamente su resistencia, ductilidad suficiente)"
+},
+"05-233": {
+"fr": "Cordon frontal a·b·σ<sub>w,Rd</sub> = {}·{}·{}/1000 = {} kN · ",
+"es": "Cordón frontal a·b·σ<sub>w,Rd</sub> = {}·{}·{}/1000 = {} kN · "
+},
+"05-234": {
+"fr": "Cordons latéraux 2·a·l·β<sub>Lw</sub>·τ<sub>∥,Rd</sub> = 2·{}·{}·{}·{}/1000 = {} kN",
+"es": "Cordones laterales 2·a·l·β<sub>Lw</sub>·τ<sub>∥,Rd</sub> = 2·{}·{}·{}·{}/1000 = {} kN"
+},
+"05-235": {
+"fr": "À titre de comparaison, méthode simplifiée : f<sub>vw,d</sub>·a·Σl = {}·{}·{}/1000 = {} kN ({} %)",
+"es": "A modo de comparación, método simplificado: f<sub>vw,d</sub>·a·Σl = {}·{}·{}/1000 = {} kN ({} %)"
+},
+"05-236": {
+"fr": "Soudures d'angle plat–gousset",
+"es": "Soldaduras en ángulo pletina–cartela"
+},
+"05-237": {
+"fr": "Cordons latéraux seuls : l'effort entre par les bords — réaliser si possible des cordons latéraux au moins aussi longs que la largeur b.",
+"es": "Solo cordones laterales: la fuerza entra por los bordes; si es posible, ejecute los cordones laterales al menos tan largos como el ancho b."
+},
+"05-238": {
+"fr": "Plat en traction",
+"es": "Pletina a tracción"
+},
+"05-239": {
+"fr": "Résistance plastique en traction du plat (sans trous, 6.2.3)",
+"es": "Resistencia plástica a tracción de la pletina (sin agujeros, 6.2.3)"
+},
+"05-240": {
+"fr": "Cordon latéral",
+"es": "Cordón lateral"
+},
+"05-241": {
+"fr": "Cordon frontal",
+"es": "Cordón frontal"
+},
+"05-242": {
+"fr": "Disposition des cordons et contraintes",
+"es": "Disposición de los cordones y tensiones"
+},
+"05-243": {
+"fr": "Deux soudures d'angle verticales, section de gorge rabattue dans le plan de l'assemblage",
+"es": "Dos soldaduras en ángulo verticales, área de garganta abatida al plano de la unión"
+},
+"05-244": {
+"fr": "Efforts internes dans le plan de l'assemblage",
+"es": "Esfuerzos internos en el plano de la unión"
+},
+"05-245": {
+"fr": "σ<sub>w</sub> = M/W<sub>w</sub> = <b>{} N/mm²</b> (traction en haut, compression en bas) · τ<sub>∥</sub> = F/A<sub>w</sub> = <b>{} N/mm²</b> (supposé uniformément réparti)",
+"es": "σ<sub>w</sub> = M/W<sub>w</sub> = <b>{} N/mm²</b> (tracción arriba, compresión abajo) · τ<sub>∥</sub> = F/A<sub>w</sub> = <b>{} N/mm²</b> (se supone repartido uniformemente)"
+},
+"05-246": {
+"fr": "Soudures d'angle (extrémité supérieure du cordon)",
+"es": "Soldaduras en ángulo (extremo superior del cordón)"
+},
+"05-247": {
+"fr": "Platine de console à la section d'encastrement",
+"es": "Chapa de ménsula en la sección de encastre"
+}
+}

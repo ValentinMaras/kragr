@@ -1,0 +1,1107 @@
+[
+ {
+  "id": "20-0",
+  "de": "<span class=\"st-n\">3</span><span>Biegung und Zug (6.17) bzw. Druck (6.19) ohne Stabilität</span>",
+  "en": "<span class=\"st-n\">3</span><span>Bending and tension (6.17) or compression (6.19) without instability</span>"
+ },
+ {
+  "id": "20-1",
+  "de": "<span class=\"st-n\">3</span><span>Festigkeit im Brandfall (k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Strength in the fire situation (k<sub>mod,fi</sub> = 1.0, γ<sub>M,fi</sub> = 1.0)</span>"
+ },
+ {
+  "id": "20-2",
+  "de": "<span class=\"st-n\">3</span><span>Maßgebende Lastkombination (Bemessungslast geteilt durch k<sub>mod</sub>)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Governing load combination (design load divided by k<sub>mod</sub>)</span>"
+ },
+ {
+  "id": "20-3",
+  "de": "<span class=\"st-n\">3</span><span>Nachweis (6.33)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Verification (6.33)</span>"
+ },
+ {
+  "id": "20-4",
+  "de": "<span class=\"st-n\">4</span><span>Ausknicken um z (in Richtung b)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Buckling about z (in direction b)</span>"
+ },
+ {
+  "id": "20-5",
+  "de": "<span class=\"st-n\">4</span><span>Biegung (6.1.6)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Bending (6.1.6)</span>"
+ },
+ {
+  "id": "20-6",
+  "de": "<span class=\"st-n\">5</span><span>Schub (6.1.7 mit Rissbeiwert k<sub>cr</sub>)</span>",
+  "en": "<span class=\"st-n\">5</span><span>Shear (6.1.7 with crack factor k<sub>cr</sub>)</span>"
+ },
+ {
+  "id": "20-7",
+  "de": "<span class=\"st-n\">5</span><span>Spannungen</span>",
+  "en": "<span class=\"st-n\">5</span><span>Stresses</span>"
+ },
+ {
+  "id": "20-8",
+  "de": "<span class=\"st-n\">6</span><span>Auflagerpressung (6.1.5)</span>",
+  "en": "<span class=\"st-n\">6</span><span>Bearing stress (6.1.5)</span>"
+ },
+ {
+  "id": "20-9",
+  "de": "<span class=\"st-n\">6</span><span>Nachweise (6.23) und (6.24), k<sub>m</sub> = 0,7</span>",
+  "en": "<span class=\"st-n\">6</span><span>Checks (6.23) and (6.24), k<sub>m</sub> = 0.7</span>"
+ },
+ {
+  "id": "20-10",
+  "de": "<span class=\"st-n\">7</span><span>Durchbiegung (GZG, ohne Schubverformung, k<sub>def</sub> = 0,60, ψ<sub>2</sub> = 0,3)</span>",
+  "en": "<span class=\"st-n\">7</span><span>Deflection (SLS, without shear deformation, k<sub>def</sub> = 0.60, ψ<sub>2</sub> = 0.3)</span>"
+ },
+ {
+  "id": "20-11",
+  "de": "A<sub>ef</sub> = b · l<sub>ef</sub>, wirksame Länge: Kontaktlänge + je 30 mm, wo das Holz übersteht (nicht über das Trägerende hinaus)",
+  "en": "A<sub>ef</sub> = b · l<sub>ef</sub>, effective length: contact length + 30 mm on each side where the timber extends beyond it (not beyond the end of the member)"
+ },
+ {
+  "id": "20-12",
+  "de": "Abbrand",
+  "en": "Charring"
+ },
+ {
+  "id": "20-13",
+  "de": "Abbrand + Schicht ohne",
+  "en": "Charring + zero-strength layer"
+ },
+ {
+  "id": "20-14",
+  "de": "Abbrand GL24h 160/400, R 30",
+  "en": "Charring GL24h 160/400, R 30"
+ },
+ {
+  "id": "20-15",
+  "de": "Abbrandraten — EN 1995-1-2, Tab. 3.1",
+  "en": "Charring rates — EN 1995-1-2, Table 3.1"
+ },
+ {
+  "id": "20-16",
+  "de": "Abscheren (t<sub>req</sub> = 9·d = 27,9 mm): Faktor <b>0,90</b><br>Herausziehen: Faktor <b>0,02</b><br>Mindestholzdicke ohne Vorbohren: <b>21,7 mm</b>",
+  "en": "Shear (t<sub>req</sub> = 9·d = 27.9 mm): factor <b>0.90</b><br>Withdrawal: factor <b>0.02</b><br>Minimum timber thickness without pre-drilling: <b>21.7 mm</b>"
+ },
+ {
+  "id": "20-17",
+  "de": "Abstand",
+  "en": "Distance"
+ },
+ {
+  "id": "20-18",
+  "de": "Anteil",
+  "en": "Share"
+ },
+ {
+  "id": "20-19",
+  "de": "Auflagerlänge [mm]",
+  "en": "Bearing length [mm]"
+ },
+ {
+  "id": "20-20",
+  "de": "Außergewöhnliche Bemessungssituation",
+  "en": "Accidental design situation"
+ },
+ {
+  "id": "20-21",
+  "de": "BSH: allgemeine Formel mit G<sub>0,05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = 232,92 · 10⁶ mm⁴",
+  "en": "Glulam: general formula with G<sub>0.05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = 232.92 · 10⁶ mm⁴"
+ },
+ {
+  "id": "20-22",
+  "de": "Baustoff / Situation",
+  "en": "Material / situation"
+ },
+ {
+  "id": "20-23",
+  "de": "Beanspruchung",
+  "en": "Loading"
+ },
+ {
+  "id": "20-24",
+  "de": "Bei Auflagerung am unteren Rand dürfen Lasten im Abstand h vom Auflagerrand bei V<sub>d</sub> unberücksichtigt bleiben.",
+  "en": "For supports at the bottom edge, loads within a distance h of the support edge may be neglected in V<sub>d</sub>."
+ },
+ {
+  "id": "20-25",
+  "de": "Bei Lastkombinationen mit verschiedenen Einwirkungsdauern ist k<sub>mod</sub> der <b>kürzesten</b> beteiligten Last maßgebend. Trotzdem muss auch die Kombination nur mit den länger wirkenden Lasten nachgewiesen werden, weil dort k<sub>mod</sub> kleiner ist.",
+  "en": "For load combinations with different load durations, k<sub>mod</sub> of the <b>shortest</b> load involved governs. The combination with only the longer-acting loads must still be checked, because k<sub>mod</sub> is smaller there."
+ },
+ {
+  "id": "20-26",
+  "de": "Bei Nägeln mit d ≤ 8 mm gilt diese Formel unabhängig vom Winkel zwischen Kraft und Faser.",
+  "en": "For nails with d ≤ 8 mm this formula applies regardless of the angle between force and grain."
+ },
+ {
+  "id": "20-27",
+  "de": "Bei kombiniertem BSH (GL..c) liegen höherfeste Lamellen außen, wo die Biegespannung am größten ist. Das spart Material: Die Biegefestigkeit ist gleich, aber die Druck- und Zugfestigkeit ∥ Faser ist niedriger als bei homogenem BSH gleicher Klasse. Für Stützen (überwiegend Druck) ist deshalb homogenes BSH meist günstiger.",
+  "en": "In combined glulam (GL..c) the higher-strength laminations are on the outside, where the bending stress is greatest. This saves material: the bending strength is the same, but the compressive and tensile strength ∥ grain is lower than for homogeneous glulam of the same class. For columns (mainly compression), homogeneous glulam is therefore usually more economical."
+ },
+ {
+  "id": "20-28",
+  "de": "Bei zusätzlicher Biegung: Interaktionsnachweis mit den Biegespannungstermen.",
+  "en": "With additional bending: interaction check including the bending stress terms."
+ },
+ {
+  "id": "20-29",
+  "de": "Bei λ<sub>rel,m</sub> ≤ 0,75 ist kein Kippnachweis nötig.",
+  "en": "For λ<sub>rel,m</sub> ≤ 0.75 no lateral-torsional buckling check is needed."
+ },
+ {
+  "id": "20-30",
+  "de": "Beispiel C24, Biegung, NKL 1, mittlere Lasteinwirkungsdauer (k<sub>mod</sub> = 0,8):<br> f<sub>m,d</sub> = 0,8 · 24 / 1,30 = <b>14,8 N/mm²</b>",
+  "en": "Example C24, bending, SC 1, medium-term load duration (k<sub>mod</sub> = 0.8):<br> f<sub>m,d</sub> = 0.8 · 24 / 1.30 = <b>14.8 N/mm²</b>"
+ },
+ {
+  "id": "20-31",
+  "de": "Bemessungswert der Einwirkung",
+  "en": "Design value of the action"
+ },
+ {
+  "id": "20-32",
+  "de": "Bemessungswert der Festigkeit",
+  "en": "Design value of the strength"
+ },
+ {
+  "id": "20-33",
+  "de": "Bemessungswert des Widerstands",
+  "en": "Design value of the resistance"
+ },
+ {
+  "id": "20-34",
+  "de": "Bemessungswerte berechnen",
+  "en": "Calculate design values"
+ },
+ {
+  "id": "20-35",
+  "de": "Bereich",
+  "en": "Range"
+ },
+ {
+  "id": "20-36",
+  "de": "Bezeichnung GL = Glued Laminated Timber. Die Zahl gibt die charakteristische Biegefestigkeit f<sub>m,k</sub> in N/mm² an. f<sub>c,90,k</sub> = 2,5 N/mm² gilt für alle Klassen.",
+  "en": "Designation GL = Glued Laminated Timber. The number gives the characteristic bending strength f<sub>m,k</sub> in N/mm². f<sub>c,90,k</sub> = 2.5 N/mm² applies to all classes."
+ },
+ {
+  "id": "20-37",
+  "de": "Biegung — EN 1995-1-1, 6.1.6",
+  "en": "Bending — EN 1995-1-1, 6.1.6"
+ },
+ {
+  "id": "20-38",
+  "de": "Bolzen haben Lochspiel und brauchen deshalb größere Abstände als passgenaue Stabdübel.",
+  "en": "Bolts have hole clearance and therefore need larger spacings than tight-fitting dowels."
+ },
+ {
+  "id": "20-39",
+  "de": "Bolzen — EN 1995-1-1, Tab. 8.4",
+  "en": "Bolts — EN 1995-1-1, Table 8.4"
+ },
+ {
+  "id": "20-40",
+  "de": "Brandfall: 20%-Fraktile",
+  "en": "Fire situation: 20% fractile"
+ },
+ {
+  "id": "20-41",
+  "de": "Brandschutz: Methode mit reduziertem Querschnitt — EN 1995-1-2, 4.2.2",
+  "en": "Fire design: reduced cross-section method — EN 1995-1-2, 4.2.2"
+ },
+ {
+  "id": "20-42",
+  "de": "Breite b [mm]",
+  "en": "Width b [mm]"
+ },
+ {
+  "id": "20-43",
+  "de": "Breiten 80 bis 240 mm, Höhen in Schritten der Lamellendicke 40 mm bis 1200 mm. Breite wählen:",
+  "en": "Widths 80 to 240 mm, depths in steps of the 40 mm lamination thickness up to 1200 mm. Choose a width:"
+ },
+ {
+  "id": "20-44",
+  "de": "Brettschichtholz — EN 14080",
+  "en": "Glulam — EN 14080"
+ },
+ {
+  "id": "20-45",
+  "de": "C14 (Vollholz)",
+  "en": "C14 (solid timber)"
+ },
+ {
+  "id": "20-46",
+  "de": "C16 (Vollholz)",
+  "en": "C16 (solid timber)"
+ },
+ {
+  "id": "20-47",
+  "de": "C18 (Vollholz)",
+  "en": "C18 (solid timber)"
+ },
+ {
+  "id": "20-48",
+  "de": "C20 (Vollholz)",
+  "en": "C20 (solid timber)"
+ },
+ {
+  "id": "20-49",
+  "de": "C22 (Vollholz)",
+  "en": "C22 (solid timber)"
+ },
+ {
+  "id": "20-50",
+  "de": "C24 (Vollholz)",
+  "en": "C24 (solid timber)"
+ },
+ {
+  "id": "20-51",
+  "de": "C27 (Vollholz)",
+  "en": "C27 (solid timber)"
+ },
+ {
+  "id": "20-52",
+  "de": "C30 (Vollholz)",
+  "en": "C30 (solid timber)"
+ },
+ {
+  "id": "20-53",
+  "de": "C35 (Vollholz)",
+  "en": "C35 (solid timber)"
+ },
+ {
+  "id": "20-54",
+  "de": "C40 (Vollholz)",
+  "en": "C40 (solid timber)"
+ },
+ {
+  "id": "20-55",
+  "de": "C45 (Vollholz)",
+  "en": "C45 (solid timber)"
+ },
+ {
+  "id": "20-56",
+  "de": "C50 (Vollholz)",
+  "en": "C50 (solid timber)"
+ },
+ {
+  "id": "20-57",
+  "de": "Charakteristische Werte — EN 338",
+  "en": "Characteristic values — EN 338"
+ },
+ {
+  "id": "20-58",
+  "de": "Damit ein Verbindungsmittel seine volle Tragfähigkeit erreicht und das Holz nicht aufspaltet, sind Mindestabstände einzuhalten. Sie werden als Vielfache des Durchmessers <b>d</b> angegeben und hängen vom Winkel α zwischen Kraft und Faser ab.",
+  "en": "For a fastener to reach its full load-carrying capacity without splitting the timber, minimum spacings must be observed. They are given as multiples of the diameter <b>d</b> and depend on the angle α between force and grain."
+ },
+ {
+  "id": "20-59",
+  "de": "Der Bemessungswert ergibt sich aus dem charakteristischen Wert:",
+  "en": "The design value is derived from the characteristic value:"
+ },
+ {
+  "id": "20-60",
+  "de": "Der deutsche NA regelt den Schwingungsnachweis abweichend (eigene Frequenzgrenzen und Kriterien). Für Nachweise in Deutschland den NA heranziehen.",
+  "en": "The German NA treats the vibration check differently (its own frequency limits and criteria). For designs in Germany, refer to the NA."
+ },
+ {
+  "id": "20-61",
+  "de": "Die Antwort der Decke auf einen Fußtritt-Impuls (1 Ns) wird begrenzt:",
+  "en": "The response of the floor to a footfall impulse (1 Ns) is limited:"
+ },
+ {
+  "id": "20-62",
+  "de": "Die EN 1995-1-1 nennt nur Bereiche (z. B. w<sub>inst</sub> ℓ/300 bis ℓ/500); verbindlich sind in Deutschland die Werte des NA. Für untergeordnete Bauteile erlaubt der NA größere Werte.",
+  "en": "EN 1995-1-1 only gives ranges (e.g. w<sub>inst</sub> ℓ/300 to ℓ/500); in Germany the NA values are binding. For secondary members the NA allows larger values."
+ },
+ {
+  "id": "20-63",
+  "de": "Die Einschlagtiefe t ist die Länge, mit der der Nagel im Holzteil mit der Spitze steckt. Für glattschaftige Nägel in Holz-Holz-Verbindungen gilt:",
+  "en": "The penetration depth t is the length of the pointside embedment of the nail in the timber member. For smooth-shank nails in timber-to-timber connections:"
+ },
+ {
+  "id": "20-64",
+  "de": "Die Festigkeit ⊥ Faser ist deutlich kleiner, besonders bei Zug (f<sub>t,90,k</sub> = 0,4 N/mm² bei Vollholz, 0,5 N/mm² bei BSH).",
+  "en": "The strength ⊥ grain is much lower, especially in tension (f<sub>t,90,k</sub> = 0.4 N/mm² for solid timber, 0.5 N/mm² for glulam)."
+ },
+ {
+  "id": "20-65",
+  "de": "Die Kraft zeigt zum rechten Ende und zum oberen Rand: dort liegen das <b>beanspruchte</b> Hirnholzende (a<sub>3,t</sub>) und der <b>beanspruchte</b> Rand (a<sub>4,t</sub>). Auf der Gegenseite gelten die kleineren Werte für <b>unbeanspruchte</b> Enden und Ränder (a<sub>3,c</sub>, a<sub>4,c</sub>).",
+  "en": "The force points to the right end and to the top edge: this is where the <b>loaded</b> end (a<sub>3,t</sub>) and the <b>loaded</b> edge (a<sub>4,t</sub>) are. On the opposite side the smaller values for <b>unloaded</b> ends and edges apply (a<sub>3,c</sub>, a<sub>4,c</sub>)."
+ },
+ {
+  "id": "20-66",
+  "de": "Die charakteristische Tragfähigkeit F<sub>v,Rk</sub> eines stiftförmigen Verbindungsmittels je Scherfuge ergibt sich aus dem kleinsten Wert mehrerer Versagensmechanismen (Fließgelenktheorie).",
+  "en": "The characteristic load-carrying capacity F<sub>v,Rk</sub> of a dowel-type fastener per shear plane is the smallest value from several failure modes (yield theory)."
+ },
+ {
+  "id": "20-67",
+  "de": "Die größte Durchbiegung unter einer Einzellast F = 1 kN wird begrenzt:",
+  "en": "The maximum deflection under a point load F = 1 kN is limited:"
+ },
+ {
+  "id": "20-68",
+  "de": "Dreiseitiger Abbrand (Oberseite durch die Decke geschützt): Der Restquerschnitt trägt mit den 20%-Fraktilwerten der Festigkeit.",
+  "en": "Charring on three sides (top protected by the floor): the residual cross-section resists with the 20% fractile strength values."
+ },
+ {
+  "id": "20-69",
+  "de": "Druck unter 30,0° zur Faser",
+  "en": "Compression at 30.0° to the grain"
+ },
+ {
+  "id": "20-70",
+  "de": "Druck unter einem Winkel zur Faser — 6.2.2",
+  "en": "Compression at an angle to the grain — 6.2.2"
+ },
+ {
+  "id": "20-71",
+  "de": "Druck ∥",
+  "en": "Compression ∥"
+ },
+ {
+  "id": "20-72",
+  "de": "Druck ⊥",
+  "en": "Compression ⊥"
+ },
+ {
+  "id": "20-73",
+  "de": "Druckstab C24 140/140",
+  "en": "Compression member C24 140/140"
+ },
+ {
+  "id": "20-74",
+  "de": "Druckstab nachweisen (auch mit Biegung)",
+  "en": "Check compression member (also with bending)"
+ },
+ {
+  "id": "20-75",
+  "de": "Durchbiegung — Grenzwerte nach NA Deutschland",
+  "en": "Deflection — limits according to German NA"
+ },
+ {
+  "id": "20-76",
+  "de": "EN-Empfehlung",
+  "en": "EN recommendation"
+ },
+ {
+  "id": "20-77",
+  "de": "Eigenfrequenz",
+  "en": "Natural frequency"
+ },
+ {
+  "id": "20-78",
+  "de": "Eigengewicht: G = ρ<sub>mean</sub> · A (hier C24 bzw. GL24h, ρ<sub>mean</sub> = 420 kg/m³)",
+  "en": "Self-weight: G = ρ<sub>mean</sub> · A (here C24 or GL24h, ρ<sub>mean</sub> = 420 kg/m³)"
+ },
+ {
+  "id": "20-79",
+  "de": "Eindringtiefe bei Herausziehen — EN 1995-1-1, 8.3.2 (7)",
+  "en": "Penetration depth for withdrawal — EN 1995-1-1, 8.3.2 (7)"
+ },
+ {
+  "id": "20-80",
+  "de": "Eine seitliche Halterung des Druckgurts (z. B. durch die Dachschalung) verkürzt die Kipplänge erheblich und macht den Nachweis oft entbehrlich.",
+  "en": "Lateral restraint of the compression flange (e.g. by the roof sheathing) greatly reduces the effective length and often makes the check unnecessary."
+ },
+ {
+  "id": "20-81",
+  "de": "Einfeldträger C24 120/240, L = 4,00 m",
+  "en": "Simply supported beam C24 120/240, L = 4.00 m"
+ },
+ {
+  "id": "20-82",
+  "de": "Einfeldträger komplett nachweisen",
+  "en": "Full check of a simply supported beam"
+ },
+ {
+  "id": "20-83",
+  "de": "Einfeldträger, Einzellast in Feldmitte",
+  "en": "Simply supported beam, point load at midspan"
+ },
+ {
+  "id": "20-84",
+  "de": "Einfeldträger, Gleichlast",
+  "en": "Simply supported beam, uniform load"
+ },
+ {
+  "id": "20-85",
+  "de": "Einfeldträger, Gleichlast; Last am Druckrand (oben, ungünstig)",
+  "en": "Simply supported beam, uniform load; load on the compression edge (top, unfavourable)"
+ },
+ {
+  "id": "20-86",
+  "de": "Einfeldträger, konstantes Moment",
+  "en": "Simply supported beam, constant moment"
+ },
+ {
+  "id": "20-87",
+  "de": "Einschlagtiefe bei Abscheren — DIN EN 1995-1-1/NA (vereinfachtes Verfahren)",
+  "en": "Penetration depth for shear — DIN EN 1995-1-1/NA (simplified method)"
+ },
+ {
+  "id": "20-88",
+  "de": "Einschlagtiefe prüfen",
+  "en": "Check penetration depth"
+ },
+ {
+  "id": "20-89",
+  "de": "Einschlagtiefe t",
+  "en": "Penetration depth t"
+ },
+ {
+  "id": "20-90",
+  "de": "Einschlagtiefe t [mm]",
+  "en": "Penetration depth t [mm]"
+ },
+ {
+  "id": "20-91",
+  "de": "Einwirkung vereinfacht: E<sub>d,fi</sub> = η<sub>fi</sub> · E<sub>d</sub> (η<sub>fi</sub> ≈ 0,6 … 0,7) oder außergewöhnliche Kombination G<sub>k</sub> + ψ<sub>1,1</sub> · Q<sub>k,1</sub>",
+  "en": "Simplified action: E<sub>d,fi</sub> = η<sub>fi</sub> · E<sub>d</sub> (η<sub>fi</sub> ≈ 0.6 … 0.7) or accidental combination G<sub>k</sub> + ψ<sub>1.1</sub> · Q<sub>k,1</sub>"
+ },
+ {
+  "id": "20-92",
+  "de": "Einzellast am Ende",
+  "en": "Point load at the end"
+ },
+ {
+  "id": "20-93",
+  "de": "Endauflager, Länge l = 100 mm, wirksam l<sub>ef</sub> = l + 30 mm = 130 mm · k<sub>c,90</sub> = 1,50 (Vollholz, Einzelauflager)",
+  "en": "End support, length l = 100 mm, effective l<sub>ef</sub> = l + 30 mm = 130 mm · k<sub>c,90</sub> = 1.50 (solid timber, discrete support)"
+ },
+ {
+  "id": "20-94",
+  "de": "Faktor dazwischen",
+  "en": "Factor in between"
+ },
+ {
+  "id": "20-95",
+  "de": "Faserrichtung →",
+  "en": "Grain direction →"
+ },
+ {
+  "id": "20-96",
+  "de": "Festigkeit (k₀·d₀)",
+  "en": "Strength (k₀·d₀)"
+ },
+ {
+  "id": "20-97",
+  "de": "Festigkeits- und Steifigkeitskennwerte für Nadelholz-Festigkeitsklassen. Festigkeiten als 5%-Quantil, E-Moduln als Mittelwert (E<sub>0,mean</sub>) bzw. 5%-Quantil (E<sub>0,05</sub>). Die Zahl im Klassennamen ist die charakteristische Biegefestigkeit f<sub>m,k</sub> in N/mm².",
+  "en": "Strength and stiffness properties for softwood strength classes. Strengths as 5% fractile, moduli of elasticity as mean value (E<sub>0,mean</sub>) or 5% fractile (E<sub>0.05</sub>). The number in the class name is the characteristic bending strength f<sub>m,k</sub> in N/mm²."
+ },
+ {
+  "id": "20-98",
+  "de": "Festigkeitsklasse, Nutzungsklasse und Klasse der Lasteinwirkungsdauer (KLED) wählen:",
+  "en": "Choose strength class, service class and load-duration class:"
+ },
+ {
+  "id": "20-99",
+  "de": "Festigkeitsklassen für Brettschichtholz. <b>h</b> = homogen (alle Lamellen gleicher Festigkeit), <b>c</b> = kombiniert (höherfeste Außenlamellen, schwächerer Kern).",
+  "en": "Strength classes for glulam. <b>h</b> = homogeneous (all laminations of the same strength), <b>c</b> = combined (higher-strength outer laminations, weaker core)."
+ },
+ {
+  "id": "20-100",
+  "de": "Feuerwiderstandsdauer t [min]",
+  "en": "Fire resistance period t [min]"
+ },
+ {
+  "id": "20-101",
+  "de": "Fließmoment M_y,Rk",
+  "en": "Yield moment M_y,Rk"
+ },
+ {
+  "id": "20-102",
+  "de": "Furnierschichtholz",
+  "en": "LVL"
+ },
+ {
+  "id": "20-103",
+  "de": "Furnierschichtholz (LVL)",
+  "en": "Laminated veneer lumber (LVL)"
+ },
+ {
+  "id": "20-104",
+  "de": "Furnierschichtholz LVL, ρ<sub>k</sub> ≥ 480 kg/m³",
+  "en": "Laminated veneer lumber LVL, ρ<sub>k</sub> ≥ 480 kg/m³"
+ },
+ {
+  "id": "20-105",
+  "de": "Für Sondernägel (gerillt, profiliert) gelten die Werte aus der Zulassung bzw. ETA des Herstellers.",
+  "en": "For special nails (ringed, threaded) the values from the manufacturer approval or ETA apply."
+ },
+ {
+  "id": "20-106",
+  "de": "Für Stabdübel und Bolzen, Kraft ∥ Faser:",
+  "en": "For dowels and bolts, force ∥ grain:"
+ },
+ {
+  "id": "20-107",
+  "de": "G ständige Last, Q<sub>1</sub> Leiteinwirkung, Q<sub>i</sub> Begleiteinwirkungen. w<sub>fin</sub> ist die Summe aller Anteile.",
+  "en": "G permanent load, Q<sub>1</sub> leading action, Q<sub>i</sub> accompanying actions. w<sub>fin</sub> is the sum of all components."
+ },
+ {
+  "id": "20-108",
+  "de": "Gilt für Last in der Schwerachse. Last am Druckrand (oben): l<sub>ef</sub> + 2h · am Zugrand (unten): l<sub>ef</sub> − 0,5h.",
+  "en": "Applies to load at the centroidal axis. Load on the compression edge (top): l<sub>ef</sub> + 2h · on the tension edge (bottom): l<sub>ef</sub> − 0.5h."
+ },
+ {
+  "id": "20-109",
+  "de": "Glattschaftnägel haben einen geringen Ausziehwiderstand. Für axial beanspruchte Verbindungen werden Sondernägel (gerillt, profiliert) verwendet.",
+  "en": "Smooth-shank nails have low withdrawal resistance. For axially loaded connections, special nails (ringed, threaded) are used."
+ },
+ {
+  "id": "20-110",
+  "de": "Grenzwert a je nach gewünschtem Schwingverhalten (EN 1995-1-1, Bild 7.2).",
+  "en": "Limit a depending on the desired vibration behaviour (EN 1995-1-1, Figure 7.2)."
+ },
+ {
+  "id": "20-111",
+  "de": "Größere Breiten als 240 mm werden als blockverleimtes BSH hergestellt. Lamellen üblich 40 mm (gekrümmte Träger dünner).",
+  "en": "Widths over 240 mm are produced as block-glued glulam. Laminations are usually 40 mm (thinner for curved beams)."
+ },
+ {
+  "id": "20-112",
+  "de": "Holz kriecht unter Dauerlast. Die Enddurchbiegung wird über den Verformungsbeiwert k<sub>def</sub> berücksichtigt, und zwar nur mit dem quasi-ständigen Anteil der Lasten:",
+  "en": "Timber creeps under sustained load. The final deflection accounts for this via the deformation factor k<sub>def</sub>, applied only to the quasi-permanent part of the loads:"
+ },
+ {
+  "id": "20-113",
+  "de": "Holzdecken sind leicht und relativ weich. Schwingungen durch gehende Personen können den Komfort stören. Entscheidend ist zuerst die Eigenfrequenz:",
+  "en": "Timber floors are light and relatively flexible. Vibrations caused by people walking can affect comfort. The natural frequency is checked first:"
+ },
+ {
+  "id": "20-114",
+  "de": "Homogen vs. Kombiniert",
+  "en": "Homogeneous vs. combined"
+ },
+ {
+  "id": "20-115",
+  "de": "Höhe h [mm]",
+  "en": "Depth h [mm]"
+ },
+ {
+  "id": "20-116",
+  "de": "Höhenbeiwert Biegung und Zug",
+  "en": "Depth factor for bending and tension"
+ },
+ {
+  "id": "20-117",
+  "de": "Höhenbeiwert Vollholz: k<sub>h</sub> = min((150/h)<sup>0,2</sup>; 1,3) für h &lt; 150 mm → k<sub>h</sub> = 1,000",
+  "en": "Depth factor solid timber: k<sub>h</sub> = min((150/h)<sup>0.2</sup>; 1.3) for h &lt; 150 mm → k<sub>h</sub> = 1.000"
+ },
+ {
+  "id": "20-118",
+  "de": "Höhenbeiwert k<sub>h</sub> — Werte",
+  "en": "Depth factor k<sub>h</sub> — values"
+ },
+ {
+  "id": "20-119",
+  "de": "Im Grenzzustand der Gebrauchstauglichkeit (GZG) wird die Durchbiegung begrenzt: aus optischen Gründen, zum Schutz von Ausbauteilen und gegen Stauwasser. ℓ ist die Stützweite, bei Kragträgern die Kraglänge.",
+  "en": "In the serviceability limit state (SLS) the deflection is limited: for appearance, to protect finishes and to prevent ponding. ℓ is the span, or the cantilever length for cantilevers."
+ },
+ {
+  "id": "20-120",
+  "de": "Imperfektion beim Knicken",
+  "en": "Imperfection in buckling"
+ },
+ {
+  "id": "20-121",
+  "de": "In Deutschland gilt der Nationale Anhang (DIN EN 1995-1-1/NA): <b>γ<sub>M</sub> = 1,30</b> für Holz und Holzwerkstoffe und für Verbindungen, in der außergewöhnlichen Bemessungssituation 1,00. Die Spalte „EN-Empfehlung“ zeigt die Werte ohne NA (EN 1995-1-1, Tab. 2.3), z. B. für andere Länder.",
+  "en": "In Germany the National Annex applies (DIN EN 1995-1-1/NA): <b>γ<sub>M</sub> = 1.30</b> for timber, wood-based products and connections, 1.00 in the accidental design situation. The column “EN recommendation” shows the values without NA (EN 1995-1-1, Table 2.3), e.g. for other countries."
+ },
+ {
+  "id": "20-122",
+  "de": "In der ständigen und vorübergehenden Bemessungssituation (GZT):",
+  "en": "In the persistent and transient design situations (ULS):"
+ },
+ {
+  "id": "20-123",
+  "de": "KLED (kürzeste Last)",
+  "en": "Load duration (shortest load)"
+ },
+ {
+  "id": "20-124",
+  "de": "Kanthölzer b = 60 bis 200 mm, h bis 300 mm. <b>•</b> = KVH-Vorzugsquerschnitt (ab Lager lieferbar, technisch getrocknet, Holzfeuchte 15 ± 3 %).",
+  "en": "Sawn sections b = 60 to 200 mm, h up to 300 mm. <b>•</b> = preferred KVH section (available from stock, kiln-dried, moisture content 15 ± 3 %)."
+ },
+ {
+  "id": "20-125",
+  "de": "Kippen GL24h 120/480, L = 8,00 m",
+  "en": "Lateral-torsional buckling GL24h 120/480, L = 8.00 m"
+ },
+ {
+  "id": "20-126",
+  "de": "Kippnachweis berechnen",
+  "en": "Calculate lateral-torsional buckling check"
+ },
+ {
+  "id": "20-127",
+  "de": "Kippnachweis für Biegeträger — EN 1995-1-1, 6.3.3",
+  "en": "Lateral-torsional buckling check for beams — EN 1995-1-1, 6.3.3"
+ },
+ {
+  "id": "20-128",
+  "de": "Knicklängen — Eulerfälle",
+  "en": "Effective lengths — Euler cases"
+ },
+ {
+  "id": "20-129",
+  "de": "Knicknachweis für Druckstäbe — EN 1995-1-1, 6.3.2",
+  "en": "Buckling check for compression members — EN 1995-1-1, 6.3.2"
+ },
+ {
+  "id": "20-130",
+  "de": "Kombination",
+  "en": "Combination"
+ },
+ {
+  "id": "20-131",
+  "de": "Kontaktfläche A<sub>ef</sub> [mm²]",
+  "en": "Contact area A<sub>ef</sub> [mm²]"
+ },
+ {
+  "id": "20-132",
+  "de": "Kragträger, Einzellast am Ende",
+  "en": "Cantilever, point load at the end"
+ },
+ {
+  "id": "20-133",
+  "de": "Kragträger, Gleichlast",
+  "en": "Cantilever, uniform load"
+ },
+ {
+  "id": "20-134",
+  "de": "Kriechen (Enddurchbiegung)",
+  "en": "Creep (final deflection)"
+ },
+ {
+  "id": "20-135",
+  "de": "Kriechen — Enddurchbiegung",
+  "en": "Creep — final deflection"
+ },
+ {
+  "id": "20-136",
+  "de": "LK 1 (nur ständig): q<sub>d</sub> = 1,35 · 2,00 = 2,70 kN/m, k<sub>mod</sub> = 0,60 (ständig) → q<sub>d</sub>/k<sub>mod</sub> = 4,500",
+  "en": "LC 1 (permanent only): q<sub>d</sub> = 1.35 · 2.00 = 2.70 kN/m, k<sub>mod</sub> = 0.60 (permanent) → q<sub>d</sub>/k<sub>mod</sub> = 4.500"
+ },
+ {
+  "id": "20-137",
+  "de": "LK 2 (ständig + Nutzlast Kat. A/B (Wohnen, Büro)): q<sub>d</sub> = 1,35 · 2,00 + 1,5 · 2,50 = 6,45 kN/m, k<sub>mod</sub> = 0,80 (mittel) → q<sub>d</sub>/k<sub>mod</sub> = 8,063",
+  "en": "LC 2 (permanent + imposed load cat. A/B (residential, office)): q<sub>d</sub> = 1.35 · 2.00 + 1.5 · 2.50 = 6.45 kN/m, k<sub>mod</sub> = 0.80 (medium-term) → q<sub>d</sub>/k<sub>mod</sub> = 8.063"
+ },
+ {
+  "id": "20-138",
+  "de": "Lastangriff",
+  "en": "Load application"
+ },
+ {
+  "id": "20-139",
+  "de": "Lasteinwirkungsdauer und Feuchte",
+  "en": "Load duration and moisture"
+ },
+ {
+  "id": "20-140",
+  "de": "Laubholz, ρ<sub>k</sub> ≥ 450 kg/m³",
+  "en": "Hardwood, ρ<sub>k</sub> ≥ 450 kg/m³"
+ },
+ {
+  "id": "20-141",
+  "de": "Lochleibungsfestigkeit",
+  "en": "Embedment strength"
+ },
+ {
+  "id": "20-142",
+  "de": "Lochleibungsfestigkeit f_h,0,k",
+  "en": "Embedment strength f_h,0,k"
+ },
+ {
+  "id": "20-143",
+  "de": "Länge L [m] (Gabellagerabstand)",
+  "en": "Length L [m] (distance between fork supports)"
+ },
+ {
+  "id": "20-144",
+  "de": "Maßgebend ist der <b>kleinste</b> Wert aus:<br> — Lochleibungsversagen im Holz<br> — Lochleibung + 1 Fließgelenk im Stift<br> — Lochleibung + 2 Fließgelenke im Stift",
+  "en": "The <b>smallest</b> value governs from:<br> — embedment failure in the timber<br> — embedment + 1 plastic hinge in the fastener<br> — embedment + 2 plastic hinges in the fastener"
+ },
+ {
+  "id": "20-145",
+  "de": "Mechanismen mit Fließgelenken sind erwünscht: Sie sind duktil und kündigen das Versagen durch Verformung an.",
+  "en": "Failure modes with plastic hinges are desirable: they are ductile and give warning of failure through deformation."
+ },
+ {
+  "id": "20-146",
+  "de": "Mindestabstände a1 bis a4 an einem Holzbauteil",
+  "en": "Minimum spacings a1 to a4 on a timber member"
+ },
+ {
+  "id": "20-147",
+  "de": "Mindestabstände stiftförmiger Verbindungsmittel",
+  "en": "Minimum spacings for dowel-type fasteners"
+ },
+ {
+  "id": "20-148",
+  "de": "Mindestholzdicke ohne Vorbohren — EN 1995-1-1, 8.3.1.2 (6)",
+  "en": "Minimum timber thickness without pre-drilling — EN 1995-1-1, 8.3.1.2 (6)"
+ },
+ {
+  "id": "20-149",
+  "de": "Mindestwert",
+  "en": "Minimum value"
+ },
+ {
+  "id": "20-150",
+  "de": "Modifikationsbeiwert kmod — EN 1995-1-1, Tab. 3.1",
+  "en": "Modification factor kmod — EN 1995-1-1, Table 3.1"
+ },
+ {
+  "id": "20-151",
+  "de": "N<sub>d</sub> [kN] (Druck)",
+  "en": "N<sub>d</sub> [kN] (compression)"
+ },
+ {
+  "id": "20-152",
+  "de": "NA Deutschland",
+  "en": "German NA"
+ },
+ {
+  "id": "20-153",
+  "de": "Nach NA darf bei Brettschichtholz das Produkt E<sub>0,05</sub> · G<sub>0,05</sub> mit dem Faktor 1,4 erhöht werden. Der Rechner setzt das nicht an (auf der sicheren Seite).",
+  "en": "According to the NA, the product E<sub>0.05</sub> · G<sub>0.05</sub> may be increased by a factor of 1.4 for glulam. The calculator does not apply this (on the safe side)."
+ },
+ {
+  "id": "20-154",
+  "de": "Nachweis mit Steifigkeits- und Geschwindigkeitskriterium (Punkte 2 und 3)",
+  "en": "Check with stiffness and velocity criterion (points 2 and 3)"
+ },
+ {
+  "id": "20-155",
+  "de": "Nadelholz BSH, ρ<sub>k</sub> ≥ 290 kg/m³",
+  "en": "Softwood glulam, ρ<sub>k</sub> ≥ 290 kg/m³"
+ },
+ {
+  "id": "20-156",
+  "de": "Nadelvollholz, ρ<sub>k</sub> ≥ 290 kg/m³",
+  "en": "Softwood solid timber, ρ<sub>k</sub> ≥ 290 kg/m³"
+ },
+ {
+  "id": "20-157",
+  "de": "Nagelart",
+  "en": "Nail type"
+ },
+ {
+  "id": "20-158",
+  "de": "Nageldurchmesser d [mm]",
+  "en": "Nail diameter d [mm]"
+ },
+ {
+  "id": "20-159",
+  "de": "Nagelform",
+  "en": "Nail shape"
+ },
+ {
+  "id": "20-160",
+  "de": "Nagelverbindungen — EN 1995-1-1, Abschn. 8.3",
+  "en": "Nailed connections — EN 1995-1-1, Section 8.3"
+ },
+ {
+  "id": "20-161",
+  "de": "Nicht enthalten: k<sub>h</sub> (Höhenfaktor bei Biegung/Zug), k<sub>cr</sub> (Rissfaktor beim Schub), k<sub>sys</sub> (Systembeiwert). Sie kommen im jeweiligen Nachweis dazu.",
+  "en": "Not included: k<sub>h</sub> (depth factor for bending/tension), k<sub>cr</sub> (crack factor for shear), k<sub>sys</sub> (system strength factor). They are added in the respective check."
+ },
+ {
+  "id": "20-162",
+  "de": "Nutzlast Kat. A/B (Wohnen, Büro)",
+  "en": "Imposed load cat. A/B (residential, office)"
+ },
+ {
+  "id": "20-163",
+  "de": "Nutzlast Kat. C/D",
+  "en": "Imposed load cat. C/D"
+ },
+ {
+  "id": "20-164",
+  "de": "Nutzungsklasse",
+  "en": "Service class"
+ },
+ {
+  "id": "20-165",
+  "de": "Nutzungsklassen (NKL)",
+  "en": "Service classes (SC)"
+ },
+ {
+  "id": "20-166",
+  "de": "Nägel ohne Vorbohrung (d ≤ 8 mm):",
+  "en": "Nails without pre-drilling (d ≤ 8 mm):"
+ },
+ {
+  "id": "20-167",
+  "de": "Nägel übertragen Kräfte überwiegend auf Abscheren. Maßgebend sind die Lochleibung im Holz, das Fließmoment des Nagels und bei axialer Last der Ausziehwiderstand.",
+  "en": "Nails transfer forces mainly in shear. Governing factors are the embedment in the timber, the yield moment of the nail and, for axial loads, the withdrawal resistance."
+ },
+ {
+  "id": "20-168",
+  "de": "Nägel — EN 1995-1-1, Tab. 8.2",
+  "en": "Nails — EN 1995-1-1, Table 8.2"
+ },
+ {
+  "id": "20-169",
+  "de": "Querdruck (Auflager, Schwelle)",
+  "en": "Compression perpendicular to the grain (support, sill)"
+ },
+ {
+  "id": "20-170",
+  "de": "Querdruck am Auflager — 6.1.5",
+  "en": "Compression perpendicular to the grain at the support — 6.1.5"
+ },
+ {
+  "id": "20-171",
+  "de": "Querschnitt suchen, z. B. 100×",
+  "en": "Search cross-section, e.g. 100×"
+ },
+ {
+  "id": "20-172",
+  "de": "Rechteck 1 + 0,15 · h/b ≤ 2,0 · Kreis 1,2",
+  "en": "Rectangle 1 + 0.15 · h/b ≤ 2.0 · circle 1.2"
+ },
+ {
+  "id": "20-173",
+  "de": "Rechteckquerschnitte — Formeln",
+  "en": "Rectangular cross-sections — formulae"
+ },
+ {
+  "id": "20-174",
+  "de": "Restquerschnitt nach Abbrand",
+  "en": "Residual cross-section after charring"
+ },
+ {
+  "id": "20-175",
+  "de": "Rissbeiwert k<sub>cr</sub> je Festigkeitsklasse",
+  "en": "Crack factor k<sub>cr</sub> per strength class"
+ },
+ {
+  "id": "20-176",
+  "de": "Risse beim Schub (b<sub>ef</sub> = k<sub>cr</sub> · b)",
+  "en": "Cracks in shear (b<sub>ef</sub> = k<sub>cr</sub> · b)"
+ },
+ {
+  "id": "20-177",
+  "de": "Schlanke Druckstäbe versagen durch Ausknicken, bevor die Druckfestigkeit erreicht ist. Der Nachweis erfolgt mit dem Knickbeiwert k<sub>c</sub>.",
+  "en": "Slender compression members fail by buckling before the compressive strength is reached. The check uses the buckling factor k<sub>c</sub>."
+ },
+ {
+  "id": "20-178",
+  "de": "Schlanke, hohe Biegeträger können seitlich ausweichen und sich verdrehen (Biegedrillknicken, „Kippen“), bevor die Biegefestigkeit erreicht ist. Der Nachweis erfolgt mit dem Kippbeiwert k<sub>crit</sub>.",
+  "en": "Slender, deep beams can deflect sideways and twist (lateral-torsional buckling) before the bending strength is reached. The check uses the factor k<sub>crit</sub>."
+ },
+ {
+  "id": "20-179",
+  "de": "Schnee (bis 1000 m)",
+  "en": "Snow (up to 1000 m)"
+ },
+ {
+  "id": "20-180",
+  "de": "Schub und Torsion zusammen (NA): τ<sub>tor,d</sub>/(k<sub>shape</sub> · f<sub>v,d</sub>) + (τ<sub>y,d</sub>/f<sub>v,d</sub>)² + (τ<sub>z,d</sub>/f<sub>v,d</sub>)² ≤ 1",
+  "en": "Combined shear and torsion (NA): τ<sub>tor,d</sub>/(k<sub>shape</sub> · f<sub>v,d</sub>) + (τ<sub>y,d</sub>/f<sub>v,d</sub>)² + (τ<sub>z,d</sub>/f<sub>v,d</sub>)² ≤ 1"
+ },
+ {
+  "id": "20-181",
+  "de": "Schub und Torsion — 6.1.7, 6.1.8",
+  "en": "Shear and torsion — 6.1.7, 6.1.8"
+ },
+ {
+  "id": "20-182",
+  "de": "Schwerachse",
+  "en": "Centroidal axis"
+ },
+ {
+  "id": "20-183",
+  "de": "Schwingungsnachweis für Wohnungsdecken — EN 1995-1-1, 7.3.3",
+  "en": "Vibration check for residential floors — EN 1995-1-1, 7.3.3"
+ },
+ {
+  "id": "20-184",
+  "de": "Sondernagel",
+  "en": "Special nail"
+ },
+ {
+  "id": "20-185",
+  "de": "Sonderuntersuchung nötig (Kriterien unten nicht anwendbar)",
+  "en": "Special investigation required (criteria below not applicable)"
+ },
+ {
+  "id": "20-186",
+  "de": "Sperrholz",
+  "en": "Plywood"
+ },
+ {
+  "id": "20-187",
+  "de": "Sperrholz, OSB",
+  "en": "Plywood, OSB"
+ },
+ {
+  "id": "20-188",
+  "de": "Stabdübel &amp; Bolzen",
+  "en": "Dowels &amp; bolts"
+ },
+ {
+  "id": "20-189",
+  "de": "Stabdübel — EN 1995-1-1, Tab. 8.5",
+  "en": "Dowels — EN 1995-1-1, Table 8.5"
+ },
+ {
+  "id": "20-190",
+  "de": "Stabdübel: 6, 8, 10, 12, 16, 20, 24 mm — passgenau im vorgebohrten Loch.<br> Bolzen: 6, 8, 10, 12, 16, 20, 24, 30 mm — mit Lochspiel, Mutter und Unterlegscheibe.",
+  "en": "Dowels: 6, 8, 10, 12, 16, 20, 24 mm — tight-fitting in a pre-drilled hole.<br> Bolts: 6, 8, 10, 12, 16, 20, 24, 30 mm — with hole clearance, nut and washer."
+ },
+ {
+  "id": "20-191",
+  "de": "Systemfestigkeit (mehrere gleichartige, verbundene Träger)",
+  "en": "System strength (several similar, connected members)"
+ },
+ {
+  "id": "20-192",
+  "de": "Teilsicherheitsbeiwert Holz und Verbindungen",
+  "en": "Partial factor for timber and connections"
+ },
+ {
+  "id": "20-193",
+  "de": "Torsion (h ≥ b): I<sub>t</sub> = b³ · h / 3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/(2b))/n⁵] (n = 1, 3, 5 …) ≈ b³ · h / 3 · (1 − 0,63 · b/h)",
+  "en": "Torsion (h ≥ b): I<sub>t</sub> = b³ · h / 3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/(2b))/n⁵] (n = 1, 3, 5 …) ≈ b³ · h / 3 · (1 − 0.63 · b/h)"
+ },
+ {
+  "id": "20-194",
+  "de": "Tragfähigkeit auf Abscheren — Theorie nach Johansen",
+  "en": "Shear capacity — Johansen yield theory"
+ },
+ {
+  "id": "20-195",
+  "de": "Tragfähigkeit der Scherfuge an der Spitze",
+  "en": "Capacity of the shear plane at the point side"
+ },
+ {
+  "id": "20-196",
+  "de": "Unter dem Winkel α zur Faser:",
+  "en": "At angle α to the grain:"
+ },
+ {
+  "id": "20-197",
+  "de": "Unterhalb des Mindestwerts darf der Nagel keine Axialkraft übernehmen. Glattschaftige Nägel nicht für ständige oder langfristige Axiallasten verwenden.",
+  "en": "Below the minimum value the nail must not carry any axial force. Do not use smooth-shank nails for permanent or long-term axial loads."
+ },
+ {
+  "id": "20-198",
+  "de": "VH 0,2 · BSH und LVL 0,1",
+  "en": "Solid timber 0.2 · glulam and LVL 0.1"
+ },
+ {
+  "id": "20-199",
+  "de": "VH: (150/h)<sup>0,2</sup> ≤ 1,3 für h &lt; 150 mm · BSH: (600/h)<sup>0,1</sup> ≤ 1,1 für h &lt; 600 mm",
+  "en": "Solid timber: (150/h)<sup>0.2</sup> ≤ 1.3 for h &lt; 150 mm · glulam: (600/h)<sup>0.1</sup> ≤ 1.1 for h &lt; 600 mm"
+ },
+ {
+  "id": "20-200",
+  "de": "Vollholz und Konstruktionsvollholz (KVH)",
+  "en": "Solid timber and structural finger-jointed timber (KVH)"
+ },
+ {
+  "id": "20-201",
+  "de": "Vorbohren ist nach EN 1995-1-1 nötig, wenn ρ<sub>k</sub> &gt; 500 kg/m³ oder d &gt; 6 mm ist. Vorgebohrt dürfen die Abstände kleiner sein, weil das Holz weniger zum Spalten neigt.",
+  "en": "According to EN 1995-1-1, pre-drilling is required if ρ<sub>k</sub> &gt; 500 kg/m³ or d &gt; 6 mm. When pre-drilled, spacings may be smaller because the timber is less prone to splitting."
+ },
+ {
+  "id": "20-202",
+  "de": "Wegen der Anisotropie des Holzes wird zwischen Beanspruchung <b>parallel</b> und <b>senkrecht</b> zur Faser unterschieden.",
+  "en": "Because timber is anisotropic, a distinction is made between stresses <b>parallel</b> and <b>perpendicular</b> to the grain."
+ },
+ {
+  "id": "20-203",
+  "de": "Wert",
+  "en": "Value"
+ },
+ {
+  "id": "20-204",
+  "de": "Werte in N/mm²",
+  "en": "Values in N/mm²"
+ },
+ {
+  "id": "20-205",
+  "de": "Wind (kurz/sehr kurz)",
+  "en": "Wind (short-term/instantaneous)"
+ },
+ {
+  "id": "20-206",
+  "de": "Winkel α",
+  "en": "Angle α"
+ },
+ {
+  "id": "20-207",
+  "de": "Winkel α [°]",
+  "en": "Angle α [°]"
+ },
+ {
+  "id": "20-208",
+  "de": "Wirksame Kipplänge — EN 1995-1-1, Tab. 6.1",
+  "en": "Effective length for lateral-torsional buckling — EN 1995-1-1, Table 6.1"
+ },
+ {
+  "id": "20-209",
+  "de": "Zeile antippen zum Markieren · waagerecht scrollbar",
+  "en": "Tap a row to highlight · scroll horizontally"
+ },
+ {
+  "id": "20-210",
+  "de": "Zug senkrecht zur Faser ist der kritischste Beanspruchungsfall im Holzbau und wird, wo möglich, konstruktiv vermieden.",
+  "en": "Tension perpendicular to the grain is the most critical stress state in timber construction and is avoided by detailing wherever possible."
+ },
+ {
+  "id": "20-211",
+  "de": "Zug senkrecht zur Faser: f<sub>t,90,k</sub> nur 0,4 (VH) bzw. 0,5 N/mm² (BSH) — konstruktiv vermeiden oder verstärken",
+  "en": "Tension perpendicular to the grain: f<sub>t,90,k</sub> only 0.4 (solid timber) or 0.5 N/mm² (glulam) — avoid by detailing or reinforce"
+ },
+ {
+  "id": "20-212",
+  "de": "Zug und Druck parallel zur Faser — 6.1.2, 6.1.4",
+  "en": "Tension and compression parallel to the grain — 6.1.2, 6.1.4"
+ },
+ {
+  "id": "20-213",
+  "de": "Zuordnung nach NA Deutschland (Beispiele): <b>Schnee</b> bis 1000 m ü. NN „kurz“, darüber „mittel“ · <b>Wind</b> „kurz/sehr kurz“: angesetzt wird der Mittelwert, in NKL 1 und 2 also k<sub>mod</sub> = (0,90 + 1,10) / 2 = <b>1,00</b>. Die vollständige Zuordnung steht im NA, Tab. NA.1.",
+  "en": "Classification according to German NA (examples): <b>Snow</b> up to 1000 m above sea level “short-term”, above that “medium-term” · <b>Wind</b> “short-term/instantaneous”: the mean value is used, so in SC 1 and 2 k<sub>mod</sub> = (0.90 + 1.10) / 2 = <b>1.00</b>. The complete classification is given in the NA, Table NA.1."
+ },
+ {
+  "id": "20-214",
+  "de": "a<sub>1</sub> — untereinander ∥ Faser&nbsp;&nbsp;|&nbsp;&nbsp;a<sub>2</sub> — untereinander ⊥ Faser<br> a<sub>3,t</sub> / a<sub>3,c</sub> — zum beanspruchten / unbeanspruchten Hirnholzende<br> a<sub>4,t</sub> / a<sub>4,c</sub> — zum beanspruchten / unbeanspruchten Rand",
+  "en": "a<sub>1</sub> — between fasteners ∥ grain&nbsp;&nbsp;|&nbsp;&nbsp;a<sub>2</sub> — between fasteners ⊥ grain<br> a<sub>3,t</sub> / a<sub>3,c</sub> — to the loaded / unloaded end<br> a<sub>4,t</sub> / a<sub>4,c</sub> — to the loaded / unloaded edge"
+ },
+ {
+  "id": "20-215",
+  "de": "abgemindert mit Faktor t / (9·d)",
+  "en": "reduced by factor t / (9·d)"
+ },
+ {
+  "id": "20-216",
+  "de": "b folgt aus a (EN 1995-1-1, Bild 7.2) · ζ — modaler Dämpfungsgrad (üblich 0,01)",
+  "en": "b follows from a (EN 1995-1-1, Figure 7.2) · ζ — modal damping ratio (usually 0.01)"
+ },
+ {
+  "id": "20-217",
+  "de": "d — Durchmesser [mm] · ρ<sub>k</sub> — char. Rohdichte [kg/m³]",
+  "en": "d — diameter [mm] · ρ<sub>k</sub> — char. density [kg/m³]"
+ },
+ {
+  "id": "20-218",
+  "de": "d<sub>ef</sub> = d<sub>char,n</sub> + k<sub>0</sub> · d<sub>0</sub> mit d<sub>char,n</sub> = β<sub>n</sub> · t und d<sub>0</sub> = 7 mm",
+  "en": "d<sub>ef</sub> = d<sub>char,n</sub> + k<sub>0</sub> · d<sub>0</sub> with d<sub>char,n</sub> = β<sub>n</sub> · t and d<sub>0</sub> = 7 mm"
+ },
+ {
+  "id": "20-219",
+  "de": "darf nicht in Rechnung gestellt werden",
+  "en": "must not be taken into account"
+ },
+ {
+  "id": "20-220",
+  "de": "eingespannt – frei (Kragstütze)",
+  "en": "fixed – free (cantilever column)"
+ }
+]

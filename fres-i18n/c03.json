@@ -1,0 +1,1642 @@
+[
+ {
+  "id": "03-0",
+  "de": "Anzahl n, m ≥ 1",
+  "en": "Number n, m ≥ 1"
+ },
+ {
+  "id": "03-1",
+  "de": "Abstände a₁ … a₄ > 0",
+  "en": "Spacings a₁ … a₄ > 0"
+ },
+ {
+  "id": "03-2",
+  "de": "Winkel α zwischen 0 und 90°",
+  "en": "Angle α between 0 and 90°"
+ },
+ {
+  "id": "03-3",
+  "de": "Platte mindestens so groß wie das Profil",
+  "en": "Plate at least as large as the section"
+ },
+ {
+  "id": "03-4",
+  "de": "Plattendicke",
+  "en": "Plate thickness"
+ },
+ {
+  "id": "03-5",
+  "de": "Fundament mindestens so groß wie die Platte (z. B. 800 x 800)",
+  "en": "Foundation at least as large as the plate (e.g. 800 x 800)"
+ },
+ {
+  "id": "03-6",
+  "de": "Nahtdicken a_f, a_w > 0",
+  "en": "Throat thicknesses a_f, a_w > 0"
+ },
+ {
+  "id": "03-7",
+  "de": "Stirnplattendicke",
+  "en": "End plate thickness"
+ },
+ {
+  "id": "03-8",
+  "de": "Breite und Dicken > 0",
+  "en": "Width and thicknesses > 0"
+ },
+ {
+  "id": "03-9",
+  "de": "Nahtdicke a > 0",
+  "en": "Throat thickness a > 0"
+ },
+ {
+  "id": "03-10",
+  "de": "Flankennahtlänge l > 0 oder Stirnnaht",
+  "en": "Side weld length l > 0 or end weld"
+ },
+ {
+  "id": "03-11",
+  "de": "Blech, Naht und Stützengurt > 0",
+  "en": "Plate, weld and column flange > 0"
+ },
+ {
+  "id": "03-12",
+  "de": "Hebelarm e ≥ 0",
+  "en": "Lever arm e ≥ 0"
+ },
+ {
+  "id": "03-13",
+  "de": "φ′ zwischen 0 und 45°",
+  "en": "φ′ between 0 and 45°"
+ },
+ {
+  "id": "03-14",
+  "de": "Wichten > 0",
+  "en": "Unit weights > 0"
+ },
+ {
+  "id": "03-15",
+  "de": "Breite b > 0",
+  "en": "Width b > 0"
+ },
+ {
+  "id": "03-16",
+  "de": "Länge a > 0",
+  "en": "Length a > 0"
+ },
+ {
+  "id": "03-17",
+  "de": "Fundamenthöhe > 0",
+  "en": "Footing depth > 0"
+ },
+ {
+  "id": "03-18",
+  "de": "Einbindetiefe ≥ 0",
+  "en": "Embedment depth ≥ 0"
+ },
+ {
+  "id": "03-19",
+  "de": "H als Betrag eingeben (≥ 0)",
+  "en": "Enter H as an absolute value (≥ 0)"
+ },
+ {
+  "id": "03-20",
+  "de": "Fundamentmaße > 0",
+  "en": "Footing dimensions > 0"
+ },
+ {
+  "id": "03-21",
+  "de": "γ über der Sohle > 0",
+  "en": "γ above the base > 0"
+ },
+ {
+  "id": "03-22",
+  "de": "Grundwasserspiegel ≥ 0",
+  "en": "Groundwater level ≥ 0"
+ },
+ {
+  "id": "03-23",
+  "de": "Abmessungen > 0",
+  "en": "Dimensions > 0"
+ },
+ {
+  "id": "03-24",
+  "de": "Sohldicke < H",
+  "en": "Base thickness < H"
+ },
+ {
+  "id": "03-25",
+  "de": "b_v + t_w < B (hinterer Sporn nötig)",
+  "en": "b_v + t_w < B (heel required)"
+ },
+ {
+  "id": "03-26",
+  "de": "φ′ zwischen 0 und 50°",
+  "en": "φ′ between 0 and 50°"
+ },
+ {
+  "id": "03-27",
+  "de": "Grundriss > 0",
+  "en": "Plan dimensions > 0"
+ },
+ {
+  "id": "03-28",
+  "de": "Sohlplatte > 0",
+  "en": "Base slab > 0"
+ },
+ {
+  "id": "03-29",
+  "de": "Wanddicke zu groß",
+  "en": "Wall thickness too large"
+ },
+ {
+  "id": "03-30",
+  "de": "f_k > 0 (bzw. f_b, f_m > 0)",
+  "en": "f_k > 0 (or f_b, f_m > 0)"
+ },
+ {
+  "id": "03-31",
+  "de": "Maße > 0",
+  "en": "Dimensions > 0"
+ },
+ {
+  "id": "03-32",
+  "de": "Auflagerbreite ≤ t",
+  "en": "Bearing width ≤ t"
+ },
+ {
+  "id": "03-33",
+  "de": "Auflager innerhalb der Wandlänge",
+  "en": "Bearing within the wall length"
+ },
+ {
+  "id": "03-34",
+  "de": "Maße und Wichte > 0",
+  "en": "Dimensions and unit weight > 0"
+ },
+ {
+  "id": "03-35",
+  "de": "Gefälle > 0",
+  "en": "Slope > 0"
+ },
+ {
+  "id": "03-36",
+  "de": "b > 0 oder m > 0",
+  "en": "b > 0 or m > 0"
+ },
+ {
+  "id": "03-37",
+  "de": "Wehrhöhe > 0",
+  "en": "Weir height > 0"
+ },
+ {
+  "id": "03-38",
+  "de": "zulässiger Oberwasserstand > w",
+  "en": "permissible headwater level > w"
+ },
+ {
+  "id": "03-39",
+  "de": "mindestens eine Schicht mit d > 0",
+  "en": "at least one layer with d > 0"
+ },
+ {
+  "id": "03-40",
+  "de": "Trennfläche, Raumtiefe und alle Flanken (m′, l_f) > 0",
+  "en": "Separating area, room depth and all flanks (m′, l_f) > 0"
+ },
+ {
+  "id": "03-41",
+  "de": "Estrich d, ρ, s′ und zul. L′n,w > 0",
+  "en": "Screed d, ρ, s′ and perm. L′n,w > 0"
+ },
+ {
+  "id": "03-42",
+  "de": "Brettschichtholz wählen",
+  "en": "choose glulam"
+ },
+ {
+  "id": "03-43",
+  "de": "Rechteckbalken",
+  "en": "Rectangular beam"
+ },
+ {
+  "id": "03-44",
+  "de": "Unterzug (Plattenbalken)",
+  "en": "Downstand beam (T-beam)"
+ },
+ {
+  "id": "03-45",
+  "de": "Platte, 1 m breiter Streifen",
+  "en": "Slab, 1 m wide strip"
+ },
+ {
+  "id": "03-46",
+  "de": "Stahlbetonstütze",
+  "en": "Reinforced concrete column"
+ },
+ {
+  "id": "03-47",
+  "de": "Durchstanzen (Flachdecke)",
+  "en": "Punching (flat slab)"
+ },
+ {
+  "id": "03-48",
+  "de": "Stahlträger (Walzprofil)",
+  "en": "Steel beam (rolled section)"
+ },
+ {
+  "id": "03-49",
+  "de": "Stahlanschluss (Schrauben, Kehlnaht)",
+  "en": "Steel connection (bolts, fillet weld)"
+ },
+ {
+  "id": "03-50",
+  "de": "Holzbalken / Holzstütze",
+  "en": "Timber beam / timber column"
+ },
+ {
+  "id": "03-51",
+  "de": "Holzverbindung (stiftförmig)",
+  "en": "Timber connection (dowel-type)"
+ },
+ {
+  "id": "03-52",
+  "de": "Ausklinkung (Holz)",
+  "en": "Notch (timber)"
+ },
+ {
+  "id": "03-53",
+  "de": "Satteldach-/Pultdachträger",
+  "en": "Double-tapered / single-tapered beam"
+ },
+ {
+  "id": "03-54",
+  "de": "Versatz (Holz)",
+  "en": "Step joint (timber)"
+ },
+ {
+  "id": "03-55",
+  "de": "Stützenfuß (Stahl)",
+  "en": "Column base (steel)"
+ },
+ {
+  "id": "03-56",
+  "de": "Schweißverbindung (Kehlnähte)",
+  "en": "Welded connection (fillet welds)"
+ },
+ {
+  "id": "03-57",
+  "de": "Flachgründung",
+  "en": "Shallow foundation"
+ },
+ {
+  "id": "03-58",
+  "de": "Setzung",
+  "en": "Settlement"
+ },
+ {
+  "id": "03-59",
+  "de": "Winkelstützmauer",
+  "en": "Cantilever retaining wall"
+ },
+ {
+  "id": "03-60",
+  "de": "Auftrieb (UPL)",
+  "en": "Uplift (UPL)"
+ },
+ {
+  "id": "03-61",
+  "de": "Mauerwerkswand (Druck)",
+  "en": "Masonry wall (compression)"
+ },
+ {
+  "id": "03-62",
+  "de": "Teilflächenpressung (Mauerwerk)",
+  "en": "Concentrated load (masonry)"
+ },
+ {
+  "id": "03-63",
+  "de": "Kellerwand (Mauerwerk)",
+  "en": "Basement wall (masonry)"
+ },
+ {
+  "id": "03-64",
+  "de": "Schubwand (Mauerwerk)",
+  "en": "Shear wall (masonry)"
+ },
+ {
+  "id": "03-65",
+  "de": "Wasserdruck",
+  "en": "Water pressure"
+ },
+ {
+  "id": "03-66",
+  "de": "Schwimmkörper",
+  "en": "Floating body"
+ },
+ {
+  "id": "03-67",
+  "de": "Rohrleitung",
+  "en": "Pipeline"
+ },
+ {
+  "id": "03-68",
+  "de": "Wehrüberfall",
+  "en": "Weir overflow"
+ },
+ {
+  "id": "03-69",
+  "de": "U-Wert (Bauphysik)",
+  "en": "U-value (building physics)"
+ },
+ {
+  "id": "03-70",
+  "de": "Tauwasser (Glaser)",
+  "en": "Condensation (Glaser)"
+ },
+ {
+  "id": "03-71",
+  "de": "Schallschutz",
+  "en": "Sound insulation"
+ },
+ {
+  "id": "03-72",
+  "de": "Diese Berechnung stammt aus einer älteren calc-Version ohne gespeicherte Verläufe. Bitte in calc neu berechnen und speichern.",
+  "en": "This calculation comes from an older calc version without saved diagrams. Please recalculate and save it in calc."
+ },
+ {
+  "id": "03-73",
+  "de": "Kragarm: Zugseite oben, das Moment wird als Betrag übernommen. Biegedrillknicken/Kippen rechnet size für gabelgelagerte Träger — Lagerung und Kipplänge prüfen.",
+  "en": "Cantilever: tension at the top, the moment is applied as an absolute value. size checks lateral-torsional buckling for fork-supported beams — check the supports and the buckling length."
+ },
+ {
+  "id": "03-74",
+  "de": "Feldmoment und Stützmoment sind die Größtwerte über alle Felder; die Stützweite ist die des Feldes mit dem größten Feldmoment. Für Stahl und Holz wird der Momentenverlauf als Gleichlast angesetzt — bitte prüfen.",
+  "en": "Span moment and support moment are the maxima over all spans; the span is that of the span with the largest span moment. For steel and timber the moment diagram is taken as a uniform load — please check."
+ },
+ {
+  "id": "03-75",
+  "de": "Bauphysik rechnet mit dem Bauteilaufbau — aus calc gibt es hier nichts zu übernehmen.",
+  "en": "Building physics works with the element build-up — there is nothing to apply from calc here."
+ },
+ {
+  "id": "03-76",
+  "de": "Wasserbau rechnet mit eigenen Eingaben (Abfluss, Geometrie) — aus calc gibt es hier nichts zu übernehmen.",
+  "en": "Hydraulics works with its own inputs (discharge, geometry) — there is nothing to apply from calc here."
+ },
+ {
+  "id": "03-77",
+  "de": "Für die Stütze braucht size eine Normalkraft. Die gibt es nur bei Rahmen-Berechnungen (Stiel). Bitte einen Rahmen wählen oder N<sub>Ed</sub> von Hand eingeben.",
+  "en": "For the column, size needs an axial force. Only frame calculations (column) provide it. Please choose a frame or enter N<sub>Ed</sub> by hand."
+ },
+ {
+  "id": "03-78",
+  "de": "Kein positives Feldmoment: Das Moment wird als Betrag für M<sub>Ed</sub> übernommen — die Zugbewehrung liegt dann oben.",
+  "en": "No positive span moment: the moment is applied as an absolute value for M<sub>Ed</sub> — the tension reinforcement is then at the top."
+ },
+ {
+  "id": "03-79",
+  "de": "M<sub>qp</sub> (quasi-ständig, für die Rissbreite) kennt calc nicht — bitte von Hand eingeben.",
+  "en": "calc does not know M<sub>qp</sub> (quasi-permanent, for the crack width) — please enter it by hand."
+ },
+ {
+  "id": "03-80",
+  "de": "Platte: Die Werte gelten je Meter Breite, wenn die Lasten in calc je m² eingegeben wurden.",
+  "en": "Slab: the values apply per metre width if the loads were entered per m² in calc."
+ },
+ {
+  "id": "03-81",
+  "de": "Für den Stützenfuß braucht es eine Normalkraft — nur Rahmen-Berechnungen liefern sie.",
+  "en": "The column base needs an axial force — only frame calculations provide it."
+ },
+ {
+  "id": "03-82",
+  "de": "Für Schweißnähte bitte die Kräfte von Hand eingeben — z. B. M<sub>y,Ed</sub> und V<sub>z,Ed</sub> am Trägerende aus calc für den Fall „Träger an Stirnplatte“.",
+  "en": "For welds, please enter the forces by hand — e.g. M<sub>y,Ed</sub> and V<sub>z,Ed</sub> at the beam end from calc for the case “Beam to end plate”."
+ },
+ {
+  "id": "03-83",
+  "de": "M<sub>y,k</sub> für die Durchbiegung ist charakteristisch — bitte von Hand anpassen.",
+  "en": "M<sub>y,k</sub> for the deflection is characteristic — please adjust by hand."
+ },
+ {
+  "id": "03-84",
+  "de": "Linearer Momentenverlauf: als „konstant“ angesetzt (sichere Seite).",
+  "en": "Linear moment diagram: taken as “constant” (on the safe side)."
+ },
+ {
+  "id": "03-85",
+  "de": "M<sub>G,k</sub> und M<sub>Q,k</sub> für die Durchbiegung sind charakteristisch — bitte von Hand eingeben.",
+  "en": "M<sub>G,k</sub> and M<sub>Q,k</sub> for the deflection are characteristic — please enter them by hand."
+ },
+ {
+  "id": "03-86",
+  "de": "linker Stiel",
+  "en": "left column"
+ },
+ {
+  "id": "03-87",
+  "de": "rechter Stiel",
+  "en": "right column"
+ },
+ {
+  "id": "03-88",
+  "de": "Riegel",
+  "en": "Beam"
+ },
+ {
+  "id": "03-89",
+  "de": "Einzellast in Feldmitte",
+  "en": "point load at midspan"
+ },
+ {
+  "id": "03-90",
+  "de": "Gleichlast",
+  "en": "uniform load"
+ },
+ {
+  "id": "03-91",
+  "de": "Plattendicke h [cm]",
+  "en": "Slab thickness h [cm]"
+ },
+ {
+  "id": "03-92",
+  "de": "Breite b [cm] (quer zur Momentenebene)",
+  "en": "Width b [cm] (perpendicular to the plane of bending)"
+ },
+ {
+  "id": "03-93",
+  "de": "Dicke h [cm] (in der Momentenebene)",
+  "en": "Thickness h [cm] (in the plane of bending)"
+ },
+ {
+  "id": "03-94",
+  "de": "Höhe h [cm]",
+  "en": "Depth h [cm]"
+ },
+ {
+  "id": "03-95",
+  "de": "Breite stützender Träger [cm]",
+  "en": "Width of the supporting beam [cm]"
+ },
+ {
+  "id": "03-96",
+  "de": "Auflagertiefe t [cm]",
+  "en": "Support depth t [cm]"
+ },
+ {
+  "id": "03-97",
+  "de": "t<sub>1</sub> [mm] (Holz 1, Kopfseite)",
+  "en": "t<sub>1</sub> [mm] (timber 1, head side)"
+ },
+ {
+  "id": "03-98",
+  "de": "t<sub>1</sub> [mm] (je Seitenholz)",
+  "en": "t<sub>1</sub> [mm] (per side member)"
+ },
+ {
+  "id": "03-99",
+  "de": "t<sub>1</sub> [mm] (Holz)",
+  "en": "t<sub>1</sub> [mm] (timber)"
+ },
+ {
+  "id": "03-100",
+  "de": "t<sub>2</sub> [mm] (Holz 2, Spitzenseite)",
+  "en": "t<sub>2</sub> [mm] (timber 2, point side)"
+ },
+ {
+  "id": "03-101",
+  "de": "t<sub>2</sub> [mm] (Mittelholz)",
+  "en": "t<sub>2</sub> [mm] (central member)"
+ },
+ {
+  "id": "03-102",
+  "de": "Deckbreite B<sub>o</sub> [m] (oben)",
+  "en": "Deck width B<sub>o</sub> [m] (top)"
+ },
+ {
+  "id": "03-103",
+  "de": "Breite B [m] (Kippachse längs)",
+  "en": "Width B [m] (longitudinal tilt axis)"
+ },
+ {
+  "id": "03-104",
+  "de": "Höhe am hohen Auflager h<sub>ap</sub> [mm]",
+  "en": "Depth at the high support h<sub>ap</sub> [mm]"
+ },
+ {
+  "id": "03-105",
+  "de": "Höhe im First h<sub>ap</sub> [mm]",
+  "en": "Apex depth h<sub>ap</sub> [mm]"
+ },
+ {
+  "id": "03-106",
+  "de": "trocken oder ständig nass",
+  "en": "dry or permanently wet"
+ },
+ {
+  "id": "03-107",
+  "de": "nass, selten trocken",
+  "en": "wet, rarely dry"
+ },
+ {
+  "id": "03-108",
+  "de": "mäßige Feuchte",
+  "en": "moderate humidity"
+ },
+ {
+  "id": "03-109",
+  "de": "wechselnd nass und trocken",
+  "en": "cyclic wet and dry"
+ },
+ {
+  "id": "03-110",
+  "de": "mäßige Feuchte + Chlorid",
+  "en": "moderate humidity + chloride"
+ },
+ {
+  "id": "03-111",
+  "de": "nass, selten trocken + Chlorid",
+  "en": "wet, rarely dry + chloride"
+ },
+ {
+  "id": "03-112",
+  "de": "wechselnd nass/trocken + Chlorid",
+  "en": "cyclic wet/dry + chloride"
+ },
+ {
+  "id": "03-113",
+  "de": "salzhaltige Luft",
+  "en": "airborne salt"
+ },
+ {
+  "id": "03-114",
+  "de": "unter Meerwasser",
+  "en": "permanently submerged in sea water"
+ },
+ {
+  "id": "03-115",
+  "de": "Tide-, Spritzwasserbereich",
+  "en": "tidal, splash and spray zones"
+ },
+ {
+  "id": "03-116",
+  "de": "Einfeldträger / gelenkig gelagerte Platte",
+  "en": "Simply supported beam / simply supported slab"
+ },
+ {
+  "id": "03-117",
+  "de": "Endfeld Durchlaufträger",
+  "en": "End span of a continuous beam"
+ },
+ {
+  "id": "03-118",
+  "de": "Innenfeld Durchlaufträger",
+  "en": "Interior span of a continuous beam"
+ },
+ {
+  "id": "03-119",
+  "de": "Flachdecke",
+  "en": "Flat slab"
+ },
+ {
+  "id": "03-120",
+  "de": "Kragträger",
+  "en": "Cantilever"
+ },
+ {
+  "id": "03-121",
+  "de": "Bügel Ø{}: c<sub>nom</sub> = max({}; {}; 10) + {} = {} mm",
+  "en": "Stirrup Ø{}: c<sub>nom</sub> = max({}; {}; 10) + {} = {} mm"
+ },
+ {
+  "id": "03-122",
+  "de": "Längsstab Ø{}: c<sub>nom</sub> = max({}; {}; 10) + {} = {} mm",
+  "en": "Longitudinal bar Ø{}: c<sub>nom</sub> = max({}; {}; 10) + {} = {} mm"
+ },
+ {
+  "id": "03-123",
+  "de": "→ über Bügel {} − {} = {} mm",
+  "en": "→ over the stirrup {} − {} = {} mm"
+ },
+ {
+  "id": "03-124",
+  "de": "Δx = l<sub>0</sub>/4 = {} mm (vom Momentennullpunkt)",
+  "en": "Δx = l<sub>0</sub>/4 = {} mm (from the point of zero moment)"
+ },
+ {
+  "id": "03-125",
+  "de": "a<sub>l</sub> = z·cot θ/2 = {}·{}/2 = <b>{} mm</b> (lotrechte Bügel)",
+  "en": "a<sub>l</sub> = z·cot θ/2 = {}·{}/2 = <b>{} mm</b> (vertical stirrups)"
+ },
+ {
+  "id": "03-126",
+  "de": "Nulllinie Zustand II{}: x = {} mm · z = {} mm",
+  "en": "Neutral axis state II{}: x = {} mm · z = {} mm"
+ },
+ {
+  "id": "03-127",
+  "de": "Grenzwerte nach NA (K = {} berücksichtigt das statische System)",
+  "en": "Limits to the NA (K = {} accounts for the structural system)"
+ },
+ {
+  "id": "03-128",
+  "de": "<span style=\"color:{}\">Einwirkungen:</span> {}",
+  "en": "<span style=\"color:{}\">Actions:</span> {}"
+ },
+ {
+  "id": "03-129",
+  "de": "<br><span style=\"color:{}\">innere Kräfte:</span> {}",
+  "en": "<br><span style=\"color:{}\">internal forces:</span> {}"
+ },
+ {
+  "id": "03-130",
+  "de": "u<sub>0</sub> = {} mm (Stützenumfang{}) · u<sub>1</sub> = {}{} = <b>{} mm</b>",
+  "en": "u<sub>0</sub> = {} mm (column perimeter{}) · u<sub>1</sub> = {}{} = <b>{} mm</b>"
+ },
+ {
+  "id": "03-131",
+  "de": "v<sub>Ed</sub> = {} ≤ v<sub>Rd,c</sub> = {} N/mm² → keine Durchstanzbewehrung nötig",
+  "en": "v<sub>Ed</sub> = {} ≤ v<sub>Rd,c</sub> = {} N/mm² → no punching shear reinforcement required"
+ },
+ {
+  "id": "03-132",
+  "de": "v<sub>Ed</sub> = {} > v<sub>Rd,c</sub> = {} N/mm² → Durchstanzbewehrung erforderlich",
+  "en": "v<sub>Ed</sub> = {} > v<sub>Rd,c</sub> = {} N/mm² → punching shear reinforcement required"
+ },
+ {
+  "id": "03-133",
+  "de": "Durchstanzbewehrung: {} Reihen, A<sub>sw,1</sub> = {} cm², A<sub>sw,2</sub> = {} cm²",
+  "en": "Punching shear reinforcement: {} rows, A<sub>sw,1</sub> = {} cm², A<sub>sw,2</sub> = {} cm²"
+ },
+ {
+  "id": "03-134",
+  "de": "Längsstab Ø{}: c<sub>nom</sub> = max({}; {}; 10) + {} = {} mm → über Bügel {} mm",
+  "en": "Longitudinal bar Ø{}: c<sub>nom</sub> = max({}; {}; 10) + {} = {} mm → over the stirrup {} mm"
+ },
+ {
+  "id": "03-135",
+  "de": "{}: mindestens {} → gewählt {} {}",
+  "en": "{}: at least {} → chosen {} {}"
+ },
+ {
+  "id": "03-136",
+  "de": "λ = {} > λ<sub>lim</sub> = {} → schlanke Stütze, Verformungen (Theorie II. Ordnung) berücksichtigen",
+  "en": "λ = {} > λ<sub>lim</sub> = {} → slender column, second-order effects must be considered"
+ },
+ {
+  "id": "03-137",
+  "de": "λ = {} ≤ λ<sub>lim</sub> = {} → gedrungene Stütze, Theorie II. Ordnung darf entfallen",
+  "en": "λ = {} ≤ λ<sub>lim</sub> = {} → stocky column, second-order effects may be ignored"
+ },
+ {
+  "id": "03-138",
+  "de": "Achsabstand s = ({} − {})/{} = {} mm ≤ 300 mm · lichter Abstand {} mm ≥ {} mm",
+  "en": "Bar spacing s = ({} − {})/{} = {} mm ≤ 300 mm · clear spacing {} mm ≥ {} mm"
+ },
+ {
+  "id": "03-139",
+  "de": "je Seite {} Ø {}, gesamt {} Ø {} = {} cm² · Bügel Ø{}/{} cm",
+  "en": "per side {} Ø {}, total {} Ø {} = {} cm² · stirrups Ø{}/{} cm"
+ },
+ {
+  "id": "03-140",
+  "de": "Grenzen 9ε / 10ε / 14ε = {} / {} / {} → <b>Klasse {}</b>",
+  "en": "Limits 9ε / 10ε / 14ε = {} / {} / {} → <b>class {}</b>"
+ },
+ {
+  "id": "03-141",
+  "de": "Grenzen Klasse 1 / 2 / 3 = {} / {} / {} → <b>Klasse {}</b>",
+  "en": "Limits class 1 / 2 / 3 = {} / {} / {} → <b>class {}</b>"
+ },
+ {
+  "id": "03-142",
+  "de": "W<sub>{},y</sub> = {} cm³ (Klasse {})",
+  "en": "W<sub>{},y</sub> = {} cm³ (class {})"
+ },
+ {
+  "id": "03-143",
+  "de": "Knicklinien (h/b = {}): y–y „{}“, z–z „{}“{}",
+  "en": "Buckling curves (h/b = {}): y–y “{}”, z–z “{}”{}"
+ },
+ {
+  "id": "03-144",
+  "de": "T<sub>Ed</sub> = {} kNm in Feldmitte",
+  "en": "T<sub>Ed</sub> = {} kNm at midspan"
+ },
+ {
+  "id": "03-145",
+  "de": "√3·τ<sub>max</sub> = <b>{} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm² (Fließbedingung 6.1)",
+  "en": "√3·τ<sub>max</sub> = <b>{} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = {} N/mm² (yield criterion 6.1)"
+ },
+ {
+  "id": "03-146",
+  "de": "{}: d = {} mm, d<sub>0</sub> = {} mm (normales Lochspiel)",
+  "en": "{}: d = {} mm, d<sub>0</sub> = {} mm (normal hole clearance)"
+ },
+ {
+  "id": "03-147",
+  "de": "Schraubenbild {} × {} = {} Schrauben",
+  "en": "Bolt layout {} × {} = {} bolts"
+ },
+ {
+  "id": "03-148",
+  "de": "Nutzungsklasse {} · KLED „{}“ → k<sub>mod</sub> = {} · γ<sub>M</sub> = 1,3",
+  "en": "Service class {} · load-duration class “{}” → k<sub>mod</sub> = {} · γ<sub>M</sub> = 1.3"
+ },
+ {
+  "id": "03-149",
+  "de": "Querschnitt {} × {} mm: A = {} cm² · W<sub>y</sub> = b·h²/6 = {} cm³ · I<sub>y</sub> = b·h³/12 = {} cm⁴",
+  "en": "Cross-section {} × {} mm: A = {} cm² · W<sub>y</sub> = b·h²/6 = {} cm³ · I<sub>y</sub> = b·h³/12 = {} cm⁴"
+ },
+ {
+  "id": "03-150",
+  "de": "k<sub>cr</sub> = {}/f<sub>v,k</sub> = {} (NA, Risse)",
+  "en": "k<sub>cr</sub> = {}/f<sub>v,k</sub> = {} (NA, cracks)"
+ },
+ {
+  "id": "03-151",
+  "de": "k<sub>c,90</sub> = {} ({}, Einzelauflager, Abstand l<sub>1</sub> ≥ 2h) → k<sub>c,90</sub>·f<sub>c,90,d</sub> = {} N/mm²",
+  "en": "k<sub>c,90</sub> = {} ({}, discrete support, distance l<sub>1</sub> ≥ 2h) → k<sub>c,90</sub>·f<sub>c,90,d</sub> = {} N/mm²"
+ },
+ {
+  "id": "03-152",
+  "de": "{} an Stirnplatte t = {} mm · a<sub>f</sub> = {} mm, a<sub>w</sub> = {} mm · {}",
+  "en": "{} to end plate t = {} mm · a<sub>f</sub> = {} mm, a<sub>w</sub> = {} mm · {}"
+ },
+ {
+  "id": "03-153",
+  "de": "Flachstahl {} × {} · a = {} mm, l = 2 × {} mm{} · F<sub>w,Rd</sub> = {} kN",
+  "en": "Flat bar {} × {} · a = {} mm, l = 2 × {} mm{} · F<sub>w,Rd</sub> = {} kN"
+ },
+ {
+  "id": "03-154",
+  "de": "Konsolblech {} × {} · a = {} mm beidseitig · M<sub>Ed</sub> = {} kNm",
+  "en": "Bracket plate {} × {} · a = {} mm both sides · M<sub>Ed</sub> = {} kNm"
+ },
+ {
+  "id": "03-155",
+  "de": "{}, Stirnplatte t<sub>p</sub> = {} mm, {}",
+  "en": "{}, end plate t<sub>p</sub> = {} mm, {}"
+ },
+ {
+  "id": "03-156",
+  "de": "Gurt a<sub>f</sub> = {} mm, Steg a<sub>w</sub> = {} mm",
+  "en": "Flange a<sub>f</sub> = {} mm, web a<sub>w</sub> = {} mm"
+ },
+ {
+  "id": "03-157",
+  "de": "{} × {} mm, {}; Knotenblech t<sub>K</sub> = {} mm",
+  "en": "{} × {} mm, {}; gusset plate t<sub>K</sub> = {} mm"
+ },
+ {
+  "id": "03-158",
+  "de": "a = {} mm, Flankennähte 2 × {} mm{}",
+  "en": "a = {} mm, side welds 2 × {} mm{}"
+ },
+ {
+  "id": "03-159",
+  "de": "{} × {} mm, {}; Stützengurt t<sub>c</sub> = {} mm",
+  "en": "{} × {} mm, {}; column flange t<sub>c</sub> = {} mm"
+ },
+ {
+  "id": "03-160",
+  "de": "F<sub>Ed</sub> = {} kN bei e = {} mm",
+  "en": "F<sub>Ed</sub> = {} kN at e = {} mm"
+ },
+ {
+  "id": "03-161",
+  "de": "lichte Wandhöhe h = {} m ≤ {}",
+  "en": "clear wall height h = {} m ≤ {}"
+ },
+ {
+  "id": "03-162",
+  "de": "Wandquerschnitt A = {} m² ≥ 0,04 m²",
+  "en": "wall cross-section A = {} m² ≥ 0.04 m²"
+ },
+ {
+  "id": "03-163",
+  "de": "Wanddicke t = {} mm ≥ 200 mm",
+  "en": "wall thickness t = {} mm ≥ 200 mm"
+ },
+ {
+  "id": "03-164",
+  "de": "lichte Höhe h = {} m ≤ 2,60 m",
+  "en": "clear height h = {} m ≤ 2.60 m"
+ },
+ {
+  "id": "03-165",
+  "de": "Geländelast q<sub>k</sub> = {} kN/m² ≤ 5 kN/m²",
+  "en": "surcharge q<sub>k</sub> = {} kN/m² ≤ 5 kN/m²"
+ },
+ {
+  "id": "03-166",
+  "de": "Anschütthöhe h<sub>e</sub> = {} m ≤ h",
+  "en": "backfill height h<sub>e</sub> = {} m ≤ h"
+ },
+ {
+  "id": "03-167",
+  "de": "Wand t = {} mm, h = {} m · Φ = {} · N<sub>Rd</sub> = {} kN",
+  "en": "Wall t = {} mm, h = {} m · Φ = {} · N<sub>Rd</sub> = {} kN"
+ },
+ {
+  "id": "03-168",
+  "de": "Kellerwand t = {} mm · n<sub>min,erf</sub> = {} kN/m · n<sub>max,zul</sub> = {} kN/m",
+  "en": "Basement wall t = {} mm · n<sub>min,req</sub> = {} kN/m · n<sub>max,perm</sub> = {} kN/m"
+ },
+ {
+  "id": "03-169",
+  "de": "Wand {} m × {} mm · l<sub>c</sub> = {} m · V<sub>Rd</sub> = {} kN",
+  "en": "Wall {} m × {} mm · l<sub>c</sub> = {} m · V<sub>Rd</sub> = {} kN"
+ },
+ {
+  "id": "03-170",
+  "de": "{} × {} mm, a<sub>1</sub> = {} mm, Wand t = {} mm, h<sub>c</sub> = {} m, l = {} m",
+  "en": "{} × {} mm, a<sub>1</sub> = {} mm, wall t = {} mm, h<sub>c</sub> = {} m, l = {} m"
+ },
+ {
+  "id": "03-171",
+  "de": "Fläche {} × {} m, α = {}° · F = {} kN · M<sub>Fuß</sub> = {} kNm",
+  "en": "Surface {} × {} m, α = {}° · F = {} kN · M<sub>base</sub> = {} kNm"
+ },
+ {
+  "id": "03-172",
+  "de": "h<sub>ü</sub> = {} m · Oberwasser {} m über Sohle",
+  "en": "h<sub>ü</sub> = {} m · headwater {} m above the bed"
+ },
+ {
+  "id": "03-173",
+  "de": "L = {} m, b = {} m, α = {}°, Oberkante {} m unter Wasser, Unterwasser {} m",
+  "en": "L = {} m, b = {} m, α = {}°, top edge {} m below water, tailwater {} m"
+ },
+ {
+  "id": "03-174",
+  "de": "Q = {} m³/s, b = {} m, μ = {}, w = {} m, zulässig {} m",
+  "en": "Q = {} m³/s, b = {} m, μ = {}, w = {} m, permissible {} m"
+ },
+ {
+  "id": "03-175",
+  "de": "Tauwasser m<sub>W,T</sub> = {} kg/m² · Verdunstung m<sub>W,V</sub> = {} kg/m² · s<sub>d</sub> = {} m",
+  "en": "Condensate m<sub>W,T</sub> = {} kg/m² · evaporation m<sub>W,V</sub> = {} kg/m² · s<sub>d</sub> = {} m"
+ },
+ {
+  "id": "03-176",
+  "de": "Schicht {}",
+  "en": "Layer {}"
+ },
+ {
+  "id": "03-177",
+  "de": "Flanke {}",
+  "en": "Flank {}"
+ },
+ {
+  "id": "03-178",
+  "de": "S<sub>s</sub> = {} m², Raumtiefe {} m, ΔR<sub>Dd</sub> = {} dB",
+  "en": "S<sub>s</sub> = {} m², room depth {} m, ΔR<sub>Dd</sub> = {} dB"
+ },
+ {
+  "id": "03-179",
+  "de": "; Estrich {} cm, ρ = {} kg/m³, s′ = {} MN/m³, K = {} dB, zul. L′<sub>n,w</sub> = {} dB",
+  "en": "; screed {} cm, ρ = {} kg/m³, s′ = {} MN/m³, K = {} dB, perm. L′<sub>n,w</sub> = {} dB"
+ },
+ {
+  "id": "03-180",
+  "de": "{} + Einhängeeffekt = ",
+  "en": "{} + rope effect = "
+ },
+ {
+  "id": "03-181",
+  "de": "Mindestabstände ({}, α<sub>1</sub> = {}°): verhindern, dass das Holz aufspaltet oder ausreißt",
+  "en": "Minimum spacings ({}, α<sub>1</sub> = {}°): prevent the timber from splitting or tearing out"
+ },
+ {
+  "id": "03-182",
+  "de": "α = {} {} 0,5 — tiefere Ausklinkungen nur mit Verstärkung ausführen",
+  "en": "α = {} {} 0.5 — deeper notches only with reinforcement"
+ },
+ {
+  "id": "03-183",
+  "de": "unten, x = {} mm, i = {}",
+  "en": "bottom, x = {} mm, i = {}"
+ },
+ {
+  "id": "03-184",
+  "de": "Nachweis",
+  "en": "Check"
+ },
+ {
+  "id": "03-185",
+  "de": "Rissbreite",
+  "en": "Crack width"
+ },
+ {
+  "id": "03-186",
+  "de": "Bauteil",
+  "en": "Member"
+ },
+ {
+  "id": "03-187",
+  "de": "Baustoff",
+  "en": "Material"
+ },
+ {
+  "id": "03-188",
+  "de": "Innenstütze",
+  "en": "Interior column"
+ },
+ {
+  "id": "03-189",
+  "de": "Randstütze",
+  "en": "Edge column"
+ },
+ {
+  "id": "03-190",
+  "de": "Eckstütze",
+  "en": "Corner column"
+ },
+ {
+  "id": "03-191",
+  "de": "oben",
+  "en": "top"
+ },
+ {
+  "id": "03-192",
+  "de": "Kragstütze",
+  "en": "Cantilever column"
+ },
+ {
+  "id": "03-193",
+  "de": "Endauflager",
+  "en": "End support"
+ },
+ {
+  "id": "03-194",
+  "de": "Last",
+  "en": "Load"
+ },
+ {
+  "id": "03-195",
+  "de": "Träger an Stirnplatte (Rundumnaht)",
+  "en": "Beam to end plate (all-round weld)"
+ },
+ {
+  "id": "03-196",
+  "de": "Flachstahl an Knotenblech",
+  "en": "Flat bar to gusset plate"
+ },
+ {
+  "id": "03-197",
+  "de": "Flachstahl",
+  "en": "Flat bar"
+ },
+ {
+  "id": "03-198",
+  "de": "Konsolblech an Stütze",
+  "en": "Bracket plate to column"
+ },
+ {
+  "id": "03-199",
+  "de": "Konsolblech",
+  "en": "Bracket plate"
+ },
+ {
+  "id": "03-200",
+  "de": "Nähte",
+  "en": "Welds"
+ },
+ {
+  "id": "03-201",
+  "de": "Kraft",
+  "en": "Force"
+ },
+ {
+  "id": "03-202",
+  "de": "Sohle",
+  "en": "Base"
+ },
+ {
+  "id": "03-203",
+  "de": "Auflast",
+  "en": "Surcharge"
+ },
+ {
+  "id": "03-204",
+  "de": "Schubwand",
+  "en": "Shear wall"
+ },
+ {
+  "id": "03-205",
+  "de": "Dünnbettmörtel",
+  "en": "Thin-layer mortar"
+ },
+ {
+  "id": "03-206",
+  "de": "Endauflager unter Dachdecke",
+  "en": "End support below the roof slab"
+ },
+ {
+  "id": "03-207",
+  "de": "Zwischenauflager",
+  "en": "Intermediate support"
+ },
+ {
+  "id": "03-208",
+  "de": "Stahlbetondecke",
+  "en": "Reinforced concrete slab"
+ },
+ {
+  "id": "03-209",
+  "de": "Holzbalkendecke",
+  "en": "Timber joist floor"
+ },
+ {
+  "id": "03-210",
+  "de": "Deckenstützweite l<sub>f</sub> = {} m ≤ 6,0 m",
+  "en": "floor span l<sub>f</sub> = {} m ≤ 6.0 m"
+ },
+ {
+  "id": "03-211",
+  "de": "Kragscheibe",
+  "en": "Cantilever wall"
+ },
+ {
+  "id": "03-212",
+  "de": "oben eingespannt",
+  "en": "fixed at the top"
+ },
+ {
+  "id": "03-213",
+  "de": "Fläche",
+  "en": "Surface"
+ },
+ {
+  "id": "03-214",
+  "de": "Leitung",
+  "en": "Pipeline"
+ },
+ {
+  "id": "03-215",
+  "de": "Offenes Gerinne",
+  "en": "Open channel"
+ },
+ {
+  "id": "03-216",
+  "de": "Grenze ",
+  "en": "Interface "
+ },
+ {
+  "id": "03-217",
+  "de": "Anforderung",
+  "en": "Requirement"
+ },
+ {
+  "id": "03-218",
+  "de": "Trennbauteil",
+  "en": "Separating element"
+ },
+ {
+  "id": "03-219",
+  "de": "Satteldachträger",
+  "en": "Double-tapered beam"
+ },
+ {
+  "id": "03-220",
+  "de": "Verbindungsmittel",
+  "en": "Fastener"
+ },
+ {
+  "id": "03-221",
+  "de": "Stabdübel",
+  "en": "Dowel"
+ },
+ {
+  "id": "03-222",
+  "de": "Nagel (glattschaftig)",
+  "en": "Nail (smooth shank)"
+ },
+ {
+  "id": "03-223",
+  "de": "Holzschraube",
+  "en": "Wood screw"
+ },
+ {
+  "id": "03-224",
+  "de": "Holzschrauben",
+  "en": "Wood screws"
+ },
+ {
+  "id": "03-225",
+  "de": "Nägel",
+  "en": "Nails"
+ },
+ {
+  "id": "03-226",
+  "de": "Vollholz",
+  "en": "Solid timber"
+ },
+ {
+  "id": "03-227",
+  "de": "Pultdachträger",
+  "en": "Single-tapered beam"
+ },
+ {
+  "id": "03-228",
+  "de": "Ausklinkung am Auflager",
+  "en": "Notch at the support"
+ },
+ {
+  "id": "03-229",
+  "de": "Stirnversatz",
+  "en": "Front step joint"
+ },
+ {
+  "id": "03-230",
+  "de": "Fersenversatz",
+  "en": "Heel step joint"
+ },
+ {
+  "id": "03-231",
+  "de": "Wasserdruck auf ebene Fläche",
+  "en": "Water pressure on a plane surface"
+ },
+ {
+  "id": "03-232",
+  "de": "Hydrostatik",
+  "en": "Hydrostatics"
+ },
+ {
+  "id": "03-233",
+  "de": "Tragfähigkeit unter der Einzellast",
+  "en": "Resistance under the concentrated load"
+ },
+ {
+  "id": "03-234",
+  "de": "Geometrie",
+  "en": "Geometry"
+ },
+ {
+  "id": "03-235",
+  "de": "Querschnittswerte",
+  "en": "Section properties"
+ },
+ {
+  "id": "03-236",
+  "de": "Statische Nutzhöhe: Abstand vom gedrückten Rand bis zur Mitte der Zugbewehrung",
+  "en": "Effective depth: distance from the compression edge to the centre of the tension reinforcement"
+ },
+ {
+  "id": "03-237",
+  "de": "Bewehrung in zwei Lagen: {} Stäbe in der 1. Lage, {} in der 2. Lage darüber",
+  "en": "Reinforcement in two layers: {} bars in the 1st layer, {} in the 2nd layer above"
+ },
+ {
+  "id": "03-238",
+  "de": "1. Lage: d<sub>1</sub> = h − c<sub>v</sub> − Ø<sub>w</sub> − Ø/2 = {} − {} − {} − {} = {} mm",
+  "en": "1st layer: d<sub>1</sub> = h − c<sub>v</sub> − Ø<sub>w</sub> − Ø/2 = {} − {} − {} − {} = {} mm"
+ },
+ {
+  "id": "03-239",
+  "de": "lichter Lagenabstand a<sub>v</sub> = max(Ø; d<sub>g</sub> + 5; 20) = max({}; {}; 20) = {} mm → Achsabstand der Lagen Ø + a<sub>v</sub> = {} mm",
+  "en": "clear spacing of the layers a<sub>v</sub> = max(Ø; d<sub>g</sub> + 5; 20) = max({}; {}; 20) = {} mm → axis spacing of the layers Ø + a<sub>v</sub> = {} mm"
+ },
+ {
+  "id": "03-240",
+  "de": "Nutzhöhe bis zum Schwerpunkt beider Lagen (gleiche Ø): d = d<sub>1</sub> − {}/{}·(Ø + a<sub>v</sub>) = {} − {} = <b>{} mm</b>",
+  "en": "Effective depth to the centroid of both layers (same Ø): d = d<sub>1</sub> − {}/{}·(Ø + a<sub>v</sub>) = {} − {} = <b>{} mm</b>"
+ },
+ {
+  "id": "03-241",
+  "de": "oben (Stütze, Ø{}): d<sub>St</sub> = h − {}{} − {} = <b>{} mm</b>",
+  "en": "top (support, Ø{}): d<sub>sup</sub> = h − {}{} − {} = <b>{} mm</b>"
+ },
+ {
+  "id": "03-242",
+  "de": "Dauerhaftigkeit: Mindestbetonfestigkeitsklasse für die Expositionsklasse",
+  "en": "Durability: minimum concrete strength class for the exposure class"
+ },
+ {
+  "id": "03-243",
+  "de": "Mindestbetonfestigkeit für {}: {} → gewählt {} {}",
+  "en": "Minimum concrete strength for {}: {} → chosen {} {}"
+ },
+ {
+  "id": "03-244",
+  "de": "Betondeckung und Nutzhöhe",
+  "en": "Concrete cover and effective depth"
+ },
+ {
+  "id": "03-245",
+  "de": "Die Betonklasse {} ist für {} zu niedrig (mindestens {}).",
+  "en": "Concrete class {} is too low for {} (at least {})."
+ },
+ {
+  "id": "03-246",
+  "de": "Mitwirkende Plattenbreite: wie weit die Platte als Druckgurt mitträgt",
+  "en": "Effective flange width: how far the slab acts as compression flange"
+ },
+ {
+  "id": "03-247",
+  "de": "l<sub>0</sub> = {}·l = {} m (Abstand der Momentennullpunkte)",
+  "en": "l<sub>0</sub> = {}·l = {} m (distance between points of zero moment)"
+ },
+ {
+  "id": "03-248",
+  "de": "Dehnungsebene so lange drehen, bis das innere Moment F<sub>cd</sub>·z gleich M<sub>Ed</sub> ist",
+  "en": "Rotate the strain plane until the internal moment F<sub>cd</sub>·z equals M<sub>Ed</sub>"
+ },
+ {
+  "id": "03-249",
+  "de": "Die Druckzone kann das Moment nicht aufnehmen.",
+  "en": "The compression zone cannot resist the moment."
+ },
+ {
+  "id": "03-250",
+  "de": "Druckzone überlastet: Querschnitt vergrößern oder höhere Betonklasse wählen.",
+  "en": "Compression zone overloaded: enlarge the cross-section or choose a higher concrete class."
+ },
+ {
+  "id": "03-251",
+  "de": "ε<sub>c</sub> = −{} ‰ (Beton oben), ε<sub>s</sub> = {} ‰ (Stahl)",
+  "en": "ε<sub>c</sub> = −{} ‰ (concrete top), ε<sub>s</sub> = {} ‰ (steel)"
+ },
+ {
+  "id": "03-252",
+  "de": "Nulllinie in der Platte",
+  "en": "neutral axis in the flange"
+ },
+ {
+  "id": "03-253",
+  "de": "Nulllinie im Steg",
+  "en": "neutral axis in the web"
+ },
+ {
+  "id": "03-254",
+  "de": "Betondruckkraft und innerer Hebelarm",
+  "en": "Concrete compression force and lever arm"
+ },
+ {
+  "id": "03-255",
+  "de": "Erforderliche Bewehrung: der Stahl muss dieselbe Kraft als Zug aufnehmen",
+  "en": "Required reinforcement: the steel must carry the same force in tension"
+ },
+ {
+  "id": "03-256",
+  "de": "A<sub>s,erf</sub> = F<sub>cd</sub>/f<sub>yd</sub> = {} cm²",
+  "en": "A<sub>s,req</sub> = F<sub>cd</sub>/f<sub>yd</sub> = {} cm²"
+ },
+ {
+  "id": "03-257",
+  "de": "Mindestbewehrung: muss das Rissmoment aufnehmen (sprödes Versagen vermeiden)",
+  "en": "Minimum reinforcement: must resist the cracking moment (avoid brittle failure)"
+ },
+ {
+  "id": "03-258",
+  "de": "A<sub>s,min</sub> = f<sub>ctm</sub>·W<sub>u</sub>/(f<sub>yk</sub>·0,9·d) = {} cm² (W<sub>u</sub> des T-Querschnitts)",
+  "en": "A<sub>s,min</sub> = f<sub>ctm</sub>·W<sub>u</sub>/(f<sub>yk</sub>·0.9·d) = {} cm² (W<sub>u</sub> of the T-section)"
+ },
+ {
+  "id": "03-259",
+  "de": "Nachweis: vorhandene ≥ maßgebende erforderliche Bewehrung",
+  "en": "Check: provided ≥ governing required reinforcement"
+ },
+ {
+  "id": "03-260",
+  "de": "A<sub>s,vorh</sub> = {} Ø {} = <b>{} cm²</b> ≥ max({}; {}) = {} cm²",
+  "en": "A<sub>s,prov</sub> = {} Ø {} = <b>{} cm²</b> ≥ max({}; {}) = {} cm²"
+ },
+ {
+  "id": "03-261",
+  "de": "Bezogenes Moment: wie stark ist die Betondruckzone beansprucht?",
+  "en": "Relative moment: how highly is the concrete compression zone stressed?"
+ },
+ {
+  "id": "03-262",
+  "de": "μ<sub>Eds</sub> > μ<sub>lim</sub> = {} (ξ = 0,45) → die Betondruckzone allein reicht nicht, Druckbewehrung oben einlegen",
+  "en": "μ<sub>Eds</sub> > μ<sub>lim</sub> = {} (ξ = 0.45) → the concrete compression zone alone is not sufficient, add compression reinforcement at the top"
+ },
+ {
+  "id": "03-263",
+  "de": "Anteil, den der Beton höchstens übernimmt (Druckzone bis ξ<sub>lim</sub> = 0,45 ausgenutzt)",
+  "en": "Share carried at most by the concrete (compression zone used up to ξ<sub>lim</sub> = 0.45)"
+ },
+ {
+  "id": "03-264",
+  "de": "Restmoment: wird von einem Stahl-Kräftepaar (oben Druck, unten Zug) mit dem Hebelarm d − d<sub>2</sub> getragen",
+  "en": "Remaining moment: carried by a steel couple (compression at the top, tension at the bottom) with lever arm d − d<sub>2</sub>"
+ },
+ {
+  "id": "03-265",
+  "de": "Spannung der Druckbewehrung aus der Dehnung in Höhe d<sub>2</sub>",
+  "en": "Stress in the compression reinforcement from the strain at level d<sub>2</sub>"
+ },
+ {
+  "id": "03-266",
+  "de": " (fließt)",
+  "en": " (yields)"
+ },
+ {
+  "id": "03-267",
+  "de": "Erforderliche Druckbewehrung oben",
+  "en": "Required compression reinforcement at the top"
+ },
+ {
+  "id": "03-268",
+  "de": "A<sub>s2,erf</sub> = ΔM/((d − d<sub>2</sub>)·σ<sub>s2</sub>) = {}·10⁶/({}·{}) = <b>{} cm²</b>",
+  "en": "A<sub>s2,req</sub> = ΔM/((d − d<sub>2</sub>)·σ<sub>s2</sub>) = {}·10⁶/({}·{}) = <b>{} cm²</b>"
+ },
+ {
+  "id": "03-269",
+  "de": "A<sub>s2,vorh</sub> = {} Ø {} = {} cm² {} {} cm²",
+  "en": "A<sub>s2,prov</sub> = {} Ø {} = {} cm² {} {} cm²"
+ },
+ {
+  "id": "03-270",
+  "de": "Erforderliche Zugbewehrung unten: Betonanteil + Anteil aus ΔM",
+  "en": "Required tension reinforcement at the bottom: concrete share + share from ΔM"
+ },
+ {
+  "id": "03-271",
+  "de": "A<sub>s1,erf</sub> = (ω<sub>lim</sub>·b·d·f<sub>cd</sub> + ΔM/(d − d<sub>2</sub>))/f<sub>yd</sub> = {} cm²",
+  "en": "A<sub>s1,req</sub> = (ω<sub>lim</sub>·b·d·f<sub>cd</sub> + ΔM/(d − d<sub>2</sub>))/f<sub>yd</sub> = {} cm²"
+ },
+ {
+  "id": "03-272",
+  "de": "Nachweis der Zugbewehrung",
+  "en": "Check of the tension reinforcement"
+ },
+ {
+  "id": "03-273",
+  "de": "A<sub>s,vorh</sub> = {} Ø {} = <b>{} cm²</b> ≥ {} cm²",
+  "en": "A<sub>s,prov</sub> = {} Ø {} = <b>{} cm²</b> ≥ {} cm²"
+ },
+ {
+  "id": "03-274",
+  "de": "Druckstäbe gegen Ausknicken mit Bügeln umschließen (Bügelabstand ≤ 12·Ø<sub>2</sub>, EN 1992-1-1, 9.2.1.2 i. V. m. 9.5.3). Wirtschaftlicher ist oft ein höherer Querschnitt.",
+  "en": "Enclose the compression bars with stirrups against buckling (stirrup spacing ≤ 12·Ø<sub>2</sub>, EN 1992-1-1, 9.2.1.2 with 9.5.3). A deeper cross-section is often more economical."
+ },
+ {
+  "id": "03-275",
+  "de": "A<sub>s1</sub> + A<sub>s2</sub> > 0,08·A<sub>c</sub> — Querschnitt vergrößern.",
+  "en": "A<sub>s1</sub> + A<sub>s2</sub> > 0.08·A<sub>c</sub> — enlarge the cross-section."
+ },
+ {
+  "id": "03-276",
+  "de": "Die Druckzone reicht nicht. Querschnitt vergrößern oder höhere Betonklasse wählen (Druckbewehrung ist für Platten und Plattenbalken nicht vorgesehen).",
+  "en": "The compression zone is not sufficient. Enlarge the cross-section or choose a higher concrete class (compression reinforcement is not provided for slabs and T-beams)."
+ },
+ {
+  "id": "03-277",
+  "de": "μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = {} → keine Druckbewehrung nötig",
+  "en": "μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = {} → no compression reinforcement required"
+ },
+ {
+  "id": "03-278",
+  "de": "Ablesen aus der Bemessungstabelle (ω-Verfahren, Parabel-Rechteck)",
+  "en": "Read from the design table (ω method, parabola-rectangle)"
+ },
+ {
+  "id": "03-279",
+  "de": " (Stahl fließt)",
+  "en": " (steel yields)"
+ },
+ {
+  "id": "03-280",
+  "de": "Erforderliche Bewehrung aus dem Gleichgewicht der Kräfte",
+  "en": "Required reinforcement from equilibrium of forces"
+ },
+ {
+  "id": "03-281",
+  "de": "A<sub>s,erf</sub> = ω·b·d·f<sub>cd</sub>/f<sub>yd</sub> = {} cm²{}",
+  "en": "A<sub>s,req</sub> = ω·b·d·f<sub>cd</sub>/f<sub>yd</sub> = {} cm²{}"
+ },
+ {
+  "id": "03-282",
+  "de": "A<sub>s,vorh</sub> = {} = <b>{} cm²{}</b> ≥ {} cm²{}",
+  "en": "A<sub>s,prov</sub> = {} = <b>{} cm²{}</b> ≥ {} cm²{}"
+ },
+ {
+  "id": "03-283",
+  "de": "Biegung im Feld — Plattenbalken (GZT)",
+  "en": "Bending at midspan — T-beam (ULS)"
+ },
+ {
+  "id": "03-284",
+  "de": "Biegung im Feld (GZT)",
+  "en": "Bending at midspan (ULS)"
+ },
+ {
+  "id": "03-285",
+  "de": "Größter Abstand: die Stäbe dürfen nicht zu weit auseinander liegen (Rissverteilung)",
+  "en": "Maximum spacing: the bars must not be too far apart (crack distribution)"
+ },
+ {
+  "id": "03-286",
+  "de": "größter Stababstand (NA 9.3.1.1): s<sub>max</sub> = {} mm für h = {} mm",
+  "en": "maximum bar spacing (NA 9.3.1.1): s<sub>max</sub> = {} mm for h = {} mm"
+ },
+ {
+  "id": "03-287",
+  "de": "gewählt s = {} mm {} {} mm",
+  "en": "chosen s = {} mm {} {} mm"
+ },
+ {
+  "id": "03-288",
+  "de": "Kleinster Abstand: der Beton muss zwischen den Stäben noch hindurchpassen",
+  "en": "Minimum spacing: the concrete must still pass between the bars"
+ },
+ {
+  "id": "03-289",
+  "de": "lichter Abstand a = s − Ø = {} mm ≥ a<sub>min</sub> = {} mm",
+  "en": "clear spacing a = s − Ø = {} mm ≥ a<sub>min</sub> = {} mm"
+ },
+ {
+  "id": "03-290",
+  "de": "Querbewehrung (verteilt Einzellasten, hält die Hauptstäbe in Lage)",
+  "en": "Transverse reinforcement (distributes concentrated loads, keeps the main bars in position)"
+ },
+ {
+  "id": "03-291",
+  "de": "Querbewehrung: ≥ 20 % der Hauptbewehrung = {} cm²/m, Abstand ≤ 250 mm",
+  "en": "Transverse reinforcement: ≥ 20 % of the main reinforcement = {} cm²/m, spacing ≤ 250 mm"
+ },
+ {
+  "id": "03-292",
+  "de": "Platz innerhalb der Bügel",
+  "en": "Space inside the stirrups"
+ },
+ {
+  "id": "03-293",
+  "de": "Breite innerhalb der Bügel: b{} − 2·c<sub>v</sub> − 2·Ø<sub>w</sub> = {} − 2·{} − 2·{} = {} mm",
+  "en": "Width inside the stirrups: b{} − 2·c<sub>v</sub> − 2·Ø<sub>w</sub> = {} − 2·{} − 2·{} = {} mm"
+ },
+ {
+  "id": "03-294",
+  "de": " in der 1. Lage",
+  "en": " in the 1st layer"
+ },
+ {
+  "id": "03-295",
+  "de": "Lichter Abstand{}: Restbreite auf die {} Zwischenräume verteilen",
+  "en": "Clear spacing{}: distribute the remaining width over the {} gaps"
+ },
+ {
+  "id": "03-296",
+  "de": "lichter Abstand a = ({} − {}·{}) / {} = <b>{} mm</b>",
+  "en": "clear spacing a = ({} − {}·{}) / {} = <b>{} mm</b>"
+ },
+ {
+  "id": "03-297",
+  "de": "Mindestabstand: Stabdurchmesser, Größtkorn + 5 mm, mindestens 20 mm",
+  "en": "Minimum spacing: bar diameter, maximum aggregate size + 5 mm, at least 20 mm"
+ },
+ {
+  "id": "03-298",
+  "de": "2. Lage: Stäbe lotrecht über denen der 1. Lage, damit Rüttelgassen frei bleiben",
+  "en": "2nd layer: bars vertically above those of the 1st layer so that vibrator gaps stay free"
+ },
+ {
+  "id": "03-299",
+  "de": "{} Stäbe in der 2. Lage ≤ {} Stäbe in der 1. Lage ✓ · waagerechter Abstand dort ≥ a",
+  "en": "{} bars in the 2nd layer ≤ {} bars in the 1st layer ✓ · horizontal spacing there ≥ a"
+ },
+ {
+  "id": "03-300",
+  "de": "lotrechter lichter Abstand der Lagen a<sub>v</sub> = {} mm ≥ a<sub>min</sub> = {} mm ✓ (über Abstandhalter, z. B. Ø{}-Querstäbe)",
+  "en": "vertical clear spacing of the layers a<sub>v</sub> = {} mm ≥ a<sub>min</sub> = {} mm ✓ (via spacers, e.g. Ø{} cross bars)"
+ },
+ {
+  "id": "03-301",
+  "de": "Die Stäbe der 1. Lage passen nicht nebeneinander. Mehr Stäbe in die 2. Lage, größeren Durchmesser oder breiteren Querschnitt wählen.",
+  "en": "The bars of the 1st layer do not fit side by side. Put more bars into the 2nd layer, choose a larger diameter or a wider cross-section."
+ },
+ {
+  "id": "03-302",
+  "de": "Die Stäbe passen nicht nebeneinander. Größeren Durchmesser mit weniger Stäben, zweite Lage oder breiteren Querschnitt wählen.",
+  "en": "The bars do not fit side by side. Choose a larger diameter with fewer bars, a second layer or a wider cross-section."
+ },
+ {
+  "id": "03-303",
+  "de": "Obere Lage im Feld",
+  "en": "Top layer in the span"
+ },
+ {
+  "id": "03-304",
+  "de": "a<sub>oben</sub> = ({} − {}·{}) / {} = {} mm {} {} mm",
+  "en": "a<sub>top</sub> = ({} − {}·{}) / {} = {} mm {} {} mm"
+ },
+ {
+  "id": "03-305",
+  "de": "Die oberen Stäbe passen nicht nebeneinander.",
+  "en": "The top bars do not fit side by side."
+ },
+ {
+  "id": "03-306",
+  "de": "Stababstände (Feld)",
+  "en": "Bar spacings (span)"
+ },
+ {
+  "id": "03-307",
+  "de": "Über der Stütze ist oben Zug: die Platte liegt in der Zugzone, gedrückt wird nur der Steg unten",
+  "en": "Over the support the top is in tension: the slab lies in the tension zone, only the web at the bottom is compressed"
+ },
+ {
+  "id": "03-308",
+  "de": "Druckzone: Rechteck mit b<sub>w</sub> = {} mm",
+  "en": "Compression zone: rectangle with b<sub>w</sub> = {} mm"
+ },
+ {
+  "id": "03-309",
+  "de": "b<sub>eff,Stütze</sub> mit l<sub>0</sub> = 0,15·(l₁ + l₂) ≈ 0,3·l = {} m: <b>{} mm</b> (Breite, über die die obere Bewehrung verteilt wird)",
+  "en": "b<sub>eff,sup</sub> with l<sub>0</sub> = 0.15·(l₁ + l₂) ≈ 0.3·l = {} m: <b>{} mm</b> (width over which the top reinforcement is distributed)"
+ },
+ {
+  "id": "03-310",
+  "de": "Über der Stütze ist oben Zug, gedrückt wird der Beton unten",
+  "en": "Over the support the top is in tension, the concrete at the bottom is compressed"
+ },
+ {
+  "id": "03-311",
+  "de": "Bezogenes Moment mit der oberen Nutzhöhe d<sub>St</sub>",
+  "en": "Relative moment with the top effective depth d<sub>sup</sub>"
+ },
+ {
+  "id": "03-312",
+  "de": "Druckzone an der Stütze überlastet: Querschnitt vergrößern, Voute oder Druckbewehrung (nicht in size enthalten).",
+  "en": "Compression zone at the support overloaded: enlarge the cross-section, add a haunch or compression reinforcement (not included in size)."
+ },
+ {
+  "id": "03-313",
+  "de": "Tabellenwerte und erforderliche Bewehrung oben",
+  "en": "Table values and required top reinforcement"
+ },
+ {
+  "id": "03-314",
+  "de": "A<sub>s,erf</sub> = ω·b·d<sub>St</sub>·f<sub>cd</sub>/f<sub>yd</sub> = {} cm²{}",
+  "en": "A<sub>s,req</sub> = ω·b·d<sub>sup</sub>·f<sub>cd</sub>/f<sub>yd</sub> = {} cm²{}"
+ },
+ {
+  "id": "03-315",
+  "de": "Nachweis der oberen Bewehrung",
+  "en": "Check of the top reinforcement"
+ },
+ {
+  "id": "03-316",
+  "de": "A<sub>s,vorh</sub> = {} oben = <b>{} cm²{}</b> ≥ {} cm²{}",
+  "en": "A<sub>s,prov</sub> = {} top = <b>{} cm²{}</b> ≥ {} cm²{}"
+ },
+ {
+  "id": "03-317",
+  "de": "Stababstände der oberen Lage",
+  "en": "Bar spacings of the top layer"
+ },
+ {
+  "id": "03-318",
+  "de": "Stababstand oben s = {} mm ≤ s<sub>max</sub> = {} mm · lichter Abstand {} mm ≥ {} mm",
+  "en": "Bar spacing top s = {} mm ≤ s<sub>max</sub> = {} mm · clear spacing {} mm ≥ {} mm"
+ },
+ {
+  "id": "03-319",
+  "de": "Stäbe oben über b<sub>eff,Stütze</sub> = {} mm verteilt: lichter Abstand {} mm ≥ {} mm (EN 1992-1-1, 9.2.1.2)",
+  "en": "Top bars distributed over b<sub>eff,sup</sub> = {} mm: clear spacing {} mm ≥ {} mm (EN 1992-1-1, 9.2.1.2)"
+ },
+ {
+  "id": "03-320",
+  "de": "lichter Abstand oben a = ({} − {}·{}) / {} = {} mm ≥ {} mm",
+  "en": "clear spacing top a = ({} − {}·{}) / {} = {} mm ≥ {} mm"
+ },
+ {
+  "id": "03-321",
+  "de": "Die oberen Stäbe passen nicht nebeneinander — größerer Durchmesser oder zweite Lage.",
+  "en": "The top bars do not fit side by side — larger diameter or a second layer."
+ },
+ {
+  "id": "03-322",
+  "de": "Konstruktive Regel für die untere Bewehrung",
+  "en": "Detailing rule for the bottom reinforcement"
+ },
+ {
+  "id": "03-323",
+  "de": "Am Zwischenauflager mindestens ¼ der Feldbewehrung unten durchführen: {} cm²{}",
+  "en": "At the intermediate support, continue at least ¼ of the span reinforcement at the bottom: {} cm²{}"
+ },
+ {
+  "id": "03-324",
+  "de": "Biegung über der Stütze (GZT)",
+  "en": "Bending over the support (ULS)"
+ },
+ {
+  "id": "03-325",
+  "de": "Nachweis der Platte ohne Querkraftbewehrung",
+  "en": "Check of the slab without shear reinforcement"
+ },
+ {
+  "id": "03-326",
+  "de": "Platte ohne Querkraftbewehrung: V<sub>Ed</sub> = {} kN ≤ V<sub>Rd,c</sub> = {} kN",
+  "en": "Slab without shear reinforcement: V<sub>Ed</sub> = {} kN ≤ V<sub>Rd,c</sub> = {} kN"
+ },
+ {
+  "id": "03-327",
+  "de": "V<sub>Ed</sub> > V<sub>Rd,c</sub>: Platte dicker wählen oder mehr Längsbewehrung — Querkraftbewehrung in Platten ist hier nicht vorgesehen.",
+  "en": "V<sub>Ed</sub> > V<sub>Rd,c</sub>: choose a thicker slab or more longitudinal reinforcement — shear reinforcement in slabs is not provided here."
+ }
+]

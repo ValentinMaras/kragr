@@ -1,0 +1,1872 @@
+[
+ {
+  "id": "01-0",
+  "de": "R<sub>si</sub> und R<sub>se</sub> nach DIN EN ISO 6946 je nach Bauteil. Geprüft werden Mindestwärmeschutz (DIN 4108-2), der U-Wert des GEG-Referenzgebäudes und der Temperaturfaktor f<sub>Rsi</sub> gegen Schimmel.",
+  "en": "R<sub>si</sub> and R<sub>se</sub> to DIN EN ISO 6946 depending on the element. Checked: minimum thermal insulation (DIN 4108-2), the U-value of the GEG reference building and the temperature factor f<sub>Rsi</sub> against mould."
+ },
+ {
+  "id": "01-1",
+  "de": "Tauwassernachweis",
+  "en": "Condensation check"
+ },
+ {
+  "id": "01-2",
+  "de": "Tauwasser an kapillar nicht wasseraufnahmefähiger Schicht (Grenze 0,5 kg/m²)",
+  "en": "Condensation at a layer that cannot absorb water by capillary action (limit 0.5 kg/m²)"
+ },
+ {
+  "id": "01-3",
+  "de": "Glaser-Verfahren nach DIN 4108-3: Tauperiode 2160 h mit innen 20 °C / 50 % und außen −5 °C / 80 %, Verdunstungsperiode 2160 h mit außen 12 °C / 70 %, R<sub>si</sub> = 0,25 und R<sub>se</sub> = 0,04 m²K/W.",
+  "en": "Glaser method to DIN 4108-3: condensation period 2160 h with inside 20 °C / 50 % and outside −5 °C / 80 %, evaporation period 2160 h with outside 12 °C / 70 %, R<sub>si</sub> = 0.25 and R<sub>se</sub> = 0.04 m²K/W."
+ },
+ {
+  "id": "01-4",
+  "de": "Luft- und Trittschall",
+  "en": "Airborne and impact sound"
+ },
+ {
+  "id": "01-5",
+  "de": "Anforderung (DIN 4109-1)",
+  "en": "Requirement (DIN 4109-1)"
+ },
+ {
+  "id": "01-6",
+  "de": "Abschlag Flankenübertragung [dB]",
+  "en": "Deduction for flanking transmission [dB]"
+ },
+ {
+  "id": "01-7",
+  "de": "Sicherheitsbeiwert u<sub>prog</sub> [dB]",
+  "en": "Safety margin u<sub>prog</sub> [dB]"
+ },
+ {
+  "id": "01-8",
+  "de": "Decke mit schwimmendem Estrich (Trittschall)",
+  "en": "Floor with floating screed (impact sound)"
+ },
+ {
+  "id": "01-9",
+  "de": "Estrichdicke [cm]",
+  "en": "Screed thickness [cm]"
+ },
+ {
+  "id": "01-10",
+  "de": "Estrich ρ [kg/m³]",
+  "en": "Screed ρ [kg/m³]"
+ },
+ {
+  "id": "01-11",
+  "de": "Trittschalldämmung s′ [MN/m³]",
+  "en": "Impact sound insulation s′ [MN/m³]"
+ },
+ {
+  "id": "01-12",
+  "de": "Korrektur K [dB]",
+  "en": "Correction K [dB]"
+ },
+ {
+  "id": "01-13",
+  "de": "zul. L′<sub>n,w</sub> [dB]",
+  "en": "perm. L′<sub>n,w</sub> [dB]"
+ },
+ {
+  "id": "01-14",
+  "de": "Massegesetz für einschalige massive Bauteile (DIN 4109-32): m′ aus allen Schichten oben. Für die Trittschalldämmung ist der Aufbau oben die Rohdecke (inkl. Putz). Genauer Nachweis: R′<sub>w</sub> aus Trennbauteil und vier Flanken mit Stoßstellendämmmaß K<sub>ij</sub> (DIN 4109-2/-32, starre Stöße); vereinfacht: pauschaler Abschlag.",
+  "en": "Mass law for single-leaf solid elements (DIN 4109-32): m′ from all layers above. For impact sound, the build-up above is the bare floor slab (incl. plaster). Exact method: R′<sub>w</sub> from the separating element and four flanks with vibration reduction index K<sub>ij</sub> (DIN 4109-2/-32, rigid junctions); simplified: lump-sum deduction."
+ },
+ {
+  "id": "01-15",
+  "de": "U-Wert",
+  "en": "U-value"
+ },
+ {
+  "id": "01-16",
+  "de": "Tauwasser (Glaser)",
+  "en": "Condensation (Glaser)"
+ },
+ {
+  "id": "01-17",
+  "de": "Schallschutz",
+  "en": "Sound insulation"
+ },
+ {
+  "id": "01-18",
+  "de": "Flanke 1 (Decke oben): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "en": "Flank 1 (ceiling above): m′ [kg/m²] · l<sub>f</sub> [m] · junction"
+ },
+ {
+  "id": "01-19",
+  "de": "Flanke 2 (Boden unten): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "en": "Flank 2 (floor below): m′ [kg/m²] · l<sub>f</sub> [m] · junction"
+ },
+ {
+  "id": "01-20",
+  "de": "Flanke 3 (Außenwand): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "en": "Flank 3 (external wall): m′ [kg/m²] · l<sub>f</sub> [m] · junction"
+ },
+ {
+  "id": "01-21",
+  "de": "Flanke 4 (Innenwand): m′ [kg/m²] · l<sub>f</sub> [m] · Stoß",
+  "en": "Flank 4 (internal wall): m′ [kg/m²] · l<sub>f</sub> [m] · junction"
+ },
+ {
+  "id": "01-22",
+  "de": "Flankenübertragung",
+  "en": "Flanking transmission"
+ },
+ {
+  "id": "01-23",
+  "de": "Trennfläche S<sub>s</sub> [m²]",
+  "en": "Separating area S<sub>s</sub> [m²]"
+ },
+ {
+  "id": "01-24",
+  "de": "Raumtiefe (für K<sub>ij,min</sub>) [m]",
+  "en": "Room depth (for K<sub>ij,min</sub>) [m]"
+ },
+ {
+  "id": "01-25",
+  "de": "Verbesserung ΔR<sub>Dd</sub> durch Vorsatzschale [dB]",
+  "en": "Improvement ΔR<sub>Dd</sub> by a lining [dB]"
+ },
+ {
+  "id": "01-26",
+  "de": "Formel von Poleni: Q = 2/3·μ·b·√(2g)·h<sub>ü</sub><sup>3/2</sup>. Vollkommener Überfall: das Unterwasser beeinflusst den Abfluss nicht. Die Zulaufgeschwindigkeit ist nicht angesetzt.",
+  "en": "Poleni formula: Q = 2/3·μ·b·√(2g)·h<sub>ü</sub><sup>3/2</sup>. Free overflow: the tailwater does not affect the discharge. The approach velocity is not taken into account."
+ },
+ {
+  "id": "01-27",
+  "de": "Wasserbau",
+  "en": "Hydraulics"
+ },
+ {
+  "id": "01-28",
+  "de": "Baugrund unter der Sohle",
+  "en": "Ground below the base"
+ },
+ {
+  "id": "01-29",
+  "de": "Anzahl Schichten",
+  "en": "Number of layers"
+ },
+ {
+  "id": "01-30",
+  "de": "über der Sohle [kN/m³]",
+  "en": "above the base [kN/m³]"
+ },
+ {
+  "id": "01-31",
+  "de": "Grundwasser",
+  "en": "Groundwater"
+ },
+ {
+  "id": "01-32",
+  "de": "Grundwasserspiegel unter Gelände [m]",
+  "en": "Groundwater level below ground [m]"
+ },
+ {
+  "id": "01-33",
+  "de": "Schicht 1",
+  "en": "Layer 1"
+ },
+ {
+  "id": "01-34",
+  "de": "Dicke [m]",
+  "en": "Thickness [m]"
+ },
+ {
+  "id": "01-35",
+  "de": "Schicht 2",
+  "en": "Layer 2"
+ },
+ {
+  "id": "01-36",
+  "de": "Schicht 3",
+  "en": "Layer 3"
+ },
+ {
+  "id": "01-37",
+  "de": "Schicht 4",
+  "en": "Layer 4"
+ },
+ {
+  "id": "01-38",
+  "de": "Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in statiq·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.",
+  "en": "The soil selection suggests γ and E<sub>s</sub> (guide values as in statiq·ref); both can be overwritten. The last layer extends to any depth. Below the groundwater level, size uses γ′ = γ − 10 kN/m³."
+ },
+ {
+  "id": "01-39",
+  "de": "Wand auf Druck",
+  "en": "Wall in compression"
+ },
+ {
+  "id": "01-40",
+  "de": "Teilfläche",
+  "en": "Concentrated load"
+ },
+ {
+  "id": "01-41",
+  "de": "Kellerwand",
+  "en": "Basement wall"
+ },
+ {
+  "id": "01-42",
+  "de": "Schubwand",
+  "en": "Shear wall"
+ },
+ {
+  "id": "01-43",
+  "de": "Mauerwerk",
+  "en": "Masonry"
+ },
+ {
+  "id": "01-44",
+  "de": "Steinart",
+  "en": "Unit type"
+ },
+ {
+  "id": "01-45",
+  "de": "Ziegel, Vollstein (Gruppe 1)",
+  "en": "Clay, solid unit (group 1)"
+ },
+ {
+  "id": "01-46",
+  "de": "Hochlochziegel (Gruppe 2)",
+  "en": "Vertically perforated clay unit (group 2)"
+ },
+ {
+  "id": "01-47",
+  "de": "Kalksandstein, Voll-/Blockstein (Gruppe 1)",
+  "en": "Calcium silicate, solid/block unit (group 1)"
+ },
+ {
+  "id": "01-48",
+  "de": "Kalksandstein, Lochstein (Gruppe 2)",
+  "en": "Calcium silicate, perforated unit (group 2)"
+ },
+ {
+  "id": "01-49",
+  "de": "Porenbeton (Gruppe 1)",
+  "en": "Autoclaved aerated concrete (group 1)"
+ },
+ {
+  "id": "01-50",
+  "de": "Leichtbeton, Vollstein (Gruppe 1)",
+  "en": "Lightweight concrete, solid unit (group 1)"
+ },
+ {
+  "id": "01-51",
+  "de": "Mörtel",
+  "en": "Mortar"
+ },
+ {
+  "id": "01-52",
+  "de": "Normalmauermörtel",
+  "en": "General-purpose mortar"
+ },
+ {
+  "id": "01-53",
+  "de": "Dünnbettmörtel",
+  "en": "Thin-layer mortar"
+ },
+ {
+  "id": "01-54",
+  "de": "(normierte Steindruckfestigkeit)",
+  "en": "(normalised compressive strength of the units)"
+ },
+ {
+  "id": "01-55",
+  "de": "(Mörteldruckfestigkeit)",
+  "en": "(mortar compressive strength)"
+ },
+ {
+  "id": "01-56",
+  "de": "f<sub>k</sub> selbst vorgeben (Tabelle NA / Zulassung)",
+  "en": "enter f<sub>k</sub> myself (NA table / approval)"
+ },
+ {
+  "id": "01-57",
+  "de": "Ohne eigenen Wert rechnet size f<sub>k</sub> = K·f<sub>b</sub><sup>α</sup>·f<sub>m</sub><sup>β</sup> nach DIN EN 1996-1-1, Gl. (3.1)–(3.3) mit den empfohlenen K-Werten. Die Tabellen des deutschen NA bzw. die Zulassung liefern oft kleinere Werte und sind im Projekt maßgebend.",
+  "en": "Without an own value, size calculates f<sub>k</sub> = K·f<sub>b</sub><sup>α</sup>·f<sub>m</sub><sup>β</sup> to DIN EN 1996-1-1, eq. (3.1)–(3.3) with the recommended K values. The tables of the German NA or the approval often give smaller values and govern in a project."
+ },
+ {
+  "id": "01-58",
+  "de": "Wand und Decke",
+  "en": "Wall and floor"
+ },
+ {
+  "id": "01-59",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-60",
+  "de": "Wanddicke t [mm]",
+  "en": "Wall thickness t [mm]"
+ },
+ {
+  "id": "01-61",
+  "de": "lichte Wandhöhe h [m]",
+  "en": "Clear wall height h [m]"
+ },
+ {
+  "id": "01-62",
+  "de": "Wandlänge l [m]",
+  "en": "Wall length l [m]"
+ },
+ {
+  "id": "01-63",
+  "de": "Lage der Wand",
+  "en": "Position of the wall"
+ },
+ {
+  "id": "01-64",
+  "de": "Endauflager (Außenwand)",
+  "en": "End support (external wall)"
+ },
+ {
+  "id": "01-65",
+  "de": "Endauflager unter Dachdecke",
+  "en": "End support below the roof slab"
+ },
+ {
+  "id": "01-66",
+  "de": "Zwischenauflager (Innenwand)",
+  "en": "Intermediate support (internal wall)"
+ },
+ {
+  "id": "01-67",
+  "de": "Decke",
+  "en": "Floor"
+ },
+ {
+  "id": "01-68",
+  "de": "Stahlbetondecke",
+  "en": "Reinforced concrete slab"
+ },
+ {
+  "id": "01-69",
+  "de": "Holzbalkendecke",
+  "en": "Timber joist floor"
+ },
+ {
+  "id": "01-70",
+  "de": "Deckenauflagertiefe a [mm]",
+  "en": "Bearing depth of the floor a [mm]"
+ },
+ {
+  "id": "01-71",
+  "de": "Deckenstützweite l<sub>f</sub> [m]",
+  "en": "Floor span l<sub>f</sub> [m]"
+ },
+ {
+  "id": "01-72",
+  "de": "(am Wandfuß, Bemessungswert)",
+  "en": "(at the wall base, design value)"
+ },
+ {
+  "id": "01-73",
+  "de": "Vereinfachtes Verfahren nach DIN EN 1996-3/NA: zweiseitig gehaltene Wand, Gebäudehöhe ≤ 20 m, Nutzlast ≤ 5 kN/m², l<sub>f</sub> ≤ 6 m. N<sub>Ed</sub> für die Wandlänge l, z. B. 1,35·G + 1,5·Q.",
+  "en": "Simplified method to DIN EN 1996-3/NA: wall restrained at top and bottom, building height ≤ 20 m, imposed load ≤ 5 kN/m², l<sub>f</sub> ≤ 6 m. N<sub>Ed</sub> for the wall length l, e.g. 1.35·G + 1.5·Q."
+ },
+ {
+  "id": "01-74",
+  "de": "Einzellast auf der Wand",
+  "en": "Concentrated load on the wall"
+ },
+ {
+  "id": "01-75",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-76",
+  "de": "Wanddicke t [mm]",
+  "en": "Wall thickness t [mm]"
+ },
+ {
+  "id": "01-77",
+  "de": "Wandhöhe bis zur Last h<sub>c</sub> [m]",
+  "en": "Wall height to the load h<sub>c</sub> [m]"
+ },
+ {
+  "id": "01-78",
+  "de": "Auflagerlänge l<sub>b</sub> [mm]",
+  "en": "Bearing length l<sub>b</sub> [mm]"
+ },
+ {
+  "id": "01-79",
+  "de": "Auflagerbreite [mm] (≤ t)",
+  "en": "Bearing width [mm] (≤ t)"
+ },
+ {
+  "id": "01-80",
+  "de": "Abstand zum Wandende a<sub>1</sub> [mm]",
+  "en": "Distance to the wall end a<sub>1</sub> [mm]"
+ },
+ {
+  "id": "01-81",
+  "de": "Wandlänge l [m]",
+  "en": "Wall length l [m]"
+ },
+ {
+  "id": "01-82",
+  "de": "Last mittig auf der Wanddicke (e ≤ t/4). a<sub>1</sub> = 0: Auflager direkt am Wandende (z. B. Sturz neben einer Öffnung).",
+  "en": "Load centred on the wall thickness (e ≤ t/4). a<sub>1</sub> = 0: bearing directly at the wall end (e.g. lintel next to an opening)."
+ },
+ {
+  "id": "01-83",
+  "de": "Kellerwand unter Erddruck",
+  "en": "Basement wall under earth pressure"
+ },
+ {
+  "id": "01-84",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-85",
+  "de": "Wanddicke t [mm]",
+  "en": "Wall thickness t [mm]"
+ },
+ {
+  "id": "01-86",
+  "de": "lichte Höhe h [m]",
+  "en": "Clear height h [m]"
+ },
+ {
+  "id": "01-87",
+  "de": "Anschütthöhe h<sub>e</sub> [m]",
+  "en": "Backfill height h<sub>e</sub> [m]"
+ },
+ {
+  "id": "01-88",
+  "de": "Abstand der Querwände b<sub>c</sub> [m]",
+  "en": "Spacing of cross walls b<sub>c</sub> [m]"
+ },
+ {
+  "id": "01-89",
+  "de": "(Wichte der Anschüttung)",
+  "en": "(unit weight of the backfill)"
+ },
+ {
+  "id": "01-90",
+  "de": "Geländelast q<sub>k</sub> [kN/m²]",
+  "en": "Surcharge q<sub>k</sub> [kN/m²]"
+ },
+ {
+  "id": "01-91",
+  "de": "(1,0·G, oben in der Wand)",
+  "en": "(1.0·G, at the top of the wall)"
+ },
+ {
+  "id": "01-92",
+  "de": "Vereinfachter Nachweis nach DIN EN 1996-3, 4.5: Die Auflast muss groß genug sein, damit sich in der Wand ein Druckbogen gegen den Erddruck bilden kann — aber nicht so groß, dass das Mauerwerk versagt.",
+  "en": "Simplified check to DIN EN 1996-3, 4.5: the vertical load must be large enough for a compression arch against the earth pressure to form in the wall — but not so large that the masonry fails."
+ },
+ {
+  "id": "01-93",
+  "de": "Aussteifende Wand (Scheibe)",
+  "en": "Bracing wall (shear wall)"
+ },
+ {
+  "id": "01-94",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-95",
+  "de": "Wandlänge l [m]",
+  "en": "Wall length l [m]"
+ },
+ {
+  "id": "01-96",
+  "de": "Wanddicke t [mm]",
+  "en": "Wall thickness t [mm]"
+ },
+ {
+  "id": "01-97",
+  "de": "Geschosshöhe h [m]",
+  "en": "Storey height h [m]"
+ },
+ {
+  "id": "01-98",
+  "de": "Lagerung",
+  "en": "Support conditions"
+ },
+ {
+  "id": "01-99",
+  "de": "Kragscheibe (M = V·h)",
+  "en": "Cantilever wall (M = V·h)"
+ },
+ {
+  "id": "01-100",
+  "de": "oben eingespannt (M = V·h/2)",
+  "en": "fixed at the top (M = V·h/2)"
+ },
+ {
+  "id": "01-101",
+  "de": "(1,0·G, günstig)",
+  "en": "(1.0·G, favourable)"
+ },
+ {
+  "id": "01-102",
+  "de": "(Wind, waagerecht in Wandebene)",
+  "en": "(wind, horizontal in the wall plane)"
+ },
+ {
+  "id": "01-103",
+  "de": "Stoßfugen unvermörtelt",
+  "en": "head joints unfilled"
+ },
+ {
+  "id": "01-104",
+  "de": "Schub in Wandebene nach DIN EN 1996-1-1, 6.2: Nur der überdrückte Teil der Wand trägt. Die Auflast erhöht die Schubfestigkeit über die Reibung in den Lagerfugen — deshalb N<sub>Ed</sub> günstig mit 1,0·G ansetzen.",
+  "en": "In-plane shear to DIN EN 1996-1-1, 6.2: only the compressed part of the wall carries load. The vertical load increases the shear strength through friction in the bed joints — so apply N<sub>Ed</sub> favourably with 1.0·G."
+ },
+ {
+  "id": "01-105",
+  "de": "Mauerwerk",
+  "en": "Masonry"
+ },
+ {
+  "id": "01-106",
+  "de": "Fundament und Last",
+  "en": "Footing and load"
+ },
+ {
+  "id": "01-107",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-108",
+  "de": "Breite b [m]",
+  "en": "Width b [m]"
+ },
+ {
+  "id": "01-109",
+  "de": "Länge a [m]",
+  "en": "Length a [m]"
+ },
+ {
+  "id": "01-110",
+  "de": "Einbindetiefe d [m]",
+  "en": "Embedment depth d [m]"
+ },
+ {
+  "id": "01-111",
+  "de": "V<sub>k</sub> [kN] (dauernd, inkl. Fundament)",
+  "en": "V<sub>k</sub> [kN] (sustained, incl. footing)"
+ },
+ {
+  "id": "01-112",
+  "de": "zulässige Setzung s<sub>zul</sub> [cm]",
+  "en": "Permissible settlement s<sub>perm</sub> [cm]"
+ },
+ {
+  "id": "01-113",
+  "de": "Für Setzungen zählen die dauernd wirkenden Lasten (ständig + quasi-ständiger Anteil der veränderlichen), charakteristisch und ohne Teilsicherheitsbeiwerte.",
+  "en": "Settlements are caused by the sustained loads (permanent + quasi-permanent part of the variable loads), characteristic and without partial factors."
+ },
+ {
+  "id": "01-114",
+  "de": "Winkelstützmauer (je m)",
+  "en": "Cantilever retaining wall (per m)"
+ },
+ {
+  "id": "01-115",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-116",
+  "de": "Höhe H [m] (UK Sohle bis Gelände)",
+  "en": "Height H [m] (underside of base to ground)"
+ },
+ {
+  "id": "01-117",
+  "de": "Sohlbreite B [m]",
+  "en": "Base width B [m]"
+ },
+ {
+  "id": "01-118",
+  "de": "Sporn vorn b<sub>v</sub> [m]",
+  "en": "Toe b<sub>v</sub> [m]"
+ },
+ {
+  "id": "01-119",
+  "de": "Wanddicke t<sub>w</sub> [m]",
+  "en": "Stem thickness t<sub>w</sub> [m]"
+ },
+ {
+  "id": "01-120",
+  "de": "Sohldicke t<sub>s</sub> [m]",
+  "en": "Base thickness t<sub>s</sub> [m]"
+ },
+ {
+  "id": "01-121",
+  "de": "Einbindetiefe vorn d [m]",
+  "en": "Embedment depth at the front d [m]"
+ },
+ {
+  "id": "01-122",
+  "de": "Auflast q<sub>k</sub> [kN/m²] (veränderlich)",
+  "en": "Surcharge q<sub>k</sub> [kN/m²] (variable)"
+ },
+ {
+  "id": "01-123",
+  "de": "Wandreibungswinkel δ<sub>a</sub>",
+  "en": "Wall friction angle δ<sub>a</sub>"
+ },
+ {
+  "id": "01-124",
+  "de": "0 (Ersatzwand, waagerechtes Gelände)",
+  "en": "0 (virtual back, level ground)"
+ },
+ {
+  "id": "01-125",
+  "de": "Der Erddruck wirkt auf eine lotrechte Ersatzwand am Ende des hinteren Sporns; die Erde über dem Sporn gehört zum Bauwerk. Gelände waagerecht, kein Grundwasser, Kohäsion im Erddruck nicht angesetzt.",
+  "en": "The earth pressure acts on a vertical virtual back at the end of the heel; the soil above the heel belongs to the structure. Level ground, no groundwater, cohesion not included in the earth pressure."
+ },
+ {
+  "id": "01-126",
+  "de": "Bauwerk im Grundwasser",
+  "en": "Structure in groundwater"
+ },
+ {
+  "id": "01-127",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-128",
+  "de": "Länge L [m]",
+  "en": "Length L [m]"
+ },
+ {
+  "id": "01-129",
+  "de": "Breite B [m]",
+  "en": "Width B [m]"
+ },
+ {
+  "id": "01-130",
+  "de": "Wasser über UK Sohle h<sub>w</sub> [m]",
+  "en": "Water above underside of base h<sub>w</sub> [m]"
+ },
+ {
+  "id": "01-131",
+  "de": "Sohlplatte t<sub>s</sub> [m]",
+  "en": "Base slab t<sub>s</sub> [m]"
+ },
+ {
+  "id": "01-132",
+  "de": "Außenwände t<sub>w</sub> [m]",
+  "en": "External walls t<sub>w</sub> [m]"
+ },
+ {
+  "id": "01-133",
+  "de": "Wandhöhe über Sohle [m]",
+  "en": "Wall height above base [m]"
+ },
+ {
+  "id": "01-134",
+  "de": "Decke t<sub>d</sub> [m] (0 = offen)",
+  "en": "Roof slab t<sub>d</sub> [m] (0 = open)"
+ },
+ {
+  "id": "01-135",
+  "de": "weitere ständige Last g<sub>k</sub> [kN/m²]",
+  "en": "Further permanent load g<sub>k</sub> [kN/m²]"
+ },
+ {
+  "id": "01-136",
+  "de": "Bemessungssituation",
+  "en": "Design situation"
+ },
+ {
+  "id": "01-137",
+  "de": "Nur ständige Lasten wirken stabilisierend, nur der tiefste Bauzustand bzw. ohne Ausbau zählt. Innenwände, Wandreibung und Zugpfähle sind nicht angesetzt (auf der sicheren Seite).",
+  "en": "Only permanent loads act as stabilising, and only the lowest construction stage or the state without finishes counts. Internal walls, wall friction and tension piles are not included (on the safe side)."
+ },
+ {
+  "id": "01-138",
+  "de": "Schweißverbindung",
+  "en": "Welded connection"
+ },
+ {
+  "id": "01-139",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-140",
+  "de": "Fall",
+  "en": "Case"
+ },
+ {
+  "id": "01-141",
+  "de": "Träger an Stirnplatte (Rundumnaht)",
+  "en": "Beam to end plate (all-round weld)"
+ },
+ {
+  "id": "01-142",
+  "de": "Flachstahl an Knotenblech (Flanken-/Stirnnähte)",
+  "en": "Flat bar to gusset plate (side/end welds)"
+ },
+ {
+  "id": "01-143",
+  "de": "Konsolblech an Stütze (exzentrisch)",
+  "en": "Bracket plate to column (eccentric)"
+ },
+ {
+  "id": "01-144",
+  "de": "Stahlsorte (Grundwerkstoff)",
+  "en": "Steel grade (parent metal)"
+ },
+ {
+  "id": "01-145",
+  "de": "Profil, Stirnplatte und Nähte",
+  "en": "Section, end plate and welds"
+ },
+ {
+  "id": "01-146",
+  "de": "Reihe",
+  "en": "Series"
+ },
+ {
+  "id": "01-147",
+  "de": "Profil",
+  "en": "Section"
+ },
+ {
+  "id": "01-148",
+  "de": "Stirnplattendicke t<sub>p</sub> [mm]",
+  "en": "End plate thickness t<sub>p</sub> [mm]"
+ },
+ {
+  "id": "01-149",
+  "de": "Naht am Gurt a<sub>f</sub> [mm]",
+  "en": "Flange weld a<sub>f</sub> [mm]"
+ },
+ {
+  "id": "01-150",
+  "de": "Naht am Steg a<sub>w</sub> [mm]",
+  "en": "Web weld a<sub>w</sub> [mm]"
+ },
+ {
+  "id": "01-151",
+  "de": "(Zug +)",
+  "en": "(tension +)"
+ },
+ {
+  "id": "01-152",
+  "de": "(+ = Zug oben)",
+  "en": "(+ = tension at the top)"
+ },
+ {
+  "id": "01-153",
+  "de": "Doppelkehlnähte rund um das Profil: außen und innen an beiden Gurten, beidseitig am Steg (ohne Ausrundungsbereich). N und M wirken auf alle Nähte, die Querkraft nur auf die Stegnähte.",
+  "en": "Double fillet welds all round the section: outside and inside on both flanges, on both sides of the web (without the root radius zone). N and M act on all welds, the shear force only on the web welds."
+ },
+ {
+  "id": "01-154",
+  "de": "Flachstahl und Nähte",
+  "en": "Flat bar and welds"
+ },
+ {
+  "id": "01-155",
+  "de": "Breite b [mm]",
+  "en": "Width b [mm]"
+ },
+ {
+  "id": "01-156",
+  "de": "Dicke t [mm]",
+  "en": "Thickness t [mm]"
+ },
+ {
+  "id": "01-157",
+  "de": "Knotenblech t<sub>K</sub> [mm]",
+  "en": "Gusset plate t<sub>K</sub> [mm]"
+ },
+ {
+  "id": "01-158",
+  "de": "Nahtdicke a [mm]",
+  "en": "Throat thickness a [mm]"
+ },
+ {
+  "id": "01-159",
+  "de": "Flankennaht l je Seite [mm]",
+  "en": "Side weld l per side [mm]"
+ },
+ {
+  "id": "01-160",
+  "de": "(Zug)",
+  "en": "(tension)"
+ },
+ {
+  "id": "01-161",
+  "de": "Stirnkehlnaht über die Breite b",
+  "en": "End fillet weld across the width b"
+ },
+ {
+  "id": "01-162",
+  "de": "Der Flachstahl liegt auf dem Knotenblech. Flankennähte laufen in Kraftrichtung (Schub τ<sub>∥</sub>), die Stirnnaht quer dazu (σ<sub>⊥</sub> und τ<sub>⊥</sub>).",
+  "en": "The flat bar lies on the gusset plate. Side welds run in the load direction (shear τ<sub>∥</sub>), the end weld across it (σ<sub>⊥</sub> and τ<sub>⊥</sub>)."
+ },
+ {
+  "id": "01-163",
+  "de": "Konsolblech und Nähte",
+  "en": "Bracket plate and welds"
+ },
+ {
+  "id": "01-164",
+  "de": "Blechdicke t [mm]",
+  "en": "Plate thickness t [mm]"
+ },
+ {
+  "id": "01-165",
+  "de": "Blech-/Nahthöhe l [mm]",
+  "en": "Plate/weld height l [mm]"
+ },
+ {
+  "id": "01-166",
+  "de": "Nahtdicke a [mm] (beidseitig)",
+  "en": "Throat thickness a [mm] (both sides)"
+ },
+ {
+  "id": "01-167",
+  "de": "Hebelarm e [mm]",
+  "en": "Lever arm e [mm]"
+ },
+ {
+  "id": "01-168",
+  "de": "(senkrecht)",
+  "en": "(vertical)"
+ },
+ {
+  "id": "01-169",
+  "de": "Stützengurt t<sub>c</sub> [mm]",
+  "en": "Column flange t<sub>c</sub> [mm]"
+ },
+ {
+  "id": "01-170",
+  "de": "Das Blech ist mit zwei senkrechten Kehlnähten an den Stützengurt geschweißt. Die Last F wirkt im Abstand e von der Naht: Moment F·e erzeugt σ, F selbst erzeugt τ<sub>∥</sub>.",
+  "en": "The plate is welded to the column flange with two vertical fillet welds. The load F acts at distance e from the weld: the moment F·e produces σ, F itself produces τ<sub>∥</sub>."
+ },
+ {
+  "id": "01-171",
+  "de": "Schweißnaht",
+  "en": "Weld"
+ },
+ {
+  "id": "01-172",
+  "de": "Gelenkiger Stützenfuß: Die Druckkraft geht über Kontakt in die Platte, die Kehlnähte übertragen die Querkraft. Mörtelfuge ≤ 0,2·min(B<sub>p</sub>; L<sub>p</sub>) und f<sub>ck,Mörtel</sub> ≥ 0,2·f<sub>ck</sub> → β<sub>j</sub> = 2/3.",
+  "en": "Pinned column base: the compression is transferred by contact into the plate, the fillet welds carry the shear force. Grout joint ≤ 0.2·min(B<sub>p</sub>; L<sub>p</sub>) and f<sub>ck,grout</sub> ≥ 0.2·f<sub>ck</sub> → β<sub>j</sub> = 2/3."
+ },
+ {
+  "id": "01-173",
+  "de": "Verbindungsmittel und Anordnung",
+  "en": "Fasteners and arrangement"
+ },
+ {
+  "id": "01-174",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "01-175",
+  "de": "Verbindungsmittel",
+  "en": "Fastener"
+ },
+ {
+  "id": "01-176",
+  "de": "Anordnung",
+  "en": "Arrangement"
+ },
+ {
+  "id": "01-177",
+  "de": "Stahl des Stabdübels",
+  "en": "Dowel steel"
+ },
+ {
+  "id": "01-178",
+  "de": "vorgebohrt",
+  "en": "pre-drilled"
+ },
+ {
+  "id": "01-179",
+  "de": "Kerndurchmesser d<sub>k</sub> [mm]",
+  "en": "Core diameter d<sub>k</sub> [mm]"
+ },
+ {
+  "id": "01-180",
+  "de": "F<sub>ax,Rk</sub> [kN] (aus ETA, 0 = ohne)",
+  "en": "F<sub>ax,Rk</sub> [kN] (from ETA, 0 = none)"
+ },
+ {
+  "id": "01-181",
+  "de": "Hölzer und Blech",
+  "en": "Timber members and plate"
+ },
+ {
+  "id": "01-182",
+  "de": "Holz",
+  "en": "Timber"
+ },
+ {
+  "id": "01-183",
+  "de": "Festigkeitsklasse",
+  "en": "Strength class"
+ },
+ {
+  "id": "01-184",
+  "de": "Blechdicke t<sub>s</sub> [mm]",
+  "en": "Plate thickness t<sub>s</sub> [mm]"
+ },
+ {
+  "id": "01-185",
+  "de": "Kraft-Faser-Winkel α<sub>1</sub> [°]",
+  "en": "Load-to-grain angle α<sub>1</sub> [°]"
+ },
+ {
+  "id": "01-186",
+  "de": "Kraft-Faser-Winkel α<sub>2</sub> [°]",
+  "en": "Load-to-grain angle α<sub>2</sub> [°]"
+ },
+ {
+  "id": "01-187",
+  "de": "Nutzungsklasse",
+  "en": "Service class"
+ },
+ {
+  "id": "01-188",
+  "de": "KLED",
+  "en": "Load-duration class"
+ },
+ {
+  "id": "01-189",
+  "de": "Anzahl, Abstände und Kraft",
+  "en": "Number, spacings and force"
+ },
+ {
+  "id": "01-190",
+  "de": "n in einer Reihe (in Faserrichtung)",
+  "en": "n in a row (parallel to grain)"
+ },
+ {
+  "id": "01-191",
+  "de": "Anzahl Reihen m",
+  "en": "Number of rows m"
+ },
+ {
+  "id": "01-192",
+  "de": "(in der Reihe)",
+  "en": "(within the row)"
+ },
+ {
+  "id": "01-193",
+  "de": "(zwischen Reihen)",
+  "en": "(between rows)"
+ },
+ {
+  "id": "01-194",
+  "de": "(Hirnholzende)",
+  "en": "(end grain)"
+ },
+ {
+  "id": "01-195",
+  "de": "(Rand)",
+  "en": "(edge)"
+ },
+ {
+  "id": "01-196",
+  "de": "Kraft F<sub>Ed</sub> [kN] (gesamt)",
+  "en": "Force F<sub>Ed</sub> [kN] (total)"
+ },
+ {
+  "id": "01-197",
+  "de": "Träger / Stütze",
+  "en": "Beam / column"
+ },
+ {
+  "id": "01-198",
+  "de": "Verbindung",
+  "en": "Connection"
+ },
+ {
+  "id": "01-199",
+  "de": "Stabdübel",
+  "en": "Dowel"
+ },
+ {
+  "id": "01-200",
+  "de": "Nagel (glattschaftig)",
+  "en": "Nail (smooth shank)"
+ },
+ {
+  "id": "01-201",
+  "de": "Holzschraube",
+  "en": "Wood screw"
+ },
+ {
+  "id": "01-202",
+  "de": "Holz – Stahlblech innen – Holz (Schlitzblech)",
+  "en": "Timber – internal steel plate – timber (slotted-in plate)"
+ },
+ {
+  "id": "01-203",
+  "de": "Holz – Holz – Holz (zweischnittig)",
+  "en": "Timber – timber – timber (double shear)"
+ },
+ {
+  "id": "01-204",
+  "de": "Holz – Holz (einschnittig)",
+  "en": "Timber – timber (single shear)"
+ },
+ {
+  "id": "01-205",
+  "de": "Blech – Holz – Blech (Bleche außen)",
+  "en": "Plate – timber – plate (external plates)"
+ },
+ {
+  "id": "01-206",
+  "de": "Blech – Holz (einschnittig)",
+  "en": "Plate – timber (single shear)"
+ },
+ {
+  "id": "01-207",
+  "de": "Holzschrauben: Im Gewinde gilt d<sub>ef</sub> = 1,1·d<sub>k</sub>; bis d<sub>ef</sub> = 6 mm wie Nägel, darüber wie Stabdübel. F<sub>ax,Rk</sub> für den Einhängeeffekt aus der Zulassung.",
+  "en": "Wood screws: in the thread d<sub>ef</sub> = 1.1·d<sub>k</sub>; up to d<sub>ef</sub> = 6 mm like nails, above like dowels. F<sub>ax,Rk</sub> for the rope effect from the approval."
+ },
+ {
+  "id": "01-208",
+  "de": "t<sub>1</sub>: Seitenholz bzw. Holz am Kopf (Nagel), t<sub>2</sub>: Mittelholz bzw. Holz an der Spitze. α = Winkel zwischen Kraft und Faser im jeweiligen Holz.",
+  "en": "t<sub>1</sub>: side member or timber at the head (nail), t<sub>2</sub>: central member or timber at the point. α = angle between force and grain in the respective member."
+ },
+ {
+  "id": "01-209",
+  "de": "Angenommen: Das Hirnholzende ist belastet (a<sub>3,t</sub>), bei α = 0 ist der Rand unbelastet (a<sub>4,c</sub>), sonst belastet (a<sub>4,t</sub>). Die Stäbe einer Reihe liegen nicht versetzt.",
+  "en": "Assumed: the end grain is loaded (a<sub>3,t</sub>); for α = 0 the edge is unloaded (a<sub>4,c</sub>), otherwise loaded (a<sub>4,t</sub>). The fasteners of a row are not staggered."
+ },
+ {
+  "id": "01-210",
+  "de": "Zur Startseite",
+  "en": "Home"
+ },
+ {
+  "id": "01-211",
+  "de": "Positionen",
+  "en": "Positions"
+ },
+ {
+  "id": "01-212",
+  "de": "Speichern",
+  "en": "Save"
+ },
+ {
+  "id": "01-213",
+  "de": "Laden",
+  "en": "Load"
+ },
+ {
+  "id": "01-214",
+  "de": "Löschen",
+  "en": "Delete"
+ },
+ {
+  "id": "01-215",
+  "de": "Wirklich?",
+  "en": "Really?"
+ },
+ {
+  "id": "01-216",
+  "de": "Schnittgrößen aus statiq·calc",
+  "en": "Internal forces from statiq·calc"
+ },
+ {
+  "id": "01-217",
+  "de": "Gespeicherte Berechnung",
+  "en": "Saved calculation"
+ },
+ {
+  "id": "01-218",
+  "de": "Bauteil des Rahmens",
+  "en": "Frame member"
+ },
+ {
+  "id": "01-219",
+  "de": "Riegel",
+  "en": "Beam"
+ },
+ {
+  "id": "01-220",
+  "de": "Stiel (der stärker gedrückte)",
+  "en": "Column (the more compressed one)"
+ },
+ {
+  "id": "01-221",
+  "de": "Übernehmen",
+  "en": "Apply"
+ },
+ {
+  "id": "01-222",
+  "de": "Die Werte gehen in den gerade gewählten Baustoff und das Bauteil — vorher unten den Bereich wählen.",
+  "en": "The values go into the currently selected material and member — choose the area below first."
+ },
+ {
+  "id": "01-223",
+  "de": "Stahlbeton",
+  "en": "Concrete"
+ },
+ {
+  "id": "01-224",
+  "de": "Stahl",
+  "en": "Steel"
+ },
+ {
+  "id": "01-225",
+  "de": "Holz",
+  "en": "Timber"
+ },
+ {
+  "id": "01-226",
+  "de": "Ergebnis",
+  "en": "Result"
+ },
+ {
+  "id": "01-227",
+  "de": "Bericht ansehen",
+  "en": "Show report"
+ },
+ {
+  "id": "01-228",
+  "de": "Drucken / als PDF speichern",
+  "en": "Print / save as PDF"
+ },
+ {
+  "id": "01-229",
+  "de": "Zurück zur Eingabe",
+  "en": "Back to input"
+ },
+ {
+  "id": "01-230",
+  "de": "Bitte Eingaben prüfen",
+  "en": "Please check the input"
+ },
+ {
+  "id": "01-231",
+  "de": "Alle Nachweise erfüllt · größte Ausnutzung {0} %",
+  "en": "All checks satisfied · max. utilisation {0} %"
+ },
+ {
+  "id": "01-232",
+  "de": "Alle Nachweise erfüllt · max. {0} %",
+  "en": "All checks satisfied · max. {0} %"
+ },
+ {
+  "id": "01-233",
+  "de": "{0} Nachweis nicht erfüllt",
+  "en": "{0} check not satisfied"
+ },
+ {
+  "id": "01-234",
+  "de": "{0} Nachweise nicht erfüllt",
+  "en": "{0} checks not satisfied"
+ },
+ {
+  "id": "01-235",
+  "de": " — zum Ergebnis ↓",
+  "en": " — to the result ↓"
+ },
+ {
+  "id": "01-236",
+  "de": "Ergebnisse berechnet",
+  "en": "Results calculated"
+ },
+ {
+  "id": "01-237",
+  "de": "Ergebnisse berechnet (keine Nachweise in diesem Fall)",
+  "en": "Results calculated (no checks in this case)"
+ },
+ {
+  "id": "01-238",
+  "de": "erfüllt",
+  "en": "satisfied"
+ },
+ {
+  "id": "01-239",
+  "de": "nicht erf.",
+  "en": "not satisf."
+ },
+ {
+  "id": "01-240",
+  "de": "Nicht enthalten",
+  "en": "Not included"
+ },
+ {
+  "id": "01-241",
+  "de": "Formeln dazu im",
+  "en": "Formulas in the"
+ },
+ {
+  "id": "01-242",
+  "de": "Nachschlagewerk statiq·ref",
+  "en": "statiq·ref reference"
+ },
+ {
+  "id": "01-243",
+  "de": "Rechenschritte",
+  "en": "Calculation steps"
+ },
+ {
+  "id": "01-244",
+  "de": "Alle aufklappen",
+  "en": "Expand all"
+ },
+ {
+  "id": "01-245",
+  "de": "Alle zuklappen",
+  "en": "Collapse all"
+ },
+ {
+  "id": "01-246",
+  "de": "Ohne Bezeichnung",
+  "en": "Untitled"
+ },
+ {
+  "id": "01-247",
+  "de": "Speichern nicht möglich — der Browser erlaubt hier keinen lokalen Speicher.",
+  "en": "Saving not possible — the browser does not allow local storage here."
+ },
+ {
+  "id": "01-248",
+  "de": "„{0}“ aktualisiert.",
+  "en": "“{0}” updated."
+ },
+ {
+  "id": "01-249",
+  "de": "„{0}“ gespeichert.",
+  "en": "“{0}” saved."
+ },
+ {
+  "id": "01-250",
+  "de": "„{0}“ geladen.",
+  "en": "“{0}” loaded."
+ },
+ {
+  "id": "01-251",
+  "de": "„{0}“ gelöscht.",
+  "en": "“{0}” deleted."
+ },
+ {
+  "id": "01-252",
+  "de": "alle Nachweise erfüllt",
+  "en": "all checks satisfied"
+ },
+ {
+  "id": "01-253",
+  "de": "nicht alle erfüllt",
+  "en": "not all satisfied"
+ },
+ {
+  "id": "01-254",
+  "de": "Noch keine Positionen gespeichert. Die Bezeichnung oben dient als Name.",
+  "en": "No positions saved yet. The name above is used as the position name."
+ },
+ {
+  "id": "01-255",
+  "de": "{0} Themen",
+  "en": "{0} topics"
+ },
+ {
+  "id": "01-256",
+  "de": "Noch keine Berechnung gespeichert. In <a href=\"calc.html\">statiq·calc</a> rechnen und „Berechnung speichern“ — dann lassen sich M, V und N hier übernehmen.",
+  "en": "No calculation saved yet. Calculate in <a href=\"calc.html\">statiq·calc</a> and use “Save calculation” — then M, V and N can be applied here."
+ },
+ {
+  "id": "01-257",
+  "de": "<b>Übernommen aus calc:</b>",
+  "en": "<b>Applied from calc:</b>"
+ },
+ {
+  "id": "01-258",
+  "de": "Normalkraft im Riegel N = {0} kN (Druck).",
+  "en": "Axial force in the beam N = {0} kN (compression)."
+ },
+ {
+  "id": "01-259",
+  "de": "Für Mauerwerk bitte die Lasten von Hand eingeben. Auflagerkraft aus calc: {0} kN (z. B. als N<sub>Edc</sub> für die Teilflächenpressung).",
+  "en": "For masonry, please enter the loads by hand. Support reaction from calc: {0} kN (e.g. as N<sub>Edc</sub> for the concentrated load)."
+ },
+ {
+  "id": "01-260",
+  "de": "Für Grundbau bitte die Lasten von Hand und getrennt nach ständig und veränderlich eingeben (calc trennt die Lastarten nicht). Auflagerkraft aus calc: {0} kN.",
+  "en": "For geotechnics, please enter the loads by hand, separated into permanent and variable (calc does not separate load types). Support reaction from calc: {0} kN."
+ },
+ {
+  "id": "01-261",
+  "de": "{0}: N<sub>Ed</sub> = {1} kN, V<sub>Ed</sub> = {2} kN (Querkraft im Stiel)",
+  "en": "{0}: N<sub>Ed</sub> = {1} kN, V<sub>Ed</sub> = {2} kN (shear force in the column)"
+ },
+ {
+  "id": "01-262",
+  "de": "Für Anschlüsse bitte die Kräfte von Hand eingeben (z. B. die Auflagerkraft als V<sub>Ed</sub>: {0} kN).",
+  "en": "For connections, please enter the forces by hand (e.g. the support reaction as V<sub>Ed</sub>: {0} kN)."
+ },
+ {
+  "id": "01-263",
+  "de": "Für Ausklinkung, Satteldachträger und Versatz bitte die Werte von Hand eingeben (z. B. die Auflagerkraft {0} kN).",
+  "en": "For notches, pitched beams and step joints, please enter the values by hand (e.g. the support reaction {0} kN)."
+ },
+ {
+  "id": "01-264",
+  "de": "Für Verbindungen bitte die Kraft von Hand eingeben (z. B. die Auflagerkraft als F<sub>Ed</sub>: {0} kN).",
+  "en": "For connections, please enter the force by hand (e.g. the support reaction as F<sub>Ed</sub>: {0} kN)."
+ },
+ {
+  "id": "01-265",
+  "de": "Momentenverlauf vereinfacht als „{0}“ angesetzt — bitte prüfen.",
+  "en": "Bending moment diagram simplified as “{0}” — please check."
+ },
+ {
+  "id": "01-266",
+  "de": "Durchlaufträger, Feld {0}",
+  "en": "Continuous beam, span {0}"
+ },
+ {
+  "id": "01-267",
+  "de": "Warum nicht erfüllt?",
+  "en": "Why is it not satisfied?"
+ },
+ {
+  "id": "01-268",
+  "de": "So wird der Nachweis erfüllt",
+  "en": "How to satisfy the check"
+ },
+ {
+  "id": "01-269",
+  "de": "Ausnutzung η = {0} > 1.",
+  "en": "Utilisation η = {0} > 1."
+ },
+ {
+  "id": "01-270",
+  "de": "Jeweils nur eine Eingabe geändert, alles andere bleibt gleich:",
+  "en": "Changing only one input at a time, everything else unchanged:"
+ },
+ {
+  "id": "01-271",
+  "de": "(statt {0})",
+  "en": "(instead of {0})"
+ },
+ {
+  "id": "01-272",
+  "de": "damit sind alle Nachweise erfüllt",
+  "en": "then all checks are satisfied"
+ },
+ {
+  "id": "01-273",
+  "de": "Übernehmen",
+  "en": "Apply"
+ },
+ {
+  "id": "01-274",
+  "de": "Mit einer einzelnen Eingabe allein nicht erreichbar — mehrere Größen zugleich ändern (z. B. Querschnitt und Baustoff) oder die Einwirkungen prüfen.",
+  "en": "Not achievable by changing a single input — change several at once (e.g. cross-section and material) or check the actions."
+ },
+ {
+  "id": "01-275",
+  "de": "Dicke Schicht {0} ({1}) [cm]",
+  "en": "Thickness layer {0} ({1}) [cm]"
+ },
+ {
+  "id": "01-276",
+  "de": "T<sub>Ed</sub> [kNm] (Torsionsmoment, GZT)",
+  "en": "T<sub>Ed</sub> [kNm] (torsional moment, ULS)"
+ },
+ {
+  "id": "01-277",
+  "de": "V<sub>Ed</sub> [kN] (Querkraft im selben Schnitt)",
+  "en": "V<sub>Ed</sub> [kN] (shear force in the same section)"
+ },
+ {
+  "id": "01-278",
+  "de": "cot θ (Druckstrebenneigung)",
+  "en": "cot θ (strut inclination)"
+ },
+ {
+  "id": "01-279",
+  "de": "Ø Bügel [mm]",
+  "en": "Ø stirrup [mm]"
+ },
+ {
+  "id": "01-280",
+  "de": "Bügelabstand s [cm]",
+  "en": "Stirrup spacing s [cm]"
+ },
+ {
+  "id": "01-281",
+  "de": "Ø Torsionslängsstäbe [mm]",
+  "en": "Ø longitudinal torsion bars [mm]"
+ },
+ {
+  "id": "01-282",
+  "de": "Anzahl Torsionslängsstäbe (über den Umfang)",
+  "en": "Number of longitudinal torsion bars (around the perimeter)"
+ },
+ {
+  "id": "01-283",
+  "de": "Gleichgewichtstorsion, z. B. Randträger mit einseitig eingespannter Kragplatte. Vereinfachend nach NA cot θ = 1,0 (45°). Die Bügel müssen geschlossen sein; die Torsionslängsstäbe kommen zur Biegebewehrung hinzu.",
+  "en": "Equilibrium torsion, e.g. an edge beam carrying a fixed cantilever slab. Simplified per NA cot θ = 1.0 (45°). Stirrups must be closed; the longitudinal torsion bars are additional to the bending reinforcement."
+ },
+ {
+  "id": "01-284",
+  "de": "Torsion: Schnittgrößen und Bewehrung",
+  "en": "Torsion: internal forces and reinforcement"
+ },
+ {
+  "id": "01-285",
+  "de": "Ø gestoßene Stäbe [mm]",
+  "en": "Ø lapped bars [mm]"
+ },
+ {
+  "id": "01-286",
+  "de": "σ<sub>sd</sub> [N/mm²] (Stahlspannung, max. 435)",
+  "en": "σ<sub>sd</sub> [N/mm²] (steel stress, max. 435)"
+ },
+ {
+  "id": "01-287",
+  "de": "Zugstoß",
+  "en": "Tension lap"
+ },
+ {
+  "id": "01-288",
+  "de": "Druckstoß",
+  "en": "Compression lap"
+ },
+ {
+  "id": "01-289",
+  "de": "Beanspruchung",
+  "en": "Action"
+ },
+ {
+  "id": "01-290",
+  "de": "gut (z. B. untere Lage)",
+  "en": "good (e.g. bottom layer)"
+ },
+ {
+  "id": "01-291",
+  "de": "mäßig (obere Lage in hohen Bauteilen)",
+  "en": "poor (top layer in deep members)"
+ },
+ {
+  "id": "01-292",
+  "de": "Verbundbedingung",
+  "en": "Bond condition"
+ },
+ {
+  "id": "01-293",
+  "de": "Anteil gestoßener Stäbe in einem Schnitt [%]",
+  "en": "Proportion of bars lapped in one section [%]"
+ },
+ {
+  "id": "01-294",
+  "de": "gerade",
+  "en": "straight"
+ },
+ {
+  "id": "01-295",
+  "de": "Haken, Winkelhaken oder Schlaufe",
+  "en": "hook, bend or loop"
+ },
+ {
+  "id": "01-296",
+  "de": "Stabende",
+  "en": "Bar end"
+ },
+ {
+  "id": "01-297",
+  "de": "vorhandene Stoßlänge l<sub>0</sub> [cm]",
+  "en": "Provided lap length l<sub>0</sub> [cm]"
+ },
+ {
+  "id": "01-298",
+  "de": "lichter Abstand der gestoßenen Stäbe a [mm]",
+  "en": "Clear distance between lapped bars a [mm]"
+ },
+ {
+  "id": "01-299",
+  "de": "Ø Querstäbe im Stoß [mm]",
+  "en": "Ø transverse bars in the lap [mm]"
+ },
+ {
+  "id": "01-300",
+  "de": "Abstand der Querstäbe [cm]",
+  "en": "Spacing of transverse bars [cm]"
+ },
+ {
+  "id": "01-301",
+  "de": "σ<sub>sd</sub> = f<sub>yd</sub>·A<sub>s,erf</sub>/A<sub>s,vorh</sub> — bei reichlich Bewehrung kürzer. Ein Stoß gilt als im selben Schnitt, wenn sich die Stoßmitten um weniger als 1,3·l<sub>0</sub> unterscheiden. Beton aus der Karte „Baustoffe“.",
+  "en": "σ<sub>sd</sub> = f<sub>yd</sub>·A<sub>s,req</sub>/A<sub>s,prov</sub> — shorter with ample reinforcement. Laps count as in the same section when their centres are less than 1.3·l<sub>0</sub> apart. Concrete from the “Materials” card."
+ },
+ {
+  "id": "01-302",
+  "de": "Übergreifungsstoß",
+  "en": "Lap splice"
+ },
+ {
+  "id": "01-303",
+  "de": "Breite b [mm]",
+  "en": "Width b [mm]"
+ },
+ {
+  "id": "01-304",
+  "de": "Höhe h [mm]",
+  "en": "Depth h [mm]"
+ },
+ {
+  "id": "01-305",
+  "de": "R 30 (feuerhemmend)",
+  "en": "R 30 (fire-retardant)"
+ },
+ {
+  "id": "01-306",
+  "de": "R 60 (hochfeuerhemmend)",
+  "en": "R 60 (highly fire-retardant)"
+ },
+ {
+  "id": "01-307",
+  "de": "R 90 (feuerbeständig)",
+  "en": "R 90 (fire-resistant)"
+ },
+ {
+  "id": "01-308",
+  "de": "Feuerwiderstandsdauer",
+  "en": "Fire resistance period"
+ },
+ {
+  "id": "01-309",
+  "de": "dreiseitig (Oberseite durch Decke geschützt)",
+  "en": "three sides (top protected by the floor)"
+ },
+ {
+  "id": "01-310",
+  "de": "vierseitig (z. B. Stütze, Unterzug frei)",
+  "en": "four sides (e.g. column, free beam)"
+ },
+ {
+  "id": "01-311",
+  "de": "Brandbeanspruchung",
+  "en": "Fire exposure"
+ },
+ {
+  "id": "01-312",
+  "de": "M<sub>d,fi</sub> [kNm] (Brandfall)",
+  "en": "M<sub>d,fi</sub> [kNm] (fire situation)"
+ },
+ {
+  "id": "01-313",
+  "de": "V<sub>d,fi</sub> [kN] (Brandfall)",
+  "en": "V<sub>d,fi</sub> [kN] (fire situation)"
+ },
+ {
+  "id": "01-314",
+  "de": "Schnittgrößen aus der außergewöhnlichen Kombination G<sub>k</sub> + ψ<sub>1,1</sub>·Q<sub>k,1</sub>; vereinfacht E<sub>d,fi</sub> = η<sub>fi</sub>·E<sub>d</sub> mit η<sub>fi</sub> ≈ 0,6. Nutzungsklasse und KLED spielen im Brandfall keine Rolle (k<sub>mod,fi</sub> = 1,0).",
+  "en": "Internal forces from the accidental combination G<sub>k</sub> + ψ<sub>1,1</sub>·Q<sub>k,1</sub>; simplified E<sub>d,fi</sub> = η<sub>fi</sub>·E<sub>d</sub> with η<sub>fi</sub> ≈ 0.6. Service class and load duration do not matter in fire (k<sub>mod,fi</sub> = 1.0)."
+ },
+ {
+  "id": "01-315",
+  "de": "Abbrand (Brandschutz)",
+  "en": "Charring (fire design)"
+ },
+ {
+  "id": "01-316",
+  "de": "Balkenbreite b [mm]",
+  "en": "Joist width b [mm]"
+ },
+ {
+  "id": "01-317",
+  "de": "Balkenhöhe h [mm]",
+  "en": "Joist depth h [mm]"
+ },
+ {
+  "id": "01-318",
+  "de": "Balkenabstand e [mm]",
+  "en": "Joist spacing e [mm]"
+ },
+ {
+  "id": "01-319",
+  "de": "Spannweite ℓ [m]",
+  "en": "Span ℓ [m]"
+ },
+ {
+  "id": "01-320",
+  "de": "Deckenbreite B [m] (quer zu den Balken)",
+  "en": "Floor width B [m] (across the joists)"
+ },
+ {
+  "id": "01-321",
+  "de": "g<sub>k</sub> [kN/m²] (ständige Last, schwingende Masse)",
+  "en": "g<sub>k</sub> [kN/m²] (permanent load, vibrating mass)"
+ },
+ {
+  "id": "01-322",
+  "de": "Estrichdicke t<sub>E</sub> [mm] (0 = ohne)",
+  "en": "Screed thickness t<sub>E</sub> [mm] (0 = none)"
+ },
+ {
+  "id": "01-323",
+  "de": "E-Modul Estrich [N/mm²]",
+  "en": "Screed modulus E [N/mm²]"
+ },
+ {
+  "id": "01-324",
+  "de": "Klasse I — zwischen Nutzungseinheiten (Wohnungstrenndecke)",
+  "en": "Class I — between separate units (separating floor)"
+ },
+ {
+  "id": "01-325",
+  "de": "Klasse II — innerhalb einer Nutzungseinheit",
+  "en": "Class II — within one unit"
+ },
+ {
+  "id": "01-326",
+  "de": "Anforderung (Deckenklasse)",
+  "en": "Requirement (floor class)"
+ },
+ {
+  "id": "01-327",
+  "de": "Einfeldträger, gelenkig gelagert. Klasse I: f<sub>1</sub> ≥ 8 Hz und w(1 kN) ≤ 0,5 mm; Klasse II: f<sub>1</sub> ≥ 6 Hz und w(1 kN) ≤ 1,0 mm. E-Modul Zementestrich als Anhaltswert; ohne Estrich wirkt nur ein Balken.",
+  "en": "Simply supported single span. Class I: f<sub>1</sub> ≥ 8 Hz and w(1 kN) ≤ 0.5 mm; class II: f<sub>1</sub> ≥ 6 Hz and w(1 kN) ≤ 1.0 mm. Modulus of cement screed as a guide value; without screed only one joist acts."
+ },
+ {
+  "id": "01-328",
+  "de": "Holzbalkendecke: Schwingung",
+  "en": "Timber joist floor: vibration"
+ },
+ {
+  "id": "01-329",
+  "de": "Wasserspiegeldifferenz Δh [m] (außen − innen)",
+  "en": "Head difference Δh [m] (outside − inside)"
+ },
+ {
+  "id": "01-330",
+  "de": "Einbindetiefe t [m] (unter Baugrubensohle)",
+  "en": "Embedment depth t [m] (below excavation level)"
+ },
+ {
+  "id": "01-331",
+  "de": "γ′ [kN/m³] (Boden unter Auftrieb)",
+  "en": "γ′ [kN/m³] (submerged soil)"
+ },
+ {
+  "id": "01-332",
+  "de": "1,35 — günstiger Untergrund (Kies, Sand)",
+  "en": "1.35 — favourable subsoil (gravel, sand)"
+ },
+ {
+  "id": "01-333",
+  "de": "1,80 — ungünstiger Untergrund (Feinsand, Schluff)",
+  "en": "1.80 — unfavourable subsoil (fine sand, silt)"
+ },
+ {
+  "id": "01-334",
+  "de": "Teilsicherheit γ<sub>H</sub> (BS-P)",
+  "en": "Partial factor γ<sub>H</sub> (BS-P)"
+ },
+ {
+  "id": "01-335",
+  "de": "vereinfacht L = Δh + 2·t",
+  "en": "simplified L = Δh + 2·t"
+ },
+ {
+  "id": "01-336",
+  "de": "eigener Wert (Strömungsnetz)",
+  "en": "own value (flow net)"
+ },
+ {
+  "id": "01-337",
+  "de": "Sickerweg",
+  "en": "Seepage path"
+ },
+ {
+  "id": "01-338",
+  "de": "Sickerweg L [m]",
+  "en": "Seepage path L [m]"
+ },
+ {
+  "id": "01-339",
+  "de": "Nachweis am Bodenkörper vor dem Wandfuß (Breite t/2, Höhe t) nach DIN 1054: S′<sub>k</sub>·γ<sub>H</sub> ≤ G′<sub>k</sub>·γ<sub>G,stb</sub>. Der vereinfachte Sickerweg verteilt den Potentialabbau gleichmäßig — eine Näherung.",
+  "en": "Check on the soil body in front of the wall toe (width t/2, height t) to DIN 1054: S′<sub>k</sub>·γ<sub>H</sub> ≤ G′<sub>k</sub>·γ<sub>G,stb</sub>. The simplified seepage path spreads the head loss evenly — an approximation."
+ },
+ {
+  "id": "01-340",
+  "de": "Hydraulischer Grundbruch (Baugrube mit Spundwand)",
+  "en": "Hydraulic heave (excavation with sheet piling)"
+ },
+ {
+  "id": "01-341",
+  "de": "Endsetzung s<sub>∞</sub> [cm] (aus Konsolidation)",
+  "en": "Final settlement s<sub>∞</sub> [cm] (from consolidation)"
+ },
+ {
+  "id": "01-342",
+  "de": "Schichtdicke H [m]",
+  "en": "Layer thickness H [m]"
+ },
+ {
+  "id": "01-343",
+  "de": "c<sub>v</sub> [m²/Jahr] (Konsolidationsbeiwert)",
+  "en": "c<sub>v</sub> [m²/year] (coefficient of consolidation)"
+ },
+ {
+  "id": "01-344",
+  "de": "einseitig (unten undurchlässig)",
+  "en": "one-way (impermeable base)"
+ },
+ {
+  "id": "01-345",
+  "de": "beidseitig (oben und unten Sand)",
+  "en": "two-way (sand above and below)"
+ },
+ {
+  "id": "01-346",
+  "de": "Entwässerung",
+  "en": "Drainage"
+ },
+ {
+  "id": "01-347",
+  "de": "Zeit bis Nutzungsbeginn t [Jahre]",
+  "en": "Time until use begins t [years]"
+ },
+ {
+  "id": "01-348",
+  "de": "zulässige Restsetzung [cm]",
+  "en": "Permissible residual settlement [cm]"
+ },
+ {
+  "id": "01-349",
+  "de": "s<sub>∞</sub> z. B. aus dem Modus Setzung (Anteil der bindigen Schicht). c<sub>v</sub> aus dem Ödometerversuch; Ton etwa 0,5 … 5 m²/Jahr, Schluff 5 … 50 m²/Jahr.",
+  "en": "s<sub>∞</sub> e.g. from the Settlement mode (share of the cohesive layer). c<sub>v</sub> from the oedometer test; clay about 0.5 … 5 m²/year, silt 5 … 50 m²/year."
+ },
+ {
+  "id": "01-350",
+  "de": "Zeitsetzung einer bindigen Schicht",
+  "en": "Time-dependent settlement of a cohesive layer"
+ },
+ {
+  "id": "01-351",
+  "de": "Böschungsneigung β [°]",
+  "en": "Slope angle β [°]"
+ },
+ {
+  "id": "01-352",
+  "de": "Tiefe der Gleitfläche z [m]",
+  "en": "Depth of the slip surface z [m]"
+ },
+ {
+  "id": "01-353",
+  "de": "keine Strömung (trocken)",
+  "en": "no seepage (dry)"
+ },
+ {
+  "id": "01-354",
+  "de": "hangparallel durchströmt (Wasser bis zur Oberfläche)",
+  "en": "seepage parallel to the slope (water up to the surface)"
+ },
+ {
+  "id": "01-355",
+  "de": "Grundwasser",
+  "en": "Groundwater"
+ },
+ {
+  "id": "01-356",
+  "de": "γ<sub>r</sub> [kN/m³] (wassergesättigt)",
+  "en": "γ<sub>r</sub> [kN/m³] (saturated)"
+ },
+ {
+  "id": "01-357",
+  "de": "Bemessungssituation",
+  "en": "Design situation"
+ },
+ {
+  "id": "01-358",
+  "de": "φ′, c′ und γ aus der Karte „Baugrund“. Die unendliche Böschung beschreibt flache, oberflächenparallele Rutschungen; für Böschungen begrenzter Höhe zusätzlich Gleitkreise untersuchen.",
+  "en": "φ′, c′ and γ from the “Ground” card. The infinite slope describes shallow slides parallel to the surface; for slopes of limited height also check slip circles."
+ },
+ {
+  "id": "01-359",
+  "de": "Böschungsbruch (unendliche Böschung)",
+  "en": "Slope failure (infinite slope)"
+ },
+ {
+  "id": "01-360",
+  "de": "Innendurchmesser D [mm]",
+  "en": "Inner diameter D [mm]"
+ },
+ {
+  "id": "01-361",
+  "de": "Wanddicke s [mm]",
+  "en": "Wall thickness s [mm]"
+ },
+ {
+  "id": "01-362",
+  "de": "Stahl (210 000 N/mm²)",
+  "en": "steel (210,000 N/mm²)"
+ },
+ {
+  "id": "01-363",
+  "de": "Guss, duktil (170 000 N/mm²)",
+  "en": "ductile iron (170,000 N/mm²)"
+ },
+ {
+  "id": "01-364",
+  "de": "Beton (30 000 N/mm²)",
+  "en": "concrete (30,000 N/mm²)"
+ },
+ {
+  "id": "01-365",
+  "de": "PVC (3 000 N/mm²)",
+  "en": "PVC (3,000 N/mm²)"
+ },
+ {
+  "id": "01-366",
+  "de": "PE-HD (1 000 N/mm²)",
+  "en": "HDPE (1,000 N/mm²)"
+ },
+ {
+  "id": "01-367",
+  "de": "Rohrwerkstoff (E-Modul)",
+  "en": "Pipe material (modulus E)"
+ },
+ {
+  "id": "01-368",
+  "de": "Leitungslänge L [m] (bis zum Behälter)",
+  "en": "Pipe length L [m] (to the reservoir)"
+ },
+ {
+  "id": "01-369",
+  "de": "Schließzeit t<sub>s</sub> [s]",
+  "en": "Closing time t<sub>s</sub> [s]"
+ },
+ {
+  "id": "01-370",
+  "de": "Betriebsdruck p<sub>0</sub> [bar] (an der Armatur)",
+  "en": "Operating pressure p<sub>0</sub> [bar] (at the valve)"
+ },
+ {
+  "id": "01-371",
+  "de": "Nenndruck PN [bar]",
+  "en": "Nominal pressure PN [bar]"
+ },
+ {
+  "id": "01-372",
+  "de": "Vollständiges Schließen (Δv = v<sub>0</sub>). Die Näherung nach Michaud setzt lineares Schließen voraus; viele Armaturen schließen zuletzt schnell — dann ist der Stoß größer.",
+  "en": "Complete closure (Δv = v<sub>0</sub>). The Michaud approximation assumes linear closure; many valves close fast at the end — the surge is then larger."
+ },
+ {
+  "id": "01-373",
+  "de": "Druckstoß beim Schließen einer Armatur",
+  "en": "Water hammer when closing a valve"
+ }
+]

@@ -1,0 +1,858 @@
+{
+"21-0": {
+"fr": "f<sub>d,fi</sub> = k<sub>mod,fi</sub> · k<sub>fi</sub> · f<sub>k</sub> / γ<sub>M,fi</sub> avec k<sub>mod,fi</sub> = 1,0 et γ<sub>M,fi</sub> = 1,0",
+"es": "f<sub>d,fi</sub> = k<sub>mod,fi</sub> · k<sub>fi</sub> · f<sub>k</sub> / γ<sub>M,fi</sub> con k<sub>mod,fi</sub> = 1,0 y γ<sub>M,fi</sub> = 1,0"
+},
+"21-1": {
+"fr": "f<sub>u,k</sub> — résistance caractéristique à la traction de la broche en acier (p. ex. S235 : 360 N/mm²)",
+"es": "f<sub>u,k</sub> — resistencia característica a tracción del pasador de acero (p. ej. S235: 360 N/mm²)"
+},
+"21-2": {
+"fr": "f_u — résistance à la traction du fil des pointes, au moins 600 N/mm²",
+"es": "f_u — resistencia a tracción del alambre de los clavos, como mínimo 600 N/mm²"
+},
+"21-3": {
+"fr": "g<sub>k</sub> [kN/m] (poids propre inclus)",
+"es": "g<sub>k</sub> [kN/m] (incluido el peso propio)"
+},
+"21-4": {
+"fr": "vitesse de carbonisation fictive β<sub>n</sub> = 0,7 mm/min (BLC, tab. 3.1)",
+"es": "velocidad de carbonización nocional β<sub>n</sub> = 0,7 mm/min (MLE, tabla 3.1)"
+},
+"21-5": {
+"fr": "k<sub>0</sub> = t/20 pour t &lt; 20 min, sinon 1,0 (surfaces non protégées)",
+"es": "k<sub>0</sub> = t/20 para t &lt; 20 min, en otro caso 1,0 (superficies no protegidas)"
+},
+"21-6": {
+"fr": "k<sub>90</sub> = 1,35 + 0,015·d (bois résineux)",
+"es": "k<sub>90</sub> = 1,35 + 0,015·d (madera de conífera)"
+},
+"21-7": {
+"fr": "k<sub>def</sub> — coefficient de déformation (EN 1995-1-1, tab. 3.2). « — » : non admis dans cette classe de service.",
+"es": "k<sub>def</sub> — coeficiente de deformación (EN 1995-1-1, tabla 3.2). «—»: no admitido en esta clase de servicio."
+},
+"21-8": {
+"fr": "k<sub>mod</sub> tient compte de l'influence de la durée de chargement et de l'humidité du bois (classe de service) sur la résistance. Valable pour le bois massif, le BLC et le LVL.",
+"es": "k<sub>mod</sub> tiene en cuenta la influencia de la duración de la carga y del contenido de humedad de la madera (clase de servicio) sobre la resistencia. Válido para madera maciza, MLE y LVL."
+},
+"21-9": {
+"fr": "k<sub>mod</sub> — coefficient de modification (durée de chargement + classe de service)<br> γ<sub>M</sub> — coefficient partiel (selon l'AN Allemagne : 1,30)",
+"es": "k<sub>mod</sub> — coeficiente de modificación (duración de la carga + clase de servicio)<br> γ<sub>M</sub> — coeficiente parcial (según el AN de Alemania: 1,30)"
+},
+"21-10": {
+"fr": "court terme/instantanée (vent)",
+"es": "corta duración/instantánea (viento)"
+},
+"21-11": {
+"fr": "déterminant : <b>permanente + charge d'exploitation cat. A/B (habitation, bureaux)</b> avec q<sub>d</sub> = 6,45 kN/m et k<sub>mod</sub> = 0,80",
+"es": "determinante: <b>permanente + sobrecarga de uso cat. A/B (vivienda, oficinas)</b> con q<sub>d</sub> = 6,45 kN/m y k<sub>mod</sub> = 0,80"
+},
+"21-12": {
+"fr": "en haut (fibre comprimée)",
+"es": "arriba (borde comprimido)"
+},
+"21-13": {
+"fr": "quasi permanente",
+"es": "cuasipermanente"
+},
+"21-14": {
+"fr": "extrémité chargée à droite (t), extrémité non chargée à gauche (c)",
+"es": "extremo cargado a la derecha (t), extremo no cargado a la izquierda (c)"
+},
+"21-15": {
+"fr": "fil rond",
+"es": "alambre redondo"
+},
+"21-16": {
+"fr": "voir statiq·size (Bois › Entaille)",
+"es": "véase statiq·size (Madera › Entalladura)"
+},
+"21-17": {
+"fr": "statiq·size est en préparation",
+"es": "statiq·size está en preparación"
+},
+"21-18": {
+"fr": "en bas (fibre tendue)",
+"es": "abajo (borde traccionado)"
+},
+"21-19": {
+"fr": "charge variable",
+"es": "carga variable"
+},
+"21-20": {
+"fr": "entièrement à partir de",
+"es": "completo a partir de"
+},
+"21-21": {
+"fr": "flexion déviée",
+"es": "flexión biaxial"
+},
+"21-22": {
+"fr": "Aperçu des coefficients — DIN EN 1995-1-1 avec AN",
+"es": "Resumen de coeficientes — DIN EN 1995-1-1 con AN"
+},
+"21-23": {
+"fr": "Diamètres usuels",
+"es": "Diámetros habituales"
+},
+"21-24": {
+"fr": "α = 0° : f<sub>c,0,d</sub> · α = 90° : k<sub>c,90</sub> · f<sub>c,90,d</sub> · entre les deux, transition continue (assemblage à entaille, assemblage de contrefiche, assemblage à embrèvement de chevron)",
+"es": "α = 0°: f<sub>c,0,d</sub> · α = 90°: k<sub>c,90</sub> · f<sub>c,90,d</sub> · entre ambos, transición continua (unión a cajeado, unión de tornapunta, embarbillado de cabio)"
+},
+"21-25": {
+"fr": "β<sub>c</sub> = 0,2 pour le bois massif · 0,1 pour le BLC et le LVL<br> Pour λ<sub>rel</sub> ≤ 0,3, aucune vérification au flambement n'est nécessaire (k<sub>c</sub> = 1).",
+"es": "β<sub>c</sub> = 0,2 para madera maciza · 0,1 para MLE y LVL<br> Para λ<sub>rel</sub> ≤ 0,3 no es necesaria la comprobación a pandeo (k<sub>c</sub> = 1)."
+},
+"21-26": {
+"fr": "β<sub>n</sub> [mm/min] (fictive, arêtes comprises)",
+"es": "β<sub>n</sub> [mm/min] (nocional, incluidas las aristas)"
+},
+"21-27": {
+"fr": "γ<sub>G</sub> = 1,35 (défavorable) ou 1,00 (favorable) · γ<sub>Q</sub> = 1,50 · ψ<sub>0</sub> — coefficient de combinaison<br> Q<sub>k,1</sub> est l'action dominante ; chaque charge variable doit être examinée une fois comme action dominante.",
+"es": "γ<sub>G</sub> = 1,35 (desfavorable) o 1,00 (favorable) · γ<sub>Q</sub> = 1,50 · ψ<sub>0</sub> — coeficiente de combinación<br> Q<sub>k,1</sub> es la acción principal; cada carga variable debe estudiarse una vez como acción principal."
+},
+"21-28": {
+"fr": "γ<sub>M</sub> couvre la dispersion des propriétés des matériaux et les incertitudes de modèle. Il figure au dénominateur de la valeur de calcul de la résistance.",
+"es": "γ<sub>M</sub> cubre la dispersión de las propiedades del material y las incertidumbres del modelo. Figura en el denominador del valor de cálculo de la resistencia."
+},
+"21-29": {
+"fr": "λ = ℓ<sub>ef</sub> / i&nbsp;&nbsp;&nbsp; avec&nbsp; i = √(I / A)<br><br> élancement relatif :<br> λ<sub>rel</sub> = (λ / π) · √( f<sub>c,0,k</sub> / E<sub>0,05</sub> )",
+"es": "λ = ℓ<sub>ef</sub> / i&nbsp;&nbsp;&nbsp; con&nbsp; i = √(I / A)<br><br> esbeltez relativa:<br> λ<sub>rel</sub> = (λ / π) · √( f<sub>c,0,k</sub> / E<sub>0,05</sub> )"
+},
+"21-30": {
+"fr": "ρ<sub>k</sub> en kg/m³ · Pour les essences sensibles à la fente (p. ex. douglas) : t ≥ max { 14·d ; (13·d − 30) · ρ<sub>k</sub> / 200 }.",
+"es": "ρ<sub>k</sub> en kg/m³ · Para especies sensibles al hendimiento (p. ej. pino Douglas): t ≥ max { 14·d ; (13·d − 30) · ρ<sub>k</sub> / 200 }."
+},
+"21-31": {
+"fr": "σ<sub>c,0,d</sub> = N<sub>c,d</sub> / A ≤ f<sub>c,0,d</sub> (barres trapues, sinon flambement)",
+"es": "σ<sub>c,0,d</sub> = N<sub>c,d</sub> / A ≤ f<sub>c,0,d</sub> (barras achaparradas; en otro caso, pandeo)"
+},
+"21-32": {
+"fr": "σ<sub>c,90,d</sub> / (k<sub>c,90</sub> · f<sub>c,90,d</sub>) = 0,83 / (1,50 · 1,54) = 0,358 ≤ 1 <b class=\"ok-t\">✓ vérifié</b>",
+"es": "σ<sub>c,90,d</sub> / (k<sub>c,90</sub> · f<sub>c,90,d</sub>) = 0,83 / (1,50 · 1,54) = 0,358 ≤ 1 <b class=\"ok-t\">✓ cumple</b>"
+},
+"21-33": {
+"fr": "σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + k<sub>m</sub> · σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1 et k<sub>m</sub> · σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1",
+"es": "σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + k<sub>m</sub> · σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1 y k<sub>m</sub> · σ<sub>m,y,d</sub>/f<sub>m,y,d</sub> + σ<sub>m,z,d</sub>/f<sub>m,z,d</sub> ≤ 1"
+},
+"21-34": {
+"fr": "σ<sub>t,0,d</sub> = N<sub>t,d</sub> / A<sub>n</sub> ≤ k<sub>h</sub> · f<sub>t,0,d</sub> (A<sub>n</sub> = section nette, déduire les trous ; k<sub>h</sub> avec le plus grand côté de la section)",
+"es": "σ<sub>t,0,d</sub> = N<sub>t,d</sub> / A<sub>n</sub> ≤ k<sub>h</sub> · f<sub>t,0,d</sub> (A<sub>n</sub> = sección neta, descontar los agujeros; k<sub>h</sub> con el lado mayor de la sección)"
+},
+"21-35": {
+"fr": "τ<sub>d</sub> = 1,5 · V<sub>d</sub> / (b<sub>ef</sub> · h) ≤ f<sub>v,d</sub> avec b<sub>ef</sub> = k<sub>cr</sub> · b",
+"es": "τ<sub>d</sub> = 1,5 · V<sub>d</sub> / (b<sub>ef</sub> · h) ≤ f<sub>v,d</sub> con b<sub>ef</sub> = k<sub>cr</sub> · b"
+},
+"21-36": {
+"fr": "τ<sub>tor,d</sub> ≤ k<sub>shape</sub> · f<sub>v,d</sub> avec k<sub>shape</sub> = min(1 + 0,15 · h/b ; 2,0)",
+"es": "τ<sub>tor,d</sub> ≤ k<sub>shape</sub> · f<sub>v,d</sub> con k<sub>shape</sub> = min(1 + 0,15 · h/b; 2,0)"
+},
+"21-37": {
+"fr": "« chargé » (t) : la force pousse l'organe d'assemblage vers l'extrémité ou le bord.",
+"es": "«cargado» (t): la fuerza empuja el medio de unión hacia el extremo o el borde."
+},
+"21-38": {
+"fr": "ℓ<sub>ef</sub> — longueur de flambement (dépend des appuis, voir ci-dessous)<br> i — rayon de giration de la section",
+"es": "ℓ<sub>ef</sub> — longitud de pandeo (depende de la sustentación, véase abajo)<br> i — radio de giro de la sección"
+},
+"21-39": {
+"fr": "ℓ<sub>ef</sub> — longueur efficace de déversement (dépend des appuis et du point d'application de la charge) · I<sub>tor</sub> — moment d'inertie de torsion",
+"es": "ℓ<sub>ef</sub> — longitud efectiva de pandeo lateral (depende de los apoyos y del punto de aplicación de la carga) · I<sub>tor</sub> — momento de inercia a torsión"
+},
+"21-40": {
+"fr": "∥ fibre :&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,0</sub> / γ<sub>M</sub><br> ⊥ fibre :&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,90</sub> / γ<sub>M</sub>",
+"es": "∥ fibra:&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,0</sub> / γ<sub>M</sub><br> ⊥ fibra:&nbsp;&nbsp; R<sub>d</sub> = k<sub>mod</sub> · R<sub>k,90</sub> / γ<sub>M</sub>"
+},
+"21-41": {
+"fr": "≤ 1 <b class=\"bad-t\">✗ non vérifié</b>",
+"es": "≤ 1 <b class=\"bad-t\">✗ no cumple</b>"
+},
+"21-42": {
+"fr": "<option value=\"0\">permanente</option><option value=\"1\">long terme</option><option value=\"2\" selected>moyen terme</option><option value=\"3\">court terme</option><option value=\"4\">instantanée</option>",
+"es": "<option value=\"0\">permanente</option><option value=\"1\">larga duración</option><option value=\"2\" selected>media duración</option><option value=\"3\">corta duración</option><option value=\"4\">instantánea</option>"
+},
+"21-43": {
+"fr": "<option value=\"wind\">Vent (court terme/instantanée)</option>",
+"es": "<option value=\"wind\">Viento (corta duración/instantánea)</option>"
+},
+"21-44": {
+"fr": "<option value=\"na\" selected>1,30 (AN Allemagne)</option>",
+"es": "<option value=\"na\" selected>1,30 (AN de Alemania)</option>"
+},
+"21-45": {
+"fr": "<option value=\"en\">1,30 (recommandation EN)</option>",
+"es": "<option value=\"en\">1,30 (recomendación EN)</option>"
+},
+"21-46": {
+"fr": "<div class=\"table-hint\">Valeurs en N/mm²</div>",
+"es": "<div class=\"table-hint\">Valores en N/mm²</div>"
+},
+"21-47": {
+"fr": "<option value=\"en\">1,25 (recommandation EN)</option>",
+"es": "<option value=\"en\">1,25 (recomendación EN)</option>"
+},
+"21-48": {
+"fr": "<tr><th>Classe de service</th><th>permanente</th><th>long terme</th><th>moyen terme</th><th>court terme</th><th>instantanée</th></tr>",
+"es": "<tr><th>Clase de servicio</th><th>permanente</th><th>larga duración</th><th>media duración</th><th>corta duración</th><th>instantánea</th></tr>"
+},
+"21-49": {
+"fr": " (bois massif)",
+"es": " (madera maciza)"
+},
+"21-50": {
+"fr": "permanente + {}",
+"es": "permanente + {}"
+},
+"21-51": {
+"fr": "§Combinaison de charges déterminante (charge de calcul divisée par k<sub>mod</sub>)",
+"es": "§Combinación de cargas determinante (carga de cálculo dividida por k<sub>mod</sub>)"
+},
+"21-52": {
+"fr": "!déterminant : <b>{}</b> avec q<sub>d</sub> = {} kN/m et k<sub>mod</sub> = {}",
+"es": "!determinante: <b>{}</b> con q<sub>d</sub> = {} kN/m y k<sub>mod</sub> = {}"
+},
+"21-53": {
+"fr": "permanente + charge d'exploitation cat. A/B (habitation, bureaux)",
+"es": "permanente + sobrecarga de uso cat. A/B (vivienda, oficinas)"
+},
+"21-54": {
+"fr": "Bois massif : k<sub>h</sub> = min((150/h)<sup>0,2</sup> ; 1,3) pour h < 150 mm",
+"es": "Madera maciza: k<sub>h</sub> = min((150/h)<sup>0,2</sup>; 1,3) para h < 150 mm"
+},
+"21-55": {
+"fr": "!Coefficient de hauteur {} → k<sub>h</sub> = {}",
+"es": "!Coeficiente de altura {} → k<sub>h</sub> = {}"
+},
+"21-56": {
+"fr": "§Cisaillement (6.1.7 avec coefficient de fissuration k<sub>cr</sub>)",
+"es": "§Cortante (6.1.7 con coeficiente de fisuración k<sub>cr</sub>)"
+},
+"21-57": {
+"fr": "!Appui d'extrémité, longueur l = {} mm, efficace l<sub>ef</sub> = l + 30 mm = {} mm · k<sub>c,90</sub> = {} ({}, appui ponctuel)",
+"es": "!Apoyo extremo, longitud l = {} mm, efectiva l<sub>ef</sub> = l + 30 mm = {} mm · k<sub>c,90</sub> = {} ({}, apoyo discreto)"
+},
+"21-58": {
+"fr": "§Flèche (ELS, sans déformation d'effort tranchant, k<sub>def</sub> = {}, ψ<sub>2</sub> = {})",
+"es": "§Flecha (ELS, sin deformación por cortante, k<sub>def</sub> = {}, ψ<sub>2</sub> = {})"
+},
+"21-59": {
+"fr": "Poutre sur deux appuis {} {}/{}, L = {} m",
+"es": "Viga biapoyada {} {}/{}, L = {} m"
+},
+"21-60": {
+"fr": "permanente + charge d'exploitation cat. C/D",
+"es": "permanente + sobrecarga de uso cat. C/D"
+},
+"21-61": {
+"fr": "permanente + neige (jusqu'à 1000 m)",
+"es": "permanente + nieve (hasta 1000 m)"
+},
+"21-62": {
+"fr": "permanente + vent",
+"es": "permanente + viento"
+},
+"21-63": {
+"fr": "§Résistance sous l'angle α = {}° (formule de type Hankinson 6.16)",
+"es": "§Resistencia bajo el ángulo α = {}° (fórmula tipo Hankinson 6.16)"
+},
+"21-64": {
+"fr": "Compression à {}° par rapport au fil",
+"es": "Compresión a {}° respecto a la fibra"
+},
+"21-65": {
+"fr": "§Flambement autour de y (dans la direction h)",
+"es": "§Pandeo alrededor de y (en la dirección h)"
+},
+"21-66": {
+"fr": "§Flambement autour de z (dans la direction b)",
+"es": "§Pandeo alrededor de z (en la dirección b)"
+},
+"21-67": {
+"fr": "§Vérifications (6.23) et (6.24), k<sub>m</sub> = 0,7",
+"es": "§Comprobaciones (6.23) y (6.24), k<sub>m</sub> = 0,7"
+},
+"21-68": {
+"fr": "Barre comprimée {} {}/{}",
+"es": "Barra comprimida {} {}/{}"
+},
+"21-69": {
+"fr": "§Longueur efficace de déversement (tab. 6.1)",
+"es": "§Longitud efectiva de pandeo lateral (tabla 6.1)"
+},
+"21-70": {
+"fr": "sur la fibre comprimée (en haut, défavorable)",
+"es": "en el borde comprimido (arriba, desfavorable)"
+},
+"21-71": {
+"fr": "!{} ; charge {}",
+"es": "!{}; carga {}"
+},
+"21-72": {
+"fr": "§Contrainte critique de flexion",
+"es": "§Tensión crítica de flexión"
+},
+"21-73": {
+"fr": "!BLC : formule générale avec G<sub>0,05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = {} · 10⁶ mm⁴",
+"es": "!MLE: fórmula general con G<sub>0,05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = {} · 10⁶ mm⁴"
+},
+"21-74": {
+"fr": "Déversement {} {}/{}, L = {} m",
+"es": "Pandeo lateral {} {}/{}, L = {} m"
+},
+"21-75": {
+"fr": "!Bois massif résineux, section rectangulaire : formule simplifiée (6.32)",
+"es": "!Madera maciza de conífera, sección rectangular: fórmula simplificada (6.32)"
+},
+"21-76": {
+"fr": "à l'axe neutre",
+"es": "en el eje del centro de gravedad"
+},
+"21-77": {
+"fr": "sur la fibre tendue (en bas, favorable)",
+"es": "en el borde traccionado (abajo, favorable)"
+},
+"21-78": {
+"fr": "§Profondeur de carbonisation après t = {} min",
+"es": "§Profundidad de carbonización tras t = {} min"
+},
+"21-79": {
+"fr": "!vitesse de carbonisation fictive β<sub>n</sub> = {} mm/min ({}, tab. 3.1)",
+"es": "!velocidad de carbonización nocional β<sub>n</sub> = {} mm/min ({}, tabla 3.1)"
+},
+"21-80": {
+"fr": "sur trois faces, face supérieure protégée",
+"es": "por tres caras, cara superior protegida"
+},
+"21-81": {
+"fr": "§Résistance en situation d'incendie (k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0)",
+"es": "§Resistencia en situación de incendio (k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0)"
+},
+"21-82": {
+"fr": "Carbonisation {} {}/{}, R {}",
+"es": "Carbonización {} {}/{}, R {}"
+},
+"21-83": {
+"fr": "<div class=\"figure\">{}</div>\n    <div class=\"figure-cap\">La force est dirigée vers l'extrémité droite et le bord supérieur : c'est là que se trouvent\n      l'extrémité <b>chargée</b> (a<sub>3,t</sub>) et le bord <b>chargé</b> (a<sub>4,t</sub>).\n      Du côté opposé, les valeurs plus petites pour extrémités et bords <b>non chargés</b> s'appliquent (a<sub>3,c</sub>, a<sub>4,c</sub>).</div>",
+"es": "<div class=\"figure\">{}</div>\n    <div class=\"figure-cap\">La fuerza apunta hacia el extremo derecho y el borde superior: allí se encuentran\n      el extremo <b>cargado</b> (a<sub>3,t</sub>) y el borde <b>cargado</b> (a<sub>4,t</sub>).\n      En el lado opuesto se aplican los valores menores para extremos y bordes <b>no cargados</b> (a<sub>3,c</sub>, a<sub>4,c</sub>).</div>"
+},
+"21-84": {
+"fr": "Cisaillement (t<sub>req</sub> = 9·d = {} mm) : facteur <b>{}</b>{}",
+"es": "Cortante (t<sub>nec</sub> = 9·d = {} mm): factor <b>{}</b>{}"
+},
+"21-85": {
+"fr": "{}<br>Arrachement : facteur <b>{}</b>{}<br>",
+"es": "{}<br>Extracción: factor <b>{}</b>{}<br>"
+},
+"21-86": {
+"fr": "Cisaillement (t<sub>req</sub> = 9·d = 27,9 mm) : facteur <b>0,90</b>",
+"es": "Cortante (t<sub>nec</sub> = 9·d = 27,9 mm): factor <b>0,90</b>"
+},
+"21-87": {
+"fr": "Épaisseur minimale du bois sans préperçage : <b>{} mm</b>",
+"es": "Espesor mínimo de la madera sin pretaladro: <b>{} mm</b>"
+},
+"21-88": {
+"fr": "Cisaillement : valeurs issues de l'agrément du clou spécial",
+"es": "Cortante: valores según la aprobación del clavo especial"
+},
+"21-89": {
+"fr": "(i) les deux côtés μ₁(α) · s<sub>k</sub> · (ii) et (iii) un côté entier, l'autre 0,5 · μ₁ — la disposition la plus défavorable est déterminante",
+"es": "(i) ambos lados μ₁(α) · s<sub>k</sub> · (ii) y (iii) un lado completo, el otro 0,5 · μ₁ — rige la disposición más desfavorable"
+},
+"21-90": {
+"fr": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/kombinationen\">→ Règles de combinaison</a>",
+"es": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/kombinationen\">→ Reglas de combinación</a>"
+},
+"21-91": {
+"fr": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/psi\">→ Coefficients de combinaison ψ</a>",
+"es": "<a class=\"applink\" href=\"#/lastannahmen/grundlagen/psi\">→ Coeficientes de combinación ψ</a>"
+},
+"21-92": {
+"fr": "<a class=\"applink\" href=\"#/mauerwerk/bemessung/wand\">→ Vérifier le mur avec n<sub>Ed</sub> (maçonnerie)</a>",
+"es": "<a class=\"applink\" href=\"#/mauerwerk/bemessung/wand\">→ Comprobar el muro con n<sub>Ed</sub> (fábrica)</a>"
+},
+"21-93": {
+"fr": "<b>déterminant : N<sub>Ed</sub> = 445,5 kN</b> avec la neige comme action dominante — pas forcément la plus grande charge isolée !",
+"es": "<b>determinante: N<sub>Ed</sub> = 445,5 kN</b> con la nieve como acción principal — ¡no necesariamente la mayor carga individual!"
+},
+"21-94": {
+"fr": "<b>ψ₀</b> réduit les <i>actions d'accompagnement</i> à l'ELU : il est improbable que la neige, le vent et la pleine charge d'exploitation atteignent simultanément leur valeur caractéristique.<br> <b>ψ₁</b> décrit la valeur fréquente (p. ex. pour les vibrations et les ouvertures de fissures).<br> <b>ψ₂</b> décrit la part pratiquement toujours présente — déterminante pour le fluage et la flèche à long terme. C'est pourquoi ψ₂ vaut zéro pour la neige et le vent jusqu'à 1000 m d'altitude : en moyenne, il n'y a là ni neige ni tempête.",
+"es": "<b>ψ₀</b> reduce las <i>acciones concomitantes</i> en ELU: es improbable que la nieve, el viento y la sobrecarga de uso completa alcancen a la vez su valor característico.<br> <b>ψ₁</b> describe el valor frecuente (p. ej. para vibraciones y anchuras de fisura).<br> <b>ψ₂</b> describe la parte que está presente prácticamente siempre — determinante para la fluencia y la flecha a largo plazo. Por eso ψ₂ es cero para nieve y viento en emplazamientos de hasta 1000 m: de media allí no hay nieve ni temporal."
+},
+"21-95": {
+"fr": "<span class=\"st-n\">1</span><span>Valeurs caractéristiques en tête de poteau</span>",
+"es": "<span class=\"st-n\">1</span><span>Valores característicos en la cabeza del pilar</span>"
+},
+"21-96": {
+"fr": "<span class=\"st-n\">1</span><span>Données</span>",
+"es": "<span class=\"st-n\">1</span><span>Datos</span>"
+},
+"21-97": {
+"fr": "<span class=\"st-n\">1</span><span>Pression dynamique de pointe (simplifiée)</span>",
+"es": "<span class=\"st-n\">1</span><span>Presión dinámica de pico (simplificada)</span>"
+},
+"21-98": {
+"fr": "<span class=\"st-n\">1</span><span>Largeur d'influence du mur central</span>",
+"es": "<span class=\"st-n\">1</span><span>Ancho tributario del muro central</span>"
+},
+"21-99": {
+"fr": "<span class=\"st-n\">1</span><span>Charge de neige au sol</span>",
+"es": "<span class=\"st-n\">1</span><span>Carga de nieve sobre el suelo</span>"
+},
+"21-100": {
+"fr": "<span class=\"st-n\">2</span><span>Dimension de référence e</span>",
+"es": "<span class=\"st-n\">2</span><span>Dimensión de referencia e</span>"
+},
+"21-101": {
+"fr": "<span class=\"st-n\">2</span><span>Charges caractéristiques au pied du mur</span>",
+"es": "<span class=\"st-n\">2</span><span>Cargas características en el arranque del muro</span>"
+},
+"21-102": {
+"fr": "<span class=\"st-n\">2</span><span>ELU — chaque action variable une fois comme action dominante (γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50)</span>",
+"es": "<span class=\"st-n\">2</span><span>ELU — cada acción variable una vez como acción principal (γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50)</span>"
+},
+"21-103": {
+"fr": "<span class=\"st-n\">2</span><span>Moment maximal en travée (STR) : q uniquement en travée, console uniquement permanente</span>",
+"es": "<span class=\"st-n\">2</span><span>Momento máximo en vano (STR): q solo en el vano, voladizo solo permanente</span>"
+},
+"21-104": {
+"fr": "<span class=\"st-n\">2</span><span>Part due à l'accumulation par le vent μ<sub>w</sub></span>",
+"es": "<span class=\"st-n\">2</span><span>Parte debida a la acumulación por el viento μ<sub>w</sub></span>"
+},
+"21-105": {
+"fr": "<span class=\"st-n\">3</span><span>Glissement depuis la toiture supérieure μ<sub>s</sub></span>",
+"es": "<span class=\"st-n\">3</span><span>Deslizamiento desde la cubierta superior μ<sub>s</sub></span>"
+},
+"21-106": {
+"fr": "<span class=\"st-n\">3</span><span>Coefficients de pression extérieure pour A = 10,00 m²</span>",
+"es": "<span class=\"st-n\">3</span><span>Coeficientes de presión exterior para A = 10,00 m²</span>"
+},
+"21-107": {
+"fr": "<span class=\"st-n\">3</span><span>Valeur de calcul (ELU, STR)</span>",
+"es": "<span class=\"st-n\">3</span><span>Valor de cálculo (ELU, STR)</span>"
+},
+"21-108": {
+"fr": "<span class=\"st-n\">3</span><span>ELS — combinaison caractéristique (irréversible)</span>",
+"es": "<span class=\"st-n\">3</span><span>ELS — combinación característica (irreversible)</span>"
+},
+"21-109": {
+"fr": "<span class=\"st-n\">3</span><span>Moment sur appui B (STR) : q sur la console</span>",
+"es": "<span class=\"st-n\">3</span><span>Momento sobre el apoyo B (STR): q en el voladizo</span>"
+},
+"21-110": {
+"fr": "<span class=\"st-n\">4</span><span>Soulèvement à l'appui A (EQU) : γ<sub>G,stb</sub> = 0,90 en travée, γ<sub>G,dst</sub> = 1,10 et q sur la console</span>",
+"es": "<span class=\"st-n\">4</span><span>Levantamiento en el apoyo A (EQU): γ<sub>G,stb</sub> = 0,90 en el vano, γ<sub>G,dst</sub> = 1,10 y q en el voladizo</span>"
+},
+"21-111": {
+"fr": "<span class=\"st-n\">4</span><span>Coefficient de forme au décrochement de toiture</span>",
+"es": "<span class=\"st-n\">4</span><span>Coeficiente de forma en el escalón de la cubierta</span>"
+},
+"21-112": {
+"fr": "<span class=\"st-n\">4</span><span>ELS — combinaison fréquente (réversible)</span>",
+"es": "<span class=\"st-n\">4</span><span>ELS — combinación frecuente (reversible)</span>"
+},
+"21-113": {
+"fr": "<span class=\"st-n\">5</span><span>ELS — combinaison quasi permanente (long terme)</span>",
+"es": "<span class=\"st-n\">5</span><span>ELS — combinación cuasipermanente (largo plazo)</span>"
+},
+"21-114": {
+"fr": "<span class=\"st-n\">5</span><span>Charges de neige</span>",
+"es": "<span class=\"st-n\">5</span><span>Cargas de nieve</span>"
+},
+"21-115": {
+"fr": "= A<sub>d</sub> / w<sub>travée</sub>",
+"es": "= A<sub>d</sub> / w<sub>vano</sub>"
+},
+"21-116": {
+"fr": "= A<sub>d</sub>² / (2 · w<sub>travée</sub>)",
+"es": "= A<sub>d</sub>² / (2 · w<sub>vano</sub>)"
+},
+"21-117": {
+"fr": "= w<sub>travée</sub> · l/2 − w<sub>console</sub> · a²/(2l)",
+"es": "= w<sub>vano</sub> · l/2 − w<sub>voladizo</sub> · a²/(2l)"
+},
+"21-118": {
+"fr": "A — altitude du terrain au-dessus du niveau de la mer [m] · zones 1a et 2a : valeurs de la zone 1 ou 2 (y compris les valeurs minimales) × 1,25",
+"es": "A — altitud del terreno sobre el nivel del mar [m] · zonas 1a y 2a: valores de la zona 1 o 2 (también los valores mínimos) × 1,25"
+},
+"21-119": {
+"fr": "A, B, C — murs latéraux (à partir du bord au vent) · D — mur au vent · E — mur sous le vent · interpoler linéairement les valeurs intermédiaires",
+"es": "A, B, C — muros laterales (desde el borde de barlovento) · D — muro de barlovento · E — muro de sotavento · interpolar linealmente los valores intermedios"
+},
+"21-120": {
+"fr": "Faux plafond",
+"es": "Falso techo"
+},
+"21-121": {
+"fr": "Au décrochement de toiture s'accumulent la neige apportée par le vent et la neige glissant de la toiture supérieure.",
+"es": "En el escalón de la cubierta se acumula la nieve arrastrada por el viento y la que se desliza desde la cubierta superior."
+},
+"21-122": {
+"fr": "Au bord au vent et aux angles, la succion est la plus forte (F, A). Les dimensions des zones dépendent de e = min(b ; 2h).",
+"es": "En el borde de barlovento y en las esquinas la succión es máxima (F, A). Las dimensiones de las zonas dependen de e = min(b; 2h)."
+},
+"21-123": {
+"fr": "Hypothèse",
+"es": "Hipótesis"
+},
+"21-124": {
+"fr": "Nombre de planchers n",
+"es": "Número de forjados n"
+},
+"21-125": {
+"fr": "Coefficients de pression extérieure c<sub>pe,10</sub> pour parois verticales (plan rectangulaire, surface d'influence ≥ 10 m²) :",
+"es": "Coeficientes de presión exterior c<sub>pe,10</sub> para paramentos verticales (planta rectangular, superficie de carga ≥ 10 m²):"
+},
+"21-126": {
+"fr": "Enduit extérieur avec ITE",
+"es": "Enlucido exterior con SATE"
+},
+"21-127": {
+"fr": "Accidentelle : E<sub>dA</sub> = Σ G<sub>k</sub> ⊕ A<sub>d</sub> ⊕ ψ<sub>1,1</sub> ou ψ<sub>2,1</sub>·Q<sub>k,1</sub> ⊕ Σ ψ<sub>2,i</sub>·Q<sub>k,i</sub>",
+"es": "Accidental: E<sub>dA</sub> = Σ G<sub>k</sub> ⊕ A<sub>d</sub> ⊕ ψ<sub>1,1</sub> o ψ<sub>2,1</sub>·Q<sub>k,1</sub> ⊕ Σ ψ<sub>2,i</sub>·Q<sub>k,i</sub>"
+},
+"21-128": {
+"fr": "Tassements du sol",
+"es": "Asientos del terreno"
+},
+"21-129": {
+"fr": "Acier de construction",
+"es": "Acero estructural"
+},
+"21-130": {
+"fr": "Pour la toiture à deux versants, examiner en plus les répartitions unilatérales (demi-charge d'un seul côté). Accumulations aux décrochements de toiture et aux superstructures : à traiter séparément.",
+"es": "En cubiertas a dos aguas, estudiar además las distribuciones unilaterales (media carga en un solo lado). Acumulaciones en escalones de cubierta y en elementos sobre la cubierta: tratar por separado."
+},
+"21-131": {
+"fr": "Exemple 1 : poteau intérieur sous toiture et plancher de bureaux",
+"es": "Ejemplo 1: pilar interior bajo cubierta y forjado de oficinas"
+},
+"21-132": {
+"fr": "Exemple 1 : combinaisons pour un poteau",
+"es": "Ejemplo 1: combinaciones para un pilar"
+},
+"21-133": {
+"fr": "Exemple 2 : favorable et défavorable — poutre avec console",
+"es": "Ejemplo 2: favorable y desfavorable — viga con voladizo"
+},
+"21-134": {
+"fr": "Exemple 2 : poutre avec console — disposition des charges pour favorable et défavorable",
+"es": "Ejemplo 2: viga con voladizo — disposición de cargas para favorable y desfavorable"
+},
+"21-135": {
+"fr": "Exemple plancher de bureaux : g<sub>k</sub> = 5,0 kN/m², q<sub>k</sub> = 2,0 kN/m² (cat. B)<br> quasi permanente : 5,0 + 0,3 · 2,0 = <b>5,6 kN/m²</b>&nbsp;&nbsp;·&nbsp;&nbsp;ELU : 1,35 · 5,0 + 1,5 · 2,0 = <b>9,75 kN/m²</b>",
+"es": "Ejemplo forjado de oficinas: g<sub>k</sub> = 5,0 kN/m², q<sub>k</sub> = 2,0 kN/m² (cat. B)<br> cuasipermanente: 5,0 + 0,3 · 2,0 = <b>5,6 kN/m²</b>&nbsp;&nbsp;·&nbsp;&nbsp;ELU: 1,35 · 5,0 + 1,5 · 2,0 = <b>9,75 kN/m²</b>"
+},
+"21-136": {
+"fr": "Exemple logement avec cloisons légères (≤ 3 kN/m) : q<sub>k</sub> = 1,5 + 0,8 = <b>2,3 kN/m²</b>",
+"es": "Ejemplo vivienda con tabiques ligeros (≤ 3 kN/m): q<sub>k</sub> = 1,5 + 0,8 = <b>2,3 kN/m²</b>"
+},
+"21-137": {
+"fr": "Exemple : dalle en béton armé d = 20 cm → 25 · 0,20 = 5,0 kN/m²",
+"es": "Ejemplo: losa de hormigón armado d = 20 cm → 25 · 0,20 = 5,0 kN/m²"
+},
+"21-138": {
+"fr": "Béton : + 1 kN/m³ pour un taux d'armatures usuel, + 1 kN/m³ à l'état frais. Bois : γ ≈ ρ<sub>mean</sub> · g (EN 338 ou EN 14080), p. ex. C24 avec ρ<sub>mean</sub> = 420 kg/m³ → 4,2 kN/m³.",
+"es": "Hormigón: + 1 kN/m³ por cuantía de armadura habitual, + 1 kN/m³ en estado fresco. Madera: γ ≈ ρ<sub>mean</sub> · g (EN 338 o EN 14080), p. ej. C24 con ρ<sub>mean</sub> = 420 kg/m³ → 4,2 kN/m³."
+},
+"21-139": {
+"fr": "Largeur de la toiture supérieure b<sub>1</sub> [m]",
+"es": "Ancho de la cubierta superior b<sub>1</sub> [m]"
+},
+"21-140": {
+"fr": "Largeur perpendiculaire au vent b [m]",
+"es": "Ancho perpendicular al viento b [m]"
+},
+"21-141": {
+"fr": "Largeur de la toiture inférieure b<sub>2</sub> [m]",
+"es": "Ancho de la cubierta inferior b<sub>2</sub> [m]"
+},
+"21-142": {
+"fr": "Bois lamellé-collé GL24h / GL28h",
+"es": "Madera laminada encolada GL24h / GL28h"
+},
+"21-143": {
+"fr": "Surfaces de bureaux, couloirs dans les immeubles de bureaux, cabinets médicaux sans équipement lourd",
+"es": "Superficies de oficinas, pasillos en edificios de oficinas, consultas médicas sin equipos pesados"
+},
+"21-144": {
+"fr": "Toiture g<sub>k</sub> [kN/m²]",
+"es": "Cubierta g<sub>k</sub> [kN/m²]"
+},
+"21-145": {
+"fr": "Pente de toiture α",
+"es": "Pendiente de cubierta α"
+},
+"21-146": {
+"fr": "Pente de toiture α [°]",
+"es": "Pendiente de cubierta α [°]"
+},
+"21-147": {
+"fr": "La charge d'exploitation de toiture H n'est pas combinée avec la neige ou le vent. Catégorie F : Q_k comme charge par essieu sur deux surfaces d'appui.",
+"es": "La sobrecarga de uso de cubierta H no se combina con nieve ni viento. Categoría F: Q_k como carga por eje sobre dos superficies de apoyo."
+},
+"21-148": {
+"fr": "Plancher g<sub>k</sub> [kN/m²] (revêtements compris)",
+"es": "Forjado g<sub>k</sub> [kN/m²] (incl. solado y acabados)"
+},
+"21-149": {
+"fr": "Calculer la composition de plancher",
+"es": "Calcular la composición del forjado"
+},
+"21-150": {
+"fr": "Épaisseur [cm]",
+"es": "Espesor [cm]"
+},
+"21-151": {
+"fr": "L'effet de continuité augmente la charge sur le premier poteau/mur intérieur et décharge les appuis d'extrémité. Pour la maçonnerie, on ajoute les poids propres des murs de tous les niveaux supérieurs.",
+"es": "El efecto de continuidad aumenta la carga sobre el primer pilar/muro interior y descarga los apoyos extremos. En fábrica se suman los pesos propios de los muros de todas las plantas superiores."
+},
+"21-152": {
+"fr": "La charge d'exploitation n'est appliquée que là où elle augmente la grandeur recherchée. Pour le soulèvement (EQU), la charge permanente en travée est stabilisante (0,9), sur la console déstabilisante (1,1).",
+"es": "La sobrecarga de uso solo se aplica donde aumenta la magnitud buscada. Para el levantamiento (EQU), la carga permanente en el vano es estabilizadora (0,9) y en el voladizo desestabilizadora (1,1)."
+},
+"21-153": {
+"fr": "Effet de continuité",
+"es": "Efecto de continuidad"
+},
+"21-154": {
+"fr": "Effet de continuité (poutre à deux travées, charge uniforme) : M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = −2,844 m² par kN/m²",
+"es": "Efecto de continuidad (viga de dos vanos, carga uniforme): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = −2,844 m² por kN/m²"
+},
+"21-155": {
+"fr": "Toitures et aires de stationnement",
+"es": "Cubiertas y zonas de aparcamiento"
+},
+"21-156": {
+"fr": "Isolation en EPS (polystyrène expansé)",
+"es": "Aislamiento de EPS (poliestireno expandido)"
+},
+"21-157": {
+"fr": "Poutre sur deux appuis avec console",
+"es": "Viga biapoyada con voladizo"
+},
+"21-158": {
+"fr": "Hypothèse de poutre isostatique : demi-portées à gauche et à droite",
+"es": "Hipótesis de viga biapoyada: mitad de los vanos a izquierda y derecha"
+},
+"21-159": {
+"fr": "Commerces et grands magasins",
+"es": "Comercios y grandes almacenes"
+},
+"21-160": {
+"fr": "Mur d'extrémité sous un plancher portant dans une direction",
+"es": "Muro extremo bajo un forjado unidireccional"
+},
+"21-161": {
+"fr": "F<sub>s</sub> = s · b · sin α (b — entraxe des supports)",
+"es": "F<sub>s</sub> = s · b · sin α (b — separación de los soportes)"
+},
+"21-162": {
+"fr": "Usines et ateliers à exploitation légère, grandes étables",
+"es": "Fábricas y talleres de uso ligero, grandes establos"
+},
+"21-163": {
+"fr": "Usines et ateliers à exploitation moyenne ou lourde",
+"es": "Fábricas y talleres de uso medio o pesado"
+},
+"21-164": {
+"fr": "Toiture plate",
+"es": "Cubierta plana"
+},
+"21-165": {
+"fr": "Toiture plate (α ≤ 5°) avec rives d'égout à arêtes vives, EN 1991-1-4 tab. 7.2. Un acrotère, des égouts arrondis ou chanfreinés réduisent la succion dans F à H.",
+"es": "Cubierta plana (α ≤ 5°) con aleros de aristas vivas, EN 1991-1-4 tab. 7.2. Un antepecho o aleros redondeados o achaflanados reducen la succión en F a H."
+},
+"21-166": {
+"fr": "Toiture plate, petites surfaces d'influence, pression intérieure",
+"es": "Cubierta plana, superficies de carga pequeñas, presión interior"
+},
+"21-167": {
+"fr": "Couloirs et cuisines dans les hôpitaux, hôtels, maisons de retraite ; caves dans les immeubles d'habitation",
+"es": "Pasillos y cocinas en hospitales, hoteles y residencias de mayores; sótanos en edificios de viviendas"
+},
+"21-168": {
+"fr": "Surfaces avec tables : salles de classe, cafés, restaurants, salles de lecture",
+"es": "Superficies con mesas: aulas, cafés, restaurantes, salas de lectura"
+},
+"21-169": {
+"fr": "Surfaces avec sièges fixes : églises, théâtres, cinémas, amphithéâtres",
+"es": "Superficies con asientos fijos: iglesias, teatros, cines, aulas magnas"
+},
+"21-170": {
+"fr": "Charge surfacique",
+"es": "Carga superficial"
+},
+"21-171": {
+"fr": "Charge surfacique d'une couche : g<sub>k</sub> = γ · d&nbsp;&nbsp; [kN/m²]",
+"es": "Carga superficial de una capa: g<sub>k</sub> = γ · d&nbsp;&nbsp; [kN/m²]"
+},
+"21-172": {
+"fr": "Coefficient de forme de la neige",
+"es": "Coeficiente de forma de la nieve"
+},
+"21-173": {
+"fr": "Formule",
+"es": "Fórmula"
+},
+"21-174": {
+"fr": "Pour les bâtiments jusqu'à 25 m de hauteur, q peut être pris constant sur toute la hauteur :",
+"es": "Para edificios de hasta 25 m de altura, q puede tomarse constante en toda la altura:"
+},
+"21-175": {
+"fr": "G<sub>k</sub> = 180 kN (poids propre) · Q<sub>k,N</sub> = 90 kN (charge d'exploitation (cat. B)) · Q<sub>k,S</sub> = 60 kN (neige, site jusqu'à NN + 1000 m) · Q<sub>k,W</sub> = 20 kN (vent, pression sur la toiture)",
+"es": "G<sub>k</sub> = 180 kN (peso propio) · Q<sub>k,N</sub> = 90 kN (sobrecarga de uso (cat. B)) · Q<sub>k,S</sub> = 60 kN (nieve, emplazamiento hasta NN + 1000 m) · Q<sub>k,W</sub> = 20 kN (viento, presión sobre la cubierta)"
+},
+"21-176": {
+"fr": "Aptitude au service (ELS)",
+"es": "Aptitud al servicio (ELS)"
+},
+"21-177": {
+"fr": "Bâtiment 20,00 × 12,00 m, h = 8,00 m",
+"es": "Edificio 20,00 × 12,00 m, h = 8,00 m"
+},
+"21-178": {
+"fr": "Hauteur du bâtiment h [m]",
+"es": "Altura del edificio h [m]"
+},
+"21-179": {
+"fr": "Altitude du terrain A [m]",
+"es": "Altitud del terreno A [m]"
+},
+"21-180": {
+"fr": "Déterminer la pression dynamique de pointe",
+"es": "Determinar la presión dinámica de pico"
+},
+"21-181": {
+"fr": "Pression dynamique de pointe — méthode simplifiée (DIN EN 1991-1-4/NA, Tab. NA.B.3)",
+"es": "Presión dinámica de pico — método simplificado (DIN EN 1991-1-4/NA, Tab. NA.B.3)"
+},
+"21-182": {
+"fr": "Verre (vitrages)",
+"es": "Vidrio (acristalamientos)"
+},
+"21-183": {
+"fr": "Limite liée à la hauteur de neige : μ<sub>w</sub> ≤ γ · h / s<sub>k</sub> = 2,0 · 3,00 / 0,890 = 6,740 · limites 0,8 ≤ μ<sub>w</sub> ≤ 2,4 → μ<sub>w</sub> = 2,400",
+"es": "Límite por la altura de nieve: μ<sub>w</sub> ≤ γ · h / s<sub>k</sub> = 2,0 · 3,00 / 0,890 = 6,740 · límites 0,8 ≤ μ<sub>w</sub> ≤ 2,4 → μ<sub>w</sub> = 2,400"
+},
+"21-184": {
+"fr": "État limite ultime (ELU) — EN 1990",
+"es": "Estado límite último (ELU) — EN 1990"
+},
+"21-185": {
+"fr": "Asphalte coulé",
+"es": "Asfalto fundido"
+},
+"21-186": {
+"fr": "Panneaux à base de bois : OSB, panneau de particules",
+"es": "Tableros derivados de la madera: OSB, tablero de partículas"
+},
+"21-187": {
+"fr": "Hauteur du décrochement h [m]",
+"es": "Altura del escalón h [m]"
+},
+"21-188": {
+"fr": "Décrochement de toiture h = 3,00 m, zone 2",
+"es": "Escalón de cubierta h = 3,00 m, zona 2"
+},
+"21-189": {
+"fr": "Décrochements de toiture, superstructures, acrotères",
+"es": "Escalones de cubierta, elementos sobre la cubierta, antepechos"
+},
+"21-190": {
+"fr": "Enduit intérieur par face",
+"es": "Enlucido interior por cara"
+},
+"21-191": {
+"fr": "Mur intérieur dans un bâtiment à étages",
+"es": "Muro interior en edificio de varias plantas"
+},
+"21-192": {
+"fr": "Mur intérieur sous 3 planchers + toiture",
+"es": "Muro interior bajo 3 forjados + cubierta"
+},
+"21-193": {
+"fr": "Chaque plancher transmet sa réaction d'appui au mur situé en dessous ; au niveau le plus bas se cumulent tous les planchers, la toiture et les poids propres des murs.",
+"es": "Cada forjado transmite su reacción de apoyo al muro situado debajo; en la planta inferior se suman todos los forjados, la cubierta y los pesos propios de los muros."
+},
+"21-194": {
+"fr": "Enduit de chaux, de chaux-plâtre et de plâtre-sable",
+"es": "Enlucido de cal, de cal-yeso y de yeso-arena"
+},
+"21-195": {
+"fr": "Maçonnerie en silico-calcaire (classe de masse volumique 1,8)",
+"es": "Fábrica de silicocalcáreo (clase de densidad 1,8)"
+},
+"21-196": {
+"fr": "Mortier de chaux-ciment",
+"es": "Mortero de cal-cemento"
+},
+"21-197": {
+"fr": "Coefficients de combinaison ψ<sub>0</sub> / ψ<sub>1</sub> / ψ<sub>2</sub> : charge d'exploitation 0,7 / 0,5 / 0,3 · neige 0,5 / 0,2 / 0 · vent 0,6 / 0,2 / 0",
+"es": "Coeficientes de combinación ψ<sub>0</sub> / ψ<sub>1</sub> / ψ<sub>2</sub>: sobrecarga de uso 0,7 / 0,5 / 0,3 · nieve 0,5 / 0,2 / 0 · viento 0,6 / 0,2 / 0"
+},
+"21-198": {
+"fr": "Coefficients de combinaison — DIN EN 1990/NA, Tab. NA.A.1.1",
+"es": "Coeficientes de combinación — DIN EN 1990/NA, Tab. NA.A.1.1"
+},
+"21-199": {
+"fr": "Cuivre",
+"es": "Cobre"
+},
+"21-200": {
+"fr": "Équilibre statique (EQU, p. ex. soulèvement, renversement d'un corps rigide) — DIN EN 1990/NA, Tab. NA.A.1.2(A) :",
+"es": "Equilibrio estático (EQU, p. ej. levantamiento, vuelco de un cuerpo rígido) — DIN EN 1990/NA, Tab. NA.A.1.2(A):"
+},
+"21-201": {
+"fr": "Long terme (fluage, aspect)",
+"es": "Largo plazo (fluencia, aspecto)"
+},
+"21-202": {
+"fr": "Dispositions de charges et cas particuliers",
+"es": "Disposiciones de carga y casos particulares"
+},
+"21-203": {
+"fr": "Part de charge",
+"es": "Proporción de carga"
+},
+"21-204": {
+"fr": "Surface d'influence A [m²]",
+"es": "Superficie de carga A [m²]"
+},
+"21-205": {
+"fr": "Les charges sont « collectées » de haut en bas : chaque élément transmet ses réactions d'appui à l'élément porteur situé en dessous. Pour un mur, on calcule avec des charges linéiques en kN/m, pour un poteau avec des charges ponctuelles issues de la surface d'influence.",
+"es": "Las cargas se «recogen» de arriba hacia abajo: cada elemento transmite sus reacciones de apoyo al elemento portante situado debajo. Para un muro se calcula con cargas lineales en kN/m; para un pilar, con cargas puntuales procedentes del área tributaria."
+},
+"21-206": {
+"fr": "Combinaison 1 : charge d'exploitation (cat. B) dominante, neige et vent avec ψ<sub>0</sub>",
+"es": "Combinación 1: sobrecarga de uso (cat. B) principal, nieve y viento con ψ<sub>0</sub>"
+},
+"21-207": {
+"fr": "Combinaison 2 : neige dominante, charge d'exploitation (cat. B) et vent avec ψ<sub>0</sub>",
+"es": "Combinación 2: nieve principal, sobrecarga de uso (cat. B) y viento con ψ<sub>0</sub>"
+},
+"21-208": {
+"fr": "Combinaison 3 : vent dominant, charge d'exploitation (cat. B) et neige avec ψ<sub>0</sub>",
+"es": "Combinación 3: viento principal, sobrecarga de uso (cat. B) y nieve con ψ<sub>0</sub>"
+},
+"21-209": {
+"fr": "Cheminement des charges",
+"es": "Trayectoria de cargas"
+},
+"21-210": {
+"fr": "Transmission des charges à travers les niveaux",
+"es": "Transmisión de cargas a través de las plantas"
+},
+"21-211": {
+"fr": "Transmission des charges — de la toiture jusqu'à la fondation",
+"es": "Transmisión de cargas — desde la cubierta hasta la cimentación"
+},
+"21-212": {
+"fr": "Bois feuillu D30 / D40",
+"es": "Madera de frondosa D30 / D40"
+},
+"21-213": {
+"fr": "Béton léger (classe de masse volumique 1,0 … 2,0)",
+"es": "Hormigón ligero (clase de densidad 1,0 … 2,0)"
+}
+}

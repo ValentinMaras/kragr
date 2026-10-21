@@ -1,0 +1,1098 @@
+{
+"13-0": {
+"fr": "Veuillez saisir au moins une couche et θ<sub>i</sub> > θ<sub>e</sub>.",
+"es": "Introduzca al menos una capa y θ<sub>i</sub> > θ<sub>e</sub>."
+},
+"13-1": {
+"fr": "!La loi de masse est valable pour 65 … 720 kg/m² — ici hors de cette plage",
+"es": "!La ley de masa es válida para 65 … 720 kg/m² — aquí fuera de este intervalo"
+},
+"13-2": {
+"fr": "!Hauteur h = {} m (plancher du dernier niveau comportant une pièce de séjour, par rapport au terrain en moyenne) · {} {} à {} m² = {} m²{}",
+"es": "!Altura h = {} m (suelo de la última planta con una estancia habitable sobre el terreno, en promedio) · {} {} de {} m² = {} m²{}"
+},
+"13-3": {
+"fr": "unité d'usage",
+"es": "unidad de uso"
+},
+"13-4": {
+"fr": " · isolé",
+"es": " · aislado"
+},
+"13-5": {
+"fr": "isolé : GK 1",
+"es": "aislado: GK 1"
+},
+"13-6": {
+"fr": "h ≤ 13 m et chaque unité d'usage ≤ 400 m² → GK 4",
+"es": "h ≤ 13 m y cada unidad de uso ≤ 400 m² → GK 4"
+},
+"13-7": {
+"fr": "!Plan de cisaillement dans le {}, α<sub>v</sub> = {}, {} {}",
+"es": "!Plano de corte en el {}, α<sub>v</sub> = {}, {} {}"
+},
+"13-8": {
+"fr": "plans de cisaillement",
+"es": "planos de corte"
+},
+"13-9": {
+"fr": "§Matériau {}, CS {}, classe de durée de chargement {}",
+"es": "§Material {}, CS {}, clase de duración de la carga {}"
+},
+"13-10": {
+"fr": "§Matériau {} ({}), CS {}, γ<sub>M</sub> = 1,3",
+"es": "§Material {} ({}), CS {}, γ<sub>M</sub> = 1,3"
+},
+"13-11": {
+"fr": "§Section {} × {} mm",
+"es": "§Sección {} × {} mm"
+},
+"13-12": {
+"fr": "§Vérification ({})",
+"es": "§Comprobación ({})"
+},
+"13-13": {
+"fr": "vent (entre court terme et instantanée)",
+"es": "viento (entre corta duración e instantánea)"
+},
+"13-14": {
+"fr": "!<b>La section ne suffit pas, même avec 9 % d'armatures</b> — choisir une section plus grande ou une classe de béton supérieure",
+"es": "!<b>La sección no basta ni siquiera con un 9 % de armadura</b> — elija una sección mayor o una clase de hormigón superior"
+},
+"13-15": {
+"fr": "!Longueur d'assemblage L<sub>j</sub> = {} mm > 15 d → tenir compte de la réduction β<sub>Lf</sub> pour les assemblages longs (3.8)",
+"es": "!Longitud de la unión L<sub>j</sub> = {} mm > 15 d → considere la reducción β<sub>Lf</sub> para uniones largas (3.8)"
+},
+"13-16": {
+"fr": "!Axe neutre dans l'âme → approximation : la dalle reprend l'effort de compression, bras de levier jusqu'au milieu de la dalle",
+"es": "!Eje neutro en el alma → aproximación: la losa absorbe la fuerza de compresión, brazo de palanca hasta el centro de la losa"
+},
+"13-17": {
+"fr": "!Pivot nul → permuter les lignes {} et {}",
+"es": "!Pivote nulo → intercambie las filas {} y {}"
+},
+"13-18": {
+"fr": "!V<sub>Ed</sub> = {} kN ≤ V<sub>Rd,c</sub> → pas d'armatures d'effort tranchant requises par le calcul (poutres : étriers minimaux)",
+"es": "!V<sub>Ed</sub> = {} kN ≤ V<sub>Rd,c</sub> → no se requiere armadura de cortante por cálculo (vigas: estribos mínimos)"
+},
+"13-19": {
+"fr": "!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub> : vérifier en plus la contrainte équivalente σ<sub>v</sub> = √(σ² + 3τ²)",
+"es": "!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub>: comprobar además la tensión equivalente σ<sub>v</sub> = √(σ² + 3τ²)"
+},
+"13-20": {
+"fr": "!f<sub>m</sub> est limitée à min(20 ; 2·f<sub>b</sub>) = {} N/mm²",
+"es": "!f<sub>m</sub> se limita a min(20; 2·f<sub>b</sub>) = {} N/mm²"
+},
+"13-21": {
+"fr": "!mur court (A = {} m² < 0,1 m²) : f<sub>d</sub> · 0,8 = {} N/mm²",
+"es": "!muro corto (A = {} m² < 0,1 m²): f<sub>d</sub> · 0,8 = {} N/mm²"
+},
+"13-22": {
+"fr": "!l = {} m ≥ 30 · t = {} m → les murs transversaux sont inopérants, mur considéré comme tenu sur deux côtés",
+"es": "!l = {} m ≥ 30 · t = {} m → los muros transversales no actúan; el muro se trata como arriostrado en dos lados"
+},
+"13-23": {
+"fr": "!l<sub>eff</sub> > 150 a : tenir compte de la réduction β<sub>Lw</sub> pour les cordons longs (4.11)",
+"es": "!l<sub>eff</sub> > 150 a: considere la reducción β<sub>Lw</sub> para cordones largos (4.11)"
+},
+"13-24": {
+"fr": "!toit inférieur plus court que l<sub>s</sub> : au bord du toit μ = {} (congère tronquée)",
+"es": "!cubierta inferior más corta que l<sub>s</sub>: en el borde de la cubierta μ = {} (acumulación de nieve truncada)"
+},
+"13-25": {
+"fr": "!λ̄ ≤ 0,2 → χ = 1,000 (pas de perte de stabilité déterminante)",
+"es": "!λ̄ ≤ 0,2 → χ = 1,000 (la inestabilidad no es determinante)"
+},
+"13-26": {
+"fr": "!λ̄<sub>LT</sub> ≤ 0,4 → χ<sub>LT</sub> = 1 (pas de déversement)",
+"es": "!λ̄<sub>LT</sub> ≤ 0,4 → χ<sub>LT</sub> = 1 (sin pandeo lateral)"
+},
+"13-27": {
+"fr": "Largeur {} m > 2 m : −10 % par m (× {})",
+"es": "Ancho {} m > 2 m: −10 % por m (× {})"
+},
+"13-28": {
+"fr": "Nappe à {} m sous la base (< b) : −{} %",
+"es": "Agua subterránea a {} m bajo la base (< b): −{} %"
+},
+"13-29": {
+"fr": "Charge horizontale H/V = {} : × (1 − H/V)² = {}",
+"es": "Carga horizontal H/V = {}: × (1 − H/V)² = {}"
+},
+"13-30": {
+"fr": "Classe 1 : 36ε / α = 36 · {} / {} = {}",
+"es": "Clase 1: 36ε / α = 36 · {} / {} = {}"
+},
+"13-31": {
+"fr": "Classe 2 : 41,5ε / α = {}",
+"es": "Clase 2: 41,5ε / α = {}"
+},
+"13-32": {
+"fr": "Classe 3 : 62ε · (1 − ψ) · √(−ψ) = {}",
+"es": "Clase 3: 62ε · (1 − ψ) · √(−ψ) = {}"
+},
+"13-33": {
+"fr": "Classe {} → W<sub>y</sub> = W<sub>el,y</sub>",
+"es": "Clase {} → W<sub>y</sub> = W<sub>el,y</sub>"
+},
+"13-34": {
+"fr": "c = b/2 − e = {} − {} = {} m · longueur comprimée 3c = {} m",
+"es": "c = b/2 − e = {} − {} = {} m · longitud comprimida 3c = {} m"
+},
+"13-35": {
+"fr": "h ≤ 7 m, au plus 2 unités d'usage totalisant ≤ 400 m² → {}",
+"es": "h ≤ 7 m, como máximo 2 unidades de uso con un total ≤ 400 m² → {}"
+},
+"13-36": {
+"fr": "k<sub>1</sub> (rangée intérieure) = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7 ; 2,5) = {}",
+"es": "k<sub>1</sub> (fila interior) = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) = {}"
+},
+"13-37": {
+"fr": "{} lignes",
+"es": "{} filas"
+},
+"13-38": {
+"fr": "§Vérification élastique (classe 3, 6.2.1 (7))",
+"es": "§Comprobación elástica (clase 3, 6.2.1 (7))"
+},
+"13-39": {
+"fr": "§Joint ouvert (e > b/6)",
+"es": "§Junta abierta (e > b/6)"
+},
+"13-40": {
+"fr": "§Plasticité et consistance (cohérent)",
+"es": "§Plasticidad y consistencia (cohesivo)"
+},
+"13-41": {
+"fr": " (> 1 : vérifier les données)",
+"es": " (> 1: compruebe los datos)"
+},
+"13-42": {
+"fr": " (ne s'écoule pas)",
+"es": " (no fluye)"
+},
+"13-43": {
+"fr": " (v<sub>min</sub> déterminant)",
+"es": " (v<sub>min</sub> determinante)"
+},
+"13-44": {
+"fr": " — <b>au-dessus de 0,08·A<sub>c</sub></b>, augmenter la section",
+"es": " — <b>por encima de 0,08·A<sub>c</sub></b>, aumente la sección"
+},
+"13-45": {
+"fr": " — classe 4 : section efficace nécessaire (seule la valeur élastique est donnée ici)",
+"es": " — clase 4: se requiere sección eficaz (aquí solo se da el valor elástico)"
+},
+"13-46": {
+"fr": " — le plan de cisaillement ne compte pas",
+"es": " — el plano de corte no cuenta"
+},
+"13-47": {
+"fr": " — ne pas appliquer d'effort axial",
+"es": " — no aplicar fuerza axil"
+},
+"13-48": {
+"fr": "!<b>Dalle surchargée</b> — dimensionnement plus précis ou dalle plus épaisse.",
+"es": "!<b>Losa sobrecargada</b> — dimensionamiento más preciso o losa más gruesa."
+},
+"13-49": {
+"fr": "!La section est entièrement carbonisée.",
+"es": "!La sección está completamente carbonizada."
+},
+"13-50": {
+"fr": "!L'écoulement amont n'est pas torrentiel — il n'y a pas de ressaut hydraulique.",
+"es": "!El flujo de entrada no es supercrítico — no se produce resalto hidráulico."
+},
+"13-51": {
+"fr": "!Pas de solution unique (déterminant 0)",
+"es": "!Sin solución única (determinante 0)"
+},
+"13-52": {
+"fr": "!Classe 4 : section efficace selon EN 1993-1-5 nécessaire — non traitée ici.",
+"es": "!Clase 4: se requiere sección eficaz según EN 1993-1-5 — no tratada aquí."
+},
+"13-53": {
+"fr": "!Section de classe 4 — non traitée.",
+"es": "!Sección de clase 4 — no tratada."
+},
+"13-54": {
+"fr": "!a₃₃ = 0 → pas de solution unique",
+"es": "!a₃₃ = 0 → sin solución única"
+},
+"13-55": {
+"fr": "!b<sub>eff</sub>/b<sub>w</sub> < 5 — l'approximation est du côté non sécuritaire ; pour plus de précision, utiliser des tables de dimensionnement pour poutres en T.",
+"es": "!b<sub>eff</sub>/b<sub>w</sub> < 5 — la aproximación queda del lado inseguro; para mayor precisión use tablas de dimensionamiento para vigas en T."
+},
+"13-56": {
+"fr": "!e ≥ b/2 : la résultante est hors de la base — la semelle se renverse.",
+"es": "!e ≥ b/2: la resultante queda fuera de la base — la zapata vuelca."
+},
+"13-57": {
+"fr": ", ici hors du domaine de validité Re ≥ 5000, 10⁻⁶ ≤ k/d ≤ 10⁻²",
+"es": ", aquí fuera del campo de validez Re ≥ 5000, 10⁻⁶ ≤ k/d ≤ 10⁻²"
+},
+"13-58": {
+"fr": "< 0 → l'appui A doit être ancré",
+"es": "< 0 → el apoyo A debe anclarse"
+},
+"13-59": {
+"fr": "< 0,70 ✗ risque de moisissure",
+"es": "< 0,70 ✗ riesgo de moho"
+},
+"13-60": {
+"fr": "<b>Risque de cavitation</b> — placer la pompe plus bas ou améliorer la conduite d'aspiration",
+"es": "<b>Riesgo de cavitación</b> — coloque la bomba más baja o mejore la tubería de aspiración"
+},
+"13-61": {
+"fr": "<b>non respecté</b>",
+"es": "<b>no se cumple</b>"
+},
+"13-62": {
+"fr": "> 2 → courbe de flambement c",
+"es": "> 2 → curva de pandeo c"
+},
+"13-63": {
+"fr": "BLC : k<sub>h</sub> = min((600/h)<sup>0,1</sup> ; 1,1) pour h < 600 mm",
+"es": "MLE: k<sub>h</sub> = min((600/h)<sup>0,1</sup>; 1,1) para h < 600 mm"
+},
+"13-64": {
+"fr": "Dimensionnement en flexion",
+"es": "Dimensionamiento a flexión"
+},
+"13-65": {
+"fr": "Flexion et compression",
+"es": "Flexión y compresión"
+},
+"13-66": {
+"fr": "Veuillez saisir 0 < φ′ < 50° et β < φ′.",
+"es": "Introduzca 0 < φ′ < 50° y β < φ′."
+},
+"13-67": {
+"fr": "Veuillez saisir 0° ≤ α ≤ 90°.",
+"es": "Introduzca 0° ≤ α ≤ 90°."
+},
+"13-68": {
+"fr": "Veuillez saisir 1 … 8 niveaux, des portées > 0 et des charges ≥ 0.",
+"es": "Introduzca 1 … 8 plantas, luces > 0 y cargas ≥ 0."
+},
+"13-69": {
+"fr": "Veuillez saisir les dimensions, la contrainte sous la base, γ, E<sub>s</sub> > 0 et Δz ≥ 0,1 m.",
+"es": "Introduzca las dimensiones, la presión en la base, γ, E<sub>s</sub> > 0 y Δz ≥ 0,1 m."
+},
+"13-70": {
+"fr": "Veuillez saisir D, I, k<sub>St</sub> > 0 et 0 < h/D ≤ 1.",
+"es": "Introduzca D, I, k<sub>St</sub> > 0 y 0 < h/D ≤ 1."
+},
+"13-71": {
+"fr": "Veuillez saisir les surfaces et l'intensité de pluie r > 0.",
+"es": "Introduzca las superficies y la intensidad de lluvia r > 0."
+},
+"13-72": {
+"fr": "Veuillez saisir la hauteur ≥ 0, au moins une unité d'usage et sa surface.",
+"es": "Introduzca la altura ≥ 0, al menos una unidad de uso y su superficie."
+},
+"13-73": {
+"fr": "Veuillez saisir des hauteurs et des largeurs > 0.",
+"es": "Introduzca alturas y anchuras > 0."
+},
+"13-74": {
+"fr": "Veuillez saisir des longueurs de flambement > 0.",
+"es": "Introduzca longitudes de pandeo > 0."
+},
+"13-75": {
+"fr": "Veuillez saisir L > 0.",
+"es": "Introduzca L > 0."
+},
+"13-76": {
+"fr": "Veuillez saisir L > 0 et g, q ≥ 0.",
+"es": "Introduzca L > 0 y g, q ≥ 0."
+},
+"13-77": {
+"fr": "Veuillez saisir L > 0 et q ≥ 0.",
+"es": "Introduzca L > 0 y q ≥ 0."
+},
+"13-78": {
+"fr": "Veuillez saisir L > 0, 0 ≤ x₀ ≤ L et des charges ≥ 0.",
+"es": "Introduzca L > 0, 0 ≤ x₀ ≤ L y cargas ≥ 0."
+},
+"13-79": {
+"fr": "Veuillez saisir la longueur, la hauteur et la hauteur d'assise > 0.",
+"es": "Introduzca la longitud, la altura y la altura de hilada > 0."
+},
+"13-80": {
+"fr": "Veuillez saisir des dimensions > 0 et n<sub>max</sub> ≥ n<sub>min</sub> ≥ 0.",
+"es": "Introduzca dimensiones > 0 y n<sub>max</sub> ≥ n<sub>min</sub> ≥ 0."
+},
+"13-81": {
+"fr": "Veuillez saisir des dimensions > 0, une largeur d'appui ≤ t et un appui situé à l'intérieur du mur.",
+"es": "Introduzca dimensiones > 0, un ancho de apoyo ≤ t y un apoyo situado dentro del muro."
+},
+"13-82": {
+"fr": "Veuillez saisir Q > 0 et 0 < η ≤ 100 %.",
+"es": "Introduzca Q > 0 y 0 < η ≤ 100 %."
+},
+"13-83": {
+"fr": "Veuillez saisir Q > 0 et b ou m > 0.",
+"es": "Introduzca Q > 0 y b o m > 0."
+},
+"13-84": {
+"fr": "Veuillez saisir Q, d, L > 0 et 0 … 100 °C.",
+"es": "Introduzca Q, d, L > 0 y 0 … 100 °C."
+},
+"13-85": {
+"fr": "Veuillez saisir les épaisseurs de couches, γ, γ<sub>r</sub> et la profondeur de la nappe.",
+"es": "Introduzca los espesores de capa, γ, γ<sub>r</sub> y la profundidad del nivel freático."
+},
+"13-86": {
+"fr": "Veuillez saisir des portées > 0 et des charges ≥ 0.",
+"es": "Introduzca luces > 0 y cargas ≥ 0."
+},
+"13-87": {
+"fr": "Veuillez saisir des nombres (N<sub>Ed</sub> en compression > 0).",
+"es": "Introduzca números (N<sub>Ed</sub> como compresión > 0)."
+},
+"13-88": {
+"fr": "Veuillez saisir des nombres (d < h).",
+"es": "Introduzca números (d < h)."
+},
+"13-89": {
+"fr": "Veuillez saisir des nombres (h > d₁, M > 0).",
+"es": "Introduzca números (h > d₁, M > 0)."
+},
+"13-90": {
+"fr": "Veuillez saisir des nombres.",
+"es": "Introduzca números."
+},
+"13-91": {
+"fr": "Veuillez saisir a, b, V > 0.",
+"es": "Introduzca a, b, V > 0."
+},
+"13-92": {
+"fr": "Veuillez saisir a, l, t<sub>1</sub>, t<sub>2</sub> > 0.",
+"es": "Introduzca a, l, t<sub>1</sub>, t<sub>2</sub> > 0."
+},
+"13-93": {
+"fr": "Veuillez saisir les 12 nombres.",
+"es": "Introduzca los 12 números."
+},
+"13-94": {
+"fr": "Veuillez saisir toutes les dimensions > 0.",
+"es": "Introduzca todas las dimensiones > 0."
+},
+"13-95": {
+"fr": "Veuillez saisir toutes les masses, longueurs et surfaces > 0.",
+"es": "Introduzca todas las masas, longitudes y superficies > 0."
+},
+"13-96": {
+"fr": "Veuillez saisir toutes les valeurs de couches et la profondeur de la nappe.",
+"es": "Introduzca todos los valores de las capas y la profundidad del nivel freático."
+},
+"13-97": {
+"fr": "Veuillez saisir toutes les valeurs > 0.",
+"es": "Introduzca todos los valores > 0."
+},
+"13-98": {
+"fr": "Veuillez saisir toutes les valeurs > 0 et a ≤ t.",
+"es": "Introduzca todos los valores > 0 y a ≤ t."
+},
+"13-99": {
+"fr": "Veuillez saisir b et h > 0.",
+"es": "Introduzca b y h > 0."
+},
+"13-100": {
+"fr": "Veuillez saisir b, d, M > 0.",
+"es": "Introduzca b, d, M > 0."
+},
+"13-101": {
+"fr": "Veuillez saisir b, d, h > 0 (h ≤ 25 m) et la surface d'influence chargée A > 0.",
+"es": "Introduzca b, d, h > 0 (h ≤ 25 m) y el área de influencia cargada A > 0."
+},
+"13-102": {
+"fr": "Veuillez saisir b, h > 0 et t ≥ 0.",
+"es": "Introduzca b, h > 0 y t ≥ 0."
+},
+"13-103": {
+"fr": "Veuillez saisir b, h > 0, HR 40 … 100 % et t<sub>0</sub> ≥ 1 jour.",
+"es": "Introduzca b, h > 0, HR 40 … 100 % y t<sub>0</sub> ≥ 1 día."
+},
+"13-104": {
+"fr": "Veuillez saisir b, h et des longueurs de flambement > 0.",
+"es": "Introduzca b, h y longitudes de pandeo > 0."
+},
+"13-105": {
+"fr": "Veuillez saisir b, h, la distance à l'axe > 0, T > 0 et 1,0 ≤ cot θ ≤ 3,0.",
+"es": "Introduzca b, h, la distancia al eje > 0, T > 0 y 1,0 ≤ cot θ ≤ 3,0."
+},
+"13-106": {
+"fr": "Veuillez saisir b, h, I et k<sub>St</sub> > 0.",
+"es": "Introduzca b, h, I y k<sub>St</sub> > 0."
+},
+"13-107": {
+"fr": "Veuillez saisir b, h, L > 0.",
+"es": "Introduzca b, h, L > 0."
+},
+"13-108": {
+"fr": "Veuillez saisir b, h, L, la longueur d'appui > 0.",
+"es": "Introduzca b, h, L, la longitud de apoyo > 0."
+},
+"13-109": {
+"fr": "Veuillez saisir b, h<sub>ü</sub>, μ > 0.",
+"es": "Introduzca b, h<sub>ü</sub>, μ > 0."
+},
+"13-110": {
+"fr": "Veuillez saisir c<sub>v</sub>, H > 0 et t ≥ 0.",
+"es": "Introduzca c<sub>v</sub>, H > 0 y t ≥ 0."
+},
+"13-111": {
+"fr": "Veuillez saisir d, μ, h<sub>1</sub> > h<sub>2</sub> ≥ 0.",
+"es": "Introduzca d, μ, h<sub>1</sub> > h<sub>2</sub> ≥ 0."
+},
+"13-112": {
+"fr": "Veuillez saisir une longueur de flambement > 0.",
+"es": "Introduzca una longitud de pandeo > 0."
+},
+"13-113": {
+"fr": "Veuillez saisir un nombre pair de travées 2 … 12, a, h > 0 et les charges.",
+"es": "Introduzca un número par de tramos 2 … 12, a, h > 0 y las cargas."
+},
+"13-114": {
+"fr": "Veuillez saisir f<sub>b</sub> (et, pour un mortier courant, f<sub>m</sub>) > 0.",
+"es": "Introduzca f<sub>b</sub> (y, para mortero ordinario, f<sub>m</sub>) > 0."
+},
+"13-115": {
+"fr": "Veuillez saisir des valeurs valides (0 < φ′ ≤ 45°, e < b/2).",
+"es": "Introduzca valores válidos (0 < φ′ ≤ 45°, e < b/2)."
+},
+"13-116": {
+"fr": "Veuillez saisir des valeurs valides (0° < φ′ < 60°).",
+"es": "Introduzca valores válidos (0° < φ′ < 60°)."
+},
+"13-117": {
+"fr": "Veuillez saisir des valeurs valides.",
+"es": "Introduzca valores válidos."
+},
+"13-118": {
+"fr": "Veuillez saisir h, t (et l) > 0.",
+"es": "Introduzca h, t (y l) > 0."
+},
+"13-119": {
+"fr": "Veuillez saisir k, H, r > 0 et 0 < s < H.",
+"es": "Introduzca k, H, r > 0 y 0 < s < H."
+},
+"13-120": {
+"fr": "Veuillez saisir k, L, A, γ′ > 0.",
+"es": "Introduzca k, L, A, γ′ > 0."
+},
+"13-121": {
+"fr": "Veuillez saisir l, h > 0 et des charges ≥ 0.",
+"es": "Introduzca l, h > 0 y cargas ≥ 0."
+},
+"13-122": {
+"fr": "Veuillez saisir l, t, h, N > 0 et V ≥ 0.",
+"es": "Introduzca l, t, h, N > 0 y V ≥ 0."
+},
+"13-123": {
+"fr": "Veuillez saisir m ≥ m<sub>d</sub> > 0, V > 0 et ρ<sub>s</sub> > 0.",
+"es": "Introduzca m ≥ m<sub>d</sub> > 0, V > 0 y ρ<sub>s</sub> > 0."
+},
+"13-124": {
+"fr": "Veuillez saisir au moins un rectangle avec b, h > 0 et z ≥ 0.",
+"es": "Introduzca al menos un rectángulo con b, h > 0 y z ≥ 0."
+},
+"13-125": {
+"fr": "Veuillez saisir p ≥ 0.",
+"es": "Introduzca p ≥ 0."
+},
+"13-126": {
+"fr": "Veuillez saisir q, h<sub>1</sub> > 0.",
+"es": "Introduzca q, h<sub>1</sub> > 0."
+},
+"13-127": {
+"fr": "Veuillez saisir s′, m′<sub>1</sub>, m′<sub>2</sub> > 0.",
+"es": "Introduzca s′, m′<sub>1</sub>, m′<sub>2</sub> > 0."
+},
+"13-128": {
+"fr": "Veuillez saisir t, e<sub>1</sub>, e<sub>2</sub> > 0.",
+"es": "Introduzca t, e<sub>1</sub>, e<sub>2</sub> > 0."
+},
+"13-129": {
+"fr": "Veuillez saisir v, L > 0 et 0 ≤ T ≤ 100 °C.",
+"es": "Introduzca v, L > 0 y 0 ≤ T ≤ 100 °C."
+},
+"13-130": {
+"fr": "Veuillez saisir w<sub>L</sub> > w<sub>P</sub> ≥ 0.",
+"es": "Introduzca w<sub>L</sub> > w<sub>P</sub> ≥ 0."
+},
+"13-131": {
+"fr": "Veuillez saisir deux essais avec σ<sub>1</sub> > σ<sub>3</sub> et des σ<sub>3</sub> différents.",
+"es": "Introduzca dos ensayos con σ<sub>1</sub> > σ<sub>3</sub> y σ<sub>3</sub> diferentes."
+},
+"13-132": {
+"fr": "Veuillez saisir −30 … 60 °C et 0 < φ ≤ 100 %.",
+"es": "Introduzca −30 … 60 °C y 0 < φ ≤ 100 %."
+},
+"13-133": {
+"fr": "La méthode simplifiée n'est valable que jusqu'à h = 25 m.",
+"es": "El método simplificado solo es válido hasta h = 25 m."
+},
+"13-134": {
+"fr": "Les valeurs ne donnent pas de porosité valide (0 < n < 1).",
+"es": "Los valores no dan una porosidad válida (0 < n < 1)."
+},
+"13-135": {
+"fr": "Vérification de section",
+"es": "Comprobación de la sección"
+},
+"13-136": {
+"fr": "Rectangle/cercle avec a/b < 2 : +20 %",
+"es": "Rectángulo/círculo con a/b < 2: +20 %"
+},
+"13-137": {
+"fr": "TL/UL (zone de transition)",
+"es": "TL/UL (zona de transición)"
+},
+"13-138": {
+"fr": "Plage du tableau : profondeur d'encastrement 0,5 … 2,0 m et largeur 0,5 … 2,0 m.",
+"es": "Intervalo de la tabla: profundidad de empotramiento 0,5 … 2,0 m y ancho 0,5 … 2,0 m."
+},
+"13-139": {
+"fr": "Plage du tableau : profondeur d'encastrement 0,5 … 2,0 m et largeur 0,5 … 5,0 m.",
+"es": "Intervalo de la tabla: profundidad de empotramiento 0,5 … 2,0 m y ancho 0,5 … 5,0 m."
+},
+"13-140": {
+"fr": "cot θ doit être compris entre 1,0 et 3,0.",
+"es": "cot θ debe estar entre 1,0 y 3,0."
+},
+"13-141": {
+"fr": "liquide",
+"es": "líquido"
+},
+"13-142": {
+"fr": "f₀ ≤ 100 Hz : acceptable",
+"es": "f₀ ≤ 100 Hz: aceptable"
+},
+"13-143": {
+"fr": "f₀ ≤ 80 Hz : très bon — la résonance se situe sous le domaine de l'acoustique du bâtiment",
+"es": "f₀ ≤ 80 Hz: muy bueno — la resonancia queda por debajo del intervalo de la acústica en la edificación"
+},
+"13-144": {
+"fr": "h > 13 m ou unités d'usage > 400 m² → GK 5 (immeuble de grande hauteur à partir de 22 m : bâtiment spécial)",
+"es": "h > 13 m o unidades de uso > 400 m² → GK 5 (edificio de gran altura desde 22 m: edificio especial)"
+},
+"13-145": {
+"fr": "semi-solide à solide",
+"es": "semisólido a sólido"
+},
+"13-146": {
+"fr": "rangée intérieure",
+"es": "fila interior"
+},
+"13-147": {
+"fr": "non isolé : GK 2",
+"es": "no aislado: GK 2"
+},
+"13-148": {
+"fr": "zone de transition (2320 … 10⁴)",
+"es": "zona de transición (2320 … 10⁴)"
+},
+"13-149": {
+"fr": "dépassé ✗",
+"es": "superado ✗"
+},
+"13-150": {
+"fr": "λ<sub>rel,m</sub> ≤ 0,75 → k<sub>crit</sub> = 1 (pas de déversement)",
+"es": "λ<sub>rel,m</sub> ≤ 0,75 → k<sub>crit</sub> = 1 (sin pandeo lateral)"
+},
+"13-151": {
+"fr": "— limite, vérifier précisément les transmissions latérales",
+"es": "— justo, compruebe con detalle las transmisiones por flancos"
+},
+"13-152": {
+"fr": "✗ condensation",
+"es": "✗ condensación"
+},
+"13-153": {
+"fr": "fermeture lente : Δp ≈ Δp<sub>J</sub> · T<sub>r</sub>/t<sub>s</sub> = {} bar (approximation de Michaud)",
+"es": "cierre lento: Δp ≈ Δp<sub>J</sub> · T<sub>r</sub>/t<sub>s</sub> = {} bar (aproximación de Michaud)"
+},
+"13-154": {
+"fr": "1. Enduit de plâtre",
+"es": "1. Enlucido de yeso"
+},
+"13-155": {
+"fr": "2. Brique silico-calcaire RDK 1,8",
+"es": "2. Fábrica de silicocalcáreo RDK 1,8"
+},
+"13-156": {
+"fr": "3. Laine minérale WLS 035",
+"es": "3. Lana mineral WLS 035"
+},
+"13-157": {
+"fr": "4. Enduit chaux-ciment",
+"es": "4. Enlucido de cal y cemento"
+},
+"13-158": {
+"fr": "90 + jonction",
+"es": "90 + encuentro"
+},
+"13-159": {
+"fr": "<a class=\"applink\" href=\"#/bauphysik/feuchte/luft\">→ Calculer le point de rosée et la température de surface</a>",
+"es": "<a class=\"applink\" href=\"#/bauphysik/feuchte/luft\">→ Calcular el punto de rocío y la temperatura superficial</a>"
+},
+"13-160": {
+"fr": "<a class=\"applink\" href=\"#/holzbau/gzt/brand\">→ Carbonisation dans la construction bois</a>",
+"es": "<a class=\"applink\" href=\"#/holzbau/gzt/brand\">→ Carbonización en la construcción en madera</a>"
+},
+"13-161": {
+"fr": "<a class=\"applink\" href=\"size.html\">→ Vérification de Glaser avec rapport dans statiq·size (physique du bâtiment)</a>",
+"es": "<a class=\"applink\" href=\"size.html\">→ Comprobación de Glaser con informe en statiq·size (física de la edificación)</a>"
+},
+"13-162": {
+"fr": "<a class=\"applink\" href=\"size.html\">→ Vérification avec rapport dans statiq·size (physique du bâtiment → isolation acoustique, vérification détaillée)</a>",
+"es": "<a class=\"applink\" href=\"size.html\">→ Comprobación con informe en statiq·size (física de la edificación → aislamiento acústico, comprobación detallada)</a>"
+},
+"13-163": {
+"fr": "<a class=\"applink\" href=\"size.html\">→ Vérification du coefficient U avec rapport dans statiq·size (physique du bâtiment)</a>",
+"es": "<a class=\"applink\" href=\"size.html\">→ Comprobación de la transmitancia U con informe en statiq·size (física de la edificación)</a>"
+},
+"13-164": {
+"fr": "<span class=\"st-n\">1</span><span>Indice d'affaiblissement acoustique apparent</span>",
+"es": "<span class=\"st-n\">1</span><span>Índice de reducción acústica aparente</span>"
+},
+"13-165": {
+"fr": "<span class=\"st-n\">1</span><span>Transmission directe</span>",
+"es": "<span class=\"st-n\">1</span><span>Transmisión directa</span>"
+},
+"13-166": {
+"fr": "<span class=\"st-n\">1</span><span>Classement selon MBO § 2 (3)</span>",
+"es": "<span class=\"st-n\">1</span><span>Clasificación según MBO § 2 (3)</span>"
+},
+"13-167": {
+"fr": "<span class=\"st-n\">1</span><span>Masse surfacique</span>",
+"es": "<span class=\"st-n\">1</span><span>Masa por unidad de superficie</span>"
+},
+"13-168": {
+"fr": "<span class=\"st-n\">1</span><span>Conditions aux limites, période de condensation (DIN 4108-3)</span>",
+"es": "<span class=\"st-n\">1</span><span>Condiciones de contorno, período de condensación (DIN 4108-3)</span>"
+},
+"13-169": {
+"fr": "<span class=\"st-n\">1</span><span>Dalle brute</span>",
+"es": "<span class=\"st-n\">1</span><span>Forjado bruto</span>"
+},
+"13-170": {
+"fr": "<span class=\"st-n\">1</span><span>Pression de vapeur saturante (formule de Magnus)</span>",
+"es": "<span class=\"st-n\">1</span><span>Presión de vapor saturante (fórmula de Magnus)</span>"
+},
+"13-171": {
+"fr": "<span class=\"st-n\">1</span><span>Résistance thermique totale</span>",
+"es": "<span class=\"st-n\">1</span><span>Resistencia térmica total</span>"
+},
+"13-172": {
+"fr": "<span class=\"st-n\">2</span><span>Exigences pour les murs porteurs, poteaux et planchers (MBO §§ 27, 31)</span>",
+"es": "<span class=\"st-n\">2</span><span>Requisitos para muros portantes, pilares y forjados (MBO §§ 27, 31)</span>"
+},
+"13-173": {
+"fr": "<span class=\"st-n\">2</span><span>Indice d'affaiblissement acoustique pondéré (DIN 4109-32, loi de masse)</span>",
+"es": "<span class=\"st-n\">2</span><span>Índice de reducción acústica ponderado (DIN 4109-32, ley de masa)</span>"
+},
+"13-174": {
+"fr": "<span class=\"st-n\">2</span><span>Pression de vapeur de l'air</span>",
+"es": "<span class=\"st-n\">2</span><span>Presión de vapor del aire</span>"
+},
+"13-175": {
+"fr": "<span class=\"st-n\">2</span><span>Résistance à la diffusion</span>",
+"es": "<span class=\"st-n\">2</span><span>Resistencia a la difusión</span>"
+},
+"13-176": {
+"fr": "<span class=\"st-n\">2</span><span>Vérification (mur séparatif entre logements)</span>",
+"es": "<span class=\"st-n\">2</span><span>Comprobación (muro separador entre viviendas)</span>"
+},
+"13-177": {
+"fr": "<span class=\"st-n\">2</span><span>Chape flottante</span>",
+"es": "<span class=\"st-n\">2</span><span>Solera flotante</span>"
+},
+"13-178": {
+"fr": "<span class=\"st-n\">2</span><span>Indice d'isolement aux jonctions (DIN 4109-32, jonctions rigides)</span>",
+"es": "<span class=\"st-n\">2</span><span>Índice de aislamiento en encuentros (DIN 4109-32, encuentros rígidos)</span>"
+},
+"13-179": {
+"fr": "<span class=\"st-n\">2</span><span>Coefficient de transmission thermique</span>",
+"es": "<span class=\"st-n\">2</span><span>Transmitancia térmica</span>"
+},
+"13-180": {
+"fr": "<span class=\"st-n\">3</span><span>Voies latérales par flanc</span>",
+"es": "<span class=\"st-n\">3</span><span>Caminos de flanco por flanco</span>"
+},
+"13-181": {
+"fr": "<span class=\"st-n\">3</span><span>Terme correctif pour les flancs (DIN 4109-2)</span>",
+"es": "<span class=\"st-n\">3</span><span>Valor de corrección para los flancos (DIN 4109-2)</span>"
+},
+"13-182": {
+"fr": "<span class=\"st-n\">3</span><span>Température du point de rosée</span>",
+"es": "<span class=\"st-n\">3</span><span>Temperatura del punto de rocío</span>"
+},
+"13-183": {
+"fr": "<span class=\"st-n\">3</span><span>Plan de condensation</span>",
+"es": "<span class=\"st-n\">3</span><span>Plano de condensación</span>"
+},
+"13-184": {
+"fr": "<span class=\"st-n\">3</span><span>Comparaison avec l'exigence (mur séparatif entre logements)</span>",
+"es": "<span class=\"st-n\">3</span><span>Comparación con el requisito (muro separador entre viviendas)</span>"
+},
+"13-185": {
+"fr": "<span class=\"st-n\">3</span><span>Flux thermique et températures</span>",
+"es": "<span class=\"st-n\">3</span><span>Flujo de calor y temperaturas</span>"
+},
+"13-186": {
+"fr": "<span class=\"st-n\">4</span><span>Exigences (valeurs indicatives)</span>",
+"es": "<span class=\"st-n\">4</span><span>Requisitos (valores orientativos)</span>"
+},
+"13-187": {
+"fr": "<span class=\"st-n\">4</span><span>Niveau de bruit de choc normalisé pondéré</span>",
+"es": "<span class=\"st-n\">4</span><span>Nivel ponderado de presión de ruido de impacto normalizado</span>"
+},
+"13-188": {
+"fr": "<span class=\"st-n\">4</span><span>Surface intérieure d'un élément (R<sub>si</sub> = 0,25)</span>",
+"es": "<span class=\"st-n\">4</span><span>Superficie interior de un elemento (R<sub>si</sub> = 0,25)</span>"
+},
+"13-189": {
+"fr": "<span class=\"st-n\">4</span><span>Période d'évaporation (intérieur 20 °C / 50 %, extérieur 12 °C / 70 %, 2160 h)</span>",
+"es": "<span class=\"st-n\">4</span><span>Período de evaporación (interior 20 °C / 50 %, exterior 12 °C / 70 %, 2160 h)</span>"
+},
+"13-190": {
+"fr": "<span class=\"st-n\">5</span><span>Vérification</span>",
+"es": "<span class=\"st-n\">5</span><span>Comprobación</span>"
+},
+"13-191": {
+"fr": "Aux ponts thermiques (angles, appuis de plancher, dalles de balcon, raccords de fenêtres), la surface intérieure est plus froide qu'en section courante. À 50 % d'humidité de l'air ambiant, la moisissure apparaît à environ 12,6 °C (80 % d'humidité en surface).",
+"es": "En los puentes térmicos (esquinas, apoyos de forjado, losas de balcón, encuentros de ventanas) la superficie interior está más fría que en la sección corriente. Con un 50 % de humedad ambiente, el moho aparece a unos 12,6 °C (80 % de humedad en la superficie)."
+},
+"13-192": {
+"fr": "Valeurs indicatives. La protection thermique minimale s'applique à chaque élément (protection contre la condensation et la moisissure) ; le GEG régit le besoin énergétique de l'ensemble du bâtiment au moyen d'un bâtiment de référence. Dans un projet, utiliser la version en vigueur du GEG et de la DIN 4108-2.",
+"es": "Valores orientativos. La protección térmica mínima se aplica a cada elemento (protección contra condensación y moho); el GEG regula la demanda energética de todo el edificio mediante un edificio de referencia. En un proyecto, utilice la versión vigente del GEG y de la DIN 4108-2."
+},
+"13-193": {
+"fr": "Parts de l'énergie acoustique transmise : directe (Dd) 43 %, toutes les voies latérales 57 % · voie latérale principale Ff par le mur intérieur avec 8 % · sans transmissions latérales, R′<sub>w</sub> = R<sub>Dd</sub> = 61,3 dB",
+"es": "Porcentajes de la energía acústica transmitida: directa (Dd) 43 %, todos los caminos de flanco 57 % · camino de flanco principal Ff por el muro interior con 8 % · sin flancos, R′<sub>w</sub> = R<sub>Dd</sub> = 61,3 dB"
+},
+"13-194": {
+"fr": "Nombre d'unités d'usage",
+"es": "Número de unidades de uso"
+},
+"13-195": {
+"fr": "Séchage",
+"es": "Secado"
+},
+"13-196": {
+"fr": "Température extérieure θ<sub>e</sub> [°C]",
+"es": "Temperatura exterior θ<sub>e</sub> [°C]"
+},
+"13-197": {
+"fr": "Porte extérieure",
+"es": "Puerta exterior"
+},
+"13-198": {
+"fr": "Indice d'affaiblissement acoustique apparent avec transmission latérale (DIN 4109-2, construction massive)",
+"es": "Índice de reducción acústica aparente con transmisión por flancos (DIN 4109-2, construcción maciza)"
+},
+"13-199": {
+"fr": "Rechercher un matériau …",
+"es": "Buscar material …"
+},
+"13-200": {
+"fr": "Caractéristiques des matériaux",
+"es": "Características de los materiales"
+},
+"13-201": {
+"fr": "Classes de réaction au feu",
+"es": "Clases de reacción al fuego"
+},
+"13-202": {
+"fr": "Élément (immeuble d'habitation collectif)",
+"es": "Elemento (edificio de viviendas multifamiliar)"
+},
+"13-203": {
+"fr": "Élément / flux thermique",
+"es": "Elemento / flujo de calor"
+},
+"13-204": {
+"fr": "Éléments selon DIN 4108-3, 5.3 (p. ex. mur extérieur avec ITE sur maçonnerie)",
+"es": "Elementos según DIN 4108-3, 5.3 (p. ej. muro exterior con SATE sobre fábrica)"
+},
+"13-205": {
+"fr": "Coupe de l'élément avec profil de température",
+"es": "Sección del elemento con perfil de temperatura"
+},
+"13-206": {
+"fr": "Exemple : isolation intérieure sans frein-vapeur — l'isolant est ouvert côté intérieur, la maçonnerie extérieure est relativement étanche.",
+"es": "Ejemplo: aislamiento interior sin barrera de vapor — el aislamiento está abierto por el interior, la fábrica exterior es comparativamente estanca."
+},
+"13-207": {
+"fr": "Exemples",
+"es": "Ejemplos"
+},
+"13-208": {
+"fr": "Valeurs de calcul selon DIN 4108-4 ou DIN EN ISO 10456 (valeurs indicatives). Isolants : λ déduit de la classe de conductivité thermique (WLS 035 → λ = 0,035). Dans un projet, ce sont les valeurs de l'agrément ou de la déclaration des performances qui s'appliquent. μ est le facteur de résistance à la diffusion de vapeur d'eau (s<sub>d</sub> = μ · d).",
+"es": "Valores de cálculo según DIN 4108-4 o DIN EN ISO 10456 (valores orientativos). Aislantes: λ a partir de la clase de conductividad térmica (WLS 035 → λ = 0,035). En un proyecto se aplican los valores de la autorización o de la declaración de prestaciones. μ es el factor de resistencia a la difusión del vapor de agua (s<sub>d</sub> = μ · d)."
+},
+"13-209": {
+"fr": "Béton, maçonnerie, acier, laine minérale (en général)",
+"es": "Hormigón, fábrica, acero, lana mineral (en general)"
+},
+"13-210": {
+"fr": "Feuille d'étanchéité bitumineuse 4 mm (s_d ≈ 200 m)",
+"es": "Lámina asfáltica de cubierta 4 mm (s_d ≈ 200 m)"
+},
+"13-211": {
+"fr": "Mur coupe-feu",
+"es": "Muro cortafuegos"
+},
+"13-212": {
+"fr": "DIN EN 13501-2 (porteur / séparatif)",
+"es": "DIN EN 13501-2 (portante / separador)"
+},
+"13-213": {
+"fr": "Fenêtre de toit",
+"es": "Ventana de tejado"
+},
+"13-214": {
+"fr": "Tuiles",
+"es": "Tejas"
+},
+"13-215": {
+"fr": "Frein-vapeur 0,2 mm (s_d = 2 m)",
+"es": "Barrera de vapor 0,2 mm (s_d = 2 m)"
+},
+"13-216": {
+"fr": "Le profil de température est une droite dans chaque couche. Sa pente est inversement proportionnelle à λ : dans l'isolant, la température chute fortement.",
+"es": "El perfil de temperatura es una recta en cada capa. Su pendiente es inversamente proporcional a λ: en el aislamiento la temperatura desciende bruscamente."
+},
+"13-217": {
+"fr": "Diagramme avec s<sub>d</sub> en abscisse : la pression de vapeur p suit alors une droite de p<sub>i</sub> à p<sub>e</sub>. Si la droite coupe la courbe de pression de vapeur saturante p<sub>s</sub>, on la remplace par des tangentes — la condensation se produit aux points de contact.",
+"es": "Diagrama con s<sub>d</sub> en el eje horizontal: la presión de vapor p discurre entonces como una recta de p<sub>i</sub> a p<sub>e</sub>. Si la recta corta la curva de presión de vapor saturante p<sub>s</sub>, se sustituye por tangentes — en los puntos de contacto se produce condensación."
+},
+"13-218": {
+"fr": "La droite de pression de vapeur touche p<sub>s</sub> à la limite 2/3 (s<sub>d</sub> = 0,160 m)",
+"es": "La recta de presión de vapor toca p<sub>s</sub> en el límite 2/3 (s<sub>d</sub> = 0,160 m)"
+},
+"13-219": {
+"fr": "Élément massif monocouche",
+"es": "Elemento macizo de una hoja"
+},
+"13-220": {
+"fr": "Local de réception",
+"es": "Recinto receptor"
+},
+"13-221": {
+"fr": "Chape ρ [kg/m³]",
+"es": "Solera ρ [kg/m³]"
+},
+"13-222": {
+"fr": "Épaisseur de chape d [cm]",
+"es": "Espesor de solera d [cm]"
+},
+"13-223": {
+"fr": "Fenêtre (bâtiment de référence)",
+"es": "Ventana (edificio de referencia)"
+},
+"13-224": {
+"fr": "Résistance au feu des éléments",
+"es": "Resistencia al fuego de los elementos"
+},
+"13-225": {
+"fr": "Flanc",
+"es": "Flanco"
+},
+"13-226": {
+"fr": "Flanc 1 : plafond au-dessus — m′ [kg/m²] / l<sub>f</sub> [m] / jonction",
+"es": "Flanco 1: techo superior — m′ [kg/m²] / l<sub>f</sub> [m] / encuentro"
+},
+"13-227": {
+"fr": "Flanc 2 : sol en dessous — m′ [kg/m²] / l<sub>f</sub> [m] / jonction",
+"es": "Flanco 2: suelo inferior — m′ [kg/m²] / l<sub>f</sub> [m] / encuentro"
+},
+"13-228": {
+"fr": "Flanc 3 : mur extérieur — m′ [kg/m²] / l<sub>f</sub> [m] / jonction",
+"es": "Flanco 3: muro exterior — m′ [kg/m²] / l<sub>f</sub> [m] / encuentro"
+},
+"13-229": {
+"fr": "Flanc 4 : mur intérieur — m′ [kg/m²] / l<sub>f</sub> [m] / jonction",
+"es": "Flanco 4: muro interior — m′ [kg/m²] / l<sub>f</sub> [m] / encuentro"
+},
+"13-230": {
+"fr": "Surface par unité d'usage [m²]",
+"es": "Superficie por unidad de uso [m²]"
+},
+"13-231": {
+"fr": "Pour les vérifications de condensation et de moisissure, on prend à l'intérieur R<sub>si</sub> = 0,25 m²K/W (défavorable, angles et derrière les meubles). Façade ventilée : R<sub>se</sub> comme R<sub>si</sub>, les couches situées à l'extérieur de la lame d'air sont négligées.",
+"es": "Para las comprobaciones de condensación y moho se toma en el interior R<sub>si</sub> = 0,25 m²K/W (desfavorable, esquinas y detrás de muebles). Fachada ventilada: R<sub>se</sub> igual que R<sub>si</sub>, se desprecian las capas situadas fuera de la cámara de aire."
+},
+"13-232": {
+"fr": "Bâtiment de référence GEG (neuf) : U = 0,202 ≤ 0,28 W/(m²K) ✓ · élément renouvelé dans l'existant : ≤ 0,24 ✓",
+"es": "Edificio de referencia GEG (nueva construcción): U = 0,202 ≤ 0,28 W/(m²K) ✓ · elemento renovado en edificio existente: ≤ 0,24 ✓"
+},
+"13-233": {
+"fr": "Classe de bâtiment GK 3",
+"es": "Clase de edificio GK 3"
+},
+"13-234": {
+"fr": "Déterminer la classe de bâtiment",
+"es": "Determinar la clase de edificio"
+},
+"13-235": {
+"fr": "Classes de bâtiment (Musterbauordnung § 2)",
+"es": "Clases de edificio (Musterbauordnung § 2)"
+},
+"13-236": {
+"fr": "Plaque de plâtre (en partie), laine minérale avec liant",
+"es": "Placa de yeso laminado (en parte), lana mineral con aglutinante"
+},
+"13-237": {
+"fr": "Plaque de plâtre",
+"es": "Placa de yeso laminado"
+},
+"13-238": {
+"fr": "Plaque de plâtre : s<sub>d</sub> = 0,100 m",
+"es": "Placa de yeso laminado: s<sub>d</sub> = 0,100 m"
+},
+"13-239": {
+"fr": "Enduit de plâtre",
+"es": "Enlucido de yeso"
+},
+"13-240": {
+"fr": "Diagramme de Glaser (période de condensation)",
+"es": "Diagrama de Glaser (período de condensación)"
+},
+"13-241": {
+"fr": "Effectuer la vérification de Glaser",
+"es": "Realizar la comprobación de Glaser"
+},
+"13-242": {
+"fr": "Méthode de Glaser",
+"es": "Método de Glaser"
+},
+"13-243": {
+"fr": "Limite",
+"es": "Límite"
+},
+"13-244": {
+"fr": "Limite 1/2",
+"es": "Límite 1/2"
+},
+"13-245": {
+"fr": "Limite 2/3",
+"es": "Límite 2/3"
+},
+"13-246": {
+"fr": "Limite 3/4",
+"es": "Límite 3/4"
+},
+"13-247": {
+"fr": "Brique alvéolaire verticale RDK 0,8",
+"es": "Ladrillo perforado vertical RDK 0,8"
+},
+"13-248": {
+"fr": "Bois et dérivés du bois",
+"es": "Madera y derivados de la madera"
+},
+"13-249": {
+"fr": "Bois, dérivés du bois, EPS",
+"es": "Madera, derivados de la madera, EPS"
+},
+"13-250": {
+"fr": "Isolant en fibre de bois WLS 040",
+"es": "Aislante de fibra de madera WLS 040"
+},
+"13-251": {
+"fr": "Panneau léger de laine de bois",
+"es": "Panel ligero de lana de madera"
+},
+"13-252": {
+"fr": "Hauteur h = 6,50 m (plancher du dernier niveau comportant une pièce de séjour, par rapport au terrain en moyenne) · 4 unités d'usage de 85 m² = 340 m² · isolé",
+"es": "Altura h = 6,50 m (suelo de la última planta con una estancia habitable sobre el terreno, en promedio) · 4 unidades de uso de 85 m² = 340 m² · aislado"
+},
+"13-253": {
+"fr": "Hauteur h [m]",
+"es": "Altura h [m]"
+},
+"13-254": {
+"fr": "Température intérieure θ<sub>i</sub> [°C]",
+"es": "Temperatura interior θ<sub>i</sub> [°C]"
+},
+"13-255": {
+"fr": "Toute surface plus froide que 9,3 °C devient humide (condensation). La moisissure menace dès 80 % d'humidité en surface : θ ≤ 12,6 °C",
+"es": "Toda superficie más fría que 9,3 °C se humedece (condensación). El moho amenaza ya a partir del 80 % de humedad en la superficie: θ ≤ 12,6 °C"
+},
+"13-256": {
+"fr": "K = 0,6 + 5,5 · lg(m′<sub>plancher</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg(440 / 300) = 1,5 dB",
+"es": "K = 0,6 + 5,5 · lg(m′<sub>forjado</sub> / m′<sub>f,m</sub>) = 0,6 + 5,5 · lg(440 / 300) = 1,5 dB"
+},
+"13-257": {
+"fr": "K = 0,6 + 5,5 · lg(m′<sub>plancher</sub> / m′<sub>f,m</sub>) ≥ 0 — terme correctif pour la transmission par les murs latéraux (DIN 4109-2 ; m′<sub>f,m</sub> — moyenne des murs latéraux du local inférieur). La chape doit être désolidarisée de l'ouvrage sur tout son pourtour par des bandes périphériques isolantes — un seul pont acoustique annule ΔL<sub>w</sub>.",
+"es": "K = 0,6 + 5,5 · lg(m′<sub>forjado</sub> / m′<sub>f,m</sub>) ≥ 0 — valor de corrección para la transmisión por los muros de flanco (DIN 4109-2; m′<sub>f,m</sub> — media de los muros de flanco del recinto inferior). La solera debe separarse de la estructura en todo su perímetro con bandas aislantes perimetrales — un solo puente acústico anula ΔL<sub>w</sub>."
+},
+"13-258": {
+"fr": "K<sub>13</sub> s'applique à la voie directe le long du flanc (Ff), K<sub>12</sub> à la voie qui contourne l'angle (Df, Fd). Un mur séparatif lourd sur un flanc léger augmente K<sub>13</sub> — le flanc est « bloqué » à la jonction. Les flancs légers et continus (p. ex. mur extérieur léger) sont souvent le point faible.",
+"es": "K<sub>13</sub> se aplica al camino recto a lo largo del flanco (Ff), K<sub>12</sub> al camino que rodea la esquina (Df, Fd). Un muro separador pesado sobre un flanco ligero aumenta K<sub>13</sub> — el flanco queda «bloqueado» en el encuentro. Los flancos ligeros y continuos (p. ej. un muro exterior ligero) suelen ser el punto débil."
+},
+"13-259": {
+"fr": "Brique silico-calcaire RDK 1,8",
+"es": "Fábrica de silicocalcáreo RDK 1,8"
+},
+"13-260": {
+"fr": "Brique silico-calcaire RDK 1,8 : s<sub>d</sub> = 2,625 m",
+"es": "Fábrica de silicocalcáreo RDK 1,8: s<sub>d</sub> = 2,625 m"
+},
+"13-261": {
+"fr": "Brique silico-calcaire RDK 2,0",
+"es": "Fábrica de silicocalcáreo RDK 2,0"
+},
+"13-262": {
+"fr": "Enduit chaux-ciment",
+"es": "Enlucido de cal y cemento"
+},
+"13-263": {
+"fr": "Enduit chaux-ciment : s<sub>d</sub> = 0,400 m",
+"es": "Enlucido de cal y cemento: s<sub>d</sub> = 0,400 m"
+},
+"13-264": {
+"fr": "Classe",
+"es": "Clase"
+},
+"13-265": {
+"fr": "Correction K [dB] (si m′<sub>f,m</sub> = 0)",
+"es": "Corrección K [dB] (si m′<sub>f,m</sub> = 0)"
+},
+"13-266": {
+"fr": "L<sub>a</sub> — niveau de bruit extérieur déterminant issu du bruit routier, ferroviaire et industriel. R′<sub>w,ges</sub> s'applique à toute la façade composée du mur, de la fenêtre et du coffre de volet roulant.",
+"es": "L<sub>a</sub> — nivel de ruido exterior determinante procedente del ruido de tráfico rodado, ferroviario e industrial. R′<sub>w,ges</sub> se aplica a toda la fachada formada por muro, ventana y cajón de persiana."
+},
+"13-267": {
+"fr": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>plancher</sub>) = 164 − 35 · lg(440) = 71,5 dB",
+"es": "L<sub>n,eq,0,w</sub> = 164 − 35 · lg(m′<sub>forjado</sub>) = 164 − 35 · lg(440) = 71,5 dB"
+},
+"13-268": {
+"fr": "Bloc plein en béton léger RDK 0,8",
+"es": "Bloque macizo de hormigón ligero RDK 0,8"
+},
+"13-269": {
+"fr": "Air 20,0 °C, 50 %",
+"es": "Aire 20,0 °C, 50 %"
+},
+"13-270": {
+"fr": "Humidité de l'air, saturation et point de rosée",
+"es": "Humedad del aire, saturación y punto de rocío"
+},
+"13-271": {
+"fr": "Bruit aérien : les murs et planchers doivent avoir un R′<sub>w</sub> élevé. Bruit de choc : le niveau L′<sub>n,w</sub> sous le plancher doit être faible.",
+"es": "Ruido aéreo: los muros y forjados deben tener un R′<sub>w</sub> elevado. Ruido de impacto: el nivel L′<sub>n,w</sub> bajo el forjado debe ser bajo."
+},
+"13-272": {
+"fr": "Isolation aux bruits aériens des éléments massifs monocouches",
+"es": "Aislamiento a ruido aéreo de elementos macizos de una hoja"
+},
+"13-273": {
+"fr": "Température de l'air θ<sub>i</sub> [°C]",
+"es": "Temperatura del aire θ<sub>i</sub> [°C]"
+}
+}

@@ -1,0 +1,1237 @@
+[
+ {
+  "id": "23-0",
+  "de": "<div class=\"calc-field\"><label>Schnee s [kN/m²]</label><input type=\"number\" id=\"lw-s\" value=\"0.68\" step=\"any\" oninput=\"updateLW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Snow s [kN/m²]</label><input type=\"number\" id=\"lw-s\" value=\"0.68\" step=\"any\" oninput=\"updateLW()\"></div>"
+ },
+ {
+  "id": "23-1",
+  "de": "<div class=\"calc-field\"><label>Wandeigenlast je Geschoss [kN/m]</label><input type=\"number\" id=\"lw-gW\" value=\"9\" step=\"any\" oninput=\"updateLW()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Wall self-weight per storey [kN/m]</label><input type=\"number\" id=\"lw-gW\" value=\"9\" step=\"any\" oninput=\"updateLW()\"></div>"
+ },
+ {
+  "id": "23-2",
+  "de": "<div class=\"calc-field\"><label>Durchlaufwirkung</label><select id=\"lw-dlt\" onchange=\"updateLW()\"><option value=\"1\" selected>berücksichtigen</option><option value=\"0\">nicht (Einfeldträger)</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Continuity</label><select id=\"lw-dlt\" onchange=\"updateLW()\"><option value=\"1\" selected>consider</option><option value=\"0\">no (simply supported beam)</option></select></div>"
+ },
+ {
+  "id": "23-3",
+  "de": "Innenwand unter {} Decken + Dach",
+  "en": "Internal wall under {} floors + roof"
+ },
+ {
+  "id": "23-4",
+  "de": "§Lasteinzugsbreite der Mittelwand",
+  "en": "§Tributary width of the middle wall"
+ },
+ {
+  "id": "23-5",
+  "de": "!Einfeldträger-Annahme: halbe Spannweiten links und rechts",
+  "en": "!Simple-beam assumption: half the spans to the left and right"
+ },
+ {
+  "id": "23-6",
+  "de": "!Durchlaufwirkung (Zweifeldträger, Gleichlast): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = {} m² je kN/m²",
+  "en": "!Continuity (two-span beam, uniform load): M<sub>B</sub> = −(l<sub>1</sub>³ + l<sub>2</sub>³) / (8 · (l<sub>1</sub> + l<sub>2</sub>)) = {} m² per kN/m²"
+ },
+ {
+  "id": "23-7",
+  "de": "mit Durchlaufwirkung",
+  "en": "with continuity"
+ },
+ {
+  "id": "23-8",
+  "de": "§Charakteristische Lasten am Wandfuß",
+  "en": "§Characteristic loads at the wall base"
+ },
+ {
+  "id": "23-9",
+  "de": "N<sub>G</sub> = n · g<sub>k</sub> · b<sub>e</sub> + g<sub>Dach</sub> · b<sub>e</sub> + n · g<sub>Wand</sub> = {} · {} · {} + {} · {} + {} · {} = {} kN/m",
+  "en": "N<sub>G</sub> = n · g<sub>k</sub> · b<sub>e</sub> + g<sub>roof</sub> · b<sub>e</sub> + n · g<sub>wall</sub> = {} · {} · {} + {} · {} + {} · {} = {} kN/m"
+ },
+ {
+  "id": "23-10",
+  "de": "Nutzlast führend: 1,35 · N<sub>G</sub> + 1,5 · N<sub>Q</sub> + 1,5 · 0,5 · N<sub>S</sub> = {} kN/m",
+  "en": "Imposed load leading: 1.35 · N<sub>G</sub> + 1.5 · N<sub>Q</sub> + 1.5 · 0.5 · N<sub>S</sub> = {} kN/m"
+ },
+ {
+  "id": "23-11",
+  "de": "Schnee führend: 1,35 · N<sub>G</sub> + 1,5 · N<sub>S</sub> + 1,5 · 0,7 · N<sub>Q</sub> = {} kN/m",
+  "en": "Snow leading: 1.35 · N<sub>G</sub> + 1.5 · N<sub>S</sub> + 1.5 · 0.7 · N<sub>Q</sub> = {} kN/m"
+ },
+ {
+  "id": "23-12",
+  "de": "Nutzlast",
+  "en": "Imposed load"
+ },
+ {
+  "id": "23-13",
+  "de": "!maßgebend n<sub>Ed</sub> = {} kN/m ({} führend; ψ<sub>0</sub> = 0,7 für Kat. A, 0,5 für Schnee bis 1000 m)",
+  "en": "!governing n<sub>Ed</sub> = {} kN/m ({} leading; ψ<sub>0</sub> = 0.7 for cat. A, 0.5 for snow up to 1000 m)"
+ },
+ {
+  "id": "23-14",
+  "de": "ohne Durchlaufwirkung",
+  "en": "without continuity"
+ },
+ {
+  "id": "23-15",
+  "de": "<a class=\"applink\" href=\"#/baustatik/arbeitssatz/pvk\">→ Alternativ: Arbeitssatz</a>",
+  "en": "<a class=\"applink\" href=\"#/baustatik/arbeitssatz/pvk\">→ Alternative: principle of virtual work</a>"
+ },
+ {
+  "id": "23-16",
+  "de": "<a class=\"applink\" href=\"#/lastannahmen/lasten/schnee\">→ Dachneigung und Schneelast</a>",
+  "en": "<a class=\"applink\" href=\"#/lastannahmen/lasten/schnee\">→ Roof pitch and snow load</a>"
+ },
+ {
+  "id": "23-17",
+  "de": "<a class=\"applink\" href=\"#/mathematik/geometrie/flaechen\">→ Weitere Flächen mit Schwerpunkt und Trägheitsmoment</a>",
+  "en": "<a class=\"applink\" href=\"#/mathematik/geometrie/flaechen\">→ More areas with centroid and second moment of area</a>"
+ },
+ {
+  "id": "23-18",
+  "de": "<b>Gauß-Verfahren</b> für größere Systeme: Gleichungen so kombinieren, dass unterhalb der Diagonale Nullen entstehen (Dreiecksform), dann von unten nach oben rückwärts einsetzen. So löst auch statiq·calc die Steifigkeitsgleichung K·u = F.",
+  "en": "<b>Gaussian elimination</b> for larger systems: combine the equations so that zeros appear below the diagonal (triangular form), then back-substitute from the bottom up. This is also how statiq·calc solves the stiffness equation K·u = F."
+ },
+ {
+  "id": "23-19",
+  "de": "<span class=\"st-n\">1</span><span>Ansatz: Die Nulllinie liegt im Schwerpunkt des ideellen Querschnitts</span>",
+  "en": "<span class=\"st-n\">1</span><span>Approach: the neutral axis lies at the centroid of the transformed section</span>"
+ },
+ {
+  "id": "23-20",
+  "de": "<span class=\"st-n\">1</span><span>Erweiterte Koeffizientenmatrix (A | b)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Augmented coefficient matrix (A | b)</span>"
+ },
+ {
+  "id": "23-21",
+  "de": "<span class=\"st-n\">1</span><span>Gleichgewicht am Knoten (Zug positiv, F = 10 kN nach unten)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Equilibrium at the node (tension positive, F = 10 kN downwards)</span>"
+ },
+ {
+  "id": "23-22",
+  "de": "<span class=\"st-n\">2</span><span>Koeffizienten</span>",
+  "en": "<span class=\"st-n\">2</span><span>Coefficients</span>"
+ },
+ {
+  "id": "23-23",
+  "de": "<span class=\"st-n\">2</span><span>Normalform x² + p · x + q = 0 (durch b/2 teilen)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Normal form x² + p · x + q = 0 (divide by b/2)</span>"
+ },
+ {
+  "id": "23-24",
+  "de": "<span class=\"st-n\">2</span><span>Spalte 1: Nullen unter dem Pivot a<sub>11</sub> = 2,000</span>",
+  "en": "<span class=\"st-n\">2</span><span>Column 1: zeros below the pivot a<sub>11</sub> = 2.000</span>"
+ },
+ {
+  "id": "23-25",
+  "de": "<span class=\"st-n\">3</span><span>Determinante</span>",
+  "en": "<span class=\"st-n\">3</span><span>Determinant</span>"
+ },
+ {
+  "id": "23-26",
+  "de": "<span class=\"st-n\">3</span><span>Spalte 2: Nullen unter dem Pivot a<sub>22</sub> = 0,500</span>",
+  "en": "<span class=\"st-n\">3</span><span>Column 2: zeros below the pivot a<sub>22</sub> = 0.500</span>"
+ },
+ {
+  "id": "23-27",
+  "de": "<span class=\"st-n\">3</span><span>p-q-Formel</span>",
+  "en": "<span class=\"st-n\">3</span><span>p-q formula</span>"
+ },
+ {
+  "id": "23-28",
+  "de": "<span class=\"st-n\">4</span><span>Cramersche Regel</span>",
+  "en": "<span class=\"st-n\">4</span><span>Cramer's rule</span>"
+ },
+ {
+  "id": "23-29",
+  "de": "<span class=\"st-n\">4</span><span>Probe</span>",
+  "en": "<span class=\"st-n\">4</span><span>Check</span>"
+ },
+ {
+  "id": "23-30",
+  "de": "<span class=\"st-n\">4</span><span>Rückwärts einsetzen</span>",
+  "en": "<span class=\"st-n\">4</span><span>Back substitution</span>"
+ },
+ {
+  "id": "23-31",
+  "de": "<span class=\"st-n\">5</span><span>Kontrolle</span>",
+  "en": "<span class=\"st-n\">5</span><span>Check</span>"
+ },
+ {
+  "id": "23-32",
+  "de": "<span class=\"st-n\">5</span><span>Probe</span>",
+  "en": "<span class=\"st-n\">5</span><span>Check</span>"
+ },
+ {
+  "id": "23-33",
+  "de": "<span>A</span><b>α·r² (α im Bogenmaß)</b>",
+  "en": "<span>A</span><b>α·r² (α in radians)</b>"
+ },
+ {
+  "id": "23-34",
+  "de": "<span>Diagonalen</span><b>senkrecht, halbieren sich</b>",
+  "en": "<span>Diagonals</span><b>perpendicular, bisect each other</b>"
+ },
+ {
+  "id": "23-35",
+  "de": "<span>Halbkugel</span><b>V = 2/3 · π · r³</b>",
+  "en": "<span>Hemisphere</span><b>V = 2/3 · π · r³</b>"
+ },
+ {
+  "id": "23-36",
+  "de": "<span>S</span><b>Mitte (symmetrisch)</b>",
+  "en": "<span>S</span><b>centre (symmetrical)</b>"
+ },
+ {
+  "id": "23-37",
+  "de": "<span>S</span><b>Mitte</b>",
+  "en": "<span>S</span><b>centre</b>"
+ },
+ {
+  "id": "23-38",
+  "de": "<span>S</span><b>h/3 über der Basis</b>",
+  "en": "<span>S</span><b>h/3 above the base</b>"
+ },
+ {
+  "id": "23-39",
+  "de": "<span>S</span><b>h/3 über der Seite</b>",
+  "en": "<span>S</span><b>h/3 above the side</b>"
+ },
+ {
+  "id": "23-40",
+  "de": "<span>Winkel</span><b>je 60°</b>",
+  "en": "<span>Angles</span><b>60° each</b>"
+ },
+ {
+  "id": "23-41",
+  "de": "<span>b</span><b>Bogen 2α·r</b>",
+  "en": "<span>b</span><b>arc 2α·r</b>"
+ },
+ {
+  "id": "23-42",
+  "de": "<span>e</span><b>2h/5 über der Sehne</b>",
+  "en": "<span>e</span><b>2h/5 above the chord</b>"
+ },
+ {
+  "id": "23-43",
+  "de": "<span>e</span><b>2·a (Eckmaß)</b>",
+  "en": "<span>e</span><b>2·a (across corners)</b>"
+ },
+ {
+  "id": "23-44",
+  "de": "<span>s</span><b>a·√3 (Schlüsselweite)</b>",
+  "en": "<span>s</span><b>a·√3 (across flats)</b>"
+ },
+ {
+  "id": "23-45",
+  "de": "<span>x<sub>S</sub></span><b>¾·b vom Scheitel</b>",
+  "en": "<span>x<sub>S</sub></span><b>¾·b from the vertex</b>"
+ },
+ {
+  "id": "23-46",
+  "de": "<span>z<sub>S</sub></span><b>3h/10 über der Basis</b>",
+  "en": "<span>z<sub>S</sub></span><b>3h/10 above the base</b>"
+ },
+ {
+  "id": "23-47",
+  "de": "Ableitung als Steigung",
+  "en": "Derivative as slope"
+ },
+ {
+  "id": "23-48",
+  "de": "Ableitung und Integral",
+  "en": "Derivative and integral"
+ },
+ {
+  "id": "23-49",
+  "de": "Ankathete",
+  "en": "Adjacent side"
+ },
+ {
+  "id": "23-50",
+  "de": "Anwendung in der Statik: Zerlegen einer schrägen Kraft F unter dem Winkel α zur Senkrechten: V = F·cos α, H = F·sin α.",
+  "en": "Application in structural analysis: resolving an inclined force F at angle α to the vertical: V = F·cos α, H = F·sin α."
+ },
+ {
+  "id": "23-51",
+  "de": "Anwendung: Höhe eines Pultdachs an einer Zwischenstelle. Firsthöhe 3,0 m über 6,0 m Länge → in 2,0 m Abstand vom Tiefpunkt: 3,0 · 2,0/6,0 = <b>1,0 m</b>.",
+  "en": "Application: height of a mono-pitch roof at an intermediate point. Ridge height 3.0 m over 6.0 m length → at 2.0 m from the low point: 3.0 · 2.0/6.0 = <b>1.0 m</b>."
+ },
+ {
+  "id": "23-52",
+  "de": "Baustelle: Ein rechter Winkel lässt sich mit dem Maßband abstecken — 3 m, 4 m und 5 m bilden ein rechtwinkliges Dreieck (3² + 4² = 9 + 16 = 25 = 5²).",
+  "en": "On site: a right angle can be set out with a tape measure — 3 m, 4 m and 5 m form a right-angled triangle (3² + 4² = 9 + 16 = 25 = 5²)."
+ },
+ {
+  "id": "23-53",
+  "de": "Bedingung 1",
+  "en": "Condition 1"
+ },
+ {
+  "id": "23-54",
+  "de": "Bedingung 2",
+  "en": "Condition 2"
+ },
+ {
+  "id": "23-55",
+  "de": "Beide positiv → beide Stäbe auf Zug (der Knoten hängt an den Stäben)",
+  "en": "Both positive → both members in tension (the node hangs from the members)"
+ },
+ {
+  "id": "23-56",
+  "de": "Beispiel 1: quadratische Gleichung",
+  "en": "Example 1: quadratic equation"
+ },
+ {
+  "id": "23-57",
+  "de": "Beispiel 2: lineares Gleichungssystem 2 × 2",
+  "en": "Example 2: system of linear equations 2 × 2"
+ },
+ {
+  "id": "23-58",
+  "de": "Beispiel 3: Gauß-Verfahren 3 × 3 (eigene Werte möglich)",
+  "en": "Example 3: Gaussian elimination 3 × 3 (your own values possible)"
+ },
+ {
+  "id": "23-59",
+  "de": "Beispiel Bohrpfahl: d = 0,90 m, Länge 12 m → V = π · 0,45² · 12 = <b>7,63 m³</b> Beton (zuzüglich Mehrverbrauch).",
+  "en": "Example bored pile: d = 0.90 m, length 12 m → V = π · 0.45² · 12 = <b>7.63 m³</b> of concrete (plus overconsumption)."
+ },
+ {
+  "id": "23-60",
+  "de": "Beispiel: Druckzonenhöhe x im Zustand II (Rechteckquerschnitt)",
+  "en": "Example: compression zone depth x in state II (rectangular section)"
+ },
+ {
+  "id": "23-61",
+  "de": "Beispiel: Ein Bogen spannt s = 10 m bei h = 2 m Stich.<br> r = 10²/(8·2) + 2/2 = 6,25 + 1 = <b>7,25 m</b> · φ = 2·arcsin(5/7,25) = 87,2° = 1,522 rad · b = 7,25 · 1,522 = <b>11,03 m</b>",
+  "en": "Example: an arch spans s = 10 m with a rise of h = 2 m.<br> r = 10²/(8·2) + 2/2 = 6.25 + 1 = <b>7.25 m</b> · φ = 2·arcsin(5/7.25) = 87.2° = 1.522 rad · b = 7.25 · 1.522 = <b>11.03 m</b>"
+ },
+ {
+  "id": "23-62",
+  "de": "Beispiel: Stabkräfte an einem Knoten (2 Gleichungen, 2 Unbekannte)",
+  "en": "Example: member forces at a node (2 equations, 2 unknowns)"
+ },
+ {
+  "id": "23-63",
+  "de": "Beliebiges Dreieck",
+  "en": "General triangle"
+ },
+ {
+  "id": "23-64",
+  "de": "Besondere Dreiecke",
+  "en": "Special triangles"
+ },
+ {
+  "id": "23-65",
+  "de": "Biegelinie",
+  "en": "Elastic curve"
+ },
+ {
+  "id": "23-66",
+  "de": "Bogenlänge:&nbsp; b = r · φ&nbsp;&nbsp; (φ im Bogenmaß)<br> Sehne:&nbsp; s = 2 · r · sin(φ/2)<br> Stichhöhe:&nbsp; h = r · (1 − cos(φ/2))<br> Radius aus Sehne und Stich:&nbsp; r = s²/(8·h) + h/2<br> Kreisausschnitt:&nbsp; A = r² · φ / 2&nbsp;&nbsp;&nbsp; Kreisabschnitt:&nbsp; A = r²/2 · (φ − sin φ)",
+  "en": "Arc length:&nbsp; b = r · φ&nbsp;&nbsp; (φ in radians)<br> Chord:&nbsp; s = 2 · r · sin(φ/2)<br> Rise:&nbsp; h = r · (1 − cos(φ/2))<br> Radius from chord and rise:&nbsp; r = s²/(8·h) + h/2<br> Circular sector:&nbsp; A = r² · φ / 2&nbsp;&nbsp;&nbsp; Circular segment:&nbsp; A = r²/2 · (φ − sin φ)"
+ },
+ {
+  "id": "23-67",
+  "de": "Bogenmaß",
+  "en": "Radians"
+ },
+ {
+  "id": "23-68",
+  "de": "D = 0: keine oder unendlich viele Lösungen (in der Statik: verschiebliches System)",
+  "en": "D = 0: no solution or infinitely many solutions (in structural analysis: a mechanism)"
+ },
+ {
+  "id": "23-69",
+  "de": "Dachneigung",
+  "en": "Roof pitch"
+ },
+ {
+  "id": "23-70",
+  "de": "Determinante 3×3 (Sarrus):<br> det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ − a₁₃a₂₂a₃₁ − a₁₁a₂₃a₃₂ − a₁₂a₂₁a₃₃",
+  "en": "Determinant 3×3 (Sarrus):<br> det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ − a₁₃a₂₂a₃₁ − a₁₁a₂₃a₃₂ − a₁₂a₂₁a₃₃"
+ },
+ {
+  "id": "23-71",
+  "de": "Die Ableitung f′(x₀) ist die Steigung der Tangente im Punkt x₀ — Grenzwert des Differenzenquotienten Δy/Δx.",
+  "en": "The derivative f′(x₀) is the slope of the tangent at the point x₀ — the limit of the difference quotient Δy/Δx."
+ },
+ {
+  "id": "23-72",
+  "de": "Die Flächen der Quadrate über den Katheten ergeben zusammen das Quadrat über der Hypotenuse.",
+  "en": "The areas of the squares on the two legs together equal the square on the hypotenuse."
+ },
+ {
+  "id": "23-73",
+  "de": "Die Höhe h teilt die Hypotenuse c in die Abschnitte p (unter a) und q (unter b).",
+  "en": "The altitude h divides the hypotenuse c into the segments p (below a) and q (below b)."
+ },
+ {
+  "id": "23-74",
+  "de": "Dreieck",
+  "en": "Triangle"
+ },
+ {
+  "id": "23-75",
+  "de": "Einfeldträger mit Gleichlast: w(x) = q/(24EI) · (L³x − 2Lx³ + x⁴), in der Mitte w = 5qL⁴/(384EI).",
+  "en": "Simply supported beam with uniform load: w(x) = q/(24EI) · (L³x − 2Lx³ + x⁴), at midspan w = 5qL⁴/(384EI)."
+ },
+ {
+  "id": "23-76",
+  "de": "Einheiten in der Statik",
+  "en": "Units in structural analysis"
+ },
+ {
+  "id": "23-77",
+  "de": "Einheitskreis",
+  "en": "Unit circle"
+ },
+ {
+  "id": "23-78",
+  "de": "Gauß-Verfahren",
+  "en": "Gaussian elimination"
+ },
+ {
+  "id": "23-79",
+  "de": "Gegenkathete",
+  "en": "Opposite side"
+ },
+ {
+  "id": "23-80",
+  "de": "Gegenüber jeder Ecke liegt die gleichnamige Seite: a gegenüber A usw.",
+  "en": "Opposite each vertex lies the side of the same name: a opposite A, and so on."
+ },
+ {
+  "id": "23-81",
+  "de": "Gleichschenkliges Dreieck",
+  "en": "Isosceles triangle"
+ },
+ {
+  "id": "23-82",
+  "de": "Gleichseitiges Dreieck",
+  "en": "Equilateral triangle"
+ },
+ {
+  "id": "23-83",
+  "de": "Grad",
+  "en": "Degrees"
+ },
+ {
+  "id": "23-84",
+  "de": "Grundableitungen und Stammfunktionen",
+  "en": "Basic derivatives and antiderivatives"
+ },
+ {
+  "id": "23-85",
+  "de": "Halbkreis",
+  "en": "Semicircle"
+ },
+ {
+  "id": "23-86",
+  "de": "Häufiger Fehler: σ = M/W mit M in kNm und W in cm³. Richtig: M in kNcm → σ in kN/cm², dann ×10 → N/mm². Beispiel: 31,25 kNm = 3125 kNcm; W = 557 cm³ → σ = 5,61 kN/cm² = <b>56,1 N/mm²</b>.",
+  "en": "Common mistake: σ = M/W with M in kNm and W in cm³. Correct: M in kNcm → σ in kN/cm², then ×10 → N/mm². Example: 31.25 kNm = 3125 kNcm; W = 557 cm³ → σ = 5.61 kN/cm² = <b>56.1 N/mm²</b>."
+ },
+ {
+  "id": "23-87",
+  "de": "Höhensatz und Kathetensatz",
+  "en": "Altitude theorem and leg theorem"
+ },
+ {
+  "id": "23-88",
+  "de": "I<sub>y</sub> jeweils um die waagerechte Schwerachse. Beim Kreisausschnitt ist α der halbe Öffnungswinkel.",
+  "en": "I<sub>y</sub> in each case about the horizontal centroidal axis. For the circular sector, α is half the opening angle."
+ },
+ {
+  "id": "23-89",
+  "de": "In der Statik: Die Resultierende einer Streckenlast ist gleich der Fläche der Lastfigur und wirkt in ihrem Schwerpunkt. Dreieckslast q, Länge L → R = qL/2 im Drittelpunkt.",
+  "en": "In structural analysis: the resultant of a line load equals the area of the load diagram and acts at its centroid. Triangular load q, length L → R = qL/2 at the third point."
+ },
+ {
+  "id": "23-90",
+  "de": "In jedem Dreieck gilt die Winkelsumme α + β + γ = 180°. Gleich lange Seiten sind mit einem Strich markiert.",
+  "en": "In every triangle the angle sum is α + β + γ = 180°. Sides of equal length are marked with a tick."
+ },
+ {
+  "id": "23-91",
+  "de": "Kegel",
+  "en": "Cone"
+ },
+ {
+  "id": "23-92",
+  "de": "Knoten eines Fachwerks: zwei unbekannte Stabkräfte, zwei Gleichgewichtsbedingungen.",
+  "en": "Truss node: two unknown member forces, two equilibrium conditions."
+ },
+ {
+  "id": "23-93",
+  "de": "Knoten mit zwei Stäben",
+  "en": "Node with two members"
+ },
+ {
+  "id": "23-94",
+  "de": "Kreisausschnitt",
+  "en": "Circular sector"
+ },
+ {
+  "id": "23-95",
+  "de": "Kreisbogen, Sehne und Stichhöhe",
+  "en": "Circular arc, chord and rise"
+ },
+ {
+  "id": "23-96",
+  "de": "Kugel",
+  "en": "Sphere"
+ },
+ {
+  "id": "23-97",
+  "de": "Lagerung am Rand",
+  "en": "Boundary support"
+ },
+ {
+  "id": "23-98",
+  "de": "Lineare Gleichungssysteme",
+  "en": "Systems of linear equations"
+ },
+ {
+  "id": "23-99",
+  "de": "Lösung: x<sub>1</sub> = <b>2,0000</b>, x<sub>2</sub> = <b>3,0000</b>, x<sub>3</sub> = <b>-1,0000</b>",
+  "en": "Solution: x<sub>1</sub> = <b>2.0000</b>, x<sub>2</sub> = <b>3.0000</b>, x<sub>3</sub> = <b>-1.0000</b>"
+ },
+ {
+  "id": "23-100",
+  "de": "Masse → Gewicht",
+  "en": "Mass → weight"
+ },
+ {
+  "id": "23-101",
+  "de": "Parabel mit Nullstellen",
+  "en": "Parabola with roots"
+ },
+ {
+  "id": "23-102",
+  "de": "Parabelsegment",
+  "en": "Parabolic segment"
+ },
+ {
+  "id": "23-103",
+  "de": "Parabelzwickel",
+  "en": "Parabolic spandrel"
+ },
+ {
+  "id": "23-104",
+  "de": "Parallelogramm",
+  "en": "Parallelogram"
+ },
+ {
+  "id": "23-105",
+  "de": "Produktregel:&nbsp; (u·v)′ = u′·v + u·v′<br> Quotientenregel:&nbsp; (u/v)′ = (u′·v − u·v′) / v²<br> Kettenregel:&nbsp; f(g(x))′ = f′(g(x)) · g′(x)<br> Partielle Integration:&nbsp; ∫ u·v′ dx = u·v − ∫ u′·v dx",
+  "en": "Product rule:&nbsp; (u·v)′ = u′·v + u·v′<br> Quotient rule:&nbsp; (u/v)′ = (u′·v − u·v′) / v²<br> Chain rule:&nbsp; f(g(x))′ = f′(g(x)) · g′(x)<br> Integration by parts:&nbsp; ∫ u·v′ dx = u·v − ∫ u′·v dx"
+ },
+ {
+  "id": "23-106",
+  "de": "Prozent und Grad sind nicht proportional: 100 % entsprechen 45°, nicht 90°.",
+  "en": "Percent and degrees are not proportional: 100 % corresponds to 45°, not 90°."
+ },
+ {
+  "id": "23-107",
+  "de": "Pythagoras:&nbsp; a² + b² = c²&nbsp;&nbsp;&nbsp; c = √(a² + b²)<br> Höhensatz:&nbsp; h² = p · q<br> Kathetensatz:&nbsp; a² = c · p&nbsp;&nbsp;&nbsp; b² = c · q<br> Fläche:&nbsp; A = a · b / 2 = c · h / 2",
+  "en": "Pythagoras:&nbsp; a² + b² = c²&nbsp;&nbsp;&nbsp; c = √(a² + b²)<br> Altitude theorem:&nbsp; h² = p · q<br> Leg theorem:&nbsp; a² = c · p&nbsp;&nbsp;&nbsp; b² = c · q<br> Area:&nbsp; A = a · b / 2 = c · h / 2"
+ },
+ {
+  "id": "23-108",
+  "de": "Quader",
+  "en": "Cuboid"
+ },
+ {
+  "id": "23-109",
+  "de": "Quadrat",
+  "en": "Square"
+ },
+ {
+  "id": "23-110",
+  "de": "Quadratische Gleichungen",
+  "en": "Quadratic equations"
+ },
+ {
+  "id": "23-111",
+  "de": "Quadratische Pyramide",
+  "en": "Square pyramid"
+ },
+ {
+  "id": "23-112",
+  "de": "Raute",
+  "en": "Rhombus"
+ },
+ {
+  "id": "23-113",
+  "de": "Rechtwinkliges Dreieck",
+  "en": "Right-angled triangle"
+ },
+ {
+  "id": "23-114",
+  "de": "Rechtwinkliges Dreieck — Pythagoras, Höhen- und Kathetensatz",
+  "en": "Right-angled triangle — Pythagoras, altitude and leg theorems"
+ },
+ {
+  "id": "23-115",
+  "de": "Regelmäßiges Sechseck",
+  "en": "Regular hexagon"
+ },
+ {
+  "id": "23-116",
+  "de": "Regeln",
+  "en": "Rules"
+ },
+ {
+  "id": "23-117",
+  "de": "Satz des Pythagoras",
+  "en": "Pythagorean theorem"
+ },
+ {
+  "id": "23-118",
+  "de": "Scheitel (−p/2 | q − p²/4)",
+  "en": "Vertex (−p/2 | q − p²/4)"
+ },
+ {
+  "id": "23-119",
+  "de": "Schlüsselweite: Eine Mutter M16 hat s = 24 mm. Das Eckmaß ist e = 2·s/√3 = 2·24/1,732 ≈ <b>27,7 mm</b> — so viel Platz braucht der Schlüssel mindestens.",
+  "en": "Width across flats: an M16 nut has s = 24 mm. The width across corners is e = 2·s/√3 = 2·24/1.732 ≈ <b>27.7 mm</b> — at least this much space is needed for the spanner."
+ },
+ {
+  "id": "23-120",
+  "de": "Sinussatz:&nbsp; a / sin α = b / sin β = c / sin γ<br> Kosinussatz:&nbsp; c² = a² + b² − 2·a·b·cos γ<br> Fläche:&nbsp; A = c·h<sub>c</sub>/2 = ½·a·b·sin γ&nbsp;&nbsp;&nbsp; α + β + γ = 180°",
+  "en": "Law of sines:&nbsp; a / sin α = b / sin β = c / sin γ<br> Law of cosines:&nbsp; c² = a² + b² − 2·a·b·cos γ<br> Area:&nbsp; A = c·h<sub>c</sub>/2 = ½·a·b·sin γ&nbsp;&nbsp;&nbsp; α + β + γ = 180°"
+ },
+ {
+  "id": "23-121",
+  "de": "Spannung",
+  "en": "Stress"
+ },
+ {
+  "id": "23-122",
+  "de": "Stab 1 unter 30° nach links oben, Stab 2 unter 60° nach rechts oben",
+  "en": "Member 1 at 30° up to the left, member 2 at 60° up to the right"
+ },
+ {
+  "id": "23-123",
+  "de": "Statik-Beispiel: q konstant → Q = −q·x + C₁ → M = −q·x²/2 + C₁·x + C₂. Die Konstanten folgen aus den Randbedingungen (z. B. M = 0 an gelenkigen Enden).",
+  "en": "Structural example: q constant → Q = −q·x + C₁ → M = −q·x²/2 + C₁·x + C₂. The constants follow from the boundary conditions (e.g. M = 0 at pinned ends)."
+ },
+ {
+  "id": "23-124",
+  "de": "Steigung",
+  "en": "Gradient"
+ },
+ {
+  "id": "23-125",
+  "de": "Steigung f′(x₀)",
+  "en": "Slope f′(x₀)"
+ },
+ {
+  "id": "23-126",
+  "de": "Steigung in Prozent und Neigungswinkel",
+  "en": "Gradient in percent and angle of inclination"
+ },
+ {
+  "id": "23-127",
+  "de": "Steigung p [%]",
+  "en": "Gradient p [%]"
+ },
+ {
+  "id": "23-128",
+  "de": "Steigung und Neigungswinkel",
+  "en": "Gradient and angle of inclination"
+ },
+ {
+  "id": "23-129",
+  "de": "Strahlensatz",
+  "en": "Intercept theorem"
+ },
+ {
+  "id": "23-130",
+  "de": "Streckenlast",
+  "en": "Line load"
+ },
+ {
+  "id": "23-131",
+  "de": "Trapez",
+  "en": "Trapezium"
+ },
+ {
+  "id": "23-132",
+  "de": "Typische Werte: Entwässerungsrinne 0,5 – 1 % · Flachdach mindestens 2 % · barrierefreie Rampe höchstens 6 % · Satteldach meist 30° – 45°.",
+  "en": "Typical values: drainage channel 0.5 – 1 % · flat roof at least 2 % · barrier-free ramp at most 6 % · pitched roof usually 30° – 45°."
+ },
+ {
+  "id": "23-133",
+  "de": "Umrechnung",
+  "en": "Conversion"
+ },
+ {
+  "id": "23-134",
+  "de": "Umrechnungstabelle",
+  "en": "Conversion table"
+ },
+ {
+  "id": "23-135",
+  "de": "V — Volumen, O — Oberfläche, M — Mantelfläche (ohne Grund- und Deckfläche), s — Mantellinie, h<sub>s</sub> — Höhe der Seitenfläche.",
+  "en": "V — volume, O — surface area, M — lateral surface (without base and top), s — slant height, h<sub>s</sub> — height of the side face."
+ },
+ {
+  "id": "23-136",
+  "de": "Vierecke und regelmäßiges Sechseck",
+  "en": "Quadrilaterals and regular hexagon"
+ },
+ {
+  "id": "23-137",
+  "de": "Viermal integrieren, dann die vier Integrationskonstanten aus den Randbedingungen bestimmen:",
+  "en": "Integrate four times, then determine the four constants of integration from the boundary conditions:"
+ },
+ {
+  "id": "23-138",
+  "de": "Volumen und Oberfläche",
+  "en": "Volume and surface area"
+ },
+ {
+  "id": "23-139",
+  "de": "Waagerechte Länge l, Höhenunterschied h, schräge Länge s.",
+  "en": "Horizontal length l, height difference h, sloping length s."
+ },
+ {
+  "id": "23-140",
+  "de": "Winkel",
+  "en": "Angle"
+ },
+ {
+  "id": "23-141",
+  "de": "ZA : ZA′ = ZB : ZB′&nbsp;&nbsp;&nbsp; (1. Strahlensatz)<br> AB : A′B′ = ZA : ZA′&nbsp;&nbsp;&nbsp; (2. Strahlensatz)",
+  "en": "ZA : ZA′ = ZB : ZB′&nbsp;&nbsp;&nbsp; (1st intercept theorem)<br> AB : A′B′ = ZA : ZA′&nbsp;&nbsp;&nbsp; (2nd intercept theorem)"
+ },
+ {
+  "id": "23-142",
+  "de": "Zeile 1: 2,00 · 2,000 + 1,00 · 3,000 + -1,00 · -1,000 = 8,000 = b<sub>1</sub> ✓",
+  "en": "Row 1: 2.00 · 2.000 + 1.00 · 3.000 + -1.00 · -1.000 = 8.000 = b<sub>1</sub> ✓"
+ },
+ {
+  "id": "23-143",
+  "de": "Zeile 2: -3,00 · 2,000 + -1,00 · 3,000 + 2,00 · -1,000 = -11,000 = b<sub>2</sub> ✓",
+  "en": "Row 2: -3.00 · 2.000 + -1.00 · 3.000 + 2.00 · -1.000 = -11.000 = b<sub>2</sub> ✓"
+ },
+ {
+  "id": "23-144",
+  "de": "Zeile 3: -2,00 · 2,000 + 1,00 · 3,000 + 2,00 · -1,000 = -3,000 = b<sub>3</sub> ✓",
+  "en": "Row 3: -2.00 · 2.000 + 1.00 · 3.000 + 2.00 · -1.000 = -3.000 = b<sub>3</sub> ✓"
+ },
+ {
+  "id": "23-145",
+  "de": "Zentriwinkel φ, Radius r, Bogen b (orange), Sehne s (blau), Stichhöhe h (grün), Kreisabschnitt hellblau.",
+  "en": "Central angle φ, radius r, arc b (orange), chord s (blue), rise h (green), circular segment light blue."
+ },
+ {
+  "id": "23-146",
+  "de": "Zerlegung einer Kraft",
+  "en": "Resolving a force"
+ },
+ {
+  "id": "23-147",
+  "de": "Zerlegung einer Kraft in eine senkrechte und eine waagerechte Komponente",
+  "en": "Resolving a force into a vertical and a horizontal component"
+ },
+ {
+  "id": "23-148",
+  "de": "Zwei Strahlen von Z werden von zwei parallelen Geraden geschnitten.",
+  "en": "Two rays from Z are intersected by two parallel lines."
+ },
+ {
+  "id": "23-149",
+  "de": "Zylinder",
+  "en": "Cylinder"
+ },
+ {
+  "id": "23-150",
+  "de": "a<sub>11</sub>·x<sub>1</sub> + a<sub>12</sub>·x<sub>2</sub> + a<sub>13</sub>·x<sub>3</sub> = b<sub>1</sub> usw. Voreingestellt ist ein Lehrbuchbeispiel mit der Lösung (2; 3; −1).",
+  "en": "a<sub>11</sub>·x<sub>1</sub> + a<sub>12</sub>·x<sub>2</sub> + a<sub>13</sub>·x<sub>3</sub> = b<sub>1</sub> etc. The preset is a textbook example with the solution (2; 3; −1)."
+ },
+ {
+  "id": "23-151",
+  "de": "b = 30 cm, d = 46 cm, A<sub>s</sub> = 12,6 cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = 15 · statisches Moment Druckzone = statisches Moment Stahl",
+  "en": "b = 30 cm, d = 46 cm, A<sub>s</sub> = 12.6 cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = 15 · first moment of compression zone = first moment of steel"
+ },
+ {
+  "id": "23-152",
+  "de": "det A = Produkt der Pivots (bei Zeilentausch Vorzeichen wechseln) = -1,000 ≠ 0 → eindeutig lösbar",
+  "en": "det A = product of the pivots (change sign when swapping rows) = -1.000 ≠ 0 → uniquely solvable"
+ },
+ {
+  "id": "23-153",
+  "de": "f(x) = x² + p·x + q: Die Nullstellen sind die Schnittpunkte mit der x-Achse, der Scheitel liegt bei x = −p/2.",
+  "en": "f(x) = x² + p·x + q: the roots are the intersections with the x-axis; the vertex lies at x = −p/2."
+ },
+ {
+  "id": "23-154",
+  "de": "gelenkig (Fest-/Loslager)",
+  "en": "pinned (fixed/roller support)"
+ },
+ {
+  "id": "23-155",
+  "de": "oder Winkel α [°]",
+  "en": "or angle α [°]"
+ },
+ {
+  "id": "23-156",
+  "de": "p = <b>2,00 %</b> &nbsp;·&nbsp; α = <b>1,15°</b> &nbsp;·&nbsp; auf 1 m waagerecht: h = 20,0 mm &nbsp;·&nbsp; s/l = 1,0002",
+  "en": "p = <b>2.00 %</b> &nbsp;·&nbsp; α = <b>1.15°</b> &nbsp;·&nbsp; per 1 m horizontal: h = 20.0 mm &nbsp;·&nbsp; s/l = 1.0002"
+ },
+ {
+  "id": "23-157",
+  "de": "tan α = h / l&nbsp;&nbsp;&nbsp; p = h / l · 100 %&nbsp;&nbsp;&nbsp; α = arctan(p / 100)<br> schräge Länge:&nbsp; s = √(l² + h²) = l / cos α",
+  "en": "tan α = h / l&nbsp;&nbsp;&nbsp; p = h / l · 100 %&nbsp;&nbsp;&nbsp; α = arctan(p / 100)<br> sloping length:&nbsp; s = √(l² + h²) = l / cos α"
+ },
+ {
+  "id": "23-158",
+  "de": "w nach unten positiv · M positiv bei Zug unten · EI konstant",
+  "en": "w positive downwards · M positive for tension at the bottom · EI constant"
+ },
+ {
+  "id": "23-159",
+  "de": "x<sub>2</sub> &lt; 0 ist mechanisch sinnlos → <b>x = 18,59 cm</b> (x/d = 0,404)",
+  "en": "x<sub>2</sub> &lt; 0 is mechanically meaningless → <b>x = 18.59 cm</b> (x/d = 0.404)"
+ },
+ {
+  "id": "23-160",
+  "de": "übliche Einheit",
+  "en": "usual unit"
+ },
+ {
+  "id": "23-161",
+  "de": "h/3 über der Seite",
+  "en": "h/3 above the side"
+ },
+ {
+  "id": "23-162",
+  "de": "Diagonalen",
+  "en": "Diagonals"
+ },
+ {
+  "id": "23-163",
+  "de": "a·√3 (Schlüsselweite)",
+  "en": "a·√3 (across flats)"
+ },
+ {
+  "id": "23-164",
+  "de": "2·a (Eckmaß)",
+  "en": "2·a (across corners)"
+ },
+ {
+  "id": "23-165",
+  "de": "Mitte",
+  "en": "centre"
+ },
+ {
+  "id": "23-166",
+  "de": "h/3 über der Basis",
+  "en": "h/3 above the base"
+ },
+ {
+  "id": "23-167",
+  "de": "α·r² (α im Bogenmaß)",
+  "en": "α·r² (α in radians)"
+ },
+ {
+  "id": "23-168",
+  "de": "Bogen 2α·r",
+  "en": "arc 2α·r"
+ },
+ {
+  "id": "23-169",
+  "de": "2h/5 über der Sehne",
+  "en": "2h/5 above the chord"
+ },
+ {
+  "id": "23-170",
+  "de": "Mitte (symmetrisch)",
+  "en": "centre (symmetrical)"
+ },
+ {
+  "id": "23-171",
+  "de": "¾·b vom Scheitel",
+  "en": "¾·b from the vertex"
+ },
+ {
+  "id": "23-172",
+  "de": "3h/10 über der Basis",
+  "en": "3h/10 above the base"
+ },
+ {
+  "id": "23-173",
+  "de": "Halbkugel",
+  "en": "Hemisphere"
+ },
+ {
+  "id": "23-174",
+  "de": "<div class=\"calc-field\"><label>Steigung p [%]</label><input type=\"number\" id=\"ng2-p\" value=\"2\" step=\"any\" oninput=\"updateNeigung()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Gradient p [%]</label><input type=\"number\" id=\"ng2-p\" value=\"2\" step=\"any\" oninput=\"updateNeigung()\"></div>"
+ },
+ {
+  "id": "23-175",
+  "de": "<div class=\"calc-field\"><label>oder Winkel α [°]</label><input type=\"number\" id=\"ng2-a\" value=\"\" step=\"any\" oninput=\"updateNeigung(true)\"></div>",
+  "en": "<div class=\"calc-field\"><label>or angle α [°]</label><input type=\"number\" id=\"ng2-a\" value=\"\" step=\"any\" oninput=\"updateNeigung(true)\"></div>"
+ },
+ {
+  "id": "23-176",
+  "de": "p = <b>{} %</b> &nbsp;·&nbsp; α = <b>{}°</b> &nbsp;·&nbsp; auf 1 m waagerecht: h = {} mm &nbsp;·&nbsp; s/l = {}",
+  "en": "p = <b>{} %</b> &nbsp;·&nbsp; α = <b>{}°</b> &nbsp;·&nbsp; per 1 m horizontal: h = {} mm &nbsp;·&nbsp; s/l = {}"
+ },
+ {
+  "id": "23-177",
+  "de": "§Ansatz: Die Nulllinie liegt im Schwerpunkt des ideellen Querschnitts",
+  "en": "§Approach: the neutral axis lies at the centroid of the transformed section"
+ },
+ {
+  "id": "23-178",
+  "de": "!b = {} cm, d = {} cm, A<sub>s</sub> = {} cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = {} · statisches Moment Druckzone = statisches Moment Stahl",
+  "en": "!b = {} cm, d = {} cm, A<sub>s</sub> = {} cm², α<sub>e</sub> = E<sub>s</sub>/E<sub>c</sub> = {} · first moment of compression zone = first moment of steel"
+ },
+ {
+  "id": "23-179",
+  "de": "§Gleichgewicht am Knoten (Zug positiv, F = {} kN nach unten)",
+  "en": "§Equilibrium at the node (tension positive, F = {} kN downwards)"
+ },
+ {
+  "id": "23-180",
+  "de": "!Stab 1 unter 30° nach links oben, Stab 2 unter 60° nach rechts oben",
+  "en": "!Member 1 at 30° up to the left, member 2 at 60° up to the right"
+ },
+ {
+  "id": "23-181",
+  "de": "§Cramersche Regel",
+  "en": "§Cramer's rule"
+ },
+ {
+  "id": "23-182",
+  "de": "!Beide positiv → beide Stäbe auf Zug (der Knoten hängt an den Stäben)",
+  "en": "!Both positive → both members in tension (the node hangs from the members)"
+ },
+ {
+  "id": "23-183",
+  "de": "§Erweiterte Koeffizientenmatrix (A | b)",
+  "en": "§Augmented coefficient matrix (A | b)"
+ },
+ {
+  "id": "23-184",
+  "de": "§Spalte {}: Nullen unter dem Pivot a<sub>{}{}</sub> = {}",
+  "en": "§Column {}: zeros below the pivot a<sub>{}{}</sub> = {}"
+ },
+ {
+  "id": "23-185",
+  "de": "§Rückwärts einsetzen",
+  "en": "§Back substitution"
+ },
+ {
+  "id": "23-186",
+  "de": "!det A = Produkt der Pivots (bei Zeilentausch Vorzeichen wechseln) = {} ≠ 0 → eindeutig lösbar",
+  "en": "!det A = product of the pivots (change sign when swapping rows) = {} ≠ 0 → uniquely solvable"
+ },
+ {
+  "id": "23-187",
+  "de": "Zeile {}: {} = {} = b<sub>{}</sub> ✓",
+  "en": "Row {}: {} = {} = b<sub>{}</sub> ✓"
+ },
+ {
+  "id": "23-188",
+  "de": "<div class=\"info-banner\">Lösung: x<sub>1</sub> = <b>{}</b>, x<sub>2</sub> = <b>{}</b>, x<sub>3</sub> = <b>{}</b></div>",
+  "en": "<div class=\"info-banner\">Solution: x<sub>1</sub> = <b>{}</b>, x<sub>2</sub> = <b>{}</b>, x<sub>3</sub> = <b>{}</b></div>"
+ },
+ {
+  "id": "23-189",
+  "de": "(11,5 cm Stein + 1 cm Fuge)",
+  "en": "(11.5 cm unit + 1 cm joint)"
+ },
+ {
+  "id": "23-190",
+  "de": "11,5-cm-Wände, Vormauerschale",
+  "en": "11.5 cm walls, facing leaf"
+ },
+ {
+  "id": "23-191",
+  "de": "2 und 3",
+  "en": "2 and 3"
+ },
+ {
+  "id": "23-192",
+  "de": "2-seitig gehalten (blau: Decken)",
+  "en": "supported on 2 sides (blue: floors)"
+ },
+ {
+  "id": "23-193",
+  "de": "2-seitig gehaltene Wand",
+  "en": "Wall supported on 2 sides"
+ },
+ {
+  "id": "23-194",
+  "de": "21 Schichten passen genau",
+  "en": "21 courses fit exactly"
+ },
+ {
+  "id": "23-195",
+  "de": "24- und 36,5-cm-Wände",
+  "en": "24 and 36.5 cm walls"
+ },
+ {
+  "id": "23-196",
+  "de": "24-cm-Wände",
+  "en": "24 cm walls"
+ },
+ {
+  "id": "23-197",
+  "de": "25 (8DF, Plansteine)",
+  "en": "25 (8DF, precision units)"
+ },
+ {
+  "id": "23-198",
+  "de": "3-seitig gehalten (blau: Decken und Querwände)",
+  "en": "supported on 3 sides (blue: floors and cross walls)"
+ },
+ {
+  "id": "23-199",
+  "de": "3-seitig gehaltene Wand",
+  "en": "Wall supported on 3 sides"
+ },
+ {
+  "id": "23-200",
+  "de": "4-seitig gehalten (blau: Decken und Querwände)",
+  "en": "supported on 4 sides (blue: floors and cross walls)"
+ },
+ {
+  "id": "23-201",
+  "de": "4-seitig gehaltene Wand",
+  "en": "Wall supported on 4 sides"
+ },
+ {
+  "id": "23-202",
+  "de": "8DF … 12DF, Plansteine",
+  "en": "8DF … 12DF, precision units"
+ },
+ {
+  "id": "23-203",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Mit Skizze in statiq·size (Mauerwerk → Kellerwand)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ With sketch in statiq·size (Masonry → Basement wall)</a>"
+ },
+ {
+  "id": "23-204",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Mit Skizze und Bericht in statiq·size (Mauerwerk → Wand)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ With sketch and report in statiq·size (Masonry → Wall)</a>"
+ },
+ {
+  "id": "23-205",
+  "de": "<span class=\"st-n\">1</span><span>Abminderung für zweiseitige Halterung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Reduction for support on two sides</span>"
+ },
+ {
+  "id": "23-206",
+  "de": "<span class=\"st-n\">1</span><span>Anwendungsbedingungen (Auszug)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Conditions of application (extract)</span>"
+ },
+ {
+  "id": "23-207",
+  "de": "<span class=\"st-n\">1</span><span>Anwendungsgrenzen (Auszug)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Limits of application (extract)</span>"
+ },
+ {
+  "id": "23-208",
+  "de": "<span class=\"st-n\">1</span><span>Baustoff</span>",
+  "en": "<span class=\"st-n\">1</span><span>Material</span>"
+ },
+ {
+  "id": "23-209",
+  "de": "<span class=\"st-n\">1</span><span>Charakteristische Druckfestigkeit (EN 1996-1-1, 3.6.1.2)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Characteristic compressive strength (EN 1996-1-1, 3.6.1.2)</span>"
+ },
+ {
+  "id": "23-210",
+  "de": "<span class=\"st-n\">1</span><span>Länge auf das Achtelmeter-Raster (12,5 cm)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Length on the eighth-metre grid (12.5 cm)</span>"
+ },
+ {
+  "id": "23-211",
+  "de": "<span class=\"st-n\">1</span><span>Moment am Wandfuß und Ausmitte</span>",
+  "en": "<span class=\"st-n\">1</span><span>Moment at the wall base and eccentricity</span>"
+ },
+ {
+  "id": "23-212",
+  "de": "<span class=\"st-n\">2</span><span>Baustoff</span>",
+  "en": "<span class=\"st-n\">2</span><span>Material</span>"
+ },
+ {
+  "id": "23-213",
+  "de": "<span class=\"st-n\">2</span><span>Beiwert β aus dem Querwandabstand</span>",
+  "en": "<span class=\"st-n\">2</span><span>Factor β from the cross-wall spacing</span>"
+ },
+ {
+  "id": "23-214",
+  "de": "<span class=\"st-n\">2</span><span>Bemessungswert</span>",
+  "en": "<span class=\"st-n\">2</span><span>Design value</span>"
+ },
+ {
+  "id": "23-215",
+  "de": "<span class=\"st-n\">2</span><span>Höhe auf die Schichthöhe 12,50 cm</span>",
+  "en": "<span class=\"st-n\">2</span><span>Height on the course height 12.50 cm</span>"
+ },
+ {
+  "id": "23-216",
+  "de": "<span class=\"st-n\">2</span><span>Lastausbreitung unter 60° bis zur halben Wandhöhe</span>",
+  "en": "<span class=\"st-n\">2</span><span>Load spread at 60° down to mid-height of the wall</span>"
+ },
+ {
+  "id": "23-217",
+  "de": "<span class=\"st-n\">2</span><span>Vierseitig gehalten</span>",
+  "en": "<span class=\"st-n\">2</span><span>Supported on four sides</span>"
+ },
+ {
+  "id": "23-218",
+  "de": "<span class=\"st-n\">2</span><span>Überdrückte Länge</span>",
+  "en": "<span class=\"st-n\">2</span><span>Compressed length</span>"
+ },
+ {
+  "id": "23-219",
+  "de": "<span class=\"st-n\">3</span><span>Erhöhungsfaktor (EN 1996-1-1, Gl. 6.10)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Enhancement factor (EN 1996-1-1, Eq. 6.10)</span>"
+ },
+ {
+  "id": "23-220",
+  "de": "<span class=\"st-n\">3</span><span>Knicklänge (zweiseitig gehalten)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Effective height (supported on two sides)</span>"
+ },
+ {
+  "id": "23-221",
+  "de": "<span class=\"st-n\">3</span><span>Knicklänge und Schlankheit</span>",
+  "en": "<span class=\"st-n\">3</span><span>Effective height and slenderness</span>"
+ },
+ {
+  "id": "23-222",
+  "de": "<span class=\"st-n\">3</span><span>Mindestauflast (Druckbogen gegen den Erddruck)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Minimum vertical load (arching against earth pressure)</span>"
+ },
+ {
+  "id": "23-223",
+  "de": "<span class=\"st-n\">3</span><span>Randdruck</span>",
+  "en": "<span class=\"st-n\">3</span><span>Edge compression</span>"
+ },
+ {
+  "id": "23-224",
+  "de": "<span class=\"st-n\">3</span><span>Verformungskennwerte (NA, Anhaltswerte)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Deformation properties (NA, guide values)</span>"
+ },
+ {
+  "id": "23-225",
+  "de": "<span class=\"st-n\">4</span><span>Abminderung in Wandmitte (volles Deckenauflager a = t)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Reduction at mid-height (full floor bearing a = t)</span>"
+ },
+ {
+  "id": "23-226",
+  "de": "<span class=\"st-n\">4</span><span>Abminderung Φ<sub>2</sub> in Wandmitte</span>",
+  "en": "<span class=\"st-n\">4</span><span>Reduction Φ<sub>2</sub> at mid-height</span>"
+ },
+ {
+  "id": "23-227",
+  "de": "<span class=\"st-n\">4</span><span>Haftscherfestigkeit (Tab. 3.4, Empfehlung)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Initial shear strength (Table 3.4, recommendation)</span>"
+ },
+ {
+  "id": "23-228",
+  "de": "<span class=\"st-n\">4</span><span>Höchstauflast</span>",
+  "en": "<span class=\"st-n\">4</span><span>Maximum vertical load</span>"
+ },
+ {
+  "id": "23-229",
+  "de": "<span class=\"st-n\">4</span><span>Schubfestigkeit (EN 1996-1-1, 3.6.2)</span>",
+  "en": "<span class=\"st-n\">4</span><span>Shear strength (EN 1996-1-1, 3.6.2)</span>"
+ },
+ {
+  "id": "23-230",
+  "de": "<span class=\"st-n\">4</span><span>Tragfähigkeit</span>",
+  "en": "<span class=\"st-n\">4</span><span>Resistance</span>"
+ },
+ {
+  "id": "23-231",
+  "de": "<span class=\"st-n\">5</span><span>Abminderung Φ<sub>1</sub> am Wandkopf und -fuß</span>",
+  "en": "<span class=\"st-n\">5</span><span>Reduction Φ<sub>1</sub> at the top and bottom of the wall</span>"
+ },
+ {
+  "id": "23-232",
+  "de": "<span class=\"st-n\">5</span><span>Schubtragfähigkeit</span>",
+  "en": "<span class=\"st-n\">5</span><span>Shear resistance</span>"
+ },
+ {
+  "id": "23-233",
+  "de": "<span class=\"st-n\">6</span><span>Tragfähigkeit</span>",
+  "en": "<span class=\"st-n\">6</span><span>Resistance</span>"
+ },
+ {
+  "id": "23-234",
+  "de": "Abstand vom Wandende a<sub>1</sub> [mm]",
+  "en": "Distance from the wall end a<sub>1</sub> [mm]"
+ },
+ {
+  "id": "23-235",
+  "de": "Achtelmeter: 1 Kopf = 12,5 cm",
+  "en": "Eighth metre: 1 module = 12.5 cm"
+ },
+ {
+  "id": "23-236",
+  "de": "Am Endauflager verdreht sich die Decke und drückt auf die Innenkante der Wand (Φ<sub>1</sub>); in Wandmitte wirkt das Knicken (Φ<sub>2</sub>).",
+  "en": "At an end support the floor rotates and presses on the inner edge of the wall (Φ<sub>1</sub>); at mid-height buckling governs (Φ<sub>2</sub>)."
+ },
+ {
+  "id": "23-237",
+  "de": "Anbaumaß",
+  "en": "Projection dimension"
+ },
+ {
+  "id": "23-238",
+  "de": "Anbaumaß (Vorsprung): n = 10 → 125,0 ± 0 = <b>125,0 cm</b> · n = 11 → 137,5 ± 0 = <b>137,5 cm</b>",
+  "en": "Projection dimension (nib): n = 10 → 125.0 ± 0 = <b>125.0 cm</b> · n = 11 → 137.5 ± 0 = <b>137.5 cm</b>"
+ },
+ {
+  "id": "23-239",
+  "de": "Anhaltswerte — maßgebend sind die Leistungserklärung des Herstellers bzw. die Anwendungsnormen (DIN 20000-401 ff.).",
+  "en": "Guide values — the manufacturer declaration of performance or the application standards (DIN 20000-401 ff.) govern."
+ },
+ {
+  "id": "23-240",
+  "de": "Anschütthöhe h<sub>e</sub>",
+  "en": "Backfill height h<sub>e</sub>"
+ },
+ {
+  "id": "23-241",
+  "de": "Anschütthöhe h<sub>e</sub> [m]",
+  "en": "Backfill height h<sub>e</sub> [m]"
+ },
+ {
+  "id": "23-242",
+  "de": "Anwendungsgrenze",
+  "en": "Limit of application"
+ },
+ {
+  "id": "23-243",
+  "de": "Aufbau",
+  "en": "Build-up"
+ },
+ {
+  "id": "23-244",
+  "de": "Auflagerbreite [mm]",
+  "en": "Bearing width [mm]"
+ },
+ {
+  "id": "23-245",
+  "de": "Auflagertiefe a [mm]",
+  "en": "Bearing depth a [mm]"
+ },
+ {
+  "id": "23-246",
+  "de": "Ausbreitung je Seite = h<sub>c</sub> / (2 · tan 60°) = 2500 / 3,464 = 721,7 mm",
+  "en": "Spread per side = h<sub>c</sub> / (2 · tan 60°) = 2500 / 3.464 = 721.7 mm"
+ }
+]

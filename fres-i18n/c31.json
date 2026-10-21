@@ -1,0 +1,1312 @@
+[
+ {
+  "id": "31-0",
+  "de": "Biegeschlankheit l = {} m, d = {} cm",
+  "en": "Span-to-depth ratio l = {} m, d = {} cm"
+ },
+ {
+  "id": "31-1",
+  "de": "§Vorhandene Schlankheit",
+  "en": "§Actual slenderness"
+ },
+ {
+  "id": "31-2",
+  "de": "mit verformungsempfindlichen Ausbauteilen: l/d ≤ K² · 150 / l = {}² · 150 / {} = {} → {}",
+  "en": "with finishes sensitive to deformation: l/d ≤ K² · 150 / l = {}² · 150 / {} = {} → {}"
+ },
+ {
+  "id": "31-3",
+  "de": "nicht eingehalten",
+  "en": "not satisfied"
+ },
+ {
+  "id": "31-4",
+  "de": "<div class=\"calc-field\"><label>Nutzhöhe d [cm]</label><input type=\"number\" id=\"rb-d\" value=\"21\" step=\"any\" oninput=\"updateRiss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Effective depth d [cm]</label><input type=\"number\" id=\"rb-d\" value=\"21\" step=\"any\" oninput=\"updateRiss()\"></div>"
+ },
+ {
+  "id": "31-5",
+  "de": "<div class=\"calc-field\"><label>Stab-Ø [mm]</label><input type=\"number\" id=\"rb-ds\" value=\"12\" step=\"any\" oninput=\"updateRiss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bar Ø [mm]</label><input type=\"number\" id=\"rb-ds\" value=\"12\" step=\"any\" oninput=\"updateRiss()\"></div>"
+ },
+ {
+  "id": "31-6",
+  "de": "<div class=\"calc-field\"><label>M quasi-ständig [kNm]</label><input type=\"number\" id=\"rb-M\" value=\"45\" step=\"any\" oninput=\"updateRiss()\"></div>",
+  "en": "<div class=\"calc-field\"><label>M quasi-permanent [kNm]</label><input type=\"number\" id=\"rb-M\" value=\"45\" step=\"any\" oninput=\"updateRiss()\"></div>"
+ },
+ {
+  "id": "31-7",
+  "de": "Rissbreite, M = {} kNm (quasi-ständig)",
+  "en": "Crack width, M = {} kNm (quasi-permanent)"
+ },
+ {
+  "id": "31-8",
+  "de": "§Stahlspannung im Zustand II",
+  "en": "§Steel stress in the cracked state (state II)"
+ },
+ {
+  "id": "31-9",
+  "de": "§Dehnungsdifferenz (Langzeit, k<sub>t</sub> = 0,4)",
+  "en": "§Strain difference (long-term, k<sub>t</sub> = 0.4)"
+ },
+ {
+  "id": "31-10",
+  "de": "!Zum Vergleich ohne direkte Berechnung (Tab. 7.2DE): Ø* · f<sub>ct,eff</sub>/2,9 = {} mm {} Ø = {} mm",
+  "en": "!For comparison without direct calculation (Tab. 7.2DE): Ø* · f<sub>ct,eff</sub>/2.9 = {} mm {} Ø = {} mm"
+ },
+ {
+  "id": "31-11",
+  "de": "107,2 % von v<sub>v</sub>",
+  "en": "107.2 % of v<sub>v</sub>"
+ },
+ {
+  "id": "31-12",
+  "de": "67,2 % von Q<sub>v</sub>",
+  "en": "67.2 % of Q<sub>v</sub>"
+ },
+ {
+  "id": "31-13",
+  "de": "<a class=\"applink\" href=\"#/grundbau/flach/sohldruck\">→ Auftrieb bei Bauwerken: Nachweis UPL in statiq·size (Grundbau)</a>",
+  "en": "<a class=\"applink\" href=\"#/grundbau/flach/sohldruck\">→ Buoyancy on structures: UPL verification in statiq·size (Geotechnics)</a>"
+ },
+ {
+  "id": "31-14",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Mit Energie- und Drucklinie in statiq·size (Wasserbau → Rohr)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ With energy line and hydraulic grade line in statiq·size (Hydraulics → Pipe)</a>"
+ },
+ {
+  "id": "31-15",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Normalwassertiefe für gegebenes Q in statiq·size (Wasserbau → Gerinne)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ Normal depth for a given Q in statiq·size (Hydraulics → Open channel)</a>"
+ },
+ {
+  "id": "31-16",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Wasserdruck mit Gegendruck in statiq·size (Wasserbau)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ Water pressure with counter-pressure in statiq·size (Hydraulics)</a>"
+ },
+ {
+  "id": "31-17",
+  "de": "<a class=\"applink\" href=\"size.html\">→ Überfallhöhe für gegebenes Q in statiq·size (Wasserbau → Wehr)</a>",
+  "en": "<a class=\"applink\" href=\"size.html\">→ Overflow head for a given Q in statiq·size (Hydraulics → Weir)</a>"
+ },
+ {
+  "id": "31-18",
+  "de": "<span class=\"st-n\">1</span><span>Abflusswirksame Fläche</span>",
+  "en": "<span class=\"st-n\">1</span><span>Effective runoff area</span>"
+ },
+ {
+  "id": "31-19",
+  "de": "<span class=\"st-n\">1</span><span>Ausfluss bei h<sub>1</sub> = 2,00 m</span>",
+  "en": "<span class=\"st-n\">1</span><span>Outflow at h<sub>1</sub> = 2.00 m</span>"
+ },
+ {
+  "id": "31-20",
+  "de": "<span class=\"st-n\">1</span><span>Druckwellengeschwindigkeit</span>",
+  "en": "<span class=\"st-n\">1</span><span>Pressure wave speed</span>"
+ },
+ {
+  "id": "31-21",
+  "de": "<span class=\"st-n\">1</span><span>Fließgeschwindigkeit</span>",
+  "en": "<span class=\"st-n\">1</span><span>Flow velocity</span>"
+ },
+ {
+  "id": "31-22",
+  "de": "<span class=\"st-n\">1</span><span>Förderhöhe der Anlage</span>",
+  "en": "<span class=\"st-n\">1</span><span>System head</span>"
+ },
+ {
+  "id": "31-23",
+  "de": "<span class=\"st-n\">1</span><span>Grenzzustand: Fr = 1 bzw. Q² · B / (g · A³) = 1</span>",
+  "en": "<span class=\"st-n\">1</span><span>Critical state: Fr = 1, i.e. Q² · B / (g · A³) = 1</span>"
+ },
+ {
+  "id": "31-24",
+  "de": "<span class=\"st-n\">1</span><span>Reichweite (Sichardt)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Radius of influence (Sichardt)</span>"
+ },
+ {
+  "id": "31-25",
+  "de": "<span class=\"st-n\">1</span><span>Stoffwerte bei 10,0 °C (interpoliert)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Properties at 10.0 °C (interpolated)</span>"
+ },
+ {
+  "id": "31-26",
+  "de": "<span class=\"st-n\">1</span><span>Vollfüllung</span>",
+  "en": "<span class=\"st-n\">1</span><span>Full flow</span>"
+ },
+ {
+  "id": "31-27",
+  "de": "<span class=\"st-n\">1</span><span>Zufluss (schießend)</span>",
+  "en": "<span class=\"st-n\">1</span><span>Inflow (supercritical)</span>"
+ },
+ {
+  "id": "31-28",
+  "de": "<span class=\"st-n\">2</span><span>Bemessungsabfluss</span>",
+  "en": "<span class=\"st-n\">2</span><span>Design runoff</span>"
+ },
+ {
+  "id": "31-29",
+  "de": "<span class=\"st-n\">2</span><span>Entleerung eines prismatischen Behälters (Grundfläche A<sub>B</sub> = 10,00 m²)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Emptying a prismatic tank (base area A<sub>B</sub> = 10.00 m²)</span>"
+ },
+ {
+  "id": "31-30",
+  "de": "<span class=\"st-n\">2</span><span>Fließgeschwindigkeit und Abfluss</span>",
+  "en": "<span class=\"st-n\">2</span><span>Flow velocity and discharge</span>"
+ },
+ {
+  "id": "31-31",
+  "de": "<span class=\"st-n\">2</span><span>Förderrate (Dupuit-Thiem)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Pumping rate (Dupuit-Thiem)</span>"
+ },
+ {
+  "id": "31-32",
+  "de": "<span class=\"st-n\">2</span><span>Konjugierte Wassertiefe (Impulssatz)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Conjugate depth (momentum equation)</span>"
+ },
+ {
+  "id": "31-33",
+  "de": "<span class=\"st-n\">2</span><span>Leistung</span>",
+  "en": "<span class=\"st-n\">2</span><span>Power</span>"
+ },
+ {
+  "id": "31-34",
+  "de": "<span class=\"st-n\">2</span><span>Reflexionszeit</span>",
+  "en": "<span class=\"st-n\">2</span><span>Reflection time</span>"
+ },
+ {
+  "id": "31-35",
+  "de": "<span class=\"st-n\">2</span><span>Reynolds-Zahl (10,0 °C: ν = 1,306 · 10⁻⁶ m²/s)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Reynolds number (10.0 °C: ν = 1.306 · 10⁻⁶ m²/s)</span>"
+ },
+ {
+  "id": "31-36",
+  "de": "<span class=\"st-n\">2</span><span>Reynolds-Zahl (Trägheit / Zähigkeit)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Reynolds number (inertia / viscosity)</span>"
+ },
+ {
+  "id": "31-37",
+  "de": "<span class=\"st-n\">2</span><span>Teilfüllung h/D = 0,600 (h = 240 mm)</span>",
+  "en": "<span class=\"st-n\">2</span><span>Partial filling h/D = 0.600 (h = 240 mm)</span>"
+ },
+ {
+  "id": "31-38",
+  "de": "<span class=\"st-n\">2</span><span>Zustand bei h = 1,200 m</span>",
+  "en": "<span class=\"st-n\">2</span><span>State at h = 1.200 m</span>"
+ },
+ {
+  "id": "31-39",
+  "de": "<span class=\"st-n\">3</span><span>Druckstoß (Joukowsky)</span>",
+  "en": "<span class=\"st-n\">3</span><span>Water hammer (Joukowsky)</span>"
+ },
+ {
+  "id": "31-40",
+  "de": "<span class=\"st-n\">3</span><span>Energieverlust</span>",
+  "en": "<span class=\"st-n\">3</span><span>Energy loss</span>"
+ },
+ {
+  "id": "31-41",
+  "de": "<span class=\"st-n\">3</span><span>Fließzustand</span>",
+  "en": "<span class=\"st-n\">3</span><span>Flow regime</span>"
+ },
+ {
+  "id": "31-42",
+  "de": "<span class=\"st-n\">3</span><span>Kavitation: NPSH<sub>A</sub> = p<sub>a</sub>/(ρg) − p<sub>D</sub>/(ρg) − h<sub>s,geo</sub> − h<sub>v,s</sub></span>",
+  "en": "<span class=\"st-n\">3</span><span>Cavitation: NPSH<sub>A</sub> = p<sub>a</sub>/(ρg) − p<sub>D</sub>/(ρg) − h<sub>s,geo</sub> − h<sub>v,s</sub></span>"
+ },
+ {
+  "id": "31-43",
+  "de": "<span class=\"st-n\">3</span><span>Reibungsbeiwert</span>",
+  "en": "<span class=\"st-n\">3</span><span>Friction factor</span>"
+ },
+ {
+  "id": "31-44",
+  "de": "<span class=\"st-n\">4</span><span>Verlusthöhen</span>",
+  "en": "<span class=\"st-n\">4</span><span>Head losses</span>"
+ },
+ {
+  "id": "31-45",
+  "de": "= 2,719 m (49,5 % von E<sub>1</sub>)",
+  "en": "= 2.719 m (49.5 % of E<sub>1</sub>)"
+ },
+ {
+  "id": "31-46",
+  "de": "= 54,7 m³/h · Absenkung im Brunnen s = 3,00 m, Wasserstand im Brunnen h = 9,00 m",
+  "en": "= 54.7 m³/h · drawdown in the well s = 3.00 m, water level in the well h = 9.00 m"
+ },
+ {
+  "id": "31-47",
+  "de": "Abfluss Q [m³/s]",
+  "en": "Discharge Q [m³/s]"
+ },
+ {
+  "id": "31-48",
+  "de": "Abfluss berechnen",
+  "en": "Calculate discharge"
+ },
+ {
+  "id": "31-49",
+  "de": "Abflussbeiwert ψ",
+  "en": "Runoff coefficient ψ"
+ },
+ {
+  "id": "31-50",
+  "de": "Ablösefrequenz",
+  "en": "Vortex shedding frequency"
+ },
+ {
+  "id": "31-51",
+  "de": "Absenkung s [m]",
+  "en": "Drawdown s [m]"
+ },
+ {
+  "id": "31-52",
+  "de": "Absperrklappe offen",
+  "en": "Butterfly valve open"
+ },
+ {
+  "id": "31-53",
+  "de": "Absperrschieber offen",
+  "en": "Gate valve open"
+ },
+ {
+  "id": "31-54",
+  "de": "Affinitätsgesetze bei Drehzahländerung: Q ~ n · H ~ n² · P ~ n³",
+  "en": "Affinity laws for a change in speed: Q ~ n · H ~ n² · P ~ n³"
+ },
+ {
+  "id": "31-55",
+  "de": "Anhaltswerte (Spitzenabflussbeiwerte); im Projekt nach DIN 1986-100 bzw. DWA-A 118 und Gutachten.",
+  "en": "Guide values (peak runoff coefficients); in a project use DIN 1986-100 or DWA-A 118 and expert reports."
+ },
+ {
+  "id": "31-56",
+  "de": "Anhaltswerte aus der Literatur — im Projekt die Herstellerangaben verwenden.",
+  "en": "Guide values from the literature — in a project use the manufacturer data."
+ },
+ {
+  "id": "31-57",
+  "de": "Anhaltswerte. Der Kehrwert n = 1/k<sub>St</sub> heißt Manning-Beiwert.",
+  "en": "Guide values. The reciprocal n = 1/k<sub>St</sub> is called the Manning coefficient."
+ },
+ {
+  "id": "31-58",
+  "de": "Anlagenkennlinie H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (Verluste wachsen mit Q²) · Betriebspunkt = Schnitt mit der Pumpenkennlinie",
+  "en": "System curve H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (losses grow with Q²) · operating point = intersection with the pump curve"
+ },
+ {
+  "id": "31-59",
+  "de": "Asphalt, fugenloser Beton",
+  "en": "Asphalt, jointless concrete"
+ },
+ {
+  "id": "31-60",
+  "de": "Auftrieb (Archimedes)",
+  "en": "Buoyancy (Archimedes)"
+ },
+ {
+  "id": "31-61",
+  "de": "Ausfluss aus einer Öffnung",
+  "en": "Outflow from an opening"
+ },
+ {
+  "id": "31-62",
+  "de": "Ausfluss aus einer Öffnung (Torricelli)",
+  "en": "Outflow from an opening (Torricelli)"
+ },
+ {
+  "id": "31-63",
+  "de": "Ausfluss und Entleerungszeit berechnen",
+  "en": "Calculate outflow and emptying time"
+ },
+ {
+  "id": "31-64",
+  "de": "Ausfluss unter dem Wasserspiegel: Geschwindigkeit wie im freien Fall aus der Höhe h.",
+  "en": "Outflow below the water surface: velocity as in free fall from height h."
+ },
+ {
+  "id": "31-65",
+  "de": "Ausflussbeiwert μ",
+  "en": "Discharge coefficient μ"
+ },
+ {
+  "id": "31-66",
+  "de": "Auslauf ins Becken",
+  "en": "Outlet into tank"
+ },
+ {
+  "id": "31-67",
+  "de": "Behältergrundfläche A<sub>B</sub> [m²] (0 = ohne)",
+  "en": "Tank base area A<sub>B</sub> [m²] (0 = none)"
+ },
+ {
+  "id": "31-68",
+  "de": "Bei Kreisflächen gehen alle Druckkräfte durch den Mittelpunkt — die Resultierende also auch. Liegt das Wasser unter der Fläche, wirkt F<sub>V</sub> nach oben.",
+  "en": "On circular surfaces all pressure forces pass through the centre — so does the resultant. If the water lies below the surface, F<sub>V</sub> acts upwards."
+ },
+ {
+  "id": "31-69",
+  "de": "Bei h/D ≈ 0,94 ist der Abfluss am größten (etwa 107 % von Q<sub>v</sub>), bei h/D ≈ 0,81 die Geschwindigkeit. Kanäle werden für Teilfüllung bemessen; Mindestgeschwindigkeit gegen Ablagerungen etwa 0,5 m/s.",
+  "en": "The discharge is greatest at h/D ≈ 0.94 (about 107 % of Q<sub>v</sub>), the velocity at h/D ≈ 0.81. Sewers are designed for partial filling; minimum velocity against deposits about 0.5 m/s."
+ },
+ {
+  "id": "31-70",
+  "de": "Beim Übergang von schießend zu strömend entsteht ein Wechselsprung — dort wird viel Energie umgewandelt (Tosbecken unter Wehren).",
+  "en": "The transition from supercritical to subcritical flow creates a hydraulic jump — a lot of energy is dissipated there (stilling basins below weirs)."
+ },
+ {
+  "id": "31-71",
+  "de": "Beispiel Viertelkreis r = h = 2,0 m, Breite 1 m:<br> F<sub>H</sub> = 10 · 2,0²/2 = <b>20 kN</b> · V<sub>W</sub> = π·r²/4 = 3,14 m³ (Viertelkreis über der Fläche) → F<sub>V</sub> = <b>31,4 kN</b> (nach oben) · F = <b>37,2 kN</b>",
+  "en": "Example quarter circle r = h = 2.0 m, width 1 m:<br> F<sub>H</sub> = 10 · 2.0²/2 = <b>20 kN</b> · V<sub>W</sub> = π·r²/4 = 3.14 m³ (quarter circle above the surface) → F<sub>V</sub> = <b>31.4 kN</b> (upwards) · F = <b>37.2 kN</b>"
+ },
+ {
+  "id": "31-72",
+  "de": "Beispiel: Ponton 10 × 6 m, t = 0,80 m, G in 1,20 m Höhe.<br> V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3,75 m · e = 1,20 − 0,40 = 0,80 m → h<sub>M</sub> = <b>2,95 m</b> &gt; 0 → stabil",
+  "en": "Example: pontoon 10 × 6 m, t = 0.80 m, G at a height of 1.20 m.<br> V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3.75 m · e = 1.20 − 0.40 = 0.80 m → h<sub>M</sub> = <b>2.95 m</b> &gt; 0 → stable"
+ },
+ {
+  "id": "31-73",
+  "de": "Beispiel: Schütz 1 × 2 m (l = 2 m in Neigungsrichtung), α = 60°, Oberkante bei y = 1,0 m.<br> y<sub>s</sub> = 2,0 m, h<sub>s</sub> = 2,0 · sin 60° = 1,73 m → F = 10 · 1,73 · 2,0 = <b>34,6 kN</b> · y<sub>D</sub> = 2,0 + (1·2³/12)/(2,0·2,0) = <b>2,17 m</b>",
+  "en": "Example: gate 1 × 2 m (l = 2 m in the direction of inclination), α = 60°, top edge at y = 1.0 m.<br> y<sub>s</sub> = 2.0 m, h<sub>s</sub> = 2.0 · sin 60° = 1.73 m → F = 10 · 1.73 · 2.0 = <b>34.6 kN</b> · y<sub>D</sub> = 2.0 + (1·2³/12)/(2.0·2.0) = <b>2.17 m</b>"
+ },
+ {
+  "id": "31-74",
+  "de": "Beispiel: h = 3,0 m, b = 1 m → F = 10 · 3,0²/2 = <b>45 kN/m</b>, M = 45 · 1,0 = <b>45 kNm/m</b> (mit γ<sub>w</sub> = 10 kN/m³).",
+  "en": "Example: h = 3.0 m, b = 1 m → F = 10 · 3.0²/2 = <b>45 kN/m</b>, M = 45 · 1.0 = <b>45 kNm/m</b> (with γ<sub>w</sub> = 10 kN/m³)."
+ },
+ {
+  "id": "31-75",
+  "de": "Beispiel: Öffnung d = 10 cm, scharfkantig, h = 2,0 m → v = √(2·9,81·2,0) = 6,26 m/s, Q = 0,62 · 0,00785 · 6,26 = <b>30,5 l/s</b>",
+  "en": "Example: opening d = 10 cm, sharp-edged, h = 2.0 m → v = √(2·9.81·2.0) = 6.26 m/s, Q = 0.62 · 0.00785 · 6.26 = <b>30.5 l/s</b>"
+ },
+ {
+  "id": "31-76",
+  "de": "Beiwert μ",
+  "en": "Coefficient μ"
+ },
+ {
+  "id": "31-77",
+  "de": "Benetzter Querschnitt A und benetzter Umfang U (blau, ohne Wasserspiegel), Böschungsneigung 1 : m.",
+  "en": "Wetted area A and wetted perimeter U (blue, excluding the water surface), side slope 1 : m."
+ },
+ {
+  "id": "31-78",
+  "de": "Bernoulli-Gleichung (Energiehöhe)",
+  "en": "Bernoulli equation (energy head)"
+ },
+ {
+  "id": "31-79",
+  "de": "Bernoulli: Energie- und Drucklinie",
+  "en": "Bernoulli: energy line and hydraulic grade line"
+ },
+ {
+  "id": "31-80",
+  "de": "Beton, glatt",
+  "en": "Concrete, smooth"
+ },
+ {
+  "id": "31-81",
+  "de": "Beton, glatt geschalt",
+  "en": "Concrete, smooth formwork"
+ },
+ {
+  "id": "31-82",
+  "de": "Beton, rau",
+  "en": "Concrete, rough"
+ },
+ {
+  "id": "31-83",
+  "de": "Beton, rau / alt",
+  "en": "Concrete, rough / old"
+ },
+ {
+  "id": "31-84",
+  "de": "Bewertung",
+  "en": "Assessment"
+ },
+ {
+  "id": "31-85",
+  "de": "Brunnen und Wasserhaltung (Dupuit-Thiem)",
+  "en": "Wells and dewatering (Dupuit-Thiem)"
+ },
+ {
+  "id": "31-86",
+  "de": "Brunnen, freies (ungespanntes) Grundwasser",
+  "en": "Well, unconfined groundwater"
+ },
+ {
+  "id": "31-87",
+  "de": "Brunnenradius r [m]",
+  "en": "Well radius r [m]"
+ },
+ {
+  "id": "31-88",
+  "de": "Böschung m (0 = Rechteck)",
+  "en": "Side slope m (0 = rectangle)"
+ },
+ {
+  "id": "31-89",
+  "de": "Dachflächen, Metall, Glas",
+  "en": "Roofs, metal, glass"
+ },
+ {
+  "id": "31-90",
+  "de": "Dachflächen, Ziegel, Dachpappe",
+  "en": "Roofs, tiles, roofing felt"
+ },
+ {
+  "id": "31-91",
+  "de": "Der Druck wächst linear mit der Tiefe h unter dem Wasserspiegel und wirkt immer senkrecht auf die Fläche — unabhängig von deren Neigung.",
+  "en": "Pressure increases linearly with the depth h below the water surface and always acts perpendicular to the surface — regardless of its inclination."
+ },
+ {
+  "id": "31-92",
+  "de": "Die Auftriebskraft greift im Schwerpunkt B des verdrängten Wasservolumens an.",
+  "en": "The buoyancy force acts at the centroid B of the displaced volume of water."
+ },
+ {
+  "id": "31-93",
+  "de": "Dimensionslose Kennzahlen",
+  "en": "Dimensionless numbers"
+ },
+ {
+  "id": "31-94",
+  "de": "Druck / Trägheit",
+  "en": "Pressure / inertia"
+ },
+ {
+  "id": "31-95",
+  "de": "Druckbeiwerte, Kavitationszahl",
+  "en": "Pressure coefficients, cavitation number"
+ },
+ {
+  "id": "31-96",
+  "de": "Druckstoß in Rohrleitungen (Joukowsky)",
+  "en": "Water hammer in pipelines (Joukowsky)"
+ },
+ {
+  "id": "31-97",
+  "de": "Druckverlust Δp = ρ · g · h<sub>v</sub> = 60,4 kPa = 0,604 bar",
+  "en": "Pressure loss Δp = ρ · g · h<sub>v</sub> = 60.4 kPa = 0.604 bar"
+ },
+ {
+  "id": "31-98",
+  "de": "Durchfluss Q [l/s]",
+  "en": "Flow rate Q [l/s]"
+ },
+ {
+  "id": "31-99",
+  "de": "Durchmesser D [mm]",
+  "en": "Diameter D [mm]"
+ },
+ {
+  "id": "31-100",
+  "de": "E = h + v²/(2g)&nbsp;&nbsp;&nbsp; Fr = v / √(g·h)<br> Rechteck (q = Q/b):&nbsp; h<sub>gr</sub> = ∛(q²/g)&nbsp;&nbsp;&nbsp; E<sub>min</sub> = 1,5 · h<sub>gr</sub>&nbsp;&nbsp;&nbsp; v<sub>gr</sub> = √(g·h<sub>gr</sub>)",
+  "en": "E = h + v²/(2g)&nbsp;&nbsp;&nbsp; Fr = v / √(g·h)<br> Rectangle (q = Q/b):&nbsp; h<sub>gr</sub> = ∛(q²/g)&nbsp;&nbsp;&nbsp; E<sub>min</sub> = 1.5 · h<sub>gr</sub>&nbsp;&nbsp;&nbsp; v<sub>gr</sub> = √(g·h<sub>gr</sub>)"
+ },
+ {
+  "id": "31-101",
+  "de": "E(h) für einen festen Abfluss q: Jede Energie über E<sub>min</sub> ist mit zwei Tiefen möglich — strömend oder schießend.",
+  "en": "E(h) for a fixed discharge q: every energy above E<sub>min</sub> is possible at two depths — subcritical or supercritical."
+ },
+ {
+  "id": "31-102",
+  "de": "E-Modul Rohr [GN/m²]",
+  "en": "Elastic modulus of pipe [GN/m²]"
+ },
+ {
+  "id": "31-103",
+  "de": "EL — Energielinie (ohne Verluste waagerecht), DL — Drucklinie. In der Engstelle steigt v, der Druck sinkt.",
+  "en": "EL — energy line (horizontal without losses), HGL — hydraulic grade line. In the constriction v rises and the pressure drops."
+ },
+ {
+  "id": "31-104",
+  "de": "Einlauf gut gerundet",
+  "en": "Inlet well rounded"
+ },
+ {
+  "id": "31-105",
+  "de": "Einlauf scharfkantig",
+  "en": "Inlet sharp-edged"
+ },
+ {
+  "id": "31-106",
+  "de": "Einteilung nach Chow (1959); die Grenzen sind fließend.",
+  "en": "Classification after Chow (1959); the boundaries are not sharp."
+ },
+ {
+  "id": "31-107",
+  "de": "Endwasserstand h<sub>2</sub> [m]",
+  "en": "Final water level h<sub>2</sub> [m]"
+ },
+ {
+  "id": "31-108",
+  "de": "Energieverlust ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · Länge L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)",
+  "en": "Energy loss ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · length L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)"
+ },
+ {
+  "id": "31-109",
+  "de": "Entleerung eines Behälters mit konstanter Grundfläche A<sub>B</sub> von h<sub>1</sub> auf h<sub>2</sub>: aus A<sub>B</sub> · dh = −Q · dt folgt t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)",
+  "en": "Emptying a tank with constant base area A<sub>B</sub> from h<sub>1</sub> to h<sub>2</sub>: from A<sub>B</sub> · dh = −Q · dt it follows that t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)"
+ },
+ {
+  "id": "31-110",
+  "de": "Erdbeschleunigung g",
+  "en": "Gravitational acceleration g"
+ },
+ {
+  "id": "31-111",
+  "de": "Erdkanal, gerade, sauber",
+  "en": "Earth channel, straight, clean"
+ },
+ {
+  "id": "31-112",
+  "de": "Erweiterung plötzlich",
+  "en": "Sudden expansion"
+ },
+ {
+  "id": "31-113",
+  "de": "F = γ<sub>w</sub> · h<sub>s</sub> · A&nbsp;&nbsp;&nbsp; (h<sub>s</sub> — Tiefe des Flächenschwerpunkts)<br> y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub> / (y<sub>s</sub> · A)&nbsp;&nbsp;&nbsp; mit h<sub>s</sub> = y<sub>s</sub> · sin α",
+  "en": "F = γ<sub>w</sub> · h<sub>s</sub> · A&nbsp;&nbsp;&nbsp; (h<sub>s</sub> — depth of the centroid of the area)<br> y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub> / (y<sub>s</sub> · A)&nbsp;&nbsp;&nbsp; with h<sub>s</sub> = y<sub>s</sub> · sin α"
+ },
+ {
+  "id": "31-114",
+  "de": "F<sub>A</sub> = γ<sub>w</sub> · V<sub>verdrängt</sub>&nbsp;&nbsp;&nbsp; Schwimmen: F<sub>A</sub> = G",
+  "en": "F<sub>A</sub> = γ<sub>w</sub> · V<sub>displaced</sub>&nbsp;&nbsp;&nbsp; Floating: F<sub>A</sub> = G"
+ },
+ {
+  "id": "31-115",
+  "de": "F<sub>H</sub> = γ<sub>w</sub> · h<sub>s,proj</sub> · A<sub>proj</sub>&nbsp;&nbsp;&nbsp; (wie bei einer senkrechten Wand mit der Projektionsfläche)<br> F<sub>V</sub> = γ<sub>w</sub> · V<sub>W</sub>&nbsp;&nbsp;&nbsp; (Gewicht des — wirklichen oder gedachten — Wasserkörpers zwischen Fläche und Wasserspiegel)<br> F = √(F<sub>H</sub>² + F<sub>V</sub>²)",
+  "en": "F<sub>H</sub> = γ<sub>w</sub> · h<sub>s,proj</sub> · A<sub>proj</sub>&nbsp;&nbsp;&nbsp; (as for a vertical wall with the projected area)<br> F<sub>V</sub> = γ<sub>w</sub> · V<sub>W</sub>&nbsp;&nbsp;&nbsp; (weight of the — real or imaginary — body of water between the surface and the water level)<br> F = √(F<sub>H</sub>² + F<sub>V</sub>²)"
+ },
+ {
+  "id": "31-116",
+  "de": "Fassungsvermögen eines Brunnens nach Sichardt: q<sub>max</sub> = 2π · r · h · √k / 15 (Grenze der Eintrittsgeschwindigkeit)",
+  "en": "Capacity of a well after Sichardt: q<sub>max</sub> = 2π · r · h · √k / 15 (limit of the entrance velocity)"
+ },
+ {
+  "id": "31-117",
+  "de": "Flachdach mit Kies",
+  "en": "Flat roof with gravel"
+ },
+ {
+  "id": "31-118",
+  "de": "Fließformel nach Gauckler-Manning-Strickler",
+  "en": "Gauckler-Manning-Strickler flow formula"
+ },
+ {
+  "id": "31-119",
+  "de": "Fließzustand",
+  "en": "Flow regime"
+ },
+ {
+  "id": "31-120",
+  "de": "Fluss mit Bewuchs",
+  "en": "River with vegetation"
+ },
+ {
+  "id": "31-121",
+  "de": "Fläche 1 [m²] / ψ",
+  "en": "Area 1 [m²] / ψ"
+ },
+ {
+  "id": "31-122",
+  "de": "Fläche 1: 450 m² · ψ = 0,90 → 405,0 m²",
+  "en": "Area 1: 450 m² · ψ = 0.90 → 405.0 m²"
+ },
+ {
+  "id": "31-123",
+  "de": "Fläche 2 [m²] / ψ",
+  "en": "Area 2 [m²] / ψ"
+ },
+ {
+  "id": "31-124",
+  "de": "Fläche 2: 300 m² · ψ = 0,75 → 225,0 m²",
+  "en": "Area 2: 300 m² · ψ = 0.75 → 225.0 m²"
+ },
+ {
+  "id": "31-125",
+  "de": "Fläche 3 [m²] / ψ",
+  "en": "Area 3 [m²] / ψ"
+ },
+ {
+  "id": "31-126",
+  "de": "Fläche 3: 200 m² · ψ = 0,15 → 30,0 m²",
+  "en": "Area 3: 200 m² · ψ = 0.15 → 30.0 m²"
+ },
+ {
+  "id": "31-127",
+  "de": "Formstück",
+  "en": "Fitting"
+ },
+ {
+  "id": "31-128",
+  "de": "Froude-Zahl",
+  "en": "Froude number"
+ },
+ {
+  "id": "31-129",
+  "de": "Förderstrom Q [l/s]",
+  "en": "Pump flow rate Q [l/s]"
+ },
+ {
+  "id": "31-130",
+  "de": "Füllungsgrad h/D",
+  "en": "Filling ratio h/D"
+ },
+ {
+  "id": "31-131",
+  "de": "G — Schwerpunkt des Körpers, B — Verdrängungsschwerpunkt, M — Metazentrum, h<sub>M</sub> — metazentrische Höhe.",
+  "en": "G — centre of gravity of the body, B — centre of buoyancy, M — metacentre, h<sub>M</sub> — metacentric height."
+ },
+ {
+  "id": "31-132",
+  "de": "Gefälle I [‰]",
+  "en": "Gradient I [‰]"
+ },
+ {
+  "id": "31-133",
+  "de": "Gekrümmte Flächen — Zerlegen in Komponenten",
+  "en": "Curved surfaces — resolving into components"
+ },
+ {
+  "id": "31-134",
+  "de": "Geneigte Fläche — Druckkraft und Druckmittelpunkt",
+  "en": "Inclined surface — pressure force and centre of pressure"
+ },
+ {
+  "id": "31-135",
+  "de": "Gerinne (L = 4R)",
+  "en": "Open channel (L = 4R)"
+ },
+ {
+  "id": "31-136",
+  "de": "Gerinne b = 3,00 m, h = 1,20 m, m = 0,00",
+  "en": "Channel b = 3.00 m, h = 1.20 m, m = 0.00"
+ },
+ {
+  "id": "31-137",
+  "de": "Gerinne berechnen",
+  "en": "Calculate open channel"
+ },
+ {
+  "id": "31-138",
+  "de": "Geschwindigkeit v [m/s]",
+  "en": "Velocity v [m/s]"
+ },
+ {
+  "id": "31-139",
+  "de": "Geschwindigkeitsänderung Δv [m/s]",
+  "en": "Change in velocity Δv [m/s]"
+ },
+ {
+  "id": "31-140",
+  "de": "Grenztiefe berechnen (Rechteck oder Trapez)",
+  "en": "Calculate critical depth (rectangle or trapezoid)"
+ },
+ {
+  "id": "31-141",
+  "de": "Grenztiefe und Fließzustand",
+  "en": "Critical depth and flow regime"
+ },
+ {
+  "id": "31-142",
+  "de": "Grundwassermächtigkeit H [m]",
+  "en": "Aquifer thickness H [m]"
+ },
+ {
+  "id": "31-143",
+  "de": "Gründach, extensiv (bis 10 cm)",
+  "en": "Green roof, extensive (up to 10 cm)"
+ },
+ {
+  "id": "31-144",
+  "de": "Gründach, intensiv (über 25 cm)",
+  "en": "Green roof, intensive (over 25 cm)"
+ },
+ {
+  "id": "31-145",
+  "de": "Guss, bitumiert",
+  "en": "Cast iron, bitumen-coated"
+ },
+ {
+  "id": "31-146",
+  "de": "Gusseisen duktil",
+  "en": "Ductile cast iron"
+ },
+ {
+  "id": "31-147",
+  "de": "H = z + p/(ρ·g) + v²/(2g) = konst.&nbsp;&nbsp;&nbsp; (ohne Verluste)<br> mit Verlusten:&nbsp; z<sub>1</sub> + p<sub>1</sub>/(ρg) + v<sub>1</sub>²/(2g) = z<sub>2</sub> + p<sub>2</sub>/(ρg) + v<sub>2</sub>²/(2g) + h<sub>v</sub>",
+  "en": "H = z + p/(ρ·g) + v²/(2g) = const.&nbsp;&nbsp;&nbsp; (without losses)<br> with losses:&nbsp; z<sub>1</sub> + p<sub>1</sub>/(ρg) + v<sub>1</sub>²/(2g) = z<sub>2</sub> + p<sub>2</sub>/(ρg) + v<sub>2</sub>²/(2g) + h<sub>v</sub>"
+ },
+ {
+  "id": "31-148",
+  "de": "Hydrostatischer Druck",
+  "en": "Hydrostatic pressure"
+ },
+ {
+  "id": "31-149",
+  "de": "I — Flächenträgheitsmoment der Wasserlinienfläche um die Längsachse (Rechteck: L·B³/12), V — verdrängtes Volumen",
+  "en": "I — second moment of area of the waterplane about the longitudinal axis (rectangle: L·B³/12), V — displaced volume"
+ },
+ {
+  "id": "31-150",
+  "de": "I — Sohlgefälle (bei Normalabfluss = Wasserspiegel- und Energiegefälle) · R — hydraulischer Radius",
+  "en": "I — bed slope (for uniform flow = water surface and energy slope) · R — hydraulic radius"
+ },
+ {
+  "id": "31-151",
+  "de": "I<sub>s</sub> — Flächenträgheitsmoment um die waagerechte Schwerachse der Fläche (Rechteck: b·l³/12)",
+  "en": "I<sub>s</sub> — second moment of area about the horizontal centroidal axis of the surface (rectangle: b·l³/12)"
+ },
+ {
+  "id": "31-152",
+  "de": "Im Wechselsprung geht schießender in strömenden Abfluss über. Die Deckwalze wandelt Energie in Wärme und Turbulenz um — die Energielinie fällt um ΔE.",
+  "en": "In a hydraulic jump, supercritical flow changes to subcritical flow. The surface roller converts energy into heat and turbulence — the energy line drops by ΔE."
+ },
+ {
+  "id": "31-153",
+  "de": "Impulssatz (Rechteckgerinne): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)",
+  "en": "Momentum equation (rectangular channel): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)"
+ },
+ {
+  "id": "31-154",
+  "de": "Innendurchmesser d [mm]",
+  "en": "Internal diameter d [mm]"
+ },
+ {
+  "id": "31-155",
+  "de": "Kavitation: NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0,5 m (h<sub>s,geo</sub> &gt; 0 bei Saugbetrieb)",
+  "en": "Cavitation: NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0.5 m (h<sub>s,geo</sub> &gt; 0 for suction lift)"
+ },
+ {
+  "id": "31-156",
+  "de": "Kennzahl",
+  "en": "Number"
+ },
+ {
+  "id": "31-157",
+  "de": "Kennzahlen",
+  "en": "Dimensionless numbers"
+ },
+ {
+  "id": "31-158",
+  "de": "Kniestück 90° scharf",
+  "en": "Elbow 90°, sharp"
+ },
+ {
+  "id": "31-159",
+  "de": "Kontinuität",
+  "en": "Continuity"
+ },
+ {
+  "id": "31-160",
+  "de": "Kreisrohr DN 400, I = 5,00 ‰",
+  "en": "Circular pipe DN 400, I = 5.00 ‰"
+ },
+ {
+  "id": "31-161",
+  "de": "Krümmer 45°",
+  "en": "Bend 45°"
+ },
+ {
+  "id": "31-162",
+  "de": "Krümmer 90° (r/d = 1 … 4)",
+  "en": "Bend 90° (r/d = 1 … 4)"
+ },
+ {
+  "id": "31-163",
+  "de": "Leitungslänge L [m]",
+  "en": "Pipeline length L [m]"
+ },
+ {
+  "id": "31-164",
+  "de": "Links der Querschnitt bei deinem Füllungsgrad, rechts die Teilfüllungskurven Q/Q<sub>v</sub> (blau) und v/v<sub>v</sub> (orange) über h/D.",
+  "en": "Left: the cross-section at your filling ratio; right: the partial-filling curves Q/Q<sub>v</sub> (blue) and v/v<sub>v</sub> (orange) against h/D."
+ },
+ {
+  "id": "31-165",
+  "de": "Luft (20 °C) ρ, ν",
+  "en": "Air (20 °C) ρ, ν"
+ },
+ {
+  "id": "31-166",
+  "de": "Luftdruck p<sub>a</sub> [kPa]",
+  "en": "Atmospheric pressure p<sub>a</sub> [kPa]"
+ },
+ {
+  "id": "31-167",
+  "de": "Länge L [m]",
+  "en": "Length L [m]"
+ },
+ {
+  "id": "31-168",
+  "de": "Länge L [m] (d bzw. 4R)",
+  "en": "Length L [m] (d or 4R)"
+ },
+ {
+  "id": "31-169",
+  "de": "Mauerwerk, Pflaster",
+  "en": "Masonry, paving"
+ },
+ {
+  "id": "31-170",
+  "de": "Meerwasser ρ",
+  "en": "Seawater ρ"
+ },
+ {
+  "id": "31-171",
+  "de": "Modellversuche im Wasserbau werden meist nach <b>Froude</b> ähnlich gebaut (Schwere maßgebend): Geschwindigkeiten skalieren mit √λ, Abflüsse mit λ<sup>5/2</sup> (λ = Längenmaßstab).",
+  "en": "Hydraulic model tests are usually built to <b>Froude</b> similarity (gravity governs): velocities scale with √λ, discharges with λ<sup>5/2</sup> (λ = length scale)."
+ },
+ {
+  "id": "31-172",
+  "de": "Moody-Diagramm (Colebrook-White): Reibungsbeiwert λ über Re für verschiedene k/d. Punkt: deine Leitung.",
+  "en": "Moody diagram (Colebrook-White): friction factor λ against Re for various k/d. Point: your pipeline."
+ },
+ {
+  "id": "31-173",
+  "de": "Moody-Diagramm: Reibungsbeiwert über Reynolds-Zahl",
+  "en": "Moody diagram: friction factor against Reynolds number"
+ },
+ {
+  "id": "31-174",
+  "de": "Mächtigkeit M [m] (gespannt)",
+  "en": "Thickness M [m] (confined)"
+ },
+ {
+  "id": "31-175",
+  "de": "NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0,5 m Sicherheit: 6,56 ≥ 4,00 m → keine Kavitation zu erwarten",
+  "en": "NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0.5 m safety margin: 6.56 ≥ 4.00 m → no cavitation expected"
+ },
+ {
+  "id": "31-176",
+  "de": "NPSH<sub>R</sub> der Pumpe [m]",
+  "en": "NPSH<sub>R</sub> of the pump [m]"
+ },
+ {
+  "id": "31-177",
+  "de": "P<sub>Welle</sub>",
+  "en": "P<sub>shaft</sub>"
+ },
+ {
+  "id": "31-178",
+  "de": "Pflaster mit dichten Fugen",
+  "en": "Paving with sealed joints"
+ },
+ {
+  "id": "31-179",
+  "de": "Pflaster mit offenen Fugen, Rasengitter",
+  "en": "Paving with open joints, grass pavers"
+ },
+ {
+  "id": "31-180",
+  "de": "Pumpen — Förderhöhe, Leistung, NPSH",
+  "en": "Pumps — head, power, NPSH"
+ },
+ {
+  "id": "31-181",
+  "de": "Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) mit r in l/(s·ha) und A in ha (bzw. /10000 bei m²)",
+  "en": "Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) with r in l/(s·ha) and A in ha (or /10000 for m²)"
+ },
+ {
+  "id": "31-182",
+  "de": "Rasen, Gärten",
+  "en": "Lawns, gardens"
+ },
+ {
+  "id": "31-183",
+  "de": "Rauheit k [mm]",
+  "en": "Roughness k [mm]"
+ },
+ {
+  "id": "31-184",
+  "de": "Regenabfluss (Fließzeitverfahren vereinfacht)",
+  "en": "Rainwater runoff (simplified time-of-flow method)"
+ },
+ {
+  "id": "31-185",
+  "de": "Regenabfluss von Flächen",
+  "en": "Rainwater runoff from surfaces"
+ },
+ {
+  "id": "31-186",
+  "de": "Regenspende r<sub>D,T</sub> [l/(s·ha)]",
+  "en": "Rainfall intensity r<sub>D,T</sub> [l/(s·ha)]"
+ },
+ {
+  "id": "31-187",
+  "de": "Regenspende r<sub>D,T</sub> aus KOSTRA-DWD (Dauer D, Wiederkehrzeit T); Dachentwässerung DIN 1986-100: r<sub>5,2</sub> und Notentwässerung r<sub>5,100</sub>",
+  "en": "Rainfall intensity r<sub>D,T</sub> from KOSTRA-DWD (duration D, return period T); roof drainage DIN 1986-100: r<sub>5.2</sub> and emergency drainage r<sub>5.100</sub>"
+ },
+ {
+  "id": "31-188",
+  "de": "Reibungsverlust (Darcy-Weisbach)",
+  "en": "Friction loss (Darcy-Weisbach)"
+ },
+ {
+  "id": "31-189",
+  "de": "Reichweite nach Sichardt R = 3000 · s · √k (s in m, k in m/s) — Erfahrungswert, nur für Vorbemessung",
+  "en": "Radius of influence after Sichardt R = 3000 · s · √k (s in m, k in m/s) — empirical value, for preliminary design only"
+ },
+ {
+  "id": "31-190",
+  "de": "Reynolds- und Froude-Zahl berechnen",
+  "en": "Calculate Reynolds and Froude numbers"
+ },
+ {
+  "id": "31-191",
+  "de": "Rohr (L = d)",
+  "en": "Pipe (L = d)"
+ },
+ {
+  "id": "31-192",
+  "de": "Rohr (L = d): turbulent (Re &gt; 10⁴)",
+  "en": "Pipe (L = d): turbulent (Re &gt; 10⁴)"
+ },
+ {
+  "id": "31-193",
+  "de": "Rohr: laminar &lt; 2320, turbulent &gt; 10⁴ · Gerinne mit L = 4R",
+  "en": "Pipe: laminar &lt; 2320, turbulent &gt; 10⁴ · open channel with L = 4R"
+ },
+ {
+  "id": "31-194",
+  "de": "Rohrleitung DN 200, Q = 50,0 l/s",
+  "en": "Pipeline DN 200, Q = 50.0 l/s"
+ },
+ {
+  "id": "31-195",
+  "de": "Rohrleitung berechnen",
+  "en": "Calculate pipeline"
+ },
+ {
+  "id": "31-196",
+  "de": "Rohrleitung zwischen zwei Behältern",
+  "en": "Pipeline between two tanks"
+ },
+ {
+  "id": "31-197",
+  "de": "Rohrwerkstoff",
+  "en": "Pipe material"
+ },
+ {
+  "id": "31-198",
+  "de": "Rückschlagklappe",
+  "en": "Check valve"
+ },
+ {
+  "id": "31-199",
+  "de": "Saughöhe h<sub>s,geo</sub> [m] (Zulauf: negativ)",
+  "en": "Suction lift h<sub>s,geo</sub> [m] (flooded suction: negative)"
+ },
+ {
+  "id": "31-200",
+  "de": "Saugkorb mit Fußventil",
+  "en": "Strainer with foot valve"
+ },
+ {
+  "id": "31-201",
+  "de": "Schallgeschwindigkeit in Wasser (10 °C)",
+  "en": "Speed of sound in water (10 °C)"
+ },
+ {
+  "id": "31-202",
+  "de": "Schließzeit t<sub>s</sub> = 0,80 s ≤ T<sub>r</sub> → schnelles Schließen: voller Joukowsky-Stoß",
+  "en": "Closing time t<sub>s</sub> = 0.80 s ≤ T<sub>r</sub> → rapid closure: full Joukowsky surge"
+ },
+ {
+  "id": "31-203",
+  "de": "Schließzeit t<sub>s</sub> [s]",
+  "en": "Closing time t<sub>s</sub> [s]"
+ },
+ {
+  "id": "31-204",
+  "de": "Schwimmender Ponton",
+  "en": "Floating pontoon"
+ },
+ {
+  "id": "31-205",
+  "de": "Segmentschütz (Viertelkreis): F<sub>H</sub> aus der senkrechten Projektion, F<sub>V</sub> aus dem Wasservolumen V<sub>W</sub> über der Fläche.",
+  "en": "Radial gate (quarter circle): F<sub>H</sub> from the vertical projection, F<sub>V</sub> from the water volume V<sub>W</sub> above the surface."
+ },
+ {
+  "id": "31-206",
+  "de": "Senkrechte Wand, Breite b:&nbsp; F = γ<sub>w</sub> · h² / 2 · b&nbsp;&nbsp;&nbsp; Angriff in h/3 über der Sohle<br> Moment am Wandfuß:&nbsp; M = F · h/3 = γ<sub>w</sub> · h³ / 6 · b",
+  "en": "Vertical wall, width b:&nbsp; F = γ<sub>w</sub> · h² / 2 · b&nbsp;&nbsp;&nbsp; acting at h/3 above the bed<br> Moment at the wall base:&nbsp; M = F · h/3 = γ<sub>w</sub> · h³ / 6 · b"
+ },
+ {
+  "id": "31-207",
+  "de": "Senkrechte Wand: Druckdreieck, Resultierende im Drittelpunkt über der Sohle.",
+  "en": "Vertical wall: pressure triangle, resultant at the third point above the bed."
+ },
+ {
+  "id": "31-208",
+  "de": "Sohlbreite b [m]",
+  "en": "Bed width b [m]"
+ },
+ {
+  "id": "31-209",
+  "de": "Spezifische Energie und Grenztiefe",
+  "en": "Specific energy and critical depth"
+ },
+ {
+  "id": "31-210",
+  "de": "Spezifische Energie, Grenztiefe, Froude-Zahl",
+  "en": "Specific energy, critical depth, Froude number"
+ },
+ {
+  "id": "31-211",
+  "de": "Sprungform",
+  "en": "Jump type"
+ },
+ {
+  "id": "31-212",
+  "de": "Sprunglänge (Anhalt für das Tosbecken) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = 13,58 m · stabiler Sprung (günstig)",
+  "en": "Jump length (guide value for the stilling basin) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = 13.58 m · steady jump (favourable)"
+ },
+ {
+  "id": "31-213",
+  "de": "Stahl, neu",
+  "en": "Steel, new"
+ },
+ {
+  "id": "31-214",
+  "de": "Strömung",
+  "en": "Flow"
+ },
+ {
+  "id": "31-215",
+  "de": "Summe Verlustbeiwerte Σζ",
+  "en": "Sum of loss coefficients Σζ"
+ },
+ {
+  "id": "31-216",
+  "de": "T-Stück Abzweig",
+  "en": "Tee, branch"
+ },
+ {
+  "id": "31-217",
+  "de": "T-Stück Durchgang",
+  "en": "Tee, straight through"
+ },
+ {
+  "id": "31-218",
+  "de": "Teilgefülltes Kreisrohr (Kanal)",
+  "en": "Partially filled circular pipe (sewer)"
+ },
+ {
+  "id": "31-219",
+  "de": "Teilgefülltes Kreisrohr: Querschnitt und Teilfüllungskurven",
+  "en": "Partially filled circular pipe: cross-section and partial-filling curves"
+ },
+ {
+  "id": "31-220",
+  "de": "Tiefe",
+  "en": "Depth"
+ },
+ {
+  "id": "31-221",
+  "de": "Tiefgang Ponton L × B:&nbsp; t = G / (γ<sub>w</sub> · L · B)<br> h<sub>M</sub> = I / V − e&nbsp;&nbsp;&nbsp; (e = Abstand G über B)<br> stabil, wenn h<sub>M</sub> &gt; 0 (M liegt über G)",
+  "en": "Draught of pontoon L × B:&nbsp; t = G / (γ<sub>w</sub> · L · B)<br> h<sub>M</sub> = I / V − e&nbsp;&nbsp;&nbsp; (e = distance of G above B)<br> stable if h<sub>M</sub> &gt; 0 (M lies above G)"
+ },
+ {
+  "id": "31-222",
+  "de": "Trapezgerinne",
+  "en": "Trapezoidal channel"
+ },
+ {
+  "id": "31-223",
+  "de": "Trägheit / Oberflächenspannung",
+  "en": "Inertia / surface tension"
+ },
+ {
+  "id": "31-224",
+  "de": "Trägheit / Schwere",
+  "en": "Inertia / gravity"
+ },
+ {
+  "id": "31-225",
+  "de": "Trägheit / Zähigkeit",
+  "en": "Inertia / viscosity"
+ },
+ {
+  "id": "31-226",
+  "de": "U = benetzter Umfang (blau)",
+  "en": "U = wetted perimeter (blue)"
+ },
+ {
+  "id": "31-227",
+  "de": "Verengung plötzlich",
+  "en": "Sudden contraction"
+ },
+ {
+  "id": "31-228",
+  "de": "Verhältnis",
+  "en": "Ratio"
+ },
+ {
+  "id": "31-229",
+  "de": "Verluste Saugseite h<sub>v,s</sub> [m]",
+  "en": "Suction-side losses h<sub>v,s</sub> [m]"
+ },
+ {
+  "id": "31-230",
+  "de": "Verlusthöhe h<sub>v</sub> [m]",
+  "en": "Head loss h<sub>v</sub> [m]"
+ },
+ {
+  "id": "31-231",
+  "de": "Vollkommener Überfall",
+  "en": "Free overflow"
+ },
+ {
+  "id": "31-232",
+  "de": "Vollkommener Überfall (Poleni)",
+  "en": "Free overflow (Poleni)"
+ },
+ {
+  "id": "31-233",
+  "de": "Wanddicke s [mm]",
+  "en": "Wall thickness s [mm]"
+ },
+ {
+  "id": "31-234",
+  "de": "Wasser — Stoffwerte bei Normaldruck",
+  "en": "Water — properties at standard pressure"
+ },
+ {
+  "id": "31-235",
+  "de": "Wasserdruck auf eine gekrümmte Fläche",
+  "en": "Water pressure on a curved surface"
+ },
+ {
+  "id": "31-236",
+  "de": "Wasserdruck auf eine geneigte Fläche",
+  "en": "Water pressure on an inclined surface"
+ },
+ {
+  "id": "31-237",
+  "de": "Wasserdruck auf eine senkrechte Wand",
+  "en": "Water pressure on a vertical wall"
+ },
+ {
+  "id": "31-238",
+  "de": "Wasserstand h<sub>1</sub> [m]",
+  "en": "Water level h<sub>1</sub> [m]"
+ },
+ {
+  "id": "31-239",
+  "de": "Wassertemperatur T [°C]",
+  "en": "Water temperature T [°C]"
+ },
+ {
+  "id": "31-240",
+  "de": "Wassertiefe h [m]",
+  "en": "Water depth h [m]"
+ },
+ {
+  "id": "31-241",
+  "de": "Wechselsprung berechnen",
+  "en": "Calculate hydraulic jump"
+ },
+ {
+  "id": "31-242",
+  "de": "Wechselsprung im Rechteckgerinne",
+  "en": "Hydraulic jump in a rectangular channel"
+ },
+ {
+  "id": "31-243",
+  "de": "Wechselsprung — Übergang von schießend zu strömend",
+  "en": "Hydraulic jump — transition from supercritical to subcritical"
+ },
+ {
+  "id": "31-244",
+  "de": "Wechselsprung: schießender Zufluss, Deckwalze, strömender Abfluss",
+  "en": "Hydraulic jump: supercritical inflow, surface roller, subcritical outflow"
+ },
+ {
+  "id": "31-245",
+  "de": "Wehrbreite b [m]",
+  "en": "Weir width b [m]"
+ },
+ {
+  "id": "31-246",
+  "de": "Wehrform",
+  "en": "Weir shape"
+ },
+ {
+  "id": "31-247",
+  "de": "Weitere Werte",
+  "en": "Further values"
+ },
+ {
+  "id": "31-248",
+  "de": "Wirbelablösung an Pfeilern, St ≈ 0,2",
+  "en": "Vortex shedding at piers, St ≈ 0.2"
+ },
+ {
+  "id": "31-249",
+  "de": "Wird der Querschnitt kleiner, wird das Wasser schneller.",
+  "en": "If the cross-section gets smaller, the water flows faster."
+ },
+ {
+  "id": "31-250",
+  "de": "Wird eine Strömung schnell abgebremst (Schieber, Pumpenausfall), läuft eine Druckwelle mit der Geschwindigkeit a durch die Leitung. Schließt der Schieber schneller als die Reflexionszeit, entsteht der volle Joukowsky-Stoß.",
+  "en": "If a flow is stopped quickly (valve, pump failure), a pressure wave travels through the pipeline at speed a. If the valve closes faster than the reflection time, the full Joukowsky surge occurs."
+ },
+ {
+  "id": "31-251",
+  "de": "Wirkungsgrad η [%]",
+  "en": "Efficiency η [%]"
+ },
+ {
+  "id": "31-252",
+  "de": "Zuflusstiefe h<sub>1</sub> [m]",
+  "en": "Inflow depth h<sub>1</sub> [m]"
+ },
+ {
+  "id": "31-253",
+  "de": "Zwischen zwei Behältern fällt die Energielinie um den Höhenunterschied Δh: Einlaufverlust, Reibung entlang der Leitung, Auslaufverlust.",
+  "en": "Between two tanks the energy line drops by the level difference Δh: inlet loss, friction along the pipeline, outlet loss."
+ },
+ {
+  "id": "31-254",
+  "de": "a ≈ 1400 m/s in starren Rohren (Stahl), 300 … 500 m/s in PE-Rohren",
+  "en": "a ≈ 1400 m/s in rigid pipes (steel), 300 … 500 m/s in PE pipes"
+ },
+ {
+  "id": "31-255",
+  "de": "freies Grundwasser: Q = π · k · (H² − h²) / ln(R/r)",
+  "en": "unconfined groundwater: Q = π · k · (H² − h²) / ln(R/r)"
+ },
+ {
+  "id": "31-256",
+  "de": "geodätische Förderhöhe H<sub>geo</sub> [m]",
+  "en": "static head H<sub>geo</sub> [m]"
+ },
+ {
+  "id": "31-257",
+  "de": "geringe Verluste",
+  "en": "low losses"
+ },
+ {
+  "id": "31-258",
+  "de": "gespanntes Grundwasser (Mächtigkeit M): Q = 2π · k · M · s / ln(R/r)",
+  "en": "confined groundwater (thickness M): Q = 2π · k · M · s / ln(R/r)"
+ },
+ {
+  "id": "31-259",
+  "de": "gewellter Sprung",
+  "en": "undular jump"
+ },
+ {
+  "id": "31-260",
+  "de": "größter Abfluss bei h/D ≈ 0,94: Q<sub>max</sub> = 154,4 l/s = 107,6 % von Q<sub>v</sub>; größte Geschwindigkeit bei h/D ≈ 0,81",
+  "en": "maximum discharge at h/D ≈ 0.94: Q<sub>max</sub> = 154.4 l/s = 107.6 % of Q<sub>v</sub>; maximum velocity at h/D ≈ 0.81"
+ },
+ {
+  "id": "31-261",
+  "de": "gut für Tosbecken",
+  "en": "good for stilling basins"
+ }
+]

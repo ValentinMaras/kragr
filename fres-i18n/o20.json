@@ -1,0 +1,886 @@
+{
+"20-0": {
+"fr": "<span class=\"st-n\">3</span><span>Flexion et traction (6.17) ou compression (6.19) sans instabilité</span>",
+"es": "<span class=\"st-n\">3</span><span>Flexión y tracción (6.17) o compresión (6.19) sin inestabilidad</span>"
+},
+"20-1": {
+"fr": "<span class=\"st-n\">3</span><span>Résistance en situation d'incendie (k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0)</span>",
+"es": "<span class=\"st-n\">3</span><span>Resistencia en situación de incendio (k<sub>mod,fi</sub> = 1,0, γ<sub>M,fi</sub> = 1,0)</span>"
+},
+"20-2": {
+"fr": "<span class=\"st-n\">3</span><span>Combinaison de charges déterminante (charge de calcul divisée par k<sub>mod</sub>)</span>",
+"es": "<span class=\"st-n\">3</span><span>Combinación de cargas determinante (carga de cálculo dividida por k<sub>mod</sub>)</span>"
+},
+"20-3": {
+"fr": "<span class=\"st-n\">3</span><span>Vérification (6.33)</span>",
+"es": "<span class=\"st-n\">3</span><span>Comprobación (6.33)</span>"
+},
+"20-4": {
+"fr": "<span class=\"st-n\">4</span><span>Flambement autour de z (dans la direction b)</span>",
+"es": "<span class=\"st-n\">4</span><span>Pandeo alrededor de z (en la dirección b)</span>"
+},
+"20-5": {
+"fr": "<span class=\"st-n\">4</span><span>Flexion (6.1.6)</span>",
+"es": "<span class=\"st-n\">4</span><span>Flexión (6.1.6)</span>"
+},
+"20-6": {
+"fr": "<span class=\"st-n\">5</span><span>Cisaillement (6.1.7 avec coefficient de fissuration k<sub>cr</sub>)</span>",
+"es": "<span class=\"st-n\">5</span><span>Cortante (6.1.7 con coeficiente de fisuración k<sub>cr</sub>)</span>"
+},
+"20-7": {
+"fr": "<span class=\"st-n\">5</span><span>Contraintes</span>",
+"es": "<span class=\"st-n\">5</span><span>Tensiones</span>"
+},
+"20-8": {
+"fr": "<span class=\"st-n\">6</span><span>Pression sur appui (6.1.5)</span>",
+"es": "<span class=\"st-n\">6</span><span>Presión sobre el apoyo (6.1.5)</span>"
+},
+"20-9": {
+"fr": "<span class=\"st-n\">6</span><span>Vérifications (6.23) et (6.24), k<sub>m</sub> = 0,7</span>",
+"es": "<span class=\"st-n\">6</span><span>Comprobaciones (6.23) y (6.24), k<sub>m</sub> = 0,7</span>"
+},
+"20-10": {
+"fr": "<span class=\"st-n\">7</span><span>Flèche (ELS, sans déformation d'effort tranchant, k<sub>def</sub> = 0,60, ψ<sub>2</sub> = 0,3)</span>",
+"es": "<span class=\"st-n\">7</span><span>Flecha (ELS, sin deformación por cortante, k<sub>def</sub> = 0,60, ψ<sub>2</sub> = 0,3)</span>"
+},
+"20-11": {
+"fr": "A<sub>ef</sub> = b · l<sub>ef</sub>, longueur efficace : longueur de contact + 30 mm de chaque côté où le bois dépasse (sans dépasser l'extrémité de la pièce)",
+"es": "A<sub>ef</sub> = b · l<sub>ef</sub>, longitud eficaz: longitud de contacto + 30 mm en cada lado donde la madera sobresale (sin sobrepasar el extremo de la pieza)"
+},
+"20-12": {
+"fr": "Carbonisation",
+"es": "Carbonización"
+},
+"20-13": {
+"fr": "Carbonisation + couche de résistance nulle",
+"es": "Carbonización + capa de resistencia nula"
+},
+"20-14": {
+"fr": "Carbonisation BLC GL24h 160/400, R 30",
+"es": "Carbonización MLE GL24h 160/400, R 30"
+},
+"20-15": {
+"fr": "Vitesses de carbonisation — EN 1995-1-2, tableau 3.1",
+"es": "Velocidades de carbonización — EN 1995-1-2, tabla 3.1"
+},
+"20-16": {
+"fr": "Cisaillement (t<sub>req</sub> = 9·d = 27,9 mm) : facteur <b>0,90</b><br>Arrachement : facteur <b>0,02</b><br>Épaisseur minimale de bois sans préperçage : <b>21,7 mm</b>",
+"es": "Corte (t<sub>req</sub> = 9·d = 27,9 mm): factor <b>0,90</b><br>Arranque: factor <b>0,02</b><br>Espesor mínimo de madera sin pretaladro: <b>21,7 mm</b>"
+},
+"20-17": {
+"fr": "Distance",
+"es": "Distancia"
+},
+"20-18": {
+"fr": "Part",
+"es": "Proporción"
+},
+"20-19": {
+"fr": "Longueur d'appui [mm]",
+"es": "Longitud de apoyo [mm]"
+},
+"20-20": {
+"fr": "Situation de calcul accidentelle",
+"es": "Situación de dimensionamiento accidental"
+},
+"20-21": {
+"fr": "BLC : formule générale avec G<sub>0,05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = 232,92 · 10⁶ mm⁴",
+"es": "MLE: fórmula general con G<sub>0,05</sub> = 540 N/mm², I<sub>tor</sub> = b³·h/3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/2b)/n⁵] = 232,92 · 10⁶ mm⁴"
+},
+"20-22": {
+"fr": "Matériau / situation",
+"es": "Material / situación"
+},
+"20-23": {
+"fr": "Sollicitation",
+"es": "Solicitación"
+},
+"20-24": {
+"fr": "Pour un appui sur la face inférieure, les charges situées à une distance h du bord de l'appui peuvent être ignorées dans V<sub>d</sub>.",
+"es": "Para un apoyo en el borde inferior, las cargas situadas a una distancia h del borde del apoyo pueden no considerarse en V<sub>d</sub>."
+},
+"20-25": {
+"fr": "Pour les combinaisons de charges de durées d'application différentes, c'est k<sub>mod</sub> de la charge <b>la plus courte</b> qui est déterminant. Il faut néanmoins vérifier aussi la combinaison comportant uniquement les charges de plus longue durée, car k<sub>mod</sub> y est plus petit.",
+"es": "En combinaciones de cargas con distinta duración, rige k<sub>mod</sub> de la carga <b>más corta</b> implicada. Aun así, debe comprobarse también la combinación solo con las cargas de mayor duración, porque allí k<sub>mod</sub> es menor."
+},
+"20-26": {
+"fr": "Pour les clous avec d ≤ 8 mm, cette formule est valable quel que soit l'angle entre l'effort et le fil.",
+"es": "Para clavos con d ≤ 8 mm, esta fórmula es válida independientemente del ángulo entre la fuerza y la fibra."
+},
+"20-27": {
+"fr": "Dans le BLC combiné (GL..c), les lamelles de résistance supérieure se trouvent à l'extérieur, là où la contrainte de flexion est maximale. Cela économise de la matière : la résistance en flexion est identique, mais la résistance en compression et en traction ∥ fil est plus faible que pour un BLC homogène de même classe. Pour les poteaux (surtout comprimés), le BLC homogène est donc généralement plus avantageux.",
+"es": "En la MLE combinada (GL..c), las láminas de mayor resistencia se sitúan en el exterior, donde la tensión de flexión es máxima. Esto ahorra material: la resistencia a flexión es la misma, pero la resistencia a compresión y a tracción ∥ fibra es menor que en la MLE homogénea de la misma clase. Para pilares (principalmente comprimidos), la MLE homogénea suele ser por tanto más favorable."
+},
+"20-28": {
+"fr": "En cas de flexion additionnelle : vérification d'interaction avec les termes de contrainte de flexion.",
+"es": "Con flexión adicional: comprobación de interacción con los términos de tensión de flexión."
+},
+"20-29": {
+"fr": "Pour λ<sub>rel,m</sub> ≤ 0,75, aucune vérification au déversement n'est nécessaire.",
+"es": "Para λ<sub>rel,m</sub> ≤ 0,75 no es necesaria la comprobación de pandeo lateral."
+},
+"20-30": {
+"fr": "Exemple C24, flexion, CS 1, durée de chargement moyen terme (k<sub>mod</sub> = 0,8) :<br> f<sub>m,d</sub> = 0,8 · 24 / 1,30 = <b>14,8 N/mm²</b>",
+"es": "Ejemplo C24, flexión, CS 1, duración de la carga media (k<sub>mod</sub> = 0,8):<br> f<sub>m,d</sub> = 0,8 · 24 / 1,30 = <b>14,8 N/mm²</b>"
+},
+"20-31": {
+"fr": "Valeur de calcul de l'action",
+"es": "Valor de cálculo de la acción"
+},
+"20-32": {
+"fr": "Valeur de calcul de la résistance",
+"es": "Valor de cálculo de la resistencia"
+},
+"20-33": {
+"fr": "Valeur de calcul de la résistance (capacité)",
+"es": "Valor de cálculo de la resistencia"
+},
+"20-34": {
+"fr": "Calculer les valeurs de calcul",
+"es": "Calcular los valores de cálculo"
+},
+"20-35": {
+"fr": "Plage",
+"es": "Intervalo"
+},
+"20-36": {
+"fr": "Désignation GL = Glued Laminated Timber (bois lamellé-collé). Le nombre indique la résistance caractéristique en flexion f<sub>m,k</sub> en N/mm². f<sub>c,90,k</sub> = 2,5 N/mm² est valable pour toutes les classes.",
+"es": "Designación GL = Glued Laminated Timber (madera laminada encolada). El número indica la resistencia característica a flexión f<sub>m,k</sub> en N/mm². f<sub>c,90,k</sub> = 2,5 N/mm² es válido para todas las clases."
+},
+"20-37": {
+"fr": "Flexion — EN 1995-1-1, 6.1.6",
+"es": "Flexión — EN 1995-1-1, 6.1.6"
+},
+"20-38": {
+"fr": "Les boulons ont un jeu dans le trou et nécessitent donc des distances plus grandes que les broches ajustées.",
+"es": "Los pernos tienen holgura en el agujero y por ello requieren distancias mayores que las clavijas ajustadas."
+},
+"20-39": {
+"fr": "Boulons — EN 1995-1-1, tableau 8.4",
+"es": "Pernos — EN 1995-1-1, tabla 8.4"
+},
+"20-40": {
+"fr": "Situation d'incendie : fractile à 20 %",
+"es": "Situación de incendio: fractil del 20 %"
+},
+"20-41": {
+"fr": "Sécurité incendie : méthode de la section réduite — EN 1995-1-2, 4.2.2",
+"es": "Protección contra incendios: método de la sección reducida — EN 1995-1-2, 4.2.2"
+},
+"20-42": {
+"fr": "Largeur b [mm]",
+"es": "Ancho b [mm]"
+},
+"20-43": {
+"fr": "Largeurs de 80 à 240 mm, hauteurs par pas de l'épaisseur de lamelle de 40 mm jusqu'à 1200 mm. Choisir une largeur :",
+"es": "Anchos de 80 a 240 mm, cantos en escalones del espesor de lámina de 40 mm hasta 1200 mm. Elija un ancho:"
+},
+"20-44": {
+"fr": "Bois lamellé-collé — EN 14080",
+"es": "Madera laminada encolada — EN 14080"
+},
+"20-45": {
+"fr": "C14 (bois massif)",
+"es": "C14 (madera maciza)"
+},
+"20-46": {
+"fr": "C16 (bois massif)",
+"es": "C16 (madera maciza)"
+},
+"20-47": {
+"fr": "C18 (bois massif)",
+"es": "C18 (madera maciza)"
+},
+"20-48": {
+"fr": "C20 (bois massif)",
+"es": "C20 (madera maciza)"
+},
+"20-49": {
+"fr": "C22 (bois massif)",
+"es": "C22 (madera maciza)"
+},
+"20-50": {
+"fr": "C24 (bois massif)",
+"es": "C24 (madera maciza)"
+},
+"20-51": {
+"fr": "C27 (bois massif)",
+"es": "C27 (madera maciza)"
+},
+"20-52": {
+"fr": "C30 (bois massif)",
+"es": "C30 (madera maciza)"
+},
+"20-53": {
+"fr": "C35 (bois massif)",
+"es": "C35 (madera maciza)"
+},
+"20-54": {
+"fr": "C40 (bois massif)",
+"es": "C40 (madera maciza)"
+},
+"20-55": {
+"fr": "C45 (bois massif)",
+"es": "C45 (madera maciza)"
+},
+"20-56": {
+"fr": "C50 (bois massif)",
+"es": "C50 (madera maciza)"
+},
+"20-57": {
+"fr": "Valeurs caractéristiques — EN 338",
+"es": "Valores característicos — EN 338"
+},
+"20-58": {
+"fr": "Pour qu'un organe d'assemblage atteigne sa pleine capacité portante sans fendre le bois, des distances minimales doivent être respectées. Elles sont exprimées en multiples du diamètre <b>d</b> et dépendent de l'angle α entre l'effort et le fil.",
+"es": "Para que un medio de unión alcance su plena capacidad resistente sin hender la madera, deben respetarse distancias mínimas. Se expresan como múltiplos del diámetro <b>d</b> y dependen del ángulo α entre la fuerza y la fibra."
+},
+"20-59": {
+"fr": "La valeur de calcul découle de la valeur caractéristique :",
+"es": "El valor de cálculo se obtiene del valor característico:"
+},
+"20-60": {
+"fr": "L'AN allemand traite la vérification aux vibrations de façon différente (limites de fréquence et critères propres). Pour les vérifications en Allemagne, se référer à l'AN.",
+"es": "El AN alemán regula la comprobación de vibraciones de forma distinta (límites de frecuencia y criterios propios). Para comprobaciones en Alemania, consulte el AN."
+},
+"20-61": {
+"fr": "La réponse du plancher à une impulsion de pas (1 Ns) est limitée :",
+"es": "La respuesta del forjado a un impulso de pisada (1 Ns) está limitada:"
+},
+"20-62": {
+"fr": "L'EN 1995-1-1 ne donne que des plages (par ex. w<sub>inst</sub> ℓ/300 à ℓ/500) ; en Allemagne, les valeurs de l'AN sont obligatoires. Pour les éléments secondaires, l'AN autorise des valeurs plus grandes.",
+"es": "La EN 1995-1-1 solo indica intervalos (p. ej. w<sub>inst</sub> ℓ/300 a ℓ/500); en Alemania son vinculantes los valores del AN. Para elementos secundarios, el AN permite valores mayores."
+},
+"20-63": {
+"fr": "La profondeur de pénétration t est la longueur sur laquelle la pointe du clou est enfoncée dans la pièce de bois. Pour les clous à tige lisse dans les assemblages bois-bois :",
+"es": "La profundidad de penetración t es la longitud con la que la punta del clavo está introducida en la pieza de madera. Para clavos de caña lisa en uniones madera-madera:"
+},
+"20-64": {
+"fr": "La résistance ⊥ fil est nettement plus faible, en particulier en traction (f<sub>t,90,k</sub> = 0,4 N/mm² pour le bois massif, 0,5 N/mm² pour le BLC).",
+"es": "La resistencia ⊥ fibra es claramente menor, especialmente a tracción (f<sub>t,90,k</sub> = 0,4 N/mm² para madera maciza, 0,5 N/mm² para MLE)."
+},
+"20-65": {
+"fr": "L'effort est dirigé vers l'extrémité droite et le bord supérieur : c'est là que se trouvent le bout <b>chargé</b> (a<sub>3,t</sub>) et le bord <b>chargé</b> (a<sub>4,t</sub>). Du côté opposé s'appliquent les valeurs plus petites pour les bouts et bords <b>non chargés</b> (a<sub>3,c</sub>, a<sub>4,c</sub>).",
+"es": "La fuerza apunta hacia el extremo derecho y el borde superior: allí se encuentran el extremo <b>cargado</b> (a<sub>3,t</sub>) y el borde <b>cargado</b> (a<sub>4,t</sub>). En el lado opuesto rigen los valores menores para extremos y bordes <b>no cargados</b> (a<sub>3,c</sub>, a<sub>4,c</sub>)."
+},
+"20-66": {
+"fr": "La capacité portante caractéristique F<sub>v,Rk</sub> d'un organe d'assemblage de type tige par plan de cisaillement est la plus petite valeur parmi plusieurs modes de ruine (théorie de la limite élastique).",
+"es": "La capacidad resistente característica F<sub>v,Rk</sub> de un medio de unión tipo clavija por plano de corte es el menor valor entre varios modos de fallo (teoría del límite elástico)."
+},
+"20-67": {
+"fr": "La flèche maximale sous une charge ponctuelle F = 1 kN est limitée :",
+"es": "La flecha máxima bajo una carga puntual F = 1 kN está limitada:"
+},
+"20-68": {
+"fr": "Carbonisation sur trois faces (face supérieure protégée par le plancher) : la section résiduelle résiste avec les valeurs de résistance au fractile de 20 %.",
+"es": "Carbonización en tres caras (cara superior protegida por el forjado): la sección residual resiste con los valores de resistencia del fractil del 20 %."
+},
+"20-69": {
+"fr": "Compression à 30,0° par rapport au fil",
+"es": "Compresión a 30,0° respecto a la fibra"
+},
+"20-70": {
+"fr": "Compression inclinée par rapport au fil — 6.2.2",
+"es": "Compresión con un ángulo respecto a la fibra — 6.2.2"
+},
+"20-71": {
+"fr": "Compression ∥",
+"es": "Compresión ∥"
+},
+"20-72": {
+"fr": "Compression ⊥",
+"es": "Compresión ⊥"
+},
+"20-73": {
+"fr": "Barre comprimée C24 140/140",
+"es": "Barra comprimida C24 140/140"
+},
+"20-74": {
+"fr": "Vérifier la barre comprimée (aussi avec flexion)",
+"es": "Comprobar la barra comprimida (también con flexión)"
+},
+"20-75": {
+"fr": "Flèche — valeurs limites selon l'AN Allemagne",
+"es": "Flecha — valores límite según el AN de Alemania"
+},
+"20-76": {
+"fr": "Recommandation de l'EN",
+"es": "Recomendación de la EN"
+},
+"20-77": {
+"fr": "Fréquence propre",
+"es": "Frecuencia propia"
+},
+"20-78": {
+"fr": "Poids propre : G = ρ<sub>mean</sub> · A (ici C24 ou GL24h, ρ<sub>mean</sub> = 420 kg/m³)",
+"es": "Peso propio: G = ρ<sub>mean</sub> · A (aquí C24 o GL24h, ρ<sub>mean</sub> = 420 kg/m³)"
+},
+"20-79": {
+"fr": "Profondeur de pénétration pour l'arrachement — EN 1995-1-1, 8.3.2 (7)",
+"es": "Profundidad de penetración para el arranque — EN 1995-1-1, 8.3.2 (7)"
+},
+"20-80": {
+"fr": "Un maintien latéral de la membrure comprimée (par ex. par le voligeage de toiture) réduit nettement la longueur de déversement et rend souvent la vérification superflue.",
+"es": "Un arriostramiento lateral del cordón comprimido (p. ej. mediante el entablado de cubierta) reduce considerablemente la longitud de pandeo lateral y a menudo hace innecesaria la comprobación."
+},
+"20-81": {
+"fr": "Poutre sur deux appuis C24 120/240, L = 4,00 m",
+"es": "Viga biapoyada C24 120/240, L = 4,00 m"
+},
+"20-82": {
+"fr": "Vérification complète d'une poutre sur deux appuis",
+"es": "Comprobación completa de una viga biapoyada"
+},
+"20-83": {
+"fr": "Poutre sur deux appuis, charge ponctuelle à mi-travée",
+"es": "Viga biapoyada, carga puntual en el centro del vano"
+},
+"20-84": {
+"fr": "Poutre sur deux appuis, charge uniformément répartie",
+"es": "Viga biapoyada, carga uniformemente repartida"
+},
+"20-85": {
+"fr": "Poutre sur deux appuis, charge uniformément répartie ; charge sur le bord comprimé (en haut, défavorable)",
+"es": "Viga biapoyada, carga uniformemente repartida; carga en el borde comprimido (arriba, desfavorable)"
+},
+"20-86": {
+"fr": "Poutre sur deux appuis, moment constant",
+"es": "Viga biapoyada, momento constante"
+},
+"20-87": {
+"fr": "Profondeur de pénétration pour le cisaillement — DIN EN 1995-1-1/NA (méthode simplifiée)",
+"es": "Profundidad de penetración para el corte — DIN EN 1995-1-1/NA (método simplificado)"
+},
+"20-88": {
+"fr": "Vérifier la profondeur de pénétration",
+"es": "Comprobar la profundidad de penetración"
+},
+"20-89": {
+"fr": "Profondeur de pénétration t",
+"es": "Profundidad de penetración t"
+},
+"20-90": {
+"fr": "Profondeur de pénétration t [mm]",
+"es": "Profundidad de penetración t [mm]"
+},
+"20-91": {
+"fr": "Action simplifiée : E<sub>d,fi</sub> = η<sub>fi</sub> · E<sub>d</sub> (η<sub>fi</sub> ≈ 0,6 … 0,7) ou combinaison accidentelle G<sub>k</sub> + ψ<sub>1,1</sub> · Q<sub>k,1</sub>",
+"es": "Acción simplificada: E<sub>d,fi</sub> = η<sub>fi</sub> · E<sub>d</sub> (η<sub>fi</sub> ≈ 0,6 … 0,7) o combinación accidental G<sub>k</sub> + ψ<sub>1,1</sub> · Q<sub>k,1</sub>"
+},
+"20-92": {
+"fr": "Charge ponctuelle à l'extrémité",
+"es": "Carga puntual en el extremo"
+},
+"20-93": {
+"fr": "Appui d'extrémité, longueur l = 100 mm, longueur efficace l<sub>ef</sub> = l + 30 mm = 130 mm · k<sub>c,90</sub> = 1,50 (bois massif, appui isolé)",
+"es": "Apoyo de extremo, longitud l = 100 mm, eficaz l<sub>ef</sub> = l + 30 mm = 130 mm · k<sub>c,90</sub> = 1,50 (madera maciza, apoyo discreto)"
+},
+"20-94": {
+"fr": "Facteur intermédiaire",
+"es": "Factor intermedio"
+},
+"20-95": {
+"fr": "Direction du fil →",
+"es": "Dirección de la fibra →"
+},
+"20-96": {
+"fr": "Résistance (k₀·d₀)",
+"es": "Resistencia (k₀·d₀)"
+},
+"20-97": {
+"fr": "Caractéristiques de résistance et de rigidité des classes de résistance des résineux. Résistances en fractile à 5 %, modules d'élasticité en valeur moyenne (E<sub>0,mean</sub>) ou fractile à 5 % (E<sub>0,05</sub>). Le nombre dans le nom de la classe est la résistance caractéristique en flexion f<sub>m,k</sub> en N/mm².",
+"es": "Valores de resistencia y rigidez de las clases resistentes de coníferas. Resistencias como fractil del 5 %, módulos de elasticidad como valor medio (E<sub>0,mean</sub>) o fractil del 5 % (E<sub>0,05</sub>). El número del nombre de la clase es la resistencia característica a flexión f<sub>m,k</sub> en N/mm²."
+},
+"20-98": {
+"fr": "Choisir la classe de résistance, la classe de service et la classe de durée de chargement (KLED) :",
+"es": "Seleccione la clase resistente, la clase de servicio y la clase de duración de la carga (KLED):"
+},
+"20-99": {
+"fr": "Classes de résistance du bois lamellé-collé. <b>h</b> = homogène (toutes les lamelles de même résistance), <b>c</b> = combiné (lamelles extérieures de résistance supérieure, âme plus faible).",
+"es": "Clases resistentes de la madera laminada encolada. <b>h</b> = homogénea (todas las láminas de igual resistencia), <b>c</b> = combinada (láminas exteriores de mayor resistencia, núcleo más débil)."
+},
+"20-100": {
+"fr": "Durée de résistance au feu t [min]",
+"es": "Duración de resistencia al fuego t [min]"
+},
+"20-101": {
+"fr": "Moment d'écoulement plastique M_y,Rk",
+"es": "Momento plástico M_y,Rk"
+},
+"20-102": {
+"fr": "LVL",
+"es": "LVL"
+},
+"20-103": {
+"fr": "Bois de placage stratifié (LVL)",
+"es": "Madera microlaminada (LVL)"
+},
+"20-104": {
+"fr": "Bois de placage stratifié LVL, ρ<sub>k</sub> ≥ 480 kg/m³",
+"es": "Madera microlaminada LVL, ρ<sub>k</sub> ≥ 480 kg/m³"
+},
+"20-105": {
+"fr": "Pour les clous spéciaux (annelés, profilés), les valeurs de l'agrément ou de l'ETA du fabricant s'appliquent.",
+"es": "Para clavos especiales (anillados, perfilados) rigen los valores de la aprobación o ETA del fabricante."
+},
+"20-106": {
+"fr": "Pour broches et boulons, effort ∥ fil :",
+"es": "Para clavijas y pernos, fuerza ∥ fibra:"
+},
+"20-107": {
+"fr": "G charge permanente, Q<sub>1</sub> action dominante, Q<sub>i</sub> actions d'accompagnement. w<sub>fin</sub> est la somme de toutes les contributions.",
+"es": "G carga permanente, Q<sub>1</sub> acción principal, Q<sub>i</sub> acciones concomitantes. w<sub>fin</sub> es la suma de todas las contribuciones."
+},
+"20-108": {
+"fr": "Valable pour une charge appliquée sur l'axe neutre (centre de gravité). Charge sur le bord comprimé (haut) : l<sub>ef</sub> + 2h · sur le bord tendu (bas) : l<sub>ef</sub> − 0,5h.",
+"es": "Válido para carga aplicada en el eje del centro de gravedad. Carga en el borde comprimido (arriba): l<sub>ef</sub> + 2h · en el borde traccionado (abajo): l<sub>ef</sub> − 0,5h."
+},
+"20-109": {
+"fr": "Les clous à tige lisse ont une faible résistance à l'arrachement. Pour les assemblages sollicités axialement, on utilise des clous spéciaux (annelés, profilés).",
+"es": "Los clavos de caña lisa tienen poca resistencia al arranque. Para uniones solicitadas axialmente se emplean clavos especiales (anillados, perfilados)."
+},
+"20-110": {
+"fr": "Valeur limite a selon le comportement vibratoire souhaité (EN 1995-1-1, figure 7.2).",
+"es": "Valor límite a según el comportamiento vibratorio deseado (EN 1995-1-1, figura 7.2)."
+},
+"20-111": {
+"fr": "Les largeurs supérieures à 240 mm sont fabriquées en BLC collé en blocs. Les lamelles font habituellement 40 mm (plus minces pour les poutres courbes).",
+"es": "Los anchos superiores a 240 mm se fabrican como MLE encolada en bloque. Las láminas suelen ser de 40 mm (más delgadas en vigas curvas)."
+},
+"20-112": {
+"fr": "Le bois flue sous charge permanente. La flèche finale en tient compte au moyen du coefficient de déformation k<sub>def</sub>, appliqué uniquement à la part quasi permanente des charges :",
+"es": "La madera experimenta fluencia bajo carga permanente. La flecha final lo considera mediante el coeficiente de deformación k<sub>def</sub>, aplicado solo a la parte cuasipermanente de las cargas:"
+},
+"20-113": {
+"fr": "Les planchers en bois sont légers et relativement souples. Les vibrations dues aux personnes qui marchent peuvent nuire au confort. La fréquence propre est d'abord déterminante :",
+"es": "Los forjados de madera son ligeros y relativamente flexibles. Las vibraciones causadas por personas al caminar pueden afectar al confort. Lo primero determinante es la frecuencia propia:"
+},
+"20-114": {
+"fr": "Homogène vs combiné",
+"es": "Homogénea vs. combinada"
+},
+"20-115": {
+"fr": "Hauteur h [mm]",
+"es": "Canto h [mm]"
+},
+"20-116": {
+"fr": "Facteur de hauteur en flexion et traction",
+"es": "Factor de canto en flexión y tracción"
+},
+"20-117": {
+"fr": "Facteur de hauteur bois massif : k<sub>h</sub> = min((150/h)<sup>0,2</sup> ; 1,3) pour h &lt; 150 mm → k<sub>h</sub> = 1,000",
+"es": "Factor de canto madera maciza: k<sub>h</sub> = min((150/h)<sup>0,2</sup>; 1,3) para h &lt; 150 mm → k<sub>h</sub> = 1,000"
+},
+"20-118": {
+"fr": "Facteur de hauteur k<sub>h</sub> — valeurs",
+"es": "Factor de canto k<sub>h</sub> — valores"
+},
+"20-119": {
+"fr": "À l'état limite de service (ELS), la flèche est limitée : pour l'aspect, pour protéger les éléments de second œuvre et pour éviter la stagnation d'eau. ℓ est la portée, ou la longueur de la console pour les consoles.",
+"es": "En el estado límite de servicio (ELS) se limita la flecha: por razones estéticas, para proteger los elementos de acabado y para evitar el encharcamiento. ℓ es la luz, o la longitud del voladizo en el caso de voladizos."
+},
+"20-120": {
+"fr": "Imperfection au flambement",
+"es": "Imperfección en el pandeo"
+},
+"20-121": {
+"fr": "En Allemagne s'applique l'annexe nationale (DIN EN 1995-1-1/NA) : <b>γ<sub>M</sub> = 1,30</b> pour le bois, les produits dérivés du bois et les assemblages, 1,00 en situation de calcul accidentelle. La colonne « Recommandation de l'EN » indique les valeurs sans AN (EN 1995-1-1, tableau 2.3), par ex. pour d'autres pays.",
+"es": "En Alemania se aplica el Anejo Nacional (DIN EN 1995-1-1/NA): <b>γ<sub>M</sub> = 1,30</b> para madera, productos derivados de la madera y uniones, 1,00 en la situación de dimensionamiento accidental. La columna «Recomendación de la EN» muestra los valores sin AN (EN 1995-1-1, tabla 2.3), p. ej. para otros países."
+},
+"20-122": {
+"fr": "En situation de calcul durable et transitoire (ELU) :",
+"es": "En la situación de dimensionamiento persistente y transitoria (ELU):"
+},
+"20-123": {
+"fr": "KLED (charge la plus courte)",
+"es": "KLED (carga más corta)"
+},
+"20-124": {
+"fr": "Bois d'équarrissage b = 60 à 200 mm, h jusqu'à 300 mm. <b>•</b> = section préférentielle KVH (livrable sur stock, séché techniquement, humidité du bois 15 ± 3 %).",
+"es": "Escuadrías b = 60 a 200 mm, h hasta 300 mm. <b>•</b> = sección preferente KVH (disponible en almacén, secada técnicamente, humedad de la madera 15 ± 3 %)."
+},
+"20-125": {
+"fr": "Déversement GL24h 120/480, L = 8,00 m",
+"es": "Pandeo lateral GL24h 120/480, L = 8,00 m"
+},
+"20-126": {
+"fr": "Calculer la vérification au déversement",
+"es": "Calcular la comprobación de pandeo lateral"
+},
+"20-127": {
+"fr": "Vérification au déversement des poutres fléchies — EN 1995-1-1, 6.3.3",
+"es": "Comprobación de pandeo lateral de vigas a flexión — EN 1995-1-1, 6.3.3"
+},
+"20-128": {
+"fr": "Longueurs de flambement — cas d'Euler",
+"es": "Longitudes de pandeo — casos de Euler"
+},
+"20-129": {
+"fr": "Vérification au flambement des barres comprimées — EN 1995-1-1, 6.3.2",
+"es": "Comprobación de pandeo de barras comprimidas — EN 1995-1-1, 6.3.2"
+},
+"20-130": {
+"fr": "Combinaison",
+"es": "Combinación"
+},
+"20-131": {
+"fr": "Surface de contact A<sub>ef</sub> [mm²]",
+"es": "Superficie de contacto A<sub>ef</sub> [mm²]"
+},
+"20-132": {
+"fr": "Console, charge ponctuelle à l'extrémité",
+"es": "Voladizo, carga puntual en el extremo"
+},
+"20-133": {
+"fr": "Console, charge uniformément répartie",
+"es": "Voladizo, carga uniformemente repartida"
+},
+"20-134": {
+"fr": "Fluage (flèche finale)",
+"es": "Fluencia (flecha final)"
+},
+"20-135": {
+"fr": "Fluage — flèche finale",
+"es": "Fluencia — flecha final"
+},
+"20-136": {
+"fr": "CC 1 (permanente seule) : q<sub>d</sub> = 1,35 · 2,00 = 2,70 kN/m, k<sub>mod</sub> = 0,60 (permanente) → q<sub>d</sub>/k<sub>mod</sub> = 4,500",
+"es": "CC 1 (solo permanente): q<sub>d</sub> = 1,35 · 2,00 = 2,70 kN/m, k<sub>mod</sub> = 0,60 (permanente) → q<sub>d</sub>/k<sub>mod</sub> = 4,500"
+},
+"20-137": {
+"fr": "CC 2 (permanente + charge d'exploitation cat. A/B (habitation, bureaux)) : q<sub>d</sub> = 1,35 · 2,00 + 1,5 · 2,50 = 6,45 kN/m, k<sub>mod</sub> = 0,80 (moyen terme) → q<sub>d</sub>/k<sub>mod</sub> = 8,063",
+"es": "CC 2 (permanente + sobrecarga de uso cat. A/B (vivienda, oficinas)): q<sub>d</sub> = 1,35 · 2,00 + 1,5 · 2,50 = 6,45 kN/m, k<sub>mod</sub> = 0,80 (media duración) → q<sub>d</sub>/k<sub>mod</sub> = 8,063"
+},
+"20-138": {
+"fr": "Point d'application de la charge",
+"es": "Punto de aplicación de la carga"
+},
+"20-139": {
+"fr": "Durée de chargement et humidité",
+"es": "Duración de la carga y humedad"
+},
+"20-140": {
+"fr": "Feuillus, ρ<sub>k</sub> ≥ 450 kg/m³",
+"es": "Frondosas, ρ<sub>k</sub> ≥ 450 kg/m³"
+},
+"20-141": {
+"fr": "Résistance au poinçonnement du bois (pression diamétrale)",
+"es": "Resistencia al aplastamiento"
+},
+"20-142": {
+"fr": "Résistance au poinçonnement du bois (pression diamétrale) f_h,0,k",
+"es": "Resistencia al aplastamiento f_h,0,k"
+},
+"20-143": {
+"fr": "Longueur L [m] (distance entre appuis à fourche)",
+"es": "Longitud L [m] (distancia entre apoyos de horquilla)"
+},
+"20-144": {
+"fr": "La valeur <b>la plus petite</b> est déterminante parmi :<br> — ruine par pression diamétrale dans le bois<br> — pression diamétrale + 1 rotule plastique dans la tige<br> — pression diamétrale + 2 rotules plastiques dans la tige",
+"es": "Rige el valor <b>más pequeño</b> de:<br> — fallo por aplastamiento en la madera<br> — aplastamiento + 1 rótula plástica en la clavija<br> — aplastamiento + 2 rótulas plásticas en la clavija"
+},
+"20-145": {
+"fr": "Les mécanismes avec rotules plastiques sont souhaitables : ils sont ductiles et annoncent la ruine par la déformation.",
+"es": "Los mecanismos con rótulas plásticas son deseables: son dúctiles y avisan del fallo mediante la deformación."
+},
+"20-146": {
+"fr": "Distances minimales a1 à a4 sur une pièce de bois",
+"es": "Distancias mínimas a1 a a4 en una pieza de madera"
+},
+"20-147": {
+"fr": "Distances minimales des organes d'assemblage de type tige",
+"es": "Distancias mínimas de los medios de unión tipo clavija"
+},
+"20-148": {
+"fr": "Épaisseur minimale de bois sans préperçage — EN 1995-1-1, 8.3.1.2 (6)",
+"es": "Espesor mínimo de madera sin pretaladro — EN 1995-1-1, 8.3.1.2 (6)"
+},
+"20-149": {
+"fr": "Valeur minimale",
+"es": "Valor mínimo"
+},
+"20-150": {
+"fr": "Coefficient de modification kmod — EN 1995-1-1, tableau 3.1",
+"es": "Factor de modificación kmod — EN 1995-1-1, tabla 3.1"
+},
+"20-151": {
+"fr": "N<sub>d</sub> [kN] (compression)",
+"es": "N<sub>d</sub> [kN] (compresión)"
+},
+"20-152": {
+"fr": "AN Allemagne",
+"es": "AN Alemania"
+},
+"20-153": {
+"fr": "Selon l'AN, pour le bois lamellé-collé, le produit E<sub>0,05</sub> · G<sub>0,05</sub> peut être majoré du facteur 1,4. Le calculateur n'en tient pas compte (côté sécurité).",
+"es": "Según el AN, en la madera laminada encolada el producto E<sub>0,05</sub> · G<sub>0,05</sub> puede incrementarse con el factor 1,4. La calculadora no lo considera (del lado de la seguridad)."
+},
+"20-154": {
+"fr": "Vérification par critère de rigidité et de vitesse (points 2 et 3)",
+"es": "Comprobación con criterio de rigidez y de velocidad (puntos 2 y 3)"
+},
+"20-155": {
+"fr": "Résineux BLC, ρ<sub>k</sub> ≥ 290 kg/m³",
+"es": "Coníferas MLE, ρ<sub>k</sub> ≥ 290 kg/m³"
+},
+"20-156": {
+"fr": "Résineux bois massif, ρ<sub>k</sub> ≥ 290 kg/m³",
+"es": "Coníferas madera maciza, ρ<sub>k</sub> ≥ 290 kg/m³"
+},
+"20-157": {
+"fr": "Type de clou",
+"es": "Tipo de clavo"
+},
+"20-158": {
+"fr": "Diamètre du clou d [mm]",
+"es": "Diámetro del clavo d [mm]"
+},
+"20-159": {
+"fr": "Forme du clou",
+"es": "Forma del clavo"
+},
+"20-160": {
+"fr": "Assemblages par clous — EN 1995-1-1, section 8.3",
+"es": "Uniones con clavos — EN 1995-1-1, apartado 8.3"
+},
+"20-161": {
+"fr": "Non inclus : k<sub>h</sub> (facteur de hauteur en flexion/traction), k<sub>cr</sub> (coefficient de fissuration en cisaillement), k<sub>sys</sub> (coefficient de système). Ils s'ajoutent dans la vérification concernée.",
+"es": "No incluidos: k<sub>h</sub> (factor de canto en flexión/tracción), k<sub>cr</sub> (coeficiente de fisuración en cortante), k<sub>sys</sub> (coeficiente de sistema). Se añaden en la comprobación correspondiente."
+},
+"20-162": {
+"fr": "Charge d'exploitation cat. A/B (habitation, bureaux)",
+"es": "Sobrecarga de uso cat. A/B (vivienda, oficinas)"
+},
+"20-163": {
+"fr": "Charge d'exploitation cat. C/D",
+"es": "Sobrecarga de uso cat. C/D"
+},
+"20-164": {
+"fr": "Classe de service",
+"es": "Clase de servicio"
+},
+"20-165": {
+"fr": "Classes de service (CS)",
+"es": "Clases de servicio (CS)"
+},
+"20-166": {
+"fr": "Clous sans préperçage (d ≤ 8 mm) :",
+"es": "Clavos sin pretaladro (d ≤ 8 mm):"
+},
+"20-167": {
+"fr": "Les clous transmettent les efforts principalement par cisaillement. Sont déterminants la pression diamétrale dans le bois, le moment d'écoulement plastique du clou et, sous charge axiale, la résistance à l'arrachement.",
+"es": "Los clavos transmiten las fuerzas principalmente a corte. Son determinantes el aplastamiento en la madera, el momento plástico del clavo y, bajo carga axial, la resistencia al arranque."
+},
+"20-168": {
+"fr": "Clous — EN 1995-1-1, tableau 8.2",
+"es": "Clavos — EN 1995-1-1, tabla 8.2"
+},
+"20-169": {
+"fr": "Compression perpendiculaire (appui, sablière)",
+"es": "Compresión perpendicular (apoyo, solera)"
+},
+"20-170": {
+"fr": "Compression perpendiculaire sur appui — 6.1.5",
+"es": "Compresión perpendicular en el apoyo — 6.1.5"
+},
+"20-171": {
+"fr": "Rechercher une section, par ex. 100×",
+"es": "Buscar sección, p. ej. 100×"
+},
+"20-172": {
+"fr": "Rectangle 1 + 0,15 · h/b ≤ 2,0 · cercle 1,2",
+"es": "Rectángulo 1 + 0,15 · h/b ≤ 2,0 · círculo 1,2"
+},
+"20-173": {
+"fr": "Sections rectangulaires — formules",
+"es": "Secciones rectangulares — fórmulas"
+},
+"20-174": {
+"fr": "Section résiduelle après carbonisation",
+"es": "Sección residual tras la carbonización"
+},
+"20-175": {
+"fr": "Coefficient de fissuration k<sub>cr</sub> par classe de résistance",
+"es": "Coeficiente de fisuración k<sub>cr</sub> por clase resistente"
+},
+"20-176": {
+"fr": "Fissures en cisaillement (b<sub>ef</sub> = k<sub>cr</sub> · b)",
+"es": "Fisuras en cortante (b<sub>ef</sub> = k<sub>cr</sub> · b)"
+},
+"20-177": {
+"fr": "Les barres comprimées élancées se ruinent par flambement avant que la résistance en compression ne soit atteinte. La vérification utilise le coefficient de flambement k<sub>c</sub>.",
+"es": "Las barras comprimidas esbeltas fallan por pandeo antes de alcanzar la resistencia a compresión. La comprobación emplea el coeficiente de pandeo k<sub>c</sub>."
+},
+"20-178": {
+"fr": "Les poutres fléchies élancées et hautes peuvent se déplacer latéralement et se tordre (déversement) avant que la résistance en flexion ne soit atteinte. La vérification utilise le coefficient k<sub>crit</sub>.",
+"es": "Las vigas esbeltas y de gran canto pueden desplazarse lateralmente y torsionarse (pandeo lateral) antes de alcanzar la resistencia a flexión. La comprobación emplea el coeficiente k<sub>crit</sub>."
+},
+"20-179": {
+"fr": "Neige (jusqu'à 1000 m)",
+"es": "Nieve (hasta 1000 m)"
+},
+"20-180": {
+"fr": "Cisaillement et torsion combinés (AN) : τ<sub>tor,d</sub>/(k<sub>shape</sub> · f<sub>v,d</sub>) + (τ<sub>y,d</sub>/f<sub>v,d</sub>)² + (τ<sub>z,d</sub>/f<sub>v,d</sub>)² ≤ 1",
+"es": "Cortante y torsión combinados (AN): τ<sub>tor,d</sub>/(k<sub>shape</sub> · f<sub>v,d</sub>) + (τ<sub>y,d</sub>/f<sub>v,d</sub>)² + (τ<sub>z,d</sub>/f<sub>v,d</sub>)² ≤ 1"
+},
+"20-181": {
+"fr": "Cisaillement et torsion — 6.1.7, 6.1.8",
+"es": "Cortante y torsión — 6.1.7, 6.1.8"
+},
+"20-182": {
+"fr": "Axe neutre (centre de gravité)",
+"es": "Eje del centro de gravedad"
+},
+"20-183": {
+"fr": "Vérification aux vibrations des planchers de logements — EN 1995-1-1, 7.3.3",
+"es": "Comprobación de vibraciones de forjados de viviendas — EN 1995-1-1, 7.3.3"
+},
+"20-184": {
+"fr": "Clou spécial",
+"es": "Clavo especial"
+},
+"20-185": {
+"fr": "Étude spécifique nécessaire (critères ci-dessous non applicables)",
+"es": "Se requiere un estudio específico (criterios inferiores no aplicables)"
+},
+"20-186": {
+"fr": "Contreplaqué",
+"es": "Contrachapado"
+},
+"20-187": {
+"fr": "Contreplaqué, OSB",
+"es": "Contrachapado, OSB"
+},
+"20-188": {
+"fr": "Broches &amp; boulons",
+"es": "Clavijas &amp; pernos"
+},
+"20-189": {
+"fr": "Broches — EN 1995-1-1, tableau 8.5",
+"es": "Clavijas — EN 1995-1-1, tabla 8.5"
+},
+"20-190": {
+"fr": "Broches : 6, 8, 10, 12, 16, 20, 24 mm — ajustées dans le trou préperçé.<br> Boulons : 6, 8, 10, 12, 16, 20, 24, 30 mm — avec jeu dans le trou, écrou et rondelle.",
+"es": "Clavijas: 6, 8, 10, 12, 16, 20, 24 mm — ajustadas en el agujero pretaladrado.<br> Pernos: 6, 8, 10, 12, 16, 20, 24, 30 mm — con holgura en el agujero, tuerca y arandela."
+},
+"20-191": {
+"fr": "Résistance de système (plusieurs poutres semblables, solidarisées)",
+"es": "Resistencia de sistema (varias vigas similares conectadas)"
+},
+"20-192": {
+"fr": "Coefficient partiel pour le bois et les assemblages",
+"es": "Coeficiente parcial para la madera y las uniones"
+},
+"20-193": {
+"fr": "Torsion (h ≥ b) : I<sub>t</sub> = b³ · h / 3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/(2b))/n⁵] (n = 1, 3, 5 …) ≈ b³ · h / 3 · (1 − 0,63 · b/h)",
+"es": "Torsión (h ≥ b): I<sub>t</sub> = b³ · h / 3 · [1 − 192/π⁵ · b/h · Σ tanh(nπh/(2b))/n⁵] (n = 1, 3, 5 …) ≈ b³ · h / 3 · (1 − 0,63 · b/h)"
+},
+"20-194": {
+"fr": "Capacité portante au cisaillement — théorie de Johansen",
+"es": "Capacidad resistente a corte — teoría de Johansen"
+},
+"20-195": {
+"fr": "Capacité du plan de cisaillement côté pointe",
+"es": "Capacidad del plano de corte del lado de la punta"
+},
+"20-196": {
+"fr": "Sous l'angle α par rapport au fil :",
+"es": "Con el ángulo α respecto a la fibra:"
+},
+"20-197": {
+"fr": "En dessous de la valeur minimale, le clou ne doit reprendre aucun effort axial. Ne pas utiliser de clous à tige lisse pour des charges axiales permanentes ou de longue durée.",
+"es": "Por debajo del valor mínimo, el clavo no debe absorber ninguna fuerza axial. No utilice clavos de caña lisa para cargas axiales permanentes o de larga duración."
+},
+"20-198": {
+"fr": "Bois massif 0,2 · BLC et LVL 0,1",
+"es": "Madera maciza 0,2 · MLE y LVL 0,1"
+},
+"20-199": {
+"fr": "Bois massif : (150/h)<sup>0,2</sup> ≤ 1,3 pour h &lt; 150 mm · BLC : (600/h)<sup>0,1</sup> ≤ 1,1 pour h &lt; 600 mm",
+"es": "Madera maciza: (150/h)<sup>0,2</sup> ≤ 1,3 para h &lt; 150 mm · MLE: (600/h)<sup>0,1</sup> ≤ 1,1 para h &lt; 600 mm"
+},
+"20-200": {
+"fr": "Bois massif et bois de construction massif (KVH)",
+"es": "Madera maciza y madera maciza estructural (KVH)"
+},
+"20-201": {
+"fr": "Selon l'EN 1995-1-1, le préperçage est nécessaire si ρ<sub>k</sub> &gt; 500 kg/m³ ou d &gt; 6 mm. Avec préperçage, les distances peuvent être plus petites, car le bois a moins tendance à fendre.",
+"es": "Según la EN 1995-1-1, el pretaladro es necesario si ρ<sub>k</sub> &gt; 500 kg/m³ o d &gt; 6 mm. Con pretaladro, las distancias pueden ser menores, porque la madera tiene menos tendencia a hendirse."
+},
+"20-202": {
+"fr": "En raison de l'anisotropie du bois, on distingue les sollicitations <b>parallèles</b> et <b>perpendiculaires</b> au fil.",
+"es": "Debido a la anisotropía de la madera, se distingue entre solicitaciones <b>paralelas</b> y <b>perpendiculares</b> a la fibra."
+},
+"20-203": {
+"fr": "Valeur",
+"es": "Valor"
+},
+"20-204": {
+"fr": "Valeurs en N/mm²",
+"es": "Valores en N/mm²"
+},
+"20-205": {
+"fr": "Vent (court terme/instantanée)",
+"es": "Viento (corta duración/instantánea)"
+},
+"20-206": {
+"fr": "Angle α",
+"es": "Ángulo α"
+},
+"20-207": {
+"fr": "Angle α [°]",
+"es": "Ángulo α [°]"
+},
+"20-208": {
+"fr": "Longueur efficace de déversement — EN 1995-1-1, tableau 6.1",
+"es": "Longitud eficaz de pandeo lateral — EN 1995-1-1, tabla 6.1"
+},
+"20-209": {
+"fr": "Toucher une ligne pour la surligner · défilement horizontal",
+"es": "Toque una fila para resaltarla · desplazamiento horizontal"
+},
+"20-210": {
+"fr": "La traction perpendiculaire au fil est le cas de sollicitation le plus critique en construction bois et est évitée par conception partout où c'est possible.",
+"es": "La tracción perpendicular a la fibra es el caso de solicitación más crítico en la construcción en madera y se evita mediante el diseño constructivo siempre que es posible."
+},
+"20-211": {
+"fr": "Traction perpendiculaire au fil : f<sub>t,90,k</sub> seulement 0,4 (bois massif) ou 0,5 N/mm² (BLC) — éviter par conception ou renforcer",
+"es": "Tracción perpendicular a la fibra: f<sub>t,90,k</sub> solo 0,4 (madera maciza) o 0,5 N/mm² (MLE) — evitar mediante el diseño constructivo o reforzar"
+},
+"20-212": {
+"fr": "Traction et compression parallèles au fil — 6.1.2, 6.1.4",
+"es": "Tracción y compresión paralelas a la fibra — 6.1.2, 6.1.4"
+},
+"20-213": {
+"fr": "Affectation selon l'AN Allemagne (exemples) : <b>Neige</b> jusqu'à 1000 m d'altitude « court terme », au-dessus « moyen terme » · <b>Vent</b> « court terme/instantanée » : on retient la valeur moyenne, donc en CS 1 et 2 k<sub>mod</sub> = (0,90 + 1,10) / 2 = <b>1,00</b>. L'affectation complète figure dans l'AN, tableau NA.1.",
+"es": "Asignación según el AN de Alemania (ejemplos): <b>Nieve</b> hasta 1000 m sobre el nivel del mar «corta duración», por encima «media duración» · <b>Viento</b> «corta duración/instantánea»: se adopta el valor medio, por lo que en CS 1 y 2 k<sub>mod</sub> = (0,90 + 1,10) / 2 = <b>1,00</b>. La asignación completa figura en el AN, tabla NA.1."
+},
+"20-214": {
+"fr": "a<sub>1</sub> — entre organes ∥ fil&nbsp;&nbsp;|&nbsp;&nbsp;a<sub>2</sub> — entre organes ⊥ fil<br> a<sub>3,t</sub> / a<sub>3,c</sub> — jusqu'au bout chargé / non chargé<br> a<sub>4,t</sub> / a<sub>4,c</sub> — jusqu'au bord chargé / non chargé",
+"es": "a<sub>1</sub> — entre medios de unión ∥ fibra&nbsp;&nbsp;|&nbsp;&nbsp;a<sub>2</sub> — entre medios de unión ⊥ fibra<br> a<sub>3,t</sub> / a<sub>3,c</sub> — al extremo cargado / no cargado<br> a<sub>4,t</sub> / a<sub>4,c</sub> — al borde cargado / no cargado"
+},
+"20-215": {
+"fr": "réduit du facteur t / (9·d)",
+"es": "reducido con el factor t / (9·d)"
+},
+"20-216": {
+"fr": "b découle de a (EN 1995-1-1, figure 7.2) · ζ — taux d'amortissement modal (habituellement 0,01)",
+"es": "b se deduce de a (EN 1995-1-1, figura 7.2) · ζ — razón de amortiguamiento modal (habitualmente 0,01)"
+},
+"20-217": {
+"fr": "d — diamètre [mm] · ρ<sub>k</sub> — masse volumique car. [kg/m³]",
+"es": "d — diámetro [mm] · ρ<sub>k</sub> — densidad caract. [kg/m³]"
+},
+"20-218": {
+"fr": "d<sub>ef</sub> = d<sub>char,n</sub> + k<sub>0</sub> · d<sub>0</sub> avec d<sub>char,n</sub> = β<sub>n</sub> · t et d<sub>0</sub> = 7 mm",
+"es": "d<sub>ef</sub> = d<sub>char,n</sub> + k<sub>0</sub> · d<sub>0</sub> con d<sub>char,n</sub> = β<sub>n</sub> · t y d<sub>0</sub> = 7 mm"
+},
+"20-219": {
+"fr": "ne doit pas être pris en compte",
+"es": "no debe tenerse en cuenta"
+},
+"20-220": {
+"fr": "encastré – libre (poteau console)",
+"es": "empotrado – libre (pilar en voladizo)"
+}
+}

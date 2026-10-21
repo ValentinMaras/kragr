@@ -1,0 +1,2037 @@
+[
+ {
+  "id": "00-0",
+  "de": "Schnittgrößen von Hand eingeben, z. B. aus <a href=\"calc.html\">statiq·calc</a>.",
+  "en": "Enter internal forces by hand, e.g. from <a href=\"calc.html\">statiq·calc</a>."
+ },
+ {
+  "id": "00-1",
+  "de": "Balken",
+  "en": "Beam"
+ },
+ {
+  "id": "00-2",
+  "de": "Unterzug",
+  "en": "Downstand beam"
+ },
+ {
+  "id": "00-3",
+  "de": "Platte",
+  "en": "Slab"
+ },
+ {
+  "id": "00-4",
+  "de": "Stütze",
+  "en": "Column"
+ },
+ {
+  "id": "00-5",
+  "de": "Breite b [cm]",
+  "en": "Width b [cm]"
+ },
+ {
+  "id": "00-6",
+  "de": "Höhe h [cm]",
+  "en": "Depth h [cm]"
+ },
+ {
+  "id": "00-7",
+  "de": "Stützweite l [m]",
+  "en": "Span l [m]"
+ },
+ {
+  "id": "00-8",
+  "de": "Tragsystem (für l/d)",
+  "en": "Structural system (for l/d)"
+ },
+ {
+  "id": "00-9",
+  "de": "Plattenbalken: Die Decke wirkt im Feld als Druckgurt mit.",
+  "en": "T-beam: the slab acts as a compression flange in the span."
+ },
+ {
+  "id": "00-10",
+  "de": "Plattendicke h<sub>f</sub> [cm]",
+  "en": "Slab thickness h<sub>f</sub> [cm]"
+ },
+ {
+  "id": "00-11",
+  "de": "Feld (für l<sub>0</sub>)",
+  "en": "Span (for l<sub>0</sub>)"
+ },
+ {
+  "id": "00-12",
+  "de": "Einfeldträger (l₀ = l)",
+  "en": "Simply supported (l₀ = l)"
+ },
+ {
+  "id": "00-13",
+  "de": "Endfeld (l₀ = 0,85·l)",
+  "en": "End span (l₀ = 0.85·l)"
+ },
+ {
+  "id": "00-14",
+  "de": "Innenfeld (l₀ = 0,70·l)",
+  "en": "Interior span (l₀ = 0.70·l)"
+ },
+ {
+  "id": "00-15",
+  "de": "Platte links b₁ [cm]",
+  "en": "Slab left b₁ [cm]"
+ },
+ {
+  "id": "00-16",
+  "de": "Platte rechts b₂ [cm]",
+  "en": "Slab right b₂ [cm]"
+ },
+ {
+  "id": "00-17",
+  "de": "b₁, b₂ — halber lichter Abstand zum Nachbarunterzug bzw. Plattenüberstand am Rand (0 = keine Platte auf dieser Seite).",
+  "en": "b₁, b₂ — half the clear distance to the neighbouring beam or the slab overhang at the edge (0 = no slab on this side)."
+ },
+ {
+  "id": "00-18",
+  "de": "Baustoffe und Umgebung",
+  "en": "Materials and environment"
+ },
+ {
+  "id": "00-19",
+  "de": "Beton",
+  "en": "Concrete"
+ },
+ {
+  "id": "00-20",
+  "de": "Betonstahl",
+  "en": "Reinforcing steel"
+ },
+ {
+  "id": "00-21",
+  "de": "Expositionsklasse",
+  "en": "Exposure class"
+ },
+ {
+  "id": "00-22",
+  "de": "Größtkorn d<sub>g</sub> [mm]",
+  "en": "Max. aggregate size d<sub>g</sub> [mm]"
+ },
+ {
+  "id": "00-23",
+  "de": "cot θ (Querkraft)",
+  "en": "cot θ (shear)"
+ },
+ {
+  "id": "00-24",
+  "de": "Stütze: System und Schnittgrößen",
+  "en": "Column: system and internal forces"
+ },
+ {
+  "id": "00-25",
+  "de": "Stützenlänge l [m]",
+  "en": "Column length l [m]"
+ },
+ {
+  "id": "00-26",
+  "de": "Lagerung (Knicklänge l<sub>0</sub> = β·l)",
+  "en": "Support conditions (buckling length l<sub>0</sub> = β·l)"
+ },
+ {
+  "id": "00-27",
+  "de": "gelenkig – gelenkig (β = 1,0)",
+  "en": "pinned – pinned (β = 1.0)"
+ },
+ {
+  "id": "00-28",
+  "de": "eingespannt – gelenkig (β = 0,7)",
+  "en": "fixed – pinned (β = 0.7)"
+ },
+ {
+  "id": "00-29",
+  "de": "beidseitig eingespannt (β = 0,5)",
+  "en": "fixed at both ends (β = 0.5)"
+ },
+ {
+  "id": "00-30",
+  "de": "Kragstütze (β = 2,0)",
+  "en": "Cantilever column (β = 2.0)"
+ },
+ {
+  "id": "00-31",
+  "de": "N<sub>Ed</sub> [kN] (Druck)",
+  "en": "N<sub>Ed</sub> [kN] (compression)"
+ },
+ {
+  "id": "00-32",
+  "de": "Kriechzahl φ<sub>ef</sub>",
+  "en": "Effective creep ratio φ<sub>ef</sub>"
+ },
+ {
+  "id": "00-33",
+  "de": "M<sub>02</sub> [kNm] (größeres Endmoment)",
+  "en": "M<sub>02</sub> [kNm] (larger end moment)"
+ },
+ {
+  "id": "00-34",
+  "de": "M<sub>01</sub> [kNm] (kleineres, mit Vorzeichen)",
+  "en": "M<sub>01</sub> [kNm] (smaller, with sign)"
+ },
+ {
+  "id": "00-35",
+  "de": "Momente nach Theorie I. Ordnung um die Achse quer zu h (h liegt in der Momentenebene). M<sub>01</sub> positiv, wenn beide Endmomente\n        auf derselben Seite Zug erzeugen (einsinnige Krümmung), negativ bei Doppelkrümmung. Kragstütze: M<sub>02</sub> = Moment am Fuß, M<sub>01</sub> = 0.\n        φ<sub>ef</sub> = 0 vernachlässigt das Kriechen (zulässig u. a. bei φ ≤ 2, λ ≤ 75 und M<sub>0Ed</sub>/N<sub>Ed</sub> ≥ h).",
+  "en": "First-order moments about the axis perpendicular to h (h lies in the plane of bending). M<sub>01</sub> is positive if both end moments cause tension on the same side (single curvature), negative for double curvature. Cantilever column: M<sub>02</sub> = moment at the base, M<sub>01</sub> = 0. φ<sub>ef</sub> = 0 neglects creep (allowed e.g. for φ ≤ 2, λ ≤ 75 and M<sub>0Ed</sub>/N<sub>Ed</sub> ≥ h)."
+ },
+ {
+  "id": "00-36",
+  "de": "Bewehrung Stütze",
+  "en": "Column reinforcement"
+ },
+ {
+  "id": "00-37",
+  "de": "Stäbe je Seite (oben und unten)",
+  "en": "Bars per side (top and bottom)"
+ },
+ {
+  "id": "00-38",
+  "de": "Ø Längsstab [mm]",
+  "en": "Ø longitudinal bar [mm]"
+ },
+ {
+  "id": "00-39",
+  "de": "Ø Bügel [mm]",
+  "en": "Ø link [mm]"
+ },
+ {
+  "id": "00-40",
+  "de": "Bügelabstand s [cm]",
+  "en": "Link spacing s [cm]"
+ },
+ {
+  "id": "00-41",
+  "de": "Symmetrische Bewehrung: gleich viele Stäbe an beiden Seiten in Momentenrichtung (A<sub>s1</sub> = A<sub>s2</sub>). Bei „automatisch“\n        wird die kleinste Gesamtfläche gewählt, die alle Nachweise erfüllt.",
+  "en": "Symmetric reinforcement: the same number of bars on both faces in the direction of bending (A<sub>s1</sub> = A<sub>s2</sub>). With “automatic”, the smallest total area that satisfies all checks is chosen."
+ },
+ {
+  "id": "00-42",
+  "de": "Schnittgrößen",
+  "en": "Internal forces"
+ },
+ {
+  "id": "00-43",
+  "de": "M<sub>Ed</sub> [kNm] (GZT, Feld)",
+  "en": "M<sub>Ed</sub> [kNm] (ULS, span)"
+ },
+ {
+  "id": "00-44",
+  "de": "V<sub>Ed</sub> [kN] (GZT, Auflager)",
+  "en": "V<sub>Ed</sub> [kN] (ULS, support)"
+ },
+ {
+  "id": "00-45",
+  "de": "M<sub>qp</sub> [kNm] (quasi-ständig)",
+  "en": "M<sub>qp</sub> [kNm] (quasi-permanent)"
+ },
+ {
+  "id": "00-46",
+  "de": "|M<sub>Ed,Stütze</sub>| [kNm] (0 = keins)",
+  "en": "|M<sub>Ed,support</sub>| [kNm] (0 = none)"
+ },
+ {
+  "id": "00-47",
+  "de": "|M<sub>qp,Stütze</sub>| [kNm]",
+  "en": "|M<sub>qp,support</sub>| [kNm]"
+ },
+ {
+  "id": "00-48",
+  "de": "Positive Feldmomente, Zugseite unten. V<sub>Ed</sub> auf der sicheren Seite am Auflagerrand — bei direkter Lagerung darf\n        der Wert im Abstand d verwendet werden. M<sub>qp</sub> = M aus G<sub>k</sub> + ψ<sub>2</sub>·Q<sub>k</sub>.\n        Das Stützmoment (Durchlaufträger) wird als Betrag eingegeben, Zugseite oben.",
+  "en": "Positive span moments, tension at the bottom. V<sub>Ed</sub> is taken at the face of the support (safe side) — with direct support the value at distance d may be used. M<sub>qp</sub> = M from G<sub>k</sub> + ψ<sub>2</sub>·Q<sub>k</sub>. The support moment (continuous beam) is entered as an absolute value, tension at the top."
+ },
+ {
+  "id": "00-49",
+  "de": "Endauflager",
+  "en": "End support"
+ },
+ {
+  "id": "00-50",
+  "de": "direkt (Wand, Stütze)",
+  "en": "direct (wall, column)"
+ },
+ {
+  "id": "00-51",
+  "de": "indirekt (auf Unterzug)",
+  "en": "indirect (on a beam)"
+ },
+ {
+  "id": "00-52",
+  "de": "Auflagertiefe t [cm]",
+  "en": "Support length t [cm]"
+ },
+ {
+  "id": "00-53",
+  "de": "Stabende",
+  "en": "Bar end"
+ },
+ {
+  "id": "00-54",
+  "de": "gerade",
+  "en": "straight"
+ },
+ {
+  "id": "00-55",
+  "de": "Haken / Winkelhaken",
+  "en": "Hook / bend"
+ },
+ {
+  "id": "00-56",
+  "de": "Direkte Lagerung: Die Verankerung beginnt an der Auflagervorderkante. Indirekte Lagerung: Der Träger hängt in einem anderen Träger\n        und braucht dort eine Aufhängebewehrung; die Verankerung liegt in dessen Breite. Haken dürfen mit α₁ = 0,7 angesetzt werden, wenn die Betondeckung\n        senkrecht zur Krümmungsebene ≥ 3·Ø ist.",
+  "en": "Direct support: anchorage starts at the front face of the support. Indirect support: the beam hangs in another beam and needs suspension reinforcement there; the anchorage lies within its width. Hooks may be taken with α₁ = 0.7 if the concrete cover perpendicular to the plane of bending is ≥ 3·Ø."
+ },
+ {
+  "id": "00-57",
+  "de": "Bewehrung",
+  "en": "Reinforcement"
+ },
+ {
+  "id": "00-58",
+  "de": "Anzahl Längsstäbe",
+  "en": "Number of longitudinal bars"
+ },
+ {
+  "id": "00-59",
+  "de": "davon in der 2. Lage: Anzahl (0 = eine Lage)",
+  "en": "of which in the 2nd layer: number (0 = one layer)"
+ },
+ {
+  "id": "00-60",
+  "de": "Bügelabstand s<sub>w</sub> [cm]",
+  "en": "Link spacing s<sub>w</sub> [cm]"
+ },
+ {
+  "id": "00-61",
+  "de": "Feld oben: Anzahl (Druck-/Montagestäbe)",
+  "en": "Span top: number (compression/assembly bars)"
+ },
+ {
+  "id": "00-62",
+  "de": "Feld oben: Ø [mm]",
+  "en": "Span top: Ø [mm]"
+ },
+ {
+  "id": "00-63",
+  "de": "Stütze oben: Anzahl",
+  "en": "Support top: number"
+ },
+ {
+  "id": "00-64",
+  "de": "Stütze oben: Ø [mm]",
+  "en": "Support top: Ø [mm]"
+ },
+ {
+  "id": "00-65",
+  "de": "Stababstand s [cm]",
+  "en": "Bar spacing s [cm]"
+ },
+ {
+  "id": "00-66",
+  "de": "Stütze oben: s [cm]",
+  "en": "Support top: s [cm]"
+ },
+ {
+  "id": "00-67",
+  "de": "Balken und Unterzug: zweischnittige Bügel, Feldbewehrung einlagig im Steg; die Stützbewehrung eines Unterzugs liegt über b<sub>eff</sub> verteilt in der Platte.",
+  "en": "Beam and downstand beam: two-legged links, span reinforcement in one layer in the web; the support reinforcement of a downstand beam is distributed in the slab over b<sub>eff</sub>."
+ },
+ {
+  "id": "00-68",
+  "de": "Anschluss",
+  "en": "Connection"
+ },
+ {
+  "id": "00-69",
+  "de": "Profil und Werkstoff",
+  "en": "Section and material"
+ },
+ {
+  "id": "00-70",
+  "de": "Stahlsorte",
+  "en": "Steel grade"
+ },
+ {
+  "id": "00-71",
+  "de": "Stützweite L [m]",
+  "en": "Span L [m]"
+ },
+ {
+  "id": "00-72",
+  "de": "Schnittgrößen (Biegung um die starke Achse y)",
+  "en": "Internal forces (bending about the major axis y)"
+ },
+ {
+  "id": "00-73",
+  "de": "N<sub>Ed</sub> [kN] (Druck +)",
+  "en": "N<sub>Ed</sub> [kN] (compression +)"
+ },
+ {
+  "id": "00-74",
+  "de": "Momentenverlauf",
+  "en": "Bending moment diagram"
+ },
+ {
+  "id": "00-75",
+  "de": "Gleichlast (Parabel)",
+  "en": "Uniform load (parabola)"
+ },
+ {
+  "id": "00-76",
+  "de": "Einzellast in Feldmitte",
+  "en": "Point load at midspan"
+ },
+ {
+  "id": "00-77",
+  "de": "konstant",
+  "en": "constant"
+ },
+ {
+  "id": "00-78",
+  "de": "linear (Endmomente)",
+  "en": "linear (end moments)"
+ },
+ {
+  "id": "00-79",
+  "de": "Alle Werte als Bemessungswerte (GZT). M<sub>y,Ed</sub> ist das größte Moment im betrachteten Abschnitt.",
+  "en": "All values as design values (ULS). M<sub>y,Ed</sub> is the largest moment in the segment considered."
+ },
+ {
+  "id": "00-80",
+  "de": "Stabilität",
+  "en": "Stability"
+ },
+ {
+  "id": "00-81",
+  "de": "Knicklänge y: β<sub>y</sub>",
+  "en": "Buckling length y: β<sub>y</sub>"
+ },
+ {
+  "id": "00-82",
+  "de": "1,0 (gelenkig)",
+  "en": "1.0 (pinned)"
+ },
+ {
+  "id": "00-83",
+  "de": "2,0 (Kragstütze)",
+  "en": "2.0 (cantilever column)"
+ },
+ {
+  "id": "00-84",
+  "de": "Knicklänge z: β<sub>z</sub>",
+  "en": "Buckling length z: β<sub>z</sub>"
+ },
+ {
+  "id": "00-85",
+  "de": "Abstand seitl. Halterungen L<sub>LT</sub> [m]",
+  "en": "Spacing of lateral restraints L<sub>LT</sub> [m]"
+ },
+ {
+  "id": "00-86",
+  "de": "Lastangriff",
+  "en": "Load application"
+ },
+ {
+  "id": "00-87",
+  "de": "Obergurt (ungünstig)",
+  "en": "Top flange (unfavourable)"
+ },
+ {
+  "id": "00-88",
+  "de": "Schwerpunkt",
+  "en": "Centroid"
+ },
+ {
+  "id": "00-89",
+  "de": "Untergurt (günstig)",
+  "en": "Bottom flange (favourable)"
+ },
+ {
+  "id": "00-90",
+  "de": "L<sub>LT</sub> = 0: Druckgurt durchgehend seitlich gehalten (z. B. durch eine aufliegende Decke) — kein Biegedrillknicken.",
+  "en": "L<sub>LT</sub> = 0: compression flange continuously restrained laterally (e.g. by a slab resting on it) — no lateral-torsional buckling."
+ },
+ {
+  "id": "00-91",
+  "de": "Weitere Einwirkungen",
+  "en": "Further actions"
+ },
+ {
+  "id": "00-92",
+  "de": "M<sub>z,Ed</sub> [kNm] (schwache Achse)",
+  "en": "M<sub>z,Ed</sub> [kNm] (minor axis)"
+ },
+ {
+  "id": "00-93",
+  "de": "keine",
+  "en": "none"
+ },
+ {
+  "id": "00-94",
+  "de": "Einzeltorsionsmoment in Feldmitte",
+  "en": "Concentrated torque at midspan"
+ },
+ {
+  "id": "00-95",
+  "de": "Streckentorsionsmoment",
+  "en": "Distributed torque"
+ },
+ {
+  "id": "00-96",
+  "de": "Einzellast auf den Gurt F<sub>Ed</sub> [kN] (0 = keine)",
+  "en": "Concentrated load on the flange F<sub>Ed</sub> [kN] (0 = none)"
+ },
+ {
+  "id": "00-97",
+  "de": "Lasteinleitungslänge s<sub>s</sub> [mm]",
+  "en": "Stiff bearing length s<sub>s</sub> [mm]"
+ },
+ {
+  "id": "00-98",
+  "de": "im Feld (Typ a)",
+  "en": "in the span (type a)"
+ },
+ {
+  "id": "00-99",
+  "de": "am Trägerende (Typ c)",
+  "en": "at the beam end (type c)"
+ },
+ {
+  "id": "00-100",
+  "de": "Abstand zum Trägerende c [mm]",
+  "en": "Distance to the beam end c [mm]"
+ },
+ {
+  "id": "00-101",
+  "de": "Torsion: gabelgelagerter Einfeldträger, z. B. aus einer ausmittig angreifenden Last (T = F·e). Lasteinleitung: Steg ohne Quersteifen, z. B. Auflager oder aufgesetzte Stütze.",
+  "en": "Torsion: simply supported beam with fork supports, e.g. from an eccentric load (T = F·e). Load introduction: web without transverse stiffeners, e.g. support or column on top."
+ },
+ {
+  "id": "00-102",
+  "de": "Durchbiegung (GZG)",
+  "en": "Deflection (SLS)"
+ },
+ {
+  "id": "00-103",
+  "de": "M<sub>y,k</sub> [kNm] (charakteristisch, 0 = ohne)",
+  "en": "M<sub>y,k</sub> [kNm] (characteristic, 0 = none)"
+ },
+ {
+  "id": "00-104",
+  "de": "Grenzwert",
+  "en": "Limit"
+ },
+ {
+  "id": "00-105",
+  "de": "Durchbiegung in Feldmitte aus M<sub>y,k</sub> und dem gewählten Momentenverlauf (Einfeldträger).",
+  "en": "Deflection at midspan from M<sub>y,k</sub> and the selected moment diagram (simply supported beam)."
+ },
+ {
+  "id": "00-106",
+  "de": "Schraubenverbindung (Scher-/Lochleibungsverbindung)",
+  "en": "Bolted connection (shear/bearing type)"
+ },
+ {
+  "id": "00-107",
+  "de": "Schraube",
+  "en": "Bolt"
+ },
+ {
+  "id": "00-108",
+  "de": "Reihen n₁ (in Kraftrichtung)",
+  "en": "Rows n₁ (in load direction)"
+ },
+ {
+  "id": "00-109",
+  "de": "Spalten n₂ (quer)",
+  "en": "Columns n₂ (transverse)"
+ },
+ {
+  "id": "00-110",
+  "de": "Scherfugen m",
+  "en": "Shear planes m"
+ },
+ {
+  "id": "00-111",
+  "de": "1 (einschnittig)",
+  "en": "1 (single shear)"
+ },
+ {
+  "id": "00-112",
+  "de": "2 (zweischnittig)",
+  "en": "2 (double shear)"
+ },
+ {
+  "id": "00-113",
+  "de": "maßgebende Blechdicke t [mm]",
+  "en": "Governing plate thickness t [mm]"
+ },
+ {
+  "id": "00-114",
+  "de": "Blech",
+  "en": "Plate"
+ },
+ {
+  "id": "00-115",
+  "de": "e₁, p₁ in Kraftrichtung, e₂, p₂ quer dazu. Die erste Reihe zählt als Endschrauben, die äußeren Spalten als Randschrauben.",
+  "en": "e₁, p₁ in load direction, e₂, p₂ perpendicular to it. The first row counts as end bolts, the outer columns as edge bolts."
+ },
+ {
+  "id": "00-116",
+  "de": "Kräfte",
+  "en": "Forces"
+ },
+ {
+  "id": "00-117",
+  "de": "V<sub>Ed</sub> [kN] (Abscheren, gesamt)",
+  "en": "V<sub>Ed</sub> [kN] (shear, total)"
+ },
+ {
+  "id": "00-118",
+  "de": "N<sub>Ed</sub> [kN] (Zug, gesamt)",
+  "en": "N<sub>Ed</sub> [kN] (tension, total)"
+ },
+ {
+  "id": "00-119",
+  "de": "Kehlnaht (z. B. Fahnenblech an Stütze)",
+  "en": "Fillet weld (e.g. fin plate to column)"
+ },
+ {
+  "id": "00-120",
+  "de": "Kraft F<sub>w,Ed</sub> [kN] (0 = keine)",
+  "en": "Force F<sub>w,Ed</sub> [kN] (0 = none)"
+ },
+ {
+  "id": "00-121",
+  "de": "Anzahl Nähte",
+  "en": "Number of welds"
+ },
+ {
+  "id": "00-122",
+  "de": "wirksame Länge l [mm]",
+  "en": "Effective length l [mm]"
+ },
+ {
+  "id": "00-123",
+  "de": "größte Blechdicke t<sub>max</sub> [mm]",
+  "en": "Largest plate thickness t<sub>max</sub> [mm]"
+ },
+ {
+  "id": "00-124",
+  "de": "Gleiten",
+  "en": "Sliding"
+ },
+ {
+  "id": "00-125",
+  "de": "<span>Gleiten in der Sohlfuge</span>",
+  "en": "<span>Sliding in the base joint</span>"
+ },
+ {
+  "id": "00-126",
+  "de": "<span>Bezeichnung</span>",
+  "en": "<span>Name</span>"
+ },
+ {
+  "id": "00-127",
+  "de": "<span>Sohlbreite b [m] (Richtung von H)</span>",
+  "en": "<span>Base width b [m] (direction of H)</span>"
+ },
+ {
+  "id": "00-128",
+  "de": "<span>Sohllänge a [m] (quer, 1 = je m)</span>",
+  "en": "<span>Base length a [m] (transverse, 1 = per m)</span>"
+ },
+ {
+  "id": "00-129",
+  "de": "V<sub>G,k</sub> [kN] <span>(ständig, mit Eigengewicht)</span>",
+  "en": "V<sub>G,k</sub> [kN] <span>(permanent, incl. self-weight)</span>"
+ },
+ {
+  "id": "00-130",
+  "de": "<span>Bemessungssituation</span>",
+  "en": "<span>Design situation</span>"
+ },
+ {
+  "id": "00-131",
+  "de": "<span>Sohlfuge</span>",
+  "en": "<span>Base joint</span>"
+ },
+ {
+  "id": "00-132",
+  "de": "Ortbeton (δ = φ′)",
+  "en": "cast in place (δ = φ′)"
+ },
+ {
+  "id": "00-133",
+  "de": "Fertigteil, glatt (δ = 2/3·φ′)",
+  "en": "precast, smooth (δ = 2/3·φ′)"
+ },
+ {
+  "id": "00-134",
+  "de": "<span>Zustand</span>",
+  "en": "<span>Condition</span>"
+ },
+ {
+  "id": "00-135",
+  "de": "dräniert (Reibung, φ′)",
+  "en": "drained (friction, φ′)"
+ },
+ {
+  "id": "00-136",
+  "de": "undräniert (bindig, c<sub>u</sub>)",
+  "en": "undrained (cohesive, c<sub>u</sub>)"
+ },
+ {
+  "id": "00-137",
+  "de": "<span>Erdwiderstand vor dem Fundament</span>",
+  "en": "<span>Passive earth pressure in front of the footing</span>"
+ },
+ {
+  "id": "00-138",
+  "de": "nicht ansetzen",
+  "en": "do not apply"
+ },
+ {
+  "id": "00-139",
+  "de": "ansetzen (50 %)",
+  "en": "apply (50 %)"
+ },
+ {
+  "id": "00-140",
+  "de": "<span>Einbindetiefe d [m]</span>",
+  "en": "<span>Embedment depth d [m]</span>"
+ },
+ {
+  "id": "00-141",
+  "de": "Nur ständige Vertikallasten wirken günstig (γ = 1,0). Bodenwerte φ′, γ aus der Karte „Baugrund“. Der Erdwiderstand braucht große Verschiebungen — deshalb höchstens die Hälfte und nur, wenn der Boden vor dem Fundament dauerhaft vorhanden ist.",
+  "en": "Only permanent vertical loads act favourably (γ = 1.0). Soil parameters φ′, γ from the “Ground” card. Passive pressure needs large displacements — so at most half of it, and only if the soil in front of the footing is permanently present."
+ },
+ {
+  "id": "00-142",
+  "de": "<span>Schwimmkörper</span>",
+  "en": "<span>Floating body</span>"
+ },
+ {
+  "id": "00-143",
+  "de": "Quader (Ponton)",
+  "en": "Box (pontoon)"
+ },
+ {
+  "id": "00-144",
+  "de": "Trapezprisma (Ponton mit Schrägen, Keil)",
+  "en": "Trapezoidal prism (pontoon with chamfers, wedge)"
+ },
+ {
+  "id": "00-145",
+  "de": "Zylinder, stehend (Boje, Senkkasten)",
+  "en": "Cylinder, upright (buoy, caisson)"
+ },
+ {
+  "id": "00-146",
+  "de": "Zylinder, liegend (Rohr, Schwimmrohr)",
+  "en": "Cylinder, horizontal (pipe, float)"
+ },
+ {
+  "id": "00-147",
+  "de": "Kugel (Boje)",
+  "en": "Sphere (buoy)"
+ },
+ {
+  "id": "00-148",
+  "de": "<span class=\"ws-lB\">Breite B [m] (Kippachse längs)</span>",
+  "en": "<span class=\"ws-lB\">Width B [m] (longitudinal tilt axis)</span>"
+ },
+ {
+  "id": "00-149",
+  "de": "<span>Bodenbreite B<sub>u</sub> [m] (0 = Keil)</span>",
+  "en": "<span>Bottom width B<sub>u</sub> [m] (0 = wedge)</span>"
+ },
+ {
+  "id": "00-150",
+  "de": "<span>Durchmesser D [m]</span>",
+  "en": "<span>Diameter D [m]</span>"
+ },
+ {
+  "id": "00-151",
+  "de": "Gipsputz",
+  "en": "Gypsum plaster"
+ },
+ {
+  "id": "00-152",
+  "de": "Kalkzementputz",
+  "en": "Lime-cement plaster"
+ },
+ {
+  "id": "00-153",
+  "de": "Zementestrich",
+  "en": "Cement screed"
+ },
+ {
+  "id": "00-154",
+  "de": "Normalbeton (unbewehrt)",
+  "en": "Normal concrete (plain)"
+ },
+ {
+  "id": "00-155",
+  "de": "Kalksandstein RDK 1,8",
+  "en": "Calcium silicate brick, density 1.8"
+ },
+ {
+  "id": "00-156",
+  "de": "Kalksandstein RDK 2,0",
+  "en": "Calcium silicate brick, density 2.0"
+ },
+ {
+  "id": "00-157",
+  "de": "Vollziegel RDK 1,8",
+  "en": "Solid clay brick, density 1.8"
+ },
+ {
+  "id": "00-158",
+  "de": "Hochlochziegel RDK 0,8",
+  "en": "Vertically perforated clay brick, density 0.8"
+ },
+ {
+  "id": "00-159",
+  "de": "Planziegel wärmedämmend (λ 0,09)",
+  "en": "Insulating clay block (λ 0.09)"
+ },
+ {
+  "id": "00-160",
+  "de": "Porenbeton RDK 0,35",
+  "en": "Autoclaved aerated concrete, density 0.35"
+ },
+ {
+  "id": "00-161",
+  "de": "Leichtbeton-Vollblock RDK 0,8",
+  "en": "Lightweight concrete block, density 0.8"
+ },
+ {
+  "id": "00-162",
+  "de": "Mineralwolle WLS 035",
+  "en": "Mineral wool WLS 035"
+ },
+ {
+  "id": "00-163",
+  "de": "Mineralwolle WLS 032",
+  "en": "Mineral wool WLS 032"
+ },
+ {
+  "id": "00-164",
+  "de": "EPS WLS 032 (grau)",
+  "en": "EPS WLS 032 (grey)"
+ },
+ {
+  "id": "00-165",
+  "de": "Holzfaserdämmung WLS 040",
+  "en": "Wood fibre insulation WLS 040"
+ },
+ {
+  "id": "00-166",
+  "de": "Zellulose WLS 040",
+  "en": "Cellulose WLS 040"
+ },
+ {
+  "id": "00-167",
+  "de": "Nadelholz",
+  "en": "Softwood"
+ },
+ {
+  "id": "00-168",
+  "de": "OSB-Platte",
+  "en": "OSB board"
+ },
+ {
+  "id": "00-169",
+  "de": "Gipskartonplatte",
+  "en": "Gypsum plasterboard"
+ },
+ {
+  "id": "00-170",
+  "de": "Holzwolle-Leichtbauplatte",
+  "en": "Wood-wool board"
+ },
+ {
+  "id": "00-171",
+  "de": "PE-Folie 0,2 mm (s_d = 100 m)",
+  "en": "PE foil 0.2 mm (s_d = 100 m)"
+ },
+ {
+  "id": "00-172",
+  "de": "Dampfbremse 0,2 mm (s_d = 2 m)",
+  "en": "Vapour retarder 0.2 mm (s_d = 2 m)"
+ },
+ {
+  "id": "00-173",
+  "de": "Bitumen-Dachbahn 4 mm (s_d ≈ 200 m)",
+  "en": "Bitumen roofing membrane 4 mm (s_d ≈ 200 m)"
+ },
+ {
+  "id": "00-174",
+  "de": "Dachziegel",
+  "en": "Roof tiles"
+ },
+ {
+  "id": "00-175",
+  "de": "Wand (Wärmestrom horizontal)",
+  "en": "Wall (horizontal heat flow)"
+ },
+ {
+  "id": "00-176",
+  "de": "Dach, Decke nach außen (Wärmestrom nach oben)",
+  "en": "Roof, ceiling to outside (upward heat flow)"
+ },
+ {
+  "id": "00-177",
+  "de": "Decke über Außenluft (Wärmestrom nach unten)",
+  "en": "Floor above outside air (downward heat flow)"
+ },
+ {
+  "id": "00-178",
+  "de": "Bauteil gegen Erdreich",
+  "en": "Element in contact with the ground"
+ },
+ {
+  "id": "00-179",
+  "de": "Wand zu unbeheiztem Raum",
+  "en": "Wall to unheated space"
+ },
+ {
+  "id": "00-180",
+  "de": "Wohnungstrennwand (53 dB)",
+  "en": "Party wall between dwellings (53 dB)"
+ },
+ {
+  "id": "00-181",
+  "de": "Treppenhauswand (53 dB)",
+  "en": "Staircase wall (53 dB)"
+ },
+ {
+  "id": "00-182",
+  "de": "Wohnungstrenndecke (54 dB)",
+  "en": "Separating floor between dwellings (54 dB)"
+ },
+ {
+  "id": "00-183",
+  "de": "Decke über Keller/Durchfahrt (52 dB)",
+  "en": "Floor above basement/passage (52 dB)"
+ },
+ {
+  "id": "00-184",
+  "de": "Treppenlauf (nur Trittschall)",
+  "en": "Stair flight (impact sound only)"
+ },
+ {
+  "id": "00-185",
+  "de": "Haustrennwand Reihenhaus, unterstes Geschoss (59 dB)",
+  "en": "Party wall, terraced house, lowest storey (59 dB)"
+ },
+ {
+  "id": "00-186",
+  "de": "Haustrennwand Reihenhaus, darüber (62 dB)",
+  "en": "Party wall, terraced house, above (62 dB)"
+ },
+ {
+  "id": "00-187",
+  "de": "genau nach DIN 4109-2 (vier Flanken)",
+  "en": "exact to DIN 4109-2 (four flanks)"
+ },
+ {
+  "id": "00-188",
+  "de": "vereinfacht (pauschaler Abschlag)",
+  "en": "simplified (lump-sum deduction)"
+ },
+ {
+  "id": "00-189",
+  "de": "Kreuzstoß",
+  "en": "Cross junction"
+ },
+ {
+  "id": "00-190",
+  "de": "T-Stoß",
+  "en": "T-junction"
+ },
+ {
+  "id": "00-191",
+  "de": "Ausklinkung",
+  "en": "Notch"
+ },
+ {
+  "id": "00-192",
+  "de": "Satteldachträger",
+  "en": "Double-tapered beam"
+ },
+ {
+  "id": "00-193",
+  "de": "Versatz",
+  "en": "Step joint"
+ },
+ {
+  "id": "00-194",
+  "de": "Vollholz (Nadelholz)",
+  "en": "Solid timber (softwood)"
+ },
+ {
+  "id": "00-195",
+  "de": "Brettschichtholz",
+  "en": "Glued laminated timber"
+ },
+ {
+  "id": "00-196",
+  "de": "t<sub>1</sub> [mm] (Seitenholz)",
+  "en": "t<sub>1</sub> [mm] (side member)"
+ },
+ {
+  "id": "00-197",
+  "de": "t<sub>2</sub> [mm] (Mittelholz)",
+  "en": "t<sub>2</sub> [mm] (central member)"
+ },
+ {
+  "id": "00-198",
+  "de": "ständig",
+  "en": "permanent"
+ },
+ {
+  "id": "00-199",
+  "de": "mittel",
+  "en": "medium-term"
+ },
+ {
+  "id": "00-200",
+  "de": "sehr kurz",
+  "en": "instantaneous"
+ },
+ {
+  "id": "00-201",
+  "de": "Baustoff und Nutzung",
+  "en": "Material and service conditions"
+ },
+ {
+  "id": "00-202",
+  "de": "1 (beheizt, innen)",
+  "en": "1 (heated, indoors)"
+ },
+ {
+  "id": "00-203",
+  "de": "2 (überdacht, außen)",
+  "en": "2 (covered, outdoors)"
+ },
+ {
+  "id": "00-204",
+  "de": "3 (bewittert)",
+  "en": "3 (exposed to weather)"
+ },
+ {
+  "id": "00-205",
+  "de": "KLED (kürzeste Last der Kombination)",
+  "en": "Load-duration class (shortest load in the combination)"
+ },
+ {
+  "id": "00-206",
+  "de": "mittel (Nutzlast)",
+  "en": "medium-term (imposed load)"
+ },
+ {
+  "id": "00-207",
+  "de": "kurz (Schnee)",
+  "en": "short-term (snow)"
+ },
+ {
+  "id": "00-208",
+  "de": "sehr kurz (Wind)",
+  "en": "instantaneous (wind)"
+ },
+ {
+  "id": "00-209",
+  "de": "Satteldach- und Pultdachträger werden aus Brettschichtholz hergestellt — die Auswahl ist hier fest auf BSH gestellt.",
+  "en": "Double-tapered and mono-pitch beams are made of glued laminated timber — the selection is fixed to glulam here."
+ },
+ {
+  "id": "00-210",
+  "de": "Ausklinkung am Auflager",
+  "en": "Notch at the support"
+ },
+ {
+  "id": "00-211",
+  "de": "Lage der Ausklinkung",
+  "en": "Position of the notch"
+ },
+ {
+  "id": "00-212",
+  "de": "unten, am Auflager (Zugseite)",
+  "en": "bottom, at the support (tension side)"
+ },
+ {
+  "id": "00-213",
+  "de": "oben, gegenüber dem Auflager",
+  "en": "top, opposite the support"
+ },
+ {
+  "id": "00-214",
+  "de": "Trägerhöhe h [mm]",
+  "en": "Beam depth h [mm]"
+ },
+ {
+  "id": "00-215",
+  "de": "Resthöhe h<sub>ef</sub> [mm]",
+  "en": "Remaining depth h<sub>ef</sub> [mm]"
+ },
+ {
+  "id": "00-216",
+  "de": "Abstand x [mm] (Auflagerkraft bis Ausklinkungsecke)",
+  "en": "Distance x [mm] (support reaction to notch corner)"
+ },
+ {
+  "id": "00-217",
+  "de": "Anschnitt i (waagerecht : senkrecht, 0 = rechtwinklig)",
+  "en": "Taper i (horizontal : vertical, 0 = square)"
+ },
+ {
+  "id": "00-218",
+  "de": "V<sub>Ed</sub> [kN] (Auflagerkraft)",
+  "en": "V<sub>Ed</sub> [kN] (support reaction)"
+ },
+ {
+  "id": "00-219",
+  "de": "EN 1995-1-1, 6.5.2: An der einspringenden Ecke einer unteren Ausklinkung entsteht Querzug — das Holz reißt dort ein. Der Abminderungsbeiwert k<sub>v</sub> erfasst das. Ein Anschnitt (i &gt; 0) mildert die Kerbwirkung.",
+  "en": "EN 1995-1-1, 6.5.2: tension perpendicular to the grain develops at the re-entrant corner of a notch on the loaded side — the timber splits there. The reduction factor k<sub>v</sub> covers this. A taper (i &gt; 0) reduces the notch effect."
+ },
+ {
+  "id": "00-220",
+  "de": "Satteldach- oder Pultdachträger",
+  "en": "Double-tapered or mono-pitch beam"
+ },
+ {
+  "id": "00-221",
+  "de": "Satteldachträger (symmetrisch)",
+  "en": "Double-tapered beam (symmetric)"
+ },
+ {
+  "id": "00-222",
+  "de": "Pultdachträger",
+  "en": "Mono-pitch beam"
+ },
+ {
+  "id": "00-223",
+  "de": "Höhe am Auflager h<sub>0</sub> [mm]",
+  "en": "Depth at the support h<sub>0</sub> [mm]"
+ },
+ {
+  "id": "00-224",
+  "de": "<span class=\"sd-hap-l\">Höhe im First h<sub>ap</sub> [mm]</span>",
+  "en": "<span class=\"sd-hap-l\">Depth at the apex h<sub>ap</sub> [mm]</span>"
+ },
+ {
+  "id": "00-225",
+  "de": "q<sub>Ed</sub> [kN/m] (Gleichlast, inkl. Eigenlast)",
+  "en": "q<sub>Ed</sub> [kN/m] (uniform load, incl. self-weight)"
+ },
+ {
+  "id": "00-226",
+  "de": "EN 1995-1-1, 6.4: Am geneigten (angeschnittenen) Rand laufen die Fasern schräg aus — dort wirken neben σ<sub>m</sub> auch Schub und Querdruck. Beim Satteldachträger entstehen im First zusätzlich Querzugspannungen. Unterkante gerade, Last von oben.",
+  "en": "EN 1995-1-1, 6.4: at the tapered (cut) edge the fibres run out at an angle — besides σ<sub>m</sub>, shear and compression perpendicular to the grain act there. In a double-tapered beam, additional tension perpendicular to the grain occurs at the apex. Straight bottom edge, load from above."
+ },
+ {
+  "id": "00-227",
+  "de": "Versatz (Druck schräg zur Faser)",
+  "en": "Step joint (compression at an angle to the grain)"
+ },
+ {
+  "id": "00-228",
+  "de": "Versatzart",
+  "en": "Type of step joint"
+ },
+ {
+  "id": "00-229",
+  "de": "Stirnversatz (Fläche halbiert den Winkel)",
+  "en": "Front notch (face bisects the angle)"
+ },
+ {
+  "id": "00-230",
+  "de": "Fersenversatz (Fläche ⊥ Strebe)",
+  "en": "Heel notch (face ⊥ strut)"
+ },
+ {
+  "id": "00-231",
+  "de": "Anschlusswinkel γ [°] (Strebe zu Gurt)",
+  "en": "Connection angle γ [°] (strut to chord)"
+ },
+ {
+  "id": "00-232",
+  "de": "Breite b [mm] (Strebe = Gurt)",
+  "en": "Width b [mm] (strut = chord)"
+ },
+ {
+  "id": "00-233",
+  "de": "Gurthöhe h [mm]",
+  "en": "Chord depth h [mm]"
+ },
+ {
+  "id": "00-234",
+  "de": "Versatztiefe t<sub>v</sub> [mm]",
+  "en": "Notch depth t<sub>v</sub> [mm]"
+ },
+ {
+  "id": "00-235",
+  "de": "Vorholzlänge l<sub>v</sub> [mm]",
+  "en": "Heel length l<sub>v</sub> [mm]"
+ },
+ {
+  "id": "00-236",
+  "de": "S<sub>Ed</sub> [kN] (Druck in der Strebe)",
+  "en": "S<sub>Ed</sub> [kN] (compression in the strut)"
+ },
+ {
+  "id": "00-237",
+  "de": "EN 1995-1-1, 6.2.2: Die Druckfestigkeit hängt vom Winkel α zwischen Kraft und Faser ab — zwischen f<sub>c,0</sub> (längs) und f<sub>c,90</sub> (quer). k<sub>c,90</sub> = 1 liegt auf der sicheren Seite.",
+  "en": "EN 1995-1-1, 6.2.2: the compressive strength depends on the angle α between force and grain — between f<sub>c,0</sub> (parallel) and f<sub>c,90</sub> (perpendicular). k<sub>c,90</sub> = 1 is on the safe side."
+ },
+ {
+  "id": "00-238",
+  "de": "Querschnitt und Baustoff",
+  "en": "Cross-section and material"
+ },
+ {
+  "id": "00-239",
+  "de": "Höhe h [mm]",
+  "en": "Depth h [mm]"
+ },
+ {
+  "id": "00-240",
+  "de": "Klasse der Lasteinwirkungsdauer (kürzeste Last der Kombination)",
+  "en": "Load-duration class (shortest load in the combination)"
+ },
+ {
+  "id": "00-241",
+  "de": "ständig (nur Eigengewicht)",
+  "en": "permanent (self-weight only)"
+ },
+ {
+  "id": "00-242",
+  "de": "lang (Lager, Archive)",
+  "en": "long-term (storage, archives)"
+ },
+ {
+  "id": "00-243",
+  "de": "mittel (Nutzlast Wohnen, Büro)",
+  "en": "medium-term (imposed load residential, office)"
+ },
+ {
+  "id": "00-244",
+  "de": "Schnittgrößen (GZT)",
+  "en": "Internal forces (ULS)"
+ },
+ {
+  "id": "00-245",
+  "de": "Gleichlast",
+  "en": "Uniform load"
+ },
+ {
+  "id": "00-246",
+  "de": "Auflagerkraft F<sub>Ed</sub> [kN]",
+  "en": "Support reaction F<sub>Ed</sub> [kN]"
+ },
+ {
+  "id": "00-247",
+  "de": "Auflagerlänge l [mm]",
+  "en": "Bearing length l [mm]"
+ },
+ {
+  "id": "00-248",
+  "de": "Kippen und Knicken",
+  "en": "Lateral-torsional buckling and flexural buckling"
+ },
+ {
+  "id": "00-249",
+  "de": "Abstand seitl. Halterungen L<sub>K</sub> [m]",
+  "en": "Spacing of lateral restraints L<sub>K</sub> [m]"
+ },
+ {
+  "id": "00-250",
+  "de": "oberer Rand",
+  "en": "top edge"
+ },
+ {
+  "id": "00-251",
+  "de": "unterer Rand",
+  "en": "bottom edge"
+ },
+ {
+  "id": "00-252",
+  "de": "L<sub>K</sub> = 0: Druckrand durchgehend gehalten, z. B. durch die aufgenagelte Decke — kein Kippen.",
+  "en": "L<sub>K</sub> = 0: compression edge continuously restrained, e.g. by the nailed-on floor — no lateral-torsional buckling."
+ },
+ {
+  "id": "00-253",
+  "de": "Durchbiegung (GZG, charakteristisch)",
+  "en": "Deflection (SLS, characteristic)"
+ },
+ {
+  "id": "00-254",
+  "de": "M<sub>G,k</sub> [kNm] (ständig)",
+  "en": "M<sub>G,k</sub> [kNm] (permanent)"
+ },
+ {
+  "id": "00-255",
+  "de": "M<sub>Q,k</sub> [kNm] (veränderlich)",
+  "en": "M<sub>Q,k</sub> [kNm] (variable)"
+ },
+ {
+  "id": "00-256",
+  "de": "ψ<sub>2</sub> der Nutzlast",
+  "en": "ψ<sub>2</sub> of the imposed load"
+ },
+ {
+  "id": "00-257",
+  "de": "Grenzwerte nach NA: w<sub>inst</sub> ≤ L/300, w<sub>fin</sub> ≤ L/200, w<sub>net,fin</sub> ≤ L/300.",
+  "en": "Limits to the German NA: w<sub>inst</sub> ≤ L/300, w<sub>fin</sub> ≤ L/200, w<sub>net,fin</sub> ≤ L/300."
+ },
+ {
+  "id": "00-258",
+  "de": "Stahlbeton — Balken, Platten, Stützen, Durchstanzen",
+  "en": "Reinforced concrete — beams, slabs, columns, punching"
+ },
+ {
+  "id": "00-259",
+  "de": "Bemessung nach DIN EN 1992-1-1 mit deutschem NA: Biegung (auch mit Druckbewehrung), Querkraft, Gurtanschluss, Verankerung, Zugkraftdeckung, Rissbreite, Biegeschlankheit, Stützen nach dem Modellstützenverfahren und Durchstanzen.",
+  "en": "Design to DIN EN 1992-1-1 with the German NA: bending (also with compression reinforcement), shear, flange connection, anchorage, curtailment, crack width, slenderness limits, columns with the model-column method and punching shear."
+ },
+ {
+  "id": "00-260",
+  "de": "verformungsempfindliche Trennwände (l/d ≤ K²·150/l)",
+  "en": "partitions sensitive to deflection (l/d ≤ K²·150/l)"
+ },
+ {
+  "id": "00-261",
+  "de": "automatisch wählen",
+  "en": "choose automatically"
+ },
+ {
+  "id": "00-262",
+  "de": "Zwang möglich (Mindestbewehrung für Rissbreite)",
+  "en": "restraint possible (minimum reinforcement for crack width)"
+ },
+ {
+  "id": "00-263",
+  "de": "Verankerung am Endauflager nachweisen",
+  "en": "check anchorage at the end support"
+ },
+ {
+  "id": "00-264",
+  "de": "Bei „automatisch“ wird die Bewehrung mit der kleinsten\n        Querschnittsfläche gewählt, die Biegung, Stababstände und Rissbreite erfüllt.",
+  "en": "With “automatic”, the reinforcement with the smallest area that satisfies bending, bar spacing and crack width is chosen."
+ },
+ {
+  "id": "00-265",
+  "de": "leichtestes Profil der Reihe automatisch wählen",
+  "en": "choose the lightest section of the series automatically"
+ },
+ {
+  "id": "00-266",
+  "de": "Gewinde liegt in der Scherfuge",
+  "en": "thread lies in the shear plane"
+ },
+ {
+  "id": "00-267",
+  "de": "kleinste ausreichende Höhe automatisch wählen",
+  "en": "choose the smallest sufficient depth automatically"
+ },
+ {
+  "id": "00-268",
+  "de": "Querschnitt",
+  "en": "Cross-section"
+ },
+ {
+  "id": "00-269",
+  "de": "Stütze und Lage",
+  "en": "Column and position"
+ },
+ {
+  "id": "00-270",
+  "de": "Stützenquerschnitt",
+  "en": "Column cross-section"
+ },
+ {
+  "id": "00-271",
+  "de": "Lage",
+  "en": "Position"
+ },
+ {
+  "id": "00-272",
+  "de": "(Stützenkraft aus der Decke, GZT)",
+  "en": "(column force from the slab, ULS)"
+ },
+ {
+  "id": "00-273",
+  "de": "Biegebewehrung der Platte (oben, über der Stütze)",
+  "en": "Flexural reinforcement of the slab (top, above the column)"
+ },
+ {
+  "id": "00-274",
+  "de": "Ø x [mm] (untere Lage)",
+  "en": "Ø x [mm] (lower layer)"
+ },
+ {
+  "id": "00-275",
+  "de": "Abstand s<sub>x</sub> [cm]",
+  "en": "Spacing s<sub>x</sub> [cm]"
+ },
+ {
+  "id": "00-276",
+  "de": "Ø y [mm] (obere Lage)",
+  "en": "Ø y [mm] (upper layer)"
+ },
+ {
+  "id": "00-277",
+  "de": "Abstand s<sub>y</sub> [cm]",
+  "en": "Spacing s<sub>y</sub> [cm]"
+ },
+ {
+  "id": "00-278",
+  "de": "Durchstanzen",
+  "en": "Punching"
+ },
+ {
+  "id": "00-279",
+  "de": "rechteckig",
+  "en": "rectangular"
+ },
+ {
+  "id": "00-280",
+  "de": "rund",
+  "en": "circular"
+ },
+ {
+  "id": "00-281",
+  "de": "Innenstütze (β = 1,10)",
+  "en": "Interior column (β = 1.10)"
+ },
+ {
+  "id": "00-282",
+  "de": "Randstütze (β = 1,40)",
+  "en": "Edge column (β = 1.40)"
+ },
+ {
+  "id": "00-283",
+  "de": "Eckstütze (β = 1,50)",
+  "en": "Corner column (β = 1.50)"
+ },
+ {
+  "id": "00-284",
+  "de": "β nach NA (vereinfacht, unverschiebliches System mit Spannweitenverhältnis 0,8 … 1,25). Bei Rand- und Eckstützen liegt c<sub>1</sub> senkrecht zum freien Rand.",
+  "en": "β to the German NA (simplified, braced system with span ratio 0.8 … 1.25). For edge and corner columns, c<sub>1</sub> is perpendicular to the free edge."
+ },
+ {
+  "id": "00-285",
+  "de": "Die Bewehrung soll im Bereich ± 3d neben der Stütze liegen. „Untere“ und „obere“ Lage beziehen sich auf die Stützbewehrung oben in der Platte: die äußere Lage hat die größere Nutzhöhe.",
+  "en": "The reinforcement should lie within ± 3d of the column. “Lower” and “upper” layer refer to the support reinforcement at the top of the slab: the outer layer has the larger effective depth."
+ },
+ {
+  "id": "00-286",
+  "de": "Stütze und Fußplatte",
+  "en": "Column and base plate"
+ },
+ {
+  "id": "00-287",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-288",
+  "de": "Reihe",
+  "en": "Series"
+ },
+ {
+  "id": "00-289",
+  "de": "Profil",
+  "en": "Section"
+ },
+ {
+  "id": "00-290",
+  "de": "Plattenbreite B<sub>p</sub> [mm] (in Gurtrichtung)",
+  "en": "Plate width B<sub>p</sub> [mm] (flange direction)"
+ },
+ {
+  "id": "00-291",
+  "de": "Plattenlänge L<sub>p</sub> [mm] (in Stegrichtung)",
+  "en": "Plate length L<sub>p</sub> [mm] (web direction)"
+ },
+ {
+  "id": "00-292",
+  "de": "Plattendicke t<sub>p</sub> [mm]",
+  "en": "Plate thickness t<sub>p</sub> [mm]"
+ },
+ {
+  "id": "00-293",
+  "de": "Stahl der Platte",
+  "en": "Plate steel"
+ },
+ {
+  "id": "00-294",
+  "de": "Fundament und Kräfte",
+  "en": "Foundation and forces"
+ },
+ {
+  "id": "00-295",
+  "de": "Beton des Fundaments",
+  "en": "Foundation concrete"
+ },
+ {
+  "id": "00-296",
+  "de": "Fundament B<sub>f</sub> × L<sub>f</sub> [mm]",
+  "en": "Foundation B<sub>f</sub> × L<sub>f</sub> [mm]"
+ },
+ {
+  "id": "00-297",
+  "de": "(Druck)",
+  "en": "(compression)"
+ },
+ {
+  "id": "00-298",
+  "de": "Kehlnaht Stütze–Platte a [mm]",
+  "en": "Fillet weld column–plate a [mm]"
+ },
+ {
+  "id": "00-299",
+  "de": "Stützenfuß",
+  "en": "Column base"
+ },
+ {
+  "id": "00-300",
+  "de": "Flachgründung",
+  "en": "Shallow foundation"
+ },
+ {
+  "id": "00-301",
+  "de": "Setzung",
+  "en": "Settlement"
+ },
+ {
+  "id": "00-302",
+  "de": "Stützwand",
+  "en": "Retaining wall"
+ },
+ {
+  "id": "00-303",
+  "de": "Auftrieb",
+  "en": "Uplift"
+ },
+ {
+  "id": "00-304",
+  "de": "Baugrund (charakteristische Werte)",
+  "en": "Ground (characteristic values)"
+ },
+ {
+  "id": "00-305",
+  "de": "Boden (Anhaltswerte, füllt die Felder)",
+  "en": "Soil (guide values, fills the fields)"
+ },
+ {
+  "id": "00-306",
+  "de": "Sand, locker",
+  "en": "Sand, loose"
+ },
+ {
+  "id": "00-307",
+  "de": "Sand, mitteldicht",
+  "en": "Sand, medium dense"
+ },
+ {
+  "id": "00-308",
+  "de": "Sand, dicht / Kies-Sand",
+  "en": "Sand, dense / gravelly sand"
+ },
+ {
+  "id": "00-309",
+  "de": "Kies, mitteldicht bis dicht",
+  "en": "Gravel, medium dense to dense"
+ },
+ {
+  "id": "00-310",
+  "de": "Schluff, steif",
+  "en": "Silt, stiff"
+ },
+ {
+  "id": "00-311",
+  "de": "Ton, steif",
+  "en": "Clay, stiff"
+ },
+ {
+  "id": "00-312",
+  "de": "Ton, halbfest",
+  "en": "Clay, very stiff"
+ },
+ {
+  "id": "00-313",
+  "de": "eigene Werte",
+  "en": "own values"
+ },
+ {
+  "id": "00-314",
+  "de": "(über der Sohle)",
+  "en": "(above the base)"
+ },
+ {
+  "id": "00-315",
+  "de": "(unter der Sohle, γ′ bei Grundwasser)",
+  "en": "(below the base, γ′ with groundwater)"
+ },
+ {
+  "id": "00-316",
+  "de": "Anhaltswerte wie in statiq·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.",
+  "en": "Guide values as in statiq·ref (Geotechnics › Soil parameters). In a project, the values from the geotechnical report apply."
+ },
+ {
+  "id": "00-317",
+  "de": "Fundament",
+  "en": "Footing"
+ },
+ {
+  "id": "00-318",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-319",
+  "de": "Form",
+  "en": "Shape"
+ },
+ {
+  "id": "00-320",
+  "de": "Einzelfundament (Rechteck)",
+  "en": "Pad footing (rectangular)"
+ },
+ {
+  "id": "00-321",
+  "de": "Streifenfundament (je m)",
+  "en": "Strip footing (per m)"
+ },
+ {
+  "id": "00-322",
+  "de": "Breite b [m] (Richtung von H und M)",
+  "en": "Width b [m] (direction of H and M)"
+ },
+ {
+  "id": "00-323",
+  "de": "Länge a [m]",
+  "en": "Length a [m]"
+ },
+ {
+  "id": "00-324",
+  "de": "Einbindetiefe d [m]",
+  "en": "Embedment depth d [m]"
+ },
+ {
+  "id": "00-325",
+  "de": "Fundamenthöhe h<sub>f</sub> [m]",
+  "en": "Footing depth h<sub>f</sub> [m]"
+ },
+ {
+  "id": "00-326",
+  "de": "Eigengewicht des Fundaments (25 kN/m³) und der Überschüttung bis zur Geländeoberkante rechnet size selbst dazu.",
+  "en": "size adds the self-weight of the footing (25 kN/m³) and of the backfill up to ground level itself."
+ },
+ {
+  "id": "00-327",
+  "de": "Lasten auf der Fundamentoberkante (charakteristisch)",
+  "en": "Loads on top of the footing (characteristic)"
+ },
+ {
+  "id": "00-328",
+  "de": "Bemessungssituation BS-P nach DIN 1054: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (Grundbruch), γ<sub>R,h</sub> = 1,10 (Gleiten). H und M wirken in Richtung b.",
+  "en": "Design situation BS-P to DIN 1054: γ<sub>G</sub> = 1.35, γ<sub>Q</sub> = 1.50, γ<sub>R,v</sub> = 1.40 (bearing), γ<sub>R,h</sub> = 1.10 (sliding). H and M act in direction b."
+ },
+ {
+  "id": "00-329",
+  "de": "Grundbau",
+  "en": "Geotechnics"
+ },
+ {
+  "id": "00-330",
+  "de": "Projekt",
+  "en": "Project"
+ },
+ {
+  "id": "00-331",
+  "de": "Wasserdruck",
+  "en": "Water pressure"
+ },
+ {
+  "id": "00-332",
+  "de": "Schwimmen",
+  "en": "Floating"
+ },
+ {
+  "id": "00-333",
+  "de": "Rohr",
+  "en": "Pipe"
+ },
+ {
+  "id": "00-334",
+  "de": "Gerinne",
+  "en": "Channel"
+ },
+ {
+  "id": "00-335",
+  "de": "Wehr",
+  "en": "Weir"
+ },
+ {
+  "id": "00-336",
+  "de": "Ebene Fläche unter Wasserdruck",
+  "en": "Plane surface under water pressure"
+ },
+ {
+  "id": "00-337",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-338",
+  "de": "Neigung α zur Waagerechten [°]",
+  "en": "Inclination α to the horizontal [°]"
+ },
+ {
+  "id": "00-339",
+  "de": "Breite b [m]",
+  "en": "Width b [m]"
+ },
+ {
+  "id": "00-340",
+  "de": "Oberkante unter Wasserspiegel t<sub>o</sub> [m]",
+  "en": "Top edge below water level t<sub>o</sub> [m]"
+ },
+ {
+  "id": "00-341",
+  "de": "Länge der Fläche L [m] (in Flächenrichtung)",
+  "en": "Length of the surface L [m] (along the surface)"
+ },
+ {
+  "id": "00-342",
+  "de": "Unterwasser über Unterkante h<sub>u</sub> [m] (0 = trocken)",
+  "en": "Tailwater above bottom edge h<sub>u</sub> [m] (0 = dry)"
+ },
+ {
+  "id": "00-343",
+  "de": "α = 90°: senkrechte Wand. t<sub>o</sub> = 0: Wasserspiegel an der Oberkante (z. B. Stauwand), t<sub>o</sub> &gt; 0: Fläche liegt ganz unter Wasser (z. B. Schütz). Wichte γ<sub>w</sub> = ρ·g = 9,81 kN/m³.",
+  "en": "α = 90°: vertical wall. t<sub>o</sub> = 0: water level at the top edge (e.g. dam wall), t<sub>o</sub> &gt; 0: surface fully submerged (e.g. sluice gate). Unit weight γ<sub>w</sub> = ρ·g = 9.81 kN/m³."
+ },
+ {
+  "id": "00-344",
+  "de": "Quaderförmiger Schwimmkörper (Ponton)",
+  "en": "Box-shaped floating body (pontoon)"
+ },
+ {
+  "id": "00-345",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-346",
+  "de": "Länge L [m]",
+  "en": "Length L [m]"
+ },
+ {
+  "id": "00-347",
+  "de": "Breite B [m] (Kippachse längs)",
+  "en": "Width B [m] (longitudinal tilt axis)"
+ },
+ {
+  "id": "00-348",
+  "de": "Seitenhöhe H [m]",
+  "en": "Side height H [m]"
+ },
+ {
+  "id": "00-349",
+  "de": "Gewicht G [kN] (mit Ladung)",
+  "en": "Weight G [kN] (with cargo)"
+ },
+ {
+  "id": "00-350",
+  "de": "Schwerpunkt über Boden z<sub>G</sub> [m]",
+  "en": "Centre of gravity above bottom z<sub>G</sub> [m]"
+ },
+ {
+  "id": "00-351",
+  "de": "Mindestfreibord f [m]",
+  "en": "Minimum freeboard f [m]"
+ },
+ {
+  "id": "00-352",
+  "de": "Wasser",
+  "en": "Water"
+ },
+ {
+  "id": "00-353",
+  "de": "Süßwasser (9,81 kN/m³)",
+  "en": "Fresh water (9.81 kN/m³)"
+ },
+ {
+  "id": "00-354",
+  "de": "Seewasser (10,05 kN/m³)",
+  "en": "Sea water (10.05 kN/m³)"
+ },
+ {
+  "id": "00-355",
+  "de": "Stabil schwimmt der Körper, wenn das Metazentrum M über dem Schwerpunkt G liegt (metazentrische Höhe GM &gt; 0). Gekippt wird um die Längsachse (bei Prismen und liegenden Zylindern die schmale Richtung). Höhen z<sub>G</sub> über der Unterkante. Beim Formwechsel werden passende Beispielwerte eingesetzt.",
+  "en": "The body floats stably if the metacentre M lies above the centre of gravity G (metacentric height GM &gt; 0). Tilting is about the longitudinal axis (for prisms and horizontal cylinders the narrow direction). Heights z<sub>G</sub> above the bottom. When the shape changes, suitable example values are inserted."
+ },
+ {
+  "id": "00-356",
+  "de": "Rohrleitung zwischen zwei Behältern",
+  "en": "Pipeline between two tanks"
+ },
+ {
+  "id": "00-357",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-358",
+  "de": "Innendurchmesser D [mm]",
+  "en": "Inner diameter D [mm]"
+ },
+ {
+  "id": "00-359",
+  "de": "Länge L [m]",
+  "en": "Length L [m]"
+ },
+ {
+  "id": "00-360",
+  "de": "Rohrwerkstoff",
+  "en": "Pipe material"
+ },
+ {
+  "id": "00-361",
+  "de": "PE / PVC (k = 0,007 mm)",
+  "en": "PE / PVC (k = 0.007 mm)"
+ },
+ {
+  "id": "00-362",
+  "de": "Stahl, neu (k = 0,05 mm)",
+  "en": "Steel, new (k = 0.05 mm)"
+ },
+ {
+  "id": "00-363",
+  "de": "Guss, zementausgekleidet (k = 0,1 mm)",
+  "en": "Cast iron, cement-lined (k = 0.1 mm)"
+ },
+ {
+  "id": "00-364",
+  "de": "Beton (k = 0,4 mm)",
+  "en": "Concrete (k = 0.4 mm)"
+ },
+ {
+  "id": "00-365",
+  "de": "alte, verkrustete Leitung (k = 1,0 mm)",
+  "en": "old, encrusted pipe (k = 1.0 mm)"
+ },
+ {
+  "id": "00-366",
+  "de": "eigener Wert",
+  "en": "own value"
+ },
+ {
+  "id": "00-367",
+  "de": "Rauheit k [mm]",
+  "en": "Roughness k [mm]"
+ },
+ {
+  "id": "00-368",
+  "de": "Σζ örtliche Verluste",
+  "en": "Σζ local losses"
+ },
+ {
+  "id": "00-369",
+  "de": "verfügbare Höhendifferenz Δh [m]",
+  "en": "Available head difference Δh [m]"
+ },
+ {
+  "id": "00-370",
+  "de": "Wassertemperatur",
+  "en": "Water temperature"
+ },
+ {
+  "id": "00-371",
+  "de": "Σζ: Einlauf (≈ 0,5), Krümmer (je ≈ 0,2–0,5), Schieber offen (≈ 0,2), Auslauf in den Behälter (1,0). Die Höhendifferenz Δh zwischen den Wasserspiegeln muss alle Verluste decken.",
+  "en": "Σζ: inlet (≈ 0.5), bends (each ≈ 0.2–0.5), open gate valve (≈ 0.2), outlet into the tank (1.0). The head difference Δh between the water levels must cover all losses."
+ },
+ {
+  "id": "00-372",
+  "de": "Offenes Gerinne (Normalabfluss)",
+  "en": "Open channel (uniform flow)"
+ },
+ {
+  "id": "00-373",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-374",
+  "de": "Sohlgefälle I [‰]",
+  "en": "Bed slope I [‰]"
+ },
+ {
+  "id": "00-375",
+  "de": "Sohlbreite b [m]",
+  "en": "Bed width b [m]"
+ },
+ {
+  "id": "00-376",
+  "de": "Böschung 1 : m (0 = Rechteck)",
+  "en": "Side slope 1 : m (0 = rectangle)"
+ },
+ {
+  "id": "00-377",
+  "de": "Oberfläche",
+  "en": "Surface"
+ },
+ {
+  "id": "00-378",
+  "de": "Beton, glatt (k<sub>St</sub> = 85)",
+  "en": "Concrete, smooth (k<sub>St</sub> = 85)"
+ },
+ {
+  "id": "00-379",
+  "de": "Beton, rau / Pflaster (k<sub>St</sub> = 65)",
+  "en": "Concrete, rough / paving (k<sub>St</sub> = 65)"
+ },
+ {
+  "id": "00-380",
+  "de": "Rasen, gepflegt (k<sub>St</sub> = 35)",
+  "en": "Grass, maintained (k<sub>St</sub> = 35)"
+ },
+ {
+  "id": "00-381",
+  "de": "Kiessohle (k<sub>St</sub> = 30)",
+  "en": "Gravel bed (k<sub>St</sub> = 30)"
+ },
+ {
+  "id": "00-382",
+  "de": "naturnah, bewachsen (k<sub>St</sub> = 20)",
+  "en": "near-natural, vegetated (k<sub>St</sub> = 20)"
+ },
+ {
+  "id": "00-383",
+  "de": "eigener Wert",
+  "en": "own value"
+ },
+ {
+  "id": "00-384",
+  "de": "Gerinnetiefe H [m]",
+  "en": "Channel depth H [m]"
+ },
+ {
+  "id": "00-385",
+  "de": "Freibord f [m]",
+  "en": "Freeboard f [m]"
+ },
+ {
+  "id": "00-386",
+  "de": "Normalabfluss: Sohl-, Wasserspiegel- und Energiegefälle sind gleich. Fließformel nach Gauckler-Manning-Strickler, v = k<sub>St</sub>·R<sup>2/3</sup>·I<sup>1/2</sup>.",
+  "en": "Uniform flow: bed slope, water-surface slope and energy slope are equal. Flow formula after Gauckler-Manning-Strickler, v = k<sub>St</sub>·R<sup>2/3</sup>·I<sup>1/2</sup>."
+ },
+ {
+  "id": "00-387",
+  "de": "Wehr mit vollkommenem Überfall",
+  "en": "Weir with free overflow"
+ },
+ {
+  "id": "00-388",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-389",
+  "de": "Überfallbreite b [m]",
+  "en": "Crest width b [m]"
+ },
+ {
+  "id": "00-390",
+  "de": "Wehrform",
+  "en": "Weir shape"
+ },
+ {
+  "id": "00-391",
+  "de": "scharfkantig (μ = 0,64)",
+  "en": "sharp-crested (μ = 0.64)"
+ },
+ {
+  "id": "00-392",
+  "de": "rundkronig (μ = 0,75)",
+  "en": "round-crested (μ = 0.75)"
+ },
+ {
+  "id": "00-393",
+  "de": "breitkronig (μ = 0,577)",
+  "en": "broad-crested (μ = 0.577)"
+ },
+ {
+  "id": "00-394",
+  "de": "eigener Wert",
+  "en": "own value"
+ },
+ {
+  "id": "00-395",
+  "de": "Überfallbeiwert μ",
+  "en": "Discharge coefficient μ"
+ },
+ {
+  "id": "00-396",
+  "de": "Wehrhöhe w [m]",
+  "en": "Weir height w [m]"
+ },
+ {
+  "id": "00-397",
+  "de": "zulässiger Oberwasserstand über Sohle [m]",
+  "en": "Permissible headwater level above bed [m]"
+ },
+ {
+  "id": "00-398",
+  "de": "Bauphysik",
+  "en": "Building physics"
+ },
+ {
+  "id": "00-399",
+  "de": "Bauteilaufbau (innen → außen)",
+  "en": "Build-up (inside → outside)"
+ },
+ {
+  "id": "00-400",
+  "de": "Bezeichnung",
+  "en": "Name"
+ },
+ {
+  "id": "00-401",
+  "de": "Baustoff",
+  "en": "Material"
+ },
+ {
+  "id": "00-402",
+  "de": "Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in statiq·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Dicke 0 oder „—“: Schicht entfällt.",
+  "en": "Choosing a material sets λ, μ and ρ (guide values to DIN 4108-4 and DIN EN ISO 10456, as in statiq·ref); all three can be overwritten with manufacturer values. Thickness 0 or “—”: layer omitted."
+ },
+ {
+  "id": "00-403",
+  "de": "Randbedingungen",
+  "en": "Boundary conditions"
+ },
+ {
+  "id": "00-404",
+  "de": "Bauteil",
+  "en": "Element"
+ },
+ {
+  "id": "00-405",
+  "de": "Innentemperatur θ<sub>i</sub> [°C]",
+  "en": "Inside temperature θ<sub>i</sub> [°C]"
+ },
+ {
+  "id": "00-406",
+  "de": "Außentemperatur θ<sub>e</sub> [°C]",
+  "en": "Outside temperature θ<sub>e</sub> [°C]"
+ }
+]

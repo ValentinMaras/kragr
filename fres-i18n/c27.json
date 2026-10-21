@@ -1,0 +1,697 @@
+[
+ {
+  "id": "27-0",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"sb-st\" onchange=\"updateSteckbrief()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"sb-st\" onchange=\"updateSteckbrief()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-1",
+  "de": "Widerstände {}, {}",
+  "en": "Resistances {}, {}"
+ },
+ {
+  "id": "27-2",
+  "de": "!Biegung um y: Flansch c/t = {}, Steg c/t = {} → <b>Klasse {}</b> · reiner Druck: Steg c/t = {} → <b>Klasse {}</b>",
+  "en": "!Bending about y: flange c/t = {}, web c/t = {} → <b>Class {}</b> · pure compression: web c/t = {} → <b>Class {}</b>"
+ },
+ {
+  "id": "27-3",
+  "de": "§Rundrohr (D außen, t Wand, d = D − 2t)",
+  "en": "§Circular tube (D outside, t wall, d = D − 2t)"
+ },
+ {
+  "id": "27-4",
+  "de": "§Rechteck-Hohlprofil (Mittellinie, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)",
+  "en": "§Rectangular hollow section (centreline, R<sub>c</sub> = (r<sub>o</sub> + r<sub>i</sub>)/2)"
+ },
+ {
+  "id": "27-5",
+  "de": "!I und W<sub>pl</sub>: Rechteck außen minus Rechteck innen, jeweils mit abgezogenen Eckquadraten und hinzugefügten Viertelkreisen",
+  "en": "!I and W<sub>pl</sub>: outer rectangle minus inner rectangle, each with the corner squares removed and quarter circles added"
+ },
+ {
+  "id": "27-6",
+  "de": "Innenteil Biegung + Druck, α > 0,5",
+  "en": "Internal part bending + compression, α > 0.5"
+ },
+ {
+  "id": "27-7",
+  "de": "42ε / (0,67 + 0,33ψ) für ψ > −1",
+  "en": "42ε / (0.67 + 0.33ψ) for ψ > −1"
+ },
+ {
+  "id": "27-8",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"qk-st\" onchange=\"updateQK()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"qk-st\" onchange=\"updateQK()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-9",
+  "de": "<div class=\"calc-field\"><label>Beanspruchung</label><select id=\"qk-art\" onchange=\"updateQK()\"><option value=\"biegung\">Biegung um y</option><option value=\"druck\">reiner Druck</option><option value=\"nm\" selected>Druck + Biegung</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Loading</label><select id=\"qk-art\" onchange=\"updateQK()\"><option value=\"biegung\">Bending about y</option><option value=\"druck\">Pure compression</option><option value=\"nm\" selected>Compression + bending</option></select></div>"
+ },
+ {
+  "id": "27-10",
+  "de": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (Druck)</label><input type=\"number\" id=\"qk-N\" value=\"400\" step=\"any\" oninput=\"updateQK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression)</label><input type=\"number\" id=\"qk-N\" value=\"400\" step=\"any\" oninput=\"updateQK()\"></div>"
+ },
+ {
+  "id": "27-11",
+  "de": "<div class=\"calc-field\"><label>Obergurt b<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-bo\" value=\"250\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Top flange b<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-bo\" value=\"250\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-12",
+  "de": "<div class=\"calc-field\"><label>Obergurt t<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-to\" value=\"15\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Top flange t<sub>o</sub> [mm]</label><input type=\"number\" id=\"zq-to\" value=\"15\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-13",
+  "de": "<div class=\"calc-field\"><label>Steg h<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-hw\" value=\"600\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Web h<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-hw\" value=\"600\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-14",
+  "de": "<div class=\"calc-field\"><label>Steg t<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-tw\" value=\"10\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Web t<sub>w</sub> [mm]</label><input type=\"number\" id=\"zq-tw\" value=\"10\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-15",
+  "de": "<div class=\"calc-field\"><label>Untergurt b<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-bu\" value=\"300\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bottom flange b<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-bu\" value=\"300\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-16",
+  "de": "<div class=\"calc-field\"><label>Untergurt t<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-tu\" value=\"20\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Bottom flange t<sub>u</sub> [mm]</label><input type=\"number\" id=\"zq-tu\" value=\"20\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-17",
+  "de": "<div class=\"calc-field\"><label>Halsnaht a [mm]</label><input type=\"number\" id=\"zq-a\" value=\"5\" step=\"any\" oninput=\"updateZQ()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Flange-to-web weld a [mm]</label><input type=\"number\" id=\"zq-a\" value=\"5\" step=\"any\" oninput=\"updateZQ()\"></div>"
+ },
+ {
+  "id": "27-18",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"zq-st\" onchange=\"updateZQ()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"zq-st\" onchange=\"updateZQ()\"><option value=\"S235\">S235</option><option value=\"S275\">S275</option><option value=\"S355\" selected>S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-19",
+  "de": "!Flansch (einseitig gestützt, Druck): c = (b − t<sub>w</sub> − 2r) / 2",
+  "en": "!Flange (outstand, compression): c = (b − t<sub>w</sub> − 2r) / 2"
+ },
+ {
+  "id": "27-20",
+  "de": "!Grenzen {} → Flansch Klasse {}",
+  "en": "!Limits {} → flange class {}"
+ },
+ {
+  "id": "27-21",
+  "de": "!Steg (beidseitig gestützt): c = h − 2t<sub>f</sub> − 2r",
+  "en": "!Web (internal part): c = h − 2t<sub>f</sub> − 2r"
+ },
+ {
+  "id": "27-22",
+  "de": "!Grenzen {} → Steg Klasse {}",
+  "en": "!Limits {} → web class {}"
+ },
+ {
+  "id": "27-23",
+  "de": "!Der Querschnitt hat die ungünstigere Klasse: <b>Klasse {}</b>",
+  "en": "!The cross-section takes the less favourable class: <b>Class {}</b>"
+ },
+ {
+  "id": "27-24",
+  "de": "!ψ (elastisch) = σ<sub>2</sub> / σ<sub>1</sub> an den Stegenden mit σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = {}",
+  "en": "!ψ (elastic) = σ<sub>2</sub> / σ<sub>1</sub> at the ends of the web with σ = N/A ± M/I<sub>y</sub> · c/2 → ψ = {}"
+ },
+ {
+  "id": "27-25",
+  "de": "plastische Berechnung und Bemessung (Fließgelenke möglich)",
+  "en": "plastic analysis and design (plastic hinges possible)"
+ },
+ {
+  "id": "27-26",
+  "de": "plastische Querschnittstragfähigkeit (W<sub>pl</sub>), keine Umlagerung",
+  "en": "plastic cross-section resistance (W<sub>pl</sub>), no redistribution"
+ },
+ {
+  "id": "27-27",
+  "de": "elastische Querschnittstragfähigkeit (W<sub>el</sub>)",
+  "en": "elastic cross-section resistance (W<sub>el</sub>)"
+ },
+ {
+  "id": "27-28",
+  "de": "örtliches Beulen vor Erreichen von f<sub>y</sub> → wirksame Querschnitte nach EN 1993-1-5",
+  "en": "local buckling before f<sub>y</sub> is reached → effective cross-sections to EN 1993-1-5"
+ },
+ {
+  "id": "27-29",
+  "de": "<div class=\"info-banner\">Klasse {}: {}</div>",
+  "en": "<div class=\"info-banner\">Class {}: {}</div>"
+ },
+ {
+  "id": "27-30",
+  "de": "§Querschnittswerte (Schweißnähte vernachlässigt, z von Oberkante)",
+  "en": "§Section properties (welds neglected, z from the top edge)"
+ },
+ {
+  "id": "27-31",
+  "de": "§Plastische Nulllinie: halbiert die Fläche",
+  "en": "§Plastic neutral axis: halves the area"
+ },
+ {
+  "id": "27-32",
+  "de": "(im Steg: {} + {} · (z<sub>pl</sub> − {}) = {})",
+  "en": "(in the web: {} + {} · (z<sub>pl</sub> − {}) = {})"
+ },
+ {
+  "id": "27-33",
+  "de": "W<sub>pl</sub> = S<sub>oben</sub> + S<sub>unten</sub> (statische Momente um die plastische NL) = {} cm³",
+  "en": "W<sub>pl</sub> = S<sub>top</sub> + S<sub>bottom</sub> (first moments of area about the plastic NA) = {} cm³"
+ },
+ {
+  "id": "27-34",
+  "de": "§Obergurt (einseitig gestützt, Druck)",
+  "en": "§Top flange (outstand, compression)"
+ },
+ {
+  "id": "27-35",
+  "de": "!Grenzen 9ε = {} · 10ε = {} · 14ε = {} → Obergurt Klasse {}",
+  "en": "!Limits 9ε = {} · 10ε = {} · 14ε = {} → top flange class {}"
+ },
+ {
+  "id": "27-36",
+  "de": "§Steg (beidseitig gestützt, Biegung mit verschobener Nulllinie)",
+  "en": "§Web (internal part, bending with shifted neutral axis)"
+ },
+ {
+  "id": "27-37",
+  "de": "!plastisch: gedrückter Stegteil α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = {} mm → α = {} / {} = {}",
+  "en": "!plastic: compressed part of the web α · c = z<sub>pl</sub> − t<sub>o</sub> − √2 · a = {} mm → α = {} / {} = {}"
+ },
+ {
+  "id": "27-38",
+  "de": "Klasse 1: 396ε / (13α − 1) = 396 · {} / (13 · {} − 1) = {}",
+  "en": "Class 1: 396ε / (13α − 1) = 396 · {} / (13 · {} − 1) = {}"
+ },
+ {
+  "id": "27-39",
+  "de": "Klasse 2: 456ε / (13α − 1) = {}",
+  "en": "Class 2: 456ε / (13α − 1) = {}"
+ },
+ {
+  "id": "27-40",
+  "de": "!elastisch: ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>unten</sub>) / (z<sub>s</sub> − z<sub>oben</sub>) = ({} − {}) / ({} − {}) = {}",
+  "en": "!elastic: ψ = σ<sub>2</sub>/σ<sub>1</sub> = (z<sub>s</sub> − z<sub>bottom</sub>) / (z<sub>s</sub> − z<sub>top</sub>) = ({} − {}) / ({} − {}) = {}"
+ },
+ {
+  "id": "27-41",
+  "de": "Klasse 3: 42ε / (0,67 + 0,33ψ) = 42 · {} / (0,67 + 0,33 · {}) = {}",
+  "en": "Class 3: 42ε / (0.67 + 0.33ψ) = 42 · {} / (0.67 + 0.33 · {}) = {}"
+ },
+ {
+  "id": "27-42",
+  "de": "!c/t = {} → Steg Klasse {}",
+  "en": "!c/t = {} → web class {}"
+ },
+ {
+  "id": "27-43",
+  "de": "!liegt in der Zugzone → keine c/t-Begrenzung (Klasse 1)",
+  "en": "!lies in the tension zone → no c/t limit (class 1)"
+ },
+ {
+  "id": "27-44",
+  "de": "!Querschnitt <b>Klasse {}</b> → {} Biegetragfähigkeit{}",
+  "en": "!Cross-section <b>class {}</b> → {} bending resistance{}"
+ },
+ {
+  "id": "27-45",
+  "de": "Geschweißter I-Querschnitt {}×{} / {}×{} / {}×{}, {}",
+  "en": "Welded I-section {}×{} / {}×{} / {}×{}, {}"
+ },
+ {
+  "id": "27-46",
+  "de": "!N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) mit N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> und N<sub>u,Rd</sub> = 0,9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>",
+  "en": "!N<sub>t,Rd</sub> = min(N<sub>pl,Rd</sub>; N<sub>u,Rd</sub>) with N<sub>pl,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> and N<sub>u,Rd</sub> = 0.9 · A<sub>net</sub> · f<sub>u</sub> / γ<sub>M2</sub>"
+ },
+ {
+  "id": "27-47",
+  "de": "!N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 1–3) bzw. A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 4)",
+  "en": "!N<sub>c,Rd</sub> = A · f<sub>y</sub> / γ<sub>M0</sub> (class 1–3) or A<sub>eff</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 4)"
+ },
+ {
+  "id": "27-48",
+  "de": "!M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (Klasse 4)",
+  "en": "!M<sub>c,Rd</sub> = W<sub>pl</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 1, 2) · W<sub>el,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 3) · W<sub>eff,min</sub> · f<sub>y</sub> / γ<sub>M0</sub> (class 4)"
+ },
+ {
+  "id": "27-49",
+  "de": "!V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · Schubbeulen nachweisen, wenn h<sub>w</sub>/t<sub>w</sub> > 72 · ε / η (η = 1,2)",
+  "en": "!V<sub>pl,Rd</sub> = A<sub>v</sub> · (f<sub>y</sub> / √3) / γ<sub>M0</sub> · check shear buckling if h<sub>w</sub>/t<sub>w</sub> > 72 · ε / η (η = 1.2)"
+ },
+ {
+  "id": "27-50",
+  "de": "§Biegung und Querkraft (6.2.8)",
+  "en": "§Bending and shear (6.2.8)"
+ },
+ {
+  "id": "27-51",
+  "de": "!V<sub>Ed</sub> ≤ 0,5 · V<sub>pl,Rd</sub>: keine Abminderung · sonst ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²",
+  "en": "!V<sub>Ed</sub> ≤ 0.5 · V<sub>pl,Rd</sub>: no reduction · otherwise ρ = (2 · V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)²"
+ },
+ {
+  "id": "27-52",
+  "de": "!M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> mit A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>",
+  "en": "!M<sub>y,V,Rd</sub> = (W<sub>pl,y</sub> − ρ · A<sub>w</sub>² / (4 · t<sub>w</sub>)) · f<sub>y</sub> / γ<sub>M0</sub> ≤ M<sub>y,c,Rd</sub> with A<sub>w</sub> = h<sub>w</sub> · t<sub>w</sub>"
+ },
+ {
+  "id": "27-53",
+  "de": "§Biegung und Normalkraft (6.2.9, Klasse 1 und 2, I-Profile)",
+  "en": "§Bending and axial force (6.2.9, class 1 and 2, I-sections)"
+ },
+ {
+  "id": "27-54",
+  "de": "!keine Abminderung um y, wenn N<sub>Ed</sub> ≤ 0,25 · N<sub>pl,Rd</sub> und N<sub>Ed</sub> ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>",
+  "en": "!no reduction about y if N<sub>Ed</sub> ≤ 0.25 · N<sub>pl,Rd</sub> and N<sub>Ed</sub> ≤ 0.5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub>"
+ },
+ {
+  "id": "27-55",
+  "de": "!M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> für n ≤ a · sonst M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]",
+  "en": "!M<sub>N,z,Rd</sub> = M<sub>pl,z,Rd</sub> for n ≤ a · otherwise M<sub>pl,z,Rd</sub> · [1 − ((n − a)/(1 − a))²]"
+ },
+ {
+  "id": "27-56",
+  "de": "!zweiachsig: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 mit α = 2, β = 5n ≥ 1",
+  "en": "!biaxial: (M<sub>y,Ed</sub>/M<sub>N,y,Rd</sub>)<sup>α</sup> + (M<sub>z,Ed</sub>/M<sub>N,z,Rd</sub>)<sup>β</sup> ≤ 1 with α = 2, β = 5n ≥ 1"
+ },
+ {
+  "id": "27-57",
+  "de": "!σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · Vergleichsspannung (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²",
+  "en": "!σ<sub>x,Ed</sub> = N/A + M<sub>y</sub>/W<sub>el,y</sub> + M<sub>z</sub>/W<sub>el,z</sub> ≤ f<sub>y</sub>/γ<sub>M0</sub> · von Mises stress (σ<sub>x</sub>² + 3τ²) ≤ (f<sub>y</sub>/γ<sub>M0</sub>)²"
+ },
+ {
+  "id": "27-58",
+  "de": "§Bruttoquerschnitt (Fließen)",
+  "en": "§Gross cross-section (yielding)"
+ },
+ {
+  "id": "27-59",
+  "de": "§Nettoquerschnitt (Bruch)",
+  "en": "§Net cross-section (fracture)"
+ },
+ {
+  "id": "27-60",
+  "de": "N<sub>Ed</sub> [kN] (Druck > 0, Zug < 0)",
+  "en": "N<sub>Ed</sub> [kN] (compression > 0, tension < 0)"
+ },
+ {
+  "id": "27-61",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"qn-st\" onchange=\"updateQN()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"qn-st\" onchange=\"updateQN()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-62",
+  "de": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (Druck > 0, Zug < 0)</label><input type=\"number\" id=\"qn-N\" value=\"250\" step=\"any\" oninput=\"updateQN()\"></div>",
+  "en": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression > 0, tension < 0)</label><input type=\"number\" id=\"qn-N\" value=\"250\" step=\"any\" oninput=\"updateQN()\"></div>"
+ },
+ {
+  "id": "27-63",
+  "de": "<div class=\"calc-field\"><label>V<sub>z,Ed</sub> [kN] (an derselben Stelle)</label><input type=\"number\" id=\"qn-V\" value=\"190\" step=\"any\" oninput=\"updateQN()\"></div>",
+  "en": "<div class=\"calc-field\"><label>V<sub>z,Ed</sub> [kN] (at the same location)</label><input type=\"number\" id=\"qn-V\" value=\"190\" step=\"any\" oninput=\"updateQN()\"></div>"
+ },
+ {
+  "id": "27-64",
+  "de": "§Werkstoff und Profil",
+  "en": "§Material and section"
+ },
+ {
+  "id": "27-65",
+  "de": "Druck und Biegung",
+  "en": "compression and bending"
+ },
+ {
+  "id": "27-66",
+  "de": "!Querschnittsklasse für {}: Flansch c/t = {} (Kl. {}), Steg c/t = {} (Kl. {}) → <b>Klasse {}</b>",
+  "en": "!Cross-section class for {}: flange c/t = {} (cl. {}), web c/t = {} (cl. {}) → <b>Class {}</b>"
+ },
+ {
+  "id": "27-67",
+  "de": "kein Beulnachweis nötig",
+  "en": "no shear buckling check required"
+ },
+ {
+  "id": "27-68",
+  "de": "!V<sub>Ed</sub> > 0,5 · V<sub>pl,Rd</sub> → Abminderung der Biegetragfähigkeit (6.2.8)",
+  "en": "!V<sub>Ed</sub> > 0.5 · V<sub>pl,Rd</sub> → reduction of the bending resistance (6.2.8)"
+ },
+ {
+  "id": "27-69",
+  "de": "§Normalkraft und Biegung (6.2.9.1)",
+  "en": "§Axial force and bending (6.2.9.1)"
+ },
+ {
+  "id": "27-70",
+  "de": "!vereinfacht: Abminderung aus Querkraft und Normalkraft nacheinander angesetzt",
+  "en": "!simplified: reductions for shear and axial force applied one after the other"
+ },
+ {
+  "id": "27-71",
+  "de": "Querschnittsnachweis {}, {}",
+  "en": "Cross-section check {}, {}"
+ },
+ {
+  "id": "27-72",
+  "de": "<div class=\"info-banner\">Maßgebende Ausnutzung: <b>{} %</b></div>",
+  "en": "<div class=\"info-banner\">Governing utilisation: <b>{} %</b></div>"
+ },
+ {
+  "id": "27-73",
+  "de": "!V<sub>Ed</sub> = {} kN ≤ 0,5 · V<sub>pl,Rd</sub> = {} kN → keine Abminderung aus Querkraft",
+  "en": "!V<sub>Ed</sub> = {} kN ≤ 0.5 · V<sub>pl,Rd</sub> = {} kN → no reduction for shear"
+ },
+ {
+  "id": "27-74",
+  "de": "!|N<sub>Ed</sub>| ≤ 0,25 · N<sub>pl,Rd</sub> = {} kN und ≤ 0,5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub> = {} kN → Normalkraft darf bei M<sub>y</sub> unberücksichtigt bleiben",
+  "en": "!|N<sub>Ed</sub>| ≤ 0.25 · N<sub>pl,Rd</sub> = {} kN and ≤ 0.5 · h<sub>w</sub> · t<sub>w</sub> · f<sub>y</sub> / γ<sub>M0</sub> = {} kN → axial force may be neglected for M<sub>y</sub>"
+ },
+ {
+  "id": "27-75",
+  "de": "§Ideale Verzweigungslast und Schlankheit",
+  "en": "§Elastic critical force and slenderness"
+ },
+ {
+  "id": "27-76",
+  "de": "!N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² mit L<sub>cr</sub> = β · L",
+  "en": "!N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² with L<sub>cr</sub> = β · L"
+ },
+ {
+  "id": "27-77",
+  "de": "!λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) mit λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93,9 · ε",
+  "en": "!λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = L<sub>cr</sub> / (i · λ<sub>1</sub>) with λ<sub>1</sub> = π · √(E / f<sub>y</sub>) = 93.9 · ε"
+ },
+ {
+  "id": "27-78",
+  "de": "!χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · für λ̄ ≤ 0,2 oder N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0,04 ist χ = 1",
+  "en": "!χ = 1 / (Φ + √(Φ² − λ̄²)) ≤ 1 · for λ̄ ≤ 0.2 or N<sub>Ed</sub>/N<sub>cr</sub> ≤ 0.04, χ = 1"
+ },
+ {
+  "id": "27-79",
+  "de": "!N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (Klasse 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1",
+  "en": "!N<sub>b,Rd</sub> = χ · A · f<sub>y</sub> / γ<sub>M1</sub> (class 1–3) · N<sub>Ed</sub> / N<sub>b,Rd</sub> ≤ 1"
+ },
+ {
+  "id": "27-80",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"kn-st\" onchange=\"updateKnick()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"kn-st\" onchange=\"updateKnick()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-81",
+  "de": "<div class=\"calc-field\"><label>Knicklänge L<sub>cr</sub> [m]</label><input type=\"number\" id=\"kn-L\" value=\"4\" step=\"any\" oninput=\"updateKnick()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Buckling length L<sub>cr</sub> [m]</label><input type=\"number\" id=\"kn-L\" value=\"4\" step=\"any\" oninput=\"updateKnick()\"></div>"
+ },
+ {
+  "id": "27-82",
+  "de": "<div class=\"calc-field\"><label>Ausweichen um</label><select id=\"kn-ax\" onchange=\"updateKnick()\"><option value=\"z\" selected>schwache Achse z–z</option><option value=\"y\">starke Achse y–y</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Buckling about</label><select id=\"kn-ax\" onchange=\"updateKnick()\"><option value=\"z\" selected>weak axis z–z</option><option value=\"y\">strong axis y–y</option></select></div>"
+ },
+ {
+  "id": "27-83",
+  "de": "§Querschnittswerte {} (Achse {}–{})",
+  "en": "§Section properties {} (axis {}–{})"
+ },
+ {
+  "id": "27-84",
+  "de": "!Kontrolle über N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = {} kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = {}",
+  "en": "!Check via N<sub>cr</sub> = π² · E · I / L<sub>cr</sub>² = {} kN → λ̄ = √(A · f<sub>y</sub> / N<sub>cr</sub>) = {}"
+ },
+ {
+  "id": "27-85",
+  "de": "§Knicklinie und Abminderung",
+  "en": "§Buckling curve and reduction"
+ },
+ {
+  "id": "27-86",
+  "de": "!h/b = {} {}, t<sub>f</sub> = {} mm, {} → Knicklinie <b>{}</b>, α = {}",
+  "en": "!h/b = {} {}, t<sub>f</sub> = {} mm, {} → buckling curve <b>{}</b>, α = {}"
+ },
+ {
+  "id": "27-87",
+  "de": "Biegeknicken {}, {}, L<sub>cr</sub> = {} m",
+  "en": "Flexural buckling {}, {}, L<sub>cr</sub> = {} m"
+ },
+ {
+  "id": "27-88",
+  "de": "§Ideales Kippmoment (Gabellagerung an beiden Enden)",
+  "en": "§Elastic critical moment (fork supports at both ends)"
+ },
+ {
+  "id": "27-89",
+  "de": "!z<sub>g</sub> — Abstand des Lastangriffs vom Schubmittelpunkt, positiv oberhalb (Obergurt: ungünstig)",
+  "en": "!z<sub>g</sub> — distance of the load application point from the shear centre, positive above (top flange: unfavourable)"
+ },
+ {
+  "id": "27-90",
+  "de": "§Bezogener Schlankheitsgrad",
+  "en": "§Non-dimensional slenderness"
+ },
+ {
+  "id": "27-91",
+  "de": "!λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) mit W<sub>y</sub> = W<sub>pl,y</sub> (Klasse 1, 2) bzw. W<sub>el,y</sub> (Klasse 3)",
+  "en": "!λ̄<sub>LT</sub> = √(W<sub>y</sub> · f<sub>y</sub> / M<sub>cr</sub>) with W<sub>y</sub> = W<sub>pl,y</sub> (class 1, 2) or W<sub>el,y</sub> (class 3)"
+ },
+ {
+  "id": "27-92",
+  "de": "§Abminderung — allgemeiner Fall (6.3.2.2)",
+  "en": "§Reduction — general case (6.3.2.2)"
+ },
+ {
+  "id": "27-93",
+  "de": "§Abminderung — gewalzte und gleichartige geschweißte Profile (6.3.2.3, NA)",
+  "en": "§Reduction — rolled and equivalent welded sections (6.3.2.3, NA)"
+ },
+ {
+  "id": "27-94",
+  "de": "!Φ<sub>LT</sub> = 0,5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) mit λ̄<sub>LT,0</sub> = 0,4 und β = 0,75",
+  "en": "!Φ<sub>LT</sub> = 0.5 · (1 + α<sub>LT</sub> · (λ̄<sub>LT</sub> − λ̄<sub>LT,0</sub>) + β · λ̄<sub>LT</sub>²) with λ̄<sub>LT,0</sub> = 0.4 and β = 0.75"
+ },
+ {
+  "id": "27-95",
+  "de": "!χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 und ≤ 1/λ̄<sub>LT</sub>²",
+  "en": "!χ<sub>LT</sub> = 1 / (Φ<sub>LT</sub> + √(Φ<sub>LT</sub>² − β · λ̄<sub>LT</sub>²)) ≤ 1 and ≤ 1/λ̄<sub>LT</sub>²"
+ },
+ {
+  "id": "27-96",
+  "de": "!M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · für λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> kein Nachweis",
+  "en": "!M<sub>b,Rd</sub> = χ<sub>LT</sub> · W<sub>y</sub> · f<sub>y</sub> / γ<sub>M1</sub> · M<sub>Ed</sub> / M<sub>b,Rd</sub> ≤ 1 · for λ̄<sub>LT</sub> ≤ λ̄<sub>LT,0</sub> no check required"
+ },
+ {
+  "id": "27-97",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"bd-st\" onchange=\"updateBDK()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"bd-st\" onchange=\"updateBDK()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-98",
+  "de": "<div class=\"calc-field\"><label>Abstand der Gabellager L [m]</label><input type=\"number\" id=\"bd-L\" value=\"6\" step=\"any\" oninput=\"updateBDK()\"></div>",
+  "en": "<div class=\"calc-field\"><label>Distance between fork supports L [m]</label><input type=\"number\" id=\"bd-L\" value=\"6\" step=\"any\" oninput=\"updateBDK()\"></div>"
+ },
+ {
+  "id": "27-99",
+  "de": "<div class=\"calc-field\"><label>Momentenverlauf</label><select id=\"bd-fall\" onchange=\"updateBDK()\"><option value=\"M\">konstantes Moment</option><option value=\"q\" selected>Gleichstreckenlast</option><option value=\"F\">Einzellast in Feldmitte</option><option value=\"psi\">linearer Momentenverlauf ψ</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Bending moment diagram</label><select id=\"bd-fall\" onchange=\"updateBDK()\"><option value=\"M\">Constant moment</option><option value=\"q\" selected>Uniformly distributed load</option><option value=\"F\">Point load at midspan</option><option value=\"psi\">Linear moment diagram ψ</option></select></div>"
+ },
+ {
+  "id": "27-100",
+  "de": "<div class=\"calc-field\"><label>Lastangriff</label><select id=\"bd-zg\" onchange=\"updateBDK()\"><option value=\"o\" selected>Obergurt</option><option value=\"s\">Schubmittelpunkt</option><option value=\"u\">Untergurt</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Load application</label><select id=\"bd-zg\" onchange=\"updateBDK()\"><option value=\"o\" selected>Top flange</option><option value=\"s\">Shear centre</option><option value=\"u\">Bottom flange</option></select></div>"
+ },
+ {
+  "id": "27-101",
+  "de": "Klasse {} → W<sub>y</sub> = W<sub>pl,y</sub>",
+  "en": "Class {} → W<sub>y</sub> = W<sub>pl,y</sub>"
+ },
+ {
+  "id": "27-102",
+  "de": "§Ideales Kippmoment M<sub>cr</sub> (Gabellagerung, k = k<sub>w</sub> = 1)",
+  "en": "§Elastic critical moment M<sub>cr</sub> (fork supports, k = k<sub>w</sub> = 1)"
+ },
+ {
+  "id": "27-103",
+  "de": "(Obergurt, ungünstig)",
+  "en": "(top flange, unfavourable)"
+ },
+ {
+  "id": "27-104",
+  "de": "!{}{} → C<sub>1</sub> = {}, C<sub>2</sub> = {} · Lastangriff z<sub>g</sub> = {} cm {}",
+  "en": "!{}{} → C<sub>1</sub> = {}, C<sub>2</sub> = {} · load application z<sub>g</sub> = {} cm {}"
+ },
+ {
+  "id": "27-105",
+  "de": "§Schlankheit und Abminderung (6.3.2.3, gewalzte Profile)",
+  "en": "§Slenderness and reduction (6.3.2.3, rolled sections)"
+ },
+ {
+  "id": "27-106",
+  "de": "≤ 2 → Knicklinie b",
+  "en": "≤ 2 → buckling curve b"
+ },
+ {
+  "id": "27-107",
+  "de": "Biegedrillknicken {}, L = {} m",
+  "en": "Lateral-torsional buckling {}, L = {} m"
+ },
+ {
+  "id": "27-108",
+  "de": "(Schubmittelpunkt)",
+  "en": "(shear centre)"
+ },
+ {
+  "id": "27-109",
+  "de": "(Untergurt, günstig)",
+  "en": "(bottom flange, favourable)"
+ },
+ {
+  "id": "27-110",
+  "de": "§Nachweisgleichungen (Klasse 1–3)",
+  "en": "§Verification equations (class 1–3)"
+ },
+ {
+  "id": "27-111",
+  "de": "!N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 für nicht kippgefährdete Bauteile (z. B. Hohlprofile)",
+  "en": "!N<sub>Rk</sub> = A · f<sub>y</sub> · M<sub>Rk</sub> = W · f<sub>y</sub> · χ<sub>LT</sub> = 1 for members not susceptible to lateral-torsional buckling (e.g. hollow sections)"
+ },
+ {
+  "id": "27-112",
+  "de": "§Interaktionsbeiwerte — Anhang B, Klasse 1 und 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> analog)",
+  "en": "§Interaction factors — Annex B, class 1 and 2 (n<sub>y</sub> = N<sub>Ed</sub> / (χ<sub>y</sub> · N<sub>Rk</sub> / γ<sub>M1</sub>), n<sub>z</sub> similarly)"
+ },
+ {
+  "id": "27-113",
+  "de": "<div class=\"calc-field\"><label>Stahlsorte</label><select id=\"in-st\" onchange=\"updateNMI()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Steel grade</label><select id=\"in-st\" onchange=\"updateNMI()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+ },
+ {
+  "id": "27-114",
+  "de": "<div class=\"calc-field\"><label>L<sub>cr,z</sub> = Gabellagerabstand [m]</label><input type=\"number\" id=\"in-Lz\" value=\"5\" step=\"any\" oninput=\"updateNMI()\"></div>",
+  "en": "<div class=\"calc-field\"><label>L<sub>cr,z</sub> = distance between fork supports [m]</label><input type=\"number\" id=\"in-Lz\" value=\"5\" step=\"any\" oninput=\"updateNMI()\"></div>"
+ },
+ {
+  "id": "27-115",
+  "de": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (Druck)</label><input type=\"number\" id=\"in-N\" value=\"500\" step=\"any\" oninput=\"updateNMI()\"></div>",
+  "en": "<div class=\"calc-field\"><label>N<sub>Ed</sub> [kN] (compression)</label><input type=\"number\" id=\"in-N\" value=\"500\" step=\"any\" oninput=\"updateNMI()\"></div>"
+ },
+ {
+  "id": "27-116",
+  "de": "<div class=\"calc-field\"><label>Momentenverlauf</label><select id=\"in-fall\" onchange=\"updateNMI()\"><option value=\"psi\" selected>linear (Randmomente)</option><option value=\"q\">Gleichstreckenlast</option><option value=\"F\">Einzellast</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Bending moment diagram</label><select id=\"in-fall\" onchange=\"updateNMI()\"><option value=\"psi\" selected>Linear (end moments)</option><option value=\"q\">Uniformly distributed load</option><option value=\"F\">Point load</option></select></div>"
+ },
+ {
+  "id": "27-117",
+  "de": "!{}, {}: f<sub>y</sub> = {} N/mm² · Klasse {} → W<sub>y</sub> = {} = {} cm³",
+  "en": "!{}, {}: f<sub>y</sub> = {} N/mm² · class {} → W<sub>y</sub> = {} = {} cm³"
+ },
+ {
+  "id": "27-118",
+  "de": "§Biegedrillknicken (L = L<sub>cr,z</sub>, Last im Schubmittelpunkt)",
+  "en": "§Lateral-torsional buckling (L = L<sub>cr,z</sub>, load at the shear centre)"
+ },
+ {
+  "id": "27-119",
+  "de": "§Momentenbeiwerte und Interaktionsbeiwerte (Anhang B, Tab. B.2 und B.3)",
+  "en": "§Moment factors and interaction factors (Annex B, Tab. B.2 and B.3)"
+ },
+ {
+  "id": "27-120",
+  "de": "§Nachweise (6.61) und (6.62)",
+  "en": "§Checks (6.61) and (6.62)"
+ },
+ {
+  "id": "27-121",
+  "de": "Biegung und Druck {}",
+  "en": "Bending and compression {}"
+ },
+ {
+  "id": "27-122",
+  "de": "<div class=\"calc-field\"><label>Grenzwert</label><select id=\"db-lim\" onchange=\"updateDurchb()\"><option value=\"300\" selected>L / 300</option><option value=\"250\">L / 250</option><option value=\"200\">L / 200</option><option value=\"500\">L / 500</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Limit value</label><select id=\"db-lim\" onchange=\"updateDurchb()\"><option value=\"300\" selected>L / 300</option><option value=\"250\">L / 250</option><option value=\"200\">L / 200</option><option value=\"500\">L / 500</option></select></div>"
+ },
+ {
+  "id": "27-123",
+  "de": "Einfeldträger {}, L = {} m",
+  "en": "Simply supported beam {}, L = {} m"
+ },
+ {
+  "id": "27-124",
+  "de": "§Durchbiegung in Feldmitte (charakteristische Last)",
+  "en": "§Midspan deflection (characteristic load)"
+ },
+ {
+  "id": "27-125",
+  "de": "w<sub>zul</sub> = L / {} = {} / {} = {} mm",
+  "en": "w<sub>perm</sub> = L / {} = {} / {} = {} mm"
+ },
+ {
+  "id": "27-126",
+  "de": "w / w<sub>zul</sub> = {} / {} = {} ≤ 1 {}",
+  "en": "w / w<sub>perm</sub> = {} / {} = {} ≤ 1 {}"
+ },
+ {
+  "id": "27-127",
+  "de": "§Abscheren je Scherfuge",
+  "en": "§Shear per shear plane"
+ },
+ {
+  "id": "27-128",
+  "de": "!F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> mit α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)",
+  "en": "!F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t / γ<sub>M2</sub> with α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1)"
+ },
+ {
+  "id": "27-129",
+  "de": "!in Kraftrichtung: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (Endschraube) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (innere Schraube)",
+  "en": "!in direction of load: α<sub>d</sub> = e<sub>1</sub> / (3d<sub>0</sub>) (end bolt) · α<sub>d</sub> = p<sub>1</sub> / (3d<sub>0</sub>) − 1/4 (inner bolt)"
+ },
+ {
+  "id": "27-130",
+  "de": "!quer zur Kraft: k<sub>1</sub> = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (Randreihe) · k<sub>1</sub> = min(1,4 · p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) (innere Reihe)",
+  "en": "!perpendicular to load: k<sub>1</sub> = min(2.8 · e<sub>2</sub>/d<sub>0</sub> − 1.7; 1.4 · p<sub>2</sub>/d<sub>0</sub> − 1.7; 2.5) (edge row) · k<sub>1</sub> = min(1.4 · p<sub>2</sub>/d<sub>0</sub> − 1.7; 2.5) (inner row)"
+ },
+ {
+  "id": "27-131",
+  "de": "§Zug und Durchstanzen",
+  "en": "§Tension and punching shear"
+ },
+ {
+  "id": "27-132",
+  "de": "!F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> mit k<sub>2</sub> = 0,9 (0,63 bei Senkschrauben)",
+  "en": "!F<sub>t,Rd</sub> = k<sub>2</sub> · f<sub>ub</sub> · A<sub>s</sub> / γ<sub>M2</sub> with k<sub>2</sub> = 0.9 (0.63 for countersunk bolts)"
+ },
+ {
+  "id": "27-133",
+  "de": "§Abscheren und Zug gleichzeitig",
+  "en": "§Combined shear and tension"
+ },
+ {
+  "id": "27-134",
+  "de": "§Gruppe von Verbindungsmitteln (3.7)",
+  "en": "§Group of fasteners (3.7)"
+ },
+ {
+  "id": "27-135",
+  "de": "!Summe der F<sub>b,Rd</sub>, wenn F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> bei jeder Schraube; sonst n · kleinster Einzelwiderstand",
+  "en": "!Sum of F<sub>b,Rd</sub> if F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> for every bolt; otherwise n · smallest individual resistance"
+ },
+ {
+  "id": "27-136",
+  "de": "<div class=\"calc-field\"><label>Schraube</label><select id=\"sr-d\" onchange=\"updateSchraube()\"><option value=\"M12\">M12</option><option value=\"M16\">M16</option><option value=\"M20\" selected>M20</option><option value=\"M22\">M22</option><option value=\"M24\">M24</option><option value=\"M27\">M27</option><option value=\"M30\">M30</option><option value=\"M36\">M36</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Bolt</label><select id=\"sr-d\" onchange=\"updateSchraube()\"><option value=\"M12\">M12</option><option value=\"M16\">M16</option><option value=\"M20\" selected>M20</option><option value=\"M22\">M22</option><option value=\"M24\">M24</option><option value=\"M27\">M27</option><option value=\"M30\">M30</option><option value=\"M36\">M36</option></select></div>"
+ },
+ {
+  "id": "27-137",
+  "de": "<div class=\"calc-field\"><label>Festigkeitsklasse</label><select id=\"sr-kl\" onchange=\"updateSchraube()\"><option value=\"4.6\">4.6</option><option value=\"5.6\">5.6</option><option value=\"8.8\" selected>8.8</option><option value=\"10.9\">10.9</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Property class</label><select id=\"sr-kl\" onchange=\"updateSchraube()\"><option value=\"4.6\">4.6</option><option value=\"5.6\">5.6</option><option value=\"8.8\" selected>8.8</option><option value=\"10.9\">10.9</option></select></div>"
+ },
+ {
+  "id": "27-138",
+  "de": "<div class=\"calc-field\"><label>Scherfuge im</label><select id=\"sr-fuge\" onchange=\"updateSchraube()\"><option value=\"g\" selected>Gewinde</option><option value=\"s\">Schaft</option></select></div>",
+  "en": "<div class=\"calc-field\"><label>Shear plane through the</label><select id=\"sr-fuge\" onchange=\"updateSchraube()\"><option value=\"g\" selected>thread</option><option value=\"s\">shank</option></select></div>"
+ }
+]

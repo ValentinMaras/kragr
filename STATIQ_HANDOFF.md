@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.0 · ref v0.3.42 · size v0.6.0 · projekt v0.1.12 · rechtliches v0.1.11 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.2 · ref v0.3.42 · size v0.6.2 · projekt v0.1.12 · rechtliches v0.1.11 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.0, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.2, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.12, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.42, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.6.0, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.6.2, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.11)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -568,6 +568,51 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## size v0.6.2 — Profil-Knöpfe wieder entfernt
+
+Valentin: Die Zeile mit den Profil-Knöpfen (IPE 240 … 360) ist überflüssig, das Profil wird über die Auswahlliste gewählt. `pills()`, die Stile `.k-pills`/`.k-pill` und der Text „Profil wählen“ sind aus `data-k3` entfernt; `test_size_design3.py` prüft jetzt, dass keine Profil-Knöpfe da sind und die Auswahlliste das Profil wählt.
+
+## kragr-Design: Lastzeilen wie im Entwurf — calc v0.9.2
+
+Valentin: „Konfiguration der Lasten sieht nicht so aus wie im Design.“ Jetzt für Einfeldträger und Kragarm umgesetzt (Rahmen und Durchlaufträger behalten die bisherigen Zeilen mit Feldern und Steppern).
+
+- `renderLoads()` baut bei vorhandenem DOM (`typeof MutationObserver==='function'`) die Zeilen mit `k3Rows()`; ohne DOM (Node-Prüfstand) bleibt der alte Weg. Code oben bei `renderLoads` (`K3T`, `k3Sum`, `k3Body`, `k3Refresh`, `k3Set`, `k3Del`), Ereignisse und Wischen im `if(UX_ON)`-Block am Ende. `LOAD_OPEN` wird über `k3Open()` gelesen (entsteht erst später im Skript).
+- **Zeile:** Symbol (F oranger Pfeil, q Lastsymbol im Akzent, H/M grau), Name, Kurzfassung in Mono, ▾. Offene Zeile mit 2-px-Rahmen in der Lastfarbe. Klassen `load-item cmp k-row` (compactLoads überspringt sie, `loadSummary()` liefert für sie `k3Sum`).
+- **Einzellast:** Kraft F mit Stepper (1 kN, Zahl eintippbar), Position a als Schieber 0 … L (0,25 m) mit Zahl daneben, Winkel α als Schieber −90 … 90° (5°) mit Schnellwahl −45/−30/0/+30/+45, darunter F_v = F·cos α und F_h = F·sin α mit Werten. Die Konvention „α zur Senkrechten“ bleibt (Entwurf: zur Trägerachse, 90° = senkrecht; Werte sind gleichwertig, F_v/F_h stimmen mit den Kontrollwerten überein).
+- **Streckenlast:** Last q mit Stepper (0,5 kN/m), Umschalter Gleichlast / Trapezlast (Trapez: q am Anfang und q am Ende, Merker `l.trap` nur in der Oberfläche), Bereich von/bis als Schieber 0 … L, Hinweis „wirkt über a – b m“.
+- **H / M_e:** Stepper für H und M_e, Position als Schieber.
+- **Ausblenden und Löschen** stehen unten in der aufgeklappten Zeile (Funktion bleibt, Kopfzeile ist frei). **Wischen nach links** (über 90 px) löscht, Hinweis „F1 gelöscht · Rückgängig“ (5 s, `#k-undo`) stellt die Last an alter Stelle wieder her. Am Touchgerät steht „Nach links wischen zum Löschen“ über der Liste.
+- Schieber-Höchstwert folgt der Stützweite (`k3Lmax()` in `k2All`).
+- Tests: `test_calc_design2.py` um 8 Prüfungen erweitert (Stepper, Schieber, F_v/F_h, Trapezlast, Wischen und Rückgängig).
+
+## kragr-Design, Stufe 3: size — size v0.6.1
+
+Wie in calc nur Oberfläche: `<style data-k3>` im head, `<script data-k3>` am Ende von body (MutationObserver auf `.col-in`, `window.mulyK3()` zum erneuten Anwenden). Felder, IDs und Rechnung unverändert.
+
+- **Stepper − / +** an allen Zahlenfeldern der Eingabe (`.col-in .field > input[type=number]`, über 400 Felder). Schrittweite nach dem Wert, weil size fast überall `step="any"` hat: mit Nachkommastellen 10⁻ⁿ (6.0 → 0,1, 1.25 → 0,01), ganze Zahlen ab 100 → 10, sonst 1; ein echtes `step` gilt vorrangig. Gleiche Container-Abfrage wie calc (unter 135 px ohne Knöpfe). Knöpfe folgen `disabled`.
+- ~~**Profil-Knöpfe**~~ (in v0.6.2 wieder entfernt): unter jeder Profilliste (Auswahl mit ≥ 8 Einträgen wie „IPE 300“) fünf Knöpfe mit dem gewählten Profil und seinen Nachbarn derselben Reihe; Tipp wählt das Profil (change-Ereignis), die Knöpfe rücken nach. Die Auswahlliste bleibt sichtbar und voll nutzbar.
+- **„Aus calc übernehmen“** als Knopf in den Schnittgrößen-Karten (Titel z045, z084, z454, pc008, z027, pa009): öffnet das Projekt-Fenster beim Abschnitt „Schnittgrößen aus kragr·calc“.
+- **Übungsmodus als Schalter** in der Rechenweg-Leiste (`.det-bar .ueb-tog.k-switch`, `role="switch"`, Texte `uebOnH`/`uebOffH` in `I18N` und den Sprachdateien), gleiches Aussehen wie calc.
+- Nachweistabelle unter 420 px kompakter (Balken 20 %, kleinere Plakette): vorher bis zu 30 px Querscrollen bei Stahl und Bauphysik.
+- `sd-hap` (Satteldachträger): Beschriftung jetzt über `closest('.field')` statt `previousElementSibling` gefunden, weil der Stepper das Feld umschließt.
+- Ungenutzter Übersetzungstext „Übungsmodus beenden“ aus den size-Sprachdateien entfernt.
+- Tests: neu `test_size_design3.py`.
+- Bewusst nicht umgesetzt: Stahlsorte als Knöpfe (Auswahllisten bleiben, Tests und Tastatur bedienen sie), Schnittgrößen als einzeln hinzufügbare Zeilen (die Felder sind in size fest je Nachweis; die Listen mit „+“ gibt es weiter bei Bauteilaufbau, Bodenschichten und Pfählen).
+
+## kragr-Design, Stufe 2: calc — calc v0.9.1
+
+Umbau nur an der Oberfläche (`<style data-k2>` im head, Code `if(UX_ON){ … }` am Ende des Hauptskripts, `k2All()` läuft über einen MutationObserver auf den vier Rechner-Bereichen und nach `applyCalcTranslations`/`showTab`). Eingabefelder, IDs, `loads`, Rechnung und gespeicherte Daten bleiben unverändert. Texte in `K2T` (DE/EN/FR/ES). Wichtig: `k2Tx()` schreibt nur bei Änderung, sonst schaukeln sich `cmpObs` (compactLoads) und `k2Obs` gegenseitig auf.
+
+- **Eine Lasten-Karte** (`.k-loads`) in Einfeldträger, Kragarm und Rahmen: die bisherigen Karten Einzellasten / Streckenlasten / H und M_e (Rahmen: Streckenlasten / Einzel- und H-Lasten) sind zusammengelegt, die Listen (`#beam-point-list` usw.) stehen untereinander. Die alten Hinzufügen-Knöpfe sind unverändert (onclick, data-i18n) als Einträge im Menü „+ Last hinzufügen ▾“. Kopf klappt auf/zu; zu: Kurzfassung „F1 10 kN · q1 5 kN/m“, offen: „2 Lasten“. Durchlaufträger behält seine Karten je Feld.
+- **Chips unter der Skizze** (Einfeldträger, Kragarm): je Last ein Chip (F orange, q blau, H/M grau, ausgeschaltete Last durchgestrichen). Tipp öffnet die Last in der Lasten-Karte und springt hin.
+- **Stepper − / +** an allen Zahlenfeldern der Eingabe (`.col-in .field > input[type=number]`, nicht in 3-/4-Spalten-Rastern). Schrittweite nach Einheit: ° 5, kN/m 0,5, kN/kNm 1, m 0,5, sonst `step`. min/max werden beachtet, `input`/`change` werden ausgelöst (Live-Rechnung folgt). Eintippen bleibt möglich, auch mit Minus. In Feldern unter 135 px (Container-Abfrage auf `.k-stp`) bleiben die Knöpfe weg.
+- **Winkel α:** Vorgaben −45°, −30°, 0°, +30°, +45° unter dem Feld, Hinweis „0° = senkrecht“ (Konvention der App bleibt: α zur Senkrechten, −90 … 90; die 0–180°-Skala aus dem Entwurf wurde bewusst nicht übernommen, damit Speicherstände und Rechenweg gleich bleiben).
+- **M/Q/N/w** als Segment-Umschalter (graue Leiste, aktiv weiß).
+- **Übungsmodus als Schalter:** `.ueb-tog` mit `role="switch"`, `aria-checked`, Titel „Übungsmodus“, darunter „Aus – vollständige Lösung“ / „An – Zahlen verborgen, …“ (`uebOnH`/`uebOffH`), Schiebeschalter rechts. `uebEnd` wird nicht mehr angezeigt.
+- **Ergebnisleiste am Handy** (`#k-bar`, unter 1000 px): Einfeldträger max M · V_A · V_B, Kragarm max M · V_A · M_A, Durchlaufträger max M · max V, Rahmen max M · max V · max N (Werte aus den Ergebnis-Kacheln, nur die Einheit). Ausgeblendet, solange die Ergebnis-Kacheln im Bild sind, im Übungsmodus und in „Gespeichert“. Tipp springt zu den Ergebnissen.
+- Tests: neu `test_calc_design2.py`; angepasst `test_calc_uebung.py` (EN-Text des Schalters), `test_design_kragr.py` (Versionsprüfung 0.9.x).
+- Offen für später: System-Karte zuklappbar mit Kurzfassung, Schnittgrößenbild direkt in der System-Karte (Entwurf), Wischen zum Löschen, Ziehen der Last in der Skizze.
+
 ## kragr-Design, Stufe 1: Farben, Schrift, Kopfzeile, Ergebnisleiste — calc v0.9.0 · size v0.6.0 · ref v0.3.42 · projekt v0.1.12 · rechtliches v0.1.11
 
 Grundlage ist die Design-Übergabe vom 21.10.2026 (`kragr-design-uebergabe.md`, Entwürfe App-Calc-v2 und App-Size). Valentin hat den Plan in vier Stufen bestätigt, ebenso den Sprung auf calc 0.9.0 und size 0.6.0. Die App bleibt DE/EN/FR/ES; „bleibt Englisch“ bezieht sich nur auf die Texte im Entwurf.
@@ -1056,7 +1101,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1695/1695 grün** (inklusive `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1740/1740 grün** (inklusive `test_size_design3.py` 13, `test_calc_design2.py` 32, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

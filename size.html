@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.6.0 -->
+<!-- kragr·size v0.6.2 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -508,6 +508,32 @@ window.mulyProj = {
   }
   @media (max-width:360px) { .app-header .header-links > a, .app-header .header-links > .module-name { padding:0 5px; } .theme-btn { width:32px; } }
   @media print { .hdr-tools { display:none !important; } }
+</style>
+<style data-k3>
+  /* kragr-Design Stufe 3 (size v0.6.1): Stepper, „Aus calc übernehmen“, Übungsschalter — Bausteine wie in calc */
+  .k-stp { display:flex; align-items:stretch; gap:4px; container-type:inline-size; }
+  @container (max-width:135px) { .k-sb { display:none; } }
+  .k-stp > input { flex:1; min-width:0; width:auto !important; text-align:center; }
+  .k-sb { flex:none; width:36px; min-height:38px; border:0; border-radius:10px; background:var(--k-card); font:inherit; font-size:18px; font-weight:700; line-height:1; color:var(--k-text); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .card .k-sb { background:#fff; box-shadow:inset 0 0 0 1px var(--k-input); }
+  .k-sb:hover { background:var(--k-ctl-h); } .k-sb:active { transform:scale(.96); } .k-sb:disabled { opacity:.35; cursor:default; }
+  .k-ci { display:flex; align-items:center; gap:10px; width:100%; min-height:44px; margin-top:12px; padding:0 12px; border:0; border-radius:12px; background:var(--k-tint); color:var(--k-accent); font:inherit; font-size:14px; font-weight:700; text-align:left; cursor:pointer; }
+  .k-ci svg { flex:none; }
+  .fold.closed > .k-ci { display:none; }
+  /* Übungsmodus als Schalter in der Rechenweg-Leiste */
+  .det-bar { flex-wrap:wrap; gap:8px 6px; }
+  .det-bar button.ueb-tog.k-switch { order:3; flex:1 1 100%; display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; padding:8px 14px; border-radius:14px; background:var(--k-card); color:var(--k-text); text-align:left; }
+  .det-bar button.ueb-tog.k-switch.on { background:var(--k-card); color:var(--k-text); }
+  .k-sw-tx { display:flex; flex-direction:column; gap:2px; }
+  .det-bar .k-sw-tx b { font-size:15px; font-weight:700; }
+  .det-bar .k-sw-tx small { font-size:13px; font-weight:500; color:var(--k-muted); }
+  .k-sw { position:relative; flex:none; width:52px; height:30px; border-radius:15px; background:var(--k-line); transition:background .15s; }
+  .k-sw i { position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:12px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.25); transition:left .15s; }
+  .ueb-tog.on .k-sw { background:var(--k-accent); } .ueb-tog.on .k-sw i { left:25px; }
+  /* Nachweistabelle am schmalen Handy: Balken schmaler, Plakette kompakt (vorher bis zu 30 px Querscrollen) */
+  @media (max-width:420px) { #chk-table td:nth-child(2) { width:20% !important; } #chk-table td:last-child { width:auto !important; padding-left:4px; }
+    #chk-table .tag { font-size:10px; padding:1px 5px; } #chk-table .chk-name { overflow-wrap:anywhere; } }
+  @media print { .k-sb, .k-ci { display:none !important; } }
 </style>
 </head>
 <body>
@@ -2712,6 +2738,8 @@ const I18N = { "de": {
 "mobOk":"Alle Nachweise erfüllt · max. {0} %",
 "mobOkS":"max. {0} %",
 "mobGov":"maßgebend",
+"uebOnH":"An – Zahlen verborgen, Schritt für Schritt selbst rechnen",
+"uebOffH":"Aus – vollständige Lösung",
 "mlAdd":"Schicht hinzufügen",
 "mlDel":"Schicht entfernen",
 "mlPick":"Baustoff wählen",
@@ -3167,7 +3195,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.6.0';
+const SIZE_VERSION = '0.6.2';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -7951,7 +7979,7 @@ function runHX(){
   if(PA['holz/'+HOMODE]) return runPA('holz/'+HOMODE);
   document.querySelectorAll('.hx-sd-hint').forEach(e=>e.style.display = HOMODE==='sattel' ? '' : 'none');
   document.querySelectorAll('.ak-x').forEach(e=>e.style.display = $('ak-lage').value==='u' ? '' : 'none');
-  $('sd-hap').previousElementSibling.querySelector('.sd-hap-l').innerHTML = tt($('sd-form').value==='pult' ? tt('Höhe am hohen Auflager h<sub>ap</sub> [mm]') : tt('Höhe im First h<sub>ap</sub> [mm]'));
+  $('sd-hap').closest('.field').querySelector('.sd-hap-l').innerHTML = tt($('sd-form').value==='pult' ? tt('Höhe am hohen Auflager h<sub>ap</sub> [mm]') : tt('Höhe im First h<sub>ap</sub> [mm]'));
   const [rd,va,na,fg]=HX_FN[HOMODE], I=rd(), bad=va(I); if(bad.length){ showBad(bad); return; }
   const res=na(I);
   LAST={ mat:'holzx', mode:HOMODE, I, res, date:new Date() };
@@ -10137,7 +10165,7 @@ const DET_OPEN=new Set(); let DET_ALL=false;
 function foldDetails(){
   const cards=[...document.querySelectorAll('#details > .card[id^="n-"]')]; if(!cards.length) return;
   const bar=document.createElement('div'); bar.className='det-bar';
-  bar.innerHTML=`<span>${tx('calcSteps')}</span><span class="det-btns"><button type="button" class="ueb-tog${UEB?' on':''}" onclick="uebToggle()">${tt(UEB?'Übungsmodus beenden':'Übungsmodus')}</button><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button></span>`;
+  bar.innerHTML=`<span>${tx('calcSteps')}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button></span><button type="button" class="ueb-tog k-switch${UEB?' on':''}" role="switch" aria-checked="${UEB}" onclick="uebToggle()"><span class="k-sw-tx"><b>${tt('Übungsmodus')}</b><small>${tx(UEB?'uebOnH':'uebOffH')}</small></span><span class="k-sw" aria-hidden="true"><i></i></span></button>`;   // Schalter wie in calc (v0.6.1)
   bar.querySelector('.det-all').onclick=()=>{ DET_ALL=!DET_ALL; DET_OPEN.clear(); foldDetails2(); bar.querySelector('.det-all').textContent=tx(DET_ALL?'collapseAll':'expandAll'); };
   $('details').prepend(bar);
   cards.forEach(c=>{ c.classList.add('dfold'); const id=c.id;
@@ -10664,5 +10692,48 @@ function mulyFehlerHref(app, ver, extra){
 <script data-theme>window.mulyThemeButton && mulyThemeButton(document.getElementById('ver'), 'after');</script>
 <script data-theme>(function(){var ms=document.getElementById('mob-status'), r=document.getElementById('results'); if(ms&&r&&window.IntersectionObserver) new IntersectionObserver(function(e){ ms.classList.toggle('away', e[0].isIntersecting); },{rootMargin:'0px 0px -35% 0px'}).observe(r); })();</script>
 <script data-theme>(function(){var h=document.querySelector('.app-header'); function s(){ document.documentElement.style.setProperty('--hdr-h', h.offsetHeight+'px'); } s(); addEventListener('resize', s); if(window.ResizeObserver) new ResizeObserver(s).observe(h); })();</script>
+<script data-k3>
+// kragr-Design Stufe 3 (size v0.6.1): Stepper − / + an den Zahlenfeldern (Profil-Knöpfe in v0.6.2 wieder entfernt),
+// „Aus calc übernehmen“ direkt in den Schnittgrößen-Karten. Nur Oberfläche: Felder, IDs und Rechnung bleiben gleich.
+(function(){
+  if(typeof MutationObserver!=='function' || !document.querySelector('.col-in')) return;
+  var T={de:{dec:'verringern',inc:'erhöhen',ci:'Aus calc übernehmen',},en:{dec:'decrease',inc:'increase',ci:'Take from calc'},
+         fr:{dec:'diminuer',inc:'augmenter',ci:'Reprendre de calc'},es:{dec:'disminuir',inc:'aumentar',ci:'Tomar de calc'}};
+  var L=T[typeof LANG==='string'?LANG:'de']||T.de, busy=false, raf=0;
+  var CI_CARDS=['z045','z084','z454','pc008','z027','pa009'];
+  function decs(s){ s=String(s).trim().replace(',','.'); var i=s.indexOf('.'); return i<0?0:s.length-i-1; }
+  function stepOf(inp){ var st=inp.getAttribute('step'); if(st && st!=='any' && +st>0) return +st;
+    var v=parseFloat(String(inp.value).replace(',','.')); if(!isFinite(v) || v===0) return 1; var d=decs(inp.value); if(d) return Math.pow(10,-Math.min(d,2)); return Math.abs(v)>=100?10:1; }
+  function step(inp, dir){
+    var s=stepOf(inp), d=Math.max(decs(inp.value), decs(String(s))), v=parseFloat(String(inp.value).replace(',','.')); if(!isFinite(v)) v=0;
+    v=Math.round((v+dir*s)/s)*s;
+    if(inp.min!=='' && isFinite(+inp.min)) v=Math.max(+inp.min, v); if(inp.max!=='' && isFinite(+inp.max)) v=Math.min(+inp.max, v);
+    inp.value=v.toFixed(Math.min(d,4)); inp.dispatchEvent(new Event('input',{bubbles:true})); inp.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+  function steppers(){
+    document.querySelectorAll('.col-in .field > input[type=number]').forEach(function(inp){
+      if(inp.closest('.k-nostep')) return;
+      var w=document.createElement('div'); w.className='k-stp'; inp.parentNode.insertBefore(w, inp);
+      var lab=(inp.parentNode.querySelector('label')||{}).textContent||'';
+      function mk(dir,sym,k){ var b=document.createElement('button'); b.type='button'; b.className='k-sb'; b.textContent=sym; b.tabIndex=-1;
+        b.setAttribute('aria-label', (lab.replace(/\s+/g,' ').trim()+' '+L[k]).trim()); b.addEventListener('click', function(){ step(inp, dir); }); return b; }
+      w.appendChild(mk(-1,'−','dec')); w.appendChild(inp); w.appendChild(mk(1,'+','inc'));
+    });
+    document.querySelectorAll('.k-stp').forEach(function(w){ var i=w.querySelector('input'); w.querySelectorAll('.k-sb').forEach(function(b){ if(b.disabled!==!!i.disabled) b.disabled=!!i.disabled; }); });
+  }
+  function ciButtons(){
+    CI_CARDS.forEach(function(k){ document.querySelectorAll('.col-in .card-title[data-i18n="'+k+'"]').forEach(function(t){ var c=t.closest('.card'); if(!c || c.querySelector(':scope > .k-ci')) return;
+      var b=document.createElement('button'); b.type='button'; b.className='k-ci';
+      b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span>'+L.ci+'</span>';
+      b.addEventListener('click', function(e){ e.stopPropagation(); if(typeof openProj==='function') openProj(); var ci=document.getElementById('calc-import'); if(ci) setTimeout(function(){ ci.scrollIntoView({block:'nearest'}); var s=document.getElementById('ci-sel'); if(s) s.focus(); }, 60); });
+      c.appendChild(b); }); });
+  }
+  function all_(){ if(busy) return; busy=true; try{ steppers(); ciButtons(); } finally { obs.takeRecords(); busy=false; } }
+  var obs=new MutationObserver(function(){ if(busy) return; cancelAnimationFrame(raf); raf=requestAnimationFrame(all_); });
+  obs.observe(document.querySelector('.col-in'), {childList:true, subtree:true});
+  window.mulyK3=all_;
+  all_();
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,710 @@
+{
+"28-0": {
+"fr": "<div class=\"calc-field\"><label>Plans de cisaillement par boulon</label><select id=\"sr-m\" onchange=\"updateSchraube()\"><option value=\"1\" selected>1 (simple cisaillement)</option><option value=\"2\">2 (double cisaillement)</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Planos de corte por tornillo</label><select id=\"sr-m\" onchange=\"updateSchraube()\"><option value=\"1\" selected>1 (corte simple)</option><option value=\"2\">2 (corte doble)</option></select></div>"
+},
+"28-1": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur de tôle t [mm] (déterminante)</label><input type=\"number\" id=\"sr-t\" value=\"10\" step=\"any\" oninput=\"updateSchraube()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor de chapa t [mm] (determinante)</label><input type=\"number\" id=\"sr-t\" value=\"10\" step=\"any\" oninput=\"updateSchraube()\"></div>"
+},
+"28-2": {
+"fr": "<div class=\"calc-field\"><label>Tôle</label><select id=\"sr-st\" onchange=\"updateSchraube()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Chapa</label><select id=\"sr-st\" onchange=\"updateSchraube()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"28-3": {
+"fr": "<div class=\"calc-field\"><label>Boulons dans le sens de l'effort n<sub>1</sub></label><input type=\"number\" id=\"sr-n1\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>",
+"es": "<div class=\"calc-field\"><label>Tornillos en la dirección de la fuerza n<sub>1</sub></label><input type=\"number\" id=\"sr-n1\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>"
+},
+"28-4": {
+"fr": "<div class=\"calc-field\"><label>Boulons transversalement n<sub>2</sub></label><input type=\"number\" id=\"sr-n2\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>",
+"es": "<div class=\"calc-field\"><label>Tornillos en sentido transversal n<sub>2</sub></label><input type=\"number\" id=\"sr-n2\" value=\"2\" step=\"any\" oninput=\"updateSchraube()\"></div>"
+},
+"28-5": {
+"fr": "§Boulon et tôle",
+"es": "§Tornillo y chapa"
+},
+"28-6": {
+"fr": "!{} {} : d = {} mm, d<sub>0</sub> = {} mm, A = {} mm², A<sub>s</sub> = {} mm², f<sub>ub</sub> = {} N/mm² · tôle {}, t = {} mm, f<sub>u</sub> = {} N/mm²",
+"es": "!{} {}: d = {} mm, d<sub>0</sub> = {} mm, A = {} mm², A<sub>s</sub> = {} mm², f<sub>ub</sub> = {} N/mm² · chapa {}, t = {} mm, f<sub>u</sub> = {} N/mm²"
+},
+"28-7": {
+"fr": "§Pinces et entraxes (Tab. 3.3, valeurs minimales)",
+"es": "§Distancias a bordes y separaciones entre agujeros (Tab. 3.3, valores mínimos)"
+},
+"28-8": {
+"fr": "§Cisaillement par boulon",
+"es": "§Corte por tornillo"
+},
+"28-9": {
+"fr": "filetage → A = A<sub>s</sub>",
+"es": "rosca → A = A<sub>s</sub>"
+},
+"28-10": {
+"fr": "!Plan de cisaillement dans le {}, α<sub>v</sub> = {}, {} plan(s) de cisaillement<!--{}-->",
+"es": "!Plano de corte por el {}, α<sub>v</sub> = {}, {} plano(s) de corte<!--{}-->"
+},
+"28-11": {
+"fr": "!α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) avec f<sub>ub</sub>/f<sub>u</sub> = {}/{} = {}",
+"es": "!α<sub>b</sub> = min(α<sub>d</sub>; f<sub>ub</sub>/f<sub>u</sub>; 1) con f<sub>ub</sub>/f<sub>u</sub> = {}/{} = {}"
+},
+"28-12": {
+"fr": "α<sub>d</sub> (boulon d'extrémité) = e<sub>1</sub> / (3 · d<sub>0</sub>) = {} / (3 · {}) = {} → α<sub>b</sub> = {}",
+"es": "α<sub>d</sub> (tornillo extremo) = e<sub>1</sub> / (3 · d<sub>0</sub>) = {} / (3 · {}) = {} → α<sub>b</sub> = {}"
+},
+"28-13": {
+"fr": "α<sub>d</sub> (boulon intérieur) = p<sub>1</sub> / (3 · d<sub>0</sub>) − 1/4 = {} / (3 · {}) − 0,25 = {} → α<sub>b</sub> = {}",
+"es": "α<sub>d</sub> (tornillo interior) = p<sub>1</sub> / (3 · d<sub>0</sub>) − 1/4 = {} / (3 · {}) − 0,25 = {} → α<sub>b</sub> = {}"
+},
+"28-14": {
+"fr": "k<sub>1</sub> (rangée de rive) = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7{} ; 2,5) = {}",
+"es": "k<sub>1</sub> (fila de borde) = min(2,8 · e<sub>2</sub>/d<sub>0</sub> − 1,7{}; 2,5) = {}"
+},
+"28-15": {
+"fr": "Rangée de rive",
+"es": "Fila de borde"
+},
+"28-16": {
+"fr": "§Résistance de l'assemblage (3.7)",
+"es": "§Resistencia de la unión (3.7)"
+},
+"28-17": {
+"fr": "!F<sub>v,Rd</sub> < F<sub>b,Rd</sub> pour au moins un boulon → n · plus petite résistance individuelle",
+"es": "!F<sub>v,Rd</sub> < F<sub>b,Rd</sub> en al menos un tornillo → n · menor resistencia individual"
+},
+"28-18": {
+"fr": "F<sub>Rd</sub> = {} kN ({} boulons)",
+"es": "F<sub>Rd</sub> = {} kN ({} tornillos)"
+},
+"28-19": {
+"fr": "Assemblage boulonné {} × {} {} {}",
+"es": "Unión atornillada {} × {} {} {}"
+},
+"28-20": {
+"fr": "!F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> pour tous les boulons → somme des résistances à la pression diamétrale",
+"es": "!F<sub>v,Rd</sub> ≥ F<sub>b,Rd</sub> en todos los tornillos → suma de las resistencias al aplastamiento"
+},
+"28-21": {
+"fr": "tige → A = section de la tige",
+"es": "vástago → A = sección del vástago"
+},
+"28-22": {
+"fr": "l > 150a : réduction β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1",
+"es": "l > 150a: reducción β<sub>Lw</sub> = 1,2 − 0,2 · l / (150a) ≤ 1"
+},
+"28-23": {
+"fr": "§Méthode simplifiée (4.5.3.3)",
+"es": "§Método simplificado (4.5.3.3)"
+},
+"28-24": {
+"fr": "!F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (par unité de longueur) avec f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)",
+"es": "!F<sub>w,Ed</sub> ≤ F<sub>w,Rd</sub> = f<sub>vw,d</sub> · a (por unidad de longitud) con f<sub>vw,d</sub> = f<sub>u</sub> / (√3 · β<sub>w</sub> · γ<sub>M2</sub>)"
+},
+"28-25": {
+"fr": "§Méthode directionnelle (4.5.3.2)",
+"es": "§Método direccional (4.5.3.2)"
+},
+"28-26": {
+"fr": "!√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) et σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>",
+"es": "!√(σ<sub>⊥</sub>² + 3 · (τ<sub>⊥</sub>² + τ<sub>∥</sub>²)) ≤ f<sub>u</sub> / (β<sub>w</sub> · γ<sub>M2</sub>) y σ<sub>⊥</sub> ≤ 0,9 · f<sub>u</sub> / γ<sub>M2</sub>"
+},
+"28-27": {
+"fr": "!σ<sub>⊥</sub>, τ<sub>⊥</sub> — contraintes perpendiculaires à l'axe de la soudure dans le plan de gorge a · l · τ<sub>∥</sub> — parallèles à l'axe de la soudure",
+"es": "!σ<sub>⊥</sub>, τ<sub>⊥</sub> — tensiones perpendiculares al eje de la soldadura en el plano de garganta a · l · τ<sub>∥</sub> — paralelas al eje de la soldadura"
+},
+"28-28": {
+"fr": "§Double soudure d'angle sous traction transversale F (effort perpendiculaire à la soudure, 45°)",
+"es": "§Doble soldadura en ángulo bajo tracción transversal F (fuerza perpendicular a la soldadura, 45°)"
+},
+"28-29": {
+"fr": "§Soudures bout à bout à pleine pénétration",
+"es": "§Soldaduras a tope de penetración completa"
+},
+"28-30": {
+"fr": "!Résistance égale à celle de la plus faible des tôles assemblées — pas de vérification séparée",
+"es": "!Resistencia igual a la de la más débil de las chapas unidas — sin comprobación aparte"
+},
+"28-31": {
+"fr": "<div class=\"calc-field\"><label>Acier</label><select id=\"kw-st\" onchange=\"updateKehl()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Acero</label><select id=\"kw-st\" onchange=\"updateKehl()\"><option value=\"S235\" selected>S235</option><option value=\"S275\">S275</option><option value=\"S355\">S355</option><option value=\"S420\">S420</option><option value=\"S460\">S460</option></select></div>"
+},
+"28-32": {
+"fr": "<div class=\"calc-field\"><label>Gorge a [mm]</label><input type=\"number\" id=\"kw-a\" value=\"4\" step=\"any\" oninput=\"updateKehl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Garganta a [mm]</label><input type=\"number\" id=\"kw-a\" value=\"4\" step=\"any\" oninput=\"updateKehl()\"></div>"
+},
+"28-33": {
+"fr": "<div class=\"calc-field\"><label>Longueur de soudure l [mm] par soudure</label><input type=\"number\" id=\"kw-l\" value=\"150\" step=\"any\" oninput=\"updateKehl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud de soldadura l [mm] por soldadura</label><input type=\"number\" id=\"kw-l\" value=\"150\" step=\"any\" oninput=\"updateKehl()\"></div>"
+},
+"28-34": {
+"fr": "<div class=\"calc-field\"><label>Nombre de soudures</label><input type=\"number\" id=\"kw-n\" value=\"2\" step=\"any\" oninput=\"updateKehl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Número de soldaduras</label><input type=\"number\" id=\"kw-n\" value=\"2\" step=\"any\" oninput=\"updateKehl()\"></div>"
+},
+"28-35": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur de tôle t<sub>1</sub> [mm]</label><input type=\"number\" id=\"kw-t1\" value=\"10\" step=\"any\" oninput=\"updateKehl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor de chapa t<sub>1</sub> [mm]</label><input type=\"number\" id=\"kw-t1\" value=\"10\" step=\"any\" oninput=\"updateKehl()\"></div>"
+},
+"28-36": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur de tôle t<sub>2</sub> [mm]</label><input type=\"number\" id=\"kw-t2\" value=\"12\" step=\"any\" oninput=\"updateKehl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor de chapa t<sub>2</sub> [mm]</label><input type=\"number\" id=\"kw-t2\" value=\"12\" step=\"any\" oninput=\"updateKehl()\"></div>"
+},
+"28-37": {
+"fr": "§Valeurs limites de la gorge",
+"es": "§Valores límite de la garganta"
+},
+"28-38": {
+"fr": "§Résistance de la soudure",
+"es": "§Resistencia de la soldadura"
+},
+"28-39": {
+"fr": "Soudure d'angle a = {} mm",
+"es": "Soldadura en ángulo a = {} mm"
+},
+"28-40": {
+"fr": "&gt; 100 mm et &gt; 7 · Ø",
+"es": "&gt; 100 mm y &gt; 7 · Ø"
+},
+"28-41": {
+"fr": "&gt; 50 mm et &gt; 3 · Ø",
+"es": "&gt; 50 mm y &gt; 3 · Ø"
+},
+"28-42": {
+"fr": "(25,0/89,3)² + (150,0/946,7)² = 0,104 ≤ 1 <b class=\"ok-t\">✓ vérifié</b>",
+"es": "(25,0/89,3)² + (150,0/946,7)² = 0,104 ≤ 1 <b class=\"ok-t\">✓ cumple</b>"
+},
+"28-43": {
+"fr": "0,25·h, au plus 200 mm",
+"es": "0,25·h, como máximo 200 mm"
+},
+"28-44": {
+"fr": "0,3 mm + mesures particulières (p. ex. revêtement)",
+"es": "0,3 mm + medidas especiales (p. ej., recubrimiento protector)"
+},
+"28-45": {
+"fr": "0,5·h, au plus 300 mm",
+"es": "0,5·h, como máximo 300 mm"
+},
+"28-46": {
+"fr": "0,7·h, au plus 300 mm",
+"es": "0,7·h, como máximo 300 mm"
+},
+"28-47": {
+"fr": "1,0 ≤ cot θ ≤ 3,0 (d'après V<sub>Rd,cc</sub>)",
+"es": "1,0 ≤ cot θ ≤ 3,0 (a partir de V<sub>Rd,cc</sub>)"
+},
+"28-48": {
+"fr": "1.&nbsp; μ<sub>Eds</sub> = M<sub>Eds</sub> / (b · d² · f<sub>cd</sub>)<br> 2.&nbsp; ω, ξ, ζ d'après le tableau (μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = 0,296)<br> 3.&nbsp; A<sub>s1</sub> = ω · b · d · f<sub>cd</sub> / f<sub>yd</sub>&nbsp;&nbsp;(+ N<sub>Ed</sub> / f<sub>yd</sub> en présence d'un effort normal)",
+"es": "1.&nbsp; μ<sub>Eds</sub> = M<sub>Eds</sub> / (b · d² · f<sub>cd</sub>)<br> 2.&nbsp; ω, ξ, ζ de la tabla (μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = 0,296)<br> 3.&nbsp; A<sub>s1</sub> = ω · b · d · f<sub>cd</sub> / f<sub>yd</sub>&nbsp;&nbsp;(+ N<sub>Ed</sub> / f<sub>yd</sub> con esfuerzo axil)"
+},
+"28-49": {
+"fr": "200 mm (béton coulé en place, bétonné à la verticale), 120 mm (préfabriqué, bétonné à l'horizontale)",
+"es": "200 mm (hormigón in situ, hormigonado en vertical), 120 mm (prefabricado, hormigonado en horizontal)"
+},
+"28-50": {
+"fr": "<a class=\"applink\" href=\"#/stahlbeton/stuetzen/bemessung\">→ Dimensionner un poteau</a>",
+"es": "<a class=\"applink\" href=\"#/stahlbeton/stuetzen/bemessung\">→ Dimensionar un pilar</a>"
+},
+"28-51": {
+"fr": "<b>Armatures de poinçonnement nécessaires</b> (étriers ou goujons à tête)",
+"es": "<b>Armadura de punzonamiento necesaria</b> (estribos o conectores tipo perfil con espigas)"
+},
+"28-52": {
+"fr": "<b>Cas 1 — axe neutre dans la table</b> (x ≤ h<sub>f</sub>) : la section se comporte comme un rectangle de largeur b<sub>eff</sub>. Dimensionnement par la méthode ω, μ<sub>Eds</sub> avec b<sub>eff</sub>.<br> <b>Cas 2 — axe neutre dans l'âme</b> (x &gt; h<sub>f</sub>) : pour les tables larges (b<sub>eff</sub>/b<sub>w</sub> ≥ 5), on peut supposer la force de compression au milieu de la dalle et négliger l'âme :",
+"es": "<b>Caso 1 — fibra neutra en el ala</b> (x ≤ h<sub>f</sub>): la sección actúa como un rectángulo de ancho b<sub>eff</sub>. Dimensionamiento con el método ω, μ<sub>Eds</sub> con b<sub>eff</sub>.<br> <b>Caso 2 — fibra neutra en el alma</b> (x &gt; h<sub>f</sub>): con alas anchas (b<sub>eff</sub>/b<sub>w</sub> ≥ 5) se puede suponer la fuerza de compresión en el centro de la losa y despreciar el alma:"
+},
+"28-53": {
+"fr": "<b>Bonnes conditions d'adhérence</b> : barres inclinées de 45° … 90° sur l'horizontale et barres horizontales dans les éléments de hauteur jusqu'à 300 mm, ou, dans les éléments plus épais, dans la moitié inférieure ou à plus de 300 mm sous la face supérieure.<br> <b>Mauvaises conditions d'adhérence</b> : tous les autres cas — typiquement les armatures supérieures des dalles et poutres épaisses, car l'eau et l'air s'accumulent sous les barres lors du bétonnage.",
+"es": "<b>Buenas condiciones de adherencia</b>: barras con 45° … 90° respecto a la horizontal y barras horizontales en elementos de hasta 300 mm de canto, o, en elementos más gruesos, en la mitad inferior o a más de 300 mm por debajo de la cara superior.<br> <b>Malas condiciones de adherencia</b>: todos los demás casos — típicamente la armadura superior de losas y vigas gruesas, porque el agua y el aire se acumulan bajo las barras durante el hormigonado."
+},
+"28-54": {
+"fr": "<b>Fluage</b> : sous charge permanente, la déformation augmente avec le temps — la déformation finale est environ (1 + φ) fois la déformation élastique. <b>Retrait</b> : le béton se raccourcit en séchant (retrait de dessiccation) et par hydratation (retrait endogène), même sans aucune charge.",
+"es": "<b>Fluencia</b>: bajo carga permanente la deformación aumenta con el tiempo — la deformación final es aproximadamente (1 + φ) veces la elástica. <b>Retracción</b>: el hormigón se acorta al secarse (retracción por secado) y por la hidratación (retracción autógena), incluso sin ninguna carga."
+},
+"28-55": {
+"fr": "<span class=\"st-n\">1</span><span>Matériaux</span>",
+"es": "<span class=\"st-n\">1</span><span>Materiales</span>"
+},
+"28-56": {
+"fr": "<span class=\"st-n\">1</span><span>Valeur d'entrée</span>",
+"es": "<span class=\"st-n\">1</span><span>Valor de entrada</span>"
+},
+"28-57": {
+"fr": "<span class=\"st-n\">1</span><span>Section creuse équivalente</span>",
+"es": "<span class=\"st-n\">1</span><span>Sección hueca equivalente</span>"
+},
+"28-58": {
+"fr": "<span class=\"st-n\">1</span><span>Enrobage minimal pour l'adhérence et la durabilité</span>",
+"es": "<span class=\"st-n\">1</span><span>Recubrimiento mínimo por adherencia y durabilidad</span>"
+},
+"28-59": {
+"fr": "<span class=\"st-n\">1</span><span>Largeur participante (5.3.2.1)</span>",
+"es": "<span class=\"st-n\">1</span><span>Ancho efectivo (5.3.2.1)</span>"
+},
+"28-60": {
+"fr": "<span class=\"st-n\">1</span><span>Hauteur utile et armatures longitudinales</span>",
+"es": "<span class=\"st-n\">1</span><span>Canto útil y armadura longitudinal</span>"
+},
+"28-61": {
+"fr": "<span class=\"st-n\">1</span><span>Sans armatures d'effort tranchant (6.2.2)</span>",
+"es": "<span class=\"st-n\">1</span><span>Sin armadura de cortante (6.2.2)</span>"
+},
+"28-62": {
+"fr": "<span class=\"st-n\">1</span><span>Élancement</span>",
+"es": "<span class=\"st-n\">1</span><span>Esbeltez</span>"
+},
+"28-63": {
+"fr": "<span class=\"st-n\">1</span><span>Contrainte de l'acier à l'état II</span>",
+"es": "<span class=\"st-n\">1</span><span>Tensión del acero en estado fisurado (estado II)</span>"
+},
+"28-64": {
+"fr": "<span class=\"st-n\">1</span><span>Contrainte d'adhérence</span>",
+"es": "<span class=\"st-n\">1</span><span>Tensión de adherencia</span>"
+},
+"28-65": {
+"fr": "<span class=\"st-n\">1</span><span>Élancement existant</span>",
+"es": "<span class=\"st-n\">1</span><span>Esbeltez existente</span>"
+},
+"28-66": {
+"fr": "<span class=\"st-n\">1</span><span>Épaisseur fictive</span>",
+"es": "<span class=\"st-n\">1</span><span>Espesor ficticio</span>"
+},
+"28-67": {
+"fr": "<span class=\"st-n\">2</span><span>Dimensionnement comme section rectangulaire avec b<sub>eff</sub></span>",
+"es": "<span class=\"st-n\">2</span><span>Dimensionamiento como sección rectangular con b<sub>eff</sub></span>"
+},
+"28-68": {
+"fr": "<span class=\"st-n\">2</span><span>Bielle de compression (6.2.3)</span>",
+"es": "<span class=\"st-n\">2</span><span>Biela de compresión (6.2.3)</span>"
+},
+"28-69": {
+"fr": "<span class=\"st-n\">2</span><span>Bielle de compression (AN : section pleine ν = 0,525 · ν<sub>2</sub>)</span>",
+"es": "<span class=\"st-n\">2</span><span>Biela de compresión (AN: sección maciza ν = 0,525 · ν<sub>2</sub>)</span>"
+},
+"28-70": {
+"fr": "<span class=\"st-n\">2</span><span>Bielle de compression</span>",
+"es": "<span class=\"st-n\">2</span><span>Biela de compresión</span>"
+},
+"28-71": {
+"fr": "<span class=\"st-n\">2</span><span>Coefficient de fluage final φ(∞, t<sub>0</sub>) = φ<sub>RH</sub> · β(f<sub>cm</sub>) · β(t<sub>0</sub>) (Annexe B)</span>",
+"es": "<span class=\"st-n\">2</span><span>Coeficiente de fluencia final φ(∞, t<sub>0</sub>) = φ<sub>RH</sub> · β(f<sub>cm</sub>) · β(t<sub>0</sub>) (Anejo B)</span>"
+},
+"28-72": {
+"fr": "<span class=\"st-n\">2</span><span>Valeurs limites (DIN EN 1992-1-1/NA, 7.4.2)</span>",
+"es": "<span class=\"st-n\">2</span><span>Valores límite (DIN EN 1992-1-1/NA, 7.4.2)</span>"
+},
+"28-73": {
+"fr": "<span class=\"st-n\">2</span><span>Valeur de base</span>",
+"es": "<span class=\"st-n\">2</span><span>Valor básico</span>"
+},
+"28-74": {
+"fr": "<span class=\"st-n\">2</span><span>Coefficient de fluage</span>",
+"es": "<span class=\"st-n\">2</span><span>Coeficiente de fluencia</span>"
+},
+"28-75": {
+"fr": "<span class=\"st-n\">2</span><span>Périmètre de contrôle critique à la distance 2d (poteau intérieur)</span>",
+"es": "<span class=\"st-n\">2</span><span>Perímetro de control crítico a la distancia 2d (pilar interior)</span>"
+},
+"28-76": {
+"fr": "<span class=\"st-n\">2</span><span>Excentricités de charge</span>",
+"es": "<span class=\"st-n\">2</span><span>Excentricidades de la carga</span>"
+},
+"28-77": {
+"fr": "<span class=\"st-n\">2</span><span>Espacement des fissures</span>",
+"es": "<span class=\"st-n\">2</span><span>Separación entre fisuras</span>"
+},
+"28-78": {
+"fr": "<span class=\"st-n\">2</span><span>Hauteur utile statique</span>",
+"es": "<span class=\"st-n\">2</span><span>Canto útil estático</span>"
+},
+"28-79": {
+"fr": "<span class=\"st-n\">2</span><span>Valeur du tableau</span>",
+"es": "<span class=\"st-n\">2</span><span>Valor de la tabla</span>"
+},
+"28-80": {
+"fr": "<span class=\"st-n\">2</span><span>Marge de tolérance</span>",
+"es": "<span class=\"st-n\">2</span><span>Margen de tolerancia</span>"
+},
+"28-81": {
+"fr": "<span class=\"st-n\">3</span><span>Moment de calcul</span>",
+"es": "<span class=\"st-n\">3</span><span>Momento de cálculo</span>"
+},
+"28-82": {
+"fr": "<span class=\"st-n\">3</span><span>Armatures</span>",
+"es": "<span class=\"st-n\">3</span><span>Armadura</span>"
+},
+"28-83": {
+"fr": "<span class=\"st-n\">3</span><span>Moment réduit</span>",
+"es": "<span class=\"st-n\">3</span><span>Momento reducido</span>"
+},
+"28-84": {
+"fr": "<span class=\"st-n\">3</span><span>Étriers</span>",
+"es": "<span class=\"st-n\">3</span><span>Estribos</span>"
+},
+"28-85": {
+"fr": "<span class=\"st-n\">3</span><span>Différence de déformation (long terme, k<sub>t</sub> = 0,4)</span>",
+"es": "<span class=\"st-n\">3</span><span>Diferencia de deformación (largo plazo, k<sub>t</sub> = 0,4)</span>"
+},
+"28-86": {
+"fr": "<span class=\"st-n\">3</span><span>Action</span>",
+"es": "<span class=\"st-n\">3</span><span>Acción</span>"
+},
+"28-87": {
+"fr": "<span class=\"st-n\">3</span><span>Valeur minimale (tirant)</span>",
+"es": "<span class=\"st-n\">3</span><span>Valor mínimo (barra traccionada)</span>"
+},
+"28-88": {
+"fr": "<span class=\"st-n\">3</span><span>Valeur nominale = enrobage de pose</span>",
+"es": "<span class=\"st-n\">3</span><span>Valor nominal = recubrimiento de colocación</span>"
+},
+"28-89": {
+"fr": "<span class=\"st-n\">3</span><span>Retrait</span>",
+"es": "<span class=\"st-n\">3</span><span>Retracción</span>"
+},
+"28-90": {
+"fr": "<span class=\"st-n\">3</span><span>Armatures de torsion</span>",
+"es": "<span class=\"st-n\">3</span><span>Armadura de torsión</span>"
+},
+"28-91": {
+"fr": "<span class=\"st-n\">3</span><span>Retrait de dessiccation ε<sub>cd,∞</sub> = k<sub>h</sub> · ε<sub>cd,0</sub></span>",
+"es": "<span class=\"st-n\">3</span><span>Retracción por secado ε<sub>cd,∞</sub> = k<sub>h</sub> · ε<sub>cd,0</sub></span>"
+},
+"28-92": {
+"fr": "<span class=\"st-n\">4</span><span>Retrait endogène</span>",
+"es": "<span class=\"st-n\">4</span><span>Retracción autógena</span>"
+},
+"28-93": {
+"fr": "<span class=\"st-n\">4</span><span>Coefficients du diagramme parabole-rectangle (tableau ci-dessus, interpolés)</span>",
+"es": "<span class=\"st-n\">4</span><span>Coeficientes del diagrama parábola-rectángulo (tabla anterior, interpolados)</span>"
+},
+"28-94": {
+"fr": "<span class=\"st-n\">4</span><span>Valeur de calcul</span>",
+"es": "<span class=\"st-n\">4</span><span>Valor de cálculo</span>"
+},
+"28-95": {
+"fr": "<span class=\"st-n\">4</span><span>Armatures (plans de déformation, parabole-rectangle, symétriques)</span>",
+"es": "<span class=\"st-n\">4</span><span>Armadura (planos de deformación, parábola-rectángulo, simétrica)</span>"
+},
+"28-96": {
+"fr": "<span class=\"st-n\">4</span><span>Ouverture des fissures</span>",
+"es": "<span class=\"st-n\">4</span><span>Ancho de fisura</span>"
+},
+"28-97": {
+"fr": "<span class=\"st-n\">4</span><span>Résistance sans armatures de poinçonnement</span>",
+"es": "<span class=\"st-n\">4</span><span>Resistencia sin armadura de punzonamiento</span>"
+},
+"28-98": {
+"fr": "<span class=\"st-n\">5</span><span>Armatures</span>",
+"es": "<span class=\"st-n\">5</span><span>Armadura</span>"
+},
+"28-99": {
+"fr": "<span class=\"st-n\">5</span><span>Retrait total</span>",
+"es": "<span class=\"st-n\">5</span><span>Retracción total</span>"
+},
+"28-100": {
+"fr": "<span class=\"st-n\">6</span><span>Armatures minimales (moment de fissuration)</span>",
+"es": "<span class=\"st-n\">6</span><span>Armadura mínima (momento de fisuración)</span>"
+},
+"28-101": {
+"fr": "= 0,800 % (≤ 2 % et ≤ 0,5 · f<sub>cd</sub>/f<sub>yd</sub>)",
+"es": "= 0,800 % (≤ 2 % y ≤ 0,5 · f<sub>cd</sub>/f<sub>yd</sub>)"
+},
+"28-102": {
+"fr": "= 2,37 cm (méthode du poteau modèle)",
+"es": "= 2,37 cm (método del pilar modelo)"
+},
+"28-103": {
+"fr": "A<sub>c</sub> = 200.000 mm² · u = 2.000 mm (dalle, séchage en face supérieure et inférieure)",
+"es": "A<sub>c</sub> = 200.000 mm² · u = 2.000 mm (losa, secado por las caras superior e inferior)"
+},
+"28-104": {
+"fr": "A<sub>s,req</sub>",
+"es": "A<sub>s,nec</sub>"
+},
+"28-105": {
+"fr": "A<sub>s,max</sub> = 0,09 · A<sub>c</sub>, y compris dans les zones de recouvrement",
+"es": "A<sub>s,max</sub> = 0,09 · A<sub>c</sub>, también en las zonas de solape"
+},
+"28-106": {
+"fr": "A<sub>s,min</sub> (robustesse, DIN EN 1992-1-1/NA 9.2.1.1) ici déterminée à partir du moment de fissuration : A<sub>s,min</sub> = f<sub>ctm</sub> · W<sub>c</sub> / (f<sub>yk</sub> · 0,9·d) avec W<sub>c</sub> = b·h²/6. Armatures maximales : A<sub>s</sub> ≤ 0,08·A<sub>c</sub> (y compris dans les zones de recouvrement).",
+"es": "A<sub>s,min</sub> (robustez, DIN EN 1992-1-1/NA 9.2.1.1) aquí a partir del momento de fisuración: A<sub>s,min</sub> = f<sub>ctm</sub> · W<sub>c</sub> / (f<sub>yk</sub> · 0,9·d) con W<sub>c</sub> = b·h²/6. Armadura máxima: A<sub>s</sub> ≤ 0,08·A<sub>c</sub> (también en las zonas de solape)."
+},
+"28-107": {
+"fr": "A<sub>s,tot,req</sub> = 7,34 cm² (itératif, jusqu'à M<sub>Rd</sub>(N<sub>Ed</sub>) = M<sub>Ed</sub>)",
+"es": "A<sub>s,tot,nec</sub> = 7,34 cm² (iterativo, hasta M<sub>Rd</sub>(N<sub>Ed</sub>) = M<sub>Ed</sub>)"
+},
+"28-108": {
+"fr": "A<sub>s</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · f<sub>yd</sub>)&nbsp;&nbsp; avec contrôle&nbsp; σ<sub>cd</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · b<sub>eff</sub> · h<sub>f</sub>) ≤ f<sub>cd</sub>",
+"es": "A<sub>s</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · f<sub>yd</sub>)&nbsp;&nbsp; con comprobación&nbsp; σ<sub>cd</sub> = M<sub>Eds</sub> / ((d − h<sub>f</sub>/2) · b<sub>eff</sub> · h<sub>f</sub>) ≤ f<sub>cd</sub>"
+},
+"28-109": {
+"fr": "A<sub>s</sub> = n · π · Ø² / 4 · poids G = A · 7,85 kg/dm³",
+"es": "A<sub>s</sub> = n · π · Ø² / 4 · peso G = A · 7,85 kg/dm³"
+},
+"28-110": {
+"fr": "A<sub>s</sub> [cm²] = k<sub>s</sub> · M<sub>Eds</sub> [kNm] / d [cm] (+ N<sub>Ed</sub>/f<sub>yd</sub> en présence d'un effort normal)",
+"es": "A<sub>s</sub> [cm²] = k<sub>s</sub> · M<sub>Eds</sub> [kNm] / d [cm] (+ N<sub>Ed</sub>/f<sub>yd</sub> con esfuerzo axil)"
+},
+"28-111": {
+"fr": "A<sub>sl</sub> n'est comptée que si les armatures sont ancrées au moins de (l<sub>bd</sub> + d) au-delà de la section considérée.",
+"es": "A<sub>sl</sub> solo se tiene en cuenta si la armadura está anclada al menos (l<sub>bd</sub> + d) más allá de la sección considerada."
+},
+"28-112": {
+"fr": "À partir de C55/67 : f<sub>ctm</sub> = 2,12 · ln(1 + f<sub>cm</sub>/10) · ε<sub>c2</sub> = 2,0 + 0,085 · (f<sub>ck</sub> − 50)<sup>0,53</sup> · ε<sub>cu2</sub> = 2,6 + 35 · ((90 − f<sub>ck</sub>)/100)⁴ · n = 1,4 + 23,4 · ((90 − f<sub>ck</sub>)/100)⁴. Jusqu'à C50/60 : ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Les calculateurs de statiq·ref sont valables jusqu'à C50/60.",
+"es": "Desde C55/67: f<sub>ctm</sub> = 2,12 · ln(1 + f<sub>cm</sub>/10) · ε<sub>c2</sub> = 2,0 + 0,085 · (f<sub>ck</sub> − 50)<sup>0,53</sup> · ε<sub>cu2</sub> = 2,6 + 35 · ((90 − f<sub>ck</sub>)/100)⁴ · n = 1,4 + 23,4 · ((90 − f<sub>ck</sub>)/100)⁴. Hasta C50/60: ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Las calculadoras de statiq·ref son válidas hasta C50/60."
+},
+"28-113": {
+"fr": "Distance d'axe des barres longitudinales c [cm]",
+"es": "Distancia al eje de las barras longitudinales c [cm]"
+},
+"28-114": {
+"fr": "Proportion de barres avec recouvrement ≤ 33 %",
+"es": "Proporción de barras solapadas ≤ 33 %"
+},
+"28-115": {
+"fr": "Les poteaux d'étage contreventés sont le plus souvent pris avec β = 1,0, du côté de la sécurité.",
+"es": "Los pilares de planta arriostrados se suelen tomar con β = 1,0, del lado de la seguridad."
+},
+"28-116": {
+"fr": "Taux de travail V_Ed / V_Rd,max",
+"es": "Aprovechamiento V_Ed / V_Rd,max"
+},
+"28-117": {
+"fr": "Éléments extérieurs à proximité de la côte",
+"es": "Elementos exteriores cerca de la costa"
+},
+"28-118": {
+"fr": "Éléments extérieurs directement exposés à la pluie",
+"es": "Elementos exteriores expuestos directamente a la lluvia"
+},
+"28-119": {
+"fr": "Éléments extérieurs protégés de la pluie, halls ouverts, locaux humides",
+"es": "Elementos exteriores protegidos de la lluvia, naves abiertas, locales húmedos"
+},
+"28-120": {
+"fr": "Éléments dans la zone d'embruns des surfaces de circulation, garages individuels",
+"es": "Elementos en la zona de salpicaduras de superficies de tráfico, garajes individuales"
+},
+"28-121": {
+"fr": "Éléments avec armatures d'effort tranchant (étriers verticaux) — 6.2.3",
+"es": "Elementos con armadura de cortante (estribos verticales) — 6.2.3"
+},
+"28-122": {
+"fr": "Éléments sans armatures d'effort tranchant — DIN EN 1992-1-1/NA, 6.2.2",
+"es": "Elementos sin armadura de cortante — DIN EN 1992-1-1/NA, 6.2.2"
+},
+"28-123": {
+"fr": "Limitation de l'élancement en flexion — DIN EN 1992-1-1/NA, 7.4.2",
+"es": "Limitación de la esbeltez a flexión — DIN EN 1992-1-1/NA, 7.4.2"
+},
+"28-124": {
+"fr": "Dans les poutres solidaires d'un plancher, une partie de la dalle participe comme table de compression. Sa largeur dépend de la distance l<sub>0</sub> entre les points de moment nul.",
+"es": "En las vigas unidas a un forjado, una parte de la losa actúa como cabeza comprimida. Su ancho depende de la distancia l<sub>0</sub> entre los puntos de momento nulo."
+},
+"28-125": {
+"fr": "Pour les étriers, l'enrobage s'applique à l'étrier (lit extérieur). Les armatures longitudinales se situent plus profondément, du diamètre de l'étrier.",
+"es": "En los estribos, el recubrimiento se refiere al estribo (capa más exterior). La armadura longitudinal queda más profunda en el diámetro del estribo."
+},
+"28-126": {
+"fr": "Dans les planchers-dalles sans retombées, la charge du poteau se concentre sur une petite surface. En cas de rupture, le poteau poinçonne la dalle selon un cône — brutalement et sans signe avant-coureur. On vérifie la contrainte de cisaillement sur un <b>périmètre de contrôle critique u<sub>1</sub></b> situé à 2,0·d du nu du poteau.",
+"es": "En las losas planas sin vigas de descuelgue, la carga del pilar se concentra en una superficie pequeña. Si la losa falla, el pilar punza un cuerpo de rotura en forma de cono — de forma súbita y sin aviso. Se comprueba la tensión tangencial en un <b>perímetro de control crítico u<sub>1</sub></b> a una distancia de 2,0·d del borde del pilar."
+},
+"28-127": {
+"fr": "Pour les moments négatifs (au droit de l'appui), la dalle se trouve en zone tendue : on calcule alors un rectangle de largeur d'âme b<sub>w</sub> et on répartit les armatures tendues sur la largeur participante.",
+"es": "Con momentos negativos (sobre el apoyo) la losa queda en la zona traccionada: entonces se calcula un rectángulo con el ancho del alma b<sub>w</sub> y se reparte la armadura de tracción en el ancho efectivo."
+},
+"28-128": {
+"fr": "Exemple dalle sur deux appuis l = 5,0 m avec cloisons : l/d ≤ 1² · 150/5 = 30 → d ≥ 500/30 = 16,7 cm, h ≈ d + 3 cm = 20 cm",
+"es": "Ejemplo losa biapoyada l = 5,0 m con tabiques: l/d ≤ 1² · 150/5 = 30 → d ≥ 500/30 = 16,7 cm, h ≈ d + 3 cm = 20 cm"
+},
+"28-129": {
+"fr": "Âge au chargement t<sub>0</sub> [jours]",
+"es": "Edad en el momento de la carga t<sub>0</sub> [días]"
+},
+"28-130": {
+"fr": "Dimensionnement pour moments positifs (dalle comprimée)",
+"es": "Dimensionamiento para momentos positivos (losa comprimida)"
+},
+"28-131": {
+"fr": "Dimensionnement par la méthode ω (rectangle, sans armatures comprimées)",
+"es": "Dimensionamiento con el método ω (rectángulo, sin armadura de compresión)"
+},
+"28-132": {
+"fr": "Valeur de calcul de la longueur d'ancrage",
+"es": "Valor de cálculo de la longitud de anclaje"
+},
+"28-133": {
+"fr": "Valeurs de calcul et coefficients partiels",
+"es": "Valores de cálculo y coeficientes parciales"
+},
+"28-134": {
+"fr": "Calculé avec le diagramme parabole-rectangle (C12/15 à C50/60), B500 avec palier horizontal, ε<sub>s</sub> ≤ 25 ‰. Les tableaux avec branche d'acier inclinée donnent des ω un peu plus faibles pour les grands μ (ici du côté de la sécurité).",
+"es": "Calculado con el diagrama parábola-rectángulo (C12/15 a C50/60), B500 con rama horizontal, ε<sub>s</sub> ≤ 25 ‰. Las tablas con rama de acero inclinada dan valores de ω algo menores para μ grandes (aquí del lado de la seguridad)."
+},
+"28-135": {
+"fr": "Calculé avec le diagramme parabole-rectangle, α<sub>cc</sub> = 0,85, acier avec palier horizontal (ε<sub>s</sub> ≤ 25 ‰), lignes pour μ<sub>Eds</sub> = 0,01 … 0,29 (fin à ξ = 0,45). Interpoler linéairement entre les valeurs.",
+"es": "Calculado con el diagrama parábola-rectángulo, α<sub>cc</sub> = 0,85, acero con rama horizontal (ε<sub>s</sub> ≤ 25 ‰), filas para μ<sub>Eds</sub> = 0,01 … 0,29 (termina en ξ = 0,45). Interpole linealmente entre valores."
+},
+"28-136": {
+"fr": "Béton",
+"es": "Hormigón"
+},
+"28-137": {
+"fr": "Enrobage XC3, Ø 12 mm",
+"es": "Recubrimiento XC3, Ø 12 mm"
+},
+"28-138": {
+"fr": "Déterminer l'enrobage",
+"es": "Determinar el recubrimiento"
+},
+"28-139": {
+"fr": "Enrobage — DIN EN 1992-1-1/NA, 4.4.1",
+"es": "Recubrimiento — DIN EN 1992-1-1/NA, 4.4.1"
+},
+"28-140": {
+"fr": "Acier pour béton armé B500 — EN 1992-1-1, Annexe C et DIN 488",
+"es": "Acero para hormigón armado B500 — EN 1992-1-1, Anejo C y DIN 488"
+},
+"28-141": {
+"fr": "Dimensionnement en flexion 30/60 cm, C30/37, M<sub>Ed</sub> = 250,0 kNm",
+"es": "Dimensionamiento a flexión 30/60 cm, C30/37, M<sub>Ed</sub> = 250,0 kNm"
+},
+"28-142": {
+"fr": "Dimensionnement en flexion d'une section rectangulaire",
+"es": "Dimensionamiento a flexión de una sección rectangular"
+},
+"28-143": {
+"fr": "Forme de cintrage",
+"es": "Forma de doblado"
+},
+"28-144": {
+"fr": "Diamètre de mandrin de cintrage — DIN EN 1992-1-1/NA, Tab. 8.1DE",
+"es": "Diámetro del mandril de doblado — DIN EN 1992-1-1/NA, Tab. 8.1DE"
+},
+"28-145": {
+"fr": "Élancement en flexion l = 5,00 m, d = 17,0 cm",
+"es": "Esbeltez a flexión l = 5,00 m, d = 17,0 cm"
+},
+"28-146": {
+"fr": "Flexion avec traction longitudinale",
+"es": "Flexión con tracción axial"
+},
+"28-147": {
+"fr": "Étriers : A<sub>sw</sub>/s = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) · Armatures longitudinales : ΣA<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>)",
+"es": "Estribos: A<sub>sw</sub>/s = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) · Armadura longitudinal: ΣA<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>)"
+},
+"28-148": {
+"fr": "Étriers : a<sub>sw</sub> = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) = 25000000 / (2 · 100.000 · 434,8 · 1,00) = 2,88 cm²/m (par branche, extérieure)",
+"es": "Estribos: a<sub>sw</sub> = T<sub>Ed</sub> / (2 · A<sub>k</sub> · f<sub>yd</sub> · cot θ) = 25000000 / (2 · 100.000 · 434,8 · 1,00) = 2,88 cm²/m (por rama, exterior)"
+},
+"28-149": {
+"fr": "Espacement des étriers réduit",
+"es": "Separación de estribos reducida"
+},
+"28-150": {
+"fr": "Diamètre des étriers",
+"es": "Diámetro de los estribos"
+},
+"28-151": {
+"fr": "Allongement sous charge maximale ε_uk",
+"es": "Deformación bajo carga máxima ε_uk"
+},
+"28-152": {
+"fr": "Le béton reprend la compression, l'acier d'armature la traction. On cherche les armatures pour lesquelles le couple de forces internes F<sub>cd</sub> · z équilibre le moment. Sans effort normal, M<sub>Eds</sub> = M<sub>Ed</sub>.",
+"es": "El hormigón absorbe la compresión y el acero de armar la tracción. Se busca la armadura con la que el par de fuerzas internas F<sub>cd</sub> · z resiste el momento. Sin esfuerzo axil, M<sub>Eds</sub> = M<sub>Ed</sub>."
+},
+"28-153": {
+"fr": "La section pleine est assimilée à une section creuse équivalente à paroi mince d'épaisseur t<sub>ef</sub>. Le moment de torsion circule sous forme de flux de cisaillement autour de l'aire du noyau A<sub>k</sub> ; étriers et barres longitudinales forment un treillis spatial.",
+"es": "La sección maciza se trata como una sección hueca equivalente de pared delgada con espesor de pared t<sub>ef</sub>. El momento torsor circula como flujo de cortante alrededor del área encerrada A<sub>k</sub>; los estribos y las barras longitudinales forman una celosía espacial."
+},
+"28-154": {
+"fr": "AN allemand : déformation de l'acier limitée à ε<sub>ud</sub> = 25 ‰ dans le dimensionnement",
+"es": "AN alemán: deformación del acero limitada en el dimensionamiento a ε<sub>ud</sub> = 25 ‰"
+},
+"28-155": {
+"fr": "Calcul direct — 7.3.4 avec l'AN allemand",
+"es": "Cálculo directo — 7.3.4 con el AN alemán"
+},
+"28-156": {
+"fr": "Vue en plan d'un poteau intérieur : u<sub>1</sub> contourne le poteau à la distance 2d, avec des quarts de cercle aux angles.",
+"es": "Vista en planta de un pilar interior: u<sub>1</sub> rodea el pilar a una distancia 2d, con cuartos de círculo en las esquinas."
+},
+"28-157": {
+"fr": "Armatures comprimées (μ<sub>Eds</sub> &gt; μ<sub>lim</sub>)",
+"es": "Armadura de compresión (μ<sub>Eds</sub> &gt; μ<sub>lim</sub>)"
+},
+"28-158": {
+"fr": "Table de compression",
+"es": "Cabeza comprimida"
+},
+"28-159": {
+"fr": "Armatures de poinçonnement (étriers ou goujons à tête avec agrément)",
+"es": "Armadura de punzonamiento (estribos o conectores con espigas con homologación)"
+},
+"28-160": {
+"fr": "Poinçonnement au droit d'un poteau intérieur",
+"es": "Punzonamiento en pilar interior"
+},
+"28-161": {
+"fr": "Vérification au poinçonnement d'un plancher-dalle",
+"es": "Comprobación a punzonamiento de una losa plana"
+},
+"28-162": {
+"fr": "E<sub>s</sub> = 200 000 N/mm² · poids volumique comme l'acier de construction (78,5 kN/m³)",
+"es": "E<sub>s</sub> = 200 000 N/mm² · peso específico como el acero estructural (78,5 kN/m³)"
+},
+"28-163": {
+"fr": "Poteau d'angle (β = 1,50)",
+"es": "Pilar de esquina (β = 1,50)"
+},
+"28-164": {
+"fr": "Module d'élasticité effectif pour les déformations à long terme : E<sub>c,eff</sub> = E<sub>cm</sub> / (1 + φ(∞, t<sub>0</sub>))",
+"es": "Módulo de elasticidad efectivo para deformaciones a largo plazo: E<sub>c,eff</sub> = E<sub>cm</sub> / (1 + φ(∞, t<sub>0</sub>))"
+},
+"28-165": {
+"fr": "Poutre sur deux appuis (l₀ = l)",
+"es": "Viga biapoyada (l₀ = l)"
+},
+"28-166": {
+"fr": "Poutre sur deux appuis, dalle simplement appuyée",
+"es": "Viga biapoyada, losa simplemente apoyada"
+},
+"28-167": {
+"fr": "Combinaison d'actions",
+"es": "Combinación de acciones"
+},
+"28-168": {
+"fr": "Travée de rive (0,85·l)",
+"es": "Vano extremo (0,85·l)"
+},
+"28-169": {
+"fr": "Travée de rive d'une poutre continue",
+"es": "Vano extremo de una viga continua"
+},
+"28-170": {
+"fr": "Longueur de flambement et élancement",
+"es": "Longitud de pandeo y esbeltez"
+},
+"28-171": {
+"fr": "Classes d'exposition pour la corrosion des armatures",
+"es": "Clases de exposición para la corrosión de la armadura"
+},
+"28-172": {
+"fr": "Modèle de treillis",
+"es": "Modelo de celosía"
+},
+"28-173": {
+"fr": "Modèle de treillis : l'effort tranchant est repris par des bielles de béton comprimées inclinées (angle θ) et des étriers verticaux jouant le rôle de tirants.",
+"es": "Modelo de celosía: el esfuerzo cortante se transmite mediante bielas de hormigón comprimidas inclinadas (ángulo θ) y estribos verticales que actúan como tirantes."
+},
+"28-174": {
+"fr": "Résistances en N/mm² · C25/30 : résistance cylindrique 25, résistance sur cube 30 · f_cd avec α<sub>cc</sub> = 0,85 et γ<sub>c</sub> = 1,5",
+"es": "Resistencias en N/mm² · C25/30: resistencia cilíndrica 25, resistencia cúbica 30 · f_cd con α<sub>cc</sub> = 0,85 y γ<sub>c</sub> = 1,5"
+},
+"28-175": {
+"fr": "Classes de résistance — EN 1992-1-1, Tab. 3.1",
+"es": "Clases de resistencia — EN 1992-1-1, Tab. 3.1"
+},
+"28-176": {
+"fr": "Plancher-dalle (sur poteaux, grande portée)",
+"es": "Losa plana (sobre pilares, mayor luz)"
+}
+}

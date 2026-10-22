@@ -1,0 +1,1050 @@
+{
+ "31-0": {
+  "fr": "Élancement en flexion l = {} m, d = {} cm",
+  "es": "Esbeltez a flexión l = {} m, d = {} cm"
+ },
+ "31-1": {
+  "fr": "§Élancement existant",
+  "es": "§Esbeltez existente"
+ },
+ "31-2": {
+  "fr": "avec éléments de second œuvre sensibles aux déformations : l/d ≤ K² · 150 / l = {}² · 150 / {} = {} → {}",
+  "es": "con elementos de acabado sensibles a las deformaciones: l/d ≤ K² · 150 / l = {}² · 150 / {} = {} → {}"
+ },
+ "31-3": {
+  "fr": "non respecté",
+  "es": "no se cumple"
+ },
+ "31-4": {
+  "fr": "<div class=\"calc-field\"><label>Hauteur utile d [cm]</label><input type=\"number\" id=\"rb-d\" value=\"21\" step=\"any\" oninput=\"updateRiss()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Canto útil d [cm]</label><input type=\"number\" id=\"rb-d\" value=\"21\" step=\"any\" oninput=\"updateRiss()\"></div>"
+ },
+ "31-5": {
+  "fr": "<div class=\"calc-field\"><label>Ø des barres [mm]</label><input type=\"number\" id=\"rb-ds\" value=\"12\" step=\"any\" oninput=\"updateRiss()\"></div>",
+  "es": "<div class=\"calc-field\"><label>Ø de barra [mm]</label><input type=\"number\" id=\"rb-ds\" value=\"12\" step=\"any\" oninput=\"updateRiss()\"></div>"
+ },
+ "31-6": {
+  "fr": "<div class=\"calc-field\"><label>M quasi permanent [kNm]</label><input type=\"number\" id=\"rb-M\" value=\"45\" step=\"any\" oninput=\"updateRiss()\"></div>",
+  "es": "<div class=\"calc-field\"><label>M casi permanente [kNm]</label><input type=\"number\" id=\"rb-M\" value=\"45\" step=\"any\" oninput=\"updateRiss()\"></div>"
+ },
+ "31-7": {
+  "fr": "Ouverture de fissure, M = {} kNm (quasi permanent)",
+  "es": "Ancho de fisura, M = {} kNm (casi permanente)"
+ },
+ "31-8": {
+  "fr": "§Contrainte de l'acier à l'état II",
+  "es": "§Tensión del acero en el estado II (fisurado)"
+ },
+ "31-9": {
+  "fr": "§Différence de déformation (long terme, k<sub>t</sub> = 0,4)",
+  "es": "§Diferencia de deformación (largo plazo, k<sub>t</sub> = 0,4)"
+ },
+ "31-10": {
+  "fr": "!À titre de comparaison, sans calcul direct (Tab. 7.2DE) : Ø* · f<sub>ct,eff</sub>/2,9 = {} mm {} Ø = {} mm",
+  "es": "!A modo de comparación, sin cálculo directo (Tab. 7.2DE): Ø* · f<sub>ct,eff</sub>/2,9 = {} mm {} Ø = {} mm"
+ },
+ "31-11": {
+  "fr": "107,2 % de v<sub>v</sub>",
+  "es": "107,2 % de v<sub>v</sub>"
+ },
+ "31-12": {
+  "fr": "67,2 % de Q<sub>v</sub>",
+  "es": "67,2 % de Q<sub>v</sub>"
+ },
+ "31-13": {
+  "fr": "<a class=\"applink\" href=\"#/grundbau/flach/sohldruck\">→ Poussée d'Archimède sur les ouvrages : vérification UPL dans statiq·size (Géotechnique)</a>",
+  "es": "<a class=\"applink\" href=\"#/grundbau/flach/sohldruck\">→ Flotación en estructuras: comprobación UPL en statiq·size (Geotecnia)</a>"
+ },
+ "31-14": {
+  "fr": "<a class=\"applink\" href=\"size.html\">→ Avec ligne d'énergie et ligne piézométrique dans statiq·size (Hydraulique → Conduite)</a>",
+  "es": "<a class=\"applink\" href=\"size.html\">→ Con línea de energía y línea piezométrica en statiq·size (Hidráulica → Tubería)</a>"
+ },
+ "31-15": {
+  "fr": "<a class=\"applink\" href=\"size.html\">→ Hauteur d'eau normale pour un Q donné dans statiq·size (Hydraulique → Canal)</a>",
+  "es": "<a class=\"applink\" href=\"size.html\">→ Calado normal para un Q dado en statiq·size (Hidráulica → Canal)</a>"
+ },
+ "31-16": {
+  "fr": "<a class=\"applink\" href=\"size.html\">→ Pression de l'eau avec contre-pression dans statiq·size (Hydraulique)</a>",
+  "es": "<a class=\"applink\" href=\"size.html\">→ Presión del agua con contrapresión en statiq·size (Hidráulica)</a>"
+ },
+ "31-17": {
+  "fr": "<a class=\"applink\" href=\"size.html\">→ Charge sur le déversoir pour un Q donné dans statiq·size (Hydraulique → Déversoir)</a>",
+  "es": "<a class=\"applink\" href=\"size.html\">→ Altura de vertido para un Q dado en statiq·size (Hidráulica → Vertedero)</a>"
+ },
+ "31-18": {
+  "fr": "<span class=\"st-n\">1</span><span>Surface contributive au ruissellement</span>",
+  "es": "<span class=\"st-n\">1</span><span>Superficie efectiva de escorrentía</span>"
+ },
+ "31-19": {
+  "fr": "<span class=\"st-n\">1</span><span>Écoulement pour h<sub>1</sub> = 2,00 m</span>",
+  "es": "<span class=\"st-n\">1</span><span>Salida de agua para h<sub>1</sub> = 2,00 m</span>"
+ },
+ "31-20": {
+  "fr": "<span class=\"st-n\">1</span><span>Célérité de l'onde de pression</span>",
+  "es": "<span class=\"st-n\">1</span><span>Celeridad de la onda de presión</span>"
+ },
+ "31-21": {
+  "fr": "<span class=\"st-n\">1</span><span>Vitesse d'écoulement</span>",
+  "es": "<span class=\"st-n\">1</span><span>Velocidad del flujo</span>"
+ },
+ "31-22": {
+  "fr": "<span class=\"st-n\">1</span><span>Hauteur manométrique de l'installation</span>",
+  "es": "<span class=\"st-n\">1</span><span>Altura manométrica de la instalación</span>"
+ },
+ "31-23": {
+  "fr": "<span class=\"st-n\">1</span><span>État critique : Fr = 1, soit Q² · B / (g · A³) = 1</span>",
+  "es": "<span class=\"st-n\">1</span><span>Estado crítico: Fr = 1, es decir, Q² · B / (g · A³) = 1</span>"
+ },
+ "31-24": {
+  "fr": "<span class=\"st-n\">1</span><span>Rayon d'influence (Sichardt)</span>",
+  "es": "<span class=\"st-n\">1</span><span>Radio de influencia (Sichardt)</span>"
+ },
+ "31-25": {
+  "fr": "<span class=\"st-n\">1</span><span>Propriétés à 10,0 °C (interpolées)</span>",
+  "es": "<span class=\"st-n\">1</span><span>Propiedades a 10,0 °C (interpoladas)</span>"
+ },
+ "31-26": {
+  "fr": "<span class=\"st-n\">1</span><span>Pleine section</span>",
+  "es": "<span class=\"st-n\">1</span><span>Sección llena</span>"
+ },
+ "31-27": {
+  "fr": "<span class=\"st-n\">1</span><span>Écoulement amont (torrentiel)</span>",
+  "es": "<span class=\"st-n\">1</span><span>Flujo de entrada (supercrítico)</span>"
+ },
+ "31-28": {
+  "fr": "<span class=\"st-n\">2</span><span>Débit de calcul</span>",
+  "es": "<span class=\"st-n\">2</span><span>Caudal de cálculo</span>"
+ },
+ "31-29": {
+  "fr": "<span class=\"st-n\">2</span><span>Vidange d'un réservoir prismatique (surface de base A<sub>B</sub> = 10,00 m²)</span>",
+  "es": "<span class=\"st-n\">2</span><span>Vaciado de un depósito prismático (superficie de base A<sub>B</sub> = 10,00 m²)</span>"
+ },
+ "31-30": {
+  "fr": "<span class=\"st-n\">2</span><span>Vitesse d'écoulement et débit</span>",
+  "es": "<span class=\"st-n\">2</span><span>Velocidad del flujo y caudal</span>"
+ },
+ "31-31": {
+  "fr": "<span class=\"st-n\">2</span><span>Débit de pompage (Dupuit-Thiem)</span>",
+  "es": "<span class=\"st-n\">2</span><span>Caudal de bombeo (Dupuit-Thiem)</span>"
+ },
+ "31-32": {
+  "fr": "<span class=\"st-n\">2</span><span>Hauteur conjuguée (théorème de la quantité de mouvement)</span>",
+  "es": "<span class=\"st-n\">2</span><span>Calado conjugado (ecuación de la cantidad de movimiento)</span>"
+ },
+ "31-33": {
+  "fr": "<span class=\"st-n\">2</span><span>Puissance</span>",
+  "es": "<span class=\"st-n\">2</span><span>Potencia</span>"
+ },
+ "31-34": {
+  "fr": "<span class=\"st-n\">2</span><span>Temps de réflexion</span>",
+  "es": "<span class=\"st-n\">2</span><span>Tiempo de reflexión</span>"
+ },
+ "31-35": {
+  "fr": "<span class=\"st-n\">2</span><span>Nombre de Reynolds (10,0 °C : ν = 1,306 · 10⁻⁶ m²/s)</span>",
+  "es": "<span class=\"st-n\">2</span><span>Número de Reynolds (10,0 °C: ν = 1,306 · 10⁻⁶ m²/s)</span>"
+ },
+ "31-36": {
+  "fr": "<span class=\"st-n\">2</span><span>Nombre de Reynolds (inertie / viscosité)</span>",
+  "es": "<span class=\"st-n\">2</span><span>Número de Reynolds (inercia / viscosidad)</span>"
+ },
+ "31-37": {
+  "fr": "<span class=\"st-n\">2</span><span>Remplissage partiel h/D = 0,600 (h = 240 mm)</span>",
+  "es": "<span class=\"st-n\">2</span><span>Llenado parcial h/D = 0,600 (h = 240 mm)</span>"
+ },
+ "31-38": {
+  "fr": "<span class=\"st-n\">2</span><span>État pour h = 1,200 m</span>",
+  "es": "<span class=\"st-n\">2</span><span>Estado para h = 1,200 m</span>"
+ },
+ "31-39": {
+  "fr": "<span class=\"st-n\">3</span><span>Coup de bélier (Joukowsky)</span>",
+  "es": "<span class=\"st-n\">3</span><span>Golpe de ariete (Joukowsky)</span>"
+ },
+ "31-40": {
+  "fr": "<span class=\"st-n\">3</span><span>Perte d'énergie</span>",
+  "es": "<span class=\"st-n\">3</span><span>Pérdida de energía</span>"
+ },
+ "31-41": {
+  "fr": "<span class=\"st-n\">3</span><span>Régime d'écoulement</span>",
+  "es": "<span class=\"st-n\">3</span><span>Régimen de flujo</span>"
+ },
+ "31-42": {
+  "fr": "<span class=\"st-n\">3</span><span>Cavitation : NPSH<sub>A</sub> = p<sub>a</sub>/(ρg) − p<sub>D</sub>/(ρg) − h<sub>s,geo</sub> − h<sub>v,s</sub></span>",
+  "es": "<span class=\"st-n\">3</span><span>Cavitación: NPSH<sub>A</sub> = p<sub>a</sub>/(ρg) − p<sub>D</sub>/(ρg) − h<sub>s,geo</sub> − h<sub>v,s</sub></span>"
+ },
+ "31-43": {
+  "fr": "<span class=\"st-n\">3</span><span>Coefficient de frottement</span>",
+  "es": "<span class=\"st-n\">3</span><span>Coeficiente de rozamiento</span>"
+ },
+ "31-44": {
+  "fr": "<span class=\"st-n\">4</span><span>Pertes de charge</span>",
+  "es": "<span class=\"st-n\">4</span><span>Pérdidas de carga</span>"
+ },
+ "31-45": {
+  "fr": "= 2,719 m (49,5 % de E<sub>1</sub>)",
+  "es": "= 2,719 m (49,5 % de E<sub>1</sub>)"
+ },
+ "31-46": {
+  "fr": "= 54,7 m³/h · rabattement dans le puits s = 3,00 m, niveau d'eau dans le puits h = 9,00 m",
+  "es": "= 54,7 m³/h · descenso en el pozo s = 3,00 m, nivel de agua en el pozo h = 9,00 m"
+ },
+ "31-47": {
+  "fr": "Débit Q [m³/s]",
+  "es": "Caudal Q [m³/s]"
+ },
+ "31-48": {
+  "fr": "Calculer le débit",
+  "es": "Calcular el caudal"
+ },
+ "31-49": {
+  "fr": "Coefficient de ruissellement ψ",
+  "es": "Coeficiente de escorrentía ψ"
+ },
+ "31-50": {
+  "fr": "Fréquence de détachement tourbillonnaire",
+  "es": "Frecuencia de desprendimiento de vórtices"
+ },
+ "31-51": {
+  "fr": "Rabattement s [m]",
+  "es": "Descenso s [m]"
+ },
+ "31-52": {
+  "fr": "Vanne papillon ouverte",
+  "es": "Válvula de mariposa abierta"
+ },
+ "31-53": {
+  "fr": "Vanne à opercule ouverte",
+  "es": "Válvula de compuerta abierta"
+ },
+ "31-54": {
+  "fr": "Lois de similitude lors d'un changement de vitesse de rotation : Q ~ n · H ~ n² · P ~ n³",
+  "es": "Leyes de afinidad al variar la velocidad de giro: Q ~ n · H ~ n² · P ~ n³"
+ },
+ "31-55": {
+  "fr": "Valeurs indicatives (coefficients de ruissellement de pointe) ; en projet, selon DIN 1986-100 ou DWA-A 118 et expertises.",
+  "es": "Valores orientativos (coeficientes de escorrentía punta); en proyecto, según DIN 1986-100 o DWA-A 118 y dictámenes técnicos."
+ },
+ "31-56": {
+  "fr": "Valeurs indicatives issues de la littérature — en projet, utiliser les indications du fabricant.",
+  "es": "Valores orientativos de la bibliografía — en proyecto, utilizar los datos del fabricante."
+ },
+ "31-57": {
+  "fr": "Valeurs indicatives. L'inverse n = 1/k<sub>St</sub> s'appelle coefficient de Manning.",
+  "es": "Valores orientativos. La inversa n = 1/k<sub>St</sub> se denomina coeficiente de Manning."
+ },
+ "31-58": {
+  "fr": "Courbe caractéristique de l'installation H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (les pertes croissent avec Q²) · point de fonctionnement = intersection avec la courbe de la pompe",
+  "es": "Curva característica de la instalación H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (las pérdidas crecen con Q²) · punto de funcionamiento = intersección con la curva de la bomba"
+ },
+ "31-59": {
+  "fr": "Asphalte, béton sans joints",
+  "es": "Asfalto, hormigón sin juntas"
+ },
+ "31-60": {
+  "fr": "Poussée d'Archimède",
+  "es": "Empuje de Arquímedes"
+ },
+ "31-61": {
+  "fr": "Écoulement par un orifice",
+  "es": "Salida de agua por un orificio"
+ },
+ "31-62": {
+  "fr": "Écoulement par un orifice (Torricelli)",
+  "es": "Salida de agua por un orificio (Torricelli)"
+ },
+ "31-63": {
+  "fr": "Calculer l'écoulement et le temps de vidange",
+  "es": "Calcular el caudal de salida y el tiempo de vaciado"
+ },
+ "31-64": {
+  "fr": "Écoulement sous la surface de l'eau : vitesse identique à celle d'une chute libre de hauteur h.",
+  "es": "Salida de agua bajo la superficie libre: velocidad igual a la de una caída libre desde la altura h."
+ },
+ "31-65": {
+  "fr": "Coefficient de débit μ",
+  "es": "Coeficiente de descarga μ"
+ },
+ "31-66": {
+  "fr": "Sortie dans le bassin",
+  "es": "Descarga al depósito"
+ },
+ "31-67": {
+  "fr": "Surface de base du réservoir A<sub>B</sub> [m²] (0 = sans)",
+  "es": "Superficie de base del depósito A<sub>B</sub> [m²] (0 = sin)"
+ },
+ "31-68": {
+  "fr": "Sur les surfaces circulaires, toutes les forces de pression passent par le centre — la résultante aussi. Si l'eau se trouve sous la surface, F<sub>V</sub> agit vers le haut.",
+  "es": "En superficies circulares todas las fuerzas de presión pasan por el centro, y la resultante también. Si el agua está debajo de la superficie, F<sub>V</sub> actúa hacia arriba."
+ },
+ "31-69": {
+  "fr": "Pour h/D ≈ 0,94, le débit est maximal (environ 107 % de Q<sub>v</sub>), pour h/D ≈ 0,81 la vitesse. Les collecteurs sont dimensionnés pour un remplissage partiel ; vitesse minimale contre les dépôts environ 0,5 m/s.",
+  "es": "Para h/D ≈ 0,94 el caudal es máximo (aproximadamente 107 % de Q<sub>v</sub>); para h/D ≈ 0,81, la velocidad. Los colectores se dimensionan para llenado parcial; velocidad mínima contra los depósitos de sedimentos, aproximadamente 0,5 m/s."
+ },
+ "31-70": {
+  "fr": "Lors du passage du régime torrentiel au régime fluvial, il se forme un ressaut hydraulique — beaucoup d'énergie y est dissipée (bassins de dissipation en aval des déversoirs).",
+  "es": "En la transición de régimen supercrítico a subcrítico se produce un resalto hidráulico, donde se disipa mucha energía (cuencos amortiguadores aguas abajo de los vertederos)."
+ },
+ "31-71": {
+  "fr": "Exemple quart de cercle r = h = 2,0 m, largeur 1 m :<br> F<sub>H</sub> = 10 · 2,0²/2 = <b>20 kN</b> · V<sub>W</sub> = π·r²/4 = 3,14 m³ (quart de cercle au-dessus de la surface) → F<sub>V</sub> = <b>31,4 kN</b> (vers le haut) · F = <b>37,2 kN</b>",
+  "es": "Ejemplo cuarto de círculo r = h = 2,0 m, ancho 1 m:<br> F<sub>H</sub> = 10 · 2,0²/2 = <b>20 kN</b> · V<sub>W</sub> = π·r²/4 = 3,14 m³ (cuarto de círculo sobre la superficie) → F<sub>V</sub> = <b>31,4 kN</b> (hacia arriba) · F = <b>37,2 kN</b>"
+ },
+ "31-72": {
+  "fr": "Exemple : ponton 10 × 6 m, t = 0,80 m, G à 1,20 m de hauteur.<br> V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3,75 m · e = 1,20 − 0,40 = 0,80 m → h<sub>M</sub> = <b>2,95 m</b> &gt; 0 → stable",
+  "es": "Ejemplo: pontón 10 × 6 m, t = 0,80 m, G a 1,20 m de altura.<br> V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3,75 m · e = 1,20 − 0,40 = 0,80 m → h<sub>M</sub> = <b>2,95 m</b> &gt; 0 → estable"
+ },
+ "31-73": {
+  "fr": "Exemple : vanne 1 × 2 m (l = 2 m dans le sens de l'inclinaison), α = 60°, arête supérieure à y = 1,0 m.<br> y<sub>s</sub> = 2,0 m, h<sub>s</sub> = 2,0 · sin 60° = 1,73 m → F = 10 · 1,73 · 2,0 = <b>34,6 kN</b> · y<sub>D</sub> = 2,0 + (1·2³/12)/(2,0·2,0) = <b>2,17 m</b>",
+  "es": "Ejemplo: compuerta 1 × 2 m (l = 2 m en el sentido de la inclinación), α = 60°, borde superior en y = 1,0 m.<br> y<sub>s</sub> = 2,0 m, h<sub>s</sub> = 2,0 · sin 60° = 1,73 m → F = 10 · 1,73 · 2,0 = <b>34,6 kN</b> · y<sub>D</sub> = 2,0 + (1·2³/12)/(2,0·2,0) = <b>2,17 m</b>"
+ },
+ "31-74": {
+  "fr": "Exemple : h = 3,0 m, b = 1 m → F = 10 · 3,0²/2 = <b>45 kN/m</b>, M = 45 · 1,0 = <b>45 kNm/m</b> (avec γ<sub>w</sub> = 10 kN/m³).",
+  "es": "Ejemplo: h = 3,0 m, b = 1 m → F = 10 · 3,0²/2 = <b>45 kN/m</b>, M = 45 · 1,0 = <b>45 kNm/m</b> (con γ<sub>w</sub> = 10 kN/m³)."
+ },
+ "31-75": {
+  "fr": "Exemple : orifice d = 10 cm, à arêtes vives, h = 2,0 m → v = √(2·9,81·2,0) = 6,26 m/s, Q = 0,62 · 0,00785 · 6,26 = <b>30,5 l/s</b>",
+  "es": "Ejemplo: orificio d = 10 cm, de arista viva, h = 2,0 m → v = √(2·9,81·2,0) = 6,26 m/s, Q = 0,62 · 0,00785 · 6,26 = <b>30,5 l/s</b>"
+ },
+ "31-76": {
+  "fr": "Coefficient μ",
+  "es": "Coeficiente μ"
+ },
+ "31-77": {
+  "fr": "Section mouillée A et périmètre mouillé U (en bleu, sans la surface libre), pente de berge 1 : m.",
+  "es": "Sección mojada A y perímetro mojado U (en azul, sin la superficie libre), inclinación del talud 1 : m."
+ },
+ "31-78": {
+  "fr": "Équation de Bernoulli (charge)",
+  "es": "Ecuación de Bernoulli (altura de energía)"
+ },
+ "31-79": {
+  "fr": "Bernoulli : ligne d'énergie et ligne piézométrique",
+  "es": "Bernoulli: línea de energía y línea piezométrica"
+ },
+ "31-80": {
+  "fr": "Béton, lisse",
+  "es": "Hormigón, liso"
+ },
+ "31-81": {
+  "fr": "Béton, coffrage lisse",
+  "es": "Hormigón, encofrado liso"
+ },
+ "31-82": {
+  "fr": "Béton, rugueux",
+  "es": "Hormigón, rugoso"
+ },
+ "31-83": {
+  "fr": "Béton, rugueux / ancien",
+  "es": "Hormigón, rugoso / viejo"
+ },
+ "31-84": {
+  "fr": "Évaluation",
+  "es": "Valoración"
+ },
+ "31-85": {
+  "fr": "Puits et rabattement de nappe (Dupuit-Thiem)",
+  "es": "Pozos y drenaje del terreno (Dupuit-Thiem)"
+ },
+ "31-86": {
+  "fr": "Puits, nappe libre",
+  "es": "Pozo, agua subterránea libre (no confinada)"
+ },
+ "31-87": {
+  "fr": "Rayon du puits r [m]",
+  "es": "Radio del pozo r [m]"
+ },
+ "31-88": {
+  "fr": "Pente de berge m (0 = rectangle)",
+  "es": "Talud m (0 = rectángulo)"
+ },
+ "31-89": {
+  "fr": "Toitures, métal, verre",
+  "es": "Cubiertas, metal, vidrio"
+ },
+ "31-90": {
+  "fr": "Toitures, tuiles, carton bitumé",
+  "es": "Cubiertas, tejas, fieltro asfáltico"
+ },
+ "31-91": {
+  "fr": "La pression croît linéairement avec la profondeur h sous la surface libre et agit toujours perpendiculairement à la surface — quelle que soit son inclinaison.",
+  "es": "La presión aumenta linealmente con la profundidad h bajo la superficie libre y actúa siempre perpendicularmente a la superficie, independientemente de su inclinación."
+ },
+ "31-92": {
+  "fr": "La poussée d'Archimède s'applique au centre de gravité B du volume d'eau déplacé.",
+  "es": "El empuje se aplica en el centro de gravedad B del volumen de agua desplazado."
+ },
+ "31-93": {
+  "fr": "Nombres sans dimension",
+  "es": "Números adimensionales"
+ },
+ "31-94": {
+  "fr": "Pression / inertie",
+  "es": "Presión / inercia"
+ },
+ "31-95": {
+  "fr": "Coefficients de pression, nombre de cavitation",
+  "es": "Coeficientes de presión, número de cavitación"
+ },
+ "31-96": {
+  "fr": "Coup de bélier dans les conduites (Joukowsky)",
+  "es": "Golpe de ariete en tuberías (Joukowsky)"
+ },
+ "31-97": {
+  "fr": "Perte de pression Δp = ρ · g · h<sub>v</sub> = 60,4 kPa = 0,604 bar",
+  "es": "Pérdida de presión Δp = ρ · g · h<sub>v</sub> = 60,4 kPa = 0,604 bar"
+ },
+ "31-98": {
+  "fr": "Débit Q [l/s]",
+  "es": "Caudal Q [l/s]"
+ },
+ "31-99": {
+  "fr": "Diamètre D [mm]",
+  "es": "Diámetro D [mm]"
+ },
+ "31-100": {
+  "fr": "E = h + v²/(2g)&nbsp;&nbsp;&nbsp; Fr = v / √(g·h)<br> Section rectangulaire (q = Q/b) :&nbsp; h<sub>gr</sub> = ∛(q²/g)&nbsp;&nbsp;&nbsp; E<sub>min</sub> = 1,5 · h<sub>gr</sub>&nbsp;&nbsp;&nbsp; v<sub>gr</sub> = √(g·h<sub>gr</sub>)",
+  "es": "E = h + v²/(2g)&nbsp;&nbsp;&nbsp; Fr = v / √(g·h)<br> Sección rectangular (q = Q/b):&nbsp; h<sub>gr</sub> = ∛(q²/g)&nbsp;&nbsp;&nbsp; E<sub>min</sub> = 1,5 · h<sub>gr</sub>&nbsp;&nbsp;&nbsp; v<sub>gr</sub> = √(g·h<sub>gr</sub>)"
+ },
+ "31-101": {
+  "fr": "E(h) pour un débit q fixé : toute énergie supérieure à E<sub>min</sub> est possible avec deux hauteurs — fluviale ou torrentielle.",
+  "es": "E(h) para un caudal q fijo: toda energía superior a E<sub>min</sub> es posible con dos calados: régimen subcrítico o supercrítico."
+ },
+ "31-102": {
+  "fr": "Module d'élasticité du tuyau [GN/m²]",
+  "es": "Módulo de elasticidad de la tubería [GN/m²]"
+ },
+ "31-103": {
+  "fr": "LE — ligne d'énergie (horizontale sans pertes), LP — ligne piézométrique. Dans le rétrécissement, v augmente et la pression diminue.",
+  "es": "LE — línea de energía (horizontal sin pérdidas), LP — línea piezométrica. En el estrechamiento v aumenta y la presión disminuye."
+ },
+ "31-104": {
+  "fr": "Entrée bien arrondie",
+  "es": "Entrada bien redondeada"
+ },
+ "31-105": {
+  "fr": "Entrée à arêtes vives",
+  "es": "Entrada de arista viva"
+ },
+ "31-106": {
+  "fr": "Classification selon Chow (1959) ; les limites sont progressives.",
+  "es": "Clasificación según Chow (1959); los límites no son nítidos."
+ },
+ "31-107": {
+  "fr": "Niveau d'eau final h<sub>2</sub> [m]",
+  "es": "Nivel de agua final h<sub>2</sub> [m]"
+ },
+ "31-108": {
+  "fr": "Perte d'énergie ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · longueur L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)",
+  "es": "Pérdida de energía ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · longitud L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)"
+ },
+ "31-109": {
+  "fr": "Vidange d'un réservoir de surface de base constante A<sub>B</sub> de h<sub>1</sub> à h<sub>2</sub> : de A<sub>B</sub> · dh = −Q · dt on déduit t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)",
+  "es": "Vaciado de un depósito de superficie de base constante A<sub>B</sub> de h<sub>1</sub> a h<sub>2</sub>: de A<sub>B</sub> · dh = −Q · dt se obtiene t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)"
+ },
+ "31-110": {
+  "fr": "Accélération de la pesanteur g",
+  "es": "Aceleración de la gravedad g"
+ },
+ "31-111": {
+  "fr": "Canal en terre, rectiligne, propre",
+  "es": "Canal en tierra, recto, limpio"
+ },
+ "31-112": {
+  "fr": "Élargissement brusque",
+  "es": "Ensanchamiento brusco"
+ },
+ "31-113": {
+  "fr": "F = γ<sub>w</sub> · h<sub>s</sub> · A&nbsp;&nbsp;&nbsp; (h<sub>s</sub> — profondeur du centre de gravité de la surface)<br> y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub> / (y<sub>s</sub> · A)&nbsp;&nbsp;&nbsp; avec h<sub>s</sub> = y<sub>s</sub> · sin α",
+  "es": "F = γ<sub>w</sub> · h<sub>s</sub> · A&nbsp;&nbsp;&nbsp; (h<sub>s</sub> — profundidad del centro de gravedad de la superficie)<br> y<sub>D</sub> = y<sub>s</sub> + I<sub>s</sub> / (y<sub>s</sub> · A)&nbsp;&nbsp;&nbsp; con h<sub>s</sub> = y<sub>s</sub> · sin α"
+ },
+ "31-114": {
+  "fr": "F<sub>A</sub> = γ<sub>w</sub> · V<sub>déplacé</sub>&nbsp;&nbsp;&nbsp; Flottaison : F<sub>A</sub> = G",
+  "es": "F<sub>A</sub> = γ<sub>w</sub> · V<sub>desplazado</sub>&nbsp;&nbsp;&nbsp; Flotación: F<sub>A</sub> = G"
+ },
+ "31-115": {
+  "fr": "F<sub>H</sub> = γ<sub>w</sub> · h<sub>s,proj</sub> · A<sub>proj</sub>&nbsp;&nbsp;&nbsp; (comme pour une paroi verticale ayant la surface projetée)<br> F<sub>V</sub> = γ<sub>w</sub> · V<sub>W</sub>&nbsp;&nbsp;&nbsp; (poids du volume d'eau — réel ou fictif — compris entre la surface et le plan d'eau)<br> F = √(F<sub>H</sub>² + F<sub>V</sub>²)",
+  "es": "F<sub>H</sub> = γ<sub>w</sub> · h<sub>s,proj</sub> · A<sub>proj</sub>&nbsp;&nbsp;&nbsp; (como en un muro vertical con la superficie proyectada)<br> F<sub>V</sub> = γ<sub>w</sub> · V<sub>W</sub>&nbsp;&nbsp;&nbsp; (peso del volumen de agua, real o imaginario, comprendido entre la superficie y el nivel del agua)<br> F = √(F<sub>H</sub>² + F<sub>V</sub>²)"
+ },
+ "31-116": {
+  "fr": "Capacité d'un puits selon Sichardt : q<sub>max</sub> = 2π · r · h · √k / 15 (limite de la vitesse d'entrée)",
+  "es": "Capacidad de un pozo según Sichardt: q<sub>max</sub> = 2π · r · h · √k / 15 (límite de la velocidad de entrada)"
+ },
+ "31-117": {
+  "fr": "Toiture-terrasse avec gravier",
+  "es": "Cubierta plana con grava"
+ },
+ "31-118": {
+  "fr": "Formule d'écoulement de Gauckler-Manning-Strickler",
+  "es": "Fórmula de flujo de Gauckler-Manning-Strickler"
+ },
+ "31-119": {
+  "fr": "Régime d'écoulement",
+  "es": "Régimen de flujo"
+ },
+ "31-120": {
+  "fr": "Cours d'eau avec végétation",
+  "es": "Río con vegetación"
+ },
+ "31-121": {
+  "fr": "Surface 1 [m²] / ψ",
+  "es": "Superficie 1 [m²] / ψ"
+ },
+ "31-122": {
+  "fr": "Surface 1 : 450 m² · ψ = 0,90 → 405,0 m²",
+  "es": "Superficie 1: 450 m² · ψ = 0,90 → 405,0 m²"
+ },
+ "31-123": {
+  "fr": "Surface 2 [m²] / ψ",
+  "es": "Superficie 2 [m²] / ψ"
+ },
+ "31-124": {
+  "fr": "Surface 2 : 300 m² · ψ = 0,75 → 225,0 m²",
+  "es": "Superficie 2: 300 m² · ψ = 0,75 → 225,0 m²"
+ },
+ "31-125": {
+  "fr": "Surface 3 [m²] / ψ",
+  "es": "Superficie 3 [m²] / ψ"
+ },
+ "31-126": {
+  "fr": "Surface 3 : 200 m² · ψ = 0,15 → 30,0 m²",
+  "es": "Superficie 3: 200 m² · ψ = 0,15 → 30,0 m²"
+ },
+ "31-127": {
+  "fr": "Pièce de raccord",
+  "es": "Pieza especial"
+ },
+ "31-128": {
+  "fr": "Nombre de Froude",
+  "es": "Número de Froude"
+ },
+ "31-129": {
+  "fr": "Débit de la pompe Q [l/s]",
+  "es": "Caudal de la bomba Q [l/s]"
+ },
+ "31-130": {
+  "fr": "Taux de remplissage h/D",
+  "es": "Grado de llenado h/D"
+ },
+ "31-131": {
+  "fr": "G — centre de gravité du corps, B — centre de poussée, M — métacentre, h<sub>M</sub> — hauteur métacentrique.",
+  "es": "G — centro de gravedad del cuerpo, B — centro de carena (empuje), M — metacentro, h<sub>M</sub> — altura metacéntrica."
+ },
+ "31-132": {
+  "fr": "Pente I [‰]",
+  "es": "Pendiente I [‰]"
+ },
+ "31-133": {
+  "fr": "Surfaces courbes — décomposition en composantes",
+  "es": "Superficies curvas — descomposición en componentes"
+ },
+ "31-134": {
+  "fr": "Surface inclinée — force de pression et centre de poussée",
+  "es": "Superficie inclinada — fuerza de presión y centro de presiones"
+ },
+ "31-135": {
+  "fr": "Canal (L = 4R)",
+  "es": "Canal (L = 4R)"
+ },
+ "31-136": {
+  "fr": "Canal b = 3,00 m, h = 1,20 m, m = 0,00",
+  "es": "Canal b = 3,00 m, h = 1,20 m, m = 0,00"
+ },
+ "31-137": {
+  "fr": "Calculer le canal",
+  "es": "Calcular el canal"
+ },
+ "31-138": {
+  "fr": "Vitesse v [m/s]",
+  "es": "Velocidad v [m/s]"
+ },
+ "31-139": {
+  "fr": "Variation de vitesse Δv [m/s]",
+  "es": "Variación de velocidad Δv [m/s]"
+ },
+ "31-140": {
+  "fr": "Calculer la hauteur critique (section rectangulaire ou trapézoïdale)",
+  "es": "Calcular el calado crítico (sección rectangular o trapezoidal)"
+ },
+ "31-141": {
+  "fr": "Hauteur critique et régime d'écoulement",
+  "es": "Calado crítico y régimen de flujo"
+ },
+ "31-142": {
+  "fr": "Épaisseur de la nappe H [m]",
+  "es": "Espesor del acuífero H [m]"
+ },
+ "31-143": {
+  "fr": "Toiture végétalisée extensive (jusqu'à 10 cm)",
+  "es": "Cubierta ajardinada extensiva (hasta 10 cm)"
+ },
+ "31-144": {
+  "fr": "Toiture végétalisée intensive (plus de 25 cm)",
+  "es": "Cubierta ajardinada intensiva (más de 25 cm)"
+ },
+ "31-145": {
+  "fr": "Fonte, revêtue de bitume",
+  "es": "Fundición, con revestimiento bituminoso"
+ },
+ "31-146": {
+  "fr": "Fonte ductile",
+  "es": "Fundición dúctil"
+ },
+ "31-147": {
+  "fr": "H = z + p/(ρ·g) + v²/(2g) = const.&nbsp;&nbsp;&nbsp; (sans pertes)<br> avec pertes :&nbsp; z<sub>1</sub> + p<sub>1</sub>/(ρg) + v<sub>1</sub>²/(2g) = z<sub>2</sub> + p<sub>2</sub>/(ρg) + v<sub>2</sub>²/(2g) + h<sub>v</sub>",
+  "es": "H = z + p/(ρ·g) + v²/(2g) = const.&nbsp;&nbsp;&nbsp; (sin pérdidas)<br> con pérdidas:&nbsp; z<sub>1</sub> + p<sub>1</sub>/(ρg) + v<sub>1</sub>²/(2g) = z<sub>2</sub> + p<sub>2</sub>/(ρg) + v<sub>2</sub>²/(2g) + h<sub>v</sub>"
+ },
+ "31-148": {
+  "fr": "Pression hydrostatique",
+  "es": "Presión hidrostática"
+ },
+ "31-149": {
+  "fr": "I — moment quadratique de la surface de flottaison par rapport à l'axe longitudinal (rectangle : L·B³/12), V — volume déplacé",
+  "es": "I — momento de inercia de la superficie de flotación respecto al eje longitudinal (rectángulo: L·B³/12), V — volumen desplazado"
+ },
+ "31-150": {
+  "fr": "I — pente du fond (en régime uniforme = pente de la surface libre et de la ligne d'énergie) · R — rayon hydraulique",
+  "es": "I — pendiente del fondo (en flujo uniforme = pendiente de la superficie libre y de la línea de energía) · R — radio hidráulico"
+ },
+ "31-151": {
+  "fr": "I<sub>s</sub> — moment quadratique par rapport à l'axe horizontal passant par le centre de gravité de la surface (rectangle : b·l³/12)",
+  "es": "I<sub>s</sub> — momento de inercia respecto al eje horizontal que pasa por el centro de gravedad de la superficie (rectángulo: b·l³/12)"
+ },
+ "31-152": {
+  "fr": "Dans le ressaut hydraulique, l'écoulement torrentiel devient fluvial. Le rouleau de surface transforme l'énergie en chaleur et en turbulence — la ligne d'énergie chute de ΔE.",
+  "es": "En el resalto hidráulico, el flujo supercrítico pasa a subcrítico. El rodillo superficial convierte energía en calor y turbulencia: la línea de energía desciende ΔE."
+ },
+ "31-153": {
+  "fr": "Théorème de la quantité de mouvement (canal rectangulaire) : h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)",
+  "es": "Ecuación de la cantidad de movimiento (canal rectangular): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)"
+ },
+ "31-154": {
+  "fr": "Diamètre intérieur d [mm]",
+  "es": "Diámetro interior d [mm]"
+ },
+ "31-155": {
+  "fr": "Cavitation : NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0,5 m (h<sub>s,geo</sub> &gt; 0 en aspiration)",
+  "es": "Cavitación: NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0,5 m (h<sub>s,geo</sub> &gt; 0 en aspiración)"
+ },
+ "31-156": {
+  "fr": "Nombre",
+  "es": "Número"
+ },
+ "31-157": {
+  "fr": "Nombres sans dimension",
+  "es": "Números adimensionales"
+ },
+ "31-158": {
+  "fr": "Coude 90° vif",
+  "es": "Codo de 90° en ángulo vivo"
+ },
+ "31-159": {
+  "fr": "Continuité",
+  "es": "Continuidad"
+ },
+ "31-160": {
+  "fr": "Conduite circulaire DN 400, I = 5,00 ‰",
+  "es": "Tubería circular DN 400, I = 5,00 ‰"
+ },
+ "31-161": {
+  "fr": "Coude 45°",
+  "es": "Codo de 45°"
+ },
+ "31-162": {
+  "fr": "Coude 90° (r/d = 1 … 4)",
+  "es": "Codo de 90° (r/d = 1 … 4)"
+ },
+ "31-163": {
+  "fr": "Longueur de la conduite L [m]",
+  "es": "Longitud de la tubería L [m]"
+ },
+ "31-164": {
+  "fr": "À gauche, la section pour votre taux de remplissage ; à droite, les courbes de remplissage partiel Q/Q<sub>v</sub> (bleu) et v/v<sub>v</sub> (orange) en fonction de h/D.",
+  "es": "A la izquierda, la sección para su grado de llenado; a la derecha, las curvas de llenado parcial Q/Q<sub>v</sub> (azul) y v/v<sub>v</sub> (naranja) en función de h/D."
+ },
+ "31-165": {
+  "fr": "Air (20 °C) ρ, ν",
+  "es": "Aire (20 °C) ρ, ν"
+ },
+ "31-166": {
+  "fr": "Pression atmosphérique p<sub>a</sub> [kPa]",
+  "es": "Presión atmosférica p<sub>a</sub> [kPa]"
+ },
+ "31-167": {
+  "fr": "Longueur L [m]",
+  "es": "Longitud L [m]"
+ },
+ "31-168": {
+  "fr": "Longueur L [m] (d ou 4R)",
+  "es": "Longitud L [m] (d o 4R)"
+ },
+ "31-169": {
+  "fr": "Maçonnerie, pavage",
+  "es": "Fábrica, adoquinado"
+ },
+ "31-170": {
+  "fr": "Eau de mer ρ",
+  "es": "Agua de mar ρ"
+ },
+ "31-171": {
+  "fr": "Les essais sur modèle en hydraulique sont le plus souvent construits en similitude de <b>Froude</b> (la gravité est déterminante) : les vitesses varient comme √λ, les débits comme λ<sup>5/2</sup> (λ = échelle des longueurs).",
+  "es": "Los ensayos en modelo reducido en hidráulica se construyen normalmente con semejanza de <b>Froude</b> (la gravedad es determinante): las velocidades escalan con √λ y los caudales con λ<sup>5/2</sup> (λ = escala de longitudes)."
+ },
+ "31-172": {
+  "fr": "Diagramme de Moody (Colebrook-White) : coefficient de frottement λ en fonction de Re pour différents k/d. Point : votre conduite.",
+  "es": "Diagrama de Moody (Colebrook-White): coeficiente de rozamiento λ en función de Re para distintos k/d. Punto: su tubería."
+ },
+ "31-173": {
+  "fr": "Diagramme de Moody : coefficient de frottement en fonction du nombre de Reynolds",
+  "es": "Diagrama de Moody: coeficiente de rozamiento en función del número de Reynolds"
+ },
+ "31-174": {
+  "fr": "Épaisseur M [m] (captive)",
+  "es": "Espesor M [m] (confinado)"
+ },
+ "31-175": {
+  "fr": "NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0,5 m de sécurité : 6,56 ≥ 4,00 m → pas de cavitation à craindre",
+  "es": "NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0,5 m de seguridad: 6,56 ≥ 4,00 m → no se prevé cavitación"
+ },
+ "31-176": {
+  "fr": "NPSH<sub>R</sub> de la pompe [m]",
+  "es": "NPSH<sub>R</sub> de la bomba [m]"
+ },
+ "31-177": {
+  "fr": "P<sub>arbre</sub>",
+  "es": "P<sub>eje</sub>"
+ },
+ "31-178": {
+  "fr": "Pavage à joints serrés",
+  "es": "Adoquinado con juntas selladas"
+ },
+ "31-179": {
+  "fr": "Pavage à joints ouverts, dalles gazon",
+  "es": "Adoquinado con juntas abiertas, losetas de césped"
+ },
+ "31-180": {
+  "fr": "Pompes — hauteur manométrique, puissance, NPSH",
+  "es": "Bombas — altura manométrica, potencia, NPSH"
+ },
+ "31-181": {
+  "fr": "Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) avec r en l/(s·ha) et A en ha (ou /10000 pour des m²)",
+  "es": "Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) con r en l/(s·ha) y A en ha (o /10000 si es en m²)"
+ },
+ "31-182": {
+  "fr": "Pelouses, jardins",
+  "es": "Césped, jardines"
+ },
+ "31-183": {
+  "fr": "Rugosité k [mm]",
+  "es": "Rugosidad k [mm]"
+ },
+ "31-184": {
+  "fr": "Ruissellement des eaux pluviales (méthode simplifiée du temps de parcours)",
+  "es": "Escorrentía de aguas pluviales (método simplificado del tiempo de recorrido)"
+ },
+ "31-185": {
+  "fr": "Ruissellement des eaux pluviales sur des surfaces",
+  "es": "Escorrentía de aguas pluviales sobre superficies"
+ },
+ "31-186": {
+  "fr": "Intensité pluviométrique r<sub>D,T</sub> [l/(s·ha)]",
+  "es": "Intensidad de lluvia r<sub>D,T</sub> [l/(s·ha)]"
+ },
+ "31-187": {
+  "fr": "Intensité pluviométrique r<sub>D,T</sub> selon KOSTRA-DWD (durée D, période de retour T) ; évacuation des toitures DIN 1986-100 : r<sub>5,2</sub> et évacuation de secours r<sub>5,100</sub>",
+  "es": "Intensidad de lluvia r<sub>D,T</sub> según KOSTRA-DWD (duración D, período de retorno T); evacuación de cubiertas DIN 1986-100: r<sub>5,2</sub> y evacuación de emergencia r<sub>5,100</sub>"
+ },
+ "31-188": {
+  "fr": "Perte de charge par frottement (Darcy-Weisbach)",
+  "es": "Pérdida de carga por rozamiento (Darcy-Weisbach)"
+ },
+ "31-189": {
+  "fr": "Rayon d'influence selon Sichardt R = 3000 · s · √k (s en m, k en m/s) — valeur empirique, uniquement pour le prédimensionnement",
+  "es": "Radio de influencia según Sichardt R = 3000 · s · √k (s en m, k en m/s): valor empírico, solo para predimensionamiento"
+ },
+ "31-190": {
+  "fr": "Calculer les nombres de Reynolds et de Froude",
+  "es": "Calcular los números de Reynolds y de Froude"
+ },
+ "31-191": {
+  "fr": "Conduite (L = d)",
+  "es": "Tubería (L = d)"
+ },
+ "31-192": {
+  "fr": "Conduite (L = d) : turbulent (Re &gt; 10⁴)",
+  "es": "Tubería (L = d): turbulento (Re &gt; 10⁴)"
+ },
+ "31-193": {
+  "fr": "Conduite : laminaire &lt; 2320, turbulent &gt; 10⁴ · canal avec L = 4R",
+  "es": "Tubería: laminar &lt; 2320, turbulento &gt; 10⁴ · canal con L = 4R"
+ },
+ "31-194": {
+  "fr": "Conduite DN 200, Q = 50,0 l/s",
+  "es": "Tubería DN 200, Q = 50,0 l/s"
+ },
+ "31-195": {
+  "fr": "Calculer la conduite",
+  "es": "Calcular la tubería"
+ },
+ "31-196": {
+  "fr": "Conduite entre deux réservoirs",
+  "es": "Tubería entre dos depósitos"
+ },
+ "31-197": {
+  "fr": "Matériau de la conduite",
+  "es": "Material de la tubería"
+ },
+ "31-198": {
+  "fr": "Clapet anti-retour",
+  "es": "Válvula de retención"
+ },
+ "31-199": {
+  "fr": "Hauteur d'aspiration h<sub>s,geo</sub> [m] (en charge : négative)",
+  "es": "Altura de aspiración h<sub>s,geo</sub> [m] (en carga: negativa)"
+ },
+ "31-200": {
+  "fr": "Crépine avec clapet de pied",
+  "es": "Cesta de aspiración con válvula de pie"
+ },
+ "31-201": {
+  "fr": "Célérité du son dans l'eau (10 °C)",
+  "es": "Velocidad del sonido en el agua (10 °C)"
+ },
+ "31-202": {
+  "fr": "Temps de fermeture t<sub>s</sub> = 0,80 s ≤ T<sub>r</sub> → fermeture rapide : coup de bélier de Joukowsky complet",
+  "es": "Tiempo de cierre t<sub>s</sub> = 0,80 s ≤ T<sub>r</sub> → cierre rápido: golpe de ariete de Joukowsky completo"
+ },
+ "31-203": {
+  "fr": "Temps de fermeture t<sub>s</sub> [s]",
+  "es": "Tiempo de cierre t<sub>s</sub> [s]"
+ },
+ "31-204": {
+  "fr": "Ponton flottant",
+  "es": "Pontón flotante"
+ },
+ "31-205": {
+  "fr": "Vanne segment (quart de cercle) : F<sub>H</sub> d'après la projection verticale, F<sub>V</sub> d'après le volume d'eau V<sub>W</sub> au-dessus de la surface.",
+  "es": "Compuerta de sector (cuarto de círculo): F<sub>H</sub> a partir de la proyección vertical, F<sub>V</sub> a partir del volumen de agua V<sub>W</sub> sobre la superficie."
+ },
+ "31-206": {
+  "fr": "Paroi verticale, largeur b :&nbsp; F = γ<sub>w</sub> · h² / 2 · b&nbsp;&nbsp;&nbsp; point d'application à h/3 au-dessus du fond<br> Moment au pied de la paroi :&nbsp; M = F · h/3 = γ<sub>w</sub> · h³ / 6 · b",
+  "es": "Muro vertical, ancho b:&nbsp; F = γ<sub>w</sub> · h² / 2 · b&nbsp;&nbsp;&nbsp; punto de aplicación a h/3 sobre el fondo<br> Momento en el pie del muro:&nbsp; M = F · h/3 = γ<sub>w</sub> · h³ / 6 · b"
+ },
+ "31-207": {
+  "fr": "Paroi verticale : diagramme triangulaire des pressions, résultante au tiers de la hauteur au-dessus du fond.",
+  "es": "Muro vertical: diagrama triangular de presiones, resultante en el tercio inferior, a h/3 sobre el fondo."
+ },
+ "31-208": {
+  "fr": "Largeur au fond b [m]",
+  "es": "Ancho de fondo b [m]"
+ },
+ "31-209": {
+  "fr": "Énergie spécifique et hauteur critique",
+  "es": "Energía específica y calado crítico"
+ },
+ "31-210": {
+  "fr": "Énergie spécifique, hauteur critique, nombre de Froude",
+  "es": "Energía específica, calado crítico, número de Froude"
+ },
+ "31-211": {
+  "fr": "Type de ressaut",
+  "es": "Tipo de resalto"
+ },
+ "31-212": {
+  "fr": "Longueur du ressaut (valeur indicative pour le bassin de dissipation) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = 13,58 m · ressaut stable (favorable)",
+  "es": "Longitud del resalto (valor orientativo para el cuenco amortiguador) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = 13,58 m · resalto estable (favorable)"
+ },
+ "31-213": {
+  "fr": "Acier, neuf",
+  "es": "Acero, nuevo"
+ },
+ "31-214": {
+  "fr": "Écoulement",
+  "es": "Flujo"
+ },
+ "31-215": {
+  "fr": "Somme des coefficients de perte Σζ",
+  "es": "Suma de coeficientes de pérdida Σζ"
+ },
+ "31-216": {
+  "fr": "Té, branchement",
+  "es": "Te, derivación"
+ },
+ "31-217": {
+  "fr": "Té, passage direct",
+  "es": "Te, paso directo"
+ },
+ "31-218": {
+  "fr": "Conduite circulaire partiellement remplie (collecteur)",
+  "es": "Tubería circular parcialmente llena (colector)"
+ },
+ "31-219": {
+  "fr": "Conduite circulaire partiellement remplie : section et courbes de remplissage partiel",
+  "es": "Tubería circular parcialmente llena: sección y curvas de llenado parcial"
+ },
+ "31-220": {
+  "fr": "Profondeur",
+  "es": "Profundidad"
+ },
+ "31-221": {
+  "fr": "Tirant d'eau du ponton L × B :&nbsp; t = G / (γ<sub>w</sub> · L · B)<br> h<sub>M</sub> = I / V − e&nbsp;&nbsp;&nbsp; (e = distance de G au-dessus de B)<br> stable si h<sub>M</sub> &gt; 0 (M est situé au-dessus de G)",
+  "es": "Calado del pontón L × B:&nbsp; t = G / (γ<sub>w</sub> · L · B)<br> h<sub>M</sub> = I / V − e&nbsp;&nbsp;&nbsp; (e = distancia de G sobre B)<br> estable si h<sub>M</sub> &gt; 0 (M está por encima de G)"
+ },
+ "31-222": {
+  "fr": "Canal trapézoïdal",
+  "es": "Canal trapezoidal"
+ },
+ "31-223": {
+  "fr": "Inertie / tension superficielle",
+  "es": "Inercia / tensión superficial"
+ },
+ "31-224": {
+  "fr": "Inertie / gravité",
+  "es": "Inercia / gravedad"
+ },
+ "31-225": {
+  "fr": "Inertie / viscosité",
+  "es": "Inercia / viscosidad"
+ },
+ "31-226": {
+  "fr": "U = périmètre mouillé (bleu)",
+  "es": "U = perímetro mojado (azul)"
+ },
+ "31-227": {
+  "fr": "Rétrécissement brusque",
+  "es": "Estrechamiento brusco"
+ },
+ "31-228": {
+  "fr": "Rapport",
+  "es": "Relación"
+ },
+ "31-229": {
+  "fr": "Pertes côté aspiration h<sub>v,s</sub> [m]",
+  "es": "Pérdidas en la aspiración h<sub>v,s</sub> [m]"
+ },
+ "31-230": {
+  "fr": "Perte de charge h<sub>v</sub> [m]",
+  "es": "Pérdida de carga h<sub>v</sub> [m]"
+ },
+ "31-231": {
+  "fr": "Déversement libre (non noyé)",
+  "es": "Vertido libre (no sumergido)"
+ },
+ "31-232": {
+  "fr": "Déversement libre (Poleni)",
+  "es": "Vertido libre (Poleni)"
+ },
+ "31-233": {
+  "fr": "Épaisseur de paroi s [mm]",
+  "es": "Espesor de pared s [mm]"
+ },
+ "31-234": {
+  "fr": "Eau — propriétés à pression normale",
+  "es": "Agua — propiedades a presión normal"
+ },
+ "31-235": {
+  "fr": "Pression de l'eau sur une surface courbe",
+  "es": "Presión del agua sobre una superficie curva"
+ },
+ "31-236": {
+  "fr": "Pression de l'eau sur une surface inclinée",
+  "es": "Presión del agua sobre una superficie inclinada"
+ },
+ "31-237": {
+  "fr": "Pression de l'eau sur une paroi verticale",
+  "es": "Presión del agua sobre un muro vertical"
+ },
+ "31-238": {
+  "fr": "Niveau d'eau h<sub>1</sub> [m]",
+  "es": "Nivel de agua h<sub>1</sub> [m]"
+ },
+ "31-239": {
+  "fr": "Température de l'eau T [°C]",
+  "es": "Temperatura del agua T [°C]"
+ },
+ "31-240": {
+  "fr": "Hauteur d'eau h [m]",
+  "es": "Calado h [m]"
+ },
+ "31-241": {
+  "fr": "Calculer le ressaut hydraulique",
+  "es": "Calcular el resalto hidráulico"
+ },
+ "31-242": {
+  "fr": "Ressaut hydraulique dans un canal rectangulaire",
+  "es": "Resalto hidráulico en un canal rectangular"
+ },
+ "31-243": {
+  "fr": "Ressaut hydraulique — passage du régime torrentiel au régime fluvial",
+  "es": "Resalto hidráulico — transición de régimen supercrítico a subcrítico"
+ },
+ "31-244": {
+  "fr": "Ressaut hydraulique : écoulement amont torrentiel, rouleau de surface, écoulement aval fluvial",
+  "es": "Resalto hidráulico: flujo de entrada supercrítico, rodillo superficial, flujo de salida subcrítico"
+ },
+ "31-245": {
+  "fr": "Largeur du déversoir b [m]",
+  "es": "Ancho del vertedero b [m]"
+ },
+ "31-246": {
+  "fr": "Forme du déversoir",
+  "es": "Forma del vertedero"
+ },
+ "31-247": {
+  "fr": "Autres valeurs",
+  "es": "Otros valores"
+ },
+ "31-248": {
+  "fr": "Détachement tourbillonnaire sur des piles, St ≈ 0,2",
+  "es": "Desprendimiento de vórtices en pilas, St ≈ 0,2"
+ },
+ "31-249": {
+  "fr": "Si la section diminue, l'eau s'écoule plus vite.",
+  "es": "Si la sección se reduce, el agua circula más rápido."
+ },
+ "31-250": {
+  "fr": "Lorsqu'un écoulement est freiné rapidement (vanne, arrêt de pompe), une onde de pression se propage dans la conduite à la célérité a. Si la vanne se ferme plus vite que le temps de réflexion, le coup de bélier de Joukowsky complet se produit.",
+  "es": "Cuando un flujo se frena rápidamente (válvula, fallo de la bomba), una onda de presión recorre la tubería con la celeridad a. Si la válvula se cierra más rápido que el tiempo de reflexión, se produce el golpe de ariete de Joukowsky completo."
+ },
+ "31-251": {
+  "fr": "Rendement η [%]",
+  "es": "Rendimiento η [%]"
+ },
+ "31-252": {
+  "fr": "Hauteur d'eau amont h<sub>1</sub> [m]",
+  "es": "Calado de entrada h<sub>1</sub> [m]"
+ },
+ "31-253": {
+  "fr": "Entre deux réservoirs, la ligne d'énergie chute de la différence de niveau Δh : perte à l'entrée, frottement le long de la conduite, perte à la sortie.",
+  "es": "Entre dos depósitos, la línea de energía desciende la diferencia de nivel Δh: pérdida de entrada, rozamiento a lo largo de la tubería y pérdida de salida."
+ },
+ "31-254": {
+  "fr": "a ≈ 1400 m/s dans les conduites rigides (acier), 300 … 500 m/s dans les conduites en PE",
+  "es": "a ≈ 1400 m/s en tuberías rígidas (acero), 300 … 500 m/s en tuberías de PE"
+ },
+ "31-255": {
+  "fr": "nappe libre : Q = π · k · (H² − h²) / ln(R/r)",
+  "es": "acuífero libre: Q = π · k · (H² − h²) / ln(R/r)"
+ },
+ "31-256": {
+  "fr": "Hauteur géométrique de refoulement H<sub>geo</sub> [m]",
+  "es": "Altura geométrica de elevación H<sub>geo</sub> [m]"
+ },
+ "31-257": {
+  "fr": "faibles pertes",
+  "es": "pérdidas bajas"
+ },
+ "31-258": {
+  "fr": "nappe captive (épaisseur M) : Q = 2π · k · M · s / ln(R/r)",
+  "es": "acuífero confinado (espesor M): Q = 2π · k · M · s / ln(R/r)"
+ },
+ "31-259": {
+  "fr": "ressaut ondulé",
+  "es": "resalto ondulado"
+ },
+ "31-260": {
+  "fr": "débit maximal pour h/D ≈ 0,94 : Q<sub>max</sub> = 154,4 l/s = 107,6 % de Q<sub>v</sub> ; vitesse maximale pour h/D ≈ 0,81",
+  "es": "caudal máximo para h/D ≈ 0,94: Q<sub>max</sub> = 154,4 l/s = 107,6 % de Q<sub>v</sub>; velocidad máxima para h/D ≈ 0,81"
+ },
+ "31-261": {
+  "fr": "bon pour les bassins de dissipation",
+  "es": "bueno para cuencos amortiguadores"
+ }
+}

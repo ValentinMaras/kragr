@@ -1,0 +1,34 @@
+{
+"33-0": {
+"fr": "!Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) avec r en l/(s·ha) et A en ha (resp. /10000 pour des m²)",
+"es": "!Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) con r en l/(s·ha) y A en ha (o bien /10000 para m²)"
+},
+"33-1": {
+"fr": "!Intensité de pluie r<sub>D,T</sub> selon KOSTRA-DWD (durée D, période de retour T) ; évacuation des toitures DIN 1986-100 : r<sub>5,2</sub> et évacuation de secours r<sub>5,100</sub>",
+"es": "!Intensidad de lluvia r<sub>D,T</sub> según KOSTRA-DWD (duración D, periodo de retorno T); drenaje de cubiertas DIN 1986-100: r<sub>5,2</sub> y drenaje de emergencia r<sub>5,100</sub>"
+},
+"33-2": {
+"fr": "Surface {} [m²] / ψ",
+"es": "Superficie {} [m²] / ψ"
+},
+"33-3": {
+"fr": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) avec r en l/(s·ha) et A en ha (resp. /10000 pour des m²)</div><div class=\"st-note\">Intensité de pluie r<sub>D,T</sub> selon KOSTRA-DWD (durée D, période de retour T) ; évacuation des toitures DIN 1986-100 : r<sub>5,2</sub> et évacuation de secours r<sub>5,100</sub></div></div></div>",
+"es": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Q = r<sub>D,T</sub> · Σ (A<sub>i</sub> · ψ<sub>i</sub>) con r en l/(s·ha) y A en ha (o bien /10000 para m²)</div><div class=\"st-note\">Intensidad de lluvia r<sub>D,T</sub> según KOSTRA-DWD (duración D, periodo de retorno T); drenaje de cubiertas DIN 1986-100: r<sub>5,2</sub> y drenaje de emergencia r<sub>5,100</sub></div></div></div>"
+},
+"33-4": {
+"fr": "<div class=\"calc-field\"><label>Intensité de pluie r<sub>D,T</sub> [l/(s·ha)]</label><input type=\"number\" id=\"rg-r\" value=\"300\" step=\"any\" oninput=\"updateRegen()\"></div>",
+"es": "<div class=\"calc-field\"><label>Intensidad de lluvia r<sub>D,T</sub> [l/(s·ha)]</label><input type=\"number\" id=\"rg-r\" value=\"300\" step=\"any\" oninput=\"updateRegen()\"></div>"
+},
+"33-5": {
+"fr": "§Surface d'écoulement effective",
+"es": "§Superficie de escorrentía efectiva"
+},
+"33-6": {
+"fr": "!Surface {} : {} m² · ψ = {} → {} m²",
+"es": "!Superficie {}: {} m² · ψ = {} → {} m²"
+},
+"33-7": {
+"fr": "!r<sub>D,T</sub> [l/(s·ha)] selon KOSTRA-DWD pour la durée D et la période de retour T (p. ex. pluie de 5 min, T = 2 a pour l'évacuation des toitures selon DIN 1986-100)",
+"es": "!r<sub>D,T</sub> [l/(s·ha)] según KOSTRA-DWD para la duración D y el periodo de retorno T (p. ej. lluvia de 5 min, T = 2 a para el drenaje de cubiertas según DIN 1986-100)"
+}
+}

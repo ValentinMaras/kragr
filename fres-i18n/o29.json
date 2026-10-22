@@ -1,0 +1,806 @@
+{
+ "29-0": {
+  "fr": "Dalle sur poteaux : C<sub>Rd,c</sub> = 0,18/γ<sub>c</sub> · poteau intérieur avec u<sub>0</sub>/d &lt; 4 : C<sub>Rd,c</sub> = 0,18/γ<sub>c</sub> · (0,1·u<sub>0</sub>/d + 0,6)<br> Semelles et radiers : C<sub>Rd,c</sub> = 0,15/γ<sub>c</sub> (la pression du sol à l'intérieur du contour de contrôle peut être déduite)<br> k = 1 + √(200/d) ≤ 2,0 · ρ<sub>l</sub> = √(ρ<sub>lx</sub>·ρ<sub>ly</sub>) ≤ min(0,02 ; 0,5·f<sub>cd</sub>/f<sub>yd</sub>) · v<sub>min</sub> comme pour l'effort tranchant",
+  "es": "Losa sin vigas: C<sub>Rd,c</sub> = 0,18/γ<sub>c</sub> · pilar interior con u<sub>0</sub>/d &lt; 4: C<sub>Rd,c</sub> = 0,18/γ<sub>c</sub> · (0,1·u<sub>0</sub>/d + 0,6)<br> Zapatas y losas de cimentación: C<sub>Rd,c</sub> = 0,15/γ<sub>c</sub> (se puede descontar la presión del terreno dentro del perímetro de control)<br> k = 1 + √(200/d) ≤ 2,0 · ρ<sub>l</sub> = √(ρ<sub>lx</sub>·ρ<sub>ly</sub>) ≤ min(0,02; 0,5·f<sub>cd</sub>/f<sub>yd</sub>) · v<sub>min</sub> como en el esfuerzo cortante"
+ },
+ "29-1": {
+  "fr": "Conséquence",
+  "es": "Consecuencia"
+ },
+ "29-2": {
+  "fr": "Calcul avec le diagramme parabole-rectangle, B500 avec palier horizontal et une nappe d'armatures en partie haute et une en partie basse. La section de béton déplacée par l'acier n'est pas déduite. Flexion simple uniquement (uniaxiale).",
+  "es": "Calculado con el diagrama parábola-rectángulo, B500 con rama horizontal y una capa de armadura superior y otra inferior. No se descuenta el área de hormigón desplazada por el acero. Solo flexión uniaxial."
+ },
+ "29-3": {
+  "fr": "Hauteur totale h [cm]",
+  "es": "Canto total h [cm]"
+ },
+ "29-4": {
+  "fr": "Valable pour les poutres continues de portées voisines (rapport des travées adjacentes 2/3 … 1,5) et une console ≤ la moitié de la travée voisine.",
+  "es": "Válido para vigas continuas con luces similares (relación entre vanos contiguos 2/3 … 1,5) y voladizo ≤ la mitad del vano contiguo."
+ },
+ "29-5": {
+  "fr": "Déformations limites jusqu'à C50/60 : ε<sub>c2</sub> = 2,0 ‰ (fin de la parabole), ε<sub>cu2</sub> = 3,5 ‰ (raccourcissement ultime).",
+  "es": "Deformaciones límite hasta C50/60: ε<sub>c2</sub> = 2,0 ‰ (fin de la parábola), ε<sub>cu2</sub> = 3,5 ‰ (acortamiento último)."
+ },
+ "29-6": {
+  "fr": "Éléments de fondation",
+  "es": "Elementos de cimentación"
+ },
+ "29-7": {
+  "fr": "Bonnes et mauvaises conditions d'adhérence",
+  "es": "Buenas y malas condiciones de adherencia"
+ },
+ "29-8": {
+  "fr": "Crochets, crochets à 90°, boucles, étriers",
+  "es": "Ganchos, ganchos en escuadra, lazos, estribos"
+ },
+ "29-9": {
+  "fr": "Béton à haute résistance — caractéristiques et déformations limites",
+  "es": "Hormigón de alta resistencia — características y deformaciones límite"
+ },
+ "29-10": {
+  "fr": "Armatures maximales",
+  "es": "Armadura máxima"
+ },
+ "29-11": {
+  "fr": "Hauteur h [cm] (sens de flexion)",
+  "es": "Canto h [cm] (dirección de flexión)"
+ },
+ "29-12": {
+  "fr": "Travée intermédiaire",
+  "es": "Vano interior"
+ },
+ "29-13": {
+  "fr": "Travée intermédiaire (0,70·l)",
+  "es": "Vano interior (0,70·l)"
+ },
+ "29-14": {
+  "fr": "Travée intermédiaire d'une poutre continue",
+  "es": "Vano interior de una viga continua"
+ },
+ "29-15": {
+  "fr": "Intérieur HR ≈ 50 %, extérieur HR ≈ 80 %. Valeurs finales (t → ∞), sans effet de la température.",
+  "es": "Interior HR ≈ 50 %, exterior HR ≈ 80 %. Valores finales (t → ∞), sin influencia de la temperatura."
+ },
+ "29-16": {
+  "fr": "Intérieur, éléments immergés",
+  "es": "Interiores, elementos bajo el agua"
+ },
+ "29-17": {
+  "fr": "Poteau intérieur (β = 1,10)",
+  "es": "Pilar interior (β = 1,10)"
+ },
+ "29-18": {
+  "fr": "Interaction avec l'effort tranchant (section compacte) : (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1 avec V<sub>Rd,max</sub> = 946,7 kN",
+  "es": "Interacción con el esfuerzo cortante (sección compacta): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1 con V<sub>Rd,max</sub> = 946,7 kN"
+ },
+ "29-19": {
+  "fr": "K<sub>1</sub> = λ/10 − 2,5 pour 25 ≤ λ ≤ 35, K<sub>1</sub> = 1 pour λ &gt; 35 · 1/r du côté de la sécurité avec K<sub>r</sub> = 1 et sans fluage (K<sub>φ</sub> = 1)<br> Si le moment varie le long du poteau : e<sub>0</sub> = 0,6·e<sub>01</sub> + 0,4·e<sub>02</sub> ≥ 0,4·e<sub>02</sub> (|e<sub>02</sub>| ≥ |e<sub>01</sub>|)",
+  "es": "K<sub>1</sub> = λ/10 − 2,5 para 25 ≤ λ ≤ 35, K<sub>1</sub> = 1 para λ &gt; 35 · 1/r del lado de la seguridad con K<sub>r</sub> = 1 y sin fluencia (K<sub>φ</sub> = 1)<br> Si el momento varía a lo largo del pilar: e<sub>0</sub> = 0,6·e<sub>01</sub> + 0,4·e<sub>02</sub> ≥ 0,4·e<sub>02</sub> (|e<sub>02</sub>| ≥ |e<sub>01</sub>|)"
+ },
+ "29-20": {
+  "fr": "Murs de quai",
+  "es": "Muros de muelle"
+ },
+ "29-21": {
+  "fr": "Valeur caractéristique",
+  "es": "Valor característico"
+ },
+ "29-22": {
+  "fr": "Dispositions constructives — DIN EN 1992-1-1/NA, 9.5",
+  "es": "Disposiciones constructivas — DIN EN 1992-1-1/NA, 9.5"
+ },
+ "29-23": {
+  "fr": "Contrôle par le bras de levier : A<sub>s</sub> = M<sub>Ed</sub>/(z · f<sub>yd</sub>) = 11,51 cm²",
+  "es": "Comprobación mediante el brazo mecánico: A<sub>s</sub> = M<sub>Ed</sub>/(z · f<sub>yd</sub>) = 11,51 cm²"
+ },
+ "29-24": {
+  "fr": "Console (au droit du poteau)",
+  "es": "Voladizo (en el pilar)"
+ },
+ "29-25": {
+  "fr": "Poteau console (β = 2,0)",
+  "es": "Pilar en voladizo (β = 2,0)"
+ },
+ "29-26": {
+  "fr": "Poteau console : encastré en pied, libre en tête",
+  "es": "Pilar en voladizo: empotrado en la base, libre en la cabeza"
+ },
+ "29-27": {
+  "fr": "Fluage et retrait C30/37",
+  "es": "Fluencia y retracción C30/37"
+ },
+ "29-28": {
+  "fr": "Fluage et retrait — EN 1992-1-1, 3.1.4 et annexe B",
+  "es": "Fluencia y retracción — EN 1992-1-1, 3.1.4 y anexo B"
+ },
+ "29-29": {
+  "fr": "Le fluage augmente la courbure. Pour les poteaux soumis à une forte part de charges permanentes et λ &gt; 50, il faut prendre en compte K<sub>φ</sub> = 1 + β·φ<sub>ef</sub>.",
+  "es": "La fluencia aumenta la curvatura. En pilares con alta proporción de carga permanente y λ &gt; 50 debe considerarse K<sub>φ</sub> = 1 + β·φ<sub>ef</sub>."
+ },
+ "29-30": {
+  "fr": "Calculer le coefficient de fluage et la déformation de retrait",
+  "es": "Calcular el coeficiente de fluencia y la deformación de retracción"
+ },
+ "29-31": {
+  "fr": "Contour de contrôle critique",
+  "es": "Perímetro de control crítico"
+ },
+ "29-32": {
+  "fr": "Position du poteau",
+  "es": "Posición del pilar"
+ },
+ "29-33": {
+  "fr": "Treillis d'appui (valeurs indicatives)",
+  "es": "Mallas de apoyo (valores orientativos)"
+ },
+ "29-34": {
+  "fr": "Conditions d'appui (cas d'Euler)",
+  "es": "Condiciones de apoyo (caso de Euler)"
+ },
+ "29-35": {
+  "fr": "Excentricités de charge (méthode de la courbure nominale)",
+  "es": "Excentricidades de la carga (método de la curvatura nominal)"
+ },
+ "29-36": {
+  "fr": "Armatures longitudinales A<sub>sl</sub> [cm²]",
+  "es": "Armadura longitudinal A<sub>sl</sub> [cm²]"
+ },
+ "29-37": {
+  "fr": "Barres longitudinales",
+  "es": "Barras longitudinales"
+ },
+ "29-38": {
+  "fr": "Barres longitudinales : A<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>) = 4,03 cm² (réparties sur le périmètre)",
+  "es": "Barras longitudinales: A<sub>sl</sub> = T<sub>Ed</sub> · u<sub>k</sub> · cot θ / (2 · A<sub>k</sub> · f<sub>yd</sub>) = 4,03 cm² (repartidas en el perímetro)"
+ },
+ "29-39": {
+  "fr": "M quasi permanent [kNm]",
+  "es": "M cuasipermanente [kNm]"
+ },
+ "29-40": {
+  "fr": "M<sub>0Ed</sub> [kNm] (1er ordre)",
+  "es": "M<sub>0Ed</sub> [kNm] (1.er orden)"
+ },
+ "29-41": {
+  "fr": "M<sub>Ed</sub> = N<sub>Ed</sub> · (e<sub>0</sub> + e<sub>i</sub> + e<sub>2</sub>)<br> e<sub>0</sub> = M<sub>0Ed</sub> / N<sub>Ed</sub> ≥ max(h/30 ; 20 mm)<br> e<sub>i</sub> = θ<sub>i</sub> · l<sub>0</sub>/2&nbsp; avec&nbsp; θ<sub>i</sub> = α<sub>h</sub>/200,&nbsp; α<sub>h</sub> = 2/√l,&nbsp; 2/3 ≤ α<sub>h</sub> ≤ 1&nbsp; (l en m)<br> e<sub>2</sub> = K<sub>1</sub> · (1/r) · l<sub>0</sub>² / 10&nbsp; avec&nbsp; 1/r = ε<sub>yd</sub> / (0,45·d)",
+  "es": "M<sub>Ed</sub> = N<sub>Ed</sub> · (e<sub>0</sub> + e<sub>i</sub> + e<sub>2</sub>)<br> e<sub>0</sub> = M<sub>0Ed</sub> / N<sub>Ed</sub> ≥ max(h/30; 20 mm)<br> e<sub>i</sub> = θ<sub>i</sub> · l<sub>0</sub>/2&nbsp; con&nbsp; θ<sub>i</sub> = α<sub>h</sub>/200,&nbsp; α<sub>h</sub> = 2/√l,&nbsp; 2/3 ≤ α<sub>h</sub> ≤ 1&nbsp; (l en m)<br> e<sub>2</sub> = K<sub>1</sub> · (1/r) · l<sub>0</sub>² / 10&nbsp; con&nbsp; 1/r = ε<sub>yd</sub> / (0,45·d)"
+ },
+ "29-42": {
+  "fr": "Treillis soudé",
+  "es": "Malla"
+ },
+ "29-43": {
+  "fr": "Treillis soudés, couronnes (laminés à froid)",
+  "es": "Mallas, rollos (conformado en frío)"
+ },
+ "29-44": {
+  "fr": "Résistance minimale du béton pour XC3 : <b>C20/25</b>",
+  "es": "Resistencia mínima del hormigón para XC3: <b>C20/25</b>"
+ },
+ "29-45": {
+  "fr": "Armatures minimales",
+  "es": "Armadura mínima"
+ },
+ "29-46": {
+  "fr": "Armatures minimales pour déformations gênées — 7.3.2",
+  "es": "Armadura mínima para deformaciones coartadas — 7.3.2"
+ },
+ "29-47": {
+  "fr": "Étriers minimaux (poutres) : ρ<sub>w,min</sub> = 0,16 · f<sub>ctm</sub> / f<sub>yk</sub>&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,min</sub> = ρ<sub>w,min</sub> · b<sub>w</sub>",
+  "es": "Estribos mínimos (vigas): ρ<sub>w,min</sub> = 0,16 · f<sub>ctm</sub> / f<sub>yk</sub>&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,min</sub> = ρ<sub>w,min</sub> · b<sub>w</sub>"
+ },
+ "29-48": {
+  "fr": "Résistance minimale",
+  "es": "Resistencia mínima"
+ },
+ "29-49": {
+  "fr": "Valeur minimale D<sub>min</sub>",
+  "es": "Valor mínimo D<sub>min</sub>"
+ },
+ "29-50": {
+  "fr": "Dimensionner avec la méthode k<sub>d</sub>",
+  "es": "Dimensionar con el método k<sub>d</sub>"
+ },
+ "29-51": {
+  "fr": "Largeur participante de la dalle — EN 1992-1-1, 5.3.2.1",
+  "es": "Ancho colaborante de la losa — EN 1992-1-1, 5.3.2.1"
+ },
+ "29-52": {
+  "fr": "Selon DIN EN 1992-1-1/NA, tab. 7.1DE. Pour X0/XC1, la limitation ne concerne que l'aspect.",
+  "es": "Según DIN EN 1992-1-1/NA, tabla 7.1DE. Para X0/XC1 la limitación solo atiende al aspecto."
+ },
+ "29-53": {
+  "fr": "Selon DIN EN 1992-1-1/NA, tab. NA.9.1",
+  "es": "Según DIN EN 1992-1-1/NA, tabla NA.9.1"
+ },
+ "29-54": {
+  "fr": "Axe neutre dans la dalle → section rectangulaire avec b<sub>eff</sub> admise",
+  "es": "Fibra neutra en la losa → se admite sección rectangular con b<sub>eff</sub>"
+ },
+ "29-55": {
+  "fr": "Hauteur utile d [cm]",
+  "es": "Canto útil d [cm]"
+ },
+ "29-56": {
+  "fr": "Sans calcul direct : diamètre limite — tab. 7.2DE",
+  "es": "Sin cálculo directo: diámetro límite — tabla 7.2DE"
+ },
+ "29-57": {
+  "fr": "Parkings en étage, parties d'ouvrage exposées aux projections d'eau",
+  "es": "Aparcamientos elevados, partes de puentes con salpicaduras de agua"
+ },
+ "29-58": {
+  "fr": "Dalle : en haut et en bas",
+  "es": "Losa: arriba y abajo"
+ },
+ "29-59": {
+  "fr": "Les dalles peuvent rester sans armatures d'effort tranchant si V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>. Les poutres reçoivent toujours au moins les étriers minimaux.",
+  "es": "Las losas pueden prescindir de armadura de cortante si V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>. Las vigas llevan siempre como mínimo los estribos mínimos."
+ },
+ "29-60": {
+  "fr": "Dalles — dispositions constructives (NA 9.3.1)",
+  "es": "Losas — disposiciones constructivas (NA 9.3.1)"
+ },
+ "29-61": {
+  "fr": "Calculer une poutre en T",
+  "es": "Calcular una viga en T"
+ },
+ "29-62": {
+  "fr": "Poutre en T, C30/37, M<sub>Ed</sub> = 450,0 kNm",
+  "es": "Viga en T, C30/37, M<sub>Ed</sub> = 450,0 kNm"
+ },
+ "29-63": {
+  "fr": "Épaisseur de la dalle h<sub>f</sub> [cm]",
+  "es": "Espesor de la losa h<sub>f</sub> [cm]"
+ },
+ "29-64": {
+  "fr": "Débord de dalle b₁ [cm]",
+  "es": "Vuelo de la losa b₁ [cm]"
+ },
+ "29-65": {
+  "fr": "Débord de dalle b₂ [cm]",
+  "es": "Vuelo de la losa b₂ [cm]"
+ },
+ "29-66": {
+  "fr": "Principe du dimensionnement à la flexion",
+  "es": "Principio del dimensionamiento a flexión"
+ },
+ "29-67": {
+  "fr": "Treillis Q : identiques dans les deux directions (dalles portant dans deux directions). Treillis R : direction principale longitudinale. a<sub>s</sub> = π · Ø²/4 · 1000/s. Pour l'exécution, ce sont les listes actuelles des fabricants qui font foi.",
+  "es": "Mallas Q: iguales en ambas direcciones (losas armadas en dos direcciones). Mallas R: dirección principal longitudinal. a<sub>s</sub> = π · Ø²/4 · 1000/s. Para la ejecución rigen las listas vigentes de los fabricantes."
+ },
+ "29-68": {
+  "fr": "Armatures transversales",
+  "es": "Armadura transversal"
+ },
+ "29-69": {
+  "fr": "Effort tranchant b<sub>w</sub> = 30 cm, d = 55,0 cm, C30/37",
+  "es": "Esfuerzo cortante b<sub>w</sub> = 30 cm, d = 55,0 cm, C30/37"
+ },
+ "29-70": {
+  "fr": "Vérification à l'effort tranchant d'une section rectangulaire",
+  "es": "Comprobación a cortante de una sección rectangular"
+ },
+ "29-71": {
+  "fr": "Section, déformations (planes, Bernoulli) et contraintes de compression du béton (parabole-rectangle). Équilibre : F<sub>cd</sub> = F<sub>sd</sub>, M<sub>Eds</sub> = F<sub>sd</sub>·z.",
+  "es": "Sección, deformaciones (planas, Bernoulli) y tensiones de compresión del hormigón (parábola-rectángulo). Equilibrio: F<sub>cd</sub> = F<sub>sd</sub>, M<sub>Eds</sub> = F<sub>sd</sub>·z."
+ },
+ "29-72": {
+  "fr": "Dimensionnement de la section en flexion composée avec compression",
+  "es": "Dimensionamiento de la sección a flexión compuesta con compresión"
+ },
+ "29-73": {
+  "fr": "Section A<sub>s</sub> [cm²] pour n barres",
+  "es": "Área A<sub>s</sub> [cm²] para n barras"
+ },
+ "29-74": {
+  "fr": "Section a<sub>s</sub> [cm²/m] par mètre (dalles, étriers)",
+  "es": "Área a<sub>s</sub> [cm²/m] por metro (losas, estribos)"
+ },
+ "29-75": {
+  "fr": "Distance au bord des armatures comprimées d₂ [cm]",
+  "es": "Distancia al borde de la armadura comprimida d₂ [cm]"
+ },
+ "29-76": {
+  "fr": "Distance au bord d₁ [cm]",
+  "es": "Distancia al borde d₁ [cm]"
+ },
+ "29-77": {
+  "fr": "Poteau de rive (β = 1,40)",
+  "es": "Pilar de borde (β = 1,40)"
+ },
+ "29-78": {
+  "fr": "Section rectangulaire avec répartition des déformations et bloc de contraintes parabole-rectangle",
+  "es": "Sección rectangular con distribución de deformaciones y bloque de tensiones parábola-rectángulo"
+ },
+ "29-79": {
+  "fr": "Si la zone de béton comprimé ne suffit pas, on fixe l'axe neutre à ξ = 0,45 et on reporte le moment restant Δμ sur un couple de forces dans l'acier : armatures comprimées A<sub>s2</sub> (en haut) et armatures tendues supplémentaires (en bas), avec le bras de levier d − d₂.",
+  "es": "Si la zona de hormigón comprimida no basta, se fija la fibra neutra en ξ = 0,45 y el momento restante Δμ se asigna a un par de fuerzas en el acero: armadura de compresión A<sub>s2</sub> (arriba) y armadura de tracción adicional (abajo) con el brazo mecánico d − d₂."
+ },
+ "29-80": {
+  "fr": "Calculer l'ouverture des fissures (rectangle, flexion simple)",
+  "es": "Calcular la abertura de fisura (rectángulo, flexión simple)"
+ },
+ "29-81": {
+  "fr": "Ouverture des fissures, M = 45,0 kNm (quasi permanent)",
+  "es": "Abertura de fisura, M = 45,0 kNm (cuasipermanente)"
+ },
+ "29-82": {
+  "fr": "Vérifier l'élancement",
+  "es": "Comprobar la esbeltez"
+ },
+ "29-83": {
+  "fr": "Barres inclinées et autres barres cintrées — enrobage ⊥ au plan de courbure",
+  "es": "Barras inclinadas y otras barras dobladas — recubrimiento ⊥ al plano de curvatura"
+ },
+ "29-84": {
+  "fr": "Bains d'eau salée, éléments en eau industrielle chlorurée",
+  "es": "Baños de salmuera, elementos en agua industrial con cloruros"
+ },
+ "29-85": {
+  "fr": "Ø barre [mm]",
+  "es": "Ø barra [mm]"
+ },
+ "29-86": {
+  "fr": "Diamètre de barre Ø [mm]",
+  "es": "Diámetro de barra Ø [mm]"
+ },
+ "29-87": {
+  "fr": "Barres, treillis soudés (laminés à chaud)",
+  "es": "Barras, mallas (laminado en caliente)"
+ },
+ "29-88": {
+  "fr": "Le béton armé se fissure normalement : ce n'est qu'à l'état fissuré que l'acier reprend l'effort de traction. Des fissures trop larges laissent toutefois passer l'eau et les chlorures jusqu'aux armatures et nuisent à l'aspect. On limite l'ouverture calculée des fissures w<sub>k</sub>.",
+  "es": "El hormigón armado se fisura de forma prevista: solo en estado fisurado el acero asume la tracción. Sin embargo, fisuras demasiado anchas dejan pasar agua y cloruros hasta la armadura y resultan antiestéticas. Se limita la abertura de fisura calculada w<sub>k</sub>."
+ },
+ "29-89": {
+  "fr": "Au lieu de calculer la flèche, on peut limiter l'élancement l/d pour les planchers et poutres du bâtiment courant. C'est le moyen le plus rapide d'obtenir l'épaisseur de plancher requise.",
+  "es": "En lugar de calcular la flecha, en forjados y vigas de la edificación habitual puede limitarse la esbeltez l/d. Es el camino más rápido para obtener el canto de forjado necesario."
+ },
+ "29-90": {
+  "fr": "Limite d'élasticité f_yk",
+  "es": "Límite elástico f_yk"
+ },
+ "29-91": {
+  "fr": "Poteau 30/30 cm, l = 3,50 m, N<sub>Ed</sub> = 1200 kN",
+  "es": "Pilar 30/30 cm, l = 3,50 m, N<sub>Ed</sub> = 1200 kN"
+ },
+ "29-92": {
+  "fr": "Dimensionner un poteau (rectangle, armatures symétriques)",
+  "es": "Dimensionar un pilar (rectángulo, armadura simétrica)"
+ },
+ "29-93": {
+  "fr": "Les poteaux sont le plus souvent armés symétriquement (A<sub>s1</sub> = A<sub>s2</sub>), car le moment change de sens selon le cas de charge. Le dimensionnement cherche le plan de déformation pour lequel l'effort normal interne vaut N<sub>Ed</sub> et vérifie que le moment résistant M<sub>Rd</sub> ≥ M<sub>Ed</sub>. À la main, on utilise pour cela des diagrammes d'interaction (diagrammes ν–μ).",
+  "es": "Los pilares suelen armarse simétricamente (A<sub>s1</sub> = A<sub>s2</sub>), porque el momento cambia de sentido según la hipótesis de carga. El dimensionamiento busca el plano de deformación en el que el axil interno coincide con N<sub>Ed</sub> y comprueba que el momento resistente M<sub>Rd</sub> ≥ M<sub>Ed</sub>. A mano se usan para ello diagramas de interacción (diagramas ν–μ)."
+ },
+ "29-94": {
+  "fr": "Forme du poteau",
+  "es": "Forma del pilar"
+ },
+ "29-95": {
+  "fr": "Longueur du poteau l [m]",
+  "es": "Longitud del pilar l [m]"
+ },
+ "29-96": {
+  "fr": "Portée l [m]",
+  "es": "Luz l [m]"
+ },
+ "29-97": {
+  "fr": "T<sub>Rd,max</sub> = 2 · ν · α<sub>cw</sub> · f<sub>cd</sub> · A<sub>k</sub> · t<sub>ef</sub> · sin θ · cos θ avec ν = 0,525 · ν<sub>2</sub> (section pleine, NA), ν<sub>2</sub> = 1,1 − f<sub>ck</sub>/500 ≤ 1",
+  "es": "T<sub>Rd,max</sub> = 2 · ν · α<sub>cw</sub> · f<sub>cd</sub> · A<sub>k</sub> · t<sub>ef</sub> · sin θ · cos θ con ν = 0,525 · ν<sub>2</sub> (sección llena, NA), ν<sub>2</sub> = 1,1 − f<sub>ck</sub>/500 ≤ 1"
+ },
+ "29-98": {
+  "fr": "Zone de marnage, d'éclaboussures et d'embruns",
+  "es": "Zona de mareas, salpicaduras y rociones"
+ },
+ "29-99": {
+  "fr": "Torsion, rectangle 30/60 cm, C30/37",
+  "es": "Torsión, rectángulo 30/60 cm, C30/37"
+ },
+ "29-100": {
+  "fr": "Calculer la torsion d'une section rectangulaire",
+  "es": "Calcular la torsión de una sección rectangular"
+ },
+ "29-101": {
+  "fr": "Torsion — EN 1992-1-1, 6.3 avec AN",
+  "es": "Torsión — EN 1992-1-1, 6.3 con AN"
+ },
+ "29-102": {
+  "fr": "Système porteur",
+  "es": "Sistema estructural"
+ },
+ "29-103": {
+  "fr": "Environnement",
+  "es": "Ambiente"
+ },
+ "29-104": {
+  "fr": "V<sub>Rd,s</sub> = a<sub>sw</sub> · z · f<sub>ywd</sub> · cot θ&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,req</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ)<br> V<sub>Rd,max</sub> = b<sub>w</sub> · z · ν<sub>1</sub> · f<sub>cd</sub> / (cot θ + tan θ)",
+  "es": "V<sub>Rd,s</sub> = a<sub>sw</sub> · z · f<sub>ywd</sub> · cot θ&nbsp;&nbsp;→&nbsp;&nbsp;a<sub>sw,nec</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ)<br> V<sub>Rd,max</sub> = b<sub>w</sub> · z · ν<sub>1</sub> · f<sub>cd</sub> / (cot θ + tan θ)"
+ },
+ "29-105": {
+  "fr": "Ancrage Ø 16, C25/30, bonnes conditions d'adhérence",
+  "es": "Anclaje Ø 16, C25/30, buenas condiciones de adherencia"
+ },
+ "29-106": {
+  "fr": "Calculer la longueur d'ancrage",
+  "es": "Calcular la longitud de anclaje"
+ },
+ "29-107": {
+  "fr": "Contrainte d'adhérence et valeur de base de la longueur d'ancrage — 8.4",
+  "es": "Tensión de adherencia y valor básico de la longitud de anclaje — 8.4"
+ },
+ "29-108": {
+  "fr": "Rapport (f_t / f_y)_k",
+  "es": "Relación (f_t / f_y)_k"
+ },
+ "29-109": {
+  "fr": "Raccourcissement d'un élément de 10 m de long sans entrave : 4,6 mm",
+  "es": "Acortamiento de un elemento de 10 m de longitud sin coacción: 4,6 mm"
+ },
+ "29-110": {
+  "fr": "Enrobage nominal c<sub>v,l</sub> [cm]",
+  "es": "Recubrimiento nominal c<sub>v,l</sub> [cm]"
+ },
+ "29-111": {
+  "fr": "Angle de voile",
+  "es": "Esquina de muro"
+ },
+ "29-112": {
+  "fr": "Extrémité de voile",
+  "es": "Extremo de muro"
+ },
+ "29-113": {
+  "fr": "Quand un poteau est-il élancé ? — DIN EN 1992-1-1/NA, 5.8.3.1",
+  "es": "¿Cuándo es esbelto un pilar? — DIN EN 1992-1-1/NA, 5.8.3.1"
+ },
+ "29-114": {
+  "fr": "Pourquoi limiter les fissures ?",
+  "es": "¿Por qué limitar la fisuración?"
+ },
+ "29-115": {
+  "fr": "Qu'est-ce que le poinçonnement ?",
+  "es": "¿Qué es el punzonamiento?"
+ },
+ "29-116": {
+  "fr": "Résistance sans armatures de poinçonnement — DIN EN 1992-1-1/NA, 6.4.4",
+  "es": "Resistencia sin armadura de punzonamiento — DIN EN 1992-1-1/NA, 6.4.4"
+ },
+ "29-117": {
+  "fr": "D'où viennent les valeurs",
+  "es": "De dónde proceden los valores"
+ },
+ "29-118": {
+  "fr": "X0 : aucun risque d'agression (béton non armé en milieu sec) · Il existe en outre des classes pour l'agression du béton (XF gel, XA chimique, XM abrasion) ; elles influencent la composition du béton, pas l'enrobage.",
+  "es": "X0: sin riesgo de ataque (hormigón en masa en ambiente seco) · Además existen clases para el ataque al hormigón (XF hielo, XA químico, XM abrasión); influyen en la composición del hormigón, no en el recubrimiento."
+ },
+ "29-119": {
+  "fr": "XC1 — sec ou en permanence humide",
+  "es": "XC1 — seco o permanentemente húmedo"
+ },
+ "29-120": {
+  "fr": "XC3 — humidité modérée",
+  "es": "XC3 — humedad moderada"
+ },
+ "29-121": {
+  "fr": "XC4 — alternance d'humidité et de séchage",
+  "es": "XC4 — alternancia de humedad y secado"
+ },
+ "29-122": {
+  "fr": "XD1 — humidité modérée + chlorures",
+  "es": "XD1 — humedad moderada + cloruros"
+ },
+ "29-123": {
+  "fr": "XD2 — humide, rarement sec + chlorures",
+  "es": "XD2 — húmedo, raramente seco + cloruros"
+ },
+ "29-124": {
+  "fr": "XD3 — alternance d'humidité et de séchage + chlorures",
+  "es": "XD3 — alternancia de humedad y secado + cloruros"
+ },
+ "29-125": {
+  "fr": "XS1 — air salin",
+  "es": "XS1 — aire salino"
+ },
+ "29-126": {
+  "fr": "XS2 — sous l'eau de mer",
+  "es": "XS2 — bajo el agua de mar"
+ },
+ "29-127": {
+  "fr": "XS3 — zone de marnage, d'éclaboussures et d'embruns",
+  "es": "XS3 — zona de mareas, salpicaduras y rociones"
+ },
+ "29-128": {
+  "fr": "Ciment",
+  "es": "Cemento"
+ },
+ "29-129": {
+  "fr": "Ciment N (normal, 32,5 R / 42,5 N) : t<sub>0</sub> = t<sub>0,T</sub> · (9/(2 + t<sub>0,T</sub><sup>1,2</sup>) + 1)<sup>α</sup> avec α = 0 → t<sub>0</sub> = 28,00 jours",
+  "es": "Cemento N (normal, 32,5 R / 42,5 N): t<sub>0</sub> = t<sub>0,T</sub> · (9/(2 + t<sub>0,T</sub><sup>1,2</sup>) + 1)<sup>α</sup> con α = 0 → t<sub>0</sub> = 28,00 días"
+ },
+ "29-130": {
+  "fr": "Membrure tendue (armatures longitudinales)",
+  "es": "Cordón traccionado (armadura longitudinal)"
+ },
+ "29-131": {
+  "fr": "À titre de comparaison, sans calcul direct (tab. 7.2DE) : Ø* · f<sub>ct,eff</sub>/2,9 = 11,4 mm &lt; Ø = 12 mm",
+  "es": "A modo de comparación, sin cálculo directo (tabla 7.2DE): Ø* · f<sub>ct,eff</sub>/2,9 = 11,4 mm &lt; Ø = 12 mm"
+ },
+ "29-132": {
+  "fr": "À ajouter aux armatures d'effort tranchant ; les étriers doivent être fermés (recouvrement ou crochet).",
+  "es": "Se suma a la armadura de cortante; los estribos deben ser cerrados (solape o gancho)."
+ },
+ "29-133": {
+  "fr": "Lien avec la méthode ω : μ<sub>Eds</sub> = 10 / (k<sub>d</sub>² · f<sub>cd</sub>), k<sub>s</sub> = 1000 / (ζ · f<sub>yd</sub>)",
+  "es": "Relación con el método ω: μ<sub>Eds</sub> = 10 / (k<sub>d</sub>² · f<sub>cd</sub>), k<sub>s</sub> = 1000 / (ζ · f<sub>yd</sub>)"
+ },
+ "29-134": {
+  "fr": "a<sub>s</sub> = A<sub>barre</sub> · 100 / s (s en cm) · Pour des étriers à deux brins, doubler la valeur.",
+  "es": "a<sub>s</sub> = A<sub>barra</sub> · 100 / s (s en cm) · En estribos de dos ramas, duplicar el valor."
+ },
+ "29-135": {
+  "fr": "a<sub>sw,req</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ) = 200000 / (480 · 434,8 · 1,20) · 1000 / 100 = 7,99 cm²/m",
+  "es": "a<sub>sw,nec</sub> = V<sub>Ed</sub> / (z · f<sub>ywd</sub> · cot θ) = 200000 / (480 · 434,8 · 1,20) · 1000 / 100 = 7,99 cm²/m"
+ },
+ "29-136": {
+  "fr": "cas général :&nbsp; l / d ≤ K · 35<br> avec cloisons légères (risque de dommages) :&nbsp; l / d ≤ K² · 150 / l&nbsp;&nbsp;(l en m)",
+  "es": "caso general:&nbsp; l / d ≤ K · 35<br> con tabiques ligeros (riesgo de daños):&nbsp; l / d ≤ K² · 150 / l&nbsp;&nbsp;(l en m)"
+ },
+ "29-137": {
+  "fr": "accidentelle",
+  "es": "accidental"
+ },
+ "29-138": {
+  "fr": "b [mm] (dalle : 1000)",
+  "es": "b [mm] (losa: 1000)"
+ },
+ "29-139": {
+  "fr": "b<sub>eff</sub> = Σ b<sub>eff,i</sub> + b<sub>w</sub> ≤ b<br> b<sub>eff,i</sub> = 0,2·b<sub>i</sub> + 0,1·l<sub>0</sub> ≤ 0,2·l<sub>0</sub>&nbsp; et&nbsp; ≤ b<sub>i</sub>",
+  "es": "b<sub>eff</sub> = Σ b<sub>eff,i</sub> + b<sub>w</sub> ≤ b<br> b<sub>eff,i</sub> = 0,2·b<sub>i</sub> + 0,1·l<sub>0</sub> ≤ 0,2·l<sub>0</sub>&nbsp; y&nbsp; ≤ b<sub>i</sub>"
+ },
+ "29-140": {
+  "fr": "b<sub>w</sub> — largeur de l'âme · b<sub>i</sub> — moitié de la distance libre à l'âme voisine (ou débord de dalle en rive)",
+  "es": "b<sub>w</sub> — ancho del alma · b<sub>i</sub> — mitad de la distancia libre hasta el alma contigua (o vuelo de la losa en el borde)"
+ },
+ "29-141": {
+  "fr": "c<sub>min,b</sub> — adhérence : ≥ diamètre de barre Ø · c<sub>min,dur</sub> — durabilité (tab. 4.4DE) · Δc<sub>dev</sub> — marge pour tolérances d'exécution",
+  "es": "c<sub>min,b</sub> — adherencia: ≥ diámetro de barra Ø · c<sub>min,dur</sub> — durabilidad (tabla 4.4DE) · Δc<sub>dev</sub> — margen para tolerancias de ejecución"
+ },
+ "29-142": {
+  "fr": "c<sub>x</sub> ou D [cm]",
+  "es": "c<sub>x</sub> o D [cm]"
+ },
+ "29-143": {
+  "fr": "d — hauteur utile statique (distance du bord comprimé au centre de gravité des armatures tendues) · ξ = x/d · ζ = z/d<br> μ<sub>lim</sub> correspond à ξ = 0,45 : jusque-là la section se déforme de façon ductile ; au-delà, armatures comprimées ou section plus grande.",
+  "es": "d — canto útil estático (distancia del borde comprimido al centro de gravedad de la armadura traccionada) · ξ = x/d · ζ = z/d<br> μ<sub>lim</sub> corresponde a ξ = 0,45: hasta ahí la sección se deforma de forma dúctil; por encima, armadura de compresión o mayor sección."
+ },
+ "29-144": {
+  "fr": "d<sub>g</sub> — plus gros granulat",
+  "es": "d<sub>g</sub> — tamaño máximo del árido"
+ },
+ "29-145": {
+  "fr": "trois côtés",
+  "es": "tres lados"
+ },
+ "29-146": {
+  "fr": "f<sub>bd</sub> = 2,25 · η<sub>1</sub> · η<sub>2</sub> · f<sub>ctd</sub>&nbsp;&nbsp;avec&nbsp; f<sub>ctd</sub> = f<sub>ctk;0,05</sub> / γ<sub>c</sub><br> l<sub>b,rqd</sub> = (Ø / 4) · σ<sub>sd</sub> / f<sub>bd</sub>",
+  "es": "f<sub>bd</sub> = 2,25 · η<sub>1</sub> · η<sub>2</sub> · f<sub>ctd</sub>&nbsp;&nbsp;con&nbsp; f<sub>ctd</sub> = f<sub>ctk;0,05</sub> / γ<sub>c</sub><br> l<sub>b,rqd</sub> = (Ø / 4) · σ<sub>sd</sub> / f<sub>bd</sub>"
+ },
+ "29-147": {
+  "fr": "f<sub>bd</sub> en N/mm² · l<sub>b,rqd</sub> pour pleine utilisation σ<sub>sd</sub> = f<sub>yd</sub>",
+  "es": "f<sub>bd</sub> en N/mm² · l<sub>b,rqd</sub> para plena utilización σ<sub>sd</sub> = f<sub>yd</sub>"
+ },
+ "29-148": {
+  "fr": "f_bd mauvaises conditions",
+  "es": "f_bd malas condiciones"
+ },
+ "29-149": {
+  "fr": "vérification détaillée",
+  "es": "comprobación detallada"
+ },
+ "29-150": {
+  "fr": "espacement maximal des armatures principales",
+  "es": "separación máxima de la armadura principal"
+ },
+ "29-151": {
+  "fr": "espacement longitudinal maximal des étriers (jusqu'à C50/60)",
+  "es": "separación longitudinal máxima de los estribos (hasta C50/60)"
+ },
+ "29-152": {
+  "fr": "valable jusqu'à C50/60 · Le tableau arrondit ces formules.",
+  "es": "válido hasta C50/60 · La tabla redondea estas fórmulas."
+ },
+ "29-153": {
+  "fr": "h — dimension du côté dans le sens de la flexion",
+  "es": "h — dimensión del lado en la dirección de flexión"
+ },
+ "29-154": {
+  "fr": "h<sub>0</sub> = 2 · A<sub>c</sub> / u (u = périmètre exposé au séchage)",
+  "es": "h<sub>0</sub> = 2 · A<sub>c</sub> / u (u = perímetro expuesto al secado)"
+ },
+ "29-155": {
+  "fr": "k = 1 + √(200/d) ≤ 2,0 (d en mm) · ρ<sub>l</sub> = A<sub>sl</sub> / (b<sub>w</sub>·d) ≤ 0,02 · σ<sub>cp</sub> — contrainte longitudinale du béton (compression +)<br> v<sub>min</sub> = (0,0525/γ<sub>c</sub>) · k<sup>3/2</sup> · f<sub>ck</sub><sup>1/2</sup> pour d ≤ 600 mm, (0,0375/γ<sub>c</sub>) · … pour d &gt; 800 mm, interpoler entre les deux",
+  "es": "k = 1 + √(200/d) ≤ 2,0 (d en mm) · ρ<sub>l</sub> = A<sub>sl</sub> / (b<sub>w</sub>·d) ≤ 0,02 · σ<sub>cp</sub> — tensión longitudinal del hormigón (compresión +)<br> v<sub>min</sub> = (0,0525/γ<sub>c</sub>) · k<sup>3/2</sup> · f<sub>ck</sub><sup>1/2</sup> para d ≤ 600 mm, (0,0375/γ<sub>c</sub>) · … para d &gt; 800 mm, interpolar entre ambos"
+ },
+ "29-156": {
+  "fr": "k<sub>c</sub> = 0,4 pour la flexion (rectangle), 1,0 pour la traction centrée · k = 0,8 pour h ≤ 300 mm, 0,5 pour h ≥ 800 mm (interpoler) · A<sub>ct</sub> — zone tendue avant fissuration · f<sub>ct,eff</sub> = f<sub>ctm</sub> à l'instant de la fissuration, sans vérification précise ≥ 3,0 N/mm²<br> σ<sub>s</sub> à partir du diamètre limite : σ<sub>s</sub> = √(w<sub>k</sub> · 3,48·10⁶ / Ø*<sub>s</sub>)&nbsp; avec Ø*<sub>s</sub> = Ø<sub>s</sub> · 2,9 / f<sub>ct,eff</sub>",
+  "es": "k<sub>c</sub> = 0,4 para flexión (rectángulo), 1,0 para tracción centrada · k = 0,8 para h ≤ 300 mm, 0,5 para h ≥ 800 mm (interpolar) · A<sub>ct</sub> — zona traccionada antes de la fisuración · f<sub>ct,eff</sub> = f<sub>ctm</sub> en el momento de la fisuración, sin comprobación precisa ≥ 3,0 N/mm²<br> σ<sub>s</sub> a partir del diámetro límite: σ<sub>s</sub> = √(w<sub>k</sub> · 3,48·10⁶ / Ø*<sub>s</sub>)&nbsp; con Ø*<sub>s</sub> = Ø<sub>s</sub> · 2,9 / f<sub>ct,eff</sub>"
+ },
+ "29-157": {
+  "fr": "k<sub>d</sub> = d [cm] / √(M<sub>Eds</sub> [kNm] / b [m]) → k<sub>s</sub>, ξ, ζ tirés de la table",
+  "es": "k<sub>d</sub> = d [cm] / √(M<sub>Eds</sub> [kNm] / b [m]) → k<sub>s</sub>, ξ, ζ de la tabla"
+ },
+ "29-158": {
+  "fr": "Table k<sub>d</sub> pour B500, sans armatures comprimées",
+  "es": "Tabla k<sub>d</sub> para B500, sin armadura de compresión"
+ },
+ "29-159": {
+  "fr": "Méthode k<sub>d</sub> C25/30",
+  "es": "Método k<sub>d</sub> C25/30"
+ },
+ "29-160": {
+  "fr": "Méthode k<sub>d</sub> — table de dimensionnement dimensionnelle",
+  "es": "Método k<sub>d</sub> — tabla de dimensionamiento dimensional"
+ },
+ "29-161": {
+  "fr": "aucune armature de poinçonnement nécessaire",
+  "es": "no se necesita armadura de punzonamiento"
+ },
+ "29-162": {
+  "fr": "plus petite dimension de la section",
+  "es": "menor dimensión de la sección"
+ },
+ "29-163": {
+  "fr": "plus petit espacement libre entre barres",
+  "es": "menor separación libre entre barras"
+ },
+ "29-164": {
+  "fr": "l — portée (pour les consoles, la longueur de la console) · d — hauteur utile statique",
+  "es": "l — luz (en voladizos, la longitud del voladizo) · d — canto útil estático"
+ },
+ "29-165": {
+  "fr": "l<sub>0</sub> / 2 avec α<sub>h</sub>",
+  "es": "l<sub>0</sub> / 2 con α<sub>h</sub>"
+ },
+ "29-166": {
+  "fr": "l<sub>0</sub> = β · l&nbsp;&nbsp;·&nbsp;&nbsp;λ = l<sub>0</sub> / i&nbsp;&nbsp;avec&nbsp; i = √(I/A) = h/√12 ≈ 0,289·h (rectangle)",
+  "es": "l<sub>0</sub> = β · l&nbsp;&nbsp;·&nbsp;&nbsp;λ = l<sub>0</sub> / i&nbsp;&nbsp;con&nbsp; i = √(I/A) = h/√12 ≈ 0,289·h (rectángulo)"
+ },
+ "29-167": {
+  "fr": "l<sub>bd</sub> = α<sub>1</sub> · α<sub>2</sub> · α<sub>3</sub> · α<sub>4</sub> · α<sub>5</sub> · l<sub>b,rqd</sub> · (A<sub>s,req</sub> / A<sub>s,exist</sub>) ≥ l<sub>b,min</sub><br> l<sub>b,min</sub> = max { 0,3 · l<sub>b,rqd</sub> ;&nbsp; 10·Ø ;&nbsp; 100 mm }&nbsp;&nbsp;(barre tendue)",
+  "es": "l<sub>bd</sub> = α<sub>1</sub> · α<sub>2</sub> · α<sub>3</sub> · α<sub>4</sub> · α<sub>5</sub> · l<sub>b,rqd</sub> · (A<sub>s,nec</sub> / A<sub>s,exist</sub>) ≥ l<sub>b,min</sub><br> l<sub>b,min</sub> = max { 0,3 · l<sub>b,rqd</sub> ;&nbsp; 10·Ø ;&nbsp; 100 mm }&nbsp;&nbsp;(barra traccionada)"
+ },
+ "29-168": {
+  "fr": "l_b,rqd mauvaises conditions",
+  "es": "l_b,rqd malas condiciones"
+ },
+ "29-169": {
+  "fr": "longitudinal Ø/espacement",
+  "es": "longitudinal Ø/separación"
+ },
+ "29-170": {
+  "fr": "déterminant <b>11,51 cm²</b> · Proposition : 8 Ø 14 = 12,32 cm² · 6 Ø 16 = 12,06 cm² · 4 Ø 20 = 12,57 cm² · 3 Ø 25 = 14,73 cm²",
+  "es": "determinante <b>11,51 cm²</b> · Propuesta: 8 Ø 14 = 12,32 cm² · 6 Ø 16 = 12,06 cm² · 4 Ø 20 = 12,57 cm² · 3 Ø 25 = 14,73 cm²"
+ },
+ "29-171": {
+  "fr": "déterminant <b>7,34 cm² au total</b>, soit 3,67 cm² par face",
+  "es": "determinante <b>7,34 cm² en total</b>, 3,67 cm² por cara"
+ },
+ "29-172": {
+  "fr": "déterminant <b>7,99 cm²/m</b> (étriers à deux brins : la moitié par brin)",
+  "es": "determinante <b>7,99 cm²/m</b> (estribos de dos ramas: la mitad por rama)"
+ },
+ "29-173": {
+  "fr": "avec crochet ou crochet à 90° (α<sub>1</sub> = 0,7) : l<sub>bd</sub> = max(0,7 · 644 ; 193) = 451 mm",
+  "es": "con gancho o gancho en escuadra (α<sub>1</sub> = 0,7): l<sub>bd</sub> = max(0,7 · 644; 193) = 451 mm"
+ },
+ "29-174": {
+  "fr": "avec effort tranchant (section compacte, AN) : (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1",
+  "es": "con esfuerzo cortante (sección compacta, AN): (T<sub>Ed</sub>/T<sub>Rd,max</sub>)² + (V<sub>Ed</sub>/V<sub>Rd,max</sub>)² ≤ 1"
+ },
+ "29-175": {
+  "fr": "avec éléments de second œuvre sensibles aux déformations :",
+  "es": "con elementos de acabado sensibles a las deformaciones:"
+ },
+ "29-176": {
+  "fr": "mauvaises conditions",
+  "es": "malas condiciones"
+ },
+ "29-177": {
+  "fr": "non réalisable : dalle plus épaisse, poteau plus grand ou chapiteau",
+  "es": "no realizable: losa más gruesa, pilar mayor o capitel"
+ },
+ "29-178": {
+  "fr": "flexion simple ou flexion composée avec compression",
+  "es": "flexión simple o flexión compuesta con compresión"
+ },
+ "29-179": {
+  "fr": "humidité relative HR [%]",
+  "es": "humedad relativa HR [%]"
+ },
+ "29-180": {
+  "fr": "sur tout le pourtour (poteau, poutre)",
+  "es": "en todo el perímetro (pilar, viga)"
+ },
+ "29-181": {
+  "fr": "permanente et transitoire",
+  "es": "permanente y transitoria"
+ },
+ "29-182": {
+  "fr": "éléments en permanence immergés dans un port",
+  "es": "elementos permanentemente sumergidos en puerto"
+ },
+ "29-183": {
+  "fr": "t<sub>ef</sub> = A/u ≥ 2 · distance d'axe des barres longitudinales au bord · A<sub>k</sub>, u<sub>k</sub> sur la ligne moyenne des parois",
+  "es": "t<sub>ef</sub> = A/u ≥ 2 · distancia del eje de las barras longitudinales al borde · A<sub>k</sub>, u<sub>k</sub> en la línea media de las paredes"
+ },
+ "29-184": {
+  "fr": "surfaces exposées au séchage",
+  "es": "superficies expuestas al secado"
+ },
+ "29-185": {
+  "fr": "forme de livraison typique",
+  "es": "forma de suministro habitual"
+ },
+ "29-186": {
+  "fr": "encastré en pied, articulé en tête",
+  "es": "empotrado en la base, articulado en la cabeza"
+ },
+ "29-187": {
+  "fr": "v<sub>Ed</sub> = β · V<sub>Ed</sub> / (u<sub>1</sub> · d)&nbsp;&nbsp; avec&nbsp; d = (d<sub>x</sub> + d<sub>y</sub>) / 2<br> Poteau rectangulaire c<sub>x</sub> × c<sub>y</sub> :&nbsp; u<sub>1</sub> = 2·(c<sub>x</sub> + c<sub>y</sub>) + 2·π·2d&nbsp;&nbsp;·&nbsp;&nbsp;Poteau circulaire D :&nbsp; u<sub>1</sub> = π·(D + 4d)",
+  "es": "v<sub>Ed</sub> = β · V<sub>Ed</sub> / (u<sub>1</sub> · d)&nbsp;&nbsp; con&nbsp; d = (d<sub>x</sub> + d<sub>y</sub>) / 2<br> Pilar rectangular c<sub>x</sub> × c<sub>y</sub>:&nbsp; u<sub>1</sub> = 2·(c<sub>x</sub> + c<sub>y</sub>) + 2·π·2d&nbsp;&nbsp;·&nbsp;&nbsp;Pilar circular D:&nbsp; u<sub>1</sub> = π·(D + 4d)"
+ },
+ "29-188": {
+  "fr": "simplifié θ = 45° (cot θ = 1,0) en torsion pure ; avec effort tranchant, utiliser le même angle que pour celui-ci",
+  "es": "simplificado θ = 45° (cot θ = 1,0) en torsión pura; con esfuerzo cortante, usar el mismo ángulo que para este"
+ },
+ "29-189": {
+  "fr": "w_max (béton armé)",
+  "es": "w_max (hormigón armado)"
+ },
+ "29-190": {
+  "fr": "alternance d'humidité et de séchage + chlorures",
+  "es": "alternancia de humedad y secado + cloruros"
+ },
+ "29-191": {
+  "fr": "× 0,6 immédiatement au-dessus et au-dessous des poutres/dalles (zone = plus grande dimension du côté) et aux recouvrements avec Ø &gt; 14 mm",
+  "es": "× 0,6 inmediatamente por encima y por debajo de vigas/losas (zona = mayor dimensión del lado) y en solapes con Ø &gt; 14 mm"
+ },
+ "29-192": {
+  "fr": "Ø ≥ 12 mm, une barre dans chaque angle, poteaux circulaires au moins 6 barres",
+  "es": "Ø ≥ 12 mm, una barra en cada esquina, pilares circulares al menos 6 barras"
+ },
+ "29-193": {
+  "fr": "Ø*<sub>s</sub> = w<sub>k</sub> · 3,48·10⁶ / σ<sub>s</sub>² en mm (valeur de base pour f<sub>ct,0</sub> = 2,9 N/mm²) · Pour les sollicitations de charge : Ø<sub>s</sub> = Ø*<sub>s</sub> · σ<sub>s</sub>·A<sub>s</sub> / (4·(h − d)·b·2,9) ≥ Ø*<sub>s</sub> · f<sub>ct,eff</sub>/2,9 · Le diamètre de barre choisi doit être ≤ Ø<sub>s</sub>.",
+  "es": "Ø*<sub>s</sub> = w<sub>k</sub> · 3,48·10⁶ / σ<sub>s</sub>² en mm (valor básico para f<sub>ct,0</sub> = 2,9 N/mm²) · Para solicitación por cargas: Ø<sub>s</sub> = Ø*<sub>s</sub> · σ<sub>s</sub>·A<sub>s</sub> / (4·(h − d)·b·2,9) ≥ Ø*<sub>s</sub> · f<sub>ct,eff</sub>/2,9 · El diámetro de barra elegido debe ser ≤ Ø<sub>s</sub>."
+ },
+ "29-194": {
+  "fr": "Recouvrements — l<sub>0</sub> = α<sub>6</sub> · l<sub>bd</sub>",
+  "es": "Solapes — l<sub>0</sub> = α<sub>6</sub> · l<sub>bd</sub>"
+ },
+ "29-195": {
+  "fr": "au droit du poteau intérieur",
+  "es": "sobre el pilar interior"
+ },
+ "29-196": {
+  "fr": "Δc<sub>dev</sub> = 15 mm (cas courant)",
+  "es": "Δc<sub>dev</sub> = 15 mm (caso habitual)"
+ },
+ "29-197": {
+  "fr": "Δc<sub>dev</sub> = 15 mm, pour XC1 et pour c<sub>min</sub> = c<sub>min,b</sub> 10 mm. Avec contrôle qualité, on peut réduire de 5 mm. Les armatures sont posées à l'<b>enrobage nominal</b> c<sub>v</sub> = c<sub>nom</sub> (cales d'espacement).",
+  "es": "Δc<sub>dev</sub> = 15 mm, para XC1 y para c<sub>min</sub> = c<sub>min,b</sub> 10 mm. Con control de calidad puede reducirse en 5 mm. La armadura se coloca al <b>recubrimiento nominal</b> c<sub>v</sub> = c<sub>nom</sub> (separadores)."
+ },
+ "29-198": {
+  "fr": "Δμ = μ<sub>Eds</sub> − μ<sub>lim</sub>&nbsp;&nbsp;(μ<sub>lim</sub> = 0,296, ω<sub>lim</sub> = 0,364)<br> A<sub>s1</sub> = (ω<sub>lim</sub> + Δμ / (1 − d₂/d)) · b·d·f<sub>cd</sub> / f<sub>yd</sub><br> A<sub>s2</sub> = Δμ / (1 − d₂/d) · b·d·f<sub>cd</sub> / σ<sub>s2</sub>&nbsp;&nbsp;avec&nbsp; ε<sub>s2</sub> = 3,5 ‰ · (ξ − d₂/d) / ξ",
+  "es": "Δμ = μ<sub>Eds</sub> − μ<sub>lim</sub>&nbsp;&nbsp;(μ<sub>lim</sub> = 0,296, ω<sub>lim</sub> = 0,364)<br> A<sub>s1</sub> = (ω<sub>lim</sub> + Δμ / (1 − d₂/d)) · b·d·f<sub>cd</sub> / f<sub>yd</sub><br> A<sub>s2</sub> = Δμ / (1 − d₂/d) · b·d·f<sub>cd</sub> / σ<sub>s2</sub>&nbsp;&nbsp;con&nbsp; ε<sub>s2</sub> = 3,5 ‰ · (ξ − d₂/d) / ξ"
+ },
+ "29-199": {
+  "fr": "α<sub>1</sub> = 0,7 pour crochets, crochets à 90° et boucles (enrobage perpendiculaire au plan de courbure ≥ 3·Ø), sinon 1,0 · α<sub>2</sub> … α<sub>5</sub> simplifiés à 1,0 (côté sécurité)",
+  "es": "α<sub>1</sub> = 0,7 para ganchos, ganchos en escuadra y lazos (recubrimiento perpendicular al plano de curvatura ≥ 3·Ø), en otro caso 1,0 · α<sub>2</sub> … α<sub>5</sub> simplificados a 1,0 (del lado de la seguridad)"
+ },
+ "29-200": {
+  "fr": "α<sub>2</sub> avec α<sub>1</sub>",
+  "es": "α<sub>2</sub> con α<sub>1</sub>"
+ }
+}

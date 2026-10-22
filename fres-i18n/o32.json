@@ -1,0 +1,626 @@
+{
+"32-0": {
+"fr": "h<sub>v,R</sub> = λ · L/d · v²/(2g)&nbsp;&nbsp;&nbsp; Re = v · d / ν&nbsp;&nbsp; (ν ≈ 1,31·10⁻⁶ m²/s à 10 °C, voir propriétés de l'eau)<br> laminaire (Re &lt; 2320) :&nbsp; λ = 64 / Re<br> turbulent (Colebrook-White) :&nbsp; 1/√λ = −2 · lg( 2,51/(Re·√λ) + k/(3,71·d) )<br> pertes de charge singulières :&nbsp; h<sub>v,ö</sub> = Σζ · v²/(2g)",
+"es": "h<sub>v,R</sub> = λ · L/d · v²/(2g)&nbsp;&nbsp;&nbsp; Re = v · d / ν&nbsp;&nbsp; (ν ≈ 1,31·10⁻⁶ m²/s a 10 °C, véase propiedades del agua)<br> laminar (Re &lt; 2320):&nbsp; λ = 64 / Re<br> turbulento (Colebrook-White):&nbsp; 1/√λ = −2 · lg( 2,51/(Re·√λ) + k/(3,71·d) )<br> pérdidas localizadas:&nbsp; h<sub>v,ö</sub> = Σζ · v²/(2g)"
+},
+"32-1": {
+"fr": "puissance hydraulique P<sub>h</sub> = ρ · g · Q · H · puissance sur l'arbre P = P<sub>h</sub> / η · puissance du moteur avec une réserve de 10 … 20 %",
+"es": "potencia hidráulica P<sub>h</sub> = ρ · g · Q · H · potencia en el eje P = P<sub>h</sub> / η · potencia del motor con una reserva de 10 … 20 %"
+},
+"32-2": {
+"fr": "quasiment pas de dissipation d'énergie",
+"es": "casi sin disipación de energía"
+},
+"32-3": {
+"fr": "tronçon de conduite court",
+"es": "tramo corto de tubería"
+},
+"32-4": {
+"fr": "profondeur moyenne h<sub>m</sub> [m] (canal)",
+"es": "profundidad media h<sub>m</sub> [m] (canal)"
+},
+"32-5": {
+"fr": "ruisseau naturel, pierreux",
+"es": "arroyo natural, pedregoso"
+},
+"32-6": {
+"fr": "ressaut oscillant",
+"es": "resalto oscilante"
+},
+"32-7": {
+"fr": "r<sub>D,T</sub> [l/(s·ha)] selon KOSTRA-DWD pour la durée D et la période de retour T (p. ex. pluie de 5 min, T = 2 a pour l'évacuation des toitures selon DIN 1986-100)",
+"es": "r<sub>D,T</sub> [l/(s·ha)] según KOSTRA-DWD para la duración D y el periodo de retorno T (p. ej. lluvia de 5 min, T = 2 a para el drenaje de cubiertas según DIN 1986-100)"
+},
+"32-8": {
+"fr": "rugosité relative k/d = 0,000500 · Colebrook-White itératif : 1/√λ = −2 · lg(2,51/(Re · √λ) + k/(3,71 · d))",
+"es": "rugosidad relativa k/d = 0,000500 · Colebrook-White iterativo: 1/√λ = −2 · lg(2,51/(Re · √λ) + k/(3,71 · d))"
+},
+"32-9": {
+"fr": "à arête vive (orifice)",
+"es": "de arista viva (orificio)"
+},
+"32-10": {
+"fr": "torrentiel (torrent, chenal à forte pente)",
+"es": "supercrítico (torrente, canal de fuerte pendiente)"
+},
+"32-11": {
+"fr": "torrentiel, Fr₁ &gt; 1",
+"es": "supercrítico, Fr₁ &gt; 1"
+},
+"32-12": {
+"fr": "ressaut faible",
+"es": "resalto débil"
+},
+"32-13": {
+"fr": "très forte sollicitation du fond",
+"es": "carga muy elevada sobre el fondo"
+},
+"32-14": {
+"fr": "débit spécifique q = Q / b = 0,783 m²/s · profondeur critique sur la crête h<sub>gr</sub> = ∛(q²/g) = 0,397 m",
+"es": "caudal específico q = Q / b = 0,783 m²/s · calado crítico en la coronación h<sub>gr</sub> = ∛(q²/g) = 0,397 m"
+},
+"32-15": {
+"fr": "débit spécifique q [m²/s]",
+"es": "caudal específico q [m²/s]"
+},
+"32-16": {
+"fr": "ressaut stable",
+"es": "resalto estable"
+},
+"32-17": {
+"fr": "ressaut fort",
+"es": "resalto fuerte"
+},
+"32-18": {
+"fr": "fluvial &lt; 1, torrentiel &gt; 1 · h<sub>m</sub> = A / B",
+"es": "subcrítico &lt; 1, supercrítico &gt; 1 · h<sub>m</sub> = A / B"
+},
+"32-19": {
+"fr": "fluvial (rivière de plaine)",
+"es": "subcrítico (río de llanura)"
+},
+"32-20": {
+"fr": "fluvial, Fr₂ &lt; 1",
+"es": "subcrítico, Fr₂ &lt; 1"
+},
+"32-21": {
+"fr": "agité, vagues dans l'aval — à éviter",
+"es": "agitado, ondas hacia aguas abajo — evitar"
+},
+"32-22": {
+"fr": "v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; R = A / U<br> Trapèze :&nbsp; A = (b + m·h)·h&nbsp;&nbsp;&nbsp; U = b + 2·h·√(1 + m²)&nbsp;&nbsp;&nbsp; Rectangle : m = 0",
+"es": "v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; R = A / U<br> Trapecio:&nbsp; A = (b + m·h)·h&nbsp;&nbsp;&nbsp; U = b + 2·h·√(1 + m²)&nbsp;&nbsp;&nbsp; Rectángulo: m = 0"
+},
+"32-23": {
+"fr": "noyé : l'aval est si bas qu'il n'influence pas le déversement · b — largeur du déversoir",
+"es": "libre: el nivel aguas abajo está tan bajo que no influye en el vertido · b — anchura del vertedero"
+},
+"32-24": {
+"fr": "profondeur existante h [m] (facultatif)",
+"es": "calado existente h [m] (opcional)"
+},
+"32-25": {
+"fr": "revêtement stabilisé, gravier",
+"es": "firme de zahorra, grava"
+},
+"32-26": {
+"fr": "important pour les petits modèles et les gouttes",
+"es": "importante en modelos pequeños y gotas"
+},
+"32-27": {
+"fr": "y est mesuré dans le plan de la surface à partir du plan d'eau. Le centre de poussée D se situe toujours plus bas que le centre de gravité S.",
+"es": "y se mide en el plano de la superficie desde el nivel del agua. El centro de presiones D siempre se sitúa más abajo que el centro de gravedad S."
+},
+"32-28": {
+"fr": "z — hauteur géométrique · p/(ρg) — hauteur de pression · v²/(2g) — hauteur cinétique, toutes en m",
+"es": "z — altura geométrica · p/(ρg) — altura de presión · v²/(2g) — altura de velocidad, todas en m"
+},
+"32-29": {
+"fr": "Orifice",
+"es": "Orificio"
+},
+"32-30": {
+"fr": "Orifice d [mm]",
+"es": "Orificio d [mm]"
+},
+"32-31": {
+"fr": "Calculer le déversement",
+"es": "Calcular el vertido"
+},
+"32-32": {
+"fr": "Charge sur le déversoir h<sub>ü</sub> [m]",
+"es": "Altura de vertido h<sub>ü</sub> [m]"
+},
+"32-33": {
+"fr": "Charge sur le déversoir h<sub>ü</sub> au-dessus de la crête, hauteur de pelle w au-dessus du fond.",
+"es": "Altura de vertido h<sub>ü</sub> sobre la coronación del vertedero, altura del vertedero w sobre el fondo."
+},
+"32-34": {
+"fr": "Zone de transition (Re · k/d · √(λ/8) = 5,9)",
+"es": "Zona de transición (Re · k/d · √(λ/8) = 5,9)"
+},
+"32-35": {
+"fr": "Δp = ρ · a · Δv = 1000 · 1236 · 1,50 / 10⁵ = 18,54 bar (189,0 m de colonne d'eau)",
+"es": "Δp = ρ · a · Δv = 1000 · 1236 · 1,50 / 10⁵ = 18,54 bar (189,0 m de columna de agua)"
+},
+"32-36": {
+"fr": "θ = 2 · arccos(1 − 2·h/D)&nbsp;&nbsp;&nbsp; A = D²/8 · (θ − sin θ)&nbsp;&nbsp;&nbsp; U = D/2 · θ&nbsp;&nbsp;&nbsp; R = A / U<br> v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; (θ en radians)",
+"es": "θ = 2 · arccos(1 − 2·h/D)&nbsp;&nbsp;&nbsp; A = D²/8 · (θ − sin θ)&nbsp;&nbsp;&nbsp; U = D/2 · θ&nbsp;&nbsp;&nbsp; R = A / U<br> v = k<sub>St</sub> · R<sup>2/3</sup> · I<sup>1/2</sup>&nbsp;&nbsp;&nbsp; Q = v · A&nbsp;&nbsp;&nbsp; (θ en radianes)"
+},
+"32-37": {
+"fr": "λ = 0,01849 (explicite selon Swamee-Jain à titre de comparaison : 0,01862)",
+"es": "λ = 0,01849 (explícito según Swamee-Jain, a modo de comparación: 0,01862)"
+},
+"32-38": {
+"fr": "μ = α · φ — coefficient de débit issu du coefficient de contraction du jet α et du coefficient de vitesse φ",
+"es": "μ = α · φ — coeficiente de desagüe, resultado del coeficiente de contracción del chorro α y del coeficiente de velocidad φ"
+},
+"32-39": {
+"fr": "ν viscosité cinématique, μ = ρ · ν viscosité dynamique · p<sub>D</sub> pression de vapeur (cavitation) · σ tension superficielle. Module de compressibilité K ≈ 2,1 · 10⁹ N/m² · poids volumique en pratique γ<sub>w</sub> = 10 kN/m³ (plus précisément ρ · g = 9,81 kN/m³).",
+"es": "ν viscosidad cinemática, μ = ρ · ν viscosidad dinámica · p<sub>D</sub> presión de vapor (cavitación) · σ tensión superficial. Módulo de compresibilidad K ≈ 2,1 · 10⁹ N/m² · peso específico en la práctica γ<sub>w</sub> = 10 kN/m³ (más exactamente ρ · g = 9,81 kN/m³)."
+},
+"32-40": {
+"fr": "→ fluvial",
+"es": "→ subcrítico"
+},
+"32-41": {
+"fr": "Conduite : laminaire < 2320, turbulent > 10⁴ · Canal avec L = 4R",
+"es": "Tubería: laminar < 2320, turbulento > 10⁴ · Canal con L = 4R"
+},
+"32-42": {
+"fr": "fluvial < 1, torrentiel > 1 · h<sub>m</sub> = A / B",
+"es": "subcrítico < 1, supercrítico > 1 · h<sub>m</sub> = A / B"
+},
+"32-43": {
+"fr": "<div class=\"calc-field\"><label>Écoulement</label><select id=\"kz-art\" onchange=\"updateKZ()\"><option value=\"rohr\" selected>Conduite (L = d)</option><option value=\"gerinne\">Canal (L = 4R)</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Flujo</label><select id=\"kz-art\" onchange=\"updateKZ()\"><option value=\"rohr\" selected>Tubería (L = d)</option><option value=\"gerinne\">Canal (L = 4R)</option></select></div>"
+},
+"32-44": {
+"fr": "<div class=\"calc-field\"><label>Vitesse v [m/s]</label><input type=\"number\" id=\"kz-v\" value=\"1.2\" step=\"any\" oninput=\"updateKZ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Velocidad v [m/s]</label><input type=\"number\" id=\"kz-v\" value=\"1.2\" step=\"any\" oninput=\"updateKZ()\"></div>"
+},
+"32-45": {
+"fr": "<div class=\"calc-field\"><label>Longueur L [m] (d ou 4R)</label><input type=\"number\" id=\"kz-L\" value=\"0.2\" step=\"any\" oninput=\"updateKZ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud L [m] (d o 4R)</label><input type=\"number\" id=\"kz-L\" value=\"0.2\" step=\"any\" oninput=\"updateKZ()\"></div>"
+},
+"32-46": {
+"fr": "<div class=\"calc-field\"><label>Température de l'eau T [°C]</label><input type=\"number\" id=\"kz-T\" value=\"10\" step=\"any\" oninput=\"updateKZ()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura del agua T [°C]</label><input type=\"number\" id=\"kz-T\" value=\"10\" step=\"any\" oninput=\"updateKZ()\"></div>"
+},
+"32-47": {
+"fr": "<div class=\"calc-field\"><label>profondeur moyenne h<sub>m</sub> [m] (canal)</label><input type=\"number\" id=\"kz-h\" value=\"1\" step=\"any\" oninput=\"updateKZ()\"></div>",
+"es": "<div class=\"calc-field\"><label>profundidad media h<sub>m</sub> [m] (canal)</label><input type=\"number\" id=\"kz-h\" value=\"1\" step=\"any\" oninput=\"updateKZ()\"></div>"
+},
+"32-48": {
+"fr": "§Propriétés de l'eau à {} °C (interpolées)",
+"es": "§Propiedades del agua a {} °C (interpoladas)"
+},
+"32-49": {
+"fr": "§Nombre de Reynolds (inertie / viscosité)",
+"es": "§Número de Reynolds (inercia / viscosidad)"
+},
+"32-50": {
+"fr": "!Canal (L = 4R ou R avec Re<sub>R</sub> < 580 laminaire) : Re<sub>4R</sub> = {} → {}",
+"es": "!Canal (L = 4R o R con Re<sub>R</sub> < 580 laminar): Re<sub>4R</sub> = {} → {}"
+},
+"32-51": {
+"fr": "§Nombre de Froude (inertie / pesanteur)",
+"es": "§Número de Froude (inercia / gravedad)"
+},
+"32-52": {
+"fr": "fluvial (Fr < 1)",
+"es": "subcrítico (Fr < 1)"
+},
+"32-53": {
+"fr": "<div class=\"calc-field\"><label>Débit Q [l/s]</label><input type=\"number\" id=\"wbr-Q\" value=\"50\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+"es": "<div class=\"calc-field\"><label>Caudal Q [l/s]</label><input type=\"number\" id=\"wbr-Q\" value=\"50\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+},
+"32-54": {
+"fr": "<div class=\"calc-field\"><label>Diamètre intérieur d [mm]</label><input type=\"number\" id=\"wbr-d\" value=\"200\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+"es": "<div class=\"calc-field\"><label>Diámetro interior d [mm]</label><input type=\"number\" id=\"wbr-d\" value=\"200\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+},
+"32-55": {
+"fr": "<div class=\"calc-field\"><label>Longueur L [m]</label><input type=\"number\" id=\"wbr-L\" value=\"500\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud L [m]</label><input type=\"number\" id=\"wbr-L\" value=\"500\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+},
+"32-56": {
+"fr": "<div class=\"calc-field\"><label>Rugosité k [mm]</label><input type=\"number\" id=\"wbr-k\" value=\"0.1\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+"es": "<div class=\"calc-field\"><label>Rugosidad k [mm]</label><input type=\"number\" id=\"wbr-k\" value=\"0.1\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+},
+"32-57": {
+"fr": "<div class=\"calc-field\"><label>Température de l'eau T [°C]</label><input type=\"number\" id=\"wbr-T\" value=\"10\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura del agua T [°C]</label><input type=\"number\" id=\"wbr-T\" value=\"10\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+},
+"32-58": {
+"fr": "<div class=\"calc-field\"><label>Somme des coefficients de perte de charge Σζ</label><input type=\"number\" id=\"wbr-z\" value=\"1.5\" step=\"any\" oninput=\"updateRohrR()\"></div>",
+"es": "<div class=\"calc-field\"><label>Suma de coeficientes de pérdida Σζ</label><input type=\"number\" id=\"wbr-z\" value=\"1.5\" step=\"any\" oninput=\"updateRohrR()\"></div>"
+},
+"32-59": {
+"fr": "§Vitesse d'écoulement",
+"es": "§Velocidad del flujo"
+},
+"32-60": {
+"fr": "!rugosité relative k/d = {} · Colebrook-White itératif : 1/√λ = −2 · lg(2,51/(Re · √λ) + k/(3,71 · d))",
+"es": "!rugosidad relativa k/d = {} · Colebrook-White iterativo: 1/√λ = −2 · lg(2,51/(Re · √λ) + k/(3,71 · d))"
+},
+"32-61": {
+"fr": "λ = {} (explicite selon Swamee-Jain à titre de comparaison : {}{})",
+"es": "λ = {} (explícito según Swamee-Jain, a modo de comparación: {}{})"
+},
+"32-62": {
+"fr": "Zone de transition",
+"es": "Zona de transición"
+},
+"32-63": {
+"fr": "§Pertes de charge",
+"es": "§Pérdidas de carga"
+},
+"32-64": {
+"fr": "Conduite DN {}, Q = {} l/s",
+"es": "Tubería DN {}, Q = {} l/s"
+},
+"32-65": {
+"fr": "!Vidange d'un réservoir de section constante A<sub>B</sub> de h<sub>1</sub> à h<sub>2</sub> : de A<sub>B</sub> · dh = −Q · dt découle t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)",
+"es": "!Vaciado de un depósito de sección constante A<sub>B</sub> de h<sub>1</sub> a h<sub>2</sub>: de A<sub>B</sub> · dh = −Q · dt resulta t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)"
+},
+"32-66": {
+"fr": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Vidange d'un réservoir de section constante A<sub>B</sub> de h<sub>1</sub> à h<sub>2</sub> : de A<sub>B</sub> · dh = −Q · dt découle t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)</div></div></div>",
+"es": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Vaciado de un depósito de sección constante A<sub>B</sub> de h<sub>1</sub> a h<sub>2</sub>: de A<sub>B</sub> · dh = −Q · dt resulta t = 2 · A<sub>B</sub> / (μ · A · √(2g)) · (√h<sub>1</sub> − √h<sub>2</sub>)</div></div></div>"
+},
+"32-67": {
+"fr": "<div class=\"calc-field\"><label>Orifice d [mm]</label><input type=\"number\" id=\"af-d\" value=\"100\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Orificio d [mm]</label><input type=\"number\" id=\"af-d\" value=\"100\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+},
+"32-68": {
+"fr": "<div class=\"calc-field\"><label>Coefficient de débit μ</label><input type=\"number\" id=\"af-mu\" value=\"0.62\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Coeficiente de desagüe μ</label><input type=\"number\" id=\"af-mu\" value=\"0.62\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+},
+"32-69": {
+"fr": "<div class=\"calc-field\"><label>Niveau d'eau h<sub>1</sub> [m]</label><input type=\"number\" id=\"af-h1\" value=\"2\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Nivel de agua h<sub>1</sub> [m]</label><input type=\"number\" id=\"af-h1\" value=\"2\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+},
+"32-70": {
+"fr": "<div class=\"calc-field\"><label>Niveau d'eau final h<sub>2</sub> [m]</label><input type=\"number\" id=\"af-h2\" value=\"0\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Nivel de agua final h<sub>2</sub> [m]</label><input type=\"number\" id=\"af-h2\" value=\"0\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+},
+"32-71": {
+"fr": "<div class=\"calc-field\"><label>Section du réservoir A<sub>B</sub> [m²] (0 = sans)</label><input type=\"number\" id=\"af-A\" value=\"10\" step=\"any\" oninput=\"updateAusfl()\"></div>",
+"es": "<div class=\"calc-field\"><label>Sección del depósito A<sub>B</sub> [m²] (0 = sin)</label><input type=\"number\" id=\"af-A\" value=\"10\" step=\"any\" oninput=\"updateAusfl()\"></div>"
+},
+"32-72": {
+"fr": "§Écoulement à h<sub>1</sub> = {} m",
+"es": "§Desagüe a h<sub>1</sub> = {} m"
+},
+"32-73": {
+"fr": "§Vidange d'un réservoir prismatique (section A<sub>B</sub> = {} m²)",
+"es": "§Vaciado de un depósito prismático (sección A<sub>B</sub> = {} m²)"
+},
+"32-74": {
+"fr": "!Courbe caractéristique de l'installation H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (les pertes de charge croissent avec Q²) · point de fonctionnement = intersection avec la courbe de la pompe",
+"es": "!Curva característica de la instalación H<sub>A</sub>(Q) = H<sub>geo</sub> + Σ h<sub>v</sub>(Q) (las pérdidas crecen con Q²) · punto de funcionamiento = intersección con la curva de la bomba"
+},
+"32-75": {
+"fr": "!puissance hydraulique P<sub>h</sub> = ρ · g · Q · H · puissance sur l'arbre P = P<sub>h</sub> / η · puissance du moteur avec une réserve de 10 … 20 %",
+"es": "!potencia hidráulica P<sub>h</sub> = ρ · g · Q · H · potencia en el eje P = P<sub>h</sub> / η · potencia del motor con una reserva de 10 … 20 %"
+},
+"32-76": {
+"fr": "!Cavitation : NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0,5 m (h<sub>s,geo</sub> > 0 en aspiration)",
+"es": "!Cavitación: NPSH<sub>A</sub> = (p<sub>a</sub> − p<sub>D</sub>) / (ρ · g) − h<sub>s,geo</sub> − h<sub>v,s</sub> ≥ NPSH<sub>R</sub> + 0,5 m (h<sub>s,geo</sub> > 0 en aspiración)"
+},
+"32-77": {
+"fr": "!Lois de similitude lors d'une variation de vitesse de rotation : Q ~ n · H ~ n² · P ~ n³",
+"es": "!Leyes de semejanza al variar el número de revoluciones: Q ~ n · H ~ n² · P ~ n³"
+},
+"32-78": {
+"fr": "<div class=\"calc-field\"><label>Débit refoulé Q [l/s]</label><input type=\"number\" id=\"pu-Q\" value=\"30\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Caudal impulsado Q [l/s]</label><input type=\"number\" id=\"pu-Q\" value=\"30\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-79": {
+"fr": "<div class=\"calc-field\"><label>Hauteur géométrique de refoulement H<sub>geo</sub> [m]</label><input type=\"number\" id=\"pu-Hg\" value=\"25\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Altura geométrica de impulsión H<sub>geo</sub> [m]</label><input type=\"number\" id=\"pu-Hg\" value=\"25\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-80": {
+"fr": "<div class=\"calc-field\"><label>Perte de charge h<sub>v</sub> [m]</label><input type=\"number\" id=\"pu-hv\" value=\"4.5\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Pérdida de carga h<sub>v</sub> [m]</label><input type=\"number\" id=\"pu-hv\" value=\"4.5\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-81": {
+"fr": "<div class=\"calc-field\"><label>Rendement η [%]</label><input type=\"number\" id=\"pu-eta\" value=\"72\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Rendimiento η [%]</label><input type=\"number\" id=\"pu-eta\" value=\"72\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-82": {
+"fr": "<div class=\"calc-field\"><label>Pression atmosphérique p<sub>a</sub> [kPa]</label><input type=\"number\" id=\"pu-pa\" value=\"101.3\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Presión atmosférica p<sub>a</sub> [kPa]</label><input type=\"number\" id=\"pu-pa\" value=\"101.3\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-83": {
+"fr": "<div class=\"calc-field\"><label>Hauteur d'aspiration h<sub>s,geo</sub> [m] (en charge : négative)</label><input type=\"number\" id=\"pu-hs\" value=\"3\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Altura de aspiración h<sub>s,geo</sub> [m] (en carga: negativa)</label><input type=\"number\" id=\"pu-hs\" value=\"3\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-84": {
+"fr": "<div class=\"calc-field\"><label>Pertes côté aspiration h<sub>v,s</sub> [m]</label><input type=\"number\" id=\"pu-hvs\" value=\"0.6\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Pérdidas en la aspiración h<sub>v,s</sub> [m]</label><input type=\"number\" id=\"pu-hvs\" value=\"0.6\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-85": {
+"fr": "<div class=\"calc-field\"><label>Température de l'eau T [°C]</label><input type=\"number\" id=\"pu-T\" value=\"15\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>Temperatura del agua T [°C]</label><input type=\"number\" id=\"pu-T\" value=\"15\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-86": {
+"fr": "<div class=\"calc-field\"><label>NPSH<sub>R</sub> de la pompe [m]</label><input type=\"number\" id=\"pu-npsh\" value=\"3.5\" step=\"any\" oninput=\"updatePumpe()\"></div>",
+"es": "<div class=\"calc-field\"><label>NPSH<sub>R</sub> de la bomba [m]</label><input type=\"number\" id=\"pu-npsh\" value=\"3.5\" step=\"any\" oninput=\"updatePumpe()\"></div>"
+},
+"32-87": {
+"fr": "§Hauteur manométrique de l'installation",
+"es": "§Altura de impulsión de la instalación"
+},
+"32-88": {
+"fr": "P<sub>Welle</sub> = P<sub>hydr</sub> / η = {} / {} = {} kW",
+"es": "P<sub>Welle</sub> = P<sub>hydr</sub> / η = {} / {} = {} kW"
+},
+"32-89": {
+"fr": "pas de cavitation à craindre",
+"es": "no se espera cavitación"
+},
+"32-90": {
+"fr": "!NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0,5 m de sécurité : {} {} {} m → {}",
+"es": "!NPSH<sub>A</sub> ≥ NPSH<sub>R</sub> + 0,5 m de seguridad: {} {} {} m → {}"
+},
+"32-91": {
+"fr": "!a ≈ 1400 m/s dans les conduites rigides (acier), 300 … 500 m/s dans les conduites en PE",
+"es": "!a ≈ 1400 m/s en tuberías rígidas (acero), 300 … 500 m/s en tuberías de PE"
+},
+"32-92": {
+"fr": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Δp = ρ · a · Δv · a = √((K/ρ) / (1 + K · d / (E · s))) · T<sub>r</sub> = 2L / a</div><div class=\"st-note\">a ≈ 1400 m/s dans les conduites rigides (acier), 300 … 500 m/s dans les conduites en PE</div></div></div>",
+"es": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Δp = ρ · a · Δv · a = √((K/ρ) / (1 + K · d / (E · s))) · T<sub>r</sub> = 2L / a</div><div class=\"st-note\">a ≈ 1400 m/s en tuberías rígidas (acero), 300 … 500 m/s en tuberías de PE</div></div></div>"
+},
+"32-93": {
+"fr": "<div class=\"calc-field\"><label>Diamètre intérieur d [mm]</label><input type=\"number\" id=\"dst-d\" value=\"300\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+"es": "<div class=\"calc-field\"><label>Diámetro interior d [mm]</label><input type=\"number\" id=\"dst-d\" value=\"300\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+},
+"32-94": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur de paroi s [mm]</label><input type=\"number\" id=\"dst-s\" value=\"8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor de pared s [mm]</label><input type=\"number\" id=\"dst-s\" value=\"8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+},
+"32-95": {
+"fr": "<div class=\"calc-field\"><label>Module d'élasticité de la conduite [GN/m²]</label><input type=\"number\" id=\"dst-E\" value=\"210\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+"es": "<div class=\"calc-field\"><label>Módulo de elasticidad de la tubería [GN/m²]</label><input type=\"number\" id=\"dst-E\" value=\"210\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+},
+"32-96": {
+"fr": "<div class=\"calc-field\"><label>Longueur de la conduite L [m]</label><input type=\"number\" id=\"dst-L\" value=\"800\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+"es": "<div class=\"calc-field\"><label>Longitud de la tubería L [m]</label><input type=\"number\" id=\"dst-L\" value=\"800\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+},
+"32-97": {
+"fr": "<div class=\"calc-field\"><label>Variation de vitesse Δv [m/s]</label><input type=\"number\" id=\"dst-dv\" value=\"1.5\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+"es": "<div class=\"calc-field\"><label>Variación de velocidad Δv [m/s]</label><input type=\"number\" id=\"dst-dv\" value=\"1.5\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+},
+"32-98": {
+"fr": "<div class=\"calc-field\"><label>Temps de fermeture t<sub>s</sub> [s]</label><input type=\"number\" id=\"dst-ts\" value=\"0.8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>",
+"es": "<div class=\"calc-field\"><label>Tiempo de cierre t<sub>s</sub> [s]</label><input type=\"number\" id=\"dst-ts\" value=\"0.8\" step=\"any\" oninput=\"updateDruckstoss()\"></div>"
+},
+"32-99": {
+"fr": "§Coup de bélier (Joukowsky)",
+"es": "§Golpe de ariete (Joukowsky)"
+},
+"32-100": {
+"fr": "Δp = ρ · a · Δv = 1000 · {} · {} / 10⁵ = {} bar ({} m de colonne d'eau)",
+"es": "Δp = ρ · a · Δv = 1000 · {} · {} / 10⁵ = {} bar ({} m de columna de agua)"
+},
+"32-101": {
+"fr": "fermeture rapide : coup de bélier de Joukowsky complet",
+"es": "cierre rápido: golpe de ariete de Joukowsky completo"
+},
+"32-102": {
+"fr": "!Temps de fermeture t<sub>s</sub> = {} s {} T<sub>r</sub> → {}",
+"es": "!Tiempo de cierre t<sub>s</sub> = {} s {} T<sub>r</sub> → {}"
+},
+"32-103": {
+"fr": "<div class=\"calc-field\"><label>Largeur au fond b [m]</label><input type=\"number\" id=\"wbg-b\" value=\"3\" step=\"any\" oninput=\"updateManning()\"></div>",
+"es": "<div class=\"calc-field\"><label>Anchura de solera b [m]</label><input type=\"number\" id=\"wbg-b\" value=\"3\" step=\"any\" oninput=\"updateManning()\"></div>"
+},
+"32-104": {
+"fr": "<div class=\"calc-field\"><label>Profondeur d'eau h [m]</label><input type=\"number\" id=\"wbg-h\" value=\"1.2\" step=\"any\" oninput=\"updateManning()\"></div>",
+"es": "<div class=\"calc-field\"><label>Calado h [m]</label><input type=\"number\" id=\"wbg-h\" value=\"1.2\" step=\"any\" oninput=\"updateManning()\"></div>"
+},
+"32-105": {
+"fr": "<div class=\"calc-field\"><label>Fruit de talus m (0 = rectangle)</label><input type=\"number\" id=\"wbg-m\" value=\"0\" step=\"any\" oninput=\"updateManning()\"></div>",
+"es": "<div class=\"calc-field\"><label>Talud m (0 = rectángulo)</label><input type=\"number\" id=\"wbg-m\" value=\"0\" step=\"any\" oninput=\"updateManning()\"></div>"
+},
+"32-106": {
+"fr": "<div class=\"calc-field\"><label>Pente I [‰]</label><input type=\"number\" id=\"wbg-I\" value=\"0.5\" step=\"any\" oninput=\"updateManning()\"></div>",
+"es": "<div class=\"calc-field\"><label>Pendiente I [‰]</label><input type=\"number\" id=\"wbg-I\" value=\"0.5\" step=\"any\" oninput=\"updateManning()\"></div>"
+},
+"32-107": {
+"fr": "Canal b = {} m, h = {} m, m = {}",
+"es": "Canal b = {} m, h = {} m, m = {}"
+},
+"32-108": {
+"fr": "§Vitesse d'écoulement et débit",
+"es": "§Velocidad del flujo y caudal"
+},
+"32-109": {
+"fr": "§Régime d'écoulement",
+"es": "§Régimen de flujo"
+},
+"32-110": {
+"fr": "torrentiel (Fr > 1)",
+"es": "supercrítico (Fr > 1)"
+},
+"32-111": {
+"fr": "<div class=\"calc-field\"><label>Débit Q [m³/s]</label><input type=\"number\" id=\"gt-Q\" value=\"6\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+"es": "<div class=\"calc-field\"><label>Caudal Q [m³/s]</label><input type=\"number\" id=\"gt-Q\" value=\"6\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+},
+"32-112": {
+"fr": "<div class=\"calc-field\"><label>Largeur au fond b [m]</label><input type=\"number\" id=\"gt-b\" value=\"3\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+"es": "<div class=\"calc-field\"><label>Anchura de solera b [m]</label><input type=\"number\" id=\"gt-b\" value=\"3\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+},
+"32-113": {
+"fr": "<div class=\"calc-field\"><label>Fruit de talus m (0 = rectangle)</label><input type=\"number\" id=\"gt-m\" value=\"0\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+"es": "<div class=\"calc-field\"><label>Talud m (0 = rectángulo)</label><input type=\"number\" id=\"gt-m\" value=\"0\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+},
+"32-114": {
+"fr": "<div class=\"calc-field\"><label>Profondeur existante h [m] (facultatif)</label><input type=\"number\" id=\"gt-h\" value=\"1.2\" step=\"any\" oninput=\"updateGrenz()\"></div>",
+"es": "<div class=\"calc-field\"><label>Calado existente h [m] (opcional)</label><input type=\"number\" id=\"gt-h\" value=\"1.2\" step=\"any\" oninput=\"updateGrenz()\"></div>"
+},
+"32-115": {
+"fr": "§État critique : Fr = 1 soit Q² · B / (g · A³) = 1",
+"es": "§Estado crítico: Fr = 1, es decir, Q² · B / (g · A³) = 1"
+},
+"32-116": {
+"fr": "§État à h = {} m",
+"es": "§Estado para h = {} m"
+},
+"32-117": {
+"fr": "<div class=\"calc-field\"><label>Largeur du déversoir b [m]</label><input type=\"number\" id=\"wbw-b\" value=\"5\" step=\"any\" oninput=\"updatePoleni()\"></div>",
+"es": "<div class=\"calc-field\"><label>Anchura del vertedero b [m]</label><input type=\"number\" id=\"wbw-b\" value=\"5\" step=\"any\" oninput=\"updatePoleni()\"></div>"
+},
+"32-118": {
+"fr": "<div class=\"calc-field\"><label>Charge sur le déversoir h<sub>ü</sub> [m]</label><input type=\"number\" id=\"wbw-h\" value=\"0.5\" step=\"any\" oninput=\"updatePoleni()\"></div>",
+"es": "<div class=\"calc-field\"><label>Altura de vertido h<sub>ü</sub> [m]</label><input type=\"number\" id=\"wbw-h\" value=\"0.5\" step=\"any\" oninput=\"updatePoleni()\"></div>"
+},
+"32-119": {
+"fr": "<div class=\"calc-field\"><label>Coefficient μ</label><input type=\"number\" id=\"wbw-mu\" value=\"0.75\" step=\"any\" oninput=\"updatePoleni()\"></div>",
+"es": "<div class=\"calc-field\"><label>Coeficiente μ</label><input type=\"number\" id=\"wbw-mu\" value=\"0.75\" step=\"any\" oninput=\"updatePoleni()\"></div>"
+},
+"32-120": {
+"fr": "!débit spécifique q = Q / b = {} m²/s · profondeur critique sur la crête h<sub>gr</sub> = ∛(q²/g) = {} m",
+"es": "!caudal específico q = Q / b = {} m²/s · calado crítico en la coronación h<sub>gr</sub> = ∛(q²/g) = {} m"
+},
+"32-121": {
+"fr": "torrentiel, Fr₁ > 1",
+"es": "supercrítico, Fr₁ > 1"
+},
+"32-122": {
+"fr": "fluvial, Fr₂ < 1",
+"es": "subcrítico, Fr₂ < 1"
+},
+"32-123": {
+"fr": "!Théorème de la quantité de mouvement (canal rectangulaire) : h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)",
+"es": "!Teorema de la cantidad de movimiento (canal rectangular): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)"
+},
+"32-124": {
+"fr": "!Perte d'énergie ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · longueur L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)",
+"es": "!Pérdida de energía ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · longitud L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)"
+},
+"32-125": {
+"fr": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Théorème de la quantité de mouvement (canal rectangulaire) : h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)</div><div class=\"st-note\">Perte d'énergie ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · longueur L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)</div></div></div>",
+"es": "<div class=\"ablauf\"><div class=\"steps\"><div class=\"st-note\">Teorema de la cantidad de movimiento (canal rectangular): h<sub>2</sub> / h<sub>1</sub> = ½ · (√(1 + 8 · Fr<sub>1</sub>²) − 1)</div><div class=\"st-note\">Pérdida de energía ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) · longitud L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>)</div></div></div>"
+},
+"32-126": {
+"fr": "<div class=\"calc-field\"><label>Débit spécifique q [m²/s]</label><input type=\"number\" id=\"ws2-q\" value=\"4\" step=\"any\" oninput=\"updateSprung()\"></div>",
+"es": "<div class=\"calc-field\"><label>Caudal específico q [m²/s]</label><input type=\"number\" id=\"ws2-q\" value=\"4\" step=\"any\" oninput=\"updateSprung()\"></div>"
+},
+"32-127": {
+"fr": "<div class=\"calc-field\"><label>Profondeur amont h<sub>1</sub> [m]</label><input type=\"number\" id=\"ws2-h1\" value=\"0.4\" step=\"any\" oninput=\"updateSprung()\"></div>",
+"es": "<div class=\"calc-field\"><label>Calado de entrada h<sub>1</sub> [m]</label><input type=\"number\" id=\"ws2-h1\" value=\"0.4\" step=\"any\" oninput=\"updateSprung()\"></div>"
+},
+"32-128": {
+"fr": "§Écoulement amont (torrentiel)",
+"es": "§Flujo de entrada (supercrítico)"
+},
+"32-129": {
+"fr": "§Profondeur conjuguée (théorème de la quantité de mouvement)",
+"es": "§Calado conjugado (teorema de la cantidad de movimiento)"
+},
+"32-130": {
+"fr": "ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) = {}³ / (4 · {} · {}) = {} m ({} % de E<sub>1</sub>)",
+"es": "ΔE = (h<sub>2</sub> − h<sub>1</sub>)³ / (4 · h<sub>1</sub> · h<sub>2</sub>) = {}³ / (4 · {} · {}) = {} m ({} % de E<sub>1</sub>)"
+},
+"32-131": {
+"fr": "ressaut stable (favorable)",
+"es": "resalto estable (favorable)"
+},
+"32-132": {
+"fr": "!Longueur du ressaut (valeur indicative pour le bassin de dissipation) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = {} m · {}",
+"es": "!Longitud del resalto (valor orientativo para el cuenco amortiguador) L ≈ 6 · (h<sub>2</sub> − h<sub>1</sub>) = {} m · {}"
+},
+"32-133": {
+"fr": "<div class=\"calc-field\"><label>Diamètre D [mm]</label><input type=\"number\" id=\"tf-D\" value=\"400\" step=\"any\" oninput=\"updateTeil()\"></div>",
+"es": "<div class=\"calc-field\"><label>Diámetro D [mm]</label><input type=\"number\" id=\"tf-D\" value=\"400\" step=\"any\" oninput=\"updateTeil()\"></div>"
+},
+"32-134": {
+"fr": "<div class=\"calc-field\"><label>Pente I [‰]</label><input type=\"number\" id=\"tf-I\" value=\"5\" step=\"any\" oninput=\"updateTeil()\"></div>",
+"es": "<div class=\"calc-field\"><label>Pendiente I [‰]</label><input type=\"number\" id=\"tf-I\" value=\"5\" step=\"any\" oninput=\"updateTeil()\"></div>"
+},
+"32-135": {
+"fr": "<div class=\"calc-field\"><label>Taux de remplissage h/D</label><input type=\"number\" id=\"tf-hD\" value=\"0.6\" step=\"any\" oninput=\"updateTeil()\"></div>",
+"es": "<div class=\"calc-field\"><label>Grado de llenado h/D</label><input type=\"number\" id=\"tf-hD\" value=\"0.6\" step=\"any\" oninput=\"updateTeil()\"></div>"
+},
+"32-136": {
+"fr": "Conduite circulaire DN {}, I = {} ‰",
+"es": "Tubería circular DN {}, I = {} ‰"
+},
+"32-137": {
+"fr": "§Pleine section",
+"es": "§Sección llena"
+},
+"32-138": {
+"fr": "§Remplissage partiel h/D = {} (h = {} mm)",
+"es": "§Llenado parcial h/D = {} (h = {} mm)"
+},
+"32-139": {
+"fr": "!{} % de v<sub>v</sub>",
+"es": "!{} % de v<sub>v</sub>"
+},
+"32-140": {
+"fr": "!{} % de Q<sub>v</sub>",
+"es": "!{} % de Q<sub>v</sub>"
+},
+"32-141": {
+"fr": "!débit maximal pour h/D ≈ {} : Q<sub>max</sub> = {} l/s = {} % de Q<sub>v</sub> ; vitesse maximale pour h/D ≈ 0,81",
+"es": "!caudal máximo para h/D ≈ {}: Q<sub>max</sub> = {} l/s = {} % de Q<sub>v</sub>; velocidad máxima para h/D ≈ 0,81"
+},
+"32-142": {
+"fr": "!nappe libre : Q = π · k · (H² − h²) / ln(R/r)",
+"es": "!acuífero libre: Q = π · k · (H² − h²) / ln(R/r)"
+},
+"32-143": {
+"fr": "!nappe captive (épaisseur M) : Q = 2π · k · M · s / ln(R/r)",
+"es": "!acuífero confinado (espesor M): Q = 2π · k · M · s / ln(R/r)"
+},
+"32-144": {
+"fr": "!Rayon d'action selon Sichardt R = 3000 · s · √k (s en m, k en m/s) — valeur empirique, uniquement pour le prédimensionnement",
+"es": "!Radio de influencia según Sichardt R = 3000 · s · √k (s en m, k en m/s) — valor empírico, solo para el predimensionamiento"
+},
+"32-145": {
+"fr": "!Capacité de captage d'un puits selon Sichardt : q<sub>max</sub> = 2π · r · h · √k / 15 (limite de la vitesse d'entrée)",
+"es": "!Capacidad de captación de un pozo según Sichardt: q<sub>max</sub> = 2π · r · h · √k / 15 (límite de la velocidad de entrada)"
+},
+"32-146": {
+"fr": "<div class=\"calc-field\"><label>Perméabilité k [m/s]</label><input type=\"number\" id=\"br-k\" value=\"0.0005\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+"es": "<div class=\"calc-field\"><label>Permeabilidad k [m/s]</label><input type=\"number\" id=\"br-k\" value=\"0.0005\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+},
+"32-147": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur de la nappe H [m]</label><input type=\"number\" id=\"br-H\" value=\"12\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor del acuífero H [m]</label><input type=\"number\" id=\"br-H\" value=\"12\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+},
+"32-148": {
+"fr": "<div class=\"calc-field\"><label>Rabattement s [m]</label><input type=\"number\" id=\"br-s\" value=\"3\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+"es": "<div class=\"calc-field\"><label>Descenso s [m]</label><input type=\"number\" id=\"br-s\" value=\"3\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+},
+"32-149": {
+"fr": "<div class=\"calc-field\"><label>Rayon du puits r [m]</label><input type=\"number\" id=\"br-r\" value=\"0.3\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+"es": "<div class=\"calc-field\"><label>Radio del pozo r [m]</label><input type=\"number\" id=\"br-r\" value=\"0.3\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+},
+"32-150": {
+"fr": "<div class=\"calc-field\"><label>Nappe</label><select id=\"br-art\" onchange=\"updateBrunnen()\"><option value=\"frei\" selected>libre</option><option value=\"gesp\">captive</option></select></div>",
+"es": "<div class=\"calc-field\"><label>Agua subterránea</label><select id=\"br-art\" onchange=\"updateBrunnen()\"><option value=\"frei\" selected>libre</option><option value=\"gesp\">confinado</option></select></div>"
+},
+"32-151": {
+"fr": "<div class=\"calc-field\"><label>Épaisseur M [m] (captive)</label><input type=\"number\" id=\"br-M\" value=\"8\" step=\"any\" oninput=\"updateBrunnen()\"></div>",
+"es": "<div class=\"calc-field\"><label>Espesor M [m] (confinado)</label><input type=\"number\" id=\"br-M\" value=\"8\" step=\"any\" oninput=\"updateBrunnen()\"></div>"
+},
+"32-152": {
+"fr": "Puits, nappe {}",
+"es": "Pozo, agua subterránea {}"
+},
+"32-153": {
+"fr": "§Rayon d'action (Sichardt)",
+"es": "§Radio de influencia (Sichardt)"
+},
+"32-154": {
+"fr": "§Débit de pompage (Dupuit-Thiem)",
+"es": "§Caudal de bombeo (Dupuit-Thiem)"
+},
+"32-155": {
+"fr": "!= {} m³/h · rabattement dans le puits s = {} m, niveau d'eau dans le puits h = {} m",
+"es": "!= {} m³/h · descenso en el pozo s = {} m, nivel de agua en el pozo h = {} m"
+}
+}

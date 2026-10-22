@@ -46,7 +46,7 @@ async def main():
         check('gleicher Schalter: size startet ebenfalls im Übungsmodus', await pg.evaluate("document.body.classList.contains('uebung')"))
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(500)
         t=await pg.evaluate("document.querySelector('#tab-beam .col-out').innerText")
-        check('EN: Übungsmodus übersetzt', 'End practice mode' in t and 'Next step' in t and 'Übung' not in t, t[:80])
+        check('EN: Übungsmodus übersetzt', 'numbers hidden' in t and 'Next step' in t and 'Übung' not in t, t[:80])
         await pg.click('#tab-beam .ueb-tog'); await pg.wait_for_timeout(400)
         check('ausschalten: alles wieder sichtbar', await pg.evaluate("!document.body.classList.contains('uebung') && !document.querySelector('.ueb-box') && document.querySelectorAll('#rw-beam .st.ueb-hid').length===0"))
         check('keine Skriptfehler', not errs, errs[:2])

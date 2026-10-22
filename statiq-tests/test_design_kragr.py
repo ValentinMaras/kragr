@@ -39,7 +39,7 @@ async def main():
             fo=await pg.evaluate(FON); check(f'{f}: Figtree und JetBrains Mono geladen', 'Figtree' in fo and 'JetBrains Mono' in fo, fo)
             await pg.click('#proj-btn'); await pg.wait_for_timeout(200)
             v=await pg.inner_text('#pp-ver'); want='kragr·calc v'+await pg.evaluate("typeof STATIQ_VERSION!=='undefined'?STATIQ_VERSION:''") if f=='calc' else 'kragr·size v'+await pg.evaluate("SIZE_VERSION")
-            check(f'{f}: Version unten im Projekt-Fenster', v==want and v.endswith(('0.9.0','0.6.0')), v)
+            check(f'{f}: Version unten im Projekt-Fenster', v==want and v.startswith(('kragr·calc v0.9.','kragr·size v0.6.')), v)
             await pg.keyboard.press('Escape')
         await pg.goto(B+'calc.html'); await pg.wait_for_timeout(500); await pg.click('#proj-btn'); await pg.click('#pp-save'); await pg.wait_for_timeout(200)
         r=await pg.evaluate(HDR); check('calc Handy: gespeichert → kein Punkt am Symbol', r['dotd']=='none', r)

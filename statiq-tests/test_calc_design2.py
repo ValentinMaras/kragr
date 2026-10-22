@@ -1,0 +1,129 @@
+# kragr-Design Stufe 2 in calc (v0.9.1): eine Lasten-Karte mit „+“-Menü, Last-Chips unter der Skizze, Stepper,
+# Winkel-Vorgaben, Segment-Umschalter M/V/N/w, Übungsmodus als Schalter, Ergebnisleiste am Handy (max M · V_A · V_B).
+# Die Rechnung selbst bleibt unverändert (Werte wie vorher). Ohne Playwright: SKIP.
+import os, sys, asyncio
+HERE=os.path.dirname(os.path.abspath(__file__)); U='file://'+os.path.abspath(os.path.join(HERE,'..','calc.html'))
+try:
+    from playwright.async_api import async_playwright
+except ImportError:
+    print('SKIP Playwright nicht installiert'); sys.exit(0)
+fails=0
+def check(name, ok, info=''):
+    global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:72}', str(info)[:220])
+BAR="(()=>{const b=document.getElementById('k-bar'); if(!b) return null; const r=b.getBoundingClientRect(), c=getComputedStyle(b); return {d:c.display, t:b.innerText.replace(/\\s+/g,' ').trim(), l:Math.round(r.left), w:Math.round(r.width), bot:Math.round(r.bottom), bg:c.backgroundColor}})()"
+async def main():
+    async with async_playwright() as p:
+        br=await p.chromium.launch(); errs=[]
+        pg=await br.new_page(viewport={'width':390,'height':844}); pg.on('pageerror', lambda e: errs.append(str(e)))
+        await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
+        r=await pg.evaluate("""[document.querySelectorAll('#tab-beam .col-in > .card').length, !!document.querySelector('#tab-beam .k-loads #beam-point-list') && !!document.querySelector('#tab-beam .k-loads #beam-dist-list') && !!document.querySelector('#tab-beam .k-loads #beam-horiz-list'),
+          document.querySelectorAll('#tab-beam .k-loads .k-menu .add-load-btn').length, document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-sum').textContent,
+          !!document.querySelector('#tab-cantilever .k-loads #cant-point-list'), !!document.querySelector('#tab-frame .k-loads #frame-vert-list') && !!document.querySelector('#tab-frame .k-loads #frame-horiz-list')]""")
+        check('Einfeldträger: System + eine Karte „Lasten“ mit allen drei Listen, Menü mit 3 Einträgen', r[0]==2 and r[1] and r[2]==3 and r[3]=='Lasten' and r[4]=='2 Lasten', r)
+        check('Kragarm und Rahmen: ebenfalls eine Lasten-Karte', r[5] and r[6], r)
+        ch=await pg.evaluate("[...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent)")
+        check('Chips unter der Skizze: „F1 10 kN“ und „q1 5 kN/m“', ch==['F1 10 kN','q1 5 kN/m'], ch)
+        # Menü: Einzellast hinzufügen
+        await pg.click('#tab-beam .k-add-btn'); vis=await pg.is_visible('#tab-beam .k-menu')
+        await pg.click('#tab-beam .k-menu .add-load-btn >> nth=0'); await pg.wait_for_timeout(500)
+        r=await pg.evaluate("[document.querySelectorAll('#beam-point-list .load-item').length, getComputedStyle(document.querySelector('#tab-beam .k-menu')).display, [...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent), document.querySelector('#tab-beam .k-sum').textContent]")
+        check('„+ Last hinzufügen“ → Menü → Einzellast: F2 neu, Menü zu, Chip F2, „3 Lasten“', vis and r[0]==2 and r[1]=='none' and 'F2 10 kN' in r[2] and r[3]=='3 Lasten', r)
+        await pg.evaluate("removeLoad('beam','point', loads.beam.point[1].id)"); await pg.wait_for_timeout(400)
+        # Stepper an der Stützweite: + 0,5 m, Rechnung folgt
+        await pg.click('#tab-beam .col-in .k-stp:has(#bL) .k-sb >> nth=1'); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[document.getElementById('bL').value, document.getElementById('b-res-Mmax').textContent]")
+        check('Stepper „+“ an der Stützweite: 5 → 5,5 m, M_max neu', r[0]=='5.5' and r[1]!='28.13', r)
+        await pg.click('#tab-beam .col-in .k-stp:has(#bL) .k-sb >> nth=0'); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[document.getElementById('bL').value, document.getElementById('b-res-Mmax').textContent, document.getElementById('b-res-A').textContent]")
+        check('Stepper „−“: zurück auf 5 m, wieder M_max 28,13 · V_A 17,50 (Rechnung unverändert)', r==['5','28.13','17.50'], r)
+        lab=await pg.evaluate("document.querySelector('#tab-beam .k-stp:has(#bL) .k-sb').getAttribute('aria-label')")
+        check('Stepper vorlesbar („Stützweite L m verringern“)', 'verringern' in lab, lab)
+        # Chip öffnet die Last, Winkel-Vorgabe
+        await pg.click('#tab-beam .k-chip >> nth=0'); await pg.wait_for_timeout(600)
+        op=await pg.evaluate("document.querySelector('#beam-point-list .load-item').classList.contains('open')")
+        check('Tipp auf Chip F1 öffnet die Last', op)
+        ang=await pg.evaluate("[...document.querySelectorAll('#beam-point-list .k-ang')].map(b=>b.textContent+':'+b.getAttribute('aria-pressed'))")
+        check('Winkel-Vorgaben −45° … +45°, 0° gewählt', ang==['−45°:false','−30°:false','0°:true','+30°:false','+45°:false'], ang)
+        await pg.click('#beam-point-list .k-ang >> nth=3'); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[loads.beam.point[0].values.alpha, document.querySelector('#beam-point-list .k-ang[aria-pressed=\"true\"]').textContent, [...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent)[0], document.getElementById('b-res-HA').textContent]")
+        check('+30° gewählt: α = 30, Chip „F1 10 kN · 30°“, H_A ≠ 0', r[0]==30 and r[1]=='+30°' and r[2]=='F1 10 kN · 30°' and r[3] not in ('0.00','—'), r)
+        await pg.click('#beam-point-list .k-ang >> nth=2'); await pg.wait_for_timeout(600)
+        # Lastzeilen im Entwurfs-Stil (v0.9.2): Stepper, Schieber, Gleich-/Trapezlast, Wischen mit „Rückgängig“
+        await pg.evaluate("scrollTo(0,0)"); await pg.wait_for_timeout(200)
+        r=await pg.evaluate("[...document.querySelectorAll('#beam-point-list .k-row .k-ic, #beam-dist-list .k-row .k-ic')].length")
+        check('Lastzeilen mit Symbol (F orange, q blau), ohne Augen-/Löschknopf in der Kopfzeile', r==2 and not await pg.evaluate("!!document.querySelector('.k-row .load-item-header .load-action-btn')"), r)
+        if not await pg.evaluate("document.querySelector('#beam-point-list .k-row').classList.contains('open')"): await pg.click('#beam-point-list .k-row .load-item-header')
+        await pg.click('#beam-point-list .k-row .k-stpv .k-sb >> nth=1'); await pg.click('#beam-point-list .k-row .k-stpv .k-sb >> nth=1'); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[loads.beam.point[0].values.F, document.querySelector('#beam-point-list .load-sum').textContent, document.getElementById('b-res-A').textContent]")
+        check('Kraft F mit Stepper: 10 → 12 kN, Kurzfassung und V_A folgen', r[0]==12 and r[1].startswith('F = 12 kN') and r[2]=='18.50', r)
+        await pg.click('#beam-point-list .k-row .k-stpv .k-sb >> nth=0'); await pg.click('#beam-point-list .k-row .k-stpv .k-sb >> nth=0'); await pg.wait_for_timeout(500)
+        await pg.evaluate("(()=>{const r=document.querySelector('#beam-point-list .k-rng[data-key=a]'); r.value='1.25'; r.dispatchEvent(new Event('input',{bubbles:true}));})()"); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[loads.beam.point[0].values.a, document.querySelector('#beam-point-list .k-num-s[data-key=a]').value, document.getElementById('b-res-A').textContent, document.querySelector('#beam-point-list .k-rng[data-key=a]').max]")
+        check('Position a per Schieber (0 … L): 1,25 m, Zahl daneben und V_A = 20,00 kN', r[0]==1.25 and r[1]=='1.25' and r[2]=='20.00' and r[3]=='5', r)
+        await pg.evaluate("(()=>{const r=document.querySelector('#beam-point-list .k-num-s[data-key=a]'); r.value='2.5'; r.dispatchEvent(new Event('input',{bubbles:true}));})()"); await pg.wait_for_timeout(500)
+        fv=await pg.evaluate("document.querySelector('#beam-point-list .k-fvh').textContent")
+        check('F_v = F·cos α und F_h = F·sin α mit Werten', 'Fv = F·cos α = 10 kN' in fv and 'Fh = F·sin α = 0 kN' in fv, fv)
+        await pg.click('#beam-dist-list .k-row .load-item-header'); await pg.click('#beam-dist-list .k-mode[data-uni="0"]'); await pg.wait_for_timeout(500)
+        await pg.click('#beam-dist-list .k-line >> nth=1 >> .k-sb >> nth=1'); await pg.wait_for_timeout(600)
+        r=await pg.evaluate("[loads.beam.dist[0].values.qa, loads.beam.dist[0].values.qb, document.querySelector('#beam-dist-list .load-sum').textContent]")
+        check('Trapezlast: q am Ende 5 → 5,5 kN/m, Kurzfassung „q = 5 → 5,5 kN/m“', r[:2]==[5,5.5] and 'q = 5 → 5,5 kN/m' in r[2], r)
+        await pg.click('#beam-dist-list .k-mode[data-uni="1"]'); await pg.wait_for_timeout(500)
+        check('zurück auf Gleichlast: q_b = q_a', await pg.evaluate("loads.beam.dist[0].values.qb")==5)
+        await pg.evaluate("document.querySelector('#beam-point-list .k-row').scrollIntoView({block:'center'})"); await pg.wait_for_timeout(300)
+        box=await (await pg.query_selector('#beam-point-list .k-row .load-item-header')).bounding_box()
+        await pg.mouse.move(box['x']+box['width']-20, box['y']+20); await pg.mouse.down(); await pg.mouse.move(box['x']+box['width']-80, box['y']+22, steps=4); await pg.mouse.move(box['x']+box['width']-180, box['y']+24, steps=6); await pg.mouse.up(); await pg.wait_for_timeout(600)
+        r=await pg.evaluate("[loads.beam.point.length, document.getElementById('k-undo')?.classList.contains('on'), document.getElementById('k-undo')?.innerText.replace(/\\s+/g,' '), document.getElementById('b-res-A').textContent]")
+        check('Wischen nach links löscht F1, Hinweis „F1 gelöscht · Rückgängig“', r[0]==0 and r[1] and 'F1 gelöscht' in r[2] and r[3]=='12.50', r)
+        await pg.click('#k-undo button'); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[loads.beam.point.length, loads.beam.point[0].values.F, document.getElementById('b-res-A').textContent]")
+        check('„Rückgängig“ stellt F1 wieder her', r==[1,10,'17.50'], r)
+        # Lasten-Karte zuklappen: Kurzfassung
+        await pg.click('#tab-beam .k-head'); s=await pg.evaluate("[document.querySelector('#tab-beam .k-sum').textContent, getComputedStyle(document.querySelector('#tab-beam .k-body')).display]")
+        check('Lasten-Karte zu: Kurzfassung „F1 10 kN · q1 5 kN/m“', s==['F1 10 kN · q1 5 kN/m','none'], s)
+        await pg.click('#tab-beam .k-head')
+        # Segment M/Q/N/w
+        sg=await pg.evaluate("(()=>{const a=getComputedStyle(document.getElementById('diag-btn-M-beam')), b=getComputedStyle(document.getElementById('diag-btn-Q-beam')); return [a.backgroundColor, b.backgroundColor, getComputedStyle(document.querySelector('#tab-beam .diagram-toggle-row')).backgroundColor]})()")
+        check('M/Q/N/w als Segment: aktiv weiß auf grauer Leiste', sg==['rgb(255, 255, 255)','rgba(0, 0, 0, 0)','rgb(241, 242, 244)'], sg)
+        # Ergebnisleiste
+        await pg.evaluate("document.querySelector('#tab-beam .results-grid').scrollIntoView({block:'center'})"); await pg.wait_for_timeout(500)
+        b=await pg.evaluate(BAR)
+        check('Ergebnisleiste ausgeblendet, solange die Ergebnisse im Bild sind', b and b['d']=='none', b)
+        await pg.evaluate("scrollTo(0,0)"); await pg.evaluate("document.querySelector('#tab-beam .k-loads').scrollIntoView()"); await pg.wait_for_timeout(500)
+        await pg.evaluate("window.scrollBy(0,-600)"); await pg.wait_for_timeout(500)
+        top=await pg.evaluate("document.querySelector('#tab-beam .results-grid').getBoundingClientRect().top")
+        await pg.evaluate("document.querySelector('#tab-beam .results-grid').style.marginTop='0'"); 
+        await pg.set_viewport_size({'width':390,'height':600}); await pg.evaluate("scrollTo(0,0)"); await pg.wait_for_timeout(600)
+        b=await pg.evaluate(BAR)
+        check('Handy oben: schwarze Leiste „max M 28.13 kNm · V_A 17.50 kN · V_B 17.50 kN“', b and b['d']=='flex' and b['bg']=='rgb(17, 17, 20)' and b['t'].startswith('max M 28.13 kNm') and 'VA 17.50 kN' in b['t'] and 'VB 17.50 kN' in b['t'] and b['l']==10, b)
+        await pg.click('#k-bar'); await pg.wait_for_timeout(900)
+        t=await pg.evaluate("Math.round(document.querySelector('#tab-beam .results-grid').getBoundingClientRect().top)")
+        check('Tipp auf die Leiste springt zu den Ergebnissen', t<200, t)
+        await pg.evaluate("scrollTo(0,0)"); await pg.wait_for_timeout(300)
+        await pg.evaluate("showTab('cantilever')"); await pg.wait_for_timeout(700); b=await pg.evaluate(BAR)
+        check('Kragarm: max M · V_A · M_A', b and b['d']=='flex' and 'MA' in b['t'] and 'VA' in b['t'] and 'Zug' not in b['t'], b)
+        await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(900); b=await pg.evaluate(BAR)
+        check('Rahmen: max M · max V · max N', b and b['d']=='flex' and 'max N' in b['t'], b)
+        await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(600)
+        # Übungsmodus-Schalter
+        sw=await pg.evaluate("(()=>{const t=document.querySelector('#tab-beam .ueb-tog'); return [t.getAttribute('role'), t.getAttribute('aria-checked'), t.innerText.replace(/\\s+/g,' ')]})()")
+        check('Übungsmodus als Schalter (role=switch, aus)', sw[0]=='switch' and sw[1]=='false' and 'Übungsmodus' in sw[2] and 'vollständige Lösung' in sw[2], sw)
+        await pg.click('#tab-beam .ueb-tog'); await pg.wait_for_timeout(600)
+        sw=await pg.evaluate("(()=>{const t=document.querySelector('#tab-beam .ueb-tog'); return [t.getAttribute('aria-checked'), t.innerText.replace(/\\s+/g,' '), getComputedStyle(document.getElementById('k-bar')).display]})()")
+        check('an: „Zahlen verborgen“, Ergebnisleiste aus (verrät sonst die Lösung)', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2]=='none', sw)
+        await pg.click('#tab-beam .ueb-tog'); await pg.wait_for_timeout(500)
+        # Sprache
+        await pg.evaluate("setCalcLang('en')"); await pg.wait_for_timeout(500)
+        r=await pg.evaluate("[document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.querySelector('#tab-beam .ueb-tog').innerText.replace(/\\s+/g,' ')]")
+        check('EN: Loads · + Add load · Angle α to the vertical · Practice mode', r[0]=='Loads' and r[1]=='+ Add load' and r[2]=='to the vertical' and 'Practice mode' in r[3] and 'full solution' in r[3], r)
+        for lg,w in [('fr','Charges'),('es','Cargas')]:
+            await pg.evaluate(f"setCalcLang('{lg}')"); await pg.wait_for_timeout(300)
+            check(f'{lg.upper()}: Lasten-Karte übersetzt', await pg.evaluate("document.querySelector('#tab-beam .k-h').textContent")==w)
+        await pg.evaluate("setCalcLang('de')")
+        await pg.close()
+        pg=await br.new_page(viewport={'width':1280,'height':800}); pg.on('pageerror', lambda e: errs.append(str(e)))
+        await pg.goto(U); await pg.wait_for_timeout(800)
+        check('Rechner: keine Ergebnisleiste (Ergebnis steht rechts daneben)', (await pg.evaluate(BAR))['d']=='none')
+        check('keine Skriptfehler', not errs, errs[:2])
+        await br.close()
+asyncio.run(main())
+print('fertig', 'mit Fehlern' if fails else 'ohne Fehler'); sys.exit(1 if fails else 0)

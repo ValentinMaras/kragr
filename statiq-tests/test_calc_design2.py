@@ -11,6 +11,10 @@ fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:72}', str(info)[:220])
 BAR="(()=>{const b=document.getElementById('k-bar'); if(!b) return null; const r=b.getBoundingClientRect(), c=getComputedStyle(b); return {d:c.display, t:b.innerText.replace(/\\s+/g,' ').trim(), l:Math.round(r.left), w:Math.round(r.width), bot:Math.round(r.bottom), bg:c.backgroundColor}})()"
+async def cc(pg, sel):   # Element mittig ins Bild holen (Ergebnisleiste unten verdeckt sonst), dann tippen
+    await pg.locator(sel).first.evaluate("e=>e.scrollIntoView({block:'center'})"); await pg.wait_for_timeout(150); await pg.click(sel)
+async def oeffne(pg, lst):   # erste Zeile einer Liste öffnen (falls noch zu) — über die Kopfzeile, wie am Gerät
+    if not await pg.evaluate(f"document.querySelector('{lst} .k-row').classList.contains('open')"): await cc(pg, f'{lst} .k-row .load-item-header')
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
@@ -77,6 +81,40 @@ async def main():
         await pg.click('#k-undo button'); await pg.wait_for_timeout(700)
         r=await pg.evaluate("[loads.beam.point.length, loads.beam.point[0].values.F, document.getElementById('b-res-A').textContent]")
         check('„Rückgängig“ stellt F1 wieder her', r==[1,10,'17.50'], r)
+        # v0.9.3: Rahmen und Durchlaufträger mit denselben Lastzeilen, Gelenke ebenso
+        await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(600)
+        await pg.evaluate("addFrameHinge()"); await pg.wait_for_timeout(400)
+        r=await pg.evaluate("[[...document.querySelectorAll('#tab-frame .load-item')].every(i=>i.classList.contains('k-row')), [...document.querySelectorAll('#tab-frame .k-row .load-item-label b')].map(b=>b.textContent), document.querySelector('#frame-vert-list .load-sum').textContent]")
+        check('Rahmen: alle Zeilen im neuen Stil (q1, P1, G1), Kurzfassung mit Stab', r[0] and r[1]==['G1','q1','P1'] and r[2].endswith('Riegel'), r)
+        await oeffne(pg, '#frame-horiz-list')
+        await cc(pg, '#frame-horiz-list .k-opt[data-v="right"]'); await pg.wait_for_timeout(600)
+        r=await pg.evaluate("[frameLoads.horiz[0].values.member, document.querySelector('#frame-horiz-list .k-opt[aria-pressed=\"true\"]').dataset.v, document.querySelector('#frame-horiz-list .load-sum').textContent]")
+        check('Rahmen P1: Stab per Umschalter auf „Rechter Stiel“, Kurzfassung folgt', r[0]=='right' and r[1]=='right' and 'Rechter Stiel' in r[2], r)
+        await cc(pg, '#frame-horiz-list .k-opt[data-v="left"]'); await pg.wait_for_timeout(500)
+        await oeffne(pg, '#frame-hinge-list')
+        await pg.evaluate("(()=>{const r=document.querySelector('#frame-hinge-list .k-rng'); r.value='1.5'; r.dispatchEvent(new Event('input',{bubbles:true}));})()"); await pg.wait_for_timeout(500)
+        check('Rahmen-Gelenk: Position per Schieber (x = 1,5 m entlang Riegel)', await pg.evaluate("[frameHinges[0].pos, document.querySelector('#frame-hinge-list .load-sum').textContent]")==[1.5,'Riegel · x = 1,5 m'])
+        await oeffne(pg, '#frame-vert-list')
+        await pg.select_option('#frame-vert-list .k-sel','n'); await pg.wait_for_timeout(500)
+        check('Rahmen q1: Richtung über die Auswahl (⊥ zum Riegel)', await pg.evaluate("frameLoads.vert[0].values.rdir")=='n')
+        await pg.select_option('#frame-vert-list .k-sel','v'); await pg.wait_for_timeout(300)
+        await pg.evaluate("removeFrameHinge(frameHinges[0].id)"); await pg.wait_for_timeout(300)
+        await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(600)
+        r=await pg.evaluate("[[...document.querySelectorAll('#span-load-cards > .card')].map(c=>c.classList.contains('k-loads')+':'+c.querySelector('.k-h').textContent), document.querySelectorAll('#span-load-cards .k-menu .add-load-btn').length, [...document.querySelectorAll('#tab-cont .load-item')].every(i=>i.classList.contains('k-row'))]")
+        check('Durchlaufträger: Feld-Karten als Lasten-Karten („Feld 1 — Lasten“), Menü mit F/q/M, neue Zeilen', r[0]==['true:Feld 1 — Lasten','true:Feld 2 — Lasten'] and r[1]==6 and r[2], r)
+        await cc(pg, '#span-load-cards .k-loads >> nth=0 >> .k-add-btn'); await cc(pg, '#span-load-cards .k-loads >> nth=0 >> .k-menu .add-load-btn >> nth=2'); await pg.wait_for_timeout(600)
+        r=await pg.evaluate("[document.querySelector('#cont-mom-list-0 .load-item-label b')?.textContent, document.querySelector('#cont-mom-list-0 .load-sum')?.textContent, document.querySelector('#cont-mom-list-0 .k-rng')?.max]")
+        check('Feld 1: „+ Last hinzufügen“ → Moment M1 = 10 kNm, Schieber bis 5 m', r==['M1','M = 10 kNm · @ 2,5 m','5'], r)
+        m0=await pg.evaluate("document.getElementById('cont-Mmax').textContent")
+        await oeffne(pg, '#cont-mom-list-0')
+        await cc(pg, '#cont-mom-list-0 .k-sb >> nth=1'); await pg.wait_for_timeout(700)
+        check('Moment-Stepper 10 → 11 kNm, Ergebnis neu', await pg.evaluate("[contSeg(0).mom[0].values.M, document.getElementById('cont-Mmax').textContent!==%r]" % m0)==[11,True])
+        await cc(pg, '#cont-mom-list-0 [data-del]'); await pg.wait_for_timeout(500)
+        check('Löschen-Knopf entfernt M1, „Rückgängig“ erscheint', await pg.evaluate("[(contSeg(0).mom||[]).length, document.getElementById('k-undo').classList.contains('on')]")==[0,True])
+        await pg.evaluate("addContHinge()"); await pg.wait_for_timeout(400); await oeffne(pg, '#cont-hinge-list')
+        await cc(pg, '#cont-hinge-list .k-opt[data-v="0"]'); await pg.wait_for_timeout(400)
+        check('Durchlaufträger-Gelenk: Feld per Umschalter', await pg.evaluate("[contCfg.hinges[0].span, document.querySelector('#cont-hinge-list .load-sum').textContent]")==[0,'Feld 1 · a = 1 m'])
+        await pg.evaluate("removeContHinge(contCfg.hinges[0].id); showTab('beam')"); await pg.wait_for_timeout(500)
         # Lasten-Karte zuklappen: Kurzfassung
         await pg.click('#tab-beam .k-head'); s=await pg.evaluate("[document.querySelector('#tab-beam .k-sum').textContent, getComputedStyle(document.querySelector('#tab-beam .k-body')).display]")
         check('Lasten-Karte zu: Kurzfassung „F1 10 kN · q1 5 kN/m“', s==['F1 10 kN · q1 5 kN/m','none'], s)

@@ -1,12 +1,12 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.2 · ref v0.3.42 · size v0.6.2 · projekt v0.1.12 · rechtliches v0.1.11 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.4 · ref v0.3.43 · size v0.6.3 · projekt v0.1.13 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.2, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.12, Test von Variante C)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.42, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.6.2, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.11)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.4, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.13, Test von Variante C)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.6.3, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Figtree (Text), JetBrains Mono (Zahlen/Formeln) und Inter (nur griechische Buchstaben, unter dem Namen Figtree) als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -568,6 +568,29 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Einheitlicher Rahmen — calc v0.9.4 · size v0.6.3 · ref v0.3.43 · projekt v0.1.13 · rechtliches v0.1.12
+
+Valentin: „kragr mal ganz links, mal weniger links, der Darstellungsrahmen ist unterschiedlich breit.“ Gemessen: Logo bei 24 px (calc/size/ref) bzw. 114/214 px (projekt/rechtliches), Logo 24 px bzw. 20 px, Kopfzeile 58/60/68 px, Inhalt 1180/952/1100/900 px breit.
+
+- Neuer gemeinsamer Baustein `<style data-frame>` (identisch auf calc, size, ref, projekt, rechtliches, als letzter Stilblock im head): `--k-frame: 1180px`, `--k-gut: 24px` (Handy 16 px).
+  - `.app-header.k-hdr`: Kopfzeile über die ganze Breite, Innenabstand `max(gut, (100% − 1180)/2 + gut)` → Logo und Werkzeuge stehen genau an den Rahmenkanten. Höhe 68 px (Handy 58 px), Logo 24 px.
+  - `.k-frame`: Inhalt höchstens 1180 px, mittig, Rand wie oben → Inhalt beginnt an der Logo-Kante und endet an der Werkzeug-Kante. Gesetzt auf calc `main.main` (alle Bereiche), size `main.main`, ref `.layout`, projekt `.wrap`, rechtliches `#content` und `footer`.
+- Kopfzeile überall gleich aufgebaut: Logo · `nav.header-links` calc size ref · `.hdr-tools` Projekte, Erscheinungsbild, Sprache. ref und rechtliches: Projekte als Link `a.proj-btn.proj-go` zu projekt.html (Beschriftung je Sprache per `<script data-frame>`); projekt: `span.proj-btn.cur` (aktuelle Seite, dunkel, `aria-current`). Version in ref/projekt bleibt als verstecktes `.version` (Anker für den Theme-Knopf).
+- rechtliches: Absätze höchstens 75 Zeichen breit (Lesbarkeit im breiteren Rahmen). ref: Seitenleiste + Inhalt (+ Inhaltsverzeichnis ab Breitbild) jetzt im 1180-px-Rahmen.
+- Die Startseite bleibt bewusst eigenständig (großes Logo, schmale Spalte, passt auf einen Bildschirm).
+- Tests: neu `test_rahmen_einheitlich.py` (Höhe, Logo-Größe und -Kante, Inhaltskanten, Kopfzeilen-Inhalt bei 390/1280/1600 px); `test_projekt.py` sucht „Meine Projekte“ jetzt als `.app-header .cur`.
+
+## Lastzeilen überall einheitlich — calc v0.9.3
+
+Valentin: Beim Rahmen (und Durchlaufträger) sahen die Lasten noch aus wie vorher — „bitte überall vereinheitlichen“.
+
+- Die Lastzeilen aus v0.9.2 gelten jetzt für **alle Systeme**: Einfeldträger, Kragarm, Durchlaufträger (Einzellast, Streckenlast, Einzelmoment je Feld/Kragarm), Rahmen (Streckenlast q, Einzel-/Horizontallast P) und die **Gelenke** von Rahmen und Durchlaufträger.
+- Aufbau: Anbindungen `K3A` je System (`beam`, `cant`, `cont` mit `data-seg`, `frame`, `fhinge`, `chinge`) mit `list/upd/tog/rem/render/after/len`. Die Render-Funktionen (`renderLoads`, `renderContLoads`, `renderFrameLoads`, `renderFrameHinges`, `renderContHinges`) rufen bei vorhandenem DOM `k3Rows(sys, seg, type, el)`; ohne DOM bleibt der alte Weg. Ereignisse laufen gesammelt über Daten-Attribute (`data-key`, `data-tog`, `data-del`, `.k-opt`, `.k-mode`, `.k-sel`), keine onclick-Strings mehr in den neuen Zeilen.
+- Rahmen: Stab als Umschalter (Linker Stiel · Riegel · Rechter Stiel), Richtung als Auswahl (lange Texte), Position/Bereich als Schieber bis zur Stablänge; P-Zeile mit „F ⊥ Stab“ und „H ∥ Stab“ (oranges Symbol). Kurzfassung wie bisher mit Stab („… · Riegel“).
+- Durchlaufträger: jede Karte „Feld n — Lasten“ wird zur Lasten-Karte (`k2MergeCont`), Zwischenüberschriften entfallen, ein Menü „+ Last hinzufügen“ mit Einzellast / Streckenlast / Einzelmoment. Moment mit lila Symbol, Stepper 1 kNm.
+- Gelenke: Zeile G1 mit Kurzfassung („Riegel · x = 0,5 m“ bzw. „Feld 2 · a = 1 m“), Stab bzw. Feld als Umschalter, Position als Schieber, Löschen (auch per Wischen, mit Rückgängig).
+- Tests: `test_calc_design2.py` um 9 Prüfungen erweitert (Rahmen, Durchlaufträger, Gelenke); Hilfsfunktionen `cc()` (mittig ins Bild, dann tippen) und `oeffne()`.
+
 ## size v0.6.2 — Profil-Knöpfe wieder entfernt
 
 Valentin: Die Zeile mit den Profil-Knöpfen (IPE 240 … 360) ist überflüssig, das Profil wird über die Auswahlliste gewählt. `pills()`, die Stile `.k-pills`/`.k-pill` und der Text „Profil wählen“ sind aus `data-k3` entfernt; `test_size_design3.py` prüft jetzt, dass keine Profil-Knöpfe da sind und die Auswahlliste das Profil wählt.
@@ -1101,7 +1124,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1740/1740 grün** (inklusive `test_size_design3.py` 13, `test_calc_design2.py` 32, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1770/1770 grün** (inklusive `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

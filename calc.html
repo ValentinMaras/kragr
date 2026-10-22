@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.9.2 -->
+<!-- kragr v0.9.4 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -787,12 +787,54 @@ window.mulyProj = {
   .k-act { display:inline-flex !important; align-items:center; gap:6px; width:auto !important; height:auto !important; min-height:36px; padding:0 12px !important; border:0 !important; border-radius:10px !important; background:var(--k-ctl) !important; font:inherit; font-size:13px; font-weight:600; color:var(--k-text2) !important; cursor:pointer; }
   .k-act.delete { color:var(--k-err) !important; }
   .k-swipe { display:none; font-size:12px; color:var(--k-muted); text-align:right; margin:-6px 0 -2px; }
-  @media (pointer:coarse) { .k-loads[data-tab="beam"] .k-swipe, .k-loads[data-tab="cantilever"] .k-swipe { display:block; } }
+  @media (pointer:coarse) { .k-loads .k-swipe { display:block; } }
+  .k-sub { font-size:14px; color:var(--k-text2); margin-bottom:-4px; }
+  .k-segn { display:grid; gap:3px; padding:3px; border-radius:12px; background:var(--k-ctl); }
+  .k-opt { min-height:36px; padding:0 4px; border:0; border-radius:9px; background:transparent; font:inherit; font-size:13px; font-weight:600; color:var(--k-text2); cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .k-opt[aria-pressed="true"] { background:#fff; color:var(--k-text); font-weight:800; box-shadow:0 1px 3px rgba(17,17,20,.12); }
+  .k-sel { width:100%; min-height:40px; padding:0 10px; border:0; border-radius:10px; background:var(--k-ctl); font:inherit; font-size:14px; color:var(--k-text); }
+  .load-item.k-row.open.k-mom { box-shadow:0 0 0 2px #7c3aed; }
+  .k-mom .k-rng { accent-color:#7c3aed; }
   #k-undo { position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 20px); z-index:45; display:flex; align-items:center; gap:14px; padding:10px 10px 10px 16px; border-radius:12px; background:#111114; color:#fff; font-size:14px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; box-shadow:0 8px 24px rgba(17,17,20,.25); }
   #k-undo.on { opacity:1; transform:translate(-50%, 0); pointer-events:auto; }
   #k-undo button { border:0; border-radius:8px; padding:6px 10px; background:#fff; color:#111114; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }
   @media (min-width:1000px) { #k-undo { bottom:24px; } }
   @media print { #k-bar, #k-undo { display:none !important; } }
+</style>
+<style data-frame>
+  /* Einheitlicher Rahmen (calc v0.9.4 · size v0.6.3 · ref v0.3.43 · projekt v0.1.13 · rechtliches v0.1.12): gleiche Kopfzeile und gleiche
+     Inhaltsbreite auf allen App-Seiten. Logo und Inhalt beginnen an derselben Kante: Rahmen 1180 px, Rand 24 px (Handy 16 px). */
+  :root { --k-frame:1180px; --k-gut:24px; }
+  @media (max-width:560px) { :root { --k-gut:16px; } }
+  .app-header.k-hdr { display:flex; align-items:center; justify-content:flex-start; gap:6px; box-sizing:border-box; min-height:68px; height:auto; max-width:none; margin:0;
+    padding:12px max(var(--k-gut), calc((100% - var(--k-frame)) / 2 + var(--k-gut))) !important; }
+  .k-frame { box-sizing:border-box; width:100%; max-width:var(--k-frame) !important; margin-left:auto !important; margin-right:auto !important;
+    padding-left:var(--k-gut) !important; padding-right:var(--k-gut) !important; }
+  .k-hdr .logo { flex:none; font-size:24px; font-weight:800; letter-spacing:-0.04em; line-height:1; color:#111114; text-decoration:none; }
+  .k-hdr .header-links { display:flex; align-items:center; gap:0; margin-left:auto; font-family:inherit; font-size:15px; font-weight:500; white-space:nowrap; }
+  .k-hdr .header-links > a, .k-hdr .header-links > .module-name { display:flex; align-items:center; min-height:44px; padding:0 8px; text-decoration:none; }
+  .k-hdr .header-links > a { color:#5c5e66; } .k-hdr .header-links > a:hover { color:#111114; }
+  .k-hdr .header-links > .module-name { color:#111114; font-weight:800; }
+  .k-hdr .hdr-tools { flex:none; display:flex; align-items:center; gap:2px; margin-left:6px; }
+  .k-hdr .hdr-tools .version { display:none; }
+  .k-hdr .proj-btn { position:relative; display:inline-flex; align-items:center; gap:8px; height:40px; min-width:40px; padding:0 13px 0 11px; border:none; border-radius:10px;
+    background:#f1f2f4; font-family:inherit; font-size:14px; font-weight:700; line-height:1; color:#111114; cursor:pointer; white-space:nowrap; text-decoration:none; box-sizing:border-box; }
+  .k-hdr a.proj-btn:hover { background:#e6e7ea; }
+  .k-hdr .proj-btn.cur { background:#111114; color:#fff; }
+  .k-hdr .proj-btn svg { flex:none; width:18px; height:18px; }
+  .k-hdr .theme-btn { width:36px; height:44px; border-radius:10px; opacity:1; color:#111114; }
+  .k-hdr .theme-btn svg { width:20px; height:20px; }
+  .k-hdr .lang-sel { -webkit-appearance:none; appearance:none; height:40px; border-radius:10px; border:none; background-color:#f1f2f4; font-family:inherit; font-size:13px; font-weight:700; padding:0 24px 0 10px; color:#111114; cursor:pointer;
+    background-image:linear-gradient(45deg, transparent 50%, #5c5e66 50%), linear-gradient(135deg, #5c5e66 50%, transparent 50%); background-position:calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size:4px 4px; background-repeat:no-repeat; }
+  .k-hdr .lang-sel:hover { background-color:#e6e7ea; }
+  @media (max-width:999px) { .k-hdr .proj-btn { width:40px; padding:0; justify-content:center; } .k-hdr .proj-btn .pb-tx { display:none; } }
+  @media (max-width:560px) {
+    .app-header.k-hdr { min-height:58px; padding-top:7px !important; padding-bottom:7px !important; gap:4px; }
+    .k-hdr .header-links > a, .k-hdr .header-links > .module-name { padding:0 7px; }
+    .k-hdr .hdr-tools { margin-left:2px; }
+  }
+  @media (max-width:370px) { .k-hdr .header-links > a, .k-hdr .header-links > .module-name { padding:0 5px; } .k-hdr .theme-btn { width:30px; } .k-hdr .logo { font-size:22px; } }
+  @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
 </head>
 <body>
@@ -933,7 +975,7 @@ window.mulyProj = {
 </div>
 
 <!-- ═══════════════ HEADER ═══════════════ -->
-<header class="app-header glass">
+<header class="app-header glass k-hdr">
   <a class="logo" href="index.html" title="Startseite">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <nav class="header-links" aria-label="Module">
     <span class="module-name">calc</span>
@@ -942,7 +984,7 @@ window.mulyProj = {
   </nav>
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
-    <span class="version">v0.9.2</span>
+    <span class="version">v0.9.4</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -953,7 +995,7 @@ window.mulyProj = {
 </nav>
 
 <!-- ═══════════════ SAVED TAB ═══════════════ -->
-<main class="main hidden" id="tab-saved">
+<main class="k-frame main hidden" id="tab-saved">
 
   <!-- List view -->
   <div id="saved-list-view" style="padding:16px">
@@ -982,7 +1024,7 @@ window.mulyProj = {
 </main>
 
 <!-- ═══════════════ BEAM TAB ═══════════════ -->
-<main class="main" id="tab-beam">
+<main class="k-frame main" id="tab-beam">
   <div class="card">
     <div class="card-title-row">
       <div class="card-title" data-i18n="system">System</div>
@@ -1049,7 +1091,7 @@ window.mulyProj = {
 </main>
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
-<main class="main hidden" id="tab-cantilever">
+<main class="k-frame main hidden" id="tab-cantilever">
   <div class="card">
     <div class="card-title-row">
       <div class="card-title" data-i18n="system">System</div>
@@ -1116,7 +1158,7 @@ window.mulyProj = {
 </main>
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
-<main class="main hidden" id="tab-cont">
+<main class="k-frame main hidden" id="tab-cont">
   <div class="card">
     <div class="card-title-row">
       <div class="card-title" data-i18n="system">System</div>
@@ -1185,7 +1227,7 @@ window.mulyProj = {
 </main>
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
-<main class="main hidden" id="tab-frame">
+<main class="k-frame main hidden" id="tab-frame">
 
   <div class="card">
     <div class="card-title-row">
@@ -1414,7 +1456,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.9.2';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.9.4';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -1548,29 +1590,59 @@ function updateVal(sys,type,id,key,val) {
   if(l) l.values[key]=parseFloat(val)||0;
   sys==='beam'?drawBeam():drawCantilever();
 }
-// ── Lastzeilen im kragr-Design (calc v0.9.2, Einfeldträger und Kragarm) ──────────────────────
-// Zeile: Symbol, Name, Kurzfassung, ▾. Aufgeklappt: Stepper für die Größe, Schieber für Position (0 … L) und Winkel,
-// Schnellwahl, F_v/F_h, darunter Ein-/Ausblenden und Löschen; Löschen auch per Wischen nach links (mit „Rückgängig“).
-// Werte laufen wie bisher über updateVal(); gespeicherte Daten und Rechnung bleiben gleich.
+// ── Lastzeilen im kragr-Design (calc v0.9.3: alle Systeme — Einfeldträger, Kragarm, Durchlaufträger, Rahmen, Gelenke) ──
+// Zeile: Symbol, Name, Kurzfassung, ▾. Aufgeklappt: Stepper für Größen, Schieber für Positionen (0 … Länge des Abschnitts/Stabs),
+// Umschalter (Stab, Gleich-/Trapezlast), darunter Ein-/Ausblenden und Löschen; Löschen auch per Wischen nach links (mit „Rückgängig“).
+// Werte laufen über die bisherigen Funktionen (updateVal, updateContVal, updateFrameVal, updateHingeVal, updateContHinge).
 const K3T = {
-  de:{ F:'Kraft F', a:'Position a', al:'Winkel α', alH:'zur Senkrechten', q:'Last q', qa:'q am Anfang', qb:'q am Ende', trap:'Trapezlast', uni:'Gleichlast', from:'von', to:'bis', over:'wirkt über {a} – {b} m', H:'Horizontalkraft H', Me:'Moment M_e', hide:'Ausblenden', show:'Einblenden', del:'Löschen', swipe:'Nach links wischen zum Löschen', gone:'{n} gelöscht', undo:'Rückgängig', dec:'verringern', inc:'erhöhen' },
-  en:{ F:'Force F', a:'Position a', al:'Angle α', alH:'to the vertical', q:'Load q', qa:'q at start', qb:'q at end', trap:'Trapezoidal', uni:'Uniform', from:'from', to:'to', over:'acts over {a} – {b} m', H:'Horizontal force H', Me:'Moment M_e', hide:'Hide', show:'Show', del:'Delete', swipe:'Swipe left to delete', gone:'{n} deleted', undo:'Undo', dec:'decrease', inc:'increase' },
-  fr:{ F:'Force F', a:'Position a', al:'Angle α', alH:'par rapport à la verticale', q:'Charge q', qa:'q au début', qb:'q à la fin', trap:'Trapézoïdale', uni:'Uniforme', from:'de', to:'à', over:'agit de {a} à {b} m', H:'Force horizontale H', Me:'Moment M_e', hide:'Masquer', show:'Afficher', del:'Supprimer', swipe:'Glisser vers la gauche pour supprimer', gone:'{n} supprimée', undo:'Annuler', dec:'diminuer', inc:'augmenter' },
-  es:{ F:'Fuerza F', a:'Posición a', al:'Ángulo α', alH:'respecto a la vertical', q:'Carga q', qa:'q al inicio', qb:'q al final', trap:'Trapezoidal', uni:'Uniforme', from:'de', to:'a', over:'actúa de {a} a {b} m', H:'Fuerza horizontal H', Me:'Momento M_e', hide:'Ocultar', show:'Mostrar', del:'Eliminar', swipe:'Desliza a la izquierda para eliminar', gone:'{n} eliminada', undo:'Deshacer', dec:'disminuir', inc:'aumentar' } };
+  de:{ F:'Kraft F', a:'Position a', al:'Winkel α', alH:'zur Senkrechten', q:'Last q', qa:'q am Anfang', qb:'q am Ende', trap:'Trapezlast', uni:'Gleichlast', from:'von', to:'bis', over:'wirkt über {a} – {b} m', H:'Horizontalkraft H', Me:'Moment M_e', M:'Moment M', Fp:'F ⊥ Stab', Hp:'H ∥ Stab', mem:'Stab', dir:'Richtung', span:'Feld', pos:'Position', hide:'Ausblenden', show:'Einblenden', del:'Löschen', swipe:'Nach links wischen zum Löschen', gone:'{n} gelöscht', undo:'Rückgängig', dec:'verringern', inc:'erhöhen' },
+  en:{ F:'Force F', a:'Position a', al:'Angle α', alH:'to the vertical', q:'Load q', qa:'q at start', qb:'q at end', trap:'Trapezoidal', uni:'Uniform', from:'from', to:'to', over:'acts over {a} – {b} m', H:'Horizontal force H', Me:'Moment M_e', M:'Moment M', Fp:'F ⊥ member', Hp:'H ∥ member', mem:'Member', dir:'Direction', span:'Span', pos:'Position', hide:'Hide', show:'Show', del:'Delete', swipe:'Swipe left to delete', gone:'{n} deleted', undo:'Undo', dec:'decrease', inc:'increase' },
+  fr:{ F:'Force F', a:'Position a', al:'Angle α', alH:'par rapport à la verticale', q:'Charge q', qa:'q au début', qb:'q à la fin', trap:'Trapézoïdale', uni:'Uniforme', from:'de', to:'à', over:'agit de {a} à {b} m', H:'Force horizontale H', Me:'Moment M_e', M:'Moment M', Fp:'F ⊥ barre', Hp:'H ∥ barre', mem:'Barre', dir:'Direction', span:'Travée', pos:'Position', hide:'Masquer', show:'Afficher', del:'Supprimer', swipe:'Glisser vers la gauche pour supprimer', gone:'{n} supprimée', undo:'Annuler', dec:'diminuer', inc:'augmenter' },
+  es:{ F:'Fuerza F', a:'Posición a', al:'Ángulo α', alH:'respecto a la vertical', q:'Carga q', qa:'q al inicio', qb:'q al final', trap:'Trapezoidal', uni:'Uniforme', from:'de', to:'a', over:'actúa de {a} a {b} m', H:'Fuerza horizontal H', Me:'Momento M_e', M:'Momento M', Fp:'F ⊥ barra', Hp:'H ∥ barra', mem:'Barra', dir:'Dirección', span:'Vano', pos:'Posición', hide:'Ocultar', show:'Mostrar', del:'Eliminar', swipe:'Desliza a la izquierda para eliminar', gone:'{n} eliminada', undo:'Deshacer', dec:'disminuir', inc:'aumentar' } };
 const k3 = k => (K3T[calcLang]||K3T.en)[k];
 const k3f = v => { const n=+v; return isFinite(n) ? String(+n.toFixed(3)).replace('.', calcLang==='en'?'.':',') : String(v); };
-const K3_ICON = {
-  point:'<svg class="k-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e8590c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="3" x2="12" y2="19"/><polyline points="7,14 12,20 17,14"/></svg>',
-  dist:'<svg class="k-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5468ad" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="4" x2="21" y2="4"/><line x1="5" y1="4" x2="5" y2="17"/><line x1="12" y1="4" x2="12" y2="17"/><line x1="19" y1="4" x2="19" y2="17"/><polyline points="2.5,14 5,18 7.5,14"/><polyline points="9.5,14 12,18 14.5,14"/><polyline points="16.5,14 19,18 21.5,14"/></svg>',
-  horiz:'<svg class="k-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3d3f45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="19" y2="12"/><polyline points="14,7 20,12 14,17"/></svg>' };
 const k3Open = () => { try{ return LOAD_OPEN; }catch(e){ return null; } };   // LOAD_OPEN entsteht erst später im Skript
-const k3Find = (sys,type,id) => (loads[sys][type]||[]).find(l=>l.id===+id);
+const K3_IC = (path, c, w) => `<svg class="k-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w||2.4}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
+const K3_ICON = {
+  point:K3_IC('<line x1="12" y1="3" x2="12" y2="19"/><polyline points="7,14 12,20 17,14"/>', '#e8590c', 2.6),
+  dist:K3_IC('<line x1="3" y1="4" x2="21" y2="4"/><line x1="5" y1="4" x2="5" y2="17"/><line x1="12" y1="4" x2="12" y2="17"/><line x1="19" y1="4" x2="19" y2="17"/><polyline points="2.5,14 5,18 7.5,14"/><polyline points="9.5,14 12,18 14.5,14"/><polyline points="16.5,14 19,18 21.5,14"/>', '#5468ad', 2.2),
+  horiz:K3_IC('<line x1="3" y1="12" x2="19" y2="12"/><polyline points="14,7 20,12 14,17"/>', '#3d3f45', 2.2),
+  mom:K3_IC('<path d="M18 8a7 7 0 1 0 1 7"/><polyline points="20,4 18,8 14,7"/>', '#7c3aed', 2.2),
+  hinge:K3_IC('<circle cx="12" cy="12" r="5.5"/><line x1="2" y1="12" x2="6.5" y2="12"/><line x1="17.5" y1="12" x2="22" y2="12"/>', '#3d3f45', 2.2) };
+K3_ICON.vert=K3_ICON.dist;
+const K3_TONE = { point:'point', dist:'dist', vert:'dist', horiz:'horiz', mom:'mom', hinge:'horiz' };
 const k3L = sys => parseFloat(document.getElementById(sys==='beam'?'bL':'cL')?.value)||5;
-function k3Sum(sys, type, v){
-  const t=[];
+const k3Num = id => parseFloat(document.getElementById(id)?.value);
+function k3MemL(m){ const b=k3Num('fB')||5, h=k3Num('fH')||4, hA=k3Num('fHA')||h, hB=k3Num('fHB')||h; return m==='rafter'?b:m==='left'?hA:hB; }
+const k3SegKey = s => /^\d+$/.test(String(s)) ? +s : s;
+// Anbindung je System: Liste, Wert setzen, ein/aus, löschen, neu zeichnen, Länge für die Schieber
+const K3A = {
+  beam:{ list:t=>loads.beam[t], upd:(t,id,k,v)=>updateVal('beam',t,id,k,v), tog:(t,id)=>toggleLoad('beam',t,id), rem:(t,id)=>removeLoad('beam',t,id), render:t=>renderLoads('beam',t), after:()=>drawBeam(), len:()=>k3L('beam') },
+  cant:{ list:t=>loads.cant[t], upd:(t,id,k,v)=>updateVal('cant',t,id,k,v), tog:(t,id)=>toggleLoad('cant',t,id), rem:(t,id)=>removeLoad('cant',t,id), render:t=>renderLoads('cant',t), after:()=>drawCantilever(), len:()=>k3L('cant') },
+  cont:{ list:(t,s)=>{ const g=contSeg(k3SegKey(s)); if(!g[t]) g[t]=[]; return g[t]; }, upd:(t,id,k,v,s)=>updateContVal(k3SegKey(s),t,id,k,v), tog:(t,id,s)=>toggleContLoad(k3SegKey(s),t,id),
+    rem:(t,id,s)=>removeContLoad(k3SegKey(s),t,id), render:(t,s)=>renderContLoads(k3SegKey(s),t), after:()=>drawContinuous(), len:(t,l,s)=>contSeg(k3SegKey(s)).L },
+  frame:{ list:t=>frameLoads[t], upd:(t,id,k,v)=>updateFrameVal(t,id,k,v), tog:(t,id)=>toggleFrameLoad(t,id), rem:(t,id)=>removeFrameLoad(t,id), render:t=>renderFrameLoads(t), after:()=>drawFrame(),
+    len:(t,l)=>k3MemL(l.values.member||(t==='vert'?'rafter':'left')) },
+  fhinge:{ list:()=>frameHinges, upd:(t,id,k,v)=>updateHingeVal(id,k,v), rem:(t,id)=>removeFrameHinge(id), render:()=>renderFrameHinges(), after:()=>{ updateIndetInfo(); drawFrame(); }, len:(t,h)=>k3MemL(h.member) },
+  chinge:{ list:()=>contCfg.hinges, upd:(t,id,k,v)=>updateContHinge(id,k,v), rem:(t,id)=>removeContHinge(id), render:()=>renderContHinges(), after:()=>drawContinuous(), len:(t,g)=>(spanData[g.span]||{}).L||5 } };
+const k3Vals = l => l.values || l;
+function k3Item(it){ const A=K3A[it.dataset.sys]; if(!A) return null; return (A.list(it.dataset.type, it.dataset.seg)||[]).find(l=>l.id===+it.dataset.id) || null; }
+function k3Name(sys, type, i){
+  if(type==='hinge') return 'G'+(i+1);
+  if(sys==='frame') return (type==='vert'?'q':'P')+(i+1);
+  if(sys==='cont') return (type==='point'?'F':type==='mom'?'M':'q')+(i+1);
+  return (type==='point'?'F':type==='horiz'?'H/Me':'q')+(i+1);
+}
+const k3MemTx = m => ({rafter:tr('rafter'), left:tr('leftCol'), right:tr('rightCol')})[m] || m;
+function k3Sum(sys, type, l){
+  const v=k3Vals(l), t=[];
+  if(type==='hinge'){ if(sys==='fhinge'){ t.push(k3MemTx(v.member)); t.push(`${v.member==='rafter'?'x':'z'} = ${k3f(v.pos)} m`); } else { t.push(`${k3('span')} ${(+v.span)+1}`); t.push(`a = ${k3f(v.a)} m`); } return t.join(' · '); }
   if(type==='point'){ t.push(`F = ${k3f(v.F)} kN`); if(+v.alpha) t.push(`α = ${k3f(v.alpha)}°`); t.push(`@ ${k3f(v.a)} m`); }
-  else if(type==='dist'){ t.push(+v.qa===+v.qb ? `q = ${k3f(v.qa)} kN/m` : `q = ${k3f(v.qa)} → ${k3f(v.qb)} kN/m`); t.push(`${k3f(v.a)} – ${k3f(v.b)} m`); }
+  else if(type==='dist' || type==='vert'){ t.push(+v.qa===+v.qb ? `q = ${k3f(v.qa)} kN/m` : `q = ${k3f(v.qa)} → ${k3f(v.qb)} kN/m`); t.push(`${k3f(v.a)} – ${k3f(v.b)} m`); }
+  else if(type==='mom'){ t.push(`M = ${k3f(v.M)} kNm`); t.push(`@ ${k3f(v.a)} m`); }
+  else if(sys==='frame'){ if(+v.F) t.push(`F = ${k3f(v.F)} kN`); if(+v.H) t.push(`H = ${k3f(v.H)} kN`); if(!+v.F && !+v.H) t.push('F = 0 kN'); t.push(`@ ${k3f(v.z)} m`); }
   else { if(+v.H) t.push(`H = ${k3f(v.H)} kN`); if(+v.Me) t.push(`M = ${k3f(v.Me)} kNm`); t.push(`@ ${k3f(v.a||0)} m`); }
+  if(sys==='frame') t.push(k3MemTx(v.member||(type==='vert'?'rafter':'left')));
   return t.join(' · ');
 }
 function k3Stp(key, val, unit, lab){
@@ -1578,70 +1650,86 @@ function k3Stp(key, val, unit, lab){
     +`<input class="k-num" type="number" step="any" data-key="${key}" value="${val}" aria-label="${lab}"><span class="k-u">${unit}</span>`
     +`<button type="button" class="k-sb" data-d="1" aria-label="${lab} ${k3('inc')}">+</button></span>`;
 }
-function k3Sl(key, val, min, max, step, unit, lab, hint, cls){
+const k3Line = (lab, key, val, unit) => `<div class="k-line"><span class="k-lab">${lab}</span>${k3Stp(key, val, unit, lab)}</div>`;
+function k3Sl(key, val, min, max, step, unit, lab, hint, lmax){
   return `<div class="k-sl"><div class="k-slh"><span class="k-lab">${lab}${hint?` <small>${hint}</small>`:''}</span><span class="k-slv"><input class="k-num k-num-s" type="number" step="any" data-key="${key}" value="${val}" aria-label="${lab}"><span class="k-u">${unit}</span></span></div>`
-    +`<input type="range" class="k-rng${cls?' '+cls:''}" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${val}" aria-label="${lab}"${key==='a'||key==='b'?' data-lmax="1"':''}></div>`;
+    +`<input type="range" class="k-rng" data-key="${key}" min="${min}" max="${max}" step="${step}" value="${val}" aria-label="${lab}"${lmax?' data-lmax="1"':''}></div>`;
 }
-function k3Body(sys, type, l){
-  const v=l.values, L=k3L(sys);
+const k3Seg = (key, cur, opts) => `<div class="k-segn" role="group" style="grid-template-columns:repeat(${opts.length},minmax(0,1fr))">${opts.map(([v,t])=>`<button type="button" class="k-opt" data-key="${key}" data-v="${v}" aria-pressed="${String(v)===String(cur)}">${t}</button>`).join('')}</div>`;
+const K3_MEMS = () => [['left',tr('leftCol')],['rafter',tr('rafter')],['right',tr('rightCol')]];
+function k3Body(sys, type, l, seg){
+  const v=k3Vals(l), A=K3A[sys], L=A.len(type,l,seg);
   let h='';
-  if(type==='point'){
-    h+=`<div class="k-line"><span class="k-lab">${k3('F')}</span>${k3Stp('F', v.F, 'kN', k3('F'))}</div>`;
-    h+=k3Sl('a', v.a, 0, L, 0.25, 'm', k3('a'));
-    h+=k3Sl('alpha', v.alpha||0, -90, 90, 5, '°', k3('al'), k3('alH'), 'k-rng-pt');
-    h+=`<div class="k-angs k-angs2">${[-45,-30,0,30,45].map(a=>`<button type="button" class="k-ang" data-a="${a}" aria-pressed="${+(v.alpha||0)===a}">${a>0?'+':''}${String(a).replace('-','−')}°</button>`).join('')}</div>`;
-    h+=`<div class="k-fvh"></div>`;
-  } else if(type==='dist'){
-    const uni=!l.trap && +v.qa===+v.qb;
-    h+=`<div class="k-line"><span class="k-lab">${uni?k3('q'):k3('qa')}</span>${k3Stp(uni?'q':'qa', v.qa, 'kN/m', uni?k3('q'):k3('qa'))}</div>`;
-    if(!uni) h+=`<div class="k-line"><span class="k-lab">${k3('qb')}</span>${k3Stp('qb', v.qb, 'kN/m', k3('qb'))}</div>`;
-    h+=`<div class="k-seg2" role="group"><button type="button" class="k-mode" data-uni="1" aria-pressed="${uni}">${k3('uni')}</button><button type="button" class="k-mode" data-uni="0" aria-pressed="${!uni}">${k3('trap')}</button></div>`;
-    h+=k3Sl('a', v.a, 0, L, 0.25, 'm', k3('from'))+k3Sl('b', v.b, 0, L, 0.25, 'm', k3('to'));
-    h+=`<div class="k-over"></div>`;
-  } else {
-    h+=`<div class="k-line"><span class="k-lab">${k3('H')}</span>${k3Stp('H', v.H||0, 'kN', k3('H'))}</div>`;
-    h+=`<div class="k-line"><span class="k-lab">${k3('Me')}</span>${k3Stp('Me', v.Me||0, 'kNm', k3('Me'))}</div>`;
-    h+=k3Sl('a', v.a||0, 0, L, 0.25, 'm', k3('a'));
+  if(type==='hinge'){
+    if(sys==='fhinge'){ h+=`<div class="k-sub">${k3('mem')}</div>`+k3Seg('member', v.member, K3_MEMS());
+      h+=k3Sl('pos', v.pos, 0, L, 0.05, 'm', k3('pos'), v.member==='rafter'?tr('alongRafter').replace(/^m\s*/,''):tr('fromBase').replace(/^m\s*/,''), true); }
+    else { h+=`<div class="k-sub">${k3('span')}</div>`+k3Seg('span', v.span, spanData.map((_,k)=>[k, String(k+1)]));
+      h+=k3Sl('a', v.a, 0, L, 0.05, 'm', k3('a'), '', true); }
+    return h+`<div class="k-acts"><button type="button" class="load-action-btn delete k-act" data-del="1">✕<span>${k3('del')}</span></button></div>`;
   }
-  h+=`<div class="k-acts"><button type="button" class="load-action-btn k-act" onclick="toggleLoad('${sys}','${type}',${l.id})">${l.enabled?ICON.eye:ICON.eyeOff}<span>${l.enabled?k3('hide'):k3('show')}</span></button>`
-    +`<button type="button" class="load-action-btn delete k-act" onclick="k3Del('${sys}','${type}',${l.id})">✕<span>${k3('del')}</span></button></div>`;
+  if(sys==='frame') h+=`<div class="k-sub">${k3('mem')}</div>`+k3Seg('member', v.member||(type==='vert'?'rafter':'left'), K3_MEMS());
+  if(type==='point'){
+    h+=k3Line(k3('F'), 'F', v.F, 'kN')+k3Sl('a', v.a, 0, L, 0.25, 'm', k3('a'), '', true);
+    if(sys!=='cont'){ h+=k3Sl('alpha', v.alpha||0, -90, 90, 5, '°', k3('al'), k3('alH'));
+      h+=`<div class="k-angs k-angs2">${[-45,-30,0,30,45].map(a=>`<button type="button" class="k-ang" data-a="${a}" aria-pressed="${+(v.alpha||0)===a}">${a>0?'+':''}${String(a).replace('-','−')}°</button>`).join('')}</div><div class="k-fvh"></div>`; }
+  } else if(type==='dist' || type==='vert'){
+    const uni=!l.trap && +v.qa===+v.qb;
+    h+=k3Line(uni?k3('q'):k3('qa'), uni?'q':'qa', v.qa, 'kN/m'); if(!uni) h+=k3Line(k3('qb'), 'qb', v.qb, 'kN/m');
+    h+=`<div class="k-seg2" role="group"><button type="button" class="k-mode" data-uni="1" aria-pressed="${uni}">${k3('uni')}</button><button type="button" class="k-mode" data-uni="0" aria-pressed="${!uni}">${k3('trap')}</button></div>`;
+    h+=k3Sl('a', v.a, 0, L, 0.25, 'm', k3('from'), '', true)+k3Sl('b', v.b, 0, L, 0.25, 'm', k3('to'), '', true)+`<div class="k-over k-range"></div>`;
+    if(sys==='frame'){ const m=v.member||'rafter';
+      const o = m==='rafter' ? [['v',tr('rdirV')],['n',tr('rdirN')],['h',tr('rdirH')]] : [['h',tr('dirH')],['ax',tr('dirAx')]], key = m==='rafter'?'rdir':'dir', cur = m==='rafter' ? (v.rdir||'v') : (v.dir==='h'?'h':'ax');
+      h+=`<div class="k-sub">${k3('dir')}</div><select class="k-sel" data-key="${key}">${o.map(([x,t])=>`<option value="${x}"${x===cur?' selected':''}>${t}</option>`).join('')}</select>`;
+      if(m==='rafter' && cur==='n') h+=`<div class="k-over">${tr('rdirNote')}</div>`; }
+  } else if(type==='mom'){
+    h+=k3Line(k3('M'), 'M', v.M, 'kNm ↻')+k3Sl('a', v.a, 0, L, 0.25, 'm', k3('a'), '', true);
+  } else if(sys==='frame'){
+    h+=k3Line(k3('Fp'), 'F', v.F||0, 'kN')+k3Line(k3('Hp'), 'H', v.H||0, 'kN')+k3Sl('z', v.z||0, 0, L, 0.25, 'm', tr('posLbl'), '', true);
+  } else {
+    h+=k3Line(k3('H'), 'H', v.H||0, 'kN')+k3Line(k3('Me'), 'Me', v.Me||0, 'kNm')+k3Sl('a', v.a||0, 0, L, 0.25, 'm', k3('a'), '', true);
+  }
+  h+=`<div class="k-acts"><button type="button" class="load-action-btn k-act" data-tog="1">${l.enabled?ICON.eye:ICON.eyeOff}<span>${l.enabled?k3('hide'):k3('show')}</span></button>`
+    +`<button type="button" class="load-action-btn delete k-act" data-del="1">✕<span>${k3('del')}</span></button></div>`;
   return h;
 }
-function k3Rows(sys, type, el){
-  const list=loads[sys][type];
+function k3Rows(sys, seg, type, el){
+  const list=K3A[sys].list(type, seg)||[];
   el.innerHTML=list.map((l,i)=>{
-    const lbl=type==='point'?`F${i+1}`:type==='horiz'?`H/Me${i+1}`:`q${i+1}`, key=el.id+'#'+i, open=!!(k3Open() && k3Open().has(key));
-    return `<div class="load-item cmp k-row k-${type}${l.enabled?'':' disabled'}${open?' open':''}" data-k="${key}" data-sys="${sys}" data-type="${type}" data-id="${l.id}">
+    const key=el.id+'#'+i, open=!!(k3Open() && k3Open().has(key)), en=l.enabled!==false, tone=(sys==='frame' && type==='horiz') ? 'point' : type;
+    return `<div class="load-item cmp k-row k-${K3_TONE[tone]||'horiz'}${en?'':' disabled'}${open?' open':''}" data-k="${key}" data-sys="${sys}" data-type="${type}" data-id="${l.id}"${seg!=null?` data-seg="${seg}"`:''}>
       <div class="load-item-header" role="button" tabindex="0" aria-expanded="${open}" onclick="k3Toggle(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();k3Toggle(this)}">
-        <div class="load-item-label">${K3_ICON[type]}<b>${lbl}</b><span class="load-sum">${k3Sum(sys,type,l.values)}</span></div>
+        <div class="load-item-label">${K3_ICON[tone]||K3_ICON.horiz}<b>${k3Name(sys,type,i)}</b><span class="load-sum">${k3Sum(sys,type,l)}</span></div>
         <svg class="k-rchev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3 L5 7 L9 3 Z"/></svg></div>
-      <div class="load-item-body">${k3Body(sys,type,l)}</div></div>`;
+      <div class="load-item-body">${k3Body(sys,type,l,seg)}</div></div>`;
   }).join('');
   el.querySelectorAll('.k-row').forEach(k3Refresh);
 }
+const k3On = el => !!el && typeof MutationObserver==='function' && typeof el.querySelectorAll==='function';
 function k3Toggle(h){ const it=h.closest('.load-item'); if(it._swiped){ it._swiped=false; return; } const o=!it.classList.contains('open'); it.classList.toggle('open', o); h.setAttribute('aria-expanded', o);
   const LO=k3Open(); if(LO){ o?LO.add(it.dataset.k):LO.delete(it.dataset.k); } }
 // Anzeige einer Zeile aus den Werten nachziehen (Kurzfassung, Schieber, Zahlenfelder, F_v/F_h, Bereich)
 function k3Refresh(it, skip){
-  const sys=it.dataset.sys, type=it.dataset.type, l=k3Find(sys,type,it.dataset.id); if(!l) return; const v=l.values;
-  const s=it.querySelector('.load-sum'); if(s) s.textContent=k3Sum(sys,type,v);
-  it.querySelectorAll('[data-key]').forEach(e=>{ if(e===skip) return; const k=e.dataset.key, x = k==='q' ? v.qa : v[k]; if(x===undefined) return; if(String(e.value)!==String(x)) e.value=x; });
+  const l=k3Item(it); if(!l) return; const v=k3Vals(l);
+  const s=it.querySelector('.load-sum'); if(s) s.textContent=k3Sum(it.dataset.sys,it.dataset.type,l);
+  it.querySelectorAll('input[data-key]').forEach(e=>{ if(e===skip) return; const k=e.dataset.key, x = k==='q' ? v.qa : v[k]; if(x===undefined) return; if(String(e.value)!==String(x)) e.value=x; });
   it.querySelectorAll('.k-ang').forEach(b=>b.setAttribute('aria-pressed', +(v.alpha||0)===+b.dataset.a ? 'true':'false'));
+  it.querySelectorAll('.k-opt').forEach(b=>b.setAttribute('aria-pressed', String(v[b.dataset.key]??'')===b.dataset.v ? 'true':'false'));
   const fv=it.querySelector('.k-fvh'); if(fv){ const r=(+v.alpha||0)*Math.PI/180, F=+v.F||0, Fv=F*Math.cos(r), Fh=Math.abs(Math.sin(r))<1e-9?0:F*Math.sin(r);
     fv.innerHTML=`F<sub>v</sub> = F·cos α = ${k3f(Fv.toFixed(2))} kN<br>F<sub>h</sub> = F·sin α = ${k3f(Fh.toFixed(2))} kN`; }
-  const ov=it.querySelector('.k-over'); if(ov) ov.textContent=k3('over').replace('{a}', k3f(v.a)).replace('{b}', k3f(v.b));
+  const ov=it.querySelector('.k-range'); if(ov) ov.textContent=k3('over').replace('{a}', k3f(v.a)).replace('{b}', k3f(v.b));
 }
 function k3Set(it, key, val){
-  const sys=it.dataset.sys, type=it.dataset.type, id=+it.dataset.id;
-  if(key==='q'){ updateVal(sys,type,id,'qa',val); updateVal(sys,type,id,'qb',val); } else updateVal(sys,type,id,key,val);
+  const A=K3A[it.dataset.sys], t=it.dataset.type, id=+it.dataset.id, s=it.dataset.seg;
+  if(key==='q'){ A.upd(t,id,'qa',val,s); A.upd(t,id,'qb',val,s); } else A.upd(t,id,key,val,s);
 }
-function k3Del(sys, type, id){
-  const list=loads[sys][type], i=list.findIndex(l=>l.id===+id); if(i<0) return; const obj=list[i], n=(type==='point'?'F':type==='horiz'?'H/Me':'q')+(i+1);
-  removeLoad(sys,type,+id);
+function k3Del(it){
+  const sys=it.dataset.sys, t=it.dataset.type, id=+it.dataset.id, s=it.dataset.seg, A=K3A[sys];
+  const list=A.list(t,s), i=list.findIndex(l=>l.id===id); if(i<0) return; const obj=list[i], n=k3Name(sys,t,i);
+  A.rem(t,id,s);
   if(typeof document==='undefined') return;
   let sb=document.getElementById('k-undo'); if(!sb){ sb=document.createElement('div'); sb.id='k-undo'; sb.setAttribute('role','status'); document.body.appendChild(sb); }
   sb.innerHTML=`<span>${k3('gone').replace('{n}', n)}</span><button type="button">${k3('undo')}</button>`; sb.classList.add('on');
-  sb.querySelector('button').onclick=()=>{ loads[sys][type].splice(i,0,obj); renderLoads(sys,type); sys==='beam'?drawBeam():drawCantilever(); sb.classList.remove('on'); if(typeof liveCalc==='function') liveCalc(true); };
+  sb.querySelector('button').onclick=()=>{ A.list(t,s).splice(i,0,obj); A.render(t,s); A.after(); sb.classList.remove('on'); if(typeof liveCalc==='function') liveCalc(true); };
   clearTimeout(sb._t); sb._t=setTimeout(()=>sb.classList.remove('on'), 5000);
   if(typeof liveCalc==='function') liveCalc(true);
 }
@@ -1649,7 +1737,7 @@ function renderLoads(sys,type) {
   const el=document.getElementById(`${sys}-${type}-list`);
   const list=loads[sys][type];
   if(!list.length){el.innerHTML='';return;}
-  if(typeof MutationObserver==='function' && typeof el.querySelectorAll==='function'){ k3Rows(sys,type,el); return; }   // Lastzeilen im kragr-Design (v0.9.2)
+  if(k3On(el)){ k3Rows(sys,null,type,el); return; }   // Lastzeilen im kragr-Design (v0.9.2)
   el.innerHTML=list.map((l,i)=>{
     const lbl=type==='point'?`F${i+1}`:type==='horiz'?`H/Me${i+1}`:`q${i+1}`;
     const eye=l.enabled?ICON.eye:ICON.eyeOff;
@@ -1768,6 +1856,7 @@ function removeContHinge(id){ contCfg.hinges = contCfg.hinges.filter(g=>g.id!==i
 function updateContHinge(id, key, val){ const g=contCfg.hinges.find(g=>g.id===id); if(g) g[key] = key==='span' ? parseInt(val) : (parseFloat(val)||0); drawContinuous(); }
 function renderContHinges(){
   const el=document.getElementById('cont-hinge-list'); if(!el) return;
+  if(k3On(el)){ k3Rows('chinge',null,'hinge',el); return; }
   el.innerHTML = contCfg.hinges.map((g,i)=>`<div class="load-item">
     <div class="load-item-header"><div class="load-item-label">G${i+1}</div>
       <div class="load-item-actions"><button class="load-action-btn delete" onclick="removeContHinge(${g.id})">✕</button></div></div>
@@ -1806,6 +1895,7 @@ function renderContLoads(spanIdx,type) {
   if(!el) return;
   const list=contSeg(spanIdx)[type]||[];
   if(!list.length){el.innerHTML='';return;}
+  if(k3On(el)){ k3Rows('cont',spanIdx,type,el); return; }   // Lastzeilen im kragr-Design (v0.9.3)
   const k = typeof spanIdx==='string' ? `'${spanIdx}'` : spanIdx;
   const fld = (lab, unit, key, v, step) => `<div class="field"><label>${lab} <span class="unit">${unit}</span></label><input type="number" value="${v}" step="${step}" oninput="updateContVal(${k},'${type}',ID,'${key}',this.value)"></div>`;
   el.innerHTML=list.map((l,i)=>{
@@ -2466,6 +2556,7 @@ function renderFrameHinges(){
   const el = document.getElementById('frame-hinge-list');
   if(!el) return;
   if(!frameHinges.length){ el.innerHTML=''; return; }
+  if(k3On(el)){ k3Rows('fhinge',null,'hinge',el); return; }
   const b = parseFloat(document.getElementById('fB').value)||5;
   const h = parseFloat(document.getElementById('fH').value)||4;
   const hA = parseFloat(document.getElementById('fHA')?.value)||h;
@@ -2554,6 +2645,7 @@ function renderFrameLoads(type){
   const el=document.getElementById('frame-'+type+'-list');
   const list=frameLoads[type];
   if(!list.length){el.innerHTML='';return;}
+  if(k3On(el)){ k3Rows('frame',null,type,el); return; }
   const b=parseFloat(document.getElementById('fB').value)||5;
   const h=parseFloat(document.getElementById('fH').value)||4;
   const hA=parseFloat(document.getElementById('fHA')?.value)||h;
@@ -6014,7 +6106,7 @@ function buildCols(){
 const LOAD_OPEN = new Set();
 const fmtV = v => { const n=parseFloat(String(v).replace(',','.')); return isFinite(n) ? String(+n.toFixed(3)).replace('.', calcLang==='en'?'.':',') : v; };
 function loadSummary(item){
-  if(item.classList.contains('k-row')){ const l=k3Find(item.dataset.sys,item.dataset.type,item.dataset.id); return l ? k3Sum(item.dataset.sys,item.dataset.type,l.values) : ''; }
+  if(item.classList.contains('k-row')){ const l=k3Item(item); return l ? k3Sum(item.dataset.sys,item.dataset.type,l) : ''; }
   const F={}; item.querySelectorAll('.load-item-body .field').forEach(f=>{ const inp=f.querySelector('input,select'); if(!inp) return;
     const lb=f.querySelector('label'), lc=lb ? lb.cloneNode(true) : null; if(lc){ lc.querySelectorAll('.unit').forEach(x=>x.remove()); lc.querySelectorAll('sub').forEach(s=>s.replaceWith('_'+s.textContent)); }
     const lab=(lc?.textContent||'').trim(), unit=(f.querySelector('label .unit')?.textContent||'').trim();   // Index (tiefgestellt) als „_“ lesen
@@ -6219,13 +6311,26 @@ function k2Merge(){
     card.querySelector('.k-add-btn').addEventListener('click', e=>{ e.stopPropagation(); k2MenuSet(card, !card.classList.contains('k-menu-open')); });
   });
 }
+// Durchlaufträger: jede Feld-Karte wird zur Lasten-Karte (Titel bleibt „Feld 1 — Lasten“, Zwischenüberschriften entfallen, Menü statt drei Knöpfe)
+function k2MergeCont(){
+  document.querySelectorAll('#span-load-cards > .card:not(.k-loads)').forEach(c=>{
+    const ttl=c.querySelector(':scope > .card-title')?.textContent||'', lists=[...c.querySelectorAll(':scope > .load-list')], btns=[...c.querySelectorAll(':scope > .add-load-btn')];
+    c.className='card k-loads'; c.dataset.tab='cont'; c.dataset.title=ttl;
+    c.innerHTML=`<button type="button" class="k-head" aria-expanded="true"><span class="k-h"></span><span class="k-sum"></span><svg class="k-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg></button>
+      <div class="k-body"><span class="k-swipe"></span><div class="k-lists"></div><div class="k-add"><button type="button" class="k-add-btn" aria-haspopup="menu" aria-expanded="false"><span class="k-add-tx"></span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3 L5 7 L9 3 Z"/></svg></button><div class="k-menu" role="menu"></div></div></div>`;
+    const L=c.querySelector('.k-lists'), M=c.querySelector('.k-menu'); lists.forEach(l=>L.appendChild(l));
+    btns.forEach(b=>{ b.setAttribute('role','menuitem'); b.classList.add('k-mi'); b.addEventListener('click', ()=>k2MenuSet(c,false)); M.appendChild(b); });
+    c.querySelector('.k-head').addEventListener('click', ()=>{ const x=!c.classList.contains('k-closed'); c.classList.toggle('k-closed', x); c.querySelector('.k-head').setAttribute('aria-expanded', x?'false':'true'); k2Sum(); });
+    c.querySelector('.k-add-btn').addEventListener('click', e=>{ e.stopPropagation(); k2MenuSet(c, !c.classList.contains('k-menu-open')); });
+  });
+}
 function k2MenuSet(card, o){ card.classList.toggle('k-menu-open', o); card.querySelector('.k-add-btn').setAttribute('aria-expanded', o?'true':'false'); }
 document.addEventListener('click', e=>{ if(!e.target.closest || !e.target.closest('.k-add')) document.querySelectorAll('.k-loads.k-menu-open').forEach(c=>k2MenuSet(c,false)); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.k-loads.k-menu-open').forEach(c=>k2MenuSet(c,false)); });
 function k2Sum(){
   document.querySelectorAll('.k-loads').forEach(card=>{
     const items=[...card.querySelectorAll('.load-item')], sum=card.querySelector('.k-sum');
-    k2Tx(card.querySelector('.k-swipe'), k3('swipe')); k2Tx(card.querySelector('.k-h'), k2('loads')); k2Tx(card.querySelector('.k-add-tx'), '+ '+k2('add'));
+    k2Tx(card.querySelector('.k-swipe'), k3('swipe')); k2Tx(card.querySelector('.k-h'), card.dataset.title || k2('loads')); k2Tx(card.querySelector('.k-add-tx'), '+ '+k2('add'));
     if(card.querySelector('.k-head').title!==k2('fold')) card.querySelector('.k-head').title=k2('fold');
     const sys=K2SYS[card.dataset.tab];
     k2Tx(sum, (card.classList.contains('k-closed') && sys) ? (k2Texts(sys).map(x=>x.t).join(' · ') || k2('none')) : items.length ? k2('n')(items.length) : k2('none'));
@@ -6304,25 +6409,31 @@ function k2Bar(){
   bar.setAttribute('aria-label', k2('go'));
 }
 let _k2T=0, _k2Busy=false;
-// Lastzeilen (v0.9.2): Stepper, Schieber, Schnellwahl, Gleich-/Trapezlast, Wischen zum Löschen
-const K3_STEP = { F:1, q:0.5, qa:0.5, qb:0.5, H:1, Me:1 };
+// Lastzeilen (v0.9.3, alle Systeme): Stepper, Schieber, Schnellwahl, Umschalter, Wischen zum Löschen
+const K3_STEP = { F:1, q:0.5, qa:0.5, qb:0.5, H:1, Me:1, M:1 };
 document.addEventListener('click', e=>{
-  const it=e.target.closest && e.target.closest('.k-row'); if(!it) return;
-  const sb=e.target.closest('.k-sb'), ang=e.target.closest('.k-ang'), md=e.target.closest('.k-mode');
+  const it=e.target.closest && e.target.closest('.k-row'); if(!it || !it.contains(e.target) || e.target.closest('.load-item-header')) return;
+  const sb=e.target.closest('.k-sb'), ang=e.target.closest('.k-ang'), md=e.target.closest('.k-mode'), op=e.target.closest('.k-opt'), tg=e.target.closest('[data-tog]'), dl=e.target.closest('[data-del]');
+  const A=K3A[it.dataset.sys], t=it.dataset.type, s=it.dataset.seg;
   if(sb){ const inp=sb.parentElement.querySelector('.k-num'), k=inp.dataset.key, st=K3_STEP[k]||1;
     let v=parseFloat(String(inp.value).replace(',','.')); if(!isFinite(v)) v=0; v=Math.round((v+(+sb.dataset.d)*st)*1000)/1000;
     inp.value=v; k3Set(it,k,v); k3Refresh(it,inp); }
   else if(ang){ k3Set(it,'alpha',+ang.dataset.a); k3Refresh(it); }
-  else if(md){ const l=k3Find(it.dataset.sys,it.dataset.type,it.dataset.id); if(!l) return;
-    l.trap = md.dataset.uni!=='1'; if(!l.trap) updateVal(it.dataset.sys,'dist',l.id,'qb',l.values.qa);
-    renderLoads(it.dataset.sys,'dist'); liveCalc(true); }
+  else if(md){ const l=k3Item(it); if(!l) return; l.trap = md.dataset.uni!=='1'; if(!l.trap) A.upd(t,l.id,'qb',k3Vals(l).qa,s); A.render(t,s); A.after(); }
+  else if(op){ const k=op.dataset.key, v=k==='member' ? op.dataset.v : +op.dataset.v; A.upd(t,+it.dataset.id,k,v,s); A.render(t,s); A.after(); }
+  else if(tg){ A.tog(t,+it.dataset.id,s); }
+  else if(dl){ k3Del(it); }
   else return;
   _userAct=Date.now(); liveCalc();
 });
 document.addEventListener('input', e=>{
-  const t=e.target; if(!t.dataset || !t.dataset.key) return; const it=t.closest('.k-row'); if(!it) return;
+  const t=e.target; if(!t.dataset || !t.dataset.key || t.tagName!=='INPUT') return; const it=t.closest('.k-row'); if(!it) return;
   const v=parseFloat(String(t.value).replace(',','.')); if(!isFinite(v)) return;
   k3Set(it, t.dataset.key, v); k3Refresh(it, t);
+}, true);
+document.addEventListener('change', e=>{
+  const t=e.target; if(!t.classList || !t.classList.contains('k-sel')) return; const it=t.closest('.k-row'); if(!it) return;
+  const A=K3A[it.dataset.sys]; A.upd(it.dataset.type, +it.dataset.id, t.dataset.key, t.value, it.dataset.seg); A.render(it.dataset.type, it.dataset.seg); A.after();
 }, true);
 // Wischen nach links löscht (mit „Rückgängig“)
 let _k3sw=null;
@@ -6332,10 +6443,12 @@ document.addEventListener('pointermove', e=>{ if(!_k3sw) return; const dx=e.clie
   _k3sw.dx=Math.min(0,dx); const it=_k3sw.h.closest('.k-row'); it.style.transform=`translateX(${_k3sw.dx}px)`; it.classList.toggle('k-sw-del', _k3sw.dx<-90); });
 document.addEventListener('pointerup', ()=>{ if(!_k3sw) return; const s=_k3sw; _k3sw=null; const it=s.h.closest('.k-row'); if(!s.on) return;
   it._swiped=true; it.style.transform=''; it.classList.remove('k-sw-del');
-  if(s.dx<-90) k3Del(it.dataset.sys, it.dataset.type, +it.dataset.id); else setTimeout(()=>{ it._swiped=false; }, 50); });
+  if(s.dx<-90){ k3Del(it); _userAct=Date.now(); } else setTimeout(()=>{ it._swiped=false; }, 50); });
 document.addEventListener('pointercancel', ()=>{ if(_k3sw){ const it=_k3sw.h.closest('.k-row'); it.style.transform=''; it.classList.remove('k-sw-del'); _k3sw=null; } });
-function k3Lmax(){ ['beam','cant'].forEach(sys=>{ const L=k3L(sys); document.querySelectorAll(`#${sys}-point-list .k-rng[data-lmax], #${sys}-dist-list .k-rng[data-lmax], #${sys}-horiz-list .k-rng[data-lmax]`).forEach(r=>{ if(+r.max!==L) r.max=L; }); }); }
-function k2All(){ if(_k2Busy) return; _k2Busy=true; try{ k2Merge(); k2Steppers(); k2Angles(); k2Chips(); k2Sum(); k2Bar(); k3Lmax(); } finally { k2Obs.takeRecords(); _k2Busy=false; } }
+// Schieber-Höchstwert folgt der Länge (Stützweite, Feld, Stab)
+function k3Lmax(){ document.querySelectorAll('.k-row').forEach(it=>{ const r=it.querySelectorAll('.k-rng[data-lmax]'); if(!r.length) return; const l=k3Item(it); if(!l) return;
+  const L=K3A[it.dataset.sys].len(it.dataset.type, l, it.dataset.seg); r.forEach(x=>{ if(+x.max!==L) x.max=L; }); }); }
+function k2All(){ if(_k2Busy) return; _k2Busy=true; try{ k2Merge(); k2MergeCont(); k2Steppers(); k2Angles(); k2Chips(); k2Sum(); k2Bar(); k3Lmax(); } finally { k2Obs.takeRecords(); _k2Busy=false; } }
 const k2Obs = new MutationObserver(()=>{ if(_k2Busy) return; cancelAnimationFrame(_k2T); _k2T=requestAnimationFrame(k2All); });
 ['tab-beam','tab-cantilever','tab-cont','tab-frame'].forEach(id=>k2Obs.observe(document.getElementById(id), {childList:true, subtree:true, characterData:true}));
 k2Obs.observe(document.body, {attributes:true, attributeFilter:['class']});

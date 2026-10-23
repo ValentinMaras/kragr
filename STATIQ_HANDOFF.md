@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.7 · ref v0.3.43 · size v0.6.6 · projekt v0.1.13 · rechtliches v0.1.12 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.7 · ref v0.3.43 · size v0.6.7 · projekt v0.1.14 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
 - `calc.html` — Schnittgrößen-App (kragr·calc v0.9.7, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.13, Test von Variante C)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.14, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.6.6, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.6.7, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -567,6 +567,19 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Weg calc → size → Meine Projekte entschlackt — size v0.6.7 · projekt v0.1.14
+
+Valentin: Navigation beim Übertragen der Schnittkräfte und bei „Meine Projekte“ wirkt sperrig und etwas verbuggt. Gefunden und behoben:
+
+1. **Projekt-Fenster sprang nach „Nachweis in size“ auf** und verdeckte am Handy die Seite. Jetzt: Hinweisleiste `#ci-banner` oben in der Eingabe (unter der Auswahl) mit den übernommenen Werten und Hinweisen, schließbar (✕). `ciDo(key, part)` übernimmt und zeigt die Leiste.
+2. **Nachweis landete nicht in „Meine Projekte“** (nur die calc-Berechnung), und der Name blieb der Beispielname („Pos. 4 — Deckenträger“). Jetzt: beim Weg über das Menü in calc wird der Nachweis sofort als Position gespeichert, Name „<calc-Name>[ · Riegel|Stiel] — <Bereich> · <Nachweis>“ (z. B. „Einfeldträger L=5m — Stahl · Träger / Stütze“), eindeutig über `ciUniqueName` (gleiche calc-Quelle → aktualisieren, sonst „(2)“). Leiste meldet „In „Meine Projekte“ gespeichert als …“.
+3. **Gleichnamige Positionen überschrieben sich still** (Standardname je Nachweisart). Durch 2. für Übernahmen entschärft; Hand-Positionen verhalten sich wie bisher.
+4. **„→ size“ im calc-Projektfenster** übernahm in den gerade offenen size-Bereich, auch Wasserbau oder Bauphysik („nichts zu übernehmen“). Jetzt: ohne `ziel` und bei unpassendem Bereich wechselt size auf Stahlbeton Balken (Rahmen-Stiel: Stahlbeton Stütze) — `ciOk()`.
+5. **„Aus calc übernehmen“ in den Karten** öffnete das Projekt-Fenster mit Auswahlliste + „Übernehmen“. Jetzt: Liste der letzten 6 calc-Berechnungen direkt unter dem Knopf (`.k-cimenu`, Rahmen zweimal: Riegel / Stiel), ein Tipp übernimmt. Ohne gespeicherte Berechnung: Hinweis und „calc öffnen →“.
+6. **„Meine Projekte“: calc-Berechnung und Nachweis standen getrennt unter „Ohne Position“**, obwohl der Text anderes versprach. Jetzt bündelt `grouped()` automatisch: gehört ein size-Nachweis zu einer calc-Berechnung ohne Position, entsteht eine Position mit dem calc-Namen. Ausdrücklich gelöste Zuordnungen (`asg[...] = null`, auch nach „Position löschen“) werden nicht neu gebündelt.
+- Neue size-Texte `cibClose`, `cibSaved`, `cibPick`, `cibNone`, `cibCalc` (4 Sprachen).
+- Tests: neu `test_navigation.py` (11); angepasst `test_projekt.py` (automatische Position), `test_size_import.py` (Projekt-Fenster vor der Auswahl öffnen), `test_size_design3.py` (Liste unter dem Knopf).
 
 ## Übungsmodus als Doktorhut in der Kopfzeile, Schweißnaht aus calc — calc v0.9.7 · size v0.6.6
 
@@ -1160,7 +1173,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1800/1800 grün** (inklusive `test_calc_bedienung.py` 30, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1812/1812 grün** (inklusive `test_navigation.py` 11, `test_calc_bedienung.py` 30, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

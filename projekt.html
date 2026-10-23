@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.13 -->
+<!-- kragr·projekt v0.1.14 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -234,7 +234,7 @@
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.13';
+const PROJ_VERSION = '0.1.14';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
@@ -311,6 +311,13 @@ function allItems(){ return [...calcItems(), ...sizeItems()]; }
 // Position eines Eintrags: ausdrücklich zugeordnet, sonst (size) über die calc-Quelle
 function posOf(P, it, cmap){ if(P.asg[it.id]!=null) return P.asg[it.id]; if(it.kind==='s' && it.p.src?.key){ const c=P.asg['c:'+it.p.src.key]; if(c!=null) return c; } return null; }
 function grouped(){ const P=proj(), items=allItems(), by={}, loose=[];
+  // Nachweise aus calc bündeln (v0.1.14): gehört ein size-Nachweis zu einer calc-Berechnung, die noch keiner Position zugeordnet ist,
+  // entsteht dafür automatisch eine Position (Titel = Name der calc-Berechnung). Ausdrücklich entfernte Zuordnungen bleiben unberührt.
+  let neu=false;
+  items.filter(s=>s.kind==='s' && s.p.src?.key && !(s.id in P.asg) && !(('c:'+s.p.src.key) in P.asg)).forEach(s=>{
+    const c=items.find(x=>x.kind==='c' && x.key===s.p.src.key); if(!c || (c.id in P.asg)) return;
+    const id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); P.pos.push({ id, nr:nextNr(P), title:c.name }); P.asg[c.id]=id; neu=true; });
+  if(neu) save(P);
   P.pos.forEach(q=>by[q.id]=[]);
   items.forEach(it=>{ const id=posOf(P, it); if(id!=null && by[id]) by[id].push(it); else loose.push(it); });
   return { P, by, loose, items }; }
@@ -361,7 +368,7 @@ function setPos(id, f, v){ const P=proj(), q=P.pos.find(x=>x.id===id); if(!q) re
 function setName(v){ const P=proj(); P.name=String(v).trim() || P.name; save(P); render(); }
 let armed=null;
 function delPos(id, btn){ if(armed!==id){ armed=id; btn.textContent=t('delAsk'); setTimeout(()=>{ if(armed===id){ armed=null; render(); } }, 3000); return; }
-  const P=proj(); P.pos=P.pos.filter(q=>q.id!==id); Object.keys(P.asg).forEach(k=>{ if(P.asg[k]===id) delete P.asg[k]; }); armed=null; save(P); render(); }
+  const P=proj(); P.pos=P.pos.filter(q=>q.id!==id); Object.keys(P.asg).forEach(k=>{ if(P.asg[k]===id) P.asg[k]=null; }); armed=null; save(P); render(); }   // null = bewusst ohne Position (wird nicht automatisch neu gebündelt)
 function assign(itemId, v){ const P=proj();
   if(v==='__new'){ const it=allItems().find(x=>x.id===itemId); const id=addPos(it ? it.name : ''); const P2=proj(); P2.asg[itemId]=id; save(P2); render(); toast(t('moved')); return; }
   if(v==='__none'){ P.asg[itemId]=null; } else if(v) P.asg[itemId]=v;

@@ -30,8 +30,9 @@ async def main():
         await pg.evaluate("$('in-l').value='6.0'; $('in-h').value='60'; run()"); await pg.wait_for_timeout(500)
         ci=await pg.evaluate("[...document.querySelectorAll('.col-in .k-ci')].map(b=>b.closest('.card').querySelector('.card-title').dataset.i18n)")
         check('„Aus calc übernehmen“ in den Schnittgrößen-Karten', 'z045' in ci and 'z084' in ci, ci)
-        await pg.click('.card:has(.card-title[data-i18n="z045"]) .k-ci'); await pg.wait_for_timeout(400)
-        check('Tipp öffnet das Projekt-Fenster mit „Schnittgrößen aus kragr·calc“', await pg.evaluate("$('proj-panel').classList.contains('open') && $('proj-panel').contains($('calc-import'))"))
+        await pg.click('.card:has(.card-title[data-i18n="z045"]) .k-ci'); await pg.wait_for_timeout(300)
+        r=await pg.evaluate('''(()=>{const m=document.querySelector('.card:has(.card-title[data-i18n="z045"]) .k-cimenu'); return [m.hidden, m.innerText.replace(/\\s+/g,' '), $('proj-panel').classList.contains('open')]})()''')
+        check('Tipp öffnet die Liste direkt unter dem Knopf (ohne gespeicherte Berechnung: Hinweis und Link zu calc), kein Projekt-Fenster', r[0]==False and 'Noch keine Berechnung in calc gespeichert' in r[1] and 'calc öffnen' in r[1] and not r[2], r)
         await pg.keyboard.press('Escape'); await pg.evaluate("$('proj-panel').classList.remove('open')")
         # Stahl: Profil-Knöpfe
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(900)

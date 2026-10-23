@@ -34,10 +34,10 @@ async def main():
         # Projekt: alles ohne Position
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(250)
         L=await pg.inner_text('#loose')
-        check('Projekt: vier Einträge „ohne Position“', all(x in L for x in ['Einfeldträger L=5m','Rahmen','Pos 3 Unterzug','Pfette P1']), L[:80])
-        # calc-Berechnung → neue Position; size folgt automatisch
-        await pg.evaluate(f"assign('c:{keys[0]}','__new')"); await pg.wait_for_timeout(100)
+        check('Projekt: Rahmen und Pfette ohne Position', all(x in L for x in ['Rahmen','Pfette P1']) and 'Pos 3 Unterzug' not in L, L[:80])
+        # seit projekt v0.1.14: calc-Berechnung mit ihrem size-Nachweis wird automatisch eine Position
         P=await pg.evaluate("proj()"); pid=P['pos'][0]['id']
+        check('automatisch: eine Position „Einfeldträger L=5m“ für die calc-Berechnung mit ihrem Nachweis', len(P['pos'])==1 and P['pos'][0]['title']=='Einfeldträger L=5m' and P['asg'].get('c:'+keys[0])==pid, P['pos'])
         t=await pg.inner_text(f".pos[data-id='{pid}']")
         check('neue Position aus calc, Nachweis folgt seiner calc-Quelle', 'Einfeldträger L=5m' in t and 'Pos 3 Unterzug' in t and 'Pos 3 Unterzug' not in await pg.inner_text('#loose'), t[:120])
         check('Status „alle erfüllt“ und Vorschau des Systems', 'alle erfüllt' in t and await pg.evaluate(f"!!document.querySelector(\".pos[data-id='{pid}'] .thumb svg\")"))

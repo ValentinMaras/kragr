@@ -29,10 +29,10 @@ async def main():
         v=[await g(i) for i in ['in-l','in-K','in-M','in-Ms','in-V']]
         check('EFT → Balken: l, K, M = 28,13, V = 17,5', v==['5','1.0','28.13','0','17.5'], v)
         check('Hinweis: M_qp von Hand', 'Mqp' in await pg.inner_text('#ci-msg'))
-        await pg.evaluate("setTyp('unterzug')"); await pg.select_option('#ci-sel', keys[2]); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
+        await pg.evaluate("setTyp('unterzug')"); await pg.evaluate('openProj()'); await pg.select_option('#ci-sel', keys[2]); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         v=[await g(i) for i in ['in-l','in-feld','in-K','in-M','in-Ms','in-V']]
         check('DLT → Unterzug: Endfeld, M = 8,79, |M_St| = 15,63', v==['5','0.85','1.3','8.79','15.63','15.63'], v)
-        await pg.evaluate("setTyp('stuetze')"); await pg.select_option('#ci-sel', keys[3]); await pg.select_option('#ci-part','stiel'); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
+        await pg.evaluate("setTyp('stuetze')"); await pg.evaluate('openProj()'); await pg.select_option('#ci-sel', keys[3]); await pg.evaluate('openProj()'); await pg.select_option('#ci-part','stiel'); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         fr=await pg.evaluate(f"JSON.parse(localStorage.getItem('{keys[3]}')).sdf.plot.fine")
         cands=[]
         for m,h in [('left',4),('right',4)]:
@@ -41,17 +41,17 @@ async def main():
         N,h,M02,M01=max(cands)
         v=[float(await g(i)) for i in ['su-l','su-N','su-M02','su-M01']]
         check(f'Rahmen → Stütze: N = {N:.2f}, M02 = {M02:.2f}, M01 = {M01:.2f}', abs(v[0]-h)<1e-9 and abs(v[1]-N)<0.006 and abs(v[2]-M02)<0.006 and abs(v[3]-M01)<0.006, v)
-        await pg.evaluate("setMat('stahl')"); await pg.select_option('#ci-part','riegel'); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
+        await pg.evaluate("setMat('stahl')"); await pg.evaluate('openProj()'); await pg.select_option('#ci-part','riegel'); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         raf=fr['rafter']; v=[float(await g(i)) for i in ['sn-L','sn-M','sn-V','sn-N']]
         check('Rahmen → Stahl (Riegel): M = max|M|, V, N Druck', abs(v[1]-max(abs(x) for x in raf['M']))<0.006 and abs(v[2]-max(abs(x) for x in raf['Q']))<0.006 and abs(v[3]+min(raf['N']))<0.006, v)
-        await pg.select_option('#ci-part','stiel'); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
+        await pg.evaluate('openProj()'); await pg.select_option('#ci-part','stiel'); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         check('Rahmen-Stiel → Stahl: linearer Verlauf mit ψ', await g('sn-mv')=='lin' and abs(float(await g('sn-psi'))-M01/M02)<0.01, await g('sn-psi'))
-        await pg.evaluate("setMat('holz')"); await pg.select_option('#ci-sel', keys[1]); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
+        await pg.evaluate("setMat('holz')"); await pg.evaluate('openProj()'); await pg.select_option('#ci-sel', keys[1]); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         v=[await g(i) for i in ['ho-L','ho-M','ho-V','ho-F']]
         check('Kragarm → Holz: M = 37,5, V = 25, Auflagerkraft 25', v==['3','37.5','25','25'], v)
         await pg.evaluate("setMat('beton'); setTyp('balken')"); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         check('Kragarm → Beton: Betrag, K = 0,4, Hinweis Zug oben', [await g('in-M'), await g('in-K')]==['37.5','0.4'] and 'Zugseite oben' in await pg.inner_text('#ci-msg'))
-        await pg.evaluate("setTyp('stuetze')"); await pg.select_option('#ci-sel', keys[0]); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
+        await pg.evaluate("setTyp('stuetze')"); await pg.evaluate('openProj()'); await pg.select_option('#ci-sel', keys[0]); await pg.evaluate('openProj()'); await pg.click('#ci-form button')
         check('Einfeldträger → Stütze: Hinweis „nur Rahmen liefern N“', 'Normalkraft' in await pg.inner_text('#ci-msg'))
         await pg.evaluate("localStorage.setItem('statiq_sdf_1', JSON.stringify({name:'alt', sdf:{module:'calc', timestamp:new Date().toISOString(), system:{type:'beam'}, results:{}}})); renderCalcImport('statiq_sdf_1')")
         await pg.evaluate('openProj()'); await pg.click('#ci-form button')

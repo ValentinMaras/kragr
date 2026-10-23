@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.6.6 -->
+<!-- kragr·size v0.6.7 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -540,7 +540,20 @@ window.mulyProj = {
   .k-sb:hover { background:var(--k-ctl-h); } .k-sb:active { transform:scale(.96); } .k-sb:disabled { opacity:.35; cursor:default; }
   .k-ci { display:flex; align-items:center; gap:10px; width:100%; min-height:44px; margin-top:12px; padding:0 12px; border:0; border-radius:12px; background:var(--k-tint); color:var(--k-accent); font:inherit; font-size:14px; font-weight:700; text-align:left; cursor:pointer; }
   .k-ci svg { flex:none; }
-  .fold.closed > .k-ci { display:none; }
+  .fold.closed > .k-ci, .fold.closed > .k-cimenu { display:none; }
+  .k-cimenu { display:flex; flex-direction:column; margin-top:6px; padding:6px; border-radius:12px; background:#fff; box-shadow:0 6px 20px rgba(17,17,20,.10); }
+  .k-cimenu[hidden] { display:none; }
+  .kci-h { padding:6px 10px 4px; font-size:12px; font-weight:700; color:var(--k-muted); }
+  .kci-i { display:flex; flex-direction:column; align-items:flex-start; gap:1px; min-height:44px; padding:6px 10px; border:0; border-radius:8px; background:transparent; font:inherit; text-align:left; color:var(--k-text); cursor:pointer; text-decoration:none; }
+  .kci-i:hover { background:var(--k-ctl); } .kci-i b { font-size:14.5px; font-weight:700; } .kci-i small { font-size:12px; color:var(--k-muted); }
+  .k-ci[aria-expanded="true"] { border-bottom-left-radius:12px; }
+  /* Hinweisleiste nach der Übernahme aus calc (v0.6.7) */
+  #ci-banner { display:flex; align-items:flex-start; gap:10px; margin:0 0 12px; padding:12px 12px 12px 16px; border-radius:14px; background:var(--k-tint); color:var(--k-text2); font-size:13px; line-height:1.5; }
+  #ci-banner .cib-tx { flex:1; min-width:0; } #ci-banner .ci-note { margin:0; }
+  #ci-banner .cib-s { margin-top:6px; font-weight:700; color:var(--k-accent); }
+  #ci-banner .cib-x { flex:none; width:32px; height:32px; border:0; border-radius:8px; background:transparent; color:var(--k-muted); font-size:14px; cursor:pointer; }
+  #ci-banner .cib-x:hover { background:rgba(17,17,20,.06); }
+  @media print { #ci-banner { display:none !important; } }
   /* Übungsmodus als Schalter in der Rechenweg-Leiste */
   .det-bar { flex-wrap:wrap; gap:8px 6px; }
   .det-bar button.ueb-tog.k-switch { order:3; flex:1 1 100%; display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; padding:8px 14px; border-radius:14px; background:var(--k-card); color:var(--k-text); text-align:left; }
@@ -2780,6 +2793,11 @@ const I18N = { "de": {
 "ciSaved":"Gespeicherte Berechnung",
 "ciPart":"Bauteil des Rahmens",
 "ciRiegel":"Riegel",
+"cibClose":"Hinweis schließen",
+"cibSaved":"In „Meine Projekte“ gespeichert als „{0}“.",
+"cibPick":"Gespeicherte Berechnung aus calc:",
+"cibNone":"Noch keine Berechnung in calc gespeichert.",
+"cibCalc":"calc öffnen",
 "ciStiel":"Stiel (der stärker gedrückte)",
 "ciApply":"Übernehmen",
 "ciHint":"Die Werte gehen in den gerade gewählten Baustoff und das Bauteil — vorher unten den Bereich wählen.",
@@ -3252,7 +3270,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.6.6';
+const SIZE_VERSION = '0.6.7';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -10707,12 +10725,29 @@ function ciGoto(mat, mode){
   if(typeof updatePick==='function') updatePick();
   return true;
 }
+// Übernahme aus calc ohne Umweg (v0.6.7): Ergebnis als Hinweisleiste oben statt Projekt-Fenster; beim Weg über das Menü in calc
+// wird der Nachweis gleich als Position gespeichert (Name aus der calc-Berechnung und dem Nachweis), damit er in „Meine Projekte“ steht.
+const ciOk = () => (MAT==='beton' && CI_ZIEL.beton.includes(TYP)) || (MAT==='stahl' && CI_ZIEL.stahl.includes(STMODE)) || (MAT==='holz' && CI_ZIEL.holz.includes(HOMODE));
+function ciBanner(html){
+  let b=$('ci-banner'); if(!b){ b=document.createElement('div'); b.id='ci-banner'; b.setAttribute('role','status'); const a=$('pick'); a.parentNode.insertBefore(b, a.nextSibling); }
+  b.innerHTML=`<div class="cib-tx">${html}</div><button type="button" class="cib-x" aria-label="${tx('cibClose')}" title="${tx('cibClose')}" onclick="this.parentNode.remove()">✕</button>`;
+}
+function ciDo(key, part){
+  renderCalcImport(key); if($('ci-part')) $('ci-part').value = part==='stiel' ? 'stiel' : 'riegel';
+  importCalc(key); ciBanner($('ci-msg').innerHTML);
+}
+function ciUniqueName(base, key){ const L=posRead(); let n=base, k=2; while(L.some(p=>p.name===n && p.src?.key!==key)) n=`${base} (${k++})`; return n; }
 { const h=location.hash, q=h.startsWith('#calc=') ? new URLSearchParams(h.slice(1)) : null, ck=q ? q.get('calc') : null;
   renderCalcImport(ck || null);
-  if(ck){ const z=(q.get('ziel')||'').split('.'), part=q.get('part');
+  if(ck){ const z=(q.get('ziel')||'').split('.'), part=q.get('part'), e=calcEntries().find(x=>x.key===ck);
     if(z.length===2) ciGoto(z[0], z[1]);
-    renderCalcImport(ck); if(part && $('ci-part')) $('ci-part').value = part==='stiel' ? 'stiel' : 'riegel';
-    openProj(); importCalc(ck); history.replaceState(null, '', location.pathname); } }
+    else if(!ciOk()) ciGoto('beton', part==='stiel' && e?.sdf?.system?.type==='frame' ? 'stuetze' : 'balken');   // „→ size“ ohne Ziel: passender Nachweis statt Wasserbau o. Ä.
+    ciDo(ck, part);
+    if(z.length===2 && e && CI_SRC && CI_SRC.key===ck){
+      const lab=[$('pick-g')?.textContent, $('pick-t')?.textContent].filter(Boolean).join(' · '), pt = e.sdf?.system?.type==='frame' ? ' · '+(part==='stiel' ? tx('ciStiel').split(' (')[0] : tx('ciRiegel')) : '';
+      $(nameField()).value = ciUniqueName(`${e.name}${pt} — ${lab}`, ck); savePos();
+      ciBanner($('ci-msg').innerHTML + `<div class="cib-s">${tx('cibSaved', esc($(nameField()).value))}</div>`); }
+    history.replaceState(null, '', location.pathname); } }
 if(openFromHash()) openProj();
 window.addEventListener('hashchange', ()=>{ if(openFromHash()) openProj(); });
 window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':focus')) renderCalcImport($('ci-sel').value); });
@@ -10803,9 +10838,22 @@ function mulyFehlerHref(app, ver, extra){
     CI_CARDS.forEach(function(k){ document.querySelectorAll('.col-in .card-title[data-i18n="'+k+'"]').forEach(function(t){ var c=t.closest('.card'); if(!c || c.querySelector(':scope > .k-ci')) return;
       var b=document.createElement('button'); b.type='button'; b.className='k-ci';
       b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span>'+L.ci+'</span>';
-      b.addEventListener('click', function(e){ e.stopPropagation(); if(typeof openProj==='function') openProj(); var ci=document.getElementById('calc-import'); if(ci) setTimeout(function(){ ci.scrollIntoView({block:'nearest'}); var s=document.getElementById('ci-sel'); if(s) s.focus(); }, 60); });
-      c.appendChild(b); }); });
+      b.setAttribute('aria-haspopup','menu'); b.setAttribute('aria-expanded','false');
+      b.addEventListener('click', function(e){ e.stopPropagation(); ciMenu(b, b.getAttribute('aria-expanded')!=='true'); });
+      c.appendChild(b); var m=document.createElement('div'); m.className='k-cimenu'; m.setAttribute('role','menu'); m.hidden=true; c.appendChild(m); }); });
   }
+  // „Aus calc übernehmen“ (v0.6.7): Liste der gespeicherten calc-Berechnungen direkt unter dem Knopf, ein Tipp übernimmt
+  function ciMenu(b, open){
+    var m=b.nextElementSibling; if(!m || !m.classList.contains('k-cimenu')) return; b.setAttribute('aria-expanded', open?'true':'false'); m.hidden=!open; if(!open) return;
+    var E=(typeof calcEntries==='function' ? calcEntries() : []).slice(0,6), esc_=function(x){ return String(x).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+    m.innerHTML = E.length ? '<div class="kci-h">'+tx('cibPick')+'</div>'+E.map(function(e){ var fr=e.sdf&&e.sdf.system&&e.sdf.system.type==='frame', d=new Date(e.sdf.timestamp).toLocaleDateString(typeof dLoc==='function'?dLoc():'de-DE');
+        return fr ? ['riegel','stiel'].map(function(p){ return '<button type="button" role="menuitem" class="kci-i" data-key="'+e.key+'" data-part="'+p+'"><b>'+esc_(e.name)+'</b><small>'+(p==='stiel'?tx('ciStiel'):tx('ciRiegel'))+' · '+d+'</small></button>'; }).join('')
+          : '<button type="button" role="menuitem" class="kci-i" data-key="'+e.key+'"><b>'+esc_(e.name)+'</b><small>'+d+'</small></button>'; }).join('')
+      : '<div class="kci-h">'+tx('cibNone')+'</div><a class="kci-i" href="calc.html"><b>'+tx('cibCalc')+' →</b></a>';
+    m.querySelectorAll('button.kci-i').forEach(function(i){ i.onclick=function(ev){ ev.stopPropagation(); ciMenu(b,false); if(typeof ciDo==='function') ciDo(i.dataset.key, i.dataset.part); }; });
+  }
+  document.addEventListener('click', function(e){ if(e.target.closest && (e.target.closest('.k-cimenu') || e.target.closest('.k-ci'))) return; document.querySelectorAll('.k-ci[aria-expanded="true"]').forEach(function(b){ ciMenu(b,false); }); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') document.querySelectorAll('.k-ci[aria-expanded="true"]').forEach(function(b){ ciMenu(b,false); }); });
   function all_(){ if(busy) return; busy=true; try{ steppers(); ciButtons(); } finally { obs.takeRecords(); busy=false; } }
   var obs=new MutationObserver(function(){ if(busy) return; cancelAnimationFrame(raf); raf=requestAnimationFrame(all_); });
   obs.observe(document.querySelector('.col-in'), {childList:true, subtree:true});

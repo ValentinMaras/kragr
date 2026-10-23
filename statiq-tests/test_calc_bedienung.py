@@ -71,7 +71,7 @@ async def main():
         check('„Holz · Träger“ öffnet den Holzträger mit M = 28,13 kNm', r[:2]==['holz','bauteil'] and r[2] in ('28.13','28.125'), r)
         pf=await sys('frame')
         mi=await pg.evaluate(f"[...document.querySelectorAll('#pos-{pf} .addm a')].map(a=>{{const q=new URLSearchParams(a.getAttribute('href').split('?')[1]); return q.get('ziel') ? q.get('ziel')+':'+(q.get('part')||'') : null}}).filter(Boolean)")
-        check('Menü Rahmen: Riegel als Balken, Stiel als Stütze, Stützenfuß, je Schweißnaht', mi==['beton.balken:riegel','beton.unterzug:riegel','stahl.traeger:riegel','holz.bauteil:riegel','stahl.schweiss:riegel','beton.stuetze:stiel','stahl.traeger:stiel','holz.bauteil:stiel','stahl.fuss:stiel','stahl.schweiss:stiel'], mi)
+        check('Menü Rahmen: Riegel als Balken, Stiel als Stütze; Schweißnähte und Stützenfuß je Knoten (seit calc v0.11.0)', mi==['beton.balken:riegel','beton.unterzug:riegel','stahl.traeger:riegel','holz.bauteil:riegel','beton.stuetze:stiel','stahl.traeger:stiel','holz.bauteil:stiel','stahl.schweiss:stiel','stahl.schweiss:riegel','stahl.schweiss:riegel','stahl.schweiss:stiel','stahl.fuss:stiel'], mi)
         await nw(pf, 'stahl.traeger', 'stiel'); r=await pg.evaluate("[MAT, STMODE, $('ci-part').value, parseFloat($('sn-N').value)]")
         check('Rahmen → „Stahl · Stütze“: Stiel mit N = 25 kN übernommen', r==['stahl','traeger','stiel',25], r)
         await nw(pf, 'beton.stuetze', 'stiel'); r=await pg.evaluate("[MAT, TYP, parseFloat($('su-N').value), parseFloat($('su-l').value)]")

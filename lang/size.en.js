@@ -743,7 +743,7 @@ window.MULY_LANG = {
 "posNone":"No positions saved yet. The name above is used as the position name.",
 "nTopics":"{0} topics",
 "ciNone":"No calculation saved yet. Calculate in <a href=\"calc.html\">kragr·calc</a> and use “Save calculation” — then M, V and N can be applied here.",
-"ciFrom":"<b>Applied from calc:</b>",
+"ciFrom":"<b>Applied from calc:</b>","cibEnde":"member end {0}","cibStab":"member {0}",
 "ciRiegelN":"Axial force in the beam N = {0} kN (compression).",
 "ciMauer":"For masonry, please enter the loads by hand. Support reaction from calc: {0} kN (e.g. as N<sub>Edc</sub> for the concentrated load).",
 "ciGrund":"For geotechnics, please enter the loads by hand, separated into permanent and variable (calc does not separate load types). Support reaction from calc: {0} kN.",

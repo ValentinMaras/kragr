@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.10.1 · ref v0.3.43 · size v0.7.1 · projekt v0.1.17 · rechtliches v0.1.12 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.0 · ref v0.3.43 · size v0.7.2 · projekt v0.1.18 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.10.1, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.17, Test von Variante C)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.0, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.18, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.7.1, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.7.2, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -567,6 +567,25 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Knoten und Stabendkräfte (Stufe 1 der Knotennachweise) — calc v0.11.0 · size v0.7.2 · projekt v0.1.18
+
+Valentin: Schnittkräfte an Knoten (Rahmenecke, First …) in Verbindungsnachweise übernehmen. Plan: Stufe 1 Knotenkräfte in calc + Übergabe über „Meine Projekte“, Stufe 2 Stahlbeton-Rahmenecke (EC2 Anhang J) und Stahl-Schubfeld (EC3-1-8, 6.2.6.1), Stufe 3 Holz-Dübelkreis und First, später ggf. geschraubte Stirnplatte (Komponentenmethode). **Stufe 1 ist umgesetzt.** calc auf 0.11.0 (neue Funktion; mittlere Stelle hochgezählt, siehe Antwort an Valentin).
+
+**Systematik (Wunsch von Valentin, Rückfrage geklärt):** Knoten längs des Tragwerks von links nach rechts nummeriert, beim Rahmen vom Auflager A (1) über Ecke links (2), Ecke rechts, Auflager B; **Gelenke sind eigene Knoten** (Dreigelenkrahmen: 1 A · 2 Ecke · 3 Gelenk · 4 Ecke · 5 B), Kragarmenden ebenfalls. **Gilt überall** (Einfeldträger 1–2, Kragarm 1 Einspannung · 2 freies Ende, Durchlaufträger Kragende/Auflager/Gelenke). Doppelindex: M_ik = Moment im Stab i–k am Knoten i (M21 = Stütze links an der Ecke, M12 = dieselbe Stütze am Fuß). **Vorzeichen wie die Verläufe**: M > 0 Zug unten bzw. innen (gestrichelte Faser), Q und N wie dort (N > 0 Zug). Ecke: M < 0 = schließend (Zug außen), M > 0 = öffnend.
+
+**calc**
+- `kStations(sys)` (aus den Eingaben, für Skizze und Rechnung), `kEnd(elems, mem, t, side)` (Element, das am Parameter t beginnt bzw. endet → `frameForcesAt`), `kKnoten(sys, elems)` → `{nodes:[{nr,kind,lab,sup,gelenk}], bars:[{i,k,mem,ik:{M,Q,N},ki:{M,Q,N}}]}`. Aufruf am Ende von calculateBeam/Cantilever/Continuous/Frame → `lastCalc[x].knoten`, gespeichert in `sdf.results.knoten` (saveCalc und buildSDF).
+- Skizze: `knrSVG(x,y,n)` (Kreis mit Nummer, `.k-knr`) in drawBeam/drawCantilever/drawContinuous/drawFrame; Rahmen zusätzlich gestrichelte Faser innen (`.k-faser`), Nummern als Sperrflächen für `placeLabels`.
+- Karte „Knoten und Stabendkräfte“ (`kKnotenCard`, `.k-knoten`, Texte `K9T` in 4 Sprachen) am Ende von `#<sys>-results`: Tabelle je Stab (Stabende ik/ki, M, Q, N), Knotengleichgewicht (M21 = M23 ✓, Einspannmoment, Sprung bei Einzelmoment, schließend/öffnend). Im Übungsmodus verborgen. Ab 10 Knoten Index mit Komma (M10,11).
+
+**projekt v0.1.18**: im Menü „＋ Nachweis“ bei Rahmen eine Gruppe je Knoten: Ecke → „Stahl · Schweißnaht am Stab 2–1 (Stütze)“ / „… 2–3 (Riegel)“, gelenkiger Fußpunkt → „Stahl · Stützenfuß am Stab 4–3“ (Link `…&ende=i-k`); die früheren pauschalen Einträge Schweißnaht/Stützenfuß unter Riegel/Stiel entfallen, wenn das System Knoten hat (ältere Systeme: wie bisher).
+
+**size v0.7.2** (data-pm-size): `&ende=i-k` setzt nach `ciDo` die exakten Stabendkräfte ein (Schweißnaht: Stirnplatte, M = |M_ik|, V = |Q_ik|, N = N_ik; Stützenfuß: N = −N_ik, V = |Q_ik|), Hinweisleiste mit M_ik/Q_ik/N_ik, Name „… · Stab i–k“, `CI_SRC.ende` wird gespeichert und bei „neu rechnen“ wieder angewendet. Neue Texte `cibEnde`, `cibStab` (4 Sprachen). Achtung: `CI_SRC` ist `let`, nicht `window.CI_SRC`.
+
+**Noch offen:** Satteldachrahmen mit First gibt es in calc noch nicht (Riegel ist ein gerader Stab) — für den First-Nachweis braucht es zuerst diesen Rahmentyp. Knotentabelle noch nicht im calc-Bericht und im Gesamtbericht.
+
+**Tests:** neu `test_knoten.py` (22; Sollwerte von Hand für Einfeldträger, Kragarm, Zweifeldträger, Knotenproben am Rahmen, Übergabe an size).
 
 ## „Meine Projekte“ als eigenes Kapitel — calc v0.10.1 · size v0.7.1 · projekt v0.1.17
 
@@ -1223,7 +1242,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1815/1815 grün** (inklusive `test_projektmodus.py` 28, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1837/1837 grün** (inklusive `test_knoten.py` 22, `test_projektmodus.py` 28, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

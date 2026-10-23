@@ -730,7 +730,7 @@ window.MULY_LANG = {
 "posNone":"Todavía no hay posiciones guardadas. La denominación indicada arriba sirve de nombre.",
 "nTopics":"{0} temas",
 "ciNone":"Todavía no hay ningún cálculo guardado. Calcule en <a href=\"calc.html\">kragr·calc</a> y use «Guardar cálculo»; entonces M, V y N se podrán aplicar aquí.",
-"ciFrom":"<b>Aplicado desde calc:</b>",
+"ciFrom":"<b>Aplicado desde calc:</b>","cibEnde":"extremo de barra {0}","cibStab":"barra {0}",
 "ciRiegelN":"Esfuerzo axil en el dintel N = {0} kN (compresión).",
 "ciMauer":"Para la fábrica, introduzca las cargas manualmente. Reacción de apoyo de calc: {0} kN (p. ej. como N<sub>Edc</sub> para la presión localizada).",
 "ciGrund":"Para geotecnia, introduzca las cargas manualmente, separadas en permanentes y variables (calc no distingue los tipos de carga). Reacción de apoyo de calc: {0} kN.",

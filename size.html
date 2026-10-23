@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.1 -->
+<!-- kragr·size v0.7.2 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -2926,7 +2926,7 @@ const I18N = { "de": {
 "posNone":"Noch keine Positionen gespeichert. Die Bezeichnung oben dient als Name.",
 "nTopics":"{0} Themen",
 "ciNone":"Noch keine Berechnung gespeichert. In <a href=\"calc.html\">kragr·calc</a> rechnen und „Berechnung speichern“ — dann lassen sich M, V und N hier übernehmen.",
-"ciFrom":"<b>Übernommen aus calc:</b>",
+"ciFrom":"<b>Übernommen aus calc:</b>","cibEnde":"Stabende {0}","cibStab":"Stab {0}",
 "ciRiegelN":"Normalkraft im Riegel N = {0} kN (Druck).",
 "ciMauer":"Für Mauerwerk bitte die Lasten von Hand eingeben. Auflagerkraft aus calc: {0} kN (z. B. als N<sub>Edc</sub> für die Teilflächenpressung).",
 "ciGrund":"Für Grundbau bitte die Lasten von Hand und getrennt nach ständig und veränderlich eingeben (calc trennt die Lastarten nicht). Auflagerkraft aus calc: {0} kN.",
@@ -3346,7 +3346,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.1';
+const SIZE_VERSION = '0.7.2';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -10946,14 +10946,25 @@ function mulyFehlerHref(app, ver, extra){
   function lab(){ return [$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · '); }
   function partLab(p){ return p==='stiel' ? tx('ciStiel').split(' (')[0] : p==='riegel' ? tx('ciRiegel') : ''; }
   function nf(){ return document.getElementById(nameField()); }
+  // Stabende eines Knotens (v0.7.2): exakte Stabendkräfte aus calc (Doppelindex i-k) für Schweißnaht und Stützenfuß
+  function endeVals(ik){ var K=sys && sys.sdf && sys.sdf.results && sys.sdf.results.knoten, p=String(ik||'').split('-').map(Number); if(!K || p.length!==2) return null;
+    for(var j=0;j<K.bars.length;j++){ var b=K.bars[j]; if(b.i===p[0] && b.k===p[1]) return b.ik; if(b.k===p[0] && b.i===p[1]) return b.ki; } return null; }
+  function applyEnde(ik){ var v=endeVals(ik); if(!v) return false; var r=function(x){ return Math.round(x*1000)/1000; }, ix=String(ik).replace('-',''), d=function(x){ return deNum(x,1); };
+    if(STMODE==='schweiss'){ $('sw-fall').value='stirn'; if(typeof swSync==='function') swSync(); $('sw-M').value=r(Math.abs(v.M)); $('sw-V').value=r(Math.abs(v.Q)); $('sw-N').value=r(v.N); }
+    else if(STMODE==='fuss'){ $('fp-N').value=r(Math.max(0,-v.N)); $('fp-V').value=r(Math.abs(v.Q)); }
+    else return false;
+    if(CI_SRC) CI_SRC.ende=ik; run();
+    ciBanner(tx('ciFrom')+' '+esc(sys.name)+' — '+tx('cibEnde', String(ik).replace('-','–'))+'<br>M<sub>'+ix+'</sub> = '+d(v.M)+' kNm · Q<sub>'+ix+'</sub> = '+d(v.Q)+' kN · N<sub>'+ix+'</sub> = '+d(v.N)+' kN');
+    return true; }
+  var ende=q.get('ende');
   if(chk){ var i=posRead().findIndex(function(p){ return p.name===chk; });
-    if(i>=0){ loadPos(i); orig=chk; var src=posRead()[i].src; if(neu && sys){ ciDo(PM.sysKey, src && src.part); if(nf()) nf().value=orig; } } }
-  else { if(ziel){ var z=ziel.split('.'); ciGoto(z[0], z[1]); if(sys) ciDo(PM.sysKey, part); }
-    var f=nf(); if(f) f.value=ciUniqueName(lab()+(part ? ' · '+partLab(part) : ''), '__neu__'); run(); }
+    if(i>=0){ loadPos(i); orig=chk; var src=posRead()[i].src; if(neu && sys){ ciDo(PM.sysKey, src && src.part); if(src && src.ende) applyEnde(src.ende); if(nf()) nf().value=orig; } } }
+  else { if(ziel){ var z=ziel.split('.'); ciGoto(z[0], z[1]); if(sys){ ciDo(PM.sysKey, part); if(ende && !applyEnde(ende)) ende=null; } }
+    var f=nf(); if(f) f.value=ciUniqueName(lab()+(ende ? ' · '+tx('cibStab', ende.replace('-','–')) : part ? ' · '+partLab(part) : ''), '__neu__'); run(); }
   posMsg('');
   function apply(){
     var f=nf(), n=(f && f.value || '').trim(), L=posRead();
-    if(!n || /^Pos\.\s/.test(n)) n=lab()+(window.CI_SRC && CI_SRC.part ? ' · '+partLab(CI_SRC.part) : '');
+    if(!n || /^Pos\.\s/.test(n)) n=lab()+(CI_SRC && CI_SRC.part ? ' · '+partLab(CI_SRC.part) : '');
     if(n!==orig){ var base=n, k=2; while(L.some(function(p){ return p.name===n; })) n=base+' ('+(k++)+')'; }
     if(f) f.value=n;
     if(orig && orig!==n){ posWrite(L.filter(function(p){ return p.name!==orig; })); var P=PM.proj(); delete P.asg['s:'+orig]; PM.saveProj(P); try{ localStorage.removeItem(POS_REP+orig); }catch(e){} }

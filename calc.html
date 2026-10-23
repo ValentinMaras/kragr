@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.10.1 -->
+<!-- kragr v0.11.0 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -635,6 +635,24 @@ window.mulyProj = {
   .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #5468ad); }
 </style>
+<style data-knoten>
+  /* Knoten und Stabendkräfte (calc v0.11.0) */
+  .k-knoten .k-kn-note { font-size:12.5px; color:#5c5e66; line-height:1.5; margin:-2px 0 10px; }
+  .k-kn-tab { width:100%; border-collapse:collapse; font-size:13px; }
+  .k-kn-tab th { text-align:right; font-size:11.5px; font-weight:700; color:#5c5e66; padding:4px 6px; border-bottom:1px solid #e3e4e8; }
+  .k-kn-tab th:first-child, .k-kn-tab td:first-child { text-align:left; }
+  .k-kn-tab td { text-align:right; padding:5px 6px; font-family:var(--k-mono, monospace); font-size:12.5px; border-bottom:1px solid #f0f1f3; white-space:nowrap; }
+  .k-kn-tab tr.k-kn-bar td { font-family:inherit; font-size:12px; font-weight:800; color:#3d3f45; padding-top:10px; border-bottom:0; text-align:left; }
+  .k-kn-tab td sub { font-size:.75em; }
+  .k-kn-h { font-size:13px; font-weight:800; margin:14px 0 6px; }
+  .k-kn-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px; }
+  .k-kn-list li { font-size:13px; line-height:1.45; padding:7px 10px; border-radius:10px; background:#f6f7f9; }
+  .k-kn-list li b { font-weight:800; } .k-kn-list .ok { color:#0f6b46; font-weight:700; }
+  .k-kn-list .tag { font-size:11.5px; font-weight:700; border-radius:6px; padding:1px 6px; background:#e9ecf6; color:#46518a; margin-left:4px; white-space:nowrap; }
+  .k-kn-list .mono { font-family:var(--k-mono, monospace); font-size:12.5px; }
+  body.uebung:not(.ueb-dia) .k-knoten { display:none !important; }
+  @media print { .k-knoten { break-inside:avoid; } }
+</style>
 <style data-pm>
   /* Projektmodus (calc v0.10.1 · size v0.7.1): calc und size sind eigenständige Rechner. Aus „Meine Projekte“ geöffnet (?pos=<id>)
      zeigen sie oben eine Projektzeile mit „Abbrechen“ und „Übernehmen und zurück“; nur dieser Knopf schreibt in die Position. */
@@ -1108,7 +1126,7 @@ window.mulyProj = {
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.10.1</span>
+    <span class="version">v0.11.0</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1582,7 +1600,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.10.1';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.0';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -2220,6 +2238,7 @@ function drawBeam() {
   h+=`<text x="${x1}" y="${bY+36}" text-anchor="middle" font-size="9" fill="#6b6a65">B</text>`;
   h+=`<line x1="${x0}" y1="${bY+42}" x2="${x1}" y2="${bY+42}" stroke="#a8a7a2" stroke-width="0.8"/>`;
   h+=`<text x="${(x0+x1)/2}" y="${bY+53}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="JetBrains Mono,monospace">L = ${L} m</text>`;
+  h+=knrSVG(x0-17, bY+14, 1)+knrSVG(x1+17, bY+14, 2);   // Knotennummern (v0.11.0)
   svg.setAttribute('viewBox','0 0 320 128');   // Höhe reicht für die Längenangabe unter dem Träger
   svg.innerHTML=mkDefs('b')+h;
 }
@@ -2269,6 +2288,7 @@ function drawCantilever() {
   h+=`<text x="${x1+4}" y="${bY+16}" font-size="9" fill="#a8a7a2">${tr('free')}</text>`;
   h+=`<line x1="${x0}" y1="${bY+26}" x2="${x1}" y2="${bY+26}" stroke="#a8a7a2" stroke-width="0.8"/>`;
   h+=`<text x="${(x0+x1)/2}" y="${bY+37}" text-anchor="middle" font-size="9" fill="#a8a7a2" font-family="JetBrains Mono,monospace">L = ${L} m</text>`;
+  h+=knrSVG(x0+12, bY+17, 1)+knrSVG(x1-12, bY+17, 2);   // Knotennummern (v0.11.0)
   svg.setAttribute('viewBox','0 0 320 110');
   svg.innerHTML=mkDefs('c')+h;
 }
@@ -2333,6 +2353,7 @@ function drawContinuous() {
     const lbl = sg.key==='L'||sg.key==='R' ? `ü=${sg.L}m` : `L${sg.key+1}=${sg.L}m${sg.k!==1?` ·${sg.k}I`:''}`;
     h+=`<text x="${((X(sg.x0)+X(sg.x0+sg.L))/2).toFixed(1)}" y="${bY+beamH+38}" text-anchor="middle" font-size="8" fill="#a8a7a2" font-family="JetBrains Mono,monospace">${lbl}</text>`;
   });
+  try{ kStations('cont').forEach(st=>{ const xx=X(st.t.beam*Ltotal); h+= st.kind==='sup' ? knrSVG(xx-15, bY+beamH+8, st.nr) : knrSVG(xx, bY+beamH+13, st.nr); }); }catch(e){}   // Knotennummern (v0.11.0)
   svg.innerHTML=mkDefs('co')+h;
 }
 
@@ -2445,6 +2466,8 @@ function calculateBeam() {
     plot:{kind:'beam', L, ts:r4(o.ts), M:r4(o.M), Q:r4(o.Q), N:r4(o.N), w:r4(o.w)}
   };
   renderBeamDiagram(L, o.Q, o.M, o.ts.map(t=>t*L), o.N, o);
+  try{ lastCalc.beam.knoten=kKnoten('beam', res.model.elems); }catch(e){}
+  if(typeof kKnotenCard==='function') kKnotenCard('beam');
 }
 
 function calculateCantilever() {
@@ -2477,6 +2500,8 @@ function calculateCantilever() {
     plot:{kind:'cant', L, ts:r4(o.ts), M:r4(o.M), Q:r4(o.Q), N:r4(o.N), w:r4(o.w)}
   };
   renderCantDiagram(L, o.Q, o.M, o.N, o);
+  try{ lastCalc.cant.knoten=kKnoten('cantilever', res.model.elems); }catch(e){}
+  if(typeof kKnotenCard==='function') kKnotenCard('cant');
 }
 
 // ══════════════════════════════════════════════════
@@ -2544,6 +2569,8 @@ function calculateContinuous() {
     plot:{kind:'cont', Ls:Ls.slice(), layout, ts:r4(o.ts), M:r4(o.M), Q:r4(o.Q), N:r4(o.N), w:r4(o.w)}
   };
   renderContDiagram(Ls, o.Q, o.M, {...o, layout});
+  try{ lastCalc.cont.knoten=kKnoten('cont', res.model.elems); }catch(e){}
+  if(typeof kKnotenCard==='function') kKnotenCard('cont');
 }
 
 // ══════════════════════════════════════════════════
@@ -3053,6 +3080,17 @@ function drawFrame(){
   labels.push({x:col_R+8, y:(col_bot+col_topB)/2+4, text:`hB=${hB}m`, color:'#a8a7a2', anchor:'start', size:8, prio:1.5, bg:false,
     cands:[{x:col_R+8, y:(col_bot+col_topB)/2+4, anchor:'start'},{x:col_R+8, y:col_bot-6, anchor:'start'},{x:col_R-8, y:col_bot-6, anchor:'end'}]});
 
+  // Gestrichelte Faser innen und Knotennummern (v0.11.0): Vorzeichen der Momente wie in den Verläufen (Zug innen positiv)
+  { const g=5;
+    html+=`<g class="k-faser" stroke="#9a9ba3" stroke-width="1" stroke-dasharray="3 2.5" fill="none"><line x1="${col_L+g}" y1="${col_bot}" x2="${col_L+g}" y2="${(col_topA+g).toFixed(1)}"/>`
+      +`<line x1="${col_L+g}" y1="${(col_topA+g).toFixed(1)}" x2="${col_R-g}" y2="${(col_topB+g).toFixed(1)}"/><line x1="${col_R-g}" y1="${(col_topB+g).toFixed(1)}" x2="${col_R-g}" y2="${col_bot}"/></g>`;
+    try{ kStations('frame').forEach(st=>{ let x, y;
+      if(st.kind==='sup'){ x = st.lab==='A' ? col_L+16 : col_R-16; y = col_bot-12; }
+      else if(st.kind==='ecke'){ x = st.lab==='L' ? col_L+16 : col_R-16; y = (st.lab==='L' ? col_topA : col_topB)+17; }
+      else if(st.t.rafter!=null){ const P=rafPt(st.t.rafter*b); x=P[0]; y=P[1]+17; }
+      else if(st.t.left!=null){ x=col_L+16; y=yCol(st.t.left*hA); }
+      else { x=col_R-16; y=yCol((1-st.t.right)*hB); }
+      html+=knrSVG(x, y, st.nr); blocked.push({x0:x-8, x1:x+8, y0:y-8, y1:y+8}); }); }catch(e){} }
   // Stützen als Sperrflächen, damit keine Beschriftung über einer Stütze liegt
   blocked.push({x0:col_L-3, x1:col_L+3, y0:col_topA, y1:col_bot}, {x0:col_R-3, x1:col_R+3, y0:col_topB, y1:col_bot});
   // Hohe Lastlagen auf dem Riegel: Zeichenfläche nach oben erweitern statt abschneiden
@@ -3098,6 +3136,59 @@ function refreshFrameInputs(){
 
 // ── STATIQ DATA FORMAT (SDF) — Save/Load ─────────────────────────
 // Standard format for sharing data between kragr·calc and kragr·size
+// ══════════════════════════════════════════════════
+// KNOTEN UND STABENDKRÄFTE (v0.11.0)
+// Knoten werden längs des Tragwerks von links nach rechts nummeriert (Rahmen: vom Auflager A über die Ecken zum Auflager B):
+// Auflager, Rahmenecken, Gelenke und freie Kragarmenden. Stabendgrößen in Doppelindex-Schreibweise: M_ik ist das Moment
+// im Stab i–k am Knoten i (z. B. M21 = Stütze links an der Ecke, M12 = dieselbe Stütze am Auflager A).
+// Vorzeichen wie in den Verläufen: M > 0 Zug unten bzw. innen (gestrichelte Faser), Q und N wie dort (N > 0 Zug).
+// ══════════════════════════════════════════════════
+// Stationen aus den aktuellen Eingaben: {t:{Stab:Parameter 0…1}, kind:'sup'|'ecke'|'gelenk'|'ende', lab, sup, gelenk}
+function kStations(sys){
+  const cl=(v,a,b)=>Math.min(Math.max(v,a),b), num=id=>parseFloat(document.getElementById(id)?.value);
+  if(sys==='frame'){
+    const h=num('fH')||4, b=num('fB')||5, hA=num('fHA')||h, hB=num('fHB')||h, Lof={left:hA, rafter:b, right:hB};
+    const tOf=(m,p)=>{ const z=cl(parseFloat(p)||0,0,Lof[m]); return m==='left' ? z/hA : m==='right' ? 1-z/hB : z/b; };
+    const hs=m=>frameHinges.filter(g=>g.member===m).map(g=>tOf(m,g.pos)).sort((x,y)=>x-y);
+    const st=[{t:{left:0}, kind:'sup', lab:'A', sup:supportA}];
+    const inner=m=>hs(m).forEach(t=>{ if(t>1e-6 && t<1-1e-6 && !st.some(s=>s.t[m]!=null && Math.abs(s.t[m]-t)<1e-6)) st.push({t:{[m]:t}, kind:'gelenk', gelenk:true}); });
+    inner('left'); st.push({t:{left:1, rafter:0}, kind:'ecke', lab:'L'}); inner('rafter');
+    st.push({t:{rafter:1, right:0}, kind:'ecke', lab:'R'}); inner('right'); st.push({t:{right:1}, kind:'sup', lab:'B', sup:supportB});
+    ['left','rafter','right'].forEach(m=>hs(m).forEach(t=>{ const s=st.find(s=>s.t[m]!=null && Math.abs(s.t[m]-t)<1e-6); if(s) s.gelenk=true; }));
+    return st.map((s,i)=>({...s, nr:i+1}));
+  }
+  let pts;
+  if(sys==='beam'){ pts=[{x:0, kind:'sup', lab:'A', sup:'pin'}, {x:1, kind:'sup', lab:'B', sup:'roller'}]; }
+  else if(sys==='cantilever'){ pts=[{x:0, kind:'sup', lab:'A', sup:'fixed'}, {x:1, kind:'ende'}]; }
+  else {
+    const lay=contLayout(), L=lay.Ltot; pts=[];
+    if(lay.oL) pts.push({x:0, kind:'ende'});
+    lay.supports.forEach((s,i)=>pts.push({x:s.x/L, kind:'sup', lab:String.fromCharCode(65+i), sup:s.type}));
+    lay.hinges.forEach(x=>pts.push({x:x/L, kind:'gelenk', gelenk:true}));
+    if(lay.oR) pts.push({x:1, kind:'ende'});
+    pts.sort((a,b)=>a.x-b.x);
+  }
+  return pts.map((p,i)=>({t:{beam:p.x}, kind:p.kind, lab:p.lab, sup:p.sup, gelenk:p.gelenk, nr:i+1}));
+}
+// Stabendkräfte am Parameter t eines Stabs: side 'a' = Element, das dort beginnt; 'b' = Element, das dort endet
+function kEnd(elems, mem, t, side){
+  const es=elems.filter(e=>e.mem===mem), e = side==='a' ? es.find(e=>Math.abs(e.t0-t)<1e-7) : es.find(e=>Math.abs(e.t1-t)<1e-7);
+  if(!e) return null; const f=frameForcesAt(e, side==='a' ? 0 : e.L), r=v=>Math.abs(v)<5e-4 ? 0 : +v.toFixed(3);
+  return {M:r(f.M), Q:r(f.Q), N:r(f.N)};
+}
+// Knoten und Stäbe mit den Stabendkräften: {nodes:[{nr,kind,lab,sup,gelenk}], bars:[{i,k,mem,ik:{M,Q,N},ki:{M,Q,N}}]}
+function kKnoten(sys, elems){
+  const st=kStations(sys), bars=[];
+  for(let n=0;n<st.length-1;n++){
+    const a=st[n], b=st[n+1], mem=Object.keys(a.t).find(m=>b.t[m]!=null); if(!mem) continue;
+    const ik=kEnd(elems, mem, a.t[mem], 'a'), ki=kEnd(elems, mem, b.t[mem], 'b'); if(!ik || !ki) continue;
+    bars.push({i:a.nr, k:b.nr, mem, ik, ki});
+  }
+  return { nodes:st.map(s=>({nr:s.nr, kind:s.kind, lab:s.lab||null, sup:s.sup||null, gelenk:!!s.gelenk})), bars };
+}
+// Knotennummern in der Systemskizze
+function knrSVG(x, y, n){ return `<g class="k-knr"><circle cx="${(+x).toFixed(1)}" cy="${(+y).toFixed(1)}" r="7" fill="#fff" stroke="#5468ad" stroke-width="1.2"/><text x="${(+x).toFixed(1)}" y="${(+y+3).toFixed(1)}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5468ad" font-family="JetBrains Mono,monospace">${n}</text></g>`; }
+
 function buildSDF(){
   // Stand der letzten Berechnung (lastCalc.frame); ohne Berechnung: aktuelle Eingaben
   const lc = lastCalc.frame;
@@ -3161,7 +3252,8 @@ function buildSDF(){
       Nmax: parseFloat(Nmax)||0,
       u: lc?.maxima.u ?? null, w: lc?.maxima.w ?? null,
       reactions,
-      members: memberData
+      members: memberData,
+      knoten: lc?.knoten || null   // Knoten und Stabendkräfte (ab v0.11.0)
     },
     plot: lc ? lc.plot : null   // exakte Verläufe für den Bericht (ab v0.8.2)
   };
@@ -3180,7 +3272,7 @@ function saveCalc(sys, opt){
   if(!data || !lc){ if(!(opt&&opt.quiet)) showCalcMsgs(sid,[{type:'error', text:msgText('calcFirst')}]); return; }
   const geom = lc.geometry;
   const results = {Mmax:lc.maxima.Mmax, Qmax:lc.maxima.Qmax, Nmax:lc.maxima.Nmax, w:lc.maxima.w,
-                   reactions:lc.reactions, supportMoments:lc.supportMoments||null};
+                   reactions:lc.reactions, supportMoments:lc.supportMoments||null, knoten:lc.knoten||null};
 
   // gleichmäßige Arrays je Stab (für kragr·size und ältere Berichte)
   const memberData={};
@@ -4278,6 +4370,8 @@ function calculateFrame(){
           hinges:frameHinges.map(hg=>({member:hg.member, pos:hg.pos}))}
   };
   renderFrameDiagram(b,h,allM,allQ,allN,NP,supportA,supportB,rafHingeIdx,hA,hB,fine);
+  try{ lastCalc.frame.knoten=kKnoten('frame', model.elems); }catch(e){}
+  if(typeof kKnotenCard==='function') kKnotenCard('frame');
 }
 
 function setDiagMode(sys, mode){
@@ -6579,6 +6673,7 @@ document.addEventListener('input', ()=>{ cancelAnimationFrame(_k2T); _k2T=reques
 if(typeof IntersectionObserver==='function') document.querySelectorAll('.results-grid').forEach(g=>{ const t=g.closest('.main')?.id.slice(4);
   new IntersectionObserver(es=>{ K2_VIS[t]=es[0].isIntersecting; k2Bar(); }).observe(g); });
 (()=>{ const o=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); k2All(); return r; }; })();
+(()=>{ const o=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); ['beam','cant','cont','frame'].forEach(x=>{ try{ kKnotenCard(x); }catch(e){} }); return r; }; })();
 (()=>{ const o=window.showTab; window.showTab=function(...a){ const r=o.apply(this,a); k2All(); return r; }; })();
 // ══════════════════════════════════════════════════
 // Bedienung (calc v0.9.5): (1) „Nachweis in size“ direkt unter den Ergebnissen, (2) Lasten in der Skizze antippen
@@ -6590,6 +6685,47 @@ const K4T = {
   fr:{ toSize:'Vérification dans size', toSizeS:'choisir la vérification — M, V et N sont repris', hint:'Touchez le schéma : une charge pour la modifier, la poutre pour placer une charge ponctuelle.', close:'Fermer', draft:'Les saisies sont enregistrées automatiquement.', reset:'Recommencer', resetQ:'Vraiment réinitialiser ?' },
   es:{ toSize:'Comprobación en size', toSizeS:'elige la comprobación — se toman M, V y N', hint:'Toca el esquema: una carga para editarla, la viga para colocar una carga puntual.', close:'Cerrar', draft:'Los datos se guardan automáticamente.', reset:'Empezar de nuevo', resetQ:'¿Restablecer de verdad?' } };
 const k4 = k => (K4T[calcLang]||K4T.en)[k];
+// ── Knoten und Stabendkräfte (v0.11.0): Karte unter den Ergebnissen ──
+const K9T = {
+  de:{ title:'Knoten und Stabendkräfte', note:'Knoten von links nach rechts nummeriert. Doppelindex: {M21} ist das Moment im Stab 2–1 am Knoten 2. Vorzeichen wie in den Verläufen (M > 0: Zug unten bzw. innen, gestrichelte Faser).', end:'Stabende', bar:'Stab', eq:'Knotengleichgewicht', node:'Knoten', sup:'Auflager', eL:'Ecke links', eR:'Ecke rechts', gel:'Gelenk', ende:'freies Ende', left:'Stütze links', rafter:'Riegel', right:'Stütze rechts', beam:'Träger', field:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts', cl:'schließend (Zug außen)', op:'öffnend (Zug innen)', clamp:'Einspannmoment', jump:'Sprung durch ein Einzelmoment', hingeSup:'mit Gelenk' },
+  en:{ title:'Nodes and member end forces', note:'Nodes numbered from left to right. Double index: {M21} is the moment in member 2–1 at node 2. Signs as in the diagrams (M > 0: tension at the bottom or inside, dashed fibre).', end:'Member end', bar:'Member', eq:'Node equilibrium', node:'Node', sup:'Support', eL:'Left corner', eR:'Right corner', gel:'Hinge', ende:'free end', left:'Left column', rafter:'Rafter', right:'Right column', beam:'Beam', field:'Span', ovL:'Left cantilever', ovR:'Right cantilever', cl:'closing (tension outside)', op:'opening (tension inside)', clamp:'fixed-end moment', jump:'jump from a point moment', hingeSup:'with hinge' },
+  fr:{ title:'Nœuds et efforts aux extrémités des barres', note:'Nœuds numérotés de gauche à droite. Double indice : {M21} est le moment dans la barre 2–1 au nœud 2. Signes comme dans les diagrammes (M > 0 : traction en bas ou à l’intérieur, fibre en pointillés).', end:'Extrémité', bar:'Barre', eq:'Équilibre des nœuds', node:'Nœud', sup:'Appui', eL:'Angle gauche', eR:'Angle droit', gel:'Articulation', ende:'extrémité libre', left:'Poteau gauche', rafter:'Traverse', right:'Poteau droit', beam:'Poutre', field:'Travée', ovL:'Console gauche', ovR:'Console droite', cl:'fermant (traction à l’extérieur)', op:'ouvrant (traction à l’intérieur)', clamp:'moment d’encastrement', jump:'saut dû à un moment ponctuel', hingeSup:'avec articulation' },
+  es:{ title:'Nudos y esfuerzos en los extremos de barra', note:'Nudos numerados de izquierda a derecha. Doble índice: {M21} es el momento en la barra 2–1 en el nudo 2. Signos como en los diagramas (M > 0: tracción abajo o en el interior, fibra discontinua).', end:'Extremo', bar:'Barra', eq:'Equilibrio de nudos', node:'Nudo', sup:'Apoyo', eL:'Esquina izquierda', eR:'Esquina derecha', gel:'Rótula', ende:'extremo libre', left:'Pilar izquierdo', rafter:'Dintel', right:'Pilar derecho', beam:'Viga', field:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho', cl:'de cierre (tracción exterior)', op:'de apertura (tracción interior)', clamp:'momento de empotramiento', jump:'salto por un momento puntual', hingeSup:'con rótula' } };
+const k9 = k => (K9T[calcLang]||K9T.en)[k] ?? K9T.de[k] ?? k;
+// Index i k als tiefgestellte Ziffern (ab 10 Knoten mit Komma)
+const k9ix = (i, k, big) => big ? `${i},${k}` : `${i}${k}`;
+const k9g = (s, i, k, big) => `${s}<sub>${k9ix(i,k,big)}</sub>`;
+function k9NodeName(n){ return n.kind==='sup' ? `${k9('sup')} ${n.lab}${n.gelenk && n.sup==='fixed' ? ' ('+k9('hingeSup')+')' : ''}` : n.kind==='ecke' ? k9(n.lab==='L'?'eL':'eR')+(n.gelenk?' ('+k9('hingeSup')+')':'') : n.kind==='gelenk' ? k9('gel') : k9('ende'); }
+function k9BarName(sysId, b){
+  if(sysId==='frame') return k9(b.mem);
+  if(sysId!=='cont') return k9('beam');
+  try{ const lay=contLayout(), st=kStations('cont'), xm=(st[b.i-1].t.beam+st[b.k-1].t.beam)/2*lay.Ltot, sg=lay.segs.find(g=>xm>=g.x0-1e-9 && xm<=g.x0+g.L+1e-9);
+    return sg.key==='L' ? k9('ovL') : sg.key==='R' ? k9('ovR') : `${k9('field')} ${sg.key+1}`; }catch(e){ return k9('beam'); }
+}
+function kKnotenCard(sysId){
+  const host=document.getElementById(sysId+'-results'), K=lastCalc[sysId] && lastCalc[sysId].knoten; if(!host) return;
+  let c=host.querySelector(':scope > .k-knoten'); if(!K){ if(c) c.remove(); return; }
+  if(!c){ c=document.createElement('div'); c.className='card k-knoten'; host.appendChild(c); }
+  const big=K.nodes.length>=10, f=v=>nf(v,2), Z=v=>Math.abs(v)<5e-3;
+  let h=`<div class="card-title" style="margin-bottom:8px">${k9('title')}</div><div class="k-kn-note">${k9('note').replace('{M21}', 'M<sub>21</sub>')}</div>`;
+  h+=`<table class="k-kn-tab"><thead><tr><th>${k9('end')}</th><th>M (kNm)</th><th>Q (kN)</th><th>N (kN)</th></tr></thead><tbody>`;
+  K.bars.forEach(b=>{ h+=`<tr class="k-kn-bar"><td colspan="4">${k9('bar')} ${b.i}–${b.k} · ${k9BarName(sysId,b)}</td></tr>`;
+    [[b.i,b.k,b.ik],[b.k,b.i,b.ki]].forEach(([i,k,v])=>{ h+=`<tr data-ik="${k9ix(i,k,big)}"><td>${k9ix(i,k,big)}</td><td>${f(v.M)}</td><td>${f(v.Q)}</td><td>${f(v.N)}</td></tr>`; }); });
+  h+=`</tbody></table><div class="k-kn-h">${k9('eq')}</div><ul class="k-kn-list">`;
+  K.nodes.forEach(n=>{
+    const ends=[]; K.bars.forEach(b=>{ if(b.i===n.nr) ends.push({i:b.i,k:b.k,v:b.ik}); if(b.k===n.nr) ends.push({i:b.k,k:b.i,v:b.ki}); });
+    let t='', x='';   // t: Formel (Mono), x: Zusatz
+    const ok=' <span class="ok">✓</span>';
+    if(ends.length===2){ const [a,c2]=ends, same=Math.abs(a.v.M-c2.v.M)<0.01;
+      if(same){ t=`${k9g('M',a.i,a.k,big)} = ${k9g('M',c2.i,c2.k,big)} = ${f(a.v.M)} kNm`; x=ok; }
+      else { t=`${k9g('M',a.i,a.k,big)} = ${f(a.v.M)} kNm, ${k9g('M',c2.i,c2.k,big)} = ${f(c2.v.M)} kNm`; x=` (${k9('jump')})`; }
+      if(n.kind==='ecke' && !Z(a.v.M)) x+=` <span class="tag">${k9(a.v.M<0?'cl':'op')}</span>`; }
+    else if(ends.length===1){ const a=ends[0]; t=`${k9g('M',a.i,a.k,big)} = ${f(a.v.M)} kNm`;
+      x = n.sup==='fixed' && !n.gelenk && !Z(a.v.M) ? ` (${k9('clamp')})` : Z(a.v.M) ? ok : ''; }
+    h+=`<li data-nr="${n.nr}"><b>${k9('node')} ${n.nr}</b> · ${k9NodeName(n)}: <span class="mono">${t}</span>${x}</li>`; });
+  h+='</ul>';
+  if(c._h!==h){ c._h=h; c.innerHTML=h; }
+}
 // (1) „Nachweis in size“ entfällt seit v0.10.1: Schnittkräfte gelangen nur über „Meine Projekte“ nach size.
 // (2) Last auswählen: Bearbeitung direkt unter der Skizze
 const K4SEL = { beam:null, cantilever:null };

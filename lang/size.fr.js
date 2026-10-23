@@ -730,7 +730,7 @@ window.MULY_LANG = {
 "posNone":"Aucune position enregistrée pour l'instant. La désignation ci-dessus sert de nom.",
 "nTopics":"{0} thèmes",
 "ciNone":"Aucun calcul enregistré pour l'instant. Calculer dans <a href=\"calc.html\">kragr·calc</a> et utiliser « Enregistrer le calcul » — M, V et N peuvent alors être repris ici.",
-"ciFrom":"<b>Repris de calc :</b>",
+"ciFrom":"<b>Repris de calc :</b>","cibEnde":"extrémité de barre {0}","cibStab":"barre {0}",
 "ciRiegelN":"Effort normal dans la traverse N = {0} kN (compression).",
 "ciMauer":"Pour la maçonnerie, veuillez saisir les charges manuellement. Réaction d'appui issue de calc : {0} kN (p. ex. comme N<sub>Edc</sub> pour la pression localisée).",
 "ciGrund":"Pour la géotechnique, veuillez saisir les charges manuellement, séparées en permanentes et variables (calc ne distingue pas les types de charges). Réaction d'appui issue de calc : {0} kN.",

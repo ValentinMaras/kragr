@@ -41,9 +41,8 @@ async def main():
         await pg.click('#pick-btn'); await pg.mouse.click(1200,850); check('Klick daneben schließt das Menü', not await pg.evaluate("$('pick').classList.contains('open')"))
         await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("$('pick').classList.contains('open')"))
         # Projekt-Menü
-        check('Positions-Menü in der Kopfzeile (zu), altes Projekt-Fenster verborgen', not await pg.is_visible('#pos-panel') and await pg.evaluate("$('proj-panel').hidden"))
-        await pg.click('#proj-btn'); check('Positions-Menü öffnet: aktuelle Position und „Neue Position“', await pg.is_visible('#pos-panel .kp-item.cur') and await pg.is_visible('#pos-panel .kp-add'))
-        await pg.mouse.click(300,850); check('Klick daneben schließt das Positions-Menü', not await pg.is_visible('#pos-panel'))
+        check('Kopfzeile: Ordner-Symbol ohne Menü, altes Projekt-Fenster verborgen', await pg.evaluate("$('proj-panel').hidden && !$('proj-btn').hasAttribute('aria-haspopup')"))
+        await pg.click('#proj-btn'); await pg.wait_for_url('**/projekt.html'); check('Ordner-Symbol öffnet „Meine Projekte“', 'projekt.html' in pg.url); await pg.go_back(); await pg.wait_for_timeout(500)
         # Aufklappbare Karten
         await pg.evaluate("setMat('beton'); setTyp('balken')"); await pg.wait_for_timeout(100)
         st=await pg.evaluate("[...document.querySelectorAll('.fold')].filter(c=>c.offsetParent).map(c=>[c.dataset.fold, c.classList.contains('closed'), c.querySelector('.fold-sum').textContent])")
@@ -70,8 +69,8 @@ async def main():
         m=await br.new_page(viewport={'width':390,'height':844}); await m.goto(HTML); await m.wait_for_timeout(300)
         w=await m.evaluate("document.documentElement.scrollWidth"); await m.click('#pick-btn')
         check('Handy: keine seitliche Überbreite, Menü einspaltig', w<=390 and await m.evaluate("getComputedStyle($('pick-menu')).gridTemplateColumns.split(' ').length")==1, w)
-        await m.click('#proj-btn'); bb=await m.evaluate("JSON.stringify($('pos-panel').getBoundingClientRect())")
-        check('Handy: Projekt-Menü passt auf den Bildschirm', await m.evaluate("$('pos-panel').getBoundingClientRect().right<=390"), bb)
+        bb=await m.evaluate("JSON.stringify($('proj-btn').getBoundingClientRect())")
+        check('Handy: Ordner-Symbol passt auf den Bildschirm', await m.evaluate("$('proj-btn').getBoundingClientRect().right<=390"), bb)
         # Rechenschritte: Rechenketten in Einzelzeilen, „=“ untereinander
         await pg.set_viewport_size({'width':1280,'height':900}); await pg.evaluate("setMat('beton'); setTyp('balken')")
         g=await pg.evaluate("(()=>{ const c=document.getElementById('n-biegung'); const eq=[...c.querySelectorAll('.eq')].find(e=>e.textContent.startsWith('μ')); return eq ? [...eq.querySelectorAll('.eq-r')].map(r=>r.textContent.trim()[0]) : null; })()")

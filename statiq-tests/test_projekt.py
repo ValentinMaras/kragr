@@ -16,21 +16,21 @@ async def main():
         pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(200)
         check('leeres Projekt: Hinweis, keine Positionen', 'Noch nichts gespeichert' in await pg.inner_text('#list') and (await pg.inner_text('#sum')).startswith('0 Positionen'))
-        # calc: Einfeldträger und Rahmen speichern
-        # seit calc v0.10.0: das System wird automatisch in der aktuellen Position gesichert; saveFrameCalc() legt wie früher eine lose Berechnung ab
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(1800)
-        k0=await pg.evaluate("mulyPos.sysKey(mulyPos.cur().id)")
-        await pg.evaluate("showTab('frame'); calculateFrame(); saveFrameCalc();"); await pg.wait_for_timeout(20); await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(1500)
+        # seit calc v0.10.1: System einer Position über den Projektmodus (calc.html?pos=…, „Übernehmen und zurück“); saveFrameCalc() legt wie früher eine lose Berechnung ab
+        pid0=await pg.evaluate("addPos()")
+        await pg.goto(B+f'calc.html?pos={pid0}'); await pg.wait_for_timeout(1200); await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*')
+        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(600)
+        await pg.evaluate("showTab('frame'); calculateFrame(); saveFrameCalc();"); await pg.wait_for_timeout(20)
+        k0='statiq_sdf_pos_'+pid0
         keys=[k0]+await pg.evaluate(f"Object.keys(localStorage).filter(k=>k.startsWith('statiq_sdf_') && k!=='{k0}')")
-        await pg.click('#proj-btn'); await pg.wait_for_timeout(150)
-        check('calc: Link zur Projektübersicht im Positions-Menü, System in Pos. 1', await pg.get_attribute('#pos-panel a.proj-link','href')=='projekt.html' and len(keys)==2, keys)
+        check('calc: Ordner-Symbol führt zur Projektübersicht, System in Pos. 1, Rahmen lose', await pg.get_attribute('#proj-btn','onclick')=='toggleProj(event)' and len(keys)==2 and await pg.evaluate(f"!!localStorage.getItem('{k0}')"), keys)
         # size: aus calc übernehmen und speichern
         await pg.goto(B+'size.html'); await pg.wait_for_timeout(500)
         await pg.evaluate(f"setMat('stahl'); setStMode('traeger'); renderCalcImport('{keys[0]}'); importCalc('{keys[0]}'); $('sn-name').value='Pos 3 Unterzug'; savePos()"); await pg.wait_for_timeout(150)
         e=await pg.evaluate("posRead().find(p=>p.name==='Pos 3 Unterzug')")
         check('size: Position merkt sich calc-Quelle, Ausnutzung, Bezeichnung', e['src']['key']==keys[0] and 0<e['eta']<5 and e['label'], (e.get('src'), e.get('eta')))
         check('size: Bericht für den Gesamtbericht gespeichert', await pg.evaluate("(localStorage.getItem('statiq-size-bericht:Pos 3 Unterzug')||'').includes('Pos 3 Unterzug')"))
-        check('size: Link zur Projektübersicht im Projekt-Menü', await pg.evaluate("!!document.querySelector('#proj-panel a[href=\"projekt.html\"], a.proj-link[href=\"projekt.html\"]')"))
+        check('size: Ordner-Symbol zur Projektübersicht', await pg.evaluate("!!document.getElementById('proj-btn')"))
         await pg.evaluate("setMat('holz'); setHoMode('bauteil'); $('ho-name').value='Pfette P1'; savePos()"); await pg.wait_for_timeout(100)
         check('size: andere Nachweisart übernimmt die calc-Quelle nicht', await pg.evaluate("!posRead().find(p=>p.name==='Pfette P1').src"))
         # Projekt: alles ohne Position
@@ -48,16 +48,16 @@ async def main():
         await pg.evaluate(f"setPos('{pid}','title','Unterzug Achse B'); setPos('{pid}','nr','3')"); await pg.wait_for_timeout(50)
         check('Nr. und Bezeichnung ändern', await pg.evaluate(f"proj().pos[0].title==='Unterzug Achse B' && proj().pos[0].nr==='3'"))
         # neuere calc-Berechnung → veraltet (mit geänderter Steifigkeit: dieselbe Berechnung legt calc seit v0.8.28 nicht doppelt ab)
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(600)
-        await pg.evaluate("const e=document.getElementById('beam-Iy'); e.value='20'; e.dispatchEvent(new Event('input',{bubbles:true}))"); await pg.wait_for_timeout(1800)
+        await pg.goto(B+f'calc.html?pos={pid}'); await pg.wait_for_timeout(1000)
+        await pg.evaluate("const e=document.getElementById('beam-Iy'); e.value='20'; e.dispatchEvent(new Event('input',{bubbles:true}))"); await pg.wait_for_timeout(400)
+        await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(250)
         k2=keys[0]
-        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(250)
         t=await pg.inner_text(f".pos[data-id='{pid}']")
-        check('System der Position geändert: Nachweis „veraltet“ (neu rechnen)', 'calc geändert — neu rechnen' in t and '1 veraltet' in await pg.inner_text('#sum'), t[:200])
+        check('System der Position geändert: Nachweis „veraltet“ (neu rechnen), Titel bleibt (von Hand vergeben)', 'calc geändert — neu rechnen' in t and '1 veraltet' in await pg.inner_text('#sum') and await pg.evaluate("proj().pos[0].title")=='Unterzug Achse B', t[:200])
         href=await pg.evaluate("document.querySelector('a.warn')?.getAttribute('href')")
-        check('„Neu rechnen“ verweist auf size mit Position und neuer calc', href and 'size.html#pos=Pos%203%20Unterzug' in href and k2 in href, href)
-        await pg.goto(B+href); await pg.wait_for_timeout(900)
-        check('size rechnet neu und speichert', 'neu gerechnet' in await pg.inner_text('#pos-msg') and await pg.evaluate(f"posRead().find(p=>p.name==='Pos 3 Unterzug').src.key==='{k2}'"))
+        check('„Neu rechnen“ öffnet size im Projektmodus mit dem Nachweis', href==f'size.html?pos={pid}&check=Pos%203%20Unterzug&neu=1', href)
+        await pg.goto(B+href); await pg.wait_for_timeout(1200); await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(200)
+        check('size rechnet neu und speichert', await pg.evaluate(f"(()=>{{ const p=JSON.parse(localStorage.getItem('statiq-size-positionen')).find(p=>p.name==='Pos 3 Unterzug'); return p.src.key==='{k2}' && p.src.ts===JSON.parse(localStorage.getItem('{k2}')).sdf.timestamp }})()"))
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(250)
         tp=await pg.inner_text(f".pos[data-id='{pid}']"); check('danach nicht mehr veraltet', 'neu rechnen' not in tp and '0 veraltet' in await pg.inner_text('#sum'), tp)
         # Gesamtbericht
@@ -90,11 +90,10 @@ async def main():
         check('Projektseite: Navigation und Titel „Meine Projekte“', await pg.inner_text('.app-header .cur')=='Meine Projekte' and await pg.title()=='kragr — Meine Projekte')
         await pg.goto(B+'index.html'); await pg.wait_for_timeout(200)
         check('Startseite: „Meine Projekte“', await pg.inner_text('#saved-title')=='Meine Projekte')
-        await pg.goto(B+'size.html'); await pg.wait_for_timeout(400)
-        await pg.click('#proj-btn'); await pg.wait_for_timeout(150)
-        check('size: Positions-Knopf zeigt die Position, Link „Meine Projekte“ im Menü', (await pg.inner_text('#proj-btn')).startswith('Pos. ') and 'Meine Projekte' in await pg.inner_text('#pos-panel .proj-link'))
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(300); await pg.click('#proj-btn'); await pg.wait_for_timeout(150)
-        check('calc: Link „Meine Projekte“ im Positions-Menü', 'Meine Projekte' in await pg.inner_text('#pos-panel .proj-link'))
+        for f in ['size','calc']:
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); tx=await pg.inner_text('#proj-btn')
+            await pg.click('#proj-btn'); await pg.wait_for_url('**/projekt.html')
+            check(f'{f}: Knopf „Meine Projekte“ führt zur Projektseite', tx=='Meine Projekte', tx)
         # Sprachen
         for L,w in (('en','My projects'),('fr','Mes projets'),('es','Mis proyectos')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(200)

@@ -299,6 +299,7 @@
       <div class="card-badge" id="saved-count"></div>
     </div>
     <div class="card-title" id="saved-title">My projects</div>
+    <div class="card-desc" id="saved-desc">Combine calc and size: one system per item, its checks in size use its internal forces — saved, with a full report.</div>
     <div class="card-arrow">→</div>
   </a>
 
@@ -312,7 +313,7 @@
 
 <footer class="footer">
   <div class="footer-logo">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · calc v0.10.0 · ref v0.3.43 · size v0.7.0 · projekt v0.1.16</span></div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · calc v0.10.1 · ref v0.3.43 · size v0.7.1 · projekt v0.1.17</span></div>
   <div class="footer-note" id="footer-check">Every calculation path is tested against independent recalculations — currently more than 1,500 automated checks.</div>
   <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>
@@ -338,6 +339,7 @@ const translations = {
     install_x: "Hide", install_t: "kragr as an app", install_s: "Install on your home screen — works offline too.", install_ios: "On iPhone/iPad: tap the Share icon, then “Add to Home Screen”.", install_b: "Install",
     footer: 'Valentin Maras', legal: 'Legal notice · Privacy', note: 'Learning tool for students — does not replace a checked structural calculation.',
     saved_from: 'items from calc &amp; size',
+    saved_desc: 'Combine calc and size: one system per item, its checks in size use its internal forces — saved, with a full report.',
     saved: 'My projects', saved_n: '{n} entries', saved_p: '{p} items · {n} entries', saved_p1: '1 item · {n} entries',
     size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Building physics", "Buckling", "Torsion", "Report"],
     ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Masonry EC6", "Geotechnics", "Hydraulics", "Building physics", "Maths", "Search"],
@@ -359,6 +361,7 @@ const translations = {
     install_x: "Ausblenden", install_t: "kragr als App", install_s: "Auf dem Startbildschirm installieren — funktioniert auch offline.", install_ios: "Auf iPhone/iPad: Teilen-Symbol antippen, dann „Zum Home-Bildschirm“.", install_b: "Installieren",
     footer: 'Valentin Maras', legal: 'Impressum · Datenschutz', note: 'Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung.',
     saved_from: 'Positionen aus calc &amp; size',
+    saved_desc: 'calc und size verbinden: je Position ein System, die Nachweise in size übernehmen seine Schnittkräfte — gespeichert, mit Gesamtbericht.',
     saved: 'Meine Projekte', saved_n: '{n} Einträge', saved_p: '{p} Positionen · {n} Einträge', saved_p1: '1 Position · {n} Einträge',
     size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Bauphysik", "Stabilität", "Torsion", "Bericht"],
     ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Mauerwerk EC6", "Grundbau", "Wasserbau", "Bauphysik", "Mathematik", "Suche"],
@@ -380,6 +383,7 @@ const translations = {
     install_x: "Masquer", install_t: "kragr en application", install_s: "Installer sur l’écran d’accueil — fonctionne aussi hors ligne.", install_ios: "Sur iPhone/iPad : touchez l’icône Partager, puis « Sur l’écran d’accueil ».", install_b: "Installer",
     footer: 'Valentin Maras', legal: 'Mentions légales · Confidentialité', note: 'Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée.',
     saved_from: 'positions de calc &amp; size',
+    saved_desc: 'Relier calc et size : un système par position, ses vérifications dans size reprennent ses efforts internes — enregistré, avec rapport complet.',
     saved: 'Mes projets', saved_n: '{n} entrées', saved_p: '{p} positions · {n} entrées', saved_p1: '1 position · {n} entrées',
     size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Physique du bâtiment", "Stabilité", "Torsion", "Note de calcul"],
     ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Maçonnerie EC6", "Géotechnique", "Hydraulique", "Physique du bâtiment", "Mathématiques", "Recherche"],
@@ -401,6 +405,7 @@ const translations = {
     install_x: "Ocultar", install_t: "kragr como app", install_s: "Instálala en la pantalla de inicio — también funciona sin conexión.", install_ios: "En iPhone/iPad: toca el icono Compartir y luego «Añadir a pantalla de inicio».", install_b: "Instalar",
     footer: 'Valentin Maras', legal: 'Aviso legal · Privacidad', note: 'Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado.',
     saved_from: 'posiciones de calc y size',
+    saved_desc: 'Unir calc y size: un sistema por posición, sus comprobaciones en size toman sus esfuerzos — guardado, con informe completo.',
     saved: 'Mis proyectos', saved_n: '{n} entradas', saved_p: '{p} posiciones · {n} entradas', saved_p1: '1 posición · {n} entradas',
     size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Física de la construcción", "Estabilidad", "Torsión", "Informe"],
     ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Fábrica EC6", "Geotecnia", "Hidráulica", "Física de la construcción", "Matemáticas", "Búsqueda"],
@@ -445,6 +450,7 @@ function applyLang(lang){
   document.getElementById('install-sub').textContent = window.__statiqIOS ? t.install_ios : t.install_s;
   document.getElementById('saved-title').textContent = t.saved;
   document.getElementById('saved-from').innerHTML = t.saved_from;
+  document.getElementById('saved-desc').textContent = t.saved_desc;
   savedCount(t);
   const tagHtml = arr => arr.map(x=>`<span class="tag">${x.replace(/&/g,'&amp;')}</span>`).join('');
   document.getElementById('calc-tags').innerHTML = tagHtml(t.tags);

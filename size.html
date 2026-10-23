@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.0 -->
+<!-- kragr·size v0.7.1 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -466,124 +466,77 @@ window.mulyProj = {
 <style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #5468ad); }
 </style>
-<style data-pos>
-  /* Positionen als roter Faden (calc v0.10.0 · size v0.7.0): Kopfzeilen-Knopf öffnet die Positionen, Leiste „Position · System · Nachweise“ unter der Kopfzeile */
-  .k-posbar { display:flex; align-items:center; gap:8px; min-height:48px; margin:2px auto 6px; }
-  .k-posbar .kpb-pos { flex:1; min-width:0; display:flex; align-items:center; gap:6px; min-height:40px; padding:0 10px 0 2px; border:0; background:transparent; font:inherit; color:#111114; cursor:pointer; text-align:left; border-radius:10px; }
-  .k-posbar .kpb-pos:hover { background:#f1f2f4; }
-  .kpb-nr { flex:none; font-family:var(--k-mono, monospace); font-size:12px; font-weight:600; color:#5c5e66; padding:3px 7px; border-radius:7px; background:#f1f2f4; }
-  .kpb-t { min-width:0; font-size:15px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .kpb-v { flex:none; color:#5c5e66; font-size:11px; }
-  .kpb-steps { flex:none; display:grid; grid-template-columns:auto auto; gap:3px; padding:3px; border-radius:12px; background:#f1f2f4; }
-  .kpb-steps a { display:flex; align-items:center; gap:6px; min-height:34px; padding:0 12px; border-radius:9px; font-size:13.5px; font-weight:600; color:#3d3f45; text-decoration:none; white-space:nowrap; }
-  .kpb-steps a[aria-current="page"] { background:#fff; color:#111114; font-weight:800; box-shadow:0 1px 3px rgba(17,17,20,.12); }
-  .kpb-steps i { font-style:normal; font-family:var(--k-mono, monospace); font-size:11px; font-weight:600; min-width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; border-radius:9px; background:#dfe3f2; color:#5468ad; padding:0 5px; }
-  .kpb-steps i.z { background:#e6e7ea; color:#5c5e66; }
-  @media (max-width:560px) { .k-posbar { flex-wrap:wrap; gap:4px; } .k-posbar .kpb-pos { flex-basis:100%; } .kpb-steps { flex:1; } .kpb-steps a { justify-content:center; } }
-  #pos-panel .pp-sec { padding:10px; }
-  #pos-panel .kp-proj { padding:6px 6px 8px; font-size:12px; font-weight:700; color:#5c5e66; }
-  #pos-panel .kp-item { display:flex; align-items:center; gap:10px; width:100%; min-height:52px; padding:8px 10px; border:0; border-radius:10px; background:transparent; font:inherit; text-align:left; color:#111114; cursor:pointer; }
-  #pos-panel .kp-item:hover { background:#fff; }
-  #pos-panel .kp-item.cur { background:#fff; box-shadow:inset 0 0 0 2px #5468ad; }
-  #pos-panel .kp-nr { flex:none; font-family:var(--k-mono, monospace); font-size:12px; font-weight:600; color:#5c5e66; min-width:44px; }
-  #pos-panel .kp-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px; }
-  #pos-panel .kp-tx b { font-size:14.5px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #pos-panel .kp-tx small { font-size:12px; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #pos-panel .kp-st { flex:none; font-size:11.5px; font-weight:700; border-radius:7px; padding:2px 7px; }
-  #pos-panel .kp-st.ok { background:#e7f5ee; color:#0f6b46; } #pos-panel .kp-st.bad { background:#fdecec; color:#b42318; } #pos-panel .kp-st.old { background:#fdf8e8; color:#7a5a00; }
-  #pos-panel .kp-add { display:flex; align-items:center; justify-content:center; width:100%; min-height:44px; margin-top:6px; border:1.5px dashed #c3c5cc; border-radius:12px; background:transparent; font:inherit; font-size:14.5px; font-weight:600; color:#3d3f45; cursor:pointer; }
-  #pos-panel .kp-add:hover { border-color:#111114; color:#111114; }
-  #proj-btn .pb-dot { display:none !important; }   /* gespeichert wird automatisch: kein oranger Punkt mehr */
+<style data-pm>
+  /* Projektmodus (calc v0.10.1 · size v0.7.1): calc und size sind eigenständige Rechner. Aus „Meine Projekte“ geöffnet (?pos=<id>)
+     zeigen sie oben eine Projektzeile mit „Abbrechen“ und „Übernehmen und zurück“; nur dieser Knopf schreibt in die Position. */
+  .k-pmbar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:4px auto 8px; padding:10px 12px 10px 16px; border-radius:16px; background:#e9ecf6; box-shadow:inset 0 0 0 1.5px #c9cfe6; }
+  .k-pmbar[hidden] { display:none !important; }
+  .k-pmbar .kpm-tx { flex:1; min-width:170px; display:flex; flex-direction:column; gap:1px; }
+  .k-pmbar .kpm-k { font-size:12px; font-weight:700; color:#46518a; }
+  .k-pmbar .kpm-t { font-size:15px; font-weight:800; color:#111114; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .k-pmbar .kpm-s { font-size:12.5px; color:#3d3f45; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .k-pmbar .kpm-b { display:flex; gap:8px; margin-left:auto; }
+  .kpm-btn { min-height:42px; padding:0 16px; border-radius:11px; border:0; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .kpm-btn.ok { background:#111114; color:#fff; } .kpm-btn.ok:hover { background:#333; }
+  .kpm-btn.x { background:#fff; color:#3d3f45; } .kpm-btn.x:hover { color:#111114; }
+  .k-pmbar.gone { background:#fdf8e8; box-shadow:inset 0 0 0 1.5px #f1d48a; }
+  .k-pmbar.gone a { font-weight:700; color:#111114; }
+  @media (max-width:560px) { .k-pmbar .kpm-b { width:100%; } .kpm-btn { flex:1; } }
+  .k-pmbar.k-frame { width:calc(100% - 40px); max-width:calc(var(--k-frame, 1180px) - 40px) !important; }   /* bündig mit den Karten */
+  .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
+  @media (min-width:1000px) { .k-verfoot { display:none; } }
+  #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Meine Projekte“ */
   .col-out .save-btn { display:none !important; }
-  .k-poscard { display:flex; flex-direction:column; gap:6px; }
-  .k-poscard .kpc-h { font-size:15px; font-weight:800; margin-bottom:2px; }
-  .kpc-i { display:flex; align-items:center; gap:10px; width:100%; min-height:48px; padding:6px 12px; border:0; border-radius:12px; background:#fff; font:inherit; text-align:left; color:#111114; cursor:pointer; }
-  .kpc-i.cur { box-shadow:inset 0 0 0 2px #5468ad; }
-  .kpc-i .kpc-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px; } .kpc-i b { font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .kpc-i small { font-size:12px; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .kpc-e { flex:none; font-family:var(--k-mono, monospace); font-size:12.5px; font-weight:600; border-radius:7px; padding:2px 7px; }
-  .kpc-e.ok { background:#e7f5ee; color:#0f6b46; } .kpc-e.bad { background:#fdecec; color:#b42318; } .kpc-e.old { background:#fdf8e8; color:#7a5a00; }
-  .kpc-loose { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 12px; border-radius:12px; background:#fdf8e8; font-size:13px; color:#3d3f45; }
-  .kpc-loose button, .kpc-add { border:0; border-radius:10px; min-height:38px; padding:0 14px; background:#111114; color:#fff; font:inherit; font-size:13.5px; font-weight:700; cursor:pointer; }
-  .kpc-add { width:100%; min-height:44px; background:transparent; color:#3d3f45; border:1.5px dashed #c3c5cc; font-size:14.5px; font-weight:600; }
-  .kpc-more { font-size:12.5px; color:#5c5e66; }
-  .kpc-menu { display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 6px 20px rgba(17,17,20,.10); }
-  .kpc-menu[hidden] { display:none; }
-  .kpc-menu button { min-height:44px; padding:0 10px; border:0; border-radius:8px; background:transparent; font:inherit; font-size:14.5px; font-weight:600; text-align:left; cursor:pointer; color:#111114; } .kpc-menu button:hover { background:#f1f2f4; }
-  .kpc-menu .kpc-g { padding:8px 10px 2px; font-size:12.5px; font-weight:800; }
-  @media print { .k-posbar { display:none !important; } }
+  @media print { .k-pmbar, .k-verfoot { display:none !important; } }
 </style>
-<script data-pos>
-// Positionen als roter Faden (calc v0.10.0 · size v0.7.0): Alles gehört zu einer Position des Projekts. calc ist das System der Position,
-// size sind ihre Nachweise. Speichern geschieht automatisch. Ablage wie bisher: Projekt „statiq-projekt“ (pos, asg, neu: cur = aktuelle Position,
-// auto = Titel folgt dem System), System der Position „statiq_sdf_pos_<id>“, Nachweise „statiq-size-positionen“ (Zuordnung über asg bzw. calc-Quelle).
+<script data-pm>
+// Projektmodus (calc v0.10.1 · size v0.7.1): „Meine Projekte“ verbindet calc und size. calc.html?pos=<id> bearbeitet das System der
+// Position, size.html?pos=<id>[&check=<Name>|&ziel=<Bereich.Nachweis>&part=<riegel|stiel>][&neu=1] einen Nachweis. Ohne ?pos=
+// sind calc und size reine Rechner ohne Projektbezug. Ablage: „statiq-projekt“ (pos, asg), System „statiq_sdf_pos_<id>“,
+// Nachweise „statiq-size-positionen“. Die Seite meldet sich mit window.kragrPMPage = { label(), apply(), cancel() }.
 (function(){
-  var PSTORE='statiq-projekt', POS_STORE='statiq-size-positionen';
-  var T={ de:{ proj:'Mein Projekt', newPos:'Neue Position', add:'＋ Neue Position', all:'Alle Positionen in „Meine Projekte“ →', sys:'System', checks:'Nachweise', noSys:'noch kein System', n0:'noch kein Nachweis', n1:'1 Nachweis', nN:'{0} Nachweise', ok:'erfüllt', bad:'nicht erfüllt', old:'neu rechnen', title:'Position wechseln', cur:'Aktuelle Position', here:'Nachweise dieser Position', loose:'Diese Eingaben gehören noch zu keiner Position.', take:'In Pos. {0} aufnehmen', fromSys:'＋ Nachweis aus dem System', more:'Weitere Nachweise: oben im Auswahlmenü wählen und in die Position aufnehmen.', noneHere:'Noch kein Nachweis in dieser Position.' },
-          en:{ proj:'My project', newPos:'New item', add:'＋ New item', all:'All items in “My projects” →', sys:'System', checks:'Checks', noSys:'no system yet', n0:'no check yet', n1:'1 check', nN:'{0} checks', ok:'satisfied', bad:'not satisfied', old:'recalculate', title:'Switch item', cur:'Current item', here:'Checks of this item', loose:'These inputs do not belong to an item yet.', take:'Add to item {0}', fromSys:'＋ Check from the system', more:'More checks: choose in the menu above and add them to the item.', noneHere:'No check in this item yet.' },
-          fr:{ proj:'Mon projet', newPos:'Nouvelle position', add:'＋ Nouvelle position', all:'Toutes les positions dans « Mes projets » →', sys:'Système', checks:'Vérifications', noSys:'pas encore de système', n0:'pas encore de vérification', n1:'1 vérification', nN:'{0} vérifications', ok:'vérifiée', bad:'non vérifiée', old:'à recalculer', title:'Changer de position', cur:'Position actuelle', here:'Vérifications de cette position', loose:'Ces saisies n’appartiennent encore à aucune position.', take:'Ajouter à la pos. {0}', fromSys:'＋ Vérification à partir du système', more:'Autres vérifications : choisir dans le menu en haut et les ajouter à la position.', noneHere:'Pas encore de vérification dans cette position.' },
-          es:{ proj:'Mi proyecto', newPos:'Nueva posición', add:'＋ Nueva posición', all:'Todas las posiciones en «Mis proyectos» →', sys:'Sistema', checks:'Comprobaciones', noSys:'aún sin sistema', n0:'aún sin comprobación', n1:'1 comprobación', nN:'{0} comprobaciones', ok:'cumple', bad:'no cumple', old:'recalcular', title:'Cambiar de posición', cur:'Posición actual', here:'Comprobaciones de esta posición', loose:'Estos datos aún no pertenecen a ninguna posición.', take:'Añadir a la pos. {0}', fromSys:'＋ Comprobación desde el sistema', more:'Más comprobaciones: elígelas en el menú de arriba y añádelas a la posición.', noneHere:'Aún no hay comprobaciones en esta posición.' } };
-  function lang(){ var l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){} return T[l]?l:'de'; }
-  function t(k,a){ return String(T[lang()][k]).replace('{0}', a); }
-  function get(k,d){ try{ var v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } }
-  // Standardname des Projekts nicht speichern, damit er der Sprache folgt
+  var PSTORE='statiq-projekt';
+  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', x:'Abbrechen', sys:'System aus calc', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Meine Projekte“ →' },
+          en:{ k:'Project', ok:'Apply and return', x:'Cancel', sys:'System from calc', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “My projects” →' },
+          fr:{ k:'Projet', ok:'Appliquer et revenir', x:'Annuler', sys:'Système de calc', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Mes projets » →' },
+          es:{ k:'Proyecto', ok:'Aplicar y volver', x:'Cancelar', sys:'Sistema de calc', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Mis proyectos» →' } };
   var DEFN=['Mein Projekt','My project','Mon projet','Mi proyecto'];
-  function set(k,v){ try{ if(k===PSTORE && v && DEFN.indexOf(v.name)>=0){ v=JSON.parse(JSON.stringify(v)); delete v.name; } localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } }
+  function lang(){ try{ return window.calcLang || localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
+  function t(k){ var L=lang(); return (T[L]||T.en)[k] || T.de[k] || k; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function newId(){ return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
-  function proj(){ var p=get(PSTORE,null)||{}; p.v=1; p.name=p.name||t('proj'); p.pos=p.pos||[]; p.asg=p.asg||{}; return p; }
-  function nextNr(P){ var n=P.pos.map(function(q){ return parseInt(q.nr,10); }).filter(isFinite); return String(n.length ? Math.max.apply(null,n)+1 : 1); }
-  function ensure(){ var P=proj(), ch=false;
-    if(!P.pos.length){ P.pos.push({ id:newId(), nr:'1', title:t('newPos'), auto:true }); ch=true; }
-    if(!P.cur || !P.pos.some(function(q){ return q.id===P.cur; })){ P.cur=P.pos[0].id; ch=true; }
-    if(ch) set(PSTORE,P); return P; }
-  // Diese Seite arbeitet bis zum Neuladen in der Position, mit der sie geöffnet wurde (auch wenn ein anderer Tab wechselt)
-  var PAGE=null;
-  function cur(){ var P=ensure(), q=PAGE && P.pos.filter(function(x){ return x.id===PAGE; })[0]; if(!q){ q=P.pos.filter(function(x){ return x.id===P.cur; })[0]; PAGE=q && q.id; } return q; }
-  function sysKey(id){ return 'statiq_sdf_pos_'+id; }
-  function sysOf(id){ var e=get(sysKey(id),null); if(e) return { key:sysKey(id), name:e.name, sdf:e.sdf };
-    var P=proj(), best=null; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k||k.indexOf('statiq_sdf_')!==0||P.asg['c:'+k]!==id) continue; var o=get(k,null); if(o&&o.sdf&&(!best||o.sdf.timestamp>best.sdf.timestamp)) best={key:k,name:o.name,sdf:o.sdf}; } }catch(e){} return best; }
-  function checks(id){ var P=proj(); return (get(POS_STORE,[])||[]).filter(function(c){ var a=P.asg['s:'+c.name]; if(a!==undefined && a!==null) return a===id; if(a===null) return false; var k=c.src&&c.src.key; return !!k && (P.asg['c:'+k]===id || k===sysKey(id)); }); }
-  function stale(c, id){ var s=sysOf(id); return !!(s && c.src && c.src.key===s.key && (c.src.ts||'') < (s.sdf.timestamp||'')); }
-  function status(id){ var cs=checks(id); if(!cs.length) return null; if(cs.some(function(c){ return stale(c,id); })) return 'old'; return cs.every(function(c){ return c.ok; }) ? 'ok' : 'bad'; }
-  function setCur(id){ var P=proj(); P.cur=id; PAGE=id; set(PSTORE,P); }
-  function add(){ var P=ensure(), id=newId(); P.pos.push({ id:id, nr:nextNr(P), title:t('newPos'), auto:true }); set(PSTORE,P); return id; }   // aktuell wird sie erst über switchTo
-  function setTitle(id, title, auto){ var P=proj(), q=P.pos.filter(function(x){ return x.id===id; })[0]; if(!q) return; if(auto && !q.auto) return; q.title=title; if(!auto) q.auto=false; set(PSTORE,P); render(); }
-  function assign(itemId, id){ var P=proj(); P.asg[itemId]=id; set(PSTORE,P); }
-  function nChecks(id){ var n=checks(id).length; return n===0 ? t('n0') : n===1 ? t('n1') : t('nN', n); }
-  // Kopfzeilen-Knopf und Leiste „Position · System · Nachweise“
-  function render(){
-    var q=cur(), b=document.getElementById('proj-btn'); if(!q) return;
-    if(b){ var tx=b.querySelector('.pb-tx'); if(tx) tx.textContent='Pos. '+q.nr+' · '+q.title; b.dataset.st='none'; b.title=t('title'); b.setAttribute('aria-label', t('cur')+': Pos. '+q.nr+' · '+q.title+' — '+t('title')); }
-    var bar=document.getElementById('k-posbar'), page=(window.mulyPosPage||{}).type||(/size\.html/.test(location.pathname)?'size':'calc');
-    if(!bar){ var h=document.querySelector('.app-header'); if(!h) return; bar=document.createElement('div'); bar.id='k-posbar'; bar.className='k-posbar k-frame'; h.parentNode.insertBefore(bar, h.nextSibling); }
-    var n=checks(q.id).length, s=sysOf(q.id);
-    var html='<button type="button" class="kpb-pos" aria-haspopup="dialog" onclick="mulyPos.toggle(event)"><span class="kpb-nr">Pos. '+esc(q.nr)+'</span><span class="kpb-t">'+esc(q.title)+'</span><span class="kpb-v" aria-hidden="true">▾</span></button>'
-      +'<nav class="kpb-steps" aria-label="'+esc(t('cur'))+'"><a href="calc.html"'+(page==='calc'?' aria-current="page"':'')+' title="'+esc(s?s.name:t('noSys'))+'">'+esc(t('sys'))+(s?'':' <i class="z">–</i>')+'</a>'
-      +'<a href="size.html"'+(page==='size'?' aria-current="page"':'')+' title="'+esc(nChecks(q.id))+'">'+esc(t('checks'))+' <i'+(n?'':' class="z"')+'>'+n+'</i></a></nav>';
-    if(bar._h!==html){ bar._h=html; bar.innerHTML=html; }
-  }
-  // Positions-Fenster (ersetzt das bisherige Projekt-Fenster)
-  function panel(){ var p=document.getElementById('pos-panel'); if(p) return p;
-    p=document.createElement('div'); p.id='pos-panel'; p.className='proj-panel'; p.setAttribute('role','dialog'); document.body.appendChild(p);
-    p.addEventListener('click', function(e){ e.stopPropagation(); var it=e.target.closest('[data-pos]'); if(it){ switchTo(it.dataset.pos); return; } if(e.target.closest('.kp-add')){ switchTo(add(), true); } }); return p; }
-  function fill(){ var P=ensure(), p=panel();
-    p.innerHTML='<section class="pp-sec"><div class="kp-proj">'+esc(P.name)+'</div>'+P.pos.slice().sort(function(a,b){ return String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true}); }).map(function(q){ var s=sysOf(q.id), st=status(q.id);
-      return '<button type="button" class="kp-item'+(q.id===P.cur?' cur':'')+'" data-pos="'+q.id+'"'+(q.id===P.cur?' aria-current="true"':'')+'><span class="kp-nr">Pos. '+esc(q.nr)+'</span><span class="kp-tx"><b>'+esc(q.title)+'</b><small>'+esc((s ? (s.name===q.title ? '' : s.name+' · ') : t('noSys')+' · ')+nChecks(q.id))+'</small></span>'+(st?'<span class="kp-st '+st+'">'+esc(t(st))+'</span>':'')+'</button>'; }).join('')
-      +'<button type="button" class="kp-add">'+esc(t('add'))+'</button></section><a class="pp-foot proj-link" href="projekt.html">'+esc(t('all'))+'</a><span class="pp-ver" id="pos-ver"></span>';
-    var v=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name'); if(v) document.getElementById('pos-ver').textContent='kragr·'+(m?m.textContent.trim():'')+' '+v.textContent; }
-  function open(o){ var p=panel(); if(o) fill(); p.classList.toggle('open', o); var b=document.getElementById('proj-btn'); if(b){ b.classList.toggle('open', o); b.setAttribute('aria-expanded', o?'true':'false'); } }
-  function toggle(e){ if(e) e.stopPropagation(); open(!panel().classList.contains('open')); }
-  function switchTo(id, isNew){ var P=proj(); open(false); if(id===P.cur && !isNew) return; var pg=window.mulyPosPage||{};
-    if(pg.beforeSwitch) pg.beforeSwitch(P.cur); setCur(id); if(pg.afterSwitch) pg.afterSwitch(id, isNew); else location.reload(); }
-  window.mulyPos={ proj:proj, ensure:ensure, cur:cur, sysKey:sysKey, sysOf:sysOf, checks:checks, stale:stale, setCur:setCur, add:add, setTitle:setTitle, assign:assign, render:render, toggle:toggle, open:open, t:t };
+  function get(k,d){ try{ var v=localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function proj(){ var p=get(PSTORE,null)||{}; p.v=1; p.pos=p.pos||[]; p.asg=p.asg||{}; return p; }
+  function saveProj(P){ try{ if(P && DEFN.indexOf(P.name)>=0){ P=JSON.parse(JSON.stringify(P)); delete P.name; } localStorage.setItem(PSTORE, JSON.stringify(P)); return true; }catch(e){ return false; } }
+  var q=new URLSearchParams((typeof location!=='undefined' && location.search) || ''), id=q.get('pos');
+  var pos=id ? proj().pos.filter(function(x){ return x.id===id; })[0] : null;
+  var PM={ on:!!pos, gone:!!id && !pos, id:id, pos:pos, params:q, sysKey: id ? 'statiq_sdf_pos_'+id : null, t:t, proj:proj, saveProj:saveProj,
+    assign:function(item, pid){ var P=proj(); P.asg[item]=pid; saveProj(P); },
+    // Titel folgt dem System, solange er nicht von Hand vergeben wurde (auto !== false)
+    setTitle:function(title){ var P=proj(), x=P.pos.filter(function(y){ return y.id===id; })[0]; if(x && title && x.auto!==false){ x.title=title; x.auto=true; saveProj(P); } },
+    back:function(){ location.href='projekt.html#pos-'+encodeURIComponent(id); },
+    render:function(){
+      var bar=document.getElementById('k-pmbar'); if(!bar) return;
+      if(PM.gone){ bar.hidden=false; bar.className='k-pmbar k-frame gone'; bar.innerHTML='<span class="kpm-tx"><span class="kpm-t">'+esc(t('gone'))+'</span></span><a href="projekt.html">'+esc(t('proj'))+'</a>'; return; }
+      if(!PM.on){ bar.hidden=true; return; }
+      document.body.classList.add('k-pm');
+      var pg=window.kragrPMPage||{}, sub=pg.label ? pg.label() : '';
+      var h='<span class="kpm-tx"><span class="kpm-k">'+esc(t('k'))+' · Pos. '+esc(pos.nr)+'</span><span class="kpm-t">'+esc(pos.title)+'</span>'+(sub?'<span class="kpm-s">'+esc(sub)+'</span>':'')+'</span>'
+        +'<span class="kpm-b"><button type="button" class="kpm-btn x" data-pm="x">'+esc(t('x'))+'</button><button type="button" class="kpm-btn ok" data-pm="ok">'+esc(t('ok'))+'</button></span>';
+      bar.hidden=false; bar.className='k-pmbar k-frame'; if(bar._h!==h){ bar._h=h; bar.innerHTML=h; }
+    } };
+  window.kragrPM=PM;
+  document.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('#k-pmbar [data-pm]'); if(!b) return; var pg=window.kragrPMPage||{};
+    if(b.dataset.pm==='ok'){ if(pg.apply) pg.apply(); else PM.back(); } else { if(pg.cancel) pg.cancel(); else PM.back(); } });
   document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
-    // altes Projekt-Fenster bleibt intern erreichbar (Tests, Übergang): mulyAltProj()
+    // Ordner-Symbol: einfacher Link zu „Meine Projekte“; das frühere Projekt-Fenster bleibt intern über mulyAltProj() erreichbar
     var L0={ open:window.openProj }; window.mulyAltProj=function(){ var o=document.getElementById('proj-panel'); if(o) o.removeAttribute('hidden'); if(L0.open) L0.open(); };
-    ensure(); window.toggleProj=toggle; window.openProj=function(){ open(true); }; window.closeProj=function(){ open(false); };
+    window.toggleProj=function(e){ if(e && e.stopPropagation) e.stopPropagation(); location.href='projekt.html'; }; window.openProj=window.toggleProj; window.closeProj=function(){};
     var old=document.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
-    render(); document.addEventListener('click', function(e){ if(!e.target.closest('#pos-panel') && !e.target.closest('#proj-btn') && !e.target.closest('.kpb-pos')) open(false); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') open(false); });
-    addEventListener('storage', render); setInterval(function(){ if(!document.hidden) render(); }, 1500);
+    var b=document.getElementById('proj-btn'); if(b){ b.removeAttribute('aria-haspopup'); b.removeAttribute('aria-expanded'); }
+    // Version unten (am Handy ist die Kopfzeile dafür zu schmal)
+    var hv=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name');
+    if(hv && m && !document.getElementById('k-verfoot')){ var f=document.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr·'+m.textContent.trim()+' '+hv.textContent.trim(); document.body.appendChild(f); }
+    PM.render();
   }, 0); });
 })();
 </script>
@@ -735,14 +688,14 @@ window.mulyProj = {
     <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
   </nav>
   <div class="hdr-tools">
-    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
     <span class="version" id="ver"></span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
-<div id="k-posbar" class="k-posbar k-frame"></div>
-<script data-pos-early>try{ if(typeof window!=="undefined" && window.mulyPos){ mulyPos.ensure(); mulyPos.render(); } }catch(e){}</script>
+<div id="k-pmbar" class="k-pmbar k-frame" hidden></div>
+<script data-pm-early>try{ if(typeof window!=="undefined" && window.kragrPM) kragrPM.render(); }catch(e){}</script>
 
 <div id="mob-status" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})"></div>
 <main class="k-frame main">
@@ -3393,7 +3346,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.0';
+const SIZE_VERSION = '0.7.1';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -10065,8 +10018,9 @@ function apply(o){
   if(o.typ && ['balken','unterzug','platte','stuetze','durchstanzen','torsion','stoss','brandschutz','zugkraft','zweiachsig','platte2'].includes(o.typ)){ TYP=o.typ; showTyp(TYP); }
   if(o.mat){ MAT=o.mat; showMat(); }
 }
-function save(){ try{ localStorage.setItem(STORE, JSON.stringify(snapshot())); }catch(e){} }
-function load(){ try{ const o=JSON.parse(localStorage.getItem(STORE)||'null'); if(o) apply(o); }catch(e){} }
+const PM_ON = () => !!(window.kragrPM && kragrPM.on);   // Projektmodus: eigener Stand, der Rechner-Stand bleibt unberührt
+function save(){ if(PM_ON()) return; try{ localStorage.setItem(STORE, JSON.stringify(snapshot())); }catch(e){} }
+function load(){ if(PM_ON()) return; try{ const o=JSON.parse(localStorage.getItem(STORE)||'null'); if(o) apply(o); }catch(e){} }
 
 // Mehrere Positionen (nur in diesem Browser)
 const POS_STORE='statiq-size-positionen';
@@ -10866,10 +10820,6 @@ function ciUniqueName(base, key){ const L=posRead(); let n=base, k=2; while(L.so
     if(z.length===2) ciGoto(z[0], z[1]);
     else if(!ciOk()) ciGoto('beton', part==='stiel' && e?.sdf?.system?.type==='frame' ? 'stuetze' : 'balken');   // „→ size“ ohne Ziel: passender Nachweis statt Wasserbau o. Ä.
     ciDo(ck, part);
-    if(z.length===2 && e && CI_SRC && CI_SRC.key===ck){
-      const lab=[$('pick-g')?.textContent, $('pick-t')?.textContent].filter(Boolean).join(' · '), pt = e.sdf?.system?.type==='frame' ? ' · '+(part==='stiel' ? tx('ciStiel').split(' (')[0] : tx('ciRiegel')) : '';
-      $(nameField()).value = ciUniqueName(`${e.name}${pt} — ${lab}`, ck); savePos();
-      ciBanner($('ci-msg').innerHTML + `<div class="cib-s">${tx('cibSaved', esc($(nameField()).value), (window.mulyPos&&mulyPos.cur()) ? 'Pos. '+esc(mulyPos.cur().nr) : 'kragr')}</div>`); }
     history.replaceState(null, '', location.pathname); } }
 openFromHash();
 window.addEventListener("hashchange", ()=>{ openFromHash(); });
@@ -10957,7 +10907,7 @@ function mulyFehlerHref(app, ver, extra){
     });
     document.querySelectorAll('.k-stp').forEach(function(w){ var i=w.querySelector('input'); w.querySelectorAll('.k-sb').forEach(function(b){ if(b.disabled!==!!i.disabled) b.disabled=!!i.disabled; }); });
   }
-  function ciButtons(){
+  function ciButtons(){ return;   // seit v0.7.1: Schnittkräfte aus calc nur noch über „Meine Projekte“
     CI_CARDS.forEach(function(k){ document.querySelectorAll('.col-in .card-title[data-i18n="'+k+'"]').forEach(function(t){ var c=t.closest('.card'); if(!c || c.querySelector(':scope > .k-ci')) return;
       var b=document.createElement('button'); b.type='button'; b.className='k-ci';
       b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span>'+L.ci+'</span>';
@@ -10984,67 +10934,33 @@ function mulyFehlerHref(app, ver, extra){
   all_();
 })();
 </script>
-<script data-pos-size>
-// size in der Position (v0.7.0): Karte „Nachweise dieser Position“ oben in der Eingabe; ein Nachweis der Position wird bei jeder
-// Änderung automatisch gespeichert; Eingaben, die noch zu keiner Position gehören, lassen sich mit einem Tipp aufnehmen.
+<script data-pm-size>
+// Projektmodus in size (v0.7.1): size.html?pos=<id>&check=<Name> öffnet einen Nachweis der Position (mit &neu=1: mit dem aktuellen
+// System neu gerechnet), size.html?pos=<id>&ziel=<Bereich.Nachweis>&part=<riegel|stiel> legt einen neuen an und übernimmt die
+// Schnittkräfte aus dem System der Position. Erst „Übernehmen und zurück“ speichert; die Eingaben des eigenständigen Rechners
+// (statiq-size-v1) bleiben dabei unberührt.
 (function(){
-  if(!window.mulyPos || !document.querySelector('.col-in')) return;
-  var P_=mulyPos, t=P_.t, K8={ cur:null, typ:null, saving:false, timer:0, sig:'' };
-  function esc_(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function nm(){ var e=document.getElementById(nameField()); return e ? (e.value||'').trim() : ''; }
-  function idx(name){ return posRead().findIndex(function(p){ return p.name===name; }); }
-  // aktuellen Nachweis festlegen (nach Laden, Übernahme oder „aufnehmen“)
-  function adopt(name){ K8.cur=name; K8.typ=curTyp(); K8.sig=JSON.stringify(snapshot()); var q=P_.cur(); if(q) P_.assign('s:'+name, q.id); card(); P_.render(); }
-  function saveNow(){ if(!K8.cur || K8.saving) return; if(curTyp()!==K8.typ){ K8.cur=null; card(); return; }   // anderer Nachweis gewählt: nicht überschreiben
-    var sig=JSON.stringify(snapshot()); if(sig===K8.sig) return;
-    var n=nm()||K8.cur; K8.saving=true;
-    try{ if(n!==K8.cur){ var L=posRead(), i=idx(K8.cur); if(i>=0 && !L.some(function(p){ return p.name===n; })){ L.splice(i,1); posWrite(L); } var P=P_.proj(); delete P.asg['s:'+K8.cur]; try{ localStorage.setItem('statiq-projekt', JSON.stringify(P)); }catch(e){} }
-      var m=document.getElementById('pos-msg'), keep=m?m.textContent:''; savePos(); if(m) m.textContent=keep; }
-    finally{ K8.saving=false; }
-    K8.sig=JSON.stringify(snapshot()); adopt(n); }
-  var _run=window.run; window.run=function(){ var r=_run.apply(this, arguments); if(!K8.saving && K8.cur){ clearTimeout(K8.timer); K8.timer=setTimeout(saveNow, 900); } if(!K8.saving) setTimeout(card, 0); return r; };
-  // Übernahme aus calc (ciDo) und „aus dem System“: danach gehört der Nachweis zur Position
-  function fromSys(z, part){ var q=P_.cur(), s=q && P_.sysOf(q.id); if(!s) return; var zz=z.split('.'); ciGoto(zz[0], zz[1]); ciDo(s.key, part);
-    var lab=[$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · '), pt = s.sdf.system&&s.sdf.system.type==='frame' ? ' · '+(part==='stiel' ? tx('ciStiel').split(' (')[0] : tx('ciRiegel')) : '';
-    document.getElementById(nameField()).value = ciUniqueName(lab+pt, s.key); K8.saving=true; try{ savePos(); }finally{ K8.saving=false; } adopt(nm()); }
-  var ZIELE={ beam:[['beton.balken'],['beton.unterzug'],['beton.platte'],['stahl.traeger'],['holz.bauteil']], cont:[['beton.balken'],['beton.unterzug'],['beton.platte'],['stahl.traeger'],['holz.bauteil']],
-    cantilever:[['beton.balken'],['beton.platte'],['stahl.traeger'],['holz.bauteil'],['stahl.schweiss']],
-    frame:[['g','riegel'],['beton.balken','riegel'],['beton.unterzug','riegel'],['stahl.traeger','riegel'],['holz.bauteil','riegel'],['stahl.schweiss','riegel'],['g','stiel'],['beton.stuetze','stiel'],['stahl.traeger','stiel'],['holz.bauteil','stiel'],['stahl.fuss','stiel'],['stahl.schweiss','stiel']] };
-  var ZL={ 'beton.balken':['matBeton','z003'], 'beton.unterzug':['matBeton','z004'], 'beton.platte':['matBeton','z005'], 'beton.stuetze':['matBeton','z006'], 'stahl.traeger':['matStahl','hoBauteil'], 'stahl.fuss':['matStahl','fpBtn'], 'stahl.schweiss':['matStahl','swBtn'], 'holz.bauteil':['matHolz','hoBauteil'] };
-  function zlab(z){ var a=ZL[z]; return a ? tx(a[0])+' · '+tx(a[1]) : z; }
-  // Karte „Nachweise dieser Position“
-  function card(){
-    var q=P_.cur(); if(!q) return; var c=document.getElementById('k-poscard');
-    if(!c){ c=document.createElement('div'); c.id='k-poscard'; c.className='card k-poscard'; var a=document.getElementById('ci-banner')||document.getElementById('pick'); a.parentNode.insertBefore(c, a.nextSibling);
-      c.addEventListener('click', function(e){ var b=e.target.closest('button'); if(!b) return; e.stopPropagation();
-        if(b.dataset.load!=null && b.dataset.stale){ var q3=P_.cur(), s3=q3 && P_.sysOf(q3.id); if(s3){ location.hash='pos='+encodeURIComponent(b.dataset.load)+'&calc='+encodeURIComponent(s3.key)+(b.dataset.part?'&part='+b.dataset.part:''); location.reload(); return; } }
-        if(b.dataset.load!=null){ var i=idx(b.dataset.load); if(i>=0){ K8.saving=true; try{ loadPos(i); }finally{ K8.saving=false; } adopt(b.dataset.load); } }
-        else if(b.classList.contains('kpc-take')){ var lab=[$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · ')||tx('noName'), n=nm(), used=posRead().some(function(p){ return p.name===n; });
-          if(!n || used || /^Pos\.\s/.test(n)) n=ciUniqueName(lab, '__eigen__'); document.getElementById(nameField()).value=n;
-          var q2=P_.cur(); if(q2 && !P_.sysOf(q2.id) && q2.auto) P_.setTitle(q2.id, lab, true); K8.saving=true; try{ savePos(); }finally{ K8.saving=false; } adopt(nm()); }
-        else if(b.classList.contains('kpc-add')){ var m=c.querySelector('.kpc-menu'); m.hidden=!m.hidden; }
-        else if(b.dataset.ziel){ fromSys(b.dataset.ziel, b.dataset.part); } }); }
-    var cs=P_.checks(q.id), s=P_.sysOf(q.id), here=K8.cur && cs.some(function(x){ return x.name===K8.cur; }) && curTyp()===K8.typ;
-    if(K8.cur && !here){ K8.cur=null; }
-    var sysT=s && s.sdf && s.sdf.system && s.sdf.system.type, zs=ZIELE[sysT]||[];
-    var h='<div class="kpc-h">'+esc_(t('here'))+'</div>'+(cs.length ? cs.map(function(x){ var old=P_.stale(x, q.id), st=old?'old':x.ok?'ok':'bad', e=x.eta!=null&&isFinite(x.eta) ? Math.round(x.eta*100)+' %' : t(x.ok?'ok':'bad');
-        return '<button type="button" class="kpc-i'+(x.name===K8.cur?' cur':'')+'" data-load="'+esc_(x.name)+'"'+(old?' data-stale="1"'+(x.src&&x.src.part?' data-part="'+esc_(x.src.part)+'"':''):'')+'><span class="kpc-tx"><b>'+esc_(x.name)+'</b><small>'+esc_(x.label||'')+'</small></span><span class="kpc-e '+st+'">'+esc_(old?t('old'):e)+'</span></button>'; }).join('')
-      : '<div class="kpc-more">'+esc_(t('noneHere'))+'</div>');
-    if(!here) h+='<div class="kpc-loose"><span style="flex:1;min-width:160px">'+esc_(t('loose'))+'</span><button type="button" class="kpc-take">'+esc_(t('take', q.nr))+'</button></div>';
-    if(zs.length){ h+='<button type="button" class="kpc-add">'+esc_(t('fromSys'))+'</button><div class="kpc-menu" hidden>'+zs.map(function(z){ return z[0]==='g' ? '<div class="kpc-g">'+esc_(z[1]==='stiel'?tx('ciStiel'):tx('ciRiegel'))+'</div>' : '<button type="button" data-ziel="'+z[0]+'"'+(z[1]?' data-part="'+z[1]+'"':'')+'>'+esc_(zlab(z[0]))+'</button>'; }).join('')+'</div>'; }
-    h+='<div class="kpc-more">'+esc_(t('more'))+'</div>';
-    if(c._h!==h){ var open=c.querySelector('.kpc-menu') && !c.querySelector('.kpc-menu').hidden; c._h=h; c.innerHTML=h; if(open) c.querySelector('.kpc-menu').hidden=false; }
+  var PM=window.kragrPM; if(!PM || !PM.on || !document.querySelector('.col-in')) return;
+  var q=PM.params, chk=q.get('check'), ziel=q.get('ziel'), part=q.get('part'), neu=q.get('neu'), orig=null, sys=null;
+  try{ sys=JSON.parse(localStorage.getItem(PM.sysKey)||'null'); }catch(e){}
+  function lab(){ return [$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · '); }
+  function partLab(p){ return p==='stiel' ? tx('ciStiel').split(' (')[0] : p==='riegel' ? tx('ciRiegel') : ''; }
+  function nf(){ return document.getElementById(nameField()); }
+  if(chk){ var i=posRead().findIndex(function(p){ return p.name===chk; });
+    if(i>=0){ loadPos(i); orig=chk; var src=posRead()[i].src; if(neu && sys){ ciDo(PM.sysKey, src && src.part); if(nf()) nf().value=orig; } } }
+  else { if(ziel){ var z=ziel.split('.'); ciGoto(z[0], z[1]); if(sys) ciDo(PM.sysKey, part); }
+    var f=nf(); if(f) f.value=ciUniqueName(lab()+(part ? ' · '+partLab(part) : ''), '__neu__'); run(); }
+  posMsg('');
+  function apply(){
+    var f=nf(), n=(f && f.value || '').trim(), L=posRead();
+    if(!n || /^Pos\.\s/.test(n)) n=lab()+(window.CI_SRC && CI_SRC.part ? ' · '+partLab(CI_SRC.part) : '');
+    if(n!==orig){ var base=n, k=2; while(L.some(function(p){ return p.name===n; })) n=base+' ('+(k++)+')'; }
+    if(f) f.value=n;
+    if(orig && orig!==n){ posWrite(L.filter(function(p){ return p.name!==orig; })); var P=PM.proj(); delete P.asg['s:'+orig]; PM.saveProj(P); try{ localStorage.removeItem(POS_REP+orig); }catch(e){} }
+    savePos(); PM.assign('s:'+n, PM.id); PM.back();
   }
-  // leere Position: gleicher Nachweis, aber Startwerte statt der Eingaben der vorigen Position
-  window.mulyPosPage={ type:'size', beforeSwitch:function(){ clearTimeout(K8.timer); saveNow(); },
-    afterSwitch:function(){ var q=P_.cur(); if(q && !P_.checks(q.id).length){ var o=snapshot(), k={}; ['typ','mat','stmode','homode','grmode','mwmode','wbmode','bpmode'].forEach(function(x){ k[x]=o[x]; }); try{ localStorage.setItem(STORE, JSON.stringify(k)); }catch(e){} } location.reload(); } };
-  window.mulyK8={ adopt:adopt, card:card, state:K8 };
-  // Start: gehört der angezeigte Nachweis zur Position? Sonst den ersten Nachweis der Position laden.
-  setTimeout(function(){ var q=P_.cur(); if(!q) return; var cs=P_.checks(q.id), n=nm();
-    if(window.CI_SRC && CI_SRC.key && location.hash==='' && cs.some(function(x){ return x.name===n; })) adopt(n);
-    else if(cs.some(function(x){ return x.name===n; })) adopt(n);
-    else if(cs.length && !window.__k8NoAutoLoad){ var i=idx(cs[0].name); if(i>=0){ K8.saving=true; try{ loadPos(i); }finally{ K8.saving=false; } adopt(cs[0].name); } }
-    card(); }, 0);
+  window.kragrPMPage={ label:function(){ return PM.t('chk')+': '+(orig || PM.t('newChk')); }, apply:apply, cancel:function(){ PM.back(); } };
+  PM.render();
 })();
 </script>
 </body>

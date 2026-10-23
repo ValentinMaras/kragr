@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.4 · ref v0.3.43 · size v0.6.3 · projekt v0.1.13 · rechtliches v0.1.12 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.5 · ref v0.3.43 · size v0.6.4 · projekt v0.1.13 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.4, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.5, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.13, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.6.3, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.6.4, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -568,6 +568,18 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Bedienung: direkter Weg nach size, Lasten in der Skizze, Entwurf — calc v0.9.5 · size v0.6.4
+
+Aus Valentins Frage nach Optimierungen der Klick-Logik; umgesetzt die Punkte 1–3 meiner Liste (Code `K4…`/`k4…` im `if(UX_ON)`-Block, vor dem ersten `k2All()`; Aufrufe in `k2All`).
+
+1. **„Nachweis in size“** (`.k-tosize`) direkt unter den Ergebnis-Kacheln in allen vier Bereichen: rechnet, legt die Berechnung in „Meine Projekte“, falls sie dort noch nicht liegt (`window.projSavedKey` aus dem Projekt-Adapter, sonst `navSave()`), und öffnet `size.html#calc=<Schlüssel>`. Zweimal tippen legt keine Kopie an. Im Übungsmodus ausgeblendet.
+2. **Lasten in der Skizze** (Einfeldträger, Kragarm): Tipp auf eine Last (Einzellast/H-M ±12 SVG-Einheiten, Streckenlast über ihrem Bereich) oder auf ihren Chip wählt sie aus: Chip gefüllt, Markierung in der Skizze (`.k-selmark`), Bearbeitung als Lastzeile direkt unter der Skizze (`.k-edit` mit `.k-slot`, gleiche Bausteine wie in der Lasten-Karte; Änderungen ziehen über `k3RefreshAll` Liste und Chips mit). Erneuter Tipp oder ✕ schließt. Tipp auf den Träger setzt eine neue Einzellast an dieser Stelle (auf 0,25 m gerundet) und öffnet sie. Hinweis unter den Chips. Geometrie aus `drawBeam`/`drawCantilever` (x0 30/50, x1 290, bY 70) in `K4GEO`.
+3. **Entwurf** (`localStorage` `muly-calc-entwurf`): alle Eingaben mit ID der vier Bereiche, `loads`, `spanData`, `contCfg`, Rahmen-Lager, -Gelenke und -Lasten sowie der aktive Bereich werden 0,6 s nach jeder Änderung und beim Verlassen gesichert und beim Öffnen wiederhergestellt (`k4Restore`, `uid` wird hochgesetzt). Im Projekt-Fenster: „Eingaben werden automatisch gesichert.“ und „Neu beginnen“ (zweistufig: „Wirklich zurücksetzen?“). Speichern in „Meine Projekte“ bleibt wie bisher (oranger Punkt = noch nicht im Projekt).
+- Projekt-Fenster calc und size: Status „Noch nicht in „Meine Projekte““ statt „Noch nicht gespeichert“ (`ppNew`, 4 Sprachen), weil die Eingaben ja gesichert sind (size sichert schon immer automatisch).
+- Übungsmodus ausschalten schaltet jetzt auch die nicht sichtbaren Bereiche zurück (`cUebToggle`); fiel auf, weil calc den zuletzt benutzten Bereich wieder öffnet.
+- Tests: neu `test_calc_bedienung.py`; `test_calc_design2.py`: Chip öffnet die Last jetzt unter der Skizze; `test_calc_uebung.py` wechselt vor dem EN-Teil auf den Einfeldträger.
+- Offen aus der Liste: (4) nur eine offene Lastzeile, (5) Karten am Handy automatisch zuklappen, (6) Ergebnis → passende Eingabe, (7) ref-Links je Rechenschritt, (8) Stepper gedrückt halten, (9) größerer Info-Knopf, (10) zuletzt benutzte Systeme oben, (11) Rückgängig für alles.
+
 ## Einheitlicher Rahmen — calc v0.9.4 · size v0.6.3 · ref v0.3.43 · projekt v0.1.13 · rechtliches v0.1.12
 
 Valentin: „kragr mal ganz links, mal weniger links, der Darstellungsrahmen ist unterschiedlich breit.“ Gemessen: Logo bei 24 px (calc/size/ref) bzw. 114/214 px (projekt/rechtliches), Logo 24 px bzw. 20 px, Kopfzeile 58/60/68 px, Inhalt 1180/952/1100/900 px breit.
@@ -1124,7 +1136,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1770/1770 grün** (inklusive `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1788/1788 grün** (inklusive `test_calc_bedienung.py` 18, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

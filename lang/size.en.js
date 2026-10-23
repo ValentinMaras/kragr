@@ -708,7 +708,7 @@ window.MULY_LANG = {
 "mlPick":"Choose a material",
 "ppCur":"Current calculation",
 "ppList":"Saved",
-"ppNew":"Not saved yet",
+"ppNew":"Not in My projects yet",
 "ppSaved":"Saved · {0}",
 "ppChanged":"Changed — not saved yet",
 "mobBadS":"{0} not satisfied",

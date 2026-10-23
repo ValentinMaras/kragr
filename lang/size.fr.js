@@ -696,7 +696,7 @@ window.MULY_LANG = {
 "mlPick":"Choisir un matériau",
 "ppCur":"Calcul actuel",
 "ppList":"Enregistré",
-"ppNew":"Pas encore enregistré",
+"ppNew":"Pas encore dans Mes projets",
 "ppSaved":"Enregistré · {0}",
 "ppChanged":"Modifié — pas encore enregistré",
 "mobBadS":"{0} non satisfaite(s)",

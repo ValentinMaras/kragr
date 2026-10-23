@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.9.4 -->
+<!-- kragr v0.9.5 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -180,7 +180,7 @@ window.mulyProj = {
   window.toggleProj=function(e){ e&&e.stopPropagation(); var o=!document.getElementById('proj-panel').classList.contains('open'); if(o){ msg(''); render(); }
     document.getElementById('proj-panel').classList.toggle('open',o); document.getElementById('proj-btn').classList.toggle('open',o); };
   window.closeProj=function(){ var p=document.getElementById('proj-panel'); if(p) p.classList.remove('open'); var b=document.getElementById('proj-btn'); if(b) b.classList.remove('open'); };
-  window.projCalcState=state;
+  window.projCalcState=state; window.projSavedKey=savedKey;   // für „Nachweis in size“ (v0.9.5)
   document.addEventListener('DOMContentLoaded', function(){
     if(typeof saveCalc!=='function' || !document.getElementById('proj-btn')) return;
     mulyProj.skeleton();
@@ -799,6 +799,25 @@ window.mulyProj = {
   #k-undo.on { opacity:1; transform:translate(-50%, 0); pointer-events:auto; }
   #k-undo button { border:0; border-radius:8px; padding:6px 10px; background:#fff; color:#111114; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }
   @media (min-width:1000px) { #k-undo { bottom:24px; } }
+  /* Bedienung v0.9.5: Nachweis in size, Bearbeitung unter der Skizze, Entwurf */
+  .k-tosize { display:flex; align-items:center; gap:12px; width:100%; min-height:56px; margin:4px 0 14px; padding:8px 16px; border:0; border-radius:14px; background:var(--k-tint); color:var(--k-accent); font:inherit; text-align:left; cursor:pointer; }
+  .k-tosize:hover { filter:brightness(.97); }
+  .k-tosize .k-ts-tx { flex:1; display:flex; flex-direction:column; gap:1px; }
+  .k-tosize b { font-size:15px; font-weight:800; } .k-tosize small { font-size:12.5px; color:var(--k-text2); }
+  .k-tosize .k-ts-ar { font-size:20px; font-weight:700; }
+  .k-tosize[hidden] { display:none; }
+  body.uebung .k-tosize { display:none; }
+  svg.k-tap { cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .k-taphint { font-size:12px; color:var(--k-muted); margin:-6px 0 10px; }
+  .k-chip[aria-pressed="true"].k-point { background:var(--k-point); color:#fff; }
+  .k-chip[aria-pressed="true"].k-dist { background:var(--k-accent); color:#fff; }
+  .k-chip[aria-pressed="true"].k-horiz { background:var(--k-text2); color:#fff; }
+  .k-edit:empty { display:none; }
+  .k-edit { margin:0 0 12px; }
+  .k-slot .k-slot-x { flex:none; font-size:14px; color:var(--k-muted); padding:4px; }
+  .k-slot { animation:k-in .15s ease-out; }
+  @keyframes k-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+  .k-draft { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 14px 10px; font-size:12.5px; color:var(--k-muted); }
   @media print { #k-bar, #k-undo { display:none !important; } }
 </style>
 <style data-frame>
@@ -984,7 +1003,7 @@ window.mulyProj = {
   </nav>
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
-    <span class="version">v0.9.4</span>
+    <span class="version">v0.9.5</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1456,7 +1475,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.9.4';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.9.5';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -1718,6 +1737,7 @@ function k3Refresh(it, skip){
     fv.innerHTML=`F<sub>v</sub> = F·cos α = ${k3f(Fv.toFixed(2))} kN<br>F<sub>h</sub> = F·sin α = ${k3f(Fh.toFixed(2))} kN`; }
   const ov=it.querySelector('.k-range'); if(ov) ov.textContent=k3('over').replace('{a}', k3f(v.a)).replace('{b}', k3f(v.b));
 }
+function k3RefreshAll(it, skip){ document.querySelectorAll(`.k-row[data-sys="${it.dataset.sys}"][data-type="${it.dataset.type}"][data-id="${it.dataset.id}"]`).forEach(r=>k3Refresh(r, skip)); }
 function k3Set(it, key, val){
   const A=K3A[it.dataset.sys], t=it.dataset.type, id=+it.dataset.id, s=it.dataset.seg;
   if(key==='q'){ A.upd(t,id,'qa',val,s); A.upd(t,id,'qb',val,s); } else A.upd(t,id,key,val,s);
@@ -5606,10 +5626,10 @@ Object.assign(I18N_UI.de,{"repPosLbl": "Position", "repDateLbl": "Datum", "repVe
 Object.assign(I18N_UI.en,{"repPosLbl": "Item", "repDateLbl": "Date", "repVerLbl": "Version"});
 Object.assign(I18N_UI.fr,{"repPosLbl": "Position", "repDateLbl": "Date", "repVerLbl": "Version"});
 Object.assign(I18N_UI.es,{"repPosLbl": "Posición", "repDateLbl": "Fecha", "repVerLbl": "Versión"});
-Object.assign(I18N_UI.de,{"projBtn": "Meine Projekte", "ppCur": "Aktuelle Berechnung", "ppList": "Gespeichert", "ppNew": "Noch nicht gespeichert", "ppSaved": "Gespeichert · {0}", "ppSave": "Speichern", "ppSavedMsg": "„{0}“ gespeichert.", "ppAlready": "Schon gespeichert — keine Kopie angelegt.", "ppAlreadyS": "✓ Schon gespeichert", "ppNoSys": "Kein System geöffnet", "ppNone": "Noch nichts gespeichert. „Speichern“ legt die aktuelle Berechnung ab — size kann sie dann übernehmen.", "ppToSizeT": "In kragr·size bemessen", "ppAllCalc": "Alle Berechnungen und Berichte", "ppAllPos": "Alle Positionen in „Meine Projekte“ →"});
-Object.assign(I18N_UI.en,{"projBtn": "My projects", "ppCur": "Current calculation", "ppList": "Saved", "ppNew": "Not saved yet", "ppSaved": "Saved · {0}", "ppSave": "Save", "ppSavedMsg": "“{0}” saved.", "ppAlready": "Already saved — no copy created.", "ppAlreadyS": "✓ Already saved", "ppNoSys": "No system open", "ppNone": "Nothing saved yet. “Save” stores the current calculation — size can then import it.", "ppToSizeT": "Design in kragr·size", "ppAllCalc": "All calculations and reports", "ppAllPos": "All items in “My projects” →"});
-Object.assign(I18N_UI.fr,{"projBtn": "Mes projets", "ppCur": "Calcul actuel", "ppList": "Enregistré", "ppNew": "Pas encore enregistré", "ppSaved": "Enregistré · {0}", "ppSave": "Enregistrer", "ppSavedMsg": "« {0} » enregistré.", "ppAlready": "Déjà enregistré — aucune copie créée.", "ppAlreadyS": "✓ Déjà enregistré", "ppNoSys": "Aucun système ouvert", "ppNone": "Rien d’enregistré pour l’instant. « Enregistrer » conserve le calcul actuel — size peut ensuite le reprendre.", "ppToSizeT": "Dimensionner dans kragr·size", "ppAllCalc": "Tous les calculs et rapports", "ppAllPos": "Toutes les positions dans « Mes projets » →"});
-Object.assign(I18N_UI.es,{"projBtn": "Mis proyectos", "ppCur": "Cálculo actual", "ppList": "Guardado", "ppNew": "Aún no guardado", "ppSaved": "Guardado · {0}", "ppSave": "Guardar", "ppSavedMsg": "«{0}» guardado.", "ppAlready": "Ya guardado — no se creó ninguna copia.", "ppAlreadyS": "✓ Ya guardado", "ppNoSys": "Ningún sistema abierto", "ppNone": "Todavía no hay nada guardado. «Guardar» almacena el cálculo actual; size puede importarlo después.", "ppToSizeT": "Dimensionar en kragr·size", "ppAllCalc": "Todos los cálculos e informes", "ppAllPos": "Todas las posiciones en «Mis proyectos» →"});
+Object.assign(I18N_UI.de,{"projBtn": "Meine Projekte", "ppCur": "Aktuelle Berechnung", "ppList": "Gespeichert", "ppNew": "Noch nicht in „Meine Projekte“", "ppSaved": "Gespeichert · {0}", "ppSave": "Speichern", "ppSavedMsg": "„{0}“ gespeichert.", "ppAlready": "Schon gespeichert — keine Kopie angelegt.", "ppAlreadyS": "✓ Schon gespeichert", "ppNoSys": "Kein System geöffnet", "ppNone": "Noch nichts gespeichert. „Speichern“ legt die aktuelle Berechnung ab — size kann sie dann übernehmen.", "ppToSizeT": "In kragr·size bemessen", "ppAllCalc": "Alle Berechnungen und Berichte", "ppAllPos": "Alle Positionen in „Meine Projekte“ →"});
+Object.assign(I18N_UI.en,{"projBtn": "My projects", "ppCur": "Current calculation", "ppList": "Saved", "ppNew": "Not in My projects yet", "ppSaved": "Saved · {0}", "ppSave": "Save", "ppSavedMsg": "“{0}” saved.", "ppAlready": "Already saved — no copy created.", "ppAlreadyS": "✓ Already saved", "ppNoSys": "No system open", "ppNone": "Nothing saved yet. “Save” stores the current calculation — size can then import it.", "ppToSizeT": "Design in kragr·size", "ppAllCalc": "All calculations and reports", "ppAllPos": "All items in “My projects” →"});
+Object.assign(I18N_UI.fr,{"projBtn": "Mes projets", "ppCur": "Calcul actuel", "ppList": "Enregistré", "ppNew": "Pas encore dans Mes projets", "ppSaved": "Enregistré · {0}", "ppSave": "Enregistrer", "ppSavedMsg": "« {0} » enregistré.", "ppAlready": "Déjà enregistré — aucune copie créée.", "ppAlreadyS": "✓ Déjà enregistré", "ppNoSys": "Aucun système ouvert", "ppNone": "Rien d’enregistré pour l’instant. « Enregistrer » conserve le calcul actuel — size peut ensuite le reprendre.", "ppToSizeT": "Dimensionner dans kragr·size", "ppAllCalc": "Tous les calculs et rapports", "ppAllPos": "Toutes les positions dans « Mes projets » →"});
+Object.assign(I18N_UI.es,{"projBtn": "Mis proyectos", "ppCur": "Cálculo actual", "ppList": "Guardado", "ppNew": "Aún no está en Mis proyectos", "ppSaved": "Guardado · {0}", "ppSave": "Guardar", "ppSavedMsg": "«{0}» guardado.", "ppAlready": "Ya guardado — no se creó ninguna copia.", "ppAlreadyS": "✓ Ya guardado", "ppNoSys": "Ningún sistema abierto", "ppNone": "Todavía no hay nada guardado. «Guardar» almacena el cálculo actual; size puede importarlo después.", "ppToSizeT": "Dimensionar en kragr·size", "ppAllCalc": "Todos los cálculos e informes", "ppAllPos": "Todas las posiciones en «Mis proyectos» →"});
 Object.keys(I18N_UI).forEach(l=>{ calcTranslations[l] = Object.assign(calcTranslations[l]||{}, I18N_UI[l]); });
 const trf = (key, ...a) => tr(key).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const LOCALE = () => ({en:'en-GB', de:'de-DE', fr:'fr-FR', es:'es-ES'})[calcLang] || 'en-GB';
@@ -5971,7 +5991,8 @@ let C_UEB = (()=>{ try{ return localStorage.getItem('muly-uebung')==='1'; }catch
 let C_REV = {}, C_KEY = {};
 const cUebNum = t => { const s=String(t).replace(/−/g,'-').replace(/\s/g,''); const m=s.match(/-?\d+(?:[.,]\d+)?/); if(!m) return NaN; const v=parseFloat(m[0].replace(',','.')); return /%/.test(s) ? v/100 : v; };
 const cUebHit = (v, x) => isFinite(x) && Math.abs(Math.abs(v)-Math.abs(x)) <= Math.max(0.01*Math.abs(x), 0.05);   // Vorzeichen frei: Richtung je nach Konvention
-function cUebToggle(){ C_UEB=!C_UEB; try{ localStorage.setItem('muly-uebung', C_UEB?'1':'0'); }catch(e){} C_REV={}; document.body.classList.remove('ueb-dia'); if(typeof liveCalc==='function') liveCalc(true); else document.querySelectorAll('.rw-card').forEach(c=>cUebApply(c.id.slice(3), c, true)); }
+function cUebToggle(){ C_UEB=!C_UEB; try{ localStorage.setItem('muly-uebung', C_UEB?'1':'0'); }catch(e){} C_REV={}; document.body.classList.remove('ueb-dia'); if(typeof liveCalc==='function') liveCalc(true);
+  document.querySelectorAll('.rw-card').forEach(c=>{ if(c.closest('.main.hidden') || typeof liveCalc!=='function') cUebApply(c.id.slice(3), c, true); }); }   // auch die anderen Bereiche umschalten (v0.9.5)
 // Übungsmodus „Lernpfad“ (calc v0.8.34 · size v0.5.51): noch nicht aufgedeckte Schritte zeigen Überschrift und Formeln,
 // alle Zahlenwerte der Rechnung sind als Lücke „…“ ausgeblendet (Indizes, Bezeichnungen wie F1 und ganze Zahlen in Formeln bleiben).
 const UEB_ANY = /(^|[^\p{L}\p{N}_'’′.,])([−-]?\d+(?:[.,]\d+)?)/gu, UEB_DEC = /(^|[^\p{L}\p{N}_'’′.,])([−-]?\d+[.,]\d+)/gu;
@@ -6348,14 +6369,9 @@ function k2Chips(){
     if(row._h!==html){ row._h=html; row.innerHTML=html; }
   });
 }
-document.addEventListener('click', e=>{
+document.addEventListener('click', e=>{   // Chip: Last auswählen, Bearbeitung erscheint direkt unter der Skizze (v0.9.5)
   const c=e.target.closest && e.target.closest('.k-chip'); if(!c) return;
-  const main=c.closest('.main'), t=main.id.slice(4), sys=K2SYS[t];
-  const it=document.querySelectorAll(`#${sys}-${c.dataset.type}-list > .load-item`)[+c.dataset.i]; if(!it) return;
-  const card=it.closest('.k-loads'); if(card && card.classList.contains('k-closed')) card.querySelector('.k-head').click();
-  it.classList.add('open'); if(it.dataset.k) LOAD_OPEN.add(it.dataset.k);
-  it.classList.add('k-flash'); setTimeout(()=>it.classList.remove('k-flash'), 900);
-  it.scrollIntoView({block:'center', behavior:'smooth'});
+  const t=c.closest('.main').id.slice(4), sys=K2SYS[t], l=(loads[sys][c.dataset.type]||[])[+c.dataset.i]; if(l) k4Select(t, c.dataset.type, l.id);
 });
 // Stepper − / + an den Zahlenfeldern der Eingabe (Tippen bleibt möglich, auch mit Minus)
 function k2StepOf(inp){
@@ -6417,8 +6433,8 @@ document.addEventListener('click', e=>{
   const A=K3A[it.dataset.sys], t=it.dataset.type, s=it.dataset.seg;
   if(sb){ const inp=sb.parentElement.querySelector('.k-num'), k=inp.dataset.key, st=K3_STEP[k]||1;
     let v=parseFloat(String(inp.value).replace(',','.')); if(!isFinite(v)) v=0; v=Math.round((v+(+sb.dataset.d)*st)*1000)/1000;
-    inp.value=v; k3Set(it,k,v); k3Refresh(it,inp); }
-  else if(ang){ k3Set(it,'alpha',+ang.dataset.a); k3Refresh(it); }
+    inp.value=v; k3Set(it,k,v); k3RefreshAll(it,inp); }
+  else if(ang){ k3Set(it,'alpha',+ang.dataset.a); k3RefreshAll(it); }
   else if(md){ const l=k3Item(it); if(!l) return; l.trap = md.dataset.uni!=='1'; if(!l.trap) A.upd(t,l.id,'qb',k3Vals(l).qa,s); A.render(t,s); A.after(); }
   else if(op){ const k=op.dataset.key, v=k==='member' ? op.dataset.v : +op.dataset.v; A.upd(t,+it.dataset.id,k,v,s); A.render(t,s); A.after(); }
   else if(tg){ A.tog(t,+it.dataset.id,s); }
@@ -6429,7 +6445,7 @@ document.addEventListener('click', e=>{
 document.addEventListener('input', e=>{
   const t=e.target; if(!t.dataset || !t.dataset.key || t.tagName!=='INPUT') return; const it=t.closest('.k-row'); if(!it) return;
   const v=parseFloat(String(t.value).replace(',','.')); if(!isFinite(v)) return;
-  k3Set(it, t.dataset.key, v); k3Refresh(it, t);
+  k3Set(it, t.dataset.key, v); k3RefreshAll(it, t);
 }, true);
 document.addEventListener('change', e=>{
   const t=e.target; if(!t.classList || !t.classList.contains('k-sel')) return; const it=t.closest('.k-row'); if(!it) return;
@@ -6448,7 +6464,7 @@ document.addEventListener('pointercancel', ()=>{ if(_k3sw){ const it=_k3sw.h.clo
 // Schieber-Höchstwert folgt der Länge (Stützweite, Feld, Stab)
 function k3Lmax(){ document.querySelectorAll('.k-row').forEach(it=>{ const r=it.querySelectorAll('.k-rng[data-lmax]'); if(!r.length) return; const l=k3Item(it); if(!l) return;
   const L=K3A[it.dataset.sys].len(it.dataset.type, l, it.dataset.seg); r.forEach(x=>{ if(+x.max!==L) x.max=L; }); }); }
-function k2All(){ if(_k2Busy) return; _k2Busy=true; try{ k2Merge(); k2MergeCont(); k2Steppers(); k2Angles(); k2Chips(); k2Sum(); k2Bar(); k3Lmax(); } finally { k2Obs.takeRecords(); _k2Busy=false; } }
+function k2All(){ if(_k2Busy) return; _k2Busy=true; try{ k2Merge(); k2MergeCont(); k2Steppers(); k2Angles(); k2Chips(); k2Sum(); k2Bar(); k3Lmax(); k4SizeBtns(); k4Slot(); k4Mark(); k4Panel(); k4PanelTx(); } finally { k2Obs.takeRecords(); _k2Busy=false; } }
 const k2Obs = new MutationObserver(()=>{ if(_k2Busy) return; cancelAnimationFrame(_k2T); _k2T=requestAnimationFrame(k2All); });
 ['tab-beam','tab-cantilever','tab-cont','tab-frame'].forEach(id=>k2Obs.observe(document.getElementById(id), {childList:true, subtree:true, characterData:true}));
 k2Obs.observe(document.body, {attributes:true, attributeFilter:['class']});
@@ -6457,6 +6473,125 @@ if(typeof IntersectionObserver==='function') document.querySelectorAll('.results
   new IntersectionObserver(es=>{ K2_VIS[t]=es[0].isIntersecting; k2Bar(); }).observe(g); });
 (()=>{ const o=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); k2All(); return r; }; })();
 (()=>{ const o=window.showTab; window.showTab=function(...a){ const r=o.apply(this,a); k2All(); return r; }; })();
+// ══════════════════════════════════════════════════
+// Bedienung (calc v0.9.5): (1) „Nachweis in size“ direkt unter den Ergebnissen, (2) Lasten in der Skizze antippen
+// und unter der Skizze bearbeiten, auf den Träger tippen setzt eine neue Einzellast, (3) Eingaben laufend als Entwurf sichern.
+// ══════════════════════════════════════════════════
+const K4T = {
+  de:{ toSize:'Nachweis in size', toSizeS:'übernimmt M, V und N dieser Berechnung', hint:'Tippe in die Skizze: auf eine Last zum Bearbeiten, auf den Träger für eine neue Einzellast.', close:'Schließen', draft:'Eingaben werden automatisch gesichert.', reset:'Neu beginnen', resetQ:'Wirklich zurücksetzen?' },
+  en:{ toSize:'Design check in size', toSizeS:'takes M, V and N of this calculation', hint:'Tap the sketch: a load to edit it, the beam to place a new point load.', close:'Close', draft:'Inputs are saved automatically.', reset:'Start over', resetQ:'Really reset?' },
+  fr:{ toSize:'Vérification dans size', toSizeS:'reprend M, V et N de ce calcul', hint:'Touchez le schéma : une charge pour la modifier, la poutre pour placer une charge ponctuelle.', close:'Fermer', draft:'Les saisies sont enregistrées automatiquement.', reset:'Recommencer', resetQ:'Vraiment réinitialiser ?' },
+  es:{ toSize:'Comprobación en size', toSizeS:'toma M, V y N de este cálculo', hint:'Toca el esquema: una carga para editarla, la viga para colocar una carga puntual.', close:'Cerrar', draft:'Los datos se guardan automáticamente.', reset:'Empezar de nuevo', resetQ:'¿Restablecer de verdad?' } };
+const k4 = k => (K4T[calcLang]||K4T.en)[k];
+// (1) Nachweis in size: aktuelle Berechnung (falls nötig) in „Meine Projekte“ legen und size damit öffnen
+function k4ToSize(){
+  const t=curTab(); if(t==='saved') return;
+  try{ liveCalc(true); }catch(e){}
+  let e = window.projSavedKey ? window.projSavedKey(t) : null;
+  if(!e){ navSave(); e = window.projSavedKey ? window.projSavedKey(t) : null; }
+  if(e) location.href='size.html#calc='+encodeURIComponent(e.key);
+}
+function k4SizeBtns(){
+  ['beam','cantilever','cont','frame'].forEach(t=>{
+    const res=document.getElementById({beam:'beam-results',cantilever:'cant-results',cont:'cont-results',frame:'frame-results'}[t]); if(!res) return;
+    let b=res.nextElementSibling; if(!b || !b.classList.contains('k-tosize')){ b=document.createElement('button'); b.type='button'; b.className='k-tosize'; b.onclick=k4ToSize;
+      b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span class="k-ts-tx"><b></b><small></small></span><span class="k-ts-ar" aria-hidden="true">→</span>';
+      res.after(b); }
+    k2Tx(b.querySelector('b'), k4('toSize')); k2Tx(b.querySelector('small'), k4('toSizeS'));
+    b.hidden = res.classList.contains('hidden');
+  });
+}
+// (2) Last auswählen: Bearbeitung direkt unter der Skizze
+const K4SEL = { beam:null, cantilever:null };
+const K4GEO = { beam:{svg:'beam-svg', x0:30, x1:290, bY:70}, cantilever:{svg:'cant-svg', x0:50, x1:290, bY:70} };
+function k4Select(t, type, id){ const s=K4SEL[t]; K4SEL[t] = (s && s.type===type && s.id===id) ? null : {type, id}; k2All(); }
+function k4Desel(t){ K4SEL[t]=null; k2All(); }
+function k4Slot(){
+  Object.keys(K4SEL).forEach(t=>{
+    const sys=K2SYS[t], chips=document.querySelector('#tab-'+t+' .k-chips'); if(!chips) return;
+    let hint=chips.nextElementSibling; if(!hint || !hint.classList.contains('k-taphint')){ hint=document.createElement('div'); hint.className='k-taphint'; chips.after(hint); }
+    k2Tx(hint, k4('hint'));
+    let slot=hint.nextElementSibling; if(!slot || !slot.classList.contains('k-edit')){ slot=document.createElement('div'); slot.className='k-edit'; hint.after(slot); }
+    const s=K4SEL[t], list=s ? loads[sys][s.type] : null, i=list ? list.findIndex(l=>l.id===s.id) : -1;
+    if(!s || i<0){ if(s) K4SEL[t]=null; if(slot.innerHTML){ slot.innerHTML=''; slot._k=''; } return; }
+    const l=list[i], key=[s.type, s.id, l.enabled, !!l.trap, k3L(sys), calcLang, i].join('|');
+    if(slot._k!==key){ slot._k=key;
+      slot.innerHTML=`<div class="load-item cmp k-row k-${K3_TONE[s.type]} open k-slot${l.enabled?'':' disabled'}" data-sys="${sys}" data-type="${s.type}" data-id="${l.id}">
+        <div class="load-item-header" role="button" tabindex="0" aria-label="${k4('close')}" onclick="k4Desel('${t}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();k4Desel('${t}')}">
+          <div class="load-item-label">${K3_ICON[s.type]}<b>${k3Name(sys,s.type,i)}</b><span class="load-sum"></span></div><span class="k-slot-x" aria-hidden="true">✕</span></div>
+        <div class="load-item-body">${k3Body(sys,s.type,l)}</div></div>`; }
+    k3Refresh(slot.querySelector('.k-row'));
+  });
+}
+function k4Mark(){
+  Object.keys(K4SEL).forEach(t=>{
+    const g=K4GEO[t], svg=document.getElementById(g.svg); if(!svg) return; const sys=K2SYS[t], s=K4SEL[t];
+    svg.querySelectorAll('.k-selmark').forEach(m=>m.remove());
+    document.querySelectorAll('#tab-'+t+' .k-chip').forEach(c=>{ const on=!!s && c.dataset.type===s.type && (loads[sys][s.type][+c.dataset.i]||{}).id===s.id; c.setAttribute('aria-pressed', on?'true':'false'); });
+    if(!s) return; const l=(loads[sys][s.type]||[]).find(x=>x.id===s.id); if(!l || !l.enabled) return;
+    const L=k3L(sys), X=a=>g.x0+Math.min(Math.max(a/L,0),1)*(g.x1-g.x0), v=l.values;
+    const m = s.type==='dist' ? `<rect class="k-selmark" x="${X(v.a)}" y="${g.bY-50}" width="${Math.max(4,X(v.b)-X(v.a))}" height="50" rx="4" fill="#5468ad" opacity=".13"/>`
+      : `<rect class="k-selmark" x="${X(v.a)-11}" y="${g.bY-62}" width="22" height="74" rx="6" fill="${s.type==='point'?'#e8590c':'#3d3f45'}" opacity=".14"/>`;
+    svg.insertAdjacentHTML('afterbegin', m);
+  });
+}
+Object.entries(K4GEO).forEach(([t,g])=>{
+  const svg=document.getElementById(g.svg); if(!svg) return; svg.classList.add('k-tap');
+  svg.addEventListener('click', e=>{
+    if(document.body.classList.contains('uebung')) return;
+    const sys=K2SYS[t], L=k3L(sys), ctm=svg.getScreenCTM(); if(!ctm) return;
+    const pt=svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY; const p=pt.matrixTransform(ctm.inverse());
+    const X=a=>g.x0+Math.min(Math.max(a/L,0),1)*(g.x1-g.x0), cand=[];
+    ['point','horiz'].forEach(type=>loads[sys][type].forEach(l=>{ const d=Math.abs(p.x-X(l.values.a||0)); if(d<=12 && p.y<g.bY+14) cand.push({type, id:l.id, d}); }));
+    if(!cand.length) loads[sys].dist.forEach(l=>{ const xa=X(l.values.a), xb=X(l.values.b); if(p.x>=xa-4 && p.x<=xb+4 && p.y<g.bY && p.y>g.bY-55) cand.push({type:'dist', id:l.id, d:0}); });
+    if(cand.length){ cand.sort((a,b)=>a.d-b.d); k4Select(t, cand[0].type, cand[0].id); return; }
+    if(Math.abs(p.y-(g.bY+4))<=16 && p.x>=g.x0-6 && p.x<=g.x1+6){   // auf den Träger: neue Einzellast an dieser Stelle
+      const a=Math.min(L, Math.max(0, Math.round((p.x-g.x0)/(g.x1-g.x0)*L*4)/4));
+      addLoad(sys,'point'); const nl=loads[sys].point[loads[sys].point.length-1]; nl.values.a=a; renderLoads(sys,'point'); sys==='beam'?drawBeam():drawCantilever();
+      K4SEL[t]={type:'point', id:nl.id}; _userAct=Date.now(); liveCalc(); k2All();
+    }
+  });
+});
+// (3) Entwurf: Eingaben aller Bereiche laufend sichern und beim nächsten Öffnen wiederherstellen
+const K4_DRAFT='muly-calc-entwurf';
+function k4Inputs(){ const o={}; ['tab-beam','tab-cantilever','tab-cont','tab-frame'].forEach(id=>document.querySelectorAll('#'+id+' input[id], #'+id+' select[id]').forEach(e=>{ o[e.id] = e.type==='checkbox' ? e.checked : e.value; })); return o; }
+function k4Snap(){ return { v:1, tab:curTab(), inputs:k4Inputs(), loads:{beam:loads.beam, cant:loads.cant}, spanData, contCfg,
+  frame:{ supportA, supportB, supportHead, supportHeadType, frameHinges, frameLoads } }; }
+let _k4T=0, _k4Off=false;
+function k4Save(now){ if(_k4Off) return; clearTimeout(_k4T); const run=()=>{ try{ localStorage.setItem(K4_DRAFT, JSON.stringify(k4Snap())); }catch(e){} }; now===true ? run() : (_k4T=setTimeout(run, 600)); }
+function k4Restore(){
+  let d=null; try{ d=JSON.parse(localStorage.getItem(K4_DRAFT)||'null'); }catch(e){} if(!d || d.v!==1) return false;
+  try{
+    Object.entries(d.inputs||{}).forEach(([id,v])=>{ const e=document.getElementById(id); if(!e) return; if(e.type==='checkbox') e.checked=!!v; else e.value=v; });
+    ['beam','cant'].forEach(s=>['point','dist','horiz'].forEach(t=>{ if(d.loads && d.loads[s] && Array.isArray(d.loads[s][t])) loads[s][t]=d.loads[s][t]; }));
+    if(Array.isArray(d.spanData) && d.spanData.length>=2){ spanData=d.spanData; numSpans=spanData.length; }
+    if(d.contCfg) contCfg=d.contCfg;
+    const f=d.frame||{};
+    if(Array.isArray(f.frameHinges)) frameHinges=f.frameHinges; if(f.frameLoads) frameLoads=f.frameLoads;
+    const ids=[]; const walk=x=>{ if(Array.isArray(x)) x.forEach(walk); else if(x && typeof x==='object'){ if(typeof x.id==='number') ids.push(x.id); Object.values(x).forEach(walk); } };
+    walk([loads, spanData, contCfg, frameHinges, frameLoads]); uid=Math.max(uid, ...ids, 0)+1;
+    ['point','dist','horiz'].forEach(t=>{ renderLoads('beam',t); renderLoads('cant',t); });
+    const sc=document.getElementById('span-count-display'); if(sc) sc.textContent=numSpans;
+    const bm=document.getElementById('btn-span-minus'), bp=document.getElementById('btn-span-plus'); if(bm) bm.disabled=numSpans<=2; if(bp) bp.disabled=numSpans>=MAX_SPANS;
+    renderContUI();
+    if(f.supportA) setSupportA(f.supportA); if(f.supportB) setSupportB(f.supportB);
+    if(f.supportHead) setHeadSupport('pos', f.supportHead); if(f.supportHeadType) setHeadSupport('type', f.supportHeadType);
+    renderFrameLoads('vert'); renderFrameLoads('horiz'); renderFrameHinges(); updateIndetInfo();
+    if(typeof updatePresetButtons==='function') updatePresetButtons();
+    drawBeam(); drawCantilever(); drawContinuous(); drawFrame();
+    if(!location.hash && ['beam','cantilever','cont','frame'].includes(d.tab) && d.tab!==curTab()) showTab(d.tab);
+    return true;
+  }catch(e){ try{ localStorage.removeItem(K4_DRAFT); }catch(_){} return false; }
+}
+function k4Reset(b){ if(b && !b.classList.contains('armed')){ b.classList.add('armed'); b.textContent=k4('resetQ'); setTimeout(()=>{ b.classList.remove('armed'); b.textContent=k4('reset'); }, 3000); return; } _k4Off=true; try{ localStorage.removeItem(K4_DRAFT); }catch(e){} location.hash=''; location.reload(); }
+function k4Panel(){ const x=document.getElementById('pp-extra'); if(!x || x.querySelector('.k-draft')) return;
+  x.insertAdjacentHTML('afterbegin', `<div class="k-draft"><span></span><button type="button" class="pp-btn small danger" onclick="event.stopPropagation(); k4Reset(this)"></button></div>`); }
+function k4PanelTx(){ const x=document.querySelector('#pp-extra .k-draft'); if(!x) return; k2Tx(x.querySelector('span'), k4('draft')); const b=x.querySelector('button'); if(!b.classList.contains('armed')) k2Tx(b, k4('reset')); }
+if(k4Restore()) liveCalc(true);
+['input','change'].forEach(ev=>document.addEventListener(ev, e=>{ if(e.target.closest && e.target.closest('.main') && !e.target.closest('#tab-saved')) k4Save(); }));
+document.addEventListener('click', e=>{ if(e.target.closest && e.target.closest('.main') && !e.target.closest('#tab-saved')) k4Save(); });
+addEventListener('pagehide', ()=>k4Save(true)); document.addEventListener('visibilitychange', ()=>{ if(document.hidden) k4Save(true); });
+(()=>{ const o=window.showTab; window.showTab=function(...a){ const r=o.apply(this,a); k4Save(); return r; }; })();
 k2All();
 }
 </script>

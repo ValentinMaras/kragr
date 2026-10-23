@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.6.3 -->
+<!-- kragr·size v0.6.4 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -2780,7 +2780,7 @@ const I18N = { "de": {
 "mlPick":"Baustoff wählen",
 "ppCur":"Aktuelle Berechnung",
 "ppList":"Gespeichert",
-"ppNew":"Noch nicht gespeichert",
+"ppNew":"Noch nicht in „Meine Projekte“",
 "ppSaved":"Gespeichert · {0}",
 "ppChanged":"Geändert — noch nicht gespeichert",
 "mobBadS":"{0} nicht erfüllt",
@@ -3230,7 +3230,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.6.3';
+const SIZE_VERSION = '0.6.4';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════

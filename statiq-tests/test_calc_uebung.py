@@ -45,6 +45,7 @@ async def main():
         await pg.goto(B+'size.html'); await pg.wait_for_timeout(400)
         check('gleicher Schalter: size startet ebenfalls im Übungsmodus', await pg.evaluate("document.body.classList.contains('uebung')"))
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(500)
+        await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(400)   # seit v0.9.5 öffnet calc den zuletzt benutzten Bereich (Entwurf)
         t=await pg.evaluate("document.querySelector('#tab-beam .col-out').innerText")
         check('EN: Übungsmodus übersetzt', 'numbers hidden' in t and 'Next step' in t and 'Übung' not in t, t[:80])
         await pg.click('#tab-beam .ueb-tog'); await pg.wait_for_timeout(400)

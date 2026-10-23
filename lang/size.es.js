@@ -675,7 +675,7 @@ window.MULY_LANG = {
 "ciPart":"Elemento del pórtico",
 "ciRiegel":"Dintel",
 "cibClose":"Cerrar aviso",
-"cibSaved":"Guardado en «Mis proyectos» como «{0}».",
+"cibSaved":"Guardado automáticamente en {1} como «{0}».",
 "cibPick":"Cálculo guardado de calc:",
 "cibNone":"Todavía no hay ningún cálculo guardado en calc.",
 "cibCalc":"Abrir calc",

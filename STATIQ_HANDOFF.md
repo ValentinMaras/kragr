@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.7 · ref v0.3.43 · size v0.6.7 · projekt v0.1.14 · rechtliches v0.1.12 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.10.0 · ref v0.3.43 · size v0.7.0 · projekt v0.1.16 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.7, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.14, Test von Variante C)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.10.0, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.16, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.6.7, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.7.0, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -567,6 +567,36 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Position als roter Faden — calc v0.10.0 · size v0.7.0 · projekt v0.1.16 (Pencil: v0.1.15)
+
+Valentin: Navigation fühlt sich „seltsam und nicht intuitiv“ an. Gewählt (Rückfrage): **„Position als roter Faden“** — alles gehört zu einer Position, gespeichert wird automatisch. Mittlere Stelle von calc (0.10) und size (0.7) wegen des Umbaus hochgezählt (angekündigt).
+
+**Modell**
+- `statiq-projekt` = `{name?, pos:[{id, nr, title, auto}], asg:{itemId: posId|null}, cur}`. Je Position genau **ein System**: `statiq_sdf_pos_<id>` (calc). Nachweise in `statiq-size-positionen` (wie bisher, nach Name), Zuordnung über `asg['s:<Name>']` oder über `src.key` = System der Position.
+- Standard-Projektname wird nicht gespeichert (folgt der Sprache); eigener Name schon.
+- calc-Entwurf je Position: `muly-calc-entwurf:<id>` (alter Schlüssel `muly-calc-entwurf` wird einmalig in die erste Position übernommen, nur wenn es genau eine Position ohne System gibt).
+
+**Gemeinsamer Block `data-pos`** (identisch in calc und size, `<style data-pos>` + `<script data-pos>`, danach `#k-posbar` als feste Zeile nach der Kopfzeile + `<script data-pos-early>`, damit nichts springt)
+- `window.mulyPos`: `proj, ensure, cur, sysKey, sysOf, checks, stale, setCur, add, setTitle(id, title, auto), assign, render, toggle, open, t`.
+- Die Seite arbeitet bis zum Neuladen in der Position, mit der sie geöffnet wurde (`PAGE` in `cur()`); `add()` macht die neue Position **nicht** aktuell, das passiert erst in `switchTo` nach `beforeSwitch` (sonst landete der Stand der alten Position in der neuen — Fehler im ersten Wurf).
+- Kopfzeilen-Knopf `#proj-btn` zeigt „Pos. N · Titel“ (am Handy Symbol), kein Speicherpunkt mehr. Fenster `#pos-panel`: Projektname, Positionen mit Status (erfüllt / nicht erfüllt / neu rechnen), „＋ Neue Position“, „Alle Positionen in ‚Meine Projekte‘ →“, Version (`#pos-ver`).
+- Leiste `#k-posbar`: „Pos. N Titel ▾ · System · Nachweise n“ (Schritte als Links calc/size).
+- Altes Projekt-Fenster `#proj-panel` bleibt verborgen im HTML (`hidden`); `mulyAltProj()` öffnet es noch (für ältere Tests/Übergang). `.col-out .save-btn` ausgeblendet.
+- Seiten melden sich mit `window.mulyPosPage = {type, beforeSwitch, afterSwitch}`.
+
+**calc**
+- `saveCalc(sys, opt)` / `saveFrameCalc(opt)` mit `{key, quiet}`. `k7SaveSys(now)` sichert das System 1 s nach jeder Änderung in `statiq_sdf_pos_<id>`, setzt den Positionstitel automatisch (nur solange `auto`). Unverändertes System (ohne Zeitstempel und Skizze verglichen) behält seinen Zeitstempel, sonst stünden die Nachweise grundlos auf „neu rechnen“.
+- `k4ToSize` nutzt den Schlüssel der Position. Ansicht „Gespeichert“ ist aus der Navigation verschwunden (nur noch `calc.html#report=` für lose, alte Berechnungen aus „Meine Projekte“). „Neu beginnen“ = „＋ Neue Position“.
+
+**size** (`<script data-pos-size>`, `window.mulyK8`)
+- Karte `#k-poscard` „Nachweise dieser Position“ unter der Auswahl: Liste (Tipp lädt; veraltete mit `data-stale` rechnen per Tipp mit dem aktuellen System neu), „In Pos. N aufnehmen“ für Eingaben ohne Position (Name aus Bereich · Nachweis statt Beispielname „Pos. 4 — …“; Positionstitel aus dem Nachweis, solange kein System da ist), „＋ Nachweis aus dem System“ (gleiche realistische Auswahl wie in calc).
+- Der geladene Nachweis wird 0,9 s nach jeder Änderung automatisch gespeichert (Umbenennen inklusive); anderer Nachweis gewählt → nicht überschreiben.
+- Leere neue Position: gleicher Nachweis mit Startwerten. Nach `#calc=`/`#pos=` kein automatisches Laden des ersten Nachweises (`__k8NoAutoLoad`). Stützenfuß aus calc setzt jetzt auch `CI_SRC` (war die einzige Übernahme ohne Quelle). Hinweisleiste: „Automatisch in Pos. N gespeichert als …“.
+
+**projekt v0.1.16** (Übersicht): aktuelle Position umrandet mit Marke „aktuell“; je Position „① System“ (calc) und „② Nachweise“ (size), `openPos(id, href)` macht sie aktuell; „Öffnen“ beim System der Position geht in calc statt in den Bericht; „veraltet“ auch bei gleichem Schlüssel und neuerem Stand; neue Hinweistexte (4 Sprachen). v0.1.15: Stift-Knopf zum Umbenennen neben Projekt- und Positionsnamen (`kRename`).
+
+**Tests:** neu `test_positionen.py` (24); `test_projekt_menue.py` neu geschrieben für das Positions-Menü; angepasst `test_calc_bedienung.py` (Neue Position statt „Neu beginnen“, keine Kopien), `test_calc_ux.py`, `test_design_kragr.py`, `test_navigation.py` (Rahmen in eigener Position), `test_projekt.py`, `test_size_ux.py`; `test_size.py`, `test_size_stahl.py`, `test_size_ext.py`, `test_size_import.py`, `test_size_holz2.py` öffnen das alte Fenster über `mulyAltProj()`.
 
 ## Weg calc → size → Meine Projekte entschlackt — size v0.6.7 · projekt v0.1.14
 
@@ -1173,7 +1203,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1812/1812 grün** (inklusive `test_navigation.py` 11, `test_calc_bedienung.py` 30, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1829/1829 grün** (inklusive `test_positionen.py` 24, `test_navigation.py` 11, `test_calc_bedienung.py` 30, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 9, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

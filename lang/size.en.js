@@ -686,7 +686,7 @@ window.MULY_LANG = {
 "ciPart":"Frame member",
 "ciRiegel":"Beam",
 "cibClose":"Close note",
-"cibSaved":"Saved in “My projects” as “{0}”.",
+"cibSaved":"Saved automatically in {1} as “{0}”.",
 "cibPick":"Saved calculation from calc:",
 "cibNone":"No calculation saved in calc yet.",
 "cibCalc":"Open calc",

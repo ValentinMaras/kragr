@@ -1,4 +1,4 @@
-# Weg calc → size → „Meine Projekte“ ohne Umwege (size v0.6.7 · projekt v0.1.14): nach „Nachweis in size“ kein Projekt-Fenster,
+# Weg calc → size → „Meine Projekte“ ohne Umwege (size v0.6.7 · projekt v0.1.14; seit calc v0.10.0/size v0.7.0 je Position ein System): nach „Nachweis in size“ kein Projekt-Fenster,
 # sondern eine Hinweisleiste; der Nachweis wird gleich als Position gespeichert (Name aus calc und Nachweis); „Aus calc
 # übernehmen“ zeigt die gespeicherten Berechnungen direkt unter dem Knopf; „→ size“ ohne Ziel wählt einen passenden Nachweis;
 # „Meine Projekte“ bündelt calc-Berechnung und Nachweis automatisch zu einer Position. Ohne Playwright: SKIP.
@@ -17,15 +17,16 @@ async def main():
         ctx=await br.new_context(viewport={'width':390,'height':844}); pg=await ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
         await pg.click('#tab-beam .k-tosize'); await pg.click('#tab-beam .k-tsm-i[data-ziel="stahl.traeger"]'); await pg.wait_for_url('**/size.html*'); await pg.wait_for_timeout(1500)
-        r=await pg.evaluate("[$('proj-panel').classList.contains('open'), $('ci-banner')?.innerText||'', $('proj-btn').dataset.st, $('sn-name').value, posRead().map(p=>p.name)]")
+        r=await pg.evaluate("[$('pos-panel')?.classList.contains('open')||false, $('ci-banner')?.innerText||'', mulyPos.checks(mulyPos.cur().id).length, $('sn-name').value, posRead().map(p=>p.name)]")
         check('nach „Nachweis in size“: kein Projekt-Fenster, Hinweisleiste mit den übernommenen Werten', r[0]==False and 'Übernommen aus calc: Einfeldträger L=5m' in r[1] and 'My,Ed = 28,1 kNm' in r[1], r[:2])
-        check('Nachweis gleich als Position gespeichert: „Einfeldträger L=5m — Stahl · Träger / Stütze“', r[2]=='saved' and r[3]=='Einfeldträger L=5m — Stahl · Träger / Stütze' and r[4]==[r[3]] and 'In „Meine Projekte“ gespeichert als' in r[1], r[2:])
+        check('Nachweis gleich in Pos. 1 gespeichert: „Einfeldträger L=5m — Stahl · Träger / Stütze“', r[2]==1 and r[3]=='Einfeldträger L=5m — Stahl · Träger / Stütze' and r[4]==[r[3]] and 'Automatisch in Pos. 1 gespeichert als' in r[1], r[2:])
         await pg.click('#ci-banner .cib-x'); check('Hinweisleiste lässt sich schließen', not await pg.evaluate("!!$('ci-banner')"))
         # derselbe Weg noch einmal: keine zweite Position
         await pg.goto(B+'calc.html'); await pg.wait_for_timeout(800); await pg.click('#tab-beam .k-tosize'); await pg.click('#tab-beam .k-tsm-i[data-ziel="stahl.traeger"]'); await pg.wait_for_url('**/size.html*'); await pg.wait_for_timeout(1200)
         check('gleiche Berechnung, gleicher Nachweis: Position wird aktualisiert, nicht verdoppelt', await pg.evaluate("posRead().length")==1)
-        # Rahmen: Stiel als Holzstütze
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(800); await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(700)
+        # Rahmen: Stiel als Holzstütze — in einer neuen Position (je Position ein System)
+        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(800); await pg.click('#proj-btn'); await pg.click('#pos-panel .kp-add'); await pg.wait_for_timeout(1500)
+        await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(1500)
         await pg.click('#tab-frame .k-tosize'); await pg.click('#tab-frame .k-tsm-i[data-ziel="holz.bauteil"][data-part="stiel"]'); await pg.wait_for_url('**/size.html*'); await pg.wait_for_timeout(1500)
         r=await pg.evaluate("[$('ho-name').value, +$('ho-N').value, posRead().length]")
         check('Rahmen-Stiel als Holzstütze: Name mit „Stiel“, N = 25 kN, zweite Position', r[0].startswith('Rahmen') and ' · Stiel — Holz' in r[0] and r[1]==25 and r[2]==2, r)
@@ -36,14 +37,13 @@ async def main():
         r=await pg.evaluate("[...document.querySelectorAll('.card:has(.card-title[data-i18n=\"z045\"]) .kci-i')].map(b=>b.innerText.replace(/\\s+/g,' '))")
         check('„Aus calc übernehmen“: Rahmen (Riegel, Stiel) und Einfeldträger als Liste unter dem Knopf', len(r)==3 and r[0].startswith('Rahmen') and 'Riegel' in r[0] and 'Stiel' in r[1] and r[2].startswith('Einfeldträger L=5m'), r)
         await pg.click('.card:has(.card-title[data-i18n="z045"]) .kci-i >> nth=2'); await pg.wait_for_timeout(900)
-        r=await pg.evaluate("[$('proj-panel').classList.contains('open'), +$('in-M').value, $('ci-banner')?.innerText.includes('Übernommen aus calc: Einfeldträger L=5m')]")
+        r=await pg.evaluate("[$('pos-panel')?.classList.contains('open')||false, +$('in-M').value, $('ci-banner')?.innerText.includes('Übernommen aus calc: Einfeldträger L=5m')]")
         check('ein Tipp übernimmt M = 28,13 kNm in den Stahlbetonbalken, Hinweisleiste statt Fenster', r==[False,28.13,True], r)
         # „→ size“ im Projekt-Fenster von calc, während size auf Wasserbau steht
         await pg.evaluate("setMat('wasser')"); await pg.wait_for_timeout(400)
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(800); await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(400)
-        await pg.click('#proj-btn'); await pg.wait_for_timeout(200); await pg.click('#pp-list a.pp-btn >> nth=-1'); await pg.wait_for_url('**/size.html*'); await pg.wait_for_timeout(1500)
+        k1=await pg.evaluate("mulyPos.sysKey(mulyPos.proj().pos[0].id)"); await pg.goto(B+'calc.html'); await pg.wait_for_timeout(600); await pg.goto(B+'size.html#calc='+k1); await pg.wait_for_timeout(1500)
         r=await pg.evaluate("[MAT, TYP, +$('in-M').value]")
-        check('„→ size“ aus dem calc-Fenster bei Wasserbau: wechselt auf Stahlbeton Balken und übernimmt', r==['beton','balken',28.13], r)
+        check('size.html#calc= ohne Ziel bei Wasserbau: wechselt auf Stahlbeton Balken und übernimmt', r==['beton','balken',28.13], r)
         # Meine Projekte: automatisch gebündelt
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(800)
         r=await pg.evaluate("[proj().pos.map(q=>q.title), document.getElementById('loose').innerText]")

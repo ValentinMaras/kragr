@@ -109,7 +109,7 @@ async def main():
             await pg.evaluate(f"setHoMode('{m}'); run(); showReport()"); rp=await pg.inner_text('#report')
             check(f'Bericht {m}', word in rp and 'eingaben' in rp.lower())
         await pg.evaluate("document.body.classList.remove('show-report')")
-        await pg.evaluate("setHoMode('sattel'); $('sd-name').value='Binder Test'; run(); openProj(); savePos()")
+        await pg.evaluate("setHoMode('sattel'); $('sd-name').value='Binder Test'; run(); mulyAltProj(); savePos()")
         lst=await pg.evaluate("posRead().map(p=>[p.name,p.typ])")
         check('Position Satteldach gespeichert (typ holz_sattel)', ['Binder Test','holz_sattel'] in lst, lst)
         await pg.evaluate("setHoMode('versatz'); $('vs-tv').value=33; run(); save()"); await pg.reload(); await pg.wait_for_timeout(200)

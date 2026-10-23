@@ -675,7 +675,7 @@ window.MULY_LANG = {
 "ciPart":"Élément du portique",
 "ciRiegel":"Traverse",
 "cibClose":"Fermer la note",
-"cibSaved":"Enregistré dans « Mes projets » sous « {0} ».",
+"cibSaved":"Enregistré automatiquement dans {1} sous « {0} ».",
 "cibPick":"Calcul enregistré dans calc :",
 "cibNone":"Aucun calcul encore enregistré dans calc.",
 "cibCalc":"Ouvrir calc",

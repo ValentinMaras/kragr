@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.6.7 -->
+<!-- kragr·size v0.7.0 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -466,6 +466,127 @@ window.mulyProj = {
 <style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #5468ad); }
 </style>
+<style data-pos>
+  /* Positionen als roter Faden (calc v0.10.0 · size v0.7.0): Kopfzeilen-Knopf öffnet die Positionen, Leiste „Position · System · Nachweise“ unter der Kopfzeile */
+  .k-posbar { display:flex; align-items:center; gap:8px; min-height:48px; margin:2px auto 6px; }
+  .k-posbar .kpb-pos { flex:1; min-width:0; display:flex; align-items:center; gap:6px; min-height:40px; padding:0 10px 0 2px; border:0; background:transparent; font:inherit; color:#111114; cursor:pointer; text-align:left; border-radius:10px; }
+  .k-posbar .kpb-pos:hover { background:#f1f2f4; }
+  .kpb-nr { flex:none; font-family:var(--k-mono, monospace); font-size:12px; font-weight:600; color:#5c5e66; padding:3px 7px; border-radius:7px; background:#f1f2f4; }
+  .kpb-t { min-width:0; font-size:15px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kpb-v { flex:none; color:#5c5e66; font-size:11px; }
+  .kpb-steps { flex:none; display:grid; grid-template-columns:auto auto; gap:3px; padding:3px; border-radius:12px; background:#f1f2f4; }
+  .kpb-steps a { display:flex; align-items:center; gap:6px; min-height:34px; padding:0 12px; border-radius:9px; font-size:13.5px; font-weight:600; color:#3d3f45; text-decoration:none; white-space:nowrap; }
+  .kpb-steps a[aria-current="page"] { background:#fff; color:#111114; font-weight:800; box-shadow:0 1px 3px rgba(17,17,20,.12); }
+  .kpb-steps i { font-style:normal; font-family:var(--k-mono, monospace); font-size:11px; font-weight:600; min-width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; border-radius:9px; background:#dfe3f2; color:#5468ad; padding:0 5px; }
+  .kpb-steps i.z { background:#e6e7ea; color:#5c5e66; }
+  @media (max-width:560px) { .k-posbar { flex-wrap:wrap; gap:4px; } .k-posbar .kpb-pos { flex-basis:100%; } .kpb-steps { flex:1; } .kpb-steps a { justify-content:center; } }
+  #pos-panel .pp-sec { padding:10px; }
+  #pos-panel .kp-proj { padding:6px 6px 8px; font-size:12px; font-weight:700; color:#5c5e66; }
+  #pos-panel .kp-item { display:flex; align-items:center; gap:10px; width:100%; min-height:52px; padding:8px 10px; border:0; border-radius:10px; background:transparent; font:inherit; text-align:left; color:#111114; cursor:pointer; }
+  #pos-panel .kp-item:hover { background:#fff; }
+  #pos-panel .kp-item.cur { background:#fff; box-shadow:inset 0 0 0 2px #5468ad; }
+  #pos-panel .kp-nr { flex:none; font-family:var(--k-mono, monospace); font-size:12px; font-weight:600; color:#5c5e66; min-width:44px; }
+  #pos-panel .kp-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px; }
+  #pos-panel .kp-tx b { font-size:14.5px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #pos-panel .kp-tx small { font-size:12px; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #pos-panel .kp-st { flex:none; font-size:11.5px; font-weight:700; border-radius:7px; padding:2px 7px; }
+  #pos-panel .kp-st.ok { background:#e7f5ee; color:#0f6b46; } #pos-panel .kp-st.bad { background:#fdecec; color:#b42318; } #pos-panel .kp-st.old { background:#fdf8e8; color:#7a5a00; }
+  #pos-panel .kp-add { display:flex; align-items:center; justify-content:center; width:100%; min-height:44px; margin-top:6px; border:1.5px dashed #c3c5cc; border-radius:12px; background:transparent; font:inherit; font-size:14.5px; font-weight:600; color:#3d3f45; cursor:pointer; }
+  #pos-panel .kp-add:hover { border-color:#111114; color:#111114; }
+  #proj-btn .pb-dot { display:none !important; }   /* gespeichert wird automatisch: kein oranger Punkt mehr */
+  .col-out .save-btn { display:none !important; }
+  .k-poscard { display:flex; flex-direction:column; gap:6px; }
+  .k-poscard .kpc-h { font-size:15px; font-weight:800; margin-bottom:2px; }
+  .kpc-i { display:flex; align-items:center; gap:10px; width:100%; min-height:48px; padding:6px 12px; border:0; border-radius:12px; background:#fff; font:inherit; text-align:left; color:#111114; cursor:pointer; }
+  .kpc-i.cur { box-shadow:inset 0 0 0 2px #5468ad; }
+  .kpc-i .kpc-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px; } .kpc-i b { font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .kpc-i small { font-size:12px; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kpc-e { flex:none; font-family:var(--k-mono, monospace); font-size:12.5px; font-weight:600; border-radius:7px; padding:2px 7px; }
+  .kpc-e.ok { background:#e7f5ee; color:#0f6b46; } .kpc-e.bad { background:#fdecec; color:#b42318; } .kpc-e.old { background:#fdf8e8; color:#7a5a00; }
+  .kpc-loose { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 12px; border-radius:12px; background:#fdf8e8; font-size:13px; color:#3d3f45; }
+  .kpc-loose button, .kpc-add { border:0; border-radius:10px; min-height:38px; padding:0 14px; background:#111114; color:#fff; font:inherit; font-size:13.5px; font-weight:700; cursor:pointer; }
+  .kpc-add { width:100%; min-height:44px; background:transparent; color:#3d3f45; border:1.5px dashed #c3c5cc; font-size:14.5px; font-weight:600; }
+  .kpc-more { font-size:12.5px; color:#5c5e66; }
+  .kpc-menu { display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 6px 20px rgba(17,17,20,.10); }
+  .kpc-menu[hidden] { display:none; }
+  .kpc-menu button { min-height:44px; padding:0 10px; border:0; border-radius:8px; background:transparent; font:inherit; font-size:14.5px; font-weight:600; text-align:left; cursor:pointer; color:#111114; } .kpc-menu button:hover { background:#f1f2f4; }
+  .kpc-menu .kpc-g { padding:8px 10px 2px; font-size:12.5px; font-weight:800; }
+  @media print { .k-posbar { display:none !important; } }
+</style>
+<script data-pos>
+// Positionen als roter Faden (calc v0.10.0 · size v0.7.0): Alles gehört zu einer Position des Projekts. calc ist das System der Position,
+// size sind ihre Nachweise. Speichern geschieht automatisch. Ablage wie bisher: Projekt „statiq-projekt“ (pos, asg, neu: cur = aktuelle Position,
+// auto = Titel folgt dem System), System der Position „statiq_sdf_pos_<id>“, Nachweise „statiq-size-positionen“ (Zuordnung über asg bzw. calc-Quelle).
+(function(){
+  var PSTORE='statiq-projekt', POS_STORE='statiq-size-positionen';
+  var T={ de:{ proj:'Mein Projekt', newPos:'Neue Position', add:'＋ Neue Position', all:'Alle Positionen in „Meine Projekte“ →', sys:'System', checks:'Nachweise', noSys:'noch kein System', n0:'noch kein Nachweis', n1:'1 Nachweis', nN:'{0} Nachweise', ok:'erfüllt', bad:'nicht erfüllt', old:'neu rechnen', title:'Position wechseln', cur:'Aktuelle Position', here:'Nachweise dieser Position', loose:'Diese Eingaben gehören noch zu keiner Position.', take:'In Pos. {0} aufnehmen', fromSys:'＋ Nachweis aus dem System', more:'Weitere Nachweise: oben im Auswahlmenü wählen und in die Position aufnehmen.', noneHere:'Noch kein Nachweis in dieser Position.' },
+          en:{ proj:'My project', newPos:'New item', add:'＋ New item', all:'All items in “My projects” →', sys:'System', checks:'Checks', noSys:'no system yet', n0:'no check yet', n1:'1 check', nN:'{0} checks', ok:'satisfied', bad:'not satisfied', old:'recalculate', title:'Switch item', cur:'Current item', here:'Checks of this item', loose:'These inputs do not belong to an item yet.', take:'Add to item {0}', fromSys:'＋ Check from the system', more:'More checks: choose in the menu above and add them to the item.', noneHere:'No check in this item yet.' },
+          fr:{ proj:'Mon projet', newPos:'Nouvelle position', add:'＋ Nouvelle position', all:'Toutes les positions dans « Mes projets » →', sys:'Système', checks:'Vérifications', noSys:'pas encore de système', n0:'pas encore de vérification', n1:'1 vérification', nN:'{0} vérifications', ok:'vérifiée', bad:'non vérifiée', old:'à recalculer', title:'Changer de position', cur:'Position actuelle', here:'Vérifications de cette position', loose:'Ces saisies n’appartiennent encore à aucune position.', take:'Ajouter à la pos. {0}', fromSys:'＋ Vérification à partir du système', more:'Autres vérifications : choisir dans le menu en haut et les ajouter à la position.', noneHere:'Pas encore de vérification dans cette position.' },
+          es:{ proj:'Mi proyecto', newPos:'Nueva posición', add:'＋ Nueva posición', all:'Todas las posiciones en «Mis proyectos» →', sys:'Sistema', checks:'Comprobaciones', noSys:'aún sin sistema', n0:'aún sin comprobación', n1:'1 comprobación', nN:'{0} comprobaciones', ok:'cumple', bad:'no cumple', old:'recalcular', title:'Cambiar de posición', cur:'Posición actual', here:'Comprobaciones de esta posición', loose:'Estos datos aún no pertenecen a ninguna posición.', take:'Añadir a la pos. {0}', fromSys:'＋ Comprobación desde el sistema', more:'Más comprobaciones: elígelas en el menú de arriba y añádelas a la posición.', noneHere:'Aún no hay comprobaciones en esta posición.' } };
+  function lang(){ var l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){} return T[l]?l:'de'; }
+  function t(k,a){ return String(T[lang()][k]).replace('{0}', a); }
+  function get(k,d){ try{ var v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } }
+  // Standardname des Projekts nicht speichern, damit er der Sprache folgt
+  var DEFN=['Mein Projekt','My project','Mon projet','Mi proyecto'];
+  function set(k,v){ try{ if(k===PSTORE && v && DEFN.indexOf(v.name)>=0){ v=JSON.parse(JSON.stringify(v)); delete v.name; } localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function newId(){ return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+  function proj(){ var p=get(PSTORE,null)||{}; p.v=1; p.name=p.name||t('proj'); p.pos=p.pos||[]; p.asg=p.asg||{}; return p; }
+  function nextNr(P){ var n=P.pos.map(function(q){ return parseInt(q.nr,10); }).filter(isFinite); return String(n.length ? Math.max.apply(null,n)+1 : 1); }
+  function ensure(){ var P=proj(), ch=false;
+    if(!P.pos.length){ P.pos.push({ id:newId(), nr:'1', title:t('newPos'), auto:true }); ch=true; }
+    if(!P.cur || !P.pos.some(function(q){ return q.id===P.cur; })){ P.cur=P.pos[0].id; ch=true; }
+    if(ch) set(PSTORE,P); return P; }
+  // Diese Seite arbeitet bis zum Neuladen in der Position, mit der sie geöffnet wurde (auch wenn ein anderer Tab wechselt)
+  var PAGE=null;
+  function cur(){ var P=ensure(), q=PAGE && P.pos.filter(function(x){ return x.id===PAGE; })[0]; if(!q){ q=P.pos.filter(function(x){ return x.id===P.cur; })[0]; PAGE=q && q.id; } return q; }
+  function sysKey(id){ return 'statiq_sdf_pos_'+id; }
+  function sysOf(id){ var e=get(sysKey(id),null); if(e) return { key:sysKey(id), name:e.name, sdf:e.sdf };
+    var P=proj(), best=null; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k||k.indexOf('statiq_sdf_')!==0||P.asg['c:'+k]!==id) continue; var o=get(k,null); if(o&&o.sdf&&(!best||o.sdf.timestamp>best.sdf.timestamp)) best={key:k,name:o.name,sdf:o.sdf}; } }catch(e){} return best; }
+  function checks(id){ var P=proj(); return (get(POS_STORE,[])||[]).filter(function(c){ var a=P.asg['s:'+c.name]; if(a!==undefined && a!==null) return a===id; if(a===null) return false; var k=c.src&&c.src.key; return !!k && (P.asg['c:'+k]===id || k===sysKey(id)); }); }
+  function stale(c, id){ var s=sysOf(id); return !!(s && c.src && c.src.key===s.key && (c.src.ts||'') < (s.sdf.timestamp||'')); }
+  function status(id){ var cs=checks(id); if(!cs.length) return null; if(cs.some(function(c){ return stale(c,id); })) return 'old'; return cs.every(function(c){ return c.ok; }) ? 'ok' : 'bad'; }
+  function setCur(id){ var P=proj(); P.cur=id; PAGE=id; set(PSTORE,P); }
+  function add(){ var P=ensure(), id=newId(); P.pos.push({ id:id, nr:nextNr(P), title:t('newPos'), auto:true }); set(PSTORE,P); return id; }   // aktuell wird sie erst über switchTo
+  function setTitle(id, title, auto){ var P=proj(), q=P.pos.filter(function(x){ return x.id===id; })[0]; if(!q) return; if(auto && !q.auto) return; q.title=title; if(!auto) q.auto=false; set(PSTORE,P); render(); }
+  function assign(itemId, id){ var P=proj(); P.asg[itemId]=id; set(PSTORE,P); }
+  function nChecks(id){ var n=checks(id).length; return n===0 ? t('n0') : n===1 ? t('n1') : t('nN', n); }
+  // Kopfzeilen-Knopf und Leiste „Position · System · Nachweise“
+  function render(){
+    var q=cur(), b=document.getElementById('proj-btn'); if(!q) return;
+    if(b){ var tx=b.querySelector('.pb-tx'); if(tx) tx.textContent='Pos. '+q.nr+' · '+q.title; b.dataset.st='none'; b.title=t('title'); b.setAttribute('aria-label', t('cur')+': Pos. '+q.nr+' · '+q.title+' — '+t('title')); }
+    var bar=document.getElementById('k-posbar'), page=(window.mulyPosPage||{}).type||(/size\.html/.test(location.pathname)?'size':'calc');
+    if(!bar){ var h=document.querySelector('.app-header'); if(!h) return; bar=document.createElement('div'); bar.id='k-posbar'; bar.className='k-posbar k-frame'; h.parentNode.insertBefore(bar, h.nextSibling); }
+    var n=checks(q.id).length, s=sysOf(q.id);
+    var html='<button type="button" class="kpb-pos" aria-haspopup="dialog" onclick="mulyPos.toggle(event)"><span class="kpb-nr">Pos. '+esc(q.nr)+'</span><span class="kpb-t">'+esc(q.title)+'</span><span class="kpb-v" aria-hidden="true">▾</span></button>'
+      +'<nav class="kpb-steps" aria-label="'+esc(t('cur'))+'"><a href="calc.html"'+(page==='calc'?' aria-current="page"':'')+' title="'+esc(s?s.name:t('noSys'))+'">'+esc(t('sys'))+(s?'':' <i class="z">–</i>')+'</a>'
+      +'<a href="size.html"'+(page==='size'?' aria-current="page"':'')+' title="'+esc(nChecks(q.id))+'">'+esc(t('checks'))+' <i'+(n?'':' class="z"')+'>'+n+'</i></a></nav>';
+    if(bar._h!==html){ bar._h=html; bar.innerHTML=html; }
+  }
+  // Positions-Fenster (ersetzt das bisherige Projekt-Fenster)
+  function panel(){ var p=document.getElementById('pos-panel'); if(p) return p;
+    p=document.createElement('div'); p.id='pos-panel'; p.className='proj-panel'; p.setAttribute('role','dialog'); document.body.appendChild(p);
+    p.addEventListener('click', function(e){ e.stopPropagation(); var it=e.target.closest('[data-pos]'); if(it){ switchTo(it.dataset.pos); return; } if(e.target.closest('.kp-add')){ switchTo(add(), true); } }); return p; }
+  function fill(){ var P=ensure(), p=panel();
+    p.innerHTML='<section class="pp-sec"><div class="kp-proj">'+esc(P.name)+'</div>'+P.pos.slice().sort(function(a,b){ return String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true}); }).map(function(q){ var s=sysOf(q.id), st=status(q.id);
+      return '<button type="button" class="kp-item'+(q.id===P.cur?' cur':'')+'" data-pos="'+q.id+'"'+(q.id===P.cur?' aria-current="true"':'')+'><span class="kp-nr">Pos. '+esc(q.nr)+'</span><span class="kp-tx"><b>'+esc(q.title)+'</b><small>'+esc((s ? (s.name===q.title ? '' : s.name+' · ') : t('noSys')+' · ')+nChecks(q.id))+'</small></span>'+(st?'<span class="kp-st '+st+'">'+esc(t(st))+'</span>':'')+'</button>'; }).join('')
+      +'<button type="button" class="kp-add">'+esc(t('add'))+'</button></section><a class="pp-foot proj-link" href="projekt.html">'+esc(t('all'))+'</a><span class="pp-ver" id="pos-ver"></span>';
+    var v=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name'); if(v) document.getElementById('pos-ver').textContent='kragr·'+(m?m.textContent.trim():'')+' '+v.textContent; }
+  function open(o){ var p=panel(); if(o) fill(); p.classList.toggle('open', o); var b=document.getElementById('proj-btn'); if(b){ b.classList.toggle('open', o); b.setAttribute('aria-expanded', o?'true':'false'); } }
+  function toggle(e){ if(e) e.stopPropagation(); open(!panel().classList.contains('open')); }
+  function switchTo(id, isNew){ var P=proj(); open(false); if(id===P.cur && !isNew) return; var pg=window.mulyPosPage||{};
+    if(pg.beforeSwitch) pg.beforeSwitch(P.cur); setCur(id); if(pg.afterSwitch) pg.afterSwitch(id, isNew); else location.reload(); }
+  window.mulyPos={ proj:proj, ensure:ensure, cur:cur, sysKey:sysKey, sysOf:sysOf, checks:checks, stale:stale, setCur:setCur, add:add, setTitle:setTitle, assign:assign, render:render, toggle:toggle, open:open, t:t };
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
+    // altes Projekt-Fenster bleibt intern erreichbar (Tests, Übergang): mulyAltProj()
+    var L0={ open:window.openProj }; window.mulyAltProj=function(){ var o=document.getElementById('proj-panel'); if(o) o.removeAttribute('hidden'); if(L0.open) L0.open(); };
+    ensure(); window.toggleProj=toggle; window.openProj=function(){ open(true); }; window.closeProj=function(){ open(false); };
+    var old=document.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
+    render(); document.addEventListener('click', function(e){ if(!e.target.closest('#pos-panel') && !e.target.closest('#proj-btn') && !e.target.closest('.kpb-pos')) open(false); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') open(false); });
+    addEventListener('storage', render); setInterval(function(){ if(!document.hidden) render(); }, 1500);
+  }, 0); });
+})();
+</script>
 <style data-ueb>
   /* Übungsmodus-Schalter in der Kopfzeile (calc v0.9.7 · size v0.6.6): Doktorhut wie der Hell/Dunkel-Knopf, an = Akzentfläche */
   .ueb-hdr { display:inline-flex; align-items:center; justify-content:center; width:36px; height:40px; padding:0; border:0; border-radius:10px; background:transparent; color:#111114; cursor:pointer; -webkit-tap-highlight-color:transparent; }
@@ -620,6 +741,8 @@ window.mulyProj = {
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
+<div id="k-posbar" class="k-posbar k-frame"></div>
+<script data-pos-early>try{ if(typeof window!=="undefined" && window.mulyPos){ mulyPos.ensure(); mulyPos.render(); } }catch(e){}</script>
 
 <div id="mob-status" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})"></div>
 <main class="k-frame main">
@@ -2794,7 +2917,7 @@ const I18N = { "de": {
 "ciPart":"Bauteil des Rahmens",
 "ciRiegel":"Riegel",
 "cibClose":"Hinweis schließen",
-"cibSaved":"In „Meine Projekte“ gespeichert als „{0}“.",
+"cibSaved":"Automatisch in {1} gespeichert als „{0}“.",
 "cibPick":"Gespeicherte Berechnung aus calc:",
 "cibNone":"Noch keine Berechnung in calc gespeichert.",
 "cibCalc":"calc öffnen",
@@ -3270,7 +3393,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.6.7';
+const SIZE_VERSION = '0.7.0';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -10138,7 +10261,7 @@ function importCalc(key){
     if(TYP==='platte') notes.push(tt('Platte: Die Werte gelten je Meter Breite, wenn die Lasten in calc je m² eingegeben wurden.'));
     say(src, [`l = ${deNum(B.L,2)} m · M<sub>Ed</sub> = ${deNum(M,1)} kNm${!cant && B.Mf>0 && B.Ms>0?_L` · |M<sub>Ed,Stütze</sub>| = ${deNum(B.Ms,1)} kNm`:''} · V<sub>Ed</sub> = ${deNum(B.V,1)} kN`, ...notes]);
   } else if(MAT==='stahl'){
-    if(STMODE==='fuss'){ const N = C.typ==='frame' ? C.stiel.N : 0; if(N>0){ setv('fp-N', N); setv('fp-V', C.stiel.V); run(); say(`${tx('ciFrom')} ${esc(e.name)} — ${tx('ciFussOk', tt(C.stiel.what), deNum(N,1), deNum(C.stiel.V,1))}`); } else say(tt('Für den Stützenfuß braucht es eine Normalkraft — nur Rahmen-Berechnungen liefern sie.')); return; }
+    if(STMODE==='fuss'){ const N = C.typ==='frame' ? C.stiel.N : 0; if(N>0){ setv('fp-N', N); setv('fp-V', C.stiel.V); run(); say(`${tx('ciFrom')} ${esc(e.name)} — ${tx('ciFussOk', tt(C.stiel.what), deNum(N,1), deNum(C.stiel.V,1))}`); CI_SRC = { key, ts:e.sdf.timestamp||'', name:e.name, part:'stiel', typ:curTyp() }; } else say(tt('Für den Stützenfuß braucht es eine Normalkraft — nur Rahmen-Berechnungen liefern sie.')); return; }
     if(STMODE==='schweiss'){   // seit v0.6.6: Anschluss an die Stirnplatte am Stabende (Rahmen: Riegel oder Stiel; Kragarm: Einspannung)
       if(C.typ!=='frame' && C.typ!=='cantilever'){ say(tt('Für Schweißnähte bitte die Kräfte von Hand eingeben — z. B. M<sub>y,Ed</sub> und V<sub>z,Ed</sub> am Trägerende aus calc für den Fall „Träger an Stirnplatte“.')); return; }
       const E = C.typ==='frame' ? ($('ci-part').value==='stiel' ? C.stiel : C.riegel) : { Mend:Math.max(C.Mf,C.Ms), Vend:C.V, Nend:0, what:tt('Einspannung') };
@@ -10710,7 +10833,7 @@ load(); run();
 function openFromHash(){
   const h=location.hash; if(!h.startsWith('#pos=')) return false;
   const q=new URLSearchParams(h.slice(1)), name=q.get('pos'), ck=q.get('calc'), part=q.get('part');
-  const i=posRead().findIndex(p=>p.name===name); history.replaceState(null,'',location.pathname);
+  const i=posRead().findIndex(p=>p.name===name); history.replaceState(null,'',location.pathname); window.__k8NoAutoLoad=true;
   if(i<0){ posMsg(tx('posMissing', name)); return true; }
   loadPos(i);
   if(ck){ renderCalcImport(ck); if(part && $('ci-part')) $('ci-part').value=part; importCalc(ck); if($(nameField())) $(nameField()).value=name; savePos(); posMsg(tx('posRecalc', name)); }
@@ -10739,17 +10862,17 @@ function ciDo(key, part){
 function ciUniqueName(base, key){ const L=posRead(); let n=base, k=2; while(L.some(p=>p.name===n && p.src?.key!==key)) n=`${base} (${k++})`; return n; }
 { const h=location.hash, q=h.startsWith('#calc=') ? new URLSearchParams(h.slice(1)) : null, ck=q ? q.get('calc') : null;
   renderCalcImport(ck || null);
-  if(ck){ const z=(q.get('ziel')||'').split('.'), part=q.get('part'), e=calcEntries().find(x=>x.key===ck);
+  if(ck){ window.__k8NoAutoLoad=true; const z=(q.get('ziel')||'').split('.'), part=q.get('part'), e=calcEntries().find(x=>x.key===ck);
     if(z.length===2) ciGoto(z[0], z[1]);
     else if(!ciOk()) ciGoto('beton', part==='stiel' && e?.sdf?.system?.type==='frame' ? 'stuetze' : 'balken');   // „→ size“ ohne Ziel: passender Nachweis statt Wasserbau o. Ä.
     ciDo(ck, part);
     if(z.length===2 && e && CI_SRC && CI_SRC.key===ck){
       const lab=[$('pick-g')?.textContent, $('pick-t')?.textContent].filter(Boolean).join(' · '), pt = e.sdf?.system?.type==='frame' ? ' · '+(part==='stiel' ? tx('ciStiel').split(' (')[0] : tx('ciRiegel')) : '';
       $(nameField()).value = ciUniqueName(`${e.name}${pt} — ${lab}`, ck); savePos();
-      ciBanner($('ci-msg').innerHTML + `<div class="cib-s">${tx('cibSaved', esc($(nameField()).value))}</div>`); }
+      ciBanner($('ci-msg').innerHTML + `<div class="cib-s">${tx('cibSaved', esc($(nameField()).value), (window.mulyPos&&mulyPos.cur()) ? 'Pos. '+esc(mulyPos.cur().nr) : 'kragr')}</div>`); }
     history.replaceState(null, '', location.pathname); } }
-if(openFromHash()) openProj();
-window.addEventListener('hashchange', ()=>{ if(openFromHash()) openProj(); });
+openFromHash();
+window.addEventListener("hashchange", ()=>{ openFromHash(); });
 window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':focus')) renderCalcImport($('ci-sel').value); });
 </script>
 <script>
@@ -10859,6 +10982,69 @@ function mulyFehlerHref(app, ver, extra){
   obs.observe(document.querySelector('.col-in'), {childList:true, subtree:true});
   window.mulyK3=all_;
   all_();
+})();
+</script>
+<script data-pos-size>
+// size in der Position (v0.7.0): Karte „Nachweise dieser Position“ oben in der Eingabe; ein Nachweis der Position wird bei jeder
+// Änderung automatisch gespeichert; Eingaben, die noch zu keiner Position gehören, lassen sich mit einem Tipp aufnehmen.
+(function(){
+  if(!window.mulyPos || !document.querySelector('.col-in')) return;
+  var P_=mulyPos, t=P_.t, K8={ cur:null, typ:null, saving:false, timer:0, sig:'' };
+  function esc_(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function nm(){ var e=document.getElementById(nameField()); return e ? (e.value||'').trim() : ''; }
+  function idx(name){ return posRead().findIndex(function(p){ return p.name===name; }); }
+  // aktuellen Nachweis festlegen (nach Laden, Übernahme oder „aufnehmen“)
+  function adopt(name){ K8.cur=name; K8.typ=curTyp(); K8.sig=JSON.stringify(snapshot()); var q=P_.cur(); if(q) P_.assign('s:'+name, q.id); card(); P_.render(); }
+  function saveNow(){ if(!K8.cur || K8.saving) return; if(curTyp()!==K8.typ){ K8.cur=null; card(); return; }   // anderer Nachweis gewählt: nicht überschreiben
+    var sig=JSON.stringify(snapshot()); if(sig===K8.sig) return;
+    var n=nm()||K8.cur; K8.saving=true;
+    try{ if(n!==K8.cur){ var L=posRead(), i=idx(K8.cur); if(i>=0 && !L.some(function(p){ return p.name===n; })){ L.splice(i,1); posWrite(L); } var P=P_.proj(); delete P.asg['s:'+K8.cur]; try{ localStorage.setItem('statiq-projekt', JSON.stringify(P)); }catch(e){} }
+      var m=document.getElementById('pos-msg'), keep=m?m.textContent:''; savePos(); if(m) m.textContent=keep; }
+    finally{ K8.saving=false; }
+    K8.sig=JSON.stringify(snapshot()); adopt(n); }
+  var _run=window.run; window.run=function(){ var r=_run.apply(this, arguments); if(!K8.saving && K8.cur){ clearTimeout(K8.timer); K8.timer=setTimeout(saveNow, 900); } if(!K8.saving) setTimeout(card, 0); return r; };
+  // Übernahme aus calc (ciDo) und „aus dem System“: danach gehört der Nachweis zur Position
+  function fromSys(z, part){ var q=P_.cur(), s=q && P_.sysOf(q.id); if(!s) return; var zz=z.split('.'); ciGoto(zz[0], zz[1]); ciDo(s.key, part);
+    var lab=[$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · '), pt = s.sdf.system&&s.sdf.system.type==='frame' ? ' · '+(part==='stiel' ? tx('ciStiel').split(' (')[0] : tx('ciRiegel')) : '';
+    document.getElementById(nameField()).value = ciUniqueName(lab+pt, s.key); K8.saving=true; try{ savePos(); }finally{ K8.saving=false; } adopt(nm()); }
+  var ZIELE={ beam:[['beton.balken'],['beton.unterzug'],['beton.platte'],['stahl.traeger'],['holz.bauteil']], cont:[['beton.balken'],['beton.unterzug'],['beton.platte'],['stahl.traeger'],['holz.bauteil']],
+    cantilever:[['beton.balken'],['beton.platte'],['stahl.traeger'],['holz.bauteil'],['stahl.schweiss']],
+    frame:[['g','riegel'],['beton.balken','riegel'],['beton.unterzug','riegel'],['stahl.traeger','riegel'],['holz.bauteil','riegel'],['stahl.schweiss','riegel'],['g','stiel'],['beton.stuetze','stiel'],['stahl.traeger','stiel'],['holz.bauteil','stiel'],['stahl.fuss','stiel'],['stahl.schweiss','stiel']] };
+  var ZL={ 'beton.balken':['matBeton','z003'], 'beton.unterzug':['matBeton','z004'], 'beton.platte':['matBeton','z005'], 'beton.stuetze':['matBeton','z006'], 'stahl.traeger':['matStahl','hoBauteil'], 'stahl.fuss':['matStahl','fpBtn'], 'stahl.schweiss':['matStahl','swBtn'], 'holz.bauteil':['matHolz','hoBauteil'] };
+  function zlab(z){ var a=ZL[z]; return a ? tx(a[0])+' · '+tx(a[1]) : z; }
+  // Karte „Nachweise dieser Position“
+  function card(){
+    var q=P_.cur(); if(!q) return; var c=document.getElementById('k-poscard');
+    if(!c){ c=document.createElement('div'); c.id='k-poscard'; c.className='card k-poscard'; var a=document.getElementById('ci-banner')||document.getElementById('pick'); a.parentNode.insertBefore(c, a.nextSibling);
+      c.addEventListener('click', function(e){ var b=e.target.closest('button'); if(!b) return; e.stopPropagation();
+        if(b.dataset.load!=null && b.dataset.stale){ var q3=P_.cur(), s3=q3 && P_.sysOf(q3.id); if(s3){ location.hash='pos='+encodeURIComponent(b.dataset.load)+'&calc='+encodeURIComponent(s3.key)+(b.dataset.part?'&part='+b.dataset.part:''); location.reload(); return; } }
+        if(b.dataset.load!=null){ var i=idx(b.dataset.load); if(i>=0){ K8.saving=true; try{ loadPos(i); }finally{ K8.saving=false; } adopt(b.dataset.load); } }
+        else if(b.classList.contains('kpc-take')){ var lab=[$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · ')||tx('noName'), n=nm(), used=posRead().some(function(p){ return p.name===n; });
+          if(!n || used || /^Pos\.\s/.test(n)) n=ciUniqueName(lab, '__eigen__'); document.getElementById(nameField()).value=n;
+          var q2=P_.cur(); if(q2 && !P_.sysOf(q2.id) && q2.auto) P_.setTitle(q2.id, lab, true); K8.saving=true; try{ savePos(); }finally{ K8.saving=false; } adopt(nm()); }
+        else if(b.classList.contains('kpc-add')){ var m=c.querySelector('.kpc-menu'); m.hidden=!m.hidden; }
+        else if(b.dataset.ziel){ fromSys(b.dataset.ziel, b.dataset.part); } }); }
+    var cs=P_.checks(q.id), s=P_.sysOf(q.id), here=K8.cur && cs.some(function(x){ return x.name===K8.cur; }) && curTyp()===K8.typ;
+    if(K8.cur && !here){ K8.cur=null; }
+    var sysT=s && s.sdf && s.sdf.system && s.sdf.system.type, zs=ZIELE[sysT]||[];
+    var h='<div class="kpc-h">'+esc_(t('here'))+'</div>'+(cs.length ? cs.map(function(x){ var old=P_.stale(x, q.id), st=old?'old':x.ok?'ok':'bad', e=x.eta!=null&&isFinite(x.eta) ? Math.round(x.eta*100)+' %' : t(x.ok?'ok':'bad');
+        return '<button type="button" class="kpc-i'+(x.name===K8.cur?' cur':'')+'" data-load="'+esc_(x.name)+'"'+(old?' data-stale="1"'+(x.src&&x.src.part?' data-part="'+esc_(x.src.part)+'"':''):'')+'><span class="kpc-tx"><b>'+esc_(x.name)+'</b><small>'+esc_(x.label||'')+'</small></span><span class="kpc-e '+st+'">'+esc_(old?t('old'):e)+'</span></button>'; }).join('')
+      : '<div class="kpc-more">'+esc_(t('noneHere'))+'</div>');
+    if(!here) h+='<div class="kpc-loose"><span style="flex:1;min-width:160px">'+esc_(t('loose'))+'</span><button type="button" class="kpc-take">'+esc_(t('take', q.nr))+'</button></div>';
+    if(zs.length){ h+='<button type="button" class="kpc-add">'+esc_(t('fromSys'))+'</button><div class="kpc-menu" hidden>'+zs.map(function(z){ return z[0]==='g' ? '<div class="kpc-g">'+esc_(z[1]==='stiel'?tx('ciStiel'):tx('ciRiegel'))+'</div>' : '<button type="button" data-ziel="'+z[0]+'"'+(z[1]?' data-part="'+z[1]+'"':'')+'>'+esc_(zlab(z[0]))+'</button>'; }).join('')+'</div>'; }
+    h+='<div class="kpc-more">'+esc_(t('more'))+'</div>';
+    if(c._h!==h){ var open=c.querySelector('.kpc-menu') && !c.querySelector('.kpc-menu').hidden; c._h=h; c.innerHTML=h; if(open) c.querySelector('.kpc-menu').hidden=false; }
+  }
+  // leere Position: gleicher Nachweis, aber Startwerte statt der Eingaben der vorigen Position
+  window.mulyPosPage={ type:'size', beforeSwitch:function(){ clearTimeout(K8.timer); saveNow(); },
+    afterSwitch:function(){ var q=P_.cur(); if(q && !P_.checks(q.id).length){ var o=snapshot(), k={}; ['typ','mat','stmode','homode','grmode','mwmode','wbmode','bpmode'].forEach(function(x){ k[x]=o[x]; }); try{ localStorage.setItem(STORE, JSON.stringify(k)); }catch(e){} } location.reload(); } };
+  window.mulyK8={ adopt:adopt, card:card, state:K8 };
+  // Start: gehört der angezeigte Nachweis zur Position? Sonst den ersten Nachweis der Position laden.
+  setTimeout(function(){ var q=P_.cur(); if(!q) return; var cs=P_.checks(q.id), n=nm();
+    if(window.CI_SRC && CI_SRC.key && location.hash==='' && cs.some(function(x){ return x.name===n; })) adopt(n);
+    else if(cs.some(function(x){ return x.name===n; })) adopt(n);
+    else if(cs.length && !window.__k8NoAutoLoad){ var i=idx(cs[0].name); if(i>=0){ K8.saving=true; try{ loadPos(i); }finally{ K8.saving=false; } adopt(cs[0].name); } }
+    card(); }, 0);
 })();
 </script>
 </body>

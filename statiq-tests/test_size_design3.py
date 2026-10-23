@@ -41,12 +41,12 @@ async def main():
         check('Auswahlliste wählt das Profil, Nachweis neu', await pg.evaluate("$('sn-prof').value")=='IPE 270' and await pg.inner_text('#summary')!=s0)
         await pg.select_option('#sn-prof','IPE 300'); await pg.wait_for_timeout(600)
         # Übungsmodus-Schalter
-        sw=await pg.evaluate("(()=>{const t=document.querySelector('.det-bar .ueb-tog'); return [t.getAttribute('role'), t.getAttribute('aria-checked'), t.innerText.replace(/\\s+/g,' ')]})()")
-        check('Übungsmodus als Schalter (role=switch, aus)', sw[0]=='switch' and sw[1]=='false' and 'vollständige Lösung' in sw[2], sw)
-        await pg.click('.det-bar .ueb-tog'); await pg.wait_for_timeout(600)
-        sw=await pg.evaluate("(()=>{const t=document.querySelector('.det-bar .ueb-tog'); return [t.getAttribute('aria-checked'), t.innerText.replace(/\\s+/g,' '), document.body.classList.contains('uebung')]})()")
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('.det-bar .ueb-tog')]})()")
+        check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr in der Rechenweg-Leiste', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
+        await pg.click('#ueb-btn'); await pg.wait_for_timeout(600)
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, document.body.classList.contains('uebung')]})()")
         check('an: „Zahlen verborgen“, Übungsmodus aktiv', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2], sw)
-        await pg.click('.det-bar .ueb-tog'); await pg.wait_for_timeout(500)
+        await pg.click('#ueb-btn'); await pg.wait_for_timeout(500)
         # kein Querscrollen in allen Bereichen
         ov={}
         await pg.set_viewport_size({'width':360,'height':740})
@@ -54,7 +54,7 @@ async def main():
             await pg.evaluate(f"setMat('{m}')"); await pg.wait_for_timeout(700); ov[m]=await pg.evaluate("document.documentElement.scrollWidth")
         check('Handy 360 px: kein Querscrollen in allen Baustoffen', all(v<=360 for v in ov.values()), ov)
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(900)
-        r=await pg.evaluate("[document.querySelector('.det-bar .ueb-tog').innerText.replace(/\\s+/g,' '), document.querySelector('.k-ci')?.innerText, document.querySelector('.k-sb').getAttribute('aria-label')]")
+        r=await pg.evaluate("[document.getElementById('ueb-btn').title, document.querySelector('.k-ci')?.innerText, document.querySelector('.k-sb').getAttribute('aria-label')]")
         check('EN: Practice mode · Take from calc · decrease', 'Practice mode' in r[0] and 'full solution' in r[0] and r[1]=='Take from calc' and r[2].endswith('decrease'), r)
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         check('keine Skriptfehler', not errs, errs[:2])

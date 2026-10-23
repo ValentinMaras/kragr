@@ -143,15 +143,15 @@ async def main():
         check('Rahmen: max M · max V · max N', b and b['d']=='flex' and 'max N' in b['t'], b)
         await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(600)
         # Übungsmodus-Schalter
-        sw=await pg.evaluate("(()=>{const t=document.querySelector('#tab-beam .ueb-tog'); return [t.getAttribute('role'), t.getAttribute('aria-checked'), t.innerText.replace(/\\s+/g,' ')]})()")
-        check('Übungsmodus als Schalter (role=switch, aus)', sw[0]=='switch' and sw[1]=='false' and 'Übungsmodus' in sw[2] and 'vollständige Lösung' in sw[2], sw)
-        await pg.click('#tab-beam .ueb-tog'); await pg.wait_for_timeout(600)
-        sw=await pg.evaluate("(()=>{const t=document.querySelector('#tab-beam .ueb-tog'); return [t.getAttribute('aria-checked'), t.innerText.replace(/\\s+/g,' '), getComputedStyle(document.getElementById('k-bar')).display]})()")
-        check('an: „Zahlen verborgen“, Ergebnisleiste aus (verrät sonst die Lösung)', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2]=='none', sw)
-        await pg.click('#tab-beam .ueb-tog'); await pg.wait_for_timeout(500)
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('#tab-beam .ueb-tog')]})()")
+        check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr im Ergebnisfeld', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
+        await pg.click('#ueb-btn'); await pg.wait_for_timeout(600)
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, getComputedStyle(document.getElementById('k-bar')).display, getComputedStyle(t).backgroundColor]})()")
+        check('an: Knopf blau, „Zahlen verborgen“, Ergebnisleiste aus (verrät sonst die Lösung)', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2]=='none' and sw[3]=='rgb(84, 104, 173)', sw)
+        await pg.click('#ueb-btn'); await pg.wait_for_timeout(500)
         # Sprache
         await pg.evaluate("setCalcLang('en')"); await pg.wait_for_timeout(500)
-        r=await pg.evaluate("[document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.querySelector('#tab-beam .ueb-tog').innerText.replace(/\\s+/g,' ')]")
+        r=await pg.evaluate("[document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.getElementById('ueb-btn').title]")
         check('EN: Loads · + Add load · Angle α to the vertical · Practice mode', r[0]=='Loads' and r[1]=='+ Add load' and r[2]=='to the vertical' and 'Practice mode' in r[3] and 'full solution' in r[3], r)
         for lg,w in [('fr','Charges'),('es','Cargas')]:
             await pg.evaluate(f"setCalcLang('{lg}')"); await pg.wait_for_timeout(300)

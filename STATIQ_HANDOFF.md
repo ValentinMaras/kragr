@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.5 · ref v0.3.43 · size v0.6.4 · projekt v0.1.13 · rechtliches v0.1.12 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.9.7 · ref v0.3.43 · size v0.6.6 · projekt v0.1.13 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.5, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.9.7, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.13, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.6.4, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.6.6, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -567,6 +567,30 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Übungsmodus als Doktorhut in der Kopfzeile, Schweißnaht aus calc — calc v0.9.7 · size v0.6.6
+
+Valentin: (a) Schweißnaht soll aus calc nachweisbar sein, beim Riegel und beim Stiel. (b) Der Übungsmodus-Schalter soll nicht im Feld liegen, sondern oben in der Kopfzeile wie der Hell/Dunkel-Knopf, mit Doktorhut.
+
+- **Übungsmodus-Knopf** `#ueb-btn` (`.ueb-hdr`) in `.hdr-tools` von calc und size, zwischen Projekte und Hell/Dunkel. Gemeinsamer Baustein `<style data-ueb>` + `<script data-ueb>` im head (vor dem Hauptskript): `mulyUebClick()` ruft `cUebToggle` (calc) bzw. `uebToggle` (size), `mulyUebSync()` hält `aria-pressed`, Farbe (an = Akzentfläche, weißer Hut) und Titel/Vorlesetext („Übungsmodus: An – Zahlen verborgen …“ / „Aus – vollständige Lösung“) aktuell; Texte liefert die Seite über `window.mulyUebText` (calc `tr('uebTog'|'uebOnH'|'uebOffH')`, size `tt('Übungsmodus')`, `tx('uebOnH'|'uebOffH')`). Beobachtet `body.uebung` und `<html lang>`.
+- Entfernt: der Schalter `.ueb-tog` im Ergebnisfeld von calc (`cUebApply` legt nur noch den Hinweis unter die Live-Zeile) und in der Rechenweg-Leiste von size (`foldDetails`).
+- Handy 360 px: Kopfzeile bleibt einzeilig (58 px); unter 370 px schmalere Knöpfe (30 px) und Logo 22 px.
+- **Schweißnaht** im Menü „Nachweis in size“: Rahmen-Riegel, Rahmen-Stiel und Kragarm (Einspannung). size `CI_ZIEL.stahl` um `schweiss` ergänzt; `calcSchnitt` liefert je Stab `Mend/Vend/Nend` am Stabende mit dem größeren Moment; `importCalc` stellt Fall „Träger an Stirnplatte“ ein und setzt `sw-M`, `sw-V`, `sw-N` (N mit Vorzeichen, Zug +). Einfeld- und Durchlaufträger bekommen die Schweißnaht nicht angeboten (an gelenkigen Auflagern nur V; bleibt Handeingabe).
+- Neue size-Texte „Einspannung“ und Hinweis zur Schweißnaht in EN/FR/ES.
+- Tests: `test_calc_bedienung.py` (Schweißnaht Riegel/Stiel/Kragarm, 30 Prüfungen), `test_calc_design2.py`, `test_size_design3.py`, `test_calc_uebung.py`, `test_size_uebung.py` auf den Kopfzeilen-Knopf umgestellt.
+
+## „Nachweis in size“ mit Auswahl des Nachweises — calc v0.9.6 · size v0.6.5
+
+Valentin: Beim Tipp auf „Nachweis in size“ soll ein kleines Menü aufgehen, in dem man den Nachweis wählt (z. B. Stahlbeton Balken oder Holz Balken, beim Rahmen den Stiel als Stütze) — nur realistische Möglichkeiten.
+
+- calc: Der Knopf `.k-tosize` öffnet `.k-tsmenu` („Welcher Nachweis?“). Ziele je System in `K5_ZIELE`, Texte in `K5T` (4 Sprachen):
+  - Einfeldträger, Durchlaufträger: Stahlbeton Balken / Unterzug (Plattenbalken) / Platte (je m Breite), Stahl Träger, Holz Träger.
+  - Kragarm: wie oben ohne Unterzug.
+  - Rahmen: **Riegel** → Stahlbeton Balken / Unterzug, Stahl Träger, Holz Träger; **Stiel (der stärker gedrückte)** → Stahlbeton Stütze, Stahl Stütze (Träger/Stütze mit N), Holz Stütze, Stahl Stützenfuß.
+  - Bewusst nicht angeboten: Bauphysik, Wasserbau, Grundbau, Mauerwerk (size übernimmt dort keine Schnittgrößen, nur Hinweise), Stützen bei Balken-Systemen (keine Normalkraft), Verbindungen und Sonderthemen.
+- Aufruf: `size.html#calc=<Schlüssel>&ziel=<beton.balken|beton.unterzug|beton.platte|beton.stuetze|stahl.traeger|stahl.fuss|holz.bauteil>&part=<riegel|stiel>`.
+- size: `ciGoto(mat, mode)` stellt Bereich und Nachweis ein (nur Ziele aus `CI_ZIEL`), setzt `ci-part`, dann `importCalc` wie bisher. Hash wird nur bei `#calc=` am Anfang ausgewertet (`#pos=…&calc=…` der Projektübersicht bleibt unberührt).
+- Tests: `test_calc_bedienung.py` um die Menüs und fünf Ziele erweitert (27 Prüfungen).
 
 ## Bedienung: direkter Weg nach size, Lasten in der Skizze, Entwurf — calc v0.9.5 · size v0.6.4
 
@@ -1136,7 +1160,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1788/1788 grün** (inklusive `test_calc_bedienung.py` 18, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1800/1800 grün** (inklusive `test_calc_bedienung.py` 30, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 13, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 15, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

@@ -1108,6 +1108,8 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"Einspannung":"Empotramiento",
+"Schnittgrößen am Stabende mit dem größeren Moment (Anschluss an die Stirnplatte). Profil, Stirnplatte und Nahtdicken bitte selbst wählen.":"Esfuerzos en el extremo de la barra con el mayor momento (unión a placa de testa). Elige tú mismo el perfil, la placa de testa y los espesores de soldadura.",
 "Schritt zeigen":"Mostrar paso",
 "Stimmt nicht mit dem Rechenweg überein. Tipp: Decke den nächsten Schritt auf.":"No coincide con el cálculo. Consejo: descubre el siguiente paso.",
 "Stimmt: Dieser Wert steht in Schritt {}.":"Correcto: este valor aparece en el paso {}.",

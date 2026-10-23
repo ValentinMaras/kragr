@@ -1108,6 +1108,8 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"Einspannung":"Encastrement",
+"Schnittgrößen am Stabende mit dem größeren Moment (Anschluss an die Stirnplatte). Profil, Stirnplatte und Nahtdicken bitte selbst wählen.":"Efforts à l’extrémité de barre au moment le plus élevé (assemblage sur platine). Choisir soi-même le profilé, la platine et les épaisseurs de cordon.",
 "Schritt zeigen":"Afficher l’étape",
 "Stimmt nicht mit dem Rechenweg überein. Tipp: Decke den nächsten Schritt auf.":"Ne correspond pas au calcul. Astuce : dévoile l’étape suivante.",
 "Stimmt: Dieser Wert steht in Schritt {}.":"Exact : cette valeur figure à l’étape {}.",

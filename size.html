@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.6.4 -->
+<!-- kragr·size v0.6.6 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -466,6 +466,27 @@ window.mulyProj = {
 <style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #5468ad); }
 </style>
+<style data-ueb>
+  /* Übungsmodus-Schalter in der Kopfzeile (calc v0.9.7 · size v0.6.6): Doktorhut wie der Hell/Dunkel-Knopf, an = Akzentfläche */
+  .ueb-hdr { display:inline-flex; align-items:center; justify-content:center; width:36px; height:40px; padding:0; border:0; border-radius:10px; background:transparent; color:#111114; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .ueb-hdr:hover { background:rgba(17,17,20,.06); }
+  .ueb-hdr svg { width:21px; height:21px; }
+  .ueb-hdr.on { background:var(--k-accent, #5468ad); color:#fff; }
+  @media (max-width:370px) { .ueb-hdr { width:30px; } }
+  @media print { .ueb-hdr { display:none !important; } }
+</style>
+<script data-ueb>
+// Übungsmodus-Schalter in der Kopfzeile: gleicher Zustand in calc und size („muly-uebung“). Texte liefert die Seite (window.mulyUebText).
+(function(){
+  window.mulyUebSync=function(){ var b=document.getElementById('ueb-btn'); if(!b || !document.body) return; var on=document.body.classList.contains('uebung');
+    var t=window.mulyUebText ? window.mulyUebText() : ['Übungsmodus','an','aus'], s=t[0]+': '+(on?t[1]:t[2]);
+    if(b.getAttribute('aria-pressed')!==String(on)) b.setAttribute('aria-pressed', String(on)); b.classList.toggle('on', on); if(b.title!==s){ b.title=s; b.setAttribute('aria-label', s); } };
+  window.mulyUebClick=function(){ var f=window.cUebToggle||window.uebToggle; if(f) f(); setTimeout(window.mulyUebSync, 0); };
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(window.mulyUebSync, 0);
+    new MutationObserver(window.mulyUebSync).observe(document.body, {attributes:true, attributeFilter:['class']});
+    new MutationObserver(window.mulyUebSync).observe(document.documentElement, {attributes:true, attributeFilter:['lang']}); });
+})();
+</script>
 <style data-kragr>
   /* kragr-Design (Übergabe vom 21.10.2026), Stufe 1: Farben, Schrift, Kopfzeile, Ergebnisleiste. Identisch in calc und size. */
   :root { --k-accent:#5468ad; --k-tint:#eceff8; --k-card:#f5f6f8; --k-ctl:#f1f2f4; --k-ctl-h:#e6e7ea; --k-text:#111114; --k-text2:#3d3f45; --k-muted:#5c5e66;
@@ -581,6 +602,7 @@ window.mulyProj = {
   </nav>
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+    <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
     <span class="version" id="ver"></span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
@@ -3230,7 +3252,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.6.4';
+const SIZE_VERSION = '0.6.6';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -9988,11 +10010,12 @@ function calcSchnitt(sdf){
   const reac = (sdf.results?.reactions||[]).map(r=>Math.abs(parseFloat(r.V))).filter(isFinite);
   if(typ==='frame'){
     const f=P.fine, raf=f.rafter;
-    const riegel = { L:P.b, Mf:Math.max(0,...raf.M), Ms:Math.max(0,...raf.M.map(v=>-v)), V:absMax(raf.Q), N:Math.max(0,-Math.min(...raf.N)), K:'1.0', feld:'1', mv:'q', what:tt('Riegel') };
+    const ende = c => { const n=c.M.length-1, e = Math.abs(c.M[0])>=Math.abs(c.M[n]) ? 0 : n; return { Mend:Math.abs(c.M[e]), Vend:Math.abs(c.Q[e]), Nend:c.N[e] }; };   // Stabende mit dem größeren Moment (Schweißnaht, v0.6.6)
+    const riegel = { L:P.b, Mf:Math.max(0,...raf.M), Ms:Math.max(0,...raf.M.map(v=>-v)), V:absMax(raf.Q), N:Math.max(0,-Math.min(...raf.N)), K:'1.0', feld:'1', mv:'q', what:tt('Riegel'), ...ende(raf) };
     const st = ['left','right'].map(m=>{ const c=f[m], N=Math.max(0,-Math.min(...c.N)), Mf=c.M[0], Mk=c.M[c.M.length-1];
       const big = Math.abs(Mf)>=Math.abs(Mk) ? Mf : Mk, small = big===Mf ? Mk : Mf;
       return { m, L: m==='left' ? (P.hA??P.h) : (P.hB??P.h), N, M02:Math.abs(big), M01: Math.abs(big)>1e-9 ? Math.sign(big*small)*Math.abs(small) : 0,
-        Mmax:absMax(c.M), V:absMax(c.Q), what: m==='left' ? tt('linker Stiel') : tt('rechter Stiel') }; });
+        Mmax:absMax(c.M), V:absMax(c.Q), what: m==='left' ? tt('linker Stiel') : tt('rechter Stiel'), ...ende(c) }; });
     const stiel = st[0].N>=st[1].N ? st[0] : st[1];
     return { typ, riegel, stiel, Fsup: Math.max(0,...reac) };
   }
@@ -10098,7 +10121,13 @@ function importCalc(key){
     say(src, [`l = ${deNum(B.L,2)} m · M<sub>Ed</sub> = ${deNum(M,1)} kNm${!cant && B.Mf>0 && B.Ms>0?_L` · |M<sub>Ed,Stütze</sub>| = ${deNum(B.Ms,1)} kNm`:''} · V<sub>Ed</sub> = ${deNum(B.V,1)} kN`, ...notes]);
   } else if(MAT==='stahl'){
     if(STMODE==='fuss'){ const N = C.typ==='frame' ? C.stiel.N : 0; if(N>0){ setv('fp-N', N); setv('fp-V', C.stiel.V); run(); say(`${tx('ciFrom')} ${esc(e.name)} — ${tx('ciFussOk', tt(C.stiel.what), deNum(N,1), deNum(C.stiel.V,1))}`); } else say(tt('Für den Stützenfuß braucht es eine Normalkraft — nur Rahmen-Berechnungen liefern sie.')); return; }
-    if(STMODE==='schweiss'){ say(tt('Für Schweißnähte bitte die Kräfte von Hand eingeben — z. B. M<sub>y,Ed</sub> und V<sub>z,Ed</sub> am Trägerende aus calc für den Fall „Träger an Stirnplatte“.')); return; }
+    if(STMODE==='schweiss'){   // seit v0.6.6: Anschluss an die Stirnplatte am Stabende (Rahmen: Riegel oder Stiel; Kragarm: Einspannung)
+      if(C.typ!=='frame' && C.typ!=='cantilever'){ say(tt('Für Schweißnähte bitte die Kräfte von Hand eingeben — z. B. M<sub>y,Ed</sub> und V<sub>z,Ed</sub> am Trägerende aus calc für den Fall „Träger an Stirnplatte“.')); return; }
+      const E = C.typ==='frame' ? ($('ci-part').value==='stiel' ? C.stiel : C.riegel) : { Mend:Math.max(C.Mf,C.Ms), Vend:C.V, Nend:0, what:tt('Einspannung') };
+      $('sw-fall').value='stirn'; swSync(); setv('sw-M', +E.Mend.toFixed(3)); setv('sw-V', +E.Vend.toFixed(3)); setv('sw-N', +(E.Nend||0).toFixed(3));
+      say(`${tx('ciFrom')} ${esc(e.name)} — ${tt(E.what)}`, [`M<sub>y,Ed</sub> = ${deNum(E.Mend,1)} kNm · V<sub>z,Ed</sub> = ${deNum(E.Vend,1)} kN · N<sub>Ed</sub> = ${deNum(E.Nend||0,1)} kN`,
+        tt('Schnittgrößen am Stabende mit dem größeren Moment (Anschluss an die Stirnplatte). Profil, Stirnplatte und Nahtdicken bitte selbst wählen.')]);
+      CI_SRC = { key, ts:e.sdf.timestamp||'', name:e.name, part: C.typ==='frame' ? $('ci-part').value : null, typ:curTyp() }; run(); return; }
     if(STMODE==='anschluss'){ say(tx('ciAnschluss', deNum(C.Fsup||B.Fsup||0,1))); return; }
     const M=Math.max(B.Mf,B.Ms), V0=ciVerlauf(e, C, B);
     ciNoteDrop(notes);
@@ -10200,7 +10229,7 @@ const DET_OPEN=new Set(); let DET_ALL=false;
 function foldDetails(){
   const cards=[...document.querySelectorAll('#details > .card[id^="n-"]')]; if(!cards.length) return;
   const bar=document.createElement('div'); bar.className='det-bar';
-  bar.innerHTML=`<span>${tx('calcSteps')}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button></span><button type="button" class="ueb-tog k-switch${UEB?' on':''}" role="switch" aria-checked="${UEB}" onclick="uebToggle()"><span class="k-sw-tx"><b>${tt('Übungsmodus')}</b><small>${tx(UEB?'uebOnH':'uebOffH')}</small></span><span class="k-sw" aria-hidden="true"><i></i></span></button>`;   // Schalter wie in calc (v0.6.1)
+  bar.innerHTML=`<span>${tx('calcSteps')}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button></span>`;   // Übungsmodus-Schalter seit v0.6.6 in der Kopfzeile (#ueb-btn)
   bar.querySelector('.det-all').onclick=()=>{ DET_ALL=!DET_ALL; DET_OPEN.clear(); foldDetails2(); bar.querySelector('.det-all').textContent=tx(DET_ALL?'collapseAll':'expandAll'); };
   $('details').prepend(bar);
   cards.forEach(c=>{ c.classList.add('dfold'); const id=c.id;
@@ -10219,6 +10248,7 @@ function foldDetails2(){
 // ══════════════════════════════════════════════════
 let UEB = (()=>{ try{ return localStorage.getItem('muly-uebung')==='1'; }catch(e){ return false; } })();
 let UEB_REV = {}, UEB_KEY = '';                 // aufgedeckte Schritte je Karte; neue Aufgabe (andere Eingaben) → zurücksetzen
+window.mulyUebText = () => [tt('Übungsmodus'), tx('uebOnH'), tx('uebOffH')];   // Kopfzeilen-Knopf (v0.6.6)
 function uebToggle(){ UEB=!UEB; try{ localStorage.setItem('muly-uebung', UEB?'1':'0'); }catch(e){} UEB_REV={}; document.body.classList.remove('ueb-fig'); run(); }
 const uebNum = t => { const s=String(t).replace(/−/g,'-').replace(/\s/g,''); const m=s.match(/-?\d+(?:[.,]\d+)?/); if(!m) return NaN; const v=parseFloat(m[0].replace(',','.')); return /%/.test(s) ? v/100 : v; };
 const uebHit = (v, x) => isFinite(x) && Math.abs(v-x) <= Math.max(0.01*Math.abs(x), 0.005);
@@ -10668,8 +10698,21 @@ function openFromHash(){
   if(ck){ renderCalcImport(ck); if(part && $('ci-part')) $('ci-part').value=part; importCalc(ck); if($(nameField())) $(nameField()).value=name; savePos(); posMsg(tx('posRecalc', name)); }
   return true;
 }
-{ const m = location.hash.match(/^#calc=(.+)$/); renderCalcImport(m ? decodeURIComponent(m[1]) : null);
-  if(m){ openProj(); importCalc(decodeURIComponent(m[1])); history.replaceState(null, '', location.pathname); } }
+// seit v0.6.5 mit Ziel aus dem Menü „Nachweis in size“ in calc: #calc=<Schlüssel>&ziel=<Bereich.Nachweis>&part=<riegel|stiel>
+const CI_ZIEL = { beton:['balken','unterzug','platte','stuetze'], stahl:['traeger','fuss','schweiss'], holz:['bauteil'] };
+function ciGoto(mat, mode){
+  if(!CI_ZIEL[mat] || !CI_ZIEL[mat].includes(mode)) return false;
+  if(MAT!==mat) setMat(mat);
+  if(mat==='beton'){ if(TYP!==mode) setTyp(mode); } else if(mat==='stahl'){ if(STMODE!==mode) setStMode(mode); } else if(HOMODE!==mode) setHoMode(mode);
+  if(typeof updatePick==='function') updatePick();
+  return true;
+}
+{ const h=location.hash, q=h.startsWith('#calc=') ? new URLSearchParams(h.slice(1)) : null, ck=q ? q.get('calc') : null;
+  renderCalcImport(ck || null);
+  if(ck){ const z=(q.get('ziel')||'').split('.'), part=q.get('part');
+    if(z.length===2) ciGoto(z[0], z[1]);
+    renderCalcImport(ck); if(part && $('ci-part')) $('ci-part').value = part==='stiel' ? 'stiel' : 'riegel';
+    openProj(); importCalc(ck); history.replaceState(null, '', location.pathname); } }
 if(openFromHash()) openProj();
 window.addEventListener('hashchange', ()=>{ if(openFromHash()) openProj(); });
 window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':focus')) renderCalcImport($('ci-sel').value); });

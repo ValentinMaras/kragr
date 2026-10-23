@@ -1108,6 +1108,8 @@ window.MULY_LANG = {
 "posRecalc":"“{0}” recalculated with the newer calc calculation and saved."
 },
 "ttx": {
+"Einspannung":"Fixed end",
+"Schnittgrößen am Stabende mit dem größeren Moment (Anschluss an die Stirnplatte). Profil, Stirnplatte und Nahtdicken bitte selbst wählen.":"Internal forces at the member end with the larger moment (connection to the end plate). Please choose the section, end plate and weld sizes yourself.",
 "Schritt zeigen":"Show step",
 "Stimmt nicht mit dem Rechenweg überein. Tipp: Decke den nächsten Schritt auf.":"Does not match the calculation. Tip: reveal the next step.",
 "Stimmt: Dieser Wert steht in Schritt {}.":"Correct: this value appears in step {}.",

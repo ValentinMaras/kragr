@@ -17,7 +17,7 @@ async def main():
         await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(300)
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(300)
         check('aus: kein Übungsfeld, Ergebnis sichtbar', await pg.evaluate("document.querySelectorAll('.ueb-box').length===0 && getComputedStyle($('summary')).display!=='none'"))
-        await pg.click('.det-bar .ueb-tog'); await pg.wait_for_timeout(300)
+        await pg.click('#ueb-btn'); await pg.wait_for_timeout(300)
         r=await pg.evaluate("""[document.querySelectorAll('#details > .card[id^="n-"]').length, document.querySelectorAll('.ueb-box').length,
           getComputedStyle($('summary')).display, getComputedStyle($('chk-table')).display, getComputedStyle($('fig')).display,
           [...document.querySelectorAll('#details .card.ueb .st')].every(s=>{ const f=s.querySelector('.st-f'); if(!f) return s.classList.contains('ueb-hid'); const c=f.cloneNode(true); c.querySelectorAll('sub,sup').forEach(x=>x.remove()); return s.classList.contains('ueb-hid') && !/(^|[^\w.])\d+[.,]\d/.test(c.textContent); }),
@@ -52,7 +52,7 @@ async def main():
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(400); await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(300)
         t=await pg.evaluate("document.getElementById('details').innerText+' '+document.getElementById('ueb-hint').innerText")
         check('EN: Übungsmodus übersetzt', 'Practice mode' in t and 'Next step' in t and 'Übung' not in t and 'Nächster' not in t, t[:100])
-        await pg.click('.det-bar .ueb-tog'); await pg.wait_for_timeout(300)
+        await pg.click('#ueb-btn'); await pg.wait_for_timeout(300)
         check('ausschalten: alles wieder sichtbar', await pg.evaluate("!document.body.classList.contains('uebung') && document.querySelectorAll('.ueb-box').length===0"))
         check('keine Skriptfehler', not errs, errs[:2])
         await br.close()

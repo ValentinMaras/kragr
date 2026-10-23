@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.9.5 -->
+<!-- kragr v0.9.7 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -635,6 +635,27 @@ window.mulyProj = {
   .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #5468ad); }
 </style>
+<style data-ueb>
+  /* Übungsmodus-Schalter in der Kopfzeile (calc v0.9.7 · size v0.6.6): Doktorhut wie der Hell/Dunkel-Knopf, an = Akzentfläche */
+  .ueb-hdr { display:inline-flex; align-items:center; justify-content:center; width:36px; height:40px; padding:0; border:0; border-radius:10px; background:transparent; color:#111114; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .ueb-hdr:hover { background:rgba(17,17,20,.06); }
+  .ueb-hdr svg { width:21px; height:21px; }
+  .ueb-hdr.on { background:var(--k-accent, #5468ad); color:#fff; }
+  @media (max-width:370px) { .ueb-hdr { width:30px; } }
+  @media print { .ueb-hdr { display:none !important; } }
+</style>
+<script data-ueb>
+// Übungsmodus-Schalter in der Kopfzeile: gleicher Zustand in calc und size („muly-uebung“). Texte liefert die Seite (window.mulyUebText).
+(function(){
+  window.mulyUebSync=function(){ var b=document.getElementById('ueb-btn'); if(!b || !document.body) return; var on=document.body.classList.contains('uebung');
+    var t=window.mulyUebText ? window.mulyUebText() : ['Übungsmodus','an','aus'], s=t[0]+': '+(on?t[1]:t[2]);
+    if(b.getAttribute('aria-pressed')!==String(on)) b.setAttribute('aria-pressed', String(on)); b.classList.toggle('on', on); if(b.title!==s){ b.title=s; b.setAttribute('aria-label', s); } };
+  window.mulyUebClick=function(){ var f=window.cUebToggle||window.uebToggle; if(f) f(); setTimeout(window.mulyUebSync, 0); };
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(window.mulyUebSync, 0);
+    new MutationObserver(window.mulyUebSync).observe(document.body, {attributes:true, attributeFilter:['class']});
+    new MutationObserver(window.mulyUebSync).observe(document.documentElement, {attributes:true, attributeFilter:['lang']}); });
+})();
+</script>
 <style data-kragr>
   /* kragr-Design (Übergabe vom 21.10.2026), Stufe 1: Farben, Schrift, Kopfzeile, Ergebnisleiste. Identisch in calc und size. */
   :root { --k-accent:#5468ad; --k-tint:#eceff8; --k-card:#f5f6f8; --k-ctl:#f1f2f4; --k-ctl-h:#e6e7ea; --k-text:#111114; --k-text2:#3d3f45; --k-muted:#5c5e66;
@@ -804,7 +825,16 @@ window.mulyProj = {
   .k-tosize:hover { filter:brightness(.97); }
   .k-tosize .k-ts-tx { flex:1; display:flex; flex-direction:column; gap:1px; }
   .k-tosize b { font-size:15px; font-weight:800; } .k-tosize small { font-size:12.5px; color:var(--k-text2); }
-  .k-tosize .k-ts-ar { font-size:20px; font-weight:700; }
+  .k-tosize .k-ts-ar { flex:none; transition:transform .15s; }
+  .k-tosize[aria-expanded="true"] .k-ts-ar { transform:rotate(180deg); }
+  .k-tosize[aria-expanded="true"] { margin-bottom:6px; }
+  .k-tsmenu { display:flex; flex-direction:column; margin:0 0 14px; padding:6px; border-radius:14px; background:#fff; box-shadow:0 6px 20px rgba(17,17,20,.12); }
+  .k-tsmenu[hidden] { display:none; }
+  .k-tsm-h { padding:6px 10px 4px; font-size:12px; font-weight:700; color:var(--k-muted); }
+  .k-tsm-g { padding:10px 10px 2px; font-size:13px; font-weight:800; color:var(--k-text); }
+  .k-tsm-i { display:flex; align-items:center; min-height:44px; padding:0 10px; border:0; border-radius:8px; background:transparent; font:inherit; font-size:15px; font-weight:600; color:var(--k-text); text-align:left; cursor:pointer; }
+  .k-tsm-i:hover { background:var(--k-ctl); }
+  body.uebung .k-tsmenu { display:none; }
   .k-tosize[hidden] { display:none; }
   body.uebung .k-tosize { display:none; }
   svg.k-tap { cursor:pointer; -webkit-tap-highlight-color:transparent; }
@@ -1003,7 +1033,8 @@ window.mulyProj = {
   </nav>
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none" aria-haspopup="dialog"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
-    <span class="version">v0.9.5</span>
+    <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
+    <span class="version">v0.9.7</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1475,7 +1506,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.9.5';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.9.7';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -5991,6 +6022,7 @@ let C_UEB = (()=>{ try{ return localStorage.getItem('muly-uebung')==='1'; }catch
 let C_REV = {}, C_KEY = {};
 const cUebNum = t => { const s=String(t).replace(/−/g,'-').replace(/\s/g,''); const m=s.match(/-?\d+(?:[.,]\d+)?/); if(!m) return NaN; const v=parseFloat(m[0].replace(',','.')); return /%/.test(s) ? v/100 : v; };
 const cUebHit = (v, x) => isFinite(x) && Math.abs(Math.abs(v)-Math.abs(x)) <= Math.max(0.01*Math.abs(x), 0.05);   // Vorzeichen frei: Richtung je nach Konvention
+if(typeof window!=='undefined') window.mulyUebText = () => [tr('uebTog'), tr('uebOnH'), tr('uebOffH')];   // Kopfzeilen-Knopf (v0.9.7)
 function cUebToggle(){ C_UEB=!C_UEB; try{ localStorage.setItem('muly-uebung', C_UEB?'1':'0'); }catch(e){} C_REV={}; document.body.classList.remove('ueb-dia'); if(typeof liveCalc==='function') liveCalc(true);
   document.querySelectorAll('.rw-card').forEach(c=>{ if(c.closest('.main.hidden') || typeof liveCalc!=='function') cUebApply(c.id.slice(3), c, true); }); }   // auch die anderen Bereiche umschalten (v0.9.5)
 // Übungsmodus „Lernpfad“ (calc v0.8.34 · size v0.5.51): noch nicht aufgedeckte Schritte zeigen Überschrift und Formeln,
@@ -6036,11 +6068,10 @@ function cUebCheck(sys){
 function cUebApply(sys, card, ok){
   document.body.classList.toggle('uebung', C_UEB);
   const out=card.closest('.col-out'); if(!out) return;
-  let tg=out.querySelector('.ueb-tog');
-  if(!tg){ tg=document.createElement('button'); tg.type='button'; tg.className='ueb-tog'; tg.onclick=cUebToggle; const note=out.querySelector('.live-note'); note ? note.after(tg) : out.prepend(tg); }
-  // Schalter wie im kragr-Design (v0.9.1): Titel, Zustand darunter, Schiebeschalter rechts
-  tg.classList.add('k-switch'); tg.setAttribute('role','switch'); tg.setAttribute('aria-checked', C_UEB?'true':'false');
-  tg.innerHTML = `<span class="k-sw-tx"><b>${tr('uebTog')}</b><small>${C_UEB ? tr('uebOnH') : tr('uebOffH')}</small></span><span class="k-sw" aria-hidden="true"><i></i></span>`; tg.classList.toggle('on', C_UEB);
+  // Schalter für den Übungsmodus sitzt seit v0.9.7 in der Kopfzeile (Doktorhut, #ueb-btn); hier nur der Hinweis unter der Live-Zeile
+  out.querySelector('.ueb-tog')?.remove();
+  let tg=out.querySelector('.live-note'); if(!tg){ tg=document.createElement('span'); out.prepend(tg); }
+  if(window.mulyUebSync) mulyUebSync();
   out.querySelector('.ueb-hint')?.remove(); card.querySelector('.ueb-box')?.remove(); out.querySelector('.ueb-diabtn')?.remove();
   if(!C_UEB){ cUebShow(sys); return; }
   const key=[...card.closest('[id^="tab-"]').querySelectorAll('.col-in input, .col-in select')].map(e=>e.type==='checkbox'?e.checked:e.value).join('|');
@@ -6478,27 +6509,56 @@ if(typeof IntersectionObserver==='function') document.querySelectorAll('.results
 // und unter der Skizze bearbeiten, auf den Träger tippen setzt eine neue Einzellast, (3) Eingaben laufend als Entwurf sichern.
 // ══════════════════════════════════════════════════
 const K4T = {
-  de:{ toSize:'Nachweis in size', toSizeS:'übernimmt M, V und N dieser Berechnung', hint:'Tippe in die Skizze: auf eine Last zum Bearbeiten, auf den Träger für eine neue Einzellast.', close:'Schließen', draft:'Eingaben werden automatisch gesichert.', reset:'Neu beginnen', resetQ:'Wirklich zurücksetzen?' },
-  en:{ toSize:'Design check in size', toSizeS:'takes M, V and N of this calculation', hint:'Tap the sketch: a load to edit it, the beam to place a new point load.', close:'Close', draft:'Inputs are saved automatically.', reset:'Start over', resetQ:'Really reset?' },
-  fr:{ toSize:'Vérification dans size', toSizeS:'reprend M, V et N de ce calcul', hint:'Touchez le schéma : une charge pour la modifier, la poutre pour placer une charge ponctuelle.', close:'Fermer', draft:'Les saisies sont enregistrées automatiquement.', reset:'Recommencer', resetQ:'Vraiment réinitialiser ?' },
-  es:{ toSize:'Comprobación en size', toSizeS:'toma M, V y N de este cálculo', hint:'Toca el esquema: una carga para editarla, la viga para colocar una carga puntual.', close:'Cerrar', draft:'Los datos se guardan automáticamente.', reset:'Empezar de nuevo', resetQ:'¿Restablecer de verdad?' } };
+  de:{ toSize:'Nachweis in size', toSizeS:'Nachweis wählen — M, V und N werden übernommen', hint:'Tippe in die Skizze: auf eine Last zum Bearbeiten, auf den Träger für eine neue Einzellast.', close:'Schließen', draft:'Eingaben werden automatisch gesichert.', reset:'Neu beginnen', resetQ:'Wirklich zurücksetzen?' },
+  en:{ toSize:'Design check in size', toSizeS:'choose a check — M, V and N are taken over', hint:'Tap the sketch: a load to edit it, the beam to place a new point load.', close:'Close', draft:'Inputs are saved automatically.', reset:'Start over', resetQ:'Really reset?' },
+  fr:{ toSize:'Vérification dans size', toSizeS:'choisir la vérification — M, V et N sont repris', hint:'Touchez le schéma : une charge pour la modifier, la poutre pour placer une charge ponctuelle.', close:'Fermer', draft:'Les saisies sont enregistrées automatiquement.', reset:'Recommencer', resetQ:'Vraiment réinitialiser ?' },
+  es:{ toSize:'Comprobación en size', toSizeS:'elige la comprobación — se toman M, V y N', hint:'Toca el esquema: una carga para editarla, la viga para colocar una carga puntual.', close:'Cerrar', draft:'Los datos se guardan automáticamente.', reset:'Empezar de nuevo', resetQ:'¿Restablecer de verdad?' } };
 const k4 = k => (K4T[calcLang]||K4T.en)[k];
-// (1) Nachweis in size: aktuelle Berechnung (falls nötig) in „Meine Projekte“ legen und size damit öffnen
-function k4ToSize(){
+// (1) Nachweis in size (v0.9.6): kleines Menü mit den Nachweisen, die zu diesem System passen. Gewählter Nachweis
+// geht als #calc=<Schlüssel>&ziel=<Bereich.Nachweis>&part=<riegel|stiel> an size. Nur Nachweise, die M, V und N aus calc
+// wirklich übernehmen (keine Bauphysik, kein Wasserbau, kein Grundbau, kein Mauerwerk).
+const K5T = {
+  de:{ ask:'Welcher Nachweis?', riegel:'Riegel', stiel:'Stiel (der stärker gedrückte)', 'beton.balken':'Stahlbeton · Balken', 'beton.unterzug':'Stahlbeton · Unterzug (Plattenbalken)', 'beton.platte':'Stahlbeton · Platte (je m Breite)',
+    'stahl.traeger':'Stahl · Träger', 'holz.bauteil':'Holz · Träger', 'beton.stuetze':'Stahlbeton · Stütze (Knicken)', 'stahl.stuetze':'Stahl · Stütze (Biegeknicken)', 'holz.stuetze':'Holz · Stütze (Knicken)', 'stahl.fuss':'Stahl · Stützenfuß', 'stahl.schweiss':'Stahl · Schweißnaht (Anschluss an Stirnplatte)' },
+  en:{ ask:'Which check?', riegel:'Rafter', stiel:'Column (the more compressed one)', 'beton.balken':'Reinforced concrete · Beam', 'beton.unterzug':'Reinforced concrete · Downstand beam (T-beam)', 'beton.platte':'Reinforced concrete · Slab (per m width)',
+    'stahl.traeger':'Steel · Beam', 'holz.bauteil':'Timber · Beam', 'beton.stuetze':'Reinforced concrete · Column (buckling)', 'stahl.stuetze':'Steel · Column (flexural buckling)', 'holz.stuetze':'Timber · Column (buckling)', 'stahl.fuss':'Steel · Column base', 'stahl.schweiss':'Steel · Weld (connection to end plate)' },
+  fr:{ ask:'Quelle vérification ?', riegel:'Traverse', stiel:'Montant (le plus comprimé)', 'beton.balken':'Béton armé · Poutre', 'beton.unterzug':'Béton armé · Poutre en T (retombée)', 'beton.platte':'Béton armé · Dalle (par m de largeur)',
+    'stahl.traeger':'Acier · Poutre', 'holz.bauteil':'Bois · Poutre', 'beton.stuetze':'Béton armé · Poteau (flambement)', 'stahl.stuetze':'Acier · Poteau (flambement)', 'holz.stuetze':'Bois · Poteau (flambement)', 'stahl.fuss':'Acier · Pied de poteau', 'stahl.schweiss':'Acier · Soudure (assemblage sur platine)' },
+  es:{ ask:'¿Qué comprobación?', riegel:'Dintel', stiel:'Pilar (el más comprimido)', 'beton.balken':'Hormigón armado · Viga', 'beton.unterzug':'Hormigón armado · Viga en T (descolgada)', 'beton.platte':'Hormigón armado · Losa (por m de ancho)',
+    'stahl.traeger':'Acero · Viga', 'holz.bauteil':'Madera · Viga', 'beton.stuetze':'Hormigón armado · Pilar (pandeo)', 'stahl.stuetze':'Acero · Pilar (pandeo)', 'holz.stuetze':'Madera · Pilar (pandeo)', 'stahl.fuss':'Acero · Placa base', 'stahl.schweiss':'Acero · Soldadura (unión a placa de testa)' } };
+const k5 = k => (K5T[calcLang]||K5T.en)[k] || K5T.de[k] || k;
+// je System die sinnvollen Ziele: [Anzeige-Schlüssel, ziel für size, Bauteil des Rahmens]
+const K5_BALKEN = [['beton.balken','beton.balken'],['beton.unterzug','beton.unterzug'],['beton.platte','beton.platte'],['stahl.traeger','stahl.traeger'],['holz.bauteil','holz.bauteil']];
+const K5_ZIELE = {
+  beam:[{items:K5_BALKEN}], cantilever:[{items:[...K5_BALKEN.filter(x=>x[0]!=='beton.unterzug'), ['stahl.schweiss','stahl.schweiss']]}], cont:[{items:K5_BALKEN}],
+  frame:[{head:'riegel', part:'riegel', items:[['beton.balken','beton.balken'],['beton.unterzug','beton.unterzug'],['stahl.traeger','stahl.traeger'],['holz.bauteil','holz.bauteil'],['stahl.schweiss','stahl.schweiss']]},
+         {head:'stiel', part:'stiel', items:[['beton.stuetze','beton.stuetze'],['stahl.stuetze','stahl.traeger'],['holz.stuetze','holz.bauteil'],['stahl.fuss','stahl.fuss'],['stahl.schweiss','stahl.schweiss']]}] };
+function k4ToSize(ziel, part){
   const t=curTab(); if(t==='saved') return;
   try{ liveCalc(true); }catch(e){}
   let e = window.projSavedKey ? window.projSavedKey(t) : null;
   if(!e){ navSave(); e = window.projSavedKey ? window.projSavedKey(t) : null; }
-  if(e) location.href='size.html#calc='+encodeURIComponent(e.key);
+  if(e) location.href='size.html#calc='+encodeURIComponent(e.key)+(ziel?'&ziel='+ziel:'')+(part?'&part='+part:'');
 }
+function k5Menu(b, open){
+  const m=b.nextElementSibling; if(!m || !m.classList.contains('k-tsmenu')) return;
+  b.setAttribute('aria-expanded', open?'true':'false'); m.hidden=!open;
+  if(open){ const t=b.closest('.main').id.slice(4);
+    m.innerHTML=`<div class="k-tsm-h">${k5('ask')}</div>`+K5_ZIELE[t].map(g=>(g.head?`<div class="k-tsm-g">${k5(g.head)}</div>`:'')
+      +g.items.map(([lab,z])=>`<button type="button" role="menuitem" class="k-tsm-i" data-ziel="${z}"${g.part?` data-part="${g.part}"`:''}>${k5(lab)}</button>`).join('')).join('');
+    m.querySelectorAll('.k-tsm-i').forEach(i=>i.onclick=ev=>{ ev.stopPropagation(); k5Menu(b,false); k4ToSize(i.dataset.ziel, i.dataset.part); }); }
+}
+document.addEventListener('click', e=>{ if(!e.target.closest || e.target.closest('.k-tsmenu') || e.target.closest('.k-tosize')) return; document.querySelectorAll('.k-tosize[aria-expanded="true"]').forEach(b=>k5Menu(b,false)); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.k-tosize[aria-expanded="true"]').forEach(b=>k5Menu(b,false)); });
 function k4SizeBtns(){
   ['beam','cantilever','cont','frame'].forEach(t=>{
     const res=document.getElementById({beam:'beam-results',cantilever:'cant-results',cont:'cont-results',frame:'frame-results'}[t]); if(!res) return;
-    let b=res.nextElementSibling; if(!b || !b.classList.contains('k-tosize')){ b=document.createElement('button'); b.type='button'; b.className='k-tosize'; b.onclick=k4ToSize;
-      b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span class="k-ts-tx"><b></b><small></small></span><span class="k-ts-ar" aria-hidden="true">→</span>';
-      res.after(b); }
+    let b=res.nextElementSibling; if(!b || !b.classList.contains('k-tosize')){ b=document.createElement('button'); b.type='button'; b.className='k-tosize'; b.setAttribute('aria-haspopup','menu'); b.setAttribute('aria-expanded','false');
+      b.onclick=e=>{ e.stopPropagation(); k5Menu(b, b.getAttribute('aria-expanded')!=='true'); };
+      b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span class="k-ts-tx"><b></b><small></small></span><svg class="k-ts-ar" width="12" height="12" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3 L5 7 L9 3 Z" fill="currentColor"/></svg>';
+      res.after(b); const m=document.createElement('div'); m.className='k-tsmenu'; m.setAttribute('role','menu'); m.hidden=true; b.after(m); }
     k2Tx(b.querySelector('b'), k4('toSize')); k2Tx(b.querySelector('small'), k4('toSizeS'));
-    b.hidden = res.classList.contains('hidden');
+    b.hidden = res.classList.contains('hidden'); if(b.hidden) k5Menu(b,false);
   });
 }
 // (2) Last auswählen: Bearbeitung direkt unter der Skizze

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.18 -->
+<!-- kragr·projekt v0.1.19 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -114,6 +114,18 @@
   .sec-h { font-size:12px; font-weight:800; color:var(--text3); margin:10px 0 2px; }
   .sec-h:first-child { margin-top:0; }
   .addc { position:relative; margin-top:8px; }
+  .more { position:relative; flex:none; }
+  .btn.more-b { width:34px; height:34px; padding:0; justify-content:center; border-radius:9px; border-color:transparent; background:transparent; color:var(--text3); }
+  .btn.more-b:hover, .btn.more-b[aria-expanded="true"] { background:#eceef2; color:var(--text); }
+  .morem { position:absolute; z-index:25; right:0; top:calc(100% + 4px); min-width:230px; max-width:calc(100vw - 48px); display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 8px 28px rgba(17,17,20,.16); }
+  .morem[hidden] { display:none; }
+  .morem a, .morem button { display:flex; align-items:center; min-height:40px; padding:0 10px; border:0; border-radius:8px; background:transparent; font:inherit; font-size:14px; font-weight:600; color:var(--text); text-decoration:none; text-align:left; cursor:pointer; }
+  .morem a:hover, .morem button:hover { background:#f1f2f4; }
+  .morem .danger { color:var(--bad); }
+  .morem-h { padding:6px 10px 2px; font-size:12px; color:var(--text3); }
+  .it .d .when { display:block; color:var(--text3); font-size:12px; }
+  .it .d .tag.w { margin-top:4px; }
+  .pos-h .more { margin-left:auto; }
   .addm { position:absolute; z-index:20; left:0; top:calc(100% + 6px); min-width:270px; max-width:calc(100vw - 48px); display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 8px 28px rgba(17,17,20,.16); }
   .addm[hidden] { display:none; }
   .addm a { display:flex; align-items:center; min-height:42px; padding:0 10px; border-radius:8px; font-size:14px; font-weight:600; color:var(--text); text-decoration:none; }
@@ -257,10 +269,10 @@
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.18';
+const PROJ_VERSION = '0.1.19';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
- de:{ kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', sysH:'① System aus calc', chkH:'② Nachweise aus size', editSys:'System bearbeiten', newSys:'System in calc anlegen', noSysYet:'Noch kein System — in calc anlegen, dann lassen sich die Schnittkräfte für die Nachweise übernehmen.', addChk:'＋ Nachweis', otherChk:'Anderer Nachweis (Werte von Hand)', withForces:'Mit den Schnittkräften des Systems:', noChk:'Noch kein Nachweis.', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', rename:'Umbenennen', sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
+ de:{ more:'Weitere Aktionen', rep1:'Bericht ansehen', moveH:'Verschieben nach', openAsIs:'Öffnen ohne neu zu rechnen', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', sysH:'① System aus calc', chkH:'② Nachweise aus size', editSys:'System bearbeiten', newSys:'System in calc anlegen', noSysYet:'Noch kein System — in calc anlegen, dann lassen sich die Schnittkräfte für die Nachweise übernehmen.', addChk:'＋ Nachweis', otherChk:'Anderer Nachweis (Werte von Hand)', withForces:'Mit den Schnittkräften des Systems:', noChk:'Noch kein Nachweis.', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', rename:'Umbenennen', sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Meine Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
   looseHint:'Gespeichertes aus calc und size, das noch keiner Position zugeordnet ist.', hint:'Eine Position bündelt ein System aus calc und seine Nachweise aus size. „System in calc anlegen“ bzw. „System bearbeiten“ öffnet calc für diese Position, „＋ Nachweis“ öffnet size mit den Schnittkräften des Systems. Gespeichert wird erst mit „Übernehmen und zurück“. Ändert sich das System später, zeigen die Nachweise „neu rechnen“. Ohne Projekt sind calc und size freie Rechner. Alles bleibt in diesem Browser — mit „Projekt als Datei sichern“ lässt es sich übertragen und aufbewahren.',
   back:'← Zurück', print:'Drucken / PDF', defName:'Mein Projekt', pos:'Pos.', newPos:'neue Position', posTitle:'Bezeichnung',
   sum:'{0} Positionen · {1} nicht erfüllt · {2} veraltet', none:'Noch nichts gespeichert. Mit „＋ Position“ beginnen, dann das System in calc anlegen.',
@@ -273,7 +285,7 @@ const T = {
   repNoRep:'Für diesen Nachweis ist kein Bericht gespeichert — in size öffnen und erneut speichern.', repDate:'Stand {0}',
   repNote:'Lernwerkzeug — ersetzt keine geprüfte Statik.', exported:'Projektdatei gespeichert.', imported:'Projektdatei geladen: {0} Einträge.', badFile:'Die Datei ist keine kragr-Projektdatei.',
   reac:'Auflagerkräfte', moved:'Zugeordnet.' },
- en:{ kn_node:'Node', kn_eL:'left corner', kn_eR:'right corner', kn_sup:'Support', kn_weld:'Steel · Weld at member {0} ({1})', kn_fuss:'Steel · Column base at member {0}', kn_col:'column', kn_raf:'rafter', sysH:'① System from calc', chkH:'② Checks from size', editSys:'Edit system', newSys:'Create system in calc', noSysYet:'No system yet — create it in calc, then the internal forces can be used for the checks.', addChk:'＋ Check', otherChk:'Other check (values by hand)', withForces:'With the internal forces of the system:', noChk:'No check yet.', z_riegel:'Rafter', z_stiel:'Column (the more compressed one)', rename:'Rename', sum1:'1 item · {1} not satisfied · {2} out of date', older:'earlier version', navProj:'My projects', report:'Full report', export:'Save project as file', import:'Load file', addPos:'＋ Item', loose:'Not assigned',
+ en:{ more:'More actions', rep1:'View report', moveH:'Move to', openAsIs:'Open without recalculating', kn_node:'Node', kn_eL:'left corner', kn_eR:'right corner', kn_sup:'Support', kn_weld:'Steel · Weld at member {0} ({1})', kn_fuss:'Steel · Column base at member {0}', kn_col:'column', kn_raf:'rafter', sysH:'① System from calc', chkH:'② Checks from size', editSys:'Edit system', newSys:'Create system in calc', noSysYet:'No system yet — create it in calc, then the internal forces can be used for the checks.', addChk:'＋ Check', otherChk:'Other check (values by hand)', withForces:'With the internal forces of the system:', noChk:'No check yet.', z_riegel:'Rafter', z_stiel:'Column (the more compressed one)', rename:'Rename', sum1:'1 item · {1} not satisfied · {2} out of date', older:'earlier version', navProj:'My projects', report:'Full report', export:'Save project as file', import:'Load file', addPos:'＋ Item', loose:'Not assigned',
   looseHint:'Saved results from calc and size that are not yet assigned to an item.', hint:'An item bundles a system from calc with its checks from size. “Create system in calc” or “Edit system” opens calc for this item, “＋ Check” opens size with the internal forces of the system. Nothing is saved until “Apply and return”. If the system changes later, the checks show “recalculate”. Without a project, calc and size are free calculators. Everything stays in this browser — “Save project as file” lets you move and keep it.',
   back:'← Back', print:'Print / PDF', defName:'My project', pos:'Item', newPos:'new item', posTitle:'Description',
   sum:'{0} items · {1} not satisfied · {2} out of date', none:'Nothing saved yet. Start with “＋ Item”, then create the system in calc.',
@@ -286,7 +298,7 @@ const T = {
   repNoRep:'No report is stored for this check — open it in size and save again.', repDate:'As of {0}',
   repNote:'Learning tool — does not replace a checked structural design.', exported:'Project file saved.', imported:'Project file loaded: {0} entries.', badFile:'This file is not a kragr project file.',
   reac:'Support reactions', moved:'Assigned.' },
- fr:{ kn_node:'Nœud', kn_eL:'angle gauche', kn_eR:'angle droit', kn_sup:'Appui', kn_weld:'Acier · Soudure sur la barre {0} ({1})', kn_fuss:'Acier · Pied de poteau, barre {0}', kn_col:'poteau', kn_raf:'traverse', sysH:'① Système de calc', chkH:'② Vérifications de size', editSys:'Modifier le système', newSys:'Créer le système dans calc', noSysYet:'Pas encore de système — le créer dans calc ; ses efforts internes servent ensuite aux vérifications.', addChk:'＋ Vérification', otherChk:'Autre vérification (valeurs à la main)', withForces:'Avec les efforts internes du système :', noChk:'Pas encore de vérification.', z_riegel:'Traverse', z_stiel:'Montant (le plus comprimé)', rename:'Renommer', sum1:'1 position · {1} non vérifiée(s) · {2} périmée(s)', older:'version antérieure', navProj:'Mes projets', report:'Rapport complet', export:'Enregistrer le projet (fichier)', import:'Charger un fichier', addPos:'＋ Position', loose:'Sans position',
+ fr:{ more:'Autres actions', rep1:'Voir le rapport', moveH:'Déplacer vers', openAsIs:'Ouvrir sans recalculer', kn_node:'Nœud', kn_eL:'angle gauche', kn_eR:'angle droit', kn_sup:'Appui', kn_weld:'Acier · Soudure sur la barre {0} ({1})', kn_fuss:'Acier · Pied de poteau, barre {0}', kn_col:'poteau', kn_raf:'traverse', sysH:'① Système de calc', chkH:'② Vérifications de size', editSys:'Modifier le système', newSys:'Créer le système dans calc', noSysYet:'Pas encore de système — le créer dans calc ; ses efforts internes servent ensuite aux vérifications.', addChk:'＋ Vérification', otherChk:'Autre vérification (valeurs à la main)', withForces:'Avec les efforts internes du système :', noChk:'Pas encore de vérification.', z_riegel:'Traverse', z_stiel:'Montant (le plus comprimé)', rename:'Renommer', sum1:'1 position · {1} non vérifiée(s) · {2} périmée(s)', older:'version antérieure', navProj:'Mes projets', report:'Rapport complet', export:'Enregistrer le projet (fichier)', import:'Charger un fichier', addPos:'＋ Position', loose:'Sans position',
   looseHint:'Éléments enregistrés dans calc et size qui ne sont encore affectés à aucune position.', hint:'Une position regroupe un système de calc et ses vérifications de size. « Créer le système dans calc » ou « Modifier le système » ouvre calc pour cette position, « ＋ Vérification » ouvre size avec les efforts internes du système. Rien n’est enregistré avant « Appliquer et revenir ». Si le système change ensuite, les vérifications affichent « recalculer ». Sans projet, calc et size sont des calculateurs libres. Tout reste dans ce navigateur — « Enregistrer le projet (fichier) » permet de le transférer et de le conserver.',
   back:'← Retour', print:'Imprimer / PDF', defName:'Mon projet', pos:'Pos.', newPos:'nouvelle position', posTitle:'Désignation',
   sum:'{0} positions · {1} non vérifiée(s) · {2} périmée(s)', none:'Rien d’enregistré pour l’instant. Commencer par « ＋ Position », puis créer le système dans calc.',
@@ -299,7 +311,7 @@ const T = {
   repNoRep:'Aucun rapport enregistré pour cette vérification — l’ouvrir dans size et l’enregistrer à nouveau.', repDate:'État au {0}',
   repNote:'Outil pédagogique — ne remplace pas une note de calcul vérifiée.', exported:'Fichier de projet enregistré.', imported:'Fichier de projet chargé : {0} éléments.', badFile:'Ce fichier n’est pas un fichier de projet kragr.',
   reac:'Réactions d’appui', moved:'Affecté.' },
- es:{ kn_node:'Nudo', kn_eL:'esquina izquierda', kn_eR:'esquina derecha', kn_sup:'Apoyo', kn_weld:'Acero · Soldadura en la barra {0} ({1})', kn_fuss:'Acero · Placa base, barra {0}', kn_col:'pilar', kn_raf:'dintel', sysH:'① Sistema de calc', chkH:'② Comprobaciones de size', editSys:'Editar el sistema', newSys:'Crear el sistema en calc', noSysYet:'Aún no hay sistema — créalo en calc; después sus esfuerzos sirven para las comprobaciones.', addChk:'＋ Comprobación', otherChk:'Otra comprobación (valores a mano)', withForces:'Con los esfuerzos del sistema:', noChk:'Aún no hay comprobaciones.', z_riegel:'Dintel', z_stiel:'Pilar (el más comprimido)', rename:'Renombrar', sum1:'1 posición · {1} no cumple(n) · {2} desactualizada(s)', older:'versión anterior', navProj:'Mis proyectos', report:'Informe completo', export:'Guardar proyecto (archivo)', import:'Cargar archivo', addPos:'＋ Posición', loose:'Sin posición',
+ es:{ more:'Más acciones', rep1:'Ver informe', moveH:'Mover a', openAsIs:'Abrir sin recalcular', kn_node:'Nudo', kn_eL:'esquina izquierda', kn_eR:'esquina derecha', kn_sup:'Apoyo', kn_weld:'Acero · Soldadura en la barra {0} ({1})', kn_fuss:'Acero · Placa base, barra {0}', kn_col:'pilar', kn_raf:'dintel', sysH:'① Sistema de calc', chkH:'② Comprobaciones de size', editSys:'Editar el sistema', newSys:'Crear el sistema en calc', noSysYet:'Aún no hay sistema — créalo en calc; después sus esfuerzos sirven para las comprobaciones.', addChk:'＋ Comprobación', otherChk:'Otra comprobación (valores a mano)', withForces:'Con los esfuerzos del sistema:', noChk:'Aún no hay comprobaciones.', z_riegel:'Dintel', z_stiel:'Pilar (el más comprimido)', rename:'Renombrar', sum1:'1 posición · {1} no cumple(n) · {2} desactualizada(s)', older:'versión anterior', navProj:'Mis proyectos', report:'Informe completo', export:'Guardar proyecto (archivo)', import:'Cargar archivo', addPos:'＋ Posición', loose:'Sin posición',
   looseHint:'Elementos guardados en calc y size que aún no están asignados a ninguna posición.', hint:'Una posición agrupa un sistema de calc y sus comprobaciones de size. «Crear el sistema en calc» o «Editar el sistema» abre calc para esta posición, «＋ Comprobación» abre size con los esfuerzos del sistema. No se guarda nada hasta «Aplicar y volver». Si el sistema cambia después, las comprobaciones muestran «recalcular». Sin proyecto, calc y size son calculadoras libres. Todo se queda en este navegador — «Guardar proyecto (archivo)» permite trasladarlo y conservarlo.',
   back:'← Volver', print:'Imprimir / PDF', defName:'Mi proyecto', pos:'Pos.', newPos:'nueva posición', posTitle:'Denominación',
   sum:'{0} posiciones · {1} no cumple(n) · {2} desactualizada(s)', none:'Aún no hay nada guardado. Empezar con «＋ Posición» y crear después el sistema en calc.',
@@ -373,16 +385,23 @@ function render(){
   const { P, by, loose, items } = grouped();
   document.getElementById('pname').value = P.name;
   let nBad=0, nStale=0;
-  const sel = (it, cur) => `<select class="sel" onchange="assign('${esc(it.id)}', this.value)"><option value="">${t('toPos')}</option>${P.pos.map(q=>`<option value="${q.id}"${q.id===cur?' selected':''}>${t('pos')} ${esc(q.nr)} — ${esc(q.title)}</option>`).join('')}<option value="__new">${t('newFrom')}</option>${cur!=null?`<option value="__none">${t('remove')}</option>`:''}</select>`;
+  // Einträge (v0.1.19): je Eintrag ein Hauptknopf, alles Weitere im ⋯-Menü (Verschieben, Neue Position, Lösen, Bericht)
+  const more = items => `<div class="more"><button type="button" class="btn more-b" aria-haspopup="menu" aria-expanded="false" aria-label="${t('more')}" title="${t('more')}" onclick="menuToggle(this)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="19" cy="12" r="1.9" fill="currentColor"/></svg></button><div class="morem" role="menu" hidden>${items}</div></div>`;
+  const mv = (it, cur) => { const o=P.pos.filter(q=>q.id!==cur);
+    return (o.length ? `<div class="morem-h">${t('moveH')}</div>`+o.map(q=>`<button type="button" role="menuitem" data-asg="${esc(it.id)}" data-to="${q.id}">${t('pos')} ${esc(q.nr)} — ${esc(q.title)}</button>`).join('') : '')
+      + `<button type="button" role="menuitem" data-asg="${esc(it.id)}" data-to="__new">${t('newFrom')}</button>`
+      + (cur!=null ? `<button type="button" role="menuitem" data-asg="${esc(it.id)}" data-to="__none">${t('remove')}</button>` : ''); };
   const row = (it, list, posId) => {
-    if(it.kind==='c'){ const own = posId!=null && it.key===sysKey(posId), old = posId!=null && !own && list.filter(x=>x.kind==='c')[0]?.key!==it.key;
-      return `<div class="it${old?' old':''}"><span class="tag">${t('calcItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${calcDesc(it)}</div><div class="r">${old?`<span class="tag n">${t('older')}</span>`:''}<span class="when">${dShort(it.ts)}</span>
-      ${own ? `<a class="btn sm" href="calc.html?pos=${encodeURIComponent(posId)}">${t('editSys')}</a>` : `<a class="btn sm" href="calc.html#report=${encodeURIComponent(it.key)}">${t('open')}</a>${sel(it, posId)}`}</div></div>`; }
+    if(it.kind==='c'){ const own = posId!=null && it.key===sysKey(posId), old = posId!=null && !own && list.filter(x=>x.kind==='c')[0]?.key!==it.key, rep=`calc.html#report=${encodeURIComponent(it.key)}`;
+      return `<div class="it${old?' old':''}"><span class="tag">${t('calcItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${calcDesc(it)}<small class="when">${dShort(it.ts)}${old?` · ${t('older')}`:''}</small></div><div class="r">`
+        + (own ? `<a class="btn sm" href="calc.html?pos=${encodeURIComponent(posId)}">${t('editSys')}</a>${more(`<a role="menuitem" href="${rep}">${t('rep1')}</a>`)}`
+               : `<a class="btn sm" href="${rep}">${t('rep1')}</a>${more(mv(it, posId))}`) + `</div></div>`; }
     const st = staleOf(it, list);
     const open = posId!=null ? `size.html?pos=${encodeURIComponent(posId)}&check=${encodeURIComponent(it.name)}` : `size.html#pos=${encodeURIComponent(it.name)}`;
-    const recalc = st?.why==='stale' ? `<a class="btn sm warn" href="${posId!=null ? open+'&neu=1' : `size.html#pos=${encodeURIComponent(it.name)}&calc=${encodeURIComponent(st.key)}${it.p.src?.part?'&part='+it.p.src.part:''}`}">${t('recalc')}</a>` : '';
-    return `<div class="it"><span class="tag size">${t('sizeItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${sizeDesc(it)}</div><div class="r">${etaTag(it.p.eta, it.p.ok)}${st?`<span class="tag w">${t(st.why==='stale'?'staleWhy':'srcGone')}</span>`:''}<span class="when">${dShort(it.ts)}</span>
-      <a class="btn sm" href="${open}">${t('open')}</a>${recalc}${sel(it, posId)}</div></div>`; };
+    const recalc = st?.why==='stale' ? (posId!=null ? open+'&neu=1' : `size.html#pos=${encodeURIComponent(it.name)}&calc=${encodeURIComponent(st.key)}${it.p.src?.part?'&part='+it.p.src.part:''}`) : null;
+    return `<div class="it"><span class="tag size">${t('sizeItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${sizeDesc(it)}<small class="when">${dShort(it.ts)}</small>${st?`<span class="tag w">${t(st.why==='stale'?'staleWhy':'srcGone')}</span>`:''}</div><div class="r">${etaTag(it.p.eta, it.p.ok)}`
+      + (recalc ? `<a class="btn sm warn" href="${recalc}">${t('recalc')}</a>${more(`<a role="menuitem" href="${open}">${t('openAsIs')}</a>`+mv(it, posId))}` : `<a class="btn sm" href="${open}">${t('open')}</a>${more(mv(it, posId))}`)
+      + `</div></div>`; };
   // Knoten (v0.1.18): je Ecke die Schweißnaht an beiden Stabenden, je gelenkigem Fußpunkt der Stützenfuß — mit den Stabendkräften aus calc
   const knotGroups = (q, K) => { const u=(z,p,ik)=>`size.html?pos=${encodeURIComponent(q.id)}&ziel=${z}&part=${p}&ende=${ik}`, out=[];
     const pof = mem => mem==='rafter' ? 'riegel' : 'stiel', nm = mem => t(mem==='rafter' ? 'kn_raf' : 'kn_col');
@@ -408,7 +427,7 @@ function render(){
       : `<div class="it"><span class="empty">${t('noSysYet')}</span><a class="btn sm p" href="calc.html?pos=${encodeURIComponent(q.id)}">${t('newSys')}</a></div>`;
     return `<div class="pos" data-id="${q.id}" id="pos-${q.id}"><div class="pos-h"><span class="pos-nr">${t('pos')} <input class="pos-t" style="width:3.2em;flex:none;min-width:0" value="${esc(q.nr)}" onchange="setPos('${q.id}','nr',this.value)" aria-label="Nr."></span>
         <span class="k-name k-name-s"><input class="pos-t" id="pt-${q.id}" value="${esc(q.title)}" onchange="setPos('${q.id}','title',this.value)" onkeydown="if(event.key==='Enter') this.blur()" aria-label="${t('posTitle')}"><button type="button" class="k-pen" aria-label="${t('rename')}" title="${t('rename')}" onclick="kRename('pt-${q.id}')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></button></span>${status}
-        <button class="btn x" onclick="delPos('${q.id}', this)">${t('delPos')}</button></div>
+        ${more(`<button type="button" role="menuitem" onclick="kRename('pt-${q.id}')">${t('rename')}</button><button type="button" role="menuitem" class="danger" data-del="${q.id}">${t('delPos')}</button>`)}</div>
       <div class="pos-body"><div class="items"><div class="sec-h">${t('sysH')}</div>${sysPart}
         <div class="sec-h">${t('chkH')}</div>${sizes.length ? sizes.map(it=>row(it, list, q.id)).join('') : `<div class="empty">${t('noChk')}</div>`}${addMenu(q, own?sysT:(calcs[0]?sysT:null), (own||calcs[0])?.sdf?.results?.knoten)}</div><div class="thumb">${thumb}</div></div></div>`; }).join('');
   document.getElementById('list').innerHTML = posHtml || (items.length ? '' : `<div class="empty" style="padding:10px 0 4px">${t('none')}</div>`);
@@ -420,9 +439,17 @@ function nextNr(P){ const n=P.pos.map(q=>parseInt(q.nr,10)).filter(isFinite); re
 function addPos(title){ const P=proj(), id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); P.pos.push({ id, nr:nextNr(P), title: title || t('newPos'), auto: !title }); save(P); render(); return id; }
 function setPos(id, f, v){ const P=proj(), q=P.pos.find(x=>x.id===id); if(!q) return; q[f]=String(v).trim() || q[f]; if(f==='title') q.auto=false; save(P); render(); }   // eigener Titel: folgt nicht mehr dem System
 // „＋ Nachweis“: kleines Menü mit den passenden Nachweisen (v0.1.17)
-function addToggle(b, open){ const m=b.nextElementSibling, o=open??(b.getAttribute('aria-expanded')!=='true'); document.querySelectorAll('.addc > button[aria-expanded="true"]').forEach(x=>{ if(x!==b){ x.setAttribute('aria-expanded','false'); x.nextElementSibling.hidden=true; } }); b.setAttribute('aria-expanded', o?'true':'false'); m.hidden=!o; }
-document.addEventListener('click', e=>{ if(e.target.closest('.addc')) return; document.querySelectorAll('.addc > button[aria-expanded="true"]').forEach(b=>addToggle(b,false)); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.addc > button[aria-expanded="true"]').forEach(b=>addToggle(b,false)); });
+function addToggle(b, open){ menuToggle(b, open); }
+// Menüs „＋ Nachweis“ und ⋯ (v0.1.19): immer nur eines offen, Klick daneben oder Escape schließt
+function menuToggle(b, open){ const m=b.nextElementSibling, o=open??(b.getAttribute('aria-expanded')!=='true');
+  document.querySelectorAll('.addc > button[aria-expanded="true"], .more > button[aria-expanded="true"]').forEach(x=>{ if(x!==b){ x.setAttribute('aria-expanded','false'); x.nextElementSibling.hidden=true; } });
+  b.setAttribute('aria-expanded', o?'true':'false'); m.hidden=!o; }
+document.addEventListener('click', e=>{
+  const a=e.target.closest('[data-asg]'); if(a){ assign(a.dataset.asg, a.dataset.to); return; }
+  const d=e.target.closest('[data-del]'); if(d){ delPos(d.dataset.del, d); return; }
+  if(e.target.closest('.addc') || e.target.closest('.more')) return;
+  document.querySelectorAll('.addc > button[aria-expanded="true"], .more > button[aria-expanded="true"]').forEach(b=>menuToggle(b,false)); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.addc > button[aria-expanded="true"], .more > button[aria-expanded="true"]').forEach(b=>menuToggle(b,false)); });
 // Umbenennen (v0.1.15): Stift neben Projekt- und Positionsnamen setzt den Cursor ins Feld und markiert den Text
 function kRename(id){ const e=document.getElementById(id); if(!e) return; e.focus(); e.select(); }
 function setName(v){ const P=proj(); P.name=String(v).trim() || P.name; save(P); render(); }

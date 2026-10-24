@@ -35,7 +35,7 @@ async def main():
         pid=await pg.evaluate(f"{PJ}.pos[0].id")
         await pg.click('.pos a.btn.p'); await pg.wait_for_url('**/calc.html?pos=*'); await pg.wait_for_timeout(1500)
         r=await pg.evaluate("[document.getElementById('k-pmbar').innerText.replace(/\\s+/g,' '), document.getElementById('bL').value]")
-        check('„System in calc anlegen“: Projektzeile mit Pos. 1, Startwerte (nicht der Rechner-Entwurf)', 'Projekt · Pos. 1' in r[0] and 'Übernehmen und zurück' in r[0] and r[1]=='5', r)
+        check('„System in calc anlegen“: schmale Projektzeile „Pos. 1 …“ mit ✕ und „Übernehmen“, Startwerte (nicht der Rechner-Entwurf)', r[0].startswith('Pos. 1') and 'Übernehmen' in r[0] and await pg.get_attribute('#k-pmbar [data-pm=x]','aria-label')=='Abbrechen' and await pg.get_attribute('#k-pmbar [data-pm=ok]','aria-label')=='Übernehmen und zurück' and r[1]=='5', r)
         await pg.evaluate("const e=document.getElementById('bL'); e.value='7'; e.dispatchEvent(new Event('input',{bubbles:true}))"); await pg.wait_for_timeout(900)
         await pg.click('#k-pmbar [data-pm=x]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(500)
         check('„Abbrechen“ speichert nichts', await pg.evaluate(f"{SDF}.length")==0)
@@ -95,6 +95,18 @@ async def main():
         check('Stiel als Stahlbetonstütze: N = 25 kN, Name „Stahlbeton · Stütze · Stiel“', r[:3]==['beton','stuetze',25] and r[4].endswith('· Stiel'), r)
         await pg.click('#k-pmbar [data-pm=x]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(500)
         check('„Abbrechen“ in size legt keinen Nachweis an', await pg.evaluate("JSON.parse(localStorage.getItem('statiq-size-positionen')).length")==1)
+        # Aufgeräumte Einträge (projekt v0.1.19): keine Auswahllisten, je Eintrag ein Hauptknopf und ⋯-Menü
+        r=await pg.evaluate("[document.querySelectorAll('#list select').length, [...document.querySelectorAll('#list .it')].filter(it=>it.querySelector('.r')).map(it=>it.querySelectorAll('.r > .btn').length+'/'+it.querySelectorAll('.r > .more').length)]")
+        check('„Meine Projekte“: keine Auswahllisten, je Eintrag ein Hauptknopf + ⋯', r[0]==0 and r[1] and all(x=='1/1' for x in r[1]), r)
+        p0,p1=await pg.evaluate("proj().pos.map(q=>q.id)")
+        await pg.click(f'#pos-{p0} .it:has(.tag.size) .more-b'); await pg.wait_for_timeout(100)
+        await pg.click(f'#pos-{p0} .morem:not([hidden]) [data-to="{p1}"]'); await pg.wait_for_timeout(200)
+        check('⋯ → „Verschieben nach Pos. 2“ ordnet den Nachweis neu zu', await pg.evaluate(f"proj().asg['s:Deckenbalken D2']")==p1)
+        await pg.click(f'#pos-{p1} .it:has(.tag.size) .more-b'); await pg.click(f'#pos-{p1} .morem:not([hidden]) [data-to="{p0}"]'); await pg.wait_for_timeout(200)
+        await pg.click(f'#pos-{p1} .pos-h .more-b'); await pg.wait_for_timeout(100)
+        r=await pg.evaluate(f"[...document.querySelectorAll('#pos-{p1} .pos-h .morem button')].map(b=>b.textContent)")
+        check('Positionskopf: ⋯ mit „Umbenennen“ und „Position löschen“ (statt Knopf in der Zeile)', r==['Umbenennen','Position löschen'], r)
+        await pg.keyboard.press('Escape')
         # gelöschte Position
         await pg.goto(B+'calc.html?pos=gibtsnicht'); await pg.wait_for_timeout(1200)
         r=await pg.evaluate("[document.getElementById('k-pmbar').hidden, document.getElementById('k-pmbar').innerText]")
@@ -102,14 +114,17 @@ async def main():
         # Sprache
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.goto(B+f'size.html?pos={pid}'); await pg.wait_for_timeout(1200)
         r=await pg.evaluate("document.getElementById('k-pmbar').innerText.replace(/\\s+/g,' ')")
-        check('EN: Projektzeile übersetzt', 'Project · Pos. 1' in r and 'Apply and return' in r and 'Cancel' in r, r)
+        check('EN: Projektzeile übersetzt', 'Pos. 1' in r and 'Apply' in r and await pg.get_attribute('#k-pmbar [data-pm=x]','aria-label')=='Cancel' and await pg.get_attribute('#k-pmbar [data-pm=ok]','aria-label')=='Apply and return', r)
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         # Handy 360
-        m=await br.new_page(viewport={'width':360,'height':720}); m.on('pageerror', lambda e: errs.append(str(e)))
+        m=pg; await m.set_viewport_size({'width':360,'height':720})   # gleiche Seite, gleicher Speicher
         for f in ['calc','size']:
             await m.goto(B+f+f'.html?pos={pid}'); await m.wait_for_timeout(1200)
             r=await m.evaluate("[document.documentElement.scrollWidth, Math.round(document.getElementById('k-pmbar').getBoundingClientRect().height)]")
-            check(f'{f} 360 px: Projektzeile passt, kein Querscrollen', r[0]<=360 and r[1]<=140, r)
+            check(f'{f} 360 px: Projektzeile einzeilig (≤ 56 px), kein Querscrollen', r[0]<=360 and r[1]<=56, r)
+            await m.evaluate("window.scrollTo(0, 900)"); await m.wait_for_timeout(200)
+            r=await m.evaluate("[Math.round(document.getElementById('k-pmbar').getBoundingClientRect().top), Math.round(document.querySelector('.app-header').getBoundingClientRect().bottom)]")
+            check(f'{f} 360 px: Projektzeile bleibt beim Scrollen direkt unter der Kopfzeile', abs(r[0]-r[1])<=2, r)
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()
 asyncio.run(main())

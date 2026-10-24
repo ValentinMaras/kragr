@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.0 -->
+<!-- kragr v0.11.1 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -654,22 +654,24 @@ window.mulyProj = {
   @media print { .k-knoten { break-inside:avoid; } }
 </style>
 <style data-pm>
-  /* Projektmodus (calc v0.10.1 · size v0.7.1): calc und size sind eigenständige Rechner. Aus „Meine Projekte“ geöffnet (?pos=<id>)
-     zeigen sie oben eine Projektzeile mit „Abbrechen“ und „Übernehmen und zurück“; nur dieser Knopf schreibt in die Position. */
-  .k-pmbar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:4px auto 8px; padding:10px 12px 10px 16px; border-radius:16px; background:#e9ecf6; box-shadow:inset 0 0 0 1.5px #c9cfe6; }
-  .k-pmbar[hidden] { display:none !important; }
-  .k-pmbar .kpm-tx { flex:1; min-width:170px; display:flex; flex-direction:column; gap:1px; }
-  .k-pmbar .kpm-k { font-size:12px; font-weight:700; color:#46518a; }
-  .k-pmbar .kpm-t { font-size:15px; font-weight:800; color:#111114; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .k-pmbar .kpm-s { font-size:12.5px; color:#3d3f45; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .k-pmbar .kpm-b { display:flex; gap:8px; margin-left:auto; }
-  .kpm-btn { min-height:42px; padding:0 16px; border-radius:11px; border:0; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
-  .kpm-btn.ok { background:#111114; color:#fff; } .kpm-btn.ok:hover { background:#333; }
-  .kpm-btn.x { background:#fff; color:#3d3f45; } .kpm-btn.x:hover { color:#111114; }
-  .k-pmbar.gone { background:#fdf8e8; box-shadow:inset 0 0 0 1.5px #f1d48a; }
-  .k-pmbar.gone a { font-weight:700; color:#111114; }
-  @media (max-width:560px) { .k-pmbar .kpm-b { width:100%; } .kpm-btn { flex:1; } }
+  /* Projektmodus (calc v0.10.1 · size v0.7.1; schmale Zeile seit calc v0.11.1 · size v0.7.3): calc und size sind eigenständige Rechner.
+     Aus „Meine Projekte“ geöffnet (?pos=<id>) zeigen sie unter der Kopfzeile eine schmale, mitlaufende Projektzeile:
+     ✕ (Abbrechen) · „Pos. N · Titel“ · „Übernehmen“. Nur dieser Knopf schreibt in die Position. */
+  .k-pmbar { position:sticky; top:var(--k-hdr-h, 58px); z-index:9; display:flex; align-items:center; gap:8px; margin:4px auto 8px; padding:6px 6px 6px 6px; border-radius:14px; background:#e9ecf6; box-shadow:inset 0 0 0 1.5px #c9cfe6, 0 4px 14px rgba(17,17,20,.06); }
   .k-pmbar.k-frame { width:calc(100% - 40px); max-width:calc(var(--k-frame, 1180px) - 40px) !important; }   /* bündig mit den Karten */
+  .k-pmbar[hidden] { display:none !important; }
+  .k-pmbar .kpm-x { flex:none; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:10px; background:#fff; color:#3d3f45; cursor:pointer; }
+  .k-pmbar .kpm-x:hover { color:#111114; background:#f6f7f9; }
+  .k-pmbar .kpm-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:0; line-height:1.3; }
+  .k-pmbar .kpm-t { font-size:14.5px; font-weight:800; color:#111114; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .k-pmbar .kpm-t i { font-style:normal; font-family:var(--k-mono, monospace); font-size:12px; font-weight:600; color:#46518a; margin-right:2px; }
+  .k-pmbar .kpm-s { font-size:12px; color:#46518a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kpm-btn { flex:none; min-height:40px; padding:0 16px; border-radius:10px; border:0; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .kpm-btn.ok { background:#111114; color:#fff; } .kpm-btn.ok:hover { background:#333; }
+  .kpm-btn .kpm-short { display:none; }
+  @media (max-width:560px) { .kpm-btn { padding:0 13px; } .kpm-btn .kpm-long { display:none; } .kpm-btn .kpm-short { display:inline; } }
+  .k-pmbar.gone { position:static; padding:10px 14px; gap:12px; flex-wrap:wrap; background:#fdf8e8; box-shadow:inset 0 0 0 1.5px #f1d48a; }
+  .k-pmbar.gone a { font-weight:700; color:#111114; }
   .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
   @media (min-width:1000px) { .k-verfoot { display:none; } }
   #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Meine Projekte“ */
@@ -683,10 +685,10 @@ window.mulyProj = {
 // Nachweise „statiq-size-positionen“. Die Seite meldet sich mit window.kragrPMPage = { label(), apply(), cancel() }.
 (function(){
   var PSTORE='statiq-projekt';
-  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', x:'Abbrechen', sys:'System aus calc', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Meine Projekte“ →' },
-          en:{ k:'Project', ok:'Apply and return', x:'Cancel', sys:'System from calc', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “My projects” →' },
-          fr:{ k:'Projet', ok:'Appliquer et revenir', x:'Annuler', sys:'Système de calc', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Mes projets » →' },
-          es:{ k:'Proyecto', ok:'Aplicar y volver', x:'Cancelar', sys:'Sistema de calc', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Mis proyectos» →' } };
+  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', okS:'Übernehmen', x:'Abbrechen', sys:'System aus calc', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Meine Projekte“ →' },
+          en:{ k:'Project', ok:'Apply and return', okS:'Apply', x:'Cancel', sys:'System from calc', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “My projects” →' },
+          fr:{ k:'Projet', ok:'Appliquer et revenir', okS:'Appliquer', x:'Annuler', sys:'Système de calc', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Mes projets » →' },
+          es:{ k:'Proyecto', ok:'Aplicar y volver', okS:'Aplicar', x:'Cancelar', sys:'Sistema de calc', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Mis proyectos» →' } };
   var DEFN=['Mein Projekt','My project','Mon projet','Mi proyecto'];
   function lang(){ try{ return window.calcLang || localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
   function t(k){ var L=lang(); return (T[L]||T.en)[k] || T.de[k] || k; }
@@ -696,6 +698,8 @@ window.mulyProj = {
   function saveProj(P){ try{ if(P && DEFN.indexOf(P.name)>=0){ P=JSON.parse(JSON.stringify(P)); delete P.name; } localStorage.setItem(PSTORE, JSON.stringify(P)); return true; }catch(e){ return false; } }
   var q=new URLSearchParams((typeof location!=='undefined' && location.search) || ''), id=q.get('pos');
   var pos=id ? proj().pos.filter(function(x){ return x.id===id; })[0] : null;
+  function hh(){ var hd=document.querySelector('.app-header'); if(hd) document.documentElement.style.setProperty('--k-hdr-h', Math.round(hd.getBoundingClientRect().height)+'px'); }
+  if(typeof window!=='undefined' && window.addEventListener) window.addEventListener('resize', hh);
   var PM={ on:!!pos, gone:!!id && !pos, id:id, pos:pos, params:q, sysKey: id ? 'statiq_sdf_pos_'+id : null, t:t, proj:proj, saveProj:saveProj,
     assign:function(item, pid){ var P=proj(); P.asg[item]=pid; saveProj(P); },
     // Titel folgt dem System, solange er nicht von Hand vergeben wurde (auto !== false)
@@ -706,9 +710,11 @@ window.mulyProj = {
       if(PM.gone){ bar.hidden=false; bar.className='k-pmbar k-frame gone'; bar.innerHTML='<span class="kpm-tx"><span class="kpm-t">'+esc(t('gone'))+'</span></span><a href="projekt.html">'+esc(t('proj'))+'</a>'; return; }
       if(!PM.on){ bar.hidden=true; return; }
       document.body.classList.add('k-pm');
-      var pg=window.kragrPMPage||{}, sub=pg.label ? pg.label() : '';
-      var h='<span class="kpm-tx"><span class="kpm-k">'+esc(t('k'))+' · Pos. '+esc(pos.nr)+'</span><span class="kpm-t">'+esc(pos.title)+'</span>'+(sub?'<span class="kpm-s">'+esc(sub)+'</span>':'')+'</span>'
-        +'<span class="kpm-b"><button type="button" class="kpm-btn x" data-pm="x">'+esc(t('x'))+'</button><button type="button" class="kpm-btn ok" data-pm="ok">'+esc(t('ok'))+'</button></span>';
+      var pg=window.kragrPMPage||{}, sub=pg.label ? pg.label() : '', X='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+      var h='<button type="button" class="kpm-x" data-pm="x" aria-label="'+esc(t('x'))+'" title="'+esc(t('x'))+'">'+X+'</button>'
+        +'<span class="kpm-tx" title="'+esc(t('k')+' · Pos. '+pos.nr+' · '+pos.title)+'"><span class="kpm-t"><i>Pos. '+esc(pos.nr)+'</i> '+esc(pos.title)+'</span>'+(sub?'<span class="kpm-s">'+esc(sub)+'</span>':'')+'</span>'
+        +'<button type="button" class="kpm-btn ok" data-pm="ok" aria-label="'+esc(t('ok'))+'"><span class="kpm-long">'+esc(t('ok'))+'</span><span class="kpm-short" aria-hidden="true">'+esc(t('okS'))+'</span></button>';
+      hh();
       bar.hidden=false; bar.className='k-pmbar k-frame'; if(bar._h!==h){ bar._h=h; bar.innerHTML=h; }
     } };
   window.kragrPM=PM;
@@ -1126,7 +1132,7 @@ window.mulyProj = {
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.0</span>
+    <span class="version">v0.11.1</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1600,7 +1606,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.0';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.1';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;

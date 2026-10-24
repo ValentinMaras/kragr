@@ -80,7 +80,7 @@ async def main():
         check('size.html#pos= lädt die Position', await pg.input_value('#ho-name')=='Pfette P1' and 'Pfette P1' in await pg.inner_text('#pos-msg'))
         # Position löschen (zweimal klicken)
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(250)
-        await pg.click(f".pos[data-id='{pid}'] .btn.x"); await pg.click(f".pos[data-id='{pid}'] .btn.x"); await pg.wait_for_timeout(80)
+        await pg.click(f".pos[data-id='{pid}'] .pos-h .more-b"); await pg.click(f".pos[data-id='{pid}'] [data-del]"); await pg.click(f".pos[data-id='{pid}'] [data-del]"); await pg.wait_for_timeout(80)
         check('Position löschen: Einträge wieder „ohne Position“', await pg.evaluate("proj().pos.length")==0 and 'Pos 3 Unterzug' in await pg.inner_text('#loose'))
         # Startseite
         await pg.evaluate(f"addPos('Test')"); await pg.goto(B+'index.html'); await pg.wait_for_timeout(250)

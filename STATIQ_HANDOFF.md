@@ -1,11 +1,11 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.0 · ref v0.3.43 · size v0.7.2 · projekt v0.1.18 · rechtliches v0.1.12 · Startseite)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.1 · ref v0.3.43 · size v0.7.3 · projekt v0.1.19 · rechtliches v0.1.12 · Startseite)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.0, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.18, Test von Variante C)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.1, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.19, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.43, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.7.2, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `size.html` — Bemessung (kragr·size v0.7.3, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.12)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
@@ -567,6 +567,14 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Bedienung: schmale Projektzeile, aufgeräumte Einträge — calc v0.11.1 · size v0.7.3 · projekt v0.1.19
+
+Valentin: Bedienung deutlich besser, aber weiter optimieren. Gewählt (Rückfrage): „Aufgeräumte Einträge“ in „Meine Projekte“ und „Schmalere Projektzeile“ in calc/size. (Nicht gewählt: „＋ Nachweis“ in zwei Schritten, Rückmeldung nach Übernehmen, kompakter Positionskopf, aufklappbare Knotenkarte, „Neu beginnen“, einheitliche Begriffe max V/Q.)
+
+- **Projektzeile (`data-pm`, identisch in calc/size):** eine Zeile: ✕ (Abbrechen, `aria-label`) · „Pos. N Titel“ mit kleiner Unterzeile (System aus calc / Nachweis: …) · „Übernehmen und zurück“ (am Handy ≤ 560 px nur „Übernehmen“, `.kpm-long`/`.kpm-short`, `aria-label` immer lang). `position:sticky` direkt unter der Kopfzeile; Höhe der Kopfzeile als `--k-hdr-h` (gemessen in `hh()`, auch bei `resize`). Text `okS` in 4 Sprachen.
+- **Meine Projekte:** keine Auswahlliste „Zuordnen …“ mehr. Je Eintrag ein Hauptknopf (System: „System bearbeiten“; Nachweis: „Öffnen“ bzw. bei veraltetem Stand „Neu rechnen“; lose calc-Berechnung: „Bericht ansehen“) und ein ⋯-Menü (`.more`/`.morem`, `menuToggle`): „Verschieben nach“ (andere Positionen), „Neue Position“, „Aus Position lösen“, beim System „Bericht ansehen“, bei veraltetem Nachweis „Öffnen ohne neu zu rechnen“. Datum als kleine Zeile unter dem Namen. Positionskopf: ⋯ mit „Umbenennen“ und „Position löschen“ (zweimal tippen). Aktionen über `data-asg`/`data-to` bzw. `data-del` (keine Namen mehr in `onclick`). Texte `more`, `rep1`, `moveH`, `openAsIs` (4 Sprachen).
+- **Tests:** `test_projektmodus.py` (+ einzeilige, mitlaufende Projektzeile, ⋯-Menüs), `test_projekt.py` (Löschen über ⋯).
 
 ## Knoten und Stabendkräfte (Stufe 1 der Knotennachweise) — calc v0.11.0 · size v0.7.2 · projekt v0.1.18
 
@@ -1242,7 +1250,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1837/1837 grün** (inklusive `test_knoten.py` 22, `test_projektmodus.py` 28, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1842/1842 grün** (inklusive `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

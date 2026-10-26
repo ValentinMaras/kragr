@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.4 -->
-<html lang="de">
+<!-- kragr·size v0.7.5 -->
+<html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
 <script data-theme>
@@ -136,7 +136,7 @@ window.mulyProj = {
 };
 </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kragr·size — Bemessung</title>
+  <title>Bemessung — kragr</title>
   <meta name="description" content="Bemessung von Stahlbetonbalken und -platten nach DIN EN 1992-1-1 mit NA — mit Nachweisbericht." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
@@ -468,7 +468,7 @@ window.mulyProj = {
 </style>
 <style data-pm>
   /* Projektmodus (calc v0.10.1 · size v0.7.1; schmale Zeile seit calc v0.11.1 · size v0.7.3): calc und size sind eigenständige Rechner.
-     Aus „Meine Projekte“ geöffnet (?pos=<id>) zeigen sie unter der Kopfzeile eine schmale, mitlaufende Projektzeile:
+     Aus „Projekte“ geöffnet (?pos=<id>) zeigen sie unter der Kopfzeile eine schmale, mitlaufende Projektzeile:
      ✕ (Abbrechen) · „Pos. N · Titel“ · „Übernehmen“. Nur dieser Knopf schreibt in die Position. */
   .k-pmbar { position:sticky; top:var(--k-hdr-h, 58px); z-index:9; display:flex; align-items:center; gap:8px; margin:4px auto 8px; padding:6px 6px 6px 6px; border-radius:14px; background:#e9ecf6; box-shadow:inset 0 0 0 1.5px #c9cfe6, 0 4px 14px rgba(17,17,20,.06); }
   .k-pmbar.k-frame { width:calc(100% - 40px); max-width:calc(var(--k-frame, 1180px) - 40px) !important; }   /* bündig mit den Karten */
@@ -487,21 +487,21 @@ window.mulyProj = {
   .k-pmbar.gone a { font-weight:700; color:#111114; }
   .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
   @media (min-width:1000px) { .k-verfoot { display:none; } }
-  #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Meine Projekte“ */
+  #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Projekte“ */
   .col-out .save-btn { display:none !important; }
   @media print { .k-pmbar, .k-verfoot { display:none !important; } }
 </style>
 <script data-pm>
-// Projektmodus (calc v0.10.1 · size v0.7.1): „Meine Projekte“ verbindet calc und size. calc.html?pos=<id> bearbeitet das System der
+// Projektmodus (calc v0.10.1 · size v0.7.1): „Projekte“ verbindet calc und size. calc.html?pos=<id> bearbeitet das System der
 // Position, size.html?pos=<id>[&check=<Name>|&ziel=<Bereich.Nachweis>&part=<riegel|stiel>][&neu=1] einen Nachweis. Ohne ?pos=
 // sind calc und size reine Rechner ohne Projektbezug. Ablage: „statiq-projekt“ (pos, asg), System „statiq_sdf_pos_<id>“,
 // Nachweise „statiq-size-positionen“. Die Seite meldet sich mit window.kragrPMPage = { label(), apply(), cancel() }.
 (function(){
   var PSTORE='statiq-projekt';
-  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', okS:'Übernehmen', x:'Abbrechen', sys:'System aus calc', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Meine Projekte“ →' },
-          en:{ k:'Project', ok:'Apply and return', okS:'Apply', x:'Cancel', sys:'System from calc', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “My projects” →' },
-          fr:{ k:'Projet', ok:'Appliquer et revenir', okS:'Appliquer', x:'Annuler', sys:'Système de calc', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Mes projets » →' },
-          es:{ k:'Proyecto', ok:'Aplicar y volver', okS:'Aplicar', x:'Cancelar', sys:'Sistema de calc', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Mis proyectos» →' } };
+  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', okS:'Übernehmen', x:'Abbrechen', sys:'System aus „Schnittkräfte“', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Projekte“ →' },
+          en:{ k:'Project', ok:'Apply and return', okS:'Apply', x:'Cancel', sys:'System from “Internal forces”', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “Projects” →' },
+          fr:{ k:'Projet', ok:'Appliquer et revenir', okS:'Appliquer', x:'Annuler', sys:'Système de « Efforts »', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Projets » →' },
+          es:{ k:'Proyecto', ok:'Aplicar y volver', okS:'Aplicar', x:'Cancelar', sys:'Sistema de «Esfuerzos»', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Proyectos» →' } };
   var DEFN=['Mein Projekt','My project','Mon projet','Mi proyecto'];
   function lang(){ try{ return window.calcLang || localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
   function t(k){ var L=lang(); return (T[L]||T.en)[k] || T.de[k] || k; }
@@ -534,14 +534,14 @@ window.mulyProj = {
   document.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('#k-pmbar [data-pm]'); if(!b) return; var pg=window.kragrPMPage||{};
     if(b.dataset.pm==='ok'){ if(pg.apply) pg.apply(); else PM.back(); } else { if(pg.cancel) pg.cancel(); else PM.back(); } });
   document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
-    // Ordner-Symbol: einfacher Link zu „Meine Projekte“; das frühere Projekt-Fenster bleibt intern über mulyAltProj() erreichbar
+    // Ordner-Symbol: einfacher Link zu „Projekte“; das frühere Projekt-Fenster bleibt intern über mulyAltProj() erreichbar
     var L0={ open:window.openProj }; window.mulyAltProj=function(){ var o=document.getElementById('proj-panel'); if(o) o.removeAttribute('hidden'); if(L0.open) L0.open(); };
     window.toggleProj=function(e){ if(e && e.stopPropagation) e.stopPropagation(); location.href='projekt.html'; }; window.openProj=window.toggleProj; window.closeProj=function(){};
     var old=document.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
     var b=document.getElementById('proj-btn'); if(b){ b.removeAttribute('aria-haspopup'); b.removeAttribute('aria-expanded'); }
     // Version unten (am Handy ist die Kopfzeile dafür zu schmal)
     var hv=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name');
-    if(hv && m && !document.getElementById('k-verfoot')){ var f=document.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr·'+m.textContent.trim()+' '+hv.textContent.trim(); document.body.appendChild(f); }
+    if(hv && m && !document.getElementById('k-verfoot')){ var f=document.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr · '+m.textContent.trim()+' '+hv.textContent.trim(); document.body.appendChild(f); }
     PM.render();
   }, 0); });
 })();
@@ -682,536 +682,30 @@ window.mulyProj = {
     .k-hdr .hdr-tools { margin-left:2px; }
   }
   @media (max-width:370px) { .k-hdr .header-links > a, .k-hdr .header-links > .module-name { padding:0 5px; } .k-hdr .theme-btn { width:30px; } .k-hdr .logo { font-size:22px; } }
+  /* Modulnamen ausgeschrieben (Schnittkräfte · Bemessung · Wissen): am Handy eigene Zeile unter Logo und Werkzeugen, drei gleich breite Reiter */
+  @media (max-width:760px) {
+    .app-header.k-hdr { flex-wrap:wrap; row-gap:0; padding-bottom:0 !important; }
+    .k-hdr .hdr-tools { margin-left:auto; }
+    .k-hdr .header-links { order:3; flex:1 1 100%; margin:4px calc(-1 * var(--k-gut)) 0; padding:0 calc(var(--k-gut) - 4px); border-top:1px solid #ececef; }
+    .k-hdr .header-links > a, .k-hdr .header-links > .module-name { flex:1 1 auto; min-width:0; justify-content:center; min-height:42px; padding:0 4px !important; font-size:14px; white-space:nowrap; }
+    .k-hdr .header-links > .module-name { box-shadow:inset 0 -2.5px 0 #111114; }
+  }
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
-<style data-k5>
-  /* kragr-Design 5 (Oktober 2026): ein Aufbau für alle Seiten. Identisch in calc, size, ref, projekt und rechtliches.
-     Weich und plastisch: hellgrauer Seitengrund, weiße Karten mit sanftem Schatten, Glas-Kopfzeile mit Burgermenü,
-     ruhige Bewegung (Aufklappen, Einblenden, Balken, Diagramme). Bei „Bewegung reduzieren“ ist alles aus. */
-  :root { --k5-bg:#f2f3f6; --k5-card:#ffffff; --k5-sub:#f5f6f8; --k5-sub-h:#eceef2; --k5-r:20px; --k5-r2:14px;
-    --k5-sh:0 1px 2px rgba(17,17,20,.04), 0 6px 22px -10px rgba(17,17,20,.13);
-    --k5-sh-h:0 2px 4px rgba(17,17,20,.05), 0 14px 34px -14px rgba(17,17,20,.2);
-    --k5-ease:cubic-bezier(.22,.8,.24,1); --k5-spring:cubic-bezier(.34,1.4,.5,1);
-    --k-card:var(--k5-card); --card:var(--k5-card); }
-  html { background:var(--k5-bg); }
-  body { background:var(--k5-bg) !important; }
-  html.dark { background:#fff; }
-  html.dark body { background:#fff !important; }
-  html.dark { --k5-card:#eef0f3; --k5-sub:#e3e5ea; --k5-sub-h:#d9dce2;
-    --k5-sh:0 0 0 1px rgba(255,255,255,.5), 0 8px 26px -12px rgba(255,255,255,.9); --k5-sh-h:0 0 0 1px rgba(255,255,255,.6), 0 14px 34px -14px rgba(255,255,255,1); }
-
-  /* ── Kopfzeile: nur Logo und ☰ ─────────────────────────────── */
-  .glass::before { background:linear-gradient(to bottom, rgba(242,243,246,.86) 0%, rgba(242,243,246,.66) 70%, rgba(242,243,246,0) 100%) !important; }
-  html.dark .glass::before { background:linear-gradient(to bottom, rgba(255,255,255,.86) 0%, rgba(255,255,255,.66) 70%, rgba(255,255,255,0) 100%) !important; }
-  .k-hdr .header-links, .k-hdr .hdr-tools { display:none !important; }
-  .k5-burger { position:relative; margin-left:auto; flex:none; display:inline-flex; align-items:center; justify-content:center; gap:10px; height:44px; min-width:44px; padding:0 12px;
-    border:none; border-radius:14px; background:var(--k5-card); box-shadow:var(--k5-sh); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer;
-    transition:transform .25s var(--k5-spring), box-shadow .25s; -webkit-tap-highlight-color:transparent; }
-  .k5-burger:hover { box-shadow:var(--k5-sh-h); }
-  .k5-burger:active { transform:scale(.94); }
-  .k5-burger .k5-cur { font-size:14px; font-weight:700; color:#111114; }
-  .k5-burger .k5-cur b { color:#111114; font-weight:700; }
-  .k5-burger svg { width:22px; height:22px; flex:none; }
-  .k5-burger svg line { transition:transform .35s var(--k5-ease), opacity .2s; transform-origin:12px 12px; }
-  .k5-burger[aria-expanded="true"] svg .l1 { transform:translateY(5px) rotate(45deg); }
-  .k5-burger[aria-expanded="true"] svg .l2 { opacity:0; transform:scaleX(.2); }
-  .k5-burger[aria-expanded="true"] svg .l3 { transform:translateY(-5px) rotate(-45deg); }
-  .k5-burger .k5-dot { position:absolute; top:8px; right:8px; width:9px; height:9px; border-radius:50%; background:#f59e0b; box-shadow:0 0 0 2px var(--k5-card); display:none; }
-  .k5-burger.k5-unsaved .k5-dot { display:block; }
-  @media (max-width:560px) { .k5-burger .k5-cur { display:none; } .k5-burger { padding:0; width:44px; } }
-
-  .k5-scrim { position:fixed; inset:0; z-index:190; background:rgba(17,17,20,.28); opacity:0; pointer-events:none; transition:opacity .3s var(--k5-ease);
-    -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
-  .k5-scrim.open { opacity:1; pointer-events:auto; }
-  .k5-menu { position:fixed; z-index:200; top:10px; right:10px; bottom:10px; width:min(360px, calc(100vw - 20px)); box-sizing:border-box; display:flex; flex-direction:column;
-    border-radius:24px; background:rgba(255,255,255,.9); -webkit-backdrop-filter:blur(22px) saturate(170%); backdrop-filter:blur(22px) saturate(170%);
-    box-shadow:0 24px 60px -18px rgba(17,17,20,.35), 0 0 0 1px rgba(17,17,20,.05); padding:14px 14px 12px; overflow-y:auto; overscroll-behavior:contain;
-    transform:translateX(calc(100% + 24px)); visibility:hidden; transition:transform .42s var(--k5-ease), visibility 0s linear .42s; font-family:Figtree, system-ui, sans-serif; color:#111114; }
-  .k5-menu.open { transform:none; visibility:visible; transition:transform .42s var(--k5-ease), visibility 0s; }
-  html.dark .k5-menu { background:rgba(240,241,244,.94); }
-  .k5-menu > * { opacity:0; transform:translateX(18px); transition:opacity .3s, transform .4s var(--k5-ease); }
-  .k5-menu.open > * { opacity:1; transform:none; transition-delay:calc(var(--i,0) * 35ms + 80ms); }
-  .k5-mhead { display:flex; align-items:center; justify-content:space-between; padding:2px 4px 10px 8px; }
-  .k5-mhead .k5-mlogo { font-size:20px; font-weight:800; letter-spacing:-.04em; text-decoration:none; color:#111114; }
-  .k5-mhead .k5-mlogo svg { height:1em; width:auto; vertical-align:-.1em; margin-left:-.04em; }
-  .k5-x { width:40px; height:40px; border:none; border-radius:12px; background:#f1f2f4; color:#111114; font-size:20px; line-height:1; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; transition:transform .25s var(--k5-spring), background .15s; }
-  .k5-x:hover { background:#e6e7ea; } .k5-x:active { transform:scale(.9); }
-  .k5-mlabel { padding:14px 10px 6px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5c5e66; }
-  .k5-mod { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:16px; text-decoration:none; color:#111114; transition:background .15s, transform .2s var(--k5-spring); }
-  .k5-mod:hover { background:rgba(17,17,20,.05); } .k5-mod:active { transform:scale(.98); }
-  .k5-mod .k5-ic { flex:none; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:#f1f2f4; color:#111114;
-    font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:700; }
-  .k5-mod .k5-mt { display:flex; flex-direction:column; min-width:0; }
-  .k5-mod .k5-mt b { font-size:15.5px; font-weight:800; letter-spacing:-.01em; }
-  .k5-mod .k5-mt span { font-size:12.5px; color:#5c5e66; }
-  .k5-mod[aria-current="page"] { background:#111114; color:#fff; }
-  .k5-mod[aria-current="page"] .k5-ic { background:#5468ad; color:#fff; }
-  .k5-mod[aria-current="page"] .k5-mt span { color:rgba(255,255,255,.7); }
-  .k5-mod .k5-badge { margin-left:auto; width:9px; height:9px; border-radius:50%; background:#f59e0b; display:none; }
-  .k5-row { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; padding:6px 8px 6px 12px; border-radius:16px; }
-  .k5-row .k5-rt { display:flex; flex-direction:column; font-size:14.5px; font-weight:700; }
-  .k5-row .k5-rt span { font-size:12px; font-weight:400; color:#5c5e66; }
-  .k5-sw { position:relative; flex:none; width:50px; height:30px; border:none; border-radius:999px; background:#d5d7dc; cursor:pointer; padding:0; transition:background .25s; }
-  .k5-sw::after { content:''; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:transform .32s var(--k5-spring); }
-  .k5-sw[aria-checked="true"] { background:#5468ad; } .k5-sw[aria-checked="true"]::after { transform:translateX(20px); }
-  .k5-segm { position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:2px; padding:3px; border-radius:13px; background:#f1f2f4; min-width:0; }
-  .k5-segm button { position:relative; z-index:1; border:none; background:transparent; height:34px; padding:0 8px; border-radius:10px; font:inherit; font-size:13px; font-weight:700; color:#5c5e66; cursor:pointer; transition:color .2s; }
-  .k5-segm button[aria-pressed="true"] { color:#111114; }
-  .k5-segm .k5-pill { position:absolute; z-index:0; top:3px; bottom:3px; left:0; border-radius:10px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.12); transition:transform .38s var(--k5-ease), width .38s var(--k5-ease); }
-  .k5-row.k5-col { flex-direction:column; align-items:stretch; gap:8px; padding-top:10px; padding-bottom:10px; }
-  .k5-mfoot { margin-top:auto; padding:16px 10px 4px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:12px; color:#5c5e66; }
-  .k5-mfoot a { color:#5c5e66; } .k5-mfoot .k5-ver { font-family:'JetBrains Mono', ui-monospace, monospace; }
-  body.k5-lock { overflow:hidden; }
-
-  /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
-  header.k5-idx > .lang-switcher, header.k5-idx > .theme-btn { display:none !important; }
-  header.k5-idx { justify-content:flex-end !important; }
-  .module-card { background:var(--k5-card) !important; box-shadow:var(--k5-sh); transition:box-shadow .3s, transform .3s var(--k5-spring) !important; }
-  .module-card:hover { box-shadow:var(--k5-sh-h); transform:translateY(-2px); }
-  .module-card:active { transform:scale(.985) !important; }
-  @media (max-width:560px) { .module-card { margin-left:-8px !important; margin-right:-8px !important; padding-left:12px !important; padding-right:12px !important; } }
-  .install { background:var(--k5-card); border:none !important; box-shadow:var(--k5-sh); }
-  .headline .logo-r { transition:transform .6s var(--k5-spring); }
-  .headline .logo-r path, .headline .logo-r line { animation:k5-drop .9s var(--k5-spring) .35s both; }
-  @keyframes k5-drop { from { transform:translateY(-14px); opacity:0; } to { transform:none; opacity:1; } }
-  html.k5-still .headline .logo-r path, html.k5-still .headline .logo-r line { animation:none; }
-
-  /* ── Karten: weiß, weicher Schatten, ein gemeinsames Maß ───── */
-  .card, .pick-btn, .k5-card { background:var(--k5-card) !important; box-shadow:var(--k5-sh) !important; border:none !important; border-radius:var(--k5-r) !important; }
-  .tile, .nav-list-item, .search-hit, .topic-pager a { background:var(--k5-card) !important; box-shadow:var(--k5-sh) !important; border:none !important; transition:box-shadow .25s, transform .22s var(--k5-spring) !important; }
-  a.tile:hover, .nav-list-item:hover, .search-hit:hover, .topic-pager a:hover { box-shadow:var(--k5-sh-h) !important; transform:translateY(-1px) !important; }
-  a.tile:active, .nav-list-item:active, .search-hit:active, .topic-pager a:active { transform:scale(.985) !important; }
-  .pick-btn { transition:box-shadow .25s, transform .2s var(--k5-spring) !important; }
-  .pick-btn:hover { box-shadow:var(--k5-sh-h) !important; } .pick-btn:active { transform:scale(.99); }
-  .pick.open .pick-btn { box-shadow:var(--k5-sh-h) !important; }
-  .pick-menu { border-radius:var(--k5-r) !important; box-shadow:0 24px 60px -18px rgba(17,17,20,.35), 0 0 0 1px rgba(17,17,20,.05) !important; transform-origin:top center; }
-  .pick.open .pick-menu { animation:k5-pop .32s var(--k5-ease); }
-  @keyframes k5-pop { from { opacity:0; transform:translateY(-6px) scale(.98); } to { opacity:1; transform:none; } }
-
-  /* Kartenköpfe wie die Lastzeilen: Titel fett, Kurzfassung in Mono, Pfeil rechts */
-  .k5-acc > .card-title, .k5-acc > .k5-head { cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
-  .k5-chev { flex:none; width:28px; height:28px; margin-left:auto; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#5c5e66; background:var(--k5-sub); transition:transform .38s var(--k5-ease), background .15s; }
-  .k5-chev svg { width:14px; height:14px; }
-  .k5-acc.k5-closed .k5-chev, .k5-acc.closed .k5-chev, .k5-acc.k-closed .k5-chev { transform:rotate(-90deg); }
-  .k5-acc > .card-title:hover .k5-chev, .k5-acc > .k5-head:hover .k5-chev { background:var(--k5-sub-h); }
-  .k5-sum { display:block; margin-top:6px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; line-height:1.5; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .k5-acc:not(.k5-closed) > .k5-sum { display:none; }
-  .k5-acc.k5-closed > .k5-body { display:none; }
-  .k5-acc.k5-closed > .card-title { margin-bottom:0 !important; }
-  .k5-flash { animation:k5-flash 1.1s var(--k5-ease); }
-  @keyframes k5-flash { 0% { box-shadow:0 0 0 3px rgba(84,104,173,.45), var(--k5-sh); } 100% { box-shadow:0 0 0 0 rgba(84,104,173,0), var(--k5-sh); } }
-
-
-  /* ── Kopf jeder klappbaren Karte: Titel · Kurzfassung (Mono) · ▲/▼ — wie die Lasten-Karte in calc ── */
-  .k5-acc > .k5-head, .col-in .card.fold > .card-title { display:flex !important; align-items:center; gap:10px; min-height:30px; flex-wrap:nowrap; }
-  .k5-head > .card-title, .k5-head > .card-title-row { margin:0 !important; flex:none; }
-  .k5-hsum { flex:1 1 auto; min-width:0; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:400; letter-spacing:0; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-transform:none; }
-  .k5-tri { flex:none; margin-left:auto; fill:#5c5e66; transition:transform .38s var(--k5-ease); }
-  .k5-acc.k5-closed > .k5-head .k5-tri, .card.fold.closed > .card-title .k5-tri, .card.dfold.closed > .card-title .k5-tri { transform:rotate(180deg); }
-  .col-in .card.fold > .card-title::after { display:none !important; }
-  .col-in .card.fold > .fold-sum { display:none !important; }
-  .col-in .card.fold.closed { padding-top:18px; padding-bottom:18px; }
-  #details .card.dfold > .card-title > span:first-child::after { content:none !important; }
-  #details .card.dfold > .card-title { display:flex; align-items:center; gap:10px; }
-  #details .card.dfold > .card-title .k5-tri { margin-left:8px; }
-  .k5-acc.k5-closed { padding-top:18px !important; padding-bottom:18px !important; }
-  .k5-acc > .k5-body { padding-top:2px; }
-  /* Unterabschnitte innerhalb einer Karte (Rahmen: Vorlage, Lager, Gelenke) */
-  .card .k5-acc { padding:4px 0 0; border-top:1px solid #eceef2; margin-top:10px !important; }
-  .card .k5-acc > .k5-head { min-height:44px; margin-bottom:0 !important; }
-  .card .k5-acc > .k5-body { padding:2px 0 8px; }
-  .card .k5-acc.k5-closed { padding:4px 0 0 !important; }
-
-  /* Flächen innerhalb weißer Karten */
-  .load-item, .k-row.load-item { background:var(--k5-sub) !important; }
-  .load-item > .load-item-header, .load-item > .load-item-body { background:transparent !important; }
-  .k-menu { box-shadow:0 18px 44px -14px rgba(17,17,20,.3), 0 0 0 1px rgba(17,17,20,.05) !important; }
-  .results-grid .metric { background:var(--k5-card); border-radius:var(--k5-r2); box-shadow:var(--k5-sh); }
-  .diagram-toggle-row { background:var(--k5-sub) !important; }
-
-  /* ── Seitenkopf überall wie die Auswahl in calc/size: Karte mit kleiner Oberzeile und fettem Titel ── */
-  #main .page-head { display:flex; flex-direction:column-reverse; gap:2px; background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:14px 18px; margin-bottom:14px; }
-  #main .page-head .page-title { font-size:20px !important; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
-  #main .page-head .page-sub { font-size:12.5px !important; margin-top:0 !important; color:#5c5e66; line-height:1.4; }
-  #main .menu-toggle { display:none !important; }
-  @media (max-width:999px) { #main .page-head { cursor:pointer; position:relative; padding-right:44px; }
-    #main .page-head::after { content:''; position:absolute; right:20px; top:50%; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #5c5e66; transform:translateY(-50%); } }
-  .wrap > .top { background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:16px 18px; margin:14px 0 18px !important; align-items:center !important; }
-  .wrap > .top .pname { font-size:22px !important; }
-  .k5-phead { margin:14px 0 18px; padding:18px 20px; }
-  #list > .pos.k5-acc { background:var(--k5-card); box-shadow:var(--k5-sh); border:none; border-radius:var(--k5-r); }
-  #list > .pos.k5-acc > .k5-head { display:grid !important; grid-template-columns:minmax(0,1fr) auto; column-gap:8px; row-gap:2px; align-items:center; }
-  #list > .pos.k5-acc > .k5-head > .pos-h { grid-column:1; grid-row:1; min-width:0; margin:0; flex-wrap:nowrap; }
-  #list > .pos.k5-acc > .k5-head > .k5-tri { grid-column:2; grid-row:1; margin:0 4px 0 0; }
-  #list > .pos.k5-acc > .k5-head > .k5-hsum { grid-column:1 / -1; grid-row:2; padding-left:2px; }
-  #list > .pos.k5-acc:not(.k5-closed) > .k5-head > .k5-hsum { display:none; }
-  #list > .pos.k5-acc .pos-h .k-name-s { flex:1 1 80px !important; order:0 !important; min-width:0 !important; }
-  #list > .pos.k5-acc .pos-h .pos-t { min-width:0 !important; text-overflow:ellipsis; }
-  #list > .pos.k5-acc .pos-h .pos-nr { order:0 !important; }
-  @media (max-width:560px) { .sec-t { flex-direction:column; align-items:flex-start !important; gap:2px; } #list > .pos.k5-acc .pos-h .k-pen { display:none; } #list > .pos.k5-acc .pos-h { gap:6px; } }
-  .k5-phead > h1 { margin:0 0 6px !important; font-size:24px !important; }
-  .k5-phead > :last-child { margin-bottom:0 !important; }
-  .rw-card .rw-chev { display:none !important; }
-  .rw-card > .rw-title { display:flex !important; align-items:center; gap:10px; cursor:pointer; }
-  .rw-card.closed > .rw-title .k5-tri { transform:rotate(180deg); }
-  .k5-head > .card-title, .col-in .card.fold > .card-title > span:first-child, .rw-title > span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:74%; }
-
-  /* ── Bewegung ─────────────────────────────────────────────── */
-  @keyframes k5-in { from { opacity:0; transform:translateY(16px) scale(.985); } to { opacity:1; transform:none; } }
-  .k5-rv { animation:k5-in .62s var(--k5-ease) both; animation-delay:var(--k5-d, 0ms); }
-  @keyframes k5-fade { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
-  .k5-open-anim > :not(.card-title):not(.k5-head):not(.k5-sum) { animation:k5-fade .38s var(--k5-ease) both; }
-  @keyframes k5-tick { 0% { opacity:.25; transform:translateY(5px); } 100% { opacity:1; transform:none; } }
-  .k5-tick { animation:k5-tick .42s var(--k5-ease); }
-  .k5-count { position:absolute; inset:0; pointer-events:none; color:inherit; font:inherit; letter-spacing:inherit; }
-  .k5-counting { position:relative; color:transparent !important; }
-  .k5-counting > .k5-count { color:#111114; }
-  .k5-wipe { animation:k5-wipe .75s var(--k5-ease) both; }
-  @keyframes k5-wipe { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
-  button, .btn, a.btn, .k-opt, .k-mode { transition:transform .22s var(--k5-spring), background-color .15s, box-shadow .2s, color .15s; }
-  button:active:not(:disabled), .btn:active { transform:scale(.97); }
-  .k5-seg-host { position:relative; isolation:isolate; }
-  .k5-seg-host > .k5-pill { position:absolute; z-index:-1; top:3px; bottom:3px; left:0; border-radius:10px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.12);
-    transition:transform .4s var(--k5-ease), width .4s var(--k5-ease); pointer-events:none; }
-  .k5-seg-host.k5-seg-on > button { background:transparent !important; box-shadow:none !important; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration:1ms !important; animation-delay:0ms !important; transition-duration:1ms !important; transition-delay:0ms !important; }
-  }
-  html.k5-still *, html.k5-still *::before, html.k5-still *::after { animation:none !important; transition:none !important; }
-  @media print { .k5-burger, .k5-menu, .k5-scrim { display:none !important; } html, body { background:#fff !important; }
-    .card, .pick-btn, .k5-card { box-shadow:none !important; } .k5-rv { animation:none !important; } }
-</style>
-<script data-k5>
-// Seiten-Anpassungen der Design-Schicht 5: welche Karten zu Akkordeons werden und was ihre Kurzfassung zeigt.
-window.kragrK5Page = function(K){
-  var D=document, $=function(s,r){ return (r||D).querySelector(s); }, $$=function(s,r){ return Array.prototype.slice.call((r||D).querySelectorAll(s)); };
-  var txt=function(el){ return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; };
-  // Regeln: Karten, die die Seite neu zeichnet, bekommen den Akkordeon-Kopf jedes Mal wieder
-  var RULES=[];
-  function rule(sel, opt){ RULES.push([sel,opt]); }
-  function apply(){
-    RULES.forEach(function(r){ $$(r[0]).forEach(function(el){
-      if(el.k5acc && el.querySelector(':scope > .k5-head') && el.querySelector(':scope > .k5-body')) return;
-      el.k5acc=null; el.classList.remove('k5-acc','k5-closed');
-      var o=typeof r[1]==='function' ? r[1](el) : r[1]; if(o) K.acc(el, o); }); });
-  }
-  var pend=0; function later(){ if(pend) return; pend=requestAnimationFrame(function(){ pend=0; apply(); deco(); K.refreshSums(); }); }
-  function deco(){}
-  var P=K.page;
-
-  if(P==='calc'){
-    // Knotentabelle: zugeklappt, Kurzfassung = Anzahl Knoten und Stäbe
-    rule('.k-knoten', function(el){ var h=$(':scope > .card-title', el)||$(':scope > .k5-head', el); if(!h) return null;
-      return {head:h, key:'knoten', closed:true, sum:function(c){ var n=$$('.k-kn-list > li', c).length, b=$$('.k-kn-tab tr.k-kn-bar', c).length;
-        var W={de:['Knoten','Stab','Stäbe'],en:['nodes','member','members'],fr:['nœuds','barre','barres'],es:['nudos','barra','barras']}[K.lang()]||['Knoten','Stab','Stäbe'];
-        return n ? n+' '+W[0]+' · '+b+' '+(b===1?W[1]:W[2]) : ''; }}; });
-    // Rahmen: Vorlage, Lager A, Lager B, Kopf, Gelenke als Unterabschnitte (immer nur einer offen)
-    rule('#tab-frame .card > div', function(el){ if(/k5-head|k5-body|card-title-row/.test(el.className) || el.closest('.k-knoten')) return null; var h=$(':scope > .card-title', el); if(!h) return null;
-      var key=h.getAttribute('data-i18n')||txt(h);
-      return {head:h, key:'frame-'+key, closed:key!=='framePresets', group:'frame-sys', sum:function(c){
-        var a=$$('.toggle-btn.active, .toggle-btn[aria-pressed="true"]', c).map(txt); if(a.length) return a.join(' · ');
-        var n=$$('.load-item, .k-row', c).length; return n ? String(n) : ''; }}; });
-    // Ergebniszahlen und Diagramm-Umschalter
-    var tick=function(){ K.watchNumbers('.results-grid .m-value');
-      $$('.diagram-toggle-row').forEach(function(r){ K.slider(r, '.diagram-toggle-btn[class*="active-"]'); }); };
-    D.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('.diagram-toggle-btn'); if(!b) return;
-      var card=b.closest('.card'); setTimeout(function(){ var s=card && $('svg[id*="diag"], .diagram-wrap svg, svg', card.querySelector('.diagram-toggle-row') ? card : null);
-        var list=$$('svg', card).filter(function(x){ return x.getBoundingClientRect().height>60; }); K.wipe(list[0]); void s; }, 0); });
-    // Lösungsweg-Karte: gleicher Kopf wie die anderen Karten, startet zugeklappt; Kurzfassung = Zahl der Schritte
-    var STEPW={de:'Schritte',en:'steps',fr:'étapes',es:'pasos'};
-    var RW0=false; try{ if(localStorage.getItem('statiq-rw-closed')===null){ localStorage.setItem('statiq-rw-closed','1'); RW0=true; } }catch(e){}
-    if(RW0) $$('.rw-card').forEach(function(c){ c.classList.add('closed'); });
-    deco=function(){ tick();
-      $$('.rw-card').forEach(function(c){ var h=$(':scope > .rw-title', c); if(!h) return; c.classList.add('k5-rw');
-        if(!$(':scope > .k5-tri', h)){ var sp=D.createElement('span'); sp.className='k5-hsum'; h.appendChild(sp); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
-        var n=$$('.rw-body > .st', c).length, v=c.classList.contains('closed') && n ? n+' '+(STEPW[K.lang()]||STEPW.de) : '';
-        var sp2=$(':scope > .k5-hsum', h); if(sp2.textContent!==v) sp2.textContent=v; h.setAttribute('aria-expanded', String(!c.classList.contains('closed'))); }); };
-    // Ergebnis-Details (Knotentabelle, Lösungsweg): immer nur eines offen
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.rw-card > .rw-title'); if(!h) return; var rw=h.parentNode;
-      setTimeout(function(){ if(rw.classList.contains('closed')) return; var col=rw.parentNode; $$('.k-knoten.k5-acc', col).forEach(function(k){ if(!k.classList.contains('k5-closed')) K.setClosed(k, true); }); deco(); }, 0); });
-    D.addEventListener('k5toggle', function(e){ var c=e.detail.card; if(!e.detail.open || !c.classList.contains('k-knoten')) return;
-      var col=c.closest('.col-out')||c.parentNode.parentNode; $$('.rw-card', col.parentNode||D).forEach(function(r){ if(!r.classList.contains('closed') && r.offsetParent!==null){ r.classList.add('closed'); try{ localStorage.setItem('statiq-rw-closed','1'); }catch(_){} } }); deco(); });
-    // System wechseln: Karten neu einblenden
-    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu')) setTimeout(function(){ $$('main .card').forEach(function(c){ c.k5seen=0; }); K.reveal('main:not(.hidden) .card, main:not(.hidden) .results-grid .metric'); }, 30); });
-  }
-
-  if(P==='size'){
-    // Eingabekarten: immer nur eine offen; Kurzfassung im Kopf (wie die Lastzeilen in calc)
-    var FS='statiq-size-fold';
-    var sumOf=function(c){ try{ return typeof foldSummary==='function' ? foldSummary(c) : ''; }catch(e){ return ''; } };
-    deco=function(){
-      $$('.col-in .card.fold').forEach(function(c){ var h=$(':scope > .card-title', c); if(!h) return; c.classList.add('k5-fold');
-        if(!$(':scope > .k5-hsum', h)){ var s=D.createElement('span'); s.className='k5-hsum'; h.appendChild(s); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
-        var s2=$(':scope > .k5-hsum', h), v=c.classList.contains('closed') ? sumOf(c) : ''; if(s2.textContent!==v) s2.textContent=v; h.setAttribute('aria-expanded', String(!c.classList.contains('closed'))); });
-      $$('#details > .card.dfold').forEach(function(c){ var h=$(':scope > .card-title', c); if(h && !$(':scope > .k5-tri', h)) h.insertAdjacentHTML('beforeend', K.CHEV); });
-      K.watchBars($('#chk-table'), function(r){ var a=$('a', r); return a ? a.getAttribute('href') : r.rowIndex; });
-    };
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.col-in .card.fold > .card-title'); if(!h || e.target.closest('button, a, input, select')) return;
-      var card=h.parentNode; if(card.classList.contains('closed')){ later(); return; }
-      var st={}; try{ st=JSON.parse(localStorage.getItem(FS)||'{}'); }catch(_){}
-      $$('.col-in .card.fold').forEach(function(c){ if(c===card || c.classList.contains('closed') || c.offsetParent===null) return; c.classList.add('closed'); if(c.dataset.fold) st[c.dataset.fold]=true; });
-      try{ localStorage.setItem(FS, JSON.stringify(st)); }catch(_){}
-      later();
-    });
-    D.addEventListener('keydown', function(e){ var h=e.target; if((e.key==='Enter'||e.key===' ') && h.matches && h.matches('.col-in .card.fold > .card-title')){ e.preventDefault(); h.click(); } });
-    // Beim Laden: nur die erste offene Eingabekarte bleibt offen (Akkordeon)
-    setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; });
-      open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 0);
-    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; }); open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 40); });
-    // Umfang und Grundlagen: zugeklappt
-    rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
-  }
-
-  if(P==='ref'){
-    // Seitenkopf wie die Auswahl in calc/size: Tippen öffnet am Handy die Themenliste
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('#main .page-head'); if(!h || !$('#main .menu-toggle') || window.innerWidth>999) return;
-      if(typeof toggleSideMenu==='function'){ e.stopPropagation(); toggleSideMenu(); } });
-  }
-
-  if(P==='rechtliches'){
-    // Seitenkopf als Karte: Titel, Einleitung und Sprungmarken zusammen
-    deco=function(){ var c=$('#content'), h=c && $(':scope > h1', c); if(!h) return; var w=D.createElement('div'); w.className='k5-card k5-phead'; c.insertBefore(w, h);
-      var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
-  }
-
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
-
-  new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
-  apply(); deco();
-  D.addEventListener('k5toggle', function(){ deco(); });
-  D.addEventListener('change', function(e){ if(e.target && (e.target.id==='lang-sel'||e.target.id==='lang')) setTimeout(function(){ K.refreshSums(); deco(); }, 50); }, true);
-  D.addEventListener('click', function(){ setTimeout(deco, 0); });
-};
-// kragr-Design 5 (Oktober 2026): Burgermenü, Akkordeon-Karten und ruhige Bewegung. Identisch in calc, size, ref, projekt, rechtliches.
-// Bedienelemente der alten Kopfzeile (#lang-sel, #ueb-btn, #theme-btn, #proj-btn) bleiben im DOM (versteckt); das Menü steuert sie.
+<script data-mod>
+// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
+// data-mod="calc|size|ref|proj" bekommen ihn als Text.
 (function(){
-  if(window.kragrK5) return;
-  var D=document, H=D.documentElement;
-  var PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.html?$/,'')||'index';
-  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Automatisierte Browser (Tests) ohne Bewegung, außer ?k5motion steht in der Adresse
-  if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
-  var STILL=function(){ return RM || H.classList.contains('k5-still'); };
-  var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Schnittgrößen',size:'Bemessung',ref:'Nachschlagewerk',proj:'Meine Projekte',projS:'Positionen aus calc und size',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Internal forces',size:'Design & sizing',ref:'Reference',proj:'My projects',projS:'Items from calc and size',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Efforts internes',size:'Dimensionnement',ref:'Référence',proj:'Mes projets',projS:'Éléments de calc et size',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Esfuerzos internos',size:'Dimensionado',ref:'Referencia',proj:'Mis proyectos',projS:'Elementos de calc y size',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
-  // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
-  var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
-    dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
-  function langSel(){ return D.getElementById('lang-sel')||D.getElementById('lang')||(PAGE==='index' && typeof window.setLang==='function' ? VSEL : null); }
-  function lang(){ var l=null; try{ l=localStorage.getItem('statiq-lang'); }catch(e){} if(!T[l]){ var s=langSel(); l=s&&s.value; } return T[l]?l:'de'; }
-  function t(k){ return (T[lang()]||T.de)[k]; }
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-  var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
-
-  // ── Höhe weich ändern (FLIP): vorher messen, Änderung ausführen, nachher animieren ──────────
-  function measure(els){ return els.map(function(el){ return {el:el, h:el.getBoundingClientRect().height}; }); }
-  function flip(before, anchor, anchorTop){
-    if(anchor && anchorTop!=null){ var d=anchor.getBoundingClientRect().top-anchorTop; if(Math.abs(d)>1) window.scrollBy(0,d); }
-    if(STILL()) return;
-    before.forEach(function(b){ var el=b.el; if(!el.isConnected) return; var h1=el.getBoundingClientRect().height; if(Math.abs(h1-b.h)<2 || !el.animate) return;
-      var ov=el.style.overflow; el.style.overflow='hidden';
-      var a=el.animate([{height:b.h+'px'},{height:h1+'px'}],{duration:Math.min(520, 260+Math.abs(h1-b.h)*0.25), easing:'cubic-bezier(.22,.8,.24,1)'});
-      a.onfinish=a.oncancel=function(){ el.style.overflow=ov; }; });
-  }
-  function openAnim(card){ if(STILL()) return; card.classList.remove('k5-open-anim'); void card.offsetWidth; card.classList.add('k5-open-anim'); setTimeout(function(){ card.classList.remove('k5-open-anim'); }, 450); }
-
-  // ── Akkordeon: Karte mit Kopf (Titel · Kurzfassung · Pfeil), Gruppe = immer nur eine offen ──────
-  // opt: {head, key, closed, group, sum(card) → Text, solo:true (nicht in Gruppe), store}
-  var ACC_STORE='kragr-k5-acc';
-  function accState(){ try{ return JSON.parse(localStorage.getItem(ACC_STORE)||'{}'); }catch(e){ return {}; } }
-  function accSave(key, closed){ if(!key) return; var s=accState(); s[PAGE+':'+key]=closed; try{ localStorage.setItem(ACC_STORE, JSON.stringify(s)); }catch(e){} }
-  function acc(card, opt){
-    if(!card || card.k5acc) return; opt=opt||{};
-    var head=opt.head||card.querySelector(':scope > .card-title'); if(!head) return;
-    // Kopf in eine eigene Zeile legen: der Titel selbst kann übersetzt (textContent) werden, ohne Pfeil und Kurzfassung zu verlieren
-    if(!head.classList.contains('k5-head')){ var w=D.createElement('div'); w.className='k5-head'; card.insertBefore(w, head); w.appendChild(head); head=w; }
-    card.k5acc=opt; card.classList.add('k5-acc');
-    head.setAttribute('role','button'); head.tabIndex=0;
-    var body=D.createElement('div'); body.className='k5-body';
-    Array.prototype.slice.call(card.childNodes).forEach(function(n){ if(n!==head) body.appendChild(n); });
-    card.appendChild(body);
-    if(!head.querySelector('.k5-hsum')){ var s=D.createElement('span'); s.className='k5-hsum'; head.appendChild(s); }
-    if(!head.querySelector('.k5-tri')) head.insertAdjacentHTML('beforeend', CHEV);
-    if(opt.group) card.dataset.k5g=opt.group;
-    var st=accState(), k=PAGE+':'+(opt.key||'');
-    var closed = opt.key && (k in st) ? st[k] : !!opt.closed;
-    setClosed(card, closed, true);
-    head.addEventListener('click', function(e){ if(e.target.closest('a, input, select, textarea, .info-btn, button:not(.k5-head)')) return; toggle(card); });
-    head.addEventListener('keydown', function(e){ if((e.key==='Enter'||e.key===' ') && e.target===head){ e.preventDefault(); toggle(card); } });
-  }
-  function setClosed(card, c, quiet){
-    card.classList.toggle('k5-closed', c);
-    var head=card.querySelector(':scope > .k5-head'); if(head) head.setAttribute('aria-expanded', c?'false':'true');
-    updSum(card);
-    if(!quiet) accSave(card.k5acc&&card.k5acc.key, c);
-  }
-  function updSum(card){ var o=card.k5acc, s=card.querySelector(':scope > .k5-head .k5-hsum'); if(!o||!s) return;
-    var tx=''; try{ tx=o.sum ? (o.sum(card, card.classList.contains('k5-closed'))||'') : ''; }catch(e){}
-    if(s.textContent!==tx) s.textContent=tx; }
-  function groupOf(card){ var g=card.dataset.k5g; if(!g) return []; var p=card.parentNode;
-    return Array.prototype.filter.call(D.querySelectorAll('[data-k5g="'+g+'"]'), function(c){ return c!==card && c.offsetParent!==null && (!p || c.parentNode===p || c.closest('[data-k5gscope]')===card.closest('[data-k5gscope]')); }); }
-  function toggle(card, force){
-    var open = force!=null ? force : card.classList.contains('k5-closed');
-    var others = open ? groupOf(card).filter(function(c){ return !c.classList.contains('k5-closed'); }) : [];
-    var before=measure([card].concat(others)), top=card.getBoundingClientRect().top;
-    others.forEach(function(c){ setClosed(c, true); });
-    setClosed(card, !open);
-    flip(before, card, top);
-    if(open) openAnim(card);
-    try{ D.dispatchEvent(new CustomEvent('k5toggle',{detail:{card:card, open:open}})); }catch(e){}
-  }
-  function refreshSums(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-acc'), updSum); }
-  var sumT=0; D.addEventListener('input', function(){ clearTimeout(sumT); sumT=setTimeout(refreshSums, 120); }, true);
-  D.addEventListener('change', function(){ clearTimeout(sumT); sumT=setTimeout(refreshSums, 60); }, true);
-
-  // Fremde Klapp-Mechaniken (Lasten-Karte, Lastzeilen, size-Karten, Rechenschritte, ref-Seitenleiste): weich animieren
-  var FOREIGN='.k-loads > .k-head, .load-item .k-row-head, .load-item > .k-rh, .fold > .card-title, .dfold > .card-title, .k-row > button:first-child, #sidebar .sb-sub > button, #sidebar button.sb-h, #sidebar .grp > button, .pos-head, [data-k5-flip]';
-  D.addEventListener('click', function(e){
-    if(STILL()) return;
-    var h=e.target.closest && e.target.closest(FOREIGN); if(!h || h.closest('.k5-acc > .k5-head')) return;
-    var card=h.closest('.load-item, .card, .k-loads, .fold, .dfold, .sb-group, li, section, div') || h.parentNode;
-    var parent=card.parentNode, sibs=parent ? Array.prototype.filter.call(parent.children, function(c){ return c.offsetParent!==null; }) : [card];
-    var before=measure(sibs.slice(0,40)), top=card.getBoundingClientRect().top;
-    requestAnimationFrame(function(){ flip(before, null, null); if(card.isConnected && !card.classList.contains('closed') && !card.classList.contains('k-closed')) openAnim(card); });
-    void top;
-  }, true);
-
-  // ── Kopfzeile: Logo · ☰ ─────────────────────────────────────────────
-  var MODS=[['calc','calc.html','Σ'],['size','size.html','η'],['ref','ref.html','§']];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
-  var burger, menu, scrim, lastFocus;
-  function buildHeader(){
-    var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
-    burger=D.createElement('button'); burger.type='button'; burger.id='k5-burger'; burger.className='k5-burger';
-    burger.setAttribute('aria-haspopup','dialog'); burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-controls','k5-menu');
-    burger.innerHTML='<span class="k5-cur"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="4" y1="7" x2="20" y2="7"/><line class="l2" x1="4" y1="12" x2="20" y2="12"/><line class="l3" x1="4" y1="17" x2="20" y2="17"/></svg><span class="k5-dot"></span>';
-    burger.addEventListener('click', function(){ menu && menu.classList.contains('open') ? closeMenu() : openMenu(); });
-    hdr.appendChild(burger);
-    scrim=D.createElement('div'); scrim.className='k5-scrim'; scrim.addEventListener('click', closeMenu);
-    menu=D.createElement('div'); menu.id='k5-menu'; menu.className='k5-menu'; menu.setAttribute('role','dialog'); menu.setAttribute('aria-modal','true');
-    D.body.appendChild(scrim); D.body.appendChild(menu);
-    D.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); } });
-    labelBurger();
-  }
-  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?PAGE:'');
-    var tx=t('menu'); if(cur.textContent!==tx) cur.textContent=tx; burger.setAttribute('aria-label', t('open')+(m?' ('+m+')':'')); }
-  function themeNow(){ return H.dataset.theme || (function(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } })(); }
-  function setTheme(v){ var n=0; while(themeNow()!==v && n++<3 && window.mulyTheme) window.mulyTheme(); if(!window.mulyTheme){ try{ localStorage.setItem('muly-theme',v); }catch(e){} } }
-  function hrefOf(name){ var a=D.querySelector('.k-hdr .header-links a[href^="'+name+'.html"]'); return a ? a.getAttribute('href') : name+'.html'; }
-  function version(){ var v=D.querySelector('.k-hdr .version'); var s=v&&v.textContent.trim(); if(!s){ var m=(D.documentElement.outerHTML.slice(0,200).match(/v(\d+\.\d+\.\d+)/)||[])[0]; s=m||''; } return s; }
-  function seg(id, items, cur){ return '<div class="k5-segm" role="group" id="'+id+'">'+items.map(function(it){ return '<button type="button" data-v="'+it[0]+'" aria-pressed="'+(it[0]===cur)+'">'+esc(it[1])+'</button>'; }).join('')+'<span class="k5-pill" aria-hidden="true"></span></div>'; }
-  function renderMenu(){
-    var ueb=D.getElementById('ueb-btn'), i=0, h='';
-    function I(){ return ' style="--i:'+(i++)+'"'; }
-    h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
-    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('mods'))+'</div>';
-    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+m[0]+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
-    h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+I()+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b><span>'+esc(t('projS'))+'</span></span><span class="k5-badge"></span></a>';
-    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
-    if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
-    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
-    if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
-    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?'·'+PAGE:'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
-    menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
-    menu.querySelector('.k5-x').onclick=closeMenu;
-    var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
-    Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
-    Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
-      setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
-  }
-  function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
-  function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
-    if(!b){ p.style.width='0'; return; } p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; }); }
-  function openMenu(){ if(!menu) return; lastFocus=D.activeElement; renderMenu(); menu.classList.add('open'); scrim.classList.add('open'); D.body.classList.add('k5-lock');
-    burger.setAttribute('aria-expanded','true'); requestAnimationFrame(placePills); var f=menu.querySelector('[aria-current="page"]')||menu.querySelector('.k5-mod'); if(f) f.focus({preventScroll:true}); }
-  function closeMenu(){ if(!menu||!menu.classList.contains('open')) return; menu.classList.remove('open'); scrim.classList.remove('open'); D.body.classList.remove('k5-lock');
-    burger.setAttribute('aria-expanded','false'); if(lastFocus && lastFocus.focus) try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
-  // Fokus im Menü halten
-  D.addEventListener('keydown', function(e){ if(e.key!=='Tab' || !menu || !menu.classList.contains('open')) return;
-    var f=menu.querySelectorAll('a,button'); if(!f.length) return; var a=f[0], z=f[f.length-1];
-    if(e.shiftKey && D.activeElement===a){ e.preventDefault(); z.focus(); } else if(!e.shiftKey && D.activeElement===z){ e.preventDefault(); a.focus(); } });
-
-  // ── Einblenden beim Laden und beim Scrollen ─────────────────────────────
-  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ show(en.target); io.unobserve(en.target); } }); }, {rootMargin:'0px 0px -8% 0px'}) : null;
-  var revealN=0, revealT=0;
-  function show(el){ var now=Date.now(); if(now-revealT>400) revealN=0; revealT=now; el.style.setProperty('--k5-d', Math.min(revealN++,8)*55+'ms'); el.classList.add('k5-rv');
-    setTimeout(function(){ el.classList.remove('k5-rv'); el.style.removeProperty('--k5-d'); }, 1300); }
-  function reveal(sel){ if(STILL()) return; Array.prototype.forEach.call(D.querySelectorAll(sel), function(el){ if(el.k5seen || el.offsetParent===null) return; el.k5seen=1; io ? io.observe(el) : show(el); }); }
-
-  // ── Zahlen zählen beim ersten Erscheinen hoch, danach kurzes Nachrücken bei Änderung ──
-  // Der echte Text bleibt unverändert im Element; gezählt wird in einer darübergelegten Ebene.
-  function countUp(el){
-    if(STILL() || el.k5counted) return; var txt=el.textContent.trim(), m=txt.match(/^(-?)(\d[\d.,\s]*)(.*)$/); if(!m) return; el.k5counted=1;
-    var raw=m[2].trim(), dec=(raw.match(/[.,](\d+)$/)||[])[1]||'', sep=(raw.match(/[.,](?=\d+$)/)||[])[0]||'.';
-    var val=parseFloat(raw.replace(/[\s]/g,'').replace(sep===','?/\./g:/,/g,'').replace(',','.')); if(!isFinite(val)||val===0) return;
-    var o=D.createElement('span'); o.className='k5-count'; o.setAttribute('aria-hidden','true'); el.classList.add('k5-counting'); el.appendChild(o);
-    var t0=performance.now(), dur=700;
-    (function step(now){ var p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3), v=val*e;
-      o.textContent=m[1]+v.toFixed(dec.length).replace('.',sep)+m[3];
-      if(p<1 && o.isConnected) requestAnimationFrame(step); else { o.remove(); el.classList.remove('k5-counting'); } })(t0);
-  }
-  function watchNumbers(sel){
-    Array.prototype.forEach.call(D.querySelectorAll(sel), function(el){ if(el.k5w) return; el.k5w=1; var last=el.textContent;
-      if(/\d/.test(last) && el.offsetParent!==null) countUp(el);
-      new MutationObserver(function(){ var now=el.textContent; if(el.querySelector('.k5-count')) return; if(now===last) return; var was=last; last=now;
-        if(!/\d/.test(was) || !el.k5counted){ if(el.offsetParent!==null) countUp(el); return; }
-        if(STILL()) return; el.classList.remove('k5-tick'); void el.offsetWidth; el.classList.add('k5-tick'); }).observe(el,{childList:true, characterData:true, subtree:true}); });
-  }
-
-  // ── Ausnutzungsbalken: von alter auf neue Breite gleiten ─────────────────
-  var BARW={};
-  function watchBars(host, rowKey){
-    if(!host || host.k5b) return; host.k5b=1;
-    function run(){ var rows=host.querySelectorAll('tr'); Array.prototype.forEach.call(rows, function(r, i){ var b=r.querySelector('.bar > i'); if(!b) return;
-      var k=rowKey(r,i), w=b.style.width; var from=(k in BARW)?BARW[k]:'0%'; BARW[k]=w; if(STILL() || from===w || !b.animate) return;
-      b.animate([{width:from},{width:w}],{duration:from==='0%'?820:480, delay:from==='0%'?120+i*45:0, easing:'cubic-bezier(.22,.8,.24,1)', fill:'backwards'}); }); }
-    new MutationObserver(run).observe(host,{childList:true}); run();
-  }
-
-  // ── Segment-Umschalter (M/Q/N/w): gleitende Fläche unter der aktiven Taste ──
-  function slider(host, activeSel){
-    if(!host || host.k5s) return; host.k5s=1; host.classList.add('k5-seg-host','k5-seg-on'); var p=D.createElement('span'); p.className='k5-pill'; host.appendChild(p);
-    function place(){ var b=host.querySelector(activeSel); if(!b||!host.offsetWidth){ p.style.opacity='0'; return; } p.style.opacity='1'; p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; p.style.top=b.offsetTop+'px'; p.style.height=b.offsetHeight+'px'; p.style.bottom='auto'; }
-    new MutationObserver(place).observe(host,{attributes:true, subtree:true, attributeFilter:['class','aria-pressed']});
-    window.addEventListener('resize', place); place(); host.k5place=place;
-  }
-  function wipe(el){ if(STILL()||!el) return; el.classList.remove('k5-wipe'); void el.getBoundingClientRect(); el.classList.add('k5-wipe'); setTimeout(function(){ el.classList.remove('k5-wipe'); }, 900); }
-
-  window.kragrK5={ page:PAGE, acc:acc, toggle:toggle, setClosed:setClosed, refreshSums:refreshSums, flip:flip, measure:measure, reveal:reveal, countUp:countUp,
-    watchNumbers:watchNumbers, watchBars:watchBars, slider:slider, wipe:wipe, openMenu:openMenu, closeMenu:closeMenu, t:t, lang:lang, still:STILL, CHEV:CHEV };
-
-  function init(){
-    buildHeader();
-    try{ if(window.kragrK5Page) window.kragrK5Page(window.kragrK5); }catch(e){ if(window.console) console.error(e); }
-    reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
-    window.addEventListener('resize', function(){ if(menu && menu.classList.contains('open')) placePills(); });
-    new MutationObserver(function(){ labelBurger(); }).observe(H,{attributes:true, attributeFilter:['lang']});
-  }
-  if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
+    try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
+  window.KMOD=K; window.kmodLang=lang;
+  window.kmod=function(m, L){ var d=K[L||lang()]||K.de; return d[m] || m; };
+  window.kmodApply=function(){ if(typeof document==='undefined') return; document.querySelectorAll('[data-mod]').forEach(function(e){ var v=window.kmod(e.getAttribute('data-mod')); if(e.textContent!==v) e.textContent=v; });
+    var pg=document.documentElement.getAttribute('data-kpage'); if(pg) document.title=window.kmod(pg)+' — kragr'; };
+  if(typeof document!=='undefined' && document.addEventListener) document.addEventListener('DOMContentLoaded', window.kmodApply);
 })();
 </script>
 </head>
@@ -1219,12 +713,12 @@ window.kragrK5Page = function(K){
 <header class="app-header glass k-hdr">
   <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <nav class="header-links" aria-label="Module">
-    <a href="calc.html">calc</a>
-    <span class="module-name">size</span>
-    <a href="ref.html#/stahlbeton" id="hdr-ref">ref</a>
+    <a href="calc.html" data-mod="calc">Schnittkräfte</a>
+    <span class="module-name" data-mod="size">Bemessung</span>
+    <a href="ref.html#/stahlbeton" id="hdr-ref" data-mod="ref">Wissen</a>
   </nav>
   <div class="hdr-tools">
-    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-i18n="projBtn">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
     <span class="version" id="ver"></span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
@@ -1238,7 +732,7 @@ window.kragrK5Page = function(K){
   <div class="page-head">
     <div class="page-title" id="page-title"><span data-i18n="z477">Stahlbeton — Balken, Platten, Stützen, Durchstanzen</span></div>
     <div class="page-sub"><span id="page-sub"><span data-i18n="z478">Bemessung nach DIN EN 1992-1-1 mit deutschem NA: Biegung (auch mit Druckbewehrung), Querkraft, Gurtanschluss, Verankerung, Zugkraftdeckung, Rissbreite, Biegeschlankheit, Stützen nach dem Modellstützenverfahren und Durchstanzen.</span></span>
-      <span id="page-calc" data-i18n="z001">Schnittgrößen von Hand eingeben, z. B. aus <a href="calc.html">kragr·calc</a>.</span></div>
+      <span id="page-calc" data-i18n="z001">Schnittgrößen von Hand eingeben, z. B. aus <a href="calc.html">kragr · Schnittkräfte</a>.</span></div>
   </div>
 
   <!-- ── Eingaben ── -->
@@ -1247,10 +741,10 @@ window.kragrK5Page = function(K){
       <div class="card-title"><span data-i18n="posTitle">Positionen</span><span class="btn-row"><button class="btn small" onclick="savePos()" data-i18n="save">Speichern</button></span></div>
       <div id="pos-msg" class="hint" style="margin-top:0"></div>
       <div id="pos-list"></div>
-      <a class="proj-link" href="projekt.html" data-i18n="projLink">Alle Positionen in „Meine Projekte“ →</a>
+      <a class="proj-link" href="projekt.html" data-i18n="projLink">Alle Positionen in „Projekte“ →</a>
     </div>
     <div class="card" id="calc-import">
-      <div class="card-title"><span data-i18n="ciTitle">Schnittgrößen aus kragr·calc</span></div>
+      <div class="card-title"><span data-i18n="ciTitle">Schnittgrößen aus „Schnittkräfte“</span></div>
       <div id="ci-form">
         <div class="grid2">
           <div class="field full"><label data-i18n="ciSaved">Gespeicherte Berechnung</label><select id="ci-sel" onchange="ciSelChange()"></select></div>
@@ -1409,7 +903,7 @@ window.kragrK5Page = function(K){
         <div class="field"><label data-i18n="pb022">Ø Stützbewehrung oben [mm]</label><select id="zk-dso" onchange="run()"><option value="10">Ø 10</option><option value="12">Ø 12</option><option value="14">Ø 14</option><option value="16" selected>Ø 16</option><option value="20">Ø 20</option><option value="25">Ø 25</option><option value="28">Ø 28</option></select></div>
         <div class="field"><label data-i18n="pb023">Stäbe oben über den Stützen</label><input type="number" step="1" id="zk-no" value="4" oninput="run()"></div>
       </div>
-      <div class="hint" data-i18n="pb024">Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit kragr·calc (Durchlaufträger). b, h und Beton aus den Karten oben.</div>
+      <div class="hint" data-i18n="pb024">Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit „Schnittkräfte“ (Durchlaufträger). b, h und Beton aus den Karten oben.</div>
     </div>
     </div>
     <div id="beton-sz" style="display:none">
@@ -1800,7 +1294,7 @@ window.kragrK5Page = function(K){
         <div class="field"><label>γ [kN/m³] <span data-i18n="grGam">(über der Sohle)</span></label><input type="number" step="any" id="gr-g1" value="18.5" oninput="grEigen(); run()"></div>
         <div class="field"><label>γ<sub>2</sub> [kN/m³] <span data-i18n="grGam2">(unter der Sohle, γ′ bei Grundwasser)</span></label><input type="number" step="any" id="gr-g2" value="18.5" oninput="grEigen(); run()"></div>
       </div>
-      <div class="hint" data-i18n="grBodenHint">Anhaltswerte wie in kragr·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.</div>
+      <div class="hint" data-i18n="grBodenHint">Anhaltswerte wie in „Wissen“ (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.</div>
     </div>
     <div id="gr-flach">
     <div class="card">
@@ -1813,7 +1307,7 @@ window.kragrK5Page = function(K){
         <div class="field"><label><span data-i18n="gfD">Einbindetiefe d [m]</span></label><input type="number" step="any" id="gf-d" value="1.0" oninput="run()"></div>
         <div class="field"><label><span data-i18n="gfHf">Fundamenthöhe h<sub>f</sub> [m]</span></label><input type="number" step="any" id="gf-hf" value="0.6" oninput="run()"></div>
       </div>
-      <div class="hint" data-i18n="gfHint1">Eigengewicht des Fundaments (25 kN/m³) und der Überschüttung bis zur Geländeoberkante rechnet size selbst dazu.</div>
+      <div class="hint" data-i18n="gfHint1">Eigengewicht des Fundaments (25 kN/m³) und der Überschüttung bis zur Geländeoberkante rechnet „Bemessung“ selbst dazu.</div>
     </div>
     <div class="card">
       <div class="card-title"><span data-i18n="gfT2">Lasten auf der Fundamentoberkante (charakteristisch)</span></div>
@@ -1881,7 +1375,7 @@ window.kragrK5Page = function(K){
         <div class="field"><label>E<sub>s</sub> [MN/m²]</label><input type="number" step="any" id="gs-E4" value="100" oninput="$('gs-b4').value='x'; run()"></div>
       </div>
       </div>
-      <div class="hint" data-i18n="gsHint2">Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in kragr·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.</div>
+      <div class="hint" data-i18n="gsHint2">Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in „Wissen“), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet „Bemessung“ mit γ′ = γ − 10 kN/m³.</div>
     </div>
     </div>
     <div id="gr-wand" style="display:none">
@@ -2043,7 +1537,7 @@ window.kragrK5Page = function(K){
         <label class="check"><input type="checkbox" id="mw-own" onchange="run()"> <span data-i18n="mwOwn">f<sub>k</sub> selbst vorgeben (Tabelle NA / Zulassung)</span></label>
         <div class="field mw-fkown"><label>f<sub>k</sub> [N/mm²]</label><input type="number" step="any" id="mw-fk" value="4.0" oninput="run()"></div>
       </div>
-      <div class="hint" data-i18n="mwHint">Ohne eigenen Wert rechnet size f<sub>k</sub> = K·f<sub>b</sub><sup>α</sup>·f<sub>m</sub><sup>β</sup> nach DIN EN 1996-1-1, Gl. (3.1)–(3.3) mit den empfohlenen K-Werten. Die Tabellen des deutschen NA bzw. die Zulassung liefern oft kleinere Werte und sind im Projekt maßgebend.</div>
+      <div class="hint" data-i18n="mwHint">Ohne eigenen Wert rechnet „Bemessung“ f<sub>k</sub> = K·f<sub>b</sub><sup>α</sup>·f<sub>m</sub><sup>β</sup> nach DIN EN 1996-1-1, Gl. (3.1)–(3.3) mit den empfohlenen K-Werten. Die Tabellen des deutschen NA bzw. die Zulassung liefern oft kleinere Werte und sind im Projekt maßgebend.</div>
     </div>
     <div id="mw-druck">
     <div class="card">
@@ -2249,7 +1743,7 @@ window.kragrK5Page = function(K){
         <div class="field"><label data-i18n="pa105">Wassertemperatur [°C]</label><input type="number" step="any" id="wp-T" value="10" oninput="run()"></div>
         <div class="field"><label data-i18n="pa106">NPSH<sub>R</sub> [m] (Herstellerangabe)</label><input type="number" step="any" id="wp-npshr" value="3.5" oninput="run()"></div>
       </div>
-      <div class="hint" data-i18n="pa107">Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in kragr·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.</div>
+      <div class="hint" data-i18n="pa107">Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in „Wissen“). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.</div>
     </div>
     </div>
     <div id="wb-teil" style="display:none">
@@ -2322,7 +1816,7 @@ window.kragrK5Page = function(K){
       <div class="bp-lay"><select id="bl-m5" onchange="bpPick(5)" aria-label="Baustoff Schicht 5"><option value="-" selected>—</option><optgroup label="Putze und Estriche" data-i18n-label="bg0"><option value="0" data-i18n="z206">Gipsputz</option><option value="1" data-i18n="z207">Kalkzementputz</option><option value="28" data-i18n="bm28">Leichtputz</option><option value="29" data-i18n="bm29">Lehmputz</option><option value="30" data-i18n="bm30">Wärmedämmputz WLS 070</option><option value="2" data-i18n="z208">Zementestrich</option><option value="31" data-i18n="bm31">Calciumsulfatestrich</option><option value="32" data-i18n="bm32">Gussasphaltestrich</option></optgroup><optgroup label="Beton" data-i18n-label="bg1"><option value="3" data-i18n="matBeton">Stahlbeton</option><option value="4" data-i18n="z210">Normalbeton (unbewehrt)</option><option value="33" data-i18n="bm33">Leichtbeton, gefügedicht</option></optgroup><optgroup label="Mauerwerk und Naturstein" data-i18n-label="bg2"><option value="5" data-i18n="z211">Kalksandstein</option><option value="6" hidden data-i18n="z212">Kalksandstein</option><option value="7" data-i18n="z213">Vollziegel</option><option value="8" data-i18n="z214">Hochlochziegel</option><option value="34" data-i18n="bm34">Hochlochziegel mit Dämmstofffüllung</option><option value="9" data-i18n="z215">Planziegel, wärmedämmend</option><option value="10" data-i18n="z216">Porenbeton</option><option value="11" data-i18n="z217">Leichtbeton-Vollblock</option><option value="35" data-i18n="bm35">Leichtbeton-Hohlblockstein</option><option value="36" data-i18n="bm36">Klinker (Vormauerschale)</option><option value="37" data-i18n="bm37">Sandstein</option><option value="38" data-i18n="bm38">Granit</option></optgroup><optgroup label="Dämmstoffe" data-i18n-label="bg3"><option value="12" data-i18n="z218">Mineralwolle WLS 035</option><option value="13" data-i18n="z219">Mineralwolle WLS 032</option><option value="39" data-i18n="bm39">Mineralwolle WLS 040</option><option value="14">EPS WLS 035</option><option value="15" data-i18n="z220">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="40" data-i18n="bm40">Schaumglas WLS 045</option><option value="41" data-i18n="bm41">Phenolharz WLS 022</option><option value="42" data-i18n="bm42">Vakuumdämmplatte (VIP)</option><option value="18" data-i18n="z221">Holzfaserdämmung WLS 040</option><option value="19" data-i18n="z222">Zellulose WLS 040</option><option value="43" data-i18n="bm43">Kork WLS 045</option><option value="44" data-i18n="bm44">Hanf / Flachs WLS 045</option></optgroup><optgroup label="Holz und Plattenwerkstoffe" data-i18n-label="bg4"><option value="20" data-i18n="z223">Nadelholz</option><option value="45" data-i18n="bm45">Brettschichtholz</option><option value="46" data-i18n="bm46">Brettsperrholz</option><option value="47" data-i18n="bm47">Laubholz (Eiche, Buche)</option><option value="21" data-i18n="z224">OSB-Platte</option><option value="48" data-i18n="bm48">Spanplatte</option><option value="49" data-i18n="bm49">MDF-Platte</option><option value="50" data-i18n="bm50">Sperrholz</option><option value="22" data-i18n="z225">Gipskartonplatte</option><option value="51" data-i18n="bm51">Gipsfaserplatte</option><option value="23" data-i18n="z226">Holzwolle-Leichtbauplatte</option><option value="52" data-i18n="bm52">Faserzementplatte</option></optgroup><optgroup label="Bahnen und Folien" data-i18n-label="bg5"><option value="24" data-i18n="z227">PE-Folie</option><option value="25" data-i18n="z228">Dampfbremse</option><option value="54" data-i18n="bm54">Dampfsperre mit Alu-Einlage</option><option value="53" data-i18n="bm53">Unterdeckbahn, diffusionsoffen</option><option value="26" data-i18n="z229">Bitumen-Dachbahn</option><option value="55" data-i18n="bm55">Kunststoff-Dachabdichtung</option></optgroup><optgroup label="Beläge und Bekleidungen" data-i18n-label="bg6"><option value="56" data-i18n="bm56">Fliesen (Keramik)</option><option value="57" data-i18n="bm57">Parkett</option><option value="58" data-i18n="bm58">Teppich</option><option value="59" data-i18n="bm59">Linoleum</option><option value="27" data-i18n="z230">Dachziegel</option><option value="60" data-i18n="bm60">Aluminiumblech</option><option value="61" data-i18n="bm61">Kies</option></optgroup><optgroup label="Luftschichten (DIN EN ISO 6946)" data-i18n-label="bg7"><option value="62" data-i18n="bm62">Luftschicht, ruhend</option><option value="63" data-i18n="bm63">Luftschicht, schwach belüftet</option><option value="64" data-i18n="bm64">Luftschicht, stark belüftet</option></optgroup></select><input type="number" step="any" id="bl-d5" data-c="d" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l5" data-c="l" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u5" data-c="u" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r5" data-c="r" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
       <div class="bp-lay"><select id="bl-m6" onchange="bpPick(6)" aria-label="Baustoff Schicht 6"><option value="-" selected>—</option><optgroup label="Putze und Estriche" data-i18n-label="bg0"><option value="0" data-i18n="z206">Gipsputz</option><option value="1" data-i18n="z207">Kalkzementputz</option><option value="28" data-i18n="bm28">Leichtputz</option><option value="29" data-i18n="bm29">Lehmputz</option><option value="30" data-i18n="bm30">Wärmedämmputz WLS 070</option><option value="2" data-i18n="z208">Zementestrich</option><option value="31" data-i18n="bm31">Calciumsulfatestrich</option><option value="32" data-i18n="bm32">Gussasphaltestrich</option></optgroup><optgroup label="Beton" data-i18n-label="bg1"><option value="3" data-i18n="matBeton">Stahlbeton</option><option value="4" data-i18n="z210">Normalbeton (unbewehrt)</option><option value="33" data-i18n="bm33">Leichtbeton, gefügedicht</option></optgroup><optgroup label="Mauerwerk und Naturstein" data-i18n-label="bg2"><option value="5" data-i18n="z211">Kalksandstein</option><option value="6" hidden data-i18n="z212">Kalksandstein</option><option value="7" data-i18n="z213">Vollziegel</option><option value="8" data-i18n="z214">Hochlochziegel</option><option value="34" data-i18n="bm34">Hochlochziegel mit Dämmstofffüllung</option><option value="9" data-i18n="z215">Planziegel, wärmedämmend</option><option value="10" data-i18n="z216">Porenbeton</option><option value="11" data-i18n="z217">Leichtbeton-Vollblock</option><option value="35" data-i18n="bm35">Leichtbeton-Hohlblockstein</option><option value="36" data-i18n="bm36">Klinker (Vormauerschale)</option><option value="37" data-i18n="bm37">Sandstein</option><option value="38" data-i18n="bm38">Granit</option></optgroup><optgroup label="Dämmstoffe" data-i18n-label="bg3"><option value="12" data-i18n="z218">Mineralwolle WLS 035</option><option value="13" data-i18n="z219">Mineralwolle WLS 032</option><option value="39" data-i18n="bm39">Mineralwolle WLS 040</option><option value="14">EPS WLS 035</option><option value="15" data-i18n="z220">EPS WLS 032 (grau)</option><option value="16">XPS WLS 035</option><option value="17">PUR/PIR WLS 024</option><option value="40" data-i18n="bm40">Schaumglas WLS 045</option><option value="41" data-i18n="bm41">Phenolharz WLS 022</option><option value="42" data-i18n="bm42">Vakuumdämmplatte (VIP)</option><option value="18" data-i18n="z221">Holzfaserdämmung WLS 040</option><option value="19" data-i18n="z222">Zellulose WLS 040</option><option value="43" data-i18n="bm43">Kork WLS 045</option><option value="44" data-i18n="bm44">Hanf / Flachs WLS 045</option></optgroup><optgroup label="Holz und Plattenwerkstoffe" data-i18n-label="bg4"><option value="20" data-i18n="z223">Nadelholz</option><option value="45" data-i18n="bm45">Brettschichtholz</option><option value="46" data-i18n="bm46">Brettsperrholz</option><option value="47" data-i18n="bm47">Laubholz (Eiche, Buche)</option><option value="21" data-i18n="z224">OSB-Platte</option><option value="48" data-i18n="bm48">Spanplatte</option><option value="49" data-i18n="bm49">MDF-Platte</option><option value="50" data-i18n="bm50">Sperrholz</option><option value="22" data-i18n="z225">Gipskartonplatte</option><option value="51" data-i18n="bm51">Gipsfaserplatte</option><option value="23" data-i18n="z226">Holzwolle-Leichtbauplatte</option><option value="52" data-i18n="bm52">Faserzementplatte</option></optgroup><optgroup label="Bahnen und Folien" data-i18n-label="bg5"><option value="24" data-i18n="z227">PE-Folie</option><option value="25" data-i18n="z228">Dampfbremse</option><option value="54" data-i18n="bm54">Dampfsperre mit Alu-Einlage</option><option value="53" data-i18n="bm53">Unterdeckbahn, diffusionsoffen</option><option value="26" data-i18n="z229">Bitumen-Dachbahn</option><option value="55" data-i18n="bm55">Kunststoff-Dachabdichtung</option></optgroup><optgroup label="Beläge und Bekleidungen" data-i18n-label="bg6"><option value="56" data-i18n="bm56">Fliesen (Keramik)</option><option value="57" data-i18n="bm57">Parkett</option><option value="58" data-i18n="bm58">Teppich</option><option value="59" data-i18n="bm59">Linoleum</option><option value="27" data-i18n="z230">Dachziegel</option><option value="60" data-i18n="bm60">Aluminiumblech</option><option value="61" data-i18n="bm61">Kies</option></optgroup><optgroup label="Luftschichten (DIN EN ISO 6946)" data-i18n-label="bg7"><option value="62" data-i18n="bm62">Luftschicht, ruhend</option><option value="63" data-i18n="bm63">Luftschicht, schwach belüftet</option><option value="64" data-i18n="bm64">Luftschicht, stark belüftet</option></optgroup></select><input type="number" step="any" id="bl-d6" data-c="d" value="0" placeholder="d" title="Dicke d [cm]" oninput="run()"><input type="number" step="any" id="bl-l6" data-c="l" value="" placeholder="λ" title="λ [W/(mK)]" oninput="run()"><input type="number" step="any" id="bl-u6" data-c="u" value="" placeholder="μ" title="μ" oninput="run()"><input type="number" step="any" id="bl-r6" data-c="r" value="" placeholder="ρ" title="ρ [kg/m³]" oninput="run()"></div>
       <div class="hint" id="bp-lay-mode"></div>
-      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Eine Schicht antippen zum Bearbeiten, „+“ fügt eine hinzu, „×“ entfernt sie.</span></div>
+      <div class="hint"><span data-i18n="bpLayHint">Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in „Wissen“); alle drei lassen sich mit Herstellerwerten überschreiben. Eine Schicht antippen zum Bearbeiten, „+“ fügt eine hinzu, „×“ entfernt sie.</span></div>
     </div>
     <div id="bp-gk" style="display:none">
     <div class="card">
@@ -2721,7 +2215,7 @@ window.kragrK5Page = function(K){
 // Neue Texte bitte gleich als Schlüssel anlegen (data-i18n="…" bzw. tx('…')).
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const I18N = { "de": {
-"z001":"Schnittgrößen von Hand eingeben, z. B. aus <a href=\"calc.html\">kragr·calc</a>.",
+"z001":"Schnittgrößen von Hand eingeben, z. B. aus <a href=\"calc.html\">kragr · Schnittkräfte</a>.",
 "z003":"Balken",
 "z004":"Unterzug",
 "z005":"Platte",
@@ -3091,7 +2585,7 @@ const I18N = { "de": {
 "grBx":"eigene Werte",
 "grGam":"(über der Sohle)",
 "grGam2":"(unter der Sohle, γ′ bei Grundwasser)",
-"grBodenHint":"Anhaltswerte wie in kragr·ref (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.",
+"grBodenHint":"Anhaltswerte wie in „Wissen“ (Grundbau › Bodenkennwerte). Im Projekt gelten die Werte aus dem Baugrundgutachten.",
 "gfT1":"Fundament",
 "gfName":"Bezeichnung",
 "gfForm":"Form",
@@ -3101,11 +2595,11 @@ const I18N = { "de": {
 "gfA":"Länge a [m]",
 "gfD":"Einbindetiefe d [m]",
 "gfHf":"Fundamenthöhe h<sub>f</sub> [m]",
-"gfHint1":"Eigengewicht des Fundaments (25 kN/m³) und der Überschüttung bis zur Geländeoberkante rechnet size selbst dazu.",
+"gfHint1":"Eigengewicht des Fundaments (25 kN/m³) und der Überschüttung bis zur Geländeoberkante rechnet „Bemessung“ selbst dazu.",
 "gfT2":"Lasten auf der Fundamentoberkante (charakteristisch)",
 "gfHint2":"Bemessungssituation BS-P nach DIN 1054: γ<sub>G</sub> = 1,35, γ<sub>Q</sub> = 1,50, γ<sub>R,v</sub> = 1,40 (Grundbruch), γ<sub>R,h</sub> = 1,10 (Gleiten). H und M wirken in Richtung b.",
 "matGrund":"Grundbau",
-"projBtn":"Meine Projekte",
+"projBtn":"Projekte",
 "wbDruck":"Wasserdruck",
 "wbSchwimm":"Schwimmen",
 "wbRohr":"Rohr",
@@ -3177,7 +2671,7 @@ const I18N = { "de": {
 "bpLayT":"Bauteilaufbau (innen → außen)",
 "bpName":"Bezeichnung",
 "bpMat":"Baustoff",
-"bpLayHint":"Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in kragr·ref); alle drei lassen sich mit Herstellerwerten überschreiben. Eine Schicht antippen zum Bearbeiten, „+“ fügt eine hinzu, „×“ entfernt sie.",
+"bpLayHint":"Die Auswahl des Baustoffs setzt λ, μ und ρ (Anhaltswerte nach DIN 4108-4 und DIN EN ISO 10456, wie in „Wissen“); alle drei lassen sich mit Herstellerwerten überschreiben. Eine Schicht antippen zum Bearbeiten, „+“ fügt eine hinzu, „×“ entfernt sie.",
 "buT":"Randbedingungen",
 "buArt":"Bauteil",
 "buTi":"Innentemperatur θ<sub>i</sub> [°C]",
@@ -3220,7 +2714,7 @@ const I18N = { "de": {
 "gsSchicht2":"Schicht 2",
 "gsSchicht3":"Schicht 3",
 "gsSchicht4":"Schicht 4",
-"gsHint2":"Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in kragr·ref), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet size mit γ′ = γ − 10 kN/m³.",
+"gsHint2":"Die Bodenauswahl schlägt γ und E<sub>s</sub> vor (Anhaltswerte wie in „Wissen“), beide lassen sich überschreiben. Die letzte Schicht reicht beliebig tief. Unter dem Grundwasserspiegel rechnet „Bemessung“ mit γ′ = γ − 10 kN/m³.",
 "mwDruck":"Wand auf Druck",
 "mwTeil":"Teilfläche",
 "mwKeller":"Kellerwand",
@@ -3239,7 +2733,7 @@ const I18N = { "de": {
 "mwFb":"(normierte Steindruckfestigkeit)",
 "mwFm":"(Mörteldruckfestigkeit)",
 "mwOwn":"f<sub>k</sub> selbst vorgeben (Tabelle NA / Zulassung)",
-"mwHint":"Ohne eigenen Wert rechnet size f<sub>k</sub> = K·f<sub>b</sub><sup>α</sup>·f<sub>m</sub><sup>β</sup> nach DIN EN 1996-1-1, Gl. (3.1)–(3.3) mit den empfohlenen K-Werten. Die Tabellen des deutschen NA bzw. die Zulassung liefern oft kleinere Werte und sind im Projekt maßgebend.",
+"mwHint":"Ohne eigenen Wert rechnet „Bemessung“ f<sub>k</sub> = K·f<sub>b</sub><sup>α</sup>·f<sub>m</sub><sup>β</sup> nach DIN EN 1996-1-1, Gl. (3.1)–(3.3) mit den empfohlenen K-Werten. Die Tabellen des deutschen NA bzw. die Zulassung liefern oft kleinere Werte und sind im Projekt maßgebend.",
 "mdT":"Wand und Decke",
 "mdName":"Bezeichnung",
 "mdT2":"Wanddicke t [mm]",
@@ -3401,15 +2895,15 @@ const I18N = { "de": {
 "load":"Laden",
 "del":"Löschen",
 "delConfirm":"Wirklich?",
-"ciTitle":"Schnittgrößen aus kragr·calc",
+"ciTitle":"Schnittgrößen aus „Schnittkräfte“",
 "ciSaved":"Gespeicherte Berechnung",
 "ciPart":"Bauteil des Rahmens",
 "ciRiegel":"Riegel",
 "cibClose":"Hinweis schließen",
 "cibSaved":"Automatisch in {1} gespeichert als „{0}“.",
-"cibPick":"Gespeicherte Berechnung aus calc:",
-"cibNone":"Noch keine Berechnung in calc gespeichert.",
-"cibCalc":"calc öffnen",
+"cibPick":"Gespeicherte Berechnung aus „Schnittkräfte“:",
+"cibNone":"Noch keine Berechnung in „Schnittkräfte“ gespeichert.",
+"cibCalc":"„Schnittkräfte“ öffnen",
 "ciStiel":"Stiel (der stärker gedrückte)",
 "ciApply":"Übernehmen",
 "ciHint":"Die Werte gehen in den gerade gewählten Baustoff und das Bauteil — vorher unten den Bereich wählen.",
@@ -3432,7 +2926,7 @@ const I18N = { "de": {
 "mlPick":"Baustoff wählen",
 "ppCur":"Aktuelle Berechnung",
 "ppList":"Gespeichert",
-"ppNew":"Noch nicht in „Meine Projekte“",
+"ppNew":"Noch nicht in „Projekte“",
 "ppSaved":"Gespeichert · {0}",
 "ppChanged":"Geändert — noch nicht gespeichert",
 "mobBadS":"{0} nicht erfüllt",
@@ -3447,7 +2941,7 @@ const I18N = { "de": {
 "notIncl":"Nicht enthalten",
 "scopeT":"Umfang und Grundlagen",
 "refFormulas":"Formeln dazu im",
-"refBook":"Nachschlagewerk kragr·ref",
+"refBook":"Nachschlagewerk „Wissen“",
 "calcSteps":"Rechenschritte",
 "expandAll":"Alle aufklappen",
 "collapseAll":"Alle zuklappen",
@@ -3461,11 +2955,11 @@ const I18N = { "de": {
 "posNotAll":"nicht alle erfüllt",
 "posNone":"Noch keine Positionen gespeichert. Die Bezeichnung oben dient als Name.",
 "nTopics":"{0} Themen",
-"ciNone":"Noch keine Berechnung gespeichert. In <a href=\"calc.html\">kragr·calc</a> rechnen und „Berechnung speichern“ — dann lassen sich M, V und N hier übernehmen.",
-"ciFrom":"<b>Übernommen aus calc:</b>","cibEnde":"Stabende {0}","cibStab":"Stab {0}",
+"ciNone":"Noch keine Berechnung gespeichert. In <a href=\"calc.html\">kragr · Schnittkräfte</a> rechnen und „Berechnung speichern“ — dann lassen sich M, V und N hier übernehmen.",
+"ciFrom":"<b>Übernommen aus „Schnittkräfte“:</b>","cibEnde":"Stabende {0}","cibStab":"Stab {0}",
 "ciRiegelN":"Normalkraft im Riegel N = {0} kN (Druck).",
-"ciMauer":"Für Mauerwerk bitte die Lasten von Hand eingeben. Auflagerkraft aus calc: {0} kN (z. B. als N<sub>Edc</sub> für die Teilflächenpressung).",
-"ciGrund":"Für Grundbau bitte die Lasten von Hand und getrennt nach ständig und veränderlich eingeben (calc trennt die Lastarten nicht). Auflagerkraft aus calc: {0} kN.",
+"ciMauer":"Für Mauerwerk bitte die Lasten von Hand eingeben. Auflagerkraft aus „Schnittkräfte“: {0} kN (z. B. als N<sub>Edc</sub> für die Teilflächenpressung).",
+"ciGrund":"Für Grundbau bitte die Lasten von Hand und getrennt nach ständig und veränderlich eingeben („Schnittkräfte“ trennt die Lastarten nicht). Auflagerkraft aus „Schnittkräfte“: {0} kN.",
 "ciFussOk":"{0}: N<sub>Ed</sub> = {1} kN, V<sub>Ed</sub> = {2} kN (Querkraft im Stiel)",
 "ciAnschluss":"Für Anschlüsse bitte die Kräfte von Hand eingeben (z. B. die Auflagerkraft als V<sub>Ed</sub>: {0} kN).",
 "ciHx":"Für Ausklinkung, Satteldachträger und Versatz bitte die Werte von Hand eingeben (z. B. die Auflagerkraft {0} kN).",
@@ -3587,7 +3081,7 @@ const I18N = { "de": {
 "pa104":"Verluste der Saugleitung h<sub>v,s</sub> [m]",
 "pa105":"Wassertemperatur [°C]",
 "pa106":"NPSH<sub>R</sub> [m] (Herstellerangabe)",
-"pa107":"Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in kragr·ref). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.",
+"pa107":"Dichte und Dampfdruck des Wassers je nach Temperatur (Tabelle wie in „Wissen“). Luftdruck auf Meereshöhe 101,3 kPa, je 100 m Höhe etwa 1,2 kPa weniger.",
 "pa108":"Pumpenanlage und Kavitation",
 "pa109":"Sohlgefälle I [‰]",
 "pa110":"zulässiger Füllungsgrad h/D",
@@ -3644,7 +3138,7 @@ const I18N = { "de": {
 "pb021":"Stäbe unten gestaffelt",
 "pb022":"Ø Stützbewehrung oben [mm]",
 "pb023":"Stäbe oben über den Stützen",
-"pb024":"Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit kragr·calc (Durchlaufträger). b, h und Beton aus den Karten oben.",
+"pb024":"Die Stützmomente aus der Schnittgrößenberechnung, z. B. mit „Schnittkräfte“ (Durchlaufträger). b, h und Beton aus den Karten oben.",
 "pb025":"Durchlaufträger: Feld und Bewehrung",
 "pb026":"Stahlgüte",
 "pb027":"Breite b [mm]",
@@ -3827,9 +3321,9 @@ const I18N = { "de": {
 "pc106":"Pfahl",
 "pc107":"Brunnen",
 "pc108":"Sommerlicher Wärmeschutz",
-"projLink":"Alle Positionen in „Meine Projekte“ →",
+"projLink":"Alle Positionen in „Projekte“ →",
 "posMissing":"Position „{0}“ nicht gefunden.",
-"posRecalc":"„{0}“ mit der neueren calc-Berechnung neu gerechnet und gespeichert."
+"posRecalc":"„{0}“ mit der neueren Berechnung aus „Schnittkräfte“ neu gerechnet und gespeichert."
 } };
 if(window.MULY_LANG && LANG!=='de') I18N[LANG] = MULY_LANG.i18n || {};
 
@@ -3882,7 +3376,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.4';
+const SIZE_VERSION = '0.7.5';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4327,7 +3821,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
     S.push(`μ<sub>Eds</sub> = |M<sub>Ed,St</sub>| / (b${uz?'<sub>w</sub>':''}·d<sub>St</sub>²·f<sub>cd</sub>) = ${deNum(I.Ms,1)}·10⁶ / (${bc}·${deNum(dt,1)}²·${deNum(fcd)}) = <b>${deNum(mus,4)}</b>`);
     if(!sts || mus>MU_LIM){
       S.push(`μ<sub>Eds</sub> > μ<sub>lim</sub> = ${deNum(MU_LIM,3)}`); eta = mus/MU_LIM;
-      note = tt('Druckzone an der Stütze überlastet: Querschnitt vergrößern, Voute oder Druckbewehrung (nicht in size enthalten).');
+      note = tt('Druckzone an der Stütze überlastet: Querschnitt vergrößern, Voute oder Druckbewehrung (nicht in „Bemessung“ enthalten).');
     } else {
       const AsB = sts.omega*bc*dt*fcd/SB.fyd, AsE = Math.max(AsB, AsminT);
       S.push(H(tt('Tabellenwerte und erforderliche Bewehrung oben')));
@@ -5577,7 +5071,7 @@ function nachweiseStahl(I, profName){
       _L`Querschnittsklasse = max(Gurt; Steg) = <b>${kl}</b> → ${kl<=2?tt('plastische Bemessung mit W<sub>pl</sub>'):kl===3?tt('elastische Bemessung mit W<sub>el</sub>'):tt('wirksamer Querschnitt nach EN 1993-1-5')}`];
     if(I.Mz>0) S.push(_L`Biegung um z: Gurte nach Tab. 5.2 wie oben (gleichmäßiger Druck, sichere Seite) → W<sub>${kl<=2?'pl':'el'},z</sub> = ${f(Wz)} cm³`);
     C.push({ id:'klasse', title:tt('Querschnittsklassifizierung'), eta: Math.min(kl,3)/3, ok: true, steps:S, klasse:kl,
-      note: kl===4 ? tt('Klasse 4: Teile beulen vor Erreichen der Streckgrenze. size rechnet mit wirksamen Querschnittswerten (nächster Nachweis).') : '' });
+      note: kl===4 ? tt('Klasse 4: Teile beulen vor Erreichen der Streckgrenze. „Bemessung“ rechnet mit wirksamen Querschnittswerten (nächster Nachweis).') : '' });
   }
   // 1b) Wirksamer Querschnitt (Klasse 4)
   if(EF){
@@ -5951,7 +5445,7 @@ function figSeiteCalc(D, I, MV, opt={}){
   const Mi=v=>{ const xs=D.x; if(v<=xs[0]) return D.M[0]; for(let i=1;i<xs.length;i++) if(v<=xs[i]){ const r=(v-xs[i-1])/((xs[i]-xs[i-1])||1); return D.M[i-1]+(D.M[i]-D.M[i-1])*r; } return D.M[D.M.length-1]; };
   const Mmax=Math.max(...D.M.map(Math.abs), 1e-9);
   let s=`<svg viewBox="0 0 ${W} 270" width="${W}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${tt('Seitenansicht mit Belastung und Momentenlinie')}">`;
-  s+=T(W/2, 14, _L`Seitenansicht aus calc: ${esc(opt.name||'')}${D.what?' — '+D.what:''}`, 'middle', '#6b7280', 9.5);
+  s+=T(W/2, 14, _L`Seitenansicht aus „Schnittkräfte“: ${esc(opt.name||'')}${D.what?' — '+D.what:''}`, 'middle', '#6b7280', 9.5);
   // Träger
   if(holz){ s+=`<rect x="${x0}" y="${yT}" width="${x1-x0}" height="${yB-yT}" fill="#f3ead9" stroke="#111" stroke-width="1"/>`; }
   else s+=`<rect x="${x0}" y="${yT}" width="${x1-x0}" height="${yB-yT}" fill="#eef1f5"/><rect x="${x0}" y="${yT}" width="${x1-x0}" height="3" fill="#475569"/><rect x="${x0}" y="${yB-3}" width="${x1-x0}" height="3" fill="#475569"/>`;
@@ -5985,7 +5479,7 @@ function figSeiteCalc(D, I, MV, opt={}){
   if(opt.right) s+=opt.right(x1+10, yM-6);
   s+='</svg>';
   const blau = holz ? tt('Blau: gedrückter Rand (oben bei Feldmomenten, unten bei Stütz- und Kragmomenten).') : tt('Blau: gedrückter Gurt (oben bei Feldmomenten, unten bei Stütz- und Kragmomenten).');
-  return s + `<div class="fig-legend">${_L`Lager, Lasten und Momentenlinie aus calc. Der Nachweis rechnet mit dem größten Betrag M = ${deNum(I.M,1)} kNm und dem gewählten Momentenverlauf „${MV.txt}“ — prüfen, ob er zum Verlauf aus calc passt.`} ${blau}</div>`;
+  return s + `<div class="fig-legend">${_L`Lager, Lasten und Momentenlinie aus „Schnittkräfte“. Der Nachweis rechnet mit dem größten Betrag M = ${deNum(I.M,1)} kNm und dem gewählten Momentenverlauf „${MV.txt}“ — prüfen, ob er zum Verlauf aus „Schnittkräfte“ passt.`} ${blau}</div>`;
 }
 function seiteStahl(I){
   const MV=mvWerte(I.mv, I.psi);
@@ -6913,7 +6407,7 @@ function runGF(){
   const res=nachweiseGF(I);
   LAST={ mat:'grund', mode:'flach', I, res, date:new Date() };
   renderOut(res.C, res.ok, figGF(I,res), `${I.form==='streifen'?tt('Streifen'):tt('Fundament')} b = ${deNum(I.b,2)} m${I.form==='streifen'?'':` × a = ${deNum(I.a,2)} m`}, d = ${deNum(I.d,2)} m · φ′ = ${deNum(I.phi,1)}°, c′ = ${deNum(I.c,1)} kN/m² · R<sub>n,d</sub> = ${deNum(res.Rnd,0)} kN${I.form==='streifen'?'/m':''}`,
-    tt('Grundwasser in der Gründungssohle (γ′ von Hand eingeben), geneigte Sohle oder Gelände, geschichteter Baugrund, Momente in beiden Richtungen, Setzung (eigener Reiter), Bemessung des Fundaments in Stahlbeton (Biegung, Durchstanzen) und der vereinfachte Nachweis mit Sohlwiderstandstabellen (kragr·ref).'), 'ref.html#/grundbau/flach/grundbruch');
+    tt('Grundwasser in der Gründungssohle (γ′ von Hand eingeben), geneigte Sohle oder Gelände, geschichteter Baugrund, Momente in beiden Richtungen, Setzung (eigener Reiter), Bemessung des Fundaments in Stahlbeton (Biegung, Durchstanzen) und der vereinfachte Nachweis mit Sohlwiderstandstabellen (kragr · Wissen).'), 'ref.html#/grundbau/flach/grundbruch');
 }
 function buildReportGF(){
   const {I,res}=LAST, st=I.form==='streifen', u=st?'/m':'';
@@ -10412,7 +9906,7 @@ function buildReportStahl(){
   const {I,res,date}=LAST, P=res.P, MV=mvWerte(I.mv,I.psi);
   const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
   return _L`<h1>${esc(I.name||tt('Stahlträger'))}</h1>
-    <div class="meta">kragr·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1993-1-1 mit NA</div>
+    <div class="meta">kragr · ${kmod('size')} v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1993-1-1 mit NA</div>
     <section><h2>Eingaben</h2><table>
       ${row(tt('Profil, Werkstoff'), `${P.name}, ${I.sorte} (f<sub>y</sub> = ${res.fy} N/mm²)${I.auto?tt(' — leichtestes Profil der Reihe automatisch gewählt'):''}`)}
       ${row(tt('Querschnittswerte'), `A = ${deNum(P.A,1)} cm², I<sub>y</sub> = ${deNum(P.Iy,0)} cm⁴, W<sub>pl,y</sub> = ${deNum(P.Wply,1)} cm³, I<sub>z</sub> = ${deNum(P.Iz,1)} cm⁴, I<sub>T</sub> = ${deNum(P.It,2)} cm⁴, I<sub>w</sub> = ${deNum(P.Iw/1000,1)}·10³ cm⁶`)}
@@ -10429,7 +9923,7 @@ function buildReportStahl(){
       <p class="meta" style="margin-top:8px">I<sub>T</sub> aus Nennmaßen (Herstellerformel mit Ausrundung), Abweichung zu Tabellenwerten bis etwa 3 %. Lernwerkzeug — ersetzt keine geprüfte Statik.</p></section>`;
 }
 const repHead = (name, norm) => { const d=LAST.date; return _L`<h1>${esc(name)}</h1>
-    <div class="meta">kragr·size v${SIZE_VERSION} · ${d.toLocaleDateString(dLoc())} ${d.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · ${norm}</div>`; };
+    <div class="meta">kragr · ${kmod('size')} v${SIZE_VERSION} · ${d.toLocaleDateString(dLoc())} ${d.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · ${norm}</div>`; };
 const repRow = (a,b) => `<tr><td>${a}</td><td>${b}</td></tr>`;
 const repEnd = txt => _L`<p class="meta" style="margin-top:8px">${txt} Lernwerkzeug — ersetzt keine geprüfte Statik.</p></section>`;
 function buildReportAnschluss(){
@@ -10460,7 +9954,7 @@ function buildReportStuetze(){
   const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
   const lag={1:'gelenkig – gelenkig', 0.7:'eingespannt – gelenkig', 0.5:'beidseitig eingespannt', 2:tt('Kragstütze')}[I.beta];
   return _L`<h1>${esc(I.name||tt('Stahlbetonstütze'))}</h1>
-    <div class="meta">kragr·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA, Modellstützenverfahren</div>
+    <div class="meta">kragr · ${kmod('size')} v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA, Modellstützenverfahren</div>
     <section><h2>Eingaben</h2><table>
       ${row(tt('Bauteil'), TYP_NAME.stuetze)}
       ${row(tt('Querschnitt'), _L`b = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm (h in der Momentenebene)`)}
@@ -10492,7 +9986,7 @@ function buildReport(){
   const {I,res,date}=LAST, B=res.B, ex=deckung(I.expo,10).e, u=I.typ==='platte'?'/m':'';
   const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
   return _L`<h1>${esc(I.name||tt('Stahlbetonbauteil'))}</h1>
-    <div class="meta">kragr·size v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA</div>
+    <div class="meta">kragr · ${kmod('size')} v${SIZE_VERSION} · ${date.toLocaleDateString(dLoc())} ${date.toLocaleTimeString(dLoc(),{hour:'2-digit',minute:'2-digit'})} · DIN EN 1992-1-1 mit NA</div>
     <section><h2>Eingaben</h2><table>
       ${row(tt('Bauteil'), TYP_NAME[I.typ])}
       ${row(tt('Querschnitt'), I.typ==='unterzug' ? `b<sub>w</sub> = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm, h<sub>f</sub> = ${deNum(I.hf,0)} cm, b₁ = ${deNum(I.b1,0)} cm, b₂ = ${deNum(I.b2,0)} cm` : `b = ${deNum(I.b,0)} cm, h = ${deNum(I.h,0)} cm`)}
@@ -10561,7 +10055,7 @@ function load(){ if(PM_ON()) return; try{ const o=JSON.parse(localStorage.getIte
 // Mehrere Positionen (nur in diesem Browser)
 const POS_STORE='statiq-size-positionen';
 const POS_REP='statiq-size-bericht:';
-let CI_SRC = null;   // calc-Berechnung, aus der die aktuellen Eingaben stammen (seit v0.5.28)
+let CI_SRC = null;   // Berechnung aus „Schnittkräfte“, aus der die aktuellen Eingaben stammen (seit v0.5.28)
 function posRead(){ try{ return JSON.parse(localStorage.getItem(POS_STORE)||'[]'); }catch(e){ return []; } }
 function posWrite(list){ try{ localStorage.setItem(POS_STORE, JSON.stringify(list)); return true; }catch(e){ return false; } }
 function posMsg(t){ $('pos-msg').textContent = t; }
@@ -10593,7 +10087,7 @@ function renderPos(){
     : `<div class="pp-empty">${tx('posNone')}</div>`;
   projState();
 }
-// Speicherstand der aktuellen Eingaben am Knopf „Meine Projekte“ (v0.5.46): grün = gespeichert, orange = neu oder geändert
+// Speicherstand der aktuellen Eingaben am Knopf „Projekte“ (v0.5.46): grün = gespeichert, orange = neu oder geändert
 function projState(){
   if(!$('pp-name')) return;
   const name=($(nameField())?.value||'').trim()||tx('noName'), p=posRead().find(x=>x.name===name);
@@ -10636,13 +10130,13 @@ function ciSelChange(){
 // maßgebende Schnittgrößen aus den gespeicherten Verläufen (Vorzeichen wie im Bericht: Zug unten bzw. innen +)
 function calcSchnitt(sdf){
   const S=sdf.system||{}, P=sdf.plot, typ=S.type;
-  if(!P) return { err:tt('Diese Berechnung stammt aus einer älteren calc-Version ohne gespeicherte Verläufe. Bitte in calc neu berechnen und speichern.') };
+  if(!P) return { err:tt('Diese Berechnung stammt aus einer älteren Version von „Schnittkräfte“ ohne gespeicherte Verläufe. Bitte in „Schnittkräfte“ neu berechnen und speichern.') };
   const absMax = a => Math.max(0, ...a.map(Math.abs));
   const reac = (sdf.results?.reactions||[]).map(r=>Math.abs(parseFloat(r.V))).filter(isFinite);
   if(typ==='frame'){
     const f=P.fine, raf=f.rafter;
     const ende = c => { const n=c.M.length-1, e = Math.abs(c.M[0])>=Math.abs(c.M[n]) ? 0 : n; return { Mend:Math.abs(c.M[e]), Vend:Math.abs(c.Q[e]), Nend:c.N[e] }; };   // Stabende mit dem größeren Moment (Schweißnaht, v0.6.6)
-    const riegel = { L:P.b, Mf:Math.max(0,...raf.M), Ms:Math.max(0,...raf.M.map(v=>-v)), V:absMax(raf.Q), N:Math.max(0,-Math.min(...raf.N)), K:'1.0', feld:'1', mv:'q', what:tt('Riegel'), ...ende(raf) };
+    const riegel = { L:P.Lraf ?? P.b, Mf:Math.max(0,...raf.M), Ms:Math.max(0,...raf.M.map(v=>-v)), V:absMax(raf.Q), N:Math.max(0,-Math.min(...raf.N)), K:'1.0', feld:'1', mv:'q', what:tt('Riegel'), ...ende(raf) };
     const st = ['left','right'].map(m=>{ const c=f[m], N=Math.max(0,-Math.min(...c.N)), Mf=c.M[0], Mk=c.M[c.M.length-1];
       const big = Math.abs(Mf)>=Math.abs(Mk) ? Mf : Mk, small = big===Mf ? Mk : Mf;
       return { m, L: m==='left' ? (P.hA??P.h) : (P.hB??P.h), N, M02:Math.abs(big), M01: Math.abs(big)>1e-9 ? Math.sign(big*small)*Math.abs(small) : 0,
@@ -10666,7 +10160,7 @@ function calcSchnitt(sdf){
     if(rest) out.notes.push(tx('ciMvVereinf', tt(out.mv==='F'?tt('Einzellast in Feldmitte'):tt('Gleichlast'))));
   } else if(typ==='cantilever'){
     out.L=P.L; out.K='0.4'; out.feld='1'; out.mv='q';
-    out.notes.push(tt('Kragarm: Zugseite oben, das Moment wird als Betrag übernommen. Biegedrillknicken/Kippen rechnet size für gabelgelagerte Träger — Lagerung und Kipplänge prüfen.'));
+    out.notes.push(tt('Kragarm: Zugseite oben, das Moment wird als Betrag übernommen. Biegedrillknicken/Kippen rechnet „Bemessung“ für gabelgelagerte Träger — Lagerung und Kipplänge prüfen.'));
   } else {
     // Feld mit dem größten Feldmoment bestimmen
     const lay = P.layout || (()=>{ const xs=[0]; P.Ls.forEach(L=>xs.push(xs[xs.length-1]+L)); return { segs:P.Ls.map((L,i)=>({key:i, x0:xs[i], L})) }; })();
@@ -10708,7 +10202,7 @@ function ciVerlauf(e, C, B){
   try{ const part = C.typ==='frame' ? $('ci-part').value : null, D=ciSideData(e.sdf, C, part), R=ciMomentVerlauf(D, C.typ==='beam' ? B.mv : null), L=R.b-R.a;
     const txt = R.mv==='lin' ? _L`linear, ψ = ${deNum(R.psi,2)}` : R.mv==='F' ? tt('Einzellast in Feldmitte') : R.mv==='q' ? tt('Gleichlast') : tt('konstantes Moment');
     const why = R.why==='lin' ? tt('im Abschnitt keine Querlast, ψ aus den Endmomenten') : R.why==='feld' ? tt('Feld ohne Endmomente') : R.why==='krag' ? tt('Kragarm: C₁ für gabelgelagerte Träger gilt nicht — konstantes Moment auf der sicheren Seite') : tt('Querlast und Endmomente: konstantes Moment, C₁ = 1 als untere Grenze (sichere Seite)');
-    return { mv:R.mv, psi:R.psi, L: L>0 ? L : B.L, a:R.a, b:R.b, note:_L`Momentenverlauf aus calc: ${txt} (${why}), Abschnitt ${deNum(R.a,2)} … ${deNum(R.b,2)} m.` }; }
+    return { mv:R.mv, psi:R.psi, L: L>0 ? L : B.L, a:R.a, b:R.b, note:_L`Momentenverlauf aus „Schnittkräfte“: ${txt} (${why}), Abschnitt ${deNum(R.a,2)} … ${deNum(R.b,2)} m.` }; }
   catch(err){ return { mv:B.mv, psi:B.psi||0, L:B.L, note:'' }; }
 }
 function ciSideSet(mat, e, C, L, M, Mabs, B){
@@ -10731,12 +10225,12 @@ function importCalc(key){
     else { B={...C.riegel, Fsup:C.Fsup}; if(C.riegel.N>0) notes.push(tx('ciRiegelN', deNum(C.riegel.N,1))); }
   }
   const src = `${tx('ciFrom')} ${esc(e.name)}${B.what?` — ${tt(B.what)}`:''}`;
-  if(MAT==='bauph'){ say(tt('Bauphysik rechnet mit dem Bauteilaufbau — aus calc gibt es hier nichts zu übernehmen.')); return; }
-  if(MAT==='wasser'){ say(tt('Wasserbau rechnet mit eigenen Eingaben (Abfluss, Geometrie) — aus calc gibt es hier nichts zu übernehmen.')); return; }
+  if(MAT==='bauph'){ say(tt('Bauphysik rechnet mit dem Bauteilaufbau — aus „Schnittkräfte“ gibt es hier nichts zu übernehmen.')); return; }
+  if(MAT==='wasser'){ say(tt('Wasserbau rechnet mit eigenen Eingaben (Abfluss, Geometrie) — aus „Schnittkräfte“ gibt es hier nichts zu übernehmen.')); return; }
   if(MAT==='mauer'){ say(tx('ciMauer', deNum(C.Fsup||B.Fsup||0,1))); return; }
   if(MAT==='grund'){ say(tx('ciGrund', deNum(C.Fsup||B.Fsup||0,1))); return; }
   if(MAT==='beton' && TYP==='stuetze'){
-    if(C.typ!=='frame'){ say(tt('Für die Stütze braucht size eine Normalkraft. Die gibt es nur bei Rahmen-Berechnungen (Stiel). Bitte einen Rahmen wählen oder N<sub>Ed</sub> von Hand eingeben.')); return; }
+    if(C.typ!=='frame'){ say(tt('Für die Stütze braucht „Bemessung“ eine Normalkraft. Die gibt es nur bei Rahmen-Berechnungen (Stiel). Bitte einen Rahmen wählen oder N<sub>Ed</sub> von Hand eingeben.')); return; }
     const s=C.stiel;
     setv('su-l', s.L); setv('su-N', s.N); setv('su-M02', s.M02); setv('su-M01', s.M01);
     say(`${tx('ciFrom')} ${esc(e.name)} — ${tt(s.what)}`, [`l = ${deNum(s.L,2)} m · N<sub>Ed</sub> = ${deNum(s.N,1)} kN · M<sub>02</sub> = ${deNum(s.M02,1)} kNm · M<sub>01</sub> = ${deNum(s.M01,1)} kNm`,
@@ -10747,13 +10241,13 @@ function importCalc(key){
     if(TYP==='unterzug'){ $('in-feld').value=B.feld; syncK(); }
     setv('in-M', M); setv('in-Ms', cant||B.Mf<=0 ? 0 : B.Ms); setv('in-V', B.V);
     if(!(B.Mf>0)) notes.push(tt('Kein positives Feldmoment: Das Moment wird als Betrag für M<sub>Ed</sub> übernommen — die Zugbewehrung liegt dann oben.'));
-    notes.push(tt('M<sub>qp</sub> (quasi-ständig, für die Rissbreite) kennt calc nicht — bitte von Hand eingeben.'));
-    if(TYP==='platte') notes.push(tt('Platte: Die Werte gelten je Meter Breite, wenn die Lasten in calc je m² eingegeben wurden.'));
+    notes.push(tt('M<sub>qp</sub> (quasi-ständig, für die Rissbreite) kennt „Schnittkräfte“ nicht — bitte von Hand eingeben.'));
+    if(TYP==='platte') notes.push(tt('Platte: Die Werte gelten je Meter Breite, wenn die Lasten in „Schnittkräfte“ je m² eingegeben wurden.'));
     say(src, [`l = ${deNum(B.L,2)} m · M<sub>Ed</sub> = ${deNum(M,1)} kNm${!cant && B.Mf>0 && B.Ms>0?_L` · |M<sub>Ed,Stütze</sub>| = ${deNum(B.Ms,1)} kNm`:''} · V<sub>Ed</sub> = ${deNum(B.V,1)} kN`, ...notes]);
   } else if(MAT==='stahl'){
     if(STMODE==='fuss'){ const N = C.typ==='frame' ? C.stiel.N : 0; if(N>0){ setv('fp-N', N); setv('fp-V', C.stiel.V); run(); say(`${tx('ciFrom')} ${esc(e.name)} — ${tx('ciFussOk', tt(C.stiel.what), deNum(N,1), deNum(C.stiel.V,1))}`); CI_SRC = { key, ts:e.sdf.timestamp||'', name:e.name, part:'stiel', typ:curTyp() }; } else say(tt('Für den Stützenfuß braucht es eine Normalkraft — nur Rahmen-Berechnungen liefern sie.')); return; }
     if(STMODE==='schweiss'){   // seit v0.6.6: Anschluss an die Stirnplatte am Stabende (Rahmen: Riegel oder Stiel; Kragarm: Einspannung)
-      if(C.typ!=='frame' && C.typ!=='cantilever'){ say(tt('Für Schweißnähte bitte die Kräfte von Hand eingeben — z. B. M<sub>y,Ed</sub> und V<sub>z,Ed</sub> am Trägerende aus calc für den Fall „Träger an Stirnplatte“.')); return; }
+      if(C.typ!=='frame' && C.typ!=='cantilever'){ say(tt('Für Schweißnähte bitte die Kräfte von Hand eingeben — z. B. M<sub>y,Ed</sub> und V<sub>z,Ed</sub> am Trägerende aus „Schnittkräfte“ für den Fall „Träger an Stirnplatte“.')); return; }
       const E = C.typ==='frame' ? ($('ci-part').value==='stiel' ? C.stiel : C.riegel) : { Mend:Math.max(C.Mf,C.Ms), Vend:C.V, Nend:0, what:tt('Einspannung') };
       $('sw-fall').value='stirn'; swSync(); setv('sw-M', +E.Mend.toFixed(3)); setv('sw-V', +E.Vend.toFixed(3)); setv('sw-N', +(E.Nend||0).toFixed(3));
       say(`${tx('ciFrom')} ${esc(e.name)} — ${tt(E.what)}`, [`M<sub>y,Ed</sub> = ${deNum(E.Mend,1)} kNm · V<sub>z,Ed</sub> = ${deNum(E.Vend,1)} kN · N<sub>Ed</sub> = ${deNum(E.Nend||0,1)} kN`,
@@ -11318,8 +10812,8 @@ applyI18n(); showLangNotice();
 if($('lang-sel')) $('lang-sel').value=LANG;
 initUX();
 load(); run();
-// Aufruf aus calc: size.html#calc=<Schlüssel der gespeicherten Berechnung>
-// Projektübersicht: #pos=Name öffnet eine Position, &calc=… rechnet sie mit einer neueren calc-Berechnung neu und speichert (seit v0.5.28)
+// Aufruf aus „Schnittkräfte“: size.html#calc=<Schlüssel der gespeicherten Berechnung>
+// Projektübersicht: #pos=Name öffnet eine Position, &calc=… rechnet sie mit einer neueren Berechnung aus „Schnittkräfte“ neu und speichert (seit v0.5.28)
 function openFromHash(){
   const h=location.hash; if(!h.startsWith('#pos=')) return false;
   const q=new URLSearchParams(h.slice(1)), name=q.get('pos'), ck=q.get('calc'), part=q.get('part');
@@ -11339,7 +10833,7 @@ function ciGoto(mat, mode){
   return true;
 }
 // Übernahme aus calc ohne Umweg (v0.6.7): Ergebnis als Hinweisleiste oben statt Projekt-Fenster; beim Weg über das Menü in calc
-// wird der Nachweis gleich als Position gespeichert (Name aus der calc-Berechnung und dem Nachweis), damit er in „Meine Projekte“ steht.
+// wird der Nachweis gleich als Position gespeichert (Name aus der Berechnung aus „Schnittkräfte“ und dem Nachweis), damit er in „Projekte“ steht.
 const ciOk = () => (MAT==='beton' && CI_ZIEL.beton.includes(TYP)) || (MAT==='stahl' && CI_ZIEL.stahl.includes(STMODE)) || (MAT==='holz' && CI_ZIEL.holz.includes(HOMODE));
 function ciBanner(html){
   let b=$('ci-banner'); if(!b){ b=document.createElement('div'); b.id='ci-banner'; b.setAttribute('role','status'); const a=$('pick'); a.parentNode.insertBefore(b, a.nextSibling); }
@@ -11382,13 +10876,13 @@ window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':
 // Offline-Nutzung und Installation als App (Service Worker, nur über http/https)
 if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!=='undefined' && /^https?:$/.test(location.protocol||'')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 
-// Link auf „Meine Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
+// Link auf „Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
 (function(){
   if(typeof document==='undefined' || !document.addEventListener) return;
-  const MSG={de:'„Meine Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
-    en:'“My projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
-    fr:'« Mes projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
-    es:'«Mis proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
+  const MSG={de:'„Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
+    en:'“Projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
+    fr:'« Projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
+    es:'«Proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
   function hint(){ let l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
     let d=document.getElementById('proj-missing'); if(!d){ d=document.createElement('div'); d.id='proj-missing'; d.setAttribute('role','alert');
       d.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:min(560px,calc(100vw - 32px));background:#7f1d1d;color:#fff;padding:12px 16px;border-radius:10px;font:14px/1.45 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:9999;cursor:pointer';
@@ -11419,8 +10913,8 @@ function mulyFehlerHref(app, ver, extra){
 // „Aus calc übernehmen“ direkt in den Schnittgrößen-Karten. Nur Oberfläche: Felder, IDs und Rechnung bleiben gleich.
 (function(){
   if(typeof MutationObserver!=='function' || !document.querySelector('.col-in')) return;
-  var T={de:{dec:'verringern',inc:'erhöhen',ci:'Aus calc übernehmen',},en:{dec:'decrease',inc:'increase',ci:'Take from calc'},
-         fr:{dec:'diminuer',inc:'augmenter',ci:'Reprendre de calc'},es:{dec:'disminuir',inc:'aumentar',ci:'Tomar de calc'}};
+  var T={de:{dec:'verringern',inc:'erhöhen',ci:'Aus „Schnittkräfte“ übernehmen',},en:{dec:'decrease',inc:'increase',ci:'Take from “Internal forces”'},
+         fr:{dec:'diminuer',inc:'augmenter',ci:'Reprendre de « Efforts »'},es:{dec:'disminuir',inc:'aumentar',ci:'Tomar de «Esfuerzos»'}};
   var L=T[typeof LANG==='string'?LANG:'de']||T.de, busy=false, raf=0;
   var CI_CARDS=['z045','z084','z454','pc008','z027','pa009'];
   function decs(s){ s=String(s).trim().replace(',','.'); var i=s.indexOf('.'); return i<0?0:s.length-i-1; }
@@ -11443,7 +10937,7 @@ function mulyFehlerHref(app, ver, extra){
     });
     document.querySelectorAll('.k-stp').forEach(function(w){ var i=w.querySelector('input'); w.querySelectorAll('.k-sb').forEach(function(b){ if(b.disabled!==!!i.disabled) b.disabled=!!i.disabled; }); });
   }
-  function ciButtons(){ return;   // seit v0.7.1: Schnittkräfte aus calc nur noch über „Meine Projekte“
+  function ciButtons(){ return;   // seit v0.7.1: Schnittkräfte aus calc nur noch über „Projekte“
     CI_CARDS.forEach(function(k){ document.querySelectorAll('.col-in .card-title[data-i18n="'+k+'"]').forEach(function(t){ var c=t.closest('.card'); if(!c || c.querySelector(':scope > .k-ci')) return;
       var b=document.createElement('button'); b.type='button'; b.className='k-ci';
       b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,12 9,7 9,10 20,10"/><polyline points="20,12 15,17 15,14 4,14"/></svg><span>'+L.ci+'</span>';
@@ -11451,7 +10945,7 @@ function mulyFehlerHref(app, ver, extra){
       b.addEventListener('click', function(e){ e.stopPropagation(); ciMenu(b, b.getAttribute('aria-expanded')!=='true'); });
       c.appendChild(b); var m=document.createElement('div'); m.className='k-cimenu'; m.setAttribute('role','menu'); m.hidden=true; c.appendChild(m); }); });
   }
-  // „Aus calc übernehmen“ (v0.6.7): Liste der gespeicherten calc-Berechnungen direkt unter dem Knopf, ein Tipp übernimmt
+  // „Aus calc übernehmen“ (v0.6.7): Liste der gespeicherten Berechnungen aus „Schnittkräfte“ direkt unter dem Knopf, ein Tipp übernimmt
   function ciMenu(b, open){
     var m=b.nextElementSibling; if(!m || !m.classList.contains('k-cimenu')) return; b.setAttribute('aria-expanded', open?'true':'false'); m.hidden=!open; if(!open) return;
     var E=(typeof calcEntries==='function' ? calcEntries() : []).slice(0,6), esc_=function(x){ return String(x).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };

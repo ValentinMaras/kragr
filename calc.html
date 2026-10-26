@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.2 -->
-<html lang="de">
+<!-- kragr v0.11.3 -->
+<html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
 <script data-theme>
@@ -143,7 +143,7 @@ window.mulyProj = {
   function sysOf(t){ var sid=t==='cantilever'?'cant':t, lc=(typeof lastCalc!=='undefined')&&lastCalc[sid]; if(!lc) return null;
     return {type:t, geometry:lc.geometry, supports:lc.supports, loads:lc.loads, stiffness:lc.stiffness, hinges:lc.hinges}; }
   function sig(s){ if(!s||!s.geometry) return ''; var fr=s.type==='frame', g=s.geometry, l=s.loads||{};
-    return JSON.stringify([s.type, fr?[g.b,g.h,g.hA,g.hB]:g, s.supports||null, fr?[l.vertical||[],l.horizontal||[]]:l, s.stiffness||null, (s.hinges&&s.hinges.length)?s.hinges:null]); }
+    return JSON.stringify([s.type, fr?[g.b,g.h,g.hA,g.hB].concat(g.gable?[g.gable.f,g.gable.xF]:[]):g, s.supports||null, fr?[l.vertical||[],l.horizontal||[]]:l, s.stiffness||null, (s.hinges&&s.hinges.length)?s.hinges:null]); }
   function entries(){ var out=[]; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k||k.indexOf('statiq_sdf_')!==0) continue;
       try{ var e=JSON.parse(localStorage.getItem(k)); if(e&&e.sdf&&e.sdf.module==='calc') out.push({key:k, name:e.name, sdf:e.sdf}); }catch(_){} } }catch(_){}
     return out.sort(function(a,b){ return b.key.localeCompare(a.key); }); }
@@ -151,7 +151,7 @@ window.mulyProj = {
   function curName(t){ var s=sysOf(t), tabs=(calcTranslations[calcLang]||calcTranslations.en).tabs, lab={beam:tabs[0],cantilever:tabs[1],cont:tabs[2],frame:tabs[3]}[t]||t;
     if(!s) return lab; var g=s.geometry;
     if(t==='cont') return trf('nameSpans', lab, g.spans.length, g.spans.join('/'));
-    if(t==='frame') return lab+' '+supW(s.supports.A)+'/'+supW(s.supports.B)+' b='+g.b+'m h='+g.hA+'/'+g.hB+'m';
+    if(t==='frame') return lab+' '+supW(s.supports.A)+'/'+supW(s.supports.B)+' b='+g.b+'m h='+g.hA+'/'+g.hB+'m'+(g.gable?' f='+g.gable.f+'m':'');
     return lab+' L='+(g.L||'?')+'m'; }
   function esc(x){ return String(x).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function state(){
@@ -166,7 +166,7 @@ window.mulyProj = {
     var E=entries(), cur=savedKey(curTab()), el=document.getElementById('pp-list');
     el.innerHTML = E.length ? E.slice(0,MAX).map(function(e){
         return '<div class="pp-item'+(cur&&cur.key===e.key?' current':'')+'"><div class="pp-iname">'+esc(e.name)+'<span class="pp-meta">'+esc(mulyProj.fmt(e.sdf.timestamp, LOCALE()))+'</span></div>'
-          +'<a class="pp-btn small sec" href="size.html#calc='+encodeURIComponent(e.key)+'" title="'+esc(L('ppToSizeT'))+'">→ size</a></div>'; }).join('')
+          +'<a class="pp-btn small sec" href="size.html#calc='+encodeURIComponent(e.key)+'" title="'+esc(L('ppToSizeT'))+'">→ „Bemessung“</a></div>'; }).join('')
         +'<button type="button" class="pp-more" onclick="closeProj(); showTab(\'saved\'); renderSavedTab();">'+esc(L('ppAllCalc'))+(E.length>MAX?' ('+E.length+')':'')+'</button>'
       : '<div class="pp-empty">'+esc(L('ppNone'))+'</div>';
   }
@@ -202,7 +202,7 @@ window.mulyProj = {
 })();
 </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kragr — Structural Analysis</title>
+  <title>Schnittkräfte — kragr</title>
   <meta name="description" content="Structural analysis app for civil engineering students — calculate shear forces, bending moments and section properties." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
@@ -655,7 +655,7 @@ window.mulyProj = {
 </style>
 <style data-pm>
   /* Projektmodus (calc v0.10.1 · size v0.7.1; schmale Zeile seit calc v0.11.1 · size v0.7.3): calc und size sind eigenständige Rechner.
-     Aus „Meine Projekte“ geöffnet (?pos=<id>) zeigen sie unter der Kopfzeile eine schmale, mitlaufende Projektzeile:
+     Aus „Projekte“ geöffnet (?pos=<id>) zeigen sie unter der Kopfzeile eine schmale, mitlaufende Projektzeile:
      ✕ (Abbrechen) · „Pos. N · Titel“ · „Übernehmen“. Nur dieser Knopf schreibt in die Position. */
   .k-pmbar { position:sticky; top:var(--k-hdr-h, 58px); z-index:9; display:flex; align-items:center; gap:8px; margin:4px auto 8px; padding:6px 6px 6px 6px; border-radius:14px; background:#e9ecf6; box-shadow:inset 0 0 0 1.5px #c9cfe6, 0 4px 14px rgba(17,17,20,.06); }
   .k-pmbar.k-frame { width:calc(100% - 40px); max-width:calc(var(--k-frame, 1180px) - 40px) !important; }   /* bündig mit den Karten */
@@ -674,21 +674,21 @@ window.mulyProj = {
   .k-pmbar.gone a { font-weight:700; color:#111114; }
   .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
   @media (min-width:1000px) { .k-verfoot { display:none; } }
-  #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Meine Projekte“ */
+  #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Projekte“ */
   .col-out .save-btn { display:none !important; }
   @media print { .k-pmbar, .k-verfoot { display:none !important; } }
 </style>
 <script data-pm>
-// Projektmodus (calc v0.10.1 · size v0.7.1): „Meine Projekte“ verbindet calc und size. calc.html?pos=<id> bearbeitet das System der
+// Projektmodus (calc v0.10.1 · size v0.7.1): „Projekte“ verbindet calc und size. calc.html?pos=<id> bearbeitet das System der
 // Position, size.html?pos=<id>[&check=<Name>|&ziel=<Bereich.Nachweis>&part=<riegel|stiel>][&neu=1] einen Nachweis. Ohne ?pos=
 // sind calc und size reine Rechner ohne Projektbezug. Ablage: „statiq-projekt“ (pos, asg), System „statiq_sdf_pos_<id>“,
 // Nachweise „statiq-size-positionen“. Die Seite meldet sich mit window.kragrPMPage = { label(), apply(), cancel() }.
 (function(){
   var PSTORE='statiq-projekt';
-  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', okS:'Übernehmen', x:'Abbrechen', sys:'System aus calc', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Meine Projekte“ →' },
-          en:{ k:'Project', ok:'Apply and return', okS:'Apply', x:'Cancel', sys:'System from calc', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “My projects” →' },
-          fr:{ k:'Projet', ok:'Appliquer et revenir', okS:'Appliquer', x:'Annuler', sys:'Système de calc', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Mes projets » →' },
-          es:{ k:'Proyecto', ok:'Aplicar y volver', okS:'Aplicar', x:'Cancelar', sys:'Sistema de calc', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Mis proyectos» →' } };
+  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', okS:'Übernehmen', x:'Abbrechen', sys:'System aus „Schnittkräfte“', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Projekte“ →' },
+          en:{ k:'Project', ok:'Apply and return', okS:'Apply', x:'Cancel', sys:'System from “Internal forces”', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “Projects” →' },
+          fr:{ k:'Projet', ok:'Appliquer et revenir', okS:'Appliquer', x:'Annuler', sys:'Système de « Efforts »', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Projets » →' },
+          es:{ k:'Proyecto', ok:'Aplicar y volver', okS:'Aplicar', x:'Cancelar', sys:'Sistema de «Esfuerzos»', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Proyectos» →' } };
   var DEFN=['Mein Projekt','My project','Mon projet','Mi proyecto'];
   function lang(){ try{ return window.calcLang || localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
   function t(k){ var L=lang(); return (T[L]||T.en)[k] || T.de[k] || k; }
@@ -721,14 +721,14 @@ window.mulyProj = {
   document.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('#k-pmbar [data-pm]'); if(!b) return; var pg=window.kragrPMPage||{};
     if(b.dataset.pm==='ok'){ if(pg.apply) pg.apply(); else PM.back(); } else { if(pg.cancel) pg.cancel(); else PM.back(); } });
   document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
-    // Ordner-Symbol: einfacher Link zu „Meine Projekte“; das frühere Projekt-Fenster bleibt intern über mulyAltProj() erreichbar
+    // Ordner-Symbol: einfacher Link zu „Projekte“; das frühere Projekt-Fenster bleibt intern über mulyAltProj() erreichbar
     var L0={ open:window.openProj }; window.mulyAltProj=function(){ var o=document.getElementById('proj-panel'); if(o) o.removeAttribute('hidden'); if(L0.open) L0.open(); };
     window.toggleProj=function(e){ if(e && e.stopPropagation) e.stopPropagation(); location.href='projekt.html'; }; window.openProj=window.toggleProj; window.closeProj=function(){};
     var old=document.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
     var b=document.getElementById('proj-btn'); if(b){ b.removeAttribute('aria-haspopup'); b.removeAttribute('aria-expanded'); }
     // Version unten (am Handy ist die Kopfzeile dafür zu schmal)
     var hv=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name');
-    if(hv && m && !document.getElementById('k-verfoot')){ var f=document.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr·'+m.textContent.trim()+' '+hv.textContent.trim(); document.body.appendChild(f); }
+    if(hv && m && !document.getElementById('k-verfoot')){ var f=document.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr · '+m.textContent.trim()+' '+hv.textContent.trim(); document.body.appendChild(f); }
     PM.render();
   }, 0); });
 })();
@@ -981,536 +981,30 @@ window.mulyProj = {
     .k-hdr .hdr-tools { margin-left:2px; }
   }
   @media (max-width:370px) { .k-hdr .header-links > a, .k-hdr .header-links > .module-name { padding:0 5px; } .k-hdr .theme-btn { width:30px; } .k-hdr .logo { font-size:22px; } }
+  /* Modulnamen ausgeschrieben (Schnittkräfte · Bemessung · Wissen): am Handy eigene Zeile unter Logo und Werkzeugen, drei gleich breite Reiter */
+  @media (max-width:760px) {
+    .app-header.k-hdr { flex-wrap:wrap; row-gap:0; padding-bottom:0 !important; }
+    .k-hdr .hdr-tools { margin-left:auto; }
+    .k-hdr .header-links { order:3; flex:1 1 100%; margin:4px calc(-1 * var(--k-gut)) 0; padding:0 calc(var(--k-gut) - 4px); border-top:1px solid #ececef; }
+    .k-hdr .header-links > a, .k-hdr .header-links > .module-name { flex:1 1 auto; min-width:0; justify-content:center; min-height:42px; padding:0 4px !important; font-size:14px; white-space:nowrap; }
+    .k-hdr .header-links > .module-name { box-shadow:inset 0 -2.5px 0 #111114; }
+  }
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
-<style data-k5>
-  /* kragr-Design 5 (Oktober 2026): ein Aufbau für alle Seiten. Identisch in calc, size, ref, projekt und rechtliches.
-     Weich und plastisch: hellgrauer Seitengrund, weiße Karten mit sanftem Schatten, Glas-Kopfzeile mit Burgermenü,
-     ruhige Bewegung (Aufklappen, Einblenden, Balken, Diagramme). Bei „Bewegung reduzieren“ ist alles aus. */
-  :root { --k5-bg:#f2f3f6; --k5-card:#ffffff; --k5-sub:#f5f6f8; --k5-sub-h:#eceef2; --k5-r:20px; --k5-r2:14px;
-    --k5-sh:0 1px 2px rgba(17,17,20,.04), 0 6px 22px -10px rgba(17,17,20,.13);
-    --k5-sh-h:0 2px 4px rgba(17,17,20,.05), 0 14px 34px -14px rgba(17,17,20,.2);
-    --k5-ease:cubic-bezier(.22,.8,.24,1); --k5-spring:cubic-bezier(.34,1.4,.5,1);
-    --k-card:var(--k5-card); --card:var(--k5-card); }
-  html { background:var(--k5-bg); }
-  body { background:var(--k5-bg) !important; }
-  html.dark { background:#fff; }
-  html.dark body { background:#fff !important; }
-  html.dark { --k5-card:#eef0f3; --k5-sub:#e3e5ea; --k5-sub-h:#d9dce2;
-    --k5-sh:0 0 0 1px rgba(255,255,255,.5), 0 8px 26px -12px rgba(255,255,255,.9); --k5-sh-h:0 0 0 1px rgba(255,255,255,.6), 0 14px 34px -14px rgba(255,255,255,1); }
-
-  /* ── Kopfzeile: nur Logo und ☰ ─────────────────────────────── */
-  .glass::before { background:linear-gradient(to bottom, rgba(242,243,246,.86) 0%, rgba(242,243,246,.66) 70%, rgba(242,243,246,0) 100%) !important; }
-  html.dark .glass::before { background:linear-gradient(to bottom, rgba(255,255,255,.86) 0%, rgba(255,255,255,.66) 70%, rgba(255,255,255,0) 100%) !important; }
-  .k-hdr .header-links, .k-hdr .hdr-tools { display:none !important; }
-  .k5-burger { position:relative; margin-left:auto; flex:none; display:inline-flex; align-items:center; justify-content:center; gap:10px; height:44px; min-width:44px; padding:0 12px;
-    border:none; border-radius:14px; background:var(--k5-card); box-shadow:var(--k5-sh); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer;
-    transition:transform .25s var(--k5-spring), box-shadow .25s; -webkit-tap-highlight-color:transparent; }
-  .k5-burger:hover { box-shadow:var(--k5-sh-h); }
-  .k5-burger:active { transform:scale(.94); }
-  .k5-burger .k5-cur { font-size:14px; font-weight:700; color:#111114; }
-  .k5-burger .k5-cur b { color:#111114; font-weight:700; }
-  .k5-burger svg { width:22px; height:22px; flex:none; }
-  .k5-burger svg line { transition:transform .35s var(--k5-ease), opacity .2s; transform-origin:12px 12px; }
-  .k5-burger[aria-expanded="true"] svg .l1 { transform:translateY(5px) rotate(45deg); }
-  .k5-burger[aria-expanded="true"] svg .l2 { opacity:0; transform:scaleX(.2); }
-  .k5-burger[aria-expanded="true"] svg .l3 { transform:translateY(-5px) rotate(-45deg); }
-  .k5-burger .k5-dot { position:absolute; top:8px; right:8px; width:9px; height:9px; border-radius:50%; background:#f59e0b; box-shadow:0 0 0 2px var(--k5-card); display:none; }
-  .k5-burger.k5-unsaved .k5-dot { display:block; }
-  @media (max-width:560px) { .k5-burger .k5-cur { display:none; } .k5-burger { padding:0; width:44px; } }
-
-  .k5-scrim { position:fixed; inset:0; z-index:190; background:rgba(17,17,20,.28); opacity:0; pointer-events:none; transition:opacity .3s var(--k5-ease);
-    -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
-  .k5-scrim.open { opacity:1; pointer-events:auto; }
-  .k5-menu { position:fixed; z-index:200; top:10px; right:10px; bottom:10px; width:min(360px, calc(100vw - 20px)); box-sizing:border-box; display:flex; flex-direction:column;
-    border-radius:24px; background:rgba(255,255,255,.9); -webkit-backdrop-filter:blur(22px) saturate(170%); backdrop-filter:blur(22px) saturate(170%);
-    box-shadow:0 24px 60px -18px rgba(17,17,20,.35), 0 0 0 1px rgba(17,17,20,.05); padding:14px 14px 12px; overflow-y:auto; overscroll-behavior:contain;
-    transform:translateX(calc(100% + 24px)); visibility:hidden; transition:transform .42s var(--k5-ease), visibility 0s linear .42s; font-family:Figtree, system-ui, sans-serif; color:#111114; }
-  .k5-menu.open { transform:none; visibility:visible; transition:transform .42s var(--k5-ease), visibility 0s; }
-  html.dark .k5-menu { background:rgba(240,241,244,.94); }
-  .k5-menu > * { opacity:0; transform:translateX(18px); transition:opacity .3s, transform .4s var(--k5-ease); }
-  .k5-menu.open > * { opacity:1; transform:none; transition-delay:calc(var(--i,0) * 35ms + 80ms); }
-  .k5-mhead { display:flex; align-items:center; justify-content:space-between; padding:2px 4px 10px 8px; }
-  .k5-mhead .k5-mlogo { font-size:20px; font-weight:800; letter-spacing:-.04em; text-decoration:none; color:#111114; }
-  .k5-mhead .k5-mlogo svg { height:1em; width:auto; vertical-align:-.1em; margin-left:-.04em; }
-  .k5-x { width:40px; height:40px; border:none; border-radius:12px; background:#f1f2f4; color:#111114; font-size:20px; line-height:1; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; transition:transform .25s var(--k5-spring), background .15s; }
-  .k5-x:hover { background:#e6e7ea; } .k5-x:active { transform:scale(.9); }
-  .k5-mlabel { padding:14px 10px 6px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5c5e66; }
-  .k5-mod { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:16px; text-decoration:none; color:#111114; transition:background .15s, transform .2s var(--k5-spring); }
-  .k5-mod:hover { background:rgba(17,17,20,.05); } .k5-mod:active { transform:scale(.98); }
-  .k5-mod .k5-ic { flex:none; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:#f1f2f4; color:#111114;
-    font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:700; }
-  .k5-mod .k5-mt { display:flex; flex-direction:column; min-width:0; }
-  .k5-mod .k5-mt b { font-size:15.5px; font-weight:800; letter-spacing:-.01em; }
-  .k5-mod .k5-mt span { font-size:12.5px; color:#5c5e66; }
-  .k5-mod[aria-current="page"] { background:#111114; color:#fff; }
-  .k5-mod[aria-current="page"] .k5-ic { background:#5468ad; color:#fff; }
-  .k5-mod[aria-current="page"] .k5-mt span { color:rgba(255,255,255,.7); }
-  .k5-mod .k5-badge { margin-left:auto; width:9px; height:9px; border-radius:50%; background:#f59e0b; display:none; }
-  .k5-row { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; padding:6px 8px 6px 12px; border-radius:16px; }
-  .k5-row .k5-rt { display:flex; flex-direction:column; font-size:14.5px; font-weight:700; }
-  .k5-row .k5-rt span { font-size:12px; font-weight:400; color:#5c5e66; }
-  .k5-sw { position:relative; flex:none; width:50px; height:30px; border:none; border-radius:999px; background:#d5d7dc; cursor:pointer; padding:0; transition:background .25s; }
-  .k5-sw::after { content:''; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:transform .32s var(--k5-spring); }
-  .k5-sw[aria-checked="true"] { background:#5468ad; } .k5-sw[aria-checked="true"]::after { transform:translateX(20px); }
-  .k5-segm { position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:2px; padding:3px; border-radius:13px; background:#f1f2f4; min-width:0; }
-  .k5-segm button { position:relative; z-index:1; border:none; background:transparent; height:34px; padding:0 8px; border-radius:10px; font:inherit; font-size:13px; font-weight:700; color:#5c5e66; cursor:pointer; transition:color .2s; }
-  .k5-segm button[aria-pressed="true"] { color:#111114; }
-  .k5-segm .k5-pill { position:absolute; z-index:0; top:3px; bottom:3px; left:0; border-radius:10px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.12); transition:transform .38s var(--k5-ease), width .38s var(--k5-ease); }
-  .k5-row.k5-col { flex-direction:column; align-items:stretch; gap:8px; padding-top:10px; padding-bottom:10px; }
-  .k5-mfoot { margin-top:auto; padding:16px 10px 4px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:12px; color:#5c5e66; }
-  .k5-mfoot a { color:#5c5e66; } .k5-mfoot .k5-ver { font-family:'JetBrains Mono', ui-monospace, monospace; }
-  body.k5-lock { overflow:hidden; }
-
-  /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
-  header.k5-idx > .lang-switcher, header.k5-idx > .theme-btn { display:none !important; }
-  header.k5-idx { justify-content:flex-end !important; }
-  .module-card { background:var(--k5-card) !important; box-shadow:var(--k5-sh); transition:box-shadow .3s, transform .3s var(--k5-spring) !important; }
-  .module-card:hover { box-shadow:var(--k5-sh-h); transform:translateY(-2px); }
-  .module-card:active { transform:scale(.985) !important; }
-  @media (max-width:560px) { .module-card { margin-left:-8px !important; margin-right:-8px !important; padding-left:12px !important; padding-right:12px !important; } }
-  .install { background:var(--k5-card); border:none !important; box-shadow:var(--k5-sh); }
-  .headline .logo-r { transition:transform .6s var(--k5-spring); }
-  .headline .logo-r path, .headline .logo-r line { animation:k5-drop .9s var(--k5-spring) .35s both; }
-  @keyframes k5-drop { from { transform:translateY(-14px); opacity:0; } to { transform:none; opacity:1; } }
-  html.k5-still .headline .logo-r path, html.k5-still .headline .logo-r line { animation:none; }
-
-  /* ── Karten: weiß, weicher Schatten, ein gemeinsames Maß ───── */
-  .card, .pick-btn, .k5-card { background:var(--k5-card) !important; box-shadow:var(--k5-sh) !important; border:none !important; border-radius:var(--k5-r) !important; }
-  .tile, .nav-list-item, .search-hit, .topic-pager a { background:var(--k5-card) !important; box-shadow:var(--k5-sh) !important; border:none !important; transition:box-shadow .25s, transform .22s var(--k5-spring) !important; }
-  a.tile:hover, .nav-list-item:hover, .search-hit:hover, .topic-pager a:hover { box-shadow:var(--k5-sh-h) !important; transform:translateY(-1px) !important; }
-  a.tile:active, .nav-list-item:active, .search-hit:active, .topic-pager a:active { transform:scale(.985) !important; }
-  .pick-btn { transition:box-shadow .25s, transform .2s var(--k5-spring) !important; }
-  .pick-btn:hover { box-shadow:var(--k5-sh-h) !important; } .pick-btn:active { transform:scale(.99); }
-  .pick.open .pick-btn { box-shadow:var(--k5-sh-h) !important; }
-  .pick-menu { border-radius:var(--k5-r) !important; box-shadow:0 24px 60px -18px rgba(17,17,20,.35), 0 0 0 1px rgba(17,17,20,.05) !important; transform-origin:top center; }
-  .pick.open .pick-menu { animation:k5-pop .32s var(--k5-ease); }
-  @keyframes k5-pop { from { opacity:0; transform:translateY(-6px) scale(.98); } to { opacity:1; transform:none; } }
-
-  /* Kartenköpfe wie die Lastzeilen: Titel fett, Kurzfassung in Mono, Pfeil rechts */
-  .k5-acc > .card-title, .k5-acc > .k5-head { cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
-  .k5-chev { flex:none; width:28px; height:28px; margin-left:auto; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#5c5e66; background:var(--k5-sub); transition:transform .38s var(--k5-ease), background .15s; }
-  .k5-chev svg { width:14px; height:14px; }
-  .k5-acc.k5-closed .k5-chev, .k5-acc.closed .k5-chev, .k5-acc.k-closed .k5-chev { transform:rotate(-90deg); }
-  .k5-acc > .card-title:hover .k5-chev, .k5-acc > .k5-head:hover .k5-chev { background:var(--k5-sub-h); }
-  .k5-sum { display:block; margin-top:6px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; line-height:1.5; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .k5-acc:not(.k5-closed) > .k5-sum { display:none; }
-  .k5-acc.k5-closed > .k5-body { display:none; }
-  .k5-acc.k5-closed > .card-title { margin-bottom:0 !important; }
-  .k5-flash { animation:k5-flash 1.1s var(--k5-ease); }
-  @keyframes k5-flash { 0% { box-shadow:0 0 0 3px rgba(84,104,173,.45), var(--k5-sh); } 100% { box-shadow:0 0 0 0 rgba(84,104,173,0), var(--k5-sh); } }
-
-
-  /* ── Kopf jeder klappbaren Karte: Titel · Kurzfassung (Mono) · ▲/▼ — wie die Lasten-Karte in calc ── */
-  .k5-acc > .k5-head, .col-in .card.fold > .card-title { display:flex !important; align-items:center; gap:10px; min-height:30px; flex-wrap:nowrap; }
-  .k5-head > .card-title, .k5-head > .card-title-row { margin:0 !important; flex:none; }
-  .k5-hsum { flex:1 1 auto; min-width:0; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:400; letter-spacing:0; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-transform:none; }
-  .k5-tri { flex:none; margin-left:auto; fill:#5c5e66; transition:transform .38s var(--k5-ease); }
-  .k5-acc.k5-closed > .k5-head .k5-tri, .card.fold.closed > .card-title .k5-tri, .card.dfold.closed > .card-title .k5-tri { transform:rotate(180deg); }
-  .col-in .card.fold > .card-title::after { display:none !important; }
-  .col-in .card.fold > .fold-sum { display:none !important; }
-  .col-in .card.fold.closed { padding-top:18px; padding-bottom:18px; }
-  #details .card.dfold > .card-title > span:first-child::after { content:none !important; }
-  #details .card.dfold > .card-title { display:flex; align-items:center; gap:10px; }
-  #details .card.dfold > .card-title .k5-tri { margin-left:8px; }
-  .k5-acc.k5-closed { padding-top:18px !important; padding-bottom:18px !important; }
-  .k5-acc > .k5-body { padding-top:2px; }
-  /* Unterabschnitte innerhalb einer Karte (Rahmen: Vorlage, Lager, Gelenke) */
-  .card .k5-acc { padding:4px 0 0; border-top:1px solid #eceef2; margin-top:10px !important; }
-  .card .k5-acc > .k5-head { min-height:44px; margin-bottom:0 !important; }
-  .card .k5-acc > .k5-body { padding:2px 0 8px; }
-  .card .k5-acc.k5-closed { padding:4px 0 0 !important; }
-
-  /* Flächen innerhalb weißer Karten */
-  .load-item, .k-row.load-item { background:var(--k5-sub) !important; }
-  .load-item > .load-item-header, .load-item > .load-item-body { background:transparent !important; }
-  .k-menu { box-shadow:0 18px 44px -14px rgba(17,17,20,.3), 0 0 0 1px rgba(17,17,20,.05) !important; }
-  .results-grid .metric { background:var(--k5-card); border-radius:var(--k5-r2); box-shadow:var(--k5-sh); }
-  .diagram-toggle-row { background:var(--k5-sub) !important; }
-
-  /* ── Seitenkopf überall wie die Auswahl in calc/size: Karte mit kleiner Oberzeile und fettem Titel ── */
-  #main .page-head { display:flex; flex-direction:column-reverse; gap:2px; background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:14px 18px; margin-bottom:14px; }
-  #main .page-head .page-title { font-size:20px !important; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
-  #main .page-head .page-sub { font-size:12.5px !important; margin-top:0 !important; color:#5c5e66; line-height:1.4; }
-  #main .menu-toggle { display:none !important; }
-  @media (max-width:999px) { #main .page-head { cursor:pointer; position:relative; padding-right:44px; }
-    #main .page-head::after { content:''; position:absolute; right:20px; top:50%; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #5c5e66; transform:translateY(-50%); } }
-  .wrap > .top { background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:16px 18px; margin:14px 0 18px !important; align-items:center !important; }
-  .wrap > .top .pname { font-size:22px !important; }
-  .k5-phead { margin:14px 0 18px; padding:18px 20px; }
-  #list > .pos.k5-acc { background:var(--k5-card); box-shadow:var(--k5-sh); border:none; border-radius:var(--k5-r); }
-  #list > .pos.k5-acc > .k5-head { display:grid !important; grid-template-columns:minmax(0,1fr) auto; column-gap:8px; row-gap:2px; align-items:center; }
-  #list > .pos.k5-acc > .k5-head > .pos-h { grid-column:1; grid-row:1; min-width:0; margin:0; flex-wrap:nowrap; }
-  #list > .pos.k5-acc > .k5-head > .k5-tri { grid-column:2; grid-row:1; margin:0 4px 0 0; }
-  #list > .pos.k5-acc > .k5-head > .k5-hsum { grid-column:1 / -1; grid-row:2; padding-left:2px; }
-  #list > .pos.k5-acc:not(.k5-closed) > .k5-head > .k5-hsum { display:none; }
-  #list > .pos.k5-acc .pos-h .k-name-s { flex:1 1 80px !important; order:0 !important; min-width:0 !important; }
-  #list > .pos.k5-acc .pos-h .pos-t { min-width:0 !important; text-overflow:ellipsis; }
-  #list > .pos.k5-acc .pos-h .pos-nr { order:0 !important; }
-  @media (max-width:560px) { .sec-t { flex-direction:column; align-items:flex-start !important; gap:2px; } #list > .pos.k5-acc .pos-h .k-pen { display:none; } #list > .pos.k5-acc .pos-h { gap:6px; } }
-  .k5-phead > h1 { margin:0 0 6px !important; font-size:24px !important; }
-  .k5-phead > :last-child { margin-bottom:0 !important; }
-  .rw-card .rw-chev { display:none !important; }
-  .rw-card > .rw-title { display:flex !important; align-items:center; gap:10px; cursor:pointer; }
-  .rw-card.closed > .rw-title .k5-tri { transform:rotate(180deg); }
-  .k5-head > .card-title, .col-in .card.fold > .card-title > span:first-child, .rw-title > span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:74%; }
-
-  /* ── Bewegung ─────────────────────────────────────────────── */
-  @keyframes k5-in { from { opacity:0; transform:translateY(16px) scale(.985); } to { opacity:1; transform:none; } }
-  .k5-rv { animation:k5-in .62s var(--k5-ease) both; animation-delay:var(--k5-d, 0ms); }
-  @keyframes k5-fade { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
-  .k5-open-anim > :not(.card-title):not(.k5-head):not(.k5-sum) { animation:k5-fade .38s var(--k5-ease) both; }
-  @keyframes k5-tick { 0% { opacity:.25; transform:translateY(5px); } 100% { opacity:1; transform:none; } }
-  .k5-tick { animation:k5-tick .42s var(--k5-ease); }
-  .k5-count { position:absolute; inset:0; pointer-events:none; color:inherit; font:inherit; letter-spacing:inherit; }
-  .k5-counting { position:relative; color:transparent !important; }
-  .k5-counting > .k5-count { color:#111114; }
-  .k5-wipe { animation:k5-wipe .75s var(--k5-ease) both; }
-  @keyframes k5-wipe { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
-  button, .btn, a.btn, .k-opt, .k-mode { transition:transform .22s var(--k5-spring), background-color .15s, box-shadow .2s, color .15s; }
-  button:active:not(:disabled), .btn:active { transform:scale(.97); }
-  .k5-seg-host { position:relative; isolation:isolate; }
-  .k5-seg-host > .k5-pill { position:absolute; z-index:-1; top:3px; bottom:3px; left:0; border-radius:10px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.12);
-    transition:transform .4s var(--k5-ease), width .4s var(--k5-ease); pointer-events:none; }
-  .k5-seg-host.k5-seg-on > button { background:transparent !important; box-shadow:none !important; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration:1ms !important; animation-delay:0ms !important; transition-duration:1ms !important; transition-delay:0ms !important; }
-  }
-  html.k5-still *, html.k5-still *::before, html.k5-still *::after { animation:none !important; transition:none !important; }
-  @media print { .k5-burger, .k5-menu, .k5-scrim { display:none !important; } html, body { background:#fff !important; }
-    .card, .pick-btn, .k5-card { box-shadow:none !important; } .k5-rv { animation:none !important; } }
-</style>
-<script data-k5>
-// Seiten-Anpassungen der Design-Schicht 5: welche Karten zu Akkordeons werden und was ihre Kurzfassung zeigt.
-window.kragrK5Page = function(K){
-  var D=document, $=function(s,r){ return (r||D).querySelector(s); }, $$=function(s,r){ return Array.prototype.slice.call((r||D).querySelectorAll(s)); };
-  var txt=function(el){ return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; };
-  // Regeln: Karten, die die Seite neu zeichnet, bekommen den Akkordeon-Kopf jedes Mal wieder
-  var RULES=[];
-  function rule(sel, opt){ RULES.push([sel,opt]); }
-  function apply(){
-    RULES.forEach(function(r){ $$(r[0]).forEach(function(el){
-      if(el.k5acc && el.querySelector(':scope > .k5-head') && el.querySelector(':scope > .k5-body')) return;
-      el.k5acc=null; el.classList.remove('k5-acc','k5-closed');
-      var o=typeof r[1]==='function' ? r[1](el) : r[1]; if(o) K.acc(el, o); }); });
-  }
-  var pend=0; function later(){ if(pend) return; pend=requestAnimationFrame(function(){ pend=0; apply(); deco(); K.refreshSums(); }); }
-  function deco(){}
-  var P=K.page;
-
-  if(P==='calc'){
-    // Knotentabelle: zugeklappt, Kurzfassung = Anzahl Knoten und Stäbe
-    rule('.k-knoten', function(el){ var h=$(':scope > .card-title', el)||$(':scope > .k5-head', el); if(!h) return null;
-      return {head:h, key:'knoten', closed:true, sum:function(c){ var n=$$('.k-kn-list > li', c).length, b=$$('.k-kn-tab tr.k-kn-bar', c).length;
-        var W={de:['Knoten','Stab','Stäbe'],en:['nodes','member','members'],fr:['nœuds','barre','barres'],es:['nudos','barra','barras']}[K.lang()]||['Knoten','Stab','Stäbe'];
-        return n ? n+' '+W[0]+' · '+b+' '+(b===1?W[1]:W[2]) : ''; }}; });
-    // Rahmen: Vorlage, Lager A, Lager B, Kopf, Gelenke als Unterabschnitte (immer nur einer offen)
-    rule('#tab-frame .card > div', function(el){ if(/k5-head|k5-body|card-title-row/.test(el.className) || el.closest('.k-knoten')) return null; var h=$(':scope > .card-title', el); if(!h) return null;
-      var key=h.getAttribute('data-i18n')||txt(h);
-      return {head:h, key:'frame-'+key, closed:key!=='framePresets', group:'frame-sys', sum:function(c){
-        var a=$$('.toggle-btn.active, .toggle-btn[aria-pressed="true"]', c).map(txt); if(a.length) return a.join(' · ');
-        var n=$$('.load-item, .k-row', c).length; return n ? String(n) : ''; }}; });
-    // Ergebniszahlen und Diagramm-Umschalter
-    var tick=function(){ K.watchNumbers('.results-grid .m-value');
-      $$('.diagram-toggle-row').forEach(function(r){ K.slider(r, '.diagram-toggle-btn[class*="active-"]'); }); };
-    D.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('.diagram-toggle-btn'); if(!b) return;
-      var card=b.closest('.card'); setTimeout(function(){ var s=card && $('svg[id*="diag"], .diagram-wrap svg, svg', card.querySelector('.diagram-toggle-row') ? card : null);
-        var list=$$('svg', card).filter(function(x){ return x.getBoundingClientRect().height>60; }); K.wipe(list[0]); void s; }, 0); });
-    // Lösungsweg-Karte: gleicher Kopf wie die anderen Karten, startet zugeklappt; Kurzfassung = Zahl der Schritte
-    var STEPW={de:'Schritte',en:'steps',fr:'étapes',es:'pasos'};
-    var RW0=false; try{ if(localStorage.getItem('statiq-rw-closed')===null){ localStorage.setItem('statiq-rw-closed','1'); RW0=true; } }catch(e){}
-    if(RW0) $$('.rw-card').forEach(function(c){ c.classList.add('closed'); });
-    deco=function(){ tick();
-      $$('.rw-card').forEach(function(c){ var h=$(':scope > .rw-title', c); if(!h) return; c.classList.add('k5-rw');
-        if(!$(':scope > .k5-tri', h)){ var sp=D.createElement('span'); sp.className='k5-hsum'; h.appendChild(sp); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
-        var n=$$('.rw-body > .st', c).length, v=c.classList.contains('closed') && n ? n+' '+(STEPW[K.lang()]||STEPW.de) : '';
-        var sp2=$(':scope > .k5-hsum', h); if(sp2.textContent!==v) sp2.textContent=v; h.setAttribute('aria-expanded', String(!c.classList.contains('closed'))); }); };
-    // Ergebnis-Details (Knotentabelle, Lösungsweg): immer nur eines offen
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.rw-card > .rw-title'); if(!h) return; var rw=h.parentNode;
-      setTimeout(function(){ if(rw.classList.contains('closed')) return; var col=rw.parentNode; $$('.k-knoten.k5-acc', col).forEach(function(k){ if(!k.classList.contains('k5-closed')) K.setClosed(k, true); }); deco(); }, 0); });
-    D.addEventListener('k5toggle', function(e){ var c=e.detail.card; if(!e.detail.open || !c.classList.contains('k-knoten')) return;
-      var col=c.closest('.col-out')||c.parentNode.parentNode; $$('.rw-card', col.parentNode||D).forEach(function(r){ if(!r.classList.contains('closed') && r.offsetParent!==null){ r.classList.add('closed'); try{ localStorage.setItem('statiq-rw-closed','1'); }catch(_){} } }); deco(); });
-    // System wechseln: Karten neu einblenden
-    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu')) setTimeout(function(){ $$('main .card').forEach(function(c){ c.k5seen=0; }); K.reveal('main:not(.hidden) .card, main:not(.hidden) .results-grid .metric'); }, 30); });
-  }
-
-  if(P==='size'){
-    // Eingabekarten: immer nur eine offen; Kurzfassung im Kopf (wie die Lastzeilen in calc)
-    var FS='statiq-size-fold';
-    var sumOf=function(c){ try{ return typeof foldSummary==='function' ? foldSummary(c) : ''; }catch(e){ return ''; } };
-    deco=function(){
-      $$('.col-in .card.fold').forEach(function(c){ var h=$(':scope > .card-title', c); if(!h) return; c.classList.add('k5-fold');
-        if(!$(':scope > .k5-hsum', h)){ var s=D.createElement('span'); s.className='k5-hsum'; h.appendChild(s); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
-        var s2=$(':scope > .k5-hsum', h), v=c.classList.contains('closed') ? sumOf(c) : ''; if(s2.textContent!==v) s2.textContent=v; h.setAttribute('aria-expanded', String(!c.classList.contains('closed'))); });
-      $$('#details > .card.dfold').forEach(function(c){ var h=$(':scope > .card-title', c); if(h && !$(':scope > .k5-tri', h)) h.insertAdjacentHTML('beforeend', K.CHEV); });
-      K.watchBars($('#chk-table'), function(r){ var a=$('a', r); return a ? a.getAttribute('href') : r.rowIndex; });
-    };
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.col-in .card.fold > .card-title'); if(!h || e.target.closest('button, a, input, select')) return;
-      var card=h.parentNode; if(card.classList.contains('closed')){ later(); return; }
-      var st={}; try{ st=JSON.parse(localStorage.getItem(FS)||'{}'); }catch(_){}
-      $$('.col-in .card.fold').forEach(function(c){ if(c===card || c.classList.contains('closed') || c.offsetParent===null) return; c.classList.add('closed'); if(c.dataset.fold) st[c.dataset.fold]=true; });
-      try{ localStorage.setItem(FS, JSON.stringify(st)); }catch(_){}
-      later();
-    });
-    D.addEventListener('keydown', function(e){ var h=e.target; if((e.key==='Enter'||e.key===' ') && h.matches && h.matches('.col-in .card.fold > .card-title')){ e.preventDefault(); h.click(); } });
-    // Beim Laden: nur die erste offene Eingabekarte bleibt offen (Akkordeon)
-    setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; });
-      open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 0);
-    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; }); open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 40); });
-    // Umfang und Grundlagen: zugeklappt
-    rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
-  }
-
-  if(P==='ref'){
-    // Seitenkopf wie die Auswahl in calc/size: Tippen öffnet am Handy die Themenliste
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('#main .page-head'); if(!h || !$('#main .menu-toggle') || window.innerWidth>999) return;
-      if(typeof toggleSideMenu==='function'){ e.stopPropagation(); toggleSideMenu(); } });
-  }
-
-  if(P==='rechtliches'){
-    // Seitenkopf als Karte: Titel, Einleitung und Sprungmarken zusammen
-    deco=function(){ var c=$('#content'), h=c && $(':scope > h1', c); if(!h) return; var w=D.createElement('div'); w.className='k5-card k5-phead'; c.insertBefore(w, h);
-      var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
-  }
-
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
-
-  new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
-  apply(); deco();
-  D.addEventListener('k5toggle', function(){ deco(); });
-  D.addEventListener('change', function(e){ if(e.target && (e.target.id==='lang-sel'||e.target.id==='lang')) setTimeout(function(){ K.refreshSums(); deco(); }, 50); }, true);
-  D.addEventListener('click', function(){ setTimeout(deco, 0); });
-};
-// kragr-Design 5 (Oktober 2026): Burgermenü, Akkordeon-Karten und ruhige Bewegung. Identisch in calc, size, ref, projekt, rechtliches.
-// Bedienelemente der alten Kopfzeile (#lang-sel, #ueb-btn, #theme-btn, #proj-btn) bleiben im DOM (versteckt); das Menü steuert sie.
+<script data-mod>
+// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
+// data-mod="calc|size|ref|proj" bekommen ihn als Text.
 (function(){
-  if(window.kragrK5) return;
-  var D=document, H=D.documentElement;
-  var PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.html?$/,'')||'index';
-  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Automatisierte Browser (Tests) ohne Bewegung, außer ?k5motion steht in der Adresse
-  if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
-  var STILL=function(){ return RM || H.classList.contains('k5-still'); };
-  var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Schnittgrößen',size:'Bemessung',ref:'Nachschlagewerk',proj:'Meine Projekte',projS:'Positionen aus calc und size',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Internal forces',size:'Design & sizing',ref:'Reference',proj:'My projects',projS:'Items from calc and size',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Efforts internes',size:'Dimensionnement',ref:'Référence',proj:'Mes projets',projS:'Éléments de calc et size',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Esfuerzos internos',size:'Dimensionado',ref:'Referencia',proj:'Mis proyectos',projS:'Elementos de calc y size',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
-  // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
-  var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
-    dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
-  function langSel(){ return D.getElementById('lang-sel')||D.getElementById('lang')||(PAGE==='index' && typeof window.setLang==='function' ? VSEL : null); }
-  function lang(){ var l=null; try{ l=localStorage.getItem('statiq-lang'); }catch(e){} if(!T[l]){ var s=langSel(); l=s&&s.value; } return T[l]?l:'de'; }
-  function t(k){ return (T[lang()]||T.de)[k]; }
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-  var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
-
-  // ── Höhe weich ändern (FLIP): vorher messen, Änderung ausführen, nachher animieren ──────────
-  function measure(els){ return els.map(function(el){ return {el:el, h:el.getBoundingClientRect().height}; }); }
-  function flip(before, anchor, anchorTop){
-    if(anchor && anchorTop!=null){ var d=anchor.getBoundingClientRect().top-anchorTop; if(Math.abs(d)>1) window.scrollBy(0,d); }
-    if(STILL()) return;
-    before.forEach(function(b){ var el=b.el; if(!el.isConnected) return; var h1=el.getBoundingClientRect().height; if(Math.abs(h1-b.h)<2 || !el.animate) return;
-      var ov=el.style.overflow; el.style.overflow='hidden';
-      var a=el.animate([{height:b.h+'px'},{height:h1+'px'}],{duration:Math.min(520, 260+Math.abs(h1-b.h)*0.25), easing:'cubic-bezier(.22,.8,.24,1)'});
-      a.onfinish=a.oncancel=function(){ el.style.overflow=ov; }; });
-  }
-  function openAnim(card){ if(STILL()) return; card.classList.remove('k5-open-anim'); void card.offsetWidth; card.classList.add('k5-open-anim'); setTimeout(function(){ card.classList.remove('k5-open-anim'); }, 450); }
-
-  // ── Akkordeon: Karte mit Kopf (Titel · Kurzfassung · Pfeil), Gruppe = immer nur eine offen ──────
-  // opt: {head, key, closed, group, sum(card) → Text, solo:true (nicht in Gruppe), store}
-  var ACC_STORE='kragr-k5-acc';
-  function accState(){ try{ return JSON.parse(localStorage.getItem(ACC_STORE)||'{}'); }catch(e){ return {}; } }
-  function accSave(key, closed){ if(!key) return; var s=accState(); s[PAGE+':'+key]=closed; try{ localStorage.setItem(ACC_STORE, JSON.stringify(s)); }catch(e){} }
-  function acc(card, opt){
-    if(!card || card.k5acc) return; opt=opt||{};
-    var head=opt.head||card.querySelector(':scope > .card-title'); if(!head) return;
-    // Kopf in eine eigene Zeile legen: der Titel selbst kann übersetzt (textContent) werden, ohne Pfeil und Kurzfassung zu verlieren
-    if(!head.classList.contains('k5-head')){ var w=D.createElement('div'); w.className='k5-head'; card.insertBefore(w, head); w.appendChild(head); head=w; }
-    card.k5acc=opt; card.classList.add('k5-acc');
-    head.setAttribute('role','button'); head.tabIndex=0;
-    var body=D.createElement('div'); body.className='k5-body';
-    Array.prototype.slice.call(card.childNodes).forEach(function(n){ if(n!==head) body.appendChild(n); });
-    card.appendChild(body);
-    if(!head.querySelector('.k5-hsum')){ var s=D.createElement('span'); s.className='k5-hsum'; head.appendChild(s); }
-    if(!head.querySelector('.k5-tri')) head.insertAdjacentHTML('beforeend', CHEV);
-    if(opt.group) card.dataset.k5g=opt.group;
-    var st=accState(), k=PAGE+':'+(opt.key||'');
-    var closed = opt.key && (k in st) ? st[k] : !!opt.closed;
-    setClosed(card, closed, true);
-    head.addEventListener('click', function(e){ if(e.target.closest('a, input, select, textarea, .info-btn, button:not(.k5-head)')) return; toggle(card); });
-    head.addEventListener('keydown', function(e){ if((e.key==='Enter'||e.key===' ') && e.target===head){ e.preventDefault(); toggle(card); } });
-  }
-  function setClosed(card, c, quiet){
-    card.classList.toggle('k5-closed', c);
-    var head=card.querySelector(':scope > .k5-head'); if(head) head.setAttribute('aria-expanded', c?'false':'true');
-    updSum(card);
-    if(!quiet) accSave(card.k5acc&&card.k5acc.key, c);
-  }
-  function updSum(card){ var o=card.k5acc, s=card.querySelector(':scope > .k5-head .k5-hsum'); if(!o||!s) return;
-    var tx=''; try{ tx=o.sum ? (o.sum(card, card.classList.contains('k5-closed'))||'') : ''; }catch(e){}
-    if(s.textContent!==tx) s.textContent=tx; }
-  function groupOf(card){ var g=card.dataset.k5g; if(!g) return []; var p=card.parentNode;
-    return Array.prototype.filter.call(D.querySelectorAll('[data-k5g="'+g+'"]'), function(c){ return c!==card && c.offsetParent!==null && (!p || c.parentNode===p || c.closest('[data-k5gscope]')===card.closest('[data-k5gscope]')); }); }
-  function toggle(card, force){
-    var open = force!=null ? force : card.classList.contains('k5-closed');
-    var others = open ? groupOf(card).filter(function(c){ return !c.classList.contains('k5-closed'); }) : [];
-    var before=measure([card].concat(others)), top=card.getBoundingClientRect().top;
-    others.forEach(function(c){ setClosed(c, true); });
-    setClosed(card, !open);
-    flip(before, card, top);
-    if(open) openAnim(card);
-    try{ D.dispatchEvent(new CustomEvent('k5toggle',{detail:{card:card, open:open}})); }catch(e){}
-  }
-  function refreshSums(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-acc'), updSum); }
-  var sumT=0; D.addEventListener('input', function(){ clearTimeout(sumT); sumT=setTimeout(refreshSums, 120); }, true);
-  D.addEventListener('change', function(){ clearTimeout(sumT); sumT=setTimeout(refreshSums, 60); }, true);
-
-  // Fremde Klapp-Mechaniken (Lasten-Karte, Lastzeilen, size-Karten, Rechenschritte, ref-Seitenleiste): weich animieren
-  var FOREIGN='.k-loads > .k-head, .load-item .k-row-head, .load-item > .k-rh, .fold > .card-title, .dfold > .card-title, .k-row > button:first-child, #sidebar .sb-sub > button, #sidebar button.sb-h, #sidebar .grp > button, .pos-head, [data-k5-flip]';
-  D.addEventListener('click', function(e){
-    if(STILL()) return;
-    var h=e.target.closest && e.target.closest(FOREIGN); if(!h || h.closest('.k5-acc > .k5-head')) return;
-    var card=h.closest('.load-item, .card, .k-loads, .fold, .dfold, .sb-group, li, section, div') || h.parentNode;
-    var parent=card.parentNode, sibs=parent ? Array.prototype.filter.call(parent.children, function(c){ return c.offsetParent!==null; }) : [card];
-    var before=measure(sibs.slice(0,40)), top=card.getBoundingClientRect().top;
-    requestAnimationFrame(function(){ flip(before, null, null); if(card.isConnected && !card.classList.contains('closed') && !card.classList.contains('k-closed')) openAnim(card); });
-    void top;
-  }, true);
-
-  // ── Kopfzeile: Logo · ☰ ─────────────────────────────────────────────
-  var MODS=[['calc','calc.html','Σ'],['size','size.html','η'],['ref','ref.html','§']];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
-  var burger, menu, scrim, lastFocus;
-  function buildHeader(){
-    var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
-    burger=D.createElement('button'); burger.type='button'; burger.id='k5-burger'; burger.className='k5-burger';
-    burger.setAttribute('aria-haspopup','dialog'); burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-controls','k5-menu');
-    burger.innerHTML='<span class="k5-cur"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="4" y1="7" x2="20" y2="7"/><line class="l2" x1="4" y1="12" x2="20" y2="12"/><line class="l3" x1="4" y1="17" x2="20" y2="17"/></svg><span class="k5-dot"></span>';
-    burger.addEventListener('click', function(){ menu && menu.classList.contains('open') ? closeMenu() : openMenu(); });
-    hdr.appendChild(burger);
-    scrim=D.createElement('div'); scrim.className='k5-scrim'; scrim.addEventListener('click', closeMenu);
-    menu=D.createElement('div'); menu.id='k5-menu'; menu.className='k5-menu'; menu.setAttribute('role','dialog'); menu.setAttribute('aria-modal','true');
-    D.body.appendChild(scrim); D.body.appendChild(menu);
-    D.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); } });
-    labelBurger();
-  }
-  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?PAGE:'');
-    var tx=t('menu'); if(cur.textContent!==tx) cur.textContent=tx; burger.setAttribute('aria-label', t('open')+(m?' ('+m+')':'')); }
-  function themeNow(){ return H.dataset.theme || (function(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } })(); }
-  function setTheme(v){ var n=0; while(themeNow()!==v && n++<3 && window.mulyTheme) window.mulyTheme(); if(!window.mulyTheme){ try{ localStorage.setItem('muly-theme',v); }catch(e){} } }
-  function hrefOf(name){ var a=D.querySelector('.k-hdr .header-links a[href^="'+name+'.html"]'); return a ? a.getAttribute('href') : name+'.html'; }
-  function version(){ var v=D.querySelector('.k-hdr .version'); var s=v&&v.textContent.trim(); if(!s){ var m=(D.documentElement.outerHTML.slice(0,200).match(/v(\d+\.\d+\.\d+)/)||[])[0]; s=m||''; } return s; }
-  function seg(id, items, cur){ return '<div class="k5-segm" role="group" id="'+id+'">'+items.map(function(it){ return '<button type="button" data-v="'+it[0]+'" aria-pressed="'+(it[0]===cur)+'">'+esc(it[1])+'</button>'; }).join('')+'<span class="k5-pill" aria-hidden="true"></span></div>'; }
-  function renderMenu(){
-    var ueb=D.getElementById('ueb-btn'), i=0, h='';
-    function I(){ return ' style="--i:'+(i++)+'"'; }
-    h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
-    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('mods'))+'</div>';
-    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+m[0]+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
-    h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+I()+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b><span>'+esc(t('projS'))+'</span></span><span class="k5-badge"></span></a>';
-    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
-    if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
-    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
-    if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
-    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?'·'+PAGE:'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
-    menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
-    menu.querySelector('.k5-x').onclick=closeMenu;
-    var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
-    Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
-    Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
-      setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
-  }
-  function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
-  function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
-    if(!b){ p.style.width='0'; return; } p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; }); }
-  function openMenu(){ if(!menu) return; lastFocus=D.activeElement; renderMenu(); menu.classList.add('open'); scrim.classList.add('open'); D.body.classList.add('k5-lock');
-    burger.setAttribute('aria-expanded','true'); requestAnimationFrame(placePills); var f=menu.querySelector('[aria-current="page"]')||menu.querySelector('.k5-mod'); if(f) f.focus({preventScroll:true}); }
-  function closeMenu(){ if(!menu||!menu.classList.contains('open')) return; menu.classList.remove('open'); scrim.classList.remove('open'); D.body.classList.remove('k5-lock');
-    burger.setAttribute('aria-expanded','false'); if(lastFocus && lastFocus.focus) try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
-  // Fokus im Menü halten
-  D.addEventListener('keydown', function(e){ if(e.key!=='Tab' || !menu || !menu.classList.contains('open')) return;
-    var f=menu.querySelectorAll('a,button'); if(!f.length) return; var a=f[0], z=f[f.length-1];
-    if(e.shiftKey && D.activeElement===a){ e.preventDefault(); z.focus(); } else if(!e.shiftKey && D.activeElement===z){ e.preventDefault(); a.focus(); } });
-
-  // ── Einblenden beim Laden und beim Scrollen ─────────────────────────────
-  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ show(en.target); io.unobserve(en.target); } }); }, {rootMargin:'0px 0px -8% 0px'}) : null;
-  var revealN=0, revealT=0;
-  function show(el){ var now=Date.now(); if(now-revealT>400) revealN=0; revealT=now; el.style.setProperty('--k5-d', Math.min(revealN++,8)*55+'ms'); el.classList.add('k5-rv');
-    setTimeout(function(){ el.classList.remove('k5-rv'); el.style.removeProperty('--k5-d'); }, 1300); }
-  function reveal(sel){ if(STILL()) return; Array.prototype.forEach.call(D.querySelectorAll(sel), function(el){ if(el.k5seen || el.offsetParent===null) return; el.k5seen=1; io ? io.observe(el) : show(el); }); }
-
-  // ── Zahlen zählen beim ersten Erscheinen hoch, danach kurzes Nachrücken bei Änderung ──
-  // Der echte Text bleibt unverändert im Element; gezählt wird in einer darübergelegten Ebene.
-  function countUp(el){
-    if(STILL() || el.k5counted) return; var txt=el.textContent.trim(), m=txt.match(/^(-?)(\d[\d.,\s]*)(.*)$/); if(!m) return; el.k5counted=1;
-    var raw=m[2].trim(), dec=(raw.match(/[.,](\d+)$/)||[])[1]||'', sep=(raw.match(/[.,](?=\d+$)/)||[])[0]||'.';
-    var val=parseFloat(raw.replace(/[\s]/g,'').replace(sep===','?/\./g:/,/g,'').replace(',','.')); if(!isFinite(val)||val===0) return;
-    var o=D.createElement('span'); o.className='k5-count'; o.setAttribute('aria-hidden','true'); el.classList.add('k5-counting'); el.appendChild(o);
-    var t0=performance.now(), dur=700;
-    (function step(now){ var p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3), v=val*e;
-      o.textContent=m[1]+v.toFixed(dec.length).replace('.',sep)+m[3];
-      if(p<1 && o.isConnected) requestAnimationFrame(step); else { o.remove(); el.classList.remove('k5-counting'); } })(t0);
-  }
-  function watchNumbers(sel){
-    Array.prototype.forEach.call(D.querySelectorAll(sel), function(el){ if(el.k5w) return; el.k5w=1; var last=el.textContent;
-      if(/\d/.test(last) && el.offsetParent!==null) countUp(el);
-      new MutationObserver(function(){ var now=el.textContent; if(el.querySelector('.k5-count')) return; if(now===last) return; var was=last; last=now;
-        if(!/\d/.test(was) || !el.k5counted){ if(el.offsetParent!==null) countUp(el); return; }
-        if(STILL()) return; el.classList.remove('k5-tick'); void el.offsetWidth; el.classList.add('k5-tick'); }).observe(el,{childList:true, characterData:true, subtree:true}); });
-  }
-
-  // ── Ausnutzungsbalken: von alter auf neue Breite gleiten ─────────────────
-  var BARW={};
-  function watchBars(host, rowKey){
-    if(!host || host.k5b) return; host.k5b=1;
-    function run(){ var rows=host.querySelectorAll('tr'); Array.prototype.forEach.call(rows, function(r, i){ var b=r.querySelector('.bar > i'); if(!b) return;
-      var k=rowKey(r,i), w=b.style.width; var from=(k in BARW)?BARW[k]:'0%'; BARW[k]=w; if(STILL() || from===w || !b.animate) return;
-      b.animate([{width:from},{width:w}],{duration:from==='0%'?820:480, delay:from==='0%'?120+i*45:0, easing:'cubic-bezier(.22,.8,.24,1)', fill:'backwards'}); }); }
-    new MutationObserver(run).observe(host,{childList:true}); run();
-  }
-
-  // ── Segment-Umschalter (M/Q/N/w): gleitende Fläche unter der aktiven Taste ──
-  function slider(host, activeSel){
-    if(!host || host.k5s) return; host.k5s=1; host.classList.add('k5-seg-host','k5-seg-on'); var p=D.createElement('span'); p.className='k5-pill'; host.appendChild(p);
-    function place(){ var b=host.querySelector(activeSel); if(!b||!host.offsetWidth){ p.style.opacity='0'; return; } p.style.opacity='1'; p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; p.style.top=b.offsetTop+'px'; p.style.height=b.offsetHeight+'px'; p.style.bottom='auto'; }
-    new MutationObserver(place).observe(host,{attributes:true, subtree:true, attributeFilter:['class','aria-pressed']});
-    window.addEventListener('resize', place); place(); host.k5place=place;
-  }
-  function wipe(el){ if(STILL()||!el) return; el.classList.remove('k5-wipe'); void el.getBoundingClientRect(); el.classList.add('k5-wipe'); setTimeout(function(){ el.classList.remove('k5-wipe'); }, 900); }
-
-  window.kragrK5={ page:PAGE, acc:acc, toggle:toggle, setClosed:setClosed, refreshSums:refreshSums, flip:flip, measure:measure, reveal:reveal, countUp:countUp,
-    watchNumbers:watchNumbers, watchBars:watchBars, slider:slider, wipe:wipe, openMenu:openMenu, closeMenu:closeMenu, t:t, lang:lang, still:STILL, CHEV:CHEV };
-
-  function init(){
-    buildHeader();
-    try{ if(window.kragrK5Page) window.kragrK5Page(window.kragrK5); }catch(e){ if(window.console) console.error(e); }
-    reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
-    window.addEventListener('resize', function(){ if(menu && menu.classList.contains('open')) placePills(); });
-    new MutationObserver(function(){ labelBurger(); }).observe(H,{attributes:true, attributeFilter:['lang']});
-  }
-  if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
+    try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
+  window.KMOD=K; window.kmodLang=lang;
+  window.kmod=function(m, L){ var d=K[L||lang()]||K.de; return d[m] || m; };
+  window.kmodApply=function(){ if(typeof document==='undefined') return; document.querySelectorAll('[data-mod]').forEach(function(e){ var v=window.kmod(e.getAttribute('data-mod')); if(e.textContent!==v) e.textContent=v; });
+    var pg=document.documentElement.getAttribute('data-kpage'); if(pg) document.title=window.kmod(pg)+' — kragr'; };
+  if(typeof document!=='undefined' && document.addEventListener) document.addEventListener('DOMContentLoaded', window.kmodApply);
 })();
 </script>
 </head>
@@ -1588,7 +1082,7 @@ window.kragrK5Page = function(K){
     </div>
     <div class="modal-section">
       <h3 data-i18n="modalContSolveH">Solution Method</h3>
-      <p data-i18n="modalContSolveP">The three-moment equation is the classic hand method. calc itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.</p>
+      <p data-i18n="modalContSolveP">The three-moment equation is the classic hand method. “Internal forces” itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.</p>
     </div>
     <div class="modal-section">
       <h3 data-i18n="modalContOptH">Options: fixed ends, cantilevers, hinges</h3>
@@ -1655,14 +1149,14 @@ window.kragrK5Page = function(K){
 <header class="app-header glass k-hdr">
   <a class="logo" href="index.html" title="Startseite">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <nav class="header-links" aria-label="Module">
-    <span class="module-name">calc</span>
-    <a href="size.html">size</a>
-    <a href="ref.html">ref</a>
+    <span class="module-name" data-mod="calc">Schnittkräfte</span>
+    <a href="size.html" data-mod="size">Bemessung</a>
+    <a href="ref.html" data-mod="ref">Wissen</a>
   </nav>
   <div class="hdr-tools">
-    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
+    <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.2</span>
+    <span class="version">v0.11.3</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1680,8 +1174,8 @@ window.kragrK5Page = function(K){
   <!-- List view -->
   <div id="saved-list-view" style="padding:16px">
     <div style="display:flex;gap:8px;margin-bottom:16px">
-      <button onclick="saveFilterTab('calc')" id="sf-calc" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:white;cursor:pointer;font-family:JetBrains Mono,monospace;font-weight:600">calc</button>
-      <a href="projekt.html" id="sf-proj" data-i18n="projLink" style="font-size:12px;padding:5px 4px;color:var(--accent);font-weight:600;text-decoration:none;align-self:center;margin-left:auto">My projects →</a>
+      <button onclick="saveFilterTab('calc')" id="sf-calc" style="font-size:11px;padding:5px 16px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:white;cursor:pointer;font-family:JetBrains Mono,monospace;font-weight:600" data-mod="calc">“Internal forces”</button>
+      <a href="projekt.html" id="sf-proj" data-i18n="projLink" style="font-size:12px;padding:5px 4px;color:var(--accent);font-weight:600;text-decoration:none;align-self:center;margin-left:auto">Projects →</a>
     </div>
     <div id="saved-calcs-list"></div>
     <div id="saved-empty" style="color:var(--text-muted);font-size:12px;font-family:JetBrains Mono,monospace;padding:40px 20px;text-align:center"></div>
@@ -1919,7 +1413,7 @@ window.kragrK5Page = function(K){
     </div>
     <div class="field-row">
       <div class="field"><label><span data-i18n="width">Width b</span> <span class="unit">m</span></label>
-        <input type="number" id="fB" value="5" step="0.1" min="0.5" oninput="drawFrame(); refreshFrameInputs()"></div>
+        <input type="number" id="fB" value="5" step="0.1" min="0.5" oninput="gableSyncB(); drawFrame(); refreshFrameInputs()"></div>
       <div class="field"><label><span data-i18n="height">Height h</span> <span class="unit">m</span></label>
         <input type="number" id="fH" value="4" step="0.1" min="0.5" oninput="syncFrameHeights('h')"></div>
     </div>
@@ -1928,6 +1422,21 @@ window.kragrK5Page = function(K){
         <input type="number" id="fHA" value="4" step="0.1" min="0.5" oninput="syncFrameHeights('A')"></div>
       <div class="field"><label>h<sub>B</sub> <span class="unit">m</span></label>
         <input type="number" id="fHB" value="4" step="0.1" min="0.5" oninput="syncFrameHeights('B')"></div>
+    </div>
+    <!-- Riegelform (v0.11.3): gerade oder Satteldach mit First -->
+    <div style="margin-top:12px">
+      <div class="card-title" style="margin-bottom:8px" data-i18n="roofShape">Rafter shape</div>
+      <div class="toggle-row">
+        <button class="toggle-btn active" id="btn-roof-flat" onclick="setRoof(false)" data-i18n="roofFlat">Straight</button>
+        <button class="toggle-btn" id="btn-roof-gable" onclick="setRoof(true)" data-i18n="roofGable">Gable roof</button>
+      </div>
+      <input type="checkbox" id="fGable" hidden>
+      <div class="field-row" id="gable-row" style="margin-top:6px;display:none">
+        <div class="field"><label><span data-i18n="gableF">Rise f</span> <span class="unit">m</span></label>
+          <input type="number" id="fF" value="1" step="0.1" min="0" oninput="drawFrame(); refreshFrameInputs()"></div>
+        <div class="field"><label><span data-i18n="gableX">Ridge x<sub>F</sub></span> <span class="unit">m</span></label>
+          <input type="number" id="fXF" value="2.5" step="0.1" min="0" oninput="drawFrame(); refreshFrameInputs()"></div>
+      </div>
     </div>
 
     <!-- Systemvorlagen: typische Rahmen mit einem Klick -->
@@ -2136,7 +1645,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.2';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.3';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -3123,6 +2632,49 @@ let supportHeadType = 'roller'; // 'roller' | 'pin'
 let frameHinges = []; // [{id, member:'left'|'rafter'|'right', pos:float}]
 let frameLoads = { vert: [], horiz: [] };
 
+// ── Satteldachrahmen (v0.11.3) ──
+// Der Riegel bleibt EIN Stab, läuft aber als Polygonzug Ecke links → First → Ecke rechts.
+// Positionen auf dem Riegel sind weiterhin waagerecht gemessen (x von der linken Ecke, 0 … b).
+// f = Stich des Firsts über der Verbindungslinie der Traufen, xF = Lage des Firsts. null = gerader Riegel.
+function frameGableOf(b, hA, hB, on, f, xF){
+  if(!on || !(f>0)) return null;
+  if(!isFinite(xF)) xF = b/2;
+  xF = Math.min(Math.max(xF, 0.05*b), 0.95*b);
+  return { xF, f, yF: hA+(hB-hA)*xF/b+f, tF: xF/b };
+}
+function frameGable(b, hA, hB){
+  const el=id=>document.getElementById(id);
+  return frameGableOf(b, hA, hB, !!el('fGable')?.checked, parseFloat(el('fF')?.value), parseFloat(el('fXF')?.value));
+}
+// Höhe des Riegels über dem Fuß an der Stelle x (waagerecht)
+function frameRafY(x, b, hA, hB, g){
+  if(!g) return hA+(hB-hA)*x/b;
+  return x<=g.xF ? hA+(g.yF-hA)*x/g.xF : g.yF+(hB-g.yF)*(x-g.xF)/(b-g.xF);
+}
+// Länge des Riegels (Polygonzug)
+function frameRafLen(b, hA, hB, g){ return g ? Math.hypot(g.xF, g.yF-hA)+Math.hypot(b-g.xF, hB-g.yF) : Math.hypot(b, hB-hA); }
+// Umschalter gerade / Satteldach
+function setRoof(on){
+  const cb=document.getElementById('fGable'); if(!cb) return;
+  const was=cb.checked; cb.checked=!!on;
+  if(on && !was){ const b=parseFloat(document.getElementById('fB')?.value)||5, xf=document.getElementById('fXF');
+    if(xf) xf.value=+(b/2).toFixed(3); const ff=document.getElementById('fF'); if(ff && !(parseFloat(ff.value)>0)) ff.value=1; }
+  gableUI(); refreshFrameInputs(); drawFrame();
+  if(typeof k4Save==='function') k4Save();
+}
+function gableUI(){
+  const on=!!document.getElementById('fGable')?.checked;
+  const r=document.getElementById('gable-row'); if(r) r.style.display = on ? '' : 'none';
+  ['flat','gable'].forEach(k=>{ const e=document.getElementById('btn-roof-'+k); if(e) e.className='toggle-btn'+((k==='gable')===on?' active':''); });
+}
+// Breite geändert: ein mittiger First bleibt mittig
+let _gableB = null;
+function gableSyncB(){
+  const b=parseFloat(document.getElementById('fB')?.value), xf=document.getElementById('fXF');
+  if(xf && _gableB && Math.abs((parseFloat(xf.value)||0)-_gableB/2)<1e-6 && b>0) xf.value=+(b/2).toFixed(3);
+  if(b>0) _gableB=b;
+}
+
 function supportDOF(s){ return s==='fixed'?3:s==='pin'?2:1; }
 
 // Grad der statischen Unbestimmtheit n = r − 3 − g
@@ -3168,7 +2720,9 @@ function applyFramePreset(name){
   const sup = name==='fixed' ? 'fixed' : 'pin';
   setSupportA(sup); setSupportB(sup);
   setHeadSupport('pos','none');
-  frameHinges = name==='three' ? [{id:++uid, member:'rafter', pos:+(b/2).toFixed(2)}] : [];
+  // Dreigelenkrahmen: Gelenk in Riegelmitte, beim Satteldach im First
+  const h_ = parseFloat(document.getElementById('fH').value)||4, gab = frameGable(b, parseFloat(document.getElementById('fHA')?.value)||h_, parseFloat(document.getElementById('fHB')?.value)||h_);
+  frameHinges = name==='three' ? [{id:++uid, member:'rafter', pos:+(gab ? gab.xF.toFixed(3) : (b/2).toFixed(2))}] : [];
   renderFrameHinges(); updateIndetInfo(); drawFrame();
 }
 // Hebt die Vorlage hervor, die zum aktuellen System passt (auch bei Eingabe von Hand)
@@ -3409,7 +2963,8 @@ function drawFrame(){
   const h=parseFloat(document.getElementById('fH').value)||4;
   const hA=parseFloat(document.getElementById('fHA')?.value)||h;
   const hB=parseFloat(document.getElementById('fHB')?.value)||h;
-  const hMax=Math.max(hA,hB,h);
+  const gab=frameGable(b,hA,hB); gableUI(); _gableB=b;   // Bezugsbreite für gableSyncB
+  const hMax=Math.max(hA,hB,h, gab ? gab.yF : 0);
 
   const SVG_W=320, PAD=40;
   const SVG_H_frame=220;
@@ -3417,15 +2972,24 @@ function drawFrame(){
   const col_bot=185;
   const col_topA=col_bot-Math.round(hA*scale_h);
   const col_topB=col_bot-Math.round(hB*scale_h);
-  const col_top=Math.min(col_topA,col_topB); // rafter at highest point
   const col_L=PAD+20, col_R=SVG_W-PAD-20;
   const rafW=col_R-col_L;
+  const fPx = gab ? [col_L+gab.tF*rafW, col_bot-gab.yF*scale_h] : null;     // First in SVG-Koordinaten
   let html='';
 
 
   // Hilfsfunktionen: Position auf den Stäben in SVG-Koordinaten
   const yCol = z => col_bot - z*scale_h;                                   // Höhe über Fuß
-  const rafPt = x => { const t=Math.min(Math.max(x/b,0),1); return [col_L+t*rafW, col_topA+(col_topB-col_topA)*t]; };
+  const rafPt = x => { const t=Math.min(Math.max(x/b,0),1);
+    if(!fPx) return [col_L+t*rafW, col_topA+(col_topB-col_topA)*t];
+    return t<=gab.tF ? [col_L+t*rafW, col_topA+(fPx[1]-col_topA)*t/gab.tF] : [col_L+t*rafW, fPx[1]+(col_topB-fPx[1])*(t-gab.tF)/(1-gab.tF)]; };
+  // Richtung des Riegels an der Stelle x (Einheitsvektor in SVG-Koordinaten); am First die Winkelhalbierende
+  const rafDir = x => { const u=(p,q)=>{ const l=Math.hypot(q[0]-p[0],q[1]-p[1]); return [(q[0]-p[0])/l,(q[1]-p[1])/l]; };
+    const A=[col_L,col_topA], B=[col_R,col_topB]; if(!fPx) return u(A,B);
+    const d1=u(A,fPx), d2=u(fPx,B), t=x/b;
+    if(Math.abs(t-gab.tF)<1e-6) return u([0,0],[d1[0]+d2[0], d1[1]+d2[1]]);
+    return t<gab.tF ? d1 : d2; };
+  const rafPoly = () => (fPx ? [[col_L,col_topA], fPx, [col_R,col_topB]] : [[col_L,col_topA],[col_R,col_topB]]);
   const labels = [];                  // Lastbeschriftungen → placeLabels (ohne Überlappung)
   const blocked = [];                 // Pfeilflächen, die Beschriftungen meiden
 
@@ -3457,13 +3021,14 @@ function drawFrame(){
     if(mem==='rafter'){
       // Richtung: 'v' senkrecht (je m Grundriss), 'n' rechtwinklig zum Riegel (Wind auf die Dachfläche),
       // 'h' waagerecht (je m Höhe, q > 0 → rechts). o = Versatz nach außen (oben), d = Kraftrichtung für q > 0
-      const rd = v.rdir||'v', rl = Math.hypot(rafW, col_topB-col_topA), rx = rafW/rl, ry = (col_topB-col_topA)/rl;
-      const o = rd==='v' ? [0,-1] : [ry, -rx];
-      const d = rd==='v' ? [0,1] : rd==='n' ? [-ry, rx] : [1,0];
-      if(rd==='h' && Math.abs(ry)<1e-6) return;            // waagerechter Riegel: keine Projektion
+      const rd = v.rdir||'v';
+      const oAt = x => { const [rx,ry]=rafDir(x); return rd==='v' ? [0,-1] : [ry, -rx]; };
+      const dAt = x => { const [rx,ry]=rafDir(x); return rd==='v' ? [0,1] : rd==='n' ? [-ry, rx] : [1,0]; };
+      if(rd==='h' && Math.abs(rafDir((pa+pb)/2)[1])<1e-6) return;            // waagerechter Riegel: keine Projektion
       const tails=[], anch=[];
+      let o=oAt((pa+pb)/2);
       for(let i=0;i<=n;i++){
-        const x=pa+(pb-pa)*i/n, q=qa+(qb-qa)*i/n, [px,py]=rafPt(x);
+        const x=pa+(pb-pa)*i/n, q=qa+(qb-qa)*i/n, [px,py]=rafPt(x), o=oAt(x), d=dAt(x);
         const off = base + (rd==='h' ? 4 : 1), len = qScale(q);
         const A=[px+o[0]*off, py+o[1]*off], T=[A[0]-d[0]*len, A[1]-d[1]*len];
         // q > 0: Pfeil zeigt auf den Riegel (Spitze an A); q < 0: vom Riegel weg
@@ -3477,6 +3042,7 @@ function drawFrame(){
         blocked.push({x0:Math.min(...P.map(p=>p[0])), x1:Math.max(...P.map(p=>p[0])), y0:Math.min(...P.map(p=>p[1])), y1:Math.max(...P.map(p=>p[1]))}); }
       // Beschriftung: mittig außen über den Pfeilenden, sonst rechts bzw. links neben dem Block
       const tm = tails[Math.floor(n/2)], tR = tails.reduce((m,p)=>p[0]>m[0]?p:m), tL = tails.reduce((m,p)=>p[0]<m[0]?p:m);
+      o = oAt(pa+(pb-pa)*Math.floor(n/2)/n);
       labels.push({x:tm[0]+o[0]*6, y:tm[1]+o[1]*6-2, text:lbl, color:CLR.q, size:8, prio:1, bg:false,
         cands:[{x:tm[0]+o[0]*6, y:tm[1]+o[1]*6-2, anchor:'middle'}, {x:tR[0]+4, y:tR[1]+3, anchor:'start'}, {x:tL[0]-4, y:tL[1]+3, anchor:'end'},
           ...[0.25,0.75,0.1,0.9].map(f=>{ const t=tails[Math.round(f*n)]; return {x:t[0]+o[0]*6, y:t[1]+o[1]*6-2, anchor:'middle'}; })]});
@@ -3538,26 +3104,28 @@ function drawFrame(){
       }
     } else {
       // Einzellast auf dem Riegel: F ⊥ (nach unten), H ∥ (in Riegelrichtung)
-      const [px,py]=rafPt(v.z||0);
+      // F ⊥ Riegel (auf den Riegel zu), H ∥ Riegel — Richtung wie in der Rechnung (bei geneigtem Riegel bzw. Satteldach schräg)
+      const [px,py]=rafPt(v.z||0), [rx,ry]=rafDir(v.z||0), o=[ry,-rx];
+      const L2=(a,b2)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b2[0].toFixed(1)}" y2="${b2[1].toFixed(1)}" stroke="${CLR.F}" stroke-width="1.8" stroke-dasharray="4,2" marker-end="url(#farr-red)"/>`;
       if(F!==0){
         // Pfeil reicht über gestapelte Streckenlasten hinaus
         const aLen=Math.max(fScale(F), stackAt('rafter', (v.z||0)-1e-6, (v.z||0)+1e-6)+10);
-        const dir = F>0 ? 1 : -1;
-        if(dir>0) html+=`<line x1="${px.toFixed(1)}" y1="${(py-aLen-2).toFixed(1)}" x2="${px.toFixed(1)}" y2="${(py-2).toFixed(1)}" stroke="${CLR.F}" stroke-width="1.8" stroke-dasharray="4,2" marker-end="url(#farr-red)"/>`;
-        else      html+=`<line x1="${px.toFixed(1)}" y1="${(py-2).toFixed(1)}" x2="${px.toFixed(1)}" y2="${(py-aLen-2).toFixed(1)}" stroke="${CLR.F}" stroke-width="1.8" stroke-dasharray="4,2" marker-end="url(#farr-red)"/>`;
-        labels.push({x:px, y:py-aLen-6, text:`F${i+1}=${Math.abs(F)}kN`, color:CLR.F, anchor:'middle', size:8, prio:0});
+        const far=[px+o[0]*(aLen+2), py+o[1]*(aLen+2)], near=[px+o[0]*2, py+o[1]*2];
+        html += F>0 ? L2(far, near) : L2(near, far);
+        labels.push({x:px+o[0]*(aLen+6), y:py+o[1]*(aLen+6), text:`F${i+1}=${Math.abs(F)}kN`, color:CLR.F, anchor:'middle', size:8, prio:0});
       }
       if(H!==0){
-        const aLen=fScale(H), dir=H>0?1:-1;
-        html+=`<line x1="${(px-dir*(aLen+2)).toFixed(1)}" y1="${(py+7).toFixed(1)}" x2="${(px-dir*2).toFixed(1)}" y2="${(py+7).toFixed(1)}" stroke="${CLR.F}" stroke-width="1.8" stroke-dasharray="4,2" marker-end="url(#farr-red)"/>`;
-        labels.push({x:px-dir*(aLen/2+2), y:py+18, text:`H${i+1}=${Math.abs(H)}kN`, color:CLR.F, anchor:'middle', size:8, prio:0});
+        const aLen=fScale(H), dir=H>0?1:-1, q0=[px-o[0]*7, py-o[1]*7];
+        html += L2([q0[0]-dir*rx*(aLen+2), q0[1]-dir*ry*(aLen+2)], [q0[0]-dir*rx*2, q0[1]-dir*ry*2]);
+        labels.push({x:q0[0]-dir*rx*(aLen/2+2)-o[0]*11, y:q0[1]-dir*ry*(aLen/2+2)-o[1]*11+3, text:`H${i+1}=${Math.abs(H)}kN`, color:CLR.F, anchor:'middle', size:8, prio:0});
       }
     }
   });
 
   // Frame members — use individual column heights
   html+=`<line x1="${col_L}" y1="${col_bot}" x2="${col_L}" y2="${col_topA}" stroke="#1a1a18" stroke-width="4" stroke-linecap="round"/>`;
-  html+=`<line x1="${col_L}" y1="${col_topA}" x2="${col_R}" y2="${col_topB}" stroke="#1a1a18" stroke-width="4" stroke-linecap="round"/>`;
+  if(fPx) html+=`<polyline class="k-raf" points="${rafPoly().map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="#1a1a18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  else html+=`<line x1="${col_L}" y1="${col_topA}" x2="${col_R}" y2="${col_topB}" stroke="#1a1a18" stroke-width="4" stroke-linecap="round"/>`;
   html+=`<line x1="${col_R}" y1="${col_bot}" x2="${col_R}" y2="${col_topB}" stroke="#1a1a18" stroke-width="4" stroke-linecap="round"/>`;
 
   // Draw hinges (auf dem jeweiligen Stab, auch bei geneigtem Riegel)
@@ -3595,6 +3163,7 @@ function drawFrame(){
   if(supportHead!=='none'){
     const hx = supportHead==='left' ? col_L : col_R;
     const hdir = supportHead==='left' ? -1 : 1;
+    const col_top = supportHead==='left' ? col_topA : col_topB;   // an der jeweiligen Ecke
     if(supportHeadType==='roller'){
       // Roller: circle + guide line
       html+=`<circle cx="${(hx+hdir*12).toFixed(1)}" cy="${col_top}" r="5" fill="none" stroke="#1a1a18" stroke-width="1.5"/>`;
@@ -3616,10 +3185,14 @@ function drawFrame(){
   labels.push({x:col_R+8, y:(col_bot+col_topB)/2+4, text:`hB=${hB}m`, color:'#a8a7a2', anchor:'start', size:8, prio:1.5, bg:false,
     cands:[{x:col_R+8, y:(col_bot+col_topB)/2+4, anchor:'start'},{x:col_R+8, y:col_bot-6, anchor:'start'},{x:col_R-8, y:col_bot-6, anchor:'end'}]});
 
+  if(fPx) labels.push({x:fPx[0], y:fPx[1]-8, text:`f=${gab.f}m`, color:'#a8a7a2', anchor:'middle', size:8, prio:1.5, bg:false,
+    cands:[{x:fPx[0], y:fPx[1]-8, anchor:'middle'}, {x:fPx[0]+10, y:fPx[1]+28, anchor:'start'}, {x:fPx[0]-10, y:fPx[1]+28, anchor:'end'}]});
   // Gestrichelte Faser innen und Knotennummern (v0.11.0): Vorzeichen der Momente wie in den Verläufen (Zug innen positiv)
   { const g=5;
     html+=`<g class="k-faser" stroke="#9a9ba3" stroke-width="1" stroke-dasharray="3 2.5" fill="none"><line x1="${col_L+g}" y1="${col_bot}" x2="${col_L+g}" y2="${(col_topA+g).toFixed(1)}"/>`
-      +`<line x1="${col_L+g}" y1="${(col_topA+g).toFixed(1)}" x2="${col_R-g}" y2="${(col_topB+g).toFixed(1)}"/><line x1="${col_R-g}" y1="${(col_topB+g).toFixed(1)}" x2="${col_R-g}" y2="${col_bot}"/></g>`;
+      +(fPx ? `<polyline points="${col_L+g},${(col_topA+g).toFixed(1)} ${fPx[0].toFixed(1)},${(fPx[1]+g*1.3).toFixed(1)} ${col_R-g},${(col_topB+g).toFixed(1)}"/>`
+            : `<line x1="${col_L+g}" y1="${(col_topA+g).toFixed(1)}" x2="${col_R-g}" y2="${(col_topB+g).toFixed(1)}"/>`)
+      +`<line x1="${col_R-g}" y1="${(col_topB+g).toFixed(1)}" x2="${col_R-g}" y2="${col_bot}"/></g>`;
     try{ kStations('frame').forEach(st=>{ let x, y;
       if(st.kind==='sup'){ x = st.lab==='A' ? col_L+16 : col_R-16; y = col_bot-12; }
       else if(st.kind==='ecke'){ x = st.lab==='L' ? col_L+16 : col_R-16; y = (st.lab==='L' ? col_topA : col_topB)+17; }
@@ -3688,7 +3261,9 @@ function kStations(sys){
     const hs=m=>frameHinges.filter(g=>g.member===m).map(g=>tOf(m,g.pos)).sort((x,y)=>x-y);
     const st=[{t:{left:0}, kind:'sup', lab:'A', sup:supportA}];
     const inner=m=>hs(m).forEach(t=>{ if(t>1e-6 && t<1-1e-6 && !st.some(s=>s.t[m]!=null && Math.abs(s.t[m]-t)<1e-6)) st.push({t:{[m]:t}, kind:'gelenk', gelenk:true}); });
-    inner('left'); st.push({t:{left:1, rafter:0}, kind:'ecke', lab:'L'}); inner('rafter');
+    inner('left'); st.push({t:{left:1, rafter:0}, kind:'ecke', lab:'L'});
+    const gab=frameGable(b, hA, hB); if(gab) st.push({t:{rafter:gab.tF}, kind:'first', lab:'F'});   // Satteldach: First als eigener Knoten
+    inner('rafter'); if(gab){ const i0=st.findIndex(s=>s.kind==='ecke')+1; st.push(...st.splice(i0).sort((p,q)=>p.t.rafter-q.t.rafter)); }
     st.push({t:{rafter:1, right:0}, kind:'ecke', lab:'R'}); inner('right'); st.push({t:{right:1}, kind:'sup', lab:'B', sup:supportB});
     ['left','rafter','right'].forEach(m=>hs(m).forEach(t=>{ const s=st.find(s=>s.t[m]!=null && Math.abs(s.t[m]-t)<1e-6); if(s) s.gelenk=true; }));
     return st.map((s,i)=>({...s, nr:i+1}));
@@ -3718,7 +3293,10 @@ function kKnoten(sys, elems){
   for(let n=0;n<st.length-1;n++){
     const a=st[n], b=st[n+1], mem=Object.keys(a.t).find(m=>b.t[m]!=null); if(!mem) continue;
     const ik=kEnd(elems, mem, a.t[mem], 'a'), ki=kEnd(elems, mem, b.t[mem], 'b'); if(!ik || !ki) continue;
-    bars.push({i:a.nr, k:b.nr, mem, ik, ki});
+    const bar={i:a.nr, k:b.nr, mem, ik, ki};
+    // Satteldach: Riegelstäbe links bzw. rechts vom First
+    const fs=st.find(s=>s.kind==='first'); if(fs && mem==='rafter') bar.side = (a.t.rafter+b.t.rafter)/2 < fs.t.rafter ? 'l' : 'r';
+    bars.push(bar);
   }
   return { nodes:st.map(s=>({nr:s.nr, kind:s.kind, lab:s.lab||null, sup:s.sup||null, gelenk:!!s.gelenk})), bars };
 }
@@ -3772,7 +3350,7 @@ function buildSDF(){
     module: 'calc',
     system: {
       type: 'frame',
-      geometry: {b, h, hA, hB},
+      geometry: lc ? {...lc.geometry} : {b, h, hA, hB, ...(()=>{ const g=frameGable(b,hA,hB); return g ? {gable:{f:g.f, xF:g.xF}} : {}; })()},
       supports: lc ? lc.supports : {A: supportA, B: supportB, head: supportHead, headType: supportHeadType},
       stiffness: lc ? lc.stiffness : {
         E_raf: parseFloat(document.getElementById('frame-E-raf')?.value)||210, Iy_raf: parseFloat(document.getElementById('frame-Iy-raf')?.value)||10,
@@ -3852,7 +3430,7 @@ function saveFrameCalc(opt){
   }
   // Generate name from system description
   const sp = sdf.system.supports, g = sdf.system.geometry;
-  const name = `${(calcTranslations[calcLang]||calcTranslations.en).tabs[3]} ${supW(sp.A)}/${supW(sp.B)} b=${g.b}m h=${g.hA}/${g.hB}m`;
+  const name = `${(calcTranslations[calcLang]||calcTranslations.en).tabs[3]} ${supW(sp.A)}/${supW(sp.B)} b=${g.b}m h=${g.hA}/${g.hB}m${g.gable?' f='+g.gable.f+'m':''}`;
   const key = (opt&&opt.key) || 'statiq_sdf_' + Date.now();
   try {
     localStorage.setItem(key, JSON.stringify({name, sdf})); if(opt&&opt.quiet) return key;
@@ -3939,7 +3517,7 @@ function renderSavedTab(){
       <div style="display:flex;gap:8px">
         <button onclick="openReport('${k}')" style="flex:2;padding:9px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-size:12px;font-weight:600;font-family:Figtree,sans-serif">${tr('report')}</button>
         ${sdf.system?.type==='frame' ? `<button onclick="loadSDF('${k}')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600">${tr('load')}</button>` : ''}
-        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in kragr·size übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:Figtree,sans-serif">${tr('toSize')}</a>` : ''}
+        ${sdf.module==='calc' ? `<a href="size.html#calc=${encodeURIComponent(k)}" title="Schnittgrößen in „Bemessung“ übernehmen" style="flex:1.4;padding:9px;border-radius:8px;border:1.5px solid var(--accent);background:none;color:var(--accent);cursor:pointer;font-size:12px;font-weight:600;text-align:center;text-decoration:none;font-family:Figtree,sans-serif">${tr('toSize')}</a>` : ''}
         <button onclick="exportSDF('${k}')" style="padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);cursor:pointer;font-size:12px">↓</button>
       </div>
     </div>
@@ -3985,7 +3563,8 @@ function uniquifySvgIds(svg, prefix){
 
 function reportGeometry(S){
   const g=S.geometry||{};
-  if(S.type==='frame') return `b = ${num(g.b)} m, h<sub>A</sub> = ${num(g.hA??g.h)} m` + ((g.hB??g.h)!==(g.hA??g.h) ? `, h<sub>B</sub> = ${num(g.hB)} m` : '');
+  if(S.type==='frame') return `b = ${num(g.b)} m, h<sub>A</sub> = ${num(g.hA??g.h)} m` + ((g.hB??g.h)!==(g.hA??g.h) ? `, h<sub>B</sub> = ${num(g.hB)} m` : '')
+    + (g.gable ? `, ${tr('roofGable')}: f = ${num(g.gable.f)} m, x<sub>F</sub> = ${num(g.gable.xF)} m` : '');
   if(S.type==='cont')  return Array.isArray(g.spans) ? [g.ovL?`${tr('repCantL')} = ${num(g.ovL)} m`:'', ...g.spans.map((L,i)=>`L<sub>${i+1}</sub> = ${num(L)} m`), g.ovR?`${tr('repCantR')} = ${num(g.ovR)} m`:''].filter(Boolean).join(', ') : '—';
   return g.L!=null ? `L = ${num(g.L)} m` : '—';
 }
@@ -4077,10 +3656,10 @@ function renderReport(name, sdf){
   document.getElementById('report-content').innerHTML=`
     <div class="rep rb">
       <div class="rb-sf">
-        <div class="rb-logo">${ICO}${REP_BRAND}·calc</div>
+        <div class="rb-logo">${ICO}${REP_BRAND} · ${kmod('calc')}</div>
         <div>${tr('repPosLbl')}<b>${escapeHtml(name)}</b></div>
         <div>${tr('repDateLbl')}<b>${date}</b></div>
-        <div>${tr('repVerLbl')}<b>calc v${escapeHtml(sdf.statiq_version||'—')}</b></div>
+        <div>${tr('repVerLbl')}<b>${kmod('calc')} v${escapeHtml(sdf.statiq_version||'—')}</b></div>
       </div>
       <div class="rb-title">${escapeHtml(sysLabel)}</div>
       <div class="rb-subt">${tr('repSub').split(' · ').pop()} · ${reportGeometry(S)}</div>
@@ -4121,7 +3700,7 @@ function renderReport(name, sdf){
       </div>
 
       ${(typeof statiqDisclaimer==='function' ? '<div class="rb-note" style="margin-top:20px">'+statiqDisclaimer()+'</div>' : '')}
-      <div class="rb-foot"><span>${REP_BRAND}·calc · valentinmaras.github.io/statiq</span><span>${date} · calc v${escapeHtml(sdf.statiq_version||'—')}</span></div>
+      <div class="rb-foot"><span>${REP_BRAND} · ${kmod('calc')} · valentinmaras.github.io/statiq</span><span>${date} · ${kmod('calc')} v${escapeHtml(sdf.statiq_version||'—')}</span></div>
     </div>
   `;
   setTimeout(()=>{ renderReportDiagrams(sdf); repMono(); }, 0);
@@ -4156,7 +3735,7 @@ function renderReportDiagrams(sdf){
     const target = {svg, mode, idp:'rep-'+k};
     if(p.kind==='frame'){
       renderFrameDiagram(p.b, p.h, p.allM, p.allQ, p.allN, p.NP, p.supA, p.supB, p.rafHingeIdx, p.hA, p.hB,
-        {left:p.fine.left, rafter:p.fine.rafter, right:p.fine.right}, {target, hinges:p.hinges||[]});
+        {left:p.fine.left, rafter:p.fine.rafter, right:p.fine.right}, {target, hinges:p.hinges||[], gable:p.gable||null});
     } else if(p.kind==='beam'){
       renderBeamDiagram(p.L, p.Q, p.M, p.ts.map(t=>t*p.L), p.N, {ts:p.ts, w:p.w, target});
     } else if(p.kind==='cant'){
@@ -4273,6 +3852,7 @@ function loadSDF(key){
     document.getElementById('fH').value=g.h;
     if(document.getElementById('fHA')) document.getElementById('fHA').value=g.hA||g.h;
     if(document.getElementById('fHB')) document.getElementById('fHB').value=g.hB||g.h;
+    { const cb=document.getElementById('fGable'); if(cb){ cb.checked=!!g.gable; if(g.gable){ document.getElementById('fF').value=g.gable.f; document.getElementById('fXF').value=g.gable.xF; } _gableB=g.b; gableUI(); } }
     // Restore supports
     if(sdf.system.supports.A) setSupportA(sdf.system.supports.A);
     if(sdf.system.supports.B) setSupportB(sdf.system.supports.B);
@@ -4370,13 +3950,14 @@ const FRAME_EA_FACTOR = 1e6;   // EA = 1e6 · EI  → dehnstarr
 // ── 1. MODELL ──────────────────────────────────────────────────────
 function frameBuildModel(b, hA, hB, cfg){
   const {supA, supB, head, headType, hinges, vLoads, hLoads, EI_S, EI_R} = cfg;
+  const gable = cfg.gable || null;             // Satteldach (v0.11.3): {xF, yF, tF}
   const clamp01 = t => Math.min(Math.max(t,0),1);
   const tol = 1e-7;
 
-  // Geometrie der drei Stäbe (Parameter t ∈ [0,1])
+  // Geometrie der drei Stäbe (Parameter t ∈ [0,1]); Satteldach: Riegel als Polygonzug über den First PF
   const members = {
     left:   {P0:[0,0],  P1:[0,hA], EI:EI_S, len:hA},
-    rafter: {P0:[0,hA], P1:[b,hB], EI:EI_R, len:Math.hypot(b,hB-hA)},
+    rafter: {P0:[0,hA], P1:[b,hB], EI:EI_R, len:frameRafLen(b,hA,hB,gable), PF: gable ? [gable.xF, gable.yF] : null},
     right:  {P0:[b,hB], P1:[b,0],  EI:EI_S, len:hB}
   };
   // Umrechnung Benutzer-Position → Parameter t
@@ -4388,11 +3969,18 @@ function frameBuildModel(b, hA, hB, cfg){
                           : clamp01(pos/b);
   const ptOf = (mem, t) => {
     const m = members[mem];
+    if(mem==='rafter' && gable) return [b*t, frameRafY(b*t, b, hA, hB, gable)];
     return [m.P0[0]+(m.P1[0]-m.P0[0])*t, m.P0[1]+(m.P1[1]-m.P0[1])*t];
   };
+  // Richtung des Riegels am Parameter t (am First: Winkelhalbierende)
+  const rafCS = t => { const m=members.rafter, u=(P,Q)=>{ const l=Math.hypot(Q[0]-P[0],Q[1]-P[1]); return [(Q[0]-P[0])/l,(Q[1]-P[1])/l]; };
+    if(!gable) return u(m.P0, m.P1);
+    const d1=u(m.P0, m.PF), d2=u(m.PF, m.P1);
+    if(Math.abs(t-gable.tF)<1e-9) return u([0,0],[d1[0]+d2[0], d1[1]+d2[1]]);
+    return t<gable.tF ? d1 : d2; };
 
   // Teilungspunkte je Stab: Enden, Gelenke, Einzellasten, Lastgrenzen
-  const cuts = {left:[0,1], rafter:[0,1], right:[0,1]};
+  const cuts = {left:[0,1], rafter: gable ? [0, gable.tF, 1] : [0,1], right:[0,1]};
   const hingeT = {left:[], rafter:[], right:[]};
   hinges.forEach(hg=>{
     const mem = hg.member, t = tOf(mem, parseFloat(hg.pos)||0);
@@ -4485,7 +4073,7 @@ function frameBuildModel(b, hA, hB, cfg){
     if(mem==='left'){  F[n.ux] += -Fp; F[n.uy] += -Hp; }
     else if(mem==='right'){ F[n.ux] += Fp; F[n.uy] += -Hp; }
     else {
-      const m = members.rafter, c=(m.P1[0]-m.P0[0])/m.len, s=(m.P1[1]-m.P0[1])/m.len;
+      const [c, s] = rafCS(tOf('rafter', v.z||0));
       // ⊥ nach unten = −(lokale y-Richtung) = (s, −c);  ∥ = (c, s)
       F[n.ux] += Fp*s + Hp*c;
       F[n.uy] += -Fp*c + Hp*s;
@@ -4505,7 +4093,8 @@ function frameBuildModel(b, hA, hB, cfg){
     fixed.add(nh.ux); if(headType==='pin') fixed.add(nh.uy);
   }
 
-  return {nodes, elems, F, fixed, ndof, nA, nB, n2, n3, head, members};
+  const nF = gable ? nodeAt(ptOf('rafter', gable.tF)) : null;
+  return {nodes, elems, F, fixed, ndof, nA, nB, n2, n3, nF, head, members, gable};
 }
 
 // Lokale Elementsteifigkeit (Euler-Bernoulli, 6×6) und Transformation
@@ -4846,9 +4435,10 @@ function calculateFrame(){
     const v=l.values, mem=v.member||'left';
     hLoads.push({...l, values:{...v, z:checkPos(warns, `P${i+1}`, v.z, Lof(mem))}});
   });
+  const gable = frameGable(b, hA, hB);
   const model = frameBuildModel(b, hA, hB, {
     supA: supportA, supB: supportB, head: supportHead, headType: supportHeadType,
-    hinges, vLoads, hLoads, EI_S, EI_R
+    hinges, vLoads, hLoads, EI_S, EI_R, gable
   });
   const sol = frameSolveDSM(model);
   if(sol.mechanism){ calcError('frame','mechanism'); return; }
@@ -4894,7 +4484,7 @@ function calculateFrame(){
   const colU = [...fine.left.ux, ...fine.right.ux].map(v=>v*1000), rafW = fine.rafter.uy.map(v=>v*1000);
   drawFrame();
   lastCalc.frame = {
-    svgSnapshot:systemSnapshot('frame-svg','0 0 340 240'), geometry:{b, h, hA, hB},
+    svgSnapshot:systemSnapshot('frame-svg','0 0 340 240'), geometry:{b, h, hA, hB, ...(gable?{gable:{f:gable.f, xF:gable.xF}}:{})},
     supports:{A:supportA, B:supportB, head:supportHead, headType:supportHeadType},
     hinges:frameHinges.map(hg=>({member:hg.member, pos:hg.pos})),
     loads:{vertical:frameLoads.vert.map((l,i)=>({i:i+1, enabled:l.enabled, ...l.values})).filter(l=>l.enabled),
@@ -4903,9 +4493,10 @@ function calculateFrame(){
                E_col:parseFloat(document.getElementById('frame-E-col')?.value)||210, Iy_col:parseFloat(document.getElementById('frame-Iy-col')?.value)||10},
     maxima:{u:signedMaxOf(colU), w:signedMaxOf(rafW)},
     plot:{kind:'frame', b, h, hA, hB, NP, allM, allQ, allN, supA:supportA, supB:supportB, rafHingeIdx, fine:fineR,
+          ...(gable?{gable:{f:gable.f, xF:gable.xF}, Lraf:+frameRafLen(b,hA,hB,gable).toFixed(4)}:{}),
           hinges:frameHinges.map(hg=>({member:hg.member, pos:hg.pos}))}
   };
-  renderFrameDiagram(b,h,allM,allQ,allN,NP,supportA,supportB,rafHingeIdx,hA,hB,fine);
+  renderFrameDiagram(b,h,allM,allQ,allN,NP,supportA,supportB,rafHingeIdx,hA,hB,fine, gable?{gable}:{});
   try{ lastCalc.frame.knoten=kKnoten('frame', model.elems); }catch(e){}
   if(typeof kKnotenCard==='function') kKnotenCard('frame');
 }
@@ -4981,6 +4572,19 @@ function placeLabels(list, W, H, blocked=[], Y0=0){
 // ── Generic diagram renderer with mm-paper + jumps ──
 // data.target (optional): {svg, mode, idp} — in ein anderes SVG zeichnen (Bericht).
 // idp = Präfix für SVG-ids (Muster), damit sich App und Bericht nicht stören.
+// Stabgeometrie für die Verläufe: gerade (x0,y0 → x1,y1) oder mit Knick (mem.kink = {t, x, y}, Satteldach-Riegel)
+function memGeo(mem){
+  const P = mem.kink ? [[mem.x0,mem.y0],[mem.kink.x,mem.kink.y],[mem.x1,mem.y1]] : [[mem.x0,mem.y0],[mem.x1,mem.y1]];
+  const T = mem.kink ? [0, mem.kink.t, 1] : [0, 1];
+  const segs = P.slice(0,-1).map((p,k)=>{ const dx=P[k+1][0]-p[0], dy=P[k+1][1]-p[1], len=Math.hypot(dx,dy)||1;
+    return {tx:dx/len, ty:dy/len, nx:-dy/len, ny:dx/len, len}; });
+  const segOf = t => (mem.kink && t > T[1]+1e-9) ? 1 : 0;
+  const at = (t, k=segOf(t)) => { const f=(t-T[k])/((T[k+1]-T[k])||1); return [P[k][0]+f*(P[k+1][0]-P[k][0]), P[k][1]+f*(P[k+1][1]-P[k][1])]; };
+  const line = (stroke, w) => mem.kink
+    ? `<polyline points="${P.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`
+    : `<line x1="${mem.x0.toFixed(1)}" y1="${mem.y0.toFixed(1)}" x2="${mem.x1.toFixed(1)}" y2="${mem.y1.toFixed(1)}" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round"/>`;
+  return {P, T, segs, segOf, at, line, len:segs.reduce((a,g)=>a+g.len,0)};
+}
 function renderDiagram(sys, data){
   const svg = data.target?.svg || document.getElementById('diag-svg-'+sys);
   if(!svg) return;
@@ -5027,7 +4631,7 @@ function renderDiagram(sys, data){
     const budgetL_in   = _col_L - PAD_SIDE;          // left col innen (nach links)
     const budgetL_out  = _SVG_W - _col_L - PAD_SIDE; // left col außen (nach rechts) - not critical
     const budgetRaf_dn = _SVG_H - _col_bot - 5;      // rafter down
-    const budgetRaf_up = Math.min(_col_topA, _col_topB) - PAD_TOP; // rafter up
+    const budgetRaf_up = Math.min(_col_topA, _col_topB, mRaf.kink ? mRaf.kink.y : Infinity) - PAD_TOP; // rafter up (Satteldach: First)
     const budgetR_in   = _SVG_W - _col_R - PAD_SIDE; // right col innen (nach rechts)
     const budgetR_out  = _col_R - PAD_SIDE;           // right col außen (nach links) - not critical
 
@@ -5074,11 +4678,9 @@ function renderDiagram(sys, data){
   const labels = [];
   const isFrame = !!data.cornerLabelsFn;
   members.forEach((mem,mi) => {
-    const dx = mem.x1-mem.x0, dy = mem.y1-mem.y0;
-    const len = Math.sqrt(dx*dx+dy*dy);
-    if(len < 0.001) return;
-    const tx=dx/len, ty=dy/len;
-    const nx=-ty, ny=tx; // normal CCW
+    const G = memGeo(mem);
+    if(G.len < 0.001) return;
+    const {nx, ny} = G.segs[0]; // normal CCW (beim Knick: erster Abschnitt, nur für die Seite der Beschriftung)
 
     const vals = mem[mode];
     if(!vals) return;
@@ -5089,9 +4691,13 @@ function renderDiagram(sys, data){
     const tAt = i => ts ? ts[i] : i/n;
     const useFlip = mode==='Q' && mem.qFlip ? true : (mem.flip!==false);
     const off = v => (useFlip ? -v : v)*SCALE;
+    // Abschnitt je Stützstelle: am Knick gehört die erste von zwei gleichen Stellen zum Abschnitt davor
+    const segAt = i => { if(!mem.kink) return 0; const t=tAt(i), tk=mem.kink.t;
+      if(Math.abs(t-tk)>1e-9) return G.segOf(t);
+      return (i>0 && Math.abs(tAt(i-1)-tk)<1e-9) ? 1 : 0; };
     const ptAt = (i, v) => {
-      const t=tAt(i), bx=mem.x0+t*dx, by=mem.y0+t*dy, o=off(v);
-      return [bx+o*nx, by+o*ny, bx, by];
+      const k=segAt(i), [bx,by]=G.at(tAt(i), k), sg=G.segs[k], o=off(v);
+      return [bx+o*sg.nx, by+o*sg.ny, bx, by];
     };
 
     // Sprünge: bei nicht gleichmäßigen Stützstellen exakt (doppelte Stelle),
@@ -5146,7 +4752,7 @@ function renderDiagram(sys, data){
     });
 
     // Zero line (member)
-    h+=`<line x1="${mem.x0.toFixed(1)}" y1="${mem.y0.toFixed(1)}" x2="${mem.x1.toFixed(1)}" y2="${mem.y1.toFixed(1)}" stroke="#1a1a18" stroke-width="${mem.thick||3}" stroke-linecap="round"/>`;
+    h+=G.line('#1a1a18', mem.thick||3);
 
     // Balken: Momente mit Vorzeichen der Baustatik (unten gezogen = positiv, Momentenfläche unter dem Träger),
     // Querkräfte wie bisher als Betrag
@@ -5256,12 +4862,12 @@ function renderFrameDeflection(data, svg, W, H, color, fill, idp='frame'){
   const labels = [];
   const allPts = [];
   mems.forEach((mem,mi)=>{
-    const dx=mem.x1-mem.x0, dy=mem.y1-mem.y0;
-    const base = mem.ts.map(t=>[mem.x0+t*dx, mem.y0+t*dy]);
+    const G = memGeo(mem);
+    const base = mem.ts.map(t=>G.at(t));
     const def  = base.map(([x,y],i)=>[x + mem.ux[i]*S, y - mem.uy[i]*S]);   // SVG-y nach unten
     const poly = [...def, ...base.slice().reverse()];
     h+=`<polygon points="${poly.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="${fill}" stroke="none"/>`;
-    h+=`<line x1="${mem.x0.toFixed(1)}" y1="${mem.y0.toFixed(1)}" x2="${mem.x1.toFixed(1)}" y2="${mem.y1.toFixed(1)}" stroke="#1a1a18" stroke-width="${mem.thick||3}" stroke-linecap="round"/>`;
+    h+=G.line('#1a1a18', mem.thick||3);
     allPts.push(...def);
     // größter Wert: Stützen horizontal, Riegel vertikal
     const comp = mem.isColumn ? mem.ux : mem.uy;
@@ -5458,11 +5064,15 @@ function renderContDiagram(Ls, Qv_all, Mv_all, ex={}){
 function renderFrameDiagram(b, h, allM, allQ, allN, NP, supA, supB, rafHingeIdx=null, hA=h, hB=h, fine=null, opts={}){
   const SVG_W=340, SVG_H=240, PAD=55;
   const col_bot=195;
-  const hMax=Math.max(hA,hB,h);
+  const gab = opts.gable ? frameGableOf(b, hA, hB, true, opts.gable.f, opts.gable.xF) : null;   // Satteldach
+  const hMax=Math.max(hA,hB,h, gab ? gab.yF : 0);
   const scale_h=130/hMax;
   const col_topA=Math.round(col_bot-hA*scale_h);  // left col top Y
   const col_topB=Math.round(col_bot-hB*scale_h);  // right col top Y
   const col_L=PAD+10, col_R=SVG_W-PAD-10;
+  const kink = gab ? {t:gab.tF, x:col_L+gab.tF*(col_R-col_L), y:col_bot-gab.yF*scale_h} : null;
+  const rafXY = t => kink ? memGeo({x0:col_L, y0:col_topA, x1:col_R, y1:col_topB, kink}).at(t)
+                          : [col_L+t*(col_R-col_L), col_topA+t*(col_topB-col_topA)];
 
   // Gleichmäßige Arrays (für SDF/Bericht) in 3 Stäbe teilen
   const segLen = NP+1;
@@ -5504,7 +5114,7 @@ function renderFrameDiagram(b, h, allM, allQ, allN, NP, supA, supB, rafHingeIdx=
   hingeList.forEach(hg=>{
     const pos = parseFloat(hg.pos)||0;
     let cx, cy;
-    if(hg.member==='rafter'){ const t=Math.min(Math.max(pos/b,0),1); cx=col_L+t*(col_R-col_L); cy=col_topA+t*(col_topB-col_topA); }
+    if(hg.member==='rafter'){ [cx,cy]=rafXY(Math.min(Math.max(pos/b,0),1)); }
     else if(hg.member==='left'){ cx=col_L; cy=col_bot-Math.min(pos,hA)*scale_h; }
     else { cx=col_R; cy=col_bot-Math.min(pos,hB)*scale_h; }
     ov+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="3.5" fill="white" stroke="#1a1a18" stroke-width="1.3"/>`;
@@ -5533,7 +5143,7 @@ function renderFrameDiagram(b, h, allM, allQ, allN, NP, supA, supB, rafHingeIdx=
     svgW: SVG_W, svgH: SVG_H, overlay: ov, blocked,
     members: [
       { x0:col_L, y0:col_bot,  x1:col_L, y1:col_topA, thick:3, flip:false, isColumn:true,  memberLen:hA, ...Lm, uni:uni[0] },
-      { x0:col_L, y0:col_topA, x1:col_R, y1:col_topB, thick:3, flip:false, isColumn:false, memberLen:b,  ...Rm, uni:uni[1],
+      { x0:col_L, y0:col_topA, x1:col_R, y1:col_topB, thick:3, flip:false, isColumn:false, memberLen:b,  ...Rm, uni:uni[1], ...(kink?{kink}:{}),
         hingeIdx: fine ? null : rafHingeIdx },
       { x0:col_R, y0:col_topB, x1:col_R, y1:col_bot,  thick:3, flip:false, isColumn:true,  memberLen:hB, ...Cm, uni:uni[2] }
     ]
@@ -5547,10 +5157,9 @@ function renderFrameDiagram(b, h, allM, allQ, allN, NP, supA, supB, rafHingeIdx=
   // der Verlauf geschlossen „um die Ecke“ (Zugseite bleibt Zugseite).
   data.cornerLineFn = function(mode, color, fill, SCALE, h){
     if(mode !== 'M') return h;
-    const mR = data.members[1];
-    const rdx = mR.x1-mR.x0, rdy = mR.y1-mR.y0, rl = Math.hypot(rdx,rdy);
-    const rnx = -rdy/rl, rny = rdx/rl;                   // Normale des Riegels
-    const corner = (cx, cy, vCol, colDir, vRaf) => {
+    const RG = memGeo(data.members[1]);                  // Normale des Riegels je Abschnitt (Satteldach: links/rechts verschieden)
+    const corner = (cx, cy, vCol, colDir, vRaf, seg) => {
+      const rnx = RG.segs[seg].nx, rny = RG.segs[seg].ny;
       if(Math.abs(vCol) < 0.05 || Math.abs(vRaf) < 0.05 || vCol*vRaf < 0) return '';
       const p1 = [cx + colDir*vCol*SCALE, cy];            // Ende Stützenordinate
       const p2 = [cx + rnx*vRaf*SCALE, cy + rny*vRaf*SCALE]; // Ende Riegelordinate
@@ -5559,8 +5168,8 @@ function renderFrameDiagram(b, h, allM, allQ, allN, NP, supA, supB, rafHingeIdx=
              `<line x1="${p1[0].toFixed(1)}" y1="${p1[1].toFixed(1)}" x2="${p2[0].toFixed(1)}" y2="${p2[1].toFixed(1)}" stroke="${color}" stroke-width="1.5"/>`;
     };
     // links: positive M der Stütze nach rechts (+1), rechts: nach links (−1)
-    h += corner(col_L, col_topA, last(Lm.M), +1, Rm.M[0]);
-    h += corner(col_R, col_topB, Cm.M[0],    -1, last(Rm.M));
+    h += corner(col_L, col_topA, last(Lm.M), +1, Rm.M[0], 0);
+    h += corner(col_R, col_topB, Cm.M[0],    -1, last(Rm.M), RG.segs.length-1);
     return h;
   };
   data.target = opts.target||null;
@@ -5575,9 +5184,9 @@ let calcLang = localStorage.getItem('statiq-lang') || 'en';
 
 const calcTranslations = {
   en: {
-    toSize:'Design in size →',
+    toSize:'To “Design” →',
     spanWord:'Span', loadsWord:'Loads', eiRatio:'stiffness ratio', eiRef:'reference EI',
-    modalContSolveH:'Solution Method', modalContSolveP:'The three-moment equation is the classic hand method. calc itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.',
+    modalContSolveH:'Solution Method', modalContSolveP:'The three-moment equation is the classic hand method. “Internal forces” itself uses the displacement method in matrix form (as for frames), so end fixity, cantilevers, hinges, different stiffnesses per span and point moments can be combined freely. M, Q and the deflection follow exactly from the nodal displacements.',
     modalContOptH:'Options: fixed ends, cantilevers, hinges', modalContOptP:'Counting rule for beams (vertical loads): n = a − 2 − g, with a = vertical support reactions plus clamping moments (fixed end 2, pin/roller 1) and g = number of hinges. n = 0: statically determinate (e.g. Gerber beam), n &lt; 0: mechanism. In a hinge the moment is zero. I<sub>i</sub>/I scales the stiffness of a span — in indeterminate systems this shifts the support moments towards the stiffer span.', endSupports:'End supports and cantilevers', leftEnd:'Left end support', rightEnd:'Right end support', overhangL:'Cantilever left', overhangR:'Cantilever right', pointMoments:'Point Moments', addMoment:'＋ Add Moment', supPin:'Pin △', supRoller:'Roller ○', supFixed:'Fixed ⊞',
     tabs: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame'],
     system: 'System', span: 'Span L', length: 'Length L',
@@ -5635,26 +5244,27 @@ const calcTranslations = {
     // Modal frame content
     framePresets: 'Frame type',
     presetThree: 'Three-hinged',
+    roofShape: 'Rafter shape', roofFlat: 'Straight', roofGable: 'Gable roof', gableF: 'Rise f', gableX: 'Ridge x<sub>F</sub>',
     presetTwo: 'Two-hinged',
     presetFixed: 'Fixed feet',
     modalFrameS1h: 'System',
     modalFrameS1p: 'A portal frame consists of two columns and a rafter. Supports (fixed, pin, roller), a head support and hinges in any member can be chosen freely. The degree of static indeterminacy follows from the counting rule:',
     modalFrameS1c: 'a — number of support reactions (fixed 3, pin 2, roller 1, head support 1 or 2) · g — effective hinges (a hinge directly at a pinned foot does not count). n &lt; 0: mechanism · n = 0: statically determinate · n &gt; 0: indeterminate.',
     modalFrameS2h: 'Typical frames',
-    modalFrameS2t: 'Three-hinged frame: pin + pin + hinge in the rafter → n = 4 − 3 − 1 = 0<br>Two-hinged frame: pin + pin → n = 1<br>Frame with fixed feet: fixed + fixed → n = 3<div class="comment">All three can be set with the “Frame type” buttons.</div>',
+    modalFrameS2t: 'Three-hinged frame: pin + pin + hinge in the rafter → n = 4 − 3 − 1 = 0<br>Two-hinged frame: pin + pin → n = 1<br>Frame with fixed feet: fixed + fixed → n = 3<div class="comment">Gable frame: with “Gable roof” the rafter runs over the ridge (rise f above the eaves, ridge at x<sub>F</sub>). In the three-hinged gable frame the hinge sits in the ridge; for a uniform load q on plan and equal column heights h: H = q·b²/(8·(h + f)).</div><div class="comment">All three can be set with the “Frame type” buttons.</div>',
     modalFrameS3h: 'Three-hinged frame by hand',
     modalFrameS3p: 'Four unknown reactions, three equilibrium equations plus the hinge condition (no moment in the hinge G):',
     modalFrameS3e: 'Example: uniform load q on the rafter, hinge at mid-span, both columns of height h:',
     modalFrameS3c: 'q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7.81 kN, corner moment −31.25 kNm (tension outside).',
-    modalFrameS4h: 'How calc solves the frame',
-    modalFrameS4p: 'calc uses the displacement method in matrix form (direct stiffness method) for every combination of supports, hinges and loads: stiffness equations K·u = F, then support reactions and member end forces. M, Q and N follow exactly from equilibrium of each member part; deflections come directly from the nodal displacements. Axial deformations are practically suppressed (EA very large), as in a hand calculation.',
+    modalFrameS4h: 'How “Internal forces” solves the frame',
+    modalFrameS4p: '“Internal forces” uses the displacement method in matrix form (direct stiffness method) for every combination of supports, hinges and loads: stiffness equations K·u = F, then support reactions and member end forces. M, Q and N follow exactly from equilibrium of each member part; deflections come directly from the nodal displacements. Axial deformations are practically suppressed (EA very large), as in a hand calculation.',
     modalFrameS5h: 'Sign convention',
     modalFrameS5t: 'M &gt; 0: tension on the inside (dashed fibre) · Q = dM/ds along the member · N &gt; 0: tension<br>Support reactions: H → +, V ↑ +, M ↺ + (forces of the support on the frame)',
   },
   de: {
-    toSize:'In size bemessen →',
+    toSize:'In „Bemessung“ bemessen →',
     spanWord:'Feld', loadsWord:'Lasten', eiRatio:'Steifigkeitsverhältnis', eiRef:'Bezugswert EI',
-    modalContSolveH:'Lösungsweg', modalContSolveP:'Die Dreimomentengleichung (Clapeyron) ist das klassische Handverfahren. calc selbst rechnet mit dem Weggrößenverfahren in Matrixform (wie beim Rahmen). Dadurch lassen sich Einspannungen, Kragarme, Gelenke, unterschiedliche Steifigkeiten je Feld und Einzelmomente beliebig kombinieren. M, Q und die Durchbiegung folgen exakt aus den Knotenverschiebungen.',
+    modalContSolveH:'Lösungsweg', modalContSolveP:'Die Dreimomentengleichung (Clapeyron) ist das klassische Handverfahren. „Schnittkräfte“ selbst rechnet mit dem Weggrößenverfahren in Matrixform (wie beim Rahmen). Dadurch lassen sich Einspannungen, Kragarme, Gelenke, unterschiedliche Steifigkeiten je Feld und Einzelmomente beliebig kombinieren. M, Q und die Durchbiegung folgen exakt aus den Knotenverschiebungen.',
     modalContOptH:'Optionen: Einspannung, Kragarme, Gelenke', modalContOptP:'Abzählkriterium für Balken (lotrechte Lasten): n = a − 2 − g mit a = lotrechte Auflagerkräfte plus Einspannmomente (Einspannung 2, Fest-/Loslager 1) und g = Anzahl der Gelenke. n = 0: statisch bestimmt (z. B. Gerberträger), n &lt; 0: verschieblich. Im Gelenk ist das Moment null. I<sub>i</sub>/I verändert die Steifigkeit eines Feldes — bei statisch unbestimmten Systemen wandern die Stützmomente dadurch zum steiferen Feld.', endSupports:'Endlager und Kragarme', leftEnd:'Lager links', rightEnd:'Lager rechts', overhangL:'Kragarm links', overhangR:'Kragarm rechts', pointMoments:'Einzelmomente', addMoment:'＋ Einzelmoment', supPin:'Festlager △', supRoller:'Loslager ○', supFixed:'Einspannung ⊞',
     tabs: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen'],
     system: 'System', span: 'Stützweite L', length: 'Länge L',
@@ -5708,19 +5318,20 @@ const calcTranslations = {
     modalCantS4p: 'Maximum bei der Einspannung (x = 0), null am freien Ende. Zugfaser oben.',
     framePresets: 'Rahmentyp',
     presetThree: 'Dreigelenkrahmen',
+    roofShape: 'Riegelform', roofFlat: 'Gerade', roofGable: 'Satteldach', gableF: 'Stich f', gableX: 'First x<sub>F</sub>',
     presetTwo: 'Zweigelenkrahmen',
     presetFixed: 'Eingespannt',
     modalFrameS1h: 'System',
     modalFrameS1p: 'Ein Rahmen besteht aus zwei Stielen und einem Riegel. Lager (Einspannung, Festlager, Loslager), eine Kopfhalterung und Gelenke in allen Stäben sind frei wählbar. Der Grad der statischen Unbestimmtheit folgt aus dem Abzählkriterium:',
     modalFrameS1c: 'a — Anzahl der Lagerreaktionen (Einspannung 3, Festlager 2, Loslager 1, Kopfhalterung 1 oder 2) · g — wirksame Gelenke (ein Gelenk direkt am gelenkigen Fuß zählt nicht). n &lt; 0: Mechanismus · n = 0: statisch bestimmt · n &gt; 0: unbestimmt.',
     modalFrameS2h: 'Typische Rahmen',
-    modalFrameS2t: 'Dreigelenkrahmen: Festlager + Festlager + Gelenk im Riegel → n = 4 − 3 − 1 = 0<br>Zweigelenkrahmen: Festlager + Festlager → n = 1<br>Eingespannter Rahmen: Einspannung + Einspannung → n = 3<div class="comment">Alle drei lassen sich über die Schalter „Rahmentyp“ einstellen.</div>',
+    modalFrameS2t: 'Dreigelenkrahmen: Festlager + Festlager + Gelenk im Riegel → n = 4 − 3 − 1 = 0<br>Zweigelenkrahmen: Festlager + Festlager → n = 1<br>Eingespannter Rahmen: Einspannung + Einspannung → n = 3<div class="comment">Satteldachrahmen: Mit „Satteldach“ läuft der Riegel über den First (Stich f über den Traufen, First bei x<sub>F</sub>). Beim Dreigelenk-Satteldachrahmen liegt das Gelenk im First; bei Gleichlast q je m Grundriss und gleich hohen Stielen h gilt: H = q·b²/(8·(h + f)).</div><div class="comment">Alle drei lassen sich über die Schalter „Rahmentyp“ einstellen.</div>',
     modalFrameS3h: 'Dreigelenkrahmen von Hand',
     modalFrameS3p: 'Vier unbekannte Lagerreaktionen, drei Gleichgewichtsbedingungen und die Gelenkbedingung (kein Moment im Gelenk G):',
     modalFrameS3e: 'Beispiel: Gleichlast q auf dem Riegel, Gelenk in Riegelmitte, beide Stiele der Höhe h:',
     modalFrameS3c: 'q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, Eckmoment −31,25 kNm (Zug außen).',
-    modalFrameS4h: 'So rechnet calc',
-    modalFrameS4p: 'calc nutzt für jede Kombination aus Lagern, Gelenken und Lasten das Weggrößenverfahren in Matrixform (direkte Steifigkeitsmethode): Steifigkeitsgleichungen K·u = F, daraus Auflagerreaktionen und Stabendkräfte. M, Q und N folgen exakt aus dem Gleichgewicht am Stabteil, die Verformungen direkt aus den Knotenverschiebungen. Normalkraftverformungen sind praktisch ausgeschaltet (EA sehr groß), wie in der Handrechnung.',
+    modalFrameS4h: 'So rechnet „Schnittkräfte“',
+    modalFrameS4p: '„Schnittkräfte“ nutzt für jede Kombination aus Lagern, Gelenken und Lasten das Weggrößenverfahren in Matrixform (direkte Steifigkeitsmethode): Steifigkeitsgleichungen K·u = F, daraus Auflagerreaktionen und Stabendkräfte. M, Q und N folgen exakt aus dem Gleichgewicht am Stabteil, die Verformungen direkt aus den Knotenverschiebungen. Normalkraftverformungen sind praktisch ausgeschaltet (EA sehr groß), wie in der Handrechnung.',
     modalFrameS5h: 'Vorzeichen',
     modalFrameS5t: 'M &gt; 0: Zug innen (gestrichelte Faser) · Q = dM/ds in Stabrichtung · N &gt; 0: Zug<br>Auflagerreaktionen: H → +, V ↑ +, M ↺ + (Kräfte des Lagers auf den Rahmen)',
   },
@@ -5776,6 +5387,7 @@ const calcTranslations = {
     modalFrameS1h: 'Système',
     framePresets: 'Type de portique',
     presetThree: 'Trois articulations',
+    roofShape: 'Forme de la traverse', roofFlat: 'Droite', roofGable: 'Toiture à deux versants', gableF: 'Flèche f', gableX: 'Faîtage x<sub>F</sub>',
     presetTwo: 'Deux articulations',
     presetFixed: 'Encastré',
     modalFrameS2h: 'Portiques types',
@@ -5835,6 +5447,7 @@ const calcTranslations = {
     modalFrameS1h: 'Sistema',
     framePresets: 'Tipo de pórtico',
     presetThree: 'Triarticulado',
+    roofShape: 'Forma del dintel', roofFlat: 'Recto', roofGable: 'Cubierta a dos aguas', gableF: 'Flecha f', gableX: 'Cumbrera x<sub>F</sub>',
     presetTwo: 'Biarticulado',
     presetFixed: 'Empotrado',
     modalFrameS2h: 'Pórticos típicos',
@@ -5899,7 +5512,7 @@ const I18N_UI = {
   "supRollerW": "Roller",
   "wLeft": "left",
   "wRight": "right",
-  "repSub": "kragr·calc · calculation report",
+  "repSub": "kragr · Internal forces · calculation report",
   "errRep": "Found an error? Please report it.",
   "uebTog": "Practice mode",
   "uebEnd": "End practice mode",
@@ -6022,7 +5635,7 @@ const I18N_UI = {
   "supRollerW": "Loslager",
   "wLeft": "links",
   "wRight": "rechts",
-  "repSub": "kragr·calc · Berechnungsprotokoll",
+  "repSub": "kragr · Schnittkräfte · Berechnungsprotokoll",
   "errRep": "Fehler gefunden? Bitte melden.",
   "uebTog": "Übungsmodus",
   "uebEnd": "Übungsmodus beenden",
@@ -6145,7 +5758,7 @@ const I18N_UI = {
   "supRollerW": "Appui mobile",
   "wLeft": "gauche",
   "wRight": "droite",
-  "repSub": "kragr·calc · note de calcul",
+  "repSub": "kragr · Efforts · note de calcul",
   "errRep": "Une erreur ? Merci de la signaler.",
   "uebTog": "Mode exercice",
   "uebEnd": "Quitter le mode exercice",
@@ -6215,7 +5828,7 @@ const I18N_UI = {
   "saved": "Enregistrés",
   "save": "Enregistrer le calcul",
   "modalContSolveH": "Méthode de résolution",
-  "modalContSolveP": "L’équation des trois moments est la méthode classique à la main. calc utilise la méthode des déplacements sous forme matricielle (comme pour les portiques) : encastrements, consoles, rotules, rigidités différentes par travée et moments ponctuels se combinent librement. M, Q et la flèche découlent exactement des déplacements nodaux.",
+  "modalContSolveP": "L’équation des trois moments est la méthode classique à la main. « Efforts » utilise la méthode des déplacements sous forme matricielle (comme pour les portiques) : encastrements, consoles, rotules, rigidités différentes par travée et moments ponctuels se combinent librement. M, Q et la flèche découlent exactement des déplacements nodaux.",
   "modalContOptH": "Options : encastrements, consoles, rotules",
   "modalContOptP": "Critère de comptage pour les poutres (charges verticales) : n = a − 2 − g, avec a = réactions verticales plus moments d’encastrement (encastrement 2, appui fixe/mobile 1) et g = nombre de rotules. n = 0 : isostatique (p. ex. poutre Gerber), n &lt; 0 : mécanisme. Dans une rotule, le moment est nul. I<sub>i</sub>/I modifie la rigidité d’une travée — dans les systèmes hyperstatiques, les moments sur appuis se déplacent vers la travée la plus rigide."
  },
@@ -6272,7 +5885,7 @@ const I18N_UI = {
   "supRollerW": "Apoyo móvil",
   "wLeft": "izquierda",
   "wRight": "derecha",
-  "repSub": "kragr·calc · memoria de cálculo",
+  "repSub": "kragr · Esfuerzos · memoria de cálculo",
   "errRep": "¿Has encontrado un error? Avísanos.",
   "uebTog": "Modo práctica",
   "uebEnd": "Salir del modo práctica",
@@ -6342,17 +5955,17 @@ const I18N_UI = {
   "saved": "Guardados",
   "save": "Guardar cálculo",
   "modalContSolveH": "Método de resolución",
-  "modalContSolveP": "La ecuación de los tres momentos es el método clásico a mano. calc usa el método de los desplazamientos en forma matricial (como en los pórticos): empotramientos, voladizos, rótulas, rigideces distintas por vano y momentos puntuales se combinan libremente. M, Q y la flecha resultan exactamente de los desplazamientos nodales.",
+  "modalContSolveP": "La ecuación de los tres momentos es el método clásico a mano. «Esfuerzos» usa el método de los desplazamientos en forma matricial (como en los pórticos): empotramientos, voladizos, rótulas, rigideces distintas por vano y momentos puntuales se combinan libremente. M, Q y la flecha resultan exactamente de los desplazamientos nodales.",
   "modalContOptH": "Opciones: empotramientos, voladizos, rótulas",
   "modalContOptP": "Criterio de recuento para vigas (cargas verticales): n = a − 2 − g, con a = reacciones verticales más momentos de empotramiento (empotramiento 2, apoyo fijo/móvil 1) y g = número de rótulas. n = 0: isostático (p. ej. viga Gerber), n &lt; 0: mecanismo. En una rótula el momento es nulo. I<sub>i</sub>/I modifica la rigidez de un vano — en sistemas hiperestáticos los momentos en apoyos se desplazan hacia el vano más rígido."
  }
 };
-Object.assign(I18N_UI.fr, {"modCalcSub": "Efforts internes &amp; déformations", "modSizeSub": "Dimensionnement selon les Eurocodes", "modRefSub": "Profilés, tableaux, Eurocodes", "savedSub": "Calculs &amp; rapports", "modalFrameS1p": "Un portique se compose de deux poteaux et d’une traverse. Les appuis (encastrement, appui fixe, appui mobile), un appui en tête et des rotules dans chaque barre se choisissent librement. Le degré d’hyperstaticité résulte du critère de comptage :", "modalFrameS1c": "a — nombre de réactions d’appui (encastrement 3, appui fixe 2, appui mobile 1, appui en tête 1 ou 2) · g — rotules effectives (une rotule directement au pied articulé ne compte pas). n &lt; 0 : mécanisme · n = 0 : isostatique · n &gt; 0 : hyperstatique.", "modalFrameS2t": "Portique à trois articulations : appui fixe + appui fixe + rotule dans la traverse → n = 4 − 3 − 1 = 0<br>Portique à deux articulations : appui fixe + appui fixe → n = 1<br>Portique à pieds encastrés : encastrement + encastrement → n = 3<div class=\"comment\">Les trois se règlent avec les boutons « Type de portique ».</div>", "modalFrameS3p": "Quatre réactions inconnues, trois équations d’équilibre et la condition de rotule (moment nul dans la rotule G) :", "modalFrameS3e": "Exemple : charge uniforme q sur la traverse, rotule à mi-portée, deux poteaux de hauteur h :", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, moment d’angle −31,25 kNm (traction à l’extérieur).", "modalFrameS4p": "calc utilise la méthode des déplacements sous forme matricielle (méthode de rigidité directe) pour toute combinaison d’appuis, de rotules et de charges : équations de rigidité K·u = F, puis réactions d’appui et efforts aux extrémités des barres. M, Q et N découlent exactement de l’équilibre de chaque partie de barre ; les déformations viennent directement des déplacements nodaux. Les déformations axiales sont pratiquement supprimées (EA très grand), comme dans un calcul à la main.", "modalFrameS5t": "M &gt; 0 : traction à l’intérieur (fibre en pointillés) · Q = dM/ds le long de la barre · N &gt; 0 : traction<br>Réactions d’appui : H → +, V ↑ +, M ↺ + (forces de l’appui sur le portique)"});
-Object.assign(I18N_UI.es, {"modCalcSub": "Esfuerzos &amp; deformaciones", "modSizeSub": "Dimensionado según Eurocódigos", "modRefSub": "Perfiles, tablas, Eurocódigos", "savedSub": "Cálculos &amp; informes", "modalFrameS1p": "Un pórtico consta de dos pilares y un dintel. Los apoyos (empotramiento, apoyo fijo, apoyo móvil), un apoyo en cabeza y rótulas en cualquier barra se eligen libremente. El grado de hiperestaticidad resulta del criterio de recuento:", "modalFrameS1c": "a — número de reacciones (empotramiento 3, apoyo fijo 2, apoyo móvil 1, apoyo en cabeza 1 o 2) · g — rótulas efectivas (una rótula justo en un pie articulado no cuenta). n &lt; 0: mecanismo · n = 0: isostático · n &gt; 0: hiperestático.", "modalFrameS2t": "Pórtico triarticulado: apoyo fijo + apoyo fijo + rótula en el dintel → n = 4 − 3 − 1 = 0<br>Pórtico biarticulado: apoyo fijo + apoyo fijo → n = 1<br>Pórtico con pies empotrados: empotramiento + empotramiento → n = 3<div class=\"comment\">Los tres se ajustan con los botones «Tipo de pórtico».</div>", "modalFrameS3p": "Cuatro reacciones desconocidas, tres ecuaciones de equilibrio y la condición de rótula (momento nulo en la rótula G):", "modalFrameS3e": "Ejemplo: carga uniforme q en el dintel, rótula en el centro del vano, ambos pilares de altura h:", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, momento en esquina −31,25 kNm (tracción exterior).", "modalFrameS4p": "calc utiliza el método de los desplazamientos en forma matricial (método de rigidez directa) para cualquier combinación de apoyos, rótulas y cargas: ecuaciones de rigidez K·u = F, luego reacciones y esfuerzos en los extremos de las barras. M, Q y N resultan exactamente del equilibrio de cada tramo de barra; las deformaciones salen directamente de los desplazamientos nodales. Las deformaciones axiales se suprimen prácticamente (EA muy grande), como en un cálculo a mano.", "modalFrameS5t": "M &gt; 0: tracción en el interior (fibra discontinua) · Q = dM/ds a lo largo de la barra · N &gt; 0: tracción<br>Reacciones: H → +, V ↑ +, M ↺ + (fuerzas del apoyo sobre el pórtico)"});
+Object.assign(I18N_UI.fr, {"modCalcSub": "Efforts internes &amp; déformations", "modSizeSub": "Dimensionnement selon les Eurocodes", "modRefSub": "Profilés, tableaux, Eurocodes", "savedSub": "Calculs &amp; rapports", "modalFrameS1p": "Un portique se compose de deux poteaux et d’une traverse. Les appuis (encastrement, appui fixe, appui mobile), un appui en tête et des rotules dans chaque barre se choisissent librement. Le degré d’hyperstaticité résulte du critère de comptage :", "modalFrameS1c": "a — nombre de réactions d’appui (encastrement 3, appui fixe 2, appui mobile 1, appui en tête 1 ou 2) · g — rotules effectives (une rotule directement au pied articulé ne compte pas). n &lt; 0 : mécanisme · n = 0 : isostatique · n &gt; 0 : hyperstatique.", "modalFrameS2t": "Portique à trois articulations : appui fixe + appui fixe + rotule dans la traverse → n = 4 − 3 − 1 = 0<br>Portique à deux articulations : appui fixe + appui fixe → n = 1<br>Portique à pieds encastrés : encastrement + encastrement → n = 3<div class=\"comment\">Les trois se règlent avec les boutons « Type de portique ».</div>", "modalFrameS3p": "Quatre réactions inconnues, trois équations d’équilibre et la condition de rotule (moment nul dans la rotule G) :", "modalFrameS3e": "Exemple : charge uniforme q sur la traverse, rotule à mi-portée, deux poteaux de hauteur h :", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, moment d’angle −31,25 kNm (traction à l’extérieur).", "modalFrameS4p": "« Efforts » utilise la méthode des déplacements sous forme matricielle (méthode de rigidité directe) pour toute combinaison d’appuis, de rotules et de charges : équations de rigidité K·u = F, puis réactions d’appui et efforts aux extrémités des barres. M, Q et N découlent exactement de l’équilibre de chaque partie de barre ; les déformations viennent directement des déplacements nodaux. Les déformations axiales sont pratiquement supprimées (EA très grand), comme dans un calcul à la main.", "modalFrameS5t": "M &gt; 0 : traction à l’intérieur (fibre en pointillés) · Q = dM/ds le long de la barre · N &gt; 0 : traction<br>Réactions d’appui : H → +, V ↑ +, M ↺ + (forces de l’appui sur le portique)"});
+Object.assign(I18N_UI.es, {"modCalcSub": "Esfuerzos &amp; deformaciones", "modSizeSub": "Dimensionado según Eurocódigos", "modRefSub": "Perfiles, tablas, Eurocódigos", "savedSub": "Cálculos &amp; informes", "modalFrameS1p": "Un pórtico consta de dos pilares y un dintel. Los apoyos (empotramiento, apoyo fijo, apoyo móvil), un apoyo en cabeza y rótulas en cualquier barra se eligen libremente. El grado de hiperestaticidad resulta del criterio de recuento:", "modalFrameS1c": "a — número de reacciones (empotramiento 3, apoyo fijo 2, apoyo móvil 1, apoyo en cabeza 1 o 2) · g — rótulas efectivas (una rótula justo en un pie articulado no cuenta). n &lt; 0: mecanismo · n = 0: isostático · n &gt; 0: hiperestático.", "modalFrameS2t": "Pórtico triarticulado: apoyo fijo + apoyo fijo + rótula en el dintel → n = 4 − 3 − 1 = 0<br>Pórtico biarticulado: apoyo fijo + apoyo fijo → n = 1<br>Pórtico con pies empotrados: empotramiento + empotramiento → n = 3<div class=\"comment\">Los tres se ajustan con los botones «Tipo de pórtico».</div>", "modalFrameS3p": "Cuatro reacciones desconocidas, tres ecuaciones de equilibrio y la condición de rótula (momento nulo en la rótula G):", "modalFrameS3e": "Ejemplo: carga uniforme q en el dintel, rótula en el centro del vano, ambos pilares de altura h:", "modalFrameS3c": "q = 10 kN/m, b = 5 m, h = 4 m → V = 25 kN, H = 7,81 kN, momento en esquina −31,25 kNm (tracción exterior).", "modalFrameS4p": "«Esfuerzos» utiliza el método de los desplazamientos en forma matricial (método de rigidez directa) para cualquier combinación de apoyos, rótulas y cargas: ecuaciones de rigidez K·u = F, luego reacciones y esfuerzos en los extremos de las barras. M, Q y N resultan exactamente del equilibrio de cada tramo de barra; las deformaciones salen directamente de los desplazamientos nodales. Las deformaciones axiales se suprimen prácticamente (EA muy grande), como en un cálculo a mano.", "modalFrameS5t": "M &gt; 0: tracción en el interior (fibra discontinua) · Q = dM/ds a lo largo de la barra · N &gt; 0: tracción<br>Reacciones: H → +, V ↑ +, M ↺ + (fuerzas del apoyo sobre el pórtico)"});
 Object.assign(I18N_UI.en,{modalFrameLeftPart:'(left part)',modalFrameCorner:'corner'}); Object.assign(I18N_UI.de,{modalFrameLeftPart:'(linker Teil)',modalFrameCorner:'Ecke'});
 Object.assign(I18N_UI.fr,{modalFrameLeftPart:'(partie gauche)',modalFrameCorner:'angle'}); Object.assign(I18N_UI.es,{modalFrameLeftPart:'(parte izquierda)',modalFrameCorner:'esquina'});
-Object.assign(I18N_UI.en,{projLink:'My projects →'}); Object.assign(I18N_UI.de,{projLink:'Meine Projekte →'});
-Object.assign(I18N_UI.fr,{projLink:'Mes projets →'}); Object.assign(I18N_UI.es,{projLink:'Mis proyectos →'});
+Object.assign(I18N_UI.en,{projLink:'Projects →'}); Object.assign(I18N_UI.de,{projLink:'Projekte →'});
+Object.assign(I18N_UI.fr,{projLink:'Projets →'}); Object.assign(I18N_UI.es,{projLink:'Proyectos →'});
 // Übungsmodus Lernpfad (v0.8.34)
 Object.assign(I18N_UI.de,{uebRevStep:"Schritt zeigen"});
 Object.assign(I18N_UI.en,{uebRevStep:"Show step"});
@@ -6363,10 +5976,10 @@ Object.assign(I18N_UI.de,{"repPosLbl": "Position", "repDateLbl": "Datum", "repVe
 Object.assign(I18N_UI.en,{"repPosLbl": "Item", "repDateLbl": "Date", "repVerLbl": "Version"});
 Object.assign(I18N_UI.fr,{"repPosLbl": "Position", "repDateLbl": "Date", "repVerLbl": "Version"});
 Object.assign(I18N_UI.es,{"repPosLbl": "Posición", "repDateLbl": "Fecha", "repVerLbl": "Versión"});
-Object.assign(I18N_UI.de,{"projBtn": "Meine Projekte", "ppCur": "Aktuelle Berechnung", "ppList": "Gespeichert", "ppNew": "Noch nicht in „Meine Projekte“", "ppSaved": "Gespeichert · {0}", "ppSave": "Speichern", "ppSavedMsg": "„{0}“ gespeichert.", "ppAlready": "Schon gespeichert — keine Kopie angelegt.", "ppAlreadyS": "✓ Schon gespeichert", "ppNoSys": "Kein System geöffnet", "ppNone": "Noch nichts gespeichert. „Speichern“ legt die aktuelle Berechnung ab — size kann sie dann übernehmen.", "ppToSizeT": "In kragr·size bemessen", "ppAllCalc": "Alle Berechnungen und Berichte", "ppAllPos": "Alle Positionen in „Meine Projekte“ →"});
-Object.assign(I18N_UI.en,{"projBtn": "My projects", "ppCur": "Current calculation", "ppList": "Saved", "ppNew": "Not in My projects yet", "ppSaved": "Saved · {0}", "ppSave": "Save", "ppSavedMsg": "“{0}” saved.", "ppAlready": "Already saved — no copy created.", "ppAlreadyS": "✓ Already saved", "ppNoSys": "No system open", "ppNone": "Nothing saved yet. “Save” stores the current calculation — size can then import it.", "ppToSizeT": "Design in kragr·size", "ppAllCalc": "All calculations and reports", "ppAllPos": "All items in “My projects” →"});
-Object.assign(I18N_UI.fr,{"projBtn": "Mes projets", "ppCur": "Calcul actuel", "ppList": "Enregistré", "ppNew": "Pas encore dans Mes projets", "ppSaved": "Enregistré · {0}", "ppSave": "Enregistrer", "ppSavedMsg": "« {0} » enregistré.", "ppAlready": "Déjà enregistré — aucune copie créée.", "ppAlreadyS": "✓ Déjà enregistré", "ppNoSys": "Aucun système ouvert", "ppNone": "Rien d’enregistré pour l’instant. « Enregistrer » conserve le calcul actuel — size peut ensuite le reprendre.", "ppToSizeT": "Dimensionner dans kragr·size", "ppAllCalc": "Tous les calculs et rapports", "ppAllPos": "Toutes les positions dans « Mes projets » →"});
-Object.assign(I18N_UI.es,{"projBtn": "Mis proyectos", "ppCur": "Cálculo actual", "ppList": "Guardado", "ppNew": "Aún no está en Mis proyectos", "ppSaved": "Guardado · {0}", "ppSave": "Guardar", "ppSavedMsg": "«{0}» guardado.", "ppAlready": "Ya guardado — no se creó ninguna copia.", "ppAlreadyS": "✓ Ya guardado", "ppNoSys": "Ningún sistema abierto", "ppNone": "Todavía no hay nada guardado. «Guardar» almacena el cálculo actual; size puede importarlo después.", "ppToSizeT": "Dimensionar en kragr·size", "ppAllCalc": "Todos los cálculos e informes", "ppAllPos": "Todas las posiciones en «Mis proyectos» →"});
+Object.assign(I18N_UI.de,{"projBtn": "Projekte", "ppCur": "Aktuelle Berechnung", "ppList": "Gespeichert", "ppNew": "Noch nicht in „Projekte“", "ppSaved": "Gespeichert · {0}", "ppSave": "Speichern", "ppSavedMsg": "„{0}“ gespeichert.", "ppAlready": "Schon gespeichert — keine Kopie angelegt.", "ppAlreadyS": "✓ Schon gespeichert", "ppNoSys": "Kein System geöffnet", "ppNone": "Noch nichts gespeichert. „Speichern“ legt die aktuelle Berechnung ab — „Bemessung“ kann sie dann übernehmen.", "ppToSizeT": "In kragr · Bemessung bemessen", "ppAllCalc": "Alle Berechnungen und Berichte", "ppAllPos": "Alle Positionen in „Projekte“ →"});
+Object.assign(I18N_UI.en,{"projBtn": "Projects", "ppCur": "Current calculation", "ppList": "Saved", "ppNew": "Not in Projects yet", "ppSaved": "Saved · {0}", "ppSave": "Save", "ppSavedMsg": "“{0}” saved.", "ppAlready": "Already saved — no copy created.", "ppAlreadyS": "✓ Already saved", "ppNoSys": "No system open", "ppNone": "Nothing saved yet. “Save” stores the current calculation — “Design” can then import it.", "ppToSizeT": "Design in “Design”", "ppAllCalc": "All calculations and reports", "ppAllPos": "All items in “Projects” →"});
+Object.assign(I18N_UI.fr,{"projBtn": "Projets", "ppCur": "Calcul actuel", "ppList": "Enregistré", "ppNew": "Pas encore dans Projets", "ppSaved": "Enregistré · {0}", "ppSave": "Enregistrer", "ppSavedMsg": "« {0} » enregistré.", "ppAlready": "Déjà enregistré — aucune copie créée.", "ppAlreadyS": "✓ Déjà enregistré", "ppNoSys": "Aucun système ouvert", "ppNone": "Rien d’enregistré pour l’instant. « Enregistrer » conserve le calcul actuel — « Dimensionnement » peut ensuite le reprendre.", "ppToSizeT": "Dimensionner dans « Dimensionnement »", "ppAllCalc": "Tous les calculs et rapports", "ppAllPos": "Toutes les positions dans « Projets » →"});
+Object.assign(I18N_UI.es,{"projBtn": "Proyectos", "ppCur": "Cálculo actual", "ppList": "Guardado", "ppNew": "Aún no está en Proyectos", "ppSaved": "Guardado · {0}", "ppSave": "Guardar", "ppSavedMsg": "«{0}» guardado.", "ppAlready": "Ya guardado — no se creó ninguna copia.", "ppAlreadyS": "✓ Ya guardado", "ppNoSys": "Ningún sistema abierto", "ppNone": "Todavía no hay nada guardado. «Guardar» almacena el cálculo actual; «Dimensionado» puede importarlo después.", "ppToSizeT": "Dimensionar en «Dimensionado»", "ppAllCalc": "Todos los cálculos e informes", "ppAllPos": "Todas las posiciones en «Proyectos» →"});
 Object.keys(I18N_UI).forEach(l=>{ calcTranslations[l] = Object.assign(calcTranslations[l]||{}, I18N_UI[l]); });
 const trf = (key, ...a) => tr(key).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const LOCALE = () => ({en:'en-GB', de:'de-DE', fr:'fr-FR', es:'es-ES'})[calcLang] || 'en-GB';
@@ -6796,10 +6409,10 @@ function cUebApply(sys, card, ok){
 // ══════════════════════════════════════════════════
 // UX 2026 (v0.8.12): Auswahlmenü, zwei Spalten, kompakte Lasten, Live-Berechnung
 // ══════════════════════════════════════════════════
-const UXT = { en:{beams:'Beams', frames:'Frames', project:'My projects', topics:'systems', live:'Results update automatically', frame:'Frame'},
-  de:{beams:'Balken', frames:'Rahmen', project:'Meine Projekte', topics:'Systeme', live:'Ergebnisse werden laufend berechnet', frame:'Rahmen'},
-  fr:{beams:'Poutres', frames:'Portiques', project:'Mes projets', topics:'systèmes', live:'Résultats calculés en continu', frame:'Portique'},
-  es:{beams:'Vigas', frames:'Pórticos', project:'Mis proyectos', topics:'sistemas', live:'Resultados calculados al instante', frame:'Pórtico'} };
+const UXT = { en:{beams:'Beams', frames:'Frames', project:'Projects', topics:'systems', live:'Results update automatically', frame:'Frame'},
+  de:{beams:'Balken', frames:'Rahmen', project:'Projekte', topics:'Systeme', live:'Ergebnisse werden laufend berechnet', frame:'Rahmen'},
+  fr:{beams:'Poutres', frames:'Portiques', project:'Projets', topics:'systèmes', live:'Résultats calculés en continu', frame:'Portique'},
+  es:{beams:'Vigas', frames:'Pórticos', project:'Proyectos', topics:'sistemas', live:'Resultados calculados al instante', frame:'Pórtico'} };
 const ux = k => (UXT[calcLang]||UXT.en)[k];
 const curTab = () => ['beam','cantilever','cont','frame','saved'].find(x=>!document.getElementById('tab-'+x)?.classList.contains('hidden'))||'beam';
 function framePresetNow(){ const b=document.querySelector('[id^="btn-preset-"].active'); return b ? b.id.replace('btn-preset-','') : null; }
@@ -6807,7 +6420,7 @@ function pickGroups(){
   const t = calcTranslations[calcLang]||calcTranslations.en;
   return [
     { key:'beams', name:ux('beams'), items:[['beam',t.tabs[0]],['cantilever',t.tabs[1]],['cont',t.tabs[2]]] },
-    { key:'frames', name:ux('frames'), items:[['frame:three',tr('presetThree')],['frame:two',tr('presetTwo')],['frame:fixed',tr('presetFixed')]] } ];   // „Meine Projekte“ nur noch über den Knopf oben (v0.8.33)
+    { key:'frames', name:ux('frames'), items:[['frame:three',tr('presetThree')],['frame:two',tr('presetTwo')],['frame:fixed',tr('presetFixed')]] } ];   // „Projekte“ nur noch über den Knopf oben (v0.8.33)
 }
 function pickCurrent(){ const tab=curTab(); return tab==='frame' ? 'frame:'+(framePresetNow()||'') : tab; }
 function updatePick(){
@@ -6997,13 +6610,13 @@ if(['#saved','#beam','#cantilever','#cont','#frame'].includes(location.hash)) sh
 // Offline-Nutzung und Installation als App (Service Worker, nur über http/https)
 if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!=='undefined' && /^https?:$/.test(location.protocol||'')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 
-// Link auf „Meine Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
+// Link auf „Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
 (function(){
   if(typeof document==='undefined' || !document.addEventListener) return;
-  const MSG={de:'„Meine Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
-    en:'“My projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
-    fr:'« Mes projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
-    es:'«Mis proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
+  const MSG={de:'„Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
+    en:'“Projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
+    fr:'« Projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
+    es:'«Proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
   function hint(){ let l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
     let d=document.getElementById('proj-missing'); if(!d){ d=document.createElement('div'); d.id='proj-missing'; d.setAttribute('role','alert');
       d.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:min(560px,calc(100vw - 32px));background:#7f1d1d;color:#fff;padding:12px 16px;border-radius:10px;font:14px/1.45 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:9999;cursor:pointer';
@@ -7209,31 +6822,31 @@ document.addEventListener('input', ()=>{ cancelAnimationFrame(_k2T); _k2T=reques
 if(typeof IntersectionObserver==='function') document.querySelectorAll('.results-grid').forEach(g=>{ const t=g.closest('.main')?.id.slice(4);
   new IntersectionObserver(es=>{ K2_VIS[t]=es[0].isIntersecting; k2Bar(); }).observe(g); });
 (()=>{ const o=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); k2All(); return r; }; })();
-(()=>{ const o=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); ['beam','cant','cont','frame'].forEach(x=>{ try{ kKnotenCard(x); }catch(e){} }); return r; }; })();
+(()=>{ const o=window.applyCalcTranslations; window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); ['beam','cant','cont','frame'].forEach(x=>{ try{ kKnotenCard(x); }catch(e){} }); try{ kmodApply(); }catch(e){} return r; }; })();
 (()=>{ const o=window.showTab; window.showTab=function(...a){ const r=o.apply(this,a); k2All(); return r; }; })();
 // ══════════════════════════════════════════════════
 // Bedienung (calc v0.9.5): (1) „Nachweis in size“ direkt unter den Ergebnissen, (2) Lasten in der Skizze antippen
 // und unter der Skizze bearbeiten, auf den Träger tippen setzt eine neue Einzellast, (3) Eingaben laufend als Entwurf sichern.
 // ══════════════════════════════════════════════════
 const K4T = {
-  de:{ toSize:'Nachweis in size', toSizeS:'Nachweis wählen — M, V und N werden übernommen', hint:'Tippe in die Skizze: auf eine Last zum Bearbeiten, auf den Träger für eine neue Einzellast.', close:'Schließen', draft:'Eingaben werden automatisch gesichert.', reset:'Neu beginnen', resetQ:'Wirklich zurücksetzen?' },
-  en:{ toSize:'Design check in size', toSizeS:'choose a check — M, V and N are taken over', hint:'Tap the sketch: a load to edit it, the beam to place a new point load.', close:'Close', draft:'Inputs are saved automatically.', reset:'Start over', resetQ:'Really reset?' },
-  fr:{ toSize:'Vérification dans size', toSizeS:'choisir la vérification — M, V et N sont repris', hint:'Touchez le schéma : une charge pour la modifier, la poutre pour placer une charge ponctuelle.', close:'Fermer', draft:'Les saisies sont enregistrées automatiquement.', reset:'Recommencer', resetQ:'Vraiment réinitialiser ?' },
-  es:{ toSize:'Comprobación en size', toSizeS:'elige la comprobación — se toman M, V y N', hint:'Toca el esquema: una carga para editarla, la viga para colocar una carga puntual.', close:'Cerrar', draft:'Los datos se guardan automáticamente.', reset:'Empezar de nuevo', resetQ:'¿Restablecer de verdad?' } };
+  de:{ toSize:'Nachweis in „Bemessung“', toSizeS:'Nachweis wählen — M, V und N werden übernommen', hint:'Tippe in die Skizze: auf eine Last zum Bearbeiten, auf den Träger für eine neue Einzellast.', close:'Schließen', draft:'Eingaben werden automatisch gesichert.', reset:'Neu beginnen', resetQ:'Wirklich zurücksetzen?' },
+  en:{ toSize:'Design check', toSizeS:'choose a check — M, V and N are taken over', hint:'Tap the sketch: a load to edit it, the beam to place a new point load.', close:'Close', draft:'Inputs are saved automatically.', reset:'Start over', resetQ:'Really reset?' },
+  fr:{ toSize:'Vérification dans « Dimensionnement »', toSizeS:'choisir la vérification — M, V et N sont repris', hint:'Touchez le schéma : une charge pour la modifier, la poutre pour placer une charge ponctuelle.', close:'Fermer', draft:'Les saisies sont enregistrées automatiquement.', reset:'Recommencer', resetQ:'Vraiment réinitialiser ?' },
+  es:{ toSize:'Comprobación en «Dimensionado»', toSizeS:'elige la comprobación — se toman M, V y N', hint:'Toca el esquema: una carga para editarla, la viga para colocar una carga puntual.', close:'Cerrar', draft:'Los datos se guardan automáticamente.', reset:'Empezar de nuevo', resetQ:'¿Restablecer de verdad?' } };
 const k4 = k => (K4T[calcLang]||K4T.en)[k];
 // ── Knoten und Stabendkräfte (v0.11.0): Karte unter den Ergebnissen ──
 const K9T = {
-  de:{ title:'Knoten und Stabendkräfte', note:'Knoten von links nach rechts nummeriert. Doppelindex: {M21} ist das Moment im Stab 2–1 am Knoten 2. Vorzeichen wie in den Verläufen (M > 0: Zug unten bzw. innen, gestrichelte Faser).', end:'Stabende', bar:'Stab', eq:'Knotengleichgewicht', node:'Knoten', sup:'Auflager', eL:'Ecke links', eR:'Ecke rechts', gel:'Gelenk', ende:'freies Ende', left:'Stütze links', rafter:'Riegel', right:'Stütze rechts', beam:'Träger', field:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts', cl:'schließend (Zug außen)', op:'öffnend (Zug innen)', clamp:'Einspannmoment', jump:'Sprung durch ein Einzelmoment', hingeSup:'mit Gelenk' },
-  en:{ title:'Nodes and member end forces', note:'Nodes numbered from left to right. Double index: {M21} is the moment in member 2–1 at node 2. Signs as in the diagrams (M > 0: tension at the bottom or inside, dashed fibre).', end:'Member end', bar:'Member', eq:'Node equilibrium', node:'Node', sup:'Support', eL:'Left corner', eR:'Right corner', gel:'Hinge', ende:'free end', left:'Left column', rafter:'Rafter', right:'Right column', beam:'Beam', field:'Span', ovL:'Left cantilever', ovR:'Right cantilever', cl:'closing (tension outside)', op:'opening (tension inside)', clamp:'fixed-end moment', jump:'jump from a point moment', hingeSup:'with hinge' },
-  fr:{ title:'Nœuds et efforts aux extrémités des barres', note:'Nœuds numérotés de gauche à droite. Double indice : {M21} est le moment dans la barre 2–1 au nœud 2. Signes comme dans les diagrammes (M > 0 : traction en bas ou à l’intérieur, fibre en pointillés).', end:'Extrémité', bar:'Barre', eq:'Équilibre des nœuds', node:'Nœud', sup:'Appui', eL:'Angle gauche', eR:'Angle droit', gel:'Articulation', ende:'extrémité libre', left:'Poteau gauche', rafter:'Traverse', right:'Poteau droit', beam:'Poutre', field:'Travée', ovL:'Console gauche', ovR:'Console droite', cl:'fermant (traction à l’extérieur)', op:'ouvrant (traction à l’intérieur)', clamp:'moment d’encastrement', jump:'saut dû à un moment ponctuel', hingeSup:'avec articulation' },
-  es:{ title:'Nudos y esfuerzos en los extremos de barra', note:'Nudos numerados de izquierda a derecha. Doble índice: {M21} es el momento en la barra 2–1 en el nudo 2. Signos como en los diagramas (M > 0: tracción abajo o en el interior, fibra discontinua).', end:'Extremo', bar:'Barra', eq:'Equilibrio de nudos', node:'Nudo', sup:'Apoyo', eL:'Esquina izquierda', eR:'Esquina derecha', gel:'Rótula', ende:'extremo libre', left:'Pilar izquierdo', rafter:'Dintel', right:'Pilar derecho', beam:'Viga', field:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho', cl:'de cierre (tracción exterior)', op:'de apertura (tracción interior)', clamp:'momento de empotramiento', jump:'salto por un momento puntual', hingeSup:'con rótula' } };
+  de:{ title:'Knoten und Stabendkräfte', note:'Knoten von links nach rechts nummeriert. Doppelindex: {M21} ist das Moment im Stab 2–1 am Knoten 2. Vorzeichen wie in den Verläufen (M > 0: Zug unten bzw. innen, gestrichelte Faser).', end:'Stabende', bar:'Stab', eq:'Knotengleichgewicht', node:'Knoten', sup:'Auflager', eL:'Ecke links', eR:'Ecke rechts', gel:'Gelenk', ende:'freies Ende', left:'Stütze links', rafter:'Riegel', right:'Stütze rechts', beam:'Träger', field:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts', cl:'schließend (Zug außen)', op:'öffnend (Zug innen)', clamp:'Einspannmoment', jump:'Sprung durch ein Einzelmoment', hingeSup:'mit Gelenk', first:'First', rafL:'Riegel links', rafR:'Riegel rechts' },
+  en:{ title:'Nodes and member end forces', note:'Nodes numbered from left to right. Double index: {M21} is the moment in member 2–1 at node 2. Signs as in the diagrams (M > 0: tension at the bottom or inside, dashed fibre).', end:'Member end', bar:'Member', eq:'Node equilibrium', node:'Node', sup:'Support', eL:'Left corner', eR:'Right corner', gel:'Hinge', ende:'free end', left:'Left column', rafter:'Rafter', right:'Right column', beam:'Beam', field:'Span', ovL:'Left cantilever', ovR:'Right cantilever', cl:'closing (tension outside)', op:'opening (tension inside)', clamp:'fixed-end moment', jump:'jump from a point moment', hingeSup:'with hinge', first:'Ridge', rafL:'Left rafter', rafR:'Right rafter' },
+  fr:{ title:'Nœuds et efforts aux extrémités des barres', note:'Nœuds numérotés de gauche à droite. Double indice : {M21} est le moment dans la barre 2–1 au nœud 2. Signes comme dans les diagrammes (M > 0 : traction en bas ou à l’intérieur, fibre en pointillés).', end:'Extrémité', bar:'Barre', eq:'Équilibre des nœuds', node:'Nœud', sup:'Appui', eL:'Angle gauche', eR:'Angle droit', gel:'Articulation', ende:'extrémité libre', left:'Poteau gauche', rafter:'Traverse', right:'Poteau droit', beam:'Poutre', field:'Travée', ovL:'Console gauche', ovR:'Console droite', cl:'fermant (traction à l’extérieur)', op:'ouvrant (traction à l’intérieur)', clamp:'moment d’encastrement', jump:'saut dû à un moment ponctuel', hingeSup:'avec articulation', first:'Faîtage', rafL:'Traverse gauche', rafR:'Traverse droite' },
+  es:{ title:'Nudos y esfuerzos en los extremos de barra', note:'Nudos numerados de izquierda a derecha. Doble índice: {M21} es el momento en la barra 2–1 en el nudo 2. Signos como en los diagramas (M > 0: tracción abajo o en el interior, fibra discontinua).', end:'Extremo', bar:'Barra', eq:'Equilibrio de nudos', node:'Nudo', sup:'Apoyo', eL:'Esquina izquierda', eR:'Esquina derecha', gel:'Rótula', ende:'extremo libre', left:'Pilar izquierdo', rafter:'Dintel', right:'Pilar derecho', beam:'Viga', field:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho', cl:'de cierre (tracción exterior)', op:'de apertura (tracción interior)', clamp:'momento de empotramiento', jump:'salto por un momento puntual', hingeSup:'con rótula', first:'Cumbrera', rafL:'Dintel izquierdo', rafR:'Dintel derecho' } };
 const k9 = k => (K9T[calcLang]||K9T.en)[k] ?? K9T.de[k] ?? k;
 // Index i k als tiefgestellte Ziffern (ab 10 Knoten mit Komma)
 const k9ix = (i, k, big) => big ? `${i},${k}` : `${i}${k}`;
 const k9g = (s, i, k, big) => `${s}<sub>${k9ix(i,k,big)}</sub>`;
-function k9NodeName(n){ return n.kind==='sup' ? `${k9('sup')} ${n.lab}${n.gelenk && n.sup==='fixed' ? ' ('+k9('hingeSup')+')' : ''}` : n.kind==='ecke' ? k9(n.lab==='L'?'eL':'eR')+(n.gelenk?' ('+k9('hingeSup')+')':'') : n.kind==='gelenk' ? k9('gel') : k9('ende'); }
+function k9NodeName(n){ return n.kind==='sup' ? `${k9('sup')} ${n.lab}${n.gelenk && n.sup==='fixed' ? ' ('+k9('hingeSup')+')' : ''}` : n.kind==='ecke' ? k9(n.lab==='L'?'eL':'eR')+(n.gelenk?' ('+k9('hingeSup')+')':'') : n.kind==='first' ? k9('first')+(n.gelenk?' ('+k9('hingeSup')+')':'') : n.kind==='gelenk' ? k9('gel') : k9('ende'); }
 function k9BarName(sysId, b){
-  if(sysId==='frame') return k9(b.mem);
+  if(sysId==='frame') return b.side ? k9(b.side==='l'?'rafL':'rafR') : k9(b.mem);
   if(sysId!=='cont') return k9('beam');
   try{ const lay=contLayout(), st=kStations('cont'), xm=(st[b.i-1].t.beam+st[b.k-1].t.beam)/2*lay.Ltot, sg=lay.segs.find(g=>xm>=g.x0-1e-9 && xm<=g.x0+g.L+1e-9);
     return sg.key==='L' ? k9('ovL') : sg.key==='R' ? k9('ovR') : `${k9('field')} ${sg.key+1}`; }catch(e){ return k9('beam'); }
@@ -7262,7 +6875,7 @@ function kKnotenCard(sysId){
   h+='</ul>';
   if(c._h!==h){ c._h=h; c.innerHTML=h; }
 }
-// (1) „Nachweis in size“ entfällt seit v0.10.1: Schnittkräfte gelangen nur über „Meine Projekte“ nach size.
+// (1) „Nachweis in size“ entfällt seit v0.10.1: Schnittkräfte gelangen nur über „Projekte“ nach size.
 // (2) Last auswählen: Bearbeitung direkt unter der Skizze
 const K4SEL = { beam:null, cantilever:null };
 const K4GEO = { beam:{svg:'beam-svg', x0:30, x1:290, bY:70}, cantilever:{svg:'cant-svg', x0:50, x1:290, bY:70} };

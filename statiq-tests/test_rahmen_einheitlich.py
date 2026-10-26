@@ -19,7 +19,7 @@ M="""(sel)=>{const h=document.querySelector('.app-header'), l=h.querySelector('.
  const lb=l.getBoundingClientRect(), fb=f.getBoundingClientRect(); const mods=[...h.querySelectorAll('.header-links > a, .header-links > .module-name')].map(e=>e.textContent.trim()).join(' ');
  const tools=h.querySelector('.hdr-tools'), pj=tools&&tools.querySelector('.proj-btn'), th=document.getElementById('theme-btn'), lg=tools&&tools.querySelector('select');
  return {h:Math.round(h.getBoundingClientRect().height), lx:Math.round(lb.left), fs:getComputedStyle(l).fontSize, fx:Math.round(fb.left+parseFloat(cs.paddingLeft)), fr:Math.round(fb.right-parseFloat(cs.paddingRight)),
-   tr:tools?Math.round(tools.getBoundingClientRect().right):0, mods, pj:!!pj, th:!!th && tools.contains(th), lang:!!lg, sw:document.documentElement.scrollWidth}}"""
+   tr:Math.round(document.getElementById('k5-burger').getBoundingClientRect().right), mods, pj:!!pj, th:!!th && tools.contains(th), lang:!!lg, sw:document.documentElement.scrollWidth}}"""
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
@@ -32,8 +32,8 @@ async def main():
             edge=max(gut, (W-1180)//2+gut)
             check(f'{W} px: Kopfzeile überall {hh} px hoch, Logo 24 px', all(r['h']==hh and r['fs']=='24px' for r in R.values()), {k:(v['h'],v['fs']) for k,v in R.items()})
             check(f'{W} px: Logo überall an derselben Kante ({edge} px)', all(r['lx']==edge for r in R.values()), {k:v['lx'] for k,v in R.items()})
-            check(f'{W} px: Inhalt beginnt an der Logo-Kante und endet an der Werkzeug-Kante', all(r['fx']==edge and abs(r['fr']-r['tr'])<=1 for r in R.values()), {k:(v['fx'],v['fr'],v['tr']) for k,v in R.items()})
-            check(f'{W} px: überall calc · size · ref, Projekte, Erscheinungsbild, Sprache', all(r['mods']=='calc size ref' and r['pj'] and r['th'] and r['lang'] for r in R.values()), {k:(v['mods'],v['pj'],v['th'],v['lang']) for k,v in R.items()})
+            check(f'{W} px: Inhalt beginnt an der Logo-Kante und endet an der ☰-Kante', all(r['fx']==edge and abs(r['fr']-r['tr'])<=1 for r in R.values()), {k:(v['fx'],v['fr'],v['tr']) for k,v in R.items()})
+            check(f'{W} px: überall calc · size · ref, Projekte, Erscheinungsbild, Sprache (im DOM, vom Menü gesteuert)', all(r['mods']=='calc size ref' and r['pj'] and r['th'] and r['lang'] for r in R.values()), {k:(v['mods'],v['pj'],v['th'],v['lang']) for k,v in R.items()})
             check(f'{W} px: kein Querscrollen', all(r['sw']<=W for r in R.values()), {k:v['sw'] for k,v in R.items()})
             await pg.close()
         pg=await br.new_page(viewport={'width':1280,'height':800}); pg.on('pageerror', lambda e: errs.append(str(e)))
@@ -42,7 +42,7 @@ async def main():
             r=await pg.evaluate("[document.querySelector('.proj-go').getAttribute('href'), document.querySelector('.proj-go .pb-tx').textContent]")
             check(f'{f}: „Meine Projekte“ führt zu projekt.html', r==['projekt.html','Meine Projekte'], r)
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(400)
-        check('EN: „My projects“', await pg.inner_text('.proj-go .pb-tx')=='My projects')
+        check('EN: „My projects“', (await pg.text_content('.proj-go .pb-tx')).strip()=='My projects')
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(400)
         check('projekt: Projekte-Knopf als aktuelle Seite (dunkel)', await pg.evaluate("[document.querySelector('.app-header .proj-btn.cur').getAttribute('aria-current'), getComputedStyle(document.querySelector('.app-header .proj-btn.cur')).backgroundColor]")==['page','rgb(17, 17, 20)'])
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")

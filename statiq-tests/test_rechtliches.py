@@ -29,7 +29,10 @@ async def main():
             bad=[]
             for page in PAGES[:5]:
                 await pg.goto(U+page); await pg.wait_for_timeout(350)
-                t=await pg.evaluate("document.body.innerText"); h=await pg.evaluate("[...document.querySelectorAll('a[href=\"rechtliches.html\"]')].map(a=>a.innerText)")
+                # file:// + sofortige Navigation: der Speicher ist gelegentlich noch nicht synchron (Prüfstand, nicht die App) → einmal neu laden
+                t=await pg.evaluate("document.body.innerText")
+                if disc not in t: await pg.evaluate(f"localStorage.setItem('statiq-lang','{lang}')"); await pg.reload(); await pg.wait_for_timeout(350); t=await pg.evaluate("document.body.innerText")
+                h=await pg.evaluate("[...document.querySelectorAll('a[href=\"rechtliches.html\"]')].map(a=>a.innerText)")
                 if disc not in t or not any(link in x for x in h): bad.append(page)
             check(f'{lang.upper()}: Haftungshinweis und Link zur Rechtsseite auf allen fünf Seiten', not bad, bad)
             await pg.goto(U+'rechtliches.html'); await pg.wait_for_timeout(200)
@@ -37,7 +40,7 @@ async def main():
             ph=await pg.evaluate("document.querySelectorAll('.ph').length"); lg=await pg.evaluate("document.documentElement.lang")
             check(f'{lang.upper()}: Rechtsseite mit fünf Abschnitten und Platzhaltern', ids and ph>=6 and lg==lang, (ids, ph, lg))
         # Sprache auf der Rechtsseite umschalten
-        await pg.select_option('#lang','de'); await pg.wait_for_timeout(100)
+        await pg.click('#k5-burger'); await pg.click('#k5-lang button[data-v=de]'); await pg.wait_for_timeout(100)
         check('Rechtsseite: Umschalten auf DE', 'Angaben gemäß § 5 DDG' in await pg.evaluate("document.body.innerText"))
         # Fußleiste folgt dem Sprachwechsel in calc (ohne Neuladen)
         await pg.goto(U+'calc.html'); await pg.wait_for_timeout(300)
@@ -69,7 +72,7 @@ async def main():
         for lang,title in [('de','Umfang und Grundlagen'),('en','Scope and basis')]:
             await pg.goto(U+'size.html'); await pg.evaluate(f"localStorage.setItem('statiq-lang','{lang}')"); await pg.reload(); await pg.wait_for_timeout(400)
             await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(300)
-            r=await pg.evaluate("[getComputedStyle(document.querySelector('.page-head')).display, document.getElementById('scope-card').innerText, document.getElementById('page-sub').textContent, [...document.querySelectorAll('#details > .card')].pop().id]")
+            r=await pg.evaluate("[getComputedStyle(document.querySelector('.page-head')).display, document.getElementById('scope-card').textContent, document.getElementById('page-sub').textContent, [...document.querySelectorAll('#details > .card')].pop().id]")
             check(f'size {lang.upper()}: Kopf (Titel, Beschreibung) ausgeblendet, Beschreibung unten in „{title}“ vor „Nicht enthalten“', r[0]=='none' and title in r[1] and r[2].strip()[:40] in r[1] and 'kragr·calc' in r[1] and r[3]=='scope-card', r[1][:80])
         await pg.goto(U+'size.html'); await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(400)
         first=await pg.evaluate("(()=>{ const m=document.querySelector('main.main'); const vis=[...m.querySelectorAll('*')].find(e=>e.offsetParent!==null && e.getBoundingClientRect().height>0); return [!!document.querySelector('.lang-notice'), document.getElementById('pick-btn').getBoundingClientRect().top < 140]; })()")

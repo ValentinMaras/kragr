@@ -17,12 +17,14 @@ async def main():
         await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
         n=await pg.evaluate("[document.querySelectorAll('.col-in .k-stp').length, !!document.querySelector('.k-stp #in-M'), document.querySelector('.k-stp:has(#in-M) .k-sb').getAttribute('aria-label')]")
         check('Stepper an den Zahlenfeldern (M_Ed mit vorlesbarem Knopf)', n[0]>50 and n[1] and 'verringern' in n[2], n)
+        await pg.click('.col-in .card.fold[data-fold="in-M"] > .card-title'); await pg.wait_for_timeout(200)   # Akkordeon (Design 5): Schnittgrößen öffnen
         e0=await pg.inner_text('#summary')
         await pg.click('.k-stp:has(#in-M) .k-sb >> nth=1'); await pg.wait_for_timeout(900)
         r=await pg.evaluate("[$('in-M').value, $('summary').innerText]")
         check('M_Ed 220 + → 230 kNm (Schritt 10), Nachweis neu gerechnet', r[0]=='230' and r[1]!=e0, r)
         await pg.click('.k-stp:has(#in-M) .k-sb >> nth=0'); await pg.wait_for_timeout(900)
         check('− → wieder 220, gleiches Ergebnis wie vorher', await pg.evaluate("[$('in-M').value, $('summary').innerText]")==['220', e0])
+        await pg.click('.col-in .card.fold[data-fold="seg-typ"] > .card-title'); await pg.wait_for_timeout(200)   # Bauteil öffnen (Akkordeon)
         await pg.click('.k-stp:has(#in-l) .k-sb >> nth=1'); await pg.wait_for_timeout(500)
         await pg.click('.k-stp:has(#in-h) .k-sb >> nth=1'); await pg.wait_for_timeout(500)
         r=await pg.evaluate("[$('in-l').value, $('in-h').value]")
@@ -37,12 +39,12 @@ async def main():
         check('Auswahlliste wählt das Profil, Nachweis neu', await pg.evaluate("$('sn-prof').value")=='IPE 270' and await pg.inner_text('#summary')!=s0)
         await pg.select_option('#sn-prof','IPE 300'); await pg.wait_for_timeout(600)
         # Übungsmodus-Schalter
-        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('.det-bar .ueb-tog')]})()")
-        check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr in der Rechenweg-Leiste', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
-        await pg.click('#ueb-btn'); await pg.wait_for_timeout(600)
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [document.getElementById('k5-burger')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('.det-bar .ueb-tog')]})()")
+        check('Übungsmodus über das Menü (aus), kein Schalter mehr in der Rechenweg-Leiste', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
+        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, document.body.classList.contains('uebung')]})()")
         check('an: „Zahlen verborgen“, Übungsmodus aktiv', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2], sw)
-        await pg.click('#ueb-btn'); await pg.wait_for_timeout(500)
+        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
         # kein Querscrollen in allen Bereichen
         ov={}
         await pg.set_viewport_size({'width':360,'height':740})

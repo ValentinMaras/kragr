@@ -15,7 +15,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(viewport={'width':1280,'height':1000}); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('muly-uebung','1')"); await pg.reload(); await pg.wait_for_timeout(700)
+        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}));localStorage.setItem('muly-uebung','1')"); await pg.reload(); await pg.wait_for_timeout(700)
         st=await pg.evaluate(TXT, '#rw-beam .rw-body > .st')
         heads=[s.split('\n')[0] for s in st]
         check('calc: alle 6 Schritte mit Überschrift sichtbar (Reihenfolge)', len(st)==6 and 'Momentengleichgewicht um A' in st[2] and 'Größtes Moment' in st[5] and all(await pg.evaluate("[...document.querySelectorAll('#rw-beam .rw-body > .st')].map(s=>s.offsetParent!==null)")), heads)

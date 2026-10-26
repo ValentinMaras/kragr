@@ -28,12 +28,13 @@ async def main():
         bad={}
         for f in PAGES:
             await pg.goto(U+f+'.html'); await pg.evaluate("localStorage.setItem('muly-theme','auto')"); await pg.reload(); await pg.wait_for_timeout(250)
-            vis=await pg.evaluate("(()=>{const b=document.getElementById('theme-btn'); return !!b && b.offsetParent!==null && !!b.getAttribute('aria-label')})()")
+            await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open')
+            vis=await pg.evaluate("(()=>{const g=document.getElementById('k5-theme'); return !!g && g.offsetParent!==null && g.querySelectorAll('button').length===3 && g.querySelector('button[data-v=auto]').getAttribute('aria-pressed')==='true'})()")
             seq=[]
-            for _ in range(3):
-                await pg.click('#theme-btn'); seq.append((await pg.evaluate("localStorage.getItem('muly-theme')"), await pg.evaluate(DARK)))
+            for v in ['dark','light','auto']:
+                await pg.click(f'#k5-theme button[data-v="{v}"]'); seq.append((await pg.evaluate("localStorage.getItem('muly-theme')"), await pg.evaluate(DARK)))
             if not vis or seq!=[('dark',True),('light',False),('auto',False)]: bad[f]=(vis,seq)
-        check('Schalter auf allen sechs Seiten sichtbar, Folge Dunkel → Hell → Automatisch', not bad, bad)
+        check('Erscheinungsbild im Menü auf allen sechs Seiten: Dunkel → Hell → Automatisch', not bad, bad)
         await pg.goto(U+'calc.html'); await pg.evaluate("localStorage.setItem('muly-theme','dark')")
         res={}
         for f in PAGES:

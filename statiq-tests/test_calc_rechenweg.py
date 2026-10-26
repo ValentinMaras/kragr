@@ -23,7 +23,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(viewport={'width':1280,'height':900}); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(HTML); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(400)
+        await pg.goto(HTML); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}))"); await pg.reload(); await pg.wait_for_timeout(400)
         check('Rechenweg-Karte sichtbar (Einfeldträger)', await pg.is_visible('#rw-beam') and 'Schritt für Schritt' in await pg.inner_text('#rw-beam'))
         # ── Einfeldträger und Kragarm: Gleichgewicht von Hand = FE-Löser ──
         for sys,tab,calc in [('beam','beam','calculateBeam'),('cant','cantilever','calculateCantilever')]:

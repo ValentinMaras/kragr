@@ -121,7 +121,8 @@ async def main():
         await pg.click('#tab-beam .k-head')
         # Segment M/Q/N/w
         sg=await pg.evaluate("(()=>{const a=getComputedStyle(document.getElementById('diag-btn-M-beam')), b=getComputedStyle(document.getElementById('diag-btn-Q-beam')); return [a.backgroundColor, b.backgroundColor, getComputedStyle(document.querySelector('#tab-beam .diagram-toggle-row')).backgroundColor]})()")
-        check('M/Q/N/w als Segment: aktiv weiß auf grauer Leiste', sg==['rgb(255, 255, 255)','rgba(0, 0, 0, 0)','rgb(241, 242, 244)'], sg)
+        pill=await pg.evaluate("(()=>{const p=document.querySelector('#tab-beam .diagram-toggle-row > .k5-pill'), a=document.getElementById('diag-btn-M-beam'); return p ? [getComputedStyle(p).backgroundColor, Math.round(p.getBoundingClientRect().left-a.getBoundingClientRect().left), Math.round(p.getBoundingClientRect().width-a.getBoundingClientRect().width)] : null})()")
+        check('M/Q/N/w als Segment: weiße Fläche unter der aktiven Taste auf grauer Leiste', sg[1]=='rgba(0, 0, 0, 0)' and sg[2]=='rgb(245, 246, 248)' and pill==['rgb(255, 255, 255)',0,0], (sg, pill))
         # Ergebnisleiste
         await pg.evaluate("document.querySelector('#tab-beam .results-grid').scrollIntoView({block:'center'})"); await pg.wait_for_timeout(500)
         b=await pg.evaluate(BAR)
@@ -143,12 +144,12 @@ async def main():
         check('Rahmen: max M · max V · max N', b and b['d']=='flex' and 'max N' in b['t'], b)
         await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(600)
         # Übungsmodus-Schalter
-        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('#tab-beam .ueb-tog')]})()")
-        check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr im Ergebnisfeld', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
-        await pg.click('#ueb-btn'); await pg.wait_for_timeout(600)
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [document.getElementById('k5-burger')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('#tab-beam .ueb-tog')]})()")
+        check('Übungsmodus über das Menü (aus), kein Schalter mehr im Ergebnisfeld', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
+        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, getComputedStyle(document.getElementById('k-bar')).display, getComputedStyle(t).backgroundColor]})()")
         check('an: Knopf blau, „Zahlen verborgen“, Ergebnisleiste aus (verrät sonst die Lösung)', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2]=='none' and sw[3]=='rgb(84, 104, 173)', sw)
-        await pg.click('#ueb-btn'); await pg.wait_for_timeout(500)
+        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
         # Sprache
         await pg.evaluate("setCalcLang('en')"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("[document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.getElementById('ueb-btn').title]")

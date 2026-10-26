@@ -42,7 +42,7 @@ async def main():
         await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("$('pick').classList.contains('open')"))
         # Projekt-Menü
         check('Kopfzeile: Ordner-Symbol ohne Menü, altes Projekt-Fenster verborgen', await pg.evaluate("$('proj-panel').hidden && !$('proj-btn').hasAttribute('aria-haspopup')"))
-        await pg.click('#proj-btn'); await pg.wait_for_url('**/projekt.html'); check('Ordner-Symbol öffnet „Meine Projekte“', 'projekt.html' in pg.url); await pg.go_back(); await pg.wait_for_timeout(500)
+        await pg.click('#k5-burger'); await pg.click('#k5-menu [data-mod=projekt]'); await pg.wait_for_url('**/projekt.html'); check('Ordner-Symbol öffnet „Meine Projekte“', 'projekt.html' in pg.url); await pg.go_back(); await pg.wait_for_timeout(500)
         # Aufklappbare Karten
         await pg.evaluate("setMat('beton'); setTyp('balken')"); await pg.wait_for_timeout(100)
         st=await pg.evaluate("[...document.querySelectorAll('.fold')].filter(c=>c.offsetParent).map(c=>[c.dataset.fold, c.classList.contains('closed'), c.querySelector('.fold-sum').textContent])")

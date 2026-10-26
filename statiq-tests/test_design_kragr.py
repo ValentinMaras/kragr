@@ -20,10 +20,9 @@ try:
     from playwright.async_api import async_playwright
 except ImportError:
     print('SKIP Playwright nicht installiert'); sys.exit(1 if fails else 0)
-HDR="""(()=>{const h=document.querySelector('.app-header'),k=[...h.children].map(e=>e.className||e.tagName),b=document.getElementById('proj-btn').getBoundingClientRect(),
- d=getComputedStyle(document.querySelector('#proj-btn .pb-dot')),v=getComputedStyle(document.querySelector('.app-header .version')).display,
- t=document.getElementById('theme-btn'),l=document.getElementById('lang-sel');
- return {k, w:Math.round(b.width), hb:Math.round(b.height), dot:d.backgroundColor, dotd:d.display, ver:v, order:t&&l&&(t.getBoundingClientRect().left<l.getBoundingClientRect().left)&&(b.left<t.getBoundingClientRect().left),
+HDR="""(()=>{const h=document.querySelector('.app-header'),vis=e=>getComputedStyle(e).display!=='none',k=[...h.children].filter(vis).map(e=>e.className.split(' ')[0]||e.tagName),b=document.getElementById('k5-burger').getBoundingClientRect(),
+ v=getComputedStyle(document.querySelector('.app-header .version')).display;
+ return {k, w:Math.round(b.width), hb:Math.round(b.height), ver:v, tools:getComputedStyle(h.querySelector('.hdr-tools')).display,
   font:getComputedStyle(document.body).fontFamily, acc:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), h:Math.round(h.offsetHeight), sw:document.documentElement.scrollWidth}})()"""
 FON="document.fonts.ready.then(()=>[...new Set([...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family.split(String.fromCharCode(34)).join('')))].sort())"
 async def main():
@@ -33,8 +32,8 @@ async def main():
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')")
         for f in ['calc','size']:
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(700); r=await pg.evaluate(HDR)
-            check(f'{f} Handy: Kopfzeile Logo · Module · Werkzeuge, einzeilig, kein Querscrollen', r['k'][:3]==['logo','header-links','hdr-tools'] and r['h']==58 and r['sw']<=390, r)
-            check(f'{f} Handy: Ordner-Symbol 40 × 40 ohne Punkt (Link zu „Meine Projekte“), dann Theme, dann Sprache', r['w']==40 and r['hb']==40 and r['dotd']=='none' and r['order'] and r['ver']=='none', r)
+            check(f'{f} Handy: Kopfzeile Logo · ☰ (Design 5), einzeilig, kein Querscrollen', r['k']==['logo','k5-burger'] and r['h']==58 and r['sw']<=390, r)
+            check(f'{f} Handy: ☰ 44 × 44, Werkzeuge und Version nicht in der Kopfzeile', r['w']==44 and r['hb']==44 and r['tools']=='none' and r['ver']=='none', r)
             check(f'{f}: Schrift Figtree, Akzent #5468ad', r['font'].startswith('Figtree') and r['acc']=='#5468ad', r)
             fo=await pg.evaluate(FON); check(f'{f}: Figtree und JetBrains Mono geladen', 'Figtree' in fo and 'JetBrains Mono' in fo, fo)
             v=await pg.inner_text('#k-verfoot')
@@ -46,7 +45,7 @@ async def main():
         pg=await br.new_page(viewport={'width':1280,'height':800}); pg.on('pageerror', lambda e: errs.append(str(e)))
         for f in ['calc','size']:
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(600); r=await pg.evaluate(HDR)
-            check(f'{f} Rechner: Projekte mit Text, Höhe 40', r['w']>100 and r['hb']==40, r)
+            check(f'{f} Rechner: ☰ mit Text „Menü“, Höhe 44', r['w']>80 and r['hb']==44 and await pg.text_content('#k5-burger .k5-cur') in ('Menü','Menu'), r)
         check('keine Skriptfehler', not errs, errs[:2])
         await br.close()
 asyncio.run(main())

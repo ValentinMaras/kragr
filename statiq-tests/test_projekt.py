@@ -87,19 +87,19 @@ async def main():
         check('Startseite: Kachel „Projekt“ → projekt.html mit Zählern', await pg.evaluate("document.getElementById('saved-card').getAttribute('href')")=='projekt.html' and re.search(r'^1 (Position|item) · \d+ (Einträge|entries)$', await pg.inner_text('#saved-count')), await pg.inner_text('#saved-count'))
         # Einheitlich „Meine Projekte“ (seit projekt v0.1.1)
         await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(200)
-        check('Projektseite: Navigation und Titel „Meine Projekte“', await pg.inner_text('.app-header .cur')=='Meine Projekte' and await pg.title()=='kragr — Meine Projekte')
+        check('Projektseite: Navigation und Titel „Meine Projekte“', (await pg.text_content('.app-header .cur')).strip()=='Meine Projekte' and await pg.evaluate("document.querySelector('#k5-burger').click(), document.querySelector('#k5-menu [data-mod=projekt]').getAttribute('aria-current')")=='page' and await pg.title()=='kragr — Meine Projekte')
         await pg.goto(B+'index.html'); await pg.wait_for_timeout(200)
         check('Startseite: „Meine Projekte“', await pg.inner_text('#saved-title')=='Meine Projekte')
         for f in ['size','calc']:
-            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); tx=await pg.inner_text('#proj-btn')
-            await pg.click('#proj-btn'); await pg.wait_for_url('**/projekt.html')
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); tx=(await pg.text_content('#proj-btn .pb-tx')).strip()
+            await pg.click('#k5-burger'); await pg.click('#k5-menu [data-mod=projekt]'); await pg.wait_for_url('**/projekt.html')
             check(f'{f}: Knopf „Meine Projekte“ führt zur Projektseite', tx=='Meine Projekte', tx)
         # Sprachen
         for L,w in (('en','My projects'),('fr','Mes projets'),('es','Mis proyectos')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(200)
             tx=await pg.inner_text('body')
             g=re.findall(r'\b(Position löschen|Öffnen|Zuordnen|Gesamtbericht|Datei laden|ohne Position|nicht erfüllt|veraltet)\b', tx)
-            check(f'{L}: Projektseite übersetzt, Navigation „{w}“', w in tx and not g and w==await pg.inner_text('.app-header .cur'), g[:3])
+            check(f'{L}: Projektseite übersetzt, Navigation „{w}“', not g and w==(await pg.text_content('.app-header .cur')).strip(), g[:3])
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()

@@ -15,7 +15,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(U+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(300)
+        await pg.goto(U+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}))"); await pg.reload(); await pg.wait_for_timeout(300)
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(300)
         a=pg.locator('#scope-card .fehler-link'); await a.evaluate("e=>e.onclick()"); h=unquote(await a.get_attribute('href'))
         v=await pg.evaluate("SIZE_VERSION")

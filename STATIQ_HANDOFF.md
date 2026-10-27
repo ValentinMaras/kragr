@@ -1,12 +1,12 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.9 · ref v0.3.45 · size v0.7.7 · projekt v0.1.22 · rechtliches v0.1.14 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.10 · ref v0.3.46 · size v0.7.8 · projekt v0.1.23 · rechtliches v0.1.15 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.9, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.22, sichtbar „Projekte“, Test von Variante C)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.45, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.7.7, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.14)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.10, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.23, sichtbar „Projekte“, Test von Variante C)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.46, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.7.8, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.15)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Figtree (Text), JetBrains Mono (Zahlen/Formeln) und Inter (nur griechische Buchstaben, unter dem Namen Figtree) als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,18 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Karten klappen weich auf (FLIP mit GSAP) — calc v0.11.10 · size v0.7.8 · ref v0.3.46 · projekt v0.1.23 · rechtliches v0.1.15
+
+Valentin hat aus der GSAP-Demo Idee 3 gewählt (Karten gleiten beim Aufklappen). Die Zeichen-Animation der Verläufe und die Zeitleiste im Rechenweg sind noch offen.
+
+- **GSAP 3.13.0 selbst gehostet**: `k5/gsap.min.js` (nur der Kern, ca. 72 KB). Kein CDN, damit die App offline läuft. `k5/inject.py` setzt `<script data-k5-gsap src="k5/gsap.min.js" defer></script>` vor den k5-Baustein auf alle sechs Seiten. `sw.js` speichert die Datei vor (VERSION `statiq-2026-10-27-5`). Lizenz: GSAP Standard License (kostenlos), in rechtliches.html in vier Sprachen genannt.
+- **`flip()` in `k5/k5.js` neu**: `measure(els)` merkt sich Lage und Höhe der Karten und zusätzlich (`.flow`) alles, was im Fluss danach kommt (nächste Geschwister auf jeder Ebene bis `body`, ohne fixed/sticky/absolute, ohne script/style, höchstens 240). Nach der Änderung: laufende Tweens beenden, Inline-`transform`/`clip-path` löschen, neu messen. Dann gleitet jedes Element per `y` von der alten an die neue Stelle; eine gewachsene Karte wird per `clip-path: inset(… round Radius)` von oben nach unten aufgedeckt. Dauer 0,26 … 0,48 s, `power2.inOut`, `clearProps` räumt am Ende auf. Elemente, die vorher und nachher außerhalb des Bildschirms liegen, springen.
+- Damit ist die offene Höhen-Animation aus der Animationsprüfung für die Karten erledigt: keine `height`-Animation mehr, also kein Layout je Bild. Ohne GSAP (`window.gsap` fehlt) läuft die alte Höhen-Animation weiter. Im ruhigen Modus (`html.k5-still`, „Bewegung reduzieren“) keine Bewegung.
+- Gilt für die k5-Akkordeons und die fremden Klapp-Mechaniken (`FOREIGN`: Lasten, Lastzeilen, size-Faltkarten, Rechenschritte, ref-Seitenleiste).
+- Fallstrick: Ein Element mit `transform` wird für 0,3 s Bezugsrahmen für `position:fixed` darin. Bisher liegen keine fixen Elemente in den Karten.
+- `k5/inject.py` findet den Hauptordner jetzt selbst (Aufruf `python3 k5/inject.py`).
+- Tests: `test_flip.py` (21) neu: GSAP auf allen Seiten geladen, Service Worker, kein CDN; mitten in der Bewegung clip-path und transform, keine Höhen-Animation; danach keine Reste und alles an der Layout-Stelle; dreimal schnell tippen; size-Faltkarte; ruhiger Modus; Rückfall ohne GSAP.
 
 ## Menü: Symbole als Fachskizzen — calc v0.11.9 · size v0.7.7 · ref v0.3.45 · projekt v0.1.22 · rechtliches v0.1.14
 Valentin: Bezeichnungen im Menü ändern, Paragraf nicht verwenden („hat was von Jura“). Vier Varianten gezeigt (Fachskizzen, Formelzeichen ohne §, Leitmotiv Kragarm, ohne Symbole); gewählt: **A · Fachskizzen**.
@@ -1329,7 +1341,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1951/1951 grün** (calc v0.11.9; inklusive `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1972/1972 grün** (calc v0.11.10; inklusive `test_flip.py` 21, `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

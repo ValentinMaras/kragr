@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·rechtliches v0.1.14 -->
+<!-- kragr·rechtliches v0.1.15 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -363,6 +363,7 @@
   @media print { .k5-burger, .k5-menu, .k5-scrim { display:none !important; } html, body { background:#fff !important; }
     .card, .pick-btn, .k5-card { box-shadow:none !important; } .k5-rv { animation:none !important; } }
 </style>
+<script data-k5-gsap src="k5/gsap.min.js" defer></script>
 <script data-k5>
 // Seiten-Anpassungen der Design-Schicht 5: welche Karten zu Akkordeons werden und was ihre Kurzfassung zeigt.
 window.kragrK5Page = function(K){
@@ -507,11 +508,41 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
 
-  // ── Höhe weich ändern (FLIP): vorher messen, Änderung ausführen, nachher animieren ──────────
-  function measure(els){ return els.map(function(el){ return {el:el, h:el.getBoundingClientRect().height}; }); }
+  // ── Weich umklappen (FLIP mit GSAP, calc v0.11.10) ──────────────────────────────────────
+  // Vorher Lage messen, Änderung ausführen, nachher vergleichen. Animiert werden nur transform und clip-path, nie die Höhe:
+  // alles, was im Fluss danach kommt, gleitet von der alten an die neue Stelle; eine wachsende Karte wird von oben nach unten
+  // aufgedeckt. Ein zweiter Klick mitten in der Bewegung startet ruhig von der sichtbaren Lage aus. Ohne GSAP: Höhe wie bisher.
+  function GS(){ return window.gsap && typeof window.gsap.fromTo==='function' ? window.gsap : null; }
+  var NOFLOW=/^(SCRIPT|STYLE|TEMPLATE|LINK|META|NOSCRIPT)$/;
+  function flowAfter(els){ var out=[];
+    els.forEach(function(el){ for(var n=el; n && n!==D.body && n!==H; n=n.parentElement){
+      for(var s=n.nextElementSibling; s && out.length<240; s=s.nextElementSibling){ if(out.indexOf(s)<0 && els.indexOf(s)<0) out.push(s); } } });
+    return out.filter(function(s){ if(NOFLOW.test(s.tagName) || !s.getClientRects().length) return false;
+      if(els.some(function(c){ return s.contains(c); })) return false;
+      var p=getComputedStyle(s).position; return p!=='fixed' && p!=='sticky' && p!=='absolute'; }); }
+  function measure(els){
+    var b=els.map(function(el){ var r=el.getBoundingClientRect(); return {el:el, h:r.height, top:r.top}; });
+    if(GS() && !STILL()) b.flow=flowAfter(els).map(function(el){ return {el:el, top:el.getBoundingClientRect().top}; });
+    return b; }
   function flip(before, anchor, anchorTop){
     if(anchor && anchorTop!=null){ var d=anchor.getBoundingClientRect().top-anchorTop; if(Math.abs(d)>1) window.scrollBy(0,d); }
     if(STILL()) return;
+    var g=GS();
+    if(g && before.flow){
+      var all=before.concat(before.flow).filter(function(b){ return b.el.isConnected; }), els=all.map(function(b){ return b.el; });
+      g.killTweensOf(els); g.set(els,{clearProps:'transform,clipPath'});
+      var vh=window.innerHeight, now=all.map(function(b){ return b.el.getBoundingClientRect(); });
+      var big=0; all.forEach(function(b,i){ if(b.h!=null) big=Math.max(big, Math.abs(now[i].height-b.h)); });
+      var dur=Math.min(0.48, 0.26+big*0.00025);
+      all.forEach(function(b,i){ var r=now[i], dy=b.top-r.top;
+        if(b.h!=null && r.height>b.h+2){ var rad=getComputedStyle(b.el).borderTopLeftRadius||'0px';
+          g.fromTo(b.el,{clipPath:'inset(0px 0px '+(r.height-b.h).toFixed(1)+'px 0px round '+rad+')'},
+                        {clipPath:'inset(0px 0px 0px 0px round '+rad+')', duration:dur, ease:'power2.inOut', clearProps:'clipPath'}); }
+        if(Math.abs(dy)<1) return;
+        if(Math.min(b.top, r.top) > vh+40 || Math.max(b.top, r.top)+r.height < -40) return;   // außerhalb des Bildschirms: springen
+        g.fromTo(b.el,{y:dy},{y:0, duration:dur, ease:'power2.inOut', clearProps:'transform'}); });
+      return;
+    }
     before.forEach(function(b){ var el=b.el; if(!el.isConnected) return; var h1=el.getBoundingClientRect().height; if(Math.abs(h1-b.h)<2 || !el.animate) return;
       var ov=el.style.overflow; el.style.overflow='hidden';
       var a=el.animate([{height:b.h+'px'},{height:h1+'px'}],{duration:Math.min(520, 260+Math.abs(h1-b.h)*0.25), easing:'cubic-bezier(.22,.8,.24,1)'});
@@ -757,7 +788,8 @@ de:{ title:'Impressum, Datenschutz und Hinweise',
     <h3>Server-Logdateien</h3><p>Beim Aufruf der Seiten verarbeitet der Hosting-Anbieter technisch notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browserkennung), um die Seiten auszuliefern und die Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: ${ph('host')}. Dabei können Daten in die USA übermittelt werden. Die Logdateien werden nach den Vorgaben des Anbieters gelöscht.</p>
     <h3>Deine Rechte</h3><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO) sowie das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>`,
   lic:`<h2 id="lizenzen">Lizenzen</h2>
-    <p>Verwendete Schriften: Figtree, JetBrains Mono und Inter (nur griechische Buchstaben), jeweils unter der SIL Open Font License 1.1. Die Lizenztexte liegen im Ordner fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>`,
+    <p>Verwendete Schriften: Figtree, JetBrains Mono und Inter (nur griechische Buchstaben), jeweils unter der SIL Open Font License 1.1. Die Lizenztexte liegen im Ordner fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>
+    <p>Bewegungen: GSAP 3.13 (GreenSock), selbst gehostet unter der kostenlosen GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'Stand: Oktober 2026', back:'Zurück zur Startseite' },
 en:{ title:'Legal notice, privacy and disclaimer',
   lead:'kragr is a learning tool for civil engineering students. This page contains the legal notice, the privacy policy, the disclaimer and notes on standards and sources. The German version is authoritative.',
@@ -786,7 +818,8 @@ en:{ title:'Legal notice, privacy and disclaimer',
     <h3>Server log files</h3><p>When pages are requested, the hosting provider processes technically necessary data (IP address, date and time, requested file, browser identifier) to deliver the pages and keep them secure. Legal basis: Art. 6(1)(f) GDPR. Hosting provider: ${ph('host')}. Data may be transferred to the USA in the process. Log files are deleted according to the provider’s rules.</p>
     <h3>Your rights</h3><p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a data protection authority.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
-    <p>Fonts used: Figtree, JetBrains Mono and Inter (Greek letters only), each under the SIL Open Font License 1.1. The licence texts are in the fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>) folder.</p>`,
+    <p>Fonts used: Figtree, JetBrains Mono and Inter (Greek letters only), each under the SIL Open Font License 1.1. The licence texts are in the fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>) folder.</p>
+    <p>Motion: GSAP 3.13 (GreenSock), self-hosted under the no-charge GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'As of October 2026', back:'Back to the start page' },
 fr:{ title:'Mentions légales, confidentialité et avertissement',
   lead:'kragr est un outil d’apprentissage pour les études de génie civil. Cette page contient les mentions légales, la politique de confidentialité, l’avertissement et des remarques sur les normes et les sources. La version allemande fait foi.',
@@ -815,7 +848,8 @@ fr:{ title:'Mentions légales, confidentialité et avertissement',
     <h3>Journaux du serveur</h3><p>Lors de l’appel des pages, l’hébergeur traite les données techniquement nécessaires (adresse IP, date et heure, fichier demandé, identifiant du navigateur) pour délivrer les pages et assurer leur sécurité. Base juridique : art. 6, par. 1, point f du RGPD. Hébergeur : ${ph('host')}. Des données peuvent alors être transférées aux États-Unis. Les journaux sont supprimés selon les règles de l’hébergeur.</p>
     <h3>Vos droits</h3><p>Vous disposez des droits d’accès, de rectification, d’effacement, de limitation, de portabilité et d’opposition (art. 15 à 21 du RGPD) ainsi que du droit d’introduire une réclamation auprès d’une autorité de contrôle.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
-    <p>Polices utilisées : Figtree, JetBrains Mono et Inter (lettres grecques uniquement), chacune sous SIL Open Font License 1.1. Les textes des licences se trouvent dans le dossier fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>`,
+    <p>Polices utilisées : Figtree, JetBrains Mono et Inter (lettres grecques uniquement), chacune sous SIL Open Font License 1.1. Les textes des licences se trouvent dans le dossier fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>
+    <p>Animations : GSAP 3.13 (GreenSock), hébergé localement sous la licence gratuite GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'Mise à jour : octobre 2026', back:'Retour à l’accueil' },
 es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
   lead:'kragr es una herramienta de aprendizaje para estudiantes de ingeniería civil. Esta página contiene el aviso legal, la política de privacidad, la exención de responsabilidad y notas sobre normas y fuentes. La versión alemana es la vinculante.',
@@ -844,7 +878,8 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
     <h3>Registros del servidor</h3><p>Al acceder a las páginas, el proveedor de alojamiento trata datos técnicamente necesarios (dirección IP, fecha y hora, archivo solicitado, identificador del navegador) para entregar las páginas y garantizar su seguridad. Base jurídica: art. 6.1.f RGPD. Proveedor de alojamiento: ${ph('host')}. En este proceso pueden transferirse datos a EE. UU. Los registros se eliminan según las normas del proveedor.</p>
     <h3>Tus derechos</h3><p>Tienes derecho de acceso, rectificación, supresión, limitación, portabilidad y oposición (arts. 15–21 RGPD) y derecho a presentar una reclamación ante una autoridad de protección de datos.</p>`,
   lic:`<h2 id="lizenzen">Licencias</h2>
-    <p>Fuentes utilizadas: Figtree, JetBrains Mono e Inter (solo letras griegas), todas bajo SIL Open Font License 1.1. Los textos de las licencias están en la carpeta fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>`,
+    <p>Fuentes utilizadas: Figtree, JetBrains Mono e Inter (solo letras griegas), todas bajo SIL Open Font License 1.1. Los textos de las licencias están en la carpeta fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>
+    <p>Animaciones: GSAP 3.13 (GreenSock), alojado localmente bajo la licencia gratuita GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'Actualizado: octubre de 2026', back:'Volver al inicio' }
 };
 const IDS=['impressum','haftung','normen','datenschutz','lizenzen'];

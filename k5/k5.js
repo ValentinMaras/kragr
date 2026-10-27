@@ -26,11 +26,41 @@
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
 
-  // ── Höhe weich ändern (FLIP): vorher messen, Änderung ausführen, nachher animieren ──────────
-  function measure(els){ return els.map(function(el){ return {el:el, h:el.getBoundingClientRect().height}; }); }
+  // ── Weich umklappen (FLIP mit GSAP, calc v0.11.10) ──────────────────────────────────────
+  // Vorher Lage messen, Änderung ausführen, nachher vergleichen. Animiert werden nur transform und clip-path, nie die Höhe:
+  // alles, was im Fluss danach kommt, gleitet von der alten an die neue Stelle; eine wachsende Karte wird von oben nach unten
+  // aufgedeckt. Ein zweiter Klick mitten in der Bewegung startet ruhig von der sichtbaren Lage aus. Ohne GSAP: Höhe wie bisher.
+  function GS(){ return window.gsap && typeof window.gsap.fromTo==='function' ? window.gsap : null; }
+  var NOFLOW=/^(SCRIPT|STYLE|TEMPLATE|LINK|META|NOSCRIPT)$/;
+  function flowAfter(els){ var out=[];
+    els.forEach(function(el){ for(var n=el; n && n!==D.body && n!==H; n=n.parentElement){
+      for(var s=n.nextElementSibling; s && out.length<240; s=s.nextElementSibling){ if(out.indexOf(s)<0 && els.indexOf(s)<0) out.push(s); } } });
+    return out.filter(function(s){ if(NOFLOW.test(s.tagName) || !s.getClientRects().length) return false;
+      if(els.some(function(c){ return s.contains(c); })) return false;
+      var p=getComputedStyle(s).position; return p!=='fixed' && p!=='sticky' && p!=='absolute'; }); }
+  function measure(els){
+    var b=els.map(function(el){ var r=el.getBoundingClientRect(); return {el:el, h:r.height, top:r.top}; });
+    if(GS() && !STILL()) b.flow=flowAfter(els).map(function(el){ return {el:el, top:el.getBoundingClientRect().top}; });
+    return b; }
   function flip(before, anchor, anchorTop){
     if(anchor && anchorTop!=null){ var d=anchor.getBoundingClientRect().top-anchorTop; if(Math.abs(d)>1) window.scrollBy(0,d); }
     if(STILL()) return;
+    var g=GS();
+    if(g && before.flow){
+      var all=before.concat(before.flow).filter(function(b){ return b.el.isConnected; }), els=all.map(function(b){ return b.el; });
+      g.killTweensOf(els); g.set(els,{clearProps:'transform,clipPath'});
+      var vh=window.innerHeight, now=all.map(function(b){ return b.el.getBoundingClientRect(); });
+      var big=0; all.forEach(function(b,i){ if(b.h!=null) big=Math.max(big, Math.abs(now[i].height-b.h)); });
+      var dur=Math.min(0.48, 0.26+big*0.00025);
+      all.forEach(function(b,i){ var r=now[i], dy=b.top-r.top;
+        if(b.h!=null && r.height>b.h+2){ var rad=getComputedStyle(b.el).borderTopLeftRadius||'0px';
+          g.fromTo(b.el,{clipPath:'inset(0px 0px '+(r.height-b.h).toFixed(1)+'px 0px round '+rad+')'},
+                        {clipPath:'inset(0px 0px 0px 0px round '+rad+')', duration:dur, ease:'power2.inOut', clearProps:'clipPath'}); }
+        if(Math.abs(dy)<1) return;
+        if(Math.min(b.top, r.top) > vh+40 || Math.max(b.top, r.top)+r.height < -40) return;   // außerhalb des Bildschirms: springen
+        g.fromTo(b.el,{y:dy},{y:0, duration:dur, ease:'power2.inOut', clearProps:'transform'}); });
+      return;
+    }
     before.forEach(function(b){ var el=b.el; if(!el.isConnected) return; var h1=el.getBoundingClientRect().height; if(Math.abs(h1-b.h)<2 || !el.animate) return;
       var ov=el.style.overflow; el.style.overflow='hidden';
       var a=el.animate([{height:b.h+'px'},{height:h1+'px'}],{duration:Math.min(520, 260+Math.abs(h1-b.h)*0.25), easing:'cubic-bezier(.22,.8,.24,1)'});

@@ -43,7 +43,7 @@ async def main():
         check('First links: N32 = −H·cos α = −19,34, Q32 = −H·sin α = −7,74 kN; rechts symmetrisch', near(end(K,3,2)['N'],-H*ca) and near(end(K,3,2)['Q'],-H*sa) and near(end(K,3,4)['N'],-H*ca) and near(end(K,3,4)['Q'],H*sa), (end(K,3,2), end(K,3,4)))
         m=await pg.evaluate("(()=>{ const f=lastCalc.frame.plot.fine.rafter; let k=0; f.t.forEach((t,i)=>{ if(Math.abs(t-0.24)<Math.abs(f.t[k]-0.24)) k=i; }); return [f.t[k], f.M[k]]; })()")
         check('Riegelmoment bei x = 2,4 m: V·2,4 − H·4,96 − q·2,4²/2 = −12,13 kNm (Hand)', near(m[0],0.24,1e-6) and near(m[1],120-H*4.96-28.8), m)
-        t=await pg.inner_text('#frame-results .k-knoten')
+        t=await pg.evaluate("document.querySelector('#frame-results .k-knoten').textContent")   # Karte ist mit k5 zugeklappt
         check('Knotenkarte: „First (mit Gelenk)“, Stäbe „Riegel links“ und „Riegel rechts“', 'First (mit Gelenk)' in t and 'Stab 2–3 · Riegel links' in t and 'Stab 3–4 · Riegel rechts' in t, t[:300])
         r=await pg.evaluate("[document.querySelectorAll('#frame-svg .k-knr').length, document.querySelectorAll('#frame-svg .k-faser polyline').length, [...document.querySelectorAll('#frame-svg text')].some(e=>e.textContent==='f=2m')]")
         check('Skizze: fünf Knotennummern, Faser als Polygonzug, Stichmaß f = 2 m', r==[5,1,True], r)
@@ -81,7 +81,7 @@ async def main():
         check('Zurück auf gerade: kein First-Knoten, Riegel wieder eine Linie', all(n['kind']!='first' for n in K['nodes']) and await pg.evaluate("document.querySelectorAll('#frame-svg .k-raf').length")==0)
         # Englisch
         await pg.evaluate("setCalcLang('en'); setRoof(true); liveCalc(true)"); await pg.wait_for_timeout(400)
-        t=await pg.inner_text('#tab-frame')
+        t=await pg.evaluate("document.getElementById('tab-frame').textContent")
         check('Englisch: „Gable roof“, „Rise f“, Knoten „Ridge“', 'Gable roof' in t and 'Rise f' in t and 'Ridge' in t, '')
         # Projekte: Schweißnaht am First anbieten
         src=open(os.path.join(HERE,'..','projekt.html'),encoding='utf-8').read()

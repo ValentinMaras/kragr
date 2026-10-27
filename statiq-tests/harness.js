@@ -12,7 +12,7 @@ function extract(name){
   for(k=j;k<src.length;k++){ if(src[k]==='{')d++; else if(src[k]==='}'){d--; if(!d)break;} }
   return src.slice(i,k+1);
 }
-const names=['frameGableOf','frameGable','frameRafY','frameRafLen','supportDOF','frameEffectiveHinges','frameIndeterminacy','checkPos','cutRange','frameBuildModel','frameElemK','frameElemT','frameElemFeq','frameSolveDSM','frameForcesAt','frameSampleForces','sampleUniform','frameDispAt','frameSampleFine','sampleFine','calculateFrame'];
+const names=['frameGableOf','frameGable','frameRafY','frameRafLen','supportDOF','frameEffectiveHinges','frameIndeterminacy','checkPos','cutRange','frameBuildModel','frameElemK','frameElemT','frameElemFeq','frameSolveDSM','frameForcesAt','frameSampleForces','sampleUniform','frameDispAt','frameSampleFine','sampleFine','frameInput','calculateFrame'];
 const consts=src.match(/const EPS_POS[^\n]*/)[0]+'\n'+src.match(/const FRAME_EA_FACTOR[^\n]*/)[0]+'\n'+src.match(/const GAUSS4[\s\S]*?\]\];/)[0];
 const code=consts+'\n'+names.map(extract).join('\n\n');
 function run(cfg){

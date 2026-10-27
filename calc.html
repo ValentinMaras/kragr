@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.3 -->
+<!-- kragr v0.11.4 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1007,6 +1007,536 @@ window.mulyProj = {
   if(typeof document!=='undefined' && document.addEventListener) document.addEventListener('DOMContentLoaded', window.kmodApply);
 })();
 </script>
+<style data-k5>
+  /* kragr-Design 5 (Oktober 2026): ein Aufbau für alle Seiten. Identisch in calc, size, ref, projekt und rechtliches.
+     Weich und plastisch: hellgrauer Seitengrund, weiße Karten mit sanftem Schatten, Glas-Kopfzeile mit Burgermenü,
+     ruhige Bewegung (Aufklappen, Einblenden, Balken, Diagramme). Bei „Bewegung reduzieren“ ist alles aus. */
+  :root { --k5-bg:#f2f3f6; --k5-card:#ffffff; --k5-sub:#f5f6f8; --k5-sub-h:#eceef2; --k5-r:20px; --k5-r2:14px;
+    --k5-sh:0 1px 2px rgba(17,17,20,.04), 0 6px 22px -10px rgba(17,17,20,.13);
+    --k5-sh-h:0 2px 4px rgba(17,17,20,.05), 0 14px 34px -14px rgba(17,17,20,.2);
+    --k5-ease:cubic-bezier(.22,.8,.24,1); --k5-spring:cubic-bezier(.34,1.4,.5,1);
+    --k-card:var(--k5-card); --card:var(--k5-card); }
+  html { background:var(--k5-bg); }
+  body { background:var(--k5-bg) !important; }
+  html.dark { background:#fff; }
+  html.dark body { background:#fff !important; }
+  html.dark { --k5-card:#eef0f3; --k5-sub:#e3e5ea; --k5-sub-h:#d9dce2;
+    --k5-sh:0 0 0 1px rgba(255,255,255,.5), 0 8px 26px -12px rgba(255,255,255,.9); --k5-sh-h:0 0 0 1px rgba(255,255,255,.6), 0 14px 34px -14px rgba(255,255,255,1); }
+
+  /* ── Kopfzeile: nur Logo und ☰ ─────────────────────────────── */
+  .glass::before { background:linear-gradient(to bottom, rgba(242,243,246,.86) 0%, rgba(242,243,246,.66) 70%, rgba(242,243,246,0) 100%) !important; }
+  html.dark .glass::before { background:linear-gradient(to bottom, rgba(255,255,255,.86) 0%, rgba(255,255,255,.66) 70%, rgba(255,255,255,0) 100%) !important; }
+  .k-hdr .header-links, .k-hdr .hdr-tools { display:none !important; }
+  .k5-burger { position:relative; margin-left:auto; flex:none; display:inline-flex; align-items:center; justify-content:center; gap:10px; height:44px; min-width:44px; padding:0 12px;
+    border:none; border-radius:14px; background:var(--k5-card); box-shadow:var(--k5-sh); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer;
+    transition:transform .25s var(--k5-spring), box-shadow .25s; -webkit-tap-highlight-color:transparent; }
+  .k5-burger:hover { box-shadow:var(--k5-sh-h); }
+  .k5-burger:active { transform:scale(.94); }
+  .k5-burger .k5-cur { font-size:14px; font-weight:700; color:#111114; }
+  .k5-burger .k5-cur b { color:#111114; font-weight:700; }
+  .k5-burger svg { width:22px; height:22px; flex:none; }
+  .k5-burger svg line { transition:transform .35s var(--k5-ease), opacity .2s; transform-origin:12px 12px; }
+  .k5-burger[aria-expanded="true"] svg .l1 { transform:translateY(5px) rotate(45deg); }
+  .k5-burger[aria-expanded="true"] svg .l2 { opacity:0; transform:scaleX(.2); }
+  .k5-burger[aria-expanded="true"] svg .l3 { transform:translateY(-5px) rotate(-45deg); }
+  .k5-burger .k5-dot { position:absolute; top:8px; right:8px; width:9px; height:9px; border-radius:50%; background:#f59e0b; box-shadow:0 0 0 2px var(--k5-card); display:none; }
+  .k5-burger.k5-unsaved .k5-dot { display:block; }
+  @media (max-width:560px) { .k5-burger .k5-cur { display:none; } .k5-burger { padding:0; width:44px; } }
+
+  .k5-scrim { position:fixed; inset:0; z-index:190; background:rgba(17,17,20,.28); opacity:0; pointer-events:none; transition:opacity .3s var(--k5-ease);
+    -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+  .k5-scrim.open { opacity:1; pointer-events:auto; }
+  .k5-menu { position:fixed; z-index:200; top:10px; right:10px; bottom:10px; width:min(360px, calc(100vw - 20px)); box-sizing:border-box; display:flex; flex-direction:column;
+    border-radius:24px; background:rgba(255,255,255,.9); -webkit-backdrop-filter:blur(22px) saturate(170%); backdrop-filter:blur(22px) saturate(170%);
+    box-shadow:0 24px 60px -18px rgba(17,17,20,.35), 0 0 0 1px rgba(17,17,20,.05); padding:14px 14px 12px; overflow-y:auto; overscroll-behavior:contain;
+    transform:translateX(calc(100% + 24px)); visibility:hidden; transition:transform .42s var(--k5-ease), visibility 0s linear .42s; font-family:Figtree, system-ui, sans-serif; color:#111114; }
+  .k5-menu.open { transform:none; visibility:visible; transition:transform .42s var(--k5-ease), visibility 0s; }
+  html.dark .k5-menu { background:rgba(240,241,244,.94); }
+  .k5-menu > * { opacity:0; transform:translateX(18px); transition:opacity .3s, transform .4s var(--k5-ease); }
+  .k5-menu.open > * { opacity:1; transform:none; transition-delay:calc(var(--i,0) * 35ms + 80ms); }
+  .k5-mhead { display:flex; align-items:center; justify-content:space-between; padding:2px 4px 10px 8px; }
+  .k5-mhead .k5-mlogo { font-size:20px; font-weight:800; letter-spacing:-.04em; text-decoration:none; color:#111114; }
+  .k5-mhead .k5-mlogo svg { height:1em; width:auto; vertical-align:-.1em; margin-left:-.04em; }
+  .k5-x { width:40px; height:40px; border:none; border-radius:12px; background:#f1f2f4; color:#111114; font-size:20px; line-height:1; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; transition:transform .25s var(--k5-spring), background .15s; }
+  .k5-x:hover { background:#e6e7ea; } .k5-x:active { transform:scale(.9); }
+  .k5-mlabel { padding:14px 10px 6px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5c5e66; }
+  .k5-mod { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:16px; text-decoration:none; color:#111114; transition:background .15s, transform .2s var(--k5-spring); }
+  .k5-mod:hover { background:rgba(17,17,20,.05); } .k5-mod:active { transform:scale(.98); }
+  .k5-mod .k5-ic { flex:none; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:#f1f2f4; color:#111114;
+    font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:700; }
+  .k5-mod .k5-mt { display:flex; flex-direction:column; min-width:0; }
+  .k5-mod .k5-mt b { font-size:15.5px; font-weight:800; letter-spacing:-.01em; }
+  .k5-mod .k5-mt span { font-size:12.5px; color:#5c5e66; }
+  .k5-mod[aria-current="page"] { background:#111114; color:#fff; }
+  .k5-mod[aria-current="page"] .k5-ic { background:#5468ad; color:#fff; }
+  .k5-mod[aria-current="page"] .k5-mt span { color:rgba(255,255,255,.7); }
+  .k5-mod .k5-badge { margin-left:auto; width:9px; height:9px; border-radius:50%; background:#f59e0b; display:none; }
+  .k5-row { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; padding:6px 8px 6px 12px; border-radius:16px; }
+  .k5-row .k5-rt { display:flex; flex-direction:column; font-size:14.5px; font-weight:700; }
+  .k5-row .k5-rt span { font-size:12px; font-weight:400; color:#5c5e66; }
+  .k5-sw { position:relative; flex:none; width:50px; height:30px; border:none; border-radius:999px; background:#d5d7dc; cursor:pointer; padding:0; transition:background .25s; }
+  .k5-sw::after { content:''; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:transform .32s var(--k5-spring); }
+  .k5-sw[aria-checked="true"] { background:#5468ad; } .k5-sw[aria-checked="true"]::after { transform:translateX(20px); }
+  .k5-segm { position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:2px; padding:3px; border-radius:13px; background:#f1f2f4; min-width:0; }
+  .k5-segm button { position:relative; z-index:1; border:none; background:transparent; height:34px; padding:0 8px; border-radius:10px; font:inherit; font-size:13px; font-weight:700; color:#5c5e66; cursor:pointer; transition:color .2s; }
+  .k5-segm button[aria-pressed="true"] { color:#111114; }
+  .k5-segm .k5-pill { position:absolute; z-index:0; top:3px; bottom:3px; left:0; border-radius:10px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.12); transition:transform .38s var(--k5-ease), width .38s var(--k5-ease); }
+  .k5-row.k5-col { flex-direction:column; align-items:stretch; gap:8px; padding-top:10px; padding-bottom:10px; }
+  .k5-mfoot { margin-top:auto; padding:16px 10px 4px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:12px; color:#5c5e66; }
+  .k5-mfoot a { color:#5c5e66; } .k5-mfoot .k5-ver { font-family:'JetBrains Mono', ui-monospace, monospace; }
+  body.k5-lock { overflow:hidden; }
+
+  /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
+  header.k5-idx > .lang-switcher, header.k5-idx > .theme-btn { display:none !important; }
+  header.k5-idx { justify-content:flex-end !important; }
+  .module-card { background:var(--k5-card) !important; box-shadow:var(--k5-sh); transition:box-shadow .3s, transform .3s var(--k5-spring) !important; }
+  .module-card:hover { box-shadow:var(--k5-sh-h); transform:translateY(-2px); }
+  .module-card:active { transform:scale(.985) !important; }
+  @media (max-width:560px) { .module-card { margin-left:-8px !important; margin-right:-8px !important; padding-left:12px !important; padding-right:12px !important; } }
+  .install { background:var(--k5-card); border:none !important; box-shadow:var(--k5-sh); }
+  .headline .logo-r { transition:transform .6s var(--k5-spring); }
+  .headline .logo-r path, .headline .logo-r line { animation:k5-drop .9s var(--k5-spring) .35s both; }
+  @keyframes k5-drop { from { transform:translateY(-14px); opacity:0; } to { transform:none; opacity:1; } }
+  html.k5-still .headline .logo-r path, html.k5-still .headline .logo-r line { animation:none; }
+
+  /* ── Karten: weiß, weicher Schatten, ein gemeinsames Maß ───── */
+  .card, .pick-btn, .k5-card { background:var(--k5-card) !important; box-shadow:var(--k5-sh) !important; border:none !important; border-radius:var(--k5-r) !important; }
+  .tile, .nav-list-item, .search-hit, .topic-pager a { background:var(--k5-card) !important; box-shadow:var(--k5-sh) !important; border:none !important; transition:box-shadow .25s, transform .22s var(--k5-spring) !important; }
+  a.tile:hover, .nav-list-item:hover, .search-hit:hover, .topic-pager a:hover { box-shadow:var(--k5-sh-h) !important; transform:translateY(-1px) !important; }
+  a.tile:active, .nav-list-item:active, .search-hit:active, .topic-pager a:active { transform:scale(.985) !important; }
+  .pick-btn { transition:box-shadow .25s, transform .2s var(--k5-spring) !important; }
+  .pick-btn:hover { box-shadow:var(--k5-sh-h) !important; } .pick-btn:active { transform:scale(.99); }
+  .pick.open .pick-btn { box-shadow:var(--k5-sh-h) !important; }
+  .pick-menu { border-radius:var(--k5-r) !important; box-shadow:0 24px 60px -18px rgba(17,17,20,.35), 0 0 0 1px rgba(17,17,20,.05) !important; transform-origin:top center; }
+  .pick.open .pick-menu { animation:k5-pop .32s var(--k5-ease); }
+  @keyframes k5-pop { from { opacity:0; transform:translateY(-6px) scale(.98); } to { opacity:1; transform:none; } }
+
+  /* Kartenköpfe wie die Lastzeilen: Titel fett, Kurzfassung in Mono, Pfeil rechts */
+  .k5-acc > .card-title, .k5-acc > .k5-head { cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
+  .k5-chev { flex:none; width:28px; height:28px; margin-left:auto; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#5c5e66; background:var(--k5-sub); transition:transform .38s var(--k5-ease), background .15s; }
+  .k5-chev svg { width:14px; height:14px; }
+  .k5-acc.k5-closed .k5-chev, .k5-acc.closed .k5-chev, .k5-acc.k-closed .k5-chev { transform:rotate(-90deg); }
+  .k5-acc > .card-title:hover .k5-chev, .k5-acc > .k5-head:hover .k5-chev { background:var(--k5-sub-h); }
+  .k5-sum { display:block; margin-top:6px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; line-height:1.5; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .k5-acc:not(.k5-closed) > .k5-sum { display:none; }
+  .k5-acc.k5-closed > .k5-body { display:none; }
+  .k5-acc.k5-closed > .card-title { margin-bottom:0 !important; }
+  .k5-flash { animation:k5-flash 1.1s var(--k5-ease); }
+  @keyframes k5-flash { 0% { box-shadow:0 0 0 3px rgba(84,104,173,.45), var(--k5-sh); } 100% { box-shadow:0 0 0 0 rgba(84,104,173,0), var(--k5-sh); } }
+
+
+  /* ── Kopf jeder klappbaren Karte: Titel · Kurzfassung (Mono) · ▲/▼ — wie die Lasten-Karte in calc ── */
+  .k5-acc > .k5-head, .col-in .card.fold > .card-title { display:flex !important; align-items:center; gap:10px; min-height:30px; flex-wrap:nowrap; }
+  .k5-head > .card-title, .k5-head > .card-title-row { margin:0 !important; flex:none; }
+  .k5-hsum { flex:1 1 auto; min-width:0; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; font-weight:400; letter-spacing:0; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-transform:none; }
+  .k5-tri { flex:none; margin-left:auto; fill:#5c5e66; transition:transform .38s var(--k5-ease); }
+  .k5-acc.k5-closed > .k5-head .k5-tri, .card.fold.closed > .card-title .k5-tri, .card.dfold.closed > .card-title .k5-tri { transform:rotate(180deg); }
+  .col-in .card.fold > .card-title::after { display:none !important; }
+  .col-in .card.fold > .fold-sum { display:none !important; }
+  .col-in .card.fold.closed { padding-top:18px; padding-bottom:18px; }
+  #details .card.dfold > .card-title > span:first-child::after { content:none !important; }
+  #details .card.dfold > .card-title { display:flex; align-items:center; gap:10px; }
+  #details .card.dfold > .card-title .k5-tri { margin-left:8px; }
+  .k5-acc.k5-closed { padding-top:18px !important; padding-bottom:18px !important; }
+  .k5-acc > .k5-body { padding-top:2px; }
+  /* Unterabschnitte innerhalb einer Karte (Rahmen: Vorlage, Lager, Gelenke) */
+  .card .k5-acc { padding:4px 0 0; border-top:1px solid #eceef2; margin-top:10px !important; }
+  .card .k5-acc > .k5-head { min-height:44px; margin-bottom:0 !important; }
+  .card .k5-acc > .k5-body { padding:2px 0 8px; }
+  .card .k5-acc.k5-closed { padding:4px 0 0 !important; }
+
+  /* Flächen innerhalb weißer Karten */
+  .load-item, .k-row.load-item { background:var(--k5-sub) !important; }
+  .load-item > .load-item-header, .load-item > .load-item-body { background:transparent !important; }
+  .k-menu { box-shadow:0 18px 44px -14px rgba(17,17,20,.3), 0 0 0 1px rgba(17,17,20,.05) !important; }
+  .results-grid .metric { background:var(--k5-card); border-radius:var(--k5-r2); box-shadow:var(--k5-sh); }
+  .diagram-toggle-row { background:var(--k5-sub) !important; }
+
+  /* ── Seitenkopf überall wie die Auswahl in calc/size: Karte mit kleiner Oberzeile und fettem Titel ── */
+  #main .page-head { display:flex; flex-direction:column-reverse; gap:2px; background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:14px 18px; margin-bottom:14px; }
+  #main .page-head .page-title { font-size:20px !important; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
+  #main .page-head .page-sub { font-size:12.5px !important; margin-top:0 !important; color:#5c5e66; line-height:1.4; }
+  #main .menu-toggle { display:none !important; }
+  @media (max-width:999px) { #main .page-head { cursor:pointer; position:relative; padding-right:44px; }
+    #main .page-head::after { content:''; position:absolute; right:20px; top:50%; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #5c5e66; transform:translateY(-50%); } }
+  .wrap > .top { background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:16px 18px; margin:14px 0 18px !important; align-items:center !important; }
+  .wrap > .top .pname { font-size:22px !important; }
+  .k5-phead { margin:14px 0 18px; padding:18px 20px; }
+  #list > .pos.k5-acc { background:var(--k5-card); box-shadow:var(--k5-sh); border:none; border-radius:var(--k5-r); }
+  #list > .pos.k5-acc > .k5-head { display:grid !important; grid-template-columns:minmax(0,1fr) auto; column-gap:8px; row-gap:2px; align-items:center; }
+  #list > .pos.k5-acc > .k5-head > .pos-h { grid-column:1; grid-row:1; min-width:0; margin:0; flex-wrap:nowrap; }
+  #list > .pos.k5-acc > .k5-head > .k5-tri { grid-column:2; grid-row:1; margin:0 4px 0 0; }
+  #list > .pos.k5-acc > .k5-head > .k5-hsum { grid-column:1 / -1; grid-row:2; padding-left:2px; }
+  #list > .pos.k5-acc:not(.k5-closed) > .k5-head > .k5-hsum { display:none; }
+  #list > .pos.k5-acc .pos-h .k-name-s { flex:1 1 80px !important; order:0 !important; min-width:0 !important; }
+  #list > .pos.k5-acc .pos-h .pos-t { min-width:0 !important; text-overflow:ellipsis; }
+  #list > .pos.k5-acc .pos-h .pos-nr { order:0 !important; }
+  @media (max-width:560px) { .sec-t { flex-direction:column; align-items:flex-start !important; gap:2px; } #list > .pos.k5-acc .pos-h .k-pen { display:none; } #list > .pos.k5-acc .pos-h { gap:6px; } }
+  .k5-phead > h1 { margin:0 0 6px !important; font-size:24px !important; }
+  .k5-phead > :last-child { margin-bottom:0 !important; }
+  .rw-card .rw-chev { display:none !important; }
+  .rw-card > .rw-title { display:flex !important; align-items:center; gap:10px; cursor:pointer; }
+  .rw-card.closed > .rw-title .k5-tri { transform:rotate(180deg); }
+  .k5-head > .card-title, .col-in .card.fold > .card-title > span:first-child, .rw-title > span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:74%; }
+
+  /* ── Bewegung ─────────────────────────────────────────────── */
+  @keyframes k5-in { from { opacity:0; transform:translateY(16px) scale(.985); } to { opacity:1; transform:none; } }
+  .k5-rv { animation:k5-in .62s var(--k5-ease) both; animation-delay:var(--k5-d, 0ms); }
+  @keyframes k5-fade { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+  .k5-open-anim > :not(.card-title):not(.k5-head):not(.k5-sum) { animation:k5-fade .38s var(--k5-ease) both; }
+  @keyframes k5-tick { 0% { opacity:.25; transform:translateY(5px); } 100% { opacity:1; transform:none; } }
+  .k5-tick { animation:k5-tick .42s var(--k5-ease); }
+  .k5-count { position:absolute; inset:0; pointer-events:none; color:inherit; font:inherit; letter-spacing:inherit; }
+  .k5-counting { position:relative; color:transparent !important; }
+  .k5-counting > .k5-count { color:#111114; }
+  .k5-wipe { animation:k5-wipe .75s var(--k5-ease) both; }
+  @keyframes k5-wipe { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
+  button, .btn, a.btn, .k-opt, .k-mode { transition:transform .22s var(--k5-spring), background-color .15s, box-shadow .2s, color .15s; }
+  button:active:not(:disabled), .btn:active { transform:scale(.97); }
+  .k5-seg-host { position:relative; isolation:isolate; }
+  .k5-seg-host > .k5-pill { position:absolute; z-index:-1; top:3px; bottom:3px; left:0; border-radius:10px; background:#fff; box-shadow:0 1px 3px rgba(17,17,20,.12);
+    transition:transform .4s var(--k5-ease), width .4s var(--k5-ease); pointer-events:none; }
+  .k5-seg-host.k5-seg-on > button { background:transparent !important; box-shadow:none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:1ms !important; animation-delay:0ms !important; transition-duration:1ms !important; transition-delay:0ms !important; }
+  }
+  html.k5-still *, html.k5-still *::before, html.k5-still *::after { animation:none !important; transition:none !important; }
+  @media print { .k5-burger, .k5-menu, .k5-scrim { display:none !important; } html, body { background:#fff !important; }
+    .card, .pick-btn, .k5-card { box-shadow:none !important; } .k5-rv { animation:none !important; } }
+</style>
+<script data-k5>
+// Seiten-Anpassungen der Design-Schicht 5: welche Karten zu Akkordeons werden und was ihre Kurzfassung zeigt.
+window.kragrK5Page = function(K){
+  var D=document, $=function(s,r){ return (r||D).querySelector(s); }, $$=function(s,r){ return Array.prototype.slice.call((r||D).querySelectorAll(s)); };
+  var txt=function(el){ return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; };
+  // Regeln: Karten, die die Seite neu zeichnet, bekommen den Akkordeon-Kopf jedes Mal wieder
+  var RULES=[];
+  function rule(sel, opt){ RULES.push([sel,opt]); }
+  function apply(){
+    RULES.forEach(function(r){ $$(r[0]).forEach(function(el){
+      if(el.k5acc && el.querySelector(':scope > .k5-head') && el.querySelector(':scope > .k5-body')) return;
+      el.k5acc=null; el.classList.remove('k5-acc','k5-closed');
+      var o=typeof r[1]==='function' ? r[1](el) : r[1]; if(o) K.acc(el, o); }); });
+  }
+  var pend=0; function later(){ if(pend) return; pend=requestAnimationFrame(function(){ pend=0; apply(); deco(); K.refreshSums(); }); }
+  function deco(){}
+  var P=K.page;
+
+  if(P==='calc'){
+    // Knotentabelle: zugeklappt, Kurzfassung = Anzahl Knoten und Stäbe
+    rule('.k-knoten', function(el){ var h=$(':scope > .card-title', el)||$(':scope > .k5-head', el); if(!h) return null;
+      return {head:h, key:'knoten', closed:true, sum:function(c){ var n=$$('.k-kn-list > li', c).length, b=$$('.k-kn-tab tr.k-kn-bar', c).length;
+        var W={de:['Knoten','Stab','Stäbe'],en:['nodes','member','members'],fr:['nœuds','barre','barres'],es:['nudos','barra','barras']}[K.lang()]||['Knoten','Stab','Stäbe'];
+        return n ? n+' '+W[0]+' · '+b+' '+(b===1?W[1]:W[2]) : ''; }}; });
+    // Rahmen: Vorlage, Lager A, Lager B, Kopf, Gelenke als Unterabschnitte (immer nur einer offen)
+    rule('#tab-frame .card > div', function(el){ if(/k5-head|k5-body|card-title-row/.test(el.className) || el.closest('.k-knoten')) return null; var h=$(':scope > .card-title', el); if(!h) return null;
+      var key=h.getAttribute('data-i18n')||txt(h);
+      return {head:h, key:'frame-'+key, closed:key!=='framePresets', group:'frame-sys', sum:function(c){
+        var a=$$('.toggle-btn.active, .toggle-btn[aria-pressed="true"]', c).map(txt); if(a.length) return a.join(' · ');
+        var n=$$('.load-item, .k-row', c).length; return n ? String(n) : ''; }}; });
+    // Ergebniszahlen und Diagramm-Umschalter
+    var tick=function(){ K.watchNumbers('.results-grid .m-value');
+      $$('.diagram-toggle-row').forEach(function(r){ K.slider(r, '.diagram-toggle-btn[class*="active-"]'); }); };
+    D.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('.diagram-toggle-btn'); if(!b) return;
+      var card=b.closest('.card'); setTimeout(function(){ var s=card && $('svg[id*="diag"], .diagram-wrap svg, svg', card.querySelector('.diagram-toggle-row') ? card : null);
+        var list=$$('svg', card).filter(function(x){ return x.getBoundingClientRect().height>60; }); K.wipe(list[0]); void s; }, 0); });
+    // Lösungsweg-Karte: gleicher Kopf wie die anderen Karten, startet zugeklappt; Kurzfassung = Zahl der Schritte
+    var STEPW={de:'Schritte',en:'steps',fr:'étapes',es:'pasos'};
+    var RW0=false; try{ if(localStorage.getItem('statiq-rw-closed')===null){ localStorage.setItem('statiq-rw-closed','1'); RW0=true; } }catch(e){}
+    if(RW0) $$('.rw-card').forEach(function(c){ c.classList.add('closed'); });
+    deco=function(){ tick();
+      $$('.rw-card').forEach(function(c){ var h=$(':scope > .rw-title', c); if(!h) return; c.classList.add('k5-rw');
+        if(!$(':scope > .k5-tri', h)){ var sp=D.createElement('span'); sp.className='k5-hsum'; h.appendChild(sp); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
+        var n=$$('.rw-body > .st', c).length, v=c.classList.contains('closed') && n ? n+' '+(STEPW[K.lang()]||STEPW.de) : '';
+        var sp2=$(':scope > .k5-hsum', h); if(sp2.textContent!==v) sp2.textContent=v; h.setAttribute('aria-expanded', String(!c.classList.contains('closed'))); }); };
+    // Ergebnis-Details (Knotentabelle, Lösungsweg): immer nur eines offen
+    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.rw-card > .rw-title'); if(!h) return; var rw=h.parentNode;
+      setTimeout(function(){ if(rw.classList.contains('closed')) return; var col=rw.parentNode; $$('.k-knoten.k5-acc', col).forEach(function(k){ if(!k.classList.contains('k5-closed')) K.setClosed(k, true); }); deco(); }, 0); });
+    D.addEventListener('k5toggle', function(e){ var c=e.detail.card; if(!e.detail.open || !c.classList.contains('k-knoten')) return;
+      var col=c.closest('.col-out')||c.parentNode.parentNode; $$('.rw-card', col.parentNode||D).forEach(function(r){ if(!r.classList.contains('closed') && r.offsetParent!==null){ r.classList.add('closed'); try{ localStorage.setItem('statiq-rw-closed','1'); }catch(_){} } }); deco(); });
+    // System wechseln: Karten neu einblenden
+    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu')) setTimeout(function(){ $$('main .card').forEach(function(c){ c.k5seen=0; }); K.reveal('main:not(.hidden) .card, main:not(.hidden) .results-grid .metric'); }, 30); });
+  }
+
+  if(P==='size'){
+    // Eingabekarten: immer nur eine offen; Kurzfassung im Kopf (wie die Lastzeilen in calc)
+    var FS='statiq-size-fold';
+    var sumOf=function(c){ try{ return typeof foldSummary==='function' ? foldSummary(c) : ''; }catch(e){ return ''; } };
+    deco=function(){
+      $$('.col-in .card.fold').forEach(function(c){ var h=$(':scope > .card-title', c); if(!h) return; c.classList.add('k5-fold');
+        if(!$(':scope > .k5-hsum', h)){ var s=D.createElement('span'); s.className='k5-hsum'; h.appendChild(s); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
+        var s2=$(':scope > .k5-hsum', h), v=c.classList.contains('closed') ? sumOf(c) : ''; if(s2.textContent!==v) s2.textContent=v; h.setAttribute('aria-expanded', String(!c.classList.contains('closed'))); });
+      $$('#details > .card.dfold').forEach(function(c){ var h=$(':scope > .card-title', c); if(h && !$(':scope > .k5-tri', h)) h.insertAdjacentHTML('beforeend', K.CHEV); });
+      K.watchBars($('#chk-table'), function(r){ var a=$('a', r); return a ? a.getAttribute('href') : r.rowIndex; });
+    };
+    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.col-in .card.fold > .card-title'); if(!h || e.target.closest('button, a, input, select')) return;
+      var card=h.parentNode; if(card.classList.contains('closed')){ later(); return; }
+      var st={}; try{ st=JSON.parse(localStorage.getItem(FS)||'{}'); }catch(_){}
+      $$('.col-in .card.fold').forEach(function(c){ if(c===card || c.classList.contains('closed') || c.offsetParent===null) return; c.classList.add('closed'); if(c.dataset.fold) st[c.dataset.fold]=true; });
+      try{ localStorage.setItem(FS, JSON.stringify(st)); }catch(_){}
+      later();
+    });
+    D.addEventListener('keydown', function(e){ var h=e.target; if((e.key==='Enter'||e.key===' ') && h.matches && h.matches('.col-in .card.fold > .card-title')){ e.preventDefault(); h.click(); } });
+    // Beim Laden: nur die erste offene Eingabekarte bleibt offen (Akkordeon)
+    setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; });
+      open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 0);
+    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; }); open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 40); });
+    // Umfang und Grundlagen: zugeklappt
+    rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
+  }
+
+  if(P==='ref'){
+    // Seitenkopf wie die Auswahl in calc/size: Tippen öffnet am Handy die Themenliste
+    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('#main .page-head'); if(!h || !$('#main .menu-toggle') || window.innerWidth>999) return;
+      if(typeof toggleSideMenu==='function'){ e.stopPropagation(); toggleSideMenu(); } });
+  }
+
+  if(P==='rechtliches'){
+    // Seitenkopf als Karte: Titel, Einleitung und Sprungmarken zusammen
+    deco=function(){ var c=$('#content'), h=c && $(':scope > h1', c); if(!h) return; var w=D.createElement('div'); w.className='k5-card k5-phead'; c.insertBefore(w, h);
+      var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
+  }
+
+  if(P==='projekt'){
+    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
+    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
+    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
+    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
+    var known=null;
+    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
+      if(!known) known=ids.slice();
+      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
+      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
+      var isNew=false;
+      var hid=hashId(), first=all[0]===el;
+      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
+        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
+    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
+  }
+
+  new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
+  apply(); deco();
+  D.addEventListener('k5toggle', function(){ deco(); });
+  D.addEventListener('change', function(e){ if(e.target && (e.target.id==='lang-sel'||e.target.id==='lang')) setTimeout(function(){ K.refreshSums(); deco(); }, 50); }, true);
+  D.addEventListener('click', function(){ setTimeout(deco, 0); });
+};
+// kragr-Design 5 (Oktober 2026): Burgermenü, Akkordeon-Karten und ruhige Bewegung. Identisch in calc, size, ref, projekt, rechtliches.
+// Bedienelemente der alten Kopfzeile (#lang-sel, #ueb-btn, #theme-btn, #proj-btn) bleiben im DOM (versteckt); das Menü steuert sie.
+(function(){
+  if(window.kragrK5) return;
+  var D=document, H=D.documentElement;
+  var PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.html?$/,'')||'index';
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Automatisierte Browser (Tests) ohne Bewegung, außer ?k5motion steht in der Adresse
+  if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
+  var STILL=function(){ return RM || H.classList.contains('k5-still'); };
+  var T={
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Schnittgrößen',size:'Bemessung',ref:'Nachschlagewerk',proj:'Meine Projekte',projS:'Positionen aus calc und size',
+        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Internal forces',size:'Design & sizing',ref:'Reference',proj:'My projects',projS:'Items from calc and size',
+        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Efforts internes',size:'Dimensionnement',ref:'Référence',proj:'Mes projets',projS:'Éléments de calc et size',
+        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Esfuerzos internos',size:'Dimensionado',ref:'Referencia',proj:'Mis proyectos',projS:'Elementos de calc y size',
+        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
+  // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
+  var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
+    dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
+  function langSel(){ return D.getElementById('lang-sel')||D.getElementById('lang')||(PAGE==='index' && typeof window.setLang==='function' ? VSEL : null); }
+  function lang(){ var l=null; try{ l=localStorage.getItem('statiq-lang'); }catch(e){} if(!T[l]){ var s=langSel(); l=s&&s.value; } return T[l]?l:'de'; }
+  function t(k){ return (T[lang()]||T.de)[k]; }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
+
+  // ── Höhe weich ändern (FLIP): vorher messen, Änderung ausführen, nachher animieren ──────────
+  function measure(els){ return els.map(function(el){ return {el:el, h:el.getBoundingClientRect().height}; }); }
+  function flip(before, anchor, anchorTop){
+    if(anchor && anchorTop!=null){ var d=anchor.getBoundingClientRect().top-anchorTop; if(Math.abs(d)>1) window.scrollBy(0,d); }
+    if(STILL()) return;
+    before.forEach(function(b){ var el=b.el; if(!el.isConnected) return; var h1=el.getBoundingClientRect().height; if(Math.abs(h1-b.h)<2 || !el.animate) return;
+      var ov=el.style.overflow; el.style.overflow='hidden';
+      var a=el.animate([{height:b.h+'px'},{height:h1+'px'}],{duration:Math.min(520, 260+Math.abs(h1-b.h)*0.25), easing:'cubic-bezier(.22,.8,.24,1)'});
+      a.onfinish=a.oncancel=function(){ el.style.overflow=ov; }; });
+  }
+  function openAnim(card){ if(STILL()) return; card.classList.remove('k5-open-anim'); void card.offsetWidth; card.classList.add('k5-open-anim'); setTimeout(function(){ card.classList.remove('k5-open-anim'); }, 450); }
+
+  // ── Akkordeon: Karte mit Kopf (Titel · Kurzfassung · Pfeil), Gruppe = immer nur eine offen ──────
+  // opt: {head, key, closed, group, sum(card) → Text, solo:true (nicht in Gruppe), store}
+  var ACC_STORE='kragr-k5-acc';
+  function accState(){ try{ return JSON.parse(localStorage.getItem(ACC_STORE)||'{}'); }catch(e){ return {}; } }
+  function accSave(key, closed){ if(!key) return; var s=accState(); s[PAGE+':'+key]=closed; try{ localStorage.setItem(ACC_STORE, JSON.stringify(s)); }catch(e){} }
+  function acc(card, opt){
+    if(!card || card.k5acc) return; opt=opt||{};
+    var head=opt.head||card.querySelector(':scope > .card-title'); if(!head) return;
+    // Kopf in eine eigene Zeile legen: der Titel selbst kann übersetzt (textContent) werden, ohne Pfeil und Kurzfassung zu verlieren
+    if(!head.classList.contains('k5-head')){ var w=D.createElement('div'); w.className='k5-head'; card.insertBefore(w, head); w.appendChild(head); head=w; }
+    card.k5acc=opt; card.classList.add('k5-acc');
+    head.setAttribute('role','button'); head.tabIndex=0;
+    var body=D.createElement('div'); body.className='k5-body';
+    Array.prototype.slice.call(card.childNodes).forEach(function(n){ if(n!==head) body.appendChild(n); });
+    card.appendChild(body);
+    if(!head.querySelector('.k5-hsum')){ var s=D.createElement('span'); s.className='k5-hsum'; head.appendChild(s); }
+    if(!head.querySelector('.k5-tri')) head.insertAdjacentHTML('beforeend', CHEV);
+    if(opt.group) card.dataset.k5g=opt.group;
+    var st=accState(), k=PAGE+':'+(opt.key||'');
+    var closed = opt.key && (k in st) ? st[k] : !!opt.closed;
+    setClosed(card, closed, true);
+    head.addEventListener('click', function(e){ if(e.target.closest('a, input, select, textarea, .info-btn, button:not(.k5-head)')) return; toggle(card); });
+    head.addEventListener('keydown', function(e){ if((e.key==='Enter'||e.key===' ') && e.target===head){ e.preventDefault(); toggle(card); } });
+  }
+  function setClosed(card, c, quiet){
+    card.classList.toggle('k5-closed', c);
+    var head=card.querySelector(':scope > .k5-head'); if(head) head.setAttribute('aria-expanded', c?'false':'true');
+    updSum(card);
+    if(!quiet) accSave(card.k5acc&&card.k5acc.key, c);
+  }
+  function updSum(card){ var o=card.k5acc, s=card.querySelector(':scope > .k5-head .k5-hsum'); if(!o||!s) return;
+    var tx=''; try{ tx=o.sum ? (o.sum(card, card.classList.contains('k5-closed'))||'') : ''; }catch(e){}
+    if(s.textContent!==tx) s.textContent=tx; }
+  function groupOf(card){ var g=card.dataset.k5g; if(!g) return []; var p=card.parentNode;
+    return Array.prototype.filter.call(D.querySelectorAll('[data-k5g="'+g+'"]'), function(c){ return c!==card && c.offsetParent!==null && (!p || c.parentNode===p || c.closest('[data-k5gscope]')===card.closest('[data-k5gscope]')); }); }
+  function toggle(card, force){
+    var open = force!=null ? force : card.classList.contains('k5-closed');
+    var others = open ? groupOf(card).filter(function(c){ return !c.classList.contains('k5-closed'); }) : [];
+    var before=measure([card].concat(others)), top=card.getBoundingClientRect().top;
+    others.forEach(function(c){ setClosed(c, true); });
+    setClosed(card, !open);
+    flip(before, card, top);
+    if(open) openAnim(card);
+    try{ D.dispatchEvent(new CustomEvent('k5toggle',{detail:{card:card, open:open}})); }catch(e){}
+  }
+  function refreshSums(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-acc'), updSum); }
+  var sumT=0; D.addEventListener('input', function(){ clearTimeout(sumT); sumT=setTimeout(refreshSums, 120); }, true);
+  D.addEventListener('change', function(){ clearTimeout(sumT); sumT=setTimeout(refreshSums, 60); }, true);
+
+  // Fremde Klapp-Mechaniken (Lasten-Karte, Lastzeilen, size-Karten, Rechenschritte, ref-Seitenleiste): weich animieren
+  var FOREIGN='.k-loads > .k-head, .load-item .k-row-head, .load-item > .k-rh, .fold > .card-title, .dfold > .card-title, .k-row > button:first-child, #sidebar .sb-sub > button, #sidebar button.sb-h, #sidebar .grp > button, .pos-head, [data-k5-flip]';
+  D.addEventListener('click', function(e){
+    if(STILL()) return;
+    var h=e.target.closest && e.target.closest(FOREIGN); if(!h || h.closest('.k5-acc > .k5-head')) return;
+    var card=h.closest('.load-item, .card, .k-loads, .fold, .dfold, .sb-group, li, section, div') || h.parentNode;
+    var parent=card.parentNode, sibs=parent ? Array.prototype.filter.call(parent.children, function(c){ return c.offsetParent!==null; }) : [card];
+    var before=measure(sibs.slice(0,40)), top=card.getBoundingClientRect().top;
+    requestAnimationFrame(function(){ flip(before, null, null); if(card.isConnected && !card.classList.contains('closed') && !card.classList.contains('k-closed')) openAnim(card); });
+    void top;
+  }, true);
+
+  // ── Kopfzeile: Logo · ☰ ─────────────────────────────────────────────
+  var MODS=[['calc','calc.html','Σ'],['size','size.html','η'],['ref','ref.html','§']];
+  var ICON_PROJ='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  var burger, menu, scrim, lastFocus;
+  function buildHeader(){
+    var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
+    burger=D.createElement('button'); burger.type='button'; burger.id='k5-burger'; burger.className='k5-burger';
+    burger.setAttribute('aria-haspopup','dialog'); burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-controls','k5-menu');
+    burger.innerHTML='<span class="k5-cur"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="4" y1="7" x2="20" y2="7"/><line class="l2" x1="4" y1="12" x2="20" y2="12"/><line class="l3" x1="4" y1="17" x2="20" y2="17"/></svg><span class="k5-dot"></span>';
+    burger.addEventListener('click', function(){ menu && menu.classList.contains('open') ? closeMenu() : openMenu(); });
+    hdr.appendChild(burger);
+    scrim=D.createElement('div'); scrim.className='k5-scrim'; scrim.addEventListener('click', closeMenu);
+    menu=D.createElement('div'); menu.id='k5-menu'; menu.className='k5-menu'; menu.setAttribute('role','dialog'); menu.setAttribute('aria-modal','true');
+    D.body.appendChild(scrim); D.body.appendChild(menu);
+    D.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); } });
+    labelBurger();
+  }
+  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?PAGE:'');
+    var tx=t('menu'); if(cur.textContent!==tx) cur.textContent=tx; burger.setAttribute('aria-label', t('open')+(m?' ('+m+')':'')); }
+  function themeNow(){ return H.dataset.theme || (function(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } })(); }
+  function setTheme(v){ var n=0; while(themeNow()!==v && n++<3 && window.mulyTheme) window.mulyTheme(); if(!window.mulyTheme){ try{ localStorage.setItem('muly-theme',v); }catch(e){} } }
+  function hrefOf(name){ var a=D.querySelector('.k-hdr .header-links a[href^="'+name+'.html"]'); return a ? a.getAttribute('href') : name+'.html'; }
+  function version(){ var v=D.querySelector('.k-hdr .version'); var s=v&&v.textContent.trim(); if(!s){ var m=(D.documentElement.outerHTML.slice(0,200).match(/v(\d+\.\d+\.\d+)/)||[])[0]; s=m||''; } return s; }
+  function seg(id, items, cur){ return '<div class="k5-segm" role="group" id="'+id+'">'+items.map(function(it){ return '<button type="button" data-v="'+it[0]+'" aria-pressed="'+(it[0]===cur)+'">'+esc(it[1])+'</button>'; }).join('')+'<span class="k5-pill" aria-hidden="true"></span></div>'; }
+  function renderMenu(){
+    var ueb=D.getElementById('ueb-btn'), i=0, h='';
+    function I(){ return ' style="--i:'+(i++)+'"'; }
+    h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
+    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('mods'))+'</div>';
+    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+m[0]+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
+    h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+I()+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b><span>'+esc(t('projS'))+'</span></span><span class="k5-badge"></span></a>';
+    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
+    if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
+    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
+    if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
+    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?'·'+PAGE:'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
+    menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
+    menu.querySelector('.k5-x').onclick=closeMenu;
+    var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
+    Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
+    Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
+      setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
+    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
+  }
+  function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
+  function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
+    if(!b){ p.style.width='0'; return; } p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; }); }
+  function openMenu(){ if(!menu) return; lastFocus=D.activeElement; renderMenu(); menu.classList.add('open'); scrim.classList.add('open'); D.body.classList.add('k5-lock');
+    burger.setAttribute('aria-expanded','true'); requestAnimationFrame(placePills); var f=menu.querySelector('[aria-current="page"]')||menu.querySelector('.k5-mod'); if(f) f.focus({preventScroll:true}); }
+  function closeMenu(){ if(!menu||!menu.classList.contains('open')) return; menu.classList.remove('open'); scrim.classList.remove('open'); D.body.classList.remove('k5-lock');
+    burger.setAttribute('aria-expanded','false'); if(lastFocus && lastFocus.focus) try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
+  // Fokus im Menü halten
+  D.addEventListener('keydown', function(e){ if(e.key!=='Tab' || !menu || !menu.classList.contains('open')) return;
+    var f=menu.querySelectorAll('a,button'); if(!f.length) return; var a=f[0], z=f[f.length-1];
+    if(e.shiftKey && D.activeElement===a){ e.preventDefault(); z.focus(); } else if(!e.shiftKey && D.activeElement===z){ e.preventDefault(); a.focus(); } });
+
+  // ── Einblenden beim Laden und beim Scrollen ─────────────────────────────
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ show(en.target); io.unobserve(en.target); } }); }, {rootMargin:'0px 0px -8% 0px'}) : null;
+  var revealN=0, revealT=0;
+  function show(el){ var now=Date.now(); if(now-revealT>400) revealN=0; revealT=now; el.style.setProperty('--k5-d', Math.min(revealN++,8)*55+'ms'); el.classList.add('k5-rv');
+    setTimeout(function(){ el.classList.remove('k5-rv'); el.style.removeProperty('--k5-d'); }, 1300); }
+  function reveal(sel){ if(STILL()) return; Array.prototype.forEach.call(D.querySelectorAll(sel), function(el){ if(el.k5seen || el.offsetParent===null) return; el.k5seen=1; io ? io.observe(el) : show(el); }); }
+
+  // ── Zahlen zählen beim ersten Erscheinen hoch, danach kurzes Nachrücken bei Änderung ──
+  // Der echte Text bleibt unverändert im Element; gezählt wird in einer darübergelegten Ebene.
+  function countUp(el){
+    if(STILL() || el.k5counted) return; var txt=el.textContent.trim(), m=txt.match(/^(-?)(\d[\d.,\s]*)(.*)$/); if(!m) return; el.k5counted=1;
+    var raw=m[2].trim(), dec=(raw.match(/[.,](\d+)$/)||[])[1]||'', sep=(raw.match(/[.,](?=\d+$)/)||[])[0]||'.';
+    var val=parseFloat(raw.replace(/[\s]/g,'').replace(sep===','?/\./g:/,/g,'').replace(',','.')); if(!isFinite(val)||val===0) return;
+    var o=D.createElement('span'); o.className='k5-count'; o.setAttribute('aria-hidden','true'); el.classList.add('k5-counting'); el.appendChild(o);
+    var t0=performance.now(), dur=700;
+    (function step(now){ var p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3), v=val*e;
+      o.textContent=m[1]+v.toFixed(dec.length).replace('.',sep)+m[3];
+      if(p<1 && o.isConnected) requestAnimationFrame(step); else { o.remove(); el.classList.remove('k5-counting'); } })(t0);
+  }
+  function watchNumbers(sel){
+    Array.prototype.forEach.call(D.querySelectorAll(sel), function(el){ if(el.k5w) return; el.k5w=1; var last=el.textContent;
+      if(/\d/.test(last) && el.offsetParent!==null) countUp(el);
+      new MutationObserver(function(){ var now=el.textContent; if(el.querySelector('.k5-count')) return; if(now===last) return; var was=last; last=now;
+        if(!/\d/.test(was) || !el.k5counted){ if(el.offsetParent!==null) countUp(el); return; }
+        if(STILL()) return; el.classList.remove('k5-tick'); void el.offsetWidth; el.classList.add('k5-tick'); }).observe(el,{childList:true, characterData:true, subtree:true}); });
+  }
+
+  // ── Ausnutzungsbalken: von alter auf neue Breite gleiten ─────────────────
+  var BARW={};
+  function watchBars(host, rowKey){
+    if(!host || host.k5b) return; host.k5b=1;
+    function run(){ var rows=host.querySelectorAll('tr'); Array.prototype.forEach.call(rows, function(r, i){ var b=r.querySelector('.bar > i'); if(!b) return;
+      var k=rowKey(r,i), w=b.style.width; var from=(k in BARW)?BARW[k]:'0%'; BARW[k]=w; if(STILL() || from===w || !b.animate) return;
+      b.animate([{width:from},{width:w}],{duration:from==='0%'?820:480, delay:from==='0%'?120+i*45:0, easing:'cubic-bezier(.22,.8,.24,1)', fill:'backwards'}); }); }
+    new MutationObserver(run).observe(host,{childList:true}); run();
+  }
+
+  // ── Segment-Umschalter (M/Q/N/w): gleitende Fläche unter der aktiven Taste ──
+  function slider(host, activeSel){
+    if(!host || host.k5s) return; host.k5s=1; host.classList.add('k5-seg-host','k5-seg-on'); var p=D.createElement('span'); p.className='k5-pill'; host.appendChild(p);
+    function place(){ var b=host.querySelector(activeSel); if(!b||!host.offsetWidth){ p.style.opacity='0'; return; } p.style.opacity='1'; p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; p.style.top=b.offsetTop+'px'; p.style.height=b.offsetHeight+'px'; p.style.bottom='auto'; }
+    new MutationObserver(place).observe(host,{attributes:true, subtree:true, attributeFilter:['class','aria-pressed']});
+    window.addEventListener('resize', place); place(); host.k5place=place;
+  }
+  function wipe(el){ if(STILL()||!el) return; el.classList.remove('k5-wipe'); void el.getBoundingClientRect(); el.classList.add('k5-wipe'); setTimeout(function(){ el.classList.remove('k5-wipe'); }, 900); }
+
+  window.kragrK5={ page:PAGE, acc:acc, toggle:toggle, setClosed:setClosed, refreshSums:refreshSums, flip:flip, measure:measure, reveal:reveal, countUp:countUp,
+    watchNumbers:watchNumbers, watchBars:watchBars, slider:slider, wipe:wipe, openMenu:openMenu, closeMenu:closeMenu, t:t, lang:lang, still:STILL, CHEV:CHEV };
+
+  function init(){
+    buildHeader();
+    try{ if(window.kragrK5Page) window.kragrK5Page(window.kragrK5); }catch(e){ if(window.console) console.error(e); }
+    reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
+    window.addEventListener('resize', function(){ if(menu && menu.classList.contains('open')) placePills(); });
+    new MutationObserver(function(){ labelBurger(); }).observe(H,{attributes:true, attributeFilter:['lang']});
+  }
+  if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
 </head>
 <body>
 
@@ -1156,7 +1686,7 @@ window.mulyProj = {
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.3</span>
+    <span class="version">v0.11.4</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1199,6 +1729,7 @@ window.mulyProj = {
 
 <!-- ═══════════════ BEAM TAB ═══════════════ -->
 <main class="k-frame main" id="tab-beam">
+  <input type="checkbox" id="lfOn-beam" hidden aria-hidden="true">
   <div class="card">
     <div class="card-title-row">
       <div class="card-title" data-i18n="system">System</div>
@@ -1266,6 +1797,7 @@ window.mulyProj = {
 
 <!-- ═══════════════ CANTILEVER TAB ═══════════════ -->
 <main class="k-frame main hidden" id="tab-cantilever">
+  <input type="checkbox" id="lfOn-cant" hidden aria-hidden="true">
   <div class="card">
     <div class="card-title-row">
       <div class="card-title" data-i18n="system">System</div>
@@ -1333,6 +1865,7 @@ window.mulyProj = {
 
 <!-- ═══════════════ CONTINUOUS BEAM TAB ═══════════════ -->
 <main class="k-frame main hidden" id="tab-cont">
+  <input type="checkbox" id="lfOn-cont" hidden aria-hidden="true">
   <div class="card">
     <div class="card-title-row">
       <div class="card-title" data-i18n="system">System</div>
@@ -1402,6 +1935,7 @@ window.mulyProj = {
 
 <!-- ═══════════════ FRAME TAB ═══════════════ -->
 <main class="k-frame main hidden" id="tab-frame">
+  <input type="checkbox" id="lfOn-frame" hidden aria-hidden="true">
 
   <div class="card">
     <div class="card-title-row">
@@ -1645,7 +2179,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.3';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.4';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[]}, cant:{point:[],dist:[],horiz:[]} };
 let uid = 0;
@@ -2558,6 +3092,14 @@ function calculateContinuous() {
   if(Ls.some(l=>!l||l<=0)){ calcError('cont','invalidSpans'); return; }
   if(n<2){ calcError('cont','minSpans'); return; }
   const warns=[];
+  const {lay, Ltot, xs, supports, points, dists, EI0, EIfn} = contInput(warns);
+  const res=lineSolve(Ltot,{supports, points, dists, EI:EI0, EIfn, hinges:lay.hinges}, 30*lay.segs.length);
+  if(!res){ calcError('cont', lay.hinges.length ? 'mechanism' : 'calcError'); return; }
+  showCalcMsgs('cont', warns.map(text=>({type:'warn', text})));
+  contFinish(res, lay, Ltot, xs, supports, Ls, n);
+}
+// Eingaben des Durchlaufträgers für den Löser (ohne Zeichnen; auch für die Lastfälle, v0.11.4)
+function contInput(warns){
   const lay=contLayout(), Ltot=lay.Ltot, xs=lay.xs;
   const supports=lay.supports.map(sp=>({...sp}));
   // keine horizontale Halterung (nur Loslager)? Dann ein Lager waagerecht halten — ändert keine Schnittgröße
@@ -2581,10 +3123,9 @@ function calculateContinuous() {
   });
   const EI0=lineEI('cont');
   const EIfn = x => { const sg=lay.segs.find(sg=>x>=sg.x0-1e-9 && x<=sg.x0+sg.L+1e-9) || lay.segs[0]; return EI0*sg.k; };
-  const res=lineSolve(Ltot,{supports, points, dists, EI:EI0, EIfn, hinges:lay.hinges}, 30*lay.segs.length);
-  if(!res){ calcError('cont', lay.hinges.length ? 'mechanism' : 'calcError'); return; }
-  showCalcMsgs('cont', warns.map(text=>({type:'warn', text})));
-
+  return {lay, Ltot, xs, supports, points, dists, EI0, EIfn};
+}
+function contFinish(res, lay, Ltot, xs, supports, Ls, n){
   document.getElementById('cont-Mmax').textContent=absMaxOf(res.fine.M).toFixed(2);
   document.getElementById('cont-Qmax').textContent=absMaxOf(res.fine.Q).toFixed(2);
 
@@ -3367,7 +3908,8 @@ function buildSDF(){
       u: lc?.maxima.u ?? null, w: lc?.maxima.w ?? null,
       reactions,
       members: memberData,
-      knoten: lc?.knoten || null   // Knoten und Stabendkräfte (ab v0.11.0)
+      knoten: lc?.knoten || null,  // Knoten und Stabendkräfte (ab v0.11.0)
+      combo: lc?.combo || null     // Lastfälle und Kombinationen (ab v0.11.4)
     },
     plot: lc ? lc.plot : null   // exakte Verläufe für den Bericht (ab v0.8.2)
   };
@@ -3386,7 +3928,7 @@ function saveCalc(sys, opt){
   if(!data || !lc){ if(!(opt&&opt.quiet)) showCalcMsgs(sid,[{type:'error', text:msgText('calcFirst')}]); return; }
   const geom = lc.geometry;
   const results = {Mmax:lc.maxima.Mmax, Qmax:lc.maxima.Qmax, Nmax:lc.maxima.Nmax, w:lc.maxima.w,
-                   reactions:lc.reactions, supportMoments:lc.supportMoments||null, knoten:lc.knoten||null};
+                   reactions:lc.reactions, supportMoments:lc.supportMoments||null, knoten:lc.knoten||null, combo:lc.combo||null};
 
   // gleichmäßige Arrays je Stab (für kragr·size und ältere Berichte)
   const memberData={};
@@ -3597,31 +4139,33 @@ function reportStiffness(S){
 function reportLoads(S){
   const L=S.loads; if(!L) return [];
   const out=[];
+  // Einwirkung (Lastfälle, ab v0.11.4) an die Zeile hängen: l.act aus dem Schnappschuss
+  const tag = l => (l && l.act && typeof lfTagText==='function') ? ` [${lfTagText(l.act)}]` : '';
   const q = l => (num(l.qa)===num(l.qb) ? `${num(l.qa)}` : `${num(l.qa)} → ${num(l.qb)}`)+' kN/m';
   if(S.type==='frame'){
     (L.vertical||[]).forEach((l,k)=>{
       const n=l.i||k+1, mem=l.member||'rafter';
       const dir = mem==='rafter' ? ({n:tr('perNormal'), h:tr('perHeight')}[l.rdir] || tr('perPlan')) : (l.dir==='h' ? tr('horizPlus') : tr('axialPlus'));
-      out.push(`q${n} = ${q(l)}, ${memW(mem)}, ${mem==='rafter'?'x':'z'} = ${num(l.a)} … ${num(l.b)} m, ${dir}`);
+      out.push(`q${n} = ${q(l)}, ${memW(mem)}, ${mem==='rafter'?'x':'z'} = ${num(l.a)} … ${num(l.b)} m, ${dir}`+tag(l));
     });
     (L.horizontal||[]).forEach((l,k)=>{
       const n=l.i||k+1, mem=l.member||'left';
       const parts=[]; if(+l.F) parts.push(`F = ${num(l.F)} kN ⊥`); if(+l.H) parts.push(`H = ${num(l.H)} kN ∥`);
-      out.push(`P${n}: ${parts.join(', ')||'0'}, ${memW(mem)}, ${mem==='rafter'?'x':'z'} = ${num(l.z)} m`);
+      out.push(`P${n}: ${parts.join(', ')||'0'}, ${memW(mem)}, ${mem==='rafter'?'x':'z'} = ${num(l.z)} m`+tag(l));
     });
   } else if(S.type==='cont'){
     const segOut = (nm, sp) => { if(!sp) return;
-      (sp.point||[]).forEach(l=>out.push(`${nm}: F${l.i} = ${num(l.F)} kN ↓, x = ${num(l.a)} m`));
-      (sp.dist||[]).forEach(l=>out.push(`${nm}: q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
-      (sp.mom||[]).forEach(l=>out.push(`${nm}: M${l.i} = ${num(l.M)} kNm ↻, x = ${num(l.a)} m`)); };
+      (sp.point||[]).forEach(l=>out.push(`${nm}: F${l.i} = ${num(l.F)} kN ↓, x = ${num(l.a)} m`+tag(l)));
+      (sp.dist||[]).forEach(l=>out.push(`${nm}: q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`+tag(l)));
+      (sp.mom||[]).forEach(l=>out.push(`${nm}: M${l.i} = ${num(l.M)} kNm ↻, x = ${num(l.a)} m`+tag(l))); };
     segOut(tr('overhangL'), L.ovL);
     (L.spans||[]).forEach((sp,k)=>segOut(`${tr('spanWord')} ${k+1}`, sp));
     segOut(tr('overhangR'), L.ovR);
   } else {
-    (L.point||[]).forEach(l=>out.push(`F${l.i} = ${num(l.F)} kN, x = ${num(l.a)} m`+(+l.alpha?`, α = ${num(l.alpha)}°`:'')));
-    (L.dist||[]).forEach(l=>out.push(`q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`));
+    (L.point||[]).forEach(l=>out.push(`F${l.i} = ${num(l.F)} kN, x = ${num(l.a)} m`+(+l.alpha?`, α = ${num(l.alpha)}°`:'')+tag(l)));
+    (L.dist||[]).forEach(l=>out.push(`q${l.i} = ${q(l)} ↓, x = ${num(l.a)} … ${num(l.b)} m`+tag(l)));
     (L.horiz||[]).forEach(l=>{ const parts=[]; if(+l.H) parts.push(`H = ${num(l.H)} kN →`); if(+l.Me) parts.push(`M<sub>e</sub> = ${num(l.Me)} kNm ↻`);
-      out.push(`H/Me${l.i}: ${parts.join(', ')||'0'}, x = ${num(l.a)} m`); });
+      out.push(`H/Me${l.i}: ${parts.join(', ')||'0'}, x = ${num(l.a)} m`+tag(l)); });
   }
   return out;
 }
@@ -3685,6 +4229,8 @@ function renderReport(name, sdf){
         ${res('|N|<sub>max</sub>', nfR(r.Nmax), 'kN')}
         ${S.type==='frame' ? (r.u!=null ? res('u<sub>max</sub>', nfR(r.u), 'mm')+res('w<sub>max</sub>', nfR(r.w), 'mm') : '') : (r.w!=null ? res('w<sub>max</sub>', nfR(r.w), 'mm') : '')}
       </div>
+
+      ${typeof lfReport==='function' ? lfReport(sdf) : ''}
 
       ${reactionRows ? `<div class="rep-block"><div class="rb-h">${tr('repReactions')}</div>
       <table class="rb-tab">
@@ -4417,29 +4963,7 @@ function calculateFrame(){
 
   // Eingaben prüfen: Positionen auf die Stablänge begrenzen, Hinweise sammeln
   const warns = [];
-  const Lof = mem => mem==='rafter' ? b : mem==='left' ? hA : hB;
-  const hinges = frameHinges.map((hg,i)=>({...hg, pos:(()=>{
-    const Lm=Lof(hg.member), p=parseFloat(hg.pos)||0, c=Math.min(Math.max(p,0),Lm);
-    if(Math.abs(c-p)>EPS_POS) warns.push(msgText('hingeClamped', i+1, p, Lm, c));
-    return c; })()}));
-  const vLoads = [];
-  frameLoads.vert.forEach((l,i)=>{
-    if(!l.enabled) return;
-    const v=l.values, mem=v.member||'rafter';
-    const d=cutRange(warns, `q${i+1}`, v.a, v.b, v.qa, v.qb, Lof(mem));
-    if(d) vLoads.push({...l, values:{...v, ...d}});
-  });
-  const hLoads = [];
-  frameLoads.horiz.forEach((l,i)=>{
-    if(!l.enabled) return;
-    const v=l.values, mem=v.member||'left';
-    hLoads.push({...l, values:{...v, z:checkPos(warns, `P${i+1}`, v.z, Lof(mem))}});
-  });
-  const gable = frameGable(b, hA, hB);
-  const model = frameBuildModel(b, hA, hB, {
-    supA: supportA, supB: supportB, head: supportHead, headType: supportHeadType,
-    hinges, vLoads, hLoads, EI_S, EI_R, gable
-  });
+  const {gable, model} = frameInput(b, hA, hB, EI_S, EI_R, warns);
   const sol = frameSolveDSM(model);
   if(sol.mechanism){ calcError('frame','mechanism'); return; }
   showCalcMsgs('frame', warns.map(text=>({type:'warn', text})));
@@ -4499,6 +5023,34 @@ function calculateFrame(){
   renderFrameDiagram(b,h,allM,allQ,allN,NP,supportA,supportB,rafHingeIdx,hA,hB,fine, gable?{gable}:{});
   try{ lastCalc.frame.knoten=kKnoten('frame', model.elems); }catch(e){}
   if(typeof kKnotenCard==='function') kKnotenCard('frame');
+}
+
+// Lasten und Modell des Rahmens aus den Eingaben (ohne Zeichnen; auch für die Lastfälle, v0.11.4)
+function frameInput(b, hA, hB, EI_S, EI_R, warns){
+  const Lof = mem => mem==='rafter' ? b : mem==='left' ? hA : hB;
+  const hinges = frameHinges.map((hg,i)=>({...hg, pos:(()=>{
+    const Lm=Lof(hg.member), p=parseFloat(hg.pos)||0, c=Math.min(Math.max(p,0),Lm);
+    if(Math.abs(c-p)>EPS_POS) warns.push(msgText('hingeClamped', i+1, p, Lm, c));
+    return c; })()}));
+  const vLoads = [];
+  frameLoads.vert.forEach((l,i)=>{
+    if(!l.enabled) return;
+    const v=l.values, mem=v.member||'rafter';
+    const d=cutRange(warns, `q${i+1}`, v.a, v.b, v.qa, v.qb, Lof(mem));
+    if(d) vLoads.push({...l, values:{...v, ...d}});
+  });
+  const hLoads = [];
+  frameLoads.horiz.forEach((l,i)=>{
+    if(!l.enabled) return;
+    const v=l.values, mem=v.member||'left';
+    hLoads.push({...l, values:{...v, z:checkPos(warns, `P${i+1}`, v.z, Lof(mem))}});
+  });
+  const gable = frameGable(b, hA, hB);
+  const model = frameBuildModel(b, hA, hB, {
+    supA: supportA, supB: supportB, head: supportHead, headType: supportHeadType,
+    hinges, vLoads, hLoads, EI_S, EI_R, gable
+  });
+  return {gable, model};
 }
 
 function setDiagMode(sys, mode){
@@ -6992,6 +7544,465 @@ function k7Cancel(){ _k4Off=true; clearTimeout(_k4T); try{ localStorage.removeIt
 if(K4_PM()){ window.kragrPMPage = { label:()=>kragrPM.t('sys'), apply:k7Apply, cancel:k7Cancel }; kragrPM.render(); }
 k2All();
 }
+</script>
+<style data-lf>
+  /* Baukasten „+“ und Lastfälle/Kombinationen (calc v0.11.4) */
+  .k-plus { width:28px; height:28px; border:none; border-radius:8px; background:var(--k-ctl,#f1f2f4); color:var(--k-accent,#5468ad); font:inherit; font-size:19px; font-weight:700; line-height:1; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; margin-left:auto; margin-right:6px; }
+  .k-plus:hover { background:var(--k-ctl-h,#e6e7ea); }
+  .k-plus.on { background:var(--k-tint,#eceff8); }
+  .k-plus[aria-expanded="true"] { background:var(--k-accent,#5468ad); color:#fff; }
+  .card-title-row .k-plus + .info-btn { margin-left:0; }
+  .k-plusm { display:flex; flex-direction:column; gap:6px; margin:0 0 12px; }
+  .k-plusm[hidden] { display:none; }
+  .k-pm-it { display:flex; align-items:center; gap:10px; text-align:left; border:none; border-radius:10px; background:#fff; padding:9px 12px; font:inherit; cursor:pointer; color:var(--k-text,#111114); }
+  .k-pm-it:disabled { cursor:default; opacity:.55; }
+  .k-pm-it b { font-size:13.5px; font-weight:800; display:block; }
+  .k-pm-it small { font-size:12px; color:var(--k-muted,#5c5e66); display:block; margin-top:1px; }
+  .k-pm-it .k-pm-tx { flex:1; min-width:0; }
+  .k-pm-sw { flex:none; width:34px; height:20px; border-radius:10px; background:#d4d6dc; position:relative; transition:background .15s; }
+  .k-pm-sw::after { content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:left .15s; }
+  .k-pm-it[aria-checked="true"] .k-pm-sw { background:var(--k-accent,#5468ad); }
+  .k-pm-it[aria-checked="true"] .k-pm-sw::after { left:16px; }
+  .k-pm-soon { flex:none; font-size:11px; font-weight:700; color:var(--k-muted,#5c5e66); background:var(--k-ctl,#f1f2f4); border-radius:6px; padding:2px 7px; }
+  .k-lft { flex:none; border:none; border-radius:6px; background:var(--k-tint,#eceff8); color:#2f3c70; font-family:var(--k-mono,monospace); font-size:11.5px; font-weight:700; padding:3px 7px; cursor:pointer; white-space:nowrap; }
+  .k-lft:hover { background:#dfe3f3; }
+  .k-lfm { display:flex; flex-wrap:wrap; gap:6px; padding:4px 12px 12px; background:#fff; }
+  .k-lfm[hidden] { display:none; }
+  .k-lfm-h { width:100%; font-size:11.5px; font-weight:700; color:var(--k-muted,#5c5e66); margin-top:4px; }
+  .k-lfo { border:none; border-radius:8px; background:var(--k-ctl,#f1f2f4); font:inherit; font-size:12.5px; padding:6px 10px; cursor:pointer; color:var(--k-text,#111114); text-align:left; }
+  .k-lfo[aria-pressed="true"] { background:var(--k-accent,#5468ad); color:#fff; }
+  .k-lfc .k-lfc-chips { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+  .k-lfc .k-lfc-chip { border:none; border-radius:8px; background:var(--k-ctl,#f1f2f4); font:inherit; font-size:12.5px; font-weight:700; padding:6px 11px; cursor:pointer; color:var(--k-text,#111114); }
+  .k-lfc .k-lfc-chip[aria-pressed="true"] { background:var(--k-accent,#5468ad); color:#fff; }
+  .k-lfc .k-lfc-note { font-size:12.5px; color:#5c5e66; line-height:1.5; margin:0 0 10px; }
+  .k-lfc .k-lfc-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin:0 0 10px; }
+  .k-lfc .k-lfc-m { background:#fff; border-radius:10px; padding:8px 10px; }
+  .k-lfc .k-lfc-l { font-size:11.5px; font-weight:700; color:#5c5e66; }
+  .k-lfc .k-lfc-v { font-size:20px; font-weight:800; line-height:1.25; }
+  .k-lfc .k-lfc-v small { font-size:11px; font-weight:600; color:#5c5e66; margin-left:3px; }
+  .k-lfc .k-lfc-c { font-family:var(--k-mono,monospace); font-size:11px; color:#5c5e66; line-height:1.4; margin-top:2px; }
+  .k-lfc .k-lfc-dia { background:#fff; border-radius:10px; padding:8px 10px 4px; margin:0 0 10px; }
+  .k-lfc .k-lfc-dt { display:flex; gap:6px; margin:0 0 6px; }
+  .k-lfc .k-lfc-dt button { border:none; border-radius:8px; background:var(--k-ctl,#f1f2f4); font:inherit; font-family:var(--k-mono,monospace); font-size:12px; font-weight:700; padding:4px 12px; cursor:pointer; }
+  .k-lfc .k-lfc-dt button[aria-pressed="true"] { background:#111114; color:#fff; }
+  .k-lfc .k-lfc-dia svg { width:100%; height:auto; display:block; }
+  .k-lfc .k-lfc-h { font-size:13px; font-weight:800; margin:12px 0 6px; }
+  .k-lfc .k-lfc-rw { font-family:var(--k-mono,monospace); font-size:12px; line-height:1.75; color:#3d3f45; background:#fff; border-radius:10px; padding:8px 10px; }
+  .k-lfc .k-lfc-rw b { color:#111114; }
+  .k-lfc table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .k-lfc th { text-align:right; font-size:11.5px; font-weight:700; color:#5c5e66; padding:4px 6px; border-bottom:1px solid #e3e4e8; }
+  .k-lfc td { text-align:right; padding:5px 6px; font-family:var(--k-mono,monospace); font-size:12px; border-bottom:1px solid #f0f1f3; white-space:nowrap; }
+  .k-lfc th:first-child, .k-lfc td:first-child { text-align:left; }
+  .k-lfc td.k-lfc-tc { white-space:normal; color:#5c5e66; font-size:11px; text-align:left; }
+  body.uebung:not(.ueb-dia) .k-lfc { display:none !important; }
+  @media print { .k-lfc { break-inside:avoid; } .k-plus, .k-plusm, .k-lft, .k-lfm { display:none !important; } }
+</style>
+<script data-lf>
+/* ═══ Baukasten „+“ in der System-Karte und Lastfälle mit Kombinationen nach DIN EN 1990/NA (calc v0.11.4) ═══
+   - „+“ neben dem Info-Knopf der System-Karte öffnet die Erweiterungen des Systems. Heute: „Lastfälle und Kombinationen“
+     (an/aus je System, gespeichert im versteckten Kontrollkästchen #lfOn-<sys>, damit der Entwurf es mitnimmt).
+     Federn/Setzungen und Temperatur stehen als „bald“ in der Liste.
+   - Ist es an, trägt jede Last ein Kürzel (G, Q mit Kategorie, S, W). Gespeichert in l.values.act ('G', 'Q:A' … 'Q:H',
+     'S', 'S:hi', 'W'); ohne Eintrag gilt G. Aus = Rechnung wie bisher (alle Lasten charakteristisch, keine Karte).
+   - Rechnung: jede Gruppe (eine Einwirkung; beim Durchlaufträger die Nutzlast je Feld) wird einzeln gelöst (linear,
+     Superposition) und an denselben Stellen ausgewertet. Je Stelle: max/min über γ_G ∈ {1,35; 1,0} (nur GZT) und jede
+     veränderliche Einwirkungsart als Leiteinwirkung; jede veränderliche Gruppe wird nur angesetzt, wenn sie ungünstig
+     wirkt (damit ist die feldweise Anordnung der Nutzlast enthalten). GZT Gl. 6.10, GZG charakteristisch, häufig,
+     quasi-ständig. ψ nach Tab. NA.A.1.1 (wie in „Wissen“).
+   - Vorzeichen wie die Verläufe der Seite (M > 0 Zug unten bzw. innen). Ergebnis in lastCalc[sys].combo (Extremwerte je
+     Kombination, Auflager), gespeichert in sdf.results.combo; Bericht über lfReport(sdf). */
+(function(){
+const LF_TAB = { beam:'beam', cant:'cantilever', cont:'cont', frame:'frame' };
+const LF_RES = { beam:'beam-results', cant:'cant-results', cont:'cont-results', frame:'frame-results' };
+const LF_FN  = { beam:'calculateBeam', cant:'calculateCantilever', cont:'calculateContinuous', frame:'calculateFrame' };
+// Einwirkungen: Kürzel, Art, ψ0, ψ1, ψ2 (DIN EN 1990/NA, Tab. NA.A.1.1)
+const LF_ACTS = { 'G':['G'], 'Q:A':['Q',.7,.5,.3], 'Q:B':['Q',.7,.5,.3], 'Q:C':['Q',.7,.7,.6], 'Q:D':['Q',.7,.7,.6], 'Q:E':['Q',1,.9,.8],
+  'Q:F':['Q',.7,.7,.6], 'Q:G':['Q',.7,.5,.3], 'Q:H':['Q',0,0,0], 'S':['S',.5,.2,0], 'S:hi':['S',.7,.5,.2], 'W':['W',.6,.2,0] };
+const LF_MODES = ['gzt','char','freq','qp'];
+const LFT = {
+  de:{ plus:'System erweitern', lf:'Lastfälle und Kombinationen', lfS:'G, Q, Schnee, Wind · GZT und GZG nach DIN EN 1990', spr:'Federn und Setzungen', tmp:'Temperatur', soon:'bald',
+    act:'Einwirkung', G:'G · ständig', 'Q:A':'Q · Kat. A Wohnen', 'Q:B':'Q · Kat. B Büros', 'Q:C':'Q · Kat. C Versammlung', 'Q:D':'Q · Kat. D Verkauf', 'Q:E':'Q · Kat. E Lager',
+    'Q:F':'Q · Kat. F Fahrzeuge ≤ 30 kN', 'Q:G':'Q · Kat. G Fahrzeuge ≤ 160 kN', 'Q:H':'Q · Kat. H Dächer', S:'S · Schnee bis 1000 m', 'S:hi':'S · Schnee über 1000 m', W:'W · Wind',
+    hG:'Ständig', hQ:'Nutzlast', hSW:'Schnee und Wind',
+    title:'Kombinationen', gzt:'GZT', char:'charakteristisch', freq:'häufig', qp:'quasi-ständig',
+    nGzt:'Grenzzustand der Tragfähigkeit, ständige und vorübergehende Situation (Gl. 6.10): γ<sub>G</sub> = 1,35 ungünstig bzw. 1,00 günstig, γ<sub>Q</sub> = 1,50, Begleiteinwirkungen mit ψ<sub>0</sub>.',
+    nChar:'Gebrauchstauglichkeit, charakteristische Kombination: G + Q<sub>k,1</sub> + Σ ψ<sub>0</sub>·Q<sub>k,i</sub> (z. B. nicht umkehrbare Verformungen).',
+    nFreq:'Gebrauchstauglichkeit, häufige Kombination: G + ψ<sub>1</sub>·Q<sub>k,1</sub> + Σ ψ<sub>2</sub>·Q<sub>k,i</sub>.',
+    nQp:'Gebrauchstauglichkeit, quasi-ständige Kombination: G + Σ ψ<sub>2</sub>·Q<sub>k,i</sub> (Langzeitverformung, Rissbreite).',
+    nTop:'Die Kennwerte oben gelten für alle Lasten mit dem Faktor 1,0.', nPat1:'Veränderliche Lasten werden nur angesetzt, wenn sie ungünstig wirken.', nPat:'Veränderliche Lasten werden nur dort angesetzt, wo sie ungünstig wirken; die Nutzlast feldweise.',
+    max:'max', min:'min', reac:'Auflagerkräfte', comp:'Größe', comb:'maßgebende Kombination', gov:'Rechenweg für {q} = {v} {u}', at:'an der Stelle', lc:'Lastfälle (charakteristisch)',
+    field:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts', left:'Stütze links', rafter:'Riegel', right:'Stütze rechts', none:'keine Last',
+    noVar:'Keine veränderliche Einwirkung: nur G.', rep:'Kombinationen (DIN EN 1990/NA)', repNote:'Extremwerte je Kombination; veränderliche Lasten nur ungünstig angesetzt, Nutzlast beim Durchlaufträger feldweise.' },
+  en:{ plus:'Extend the system', lf:'Load cases and combinations', lfS:'G, Q, snow, wind · ULS and SLS to EN 1990', spr:'Springs and settlements', tmp:'Temperature', soon:'soon',
+    act:'Action', G:'G · permanent', 'Q:A':'Q · cat. A domestic', 'Q:B':'Q · cat. B offices', 'Q:C':'Q · cat. C congregation', 'Q:D':'Q · cat. D shopping', 'Q:E':'Q · cat. E storage',
+    'Q:F':'Q · cat. F vehicles ≤ 30 kN', 'Q:G':'Q · cat. G vehicles ≤ 160 kN', 'Q:H':'Q · cat. H roofs', S:'S · snow up to 1000 m', 'S:hi':'S · snow above 1000 m', W:'W · wind',
+    hG:'Permanent', hQ:'Imposed load', hSW:'Snow and wind',
+    title:'Combinations', gzt:'ULS', char:'characteristic', freq:'frequent', qp:'quasi-permanent',
+    nGzt:'Ultimate limit state, persistent and transient situation (Eq. 6.10): γ<sub>G</sub> = 1.35 unfavourable or 1.00 favourable, γ<sub>Q</sub> = 1.50, accompanying actions with ψ<sub>0</sub>.',
+    nChar:'Serviceability, characteristic combination: G + Q<sub>k,1</sub> + Σ ψ<sub>0</sub>·Q<sub>k,i</sub> (e.g. irreversible deformations).',
+    nFreq:'Serviceability, frequent combination: G + ψ<sub>1</sub>·Q<sub>k,1</sub> + Σ ψ<sub>2</sub>·Q<sub>k,i</sub>.',
+    nQp:'Serviceability, quasi-permanent combination: G + Σ ψ<sub>2</sub>·Q<sub>k,i</sub> (long-term deflection, crack width).',
+    nTop:'The values above are for all loads with factor 1.0.', nPat1:'Variable loads are applied only where they are unfavourable.', nPat:'Variable loads are applied only where they are unfavourable; imposed load span by span.',
+    max:'max', min:'min', reac:'Support reactions', comp:'Value', comb:'governing combination', gov:'Calculation for {q} = {v} {u}', at:'at', lc:'Load cases (characteristic)',
+    field:'Span', ovL:'Left cantilever', ovR:'Right cantilever', left:'Left column', rafter:'Rafter', right:'Right column', none:'no load',
+    noVar:'No variable action: G only.', rep:'Combinations (EN 1990)', repNote:'Extreme values per combination; variable loads applied only where unfavourable, imposed load span by span on continuous beams.' },
+  fr:{ plus:'Compléter le système', lf:'Cas de charge et combinaisons', lfS:'G, Q, neige, vent · ELU et ELS selon EN 1990', spr:'Ressorts et tassements', tmp:'Température', soon:'bientôt',
+    act:'Action', G:'G · permanente', 'Q:A':'Q · cat. A habitation', 'Q:B':'Q · cat. B bureaux', 'Q:C':'Q · cat. C réunion', 'Q:D':'Q · cat. D commerces', 'Q:E':'Q · cat. E stockage',
+    'Q:F':'Q · cat. F véhicules ≤ 30 kN', 'Q:G':'Q · cat. G véhicules ≤ 160 kN', 'Q:H':'Q · cat. H toitures', S:'S · neige jusqu’à 1000 m', 'S:hi':'S · neige au-dessus de 1000 m', W:'W · vent',
+    hG:'Permanente', hQ:'Charge d’exploitation', hSW:'Neige et vent',
+    title:'Combinaisons', gzt:'ELU', char:'caractéristique', freq:'fréquente', qp:'quasi permanente',
+    nGzt:'État limite ultime, situation durable et transitoire (éq. 6.10) : γ<sub>G</sub> = 1,35 défavorable ou 1,00 favorable, γ<sub>Q</sub> = 1,50, actions d’accompagnement avec ψ<sub>0</sub>.',
+    nChar:'Service, combinaison caractéristique : G + Q<sub>k,1</sub> + Σ ψ<sub>0</sub>·Q<sub>k,i</sub> (p. ex. déformations irréversibles).',
+    nFreq:'Service, combinaison fréquente : G + ψ<sub>1</sub>·Q<sub>k,1</sub> + Σ ψ<sub>2</sub>·Q<sub>k,i</sub>.',
+    nQp:'Service, combinaison quasi permanente : G + Σ ψ<sub>2</sub>·Q<sub>k,i</sub> (flèche à long terme, fissuration).',
+    nTop:'Les valeurs ci-dessus correspondent à toutes les charges avec le facteur 1,0.', nPat1:'Les charges variables ne sont appliquées que si elles sont défavorables.', nPat:'Les charges variables ne sont appliquées que là où elles sont défavorables ; la charge d’exploitation travée par travée.',
+    max:'max', min:'min', reac:'Réactions d’appui', comp:'Grandeur', comb:'combinaison déterminante', gov:'Calcul pour {q} = {v} {u}', at:'à', lc:'Cas de charge (caractéristiques)',
+    field:'Travée', ovL:'Console gauche', ovR:'Console droite', left:'Poteau gauche', rafter:'Traverse', right:'Poteau droit', none:'aucune charge',
+    noVar:'Aucune action variable : G seulement.', rep:'Combinaisons (EN 1990)', repNote:'Valeurs extrêmes par combinaison ; charges variables seulement si défavorables, exploitation travée par travée pour les poutres continues.' },
+  es:{ plus:'Ampliar el sistema', lf:'Hipótesis y combinaciones', lfS:'G, Q, nieve, viento · ELU y ELS según EN 1990', spr:'Muelles y asientos', tmp:'Temperatura', soon:'pronto',
+    act:'Acción', G:'G · permanente', 'Q:A':'Q · cat. A vivienda', 'Q:B':'Q · cat. B oficinas', 'Q:C':'Q · cat. C reunión', 'Q:D':'Q · cat. D comercio', 'Q:E':'Q · cat. E almacén',
+    'Q:F':'Q · cat. F vehículos ≤ 30 kN', 'Q:G':'Q · cat. G vehículos ≤ 160 kN', 'Q:H':'Q · cat. H cubiertas', S:'S · nieve hasta 1000 m', 'S:hi':'S · nieve sobre 1000 m', W:'W · viento',
+    hG:'Permanente', hQ:'Sobrecarga de uso', hSW:'Nieve y viento',
+    title:'Combinaciones', gzt:'ELU', char:'característica', freq:'frecuente', qp:'casi permanente',
+    nGzt:'Estado límite último, situación persistente y transitoria (ec. 6.10): γ<sub>G</sub> = 1,35 desfavorable o 1,00 favorable, γ<sub>Q</sub> = 1,50, acciones concomitantes con ψ<sub>0</sub>.',
+    nChar:'Servicio, combinación característica: G + Q<sub>k,1</sub> + Σ ψ<sub>0</sub>·Q<sub>k,i</sub> (p. ej. deformaciones irreversibles).',
+    nFreq:'Servicio, combinación frecuente: G + ψ<sub>1</sub>·Q<sub>k,1</sub> + Σ ψ<sub>2</sub>·Q<sub>k,i</sub>.',
+    nQp:'Servicio, combinación casi permanente: G + Σ ψ<sub>2</sub>·Q<sub>k,i</sub> (flecha a largo plazo, fisuración).',
+    nTop:'Los valores de arriba corresponden a todas las cargas con factor 1,0.', nPat1:'Las cargas variables solo se aplican si son desfavorables.', nPat:'Las cargas variables solo se aplican donde son desfavorables; la sobrecarga vano a vano.',
+    max:'máx', min:'mín', reac:'Reacciones', comp:'Magnitud', comb:'combinación determinante', gov:'Cálculo para {q} = {v} {u}', at:'en', lc:'Hipótesis (características)',
+    field:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho', left:'Pilar izquierdo', rafter:'Dintel', right:'Pilar derecho', none:'sin carga',
+    noVar:'Ninguna acción variable: solo G.', rep:'Combinaciones (EN 1990)', repNote:'Valores extremos por combinación; cargas variables solo donde son desfavorables, sobrecarga vano a vano en vigas continuas.' } };
+const lft = k => ((LFT[calcLang]||LFT.en)[k]) ?? LFT.de[k] ?? k;
+const lfn = (v, d=2) => { const x=Math.abs(v)<5*Math.pow(10,-d-1) ? 0 : v+Math.sign(v)*1e-9; return x.toFixed(d).replace('.', calcLang==='en'?'.':','); };   // halbe Werte aufrunden (178,125 → 178,13)
+const lff = v => { const s=String(+(+v).toFixed(3)); return calcLang==='en' ? s : s.replace('.', ','); };
+const lfF = v => { let s=String(+(+v).toFixed(3)); if(!s.includes('.')) s+='.0'; return calcLang==='en' ? s : s.replace('.', ','); };   // Faktor: 1,0 · 1,35 · 1,05
+const lfOn = sys => !!document.getElementById('lfOn-'+sys)?.checked;
+const lfAct = l => { const a=l && l.values && l.values.act; return LF_ACTS[a] ? a : 'G'; };
+window.lfTagText = a => !LF_ACTS[a] ? 'G' : a==='S:hi' ? 'S>1000' : a.replace(':',' ');
+const LF_MODE = { beam:'gzt', cant:'gzt', cont:'gzt', frame:'gzt' }, LF_Q = { beam:'M', cant:'M', cont:'M', frame:'M' };
+const LF_DATA = {};
+
+// ── alle Lasten eines Systems (ohne Gelenke) ──
+function lfLoads(sys){
+  const out=[];
+  if(sys==='beam'||sys==='cant') ['point','dist','horiz'].forEach(t=>(loads[sys][t]||[]).forEach(l=>out.push({l, type:t, seg:null})));
+  else if(sys==='cont'){ contLayout().segs.forEach(sg=>{ const sp=contSeg(sg.key); ['point','dist','mom'].forEach(t=>(sp[t]||[]).forEach(l=>out.push({l, type:t, seg:sg.key}))); }); }
+  else ['vert','horiz'].forEach(t=>(frameLoads[t]||[]).forEach(l=>out.push({l, type:t, seg:null})));
+  return out;
+}
+// ── Löser ohne Zeichnen: Modell und Auflagerkräfte (je Komponente) ──
+const SUPN = ['A','B','C','D','E','F','G','H'];
+function lfSolveRaw(sys){
+  if(sys==='beam'||sys==='cant'){
+    const L=parseFloat(document.getElementById(sys==='beam'?'bL':'cL').value); if(!(L>0)) return null;
+    const sup = sys==='beam' ? [{x:0,type:'pin'},{x:L,type:'roller'}] : [{x:0,type:'fixed'}];
+    const res=lineSolve(L,{supports:sup, points:beamPointLoads(sys,L,[]), dists:beamDistLoads(sys,L,[]), EI:lineEI(sys)});
+    if(!res) return null;
+    const R = sys==='beam' ? [['H','A',res.reac[0].H],['V','A',res.reac[0].V],['V','B',res.reac[1].V]]
+                           : [['H','A',res.reac[0].H],['V','A',res.reac[0].V],['M','A',res.reac[0].M]];
+    return {model:res.model, mems:['beam'], len:{beam:L}, R};
+  }
+  if(sys==='cont'){
+    const ci=contInput([]);
+    const res=lineSolve(ci.Ltot,{supports:ci.supports, points:ci.points, dists:ci.dists, EI:ci.EI0, EIfn:ci.EIfn, hinges:ci.lay.hinges}, 30*ci.lay.segs.length);
+    if(!res) return null;
+    const R=[]; res.reac.forEach((r,i)=>{ R.push(['V', SUPN[i]||('S'+i), r.V]); if(ci.supports[i].type==='fixed') R.push(['M', SUPN[i]||('S'+i), r.M]); });
+    return {model:res.model, mems:['beam'], len:{beam:ci.Ltot}, R, lay:ci.lay};
+  }
+  const b=parseFloat(document.getElementById('fB').value)||5, h=parseFloat(document.getElementById('fH').value)||4;
+  const hA=parseFloat(document.getElementById('fHA')?.value)||h, hB=parseFloat(document.getElementById('fHB')?.value)||h;
+  const EI_R=10*(parseFloat(document.getElementById('frame-E-raf')?.value)||210)*(parseFloat(document.getElementById('frame-Iy-raf')?.value)||10);
+  const EI_S=10*(parseFloat(document.getElementById('frame-E-col')?.value)||210)*(parseFloat(document.getElementById('frame-Iy-col')?.value)||10);
+  if(frameIndeterminacy()<0) return null;
+  const {model}=frameInput(b, hA, hB, EI_S, EI_R, []);
+  const sol=frameSolveDSM(model); if(sol.mechanism) return null;
+  const {R:RR}=sol, {nA,nB,n2,n3}=model, R=[];
+  [['A',nA,supportA],['B',nB,supportB]].forEach(([s,n,ty])=>{ if(ty!=='roller') R.push(['H',s,RR[n.ux]]); R.push(['V',s,RR[n.uy]]); if(ty==='fixed') R.push(['M',s,RR[n.rot]]); });
+  if(supportHead==='left'||supportHead==='right'){ const nh=supportHead==='left'?n2:n3; R.push(['H','K',RR[nh.ux]]); if(supportHeadType==='pin') R.push(['V','K',RR[nh.uy]]); }
+  return {model, mems:['left','rafter','right'], len:{left:hA, rafter:b, right:hB}, R};
+}
+// nur die Lasten aus keep ansetzen (Schalter vorübergehend umstellen)
+function lfSolveSet(sys, keep){
+  const all=lfLoads(sys), saved=all.map(o=>o.l.enabled);
+  all.forEach(o=>{ o.l.enabled = !!o.l.enabled && keep.has(o.l); });
+  try{ return lfSolveRaw(sys); } finally { all.forEach((o,i)=>{ o.l.enabled=saved[i]; }); }
+}
+// Schnittgrößen an der Stelle t eines Stabs (side 'L': Ende des Elements links davon)
+function lfAt(model, mem, t, side){
+  const es=model.elems.filter(e=>e.mem===mem);
+  let e = side==='L' ? es.find(e=>t>e.t0+1e-10 && t<=e.t1+1e-10) : es.find(e=>t>=e.t0-1e-10 && t<e.t1-1e-10);
+  if(!e) e=es.find(e=>t>=e.t0-1e-9 && t<=e.t1+1e-9) || es[es.length-1];
+  const xi=Math.min(Math.max((t-e.t0)/((e.t1-e.t0)||1)*e.L, 0), e.L);
+  return frameForcesAt(e, xi);
+}
+// Vorzeichen wie in der Knotentabelle: M > 0 Zug unten bzw. innen, Q = dM/dx, N > 0 Zug (so rechnet der Löser)
+const LF_SGN = { beam:{M:1,Q:1,N:1}, cant:{M:1,Q:1,N:1}, cont:{M:1,Q:1,N:1}, frame:{M:1,Q:1,N:1} };
+
+// ── Gruppen bilden und einzeln rechnen ──
+function lfGroups(sys){
+  const map=new Map();
+  lfLoads(sys).forEach(o=>{ if(!o.l.enabled) return;
+    const a=lfAct(o.l), ty=LF_ACTS[a][0], key = a + (sys==='cont' && ty==='Q' ? '@'+o.seg : '');
+    if(!map.has(key)) map.set(key, {key, act:a, type:ty, psi:LF_ACTS[a].slice(1), seg: sys==='cont' && ty==='Q' ? o.seg : null, loads:new Set()});
+    map.get(key).loads.add(o.l); });
+  const ord={G:0,Q:1,S:2,W:3};
+  return [...map.values()].sort((x,y)=>ord[x.type]-ord[y.type] || String(x.act).localeCompare(String(y.act)) || String(x.seg).localeCompare(String(y.seg),undefined,{numeric:true}));
+}
+function lfCompute(sys){
+  const gs=lfGroups(sys); if(!gs.length) return null;
+  const full=lfSolveRaw(sys); if(!full) return null;
+  const sg=LF_SGN[sys];
+  // Stellen: feine Abtastung des vollen Lastbilds (Lastpunkte doppelt, Q = 0), Seite je Stelle
+  const st={};
+  full.mems.forEach(mem=>{ const f=sampleFine(full.model.elems.filter(e=>e.mem===mem), sys==='frame'?60:(sys==='cont'?40*full.lay.segs.length:120));
+    const t=f.t, side=t.map((v,i)=>Math.abs((t[i+1]??-9)-v)<1e-9 ? 'L' : Math.abs((t[i-1]??-9)-v)<1e-9 ? 'R' : 'M');
+    st[mem]={t, side}; });
+  gs.forEach(g=>{ const r=lfSolveSet(sys, g.loads); if(!r) throw new Error('lf');
+    g.model=r.model; g.val={}; full.mems.forEach(mem=>{ const s=st[mem]; g.val[mem]={M:[],Q:[],N:[]};
+      s.t.forEach((t,i)=>{ const f=lfAt(r.model, mem, t, s.side[i]); g.val[mem].M.push(sg.M*f.M); g.val[mem].Q.push(sg.Q*f.Q); g.val[mem].N.push(sg.N*f.N); }); });
+    g.R=r.R.map(x=>x[2]); });
+  return {sys, gs, st, mems:full.mems, len:full.len, Rlab:full.R.map(x=>[x[0],x[1]]), lay:full.lay};
+}
+// ── Kombination an einer Stelle: val(i) = Wert der Gruppe i ──
+function lfFactor(mode, g, lead){
+  if(mode==='gzt') return 1.5*(g.type===lead ? 1 : g.psi[0]);
+  if(mode==='char') return g.type===lead ? 1 : g.psi[0];
+  if(mode==='freq') return g.type===lead ? g.psi[1] : g.psi[2];
+  return g.psi[2];
+}
+function lfComb(mode, gs, val){
+  const iG=gs.findIndex(g=>g.type==='G'), G = iG>=0 ? val(iG) : 0;
+  const types=[...new Set(gs.filter(g=>g.type!=='G').map(g=>g.type))];
+  const gGs = mode==='gzt' ? [1.35, 1.0] : [1.0], leads = mode==='qp' || !types.length ? [null] : types;
+  let mx=null, mn=null;
+  gGs.forEach(gG=>leads.forEach(lead=>{
+    let vmax=gG*G, vmin=gG*G; const on1=[], on2=[];
+    gs.forEach((g,i)=>{ if(g.type==='G') return; const x=lfFactor(mode,g,lead)*val(i); if(x>1e-12){ vmax+=x; on1.push(i); } else if(x<-1e-12){ vmin+=x; on2.push(i); } });
+    if(!mx || vmax>mx.v+1e-9) mx={v:vmax, gG, lead, on:on1};
+    if(!mn || vmin<mn.v-1e-9) mn={v:vmin, gG, lead, on:on2};
+  }));
+  return {max:mx, min:mn};
+}
+// Bezeichnung einer Gruppe als Größe mit Index (ohne Unterstrich)
+function lfSym(C, g, q){
+  const cats=new Set(C.gs.filter(x=>x.type===g.type).map(x=>x.act));
+  let ix = g.type==='G' ? 'G' : g.type + (cats.size>1 ? (g.act==='S:hi'?'>1000':g.act.includes(':')?g.act.split(':')[1]:'') : '');
+  if(g.seg!=null && g.seg!==undefined) ix += ','+(g.seg==='L'?'L':g.seg==='R'?'R':(+g.seg+1));
+  return q ? `${q}<sub>${ix}</sub>` : ix;
+}
+function lfLabel(C, mode, c){
+  if(!c) return '';
+  const gs=C.gs, t=[]; const iG=gs.findIndex(g=>g.type==='G');
+  if(iG>=0) t.push(`${lfF(c.gG)}·G`);
+  // gleiche Art und gleicher Faktor zusammenfassen, Felder der Nutzlast nennen
+  const grp=new Map();
+  c.on.forEach(i=>{ const g=gs[i], f=lfFactor(mode,g,c.lead), cat=g.act, k=g.type+'|'+cat+'|'+f.toFixed(4);
+    if(!grp.has(k)) grp.set(k, {g, f, segs:[]}); if(g.seg!=null) grp.get(k).segs.push(g.seg); });
+  grp.forEach(({g,f,segs})=>{ const cats=new Set(gs.filter(x=>x.type===g.type).map(x=>x.act));
+    let s=`${lfF(f)}·${g.type}${cats.size>1 ? (g.act==='S:hi'?'>1000':g.act.includes(':')?g.act.split(':')[1]:'') : ''}`;
+    const allSegs=gs.filter(x=>x.act===g.act && x.seg!=null).length;
+    if(segs.length && segs.length<allSegs) s+=` (${segs.map(x=>x==='L'?lft('ovL'):x==='R'?lft('ovR'):lft('field')+' '+(+x+1)).join(', ')})`;
+    t.push(s); });
+  return t.length ? t.join(' + ') : '0';
+}
+// Lage einer Stelle als Text
+function lfWhere(C, mem, t){
+  const f = v => lff(+v.toFixed(2));
+  if(C.sys!=='frame') return `x = ${f(t*C.len.beam)} m`;
+  const L=C.len[mem];
+  if(mem==='rafter') return `${lft('rafter')}, x = ${f(t*L)} m`;
+  return `${lft(mem)}, z = ${f((mem==='left'?t:1-t)*L)} m`;
+}
+// Umhüllende und Extremwerte je Kombination
+function lfEnvelope(C, mode){
+  const env={}, ext={};
+  C.mems.forEach(mem=>{ const s=C.st[mem], n=s.t.length; env[mem]={};
+    ['M','Q','N'].forEach(q=>{ const mx=[], mn=[];
+      for(let i=0;i<n;i++){ const r=lfComb(mode, C.gs, j=>C.gs[j].val[mem][q][i]); mx.push(r.max); mn.push(r.min);
+        if(!ext[q+'max'] || r.max.v>ext[q+'max'].v+1e-9) ext[q+'max']={...r.max, mem, i, t:s.t[i], vals:C.gs.map(g=>g.val[mem][q][i])};
+        if(!ext[q+'min'] || r.min.v<ext[q+'min'].v-1e-9) ext[q+'min']={...r.min, mem, i, t:s.t[i], vals:C.gs.map(g=>g.val[mem][q][i])}; }
+      env[mem][q]={max:mx.map(x=>x.v), min:mn.map(x=>x.v)}; }); });
+  ['Mmax','Mmin'].forEach(k=>lfRefine(C, mode, ext, k));
+  const reac=C.Rlab.map((lab,k)=>{ const r=lfComb(mode, C.gs, j=>C.gs[j].R[k]); return {lab, max:r.max, min:r.min}; });
+  return {env, ext, reac};
+}
+// Extremstelle von M zwischen den Nachbarpunkten genau suchen (goldener Schnitt; die Kombination darf dabei wechseln)
+function lfRefine(C, mode, ext, key){
+  const x=ext[key], s=C.st[x.mem], i=x.i, sgn=key.endsWith('max')?1:-1, q=key[0];
+  let a=s.t[Math.max(0,i-1)], b=s.t[Math.min(s.t.length-1,i+1)]; if(!(b-a>1e-9)) return;
+  const sg=LF_SGN[C.sys][q];
+  const f=t=>{ const vals=C.gs.map(g=>sg*lfAt(g.model, x.mem, t, 'M')[q]); const r=lfComb(mode, C.gs, j=>vals[j]); return {...(sgn>0?r.max:r.min), vals, t}; };
+  const gr=(Math.sqrt(5)-1)/2; let c=b-gr*(b-a), d=a+gr*(b-a), fc=f(c), fd=f(d);
+  for(let it=0; it<48; it++){ if(sgn*fc.v>sgn*fd.v){ b=d; d=c; fd=fc; c=b-gr*(b-a); fc=f(c); } else { a=c; c=d; fc=fd; d=a+gr*(b-a); fd=f(d); } }
+  const best = sgn*fc.v>sgn*fd.v ? fc : fd;
+  if(sgn*best.v > sgn*x.v+1e-9) ext[key]={...best, mem:x.mem, i:x.i, t:best.t};
+}
+function lfRun(sys){
+  const host=document.getElementById(LF_RES[sys]);
+  const old=host && host.querySelector(':scope > .k-lfc');
+  const lc=lastCalc[sys];
+  if(!lfOn(sys) || !host || host.classList.contains('hidden')){ if(old) old.remove(); if(lc) delete lc.combo; delete LF_DATA[sys]; return; }
+  let C=null; try{ C=lfCompute(sys); }catch(e){ C=null; }
+  if(!C){ if(old) old.remove(); if(lc) delete lc.combo; delete LF_DATA[sys]; return; }
+  const E={}; LF_MODES.forEach(m=>{ E[m]=lfEnvelope(C, m); });
+  LF_DATA[sys]={C, E};
+  // für Speichern und Bericht: Extremwerte je Kombination mit Bezeichnung
+  if(lc) lc.combo = { v:1, groups:C.gs.map(g=>({act:g.act, seg:g.seg})), modes:Object.fromEntries(LF_MODES.map(m=>[m, {
+      ext:Object.fromEntries(Object.entries(E[m].ext).map(([k,x])=>[k, {v:+x.v.toFixed(4), at:lfWhere(C,x.mem,x.t), comb:lfLabel(C,m,x)}])),
+      reac:E[m].reac.map(r=>({c:r.lab[0], s:r.lab[1], max:+r.max.v.toFixed(4), min:+r.min.v.toFixed(4), cmax:lfLabel(C,m,r.max), cmin:lfLabel(C,m,r.min)})) }])) };
+  lfCard(sys);
+}
+// ── Ergebniskarte ──
+function lfCard(sys){
+  const host=document.getElementById(LF_RES[sys]), D=LF_DATA[sys]; if(!host || !D) return;
+  let c=host.querySelector(':scope > .k-lfc');
+  if(!c){ c=document.createElement('div'); c.className='card k-lfc'; const g=host.querySelector(':scope > .results-grid'); g ? g.after(c) : host.prepend(c); }
+  const {C, E}=D, mode=LF_MODE[sys], R=E[mode], q=LF_Q[sys];
+  const note={gzt:'nGzt', char:'nChar', freq:'nFreq', qp:'nQp'}[mode];
+  const unit = x => x==='M' ? 'kNm' : 'kN';
+  const hasN = ['Nmax','Nmin'].some(k=>Math.abs(R.ext[k].v)>1e-6), hasVar=C.gs.some(g=>g.type!=='G');
+  const met = (k, lab) => { const x=R.ext[k]; if(Math.abs(x.v)<5e-4) return ''; return `<div class="k-lfc-m" data-lfk="${k}"><div class="k-lfc-l">${lab}</div><div class="k-lfc-v">${lfn(x.v)}<small>${unit(k[0])}</small></div><div class="k-lfc-c">${lfLabel(C,mode,x)}<br>${lfWhere(C,x.mem,x.t)}</div></div>`; };
+  let h=`<div class="card-title" style="margin-bottom:8px">${lft('title')}</div>`;
+  h+=`<div class="k-lfc-chips" role="group">${LF_MODES.map(m=>`<button type="button" class="k-lfc-chip" data-lfm="${m}" aria-pressed="${m===mode}">${lft(m)}</button>`).join('')}</div>`;
+  h+=`<div class="k-lfc-note">${lft(note)} ${hasVar ? lft(sys==='cont'?'nPat':'nPat1') : lft('noVar')} ${lft('nTop')}</div>`;
+  h+=`<div class="k-lfc-grid">${met('Mmax','M<sub>max</sub>')}${met('Mmin','M<sub>min</sub>')}${met('Qmax','Q<sub>max</sub>')}${met('Qmin','Q<sub>min</sub>')}${hasN ? met('Nmax','N<sub>max</sub>')+met('Nmin','N<sub>min</sub>') : ''}</div>`;
+  h+=`<div class="k-lfc-dia"><div class="k-lfc-dt" role="group">${['M','Q',...(hasN?['N']:[])].map(x=>`<button type="button" data-lfq="${x}" aria-pressed="${x===q}">${x}</button>`).join('')}</div>${lfSvg(sys, q)}</div>`;
+  const RR=R.reac.filter((r,k)=>C.gs.some(g=>Math.abs(g.R[k])>5e-4));
+  if(RR.length){ h+=`<div class="k-lfc-h">${lft('reac')}</div><table><thead><tr><th>${lft('comp')}</th><th>${lft('max')}</th><th>${lft('min')}</th></tr></thead><tbody>`;
+    RR.forEach(r=>{ const u=r.lab[0]==='M'?'kNm':'kN'; h+=`<tr><td>${r.lab[0]}<sub>${r.lab[1]}</sub> [${u}]</td><td>${lfn(r.max.v)}</td><td>${lfn(r.min.v)}</td></tr><tr><td class="k-lfc-tc" colspan="3">${lft('max')}: ${lfLabel(C,mode,r.max)} · ${lft('min')}: ${lfLabel(C,mode,r.min)}</td></tr>`; });
+    h+='</tbody></table>'; }
+  h+=lfSteps(C, mode, R);
+  c.innerHTML=h;
+  if(typeof declutter==='function'){ try{ declutter(c.querySelector('svg')); }catch(e){} }
+}
+// Rechenweg: maßgebender Betrag von M (sonst Q), mit den charakteristischen Werten der Lastfälle an dieser Stelle
+function lfSteps(C, mode, R){
+  const pick = ['M','Q','N'].map(q=>[q, Math.abs(R.ext[q+'max'].v)>=Math.abs(R.ext[q+'min'].v) ? 'max' : 'min']).find(([q,k])=>Math.abs(R.ext[q+k].v)>1e-6);
+  if(!pick) return '';
+  const [q,k]=pick, x=R.ext[q+k], u=q==='M'?'kNm':'kN', i=x.i, mem=x.mem;
+  const v=j=>x.vals ? x.vals[j] : C.gs[j].val[mem][q][i];
+  let h=`<div class="k-lfc-h">${lft('gov').replace('{q}', `${q}<sub>${k==='max'?lft('max'):lft('min')}</sub>`).replace('{v}', lfn(x.v)).replace('{u}', u)}</div><div class="k-lfc-rw">`;
+  h+=`<div>${lft('at')} ${lfWhere(C, mem, x.t)}</div><div>${lft('lc')}:</div>`;
+  C.gs.forEach((g,j)=>{ h+=`<div>&nbsp;&nbsp;${lfSym(C,g,q)} = ${lfn(v(j))} ${u}${g.type!=='G' ? ` (ψ<sub>0</sub> = ${lfF(g.psi[0])}, ψ<sub>1</sub> = ${lfF(g.psi[1])}, ψ<sub>2</sub> = ${lfF(g.psi[2])})` : ''}</div>`; });
+  const terms=[]; const iG=C.gs.findIndex(g=>g.type==='G');
+  const pv = y => y<0 ? '('+lfn(y)+')' : lfn(y);
+  if(iG>=0) terms.push(`${lfF(x.gG)}·${pv(v(iG))}`);
+  x.on.forEach(j=>{ const f=lfFactor(mode, C.gs[j], x.lead); terms.push(`${lfF(f)}·${pv(v(j))}`); });
+  h+=`<div><b>${q}<sub>${mode==='gzt'?'Ed':'d'}</sub> = ${terms.join(' + ')||'0'} = ${lfn(x.v)} ${u}</b></div></div>`;
+  return h;
+}
+// Umhüllende als Skizze: Linienträger über die Länge, Rahmen abgewickelt (Stütze links · Riegel · Stütze rechts)
+function lfSvg(sys, q){
+  const D=LF_DATA[sys]; if(!D) return '';
+  const {C, E}=D, R=E[LF_MODE[sys]], W=340, pad=18;
+  const parts = C.sys==='frame' ? C.mems.map(m=>({mem:m, w:C.len[m]})) : [{mem:'beam', w:C.len.beam}];
+  const gap = parts.length>1 ? 14 : 0, tw=parts.reduce((a,p)=>a+p.w,0), sx=(W-2*pad-gap*(parts.length-1))/tw;
+  const dir = q==='M' ? 1 : -1;   // M > 0 nach unten (Zugseite), Q und N > 0 nach oben
+  let dmin=0, dmax=0; parts.forEach(p=>{ const e=R.env[p.mem][q]; e.max.concat(e.min).forEach(v=>{ dmin=Math.min(dmin,dir*v); dmax=Math.max(dmax,dir*v); }); });
+  const span=Math.max(dmax-dmin,1e-9), hp=100;
+  const top=16, H=Math.round(top+hp+18+(parts.length>1?10:0)), sy=hp/span, y0=top+(0-dmin)*sy;
+  let x0=pad, h=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${q}">`;
+  parts.forEach((p,k)=>{ const s=C.st[p.mem], e=R.env[p.mem][q], X=t=>x0+t*p.w*sx, Y=v=>y0+dir*v*sy;
+    const top=s.t.map((t,i)=>`${X(t).toFixed(1)},${Y(e.max[i]).toFixed(1)}`), bot=s.t.map((t,i)=>`${X(t).toFixed(1)},${Y(e.min[i]).toFixed(1)}`).reverse();
+    h+=`<polygon points="${top.concat(bot).join(' ')}" fill="rgba(84,104,173,0.16)" stroke="none"/>`;
+    h+=`<polyline points="${top.join(' ')}" fill="none" stroke="#5468ad" stroke-width="1.4"/><polyline points="${bot.join(' ')}" fill="none" stroke="#5468ad" stroke-width="1" stroke-dasharray="4 3"/>`;
+    h+=`<line x1="${X(0).toFixed(1)}" y1="${y0.toFixed(1)}" x2="${X(1).toFixed(1)}" y2="${y0.toFixed(1)}" stroke="#111114" stroke-width="2.2"/>`;
+    if(parts.length>1) h+=`<text x="${((X(0)+X(1))/2).toFixed(1)}" y="${H-3}" text-anchor="middle" font-size="8.5" fill="#5c5e66" font-family="Figtree,sans-serif">${lft(p.mem)}</text>`;
+    x0+=p.w*sx+gap; });
+  // Extremwerte beschriften
+  const lab=(k)=>{ const x=R.ext[q+k]; if(Math.abs(x.v)<1e-6) return ''; let xx=pad; for(const p of parts){ if(p.mem===x.mem) break; xx+=p.w*sx+gap; }
+    const p=parts.find(p=>p.mem===x.mem), X=xx+x.t*p.w*sx, Y=y0+dir*x.v*sy, up=(dir*x.v)<0;
+    return `<circle cx="${X.toFixed(1)}" cy="${Y.toFixed(1)}" r="2.4" fill="#5468ad"/><text x="${Math.min(Math.max(X,30),W-30).toFixed(1)}" y="${(up?Y-6:Y+12).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#111114" font-family="JetBrains Mono,monospace">${lfn(x.v)}</text>`; };
+  h+=lab('max')+lab('min')+'</svg>';
+  return h;
+}
+// ── Baukasten „+“ in der System-Karte ──
+function lfPlusInit(){
+  Object.entries(LF_TAB).forEach(([sys,tab])=>{
+    const main=document.getElementById('tab-'+tab); if(!main) return;
+    const row=main.querySelector('.card-title-row'); if(!row || row.querySelector('.k-plus')) return;
+    const b=document.createElement('button'); b.type='button'; b.className='k-plus'; b.dataset.lfsys=sys; b.setAttribute('aria-expanded','false'); b.textContent='+';
+    const info=row.querySelector('.info-btn'); info ? row.insertBefore(b, info) : row.appendChild(b);
+    const m=document.createElement('div'); m.className='k-plusm'; m.hidden=true; m.dataset.lfsys=sys; row.after(m);
+  });
+  lfPlusTx();
+}
+function lfPlusTx(){
+  document.querySelectorAll('.k-plus').forEach(b=>{ const sys=b.dataset.lfsys; b.setAttribute('aria-label', lft('plus')); b.title=lft('plus'); b.classList.toggle('on', lfOn(sys)); });
+  document.querySelectorAll('.k-plusm').forEach(m=>{ const sys=m.dataset.lfsys;
+    m.innerHTML=`<button type="button" class="k-pm-it" role="switch" data-lfsw="1" aria-checked="${lfOn(sys)}"><span class="k-pm-tx"><b>${lft('lf')}</b><small>${lft('lfS')}</small></span><span class="k-pm-sw"></span></button>`
+      +`<button type="button" class="k-pm-it" disabled><span class="k-pm-tx"><b>${lft('spr')}</b></span><span class="k-pm-soon">${lft('soon')}</span></button>`
+      +`<button type="button" class="k-pm-it" disabled><span class="k-pm-tx"><b>${lft('tmp')}</b></span><span class="k-pm-soon">${lft('soon')}</span></button>`; });
+}
+window.lfSetOn = function(sys, on){
+  const cb=document.getElementById('lfOn-'+sys); if(!cb) return; cb.checked=!!on;
+  lfPlusTx(); lfTagsAll();
+  try{ if(typeof k4Save==='function') k4Save(); }catch(e){}
+  if(curTab()===LF_TAB[sys]) { try{ window[LF_FN[sys]](); }catch(e){} } else lfRun(sys);
+};
+// ── Kürzel an den Lastzeilen ──
+const LF_ROWSYS = new Set(['beam','cant','cont','frame']);
+function lfTag(it){
+  if(!it || !LF_ROWSYS.has(it.dataset.sys)) return;
+  const hd=it.querySelector(':scope > .load-item-header'); if(!hd) return;
+  let t=hd.querySelector('.k-lft'), m=it.querySelector(':scope > .k-lfm');
+  if(!lfOn(it.dataset.sys)){ if(t) t.remove(); if(m) m.remove(); return; }
+  const l=k3Item(it); if(!l) return; const a=lfAct(l);
+  if(!t){ t=document.createElement('button'); t.type='button'; t.className='k-lft'; t.dataset.lft='1'; const ch=hd.querySelector('.k-rchev'); ch ? hd.insertBefore(t, ch) : hd.appendChild(t); }
+  t.textContent=window.lfTagText(a)+' ▾'; t.setAttribute('aria-label', `${lft('act')}: ${lft(a)}`); t.title=lft(a);
+  if(m && !m.hidden) lfMenuFill(m, a);
+}
+function lfMenuFill(m, a){
+  const o = k => `<button type="button" class="k-lfo" data-lfa="${k}" aria-pressed="${k===a}">${lft(k)}</button>`;
+  m.innerHTML=`<div class="k-lfm-h">${lft('hG')}</div>${o('G')}<div class="k-lfm-h">${lft('hQ')}</div>${['Q:A','Q:B','Q:C','Q:D','Q:E','Q:F','Q:G','Q:H'].map(o).join('')}<div class="k-lfm-h">${lft('hSW')}</div>${['S','S:hi','W'].map(o).join('')}`;
+}
+function lfTagsAll(){ document.querySelectorAll('.k-row').forEach(lfTag); }
+// k3Refresh läuft für jede neu gezeichnete Zeile (Listen und Skizzen-Bearbeitung) → Kürzel dort nachziehen
+(()=>{ const o=window.k3Refresh; if(typeof o!=='function') return; window.k3Refresh=function(it, skip){ const r=o.apply(this, arguments); try{ lfTag(it); }catch(e){} return r; }; })();
+document.addEventListener('click', e=>{
+  const pb=e.target.closest && e.target.closest('.k-plus');
+  if(pb){ e.preventDefault(); e.stopPropagation(); const m=pb.closest('.card').querySelector(`.k-plusm[data-lfsys="${pb.dataset.lfsys}"]`); if(!m) return;
+    m.hidden=!m.hidden; pb.setAttribute('aria-expanded', String(!m.hidden)); return; }
+  const sw=e.target.closest && e.target.closest('[data-lfsw]');
+  if(sw){ e.preventDefault(); const sys=sw.closest('.k-plusm').dataset.lfsys; window.lfSetOn(sys, !lfOn(sys));
+    const m=document.querySelector(`.k-plusm[data-lfsys="${sys}"]`); if(m){ m.hidden=true; } const pb2=document.querySelector(`.k-plus[data-lfsys="${sys}"]`); if(pb2) pb2.setAttribute('aria-expanded','false'); return; }
+  const tg=e.target.closest && e.target.closest('.k-lft');
+  if(tg){ e.preventDefault(); e.stopPropagation(); const it=tg.closest('.k-row'); let m=it.querySelector(':scope > .k-lfm');
+    if(!m){ m=document.createElement('div'); m.className='k-lfm'; m.hidden=true; it.querySelector(':scope > .load-item-header').after(m); }
+    m.hidden=!m.hidden; if(!m.hidden){ const l=k3Item(it); lfMenuFill(m, lfAct(l)); } return; }
+  const op=e.target.closest && e.target.closest('.k-lfo');
+  if(op){ e.preventDefault(); e.stopPropagation(); const it=op.closest('.k-row'), l=k3Item(it); if(!l) return;
+    l.values.act=op.dataset.lfa; const m=op.closest('.k-lfm'); m.hidden=true;
+    document.querySelectorAll(`.k-row[data-sys="${it.dataset.sys}"][data-type="${it.dataset.type}"][data-id="${it.dataset.id}"]`).forEach(lfTag);
+    try{ if(typeof k4Save==='function') k4Save(); }catch(e2){}
+    try{ window[LF_FN[it.dataset.sys]](); }catch(e2){} return; }
+  const ch=e.target.closest && e.target.closest('.k-lfc [data-lfm]');
+  if(ch){ const sys=Object.keys(LF_RES).find(s=>ch.closest('#'+LF_RES[s])); LF_MODE[sys]=ch.dataset.lfm; lfCard(sys); return; }
+  const dq=e.target.closest && e.target.closest('.k-lfc [data-lfq]');
+  if(dq){ const sys=Object.keys(LF_RES).find(s=>dq.closest('#'+LF_RES[s])); LF_Q[sys]=dq.dataset.lfq; lfCard(sys); return; }
+}, true);
+// nach jeder Berechnung die Kombinationen rechnen
+Object.entries(LF_FN).forEach(([sys,fn])=>{ const o=window[fn]; if(typeof o!=='function') return;
+  window[fn]=function(...a){ const r=o.apply(this,a); try{ lfRun(sys); }catch(e){ console.error(e); } return r; }; });
+// Sprache: Texte nachziehen
+(()=>{ const o=window.applyCalcTranslations; if(typeof o!=='function') return;
+  window.applyCalcTranslations=function(...a){ const r=o.apply(this,a); try{ lfPlusTx(); lfTagsAll(); Object.keys(LF_DATA).forEach(lfCard); }catch(e){} return r; }; })();
+// ── Bericht: Kombinationen als Tabelle ──
+window.lfReport = function(sdf){
+  const C=sdf && sdf.results && sdf.results.combo; if(!C || !C.modes) return '';
+  const n=v=>lfn(+v||0), un=k=>k[0]==='M'?'kNm':'kN';
+  let h=`<div class="rb-h">${lft('rep')}</div><div class="rb-note">${lft('repNote')}</div>`;
+  h+=`<table class="rb-tab"><thead><tr><th></th><th>${lft('comp')}</th><th>${lft('max')} / ${lft('min')}</th><th>${lft('comb')}</th></tr></thead><tbody>`;
+  LF_MODES.forEach(m=>{ const M=C.modes[m]; if(!M) return; let first=true;
+    ['Mmax','Mmin','Qmax','Qmin','Nmax','Nmin'].forEach(k=>{ const x=M.ext[k]; if(!x || (k[0]==='N' && Math.abs(M.ext.Nmax.v)<1e-6 && Math.abs(M.ext.Nmin.v)<1e-6)) return;
+      h+=`<tr><td>${first?lft(m):''}</td><td>${k[0]}<sub>${k.slice(1)==='max'?lft('max'):lft('min')}</sub></td><td>${n(x.v)} ${un(k)}</td><td style="text-align:left;white-space:normal">${x.comb} · ${x.at}</td></tr>`; first=false; });
+    (M.reac||[]).filter(r=>Math.abs(r.max)>5e-4||Math.abs(r.min)>5e-4).forEach(r=>{ h+=`<tr><td></td><td>${r.c}<sub>${r.s}</sub></td><td>${n(r.max)} / ${n(r.min)} ${r.c==='M'?'kNm':'kN'}</td><td style="text-align:left;white-space:normal">${r.cmax} / ${r.cmin}</td></tr>`; }); });
+  return h+'</tbody></table>';
+};
+lfPlusInit(); lfTagsAll();
+if(Object.keys(LF_TAB).some(lfOn)){ try{ liveCalc(true); }catch(e){} }
+window.lfDebug = { compute:lfCompute, envelope:lfEnvelope, data:LF_DATA, comb:lfComb };
+})();
 </script>
 </body>
 </html>

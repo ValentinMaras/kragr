@@ -1,12 +1,12 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.8 · ref v0.3.44 · size v0.7.6 · projekt v0.1.21 · rechtliches v0.1.13 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.9 · ref v0.3.45 · size v0.7.7 · projekt v0.1.22 · rechtliches v0.1.14 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.8, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.21, sichtbar „Projekte“, Test von Variante C)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.44, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.7.6, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.13)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.9, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
+- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.22, sichtbar „Projekte“, Test von Variante C)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.45, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.7.7, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.14)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Figtree (Text), JetBrains Mono (Zahlen/Formeln) und Inter (nur griechische Buchstaben, unter dem Namen Figtree) als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,11 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Menü: Symbole als Fachskizzen — calc v0.11.9 · size v0.7.7 · ref v0.3.45 · projekt v0.1.22 · rechtliches v0.1.14
+Valentin: Bezeichnungen im Menü ändern, Paragraf nicht verwenden („hat was von Jura“). Vier Varianten gezeigt (Fachskizzen, Formelzeichen ohne §, Leitmotiv Kragarm, ohne Symbole); gewählt: **A · Fachskizzen**.
+- `k5/k5.js`, `MODS`: Symbole als SVG mit `stroke="currentColor"` (Farbe folgt dem Text, hell/dunkel/aktiv): Schnittkräfte = Einfeldträger mit zwei Auflagern und Momentenlinie, Bemessung = I-Profil, Wissen = aufgeschlagenes Buch; Projekte = Ordner (20 px). Mit `k5/inject.py` in alle sechs Seiten verteilt, deshalb überall die letzte Stelle hochgezählt.
+- Die neuen Modulnamen im Menü (seit v0.11.8) erscheinen erst nach dem Neuladen der App; Valentins Handy zeigte noch den alten Stand 0.7.5 aus dem Speicher.
 
 ## Zusammenführung mit k5, Bewegung mit Lernwert (gleitende Verläufe, Biegelinie, „Schnitt führen“) — calc v0.11.8
 **Ausgangslage (27.10.):** Es gab zwei parallele Linien. (1) Entwicklungslinie calc 0.11.3 → 0.11.7 (Lastfälle, Stufen, Federn, Lagerzeichen), lag nur als Zip vor, ohne die Design-Schicht k5. (2) GitHub: k5 (auf 0.11.1 als „0.11.2“ gebaut), Satteldach 0.11.3 und in einem weiteren Chat eine eigene Lastfall-Umsetzung „0.11.4“ (über ein „+“ in der System-Karte) und „0.11.5“ (Bewegung). Zusammengeführt auf Basis der Entwicklungslinie (Zip 0.11.7):
@@ -1324,7 +1329,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1951/1951 grün** (calc v0.11.8; inklusive `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1951/1951 grün** (calc v0.11.9; inklusive `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

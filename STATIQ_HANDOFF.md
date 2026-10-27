@@ -1,8 +1,8 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.4 · ref v0.3.44 · size v0.7.5 · projekt v0.1.21 · rechtliches v0.1.13 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.5 · ref v0.3.44 · size v0.7.5 · projekt v0.1.21 · rechtliches v0.1.13 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.4, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.5, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
 - `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.21, sichtbar „Projekte“, Test von Variante C)
 - `ref.html` — Nachschlagewerk (kragr·ref v0.3.44, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
 - `size.html` — Bemessung (kragr·size v0.7.5, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
@@ -567,6 +567,16 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Bewegung mit Lernwert: gleitende Verläufe, Biegelinie, „Schnitt führen“ — calc v0.11.5
+Valentin hat das Motion AI Kit (`npx motion-ai`) übernehmen lassen; die freien Regeln liegen als eigener Skill „motion-animation“ vor (Bewegung nur für Zustandsänderungen, `transform`/`opacity`, 150–300 ms, kein Überschwingen in Rechenwerkzeugen, reduzierte Bewegung beachten). Aus drei Demo-Varianten gewählt: **A** (Verlauf gleitet, Träger biegt sich) und **B** (Schnitt führen); C (Laststellungen abspielen) vorerst nicht.
+- **Block `<style data-motion>` + `<script data-motion>`** am Ende von calc.html (nach `data-lf`), ohne Bibliothek.
+- **A, gleitende Verläufe:** Wrapper um `renderDiagram` (nur ohne `data.target`, also nicht im Bericht). Der zuletzt sichtbare Verlauf wird an den Stellen des neuen ausgewertet (`valAt`, linear über `ts`) und in 280 ms (easeOut, kubisch) überblendet; jedes Zwischenbild ist eine Kopie mit `__tw:true`, gezeichnet mit dem Original-`renderDiagram`. Nur bei gleicher Geometrie der Stäbe (x0/y0/x1/y1, Knick), sonst sofort. `kragrMotion.shown[sys]` = sichtbarer Stand (beim Start aus `diagData` übernommen, weil die erste Rechnung vor dem Block läuft).
+- **A, Biegelinie:** in den Skizzen von Einfeldträger, Kragarm und Durchlaufträger gestrichelt (`.k-bl`, Akzentblau) unter dem Träger, überhöht auf 10 px, aus `lastCalc[sys].plot.w`; gleitet mit. Lage über die schwarzen Träger-Rechtecke der Skizze (`blBeam`). Wrapper um `drawBeam/drawCantilever/drawContinuous` hängt sie nach jedem Neuzeichnen wieder an. Rahmen ohne Biegelinie in der Skizze (Verformung gibt es im Verlauf „w“).
+- **B, Schnitt führen:** Leiste `.k-cutbar` unter Verlauf und Beschriftung jedes Systems, Knopf „Schnitt führen“ (`aria-pressed`). Aktiv: Ziehen oder Tippen im Verlauf setzt den Schnitt (Rahmen: nächster Stab über `memGeo`), Pfeiltasten ±0,1 m, Einrasten (7 px) an Elementgrenzen des Löser-Modells (Lasten, Auflager, Gelenke). Freikörper = linker Teil hinterlegt (Rahmen: Stäbe davor ganz). Werte exakt aus `kragrSolve.raw/at` (freigegeben im `data-lf`-Block), links und rechts des Schnitts; Sprung an Lastpunkten als „5,00 | −5,00“. Vorzeichen wie die Knotentabelle. Texte `CUTT` in 4 Sprachen, im Übungsmodus und im Druck verborgen.
+- **Ohne Bewegung:** `prefers-reduced-motion` oder `html.k5-still` (automatisierte Browser) → kein Gleiten. Tests mit Bewegung über `calc.html?k5motion`.
+- **Prüfung der vorhandenen Animationen (offen, nicht umgesetzt):** Kartenhöhe per `height` (k5, FLIP), Ausnutzungsbalken per `width` (k5), gleitende Fläche mit `width`, sechs `transition: all .15s`, Schalter im „+“-Menü mit `left`. Vorschlag: `clip-path`/`scaleX`, Eigenschaften einzeln nennen. k5-Änderungen in `k5/` machen und mit `inject.py` in alle Seiten bringen.
+- **Tests:** neu `test_bewegung.py` (21; Handwerte Einfeldträger mit Sprung am Lastpunkt, Pfeiltaste, Einrasten, Kragarm, Zweifeldträger über B, Rahmen-Referenz, Freikörper, Übungsmodus, Englisch, ohne Bewegung).
 
 ## Baukasten „+“ und Lastfälle mit Kombinationen — calc v0.11.4
 Zweiter von drei Bausteinen „Schnittkraftrechner ausbauen“ (danach: Lagerfedern/Setzungen/Temperatur). Entscheidungen von Valentin (Rückfrage): Einwirkung je Lastzeile, GZT und GZG, Nutzlast beim Durchlaufträger gleich feldweise. Bedienung auf seinen Wunsch über ein „+“: Der Nutzer „baut“ das System auf, die Grundansicht bleibt wie bisher.
@@ -1288,7 +1298,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1773/1811 grün** (calc v0.11.4; die 38 Fehler stammen aus fehlenden Uploads, siehe Abschnitt „Baukasten“; inklusive `test_lastfaelle.py` 28, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1795/1833 grün** (calc v0.11.5, inklusive `test_bewegung.py` 21; die 38 Fehler stammen aus fehlenden Uploads, siehe Abschnitt „Baukasten“; inklusive `test_lastfaelle.py` 28, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

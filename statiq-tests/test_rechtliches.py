@@ -47,8 +47,9 @@ async def main():
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         await pg.goto(U+'size.html'); await pg.wait_for_timeout(400); await pg.evaluate("showReport()"); await pg.wait_for_timeout(200)
         check('size: Bericht endet mit Haftungshinweis', 'ersetzt keine geprüfte statische Berechnung' in await pg.evaluate("document.getElementById('report').innerText"))
-        await pg.goto(U+'projekt.html'); await pg.wait_for_timeout(300); await pg.evaluate("showReport()"); await pg.wait_for_timeout(200)
-        check('projekt: Gesamtbericht endet mit Haftungshinweis', 'ersetzt keine geprüfte statische Berechnung' in await pg.evaluate("document.getElementById('report').innerText"))
+        await pg.evaluate("localStorage.setItem('statiq-size-positionen', JSON.stringify([{name:'Test', typ:'balken', ok:true, date:'2026-10-27T10:00:00Z', data:{}}])); localStorage.setItem('statiq-size-bericht:Test', '<h3>Test</h3>')")
+        await pg.goto(U+'projekt.html'); await pg.wait_for_timeout(300); await pg.evaluate("report('s:Test')"); await pg.wait_for_timeout(200)
+        check('Rechenblätter: Bericht endet mit Haftungshinweis', 'ersetzt keine geprüfte statische Berechnung' in await pg.evaluate("document.getElementById('report').innerText"))
         # Druck: Fußleiste ausgeblendet
         await pg.emulate_media(media='print')
         check('Druckansicht ohne Fußleiste', await pg.evaluate("getComputedStyle(document.querySelector('.legal-bar')).display")=='none')

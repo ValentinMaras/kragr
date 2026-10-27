@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.46 -->
+<!-- kragr·ref v0.3.47 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -449,12 +449,12 @@
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
 <script data-mod>
-// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Modulnamen (seit 26.10.2026; „Rechenblätter“ statt „Projekte“ seit 27.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Rechenblätter“ statt calc · size · ref · Projekte.
 // Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
 // data-mod="calc|size|ref|proj" bekommen ihn als Text.
 (function(){
-  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
-          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Rechenblätter'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Calculation sheets'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Notes de calcul'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Memorias de cálculo'} };
   function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
     try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
   window.KMOD=K; window.kmodLang=lang;
@@ -756,22 +756,7 @@ window.kragrK5Page = function(K){
       var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
   }
 
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
+  // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
   apply(); deco();
@@ -790,13 +775,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -916,7 +901,8 @@ window.kragrK5Page = function(K){
   var MODS=[['calc','calc.html',SVG_I('<line x1="2.5" y1="6" x2="21.5" y2="6" stroke-width="2.4"/><path d="M4 6.8 l-2.3 3.6 h4.6z M20 6.8 l-2.3 3.6 h4.6z" stroke-width="1.4"/><path d="M4 6 Q12 25 20 6" stroke-width="1.6" stroke-dasharray="0"/>')],
             ['size','size.html',SVG_I('<line x1="6" y1="4" x2="18" y2="4" stroke-width="2.4"/><line x1="6" y1="20" x2="18" y2="20" stroke-width="2.4"/><line x1="12" y1="4" x2="12" y2="20" stroke-width="2"/>')],
             ['ref','ref.html',SVG_I('<path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z" stroke-width="1.8"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z" stroke-width="1.8"/>')]];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  // Rechenblätter (calc v0.11.11, statt „Projekte“): Blatt mit Eselsohr und Zeilen
+  var ICON_PROJ=SVG_I('<path d="M6 3h8l4 4v14H6z" stroke-width="1.8"/><path d="M14 3v4h4" stroke-width="1.8"/><path d="M9 12h6M9 15.5h6M9 19h3" stroke-width="1.8"/>');
   var burger, menu, scrim, lastFocus;
   function buildHeader(){
     var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
@@ -956,7 +942,6 @@ window.kragrK5Page = function(K){
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
   }
   function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
   function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
@@ -1047,7 +1032,7 @@ window.kragrK5Page = function(K){
 </header>
 <script data-frame>
 // „Projekte“ in der Kopfzeile (ref, rechtliches): Beschriftung in der gewählten Sprache
-(function(){ var T={de:'Projekte',en:'Projects',fr:'Projets',es:'Proyectos'}, l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
+(function(){ var T={de:'Rechenblätter',en:'Calculation sheets',fr:'Notes de calcul',es:'Memorias de cálculo'}, l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
   document.querySelectorAll('.proj-go').forEach(function(a){ var t=T[l]||T.de; var s=a.querySelector('.pb-tx'); if(s) s.textContent=t; a.setAttribute('aria-label', t); a.title=t; }); })();
 </script>
 
@@ -1183,7 +1168,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.46';
+const REF_VERSION = '0.3.47';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau

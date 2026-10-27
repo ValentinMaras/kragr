@@ -1,0 +1,25 @@
+  /* Rechenblatt speichern (calc v0.11.11 · size v0.7.9) */
+  .kbl { margin-top:10px; }
+  .btn-row > .kbl { flex-basis:100%; margin-top:6px; }
+  .kbl-btn { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border:none; border-radius:14px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer; }
+  .kbl-btn:hover { box-shadow:var(--k5-sh-h, inset 0 0 0 1px #a1a1aa); }
+  .kbl-btn[hidden], .kbl-form[hidden] { display:none !important; }
+  .kbl-form { display:flex; flex-wrap:wrap; align-items:flex-end; gap:8px; padding:12px; border-radius:16px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); }
+  .kbl-l { flex:1 1 220px; display:flex; flex-direction:column; gap:4px; font-size:12px; font-weight:600; color:#5c5e66; }
+  .kbl-in { font:inherit; font-size:15px; font-weight:600; color:#111114; padding:9px 11px; border:1.5px solid #d4d4d8; border-radius:10px; background:#fff; min-width:0; }
+  .kbl-in:focus { outline:none; border-color:#5468ad; }
+  .kbl-row { display:flex; gap:8px; }
+  .kbl-ok, .kbl-x { min-height:42px; padding:0 16px; border-radius:10px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; border:none; }
+  .kbl-ok { background:#111114; color:#fff; } .kbl-ok:hover { background:#333; }
+  .kbl-ok.armed { background:#b45309; }
+  .kbl-x { background:transparent; color:#3d3f45; } .kbl-x:hover { background:#e6e7ea; }
+  .kbl-msg { font-size:13px; color:#3d3f45; margin-top:6px; line-height:1.5; }
+  .kbl-msg:empty { display:none; }
+  .kbl-msg a { color:#5468ad; font-weight:700; text-decoration:none; white-space:nowrap; } .kbl-msg a:hover { text-decoration:underline; }
+  @media print { .kbl { display:none !important; } }
+  .col-out .save-btn { display:none !important; }   /* alter Knopf „Berechnung speichern“: ersetzt durch „Als Rechenblatt speichern“ */
+  /* aus dem früheren Projektmodus übernommen: Version unten (Handy), alter Speicherpunkt am Ordner-Symbol aus */
+  .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
+  @media (min-width:1000px) { .k-verfoot { display:none; } }
+  #proj-btn .pb-dot { display:none !important; }
+  @media print { .k-verfoot { display:none !important; } }

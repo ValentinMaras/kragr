@@ -42,7 +42,7 @@ async def main():
             want='kragr · Schnittkräfte v'+await pg.evaluate("typeof STATIQ_VERSION!=='undefined'?STATIQ_VERSION:''") if f=='calc' else 'kragr · Bemessung v'+await pg.evaluate("SIZE_VERSION")
             check(f'{f}: Version unten auf der Seite (Handy)', v==want and v.startswith(('kragr · Schnittkräfte v0.11.','kragr · Bemessung v0.7.')) and await pg.is_visible('#k-verfoot'), v)
         await pg.goto(B+'calc.html'); await pg.wait_for_timeout(1500)
-        r=await pg.evaluate("[localStorage.getItem('statiq-projekt'), document.getElementById('k-pmbar').hidden]"); check('calc Handy: als Rechner ohne Projektbezug (kein Projekt, keine Projektzeile)', r==[None,True], r)
+        r=await pg.evaluate("[localStorage.getItem('statiq-projekt'), !!document.getElementById('k-pmbar')]"); check('calc Handy: als Rechner ohne Projektbezug (kein Projekt, keine Projektzeile)', r==[None,False], r)
         await pg.close()
         pg=await br.new_page(viewport={'width':1280,'height':800}); pg.on('pageerror', lambda e: errs.append(str(e)))
         for f in ['calc','size']:

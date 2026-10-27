@@ -1,12 +1,12 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.10 · ref v0.3.46 · size v0.7.8 · projekt v0.1.23 · rechtliches v0.1.15 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Projekte)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.11 · ref v0.3.47 · size v0.7.9 · projekt v0.1.24 · rechtliches v0.1.16 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Rechenblätter)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.10, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
-- `projekt.html` — „Meine Projekte“: Positionsliste über calc und size (kragr·projekt v0.1.23, sichtbar „Projekte“, Test von Variante C)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.46, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.7.8, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.15)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.11, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
+- `projekt.html` — „Rechenblätter“: Liste aller gespeicherten Berechnungen aus calc und size, Bericht/PDF, Öffnen, Umbenennen, Löschen, Datei (kragr·projekt v0.1.24; bis v0.1.23 „Projekte“ mit Positionen)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.47, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.7.9, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.16)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Figtree (Text), JetBrains Mono (Zahlen/Formeln) und Inter (nur griechische Buchstaben, unter dem Namen Figtree) als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,24 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Rechenblätter statt Projekte — calc v0.11.11 · size v0.7.9 · ref v0.3.47 · projekt v0.1.24 · rechtliches v0.1.16
+
+Valentin: „Meine Projekte“ gefällt weder in der Umsetzung noch als Idee; Fokus auf Schnittkräfte, Bemessung, Wissen. Eine Berechnung zu einem Bericht speichern bleibt sinnvoll. Gewählt (Rückfrage): Name **„Rechenblätter“** (EN Calculation sheets, FR Notes de calcul, ES Memorias de cálculo), alte Projektdaten **verwerfen** (nicht übernehmen, aber auch nicht löschen).
+
+- **Projektmodus entfernt:** `<style data-pm>`, `<script data-pm>`, `data-pm-early` (calc, size), `data-pm-size` (size), `#k-pmbar`, `k7Apply/k7Cancel` (calc). Die Wächter `K4_PM()`/`PM_ON()` im Hauptskript bleiben und liefern jetzt immer false (`window.kragrPM` gibt es nicht mehr). Keine Wege mehr zu `?pos=`.
+- **Speichern:** gemeinsamer Baustein `k5/blatt.css` + `k5/blatt.js` → `<style data-blatt>`/`<script data-blatt>` (nur calc und size, über `k5/inject.py`). Knopf „Als Rechenblatt speichern“ am Ende der Ergebnisspalte (calc: `.col-out` jedes Bereichs; der alte „Berechnung speichern“ bleibt versteckt) bzw. neben „Bericht ansehen“ (size). Klick → Namensfeld mit Vorschlag (calc: wie bisher „Einfeldträger L=7m“; size: Bezeichnung), Enter speichert, Escape bricht ab. Gleicher Name: Knopf wird „Überschreiben?“, zweiter Klick ersetzt. Danach „Gespeichert: „…“ · Rechenblätter ansehen →“.
+  - calc: `saveCalc/saveFrameCalc(…, {key, quiet:true})`, dann `name` und **`draft = k4Snap()`** (alle Eingaben) in denselben Eintrag `statiq_sdf_<Zeit>`.
+  - size: `savePos()` wie bisher (`statiq-size-positionen`, Bericht `statiq-size-bericht:<Name>`).
+- **Öffnen:** `calc.html#blatt=<Schlüssel>` schreibt `draft` als Arbeitsstand (`muly-calc-entwurf`) vor `k4Restore()`; ältere Einträge ohne `draft`: nur Bericht. `size.html#blatt=<Name>` → `loadPos`. Beide melden „Rechenblatt geöffnet: „…““.
+- **Bericht:** calc über `calc.html#report=<Schlüssel>` (ruft jetzt `showTab('saved')` erneut, sonst schaltete der Entwurf zurück — der Bericht war vorher unsichtbar); „←“ führt dann zurück zu `projekt.html` (`window.kReportBack`). size: gespeicherter Bericht direkt in der Seite, „Drucken / PDF“.
+- **projekt.html neu** (Dateiname bleibt): Kopf „Rechenblätter“ + Anzahl, Filter Alle/Schnittkräfte/Bemessung (`kragr-blatt-filter`), Karten neueste zuerst (Systembild bzw. I-Profil, Marke, Typ, Datum, M/Q bzw. erfüllt · η), „Bericht“, „Öffnen“, ⋯ (Umbenennen inline, „In „Bemessung“ übernehmen“ für calc, Löschen mit „Wirklich löschen?“), „Alle als Datei sichern“ (`kragr:'rechenblaetter'`) und „Datei laden“ (liest auch alte Projektdateien, nur Berechnungen und Nachweise). Leer: Hinweis und Links zu beiden Modulen.
+- **„＋ Nachweis“ an jedem Schnittkräfte-Rechenblatt** (übernommen aus dem früheren Positions-Menü): passende Nachweise je System (`ZIELE`, `ZL`; Rahmen getrennt nach Riegel/Stiel, beim Rahmen zusätzlich je Knoten Schweißnaht an den Stabenden und Stützenfuß am gelenkigen Fußpunkt, First eingeschlossen). Link `size.html#calc=<Schlüssel>&ziel=…&part=…&ende=i-k`. size: neue Funktion `ciEnde(entry, ik)` (vorher im Block data-pm-size) übernimmt M, Q, N am Stabende, Name „<Rechenblatt> · Stab i–k“. Menü an der Karte ausgerichtet (kein seitliches Verschieben am Handy).
+- **Kollision vermieden:** Die Klassen des Speicher-Bausteins heißen `kbl-*`, weil `kb-*` schon die schwarze Ergebnisleiste in calc belegt (`.kb-l` hätte die Leiste aufgebläht).
+- **Reste aus data-pm in blatt.js (`legacy()`)**: `mulyAltProj()` (Prüfstände), Ordner-Symbol → projekt.html, `#k-verfoot` (Version unten am Handy).
+- **Verworfen heißt:** `statiq_sdf_pos_*` und size-Einträge mit Zuordnung in `statiq-projekt` (oder Quelle `statiq_sdf_pos_*`) werden nirgends gezeigt (Liste, Startseiten-Zähler, alter calc-Speicherreiter), bleiben aber im Speicher.
+- **Menü und Namen:** `kmod('proj')` und k5-Menü „Rechenblätter · Gespeichert · als PDF drucken“ (4 Sprachen), Symbol Blatt mit Eselsohr; Hinweispunkt „ungespeichert“ am Menü entfällt. k5-pages: Positions-Akkordeon entfernt. Startseite: Kachel „Rechenblätter“ mit Zähler, Fußzeile. rechtliches: Datenschutz-Satz zur Speicherung angepasst.
+- **Tests:** umgestellt auf Rechenblätter: test_calc_bedienung (Menü „＋ Nachweis“ und Übergabe), test_knoten (Stabenden über `#calc=…&ende=`), test_design_k5, test_satteldach, test_rahmen_einheitlich, test_rechtliches, test_design_kragr, test_calc_ux, test_marke_kragr, test_vertrauen. Neu `test_rechenblaetter.py` (35, Sollwert von Hand: L = 7 m, F = 10 kN bei 2,5 m, q = 5 kN/m auf 0–5 m → A = 22,5 kN, max M = 40,625 kNm unter F). Entfernt: `test_projekt.py`, `test_projekt_menue.py`, `test_projekt_link.py`, `test_projektmodus.py`.
 
 ## Karten klappen weich auf (FLIP mit GSAP) — calc v0.11.10 · size v0.7.8 · ref v0.3.46 · projekt v0.1.23 · rechtliches v0.1.15
 
@@ -1341,7 +1359,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1972/1972 grün** (calc v0.11.10; inklusive `test_flip.py` 21, `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1923/1923 grün** (calc v0.11.11; inklusive `test_rechenblaetter.py` 35, `test_flip.py` 21; die vier Projekt-Testdateien sind entfallen; `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

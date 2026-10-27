@@ -34,7 +34,7 @@ async def main():
             await pg.goto(U+f); await pg.wait_for_timeout(200); vers.append(await pg.evaluate(c))
         await pg.goto(U+'index.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(800)
         meta=await pg.evaluate("document.querySelector('.footer-meta').innerText"); chk=await pg.evaluate("document.getElementById('footer-check').innerText")
-        exp=f'Schnittkräfte v{vers[0]} · Bemessung v{vers[2]} · Wissen v{vers[1]} · Projekte v{vers[3]}'
+        exp=f'Schnittkräfte v{vers[0]} · Bemessung v{vers[2]} · Wissen v{vers[1]} · Rechenblätter v{vers[3]}'
         check('Startseite: Versionen in der Fußzeile aktuell', exp in meta, (meta, exp))
         check('Startseite: Hinweis auf unabhängige Prüfungen', 'unabhängige Nachrechnungen' in chk, chk)
         # Impressum

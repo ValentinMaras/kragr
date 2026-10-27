@@ -26,7 +26,7 @@ async def main():
         # zwei Spalten
         g=await pg.evaluate("(()=>{const a=document.querySelector('#tab-beam .col-in').getBoundingClientRect(), b=document.querySelector('#tab-beam .col-out').getBoundingClientRect(); return [a.left,a.right,b.left,b.top, getComputedStyle(document.querySelector('#tab-beam .col-out')).position]})()")
         check('Rechner: Eingaben links, Ergebnis rechts (mitlaufend)', g[1]<=g[2] and g[4]=='sticky', g)
-        check('Speichern-Knopf unter dem Ergebnis', await pg.evaluate("document.querySelector('#tab-beam .col-out').lastElementChild.classList.contains('save-btn')"))
+        check('„Als Rechenblatt speichern“ unter dem Ergebnis (calc v0.11.11)', await pg.evaluate("document.querySelector('#tab-beam .col-out').lastElementChild.classList.contains('kbl')"))
         # Auswahlmenü
         check('Auswahlknopf zeigt Bereich und System', await pg.inner_text('#pick-g')=='Balken' and await pg.inner_text('#pick-t')=='Einfeldträger')
         await pg.click('#pick-btn')
@@ -39,7 +39,7 @@ async def main():
         check('Menü → Dreigelenkrahmen: Tab, Vorlage, Anzeige, Ergebnis', st==['frame','three','Dreigelenkrahmen',False,True], st)
         await pg.click('#pick-btn'); await pg.click('.pick-group[data-g="beams"] .pick-head'); await pg.click('.pick-item[data-k="cantilever"]'); await pg.wait_for_timeout(300)
         check('Menü → Kragarm', await pg.evaluate("curTab()==='cantilever' && document.getElementById('pick-t').textContent==='Kragarm' && !document.getElementById('cant-results').classList.contains('hidden')"))
-        check('Kopfzeile: Ordner-Symbol ist ein Link zu „Meine Projekte“ (kein Menü, keine Ansicht „Gespeichert“)', await pg.evaluate("!document.getElementById('proj-btn').hasAttribute('aria-haspopup') && document.getElementById('proj-panel').hidden"))
+        check('Kopfzeile: Ordner-Symbol ist ein Link zu den Rechenblättern (kein Menü, keine Ansicht „Gespeichert“)', await pg.evaluate("!document.getElementById('proj-btn').hasAttribute('aria-haspopup') && document.getElementById('proj-panel').hidden"))
         await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("document.getElementById('pick').classList.contains('open')"))
         await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(400)
         check('Durchlaufträger startet mit Gleichlast und Ergebnis', await pg.evaluate("parseFloat(document.getElementById('cont-Mmax').textContent)")>15)

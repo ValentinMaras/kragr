@@ -90,22 +90,7 @@ window.kragrK5Page = function(K){
       var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
   }
 
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
+  // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
   apply(); deco();

@@ -86,7 +86,7 @@ async def main():
         check('Englisch: „Gable roof“, „Rise f“, Knoten „Ridge“', 'Gable roof' in t and 'Rise f' in t and 'Ridge' in t, '')
         # Projekte: Schweißnaht am First anbieten
         src=open(os.path.join(HERE,'..','projekt.html'),encoding='utf-8').read()
-        check('Projekte: Knotenmenü kennt den First (Schweißnaht an beiden Riegelenden)', "n.kind==='first'" in src and "kn_first:'First'" in src)
+        check('Rechenblätter: Knotenmenü kennt den First (Schweißnaht an beiden Riegelenden)', "n.kind==='first'" in src and "kn_first:'First'" in src)
         src=open(os.path.join(HERE,'..','size.html'),encoding='utf-8').read()
         check('Bemessung: Riegellänge aus dem Polygonzug (P.Lraf)', 'L:P.Lraf ?? P.b' in src)
         check('keine Skriptfehler', not errs, errs[:3])

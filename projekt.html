@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.23 -->
+<!-- kragr·projekt v0.1.24 · sichtbar „Rechenblätter“ -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -70,7 +70,7 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>kragr — Projekte</title>
+<title>kragr — Rechenblätter</title>
 <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -83,75 +83,60 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --line:#ececec; --card:#f6f6f7; --accent:#5468ad;
-    --ok:#047857; --ok-bg:#e7f6ee; --bad:#b91c1c; --bad-bg:#fdecec; --warn:#b45309; --warn-bg:#fff4e5; --calc-bg:#e8eefc; --calc:#45589a; }
-  body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  :root { --text:#111114; --text2:#3d3f45; --text3:#5c5e66; --line:#ececec; --accent:#5468ad;
+    --ok:#047857; --ok-bg:#e7f6ee; --bad:#b91c1c; --bad-bg:#fdecec; --calc-bg:#e8eefc; --calc:#45589a; }
+  body { font-family:Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; color:var(--text); -webkit-font-smoothing:antialiased; }
   a { color:inherit; }
   .app-header { display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 24px; max-width:1100px; margin:0 auto; }
   .logo { font-size:20px; font-weight:800; letter-spacing:-0.6px; text-decoration:none; }
-  .logo span { color:var(--accent); }
   .links { display:flex; align-items:center; gap:16px; font-size:14px; font-weight:600; color:var(--text3); }
-  .links a { text-decoration:none; } .links a:hover { color:var(--text); }
-  .links .cur { color:var(--text); } .version { font-weight:500; font-size:13px; }
+  .links a { text-decoration:none; } .version { font-weight:500; font-size:13px; }
   .lang-sel { font:inherit; font-size:13px; font-weight:700; border:none; background:#f1f2f4; border-radius:8px; padding:5px 8px; }
+  /* Rechenblätter (projekt v0.1.24): flache Liste, neueste oben */
   .wrap { max-width:1100px; margin:0 auto; padding:8px 24px 60px; }
-  .top { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin:10px 0 18px; }
-  .pname { font-size:clamp(26px,4.4vw,40px); font-weight:800; letter-spacing:-0.035em; border:none; background:none; font-family:inherit; width:100%; max-width:640px; outline:none; border-radius:8px; padding:2px 4px; margin-left:-4px; }
-  .pname:hover, .pname:focus { background:#f6f6f7; }
-  .sumline { font-size:13px; color:var(--text3); margin-top:2px; }
+  .top { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin:10px 0 16px; }
+  .ptitle { font-size:clamp(28px,4.6vw,42px); font-weight:800; letter-spacing:-0.035em; line-height:1.1; }
+  .sumline { font-size:13.5px; color:var(--text3); margin-top:4px; }
   .acts { display:flex; gap:8px; flex-wrap:wrap; }
-  .btn { font:inherit; font-size:13px; font-weight:700; border-radius:10px; padding:8px 14px; border:1px solid #d4d4d8; background:#fff; color:var(--text); cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
-  .btn:hover { background:#f6f6f7; } .btn.k { background:#111; border-color:#111; color:#fff; } .btn.k:hover { background:#333; }
-  .btn.p { background:var(--accent); border-color:var(--accent); color:#fff; } .btn.sm { font-size:12px; padding:5px 10px; border-radius:8px; }
-  .btn.warn { border-color:#f1c27d; background:var(--warn-bg); color:var(--warn); }
-  .btn.x { border:none; background:none; color:var(--text3); padding:5px 6px; } .btn.x:hover { color:var(--bad); background:none; }
+  .btn { font:inherit; font-size:13.5px; font-weight:700; border-radius:10px; min-height:40px; padding:0 14px; border:none; background:#fff; color:var(--text); cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; box-shadow:inset 0 0 0 1px #d4d4d8; }
+  .btn:hover { background:#f6f6f7; }
+  .btn.p { background:#111114; color:#fff; box-shadow:none; } .btn.p:hover { background:#333; }
+  .btn.q { background:#f1f2f4; box-shadow:none; } .btn.q:hover { background:#e6e7ea; }
+  .filt { display:inline-flex; gap:4px; padding:4px; border-radius:14px; background:#e9eaee; margin-bottom:14px; flex-wrap:wrap; }
+  .filt button { font:inherit; font-size:13.5px; font-weight:700; border:none; background:transparent; color:var(--text2); min-height:36px; padding:0 14px; border-radius:10px; cursor:pointer; }
+  .filt button[aria-pressed="true"] { background:#fff; color:var(--text); box-shadow:0 1px 3px rgba(17,17,20,.12); }
+  .filt .n { font-weight:600; color:var(--text3); margin-left:4px; }
+  .list { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 480px), 1fr)); gap:12px; }
+  .bl { display:grid; grid-template-columns:120px minmax(0,1fr); gap:14px; align-items:start; background:var(--k5-card,#fff); border-radius:20px; padding:14px; box-shadow:var(--k5-sh, 0 1px 2px rgba(17,17,20,.06)); }
+  .bl-fig { background:var(--k5-sub,#f5f6f8); border-radius:12px; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; overflow:hidden; color:#8a8c94; }
+  .bl-fig svg { width:100%; height:100%; }
+  .bl-fig .ic { width:42px; height:42px; }
+  .bl-main { min-width:0; display:flex; flex-direction:column; gap:3px; }
+  .bl-name { font-size:16px; font-weight:800; letter-spacing:-0.01em; overflow-wrap:anywhere; }
+  .bl-name input { font:inherit; width:100%; padding:4px 8px; margin:-5px -9px; border:1.5px solid var(--accent); border-radius:8px; outline:none; background:#fff; }
+  .bl-meta { font-size:12.5px; color:var(--text3); display:flex; flex-wrap:wrap; gap:4px 8px; align-items:center; }
+  .bl-res { font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--text2); margin-top:2px; }
+  .bl-acts { display:flex; gap:6px; align-items:center; margin-top:8px; flex-wrap:wrap; }
   .tag { display:inline-block; font-size:11px; font-weight:700; border-radius:6px; padding:2px 7px; background:var(--calc-bg); color:var(--calc); white-space:nowrap; }
-  .tag.s { background:var(--ok-bg); color:var(--ok); } .tag.b { background:var(--bad-bg); color:var(--bad); } .tag.w { background:var(--warn-bg); color:var(--warn); } .tag.n { background:#f1f2f4; color:var(--text3); }
-  .tag.size { background:#eef7f2; color:#047857; }
-  .pos { background:var(--card); border-radius:16px; padding:14px 16px; margin-bottom:12px; }
-  .pos-h { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .pos.flash { box-shadow:inset 0 0 0 2px var(--accent); transition:box-shadow .6s; }
-  .sec-h { font-size:12px; font-weight:800; color:var(--text3); margin:10px 0 2px; }
-  .sec-h:first-child { margin-top:0; }
-  .addc { position:relative; margin-top:8px; }
-  .more { position:relative; flex:none; }
-  .btn.more-b { width:34px; height:34px; padding:0; justify-content:center; border-radius:9px; border-color:transparent; background:transparent; color:var(--text3); }
+  .tag.size { background:#eef7f2; color:#047857; } .tag.s { background:var(--ok-bg); color:var(--ok); } .tag.b { background:var(--bad-bg); color:var(--bad); } .tag.n { background:#f1f2f4; color:var(--text3); }
+  .more { position:relative; margin-left:auto; }
+  .btn.more-b { width:40px; padding:0; justify-content:center; box-shadow:none; background:transparent; color:var(--text3); }
   .btn.more-b:hover, .btn.more-b[aria-expanded="true"] { background:#eceef2; color:var(--text); }
-  .morem { position:absolute; z-index:25; right:0; top:calc(100% + 4px); min-width:230px; max-width:calc(100vw - 48px); display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 8px 28px rgba(17,17,20,.16); }
+  .morem { position:absolute; z-index:25; right:0; top:calc(100% + 4px); min-width:230px; display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 8px 28px rgba(17,17,20,.16), 0 0 0 1px rgba(17,17,20,.06); }
   .morem[hidden] { display:none; }
   .morem a, .morem button { display:flex; align-items:center; min-height:40px; padding:0 10px; border:0; border-radius:8px; background:transparent; font:inherit; font-size:14px; font-weight:600; color:var(--text); text-decoration:none; text-align:left; cursor:pointer; }
   .morem a:hover, .morem button:hover { background:#f1f2f4; }
   .morem .danger { color:var(--bad); }
-  .morem-h { padding:6px 10px 2px; font-size:12px; color:var(--text3); }
-  .it .d .when { display:block; color:var(--text3); font-size:12px; }
-  .it .d .tag.w { margin-top:4px; }
-  .pos-h .more { margin-left:auto; }
-  .addm { position:absolute; z-index:20; left:0; top:calc(100% + 6px); min-width:270px; max-width:calc(100vw - 48px); display:flex; flex-direction:column; padding:6px; border-radius:12px; background:#fff; box-shadow:0 8px 28px rgba(17,17,20,.16); }
-  .addm[hidden] { display:none; }
-  .addm a { display:flex; align-items:center; min-height:42px; padding:0 10px; border-radius:8px; font-size:14px; font-weight:600; color:var(--text); text-decoration:none; }
-  .addm a:hover { background:#f1f2f4; }
-  .addm-h { padding:6px 10px 2px; font-size:12px; color:var(--text3); }
-  .addm-g { padding:8px 10px 2px; font-size:12.5px; font-weight:800; }
-  .addm .addm-o { margin-top:4px; border-top:1px solid #ececef; border-radius:0 0 8px 8px; color:var(--text3); }
-  .pos-nr { font-weight:800; font-size:17px; white-space:nowrap; }
-  .pos-t { font:inherit; font-weight:800; font-size:17px; border:none; background:none; flex:1; min-width:180px; outline:none; border-radius:6px; padding:2px 4px; }
-  .pos-t:hover, .pos-t:focus { background:#fff; }
-  .pos-body { display:grid; grid-template-columns:1fr 240px; gap:14px; margin-top:10px; }
-  .items { border-left:2px solid #e2e2e6; padding-left:12px; }
-  .it { display:flex; align-items:center; gap:10px; padding:6px 0; font-size:13.5px; flex-wrap:wrap; }
-  .it .d { flex:1; min-width:200px; } .it .d small { display:block; color:var(--text3); font-size:12px; }
-  .it .when { color:var(--text3); font-size:12px; white-space:nowrap; }
-  .it .r { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; margin-left:auto; }
-  .thumb { background:#fff; border-radius:12px; padding:6px; display:flex; align-items:center; justify-content:center; min-height:110px; }
-  .thumb svg { width:100%; height:auto; max-height:150px; }
-  .thumb .none { font-size:12px; color:var(--text3); text-align:center; padding:10px; }
-  .empty { font-size:13px; color:var(--text3); padding:4px 0; }
-  .sec-t { font-size:13px; font-weight:700; color:var(--text3); margin:26px 0 8px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
-  .loose { background:#fff; border:1.5px dashed #e2e2e6; border-radius:16px; padding:8px 16px; }
-  .sel { font:inherit; font-size:12px; border:1px solid #d4d4d8; border-radius:8px; padding:4px 6px; background:#fff; max-width:220px; }
+  .morem-h { padding:6px 10px 2px; font-size:12px; color:var(--text3); } .morem-g { padding:8px 10px 2px; font-size:12.5px; font-weight:800; }
+  .bl { position:relative; } .more.chk { margin-left:0; position:static; }   /* Menü an der Karte ausrichten: kein seitliches Verschieben am Handy */
+  .more.chk .morem { left:12px; right:12px; top:auto; margin-top:4px; min-width:0; max-height:60vh; overflow:auto; }
+  @media (min-width:721px) { .more.chk .morem { right:auto; min-width:320px; } } .morem .danger.armed { background:var(--bad-bg); }
+  .empty { background:var(--k5-card,#fff); border-radius:20px; padding:26px 22px; box-shadow:var(--k5-sh, none); font-size:14.5px; line-height:1.6; color:var(--text2); max-width:720px; }
+  .empty b { color:var(--text); } .empty .acts { margin-top:14px; }
   .hint { font-size:12.5px; color:var(--text3); line-height:1.55; margin-top:22px; max-width:760px; }
   .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#111; color:#fff; font-size:13px; padding:9px 16px; border-radius:10px; z-index:99; }
-  @media (max-width:720px){ .links { gap:10px; font-size:13px; } .links .version { display:none; } .pos-body { grid-template-columns:1fr; } .thumb { display:none; } .app-header,.wrap { padding-left:16px; padding-right:16px; } }
+  @media (max-width:720px){ .links { gap:10px; font-size:13px; } .links .version { display:none; } .app-header,.wrap { padding-left:16px; padding-right:16px; }
+    .bl { grid-template-columns:84px minmax(0,1fr); gap:12px; padding:12px; } .bl-acts { margin-left:-96px; } .top .acts { width:100%; } }
   /* Gesamtbericht */
   #report-view { display:none; max-width:860px; margin:0 auto; padding:16px; }
   body.show-report #report-view { display:block; } body.show-report .app-header, body.show-report .wrap { display:none; }
@@ -167,8 +152,7 @@
   .report th { font-size:11px; color:#555; font-weight:600; }
   .report .ok { color:var(--ok); font-weight:600; } .report .bad { color:var(--bad); font-weight:600; }
   .report .figure svg, .report .sysfig svg { max-width:460px; height:auto; }
-  .report .posblock { break-before:page; padding-top:6px; }
-  .report .sub { border-left:3px solid #e2e2e6; padding-left:12px; margin:10px 0 14px; }
+    .report .sub { border-left:3px solid #e2e2e6; padding-left:12px; margin:10px 0 14px; }
   .report .steps { font-size:11.5px; } .report .st { margin-bottom:6px; } .report .st-h { font-size:12px; }
   /* Rechenschritte aus den size-Berichten (wie in size) */
   .report .steps { font-family:'JetBrains Mono', monospace; font-size:11.5px; line-height:1.75; color:#222; } .report .steps b { color:#111; }
@@ -181,20 +165,11 @@
   .report .note { font-size:12px; color:#333; background:#eceff8; border-left:3px solid var(--accent); padding:6px 10px; margin-top:6px; }
   .old { opacity:.55; }
   @media print { body.show-report .rep-acts { display:none; } #report-view { max-width:none; padding:0; } .report { border:none; padding:0; } .report h2 { break-after:avoid; } .report section { break-inside:avoid; } }
+  .report .sysfig svg { max-width:460px; height:auto; }
+  .rep-title { font-size:15px; font-weight:800; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; align-self:center; }
+  @media print { .more, .filt, .acts, .hint { display:none !important; } }
 </style>
 <style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
-<style>
-  /* Umbenennen sichtbar machen (v0.1.15): Stift-Knopf, gestrichelte Linie unter dem Namen */
-  .k-name { display:flex; align-items:center; gap:6px; min-width:0; max-width:680px; }
-  .k-name-s { flex:1; min-width:180px; }
-  .k-name input { flex:1; min-width:0; border-bottom:1.5px dashed transparent !important; border-radius:6px 6px 0 0 !important; }
-  .k-name:hover input, .k-name input:focus { border-bottom-color:#c3c5cc !important; }
-  .k-pen { flex:none; display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border:0; border-radius:10px; background:#f1f2f4; color:#3d3f45; cursor:pointer; }
-  .k-pen:hover { background:#e6e7ea; color:#111114; }
-  .k-name-s .k-pen { width:32px; height:32px; }
-  @media (max-width:720px){ .pos-h .k-name-s { flex:1 1 100%; order:-1; } .pos-h .pos-nr { order:-2; } .pos-h .pos-t[id^="pt-"] { font-size:16px; } }   /* langer Titel: eigene Zeile */
-  @media print { .k-pen { display:none !important; } }
-</style>
 <style data-frame>
   /* Einheitlicher Rahmen (calc v0.9.4 · size v0.6.3 · ref v0.3.43 · projekt v0.1.13 · rechtliches v0.1.12): gleiche Kopfzeile und gleiche
      Inhaltsbreite auf allen App-Seiten. Logo und Inhalt beginnen an derselben Kante: Rahmen 1180 px, Rand 24 px (Handy 16 px). */
@@ -239,12 +214,12 @@
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
 <script data-mod>
-// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Modulnamen (seit 26.10.2026; „Rechenblätter“ statt „Projekte“ seit 27.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Rechenblätter“ statt calc · size · ref · Projekte.
 // Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
 // data-mod="calc|size|ref|proj" bekommen ihn als Text.
 (function(){
-  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
-          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Rechenblätter'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Calculation sheets'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Notes de calcul'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Memorias de cálculo'} };
   function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
     try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
   window.KMOD=K; window.kmodLang=lang;
@@ -546,22 +521,7 @@ window.kragrK5Page = function(K){
       var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
   }
 
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
+  // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
   apply(); deco();
@@ -580,13 +540,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -706,7 +666,8 @@ window.kragrK5Page = function(K){
   var MODS=[['calc','calc.html',SVG_I('<line x1="2.5" y1="6" x2="21.5" y2="6" stroke-width="2.4"/><path d="M4 6.8 l-2.3 3.6 h4.6z M20 6.8 l-2.3 3.6 h4.6z" stroke-width="1.4"/><path d="M4 6 Q12 25 20 6" stroke-width="1.6" stroke-dasharray="0"/>')],
             ['size','size.html',SVG_I('<line x1="6" y1="4" x2="18" y2="4" stroke-width="2.4"/><line x1="6" y1="20" x2="18" y2="20" stroke-width="2.4"/><line x1="12" y1="4" x2="12" y2="20" stroke-width="2"/>')],
             ['ref','ref.html',SVG_I('<path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z" stroke-width="1.8"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z" stroke-width="1.8"/>')]];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  // Rechenblätter (calc v0.11.11, statt „Projekte“): Blatt mit Eselsohr und Zeilen
+  var ICON_PROJ=SVG_I('<path d="M6 3h8l4 4v14H6z" stroke-width="1.8"/><path d="M14 3v4h4" stroke-width="1.8"/><path d="M9 12h6M9 15.5h6M9 19h3" stroke-width="1.8"/>');
   var burger, menu, scrim, lastFocus;
   function buildHeader(){
     var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
@@ -746,7 +707,6 @@ window.kragrK5Page = function(K){
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
   }
   function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
   function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
@@ -827,137 +787,91 @@ window.kragrK5Page = function(K){
     <a href="calc.html" data-mod="calc">Schnittkräfte</a><a href="size.html" data-mod="size">Bemessung</a><a href="ref.html" data-mod="ref">Wissen</a>
   </nav>
   <div class="hdr-tools">
-    <span class="proj-btn cur" aria-current="page"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-t="navProj">Projekte</span></span>
-    <span class="version" id="ver"></span>
+    <span class="proj-btn cur" aria-current="page"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx" data-mod="proj">Rechenblätter</span></span>
+        <span class="version" id="ver"></span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setLang(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
 
 <div class="wrap k-frame">
   <div class="top">
-    <div style="flex:1;min-width:280px">
-      <div class="k-name"><input class="pname" id="pname" onchange="setName(this.value)" onkeydown="if(event.key==='Enter') this.blur()" aria-label="Projektname"><button type="button" class="k-pen" data-tt="rename" onclick="kRename('pname')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></button></div>
-      <div class="sumline" id="sum"></div>
-    </div>
+    <div><h1 class="ptitle" data-mod="proj">Rechenblätter</h1><div class="sumline" id="sum"></div></div>
     <div class="acts">
-      <button class="btn" onclick="showReport()" data-t="report">Gesamtbericht</button>
-      <button class="btn" onclick="exportFile()" data-t="export">Projekt als Datei sichern</button>
-      <label class="btn"><span data-t="import">Datei laden</span><input type="file" accept=".json,.statiq,.muly,.kragr,application/json" style="display:none" onchange="importFile(this)"></label>
-      <button class="btn k" onclick="addPos()" data-t="addPos">＋ Position</button>
+      <button class="btn q" onclick="exportFile()" data-t="export">Alle als Datei sichern</button>
+      <label class="btn q"><span data-t="import">Datei laden</span><input type="file" accept=".json,.statiq,.muly,.kragr,application/json" style="display:none" onchange="importFile(this)"></label>
     </div>
   </div>
-  <div id="list"></div>
-  <div class="sec-t"><span data-t="loose">Ohne Position</span><span class="sumline" data-t="looseHint" style="margin:0">Gespeichertes aus „Schnittkräfte“ und „Bemessung“, das noch keiner Position zugeordnet ist.</span></div>
-  <div class="loose" id="loose"></div>
-  <p class="hint" data-t="hint">Eine Position bündelt ein System und seine Nachweise. „System anlegen“ bzw. „System bearbeiten“ öffnet Schnittkräfte für diese Position, „＋ Nachweis“ öffnet Bemessung mit den Schnittkräften des Systems. Gespeichert wird erst mit „Übernehmen und zurück“. Ändert sich das System später, zeigen die Nachweise „neu rechnen“. Ohne Projekt sind Schnittkräfte und Bemessung freie Rechner. Alles bleibt in diesem Browser — mit „Projekt als Datei sichern“ lässt es sich übertragen und aufbewahren.</p>
+  <div class="filt" id="filt" role="group"></div>
+  <div class="list" id="list"></div>
+  <p class="hint" data-t="hint">Rechenblätter liegen nur in diesem Browser.</p>
 </div>
 
 <div id="report-view">
-  <div class="rep-acts"><button class="btn" onclick="hideReport()" data-t="back">← Zurück</button><button class="btn p" onclick="window.print()" data-t="print">Drucken / PDF</button></div>
+  <div class="rep-acts"><button class="btn" onclick="hideReport()" data-t="back">← Zurück</button><span class="rep-title" id="rep-title"></span><button class="btn p" onclick="window.print()" data-t="print">Drucken / PDF</button></div>
   <div class="report" id="report"></div>
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.23';
+const PROJ_VERSION = '0.1.24';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
- de:{ more:'Weitere Aktionen', rep1:'Bericht ansehen', moveH:'Verschieben nach', openAsIs:'Öffnen ohne neu zu rechnen', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_first:'First', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', sysH:'① System (Schnittkräfte)', chkH:'② Nachweise (Bemessung)', editSys:'System bearbeiten', newSys:'System anlegen', noSysYet:'Noch kein System — erst anlegen, dann lassen sich die Schnittkräfte für die Nachweise übernehmen.', addChk:'＋ Nachweis', otherChk:'Anderer Nachweis (Werte von Hand)', withForces:'Mit den Schnittkräften des Systems:', noChk:'Noch kein Nachweis.', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', rename:'Umbenennen', sum1:'1 Position · {1} nicht erfüllt · {2} veraltet', older:'älterer Stand', navProj:'Projekte', report:'Gesamtbericht', export:'Projekt als Datei sichern', import:'Datei laden', addPos:'＋ Position', loose:'Ohne Position',
-  looseHint:'Gespeichertes aus „Schnittkräfte“ und „Bemessung“, das noch keiner Position zugeordnet ist.', hint:'Eine Position bündelt ein System und seine Nachweise. „System anlegen“ bzw. „System bearbeiten“ öffnet Schnittkräfte für diese Position, „＋ Nachweis“ öffnet Bemessung mit den Schnittkräften des Systems. Gespeichert wird erst mit „Übernehmen und zurück“. Ändert sich das System später, zeigen die Nachweise „neu rechnen“. Ohne Projekt sind Schnittkräfte und Bemessung freie Rechner. Alles bleibt in diesem Browser — mit „Projekt als Datei sichern“ lässt es sich übertragen und aufbewahren.',
-  back:'← Zurück', print:'Drucken / PDF', defName:'Mein Projekt', pos:'Pos.', newPos:'neue Position', posTitle:'Bezeichnung',
-  sum:'{0} Positionen · {1} nicht erfüllt · {2} veraltet', none:'Noch nichts gespeichert. Mit „＋ Position“ beginnen, dann das System anlegen.',
-  noneLoose:'Alles ist zugeordnet.', emptyPos:'Noch leer — mit „① System“ beginnen.',
-  allOk:'alle erfüllt', notOk:'nicht erfüllt', stale:'veraltet', empty:'leer', open:'Öffnen', recalc:'Neu rechnen', toPos:'Zuordnen …', newFrom:'Neue Position', remove:'Aus Position lösen',
-  delPos:'Position löschen', delAsk:'Löschen?', staleWhy:'System geändert — neu rechnen', srcGone:'Berechnung aus „Schnittkräfte“ nicht mehr vorhanden', fromCalc:'aus „Schnittkräfte“',
-  noSys:'kein System aus „Schnittkräfte“', calcItem:'System', sizeItem:'Nachweis', util:'{0} %', saved:'gespeichert {0}',
-  types:{ beam:'Einfeldträger', cantilever:'Kragarm', cont:'Durchlaufträger', frame:'Rahmen' },
-  repOverview:'Positionsübersicht', repParts:'Bestandteile', repStatus:'Status', repSystem:'System aus „Schnittkräfte“', repResults:'Größtwerte',
-  repNoRep:'Für diesen Nachweis ist kein Bericht gespeichert — in „Bemessung“ öffnen und erneut speichern.', repDate:'Stand {0}',
-  repNote:'Lernwerkzeug — ersetzt keine geprüfte Statik.', exported:'Projektdatei gespeichert.', imported:'Projektdatei geladen: {0} Einträge.', badFile:'Die Datei ist keine kragr-Projektdatei.',
-  reac:'Auflagerkräfte', moved:'Zugeordnet.' },
- en:{ more:'More actions', rep1:'View report', moveH:'Move to', openAsIs:'Open without recalculating', kn_node:'Node', kn_eL:'left corner', kn_eR:'right corner', kn_first:'ridge', kn_sup:'Support', kn_weld:'Steel · Weld at member {0} ({1})', kn_fuss:'Steel · Column base at member {0}', kn_col:'column', kn_raf:'rafter', sysH:'① System (internal forces)', chkH:'② Checks (design)', editSys:'Edit system', newSys:'Create system', noSysYet:'No system yet — create it first, then its internal forces can be used for the checks.', addChk:'＋ Check', otherChk:'Other check (values by hand)', withForces:'With the internal forces of the system:', noChk:'No check yet.', z_riegel:'Rafter', z_stiel:'Column (the more compressed one)', rename:'Rename', sum1:'1 item · {1} not satisfied · {2} out of date', older:'earlier version', navProj:'Projects', report:'Full report', export:'Save project as file', import:'Load file', addPos:'＋ Item', loose:'Not assigned',
-  looseHint:'Saved results from “Internal forces” and “Design” that are not yet assigned to an item.', hint:'An item bundles a system with its checks. “Create system” or “Edit system” opens Internal forces for this item, “＋ Check” opens Design with the internal forces of the system. Nothing is saved until “Apply and return”. If the system changes later, the checks show “recalculate”. Without a project, Internal forces and Design are free calculators. Everything stays in this browser — “Save project as file” lets you move and keep it.',
-  back:'← Back', print:'Print / PDF', defName:'My project', pos:'Item', newPos:'new item', posTitle:'Description',
-  sum:'{0} items · {1} not satisfied · {2} out of date', none:'Nothing saved yet. Start with “＋ Item”, then create the system.',
-  noneLoose:'Everything is assigned.', emptyPos:'Empty — start with “① System”.',
-  allOk:'all satisfied', notOk:'not satisfied', stale:'out of date', empty:'empty', open:'Open', recalc:'Recalculate', toPos:'Assign …', newFrom:'New item', remove:'Detach from item',
-  delPos:'Delete item', delAsk:'Delete?', staleWhy:'system changed — recalculate', srcGone:'calculation from “Internal forces” no longer exists', fromCalc:'from “Internal forces”',
-  noSys:'no system from “Internal forces”', calcItem:'System', sizeItem:'Check', util:'{0} %', saved:'saved {0}',
-  types:{ beam:'Simply supported beam', cantilever:'Cantilever', cont:'Continuous beam', frame:'Frame' },
-  repOverview:'Overview of items', repParts:'Contents', repStatus:'Status', repSystem:'System from “Internal forces”', repResults:'Maximum values',
-  repNoRep:'No report is stored for this check — open it in “Design” and save again.', repDate:'As of {0}',
-  repNote:'Learning tool — does not replace a checked structural design.', exported:'Project file saved.', imported:'Project file loaded: {0} entries.', badFile:'This file is not a kragr project file.',
-  reac:'Support reactions', moved:'Assigned.' },
- fr:{ more:'Autres actions', rep1:'Voir le rapport', moveH:'Déplacer vers', openAsIs:'Ouvrir sans recalculer', kn_node:'Nœud', kn_eL:'angle gauche', kn_eR:'angle droit', kn_first:'faîtage', kn_sup:'Appui', kn_weld:'Acier · Soudure sur la barre {0} ({1})', kn_fuss:'Acier · Pied de poteau, barre {0}', kn_col:'poteau', kn_raf:'traverse', sysH:'① Système (efforts)', chkH:'② Vérifications (dimensionnement)', editSys:'Modifier le système', newSys:'Créer le système', noSysYet:'Pas encore de système — le créer d’abord ; ses efforts internes servent ensuite aux vérifications.', addChk:'＋ Vérification', otherChk:'Autre vérification (valeurs à la main)', withForces:'Avec les efforts internes du système :', noChk:'Pas encore de vérification.', z_riegel:'Traverse', z_stiel:'Montant (le plus comprimé)', rename:'Renommer', sum1:'1 position · {1} non vérifiée(s) · {2} périmée(s)', older:'version antérieure', navProj:'Projets', report:'Rapport complet', export:'Enregistrer le projet (fichier)', import:'Charger un fichier', addPos:'＋ Position', loose:'Sans position',
-  looseHint:'Éléments enregistrés dans « Efforts » et « Dimensionnement » qui ne sont encore affectés à aucune position.', hint:'Une position regroupe un système et ses vérifications. « Créer le système » ou « Modifier le système » ouvre Efforts pour cette position, « ＋ Vérification » ouvre Dimensionnement avec les efforts internes du système. Rien n’est enregistré avant « Appliquer et revenir ». Si le système change ensuite, les vérifications affichent « recalculer ». Sans projet, Efforts et Dimensionnement sont des calculateurs libres. Tout reste dans ce navigateur — « Enregistrer le projet (fichier) » permet de le transférer et de le conserver.',
-  back:'← Retour', print:'Imprimer / PDF', defName:'Mon projet', pos:'Pos.', newPos:'nouvelle position', posTitle:'Désignation',
-  sum:'{0} positions · {1} non vérifiée(s) · {2} périmée(s)', none:'Rien d’enregistré pour l’instant. Commencer par « ＋ Position », puis créer le système.',
-  noneLoose:'Tout est affecté.', emptyPos:'Vide — commencer par « ① Système ».',
-  allOk:'toutes vérifiées', notOk:'non vérifiée', stale:'périmée', empty:'vide', open:'Ouvrir', recalc:'Recalculer', toPos:'Affecter …', newFrom:'Nouvelle position', remove:'Retirer de la position',
-  delPos:'Supprimer la position', delAsk:'Supprimer ?', staleWhy:'système modifié — recalculer', srcGone:'le calcul de « Efforts » n’existe plus', fromCalc:'de « Efforts »',
-  noSys:'pas de système « Efforts »', calcItem:'Système', sizeItem:'Vérification', util:'{0} %', saved:'enregistré {0}',
-  types:{ beam:'Poutre sur deux appuis', cantilever:'Console', cont:'Poutre continue', frame:'Portique' },
-  repOverview:'Liste des positions', repParts:'Contenu', repStatus:'État', repSystem:'Système de « Efforts »', repResults:'Valeurs maximales',
-  repNoRep:'Aucun rapport enregistré pour cette vérification — l’ouvrir dans « Dimensionnement » et l’enregistrer à nouveau.', repDate:'État au {0}',
-  repNote:'Outil pédagogique — ne remplace pas une note de calcul vérifiée.', exported:'Fichier de projet enregistré.', imported:'Fichier de projet chargé : {0} éléments.', badFile:'Ce fichier n’est pas un fichier de projet kragr.',
-  reac:'Réactions d’appui', moved:'Affecté.' },
- es:{ more:'Más acciones', rep1:'Ver informe', moveH:'Mover a', openAsIs:'Abrir sin recalcular', kn_node:'Nudo', kn_eL:'esquina izquierda', kn_eR:'esquina derecha', kn_first:'cumbrera', kn_sup:'Apoyo', kn_weld:'Acero · Soldadura en la barra {0} ({1})', kn_fuss:'Acero · Placa base, barra {0}', kn_col:'pilar', kn_raf:'dintel', sysH:'① Sistema (esfuerzos)', chkH:'② Comprobaciones (dimensionado)', editSys:'Editar el sistema', newSys:'Crear el sistema', noSysYet:'Aún no hay sistema — créalo primero; después sus esfuerzos sirven para las comprobaciones.', addChk:'＋ Comprobación', otherChk:'Otra comprobación (valores a mano)', withForces:'Con los esfuerzos del sistema:', noChk:'Aún no hay comprobaciones.', z_riegel:'Dintel', z_stiel:'Pilar (el más comprimido)', rename:'Renombrar', sum1:'1 posición · {1} no cumple(n) · {2} desactualizada(s)', older:'versión anterior', navProj:'Proyectos', report:'Informe completo', export:'Guardar proyecto (archivo)', import:'Cargar archivo', addPos:'＋ Posición', loose:'Sin posición',
-  looseHint:'Elementos guardados en «Esfuerzos» y «Dimensionado» que aún no están asignados a ninguna posición.', hint:'Una posición agrupa un sistema y sus comprobaciones. «Crear el sistema» o «Editar el sistema» abre Esfuerzos para esta posición, «＋ Comprobación» abre Dimensionado con los esfuerzos del sistema. No se guarda nada hasta «Aplicar y volver». Si el sistema cambia después, las comprobaciones muestran «recalcular». Sin proyecto, Esfuerzos y Dimensionado son calculadoras libres. Todo se queda en este navegador — «Guardar proyecto (archivo)» permite trasladarlo y conservarlo.',
-  back:'← Volver', print:'Imprimir / PDF', defName:'Mi proyecto', pos:'Pos.', newPos:'nueva posición', posTitle:'Denominación',
-  sum:'{0} posiciones · {1} no cumple(n) · {2} desactualizada(s)', none:'Aún no hay nada guardado. Empezar con «＋ Posición» y crear después el sistema.',
-  noneLoose:'Todo está asignado.', emptyPos:'Vacía — empezar con «① Sistema».',
-  allOk:'todas cumplen', notOk:'no cumple', stale:'desactualizada', empty:'vacía', open:'Abrir', recalc:'Recalcular', toPos:'Asignar …', newFrom:'Nueva posición', remove:'Quitar de la posición',
-  delPos:'Eliminar posición', delAsk:'¿Eliminar?', staleWhy:'sistema modificado — recalcular', srcGone:'el cálculo de «Esfuerzos» ya no existe', fromCalc:'de «Esfuerzos»',
-  noSys:'sin sistema de «Esfuerzos»', calcItem:'Sistema', sizeItem:'Comprobación', util:'{0} %', saved:'guardado {0}',
-  types:{ beam:'Viga biapoyada', cantilever:'Voladizo', cont:'Viga continua', frame:'Pórtico' },
-  repOverview:'Lista de posiciones', repParts:'Contenido', repStatus:'Estado', repSystem:'Sistema de «Esfuerzos»', repResults:'Valores máximos',
-  repNoRep:'No hay informe guardado para esta comprobación — abrirla en «Dimensionado» y guardar de nuevo.', repDate:'Estado a {0}',
-  repNote:'Herramienta didáctica — no sustituye un cálculo estructural revisado.', exported:'Archivo de proyecto guardado.', imported:'Archivo de proyecto cargado: {0} elementos.', badFile:'El archivo no es un archivo de proyecto de kragr.',
-  reac:'Reacciones', moved:'Asignado.' } };
+ de:{ addChk:'＋ Nachweis', withForces:'Mit den Schnittkräften dieses Systems:', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_first:'First', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', n1:'1 Rechenblatt', n:'{0} Rechenblätter', all:'Alle', report:'Bericht', open:'Öffnen', more:'Weitere Aktionen', rename:'Umbenennen', toSize:'In „{0}“ übernehmen',
+  del:'Löschen', delAsk:'Wirklich löschen?', deleted:'„{0}“ gelöscht.', export:'Alle als Datei sichern', import:'Datei laden', exported:'Datei gespeichert.', imported:'{0} Rechenblätter geladen.',
+  badFile:'Diese Datei ist keine kragr-Datei.', back:'← Zurück', print:'Drucken / PDF', ok:'erfüllt', notOk:'nicht erfüllt', noDraft:'älterer Stand: nur Bericht',
+  noRep:'Für dieses Rechenblatt ist kein Bericht gespeichert. In „{0}“ öffnen und erneut speichern.',
+  none:'<b>Noch keine Rechenblätter.</b><br>Rechne in „{0}“ oder „{1}“ und wähle unter den Ergebnissen <b>„Als Rechenblatt speichern“</b>. Hier kannst du es danach als Bericht ansehen, als PDF drucken oder wieder öffnen.',
+  noneF:'In dieser Auswahl gibt es noch keine Rechenblätter.',
+  hint:'Rechenblätter liegen nur in diesem Browser. Zum Sichern oder für ein anderes Gerät: „Alle als Datei sichern“ und dort „Datei laden“.',
+  types:{ beam:'Einfeldträger', cantilever:'Kragarm', cont:'Durchlaufträger', frame:'Rahmen' } },
+ en:{ addChk:'＋ Check', withForces:'With the internal forces of this system:', z_riegel:'Rafter', z_stiel:'Column (the more compressed one)', kn_node:'Node', kn_eL:'left corner', kn_eR:'right corner', kn_first:'ridge', kn_sup:'Support', kn_weld:'Steel · Weld at member {0} ({1})', kn_fuss:'Steel · Column base at member {0}', kn_col:'column', kn_raf:'rafter', n1:'1 calculation sheet', n:'{0} calculation sheets', all:'All', report:'Report', open:'Open', more:'More actions', rename:'Rename', toSize:'Use in “{0}”',
+  del:'Delete', delAsk:'Really delete?', deleted:'“{0}” deleted.', export:'Save all to file', import:'Load file', exported:'File saved.', imported:'{0} calculation sheets loaded.',
+  badFile:'This file is not a kragr file.', back:'← Back', print:'Print / PDF', ok:'satisfied', notOk:'not satisfied', noDraft:'older version: report only',
+  noRep:'No report is stored for this sheet. Open it in “{0}” and save again.',
+  none:'<b>No calculation sheets yet.</b><br>Calculate in “{0}” or “{1}” and choose <b>“Save as calculation sheet”</b> below the results. Here you can then view it as a report, print it as a PDF or open it again.',
+  noneF:'No calculation sheets in this selection yet.',
+  hint:'Calculation sheets are stored in this browser only. To back them up or move them to another device: “Save all to file”, then “Load file” there.',
+  types:{ beam:'Simply supported beam', cantilever:'Cantilever', cont:'Continuous beam', frame:'Frame' } },
+ fr:{ addChk:'＋ Vérification', withForces:'Avec les efforts internes de ce système :', z_riegel:'Traverse', z_stiel:'Montant (le plus comprimé)', kn_node:'Nœud', kn_eL:'angle gauche', kn_eR:'angle droit', kn_first:'faîtage', kn_sup:'Appui', kn_weld:'Acier · Soudure sur la barre {0} ({1})', kn_fuss:'Acier · Pied de poteau, barre {0}', kn_col:'poteau', kn_raf:'traverse', n1:'1 note de calcul', n:'{0} notes de calcul', all:'Toutes', report:'Rapport', open:'Ouvrir', more:'Autres actions', rename:'Renommer', toSize:'Reprendre dans « {0} »',
+  del:'Supprimer', delAsk:'Vraiment supprimer ?', deleted:'« {0} » supprimée.', export:'Tout enregistrer dans un fichier', import:'Charger un fichier', exported:'Fichier enregistré.', imported:'{0} notes de calcul chargées.',
+  badFile:'Ce fichier n’est pas un fichier kragr.', back:'← Retour', print:'Imprimer / PDF', ok:'vérifiée', notOk:'non vérifiée', noDraft:'ancienne version : rapport seulement',
+  noRep:'Aucun rapport enregistré pour cette note. L’ouvrir dans « {0} » et l’enregistrer à nouveau.',
+  none:'<b>Pas encore de notes de calcul.</b><br>Calculer dans « {0} » ou « {1} » et choisir <b>« Enregistrer comme note de calcul »</b> sous les résultats. Ici, on peut ensuite la voir comme rapport, l’imprimer en PDF ou la rouvrir.',
+  noneF:'Pas encore de notes de calcul dans cette sélection.',
+  hint:'Les notes de calcul sont stockées uniquement dans ce navigateur. Pour les sauvegarder ou les utiliser sur un autre appareil : « Tout enregistrer dans un fichier », puis « Charger un fichier » sur l’autre appareil.',
+  types:{ beam:'Poutre sur deux appuis', cantilever:'Console', cont:'Poutre continue', frame:'Portique' } },
+ es:{ addChk:'＋ Comprobación', withForces:'Con los esfuerzos de este sistema:', z_riegel:'Dintel', z_stiel:'Pilar (el más comprimido)', kn_node:'Nudo', kn_eL:'esquina izquierda', kn_eR:'esquina derecha', kn_first:'cumbrera', kn_sup:'Apoyo', kn_weld:'Acero · Soldadura en la barra {0} ({1})', kn_fuss:'Acero · Placa base, barra {0}', kn_col:'pilar', kn_raf:'dintel', n1:'1 memoria de cálculo', n:'{0} memorias de cálculo', all:'Todas', report:'Informe', open:'Abrir', more:'Más acciones', rename:'Renombrar', toSize:'Usar en «{0}»',
+  del:'Eliminar', delAsk:'¿Eliminar de verdad?', deleted:'«{0}» eliminada.', export:'Guardar todo en un archivo', import:'Cargar archivo', exported:'Archivo guardado.', imported:'{0} memorias de cálculo cargadas.',
+  badFile:'El archivo no es un archivo de kragr.', back:'← Volver', print:'Imprimir / PDF', ok:'cumple', notOk:'no cumple', noDraft:'versión antigua: solo informe',
+  noRep:'No hay informe guardado para esta memoria. Abrirla en «{0}» y guardarla de nuevo.',
+  none:'<b>Aún no hay memorias de cálculo.</b><br>Calcula en «{0}» o «{1}» y elige <b>«Guardar como memoria de cálculo»</b> debajo de los resultados. Aquí podrás verla como informe, imprimirla en PDF o volver a abrirla.',
+  noneF:'Aún no hay memorias de cálculo en esta selección.',
+  hint:'Las memorias de cálculo se guardan solo en este navegador. Para hacer una copia o usarlas en otro dispositivo: «Guardar todo en un archivo» y allí «Cargar archivo».',
+  types:{ beam:'Viga biapoyada', cantilever:'Voladizo', cont:'Viga continua', frame:'Pórtico' } } };
 const t = (k, ...a) => String(((T[LANG]||T.de)[k] ?? T.de[k] ?? k)).replace(/\{(\d+)\}/g, (_,i)=>a[+i]);
 const tTyp = k => ((T[LANG]||T.de).types||T.de.types)[k] || k;
+const M = m => (typeof kmod==='function' ? kmod(m, LANG) : m);
 const LOC = ({ de:'de-DE', en:'en-GB', fr:'fr-FR', es:'es-ES' })[LANG] || 'de-DE';
 const nf = (v,d=1) => { const s=(+v).toFixed(d); return LANG==='en' ? s : s.replace('.', ','); };
 const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const dShort = iso => { try{ return new Date(iso).toLocaleString(LOC, {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'}); }catch(e){ return ''; } };
 
-// ── Speicher ─────────────────────────────────────
-const PSTORE='statiq-projekt', POS_STORE='statiq-size-positionen', REP='statiq-size-bericht:';
+// ── Speicher (Schlüssel wie bisher) ──────────────
+// calc: statiq_sdf_<Zeit> = {name, sdf, draft?}; size: statiq-size-positionen (Liste) + Bericht statiq-size-bericht:<Name>.
+// Was zu einer früheren Projekt-Position gehörte (statiq_sdf_pos_*, size-Einträge mit Zuordnung), wird nicht gezeigt (Entscheidung Valentin: verwerfen).
+const POS_STORE='statiq-size-positionen', REP='statiq-size-bericht:', FILT='kragr-blatt-filter';
 const lsGet = (k, d) => { try{ const v=localStorage.getItem(k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } };
 const lsSet = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } };
-function proj(){ const p=lsGet(PSTORE, null) || {}; p.v=1; p.name=p.name||t('defName'); p.pos=p.pos||[]; p.asg=p.asg||{}; return p; }
-function save(p){ if(['Mein Projekt','My project','Mon projet','Mi proyecto'].includes(p.name)){ p={...p}; delete p.name; } lsSet(PSTORE, p); }   // Standardname folgt der Sprache
+function oldAsg(){ const p=lsGet('statiq-projekt', null); return (p && p.asg) || {}; }
 function calcItems(){ const out=[];
-  try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k || !k.startsWith('statiq_sdf_')) continue;
-    const o=lsGet(k, null); if(!o || !o.sdf || (o.sdf.module && o.sdf.module!=='calc')) continue; out.push({ kind:'c', id:'c:'+k, key:k, name:o.name||k, sdf:o.sdf, ts:o.sdf.timestamp||'' }); } }catch(e){}
-  return out.sort((a,b)=>a.ts<b.ts?1:-1); }
-function sizeItems(){ return (lsGet(POS_STORE, [])||[]).map(p=>({ kind:'s', id:'s:'+p.name, name:p.name, p, ts:p.date||'' })); }
-function allItems(){ return [...calcItems(), ...sizeItems()]; }
-// Position eines Eintrags: ausdrücklich zugeordnet, sonst (size) über die calc-Quelle
-function posOf(P, it, cmap){ if(P.asg[it.id]!=null) return P.asg[it.id]; if(it.kind==='s' && it.p.src?.key){ const c=P.asg['c:'+it.p.src.key]; if(c!=null) return c; } return null; }
-function grouped(){ const P=proj(), items=allItems(), by={}, loose=[];
-  // Nachweise aus calc bündeln (v0.1.14): gehört ein size-Nachweis zu einer Berechnung aus „Schnittkräfte“, die noch keiner Position zugeordnet ist,
-  // entsteht dafür automatisch eine Position (Titel = Name der Berechnung aus „Schnittkräfte“). Ausdrücklich entfernte Zuordnungen bleiben unberührt.
-  let neu=false;
-  items.filter(s=>s.kind==='s' && s.p.src?.key && !(s.id in P.asg) && !(('c:'+s.p.src.key) in P.asg)).forEach(s=>{
-    const c=items.find(x=>x.kind==='c' && x.key===s.p.src.key); if(!c || (c.id in P.asg)) return;
-    const id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); P.pos.push({ id, nr:nextNr(P), title:c.name }); P.asg[c.id]=id; neu=true; });
-  if(neu) save(P);
-  P.pos.forEach(q=>by[q.id]=[]);
-  items.forEach(it=>{ const id=posOf(P, it); if(id!=null && by[id]) by[id].push(it); else loose.push(it); });
-  return { P, by, loose, items }; }
-// veraltet: in der Position gibt es eine neuere Berechnung aus „Schnittkräfte“ als die, aus der der Nachweis stammt
-function staleOf(it, list){ if(it.kind!=='s' || !it.p.src?.key) return null;
-  const calcs=list.filter(x=>x.kind==='c'); const newest=calcs[0];
-  if(newest && newest.ts > (it.p.src.ts||'') && (newest.key!==it.p.src.key || newest.key.indexOf('statiq_sdf_pos_')===0)) return { why:'stale', key:newest.key };
-  if(!lsGet(it.p.src.key, null)) return { why:'gone' };
-  return null; }
-function etaTag(e, ok){ if(e==null || !isFinite(e)) return `<span class="tag ${ok?'s':'b'}">${t(ok?'allOk':'notOk')}</span>`;
-  return `<span class="tag ${ok?'s':'b'}">${t('util', nf(e*100,0))}</span>`; }
-function calcDesc(c){ const r=c.sdf.results||{}, ty=c.sdf.system?.type; const M=r.Mmax!=null ? `M<sub>max</sub> = ${nf(r.Mmax,1)} kNm` : '';
-  const Q=r.Qmax!=null ? ` · Q<sub>max</sub> = ${nf(r.Qmax,1)} kN` : ''; return `${esc(tTyp(ty))}<small>${M}${Q}</small>`; }
-function sizeDesc(s){ const p=s.p; return `${esc(p.label||p.typ||'')}${p.src?`<small>${t('fromCalc')}${p.src.name?': '+esc(p.src.name):''}</small>`:''}`; }
+  try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k || !k.startsWith('statiq_sdf_') || k.startsWith('statiq_sdf_pos_')) continue;
+    const o=lsGet(k, null); if(!o || !o.sdf || (o.sdf.module && o.sdf.module!=='calc')) continue; out.push({ kind:'c', id:'c:'+k, key:k, name:o.name||k, o, ts:o.sdf.timestamp||'' }); } }catch(e){}
+  return out; }
+function sizeItems(){ const A=oldAsg();
+  return (lsGet(POS_STORE, [])||[]).filter(p=>A['s:'+p.name]==null && !(p.src && String(p.src.key||'').startsWith('statiq_sdf_pos_')))
+    .map(p=>({ kind:'s', id:'s:'+p.name, name:p.name, p, ts:p.date||'' })); }
+function allItems(){ return [...calcItems(), ...sizeItems()].sort((a,b)=>a.ts<b.ts?1:a.ts>b.ts?-1:0); }
 
-// Nachweise, die die Schnittkräfte eines Systems sinnvoll übernehmen (wie früher das Menü in calc): je System [Ziel, Bauteil des Rahmens]
+// Nachweise, die die Schnittkräfte eines Systems sinnvoll übernehmen (aus „Projekte“ übernommen, projekt v0.1.24: Ziel über size.html#calc=…): je System [Ziel, Bauteil des Rahmens]
 const ZL = {
   de:{ 'beton.balken':'Stahlbeton · Balken', 'beton.unterzug':'Stahlbeton · Unterzug (Plattenbalken)', 'beton.platte':'Stahlbeton · Platte (je m Breite)', 'stahl.traeger':'Stahl · Träger', 'holz.bauteil':'Holz · Träger', 'beton.stuetze':'Stahlbeton · Stütze (Knicken)', 'stahl.stuetze':'Stahl · Stütze (Biegeknicken)', 'holz.stuetze':'Holz · Stütze (Knicken)', 'stahl.fuss':'Stahl · Stützenfuß', 'stahl.schweiss':'Stahl · Schweißnaht (Anschluss an Stirnplatte)' },
   en:{ 'beton.balken':'Reinforced concrete · Beam', 'beton.unterzug':'Reinforced concrete · Downstand beam (T-beam)', 'beton.platte':'Reinforced concrete · Slab (per m width)', 'stahl.traeger':'Steel · Beam', 'holz.bauteil':'Timber · Beam', 'beton.stuetze':'Reinforced concrete · Column (buckling)', 'stahl.stuetze':'Steel · Column (flexural buckling)', 'holz.stuetze':'Timber · Column (buckling)', 'stahl.fuss':'Steel · Column base', 'stahl.schweiss':'Steel · Weld (connection to end plate)' },
@@ -968,139 +882,115 @@ const ZB = [['beton.balken','beton.balken'],['beton.unterzug','beton.unterzug'],
 const ZIELE = { beam:[{items:ZB}], cont:[{items:ZB}], cantilever:[{items:[...ZB.filter(x=>x[0]!=='beton.unterzug'), ['stahl.schweiss','stahl.schweiss']]}],
   frame:[{head:'z_riegel', part:'riegel', items:[['beton.balken','beton.balken'],['beton.unterzug','beton.unterzug'],['stahl.traeger','stahl.traeger'],['holz.bauteil','holz.bauteil'],['stahl.schweiss','stahl.schweiss']]},
          {head:'z_stiel', part:'stiel', items:[['beton.stuetze','beton.stuetze'],['stahl.stuetze','stahl.traeger'],['holz.stuetze','holz.bauteil'],['stahl.fuss','stahl.fuss'],['stahl.schweiss','stahl.schweiss']]}] };
-const sysKey = id => 'statiq_sdf_pos_'+id;
-// ── Darstellung ──────────────────────────────────
-function render(){
-  const { P, by, loose, items } = grouped();
-  document.getElementById('pname').value = P.name;
-  let nBad=0, nStale=0;
-  // Einträge (v0.1.19): je Eintrag ein Hauptknopf, alles Weitere im ⋯-Menü (Verschieben, Neue Position, Lösen, Bericht)
-  const more = items => `<div class="more"><button type="button" class="btn more-b" aria-haspopup="menu" aria-expanded="false" aria-label="${t('more')}" title="${t('more')}" onclick="menuToggle(this)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="19" cy="12" r="1.9" fill="currentColor"/></svg></button><div class="morem" role="menu" hidden>${items}</div></div>`;
-  const mv = (it, cur) => { const o=P.pos.filter(q=>q.id!==cur);
-    return (o.length ? `<div class="morem-h">${t('moveH')}</div>`+o.map(q=>`<button type="button" role="menuitem" data-asg="${esc(it.id)}" data-to="${q.id}">${t('pos')} ${esc(q.nr)} — ${esc(q.title)}</button>`).join('') : '')
-      + `<button type="button" role="menuitem" data-asg="${esc(it.id)}" data-to="__new">${t('newFrom')}</button>`
-      + (cur!=null ? `<button type="button" role="menuitem" data-asg="${esc(it.id)}" data-to="__none">${t('remove')}</button>` : ''); };
-  const row = (it, list, posId) => {
-    if(it.kind==='c'){ const own = posId!=null && it.key===sysKey(posId), old = posId!=null && !own && list.filter(x=>x.kind==='c')[0]?.key!==it.key, rep=`calc.html#report=${encodeURIComponent(it.key)}`;
-      return `<div class="it${old?' old':''}"><span class="tag">${t('calcItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${calcDesc(it)}<small class="when">${dShort(it.ts)}${old?` · ${t('older')}`:''}</small></div><div class="r">`
-        + (own ? `<a class="btn sm" href="calc.html?pos=${encodeURIComponent(posId)}">${t('editSys')}</a>${more(`<a role="menuitem" href="${rep}">${t('rep1')}</a>`)}`
-               : `<a class="btn sm" href="${rep}">${t('rep1')}</a>${more(mv(it, posId))}`) + `</div></div>`; }
-    const st = staleOf(it, list);
-    const open = posId!=null ? `size.html?pos=${encodeURIComponent(posId)}&check=${encodeURIComponent(it.name)}` : `size.html#pos=${encodeURIComponent(it.name)}`;
-    const recalc = st?.why==='stale' ? (posId!=null ? open+'&neu=1' : `size.html#pos=${encodeURIComponent(it.name)}&calc=${encodeURIComponent(st.key)}${it.p.src?.part?'&part='+it.p.src.part:''}`) : null;
-    return `<div class="it"><span class="tag size">${t('sizeItem')}</span><div class="d"><b>${esc(it.name)}</b> · ${sizeDesc(it)}<small class="when">${dShort(it.ts)}</small>${st?`<span class="tag w">${t(st.why==='stale'?'staleWhy':'srcGone')}</span>`:''}</div><div class="r">${etaTag(it.p.eta, it.p.ok)}`
-      + (recalc ? `<a class="btn sm warn" href="${recalc}">${t('recalc')}</a>${more(`<a role="menuitem" href="${open}">${t('openAsIs')}</a>`+mv(it, posId))}` : `<a class="btn sm" href="${open}">${t('open')}</a>${more(mv(it, posId))}`)
-      + `</div></div>`; };
-  // Knoten (v0.1.18, First seit v0.1.21): je Ecke und First die Schweißnaht an beiden Stabenden, je gelenkigem Fußpunkt der Stützenfuß — mit den Stabendkräften aus calc
-  const knotGroups = (q, K) => { const u=(z,p,ik)=>`size.html?pos=${encodeURIComponent(q.id)}&ziel=${z}&part=${p}&ende=${ik}`, out=[];
-    const pof = mem => mem==='rafter' ? 'riegel' : 'stiel', nm = mem => t(mem==='rafter' ? 'kn_raf' : 'kn_col');
-    K.nodes.forEach(n=>{ const ends=[]; K.bars.forEach(b=>{ if(b.i===n.nr) ends.push([b.i,b.k,b.mem]); if(b.k===n.nr) ends.push([b.k,b.i,b.mem]); });
-      let items=[];
+// Menü „＋ Nachweis“ einer Berechnung: passende Nachweise mit Übergabe der Schnittkräfte, beim Rahmen zusätzlich je Knoten die Stabenden
+function chkMenu(it){ const S=it.o.sdf, sysT=S.system?.type, K=S.results?.knoten, base=`size.html#calc=${encodeURIComponent(it.key)}`;
+  const u=(z,p,ik)=>base+`&ziel=${z}`+(p?`&part=${p}`:'')+(ik?`&ende=${ik}`:'');
+  let kn=''; if(sysT==='frame' && K && K.nodes){ const pof=m=>m==='rafter'?'riegel':'stiel', nm=m=>t(m==='rafter'?'kn_raf':'kn_col');
+    K.nodes.forEach(n=>{ const ends=[]; K.bars.forEach(b=>{ if(b.i===n.nr) ends.push([b.i,b.k,b.mem]); if(b.k===n.nr) ends.push([b.k,b.i,b.mem]); }); let items=[];
       if((n.kind==='ecke' || n.kind==='first') && !n.gelenk) items=ends.map(([i,k,m])=>`<a role="menuitem" href="${u('stahl.schweiss',pof(m),i+'-'+k)}">${esc(t('kn_weld', i+'–'+k, nm(m)))}</a>`);
       else if(n.kind==='sup' && (n.sup==='pin' || n.sup==='roller') && ends.length===1){ const [i,k,m]=ends[0]; if(m!=='rafter') items=[`<a role="menuitem" href="${u('stahl.fuss','stiel',i+'-'+k)}">${esc(t('kn_fuss', i+'–'+k))}</a>`]; }
-      if(items.length) out.push(`<div class="addm-g">${t('kn_node')} ${n.nr} · ${esc(n.kind==='ecke' ? t(n.lab==='L'?'kn_eL':'kn_eR') : n.kind==='first' ? t('kn_first') : t('kn_sup')+' '+(n.lab||''))}</div>`+items.join('')); });
-    return out.join(''); };
-  const addMenu = (q, sysT, K) => { const kn = sysT==='frame' && K && K.nodes ? knotGroups(q, K) : '';
-    const g=(ZIELE[sysT]||[]).map(x=>kn ? {...x, items:x.items.filter(z=>z[1]!=='stahl.schweiss' && z[1]!=='stahl.fuss')} : x), u=z=>`size.html?pos=${encodeURIComponent(q.id)}&ziel=${z[1]}`;
-    return `<div class="addc"><button type="button" class="btn sm k" aria-haspopup="menu" aria-expanded="false" onclick="addToggle(this)">${t('addChk')}</button><div class="addm" role="menu" hidden>`
-      + (g.length ? `<div class="addm-h">${t('withForces')}</div>`+g.map(x=>(x.head?`<div class="addm-g">${t(x.head)}</div>`:'')+x.items.map(z=>`<a role="menuitem" href="${u(z)}${x.part?'&part='+x.part:''}">${esc(zl(z[0]))}</a>`).join('')).join('') : '')
-      + kn + `<a role="menuitem" class="addm-o" href="size.html?pos=${encodeURIComponent(q.id)}">${t('otherChk')}</a></div></div>`; };
-  const posHtml = [...P.pos].sort((a,b)=>String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true})).map(q=>{
-    const list = by[q.id]||[], calcs=list.filter(x=>x.kind==='c'), sizes=list.filter(x=>x.kind==='s'), own=calcs.find(c=>c.key===sysKey(q.id));
-    const bad = sizes.some(s=>!s.p.ok), stale = sizes.some(s=>staleOf(s, list)?.why==='stale');
-    if(bad) nBad++; if(stale) nStale++;
-    const status = !list.length ? `<span class="tag n">${t('empty')}</span>` : stale ? `<span class="tag w">${t('staleWhy')}</span>` : bad ? `<span class="tag b">${t('notOk')}</span>` : sizes.length ? `<span class="tag s">${t('allOk')}</span>` : '';
-    const sysT = (own||calcs[0])?.sdf?.system?.type;
-    const thumb = (own||calcs[0])?.sdf?.system?.svgSnapshot || `<div class="none">${t('noSys')}</div>`;
-    const sysPart = calcs.length ? calcs.map(it=>row(it, list, q.id)).join('') + (own ? '' : `<div class="it"><a class="btn sm" href="calc.html?pos=${encodeURIComponent(q.id)}">${t('newSys')}</a></div>`)
-      : `<div class="it"><span class="empty">${t('noSysYet')}</span><a class="btn sm p" href="calc.html?pos=${encodeURIComponent(q.id)}">${t('newSys')}</a></div>`;
-    return `<div class="pos" data-id="${q.id}" id="pos-${q.id}"><div class="pos-h"><span class="pos-nr">${t('pos')} <input class="pos-t" style="width:3.2em;flex:none;min-width:0" value="${esc(q.nr)}" onchange="setPos('${q.id}','nr',this.value)" aria-label="Nr."></span>
-        <span class="k-name k-name-s"><input class="pos-t" id="pt-${q.id}" value="${esc(q.title)}" onchange="setPos('${q.id}','title',this.value)" onkeydown="if(event.key==='Enter') this.blur()" aria-label="${t('posTitle')}"><button type="button" class="k-pen" aria-label="${t('rename')}" title="${t('rename')}" onclick="kRename('pt-${q.id}')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></button></span>${status}
-        ${more(`<button type="button" role="menuitem" onclick="kRename('pt-${q.id}')">${t('rename')}</button><button type="button" role="menuitem" class="danger" data-del="${q.id}">${t('delPos')}</button>`)}</div>
-      <div class="pos-body"><div class="items"><div class="sec-h">${t('sysH')}</div>${sysPart}
-        <div class="sec-h">${t('chkH')}</div>${sizes.length ? sizes.map(it=>row(it, list, q.id)).join('') : `<div class="empty">${t('noChk')}</div>`}${addMenu(q, own?sysT:(calcs[0]?sysT:null), (own||calcs[0])?.sdf?.results?.knoten)}</div><div class="thumb">${thumb}</div></div></div>`; }).join('');
-  document.getElementById('list').innerHTML = posHtml || (items.length ? '' : `<div class="empty" style="padding:10px 0 4px">${t('none')}</div>`);
-  document.getElementById('loose').innerHTML = loose.length ? loose.map(it=>row(it, [it], null)).join('') : `<div class="empty">${t('noneLoose')}</div>`;
-  document.getElementById('sum').textContent = t(P.pos.length===1?'sum1':'sum', P.pos.length, nBad, nStale);
+      if(items.length) kn+=`<div class="morem-g">${t('kn_node')} ${n.nr} · ${esc(n.kind==='ecke' ? t(n.lab==='L'?'kn_eL':'kn_eR') : n.kind==='first' ? t('kn_first') : t('kn_sup')+' '+(n.lab||''))}</div>`+items.join(''); }); }
+  const g=(ZIELE[sysT]||[]).map(x=>kn ? {...x, items:x.items.filter(z=>z[1]!=='stahl.schweiss' && z[1]!=='stahl.fuss')} : x);
+  if(!g.length && !kn) return '';
+  return `<div class="more chk"><button type="button" class="btn" aria-haspopup="menu" aria-expanded="false" onclick="menu(this)">${t('addChk')}</button><div class="morem" role="menu" hidden><div class="morem-h">${t('withForces')}</div>`
+    + g.map(x=>(x.head?`<div class="morem-g">${t(x.head)}</div>`:'')+x.items.map(z=>`<a role="menuitem" href="${u(z[1], x.part)}">${esc(zl(z[0]))}</a>`).join('')).join('') + kn + `</div></div>`; }
+// ── Liste ────────────────────────────────────────
+let FIL=(()=>{ try{ return localStorage.getItem(FILT)||'all'; }catch(e){ return 'all'; } })(), armed=null;
+const ICON_SIZE='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="4" x2="18" y2="4" stroke-width="2.4"/><line x1="6" y1="20" x2="18" y2="20" stroke-width="2.4"/><line x1="12" y1="4" x2="12" y2="20" stroke-width="2"/></svg>';
+let _uid=0; function uniq(svg){ const p='b'+(++_uid)+'_'; return String(svg||'').replace(/id="([^"]+)"/g,(m,a)=>'id="'+p+a+'"').replace(/url\(#([^)]+)\)/g,(m,a)=>'url(#'+p+a+')').replace(/href="#([^"]+)"/g,(m,a)=>'href="#'+p+a+'"'); }
+function card(it){
+  const id=esc(it.id), A=`<button class="btn p" onclick="report('${id}')">${t('report')}</button>`;
+  let fig, meta, res, open='', extra='';
+  if(it.kind==='c'){ const s=it.o.sdf, r=s.results||{};
+    fig = s.system?.svgSnapshot ? uniq(s.system.svgSnapshot) : '';
+    meta = `<span class="tag">${esc(M('calc'))}</span><span>${esc(tTyp(s.system?.type))}</span><span>${dShort(it.ts)}</span>`;
+    res = [r.Mmax!=null?`M<sub>max</sub> = ${nf(r.Mmax,2)} kNm`:'', r.Qmax!=null?`Q<sub>max</sub> = ${nf(r.Qmax,2)} kN`:''].filter(Boolean).join(' · ');
+    open = it.o.draft ? `<a class="btn" href="calc.html#blatt=${encodeURIComponent(it.key)}">${t('open')}</a>` : `<span class="bl-meta">${t('noDraft')}</span>`;
+    extra = chkMenu(it);
+  } else { const p=it.p, eta=isFinite(p.eta) && p.eta!=null ? ` · η = ${Math.round(p.eta*100)} %` : '';
+    fig = ICON_SIZE;
+    meta = `<span class="tag size">${esc(M('size'))}</span><span>${esc(p.label||'')}</span><span>${dShort(it.ts)}</span>`;
+    res = `<span class="tag ${p.ok?'s':'b'}">${t(p.ok?'ok':'notOk')}${eta}</span>`;
+    open = `<a class="btn" href="size.html#blatt=${encodeURIComponent(p.name)}">${t('open')}</a>`; }
+  return `<article class="bl" data-id="${id}"><div class="bl-fig">${fig}</div><div class="bl-main"><div class="bl-name">${esc(it.name)}</div><div class="bl-meta">${meta}</div><div class="bl-res">${res}</div>
+    <div class="bl-acts">${A}${open}${it.kind==='c'?extra:''}<div class="more"><button class="btn more-b" aria-haspopup="true" aria-expanded="false" title="${esc(t('more'))}" aria-label="${esc(t('more'))}" onclick="menu(this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+    <div class="morem" hidden role="menu"><button onclick="renameStart('${id}')">${t('rename')}</button><button class="danger${armed===it.id?' armed':''}" onclick="del('${id}', this)">${t(armed===it.id?'delAsk':'del')}</button></div></div></div></div></article>`; }
+function render(){
+  const all=allItems(), nC=all.filter(x=>x.kind==='c').length, nS=all.length-nC;
+  if(!['all','c','s'].includes(FIL)) FIL='all';
+  document.getElementById('sum').textContent = all.length===1 ? t('n1') : t('n', all.length);
+  const f=document.getElementById('filt');
+  f.hidden = !all.length;
+  f.innerHTML=[['all',t('all'),all.length],['c',M('calc'),nC],['s',M('size'),nS]].map(([k,l,n])=>`<button type="button" data-f="${k}" aria-pressed="${FIL===k}" onclick="setFil('${k}')">${esc(l)}<span class="n">${n}</span></button>`).join('');
+  const L=all.filter(x=>FIL==='all' || x.kind===FIL);
+  document.getElementById('list').innerHTML = !all.length
+    ? `<div class="empty">${t('none', esc(M('calc')), esc(M('size')))}<div class="acts"><a class="btn p" href="calc.html">${esc(M('calc'))}</a><a class="btn" href="size.html">${esc(M('size'))}</a></div></div>`
+    : L.length ? L.map(card).join('') : `<div class="empty">${t('noneF')}</div>`;
 }
+function setFil(k){ FIL=k; try{ localStorage.setItem(FILT, k); }catch(e){} render(); }
+function byId(id){ return allItems().find(x=>x.id===id); }
+function menu(b, open){ const m=b.nextElementSibling, o=open ?? (b.getAttribute('aria-expanded')!=='true');
+  document.querySelectorAll('.more > button[aria-expanded="true"]').forEach(x=>{ if(x!==b){ x.setAttribute('aria-expanded','false'); x.nextElementSibling.hidden=true; } });
+  b.setAttribute('aria-expanded', String(o)); m.hidden=!o; }
+document.addEventListener('click', e=>{ if(!e.target.closest('.more')) document.querySelectorAll('.more > button[aria-expanded="true"]').forEach(b=>menu(b,false)); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ document.querySelectorAll('.more-b[aria-expanded="true"]').forEach(b=>{ menu(b,false); b.focus(); }); if(document.body.classList.contains('show-report')) hideReport(); } });
+
 // ── Aktionen ─────────────────────────────────────
-function nextNr(P){ const n=P.pos.map(q=>parseInt(q.nr,10)).filter(isFinite); return String(n.length ? Math.max(...n)+1 : 1); }
-function addPos(title){ const P=proj(), id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); P.pos.push({ id, nr:nextNr(P), title: title || t('newPos'), auto: !title }); save(P); render(); return id; }
-function setPos(id, f, v){ const P=proj(), q=P.pos.find(x=>x.id===id); if(!q) return; q[f]=String(v).trim() || q[f]; if(f==='title') q.auto=false; save(P); render(); }   // eigener Titel: folgt nicht mehr dem System
-// „＋ Nachweis“: kleines Menü mit den passenden Nachweisen (v0.1.17)
-function addToggle(b, open){ menuToggle(b, open); }
-// Menüs „＋ Nachweis“ und ⋯ (v0.1.19): immer nur eines offen, Klick daneben oder Escape schließt
-function menuToggle(b, open){ const m=b.nextElementSibling, o=open??(b.getAttribute('aria-expanded')!=='true');
-  document.querySelectorAll('.addc > button[aria-expanded="true"], .more > button[aria-expanded="true"]').forEach(x=>{ if(x!==b){ x.setAttribute('aria-expanded','false'); x.nextElementSibling.hidden=true; } });
-  b.setAttribute('aria-expanded', o?'true':'false'); m.hidden=!o; }
-document.addEventListener('click', e=>{
-  const a=e.target.closest('[data-asg]'); if(a){ assign(a.dataset.asg, a.dataset.to); return; }
-  const d=e.target.closest('[data-del]'); if(d){ delPos(d.dataset.del, d); return; }
-  if(e.target.closest('.addc') || e.target.closest('.more')) return;
-  document.querySelectorAll('.addc > button[aria-expanded="true"], .more > button[aria-expanded="true"]').forEach(b=>menuToggle(b,false)); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.addc > button[aria-expanded="true"], .more > button[aria-expanded="true"]').forEach(b=>menuToggle(b,false)); });
-// Umbenennen (v0.1.15): Stift neben Projekt- und Positionsnamen setzt den Cursor ins Feld und markiert den Text
-function kRename(id){ const e=document.getElementById(id); if(!e) return; e.focus(); e.select(); }
-function setName(v){ const P=proj(); P.name=String(v).trim() || P.name; save(P); render(); }
-let armed=null;
-function delPos(id, btn){ if(armed!==id){ armed=id; btn.textContent=t('delAsk'); setTimeout(()=>{ if(armed===id){ armed=null; render(); } }, 3000); return; }
-  const P=proj(); P.pos=P.pos.filter(q=>q.id!==id); Object.keys(P.asg).forEach(k=>{ if(P.asg[k]===id) P.asg[k]=null; }); armed=null; save(P); render(); }   // null = bewusst ohne Position (wird nicht automatisch neu gebündelt)
-function assign(itemId, v){ const P=proj();
-  if(v==='__new'){ const it=allItems().find(x=>x.id===itemId); const id=addPos(it ? it.name : ''); const P2=proj(); P2.asg[itemId]=id; save(P2); render(); toast(t('moved')); return; }
-  if(v==='__none'){ P.asg[itemId]=null; } else if(v) P.asg[itemId]=v;
-  // calc-Quelle mitnehmen: size-Einträge folgen ihrer Berechnung aus „Schnittkräfte“, solange sie nicht eigens zugeordnet sind
-  save(P); render(); if(v) toast(t('moved')); }
-function toast(m){ document.querySelectorAll('.toast').forEach(x=>x.remove()); const d=document.createElement('div'); d.className='toast'; d.textContent=m; document.body.appendChild(d); setTimeout(()=>d.remove(), 2600); }
-// ── Datei sichern / laden ────────────────────────
+function del(id, btn){
+  if(armed!==id){ armed=id; btn.textContent=t('delAsk'); btn.classList.add('armed'); setTimeout(()=>{ if(armed===id){ armed=null; render(); } }, 3000); return; }
+  const it=byId(id); armed=null; if(!it) return;
+  try{ if(it.kind==='c') localStorage.removeItem(it.key);
+    else { lsSet(POS_STORE, (lsGet(POS_STORE, [])||[]).filter(p=>p.name!==it.name)); localStorage.removeItem(REP+it.name); } }catch(e){}
+  render(); toast(t('deleted', it.name)); }
+function renameStart(id){
+  const el=document.querySelector(`.bl[data-id="${CSS.escape(id)}"] .bl-name`), it=byId(id); if(!el || !it) return;
+  document.querySelectorAll('.more-b[aria-expanded="true"]').forEach(b=>menu(b,false));
+  el.innerHTML=`<input value="${esc(it.name)}" aria-label="${esc(t('rename'))}" maxlength="80">`; const inp=el.firstChild; inp.focus(); inp.select();
+  let done=false; const fin=ok=>{ if(done) return; done=true; const n=inp.value.trim(); if(ok && n && n!==it.name) rename(it, n); render(); };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); fin(true); } else if(e.key==='Escape'){ e.preventDefault(); e.stopPropagation(); fin(false); } });
+  inp.addEventListener('blur', ()=>fin(true)); }
+function rename(it, n){
+  if(it.kind==='c'){ const o=lsGet(it.key, null); if(o){ o.name=n; lsSet(it.key, o); } return; }
+  const L=lsGet(POS_STORE, [])||[]; let base=n, k=2; while(L.some(p=>p.name===n && p.name!==it.name)) n=base+' ('+(k++)+')';
+  const p=L.find(x=>x.name===it.name); if(!p) return; const old=p.name; p.name=n;
+  // Bezeichnung in den gespeicherten Eingaben mitziehen, damit „Öffnen“ und erneutes Speichern denselben Namen tragen
+  if(p.data && typeof p.data==='object') (function walk(o){ Object.keys(o).forEach(k=>{ if(o[k]===old) o[k]=n; else if(o[k] && typeof o[k]==='object') walk(o[k]); }); })(p.data);
+  lsSet(POS_STORE, L); try{ const r=localStorage.getItem(REP+old); if(r!=null){ localStorage.setItem(REP+n, r); localStorage.removeItem(REP+old); } }catch(e){} }
+function report(id){ const it=byId(id); if(!it) return;
+  if(it.kind==='c'){ location.href='calc.html#report='+encodeURIComponent(it.key); return; }
+  let r=null; try{ r=localStorage.getItem(REP+it.name); }catch(e){}
+  document.getElementById('rep-title').textContent=it.name;
+  document.getElementById('report').innerHTML = (r || `<h3>${esc(it.name)}</h3><p class="meta">${t('noRep', esc(M('size')))}</p>`)
+    + (typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : '');
+  document.body.classList.add('show-report'); window.scrollTo(0,0); }
+function hideReport(){ document.body.classList.remove('show-report'); }
+function toast(m){ document.querySelectorAll('.toast').forEach(x=>x.remove()); const d=document.createElement('div'); d.className='toast'; d.setAttribute('role','status'); d.textContent=m; document.body.appendChild(d); setTimeout(()=>d.remove(), 2600); }
+
+// ── Datei ────────────────────────────────────────
 function exportFile(){
-  const P=proj(), calc={}, reps={};
-  calcItems().forEach(c=>calc[c.key]={ name:c.name, sdf:c.sdf });
-  sizeItems().forEach(s=>{ try{ const r=localStorage.getItem(REP+s.name); if(r) reps[s.name]=r; }catch(e){} });
-  const data={ statiq:'projekt', version:PROJ_VERSION, saved:new Date().toISOString(), project:P, calc, size:lsGet(POS_STORE, []), reports:reps };
+  const calc={}, reps={}, size=sizeItems().map(s=>s.p);
+  calcItems().forEach(c=>calc[c.key]=c.o);
+  size.forEach(p=>{ try{ const r=localStorage.getItem(REP+p.name); if(r) reps[p.name]=r; }catch(e){} });
+  const data={ kragr:'rechenblaetter', version:PROJ_VERSION, saved:new Date().toISOString(), calc, size, reports:reps };
   const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data)], {type:'application/json'}));
-  a.download=(P.name||'projekt').replace(/[^\wäöüÄÖÜß\- ]+/g,'').trim().replace(/\s+/g,'_')+'.kragr.json'; document.body.appendChild(a); a.click(); a.remove(); toast(t('exported'));
+  a.download='kragr-rechenblaetter-'+new Date().toISOString().slice(0,10)+'.json'; document.body.appendChild(a); a.click(); a.remove(); toast(t('exported'));
 }
 function importData(d){
-  if(!d || d.statiq!=='projekt') { toast(t('badFile')); return 0; }
-  let n=0; Object.entries(d.calc||{}).forEach(([k,v])=>{ if(lsSet(k, v)) n++; });
-  const cur=lsGet(POS_STORE, []); (d.size||[]).forEach(s=>{ const i=cur.findIndex(x=>x.name===s.name); if(i>=0) cur[i]=s; else cur.push(s); n++; }); lsSet(POS_STORE, cur);
+  // auch ältere Projektdateien (statiq:'projekt'): nur Berechnungen und Nachweise, keine Positionen
+  if(!d || (d.kragr!=='rechenblaetter' && d.statiq!=='projekt')) { toast(t('badFile')); return 0; }
+  let n=0; Object.entries(d.calc||{}).forEach(([k,v])=>{ if(String(k).startsWith('statiq_sdf_pos_')) return; if(v && v.sdf && lsSet(k, v)) n++; });
+  const cur=lsGet(POS_STORE, [])||[]; (d.size||[]).forEach(s=>{ if(!s || !s.name) return; const i=cur.findIndex(x=>x.name===s.name); if(i>=0) cur[i]=s; else cur.push(s); n++; }); lsSet(POS_STORE, cur);
   Object.entries(d.reports||{}).forEach(([k,v])=>{ try{ localStorage.setItem(REP+k, v); }catch(e){} });
-  if(d.project) lsSet(PSTORE, d.project);
   render(); toast(t('imported', n)); return n;
 }
 function importFile(inp){ const f=inp.files && inp.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ importData(JSON.parse(r.result)); }catch(e){ toast(t('badFile')); } inp.value=''; }; r.readAsText(f); }
-// ── Gesamtbericht ────────────────────────────────
-function buildReport(){
-  const { P, by } = grouped(), date=new Date().toLocaleDateString(LOC);
-  const pos=[...P.pos].sort((a,b)=>String(a.nr).localeCompare(String(b.nr), undefined, {numeric:true}));
-  const stTxt = list => { const s=list.filter(x=>x.kind==='s'); if(!s.length) return '—'; const bad=s.some(x=>!x.p.ok), st=s.some(x=>staleOf(x,list)?.why==='stale');
-    return st ? t('stale') : bad ? `<span class="bad">${t('notOk')}</span>` : `<span class="ok">${t('allOk')}</span>`; };
-  let h=`<div class="cover"><div class="meta">kragr · ${t('navProj')}</div><h1>${esc(P.name)}</h1><div class="meta">${t('repDate', date)}</div></div>`;
-  h+=`<section><h2>${t('repOverview')}</h2><table><tr><th>${t('pos')}</th><th>${t('posTitle')}</th><th>${t('repParts')}</th><th>${t('repStatus')}</th></tr>`
-    + pos.map(q=>{ const l=by[q.id]||[]; return `<tr><td>${esc(q.nr)}</td><td>${esc(q.title)}</td><td>${l.map(x=>esc(x.name)).join('<br>')||'—'}</td><td>${stTxt(l)}</td></tr>`; }).join('') + `</table></section>`;
-  pos.forEach(q=>{ const l=by[q.id]||[]; if(!l.length) return;
-    h+=`<div class="posblock"><h1>${t('pos')} ${esc(q.nr)} — ${esc(q.title)}</h1>`;
-    l.filter(x=>x.kind==='c').slice(0,1).forEach(c=>{ const r=c.sdf.results||{};
-      h+=`<div class="sub"><h3>${t('repSystem')}: ${esc(c.name)}</h3><div class="meta">${esc(tTyp(c.sdf.system?.type))} · ${dShort(c.ts)}</div><div class="sysfig">${c.sdf.system?.svgSnapshot||''}</div>
-        <table><tr><th>${t('repResults')}</th><td>M<sub>max</sub> = ${nf(r.Mmax??0,2)} kNm · Q<sub>max</sub> = ${nf(r.Qmax??0,2)} kN · N<sub>max</sub> = ${nf(r.Nmax??0,2)} kN</td></tr>
-        ${(r.reactions||[]).length?`<tr><th>${t('reac')}</th><td>${r.reactions.map(reacTxt).join('<br>')}</td></tr>`:''}</table></div>`; });
-    l.filter(x=>x.kind==='s').forEach(s=>{ let r=null; try{ r=localStorage.getItem(REP+s.name); }catch(e){}
-      h+=`<div class="sub">${r || `<h3>${esc(s.name)}</h3><p class="meta">${t('repNoRep')}</p>`}</div>`; });
-    h+=`</div>`; });
-  h+=`<p class="meta" style="margin-top:20px">${t('repNote')}</p>`;
-  return h; }
-function reacTxt(x){ const v=(k,u)=>{ const n=parseFloat(x[k]); return isFinite(n) && Math.abs(n)>1e-9 ? `${k}<sub>${esc(x.support||'')}</sub> = ${nf(n,2)} ${u}` : ''; };
-  return [v('V','kN'), v('H','kN'), v('M','kNm')].filter(Boolean).join(' · ') || `${esc(x.support||'')}: —`; }
-function showReport(){ document.getElementById('report').innerHTML = buildReport() + (typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : ''); document.body.classList.add('show-report'); window.scrollTo(0,0); }
-function hideReport(){ document.body.classList.remove('show-report'); }
 // ── Sprache ──────────────────────────────────────
 function setLang(l){ try{ localStorage.setItem('statiq-lang', l); }catch(e){} location.reload(); }
-function applyLang(){ try{ kmodApply(); }catch(e){} document.querySelectorAll('[data-tt]').forEach(e=>{ e.title=t(e.dataset.tt); e.setAttribute('aria-label', t(e.dataset.tt)); }); document.documentElement.lang=LANG; document.querySelectorAll('[data-t]').forEach(e=>{ e.innerHTML=t(e.dataset.t); }); const s=document.getElementById('lang-sel'); if(s) s.value=LANG; document.title=`kragr — ${t('navProj')}`; }
+function applyLang(){ try{ kmodApply(); }catch(e){} document.documentElement.lang=LANG; document.querySelectorAll('[data-t]').forEach(e=>{ e.textContent=t(e.dataset.t); });
+  const s=document.getElementById('lang-sel'); if(s) s.value=LANG; document.title=M('proj')+' — kragr'; }
 document.getElementById('ver').textContent='v'+PROJ_VERSION;
 applyLang(); render();
-// Rückkehr aus calc/size (#pos-<id>): Position zeigen und kurz hervorheben
-(()=>{ const m=location.hash.match(/^#pos-(.+)$/); if(!m) return; const e=document.getElementById('pos-'+decodeURIComponent(m[1])); if(!e) return; e.scrollIntoView({block:'center'}); e.classList.add('flash'); setTimeout(()=>e.classList.remove('flash'), 1600); history.replaceState(null,'',location.pathname); })();
-window.addEventListener('storage', render); window.addEventListener('focus', render);
+window.addEventListener('storage', render); window.addEventListener('focus', ()=>{ if(!document.querySelector('.bl-name input')) render(); });
 </script>
 <script>
 // Fußleiste mit Haftungshinweis und Link zu Impressum/Datenschutz (Sprache folgt <html lang>)

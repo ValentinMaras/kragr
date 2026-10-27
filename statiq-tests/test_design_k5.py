@@ -45,7 +45,7 @@ async def main():
               cur:(document.querySelector('#k5-menu .k5-mod[aria-current=page]')||{}).dataset?.mod||null, ueb:!!document.getElementById('k5-ueb'),
               theme:!!document.querySelector('#k5-theme'), lang:!!document.querySelector('#k5-lang'), exp:document.getElementById('k5-burger').getAttribute('aria-expanded'),
               foc:document.activeElement && document.activeElement.closest('#k5-menu')!==null, lock:document.body.classList.contains('k5-lock')})""")
-            check(f'{f}: Menü mit calc, size, ref, Meine Projekte; aktuelle Seite markiert', r['mods']==['calc>calc.html','size>size.html','ref>ref.html','projekt>projekt.html'] and r['cur']==cur, r)
+            check(f'{f}: Menü mit calc, size, ref, Rechenblätter; aktuelle Seite markiert', r['mods']==['calc>calc.html','size>size.html','ref>ref.html','projekt>projekt.html'] and r['cur']==cur, r)
             check(f'{f}: Menü offen (aria-expanded, Fokus im Menü, Seite gesperrt), Erscheinungsbild und Sprache', r['exp']=='true' and r['foc'] and r['lock'] and r['theme'] and r['lang'], r)
             check(f'{f}: Übungsmodus nur in calc und size', r['ueb']==(f in ('calc','size')), r['ueb'])
             await pg.keyboard.press('Escape'); await pg.wait_for_timeout(100)
@@ -108,16 +108,11 @@ async def main():
         check('size: Zustand nach Neuladen gemerkt', [x[0] for x in await pg.evaluate(S) if x[1]]==['in-beton'])
         r=await pg.evaluate("[document.getElementById('scope-card').classList.contains('k5-closed'), document.querySelectorAll('#details > .card.dfold .k5-tri').length>0]")
         check('size: „Umfang und Grundlagen“ zugeklappt, Rechenschritte mit gleichem Pfeil', r==[True,True], r)
-        # projekt: Positionen als Akkordeon
-        await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.removeItem('kragr-k5-acc')"); await pg.reload(); await pg.wait_for_timeout(300)
-        await pg.evaluate("addPos(); addPos(); addPos();"); await pg.wait_for_timeout(200)
-        P="""()=>[...document.querySelectorAll('#list > .pos')].map(c=>[!c.classList.contains('k5-closed'), (c.querySelector('.k5-hsum')||{}).textContent])"""
-        r=await pg.evaluate(P)
-        check('projekt: erste Position offen, andere zu mit Kurzfassung', [x[0] for x in r]==[True,False,False] and r[1][1]=='kein System · 0 Nachweise', r)
-        await pg.click('#list > .pos:nth-child(3) .k5-hsum'); await pg.wait_for_timeout(150)
-        check('projekt: Position 3 öffnen schließt Position 1', [x[0] for x in await pg.evaluate(P)]==[False,False,True])
-        await pg.click('#list > .pos:nth-child(3) .pos-t[id^="pt-"]'); await pg.wait_for_timeout(100)
-        check('projekt: Tipp ins Titelfeld klappt nicht zu', [x[0] for x in await pg.evaluate(P)]==[False,False,True])
+        # projekt = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, Karten im k5-Stil
+        await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.setItem('statiq-size-positionen', JSON.stringify([{name:'A', typ:'balken', ok:true, date:'2026-10-27T10:00:00Z', data:{}},{name:'B', typ:'balken', ok:false, date:'2026-10-27T11:00:00Z', data:{}}]))"); await pg.reload(); await pg.wait_for_timeout(300)
+        r=await pg.evaluate("[document.querySelectorAll('.bl').length, document.querySelectorAll('.k5-acc').length, getComputedStyle(document.querySelector('.bl')).borderTopLeftRadius]")
+        check('Rechenblätter: Karten ohne Akkordeon, Rundung wie k5 (20 px)', r==[2,0,'20px'], r)
+        await pg.evaluate("localStorage.removeItem('statiq-size-positionen')")
         # ref: Seitenkopf als Karte
         await pg.goto(B+'ref.html#/stahlbeton/baustoffe/kriechen'); await pg.wait_for_timeout(500)
         r=await pg.evaluate("(()=>{const h=document.querySelector('#main .page-head'); const cs=getComputedStyle(h); return [cs.backgroundColor, cs.borderRadius, cs.flexDirection, h.querySelector('.page-sub').getBoundingClientRect().top < h.querySelector('.page-title').getBoundingClientRect().top]})()")

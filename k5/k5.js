@@ -9,13 +9,13 @@
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -135,7 +135,8 @@
   var MODS=[['calc','calc.html',SVG_I('<line x1="2.5" y1="6" x2="21.5" y2="6" stroke-width="2.4"/><path d="M4 6.8 l-2.3 3.6 h4.6z M20 6.8 l-2.3 3.6 h4.6z" stroke-width="1.4"/><path d="M4 6 Q12 25 20 6" stroke-width="1.6" stroke-dasharray="0"/>')],
             ['size','size.html',SVG_I('<line x1="6" y1="4" x2="18" y2="4" stroke-width="2.4"/><line x1="6" y1="20" x2="18" y2="20" stroke-width="2.4"/><line x1="12" y1="4" x2="12" y2="20" stroke-width="2"/>')],
             ['ref','ref.html',SVG_I('<path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z" stroke-width="1.8"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z" stroke-width="1.8"/>')]];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  // Rechenblätter (calc v0.11.11, statt „Projekte“): Blatt mit Eselsohr und Zeilen
+  var ICON_PROJ=SVG_I('<path d="M6 3h8l4 4v14H6z" stroke-width="1.8"/><path d="M14 3v4h4" stroke-width="1.8"/><path d="M9 12h6M9 15.5h6M9 19h3" stroke-width="1.8"/>');
   var burger, menu, scrim, lastFocus;
   function buildHeader(){
     var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
@@ -175,7 +176,6 @@
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
   }
   function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
   function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;

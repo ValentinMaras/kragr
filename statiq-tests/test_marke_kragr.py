@@ -18,7 +18,7 @@ for p in PAGES:
     check(f'{p}: Startbildschirm-Name kragr', '<meta name="apple-mobile-web-app-title" content="kragr" />' in src[p])
 check('calc Bericht: Marke kragr im Schriftfeld und in der Fußzeile', "const REP_BRAND = 'kragr';" in src['calc.html'] and '${REP_BRAND} · ${kmod(\'calc\')} · ' in src['calc.html'])
 check('size Bericht: Kopf „kragr · Bemessung“', 'kragr · ${kmod(\'size\')} v${SIZE_VERSION}' in src['size.html'])
-check('projekt: Export als .kragr.json, alte .muly- und .statiq-Dateien weiter ladbar', "'.kragr.json'" in src['projekt.html'] and '.statiq,.muly,.kragr' in src['projekt.html'] and "d.statiq!=='projekt'" in src['projekt.html'])
+check('Rechenblätter: Export als kragr-rechenblaetter-….json, alte .muly- und .statiq-Dateien weiter ladbar', "'kragr-rechenblaetter-'" in src['projekt.html'] and '.statiq,.muly,.kragr' in src['projekt.html'] and "d.statiq!=='projekt'" in src['projekt.html'])
 check('Spracheinstellung bleibt unter dem alten Schlüssel (keine Daten verloren)', all("'statiq-lang'" in src[p] for p in ['index.html','projekt.html']))
 
 try:

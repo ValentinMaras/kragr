@@ -493,22 +493,7 @@ window.kragrK5Page = function(K){
       var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
   }
 
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
+  // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
   apply(); deco();
@@ -527,13 +512,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -653,7 +638,8 @@ window.kragrK5Page = function(K){
   var MODS=[['calc','calc.html',SVG_I('<line x1="2.5" y1="6" x2="21.5" y2="6" stroke-width="2.4"/><path d="M4 6.8 l-2.3 3.6 h4.6z M20 6.8 l-2.3 3.6 h4.6z" stroke-width="1.4"/><path d="M4 6 Q12 25 20 6" stroke-width="1.6" stroke-dasharray="0"/>')],
             ['size','size.html',SVG_I('<line x1="6" y1="4" x2="18" y2="4" stroke-width="2.4"/><line x1="6" y1="20" x2="18" y2="20" stroke-width="2.4"/><line x1="12" y1="4" x2="12" y2="20" stroke-width="2"/>')],
             ['ref','ref.html',SVG_I('<path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z" stroke-width="1.8"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z" stroke-width="1.8"/>')]];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  // Rechenblätter (calc v0.11.11, statt „Projekte“): Blatt mit Eselsohr und Zeilen
+  var ICON_PROJ=SVG_I('<path d="M6 3h8l4 4v14H6z" stroke-width="1.8"/><path d="M14 3v4h4" stroke-width="1.8"/><path d="M9 12h6M9 15.5h6M9 19h3" stroke-width="1.8"/>');
   var burger, menu, scrim, lastFocus;
   function buildHeader(){
     var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
@@ -693,7 +679,6 @@ window.kragrK5Page = function(K){
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
   }
   function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
   function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
@@ -863,8 +848,8 @@ window.kragrK5Page = function(K){
       <div class="card-id" id="saved-from">items from “Internal forces” &amp; “Design”</div>
       <div class="card-badge" id="saved-count"></div>
     </div>
-    <div class="card-title" id="saved-title">Projects</div>
-    <div class="card-desc" id="saved-desc">Combine internal forces and design: one system per item, its checks use its internal forces — saved, with a full report.</div>
+    <div class="card-title" id="saved-title">Calculation sheets</div>
+    <div class="card-desc" id="saved-desc">Your saved calculations from both modules: view as a report, print as a PDF or open again.</div>
     <div class="card-arrow">→</div>
   </a>
 
@@ -878,7 +863,7 @@ window.kragrK5Page = function(K){
 
 <footer class="footer">
   <div class="footer-logo">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · Schnittkräfte v0.11.10 · Bemessung v0.7.8 · Wissen v0.3.46 · Projekte v0.1.23</span></div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · Schnittkräfte v0.11.11 · Bemessung v0.7.9 · Wissen v0.3.47 · Rechenblätter v0.1.24</span></div>
   <div class="footer-note" id="footer-check">Every calculation path is tested against independent recalculations — currently more than 1,500 automated checks.</div>
   <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>
@@ -904,8 +889,8 @@ const translations = {
     install_x: "Hide", install_t: "kragr as an app", install_s: "Install on your home screen — works offline too.", install_ios: "On iPhone/iPad: tap the Share icon, then “Add to Home Screen”.", install_b: "Install",
     footer: 'Valentin Maras', legal: 'Legal notice · Privacy', note: 'Learning tool for students — does not replace a checked structural calculation.',
     saved_from: 'Internal forces + Design',
-    saved_desc: 'Combine internal forces and design: one system per item, its checks use its internal forces — saved, with a full report.',
-    saved: 'Projects', saved_n: '{n} entries', saved_p: '{p} items · {n} entries', saved_p1: '1 item · {n} entries',
+    saved_desc: 'Your saved calculations from both modules: view as a report, print as a PDF or open again.',
+    saved: 'Calculation sheets', saved_n: '{n} sheets', saved_n1: '1 sheet',
     size_tags: ["Concrete EC2", "Steel EC3", "Connections", "Timber EC5", "Masonry EC6", "Geotechnics EC7", "Hydraulics", "Building physics", "Buckling", "Torsion", "Report"],
     ref_tags: ["Structural Analysis", "Loads EC0/EC1", "Concrete EC2", "Steel Sections", "Timber EC5", "Masonry EC6", "Geotechnics", "Hydraulics", "Building physics", "Maths", "Search"],
     tags: ['Simply Supported', 'Cantilever', 'Continuous Beam', 'Frame', 'Trapezoidal Loads', 'Wind on Columns', 'Exact Deflection', 'PDF Report'],
@@ -926,8 +911,8 @@ const translations = {
     install_x: "Ausblenden", install_t: "kragr als App", install_s: "Auf dem Startbildschirm installieren — funktioniert auch offline.", install_ios: "Auf iPhone/iPad: Teilen-Symbol antippen, dann „Zum Home-Bildschirm“.", install_b: "Installieren",
     footer: 'Valentin Maras', legal: 'Impressum · Datenschutz', note: 'Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung.',
     saved_from: 'Schnittkräfte + Bemessung',
-    saved_desc: 'Schnittkräfte und Bemessung verbinden: je Position ein System, seine Nachweise übernehmen die Schnittkräfte — gespeichert, mit Gesamtbericht.',
-    saved: 'Projekte', saved_n: '{n} Einträge', saved_p: '{p} Positionen · {n} Einträge', saved_p1: '1 Position · {n} Einträge',
+    saved_desc: 'Deine gespeicherten Berechnungen aus beiden Modulen: als Bericht ansehen, als PDF drucken oder wieder öffnen.',
+    saved: 'Rechenblätter', saved_n: '{n} Rechenblätter', saved_n1: '1 Rechenblatt',
     size_tags: ["Stahlbeton EC2", "Stahl EC3", "Anschlüsse", "Holz EC5", "Mauerwerk EC6", "Grundbau EC7", "Wasserbau", "Bauphysik", "Stabilität", "Torsion", "Bericht"],
     ref_tags: ["Baustatik", "Lastannahmen", "Stahlbeton EC2", "Stahlprofile", "Holzbau EC5", "Mauerwerk EC6", "Grundbau", "Wasserbau", "Bauphysik", "Mathematik", "Suche"],
     tags: ['Einfeldträger', 'Kragarm', 'Durchlaufträger', 'Rahmen', 'Trapezlasten', 'Wind auf Stielen', 'Exakte Durchbiegung', 'Bericht als PDF'],
@@ -948,8 +933,8 @@ const translations = {
     install_x: "Masquer", install_t: "kragr en application", install_s: "Installer sur l’écran d’accueil — fonctionne aussi hors ligne.", install_ios: "Sur iPhone/iPad : touchez l’icône Partager, puis « Sur l’écran d’accueil ».", install_b: "Installer",
     footer: 'Valentin Maras', legal: 'Mentions légales · Confidentialité', note: 'Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée.',
     saved_from: 'Efforts + Dimensionnement',
-    saved_desc: 'Relier efforts et dimensionnement : un système par position, ses vérifications reprennent ses efforts internes — enregistré, avec rapport complet.',
-    saved: 'Projets', saved_n: '{n} entrées', saved_p: '{p} positions · {n} entrées', saved_p1: '1 position · {n} entrées',
+    saved_desc: 'Tes calculs enregistrés dans les deux modules : à voir comme rapport, à imprimer en PDF ou à rouvrir.',
+    saved: 'Notes de calcul', saved_n: '{n} notes', saved_n1: '1 note',
     size_tags: ["Béton armé EC2", "Acier EC3", "Assemblages", "Bois EC5", "Maçonnerie EC6", "Géotechnique EC7", "Hydraulique", "Physique du bâtiment", "Stabilité", "Torsion", "Note de calcul"],
     ref_tags: ["Statique", "Charges EC0/EC1", "Béton armé EC2", "Profilés acier", "Bois EC5", "Maçonnerie EC6", "Géotechnique", "Hydraulique", "Physique du bâtiment", "Mathématiques", "Recherche"],
     tags: ['Poutre simple', 'Console', 'Poutre continue', 'Portique', 'Charges trapézoïdales', 'Vent sur poteaux', 'Flèche exacte', 'Rapport PDF'],
@@ -970,8 +955,8 @@ const translations = {
     install_x: "Ocultar", install_t: "kragr como app", install_s: "Instálala en la pantalla de inicio — también funciona sin conexión.", install_ios: "En iPhone/iPad: toca el icono Compartir y luego «Añadir a pantalla de inicio».", install_b: "Instalar",
     footer: 'Valentin Maras', legal: 'Aviso legal · Privacidad', note: 'Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado.',
     saved_from: 'Esfuerzos + Dimensionado',
-    saved_desc: 'Unir esfuerzos y dimensionado: un sistema por posición, sus comprobaciones toman sus esfuerzos — guardado, con informe completo.',
-    saved: 'Proyectos', saved_n: '{n} entradas', saved_p: '{p} posiciones · {n} entradas', saved_p1: '1 posición · {n} entradas',
+    saved_desc: 'Tus cálculos guardados de ambos módulos: verlos como informe, imprimirlos en PDF o volver a abrirlos.',
+    saved: 'Memorias de cálculo', saved_n: '{n} memorias', saved_n1: '1 memoria',
     size_tags: ["Hormigón EC2", "Acero EC3", "Uniones", "Madera EC5", "Fábrica EC6", "Geotecnia EC7", "Hidráulica", "Física de la construcción", "Estabilidad", "Torsión", "Informe"],
     ref_tags: ["Estática", "Cargas EC0/EC1", "Hormigón armado EC2", "Perfiles de acero", "Madera EC5", "Fábrica EC6", "Geotecnia", "Hidráulica", "Física de la construcción", "Matemáticas", "Búsqueda"],
     tags: ['Viga biapoyada', 'Ménsula', 'Viga continua', 'Pórtico', 'Cargas trapezoidales', 'Viento en pilares', 'Flecha exacta', 'Informe PDF'],
@@ -1023,15 +1008,15 @@ function applyLang(lang){
   document.getElementById('ref-tags').innerHTML  = tagHtml(t.ref_tags);
 }
 
-// Gespeicherte Berechnungen zählen (calc: statiq_sdf_*, size: Positionen) — nur im selben Browser
+// Rechenblätter zählen (calc: statiq_sdf_* ohne frühere Projekt-Positionen, size: statiq-size-positionen ohne Zuordnung) — nur im selben Browser
 function savedCount(t){
   let n=0;
   try{
-    for(let i=0;i<localStorage.length;i++){ if((localStorage.key(i)||'').startsWith('statiq_sdf_')) n++; }
-    n += (JSON.parse(localStorage.getItem('statiq-size-positionen')||'[]')||[]).length;
+    const asg=((JSON.parse(localStorage.getItem('statiq-projekt')||'{}')||{}).asg)||{};
+    for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i)||''; if(k.startsWith('statiq_sdf_') && !k.startsWith('statiq_sdf_pos_')) n++; }
+    n += (JSON.parse(localStorage.getItem('statiq-size-positionen')||'[]')||[]).filter(p=>asg['s:'+p.name]==null && !(p.src && String(p.src.key||'').startsWith('statiq_sdf_pos_'))).length;
   }catch(e){}
-  let p=0; try{ p=((JSON.parse(localStorage.getItem('statiq-projekt')||'{}')||{}).pos||[]).length; }catch(e){}
-  const el=document.getElementById('saved-count'); if(el) el.textContent = p>0 ? (p===1 ? t.saved_p1 : t.saved_p).replace('{p}', p).replace('{n}', n) : n>0 ? t.saved_n.replace('{n}', n) : '';
+  const el=document.getElementById('saved-count'); if(el) el.textContent = n===1 ? t.saved_n1 : n>0 ? t.saved_n.replace('{n}', n) : '';
 }
 
 // Init
@@ -1044,13 +1029,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
 });
 </script>
 <script>
-// Link auf „Projekte“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
+// Link auf „Rechenblätter“: Fehlt projekt.html auf dem Server, statt 404 einen klaren Hinweis zeigen (nur bei http/https).
 (function(){
   if(typeof document==='undefined' || !document.addEventListener) return;
-  const MSG={de:'„Projekte“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
-    en:'“Projects” is missing on this server. Please upload projekt.html to the same folder as index.html.',
-    fr:'« Projets » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
-    es:'«Proyectos» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
+  const MSG={de:'„Rechenblätter“ ist auf diesem Server nicht vorhanden. Bitte projekt.html in denselben Ordner wie index.html hochladen.',
+    en:'“Calculation sheets” is missing on this server. Please upload projekt.html to the same folder as index.html.',
+    fr:'« Notes de calcul » est absent de ce serveur. Veuillez déposer projekt.html dans le même dossier que index.html.',
+    es:'«Memorias de cálculo» no está en este servidor. Sube projekt.html a la misma carpeta que index.html.'};
   function hint(){ let l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
     let d=document.getElementById('proj-missing'); if(!d){ d=document.createElement('div'); d.id='proj-missing'; d.setAttribute('role','alert');
       d.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:min(560px,calc(100vw - 32px));background:#7f1d1d;color:#fff;padding:12px 16px;border-radius:10px;font:14px/1.45 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:9999;cursor:pointer';

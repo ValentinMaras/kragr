@@ -52,17 +52,22 @@ async def main():
         await pg.evaluate("addLoad('beam','dist')"); await pg.wait_for_timeout(300)
         n=await pg.evaluate("(()=>{const ids=[...loads.beam.point,...loads.beam.dist,...loads.cant.point,...loads.cant.dist,...frameLoads.vert,...frameLoads.horiz].map(l=>l.id); return new Set(ids).size===ids.length})()")
         check('neue Lasten bekommen nach dem Wiederherstellen eindeutige Nummern', n)
-        # Seit v0.10.1 ist calc eigenständig: kein „Nachweis in size“. Schnittkräfte gehen über eine Position in „Meine Projekte“ nach size.
+        # Seit v0.10.1 ist calc eigenständig: kein „Nachweis in size“. Seit v0.11.11 gehen Schnittkräfte über ein Rechenblatt
+        # („＋ Nachweis“ in „Rechenblätter“, Link size.html#calc=<Schlüssel>&ziel=…&part=…&ende=…) nach size.
         check('kein Knopf „Nachweis in size“ mehr', await pg.evaluate("document.querySelectorAll('.k-tosize').length")==0)
-        async def sys(tab):   # Position mit System anlegen (Startwerte des Bereichs)
-            await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(300); pid=await pg.evaluate("addPos()")
-            await pg.goto(B+f'calc.html?pos={pid}'); await pg.wait_for_timeout(900); await pg.evaluate(f"showTab('{tab}')"); await pg.wait_for_timeout(500)
-            await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(300); return pid
-        async def nw(pid, ziel, part=None):
-            await pg.goto(B+f'size.html?pos={pid}&ziel={ziel}'+(f'&part={part}' if part else '')); await pg.wait_for_timeout(1500)
+        async def sys(tab):   # Rechenblatt mit den Startwerten des Bereichs
+            await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.removeItem('muly-calc-entwurf')")   # Startwerte: Entwurf löschen, solange calc nicht offen ist
+            await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900)
+            await pg.evaluate(f"showTab('{tab}')"); await pg.wait_for_timeout(500)
+            await pg.click(f'#tab-{tab} .kbl-btn'); await pg.fill(f'#tab-{tab} .kbl-in', 'Test '+tab); await pg.click(f'#tab-{tab} .kbl-ok'); await pg.wait_for_timeout(200)
+            return await pg.evaluate(f"Object.keys(localStorage).find(k=>k.startsWith('statiq_sdf_') && JSON.parse(localStorage.getItem(k)).name==='Test {tab}')")
+        async def nw(key, ziel, part=None):
+            await pg.goto('about:blank'); await pg.goto(B+f'size.html#calc={key}&ziel={ziel}'+(f'&part={part}' if part else '')); await pg.wait_for_timeout(1500)
+        async def menu(key, js):
+            await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(300)
+            return await pg.evaluate("([k,js])=>[...document.querySelectorAll('.bl[data-id=\"c:'+k+'\"] .more.chk a')].map(a=>new URLSearchParams(a.getAttribute('href').split('#')[1])).map(q=>eval(js))", [key, js])
         pb=await sys('beam')
-        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(300)
-        mi=await pg.evaluate(f"[...document.querySelectorAll('#pos-{pb} .addm a')].map(a=>new URLSearchParams(a.getAttribute('href').split('?')[1]).get('ziel')).filter(Boolean)")
+        mi=await menu(pb, "q.get('ziel')")
         check('Menü Einfeldträger: nur Balken-Nachweise (Stahlbeton Balken/Unterzug/Platte, Stahl, Holz)', mi==['beton.balken','beton.unterzug','beton.platte','stahl.traeger','holz.bauteil'], mi)
         check('keine unpassenden Bereiche (Wasserbau, Grundbau, Mauerwerk, Bauphysik, Stütze)', not any(z.split('.')[0] in ('wasser','grund','mauer','bauph') or 'stuetze' in z for z in mi))
         await nw(pb, 'beton.balken'); r=await pg.evaluate("[MAT, TYP, document.getElementById('in-M')?.value]")
@@ -70,7 +75,7 @@ async def main():
         await nw(pb, 'holz.bauteil'); r=await pg.evaluate("[MAT, HOMODE, $('ho-M').value]")
         check('„Holz · Träger“ öffnet den Holzträger mit M = 28,13 kNm', r[:2]==['holz','bauteil'] and r[2] in ('28.13','28.125'), r)
         pf=await sys('frame')
-        mi=await pg.evaluate(f"[...document.querySelectorAll('#pos-{pf} .addm a')].map(a=>{{const q=new URLSearchParams(a.getAttribute('href').split('?')[1]); return q.get('ziel') ? q.get('ziel')+':'+(q.get('part')||'') : null}}).filter(Boolean)")
+        mi=await menu(pf, "q.get('ziel')+':'+(q.get('part')||'')")
         check('Menü Rahmen: Riegel als Balken, Stiel als Stütze; Schweißnähte und Stützenfuß je Knoten (seit calc v0.11.0)', mi==['beton.balken:riegel','beton.unterzug:riegel','stahl.traeger:riegel','holz.bauteil:riegel','beton.stuetze:stiel','stahl.traeger:stiel','holz.bauteil:stiel','stahl.schweiss:stiel','stahl.schweiss:riegel','stahl.schweiss:riegel','stahl.schweiss:stiel','stahl.fuss:stiel'], mi)
         await nw(pf, 'stahl.traeger', 'stiel'); r=await pg.evaluate("[MAT, STMODE, $('ci-part').value, parseFloat($('sn-N').value)]")
         check('Rahmen → „Stahl · Stütze“: Stiel mit N = 25 kN übernommen', r==['stahl','traeger','stiel',25], r)
@@ -82,10 +87,10 @@ async def main():
         await nw(pf, 'stahl.schweiss', 'stiel'); r=await pg.evaluate("[+$('sw-M').value, +$('sw-V').value, +$('sw-N').value]")
         check('Rahmen-Stiel → Schweißnaht: M = 13,81 kNm, V = 3,45 kN, N = −25 kN (Druck)', r==[13.81,3.45,-25], r)
         pk=await sys('cantilever')
-        mi=await pg.evaluate(f"[...document.querySelectorAll('#pos-{pk} .addm a')].map(a=>new URLSearchParams(a.getAttribute('href').split('?')[1]).get('ziel')).filter(Boolean)")
+        mi=await menu(pk, "q.get('ziel')")
         check('Menü Kragarm: ohne Unterzug, mit Schweißnaht an der Einspannung', mi==['beton.balken','beton.platte','stahl.traeger','holz.bauteil','stahl.schweiss'], mi)
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(300)
-        r=await pg.evaluate(f"[...document.querySelectorAll('#pos-{pk} .addm a')].map(a=>a.textContent)")
+        r=await pg.evaluate("k=>[...document.querySelectorAll('.bl[data-id=\"c:'+k+'\"] .more.chk a')].map(a=>a.textContent)", pk)
         check('EN: „Timber · Beam“ im Menü', r[3]=='Timber · Beam', r)
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         await nw(pk, 'stahl.schweiss')

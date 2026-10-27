@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.8 -->
+<!-- kragr·size v0.7.9 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -466,86 +466,6 @@ window.mulyProj = {
 <style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}  .fehler-link { color: var(--text3, #6b7280); text-decoration: underline; text-underline-offset: 2px; }
   .fehler-link:hover { color: var(--accent, #5468ad); }
 </style>
-<style data-pm>
-  /* Projektmodus (calc v0.10.1 · size v0.7.1; schmale Zeile seit calc v0.11.1 · size v0.7.3): calc und size sind eigenständige Rechner.
-     Aus „Projekte“ geöffnet (?pos=<id>) zeigen sie unter der Kopfzeile eine schmale, mitlaufende Projektzeile:
-     ✕ (Abbrechen) · „Pos. N · Titel“ · „Übernehmen“. Nur dieser Knopf schreibt in die Position. */
-  .k-pmbar { position:sticky; top:var(--k-hdr-h, 58px); z-index:9; display:flex; align-items:center; gap:8px; margin:4px auto 8px; padding:6px 6px 6px 6px; border-radius:14px; background:#e9ecf6; box-shadow:inset 0 0 0 1.5px #c9cfe6, 0 4px 14px rgba(17,17,20,.06); }
-  .k-pmbar.k-frame { width:calc(100% - 40px); max-width:calc(var(--k-frame, 1180px) - 40px) !important; }   /* bündig mit den Karten */
-  .k-pmbar[hidden] { display:none !important; }
-  .k-pmbar .kpm-x { flex:none; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:10px; background:#fff; color:#3d3f45; cursor:pointer; }
-  .k-pmbar .kpm-x:hover { color:#111114; background:#f6f7f9; }
-  .k-pmbar .kpm-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:0; line-height:1.3; }
-  .k-pmbar .kpm-t { font-size:14.5px; font-weight:800; color:#111114; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .k-pmbar .kpm-t i { font-style:normal; font-family:var(--k-mono, monospace); font-size:12px; font-weight:600; color:#46518a; margin-right:2px; }
-  .k-pmbar .kpm-s { font-size:12px; color:#46518a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .kpm-btn { flex:none; min-height:40px; padding:0 16px; border-radius:10px; border:0; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
-  .kpm-btn.ok { background:#111114; color:#fff; } .kpm-btn.ok:hover { background:#333; }
-  .kpm-btn .kpm-short { display:none; }
-  @media (max-width:560px) { .kpm-btn { padding:0 13px; } .kpm-btn .kpm-long { display:none; } .kpm-btn .kpm-short { display:inline; } }
-  .k-pmbar.gone { position:static; padding:10px 14px; gap:12px; flex-wrap:wrap; background:#fdf8e8; box-shadow:inset 0 0 0 1.5px #f1d48a; }
-  .k-pmbar.gone a { font-weight:700; color:#111114; }
-  .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
-  @media (min-width:1000px) { .k-verfoot { display:none; } }
-  #proj-btn .pb-dot { display:none !important; }   /* Ordner-Symbol ist nur noch ein Link zu „Projekte“ */
-  .col-out .save-btn { display:none !important; }
-  @media print { .k-pmbar, .k-verfoot { display:none !important; } }
-</style>
-<script data-pm>
-// Projektmodus (calc v0.10.1 · size v0.7.1): „Projekte“ verbindet calc und size. calc.html?pos=<id> bearbeitet das System der
-// Position, size.html?pos=<id>[&check=<Name>|&ziel=<Bereich.Nachweis>&part=<riegel|stiel>][&neu=1] einen Nachweis. Ohne ?pos=
-// sind calc und size reine Rechner ohne Projektbezug. Ablage: „statiq-projekt“ (pos, asg), System „statiq_sdf_pos_<id>“,
-// Nachweise „statiq-size-positionen“. Die Seite meldet sich mit window.kragrPMPage = { label(), apply(), cancel() }.
-(function(){
-  var PSTORE='statiq-projekt';
-  var T={ de:{ k:'Projekt', ok:'Übernehmen und zurück', okS:'Übernehmen', x:'Abbrechen', sys:'System aus „Schnittkräfte“', chk:'Nachweis', newChk:'neuer Nachweis', gone:'Diese Position gibt es nicht mehr.', proj:'Zu „Projekte“ →' },
-          en:{ k:'Project', ok:'Apply and return', okS:'Apply', x:'Cancel', sys:'System from “Internal forces”', chk:'Check', newChk:'new check', gone:'This item no longer exists.', proj:'To “Projects” →' },
-          fr:{ k:'Projet', ok:'Appliquer et revenir', okS:'Appliquer', x:'Annuler', sys:'Système de « Efforts »', chk:'Vérification', newChk:'nouvelle vérification', gone:'Cette position n’existe plus.', proj:'Vers « Projets » →' },
-          es:{ k:'Proyecto', ok:'Aplicar y volver', okS:'Aplicar', x:'Cancelar', sys:'Sistema de «Esfuerzos»', chk:'Comprobación', newChk:'nueva comprobación', gone:'Esta posición ya no existe.', proj:'A «Proyectos» →' } };
-  var DEFN=['Mein Projekt','My project','Mon projet','Mi proyecto'];
-  function lang(){ try{ return window.calcLang || localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
-  function t(k){ var L=lang(); return (T[L]||T.en)[k] || T.de[k] || k; }
-  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function get(k,d){ try{ var v=localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
-  function proj(){ var p=get(PSTORE,null)||{}; p.v=1; p.pos=p.pos||[]; p.asg=p.asg||{}; return p; }
-  function saveProj(P){ try{ if(P && DEFN.indexOf(P.name)>=0){ P=JSON.parse(JSON.stringify(P)); delete P.name; } localStorage.setItem(PSTORE, JSON.stringify(P)); return true; }catch(e){ return false; } }
-  var q=new URLSearchParams((typeof location!=='undefined' && location.search) || ''), id=q.get('pos');
-  var pos=id ? proj().pos.filter(function(x){ return x.id===id; })[0] : null;
-  function hh(){ var hd=document.querySelector('.app-header'); if(hd) document.documentElement.style.setProperty('--k-hdr-h', Math.round(hd.getBoundingClientRect().height)+'px'); }
-  if(typeof window!=='undefined' && window.addEventListener) window.addEventListener('resize', hh);
-  var PM={ on:!!pos, gone:!!id && !pos, id:id, pos:pos, params:q, sysKey: id ? 'statiq_sdf_pos_'+id : null, t:t, proj:proj, saveProj:saveProj,
-    assign:function(item, pid){ var P=proj(); P.asg[item]=pid; saveProj(P); },
-    // Titel folgt dem System, solange er nicht von Hand vergeben wurde (auto !== false)
-    setTitle:function(title){ var P=proj(), x=P.pos.filter(function(y){ return y.id===id; })[0]; if(x && title && x.auto!==false){ x.title=title; x.auto=true; saveProj(P); } },
-    back:function(){ location.href='projekt.html#pos-'+encodeURIComponent(id); },
-    render:function(){
-      var bar=document.getElementById('k-pmbar'); if(!bar) return;
-      if(PM.gone){ bar.hidden=false; bar.className='k-pmbar k-frame gone'; bar.innerHTML='<span class="kpm-tx"><span class="kpm-t">'+esc(t('gone'))+'</span></span><a href="projekt.html">'+esc(t('proj'))+'</a>'; return; }
-      if(!PM.on){ bar.hidden=true; return; }
-      document.body.classList.add('k-pm');
-      var pg=window.kragrPMPage||{}, sub=pg.label ? pg.label() : '', X='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-      var h='<button type="button" class="kpm-x" data-pm="x" aria-label="'+esc(t('x'))+'" title="'+esc(t('x'))+'">'+X+'</button>'
-        +'<span class="kpm-tx" title="'+esc(t('k')+' · Pos. '+pos.nr+' · '+pos.title)+'"><span class="kpm-t"><i>Pos. '+esc(pos.nr)+'</i> '+esc(pos.title)+'</span>'+(sub?'<span class="kpm-s">'+esc(sub)+'</span>':'')+'</span>'
-        +'<button type="button" class="kpm-btn ok" data-pm="ok" aria-label="'+esc(t('ok'))+'"><span class="kpm-long">'+esc(t('ok'))+'</span><span class="kpm-short" aria-hidden="true">'+esc(t('okS'))+'</span></button>';
-      hh();
-      bar.hidden=false; bar.className='k-pmbar k-frame'; if(bar._h!==h){ bar._h=h; bar.innerHTML=h; }
-    } };
-  window.kragrPM=PM;
-  document.addEventListener('click', function(e){ var b=e.target.closest && e.target.closest('#k-pmbar [data-pm]'); if(!b) return; var pg=window.kragrPMPage||{};
-    if(b.dataset.pm==='ok'){ if(pg.apply) pg.apply(); else PM.back(); } else { if(pg.cancel) pg.cancel(); else PM.back(); } });
-  document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
-    // Ordner-Symbol: einfacher Link zu „Projekte“; das frühere Projekt-Fenster bleibt intern über mulyAltProj() erreichbar
-    var L0={ open:window.openProj }; window.mulyAltProj=function(){ var o=document.getElementById('proj-panel'); if(o) o.removeAttribute('hidden'); if(L0.open) L0.open(); };
-    window.toggleProj=function(e){ if(e && e.stopPropagation) e.stopPropagation(); location.href='projekt.html'; }; window.openProj=window.toggleProj; window.closeProj=function(){};
-    var old=document.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
-    var b=document.getElementById('proj-btn'); if(b){ b.removeAttribute('aria-haspopup'); b.removeAttribute('aria-expanded'); }
-    // Version unten (am Handy ist die Kopfzeile dafür zu schmal)
-    var hv=document.querySelector('.app-header .version'), m=document.querySelector('.app-header .module-name');
-    if(hv && m && !document.getElementById('k-verfoot')){ var f=document.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr · '+m.textContent.trim()+' '+hv.textContent.trim(); document.body.appendChild(f); }
-    PM.render();
-  }, 0); });
-})();
-</script>
 <style data-ueb>
   /* Übungsmodus-Schalter in der Kopfzeile (calc v0.9.7 · size v0.6.6): Doktorhut wie der Hell/Dunkel-Knopf, an = Akzentfläche */
   .ueb-hdr { display:inline-flex; align-items:center; justify-content:center; width:36px; height:40px; padding:0; border:0; border-radius:10px; background:transparent; color:#111114; cursor:pointer; -webkit-tap-highlight-color:transparent; }
@@ -693,12 +613,12 @@ window.mulyProj = {
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
 <script data-mod>
-// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Modulnamen (seit 26.10.2026; „Rechenblätter“ statt „Projekte“ seit 27.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Rechenblätter“ statt calc · size · ref · Projekte.
 // Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
 // data-mod="calc|size|ref|proj" bekommen ihn als Text.
 (function(){
-  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
-          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Rechenblätter'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Calculation sheets'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Notes de calcul'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Memorias de cálculo'} };
   function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
     try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
   window.KMOD=K; window.kmodLang=lang;
@@ -1000,22 +920,7 @@ window.kragrK5Page = function(K){
       var n=h; while(n && n!==w){ var nx=n.nextElementSibling; w.appendChild(n); if(nx && (nx.tagName==='H2' || nx.classList.contains('card') || nx.tagName==='SECTION')) break; n=nx; if(w.children.length>=3) break; } };
   }
 
-  if(P==='projekt'){
-    // Positionen als Akkordeon: Kopf mit Nummer, Titel, Kurzfassung (System · Nachweise); Rücksprung #pos-… öffnet die Position
-    var W={de:['Nachweis','Nachweise','kein System'],en:['check','checks','no system'],fr:['vérification','vérifications','pas de système'],es:['comprobación','comprobaciones','sin sistema']};
-    var hashId=function(){ return (location.hash.match(/^#pos-(.+)$/)||[])[1]; };
-    // Neu angelegte Position (＋ Position): offen, die anderen klappen zu
-    var known=null;
-    rule('#list > .pos', function(el){ var h=$(':scope > .pos-h', el); if(!h) return null; var id=el.dataset.id, all=$$('#list > .pos'), ids=all.map(function(x){ return x.dataset.id; });
-      if(!known) known=ids.slice();
-      var nw=ids.filter(function(x){ return known.indexOf(x)<0; });
-      if(nw.length){ var open=nw[nw.length-1]; known=known.concat(nw); try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); ids.forEach(function(x){ st['projekt:pos-'+x]=x!==open; }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){} }
-      var isNew=false;
-      var hid=hashId(), first=all[0]===el;
-      return {head:h, key:'pos-'+id, group:'pos', closed: isNew ? false : hid ? hid!==id : !first, sum:function(c){ var w=W[K.lang()]||W.de;
-        var sys=$('.items .it .d b', c), n=$$('.items .tag.size', c).length; return (sys ? sys.textContent : w[2])+' · '+n+' '+(n===1?w[0]:w[1]); }}; });
-    if(hashId()) try{ var st=JSON.parse(localStorage.getItem('kragr-k5-acc')||'{}'); Object.keys(st).forEach(function(k){ if(/^projekt:pos-/.test(k)) st[k]=k!=='projekt:pos-'+hashId(); }); localStorage.setItem('kragr-k5-acc', JSON.stringify(st)); }catch(e){}
-  }
+  // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
   apply(); deco();
@@ -1034,13 +939,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -1160,7 +1065,8 @@ window.kragrK5Page = function(K){
   var MODS=[['calc','calc.html',SVG_I('<line x1="2.5" y1="6" x2="21.5" y2="6" stroke-width="2.4"/><path d="M4 6.8 l-2.3 3.6 h4.6z M20 6.8 l-2.3 3.6 h4.6z" stroke-width="1.4"/><path d="M4 6 Q12 25 20 6" stroke-width="1.6" stroke-dasharray="0"/>')],
             ['size','size.html',SVG_I('<line x1="6" y1="4" x2="18" y2="4" stroke-width="2.4"/><line x1="6" y1="20" x2="18" y2="20" stroke-width="2.4"/><line x1="12" y1="4" x2="12" y2="20" stroke-width="2"/>')],
             ['ref','ref.html',SVG_I('<path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z" stroke-width="1.8"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z" stroke-width="1.8"/>')]];
-  var ICON_PROJ='<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  // Rechenblätter (calc v0.11.11, statt „Projekte“): Blatt mit Eselsohr und Zeilen
+  var ICON_PROJ=SVG_I('<path d="M6 3h8l4 4v14H6z" stroke-width="1.8"/><path d="M14 3v4h4" stroke-width="1.8"/><path d="M9 12h6M9 15.5h6M9 19h3" stroke-width="1.8"/>');
   var burger, menu, scrim, lastFocus;
   function buildHeader(){
     var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
@@ -1200,7 +1106,6 @@ window.kragrK5Page = function(K){
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
-    var pb=D.getElementById('proj-btn'); var st=pb&&pb.dataset.st; menu.querySelector('[data-mod="projekt"]').classList.toggle('k5-unsaved', st==='changed'||st==='new');
   }
   function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
   function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
@@ -1273,6 +1178,131 @@ window.kragrK5Page = function(K){
   if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
+<style data-blatt>
+  /* Rechenblatt speichern (calc v0.11.11 · size v0.7.9) */
+  .kbl { margin-top:10px; }
+  .btn-row > .kbl { flex-basis:100%; margin-top:6px; }
+  .kbl-btn { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border:none; border-radius:14px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer; }
+  .kbl-btn:hover { box-shadow:var(--k5-sh-h, inset 0 0 0 1px #a1a1aa); }
+  .kbl-btn[hidden], .kbl-form[hidden] { display:none !important; }
+  .kbl-form { display:flex; flex-wrap:wrap; align-items:flex-end; gap:8px; padding:12px; border-radius:16px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); }
+  .kbl-l { flex:1 1 220px; display:flex; flex-direction:column; gap:4px; font-size:12px; font-weight:600; color:#5c5e66; }
+  .kbl-in { font:inherit; font-size:15px; font-weight:600; color:#111114; padding:9px 11px; border:1.5px solid #d4d4d8; border-radius:10px; background:#fff; min-width:0; }
+  .kbl-in:focus { outline:none; border-color:#5468ad; }
+  .kbl-row { display:flex; gap:8px; }
+  .kbl-ok, .kbl-x { min-height:42px; padding:0 16px; border-radius:10px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; border:none; }
+  .kbl-ok { background:#111114; color:#fff; } .kbl-ok:hover { background:#333; }
+  .kbl-ok.armed { background:#b45309; }
+  .kbl-x { background:transparent; color:#3d3f45; } .kbl-x:hover { background:#e6e7ea; }
+  .kbl-msg { font-size:13px; color:#3d3f45; margin-top:6px; line-height:1.5; }
+  .kbl-msg:empty { display:none; }
+  .kbl-msg a { color:#5468ad; font-weight:700; text-decoration:none; white-space:nowrap; } .kbl-msg a:hover { text-decoration:underline; }
+  @media print { .kbl { display:none !important; } }
+  .col-out .save-btn { display:none !important; }   /* alter Knopf „Berechnung speichern“: ersetzt durch „Als Rechenblatt speichern“ */
+  /* aus dem früheren Projektmodus übernommen: Version unten (Handy), alter Speicherpunkt am Ordner-Symbol aus */
+  .k-verfoot { max-width:1180px; margin:20px auto 10px; padding:0 20px; font-family:var(--k-mono, monospace); font-size:11px; color:#5c5e66; }
+  @media (min-width:1000px) { .k-verfoot { display:none; } }
+  #proj-btn .pb-dot { display:none !important; }
+  @media print { .k-verfoot { display:none !important; } }
+</style>
+<script data-blatt>
+// Rechenblatt speichern (calc v0.11.11 · size v0.7.9): ersetzt „Projekte“. Unter den Ergebnissen ein Knopf „Als Rechenblatt speichern“,
+// darunter ein kleines Feld für den Namen. Gleicher Name: erst „Überschreiben?“, dann ersetzen. Alle Rechenblätter zeigt projekt.html.
+// calc: Eintrag statiq_sdf_<Zeit> = {name, sdf, draft} — draft sind die Eingaben (k4Snap), damit „Öffnen“ alles wiederherstellt.
+// size: wie bisher savePos() → statiq-size-positionen + Bericht statiq-size-bericht:<Name>. Öffnen: size.html#blatt=<Name>.
+(function(){
+  var D=document, PAGE=(location.pathname.split('/').pop()||'').replace(/\.html?$/,'');
+  if(PAGE!=='calc' && PAGE!=='size') return;
+  var T={
+    de:{save:'Als Rechenblatt speichern', name:'Name des Rechenblatts', ok:'Speichern', cancel:'Abbrechen', over:'Überschreiben?', done:'Gespeichert: „{0}“', upd:'Überschrieben: „{0}“', go:'Rechenblätter ansehen →', first:'Erst rechnen, dann speichern.', full:'Speicher voll — nicht gespeichert.', opened:'Rechenblatt geöffnet: „{0}“'},
+    en:{save:'Save as calculation sheet', name:'Name of the sheet', ok:'Save', cancel:'Cancel', over:'Overwrite?', done:'Saved: “{0}”', upd:'Overwritten: “{0}”', go:'View calculation sheets →', first:'Calculate first, then save.', full:'Storage full — not saved.', opened:'Calculation sheet opened: “{0}”'},
+    fr:{save:'Enregistrer comme note de calcul', name:'Nom de la note', ok:'Enregistrer', cancel:'Annuler', over:'Remplacer ?', done:'Enregistré : « {0} »', upd:'Remplacé : « {0} »', go:'Voir les notes de calcul →', first:'Calculer d’abord, puis enregistrer.', full:'Mémoire pleine — non enregistré.', opened:'Note de calcul ouverte : « {0} »'},
+    es:{save:'Guardar como memoria de cálculo', name:'Nombre de la memoria', ok:'Guardar', cancel:'Cancelar', over:'¿Sobrescribir?', done:'Guardado: «{0}»', upd:'Sobrescrito: «{0}»', go:'Ver memorias de cálculo →', first:'Primero calcular, luego guardar.', full:'Memoria llena: no se ha guardado.', opened:'Memoria de cálculo abierta: «{0}»'}};
+  function lang(){ try{ if(PAGE==='calc' && typeof calcLang!=='undefined' && T[calcLang]) return calcLang; }catch(e){} var l=null; try{ l=localStorage.getItem('statiq-lang'); }catch(e){} return T[l]?l:'de'; }
+  function t(k, a){ return String((T[lang()]||T.de)[k]).replace('{0}', a==null?'':a); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var ICON='<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 15.5h6M9 19h3"/></svg>';
+
+  // ── Seiten-Anpassung ───────────────────────────────────────────────
+  function calcTab(){ try{ var c=curTab(); return ['beam','cantilever','cont','frame'].indexOf(c)>=0 ? c : null; }catch(e){ return null; } }
+  function calcList(){ var out=[]; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k || k.indexOf('statiq_sdf_')!==0 || k.indexOf('statiq_sdf_pos_')===0) continue;
+    try{ var e=JSON.parse(localStorage.getItem(k)); if(e && e.sdf && (e.sdf.module||'calc')==='calc') out.push({key:k, name:e.name}); }catch(_){} } }catch(e){} return out; }
+  var A = PAGE==='calc' ? {
+    host: function(t){ var m=D.getElementById('tab-'+t); return m && (m.querySelector('.col-out') || m); },
+    def: function(){ var t=calcTab(); if(!t) return ''; try{ var sid=t==='cantilever'?'cant':t, lc=lastCalc[sid], tabs=(calcTranslations[calcLang]||calcTranslations.en).tabs,
+        lab={beam:tabs[0],cantilever:tabs[1],cont:tabs[2],frame:tabs[3]}[t]||t; if(!lc) return lab; var g=lc.geometry;
+        if(t==='cont') return trf('nameSpans', lab, g.spans.length, g.spans.join('/'));
+        if(t==='frame') return lab+' '+supW(lc.supports.A)+'/'+supW(lc.supports.B)+' b='+g.b+'m h='+g.hA+'/'+g.hB+'m'+(g.gable?' f='+g.gable.f+'m':'');
+        return lab+' L='+(g.L||'?')+'m'; }catch(e){ return ''; } },
+    exists: function(n){ var e=calcList().filter(function(x){ return x.name===n; })[0]; return e ? e.key : null; },
+    save: function(n){ var t=calcTab(); if(!t) return 'first'; try{ liveCalc(true); }catch(e){}
+      var key=A.exists(n) || 'statiq_sdf_'+Date.now(), r=null;
+      try{ r = t==='frame' ? saveFrameCalc({key:key, quiet:true}) : saveCalc(t, {key:key, quiet:true}); }catch(e){ r=null; }
+      if(!r) return 'first';
+      try{ var o=JSON.parse(localStorage.getItem(key)); o.name=n; o.draft=k4Snap(); localStorage.setItem(key, JSON.stringify(o)); }catch(e){ return 'full'; }
+      return 'ok'; }
+  } : {
+    host: function(){ var b=D.querySelector('#results button[onclick="showReport()"]') || D.querySelector('button[onclick="showReport()"]'); return b ? b.closest('.btn-row') || b.parentNode : null; },
+    def: function(){ try{ return (D.getElementById(nameField()).value||'').trim(); }catch(e){ return ''; } },
+    exists: function(n){ try{ return posRead().some(function(p){ return p.name===n; }); }catch(e){ return false; } },
+    save: function(n){ try{ var f=D.getElementById(nameField()); if(f){ f.value=n; f.dispatchEvent(new Event('input',{bubbles:true})); } savePos(); }catch(e){ return 'full'; }
+      return A.exists(n) ? 'ok' : 'full'; }
+  };
+
+  // ── Knopf und Namensfeld ───────────────────────────────────────────
+  function build(host){
+    if(!host || host.querySelector(':scope > .kbl')) return;
+    var w=D.createElement('div'); w.className='kbl';
+    w.innerHTML='<button type="button" class="kbl-btn">'+ICON+'<span></span></button>'
+      +'<div class="kbl-form" hidden><label class="kbl-l"><span></span><input type="text" class="kbl-in" maxlength="80" autocomplete="off" spellcheck="false"></label>'
+      +'<div class="kbl-row"><button type="button" class="kbl-ok"></button><button type="button" class="kbl-x"></button></div></div>'
+      +'<div class="kbl-msg" aria-live="polite"></div>';
+    host.appendChild(w); label(w);
+    var btn=w.querySelector('.kbl-btn'), form=w.querySelector('.kbl-form'), inp=w.querySelector('.kbl-in'), ok=w.querySelector('.kbl-ok'), msg=w.querySelector('.kbl-msg');
+    function close(){ form.hidden=true; btn.hidden=false; ok.classList.remove('armed'); ok.textContent=t('ok'); }
+    btn.addEventListener('click', function(){ msg.innerHTML=''; label(w); inp.value=A.def(); form.hidden=false; btn.hidden=true; inp.focus(); inp.select(); });
+    w.querySelector('.kbl-x').addEventListener('click', close);
+    inp.addEventListener('input', function(){ ok.classList.remove('armed'); ok.textContent=t('ok'); });
+    inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); ok.click(); } else if(e.key==='Escape'){ e.preventDefault(); close(); btn.focus(); } });
+    ok.addEventListener('click', function(){
+      var n=inp.value.trim()||A.def(); if(!n){ inp.focus(); return; }
+      var had=!!A.exists(n);
+      if(had && !ok.classList.contains('armed')){ ok.classList.add('armed'); ok.textContent=t('over'); return; }
+      var r=A.save(n);
+      if(r==='ok'){ close(); msg.innerHTML='<span>'+esc(t(had?'upd':'done', n))+'</span> <a href="projekt.html">'+esc(t('go'))+'</a>'; }
+      else msg.textContent=t(r==='first'?'first':'full');
+    });
+  }
+  function label(w){ w.querySelector('.kbl-btn span').textContent=t('save'); w.querySelector('.kbl-l > span').textContent=t('name');
+    var ok=w.querySelector('.kbl-ok'); if(!ok.classList.contains('armed')) ok.textContent=t('ok'); w.querySelector('.kbl-x').textContent=t('cancel'); }
+  function relabel(){ Array.prototype.forEach.call(D.querySelectorAll('.kbl'), label); }
+
+  // Reste aus dem früheren Projektmodus (bis calc v0.11.10 im Block data-pm): altes Projekt-Fenster verborgen, aber für Prüfstände
+  // über mulyAltProj() erreichbar (Speichern/Laden in size, Übernahme aus calc); Ordner-Symbol der alten Kopfzeile → Rechenblätter;
+  // Version unten auf der Seite (#k-verfoot).
+  function legacy(){
+    var L0={ open:window.openProj }; window.mulyAltProj=function(){ var o=D.getElementById('proj-panel'); if(o) o.removeAttribute('hidden'); if(L0.open) L0.open(); };
+    window.toggleProj=function(e){ if(e && e.stopPropagation) e.stopPropagation(); location.href='projekt.html'; }; window.openProj=window.toggleProj; window.closeProj=function(){};
+    var old=D.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
+    var b=D.getElementById('proj-btn'); if(b){ b.removeAttribute('aria-haspopup'); b.removeAttribute('aria-expanded'); }
+    var hv=D.querySelector('.app-header .version'), m=D.querySelector('.app-header .module-name');
+    if(hv && m && !D.getElementById('k-verfoot')){ var f=D.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr · '+m.textContent.trim()+' '+hv.textContent.trim(); D.body.appendChild(f); }
+  }
+  function init(){
+    try{ legacy(); }catch(e){}
+    if(PAGE==='calc') ['beam','cantilever','cont','frame'].forEach(function(t){ build(A.host(t)); });
+    else build(A.host());
+    if(PAGE==='calc' && typeof window.setCalcLang==='function'){ var o=window.setCalcLang; window.setCalcLang=function(){ var r=o.apply(this, arguments); relabel(); return r; }; }
+    // Aus „Rechenblätter“ geöffnet
+    if(PAGE==='calc' && window.kBlattOpen){ var h=A.host(calcTab()); var m=h && h.querySelector('.kbl-msg'); if(m) m.textContent=t('opened', window.kBlattOpen); }
+    if(PAGE==='size'){ var mm=String(location.hash||'').match(/^#blatt=(.+)$/); if(mm){ var n=decodeURIComponent(mm[1]); history.replaceState(null,'',location.pathname+location.search);
+      try{ var i=posRead().findIndex(function(p){ return p.name===n; }); if(i>=0){ loadPos(i); var mg=D.querySelector('.kbl .kbl-msg'); if(mg) mg.textContent=t('opened', n); } }catch(e){} } }
+  }
+  // nach allen anderen Start-Routinen (Spalten in calc entstehen erst beim Start)
+  D.readyState==='loading' ? D.addEventListener('DOMContentLoaded', function(){ setTimeout(init, 0); }) : setTimeout(init, 0);
+  window.kragrBlatt={ t:t, relabel:relabel };
+})();
+</script>
 </head>
 <body>
 <header class="app-header glass k-hdr">
@@ -1289,8 +1319,7 @@ window.kragrK5Page = function(K){
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="mulyLangSwitch(this.value)"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
-<div id="k-pmbar" class="k-pmbar k-frame" hidden></div>
-<script data-pm-early>try{ if(typeof window!=="undefined" && window.kragrPM) kragrPM.render(); }catch(e){}</script>
+
 
 <div id="mob-status" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})"></div>
 <main class="k-frame main">
@@ -3941,7 +3970,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.8';
+const SIZE_VERSION = '0.7.9';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11410,6 +11439,22 @@ function ciDo(key, part){
   renderCalcImport(key); if($('ci-part')) $('ci-part').value = part==='stiel' ? 'stiel' : 'riegel';
   importCalc(key); ciBanner($('ci-msg').innerHTML);
 }
+// Stabendkräfte eines Knotens (size v0.7.9, vorher nur über „Projekte“): size.html#calc=<Schlüssel>&ziel=stahl.schweiss|stahl.fuss&part=…&ende=i-k
+// übernimmt M, Q, N am Stabende i–k (Doppelindex wie in „Knoten und Stabendkräfte“) in Schweißnaht bzw. Stützenfuß.
+function ciEnde(entry, ik){
+  const K=entry?.sdf?.results?.knoten, p=String(ik||'').split('-').map(Number); if(!K || p.length!==2) return false;
+  let v=null; for(const b of K.bars){ if(b.i===p[0] && b.k===p[1]){ v=b.ik; break; } if(b.k===p[0] && b.i===p[1]){ v=b.ki; break; } }
+  if(!v) return false;
+  const r=x=>Math.round(x*1000)/1000, ix=String(ik).replace('-',''), d=x=>deNum(x,1);
+  if(STMODE==='schweiss'){ $('sw-fall').value='stirn'; if(typeof swSync==='function') swSync(); $('sw-M').value=r(Math.abs(v.M)); $('sw-V').value=r(Math.abs(v.Q)); $('sw-N').value=r(v.N); }
+  else if(STMODE==='fuss'){ $('fp-N').value=r(Math.max(0,-v.N)); $('fp-V').value=r(Math.abs(v.Q)); }
+  else return false;
+  if(CI_SRC) CI_SRC.ende=ik;
+  const f=$(nameField()); if(f) f.value=ciUniqueName(entry.name+' · '+tx('cibStab', String(ik).replace('-','–')), entry.key);
+  run();
+  ciBanner(tx('ciFrom')+' '+esc(entry.name)+' — '+tx('cibEnde', String(ik).replace('-','–'))+'<br>M<sub>'+ix+'</sub> = '+d(v.M)+' kNm · Q<sub>'+ix+'</sub> = '+d(v.Q)+' kN · N<sub>'+ix+'</sub> = '+d(v.N)+' kN');
+  return true;
+}
 function ciUniqueName(base, key){ const L=posRead(); let n=base, k=2; while(L.some(p=>p.name===n && p.src?.key!==key)) n=`${base} (${k++})`; return n; }
 { const h=location.hash, q=h.startsWith('#calc=') ? new URLSearchParams(h.slice(1)) : null, ck=q ? q.get('calc') : null;
   renderCalcImport(ck || null);
@@ -11417,6 +11462,7 @@ function ciUniqueName(base, key){ const L=posRead(); let n=base, k=2; while(L.so
     if(z.length===2) ciGoto(z[0], z[1]);
     else if(!ciOk()) ciGoto('beton', part==='stiel' && e?.sdf?.system?.type==='frame' ? 'stuetze' : 'balken');   // „→ size“ ohne Ziel: passender Nachweis statt Wasserbau o. Ä.
     ciDo(ck, part);
+    const ende=q.get('ende'); if(ende && e) ciEnde(e, ende);
     history.replaceState(null, '', location.pathname); } }
 openFromHash();
 window.addEventListener("hashchange", ()=>{ openFromHash(); });
@@ -11529,46 +11575,6 @@ function mulyFehlerHref(app, ver, extra){
   obs.observe(document.querySelector('.col-in'), {childList:true, subtree:true});
   window.mulyK3=all_;
   all_();
-})();
-</script>
-<script data-pm-size>
-// Projektmodus in size (v0.7.1): size.html?pos=<id>&check=<Name> öffnet einen Nachweis der Position (mit &neu=1: mit dem aktuellen
-// System neu gerechnet), size.html?pos=<id>&ziel=<Bereich.Nachweis>&part=<riegel|stiel> legt einen neuen an und übernimmt die
-// Schnittkräfte aus dem System der Position. Erst „Übernehmen und zurück“ speichert; die Eingaben des eigenständigen Rechners
-// (statiq-size-v1) bleiben dabei unberührt.
-(function(){
-  var PM=window.kragrPM; if(!PM || !PM.on || !document.querySelector('.col-in')) return;
-  var q=PM.params, chk=q.get('check'), ziel=q.get('ziel'), part=q.get('part'), neu=q.get('neu'), orig=null, sys=null;
-  try{ sys=JSON.parse(localStorage.getItem(PM.sysKey)||'null'); }catch(e){}
-  function lab(){ return [$('pick-g')&&$('pick-g').textContent, $('pick-t')&&$('pick-t').textContent].filter(Boolean).join(' · '); }
-  function partLab(p){ return p==='stiel' ? tx('ciStiel').split(' (')[0] : p==='riegel' ? tx('ciRiegel') : ''; }
-  function nf(){ return document.getElementById(nameField()); }
-  // Stabende eines Knotens (v0.7.2): exakte Stabendkräfte aus calc (Doppelindex i-k) für Schweißnaht und Stützenfuß
-  function endeVals(ik){ var K=sys && sys.sdf && sys.sdf.results && sys.sdf.results.knoten, p=String(ik||'').split('-').map(Number); if(!K || p.length!==2) return null;
-    for(var j=0;j<K.bars.length;j++){ var b=K.bars[j]; if(b.i===p[0] && b.k===p[1]) return b.ik; if(b.k===p[0] && b.i===p[1]) return b.ki; } return null; }
-  function applyEnde(ik){ var v=endeVals(ik); if(!v) return false; var r=function(x){ return Math.round(x*1000)/1000; }, ix=String(ik).replace('-',''), d=function(x){ return deNum(x,1); };
-    if(STMODE==='schweiss'){ $('sw-fall').value='stirn'; if(typeof swSync==='function') swSync(); $('sw-M').value=r(Math.abs(v.M)); $('sw-V').value=r(Math.abs(v.Q)); $('sw-N').value=r(v.N); }
-    else if(STMODE==='fuss'){ $('fp-N').value=r(Math.max(0,-v.N)); $('fp-V').value=r(Math.abs(v.Q)); }
-    else return false;
-    if(CI_SRC) CI_SRC.ende=ik; run();
-    ciBanner(tx('ciFrom')+' '+esc(sys.name)+' — '+tx('cibEnde', String(ik).replace('-','–'))+'<br>M<sub>'+ix+'</sub> = '+d(v.M)+' kNm · Q<sub>'+ix+'</sub> = '+d(v.Q)+' kN · N<sub>'+ix+'</sub> = '+d(v.N)+' kN');
-    return true; }
-  var ende=q.get('ende');
-  if(chk){ var i=posRead().findIndex(function(p){ return p.name===chk; });
-    if(i>=0){ loadPos(i); orig=chk; var src=posRead()[i].src; if(neu && sys){ ciDo(PM.sysKey, src && src.part); if(src && src.ende) applyEnde(src.ende); if(nf()) nf().value=orig; } } }
-  else { if(ziel){ var z=ziel.split('.'); ciGoto(z[0], z[1]); if(sys){ ciDo(PM.sysKey, part); if(ende && !applyEnde(ende)) ende=null; } }
-    var f=nf(); if(f) f.value=ciUniqueName(lab()+(ende ? ' · '+tx('cibStab', ende.replace('-','–')) : part ? ' · '+partLab(part) : ''), '__neu__'); run(); }
-  posMsg('');
-  function apply(){
-    var f=nf(), n=(f && f.value || '').trim(), L=posRead();
-    if(!n || /^Pos\.\s/.test(n)) n=lab()+(CI_SRC && CI_SRC.part ? ' · '+partLab(CI_SRC.part) : '');
-    if(n!==orig){ var base=n, k=2; while(L.some(function(p){ return p.name===n; })) n=base+' ('+(k++)+')'; }
-    if(f) f.value=n;
-    if(orig && orig!==n){ posWrite(L.filter(function(p){ return p.name!==orig; })); var P=PM.proj(); delete P.asg['s:'+orig]; PM.saveProj(P); try{ localStorage.removeItem(POS_REP+orig); }catch(e){} }
-    savePos(); PM.assign('s:'+n, PM.id); PM.back();
-  }
-  window.kragrPMPage={ label:function(){ return PM.t('chk')+': '+(orig || PM.t('newChk')); }, apply:apply, cancel:function(){ PM.back(); } };
-  PM.render();
 })();
 </script>
 </body>

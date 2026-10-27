@@ -1,6 +1,7 @@
 # Übungsmodus „Lernpfad“ (calc v0.8.34, size v0.5.51): Schritte bleiben sichtbar und zeigen Reihenfolge und Formeln,
 # Zahlenwerte der Rechnung sind als „…“ ausgeblendet; Antippen eines Schritts deckt bis dorthin auf; Prüfen findet
 # Zwischenwerte auch in noch verdeckten Schritten. Ohne Playwright: SKIP.
+# Stufen (calc v0.11.5): Test öffnet alle Stufen und Ergebnis-Karten (Standardzustand prüft test_stufen.py)
 import os, sys, re, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
 try:
@@ -15,7 +16,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(viewport={'width':1280,'height':1000}); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}));localStorage.setItem('muly-uebung','1')"); await pg.reload(); await pg.wait_for_timeout(700)
+        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}));localStorage.setItem('muly-uebung','1')"); await pg.reload(); await pg.wait_for_timeout(700)
         st=await pg.evaluate(TXT, '#rw-beam .rw-body > .st')
         heads=[s.split('\n')[0] for s in st]
         check('calc: alle 6 Schritte mit Überschrift sichtbar (Reihenfolge)', len(st)==6 and 'Momentengleichgewicht um A' in st[2] and 'Größtes Moment' in st[5] and all(await pg.evaluate("[...document.querySelectorAll('#rw-beam .rw-body > .st')].map(s=>s.offsetParent!==null)")), heads)
@@ -27,6 +28,7 @@ async def main():
         check('calc: Prüfen erkennt M_max, obwohl der Schritt verdeckt ist', 'Richtig' in m or 'Stimmt' in m, m)
         await pg.fill('#rw-beam .ueb-in','12,5'); await pg.click('#rw-beam .ueb-box button'); m=await pg.inner_text('#rw-beam .ueb-msg')
         check('calc: Prüfen erkennt Zwischenwert R′ = 12,50 kN aus verdecktem Schritt 6', 'Schritt 6' in m, m)
+        await pg.wait_for_timeout(600)   # Live-Rechnung nach der Eingabe ins Prüffeld abwarten (zeichnet den Rechenweg neu)
         await pg.click('#rw-beam .rw-body > .st:nth-of-type(3) .st-h'); await pg.wait_for_timeout(200)
         st=await pg.evaluate(TXT, '#rw-beam .rw-body > .st'); hid=await pg.evaluate("[...document.querySelectorAll('#rw-beam .rw-body > .st')].map(s=>s.classList.contains('ueb-hid'))")
         check('calc: Antippen von Schritt 3 deckt 1–3 auf (mit Zahlen), 4–6 bleiben Lernpfad', hid==[False,False,False,True,True,True] and '17,50 kN' in st[2] and '…' not in st[2] and '…' in st[3], (hid, st[2][-40:]))

@@ -19,7 +19,7 @@ async def main():
         await pg.evaluate("saveCalc('beam')"); await pg.evaluate(OPEN); await pg.wait_for_timeout(400)
         sf=await pg.evaluate("[...document.querySelectorAll('.rb-sf b')].map(b=>b.textContent)")
         v=await pg.evaluate("STATIQ_VERSION")
-        check('Schriftfeld: Position, Datum, Version', len(sf)==3 and sf[0].startswith('Einfeldträger') and sf[2]==f'calc v{v}' and sf[1].count('.')==2, sf)
+        check('Schriftfeld: Position, Datum, Version', len(sf)==3 and sf[0].startswith('Einfeldträger') and sf[2]==f'Schnittkräfte v{v}' and sf[1].count('.')==2, sf)
         rw=await pg.evaluate("(()=>{ const s=document.querySelector('.rb-grid .steps'); if(!s) return null; const b=[...s.querySelectorAll('b')].map(x=>x.textContent); return [s.querySelectorAll('.st').length, b, getComputedStyle(s.querySelector('b')).borderBottomStyle]; })()")
         check('Rechenweg im Bericht (6 Schritte), B_V = 17,50 kN, doppelt unterstrichen', rw and rw[0]==6 and '17,50 kN' in rw[1] and rw[2]=='double', rw)
         t=await pg.evaluate("document.querySelector('.rb').innerText")

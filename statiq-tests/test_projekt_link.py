@@ -34,7 +34,7 @@ async def main():
         await pg.goto(u2+'index.html'); await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(300)
         await pg.evaluate("document.querySelector('#saved-card').click()"); await pg.wait_for_timeout(700)
         msg=await pg.evaluate("(document.getElementById('proj-missing')||{}).textContent||''")
-        check('Hinweis auf Englisch', msg.startswith('“My projects”'), msg[:60])
+        check('Hinweis auf Englisch', msg.startswith('“Projects”'), msg[:60])
         check('keine Skriptfehler', not errs, errs[:2])
         await br.close()
     s1.shutdown(); s2.shutdown(); shutil.rmtree(tmp, ignore_errors=True)

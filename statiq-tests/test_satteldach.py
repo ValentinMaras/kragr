@@ -4,6 +4,7 @@
 #   M(x = 2,4) = V·2,4 − H·(4+0,96) − q·2,4²/2 = −12,13 kNm, Riegelanfang N = −(H·cos α + V·sin α), Q = V·cos α − H·sin α (tan α = 0,4).
 # Einzellast 20 kN im First: H = 10·5/6 = 8,333 kN. Wind rechtwinklig auf die linke Dachfläche (q = 1 kN/m, Länge √29):
 #   Resultierende waagerecht q·f = 2 kN, lotrecht q·5 = 5 kN. Dazu Skizze, Knoten (First = eigener Knoten), Speichern, Bericht, Übergabe.
+# Stufen (calc v0.11.5): Test öffnet alle Stufen und Ergebnis-Karten (Standardzustand prüft test_stufen.py)
 import os, sys, asyncio, math, json
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
 try:
@@ -26,7 +27,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':1280,'height':900}); pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
         await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(400)
         r=await pg.evaluate("[getComputedStyle(document.getElementById('gable-row')).display, document.getElementById('btn-roof-flat').classList.contains('active'), document.querySelectorAll('#frame-svg .k-raf').length]")
         check('Voreinstellung: gerader Riegel, Felder f und xF verborgen', r==['none',True,0], r)
@@ -43,7 +44,7 @@ async def main():
         check('First links: N32 = −H·cos α = −19,34, Q32 = −H·sin α = −7,74 kN; rechts symmetrisch', near(end(K,3,2)['N'],-H*ca) and near(end(K,3,2)['Q'],-H*sa) and near(end(K,3,4)['N'],-H*ca) and near(end(K,3,4)['Q'],H*sa), (end(K,3,2), end(K,3,4)))
         m=await pg.evaluate("(()=>{ const f=lastCalc.frame.plot.fine.rafter; let k=0; f.t.forEach((t,i)=>{ if(Math.abs(t-0.24)<Math.abs(f.t[k]-0.24)) k=i; }); return [f.t[k], f.M[k]]; })()")
         check('Riegelmoment bei x = 2,4 m: V·2,4 − H·4,96 − q·2,4²/2 = −12,13 kNm (Hand)', near(m[0],0.24,1e-6) and near(m[1],120-H*4.96-28.8), m)
-        t=await pg.evaluate("document.querySelector('#frame-results .k-knoten').textContent")   # Karte ist mit k5 zugeklappt
+        t=await pg.evaluate("document.querySelector('#frame-results .k-knoten').textContent")   # k5: Karte zugeklappt
         check('Knotenkarte: „First (mit Gelenk)“, Stäbe „Riegel links“ und „Riegel rechts“', 'First (mit Gelenk)' in t and 'Stab 2–3 · Riegel links' in t and 'Stab 3–4 · Riegel rechts' in t, t[:300])
         r=await pg.evaluate("[document.querySelectorAll('#frame-svg .k-knr').length, document.querySelectorAll('#frame-svg .k-faser polyline').length, [...document.querySelectorAll('#frame-svg text')].some(e=>e.textContent==='f=2m')]")
         check('Skizze: fünf Knotennummern, Faser als Polygonzug, Stichmaß f = 2 m', r==[5,1,True], r)

@@ -78,7 +78,7 @@
   @media (max-width:560px){ .app-header .header-links { gap:12px; } .header-links .version { display:none; } }
 </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kragr·ref — Nachschlagewerk</title>
+  <title>Wissen — kragr</title>
   <meta name="description" content="Nachschlagewerk für Studierende im Bauingenieurwesen — Baustoffkennwerte, Beiwerte und Nachweise nach Eurocode." />
     <link href="fonts/fonts.css" rel="stylesheet" />
 <link rel="manifest" href="manifest.json" />
@@ -438,8 +438,32 @@
     .k-hdr .hdr-tools { margin-left:2px; }
   }
   @media (max-width:370px) { .k-hdr .header-links > a, .k-hdr .header-links > .module-name { padding:0 5px; } .k-hdr .theme-btn { width:30px; } .k-hdr .logo { font-size:22px; } }
+  /* Modulnamen ausgeschrieben (Schnittkräfte · Bemessung · Wissen): am Handy eigene Zeile unter Logo und Werkzeugen, drei gleich breite Reiter */
+  @media (max-width:760px) {
+    .app-header.k-hdr { flex-wrap:wrap; row-gap:0; padding-bottom:0 !important; }
+    .k-hdr .hdr-tools { margin-left:auto; }
+    .k-hdr .header-links { order:3; flex:1 1 100%; margin:4px calc(-1 * var(--k-gut)) 0; padding:0 calc(var(--k-gut) - 4px); border-top:1px solid #ececef; }
+    .k-hdr .header-links > a, .k-hdr .header-links > .module-name { flex:1 1 auto; min-width:0; justify-content:center; min-height:42px; padding:0 4px !important; font-size:14px; white-space:nowrap; }
+    .k-hdr .header-links > .module-name { box-shadow:inset 0 -2.5px 0 #111114; }
+  }
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
+<script data-mod>
+// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
+// data-mod="calc|size|ref|proj" bekommen ihn als Text.
+(function(){
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
+    try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
+  window.KMOD=K; window.kmodLang=lang;
+  window.kmod=function(m, L){ var d=K[L||lang()]||K.de; return d[m] || m; };
+  window.kmodApply=function(){ if(typeof document==='undefined') return; document.querySelectorAll('[data-mod]').forEach(function(e){ var v=window.kmod(e.getAttribute('data-mod')); if(e.textContent!==v) e.textContent=v; });
+    var pg=document.documentElement.getAttribute('data-kpage'); if(pg) document.title=window.kmod(pg)+' — kragr'; };
+  if(typeof document!=='undefined' && document.addEventListener) document.addEventListener('DOMContentLoaded', window.kmodApply);
+})();
+</script>
 <style data-k5>
   /* kragr-Design 5 (Oktober 2026): ein Aufbau für alle Seiten. Identisch in calc, size, ref, projekt und rechtliches.
      Weich und plastisch: hellgrauer Seitengrund, weiße Karten mit sanftem Schatten, Glas-Kopfzeile mit Burgermenü,
@@ -765,13 +789,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Schnittgrößen',size:'Bemessung',ref:'Nachschlagewerk',proj:'Meine Projekte',projS:'Positionen aus calc und size',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Internal forces',size:'Design & sizing',ref:'Reference',proj:'My projects',projS:'Items from calc and size',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Efforts internes',size:'Dimensionnement',ref:'Référence',proj:'Mes projets',projS:'Éléments de calc et size',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Esfuerzos internos',size:'Dimensionado',ref:'Referencia',proj:'Mis proyectos',projS:'Elementos de calc y size',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -872,7 +896,7 @@ window.kragrK5Page = function(K){
     D.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); } });
     labelBurger();
   }
-  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?PAGE:'');
+  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : PAGE):'');
     var tx=t('menu'); if(cur.textContent!==tx) cur.textContent=tx; burger.setAttribute('aria-label', t('open')+(m?' ('+m+')':'')); }
   function themeNow(){ return H.dataset.theme || (function(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } })(); }
   function setTheme(v){ var n=0; while(themeNow()!==v && n++<3 && window.mulyTheme) window.mulyTheme(); if(!window.mulyTheme){ try{ localStorage.setItem('muly-theme',v); }catch(e){} } }
@@ -884,13 +908,13 @@ window.kragrK5Page = function(K){
     function I(){ return ' style="--i:'+(i++)+'"'; }
     h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('mods'))+'</div>';
-    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+m[0]+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
+    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+esc(typeof window.kmod==='function' ? window.kmod(m[0], lang()) : m[0])+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
     h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+I()+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b><span>'+esc(t('projS'))+'</span></span><span class="k5-badge"></span></a>';
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
     if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
     if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
-    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?'·'+PAGE:'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
+    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
     menu.querySelector('.k5-x').onclick=closeMenu;
     var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
@@ -976,19 +1000,19 @@ window.kragrK5Page = function(K){
 <header class="app-header glass k-hdr">
   <a class="logo" href="index.html" data-i18n-title="home" title="Zur Startseite">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <nav class="header-links" aria-label="Module">
-    <a href="calc.html">calc</a>
-    <a href="size.html">size</a>
-    <a href="#/" class="module-name">ref</a>
+    <a href="calc.html" data-mod="calc">Schnittkräfte</a>
+    <a href="size.html" data-mod="size">Bemessung</a>
+    <a href="#/" class="module-name" data-mod="ref">Wissen</a>
   </nav>
   <div class="hdr-tools">
-    <a class="proj-btn proj-go" href="projekt.html"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span></a>
+    <a class="proj-btn proj-go" href="projekt.html"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span></a>
     <span class="version" id="ref-version"></span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="try{localStorage.setItem('statiq-lang',this.value)}catch(e){} location.reload()"><option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
 <script data-frame>
-// „Meine Projekte“ in der Kopfzeile (ref, rechtliches): Beschriftung in der gewählten Sprache
-(function(){ var T={de:'Meine Projekte',en:'My projects',fr:'Mes projets',es:'Mis proyectos'}, l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
+// „Projekte“ in der Kopfzeile (ref, rechtliches): Beschriftung in der gewählten Sprache
+(function(){ var T={de:'Projekte',en:'Projects',fr:'Projets',es:'Proyectos'}, l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
   document.querySelectorAll('.proj-go').forEach(function(a){ var t=T[l]||T.de; var s=a.querySelector('.pb-tx'); if(s) s.textContent=t; a.setAttribute('aria-label', t); a.title=t; }); })();
 </script>
 
@@ -5657,7 +5681,7 @@ function textTable(cols, rows){
     <tbody>${rows.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')}</tbody></table></div>`
     + (cols.length>=5 && !wrap ? '<div class="table-hint">waagerecht scrollbar</div>' : '');
 }
-const sizeSoon = txt => `<span class="applink soon" title="kragr·size ist in Vorbereitung">${txt} — kragr·size folgt</span>`;
+const sizeSoon = txt => `<span class="applink soon" title="kragr · Bemessung ist in Vorbereitung">${txt} — kragr · Bemessung folgt</span>`;
 
 // ── Rechner: Bemessungswerte der Festigkeit f_d = kmod · f_k / γM ──
 // Für Vollholz und BSH. Nicht enthalten: k_h (Höhenfaktor), k_cr (Rissfaktor
@@ -6153,7 +6177,7 @@ const CONTENT = {
         ['k<sub>crit</sub>','Kippen','1,0 / 1,56 − 0,75 λ<sub>rel,m</sub> / 1/λ<sub>rel,m</sub>²'],
         ['k<sub>sys</sub>','Systemfestigkeit (mehrere gleichartige, verbundene Träger)','1,1'],
         ['k<sub>shape</sub>','Torsion','Rechteck min(1 + 0,05 · h/b; 1,3) · Kreis 1,2'],
-        ['k<sub>v</sub>','Ausklinkung am Auflager','siehe kragr·size (Holz › Ausklinkung)'],
+        ['k<sub>v</sub>','Ausklinkung am Auflager','siehe kragr · Bemessung (Holz › Ausklinkung)'],
         ['k<sub>fi</sub>','Brandfall: 20%-Fraktile','VH 1,25 · BSH 1,15 · LVL 1,10'],
       ])}
     </div>
@@ -6293,7 +6317,7 @@ const CONTENT = {
         Die EN 1995-1-1 nennt nur Bereiche (z. B. w<sub>inst</sub> ℓ/300 bis ℓ/500); verbindlich sind in
         Deutschland die Werte des NA. Für untergeordnete Bauteile erlaubt der NA größere Werte.
       </div>
-      <a class="applink" href="calc.html">→ Durchbiegung in kragr·calc berechnen</a>
+      <a class="applink" href="calc.html">→ Durchbiegung in „Schnittkräfte“ berechnen</a>
     </div>
 
     <div class="card">
@@ -6592,7 +6616,7 @@ Object.assign(CONTENT, {
         [tt('Dreigelenkrahmen'),'4','1','0'],
         [tt('Festlager + Loslager + Riegelgelenk'),'3','1',tt('−1 (Mechanismus)')],
       ])}
-      <a class="applink" href="calc.html#frame">→ Rahmen in kragr·calc untersuchen</a>
+      <a class="applink" href="calc.html#frame">→ Rahmen in „Schnittkräfte“ untersuchen</a>
     </div>
   `,
 
@@ -6625,7 +6649,7 @@ Object.assign(CONTENT, {
       ])}
       <div class="info-banner">Das Biegemoment ist dort extremal, wo die Querkraft null ist (oder das Vorzeichen wechselt).
         So findet man das Feldmoment.</div>
-      <a class="applink" href="calc.html#beam">→ Verläufe in kragr·calc ansehen</a>
+      <a class="applink" href="calc.html#beam">→ Verläufe in „Schnittkräfte“ ansehen</a>
     </div>
   `,
 
@@ -6648,7 +6672,7 @@ Object.assign(CONTENT, {
       <div class="info-banner">
         Beispiel: q = 10 kN/m, L = 5 m → A = B = 25 kN, max M = 10·5²/8 = <b>31,25 kNm</b>.
       </div>
-      <a class="applink" href="calc.html#beam">→ Eigene Lastfälle in kragr·calc</a>
+      <a class="applink" href="calc.html#beam">→ Eigene Lastfälle in „Schnittkräfte“</a>
     </div>
   `,
 
@@ -6666,7 +6690,7 @@ Object.assign(CONTENT, {
         [tt('Dreieckslast (q an der Einspannung, 0 am Ende)'),'qL/2','−qL²/6','qL⁴/(30EI)','qL³/(24EI)'],
       ])}
       <div class="legend">M_A als Schnittmoment an der Einspannung (Zug oben → negativ).</div>
-      <a class="applink" href="calc.html#cantilever">→ Kragarm in kragr·calc</a>
+      <a class="applink" href="calc.html#cantilever">→ Kragarm in „Schnittkräfte“</a>
     </div>
   `,
 
@@ -6714,7 +6738,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="info-banner">Beispiel Zweifeldträger, q = 10 kN/m, L = 5 m:
         M_B = −0,125·10·25 = <b>−31,25 kNm</b>, B = 1,25·10·5 = <b>62,5 kN</b>.</div>
-      <a class="applink" href="calc.html#cont">→ Beliebige Felder in kragr·calc</a>
+      <a class="applink" href="calc.html#cont">→ Beliebige Felder in „Schnittkräfte“</a>
     </div>
     <div class="card">
       <div class="card-title">Beiwerte für 2 bis 5 gleiche Felder mit Laststellungen</div>
@@ -6962,7 +6986,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="dgr-out"></div>
       <div id="dgr-fig"></div>
-      <a class="applink" href="calc.html#frame">→ Rahmen mit beliebigen Lasten in kragr·calc</a>
+      <a class="applink" href="calc.html#frame">→ Rahmen mit beliebigen Lasten in „Schnittkräfte“</a>
     </div>
   `,
 
@@ -6994,7 +7018,7 @@ Object.assign(CONTENT, {
         ${field(tt('Einzellast F<sub>2</sub> in Feldmitte [kN]'), inp('kgv-F2', 20, 'updateKGV()'))}
       </div>
       <div class="calc-out" id="kgv-out"></div>
-      <a class="applink" href="calc.html#cont">→ Momentenlinie in kragr·calc</a>
+      <a class="applink" href="calc.html#cont">→ Momentenlinie in „Schnittkräfte“</a>
     </div>
   `,
 
@@ -7435,7 +7459,7 @@ Object.assign(CONTENT, {
         ${field(tt('N<sub>Ed</sub> [kN] auf die Länge l'), inp('mwd-N', 300, 'updateMWD()'))}
       </div>
       <div class="calc-out" id="mwd-out"></div>
-      <a class="applink" href="size.html">→ Mit Skizze und Bericht in kragr·size (Mauerwerk → Wand)</a>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Mauerwerk → Wand)</a>
     </div>
   `,
 
@@ -7492,7 +7516,7 @@ Object.assign(CONTENT, {
         ${field('n<sub>Ed,min</sub> [kN/m]', inp('mwk-Nmin', 60, 'updateMWK()'))}
       </div>
       <div class="calc-out" id="mwk-out"></div>
-      <a class="applink" href="size.html">→ Mit Skizze in kragr·size (Mauerwerk → Kellerwand)</a>
+      <a class="applink" href="size.html">→ Mit Skizze in „Bemessung“ (Mauerwerk → Kellerwand)</a>
     </div>
   `,
 
@@ -7587,7 +7611,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="uw-out"></div>
       <div id="uw-fig"></div>
-      <a class="applink" href="size.html">→ U-Wert-Nachweis mit Bericht in kragr·size (Bauphysik)</a>
+      <a class="applink" href="size.html">→ U-Wert-Nachweis mit Bericht in „Bemessung“ (Bauphysik)</a>
     </div>
   `,
 
@@ -7651,7 +7675,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="gl-out"></div>
       <div id="gl-fig"></div>
-      <a class="applink" href="size.html">→ Glaser-Nachweis mit Bericht in kragr·size (Bauphysik)</a>
+      <a class="applink" href="size.html">→ Glaser-Nachweis mit Bericht in „Bemessung“ (Bauphysik)</a>
     </div>
   `,
 
@@ -7730,7 +7754,7 @@ Object.assign(CONTENT, {
         ${flFelder('fl-', 'updateFL()')}
       </div>
       <div class="calc-out" id="fl-out"></div>
-      <a class="applink" href="size.html">→ Nachweis mit Bericht in kragr·size (Bauphysik → Schallschutz, genauer Nachweis)</a>
+      <a class="applink" href="size.html">→ Nachweis mit Bericht in „Bemessung“ (Bauphysik → Schallschutz, genauer Nachweis)</a>
     </div>
   `,
 
@@ -8393,7 +8417,7 @@ Object.assign(CONTENT, {
         ${field(tt('Schichtdicke Δz [m]'), inp('st2-dz', 0.5, 'updateSetz()'))}
       </div>
       <div class="calc-out" id="st2-out"></div>
-      <div class="legend">Für geschichteten Boden mit mehreren Steifemoduln: kragr·size › Grundbau › Setzung.</div>
+      <div class="legend">Für geschichteten Boden mit mehreren Steifemoduln: kragr · Bemessung › Grundbau › Setzung.</div>
     </div>
   `,
 
@@ -8735,7 +8759,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="info-banner">Beispiel: Schütz 1 × 2 m (l = 2 m in Neigungsrichtung), α = 60°, Oberkante bei y = 1,0 m.<br>
         y<sub>s</sub> = 2,0 m, h<sub>s</sub> = 2,0 · sin 60° = 1,73 m → F = 10 · 1,73 · 2,0 = <b>34,6 kN</b> · y<sub>D</sub> = 2,0 + (1·2³/12)/(2,0·2,0) = <b>2,17 m</b></div>
-      <a class="applink" href="size.html">→ Wasserdruck mit Gegendruck in kragr·size (Wasserbau)</a>
+      <a class="applink" href="size.html">→ Wasserdruck mit Gegendruck in „Bemessung“ (Wasserbau)</a>
     </div>
   `,
 
@@ -8770,7 +8794,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="info-banner">Beispiel: Ponton 10 × 6 m, t = 0,80 m, G in 1,20 m Höhe.<br>
         V = 48 m³ · I = 10·6³/12 = 180 m⁴ · I/V = 3,75 m · e = 1,20 − 0,40 = 0,80 m → h<sub>M</sub> = <b>2,95 m</b> > 0 → stabil</div>
-      <a class="applink" href="#/grundbau/flach/sohldruck">→ Auftrieb bei Bauwerken: Nachweis UPL in kragr·size (Grundbau)</a>
+      <a class="applink" href="#/grundbau/flach/sohldruck">→ Auftrieb bei Bauwerken: Nachweis UPL in „Bemessung“ (Grundbau)</a>
     </div>
   `,
 
@@ -8820,7 +8844,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="calc-out" id="wbr-out"></div>
       <div id="wbr-fig"></div>
-      <a class="applink" href="size.html">→ Mit Energie- und Drucklinie in kragr·size (Wasserbau → Rohr)</a>
+      <a class="applink" href="size.html">→ Mit Energie- und Drucklinie in „Bemessung“ (Wasserbau → Rohr)</a>
     </div>
   `,
 
@@ -8871,7 +8895,7 @@ Object.assign(CONTENT, {
         ${field('k<sub>St</sub> [m<sup>1/3</sup>/s]', inp('wbg-k', 60, 'updateManning()'))}
       </div>
       <div class="calc-out" id="wbg-out"></div>
-      <a class="applink" href="size.html">→ Normalwassertiefe für gegebenes Q in kragr·size (Wasserbau → Gerinne)</a>
+      <a class="applink" href="size.html">→ Normalwassertiefe für gegebenes Q in „Bemessung“ (Wasserbau → Gerinne)</a>
     </div>
   `,
 
@@ -8916,7 +8940,7 @@ Object.assign(CONTENT, {
         ${field(tt('Beiwert μ'), inp('wbw-mu', 0.75, 'updatePoleni()'))}
       </div>
       <div class="calc-out" id="wbw-out"></div>
-      <a class="applink" href="size.html">→ Überfallhöhe für gegebenes Q in kragr·size (Wasserbau → Wehr)</a>
+      <a class="applink" href="size.html">→ Überfallhöhe für gegebenes Q in „Bemessung“ (Wasserbau → Wehr)</a>
     </div>
   `,
 
@@ -9112,7 +9136,7 @@ Object.assign(CONTENT, {
       </div>
       <div class="section-note"><b>Gauß-Verfahren</b> für größere Systeme: Gleichungen so kombinieren, dass
         unterhalb der Diagonale Nullen entstehen (Dreiecksform), dann von unten nach oben rückwärts einsetzen.
-        So löst auch kragr·calc die Steifigkeitsgleichung K·u = F.</div>
+        So löst auch kragr · Schnittkräfte die Steifigkeitsgleichung K·u = F.</div>
       <div class="formula-box">
         Determinante 3×3 (Sarrus):<br>
         det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ − a₁₃a₂₂a₃₁ − a₁₁a₂₃a₃₂ − a₁₂a₂₁a₃₃
@@ -9565,7 +9589,7 @@ Object.assign(CONTENT, {
       ${textTable([tt('Klasse'),'f<sub>ck</sub>','f<sub>cm</sub>','f<sub>ctm</sub>','f<sub>ctk;0,05</sub>','E<sub>cm</sub> [GPa]','ε<sub>c2</sub> [‰]','ε<sub>cu2</sub> [‰]','n'], HOCHFEST.map(([k,fck,cube,fcm,fctm,fctk,Ecm])=>{
         return [k, fck, fcm, deNum(fctm,1), deNum(fctk,1), Ecm, deNum(2+0.085*(fck-50)**0.53,2), deNum(2.6+35*((90-fck)/100)**4,2), deNum(1.4+23.4*((90-fck)/100)**4,2)]; }))}
       <div class="legend">Ab C55/67: f<sub>ctm</sub> = 2,12 · ln(1 + f<sub>cm</sub>/10) · ε<sub>c2</sub> = 2,0 + 0,085 · (f<sub>ck</sub> − 50)<sup>0,53</sup> · ε<sub>cu2</sub> = 2,6 + 35 · ((90 − f<sub>ck</sub>)/100)⁴ · n = 1,4 + 23,4 · ((90 − f<sub>ck</sub>)/100)⁴.
-        Bis C50/60: ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Die Rechner in kragr·ref gelten bis C50/60.</div>
+        Bis C50/60: ε<sub>c2</sub> = 2,0 ‰, ε<sub>cu2</sub> = 3,5 ‰, n = 2. Die Rechner in „Wissen“ gelten bis C50/60.</div>
     </div>
   `,
 
@@ -10162,10 +10186,10 @@ function render(){
 }
 function pageTitle(){
   const {fach,kapitel,thema} = navState;
-  if(thema) return FAECHER[fach].kapitel[kapitel].themen[thema].title + tt(' — kragr·ref');
-  if(kapitel) return FAECHER[fach].kapitel[kapitel].title + tt(' — kragr·ref');
-  if(fach) return FAECHER[fach].title + tt(' — kragr·ref');
-  return tt('kragr·ref — Nachschlagewerk');
+  if(thema) return FAECHER[fach].kapitel[kapitel].themen[thema].title + ' — kragr';
+  if(kapitel) return FAECHER[fach].kapitel[kapitel].title + ' — kragr';
+  if(fach) return FAECHER[fach].title + ' — kragr';
+  return kmod('ref')+' — kragr';
 }
 
 function renderBreadcrumb(){
@@ -10185,7 +10209,7 @@ function renderBreadcrumb(){
   bc.innerHTML = html;
 }
 
-const footnote = extra => _L`<div class="footnote">kragr·ref v${REF_VERSION}${extra ? ' — '+extra : ''}</div>`.replace('</div>', ` · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('ref',REF_VERSION,location.hash)">${tt('Fehler gefunden? Bitte melden.')}</a></div>`);
+const footnote = extra => _L`<div class="footnote">kragr · ${kmod('ref')} v${REF_VERSION}${extra ? ' — '+extra : ''}</div>`.replace('</div>', ` · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('ref',REF_VERSION,location.hash)">${tt('Fehler gefunden? Bitte melden.')}</a></div>`);
 
 // ── Start: Fächer + Suche ──────────────────────────
 function viewFaecher(){

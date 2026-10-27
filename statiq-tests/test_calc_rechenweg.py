@@ -1,4 +1,5 @@
 # statiq·calc v0.8.13: Rechenweg (Schritt für Schritt) — Handrechnung im Rechenweg gegen den FE-Löser und gegen Tabellenwerte. Ohne Playwright: SKIP.
+# Stufen (calc v0.11.5): Test öffnet alle Stufen und Ergebnis-Karten (Standardzustand prüft test_stufen.py)
 import os, sys, asyncio, math, json
 HERE=os.path.dirname(os.path.abspath(__file__)); HTML='file://'+os.path.abspath(os.path.join(HERE,'..','calc.html'))
 try:
@@ -23,7 +24,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(viewport={'width':1280,'height':900}); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(HTML); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}))"); await pg.reload(); await pg.wait_for_timeout(400)
+        await pg.goto(HTML); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(400)
         check('Rechenweg-Karte sichtbar (Einfeldträger)', await pg.is_visible('#rw-beam') and 'Schritt für Schritt' in await pg.inner_text('#rw-beam'))
         # ── Einfeldträger und Kragarm: Gleichgewicht von Hand = FE-Löser ──
         for sys,tab,calc in [('beam','beam','calculateBeam'),('cant','cantilever','calculateCantilever')]:

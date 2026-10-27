@@ -2,7 +2,7 @@
 // <script> von calc.html mit einem DOM-Stub aus und fängt die Diagrammdaten ab.
 const fs=require('fs'), vm=require('vm');
 const src=fs.readFileSync(process.argv[2],'utf8');
-const code=src.match(/<script>([\s\S]*?)<\/script>/)[1];   // nur das Hauptskript (Zusatzblöcke wie data-lf folgen danach)
+const code=src.match(/<script>([\s\S]*?)<\/script>/)[1];   // nur das Hauptskript (seit calc v0.11.4 folgt <script data-lf>)
 function run(cfg){
   const els={};
   const mk=id=>({id,value:'',textContent:'',innerHTML:'',style:{},dataset:{},classList:{add(){},remove(){},contains(){return false},toggle(){}},

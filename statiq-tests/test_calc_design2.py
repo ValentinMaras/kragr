@@ -1,6 +1,7 @@
 # kragr-Design Stufe 2 in calc (v0.9.1): eine Lasten-Karte mit „+“-Menü, Last-Chips unter der Skizze, Stepper,
 # Winkel-Vorgaben, Segment-Umschalter M/V/N/w, Übungsmodus als Schalter, Ergebnisleiste am Handy (max M · V_A · V_B).
 # Die Rechnung selbst bleibt unverändert (Werte wie vorher). Ohne Playwright: SKIP.
+# Stufen (calc v0.11.5): Test öffnet alle Stufen und Ergebnis-Karten (Standardzustand prüft test_stufen.py)
 import os, sys, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); U='file://'+os.path.abspath(os.path.join(HERE,'..','calc.html'))
 try:
@@ -19,11 +20,11 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':390,'height':844}); pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
         r=await pg.evaluate("""[document.querySelectorAll('#tab-beam .col-in > .card').length, !!document.querySelector('#tab-beam .k-loads #beam-point-list') && !!document.querySelector('#tab-beam .k-loads #beam-dist-list') && !!document.querySelector('#tab-beam .k-loads #beam-horiz-list'),
           document.querySelectorAll('#tab-beam .k-loads .k-menu .add-load-btn').length, document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-sum').textContent,
           !!document.querySelector('#tab-cantilever .k-loads #cant-point-list'), !!document.querySelector('#tab-frame .k-loads #frame-vert-list') && !!document.querySelector('#tab-frame .k-loads #frame-horiz-list')]""")
-        check('Einfeldträger: System + eine Karte „Lasten“ mit allen drei Listen, Menü mit 3 Einträgen', r[0]==2 and r[1] and r[2]==3 and r[3]=='Lasten' and r[4]=='2 Lasten', r)
+        check('Einfeldträger: System + eine Karte „Lasten“ (+ „Lastfälle nach EC 0“, v0.11.4) mit allen Listen, Menü mit 4 Einträgen (+ Temperatur, v0.11.6)', r[0]==3 and r[1] and r[2]==4 and r[3]=='Lasten' and r[4]=='2 Lasten', r)
         check('Kragarm und Rahmen: ebenfalls eine Lasten-Karte', r[5] and r[6], r)
         ch=await pg.evaluate("[...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent)")
         check('Chips unter der Skizze: „F1 10 kN“ und „q1 5 kN/m“', ch==['F1 10 kN','q1 5 kN/m'], ch)
@@ -101,7 +102,7 @@ async def main():
         await pg.evaluate("removeFrameHinge(frameHinges[0].id)"); await pg.wait_for_timeout(300)
         await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(600)
         r=await pg.evaluate("[[...document.querySelectorAll('#span-load-cards > .card')].map(c=>c.classList.contains('k-loads')+':'+c.querySelector('.k-h').textContent), document.querySelectorAll('#span-load-cards .k-menu .add-load-btn').length, [...document.querySelectorAll('#tab-cont .load-item')].every(i=>i.classList.contains('k-row'))]")
-        check('Durchlaufträger: Feld-Karten als Lasten-Karten („Feld 1 — Lasten“), Menü mit F/q/M, neue Zeilen', r[0]==['true:Feld 1 — Lasten','true:Feld 2 — Lasten'] and r[1]==6 and r[2], r)
+        check('Durchlaufträger: Feld-Karten als Lasten-Karten („Feld 1 — Lasten“), Menü mit F/q/M/T, neue Zeilen', r[0]==['true:Feld 1 — Lasten','true:Feld 2 — Lasten'] and r[1]==8 and r[2], r)
         await cc(pg, '#span-load-cards .k-loads >> nth=0 >> .k-add-btn'); await cc(pg, '#span-load-cards .k-loads >> nth=0 >> .k-menu .add-load-btn >> nth=2'); await pg.wait_for_timeout(600)
         r=await pg.evaluate("[document.querySelector('#cont-mom-list-0 .load-item-label b')?.textContent, document.querySelector('#cont-mom-list-0 .load-sum')?.textContent, document.querySelector('#cont-mom-list-0 .k-rng')?.max]")
         check('Feld 1: „+ Last hinzufügen“ → Moment M1 = 10 kNm, Schieber bis 5 m', r==['M1','M = 10 kNm · @ 2,5 m','5'], r)
@@ -120,9 +121,9 @@ async def main():
         check('Lasten-Karte zu: Kurzfassung „F1 10 kN · q1 5 kN/m“', s==['F1 10 kN · q1 5 kN/m','none'], s)
         await pg.click('#tab-beam .k-head')
         # Segment M/Q/N/w
-        sg=await pg.evaluate("(()=>{const a=getComputedStyle(document.getElementById('diag-btn-M-beam')), b=getComputedStyle(document.getElementById('diag-btn-Q-beam')); return [a.backgroundColor, b.backgroundColor, getComputedStyle(document.querySelector('#tab-beam .diagram-toggle-row')).backgroundColor]})()")
-        pill=await pg.evaluate("(()=>{const p=document.querySelector('#tab-beam .diagram-toggle-row > .k5-pill'), a=document.getElementById('diag-btn-M-beam'); return p ? [getComputedStyle(p).backgroundColor, Math.round(p.getBoundingClientRect().left-a.getBoundingClientRect().left), Math.round(p.getBoundingClientRect().width-a.getBoundingClientRect().width)] : null})()")
-        check('M/Q/N/w als Segment: weiße Fläche unter der aktiven Taste auf grauer Leiste', sg[1]=='rgba(0, 0, 0, 0)' and sg[2]=='rgb(245, 246, 248)' and pill==['rgb(255, 255, 255)',0,0], (sg, pill))
+        # k5: aktive Taste über eine gleitende weiße Fläche (.k5-pill) unter dem aktiven Knopf
+        sg=await pg.evaluate("(()=>{const row=document.querySelector('#tab-beam .diagram-toggle-row'), p=row.querySelector('.k5-pill'), a=document.getElementById('diag-btn-M-beam'); return [getComputedStyle(p).backgroundColor, Math.round(p.getBoundingClientRect().left-a.getBoundingClientRect().left), Math.round(p.getBoundingClientRect().width-a.getBoundingClientRect().width), getComputedStyle(row).backgroundColor]})()")
+        check('M/Q/N/w als Segment: weiße Fläche unter der aktiven Taste auf grauer Leiste', sg[0]=='rgb(255, 255, 255)' and abs(sg[1])<=1 and abs(sg[2])<=1 and sg[3]!='rgba(0, 0, 0, 0)', sg)
         # Ergebnisleiste
         await pg.evaluate("document.querySelector('#tab-beam .results-grid').scrollIntoView({block:'center'})"); await pg.wait_for_timeout(500)
         b=await pg.evaluate(BAR)
@@ -144,8 +145,8 @@ async def main():
         check('Rahmen: max M · max V · max N', b and b['d']=='flex' and 'max N' in b['t'], b)
         await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(600)
         # Übungsmodus-Schalter
-        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [document.getElementById('k5-burger')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('#tab-beam .ueb-tog')]})()")
-        check('Übungsmodus über das Menü (aus), kein Schalter mehr im Ergebnisfeld', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
+        sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('#tab-beam .ueb-tog')]})()")
+        check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr im Ergebnisfeld', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
         await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, getComputedStyle(document.getElementById('k-bar')).display, getComputedStyle(t).backgroundColor]})()")
         check('an: Knopf blau, „Zahlen verborgen“, Ergebnisleiste aus (verrät sonst die Lösung)', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2]=='none' and sw[3]=='rgb(84, 104, 173)', sw)

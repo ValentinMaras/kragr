@@ -73,8 +73,8 @@ async def main():
         await pg.evaluate("setCalcLang('de')")
         # keine Seitenleiste mehr: Module stehen oben, Sprache als Auswahl im Kopf
         check('Kein ☰-Menü und keine Seitenleiste', await pg.evaluate("!document.getElementById('nav-drawer') && !document.querySelector('.menu-btn')"))
-        await pg.click('#k5-burger'); await pg.click('#k5-lang button[data-v=fr]'); await pg.wait_for_timeout(150); await pg.keyboard.press('Escape')
-        check('Sprachauswahl im Menü: FR', await pg.evaluate("calcLang==='fr' && localStorage.getItem('statiq-lang')==='fr' && document.getElementById('lang-sel').value==='fr'"))
+        await pg.click('#k5-burger'); await pg.click('#k5-lang button[data-v=fr]'); await pg.wait_for_timeout(250); await pg.keyboard.press('Escape'); await pg.wait_for_timeout(150)
+        check('Sprachauswahl im Kopf: FR', await pg.evaluate("calcLang==='fr' && localStorage.getItem('statiq-lang')==='fr' && document.getElementById('lang-sel').value==='fr'"))
         await pg.evaluate("setCalcLang('de')")
         check('Auswahl folgt der Sprache', await pg.evaluate("document.getElementById('lang-sel').value")=='de')
         # Handy

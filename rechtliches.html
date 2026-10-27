@@ -138,8 +138,32 @@
     .k-hdr .hdr-tools { margin-left:2px; }
   }
   @media (max-width:370px) { .k-hdr .header-links > a, .k-hdr .header-links > .module-name { padding:0 5px; } .k-hdr .theme-btn { width:30px; } .k-hdr .logo { font-size:22px; } }
+  /* Modulnamen ausgeschrieben (Schnittkräfte · Bemessung · Wissen): am Handy eigene Zeile unter Logo und Werkzeugen, drei gleich breite Reiter */
+  @media (max-width:760px) {
+    .app-header.k-hdr { flex-wrap:wrap; row-gap:0; padding-bottom:0 !important; }
+    .k-hdr .hdr-tools { margin-left:auto; }
+    .k-hdr .header-links { order:3; flex:1 1 100%; margin:4px calc(-1 * var(--k-gut)) 0; padding:0 calc(var(--k-gut) - 4px); border-top:1px solid #ececef; }
+    .k-hdr .header-links > a, .k-hdr .header-links > .module-name { flex:1 1 auto; min-width:0; justify-content:center; min-height:42px; padding:0 4px !important; font-size:14px; white-space:nowrap; }
+    .k-hdr .header-links > .module-name { box-shadow:inset 0 -2.5px 0 #111114; }
+  }
   @media print { .k-hdr .hdr-tools { display:none !important; } }
 </style>
+<script data-mod>
+// Modulnamen (seit 26.10.2026): sichtbar „Schnittkräfte · Bemessung · Wissen · Projekte“ statt calc · size · ref · Projekte.
+// Dateinamen (calc.html …) und gespeicherte Daten bleiben. kmod('calc') liefert den Namen in der Sprache der Seite; Elemente mit
+// data-mod="calc|size|ref|proj" bekommen ihn als Text.
+(function(){
+  var K={ de:{calc:'Schnittkräfte', size:'Bemessung', ref:'Wissen', proj:'Projekte'}, en:{calc:'Internal forces', size:'Design', ref:'Reference', proj:'Projects'},
+          fr:{calc:'Efforts', size:'Dimensionnement', ref:'Référence', proj:'Projets'}, es:{calc:'Esfuerzos', size:'Dimensionado', ref:'Referencia', proj:'Proyectos'} };
+  function lang(){ try{ if(typeof calcLang!=='undefined' && calcLang) return calcLang; }catch(e){} try{ if(typeof LANG!=='undefined' && LANG) return LANG; }catch(e){}
+    try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } }
+  window.KMOD=K; window.kmodLang=lang;
+  window.kmod=function(m, L){ var d=K[L||lang()]||K.de; return d[m] || m; };
+  window.kmodApply=function(){ if(typeof document==='undefined') return; document.querySelectorAll('[data-mod]').forEach(function(e){ var v=window.kmod(e.getAttribute('data-mod')); if(e.textContent!==v) e.textContent=v; });
+    var pg=document.documentElement.getAttribute('data-kpage'); if(pg) document.title=window.kmod(pg)+' — kragr'; };
+  if(typeof document!=='undefined' && document.addEventListener) document.addEventListener('DOMContentLoaded', window.kmodApply);
+})();
+</script>
 <style>#content p, #content li { max-width:75ch; }   /* Lesbarkeit im breiten Rahmen */</style>
 <style data-k5>
   /* kragr-Design 5 (Oktober 2026): ein Aufbau für alle Seiten. Identisch in calc, size, ref, projekt und rechtliches.
@@ -466,13 +490,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Schnittgrößen',size:'Bemessung',ref:'Nachschlagewerk',proj:'Meine Projekte',projS:'Positionen aus calc und size',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Projekte',projS:'Schnittkräfte + Bemessung',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Internal forces',size:'Design & sizing',ref:'Reference',proj:'My projects',projS:'Items from calc and size',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Projects',projS:'Internal forces + design',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Efforts internes',size:'Dimensionnement',ref:'Référence',proj:'Mes projets',projS:'Éléments de calc et size',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Projets',projS:'Efforts + dimensionnement',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Esfuerzos internos',size:'Dimensionado',ref:'Referencia',proj:'Mis proyectos',projS:'Elementos de calc y size',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Proyectos',projS:'Esfuerzos + dimensionado',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -573,7 +597,7 @@ window.kragrK5Page = function(K){
     D.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); } });
     labelBurger();
   }
-  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?PAGE:'');
+  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : PAGE):'');
     var tx=t('menu'); if(cur.textContent!==tx) cur.textContent=tx; burger.setAttribute('aria-label', t('open')+(m?' ('+m+')':'')); }
   function themeNow(){ return H.dataset.theme || (function(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } })(); }
   function setTheme(v){ var n=0; while(themeNow()!==v && n++<3 && window.mulyTheme) window.mulyTheme(); if(!window.mulyTheme){ try{ localStorage.setItem('muly-theme',v); }catch(e){} } }
@@ -585,13 +609,13 @@ window.kragrK5Page = function(K){
     function I(){ return ' style="--i:'+(i++)+'"'; }
     h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('mods'))+'</div>';
-    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+m[0]+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
+    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+esc(typeof window.kmod==='function' ? window.kmod(m[0], lang()) : m[0])+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
     h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+I()+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b><span>'+esc(t('projS'))+'</span></span><span class="k5-badge"></span></a>';
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
     if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
     if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
-    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?'·'+PAGE:'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
+    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
     menu.querySelector('.k5-x').onclick=closeMenu;
     var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
@@ -676,18 +700,18 @@ window.kragrK5Page = function(K){
 <header class="app-header glass k-hdr">
   <a class="logo" href="index.html">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></a>
   <nav class="header-links" aria-label="Module">
-    <a href="calc.html">calc</a><a href="size.html">size</a><a href="ref.html">ref</a>
+    <a href="calc.html" data-mod="calc">Schnittkräfte</a><a href="size.html" data-mod="size">Bemessung</a><a href="ref.html" data-mod="ref">Wissen</a>
   </nav>
   <div class="hdr-tools">
-    <a class="proj-btn proj-go" href="projekt.html"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Meine Projekte</span></a>
+    <a class="proj-btn proj-go" href="projekt.html"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span></a>
     <select class="lang-sel" id="lang" onchange="setLang(this.value)" aria-label="Sprache">
       <option value="de">DE</option><option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option>
     </select>
   </div>
 </header>
 <script data-frame>
-// „Meine Projekte“ in der Kopfzeile (ref, rechtliches): Beschriftung in der gewählten Sprache
-(function(){ var T={de:'Meine Projekte',en:'My projects',fr:'Mes projets',es:'Mis proyectos'}, l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
+// „Projekte“ in der Kopfzeile (ref, rechtliches): Beschriftung in der gewählten Sprache
+(function(){ var T={de:'Projekte',en:'Projects',fr:'Projets',es:'Proyectos'}, l='de'; try{ l=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
   document.querySelectorAll('.proj-go').forEach(function(a){ var t=T[l]||T.de; var s=a.querySelector('.pb-tx'); if(s) s.textContent=t; a.setAttribute('aria-label', t); a.title=t; }); })();
 </script>
 
@@ -724,7 +748,7 @@ de:{ title:'Impressum, Datenschutz und Hinweise',
   ds:`<h2 id="datenschutz">Datenschutz</h2>
     <h3>Verantwortlicher</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, E-Mail: ${ph('mail')}</p>
     <h3>Keine Konten, kein Tracking</h3><p>kragr verlangt keine Anmeldung, setzt keine Cookies zu Werbe- oder Analysezwecken und bindet keine Inhalte Dritter ein. Schriften werden vom eigenen Server geladen.</p>
-    <h3>Speicherung im Browser</h3><p>Gespeicherte Berechnungen, Positionen, Projekte und die Spracheinstellung legt kragr im lokalen Speicher deines Browsers ab (localStorage). Diese Daten verlassen dein Gerät nicht und werden nicht an den Anbieter übertragen. Du kannst sie jederzeit über die Browsereinstellungen oder in „Meine Projekte“ löschen.</p>
+    <h3>Speicherung im Browser</h3><p>Gespeicherte Berechnungen, Positionen, Projekte und die Spracheinstellung legt kragr im lokalen Speicher deines Browsers ab (localStorage). Diese Daten verlassen dein Gerät nicht und werden nicht an den Anbieter übertragen. Du kannst sie jederzeit über die Browsereinstellungen oder in „Projekte“ löschen.</p>
     <h3>Offline-Nutzung und Installation</h3><p>Damit kragr ohne Internet funktioniert und sich als App installieren lässt, legt dein Browser eine Kopie der Programmdateien (Seiten, Schriften, Symbole) auf deinem Gerät ab (Service Worker). Dabei werden keine personenbezogenen Daten gespeichert oder übertragen. Die Kopie verschwindet, wenn du die Websitedaten im Browser löschst oder die App deinstallierst.</p>
     <h3>Server-Logdateien</h3><p>Beim Aufruf der Seiten verarbeitet der Hosting-Anbieter technisch notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browserkennung), um die Seiten auszuliefern und die Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: ${ph('host')}. Dabei können Daten in die USA übermittelt werden. Die Logdateien werden nach den Vorgaben des Anbieters gelöscht.</p>
     <h3>Deine Rechte</h3><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO) sowie das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>`,
@@ -753,7 +777,7 @@ en:{ title:'Legal notice, privacy and disclaimer',
   ds:`<h2 id="datenschutz">Privacy</h2>
     <h3>Controller</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, email: ${ph('mail')}</p>
     <h3>No accounts, no tracking</h3><p>kragr requires no sign-in, sets no advertising or analytics cookies and embeds no third-party content. Fonts are loaded from our own server.</p>
-    <h3>Storage in your browser</h3><p>Saved calculations, positions, projects and the language setting are stored in your browser’s local storage. This data does not leave your device and is not transmitted to the provider. You can delete it at any time in your browser settings or in “My projects”.</p>
+    <h3>Storage in your browser</h3><p>Saved calculations, positions, projects and the language setting are stored in your browser’s local storage. This data does not leave your device and is not transmitted to the provider. You can delete it at any time in your browser settings or in “Projects”.</p>
     <h3>Offline use and installation</h3><p>So that kragr works without internet and can be installed as an app, your browser keeps a copy of the program files (pages, fonts, icons) on your device (service worker). No personal data is stored or transmitted in the process. The copy is removed when you clear the site data in your browser or uninstall the app.</p>
     <h3>Server log files</h3><p>When pages are requested, the hosting provider processes technically necessary data (IP address, date and time, requested file, browser identifier) to deliver the pages and keep them secure. Legal basis: Art. 6(1)(f) GDPR. Hosting provider: ${ph('host')}. Data may be transferred to the USA in the process. Log files are deleted according to the provider’s rules.</p>
     <h3>Your rights</h3><p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a data protection authority.</p>`,
@@ -782,7 +806,7 @@ fr:{ title:'Mentions légales, confidentialité et avertissement',
   ds:`<h2 id="datenschutz">Confidentialité</h2>
     <h3>Responsable du traitement</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, e-mail : ${ph('mail')}</p>
     <h3>Pas de compte, pas de suivi</h3><p>kragr ne demande aucune inscription, ne dépose aucun cookie publicitaire ou d’analyse et n’intègre aucun contenu tiers. Les polices sont chargées depuis notre propre serveur.</p>
-    <h3>Stockage dans le navigateur</h3><p>Les calculs, positions, projets enregistrés et le choix de la langue sont stockés dans le stockage local de votre navigateur. Ces données ne quittent pas votre appareil et ne sont pas transmises au fournisseur. Vous pouvez les supprimer à tout moment dans les réglages du navigateur ou dans « Mes projets ».</p>
+    <h3>Stockage dans le navigateur</h3><p>Les calculs, positions, projets enregistrés et le choix de la langue sont stockés dans le stockage local de votre navigateur. Ces données ne quittent pas votre appareil et ne sont pas transmises au fournisseur. Vous pouvez les supprimer à tout moment dans les réglages du navigateur ou dans « Projets ».</p>
     <h3>Utilisation hors ligne et installation</h3><p>Pour que kragr fonctionne sans internet et puisse être installé comme application, votre navigateur conserve une copie des fichiers du programme (pages, polices, icônes) sur votre appareil (service worker). Aucune donnée personnelle n’est enregistrée ni transmise. La copie disparaît lorsque vous effacez les données du site dans le navigateur ou désinstallez l’application.</p>
     <h3>Journaux du serveur</h3><p>Lors de l’appel des pages, l’hébergeur traite les données techniquement nécessaires (adresse IP, date et heure, fichier demandé, identifiant du navigateur) pour délivrer les pages et assurer leur sécurité. Base juridique : art. 6, par. 1, point f du RGPD. Hébergeur : ${ph('host')}. Des données peuvent alors être transférées aux États-Unis. Les journaux sont supprimés selon les règles de l’hébergeur.</p>
     <h3>Vos droits</h3><p>Vous disposez des droits d’accès, de rectification, d’effacement, de limitation, de portabilité et d’opposition (art. 15 à 21 du RGPD) ainsi que du droit d’introduire une réclamation auprès d’une autorité de contrôle.</p>`,
@@ -811,7 +835,7 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
   ds:`<h2 id="datenschutz">Privacidad</h2>
     <h3>Responsable</h3><p>${ph('name')}, ${ph('street')}, ${ph('city')}, correo: ${ph('mail')}</p>
     <h3>Sin cuentas, sin seguimiento</h3><p>kragr no requiere registro, no instala cookies publicitarias ni analíticas y no integra contenido de terceros. Las fuentes se cargan desde nuestro propio servidor.</p>
-    <h3>Almacenamiento en el navegador</h3><p>Los cálculos, posiciones y proyectos guardados y el idioma elegido se almacenan en el almacenamiento local de tu navegador. Estos datos no salen de tu dispositivo ni se transmiten al proveedor. Puedes borrarlos en cualquier momento en los ajustes del navegador o en «Mis proyectos».</p>
+    <h3>Almacenamiento en el navegador</h3><p>Los cálculos, posiciones y proyectos guardados y el idioma elegido se almacenan en el almacenamiento local de tu navegador. Estos datos no salen de tu dispositivo ni se transmiten al proveedor. Puedes borrarlos en cualquier momento en los ajustes del navegador o en «Proyectos».</p>
     <h3>Uso sin conexión e instalación</h3><p>Para que kragr funcione sin internet y pueda instalarse como app, tu navegador guarda una copia de los archivos del programa (páginas, fuentes, iconos) en tu dispositivo (service worker). No se almacenan ni transmiten datos personales. La copia desaparece al borrar los datos del sitio en el navegador o al desinstalar la app.</p>
     <h3>Registros del servidor</h3><p>Al acceder a las páginas, el proveedor de alojamiento trata datos técnicamente necesarios (dirección IP, fecha y hora, archivo solicitado, identificador del navegador) para entregar las páginas y garantizar su seguridad. Base jurídica: art. 6.1.f RGPD. Proveedor de alojamiento: ${ph('host')}. En este proceso pueden transferirse datos a EE. UU. Los registros se eliminan según las normas del proveedor.</p>
     <h3>Tus derechos</h3><p>Tienes derecho de acceso, rectificación, supresión, limitación, portabilidad y oposición (arts. 15–21 RGPD) y derecho a presentar una reclamación ante una autoridad de protección de datos.</p>`,
@@ -821,7 +845,7 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
 };
 const IDS=['impressum','haftung','normen','datenschutz','lizenzen'];
 function render(l){
-  const t=T[l]||T.de; document.documentElement.lang=l; document.title='kragr — '+t.title;
+  const t=T[l]||T.de; document.documentElement.lang=l; try{ kmodApply(); }catch(e){} document.title='kragr — '+t.title;
   document.getElementById('content').innerHTML = `<h1>${t.title}</h1><p class="lead">${t.lead}</p>
     <nav class="toc">${t.toc.map((x,i)=>`<a href="#${IDS[i]}">${x}</a>`).join('')}</nav>
     <section>${t.imp}</section><section>${t.haft}</section><section>${t.norm}</section><section>${t.ds}</section><section>${t.lic}</section>`;

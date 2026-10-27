@@ -31,7 +31,7 @@ async def main():
             await pg.evaluate(f"importCalc('{keys[k]}')"); await pg.wait_for_timeout(120)
             return await pg.evaluate(SIDE)
         r=await imp('stahl',0)
-        check('Einfeldträger: Seitenansicht aus calc mit 2 Lagern', any('aus calc' in t for t in r['txt']) and r['tri']==2, r['tri'])
+        check('Einfeldträger: Seitenansicht aus calc mit 2 Lagern', any('aus „Schnittkräfte“' in t for t in r['txt']) and r['tri']==2, r['tri'])
         check('Einfeldträger: Lasten q = 5,0 und F = 10,0 aus calc', any(t.startswith('q = 5,0') for t in r['txt']) and any(t=='F = 10,0' for t in r['txt']))
         check('Einfeldträger: max M = 28,1 kNm, Druckgurt oben', '28,1 kNm' in r['txt'] and all(y<80 for y in r['blue']))
         check('Import setzt L_LT = Stützweite (mit Hinweis)', await pg.input_value('#sn-Llt')=='5' and 'Stützweite angenommen' in await pg.inner_text('#ci-msg'))
@@ -65,8 +65,8 @@ async def main():
         check('Holz aus Kragarm: Holzbalken mit Einspannung', r['wood'] and r['hatch']==1 and 'gedrückter Rand' in r['legend'])
         await pg.evaluate("$('ho-M').value='20'; run()"); await pg.wait_for_timeout(80)
         r=await pg.evaluate(SIDE)
-        check('nach Änderung von M: wieder schematische Ansicht', r and not any('aus calc' in t for t in r['txt']))
-        for L,w in (('en','Side view from calc'),('fr','Vue latérale issue de calc'),('es','Vista lateral desde calc')):
+        check('nach Änderung von M: wieder schematische Ansicht', r and not any('aus „Schnittkräfte“' in t for t in r['txt']))
+        for L,w in (('en','Side view from “Internal forces”'),('fr','Vue latérale issue de « Efforts »'),('es','Vista lateral desde «Esfuerzos»')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.reload(); await pg.wait_for_timeout(300)
             r=await imp('stahl',2)
             t=' '.join(r['txt'])+' '+r['legend']+' '+r['prof']

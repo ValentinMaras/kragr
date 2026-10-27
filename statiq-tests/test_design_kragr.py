@@ -20,10 +20,11 @@ try:
     from playwright.async_api import async_playwright
 except ImportError:
     print('SKIP Playwright nicht installiert'); sys.exit(1 if fails else 0)
-HDR="""(()=>{const h=document.querySelector('.app-header'),vis=e=>getComputedStyle(e).display!=='none',k=[...h.children].filter(vis).map(e=>e.className.split(' ')[0]||e.tagName),b=document.getElementById('k5-burger').getBoundingClientRect(),
- v=getComputedStyle(document.querySelector('.app-header .version')).display;
- return {k, w:Math.round(b.width), hb:Math.round(b.height), ver:v, tools:getComputedStyle(h.querySelector('.hdr-tools')).display,
-  font:getComputedStyle(document.body).fontFamily, acc:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), h:Math.round(h.offsetHeight), sw:document.documentElement.scrollWidth}})()"""
+HDR="""(()=>{const h=document.querySelector('.app-header'),k=[...h.children].filter(e=>getComputedStyle(e).display!=='none').map(e=>e.id||e.className||e.tagName),b=document.getElementById('k5-burger').getBoundingClientRect(),
+ v=getComputedStyle(document.querySelector('.app-header .version')).display, tools=h.querySelector('.hdr-tools');
+ return {k, w:Math.round(b.width), hb:Math.round(b.height), ver:v, tools:tools?getComputedStyle(tools).display:'-', txt:document.getElementById('k5-burger').innerText.trim(),
+  font:getComputedStyle(document.body).fontFamily, acc:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), h:Math.round(h.offsetHeight), sw:document.documentElement.scrollWidth}})()"""   # k5: Kopfzeile Logo · Menü
+MENU="(()=>{ document.getElementById('k5-burger').click(); const m=document.getElementById('k5-menu'), r=[m.querySelectorAll('.k5-mod').length, !!m.querySelector('[data-mod=projekt]'), m.querySelectorAll('#k5-theme button').length, m.querySelectorAll('#k5-lang button').length]; document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'})); return r; })()"
 FON="document.fonts.ready.then(()=>[...new Set([...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family.split(String.fromCharCode(34)).join('')))].sort())"
 async def main():
     async with async_playwright() as p:
@@ -32,20 +33,21 @@ async def main():
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')")
         for f in ['calc','size']:
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(700); r=await pg.evaluate(HDR)
-            check(f'{f} Handy: Kopfzeile Logo · ☰ (Design 5), einzeilig, kein Querscrollen', r['k']==['logo','k5-burger'] and r['h']==58 and r['sw']<=390, r)
-            check(f'{f} Handy: ☰ 44 × 44, Werkzeuge und Version nicht in der Kopfzeile', r['w']==44 and r['hb']==44 and r['tools']=='none' and r['ver']=='none', r)
+            check(f'{f} Handy: Kopfzeile eine Zeile Logo · Menü (58 px), alte Werkzeuge verborgen, kein Querscrollen', r['k'][0]=='logo' and r['k'][-1]=='k5-burger' and r['h']==58 and r['tools']=='none' and r['sw']<=390, r)
+            mn=await pg.evaluate(MENU); await pg.wait_for_timeout(100)
+            check(f'{f} Handy: Menüknopf 44 × 44; im Menü drei Module + Projekte, Erscheinungsbild, Sprache', r['w']==44 and r['hb']==44 and r['ver']=='none' and mn==[4,True,3,4], (r, mn))
             check(f'{f}: Schrift Figtree, Akzent #5468ad', r['font'].startswith('Figtree') and r['acc']=='#5468ad', r)
             fo=await pg.evaluate(FON); check(f'{f}: Figtree und JetBrains Mono geladen', 'Figtree' in fo and 'JetBrains Mono' in fo, fo)
             v=await pg.inner_text('#k-verfoot')
-            want='kragr·calc v'+await pg.evaluate("typeof STATIQ_VERSION!=='undefined'?STATIQ_VERSION:''") if f=='calc' else 'kragr·size v'+await pg.evaluate("SIZE_VERSION")
-            check(f'{f}: Version unten auf der Seite (Handy)', v==want and v.startswith(('kragr·calc v0.11.','kragr·size v0.7.')) and await pg.is_visible('#k-verfoot'), v)
+            want='kragr · Schnittkräfte v'+await pg.evaluate("typeof STATIQ_VERSION!=='undefined'?STATIQ_VERSION:''") if f=='calc' else 'kragr · Bemessung v'+await pg.evaluate("SIZE_VERSION")
+            check(f'{f}: Version unten auf der Seite (Handy)', v==want and v.startswith(('kragr · Schnittkräfte v0.11.','kragr · Bemessung v0.7.')) and await pg.is_visible('#k-verfoot'), v)
         await pg.goto(B+'calc.html'); await pg.wait_for_timeout(1500)
         r=await pg.evaluate("[localStorage.getItem('statiq-projekt'), document.getElementById('k-pmbar').hidden]"); check('calc Handy: als Rechner ohne Projektbezug (kein Projekt, keine Projektzeile)', r==[None,True], r)
         await pg.close()
         pg=await br.new_page(viewport={'width':1280,'height':800}); pg.on('pageerror', lambda e: errs.append(str(e)))
         for f in ['calc','size']:
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(600); r=await pg.evaluate(HDR)
-            check(f'{f} Rechner: ☰ mit Text „Menü“, Höhe 44', r['w']>80 and r['hb']==44 and await pg.text_content('#k5-burger .k5-cur') in ('Menü','Menu'), r)
+            check(f'{f} Rechner: Menüknopf mit Text „Menü“, Höhe 44', r['w']>80 and r['hb']==44 and r['txt'] in ('Menü','Menu'), r)
         check('keine Skriptfehler', not errs, errs[:2])
         await br.close()
 asyncio.run(main())

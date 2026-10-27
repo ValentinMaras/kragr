@@ -35,7 +35,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}))"); await pg.reload(); await pg.wait_for_timeout(400)
+        await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(400)
         await pg.evaluate("setMat('stahl'); setStMode('traeger')"); await pg.wait_for_timeout(300)
         async def run(prof, st, V, M, N=0):
             await pg.evaluate(f"$('sn-auto').checked=false; $('sn-prof').value='{prof}'; $('sn-stahl').value='{st}'; $('sn-V').value='{V}'; $('sn-M').value='{M}'; $('sn-N').value='{N}'; run()")
@@ -71,7 +71,7 @@ async def main():
         r=await run('IPE 300','S235',500,0); await pg.wait_for_timeout(300)
         t=await pg.evaluate("document.getElementById('n-qv').innerText")
         check('Abhilfe: Ursache „Schubtragfähigkeit des Stegs“ bei nicht erfülltem Querkraftnachweis', 'Schubtragfähigkeit des Stegs' in t, t[-200:])
-        sc=await pg.evaluate("document.getElementById('scope-card').innerText")
+        sc=await pg.evaluate("document.getElementById('scope-card').textContent.replace(/\\s+/g,' ')")   # k5: Karte zugeklappt
         check('Umfang: unversteifter Steg enthalten, Zwischensteifen und Gurtanteil „nicht enthalten“', 'Schubbeulen mit Zwischensteifen' in sc and 'Plattenbeulen bei Schub' not in sc)
         for lang, word in [('en','Shear buckling'),('fr','Voilement'),('es','Abolladura')]:
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{lang}')"); await pg.reload(); await pg.wait_for_timeout(300)

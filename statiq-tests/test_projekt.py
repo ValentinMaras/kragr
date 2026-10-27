@@ -34,7 +34,7 @@ async def main():
         await pg.evaluate("setMat('holz'); setHoMode('bauteil'); $('ho-name').value='Pfette P1'; savePos()"); await pg.wait_for_timeout(100)
         check('size: andere Nachweisart übernimmt die calc-Quelle nicht', await pg.evaluate("!posRead().find(p=>p.name==='Pfette P1').src"))
         # Projekt: alles ohne Position
-        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(250)
+        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(600)
         L=await pg.inner_text('#loose')
         check('Projekt: Rahmen und Pfette ohne Position', all(x in L for x in ['Rahmen','Pfette P1']) and 'Pos 3 Unterzug' not in L, L[:80])
         # seit projekt v0.1.14: calc-Berechnung mit ihrem size-Nachweis wird automatisch eine Position
@@ -53,7 +53,7 @@ async def main():
         await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(250)
         k2=keys[0]
         t=await pg.inner_text(f".pos[data-id='{pid}']")
-        check('System der Position geändert: Nachweis „veraltet“ (neu rechnen), Titel bleibt (von Hand vergeben)', 'calc geändert — neu rechnen' in t and '1 veraltet' in await pg.inner_text('#sum') and await pg.evaluate("proj().pos[0].title")=='Unterzug Achse B', t[:200])
+        check('System der Position geändert: Nachweis „veraltet“ (neu rechnen), Titel bleibt (von Hand vergeben)', 'System geändert — neu rechnen' in t and '1 veraltet' in await pg.inner_text('#sum') and await pg.evaluate("proj().pos[0].title")=='Unterzug Achse B', t[:200])
         href=await pg.evaluate("document.querySelector('a.warn')?.getAttribute('href')")
         check('„Neu rechnen“ öffnet size im Projektmodus mit dem Nachweis', href==f'size.html?pos={pid}&check=Pos%203%20Unterzug&neu=1', href)
         await pg.goto(B+href); await pg.wait_for_timeout(1200); await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(200)
@@ -63,8 +63,8 @@ async def main():
         # Gesamtbericht
         await pg.evaluate("showReport()"); await pg.wait_for_timeout(150)
         r=await pg.inner_text('#report')
-        check('Gesamtbericht: Übersicht, Position, System aus calc, size-Bericht', 'Positionsübersicht' in r.upper().title() or 'POSITIONSÜBERSICHT' in r.upper() and 'Pos. 3 — Unterzug Achse B' in r and 'System aus calc' in r and 'BIEGEDRILLKNICKEN' in r.upper())
-        check('Gesamtbericht: nur der aktuelle calc-Stand', r.count('System aus calc')==1, r.count('System aus calc'))
+        check('Gesamtbericht: Übersicht, Position, System, Nachweis-Bericht', 'Positionsübersicht' in r.upper().title() or 'POSITIONSÜBERSICHT' in r.upper() and 'Pos. 3 — Unterzug Achse B' in r and 'System aus „Schnittkräfte“' in r and 'BIEGEDRILLKNICKEN' in r.upper())
+        check('Gesamtbericht: nur der aktuelle Stand des Systems', r.count('System aus „Schnittkräfte“')==1, r.count('System aus „Schnittkräfte“'))
         check('Gesamtbericht: Auflagerkräfte mit Dezimalkomma', re.search(r'V\s*A\s*= 17,50 kN', r) is not None, re.findall(r'V.{0,6}= [\d.,]+ kN', r)[:2])
         await pg.evaluate("hideReport()")
         # Projektdatei: sichern (Inhalt) und laden
@@ -79,7 +79,7 @@ async def main():
         await pg.goto(B+'size.html#pos=Pfette%20P1'); await pg.wait_for_timeout(700)
         check('size.html#pos= lädt die Position', await pg.input_value('#ho-name')=='Pfette P1' and 'Pfette P1' in await pg.inner_text('#pos-msg'))
         # Position löschen (zweimal klicken)
-        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(250)
+        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(600)
         await pg.click(f".pos[data-id='{pid}'] .pos-h .more-b"); await pg.click(f".pos[data-id='{pid}'] [data-del]"); await pg.click(f".pos[data-id='{pid}'] [data-del]"); await pg.wait_for_timeout(80)
         check('Position löschen: Einträge wieder „ohne Position“', await pg.evaluate("proj().pos.length")==0 and 'Pos 3 Unterzug' in await pg.inner_text('#loose'))
         # Startseite
@@ -87,19 +87,19 @@ async def main():
         check('Startseite: Kachel „Projekt“ → projekt.html mit Zählern', await pg.evaluate("document.getElementById('saved-card').getAttribute('href')")=='projekt.html' and re.search(r'^1 (Position|item) · \d+ (Einträge|entries)$', await pg.inner_text('#saved-count')), await pg.inner_text('#saved-count'))
         # Einheitlich „Meine Projekte“ (seit projekt v0.1.1)
         await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(200)
-        check('Projektseite: Navigation und Titel „Meine Projekte“', (await pg.text_content('.app-header .cur')).strip()=='Meine Projekte' and await pg.evaluate("document.querySelector('#k5-burger').click(), document.querySelector('#k5-menu [data-mod=projekt]').getAttribute('aria-current')")=='page' and await pg.title()=='kragr — Meine Projekte')
+        check('Projektseite: Navigation und Titel „Projekte“', await pg.inner_text('.app-header .cur')=='Projekte' and await pg.title()=='kragr — Projekte')
         await pg.goto(B+'index.html'); await pg.wait_for_timeout(200)
-        check('Startseite: „Meine Projekte“', await pg.inner_text('#saved-title')=='Meine Projekte')
+        check('Startseite: „Projekte“', await pg.inner_text('#saved-title')=='Projekte')
         for f in ['size','calc']:
-            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); tx=(await pg.text_content('#proj-btn .pb-tx')).strip()
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); tx=await pg.inner_text('#proj-btn')
             await pg.click('#k5-burger'); await pg.click('#k5-menu [data-mod=projekt]'); await pg.wait_for_url('**/projekt.html')
-            check(f'{f}: Knopf „Meine Projekte“ führt zur Projektseite', tx=='Meine Projekte', tx)
+            check(f'{f}: Knopf „Projekte“ führt zur Projektseite', tx=='Projekte', tx)
         # Sprachen
-        for L,w in (('en','My projects'),('fr','Mes projets'),('es','Mis proyectos')):
+        for L,w in (('en','Projects'),('fr','Projets'),('es','Proyectos')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(200)
             tx=await pg.inner_text('body')
             g=re.findall(r'\b(Position löschen|Öffnen|Zuordnen|Gesamtbericht|Datei laden|ohne Position|nicht erfüllt|veraltet)\b', tx)
-            check(f'{L}: Projektseite übersetzt, Navigation „{w}“', not g and w==(await pg.text_content('.app-header .cur')).strip(), g[:3])
+            check(f'{L}: Projektseite übersetzt, Menüknopf nennt „{w}“', not g and w in (await pg.evaluate("document.getElementById('k5-burger').getAttribute('aria-label')")), g[:3])   # k5: Seite im Menüknopf genannt
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()

@@ -1,10 +1,12 @@
-# Bewegung mit Lernwert (calc v0.11.5): gleitende Verläufe, Biegelinie in der Skizze, „Schnitt führen“.
+# Bewegung mit Lernwert (calc v0.11.5, auf v0.11.8 mit Stufen, Federn und Lastfällen): gleitende Verläufe, Biegelinie in der Skizze, „Schnitt führen“.
 # Sollwerte von Hand:
 #   Einfeldträger L = 5 m, q = 5 kN/m, F = 10 kN in Feldmitte: A = B = 17,5 kN; x = 2,5 m: M = 17,5·2,5 − 5·2,5²/2 = 28,13 kNm,
 #     Q links = 17,5 − 12,5 = 5,00, rechts −5,00 kN; x = 2,6 m: M = 17,5·2,6 − 5·2,6²/2 − 10·0,1 = 27,60 kNm, Q = 17,5 − 13 − 10 = −5,50 kN.
 #   Zweifeldträger 2 × 5 m, q = 10 kN/m: Stützmoment −q·L²/8 = −31,25 kNm, Q links von B = −31,25, rechts +31,25 kN.
 #   Rahmen eingespannt h = 4, b = 5, q = 10 (Referenz): Riegelmitte M = 16,37 kNm, N = −5,58 kN (= H); Stützenkopf links M = −14,88, N = −25 kN.
 #   Kragarm L = 3 m, F = 10 kN am Ende: Einspannung M = −30 kNm, Q = 10 kN.
+#   Zweifeldträger 2 × 5 m, q = 5 kN/m, Setzung Mittellager 10 mm (EI = 21 000 kNm²): M_B = −15,625 + 3·EI·s/L² = 9,575 kNm.
+#   Zweifeldträger 2 × 5 m, g = q = 10 kN/m (Q Kat. A, feldweise), Umhüllende: M_B zwischen −2,85·31,25 = −89,06 und −1,0·31,25 = −31,25 kNm.
 import os, sys, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
 try:
@@ -68,6 +70,17 @@ async def main():
         check('B: Zweifeldträger über B: M = −31,25 kNm, Q = −31,25 | 31,25 kN (Hand)', 'x = 5,00 m' in t and 'M = −31,25 kNm' in t and 'Q = −31,25 | 31,25 kN' in t, t[:110])
         r=await pg.evaluate("!!document.querySelector('#cont-svg .k-bl')")
         check('A: Biegelinie auch in der Skizze des Durchlaufträgers', r, r)
+        # Federn/Setzungen (v0.11.6): Schnitt nimmt das gerechnete Modell
+        await pg.evaluate("""(()=>{ const sp=id=>({L:5,k:1,point:[],mom:[],dist:[{id:id,enabled:true,values:{a:0,b:5,qa:5,qb:5}}]});
+          spanData=[sp(920),sp(930)]; numSpans=2; renderContUI(); SUPX.cont={on:true, B:{sv:10}}; calculateContinuous(); kragrMotion.cut.cont.t=0.5; kragrMotion.cutDraw('cont'); })()"""); await pg.wait_for_timeout(200)
+        t=await ro(pg,'cont')
+        check('B: Setzung Mittellager 10 mm: Schnitt über B zeigt M = 9,58 kNm (Hand 9,575)', 'M = 9,58 kNm' in t, t[:80])
+        # Lastfälle (v0.11.4 im Zip-Stand): Umhüllende → Spanne
+        await pg.evaluate("""(()=>{ SUPX.cont={on:false}; const sp=id=>({L:5,k:1,point:[],mom:[],dist:[{id:id,enabled:true,values:{a:0,b:5,qa:10,qb:10}},{id:id+1,enabled:true,values:{a:0,b:5,qa:10,qb:10,lf:'Q'}}]});
+          spanData=[sp(940),sp(950)]; numSpans=2; renderContUI(); document.getElementById('lf-on-cont').checked=true; lfCfg('cont'); calculateContinuous(); kragrMotion.cut.cont.t=0.5; kragrMotion.cutDraw('cont'); })()"""); await pg.wait_for_timeout(300)
+        t=await ro(pg,'cont')
+        check('B: Lastfälle, Umhüllende: über B M = −89,06 … −31,25 kNm (Hand)', 'M = −89,06 … −31,25 kNm' in t and 'Umhüllende' in t, t[:120])
+        await pg.evaluate("document.getElementById('lf-on-cont').checked=false; lfCfg('cont')")
         # Rahmen
         await pg.evaluate("""showTab('frame'); fB.value=5; fH.value=4; if(window.fHA) fHA.value=4; if(window.fHB) fHB.value=4; if(typeof setRoof==='function') setRoof(false); setSupportA('fixed'); setSupportB('fixed'); setHeadSupport('pos','none'); frameHinges=[]; renderFrameHinges();
           frameLoads.vert=[{id:950,enabled:true,values:{member:'rafter',a:0,b:5,qa:10,qb:10}}]; frameLoads.horiz=[]; renderFrameLoads('vert'); renderFrameLoads('horiz'); calculateFrame();

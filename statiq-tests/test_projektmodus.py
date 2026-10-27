@@ -13,6 +13,8 @@ def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:74}', str(info)[:230])
 PJ="JSON.parse(localStorage.getItem('statiq-projekt')||'{}')"
 SDF="Object.keys(localStorage).filter(k=>k.startsWith('statiq_sdf_'))"
+async def op(pg, pid):   # k5: Positionen als Akkordeon — Position vor dem Antippen öffnen
+    await pg.evaluate("(id)=>{ const c=document.getElementById('pos-'+id); if(c && c.classList.contains('k5-closed')){ const h=c.querySelector(':scope > .k5-head, :scope > .pos-h'); if(h) h.click(); } }", pid); await pg.wait_for_timeout(120)
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
@@ -21,7 +23,7 @@ async def main():
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(1500)
         await pg.evaluate("const e=document.getElementById('bL'); e.value='6'; e.dispatchEvent(new Event('input',{bubbles:true}))"); await pg.wait_for_timeout(1500)
         r=await pg.evaluate(f"[document.getElementById('k-pmbar').hidden, {SDF}.length, localStorage.getItem('statiq-projekt'), document.querySelectorAll('.k-tosize').length, document.getElementById('k-verfoot')?.textContent]")
-        check('calc eigenständig: keine Projektzeile, nichts im Projekt, kein „Nachweis in size“', r[:4]==[True,0,None,0] and r[4]=='kragr·calc v'+await pg.evaluate('STATIQ_VERSION'), r)
+        check('calc eigenständig: keine Projektzeile, nichts im Projekt, kein „Nachweis in size“', r[:4]==[True,0,None,0] and r[4]=='kragr · Schnittkräfte v'+await pg.evaluate('STATIQ_VERSION'), r)
         await pg.reload(); await pg.wait_for_timeout(1200)
         check('calc eigenständig: Entwurf bleibt nach dem Neuladen (L = 6 m)', await pg.evaluate("document.getElementById('bL').value")=='6')
         await pg.goto(B+'size.html'); await pg.wait_for_timeout(1200)
@@ -73,7 +75,7 @@ async def main():
         await pg.evaluate("const e=document.getElementById('bL'); e.value='9'; e.dispatchEvent(new Event('input',{bubbles:true}))"); await pg.wait_for_timeout(600)
         await pg.click('#k-pmbar [data-pm=ok]'); await pg.wait_for_url('**/projekt.html*'); await pg.wait_for_timeout(600)
         t=await pg.inner_text('.pos')
-        check('geändertes System: Nachweis „calc geändert — neu rechnen“', 'calc geändert — neu rechnen' in t and 'Einfeldträger L=9m' in await pg.evaluate(f"{PJ}.pos[0].title"), t[:200])
+        check('geändertes System: Nachweis „calc geändert — neu rechnen“', 'System geändert — neu rechnen' in t and 'Einfeldträger L=9m' in await pg.evaluate(f"{PJ}.pos[0].title"), t[:200])
         await pg.click('.pos a.warn'); await pg.wait_for_url('**/size.html?*'); await pg.wait_for_timeout(1500)
         r=await pg.evaluate("[+$('ho-L').value, $('ho-name').value]")
         check('„Neu rechnen“: size mit L = 9 m, Name bleibt', r==[9,'Deckenbalken D2'], r)
@@ -99,11 +101,11 @@ async def main():
         r=await pg.evaluate("[document.querySelectorAll('#list select').length, [...document.querySelectorAll('#list .it')].filter(it=>it.querySelector('.r')).map(it=>it.querySelectorAll('.r > .btn').length+'/'+it.querySelectorAll('.r > .more').length)]")
         check('„Meine Projekte“: keine Auswahllisten, je Eintrag ein Hauptknopf + ⋯', r[0]==0 and r[1] and all(x=='1/1' for x in r[1]), r)
         p0,p1=await pg.evaluate("proj().pos.map(q=>q.id)")
-        await pg.evaluate("(id)=>{const c=document.getElementById('pos-'+id); if(c && c.classList.contains('k5-closed')) kragrK5.toggle(c, true)}", p0); await pg.click(f'#pos-{p0} .it:has(.tag.size) .more-b'); await pg.wait_for_timeout(100)
-        await pg.evaluate("(id)=>{const c=document.getElementById('pos-'+id); if(c && c.classList.contains('k5-closed')) kragrK5.toggle(c, true)}", p0); await pg.click(f'#pos-{p0} .morem:not([hidden]) [data-to="{p1}"]'); await pg.wait_for_timeout(200)
+        await op(pg, p0); await pg.click(f'#pos-{p0} .it:has(.tag.size) .more-b'); await pg.wait_for_timeout(100)
+        await op(pg, p0); await pg.click(f'#pos-{p0} .morem:not([hidden]) [data-to="{p1}"]'); await pg.wait_for_timeout(200)
         check('⋯ → „Verschieben nach Pos. 2“ ordnet den Nachweis neu zu', await pg.evaluate(f"proj().asg['s:Deckenbalken D2']")==p1)
-        await pg.evaluate("(id)=>{const c=document.getElementById('pos-'+id); if(c && c.classList.contains('k5-closed')) kragrK5.toggle(c, true)}", p1); await pg.click(f'#pos-{p1} .it:has(.tag.size) .more-b'); await pg.click(f'#pos-{p1} .morem:not([hidden]) [data-to="{p0}"]'); await pg.wait_for_timeout(200)
-        await pg.evaluate("(id)=>{const c=document.getElementById('pos-'+id); if(c && c.classList.contains('k5-closed')) kragrK5.toggle(c, true)}", p1); await pg.click(f'#pos-{p1} .pos-h .more-b'); await pg.wait_for_timeout(100)
+        await op(pg, p1); await pg.click(f'#pos-{p1} .it:has(.tag.size) .more-b'); await pg.click(f'#pos-{p1} .morem:not([hidden]) [data-to="{p0}"]'); await pg.wait_for_timeout(200)
+        await op(pg, p1); await pg.click(f'#pos-{p1} .pos-h .more-b'); await pg.wait_for_timeout(100)
         r=await pg.evaluate(f"[...document.querySelectorAll('#pos-{p1} .pos-h .morem button')].map(b=>b.textContent)")
         check('Positionskopf: ⋯ mit „Umbenennen“ und „Position löschen“ (statt Knopf in der Zeile)', r==['Umbenennen','Position löschen'], r)
         await pg.keyboard.press('Escape')

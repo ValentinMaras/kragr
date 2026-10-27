@@ -15,7 +15,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); pg=await br.new_page(); errs=[]
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(U+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}))"); await pg.reload(); await pg.wait_for_timeout(300)
+        await pg.goto(U+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(300)
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(300)
         a=pg.locator('#scope-card .fehler-link'); await a.evaluate("e=>e.onclick()"); h=unquote(await a.get_attribute('href'))
         v=await pg.evaluate("SIZE_VERSION")
@@ -32,9 +32,9 @@ async def main():
         vers=[]
         for f,c in [('calc.html','STATIQ_VERSION'),('ref.html','REF_VERSION'),('size.html','SIZE_VERSION'),('projekt.html','PROJ_VERSION')]:
             await pg.goto(U+f); await pg.wait_for_timeout(200); vers.append(await pg.evaluate(c))
-        await pg.goto(U+'index.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(300)
+        await pg.goto(U+'index.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(800)
         meta=await pg.evaluate("document.querySelector('.footer-meta').innerText"); chk=await pg.evaluate("document.getElementById('footer-check').innerText")
-        exp=f'calc v{vers[0]} · ref v{vers[1]} · size v{vers[2]} · projekt v{vers[3]}'
+        exp=f'Schnittkräfte v{vers[0]} · Bemessung v{vers[2]} · Wissen v{vers[1]} · Projekte v{vers[3]}'
         check('Startseite: Versionen in der Fußzeile aktuell', exp in meta, (meta, exp))
         check('Startseite: Hinweis auf unabhängige Prüfungen', 'unabhängige Nachrechnungen' in chk, chk)
         # Impressum
@@ -49,7 +49,7 @@ async def main():
         for js,key in [("setMat('beton'); setTyp('platte2')",'DIN EN 1992-1-1'),("setMat('mauer'); setMwMode('ausfach')",'DIN EN 1996-3'),("setMat('grund'); setGrMode('spundwand')",'DIN 4085'),("setMat('holz'); setHoMode('durchbruch')",'DIN EN 1995-1-1')]:
             try:
                 await pg.evaluate(js); await pg.wait_for_timeout(250)
-                res[key]=key in await pg.evaluate("document.getElementById('scope-card').innerText")
+                res[key]=key in await pg.evaluate("document.getElementById('scope-card').textContent.replace(/\\s+/g,' ')")   # k5: Karte zugeklappt
             except Exception as e: res[key]=str(e)[:60]
         check('size: Umfang nennt die Norm (Platte zweiachsig, Ausfachung, Spundwand, Durchbruch)', all(v is True for v in res.values()), res)
         check('keine Skriptfehler', not errs, errs[:2])

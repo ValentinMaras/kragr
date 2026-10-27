@@ -2,6 +2,7 @@
 # Ecke links = 2 …), Gelenke als eigene Knoten, Doppelindex M_ik (Moment im Stab i–k am Knoten i), Vorzeichen wie die Verläufe
 # (M > 0 Zug unten/innen). Sollwerte unabhängig von Hand: Einfeldträger, Kragarm, Zweifeldträger; Rahmen über die Knotenproben (stetige
 # Eckmomente, Q-Sprung = q·b, N = Auflagerkraft). Dazu Knotennummern in der Skizze, Übergabe Stabende → size (Schweißnaht, Stützenfuß). Ohne Playwright: SKIP.
+# Stufen (calc v0.11.5): Test öffnet alle Stufen und Ergebnis-Karten (Standardzustand prüft test_stufen.py)
 import os, sys, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
 try:
@@ -20,7 +21,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':1280,'height':900}); pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','');localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false,'size:scope':false}))"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('kragr-k5-acc',JSON.stringify({'calc:knoten':false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
         # Einfeldträger L = 5 m, q = 5 kN/m, F = 10 kN in der Mitte: A = qL/2 + F/2 = 17,5 kN
         K=await pg.evaluate("lastCalc.beam.knoten")
         check('Einfeldträger: Knoten 1 = A, 2 = B; Q12 = 17,5 kN, Q21 = −17,5 kN, M12 = M21 = 0', [n['lab'] for n in K['nodes']]==['A','B'] and near(end(K,1,2)['Q'],17.5) and near(end(K,2,1)['Q'],-17.5) and end(K,1,2)['M']==0 and end(K,2,1)['M']==0, K['bars'])

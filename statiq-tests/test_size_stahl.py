@@ -42,7 +42,9 @@ async def main():
         pg.on('pageerror',lambda e: errs.append(str(e)))
         await pg.goto('file://'+HTML); await pg.wait_for_timeout(300)
         await pg.evaluate("setMat('stahl')")
-        out=lambda: pg.evaluate("document.querySelector('.col-out').innerText + '\\n' + (()=>{ const d=document.createElement('div'); return (LAST&&LAST.res&&LAST.res.C||[]).flatMap(c=>c.steps).map(s=>{ d.innerHTML=s.replace(/^§/,''); return d.innerText||d.textContent; }).join('\\n'); })()")
+        async def out():   # Rechnung abwarten: unter Last (Gesamtlauf) kommt run() nach fill() manchmal ein Bild später
+            await pg.evaluate("run()"); await pg.wait_for_timeout(60); return await _out()
+        _out=lambda: pg.evaluate("document.querySelector('.col-out').innerText + '\\n' + (()=>{ const d=document.createElement('div'); return (LAST&&LAST.res&&LAST.res.C||[]).flatMap(c=>c.steps).map(s=>{ d.innerHTML=s.replace(/^§/,''); return d.innerText||d.textContent; }).join('\\n'); })()")
         # A) Standard: IPE 300, S235, L = 6 m, M = 90 kNm, L_LT = 3 m, Last Obergurt, Gleichlast
         t=await out(); P=prof('IPE 300'); fy=235
         Mc=mcr(P,3000,1.127,0.454,P['h']/2)/1e6; MRk=P['Wpl']*fy/1e6; cL,lL=chiLT(P,MRk,Mc,0.94); Mb=cL*MRk/gM1

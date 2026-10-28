@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.47 -->
+<!-- kragr·ref v0.3.48 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1168,7 +1168,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.47';
+const REF_VERSION = '0.3.48';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -5033,6 +5033,50 @@ function skSteiner(T,R){
   o+=dimL(cx-W*k/2-24,y0+R.top*k,cx-W*k/2-24,y0+R.zs*k,'z<tspan font-size="9" dy="3">s</tspan>',0);
   return sv(300,Math.round((R.H-R.top)*k+50),tt('Zusammengesetzter Querschnitt'), o);
 }
+// Spannungsbild im Querschnitt (ref v0.3.48): σ(z) = N/A + M/I·z, z nach unten positiv, Zug positiv. Farbe je Streifen (blau Druck, rot Zug),
+// Nulllinie z0 = −N·I/(A·M). Rechteck aus b × h (cm) oder I-Profil aus PROF (Maße mm, A cm², I cm⁴). Rechnung in N und mm, Ausgabe in N/mm².
+function spbQuer(){
+  const q=document.getElementById('spb-q')?.value||'r';
+  if(q==='r'){ const b=(num('spb-b')||0)*10, h=(num('spb-h')||0)*10; return b>0&&h>0 ? {typ:'r', b, h, A:b*h, I:b*h**3/12} : null; }
+  const P=PROF[q]; return P ? {typ:'i', b:P.b, h:P.h, tw:P.tw, tf:P.tf, A:P.A*100, I:P.Iy*1e4, name:q} : null;   // PROF: Maße in mm, A in cm², I in cm⁴
+}
+const SPB_RANGE='border:none;background:none;box-shadow:none;padding:0;height:40px;width:100%';
+function spbColor(s, S){ const t=Math.max(-1, Math.min(1, s/(S||1))), a=t<0?[24,82,150]:[178,40,40], n=[238,237,232], u=Math.pow(Math.abs(t),0.8);
+  return 'rgb('+n.map((c,k)=>Math.round(c+(a[k]-c)*u)).join(',')+')'; }
+function updateSpBild(){
+  const out=document.getElementById('spb-out'); if(!out) return;
+  const Q=spbQuer(), M=num('spb-M')||0, N=num('spb-N')||0, f=(v,n=1)=>dS(v,n);
+  const bh=document.getElementById('spb-bh'); if(bh) bh.closest('.calc-field').style.display = document.getElementById('spb-q').value==='r' ? '' : 'none';
+  document.getElementById('spb-Mo').textContent=' = '+f(M,0); document.getElementById('spb-No').textContent=' = '+(N>0?'+':'')+f(N,0);
+  if(!Q){ out.innerHTML=tt('Bitte b und h größer 0 eingeben.'); document.getElementById('spb-fig').innerHTML=''; return; }
+  const Mn=M*1e6, Nn=N*1e3, sig=z=>Nn/Q.A+Mn/Q.I*z, so=sig(-Q.h/2), su=sig(Q.h/2);
+  const S=Math.max(Math.abs(so), Math.abs(su), 1e-9), z0=Math.abs(Mn)>1e-9 ? -Nn*Q.I/(Q.A*Mn) : null;
+  // Bild: links Querschnitt, rechts Spannungsverlauf
+  const H=200, cx=105, cy=125, sc=H/Q.h, top=cy-H/2;
+  let w=Q.b*sc; if(w>160){ w=160; } let path;
+  if(Q.typ==='r') path=`M${cx-w/2} ${top} h${w} v${H} h${-w}z`;
+  else { const tf=Math.max(Q.tf*sc,4), tw=Math.max(Q.tw*sc,3), a=(w-tw)/2;
+    path=`M${cx-w/2} ${top} h${w} v${tf} h${-a} v${H-2*tf} h${a} v${tf} h${-w} v${-tf} h${a} v${-(H-2*tf)} h${-a}z`; }
+  let g=`<defs><clipPath id="spb-c"><path d="${path}"/></clipPath></defs><g clip-path="url(#spb-c)">`;
+  for(let j=0;j<60;j++){ const z=-Q.h/2+Q.h*(j+.5)/60; g+=`<rect x="${cx-85}" y="${(top+H*j/60-0.3).toFixed(2)}" width="170" height="${(H/60+0.6).toFixed(2)}" fill="${spbColor(sig(z),S)}"/>`; }
+  g+=`</g><path d="${path}" fill="none" stroke="#111" stroke-width="1.3"/>`;
+  g+=`<line x1="${cx-w/2-22}" y1="${cy}" x2="${cx-w/2-6}" y2="${cy}" stroke="#555" stroke-width="1"/><text x="${cx-w/2-26}" y="${cy+5}" text-anchor="end" font-size="15" fill="#555">S</text>`;
+  const ax=318, sw=78/S, pt=ax+so*sw, pb=ax+su*sw;
+  if(z0!==null && Math.abs(z0)<=Q.h/2){ const yz=cy+z0*sc; g+=`<line x1="${cx-w/2-4}" y1="${yz}" x2="${ax+84}" y2="${yz}" stroke="#111" stroke-width="1.2" stroke-dasharray="5 3"/><text x="${ax+86}" y="${yz+5}" font-size="14" fill="#111">σ=0</text>`; }
+  g+=`<line x1="${ax}" y1="${top-12}" x2="${ax}" y2="${top+H+12}" stroke="#555" stroke-width="1"/>`;
+  g+=`<path d="M${ax} ${top} L${pt} ${top} L${pb} ${top+H} L${ax} ${top+H}z" fill="#111" fill-opacity="0.07" stroke="#111" stroke-width="1.5"/>`;
+  const lab=(x,y,v)=>`<text x="${v<0?x-6:x+6}" y="${y}" text-anchor="${v<0?'end':'start'}" font-size="16" font-family="JetBrains Mono, monospace" fill="#111">${f(v)}</text>`;
+  g+=lab(pt, top+4, so)+lab(pb, top+H+4, su);
+  g+=`<text x="${ax}" y="${top+H+40}" text-anchor="middle" font-size="14" fill="#555">σ ${tt('in')} N/mm²</text>`;
+  for(let k=0;k<=20;k++) g+=`<rect x="${cx-52+k*5}" y="${top+H+28}" width="5.5" height="12" fill="${spbColor(-S+2*S*k/20,S)}"/>`;
+  g+=`<text x="${cx-58}" y="${top+H+39}" text-anchor="end" font-size="14" fill="#555">${tt('Druck')}</text><text x="${cx+56}" y="${top+H+39}" font-size="14" fill="#555">${tt('Zug')}</text>`;
+  document.getElementById('spb-fig').innerHTML = fig(`<svg viewBox="0 0 440 300" width="440" height="300" role="img" aria-label="${tt('Spannungsbild im Querschnitt')}">${g}</svg>`);
+  const lage = z0===null ? tt('keine (M = 0: σ überall gleich)') : Math.abs(z0)>Q.h/2 ? tt('außerhalb des Querschnitts: überall gleiches Vorzeichen') : `z<sub>0</sub> = ${f(Math.abs(z0)/10,1)} cm ${z0<0?tt('über der Schwerachse'):z0>0?tt('unter der Schwerachse'):tt('in der Schwerachse')}`;
+  out.innerHTML = `A = ${f(Q.A/100,1)} cm² · I<sub>y</sub> = ${f(Q.I/1e4,0)} cm⁴<br>`
+    + `σ<sub>${tt('oben')}</sub> = ${f(Nn/Q.A,2)} ${Mn>=0?'−':'+'} ${f(Math.abs(Mn)*Q.h/2/Q.I,2)} = <b>${f(so,2)} N/mm²</b><br>`
+    + `σ<sub>${tt('unten')}</sub> = ${f(Nn/Q.A,2)} ${Mn>=0?'+':'−'} ${f(Math.abs(Mn)*Q.h/2/Q.I,2)} = <b>${f(su,2)} N/mm²</b><br>`
+    + `${tt('Nulllinie')}: ${lage}`;
+}
 function updateSteiner(){
   const out=document.getElementById('stq-out'); if(!out) return;
   const T=[1,2,3,4].map(i=>({ b:num('stq-b'+i)||0, h:num('stq-h'+i)||0, z:num('stq-z'+i)||0 })).filter(t=>t.b>0&&t.h>0);
@@ -6849,6 +6893,18 @@ Object.assign(CONTENT, {
       ${fig(skSpannung(),tt('Rechteck unter Biegung: σ linear (Druck oben, Zug unten), τ parabolisch mit dem Maximum in der Schwerachse'))}
       <div class="section-note">Die Spannung verläuft linear über die Höhe. Die Nulllinie liegt bei reiner Biegung
         in der Schwerachse, bei zusätzlicher Normalkraft verschoben.</div>
+    </div>
+    <div class="card" id="spb-card">
+      <div class="card-title">${tt('Ausprobieren: Spannungsbild im Querschnitt')}</div>
+      <div class="section-note">${tt('Querschnitt wählen, Biegemoment und Normalkraft einstellen. Die Farbe zeigt σ an jeder Stelle: blau Druck, rot Zug. Gestrichelt: die Nulllinie (σ = 0).')}</div>
+      <div class="calc-grid">
+        ${field(tt('Querschnitt'), sel('spb-q', [['r', tt('Rechteck b × h')], ...Object.keys(PROF).filter(k=>PROF[k].typ==='I').map(k=>[k,k])], 'r', 'updateSpBild()'))}
+        ${field(tt('b / h in cm'), `<div style="display:flex;gap:6px" id="spb-bh">${inp('spb-b', 20, 'updateSpBild()')}${inp('spb-h', 40, 'updateSpBild()')}</div>`)}
+        ${field(`M<sub>y</sub> ${tt('in')} kNm <b id="spb-Mo"></b>`, `<input type="range" id="spb-M" min="-150" max="150" step="1" value="30" oninput="updateSpBild()" style="${SPB_RANGE}">`)}
+        ${field(`N ${tt('in')} kN, ${tt('Zug positiv')} <b id="spb-No"></b>`, `<input type="range" id="spb-N" min="-600" max="600" step="10" value="0" oninput="updateSpBild()" style="${SPB_RANGE}">`)}
+      </div>
+      <div id="spb-fig"></div>
+      <div class="calc-out" id="spb-out"></div>
     </div>
     <div class="card">
       <div class="card-title">Schubspannungen</div>
@@ -10150,6 +10206,7 @@ Object.assign(AFTER, {
   'grundbau/boden/scherfestigkeit': () => updateMohr(),
   'grundbau/boden/grundwasser': () => updateDarcy(),
   'grundbau/verformung/spannungen': () => updateSpann(),
+  'baustatik/querschnitte/spannungen': () => updateSpBild(),
   'grundbau/verformung/setzung': () => updateSetz(),
   'grundbau/verformung/konsolidation': () => updateKons(),
   'grundbau/erddruck/geschichtet': () => { updateCoulomb(); updateErdS(); },
@@ -10332,6 +10389,7 @@ function viewThema(){
 let SEARCH_INDEX = null;
 // Zusätzlicher Suchtext für Themen, deren Inhalt nicht vollständig sichtbar ist (z. B. gefilterte Tabellen)
 const SEARCH_EXTRA = {
+  'baustatik/querschnitte/spannungen': () => 'Spannungsbild Spannungsverteilung Nulllinie Navier Biegung mit Normalkraft Randspannung Druck Zug',
   'bauphysik/waerme/grundlagen': () => 'Wärmeleitfähigkeit lambda Wärmeübergang Rsi Rse '+BP_MAT.map(m=>m[0]).join(' '),
   'bauphysik/waerme/uwert': () => 'U-Wert Wärmedurchgangskoeffizient Wärmedurchlasswiderstand Temperaturverlauf Dämmung',
   'bauphysik/waerme/anforderungen': () => 'GEG EnEV Mindestwärmeschutz DIN 4108-2 Wärmebrücke fRsi Schimmel',

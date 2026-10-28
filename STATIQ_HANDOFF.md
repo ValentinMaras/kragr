@@ -1,10 +1,10 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.11 · ref v0.3.47 · size v0.7.9 · projekt v0.1.24 · rechtliches v0.1.16 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Rechenblätter)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.11 · ref v0.3.48 · size v0.7.9 · projekt v0.1.24 · rechtliches v0.1.16 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Rechenblätter)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
 - `calc.html` — Schnittgrößen-App (kragr·calc v0.11.11, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
 - `projekt.html` — „Rechenblätter“: Liste aller gespeicherten Berechnungen aus calc und size, Bericht/PDF, Öffnen, Umbenennen, Löschen, Datei (kragr·projekt v0.1.24; bis v0.1.23 „Projekte“ mit Positionen)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.47, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.48, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
 - `size.html` — Bemessung (kragr·size v0.7.9, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
 - `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.16)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
@@ -567,6 +567,17 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Wissen: Spannungsbild im Querschnitt — ref v0.3.48
+
+Valentin: Idee aus dem three.js-Beispiel „Farbtabelle“ (Wert → Farbe mit Farbleiste). Nach der Demo: „nette Sache, das sollten wir aber bei Wissen einbauen“ (nicht in Schnittkräfte, dort fehlt der Querschnitt).
+
+- **Ort:** `baustatik/querschnitte/spannungen`, neue Karte „Ausprobieren: Spannungsbild im Querschnitt“ direkt unter „Normalspannungen (Navier)“. Hook `updateSpBild()` im Start-Objekt der Themen, Suchbegriffe in `SEARCH_EXTRA`.
+- **Eingabe:** Querschnitt (Rechteck b × h in cm oder jedes I-Profil aus `PROF`; Felder b/h nur beim Rechteck), Regler M<sub>y</sub> (−150 … 150 kNm, Start 30) und N (−600 … 600 kN, Zug positiv).
+- **Rechnung** (`spbQuer`, `updateSpBild`): σ(z) = N/A + M/I·z in N und mm (`PROF`: Maße mm, A cm², I cm⁴ → ×100 bzw. ×10⁴). Nulllinie z0 = −N·I/(A·M), Text „über/unter/in der Schwerachse“, „außerhalb des Querschnitts“ bzw. „keine“ bei M = 0. Ausgabe A, I_y, σ oben/unten mit Rechenweg N/A ∓ M/W.
+- **Bild:** Querschnitt als Umriss mit 60 Streifen (clipPath), Farbe `spbColor` divergierend blau (Druck) – hell – rot (Zug), Skala = größter Randwert; Spannungsverlauf daneben mit Randwerten, Nulllinie gestrichelt, Farbleiste „Druck … Zug“. Kein Regenbogen (Helligkeitssprünge). Dunkelmodus über die vorhandene Invertierung (Farbton bleibt).
+- **Sprachen:** 15 neue Schlüssel in `lang/ref.{en,fr,es}.js` (`ttx`), u. a. „oben“/„unten“ als Index.
+- **Tests:** `test_ref_spannungsbild.py` (15, Sollwerte von Hand im Kopf der Datei: Rechteck 20/40 mit M = 30 kNm → ∓5,63 N/mm²; mit N = +200 kN → −3,13 / 8,13 N/mm², z0 = 8,9 cm über S; IPE 240 → ∓92,51 N/mm²).
 
 ## Rechenblätter statt Projekte — calc v0.11.11 · size v0.7.9 · ref v0.3.47 · projekt v0.1.24 · rechtliches v0.1.16
 
@@ -1359,7 +1370,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1923/1923 grün** (calc v0.11.11; inklusive `test_rechenblaetter.py` 35, `test_flip.py` 21; die vier Projekt-Testdateien sind entfallen; `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1938/1938 grün** (ref v0.3.48; inklusive `test_ref_spannungsbild.py` 15, `test_rechenblaetter.py` 35, `test_flip.py` 21; die vier Projekt-Testdateien sind entfallen; `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

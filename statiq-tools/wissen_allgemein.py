@@ -12,6 +12,7 @@ def T(de, en, fr, es): return (de, en, fr, es)
 ALLG = T('Allgemeines', 'General', 'Généralités', 'Generalidades')
 GESCH = T('Geschichte', 'History', 'Histoire', 'Historia')
 KAP = {
+  'baustatik':  [('allgemein', ALLG, [('geschichte', GESCH)])],
   'stahlbeton': [('allgemein', ALLG, [('geschichte', GESCH), ('verbund', T('Verbundbaustoff Stahlbeton', 'Reinforced concrete as a composite material', 'Le béton armé, matériau composite', 'El hormigón armado como material compuesto'))]),
                  ('betontechnologie', T('Betontechnologie', 'Concrete technology', 'Technologie du béton', 'Tecnología del hormigón'), [
                    ('ausgangsstoffe', T('Ausgangsstoffe', 'Constituents', 'Constituants', 'Componentes')),
@@ -254,6 +255,12 @@ C['bauphysik/allgemein/aufgaben'] = [
   ('p', T('Die Gebiete hängen zusammen: Mehr Dämmung verschiebt die Taupunktebene, schwere Bauteile verbessern den Schallschutz und dämpfen die sommerliche Erwärmung.', 'The fields are connected: more insulation shifts the dew point plane, heavy components improve sound insulation and damp summer overheating.', 'Les domaines sont liés : plus d’isolant déplace le plan du point de rosée, les parois lourdes améliorent l’isolation acoustique et amortissent la surchauffe estivale.', 'Los ámbitos están relacionados: más aislamiento desplaza el plano de rocío, los elementos pesados mejoran el aislamiento acústico y amortiguan el sobrecalentamiento en verano.')),
   ('link', '#/bauphysik/waerme/uwert', T('→ U-Wert berechnen', '→ Calculate the U-value', '→ Calculer le coefficient U', '→ Calcular la transmitancia U'))]}]
 
+# ── Geschichte als Fließtext (ref v0.3.54): ersetzt die Zeitleisten, dazu die Geschichte der Baustatik ──
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from wissen_geschichte import G, LINKS
+for key, secs in G.items():
+    C[key] = [{'t': t, 'b': [('p', x) for x in ps] + [('link', h, lt) for h, lt in LINKS.get(key, {}).get(i, [])]} for i, (t, ps) in enumerate(secs)]
+
 # ── Erzeugen ───────────────────────────────────────────────────────────────────
 ALL = {}   # de → (en, fr, es)
 def reg(t):
@@ -305,7 +312,8 @@ p = os.path.join(ROOT, 'ref.html'); s = open(p, encoding='utf-8').read()
 s = re.sub(r'<script data-allg>.*?</script>\n<style data-allg>.*?</style>\n', '', s, flags=re.S)
 i = s.index('</head>'); s = s[:i] + BLOCK + s[i:]
 # CONTENT-Einträge (nach dem CONTENT-Objekt)
-s = re.sub(r"\n// Wissen allgemein \(erzeugt\).*?\n", "\n", s)
+s = re.sub(r"\n// Wissen allgemein \(erzeugt\)[^\n]*", "", s)
+s = s.replace("\nObject.keys(ALLG_DATA).forEach(k=>{ CONTENT[k]=()=>allgView(k); });", "")
 a = s.index('const AFTER = {')
 s = s[:a] + "// Wissen allgemein (erzeugt): Object.keys(ALLG_DATA).forEach(k=>{ CONTENT[k]=()=>allgView(k); });\nObject.keys(ALLG_DATA).forEach(k=>{ CONTENT[k]=()=>allgView(k); });\n" + s[a:]
 s = s.replace("// Wissen allgemein (erzeugt): Object.keys(ALLG_DATA).forEach(k=>{ CONTENT[k]=()=>allgView(k); });\nObject.keys(ALLG_DATA).forEach(k=>{ CONTENT[k]=()=>allgView(k); });\n" * 2,
@@ -324,6 +332,14 @@ open(p, 'w', encoding='utf-8').write(s)
 for i, l in enumerate(['en', 'fr', 'es']):
     lp = os.path.join(ROOT, 'lang', f'ref.{l}.js'); ls = open(lp, encoding='utf-8').read()
     a = '"ttx": {\n'; assert ls.count(a) == 1
-    add = ''.join(f'{js(de)}:{js(tr[i])},\n' for de, tr in ALL.items() if ('\n' + js(de) + ':') not in ls)
+    for de in ALL:   # vorhandene Einträge ersetzen, damit Korrekturen ankommen
+        k = '\n' + js(de) + ':'
+        while k in ls:
+            a0 = ls.index(k) + 1; a1 = ls.index(',\n', a0 + len(k) - 1)
+            while True:   # Ende des Werts: das Komma nach dem schließenden Anführungszeichen
+                try: json.loads(ls[a0 + len(k) - 1:a1]); break
+                except Exception: a1 = ls.index(',\n', a1 + 1)
+            ls = ls[:a0] + ls[a1 + 2:]
+    add = ''.join(f'{js(de)}:{js(tr[i])},\n' for de, tr in ALL.items())
     ls = ls.replace(a, a + add); open(lp, 'w', encoding='utf-8').write(ls)
 print('Themen:', len(C), '· Texte:', len(ALL))

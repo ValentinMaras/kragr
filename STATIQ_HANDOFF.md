@@ -568,6 +568,13 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Geschichte als Fließtext, Geschichte der Baustatik — ref v0.3.54
+
+- Die Geschichtsseiten der sieben Fachgebiete sind keine Zeitleisten mehr, sondern Fließtext in drei Abschnitten mit je zwei Absätzen (Personen, Jahreszahlen und Bezug zum heutigen Nachweis).
+- Neu: Baustatik › 1.1 Allgemeines › Geschichte in fünf Abschnitten (Archimedes und Vitruv; Galilei, Hooke, Newton; Bernoulli, Euler, Coulomb, Young, Navier; Clapeyron, Ritter, Culmann, Maxwell, Mohr, Castigliano, Müller-Breslau; Cross, Kani, FEM). Damit verschieben sich die Kapitelnummern der Baustatik um eins.
+- Texte in `statiq-tools/wissen_geschichte.py` (G, dazu LINKS für Verweise am Abschnittsende), eingelesen von `wissen_allgemein.py`. Das Skript ersetzt jetzt vorhandene Übersetzungen (Korrekturen kommen an) und ist wieder idempotent (die CONTENT-Zeile vervielfachte sich vorher bei jedem Lauf).
+- test_wissen_allgemein: acht Fachgebiete mit „Allgemeines“, 19 Themen, Geschichte ohne Zeitleiste, Baustatik-Geschichte in allen Sprachen.
+
 ## Wissen als Lehrbuchseite, Wortmarke auf dem Rechenblatt — ref v0.3.53 · calc v0.11.15 · size v0.7.11
 
 - **Wissen (Mischform, von Valentin gewählt):** jedes Thema ist ein weißes Blatt `<article class="lb-page" style="--lb-num:'4.4.3'">` statt einzelner Karten. Schrift bleibt Figtree/JetBrains Mono.

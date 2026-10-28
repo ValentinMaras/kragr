@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.11 -->
+<!-- kragr·size v0.7.12 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1672,10 +1672,6 @@ window.kragrK5Page = function(K){
         <div class="field"><label data-i18n="z085">M<sub>y,Ed</sub> [kNm]</label><input type="number" step="any" id="sn-M" value="90" oninput="run()"></div>
         <div class="field"><label>V<sub>z,Ed</sub> [kN]</label><input type="number" step="any" id="sn-V" value="60" oninput="run()"></div>
         <div class="field"><label data-i18n="z086">N<sub>Ed</sub> [kN] (Druck +)</label><input type="number" step="any" id="sn-N" value="0" oninput="run()"></div>
-        <div class="field"><label data-i18n="z087">Momentenverlauf</label><select id="sn-mv" onchange="run()">
-          <option value="q" data-i18n="z088">Gleichlast (Parabel)</option><option value="F" data-i18n="z089">Einzellast in Feldmitte</option>
-          <option value="c" data-i18n="z090">konstant</option><option value="lin" data-i18n="z091">linear (Endmomente)</option></select></div>
-        <div class="field sn-psi"><label>ψ = M<sub>2</sub>/M<sub>1</sub> (−1 … 1)</label><input type="number" step="any" id="sn-psi" value="0" oninput="run()"></div>
       </div>
       <div class="hint" data-i18n="z092">Alle Werte als Bemessungswerte (GZT). M<sub>y,Ed</sub> ist das größte Moment im betrachteten Abschnitt.</div>
     </div>
@@ -1685,9 +1681,14 @@ window.kragrK5Page = function(K){
       <div class="grid2">
         <div class="field"><label data-i18n="z094">Knicklänge y: β<sub>y</sub></label><select id="sn-by" onchange="run()"><option value="1" data-i18n="z095">1,0 (gelenkig)</option><option value="0.7">0,7</option><option value="0.5">0,5</option><option value="2" data-i18n="z096">2,0 (Kragstütze)</option></select></div>
         <div class="field"><label data-i18n="z097">Knicklänge z: β<sub>z</sub></label><select id="sn-bz" onchange="run()"><option value="1" data-i18n="z095">1,0 (gelenkig)</option><option value="0.7">0,7</option><option value="0.5">0,5</option><option value="2" data-i18n="z096">2,0 (Kragstütze)</option></select></div>
+        <div class="field"><label data-i18n="mvKipp">Momentenverlauf (für Kippen und Durchbiegung)</label><select id="sn-mv" onchange="run()">
+          <option value="q" data-i18n="z088">Gleichlast (Parabel)</option><option value="F" data-i18n="z089">Einzellast in Feldmitte</option>
+          <option value="c" data-i18n="z090">konstant</option><option value="lin" data-i18n="z091">linear (Endmomente)</option></select></div>
+        <div class="field sn-psi"><label>ψ = M<sub>2</sub>/M<sub>1</sub> (−1 … 1)</label><input type="number" step="any" id="sn-psi" value="0" oninput="run()"></div>
         <div class="field"><label data-i18n="z100">Abstand seitl. Halterungen L<sub>LT</sub> [m]</label><input type="number" step="any" id="sn-Llt" value="3.0" oninput="run()"></div>
         <div class="field"><label data-i18n="z101">Lastangriff</label><select id="sn-zg" onchange="run()"><option value="1" data-i18n="z102">Obergurt (ungünstig)</option><option value="0" data-i18n="z103">Schwerpunkt</option><option value="-1" data-i18n="z104">Untergurt (günstig)</option></select></div>
       </div>
+      <div class="hint" data-i18n="mvHint">Der Momentenverlauf ändert M<sub>y,Ed</sub> nicht. Er bestimmt nur den Momentenbeiwert C<sub>1</sub> beim Biegedrillknicken und die Form der Biegelinie.</div>
       <div class="hint" data-i18n="z105">L<sub>LT</sub> = 0: Druckgurt durchgehend seitlich gehalten (z. B. durch eine aufliegende Decke) — kein Biegedrillknicken.</div>
     </div>
 
@@ -2772,7 +2773,6 @@ window.kragrK5Page = function(K){
         <div class="field"><label data-i18n="z085">M<sub>y,Ed</sub> [kNm]</label><input type="number" step="any" id="ho-M" value="9" oninput="run()"></div>
         <div class="field"><label>V<sub>Ed</sub> [kN]</label><input type="number" step="any" id="ho-V" value="8" oninput="run()"></div>
         <div class="field"><label data-i18n="z086">N<sub>Ed</sub> [kN] (Druck +)</label><input type="number" step="any" id="ho-N" value="0" oninput="run()"></div>
-        <div class="field"><label data-i18n="z087">Momentenverlauf</label><select id="ho-mv" onchange="run()"><option value="q" data-i18n="z458">Gleichlast</option><option value="F" data-i18n="z089">Einzellast in Feldmitte</option><option value="c" data-i18n="z090">konstant</option></select></div>
         <div class="field"><label data-i18n="z461">Auflagerkraft F<sub>Ed</sub> [kN]</label><input type="number" step="any" id="ho-F" value="8" oninput="run()"></div>
         <div class="field"><label data-i18n="z462">Auflagerlänge l [mm]</label><input type="number" step="any" id="ho-lA" value="80" oninput="run()"></div>
       </div>
@@ -2780,12 +2780,14 @@ window.kragrK5Page = function(K){
     <div class="card">
       <div class="card-title" data-i18n="z463">Kippen und Knicken</div>
       <div class="grid2">
+        <div class="field"><label data-i18n="mvKipp">Momentenverlauf (für Kippen und Durchbiegung)</label><select id="ho-mv" onchange="run()"><option value="q" data-i18n="z458">Gleichlast</option><option value="F" data-i18n="z089">Einzellast in Feldmitte</option><option value="c" data-i18n="z090">konstant</option></select></div>
         <div class="field"><label data-i18n="z464">Abstand seitl. Halterungen L<sub>K</sub> [m]</label><input type="number" step="any" id="ho-Llt" value="0" oninput="run()"></div>
         <div class="field"><label data-i18n="z101">Lastangriff</label><select id="ho-zg" onchange="run()"><option value="1" data-i18n="z466">oberer Rand</option><option value="0" data-i18n="z103">Schwerpunkt</option><option value="-1" data-i18n="z468">unterer Rand</option></select></div>
         <div class="field"><label data-i18n="z094">Knicklänge y: β<sub>y</sub></label><select id="ho-by" onchange="run()"><option value="1">1,0</option><option value="0.7">0,7</option><option value="0.5">0,5</option><option value="2">2,0</option></select></div>
         <div class="field"><label data-i18n="z097">Knicklänge z: β<sub>z</sub></label><select id="ho-bz" onchange="run()"><option value="1">1,0</option><option value="0.7">0,7</option><option value="0.5">0,5</option><option value="2">2,0</option></select></div>
       </div>
       <div class="hint" data-i18n="z471">L<sub>K</sub> = 0: Druckrand durchgehend gehalten, z. B. durch die aufgenagelte Decke — kein Kippen.</div>
+      <div class="hint" data-i18n="mvHintH">Der Momentenverlauf ändert M<sub>y,Ed</sub> nicht. Er bestimmt nur die wirksame Kipplänge l<sub>ef</sub> und die Form der Biegelinie.</div>
     </div>
     <div class="card">
       <div class="card-title" data-i18n="z472">Durchbiegung (GZG, charakteristisch)</div>
@@ -2918,6 +2920,9 @@ const I18N = { "de": {
 "z089":"Einzellast in Feldmitte",
 "z090":"konstant",
 "z091":"linear (Endmomente)",
+"mvKipp":"Momentenverlauf (für Kippen und Durchbiegung)",
+"mvHint":"Der Momentenverlauf ändert M<sub>y,Ed</sub> nicht. Er bestimmt nur den Momentenbeiwert C<sub>1</sub> beim Biegedrillknicken und die Form der Biegelinie.",
+"mvHintH":"Der Momentenverlauf ändert M<sub>y,Ed</sub> nicht. Er bestimmt nur die wirksame Kipplänge l<sub>ef</sub> und die Form der Biegelinie.",
 "z092":"Alle Werte als Bemessungswerte (GZT). M<sub>y,Ed</sub> ist das größte Moment im betrachteten Abschnitt.",
 "z093":"Stabilität",
 "z094":"Knicklänge y: β<sub>y</sub>",
@@ -3999,7 +4004,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.11';
+const SIZE_VERSION = '0.7.12';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -6178,7 +6183,7 @@ function runStahl(){
   const res = nachweiseStahl(I, I.prof), P=res.P;
   $('hint-prof').innerHTML = `${P.name}: G = ${deNum(P.G,1)} kg/m · A = ${deNum(P.A,1)} cm² · I<sub>y</sub> = ${deNum(P.Iy,0)} cm⁴ · W<sub>pl,y</sub> = ${deNum(P.Wply,1)} cm³ · I<sub>z</sub> = ${deNum(P.Iz,1)} cm⁴ · f<sub>y</sub> = ${res.fy} N/mm²`;
   LAST = { mat:'stahl', I, res, date:new Date() };
-  renderOut(res.C, res.ok, figProfil(P, res.K, I)+seiteStahl(I), _L`${P.name}, ${I.sorte} · Querschnittsklasse ${res.K.k} · ${deNum(P.G,1)} kg/m`,
+  renderOut(res.C, res.ok, figProfil(P, res.K, I), _L`${P.name}, ${I.sorte} · Querschnittsklasse ${res.K.k} · ${deNum(P.G,1)} kg/m`,
     tt('Querkraft V<sub>y</sub>, Schubbeulen mit Zwischensteifen und Mitwirkung der Gurte, Lasteinleitung mit Steifen, Wechselwirkung Torsion/Biegedrillknicken, Klasse 4 unter M<sub>z</sub>.'), 'ref.html#/stahlbau');
 }
 
@@ -8565,7 +8570,7 @@ function runHolz(){
   I.hog = ciSideOn('holz', I) && CI_SIDE.hog;
   const res=nachweiseHolz(I, h);
   LAST={ mat:'holz', I:{...I, h}, res, date:new Date() };
-  renderOut(res.C, res.ok, figHolz(I, h)+(I.M>0 ? figHolzSeite(I, h) : ''), _L`${I.b} × ${h} mm, ${res.R[0]} · k<sub>mod</sub> = ${deNum(res.kmod,2)} · ${deNum(I.b*h*res.R[11]/1e6*9.81/1000,2)} kN/m Eigenlast`,
+  renderOut(res.C, res.ok, figHolz(I, h), _L`${I.b} × ${h} mm, ${res.R[0]} · k<sub>mod</sub> = ${deNum(res.kmod,2)} · ${deNum(I.b*h*res.R[11]/1e6*9.81/1000,2)} kN/m Eigenlast`,
     tt('Querzug, Durchbrüche und gekrümmte Träger. Ausklinkungen, Satteldachträger, Verbindungen, Abbrand (Brandschutz) und Deckenschwingungen haben eigene Modi.'), 'ref.html#/holzbau');
 }
 
@@ -10541,7 +10546,6 @@ function buildReportStahl(){
       ${row(tt('Teilsicherheitsbeiwerte'), 'γ<sub>M0</sub> = 1,0 · γ<sub>M1</sub> = 1,1')}
     </table></section>
     <section><h2>Profil</h2><div class="figure">${figProfil(P,res.K,I)}</div></section>
-    <section><h2>${tt('Seitenansicht')}</h2><div class="figure">${seiteStahl(I)}</div></section>
     ${reportChecks(res.C)}
       <p class="meta" style="margin-top:8px">I<sub>T</sub> aus Nennmaßen (Herstellerformel mit Ausrundung), Abweichung zu Tabellenwerten bis etwa 3 %. Lernwerkzeug — ersetzt keine geprüfte Statik.</p></section>`;
 }
@@ -10569,7 +10573,7 @@ function buildReportHolz(){
       ${repRow(tt('Nutzung'), _L`Nutzungsklasse ${I.nkl}, KLED „${KLED_[I.kled]}“, k<sub>mod</sub> = ${deNum(res.kmod,2)}, γ<sub>M</sub> = 1,3`)}
       ${repRow(tt('Schnittgrößen (GZT)'), `M<sub>y,Ed</sub> = ${deNum(I.M,1)} kNm, V<sub>Ed</sub> = ${deNum(I.V,1)} kN, N<sub>Ed</sub> = ${deNum(I.N,1)} kN, F<sub>Ed</sub> = ${deNum(I.F,1)} kN (l = ${deNum(I.lA,0)} mm)`)}
       ${repRow(tt('Gebrauchstauglichkeit'), `M<sub>G,k</sub> = ${deNum(I.MG,2)} kNm, M<sub>Q,k</sub> = ${deNum(I.MQ,2)} kNm, ψ<sub>2</sub> = ${deNum(I.psi2,2)}`)}
-    </table></section><section><h2>Querschnitt</h2><div class="figure">${figHolz(I,res.h)}</div></section>${I.M>0?`<section><h2>${tt('Seitenansicht')}</h2><div class="figure">${figHolzSeite(I,res.h)}</div></section>`:''}`
+    </table></section><section><h2>Querschnitt</h2><div class="figure">${figHolz(I,res.h)}</div></section>`
     + reportChecks(res.C) + repEnd(tt('Schubverformung vernachlässigt.'));
 }
 function buildReportStuetze(){

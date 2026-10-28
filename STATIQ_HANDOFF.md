@@ -568,6 +568,13 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Bemessung Stahlträger und Holzbauteil: ohne Seitenansicht, Momentenverlauf im Stabilitätsteil — size v0.7.12
+
+- Auf Valentins Wunsch zeigen Stahl › Träger/Stütze und Holz › Bauteil nur noch den Querschnitt; die Seitenansicht (auch die aus „Schnittkräfte“ nach dem Import) ist auf dem Bildschirm und im Bericht entfallen. Die Funktionen `figTraegerSeite`, `figHolzSeite`, `figSeiteCalc`, `seiteStahl` bleiben ungenutzt im Code.
+- Die Schnittgrößen-Karten enthalten nur M, V, N. Der Momentenverlauf (Gleichlast, Einzellast in Feldmitte, konstant, linear mit ψ) steht jetzt in „Stabilität“ bzw. „Kippen und Knicken“ als „Momentenverlauf (für Kippen und Durchbiegung)“ mit Hinweis: er ändert M_Ed nicht, sondern nur C₁ bzw. l_ef und die Biegelinie. Rechnung unverändert; der Import aus calc setzt den Verlauf weiterhin.
+- Übersetzungsschlüssel der Berichtsvorlagen Stahl (Seitenansicht-Abschnitt) und Holz (Platzhalter am Ende) in lang/size.{en,fr,es}.js angepasst; neue Schlüssel mvKipp, mvHint, mvHintH.
+- Tests: test_size_traeger_seite (24) und test_size_import_seite neu ausgerichtet (keine Seitenansicht, C₁/l_ef unverändert, Feld im Stabilitätsteil, Übersetzung).
+
 ## „Auf dieser Seite“: Markierung bis zum letzten Abschnitt — ref v0.3.55
 
 - `renderToc()` nutzt statt des IntersectionObservers einen Scroll-Beobachter (rAF): aktiv ist der letzte Abschnitt, dessen Anfang das obere Viertel erreicht hat; ist die Seite ganz unten, immer der letzte. Vorher blieb die Markierung bei kurzen Schlussabschnitten am vorletzten hängen. Der Beobachter wird bei jedem Seitenwechsel abgemeldet.

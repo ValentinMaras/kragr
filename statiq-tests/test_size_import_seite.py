@@ -1,4 +1,4 @@
-# statiq·size v0.5.26/0.5.27: Seitenansicht und Momentenverlauf (C₁) nach „Aus calc übernehmen“ — echtes System aus calc (Lager, Lasten, Momentenlinie,
+# statiq·size v0.5.26/0.5.27 (Seitenansicht seit v0.7.12 entfernt, geprüft wird der Momentenverlauf): Seitenansicht und Momentenverlauf (C₁) nach „Aus calc übernehmen“ — echtes System aus calc (Lager, Lasten, Momentenlinie,
 # gedrückter Gurt nach Vorzeichen) für Stahlträger und Holzbauteil; nach Änderung von L oder M wieder schematisch. Ohne Playwright: SKIP.
 import os, sys, re, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
@@ -30,29 +30,20 @@ async def main():
             if part: await pg.evaluate(f"$('ci-part').value='{part}'")
             await pg.evaluate(f"importCalc('{keys[k]}')"); await pg.wait_for_timeout(120)
             return await pg.evaluate(SIDE)
-        r=await imp('stahl',0)
-        check('Einfeldträger: Seitenansicht aus calc mit 2 Lagern', any('aus „Schnittkräfte“' in t for t in r['txt']) and r['tri']==2, r['tri'])
-        check('Einfeldträger: Lasten q = 5,0 und F = 10,0 aus calc', any(t.startswith('q = 5,0') for t in r['txt']) and any(t=='F = 10,0' for t in r['txt']))
-        check('Einfeldträger: max M = 28,1 kNm, Druckgurt oben', '28,1 kNm' in r['txt'] and all(y<80 for y in r['blue']))
+        # seit size v0.7.12 keine Seitenansicht mehr — auch nicht nach dem Import aus calc
+        for k,part in ((0,None),(1,None),(2,None),(3,'riegel'),(3,'stiel')):
+            r=await imp('stahl',k,part)
+            check(f'Import {k}{" "+part if part else ""}: keine Seitenansicht', r is None)
+        await imp('stahl',0)
         check('Import setzt L_LT = Stützweite (mit Hinweis)', await pg.input_value('#sn-Llt')=='5' and 'Stützweite angenommen' in await pg.inner_text('#ci-msg'))
-        r=await imp('stahl',1)
-        check('Kragarm: Einspannung, Kragmoment −37,5 kNm, Druckgurt unten', r['hatch']==1 and any('37,5 kNm' in t and t.startswith('-') for t in r['txt']) and r['blue'] and all(y>80 for y in r['blue']), r['blue'][:3])
-        check('Kragarm: Legende „Druck unten“', 'Druck unten' in r['prof'])
-        r=await imp('stahl',2)
-        check('Durchlaufträger: 3 Lager, zwei Feldlasten', r['tri']==3 and sum(1 for t in r['txt'] if t.startswith('q = 5,0'))==2, r['tri'])
-        check('Durchlaufträger: Feldmoment 8,8 und Stützmoment −15,6 kNm', '8,8 kNm' in r['txt'] and any(t.startswith('-15,6') for t in r['txt']))
-        check('Durchlaufträger: Druckgurt über der Stütze unten, im Feld oben', any(y>80 for y in r['blue']) and any(y<80 for y in r['blue']))
-        r=await imp('stahl',3,'riegel')
-        check('Rahmen-Riegel: zwei Rahmenecken, Eckmoment negativ', r['txt'].count('Rahmenecke')==2 and any(t.startswith('-13,8') for t in r['txt']), [t for t in r['txt'] if 'kNm' in t])
-        r=await imp('stahl',3,'stiel')
-        check('Rahmen-Stiel: Fuß und Kopf beschriftet', 'Fuß' in r['txt'] and 'Kopf' in r['txt'])
+        await imp('stahl',1)
+        check('Kragarm: Legende am Profil „Druck unten“', 'Druck unten' in await pg.evaluate("document.querySelector('#fig .fig-legend')?.textContent||''"))
         # Momentenverlauf aus calc (seit v0.5.27)
         mv=lambda: pg.evaluate("[$('sn-mv').value, +$('sn-psi').value, +$('sn-L').value, +$('sn-Llt').value]")
         await imp('stahl',0); v=await mv(); check('Verlauf: Einfeldträger → Gleichlast, L = L_LT = 5', v==['q',0,5,5], v)
         await imp('stahl',1); v=await mv(); check('Verlauf: Kragarm → konstant (sichere Seite)', v[0]=='c' and 'Kragarm: C₁' in await pg.inner_text('#ci-msg'), v)
         r=await imp('stahl',2); v=await mv(); t=await pg.inner_text('#ci-msg')
         check('Verlauf: Durchlaufträger (Stützmoment) → konstant, Feld 0…5 m', v[0]=='c' and v[2]==5 and 'Abschnitt 0,00 … 5,00 m' in t and 'als Gleichlast angesetzt' not in t, v)
-        check('Seitenansicht markiert den Abschnitt für den Nachweis', 'Abschnitt für den Nachweis' in r['txt'])
         await imp('stahl',3,'riegel'); v=await mv(); check('Verlauf: Rahmenriegel mit Eckmomenten → konstant', v[0]=='c', v)
         await imp('stahl',3,'stiel'); v=await mv(); check('Verlauf: Rahmenstiel ohne Querlast → linear mit ψ', v[0]=='lin' and 'keine Querlast' in await pg.inner_text('#ci-msg'), v)
         R=await pg.evaluate("""[ciMomentVerlauf({typ:'cont',L:10,x:[0,5,10],M:[0,-20,10],sup:[{x:0},{x:5},{x:10}],loads:[{k:'q',a:0,b:5,qa:5,qb:5}]}),
@@ -62,17 +53,12 @@ async def main():
         check('Regel: unbelastetes Feld (längeres Nachbarfeld) → linear, ψ = M_klein/M_groß', R[1]['mv']=='lin' and abs(R[1]['psi']-(-0.5))<1e-9 and R[1]['a']==5 and R[1]['b']==12, R[1])
         check('Regel: Feld ohne Endmomente → Verlauf aus den Lasten (Einzellast)', R[2]['mv']=='F', R[2])
         r=await imp('holz',1)
-        check('Holz aus Kragarm: Holzbalken mit Einspannung', r['wood'] and r['hatch']==1 and 'gedrückter Rand' in r['legend'])
-        await pg.evaluate("$('ho-M').value='20'; run()"); await pg.wait_for_timeout(80)
-        r=await pg.evaluate(SIDE)
-        check('nach Änderung von M: wieder schematische Ansicht', r and not any('aus „Schnittkräfte“' in t for t in r['txt']))
-        for L,w in (('en','Side view from “Internal forces”'),('fr','Vue latérale issue de « Efforts »'),('es','Vista lateral desde «Esfuerzos»')):
+        check('Holz aus Kragarm: keine Seitenansicht, Verlauf konstant', r is None and await pg.input_value('#ho-mv')=='c')
+        for L in ('en','fr','es'):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.reload(); await pg.wait_for_timeout(300)
-            r=await imp('stahl',2)
-            t=' '.join(r['txt'])+' '+r['legend']+' '+r['prof']
-            t+=' '+await pg.inner_text('#ci-msg')
+            await imp('stahl',2); t=await pg.inner_text('#ci-msg')
             g=re.findall(r'\b(Seitenansicht|Lager|Lasten|Momentenlinie|Rahmenecke|Druck|gedrückter|Gurt|Momentenverlauf|Abschnitt|Querlast|Endmomente)\b', t)
-            check(f'{L}: Seitenansicht aus calc übersetzt', any(w in x for x in r['txt']) and not g, g[:4])
+            check(f'{L}: Import-Hinweis übersetzt', t.strip() and not g, g[:4])
         await pg.evaluate("localStorage.setItem('statiq-lang','de')")
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()

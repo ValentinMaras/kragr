@@ -568,6 +568,12 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Startseite ohne Menü — k5 (28.10.2026)
+
+- Die Startseite (`PAGE==='index'`) baut kein ☰-Menü mehr; sie verlinkt die Module selbst. `footerSet()` in k5.js legt stattdessen oben rechts in `header.k5-idx` zwei schmale Umschalter an: `#k5-ftheme` (Auto/Hell/Dunkel, über `setTheme`) und `#k5-flang` (DE/EN/FR/ES, über die Sprachwahl der Startseite `setLang`). Unter 380 px enger, damit beide in eine Zeile passen; die Startseite passt weiter ohne Scrollen.
+- Das Design der Startseite bleibt (Valentin: „Das Jetzige ist schon ganz cool“); drei Entwürfe (Inhaltsverzeichnis, Kacheln mit Figur, Kragarm als Titelbild) wurden gezeigt und zurückgestellt.
+- Tests: test_design_k5 (Startseite ohne Menü, Umschalter, 360/390/1280 px), test_dunkel (Startseite über `#k5-ftheme`).
+
 ## Stahlträger: „Weitere Einwirkungen“ als „Erweitert“ in den Schnittgrößen — size v0.7.13
 
 - M_z, Torsion und Einzellast auf den Gurt (mit s_s, Lage, c) stehen nicht mehr in einer eigenen Karte, sondern als `#st-adv` („Erweitert: Biegung um z, Torsion, Einzellast auf den Gurt“) in der Karte Schnittgrößen. `kragrK5.acc` macht daraus ein Akkordeon (Schlüssel st-adv, standardmäßig zu, offen wenn Werte gesetzt); zugeklappt zeigt die Kurzfassung die gesetzten Werte.

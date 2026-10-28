@@ -28,14 +28,15 @@ async def main():
         bad={}
         for f in PAGES:
             await pg.goto(U+f+'.html'); await pg.evaluate("localStorage.setItem('muly-theme','auto')"); await pg.reload(); await pg.wait_for_timeout(250)
-            # k5: Erscheinungsbild im Menü als Umschalter Auto · Hell · Dunkel
-            await pg.click('#k5-burger'); await pg.wait_for_timeout(150)
-            vis=await pg.evaluate("document.querySelectorAll('#k5-theme button').length")==3
+            # k5: Erscheinungsbild im Menü als Umschalter Auto · Hell · Dunkel (Startseite seit 28.10.2026 ohne Menü: Umschalter oben rechts)
+            sel='#k5-ftheme' if f=='index' else '#k5-theme'
+            if f!='index': await pg.click('#k5-burger'); await pg.wait_for_timeout(150)
+            vis=await pg.evaluate(f"document.querySelectorAll('{sel} button').length")==3
             seq=[]
             for v in ['dark','light','auto']:
-                await pg.click(f'#k5-theme button[data-v={v}]'); await pg.wait_for_timeout(80)
+                await pg.click(f'{sel} button[data-v={v}]'); await pg.wait_for_timeout(80)
                 seq.append((await pg.evaluate("localStorage.getItem('muly-theme')"), await pg.evaluate(DARK)))
-            await pg.keyboard.press('Escape')
+            if f!='index': await pg.keyboard.press('Escape')
             if not vis or seq!=[('dark',True),('light',False),('auto',False)]: bad[f]=(vis,seq)
         check('Menü auf allen sechs Seiten: Erscheinungsbild Dunkel → Hell → Automatisch', not bad, bad)
         await pg.goto(U+'calc.html'); await pg.evaluate("localStorage.setItem('muly-theme','dark')")

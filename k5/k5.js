@@ -158,7 +158,20 @@
   // Rechenblätter (calc v0.11.11, statt „Projekte“): Blatt mit Eselsohr und Zeilen
   var ICON_PROJ=SVG_I('<path d="M6 3h8l4 4v14H6z" stroke-width="1.8"/><path d="M14 3v4h4" stroke-width="1.8"/><path d="M9 12h6M9 15.5h6M9 19h3" stroke-width="1.8"/>');
   var burger, menu, scrim, lastFocus;
+  // Startseite (seit 28.10.2026): kein Menü — sie verlinkt die Module selbst. Hell/Dunkel und Sprache stehen schmal oben rechts,
+  // wo vorher der Menüknopf war (kostet keine Höhe, die Startseite passt weiter ohne Scrollen).
+  function footerSet(){
+    var f=D.querySelector('header.k5-idx'); if(!f) return;
+    var w=D.getElementById('k5-fset'); if(!w){ w=D.createElement('div'); w.id='k5-fset'; w.className='k5-fset'; w.setAttribute('role','group'); f.appendChild(w); }
+    w.innerHTML=seg('k5-ftheme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+(langSel()?seg('k5-flang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang()):'');
+    w.setAttribute('aria-label', t('set'));
+    Array.prototype.forEach.call(w.querySelectorAll('#k5-ftheme button'), function(b){ b.setAttribute('aria-label', t('look')+': '+b.textContent); b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
+    Array.prototype.forEach.call(w.querySelectorAll('#k5-flang button'), function(b){ b.setAttribute('aria-label', t('lang')+': '+b.textContent); b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
+      setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); footerSet(); }, STILL()?0:160); }; });
+    requestAnimationFrame(placePills);
+  }
   function buildHeader(){
+    if(PAGE==='index'){ footerSet(); return; }
     var hdr=D.querySelector('.app-header.k-hdr, header.k5-idx'); if(!hdr || D.getElementById('k5-burger')) return;
     burger=D.createElement('button'); burger.type='button'; burger.id='k5-burger'; burger.className='k5-burger';
     burger.setAttribute('aria-haspopup','dialog'); burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-controls','k5-menu');

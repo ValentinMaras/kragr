@@ -31,7 +31,7 @@ async def main():
         # Kopfzeile und Menü auf allen Seiten
         for W in [390,1280]:
             await pg.set_viewport_size({'width':W,'height':844}); R={}
-            for f in PAGES:
+            for f in [x for x in PAGES if x!='index']:   # Startseite seit 28.10.2026 ohne Menü (eigene Prüfung unten)
                 await pg.goto(B+f+'.html'); await pg.wait_for_timeout(300); R[f]=await pg.evaluate(HDR)
             check(f'{W} px: Kopfzeile zeigt nur Logo und ☰', all(set(r['shown'])<= {'logo','k5-burger'} and 'k5-burger' in r['shown'] for r in R.values()), {k:v['shown'] for k,v in R.items()})
             check(f'{W} px: ☰ mindestens 44 × 44 px', all(r['w']>=44 and r['h']>=44 for r in R.values()), {k:(v['w'],v['h']) for k,v in R.items()})
@@ -39,7 +39,23 @@ async def main():
             check(f'{W} px: ☰ an der rechten Rahmenkante (App-Seiten)', all(abs(R[f]['right']-edge)<=1 for f in PAGES if f!='index'), {k:v['right'] for k,v in R.items()})
             check(f'{W} px: hellgrauer Seitengrund, kein Querscrollen', all(r['bg']=='rgb(242, 243, 246)' and r['sw']<=W for r in R.values()), {k:(v['bg'],v['sw']) for k,v in R.items()})
         await pg.set_viewport_size({'width':390,'height':844})
-        for f,cur in [('calc','calc'),('size','size'),('ref','ref'),('projekt','projekt'),('index',None)]:
+        # Startseite: kein Menü; Erscheinungsbild und Sprache oben rechts
+        for W in [390,1280,360]:
+            await pg.set_viewport_size({'width':W,'height':844}); await pg.goto(B+'index.html'); await pg.wait_for_timeout(300)
+            r=await pg.evaluate("""(()=>{ const f=document.getElementById('k5-fset'), b=f&&f.getBoundingClientRect();
+              return {burger:!!document.getElementById('k5-burger'), menu:!!document.getElementById('k5-menu'), theme:document.querySelectorAll('#k5-ftheme button').length, lang:document.querySelectorAll('#k5-flang button').length,
+                inHdr:!!(f&&f.closest('header.k5-idx')), top:b?Math.round(b.top):null, h:b?Math.round(b.height):null, right:b?Math.round(b.right):null, sw:document.documentElement.scrollWidth}; })()""")
+            check(f'Startseite {W} px: kein Menü, oben rechts Auto/Hell/Dunkel und DE/EN/FR/ES in einer Zeile', not r['burger'] and not r['menu'] and r['theme']==3 and r['lang']==4 and r['inHdr'] and r['top']>=0 and r['h']<=34 and r['right']<=W and r['sw']<=W, r)
+        await pg.set_viewport_size({'width':390,'height':844}); await pg.goto(B+'index.html'); await pg.wait_for_timeout(300)
+        await pg.click('#k5-ftheme button[data-v="dark"]'); await pg.wait_for_timeout(120)
+        d=await pg.evaluate("[document.documentElement.classList.contains('dark'), localStorage.getItem('muly-theme')]")
+        await pg.click('#k5-ftheme button[data-v="auto"]'); await pg.wait_for_timeout(120)
+        check('Startseite: Erscheinungsbild „Dunkel“ und zurück auf „Auto“', d==[True,'dark'] and await pg.evaluate("localStorage.getItem('muly-theme')")=='auto', d)
+        await pg.click('#k5-flang button[data-v="en"]'); await pg.wait_for_timeout(500)
+        r=await pg.evaluate("[localStorage.getItem('statiq-lang'), document.getElementById('footer-legal').textContent, document.querySelector('#k5-flang button[aria-pressed=true]').dataset.v]")
+        check('Startseite: Sprache EN über die Umschalter', r[0]=='en' and 'Legal' in r[1] and r[2]=='en', r)
+        await pg.click('#k5-flang button[data-v="de"]'); await pg.wait_for_timeout(500)
+        for f,cur in [('calc','calc'),('size','size'),('ref','ref'),('projekt','projekt')]:
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(300); await menu(pg)
             r=await pg.evaluate("""()=>({mods:[...document.querySelectorAll('#k5-menu .k5-mod')].map(a=>a.dataset.mod+'>'+a.getAttribute('href').split('#')[0]),
               cur:(document.querySelector('#k5-menu .k5-mod[aria-current=page]')||{}).dataset?.mod||null, ueb:!!document.getElementById('k5-ueb'),

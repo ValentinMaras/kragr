@@ -11,7 +11,7 @@ fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:66}', str(info)[:150])
 GER=re.compile(r'\w*[äöüÄÖÜß]\w*|\b(und|der|die|das|mit|nicht|oder|für|ein|eine|bei|aus|nach|ist|sind|wird|im|am|zum|zur|vom|oben|unten|rechts|Feld|Felder|Last|Lager|Träger|Stütze|Wand|Platte|Balken|Querschnitt|Kraft|Knoten|Stab|Gurt|Pfosten|Riegel|Seite|Höhe|Breite|Dicke|Länge|Beispiel|Schnitt|Fall)\b')
-OK_WORDS=['Müller-Breslau','Dünnformat']   # Eigennamen/Fachbegriffe ('links' = engl. Bügel, daher nicht im Muster)
+OK_WORDS=['Der Eisenbetonbau','Eisenbetonbau','Eisenbeton','Stahlbeton','Mörsch','Erdbaumechanik','Müller-Breslau','Dünnformat']   # Eigennamen/Fachbegriffe ('links' = engl. Bügel, daher nicht im Muster)
 TEXTS=r"""(sel) => { const out=[]; document.querySelectorAll(sel).forEach(R=>{ const w=document.createTreeWalker(R, NodeFilter.SHOW_TEXT);
   while(w.nextNode()){ const n=w.currentNode, p=n.parentElement; if(!p || ['SCRIPT','STYLE','SUB','SUP'].includes(p.tagName.toUpperCase())) continue;
     const t=n.textContent.trim(); if(t && /[A-Za-zÄÖÜäöüß]{3,}/.test(t)) out.push(t); }

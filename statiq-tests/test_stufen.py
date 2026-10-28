@@ -70,8 +70,10 @@ async def main():
         r=await pg.evaluate("""[!!document.querySelector('#tab-cont [data-st=dims] #span-length-inputs input'), !!document.querySelector('#tab-cont [data-st=sup] #cont-sup-inputs select'),
            !!document.querySelector('#tab-cont [data-st=sup] #cont-hinge-list'), !!document.querySelector('#tab-cont [data-st=loads] #span-load-cards .k-loads'), !document.querySelector('#span-length-inputs select')]""")
         check('Durchlaufträger: Felder in ①, Endlager/Kragarme/Gelenke in ②, Lasten je Feld in ③', all(r), r)
-        await pg.evaluate("addContHinge()"); await pg.wait_for_timeout(300)
-        s=await pg.evaluate(ST, 'cont')
+        await pg.evaluate("addContHinge()")
+        for _ in range(20):   # Kurzfassung baut sich verzögert neu (unter Last im Gesamtlauf langsamer)
+            await pg.wait_for_timeout(150); s=await pg.evaluate(ST, 'cont')
+            if s[1][2].endswith('1 Gelenk'): break
         check('Zusammenfassungen: „2 Felder · L = 5 / 5 m“, Lager mit „1 Gelenk“', s[0][2]=='2 Felder · L = 5 / 5 m' and s[1][2].endswith('1 Gelenk'), s)
         # Einfeldträger
         await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(300)

@@ -32,7 +32,7 @@ async def main():
         await pg.evaluate("showTab('frame'); calculateFrame(); saveFrameCalc()"); await pg.evaluate(OPEN); await pg.wait_for_timeout(400)
         h=await pg.evaluate("(()=>{ const s=document.getElementById('report-svg-N'); return [s.querySelectorAll('[fill$=\"h)\"]').length, s.querySelectorAll('[fill$=\"v)\"]').length]; })()")
         n=await pg.evaluate("document.querySelectorAll('.rb-grid .st').length")
-        check('Rahmen: Stiele waagerecht, Riegel senkrecht schraffiert; Rechenweg 4 Schritte', h[0]>=1 and h[1]>=1 and n==4, (h, n))
+        check('Rahmen: Stiele waagerecht, Riegel senkrecht schraffiert; Rechenweg mit Kraftgrößenverfahren (calc v0.11.13: mind. 10 Schritte)', h[0]>=1 and h[1]>=1 and n>=10, (h, n))
         # EN: Punkt als Dezimaltrenner, Überschriften englisch
         await pg.evaluate("setCalcLang('en')"); await pg.evaluate(OPEN); await pg.wait_for_timeout(300)
         t=await pg.evaluate("document.querySelector('.rb').innerText")

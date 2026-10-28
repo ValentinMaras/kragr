@@ -165,7 +165,7 @@ async def main():
                 ov=await pg.evaluate("document.documentElement.scrollWidth > window.innerWidth+1")
                 if nan or ov: bad.append((vp[0],t,'NaN' if nan else 'Überlauf'))
         check(f'{len(PAGES)} Wasserbau-Seiten Desktop + 390 px: keine NaN, kein Seitenüberlauf', not bad, bad)
-        n=await pg.evaluate("Object.values(FAECHER.wasserbau.kapitel).reduce((s,k)=>s+Object.keys(k.themen).length,0)")
+        n=await pg.evaluate("Object.entries(FAECHER.wasserbau.kapitel).filter(([k])=>k!=='allgemein').reduce((s,[,k])=>s+Object.keys(k.themen).length,0)")   # ohne „Allgemeines“ (ref v0.3.51, eigene Prüfung)
         check(f'FAECHER Wasserbau: {n} Themen = {len(PAGES)}', n==len(PAGES))
         check('Keine JavaScript-Fehler', not errs, errs[:3])
         await br.close()

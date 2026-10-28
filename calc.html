@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.12 -->
+<!-- kragr v0.11.13 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1795,7 +1795,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.12</span>
+    <span class="version">v0.11.13</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2331,7 +2331,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.12';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.13';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -4976,6 +4976,9 @@ function frameSolveDSM(model){
   return {u, R, mechanism:false};
 }
 
+// Ungekapselter Löser für Hilfsrechnungen (Kraftgrößenverfahren im Rechenweg, calc v0.11.13): spätere Hüllen (Schnitt, Rechenweg)
+// sollen davon nichts mitschneiden.
+const FRAME_SOLVE_RAW = frameSolveDSM;
 // ── 3. SCHNITTGRÖSSEN ──────────────────────────────────────────────
 // Aus den Stabendkräften am Elementanfang + Gleichgewicht am Teilstück 0…ξ:
 //   N(ξ) = −N_i − ∫px,   Q(ξ) = V_i + ∫py,   M(ξ) = −M_i + V_i·ξ + ∫py(τ)(ξ−τ)dτ
@@ -6920,7 +6923,7 @@ function eqLine(line){
 // RECHENWEG (v0.8.13): Schritt-für-Schritt-Lösung zu jedem System, Darstellung wie in kragr·size
 // ══════════════════════════════════════════════════
 const RWT = {
-  de:{ title:'Rechenweg — Schritt für Schritt', sys:'System und statische Bestimmtheit', loads:'Lasten und ihre Resultierenden', none:'keine Lasten',
+  de:{ kfGS:"Kraftgrößenverfahren: statisch bestimmtes Grundsystem", kfGST:"Die n überzähligen Lagergrößen werden gelöst und als Unbekannte X angesetzt. Übrig bleibt ein statisch bestimmtes Grundsystem.", relRot:"Einspannung in {0} durch ein Gelenk ersetzt", relUx:"waagerechte Halterung in {0} gelöst", relUy:"senkrechte Halterung in {0} gelöst", kfM0:"Lastzustand „0“: Momente M₀ im Grundsystem (Anfang | Mitte | Ende je Stababschnitt)", kfMi:"Einheitszustand X{0} = 1: Momente M̄{0} (Anfang | Ende, linear)", kfD:"Formänderungswerte EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> ds · EI₀/EI", kfDT:"Integraltafel je Stababschnitt: Trapez (i₁, i₂) × Trapez (k₁, k₂) mit Parabel (Stich f): l/6·[i₁·(2k₁ + k₂) + i₂·(k₁ + 2k₂)] + l/3·f·(i₁ + i₂). Ohne Last ist f = 0.", kfB:"Belastungsglieder EI₀·δ<sub>i0</sub> = Σ ∫ M̄<sub>i</sub>·M₀ ds · EI₀/EI", kfNum:"Trapezlast: numerisch integriert", kfE:"Verträglichkeit: an den gelösten Stellen keine Verschiebung bzw. Verdrehung", kfSup:"Überlagerung: M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub> an den Stabenden", kfChk:"Kontrolle: X stimmt mit den Auflagerkräften des Lösers überein, die Momente auch (größte Abweichung {0}).", kfSkip:"Mit Federn, Setzungen oder Temperatur zeigt der Rechenweg das Ergebnis des Weggrößenverfahrens.", kfBig:"n > 3: Rechenweg nur über das Weggrößenverfahren.", frMethK:"n > 0: Kraftgrößenverfahren Schritt für Schritt (unten). Der Löser rechnet zur Kontrolle mit dem Weggrößenverfahren.", memL:"Stiel links", memR:"Stiel rechts", memRaf:"Riegel", kfEI:"EI₀ = EI der Stiele", kfX:"X wirkt in Richtung der gelösten Lagergröße (→, ↑ bzw. ↺ positiv).",  kgvGS:"Kraftgrößenverfahren: statisch bestimmtes Grundsystem", kgvGST:"Gelenke über den Innenstützen{0} machen aus dem Durchlaufträger eine Kette von Einfeldträgern. Die dort frei gewordenen Stützmomente sind die Unbekannten X.", kgvFixT:" und an der Einspannung", kgvM0:"Lastzustand „0“: Momente M₀ im Grundsystem (jedes Feld als Einfeldträger)", kgvMi:"Einheitszustände X<sub>i</sub> = 1", kgvMiT:"M̄<sub>i</sub> ist ein Dreieck über den beiden Nachbarfeldern der Stütze i, mit dem Wert 1 über der Stütze und 0 an den Nachbarstützen.", kgvD:"Formänderungswerte EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> dx / k", kgvDT:"Integraltafel: Dreieck × Dreieck mit gleicher Spitze l/3 · i · k, gegenläufig l/6 · i · k (k = I/I₀ der Felder).", kgvB:"Belastungsglieder EI₀·δ<sub>i0</sub> = Σ ∫ M₀·M̄<sub>i</sub> dx / k", kgvBT:"Je Last eine Zeile der Integraltafel, die Beiträge werden addiert (Überlagerung).", tPar:"Parabel × Dreieck", tTri:"Dreieck × Dreieck", tNum:"Teillast: abschnittsweise integriert", tMom:"Einzelmoment: abschnittsweise integriert", kgvE:"Verträglichkeit: kein Knick über den Stützen", kgvE6:"Mit 6 multipliziert ist das genau die Dreimomentengleichung (Clapeyron).", kgvSup:"Überlagerung: M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub>", kgvTab:"Integraltafel in „Wissen“ →", kgvChk:"Kontrolle: stimmt mit dem Ergebnis des Lösers überein (Abweichung {0} kNm).", kgvSol:"Gleichungssystem lösen", kgvSolT:"Die Lösungen sind die Stützmomente.", eqAt:"Gleichung für Stütze",  title:'Rechenweg — Schritt für Schritt', sys:'System und statische Bestimmtheit', loads:'Lasten und ihre Resultierenden', none:'keine Lasten',
     momA:'Momentengleichgewicht um A (↺ positiv) liefert B<sub>V</sub>', sumV:'Summe der Vertikalkräfte liefert A<sub>V</sub>', sumH:'Summe der Horizontalkräfte liefert A<sub>H</sub>',
     clamp:'Gleichgewicht an der Einspannung A', mmax:'Größtes Moment: Schnitt bei x₀, Gleichgewicht am linken Teil', at:'bei', from:'von', to:'bis',
     detBeam:'Festlager A + Loslager B: 3 Auflagerreaktionen, 3 Gleichgewichtsbedingungen → statisch bestimmt', detCant:'Einspannung A: 3 Auflagerreaktionen, 3 Gleichgewichtsbedingungen → statisch bestimmt',
@@ -6931,7 +6934,7 @@ const RWT = {
     span:'Feld', ovh:'Kragarm', known:'bekannt aus dem Kragarm', frDet:'Bestimmtheit n = a − 3 − g', frLoad:'Resultierende aller Lasten', frReac:'Auflagerkräfte (Lösung über das Weggrößenverfahren)', frEq:'Gleichgewichtskontrolle am Gesamtsystem',
     frMeth:'n > 0: Lösung mit der Steifigkeitsmatrix (Weggrößenverfahren). Die Gleichgewichtskontrolle zeigt, dass Lasten und Auflagerkräfte zusammenpassen.',
     frMeth0:'n = 0: statisch bestimmt — die Auflagerkräfte folgen allein aus Gleichgewicht (und M = 0 im Gelenk).', cutLeft:'Anteil links vom Schnitt', with:'mit', spans:'Felder', left:'links', right:'rechts', kNote:'(k = I/I₀; bei Gleichlast über das ganze Feld: R = L = q·l³/4)', head:'Kopfhalterung' },
-  en:{ title:'Solution — step by step', sys:'System and static determinacy', loads:'Loads and their resultants', none:'no loads',
+  en:{ kfGS:"Force method: statically determinate primary system", kfGST:"The n redundant support reactions are released and taken as unknowns X. What remains is a statically determinate primary system.", relRot:"fixed support {0} replaced by a pin", relUx:"horizontal restraint at {0} released", relUy:"vertical restraint at {0} released", kfM0:"Load case “0”: moments M₀ in the primary system (start | middle | end of each member part)", kfMi:"Unit state X{0} = 1: moments M̄{0} (start | end, linear)", kfD:"Flexibility coefficients EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> ds · EI₀/EI", kfDT:"Integral table for each member part: trapezoid (i₁, i₂) × trapezoid (k₁, k₂) with parabola (sag f): l/6·[i₁·(2k₁ + k₂) + i₂·(k₁ + 2k₂)] + l/3·f·(i₁ + i₂). Without load f = 0.", kfB:"Load terms EI₀·δ<sub>i0</sub> = Σ ∫ M̄<sub>i</sub>·M₀ ds · EI₀/EI", kfNum:"trapezoidal load: integrated numerically", kfE:"Compatibility: no displacement or rotation at the released points", kfSup:"Superposition: M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub> at the member ends", kfChk:"Check: X agrees with the solver’s reactions, and so do the moments (largest difference {0}).", kfSkip:"With springs, settlements or temperature the solution shows the result of the displacement method.", kfBig:"n > 3: solution via the displacement method only.", frMethK:"n > 0: force method step by step (below). The solver checks it with the displacement method.", memL:"left column", memR:"right column", memRaf:"rafter", kfEI:"EI₀ = EI of the columns", kfX:"X acts in the direction of the released reaction (→, ↑ or ↺ positive).",  kgvGS:"Force method: statically determinate primary system", kgvGST:"Hinges over the inner supports{0} turn the continuous beam into a chain of simple beams. The released support moments are the unknowns X.", kgvFixT:" and at the fixed end", kgvM0:"Load case “0”: moments M₀ in the primary system (each span as a simple beam)", kgvMi:"Unit states X<sub>i</sub> = 1", kgvMiT:"M̄<sub>i</sub> is a triangle over the two spans next to support i, with the value 1 over the support and 0 at the neighbouring supports.", kgvD:"Flexibility coefficients EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> dx / k", kgvDT:"Integral table: triangle × triangle with the same peak l/3 · i · k, opposite peaks l/6 · i · k (k = I/I₀ of the spans).", kgvB:"Load terms EI₀·δ<sub>i0</sub> = Σ ∫ M₀·M̄<sub>i</sub> dx / k", kgvBT:"One line of the integral table per load; the contributions are added (superposition).", tPar:"parabola × triangle", tTri:"triangle × triangle", tNum:"partial load: integrated piece by piece", tMom:"point moment: integrated piece by piece", kgvE:"Compatibility: no kink over the supports", kgvE6:"Multiplied by 6 this is exactly the three-moment equation (Clapeyron).", kgvSup:"Superposition: M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub>", kgvTab:"Integral table in “Reference” →", kgvChk:"Check: agrees with the solver result (difference {0} kNm).", kgvSol:"Solve the system of equations", kgvSolT:"The solutions are the support moments.", eqAt:"equation for support",  title:'Solution — step by step', sys:'System and static determinacy', loads:'Loads and their resultants', none:'no loads',
     momA:'Moment equilibrium about A (↺ positive) gives B<sub>V</sub>', sumV:'Sum of vertical forces gives A<sub>V</sub>', sumH:'Sum of horizontal forces gives A<sub>H</sub>',
     clamp:'Equilibrium at the fixed support A', mmax:'Largest moment: cut at x₀, equilibrium of the left part', at:'at', from:'from', to:'to',
     detBeam:'Pin A + roller B: 3 reactions, 3 equilibrium equations → statically determinate', detCant:'Fixed support A: 3 reactions, 3 equilibrium equations → statically determinate',
@@ -6942,8 +6945,8 @@ const RWT = {
     span:'Span', ovh:'Overhang', known:'known from the overhang', frDet:'Determinacy n = a − 3 − g', frLoad:'Resultant of all loads', frReac:'Reactions (stiffness method)', frEq:'Equilibrium check of the whole system',
     frMeth:'n > 0: solved with the stiffness method. The equilibrium check shows that loads and reactions match.',
     frMeth0:'n = 0: statically determinate — reactions follow from equilibrium alone (and M = 0 at the hinge).', cutLeft:'part left of the cut', with:'with', spans:'spans', left:'left', right:'right', kNote:'(k = I/I₀; full uniform load: R = L = q·l³/4)', head:'head support' },
-  fr:{"title": "Étapes de calcul — pas à pas", "sys": "Système et degré d’hyperstaticité", "loads": "Charges et leurs résultantes", "none": "aucune charge", "momA": "L’équilibre des moments autour de A (↺ positif) donne B<sub>V</sub>", "sumV": "La somme des forces verticales donne A<sub>V</sub>", "sumH": "La somme des forces horizontales donne A<sub>H</sub>", "clamp": "Équilibre à l’encastrement A", "mmax": "Moment maximal : coupe en x₀, équilibre de la partie gauche", "at": "en", "from": "de", "to": "à", "detBeam": "Appui fixe A + appui mobile B : 3 réactions, 3 équations d’équilibre → isostatique", "detCant": "Encastrement A : 3 réactions, 3 équations d’équilibre → isostatique", "vzero": "l’effort tranchant y change de signe", "check": "Contrôle", "cont1": "Hyperstatique : moments sur appuis inconnus", "cw": "(↻)", "clap": "Équation des trois moments (Clapeyron) pour chaque appui intermédiaire", "clapFix": "encastrement", "lt": "Termes de charge issus du moment M₀ de la poutre sur deux appuis", "solve": "Résoudre le système → moments sur appuis", "reac": "Réactions : part de la poutre sur deux appuis + part des moments sur appuis", "field": "Moments en travée : M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l", "hinge": "Avec des articulations, la poutre continue est résolue par la méthode des déplacements (matrice de rigidité) ; le résultat et le contrôle d’équilibre sont indiqués ici.", "span": "Travée", "ovh": "Console", "known": "connu à partir de la console", "frDet": "Degré d’hyperstaticité n = a − 3 − g", "frLoad": "Résultante de toutes les charges", "frReac": "Réactions d’appui (méthode des déplacements)", "frEq": "Contrôle d’équilibre du système complet", "frMeth": "n > 0 : résolution avec la matrice de rigidité (méthode des déplacements). Le contrôle d’équilibre montre que charges et réactions concordent.", "frMeth0": "n = 0 : isostatique — les réactions découlent de l’équilibre seul (et M = 0 dans l’articulation).", "head": "appui en tête", "cutLeft": "part à gauche de la coupe", "with": "avec", "spans": "travées", "left": "gauche", "right": "droite", "kNote": "(k = I/I₀ ; charge uniforme sur toute la travée : R = L = q·l³/4)"},
-  es:{"title": "Desarrollo del cálculo — paso a paso", "sys": "Sistema y grado de hiperestatismo", "loads": "Cargas y sus resultantes", "none": "sin cargas", "momA": "El equilibrio de momentos respecto a A (↺ positivo) da B<sub>V</sub>", "sumV": "La suma de fuerzas verticales da A<sub>V</sub>", "sumH": "La suma de fuerzas horizontales da A<sub>H</sub>", "clamp": "Equilibrio en el empotramiento A", "mmax": "Momento máximo: corte en x₀, equilibrio de la parte izquierda", "at": "en", "from": "de", "to": "a", "detBeam": "Apoyo fijo A + apoyo móvil B: 3 reacciones, 3 ecuaciones de equilibrio → isostático", "detCant": "Empotramiento A: 3 reacciones, 3 ecuaciones de equilibrio → isostático", "vzero": "el cortante cambia ahí de signo", "check": "Comprobación", "cont1": "Hiperestático: momentos en apoyos desconocidos", "cw": "(↻)", "clap": "Ecuación de los tres momentos (Clapeyron) en cada apoyo intermedio", "clapFix": "empotramiento", "lt": "Términos de carga a partir del momento M₀ de la viga biapoyada", "solve": "Resolver el sistema → momentos en apoyos", "reac": "Reacciones: parte de la viga biapoyada + parte de los momentos en apoyos", "field": "Momentos en vano: M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l", "hinge": "Con articulaciones, la viga continua se resuelve por el método de rigidez (matriz de rigidez); aquí se muestran el resultado y la comprobación de equilibrio.", "span": "Vano", "ovh": "Voladizo", "known": "conocido del voladizo", "frDet": "Grado de hiperestatismo n = a − 3 − g", "frLoad": "Resultante de todas las cargas", "frReac": "Reacciones (método de rigidez)", "frEq": "Comprobación del equilibrio del sistema completo", "frMeth": "n > 0: resolución con la matriz de rigidez (método de rigidez). La comprobación de equilibrio muestra que cargas y reacciones coinciden.", "frMeth0": "n = 0: isostático — las reacciones resultan solo del equilibrio (y M = 0 en la articulación).", "head": "apoyo en cabeza", "cutLeft": "parte a la izquierda del corte", "with": "con", "spans": "vanos", "left": "izquierda", "right": "derecha", "kNote": "(k = I/I₀; carga uniforme en todo el vano: R = L = q·l³/4)"} };
+  fr:{ kfGS:"Méthode des forces : système isostatique de base", kfGST:"Les n réactions surabondantes sont libérées et prises comme inconnues X. Il reste un système de base isostatique.", relRot:"encastrement en {0} remplacé par une articulation", relUx:"appui horizontal en {0} libéré", relUy:"appui vertical en {0} libéré", kfM0:"Cas de charge « 0 » : moments M₀ dans le système de base (début | milieu | fin de chaque tronçon)", kfMi:"État unitaire X{0} = 1 : moments M̄{0} (début | fin, linéaire)", kfD:"Coefficients de souplesse EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> ds · EI₀/EI", kfDT:"Table d’intégrales par tronçon : trapèze (i₁, i₂) × trapèze (k₁, k₂) avec parabole (flèche f) : l/6·[i₁·(2k₁ + k₂) + i₂·(k₁ + 2k₂)] + l/3·f·(i₁ + i₂). Sans charge f = 0.", kfB:"Termes de charge EI₀·δ<sub>i0</sub> = Σ ∫ M̄<sub>i</sub>·M₀ ds · EI₀/EI", kfNum:"charge trapézoïdale : intégrée numériquement", kfE:"Compatibilité : ni déplacement ni rotation aux points libérés", kfSup:"Superposition : M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub> aux extrémités des barres", kfChk:"Contrôle : X concorde avec les réactions du solveur, les moments aussi (écart maximal {0}).", kfSkip:"Avec ressorts, tassements ou température, le calcul montre le résultat de la méthode des déplacements.", kfBig:"n > 3 : calcul uniquement par la méthode des déplacements.", frMethK:"n > 0 : méthode des forces pas à pas (ci-dessous). Le solveur contrôle avec la méthode des déplacements.", memL:"montant gauche", memR:"montant droit", memRaf:"traverse", kfEI:"EI₀ = EI des montants", kfX:"X agit dans le sens de la réaction libérée (→, ↑ ou ↺ positif).",  kgvGS:"Méthode des forces : système isostatique de base", kgvGST:"Des articulations sur les appuis intermédiaires{0} transforment la poutre continue en une suite de poutres sur deux appuis. Les moments sur appuis ainsi libérés sont les inconnues X.", kgvFixT:" et à l’encastrement", kgvM0:"Cas de charge « 0 » : moments M₀ dans le système de base (chaque travée sur deux appuis)", kgvMi:"États unitaires X<sub>i</sub> = 1", kgvMiT:"M̄<sub>i</sub> est un triangle sur les deux travées voisines de l’appui i, valeur 1 sur l’appui et 0 sur les appuis voisins.", kgvD:"Coefficients de souplesse EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> dx / k", kgvDT:"Table d’intégrales : triangle × triangle de même sommet l/3 · i · k, sommets opposés l/6 · i · k (k = I/I₀ des travées).", kgvB:"Termes de charge EI₀·δ<sub>i0</sub> = Σ ∫ M₀·M̄<sub>i</sub> dx / k", kgvBT:"Une ligne de la table d’intégrales par charge ; les contributions s’additionnent (superposition).", tPar:"parabole × triangle", tTri:"triangle × triangle", tNum:"charge partielle : intégrée par tronçons", tMom:"moment ponctuel : intégré par tronçons", kgvE:"Compatibilité : pas de rotation relative sur les appuis", kgvE6:"Multipliée par 6, c’est exactement l’équation des trois moments (Clapeyron).", kgvSup:"Superposition : M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub>", kgvTab:"Table d’intégrales dans « Référence » →", kgvChk:"Contrôle : conforme au résultat du solveur (écart {0} kNm).", kgvSol:"Résoudre le système d’équations", kgvSolT:"Les solutions sont les moments sur appuis.", eqAt:"équation pour l’appui", "title": "Étapes de calcul — pas à pas", "sys": "Système et degré d’hyperstaticité", "loads": "Charges et leurs résultantes", "none": "aucune charge", "momA": "L’équilibre des moments autour de A (↺ positif) donne B<sub>V</sub>", "sumV": "La somme des forces verticales donne A<sub>V</sub>", "sumH": "La somme des forces horizontales donne A<sub>H</sub>", "clamp": "Équilibre à l’encastrement A", "mmax": "Moment maximal : coupe en x₀, équilibre de la partie gauche", "at": "en", "from": "de", "to": "à", "detBeam": "Appui fixe A + appui mobile B : 3 réactions, 3 équations d’équilibre → isostatique", "detCant": "Encastrement A : 3 réactions, 3 équations d’équilibre → isostatique", "vzero": "l’effort tranchant y change de signe", "check": "Contrôle", "cont1": "Hyperstatique : moments sur appuis inconnus", "cw": "(↻)", "clap": "Équation des trois moments (Clapeyron) pour chaque appui intermédiaire", "clapFix": "encastrement", "lt": "Termes de charge issus du moment M₀ de la poutre sur deux appuis", "solve": "Résoudre le système → moments sur appuis", "reac": "Réactions : part de la poutre sur deux appuis + part des moments sur appuis", "field": "Moments en travée : M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l", "hinge": "Avec des articulations, la poutre continue est résolue par la méthode des déplacements (matrice de rigidité) ; le résultat et le contrôle d’équilibre sont indiqués ici.", "span": "Travée", "ovh": "Console", "known": "connu à partir de la console", "frDet": "Degré d’hyperstaticité n = a − 3 − g", "frLoad": "Résultante de toutes les charges", "frReac": "Réactions d’appui (méthode des déplacements)", "frEq": "Contrôle d’équilibre du système complet", "frMeth": "n > 0 : résolution avec la matrice de rigidité (méthode des déplacements). Le contrôle d’équilibre montre que charges et réactions concordent.", "frMeth0": "n = 0 : isostatique — les réactions découlent de l’équilibre seul (et M = 0 dans l’articulation).", "head": "appui en tête", "cutLeft": "part à gauche de la coupe", "with": "avec", "spans": "travées", "left": "gauche", "right": "droite", "kNote": "(k = I/I₀ ; charge uniforme sur toute la travée : R = L = q·l³/4)"},
+  es:{ kfGS:"Método de las fuerzas: sistema base isostático", kfGST:"Se liberan las n reacciones redundantes y se toman como incógnitas X. Queda un sistema base isostático.", relRot:"empotramiento en {0} sustituido por una articulación", relUx:"coacción horizontal en {0} liberada", relUy:"coacción vertical en {0} liberada", kfM0:"Estado de carga «0»: momentos M₀ en el sistema base (inicio | centro | final de cada tramo)", kfMi:"Estado unitario X{0} = 1: momentos M̄{0} (inicio | final, lineal)", kfD:"Coeficientes de flexibilidad EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> ds · EI₀/EI", kfDT:"Tabla de integrales por tramo: trapecio (i₁, i₂) × trapecio (k₁, k₂) con parábola (flecha f): l/6·[i₁·(2k₁ + k₂) + i₂·(k₁ + 2k₂)] + l/3·f·(i₁ + i₂). Sin carga f = 0.", kfB:"Términos de carga EI₀·δ<sub>i0</sub> = Σ ∫ M̄<sub>i</sub>·M₀ ds · EI₀/EI", kfNum:"carga trapezoidal: integrada numéricamente", kfE:"Compatibilidad: sin desplazamiento ni giro en los puntos liberados", kfSup:"Superposición: M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub> en los extremos de las barras", kfChk:"Control: X coincide con las reacciones del solver y también los momentos (diferencia máxima {0}).", kfSkip:"Con muelles, asientos o temperatura, el desarrollo muestra el resultado del método de los desplazamientos.", kfBig:"n > 3: desarrollo solo con el método de los desplazamientos.", frMethK:"n > 0: método de las fuerzas paso a paso (abajo). El solver lo comprueba con el método de los desplazamientos.", memL:"pilar izquierdo", memR:"pilar derecho", memRaf:"dintel", kfEI:"EI₀ = EI de los pilares", kfX:"X actúa en el sentido de la reacción liberada (→, ↑ o ↺ positivo).",  kgvGS:"Método de las fuerzas: sistema base isostático", kgvGST:"Articulaciones sobre los apoyos intermedios{0} convierten la viga continua en una cadena de vigas biapoyadas. Los momentos en apoyos liberados son las incógnitas X.", kgvFixT:" y en el empotramiento", kgvM0:"Estado de carga «0»: momentos M₀ en el sistema base (cada vano como viga biapoyada)", kgvMi:"Estados unitarios X<sub>i</sub> = 1", kgvMiT:"M̄<sub>i</sub> es un triángulo sobre los dos vanos contiguos al apoyo i, con valor 1 sobre el apoyo y 0 en los apoyos vecinos.", kgvD:"Coeficientes de flexibilidad EI₀·δ<sub>ik</sub> = Σ ∫ M̄<sub>i</sub>·M̄<sub>k</sub> dx / k", kgvDT:"Tabla de integrales: triángulo × triángulo con el mismo vértice l/3 · i · k, vértices opuestos l/6 · i · k (k = I/I₀ de los vanos).", kgvB:"Términos de carga EI₀·δ<sub>i0</sub> = Σ ∫ M₀·M̄<sub>i</sub> dx / k", kgvBT:"Una fila de la tabla de integrales por carga; las contribuciones se suman (superposición).", tPar:"parábola × triángulo", tTri:"triángulo × triángulo", tNum:"carga parcial: integrada por tramos", tMom:"momento puntual: integrado por tramos", kgvE:"Compatibilidad: sin giro relativo sobre los apoyos", kgvE6:"Multiplicada por 6 es exactamente la ecuación de los tres momentos (Clapeyron).", kgvSup:"Superposición: M = M₀ + Σ X<sub>i</sub>·M̄<sub>i</sub>", kgvTab:"Tabla de integrales en «Referencia» →", kgvChk:"Control: coincide con el resultado del solver (diferencia {0} kNm).", kgvSol:"Resolver el sistema de ecuaciones", kgvSolT:"Las soluciones son los momentos en los apoyos.", eqAt:"ecuación para el apoyo", "title": "Desarrollo del cálculo — paso a paso", "sys": "Sistema y grado de hiperestatismo", "loads": "Cargas y sus resultantes", "none": "sin cargas", "momA": "El equilibrio de momentos respecto a A (↺ positivo) da B<sub>V</sub>", "sumV": "La suma de fuerzas verticales da A<sub>V</sub>", "sumH": "La suma de fuerzas horizontales da A<sub>H</sub>", "clamp": "Equilibrio en el empotramiento A", "mmax": "Momento máximo: corte en x₀, equilibrio de la parte izquierda", "at": "en", "from": "de", "to": "a", "detBeam": "Apoyo fijo A + apoyo móvil B: 3 reacciones, 3 ecuaciones de equilibrio → isostático", "detCant": "Empotramiento A: 3 reacciones, 3 ecuaciones de equilibrio → isostático", "vzero": "el cortante cambia ahí de signo", "check": "Comprobación", "cont1": "Hiperestático: momentos en apoyos desconocidos", "cw": "(↻)", "clap": "Ecuación de los tres momentos (Clapeyron) en cada apoyo intermedio", "clapFix": "empotramiento", "lt": "Términos de carga a partir del momento M₀ de la viga biapoyada", "solve": "Resolver el sistema → momentos en apoyos", "reac": "Reacciones: parte de la viga biapoyada + parte de los momentos en apoyos", "field": "Momentos en vano: M(x) = M₀(x) + M<sub>l</sub>·(1 − x/l) + M<sub>r</sub>·x/l", "hinge": "Con articulaciones, la viga continua se resuelve por el método de rigidez (matriz de rigidez); aquí se muestran el resultado y la comprobación de equilibrio.", "span": "Vano", "ovh": "Voladizo", "known": "conocido del voladizo", "frDet": "Grado de hiperestatismo n = a − 3 − g", "frLoad": "Resultante de todas las cargas", "frReac": "Reacciones (método de rigidez)", "frEq": "Comprobación del equilibrio del sistema completo", "frMeth": "n > 0: resolución con la matriz de rigidez (método de rigidez). La comprobación de equilibrio muestra que cargas y reacciones coinciden.", "frMeth0": "n = 0: isostático — las reacciones resultan solo del equilibrio (y M = 0 en la articulación).", "head": "apoyo en cabeza", "cutLeft": "parte a la izquierda del corte", "with": "con", "spans": "vanos", "left": "izquierda", "right": "derecha", "kNote": "(k = I/I₀; carga uniforme en todo el vano: R = L = q·l³/4)"} };
 const rwT = k => (RWT[calcLang]||RWT.en)[k] ?? RWT.en[k];
 const nf = (v, d=2) => { const x = Math.abs(v)<5*10**(-d-1) ? 0 : v; const s = x.toFixed(d); return calcLang==='en' ? s : s.replace('.', ','); };
 const nfp = (v, d=2) => v<0 ? `(${nf(v,d)})` : nf(v,d);
@@ -7026,7 +7029,7 @@ function rwBeam(sys){
   S.push('§'+rwT('mmax'), ...mm.S);
   return { S, AV, BV, AH, MA, Mmax:mm.mx.M, x0:mm.mx.x };
 }
-// ── Durchlaufträger: Dreimomentengleichung ──
+// ── Durchlaufträger: Kraftgrößenverfahren mit Integraltafel (calc v0.11.13; vorher nur Dreimomentengleichung) ──
 function rwContData(){
   const lay=contLayout(), P=[], D=[];
   lay.segs.forEach(sg=>{ const sp=contSeg(sg.key), tag = typeof sg.key==='string' ? (sg.key==='L'?rwT('ovh')+' '+(rwT('left')):rwT('ovh')+' '+(rwT('right'))) : `${rwT('span')} ${sg.key+1}`;
@@ -7077,20 +7080,48 @@ function rwCont(){
   S.push('§'+rwT('cont1'), `n = ${unk.length}: ${unk.map(j=>`M<sub>${names[j]}</sub>`).join(', ')}`);
   if(!fixL && lay.oL) S.push(`M<sub>A</sub> = ${nf(M[0])} kNm (${rwT('known')})`);
   if(!fixR && lay.oR) S.push(`M<sub>${names[n]}</sub> = ${nf(M[n])} kNm (${rwT('known')})`);
-  S.push('§'+rwT('lt'), ...SS.flatMap((s,i)=>[`${rwT('span')} ${i+1}: R<sub>${i+1}</sub> = 6/(k·l)·∫M₀·x dx = <b>${nf(s.R,3)}</b> · L<sub>${i+1}</sub> = 6/(k·l)·∫M₀·(l − x) dx = <b>${nf(s.Lt,3)}</b>`]),
-    rwT('kNote'));
-  const A=[], b=[], eqs=[], col=j=>unk.indexOf(j);
-  const term=(j,c)=>{ if(Math.abs(c)<1e-12) return; return [j,c]; };
-  const addEq=(pairs, rhs, label)=>{ const row=new Array(unk.length).fill(0); let r=rhs; const txt=[];
-    pairs.forEach(([j,c])=>{ if(col(j)>=0){ row[col(j)]+=c; txt.push(`${nf(c,3)}·M<sub>${names[j]}</sub>`); } else { r -= c*M[j]; if(Math.abs(M[j])>1e-12) txt.push(`${nf(c,3)}·${nfp(M[j])}`); } });
-    A.push(row); b.push(r); eqs.push(`${label}: ${txt.join(' + ')} = ${nf(rhs,3)}`); };
-  if(fixL) addEq([[0,2*Lk[0]],[1,Lk[0]]], -SS[0].Lt, `${rwT('clapFix')} A`);
-  for(let j=1;j<n;j++) addEq([[j-1,Lk[j-1]],[j,2*(Lk[j-1]+Lk[j])],[j+1,Lk[j]]], -(SS[j-1].R+SS[j].Lt), names[j]);
-  if(fixR) addEq([[n-1,Lk[n-1]],[n,2*Lk[n-1]]], -SS[n-1].R, `${rwT('clapFix')} ${names[n]}`);
-  S.push('§'+rwT('clap'), 'M<sub>i−1</sub>·l\'<sub>i</sub> + 2·M<sub>i</sub>·(l\'<sub>i</sub> + l\'<sub>i+1</sub>) + M<sub>i+1</sub>·l\'<sub>i+1</sub> = −(R<sub>i</sub> + L<sub>i+1</sub>) '+rwT('with')+' l\' = l/k', ...eqs);
+  // ── Kraftgrößenverfahren (calc v0.11.13): Grundsystem, M₀, Einheitszustände, δ aus der Integraltafel, Verträglichkeit ──
+  const X = j => `X<sub>${unk.indexOf(j)+1}</sub>`, kk = i => segs[i].k, kTxt = i => kk(i)!==1 ? ` / ${nf(kk(i))}` : '';
+  S.push('§'+rwT('kgvGS'), rwT('kgvGST').replace('{0}', (fixL||fixR) ? rwT('kgvFixT') : ''), unk.map(j=>`${X(j)} = M<sub>${names[j]}</sub>`).join(' · '));
+  S.push('§'+rwT('kgvM0'), ...SS.map((ss,i)=>{ const m=rwMaxM(ss.M0, ss.L, ss.sub.P, ss.sub.D);
+    return `${rwT('span')} ${i+1}: A<sub>0</sub> = ${nf(ss.A0)} kN · B<sub>0</sub> = ${nf(ss.B0)} kN · max M<sub>0</sub> = ${nf(m.M)} kNm (x = ${nf(m.x)} m)`; }));
+  S.push('§'+rwT('kgvMi'), rwT('kgvMiT'));
+  // δ_ik: Dreieck × Dreieck
+  const dd = (i, j) => { if(i===j) return (i>0 ? Lk[i-1]/3 : 0) + (i<n ? Lk[i]/3 : 0); const lo=Math.min(i,j); return Math.abs(i-j)===1 ? Lk[lo]/6 : 0; };
+  const dLines=[]; unk.forEach(i=>{ const parts=[], nums=[]; if(i>0){ parts.push(`l<sub>${i}</sub>/3${kk(i-1)!==1?`·k<sub>${i}</sub>`:''}`); nums.push(`${nf(segs[i-1].L)}/3${kTxt(i-1)}`); }
+      if(i<n){ parts.push(`l<sub>${i+1}</sub>/3${kk(i)!==1?`·k<sub>${i+1}</sub>`:''}`); nums.push(`${nf(segs[i].L)}/3${kTxt(i)}`); }
+      dLines.push(`EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i)+1}</sub> = ${nums.join(' + ')} = <b>${nf(dd(i,i),3)}</b> m`);
+      if(unk.includes(i+1)) dLines.push(`EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i+1)+1}</sub> = ${nf(segs[i].L)}/6${kTxt(i)} = <b>${nf(dd(i,i+1),3)}</b> m`); });
+  S.push('§'+rwT('kgvD'), rwT('kgvDT'), ...dLines, `<a href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
+  // δ_i0: je Last eine Tafelzeile
+  const part = (ss, i, side) => {   // Beiträge der Lasten in Feld i zum Einheitszustand am linken (side 'L') bzw. rechten Lager
+    const l=ss.L, out=[], k=kk(i), w = x => side==='R' ? x/l : 1-x/l;
+    ss.sub.D.forEach(d=>{ const one=rwSS(l, [], [d]), v=rwInt(x=>one.M0(x)*w(x), l, [d.a,d.b])/k;
+      if(Math.abs(d.qa-d.qb)<1e-9 && d.a<1e-9 && d.b>l-1e-9){ const f=d.qa*l*l/8; out.push([v, `${d.lab} (${rwT('tPar')}): l/3 · f${kTxt(i)} = ${nf(l)}/3 · ${nf(f)}${kTxt(i)} = ${nf(v,3)} (f = q·l²/8)`]); }
+      else out.push([v, `${d.lab} (${rwT('tNum')}): ∫ M₀·M̄ dx${kTxt(i)} = ${nf(v,3)}`]); });
+    ss.sub.P.forEach(pp=>{ if(pp.Fy){ const a=pp.x, b=l-a, Mp=pp.Fy*a*b/l, r=side==='R' ? a/l : b/l, v=l/6*Mp*(1+r)/k;
+        out.push([v, `${pp.lab} (${rwT('tTri')}): l/6 · M<sub>F</sub> · (1 + ${side==='R'?'a':'b'}/l)${kTxt(i)} = ${nf(l)}/6 · ${nf(Mp)} · (1 + ${nf(r,3)})${kTxt(i)} = ${nf(v,3)} (M<sub>F</sub> = F·a·b/l)`]); }
+      if(pp.Me){ const one=rwSS(l, [{...pp, Fy:0}], []), v=rwInt(x=>one.M0(x)*w(x), l, [pp.x])/k; out.push([v, `${pp.mlab||pp.lab} (${rwT('tMom')}): ${nf(v,3)}`]); } });
+    return out; };
+  const d0 = {}, bLines=[];
+  unk.forEach(j=>{ const L1 = j>0 ? part(SS[j-1], j-1, 'R') : [], R1 = j<n ? part(SS[j], j, 'L') : [], all=[...L1, ...R1];
+    d0[j]=all.reduce((t,c)=>t+c[0],0);
+    if(L1.length) bLines.push(`${X(j)}, ${rwT('span')} ${j}:`, ...L1.map(c=>c[1]));
+    if(R1.length) bLines.push(`${X(j)}, ${rwT('span')} ${j+1}:`, ...R1.map(c=>c[1]));
+    bLines.push(`EI₀·δ<sub>${unk.indexOf(j)+1}0</sub> = <b>${nf(d0[j],3)}</b> kNm·m`); });
+  S.push('§'+rwT('kgvB'), rwT('kgvBT'), ...bLines);
+  // Verträglichkeit
+  const A=[], b=[], eqs=[];
+  unk.forEach(i=>{ const row=new Array(unk.length).fill(0); let r=-d0[i]; const txt=[];
+    [i-1,i,i+1].forEach(j=>{ if(j<0||j>n) return; const c=dd(i,j); if(Math.abs(c)<1e-12) return;
+      if(unk.includes(j)){ row[unk.indexOf(j)]+=c; txt.push(`${nf(c,3)}·${X(j)}`); } else if(M[j]){ r-=c*M[j]; txt.push(`${nf(c,3)}·${nfp(M[j])}`); } });
+    A.push(row); b.push(r); eqs.push(`${X(i)}: ${txt.join(' + ')} + ${nfp(d0[i],3)} = 0`); });
+  S.push('§'+rwT('kgvE'), 'Σ δ<sub>ik</sub>·X<sub>k</sub> + δ<sub>i0</sub> = 0', ...eqs, rwT('kgvE6'));
   const x = rwSolve(A, b); if(!x) return {S, ok:false};
   unk.forEach((j,k)=>M[j]=x[k]);
-  S.push('§'+rwT('solve'), M.map((m,j)=>`M<sub>${names[j]}</sub> = <b>${nf(m)} kNm</b>`).join(' · '));
+  S.push('§'+rwT('kgvSol'), rwT('kgvSolT'), unk.map(j=>`${X(j)} = M<sub>${names[j]}</sub> = <b>${nf(M[j])} kNm</b>`).join(' · '));
+  try{ const sm=(lastCalc.cont && lastCalc.cont.supportMoments)||[], hit=sm.map(m=>{ const j=names.indexOf(m.support); return j>=0 ? Math.abs(M[j]-m.M) : null; }).filter(v=>v!=null);
+    if(hit.length) S.push(rwT('kgvChk').replace('{0}', nf(Math.max(...hit),3))); }catch(e){}
   // Auflagerkräfte
   const V=new Array(n+1).fill(0), lines=[];
   SS.forEach((s,i)=>{ const dl=(M[i+1]-M[i])/s.L, Al=s.A0+dl, Br=s.B0-dl; V[i]+=Al; V[i+1]+=Br;
@@ -7106,19 +7137,82 @@ function rwCont(){
   S.push('§'+rwT('field'), ...fm);
   return {S, ok:true, M, V};
 }
+// ── Rahmen: Kraftgrößenverfahren (calc v0.11.13) ──
+// Grundsystem: n überzählige Lagergrößen lösen (Kopf, B, A; erste stabile Wahl). M₀ und M̄ᵢ rechnet der vorhandene Löser am Grundsystem
+// (statisch bestimmt, also reines Gleichgewicht). δ je Stababschnitt mit der Tafelformel Trapez × (Trapez + Parabel), die für
+// lineare M̄ und quadratische M₀ (Gleichlast) exakt ist; bei Trapezlast (M₀ kubisch) numerisch. Kontrolle gegen das Ergebnis des Lösers.
+function rwFrameKGV(model, sol, n){
+  if((model.springs||[]).length || Object.keys(model.presc||{}).length || model.elems.some(e=>e.eps0||e.kap0)) return {S:[rwT('kfSkip')]};
+  if(n>3) return {S:[rwT('kfBig')]};
+  const nA=model.nA, nB=model.nB, nh = model.head==='left' ? model.n2 : model.head==='right' ? model.n3 : null;
+  const cand=[];   // [dof, Größe, Ort, Art]
+  if(nh){ if(model.fixed.has(nh.ux)) cand.push([nh.ux,'H','K','ux',rwT('head')]); if(supportHeadType==='pin' && model.fixed.has(nh.uy)) cand.push([nh.uy,'V','K','uy',rwT('head')]); }
+  [[nB,'B',supportB],[nA,'A',supportA]].forEach(([nd,lab,t])=>{ if(t==='fixed') cand.push([nd.rot,'M',lab,'rot']); if(t==='fixed'||t==='pin') cand.push([nd.ux,'H',lab,'ux']); cand.push([nd.uy,'V',lab,'uy']); });
+  const sup0=new Set(cand.map(c=>c[0])), base=[...model.fixed].filter(d=>!sup0.has(d)||true);
+  const clone = (zero) => model.elems.map(e=>{ const c={...e}; if(zero){ c.pAt=()=>[0,0]; c.gAt=()=>[0,0]; } return c; });
+  const solveG = (rel, F, zero) => { const fixed=new Set(model.fixed); rel.forEach(c=>fixed.delete(c[0])); const m={...model, elems:clone(zero), F, fixed}; const r=FRAME_SOLVE_RAW(m); return r.mechanism ? null : m; };
+  // erste stabile Auswahl von n Lagergrößen
+  let rel=null; const pick=(start, chosen)=>{ if(rel) return; if(chosen.length===n){ if(solveG(chosen, model.F.slice(), false)) rel=chosen.slice(); return; }
+    for(let i=start;i<cand.length;i++){ chosen.push(cand[i]); pick(i+1, chosen); chosen.pop(); if(rel) return; } };
+  pick(0, []); if(!rel) return null;
+  const G0=solveG(rel, model.F.slice(), false), GU=rel.map(c=>{ const F=new Array(model.ndof).fill(0); F[c[0]]=1; return solveG(rel, F, true); });
+  if(!G0 || GU.some(g=>!g)) return null;
+  const EI0 = (model.elems.find(e=>e.mem==='left')||model.elems[0]).EI;
+  const M = (m, k, xi) => frameForcesAt(m.elems[k], xi).M;
+  const memName = {left:rwT('memL'), rafter:rwT('memRaf'), right:rwT('memR')}, cnt={}, idx={};
+  model.elems.forEach((e,k)=>{ cnt[e.mem]=(cnt[e.mem]||0)+1; idx[k]=cnt[e.mem]; });
+  const eName = k => { const e=model.elems[k]; return memName[e.mem]+(cnt[e.mem]>1 ? ` ${idx[k]}/${cnt[e.mem]}` : '')+` (l = ${nf(e.L)} m${Math.abs(e.EI-EI0)>1e-9*EI0 ? `, EI₀/EI = ${nf(EI0/e.EI,3)}` : ''})`; };
+  const Xs = i => `X<sub>${i+1}</sub>`, d3 = v => nf(v,3), p3 = v => nfp(v,3);
+  const S=[];
+  S.push('§'+rwT('kfGS'), rwT('kfGST'), ...rel.map((c,i)=>`${Xs(i)} = ${c[1]}<sub>${c[2]}</sub>: ${rwT(c[3]==='rot'?'relRot':c[3]==='ux'?'relUx':'relUy').replace('{0}', c[4]||c[2])}`), rwT('kfX'), rwT('kfEI'));
+  S.push('§'+rwT('kfM0'), ...model.elems.map((e,k)=>`${eName(k)}: ${nf(M(G0,k,0))} | ${nf(M(G0,k,e.L/2))} | ${nf(M(G0,k,e.L))} kNm`));
+  GU.forEach((g,i)=>S.push('§'+rwT('kfMi').split('{0}').join(`<sub>${i+1}</sub>`), ...model.elems.map((e,k)=>`${eName(k)}: ${d3(M(g,k,0))} | ${d3(M(g,k,e.L))}`)));
+  // Integrale je Abschnitt
+  const integ = (ga, gb, k) => { const e=model.elems[k], l=e.L, f=EI0/e.EI;
+    const a1=M(ga,k,0), a2=M(ga,k,l), b1=M(gb,k,0), bm=M(gb,k,l/2), b2=M(gb,k,l), fp=bm-(b1+b2)/2;
+    const tab=(l/6*(a1*(2*b1+b2)+a2*(b1+2*b2))+l/3*fp*(a1+a2))*f;
+    let gs=0; GAUSS4.forEach(([g,w])=>{ const x=(g+1)/2*l; gs+=w*l/2*M(ga,k,x)*M(gb,k,x); }); gs*=f;
+    const exact=Math.abs(tab-gs)<=1e-7*Math.max(1,Math.abs(gs));
+    if(Math.abs(gs)<1e-12) return {v:0, txt:null};
+    const fac = Math.abs(f-1)>1e-9 ? ` · ${nf(f,3)}` : '';
+    const txt = exact ? `${eName(k)}: ${nf(l)}/6·[${p3(a1)}·(2·${p3(b1)} + ${p3(b2)}) + ${p3(a2)}·(${p3(b1)} + 2·${p3(b2)})]${Math.abs(fp)>1e-9 ? ` + ${nf(l)}/3·${p3(fp)}·(${p3(a1)} + ${p3(a2)})` : ''}${fac} = ${d3(gs)}`
+                      : `${eName(k)} (${rwT('kfNum')}): ${d3(gs)}`;
+    return {v:gs, txt}; };
+  const nU=GU.length, D=[], D0=[];
+  const dSec=['§'+rwT('kfD'), rwT('kfDT')];
+  for(let i=0;i<nU;i++){ D.push([]); for(let j=0;j<nU;j++){ if(j<i){ D[i][j]=D[j][i]; continue; }
+    const parts=model.elems.map((e,k)=>integ(GU[i], GU[j], k)), v=parts.reduce((t,p)=>t+p.v,0); D[i][j]=v;
+    dSec.push(`EI₀·δ<sub>${i+1}${j+1}</sub>:`, ...parts.filter(p=>p.txt).map(p=>p.txt), `EI₀·δ<sub>${i+1}${j+1}</sub> = <b>${d3(v)}</b>`); } }
+  S.push(...dSec, `<a href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
+  const bSec=['§'+rwT('kfB')];
+  for(let i=0;i<nU;i++){ const parts=model.elems.map((e,k)=>integ(GU[i], G0, k)), v=parts.reduce((t,p)=>t+p.v,0); D0.push(v);
+    bSec.push(`EI₀·δ<sub>${i+1}0</sub>:`, ...parts.filter(p=>p.txt).map(p=>p.txt), `EI₀·δ<sub>${i+1}0</sub> = <b>${d3(v)}</b>`); }
+  S.push(...bSec);
+  S.push('§'+rwT('kfE'), 'Σ δ<sub>ik</sub>·X<sub>k</sub> + δ<sub>i0</sub> = 0', ...D.map((row,i)=>`${row.map((c,j)=>`${d3(c)}·${Xs(j)}`).join(' + ')} + ${nfp(D0[i],3)} = 0`));
+  const X=rwSolve(D, D0.map(v=>-v)); if(!X) return null;
+  S.push('§'+rwT('kgvSol'), X.map((x,i)=>`${Xs(i)} = ${rel[i][1]}<sub>${rel[i][2]}</sub> = <b>${nf(x)} ${rel[i][3]==='rot'?'kNm':'kN'}</b>`).join(' · '));
+  // Überlagerung an den Stabenden, Kontrolle
+  let dev=0; rel.forEach((c,i)=>{ dev=Math.max(dev, Math.abs(X[i]-(sol.R[c[0]]||0))); });
+  const sup=model.elems.map((e,k)=>{ const at=xi=>M(G0,k,xi)+X.reduce((t,x,i)=>t+x*M(GU[i],k,xi),0), m1=at(0), m2=at(e.L);
+    dev=Math.max(dev, Math.abs(m1-frameForcesAt(model.elems[k],0).M), Math.abs(m2-frameForcesAt(model.elems[k],e.L).M));
+    return `${eName(k)}: M = ${nf(m1)} | ${nf(m2)} kNm`; });
+  S.push('§'+rwT('kfSup'), ...sup, rwT('kfChk').replace('{0}', nf(dev,3)));
+  return {S, X, rel, dev};
+}
 // ── Rahmen: Bestimmtheit, Lastresultierende, Auflagerkräfte, Gleichgewichtskontrolle ──
 let RW_FRAME=null;
 function rwFrame(){
   const F=RW_FRAME; if(!F) return null;
   const {model, sol}=F, S=[], nA=model.nA, nB=model.nB;
   const r = supportDOF(supportA)+supportDOF(supportB)+(supportHead==='none'?0:(supportHeadType==='pin'?2:1)), g=frameEffectiveHinges(), n=r-3-g;
-  S.push('§'+rwT('frDet'), `a = ${supportDOF(supportA)} + ${supportDOF(supportB)}${supportHead==='none'?'':' + '+(supportHeadType==='pin'?2:1)} = ${r} · g = ${g}`, `n = ${r} − 3 − ${g} = <b>${n}</b>`, n===0 ? rwT('frMeth0') : rwT('frMeth'));
+  S.push('§'+rwT('frDet'), `a = ${supportDOF(supportA)} + ${supportDOF(supportB)}${supportHead==='none'?'':' + '+(supportHeadType==='pin'?2:1)} = ${r} · g = ${g}`, `n = ${r} − 3 − ${g} = <b>${n}</b>`, n===0 ? rwT('frMeth0') : (n<=3 && !(model.springs||[]).length && !Object.keys(model.presc||{}).length && !model.elems.some(e=>e.eps0||e.kap0)) ? rwT('frMethK') : rwT('frMeth'));
   // Lasten als statisch gleichwertige Knotenlasten (Summe und Moment exakt)
   const Fg=model.F.slice(); model.elems.forEach(e=>{ if(!e.T||!e.feq) return; const d=e.dofs; for(let i=0;i<6;i++){ let s=0; for(let p=0;p<6;p++) s+=e.T[p][i]*e.feq[p]; Fg[d[i]]+=s; } });
   const isX=new Set(model.nodes.map(n=>n.ux)), isY=new Set(model.nodes.map(n=>n.uy)), byDof={};
   model.nodes.forEach(nd=>{ byDof[nd.ux]=nd; byDof[nd.uy]=nd; });
   let Fx=0, Fy=0, Mo=0; Fg.forEach((v,i)=>{ if(isX.has(i)){ Fx+=v; Mo-= (byDof[i].y-nA.y)*v; } else if(isY.has(i)){ Fy+=v; Mo+=(byDof[i].x-nA.x)*v; } else Mo+=v; });
   S.push('§'+rwT('frLoad'), `ΣH<sub>Last</sub> = ${nf(Fx)} kN (→ +)`, `ΣV<sub>Last</sub> = ${nf(-Fy)} kN (↓ +)`, `M<sub>Last,A</sub> = ${nf(Mo)} kNm (↺ +, um A)`);
+  let KG=null; if(n>0){ try{ KG=rwFrameKGV(model, sol, n); }catch(e){ KG=null; } if(KG && KG.S) S.push(...KG.S); }
   const R=sol.R, rows=[['A',nA,supportA],['B',nB,supportB]]; if(supportHead!=='none') rows.push([rwT('head'), supportHead==='left'?model.n2:model.n3, supportHeadType==='pin'?'pin':'roller']);
   let Rx=0, Ry=0, RM=0; const L=[];
   rows.forEach(([lab,nd,t])=>{ const h=R[nd.ux]||0, v=R[nd.uy]||0, m=t==='fixed'?(R[nd.rot]||0):0; Rx+=h; Ry+=v; RM+= (nd.x-nA.x)*v - (nd.y-nA.y)*h + m;
@@ -7126,7 +7220,7 @@ function rwFrame(){
   S.push('§'+rwT('frReac'), ...L);
   S.push('§'+rwT('frEq'), `ΣH = ΣH<sub>Last</sub> + ΣH<sub>Lager</sub> = ${nf(Fx)} + ${nfp(Rx)} = <b>${nf(Fx+Rx,3)}</b> ✓`,
     `ΣV = −ΣV<sub>Last</sub> + ΣV<sub>Lager</sub> = ${nf(Fy)} + ${nfp(Ry)} = <b>${nf(Fy+Ry,3)}</b> ✓`, `ΣM<sub>A</sub> = M<sub>Last,A</sub> + M<sub>Lager,A</sub> = ${nf(Mo)} + ${nfp(RM)} = <b>${nf(Mo+RM,3)}</b> ✓`);
-  return {S, n, sums:[Fx+Rx, Fy+Ry, Mo+RM]};
+  return {S, n, sums:[Fx+Rx, Fy+Ry, Mo+RM], kgv:KG};
 }
 // Anzeige
 function rwCard(sys){

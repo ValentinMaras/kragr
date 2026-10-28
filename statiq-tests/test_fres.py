@@ -11,7 +11,7 @@ ALL={}
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:66}', str(info)[:160])
 GER=re.compile(r'\w*[äöüÄÖÜß]\w*|\b(und|der|die|mit|nicht|oder|für|ein|eine|bei|aus|nach|ist|sind|wird|zum|zur|vom|oben|unten|Nachweis|Nachweise|erfüllt|Schicht|Wand|Platte|Balken|Decke|Holz|Stahl|Beton|Naht|Last|Fundament|Setzung|Rohr|Wehr|Gerinne|Höhe|Breite|Dicke|Länge|Seite|Stäbe|Bügel|Stütze|Auflager|Schub|Druck|Zug|Biegung|Knicken|Sohle|Boden|Querschnitt|Bewehrung|Kraft|Feld|Bitte|Eingabe|Ergebnis|Bericht|Beispiel|Träger|Knoten|Stab)\b')
-OK_WORDS=['EA-Pfähle','Länder','Müller-Breslau','Dünnformat','Strickler','Glaser','Sichardt','Dupuit','Thiem','Joukowsky','Michaud','Blum','Rankine','Terzaghi','Coulomb','Mohr','Marcus','Torricelli','Bernoulli','Darcy','Weisbach','Colebrook','Prandtl','Reynolds','Froude','Steiner','Euler','Gauß','Möller','Schütt']
+OK_WORDS=['Der Eisenbetonbau','Eisenbetonbau','Eisenbeton','Stahlbeton','Mörsch','Erdbaumechanik','EA-Pfähle','Länder','Müller-Breslau','Dünnformat','Strickler','Glaser','Sichardt','Dupuit','Thiem','Joukowsky','Michaud','Blum','Rankine','Terzaghi','Coulomb','Mohr','Marcus','Torricelli','Bernoulli','Darcy','Weisbach','Colebrook','Prandtl','Reynolds','Froude','Steiner','Euler','Gauß','Möller','Schütt']
 def german(t):
     for w in OK_WORDS: t=t.replace(w,'')
     return any(len(m.group(0))>=2 and not re.search(r'gü[eiéí]',m.group(0)) for m in GER.finditer(t))   # span. „desagüe“, „bilingüe“

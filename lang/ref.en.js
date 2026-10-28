@@ -14,6 +14,10 @@ window.MULY_LANG = {
 "notYet":"This subject has not been translated yet and is shown in German."
 },
 "ttx": {
+"Trapez k₁, k₂":"Trapezoid k₁, k₂",
+"Parabel k":"Parabola k",
+"Dreieck Mitte i":"Triangle peak i",
+"Trapez i₁, i₂":"Trapezoid i₁, i₂",
 "um 125 n. Chr.":"around AD 125",
 "Pantheon in Rom: unbewehrte Kuppel aus römischem Beton (opus caementitium) mit rund 43 m Spannweite.":"Pantheon in Rome: unreinforced dome of Roman concrete (opus caementitium) spanning about 43 m.",
 "Joseph Aspdin erhält in England ein Patent auf Portlandzement.":"Joseph Aspdin is granted a patent for Portland cement in England.",

@@ -14,6 +14,10 @@ window.MULY_LANG = {
 "notYet":"Cette matière n’est pas encore traduite et s’affiche en allemand."
 },
 "ttx": {
+"Trapez k₁, k₂":"Trapèze k₁, k₂",
+"Parabel k":"Parabole k",
+"Dreieck Mitte i":"Triangle sommet i",
+"Trapez i₁, i₂":"Trapèze i₁, i₂",
 "um 125 n. Chr.":"vers 125 apr. J.-C.",
 "Pantheon in Rom: unbewehrte Kuppel aus römischem Beton (opus caementitium) mit rund 43 m Spannweite.":"Panthéon de Rome : coupole non armée en béton romain (opus caementitium) d’environ 43 m de portée.",
 "Joseph Aspdin erhält in England ein Patent auf Portlandzement.":"Joseph Aspdin obtient en Angleterre un brevet pour le ciment Portland.",

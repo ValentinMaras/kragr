@@ -1056,6 +1056,7 @@ function allgView(key){
 }
 </script>
 <style data-allg>.allg-li{margin:4px 0 6px;padding-left:1.25em}.allg-li li{margin:0 0 6px}</style>
+<style data-ktf>table.data.ktf-tab th,table.data.ktf-tab td{text-align:center;vertical-align:middle;white-space:nowrap;font-size:12px;padding:8px 7px}table.data.ktf-tab tbody th{text-align:left}.ktf-h span{text-align:center}.ktf-tab tbody .ktf-h span{text-align:left}.ktf-h{display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:600;font-size:11px;line-height:1.25;white-space:normal;min-width:70px;max-width:96px}.ktf-tab tbody .ktf-h{align-items:flex-start}.ktf{display:block;overflow:visible}</style>
 </head>
 <body>
 
@@ -1210,7 +1211,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.51';
+const REF_VERSION = '0.3.52';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -5837,6 +5838,31 @@ function dataTable(data){
     <div class="table-hint">Zeile antippen zum Markieren${data.cols.length>5 ? ' · waagerecht scrollbar' : ''}</div>`;
 }
 // Einfache Texttabelle (Formeln, Grenzwerte)
+// Integraltafel mit Figuren (ref v0.3.52): Zeilen M (Ordinate i), Spalten M̄ (Ordinate k). Figur: Grundlinie, Fläche, Ordinate beschriftet.
+function kFig(t, v){   // t: rect | triR | triL | triM | trap | par; v: 'i' | 'k' — Beschriftung über der Ordinate, nicht in der Fläche
+  const W=66, H=38, x0=7, x1=W-7, y0=13, yb=H-4, h=yb-y0, xm=(x0+x1)/2, F='font-family="JetBrains Mono, monospace" fill="#111" text-anchor="middle"';
+  const s=(x,y,n)=>`<text x="${x}" y="${y}" font-size="10" ${F}>${v}${n?`<tspan font-size="7" dy="2">${n}</tspan>`:''}</text>`;
+  let d='', lab='';
+  if(t==='rect'){ d=`M${x0} ${yb} V${y0} H${x1} V${yb}Z`; lab=s(xm, y0-3); }
+  if(t==='triR'){ d=`M${x0} ${yb} L${x1} ${y0} V${yb}Z`; lab=s(x1, y0-3); }
+  if(t==='triL'){ d=`M${x0} ${yb} V${y0} L${x1} ${yb}Z`; lab=s(x0, y0-3); }
+  if(t==='triM'){ d=`M${x0} ${yb} L${xm} ${y0} L${x1} ${yb}Z`; lab=s(xm, y0-3); }
+  if(t==='trap'){ const ya=y0+h*0.45; d=`M${x0} ${yb} V${ya} L${x1} ${y0} V${yb}Z`; lab=s(x0+1, ya-3, '1')+s(x1-1, y0-3, '2'); }
+  if(t==='par'){ d=`M${x0} ${yb} Q${xm} ${y0-h} ${x1} ${yb}Z`; lab=s(xm, y0-3); }
+  return `<svg class="ktf" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-hidden="true"><path d="${d}" fill="#111" fill-opacity="0.09" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/><line x1="${x0-4}" y1="${yb}" x2="${x1+4}" y2="${yb}" stroke="#111" stroke-width="1"/>${lab}</svg>`;
+}
+function kTafel(){
+  const C=[['rect','Rechteck k'],['triR','Dreieck k'],['triM','Dreieck Mitte k'],['trap','Trapez k₁, k₂'],['par','Parabel k']];
+  const R=[['rect','Rechteck i',            ['L·i·k','½·L·i·k','½·L·i·k','½·L·i·(k₁ + k₂)','⅔·L·i·k']],
+           ['triR','Dreieck i (gleichsinnig)',['½·L·i·k','⅓·L·i·k','¼·L·i·k','L/6·i·(k₁ + 2k₂)','⅓·L·i·k']],
+           ['triL','Dreieck i (gegensinnig)', ['½·L·i·k','⅙·L·i·k','¼·L·i·k','L/6·i·(2k₁ + k₂)','⅓·L·i·k']],
+           ['triM','Dreieck Mitte i',         ['½·L·i·k','¼·L·i·k','⅓·L·i·k','¼·L·i·(k₁ + k₂)','5/12·L·i·k']],
+           ['trap','Trapez i₁, i₂',            ['½·L·k·(i₁ + i₂)','L/6·k·(i₁ + 2i₂)','¼·L·k·(i₁ + i₂)','L/6·(2i₁k₁ + 2i₂k₂<br>+ i₁k₂ + i₂k₁)','⅓·L·k·(i₁ + i₂)']],
+           ['par','Parabel i',                ['⅔·L·i·k','⅓·L·i·k','5/12·L·i·k','⅓·L·i·(k₁ + k₂)','8/15·L·i·k']]];
+  const hd=(t,l,v)=>`<div class="ktf-h">${kFig(t,v)}<span>${tt(l)}</span></div>`;
+  return `<div class="data-table-wrap ktf-wrap"><table class="data ktf-tab"><thead><tr><th>M \\ M̄</th>${C.map(c=>`<th>${hd(c[0],c[1],'k')}</th>`).join('')}</tr></thead><tbody>`
+    + R.map(r=>`<tr><th>${hd(r[0],r[1],'i')}</th>${r[2].map(x=>`<td>${x}</td>`).join('')}</tr>`).join('') + `</tbody></table></div><div class="table-hint">waagerecht scrollbar</div>`;
+}
 function textTable(cols, rows){
   // Lange Texte in den hinteren Spalten → umbrechen und linksbündig statt waagerecht scrollen
   const plain = c => String(c).replace(/<[^>]*>/g,'');
@@ -7079,12 +7105,7 @@ Object.assign(CONTENT, {
       <div class="section-note">i — Ordinate von M, k — Ordinate von M̄, L — Länge des Abschnitts.
         „Dreieck“ hat die Spitze am Ende, „Dreieck Mitte“ die Spitze in der Mitte, „Parabel“ ist die
         quadratische Parabel mit Stich i in der Mitte (Gleichlast).</div>
-      ${textTable(['M \\ M̄',tt('Rechteck k'),tt('Dreieck k'),tt('Dreieck Mitte k')], [
-        [tt('Rechteck i'),'L·i·k','½·L·i·k','½·L·i·k'],
-        [tt('Dreieck i (gleichsinnig)'),'½·L·i·k','⅓·L·i·k','¼·L·i·k'],
-        [tt('Dreieck i (gegensinnig)'),'½·L·i·k','⅙·L·i·k','¼·L·i·k'],
-        [tt('Parabel i'),'⅔·L·i·k','⅓·L·i·k','5/12·L·i·k'],
-      ])}
+      ${kTafel()}
       <div class="formula-box">
         Trapez (i₁, i₂) × Trapez (k₁, k₂):<br>
         L/6 · (2·i₁·k₁ + 2·i₂·k₂ + i₁·k₂ + i₂·k₁)

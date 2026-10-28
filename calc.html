@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.13 -->
+<!-- kragr v0.11.14 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -606,6 +606,7 @@ window.mulyProj = {
     .st-f > div { padding-left:0.9em; text-indent:-0.9em; }
     .eq { display:grid; grid-template-columns:fit-content(48%) minmax(0,1fr); column-gap:0.45em; margin:1px 0 3px; }
     .st-f > div.eq { padding-left:0; text-indent:0; }
+    .st-f > div.rw-figs { display:flex; align-items:center; gap:8px; padding-left:0; text-indent:0; margin:8px 0 2px; color:#111; font-family:'JetBrains Mono',monospace; font-size:11px; } .rw-fig{ display:block; overflow:visible; } .rw-fig-x{ opacity:.6; } .rw-fig-t{ opacity:.6; margin-right:2px; }
     .eq-r { padding-left:0.9em; text-indent:-0.9em; }
     .eq-w { grid-column:1 / -1; padding-left:0.9em; text-indent:-0.9em; }
       /* v0.8.20: gleicher Rahmen wie size (Kopfzeile 58 px) */
@@ -1795,7 +1796,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.13</span>
+    <span class="version">v0.11.14</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2331,7 +2332,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.13';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.14';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7049,6 +7050,15 @@ function rwSS(L, P, D){
   const tot = P.reduce((s,p)=>s+p.Fy,0) + D.reduce((s,d)=>s+rwRes(d).R,0), B0=mB/L, A0=tot-B0;
   return { A0, B0, M0: x=>rwMleft(x, A0, 0, P, D) };
 }
+// Mini-Figuren zur Integraltafel (calc v0.11.14): Verlauf über 0…1 abgetastet, positiv nach oben, je Figur auf den größten Betrag skaliert
+function rwFig(fn, xs, labs){   // fn(t) mit t = 0…1, xs: zusätzliche Knickstellen, labs: [[t, Text], …]
+  const W=78, H=34, x0=8, x1=W-8, ym=H/2, hh=ym-7, T=[...new Set([...Array.from({length:49},(_,i)=>i/48), ...(xs||[])])].sort((a,b)=>a-b), V=T.map(fn);
+  const mx=Math.max(1e-12, ...V.map(Math.abs)), X=t=>x0+t*(x1-x0), Y=v=>ym-v/mx*hh;
+  const pts=T.map((t,i)=>`${X(t).toFixed(1)},${Y(V[i]).toFixed(1)}`).join(' ');
+  const lab=(labs||[]).map(([t,txt])=>{ const v=fn(t), up=v>=0, y=up ? Y(v)-3 : Y(v)+9; return `<text x="${X(t).toFixed(1)}" y="${Math.max(7,Math.min(H-1,y)).toFixed(1)}" font-size="7.5" text-anchor="${t<0.2?'end':t>0.8?'start':'middle'}" dx="${t<0.2?-2:t>0.8?2:0}" fill="currentColor">${txt}</text>`; }).join('');
+  return `<svg class="rw-fig" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true"><polygon points="${X(0)},${ym} ${pts} ${X(1)},${ym}" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><line x1="${x0-4}" y1="${ym}" x2="${x1+4}" y2="${ym}" stroke="currentColor" stroke-width="0.8"/>${lab}</svg>`;
+}
+const rwFigs = (a, b, tag) => `<div class="rw-figs">${tag?`<span class="rw-fig-t">${tag}</span>`:''}${a}<span class="rw-fig-x">×</span>${b}</div>`;
 function rwInt(f, L, brk){   // ∫₀ᴸ f, stückweise exakt (Gauß, 3 Punkte)
   const xs=[...new Set([0,L,...brk.filter(x=>x>0&&x<L)])].sort((a,b)=>a-b); let s=0;
   for(let i=0;i<xs.length-1;i++){ const a=xs[i], b=xs[i+1], h=(b-a)/2, m=(a+b)/2; G3.forEach(([g,w])=>s+=w*h*f(m+g*h)); }
@@ -7090,16 +7100,18 @@ function rwCont(){
   const dd = (i, j) => { if(i===j) return (i>0 ? Lk[i-1]/3 : 0) + (i<n ? Lk[i]/3 : 0); const lo=Math.min(i,j); return Math.abs(i-j)===1 ? Lk[lo]/6 : 0; };
   const dLines=[]; unk.forEach(i=>{ const parts=[], nums=[]; if(i>0){ parts.push(`l<sub>${i}</sub>/3${kk(i-1)!==1?`·k<sub>${i}</sub>`:''}`); nums.push(`${nf(segs[i-1].L)}/3${kTxt(i-1)}`); }
       if(i<n){ parts.push(`l<sub>${i+1}</sub>/3${kk(i)!==1?`·k<sub>${i+1}</sub>`:''}`); nums.push(`${nf(segs[i].L)}/3${kTxt(i)}`); }
-      dLines.push(`EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i)+1}</sub> = ${nums.join(' + ')} = <b>${nf(dd(i,i),3)}</b> m`);
-      if(unk.includes(i+1)) dLines.push(`EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i+1)+1}</sub> = ${nf(segs[i].L)}/6${kTxt(i)} = <b>${nf(dd(i,i+1),3)}</b> m`); });
+      dLines.push(rwFigs(rwFig(t=>t<0.5?t*2:2-2*t,[0.5],[[0.5,'1']]), rwFig(t=>t<0.5?t*2:2-2*t,[0.5],[[0.5,'1']])), `EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i)+1}</sub> = ${nums.join(' + ')} = <b>${nf(dd(i,i),3)}</b> m`);
+      if(unk.includes(i+1)) dLines.push(rwFigs(rwFig(t=>1-t,null,[[0,'1']]), rwFig(t=>t,null,[[1,'1']])),`EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i+1)+1}</sub> = ${nf(segs[i].L)}/6${kTxt(i)} = <b>${nf(dd(i,i+1),3)}</b> m`); });
   S.push('§'+rwT('kgvD'), rwT('kgvDT'), ...dLines, `<a href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
   // δ_i0: je Last eine Tafelzeile
   const part = (ss, i, side) => {   // Beiträge der Lasten in Feld i zum Einheitszustand am linken (side 'L') bzw. rechten Lager
     const l=ss.L, out=[], k=kk(i), w = x => side==='R' ? x/l : 1-x/l;
     ss.sub.D.forEach(d=>{ const one=rwSS(l, [], [d]), v=rwInt(x=>one.M0(x)*w(x), l, [d.a,d.b])/k;
-      if(Math.abs(d.qa-d.qb)<1e-9 && d.a<1e-9 && d.b>l-1e-9){ const f=d.qa*l*l/8; out.push([v, `${d.lab} (${rwT('tPar')}): l/3 · f${kTxt(i)} = ${nf(l)}/3 · ${nf(f)}${kTxt(i)} = ${nf(v,3)} (f = q·l²/8)`]); }
-      else out.push([v, `${d.lab} (${rwT('tNum')}): ∫ M₀·M̄ dx${kTxt(i)} = ${nf(v,3)}`]); });
+      const fg=rwFigs(rwFig(t=>one.M0(t*l),[d.a/l,d.b/l],null), rwFig(t=>side==='R'?t:1-t,null,[[side==='R'?1:0,'1']]));
+      if(Math.abs(d.qa-d.qb)<1e-9 && d.a<1e-9 && d.b>l-1e-9){ const f=d.qa*l*l/8; out.push([0, fg]); out.push([v, `${d.lab} (${rwT('tPar')}): l/3 · f${kTxt(i)} = ${nf(l)}/3 · ${nf(f)}${kTxt(i)} = ${nf(v,3)} (f = q·l²/8)`]); }
+      else { out.push([0, fg]); out.push([v, `${d.lab} (${rwT('tNum')}): ∫ M₀·M̄ dx${kTxt(i)} = ${nf(v,3)}`]); } });
     ss.sub.P.forEach(pp=>{ if(pp.Fy){ const a=pp.x, b=l-a, Mp=pp.Fy*a*b/l, r=side==='R' ? a/l : b/l, v=l/6*Mp*(1+r)/k;
+        out.push([0, rwFigs(rwFig(t=>t<=a/l ? (l>0&&a>0 ? t*l/a : 0) : (b>0 ? (l-t*l)/b : 0),[a/l],[[a/l,'M<tspan font-size="6" dy="1.5">F</tspan>']]), rwFig(t=>side==='R'?t:1-t,null,[[side==='R'?1:0,'1']]))]);
         out.push([v, `${pp.lab} (${rwT('tTri')}): l/6 · M<sub>F</sub> · (1 + ${side==='R'?'a':'b'}/l)${kTxt(i)} = ${nf(l)}/6 · ${nf(Mp)} · (1 + ${nf(r,3)})${kTxt(i)} = ${nf(v,3)} (M<sub>F</sub> = F·a·b/l)`]); }
       if(pp.Me){ const one=rwSS(l, [{...pp, Fy:0}], []), v=rwInt(x=>one.M0(x)*w(x), l, [pp.x])/k; out.push([v, `${pp.mlab||pp.lab} (${rwT('tMom')}): ${nf(v,3)}`]); } });
     return out; };
@@ -7177,16 +7189,17 @@ function rwFrameKGV(model, sol, n){
     const fac = Math.abs(f-1)>1e-9 ? ` · ${nf(f,3)}` : '';
     const txt = exact ? `${eName(k)}: ${nf(l)}/6·[${p3(a1)}·(2·${p3(b1)} + ${p3(b2)}) + ${p3(a2)}·(${p3(b1)} + 2·${p3(b2)})]${Math.abs(fp)>1e-9 ? ` + ${nf(l)}/3·${p3(fp)}·(${p3(a1)} + ${p3(a2)})` : ''}${fac} = ${d3(gs)}`
                       : `${eName(k)} (${rwT('kfNum')}): ${d3(gs)}`;
-    return {v:gs, txt}; };
+    const fig = rwFigs(rwFig(t=>M(ga,k,t*l),null,null), rwFig(t=>M(gb,k,t*l),null,null));
+    return {v:gs, txt, fig}; };
   const nU=GU.length, D=[], D0=[];
   const dSec=['§'+rwT('kfD'), rwT('kfDT')];
   for(let i=0;i<nU;i++){ D.push([]); for(let j=0;j<nU;j++){ if(j<i){ D[i][j]=D[j][i]; continue; }
     const parts=model.elems.map((e,k)=>integ(GU[i], GU[j], k)), v=parts.reduce((t,p)=>t+p.v,0); D[i][j]=v;
-    dSec.push(`EI₀·δ<sub>${i+1}${j+1}</sub>:`, ...parts.filter(p=>p.txt).map(p=>p.txt), `EI₀·δ<sub>${i+1}${j+1}</sub> = <b>${d3(v)}</b>`); } }
+    dSec.push(`EI₀·δ<sub>${i+1}${j+1}</sub>:`, ...parts.filter(p=>p.txt).flatMap(p=>[p.fig, p.txt]), `EI₀·δ<sub>${i+1}${j+1}</sub> = <b>${d3(v)}</b>`); } }
   S.push(...dSec, `<a href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
   const bSec=['§'+rwT('kfB')];
   for(let i=0;i<nU;i++){ const parts=model.elems.map((e,k)=>integ(GU[i], G0, k)), v=parts.reduce((t,p)=>t+p.v,0); D0.push(v);
-    bSec.push(`EI₀·δ<sub>${i+1}0</sub>:`, ...parts.filter(p=>p.txt).map(p=>p.txt), `EI₀·δ<sub>${i+1}0</sub> = <b>${d3(v)}</b>`); }
+    bSec.push(`EI₀·δ<sub>${i+1}0</sub>:`, ...parts.filter(p=>p.txt).flatMap(p=>[p.fig, p.txt]), `EI₀·δ<sub>${i+1}0</sub> = <b>${d3(v)}</b>`); }
   S.push(...bSec);
   S.push('§'+rwT('kfE'), 'Σ δ<sub>ik</sub>·X<sub>k</sub> + δ<sub>i0</sub> = 0', ...D.map((row,i)=>`${row.map((c,j)=>`${d3(c)}·${Xs(j)}`).join(' + ')} + ${nfp(D0[i],3)} = 0`));
   const X=rwSolve(D, D0.map(v=>-v)); if(!X) return null;
@@ -7244,7 +7257,7 @@ function rwSteps(S){
   let out='', n=0, open=false;
   for(const s of S){
     if(s.startsWith('§')){ if(open) out+='</div></div>'; n++; out+=`<div class="st"><div class="st-h"><span class="st-n">${n}</span><span>${s.slice(1)}</span></div><div class="st-f">`; open=true; }
-    else { const e=eqLine(s); out += e || `<div>${s}</div>`; }
+    else { const e=eqLine(s); out += e || (s.startsWith('<div class="rw-figs"') ? s : `<div>${s}</div>`); }
   }
   return out + (open?'</div></div>':'');
 }

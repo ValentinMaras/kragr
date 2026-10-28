@@ -568,6 +568,12 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Integraltafel mit Figuren — calc v0.11.14 · ref v0.3.52
+
+- **Wissen, Koppeltafel** (`baustatik/arbeitssatz/koppeltafel`): statt Texttabelle eine Matrix wie in Schneider/Wendehorst (`kTafel()`), Kopfzeile M̄ (Rechteck, Dreieck, Dreieck Mitte, Trapez, Parabel), Kopfspalte M (zusätzlich Dreieck gegensinnig). Jede Kopfzelle mit kleiner SVG-Figur (`kFig(t, v)`, 66 × 38), Beschriftung i/k über der Ordinate, nie in der Fläche. Trapez × Trapez steht zweizeilig, damit die Tafel am Rechner ohne Querscroll passt; am Handy scrollt sie im Rahmen (Hinweis „waagerecht scrollbar“). CSS in `<style data-ktf>`. Neue Labels in lang/ref.{en,fr,es}.js.
+- **Rechenweg (calc)**: vor jeder Tafelzeile ein Figurenpaar M̄ × M̄ bzw. M₀ × M̄ (`rwFig(fn, xs, labs)` tastet den echten Verlauf über 0…1 ab, positiv nach oben, je Figur auf den Größtwert skaliert; `rwFigs(a, b)`). Durchlaufträger: δ-Zeilen (Dreiecke, Wert 1), Parabel- und Einzellast-Zeilen (Dreieck mit Spitze bei a, M_F). Rahmen: je Stababschnitt in δ_ik und δ_i0. Die Zeile beginnt mit `<div class="rw-figs">` und wird ohne Hülle direkt in den Schritt gesetzt; `d0` zählt sie mit 0.
+- Test: `test_integraltafel_figuren.py` (18).
+
 ## Rechenwege mit Kraftgrößenverfahren, Wissen „Allgemeines“ und Betontechnologie — calc v0.11.13 · ref v0.3.51
 
 Valentin: Rechenwege in Schnittkräfte umfangreicher, Schritt für Schritt, vor allem bei statisch unbestimmten Systemen, mit Bezug zu den Integraltafeln. Wissen ausbauen: je Fachgebiet ein allgemeiner Teil (Geschichte, Eigenschaften des Baustoffs) und ein Teil Betontechnologie. Themen-Anzahl im Menü entfällt. Gewählt (Rückfrage): Kraftgrößenverfahren; alle sieben Werkstoff-Fachgebiete; erst Rechenwege.

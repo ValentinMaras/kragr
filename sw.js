@@ -2,7 +2,7 @@
 // Seiten (HTML): zuerst aus dem Netz (immer aktuell), offline aus dem Speicher.
 // Schriften und Symbole: zuerst aus dem Speicher.
 // Bei jeder neuen Version VERSION hochzählen, dann werden alte Speicher gelöscht.
-const VERSION = 'statiq-2026-10-28-8';
+const VERSION = 'statiq-2026-10-28-9';
 const FILES = ["./", "index.html", "calc.html", "size.html", "ref.html", "projekt.html", "rechtliches.html", "manifest.json", "k5/gsap.min.js", "lang/size.en.js", "lang/size.fr.js", "lang/size.es.js", "lang/ref.en.js", "lang/ref.fr.js", "lang/ref.es.js", "fonts/fonts.css", "fonts/figtree-latin-ext-wght-normal.woff2", "fonts/figtree-latin-wght-normal.woff2", "fonts/inter-greek-wght-normal.woff2", "fonts/jetbrains-mono-greek-wght-normal.woff2", "fonts/jetbrains-mono-latin-ext-wght-normal.woff2", "fonts/jetbrains-mono-latin-wght-normal.woff2", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png"];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

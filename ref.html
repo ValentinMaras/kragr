@@ -1268,7 +1268,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.54';
+const REF_VERSION = '0.3.55';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -10731,17 +10731,23 @@ const slug = s => norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(
 let _tocObs=null;
 function renderToc(){
   const toc=document.getElementById('toc'); if(!toc) return;
+  if(_tocObs){ _tocObs.disconnect(); _tocObs=null; }
   const cards=[...document.querySelectorAll('#main .card')].filter(c=>c.querySelector(':scope > .card-title'));
   if(!navState.thema || cards.length<2){ toc.innerHTML=''; return; }
   const used=new Set();
   cards.forEach(c=>{ let id='s-'+slug(c.querySelector(':scope > .card-title').textContent); while(used.has(id)) id+='-2'; used.add(id); c.id=id; });
   toc.innerHTML=_L`<div class="toc-h">Auf dieser Seite</div>`+cards.map(c=>`<a href="#${location.hash.slice(1)}" data-id="${c.id}">${c.querySelector(':scope > .card-title').textContent}</a>`).join('');
   toc.querySelectorAll('a').forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById(a.dataset.id)?.scrollIntoView({behavior:'smooth', block:'start'}); });
-  if(_tocObs) _tocObs.disconnect();
-  if('IntersectionObserver' in window){
-    _tocObs=new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting){ toc.querySelectorAll('a').forEach(a=>a.classList.toggle('on', a.dataset.id===en.target.id)); } }); }, {rootMargin:'-10% 0px -75% 0px'});
-    cards.forEach(c=>_tocObs.observe(c));
-  }
+  // Markierung folgt dem Lesen (ref v0.3.55): aktiv ist der letzte Abschnitt, dessen Anfang das obere Viertel erreicht hat;
+  // ganz unten auf der Seite immer der letzte Abschnitt (er kann den oberen Rand sonst nie erreichen).
+  const links=[...toc.querySelectorAll('a')];
+  const spy=()=>{ const lim=innerHeight*0.25, end=Math.ceil(scrollY+innerHeight)>=document.documentElement.scrollHeight-4;
+    let cur=cards[0]; if(end) cur=cards[cards.length-1]; else cards.forEach(c=>{ if(c.getBoundingClientRect().top<=lim) cur=c; });
+    links.forEach(a=>a.classList.toggle('on', a.dataset.id===cur.id)); };
+  let raf=0; const onScroll=()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; spy(); }); };
+  addEventListener('scroll', onScroll, {passive:true}); addEventListener('resize', onScroll);
+  _tocObs={ disconnect(){ removeEventListener('scroll', onScroll); removeEventListener('resize', onScroll); } };
+  spy();
 }
 function toggleSideMenu(force){ const sb=document.getElementById('sidebar'); const o=force??!sb.classList.contains('open'); sb.classList.toggle('open', o); }
 document.addEventListener('click', e=>{ const sb=document.getElementById('sidebar'); if(sb && sb.classList.contains('open') && !e.target.closest('#sidebar') && !e.target.closest('.menu-toggle')) toggleSideMenu(false); });

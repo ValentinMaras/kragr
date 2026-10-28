@@ -568,6 +568,11 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## „Auf dieser Seite“: Markierung bis zum letzten Abschnitt — ref v0.3.55
+
+- `renderToc()` nutzt statt des IntersectionObservers einen Scroll-Beobachter (rAF): aktiv ist der letzte Abschnitt, dessen Anfang das obere Viertel erreicht hat; ist die Seite ganz unten, immer der letzte. Vorher blieb die Markierung bei kurzen Schlussabschnitten am vorletzten hängen. Der Beobachter wird bei jedem Seitenwechsel abgemeldet.
+- Test: `test_toc_marker.py` (11).
+
 ## Geschichte als Fließtext, Geschichte der Baustatik — ref v0.3.54
 
 - Die Geschichtsseiten der sieben Fachgebiete sind keine Zeitleisten mehr, sondern Fließtext in drei Abschnitten mit je zwei Absätzen (Personen, Jahreszahlen und Bezug zum heutigen Nachweis).

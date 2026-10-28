@@ -1,12 +1,12 @@
-# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.11 · ref v0.3.48 · size v0.7.9 · projekt v0.1.24 · rechtliches v0.1.16 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Rechenblätter)
+# kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.12 · ref v0.3.49 · size v0.7.10 · projekt v0.1.25 · rechtliches v0.1.17 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Rechenblätter)
 
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
-- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.11, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
-- `projekt.html` — „Rechenblätter“: Liste aller gespeicherten Berechnungen aus calc und size, Bericht/PDF, Öffnen, Umbenennen, Löschen, Datei (kragr·projekt v0.1.24; bis v0.1.23 „Projekte“ mit Positionen)
-- `ref.html` — Nachschlagewerk (kragr·ref v0.3.48, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
-- `size.html` — Bemessung (kragr·size v0.7.9, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
-- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.16)
+- `calc.html` — Schnittgrößen-App (kragr·calc v0.11.12, sichtbar „Schnittkräfte“, DE/EN/FR/ES)
+- `projekt.html` — „Rechenblätter“: Liste aller gespeicherten Berechnungen aus calc und size, Bericht/PDF, Öffnen, Umbenennen, Löschen, Datei (kragr·projekt v0.1.25; bis v0.1.23 „Projekte“ mit Positionen)
+- `ref.html` — Nachschlagewerk (kragr·ref v0.3.49, sichtbar „Wissen“, vollständig auf Englisch, Französisch und Spanisch)
+- `size.html` — Bemessung (kragr·size v0.7.10, sichtbar „Bemessung“, Beta: DE/EN/FR/ES, Pakete A–C mit 27 neuen Nachweisen, Abhilfe bei nicht erfüllten Nachweisen, vollständig auf Englisch, Bauphysik neu, dazu Wasserbau, Mauerwerk und Grundbau; Stahlbeton inkl. Stützen und Durchstanzen, Stahl inkl. Anschlüsse, Schweißnähte und Stützenfuß, Holz inkl. Verbindungen)
+- `rechtliches.html` — Impressum (Platzhalter in eckigen Klammern), Haftung, Normen und Quellen, Datenschutz, Lizenzen; DE/EN/FR/ES (kragr·rechtliches v0.1.17)
 - `manifest.json`, `sw.js`, `icons/` — Installierbare Web-App (PWA): Manifest, Service Worker für Offline-Betrieb, App-Symbole (192, 512, maskable 512, Apple 180, Favicon 32)
 - `lang/` — Sprachdateien `size.en.js`, `size.fr.js`, `size.es.js`, `ref.en.js`, `ref.fr.js`, `ref.es.js` (müssen neben den HTML-Dateien liegen)
 - `fonts/` — Figtree (Text), JetBrains Mono (Zahlen/Formeln) und Inter (nur griechische Buchstaben, unter dem Namen Figtree) als woff2 mit `fonts.css` und OFL-Lizenzen (muss neben den HTML-Dateien liegen)
@@ -567,6 +567,19 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 ## Startseite — vier Kacheln
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
+
+## Weicheres Klappen, nur die eigene Spalte, Speichern unten rechts — calc v0.11.12 · size v0.7.10 · ref v0.3.49 · projekt v0.1.25 · rechtliches v0.1.17
+
+Valentin: Speichern-Knopf an der Stelle gefällt nicht („ganz unten auf der Seite rechts?“); beim Zuklappen verschiebt sich die Seite sehr stark; am Rechner mit zwei Spalten soll sich nur die Spalte bewegen, in der geklappt wird.
+
+- **Speichern:** `.kbl` jetzt letztes Kind des Bereichs (`#tab-…` in calc, `main.main` in size, dort über beide Rasterspalten), rechtsbündig, Namensfeld höchstens 520 px breit.
+- **Klappen neu (`k5/k5.js`, `resize`):** statt Verschieben per transform (v0.11.10) gleitet die Höhe der Karte (GSAP `height`, `power2.inOut`, 0,32 … 0,62 s je nach Höhenänderung), alles darunter folgt über das Layout. Damit bewegt sich nur die eigene Spalte, und am Seitenende rückt die Seite allmählich statt mit einem Sprung nach (der Browser kürzt die Scrollhöhe Bild für Bild).
+  - Zuklappen einer k5-Karte: Klasse `k5-closing` hält `.k5-body` sichtbar, bis die Höhe unten ist; der Inhalt blendet dabei aus. Fremde Klappkarten (`closed`/`k-closed`, z. B. Lasten, size-Faltkarten): die neue Klasse wird während der Bewegung entfernt und am Ende wieder gesetzt (`el._k5re`), danach Ereignis `k5refold` → calc `k2All()`/`k11Sum()`, alle Seiten `later()` (Kurzfassungen neu).
+  - Eine Spalte (Handy): Kopf der angetippten Karte bleibt Bild für Bild an seiner Stelle (scrollBy), auch wenn darüber eine andere Karte der Gruppe zuklappt. Zwei Spalten (`sideBox`): kein Scrollen; liegt der Kopf danach außerhalb, gleitet die Seite sanft hin.
+  - Mitlaufende Nachbarspalte (calc `.col-out` sticky): Der Spaltenbehälter hält beim Kürzerwerden seine Höhe (`min-height`, `hold`) und gibt sie beim Hochscrollen unsichtbar frei (`release`, auch am Ende jeder Bewegung, bei Fenstergröße: sofort).
+  - Ohne GSAP dieselbe Höhenbewegung über die Web Animations API; ruhiger Modus: keine Bewegung.
+  - Fremde Mechaniken: der Kartenkopf wird ab dem Elternteil gesucht (`h.parentNode.closest(…)`), vorher traf `div` den Kopf selbst und es glitt nur das Innenteil.
+- **Tests:** `test_flip.py` neu geschrieben (26): Höhe gleitet, kein transform, Inhalt beim Zuklappen sichtbar, Kopf bleibt stehen (Handy), Seitenende ohne Sprung, dreimal schnell, Rechner: rechte bzw. linke Spalte bleibt Bild für Bild stehen, Behälter hält und gibt frei, size-Faltkarte, ruhiger Modus, ohne GSAP. Angepasst: test_rechenblaetter, test_calc_ux (Knopf ganz unten rechts).
 
 ## Wissen: Spannungsbild im Querschnitt — ref v0.3.48
 
@@ -1370,7 +1383,7 @@ Alles auf einmal: `python3 statiq-tests/run_all.py` (braucht Node, Python 3 und 
 - `test_rechtliches.py` — neu in v0.3.24/v0.5.31: Rechtsseite DE/EN/FR/ES, Haftungshinweis und Link auf allen Seiten, Hinweis im Bericht, Schriften lokal ohne fremde Anfragen, Normtabellen als Auszug
 - `test_projekt_link.py` (8) — neu: „Meine Projekte“ über einen lokalen Webserver mit und ohne projekt.html (Navigation bzw. Hinweis statt 404, DE/EN)
 
-Stand: **1938/1938 grün** (ref v0.3.48; inklusive `test_ref_spannungsbild.py` 15, `test_rechenblaetter.py` 35, `test_flip.py` 21; die vier Projekt-Testdateien sind entfallen; `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
+Stand: **1943/1943 grün** (calc v0.11.12; inklusive `test_flip.py` 26 neu geschrieben, `test_ref_spannungsbild.py` 15, `test_rechenblaetter.py` 35, `test_flip.py` 21; die vier Projekt-Testdateien sind entfallen; `test_bewegung.py` 24, `test_design_k5.py`, `test_lagerzeichen.py` 10, `test_federn.py` 19, `test_stufen.py` 24, `test_lastfaelle.py` 29, `test_satteldach.py` 24, `test_knoten.py` 22, `test_projektmodus.py` 33, `test_calc_bedienung.py` 26, `test_rahmen_einheitlich.py` 21, `test_size_design3.py` 12, `test_calc_design2.py` 41, `test_design_kragr.py` 20, `test_bericht_rechenblatt.py` 9, `test_projekt_menue.py` 8, `test_size_plakette.py` 9, `test_startseite_glas.py` 11, `test_dunkel.py` 14, `test_calc_uebung.py` 15, `test_size_uebung.py` 16, `test_sprachdateien.py` 16, `test_skizzen_klarheit.py` 16, `test_marke_muly.py` 24, `test_size_schub.py` 19, `test_size_bauph_plaus.py` 16, `test_size_luftschicht.py` 12 und `test_vertrauen.py` 9 Prüfungen).
 Referenzfälle: Rahmen fix/fix h=4 b=5 q=10 → Kopf −14.88, Fuß +7.44, Feld +16.37 · DLT 2×5 m q=10 → 18.75 / 62.5 / 18.75 kN, M_B = −31.25 kNm
 
 ---

@@ -16,6 +16,8 @@ window.kragrK5Page = function(K){
   var P=K.page;
 
   if(P==='calc'){
+    // nach dem weichen Zuklappen einer fremden Klappkarte (Klasse war während der Bewegung entfernt): Kurzfassungen neu
+    D.addEventListener('k5refold', function(){ try{ if(typeof window.k2All==='function') window.k2All(); if(typeof window.k11Sum==='function') window.k11Sum(); }catch(e){} });
     // Knotentabelle: zugeklappt, Kurzfassung = Anzahl Knoten und Stäbe
     rule('.k-knoten', function(el){ var h=$(':scope > .card-title', el)||$(':scope > .k5-head', el); if(!h) return null;
       return {head:h, key:'knoten', closed:true, sum:function(c){ var n=$$('.k-kn-list > li', c).length, b=$$('.k-kn-tab tr.k-kn-bar', c).length;
@@ -93,6 +95,7 @@ window.kragrK5Page = function(K){
   // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
+  D.addEventListener('k5refold', function(){ later(); });   // Kurzfassungen der Faltkarten nach dem weichen Zuklappen
   apply(); deco();
   D.addEventListener('k5toggle', function(){ deco(); });
   D.addEventListener('change', function(e){ if(e.target && (e.target.id==='lang-sel'||e.target.id==='lang')) setTimeout(function(){ K.refreshSums(); deco(); }, 50); }, true);

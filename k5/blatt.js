@@ -1,4 +1,4 @@
-// Rechenblatt speichern (calc v0.11.11 · size v0.7.9): ersetzt „Projekte“. Unter den Ergebnissen ein Knopf „Als Rechenblatt speichern“,
+// Rechenblatt speichern (calc v0.11.11 · size v0.7.9; seit calc v0.11.12 · size v0.7.10 ganz unten rechts): ersetzt „Projekte“. Knopf „Als Rechenblatt speichern“,
 // darunter ein kleines Feld für den Namen. Gleicher Name: erst „Überschreiben?“, dann ersetzen. Alle Rechenblätter zeigt projekt.html.
 // calc: Eintrag statiq_sdf_<Zeit> = {name, sdf, draft} — draft sind die Eingaben (k4Snap), damit „Öffnen“ alles wiederherstellt.
 // size: wie bisher savePos() → statiq-size-positionen + Bericht statiq-size-bericht:<Name>. Öffnen: size.html#blatt=<Name>.
@@ -20,7 +20,7 @@
   function calcList(){ var out=[]; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k || k.indexOf('statiq_sdf_')!==0 || k.indexOf('statiq_sdf_pos_')===0) continue;
     try{ var e=JSON.parse(localStorage.getItem(k)); if(e && e.sdf && (e.sdf.module||'calc')==='calc') out.push({key:k, name:e.name}); }catch(_){} } }catch(e){} return out; }
   var A = PAGE==='calc' ? {
-    host: function(t){ var m=D.getElementById('tab-'+t); return m && (m.querySelector('.col-out') || m); },
+    host: function(t){ return D.getElementById('tab-'+t); },   // ganz unten im Bereich, rechts (v0.11.12)
     def: function(){ var t=calcTab(); if(!t) return ''; try{ var sid=t==='cantilever'?'cant':t, lc=lastCalc[sid], tabs=(calcTranslations[calcLang]||calcTranslations.en).tabs,
         lab={beam:tabs[0],cantilever:tabs[1],cont:tabs[2],frame:tabs[3]}[t]||t; if(!lc) return lab; var g=lc.geometry;
         if(t==='cont') return trf('nameSpans', lab, g.spans.length, g.spans.join('/'));
@@ -34,7 +34,7 @@
       try{ var o=JSON.parse(localStorage.getItem(key)); o.name=n; o.draft=k4Snap(); localStorage.setItem(key, JSON.stringify(o)); }catch(e){ return 'full'; }
       return 'ok'; }
   } : {
-    host: function(){ var b=D.querySelector('#results button[onclick="showReport()"]') || D.querySelector('button[onclick="showReport()"]'); return b ? b.closest('.btn-row') || b.parentNode : null; },
+    host: function(){ return D.querySelector('main.main') || D.querySelector('main'); },   // ganz unten auf der Seite, rechts (size v0.7.10)
     def: function(){ try{ return (D.getElementById(nameField()).value||'').trim(); }catch(e){ return ''; } },
     exists: function(n){ try{ return posRead().some(function(p){ return p.name===n; }); }catch(e){ return false; } },
     save: function(n){ try{ var f=D.getElementById(nameField()); if(f){ f.value=n; f.dispatchEvent(new Event('input',{bubbles:true})); } savePos(); }catch(e){ return 'full'; }

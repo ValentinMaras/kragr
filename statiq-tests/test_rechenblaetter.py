@@ -22,9 +22,9 @@ async def main():
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':390,'height':844}); pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
-        r=await pg.evaluate("""()=>{const w=document.querySelector('#tab-beam .kbl'); return {par:w && w.parentNode.className, vis:!!(w && w.offsetParent), txt:w && w.querySelector('.kbl-btn').textContent,
+        r=await pg.evaluate("""()=>{const w=document.querySelector('#tab-beam .kbl'); return {par:w && w.parentNode.id, last:w===w.parentNode.lastElementChild, right:Math.round(innerWidth-w.querySelector('.kbl-btn').getBoundingClientRect().right), vis:!!(w && w.offsetParent), txt:w && w.querySelector('.kbl-btn').textContent,
             old:[...document.querySelectorAll('.col-out .save-btn')].some(e=>e.offsetParent)}}""")
-        check('calc: Knopf „Als Rechenblatt speichern“ in der Ergebnisspalte', r['par']=='col-out' and r['vis'] and r['txt']=='Als Rechenblatt speichern', r)
+        check('calc: Knopf „Als Rechenblatt speichern“ ganz unten im Bereich, rechts (v0.11.12)', r['par']=='tab-beam' and r['last'] and r['right']<=17 and r['vis'] and r['txt']=='Als Rechenblatt speichern', r)
         check('calc: alter Knopf „Berechnung speichern“ verborgen', not r['old'], r)
         # Einfeldträger, Startlasten F = 10 kN bei a = 2,5 m und q = 5 kN/m von 0 bis 5 m, jetzt L = 7 m:
         # A = 25·4,5/7 + 10·4,5/7 = 22,5 kN; Q = 22,5 − 5·2,5 = 10 → nach F genau 0, also max M unter F: 22,5·2,5 − 5·2,5²/2 = 40,625 kNm
@@ -50,8 +50,8 @@ async def main():
         check('calc: Sprache wechselt den Knopftext mit (EN)', t=='Save as calculation sheet', t)
         # size
         await pg.goto(B+'size.html'); await pg.wait_for_timeout(900)
-        r=await pg.evaluate("()=>{const w=document.querySelector('.kbl'); return {vis:!!(w&&w.offsetParent), row:w && w.parentNode.className, rep:!!w.parentNode.querySelector('button[onclick=\"showReport()\"]')}}")
-        check('size: Knopf neben „Bericht ansehen“', r['vis'] and r['rep'], r)
+        r=await pg.evaluate("()=>{const w=document.querySelector('.kbl'), b=w.querySelector('.kbl-btn').getBoundingClientRect(); return {vis:!!(w&&w.offsetParent), rep:w.parentNode.matches('main') && w===w.parentNode.lastElementChild, right:Math.round(innerWidth-b.right)}}")
+        check('size: Knopf ganz unten auf der Seite, rechts', r['vis'] and r['rep'] and r['right']<=17, r)
         await pg.click('.kbl-btn'); await pg.fill('.kbl-in','Unterzug Beton'); await pg.click('.kbl-ok'); await pg.wait_for_timeout(400)
         e=await pg.evaluate("()=>{const L=JSON.parse(localStorage.getItem('statiq-size-positionen')||'[]'); return {n:L.length, name:L[0]&&L[0].name, rep:(localStorage.getItem('statiq-size-bericht:Unterzug Beton')||'').length}}")
         check('size: Nachweis und Bericht gespeichert', e['n']==1 and e['name']=='Unterzug Beton' and e['rep']>500, e)

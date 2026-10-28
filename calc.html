@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.11 -->
+<!-- kragr v0.11.12 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1058,6 +1058,7 @@ window.mulyProj = {
   .k5-sum { display:block; margin-top:6px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; line-height:1.5; color:#5c5e66; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .k5-acc:not(.k5-closed) > .k5-sum { display:none; }
   .k5-acc.k5-closed > .k5-body { display:none; }
+  .k5-acc.k5-closed.k5-closing > .k5-body { display:block; }   /* beim Zuklappen sichtbar, bis die Höhe unten ist (calc v0.11.12) */
   .k5-acc.k5-closed > .card-title { margin-bottom:0 !important; }
   .k5-flash { animation:k5-flash 1.1s var(--k5-ease); }
   @keyframes k5-flash { 0% { box-shadow:0 0 0 3px rgba(84,104,173,.45), var(--k5-sh); } 100% { box-shadow:0 0 0 0 rgba(84,104,173,0), var(--k5-sh); } }
@@ -1163,6 +1164,8 @@ window.kragrK5Page = function(K){
   var P=K.page;
 
   if(P==='calc'){
+    // nach dem weichen Zuklappen einer fremden Klappkarte (Klasse war während der Bewegung entfernt): Kurzfassungen neu
+    D.addEventListener('k5refold', function(){ try{ if(typeof window.k2All==='function') window.k2All(); if(typeof window.k11Sum==='function') window.k11Sum(); }catch(e){} });
     // Knotentabelle: zugeklappt, Kurzfassung = Anzahl Knoten und Stäbe
     rule('.k-knoten', function(el){ var h=$(':scope > .card-title', el)||$(':scope > .k5-head', el); if(!h) return null;
       return {head:h, key:'knoten', closed:true, sum:function(c){ var n=$$('.k-kn-list > li', c).length, b=$$('.k-kn-tab tr.k-kn-bar', c).length;
@@ -1240,6 +1243,7 @@ window.kragrK5Page = function(K){
   // projekt.html = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, eigene Gestaltung auf der Seite
 
   new MutationObserver(later).observe(D.body, {childList:true, subtree:true});
+  D.addEventListener('k5refold', function(){ later(); });   // Kurzfassungen der Faltkarten nach dem weichen Zuklappen
   apply(); deco();
   D.addEventListener('k5toggle', function(){ deco(); });
   D.addEventListener('change', function(e){ if(e.target && (e.target.id==='lang-sel'||e.target.id==='lang')) setTimeout(function(){ K.refreshSums(); deco(); }, 50); }, true);
@@ -1273,46 +1277,67 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
 
-  // ── Weich umklappen (FLIP mit GSAP, calc v0.11.10) ──────────────────────────────────────
-  // Vorher Lage messen, Änderung ausführen, nachher vergleichen. Animiert werden nur transform und clip-path, nie die Höhe:
-  // alles, was im Fluss danach kommt, gleitet von der alten an die neue Stelle; eine wachsende Karte wird von oben nach unten
-  // aufgedeckt. Ein zweiter Klick mitten in der Bewegung startet ruhig von der sichtbaren Lage aus. Ohne GSAP: Höhe wie bisher.
+  // ── Weich umklappen (calc v0.11.12, GSAP) ───────────────────────────────────────────────
+  // Die Höhe der Karte gleitet von der alten zur neuen Höhe; alles darunter folgt über das normale Layout. So bewegt sich nur die
+  // Spalte, in der geklappt wird (zwei Spalten am Rechner), und am Seitenende rückt die Seite allmählich statt mit einem Sprung nach.
+  // Beim Zuklappen bleibt der Inhalt sichtbar, bis die Karte zu ist (Klasse k5-closing), und blendet dabei aus.
+  // Eine Spalte (Handy): der Kopf der angetippten Karte bleibt unter dem Finger stehen, auch wenn darüber eine andere Karte zuklappt.
+  // Ohne GSAP: dieselbe Höhenbewegung mit der Web Animations API.
   function GS(){ return window.gsap && typeof window.gsap.fromTo==='function' ? window.gsap : null; }
-  var NOFLOW=/^(SCRIPT|STYLE|TEMPLATE|LINK|META|NOSCRIPT)$/;
-  function flowAfter(els){ var out=[];
-    els.forEach(function(el){ for(var n=el; n && n!==D.body && n!==H; n=n.parentElement){
-      for(var s=n.nextElementSibling; s && out.length<240; s=s.nextElementSibling){ if(out.indexOf(s)<0 && els.indexOf(s)<0) out.push(s); } } });
-    return out.filter(function(s){ if(NOFLOW.test(s.tagName) || !s.getClientRects().length) return false;
-      if(els.some(function(c){ return s.contains(c); })) return false;
-      var p=getComputedStyle(s).position; return p!=='fixed' && p!=='sticky' && p!=='absolute'; }); }
-  function measure(els){
-    var b=els.map(function(el){ var r=el.getBoundingClientRect(); return {el:el, h:r.height, top:r.top}; });
-    if(GS() && !STILL()) b.flow=flowAfter(els).map(function(el){ return {el:el, top:el.getBoundingClientRect().top}; });
-    return b; }
-  function flip(before, anchor, anchorTop){
-    if(anchor && anchorTop!=null){ var d=anchor.getBoundingClientRect().top-anchorTop; if(Math.abs(d)>1) window.scrollBy(0,d); }
-    if(STILL()) return;
-    var g=GS();
-    if(g && before.flow){
-      var all=before.concat(before.flow).filter(function(b){ return b.el.isConnected; }), els=all.map(function(b){ return b.el; });
-      g.killTweensOf(els); g.set(els,{clearProps:'transform,clipPath'});
-      var vh=window.innerHeight, now=all.map(function(b){ return b.el.getBoundingClientRect(); });
-      var big=0; all.forEach(function(b,i){ if(b.h!=null) big=Math.max(big, Math.abs(now[i].height-b.h)); });
-      var dur=Math.min(0.48, 0.26+big*0.00025);
-      all.forEach(function(b,i){ var r=now[i], dy=b.top-r.top;
-        if(b.h!=null && r.height>b.h+2){ var rad=getComputedStyle(b.el).borderTopLeftRadius||'0px';
-          g.fromTo(b.el,{clipPath:'inset(0px 0px '+(r.height-b.h).toFixed(1)+'px 0px round '+rad+')'},
-                        {clipPath:'inset(0px 0px 0px 0px round '+rad+')', duration:dur, ease:'power2.inOut', clearProps:'clipPath'}); }
-        if(Math.abs(dy)<1) return;
-        if(Math.min(b.top, r.top) > vh+40 || Math.max(b.top, r.top)+r.height < -40) return;   // außerhalb des Bildschirms: springen
-        g.fromTo(b.el,{y:dy},{y:0, duration:dur, ease:'power2.inOut', clearProps:'transform'}); });
-      return;
-    }
-    before.forEach(function(b){ var el=b.el; if(!el.isConnected) return; var h1=el.getBoundingClientRect().height; if(Math.abs(h1-b.h)<2 || !el.animate) return;
-      var ov=el.style.overflow; el.style.overflow='hidden';
-      var a=el.animate([{height:b.h+'px'},{height:h1+'px'}],{duration:Math.min(520, 260+Math.abs(h1-b.h)*0.25), easing:'cubic-bezier(.22,.8,.24,1)'});
-      a.onfinish=a.oncancel=function(){ el.style.overflow=ov; }; });
+  function measure(els){ var b=els.map(function(el){ var r=el.getBoundingClientRect(); return {el:el, h:r.height, top:r.top, cls:el.className}; });
+    var C=els.length ? sideBox(els[0]) : null; if(C) b.box={C:C, h:C.getBoundingClientRect().height}; return b; }
+  function stopH(el){ var g=GS(); if(g){ g.killTweensOf(el); var bd=el.querySelector && el.querySelector(':scope > .k5-body'); if(bd){ g.killTweensOf(bd); bd.style.opacity=''; } }
+    if(el.getAnimations) el.getAnimations().forEach(function(a){ try{ var k=a.effect && a.effect.getKeyframes(); if(k && k.some(function(f){ return 'height' in f; })) a.cancel(); }catch(e){} });
+    el.style.height=''; el.style.overflow=''; el.classList.remove('k5-closing'); if(el._k5re){ el._k5re.forEach(function(c){ el.classList.add(c); }); el._k5re=null; } }
+  // Liegt neben der Karte eine zweite Spalte? sideBox liefert den Behälter der Spalten (z. B. .cols), sonst null.
+  function sideBox(el){ for(var a=el; a && a.parentElement && a!==D.body; a=a.parentElement){ var r=a.getBoundingClientRect();
+      var sib=Array.prototype.some.call(a.parentElement.children, function(s){ if(s===a || !s.getClientRects().length) return false; var q=s.getBoundingClientRect();
+        if(q.width<=150 || q.height<=40 || q.left>=window.innerWidth || q.right<=0) return false;   // schmale oder außerhalb liegende (Menü) nicht
+        var pos=getComputedStyle(s).position; if(pos==='fixed' || pos==='absolute') return false;
+        return (q.left>=r.right-1 || q.right<=r.left+1) && q.top<r.bottom && q.bottom>r.top; });
+      if(sib) return a.parentElement; } return null; }
+  function wide(el){ return !!sideBox(el); }
+  // Zwei Spalten mit mitlaufender (sticky) Nachbarspalte: Wird eine Spalte kürzer, würde der Behälter schrumpfen und die Nachbarspalte
+  // nach oben schieben. Deshalb hält der Behälter seine Höhe (min-height) und gibt sie beim Hochscrollen unsichtbar wieder frei.
+  var HOLDS=[];
+  function hasSticky(C){ return Array.prototype.some.call(C.children, function(s){ return getComputedStyle(s).position==='sticky'; }); }
+  function hold(C, h){ if(!C || !hasSticky(C)) return; var cur=parseFloat(C.style.minHeight)||0; C.style.minHeight=Math.max(cur, h)+'px'; if(HOLDS.indexOf(C)<0) HOLDS.push(C); }
+  function release(){ HOLDS=HOLDS.filter(function(C){ if(!C.isConnected){ return false; } var r=C.getBoundingClientRect(), cs=getComputedStyle(C), pb=parseFloat(cs.paddingBottom)||0, pt=parseFloat(cs.paddingTop)||0, nat=0, req=0;
+      Array.prototype.forEach.call(C.children, function(s){ if(!s.getClientRects().length) return; var v=s.getBoundingClientRect().bottom-r.top+pb, ss=getComputedStyle(s);
+        if(ss.position==='sticky'){ req=Math.max(req, v); nat=Math.max(nat, pt+(parseFloat(ss.marginTop)||0)+s.offsetHeight+pb); }   // ohne Mitlaufen: oben im Behälter
+        else nat=Math.max(nat, v); });
+      var m=Math.max(nat, req); if(m<=nat+1){ C.style.minHeight=''; return false; } if(m<(parseFloat(C.style.minHeight)||0)) C.style.minHeight=m+'px'; return true; }); }
+  var relT=0; window.addEventListener('scroll', function(){ if(!HOLDS.length || relT) return; relT=requestAnimationFrame(function(){ relT=0; release(); }); }, {passive:true});
+  window.addEventListener('resize', function(){ HOLDS.forEach(function(C){ C.style.minHeight=''; }); HOLDS=[]; });
+  var HDR=72;   // Höhe der festen Kopfzeile
+  function resize(els, h0, anchor, top, box, cls){
+    if(box && !STILL()) hold(box.C, box.h);
+    els.forEach(stopH);
+    var h1=els.map(function(el){ return el.getBoundingClientRect().height; }), big=0;
+    els.forEach(function(el,i){ big=Math.max(big, Math.abs(h1[i]-h0[i])); });
+    var keep = anchor && top!=null && !wide(anchor);
+    var fix=function(){ if(!keep || !anchor.isConnected) return; var d=anchor.getBoundingClientRect().top-top; if(Math.abs(d)>0.5) window.scrollBy(0,d); };
+    if(big<2 || STILL()){ fix(); return; }
+    var dur=Math.min(0.62, 0.32+big*0.00035), g=GS();
+    els.forEach(function(el,i){ var a=h0[i], b=h1[i]; if(Math.abs(b-a)<2) return;
+      var acc=el.classList.contains('k5-acc'), body=acc && el.querySelector(':scope > .k5-body');
+      if(b<a && acc) el.classList.add('k5-closing');
+      // fremde Klappkarten (closed / k-closed): Klasse erst am Ende setzen, damit der Inhalt beim Zuklappen sichtbar bleibt
+      var re = !acc && b<a && cls && cls[i]!=null ? ['closed','k-closed'].filter(function(c){ return el.classList.contains(c) && (' '+cls[i]+' ').indexOf(' '+c+' ')<0; }) : [];
+      if(re.length){ re.forEach(function(c){ el.classList.remove(c); }); el._k5re=re; }
+      el.style.overflow='hidden';
+      var end=function(){ el.style.height=''; el.style.overflow=''; el.classList.remove('k5-closing'); if(el._k5re){ el._k5re.forEach(function(c){ el.classList.add(c); }); el._k5re=null;
+          try{ D.dispatchEvent(new CustomEvent('k5refold',{detail:{el:el}})); }catch(e){} }   // Seite rechnet Kurzfassungen neu (Klasse war kurz weg)
+        if(body) body.style.opacity=''; release(); };
+      if(g){ g.fromTo(el, {height:a}, {height:b, duration:dur, ease:'power2.inOut', onComplete:end});
+        if(body && b<a) g.fromTo(body, {opacity:1}, {opacity:0, duration:dur*0.7, ease:'power1.out'}); }
+      else if(el.animate){ el.style.height=b+'px'; var an=el.animate([{height:a+'px'},{height:b+'px'}], {duration:dur*1000, easing:'cubic-bezier(.45,0,.25,1)'}); an.onfinish=an.oncancel=end; }
+      else end(); });
+    if(keep){ var t0=performance.now(); (function step(){ fix(); if(performance.now()-t0 < dur*1000+60) requestAnimationFrame(step); })(); }
+    else if(anchor && top!=null) setTimeout(function(){ if(!anchor.isConnected) return; var r=anchor.getBoundingClientRect();
+      if(r.top<HDR || r.top>window.innerHeight-60) window.scrollTo({top:window.scrollY+r.top-HDR-12, behavior:'smooth'}); }, dur*1000+40);
   }
+  function flip(before, anchor, anchorTop){ resize(before.map(function(b){ return b.el; }), before.map(function(b){ return b.h; }), anchor, anchorTop, before.box, before.map(function(b){ return b.cls; })); }
   function openAnim(card){ if(STILL()) return; card.classList.remove('k5-open-anim'); void card.offsetWidth; card.classList.add('k5-open-anim'); setTimeout(function(){ card.classList.remove('k5-open-anim'); }, 450); }
 
   // ── Akkordeon: Karte mit Kopf (Titel · Kurzfassung · Pfeil), Gruppe = immer nur eine offen ──────
@@ -1353,10 +1378,10 @@ window.kragrK5Page = function(K){
   function toggle(card, force){
     var open = force!=null ? force : card.classList.contains('k5-closed');
     var others = open ? groupOf(card).filter(function(c){ return !c.classList.contains('k5-closed'); }) : [];
-    var before=measure([card].concat(others)), top=card.getBoundingClientRect().top;
+    var head=card.querySelector(':scope > .k5-head')||card, before=measure([card].concat(others)), top=head.getBoundingClientRect().top;
     others.forEach(function(c){ setClosed(c, true); });
     setClosed(card, !open);
-    flip(before, card, top);
+    flip(before, head, top);
     if(open) openAnim(card);
     try{ D.dispatchEvent(new CustomEvent('k5toggle',{detail:{card:card, open:open}})); }catch(e){}
   }
@@ -1369,11 +1394,10 @@ window.kragrK5Page = function(K){
   D.addEventListener('click', function(e){
     if(STILL()) return;
     var h=e.target.closest && e.target.closest(FOREIGN); if(!h || h.closest('.k5-acc > .k5-head')) return;
-    var card=h.closest('.load-item, .card, .k-loads, .fold, .dfold, .sb-group, li, section, div') || h.parentNode;
+    var card=(h.parentNode && h.parentNode.closest && h.parentNode.closest('.load-item, .card, .k-loads, .fold, .dfold, .sb-group, li, section, div')) || h.parentNode;   // ab dem Elternteil suchen: der Kopf selbst ist oft ein div
     var parent=card.parentNode, sibs=parent ? Array.prototype.filter.call(parent.children, function(c){ return c.offsetParent!==null; }) : [card];
-    var before=measure(sibs.slice(0,40)), top=card.getBoundingClientRect().top;
+    var before=measure(sibs.slice(0,40));
     requestAnimationFrame(function(){ flip(before, null, null); if(card.isConnected && !card.classList.contains('closed') && !card.classList.contains('k-closed')) openAnim(card); });
-    void top;
   }, true);
 
   // ── Kopfzeile: Logo · ☰ ─────────────────────────────────────────────
@@ -1497,8 +1521,10 @@ window.kragrK5Page = function(K){
 </script>
 <style data-blatt>
   /* Rechenblatt speichern (calc v0.11.11 · size v0.7.9) */
-  .kbl { margin-top:10px; }
-  .btn-row > .kbl { flex-basis:100%; margin-top:6px; }
+  .kbl { display:flex; flex-direction:column; align-items:flex-end; gap:6px; margin:28px 0 8px; clear:both; }   /* ganz unten rechts (calc v0.11.12) */
+  .kbl-form { width:min(100%, 520px); }
+  .main > .kbl { grid-column:1 / -1; }   /* size: über beide Spalten des Rasters */
+  .kbl-msg { text-align:right; }
   .kbl-btn { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border:none; border-radius:14px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer; }
   .kbl-btn:hover { box-shadow:var(--k5-sh-h, inset 0 0 0 1px #a1a1aa); }
   .kbl-btn[hidden], .kbl-form[hidden] { display:none !important; }
@@ -1523,7 +1549,7 @@ window.kragrK5Page = function(K){
   @media print { .k-verfoot { display:none !important; } }
 </style>
 <script data-blatt>
-// Rechenblatt speichern (calc v0.11.11 · size v0.7.9): ersetzt „Projekte“. Unter den Ergebnissen ein Knopf „Als Rechenblatt speichern“,
+// Rechenblatt speichern (calc v0.11.11 · size v0.7.9; seit calc v0.11.12 · size v0.7.10 ganz unten rechts): ersetzt „Projekte“. Knopf „Als Rechenblatt speichern“,
 // darunter ein kleines Feld für den Namen. Gleicher Name: erst „Überschreiben?“, dann ersetzen. Alle Rechenblätter zeigt projekt.html.
 // calc: Eintrag statiq_sdf_<Zeit> = {name, sdf, draft} — draft sind die Eingaben (k4Snap), damit „Öffnen“ alles wiederherstellt.
 // size: wie bisher savePos() → statiq-size-positionen + Bericht statiq-size-bericht:<Name>. Öffnen: size.html#blatt=<Name>.
@@ -1545,7 +1571,7 @@ window.kragrK5Page = function(K){
   function calcList(){ var out=[]; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(!k || k.indexOf('statiq_sdf_')!==0 || k.indexOf('statiq_sdf_pos_')===0) continue;
     try{ var e=JSON.parse(localStorage.getItem(k)); if(e && e.sdf && (e.sdf.module||'calc')==='calc') out.push({key:k, name:e.name}); }catch(_){} } }catch(e){} return out; }
   var A = PAGE==='calc' ? {
-    host: function(t){ var m=D.getElementById('tab-'+t); return m && (m.querySelector('.col-out') || m); },
+    host: function(t){ return D.getElementById('tab-'+t); },   // ganz unten im Bereich, rechts (v0.11.12)
     def: function(){ var t=calcTab(); if(!t) return ''; try{ var sid=t==='cantilever'?'cant':t, lc=lastCalc[sid], tabs=(calcTranslations[calcLang]||calcTranslations.en).tabs,
         lab={beam:tabs[0],cantilever:tabs[1],cont:tabs[2],frame:tabs[3]}[t]||t; if(!lc) return lab; var g=lc.geometry;
         if(t==='cont') return trf('nameSpans', lab, g.spans.length, g.spans.join('/'));
@@ -1559,7 +1585,7 @@ window.kragrK5Page = function(K){
       try{ var o=JSON.parse(localStorage.getItem(key)); o.name=n; o.draft=k4Snap(); localStorage.setItem(key, JSON.stringify(o)); }catch(e){ return 'full'; }
       return 'ok'; }
   } : {
-    host: function(){ var b=D.querySelector('#results button[onclick="showReport()"]') || D.querySelector('button[onclick="showReport()"]'); return b ? b.closest('.btn-row') || b.parentNode : null; },
+    host: function(){ return D.querySelector('main.main') || D.querySelector('main'); },   // ganz unten auf der Seite, rechts (size v0.7.10)
     def: function(){ try{ return (D.getElementById(nameField()).value||'').trim(); }catch(e){ return ''; } },
     exists: function(n){ try{ return posRead().some(function(p){ return p.name===n; }); }catch(e){ return false; } },
     save: function(n){ try{ var f=D.getElementById(nameField()); if(f){ f.value=n; f.dispatchEvent(new Event('input',{bubbles:true})); } savePos(); }catch(e){ return 'full'; }
@@ -1769,7 +1795,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.11</span>
+    <span class="version">v0.11.12</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2305,7 +2331,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.11';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.12';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;

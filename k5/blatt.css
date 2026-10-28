@@ -1,6 +1,8 @@
   /* Rechenblatt speichern (calc v0.11.11 · size v0.7.9) */
-  .kbl { margin-top:10px; }
-  .btn-row > .kbl { flex-basis:100%; margin-top:6px; }
+  .kbl { display:flex; flex-direction:column; align-items:flex-end; gap:6px; margin:28px 0 8px; clear:both; }   /* ganz unten rechts (calc v0.11.12) */
+  .kbl-form { width:min(100%, 520px); }
+  .main > .kbl { grid-column:1 / -1; }   /* size: über beide Spalten des Rasters */
+  .kbl-msg { text-align:right; }
   .kbl-btn { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border:none; border-radius:14px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer; }
   .kbl-btn:hover { box-shadow:var(--k5-sh-h, inset 0 0 0 1px #a1a1aa); }
   .kbl-btn[hidden], .kbl-form[hidden] { display:none !important; }

@@ -26,7 +26,7 @@ async def main():
         # zwei Spalten
         g=await pg.evaluate("(()=>{const a=document.querySelector('#tab-beam .col-in').getBoundingClientRect(), b=document.querySelector('#tab-beam .col-out').getBoundingClientRect(); return [a.left,a.right,b.left,b.top, getComputedStyle(document.querySelector('#tab-beam .col-out')).position]})()")
         check('Rechner: Eingaben links, Ergebnis rechts (mitlaufend)', g[1]<=g[2] and g[4]=='sticky', g)
-        check('„Als Rechenblatt speichern“ unter dem Ergebnis (calc v0.11.11)', await pg.evaluate("document.querySelector('#tab-beam .col-out').lastElementChild.classList.contains('kbl')"))
+        check('„Als Rechenblatt speichern“ ganz unten im Bereich (calc v0.11.12)', await pg.evaluate("document.getElementById('tab-beam').lastElementChild.classList.contains('kbl')"))
         # Auswahlmenü
         check('Auswahlknopf zeigt Bereich und System', await pg.inner_text('#pick-g')=='Balken' and await pg.inner_text('#pick-t')=='Einfeldträger')
         await pg.click('#pick-btn')

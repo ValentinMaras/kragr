@@ -30,7 +30,8 @@ async def main():
         await pg.click('.topic-pager a >> text=Brettschichtholz')
         await pg.go_back()
         title2 = await pg.evaluate("document.querySelector('.page-title').textContent")
-        check('Direktlink öffnet Thema, Zurück-Taste führt zurück', title=='Vollholz (Nadelholz)' and title2==title, f'{title} / {title2}')
+        check('Direktlink öffnet Thema, Zurück-Taste führt zurück', title=='5.3.1Vollholz (Nadelholz)' and title2==title,  # seit ref v0.3.53 mit Nummer
+              f'{title} / {title2}')
         await pg.reload()
         check('Neuladen bleibt auf der Seite', await pg.evaluate("document.querySelector('.page-title').textContent")==title)
         # Rechner

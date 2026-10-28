@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.14 -->
+<!-- kragr v0.11.15 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -341,8 +341,9 @@ window.mulyProj = {
     .rb-sf > div { padding:5px 9px; border-right:1px solid #111; min-width:0; }
     .rb-sf > div:last-child { border-right:none; }
     .rb-sf b { display:block; font-size:12.5px; color:#111; font-weight:700; margin-top:1px; overflow-wrap:anywhere; }
-    .rb-logo { display:flex; align-items:center; gap:7px; font-weight:800; font-size:16px; letter-spacing:-.03em; color:#111; }
-    .rb-logo svg { flex:none; }
+    .rb-logo { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1px; color:#111; }
+    .rb-mark { font-family:Figtree,sans-serif; font-weight:800; font-size:22px; letter-spacing:-.04em; line-height:1; white-space:nowrap; color:#111114; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .rb-mod { font-size:9.5px; color:#555; letter-spacing:.02em; }
     .rb-title { font-size:22px; font-weight:800; letter-spacing:-.02em; margin:18px 0 2px; }
     .rb-subt { font-size:12px; color:#666; margin-bottom:6px; }
     .rb-h { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin:20px 0 8px; padding-bottom:4px; border-bottom:1.2px solid #111; break-after:avoid; }
@@ -2332,7 +2333,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.14';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.15';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -4431,7 +4432,7 @@ function renderReport(name, sdf){
   document.getElementById('report-content').innerHTML=`
     <div class="rep rb">
       <div class="rb-sf">
-        <div class="rb-logo">${ICO}${REP_BRAND} · ${kmod('calc')}</div>
+        <div class="rb-logo"><span class="rb-mark">${REP_MARK}</span><span class="rb-mod">${kmod('calc')}</span></div>
         <div>${tr('repPosLbl')}<b>${escapeHtml(name)}</b></div>
         <div>${tr('repDateLbl')}<b>${date}</b></div>
         <div>${tr('repVerLbl')}<b>${kmod('calc')} v${escapeHtml(sdf.statiq_version||'—')}</b></div>
@@ -4484,6 +4485,8 @@ function renderReport(name, sdf){
 
 // Bericht als Rechenblatt: Diagramme schwarz-weiß, Flächen schraffiert (senkrecht zur Stabachse), kein Raster
 const REP_BRAND = 'kragr';
+// Wortmarke für das Rechenblatt (calc v0.11.15): wie in der Kopfzeile, das r als Kragarm mit Last
+const REP_MARK = 'krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg>';
 function repMono(){
   const host=document.getElementById('report-diagrams'); if(!host) return;
   const COL=Object.values(diagColors).concat(['#2d6a4f','#45589a','#92400e','#7c3aed']).map(c=>c.toLowerCase()), FILL=Object.values(diagFill);

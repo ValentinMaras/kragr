@@ -568,6 +568,16 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Wissen als Lehrbuchseite, Wortmarke auf dem Rechenblatt — ref v0.3.53 · calc v0.11.15 · size v0.7.11
+
+- **Wissen (Mischform, von Valentin gewählt):** jedes Thema ist ein weißes Blatt `<article class="lb-page" style="--lb-num:'4.4.3'">` statt einzelner Karten. Schrift bleibt Figtree/JetBrains Mono.
+  - Nummern über `lbNum(f, k, t)` in der Reihenfolge von `FAECHER` (= Seitenleiste): Titel „4.4.3 Biegeknicken“, Oberzeile „EC3 · Stahlbau · 4.4 Nachweise“, Kapitel in der Seitenleiste mit `.lb-tn`.
+  - Abschnitte (`.card` mit `.card-title`) über CSS-Zähler `lbsec`: „4.4.3.1 …“. Tafeln (`.data-table-wrap`) mit schwarzem Rahmen und Kopfzeile „Tafel 4.4.3-n“ (Zähler `lbtaf`), Formeln (`.formula-box`) gerahmt mit „(4.4.3-n)“ rechts oben (`lbeq`), Bilder „Bild 4.4.3-n“ vor `.figure-cap` (`lbbild`), Rechengänge (`.ablauf`) als Tafel mit grauem Kopf, Hinweise (`.info-banner`) als Merkkasten mit Linie links.
+  - Fach- und Kapitelübersicht als Inhaltsverzeichnis (`.lb-toc`).
+  - Alles in `<style data-lehrbuch>` am Ende des Kopfs; die Nummern stehen nur im CSS bzw. in `.lb-n`, nicht im übersetzten Text.
+- **Rechenblatt (PDF):** oben links die Wortmarke „krag“ + r als Kragarm (`REP_MARK`) — in calc im Schriftfeld (`.rb-mark`, darunter das Modul), in size als erste Zeile des Berichts (`.rep-mark`).
+- Tests: `test_wissen_lehrbuch.py` (19), `test_rechenblatt_logo.py` (8); angepasst: test_ref (Titel mit Nummer), test_design_k5 (Seitenkopf im weißen Blatt).
+
 ## Integraltafel mit Figuren — calc v0.11.14 · ref v0.3.52
 
 - **Wissen, Koppeltafel** (`baustatik/arbeitssatz/koppeltafel`): statt Texttabelle eine Matrix wie in Schneider/Wendehorst (`kTafel()`), Kopfzeile M̄ (Rechteck, Dreieck, Dreieck Mitte, Trapez, Parabel), Kopfspalte M (zusätzlich Dreieck gegensinnig). Jede Kopfzelle mit kleiner SVG-Figur (`kFig(t, v)`, 66 × 38), Beschriftung i/k über der Ordinate, nie in der Fläche. Trapez × Trapez steht zweizeilig, damit die Tafel am Rechner ohne Querscroll passt; am Handy scrollt sie im Rahmen (Hinweis „waagerecht scrollbar“). CSS in `<style data-ktf>`. Neue Labels in lang/ref.{en,fr,es}.js.

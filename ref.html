@@ -1057,6 +1057,63 @@ function allgView(key){
 </script>
 <style data-allg>.allg-li{margin:4px 0 6px;padding-left:1.25em}.allg-li li{margin:0 0 6px}</style>
 <style data-ktf>table.data.ktf-tab th,table.data.ktf-tab td{text-align:center;vertical-align:middle;white-space:nowrap;font-size:12px;padding:8px 7px}table.data.ktf-tab tbody th{text-align:left}.ktf-h span{text-align:center}.ktf-tab tbody .ktf-h span{text-align:left}.ktf-h{display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:600;font-size:11px;line-height:1.25;white-space:normal;min-width:70px;max-width:96px}.ktf-tab tbody .ktf-h{align-items:flex-start}.ktf{display:block;overflow:visible}</style>
+<style data-lehrbuch>
+/* Lehrbuchseite (ref v0.3.53): ein durchgehendes Blatt statt Karten, nummerierte Abschnitte, Tafeln im Stil der Integraltafel,
+   Formeln mit Nummer rechts, Bilder mit Bildnummer. Schrift bleibt Figtree / JetBrains Mono. */
+#main .lb-page { background:#fff; border-radius:20px; box-shadow:var(--k5-sh, none); padding:30px 36px 14px; margin-bottom:14px; counter-reset:lbsec lbtaf lbeq lbbild; }
+#main .lb-page > .page-head { display:block !important; background:none !important; box-shadow:none !important; border-radius:0 !important; padding:0 0 12px !important; margin:0 0 22px !important; border-bottom:2px solid #111; cursor:auto; }
+#main .lb-page > .page-head::after { display:none !important; }
+#main .lb-page > .page-head .page-sub { font-size:10.5px !important; letter-spacing:.08em; text-transform:uppercase; color:#6b6d75 !important; margin:0 0 4px !important; font-weight:600; }
+#main .lb-page > .page-head { display:flex !important; flex-direction:column-reverse; }
+#main .lb-page > .page-head .page-title { font-size:clamp(24px, 3.4vw, 30px) !important; letter-spacing:-.025em; }
+.lb-n { font-variant-numeric:tabular-nums; color:#5468ad; margin-right:.5em; font-weight:800; }
+.nav-list-label .lb-n { font-weight:700; }
+.lb-tn { margin-right:6px; color:#9a9ca4; font-variant-numeric:tabular-nums; }
+/* Abschnitte: keine Karten mehr */
+#main .lb-page .card { background:transparent !important; box-shadow:none !important; border:none !important; border-radius:0 !important; padding:0 !important; margin:0 0 30px !important; }
+#main .lb-page > .card:has(> .card-title) { counter-increment:lbsec; }
+#main .lb-page > .card > .card-title { font-size:17px !important; font-weight:800; letter-spacing:-.015em; color:#111; margin:0 0 12px !important; padding-bottom:6px; border-bottom:1px solid #d9dbe0; }
+#main .lb-page > .card > .card-title::before { content:var(--lb-num) "." counter(lbsec); color:#5468ad; margin-right:.6em; font-variant-numeric:tabular-nums; }
+#main .lb-page .section-note { font-size:14px; line-height:1.72; color:#25262b; }
+#main .lb-page p, #main .lb-page li { line-height:1.7; }
+/* Tafeln: Rahmen, grauer Kopf, Nummer darüber */
+#main .lb-page .data-table-wrap { border:1.2px solid #111 !important; border-radius:8px !important; background:#fff; margin:22px 0 6px; position:relative; overflow:visible; }
+#main .lb-page .data-table-wrap > table { border-radius:7px; }
+#main .lb-page .data-table-wrap.tall, #main .lb-page .data-table-wrap { overflow-x:auto; }
+#main .lb-page .data-table-wrap { counter-increment:lbtaf; }
+#main .lb-page .data-table-wrap::before { content:"Tafel " var(--lb-num) "-" counter(lbtaf); display:block; position:sticky; left:0; font-family:Figtree, sans-serif; font-size:11px; font-weight:700; letter-spacing:.04em; color:#111; background:#f1f2f4; border-bottom:1px solid #111; padding:5px 10px; border-radius:7px 7px 0 0; }
+#main .lb-page table.data th { background:#f7f7f8 !important; color:#111 !important; border-bottom:1px solid #111 !important; }
+#main .lb-page table.data td { border-bottom:1px solid #e6e7ea; }
+#main .lb-page table.data tbody tr:hover td { background:#f7f7f8; }
+/* Formeln: gerahmte Tafel mit Formelnummer rechts oben */
+#main .lb-page .formula-box { background:#fff !important; border:1.2px solid #111 !important; border-radius:8px !important; position:relative; padding:12px 64px 12px 16px !important; counter-increment:lbeq; color:#111; }
+#main .lb-page .formula-box::after { content:"(" var(--lb-num) "-" counter(lbeq) ")"; position:absolute; right:12px; top:12px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#6b6d75; }
+/* Rechengang, Rechner */
+#main .lb-page .ablauf { background:#fff !important; border:1.2px solid #111; border-radius:8px; padding:0 16px 6px !important; overflow:hidden; }
+#main .lb-page .ablauf-t { background:#f1f2f4; border-bottom:1px solid #111; margin:0 -16px 12px !important; padding:6px 16px; font-size:12px !important; }
+#main .lb-page .calc-grid { background:#f7f7f8; border-radius:8px; padding:12px; }
+/* Hinweise und Beispiele: Merkkasten mit Linie links */
+#main .lb-page .info-banner { background:#fff !important; border:none !important; border-left:3px solid #111 !important; border-radius:0 !important; color:#25262b !important; font-size:13px; padding:4px 0 4px 14px !important; margin:14px 0 !important; }
+#main .lb-page .norm-note { border-radius:0; }
+/* Bilder mit Nummer */
+#main .lb-page .figure { margin:18px 0 8px; }
+#main .lb-page .figure:has(+ .figure-cap), #main .lb-page .figure:has(.figure-cap) { counter-increment:lbbild; }
+#main .lb-page .figure + .figure-cap::before, #main .lb-page .figure .figure-cap::before { content:"Bild " var(--lb-num) "-" counter(lbbild) "  "; font-weight:700; color:#111; white-space:pre; }
+#main .lb-page .figure-cap { font-family:Figtree, sans-serif; font-size:12px; color:#4a4c53; margin-bottom:16px; }
+/* Übersichten als Inhaltsverzeichnis */
+#main .lb-toc .page-sub { text-transform:none !important; letter-spacing:0 !important; font-weight:500 !important; font-size:12.5px !important; }
+#main .lb-toc .nav-list { display:block; }
+#main .lb-toc .nav-list-item { background:none !important; box-shadow:none !important; border:none !important; border-bottom:1px solid #e6e7ea !important; border-radius:0 !important; padding:12px 2px !important; margin:0 !important; }
+#main .lb-toc .nav-list-item:hover { background:#f7f7f8 !important; }
+#main .lb-toc .nav-list-label { font-size:15.5px; }
+#main .lb-toc .nav-list .lb-n { display:inline-block; min-width:2.6em; }
+#main .lb-page .legend { color:#4a4c53; }
+#main .lb-page .applink { border-radius:6px; }
+/* Integraltafel ist schon eine eigene Tafel: nicht doppelt rahmen */
+#main .lb-page .ktf-wrap { border-color:#111 !important; }
+@media (max-width:560px) { #main .lb-page { padding:20px 16px 6px; border-radius:16px; } #main .lb-page > .card > .card-title { font-size:16px !important; } #main .lb-page .formula-box { padding-right:16px !important; padding-top:26px !important; } #main .lb-page .formula-box::after { top:7px; } }
+@media print { #main .lb-page { box-shadow:none; padding:0; } }
+</style>
 </head>
 <body>
 
@@ -1211,7 +1268,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.52';
+const REF_VERSION = '0.3.53';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -10443,22 +10500,30 @@ function viewFaecher(){
   `;
 }
 
+// ── Lehrbuch-Nummern (ref v0.3.53): Fach.Kapitel.Thema in der Reihenfolge der Seitenleiste ──
+function lbNum(f, k, t){ const fi=Object.keys(FAECHER).indexOf(f)+1; if(!k) return String(fi);
+  const ki=Object.keys(FAECHER[f].kapitel).indexOf(k)+1; if(!t) return fi+'.'+ki;
+  return fi+'.'+ki+'.'+(Object.keys(FAECHER[f].kapitel[k].themen).indexOf(t)+1); }
+const lbN = n => `<span class="lb-n">${n}</span>`;
+
 // ── Kapitel eines Fachs ────────────────────────────
 function viewKapitel(){
   const f = FAECHER[navState.fach];
   let items = '';
   for(const [key, k] of Object.entries(f.kapitel)){
     items += `<a class="nav-list-item" href="${hrefOf(navState.fach,key)}">
-      <span class="nav-list-label">${k.title}</span>
+      <span class="nav-list-label">${lbN(lbNum(navState.fach,key))}${k.title}</span>
       <span class="nav-list-meta"><span class="nav-list-arrow">›</span></span>
     </a>`;
   }
   return `
+    <article class="lb-page lb-toc">
     <div class="page-head">
-      <div class="page-title">${f.title}</div>
+      <div class="page-title">${lbN(lbNum(navState.fach))}${f.title}</div>
       <div class="page-sub">${f.sub}</div>
     </div>
     <div class="nav-list">${items}</div>
+    </article>
     ${footnote()}
   `;
 }
@@ -10469,15 +10534,18 @@ function viewThemen(){
   let items = '';
   for(const [key, t] of Object.entries(k.themen)){
     items += `<a class="nav-list-item" href="${hrefOf(navState.fach,navState.kapitel,key)}">
-      <span class="nav-list-label">${t.title}</span>
+      <span class="nav-list-label">${lbN(lbNum(navState.fach,navState.kapitel,key))}${t.title}</span>
       <span class="nav-list-arrow">›</span>
     </a>`;
   }
   return `
+    <article class="lb-page lb-toc">
     <div class="page-head">
-      <div class="page-title">${k.title}</div>
+      <div class="page-title">${lbN(lbNum(navState.fach,navState.kapitel))}${k.title}</div>
+      <div class="page-sub">${FAECHER[navState.fach].tag} · ${FAECHER[navState.fach].title}</div>
     </div>
     <div class="nav-list">${items}</div>
+    </article>
     ${footnote()}
   `;
 }
@@ -10495,11 +10563,13 @@ function viewThema(){
   const next = i<keys.length-1 ? `<a class="nav-list-item" href="${hrefOf(fach,kapitel,keys[i+1])}"><span class="nav-list-label">${K.themen[keys[i+1]].title}</span><span class="nav-list-arrow">›</span></a>` : '';
   return _L`
     <button class="menu-toggle" onclick="event.stopPropagation(); toggleSideMenu()">☰ Alle Themen</button>
+    <article class="lb-page" style="--lb-num:'${lbNum(fach,kapitel,thema)}'">
     <div class="page-head">
-      <div class="page-title">${t.title}</div>
-      <div class="page-sub">${FAECHER[fach].title} · ${K.title}</div>
+      <div class="page-title">${lbN(lbNum(fach,kapitel,thema))}${t.title}</div>
+      <div class="page-sub">${FAECHER[fach].tag} · ${FAECHER[fach].title} · ${lbNum(fach,kapitel)} ${K.title}</div>
     </div>
     ${body}
+    </article>
     <div class="topic-pager">${i>0?_L`<a href="${hrefOf(fach,kapitel,keys[i-1])}"><small>‹ zurück</small><b>${K.themen[keys[i-1]].title}</b></a>`:'<span></span>'}${i<keys.length-1?`<a class="nx" href="${hrefOf(fach,kapitel,keys[i+1])}"><small>weiter ›</small><b>${K.themen[keys[i+1]].title}</b></a>`:''}</div>
     ${(prev||next) ? `<div class="nav-list legacy-pager" style="display:none">${prev}${next}</div>` : ''}
     ${footnote()}
@@ -10637,7 +10707,7 @@ function renderSidebar(){
       <input id="side-q" type="search" placeholder="Themen filtern …" value="${escapeHtml(q)}" oninput="filterSidebar(this.value)" autocomplete="off"></div>
     <nav class="tree">${Object.entries(FAECHER).map(([fk,F])=>`<div class="tree-f${open.has(fk)?' open':''}" data-f="${fk}">
       <button class="tree-fh" onclick="toggleTree('${fk}')"><span class="tree-tag">${F.tag}</span>${F.title}${refUntr(fk)?'<span class="tree-de" title="'+tx('notYet')+'">DE</span>':''}<span class="tree-chev">›</span></button>
-      <div class="tree-body">${Object.entries(F.kapitel).map(([kk,K])=>`<div class="tree-k">${K.title}</div>${Object.entries(K.themen).map(([tk,T])=>
+      <div class="tree-body">${Object.entries(F.kapitel).map(([kk,K])=>`<div class="tree-k"><span class="lb-tn">${lbNum(fk,kk)}</span>${K.title}</div>${Object.entries(K.themen).map(([tk,T])=>
         `<a class="tree-t${fk===fach&&kk===kapitel&&tk===thema?' active':''}" href="${hrefOf(fk,kk,tk)}">${T.title}</a>`).join('')}`).join('')}</div></div>`).join('')}</nav>`;
   if(q) filterSidebar(q);
   const act=sb.querySelector('.tree-t.active'); if(act && act.offsetParent){ const r=act.getBoundingClientRect(), sr=sb.getBoundingClientRect(); if(r.top<sr.top || r.bottom>sr.bottom) act.scrollIntoView({block:'center'}); }

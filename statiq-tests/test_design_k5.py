@@ -115,8 +115,9 @@ async def main():
         await pg.evaluate("localStorage.removeItem('statiq-size-positionen')")
         # ref: Seitenkopf als Karte
         await pg.goto(B+'ref.html#/stahlbeton/baustoffe/kriechen'); await pg.wait_for_timeout(500)
-        r=await pg.evaluate("(()=>{const h=document.querySelector('#main .page-head'); const cs=getComputedStyle(h); return [cs.backgroundColor, cs.borderRadius, cs.flexDirection, h.querySelector('.page-sub').getBoundingClientRect().top < h.querySelector('.page-title').getBoundingClientRect().top]})()")
-        check('ref: Seitenkopf als weiße Karte, Fach · Kapitel als Oberzeile', r==['rgb(255, 255, 255)','20px','column-reverse',True], r)
+        # seit ref v0.3.53: der Seitenkopf sitzt im weißen Lehrbuchblatt (.lb-page)
+        r=await pg.evaluate("(()=>{const h=document.querySelector('#main .page-head'), b=h.closest('.lb-page'); const cs=getComputedStyle(b); return [cs.backgroundColor, cs.borderRadius, getComputedStyle(h).flexDirection, h.querySelector('.page-sub').getBoundingClientRect().top < h.querySelector('.page-title').getBoundingClientRect().top]})()")
+        check('ref: Seitenkopf im weißen Blatt, Fach · Kapitel als Oberzeile', r[0]=='rgb(255, 255, 255)' and r[1] in ('16px','20px') and r[2:]==['column-reverse',True], r)
         await pg.click('#main .page-head'); await pg.wait_for_timeout(200)
         check('ref (Handy): Tipp auf den Seitenkopf öffnet die Themenliste', await pg.evaluate("document.getElementById('sidebar').classList.contains('open')"))
         # rechtliches: Seitenkopf

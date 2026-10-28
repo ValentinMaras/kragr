@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.12 -->
+<!-- kragr·size v0.7.13 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1674,6 +1674,19 @@ window.kragrK5Page = function(K){
         <div class="field"><label data-i18n="z086">N<sub>Ed</sub> [kN] (Druck +)</label><input type="number" step="any" id="sn-N" value="0" oninput="run()"></div>
       </div>
       <div class="hint" data-i18n="z092">Alle Werte als Bemessungswerte (GZT). M<sub>y,Ed</sub> ist das größte Moment im betrachteten Abschnitt.</div>
+      <div class="st-adv" id="st-adv">
+      <div class="card-title" data-i18n="advT">Erweitert: Biegung um z, Torsion, Einzellast auf den Gurt</div>
+      <div class="grid2">
+        <div class="field"><label data-i18n="z107">M<sub>z,Ed</sub> [kNm] (schwache Achse)</label><input type="number" step="any" id="sn-Mz" value="0" oninput="run()"></div>
+        <div class="field"><label data-i18n="z108">Torsion</label><select id="sn-tors" onchange="run()"><option value="0" data-i18n="z109">keine</option><option value="T" data-i18n="z110">Einzeltorsionsmoment in Feldmitte</option><option value="m" data-i18n="z111">Streckentorsionsmoment</option></select></div>
+        <div class="field sn-tw"><label id="lab-tw" data-i18n="z112">T<sub>Ed</sub> [kNm]</label><input type="number" step="any" id="sn-Tw" value="2" oninput="run()"></div>
+        <div class="field"><label data-i18n="z113">Einzellast auf den Gurt F<sub>Ed</sub> [kN] (0 = keine)</label><input type="number" step="any" id="sn-F" value="0" oninput="run()"></div>
+        <div class="field sn-f"><label data-i18n="z114">Lasteinleitungslänge s<sub>s</sub> [mm]</label><input type="number" step="any" id="sn-ss" value="100" oninput="run()"></div>
+        <div class="field sn-f"><label>Lage</label><select id="sn-lage" onchange="run()"><option value="a" data-i18n="z115">im Feld (Typ a)</option><option value="c" data-i18n="z116">am Trägerende (Typ c)</option></select></div>
+        <div class="field sn-f sn-c"><label data-i18n="z117">Abstand zum Trägerende c [mm]</label><input type="number" step="any" id="sn-cE" value="0" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="z118">Torsion: gabelgelagerter Einfeldträger, z. B. aus einer ausmittig angreifenden Last (T = F·e). Lasteinleitung: Steg ohne Quersteifen, z. B. Auflager oder aufgesetzte Stütze.</div>
+    </div>
     </div>
 
     <div class="card">
@@ -1692,19 +1705,6 @@ window.kragrK5Page = function(K){
       <div class="hint" data-i18n="z105">L<sub>LT</sub> = 0: Druckgurt durchgehend seitlich gehalten (z. B. durch eine aufliegende Decke) — kein Biegedrillknicken.</div>
     </div>
 
-    <div class="card">
-      <div class="card-title" data-i18n="z106">Weitere Einwirkungen</div>
-      <div class="grid2">
-        <div class="field"><label data-i18n="z107">M<sub>z,Ed</sub> [kNm] (schwache Achse)</label><input type="number" step="any" id="sn-Mz" value="0" oninput="run()"></div>
-        <div class="field"><label data-i18n="z108">Torsion</label><select id="sn-tors" onchange="run()"><option value="0" data-i18n="z109">keine</option><option value="T" data-i18n="z110">Einzeltorsionsmoment in Feldmitte</option><option value="m" data-i18n="z111">Streckentorsionsmoment</option></select></div>
-        <div class="field sn-tw"><label id="lab-tw" data-i18n="z112">T<sub>Ed</sub> [kNm]</label><input type="number" step="any" id="sn-Tw" value="2" oninput="run()"></div>
-        <div class="field"><label data-i18n="z113">Einzellast auf den Gurt F<sub>Ed</sub> [kN] (0 = keine)</label><input type="number" step="any" id="sn-F" value="0" oninput="run()"></div>
-        <div class="field sn-f"><label data-i18n="z114">Lasteinleitungslänge s<sub>s</sub> [mm]</label><input type="number" step="any" id="sn-ss" value="100" oninput="run()"></div>
-        <div class="field sn-f"><label>Lage</label><select id="sn-lage" onchange="run()"><option value="a" data-i18n="z115">im Feld (Typ a)</option><option value="c" data-i18n="z116">am Trägerende (Typ c)</option></select></div>
-        <div class="field sn-f sn-c"><label data-i18n="z117">Abstand zum Trägerende c [mm]</label><input type="number" step="any" id="sn-cE" value="0" oninput="run()"></div>
-      </div>
-      <div class="hint" data-i18n="z118">Torsion: gabelgelagerter Einfeldträger, z. B. aus einer ausmittig angreifenden Last (T = F·e). Lasteinleitung: Steg ohne Quersteifen, z. B. Auflager oder aufgesetzte Stütze.</div>
-    </div>
     <div class="card">
       <div class="card-title" data-i18n="z119">Durchbiegung (GZG)</div>
       <div class="grid2">
@@ -2936,6 +2936,7 @@ const I18N = { "de": {
 "z104":"Untergurt (günstig)",
 "z105":"L<sub>LT</sub> = 0: Druckgurt durchgehend seitlich gehalten (z. B. durch eine aufliegende Decke) — kein Biegedrillknicken.",
 "z106":"Weitere Einwirkungen",
+"advT":"Erweitert: Biegung um z, Torsion, Einzellast auf den Gurt",
 "z107":"M<sub>z,Ed</sub> [kNm] (schwache Achse)",
 "z108":"Torsion",
 "z109":"keine",
@@ -4004,7 +4005,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.12';
+const SIZE_VERSION = '0.7.13';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11612,5 +11613,18 @@ function mulyFehlerHref(app, ver, extra){
   all_();
 })();
 </script>
+<script data-st-adv>
+// Stahlträger (size v0.7.13): M_z, Torsion und Einzellast auf den Gurt als „Erweitert“ in der Schnittgrößen-Karte, standardmäßig zu;
+// sind dort Werte gesetzt, bleibt der Teil offen bzw. die Kurzfassung zeigt sie.
+(function(){ function init(){ var el=document.getElementById('st-adv'); if(!el || !window.kragrK5 || el.k5acc) return;
+  var set=function(){ return (+(document.getElementById('sn-Mz')||{}).value||0)!==0 || (document.getElementById('sn-tors')||{}).value!=='0' || (+(document.getElementById('sn-F')||{}).value||0)!==0; };
+  kragrK5.acc(el, { key:'st-adv', closed:!set(), sum:function(c, closed){ if(!closed) return ''; var p=[];
+    var Mz=+document.getElementById('sn-Mz').value||0, T=document.getElementById('sn-tors'), F=+document.getElementById('sn-F').value||0;
+    if(Mz) p.push('Mz,Ed '+String(Mz).replace('.',',')+' kNm'); if(T.value!=='0') p.push(T.options[T.selectedIndex].textContent); if(F) p.push('F '+String(F).replace('.',',')+' kN');
+    return p.join(' · '); } });
+  ['sn-Mz','sn-tors','sn-F'].forEach(function(id){ var e=document.getElementById(id); if(e) e.addEventListener(e.tagName==='SELECT'?'change':'input', function(){ kragrK5.refreshSums(); }); }); }
+  if(document.readyState==='complete') init(); else window.addEventListener('load', init); })();
+</script>
+<style data-st-adv>#st-adv { margin-top:14px; } #st-adv > .k5-head .card-title { font-size:14px; }</style>
 </body>
 </html>

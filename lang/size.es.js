@@ -84,6 +84,7 @@ window.MULY_LANG = {
 "mvKipp":"Ley de momentos (para el vuelco lateral y la flecha)",
 "mvHint":"La ley de momentos no cambia M<sub>y,Ed</sub>. Solo determina el coeficiente de momento C<sub>1</sub> para el pandeo lateral y la forma de la elástica.",
 "mvHintH":"La ley de momentos no cambia M<sub>y,Ed</sub>. Solo determina la longitud eficaz l<sub>ef</sub> para el vuelco lateral y la forma de la elástica.",
+"advT":"Avanzado: flexión según z, torsión, carga puntual sobre el ala",
 "z092":"Todos los valores son valores de cálculo (ELU). M<sub>y,Ed</sub> es el mayor momento del tramo considerado.",
 "z093":"Estabilidad",
 "z094":"Longitud de pandeo y: β<sub>y</sub>",

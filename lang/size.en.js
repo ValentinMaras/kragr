@@ -84,6 +84,7 @@ window.MULY_LANG = {
 "mvKipp":"Moment distribution (for lateral torsional buckling and deflection)",
 "mvHint":"The moment distribution does not change M<sub>y,Ed</sub>. It only determines the moment factor C<sub>1</sub> for lateral torsional buckling and the shape of the deflection curve.",
 "mvHintH":"The moment distribution does not change M<sub>y,Ed</sub>. It only determines the effective length l<sub>ef</sub> for lateral torsional buckling and the shape of the deflection curve.",
+"advT":"Advanced: bending about z, torsion, point load on the flange",
 "z092":"All values as design values (ULS). M<sub>y,Ed</sub> is the largest moment in the segment considered.",
 "z093":"Stability",
 "z094":"Buckling length y: β<sub>y</sub>",

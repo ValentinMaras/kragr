@@ -568,6 +568,11 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Stahlträger: „Weitere Einwirkungen“ als „Erweitert“ in den Schnittgrößen — size v0.7.13
+
+- M_z, Torsion und Einzellast auf den Gurt (mit s_s, Lage, c) stehen nicht mehr in einer eigenen Karte, sondern als `#st-adv` („Erweitert: Biegung um z, Torsion, Einzellast auf den Gurt“) in der Karte Schnittgrößen. `kragrK5.acc` macht daraus ein Akkordeon (Schlüssel st-adv, standardmäßig zu, offen wenn Werte gesetzt); zugeklappt zeigt die Kurzfassung die gesetzten Werte.
+- Neuer Übersetzungsschlüssel advT; test_size_ext klappt den Teil vor dem Ausfüllen auf. Test: `test_size_st_erweitert.py` (12).
+
 ## Bemessung Stahlträger und Holzbauteil: ohne Seitenansicht, Momentenverlauf im Stabilitätsteil — size v0.7.12
 
 - Auf Valentins Wunsch zeigen Stahl › Träger/Stütze und Holz › Bauteil nur noch den Querschnitt; die Seitenansicht (auch die aus „Schnittkräfte“ nach dem Import) ist auf dem Bildschirm und im Bericht entfallen. Die Funktionen `figTraegerSeite`, `figHolzSeite`, `figSeiteCalc`, `seiteStahl` bleiben ungenutzt im Code.

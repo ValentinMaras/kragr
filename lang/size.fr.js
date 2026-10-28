@@ -84,6 +84,7 @@ window.MULY_LANG = {
 "mvKipp":"Diagramme des moments (pour le déversement et la flèche)",
 "mvHint":"Le diagramme des moments ne modifie pas M<sub>y,Ed</sub>. Il détermine seulement le facteur de moment C<sub>1</sub> pour le déversement et la forme de la déformée.",
 "mvHintH":"Le diagramme des moments ne modifie pas M<sub>y,Ed</sub>. Il détermine seulement la longueur efficace l<sub>ef</sub> pour le déversement et la forme de la déformée.",
+"advT":"Avancé : flexion selon z, torsion, charge concentrée sur la semelle",
 "z092":"Toutes les valeurs sont des valeurs de calcul (ELU). M<sub>y,Ed</sub> est le plus grand moment du tronçon considéré.",
 "z093":"Stabilité",
 "z094":"Longueur de flambement y : β<sub>y</sub>",

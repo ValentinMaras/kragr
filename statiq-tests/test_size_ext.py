@@ -62,6 +62,8 @@ async def main():
         await pg.goto('file://'+HTML); await pg.wait_for_timeout(300)
         out=lambda: pg.evaluate("document.querySelector('.col-out').innerText + '\\n' + (()=>{ const d=document.createElement('div'); return (LAST&&LAST.res&&LAST.res.C||[]).flatMap(c=>c.steps).map(s=>{ d.innerHTML=s.replace(/^§/,''); return d.innerText||d.textContent; }).join('\\n'); })()")
         await pg.evaluate("setMat('stahl')")
+        # seit size v0.7.13 liegen M_z, Torsion und Gurtlast unter „Erweitert“ in der Schnittgrößen-Karte: aufklappen
+        await pg.wait_for_timeout(300); await pg.evaluate("document.querySelectorAll('.col-in .card.fold.closed').forEach(c=>c.classList.remove('closed')); const a=document.getElementById('st-adv'); if(a && a.classList.contains('k5-closed')) kragrK5.setClosed(a,false,true)")
         P=prof('IPE 300')
         # 1) Torsion Einzelmoment / Streckenmoment gegen Differenzenverfahren
         for art,val,lab in [('T',2.0,'Einzeltorsionsmoment 2 kNm'),('m',0.5,'Streckentorsion 0,5 kNm/m')]:

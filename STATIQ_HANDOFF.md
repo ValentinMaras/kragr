@@ -568,6 +568,12 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Bemessungsbericht im Stil von Schnittkräfte — size v0.7.16 · calc v0.11.17
+
+- `repRB(html)` in size macht aus jedem Bericht (`buildReport()`, h1 + `.meta` + Abschnitte) das Blatt wie in calc: Schriftfeld (Wortmarke + „Bemessung“ | Position = h1 | Datum | Version), Titel wie die Auswahl („Stahlbeton · Balken“), darunter die Norm aus der `.meta`-Zeile, Abschnitte mit Überschriften in Großbuchstaben, Tabellen in Mono, Haftungshinweis und Fußzeile. Gilt für „Drucken“ (`showReport`) und für den in Rechenblätter gespeicherten Bericht (`savePos` → statiq-size-bericht); projekt.html hat denselben CSS-Block `<style data-rb-size>` und hängt den Hinweis bei solchen Berichten nicht doppelt an.
+- Handy: Schriftfeld zweispaltig (size, projekt und calc), Abbildungen höchstens so breit wie das Blatt (vorher 35 px Querscrollen im size-Bericht).
+- Neue Schlüssel repPosLbl, repDateLbl, repVerLbl in size (EN/FR/ES). test_rechenblatt_logo prüft das Schriftfeld in size und den Bericht am Handy.
+
 ## Bemessung: „Bericht ansehen“ aus der Leiste „Ergebnisse“ entfernt — size v0.7.15
 
 - Valentin: das Pendant ist „Als Rechenblatt speichern“ ganz unten (der Bericht steht dann in Rechenblätter). `.det-rep` entfällt; `showReport()` bleibt für Rechenblätter und Tests. Tests klicken nicht mehr „Bericht ansehen“, sondern rufen `showReport()`.

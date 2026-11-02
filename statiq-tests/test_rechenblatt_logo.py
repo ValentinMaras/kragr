@@ -25,12 +25,22 @@ async def main():
         s=await br.new_page(viewport={'width':1100,'height':1400}); s.on('pageerror', lambda e: errs.append(str(e)))
         await s.goto(B+'size.html'); await s.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await s.reload(); await s.wait_for_timeout(900)
         await s.evaluate("showReport()"); await s.wait_for_timeout(400); await s.emulate_media(media='print')
-        r=await s.evaluate("""(()=>{ const rep=document.getElementById('report'), m=rep.firstElementChild; const b=m.getBoundingClientRect(), R=rep.getBoundingClientRect();
-          return {cls:m.className, txt:m.querySelector('.rep-mark-w').textContent, r:!!m.querySelector('svg.logo-r'), mod:m.querySelector('.rep-mark-m').textContent, left:b.left-R.left, vis:getComputedStyle(m).display!=='none' && b.height>15} })()""")
-        check('size: Wortmarke als erstes Element des Rechenblatts, links', r['cls']=='rep-mark' and r['txt']=='krag' and r['r'] and r['left']<5 and r['vis'], r)
-        check('size: Modul „Bemessung“ neben der Marke', r['mod']=='Bemessung', r['mod'])
+        # seit size v0.7.16: Bericht im Stil von Schnittkräfte — Schriftfeld mit Wortmarke links, Position, Datum, Version
+        r=await s.evaluate("""(()=>{ const rb=document.querySelector('#report .rb-size'), sf=rb&&rb.querySelector('.rb-sf'), l=sf&&sf.firstElementChild, m=l&&l.querySelector('.rb-mark');
+          const b=m.getBoundingClientRect(), R=sf.getBoundingClientRect();
+          return {first:document.getElementById('report').firstElementChild===rb && rb.firstElementChild===sf, txt:m.textContent, r:!!m.querySelector('svg.logo-r'), mod:l.querySelector('.rb-mod').textContent,
+            cells:[...sf.children].map(c=>c.textContent.trim()), left:b.left-R.left, top:b.top-R.top, title:rb.querySelector('.rb-title').textContent, foot:!!rb.querySelector('.rb-foot')} })()""")
+        check('size: Schriftfeld wie in Schnittkräfte, Wortmarke oben links', r['first'] and r['txt']=='krag' and r['r'] and r['left']<20 and r['top']<20, r)
+        check('size: Modul „Bemessung“ unter der Marke, Position/Datum/Version', r['mod']=='Bemessung' and r['cells'][1].startswith('Position') and r['cells'][2].startswith('Datum') and r['cells'][3].startswith('Version'), r['cells'])
+        check('size: Titel wie die Auswahl („Stahlbeton · Balken“), Fußzeile', r['title']=='Stahlbeton · Balken' and r['foot'], r['title'])
+        # Handy: Schriftfeld zweispaltig, Bericht ohne Querscrollen
+        m=await br.new_page(viewport={'width':390,'height':844}); m.on('pageerror', lambda e: errs.append(str(e)))
+        await m.goto(B+'size.html'); await m.wait_for_timeout(800); await m.evaluate("showReport()"); await m.wait_for_timeout(300)
+        r=await m.evaluate("[document.documentElement.scrollWidth, getComputedStyle(document.querySelector('#report .rb-sf')).gridTemplateColumns.split(' ').length]")
+        check('size Handy: Bericht ohne Querscrollen, Schriftfeld zweispaltig', r[0]<=390 and r[1]==2, r)
+        await m.close()
         await s.emulate_media(media='screen'); await s.evaluate("localStorage.setItem('statiq-lang','en')"); await s.reload(); await s.wait_for_timeout(800); await s.evaluate("showReport()"); await s.wait_for_timeout(300)
-        m=await s.evaluate("document.querySelector('#report .rep-mark-m').textContent")
+        m=await s.evaluate("document.querySelector('#report .rb-mod').textContent")
         check('size EN: Modulname übersetzt', m!='Bemessung' and m, m)
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()

@@ -63,8 +63,14 @@ async def main():
         check('EN: „Nodes and member end forces“, „Left corner“, „closing (tension outside)“', 'Nodes and member end forces' in t and 'Left corner' in t and 'closing (tension outside)' in t, t[:200])
         await pg.evaluate("setCalcLang('de')")
         # Rechenblatt: Knoten im Menü „＋ Nachweis“, Übergabe an size (seit calc v0.11.11 ohne Projekte)
-        await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.removeItem('muly-calc-entwurf')")
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900); await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(600)
+        # Arbeitsstand verwerfen, damit wieder der Standard-Rahmen (A eingespannt, B gelenkig) gilt. Die Seite calc schreibt ihren Stand
+        # beim Verlassen (pagehide); unter Last kam dieser Schreibvorgang im Gesamtlauf erst nach dem Löschen an — dann stand noch der
+        # Dreigelenkrahmen von oben im Entwurf (5 Knoten). Darum: kurz warten, löschen und auf der Seite prüfen, notfalls noch einmal.
+        await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(300); await pg.evaluate("localStorage.removeItem('muly-calc-entwurf')")
+        for _ in range(3):
+            await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900); await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(600)
+            if await pg.evaluate("lastCalc.frame && lastCalc.frame.knoten && lastCalc.frame.knoten.nodes.length")==4: break
+            await pg.evaluate("_k4Off=true; localStorage.removeItem('muly-calc-entwurf')")
         await pg.click('#tab-frame .kbl-btn'); await pg.fill('#tab-frame .kbl-in','Rahmen Test'); await pg.click('#tab-frame .kbl-ok'); await pg.wait_for_timeout(200)
         key=await pg.evaluate("Object.keys(localStorage).find(k=>k.startsWith('statiq_sdf_') && JSON.parse(localStorage.getItem(k)).name==='Rahmen Test')")
         r=await pg.evaluate(f"JSON.parse(localStorage.getItem('{key}')).sdf.results.knoten.nodes.length")

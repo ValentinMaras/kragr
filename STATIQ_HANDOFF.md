@@ -568,6 +568,11 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## test_knoten: Rennen beim Verwerfen des Arbeitsstands (02.11.2026)
+
+- Im Gesamtlauf war test_knoten einmal mit 4 Fehlern rot: das gespeicherte Rechenblatt hatte 5 Knoten (Dreigelenkrahmen) statt 4. Ursache: calc schreibt seinen Arbeitsstand `muly-calc-entwurf` beim Verlassen (pagehide). Der Test löschte ihn danach auf projekt.html — unter Last kam der Schreibvorgang der alten Seite erst nach dem Löschen an, und der Dreigelenkrahmen aus dem vorigen Testschritt war wieder da.
+- Der Test wartet jetzt kurz, löscht, prüft auf der Seite calc, dass der Standard-Rahmen (4 Knoten) gilt, und löscht sonst mit `_k4Off = true` noch einmal. Für Nutzer kein Fehler: in der App löscht nur „Zurücksetzen“ in calc selbst den Stand, und das setzt `_k4Off` vorher.
+
 ## Schnittkräfte: Systemauswahl läuft nicht mehr über die Kopfzeile — calc v0.11.16
 
 - Am Handy steht die Systemauswahl in `.nav.calc-top` (z-index 30) über der Seite; beim Scrollen schob sie sich über das Logo der mitlaufenden Kopfzeile (z-index 10). Jetzt z-index 9: unter der Kopfzeile, aber weiter über dem Inhalt (die geöffnete Auswahl liegt über den Karten).

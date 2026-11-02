@@ -723,6 +723,7 @@ window.MULY_LANG = {
 "repPosLbl":"Position",
 "repDateLbl":"Date",
 "repVerLbl":"Version",
+"fdGo":"vers la grande figure ↓",
 "calcSteps":"Résultats",
 "expandAll":"Tout déplier",
 "collapseAll":"Tout replier",

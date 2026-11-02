@@ -736,6 +736,7 @@ window.MULY_LANG = {
 "repPosLbl":"Item",
 "repDateLbl":"Date",
 "repVerLbl":"Version",
+"fdGo":"to the large figure ↓",
 "calcSteps":"Results",
 "expandAll":"Expand all",
 "collapseAll":"Collapse all",

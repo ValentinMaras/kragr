@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.13 -->
+<!-- kragr·size v0.7.14 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -413,6 +413,14 @@ window.mulyProj = {
     #details .card.dfold.closed > .steps, #details .card.dfold.closed > .note { max-height:0; overflow:hidden; margin-top:0; padding-top:0; padding-bottom:0; }
     #details .card.dfold { padding-top:16px; padding-bottom:16px; margin-bottom:8px; }
     .det-bar { display:flex; justify-content:space-between; align-items:center; margin:6px 2px 10px; }
+    /* seit v0.7.14: die Karte „Ergebnis“ entfällt; die Leiste heißt „Ergebnisse“ und trägt Gesamturteil und „Bericht ansehen“ */
+    #results[hidden] { display:none !important; }
+    .det-bar .det-h { display:flex; flex-direction:column; gap:3px; min-width:0; }
+    .det-bar .det-sum { font-size:12.5px; font-weight:700; }
+    .det-bar .det-sum.ok { color:#1f7a4d; } .det-bar .det-sum.bad { color:#b42318; }
+    .det-bar .det-btns { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+    .det-bar button.det-rep { background:#111114; color:#fff; }
+    body.uebung .det-bar .det-sum { display:none; }
     .det-bar span { font-size:15px; font-weight:800; }
     .det-bar button { border:none; background:#f1f2f4; border-radius:10px; padding:6px 12px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); }
     /* Übungsmodus */
@@ -1350,7 +1358,7 @@ window.kragrK5Page = function(K){
 </header>
 
 
-<div id="mob-status" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})"></div>
+<div id="mob-status" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})"></div>
 <main class="k-frame main">
   <div class="page-head">
     <div class="page-title" id="page-title"><span data-i18n="z477">Stahlbeton — Balken, Platten, Stützen, Durchstanzen</span></div>
@@ -2804,9 +2812,8 @@ window.kragrK5Page = function(K){
 
   <!-- ── Ergebnisse ── -->
   <div class="col-out">
-    <div class="card" id="results">
-      <div class="card-title"><span data-i18n="result">Ergebnis</span>
-        <span class="btn-row"><button class="btn" onclick="showReport()" data-i18n="showReport">Bericht ansehen</button></span></div>
+    <div class="card" id="results" hidden>
+      <div class="card-title"><span data-i18n="result">Ergebnis</span></div>
       <div id="summary"></div>
       <table class="chk-table" id="chk-table"></table>
     </div>
@@ -3571,7 +3578,7 @@ const I18N = { "de": {
 "scopeT":"Umfang und Grundlagen",
 "refFormulas":"Formeln dazu im",
 "refBook":"Nachschlagewerk „Wissen“",
-"calcSteps":"Rechenschritte",
+"calcSteps":"Ergebnisse",
 "expandAll":"Alle aufklappen",
 "collapseAll":"Alle zuklappen",
 "noName":"Ohne Bezeichnung",
@@ -4005,7 +4012,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.13';
+const SIZE_VERSION = '0.7.14';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4977,7 +4984,9 @@ function showBad(bad){
   if(typeof FIX_GEN!=='undefined') FIX_GEN++;
   $('summary').innerHTML = `<div class="summary bad">${tx('checkInput')}: ${bad.map(ttBad).join(', ')}</div>`;
   $('mob-status').className='bad'; $('mob-status').textContent=tx('checkInput'); $('mob-status').title=tx('checkInput');
-  $('chk-table').innerHTML=''; $('details').innerHTML=''; $('fig').innerHTML=''; $('reinf-line').innerHTML=''; LAST=null;
+  $('chk-table').innerHTML=''; $('fig').innerHTML=''; $('reinf-line').innerHTML=''; LAST=null;
+  // seit v0.7.14 ohne Karte „Ergebnis“: der Hinweis steht in der Leiste „Ergebnisse“
+  $('details').innerHTML=`<div class="det-bar"><span class="det-h"><span class="det-t">${tx('calcSteps')}</span><span class="det-sum bad">${$('summary').querySelector('.summary').innerHTML}</span></span></div>`;
 }
 function runBeton(){
   if(PA['beton/'+TYP]) return runPA('beton/'+TYP);
@@ -10986,7 +10995,8 @@ const DET_OPEN=new Set(); let DET_ALL=false;
 function foldDetails(){
   const cards=[...document.querySelectorAll('#details > .card[id^="n-"]')]; if(!cards.length) return;
   const bar=document.createElement('div'); bar.className='det-bar';
-  bar.innerHTML=`<span>${tx('calcSteps')}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button></span>`;   // Übungsmodus-Schalter seit v0.6.6 in der Kopfzeile (#ueb-btn)
+  const sm=document.querySelector('#summary .summary');
+  bar.innerHTML=`<span class="det-h"><span class="det-t">${tx('calcSteps')}</span>${sm?`<span class="det-sum ${sm.classList.contains('bad')?'bad':'ok'}">${sm.innerHTML}</span>`:''}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button><button type="button" class="det-rep" onclick="showReport()">${tx('showReport')}</button></span>`;   // Übungsmodus-Schalter seit v0.6.6 in der Kopfzeile (#ueb-btn)
   bar.querySelector('.det-all').onclick=()=>{ DET_ALL=!DET_ALL; DET_OPEN.clear(); foldDetails2(); bar.querySelector('.det-all').textContent=tx(DET_ALL?'collapseAll':'expandAll'); };
   $('details').prepend(bar);
   cards.forEach(c=>{ c.classList.add('dfold'); const id=c.id;
@@ -11055,7 +11065,7 @@ function uebApply(C){
   $('ueb-hint')?.remove(); $('ueb-figbtn')?.remove();
   if(!UEB) return;
   const key = fixMode()+'|'+[...document.querySelectorAll('.col-in input, .col-in select')].map(e=>e.type==='checkbox'?e.checked:e.value).join('|'); if(key!==UEB_KEY){ UEB_REV={}; UEB_KEY=key; }
-  $('results').insertAdjacentHTML('beforeend', `<div class="ueb-hint" id="ueb-hint">${tt('Übungsmodus: Jeder Schritt zeigt, welche Formel du in welcher Reihenfolge anwendest – die Zahlenwerte sind als „…“ ausgeblendet. Rechne selbst, prüfe dein Ergebnis in den Karten unten oder decke Schritt für Schritt auf.')}</div>`);
+  ($('details').querySelector('.det-bar')||$('details')).insertAdjacentHTML('afterend', `<div class="ueb-hint" id="ueb-hint">${tt('Übungsmodus: Jeder Schritt zeigt, welche Formel du in welcher Reihenfolge anwendest – die Zahlenwerte sind als „…“ ausgeblendet. Rechne selbst, prüfe dein Ergebnis in den Karten unten oder decke Schritt für Schritt auf.')}</div>`);
   $('fig').insertAdjacentHTML('beforebegin', `<button type="button" class="ueb-figbtn" id="ueb-figbtn" onclick="document.body.classList.toggle('ueb-fig'); this.textContent=document.body.classList.contains('ueb-fig')?tt('Abbildung ausblenden'):tt('Abbildung zeigen')">${document.body.classList.contains('ueb-fig')?tt('Abbildung ausblenden'):tt('Abbildung zeigen')}</button>`);
   document.querySelectorAll('#details > .card[id^="n-"]').forEach(card=>{
     const c=C.find(x=>'n-'+x.id===card.id); card.classList.add('ueb'); card.classList.remove('closed');
@@ -11555,7 +11565,7 @@ function mulyFehlerHref(app, ver, extra){
 }
 </script>
 <script data-theme>window.mulyThemeButton && mulyThemeButton(document.getElementById('ver'), 'after');</script>
-<script data-theme>(function(){var ms=document.getElementById('mob-status'), r=document.getElementById('results'); if(ms&&r&&window.IntersectionObserver) new IntersectionObserver(function(e){ ms.classList.toggle('away', e[0].isIntersecting); },{rootMargin:'0px 0px -35% 0px'}).observe(r); })();</script>
+<script data-theme>(function(){var ms=document.getElementById('mob-status'), r=document.getElementById('details'); if(ms&&r&&window.IntersectionObserver) new IntersectionObserver(function(e){ ms.classList.toggle('away', e[0].isIntersecting); },{rootMargin:'0px 0px -35% 0px'}).observe(r); })();</script>
 <script data-theme>(function(){var h=document.querySelector('.app-header'); function s(){ document.documentElement.style.setProperty('--hdr-h', h.offsetHeight+'px'); } s(); addEventListener('resize', s); if(window.ResizeObserver) new ResizeObserver(s).observe(h); })();</script>
 <script data-k3>
 // kragr-Design Stufe 3 (size v0.6.1): Stepper − / + an den Zahlenfeldern (Profil-Knöpfe in v0.6.2 wieder entfernt),

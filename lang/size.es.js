@@ -720,7 +720,7 @@ window.MULY_LANG = {
 "scopeT":"Alcance y bases",
 "refFormulas":"Fórmulas en el",
 "refBook":"manual de consulta kragr · Referencia",
-"calcSteps":"Desarrollo del cálculo",
+"calcSteps":"Resultados",
 "expandAll":"Expandir todo",
 "collapseAll":"Contraer todo",
 "noName":"Sin denominación",

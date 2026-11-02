@@ -720,7 +720,7 @@ window.MULY_LANG = {
 "scopeT":"Portée et bases",
 "refFormulas":"Formules dans le",
 "refBook":"ouvrage de référence « Référence »",
-"calcSteps":"Étapes de calcul",
+"calcSteps":"Résultats",
 "expandAll":"Tout déplier",
 "collapseAll":"Tout replier",
 "noName":"Sans désignation",

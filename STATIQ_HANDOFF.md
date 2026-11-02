@@ -568,6 +568,13 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Bemessung: Karte „Ergebnis“ entfällt, „Rechenschritte“ heißt „Ergebnisse“ — size v0.7.14
+
+- Valentin: die Karte „Ergebnis“ (Urteil, Balken je Nachweis, „Bericht ansehen“) blähte die Seite auf. Sie steht noch im DOM (`#results hidden`, `#summary`/`#chk-table` werden weiter gefüllt), ist aber ausgeblendet; „Bericht ansehen“ ist aus ihr entfernt.
+- Die Leiste über den Nachweiskarten (`.det-bar`, `foldDetails`) heißt „Ergebnisse“ (Schlüssel calcSteps, EN Results, FR Résultats, ES Resultados), zeigt darunter das Gesamturteil (`.det-sum ok|bad`, aus `#summary`) und rechts „Alle aufklappen“ und „Bericht ansehen“ (`.det-rep`). Bei ungültiger Eingabe schreibt `showBad` den Hinweis in diese Leiste.
+- Ergebnisleiste unten (`#mob-status`) springt zu `#details` und blendet sich aus, wenn die Ergebnisse sichtbar sind; der Übungsmodus-Hinweis steht unter der Leiste.
+- Tests: `test_size_ergebnisse.py` (19); test_size_i18n, test_fres auf die neuen Wörter.
+
 ## Startseite wieder mit Menü (02.11.2026)
 
 - Valentin: „das Burgermenü auf Index war evtl doch gar nicht so schlecht“ — der Stand vom 28.10. (Startseite ohne Menü, Umschalter `#k5-fset` oben rechts) ist per `git revert` von 946ac34 zurückgenommen. Die Startseite hat wieder das ☰-Menü mit Modulen, Erscheinungsbild und Sprache; test_design_k5 und test_dunkel prüfen wieder das Menü auf allen sechs Seiten.

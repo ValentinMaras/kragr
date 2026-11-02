@@ -44,7 +44,7 @@ async def main():
             check(f'size {L}: Platzhalter {{0}}… wie im Deutschen', not ph, ph[:5])
             m2=[k for k in en_t if k not in tt and re.search(r'[a-zäöü]{3}',re.sub(r'<[^>]+>','',k)) and EN[k]!=k]
             check(f'size {L}: TTX.{L} deckt TTX.en ab ({len(tt)})', not m2, m2[:4])
-        for L,word,word2 in (('en','All checks','Calculation steps'),('fr','Toutes les vérifications','Étapes de calcul'),('es','Todas las comprobaciones','Desarrollo del cálculo')):
+        for L,word,word2 in (('en','All checks','Results'),('fr','Toutes les vérifications','Résultats'),('es','Todas las comprobaciones','Resultados')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.reload(); await pg.wait_for_timeout(250)
             n=await pg.evaluate("document.querySelector('.lang-notice')?.textContent||''")
             if L!='en': check(f'size {L}: kein Sprachhinweis mehr (seit v0.5.33)', n=='', n[:90])
@@ -58,7 +58,7 @@ async def main():
             ALL['size-'+L]=left; check(f'size {L}: {len(modes)} Nachweise ohne deutsche Reste (Oberfläche, Rechenweg, Bericht)', not left, list(left.items())[:5])
             await pg.evaluate("setMat('beton'); setTyp('balken')"); await pg.wait_for_timeout(60)
             s=await pg.inner_text('#summary'); check(f'size {L}: Zusammenfassung', s.startswith(word), s[:60])
-            check(f'size {L}: Leiste Rechenschritte', word2 in await pg.inner_text('.det-bar'))
+            check(f'size {L}: Leiste Ergebnisse', word2 in await pg.inner_text('.det-bar'))
             det=await pg.inner_text('#details'); check(f'size {L}: Dezimalzeichen', (re.search(r'\d,\d', det) is None) if L=='en' else (re.search(r'\d,\d', det) is not None))
             await pg.fill('#in-l','0'); await pg.dispatch_event('#in-l','input'); await pg.wait_for_timeout(60)
             s=await pg.inner_text('#summary'); check(f'size {L}: Eingabefehler übersetzt', not german(s), s[:60])

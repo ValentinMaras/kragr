@@ -59,7 +59,7 @@ async def main():
         check(f'{len(pairs)} Elemente: HTML-Text = I18N.de', not bad, bad[:6]); await ctx.close()
         # DE-Oberfläche nach applyI18n
         s=await pg.inner_text('#summary'); check('DE: Zusammenfassung deutsch', s.startswith('Alle Nachweise erfüllt · größte Ausnutzung'), s)
-        check('DE: Rechenschritte-Leiste deutsch', 'Rechenschritte' in await pg.inner_text('.det-bar'))
+        check('DE: Leiste „Ergebnisse“ deutsch (seit v0.7.14, vorher „Rechenschritte“)', 'Ergebnisse' in await pg.inner_text('.det-bar'))
         check('DE: kein Sprachhinweis', await pg.evaluate("!document.querySelector('.lang-notice')"))
         # 3) Englisch: alle Modi
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(250)
@@ -93,7 +93,7 @@ async def main():
         s=await pg.inner_text('#summary'); check('EN: Zusammenfassung', s.startswith('All checks satisfied · max. utilisation'), s)
         check('EN: Seitentitel (ausgeblendet, Text übersetzt)', (await pg.evaluate("document.getElementById('page-title').textContent")).strip()=='Reinforced concrete — beams, slabs, columns, punching')
         check('EN: Kennzeichen „satisfied“', 'satisfied' in await pg.inner_text('#chk-table'))
-        bar=await pg.inner_text('.det-bar'); check('EN: Leiste Rechenschritte', 'Calculation steps' in bar and 'Expand all' in bar, bar)
+        bar=await pg.inner_text('.det-bar'); check('EN: Leiste Ergebnisse', 'Results' in bar and 'Expand all' in bar and 'Show report' in bar, bar)
         await pg.click('.det-bar .det-all'); check('EN: Knopf „Collapse all“', 'Collapse all' in await pg.inner_text('.det-bar'))
         opt=await pg.evaluate("$('in-expo').options[2].text"); check('EN: Expositionsklasse übersetzt', opt=='XC3 — moderate humidity', opt)
         await pg.fill('#in-l','0'); await pg.dispatch_event('#in-l','input'); await pg.wait_for_timeout(60)

@@ -733,7 +733,7 @@ window.MULY_LANG = {
 "scopeT":"Scope and basis",
 "refFormulas":"Formulas in the",
 "refBook":"kragr · Reference reference",
-"calcSteps":"Calculation steps",
+"calcSteps":"Results",
 "expandAll":"Expand all",
 "collapseAll":"Collapse all",
 "noName":"Untitled",

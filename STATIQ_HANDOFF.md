@@ -568,6 +568,11 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Schnittkräfte: Systemauswahl läuft nicht mehr über die Kopfzeile — calc v0.11.16
+
+- Am Handy steht die Systemauswahl in `.nav.calc-top` (z-index 30) über der Seite; beim Scrollen schob sie sich über das Logo der mitlaufenden Kopfzeile (z-index 10). Jetzt z-index 9: unter der Kopfzeile, aber weiter über dem Inhalt (die geöffnete Auswahl liegt über den Karten).
+- Test: `test_kopf_vorne.py` (11): Logo und ☰ bleiben auf calc, size, ref und Rechenblätter beim Scrollen vorne (390 und 1280 px).
+
 ## Bemessung: Karte „Ergebnis“ entfällt, „Rechenschritte“ heißt „Ergebnisse“ — size v0.7.14
 
 - Valentin: die Karte „Ergebnis“ (Urteil, Balken je Nachweis, „Bericht ansehen“) blähte die Seite auf. Sie steht noch im DOM (`#results hidden`, `#summary`/`#chk-table` werden weiter gefüllt), ist aber ausgeblendet; „Bericht ansehen“ ist aus ihr entfernt.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.15 -->
+<!-- kragr v0.11.16 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -537,7 +537,7 @@ window.mulyProj = {
     .diagram-toggle-btn { border-radius:10px; }
     .beam-svg-wrap, .diagram-svg-wrap { background:#fff; border-radius:12px; }
     /* ── UX 2026 (calc v0.8.12): Auswahlmenü, zwei Spalten, kompakte Lasten, Live-Ergebnis ── */
-    .nav.calc-top { z-index:30; overflow:visible; background:transparent; padding:6px 20px 0; max-width:1180px; margin:0 auto; display:flex; align-items:stretch; gap:10px; }
+    .nav.calc-top { z-index:9;   /* unter der Kopfzeile (z 10), sonst läuft die Auswahl beim Scrollen über das Logo (calc v0.11.16) */ overflow:visible; background:transparent; padding:6px 20px 0; max-width:1180px; margin:0 auto; display:flex; align-items:stretch; gap:10px; }
     .pick { position:relative; flex:1; min-width:0; }
     .pick.in-col { margin-bottom:14px; }
     .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card); border-radius:18px; padding:14px 18px; font-family:inherit; color:var(--text); transition:background .15s, transform .1s; }
@@ -1797,7 +1797,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.15</span>
+    <span class="version">v0.11.16</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2333,7 +2333,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.15';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.16';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;

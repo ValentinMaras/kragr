@@ -568,12 +568,11 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
-## Bemessung: Querschnitt mitlaufend am Handy — size v0.7.17
+## Bemessung: Querschnitt oben am Handy, Eingabekarten einheitlich — size v0.7.18 (v0.7.17 verworfen)
 
-- Valentin: der Querschnitt war beim Eingeben am Handy nicht präsent (stand rund 2000 px tiefer). Variante 1 „mitlaufend oben“, mit seinem Wunsch: erst groß, beim Scrollen gleichmäßig kleiner, die Anordnung passt sich an.
-- `<script data-figdock>`: Platzhalter `#fd-ph` (Höhe H0 = 220…300 px) unter der Auswahl, darüber das feste Element `#fd`. Es folgt dem Platzhalter, bleibt 6 px unter der Kopfzeile stehen und schrumpft mit dem Scrollweg bis 94 px (`--p` 0…1). Groß: Abbildung über die ganze Breite, darunter Titel, Bewehrung bzw. Profilzeile (`#reinf-line`) und Gesamturteil (`#summary`). Klein: Abbildung links (bei breiten Bildern wie Querschnitt + Ansicht am Schnitt nur der linke Teil über die viewBox), Angaben rechts; die Angaben blenden in der Mitte um. Ausgeblendet, sobald die Eingaben durch sind, im Bericht und im Übungsmodus ohne Abbildung. Antippen springt zur großen Abbildung. Nur aktiv, wenn Eingaben und Ergebnisse untereinander stehen (unter 1000 px).
-- Inhalt per MutationObserver aus `#fig`, `#reinf-line`, `#summary`, `#fig-title`. Felder haben am Handy `scroll-margin-top: 170px`, damit sie beim Anspringen nicht unter der Leiste liegen.
-- Test: `test_figdock.py` (13).
+- v0.7.17 (mitlaufende, schrumpfende Abbildung `#fd`) hat Valentin wieder verworfen: „das mit dem kleiner werden weglassen, die Stelle oben aber gut“. Jetzt `<script data-figtop>`: am Handy (Eingaben und Ergebnisse untereinander, unter 1000 px) wandert die Abbildungskarte (`#fig` mit `#reinf-line`) in `#fig-top` direkt unter die Auswahl; am Rechner zurück an `#fig-home` in der rechten Spalte. Kein Doppel, die IDs bleiben dieselben.
+- `<script data-foldreset>`: nach jedem Wechsel des Nachweises (setMat, setTyp, set*Mode, auch über die Auswahl) und beim Laden ist die erste Eingabekarte offen, alle anderen zu (`foldReset()`, danach `k5refold` für die Kurzfassungen). Vorher hingen die Zustände an gespeicherten Werten je Karte — mal eine, mal drei Karten offen.
+- Test: `test_figtop.py` (16) statt test_figdock.
 
 ## Bemessungsbericht im Stil von Schnittkräfte — size v0.7.16 · calc v0.11.17
 

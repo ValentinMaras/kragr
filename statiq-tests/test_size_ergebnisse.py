@@ -1,5 +1,5 @@
 # Bemessung (size v0.7.14): die Karte „Ergebnis“ (Balken je Nachweis) entfällt; die Leiste über den Nachweiskarten heißt jetzt
-# „Ergebnisse“ und trägt das Gesamturteil und „Bericht ansehen“. Fehlerhafte Eingabe: Hinweis in derselben Leiste.
+# „Ergebnisse“ und trägt das Gesamturteil (seit v0.7.15 ohne „Bericht ansehen“ — der Bericht kommt über „Als Rechenblatt speichern“). Fehlerhafte Eingabe: Hinweis in derselben Leiste.
 import os, sys, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); BASE=os.path.abspath(os.path.join(HERE,'..')); B='file://'+BASE+'/'
 try:
@@ -21,10 +21,9 @@ async def main():
                 cards:document.querySelectorAll('#details > .card[id^="n-"]').length, first:document.querySelector('.col-out').firstElementChild.id||'' }; })()""")
             check(f'{W} px: Karte „Ergebnis“ ausgeblendet', r['hidden'], r)
             check(f'{W} px: Leiste heißt „Ergebnisse“, mit Gesamturteil', r['title']=='Ergebnisse' and 'Alle Nachweise erfüllt' in r['sum'] and r['ok'], r)
-            check(f'{W} px: Leiste mit „Alle aufklappen“ und „Bericht ansehen“, Nachweiskarten darunter', r['all'] and r['rep'] and r['cards']>=8, r)
-            await pg.click('#details .det-rep'); await pg.wait_for_timeout(300)
-            check(f'{W} px: „Bericht ansehen“ öffnet den Bericht', await pg.evaluate("document.body.classList.contains('show-report')"))
-            await pg.evaluate("hideReport()"); await pg.wait_for_timeout(200)
+            check(f'{W} px: Leiste mit „Alle aufklappen“, ohne „Bericht ansehen“, Nachweiskarten darunter', r['all'] and not r['rep'] and r['cards']>=8, r)
+            n=await pg.evaluate("[...document.querySelectorAll('button, a')].filter(b=>b.offsetParent && /Bericht ansehen/.test(b.textContent)).length")
+            check(f'{W} px: nirgends ein sichtbarer Knopf „Bericht ansehen“', n==0, n)
             # nicht erfüllt: Urteil rot
             await pg.evaluate("document.getElementById('in-M').value='600'; document.getElementById('in-h').value='30'; run()"); await pg.wait_for_timeout(200)
             r=await pg.evaluate("[document.querySelector('#details .det-sum').className, document.querySelector('#details .det-sum').textContent]")
@@ -40,7 +39,7 @@ async def main():
         for m in ('stahl','holz','mauer','grund','wasser','bauph'):
             await pg.evaluate(f"setMat('{m}')"); await pg.wait_for_timeout(300)
             t=await pg.evaluate("[document.querySelector('#details .det-t')?.textContent, !!document.querySelector('#details .det-rep'), getComputedStyle(document.getElementById('results')).display]")
-            check(f'{m}: Leiste „Ergebnisse“ mit Bericht-Knopf, keine Ergebnis-Karte', t==['Ergebnisse',True,'none'], t)
+            check(f'{m}: Leiste „Ergebnisse“ ohne Bericht-Knopf, keine Ergebnis-Karte', t==['Ergebnisse',False,'none'], t)
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()
 asyncio.run(main())

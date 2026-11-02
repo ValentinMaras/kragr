@@ -568,6 +568,10 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Bemessung: „Bericht ansehen“ aus der Leiste „Ergebnisse“ entfernt — size v0.7.15
+
+- Valentin: das Pendant ist „Als Rechenblatt speichern“ ganz unten (der Bericht steht dann in Rechenblätter). `.det-rep` entfällt; `showReport()` bleibt für Rechenblätter und Tests. Tests klicken nicht mehr „Bericht ansehen“, sondern rufen `showReport()`.
+
 ## test_knoten: Rennen beim Verwerfen des Arbeitsstands (02.11.2026)
 
 - Im Gesamtlauf war test_knoten einmal mit 4 Fehlern rot: das gespeicherte Rechenblatt hatte 5 Knoten (Dreigelenkrahmen) statt 4. Ursache: calc schreibt seinen Arbeitsstand `muly-calc-entwurf` beim Verlassen (pagehide). Der Test löschte ihn danach auf projekt.html — unter Last kam der Schreibvorgang der alten Seite erst nach dem Löschen an, und der Dreigelenkrahmen aus dem vorigen Testschritt war wieder da.

@@ -151,7 +151,7 @@ async def main():
         hsel=await pg.evaluate("document.getElementById('ho-h').value")
         check(f'Holz automatische Höhe: h = {best} mm', str(best)==hsel and 'Alle Nachweise erfüllt' in t, hsel)
         # Bericht + Positionen
-        await pg.click('text=Bericht ansehen'); r=await pg.evaluate("document.getElementById('report').innerText")
+        await pg.evaluate('showReport()'); r=await pg.evaluate("document.getElementById('report').innerText")
         check('Bericht Holz', 'DIN EN 1995-1-1' in r and 'ZUSAMMENFASSUNG' in r.upper()); await pg.click('text=Zurück zur Eingabe')
         await pg.evaluate('mulyAltProj()'); await pg.click('#proj-panel >> text=Speichern'); await pg.evaluate("setMat('stahl')"); await pg.evaluate("setStMode('anschluss')"); await pg.evaluate('mulyAltProj()'); await pg.click('#proj-panel >> text=Speichern')
         await pg.evaluate('mulyAltProj()'); await pg.click('.pos-item:nth-child(1) >> text=Laden')
@@ -159,7 +159,7 @@ async def main():
         check('Positionen: Holz und Anschluss speichern, Holz lädt zurück', m=='holz' and await pg.evaluate("document.querySelectorAll('.pos-item').length")==2, m)
         await pg.evaluate('mulyAltProj()'); await pg.click('.pos-item:nth-child(2) >> text=Laden')
         check('Anschluss-Position lädt in Stahl → Anschluss', await pg.evaluate("MAT+'/'+STMODE")=='stahl/anschluss')
-        await pg.evaluate("$('proj-panel').classList.remove('open')"); await pg.click('text=Bericht ansehen'); r=await pg.evaluate("document.getElementById('report').innerText")
+        await pg.evaluate("$('proj-panel').classList.remove('open')"); await pg.evaluate('showReport()'); r=await pg.evaluate("document.getElementById('report').innerText")
         check('Bericht Anschluss', 'DIN EN 1993-1-8' in r and 'Schraubenbild' in r)
         check('Keine Skriptfehler', not errs, errs)
         await br.close()

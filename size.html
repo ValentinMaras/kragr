@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.14 -->
+<!-- kragr·size v0.7.15 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -419,7 +419,6 @@ window.mulyProj = {
     .det-bar .det-sum { font-size:12.5px; font-weight:700; }
     .det-bar .det-sum.ok { color:#1f7a4d; } .det-bar .det-sum.bad { color:#b42318; }
     .det-bar .det-btns { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
-    .det-bar button.det-rep { background:#111114; color:#fff; }
     body.uebung .det-bar .det-sum { display:none; }
     .det-bar span { font-size:15px; font-weight:800; }
     .det-bar button { border:none; background:#f1f2f4; border-radius:10px; padding:6px 12px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text); }
@@ -4012,7 +4011,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.14';
+const SIZE_VERSION = '0.7.15';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -10996,7 +10995,7 @@ function foldDetails(){
   const cards=[...document.querySelectorAll('#details > .card[id^="n-"]')]; if(!cards.length) return;
   const bar=document.createElement('div'); bar.className='det-bar';
   const sm=document.querySelector('#summary .summary');
-  bar.innerHTML=`<span class="det-h"><span class="det-t">${tx('calcSteps')}</span>${sm?`<span class="det-sum ${sm.classList.contains('bad')?'bad':'ok'}">${sm.innerHTML}</span>`:''}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button><button type="button" class="det-rep" onclick="showReport()">${tx('showReport')}</button></span>`;   // Übungsmodus-Schalter seit v0.6.6 in der Kopfzeile (#ueb-btn)
+  bar.innerHTML=`<span class="det-h"><span class="det-t">${tx('calcSteps')}</span>${sm?`<span class="det-sum ${sm.classList.contains('bad')?'bad':'ok'}">${sm.innerHTML}</span>`:''}</span><span class="det-btns"><button type="button" class="det-all">${tx(DET_ALL?'collapseAll':'expandAll')}</button></span>`;   // Übungsmodus-Schalter seit v0.6.6 in der Kopfzeile (#ueb-btn)
   bar.querySelector('.det-all').onclick=()=>{ DET_ALL=!DET_ALL; DET_OPEN.clear(); foldDetails2(); bar.querySelector('.det-all').textContent=tx(DET_ALL?'collapseAll':'expandAll'); };
   $('details').prepend(bar);
   cards.forEach(c=>{ c.classList.add('dfold'); const id=c.id;

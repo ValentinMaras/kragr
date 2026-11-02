@@ -102,7 +102,7 @@ async def main():
         check(f'Knicklänge z = L_LT = 3 m: λz = {de(lbz,3)}', 'Lcr = βz·LLT = 3,00 m' in t and f'λ̄z = {de(lbz,3)}' in t)
         await pg.fill('#sn-N','0')
         # Bericht und Positionen
-        await pg.click('text=Bericht ansehen'); r=await pg.evaluate("document.getElementById('report').innerText")
+        await pg.evaluate('showReport()'); r=await pg.evaluate("document.getElementById('report').innerText")
         check('Bericht Stahl: Profil, Klassifizierung, Zusammenfassung', 'DIN EN 1993-1-1' in r and 'Querschnittsklassifizierung' in r and 'ZUSAMMENFASSUNG' in r.upper())
         await pg.click('text=Zurück zur Eingabe')
         await pg.evaluate('mulyAltProj()'); await pg.click('#proj-panel >> text=Speichern'); await pg.evaluate("setMat('beton')")

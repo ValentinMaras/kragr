@@ -96,7 +96,7 @@ async def main():
         await pg.fill('#in-l','8'); t=await out()
         check('Platte l = 8 m: Biegeschlankheit nicht erfüllt', 'l/d = 8000' in t and 'nicht erfüllt' in t)
         # Bericht
-        await pg.click('text=Bericht ansehen')
+        await pg.evaluate('showReport()')
         r=await pg.evaluate("document.getElementById('report').innerText")
         vis=await pg.evaluate("getComputedStyle(document.getElementById('report-view')).display")
         check('Bericht: Eingaben, Nachweise, Zusammenfassung', vis=='block' and 'EINGABEN' in r.upper() and 'ZUSAMMENFASSUNG' in r.upper() and 'Pos. 2' in r)
@@ -135,7 +135,7 @@ async def main():
         check('Stütze: obere Stäbe über beff,Stütze = 1200 mm verteilt', 'beff,Stütze = 1200 mm verteilt' in t)
         await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.check('#in-auto'); t=await out()
         check('Unterzug automatisch: alle Nachweise erfüllt', 'Alle Nachweise erfüllt' in t, t.split('\n')[2])
-        await pg.click('text=Bericht ansehen'); r=await pg.evaluate("document.getElementById('report').innerText")
+        await pg.evaluate('showReport()'); r=await pg.evaluate("document.getElementById('report').innerText")
         check('Bericht Unterzug: Plattenbalken, Gurtanschluss, Endauflager', 'Unterzug (Plattenbalken)' in r and 'Anschluss Gurt' in r and 'Endauflager' in r)
         await pg.click('text=Zurück zur Eingabe'); await pg.fill('#in-Ms','0')
         # ── v0.1.2: Rissbreite über der Stütze ──

@@ -119,8 +119,8 @@ async def main():
         # seit ref v0.3.53: der Seitenkopf sitzt im weißen Lehrbuchblatt (.lb-page)
         r=await pg.evaluate("(()=>{const h=document.querySelector('#main .page-head'), b=h.closest('.lb-page'); const cs=getComputedStyle(b); return [cs.backgroundColor, cs.borderRadius, getComputedStyle(h).flexDirection, h.querySelector('.page-sub').getBoundingClientRect().top < h.querySelector('.page-title').getBoundingClientRect().top]})()")
         check('ref: Seitenkopf im weißen Blatt, Fach · Kapitel als Oberzeile', r[0]=='rgb(255, 255, 255)' and r[1] in ('16px','20px') and r[2:]==['column-reverse',True], r)
-        await pg.click('#main .page-head'); await pg.wait_for_timeout(200)
-        check('ref (Handy): Tipp auf den Seitenkopf öffnet die Themenliste', await pg.evaluate("document.getElementById('sidebar').classList.contains('open')"))
+        await pg.click('#pick-btn'); await pg.wait_for_timeout(200)
+        check('ref (Handy): Auswahl oben wie in calc/size öffnet die Themenliste', await pg.evaluate("document.getElementById('pick').classList.contains('open') && document.querySelectorAll('#pick-menu .pick-item').length>100"))
         # rechtliches: Seitenkopf
         await pg.goto(B+'rechtliches.html'); await pg.wait_for_timeout(300)
         check('rechtliches: Titel, Einleitung und Sprungmarken in einer Kopfkarte', await pg.evaluate("(()=>{const k=document.querySelector('#content > .k5-phead'); return !!k && !!k.querySelector('h1') && !!k.querySelector('.lead')})()"))

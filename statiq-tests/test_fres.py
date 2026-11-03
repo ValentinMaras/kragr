@@ -75,8 +75,8 @@ async def main():
             ph=(await pg.evaluate("document.getElementById('search').placeholder")).lower(); mt=await pg.inner_text('#main')
             check(f'ref {L}: Startseite übersetzt (Suchfeld, ohne Titel seit v0.3.25)', srch in ph and 'Nachschlagewerk' not in mt and 'Schnee' not in ph, ph[:60])
             nde=await pg.evaluate("document.querySelectorAll('.tree-de').length"); check(f'ref {L}: kein Hinweis „DE“', nde==0, nde)
-            side=[x for x in await pg.evaluate(TEXTS,'#sidebar') if german(x)]
-            check(f'ref {L}: Seitenleiste übersetzt', not side, side[:4])
+            await pg.evaluate("buildPick()"); side=[x for x in await pg.evaluate(TEXTS,'#pick-menu') if german(x)]
+            check(f'ref {L}: Themenmenü übersetzt', not side, side[:4])
             pages=await pg.evaluate("Object.entries(FAECHER).flatMap(([f,F])=>Object.entries(F.kapitel).flatMap(([k,K])=>Object.keys(K.themen).map(t=>f+'/'+k+'/'+t)))")
             left={}
             for key in pages:

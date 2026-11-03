@@ -80,11 +80,6 @@ window.kragrK5Page = function(K){
     rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
   }
 
-  if(P==='ref'){
-    // Seitenkopf wie die Auswahl in calc/size: Tippen öffnet am Handy die Themenliste
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('#main .page-head'); if(!h || !$('#main .menu-toggle') || window.innerWidth>999) return;
-      if(typeof toggleSideMenu==='function'){ e.stopPropagation(); toggleSideMenu(); } });
-  }
 
   if(P==='rechtliches'){
     // Seitenkopf als Karte: Titel, Einleitung und Sprungmarken zusammen

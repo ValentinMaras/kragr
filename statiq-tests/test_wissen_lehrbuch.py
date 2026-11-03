@@ -45,8 +45,8 @@ async def main():
         r=await pg.evaluate("[...document.querySelectorAll('#main .lb-toc .nav-list-item .lb-n')].map(e=>e.textContent)")
         k=await pg.evaluate("lbNum('holzbau','baustoffe')")
         check('Kapitel-Übersicht: Themen mit Nummern', r and r[0]==k+'.1', r[:3])
-        s=await pg.evaluate("[...document.querySelectorAll('#sidebar .tree-k .lb-tn')].length")
-        check('Seitenleiste: Kapitel mit Nummern', s>=30, s)
+        s=await pg.evaluate("buildPick(), [...document.querySelectorAll('#pick-menu .pick-k .lb-tn')].length")
+        check('Themenmenü: Kapitel mit Nummern', s>=30, s)
         # Schrift bleibt
         ff=await pg.evaluate("getComputedStyle(document.querySelector('#main .lb-page .page-title')).fontFamily")
         check('Schrift bleibt Figtree', 'Figtree' in ff, ff)

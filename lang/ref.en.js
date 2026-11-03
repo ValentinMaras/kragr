@@ -11,7 +11,10 @@ window.MULY_LANG = {
 "topic":"topic",
 "soon":"in preparation",
 "contentSoon":"Content coming soon.",
-"notYet":"This subject has not been translated yet and is shown in German."
+"notYet":"This subject has not been translated yet and is shown in German.",
+"pickHome":"Choose a topic",
+"pickFilter":"Filter topics …",
+"pickNone":"No topic found"
 },
 "ttx": {
 "Beton ist älter, als man denkt. Die Römer mischten Kalk, vulkanische Asche aus der Gegend von Pozzuoli, Wasser und Steine zu einem Baustoff, den sie opus caementitium nannten. Er erhärtete sogar unter Wasser und ermöglichte Hafenanlagen, Gewölbe und Kuppeln. Das bekannteste Beispiel ist das Pantheon in Rom, um 125 n. Chr. vollendet: Seine unbewehrte Kuppel spannt rund 43 m weit und steht bis heute. Die Römer machten den Beton nach oben hin leichter, indem sie Bims als Zuschlag verwendeten – eine frühe Form des Leichtbetons.":"Concrete is older than you might think. The Romans mixed lime, volcanic ash from the area around Pozzuoli, water and stones into a building material they called opus caementitium. It hardened even under water and made harbours, vaults and domes possible. The best-known example is the Pantheon in Rome, completed around AD 125: its unreinforced dome spans about 43 m and still stands today. The Romans made the concrete lighter towards the top by using pumice as aggregate – an early form of lightweight concrete.",

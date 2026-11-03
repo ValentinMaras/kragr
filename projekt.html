@@ -229,6 +229,34 @@
   if(typeof document!=='undefined' && document.addEventListener) document.addEventListener('DOMContentLoaded', window.kmodApply);
 })();
 </script>
+<style data-rb-size>
+/* Bericht im Stil von Schnittkräfte (size v0.7.16): Schriftfeld, Überschriften in Großbuchstaben, Tabellen in Mono, Fußzeile.
+   Gleicher Block in size.html und projekt.html (dort steht der gespeicherte Bericht). */
+.rb-size { max-width:760px; margin:0 auto; font-family:Figtree, sans-serif; color:#111; font-size:12.5px; line-height:1.55; }
+.rb-size .rb-sf { display:grid; grid-template-columns:auto 1.6fr 1fr 1fr; border:1.4px solid #111; font-size:10px; color:#555; }
+.rb-size .rb-sf > div { padding:5px 9px; border-right:1px solid #111; min-width:0; }
+.rb-size .rb-sf > div:last-child { border-right:none; }
+.rb-size .rb-sf b { display:block; font-size:12.5px; color:#111; font-weight:700; margin-top:1px; overflow-wrap:anywhere; }
+.rb-size .rb-logo { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1px; color:#111; }
+.rb-size .rb-mark { font-family:Figtree,sans-serif; font-weight:800; font-size:22px; letter-spacing:-.04em; line-height:1; white-space:nowrap; color:#111114; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.rb-size .rb-mark .logo-r { display:inline-block; width:1.281ex; height:1.934ex; vertical-align:baseline; margin:-.3em 0 0 -.01em; overflow:visible; }
+.rb-size .rb-mod { font-size:9.5px; color:#555; letter-spacing:.02em; }
+.rb-size .rb-title { font-size:22px; font-weight:800; letter-spacing:-.02em; margin:18px 0 2px; }
+.rb-size .rb-subt { font-size:12px; color:#666; margin-bottom:6px; }
+.rb-size h2 { font-family:Figtree, sans-serif !important; font-size:11.5px !important; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#111 !important; margin:20px 0 8px !important; padding-bottom:4px !important; border-bottom:1.2px solid #111 !important; break-after:avoid; }
+.rb-size h3 { font-size:13px; margin:12px 0 4px; }
+.rb-size table { width:100%; border-collapse:collapse; font-family:'JetBrains Mono', monospace; font-size:12px; margin-top:4px; }
+.rb-size th { text-align:left; font-weight:700; font-size:11.5px; color:#111 !important; padding:5px 8px !important; border-bottom:1.2px solid #111 !important; }
+.rb-size td { padding:5px 8px !important; border-bottom:1px solid #ddd !important; vertical-align:top; }
+.rb-size td:first-child { color:#555; }
+.rb-size .meta { font-size:11px; color:#666; line-height:1.5; }
+.rb-size .steps b { border-bottom:3px double #111; padding:0 1px; }
+.rb-size .rb-foot { display:flex; justify-content:space-between; gap:12px; font-size:10px; color:#777; border-top:1px solid #ccc; margin-top:22px; padding-top:6px; }
+/* schmal: Schriftfeld zweispaltig, Abbildungen nicht breiter als das Blatt */
+.rb-size svg { max-width:min(100%, 460px) !important; height:auto; }
+@media (max-width:560px) { .rb-size .rb-sf { grid-template-columns:auto 1fr; } .rb-size .rb-sf > div:nth-child(2) { border-right:none; } .rb-size .rb-sf > div:nth-child(-n+2) { border-bottom:1px solid #111; } .rb-size .rb-title { font-size:19px; } }
+@media print { .rb-size { max-width:none; } .rb-size section { break-inside:auto; } .rb-size h2 { break-after:avoid; } .rb-size .figure, .rb-size table { break-inside:avoid; } }
+</style>
 <style data-k5>
   /* kragr-Design 5 (Oktober 2026): ein Aufbau für alle Seiten. Identisch in calc, size, ref, projekt und rechtliches.
      Weich und plastisch: hellgrauer Seitengrund, weiße Karten mit sanftem Schatten, Glas-Kopfzeile mit Burgermenü,
@@ -380,8 +408,7 @@
   #main .page-head .page-title { font-size:20px !important; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
   #main .page-head .page-sub { font-size:12.5px !important; margin-top:0 !important; color:#5c5e66; line-height:1.4; }
   #main .menu-toggle { display:none !important; }
-  @media (max-width:999px) { #main .page-head { cursor:pointer; position:relative; padding-right:44px; }
-    #main .page-head::after { content:''; position:absolute; right:20px; top:50%; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #5c5e66; transform:translateY(-50%); } }
+  /* ref v0.3.56: Tippen auf den Seitenkopf öffnet nichts mehr, die Auswahl sitzt darüber (#pick) */
   .wrap > .top { background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:16px 18px; margin:14px 0 18px !important; align-items:center !important; }
   .wrap > .top .pname { font-size:22px !important; }
   .k5-phead { margin:14px 0 18px; padding:18px 20px; }
@@ -512,11 +539,6 @@ window.kragrK5Page = function(K){
     rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
   }
 
-  if(P==='ref'){
-    // Seitenkopf wie die Auswahl in calc/size: Tippen öffnet am Handy die Themenliste
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('#main .page-head'); if(!h || !$('#main .menu-toggle') || window.innerWidth>999) return;
-      if(typeof toggleSideMenu==='function'){ e.stopPropagation(); toggleSideMenu(); } });
-  }
 
   if(P==='rechtliches'){
     // Seitenkopf als Karte: Titel, Einleitung und Sprungmarken zusammen
@@ -803,34 +825,6 @@ window.kragrK5Page = function(K){
   if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
-<style data-rb-size>
-/* Bericht im Stil von Schnittkräfte (size v0.7.16): Schriftfeld, Überschriften in Großbuchstaben, Tabellen in Mono, Fußzeile.
-   Gleicher Block in size.html und projekt.html (dort steht der gespeicherte Bericht). */
-.rb-size { max-width:760px; margin:0 auto; font-family:Figtree, sans-serif; color:#111; font-size:12.5px; line-height:1.55; }
-.rb-size .rb-sf { display:grid; grid-template-columns:auto 1.6fr 1fr 1fr; border:1.4px solid #111; font-size:10px; color:#555; }
-.rb-size .rb-sf > div { padding:5px 9px; border-right:1px solid #111; min-width:0; }
-.rb-size .rb-sf > div:last-child { border-right:none; }
-.rb-size .rb-sf b { display:block; font-size:12.5px; color:#111; font-weight:700; margin-top:1px; overflow-wrap:anywhere; }
-.rb-size .rb-logo { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1px; color:#111; }
-.rb-size .rb-mark { font-family:Figtree,sans-serif; font-weight:800; font-size:22px; letter-spacing:-.04em; line-height:1; white-space:nowrap; color:#111114; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-.rb-size .rb-mark .logo-r { display:inline-block; width:1.281ex; height:1.934ex; vertical-align:baseline; margin:-.3em 0 0 -.01em; overflow:visible; }
-.rb-size .rb-mod { font-size:9.5px; color:#555; letter-spacing:.02em; }
-.rb-size .rb-title { font-size:22px; font-weight:800; letter-spacing:-.02em; margin:18px 0 2px; }
-.rb-size .rb-subt { font-size:12px; color:#666; margin-bottom:6px; }
-.rb-size h2 { font-family:Figtree, sans-serif !important; font-size:11.5px !important; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#111 !important; margin:20px 0 8px !important; padding-bottom:4px !important; border-bottom:1.2px solid #111 !important; break-after:avoid; }
-.rb-size h3 { font-size:13px; margin:12px 0 4px; }
-.rb-size table { width:100%; border-collapse:collapse; font-family:'JetBrains Mono', monospace; font-size:12px; margin-top:4px; }
-.rb-size th { text-align:left; font-weight:700; font-size:11.5px; color:#111 !important; padding:5px 8px !important; border-bottom:1.2px solid #111 !important; }
-.rb-size td { padding:5px 8px !important; border-bottom:1px solid #ddd !important; vertical-align:top; }
-.rb-size td:first-child { color:#555; }
-.rb-size .meta { font-size:11px; color:#666; line-height:1.5; }
-.rb-size .steps b { border-bottom:3px double #111; padding:0 1px; }
-.rb-size .rb-foot { display:flex; justify-content:space-between; gap:12px; font-size:10px; color:#777; border-top:1px solid #ccc; margin-top:22px; padding-top:6px; }
-/* schmal: Schriftfeld zweispaltig, Abbildungen nicht breiter als das Blatt */
-.rb-size svg { max-width:min(100%, 460px) !important; height:auto; }
-@media (max-width:560px) { .rb-size .rb-sf { grid-template-columns:auto 1fr; } .rb-size .rb-sf > div:nth-child(2) { border-right:none; } .rb-size .rb-sf > div:nth-child(-n+2) { border-bottom:1px solid #111; } .rb-size .rb-title { font-size:19px; } }
-@media print { .rb-size { max-width:none; } .rb-size section { break-inside:auto; } .rb-size h2 { break-after:avoid; } .rb-size .figure, .rb-size table { break-inside:avoid; } }
-</style>
 </head>
 <body>
 <header class="app-header glass k-hdr">

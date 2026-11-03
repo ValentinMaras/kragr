@@ -11,7 +11,10 @@ window.MULY_LANG = {
 "topic":"tema",
 "soon":"en preparación",
 "contentSoon":"Contenido disponible próximamente.",
-"notYet":"Esta materia aún no está traducida y se muestra en alemán."
+"notYet":"Esta materia aún no está traducida y se muestra en alemán.",
+"pickHome":"Elegir un tema",
+"pickFilter":"Filtrar temas …",
+"pickNone":"Ningún tema encontrado"
 },
 "ttx": {
 "Beton ist älter, als man denkt. Die Römer mischten Kalk, vulkanische Asche aus der Gegend von Pozzuoli, Wasser und Steine zu einem Baustoff, den sie opus caementitium nannten. Er erhärtete sogar unter Wasser und ermöglichte Hafenanlagen, Gewölbe und Kuppeln. Das bekannteste Beispiel ist das Pantheon in Rom, um 125 n. Chr. vollendet: Seine unbewehrte Kuppel spannt rund 43 m weit und steht bis heute. Die Römer machten den Beton nach oben hin leichter, indem sie Bims als Zuschlag verwendeten – eine frühe Form des Leichtbetons.":"El hormigón es más antiguo de lo que se cree. Los romanos mezclaban cal, ceniza volcánica de la zona de Pozzuoli, agua y piedras para obtener un material que llamaban opus caementitium. Endurecía incluso bajo el agua y permitió construir puertos, bóvedas y cúpulas. El ejemplo más conocido es el Panteón de Roma, terminado hacia el 125 d. C.: su cúpula sin armar salva unos 43 m y sigue en pie. Los romanos aligeraban el hormigón hacia arriba usando piedra pómez como árido, una forma temprana de hormigón ligero.",

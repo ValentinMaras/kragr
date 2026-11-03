@@ -50,11 +50,11 @@ async def main():
         check('Stahl: Duktilität erklärt', 'Duktilität' in t and 'fließt' in t)
         # Suche findet die neuen Themen
         await pg.evaluate("location.hash='#/'"); await pg.wait_for_timeout(150)
-        await pg.fill('#side-q', 'Hydratation'); await pg.wait_for_timeout(200)
-        vis=await pg.evaluate("[...document.querySelectorAll('#sidebar a')].filter(a=>a.offsetParent).map(a=>a.textContent.trim())")
-        check('Seitenleisten-Filter findet „Hydratation und w/z-Wert“', any('Hydratation' in v for v in vis), vis[:4])
+        await pg.click('#pick-btn'); await pg.fill('#pick-q', 'Hydratation'); await pg.wait_for_timeout(200)
+        vis=await pg.evaluate("[...document.querySelectorAll('#pick-menu .pick-item')].filter(a=>a.offsetParent).map(a=>a.textContent.trim())")
+        check('Themenfilter findet „Hydratation und w/z-Wert“', any('Hydratation' in v for v in vis), vis[:4])
         # keine Themen-Anzahl mehr
-        await pg.fill('#side-q', ''); await pg.evaluate("location.hash='#/'"); await pg.wait_for_timeout(200)
+        await pg.fill('#pick-q', ''); await pg.keyboard.press('Escape'); await pg.evaluate("location.hash='#/'"); await pg.wait_for_timeout(200)
         subs=await pg.evaluate("[...document.querySelectorAll('.tile-sub')].map(e=>e.textContent)")
         check('Übersicht: keine „n Themen“ an den Fachgebieten', subs and not any(re.search(r'\d+ Themen', s) for s in subs), subs[:2])
         await pg.evaluate("location.hash='#/stahlbeton'"); await pg.wait_for_timeout(200)

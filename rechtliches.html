@@ -316,8 +316,7 @@
   #main .page-head .page-title { font-size:20px !important; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
   #main .page-head .page-sub { font-size:12.5px !important; margin-top:0 !important; color:#5c5e66; line-height:1.4; }
   #main .menu-toggle { display:none !important; }
-  @media (max-width:999px) { #main .page-head { cursor:pointer; position:relative; padding-right:44px; }
-    #main .page-head::after { content:''; position:absolute; right:20px; top:50%; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid #5c5e66; transform:translateY(-50%); } }
+  /* ref v0.3.56: Tippen auf den Seitenkopf öffnet nichts mehr, die Auswahl sitzt darüber (#pick) */
   .wrap > .top { background:var(--k5-card); box-shadow:var(--k5-sh); border-radius:var(--k5-r); padding:16px 18px; margin:14px 0 18px !important; align-items:center !important; }
   .wrap > .top .pname { font-size:22px !important; }
   .k5-phead { margin:14px 0 18px; padding:18px 20px; }
@@ -448,11 +447,6 @@ window.kragrK5Page = function(K){
     rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
   }
 
-  if(P==='ref'){
-    // Seitenkopf wie die Auswahl in calc/size: Tippen öffnet am Handy die Themenliste
-    D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('#main .page-head'); if(!h || !$('#main .menu-toggle') || window.innerWidth>999) return;
-      if(typeof toggleSideMenu==='function'){ e.stopPropagation(); toggleSideMenu(); } });
-  }
 
   if(P==='rechtliches'){
     // Seitenkopf als Karte: Titel, Einleitung und Sprungmarken zusammen

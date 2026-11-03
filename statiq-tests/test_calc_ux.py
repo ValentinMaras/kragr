@@ -17,7 +17,7 @@ async def main():
         await pg.goto(HTML); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(500)
         # Live-Ergebnis direkt nach dem Laden
         check('Ergebnis sofort sichtbar (ohne Klick auf Berechnen)', await pg.is_visible('#beam-results') and await pg.inner_text('#b-res-Mmax')=='28.13', await pg.inner_text('#b-res-Mmax'))
-        check('Berechnen-Knopf ausgeblendet, Hinweis „laufend berechnet“', not await pg.is_visible('#tab-beam .run-btn') and 'laufend' in await pg.inner_text('#tab-beam .live-note'))
+        check('Berechnen-Knopf ausgeblendet, kein Hinweis „laufend berechnet“ mehr', not await pg.is_visible('#tab-beam .run-btn') and not await pg.is_visible('#tab-beam .live-note') and 'laufend' not in await pg.inner_text('#tab-beam .col-out'))
         await pg.fill('#bL','6'); await pg.wait_for_timeout(450)
         m=float(await pg.inner_text('#b-res-Mmax'))
         # q = 5 auf 0…5 m, F = 10 bei 2,5 m, L = 6 m: max M unter F (Querkraft wechselt dort das Vorzeichen)
@@ -69,7 +69,7 @@ async def main():
             check(f'Skizze {t}: keine überlappenden Beschriftungen', await pg.evaluate(f"({OVERLAP})('{svg}')")==0)
         # Sprache
         await pg.evaluate("showTab('beam'); setCalcLang('en')"); await pg.wait_for_timeout(200)
-        check('Sprache EN: Menü übersetzt', await pg.inner_text('#pick-g')=='Beams' and await pg.inner_text('#pick-t')=='Simply Supported' and 'automatically' in await pg.inner_text('#tab-beam .live-note'))
+        check('Sprache EN: Menü übersetzt', await pg.inner_text('#pick-g')=='Beams' and await pg.inner_text('#pick-t')=='Simply Supported'  and 'automatically' not in await pg.inner_text('#tab-beam .col-out'))
         await pg.evaluate("setCalcLang('de')")
         # keine Seitenleiste mehr: Module stehen oben, Sprache als Auswahl im Kopf
         check('Kein ☰-Menü und keine Seitenleiste', await pg.evaluate("!document.getElementById('nav-drawer') && !document.querySelector('.menu-btn')"))

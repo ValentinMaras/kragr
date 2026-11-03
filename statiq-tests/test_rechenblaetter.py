@@ -127,7 +127,8 @@ async def main():
             a=await pg.text_content('h1.ptitle'); await pg.goto(B+'size.html'); await pg.wait_for_timeout(600); b2=await pg.text_content('.kbl-btn'); await pg.goto(B+'projekt.html')
             check(f'{l}: Seite „{h}“, Knopf „{btn}“', a==h and b2==btn, (a,b2))
         # Startseite
-        await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.goto(B+'index.html'); await pg.wait_for_timeout(500)
+        # Sprache auf der Startseite selbst setzen und neu laden (unter Last kam die Sprache der Seite vorher sonst manchmal zu spät an)
+        await pg.goto(B+'index.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(500)
         r=await pg.evaluate("({t:document.getElementById('saved-title').textContent, c:document.getElementById('saved-count').textContent})")
         check('Startseite: Kachel „Rechenblätter“', r['t']=='Rechenblätter', r)
         check('keine Skriptfehler', not errs, errs[:3])

@@ -45,6 +45,7 @@ async def main():
         check('Position laden: Liste zeigt genau die gespeicherten 2 Schichten', len(await pg.evaluate(VIS,'bp'))==2)
         # Setzung
         await pg.evaluate("setMat('grund'); setGrMode('setzung')"); await pg.wait_for_timeout(300)
+        await pg.evaluate("document.querySelectorAll('.ml').forEach(m=>{ const c=m.closest('.card.fold'); if(c) c.classList.remove('closed'); })")   # seit size v0.7.18 ist nur die erste Karte offen
         v=await pg.evaluate(VIS,'gs'); s0=await pg.evaluate("LAST.res.s")
         check('Setzung: 3 Bodenschichten als Zeilen, Anzahl-Feld ausgeblendet', len(v)==3 and 'Sand, mitteldicht' in v[0] and '2 m' in v[0] and not await pg.is_visible('#gs-n'), v)
         await pg.click('.ml[data-ml="gs"] .ml-add'); await pg.wait_for_timeout(200)

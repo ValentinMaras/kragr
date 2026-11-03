@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.18 -->
+<!-- kragr·size v0.7.19 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -3606,6 +3606,11 @@ const I18N = { "de": {
 "refFormulas":"Formeln dazu im",
 "refBook":"Nachschlagewerk „Wissen“",
 "calcSteps":"Ergebnisse",
+"zvOpen":"Skizze vergrößern",
+"zvReset":"Zurücksetzen",
+"zvClose":"Schließen",
+"zvHintT":"Zwei Finger zum Zoomen, ein Finger zum Verschieben",
+"zvHintM":"Mausrad zum Zoomen, ziehen zum Verschieben, Doppelklick zoomt",
 "fdGo":"zur großen Abbildung ↓",
 "repPosLbl":"Position",
 "repDateLbl":"Datum",
@@ -4043,7 +4048,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.18';
+const SIZE_VERSION = '0.7.19';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11009,6 +11014,7 @@ function foldSummary(card){
   card.querySelectorAll('.fold-body .field, .fold-body label.check').forEach(f=>{
     if(out.length>=4 || f.offsetParent===null) return;
     const el=f.querySelector('input, select'); if(!el || el.disabled && el.type!=='checkbox') return;
+    if(/-name$/.test(el.id)) return;   // Bezeichnung nicht in die Kurzfassung (Freitext des Nutzers, seit v0.7.18)
     if(el.type==='checkbox'){ if(el.checked) out.push(f.textContent.trim().replace(/\s*\(.*\)$/,'').slice(0,40)); return; }
     const lab=f.querySelector('label'); let t=(lab?lab.textContent:'').replace(/\s+/g,' ').trim();
     const unit=(t.match(/\[([^\]]+)\]/)||[])[1]||''; t=t.replace(/\[[^\]]*\]/g,'').replace(/\([^)]*\)/g,'').trim();
@@ -11720,6 +11726,88 @@ function mulyFehlerHref(app, ver, extra){
     var f=window[n]; if(typeof f!=='function') return;
     window[n]=function(){ var r=f.apply(this, arguments); setTimeout(reset, 0); return r; }; });
   if(document.readyState==='complete') setTimeout(reset, 0); else addEventListener('load', function(){ setTimeout(reset, 0); });
+})();
+</script>
+<style data-zoomview>
+/* Ansichtsfenster für die Querschnittskizze (size v0.7.19): Antippen öffnet ein Fenster, darin mit zwei Fingern (oder Mausrad)
+   zoomen und mit einem Finger (oder der Maus) verschieben; Doppeltippen zoomt auf die Stelle bzw. zurück. */
+#fig svg { cursor:zoom-in; }
+.zv-open { position:absolute; top:14px; right:14px; width:34px; height:34px; border:none; border-radius:10px; background:#f1f2f4; color:#111114; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+.zv-open:hover { background:#e7e8ec; }
+#zv { position:fixed; inset:0; z-index:300; display:none; align-items:center; justify-content:center; padding:16px; background:rgba(17,17,20,.42); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); }
+#zv.open { display:flex; animation:zv-in .22s var(--k5-ease, ease) both; }
+@keyframes zv-in { from { opacity:0; } to { opacity:1; } }
+#zv .zv-win { position:relative; width:min(760px, 100%); height:min(78vh, 640px); background:#fff; border-radius:20px; box-shadow:0 18px 48px rgba(17,17,20,.28); display:flex; flex-direction:column; overflow:hidden; animation:zv-pop .28s var(--k5-spring, ease) both; }
+@keyframes zv-pop { from { transform:scale(.94); } to { transform:none; } }
+#zv .zv-bar { display:flex; align-items:center; gap:8px; padding:10px 10px 10px 16px; border-bottom:1px solid #eceef2; }
+#zv .zv-t { flex:1; min-width:0; font-weight:800; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#zv .zv-b { border:none; background:#f1f2f4; color:#111114; border-radius:10px; height:34px; padding:0 12px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; }
+#zv .zv-x { width:34px; padding:0; font-size:18px; }
+#zv .zv-stage { position:relative; flex:1; overflow:hidden; touch-action:none; cursor:grab; background:#fbfbfc; }
+#zv .zv-stage.drag { cursor:grabbing; }
+#zv .zv-in { position:absolute; left:0; top:0; transform-origin:0 0; will-change:transform; }
+#zv .zv-in svg { display:block; width:100%; height:100%; }
+#zv .zv-hint { position:absolute; left:10px; bottom:10px; max-width:calc(100% - 96px); font-size:11.5px; line-height:1.35; color:#5c5e66; background:rgba(255,255,255,.92); padding:5px 10px; border-radius:12px; pointer-events:none; transition:opacity .4s; }
+#zv .zv-z { position:absolute; right:10px; bottom:10px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#5c5e66; background:rgba(255,255,255,.9); padding:3px 8px; border-radius:8px; pointer-events:none; }
+body.zv-lock { overflow:hidden; }
+@media print { #zv, .zv-open { display:none !important; } }
+</style>
+<script data-zoomview>
+var __zvTx = (typeof tx==='function') ? tx : null;   // Übersetzer der Seite (in der Funktion unten heißt tx die Verschiebung)
+(function(){
+  var D=document, zv, stage, inner, title, hint, zl, s=1, tx=0, ty=0, W=0, H=0, ptr=new Map(), pinch=null, last=null, lastTap=0, moved=false;
+  var T=function(k){ return __zvTx ? __zvTx(k) : k; };
+  function build(){
+    zv=D.createElement('div'); zv.id='zv'; zv.setAttribute('role','dialog'); zv.setAttribute('aria-modal','true');
+    zv.innerHTML='<div class="zv-win"><div class="zv-bar"><span class="zv-t"></span><button type="button" class="zv-b zv-r"></button><button type="button" class="zv-b zv-x" aria-label="">✕</button></div>'
+      +'<div class="zv-stage"><div class="zv-in"></div><span class="zv-hint"></span><span class="zv-z"></span></div></div>';
+    D.body.appendChild(zv);
+    stage=zv.querySelector('.zv-stage'); inner=zv.querySelector('.zv-in'); title=zv.querySelector('.zv-t'); hint=zv.querySelector('.zv-hint'); zl=zv.querySelector('.zv-z');
+    zv.addEventListener('click', function(e){ if(e.target===zv) close(); });
+    zv.querySelector('.zv-x').onclick=close; zv.querySelector('.zv-r').onclick=function(){ fit(true); };
+    D.addEventListener('keydown', function(e){ if(!zv.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='+'||e.key==='=') zoomAt(1.25, W/2, H/2); if(e.key==='-') zoomAt(0.8, W/2, H/2); if(e.key==='0') fit(true); });
+    stage.addEventListener('pointerdown', down); stage.addEventListener('pointermove', move); stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up); stage.addEventListener('pointerleave', function(e){ if(e.pointerType==='mouse') up(e); });
+    stage.addEventListener('wheel', function(e){ e.preventDefault(); var r=stage.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY*0.0015), e.clientX-r.left, e.clientY-r.top); }, {passive:false});
+    stage.addEventListener('dblclick', function(e){ var r=stage.getBoundingClientRect(); dbl(e.clientX-r.left, e.clientY-r.top); });
+  }
+  function apply(){ inner.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')'; zl.textContent=Math.round(s*100)+' %'; }
+  function clamp(){ var cw=W*s, ch=H*s, m=40;   // Inhalt bleibt im Fenster (mindestens 40 px sichtbar)
+    tx=cw<=W ? (W-cw)/2 : Math.min(m, Math.max(W-cw-m, tx)); ty=ch<=H ? (H-ch)/2 : Math.min(m, Math.max(H-ch-m, ty)); }
+  function fit(anim){ s=1; tx=0; ty=0; clamp(); if(anim){ inner.style.transition='transform .3s var(--k5-ease, ease)'; setTimeout(function(){ inner.style.transition=''; }, 320); } apply(); }
+  function zoomAt(f, x, y){ var ns=Math.max(1, Math.min(8, s*f)); f=ns/s; tx=x-(x-tx)*f; ty=y-(y-ty)*f; s=ns; clamp(); apply(); fade(); }
+  function dbl(x, y){ inner.style.transition='transform .28s var(--k5-ease, ease)'; setTimeout(function(){ inner.style.transition=''; }, 300); if(s>1.4) fit(false); else zoomAt(2.5/s, x, y); }
+  function fade(){ hint.style.opacity='0'; }
+  function pt(e){ var r=stage.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; }
+  function down(e){ try{ stage.setPointerCapture(e.pointerId); }catch(_){} ptr.set(e.pointerId, pt(e)); moved=false;
+    if(ptr.size===2){ var a=[...ptr.values()]; pinch={d:Math.hypot(a[0].x-a[1].x, a[0].y-a[1].y), s:s, tx:tx, ty:ty, mx:(a[0].x+a[1].x)/2, my:(a[0].y+a[1].y)/2}; }
+    else { last=pt(e); stage.classList.add('drag'); } }
+  function move(e){ if(!ptr.has(e.pointerId)) return; ptr.set(e.pointerId, pt(e));
+    if(ptr.size>=2 && pinch){ var a=[...ptr.values()], d=Math.hypot(a[0].x-a[1].x, a[0].y-a[1].y), mx=(a[0].x+a[1].x)/2, my=(a[0].y+a[1].y)/2;
+      var ns=Math.max(1, Math.min(8, pinch.s*d/pinch.d)), f=ns/pinch.s;
+      s=ns; tx=mx-(pinch.mx-pinch.tx)*f; ty=my-(pinch.my-pinch.ty)*f; clamp(); apply(); fade(); moved=true; return; }
+    if(ptr.size===1 && last){ var p=pt(e); if(Math.abs(p.x-last.x)+Math.abs(p.y-last.y)>2) moved=true; tx+=p.x-last.x; ty+=p.y-last.y; last=p; clamp(); apply(); if(moved) fade(); } }
+  function up(e){ var p=ptr.get(e.pointerId); ptr.delete(e.pointerId); if(ptr.size<2) pinch=null;
+    if(ptr.size===1){ last=[...ptr.values()][0]; } else { last=null; stage.classList.remove('drag'); }
+    if(e.pointerType!=='mouse' && e.type==='pointerup' && !moved && p){ var now=Date.now(); if(now-lastTap<300){ dbl(p.x, p.y); lastTap=0; } else lastTap=now; } }
+  function open(){
+    var src=D.querySelector('#fig svg'); if(!src) return; if(!zv) build();
+    var c=src.cloneNode(true); c.removeAttribute('id'); [].forEach.call(c.querySelectorAll('[id]'), function(n){ n.removeAttribute('id'); });
+    c.removeAttribute('width'); c.removeAttribute('height'); c.setAttribute('preserveAspectRatio','xMidYMid meet');
+    inner.innerHTML=''; inner.appendChild(c);
+    var ft=D.getElementById('fig-title'); title.textContent=ft ? ft.textContent.trim() : '';
+    zv.querySelector('.zv-r').textContent=T('zvReset'); zv.querySelector('.zv-x').setAttribute('aria-label', T('zvClose')); hint.textContent=T(matchMedia('(pointer:coarse)').matches ? 'zvHintT' : 'zvHintM'); hint.style.opacity='1';
+    zv.classList.add('open'); D.body.classList.add('zv-lock');
+    requestAnimationFrame(function(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height; inner.style.width=W+'px'; inner.style.height=H+'px'; fit(false); zv.querySelector('.zv-x').focus({preventScroll:true}); });
+  }
+  function close(){ if(!zv) return; zv.classList.remove('open'); D.body.classList.remove('zv-lock'); ptr.clear(); pinch=null; }
+  window.zoomView={open:open, close:close, state:function(){ return {s:s, tx:tx, ty:ty, W:W, H:H}; }, zoomAt:function(f,x,y){ zoomAt(f,x,y); }};
+  function deco(){ var f=D.getElementById('fig'), card=f && f.closest('.card'); if(!card || card.querySelector('.zv-open')) return;
+    if(getComputedStyle(card).position==='static') card.style.position='relative';
+    var b=D.createElement('button'); b.type='button'; b.className='zv-open'; b.setAttribute('aria-label', T('zvOpen')); b.title=T('zvOpen');
+    b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.5" x2="10.5" y2="13.5"/><line x1="7.5" y1="10.5" x2="13.5" y2="10.5"/></svg>';
+    b.onclick=open; card.appendChild(b);
+    f.addEventListener('click', function(e){ if(e.target.closest('svg')) open(); }); }
+  if(D.readyState==='complete') deco(); else addEventListener('load', deco);
 })();
 </script>
 </body>

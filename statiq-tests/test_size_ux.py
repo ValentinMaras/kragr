@@ -50,8 +50,8 @@ async def main():
         check('Bauteil offen, Baustoffe zu mit Kurzfassung', d.get('seg-typ',(True,))[0]==False and d.get('in-beton',(False,''))[0] and 'C30/37' in d['in-beton'][1], d.get('in-beton'))
         await pg.click('.fold[data-fold="in-beton"] > .card-title'); check('Klick auf den Titel klappt auf', not await pg.evaluate("document.querySelector('.fold[data-fold=\"in-beton\"]').classList.contains('closed')"))
         await pg.reload(); await pg.wait_for_timeout(300)
-        check('Auf-/Zugeklappt bleibt nach Neuladen erhalten', not await pg.evaluate("document.querySelector('.fold[data-fold=\"in-beton\"]').classList.contains('closed')"))
-        await pg.click('.fold[data-fold="in-beton"] > .card-title'); await pg.select_option('#in-beton','C35/45') if False else None
+        # seit size v0.7.18 einheitlich: nach dem Laden ist nur die erste Eingabekarte offen (vorher gespeicherter Zustand je Karte)
+        check('nach Neuladen: erste Karte offen, Baustoffe wieder zu', await pg.evaluate("document.querySelector('.fold[data-fold=\"in-beton\"]').classList.contains('closed') && !document.querySelector('.col-in .fold').classList.contains('closed')"))
         await pg.evaluate("$('in-beton').value='C35/45'; run()")
         check('Kurzfassung folgt den Eingaben', 'C35/45' in await pg.inner_text('.fold[data-fold="in-beton"] .fold-sum'))
         # Nachweisdetails

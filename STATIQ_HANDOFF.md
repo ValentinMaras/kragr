@@ -568,6 +568,13 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Bemessung: Ansichtsfenster für die Skizze — size v0.7.19
+
+- Valentin: „draufdrücken, kleines Fenster, mit zwei Fingern zoomen, mit einem Finger verschieben“. `<script data-zoomview>`: Lupe oben rechts an der Abbildungskarte (`.zv-open`) und Antippen der Skizze öffnen `#zv` (Kopie des SVG aus `#fig`, Titel aus `#fig-title`). Pointer-Events: zwei Finger zoomen um ihre Mitte (100 … 800 %), ein Finger/Maus verschiebt (Inhalt bleibt mindestens 40 px im Fenster, bei 100 % zentriert), Doppeltippen/Doppelklick 250 % bzw. zurück, Mausrad zoomt um den Zeiger, Tasten + − 0; „Zurücksetzen“, ✕, Esc, Tippen außerhalb schließt. `window.zoomView` (open, close, state, zoomAt) für Tests.
+- Übersetzungsschlüssel zvOpen, zvReset, zvClose, zvHintT (Touch), zvHintM (Maus). Der Übersetzer heißt in size `tx` — im Skript als `__zvTx` gesichert, weil dort `tx` die Verschiebung ist.
+- Dazu v0.7.18-Nachzug: die Kurzfassung zugeklappter Karten lässt die Bezeichnung (`*-name`) weg; test_size_ux, test_size_listen an „nur die erste Karte offen“ angepasst.
+- Test: `test_zoomview.py` (19).
+
 ## Bemessung: Querschnitt oben am Handy, Eingabekarten einheitlich — size v0.7.18 (v0.7.17 verworfen)
 
 - v0.7.17 (mitlaufende, schrumpfende Abbildung `#fd`) hat Valentin wieder verworfen: „das mit dem kleiner werden weglassen, die Stelle oben aber gut“. Jetzt `<script data-figtop>`: am Handy (Eingaben und Ergebnisse untereinander, unter 1000 px) wandert die Abbildungskarte (`#fig` mit `#reinf-line`) in `#fig-top` direkt unter die Auswahl; am Rechner zurück an `#fig-home` in der rechten Spalte. Kein Doppel, die IDs bleiben dieselben.

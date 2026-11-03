@@ -105,7 +105,8 @@ async def main():
         r=await pg.evaluate(S)
         check('size: andere Karte öffnen schließt die erste', [x[0] for x in r if x[1]]==['in-beton'], r)
         await pg.reload(); await pg.wait_for_timeout(500)
-        check('size: Zustand nach Neuladen gemerkt', [x[0] for x in await pg.evaluate(S) if x[1]]==['in-beton'])
+        r=await pg.evaluate(S)   # seit size v0.7.18 einheitlich: nach dem Laden ist nur die erste Eingabekarte offen
+        check('size: nach Neuladen wieder nur die erste Karte offen', len([x for x in r if x[1]])==1 and r[0][1], r)
         r=await pg.evaluate("[document.getElementById('scope-card').classList.contains('k5-closed'), document.querySelectorAll('#details > .card.dfold .k5-tri').length>0]")
         check('size: „Umfang und Grundlagen“ zugeklappt, Rechenschritte mit gleichem Pfeil', r==[True,True], r)
         # projekt = „Rechenblätter“ (seit calc v0.11.11): flache Liste ohne Akkordeon, Karten im k5-Stil

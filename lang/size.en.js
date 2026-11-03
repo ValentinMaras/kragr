@@ -738,7 +738,6 @@ window.MULY_LANG = {
 "repVerLbl":"Version",
 "fdGo":"to the large figure ↓",
 "zvOpen":"Enlarge sketch",
-"zvReset":"Reset",
 "zvClose":"Close",
 "zvHintT":"Two fingers to zoom, one finger to move",
 "zvHintM":"Mouse wheel to zoom, drag to move, double-click zooms",

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.19 -->
+<!-- kragr·size v0.7.20 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1366,6 +1366,17 @@ window.kragrK5Page = function(K){
 .rb-size svg { max-width:min(100%, 460px) !important; height:auto; }
 @media (max-width:560px) { .rb-size .rb-sf { grid-template-columns:auto 1fr; } .rb-size .rb-sf > div:nth-child(2) { border-right:none; } .rb-size .rb-sf > div:nth-child(-n+2) { border-bottom:1px solid #111; } .rb-size .rb-title { font-size:19px; } }
 @media print { .rb-size { max-width:none; } .rb-size section { break-inside:auto; } .rb-size h2 { break-after:avoid; } .rb-size .figure, .rb-size table { break-inside:avoid; } }
+</style>
+<style data-quer>
+/* Handy quer (size v0.7.20): Ansicht wie am Rechner — Eingaben links, Ergebnisse rechts, jede Spalte scrollt für sich */
+@media (orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px) {
+  .app-header.k-hdr { min-height:50px !important; padding-top:4px !important; padding-bottom:4px !important; }
+  .k-hdr .k5-burger { height:38px; }
+  .main { max-width:none; padding:4px 10px 0 !important; gap:10px; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) !important; align-items:start; }
+  .main > .col-in, .main > .col-out { position:sticky; top:var(--k-hdr-h, 58px); height:calc(100dvh - var(--k-hdr-h, 58px) - 6px); overflow-y:auto; overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch; scrollbar-width:thin; padding:2px 2px 24px; box-sizing:border-box; }
+  #mob-status { display:none !important; }
+}
 </style>
 </head>
 <body>
@@ -3607,7 +3618,6 @@ const I18N = { "de": {
 "refBook":"Nachschlagewerk „Wissen“",
 "calcSteps":"Ergebnisse",
 "zvOpen":"Skizze vergrößern",
-"zvReset":"Zurücksetzen",
 "zvClose":"Schließen",
 "zvHintT":"Zwei Finger zum Zoomen, ein Finger zum Verschieben",
 "zvHintM":"Mausrad zum Zoomen, ziehen zum Verschieben, Doppelklick zoomt",
@@ -4048,7 +4058,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.19';
+const SIZE_VERSION = '0.7.20';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11759,12 +11769,12 @@ var __zvTx = (typeof tx==='function') ? tx : null;   // Übersetzer der Seite (i
   var T=function(k){ return __zvTx ? __zvTx(k) : k; };
   function build(){
     zv=D.createElement('div'); zv.id='zv'; zv.setAttribute('role','dialog'); zv.setAttribute('aria-modal','true');
-    zv.innerHTML='<div class="zv-win"><div class="zv-bar"><span class="zv-t"></span><button type="button" class="zv-b zv-r"></button><button type="button" class="zv-b zv-x" aria-label="">✕</button></div>'
+    zv.innerHTML='<div class="zv-win"><div class="zv-bar"><span class="zv-t"></span><button type="button" class="zv-b zv-x" aria-label="">✕</button></div>'
       +'<div class="zv-stage"><div class="zv-in"></div><span class="zv-hint"></span><span class="zv-z"></span></div></div>';
     D.body.appendChild(zv);
     stage=zv.querySelector('.zv-stage'); inner=zv.querySelector('.zv-in'); title=zv.querySelector('.zv-t'); hint=zv.querySelector('.zv-hint'); zl=zv.querySelector('.zv-z');
     zv.addEventListener('click', function(e){ if(e.target===zv) close(); });
-    zv.querySelector('.zv-x').onclick=close; zv.querySelector('.zv-r').onclick=function(){ fit(true); };
+    zv.querySelector('.zv-x').onclick=close;
     D.addEventListener('keydown', function(e){ if(!zv.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='+'||e.key==='=') zoomAt(1.25, W/2, H/2); if(e.key==='-') zoomAt(0.8, W/2, H/2); if(e.key==='0') fit(true); });
     stage.addEventListener('pointerdown', down); stage.addEventListener('pointermove', move); stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up); stage.addEventListener('pointerleave', function(e){ if(e.pointerType==='mouse') up(e); });
     stage.addEventListener('wheel', function(e){ e.preventDefault(); var r=stage.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY*0.0015), e.clientX-r.left, e.clientY-r.top); }, {passive:false});
@@ -11795,7 +11805,7 @@ var __zvTx = (typeof tx==='function') ? tx : null;   // Übersetzer der Seite (i
     c.removeAttribute('width'); c.removeAttribute('height'); c.setAttribute('preserveAspectRatio','xMidYMid meet');
     inner.innerHTML=''; inner.appendChild(c);
     var ft=D.getElementById('fig-title'); title.textContent=ft ? ft.textContent.trim() : '';
-    zv.querySelector('.zv-r').textContent=T('zvReset'); zv.querySelector('.zv-x').setAttribute('aria-label', T('zvClose')); hint.textContent=T(matchMedia('(pointer:coarse)').matches ? 'zvHintT' : 'zvHintM'); hint.style.opacity='1';
+    zv.querySelector('.zv-x').setAttribute('aria-label', T('zvClose')); hint.textContent=T(matchMedia('(pointer:coarse)').matches ? 'zvHintT' : 'zvHintM'); hint.style.opacity='1';
     zv.classList.add('open'); D.body.classList.add('zv-lock');
     requestAnimationFrame(function(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height; inner.style.width=W+'px'; inner.style.height=H+'px'; fit(false); zv.querySelector('.zv-x').focus({preventScroll:true}); });
   }
@@ -11809,6 +11819,11 @@ var __zvTx = (typeof tx==='function') ? tx : null;   // Übersetzer der Seite (i
     f.addEventListener('click', function(e){ if(e.target.closest('svg')) open(); }); }
   if(D.readyState==='complete') deco(); else addEventListener('load', deco);
 })();
+</script>
+<script data-quer>
+// Höhe der Kopfzeile für die Spalten im Querformat (Spalten beginnen direkt darunter)
+(function(){ var set=function(){ var h=document.querySelector('.app-header.k-hdr'); if(h) document.documentElement.style.setProperty('--k-hdr-h', Math.round(h.getBoundingClientRect().height)+'px'); };
+  addEventListener('resize', set); addEventListener('orientationchange', set); if(document.readyState==='complete') set(); else addEventListener('load', set); })();
 </script>
 </body>
 </html>

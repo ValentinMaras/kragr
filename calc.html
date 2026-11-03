@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.17 -->
+<!-- kragr v0.11.18 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1649,6 +1649,20 @@ window.kragrK5Page = function(K){
   window.kragrBlatt={ t:t, relabel:relabel };
 })();
 </script>
+<style data-quer>
+/* Handy quer (calc v0.11.18): Ansicht wie am Rechner — Eingaben links, Ergebnisse rechts, jede Spalte scrollt für sich */
+@media (orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px) {
+  .app-header.k-hdr { min-height:50px !important; padding-top:4px !important; padding-bottom:4px !important; }
+  .k-hdr .k5-burger { height:38px; }
+  .main:not(#tab-saved) { max-width:none; padding:4px 10px 0; }
+  .nav.calc-top.pick-out { display:none; }
+  .cols { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:10px; align-items:start; }
+  .cols > .col-in, .cols > .col-out { position:sticky; top:var(--k-hdr-h, 58px); height:calc(100dvh - var(--k-hdr-h, 58px) - 6px); overflow-y:auto; overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch; scrollbar-width:thin; padding:2px 2px 24px; box-sizing:border-box; }
+  #k-bar.on { display:none !important; } body.k-bar-on .main:not(#tab-saved) { padding-bottom:0; }
+  #k-undo { bottom:12px; }
+}
+</style>
 </head>
 <body>
 
@@ -1798,7 +1812,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.17</span>
+    <span class="version">v0.11.18</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2334,7 +2348,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.17';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.18';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7379,7 +7393,7 @@ function buildPick(){
 // Auswahl wie in size (v0.8.33): am Rechner oben in der Eingabespalte, sonst über der Seite
 function placePick(){
   const p=document.getElementById('pick'), nav=document.querySelector('.nav.calc-top'); if(!p || !nav || typeof matchMedia!=='function') return;
-  const cin = matchMedia('(min-width:1000px)').matches ? document.querySelector('#tab-'+curTab()+' .col-in') : null;
+  const cin = matchMedia('(min-width:1000px), (orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px)').matches ? document.querySelector('#tab-'+curTab()+' .col-in') : null;   // auch Handy quer (v0.11.18)
   if(cin){ if(cin.firstElementChild!==p) cin.insertBefore(p, cin.firstChild); p.classList.add('in-col'); }
   else if(p.parentElement!==nav){ nav.appendChild(p); p.classList.remove('in-col'); }
   nav.classList.toggle('pick-out', !!cin);
@@ -7515,7 +7529,7 @@ if(UX_ON) (()=>{ const orig=window.updatePresetButtons; if(orig) window.updatePr
   const it=e.target.closest('.load-item'); if(it){ const s=it.querySelector('.load-sum'); if(s) s.textContent=loadSummary(it); }
   liveCalc(); }));
 
-if(UX_ON){ buildCols(); compactLoads(); if(typeof matchMedia==='function') matchMedia('(min-width:1000px)').addEventListener('change', placePick);
+if(UX_ON){ buildCols(); compactLoads(); if(typeof matchMedia==='function') matchMedia('(min-width:1000px), (orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px)').addEventListener('change', placePick);
   ['tab-beam','tab-cantilever','tab-cont','tab-frame'].forEach(id=>cmpObs.observe(document.getElementById(id), {childList:true, subtree:true}));
   updatePick(); liveCalc(true); }
 // Direkt in einen Bereich springen, z. B. calc.html#saved (Link von der Startseite)
@@ -8727,6 +8741,11 @@ cutInit();
 ['beam','cant','cont'].forEach(s=>{ try{ blRun(s); }catch(e){} });
 window.kragrMotion = { cut:CUT, cutDraw, cutToggle, bl:BLS, shown, model:MODEL };
 })();
+</script>
+<script data-quer>
+// Höhe der Kopfzeile für die Spalten im Querformat (Spalten beginnen direkt darunter)
+(function(){ var set=function(){ var h=document.querySelector('.app-header.k-hdr'); if(h) document.documentElement.style.setProperty('--k-hdr-h', Math.round(h.getBoundingClientRect().height)+'px'); };
+  addEventListener('resize', set); addEventListener('orientationchange', set); if(document.readyState==='complete') set(); else addEventListener('load', set); })();
 </script>
 </body>
 </html>

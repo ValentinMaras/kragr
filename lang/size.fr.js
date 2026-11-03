@@ -725,7 +725,6 @@ window.MULY_LANG = {
 "repVerLbl":"Version",
 "fdGo":"vers la grande figure ↓",
 "zvOpen":"Agrandir le croquis",
-"zvReset":"Réinitialiser",
 "zvClose":"Fermer",
 "zvHintT":"Deux doigts pour zoomer, un doigt pour déplacer",
 "zvHintM":"Molette pour zoomer, glisser pour déplacer, double-clic pour zoomer",

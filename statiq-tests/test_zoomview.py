@@ -46,8 +46,10 @@ async def main():
         await pg.evaluate(EV, ['pointerdown',1,150,200]); await pg.evaluate(EV, ['pointerup',1,150,200]); await pg.wait_for_timeout(350)
         d=await pg.evaluate("zoomView.state()")
         check('Doppeltippen zoomt auf 250 %', abs(d['s']-2.5)<1e-6, d)
-        await pg.click('#zv .zv-r'); await pg.wait_for_timeout(350)
-        check('Zurücksetzen: 100 %', (await pg.evaluate("zoomView.state()"))['s']==1)
+        check('kein Knopf „Zurücksetzen“ (seit v0.7.20, Doppeltippen setzt zurück)', await pg.evaluate("!document.querySelector('#zv .zv-r') && !/Zurücksetzen/.test(document.querySelector('#zv .zv-bar').textContent)"))
+        await pg.evaluate(EV, ['pointerdown',1,150,200]); await pg.evaluate(EV, ['pointerup',1,150,200]); await pg.wait_for_timeout(80)
+        await pg.evaluate(EV, ['pointerdown',1,150,200]); await pg.evaluate(EV, ['pointerup',1,150,200]); await pg.wait_for_timeout(350)
+        check('Doppeltippen bei 250 %: zurück auf 100 %', (await pg.evaluate("zoomView.state()"))['s']==1)
         await pg.click('#zv .zv-x'); await pg.wait_for_timeout(200)
         check('✕ schließt, Seite wieder scrollbar', await pg.evaluate("!document.getElementById('zv').classList.contains('open') && !document.body.classList.contains('zv-lock')"))
         # Rechner: Mausrad und Esc, Stahl
@@ -64,8 +66,8 @@ async def main():
         for L,w in (('en','Two fingers'),('fr','Deux doigts'),('es','Dos dedos')):
             await pg.evaluate(f"localStorage.setItem('statiq-lang','{L}')"); await pg.reload(); await pg.wait_for_timeout(800)
             await pg.tap('.zv-open'); await pg.wait_for_timeout(300)
-            h=await pg.evaluate("[document.querySelector('#zv .zv-hint').textContent, document.querySelector('#zv .zv-r').textContent]")
-            check(f'{L}: Hinweis und Knopf übersetzt', h[0].startswith(w) and h[1]!='Zurücksetzen', h)
+            h=await pg.evaluate("[document.querySelector('#zv .zv-hint').textContent, document.querySelector('#zv .zv-x').getAttribute('aria-label')]")
+            check(f'{L}: Hinweis und Schließen übersetzt', h[0].startswith(w) and h[1]!='Schließen', h)
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()
 asyncio.run(main())

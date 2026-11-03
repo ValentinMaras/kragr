@@ -568,6 +568,12 @@ Skizzen: Mathematik (9 Flächen, Dreiecke, Einheitskreis, Kraftzerlegung, Ableit
 - Vierte Kachel „Gespeichert“ (`#saved-card`, Link `calc.html#saved`) ersetzt die Textzeile unter calc; zeigt die Anzahl gespeicherter Einträge aus calc (`statiq_sdf_*`) und size (`statiq-size-positionen`) — `savedCount()`, Texte `saved`/`saved_n` in allen vier Sprachen
 - Zusätze „LIVE“ und „BETA“ entfernt (samt CSS)
 
+## Handy quer: Ansicht wie am Rechner — calc v0.11.18 · size v0.7.20
+
+- Media-Query `(orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px)` (`<style data-quer>` in calc und size): zwei Spalten wie am Rechner (1 : 1,15), beide `position:sticky` direkt unter der Kopfzeile, Höhe `100dvh − Kopfzeile`, `overflow-y:auto`, `overscroll-behavior:contain` — jede Spalte scrollt für sich. Kopfzeile im Querformat flacher (50 px), `--k-hdr-h` misst ein kleines Skript. Ergebnisleiste unten (`#k-bar`, `#mob-status`) entfällt. In calc steht die Systemauswahl dann in der linken Spalte (`placePick` nutzt dieselbe Query).
+- Ansichtsfenster: Knopf „Zurücksetzen“ entfernt (Doppeltippen setzt zurück), Schlüssel zvReset gelöscht.
+- Test: `test_quer.py` (31): 844×390, 932×430, 667×375; hochkant unverändert.
+
 ## Bemessung: Ansichtsfenster für die Skizze — size v0.7.19
 
 - Valentin: „draufdrücken, kleines Fenster, mit zwei Fingern zoomen, mit einem Finger verschieben“. `<script data-zoomview>`: Lupe oben rechts an der Abbildungskarte (`.zv-open`) und Antippen der Skizze öffnen `#zv` (Kopie des SVG aus `#fig`, Titel aus `#fig-title`). Pointer-Events: zwei Finger zoomen um ihre Mitte (100 … 800 %), ein Finger/Maus verschiebt (Inhalt bleibt mindestens 40 px im Fenster, bei 100 % zentriert), Doppeltippen/Doppelklick 250 % bzw. zurück, Mausrad zoomt um den Zeiger, Tasten + − 0; „Zurücksetzen“, ✕, Esc, Tippen außerhalb schließt. `window.zoomView` (open, close, state, zoomAt) für Tests.

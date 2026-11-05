@@ -362,6 +362,12 @@
   html.k5-still *, html.k5-still *::before, html.k5-still *::after { animation:none !important; transition:none !important; }
   @media print { .k5-burger, .k5-menu, .k5-scrim { display:none !important; } html, body { background:#fff !important; }
     .card, .pick-btn, .k5-card { box-shadow:none !important; } .k5-rv { animation:none !important; } }
+  /* Bemessungsgrundlage: Marke für Werte aus dem nationalen Anhang, Hinweis oben in den Ergebnissen, Länder „in Vorbereitung“ */
+  .na-t { display:inline-block; font:700 9.5px/1 Figtree, system-ui, sans-serif; letter-spacing:.04em; color:#5468ad; background:#eef0f9; border-radius:5px; padding:3px 5px; margin-left:6px; vertical-align:2px; white-space:nowrap; text-indent:0; }
+  .na-hint { font-size:12px; line-height:1.45; color:#5c5e66; background:var(--k5-sub,#f5f6f8); border-radius:12px; padding:8px 12px; margin:0 0 10px; }
+  .na-hint .na-t { margin:0 2px; }
+  .k5-segm button.k5-soon { opacity:.38; cursor:not-allowed; }
+  @media print { .na-t, .na-hint { display:none !important; } }
 </style>
 <script data-k5-gsap src="k5/gsap.min.js" defer></script>
 <script data-k5>
@@ -475,13 +481,13 @@ window.kragrK5Page = function(K){
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
     de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
+        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
     en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
+        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
     fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
+        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
     es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
+        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
     dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
@@ -489,6 +495,34 @@ window.kragrK5Page = function(K){
   function lang(){ var l=null; try{ l=localStorage.getItem('statiq-lang'); }catch(e){} if(!T[l]){ var s=langSel(); l=s&&s.value; } return T[l]?l:'de'; }
   function t(k){ return (T[lang()]||T.de)[k]; }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
+  // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de'];
+  function naNow(){ var v='de'; try{ v=localStorage.getItem('kragr-na')||'de'; }catch(e){} return NA_ON.indexOf(v)>=0 ? v : 'de'; }
+  function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v); markNA(true); }
+  function naBadge(){ return t('naAbbr')+' '+naNow().toUpperCase(); }
+  window.kragrNA=function(){ return naNow(); };
+  // Werte, die der nationale Anhang festlegt: Teilsicherheits- und Kombinationsbeiwerte, α_cc/α_ct, k_mod/k_def — markiert, wo ein Zahlenwert genannt wird
+  var NA_RX=/(?<![A-Za-zÄÖÜäöüß])(?:γ[cCsSGQMRPHtφ][\w,′]*|ψ\s?[012][\w,]*|α(?:cc|ct)|k(?:mod|def))/g;
+  var NA_ROOTS='#details .steps, #main .steps, .col-out .steps, .ablauf .steps', NA_SKIP='#report, #report-view, .report, .rep, #rep, [data-no-na]';
+  function naTitle(sy){ return t('naTip').replace('{0}', t('c'+naNow().toUpperCase()))+(sy?': '+sy:''); }
+  // Je Rechenweg wird jede Größe einmal markiert, und zwar in der ersten Zeile, in der sie vorkommt (Zeilen und Zellen getrennt betrachtet).
+  function markNA(force){
+    if(force) Array.prototype.forEach.call(D.querySelectorAll('.na-t'), function(b){ b.textContent=naBadge(); if(b.dataset.sy!=null) b.title=naTitle(b.dataset.sy); });
+    Array.prototype.forEach.call(D.querySelectorAll(NA_ROOTS), function(R){ if(R.closest(NA_SKIP) || R.dataset.naDone===String(R.childElementCount)+'|'+R.textContent.length) return;
+      var seen={}; Array.prototype.forEach.call(R.querySelectorAll('.na-t[data-sy]'), function(b){ b.dataset.sy.split(', ').forEach(function(x){ seen[x]=1; }); });
+      var els=R.querySelectorAll('div, .st-h');
+      for(var i=0;i<els.length;i++){ var el=els[i]; if(el.querySelector('div') || el.querySelector('.na-t')) continue;
+        var tx=el.innerHTML.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' '), m=tx.match(NA_RX); if(!m) continue;
+        var nu=[]; m.forEach(function(x){ x=x.replace(/\s/g,''); if(!seen[x] && nu.indexOf(x)<0) nu.push(x); }); if(!nu.length) continue;
+        nu.forEach(function(x){ seen[x]=1; });
+        var b=D.createElement('span'); b.className='na-t'; b.dataset.sy=nu.join(', '); b.textContent=naBadge(); b.title=naTitle(b.dataset.sy); el.appendChild(b); }
+      R.dataset.naDone=String(R.childElementCount)+'|'+R.textContent.length; });
+    // Bemessung: einmal oben in den Ergebnissen erklären, was die Marke bedeutet
+    var det=D.getElementById('details'); if(det && det.querySelector('.na-t') && !det.querySelector('.na-hint')){ var c=det.querySelector('.card'); if(c){ var h=D.createElement('div'); h.className='na-hint';
+      h.innerHTML=esc(t('naHint')).replace('{0}','<span class="na-t">'+esc(naBadge())+'</span>'); c.parentNode.insertBefore(h, c); } }
+  }
+  var naRaf=0; function naQueue(){ if(naRaf) return; naRaf=requestAnimationFrame(function(){ naRaf=0; markNA(false); }); }
   var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
 
   // ── Weich umklappen (calc v0.11.12, GSAP) ───────────────────────────────────────────────
@@ -653,12 +687,16 @@ window.kragrK5Page = function(K){
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
     if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
+    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('na'))+'<span>'+esc(t('naS').replace('{0}', t('c'+naNow().toUpperCase())))+'</span></span>'+seg('k5-na', NA_ALL.map(function(c){ return [c, c.toUpperCase()]; }), naNow())+'</div>';
     if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
     h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
     menu.querySelector('.k5-x').onclick=closeMenu;
     var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
+    Array.prototype.forEach.call(menu.querySelectorAll('#k5-na button'), function(b){ var on=NA_ON.indexOf(b.dataset.v)>=0;
+      if(!on){ b.disabled=true; b.classList.add('k5-soon'); b.title=t('c'+b.dataset.v.toUpperCase())+' – '+t('soon'); b.setAttribute('aria-label', b.title); }
+      else b.onclick=function(){ naSet(b.dataset.v); pressSeg(b); var s=b.closest('.k5-row').querySelector('.k5-rt > span'); if(s) s.textContent=t('naS').replace('{0}', t('c'+naNow().toUpperCase())); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
   }
@@ -729,6 +767,8 @@ window.kragrK5Page = function(K){
     reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
     window.addEventListener('resize', function(){ if(menu && menu.classList.contains('open')) placePills(); });
     new MutationObserver(function(){ labelBurger(); }).observe(H,{attributes:true, attributeFilter:['lang']});
+    H.setAttribute('data-na', naNow());
+    if(PAGE==='size' || PAGE==='ref' || PAGE==='calc'){ new MutationObserver(naQueue).observe(D.body,{childList:true, subtree:true}); markNA(false); }
   }
   if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();

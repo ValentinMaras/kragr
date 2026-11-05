@@ -194,3 +194,9 @@
   html.k5-still *, html.k5-still *::before, html.k5-still *::after { animation:none !important; transition:none !important; }
   @media print { .k5-burger, .k5-menu, .k5-scrim { display:none !important; } html, body { background:#fff !important; }
     .card, .pick-btn, .k5-card { box-shadow:none !important; } .k5-rv { animation:none !important; } }
+  /* Bemessungsgrundlage: Marke für Werte aus dem nationalen Anhang, Hinweis oben in den Ergebnissen, Länder „in Vorbereitung“ */
+  .na-t { display:inline-block; font:700 9.5px/1 Figtree, system-ui, sans-serif; letter-spacing:.04em; color:#5468ad; background:#eef0f9; border-radius:5px; padding:3px 5px; margin-left:6px; vertical-align:2px; white-space:nowrap; text-indent:0; }
+  .na-hint { font-size:12px; line-height:1.45; color:#5c5e66; background:var(--k5-sub,#f5f6f8); border-radius:12px; padding:8px 12px; margin:0 0 10px; }
+  .na-hint .na-t { margin:0 2px; }
+  .k5-segm button.k5-soon { opacity:.38; cursor:not-allowed; }
+  @media print { .na-t, .na-hint { display:none !important; } }

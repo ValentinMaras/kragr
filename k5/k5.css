@@ -198,5 +198,6 @@
   .na-t { display:inline-block; font:700 9.5px/1 Figtree, system-ui, sans-serif; letter-spacing:.04em; color:#5468ad; background:#eef0f9; border-radius:5px; padding:3px 5px; margin-left:6px; vertical-align:2px; white-space:nowrap; text-indent:0; }
   .na-hint { font-size:12px; line-height:1.45; color:#5c5e66; background:var(--k5-sub,#f5f6f8); border-radius:12px; padding:8px 12px; margin:0 0 10px; }
   .na-hint .na-t { margin:0 2px; }
+  .na-miss { display:block; font:400 13px/1.5 Figtree, system-ui, sans-serif; color:#5c5e66; text-indent:0; }
   .k5-segm button.k5-soon { opacity:.38; cursor:not-allowed; }
   @media print { .na-t, .na-hint { display:none !important; } }

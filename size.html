@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.22 -->
+<!-- kragr·size v0.7.23 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -878,6 +878,7 @@ window.mulyProj = {
   .na-t { display:inline-block; font:700 9.5px/1 Figtree, system-ui, sans-serif; letter-spacing:.04em; color:#5468ad; background:#eef0f9; border-radius:5px; padding:3px 5px; margin-left:6px; vertical-align:2px; white-space:nowrap; text-indent:0; }
   .na-hint { font-size:12px; line-height:1.45; color:#5c5e66; background:var(--k5-sub,#f5f6f8); border-radius:12px; padding:8px 12px; margin:0 0 10px; }
   .na-hint .na-t { margin:0 2px; }
+  .na-miss { display:block; font:400 13px/1.5 Figtree, system-ui, sans-serif; color:#5c5e66; text-indent:0; }
   .k5-segm button.k5-soon { opacity:.38; cursor:not-allowed; }
   @media print { .na-t, .na-hint { display:none !important; } }
 </style>
@@ -993,13 +994,13 @@ window.kragrK5Page = function(K){
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
     de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
+        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
     en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
+        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
     fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
+        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
     es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
+        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
     dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
@@ -1009,10 +1010,22 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
   // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
-  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de'];
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at'];
+  // Ländertabelle (Schritt 2, November 2026): nur Werte mit Quelle. Fehlt ein Wert oder ein Nachweis in NA_COVER, rechnet die App ihn für dieses Land nicht.
+  // AT: ÖNORM B 1990-1 (γ, ψ wie DE) und B 1995-1-1 nach IHBV-Tabellenwerk (TU Graz) 2017; ÖNORM B 1992-1-1 nach SCIA „Theoretical background NA EN 1992“ (EN-Empfehlung für γ_c, γ_s, α_cc, Δc_dev = 5 mm, c_min,dur-Tabelle).
+  var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3 },
+             at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en' } };
+  // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
+  var NA_COVER={ at:{ 'beton/balken':['deckung','biegung'], 'beton/platte':['deckung','biegung'], 'beton/unterzug':['deckung','biegung'], 'holz/bauteil':['bem','biegung'] } };
+  window.kragrNAV=function(k){ var v=(NA_V[naNow()]||{})[k]; return v===undefined ? null : v; };
+  window.kragrNACovers=function(scope, id){ var n=naNow(); if(n==='de') return true; var c=(NA_COVER[n]||{})[scope]; return !!(c && c.indexOf(id)>=0); };
+  window.kragrNAName=function(){ return t('c'+naNow().toUpperCase()); };
+  window.kragrNAScope=function(){ var n=naNow(), c=NA_COVER[n]||{}; return Object.keys(c); };
   function naNow(){ var v='de'; try{ v=localStorage.getItem('kragr-na')||'de'; }catch(e){} return NA_ON.indexOf(v)>=0 ? v : 'de'; }
-  function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v); markNA(true); }
-  function naBadge(){ return t('naAbbr')+' '+naNow().toUpperCase(); }
+  function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v);
+    Array.prototype.forEach.call(D.querySelectorAll('.na-hint'), function(h){ h.remove(); }); Array.prototype.forEach.call(D.querySelectorAll('[data-na-done]'), function(r){ delete r.dataset.naDone; });
+    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); }catch(e){} markNA(true); }
+  function naBadge(){ return t('naAbbr')+' '+(PAGE==='ref' ? 'DE' : naNow().toUpperCase()); }
   window.kragrNA=function(){ return naNow(); };
   // Werte, die der nationale Anhang festlegt: Teilsicherheits- und Kombinationsbeiwerte, α_cc/α_ct, k_mod/k_def — markiert, wo ein Zahlenwert genannt wird
   var NA_RX=/(?<![A-Za-zÄÖÜäöüß])(?:γ[cCsSGQMRPHtφ][\w,′]*|ψ\s?[012][\w,]*|α(?:cc|ct)|k(?:mod|def))/g;
@@ -1030,9 +1043,13 @@ window.kragrK5Page = function(K){
         nu.forEach(function(x){ seen[x]=1; });
         var b=D.createElement('span'); b.className='na-t'; b.dataset.sy=nu.join(', '); b.textContent=naBadge(); b.title=naTitle(b.dataset.sy); el.appendChild(b); }
       R.dataset.naDone=String(R.childElementCount)+'|'+R.textContent.length; });
+    // Wissen: Inhalte stehen nach deutschem NA; bei anderem Land einmal oben auf der Seite darauf hinweisen
+    if(PAGE==='ref'){ var pg=D.querySelector('#main .lb-page'), old=D.querySelector('#main .na-ref');
+      if(naNow()!=='de' && pg && pg.querySelector('.na-t') && !old){ var r=D.createElement('div'); r.className='na-hint na-ref'; r.textContent=t('naRef').replace('{0}', t('c'+naNow().toUpperCase())); var ph=pg.querySelector('.page-head'); pg.insertBefore(r, ph ? ph.nextSibling : pg.firstChild); }
+      if(naNow()==='de' && old) old.remove(); }
     // Bemessung: einmal oben in den Ergebnissen erklären, was die Marke bedeutet
-    var det=D.getElementById('details'); if(det && det.querySelector('.na-t') && !det.querySelector('.na-hint')){ var c=det.querySelector('.card'); if(c){ var h=D.createElement('div'); h.className='na-hint';
-      h.innerHTML=esc(t('naHint')).replace('{0}','<span class="na-t">'+esc(naBadge())+'</span>'); c.parentNode.insertBefore(h, c); } }
+    var det=D.getElementById('details'); if(det && (det.querySelector('.na-t') || naNow()!=='de' && det.querySelector('.card[id^="n-"]')) && !det.querySelector('.na-hint')){ var c=det.querySelector('.card'); if(c){ var h=D.createElement('div'); h.className='na-hint';
+      h.innerHTML=esc(t('naHint')).replace('{0}','<span class="na-t">'+esc(naBadge())+'</span>')+(naNow()!=='de' ? ' '+esc(t('naPart').replace('{0}', t('c'+naNow().toUpperCase()))) : ''); c.parentNode.insertBefore(h, c); } }
   }
   var naRaf=0; function naQueue(){ if(naRaf) return; naRaf=requestAnimationFrame(function(){ naRaf=0; markNA(false); }); }
   var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
@@ -4098,7 +4115,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.22';
+const SIZE_VERSION = '0.7.23';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4121,6 +4138,11 @@ const BETON = [
 ];
 const SB = { gc:1.5, gs:1.15, acc:0.85, fyk:500, Es:200000, eud:25 };
 SB.fyd = SB.fyk/SB.gs; SB.eyd = SB.fyd/SB.Es*1000;
+// Bemessungsgrundlage (v0.7.23): national festgelegte Werte aus der Ländertabelle in k5 (kragrNAV); Deutschland bleibt der Ausgangswert
+const naV = (k, d) => { const v = typeof window.kragrNAV==='function' ? window.kragrNAV(k) : null; return v==null ? d : v; };
+const naLand = () => typeof window.kragrNA==='function' ? window.kragrNA() : 'de';
+const naNum = v => deNum(v, Math.max(1, (String(v).split('.')[1]||'').length));
+function applyNA(){ SB.gc=naV('gc',1.5); SB.gs=naV('gs',1.15); SB.acc=naV('acc',0.85); SB.fyd=SB.fyk/SB.gs; SB.eyd=SB.fyd/SB.Es*1000; }
 const betonRow = name => BETON.find(r=>r[0]===name) || BETON[4];
 const fcdOf = fck => SB.acc*fck/SB.gc;
 
@@ -4139,6 +4161,9 @@ const EXPO = [
 ];
 function deckung(cls, ds){
   const e = EXPO.find(r=>r[0]===cls) || EXPO[2];
+  if(naLand()==='at'){ const T=naV('cdur',{}), base=T[e[0]];   // ÖNORM B 1992-1-1: c_min,dur je Klasse, Δc_dur,γ = 0, Δc_dev = 5 mm; ohne Wert (XS) nicht hinterlegt
+    if(base==null) return { cdur:NaN, cmin:NaN, dev:NaN, cnom:NaN, e, naMiss:true };
+    const cmin=Math.max(ds, base, 10), dev=naV('cdev',5); return { cdur:base, cmin, dev, cnom:cmin+dev, e, at:true }; }
   const cdur = e[2]+e[3], cmin = Math.max(ds, cdur, 10), dev = (cls==='XC1' || cdur<=ds) ? 10 : 15;
   return { cdur, cmin, dev, cnom: cmin+dev, e };
 }
@@ -4382,22 +4407,29 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
     } else
     st.push(`d = h − c<sub>v</sub>${platte?'':' − Ø<sub>w</sub>'} − Ø/2 = ${h} − ${G.cv}${platte?'':' − '+R.dsw} − ${deNum(R.ds/2,1)} = <b>${deNum(d,1)} mm</b>`);
     if(I.Ms>0) st.push(_L`oben (Stütze, Ø${R.dst}): d<sub>St</sub> = h − ${G.cvt}${platte?'':' − '+R.dsw} − ${deNum(R.dst/2,1)} = <b>${deNum(G.dt,1)} mm</b>`);
+    if(naLand()==='at'){
+      st.push('<span class="na-miss">'+tt('ÖNORM B 1992-1-1: c<sub>min,dur</sub> je Expositionsklasse, Δc<sub>dev</sub> = 5 mm. Die Abminderung um 5 mm bei höherer Betonklasse ist nicht angesetzt (sichere Seite).')+'</span>');
+      st.push('<span class="na-miss">'+tt('Mindestbetonfestigkeit nach ÖNORM B 4710-1 – hier nicht geprüft.')+'</span>');
+      C.push({ id:'deckung', title:tt('Betondeckung und Nutzhöhe'), eta:0, ok:true, info:true, steps: st, naBlock: !!G.cl.naMiss });
+    } else {
     st.push(H(tt('Dauerhaftigkeit: Mindestbetonfestigkeitsklasse für die Expositionsklasse')));
     st.push(_L`Mindestbetonfestigkeit für ${ex[0]}: ${minC} → gewählt ${B[0]} ${okC?'✓':'✗'}`);
     C.push({ id:'deckung', title:tt('Betondeckung und Nutzhöhe'), eta: okC ? betonRow(minC)[1]/fck : 1.01, ok: okC, steps: st,
-      note: okC ? '' : _L`Die Betonklasse ${B[0]} ist für ${ex[0]} zu niedrig (mindestens ${minC}).` });
+      note: okC ? '' : _L`Die Betonklasse ${B[0]} ist für ${ex[0]} zu niedrig (mindestens ${minC}).` }); }
   }
 
   // 1) Biegung im Feld
   let Asmin, Asmax, AsErf, BQ=null, st=null, mu=null, DZ=null;
   {
-    const S = [H(tt('Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)')),
-      `f<sub>cd</sub> = α<sub>cc</sub>·f<sub>ck</sub>/γ<sub>c</sub> = 0,85 · ${fck} / 1,5 = ${deNum(fcd)} N/mm²`,
-      `f<sub>yd</sub> = f<sub>yk</sub>/γ<sub>s</sub> = 500 / 1,15 = ${deNum(SB.fyd,1)} N/mm²`];
+    const S = [H(_L`Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = ${naNum(SB.gc)}, γ<sub>s</sub> = ${naNum(SB.gs)})`),
+      `f<sub>cd</sub> = α<sub>cc</sub>·f<sub>ck</sub>/γ<sub>c</sub> = ${naNum(SB.acc)} · ${fck} / ${naNum(SB.gc)} = ${deNum(fcd)} N/mm²`,
+      `f<sub>yd</sub> = f<sub>yk</sub>/γ<sub>s</sub> = 500 / ${naNum(SB.gs)} = ${deNum(SB.fyd,1)} N/mm²`];
+    const AT = naLand()==='at' && naV('asmin','')==='en', asMinEN = bt => Math.max(0.26*fctm/SB.fyk*bt*d, 0.0013*bt*d);
+    const asMinTxt = (bt, deTxt) => AT ? _L`A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max(${deNum(0.26*fctm/SB.fyk,5)}; 0,0013)·${bt}·${deNum(d,1)} = ${deNum(Asmin/100)} cm²${unit} (EN 1992-1-1, 9.2.1.1)` : deTxt;
     let note='', eta;
     if(uz){
       const T=tSection(BF.beff, hf, b, h);
-      Asmin = fctm*T.Wu/(SB.fyk*0.9*d); Asmax = 0.08*T.A;
+      Asmin = AT ? asMinEN(b) : fctm*T.Wu/(SB.fyk*0.9*d); Asmax = 0.08*T.A;
       S.push(H(tt('Mitwirkende Plattenbreite: wie weit die Platte als Druckgurt mitträgt')));
       S.push(_L`l<sub>0</sub> = ${deNum(I.feld,2)}·l = ${deNum(BF.l0/1000,2)} m (Abstand der Momentennullpunkte)`);
       S.push(`b<sub>eff,i</sub> = 0,2·b<sub>i</sub> + 0,1·l<sub>0</sub> ≤ 0,2·l<sub>0</sub>, ≤ b<sub>i</sub> → b<sub>eff,1</sub> = ${deNum(BF.b1e,0)} mm, b<sub>eff,2</sub> = ${deNum(BF.b2e,0)} mm`);
@@ -4418,13 +4450,13 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
         S.push(H(tt('Erforderliche Bewehrung: der Stahl muss dieselbe Kraft als Zug aufnehmen')));
         S.push(_L`A<sub>s,erf</sub> = F<sub>cd</sub>/f<sub>yd</sub> = ${deNum(AsB/100)} cm²`);
         S.push(H(tt('Mindestbewehrung: muss das Rissmoment aufnehmen (sprödes Versagen vermeiden)')));
-        S.push(_L`A<sub>s,min</sub> = f<sub>ctm</sub>·W<sub>u</sub>/(f<sub>yk</sub>·0,9·d) = ${deNum(Asmin/100)} cm² (W<sub>u</sub> des T-Querschnitts)`);
+        S.push(asMinTxt(b, _L`A<sub>s,min</sub> = f<sub>ctm</sub>·W<sub>u</sub>/(f<sub>yk</sub>·0,9·d) = ${deNum(Asmin/100)} cm² (W<sub>u</sub> des T-Querschnitts)`));
         S.push(H(tt('Nachweis: vorhandene ≥ maßgebende erforderliche Bewehrung')));
         S.push(_L`A<sub>s,vorh</sub> = ${R.n} Ø ${R.ds} = <b>${deNum(As/100)} cm²</b> ≥ max(${deNum(AsB/100)}; ${deNum(Asmin/100)}) = ${deNum(AsErf/100)} cm²`);
         eta = AsErf/As;
       }
     } else {
-      Asmin = fctm*(b*h*h/6)/(SB.fyk*0.9*d); Asmax = 0.08*b*h; AsErf = Asmin;
+      Asmin = AT ? asMinEN(b) : fctm*(b*h*h/6)/(SB.fyk*0.9*d); Asmax = 0.08*b*h; AsErf = Asmin;
       mu = I.M*1e6/(b*d*d*fcd); st = biegeAusMu(mu);
       S.push(H(tt('Bezogenes Moment: wie stark ist die Betondruckzone beansprucht?')));
       S.push(`μ<sub>Eds</sub> = M<sub>Ed</sub> / (b·d²·f<sub>cd</sub>) = ${deNum(I.M,1)}·10⁶ / (${b}·${deNum(d,1)}²·${deNum(fcd)}) = <b>${deNum(mu,4)}</b>`);
@@ -4473,14 +4505,14 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
         S.push(H(tt('Erforderliche Bewehrung aus dem Gleichgewicht der Kräfte')));
         S.push(_L`A<sub>s,erf</sub> = ω·b·d·f<sub>cd</sub>/f<sub>yd</sub> = ${deNum(AsB/100)} cm²${unit}`);
         S.push(H(tt('Mindestbewehrung: muss das Rissmoment aufnehmen (sprödes Versagen vermeiden)')));
-        S.push(`A<sub>s,min</sub> = f<sub>ctm</sub>·W<sub>c</sub>/(f<sub>yk</sub>·0,9·d) = ${deNum(fctm,1)}·${b}·${h}²/6 / (500·0,9·${deNum(d,1)}) = ${deNum(Asmin/100)} cm²${unit}`);
+        S.push(asMinTxt(b, `A<sub>s,min</sub> = f<sub>ctm</sub>·W<sub>c</sub>/(f<sub>yk</sub>·0,9·d) = ${deNum(fctm,1)}·${b}·${h}²/6 / (500·0,9·${deNum(d,1)}) = ${deNum(Asmin/100)} cm²${unit}`));
         S.push(H(tt('Nachweis: vorhandene ≥ maßgebende erforderliche Bewehrung')));
         S.push(_L`A<sub>s,vorh</sub> = ${platte?`Ø${R.ds}/${deNum(R.s/10,1)} cm`:`${R.n} Ø ${R.ds}`} = <b>${deNum(As/100)} cm²${unit}</b> ≥ ${deNum(AsErf/100)} cm²${unit}`);
         eta = AsErf/As;
       }
     }
     if(As + (DZ?DZ.As2:0) > Asmax){ eta = Math.max(eta, (As + (DZ?DZ.As2:0))/Asmax); note = `A<sub>s</sub> > 0,08·A<sub>c</sub> = ${deNum(Asmax/100)} cm².`; }
-    C.push({ id:'biegung', title: uz ? tt('Biegung im Feld — Plattenbalken (GZT)') : tt('Biegung im Feld (GZT)'), eta, ok: eta<=1, steps:S, note });
+    C.push({ id:'biegung', title: uz ? tt('Biegung im Feld — Plattenbalken (GZT)') : tt('Biegung im Feld (GZT)'), eta, ok: eta<=1, steps:S, note, naBlock: !!G.cl.naMiss });
   }
 
   // 2) Stababstände (Feldbewehrung)
@@ -5063,7 +5095,7 @@ const NICHT_ENTHALTEN = 'Zugkraftdeckung bei Durchlaufträgern und Einzellasten,
 let LAST = null;
 let MAT = 'beton';
 let STMODE = 'traeger';
-function run(){ if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else if(MAT==='bauph') runBauph(); else runBeton(); save(); renderPos(); if(typeof mlRefresh==='function') mlRefresh(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
+function run(){ applyNA(); if(MAT==='stahl') (STMODE==='anschluss' ? runAnschluss() : STMODE==='fuss' ? runFP() : STMODE==='schweiss' ? runSW() : runStahl()); else if(MAT==='holz') (HOMODE==='verbindung' ? runHV() : HOMODE==='bauteil' ? runHolz() : runHX()); else if(MAT==='grund') runGrund(); else if(MAT==='mauer') runMauer(); else if(MAT==='wasser') runWasser(); else if(MAT==='bauph') runBauph(); else runBeton(); save(); renderPos(); if(typeof mlRefresh==='function') mlRefresh(); if(typeof updatePick==='function'){ updatePick(); updateFoldSums(); } }
 function setStMode(m){ STMODE=m; showMat(); run(); }
 function showBad(bad){
   if(PROBE){ PROBE.C=null; return; }
@@ -5494,7 +5526,16 @@ function runStuetze(){
 }
 const stuetzeText = R => _L`je Seite ${R.n} Ø ${R.ds}, gesamt ${2*R.n} Ø ${R.ds} = ${deNum(2*R.n*areaBar(R.ds)/100)} cm² · Bügel Ø${R.dsw}/${deNum(R.sw,1)} cm`;
 const NICHT_STUETZE = 'Zweiachsige Biegung (schiefe Biegung), Querkraft, Rahmen mit verschieblichen Knoten (Gesamtsystem), Brandschutz und Stöße der Längsbewehrung.';
+// Bemessungsgrundlage: Nachweise, die für das gewählte Land (noch) nicht vollständig hinterlegt sind, werden nicht gerechnet, sondern als Hinweis gezeigt
+function naScope(){ return MAT==='beton' ? 'beton/'+TYP : MAT==='stahl' ? 'stahl/'+STMODE : MAT==='holz' ? 'holz/'+HOMODE : MAT==='grund' ? 'grund/'+GRMODE : MAT==='mauer' ? 'mauer/'+MWMODE : MAT==='wasser' ? 'wasser/'+WBMODE : MAT==='bauph' ? 'bauph/'+BPMODE : MAT; }
+function naFilter(C){
+  if(naLand()==='de' || typeof window.kragrNACovers!=='function') return C;
+  const sc=naScope(), land=window.kragrNAName();
+  return C.map(c => (window.kragrNACovers(sc, c.id) && !c.naBlock) ? c
+    : { id:c.id, title:c.title, info:true, ok:true, eta:0, naMiss:true, steps:['<span class="na-miss">'+_L`Für ${land} sind die national festgelegten Werte dieses Nachweises noch nicht hinterlegt. kragr rechnet ihn deshalb nicht (kein Rückgriff auf den deutschen NA).`+'</span>'] });
+}
 function renderOut(C, ok, fig, line, nicht, refLink){
+  { const C0=C; C = naFilter(C); if(C!==C0) ok = C.every(c=>c.ok); }
   if(PROBE){ PROBE.C=C; return; }   // Abhilfe-Suche: nur die Nachweise merken
   const nBad = C.filter(c=>!c.ok).length, maxEta = Math.max(0, ...C.filter(c=>!c.info).map(c=>c.eta));
   const ms=$('mob-status'); ms.className = ok?'ok':'bad';
@@ -6483,6 +6524,7 @@ const holzMV = mv => mv==='q' ? { lef:0.9, cw:5/48, txt:tt('Gleichlast') } : mv=
 function nachweiseHolz(I, h){
   const R=holzRow(I.art, I.kl), [kl, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0m, E005, Gm] = R;
   const bsh = I.art==='bsh', b=I.b, A=b*h, Wy=b*h*h/6, Iy=b*h**3/12, f=x=>deNum(x,1), C=[];
+  const gMH = bsh ? naV('gMbsh',1.3) : naV('gMvh',1.3), gMt = naNum(gMH);   // ÖNORM B 1995-1-1: BSH 1,25
   const kmod = KMOD_[I.nkl][I.kled], kdef = KDEF_[I.nkl];
   const kh = bsh ? (h<600 ? Math.min((600/h)**0.1, 1.1) : 1) : (h<150 ? Math.min((150/h)**0.2, 1.3) : 1);
   const fmd = kh*kmod*fmk/gMH, fvd = kmod*fvk/gMH, fc0d = kmod*fc0k/gMH, fc90d = kmod*fc90k/gMH;
@@ -6493,11 +6535,11 @@ function nachweiseHolz(I, h){
       `${kl} (${bsh?tt('Brettschichtholz, EN 14080'):tt('Vollholz Nadelholz, EN 338')})`,
       `f<sub>m,k</sub> = ${dk(fmk)} · f<sub>v,k</sub> = ${dk(fvk)} · f<sub>c,0,k</sub> = ${dk(fc0k)} · f<sub>c,90,k</sub> = ${dk(fc90k)} N/mm²`,
       H(tt('Modifikationsbeiwert k<sub>mod</sub>: Holz ist unter kurzer Last fester, unter Dauerlast und Feuchte schwächer')),
-      _L`Nutzungsklasse ${I.nkl} · KLED „${KLED_[I.kled]}“ → k<sub>mod</sub> = ${deNum(kmod,2)} · γ<sub>M</sub> = 1,3`,
+      _L`Nutzungsklasse ${I.nkl} · KLED „${KLED_[I.kled]}“ → k<sub>mod</sub> = ${deNum(kmod,2)} · γ<sub>M</sub> = ${gMt}`,
       H(tt('Höhenbeiwert k<sub>h</sub>: niedrige Querschnitte dürfen etwas höher ausgenutzt werden')),
       `k<sub>h</sub> = ${bsh?'(600/h)<sup>0,1</sup> ≤ 1,1':'(150/h)<sup>0,2</sup> ≤ 1,3'} = ${deNum(kh,3)} (h = ${h} mm)`,
       H(tt('Bemessungswerte der Festigkeiten')),
-      `f<sub>m,d</sub> = k<sub>h</sub>·k<sub>mod</sub>·f<sub>m,k</sub>/γ<sub>M</sub> = ${deNum(kh,3)}·${deNum(kmod,2)}·${dk(fmk)}/1,3 = ${deNum(fmd,2)} N/mm²`,
+      `f<sub>m,d</sub> = k<sub>h</sub>·k<sub>mod</sub>·f<sub>m,k</sub>/γ<sub>M</sub> = ${deNum(kh,3)}·${deNum(kmod,2)}·${dk(fmk)}/${gMt} = ${deNum(fmd,2)} N/mm²`,
       `f<sub>v,d</sub> = ${deNum(fvd,2)} · f<sub>c,0,d</sub> = ${deNum(fc0d,2)} · f<sub>c,90,d</sub> = ${deNum(fc90d,2)} N/mm²`,
       H(tt('Querschnittswerte')),
       _L`Querschnitt ${b} × ${h} mm: A = ${deNum(A/100,1)} cm² · W<sub>y</sub> = b·h²/6 = ${deNum(Wy/1000,0)} cm³ · I<sub>y</sub> = b·h³/12 = ${deNum(Iy/1e4,0)} cm⁴`];

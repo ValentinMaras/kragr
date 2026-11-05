@@ -1128,6 +1128,12 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = {}, γ<sub>s</sub> = {})":"Valeurs de calcul des matériaux (coefficients partiels γ<sub>c</sub> = {}, γ<sub>s</sub> = {})",
+"Nutzungsklasse {} · KLED „{}“ → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}":"Classe de service {} · classe de durée de chargement « {} » → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}",
+"ÖNORM B 1992-1-1: c<sub>min,dur</sub> je Expositionsklasse, Δc<sub>dev</sub> = 5 mm. Die Abminderung um 5 mm bei höherer Betonklasse ist nicht angesetzt (sichere Seite).":"ÖNORM B 1992-1-1 : c<sub>min,dur</sub> selon la classe d’exposition, Δc<sub>dev</sub> = 5 mm. La réduction de 5 mm pour une classe de béton plus élevée n’est pas appliquée (côté sûr).",
+"Mindestbetonfestigkeit nach ÖNORM B 4710-1 – hier nicht geprüft.":"Classe de résistance minimale du béton selon ÖNORM B 4710-1 – non vérifiée ici.",
+"A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max({}; 0,0013)·{}·{} = {} cm²{} (EN 1992-1-1, 9.2.1.1)":"A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub> ; 0,0013)·b<sub>t</sub>·d = max({} ; 0,0013)·{}·{} = {} cm²{} (EN 1992-1-1, 9.2.1.1)",
+"Für {} sind die national festgelegten Werte dieses Nachweises noch nicht hinterlegt. kragr rechnet ihn deshalb nicht (kein Rückgriff auf den deutschen NA).":"Pour {}, les valeurs déterminées au niveau national de cette vérification ne sont pas encore disponibles. kragr ne la calcule donc pas (pas de repli sur l’AN allemande).",
 "Vollziegel (Gr. 1)":"Brique pleine (gr. 1)",
 "Hochlochziegel HLzA/HLzB (Gr. 2)":"Brique perforée HLzA/HLzB (gr. 2)",
 "Hochlochziegel HLzW (Gr. 2)":"Brique perforée isolante HLzW (gr. 2)",
@@ -1752,7 +1758,6 @@ window.MULY_LANG = {
 "Nennmaß für den Längsstab — der Bügel liegt außen, deshalb zählt er mit":"Enrobage nominal pour la barre longitudinale — l'étrier se trouve à l'extérieur, il est donc pris en compte",
 "Verlegemaß: der größere der beiden Werte, gemessen bis zur Bügelaußenkante":"Enrobage nominal à la pose : la plus grande des deux valeurs, mesurée jusqu'à la face extérieure de l'étrier",
 "Verlegemaß Bügel c<sub>v</sub> = max({}; {}) = <b>{} mm</b>":"Enrobage nominal de l'étrier c<sub>v</sub> = max({} ; {}) = <b>{} mm</b>",
-"Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)":"Valeurs de calcul des matériaux (coefficients partiels γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)",
 "b<sub>eff,Stütze</sub>":"b<sub>eff,appui</sub>",
 "Tragfähigkeit ohne Querkraftbewehrung V<sub>Rd,c</sub> — Beiwerte":"Résistance sans armatures d'effort tranchant V<sub>Rd,c</sub> — coefficients",
 "Maßstabsfaktor k = 1 + √(200/d) = {} ≤ 2":"Facteur d'échelle k = 1 + √(200/d) = {} ≤ 2",

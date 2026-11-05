@@ -1128,6 +1128,12 @@ window.MULY_LANG = {
 "posRecalc":"“{0}” recalculated with the newer calculation from “Internal forces” and saved."
 },
 "ttx": {
+"Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = {}, γ<sub>s</sub> = {})":"Design values of the materials (partial factors γ<sub>c</sub> = {}, γ<sub>s</sub> = {})",
+"Nutzungsklasse {} · KLED „{}“ → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}":"Service class {} · load-duration class “{}” → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}",
+"ÖNORM B 1992-1-1: c<sub>min,dur</sub> je Expositionsklasse, Δc<sub>dev</sub> = 5 mm. Die Abminderung um 5 mm bei höherer Betonklasse ist nicht angesetzt (sichere Seite).":"ÖNORM B 1992-1-1: c<sub>min,dur</sub> per exposure class, Δc<sub>dev</sub> = 5 mm. The 5 mm reduction for a higher concrete class is not applied (safe side).",
+"Mindestbetonfestigkeit nach ÖNORM B 4710-1 – hier nicht geprüft.":"Minimum concrete strength class according to ÖNORM B 4710-1 – not checked here.",
+"A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max({}; 0,0013)·{}·{} = {} cm²{} (EN 1992-1-1, 9.2.1.1)":"A<sub>s,min</sub> = max(0.26·f<sub>ctm</sub>/f<sub>yk</sub>; 0.0013)·b<sub>t</sub>·d = max({}; 0.0013)·{}·{} = {} cm²{} (EN 1992-1-1, 9.2.1.1)",
+"Für {} sind die national festgelegten Werte dieses Nachweises noch nicht hinterlegt. kragr rechnet ihn deshalb nicht (kein Rückgriff auf den deutschen NA).":"For {} the nationally determined values of this check are not yet available. kragr therefore does not calculate it (no fallback to the German NA).",
 "Vollziegel (Gr. 1)":"Solid clay unit (Gr. 1)",
 "Hochlochziegel HLzA/HLzB (Gr. 2)":"Vertically perforated clay unit HLzA/HLzB (Gr. 2)",
 "Hochlochziegel HLzW (Gr. 2)":"Insulating perforated clay unit HLzW (Gr. 2)",
@@ -1753,7 +1759,6 @@ window.MULY_LANG = {
 "Nennmaß für den Längsstab — der Bügel liegt außen, deshalb zählt er mit":"Nominal cover for the longitudinal bar — the stirrup lies outside, so it counts",
 "Verlegemaß: der größere der beiden Werte, gemessen bis zur Bügelaußenkante":"Cover to the stirrup: the larger of the two values, measured to the outer face of the stirrup",
 "Verlegemaß Bügel c<sub>v</sub> = max({}; {}) = <b>{} mm</b>":"Stirrup cover c<sub>v</sub> = max({}; {}) = <b>{} mm</b>",
-"Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)":"Design values of the materials (partial factors γ<sub>c</sub> = 1.5, γ<sub>s</sub> = 1.15)",
 "b<sub>eff,Stütze</sub>":"b<sub>eff,sup</sub>",
 "Tragfähigkeit ohne Querkraftbewehrung V<sub>Rd,c</sub> — Beiwerte":"Resistance without shear reinforcement V<sub>Rd,c</sub> — coefficients",
 "Maßstabsfaktor k = 1 + √(200/d) = {} ≤ 2":"Size factor k = 1 + √(200/d) = {} ≤ 2",

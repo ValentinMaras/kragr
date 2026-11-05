@@ -402,6 +402,7 @@
   .na-t { display:inline-block; font:700 9.5px/1 Figtree, system-ui, sans-serif; letter-spacing:.04em; color:#5468ad; background:#eef0f9; border-radius:5px; padding:3px 5px; margin-left:6px; vertical-align:2px; white-space:nowrap; text-indent:0; }
   .na-hint { font-size:12px; line-height:1.45; color:#5c5e66; background:var(--k5-sub,#f5f6f8); border-radius:12px; padding:8px 12px; margin:0 0 10px; }
   .na-hint .na-t { margin:0 2px; }
+  .na-miss { display:block; font:400 13px/1.5 Figtree, system-ui, sans-serif; color:#5c5e66; text-indent:0; }
   .k5-segm button.k5-soon { opacity:.38; cursor:not-allowed; }
   @media print { .na-t, .na-hint { display:none !important; } }
 </style>
@@ -517,13 +518,13 @@ window.kragrK5Page = function(K){
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
     de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
+        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
     en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
+        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
     fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
+        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
     es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
+        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
     dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
@@ -533,10 +534,22 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
   // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
-  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de'];
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at'];
+  // Ländertabelle (Schritt 2, November 2026): nur Werte mit Quelle. Fehlt ein Wert oder ein Nachweis in NA_COVER, rechnet die App ihn für dieses Land nicht.
+  // AT: ÖNORM B 1990-1 (γ, ψ wie DE) und B 1995-1-1 nach IHBV-Tabellenwerk (TU Graz) 2017; ÖNORM B 1992-1-1 nach SCIA „Theoretical background NA EN 1992“ (EN-Empfehlung für γ_c, γ_s, α_cc, Δc_dev = 5 mm, c_min,dur-Tabelle).
+  var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3 },
+             at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en' } };
+  // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
+  var NA_COVER={ at:{ 'beton/balken':['deckung','biegung'], 'beton/platte':['deckung','biegung'], 'beton/unterzug':['deckung','biegung'], 'holz/bauteil':['bem','biegung'] } };
+  window.kragrNAV=function(k){ var v=(NA_V[naNow()]||{})[k]; return v===undefined ? null : v; };
+  window.kragrNACovers=function(scope, id){ var n=naNow(); if(n==='de') return true; var c=(NA_COVER[n]||{})[scope]; return !!(c && c.indexOf(id)>=0); };
+  window.kragrNAName=function(){ return t('c'+naNow().toUpperCase()); };
+  window.kragrNAScope=function(){ var n=naNow(), c=NA_COVER[n]||{}; return Object.keys(c); };
   function naNow(){ var v='de'; try{ v=localStorage.getItem('kragr-na')||'de'; }catch(e){} return NA_ON.indexOf(v)>=0 ? v : 'de'; }
-  function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v); markNA(true); }
-  function naBadge(){ return t('naAbbr')+' '+naNow().toUpperCase(); }
+  function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v);
+    Array.prototype.forEach.call(D.querySelectorAll('.na-hint'), function(h){ h.remove(); }); Array.prototype.forEach.call(D.querySelectorAll('[data-na-done]'), function(r){ delete r.dataset.naDone; });
+    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); }catch(e){} markNA(true); }
+  function naBadge(){ return t('naAbbr')+' '+(PAGE==='ref' ? 'DE' : naNow().toUpperCase()); }
   window.kragrNA=function(){ return naNow(); };
   // Werte, die der nationale Anhang festlegt: Teilsicherheits- und Kombinationsbeiwerte, α_cc/α_ct, k_mod/k_def — markiert, wo ein Zahlenwert genannt wird
   var NA_RX=/(?<![A-Za-zÄÖÜäöüß])(?:γ[cCsSGQMRPHtφ][\w,′]*|ψ\s?[012][\w,]*|α(?:cc|ct)|k(?:mod|def))/g;
@@ -554,9 +567,13 @@ window.kragrK5Page = function(K){
         nu.forEach(function(x){ seen[x]=1; });
         var b=D.createElement('span'); b.className='na-t'; b.dataset.sy=nu.join(', '); b.textContent=naBadge(); b.title=naTitle(b.dataset.sy); el.appendChild(b); }
       R.dataset.naDone=String(R.childElementCount)+'|'+R.textContent.length; });
+    // Wissen: Inhalte stehen nach deutschem NA; bei anderem Land einmal oben auf der Seite darauf hinweisen
+    if(PAGE==='ref'){ var pg=D.querySelector('#main .lb-page'), old=D.querySelector('#main .na-ref');
+      if(naNow()!=='de' && pg && pg.querySelector('.na-t') && !old){ var r=D.createElement('div'); r.className='na-hint na-ref'; r.textContent=t('naRef').replace('{0}', t('c'+naNow().toUpperCase())); var ph=pg.querySelector('.page-head'); pg.insertBefore(r, ph ? ph.nextSibling : pg.firstChild); }
+      if(naNow()==='de' && old) old.remove(); }
     // Bemessung: einmal oben in den Ergebnissen erklären, was die Marke bedeutet
-    var det=D.getElementById('details'); if(det && det.querySelector('.na-t') && !det.querySelector('.na-hint')){ var c=det.querySelector('.card'); if(c){ var h=D.createElement('div'); h.className='na-hint';
-      h.innerHTML=esc(t('naHint')).replace('{0}','<span class="na-t">'+esc(naBadge())+'</span>'); c.parentNode.insertBefore(h, c); } }
+    var det=D.getElementById('details'); if(det && (det.querySelector('.na-t') || naNow()!=='de' && det.querySelector('.card[id^="n-"]')) && !det.querySelector('.na-hint')){ var c=det.querySelector('.card'); if(c){ var h=D.createElement('div'); h.className='na-hint';
+      h.innerHTML=esc(t('naHint')).replace('{0}','<span class="na-t">'+esc(naBadge())+'</span>')+(naNow()!=='de' ? ' '+esc(t('naPart').replace('{0}', t('c'+naNow().toUpperCase()))) : ''); c.parentNode.insertBefore(h, c); } }
   }
   var naRaf=0; function naQueue(){ if(naRaf) return; naRaf=requestAnimationFrame(function(){ naRaf=0; markNA(false); }); }
   var CHEV='<svg class="k-chev k5-tri" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
@@ -921,7 +938,7 @@ window.kragrK5Page = function(K){
 
 <footer class="footer">
   <div class="footer-logo">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · Schnittkräfte v0.11.20 · Bemessung v0.7.22 · Wissen v0.3.58 · Rechenblätter v0.1.27</span></div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · Schnittkräfte v0.11.21 · Bemessung v0.7.23 · Wissen v0.3.59 · Rechenblätter v0.1.28</span></div>
   <div class="footer-note" id="footer-check">Every calculation path is tested against independent recalculations — currently more than 1,500 automated checks.</div>
   <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>

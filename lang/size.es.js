@@ -1128,6 +1128,12 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = {}, γ<sub>s</sub> = {})":"Valores de cálculo de los materiales (coeficientes parciales γ<sub>c</sub> = {}, γ<sub>s</sub> = {})",
+"Nutzungsklasse {} · KLED „{}“ → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}":"Clase de servicio {} · clase de duración de la carga «{}» → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}",
+"ÖNORM B 1992-1-1: c<sub>min,dur</sub> je Expositionsklasse, Δc<sub>dev</sub> = 5 mm. Die Abminderung um 5 mm bei höherer Betonklasse ist nicht angesetzt (sichere Seite).":"ÖNORM B 1992-1-1: c<sub>min,dur</sub> según la clase de exposición, Δc<sub>dev</sub> = 5 mm. No se aplica la reducción de 5 mm para una clase de hormigón superior (lado seguro).",
+"Mindestbetonfestigkeit nach ÖNORM B 4710-1 – hier nicht geprüft.":"Clase de resistencia mínima del hormigón según ÖNORM B 4710-1: no se comprueba aquí.",
+"A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max({}; 0,0013)·{}·{} = {} cm²{} (EN 1992-1-1, 9.2.1.1)":"A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max({}; 0,0013)·{}·{} = {} cm²{} (EN 1992-1-1, 9.2.1.1)",
+"Für {} sind die national festgelegten Werte dieses Nachweises noch nicht hinterlegt. kragr rechnet ihn deshalb nicht (kein Rückgriff auf den deutschen NA).":"Para {} aún no están disponibles los valores de determinación nacional de esta comprobación. Por eso kragr no la calcula (sin recurrir al AN alemán).",
 "Vollziegel (Gr. 1)":"Ladrillo macizo (gr. 1)",
 "Hochlochziegel HLzA/HLzB (Gr. 2)":"Ladrillo perforado HLzA/HLzB (gr. 2)",
 "Hochlochziegel HLzW (Gr. 2)":"Ladrillo perforado aislante HLzW (gr. 2)",
@@ -1752,7 +1758,6 @@ window.MULY_LANG = {
 "Nennmaß für den Längsstab — der Bügel liegt außen, deshalb zählt er mit":"Recubrimiento nominal para la barra longitudinal — el estribo queda por fuera, por eso se tiene en cuenta",
 "Verlegemaß: der größere der beiden Werte, gemessen bis zur Bügelaußenkante":"Recubrimiento nominal de colocación: el mayor de los dos valores, medido hasta la cara exterior del estribo",
 "Verlegemaß Bügel c<sub>v</sub> = max({}; {}) = <b>{} mm</b>":"Recubrimiento nominal del estribo c<sub>v</sub> = max({}; {}) = <b>{} mm</b>",
-"Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)":"Valores de cálculo de los materiales (coeficientes parciales γ<sub>c</sub> = 1,5, γ<sub>s</sub> = 1,15)",
 "b<sub>eff,Stütze</sub>":"b<sub>eff,apoyo</sub>",
 "Tragfähigkeit ohne Querkraftbewehrung V<sub>Rd,c</sub> — Beiwerte":"Resistencia sin armadura de cortante V<sub>Rd,c</sub> — coeficientes",
 "Maßstabsfaktor k = 1 + √(200/d) = {} ≤ 2":"Factor de escala k = 1 + √(200/d) = {} ≤ 2",

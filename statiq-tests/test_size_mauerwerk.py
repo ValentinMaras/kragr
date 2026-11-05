@@ -8,11 +8,25 @@ except ImportError:
 fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:66}', str(info)[:150])
-K={'nm':{'z1':.55,'z2':.45,'k1':.55,'k2':.45,'p1':.55,'l1':.55},'dm':{'z1':.75,'z2':.70,'k1':.80,'k2':.65,'p1':.80,'l1':.80}}
-GRP={'z1':1,'z2':2,'k1':1,'k2':2,'p1':1,'l1':1}
+# f_k nach DIN EN 1996-3/NA, Anhang NA.D — Tabellenwerte von Hand aus mauerwerksbau-lehre.de (Anhang f_k) und KS-Verband (Tafeln 4/1–4/3) abgeschrieben
+_C=[4,6,8,10,12,16,20,28,36,48,60]
+NA={'A1':(_C,{2.5:[2.1,2.7,3.1,3.5,3.9,4.6,5.3,5.3,5.3,5.3,5.3],5:[2.4,3.1,3.9,4.5,5.0,5.9,6.7,6.7,6.7,6.7,6.7],10:[2.9,3.7,4.4,5.0,5.6,6.6,7.5,9.2,10.6,12.5,14.3],20:[None,None,None,5.6,6.3,7.4,8.4,10.3,11.9,14.1,16.0]}),
+    'A2':([4,6,8,10,12,16,20],{2.5:[1.7,2.2,2.5,2.8,3.1,3.1,3.1],5:[2.0,2.5,3.2,3.6,4.0,4.0,4.0],10:[2.3,2.9,3.5,4.0,4.5,4.5,4.5],20:[2.6,3.3,4.0,4.5,5.0,5.0,5.0]}),
+    'A3':(_C,{2.5:[2.8,3.6,4.2,4.8,5.4,6.4,7.2,8.8,10.2,10.2,10.2],5:[None,4.0,4.7,5.4,6.0,7.1,8.1,9.9,11.4,11.4,11.4],10:[None,None,None,6.0,6.7,8.0,9.1,11.0,12.7,15.1,15.1],20:[None,None,None,None,7.5,8.9,10.1,12.4,14.3,16.9,16.9]}),
+    'LV':([2,4,6,8,10,12,16,20],{2.5:[1.5,2.5,3.4,3.4,3.4,3.4,3.4,3.4],5:[1.6,2.7,3.7,4.5,5.4,6.1,6.1,6.1],10:[1.8,3.0,4.0,5.0,5.9,6.7,8.3,9.8],20:[1.8,3.0,4.0,5.0,5.9,6.7,8.3,9.8]}),
+    'LH':([2,4,6,8,10,12],{2.5:[1.4,2.2,2.9,2.9,2.9,2.9],5:[1.5,2.4,3.1,3.7,4.3,4.8],10:[1.7,2.6,3.3,4.0,4.6,5.1],20:[1.7,2.6,3.3,4.0,4.6,5.1]}),
+    'KSP':(_C,[2.9,4.0,5.0,6.0,7.0,8.8,10.5,13.8,13.8,13.8,13.8]),'KSLP':(_C,[2.9,3.7,4.4,5.0,5.6,6.6,7.6,7.6,7.6,7.6,7.6]),
+    'KSXL':(_C,[2.9,4.0,5.0,6.0,9.4,11.2,12.9,16.0,16.0,16.0,16.0]),'PP':([2,4,6,8],[1.8,3.0,4.1,5.1]),'PHLZ':([6,8,10,12,16,20],[3.1,3.7,4.2,4.7,5.5,6.3])}
+TAB={'z1':{'nm':'A3'},'z2':{'nm':'A1','dm':'PHLZ'},'zw':{'nm':'A2'},'k1':{'nm':'A3','dm':'KSP'},'k2':{'nm':'A1','dm':'KSLP'},'kx':{'dm':'KSXL'},'p1':{'dm':'PP'},'l1':{'nm':'LV'},'l2':{'nm':'LH'}}
+GRP={'z1':1,'z2':2,'zw':2,'k1':1,'k2':2,'kx':1,'p1':1,'l1':1,'l2':2}
 def fk(art,m,fb,fm):
-    if m=='nm': return K[m][art]*fb**0.7*min(fm,20,2*fb)**0.3
-    return K[m][art]*fb**(0.85 if GRP[art]==1 else 0.7)
+    t=TAB[art].get(m)
+    if not t: return None
+    cls,vals=NA[t]; i=max([k for k,c in enumerate(cls) if fb>=c], default=None)
+    if i is None: return None
+    if m=='dm': return vals[i]
+    ms=[x for x in (2.5,5,10,20) if fm>=x]
+    return vals[ms[-1]][i] if ms else None
 def druck(fkv,t,h,l,lage,decke,a,lf,N):
     A=l*t/1000; fd=0.85*fkv/1.5*(0.8 if A<0.1 else 1)
     rho=1.0 if decke=='hb' else (0.75 if t<=175 else 0.9 if t<=250 else 1.0); lam=rho*h*1000/t
@@ -26,16 +40,22 @@ async def main():
         await pg.goto(HTML); await pg.evaluate("localStorage.clear()"); await pg.reload(); await pg.wait_for_timeout(200)
         await pg.evaluate("setMat('mauer'); setMwMode('druck')")
         s=await pg.inner_text('#summary'); check('Standard Wand auf Druck erfüllt', 'Alle Nachweise erfüllt' in s, s)
-        # f_k nach Gl. 3.1–3.3
-        for art,m,fb,fm in [('z2','nm',12,5),('k1','dm',20,0),('z2','dm',10,0),('k1','nm',12,25),('p1','dm',4,0)]:
+        # f_k aus den NA-Tabellen (seit size v0.7.21); Sollwerte von Hand: 5,0 · 10,5 · 4,2 · 7,5 · 3,0 · 6,0 (Klasse 15 → 12) · 2,0 (HLzW 4, M 10 → 2,3? nein M 5 → 2,0)
+        for art,m,fb,fm in [('z2','nm',12,5),('k1','dm',20,0),('z2','dm',10,0),('k1','nm',12,25),('p1','dm',4,0),('k1','nm',15,7),('zw','nm',4,5),('kx','dm',12,0),('l2','nm',8,10)]:
             await pg.evaluate(f"$('mw-own').checked=false; $('mw-art').value='{art}'; $('mw-m').value='{m}'; $('mw-fb').value={fb}; $('mw-fm').value={fm or 5}; run()")
             g=await pg.evaluate("LAST.I.M.fk"); r=fk(art,m,fb,fm or 5)
-            check(f'f_k {art}, {m}, f_b = {fb}', abs(g-r)<1e-12, f'{g:.3f} N/mm²')
+            check(f'f_k {art}, {m}, Klasse {fb}, M {fm or "DM"} = {r} N/mm² (NA-Tabelle)', g==r, f'{g} N/mm²')
+        hand={('z2','nm',12,5):5.0,('k1','dm',20,0):10.5,('z2','dm',10,0):4.2,('k1','nm',12,25):7.5,('p1','dm',4,0):3.0,('k1','nm',15,7):6.0,('zw','nm',4,5):2.0,('kx','dm',12,0):9.4,('l2','nm',8,10):4.0}
+        check('Test-Tabelle stimmt mit den von Hand gelesenen Werten', all(fk(a,m,b,f or 5)==v for (a,m,b,f),v in hand.items()))
+        for art,m,fb,fm,word in [('p1','nm',4,5,'keine NA-Tabelle'),('z1','nm',4,10,'nicht vorgesehen'),('k1','nm',2,5,'kleiner als'),('k1','nm',12,1,'M 2,5')]:
+            await pg.evaluate(f"$('mw-own').checked=false; $('mw-art').value='{art}'; $('mw-m').value='{m}'; $('mw-fb').value={fb}; $('mw-fm').value={fm}; run()")
+            check(f'ohne NA-Wert ({art}, {m}, {fb}, M {fm}): Hinweis statt Rechnung', word in await pg.inner_text('#summary') or word in await pg.inner_text('body'), (await pg.inner_text('#summary'))[:90])
         cases={'Außenwand 240, Stahlbetondecke, Standard':('z2','nm',12,5,240,2.625,1.0,'end','sb',240,5.0,210),
                'Innenwand 175 KS Dünnbett, Zwischenauflager':('k1','dm',20,0,175,2.75,1.0,'zw','sb',175,0,380),
                'Dachgeschoss Endauflager (Φ₁ = 0,333)':('z2','nm',12,5,300,2.5,1.0,'dach','sb',300,5.5,150),
                'Holzbalkendecke, Teilauflager a = 2/3 t, kurze Wand':('z1','nm',20,10,240,2.5,0.365,'end','hb',160,4.0,60),
-               'f_k < 1,8 (Porenbeton 2), Endauflager':('p1','dm',2,0,365,2.6,1.0,'end','sb',300,5.0,90)}
+               'f_k = 1,8 (Porenbeton 2), Endauflager':('p1','dm',2,0,365,2.6,1.0,'end','sb',300,5.0,90),
+               'f_k < 1,8 (Hbl 2, M 2,5), Endauflager':('l2','nm',2,2.5,300,2.5,1.0,'end','sb',300,5.0,60)}
         for name,(art,m,fb,fm,t,h,l,lage,decke,a,lf,N) in cases.items():
             await pg.evaluate(f"$('mw-own').checked=false; $('mw-art').value='{art}'; $('mw-m').value='{m}'; $('mw-fb').value={fb}; $('mw-fm').value={fm or 5}; $('md-t').value={t}; $('md-h').value={h}; $('md-l').value={l}; $('md-lage').value='{lage}'; $('md-decke').value='{decke}'; $('md-a').value={a}; $('md-lf').value={lf}; $('md-N').value={N}; run()")
             eta,Phi=druck(fk(art,m,fb,fm or 5),t,h,l,lage,decke,a,lf,N)

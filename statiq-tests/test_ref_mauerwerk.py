@@ -12,11 +12,25 @@ def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:72}', str(info)[:170])
 de=lambda v,d=2: f'{v+(1e-9 if v>=0 else -1e-9):.{d}f}'.replace('.',',')
 def has(t,v,d): t=t.replace('\n',' '); return de(v,d) in t or de(v,d) in t.replace('.','')
-K={'nm':{'z1':.55,'z2':.45,'k1':.55,'k2':.45,'p1':.55,'l1':.55},'dm':{'z1':.75,'z2':.70,'k1':.80,'k2':.65,'p1':.80,'l1':.80}}
-GRP={'z1':1,'z2':2,'k1':1,'k2':2,'p1':1,'l1':1}
+# f_k nach DIN EN 1996-3/NA, Anhang NA.D — Tabellenwerte von Hand aus mauerwerksbau-lehre.de (Anhang f_k) und KS-Verband (Tafeln 4/1–4/3) abgeschrieben
+_C=[4,6,8,10,12,16,20,28,36,48,60]
+NA={'A1':(_C,{2.5:[2.1,2.7,3.1,3.5,3.9,4.6,5.3,5.3,5.3,5.3,5.3],5:[2.4,3.1,3.9,4.5,5.0,5.9,6.7,6.7,6.7,6.7,6.7],10:[2.9,3.7,4.4,5.0,5.6,6.6,7.5,9.2,10.6,12.5,14.3],20:[None,None,None,5.6,6.3,7.4,8.4,10.3,11.9,14.1,16.0]}),
+    'A2':([4,6,8,10,12,16,20],{2.5:[1.7,2.2,2.5,2.8,3.1,3.1,3.1],5:[2.0,2.5,3.2,3.6,4.0,4.0,4.0],10:[2.3,2.9,3.5,4.0,4.5,4.5,4.5],20:[2.6,3.3,4.0,4.5,5.0,5.0,5.0]}),
+    'A3':(_C,{2.5:[2.8,3.6,4.2,4.8,5.4,6.4,7.2,8.8,10.2,10.2,10.2],5:[None,4.0,4.7,5.4,6.0,7.1,8.1,9.9,11.4,11.4,11.4],10:[None,None,None,6.0,6.7,8.0,9.1,11.0,12.7,15.1,15.1],20:[None,None,None,None,7.5,8.9,10.1,12.4,14.3,16.9,16.9]}),
+    'LV':([2,4,6,8,10,12,16,20],{2.5:[1.5,2.5,3.4,3.4,3.4,3.4,3.4,3.4],5:[1.6,2.7,3.7,4.5,5.4,6.1,6.1,6.1],10:[1.8,3.0,4.0,5.0,5.9,6.7,8.3,9.8],20:[1.8,3.0,4.0,5.0,5.9,6.7,8.3,9.8]}),
+    'LH':([2,4,6,8,10,12],{2.5:[1.4,2.2,2.9,2.9,2.9,2.9],5:[1.5,2.4,3.1,3.7,4.3,4.8],10:[1.7,2.6,3.3,4.0,4.6,5.1],20:[1.7,2.6,3.3,4.0,4.6,5.1]}),
+    'KSP':(_C,[2.9,4.0,5.0,6.0,7.0,8.8,10.5,13.8,13.8,13.8,13.8]),'KSLP':(_C,[2.9,3.7,4.4,5.0,5.6,6.6,7.6,7.6,7.6,7.6,7.6]),
+    'KSXL':(_C,[2.9,4.0,5.0,6.0,9.4,11.2,12.9,16.0,16.0,16.0,16.0]),'PP':([2,4,6,8],[1.8,3.0,4.1,5.1]),'PHLZ':([6,8,10,12,16,20],[3.1,3.7,4.2,4.7,5.5,6.3])}
+TAB={'z1':{'nm':'A3'},'z2':{'nm':'A1','dm':'PHLZ'},'zw':{'nm':'A2'},'k1':{'nm':'A3','dm':'KSP'},'k2':{'nm':'A1','dm':'KSLP'},'kx':{'dm':'KSXL'},'p1':{'dm':'PP'},'l1':{'nm':'LV'},'l2':{'nm':'LH'}}
+GRP={'z1':1,'z2':2,'zw':2,'k1':1,'k2':2,'kx':1,'p1':1,'l1':1,'l2':2}
 def fk(art,m,fb,fm):
-    if m=='nm': return K[m][art]*fb**0.7*min(fm,20,2*fb)**0.3
-    return K[m][art]*fb**(0.85 if GRP[art]==1 else 0.7)
+    t=TAB[art].get(m)
+    if not t: return None
+    cls,vals=NA[t]; i=max([k for k,c in enumerate(cls) if fb>=c], default=None)
+    if i is None: return None
+    if m=='dm': return vals[i]
+    ms=[x for x in (2.5,5,10,20) if fm>=x]
+    return vals[ms[-1]][i] if ms else None
 fd=lambda f: 0.85*f/1.5
 PAGES=['baustoffe/steine','baustoffe/massordnung','baustoffe/moertel','baustoffe/festigkeit','bemessung/knicklaenge','bemessung/wand','bemessung/teilflaeche','bemessung/keller','bemessung/schub']
 
@@ -32,16 +46,21 @@ async def main():
 
         # ── f_k ──
         await go('baustoffe/festigkeit'); okk=True; bad=[]
-        for art in K['nm']:
+        n=0
+        for art in TAB:
             for m in ['nm','dm']:
-                for fb,fm in [(15,10),(8,20),(25,5)]:
+                for fb,fm in [(15,10),(8,20),(25,5),(4,2.5)]:
                     await setv('fk-', {'art':art,'m':m,'fb':fb,'fm':fm}, 'updateFk'); o=await out('fk-out'); f=fk(art,m,fb,fm)
-                    if not (has(o,f,2) and has(o,fd(f),3)): okk=False; bad.append((art,m,fb,fm,round(f,3)))
-        check('f_k und f_d: 6 Steinarten × 2 Mörtel × 3 Festigkeiten (inkl. f_m ≤ 2·f_b)', okk, bad[:3])
+                    if f is None:
+                        if 'NA' not in o: okk=False; bad.append((art,m,fb,fm,'Hinweis fehlt'))
+                        continue
+                    n+=1
+                    if not (has(o,f,1) and has(o,fd(f),3)): okk=False; bad.append((art,m,fb,fm,f))
+        check(f'f_k und f_d aus der NA-Tabelle: 9 Steinarten × 2 Mörtel × 4 Fälle ({n} mit Wert, sonst Hinweis)', okk and n>=30, bad[:3])
         await setv('fk-', {'art':'z2','m':'nm','fb':12,'fm':5}, 'updateFk'); o=await out('fk-out'); E=1100*fk('z2','nm',12,5)
         check(f'E-Modul Hochlochziegel = 1100 · f_k = {E:.0f} N/mm²', has(o,E,0), o[-120:])
-        km=await pg.evaluate('[MWR_K, MWR_ART]'); kz=await sz.evaluate('[MW_K, MW_ART]')
-        check('K-Werte und Steinarten identisch mit statiq·size', km==kz)
+        km=await pg.evaluate('[MW_NA_T, MW_NA_ART, MWR_ART]'); kz=await sz.evaluate('[MW_NA_T, MW_NA_ART, MW_ART]')
+        check('NA-Tabellen und Steinarten identisch mit kragr·size', km==kz)
 
         # ── Maßordnung ──
         await go('baustoffe/massordnung')
@@ -101,15 +120,15 @@ async def main():
         # ── Kellerwand ──
         await go('bemessung/keller'); okk=True; bad=[]
         for t,h,he,bc,rho_ in [(300,2.5,2.0,4.0,19),(240,2.4,2.2,2.0,20),(365,2.6,1.5,6.0,18),(240,2.5,2.5,3.5,19)]:
-            beta=20 if bc>=2*h else 40 if bc<=h else 60-20*bc/h; nreq=rho_*h*he*he/(beta*t/1000); f=fk('k1','nm',15,10); nlim=t*fd(f)/3
-            await setv('mwk-', {'art':'k1','m':'nm','fb':15,'fm':10,'t':t,'h':h,'he':he,'bc':bc,'rho':rho_,'q':5,'Nmax':150,'Nmin':40}, 'updateMWK'); o=await out('mwk-out')
+            beta=20 if bc>=2*h else 40 if bc<=h else 60-20*bc/h; nreq=rho_*h*he*he/(beta*t/1000); f=fk('k1','nm',16,10); nlim=t*fd(f)/3
+            await setv('mwk-', {'art':'k1','m':'nm','fb':16,'fm':10,'t':t,'h':h,'he':he,'bc':bc,'rho':rho_,'q':5,'Nmax':150,'Nmin':40}, 'updateMWK'); o=await out('mwk-out')
             s_=await sz.evaluate("I=>{const r=nachweiseMK(I); return [r.nreq,r.nlim]}", {'M':{'fk':f,'fd':fd(f),'grp':1},'t':t,'h':h,'he':he,'bc':bc,'rho':rho_,'q':5,'Nmax':150,'Nmin':40})
             if not (has(o,nreq,1) and has(o,nlim,1) and abs(s_[0]-nreq)<1e-6 and abs(s_[1]-nlim)<1e-6): okk=False; bad.append((t,bc,round(nreq,2),s_))
         check('Kellerwand: β für b_c ≥ 2h, ≤ h und dazwischen; n_min,erf und n_max,zul = size', okk, bad[:2])
 
         # ── Schubwand ──
         await go('bemessung/schub'); okk=True; bad=[]
-        for art,m,fb,fm,l,t,h,lag,st,N,V in [('k1','dm',25,10,2.5,175,2.75,'krag','1',150,25),('z1','nm',12,10,4.0,240,2.75,'eing','0',300,60),('k2','nm',12,5,1.5,175,2.5,'krag','0',80,8),('z2','nm',8,1.5,3.0,365,2.75,'krag','0',400,20)]:
+        for art,m,fb,fm,l,t,h,lag,st,N,V in [('k1','dm',25,10,2.5,175,2.75,'krag','1',150,25),('z1','nm',12,10,4.0,240,2.75,'eing','0',300,60),('k2','nm',12,5,1.5,175,2.5,'krag','0',80,8),('z2','nm',8,2.5,3.0,365,2.75,'krag','0',400,20)]:
             f=fk(art,m,fb,fm); typ=art[0]
             fvk0 = ({'z':.30,'k':.40,'p':.30,'l':.30}[typ]) if m=='dm' else ((.30 if fm>=10 else .20 if fm>=2.5 else .10) if typ=='z' else (.20 if fm>=10 else .15 if fm>=2.5 else .10))
             Mb=V*h*(1 if lag=='krag' else 0.5); e=Mb/N; lc=l if e<=l/6 else max(0,3*(l/2-e)); sd=N/(t*lc)

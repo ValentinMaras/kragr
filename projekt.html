@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.25 · sichtbar „Rechenblätter“ -->
+<!-- kragr·projekt v0.1.26 · sichtbar „Rechenblätter“ -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -102,10 +102,24 @@
   .btn:hover { background:#f6f6f7; }
   .btn.p { background:#111114; color:#fff; box-shadow:none; } .btn.p:hover { background:#333; }
   .btn.q { background:#f1f2f4; box-shadow:none; } .btn.q:hover { background:#e6e7ea; }
-  .filt { display:inline-flex; gap:4px; padding:4px; border-radius:14px; background:#e9eaee; margin-bottom:14px; flex-wrap:wrap; }
-  .filt button { font:inherit; font-size:13.5px; font-weight:700; border:none; background:transparent; color:var(--text2); min-height:36px; padding:0 14px; border-radius:10px; cursor:pointer; }
-  .filt button[aria-pressed="true"] { background:#fff; color:var(--text); box-shadow:0 1px 3px rgba(17,17,20,.12); }
-  .filt .n { font-weight:600; color:var(--text3); margin-left:4px; }
+  /* projekt v0.1.26: Auswahl oben wie in den Modulen (klein Anzahl, groß der Filter), Knöpfe darunter */
+  .sr-only { position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .pick { position:relative; margin:14px 0 10px; }
+  .pick-btn { width:100%; display:flex; align-items:center; gap:10px; text-align:left; border:none; cursor:pointer; background:var(--card,#fff); border-radius:18px; padding:14px 18px; font-family:inherit; color:var(--text); }
+  .pick-txt { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .pick-g { font-size:12px; font-weight:600; color:var(--text3); }
+  .pick-t { font-size:20px; font-weight:800; letter-spacing:-0.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pick-chev { font-size:13px; color:var(--text3); transition:transform .18s; }
+  .pick.open .pick-chev { transform:rotate(180deg); }
+  .pick-menu { display:none; position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:40; background:#fff; border-radius:18px; box-shadow:0 18px 48px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); padding:8px; }
+  .pick.open .pick-menu { display:block; }
+  .pick-menu button { width:100%; display:flex; justify-content:space-between; align-items:center; font:inherit; font-size:15px; font-weight:600; border:none; background:none; color:var(--text); text-align:left; padding:11px 12px; border-radius:12px; cursor:pointer; }
+  .pick-menu button:hover { background:#f6f6f7; }
+  .pick-menu button[aria-pressed="true"] { background:#f5f6f8; font-weight:800; }
+  .pick-menu .n { font-weight:600; color:var(--text3); font-size:13px; }
+  .top-acts { margin:0 0 16px; }
+  .top-acts .btn.q { background:#e9eaee; }
+  @media (min-width:1000px){ .pick, .top-acts { max-width:560px; } }
   .list { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 480px), 1fr)); gap:12px; }
   .bl { display:grid; grid-template-columns:120px minmax(0,1fr); gap:14px; align-items:start; background:var(--k5-card,#fff); border-radius:20px; padding:14px; box-shadow:var(--k5-sh, 0 1px 2px rgba(17,17,20,.06)); }
   .bl-fig { background:var(--k5-sub,#f5f6f8); border-radius:12px; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; overflow:hidden; color:#8a8c94; }
@@ -167,7 +181,7 @@
   @media print { body.show-report .rep-acts { display:none; } #report-view { max-width:none; padding:0; } .report { border:none; padding:0; } .report h2 { break-after:avoid; } .report section { break-inside:avoid; } }
   .report .sysfig svg { max-width:460px; height:auto; }
   .rep-title { font-size:15px; font-weight:800; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; align-self:center; }
-  @media print { .more, .filt, .acts, .hint { display:none !important; } }
+  @media print { .more, .pick, .acts, .hint { display:none !important; } }
 </style>
 <style>/* Marke kragr: das r ist ein Kragarm mit Last */ .logo-r{display:inline-block;width:1.281ex;height:1.934ex;vertical-align:baseline;margin:-.3em 0 0 -.01em;overflow:visible} /* Höhe in ex: Kragarm endet auf der Oberkante des g (x-Höhe + Überhang), auch bei Ersatzschrift */ .logo,.footer-logo,.headline{white-space:nowrap}</style>
 <style data-frame>
@@ -840,8 +854,9 @@ window.kragrK5Page = function(K){
 </header>
 
 <div class="wrap k-frame">
-  <div class="top">
-    <div><h1 class="ptitle" data-mod="proj">Rechenblätter</h1><div class="sumline" id="sum"></div></div>
+  <h1 class="ptitle sr-only" data-mod="proj">Rechenblätter</h1>
+  <div class="pick" id="pick"><button class="pick-btn" id="pick-btn" onclick="togglePick(event)" aria-haspopup="true" aria-expanded="false"><span class="pick-txt"><span class="pick-g" id="sum"></span><span class="pick-t" id="pick-t"></span></span><span class="pick-chev">▾</span></button><div class="pick-menu" id="filt" role="menu"></div></div>
+  <div class="top-acts">
     <div class="acts">
       <button class="btn q" onclick="exportFile()" data-t="export">Alle als Datei sichern</button>
       <label class="btn q"><span data-t="import">Datei laden</span><input type="file" accept=".json,.statiq,.muly,.kragr,application/json" style="display:none" onchange="importFile(this)"></label>
@@ -858,7 +873,7 @@ window.kragrK5Page = function(K){
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.25';
+const PROJ_VERSION = '0.1.26';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ addChk:'＋ Nachweis', withForces:'Mit den Schnittkräften dieses Systems:', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_first:'First', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', n1:'1 Rechenblatt', n:'{0} Rechenblätter', all:'Alle', report:'Bericht', open:'Öffnen', more:'Weitere Aktionen', rename:'Umbenennen', toSize:'In „{0}“ übernehmen',
@@ -965,15 +980,19 @@ function render(){
   const all=allItems(), nC=all.filter(x=>x.kind==='c').length, nS=all.length-nC;
   if(!['all','c','s'].includes(FIL)) FIL='all';
   document.getElementById('sum').textContent = all.length===1 ? t('n1') : t('n', all.length);
-  const f=document.getElementById('filt');
-  f.hidden = !all.length;
-  f.innerHTML=[['all',t('all'),all.length],['c',M('calc'),nC],['s',M('size'),nS]].map(([k,l,n])=>`<button type="button" data-f="${k}" aria-pressed="${FIL===k}" onclick="setFil('${k}')">${esc(l)}<span class="n">${n}</span></button>`).join('');
+  const f=document.getElementById('filt'), opts=[['all',t('all'),all.length],['c',M('calc'),nC],['s',M('size'),nS]];
+  f.innerHTML=opts.map(([k,l,n])=>`<button type="button" role="menuitem" data-f="${k}" aria-pressed="${FIL===k}" onclick="setFil('${k}')">${esc(l)}<span class="n">${n}</span></button>`).join('');
+  document.getElementById('pick-t').textContent=opts.find(o=>o[0]===FIL)[1];
   const L=all.filter(x=>FIL==='all' || x.kind===FIL);
   document.getElementById('list').innerHTML = !all.length
     ? `<div class="empty">${t('none', esc(M('calc')), esc(M('size')))}<div class="acts"><a class="btn p" href="calc.html">${esc(M('calc'))}</a><a class="btn" href="size.html">${esc(M('size'))}</a></div></div>`
     : L.length ? L.map(card).join('') : `<div class="empty">${t('noneF')}</div>`;
 }
-function setFil(k){ FIL=k; try{ localStorage.setItem(FILT, k); }catch(e){} render(); }
+function setFil(k){ FIL=k; try{ localStorage.setItem(FILT, k); }catch(e){} closePick(); render(); }
+function togglePick(e){ e && e.stopPropagation(); const p=document.getElementById('pick'), o=!p.classList.contains('open'); p.classList.toggle('open', o); document.getElementById('pick-btn').setAttribute('aria-expanded', o); }
+function closePick(){ const p=document.getElementById('pick'); if(p){ p.classList.remove('open'); document.getElementById('pick-btn').setAttribute('aria-expanded', false); } }
+document.addEventListener('click', e=>{ if(!e.target.closest('#pick')) closePick(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePick(); });
 function byId(id){ return allItems().find(x=>x.id===id); }
 function menu(b, open){ const m=b.nextElementSibling, o=open ?? (b.getAttribute('aria-expanded')!=='true');
   document.querySelectorAll('.more > button[aria-expanded="true"]').forEach(x=>{ if(x!==b){ x.setAttribute('aria-expanded','false'); x.nextElementSibling.hidden=true; } });

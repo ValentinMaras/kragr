@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.51 -->
+<!-- kragr·ref v0.3.57 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1309,7 +1309,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.56';
+const REF_VERSION = '0.3.57';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -4946,31 +4946,64 @@ function updatePoleni(){
 // Teilflächenpressung, Kellerwand, Schubwand — Rechenkerne wie in kragr·size (γ_M = 1,5, ζ = 0,85)
 // ══════════════════════════════════════════════════
 const MWR = { gM:1.5, zeta:0.85 };
-const MWR_ART = { z1:{t:'z',g:1,n:'Ziegel, Vollstein (Gr. 1)'}, z2:{t:'z',g:2,n:'Hochlochziegel (Gr. 2)'}, k1:{t:'k',g:1,n:'Kalksandstein, Voll-/Blockstein (Gr. 1)'},
-  k2:{t:'k',g:2,n:'Kalksandstein, Lochstein (Gr. 2)'}, p1:{t:'p',g:1,n:'Porenbeton (Gr. 1)'}, l1:{t:'l',g:1,n:'Leichtbeton, Vollstein (Gr. 1)'} };
+const MWR_ART = { z1:{t:'z',g:1,n:'Vollziegel (Gr. 1)'}, z2:{t:'z',g:2,n:'Hochlochziegel HLzA/HLzB (Gr. 2)'}, zw:{t:'z',g:2,n:'Hochlochziegel HLzW (Gr. 2)'},
+  k1:{t:'k',g:1,n:'Kalksandstein, Voll-/Blockstein (Gr. 1)'}, k2:{t:'k',g:2,n:'Kalksandstein, Lochstein (Gr. 2)'}, kx:{t:'k',g:1,n:'KS-Planelement KS XL (Gr. 1)'},
+  p1:{t:'p',g:1,n:'Porenbeton-Planstein (Gr. 1)'}, l1:{t:'l',g:1,n:'Leichtbeton-Vollstein (Gr. 1)'}, l2:{t:'l',g:2,n:'Leichtbeton-Hohlblock (Gr. 2)'} };
 const MWR_K = { nm:{z1:0.55,z2:0.45,k1:0.55,k2:0.45,p1:0.55,l1:0.55}, dm:{z1:0.75,z2:0.70,k1:0.80,k2:0.65,p1:0.80,l1:0.80} };
 // Rechenwerte nach DIN EN 1996-1-1/NA (Anhaltswerte): K_E (E = K_E·f_k), Endkriechzahl φ∞, Endschwinden ε∞ [mm/m], α_t [10⁻⁶/K]
 const MWR_RW = { z:{n:'Mauerziegel', KE:1100, phi:1.0, eps:0, at:6}, k:{n:'Kalksandstein', KE:950, phi:1.5, eps:-0.2, at:8},
   l:{n:'Leichtbeton', KE:950, phi:2.0, eps:-0.4, at:10}, b:{n:'Normalbeton', KE:2400, phi:1.0, eps:-0.2, at:10}, p:{n:'Porenbeton', KE:550, phi:0.5, eps:-0.1, at:8} };
 const mwOpts = () => Object.entries(MWR_ART).map(([k,v])=>[k,v.n]);
 const mwMoertel = [['nm','Normalmauermörtel'],['dm','Dünnbettmörtel']];
-// f_k und f_d mit Rechenweg
+// f_k nach DIN EN 1996-3/NA, Anhang NA.D (Tabellenwerte je Steinart, Steinfestigkeitsklasse und Mörtelklasse; seit size v0.7.21 / ref v0.3.57).
+// Quellen: Tabellen nach DIN EN 1996-3/NA:2019-12, wiedergegeben bei mauerwerksbau-lehre.de (Anhang f_k) und KS-Verband (Tafeln 4/1–4/3).
+// Einsteinmauerwerk; Verbandsmauerwerk mit Normalmörtel × 0,8 (hier nicht angesetzt). null = Kombination im NA nicht vorgesehen.
+const MW_NA_T = {
+  A1:{ n:'Hochlochziegel HLzA/HLzB, KS-Lochstein', cls:[4,6,8,10,12,16,20,28,36,48,60], M:{
+    2.5:[2.1,2.7,3.1,3.5,3.9,4.6,5.3,5.3,5.3,5.3,5.3], 5:[2.4,3.1,3.9,4.5,5.0,5.9,6.7,6.7,6.7,6.7,6.7],
+    10:[2.9,3.7,4.4,5.0,5.6,6.6,7.5,9.2,10.6,12.5,14.3], 20:[null,null,null,5.6,6.3,7.4,8.4,10.3,11.9,14.1,16.0] } },
+  A2:{ n:'Hochlochziegel HLzW, Mauertafelziegel T4', cls:[4,6,8,10,12,16,20], M:{
+    2.5:[1.7,2.2,2.5,2.8,3.1,3.1,3.1], 5:[2.0,2.5,3.2,3.6,4.0,4.0,4.0], 10:[2.3,2.9,3.5,4.0,4.5,4.5,4.5], 20:[2.6,3.3,4.0,4.5,5.0,5.0,5.0] } },
+  A3:{ n:'Vollziegel, KS-Voll- und Blockstein', cls:[4,6,8,10,12,16,20,28,36,48,60], M:{
+    2.5:[2.8,3.6,4.2,4.8,5.4,6.4,7.2,8.8,10.2,10.2,10.2], 5:[null,4.0,4.7,5.4,6.0,7.1,8.1,9.9,11.4,11.4,11.4],
+    10:[null,null,null,6.0,6.7,8.0,9.1,11.0,12.7,15.1,15.1], 20:[null,null,null,null,7.5,8.9,10.1,12.4,14.3,16.9,16.9] } },
+  LV:{ n:'Leichtbeton-Vollstein V, Vbl', cls:[2,4,6,8,10,12,16,20], M:{
+    2.5:[1.5,2.5,3.4,3.4,3.4,3.4,3.4,3.4], 5:[1.6,2.7,3.7,4.5,5.4,6.1,6.1,6.1], 10:[1.8,3.0,4.0,5.0,5.9,6.7,8.3,9.8], 20:[1.8,3.0,4.0,5.0,5.9,6.7,8.3,9.8] } },
+  LH:{ n:'Leichtbeton-Hohlblock Hbl', cls:[2,4,6,8,10,12], M:{
+    2.5:[1.4,2.2,2.9,2.9,2.9,2.9], 5:[1.5,2.4,3.1,3.7,4.3,4.8], 10:[1.7,2.6,3.3,4.0,4.6,5.1], 20:[1.7,2.6,3.3,4.0,4.6,5.1] } },
+  KSP:{ n:'KS-Planstein KS P', cls:[4,6,8,10,12,16,20,28,36,48,60], DM:[2.9,4.0,5.0,6.0,7.0,8.8,10.5,13.8,13.8,13.8,13.8] },
+  KSLP:{ n:'KS-Loch-Planstein KS L-P', cls:[4,6,8,10,12,16,20,28,36,48,60], DM:[2.9,3.7,4.4,5.0,5.6,6.6,7.6,7.6,7.6,7.6,7.6] },
+  KSXL:{ n:'KS-Planelement KS XL', cls:[4,6,8,10,12,16,20,28,36,48,60], DM:[2.9,4.0,5.0,6.0,9.4,11.2,12.9,16.0,16.0,16.0,16.0] },
+  PP:{ n:'Porenbeton-Planstein PP', cls:[2,4,6,8], DM:[1.8,3.0,4.1,5.1] },
+  PHLZ:{ n:'Planhochlochziegel PHLzB/PHLzE', cls:[6,8,10,12,16,20], DM:[3.1,3.7,4.2,4.7,5.5,6.3] } };
+// Steinart → Tabelle bei Normalmörtel (nm) bzw. Dünnbettmörtel (dm)
+const MW_NA_ART = { z1:{nm:'A3'}, z2:{nm:'A1',dm:'PHLZ'}, zw:{nm:'A2'}, k1:{nm:'A3',dm:'KSP'}, k2:{nm:'A1',dm:'KSLP'}, kx:{dm:'KSXL'}, p1:{dm:'PP'}, l1:{nm:'LV'}, l2:{nm:'LH'} };
+// Liefert { fk, tab, cls, M, note } oder { err } (Text für den Hinweis)
+function mwNA(art, m, fst, fm){
+  const key=(MW_NA_ART[art]||{})[m]; if(!key) return { err:tt('Für diese Steinart ist mit diesem Mörtel keine NA-Tabelle hinterlegt – f<sub>k</sub> selbst vorgeben (Zulassung).') };
+  const T=MW_NA_T[key]; let i=-1; T.cls.forEach((c,k)=>{ if(fst>=c-1e-9) i=k; });
+  if(i<0) return { err:_L`Steinfestigkeitsklasse kleiner als ${T.cls[0]} – in der NA-Tabelle nicht enthalten.` };
+  let row, Mk=null;
+  if(m==='dm') row=T.DM; else { const ms=[2.5,5,10,20].filter(x=>fm>=x-1e-9); if(!ms.length) return { err:tt('Mörtelklasse kleiner als M 2,5 – im NA nicht vorgesehen.') }; Mk=ms[ms.length-1]; row=T.M[Mk]; }
+  const v=row[i]; if(v==null) return { err:_L`Steinfestigkeitsklasse ${T.cls[i]} mit M ${String(Mk).replace('.',',')} ist im NA nicht vorgesehen.` };
+  return { fk:v, tab:T.n, cls:T.cls[i], M:Mk, rounded:Math.abs(fst-T.cls[i])>1e-9 };
+}
+// f_k und f_d mit Rechenweg (seit ref v0.3.57 aus der NA-Tabelle statt mit der EN-Formel)
 function mwFest(art, m, fb, fm){
-  const A=MWR_ART[art], K=MWR_K[m][art], f=deNum; let fk, S=[];
-  if(m==='nm'){ const fmE=Math.min(fm,20,2*fb); fk=K*fb**0.7*fmE**0.3;
-    if(fmE<fm) S.push(_L`!f<sub>m</sub> wird begrenzt auf min(20; 2·f<sub>b</sub>) = ${f(fmE,1)} N/mm²`);
-    S.push(`f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup> = ${f(K,2)} · ${f(fb,1)}<sup>0,7</sup> · ${f(fmE,1)}<sup>0,3</sup> = ${f(fk,2)} N/mm²`); }
-  else if(A.g===1){ fk=K*fb**0.85; S.push(`f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup> = ${f(K,2)} · ${f(fb,1)}<sup>0,85</sup> = ${f(fk,2)} N/mm²`); }
-  else { fk=K*fb**0.7; S.push(`f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> = ${f(K,2)} · ${f(fb,1)}<sup>0,7</sup> = ${f(fk,2)} N/mm²`); }
+  const A=MWR_ART[art]||MWR_ART.z2, f=deNum; let fk, S=[], err='';
+  const r=mwNA(art, m, fb, fm);
+  if(r.err){ fk=NaN; err=r.err; S.push('!'+err); }
+  else { fk=r.fk; S.push(_L`f<sub>k</sub> = ${f(fk,1)} N/mm² (Tabelle NA.D: ${tt(r.tab)}, Steinfestigkeitsklasse ${r.cls}, ${m==='dm'?tt('Dünnbettmörtel'):'M '+String(r.M).replace('.',',')})`);
+    if(r.rounded) S.push(_L`!Klasse ${String(fb).replace('.',',')} auf die nächstkleinere Tabellenklasse ${r.cls} abgerundet`); }
   const fvk0 = m==='dm' ? ({z:0.30,k:0.40,p:0.30,l:0.30})[A.t] : (A.t==='z' ? (fm>=10?0.30:fm>=2.5?0.20:0.10) : (fm>=10?0.20:fm>=2.5?0.15:0.10));
   const fd=MWR.zeta*fk/MWR.gM;
   S.push(`f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub> = 0,85 · ${f(fk,2)} / 1,5 = ${f(fd,3)} N/mm²`);
-  return { fk, fd, K, fvk0, grp:A.g, typ:A.t, name:A.n, S };
+  return { fk, fd, K:null, fvk0, grp:A.g, typ:A.t, name:A.n, S, err };
 }
 function mwRead(p){ return mwFest(valOf(p+'art'), valOf(p+'m'), num(p+'fb'), num(p+'fm')); }
 // gemeinsame Baustofffelder
-const mwFelder = (p, on, d={art:'k1',m:'dm',fb:15,fm:10}) => field(tt('Steinart'), sel(p+'art', mwOpts(), d.art, on)) + field(tt('Mörtel'), sel(p+'m', mwMoertel, d.m, on))
-  + field(tt('f<sub>b</sub> bzw. f<sub>st</sub> [N/mm²]'), inp(p+'fb', d.fb, on)) + field(tt('f<sub>m</sub> [N/mm²] (nur Normalmörtel)'), inp(p+'fm', d.fm, on));
+const mwFelder = (p, on, d={art:'k1',m:'dm',fb:12,fm:10}) => field(tt('Steinart'), sel(p+'art', mwOpts(), d.art, on)) + field(tt('Mörtel'), sel(p+'m', mwMoertel, d.m, on))
+  + field(tt('Steinfestigkeitsklasse'), inp(p+'fb', d.fb, on)) + field(tt('Mörtelklasse M (nur Normalmörtel)'), inp(p+'fm', d.fm, on));
 
 // ── Skizzen ──
 const MWC = { st:'#e7c9b0', fu:'#b08968', db:'#cbd5e1' };
@@ -5032,10 +5065,11 @@ function updateMass(){
 function updateFk(){
   const out=document.getElementById('fk-out'); if(!out) return;
   const fb=num('fk-fb'), fm=num('fk-fm');
-  if(!(fb>0) || (valOf('fk-m')==='nm' && !(fm>0))){ out.innerHTML=tt('Bitte f<sub>b</sub> (und bei Normalmörtel f<sub>m</sub>) > 0 eingeben.'); return; }
+  if(!(fb>0) || (valOf('fk-m')==='nm' && !(fm>0))){ out.innerHTML=tt('Bitte Steinfestigkeitsklasse (und bei Normalmörtel die Mörtelklasse) > 0 eingeben.'); return; }
   const R=mwRead('fk-'), rw=MWR_RW[R.typ], E=rw.KE*R.fk, f=deNum;
+  if(R.err){ out.innerHTML=R.err; return; }
   out.innerHTML = ablauf(`${R.name}, ${valOf('fk-m')==='nm'?tt('Normalmauermörtel'):tt('Dünnbettmörtel')}`, [
-    _L`§Charakteristische Druckfestigkeit (EN 1996-1-1, 3.6.1.2)`, _L`!K = ${f(R.K,2)} für ${R.name} (Tab. 3.3, Empfehlung)`, ...R.S.slice(0,-1),
+    _L`§Charakteristische Druckfestigkeit (DIN EN 1996-3/NA, Anhang NA.D)`, ...R.S.slice(0,-1),
     `§Bemessungswert`, R.S[R.S.length-1], _L`!ζ = 0,85 erfasst die geringere Festigkeit unter Dauerlast; γ<sub>M</sub> = 1,5 für Mauerwerk nach NA`,
     _L`§Verformungskennwerte (NA, Anhaltswerte)`, `E = K<sub>E</sub> · f<sub>k</sub> = ${dk(rw.KE)} · ${f(R.fk,2)} = ${dk(E)} N/mm²`,
     _L`!Endkriechzahl φ<sub>∞</sub> = ${f(rw.phi,1)} · Endschwinden ε<sub>∞</sub> = ${f(rw.eps,1).replace('-','−')} mm/m · α<sub>t</sub> = ${rw.at} · 10⁻⁶ /K`,
@@ -5078,6 +5112,7 @@ function mwWandRechnung(I){
 function updateMWD(){
   const out=document.getElementById('mwd-out'); if(!out) return;
   const I={ M:mwRead('mwd-'), t:num('mwd-t'), h:num('mwd-h'), l:num('mwd-l'), lage:valOf('mwd-lage'), decke:valOf('mwd-d'), a:num('mwd-a'), lf:num('mwd-lf')||0, N:num('mwd-N') };
+  if(I.M.err){ out.innerHTML=I.M.err; return; }
   if(!(I.M.fk>0 && I.t>0 && I.h>0 && I.l>0 && I.a>0 && I.a<=I.t && I.N>0)){ out.innerHTML=tt('Bitte alle Werte > 0 und a ≤ t eingeben.'); return; }
   const R=mwWandRechnung(I), f=deNum, t=I.t, k6=I.M.fk>=1.8?6:5;
   const G=[[_L`lichte Wandhöhe h = ${f(I.h,2)} m ≤ ${t<240?'2,75 m':'12 · t = '+f(R.hlim,2)+' m'}`, I.h<=R.hlim+1e-9],[_L`Deckenstützweite l<sub>f</sub> = ${f(I.lf,2)} m ≤ 6,0 m`, I.lf<=6],[`h<sub>ef</sub>/t = ${f(R.lam,1)} ≤ 27`, R.lam<=27],[`A = ${f(R.A,3)} m² ≥ 0,04 m²`, R.A>=0.04]];
@@ -5104,6 +5139,7 @@ function mwTeilRechnung(I){
 function updateMWT(){
   const out=document.getElementById('mwt-out'); if(!out) return;
   const I={ M:mwRead('mwt-'), t:num('mwt-t'), hc:num('mwt-hc'), lb:num('mwt-lb'), bb:num('mwt-bb'), a1:num('mwt-a1')||0, lw:num('mwt-lw'), N:num('mwt-N') };
+  if(I.M.err){ out.innerHTML=I.M.err; return; }
   if(!(I.M.fk>0&&I.t>0&&I.hc>0&&I.lb>0&&I.bb>0&&I.bb<=I.t&&I.a1>=0&&I.a1+I.lb<=I.lw*1000&&I.N>0)){ out.innerHTML=tt('Bitte Maße > 0, Auflagerbreite ≤ t und das Auflager innerhalb der Wand eingeben.'); return; }
   const R=mwTeilRechnung(I), f=deNum;
   out.innerHTML = ablauf(_L`Einzellast auf ${f(I.lb,0)} × ${f(I.bb,0)} mm`, [`§Baustoff`, ...I.M.S,
@@ -5121,6 +5157,7 @@ function mwKellerBeta(bc,h){ return bc>=2*h ? 20 : bc<=h ? 40 : 60-20*bc/h; }
 function updateMWK(){
   const out=document.getElementById('mwk-out'); if(!out) return;
   const M=mwRead('mwk-'), t=num('mwk-t'), h=num('mwk-h'), he=num('mwk-he'), bc=num('mwk-bc'), rho=num('mwk-rho'), q=num('mwk-q')||0, Nmax=num('mwk-Nmax'), Nmin=num('mwk-Nmin'), f=deNum;
+  if(M.err){ out.innerHTML=M.err; return; }
   if(!(M.fk>0&&t>0&&h>0&&he>=0&&bc>0&&rho>0&&Nmax>=Nmin&&Nmin>=0)){ out.innerHTML=tt('Bitte Maße > 0 und n<sub>max</sub> ≥ n<sub>min</sub> ≥ 0 eingeben.'); return; }
   const beta=mwKellerBeta(bc,h), nreq=rho*h*he*he/(beta*t/1000), nlim=t*M.fd/3;
   const G=[[`t = ${t} mm ≥ 200 mm`,t>=200],[`h = ${f(h,2)} m ≤ 2,60 m`,h<=2.6],[`q<sub>k</sub> = ${f(q,1)} kN/m² ≤ 5 kN/m²`,q<=5],[`h<sub>e</sub> = ${f(he,2)} m ≤ h`,he<=h]];
@@ -5141,6 +5178,7 @@ function mwSchubRechnung(I){
 function updateMWS(){
   const out=document.getElementById('mws-out'); if(!out) return;
   const I={ M:mwRead('mws-'), fb:num('mws-fb'), l:num('mws-l'), t:num('mws-t'), h:num('mws-h'), lag:valOf('mws-lag'), N:num('mws-N'), V:num('mws-V'), stoss:valOf('mws-st')==='1' };
+  if(I.M.err){ out.innerHTML=I.M.err; return; }
   if(!(I.M.fk>0&&I.l>0&&I.t>0&&I.h>0&&I.N>0&&I.V>=0)){ out.innerHTML=tt('Bitte l, t, h, N > 0 und V ≥ 0 eingeben.'); return; }
   const R=mwSchubRechnung(I), f=deNum, l=I.l;
   out.innerHTML = ablauf(_L`Wandscheibe l = ${f(l,2)} m, t = ${I.t} mm`, [
@@ -7687,14 +7725,20 @@ Object.assign(CONTENT, {
 
   'mauerwerk/baustoffe/festigkeit': () => _L`
     <div class="card">
-      <div class="card-title">Charakteristische Druckfestigkeit f<sub>k</sub> (EN 1996-1-1, 3.6.1.2)</div>
+      <div class="card-title">Charakteristische Druckfestigkeit f<sub>k</sub> nach NA (DIN EN 1996-3/NA, Anhang NA.D)</div>
+      <div class="section-note">In Deutschland wird f<sub>k</sub> aus Tabellen abgelesen: je Steinart, Steinfestigkeitsklasse und Mörtelklasse (M 2,5 / 5 / 10 / 20) bzw. Dünnbettmörtel. Die Werte gelten für Einsteinmauerwerk; Verbandsmauerwerk mit Normalmörtel erhält 80 %. Für Steine mit Zulassung gilt deren Wert. Auszug:</div>
+      ${textTable([tt('Klasse'),'HLz M 5','HLz M 10','KS M 5','KS M 10','KS P DM','PP DM'], [4,6,8,12,16,20].map(c=>{ const g=(k,m)=>{ const T=MW_NA_T[k], i=T.cls.indexOf(c); if(i<0) return '–'; const v=m?T.M[m][i]:T.DM[i]; return v==null?'–':deNum(v,1); }; return [c, g('A1',5), g('A1',10), g('A3',5), g('A3',10), g('KSP'), g('PP')]; }))}
+      <div class="legend">f<sub>k</sub> in N/mm². HLz: Hochlochziegel HLzA/HLzB · KS: Kalksand-Voll- und Blockstein · KS P: KS-Planstein · PP: Porenbeton-Planstein · DM: Dünnbettmörtel. „–“: Kombination im NA nicht vorgesehen. Vollständige Tabellen: DIN EN 1996-3/NA:2019-12, Anhang NA.D.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Hintergrund: EN-Formel (EN 1996-1-1, 3.6.1.2)</div>
       <div class="formula-box">
         Normalmauermörtel:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup> · f<sub>m</sub><sup>0,3</sup>&nbsp;&nbsp; mit f<sub>m</sub> ≤ min(20; 2 · f<sub>b</sub>)<br>
         Dünnbettmörtel, Gruppe 1:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,85</sup>&nbsp;&nbsp;&nbsp; Lochsteine:&nbsp; f<sub>k</sub> = K · f<sub>b</sub><sup>0,7</sup><br>
         Bemessungswert:&nbsp; f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub>&nbsp;&nbsp; mit ζ = 0,85 (Dauerstandfestigkeit), γ<sub>M</sub> = 1,5
-        <div class="comment">In Deutschland stehen die f<sub>k</sub>-Werte in Tabellen des NA (je Steinart, Festigkeitsklasse und Mörtel). Die Formel mit den Empfehlungswerten zeigt, wovon f<sub>k</sub> abhängt — für die Bemessung die NA-Tabelle oder die Zulassung verwenden.</div>
+        <div class="comment">Die Formel mit den EN-Empfehlungswerten zeigt, wovon f<sub>k</sub> abhängt. Sie liefert bis etwa ±15 % andere Werte als die NA-Tabellen; gerechnet wird in kragr mit der NA-Tabelle.</div>
       </div>
-      ${textTable([tt('Steinart'),tt('K (Normalmörtel)'),tt('K (Dünnbettmörtel)')], Object.entries(MWR_ART).map(([k,v])=>[v.n, deNum(MWR_K.nm[k],2), deNum(MWR_K.dm[k],2)]))}
+      ${textTable([tt('Steinart'),tt('K (Normalmörtel)'),tt('K (Dünnbettmörtel)')], Object.entries(MWR_K.nm).map(([k,v])=>[MWR_ART[k].n, deNum(v,2), deNum(MWR_K.dm[k],2)]))}
     </div>
     <div class="card">
       <div class="card-title">Rechenwerte für Verformungen (NA, Anhaltswerte)</div>
@@ -7751,7 +7795,7 @@ Object.assign(CONTENT, {
     <div class="card">
       <div class="card-title">Wand nachweisen</div>
       <div class="calc-grid">
-        ${mwFelder('mwd-', 'updateMWD()', {art:'k1',m:'dm',fb:15,fm:10})}
+        ${mwFelder('mwd-', 'updateMWD()', {art:'k1',m:'dm',fb:12,fm:10})}
         ${field(tt('Wanddicke t [mm]'), inp('mwd-t', 175, 'updateMWD()'))}
         ${field(tt('lichte Höhe h [m]'), inp('mwd-h', 2.6, 'updateMWD()'))}
         ${field(tt('Wandlänge l [m]'), inp('mwd-l', 1.0, 'updateMWD()'))}
@@ -7780,7 +7824,7 @@ Object.assign(CONTENT, {
     <div class="card">
       <div class="card-title">Teilflächenpressung nachweisen</div>
       <div class="calc-grid">
-        ${mwFelder('mwt-', 'updateMWT()', {art:'z1',m:'nm',fb:15,fm:5})}
+        ${mwFelder('mwt-', 'updateMWT()', {art:'z1',m:'nm',fb:16,fm:5})}
         ${field(tt('Wanddicke t [mm]'), inp('mwt-t', 240, 'updateMWT()'))}
         ${field(tt('Wandhöhe h<sub>c</sub> [m]'), inp('mwt-hc', 2.5, 'updateMWT()'))}
         ${field(tt('Wandlänge [m]'), inp('mwt-lw', 3.0, 'updateMWT()'))}
@@ -7808,7 +7852,7 @@ Object.assign(CONTENT, {
     <div class="card">
       <div class="card-title">Kellerwand nachweisen</div>
       <div class="calc-grid">
-        ${mwFelder('mwk-', 'updateMWK()', {art:'k1',m:'nm',fb:15,fm:10})}
+        ${mwFelder('mwk-', 'updateMWK()', {art:'k1',m:'nm',fb:16,fm:10})}
         ${field(tt('Wanddicke t [mm]'), inp('mwk-t', 300, 'updateMWK()'))}
         ${field(tt('lichte Höhe h [m]'), inp('mwk-h', 2.5, 'updateMWK()'))}
         ${field(tt('Anschütthöhe h<sub>e</sub> [m]'), inp('mwk-he', 2.0, 'updateMWK()'))}
@@ -7838,7 +7882,7 @@ Object.assign(CONTENT, {
     <div class="card">
       <div class="card-title">Schubwand nachweisen</div>
       <div class="calc-grid">
-        ${mwFelder('mws-', 'updateMWS()', {art:'k1',m:'dm',fb:25,fm:10})}
+        ${mwFelder('mws-', 'updateMWS()', {art:'k1',m:'dm',fb:20,fm:10})}
         ${field(tt('Wandlänge l [m]'), inp('mws-l', 2.5, 'updateMWS()'))}
         ${field(tt('Wanddicke t [mm]'), inp('mws-t', 175, 'updateMWS()'))}
         ${field(tt('Wandhöhe h [m]'), inp('mws-h', 2.75, 'updateMWS()'))}

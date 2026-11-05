@@ -66,10 +66,14 @@ async def main():
         check('Kopf: „Rechenblätter“ · „2 Rechenblätter“, Seitentitel', await pg.text_content('h1.ptitle')=='Rechenblätter' and await pg.text_content('#sum')=='2 Rechenblätter' and await pg.title()=='Rechenblätter — kragr')
         res=await pg.evaluate("document.querySelectorAll('.bl')[1].querySelector('.bl-res').textContent")
         check('calc-Eintrag zeigt M_max = 40,63 kNm und Q_max = 22,50 kN', 'Mmax = 40,63 kNm' in res and 'Qmax = 22,50 kN' in res, res)
+        check('Auswahl oben wie in den Modulen (projekt v0.1.26): klein die Anzahl, groß „Alle“, Menü zu', await pg.text_content('#pick-t')=='Alle' and not await pg.is_visible('#filt') and await pg.is_visible('.top-acts .acts'))
+        await pg.click('#pick-btn'); await pg.wait_for_timeout(150)
+        check('Menü: Alle / Schnittkräfte / Bemessung mit Anzahl', await pg.evaluate("[...document.querySelectorAll('#filt button')].map(b=>b.textContent)")==['Alle2','Schnittkräfte1','Bemessung1'], await pg.evaluate("[...document.querySelectorAll('#filt button')].map(b=>b.textContent)"))
         await pg.click('#filt button[data-f="s"]'); f=await pg.evaluate("[...document.querySelectorAll('.bl-name')].map(e=>e.textContent)")
+        check('Wahl schließt das Menü, Auswahl zeigt „Bemessung“', await pg.text_content('#pick-t')=='Bemessung' and not await pg.is_visible('#filt'))
         await pg.reload(); await pg.wait_for_timeout(300); f2=await pg.evaluate("[...document.querySelectorAll('.bl-name')].map(e=>e.textContent)")
         check('Filter „Bemessung“, bleibt nach Neuladen', f==['Unterzug Beton'] and f2==f, (f,f2))
-        await pg.click('#filt button[data-f="all"]')
+        await pg.click('#pick-btn'); await pg.click('#filt button[data-f="all"]')
         # Menü
         await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open')
         mi=await pg.evaluate("()=>{const a=document.querySelector('#k5-menu [data-mod=projekt]'); return {t:a.querySelector('b').textContent, s:a.querySelector('.k5-mt > span').textContent, cur:a.getAttribute('aria-current')}}")
@@ -119,7 +123,7 @@ async def main():
         check('Datei laden stellt die Rechenblätter wieder her', await pg.evaluate("[...document.querySelectorAll('.bl-name')].map(e=>e.textContent)")==['Unterzug Pos. 3'])
         # leer
         await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(300)
-        r=await pg.evaluate("({e:document.querySelector('.empty')&&document.querySelector('.empty').textContent, f:document.getElementById('filt').hidden, links:[...document.querySelectorAll('.empty a')].map(a=>a.getAttribute('href'))})")
+        r=await pg.evaluate("({e:document.querySelector('.empty')&&document.querySelector('.empty').textContent, f:document.getElementById('sum').textContent==='0 Rechenblätter' && !!document.getElementById('pick').offsetParent, links:[...document.querySelectorAll('.empty a')].map(a=>a.getAttribute('href'))})")
         check('leer: Hinweis „Als Rechenblatt speichern“ und Links zu beiden Modulen', 'Als Rechenblatt speichern' in r['e'] and r['f'] and r['links']==['calc.html','size.html'], r)
         # Sprachen
         for l,h,btn in [('en','Calculation sheets','Save as calculation sheet'),('fr','Notes de calcul','Enregistrer comme note de calcul'),('es','Memorias de cálculo','Guardar como memoria de cálculo')]:

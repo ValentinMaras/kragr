@@ -504,11 +504,11 @@ window.kragrK5Page = function(K){
   var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3, gM0:1.0, gM1:1.1, gM2:1.25 },
              at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en', gM0:1.0, gM1:1.0, gM2:1.25, cotmax:1/0.6, rhow:'at', smax250:true },
              // UK: BS EN 1990/NA (SCIA NA EN 1990: 6.10a/b, ξ = 0,925, ψ0 Wind 0,5, Kat. H 0,7), BS EN 1992-1-1/NA (SCIA NA EN 1992: γ_c/γ_s EN, α_cc 0,85 Biegung/Druck, 1,0 sonst; c_min,dur nach BS 8500 → Eingabe; Δc_dev EN 10 mm; C_Rd,c/v_min EN; cot θ ≤ 2,5; ν1 = ν; ρ_w,min EN),
-             // BS EN 1993-1-1/NA (Oasys GSA und SCIA NA EN 1993: γ_M0 = γ_M1 = 1,0, γ_M2 = 1,1; Biegedrillknicken gewalzt λ̄_LT,0 0,4, β 0,75, Kurve b/c/d für h/b ≤ 2 / ≤ 3,1 / > 3,1 nach NSC 01/2009; f nach NA 2.18 nicht belegt → f = 1, sichere Seite; Interaktion Anhang B)
+             // BS EN 1993-1-1/NA (Oasys GSA und SCIA NA EN 1993: γ_M0 = γ_M1 = 1,0, γ_M2 = 1,1; Biegedrillknicken gewalzt λ̄_LT,0 0,4, β 0,75, Kurve b/c/d für h/b ≤ 2 / ≤ 3,1 / > 3,1 nach NSC 01/2009; f nach NA 2.18 nicht belegt → f = 1, sichere Seite; Interaktion Anhang B); Rissbreite UK: 7.3.4(3) EN (k3 3,4, k4 0,425), w_max 0,3 mm (SCIA)
              uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk' } };
   // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
   var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
-                 uk:{ 'beton/balken':['deckung','biegung','querkraft'], 'beton/platte':['deckung','biegung','querkraft'], 'beton/unterzug':['deckung','biegung','querkraft'],
+                 uk:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] } };
   window.kragrNAV=function(k){ var v=(NA_V[naNow()]||{})[k]; return v===undefined ? null : v; };
   window.kragrNACovers=function(scope, id){ var n=naNow(); if(n==='de') return true; var c=(NA_COVER[n]||{})[scope]; return !!(c && c.indexOf(id)>=0); };

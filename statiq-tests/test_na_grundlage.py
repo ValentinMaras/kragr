@@ -127,7 +127,10 @@ async def main():
         check('UK: Eingabe c_min,dur nach BS 8500 sichtbar (Vorgabe 15 mm)', r==['uk','block','15'], r)
         await pg.evaluate("$('in-auto') && ($('in-auto').checked=false); run()"); await pg.wait_for_timeout(300)
         r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für')])")
-        check('UK Beton: Deckung, Biegung und Querkraft gerechnet, übrige Nachweise als Hinweis', all(h==(i not in ('deckung','biegung','querkraft')) for i,h in r), r)
+        check('UK Beton: Deckung, Biegung, Querkraft und Rissbreite gerechnet, übrige als Hinweis', all(h==(i not in ('deckung','biegung','querkraft','riss')) for i,h in r), r)
+        # Rissbreite UK (EN 7.3.4(3)): c = c_v + Ø_w = 25 + 8 = 33 mm; s_r,max = 3,4·33 + 0,8·0,5·0,425·16/0,03269 = 112,2 + 83,2 = 195 mm; w_max = 0,3 mm
+        t=await pg.evaluate("document.querySelector('#n-riss .steps').textContent")
+        check('UK Rissbreite: s_r,max = 3,4·33 + 0,8·0,5·0,425·Ø/ρ = 195 mm, w_max = 0,3 mm', '= 3,4·33 + 0,8·0,5·0,425·16/0,0327= 195 mm' in t.replace(' = ','= ') and '0,3 mm (XC1, BS EN 1992-1-1/NA)' in t, t[t.find('sr,max'):t.find('sr,max')+120])
         # Bügel Ø8: c_nom = max(15; 8; 10) + Δc_dev 10 = 25 mm; f_cd = 0,85·30/1,5 = 17,00; Querkraft: α_cc = 1,0 → f_cd = 20,00 für die Druckstrebe; a_sw,min = 0,08·√30/500·300·10 = 2,63 cm²/m; s_l,max = 0,75·d
         t=await pg.evaluate("[document.querySelector('#n-deckung .steps').textContent, document.querySelector('#n-biegung .steps').textContent, document.querySelector('#n-querkraft .steps').textContent]")
         check('UK Deckung: c_nom Bügel = max(15; 8; 10) + 10 = 25 mm', '= max(15; 8; 10) + 10= 25 mm' in t[0], t[0][:120])

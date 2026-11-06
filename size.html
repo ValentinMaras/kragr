@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.26 -->
+<!-- kragr·size v0.7.27 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1017,11 +1017,11 @@ window.kragrK5Page = function(K){
   var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3, gM0:1.0, gM1:1.1, gM2:1.25 },
              at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en', gM0:1.0, gM1:1.0, gM2:1.25, cotmax:1/0.6, rhow:'at', smax250:true },
              // UK: BS EN 1990/NA (SCIA NA EN 1990: 6.10a/b, ξ = 0,925, ψ0 Wind 0,5, Kat. H 0,7), BS EN 1992-1-1/NA (SCIA NA EN 1992: γ_c/γ_s EN, α_cc 0,85 Biegung/Druck, 1,0 sonst; c_min,dur nach BS 8500 → Eingabe; Δc_dev EN 10 mm; C_Rd,c/v_min EN; cot θ ≤ 2,5; ν1 = ν; ρ_w,min EN),
-             // BS EN 1993-1-1/NA (Oasys GSA und SCIA NA EN 1993: γ_M0 = γ_M1 = 1,0, γ_M2 = 1,1; Biegedrillknicken gewalzt λ̄_LT,0 0,4, β 0,75, Kurve b/c/d für h/b ≤ 2 / ≤ 3,1 / > 3,1 nach NSC 01/2009; f nach NA 2.18 nicht belegt → f = 1, sichere Seite; Interaktion Anhang B)
+             // BS EN 1993-1-1/NA (Oasys GSA und SCIA NA EN 1993: γ_M0 = γ_M1 = 1,0, γ_M2 = 1,1; Biegedrillknicken gewalzt λ̄_LT,0 0,4, β 0,75, Kurve b/c/d für h/b ≤ 2 / ≤ 3,1 / > 3,1 nach NSC 01/2009; f nach NA 2.18 nicht belegt → f = 1, sichere Seite; Interaktion Anhang B); Rissbreite UK: 7.3.4(3) EN (k3 3,4, k4 0,425), w_max 0,3 mm (SCIA)
              uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk' } };
   // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
   var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
-                 uk:{ 'beton/balken':['deckung','biegung','querkraft'], 'beton/platte':['deckung','biegung','querkraft'], 'beton/unterzug':['deckung','biegung','querkraft'],
+                 uk:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] } };
   window.kragrNAV=function(k){ var v=(NA_V[naNow()]||{})[k]; return v===undefined ? null : v; };
   window.kragrNACovers=function(scope, id){ var n=naNow(); if(n==='de') return true; var c=(NA_COVER[n]||{})[scope]; return !!(c && c.indexOf(id)>=0); };
@@ -4123,7 +4123,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.26';
+const SIZE_VERSION = '0.7.27';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4357,7 +4357,7 @@ function biegeQS(M, bfun, d, fcd, hf){   // M [kNm], mm, N/mm² → { st, x, Fc,
   _memoT.set(key, r); return r;
 }
 // Rissbreite mit Breite der Druckzone b_c(y) und Zugbreite b_t (Zustand II, linear-elastisch) — mm, mm², kNm
-function rissbreiteQS({bfun, bt, h, d, As, ds, M, B}){
+function rissbreiteQS({bfun, bt, h, d, As, ds, M, B, c}){
   const Ecm=B[6]*1000, fct=B[4], ae=SB.Es/Ecm, n=200;
   const S = x => { let s=0; for(let i=0;i<n;i++){ const y=(i+0.5)*x/n; s+=bfun(y)*(x-y)*x/n; } return s; };   // ∫ b(y)·(x−y) dy
   let lo=0, hi=d; for(let i=0;i<60;i++){ const x=(lo+hi)/2; if(S(x) < ae*As*(d-x)) lo=x; else hi=x; }
@@ -4365,9 +4365,11 @@ function rissbreiteQS({bfun, bt, h, d, As, ds, M, B}){
   let F=0, Fy=0; for(let i=0;i<n;i++){ const y=(i+0.5)*x/n, f=bfun(y)*(x-y)*x/n; F+=f; Fy+=f*y; }
   const z=d-Fy/F, ss=M*1e6/(As*z);
   const hce=Math.min(2.5*(h-d), (h-x)/3, h/2), rpe=As/(bt*hce);
-  const sr1=ds/(3.6*rpe), sr2=ss*ds/(3.6*fct), sr=Math.min(sr1,sr2);
+  // UK (BS EN 1992-1-1/NA, 7.3.4(3) wie EN): s_r,max = k3·c + k1·k2·k4·Ø/ρ_p,eff mit k3 = 3,4, k1 = 0,8, k2 = 0,5, k4 = 0,425
+  const enF = naLand()==='uk' && c>0;
+  const sr1 = enF ? 3.4*c + 0.8*0.5*0.425*ds/rpe : ds/(3.6*rpe), sr2 = enF ? Infinity : ss*ds/(3.6*fct), sr=Math.min(sr1,sr2);
   const de=Math.max((ss-0.4*fct/rpe*(1+ae*rpe))/SB.Es, 0.6*ss/SB.Es);
-  return { ae, x, z, ss, hce, rpe, sr1, sr2, sr, de, wk: sr*de, fct };
+  return { ae, x, z, ss, hce, rpe, sr1, sr2, sr, de, wk: sr*de, fct, enF, c };
 }
 
 // Geometrie (Betondeckung, Nutzhöhe) — alle Längen in mm
@@ -4812,9 +4814,9 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
   }
 
   // 7) Rissbreite (Feld)
-  const wmax = ex[6];
+  const wmax = naLand()==='uk' ? 0.3 : ex[6];
   if(I.Mqp>0){
-    const r = rissbreiteQS({ bfun, bt:b, h, d, As, ds:R.ds, M:I.Mqp, B });
+    const r = rissbreiteQS({ bfun, bt:b, h, d, As, ds:R.ds, M:I.Mqp, B, c:G.cvl });
     const S = [H(tt('Gerissener Querschnitt (Zustand II): Nulllinie und Hebelarm')),
       `α<sub>e</sub> = E<sub>s</sub>/E<sub>cm</sub> = ${deNum(r.ae,2)}`,
       _L`Nulllinie Zustand II${uz?tt(' (Druckzone mit b<sub>eff</sub>)'):''}: x = ${deNum(r.x,1)} mm · z = ${deNum(r.z,1)} mm`,
@@ -4824,11 +4826,12 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       `h<sub>c,ef</sub> = min(2,5·(h−d); (h−x)/3; h/2) = ${deNum(r.hce,1)} mm`,
       `ρ<sub>p,eff</sub> = A<sub>s</sub>/(b${uz?'<sub>w</sub>':''}·h<sub>c,ef</sub>) = ${deNum(r.rpe*100,3)} %`,
       H(tt('Größter Rissabstand')),
-      `s<sub>r,max</sub> = min(Ø/(3,6·ρ<sub>p,eff</sub>); σ<sub>s</sub>·Ø/(3,6·f<sub>ct,eff</sub>)) = min(${deNum(r.sr1,0)}; ${deNum(r.sr2,0)}) = ${deNum(r.sr,0)} mm`,
+      r.enF ? `s<sub>r,max</sub> = k<sub>3</sub>·c + k<sub>1</sub>·k<sub>2</sub>·k<sub>4</sub>·Ø/ρ<sub>p,eff</sub> = 3,4·${deNum(r.c,0)} + 0,8·0,5·0,425·${R.ds}/${deNum(r.rpe,4)} = ${deNum(r.sr,0)} mm`
+        : `s<sub>r,max</sub> = min(Ø/(3,6·ρ<sub>p,eff</sub>); σ<sub>s</sub>·Ø/(3,6·f<sub>ct,eff</sub>)) = min(${deNum(r.sr1,0)}; ${deNum(r.sr2,0)}) = ${deNum(r.sr,0)} mm`,
       H(tt('Mittlere Dehnungsdifferenz Stahl–Beton zwischen zwei Rissen')),
       `ε<sub>sm</sub> − ε<sub>cm</sub> = max([σ<sub>s</sub> − 0,4·f<sub>ct,eff</sub>/ρ<sub>p,eff</sub>·(1 + α<sub>e</sub>·ρ<sub>p,eff</sub>)]/E<sub>s</sub>; 0,6·σ<sub>s</sub>/E<sub>s</sub>) = ${deNum(r.de*1000,3)} ‰`,
       H(tt('Rissbreite = Rissabstand × Dehnungsdifferenz')),
-      `w<sub>k</sub> = s<sub>r,max</sub>·(ε<sub>sm</sub> − ε<sub>cm</sub>) = <b>${deNum(r.wk,3)} mm</b> ≤ w<sub>max</sub> = ${deNum(wmax,1)} mm (${ex[0]}, ${naLand()==='at'?'Tab. 7.1N':'Tab. 7.1DE'})`];
+      `w<sub>k</sub> = s<sub>r,max</sub>·(ε<sub>sm</sub> − ε<sub>cm</sub>) = <b>${deNum(r.wk,3)} mm</b> ≤ w<sub>max</sub> = ${deNum(wmax,1)} mm (${ex[0]}, ${naLand()==='at'?'Tab. 7.1N':naLand()==='uk'?'BS EN 1992-1-1/NA':'Tab. 7.1DE'})`];
     let eta = r.wk/wmax, note='';
     if(I.zwang){
       const fcte=Math.max(fctm,3.0), kc=0.4, k=h<=300?0.8:h>=800?0.5:0.8-0.3*(h-300)/500;
@@ -4840,13 +4843,13 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       S.push(_L`A<sub>s,min</sub> = k<sub>c</sub>·k·f<sub>ct,eff</sub>·A<sub>ct</sub>/σ<sub>s</sub> = 0,4·${deNum(k,2)}·${deNum(fcte,1)}·${deNum(Act,0)}/${deNum(ss,0)} = <b>${deNum(AsZ/100)} cm²${unit}</b> ≤ A<sub>s,vorh</sub>${uz?tt(' (A<sub>ct</sub> vereinfacht für den Steg)'):''}`);
       eta = Math.max(eta, AsZ/As);
     }
-    C.push({ id:'riss', title:tt('Rissbreite im Feld (GZG)'), eta, ok: eta<=1, steps:S, note, wk:r.wk, naBlock: naLand()==='at' && !!I.zwang });   // AT: Zwang-Mindestbewehrung (Gl. 7.7.1DE) nicht belegt
+    C.push({ id:'riss', title:tt('Rissbreite im Feld (GZG)'), eta, ok: eta<=1, steps:S, note, wk:r.wk, naBlock: naLand()!=='de' && !!I.zwang });   // AT: Zwang-Mindestbewehrung (Gl. 7.7.1DE) nicht belegt
   }
 
   // 7b) Rissbreite über der Stütze
   if(I.Ms>0 && I.Mqps>0 && AsT>0){
     const brect = Object.assign(()=>b, {key:`R${b}`}), bt = uz ? BFs.beff : b;
-    const r = rissbreiteQS({ bfun: brect, bt, h, d: G.dt, As: AsT, ds: R.dst, M: I.Mqps, B });
+    const r = rissbreiteQS({ bfun: brect, bt, h, d: G.dt, As: AsT, ds: R.dst, M: I.Mqps, B, c: G.cvt + (platte ? 0 : R.dsw) });
     const S = [H(tt('Gerissener Querschnitt: Zug oben, Druckzone unten')),
       _L`Zugseite oben, Druckzone unten mit b${uz?'<sub>w</sub>':''} = ${b} mm`,
       `x = ${deNum(r.x,1)} mm · z = ${deNum(r.z,1)} mm`,
@@ -4856,7 +4859,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       `h<sub>c,ef</sub> = ${deNum(r.hce,1)} mm`,
       `ρ<sub>p,eff</sub> = A<sub>s</sub>/(${uz?tt('b<sub>eff,Stütze</sub>'):'b'}·h<sub>c,ef</sub>) = ${deNum(r.rpe*100,3)} %`,
       H(tt('Rissabstand und Dehnungsdifferenz')),
-      `s<sub>r,max</sub> = min(${deNum(r.sr1,0)}; ${deNum(r.sr2,0)}) = ${deNum(r.sr,0)} mm`,
+      r.enF ? `s<sub>r,max</sub> = 3,4·${deNum(r.c,0)} + 0,8·0,5·0,425·${R.dst}/${deNum(r.rpe,4)} = ${deNum(r.sr,0)} mm` : `s<sub>r,max</sub> = min(${deNum(r.sr1,0)}; ${deNum(r.sr2,0)}) = ${deNum(r.sr,0)} mm`,
       `ε<sub>sm</sub> − ε<sub>cm</sub> = ${deNum(r.de*1000,3)} ‰`,
       H(tt('Rissbreite')),
       `w<sub>k</sub> = s<sub>r,max</sub>·(ε<sub>sm</sub> − ε<sub>cm</sub>) = <b>${deNum(r.wk,3)} mm</b> ≤ w<sub>max</sub> = ${deNum(wmax,1)} mm`];

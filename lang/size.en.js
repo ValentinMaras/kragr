@@ -1128,6 +1128,13 @@ window.MULY_LANG = {
 "posRecalc":"“{0}” recalculated with the newer calculation from “Internal forces” and saved."
 },
 "ttx": {
+"cot θ = {} auf den in Österreich zulässigen Bereich 1,0 … 1,67 begrenzt (θ ≥ 30,96°)":"cot θ = {} limited to the range permitted in Austria, 1.0 … 1.67 (θ ≥ 30.96°)",
+"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,15·f<sub>ctm</sub>/f<sub>yd</sub>·b<sub>w</sub> = {} cm²/m":"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: minimum links a<sub>sw,min</sub> = 0.15·f<sub>ctm</sub>/f<sub>yd</sub>·b<sub>w</sub> = {} cm²/m",
+"größter Bügelabstand (ÖNORM B 1992-1-1, 9.2.2): s<sub>l,max</sub> = 0,75·d ≤ 250 mm = {} mm ≥ {} mm":"maximum link spacing (ÖNORM B 1992-1-1, 9.2.2): s<sub>l,max</sub> = 0.75·d ≤ 250 mm = {} mm ≥ {} mm",
+"Schubfestigkeit nach ÖNORM B 1995-1-1: Risse sind bereits berücksichtigt (k<sub>cr</sub> = 1)":"Shear strength according to ÖNORM B 1995-1-1: cracks are already allowed for (k<sub>cr</sub> = 1)",
+"f<sub>v,k</sub> = {} N/mm² ({})":"f<sub>v,k</sub> = {} N/mm² ({})",
+"Brettschichtholz, alle Festigkeitsklassen":"glulam, all strength classes",
+"Nadelholz, alle Festigkeitsklassen":"softwood, all strength classes",
 "Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = {}, γ<sub>s</sub> = {})":"Design values of the materials (partial factors γ<sub>c</sub> = {}, γ<sub>s</sub> = {})",
 "Nutzungsklasse {} · KLED „{}“ → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}":"Service class {} · load-duration class “{}” → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}",
 "ÖNORM B 1992-1-1: c<sub>min,dur</sub> je Expositionsklasse, Δc<sub>dev</sub> = 5 mm. Die Abminderung um 5 mm bei höherer Betonklasse ist nicht angesetzt (sichere Seite).":"ÖNORM B 1992-1-1: c<sub>min,dur</sub> per exposure class, Δc<sub>dev</sub> = 5 mm. The 5 mm reduction for a higher concrete class is not applied (safe side).",

@@ -1128,6 +1128,13 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"cot θ = {} auf den in Österreich zulässigen Bereich 1,0 … 1,67 begrenzt (θ ≥ 30,96°)":"cot θ = {} limité au domaine admis en Autriche, 1,0 … 1,67 (θ ≥ 30,96°)",
+"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,15·f<sub>ctm</sub>/f<sub>yd</sub>·b<sub>w</sub> = {} cm²/m":"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub> : étriers minimaux a<sub>sw,min</sub> = 0,15·f<sub>ctm</sub>/f<sub>yd</sub>·b<sub>w</sub> = {} cm²/m",
+"größter Bügelabstand (ÖNORM B 1992-1-1, 9.2.2): s<sub>l,max</sub> = 0,75·d ≤ 250 mm = {} mm ≥ {} mm":"espacement maximal des étriers (ÖNORM B 1992-1-1, 9.2.2) : s<sub>l,max</sub> = 0,75·d ≤ 250 mm = {} mm ≥ {} mm",
+"Schubfestigkeit nach ÖNORM B 1995-1-1: Risse sind bereits berücksichtigt (k<sub>cr</sub> = 1)":"Résistance au cisaillement selon ÖNORM B 1995-1-1 : les fissures sont déjà prises en compte (k<sub>cr</sub> = 1)",
+"f<sub>v,k</sub> = {} N/mm² ({})":"f<sub>v,k</sub> = {} N/mm² ({})",
+"Brettschichtholz, alle Festigkeitsklassen":"bois lamellé-collé, toutes classes de résistance",
+"Nadelholz, alle Festigkeitsklassen":"résineux, toutes classes de résistance",
 "Bemessungswerte der Baustoffe (Teilsicherheitsbeiwerte γ<sub>c</sub> = {}, γ<sub>s</sub> = {})":"Valeurs de calcul des matériaux (coefficients partiels γ<sub>c</sub> = {}, γ<sub>s</sub> = {})",
 "Nutzungsklasse {} · KLED „{}“ → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}":"Classe de service {} · classe de durée de chargement « {} » → k<sub>mod</sub> = {} · γ<sub>M</sub> = {}",
 "ÖNORM B 1992-1-1: c<sub>min,dur</sub> je Expositionsklasse, Δc<sub>dev</sub> = 5 mm. Die Abminderung um 5 mm bei höherer Betonklasse ist nicht angesetzt (sichere Seite).":"ÖNORM B 1992-1-1 : c<sub>min,dur</sub> selon la classe d’exposition, Δc<sub>dev</sub> = 5 mm. La réduction de 5 mm pour une classe de béton plus élevée n’est pas appliquée (côté sûr).",

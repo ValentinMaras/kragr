@@ -68,7 +68,16 @@ async def main():
         r=await pg.evaluate("(()=>{ const t=document.querySelector('#n-biegung .steps').textContent, d=document.querySelector('#n-deckung .steps').textContent; return [t.includes('= 1,0 · 30 / 1,5= 20,00'), d.includes('= 600 − 22 − 8 − 12,5= 557,5'), t.includes('= 2,52 cm²'), t.includes('9.2.1.1'), d.includes('Δcdev = 5 mm')]; })()")
         check('AT Beton: α_cc = 1,0 → f_cd = 20,00; d = 557,5 mm (Δc_dev = 5); A_s,min = 2,52 cm² nach EN 9.2.1.1', all(r), r)
         r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für Österreich')])")
-        check('AT Beton: nur Deckung und Biegung gerechnet, übrige Nachweise als Hinweis', all(h==(i not in ('deckung','biegung')) for i,h in r), r)
+        check('AT Beton: Deckung, Biegung und Querkraft gerechnet, übrige Nachweise als Hinweis', all(h==(i not in ('deckung','biegung','querkraft')) for i,h in r), r)
+        # Querkraft V_Ed = 160 kN: k = 1 + √(200/557,5) = 1,599; ρ_l = 982/(300·557,5) = 0,587 %; v_Rd,c = 0,18/1,5·1,599·(100·0,00587·30)^(1/3) = 0,499;
+        # v_min = 0,035·1,599^1,5·√30 = 0,388; V_Rd,c = 83,5 kN; z = 0,9·d = 501,8; ν1 = 0,6·(1 − 30/250) = 0,528; cot θ = 1,2:
+        # V_Rd,max = 300·501,75·0,528·20/(1,2 + 1/1,2) = 781,7 kN; a_sw,erf = 160000/(501,75·434,78·1,2)·10 = 6,11 cm²/m; a_sw,min = 0,15·2,9/434,78·300·10 = 3,00; s_l,max = min(0,75·557,5; 250) = 250
+        t=await pg.evaluate("document.querySelector('#n-querkraft .steps').textContent")
+        check('AT Querkraft: v_Rd,c 0,499 · v_min 0,388 · V_Rd,c 83,5 · z 501,8 · ν1 0,528 · V_Rd,max 781,7 · a_sw 6,11 / min 3,00 · s_max 250', all(x in t for x in ['= 0,499 N/mm²','= 0,388 N/mm²','83,5 kN','= 501,8 mm','= 0,528','781,7 kN','= 6,11 cm²/m','3,00 cm²/m','= 250 mm']), t[:200])
+        await pg.evaluate("$('in-cot').value=2.5; run()"); await pg.wait_for_timeout(300)
+        t=await pg.evaluate("document.querySelector('#n-querkraft .steps').textContent")
+        check('AT Querkraft: cot θ = 2,5 wird auf 1,67 begrenzt (θ ≥ 30,96°)', 'auf den in Österreich zulässigen Bereich' in t and 'cot θ= 1,67' in t.replace(' = ','= '), t[t.find('cot'):t.find('cot')+120])
+        await pg.evaluate("$('in-cot').value=1.2; run()"); await pg.wait_for_timeout(200)
         h=await pg.evaluate("document.querySelector('#details .na-hint').textContent")
         check('AT: Hinweis oben nennt die Marke NA AT und die Teilabdeckung', 'NA AT' in h and 'Für Österreich rechnet kragr bisher nur' in h, h)
         m=await pg.evaluate(MARKS); check('AT: Marke im Rechenweg „NA AT“', await pg.evaluate("document.querySelector('#details .steps .na-t').textContent")=='NA AT', m)
@@ -81,11 +90,17 @@ async def main():
         # Holz BSH GL24h: γ_M = 1,25 (ÖNORM B 1995-1-1)
         await pg.evaluate("setMat('holz'); $('ho-art').value='bsh'; $('ho-art').dispatchEvent(new Event('change')); run()"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("[document.querySelector('#n-bem .steps').textContent, document.querySelector('#n-biegung .steps').textContent.startsWith('Für Österreich'), document.querySelector('#n-schub .steps').textContent.startsWith('Für Österreich')]")
-        check('AT Holz BSH: γ_M = 1,25 im Rechenweg, Biegung gerechnet, Schub als Hinweis', 'γM = 1,25' in r[0] and '24/1,25= 16,90' in r[0] and not r[1] and r[2], r[0][-160:])
-        # Stahl: in AT noch nicht hinterlegt
+        check('AT Holz BSH: γ_M = 1,25 → f_m,d = 16,90; f_v,d = 0,8·2,5/1,25 = 1,60; Biegung und Schub gerechnet', 'γM = 1,25' in r[0] and '24/1,25= 16,90' in r[0] and 'fv,d = 1,60' in r[0] and not r[1] and not r[2], r[0][-160:])
+        # Holz Schub (Vollholz C24 100/220, V = 8 kN): f_v,d = 0,8·2,3/1,3 = 1,42; τ_d = 1,5·8000/(100·220) = 0,55 N/mm²
+        await pg.evaluate("$('ho-art').value='vh'; $('ho-art').dispatchEvent(new Event('change')); run()"); await pg.wait_for_timeout(400)
+        t=await pg.evaluate("document.querySelector('#n-schub .steps').textContent")
+        check('AT Holz Schub: f_v,k = 2,3 (k_cr = 1), f_v,d = 1,42, τ_d = 0,55 N/mm²', 'fv,k = 2,3' in t and '= 1,42 N/mm²' in t and '0,55 N/mm²' in t, t[:200])
+        # Stahl IPE 300, S235, M = 90 kNm, Kipplänge 3 m: M_b,Rd = χ_LT,mod·W·f_y/γ_M1 = 0,801·147,7/1,0 = 118,3 kNm (DE mit 1,1: 107,6)
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(500)
-        r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].every(c=>c.querySelector('.steps').textContent.startsWith('Für Österreich'))")
-        check('AT Stahl: alle Nachweise als Hinweis (noch nicht hinterlegt)', r)
+        r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für Österreich')])")
+        check('AT Stahl: Querschnitt, Querkraft und Biegedrillknicken gerechnet, Durchbiegung als Hinweis', all(h==(i=='w') for i,h in r), r)
+        t=await pg.evaluate("document.querySelector('#n-bdk .steps').textContent")
+        check('AT Stahl: γ_M1 = 1,0 → M_b,Rd = 118,3 kNm', '= 118,3 kNm' in t, t[-160:])
         # zurück auf DE: Werte wie vorher
         await pg.evaluate("localStorage.setItem('kragr-na','de')"); await pg.reload(); await pg.wait_for_timeout(800); await pg.evaluate("setMat('beton')"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("document.querySelector('#n-biegung .steps').textContent")

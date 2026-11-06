@@ -68,7 +68,12 @@ async def main():
         r=await pg.evaluate("(()=>{ const t=document.querySelector('#n-biegung .steps').textContent, d=document.querySelector('#n-deckung .steps').textContent; return [t.includes('= 1,0 · 30 / 1,5= 20,00'), d.includes('= 600 − 22 − 8 − 12,5= 557,5'), t.includes('= 2,52 cm²'), t.includes('9.2.1.1'), d.includes('Δcdev = 5 mm')]; })()")
         check('AT Beton: α_cc = 1,0 → f_cd = 20,00; d = 557,5 mm (Δc_dev = 5); A_s,min = 2,52 cm² nach EN 9.2.1.1', all(r), r)
         r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für Österreich')])")
-        check('AT Beton: Deckung, Biegung und Querkraft gerechnet, übrige Nachweise als Hinweis', all(h==(i not in ('deckung','biegung','querkraft')) for i,h in r), r)
+        check('AT Beton: Deckung, Biegung, Querkraft und Rissbreite gerechnet, übrige als Hinweis', all(h==(i not in ('deckung','biegung','querkraft','riss')) for i,h in r), r)
+        t=await pg.evaluate("document.querySelector('#n-riss .steps').textContent")
+        check('AT Rissbreite: s_r,max wie DE (k3 = 0), w_max nach Tab. 7.1N', 'Tab. 7.1N' in t and 'Tab. 7.1DE' not in t, t[-80:])
+        await pg.evaluate("$('in-zwang').checked=true; run()"); await pg.wait_for_timeout(300)
+        check('AT Rissbreite mit Zwang (Gl. 7.7.1DE nicht belegt): als Hinweis', await pg.evaluate("document.querySelector('#n-riss .steps').textContent.startsWith('Für Österreich')"))
+        await pg.evaluate("$('in-zwang').checked=false; run()"); await pg.wait_for_timeout(200)
         # Querkraft V_Ed = 160 kN: k = 1 + √(200/557,5) = 1,599; ρ_l = 982/(300·557,5) = 0,587 %; v_Rd,c = 0,18/1,5·1,599·(100·0,00587·30)^(1/3) = 0,499;
         # v_min = 0,035·1,599^1,5·√30 = 0,388; V_Rd,c = 83,5 kN; z = 0,9·d = 501,8; ν1 = 0,6·(1 − 30/250) = 0,528; cot θ = 1,2:
         # V_Rd,max = 300·501,75·0,528·20/(1,2 + 1/1,2) = 781,7 kN; a_sw,erf = 160000/(501,75·434,78·1,2)·10 = 6,11 cm²/m; a_sw,min = 0,15·2,9/434,78·300·10 = 3,00; s_l,max = min(0,75·557,5; 250) = 250
@@ -95,6 +100,12 @@ async def main():
         await pg.evaluate("$('ho-art').value='vh'; $('ho-art').dispatchEvent(new Event('change')); run()"); await pg.wait_for_timeout(400)
         t=await pg.evaluate("document.querySelector('#n-schub .steps').textContent")
         check('AT Holz Schub: f_v,k = 2,3 (k_cr = 1), f_v,d = 1,42, τ_d = 0,55 N/mm²', 'fv,k = 2,3' in t and '= 1,42 N/mm²' in t and '0,55 N/mm²' in t, t[:200])
+        await pg.evaluate("$('ho-Llt').value=4; $('ho-art').value='vh'; run()"); await pg.wait_for_timeout(300)
+        k1=await pg.evaluate("document.querySelector('#n-kipp .steps').textContent.startsWith('Für Österreich')")
+        await pg.evaluate("$('ho-art').value='bsh'; run()"); await pg.wait_for_timeout(300)
+        k2=await pg.evaluate("document.querySelector('#n-kipp .steps').textContent.startsWith('Für Österreich')")
+        check('AT Holz Kippen: Vollholz gerechnet (EN-Formel), BSH als Hinweis (DE-Faktor 1,4 nicht belegt)', not k1 and k2, (k1,k2))
+        await pg.evaluate("$('ho-Llt').value=0; $('ho-art').value='vh'; run()"); await pg.wait_for_timeout(200)
         # Stahl IPE 300, S235, M = 90 kNm, Kipplänge 3 m: M_b,Rd = χ_LT,mod·W·f_y/γ_M1 = 0,801·147,7/1,0 = 118,3 kNm (DE mit 1,1: 107,6)
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für Österreich')])")

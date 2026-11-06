@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.21 -->
+<!-- kragr v0.11.22 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1294,13 +1294,18 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
   // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
-  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at'];
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','uk'];
   // Ländertabelle (Schritt 2, November 2026): nur Werte mit Quelle. Fehlt ein Wert oder ein Nachweis in NA_COVER, rechnet die App ihn für dieses Land nicht.
   // AT: ÖNORM B 1990-1 (γ, ψ wie DE) und B 1995-1-1 nach IHBV-Tabellenwerk (TU Graz) 2017; ÖNORM B 1992-1-1 nach SCIA „Theoretical background NA EN 1992“ (EN-Empfehlung für γ_c, γ_s, α_cc, C_Rd,c, v_min, ν; Δc_dev = 5 mm, c_min,dur-Tabelle, θ ≥ 30,96°, ρ_w,min = 0,15·f_ctm/f_yd, s_l,max = 0,75·d ≤ 250 mm); B 1995-1-1: f_v,k 2,3 (Nadelholz) / 2,5 (BSH) mit k_cr = 1; k_c,90 und β_c wie EN (IHBV-Beispielsammlung 2022), Kippen BSH (DE-Faktor 1,4) gesperrt. EC2 7.3.4(3) AT: k3 = 0, k4 wie DE → s_r,max-Formel gleich; Zwang-Mindestbewehrung gesperrt. ÖNORM B 1993-1-1 nach SCIA „Theoretical background NA EN 1993“: γ_M0/γ_M1/γ_M2 und Biegedrillknicken nach EN-Empfehlung (1,0 / 1,0 / 1,25), Interaktion Anhang B.
   var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3, gM0:1.0, gM1:1.1, gM2:1.25 },
-             at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en', gM0:1.0, gM1:1.0, gM2:1.25 } };
+             at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en', gM0:1.0, gM1:1.0, gM2:1.25, cotmax:1/0.6, rhow:'at', smax250:true },
+             // UK: BS EN 1990/NA (SCIA NA EN 1990: 6.10a/b, ξ = 0,925, ψ0 Wind 0,5, Kat. H 0,7), BS EN 1992-1-1/NA (SCIA NA EN 1992: γ_c/γ_s EN, α_cc 0,85 Biegung/Druck, 1,0 sonst; c_min,dur nach BS 8500 → Eingabe; Δc_dev EN 10 mm; C_Rd,c/v_min EN; cot θ ≤ 2,5; ν1 = ν; ρ_w,min EN),
+             // BS EN 1993-1-1/NA (Oasys GSA und SCIA NA EN 1993: γ_M0 = γ_M1 = 1,0, γ_M2 = 1,1; Biegedrillknicken gewalzt λ̄_LT,0 0,4, β 0,75, Kurve b/c/d für h/b ≤ 2 / ≤ 3,1 / > 3,1 nach NSC 01/2009; f nach NA 2.18 nicht belegt → f = 1, sichere Seite; Interaktion Anhang B)
+             uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk' } };
   // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
-  var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] } };
+  var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
+                 uk:{ 'beton/balken':['deckung','biegung','querkraft'], 'beton/platte':['deckung','biegung','querkraft'], 'beton/unterzug':['deckung','biegung','querkraft'],
+                      'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] } };
   window.kragrNAV=function(k){ var v=(NA_V[naNow()]||{})[k]; return v===undefined ? null : v; };
   window.kragrNACovers=function(scope, id){ var n=naNow(); if(n==='de') return true; var c=(NA_COVER[n]||{})[scope]; return !!(c && c.indexOf(id)>=0); };
   window.kragrNAName=function(){ return t('c'+naNow().toUpperCase()); };
@@ -1308,7 +1313,7 @@ window.kragrK5Page = function(K){
   function naNow(){ var v='de'; try{ v=localStorage.getItem('kragr-na')||'de'; }catch(e){} return NA_ON.indexOf(v)>=0 ? v : 'de'; }
   function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v);
     Array.prototype.forEach.call(D.querySelectorAll('.na-hint'), function(h){ h.remove(); }); Array.prototype.forEach.call(D.querySelectorAll('[data-na-done]'), function(r){ delete r.dataset.naDone; });
-    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); }catch(e){} markNA(true); }
+    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); if(PAGE==='calc' && typeof window.liveCalc==='function') window.liveCalc(true); }catch(e){} markNA(true); }
   function naBadge(){ return t('naAbbr')+' '+(PAGE==='ref' ? 'DE' : naNow().toUpperCase()); }
   window.kragrNA=function(){ return naNow(); };
   // Werte, die der nationale Anhang festlegt: Teilsicherheits- und Kombinationsbeiwerte, α_cc/α_ct, k_mod/k_def — markiert, wo ein Zahlenwert genannt wird
@@ -1862,7 +1867,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.21</span>
+    <span class="version">v0.11.22</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2398,7 +2403,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.21';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.22';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7994,6 +7999,9 @@ const LF_TYPES = ['G','Q','S','W1','W2','T'];   // T: Temperatur (v0.11.6, ψ = 
 const LF_PSI = { A:[0.7,0.5,0.3], B:[0.7,0.5,0.3], C:[0.7,0.7,0.6], D:[0.7,0.7,0.6], E:[1.0,0.9,0.8], F:[0.7,0.7,0.6], H:[0,0,0] };
 const LF_PSI_S = [0.5,0.2,0], LF_PSI_W = [0.6,0.2,0], LF_PSI_T = [0.6,0.5,0];
 const LF_GSUP = 1.35, LF_GINF = 1.0, LF_GQ = 1.5;
+// Bemessungsgrundlage (calc v0.11.22): UK nach BS EN 1990/NA — Gl. 6.10a/6.10b mit ξ = 0,925, ψ0 Wind 0,5 und Kategorie H 0,7 (ψ1 = ψ2 = 0)
+const lfUK = () => typeof window.kragrNA==='function' && window.kragrNA()==='uk';
+const LF_XI = 0.925;
 const LF_MAG = ['F','H','Me','M','qa','qb','dTN','dTM'];
 const LF_SK = { beam:'beam', cantilever:'cant', cont:'cont', frame:'frame' };          // Bereich → lastCalc-Schlüssel
 const LF_K3 = { beam:'beam', cant:'cantilever', cont:'cont', frame:'frame' };          // Lastzeilen-System → Bereich
@@ -8007,6 +8015,7 @@ const LFT = {
     shown:'Angezeigt', envShown:'Verläufe M, Q, N: Grenzlinien aller Kombinationen (GZT). Tabellen, Knoten und Biegelinie: maßgebende Kombination für |M|',
     lfChar:'Lastfall {0}, charakteristisch', cases:'Lastfälle', loadsCol:'Lasten', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Maßgebende Werte', val:'Wert', at:'Stelle', comb:'Kombination',
     reac:'Auflagerkräfte (Grenzwerte GZT)', sup:'Lager', G:'ständig', Q:'Nutzlast', S:'Schnee', W1:'Wind 1', W2:'Wind 2', span:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts',
+    formulaUK:'Grundkombination BS EN 1990/NA (UK), Gl. 6.10a: Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> und Gl. 6.10b: Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> mit ξ = 0,925 (günstig 1,0·G<sub>k</sub>); ψ<sub>0</sub> Wind 0,5. Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     formula:'Grundkombination DIN EN 1990, Gl. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> mit γ<sub>G</sub> = 1,35 (günstig 1,0), γ<sub>Q</sub> = 1,5 (günstig 0). Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     feldNote:'Nutzlast feldweise: je Stelle werden nur die Felder belastet, die ungünstig wirken.', none:'—', only:'nur', at_x:'x = {0} m', snow:'Schnee: Orte bis 1000 m ü. NN' , T:'Temperatur', setl:'Setzungen' },
   en:{ title:'Load cases to EC 0', on:'Assign loads to load cases and combine', cat:'Imposed load category', feld:'Imposed load span by span (most unfavourable)',
@@ -8016,6 +8025,7 @@ const LFT = {
     shown:'Shown', envShown:'Diagrams M, Q, N: envelope of all combinations (ULS). Tables, nodes and deflection: governing combination for |M|',
     lfChar:'Load case {0}, characteristic', cases:'Load cases', loadsCol:'Loads', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Governing values', val:'Value', at:'Location', comb:'Combination',
     reac:'Support reactions (ULS limits)', sup:'Support', G:'permanent', Q:'imposed', S:'snow', W1:'wind 1', W2:'wind 2', span:'Span', ovL:'Left cantilever', ovR:'Right cantilever',
+    formulaUK:'Fundamental combination BS EN 1990/NA (UK), eq. 6.10a: Σ1.35·G<sub>k</sub> + Σ1.5·ψ<sub>0</sub>·Q<sub>k,i</sub> and eq. 6.10b: Σξ·1.35·G<sub>k</sub> + 1.5·Q<sub>k,1</sub> + Σ1.5·ψ<sub>0</sub>·Q<sub>k,i</sub> with ξ = 0.925 (favourable 1.0·G<sub>k</sub>); ψ<sub>0</sub> wind 0.5. At each point the most unfavourable combination governs. Deflection: characteristic combination (γ = 1).',
     formula:'Fundamental combination EN 1990, eq. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> with γ<sub>G</sub> = 1.35 (favourable 1.0), γ<sub>Q</sub> = 1.5 (favourable 0). At each point the most unfavourable combination applies. Deflection: characteristic combination (γ = 1).',
     feldNote:'Imposed load span by span: at each point only the spans acting unfavourably are loaded.', none:'—', only:'only', at_x:'x = {0} m', snow:'Snow: sites up to 1000 m a.s.l.' , T:'temperature', setl:'settlements' },
   fr:{ title:'Cas de charge selon l’EC 0', on:'Affecter les charges à des cas et combiner', cat:'Catégorie de charge d’exploitation', feld:'Exploitation travée par travée (la plus défavorable)',
@@ -8025,6 +8035,7 @@ const LFT = {
     shown:'Affiché', envShown:'Diagrammes M, Q, N : enveloppe de toutes les combinaisons (ELU). Tableaux, nœuds et déformée : combinaison déterminante pour |M|',
     lfChar:'Cas {0}, caractéristique', cases:'Cas de charge', loadsCol:'Charges', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Valeurs déterminantes', val:'Valeur', at:'Position', comb:'Combinaison',
     reac:'Réactions d’appui (limites ELU)', sup:'Appui', G:'permanente', Q:'exploitation', S:'neige', W1:'vent 1', W2:'vent 2', span:'Travée', ovL:'Console gauche', ovR:'Console droite',
+    formulaUK:'Combinaison fondamentale BS EN 1990/NA (UK), éq. 6.10a : Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> et éq. 6.10b : Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> avec ξ = 0,925 (favorable 1,0·G<sub>k</sub>) ; ψ<sub>0</sub> vent 0,5. En chaque point, la combinaison la plus défavorable est déterminante. Flèche : combinaison caractéristique (γ = 1).',
     formula:'Combinaison fondamentale EN 1990, éq. 6.10 : Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> avec γ<sub>G</sub> = 1,35 (favorable 1,0), γ<sub>Q</sub> = 1,5 (favorable 0). En chaque point, la combinaison la plus défavorable. Déformée : combinaison caractéristique (γ = 1).',
     feldNote:'Exploitation travée par travée : en chaque point, seules les travées défavorables sont chargées.', none:'—', only:'seulement', at_x:'x = {0} m', snow:'Neige : sites jusqu’à 1000 m' , T:'température', setl:'tassements' },
   es:{ title:'Hipótesis de carga según EC 0', on:'Asignar las cargas a hipótesis y combinar', cat:'Categoría de sobrecarga de uso', feld:'Sobrecarga por vanos (la más desfavorable)',
@@ -8034,6 +8045,7 @@ const LFT = {
     shown:'Mostrado', envShown:'Diagramas M, Q, N: envolvente de todas las combinaciones (ELU). Tablas, nudos y deformada: combinación determinante para |M|',
     lfChar:'Hipótesis {0}, característica', cases:'Hipótesis', loadsCol:'Cargas', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Valores determinantes', val:'Valor', at:'Posición', comb:'Combinación',
     reac:'Reacciones (límites ELU)', sup:'Apoyo', G:'permanente', Q:'uso', S:'nieve', W1:'viento 1', W2:'viento 2', span:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho',
+    formulaUK:'Combinación fundamental BS EN 1990/NA (UK), ec. 6.10a: Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> y ec. 6.10b: Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> con ξ = 0,925 (favorable 1,0·G<sub>k</sub>); ψ<sub>0</sub> viento 0,5. En cada punto rige la combinación más desfavorable. Flecha: combinación característica (γ = 1).',
     formula:'Combinación fundamental EN 1990, ec. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> con γ<sub>G</sub> = 1,35 (favorable 1,0), γ<sub>Q</sub> = 1,5 (favorable 0). En cada punto, la combinación más desfavorable. Deformada: combinación característica (γ = 1).',
     feldNote:'Sobrecarga por vanos: en cada punto solo se cargan los vanos desfavorables.', none:'—', only:'solo', at_x:'x = {0} m', snow:'Nieve: lugares hasta 1000 m s.n.m.' , T:'temperatura', setl:'asientos' } };
 function lfTx(k, ...a){ let s=(LFT[calcLang]||LFT.en)[k] ?? LFT.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; }
@@ -8045,7 +8057,7 @@ function lfHasSet(t){ if(!supxOn(t)) return false; return Object.entries(SUPX[t]
 function lfOnK3(sys){ const t=LF_K3[sys]; return !!t && lfOn(t); }
 function lfCat(t){ const v=document.getElementById('lf-cat-'+t)?.value; return LF_PSI[v] ? v : 'A'; }
 function lfFeld(t){ return t==='cont' && !!document.getElementById('lf-feld-cont')?.checked; }
-function lfPsi(t, T){ return T==='Q' ? LF_PSI[lfCat(t)] : T==='S' ? LF_PSI_S : (T==='W1'||T==='W2') ? LF_PSI_W : T==='T' ? LF_PSI_T : [1,1,1]; }
+function lfPsi(t, T){ const uk=lfUK(); return T==='Q' ? (uk && lfCat(t)==='H' ? [0.7,0,0] : LF_PSI[lfCat(t)]) : T==='S' ? LF_PSI_S : (T==='W1'||T==='W2') ? (uk ? [0.5,0.2,0] : LF_PSI_W) : T==='T' ? LF_PSI_T : [1,1,1]; }
 const lfExcl = (a, b) => (a==='W1'&&b==='W2') || (a==='W2'&&b==='W1');
 const lfSegName = k => k==='L' ? lfTx('ovL') : k==='R' ? lfTx('ovR') : `${lfTx('span')} ${(+k)+1}`;
 
@@ -8073,6 +8085,10 @@ function lfSample(t, cap){
 // Optionen: ULS je γ_G und Leiteinwirkung, SLS (charakteristisch) je Leiteinwirkung
 function lfOptions(t, P){
   const hasG=P.some(p=>p.T==='G'), vars=[...new Set(P.filter(p=>p.T!=='G').map(p=>p.T))], leads=[null, ...vars], o=[];
+  if(lfUK() && hasG){   // 6.10a: 1,35·G + Σ 1,5·ψ0·Q · 6.10b: ξ·1,35·G + 1,5·Q_1 + Σ 1,5·ψ0·Q_i · günstig 1,0·G
+    o.push({uls:true, gam:LF_GSUP, lead:null, eq:'a'}); vars.forEach(lead=>o.push({uls:true, gam:LF_XI*LF_GSUP, lead, eq:'b'}));
+    leads.forEach(lead=>o.push({uls:true, gam:LF_GINF, lead}));
+  } else
   (hasG ? [LF_GSUP, LF_GINF] : [LF_GSUP]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
   leads.forEach(lead=>o.push({uls:false, gam:1, lead}));
   return o;
@@ -8254,7 +8270,7 @@ function lfCard(t){
     h+=`<div class="k-kn-h">${lfTx('reac')}</div><table class="k-kn-tab k-lftab"><thead><tr><th>${lfTx('sup')}</th>${cols.map(k=>`<th>${k} max<br>min</th>`).join('')}</tr></thead><tbody>`
       + lf.reac.map(r=>`<tr><td>${r.lab}</td>${cols.map(k=>`<td>${r.comp.includes(k) ? n(r[k][0])+'<br>'+n(r[k][1]) : '—'}</td>`).join('')}</tr>`).join('') + `</tbody></table>`;
   }
-  h+=`<div class="k-kn-note">${lfTx('formula')}${lf.feld ? ' '+lfTx('feldNote') : ''}</div>`;
+  h+=`<div class="k-kn-note">${lfTx(lfUK()?'formulaUK':'formula')}${lf.feld ? ' '+lfTx('feldNote') : ''}</div>`;
   if(c._h!==h){ c._h=h; c.innerHTML=h; }
 }
 // Abschnitt im Bericht
@@ -8265,7 +8281,7 @@ function lfReportBlock(lf){
   h+=['maxM','minM','absQ','absN','sls'].filter(x=>G[x]).map(x=>`<div>${k(lfTx(x))}= <span class="rb-res">${lfNum(G[x].v)} ${unit[x]}</span> · ${G[x].where} · ${G[x].formula}</div>`).join('');
   (lf.reac||[]).forEach(r=>{ const c=['V','H','M'].filter(q=>r.comp.includes(q) && r[q].some(v=>Math.abs(v)>5e-4)); if(c.length) h+=`<div>${k(lfTx('sup')+' '+r.lab)}${c.map(q=>`${q} = ${lfNum(r[q][0])} / ${lfNum(r[q][1])}`).join(' · ')} (max / min)</div>`; });
   h+=`<div>${k(lfTx('shown'))}${lf.view==='env' ? lfTx('envShown')+': '+lf.viewLabel : lf.viewLabel}</div></div>`;
-  return h+`<div class="rb-note">${lfTx('formula')}${lf.feld?' '+lfTx('feldNote'):''}</div>`;
+  return h+`<div class="rb-note">${lfTx(lfUK()?'formulaUK':'formula')}${lf.feld?' '+lfTx('feldNote'):''}</div>`;
 }
 // Einstellungen (Karte in der Eingabespalte)
 function lfCfgUI(t){

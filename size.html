@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.28 -->
+<!-- kragr·size v0.7.29 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1011,21 +1011,30 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
   // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
-  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','fr','uk'];
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','fr','es','uk'];
   // Ländertabelle (Schritt 2, November 2026): nur Werte mit Quelle. Fehlt ein Wert oder ein Nachweis in NA_COVER, rechnet die App ihn für dieses Land nicht.
   // AT: ÖNORM B 1990-1 (γ, ψ wie DE) und B 1995-1-1 nach IHBV-Tabellenwerk (TU Graz) 2017; ÖNORM B 1992-1-1 nach SCIA „Theoretical background NA EN 1992“ (EN-Empfehlung für γ_c, γ_s, α_cc, C_Rd,c, v_min, ν; Δc_dev = 5 mm, c_min,dur-Tabelle, θ ≥ 30,96°, ρ_w,min = 0,15·f_ctm/f_yd, s_l,max = 0,75·d ≤ 250 mm); B 1995-1-1: f_v,k 2,3 (Nadelholz) / 2,5 (BSH) mit k_cr = 1; k_c,90 und β_c wie EN (IHBV-Beispielsammlung 2022), Kippen BSH (DE-Faktor 1,4) gesperrt. EC2 7.3.4(3) AT: k3 = 0, k4 wie DE → s_r,max-Formel gleich; Zwang-Mindestbewehrung gesperrt. ÖNORM B 1993-1-1 nach SCIA „Theoretical background NA EN 1993“: γ_M0/γ_M1/γ_M2 und Biegedrillknicken nach EN-Empfehlung (1,0 / 1,0 / 1,25), Interaktion Anhang B.
   var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3, gM0:1.0, gM1:1.1, gM2:1.25 },
              at:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gMvh:1.3, gMbsh:1.25, cdev:5, cdur:{XC1:15,XC2:25,XC3:25,XC4:25,XD1:30,XD2:30,XD3:40}, asmin:'en', gM0:1.0, gM1:1.0, gM2:1.25, cotmax:1/0.6, rhow:'at', smax250:true },
              // UK: BS EN 1990/NA (SCIA NA EN 1990: 6.10a/b, ξ = 0,925, ψ0 Wind 0,5, Kat. H 0,7), BS EN 1992-1-1/NA (SCIA NA EN 1992: γ_c/γ_s EN, α_cc 0,85 Biegung/Druck, 1,0 sonst; c_min,dur nach BS 8500 → Eingabe; Δc_dev EN 10 mm; C_Rd,c/v_min EN; cot θ ≤ 2,5; ν1 = ν; ρ_w,min EN),
              // BS EN 1993-1-1/NA (Oasys GSA und SCIA NA EN 1993: γ_M0 = γ_M1 = 1,0, γ_M2 = 1,1; Biegedrillknicken gewalzt λ̄_LT,0 0,4, β 0,75, Kurve b/c/d für h/b ≤ 2 / ≤ 3,1 / > 3,1 nach NSC 01/2009; f nach NA 2.18 nicht belegt → f = 1, sichere Seite; Interaktion Anhang B); Rissbreite UK: 7.3.4(3) EN (k3 3,4, k4 0,425), w_max 0,3 mm (SCIA)
-             uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk' },
+             uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk', crack:'en' },
              // FR: NF EN 1990/NA (SCIA „Theoretical background NA EN 1990“: Gl. 6.10, γ_G 1,35, γ_Q 1,5, ψ wie EN-Empfehlung = wie DE), NF EN 1992-1-1/NA (SCIA Hilfe „France“: γ_c/γ_s, α_cc, c_min,dur, Δc_dev, A_s,min,
              // ρ_w,min, C_Rd,c EN; v_min Balken 0,053/γ_c·k^1,5·√f_ck (= EN); cot θ 1 … 2,5; s_l,max 0,75·d bzw. 0,9·d bei h ≤ 250 mm; w_max X0/XC1 0,4, XC2–4 0,3, XD/XS 0,2; k3 = 3,4·(25/c)^(2/3) für c > 25 mm; h_c,ef = min(2,5·(h−d); h/2)),
              // c_min,dur nach EN Tab. 4.4N, Tragwerksklasse S4 ohne Klassenänderung. NF EN 1993-1-1/NA (Oasys GSA): γ_M0 = γ_M1 = 1,0, γ_M2 = 1,25; Biegedrillknicken (eigene Formeln) und Interaktion (Anhang A) nicht hinterlegt. Holz: keine belegte Quelle.
-             fr:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.0, gM1:1.0, gM2:1.25, cdev:10, cdur:{X0:10,XC1:15,XC2:25,XC3:25,XC4:30,XD1:35,XD2:40,XD3:45,XS1:35,XS2:40,XS3:45}, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, smaxFR:true, crack:'fr' } };
+             fr:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.0, gM1:1.0, gM2:1.25, cdev:10, cdur:{X0:10,XC1:15,XC2:25,XC3:25,XC4:30,XD1:35,XD2:40,XD3:45,XS1:35,XS2:40,XS3:45}, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, smaxFR:true, crack:'fr' },
+             // ES: Anejos Nacionales des Ministerio de Transportes (frei: AN/UNE-EN 1992-1-1 Okt. 2015, AN/UNE-EN 1993-1-1 Feb. 2013), gegengelesen mit SCIA-Hilfe „Spain“.
+             // EC2: γ_c 1,5, γ_s 1,15, α_cc = α_ct = 1,0; c_min,dur Tab. AN/3 Klasse S4 (X0/XC1 15, XC2/XC3 20, XC4 25; XD/XS je nach Zement → nicht hinterlegt), Δc_dur,γ = 0 (XC), Δc_dev = 10 mm;
+             // C_Rd,c 0,18/γ_c, v_min = 0,075/γ_c·k^1,5·√f_ck (f_ck ≤ 60), 0,5 ≤ cot θ ≤ 2,0; A_s,min = W/z·f_ctm,fl/f_yd (z = 0,8·h); ρ_w,min = f_ctm/(7,5·f_yk); s_l,max 0,75·d ≤ 600 / 0,60·d ≤ 450 / 0,30·d ≤ 300 mm
+             // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0/XC1 0,4, XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
+             // EC3: γ_M0 = γ_M1 = 1,05 (Hochbau), γ_M2 = 1,25; Biegedrillknicken λ̄_LT,0 0,4, β 0,75, Kurve b/c (gewalzt h/b ≤ 2 / > 2), f mit k_c nach Tab. AN/6 (nicht lesbar) → f = 1; Interaktion Anhang A oder B frei.
+             // EN 1990 Anhang A1 (Hochbau): im spanischen NA „pendientes de determinación“ → Schnittkräfte mit EN-Empfehlung und Hinweis. Holz: kein frei zugänglicher NA.
+             es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' } };
   // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
   var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
                  uk:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
+                      'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
+                 es:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
                  fr:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','torsion','last'] } };
@@ -4129,7 +4138,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.28';
+const SIZE_VERSION = '0.7.29';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4175,7 +4184,7 @@ const EXPO = [
 ];
 function deckung(cls, ds){
   const e = EXPO.find(r=>r[0]===cls) || EXPO[2];
-  if(naLand()==='at' || naLand()==='fr'){ const T=naV('cdur',{}), base=T[e[0]];   // ÖNORM B 1992-1-1: c_min,dur je Klasse, Δc_dur,γ = 0, Δc_dev = 5 mm; ohne Wert (XS) nicht hinterlegt · FR: EN Tab. 4.4N (S4), Δc_dev = 10 mm
+  if(naLand()==='at' || naLand()==='fr' || naLand()==='es'){ const T=naV('cdur',{}), base=T[e[0]];   // ÖNORM B 1992-1-1: c_min,dur je Klasse, Δc_dur,γ = 0, Δc_dev = 5 mm; ohne Wert (XS) nicht hinterlegt · FR: EN Tab. 4.4N (S4), Δc_dev = 10 mm
     if(base==null) return { cdur:NaN, cmin:NaN, dev:NaN, cnom:NaN, e, naMiss:true };
     const cmin=Math.max(ds, base, 10), dev=naV('cdev',5); return { cdur:base, cmin, dev, cnom:cmin+dev, e, at:true }; }
   if(naV('cdurIn',false)){   // UK: c_min,dur aus BS 8500-1 (Tab. A.4/A.5) gibt man selbst vor; Δc_dev = 10 mm (EN-Empfehlung)
@@ -4210,11 +4219,11 @@ const MU_LIM = (()=>{ const {aR,ka}=prBlock(3.5); return aR*XI_LIM*(1-ka*XI_LIM)
 function querkraft({bw, d, fck, fctm, Asl, VEd, cot, cv}){
   const k=Math.min(1+Math.sqrt(200/d),2), rho=Math.min(Asl/(bw*d),0.02);
   if(naLand()!=='de'){   // EN-Querkraft mit Länderwerten: AT (ÖNORM B 1992-1-1) θ ≥ 30,96°, ρ_w,min = 0,15·f_ctm/f_yd · UK (BS EN 1992-1-1/NA) cot θ ≤ 2,5, ρ_w,min = 0,08·√f_ck/f_yk, f_cd mit α_cc = 1,0
-    const cot0=cot, cmax=naV('cotmax',2.5); cot=Math.min(Math.max(cot,1), cmax);
-    const vmin=0.035*Math.pow(k,1.5)*Math.sqrt(fck), vc=0.18/SB.gc*k*Math.cbrt(100*rho*fck), VRdc=Math.max(vc,vmin)*bw*d/1000;
+    const cot0=cot, cmax=naV('cotmax',2.5), cmin=naV('cotmin',1); cot=Math.min(Math.max(cot,cmin), cmax);
+    const esV=naV('vmin','')==='es', vmin=esV ? 0.075/SB.gc*Math.pow(k,1.5)*Math.sqrt(Math.min(fck,60)) : 0.035*Math.pow(k,1.5)*Math.sqrt(fck), vc=0.18/SB.gc*k*Math.cbrt(100*rho*fck), VRdc=Math.max(vc,vmin)*bw*d/1000;
     const z=0.9*d, nu1=0.6*(1-fck/250), accV=naV('accV',SB.acc), fcd=accV*fck/SB.gc, VRdmax=bw*z*nu1*fcd/(cot+1/cot)/1000;
-    const rhow=naV('rhow','at'), aswmin = rhow==='en' ? 0.08*Math.sqrt(fck)/SB.fyk*bw*10 : 0.15*fctm/SB.fyd*bw*10;
-    return { at:true, land:naLand(), k, rho, vmin, vc, VRdc, z, nu1, fcd, accV, VRdmax, cot, cot0, cmax, rhow, asw:VEd*1000/(z*SB.fyd*cot)*10, aswmin, k1:0 }; }
+    const rhow=naV('rhow','at'), aswmin = rhow==='en' ? 0.08*Math.sqrt(fck)/SB.fyk*bw*10 : rhow==='es' ? fctm/(7.5*SB.fyk)*bw*10 : 0.15*fctm/SB.fyd*bw*10;
+    return { at:true, land:naLand(), k, rho, vmin, vc, VRdc, z, nu1, fcd, accV, VRdmax, cot, cot0, cmax, cmin, esV, rhow, asw:VEd*1000/(z*SB.fyd*cot)*10, aswmin, k1:0 }; }
   const k1 = d<=600 ? 0.0525 : d>=800 ? 0.0375 : 0.0525-(d-600)/200*0.015;
   const vmin = k1/SB.gc*Math.pow(k,1.5)*Math.sqrt(fck);
   const vc = 0.15/SB.gc*k*Math.cbrt(100*rho*fck);
@@ -4315,7 +4324,7 @@ function validate(I){
   if(!(I.b>0)) bad.push(tt('Breite b')); if(!(I.h>0)) bad.push(tt('Höhe h')); if(!(I.l>0)) bad.push(tt('Stützweite l'));
   if(!(I.M>0)) bad.push('M_Ed > 0'); if(!(I.V>=0)) bad.push('V_Ed ≥ 0'); if(!(I.Mqp>=0)) bad.push('M_qp ≥ 0'); if(!(I.Ms>=0)) bad.push(tt('M_Ed,Stütze ≥ 0'));
   if(!(I.Mqps>=0)) bad.push(tt('M_qp,Stütze ≥ 0'));
-  if(!(I.cot>=1 && I.cot<=3)) bad.push(tt('cot θ zwischen 1,0 und 3,0'));
+  { const c0=naV('cotmin',1); if(!(I.cot>=c0 && I.cot<=3)) bad.push(c0<1 ? tt('cot θ zwischen 0,5 und 3,0') : tt('cot θ zwischen 1,0 und 3,0')); }   // ES: 0,5 ≤ cot θ (UNE-EN 1992-1-1/AN)
   if(I.typ==='unterzug'){ if(!(I.hf>0 && I.hf<I.h)) bad.push(tt('Plattendicke 0 < h_f < h')); if(!(I.b1>=0 && I.b2>=0)) bad.push(tt('Plattenbreiten b₁, b₂ ≥ 0')); }
   if(I.aufl && !(I.t>0)) bad.push(tt('Auflagertiefe'));
   if(!I.auto){
@@ -4373,7 +4382,7 @@ function rissbreiteQS({bfun, bt, h, d, As, ds, M, B, c}){
   const frR = naV('crack','')==='fr';   // FR (NF EN 1992-1-1/NA): h_c,ef = min(2,5·(h−d); h/2); s_r,max nach 7.3.4(3) mit k3 = 3,4·(25/c)^(2/3) für c > 25 mm
   const hce=frR ? Math.min(2.5*(h-d), h/2) : Math.min(2.5*(h-d), (h-x)/3, h/2), rpe=As/(bt*hce);
   // UK (BS EN 1992-1-1/NA, 7.3.4(3) wie EN): s_r,max = k3·c + k1·k2·k4·Ø/ρ_p,eff mit k3 = 3,4, k1 = 0,8, k2 = 0,5, k4 = 0,425
-  const enF = (naLand()==='uk' || frR) && c>0, k3 = frR && c>25 ? 3.4*Math.pow(25/c, 2/3) : 3.4;
+  const enF = !!naV('crack','') && c>0, k3 = frR && c>25 ? 3.4*Math.pow(25/c, 2/3) : 3.4;
   const sr1 = enF ? k3*c + 0.8*0.5*0.425*ds/rpe : ds/(3.6*rpe), sr2 = enF ? Infinity : ss*ds/(3.6*fct), sr=Math.min(sr1,sr2);
   const de=Math.max((ss-0.4*fct/rpe*(1+ae*rpe))/SB.Es, 0.6*ss/SB.Es);
   return { ae, x, z, ss, hce, rpe, sr1, sr2, sr, de, wk: sr*de, fct, enF, c, k3, frR };
@@ -4438,6 +4447,10 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       st.push('<span class="na-miss">'+tt('BS EN 1992-1-1/NA: c<sub>min,dur</sub> nach BS 8500-1 (Tab. A.4/A.5, hängt von Betonklasse und Zement ab) – hier als Eingabe; Δc<sub>dev</sub> = 10 mm.')+'</span>');
       st.push('<span class="na-miss">'+tt('Mindestbetonfestigkeit nach BS 8500 – hier nicht geprüft.')+'</span>');
       C.push({ id:'deckung', title:tt('Betondeckung und Nutzhöhe'), eta:0, ok:true, info:true, steps: st, naBlock: !!G.cl.naMiss });
+    } else if(naLand()==='es'){
+      st.push('<span class="na-miss">'+tt('UNE-EN 1992-1-1/AN: c<sub>min,dur</sub> nach Tab. AN/3 für die Tragwerksklasse S4 (50 Jahre), ohne Klassenänderung (sichere Seite); Δc<sub>dur,γ</sub> = 0 für X0 bis XC4, Δc<sub>dev</sub> = 10 mm. XD und XS sind noch nicht hinterlegt (je nach Zement).')+'</span>');
+      st.push('<span class="na-miss">'+tt('Mindestbetonfestigkeit nach Código Estructural – hier nicht geprüft.')+'</span>');
+      C.push({ id:'deckung', title:tt('Betondeckung und Nutzhöhe'), eta:0, ok:true, info:true, steps: st, naBlock: !!G.cl.naMiss });
     } else if(naLand()==='fr'){
       st.push('<span class="na-miss">'+tt('NF EN 1992-1-1/NA: c<sub>min,dur</sub> nach Tab. 4.4N für die Tragwerksklasse S4, ohne Klassenänderung (sichere Seite); Δc<sub>dev</sub> = 10 mm.')+'</span>');
       st.push('<span class="na-miss">'+tt('Mindestbetonfestigkeit nach NF EN 206/CN – hier nicht geprüft.')+'</span>');
@@ -4460,11 +4473,14 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       `f<sub>cd</sub> = α<sub>cc</sub>·f<sub>ck</sub>/γ<sub>c</sub> = ${naNum(SB.acc)} · ${fck} / ${naNum(SB.gc)} = ${deNum(fcd)} N/mm²`,
       `f<sub>yd</sub> = f<sub>yk</sub>/γ<sub>s</sub> = 500 / ${naNum(SB.gs)} = ${deNum(SB.fyd,1)} N/mm²`];
     const AT = naV('asmin','')==='en', asMinEN = bt => Math.max(0.26*fctm/SB.fyk*bt*d, 0.0013*bt*d);
-    const asMinTxt = (bt, deTxt) => AT ? _L`A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max(${deNum(0.26*fctm/SB.fyk,5)}; 0,0013)·${bt}·${deNum(d,1)} = ${deNum(Asmin/100)} cm²${unit} (EN 1992-1-1, 9.2.1.1)` : deTxt;
+    // ES (UNE-EN 1992-1-1/AN, 9.2.1.1): A_s,min = W/z·f_ctm,fl/f_yd mit z = 0,8·h, W der Bruttoquerschnitt zur gezogenen Faser, f_ctm,fl = max((1,6 − h/1000)·f_ctm; f_ctm) (3.1.8)
+    const ES = naV('asmin','')==='es', fctfl = Math.max((1.6-h/1000)*fctm, fctm); let WES=0;
+    const asMinES = W => { WES=W; return W/(0.8*h)*fctfl/SB.fyd; };
+    const asMinTxt = (bt, deTxt) => ES ? _L`A<sub>s,min</sub> = W/(0,8·h)·f<sub>ctm,fl</sub>/f<sub>yd</sub> = ${deNum(WES/1e6,2)}·10⁶/(0,8·${h})·${deNum(fctfl,2)}/${deNum(SB.fyd,1)} = ${deNum(Asmin/100)} cm²${unit} (UNE-EN 1992-1-1/AN, 9.2.1.1; f<sub>ctm,fl</sub> = max((1,6 − h/1000)·f<sub>ctm</sub>; f<sub>ctm</sub>))` : AT ? _L`A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max(${deNum(0.26*fctm/SB.fyk,5)}; 0,0013)·${bt}·${deNum(d,1)} = ${deNum(Asmin/100)} cm²${unit} (EN 1992-1-1, 9.2.1.1)` : deTxt;
     let note='', eta;
     if(uz){
       const T=tSection(BF.beff, hf, b, h);
-      Asmin = AT ? asMinEN(b) : fctm*T.Wu/(SB.fyk*0.9*d); Asmax = 0.08*T.A;
+      Asmin = ES ? asMinES(T.Wu) : AT ? asMinEN(b) : fctm*T.Wu/(SB.fyk*0.9*d); Asmax = 0.08*T.A;
       S.push(H(tt('Mitwirkende Plattenbreite: wie weit die Platte als Druckgurt mitträgt')));
       S.push(_L`l<sub>0</sub> = ${deNum(I.feld,2)}·l = ${deNum(BF.l0/1000,2)} m (Abstand der Momentennullpunkte)`);
       S.push(`b<sub>eff,i</sub> = 0,2·b<sub>i</sub> + 0,1·l<sub>0</sub> ≤ 0,2·l<sub>0</sub>, ≤ b<sub>i</sub> → b<sub>eff,1</sub> = ${deNum(BF.b1e,0)} mm, b<sub>eff,2</sub> = ${deNum(BF.b2e,0)} mm`);
@@ -4491,7 +4507,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
         eta = AsErf/As;
       }
     } else {
-      Asmin = AT ? asMinEN(b) : fctm*(b*h*h/6)/(SB.fyk*0.9*d); Asmax = 0.08*b*h; AsErf = Asmin;
+      Asmin = ES ? asMinES(b*h*h/6) : AT ? asMinEN(b) : fctm*(b*h*h/6)/(SB.fyk*0.9*d); Asmax = 0.08*b*h; AsErf = Asmin;
       mu = I.M*1e6/(b*d*d*fcd); st = biegeAusMu(mu);
       S.push(H(tt('Bezogenes Moment: wie stark ist die Betondruckzone beansprucht?')));
       S.push(`μ<sub>Eds</sub> = M<sub>Ed</sub> / (b·d²·f<sub>cd</sub>) = ${deNum(I.M,1)}·10⁶ / (${b}·${deNum(d,1)}²·${deNum(fcd)}) = <b>${deNum(mu,4)}</b>`);
@@ -4648,14 +4664,14 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       _L`Längsbewehrungsgrad ρ<sub>l</sub> = A<sub>sl</sub>/(b<sub>w</sub>·d) = ${deNum(Q.rho*100,3)} % ≤ 2 %`,
       H(tt('Schubspannung, die der Beton allein aufnehmen kann (der größere Wert gilt)')),
       `v<sub>Rd,c</sub> = 0,18/${naNum(SB.gc)}·k·(100·ρ<sub>l</sub>·f<sub>ck</sub>)<sup>1/3</sup> = ${deNum(Q.vc,3)} N/mm²`,
-      `v<sub>min</sub> = 0,035 · k<sup>1,5</sup> · √f<sub>ck</sub> = ${deNum(Q.vmin,3)} N/mm²`,
+      Q.esV ? `v<sub>min</sub> = 0,075/${naNum(SB.gc)} · k<sup>1,5</sup> · √f<sub>ck</sub> = ${deNum(Q.vmin,3)} N/mm²` : `v<sub>min</sub> = 0,035 · k<sup>1,5</sup> · √f<sub>ck</sub> = ${deNum(Q.vmin,3)} N/mm²`,
       H(tt('Querkrafttragfähigkeit des Betons: Spannung × Fläche')),
       `V<sub>Rd,c</sub> = ${deNum(Math.max(Q.vc,Q.vmin),3)} · ${b} · ${deNum(d,1)} / 1000 = <b>${deNum(Q.VRdc,1)} kN</b>`,
       `V<sub>Ed</sub> = ${deNum(I.V,1)} kN ${I.V<=Q.VRdc?'≤':'>'} V<sub>Rd,c</sub> → ${I.V<=Q.VRdc?(platte?tt('keine Querkraftbewehrung nötig'):tt('nur Mindestbügel nötig')):tt('Querkraftbewehrung erforderlich')}`,
       H(tt('Fachwerkmodell: innerer Hebelarm, Abminderung der Betonfestigkeit, Strebenneigung')),
       `z = 0,9·d = ${deNum(Q.z,1)} mm`,
       `ν<sub>1</sub> = 0,6·(1 − f<sub>ck</sub>/250) = ${deNum(Q.nu1,3)} · cot θ = ${deNum(cotQ,2)}`,
-      ...(Math.abs(Q.cot-Q.cot0)>1e-9 ? [Q.land==='at' ? _L`cot θ = ${deNum(Q.cot0,2)} auf den in Österreich zulässigen Bereich 1,0 … 1,67 begrenzt (θ ≥ 30,96°)` : _L`cot θ = ${deNum(Q.cot0,2)} auf den zulässigen Bereich 1,0 … ${deNum(Q.cmax,1)} begrenzt`] : []),
+      ...(Math.abs(Q.cot-Q.cot0)>1e-9 ? [Q.land==='at' ? _L`cot θ = ${deNum(Q.cot0,2)} auf den in Österreich zulässigen Bereich 1,0 … 1,67 begrenzt (θ ≥ 30,96°)` : _L`cot θ = ${deNum(Q.cot0,2)} auf den zulässigen Bereich ${deNum(Q.cmin,1)} … ${deNum(Q.cmax,1)} begrenzt`] : []),
       ...(Q.accV!==SB.acc ? [_L`f<sub>cd</sub> für die Druckstrebe mit α<sub>cc</sub> = ${naNum(Q.accV)}: ${deNum(Q.fcd,2)} N/mm²`] : []),
       H(tt('Druckstrebe: der Beton zwischen den Schubrissen darf nicht zerdrückt werden')),
       `V<sub>Rd,max</sub> = b<sub>w</sub>·z·ν<sub>1</sub>·f<sub>cd</sub>/(cot θ + tan θ) = <b>${deNum(Q.VRdmax,1)} kN</b> ≥ V<sub>Ed</sub> = ${deNum(I.V,1)} kN`]
@@ -4681,17 +4697,18 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       if(Q.land==='fr') S.push('<span class="na-miss">'+tt('NF EN 1992-1-1/NA erlaubt für Platten mit Querverteilung v<sub>min</sub> = 0,34/γ<sub>c</sub>·√f<sub>ck</sub>; hier gilt der kleinere Balkenwert (sichere Seite).')+'</span>');
       if(I.V>Q.VRdc) note = tt('V<sub>Ed</sub> > V<sub>Rd,c</sub>: Platte dicker wählen oder mehr Längsbewehrung — Querkraftbewehrung in Platten ist hier nicht vorgesehen.');
     } else {
-      const ratio=I.V/Q.VRdmax, smax = AT ? (naV('smax250',false) ? Math.min(0.75*d, 250) : naV('smaxFR',false) && h<=250 ? 0.9*d : 0.75*d) : smaxBuegel(h, ratio), aswVorh = 2*areaBar(R.dsw)/(R.sw*10)*10;   // cm²/m
+      const ratio=I.V/Q.VRdmax, smax = AT ? (naV('smax250',false) ? Math.min(0.75*d, 250) : naV('smaxFR',false) && h<=250 ? 0.9*d : naV('smaxES',false) ? (ratio<=0.2 ? Math.min(0.75*d,600) : ratio<=2/3 ? Math.min(0.6*d,450) : Math.min(0.3*d,300)) : 0.75*d) : smaxBuegel(h, ratio), aswVorh = 2*areaBar(R.dsw)/(R.sw*10)*10;   // cm²/m
       const aswErf = I.V>Q.VRdc ? Math.max(Q.asw, Q.aswmin) : Q.aswmin;
       S.push(H(tt('Zugstrebe: erforderlicher Bügelquerschnitt je Meter Balkenlänge')));
       if(I.V>Q.VRdc){
         S.push(_L`a<sub>sw,erf</sub> = V<sub>Ed</sub>/(z·f<sub>yd</sub>·cot θ) = ${deNum(Q.asw)} cm²/m`);
         S.push(_L`Mindestwert ρ<sub>w,min</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m`);
-      } else S.push(AT && Q.rhow==='en' ? _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m` : AT ? _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,15·f<sub>ctm</sub>/f<sub>yd</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m` : _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,16·f<sub>ctm</sub>/f<sub>yk</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m`);
+      } else S.push(AT && Q.rhow==='es' ? _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = f<sub>ctm</sub>/(7,5·f<sub>yk</sub>)·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m` : AT && Q.rhow==='en' ? _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m` : AT ? _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,15·f<sub>ctm</sub>/f<sub>yd</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m` : _L`V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,16·f<sub>ctm</sub>/f<sub>yk</sub>·b<sub>w</sub> = ${deNum(Q.aswmin)} cm²/m`);
       S.push(H(tt('Nachweis der gewählten Bügel (zwei Schenkel je Bügel)')));
       S.push(_L`gewählt Bügel Ø${R.dsw}/${deNum(R.sw,1)} cm, zweischnittig: a<sub>sw,vorh</sub> = <b>${deNum(aswVorh)} cm²/m</b> ≥ ${deNum(aswErf)} cm²/m`);
       S.push(H(tt('Größter Bügelabstand — je höher die Ausnutzung, desto enger')));
-      S.push(AT && Q.land==='fr' ? (h<=250 ? _L`größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0,9·d = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm` : _L`größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0,75·d = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm`)
+      S.push(AT && Q.land==='es' ? _L`größter Bügelabstand (UNE-EN 1992-1-1/AN, 9.2.2, V<sub>Ed</sub>/V<sub>Rd,max</sub> = ${deNum(ratio,2)}): s<sub>l,max</sub> = ${ratio<=0.2?'0,75·d ≤ 600':ratio<=2/3?'0,60·d ≤ 450':'0,30·d ≤ 300'} mm = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm`
+        : AT && Q.land==='fr' ? (h<=250 ? _L`größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0,9·d = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm` : _L`größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0,75·d = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm`)
         : AT && Q.land==='uk' ? _L`größter Bügelabstand (EN 1992-1-1, 9.2.2): s<sub>l,max</sub> = 0,75·d = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm` : AT ? _L`größter Bügelabstand (ÖNORM B 1992-1-1, 9.2.2): s<sub>l,max</sub> = 0,75·d ≤ 250 mm = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm`
                 : _L`größter Bügelabstand (Tab. NA.9.1, V<sub>Ed</sub>/V<sub>Rd,max</sub> = ${deNum(ratio,2)}): s<sub>max</sub> = ${deNum(smax,0)} mm ≥ ${deNum(R.sw*10,0)} mm`);
       eta = Math.max(eta, aswErf/aswVorh, R.sw*10/smax);
@@ -4827,7 +4844,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
   }
 
   // 7) Rissbreite (Feld)
-  const wmax = naLand()==='uk' ? 0.3 : naLand()==='fr' ? (/^X[DS]/.test(ex[0]) ? 0.2 : ex[0]==='XC1' ? 0.4 : 0.3) : ex[6];   // FR: NF EN 1992-1-1/NA Tab. 7.1N
+  const wmax = naLand()==='uk' ? 0.3 : naLand()==='es' ? (ex[0]==='XS3' ? 0.1 : /^X[DS]/.test(ex[0]) ? 0.2 : ex[0]==='XC1' ? 0.4 : 0.3) : naLand()==='fr' ? (/^X[DS]/.test(ex[0]) ? 0.2 : ex[0]==='XC1' ? 0.4 : 0.3) : ex[6];   // FR: NF EN 1992-1-1/NA Tab. 7.1N
   if(I.Mqp>0){
     const r = rissbreiteQS({ bfun, bt:b, h, d, As, ds:R.ds, M:I.Mqp, B, c:G.cvl });
     const S = [H(tt('Gerissener Querschnitt (Zustand II): Nulllinie und Hebelarm')),
@@ -4845,7 +4862,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       H(tt('Mittlere Dehnungsdifferenz Stahl–Beton zwischen zwei Rissen')),
       `ε<sub>sm</sub> − ε<sub>cm</sub> = max([σ<sub>s</sub> − 0,4·f<sub>ct,eff</sub>/ρ<sub>p,eff</sub>·(1 + α<sub>e</sub>·ρ<sub>p,eff</sub>)]/E<sub>s</sub>; 0,6·σ<sub>s</sub>/E<sub>s</sub>) = ${deNum(r.de*1000,3)} ‰`,
       H(tt('Rissbreite = Rissabstand × Dehnungsdifferenz')),
-      `w<sub>k</sub> = s<sub>r,max</sub>·(ε<sub>sm</sub> − ε<sub>cm</sub>) = <b>${deNum(r.wk,3)} mm</b> ≤ w<sub>max</sub> = ${deNum(wmax,1)} mm (${ex[0]}, ${naLand()==='at'?'Tab. 7.1N':naLand()==='uk'?'BS EN 1992-1-1/NA':naLand()==='fr'?'NF EN 1992-1-1/NA':'Tab. 7.1DE'})`];
+      `w<sub>k</sub> = s<sub>r,max</sub>·(ε<sub>sm</sub> − ε<sub>cm</sub>) = <b>${deNum(r.wk,3)} mm</b> ≤ w<sub>max</sub> = ${deNum(wmax,1)} mm (${ex[0]}, ${naLand()==='at'?'Tab. 7.1N':naLand()==='uk'?'BS EN 1992-1-1/NA':naLand()==='fr'?'NF EN 1992-1-1/NA':naLand()==='es'?'UNE-EN 1992-1-1/AN, Tab. AN/9':'Tab. 7.1DE'})`];
     let eta = r.wk/wmax, note='';
     if(I.zwang){
       const fcte=Math.max(fctm,3.0), kc=0.4, k=h<=300?0.8:h>=800?0.5:0.8-0.3*(h-300)/500;
@@ -5920,7 +5937,7 @@ function nachweiseStahl(I, profName){
       `A = ${f(P.A)} cm²`,
       _L`Schubfläche A<sub>v,z</sub> = A − 2b·t<sub>f</sub> + (t<sub>w</sub> + 2r)·t<sub>f</sub> ≥ h<sub>w</sub>·t<sub>w</sub> = ${deNum(P.Avz,2)} cm²`,
       _L`W<sub>${kl<=2?'pl':kl===3?'el':'eff'},y</sub> = ${f(W)} cm³ (Klasse ${kl})`,
-      H(tt('Widerstände des Querschnitts (γ<sub>M0</sub> = 1,0)')),
+      H(_L`Widerstände des Querschnitts (γ<sub>M0</sub> = ${naNum(ST.gM0)})`),
       `N<sub>${kl===4?'c':'pl'},Rd</sub> = ${kl===4?'A<sub>eff</sub>':'A'}·f<sub>y</sub>/γ<sub>M0</sub> = ${deNum(NRk/ST.gM0,0)} kN`,
       `V<sub>pl,z,Rd</sub> = A<sub>v,z</sub>·f<sub>y</sub>/(√3·γ<sub>M0</sub>) = ${f(Vpl)} kN`,
       `M<sub>c,y,Rd</sub> = W·f<sub>y</sub>/γ<sub>M0</sub> = ${f(Mc)} kNm`,
@@ -6031,12 +6048,12 @@ function nachweiseStahl(I, profName){
       const L=I.Llt*1000, Iz=P.Iz*1e4, Iw=P.Iw*1e6, It=P.It*1e4, zg=I.zg*P.h/2*(MV.C2>0?1:0);
       const pz = Math.PI**2*ST.E*Iz/L**2;
       const Mcr = MV.C1*pz*(Math.sqrt(Iw/Iz + L*L*ST.G*It/(Math.PI**2*ST.E*Iz) + (MV.C2*zg)**2) - MV.C2*zg)/1e6;
-      const ukL = naV('ltb','')==='uk', hb=P.h/P.b, lLT = Math.sqrt(MRk/Mcr), aLT = hb<=2 ? 0.34 : (ukL && hb>3.1) ? 0.76 : 0.49, l0=0.4, beta=0.75;
+      const ukL = naV('ltb','')==='uk', esL = naV('ltb','')==='es', hb=P.h/P.b, lLT = Math.sqrt(MRk/Mcr), aLT = hb<=2 ? 0.34 : (ukL && hb>3.1) ? 0.76 : 0.49, l0=0.4, beta=0.75;
       let chi=1, f1=1;
       if(lLT>l0 && I.M/Mcr>l0*l0){
         const ph=0.5*(1+aLT*(lLT-l0)+beta*lLT*lLT);
         chi = Math.min(1, 1/(lLT*lLT), 1/(ph+Math.sqrt(ph*ph-beta*lLT*lLT)));
-        f1 = ukL ? 1 : Math.min(1, 1-0.5*(1-MV.kc)*(1-2*(lLT-0.8)**2));
+        f1 = (ukL || esL) ? 1 : Math.min(1, 1-0.5*(1-MV.kc)*(1-2*(lLT-0.8)**2));
       }
       chiLT = Math.min(chi/f1, 1, lLT>0 ? 1/(lLT*lLT) : 1);
       const Mb = chiLT*MRk/ST.gM1;
@@ -6053,7 +6070,7 @@ function nachweiseStahl(I, profName){
         H(tt('Abminderungsfaktor χ<sub>LT</sub>')),
         ...(lLT<=l0 || I.M/Mcr<=l0*l0 ? [_L`λ̄<sub>LT</sub> ≤ 0,4 bzw. M<sub>Ed</sub>/M<sub>cr</sub> ≤ 0,16 → χ<sub>LT</sub> = 1`]
           : [_L`Walzprofil (6.3.2.3, λ̄<sub>LT,0</sub> = 0,4, β = 0,75): χ<sub>LT</sub> = ${deNum(chi,3)}`,
-             ukL ? tt('Korrekturfaktor f nach UK-NA (NA.2.18) nicht angesetzt: f = 1 (sichere Seite)') : _L`Korrektur für den Momentenverlauf: k<sub>c</sub> = ${deNum(MV.kc,2)} · f = ${deNum(f1,3)}`,
+             ukL ? tt('Korrekturfaktor f nach UK-NA (NA.2.18) nicht angesetzt: f = 1 (sichere Seite)') : esL ? tt('Korrekturfaktor f (k<sub>c</sub> nach Tab. AN/6 des spanischen NA) nicht angesetzt: f = 1 (sichere Seite)') : _L`Korrektur für den Momentenverlauf: k<sub>c</sub> = ${deNum(MV.kc,2)} · f = ${deNum(f1,3)}`,
              `χ<sub>LT,mod</sub> = χ<sub>LT</sub>/f = <b>${deNum(chiLT,3)}</b>`]),
         H(tt('Nachweis')),
         `M<sub>b,Rd</sub> = χ<sub>LT</sub>·W·f<sub>y</sub>/γ<sub>M1</sub> = <b>${f(Mb)} kNm</b> ≥ M<sub>y,Ed</sub> = ${f(I.M)} kNm`);
@@ -6108,12 +6125,12 @@ function nachweiseStahl(I, profName){
       H(tt('Wölbnormalspannung an der Gurtkante')),
       _L`σ<sub>w</sub> = B·ω<sub>max</sub>/I<sub>w</sub> mit ω<sub>max</sub> = (h − t<sub>f</sub>)·b/4 = ${deNum(T.wmax,0)} mm² → σ<sub>w</sub> = ${deNum(T.sw,1)} N/mm² (Gurtkante)`,
       H(tt('Normalspannungen addieren (Feldmitte, Gurtkante)')),
-      _L`Feldmitte, Gurtkante: σ = N/A + M<sub>y</sub>/W<sub>el,y</sub>${I.Mz>0?' + M<sub>z</sub>/W<sub>el,z</sub>':''} + σ<sub>w</sub> = ${deNum(sb,1)} + ${deNum(T.sw,1)} = <b>${deNum(sM,1)} N/mm²</b> ≤ f<sub>y</sub> = ${fy} N/mm²`,
+      _L`Feldmitte, Gurtkante: σ = N/A + M<sub>y</sub>/W<sub>el,y</sub>${I.Mz>0?' + M<sub>z</sub>/W<sub>el,z</sub>':''} + σ<sub>w</sub> = ${deNum(sb,1)} + ${deNum(T.sw,1)} = <b>${deNum(sM,1)} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = ${deNum(fy/ST.gM0, ST.gM0===1?0:1)} N/mm²`,
       H(tt('Schubspannungen addieren (Auflager)')),
       _L`Steg: τ = V/(h<sub>w</sub>·t<sub>w</sub>) + T<sub>t</sub>·t<sub>w</sub>/I<sub>T</sub> = ${deNum(tV,1)} + ${deNum(T.tt_w,1)} = ${deNum(tw_,1)} N/mm²`,
       _L`Gurt: τ = T<sub>t</sub>·t<sub>f</sub>/I<sub>T</sub> + T<sub>w</sub>·S<sub>ω</sub>/(I<sub>w</sub>·t<sub>f</sub>) = ${deNum(T.tt_f,1)} + ${deNum(T.tw0,1)} = ${deNum(tf_,1)} N/mm²`,
       H(tt('Fließbedingung für Schub')),
-      _L`√3·τ<sub>max</sub> = <b>${deNum(vM2,1)} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = ${fy} N/mm² (Fließbedingung 6.1)`];
+      _L`√3·τ<sub>max</sub> = <b>${deNum(vM2,1)} N/mm²</b> ≤ f<sub>y</sub>/γ<sub>M0</sub> = ${deNum(fy/ST.gM0, ST.gM0===1?0:1)} N/mm² (Fließbedingung 6.1)`];
     const eta=Math.max(vM1, vM2)/(fy/ST.gM0);
     C.push({ id:'torsion', title:tt('Torsion (elastisch)'), eta, ok: eta<=1, steps:S,
       note: tt('Elastischer Nachweis der Spannungen. Die Wechselwirkung von Torsion und Biegedrillknicken ist im Eurocode nicht geregelt und hier nicht enthalten.') });

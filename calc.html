@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.25 -->
+<!-- kragr v0.11.26 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -31,6 +31,13 @@
   .theme-btn { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; padding:0; border:none; border-radius:8px; background:transparent; color:inherit; opacity:.7; cursor:pointer; vertical-align:middle; }
   .theme-btn:hover { opacity:1; background:rgba(0,0,0,.06); }
   @media print { html.dark, html.dark img, html.dark .no-invert { filter:none !important; } .theme-btn { display:none !important; } }
+  .k-lfpsi { margin:6px 0 4px; }
+  .k-lfpsi-h { font-size:12.5px; font-weight:700; margin-bottom:6px; }
+  .k-lfpsi-r { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px; }
+  .k-lfpsi-f { display:flex; flex-direction:column; gap:3px; font-size:12px; min-width:0; }
+  .k-lfpsi-f input { width:100%; min-width:0; box-sizing:border-box; padding:8px 10px; font-size:13px; font-family:inherit; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface2); color:var(--text); }
+  .k-lfpsi-f span { color:var(--text2, #5c5e66); }
+  @media (max-width:420px){ .k-lfpsi-r { grid-template-columns:repeat(2, minmax(0,1fr)); } }
 </style>
 <style data-glass>
   /* Glasleiste (Oktober 2026): Kopfzeile durchscheinend, Inhalt darunter weichgezeichnet, unterer Rand läuft weich aus. */
@@ -1278,13 +1285,13 @@ window.kragrK5Page = function(K){
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
     de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
+        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',naSCH:'Schweizer Normen (SIA)',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'die Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
     en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
+        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',naSCH:'Swiss standards (SIA)',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
     fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
+        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',naSCH:'Normes suisses (SIA)',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'la Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
     es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
+        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',naSCH:'Normas suizas (SIA)',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
     dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
@@ -1294,7 +1301,7 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
   // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
-  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','fr','es','uk'];
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','ch','fr','es','uk'];
   // Ländertabelle (Schritt 2, November 2026): nur Werte mit Quelle. Fehlt ein Wert oder ein Nachweis in NA_COVER, rechnet die App ihn für dieses Land nicht.
   // AT: ÖNORM B 1990-1 (γ, ψ wie DE) und B 1995-1-1 nach IHBV-Tabellenwerk (TU Graz) 2017; ÖNORM B 1992-1-1 nach SCIA „Theoretical background NA EN 1992“ (EN-Empfehlung für γ_c, γ_s, α_cc, C_Rd,c, v_min, ν; Δc_dev = 5 mm, c_min,dur-Tabelle, θ ≥ 30,96°, ρ_w,min = 0,15·f_ctm/f_yd, s_l,max = 0,75·d ≤ 250 mm); B 1995-1-1: f_v,k 2,3 (Nadelholz) / 2,5 (BSH) mit k_cr = 1; k_c,90 und β_c wie EN (IHBV-Beispielsammlung 2022), Kippen BSH (DE-Faktor 1,4) gesperrt. EC2 7.3.4(3) AT: k3 = 0, k4 wie DE → s_r,max-Formel gleich; Zwang-Mindestbewehrung gesperrt. ÖNORM B 1993-1-1 nach SCIA „Theoretical background NA EN 1993“: γ_M0/γ_M1/γ_M2 und Biegedrillknicken nach EN-Empfehlung (1,0 / 1,0 / 1,25), Interaktion Anhang B.
   var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3, gM0:1.0, gM1:1.1, gM2:1.25 },
@@ -1312,11 +1319,15 @@ window.kragrK5Page = function(K){
              // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0/XC1 0,4, XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
              // EC3: γ_M0 = γ_M1 = 1,05 (Hochbau), γ_M2 = 1,25; Biegedrillknicken λ̄_LT,0 0,4, β 0,75, Kurve b/c (gewalzt h/b ≤ 2 / > 2), f mit k_c nach Tab. AN/6 (nicht lesbar) → f = 1; Interaktion Anhang A oder B frei.
              // EN 1990 Anhang A1 (Hochbau): im spanischen NA „pendientes de determinación“ → Schnittkräfte mit EN-Empfehlung und Hinweis. Holz: kein frei zugänglicher NA.
-             es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' } };
+             es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' },
+             // CH: SIA-Normen statt Eurocode. Frei belegt nur SIA 260 Typ 2 (γ_G 1,35 / 0,80, γ_Q 1,5, Begleitlasten ψ0·Q_k ohne γ_Q) → Schnittkräfte; ψ0 als Eingabe.
+             // SIA 262/263/265 (Bemessung) nicht frei zugänglich → alle Bemessungsnachweise als Hinweis (NA_COVER.ch leer).
+             ch:{ gG:1.35, gGinf:0.80, gQ:1.5 } };
   // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
   var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
                  uk:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
+                 ch:{},
                  es:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
                  fr:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
@@ -1328,9 +1339,10 @@ window.kragrK5Page = function(K){
   function naNow(){ var v='de'; try{ v=localStorage.getItem('kragr-na')||'de'; }catch(e){} return NA_ON.indexOf(v)>=0 ? v : 'de'; }
   function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v);
     Array.prototype.forEach.call(D.querySelectorAll('.na-hint'), function(h){ h.remove(); }); Array.prototype.forEach.call(D.querySelectorAll('[data-na-done]'), function(r){ delete r.dataset.naDone; });
-    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); if(PAGE==='calc' && typeof window.liveCalc==='function') window.liveCalc(true); }catch(e){} markNA(true); }
+    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); if(PAGE==='calc' && typeof window.lfCfgUI==='function') ['beam','cantilever','cont','frame'].forEach(function(x){ window.lfCfgUI(x); }); if(PAGE==='calc' && typeof window.liveCalc==='function') window.liveCalc(true); }catch(e){} markNA(true); }
   function naBadge(){ return t('naAbbr')+' '+(PAGE==='ref' ? 'DE' : naNow().toUpperCase()); }
   window.kragrNA=function(){ return naNow(); };
+  function naSub(){ return naNow()==='ch' ? t('naSCH') : t('naS').replace('{0}', t('c'+naNow().toUpperCase())); }
   // Werte, die der nationale Anhang festlegt: Teilsicherheits- und Kombinationsbeiwerte, α_cc/α_ct, k_mod/k_def — markiert, wo ein Zahlenwert genannt wird
   var NA_RX=/(?<![A-Za-zÄÖÜäöüß])(?:γ[cCsSGQMRPHtφ][\w,′]*|ψ\s?[012][\w,]*|α(?:cc|ct)|k(?:mod|def))/g;
   var NA_ROOTS='#details .steps, #main .steps, .col-out .steps, .ablauf .steps', NA_SKIP='#report, #report-view, .report, .rep, #rep, [data-no-na]';
@@ -1520,7 +1532,7 @@ window.kragrK5Page = function(K){
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
     if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
-    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('na'))+'<span>'+esc(t('naS').replace('{0}', t('c'+naNow().toUpperCase())))+'</span></span>'+seg('k5-na', NA_ALL.map(function(c){ return [c, c.toUpperCase()]; }), naNow())+'</div>';
+    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('na'))+'<span>'+esc(naSub())+'</span></span>'+seg('k5-na', NA_ALL.map(function(c){ return [c, c.toUpperCase()]; }), naNow())+'</div>';
     if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
     h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
@@ -1529,7 +1541,7 @@ window.kragrK5Page = function(K){
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-na button'), function(b){ var on=NA_ON.indexOf(b.dataset.v)>=0;
       if(!on){ b.disabled=true; b.classList.add('k5-soon'); b.title=t('c'+b.dataset.v.toUpperCase())+' – '+t('soon'); b.setAttribute('aria-label', b.title); }
-      else b.onclick=function(){ naSet(b.dataset.v); pressSeg(b); var s=b.closest('.k5-row').querySelector('.k5-rt > span'); if(s) s.textContent=t('naS').replace('{0}', t('c'+naNow().toUpperCase())); }; });
+      else b.onclick=function(){ naSet(b.dataset.v); pressSeg(b); var s=b.closest('.k5-row').querySelector('.k5-rt > span'); if(s) s.textContent=naSub(); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
   }
@@ -1882,7 +1894,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.25</span>
+    <span class="version">v0.11.26</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -1957,7 +1969,7 @@ window.kragrK5Page = function(K){
     <div class="card-title" style="margin-bottom:8px" data-lfx="title">Lastfälle nach EC 0</div>
     <label class="k-lfsw"><input type="checkbox" id="lf-on-beam" onchange="lfCfg('beam')"><span data-lfx="on">Lasten Lastfällen zuordnen und kombinieren</span></label>
     <div class="k-lfopt" hidden>
-      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-beam" onchange="lfCfg('beam')"><option value="A">A</option></select></div>
+      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-beam" onchange="lfCfg('beam')"><option value="A">A</option></select></div><div class="k-lfpsi" hidden><div class="k-lfpsi-h" data-lfx="psiH">ψ₀ nach SIA 260</div><div class="k-lfpsi-r"><label class="k-lfpsi-f"><span data-lfx="psiQ">Q</span><input type="number" id="lf-psi-beam-Q" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('beam')"></label><label class="k-lfpsi-f"><span data-lfx="psiS">S</span><input type="number" id="lf-psi-beam-S" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('beam')"></label><label class="k-lfpsi-f"><span data-lfx="psiW">W</span><input type="number" id="lf-psi-beam-W" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('beam')"></label><label class="k-lfpsi-f"><span data-lfx="psiT">T</span><input type="number" id="lf-psi-beam-T" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('beam')"></label></div><div class="k-lfnote" data-lfx="psiNote"></div></div>
       <div class="k-lfnote" data-lfx="note"></div>
     </div>
   </div>
@@ -2037,7 +2049,7 @@ window.kragrK5Page = function(K){
     <div class="card-title" style="margin-bottom:8px" data-lfx="title">Lastfälle nach EC 0</div>
     <label class="k-lfsw"><input type="checkbox" id="lf-on-cantilever" onchange="lfCfg('cantilever')"><span data-lfx="on">Lasten Lastfällen zuordnen und kombinieren</span></label>
     <div class="k-lfopt" hidden>
-      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-cantilever" onchange="lfCfg('cantilever')"><option value="A">A</option></select></div>
+      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-cantilever" onchange="lfCfg('cantilever')"><option value="A">A</option></select></div><div class="k-lfpsi" hidden><div class="k-lfpsi-h" data-lfx="psiH">ψ₀ nach SIA 260</div><div class="k-lfpsi-r"><label class="k-lfpsi-f"><span data-lfx="psiQ">Q</span><input type="number" id="lf-psi-cantilever-Q" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cantilever')"></label><label class="k-lfpsi-f"><span data-lfx="psiS">S</span><input type="number" id="lf-psi-cantilever-S" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cantilever')"></label><label class="k-lfpsi-f"><span data-lfx="psiW">W</span><input type="number" id="lf-psi-cantilever-W" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cantilever')"></label><label class="k-lfpsi-f"><span data-lfx="psiT">T</span><input type="number" id="lf-psi-cantilever-T" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cantilever')"></label></div><div class="k-lfnote" data-lfx="psiNote"></div></div>
       <div class="k-lfnote" data-lfx="note"></div>
     </div>
   </div>
@@ -2109,7 +2121,7 @@ window.kragrK5Page = function(K){
     <div class="card-title" style="margin-bottom:8px" data-lfx="title">Lastfälle nach EC 0</div>
     <label class="k-lfsw"><input type="checkbox" id="lf-on-cont" onchange="lfCfg('cont')"><span data-lfx="on">Lasten Lastfällen zuordnen und kombinieren</span></label>
     <div class="k-lfopt" hidden>
-      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-cont" onchange="lfCfg('cont')"><option value="A">A</option></select></div>
+      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-cont" onchange="lfCfg('cont')"><option value="A">A</option></select></div><div class="k-lfpsi" hidden><div class="k-lfpsi-h" data-lfx="psiH">ψ₀ nach SIA 260</div><div class="k-lfpsi-r"><label class="k-lfpsi-f"><span data-lfx="psiQ">Q</span><input type="number" id="lf-psi-cont-Q" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cont')"></label><label class="k-lfpsi-f"><span data-lfx="psiS">S</span><input type="number" id="lf-psi-cont-S" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cont')"></label><label class="k-lfpsi-f"><span data-lfx="psiW">W</span><input type="number" id="lf-psi-cont-W" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cont')"></label><label class="k-lfpsi-f"><span data-lfx="psiT">T</span><input type="number" id="lf-psi-cont-T" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('cont')"></label></div><div class="k-lfnote" data-lfx="psiNote"></div></div>
       <label class="k-lffeld"><input type="checkbox" id="lf-feld-cont" checked onchange="lfCfg('cont')"><span data-lfx="feld">Nutzlast feldweise</span></label>
       <div class="k-lfnote" data-lfx="note"></div>
     </div>
@@ -2270,7 +2282,7 @@ window.kragrK5Page = function(K){
     <div class="card-title" style="margin-bottom:8px" data-lfx="title">Lastfälle nach EC 0</div>
     <label class="k-lfsw"><input type="checkbox" id="lf-on-frame" onchange="lfCfg('frame')"><span data-lfx="on">Lasten Lastfällen zuordnen und kombinieren</span></label>
     <div class="k-lfopt" hidden>
-      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-frame" onchange="lfCfg('frame')"><option value="A">A</option></select></div>
+      <div class="field"><label data-lfx="cat">Nutzlast-Kategorie</label><select id="lf-cat-frame" onchange="lfCfg('frame')"><option value="A">A</option></select></div><div class="k-lfpsi" hidden><div class="k-lfpsi-h" data-lfx="psiH">ψ₀ nach SIA 260</div><div class="k-lfpsi-r"><label class="k-lfpsi-f"><span data-lfx="psiQ">Q</span><input type="number" id="lf-psi-frame-Q" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('frame')"></label><label class="k-lfpsi-f"><span data-lfx="psiS">S</span><input type="number" id="lf-psi-frame-S" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('frame')"></label><label class="k-lfpsi-f"><span data-lfx="psiW">W</span><input type="number" id="lf-psi-frame-W" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('frame')"></label><label class="k-lfpsi-f"><span data-lfx="psiT">T</span><input type="number" id="lf-psi-frame-T" min="0" max="1" step="0.1" placeholder="1,0" inputmode="decimal" onchange="lfCfg('frame')"></label></div><div class="k-lfnote" data-lfx="psiNote"></div></div>
       <div class="k-lfnote" data-lfx="note"></div>
     </div>
   </div>
@@ -2418,7 +2430,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.25';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.26';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -8020,7 +8032,12 @@ const lfUK = () => typeof window.kragrNA==='function' && window.kragrNA()==='uk'
 const lfFR = () => typeof window.kragrNA==='function' && window.kragrNA()==='fr';
 // ES (calc v0.11.25): Anhang A1 (Hochbau) im spanischen NA zu UNE-EN 1990 noch nicht festgelegt („pendientes de determinación“) → EN-Empfehlung (Gl. 6.10, γ und ψ wie Tab. A1.1/A1.2(B)) mit Hinweis
 const lfES = () => typeof window.kragrNA==='function' && window.kragrNA()==='es';
-const lfNorm = () => lfUK() ? lfTx('formulaUK') : lfFR() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'NF EN 1990/NA (FR)') : lfES() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'EN 1990')+' '+lfTx('esNote') : lfTx('formula');
+// CH (calc v0.11.26): SIA 260 (Typ 2) — γ_G 1,35 / günstig 0,80, Leiteinwirkung γ_Q = 1,5, Begleiteinwirkungen ψ0·Q_k ohne γ_Q (SIA 260, 4.4.3.4, Gl. 16).
+// Die ψ-Tabelle (SIA 260, Anhang A, Tab. 2) ist nicht frei zugänglich: ψ0 gibt man je Einwirkungsart selbst ein, leer = 1,0 (sichere Seite).
+const lfCH = () => typeof window.kragrNA==='function' && window.kragrNA()==='ch';
+const LF_GINF_CH = 0.80;
+function lfPsiCH(t, T){ const k=(T==='W1'||T==='W2')?'W':T, v=parseFloat(String(document.getElementById(`lf-psi-${t}-${k}`)?.value||'').replace(',','.')); return isFinite(v) ? Math.min(1, Math.max(0, v)) : 1; }
+const lfNorm = () => lfCH() ? lfTx('formulaCH') : lfUK() ? lfTx('formulaUK') : lfFR() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'NF EN 1990/NA (FR)') : lfES() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'EN 1990')+' '+lfTx('esNote') : lfTx('formula');
 const LF_XI = 0.925;
 const LF_MAG = ['F','H','Me','M','qa','qb','dTN','dTM'];
 const LF_SK = { beam:'beam', cantilever:'cant', cont:'cont', frame:'frame' };          // Bereich → lastCalc-Schlüssel
@@ -8036,6 +8053,7 @@ const LFT = {
     lfChar:'Lastfall {0}, charakteristisch', cases:'Lastfälle', loadsCol:'Lasten', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Maßgebende Werte', val:'Wert', at:'Stelle', comb:'Kombination',
     reac:'Auflagerkräfte (Grenzwerte GZT)', sup:'Lager', G:'ständig', Q:'Nutzlast', S:'Schnee', W1:'Wind 1', W2:'Wind 2', span:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts',
     esNote:'Spanien: Der nationale Anhang zu UNE-EN 1990 legt die Werte für den Hochbau (Anhang A1) noch nicht fest; gerechnet wird mit den Empfehlungswerten der EN 1990.',
+    titleCH:'Lastfälle nach SIA 260', resCH:'Lastfälle und Kombinationen (SIA 260)', psiH:'Kombinationsbeiwerte ψ₀ (SIA 260, Tab. 2)', psiQ:'Nutzlast', psiS:'Schnee', psiW:'Wind', psiT:'Temperatur', psiNote:'Die SIA-Tabelle ist nicht frei zugänglich, deshalb trägst du ψ₀ selbst ein. Leer = 1,0 (sichere Seite).', formulaCH:'Gefährdungsbild Typ 2 nach SIA 260, Gl. 16: γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> mit γ<sub>G</sub> = 1,35 (günstig 0,80), γ<sub>Q</sub> = 1,5 (günstig 0); Begleiteinwirkungen ohne γ<sub>Q</sub>. ψ<sub>0</sub> nach Eingabe. Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     formulaUK:'Grundkombination BS EN 1990/NA (UK), Gl. 6.10a: Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> und Gl. 6.10b: Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> mit ξ = 0,925 (günstig 1,0·G<sub>k</sub>); ψ<sub>0</sub> Wind 0,5. Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     formula:'Grundkombination DIN EN 1990, Gl. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> mit γ<sub>G</sub> = 1,35 (günstig 1,0), γ<sub>Q</sub> = 1,5 (günstig 0). Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     feldNote:'Nutzlast feldweise: je Stelle werden nur die Felder belastet, die ungünstig wirken.', none:'—', only:'nur', at_x:'x = {0} m', snow:'Schnee: Orte bis 1000 m ü. NN' , T:'Temperatur', setl:'Setzungen' },
@@ -8047,6 +8065,7 @@ const LFT = {
     lfChar:'Load case {0}, characteristic', cases:'Load cases', loadsCol:'Loads', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Governing values', val:'Value', at:'Location', comb:'Combination',
     reac:'Support reactions (ULS limits)', sup:'Support', G:'permanent', Q:'imposed', S:'snow', W1:'wind 1', W2:'wind 2', span:'Span', ovL:'Left cantilever', ovR:'Right cantilever',
     esNote:'Spain: the national annex to UNE-EN 1990 has not yet set the values for buildings (Annex A1); the recommended EN 1990 values are used.',
+    titleCH:'Load cases to SIA 260', resCH:'Load cases and combinations (SIA 260)', psiH:'Combination factors ψ₀ to SIA 260, Annex A, Table 2', psiQ:'Imposed', psiS:'Snow', psiW:'Wind', psiT:'Temperature', psiNote:'The SIA table is not freely available, so you enter ψ₀ yourself. Empty = 1.0 (safe side).', formulaCH:'Hazard scenario type 2 to SIA 260, eq. 16: γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> with γ<sub>G</sub> = 1.35 (favourable 0.80), γ<sub>Q</sub> = 1.5 (favourable 0); accompanying actions without γ<sub>Q</sub>. ψ<sub>0</sub> as entered. At each point the most unfavourable combination applies. Deflection: characteristic combination (γ = 1).',
     formulaUK:'Fundamental combination BS EN 1990/NA (UK), eq. 6.10a: Σ1.35·G<sub>k</sub> + Σ1.5·ψ<sub>0</sub>·Q<sub>k,i</sub> and eq. 6.10b: Σξ·1.35·G<sub>k</sub> + 1.5·Q<sub>k,1</sub> + Σ1.5·ψ<sub>0</sub>·Q<sub>k,i</sub> with ξ = 0.925 (favourable 1.0·G<sub>k</sub>); ψ<sub>0</sub> wind 0.5. At each point the most unfavourable combination governs. Deflection: characteristic combination (γ = 1).',
     formula:'Fundamental combination EN 1990, eq. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> with γ<sub>G</sub> = 1.35 (favourable 1.0), γ<sub>Q</sub> = 1.5 (favourable 0). At each point the most unfavourable combination applies. Deflection: characteristic combination (γ = 1).',
     feldNote:'Imposed load span by span: at each point only the spans acting unfavourably are loaded.', none:'—', only:'only', at_x:'x = {0} m', snow:'Snow: sites up to 1000 m a.s.l.' , T:'temperature', setl:'settlements' },
@@ -8058,6 +8077,7 @@ const LFT = {
     lfChar:'Cas {0}, caractéristique', cases:'Cas de charge', loadsCol:'Charges', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Valeurs déterminantes', val:'Valeur', at:'Position', comb:'Combinaison',
     reac:'Réactions d’appui (limites ELU)', sup:'Appui', G:'permanente', Q:'exploitation', S:'neige', W1:'vent 1', W2:'vent 2', span:'Travée', ovL:'Console gauche', ovR:'Console droite',
     esNote:'Espagne : l’annexe nationale à l’UNE-EN 1990 ne fixe pas encore les valeurs pour les bâtiments (annexe A1) ; les valeurs recommandées de l’EN 1990 sont utilisées.',
+    titleCH:'Cas de charge selon SIA 260', resCH:'Cas de charge et combinaisons (SIA 260)', psiH:'Coefficients de combinaison ψ₀ selon SIA 260, annexe A, tableau 2', psiQ:'Exploitation', psiS:'Neige', psiW:'Vent', psiT:'Température', psiNote:'Le tableau SIA n’est pas librement accessible : saisis ψ₀ toi-même. Vide = 1,0 (côté sécurité).', formulaCH:'Situation de risque type 2 selon SIA 260, éq. 16 : γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> avec γ<sub>G</sub> = 1,35 (favorable 0,80), γ<sub>Q</sub> = 1,5 (favorable 0) ; actions concomitantes sans γ<sub>Q</sub>. ψ<sub>0</sub> selon la saisie. En chaque point, la combinaison la plus défavorable. Déformée : combinaison caractéristique (γ = 1).',
     formulaUK:'Combinaison fondamentale BS EN 1990/NA (UK), éq. 6.10a : Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> et éq. 6.10b : Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> avec ξ = 0,925 (favorable 1,0·G<sub>k</sub>) ; ψ<sub>0</sub> vent 0,5. En chaque point, la combinaison la plus défavorable est déterminante. Flèche : combinaison caractéristique (γ = 1).',
     formula:'Combinaison fondamentale EN 1990, éq. 6.10 : Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> avec γ<sub>G</sub> = 1,35 (favorable 1,0), γ<sub>Q</sub> = 1,5 (favorable 0). En chaque point, la combinaison la plus défavorable. Déformée : combinaison caractéristique (γ = 1).',
     feldNote:'Exploitation travée par travée : en chaque point, seules les travées défavorables sont chargées.', none:'—', only:'seulement', at_x:'x = {0} m', snow:'Neige : sites jusqu’à 1000 m' , T:'température', setl:'tassements' },
@@ -8069,10 +8089,11 @@ const LFT = {
     lfChar:'Hipótesis {0}, característica', cases:'Hipótesis', loadsCol:'Cargas', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Valores determinantes', val:'Valor', at:'Posición', comb:'Combinación',
     reac:'Reacciones (límites ELU)', sup:'Apoyo', G:'permanente', Q:'uso', S:'nieve', W1:'viento 1', W2:'viento 2', span:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho',
     esNote:'España: el anejo nacional de la UNE-EN 1990 aún no fija los valores para edificación (anejo A1); se usan los valores recomendados de la EN 1990.',
+    titleCH:'Hipótesis de carga según SIA 260', resCH:'Hipótesis y combinaciones (SIA 260)', psiH:'Coeficientes de combinación ψ₀ según SIA 260, anejo A, tabla 2', psiQ:'Uso', psiS:'Nieve', psiW:'Viento', psiT:'Temperatura', psiNote:'La tabla SIA no es de libre acceso, así que introduces ψ₀ tú mismo. Vacío = 1,0 (lado seguro).', formulaCH:'Situación de riesgo tipo 2 según SIA 260, ec. 16: γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> con γ<sub>G</sub> = 1,35 (favorable 0,80), γ<sub>Q</sub> = 1,5 (favorable 0); acciones concomitantes sin γ<sub>Q</sub>. ψ<sub>0</sub> según lo introducido. En cada punto, la combinación más desfavorable. Deformada: combinación característica (γ = 1).',
     formulaUK:'Combinación fundamental BS EN 1990/NA (UK), ec. 6.10a: Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> y ec. 6.10b: Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> con ξ = 0,925 (favorable 1,0·G<sub>k</sub>); ψ<sub>0</sub> viento 0,5. En cada punto rige la combinación más desfavorable. Flecha: combinación característica (γ = 1).',
     formula:'Combinación fundamental EN 1990, ec. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> con γ<sub>G</sub> = 1,35 (favorable 1,0), γ<sub>Q</sub> = 1,5 (favorable 0). En cada punto, la combinación más desfavorable. Deformada: combinación característica (γ = 1).',
     feldNote:'Sobrecarga por vanos: en cada punto solo se cargan los vanos desfavorables.', none:'—', only:'solo', at_x:'x = {0} m', snow:'Nieve: lugares hasta 1000 m s.n.m.' , T:'temperatura', setl:'asientos' } };
-function lfTx(k, ...a){ let s=(LFT[calcLang]||LFT.en)[k] ?? LFT.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; }
+function lfTx(k, ...a){ if(lfCH() && (k+'CH') in LFT.de) k+='CH'; let s=(LFT[calcLang]||LFT.en)[k] ?? LFT.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; }
 const lfNum = (v, d=2) => { const n=+v; return isFinite(n) ? (Math.abs(n)<5e-4?0:n).toFixed(d).replace('.', calcLang==='en'?'.':',') : String(v); };
 const lfF = v => String(+(+v).toFixed(3)).replace('.', calcLang==='en'?'.':',');
 function lfOn(t){ return !!document.getElementById('lf-on-'+t)?.checked; }
@@ -8081,7 +8102,7 @@ function lfHasSet(t){ if(!supxOn(t)) return false; return Object.entries(SUPX[t]
 function lfOnK3(sys){ const t=LF_K3[sys]; return !!t && lfOn(t); }
 function lfCat(t){ const v=document.getElementById('lf-cat-'+t)?.value; return LF_PSI[v] ? v : 'A'; }
 function lfFeld(t){ return t==='cont' && !!document.getElementById('lf-feld-cont')?.checked; }
-function lfPsi(t, T){ const uk=lfUK(); return T==='Q' ? (uk && lfCat(t)==='H' ? [0.7,0,0] : LF_PSI[lfCat(t)]) : T==='S' ? LF_PSI_S : (T==='W1'||T==='W2') ? (uk ? [0.5,0.2,0] : LF_PSI_W) : T==='T' ? LF_PSI_T : [1,1,1]; }
+function lfPsi(t, T){ if(lfCH() && T!=='G'){ const p=lfPsiCH(t,T); return [p,p,p]; } const uk=lfUK(); return T==='Q' ? (uk && lfCat(t)==='H' ? [0.7,0,0] : LF_PSI[lfCat(t)]) : T==='S' ? LF_PSI_S : (T==='W1'||T==='W2') ? (uk ? [0.5,0.2,0] : LF_PSI_W) : T==='T' ? LF_PSI_T : [1,1,1]; }
 const lfExcl = (a, b) => (a==='W1'&&b==='W2') || (a==='W2'&&b==='W1');
 const lfSegName = k => k==='L' ? lfTx('ovL') : k==='R' ? lfTx('ovR') : `${lfTx('span')} ${(+k)+1}`;
 
@@ -8113,7 +8134,7 @@ function lfOptions(t, P){
     o.push({uls:true, gam:LF_GSUP, lead:null, eq:'a'}); vars.forEach(lead=>o.push({uls:true, gam:LF_XI*LF_GSUP, lead, eq:'b'}));
     leads.forEach(lead=>o.push({uls:true, gam:LF_GINF, lead}));
   } else
-  (hasG ? [LF_GSUP, LF_GINF] : [LF_GSUP]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
+  (hasG ? [LF_GSUP, lfCH() ? LF_GINF_CH : LF_GINF] : [LF_GSUP]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
   leads.forEach(lead=>o.push({uls:false, gam:1, lead}));
   return o;
 }
@@ -8122,6 +8143,7 @@ function lfFac(t, o, T){
   const g = o.uls ? LF_GQ : 1;
   if(T===o.lead) return g;
   if(lfExcl(T, o.lead)) return 0;
+  if(lfCH()) return lfPsi(t,T)[0];   // SIA 260: Begleiteinwirkung ψ0·Q_k ohne γ_Q
   return g*lfPsi(t,T)[0];
 }
 // Grenzwert an einer Stelle: val(p) = Ergebnis des Teillastfalls p; sense +1 (max) / −1 (min). Liefert Wert und Faktoren je Teillastfall.
@@ -8173,7 +8195,7 @@ function lfFormula(t, P, fac, o){
     const f=fac[on[0].k]; let s;
     const one = Math.abs(f-1)<1e-9;
     if(T==='G') s = one ? 'G' : `${lfF(f)}·G`;
-    else { const psi=lfPsi(t,T)[0], g=o && o.uls ? LF_GQ : 1;
+    else { const psi=lfPsi(t,T)[0], g=o && o.uls && !(lfCH() && T!==o.lead) ? LF_GQ : 1;
       s = Math.abs(f-g)<1e-9 ? (one ? T : `${lfF(f)}·${T}`) : (g===1 ? `${lfF(psi)}·${T}` : `${lfF(g)}·${lfF(psi)}·${T}`); }
     if(T==='Q' && ps.length>1 && on.length<ps.length) s+=` (${on.map(p=>lfSegName(p.seg)).join(', ')})`;
     parts.push(s); });
@@ -8312,6 +8334,7 @@ function lfCfgUI(t){
   const box=document.querySelector(`.k-lfcfg[data-lft="${t}"]`); if(!box) return;
   const on=lfOn(t); box.querySelector('.k-lfopt').hidden=!on; box.classList.toggle('on', on);
   box.querySelectorAll('[data-lfx]').forEach(e=>{ e.innerHTML=lfTx(e.dataset.lfx); });
+  { const ch=lfCH(), sel=document.getElementById('lf-cat-'+t), ps=box.querySelector('.k-lfpsi'); if(sel) sel.closest('.field').hidden=ch; if(ps) ps.hidden=!ch; }
   const sel=document.getElementById('lf-cat-'+t); if(sel){ const cur=lfCat(t); sel.innerHTML=Object.keys(LF_PSI).map(k=>`<option value="${k}"${k===cur?' selected':''}>${lfTx('cat'+k)} · ψ₀ = ${lfF(LF_PSI[k][0])}</option>`).join(''); }
 }
 function lfRerows(t){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.62 -->
+<!-- kragr·ref v0.3.63 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -901,13 +901,13 @@ window.kragrK5Page = function(K){
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
     de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
-        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
+        set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',naSCH:'Schweizer Normen (SIA)',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'die Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
     en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
-        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
+        set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',naSCH:'Swiss standards (SIA)',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
     fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
-        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
+        set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',naSCH:'Normes suisses (SIA)',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'la Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
     es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
-        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
+        set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',naSCH:'Normas suizas (SIA)',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
     dispatchEvent:function(){ var v=this._v; this._v=null; if(v && typeof window.setLang==='function') window.setLang(v); return true; } };
@@ -917,7 +917,7 @@ window.kragrK5Page = function(K){
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // ── Bemessungsgrundlage (nationaler Anhang, seit Oktober/November 2026): Auswahl im Menü, Markierung im Rechenweg ──
   // Bisher ist nur Deutschland hinterlegt; die übrigen Länder stehen als „in Vorbereitung“ im Menü (Schritt 2 ff.).
-  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','fr','es','uk'];
+  var NA_ALL=['de','at','ch','fr','es','uk'], NA_ON=['de','at','ch','fr','es','uk'];
   // Ländertabelle (Schritt 2, November 2026): nur Werte mit Quelle. Fehlt ein Wert oder ein Nachweis in NA_COVER, rechnet die App ihn für dieses Land nicht.
   // AT: ÖNORM B 1990-1 (γ, ψ wie DE) und B 1995-1-1 nach IHBV-Tabellenwerk (TU Graz) 2017; ÖNORM B 1992-1-1 nach SCIA „Theoretical background NA EN 1992“ (EN-Empfehlung für γ_c, γ_s, α_cc, C_Rd,c, v_min, ν; Δc_dev = 5 mm, c_min,dur-Tabelle, θ ≥ 30,96°, ρ_w,min = 0,15·f_ctm/f_yd, s_l,max = 0,75·d ≤ 250 mm); B 1995-1-1: f_v,k 2,3 (Nadelholz) / 2,5 (BSH) mit k_cr = 1; k_c,90 und β_c wie EN (IHBV-Beispielsammlung 2022), Kippen BSH (DE-Faktor 1,4) gesperrt. EC2 7.3.4(3) AT: k3 = 0, k4 wie DE → s_r,max-Formel gleich; Zwang-Mindestbewehrung gesperrt. ÖNORM B 1993-1-1 nach SCIA „Theoretical background NA EN 1993“: γ_M0/γ_M1/γ_M2 und Biegedrillknicken nach EN-Empfehlung (1,0 / 1,0 / 1,25), Interaktion Anhang B.
   var NA_V={ de:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, gMvh:1.3, gMbsh:1.3, gM0:1.0, gM1:1.1, gM2:1.25 },
@@ -935,11 +935,15 @@ window.kragrK5Page = function(K){
              // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0/XC1 0,4, XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
              // EC3: γ_M0 = γ_M1 = 1,05 (Hochbau), γ_M2 = 1,25; Biegedrillknicken λ̄_LT,0 0,4, β 0,75, Kurve b/c (gewalzt h/b ≤ 2 / > 2), f mit k_c nach Tab. AN/6 (nicht lesbar) → f = 1; Interaktion Anhang A oder B frei.
              // EN 1990 Anhang A1 (Hochbau): im spanischen NA „pendientes de determinación“ → Schnittkräfte mit EN-Empfehlung und Hinweis. Holz: kein frei zugänglicher NA.
-             es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' } };
+             es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' },
+             // CH: SIA-Normen statt Eurocode. Frei belegt nur SIA 260 Typ 2 (γ_G 1,35 / 0,80, γ_Q 1,5, Begleitlasten ψ0·Q_k ohne γ_Q) → Schnittkräfte; ψ0 als Eingabe.
+             // SIA 262/263/265 (Bemessung) nicht frei zugänglich → alle Bemessungsnachweise als Hinweis (NA_COVER.ch leer).
+             ch:{ gG:1.35, gGinf:0.80, gQ:1.5 } };
   // Bemessung: Nachweise (Bereich/Modus → Kennungen), die für ein Land vollständig mit dessen Werten gerechnet werden
   var NA_COVER={ at:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'], 'holz/bauteil':['bem','biegung','schub','aufl','kipp','knick'], 'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
                  uk:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
+                 ch:{},
                  es:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
                       'stahl/traeger':['klasse','eff','qs','qv','bk','bdk','inter','torsion','last'] },
                  fr:{ 'beton/balken':['deckung','biegung','querkraft','riss','riss_st'], 'beton/platte':['deckung','biegung','querkraft','riss','riss_st'], 'beton/unterzug':['deckung','biegung','querkraft','riss','riss_st'],
@@ -951,9 +955,10 @@ window.kragrK5Page = function(K){
   function naNow(){ var v='de'; try{ v=localStorage.getItem('kragr-na')||'de'; }catch(e){} return NA_ON.indexOf(v)>=0 ? v : 'de'; }
   function naSet(v){ if(NA_ON.indexOf(v)<0) return; try{ localStorage.setItem('kragr-na', v); }catch(e){} H.setAttribute('data-na', v);
     Array.prototype.forEach.call(D.querySelectorAll('.na-hint'), function(h){ h.remove(); }); Array.prototype.forEach.call(D.querySelectorAll('[data-na-done]'), function(r){ delete r.dataset.naDone; });
-    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); if(PAGE==='calc' && typeof window.liveCalc==='function') window.liveCalc(true); }catch(e){} markNA(true); }
+    try{ if(typeof window.run==='function' && PAGE==='size') window.run(); if(PAGE==='calc' && typeof window.lfCfgUI==='function') ['beam','cantilever','cont','frame'].forEach(function(x){ window.lfCfgUI(x); }); if(PAGE==='calc' && typeof window.liveCalc==='function') window.liveCalc(true); }catch(e){} markNA(true); }
   function naBadge(){ return t('naAbbr')+' '+(PAGE==='ref' ? 'DE' : naNow().toUpperCase()); }
   window.kragrNA=function(){ return naNow(); };
+  function naSub(){ return naNow()==='ch' ? t('naSCH') : t('naS').replace('{0}', t('c'+naNow().toUpperCase())); }
   // Werte, die der nationale Anhang festlegt: Teilsicherheits- und Kombinationsbeiwerte, α_cc/α_ct, k_mod/k_def — markiert, wo ein Zahlenwert genannt wird
   var NA_RX=/(?<![A-Za-zÄÖÜäöüß])(?:γ[cCsSGQMRPHtφ][\w,′]*|ψ\s?[012][\w,]*|α(?:cc|ct)|k(?:mod|def))/g;
   var NA_ROOTS='#details .steps, #main .steps, .col-out .steps, .ablauf .steps', NA_SKIP='#report, #report-view, .report, .rep, #rep, [data-no-na]';
@@ -1143,7 +1148,7 @@ window.kragrK5Page = function(K){
     h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
     if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
-    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('na'))+'<span>'+esc(t('naS').replace('{0}', t('c'+naNow().toUpperCase())))+'</span></span>'+seg('k5-na', NA_ALL.map(function(c){ return [c, c.toUpperCase()]; }), naNow())+'</div>';
+    h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('na'))+'<span>'+esc(naSub())+'</span></span>'+seg('k5-na', NA_ALL.map(function(c){ return [c, c.toUpperCase()]; }), naNow())+'</div>';
     if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
     h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
@@ -1152,7 +1157,7 @@ window.kragrK5Page = function(K){
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-na button'), function(b){ var on=NA_ON.indexOf(b.dataset.v)>=0;
       if(!on){ b.disabled=true; b.classList.add('k5-soon'); b.title=t('c'+b.dataset.v.toUpperCase())+' – '+t('soon'); b.setAttribute('aria-label', b.title); }
-      else b.onclick=function(){ naSet(b.dataset.v); pressSeg(b); var s=b.closest('.k5-row').querySelector('.k5-rt > span'); if(s) s.textContent=t('naS').replace('{0}', t('c'+naNow().toUpperCase())); }; });
+      else b.onclick=function(){ naSet(b.dataset.v); pressSeg(b); var s=b.closest('.k5-row').querySelector('.k5-rt > span'); if(s) s.textContent=naSub(); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-lang button'), function(b){ b.onclick=function(){ var s=langSel(); if(!s||s.value===b.dataset.v) return; pressSeg(b); s.value=b.dataset.v;
       setTimeout(function(){ s.dispatchEvent(new Event('change',{bubbles:true})); if(menu.isConnected){ renderMenu(); placePills(); labelBurger(); } }, STILL()?0:160); }; });
   }
@@ -1386,7 +1391,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.62';
+const REF_VERSION = '0.3.63';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau

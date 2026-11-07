@@ -20,11 +20,13 @@ async def main():
         r=await pg.evaluate("""(()=>{const g=document.getElementById('k5-na'); const bs=[...g.querySelectorAll('button')];
           return {codes:bs.map(b=>b.textContent), on:bs.filter(b=>!b.disabled).map(b=>b.dataset.v), pressed:bs.filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.v),
             sub:g.closest('.k5-row').querySelector('.k5-rt').textContent, soon:bs[1].title, order:[...document.querySelectorAll('#k5-menu .k5-rt')].map(e=>e.firstChild.textContent)}})()""")
-        check('Menü: Bemessungsgrundlage DE AT CH FR ES UK, alle außer CH wählbar, DE gewählt', r['codes']==['DE','AT','CH','FR','ES','UK'] and r['on']==['de','at','fr','es','uk'] and r['pressed']==['de'], r)
-        check('Menü: Untertitel „Nationaler Anhang: Deutschland“, CH „in Vorbereitung“', 'Nationaler Anhang: Deutschland' in r['sub'] and await pg.evaluate("document.querySelector('#k5-na button[data-v=ch]').title")=='Schweiz – in Vorbereitung', r['sub'])
-        await pg.click('#k5-na button[data-v="ch"]', force=True); await pg.wait_for_timeout(100)
-        check('Klick auf CH ändert nichts (deaktiviert)', await pg.evaluate("kragrNA()")=='de' and await pg.evaluate("localStorage.getItem('kragr-na')") in (None,'de'))
-        await pg.evaluate("localStorage.setItem('kragr-na','ch')"); check('gespeichertes, noch nicht verfügbares Land (CH) fällt auf DE zurück', await pg.evaluate("kragrNA()")=='de')
+        check('Menü: Bemessungsgrundlage DE AT CH FR ES UK, alle wählbar, DE gewählt', r['codes']==['DE','AT','CH','FR','ES','UK'] and r['on']==['de','at','ch','fr','es','uk'] and r['pressed']==['de'], r)
+        check('Menü: Untertitel „Nationaler Anhang: Deutschland“', 'Nationaler Anhang: Deutschland' in r['sub'], r['sub'])
+        await pg.click('#k5-na button[data-v="ch"]'); await pg.wait_for_timeout(300)
+        r=await pg.evaluate("[kragrNA(), document.getElementById('k5-na').closest('.k5-row').querySelector('.k5-rt').textContent]")
+        check('Klick auf CH: Schweiz gewählt, Untertitel „Schweizer Normen (SIA)“', r[0]=='ch' and 'Schweizer Normen (SIA)' in r[1], r)
+        await pg.click('#k5-na button[data-v="de"]'); await pg.wait_for_timeout(300)
+        await pg.evaluate("localStorage.setItem('kragr-na','xx')"); check('gespeicherter unbekannter Wert fällt auf DE zurück', await pg.evaluate("kragrNA()")=='de')
         await pg.keyboard.press('Escape'); await pg.wait_for_timeout(200)
         # Marken im Rechenweg
         await pg.evaluate("setMat('beton')"); await pg.wait_for_timeout(500)
@@ -223,6 +225,24 @@ async def main():
         await pg.evaluate("loads.beam.point[0].values.lf='Q'; document.getElementById('lf-on-beam').checked=true; lfCfg('beam')"); await pg.wait_for_timeout(700)
         r=await pg.evaluate("[lastCalc.beam.lf.gov.maxM.v, document.querySelector('#beam-results .k-lfres').textContent]")
         check('ES Schnittkräfte: EN-Empfehlung, max M = 39,84 kNm, Hinweis auf fehlenden Anhang A1', abs(r[0]-39.84375)<0.002 and 'Anhang A1' in r[1] and 'DIN' not in r[1], r[0])
+        # ── Schweiz (calc v0.11.26): SIA 260 Typ 2 — γ_G 1,35 / 0,80, Leitlast γ_Q 1,5, Begleitlasten ψ0·Q_k ohne γ_Q; ψ0 als Eingabe (leer = 1,0) ──
+        #   Einfeldträger 5 m, g = 5 kN/m (G), F_Q = 10 kN und F_S = 10 kN in Feldmitte (je M = 12,5 kNm), G: M = 15,625 kNm
+        #   ohne ψ0: 1,35·15,625 + 1,5·12,5 + 1,0·12,5 = 52,34 kNm; ψ0,Q = 0,7, ψ0,S = 0,5: Leitlast S → 21,09 + 0,7·12,5 + 1,5·12,5 = 48,59 kNm
+        #   Auflager A: V max = 1,35·12,5 + 0,7·5 + 1,5·5 = 27,88 kN, V min = 0,80·12,5 = 10,00 kN; GZG charakteristisch G + 0,7·Q + S
+        await pg.evaluate("localStorage.setItem('kragr-na','ch')"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.evaluate("loads.beam.point[0].values.lf='Q'; loads.beam.point.push({id:991,enabled:true,values:{F:10,a:2.5,alpha:0,lf:'S'}}); document.getElementById('lf-on-beam').checked=true; lfCfg('beam')"); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[lastCalc.beam.lf.gov.maxM, document.querySelector('.k-lfcfg[data-lft=beam] .card-title').textContent, document.querySelector('#lf-cat-beam').closest('.field').hidden, document.querySelector('.k-lfcfg[data-lft=beam] .k-lfpsi').hidden]")
+        check('CH: Karte „Lastfälle nach SIA 260“, ψ0-Eingaben statt Nutzlast-Kategorie', r[1]=='Lastfälle nach SIA 260' and r[2]==True and r[3]==False, r[1:])
+        check('CH ohne ψ0: max M = 1,35·G + 1,5·Q + 1,0·S = 52,34 kNm', abs(r[0]['v']-52.34375)<0.002, r[0])
+        await pg.evaluate("document.getElementById('lf-psi-beam-Q').value='0.7'; document.getElementById('lf-psi-beam-S').value='0.5'; lfCfg('beam')"); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[lastCalc.beam.lf.gov.maxM, lastCalc.beam.lf.reac[0].V, lastCalc.beam.lf.gov.sls.formula||'', document.querySelector('#beam-results .k-lfres').textContent]")
+        check('CH ψ0,Q = 0,7, ψ0,S = 0,5: max M = 1,35·G + 0,7·Q + 1,5·S = 48,59 kNm (Begleitlast ohne γQ)', abs(r[0]['v']-48.59375)<0.002 and r[0]['formula']=='1,35·G + 0,7·Q + 1,5·S', r[0])
+        check('CH Auflager A: V max = 27,88 kN, V min = 0,80·G = 10,00 kN', abs(r[1][0]-27.875)<0.002 and abs(r[1][1]-10)<0.002, r[1])
+        check('CH Karte: Formel SIA 260, Gl. 16, γG günstig 0,80', 'SIA 260, Gl. 16' in r[3] and '0,80' in r[3], '')
+        await pg.goto(B+'size.html'); await pg.wait_for_timeout(900)
+        r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].every(c=>c.querySelector('.steps').textContent.startsWith('Für die Schweiz'))")
+        check('CH Bemessung: alle Nachweise als Hinweis (SIA 262/263/265 nicht frei zugänglich)', r)
+        await pg.evaluate("localStorage.setItem('kragr-na','de')")
         check('keine Skriptfehler', not errs, errs)
         await br.close()
 asyncio.run(main())

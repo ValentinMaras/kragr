@@ -1131,6 +1131,11 @@ window.MULY_LANG = {
 "ttx": {
 "BS EN 1992-1-1/NA: c<sub>min,dur</sub> nach BS 8500-1 (Tab. A.4/A.5, hängt von Betonklasse und Zement ab) – hier als Eingabe; Δc<sub>dev</sub> = 10 mm.":"BS EN 1992-1-1/NA: c<sub>min,dur</sub> según BS 8500-1 (tablas A.4/A.5, depende de la clase de hormigón y del cemento): aquí como dato de entrada; Δc<sub>dev</sub> = 10 mm.",
 "Mindestbetonfestigkeit nach BS 8500 – hier nicht geprüft.":"Clase de resistencia mínima del hormigón según BS 8500: no se comprueba aquí.",
+"NF EN 1992-1-1/NA: c<sub>min,dur</sub> nach Tab. 4.4N für die Tragwerksklasse S4, ohne Klassenänderung (sichere Seite); Δc<sub>dev</sub> = 10 mm.":"NF EN 1992-1-1/NA: c<sub>min,dur</sub> según la tabla 4.4N para la clase estructural S4, sin modificación de clase (lado seguro); Δc<sub>dev</sub> = 10 mm.",
+"Mindestbetonfestigkeit nach NF EN 206/CN – hier nicht geprüft.":"Clase de resistencia mínima del hormigón según NF EN 206/CN: no se comprueba aquí.",
+"NF EN 1992-1-1/NA erlaubt für Platten mit Querverteilung v<sub>min</sub> = 0,34/γ<sub>c</sub>·√f<sub>ck</sub>; hier gilt der kleinere Balkenwert (sichere Seite).":"La NF EN 1992-1-1/NA permite v<sub>min</sub> = 0,34/γ<sub>c</sub>·√f<sub>ck</sub> en losas con redistribución transversal; aquí se usa el valor menor de vigas (lado seguro).",
+"größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0,9·d = {} mm ≥ {} mm":"separación máxima de cercos (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0,9·d = {} mm ≥ {} mm",
+"größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0,75·d = {} mm ≥ {} mm":"separación máxima de cercos (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0,75·d = {} mm ≥ {} mm",
 "cot θ = {} auf den zulässigen Bereich 1,0 … {} begrenzt":"cot θ = {} limitado al rango admitido 1,0 … {}",
 "f<sub>cd</sub> für die Druckstrebe mit α<sub>cc</sub> = {}: {} N/mm²":"f<sub>cd</sub> para la biela con α<sub>cc</sub> = {}: {} N/mm²",
 "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m":"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: cercos mínimos a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m",

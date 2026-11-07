@@ -20,11 +20,11 @@ async def main():
         r=await pg.evaluate("""(()=>{const g=document.getElementById('k5-na'); const bs=[...g.querySelectorAll('button')];
           return {codes:bs.map(b=>b.textContent), on:bs.filter(b=>!b.disabled).map(b=>b.dataset.v), pressed:bs.filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.v),
             sub:g.closest('.k5-row').querySelector('.k5-rt').textContent, soon:bs[1].title, order:[...document.querySelectorAll('#k5-menu .k5-rt')].map(e=>e.firstChild.textContent)}})()""")
-        check('Menü: Bemessungsgrundlage DE AT CH FR ES UK, DE, AT und UK wählbar, DE gewählt', r['codes']==['DE','AT','CH','FR','ES','UK'] and r['on']==['de','at','uk'] and r['pressed']==['de'], r)
+        check('Menü: Bemessungsgrundlage DE AT CH FR ES UK, DE, AT, FR und UK wählbar, DE gewählt', r['codes']==['DE','AT','CH','FR','ES','UK'] and r['on']==['de','at','fr','uk'] and r['pressed']==['de'], r)
         check('Menü: Untertitel „Nationaler Anhang: Deutschland“, CH „in Vorbereitung“', 'Nationaler Anhang: Deutschland' in r['sub'] and await pg.evaluate("document.querySelector('#k5-na button[data-v=ch]').title")=='Schweiz – in Vorbereitung', r['sub'])
         await pg.click('#k5-na button[data-v="ch"]', force=True); await pg.wait_for_timeout(100)
         check('Klick auf CH ändert nichts (deaktiviert)', await pg.evaluate("kragrNA()")=='de' and await pg.evaluate("localStorage.getItem('kragr-na')") in (None,'de'))
-        await pg.evaluate("localStorage.setItem('kragr-na','fr')"); check('gespeichertes, noch nicht verfügbares Land (FR) fällt auf DE zurück', await pg.evaluate("kragrNA()")=='de')
+        await pg.evaluate("localStorage.setItem('kragr-na','es')"); check('gespeichertes, noch nicht verfügbares Land (ES) fällt auf DE zurück', await pg.evaluate("kragrNA()")=='de')
         await pg.keyboard.press('Escape'); await pg.wait_for_timeout(200)
         # Marken im Rechenweg
         await pg.evaluate("setMat('beton')"); await pg.wait_for_timeout(500)
@@ -158,6 +158,42 @@ async def main():
         await pg.evaluate("localStorage.setItem('kragr-na','de')"); await pg.reload(); await pg.wait_for_timeout(900)
         await pg.evaluate("loads.beam.point[0].values.lf='Q'; document.getElementById('lf-on-beam').checked=true; lfCfg('beam')"); await pg.wait_for_timeout(700)
         check('DE wieder: max M = 39,84 kNm (Gl. 6.10)', abs(await pg.evaluate("lastCalc.beam.lf.gov.maxM.v")-39.84375)<0.002)
+        # ── Frankreich (size v0.7.28 · calc v0.11.24) — Sollwerte von Hand ──
+        # Schnittkräfte: NF EN 1990/NA Gl. 6.10, γ und ψ wie DE: max M = 1,35·15,625 + 1,5·12,5 = 39,84 kNm
+        await pg.evaluate("localStorage.setItem('kragr-na','fr')"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.evaluate("loads.beam.point[0].values.lf='Q'; document.getElementById('lf-on-beam').checked=true; lfCfg('beam')"); await pg.wait_for_timeout(700)
+        r=await pg.evaluate("[lastCalc.beam.lf.gov.maxM.v, document.querySelector('#beam-results .k-lfres').textContent]")
+        check('FR Schnittkräfte: max M = 1,35·G + 1,5·Q = 39,84 kNm, Formel „NF EN 1990/NA (FR), Gl. 6.10“', abs(r[0]-39.84375)<0.002 and 'NF EN 1990/NA (FR), Gl. 6.10' in r[1], r[0])
+        # Bemessung Stahlbeton (Vorgabe Balken 30/60, C30/37, XC1, 2 Ø 25, Bügel Ø8/15): c_min,dur = 15 (Tab. 4.4N, S4), Δc_dev = 10
+        #   Bügel c_nom = max(15; 8; 10) + 10 = 25; Längsstab max(15; 25; 10) + 10 = 35 → über Bügel 27 → c_v = 27, d = 600 − 27 − 8 − 12,5 = 552,5 mm
+        #   f_cd = 1,0·30/1,5 = 20,00; Rissbreite: h_c,ef = min(2,5·47,5; 300) = 118,8 mm; c = 27 + 8 = 35 > 25 → k3 = 3,4·(25/35)^(2/3) = 2,717;
+        #   s_r,max = 2,717·35 + 0,8·0,5·0,425·25/0,02756 = 95,1 + 154,2 = 249 mm; w_max (XC1) = 0,4 mm
+        await pg.goto(B+'size.html'); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de'); localStorage.setItem('kragr-na','fr')"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.evaluate("$('in-auto') && ($('in-auto').checked=false); run()"); await pg.wait_for_timeout(300)
+        r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für')])")
+        check('FR Beton: Deckung, Biegung, Querkraft und Rissbreite gerechnet, übrige als Hinweis', all(h==(i not in ('deckung','biegung','querkraft','riss')) for i,h in r), r)
+        t=await pg.evaluate("['deckung','biegung','querkraft','riss'].map(i=>document.querySelector('#n-'+i+' .steps').textContent.replace(/ = /g,'= '))")
+        check('FR Deckung: Bügel max(15; 8; 10) + 10 = 25, Längsstab 35, d = 552,5 mm', '= max(15; 8; 10) + 10= 25 mm' in t[0] and '= max(15; 25; 10) + 10= 35 mm' in t[0] and '= 552,5 mm' in t[0] and 'S4' in t[0], t[0][:160])
+        check('FR Biegung: f_cd = 1,0·30/1,5 = 20,00, A_s,min nach EN 9.2.1.1', '= 1,0 · 30 / 1,5= 20,00' in t[1] and '9.2.1.1' in t[1], '')
+        check('FR Querkraft: v_min = 0,035·k^1,5·√f_ck, a_sw,min = 2,63 cm²/m, s_l,max = 0,75·d = 414 mm', '0,035 · k1,5' in t[2] and '2,63 cm²/m' in t[2] and 'NF EN 1992-1-1/NA, 9.2.2):sl,max= 0,75·d= 414 mm' in t[2].replace(': ',':'), t[2][-200:])
+        check('FR Rissbreite: h_c,ef = 118,8, k3 = 2,717, s_r,max = 249 mm, w_max = 0,4 mm', 'min(2,5·(h−d); h/2)= 118,8 mm' in t[3] and '(25/35)2/3= 2,717' in t[3] and '2,717·35 + 0,8·0,5·0,425·25/0,0276= 249 mm' in t[3] and '0,4 mm (XC1, NF EN 1992-1-1/NA)' in t[3], t[3][t.find('hc,ef') if False else 0:0])
+        # XD1: c_min,dur = 35 → Bügel max(35; 8; 10) + 10 = 45; w_max = 0,2 mm
+        await pg.evaluate("$('in-expo').value='XD1'; run()"); await pg.wait_for_timeout(300)
+        t=await pg.evaluate("['deckung','riss'].map(i=>document.querySelector('#n-'+i+' .steps').textContent.replace(/ = /g,'= '))")
+        check('FR XD1: Bügel c_nom = max(35; 8; 10) + 10 = 45 mm, w_max = 0,2 mm', '= max(35; 8; 10) + 10= 45 mm' in t[0] and '0,2 mm (XD1, NF EN 1992-1-1/NA)' in t[1], '')
+        # Balken h = 25 cm: s_l,max = 0,9·d
+        await pg.evaluate("$('in-expo').value='XC1'; $('in-h').value=25; run()"); await pg.wait_for_timeout(300)
+        t=await pg.evaluate("document.querySelector('#n-querkraft .steps').textContent.replace(/ = /g,'= ')")
+        check('FR Balken h = 250 mm: s_l,max = 0,9·d', 'h ≤ 250 mm):sl,max= 0,9·d=' in t.replace(': ',':'), t[-120:])
+        # Stahl: γ_M0 = 1,0 (Querschnitt gerechnet), Biegedrillknicken nicht hinterlegt; Holz ganz als Hinweis
+        await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(500)
+        r=await pg.evaluate("Object.fromEntries([...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für')]))")
+        check('FR Stahl: Querschnitt gerechnet, Biegedrillknicken als Hinweis', r.get('qs')==False and r.get('qv')==False and r.get('bdk')==True, r)
+        t=await pg.evaluate("document.querySelector('#n-qs .steps').textContent")
+        check('FR Stahl: γM0 = 1,0, M_c,Rd = 147,7 kNm', '(γM0 = 1,0)' in t and '147,7 kNm' in t, '')
+        await pg.evaluate("setMat('holz')"); await pg.wait_for_timeout(500)
+        r=await pg.evaluate("[...document.querySelectorAll('#details > .card[id^=n-]')].every(c=>c.querySelector('.steps').textContent.startsWith('Für Frankreich'))")
+        check('FR Holz: alle Nachweise als Hinweis (keine belegte Quelle)', r)
         check('keine Skriptfehler', not errs, errs)
         await br.close()
 asyncio.run(main())

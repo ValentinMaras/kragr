@@ -1131,6 +1131,11 @@ window.MULY_LANG = {
 "ttx": {
 "BS EN 1992-1-1/NA: c<sub>min,dur</sub> nach BS 8500-1 (Tab. A.4/A.5, hängt von Betonklasse und Zement ab) – hier als Eingabe; Δc<sub>dev</sub> = 10 mm.":"BS EN 1992-1-1/NA: c<sub>min,dur</sub> according to BS 8500-1 (Tables A.4/A.5, depends on concrete class and cement) – entered here as input; Δc<sub>dev</sub> = 10 mm.",
 "Mindestbetonfestigkeit nach BS 8500 – hier nicht geprüft.":"Minimum concrete strength class according to BS 8500 – not checked here.",
+"NF EN 1992-1-1/NA: c<sub>min,dur</sub> nach Tab. 4.4N für die Tragwerksklasse S4, ohne Klassenänderung (sichere Seite); Δc<sub>dev</sub> = 10 mm.":"NF EN 1992-1-1/NA: c<sub>min,dur</sub> from Table 4.4N for structural class S4, without class modification (safe side); Δc<sub>dev</sub> = 10 mm.",
+"Mindestbetonfestigkeit nach NF EN 206/CN – hier nicht geprüft.":"Minimum concrete strength class according to NF EN 206/CN – not checked here.",
+"NF EN 1992-1-1/NA erlaubt für Platten mit Querverteilung v<sub>min</sub> = 0,34/γ<sub>c</sub>·√f<sub>ck</sub>; hier gilt der kleinere Balkenwert (sichere Seite).":"NF EN 1992-1-1/NA allows v<sub>min</sub> = 0.34/γ<sub>c</sub>·√f<sub>ck</sub> for slabs with transverse redistribution; the smaller beam value is used here (safe side).",
+"größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0,9·d = {} mm ≥ {} mm":"maximum link spacing (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0.9·d = {} mm ≥ {} mm",
+"größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0,75·d = {} mm ≥ {} mm":"maximum link spacing (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0.75·d = {} mm ≥ {} mm",
 "cot θ = {} auf den zulässigen Bereich 1,0 … {} begrenzt":"cot θ = {} limited to the permitted range 1.0 … {}",
 "f<sub>cd</sub> für die Druckstrebe mit α<sub>cc</sub> = {}: {} N/mm²":"f<sub>cd</sub> for the compression strut with α<sub>cc</sub> = {}: {} N/mm²",
 "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m":"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: minimum links a<sub>sw,min</sub> = 0.08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m",

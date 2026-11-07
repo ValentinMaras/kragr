@@ -1131,6 +1131,11 @@ window.MULY_LANG = {
 "ttx": {
 "BS EN 1992-1-1/NA: c<sub>min,dur</sub> nach BS 8500-1 (Tab. A.4/A.5, hängt von Betonklasse und Zement ab) – hier als Eingabe; Δc<sub>dev</sub> = 10 mm.":"BS EN 1992-1-1/NA : c<sub>min,dur</sub> selon BS 8500-1 (tableaux A.4/A.5, dépend de la classe de béton et du ciment) – saisi ici ; Δc<sub>dev</sub> = 10 mm.",
 "Mindestbetonfestigkeit nach BS 8500 – hier nicht geprüft.":"Classe de résistance minimale du béton selon BS 8500 – non vérifiée ici.",
+"NF EN 1992-1-1/NA: c<sub>min,dur</sub> nach Tab. 4.4N für die Tragwerksklasse S4, ohne Klassenänderung (sichere Seite); Δc<sub>dev</sub> = 10 mm.":"NF EN 1992-1-1/NA : c<sub>min,dur</sub> selon le tableau 4.4N pour la classe structurale S4, sans modulation (côté sécurité) ; Δc<sub>dev</sub> = 10 mm.",
+"Mindestbetonfestigkeit nach NF EN 206/CN – hier nicht geprüft.":"Classe de résistance minimale du béton selon NF EN 206/CN – non vérifiée ici.",
+"NF EN 1992-1-1/NA erlaubt für Platten mit Querverteilung v<sub>min</sub> = 0,34/γ<sub>c</sub>·√f<sub>ck</sub>; hier gilt der kleinere Balkenwert (sichere Seite).":"La NF EN 1992-1-1/NA admet v<sub>min</sub> = 0,34/γ<sub>c</sub>·√f<sub>ck</sub> pour les dalles avec redistribution transversale ; ici la valeur plus faible des poutres est retenue (côté sécurité).",
+"größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm): s<sub>l,max</sub> = 0,9·d = {} mm ≥ {} mm":"espacement maximal des cadres (NF EN 1992-1-1/NA, 9.2.2, h ≤ 250 mm) : s<sub>l,max</sub> = 0,9·d = {} mm ≥ {} mm",
+"größter Bügelabstand (NF EN 1992-1-1/NA, 9.2.2): s<sub>l,max</sub> = 0,75·d = {} mm ≥ {} mm":"espacement maximal des cadres (NF EN 1992-1-1/NA, 9.2.2) : s<sub>l,max</sub> = 0,75·d = {} mm ≥ {} mm",
 "cot θ = {} auf den zulässigen Bereich 1,0 … {} begrenzt":"cot θ = {} limité au domaine admis 1,0 … {}",
 "f<sub>cd</sub> für die Druckstrebe mit α<sub>cc</sub> = {}: {} N/mm²":"f<sub>cd</sub> pour la bielle avec α<sub>cc</sub> = {} : {} N/mm²",
 "V<sub>Ed</sub> ≤ V<sub>Rd,c</sub>: Mindestbügel a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m":"V<sub>Ed</sub> ≤ V<sub>Rd,c</sub> : étriers minimaux a<sub>sw,min</sub> = 0,08·√f<sub>ck</sub>/f<sub>yk</sub>·b<sub>w</sub> = {} cm²/m",

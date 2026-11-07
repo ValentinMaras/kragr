@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.32 · sichtbar „Rechenblätter“ -->
+<!-- kragr·projekt v0.1.33 · sichtbar „Rechenblätter“ -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -614,12 +614,12 @@ window.kragrK5Page = function(K){
              uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk', crack:'en' },
              // FR: NF EN 1990/NA (SCIA „Theoretical background NA EN 1990“: Gl. 6.10, γ_G 1,35, γ_Q 1,5, ψ wie EN-Empfehlung = wie DE), NF EN 1992-1-1/NA (SCIA Hilfe „France“: γ_c/γ_s, α_cc, c_min,dur, Δc_dev, A_s,min,
              // ρ_w,min, C_Rd,c EN; v_min Balken 0,053/γ_c·k^1,5·√f_ck (= EN); cot θ 1 … 2,5; s_l,max 0,75·d bzw. 0,9·d bei h ≤ 250 mm; w_max X0/XC1 0,4, XC2–4 0,3, XD/XS 0,2; k3 = 3,4·(25/c)^(2/3) für c > 25 mm; h_c,ef = min(2,5·(h−d); h/2)),
-             // c_min,dur nach EN Tab. 4.4N, Tragwerksklasse S4 ohne Klassenänderung. NF EN 1993-1-1/NA (Oasys GSA): γ_M0 = γ_M1 = 1,0, γ_M2 = 1,25; Biegedrillknicken (eigene Formeln) und Interaktion (Anhang A) nicht hinterlegt. Holz: keine belegte Quelle.
+             // c_min,dur nach EN Tab. 4.4N, Tragwerksklasse S4 ohne Klassenänderung (bestätigt durch LCPC-Leitfaden „Enrobage“: S4 Referenzklasse, Tab. 4.3NF nur Abminderungen außer 100 Jahre; Δc_dev Vorgabe 10 mm). NF EN 1993-1-1/NA (Oasys GSA): γ_M0 = γ_M1 = 1,0, γ_M2 = 1,25; Biegedrillknicken (eigene Formeln) und Interaktion (Anhang A) nicht hinterlegt. Holz: keine belegte Quelle.
              fr:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.0, gM1:1.0, gM2:1.25, cdev:10, cdur:{X0:10,XC1:15,XC2:25,XC3:25,XC4:30,XD1:35,XD2:40,XD3:45,XS1:35,XS2:40,XS3:45}, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, smaxFR:true, crack:'fr' },
              // ES: Anejos Nacionales des Ministerio de Transportes (frei: AN/UNE-EN 1992-1-1 Okt. 2015, AN/UNE-EN 1993-1-1 Feb. 2013), gegengelesen mit SCIA-Hilfe „Spain“.
              // EC2: γ_c 1,5, γ_s 1,15, α_cc = α_ct = 1,0; c_min,dur Tab. AN/3 Klasse S4 (X0/XC1 15, XC2/XC3 20, XC4 25; XD/XS je nach Zement → nicht hinterlegt), Δc_dur,γ = 0 (XC), Δc_dev = 10 mm;
              // C_Rd,c 0,18/γ_c, v_min = 0,075/γ_c·k^1,5·√f_ck (f_ck ≤ 60), 0,5 ≤ cot θ ≤ 2,0; A_s,min = W/z·f_ctm,fl/f_yd (z = 0,8·h); ρ_w,min = f_ctm/(7,5·f_yk); s_l,max 0,75·d ≤ 600 / 0,60·d ≤ 450 / 0,30·d ≤ 300 mm
-             // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0/XC1 0,4, XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
+             // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0 0,4, XC1 0,3 (XC1 steht in beiden Zeilen, 0,4 nur trockene Innenbauteile laut Fußnote 4 → sichere Seite), XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
              // EC3: γ_M0 = γ_M1 = 1,05 (Hochbau), γ_M2 = 1,25; Biegedrillknicken λ̄_LT,0 0,4, β 0,75, Kurve b/c (gewalzt h/b ≤ 2 / > 2), f mit k_c nach Tab. AN/6 (nicht lesbar) → f = 1; Interaktion Anhang A oder B frei.
              // EN 1990 Anhang A1 (Hochbau): im spanischen NA „pendientes de determinación“ → Schnittkräfte mit EN-Empfehlung und Hinweis. Holz: kein frei zugänglicher NA.
              es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' },
@@ -955,7 +955,7 @@ window.kragrK5Page = function(K){
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.32';
+const PROJ_VERSION = '0.1.33';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ addChk:'＋ Nachweis', withForces:'Mit den Schnittkräften dieses Systems:', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_first:'First', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', n1:'1 Rechenblatt', n:'{0} Rechenblätter', all:'Alle', report:'Bericht', open:'Öffnen', more:'Weitere Aktionen', rename:'Umbenennen', toSize:'In „{0}“ übernehmen',

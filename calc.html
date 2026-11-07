@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.26 -->
+<!-- kragr v0.11.27 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1311,12 +1311,12 @@ window.kragrK5Page = function(K){
              uk:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:0.85, accV:1.0, gM0:1.0, gM1:1.0, gM2:1.1, cdev:10, cdurIn:true, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, ltb:'uk', crack:'en' },
              // FR: NF EN 1990/NA (SCIA „Theoretical background NA EN 1990“: Gl. 6.10, γ_G 1,35, γ_Q 1,5, ψ wie EN-Empfehlung = wie DE), NF EN 1992-1-1/NA (SCIA Hilfe „France“: γ_c/γ_s, α_cc, c_min,dur, Δc_dev, A_s,min,
              // ρ_w,min, C_Rd,c EN; v_min Balken 0,053/γ_c·k^1,5·√f_ck (= EN); cot θ 1 … 2,5; s_l,max 0,75·d bzw. 0,9·d bei h ≤ 250 mm; w_max X0/XC1 0,4, XC2–4 0,3, XD/XS 0,2; k3 = 3,4·(25/c)^(2/3) für c > 25 mm; h_c,ef = min(2,5·(h−d); h/2)),
-             // c_min,dur nach EN Tab. 4.4N, Tragwerksklasse S4 ohne Klassenänderung. NF EN 1993-1-1/NA (Oasys GSA): γ_M0 = γ_M1 = 1,0, γ_M2 = 1,25; Biegedrillknicken (eigene Formeln) und Interaktion (Anhang A) nicht hinterlegt. Holz: keine belegte Quelle.
+             // c_min,dur nach EN Tab. 4.4N, Tragwerksklasse S4 ohne Klassenänderung (bestätigt durch LCPC-Leitfaden „Enrobage“: S4 Referenzklasse, Tab. 4.3NF nur Abminderungen außer 100 Jahre; Δc_dev Vorgabe 10 mm). NF EN 1993-1-1/NA (Oasys GSA): γ_M0 = γ_M1 = 1,0, γ_M2 = 1,25; Biegedrillknicken (eigene Formeln) und Interaktion (Anhang A) nicht hinterlegt. Holz: keine belegte Quelle.
              fr:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.0, gM1:1.0, gM2:1.25, cdev:10, cdur:{X0:10,XC1:15,XC2:25,XC3:25,XC4:30,XD1:35,XD2:40,XD3:45,XS1:35,XS2:40,XS3:45}, asmin:'en', cotmax:2.5, rhow:'en', smax250:false, smaxFR:true, crack:'fr' },
              // ES: Anejos Nacionales des Ministerio de Transportes (frei: AN/UNE-EN 1992-1-1 Okt. 2015, AN/UNE-EN 1993-1-1 Feb. 2013), gegengelesen mit SCIA-Hilfe „Spain“.
              // EC2: γ_c 1,5, γ_s 1,15, α_cc = α_ct = 1,0; c_min,dur Tab. AN/3 Klasse S4 (X0/XC1 15, XC2/XC3 20, XC4 25; XD/XS je nach Zement → nicht hinterlegt), Δc_dur,γ = 0 (XC), Δc_dev = 10 mm;
              // C_Rd,c 0,18/γ_c, v_min = 0,075/γ_c·k^1,5·√f_ck (f_ck ≤ 60), 0,5 ≤ cot θ ≤ 2,0; A_s,min = W/z·f_ctm,fl/f_yd (z = 0,8·h); ρ_w,min = f_ctm/(7,5·f_yk); s_l,max 0,75·d ≤ 600 / 0,60·d ≤ 450 / 0,30·d ≤ 300 mm
-             // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0/XC1 0,4, XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
+             // für V/V_Rd,max ≤ 1/5 / ≤ 2/3 / darüber; w_max Tab. AN/9: X0 0,4, XC1 0,3 (XC1 steht in beiden Zeilen, 0,4 nur trockene Innenbauteile laut Fußnote 4 → sichere Seite), XC2–4 0,3, XD/XS1/XS2 0,2, XS3 0,1 mm; k3 = 3,4, k4 = 0,425 (EN).
              // EC3: γ_M0 = γ_M1 = 1,05 (Hochbau), γ_M2 = 1,25; Biegedrillknicken λ̄_LT,0 0,4, β 0,75, Kurve b/c (gewalzt h/b ≤ 2 / > 2), f mit k_c nach Tab. AN/6 (nicht lesbar) → f = 1; Interaktion Anhang A oder B frei.
              // EN 1990 Anhang A1 (Hochbau): im spanischen NA „pendientes de determinación“ → Schnittkräfte mit EN-Empfehlung und Hinweis. Holz: kein frei zugänglicher NA.
              es:{ gG:1.35, gQ:1.5, gc:1.5, gs:1.15, acc:1.0, gM0:1.05, gM1:1.05, gM2:1.25, cdev:10, cdur:{XC1:15,XC2:20,XC3:20,XC4:25}, asmin:'es', cotmin:0.5, cotmax:2.0, rhow:'es', vmin:'es', smax250:false, smaxES:true, crack:'en', ltb:'es' },
@@ -1894,7 +1894,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.26</span>
+    <span class="version">v0.11.27</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2430,7 +2430,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.26';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.27';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -8030,14 +8030,14 @@ const LF_GSUP = 1.35, LF_GINF = 1.0, LF_GQ = 1.5;
 const lfUK = () => typeof window.kragrNA==='function' && window.kragrNA()==='uk';
 // FR (calc v0.11.24): NF EN 1990/NA — Gl. 6.10, γ und ψ wie die EN-Empfehlung (SCIA „Theoretical background NA EN 1990“), also wie DE; nur die Normangabe ändert sich
 const lfFR = () => typeof window.kragrNA==='function' && window.kragrNA()==='fr';
-// ES (calc v0.11.25): Anhang A1 (Hochbau) im spanischen NA zu UNE-EN 1990 noch nicht festgelegt („pendientes de determinación“) → EN-Empfehlung (Gl. 6.10, γ und ψ wie Tab. A1.1/A1.2(B)) mit Hinweis
+// ES (calc v0.11.27, Entscheidung Valentin): Anhang A1 im spanischen NA zu UNE-EN 1990 offen → CTE DB-SE (2019), Gl. 4.3, Tab. 4.1: γ_G 1,35 / günstig 0,80, γ_Q 1,5; Tab. 4.2: ψ0 wie EN (A–D 0,7, Fahrzeuge 0,7, Dächer 0, Schnee ≤ 1000 m 0,5, Wind 0,6, Temperatur 0,6), keine Lager-Kategorie
 const lfES = () => typeof window.kragrNA==='function' && window.kragrNA()==='es';
 // CH (calc v0.11.26): SIA 260 (Typ 2) — γ_G 1,35 / günstig 0,80, Leiteinwirkung γ_Q = 1,5, Begleiteinwirkungen ψ0·Q_k ohne γ_Q (SIA 260, 4.4.3.4, Gl. 16).
 // Die ψ-Tabelle (SIA 260, Anhang A, Tab. 2) ist nicht frei zugänglich: ψ0 gibt man je Einwirkungsart selbst ein, leer = 1,0 (sichere Seite).
 const lfCH = () => typeof window.kragrNA==='function' && window.kragrNA()==='ch';
 const LF_GINF_CH = 0.80;
 function lfPsiCH(t, T){ const k=(T==='W1'||T==='W2')?'W':T, v=parseFloat(String(document.getElementById(`lf-psi-${t}-${k}`)?.value||'').replace(',','.')); return isFinite(v) ? Math.min(1, Math.max(0, v)) : 1; }
-const lfNorm = () => lfCH() ? lfTx('formulaCH') : lfUK() ? lfTx('formulaUK') : lfFR() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'NF EN 1990/NA (FR)') : lfES() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'EN 1990')+' '+lfTx('esNote') : lfTx('formula');
+const lfNorm = () => lfCH() ? lfTx('formulaCH') : lfUK() ? lfTx('formulaUK') : lfFR() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'NF EN 1990/NA (FR)') : lfES() ? lfTx('formulaES') : lfTx('formula');
 const LF_XI = 0.925;
 const LF_MAG = ['F','H','Me','M','qa','qb','dTN','dTM'];
 const LF_SK = { beam:'beam', cantilever:'cant', cont:'cont', frame:'frame' };          // Bereich → lastCalc-Schlüssel
@@ -8052,7 +8052,8 @@ const LFT = {
     shown:'Angezeigt', envShown:'Verläufe M, Q, N: Grenzlinien aller Kombinationen (GZT). Tabellen, Knoten und Biegelinie: maßgebende Kombination für |M|',
     lfChar:'Lastfall {0}, charakteristisch', cases:'Lastfälle', loadsCol:'Lasten', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Maßgebende Werte', val:'Wert', at:'Stelle', comb:'Kombination',
     reac:'Auflagerkräfte (Grenzwerte GZT)', sup:'Lager', G:'ständig', Q:'Nutzlast', S:'Schnee', W1:'Wind 1', W2:'Wind 2', span:'Feld', ovL:'Kragarm links', ovR:'Kragarm rechts',
-    esNote:'Spanien: Der nationale Anhang zu UNE-EN 1990 legt die Werte für den Hochbau (Anhang A1) noch nicht fest; gerechnet wird mit den Empfehlungswerten der EN 1990.',
+    titleES:'Lastfälle nach CTE DB-SE', resES:'Lastfälle und Kombinationen (CTE DB-SE)',
+    formulaES:'Grundkombination nach CTE DB-SE (Spanien), Gl. 4.3: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> mit γ<sub>G</sub> = 1,35 (günstig 0,80), γ<sub>Q</sub> = 1,5 (günstig 0), ψ nach Tab. 4.2. Der spanische Anhang zu UNE-EN 1990 legt den Hochbau noch nicht fest. Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     titleCH:'Lastfälle nach SIA 260', resCH:'Lastfälle und Kombinationen (SIA 260)', psiH:'Kombinationsbeiwerte ψ₀ (SIA 260, Tab. 2)', psiQ:'Nutzlast', psiS:'Schnee', psiW:'Wind', psiT:'Temperatur', psiNote:'Die SIA-Tabelle ist nicht frei zugänglich, deshalb trägst du ψ₀ selbst ein. Leer = 1,0 (sichere Seite).', formulaCH:'Gefährdungsbild Typ 2 nach SIA 260, Gl. 16: γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> mit γ<sub>G</sub> = 1,35 (günstig 0,80), γ<sub>Q</sub> = 1,5 (günstig 0); Begleiteinwirkungen ohne γ<sub>Q</sub>. ψ<sub>0</sub> nach Eingabe. Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     formulaUK:'Grundkombination BS EN 1990/NA (UK), Gl. 6.10a: Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> und Gl. 6.10b: Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> mit ξ = 0,925 (günstig 1,0·G<sub>k</sub>); ψ<sub>0</sub> Wind 0,5. Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
     formula:'Grundkombination DIN EN 1990, Gl. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> mit γ<sub>G</sub> = 1,35 (günstig 1,0), γ<sub>Q</sub> = 1,5 (günstig 0). Je Stelle gilt die ungünstigste Kombination. Durchbiegung: charakteristische Kombination (γ = 1).',
@@ -8064,7 +8065,8 @@ const LFT = {
     shown:'Shown', envShown:'Diagrams M, Q, N: envelope of all combinations (ULS). Tables, nodes and deflection: governing combination for |M|',
     lfChar:'Load case {0}, characteristic', cases:'Load cases', loadsCol:'Loads', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Governing values', val:'Value', at:'Location', comb:'Combination',
     reac:'Support reactions (ULS limits)', sup:'Support', G:'permanent', Q:'imposed', S:'snow', W1:'wind 1', W2:'wind 2', span:'Span', ovL:'Left cantilever', ovR:'Right cantilever',
-    esNote:'Spain: the national annex to UNE-EN 1990 has not yet set the values for buildings (Annex A1); the recommended EN 1990 values are used.',
+    titleES:'Load cases to CTE DB-SE', resES:'Load cases and combinations (CTE DB-SE)',
+    formulaES:'Fundamental combination to CTE DB-SE (Spain), eq. 4.3: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> with γ<sub>G</sub> = 1.35 (favourable 0.80), γ<sub>Q</sub> = 1.5 (favourable 0), ψ to Table 4.2. The Spanish annex to UNE-EN 1990 does not yet cover buildings. At each point the most unfavourable combination applies. Deflection: characteristic combination (γ = 1).',
     titleCH:'Load cases to SIA 260', resCH:'Load cases and combinations (SIA 260)', psiH:'Combination factors ψ₀ to SIA 260, Annex A, Table 2', psiQ:'Imposed', psiS:'Snow', psiW:'Wind', psiT:'Temperature', psiNote:'The SIA table is not freely available, so you enter ψ₀ yourself. Empty = 1.0 (safe side).', formulaCH:'Hazard scenario type 2 to SIA 260, eq. 16: γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> with γ<sub>G</sub> = 1.35 (favourable 0.80), γ<sub>Q</sub> = 1.5 (favourable 0); accompanying actions without γ<sub>Q</sub>. ψ<sub>0</sub> as entered. At each point the most unfavourable combination applies. Deflection: characteristic combination (γ = 1).',
     formulaUK:'Fundamental combination BS EN 1990/NA (UK), eq. 6.10a: Σ1.35·G<sub>k</sub> + Σ1.5·ψ<sub>0</sub>·Q<sub>k,i</sub> and eq. 6.10b: Σξ·1.35·G<sub>k</sub> + 1.5·Q<sub>k,1</sub> + Σ1.5·ψ<sub>0</sub>·Q<sub>k,i</sub> with ξ = 0.925 (favourable 1.0·G<sub>k</sub>); ψ<sub>0</sub> wind 0.5. At each point the most unfavourable combination governs. Deflection: characteristic combination (γ = 1).',
     formula:'Fundamental combination EN 1990, eq. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> with γ<sub>G</sub> = 1.35 (favourable 1.0), γ<sub>Q</sub> = 1.5 (favourable 0). At each point the most unfavourable combination applies. Deflection: characteristic combination (γ = 1).',
@@ -8076,7 +8078,8 @@ const LFT = {
     shown:'Affiché', envShown:'Diagrammes M, Q, N : enveloppe de toutes les combinaisons (ELU). Tableaux, nœuds et déformée : combinaison déterminante pour |M|',
     lfChar:'Cas {0}, caractéristique', cases:'Cas de charge', loadsCol:'Charges', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Valeurs déterminantes', val:'Valeur', at:'Position', comb:'Combinaison',
     reac:'Réactions d’appui (limites ELU)', sup:'Appui', G:'permanente', Q:'exploitation', S:'neige', W1:'vent 1', W2:'vent 2', span:'Travée', ovL:'Console gauche', ovR:'Console droite',
-    esNote:'Espagne : l’annexe nationale à l’UNE-EN 1990 ne fixe pas encore les valeurs pour les bâtiments (annexe A1) ; les valeurs recommandées de l’EN 1990 sont utilisées.',
+    titleES:'Cas de charge selon le CTE DB-SE', resES:'Cas de charge et combinaisons (CTE DB-SE)',
+    formulaES:'Combinaison fondamentale selon le CTE DB-SE (Espagne), éq. 4.3 : Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> avec γ<sub>G</sub> = 1,35 (favorable 0,80), γ<sub>Q</sub> = 1,5 (favorable 0), ψ selon le tableau 4.2. L’annexe espagnole à l’UNE-EN 1990 ne couvre pas encore les bâtiments. En chaque point, la combinaison la plus défavorable. Déformée : combinaison caractéristique (γ = 1).',
     titleCH:'Cas de charge selon SIA 260', resCH:'Cas de charge et combinaisons (SIA 260)', psiH:'Coefficients de combinaison ψ₀ selon SIA 260, annexe A, tableau 2', psiQ:'Exploitation', psiS:'Neige', psiW:'Vent', psiT:'Température', psiNote:'Le tableau SIA n’est pas librement accessible : saisis ψ₀ toi-même. Vide = 1,0 (côté sécurité).', formulaCH:'Situation de risque type 2 selon SIA 260, éq. 16 : γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> avec γ<sub>G</sub> = 1,35 (favorable 0,80), γ<sub>Q</sub> = 1,5 (favorable 0) ; actions concomitantes sans γ<sub>Q</sub>. ψ<sub>0</sub> selon la saisie. En chaque point, la combinaison la plus défavorable. Déformée : combinaison caractéristique (γ = 1).',
     formulaUK:'Combinaison fondamentale BS EN 1990/NA (UK), éq. 6.10a : Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> et éq. 6.10b : Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> avec ξ = 0,925 (favorable 1,0·G<sub>k</sub>) ; ψ<sub>0</sub> vent 0,5. En chaque point, la combinaison la plus défavorable est déterminante. Flèche : combinaison caractéristique (γ = 1).',
     formula:'Combinaison fondamentale EN 1990, éq. 6.10 : Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> avec γ<sub>G</sub> = 1,35 (favorable 1,0), γ<sub>Q</sub> = 1,5 (favorable 0). En chaque point, la combinaison la plus défavorable. Déformée : combinaison caractéristique (γ = 1).',
@@ -8088,19 +8091,20 @@ const LFT = {
     shown:'Mostrado', envShown:'Diagramas M, Q, N: envolvente de todas las combinaciones (ELU). Tablas, nudos y deformada: combinación determinante para |M|',
     lfChar:'Hipótesis {0}, característica', cases:'Hipótesis', loadsCol:'Cargas', psiCol:'ψ₀ / ψ₁ / ψ₂', gamCol:'γ', ext:'Valores determinantes', val:'Valor', at:'Posición', comb:'Combinación',
     reac:'Reacciones (límites ELU)', sup:'Apoyo', G:'permanente', Q:'uso', S:'nieve', W1:'viento 1', W2:'viento 2', span:'Vano', ovL:'Voladizo izquierdo', ovR:'Voladizo derecho',
-    esNote:'España: el anejo nacional de la UNE-EN 1990 aún no fija los valores para edificación (anejo A1); se usan los valores recomendados de la EN 1990.',
+    titleES:'Hipótesis de carga según CTE DB-SE', resES:'Hipótesis y combinaciones (CTE DB-SE)',
+    formulaES:'Combinación fundamental según el CTE DB-SE, ec. 4.3: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> con γ<sub>G</sub> = 1,35 (favorable 0,80), γ<sub>Q</sub> = 1,5 (favorable 0), ψ según la tabla 4.2. El anejo nacional de la UNE-EN 1990 aún no cubre la edificación. En cada punto, la combinación más desfavorable. Deformada: combinación característica (γ = 1).',
     titleCH:'Hipótesis de carga según SIA 260', resCH:'Hipótesis y combinaciones (SIA 260)', psiH:'Coeficientes de combinación ψ₀ según SIA 260, anejo A, tabla 2', psiQ:'Uso', psiS:'Nieve', psiW:'Viento', psiT:'Temperatura', psiNote:'La tabla SIA no es de libre acceso, así que introduces ψ₀ tú mismo. Vacío = 1,0 (lado seguro).', formulaCH:'Situación de riesgo tipo 2 según SIA 260, ec. 16: γ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σψ<sub>0,i</sub>·Q<sub>k,i</sub> con γ<sub>G</sub> = 1,35 (favorable 0,80), γ<sub>Q</sub> = 1,5 (favorable 0); acciones concomitantes sin γ<sub>Q</sub>. ψ<sub>0</sub> según lo introducido. En cada punto, la combinación más desfavorable. Deformada: combinación característica (γ = 1).',
     formulaUK:'Combinación fundamental BS EN 1990/NA (UK), ec. 6.10a: Σ1,35·G<sub>k</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> y ec. 6.10b: Σξ·1,35·G<sub>k</sub> + 1,5·Q<sub>k,1</sub> + Σ1,5·ψ<sub>0</sub>·Q<sub>k,i</sub> con ξ = 0,925 (favorable 1,0·G<sub>k</sub>); ψ<sub>0</sub> viento 0,5. En cada punto rige la combinación más desfavorable. Flecha: combinación característica (γ = 1).',
     formula:'Combinación fundamental EN 1990, ec. 6.10: Σγ<sub>G</sub>·G<sub>k</sub> + γ<sub>Q</sub>·Q<sub>k,1</sub> + Σγ<sub>Q</sub>·ψ<sub>0</sub>·Q<sub>k,i</sub> con γ<sub>G</sub> = 1,35 (favorable 1,0), γ<sub>Q</sub> = 1,5 (favorable 0). En cada punto, la combinación más desfavorable. Deformada: combinación característica (γ = 1).',
     feldNote:'Sobrecarga por vanos: en cada punto solo se cargan los vanos desfavorables.', none:'—', only:'solo', at_x:'x = {0} m', snow:'Nieve: lugares hasta 1000 m s.n.m.' , T:'temperatura', setl:'asientos' } };
-function lfTx(k, ...a){ if(lfCH() && (k+'CH') in LFT.de) k+='CH'; let s=(LFT[calcLang]||LFT.en)[k] ?? LFT.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; }
+function lfTx(k, ...a){ { const x=lfCH()?'CH':lfES()?'ES':''; if(x && (k+x) in LFT.de) k+=x; } let s=(LFT[calcLang]||LFT.en)[k] ?? LFT.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; }
 const lfNum = (v, d=2) => { const n=+v; return isFinite(n) ? (Math.abs(n)<5e-4?0:n).toFixed(d).replace('.', calcLang==='en'?'.':',') : String(v); };
 const lfF = v => String(+(+v).toFixed(3)).replace('.', calcLang==='en'?'.':',');
 function lfOn(t){ return !!document.getElementById('lf-on-'+t)?.checked; }
 // Setzungen vorhanden? (gehören zum Lastfall G, v0.11.6)
 function lfHasSet(t){ if(!supxOn(t)) return false; return Object.entries(SUPX[t]||{}).some(([k,o])=>k!=='on' && o && ['sv','sh','sr'].some(q=>Math.abs(parseFloat(o[q])||0)>0)); }
 function lfOnK3(sys){ const t=LF_K3[sys]; return !!t && lfOn(t); }
-function lfCat(t){ const v=document.getElementById('lf-cat-'+t)?.value; return LF_PSI[v] ? v : 'A'; }
+function lfCat(t){ const v=document.getElementById('lf-cat-'+t)?.value; return LF_PSI[v] && !(lfES() && v==='E') ? v : 'A'; }   // ES (CTE DB-SE): keine Lager-Kategorie
 function lfFeld(t){ return t==='cont' && !!document.getElementById('lf-feld-cont')?.checked; }
 function lfPsi(t, T){ if(lfCH() && T!=='G'){ const p=lfPsiCH(t,T); return [p,p,p]; } const uk=lfUK(); return T==='Q' ? (uk && lfCat(t)==='H' ? [0.7,0,0] : LF_PSI[lfCat(t)]) : T==='S' ? LF_PSI_S : (T==='W1'||T==='W2') ? (uk ? [0.5,0.2,0] : LF_PSI_W) : T==='T' ? LF_PSI_T : [1,1,1]; }
 const lfExcl = (a, b) => (a==='W1'&&b==='W2') || (a==='W2'&&b==='W1');
@@ -8134,7 +8138,7 @@ function lfOptions(t, P){
     o.push({uls:true, gam:LF_GSUP, lead:null, eq:'a'}); vars.forEach(lead=>o.push({uls:true, gam:LF_XI*LF_GSUP, lead, eq:'b'}));
     leads.forEach(lead=>o.push({uls:true, gam:LF_GINF, lead}));
   } else
-  (hasG ? [LF_GSUP, lfCH() ? LF_GINF_CH : LF_GINF] : [LF_GSUP]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
+  (hasG ? [LF_GSUP, (lfCH() || lfES()) ? LF_GINF_CH : LF_GINF] : [LF_GSUP]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
   leads.forEach(lead=>o.push({uls:false, gam:1, lead}));
   return o;
 }
@@ -8335,7 +8339,7 @@ function lfCfgUI(t){
   const on=lfOn(t); box.querySelector('.k-lfopt').hidden=!on; box.classList.toggle('on', on);
   box.querySelectorAll('[data-lfx]').forEach(e=>{ e.innerHTML=lfTx(e.dataset.lfx); });
   { const ch=lfCH(), sel=document.getElementById('lf-cat-'+t), ps=box.querySelector('.k-lfpsi'); if(sel) sel.closest('.field').hidden=ch; if(ps) ps.hidden=!ch; }
-  const sel=document.getElementById('lf-cat-'+t); if(sel){ const cur=lfCat(t); sel.innerHTML=Object.keys(LF_PSI).map(k=>`<option value="${k}"${k===cur?' selected':''}>${lfTx('cat'+k)} · ψ₀ = ${lfF(LF_PSI[k][0])}</option>`).join(''); }
+  const sel=document.getElementById('lf-cat-'+t); if(sel){ const cur=lfCat(t); sel.innerHTML=Object.keys(LF_PSI).filter(k=>!(lfES() && k==='E')).map(k=>`<option value="${k}"${k===cur?' selected':''}>${lfTx('cat'+k)} · ψ₀ = ${lfF(LF_PSI[k][0])}</option>`).join(''); }
 }
 function lfRerows(t){
   try{ if(t==='beam'||t==='cantilever'){ const s=LF_SK[t]; ['point','dist','horiz'].forEach(k=>renderLoads(s,k)); }

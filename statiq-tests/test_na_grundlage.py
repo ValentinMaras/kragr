@@ -190,7 +190,11 @@ async def main():
         # Stahl: γ_M0 = 1,0 (Querschnitt gerechnet), Biegedrillknicken nicht hinterlegt; Holz ganz als Hinweis
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("Object.fromEntries([...document.querySelectorAll('#details > .card[id^=n-]')].map(c=>[c.id.slice(2), c.querySelector('.steps').textContent.startsWith('Für')]))")
-        check('FR Stahl: Querschnitt gerechnet, Biegedrillknicken als Hinweis', r.get('qs')==False and r.get('qv')==False and r.get('bdk')==True, r)
+        check('FR Stahl: Querschnitt und Biegedrillknicken gerechnet', r.get('qs')==False and r.get('qv')==False and r.get('bdk')==False, r)
+        # Biegedrillknicken FR (IPE 300, b/h = 0,5, λ̄_LT = 0,870): λ̄_LT,0 = 0,25, α_LT = 0,4 − 0,2·0,5·0,870² = 0,3245, β = 1
+        #   Φ = 0,5·[1 + 0,3245·0,620 + 0,757] = 0,979 → χ_LT = 1/(0,979 + √(0,979² − 0,757)) = 0,700; M_b,Rd = 0,700·147,7/1,0 = 103,4 kNm (f = 1)
+        t=await pg.evaluate("document.querySelector('#n-bdk .steps').textContent.replace(/ = /g,'= ')")
+        check('FR Biegedrillknicken: λ̄LT,0 = 0,250, αLT = 0,3245, χLT = 0,700, M_b,Rd = 103,4 kNm', '0,2 + 0,1·b/h= 0,250' in t and '= 0,3245' in t and 'χLT= 0,700' in t.replace(' = ','= ') and '103,4 kNm' in t, t[-260:])
         t=await pg.evaluate("document.querySelector('#n-qs .steps').textContent")
         check('FR Stahl: γM0 = 1,0, M_c,Rd = 147,7 kNm', '(γM0 = 1,0)' in t and '147,7 kNm' in t, '')
         await pg.evaluate("setMat('holz')"); await pg.wait_for_timeout(500)
@@ -216,11 +220,12 @@ async def main():
         await pg.evaluate("$('in-cot').value=1.2; $('in-expo').value='XD1'; run()"); await pg.wait_for_timeout(300)
         check('ES XD1: Deckung und Biegung nicht gerechnet (c_min,dur je nach Zement)', await pg.evaluate("['deckung','biegung'].every(i=>document.querySelector('#n-'+i+' .steps').textContent.startsWith('Für'))"))
         await pg.evaluate("$('in-expo').value='XC1'; run()")
-        # Stahl IPE 300, S235: γ_M0 = γ_M1 = 1,05 → N_pl,Rd = 53,8·23,5/1,05 = 1204 kN; M_b,Rd = 0,778·147,7/1,05 = 109,4 kNm (f = 1)
+        # Stahl IPE 300, S235: γ_M0 = γ_M1 = 1,05 → N_pl,Rd = 53,8·23,5/1,05 = 1204 kN; Gleichlast k_c = 0,94: f = 1 − 0,5·0,06·[1 − 2·(0,870 − 0,8)²] = 0,970,
+        #   χ_LT,mod = 0,7786/0,970 = 0,8016 → M_b,Rd = 0,8016·147,7/1,05 = 112,7 kNm
         await pg.evaluate("setMat('stahl')"); await pg.wait_for_timeout(500)
         t=await pg.evaluate("[document.querySelector('#n-qs .steps').textContent, document.querySelector('#n-bdk .steps').textContent]")
         check('ES Stahl: γM0 = 1,05, N_pl,Rd = 1204 kN', '(γM0 = 1,05)' in t[0] and '1204 kN' in t[0], t[0][:200])
-        check('ES Stahl: f = 1 (k_c nach Tab. AN/6 nicht angesetzt), M_b,Rd = 109,4 kNm', 'Tab. AN/6' in t[1] and '109,4 kNm' in t[1], t[1][-160:])
+        check('ES Stahl: k_c = 0,94 (Tab. AN/6 = EN-Tab. 6.6), f = 0,970, χ_LT,mod = 0,8016, M_b,Rd = 112,7 kNm', 'kc = 0,94 · f = 0,970' in t[1] and '0,8016' in t[1] and '112,7 kNm' in t[1], t[1][-200:])
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
         await pg.evaluate("loads.beam.point[0].values.lf='Q'; document.getElementById('lf-on-beam').checked=true; lfCfg('beam')"); await pg.wait_for_timeout(700)
         # CTE DB-SE (calc v0.11.27): max M = 1,35·15,625 + 1,5·12,5 = 39,84 kNm; Auflager A: V min = 0,80·12,5 = 10,00 kN (γ_G günstig 0,80, Tab. 4.1)

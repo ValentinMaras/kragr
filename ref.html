@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.68 -->
+<!-- kragr·ref v0.3.69 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1392,7 +1392,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.68';
+const REF_VERSION = '0.3.69';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -1660,6 +1660,7 @@ const FAECHER = {
         themen: {
           schrauben:  { title: 'Schraubenverbindungen' },
           schweissen: { title: 'Schweißnähte' },
+          lasche:     { title: 'Laschenstoß (Trägerstoß)' },
         }
       },
     }
@@ -3887,6 +3888,75 @@ function updateSchraube(){
   if(F>0) S.push(`F<sub>Ed</sub> / F<sub>Rd</sub> = ${d1(F,1)} / ${d1(FRd,1)} = ${d1(F/FRd,3)} ≤ 1 ${ok(F/FRd)}`);
   const Lj=(n1-1)*p1; if(Lj>15*d) S.push(_L`!Anschlusslänge L<sub>j</sub> = ${d1(Lj)} mm > 15 d → Abminderung β<sub>Lf</sub> für lange Anschlüsse (3.8) beachten`);
   out.innerHTML = ablauf(_L`Schraubenverbindung ${n1} × ${n2} ${sb[0]} ${kl[0]}`, S);
+}
+
+// ── Laschenstoß (wie size: nachweiseLS; DIN EN 1993-1-8 mit NA, 3.6–3.8, Kategorie A) ──
+function lsrLochl(e1, p1, e2, p2, d, d0, fub, fu, t){
+  const ad=Math.min(e1/(3*d0), p1>0 ? p1/(3*d0)-0.25 : Infinity), ab=Math.min(ad, fub/fu, 1);
+  const k1=Math.min(2.8*e2/d0-1.7, p2>0 ? 1.4*p2/d0-1.7 : Infinity, 2.5);
+  return { ab, k1, F:k1*ab*fu*d*t/GM2/1000 };
+}
+function lsrRechnung(I){
+  const P=PROF[I.prof], {h,b,tw,tf,r}=P, Iy=P.Iy*1e4, sb=SCHRAUBEN.find(x=>x[0]===I.d), [, d, d0, , As]=sb, kl=SKLASSEN.find(x=>x[0]===I.kl), fub=kl[2], av=kl[0]==='10.9'?0.5:0.6;
+  const fy=stFy(I.st, Math.max(tf, I.ta)), fu=stFu(I.st, Math.max(tf, I.ta));
+  const hw=h-2*tf, Iw=tw*hw**3/12, Mw=I.M*Iw/Iy, Mf=I.M-Mw, Ff=Mf/(h-tf)*1000;
+  const zw=I.ga==='ai', m=zw?2:1, FvRd=m*av*fub*As/GM2/1000, e2=(b-I.w)/2, tL=zw?I.ta+I.ti:I.ta, tb=Math.min(tf,tL);
+  const Lb=lsrLochl(I.e1, I.n1>1?I.p1:0, e2, I.w, d, d0, fub, fu, tb), Lj=(I.n1-1)*I.p1, bLf=Lj>15*d ? Math.min(1, Math.max(0.75, 1-(Lj-15*d)/(200*d))) : 1;
+  const Fein=Math.min(FvRd*bLf, Lb.F), RgrF=2*I.n1*Fein;
+  const bi=Math.floor(((b-tw)/2-r)/5)*5, AL=b*I.ta+(zw?2*bi*I.ti:0), AnL=AL-2*d0*tL, NL=Math.min(AL*stFy(I.st,I.ta)/GM0/1000, 0.9*AnL*fu/GM2/1000);
+  const Nf=Math.min(b*tf*fy/GM0/1000, 0.9*(b-2*d0)*tf*fu/GM2/1000);
+  const zs=[], xs=[]; for(let i=0;i<I.nv;i++) zs.push((i-(I.nv-1)/2)*I.pv); for(let j=0;j<I.nh;j++) xs.push((j-(I.nh-1)/2)*I.ph);
+  let Ip=0; zs.forEach(z=>xs.forEach(x=>{ Ip+=x*x+z*z; }));
+  const ns=I.nv*I.nh, Ms=Mw+I.V*I.e/1000, Fx=Ms*1000*Math.max(...zs.map(Math.abs))/Ip, Fz=I.V/ns+Ms*1000*Math.max(...xs.map(Math.abs))/Ip, Fr=Math.hypot(Fx,Fz);
+  const FvS=2*av*fub*As/GM2/1000, pm=Math.min(I.pv, I.nh>1?I.ph:Infinity), LbS=lsrLochl(I.es, pm, I.es, pm, d, d0, fub, fu, Math.min(tw, 2*I.ts)), FS=Math.min(FvS, LbS.F);
+  const hs=(I.nv-1)*I.pv+2*I.es, fyS=stFy(I.st,I.ts), Vpl=2*I.ts*hs*fyS/(Math.sqrt(3)*GM0)/1000, rho=I.V>0.5*Vpl?(2*I.V/Vpl-1)**2:0, Mel=2*I.ts*hs*hs/6*fyS*(1-rho)/GM0/1e6;
+  return { P, h, b, tw, tf, r, d, d0, As, fub, av, fy, fu, Iw, Iy, Mw, Mf, Ff, m, FvRd, e2, tL, tb, Lb, Lj, bLf, Fein, RgrF, bi, AL, AnL, NL, Nf, ns, Ip, Ms, Fx, Fz, Fr, FvS, LbS, FS, hs, Vpl, rho, Mel };
+}
+function updateLasche(){
+  const out=document.getElementById('lsr-out'); if(!out) return;
+  const I={ prof:valOf('lsr-prof'), st:valOf('lsr-st'), d:valOf('lsr-d'), kl:valOf('lsr-kl'), M:Math.abs(num('lsr-M')||0), V:Math.abs(num('lsr-V')||0), ga:valOf('lsr-ga'),
+    ta:num('lsr-ta'), ti:num('lsr-ti')||0, n1:Math.round(num('lsr-n1')), e1:num('lsr-e1'), p1:num('lsr-p1')||0, w:num('lsr-w'), ts:num('lsr-ts'),
+    nv:Math.round(num('lsr-nv')), nh:Math.round(num('lsr-nh')), pv:num('lsr-pv')||0, ph:num('lsr-ph')||0, es:num('lsr-es'), e:num('lsr-e') };
+  const P=PROF[I.prof];
+  if(!(P && I.ta>0 && I.ts>0 && (I.ga==='a'||I.ti>0) && I.n1>=1 && I.nv>=2 && I.nh>=1 && I.nh<=3 && I.e1>0 && I.es>0 && I.e>0 && I.pv>0 && (I.n1<2||I.p1>0) && (I.nh<2||I.ph>0) && I.w>P.tw+2*P.r && I.w<P.b && (I.M>0||I.V>0))){
+    out.innerHTML=tt('Bitte gültige Werte eingeben (Querabstand w zwischen Steg mit Ausrundungen und Gurtbreite, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).'); return; }
+  const R=lsrRechnung(I), f=deNum, ef=R.Ff/R.RgrF, eL=R.Ff/R.NL, eG=R.Ff/R.Nf, eS=R.Fr/R.FS, eW=Math.max(R.Ms/R.Mel, I.V/R.Vpl);
+  out.innerHTML = ablauf(_L`Laschenstoß ${I.prof}, ${I.d} ${I.kl}`, [
+    _L`§Aufteilung des Moments`,
+    `I<sub>w</sub> = t<sub>w</sub> · (h − 2t<sub>f</sub>)³/12 = ${f(R.tw,1)} · ${f(R.h-2*R.tf,1)}³/12 = ${f(R.Iw/1e4,0)} cm⁴ · I<sub>y</sub> = ${f(R.Iy/1e4,0)} cm⁴`,
+    `M<sub>w</sub> = M<sub>Ed</sub> · I<sub>w</sub>/I<sub>y</sub> = ${f(I.M,1)} · ${f(R.Iw/R.Iy,3)} = ${f(R.Mw,2)} kNm`,
+    `F<sub>f</sub> = (M<sub>Ed</sub> − M<sub>w</sub>)/(h − t<sub>f</sub>) = ${f(R.Mf,2)}/${f((R.h-R.tf)/1000,4)} = ${f(R.Ff,1)} kN`,
+    _L`§Gurtschrauben (${2*I.n1} je Gurt und Seite, ${R.m === 2 ? tt('zweischnittig') : tt('einschnittig')})`,
+    `!e<sub>1</sub> = ${f(I.e1,1)} ${I.e1>=1.2*R.d0?'≥':'<'} 1,2 · d<sub>0</sub> = ${f(1.2*R.d0,1)} mm · e<sub>2</sub> = ${f(R.e2,1)} ${R.e2>=1.2*R.d0?'≥':'<'} ${f(1.2*R.d0,1)} mm · w = ${f(I.w,1)} ${I.w>=2.4*R.d0?'≥':'<'} 2,4 · d<sub>0</sub> = ${f(2.4*R.d0,1)} mm${I.n1>1?` · p<sub>1</sub> = ${f(I.p1,1)} ${I.p1>=2.2*R.d0?'≥':'<'} 2,2 · d<sub>0</sub> = ${f(2.2*R.d0,1)} mm`:''}`,
+    `F<sub>v,Rd</sub> = ${R.m} · ${f(R.av,1)} · ${R.fub} · ${f(R.As,0)}/1,25 = ${f(R.FvRd,1)} kN${R.bLf<1?` · β<sub>Lf</sub> = ${f(R.bLf,3)}`:''}`,
+    _L`F<sub>b,Rd</sub> mit t = min(t<sub>f</sub>; Σt) = ${f(R.tb,1)} mm, e<sub>2</sub> = ${f(R.e2,1)} mm: k<sub>1</sub> = ${f(R.Lb.k1,3)}, α<sub>b</sub> = ${f(R.Lb.ab,3)} → ${f(R.Lb.F,1)} kN`,
+    `F<sub>Rd</sub> = ${2*I.n1} · ${f(R.Fein,1)} = ${f(R.RgrF,1)} kN`,
+    `!F<sub>f</sub>/F<sub>Rd</sub> = ${f(R.Ff,1)}/${f(R.RgrF,1)} = ${f(ef,3)} ${ok(ef)}`,
+    _L`§Gurtlaschen und Zuggurt im Lochquerschnitt`,
+    `N<sub>t,Rd</sub> (${tt('Laschen')}) = min(A · f<sub>y</sub>; 0,9 · A<sub>net</sub> · f<sub>u</sub>/γ<sub>M2</sub>) = ${f(R.NL,1)} kN · N<sub>t,Rd</sub> (${tt('Gurt')}) = ${f(R.Nf,1)} kN`,
+    `!F<sub>f</sub>/N<sub>t,Rd</sub> = ${f(Math.max(eL,eG),3)} ${ok(Math.max(eL,eG))}`,
+    _L`§Stegschrauben (${R.ns} je Seite, zweischnittig)`,
+    `M<sub>s</sub> = M<sub>w</sub> + V<sub>Ed</sub> · e = ${f(R.Mw,2)} + ${f(I.V,1)} · ${f(I.e/1000,3)} = ${f(R.Ms,2)} kNm · Σr² = ${f(R.Ip/100,1)} cm²`,
+    `F<sub>x</sub> = ${f(R.Fx,1)} kN · F<sub>z</sub> = ${f(R.Fz,1)} kN → F<sub>Ed</sub> = ${f(R.Fr,1)} kN`,
+    `F<sub>Rd</sub> = min(F<sub>v,Rd</sub>; F<sub>b,Rd</sub>) = min(${f(R.FvS,1)}; ${f(R.LbS.F,1)}) = ${f(R.FS,1)} kN`,
+    `!F<sub>Ed</sub>/F<sub>Rd</sub> = ${f(eS,3)} ${ok(eS)}`,
+    _L`§Steglaschen 2 × ${f(R.hs,0)} × ${f(I.ts,0)} mm`,
+    `V<sub>pl,Rd</sub> = ${f(R.Vpl,1)} kN · M<sub>el,Rd</sub> = ${f(R.Mel,2)} kNm${R.rho>0?` (ρ = ${f(R.rho,3)})`:''}`,
+    `!max(M<sub>s</sub>/M<sub>el,Rd</sub>; V<sub>Ed</sub>/V<sub>pl,Rd</sub>) = ${f(eW,3)} ${ok(eW)}`]);
+}
+function skLasche(){
+  const xj=170, y0=40, H=120, tf=10, L=130; let o='';
+  o+=poly([[xj-L,y0],[xj+L,y0],[xj+L,y0+tf],[xj-L,y0+tf]],SK.fill2)+poly([[xj-L,y0+H-tf],[xj+L,y0+H-tf],[xj+L,y0+H],[xj-L,y0+H]],SK.fill2)+poly([[xj-L,y0+tf],[xj+L,y0+tf],[xj+L,y0+H-tf],[xj-L,y0+H-tf]],SK.fill,'#94a3b8',0.6);
+  o+=ln(xj,y0-16,xj,y0+H+16,SK.ink,1,'stroke-dasharray="4 3"');
+  o+=poly([[xj-60,y0-7],[xj+60,y0-7],[xj+60,y0],[xj-60,y0]],'#94a3b8')+poly([[xj-60,y0+H],[xj+60,y0+H],[xj+60,y0+H+7],[xj-60,y0+H+7]],'#94a3b8');
+  [-45,-20,20,45].forEach(dx=>{ o+=ln(xj+dx,y0-11,xj+dx,y0+tf+2,SK.ink,2)+ln(xj+dx,y0+H-tf-2,xj+dx,y0+H+11,SK.ink,2); });
+  o+=poly([[xj-48,y0+28],[xj+48,y0+28],[xj+48,y0+H-28],[xj-48,y0+H-28]],'rgba(148,163,184,0.55)');
+  [-32,-14,14,32].forEach(dx=>[-20,0,20].forEach(dz=>{ o+=`<circle cx="${xj+dx}" cy="${y0+H/2+dz}" r="3.5" fill="#fff" stroke="#111"/>`; }));
+  o+=vec(xj+L+44,y0+tf/2,xj+L+4,y0+tf/2,SK.acc,1.6)+it(xj+L+8,y0-4,'F<tspan font-size="9" dy="3">f</tspan>','start',SK.acc,12);
+  o+=vec(xj+L+4,y0+H-tf/2,xj+L+44,y0+H-tf/2,SK.load,1.6)+it(xj+L+8,y0+H+16,'F<tspan font-size="9" dy="3">f</tspan>','start',SK.load,12);
+  o+=vec(xj+L-14,y0+H/2-30,xj+L-14,y0+H/2+8,SK.load,1.5)+it(xj+L-8,y0+H/2-12,'V','start',SK.load,12);
+  o+=dimL(xj,y0+H+30,xj+23,y0+H+30,'e',-0.01,12)+tl(xj-L,y0+H+30,tt('Stoßfuge gestrichelt'),'start');
+  return sv(360,206,tt('Laschenstoß'),o);
 }
 
 // ── Kehlnähte: vereinfachtes Verfahren (EN 1993-1-8, 4.5.3.3) ──
@@ -9311,6 +9381,50 @@ Object.assign(CONTENT, {
     </div>
   `,
 
+  'stahlbau/verbindungen/lasche': () => _L`
+    <div class="card">
+      <div class="card-title">Geschraubter Laschenstoß eines Trägers</div>
+      ${fig(skLasche(),tt('Universalstoß: Gurtlaschen übertragen die Gurtkräfte, beidseitige Steglaschen die Querkraft und den Anteil des Stegs am Moment.'))}
+      <p>Lange Träger werden in Teilen geliefert und auf der Baustelle gestoßen. Beim <b>Universalstoß</b> werden beide Gurte und der Steg mit aufgeschraubten Laschen verbunden — der Stoß soll das Moment und die Querkraft so weitergeben, als wäre der Träger durchgehend. Jede Lasche nimmt den Teil der Schnittgrößen auf, den der gestoßene Querschnittsteil vorher getragen hat.</p>
+      <div class="formula-box">
+        M<sub>w</sub> = M<sub>Ed</sub> · I<sub>w</sub>/I<sub>y</sub> &nbsp; I<sub>w</sub> = t<sub>w</sub> · (h − 2t<sub>f</sub>)³/12 &nbsp;&nbsp; F<sub>f</sub> = (M<sub>Ed</sub> − M<sub>w</sub>)/(h − t<sub>f</sub>)<br>
+        Steg: M<sub>s</sub> = M<sub>w</sub> + V<sub>Ed</sub> · e &nbsp;&nbsp; F<sub>x</sub> = M<sub>s</sub> · z<sub>max</sub>/Σr² &nbsp; F<sub>z</sub> = V<sub>Ed</sub>/n + M<sub>s</sub> · x<sub>max</sub>/Σr² &nbsp; F<sub>Ed</sub> = √(F<sub>x</sub>² + F<sub>z</sub>²)<br>
+        Schraube: F<sub>v,Rd</sub> = m · α<sub>v</sub> · f<sub>ub</sub> · A<sub>s</sub>/γ<sub>M2</sub> &nbsp;&nbsp; F<sub>b,Rd</sub> = k<sub>1</sub> · α<sub>b</sub> · f<sub>u</sub> · d · t/γ<sub>M2</sub>
+        <div class="comment">DIN EN 1993-1-8 mit NA, 3.6 bis 3.8 (Kategorie A, Scher-Lochleibungsverbindung) · m — Anzahl der Scherfugen · Σr² — polares Trägheitsmoment der Schraubengruppe · e — Abstand Stoßfuge bis Schwerpunkt der Stegschrauben · lange Verbindungen (L<sub>j</sub> &gt; 15d): β<sub>Lf</sub></div>
+      </div>
+      <div class="info-banner">Die Aufteilung nach Steifigkeit ist der übliche Lehrbuchweg. Auf der sicheren Seite liegt man auch, wenn die Gurte das ganze Moment tragen — dann bekommt der Steg nur Querkraft und Versatzmoment, die Gurtlaschen werden aber größer.</div>
+      ${textTable([tt('Teil'),tt('nimmt auf'),tt('Nachweise')], [
+        [tt('Gurtlaschen'),tt('Gurtkraft F<sub>f</sub> (Zug bzw. Druck)'),tt('Schrauben auf Abscheren und Lochleibung, Laschen und Gurt im Lochquerschnitt')],
+        [tt('Steglaschen'),tt('Querkraft und Stegmoment mit Versatz'),tt('Schraubengruppe mit polarem Moment, Laschen auf Biegung und Querkraft')]])}
+    </div>
+    <div class="card">
+      <div class="card-title">Laschenstoß nachweisen</div>
+      <div class="calc-grid">
+        ${field(tt('Profil'), selProf('lsr-prof','IPE 300','updateLasche()'))}
+        ${field(tt('Stahlgüte'), selSt('lsr-st','S235','updateLasche()'))}
+        ${field(tt('Schraube'), sel('lsr-d', SCHRAUBEN.filter(x=>x[1]>=16 && x[1]<=30).map(x=>[x[0],x[0]]), 'M20', 'updateLasche()'))}
+        ${field(tt('Festigkeitsklasse'), sel('lsr-kl', SKLASSEN.map(x=>[x[0],x[0]]), '8.8', 'updateLasche()'))}
+        ${field('M<sub>Ed</sub> [kNm]', inp('lsr-M', 80, 'updateLasche()'))}
+        ${field('V<sub>Ed</sub> [kN]', inp('lsr-V', 60, 'updateLasche()'))}
+        ${field(tt('Gurtlaschen'), sel('lsr-ga', [['a',tt('nur außen (einschnittig)')],['ai',tt('außen und innen (zweischnittig)')]], 'a', 'updateLasche()'))}
+        ${field(tt('Dicke Außenlasche t<sub>a</sub> [mm]'), inp('lsr-ta', 12, 'updateLasche()'))}
+        ${field(tt('Dicke Innenlaschen t<sub>i</sub> [mm]'), inp('lsr-ti', 10, 'updateLasche()'))}
+        ${field(tt('Schraubenreihen je Seite n<sub>1</sub>'), inp('lsr-n1', 2, 'updateLasche()'))}
+        ${field('e<sub>1</sub> [mm]', inp('lsr-e1', 40, 'updateLasche()'))}
+        ${field('p<sub>1</sub> [mm]', inp('lsr-p1', 70, 'updateLasche()'))}
+        ${field(tt('Querabstand w [mm]'), inp('lsr-w', 90, 'updateLasche()'))}
+        ${field(tt('Steglaschen t<sub>s</sub> [mm]'), inp('lsr-ts', 8, 'updateLasche()'))}
+        ${field('n<sub>v</sub> × n<sub>h</sub>', `<span style="display:flex;gap:6px">${inp('lsr-nv', 3, 'updateLasche()')}${inp('lsr-nh', 2, 'updateLasche()')}</span>`)}
+        ${field('p<sub>v</sub> [mm]', inp('lsr-pv', 70, 'updateLasche()'))}
+        ${field('p<sub>h</sub> [mm]', inp('lsr-ph', 70, 'updateLasche()'))}
+        ${field('e<sub>s</sub> [mm]', inp('lsr-es', 45, 'updateLasche()'))}
+        ${field(tt('Stoßfuge bis Schraubenmitte e [mm]'), inp('lsr-e', 85, 'updateLasche()'))}
+      </div>
+      <div class="calc-out" id="lsr-out"></div>
+      <p><a class="applink" href="size.html">→ Mit Skizze, Abhilfe und Bericht in „Bemessung“ (Stahl → Laschenstoß)</a></p>
+    </div>
+  `,
+
   'stahlbau/verbindungen/schweissen': () => _L`
     <div class="card">
       <div class="card-title">Kehlnähte — EN 1993-1-8, 4.5</div>
@@ -11356,6 +11470,7 @@ Object.assign(AFTER, {
   'stahlbau/nachweise/gebrauch': () => updateDurchb(),
   'stahlbau/verbindungen/schrauben': () => updateSchraube(),
   'stahlbau/verbindungen/schweissen': () => updateKehl(),
+  'stahlbau/verbindungen/lasche': () => updateLasche(),
   'lastannahmen/lasten/eigenlasten': () => updateAufbau(),
   'holzbau/verbindungen/naegel': () => updateNagel(),
   'grundbau/flach/sohlwiderstand': () => updateSohl(),
@@ -11589,6 +11704,7 @@ const SEARCH_EXTRA = {
   'mauerwerk/baustoffe/moertel': () => 'Normalmörtel Dünnbettmörtel Leichtmörtel NM IIa NM III Überbindemaß Läuferverband Blockverband',
   'mauerwerk/baustoffe/festigkeit': () => 'fk fd E-Modul Kriechen Schwinden Haftscherfestigkeit EC6',
   'mauerwerk/bemessung/wand': () => 'Phi Abminderungsfaktor Endauflager Deckenverdrehung NRd EC6 DIN EN 1996-3',
+  'stahlbau/verbindungen/lasche': () => 'Laschenstoß Universalstoß Trägerstoß Gurtlasche Steglasche Schraubengruppe polares Trägheitsmoment Lochleibung Abscheren',
   'mauerwerk/bemessung/ausfach': () => 'Ausfachung Ausfachungswand nichttragend Wind Rahmen Skelett NA.C zulässige Fläche',
   'wasserbau/grundlagen/stoffwerte': () => 'Dichte Viskosität Zähigkeit Dampfdruck Oberflächenspannung Temperatur',
   'wasserbau/grundlagen/kennzahlen': () => 'Reynoldszahl Reynolds Froudezahl Froude Weber laminar turbulent Ähnlichkeit',

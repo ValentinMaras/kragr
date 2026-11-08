@@ -1,6 +1,9 @@
 // Headless harness: extracts frame solver functions from calc.html and runs calculateFrame()
 const fs=require('fs'), vm=require('vm');
-const src=fs.readFileSync(process.argv[2]||'calc.html','utf8');
+const path=require('path'), html=process.argv[2]||'calc.html';
+// seit calc v0.11.30 liegt der Rechenkern in solver.js neben calc.html; die Oberflächenteile (calculateFrame) bleiben in der Seite
+const solverFile=path.join(path.dirname(path.resolve(html)),'solver.js');
+const src=(fs.existsSync(solverFile)?fs.readFileSync(solverFile,'utf8')+'\n':'')+fs.readFileSync(html,'utf8');
 function extract(name){
   const i=src.indexOf('function '+name+'(');
   if(i<0) throw new Error('missing '+name);
@@ -12,7 +15,7 @@ function extract(name){
   for(k=j;k<src.length;k++){ if(src[k]==='{')d++; else if(src[k]==='}'){d--; if(!d)break;} }
   return src.slice(i,k+1);
 }
-const names=['frameGableOf','frameGable','frameRafY','frameRafLen','supportDOF','frameEffectiveHinges','frameIndeterminacy','checkPos','cutRange','frameBuildModel','frameElemK','frameElemT','frameElemFeq','frameSolveDSM','frameForcesAt','frameSampleForces','sampleUniform','frameDispAt','frameSampleFine','sampleFine','calculateFrame'];
+const names=['frameGableOf','frameGable','frameGeomInp','frameEffectiveHingesOf','frameIndeterminacyOf','frameSolve','tempRows','frameRafY','frameRafLen','supportDOF','frameEffectiveHinges','frameIndeterminacy','checkPos','cutRange','frameBuildModel','frameElemK','frameElemT','frameElemFeq','frameSolveDSM','frameForcesAt','frameSampleForces','sampleUniform','frameDispAt','frameSampleFine','sampleFine','calculateFrame'];
 const consts=src.match(/const EPS_POS[^\n]*/)[0]+'\n'+src.match(/const FRAME_EA_FACTOR[^\n]*/)[0]+'\n'+src.match(/const GAUSS4[\s\S]*?\]\];/)[0];
 const code=consts+'\n'+names.map(extract).join('\n\n');
 function run(cfg){

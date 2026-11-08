@@ -18,7 +18,7 @@ async def main():
         check('Alte Leisten ausgeblendet, Auswahlknopf sichtbar', await pg.evaluate("getComputedStyle($('seg-mat')).display==='none' && getComputedStyle($('seg-typ')).display==='none'") and await pg.is_visible('#pick-btn'))
         n=await pg.evaluate("document.querySelectorAll('.pick-item').length"); await pg.click('#pick-btn')
         n=await pg.evaluate("document.querySelectorAll('.pick-item').length")
-        check('Menü zeigt alle 58 Nachweise in 7 Bereichen', n==58 and await pg.evaluate("document.querySelectorAll('.pick-group').length")==7, n)
+        check('Menü zeigt alle 59 Nachweise in 7 Bereichen (seit size v0.7.34 mit Laschenstoß)', n==59 and await pg.evaluate("document.querySelectorAll('.pick-group').length")==7, n)
         bad=[]
         for mat,(var,ms) in MODES.items():
             for i,m in enumerate(ms):
@@ -31,7 +31,7 @@ async def main():
         # Akkordeon: nur der aktuelle Bereich ist offen, Klick auf einen anderen Kopf wechselt
         await pg.evaluate("setMat('holz'); setHoMode('versatz')"); await pg.click('#pick-btn')
         st=await pg.evaluate("[[...document.querySelectorAll('.pick-group.open')].map(g=>g.dataset.mat), document.querySelectorAll('.pick-item').length - [...document.querySelectorAll('.pick-item')].filter(b=>b.offsetParent).length]")
-        check('Akkordeon: nur der aktuelle Bereich (Holz) offen, übrige Listen zu', st[0]==['holz'] and st[1]==47, st)
+        check('Akkordeon: nur der aktuelle Bereich (Holz) offen, übrige Listen zu', st[0]==['holz'] and st[1]==48, st)
         await pg.click('.pick-group[data-mat="grund"] .pick-head')
         st=await pg.evaluate("[[...document.querySelectorAll('.pick-group.open')].map(g=>g.dataset.mat), $('pick').classList.contains('open'), MAT]")
         check('Klick auf Bereichskopf klappt um, Menü bleibt offen, Auswahl unverändert', st==[['grund'],True,'holz'], st)

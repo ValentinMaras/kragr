@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.33 -->
+<!-- kragr·size v0.7.34 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1776,6 +1776,7 @@ window.kragrK5Page = function(K){
         <button data-st="zugstab" onclick="setStMode('zugstab')" data-i18n="pb089">Zugstab</button>
         <button data-st="stumpf" onclick="setStMode('stumpf')" data-i18n="pb090">Stumpfnaht</button>
         <button data-st="stirnplatte" onclick="setStMode('stirnplatte')" data-i18n="pc103">Stirnplatte</button>
+        <button data-st="lasche" onclick="setStMode('lasche')" data-i18n="ls001">Laschenstoß</button>
       </div>
       <div id="st-traeger">
     <div class="card">
@@ -1898,6 +1899,46 @@ window.kragrK5Page = function(K){
         <div class="field"><label data-i18n="pb046">M [kNm] (Biegung in Blechebene)</label><input type="number" step="any" id="bw-M" value="5" oninput="run()"></div>
       </div>
       <div class="hint" data-i18n="pb047">Durchgeschweißte Stumpfnähte tragen so viel wie das schwächere der verbundenen Bleche — nachgewiesen wird deshalb der Blechquerschnitt in der Naht.</div>
+    </div>
+    </div>
+    <div id="st-lasche" style="display:none">
+    <div class="card">
+      <div class="card-title" data-i18n="ls002">Laschenstoß (geschraubter Universalstoß)</div>
+      <div class="grid2">
+        <div class="field full"><label data-i18n="hvName">Bezeichnung</label><input id="ls-name" value="Trägerstoß T2 — Laschen" oninput="run()"></div>
+        <div class="field"><label data-i18n="pc018">Profil</label><select id="ls-prof" onchange="run()"><option value="IPE 80">IPE 80</option><option value="IPE 100">IPE 100</option><option value="IPE 120">IPE 120</option><option value="IPE 140">IPE 140</option><option value="IPE 160">IPE 160</option><option value="IPE 180">IPE 180</option><option value="IPE 200">IPE 200</option><option value="IPE 220">IPE 220</option><option value="IPE 240">IPE 240</option><option value="IPE 270">IPE 270</option><option value="IPE 300" selected>IPE 300</option><option value="IPE 330">IPE 330</option><option value="IPE 360">IPE 360</option><option value="IPE 400">IPE 400</option><option value="IPE 450">IPE 450</option><option value="IPE 500">IPE 500</option><option value="IPE 550">IPE 550</option><option value="IPE 600">IPE 600</option><option value="HEA 100">HEA 100</option><option value="HEA 120">HEA 120</option><option value="HEA 140">HEA 140</option><option value="HEA 160">HEA 160</option><option value="HEA 180">HEA 180</option><option value="HEA 200">HEA 200</option><option value="HEA 220">HEA 220</option><option value="HEA 240">HEA 240</option><option value="HEA 260">HEA 260</option><option value="HEA 280">HEA 280</option><option value="HEA 300">HEA 300</option><option value="HEA 320">HEA 320</option><option value="HEA 340">HEA 340</option><option value="HEA 360">HEA 360</option><option value="HEA 400">HEA 400</option><option value="HEA 450">HEA 450</option><option value="HEA 500">HEA 500</option><option value="HEB 100">HEB 100</option><option value="HEB 120">HEB 120</option><option value="HEB 140">HEB 140</option><option value="HEB 160">HEB 160</option><option value="HEB 180">HEB 180</option><option value="HEB 200">HEB 200</option><option value="HEB 220">HEB 220</option><option value="HEB 240">HEB 240</option><option value="HEB 260">HEB 260</option><option value="HEB 280">HEB 280</option><option value="HEB 300">HEB 300</option><option value="HEB 320">HEB 320</option><option value="HEB 340">HEB 340</option><option value="HEB 360">HEB 360</option><option value="HEB 400">HEB 400</option><option value="HEB 450">HEB 450</option><option value="HEB 500">HEB 500</option></select></div>
+        <div class="field"><label data-i18n="pc019">Stahlgüte</label><select id="ls-st" onchange="run()"><option value="S235" selected>S235</option><option value="S275">S275</option><option value="S355">S355</option><option value="S460">S460</option></select></div>
+        <div class="field"><label data-i18n="pc022">Schrauben</label><select id="ls-d" onchange="run()"><option value="M16">M16</option><option value="M20" selected>M20</option><option value="M22">M22</option><option value="M24">M24</option><option value="M27">M27</option><option value="M30">M30</option></select></div>
+        <div class="field"><label data-i18n="pc023">Festigkeitsklasse</label><select id="ls-kl" onchange="run()"><option value="4.6">4.6</option><option value="5.6">5.6</option><option value="8.8" selected>8.8</option><option value="10.9">10.9</option></select></div>
+        <div class="field"><label>M<sub>Ed</sub> [kNm]</label><input type="number" step="any" id="ls-M" value="80" oninput="run()"></div>
+        <div class="field"><label>V<sub>Ed</sub> [kN]</label><input type="number" step="any" id="ls-V" value="60" oninput="run()"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" data-i18n="ls003">Gurtlaschen</div>
+      <div class="grid2">
+        <div class="field"><label data-i18n="ls004">Anordnung</label><select id="ls-ga" onchange="run()"><option value="a" selected data-i18n="ls005">nur außen (einschnittig)</option><option value="ai" data-i18n="ls006">außen und innen (zweischnittig)</option></select></div>
+        <div class="field"><label data-i18n="ls007">Dicke Außenlasche t<sub>a</sub> [mm]</label><input type="number" step="any" id="ls-ta" value="12" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls008">Dicke Innenlaschen t<sub>i</sub> [mm]</label><input type="number" step="any" id="ls-ti" value="10" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls009">Schraubenreihen je Seite n<sub>1</sub></label><input type="number" step="1" id="ls-n1" value="2" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls010">Randabstand e<sub>1</sub> [mm]</label><input type="number" step="any" id="ls-e1" value="40" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls011">Lochabstand p<sub>1</sub> [mm]</label><input type="number" step="any" id="ls-p1" value="70" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls012">Querabstand w [mm]</label><input type="number" step="any" id="ls-w" value="90" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="ls013">Je Gurt zwei Schraubenreihen in Längsrichtung (links und rechts vom Steg), auf jeder Seite der Stoßfuge n<sub>1</sub> Schrauben je Reihe. Die Außenlasche ist so breit wie der Gurt.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" data-i18n="ls014">Steglaschen (beidseitig)</div>
+      <div class="grid2">
+        <div class="field"><label data-i18n="ls015">Dicke je Lasche t<sub>s</sub> [mm]</label><input type="number" step="any" id="ls-ts" value="8" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls016">Schrauben übereinander n<sub>v</sub></label><input type="number" step="1" id="ls-nv" value="3" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls017">Lochabstand senkrecht p<sub>v</sub> [mm]</label><input type="number" step="any" id="ls-pv" value="70" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls018">Spalten je Seite n<sub>h</sub></label><input type="number" step="1" id="ls-nh" value="2" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls019">Lochabstand waagerecht p<sub>h</sub> [mm]</label><input type="number" step="any" id="ls-ph" value="70" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls020">Randabstand e<sub>s</sub> [mm]</label><input type="number" step="any" id="ls-es" value="45" oninput="run()"></div>
+        <div class="field"><label data-i18n="ls021">Stoßfuge bis Schwerpunkt der Schrauben e [mm]</label><input type="number" step="any" id="ls-e" value="85" oninput="run()"></div>
+      </div>
+      <div class="hint" data-i18n="ls022">Schrauben als Scher-Lochleibungsverbindung (Kategorie A) mit normalem Lochspiel, Gewinde in der Scherfuge. Das Moment wird nach der Steifigkeit auf Gurte und Steg verteilt.</div>
     </div>
     </div>
     <div id="st-stirnplatte" style="display:none">
@@ -4089,6 +4130,28 @@ const I18N = { "de": {
 "pc106":"Pfahl",
 "pc107":"Brunnen",
 "pc108":"Sommerlicher Wärmeschutz",
+"ls001":"Laschenstoß",
+"ls002":"Laschenstoß (geschraubter Universalstoß)",
+"ls003":"Gurtlaschen",
+"ls004":"Anordnung",
+"ls005":"nur außen (einschnittig)",
+"ls006":"außen und innen (zweischnittig)",
+"ls007":"Dicke Außenlasche t<sub>a</sub> [mm]",
+"ls008":"Dicke Innenlaschen t<sub>i</sub> [mm]",
+"ls009":"Schraubenreihen je Seite n<sub>1</sub>",
+"ls010":"Randabstand e<sub>1</sub> [mm]",
+"ls011":"Lochabstand p<sub>1</sub> [mm]",
+"ls012":"Querabstand w [mm]",
+"ls013":"Je Gurt zwei Schraubenreihen in Längsrichtung (links und rechts vom Steg), auf jeder Seite der Stoßfuge n<sub>1</sub> Schrauben je Reihe. Die Außenlasche ist so breit wie der Gurt.",
+"ls014":"Steglaschen (beidseitig)",
+"ls015":"Dicke je Lasche t<sub>s</sub> [mm]",
+"ls016":"Schrauben übereinander n<sub>v</sub>",
+"ls017":"Lochabstand senkrecht p<sub>v</sub> [mm]",
+"ls018":"Spalten je Seite n<sub>h</sub>",
+"ls019":"Lochabstand waagerecht p<sub>h</sub> [mm]",
+"ls020":"Randabstand e<sub>s</sub> [mm]",
+"ls021":"Stoßfuge bis Schwerpunkt der Schrauben e [mm]",
+"ls022":"Schrauben als Scher-Lochleibungsverbindung (Kategorie A) mit normalem Lochspiel, Gewinde in der Scherfuge. Das Moment wird nach der Steifigkeit auf Gurte und Steg verteilt.",
 "projLink":"Alle Positionen in „Projekte“ →",
 "posMissing":"Position „{0}“ nicht gefunden.",
 "posRecalc":"„{0}“ mit der neueren Berechnung aus „Schnittkräfte“ neu gerechnet und gespeichert."
@@ -4144,7 +4207,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.33';
+const SIZE_VERSION = '0.7.34';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -5684,7 +5747,7 @@ function showMat(){
   $('st-traeger').style.display = STMODE==='traeger' ? '' : 'none';
   $('st-anschluss').style.display = STMODE==='anschluss' ? '' : 'none';
   $('st-fuss').style.display = STMODE==='fuss' ? '' : 'none';
-  $('st-schweiss').style.display = STMODE==='schweiss' ? '' : 'none'; $('st-zugstab').style.display = STMODE==='zugstab' ? '' : 'none'; $('st-stumpf').style.display = STMODE==='stumpf' ? '' : 'none'; $('st-stirnplatte').style.display = STMODE==='stirnplatte' ? '' : 'none';
+  $('st-schweiss').style.display = STMODE==='schweiss' ? '' : 'none'; $('st-zugstab').style.display = STMODE==='zugstab' ? '' : 'none'; $('st-stumpf').style.display = STMODE==='stumpf' ? '' : 'none'; $('st-stirnplatte').style.display = STMODE==='stirnplatte' ? '' : 'none'; $('st-lasche').style.display = STMODE==='lasche' ? '' : 'none';
   const T = { beton:[tt('Stahlbeton — Balken, Platten, Stützen, Durchstanzen'),tt('Bemessung nach DIN EN 1992-1-1 mit deutschem NA: Biegung (auch mit Druckbewehrung), Querkraft, Gurtanschluss, Verankerung, Zugkraftdeckung, Rissbreite, Biegeschlankheit, Stützen nach dem Modellstützenverfahren und Durchstanzen.'),tt('Querschnitt')],
     stahl: STMODE==='schweiss'
       ? [tt('Stahl — Schweißverbindungen'),tt('Bemessung nach DIN EN 1993-1-8 mit deutschem NA, 4.5: Kehlnähte nach dem richtungsbezogenen Verfahren (σ⊥, τ⊥, τ∥) mit Vergleich zum vereinfachten Verfahren, lange Nähte und konstruktive Regeln.'),tt('Nahtbild')]
@@ -10475,6 +10538,131 @@ PA['stahl/stirnplatte'] = { rd:readSP, va:validateSP, na:nachweiseSP, fg:figSP, 
     + repRow(tt('Schrauben'), _L`M${I.d} ${I.kl}, w = ${deNum(I.w,0)} mm, p<sub>f</sub> = ${deNum(I.pf,0)} mm`)
     + repRow(tt('Schnittgrößen'), `M<sub>Ed</sub> = ${deNum(I.M,1)} kNm, V<sub>Ed</sub> = ${deNum(I.V,1)} kN`) };
 
+// ── Stahl: geschraubter Laschenstoß (Universalstoß) eines Walzträgers, Kategorie A (DIN EN 1993-1-8 mit NA, 3.6–3.8; EN 1993-1-1, 6.2) ──
+// Moment nach Steifigkeit: Steg M·I_w/I_y, Gurte den Rest als Kräftepaar über h − t_f. Steglaschen: V, Stegmoment und Versatz V·e (polares Moment).
+function lsLochl(e1, p1, e2, p2, d, d0, fub, fu, t){      // kleinste Lochleibung F_b,Rd [kN] einer Schraubengruppe (End-/Innenreihe, Randspalten)
+  const aEnd=e1/(3*d0), aIn=p1>0 ? p1/(3*d0)-0.25 : Infinity, ad=Math.min(aEnd, aIn), ab=Math.min(ad, fub/fu, 1);
+  const k1=Math.min(2.8*e2/d0-1.7, p2>0 ? 1.4*p2/d0-1.7 : Infinity, 2.5);
+  return { ad, ab, k1, F:k1*ab*fu*d*t/gM2/1000 };
+}
+function readLS(){ return { name:$('ls-name').value, prof:$('ls-prof').value, st:$('ls-st').value, d:$('ls-d').value, kl:$('ls-kl').value, M:Math.abs(num('ls-M')||0), V:Math.abs(num('ls-V')||0),
+  ga:$('ls-ga').value, ta:num('ls-ta'), ti:num('ls-ti')||0, n1:Math.round(num('ls-n1')), e1:num('ls-e1'), p1:num('ls-p1')||0, w:num('ls-w'),
+  ts:num('ls-ts'), nv:Math.round(num('ls-nv')), pv:num('ls-pv')||0, nh:Math.round(num('ls-nh')), ph:num('ls-ph')||0, es:num('ls-es'), e:num('ls-e') }; }
+function validateLS(I){ const P=PROFILE.find(p=>p[0]===I.prof), bad=[]; if(!P) bad.push(tt('Profil'));
+  if(!(I.ta>0 && I.ts>0 && (I.ga==='a' || I.ti>0))) bad.push(tt('Laschendicken > 0'));
+  if(!(I.n1>=1 && I.nv>=2 && I.nh>=1 && I.nh<=3)) bad.push(tt('Schraubenanzahl (n₁ ≥ 1, n_v ≥ 2, 1 ≤ n_h ≤ 3)'));
+  if(!(I.e1>0 && I.es>0 && I.e>0 && (I.n1<2 || I.p1>0) && I.pv>0 && (I.nh<2 || I.ph>0))) bad.push(tt('Rand- und Lochabstände > 0'));
+  if(P && !(I.w>P[3]+2*P[5] && I.w<P[2])) bad.push(tt('Querabstand w passt nicht zu Steg und Gurtbreite'));
+  if(P && (I.nv-1)*I.pv+2*I.es > P[1]-2*P[4]-2*P[5]+1e-9) bad.push(tt('Steglasche passt nicht zwischen die Ausrundungen'));
+  if(!(I.M>0 || I.V>0)) bad.push('M_Ed, V_Ed'); return bad; }
+function nachweiseLS(I){
+  const C=[], P=PROFILE.find(p=>p[0]===I.prof), [, h, b, tw, tf, r]=P, Iy=P[8]*1e4, Wpl=P[10]*1000;
+  const SR=SCHRAUBEN.find(x=>x[0]===I.d), [, d, As, d0]=SR, K=SKLASSEN.find(k=>k[0]===I.kl), fub=K[2], av=K[3];
+  const {fy, fu}=stahlFyFu(I.st, Math.max(tf, I.ta)), f1=x=>deNum(x,1), f3=x=>deNum(x,3);
+  // 1) Momentaufteilung
+  const hw=h-2*tf, Iw=tw*hw**3/12, Mw=I.M*Iw/Iy, Mf=I.M-Mw, zf=h-tf, Ff=Mf/zf*1000;   // kN
+  C.push({ id:'lsauf', title:tt('Aufteilung des Moments auf Gurte und Steg'), eta:0, ok:true, info:true, steps:[
+    _L`${I.prof}: h = ${h}, b = ${b}, t<sub>w</sub> = ${f1(tw)}, t<sub>f</sub> = ${f1(tf)}, r = ${r} mm · I<sub>y</sub> = ${deNum(P[8],0)} cm⁴ · ${I.st}: f<sub>y</sub> = ${fy}, f<sub>u</sub> = ${fu} N/mm²`,
+    H(tt('Anteil des Stegs nach seiner Biegesteifigkeit')),
+    `I<sub>w</sub> = t<sub>w</sub>·(h − 2t<sub>f</sub>)³/12 = ${f1(tw)}·${f1(hw)}³/12 = ${deNum(Iw/1e4,0)} cm⁴ · I<sub>w</sub>/I<sub>y</sub> = ${f3(Iw/Iy)}`,
+    `M<sub>w</sub> = M<sub>Ed</sub>·I<sub>w</sub>/I<sub>y</sub> = ${f1(I.M)}·${f3(Iw/Iy)} = <b>${deNum(Mw,2)} kNm</b>`,
+    H(tt('Gurte: Rest des Moments als Kräftepaar')),
+    `M<sub>f</sub> = M<sub>Ed</sub> − M<sub>w</sub> = ${deNum(Mf,2)} kNm · F<sub>f</sub> = M<sub>f</sub>/(h − t<sub>f</sub>) = ${deNum(Mf,2)}/${deNum(zf/1000,4)} = <b>${f1(Ff)} kN</b>`] });
+  // 2) Gurtstoß: Schrauben
+  const zw=I.ga==='ai', m=zw?2:1, nf=2*I.n1, FvRd=m*av*fub*As/gM2/1000, e2=(b-I.w)/2;
+  const tL=zw ? I.ta+I.ti : I.ta, tb=Math.min(tf, tL), Lb=lsLochl(I.e1, I.n1>1?I.p1:0, e2, I.w, d, d0, fub, fu, tb);
+  const Lj=(I.n1-1)*I.p1, bLf=Lj>15*d ? Math.min(1, Math.max(0.75, 1-(Lj-15*d)/(200*d))) : 1;
+  const Fein=Math.min(FvRd*bLf, Lb.F), RgrF=nf*Fein, etaF=Ff/RgrF;
+  const ab=[['e₁',I.e1,1.2*d0],['e₂',e2,1.2*d0],['p₂ = w',I.w,2.4*d0]]; if(I.n1>1) ab.push(['p₁',I.p1,2.2*d0]);
+  const etaA=Math.max(...ab.map(a=>a[2]/a[1]));
+  C.push({ id:'lsfs', title:tt('Gurtstoß: Schrauben auf Abscheren und Lochleibung'), eta:Math.max(etaF, etaA), ok:etaF<=1 && etaA<=1, steps:[
+    H(_L`${I.d} ${I.kl}: d<sub>0</sub> = ${d0} mm, A<sub>s</sub> = ${As} mm² · je Gurt und Trägerseite ${nf} Schrauben (2 × ${I.n1})`),
+    H(tt('Mindestabstände (Tab. 3.3)')), ...ab.map(([k,v,mn])=>`${k} = ${f1(v)} mm ${paGe(v>=mn)} ${f1(mn)} mm`),
+    H(zw ? tt('Abscheren: Außen- und Innenlaschen, zwei Scherfugen') : tt('Abscheren: nur Außenlasche, eine Scherfuge')),
+    _L`F<sub>v,Rd</sub> = m·α<sub>v</sub>·f<sub>ub</sub>·A<sub>s</sub>/γ<sub>M2</sub> = ${m}·${deNum(av,1)}·${fub}·${As}/1,25 = <b>${f1(FvRd)} kN</b>`,
+    ...(bLf<1 ? [_L`lange Verbindung: L<sub>j</sub> = ${f1(Lj)} mm > 15d → β<sub>Lf</sub> = ${f3(bLf)} (3.8)`] : []),
+    H(_L`Lochleibung im dünneren Teil: Gurt t<sub>f</sub> = ${f1(tf)} mm oder Laschen Σt = ${f1(tL)} mm → t = ${f1(tb)} mm`),
+    `α<sub>b</sub> = min(e<sub>1</sub>/(3d<sub>0</sub>); p<sub>1</sub>/(3d<sub>0</sub>) − 1/4; f<sub>ub</sub>/f<sub>u</sub>; 1) = ${f3(Lb.ab)} · k<sub>1</sub> = min(2,8·e<sub>2</sub>/d<sub>0</sub> − 1,7; 1,4·p<sub>2</sub>/d<sub>0</sub> − 1,7; 2,5) = ${f3(Lb.k1)}`,
+    `F<sub>b,Rd</sub> = k<sub>1</sub>·α<sub>b</sub>·f<sub>u</sub>·d·t/γ<sub>M2</sub> = <b>${f1(Lb.F)} kN</b>`,
+    H(tt('Tragfähigkeit der Gurtschrauben einer Trägerseite')),
+    `F<sub>Rd</sub> = n·min(F<sub>v,Rd</sub>${bLf<1?'·β<sub>Lf</sub>':''}; F<sub>b,Rd</sub>) = ${nf}·${f1(Fein)} = <b>${f1(RgrF)} kN</b> ${paGe(etaF<=1)} F<sub>f</sub> = ${f1(Ff)} kN`],
+    note: etaF>1 ? tt('Mehr Schraubenreihen, größere oder festere Schrauben, Innenlaschen (zweischnittig) oder dickere Laschen bei Lochleibung.') : '' });
+  // 3) Gurtlaschen und Trägergurt im Querschnitt
+  const bi=Math.floor(((b-tw)/2-r)/5)*5, AL=b*I.ta+(zw?2*bi*I.ti:0), AnL=AL-2*d0*tL, fyL=stahlFyFu(I.st, I.ta).fy;
+  const NplL=AL*fyL/ST.gM0/1000, NuL=0.9*AnL*fu/gM2/1000, NL=Math.min(NplL, NuL);
+  const Af=b*tf, Anf=(b-2*d0)*tf, Nplf=Af*fy/ST.gM0/1000, Nuf=0.9*Anf*fu/gM2/1000, Nf=Math.min(Nplf, Nuf);
+  const etaL=Ff/NL, etaG=Ff/Nf;
+  C.push({ id:'lsfl', title:tt('Gurtlaschen und Trägergurt auf Zug'), eta:Math.max(etaL, etaG), ok:etaL<=1 && etaG<=1, steps:[
+    H(zw ? _L`Laschen: außen ${b} × ${f1(I.ta)} mm, innen 2 × ${bi} × ${f1(I.ti)} mm (Breite (b − t<sub>w</sub>)/2 − r, abgerundet)` : _L`Außenlasche ${b} × ${f1(I.ta)} mm`),
+    `A = ${f1(AL)} mm² · A<sub>net</sub> = A − 2·d<sub>0</sub>·Σt = ${f1(AnL)} mm²`,
+    `N<sub>pl,Rd</sub> = A·f<sub>y</sub>/γ<sub>M0</sub> = ${f1(NplL)} kN · N<sub>u,Rd</sub> = 0,9·A<sub>net</sub>·f<sub>u</sub>/γ<sub>M2</sub> = ${f1(NuL)} kN`,
+    `F<sub>f</sub>/N<sub>t,Rd</sub> = ${f1(Ff)}/${f1(NL)} = <b>${f3(etaL)}</b>`,
+    H(tt('Zuggurt des Trägers im Lochquerschnitt')),
+    `A<sub>f</sub> = b·t<sub>f</sub> = ${f1(Af)} mm² · A<sub>net</sub> = (b − 2d<sub>0</sub>)·t<sub>f</sub> = ${f1(Anf)} mm²`,
+    `N<sub>t,Rd</sub> = min(${f1(Nplf)}; ${f1(Nuf)}) = ${f1(Nf)} kN · F<sub>f</sub>/N<sub>t,Rd</sub> = <b>${f3(etaG)}</b>`],
+    note: tt('Am Druckgurt gilt der Bruttoquerschnitt; die Laschen sind kurz, Knicken zwischen den Schrauben ist bei p₁ ≤ 9ε·t ohne Belang.') });
+  // 4) Steg: Schraubengruppe mit polarem Moment
+  const ns=I.nv*I.nh, zs=[], xs=[]; for(let i=0;i<I.nv;i++) zs.push((i-(I.nv-1)/2)*I.pv); for(let j=0;j<I.nh;j++) xs.push((j-(I.nh-1)/2)*I.ph);
+  let Ip=0; zs.forEach(z=>xs.forEach(x=>{ Ip+=x*x+z*z; }));
+  const zmax=Math.max(...zs.map(Math.abs)), xmax=Math.max(...xs.map(Math.abs)), Ms=Mw+I.V*I.e/1000;   // kNm
+  const Fx=Ms*1000*zmax/Ip, Fz=I.V/ns+Ms*1000*xmax/Ip, Fr=Math.hypot(Fx, Fz);
+  const FvS=2*av*fub*As/gM2/1000, tS=Math.min(tw, 2*I.ts), pmin=Math.min(I.pv, I.nh>1?I.ph:Infinity);
+  const LbS=lsLochl(I.es, pmin, I.es, pmin, d, d0, fub, fu, tS), FS=Math.min(FvS, LbS.F), etaS=Fr/FS;
+  const abS=[['e<sub>s</sub>',I.es,1.2*d0],['p<sub>v</sub>',I.pv,2.4*d0]]; if(I.nh>1) abS.push(['p<sub>h</sub>',I.ph,2.4*d0]);
+  const etaSA=Math.max(...abS.map(a=>a[2]/a[1]));
+  C.push({ id:'lsws', title:tt('Stegstoß: Schrauben unter Querkraft und Moment'), eta:Math.max(etaS, etaSA), ok:etaS<=1 && etaSA<=1, steps:[
+    H(tt('Mindestabstände (Tab. 3.3, Abstände in beiden Richtungen wie quer zur Kraft)')), ...abS.map(([k,v,mn])=>`${k} = ${f1(v)} mm ${paGe(v>=mn)} ${f1(mn)} mm`),
+    H(tt('Beanspruchung der Schraubengruppe einer Trägerseite')),
+    `M<sub>s</sub> = M<sub>w</sub> + V<sub>Ed</sub>·e = ${deNum(Mw,2)} + ${f1(I.V)}·${deNum(I.e/1000,3)} = <b>${deNum(Ms,2)} kNm</b>`,
+    _L`${ns} Schrauben (${I.nv} × ${I.nh}) · Σr² = Σ(x² + z²) = ${deNum(Ip/100,1)} cm²`,
+    `F<sub>x</sub> = M<sub>s</sub>·z<sub>max</sub>/Σr² = ${f1(Fx)} kN · F<sub>z</sub> = V/n + M<sub>s</sub>·x<sub>max</sub>/Σr² = ${f1(I.V/ns)} + ${f1(Ms*1000*xmax/Ip)} = ${f1(Fz)} kN`,
+    `F<sub>Ed</sub> = √(F<sub>x</sub>² + F<sub>z</sub>²) = <b>${f1(Fr)} kN</b> (Eckschraube)`,
+    H(tt('Tragfähigkeit einer Stegschraube (zwei Scherfugen)')),
+    `F<sub>v,Rd</sub> = 2·α<sub>v</sub>·f<sub>ub</sub>·A<sub>s</sub>/γ<sub>M2</sub> = ${f1(FvS)} kN`,
+    _L`Lochleibung im dünneren Teil: Steg ${f1(tw)} mm oder Laschen 2 × ${f1(I.ts)} mm → t = ${f1(tS)} mm; mit dem kleinsten Abstand in beiden Richtungen (sichere Seite): α<sub>b</sub> = ${f3(LbS.ab)}, k<sub>1</sub> = ${f3(LbS.k1)}`,
+    `F<sub>b,Rd</sub> = ${f1(LbS.F)} kN → F<sub>Rd</sub> = ${f1(FS)} kN ${paGe(etaS<=1)} F<sub>Ed</sub> = ${f1(Fr)} kN`],
+    note: etaS>1 ? tt('Mehr Schrauben übereinander oder eine zweite Spalte, größere Schraubenabstände (größeres Σr²), kleineres e.') : '' });
+  // 5) Steglaschen
+  const hs=(I.nv-1)*I.pv+2*I.es, Ws=2*I.ts*hs*hs/6, Avs=2*I.ts*hs, fyS=stahlFyFu(I.st, I.ts).fy;
+  const Vpl=Avs*fyS/(Math.sqrt(3)*ST.gM0)/1000, rho=I.V>0.5*Vpl ? (2*I.V/Vpl-1)**2 : 0, Mel=Ws*fyS*(1-rho)/ST.gM0/1e6;
+  const etaSL=Math.max(Ms/Mel, I.V/Vpl);
+  C.push({ id:'lswl', title:tt('Steglaschen: Biegung und Querkraft'), eta:etaSL, ok:etaSL<=1, steps:[
+    _L`zwei Laschen ${f1(hs)} × ${f1(I.ts)} mm (h<sub>s</sub> = (n<sub>v</sub> − 1)·p<sub>v</sub> + 2e<sub>s</sub>) · lichte Steghöhe h − 2t<sub>f</sub> − 2r = ${f1(h-2*tf-2*r)} mm`,
+    `V<sub>pl,Rd</sub> = 2·t<sub>s</sub>·h<sub>s</sub>·f<sub>y</sub>/(√3·γ<sub>M0</sub>) = ${f1(Vpl)} kN · V<sub>Ed</sub>/V<sub>pl,Rd</sub> = ${f3(I.V/Vpl)}`,
+    ...(rho>0 ? [`V<sub>Ed</sub> > 0,5·V<sub>pl,Rd</sub>: ρ = (2V<sub>Ed</sub>/V<sub>pl,Rd</sub> − 1)² = ${f3(rho)}`] : []),
+    `M<sub>el,Rd</sub> = 2·t<sub>s</sub>·h<sub>s</sub>²/6·f<sub>y</sub>${rho>0?'·(1 − ρ)':''}/γ<sub>M0</sub> = ${deNum(Mel,2)} kNm · M<sub>s</sub>/M<sub>el,Rd</sub> = <b>${f3(Ms/Mel)}</b>`],
+    note: tt('Elastisch im Bruttoquerschnitt an der Stoßfuge; die Lochschwächung im Schraubenquerschnitt ist hier nicht gesondert nachgewiesen.') });
+  return { C, ok:C.every(c=>c.ok), P, h, b, tw, tf, r, d, d0, Iw, Iy, Mw, Mf, Ff, FvRd, Lb, RgrF, e2, bi, AL, NL, Nf, Ms, Fx, Fz, Fr, FS, hs, Mel, Vpl, Wpl, fy };
+}
+function figLS(I, res){
+  let s=paSvg(470, 330, tt('Laschenstoß'));
+  const sc=Math.min(200/res.h, 0.9), y0=48, H_=res.h*sc, tf=Math.max(res.tf*sc,3), xj=200, L=150;
+  s+=svgT(xj, 16, tt('Seitenansicht mit Gurt- und Steglaschen'), 'middle', '#6b7280', 9.5);
+  s+=`<rect x="${xj-L}" y="${y0}" width="${2*L}" height="${tf}" fill="#cbd5e1" stroke="#111"/><rect x="${xj-L}" y="${y0+H_-tf}" width="${2*L}" height="${tf}" fill="#cbd5e1" stroke="#111"/><rect x="${xj-L}" y="${y0+tf}" width="${2*L}" height="${H_-2*tf}" fill="#eef0f3" stroke="#94a3b8" stroke-width="0.5"/>`;
+  s+=`<line x1="${xj}" y1="${y0-14}" x2="${xj}" y2="${y0+H_+14}" stroke="#111" stroke-dasharray="4 3"/>`;
+  const lg=(6+2*I.e1+(I.n1-1)*I.p1)*sc, tA=Math.max(I.ta*sc,3);
+  s+=`<rect x="${xj-lg}" y="${y0-tA}" width="${2*lg}" height="${tA}" fill="#94a3b8" stroke="#111"/><rect x="${xj-lg}" y="${y0+H_}" width="${2*lg}" height="${tA}" fill="#94a3b8" stroke="#111"/>`;
+  for(const k of [-1,1]) for(let i=0;i<I.n1;i++){ const x=xj+k*(6+I.e1+i*I.p1)*sc; s+=`<line x1="${x}" y1="${y0-tA-5}" x2="${x}" y2="${y0+tf+3}" stroke="#111" stroke-width="2"/><line x1="${x}" y1="${y0+H_-tf-3}" x2="${x}" y2="${y0+H_+tA+5}" stroke="#111" stroke-width="2"/>`; }
+  const hs=res.hs*sc, ws=(2*I.e+ (I.nh-1)*I.ph + 2*I.es)*sc, ym=y0+H_/2;
+  s+=`<rect x="${xj-ws/2}" y="${ym-hs/2}" width="${ws}" height="${hs}" fill="#94a3b8" fill-opacity="0.55" stroke="#111"/>`;
+  for(const k of [-1,1]) for(let j=0;j<I.nh;j++) for(let i=0;i<I.nv;i++){ const x=xj+k*(I.e+(j-(I.nh-1)/2)*I.ph)*sc, y=ym+(i-(I.nv-1)/2)*I.pv*sc; s+=`<circle cx="${x}" cy="${y}" r="${Math.max(2.5,res.d0/2*sc)}" fill="#fff" stroke="#111"/>`; }
+  // Kräfte am rechten Trägerteil: Gurtkräfte (Zug oben bei positivem Moment unten? hier oben Druck, unten Zug), Querkraft
+  s+=svgArrow(xj+L+4, y0+H_-tf/2, xj+L+44, y0+H_-tf/2, C_EW, false, 1.8)+svgT(xj+L+48, y0+H_-tf/2+3, `F_f = ${deNum(res.Ff,0)} kN`, 'start', C_EW, 9);
+  s+=svgArrow(xj+L+44, y0+tf/2, xj+L+4, y0+tf/2, C_IN, false, 1.8)+svgT(xj+L+48, y0+tf/2+3, `F_f = ${deNum(res.Ff,0)} kN`, 'start', C_IN, 9);
+  s+=svgArrow(xj+L-20, ym-34, xj+L-20, ym+6, C_EW, false, 1.6)+svgT(xj+L-14, ym-14, sub('V','Ed'), 'start', C_EW, 9);
+  s+=paDim(xj, y0+H_+tA+22, xj+I.e*sc, y0+H_+tA+22, 'e', 0, 11);
+  s+='</svg>';
+  return s + figLegend([`M<sub>Ed</sub> = ${deNum(I.M,1)} kNm`, `V<sub>Ed</sub> = ${deNum(I.V,1)} kN`], [`F<sub>f</sub> = ${deNum(res.Ff,1)} kN`, `M<sub>w</sub> = ${deNum(res.Mw,2)} kNm`, `M<sub>s</sub> = ${deNum(res.Ms,2)} kNm`], tt('Gestrichelt: Stoßfuge. Die Gurtlaschen übertragen die Gurtkräfte (oben Druck, unten Zug), die Steglaschen Querkraft und Stegmoment.'));
+}
+PA['stahl/lasche'] = { rd:readLS, va:validateLS, na:nachweiseLS, fg:figLS, ref:'ref.html#/stahlbau/verbindungen/lasche',
+  line:(I,r)=>_L`${I.prof}, ${I.d} ${I.kl} · Gurt 2 × ${I.n1}, Steg ${I.nv} × ${I.nh} je Seite · F<sub>f</sub> = ${deNum(r.Ff,1)} kN`,
+  nicht:'Normalkraft im Träger, gleitfeste Verbindungen (Kategorie B/C), Blockversagen der Laschen, Lochschwächung des Trägers im Steg, Knicken der Druckgurtlaschen bei großen Schraubenabständen und Verformungen aus Lochspiel.',
+  title:()=>tt('Laschenstoß'), norm:tt('DIN EN 1993-1-8 mit NA, 3.6 bis 3.8; DIN EN 1993-1-1, 6.2'),
+  rows:(I,r)=>repRow(tt('Träger, Schrauben'), _L`${I.prof}, ${I.st}, ${I.d} ${I.kl} (Kategorie A, Gewinde in der Scherfuge)`)
+    + repRow(tt('Gurtlaschen'), _L`${I.ga==='ai'?_L`außen ${r.b} × ${deNum(I.ta,0)} mm, innen 2 × ${r.bi} × ${deNum(I.ti,0)} mm`:_L`außen ${r.b} × ${deNum(I.ta,0)} mm`}; je Seite 2 × ${I.n1} Schrauben, e<sub>1</sub> = ${deNum(I.e1,0)}, p<sub>1</sub> = ${deNum(I.p1,0)}, w = ${deNum(I.w,0)} mm`)
+    + repRow(tt('Steglaschen'), _L`2 × ${deNum(r.hs,0)} × ${deNum(I.ts,0)} mm; je Seite ${I.nv} × ${I.nh} Schrauben, p<sub>v</sub> = ${deNum(I.pv,0)}, p<sub>h</sub> = ${deNum(I.ph,0)}, e<sub>s</sub> = ${deNum(I.es,0)}, e = ${deNum(I.e,0)} mm`)
+    + repRow(tt('Schnittgrößen'), `M<sub>Ed</sub> = ${deNum(I.M,1)} kNm, V<sub>Ed</sub> = ${deNum(I.V,1)} kN`) };
+
 // ── Holz: nachgiebig verbundener Querschnitt, γ-Verfahren (EN 1995-1-1, Anhang B) — Holz-Beton-Verbund ──
 function readVB(){ return { M:hxMat(), name:$('vb-name').value, beton:$('vb-beton').value, b1:num('vb-b1'), h1:num('vb-h1'), b2:num('vb-b2'), h2:num('vb-h2'),
   L:num('vb-L'), K:num('vb-K'), s:num('vb-s'), FvRd:num('vb-Fv'), Med:Math.abs(num('vb-M')||0), Ved:Math.abs(num('vb-V')||0) }; }
@@ -10773,6 +10961,7 @@ PA['bauph/sommer'] = { rd:readSX, va:validateSX, na:nachweiseSX, fg:figSX, ref:'
 Object.assign(PA_HEAD, {
   'beton/zweiachsig': ['Stahlbeton — Stütze mit zweiachsiger Biegung','Nachweis nach DIN EN 1992-1-1, 5.8.9: einachsige Momententragfähigkeiten bei N_Ed und die Interaktion mit dem Exponenten a.','Querschnitt und Interaktion'],
   'beton/platte2': ['Stahlbeton — Zweiachsig gespannte Platte','Allseitig gelenkig gelagerte Rechteckplatte: Lastaufteilung und Feldmomente nach Marcus, Biegebemessung in beiden Richtungen mit Mindestbewehrung. Bemessung nach DIN EN 1992-1-1 mit NA.','Grundriss'],
+  'stahl/lasche': ['Stahl — Laschenstoß','Geschraubter Universalstoß eines Walzträgers mit Gurt- und Steglaschen nach DIN EN 1993-1-8 mit NA (Kategorie A): Momentaufteilung nach Steifigkeit, Schrauben auf Abscheren und Lochleibung, Laschen- und Gurtquerschnitte.','Stoß'],
   'stahl/stirnplatte': ['Stahl — Biegesteifer Stirnplattenstoß','Bündiger Stirnplattenstoß mit einer Zugschraubenreihe nach der Komponentenmethode (DIN EN 1993-1-8, 6.2, vereinfacht): T-Stummel, Steg auf Zug, Flansch auf Druck.','Stoß'],
   'holz/verbund': ['Holz — Nachgiebiger Verbund (γ-Verfahren)','Holz-Beton-Verbunddecke nach DIN EN 1995-1-1, Anhang B: wirksame Biegesteifigkeit, Spannungen in Holz und Beton, Schub und Verbindungsmittelkraft.','Querschnitt'],
   'grund/spundwand': ['Grundbau — Spundwand nach Blum','Nicht verankerte, im Boden eingespannte Spundwand: Erddruck mit Teilsicherheiten, Einbindetiefe nach Blum mit Zuschlag und größtes Moment. Teilsicherheiten nach DIN 1054, Erddruck nach DIN 4085.','Spundwand'],
@@ -10788,7 +10977,7 @@ PA['beton/zweiachsig'].pre = paBetonHint; PA['beton/platte2'].pre = paBetonHint;
 // ══════════════════════════════════════════════════
 // Bericht
 // ══════════════════════════════════════════════════
-const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall', bauph_uwert:'U-Wert (Bauphysik)', bauph_glaser:'Tauwasser (Glaser)', bauph_schall:'Schallschutz', torsion:'Torsion (Stahlbeton)', stoss:'Übergreifungsstoß', holz_brand:'Abbrand (Holz, Brandfall)', holz_schwingung:'Schwingung Holzbalkendecke', grund_hyd:'Hydraulischer Grundbruch', grund_zeit:'Zeitsetzung', grund_boesch:'Böschungsbruch', wasser_druckstoss:'Druckstoß', wasser_pumpe:'Pumpe (NPSH)', wasser_teil:'Teilgefülltes Kreisrohr', bauph_gk:'Gebäudeklasse', brandschutz:'Brandschutz (Stahlbeton)', zugkraft:'Zugkraftdeckung (Durchlaufträger)', stahl_zugstab:'Zugstab mit Lochschwächung', stahl_stumpf:'Stumpfnaht', holz_querzug:'Querzug (Holz)', holz_durchbruch:'Durchbruch (Holz)', holz_doppel:'Pfette mit Doppelbiegung', mauer_ausfach:'Ausfachungswand', zweiachsig:'Stütze mit zweiachsiger Biegung', platte2:'Zweiachsig gespannte Platte', stahl_stirnplatte:'Stirnplattenstoß', holz_verbund:'Holz-Beton-Verbund', grund_spundwand:'Spundwand (Blum)', grund_pfahl:'Pfahl (axial)', wasser_brunnen:'Grundwasserabsenkung', bauph_sommer:'Sommerlicher Wärmeschutz' };
+const TYP_NAME = { balken:'Rechteckbalken', unterzug:'Unterzug (Plattenbalken)', platte:'Platte, 1 m breiter Streifen', stuetze:'Stahlbetonstütze', durchstanzen:'Durchstanzen (Flachdecke)', stahl:'Stahlträger (Walzprofil)', anschluss:'Stahlanschluss (Schrauben, Kehlnaht)', holz:'Holzbalken / Holzstütze', holzverb:'Holzverbindung (stiftförmig)', holz_ausklink:'Ausklinkung (Holz)', holz_sattel:'Satteldach-/Pultdachträger', holz_versatz:'Versatz (Holz)', fuss:'Stützenfuß (Stahl)', schweiss:'Schweißverbindung (Kehlnähte)', grund_flach:'Flachgründung', grund_setzung:'Setzung', grund_wand:'Winkelstützmauer', grund_upl:'Auftrieb (UPL)', grund_gleit:'Gleiten', mauer_druck:'Mauerwerkswand (Druck)', mauer_teil:'Teilflächenpressung (Mauerwerk)', mauer_keller:'Kellerwand (Mauerwerk)', mauer_schub:'Schubwand (Mauerwerk)', wasser_druck:'Wasserdruck', wasser_schwimm:'Schwimmkörper', wasser_rohr:'Rohrleitung', wasser_gerinne:'Gerinne', wasser_wehr:'Wehrüberfall', bauph_uwert:'U-Wert (Bauphysik)', bauph_glaser:'Tauwasser (Glaser)', bauph_schall:'Schallschutz', torsion:'Torsion (Stahlbeton)', stoss:'Übergreifungsstoß', holz_brand:'Abbrand (Holz, Brandfall)', holz_schwingung:'Schwingung Holzbalkendecke', grund_hyd:'Hydraulischer Grundbruch', grund_zeit:'Zeitsetzung', grund_boesch:'Böschungsbruch', wasser_druckstoss:'Druckstoß', wasser_pumpe:'Pumpe (NPSH)', wasser_teil:'Teilgefülltes Kreisrohr', bauph_gk:'Gebäudeklasse', brandschutz:'Brandschutz (Stahlbeton)', zugkraft:'Zugkraftdeckung (Durchlaufträger)', stahl_zugstab:'Zugstab mit Lochschwächung', stahl_stumpf:'Stumpfnaht', holz_querzug:'Querzug (Holz)', holz_durchbruch:'Durchbruch (Holz)', holz_doppel:'Pfette mit Doppelbiegung', mauer_ausfach:'Ausfachungswand', zweiachsig:'Stütze mit zweiachsiger Biegung', platte2:'Zweiachsig gespannte Platte', stahl_stirnplatte:'Stirnplattenstoß', stahl_lasche:'Laschenstoß', holz_verbund:'Holz-Beton-Verbund', grund_spundwand:'Spundwand (Blum)', grund_pfahl:'Pfahl (axial)', wasser_brunnen:'Grundwasserabsenkung', bauph_sommer:'Sommerlicher Wärmeschutz' };
 function reportChecks(C){
   return C.map((c,i)=>`<section><h2>${i+1}. ${c.title}</h2><div class="steps">${stepsHtml(c.steps)}</div>
       ${c.info?'':_L`<p>Ausnutzung η = ${deNum(c.eta,2)} — <span class="${c.ok?'ok':'bad'}">${c.ok?tt('Nachweis erfüllt'):tt('Nachweis nicht erfüllt')}</span></p>`}
@@ -10940,7 +11129,7 @@ const SFIELDS=['bs-fl','bf-S','bf-d','bf-dR','bf-m1','bf-l1','bf-a1','bf-m2','bf
   'hx-art','hx-kl','hx-nkl','hx-kled','ak-name','ak-lage','ak-b','ak-h','ak-hef','ak-x','ak-i','ak-V','sd-name','sd-form','sd-L','sd-b','sd-h0','sd-hap','sd-q','vs-name','vs-art','vs-gam','vs-b','vs-h','vs-tv','vs-lv','vs-S','vs-kc90',
   'to-T','to-V','to-cot','to-dsw','to-sw','to-dsl','to-nl','so-ds','so-ssd','so-art','so-verb','so-ant','so-haken','so-l0','so-a','so-dst','so-st','br-name','br-b','br-h','br-t','br-s','br-M','br-V','sv-name','sv-b','sv-h','sv-e','sv-L','sv-B','sv-g','sv-tE','sv-EE','sv-kl','hy-name','hy-dh','hy-t','hy-gs','hy-gH','hy-ans','hy-L','zs-name','zs-s','zs-H','zs-cv','zs-dr','zs-tN','zs-zul','bo-name','bo-b','bo-z','bo-w','bo-gr','bo-bs','wj-name','wj-Q','wj-D','wj-s','wj-E','wj-L','wj-ts','wj-p0','wj-PN','wp-name','wp-Q','wp-Hg','wp-hv','wp-eta','wp-pa','wp-hs','wp-hvs','wp-T','wp-npshr','wt-name','wt-Q','wt-D','wt-I','wt-k','wt-hD','wt-vmin','gk-name','gk-h','gk-n','gk-a','gk-frei','gk-lage','gk-fw',
   'fb-art','fb-R','fb-ds','fb-dsw','fb-lagen','fb-cv','zk-l','zk-q','zk-MA','zk-MB','zk-cot','zk-dsw','zk-ds','zk-nd','zk-ng','zk-dso','zk-no','zb-name','zb-st','zb-b','zb-t','zb-d0','zb-n1','zb-n2','zb-e1','zb-p1','zb-p2','zb-N','bw-name','bw-st','bw-art','bw-a','bw-t','bw-l','bw-N','bw-V','bw-M','qz-name','qz-b','qz-h','qz-a','qz-ar','qz-tef','qz-F','db-name','db-form','db-b','db-h','db-hd','db-a','db-hro','db-lv','db-V','db-M','dp-name','dp-b','dp-h','dp-L','dp-al','dp-qv','dp-qn','af-name','af-t','af-sfk','af-h','af-l','af-z',
-  'sz-N','sz-My','sz-Mz','sz-n','sz-ds','sz-dsw','pz-lx','pz-ly','pz-q','pz-dsx','pz-sx','pz-dsy','pz-sy','sp-name','sp-prof','sp-st','sp-tp','sp-bp','sp-d','sp-kl','sp-w','sp-pf','sp-aw','sp-M','sp-V','vb-name','vb-beton','vb-b1','vb-h1','vb-b2','vb-h2','vb-L','vb-K','vb-s','vb-Fv','vb-M','vb-V','sq-name','sq-h','sq-q','sq-bs','sq-t','sq-W','sq-st','pf-name','pf-D','pf-bs','pf-t1','pf-q1','pf-t2','pf-q2','pf-t3','pf-q3','pf-qb','pf-G','pf-Q','gb-name','gb-k','gb-H','gb-n','gb-A','gb-rw','gb-Q','gb-s','sx-name','sx-AG','sx-Aw','sx-g','sx-fcs','sx-fc','sx-ori','sx-kl','sx-bau','sx-nl','sx-glas','sx-kuehl'];
+  'sz-N','sz-My','sz-Mz','sz-n','sz-ds','sz-dsw','pz-lx','pz-ly','pz-q','pz-dsx','pz-sx','pz-dsy','pz-sy','sp-name','sp-prof','sp-st','sp-tp','sp-bp','sp-d','sp-kl','sp-w','sp-pf','sp-aw','sp-M','sp-V','ls-name','ls-prof','ls-st','ls-d','ls-kl','ls-M','ls-V','ls-ga','ls-ta','ls-ti','ls-n1','ls-e1','ls-p1','ls-w','ls-ts','ls-nv','ls-pv','ls-nh','ls-ph','ls-es','ls-e','vb-name','vb-beton','vb-b1','vb-h1','vb-b2','vb-h2','vb-L','vb-K','vb-s','vb-Fv','vb-M','vb-V','sq-name','sq-h','sq-q','sq-bs','sq-t','sq-W','sq-st','pf-name','pf-D','pf-bs','pf-t1','pf-q1','pf-t2','pf-q2','pf-t3','pf-q3','pf-qb','pf-G','pf-Q','gb-name','gb-k','gb-H','gb-n','gb-A','gb-rw','gb-Q','gb-s','sx-name','sx-AG','sx-Aw','sx-g','sx-fcs','sx-fc','sx-ori','sx-kl','sx-bau','sx-nl','sx-glas','sx-kuehl'];
 const snapshot = () => { const o={typ:TYP, mat:MAT, stmode:STMODE, homode:HOMODE, grmode:GRMODE, mwmode:MWMODE, wbmode:WBMODE, bpmode:BPMODE}; [...FIELDS,...SFIELDS].forEach(f=>o[f]=$(f).value); CHECKS.forEach(f=>o[f]=$(f).checked); return o; };
 function apply(o){
   if(o['sn-reihe']){ $('sn-reihe').value=o['sn-reihe']; fillProfile(); }
@@ -11009,7 +11198,7 @@ function projState(){
   mulyProj.state(st, st==='new' ? tx('ppNew') : st==='saved' ? tx('ppSaved', mulyProj.fmt(p.date, dLoc())) : tx('ppChanged'));
 }
 function mulyLangSwitch(l){ try{ localStorage.setItem('statiq-lang', l); }catch(e){} location.reload(); }
-function nameField(){ return MAT==='bauph' ? (BPMODE==='gk' ? 'gk-name' : BPMODE==='sommer' ? 'sx-name' : 'bp-name') : MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : STMODE==='zugstab' ? 'zb-name' : STMODE==='stumpf' ? 'bw-name' : STMODE==='stirnplatte' ? 'sp-name' : 'sn-name') : 'in-name'; }
+function nameField(){ return MAT==='bauph' ? (BPMODE==='gk' ? 'gk-name' : BPMODE==='sommer' ? 'sx-name' : 'bp-name') : MAT==='wasser' ? WB_NAME[WBMODE] : MAT==='mauer' ? MW_NAME[MWMODE] : MAT==='grund' ? GR_NAME[GRMODE] : MAT==='holz' ? (HOMODE==='verbindung' ? 'hv-name' : HX_NAME[HOMODE] || 'ho-name') : MAT==='stahl' ? (STMODE==='anschluss' ? 'an-name' : STMODE==='fuss' ? 'fp-name' : STMODE==='schweiss' ? 'sw-name' : STMODE==='zugstab' ? 'zb-name' : STMODE==='stumpf' ? 'bw-name' : STMODE==='stirnplatte' ? 'sp-name' : STMODE==='lasche' ? 'ls-name' : 'sn-name') : 'in-name'; }
 function syncK(){ const f=$('in-feld').value; $('in-K').value = f==='0.85' ? '1.3' : f==='0.7' ? '1.5' : '1.0'; }
 
 
@@ -11628,6 +11817,7 @@ Object.assign(FIX_LEVERS, {
   'beton/zweiachsig': () => [fxN('sz-n',1,1,12), fxS('sz-ds'), fxN('in-h',1,1,150), fxN('in-b',1,1,150), fxS('in-beton')],
   'beton/platte2':   () => [fxN('pz-sx',-1,0.5,5), fxS('pz-dsx'), fxN('pz-sy',-1,0.5,5), fxS('pz-dsy'), fxN('in-h',1,1,60)],
   'stahl/stirnplatte': () => [fxN('sp-tp',1,1,80), fxS('sp-d'), fxS('sp-kl'), fxN('sp-w',-1,5,40), fxS('sp-prof')],
+  'stahl/lasche': () => [fxN('ls-n1',1,1,8), fxN('ls-nv',1,1,10), fxS('ls-d'), fxS('ls-kl'), fxN('ls-ta',1,1,40), fxN('ls-ts',1,1,30)],
   'holz/verbund':    () => [fxN('vb-h2',1,10,1000), fxN('vb-b2',1,10,400), fxN('vb-s',-1,5,30), fxN('vb-h1',1,5,300), fxS('hx-kl')],
   'grund/spundwand': () => [fxN('sq-t',1,0.1,40), fxN('sq-W',1,50,10000), fxS('sq-st')],
   'grund/pfahl':     () => [fxN('pf-t2',1,0.25,60), fxN('pf-D',1,0.05,3)],

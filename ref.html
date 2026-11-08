@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.66 -->
+<!-- kragr·ref v0.3.67 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1392,7 +1392,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.66';
+const REF_VERSION = '0.3.67';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -1750,7 +1750,7 @@ const FAECHER = {
   },
   grundbau: {
     title: 'Grundbau', tag: 'EC7',
-    sub: 'Bodenphysik, Spannungen, Setzungen, Erddruck, Flachgründungen, Böschungen',
+    sub: 'Bodenphysik, Spannungen, Setzungen, Erddruck, Flachgründungen, Böschungen, Stützbauwerke, Pfähle',
     kapitel: {
       allgemein: {
         title: "Allgemeines",
@@ -1790,12 +1790,26 @@ const FAECHER = {
           sohldruck:  { title: 'Sohldruck und Lage der Resultierenden' },
           grundbruch: { title: 'Grundbruch und Gleiten' },
           sohlwiderstand: { title: 'Sohlwiderstand (Tabellen DIN 1054)' },
+          auftrieb:   { title: 'Auftrieb (UPL)' },
         }
       },
       boeschung: {
         title: 'Böschungen',
         themen: {
           boeschung: { title: 'Böschungsbruch' },
+        }
+      },
+      stuetz: {
+        title: 'Stützbauwerke und Baugruben',
+        themen: {
+          stuetzwand: { title: 'Winkelstützwand' },
+          spundwand:  { title: 'Spundwand nach Blum' },
+        }
+      },
+      pfahl: {
+        title: 'Pfahlgründungen',
+        themen: {
+          axial: { title: 'Axial belastete Pfähle' },
         }
       },
     }
@@ -4753,6 +4767,131 @@ function updateGB(){
   if(o.Vd>0) S.push(`V<sub>d</sub> / R<sub>n,d</sub> = ${f(o.Vd,1)} / ${f(Rd,1)} = ${f(o.Vd/Rd,3)} ≤ 1 ${ok(o.Vd/Rd)}`);
   S.push(tt('!V und H hier charakteristisch (für die Neigungsbeiwerte), V<sub>d</sub> als Bemessungswert für den Nachweis.'));
   out.innerHTML = ablauf(_L`Grundbruch ${strip?tt('Streifenfundament'):tt('Einzelfundament')} b = ${f(o.b)} m`, S);
+}
+
+
+// ── Grundbau: Auftrieb, Winkelstützwand, Spundwand nach Blum, Pfahl (ref v0.3.67, wie size: nachweiseGU/GW/SQ/PF) ──
+function updateAuftrieb(){
+  const out=document.getElementById('upl-out'); if(!out) return;
+  const L=num('upl-L'), B=num('upl-B'), ts=num('upl-ts'), hW=num('upl-hw')||0, tw=num('upl-tw')||0, td=num('upl-td')||0, hw=num('upl-h'), bs=valOf('upl-bs');
+  if(!(L>0&&B>0&&ts>0&&hW>=0&&tw>=0&&2*tw<Math.min(L,B)&&td>=0&&hw>=0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const F={P:[1.05,0.95],T:[1.05,0.95],A:[1.00,0.95]}[bs], A=L*B, f=dG;
+  const Gs=25*A*ts, Gw=25*(A-(L-2*tw)*(B-2*tw))*hW, Gd=25*A*td, G=Gs+Gw+Gd, U=10*hw*A, Ud=F[0]*U, Gst=F[1]*G, eta=G>0?Ud/Gst:9.99;
+  const tsR=Math.max(0,(Ud/F[1]-Gw-Gd)/(25*A));
+  const S=[_L`§Eigengewicht (Beton 25 kN/m³)`,
+    _L`Sohle ${f(L)} · ${f(B)} · ${f(ts)} · 25 = ${f(Gs,1)} kN · Wände ${f(Gw,1)} kN · Decke ${f(Gd,1)} kN`,
+    `G<sub>stb,k</sub> = ${f(G,1)} kN`,
+    _L`§Auftrieb`,
+    `A<sub>k</sub> = γ<sub>w</sub> · h<sub>w</sub> · L · B = 10 · ${f(hw)} · ${f(A,1)} = ${f(U,1)} kN`,
+    _L`§Nachweis BS-${bs} (γ<sub>G,dst</sub> = ${f(F[0])}, γ<sub>G,stb</sub> = ${f(F[1])})`,
+    `A<sub>d</sub> = ${f(F[0])} · ${f(U,1)} = ${f(Ud,1)} kN ${eta<=1?'≤':'>'} G<sub>stb,d</sub> = ${f(F[1])} · ${f(G,1)} = ${f(Gst,1)} kN`, `η = ${f(eta,3)} ${ok(eta)}`,
+    _L`!Erforderliche Sohldicke bei sonst gleichem Bauwerk: t<sub>s,erf</sub> = ${f(tsR)} m`];
+  out.innerHTML = ablauf(_L`Auftrieb Wanne ${f(L)} × ${f(B)} m`, S);
+}
+function kaCoul(phi, d){ const p=radG(phi), dd=radG(d); return Math.cos(p)**2/(Math.cos(dd)*(1+Math.sqrt(Math.sin(p+dd)*Math.sin(p)/Math.cos(dd)))**2); }
+function updateStuetz(){
+  const out=document.getElementById('swk-out'); if(!out) return;
+  const H=num('swk-H'), B=num('swk-B'), bv=num('swk-bv')||0, tw=num('swk-tw'), ts=num('swk-ts'), phi=num('swk-phi'), g=num('swk-g'), q=num('swk-q')||0, df=+valOf('swk-df');
+  if(!(H>ts&&ts>0&&tw>0&&B>bv+tw&&bv>=0&&phi>0&&phi<50&&g>0&&q>=0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const f=dG, delta=df*phi, Ka=kaCoul(phi,delta), Kah=Ka*Math.cos(radG(delta)), hs=H-ts, bh=B-bv-tw, td=Math.tan(radG(delta));
+  const Vw=25*tw*hs, Vs=25*B*ts, Ve=g*bh*hs, EahG=0.5*g*H*H*Kah, EahQ=q*H*Kah, EavG=EahG*td, EavQ=EahQ*td;
+  const VG=Vw+Vs+Ve+EavG;
+  const MG=Vw*(B/2-(bv+tw/2))+Vs*0+Ve*(B/2-(B-bh/2))+EavG*(B/2-B)+EahG*H/3, MQ=EahQ*H/2+EavQ*(B/2-B);
+  const eG=MG/VG, eU=(MG+MQ)/VG, r1=Math.abs(eG)/(B/6), r2=Math.abs(eU)/(B/3);
+  const Hd=1.35*EahG+1.5*EahQ, Rtk=VG*Math.tan(radG(phi)), Rtd=Rtk/1.1;
+  const S=[_L`§Erddruck an der Ersatzwand`,
+    `δ<sub>a</sub> = ${f(delta,1)}° · K<sub>a</sub> = ${f(Ka,4)} · K<sub>ah</sub> = K<sub>a</sub> · cos δ<sub>a</sub> = ${f(Kah,4)}`,
+    `E<sub>ah,G</sub> = ½ · ${f(g,1)} · ${f(H)}² · ${f(Kah,4)} = ${f(EahG,1)} kN/m · E<sub>ah,Q</sub> = ${f(q,1)} · ${f(H)} · ${f(Kah,4)} = ${f(EahQ,1)} kN/m`,
+    _L`§Ständige Vertikallasten (je m)`,
+    _L`Wand ${f(Vw,1)} · Sohle ${f(Vs,1)} · Erde über dem hinteren Sporn ${f(Ve,1)} · E<sub>av,G</sub> ${f(EavG,1)} → V<sub>G</sub> = ${f(VG,1)} kN/m`,
+    _L`§Kippen: Lage der Resultierenden (Moment um die Sohlmitte)`,
+    `M<sub>G</sub> = ${f(MG,1)} kNm/m · M<sub>Q</sub> = ${f(MQ,1)} kNm/m`,
+    `e<sub>G</sub> = M<sub>G</sub>/V<sub>G</sub> = ${f(eG,3)} m ≤ B/6 = ${f(B/6,3)} m ${ok(r1)}`,
+    `e = (M<sub>G</sub> + M<sub>Q</sub>)/V<sub>G</sub> = ${f(eU,3)} m ≤ B/3 = ${f(B/3,3)} m ${ok(r2)}`,
+    _L`§Gleiten (γ<sub>R,h</sub> = 1,10, δ<sub>S</sub> = φ′)`,
+    `R<sub>t,d</sub> = ${f(VG,1)} · tan ${f(phi,1)}° / 1,10 = ${f(Rtd,1)} kN/m`, `H<sub>d</sub> = 1,35 · ${f(EahG,1)} + 1,50 · ${f(EahQ,1)} = ${f(Hd,1)} kN/m`, `H<sub>d</sub>/R<sub>t,d</sub> = ${f(Hd/Rtd,3)} ≤ 1 ${ok(Hd/Rtd)}`,
+    tt('!Erdwiderstand vor dem vorderen Sporn nicht angesetzt (auf der sicheren Seite).')];
+  out.innerHTML = ablauf(_L`Winkelstützwand H = ${f(H)} m, B = ${f(B)} m`, S);
+}
+function updateBlum(){
+  const out=document.getElementById('blu-out'); if(!out) return;
+  const h=num('blu-h'), phi=num('blu-phi'), g=num('blu-g'), q=num('blu-q')||0, bs=valOf('blu-bs');
+  if(!(h>0&&phi>0&&phi<50&&g>0&&q>=0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const F={P:[1.35,1.50,1.40],T:[1.20,1.30,1.30]}[bs], f=dG, Ka=Math.tan(radG(45-phi/2))**2, Kp=Math.tan(radG(45+phi/2))**2;
+  const A=F[0]*Ka*g, Bq=F[1]*Ka*q, Cp=Kp*g/F[2];
+  const Mf=t=>A*(h+t)**3/6+Bq*(h+t)**2/2-Cp*t**3/6;
+  let lo=0, hi=1; while(Mf(hi)>0&&hi<200) hi*=2; for(let k=0;k<100;k++){ const m=(lo+hi)/2; if(Mf(m)>0) lo=m; else hi=m; } const t0=(lo+hi)/2;
+  const Qz=z=>A*(h+z)**2/2+Bq*(h+z)-Cp*z*z/2; let a=0, b=t0; for(let k=0;k<100;k++){ const m=(a+b)/2; if(Qz(m)>0) a=m; else b=m; } const zm=(a+b)/2;
+  const Mmax=A*(h+zm)**3/6+Bq*(h+zm)**2/2-Cp*zm**3/6, C=Cp*t0*t0/2-A*(h+t0)**2/2-Bq*(h+t0);
+  const S=[_L`§Erddruckbeiwerte und Bemessungswerte (BS-${bs})`,
+    `K<sub>a</sub> = ${f(Ka,4)} · K<sub>p</sub> = ${f(Kp,4)}`,
+    `e<sub>a,d</sub>(z) = ${f(A,3)} · z + ${f(Bq,3)} kN/m² · e<sub>p,d</sub>(z′) = ${f(Cp,3)} · z′ kN/m²`,
+    _L`§Theoretischer Fußpunkt`,
+    `${f(A,3)} · (h + t<sub>0</sub>)³/6 + ${f(Bq,3)} · (h + t<sub>0</sub>)²/2 − ${f(Cp,3)} · t<sub>0</sub>³/6 = 0 → t<sub>0</sub> = ${f(t0,3)} m`,
+    `t<sub>erf</sub> = 1,2 · t<sub>0</sub> = ${f(1.2*t0)} m`, `L<sub>Wand</sub> ≥ h + t<sub>erf</sub> = ${f(h+1.2*t0)} m`,
+    _L`§Größtes Moment (Querkraftnullpunkt unter der Sohle)`,
+    _L`z′ = ${f(zm,3)} m → M<sub>max,d</sub> = ${f(Mmax,1)} kNm/m · Ersatzkraft C = ${f(C,1)} kN/m`,
+    _L`!Erforderliches Widerstandsmoment für S 240 GP (f<sub>y</sub> = 240 N/mm²): W ≥ ${f(Mmax*1e3/240,0)} cm³/m`];
+  out.innerHTML = ablauf(_L`Spundwand h = ${f(h)} m`, S);
+}
+function updatePfahl(){
+  const out=document.getElementById('pfa-out'); if(!out) return;
+  const D=num('pfa-D'), qb=num('pfa-qb')||0, t1=num('pfa-t1')||0, q1=num('pfa-q1')||0, t2=num('pfa-t2')||0, q2=num('pfa-q2')||0, G=num('pfa-G')||0, Q=num('pfa-Q')||0;
+  if(!(D>0&&qb>=0&&t1>=0&&t2>=0&&q1>=0&&q2>=0&&t1+t2>0&&G+Q>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const f=dG, Ab=Math.PI*D*D/4, U=Math.PI*D, Rb=qb*Ab, R1=q1*U*t1, R2=q2*U*t2, Rk=Rb+R1+R2, Rd=Rk/1.4, Ed=1.35*G+1.5*Q;
+  const S=[_L`§Geometrie`, `A<sub>b</sub> = π · ${f(D)}²/4 = ${f(Ab,4)} m² · U = π · ${f(D)} = ${f(U,4)} m`,
+    _L`§Charakteristischer Widerstand`,
+    `R<sub>b,k</sub> = ${f(qb,0)} · ${f(Ab,4)} = ${f(Rb,1)} kN`,
+    `R<sub>s,k</sub> = ${f(q1,0)} · ${f(U,4)} · ${f(t1)} + ${f(q2,0)} · ${f(U,4)} · ${f(t2)} = ${f(R1,1)} + ${f(R2,1)} = ${f(R1+R2,1)} kN`,
+    `R<sub>c,k</sub> = ${f(Rb,1)} + ${f(R1+R2,1)} = ${f(Rk,1)} kN`,
+    _L`§Nachweis (BS-P, γ<sub>t</sub> = 1,40)`,
+    `E<sub>c,d</sub> = 1,35 · ${f(G,0)} + 1,50 · ${f(Q,0)} = ${f(Ed,1)} kN`, `R<sub>c,d</sub> = R<sub>c,k</sub>/γ<sub>t</sub> = ${f(Rk,1)}/1,40 = ${f(Rd,1)} kN`, `E<sub>c,d</sub>/R<sub>c,d</sub> = ${f(Ed/Rd,3)} ≤ 1 ${ok(Ed/Rd)}`,
+    _L`!Anteil der Mantelreibung ${f((R1+R2)/Rk*100,0)} %.`];
+  out.innerHTML = ablauf(_L`Pfahl D = ${f(D)} m`, S);
+}
+function skAuftrieb(){
+  const x0=110, x1=290, yb=150, ts=12, tw=12, ht=78; let o='';
+  o+=`<rect x="10" y="62" width="380" height="${yb+30-62}" fill="#dfe3f2"/>`+ln(10,62,390,62,SK.acc,1.2)+tl(16,58,'GW','start',SK.acc);
+  o+=`<rect x="${x0+tw}" y="${yb-ts-ht}" width="${x1-x0-2*tw}" height="${ht}" fill="#ffffff"/>`;
+  o+=poly([[x0,yb-ts],[x1,yb-ts],[x1,yb],[x0,yb]],SK.fill2)+poly([[x0,yb-ts-ht],[x0+tw,yb-ts-ht],[x0+tw,yb-ts],[x0,yb-ts]],SK.fill2)+poly([[x1-tw,yb-ts-ht],[x1,yb-ts-ht],[x1,yb-ts],[x1-tw,yb-ts]],SK.fill2);
+  for(let i=0;i<7;i++){ const x=x0+12+i*26; o+=vec(x,yb+26,x,yb+3,SK.load,1.3); }
+  o+=it(200,yb+40,'γ<tspan font-size="9" dy="3">w</tspan><tspan dy="-3">·h</tspan><tspan font-size="9" dy="3">w</tspan>','middle',SK.load,12);
+  o+=vec(200,yb-ts-ht+8,200,yb-ts-30,SK.acc,1.8)+it(206,yb-ts-44,'G','start',SK.acc,12);
+  o+=dimL(x1+26,62,x1+26,yb,'h<tspan font-size="9" dy="3">w</tspan>',-0.01,10);
+  return sv(400,196,tt('Auftrieb'),o);
+}
+function skStuetzwand(){
+  const yb=170, B=170, x0=110, bv=30, tw=16, ts=16, H=130, xw=x0+bv; let o='';
+  o+=`<rect x="${xw+tw}" y="${yb-H}" width="${x0+B-xw-tw}" height="${H-ts}" fill="#f5efe4"/>`+`<rect x="10" y="${yb-28}" width="${x0-10}" height="28" fill="#f5efe4"/>`+`<rect x="${x0+B}" y="${yb-H}" width="${390-x0-B}" height="${H}" fill="#f5efe4"/>`;
+  o+=ln(xw+tw,yb-H,390,yb-H,'#8a6d3b',1.2)+ln(10,yb-28,xw,yb-28,'#8a6d3b',1.2);
+  o+=poly([[x0,yb-ts],[x0+B,yb-ts],[x0+B,yb],[x0,yb]],SK.fill2)+poly([[xw,yb-H],[xw+tw,yb-H],[xw+tw,yb-ts],[xw,yb-ts]],SK.fill2);
+  o+=ln(x0+B,yb-H,x0+B,yb,SK.acc,1.2,'stroke-dasharray="5 4"')+tl(x0+B+4,yb-H+12,tt('Ersatzwand'),'start',SK.acc);
+  const k=0.55; o+=poly([[x0+B,yb-H],[x0+B+0.01,yb-H],[x0+B+H*k*0.55,yb],[x0+B,yb]],'rgba(194,65,12,0.15)',SK.load,1);
+  o+=vec(x0+B+H*k*0.42,yb-H/3,x0+B+6,yb-H/3,SK.load,1.6)+it(x0+B+H*k*0.42+4,yb-H/3-4,'E<tspan font-size="9" dy="3">ah</tspan>','start',SK.load,12);
+  o+=dimL(x0,yb+14,x0+B,yb+14,'B',-0.01,10)+dimL(x0-30,yb-H,x0-30,yb,'H',-0.01,-10);
+  return sv(400,206,tt('Winkelstützwand'),o);
+}
+function skBlum(){
+  const xw=200, y0=20, h=90, t=80, yS=y0+h, yF=yS+t*0.83, ka=0.32, kp=1.3; let o='';
+  o+=`<rect x="20" y="${y0}" width="${xw-20}" height="${h+t+10}" fill="#f5efe4"/><rect x="${xw}" y="${yS}" width="${380-xw}" height="${t+10}" fill="#f5efe4"/>`;
+  o+=ln(20,y0,xw,y0,'#8a6d3b',1.2)+ln(xw,yS,380,yS,'#8a6d3b',1.2);
+  o+=poly([[xw,y0],[xw-(h+t*0.83)*ka,yF],[xw,yF]],'rgba(194,65,12,0.15)',SK.load,1)+poly([[xw,yS],[xw+t*0.83*kp,yF],[xw,yF]],'rgba(15,110,86,0.15)',SK.m,1);
+  o+=`<rect x="${xw-3}" y="${y0-8}" width="6" height="${h+t+8}" fill="#475569"/>`;
+  o+=vec(xw+46,yF+14,xw+5,yF+14,SK.acc,1.8)+it(xw+50,yF+18,'C','start',SK.acc,12);
+  o+=dimL(xw+120,y0,xw+120,yS,'h',-0.01,10)+dimL(xw+120,yS,xw+120,yF,'t₀',-0.01,10);
+  o+=tl(60,y0+40,tt('aktiver Erddruck'),'start',SK.load)+tl(xw+20,yS+16,tt('Erdwiderstand'),'start',SK.m);
+  return sv(400,206,tt('Spundwand nach Blum'),o);
+}
+function skPfahl(){
+  const xc=170, w=22, y0=40, yD=90, yE=190; let o='';
+  o+=`<rect x="20" y="${y0}" width="300" height="${yD-y0}" fill="#f3f4f6"/><rect x="20" y="${yD}" width="300" height="${yE+20-yD}" fill="#efe7da"/>`;
+  o+=tl(26,y0+14,tt('weiche Deckschicht'),'start')+tl(26,yD+14,tt('tragfähiger Boden'),'start');
+  o+=poly([[xc-w/2,y0-6],[xc+w/2,y0-6],[xc+w/2,yE],[xc-w/2,yE]],'#9ca3af');
+  o+=vec(xc,y0-36,xc,y0-8,SK.load,1.8)+it(xc+8,y0-22,'E<tspan font-size="9" dy="3">c,d</tspan>','start',SK.load,12);
+  for(let i=0;i<4;i++){ const y=yD+16+i*22; o+=vec(xc-w/2-6,y+8,xc-w/2-6,y-8,SK.m,1.3)+vec(xc+w/2+6,y+8,xc+w/2+6,y-8,SK.m,1.3); }
+  o+=vec(xc,yE+28,xc,yE+3,SK.m,1.8)+it(xc+8,yE+22,'R<tspan font-size="9" dy="3">b,k</tspan>','start',SK.m,12)+it(xc+w/2+14,yD+50,'R<tspan font-size="9" dy="3">s,k</tspan>','start',SK.m,12);
+  o+=dimL(xc-w/2,yE+40,xc+w/2,yE+40,'D',-0.01,10);
+  return sv(340,236,tt('Pfahl'),o);
 }
 
 // ── Böschung (unendlich lange Böschung) ──
@@ -9810,6 +9949,139 @@ Object.assign(CONTENT, {
     </div>
   `,
 
+  'grundbau/flach/auftrieb': () => _L`
+    <div class="card">
+      <div class="card-title">Auftrieb — Grenzzustand UPL</div>
+      ${fig(skAuftrieb(),tt('Wanne im Grundwasser: Der Wasserdruck auf die Sohle hebt das Bauwerk, nur das Eigengewicht hält dagegen.'))}
+      <p>Ein Keller oder eine Baugrubensohle im Grundwasser erfährt von unten den Wasserdruck γ<sub>w</sub>·h<sub>w</sub>. Die Wasserdrücke auf die Wände heben sich seitlich auf, übrig bleibt die nach oben gerichtete Auftriebskraft. Sie muss durch ständige Lasten sicher überdrückt werden — veränderliche Lasten dürfen dabei nicht helfen.</p>
+      <div class="formula-box">
+        A<sub>k</sub> = γ<sub>w</sub> · h<sub>w</sub> · A<sub>Sohle</sub><br>
+        γ<sub>G,dst</sub> · A<sub>k</sub> ≤ γ<sub>G,stb</sub> · G<sub>stb,k</sub>
+        <div class="comment">γ<sub>w</sub> = 10 kN/m³ · h<sub>w</sub> — Wasserhöhe über der Sohlunterkante · G<sub>stb,k</sub> — ständige, stabilisierende Lasten (Sohle, Wände, Decken, Auflast)</div>
+      </div>
+      ${textTable([tt('Beiwert'),'BS-P','BS-T','BS-A'], [
+        [tt('γ_G,dst destabilisierend (Auftrieb)'),'1,05','1,05','1,00'],
+        [tt('γ_G,stb stabilisierend (Eigengewicht)'),'0,95','0,95','0,95'],
+      ])}
+      <div class="legend">DIN 1054, Tab. A 2.1 (UPL)</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Worauf es ankommt</div>
+      <ul>
+        <li>Maßgebend ist oft der <b>Bauzustand</b>: Decken und Ausbau fehlen noch, die Grundwasserabsenkung wird abgeschaltet.</li>
+        <li>Der Bemessungswasserstand ist der höchste zu erwartende Grundwasserstand (z. B. HGW mit Zuschlag), nicht der beim Aushub gemessene.</li>
+        <li>Reibung zwischen Wand und Boden wird meist nicht angesetzt (auf der sicheren Seite).</li>
+        <li>Abhilfe: dickere Sohle, Sohlüberstand mit Erdauflast, Zugpfähle oder Anker, Ballast, im Bauzustand Flutöffnungen.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Auftrieb berechnen (rechteckige Wanne)</div>
+      <div class="calc-grid">
+        ${field(tt('Länge L [m]'), inp('upl-L', 12, 'updateAuftrieb()'))}
+        ${field(tt('Breite B [m]'), inp('upl-B', 10, 'updateAuftrieb()'))}
+        ${field(tt('Sohldicke t<sub>s</sub> [m]'), inp('upl-ts', 0.5, 'updateAuftrieb()'))}
+        ${field(tt('Wandhöhe h<sub>W</sub> [m]'), inp('upl-hw', 3.0, 'updateAuftrieb()'))}
+        ${field(tt('Wanddicke t<sub>W</sub> [m]'), inp('upl-tw', 0.3, 'updateAuftrieb()'))}
+        ${field(tt('Deckendicke t<sub>D</sub> [m] (0 = Bauzustand)'), inp('upl-td', 0.25, 'updateAuftrieb()'))}
+        ${field(tt('Wasserhöhe h<sub>w</sub> über Sohlunterkante [m]'), inp('upl-h', 2.0, 'updateAuftrieb()'))}
+        ${field(tt('Bemessungssituation'), sel('upl-bs', [['P','BS-P'],['T','BS-T'],['A','BS-A']], 'P', 'updateAuftrieb()'))}
+      </div>
+      <div class="calc-out" id="upl-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Grundbau → Auftrieb)</a>
+    </div>`,
+  'grundbau/stuetz/stuetzwand': () => _L`
+    <div class="card">
+      <div class="card-title">Winkelstützwand — Tragwirkung</div>
+      ${fig(skStuetzwand(),tt('Winkelstützwand: Erddruck auf die Ersatzwand durch das Spornende, die Erde über dem hinteren Sporn wirkt als Gewicht mit.'))}
+      <p>Eine Winkelstützwand hält einen Geländesprung. Der Erddruck schiebt und kippt die Wand nach vorn; dagegen wirken das Gewicht der Wand und — das ist der Trick — die Erde über dem hinteren Sporn. Gerechnet wird mit einer <b>Ersatzwand</b>: einer lotrechten Fläche durch das Ende des hinteren Sporns über die ganze Höhe H.</p>
+      <div class="formula-box">
+        K<sub>a</sub> = cos²φ′ / ( cos δ<sub>a</sub> · [1 + √(sin(φ′ + δ<sub>a</sub>) · sin φ′ / cos δ<sub>a</sub>)]² )<br>
+        E<sub>ah,G</sub> = ½ · γ · H² · K<sub>ah</sub> &nbsp;in H/3 · E<sub>ah,Q</sub> = q · H · K<sub>ah</sub> &nbsp;in H/2
+        <div class="comment">Coulomb für lotrechte Wand und waagerechtes Gelände · K<sub>ah</sub> = K<sub>a</sub> · cos δ<sub>a</sub> · an der Ersatzwand (Erde an Erde) δ<sub>a</sub> bis φ′, meist 2/3 · φ′</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Nachweise</div>
+      ${textTable([tt('Nachweis'),tt('Bedingung'),tt('Bemerkung')], [
+        [tt('Kippen (Lage der Resultierenden)'),'e<sub>G</sub> ≤ B/6 · e ≤ B/3',tt('DIN 1054: nur ständige Lasten keine klaffende Fuge, mit Auflast höchstens bis zur Mitte')],
+        [tt('Gleiten'),'H<sub>d</sub> ≤ V<sub>G,k</sub> · tan δ<sub>S</sub> / 1,10',tt('nur ständige Vertikallasten, δ<sub>S</sub> = φ′ bei Ortbeton')],
+        [tt('Grundbruch'),'V<sub>d</sub> ≤ R<sub>n,k</sub> / 1,40',tt('mit Ausmitte und Neigung wie bei der Flachgründung')],
+      ])}
+      <a class="applink" href="#/grundbau/flach/grundbruch">→ Grundbruch genauer nach DIN 4017</a>
+    </div>
+    <div class="card">
+      <div class="card-title">Stützwand berechnen (Kippen und Gleiten)</div>
+      <div class="calc-grid">
+        ${field(tt('Wandhöhe H bis Sohlunterkante [m]'), inp('swk-H', 4.0, 'updateStuetz()'))}
+        ${field(tt('Sohlbreite B [m]'), inp('swk-B', 2.8, 'updateStuetz()'))}
+        ${field(tt('vorderer Sporn b<sub>v</sub> [m]'), inp('swk-bv', 0.5, 'updateStuetz()'))}
+        ${field(tt('Wanddicke t<sub>W</sub> [m]'), inp('swk-tw', 0.3, 'updateStuetz()'))}
+        ${field(tt('Sohldicke t<sub>s</sub> [m]'), inp('swk-ts', 0.4, 'updateStuetz()'))}
+        ${field('φ′<sub>k</sub> [°]', inp('swk-phi', 32.5, 'updateStuetz()'))}
+        ${field(tt('Wichte γ [kN/m³]'), inp('swk-g', 19, 'updateStuetz()'))}
+        ${field(tt('Auflast q [kN/m²]'), inp('swk-q', 10, 'updateStuetz()'))}
+        ${field('δ<sub>a</sub> / φ′', sel('swk-df', [['0','0'],['0.5','1/2'],['0.667','2/3'],['1','1']], '0.667', 'updateStuetz()'))}
+      </div>
+      <div class="calc-out" id="swk-out"></div>
+      <a class="applink" href="size.html">→ Mit Grundbruch, Skizze und Bericht in „Bemessung“ (Grundbau → Stützwand)</a>
+    </div>`,
+  'grundbau/stuetz/spundwand': () => _L`
+    <div class="card">
+      <div class="card-title">Im Boden eingespannte Spundwand (Blum)</div>
+      ${fig(skBlum(),tt('Nicht verankerte Spundwand: aktiver Erddruck hinten, Erdwiderstand vorn; der Fuß wird durch die Ersatzkraft C gehalten.'))}
+      <p>Eine nicht gestützte Spundwand trägt den Erddruck allein über die Einspannung im Boden. Blum ersetzt den Gegenerddruck unterhalb des Drehpunkts durch eine Einzelkraft C im <b>theoretischen Fußpunkt</b>. Die Tiefe t<sub>0</sub> folgt aus dem Momentengleichgewicht um diesen Punkt; für die Kraft C braucht die Wand etwas mehr Länge.</p>
+      <div class="formula-box">
+        e<sub>a,d</sub>(z) = γ<sub>G</sub> · K<sub>a</sub> · γ · z + γ<sub>Q</sub> · K<sub>a</sub> · q &nbsp;·&nbsp; e<sub>p,d</sub>(z′) = K<sub>p</sub> · γ · z′ / γ<sub>R,e</sub><br>
+        Σ M um den Fußpunkt = 0 → t<sub>0</sub> · t<sub>erf</sub> = 1,2 · t<sub>0</sub>
+        <div class="comment">z ab Geländeoberkante, z′ ab Baugrubensohle · K<sub>a</sub> = tan²(45° − φ′/2), K<sub>p</sub> = tan²(45° + φ′/2) (Rankine, δ = 0, auf der sicheren Seite) · γ<sub>R,e</sub> = 1,40 (BS-P)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Spundwand berechnen</div>
+      <div class="calc-grid">
+        ${field(tt('Aushubtiefe h [m]'), inp('blu-h', 3.0, 'updateBlum()'))}
+        ${field('φ′<sub>k</sub> [°]', inp('blu-phi', 32.5, 'updateBlum()'))}
+        ${field(tt('Wichte γ [kN/m³]'), inp('blu-g', 19, 'updateBlum()'))}
+        ${field(tt('Auflast q [kN/m²]'), inp('blu-q', 10, 'updateBlum()'))}
+        ${field(tt('Bemessungssituation'), sel('blu-bs', [['P','BS-P'],['T','BS-T']], 'P', 'updateBlum()'))}
+      </div>
+      <div class="calc-out" id="blu-out"></div>
+      <a class="applink" href="size.html">→ Mit Profilwahl, Skizze und Bericht in „Bemessung“ (Grundbau → Spundwand)</a>
+    </div>`,
+  'grundbau/pfahl/axial': () => _L`
+    <div class="card">
+      <div class="card-title">Tragverhalten eines Einzelpfahls</div>
+      ${fig(skPfahl(),tt('Bohrpfahl: Die Last wird über Mantelreibung entlang der tragfähigen Schichten und über den Spitzendruck am Fuß abgegeben.'))}
+      <p>Pfähle leiten Lasten durch weiche Schichten in tragfähigen Baugrund. Der Widerstand setzt sich aus <b>Mantelreibung</b> und <b>Spitzendruck</b> zusammen. Beide brauchen Setzung, um sich zu entwickeln: die Mantelreibung schon nach wenigen Zentimetern, der Spitzendruck erst bei einer Setzung von etwa 10 % des Durchmessers. Deshalb gehört zu jedem Pfahl eine Widerstands-Setzungs-Linie.</p>
+      <div class="formula-box">
+        R<sub>c,k</sub> = R<sub>b,k</sub> + R<sub>s,k</sub> = q<sub>b,k</sub> · A<sub>b</sub> + Σ q<sub>s,k,i</sub> · U · t<sub>i</sub><br>
+        E<sub>c,d</sub> = γ<sub>G</sub> · G<sub>k</sub> + γ<sub>Q</sub> · Q<sub>k</sub> ≤ R<sub>c,d</sub> = R<sub>c,k</sub> / γ<sub>t</sub>
+        <div class="comment">A<sub>b</sub> = π·D²/4 — Fußfläche · U = π·D — Umfang · t<sub>i</sub> — Dicke der tragfähigen Schicht i · weiche Deckschichten tragen nicht mit</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Woher die Widerstände kommen</div>
+      <ul>
+        <li><b>Probebelastungen</b> (statisch oder dynamisch) am Ort — die beste Grundlage, ausgewertet mit Streuungsfaktoren ξ.</li>
+        <li><b>Erfahrungswerte</b> der EA-Pfähle: q<sub>b,k</sub> und q<sub>s,k</sub> in Abhängigkeit vom Spitzenwiderstand q<sub>c</sub> der Drucksonde (nichtbindige Böden) bzw. der Scherfestigkeit c<sub>u</sub> (bindige Böden).</li>
+        <li>In „Bemessung“ wird mit γ<sub>t</sub> = 1,40 gerechnet (Widerstand aus Erfahrungswerten).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Pfahlwiderstand berechnen</div>
+      <div class="calc-grid">
+        ${field(tt('Durchmesser D [m]'), inp('pfa-D', 0.9, 'updatePfahl()'))}
+        ${field('q<sub>b,k</sub> [kN/m²]', inp('pfa-qb', 2500, 'updatePfahl()'))}
+        ${field(tt('Schicht 1: Dicke t<sub>1</sub> [m]'), inp('pfa-t1', 4, 'updatePfahl()'))}
+        ${field(tt('Schicht 1: q<sub>s,k</sub> [kN/m²]'), inp('pfa-q1', 50, 'updatePfahl()'))}
+        ${field(tt('Schicht 2: Dicke t<sub>2</sub> [m]'), inp('pfa-t2', 6, 'updatePfahl()'))}
+        ${field(tt('Schicht 2: q<sub>s,k</sub> [kN/m²]'), inp('pfa-q2', 90, 'updatePfahl()'))}
+        ${field('G<sub>k</sub> [kN]', inp('pfa-G', 1200, 'updatePfahl()'))}
+        ${field('Q<sub>k</sub> [kN]', inp('pfa-Q', 500, 'updatePfahl()'))}
+      </div>
+      <div class="calc-out" id="pfa-out"></div>
+      <a class="applink" href="size.html">→ Mit bis zu drei Schichten, Skizze und Bericht in „Bemessung“ (Grundbau → Pfahl)</a>
+    </div>`,
   'grundbau/flach/sohlwiderstand': () => _L`
     <div class="card">
       <div class="card-title">Wann darf man die Tabellen verwenden? — DIN 1054, A 6.10</div>
@@ -10567,6 +10839,10 @@ Object.assign(AFTER, {
   'grundbau/flach/sohldruck': () => updateSohldruck(),
   'grundbau/flach/grundbruch': () => updateGB(),
   'grundbau/boeschung/boeschung': () => updateBoesch(),
+  'grundbau/flach/auftrieb': () => updateAuftrieb(),
+  'grundbau/stuetz/stuetzwand': () => updateStuetz(),
+  'grundbau/stuetz/spundwand': () => updateBlum(),
+  'grundbau/pfahl/axial': () => updatePfahl(),
   'stahlbeton/dauerhaftigkeit/deckung': () => updateDeckung(),
   'stahlbeton/bemessung/biegung': () => updateBiegung(),
   'stahlbeton/bemessung/querkraft': () => updateQuerkraft(),
@@ -10811,6 +11087,10 @@ const SEARCH_EXTRA = {
   'grundbau/boden/phasen': () => 'Wassergehalt Porenzahl Porenanteil Sättigung Trockendichte Korndichte Lagerungsdichte Konsistenzzahl',
   'grundbau/verformung/konsolidation': () => 'Konsolidation Terzaghi Zeitsetzung cv Zeitfaktor',
   'grundbau/boeschung/boeschung': () => 'Böschungsbruch Gleitkreis Bishop Fellenius Standsicherheit DIN 4084',
+  'grundbau/flach/auftrieb': () => 'Auftrieb UPL Grundwasser Wanne Sohle Keller Auftriebssicherheit Bauzustand',
+  'grundbau/stuetz/stuetzwand': () => 'Winkelstützwand Stützmauer Erddruck Coulomb Kippen Gleiten Ersatzwand Sporn',
+  'grundbau/stuetz/spundwand': () => 'Spundwand Blum Einbindetiefe Baugrube Verbau Erdwiderstand Fußpunkt',
+  'grundbau/pfahl/axial': () => 'Pfahl Bohrpfahl Mantelreibung Spitzendruck Pfahlwiderstand EA-Pfähle Tiefgründung',
 };
 const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[_\s]+/g,' ');
 function buildIndex(){

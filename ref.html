@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.67 -->
+<!-- kragr·ref v0.3.68 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1392,7 +1392,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.67';
+const REF_VERSION = '0.3.68';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -1589,6 +1589,7 @@ const FAECHER = {
           querkraft:      { title: 'Querkraft' },
           durchstanzen:   { title: 'Durchstanzen' },
           torsion:        { title: 'Torsion' },
+          platte2:        { title: 'Zweiachsig gespannte Platten' },
         }
       },
       bewehrung: {
@@ -1596,6 +1597,7 @@ const FAECHER = {
         themen: {
           querschnitte: { title: 'Bewehrungsquerschnitte und Platten' },
           verankerung:  { title: 'Verbund und Verankerung' },
+          zugkraft:     { title: 'Zugkraftdeckung und Staffelung' },
           matten:       { title: 'Matten, Biegerollen, Übergreifung' },
         }
       },
@@ -1604,6 +1606,7 @@ const FAECHER = {
         themen: {
           schlankheit: { title: 'Schlankheit und Lastausmitten' },
           bemessung:   { title: 'Stützen bemessen' },
+          zweiachsig:  { title: 'Zweiachsige Biegung' },
         }
       },
       gzg: {
@@ -1706,6 +1709,15 @@ const FAECHER = {
           brand:    { title: 'Abbrand (Brandschutz)' },
         }
       },
+      details: {
+        title: 'Ausklinkungen, Durchbrüche, Sonderformen',
+        themen: {
+          ausklinkung: { title: 'Ausklinkungen am Auflager' },
+          durchbruch:  { title: 'Durchbrüche' },
+          sattel:      { title: 'Satteldachträger' },
+          querzug:     { title: 'Querzug bei Anschlüssen' },
+        }
+      },
       verbindungen: {
         title: 'Verbindungsmittel — Grundlagen',
         themen: {
@@ -1718,7 +1730,7 @@ const FAECHER = {
   },
   mauerwerk: {
     title: 'Mauerwerk', tag: 'EC6',
-    sub: 'Steine, Maßordnung, Mörtel, f_k, Knicklänge, Wand, Teilflächenpressung, Kellerwand, Schub',
+    sub: 'Steine, Maßordnung, Mörtel, f_k, Knicklänge, Wand, Teilflächenpressung, Kellerwand, Schub, Ausfachung',
     kapitel: {
       allgemein: {
         title: "Allgemeines",
@@ -1744,6 +1756,7 @@ const FAECHER = {
           teilflaeche: { title: 'Teilflächenpressung' },
           keller:      { title: 'Kellerwand' },
           schub:       { title: 'Schubwand' },
+          ausfach:     { title: 'Ausfachungswand' },
         }
       },
     }
@@ -4894,6 +4907,271 @@ function skPfahl(){
   return sv(340,236,tt('Pfahl'),o);
 }
 
+
+// ── Mauerwerk: Ausfachungswand (wie size: nachweiseAF; DIN EN 1996-3/NA, Anhang NA.C, Tab. NA.C.1, vierseitig gehalten) ──
+const AFR_TAB = { 115:[[12,8],null], 150:[[12,8],[8,5]], 175:[[20,14],[13,9]], 240:[[36,25],[23,16]], 300:[[50,33],[35,23]] };
+function updateAusfach(){
+  const out=document.getElementById('afr-out'); if(!out) return;
+  const t=+valOf('afr-t'), sfk=+valOf('afr-sfk'), z=+valOf('afr-z'), h=num('afr-h'), l=num('afr-l'), f=deNum;
+  if(!(h>0&&l>0)){ out.innerHTML=tt('Bitte Höhe und Länge > 0 eingeben.'); return; }
+  const A=h*l, eps=Math.max(h,l)/Math.min(h,l), row=AFR_TAB[t][z===20?1:0];
+  const S=[_L`§Fläche und Seitenverhältnis`, `A = h · l = ${f(h,2)} · ${f(l,2)} = ${f(A,2)} m²`, _L`ε = größere/kleinere Seite = ${f(eps,2)}`];
+  if(!row){ out.innerHTML = ablauf(_L`Ausfachung t = ${t} mm`, [...S, _L`§Zulässige Fläche`, tt('!Ausfachungen mit t = 115 mm sind nur bis 8 m über Gelände zulässig — dickere Wand oder rechnerischer Nachweis.')]); return; }
+  const fz = sfk>=12 && t<=150 ? 4/3 : 1, a1=row[0]*fz, a2=row[1]*fz, k=Math.min(Math.max(eps-1,0),1), Az=a1+(a2-a1)*k;
+  out.innerHTML = ablauf(_L`Ausfachung t = ${t} mm`, [...S, _L`§Zulässige Fläche (Tab. NA.C.1, vierseitig gehalten)`,
+    ...(fz>1 ? [tt('!Steinfestigkeitsklasse ≥ 12 bei t ≤ 150 mm: Tabellenwerte um 1/3 erhöht')] : []),
+    _L`Tabelle: ε = 1,0 → ${f(a1,1)} m² · ε ≥ 2,0 → ${f(a2,1)} m²`,
+    `A<sub>zul</sub> = ${f(a1,1)} + (${f(a2,1)} − ${f(a1,1)}) · ${f(k,2)} = ${f(Az,2)} m²`,
+    `!A / A<sub>zul</sub> = ${f(A,2)} / ${f(Az,2)} = ${f(A/Az,3)} ${ok(A/Az)}`,
+    ...(A>Az ? [tt('!Zu groß: dickere Wand, zusätzliche Stütze oder Riegel (teilt die Fläche) oder rechnerischer Nachweis für Wind.')] : [])]);
+}
+const MWH = (x,y,w,h) => { let r=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#e7c9b0" stroke="#111" stroke-width="1.3"/>`; for(let yy=y+10; yy<y+h-2; yy+=10) r+=ln(x,yy,x+w,yy,'#b08968',0.6); return r; };
+function skTeilfl(){
+  const x0=30, y0=50, L=300, H=150, a1=70, lb=50, sp=H/2/Math.sqrt(3); let o=MWH(x0,y0,L,H);
+  o+=`<rect x="${x0+a1}" y="${y0-8}" width="${lb}" height="8" fill="#475569"/>`;
+  for(let k=0;k<3;k++){ const xx=x0+a1+lb*(k+0.5)/3; o+=vec(xx,y0-36,xx,y0-10,SK.load,1.4); }
+  o+=it(x0+a1+lb+6,y0-22,'N<tspan font-size="9" dy="3">Edc</tspan>','start',SK.load,12);
+  o+=poly([[x0+a1,y0],[x0+a1+lb,y0],[x0+a1+lb+sp,y0+H/2],[x0+a1-sp,y0+H/2]],'rgba(84,104,173,0.22)',SK.acc,1.2);
+  o+=ln(x0,y0+H/2,x0+L,y0+H/2,SK.dim,0.8,'stroke-dasharray="4 3"')+tl(x0+L-4,y0+H/2-4,tt('halbe Wandhöhe'),'end');
+  o+=dimL(x0+a1-sp,y0+H/2+16,x0+a1+lb+sp,y0+H/2+16,'l<tspan font-size="9" dy="3">efm</tspan>',-0.01,12);
+  o+=dimL(x0,y0-48,x0+a1,y0-48,'a<tspan font-size="9" dy="3">1</tspan>',-0.01,-8)+tl(x0+a1+lb+sp+6,y0+H/4,'60°','start',SK.acc);
+  return sv(360,220,tt('Teilflächenpressung'),o);
+}
+function skKeller(){
+  const xw=170, tw=32, y0=40, y1=190, he=110; let o='';
+  o+=`<rect x="30" y="${y1-he}" width="${xw-30}" height="${he+16}" fill="#efe7da"/>`+ln(30,y1-he,xw,y1-he,'#8b6b3e',1.4)+tl(36,y1-he-6,tt('Gelände'),'start');
+  o+=MWH(xw,y0,tw,y1-y0);
+  o+=`<rect x="${xw}" y="${y0-14}" width="150" height="14" fill="#cbd5e1" stroke="#111"/><rect x="${xw-10}" y="${y1}" width="170" height="16" fill="#cbd5e1" stroke="#111"/>`;
+  o+=poly([[xw,y1-he],[xw,y1],[xw-70,y1]],'rgba(194,65,12,0.15)',SK.load,1.1);
+  for(let i=1;i<=4;i++){ const yy=y1-he*(1-i/5), len=70*i/5; o+=vec(xw-len,yy,xw-2,yy,SK.load,1.1); }
+  o+=vec(xw+tw/2,y0-44,xw+tw/2,y0-16,SK.load,1.8)+it(xw+tw/2+8,y0-28,'n<tspan font-size="9" dy="3">Ed</tspan>','start',SK.load,12);
+  o+=`<path d="M ${xw+tw-4} ${y0} Q ${xw-tw+12} ${(y0+y1)/2} ${xw+tw-4} ${y1}" fill="none" stroke="${SK.acc}" stroke-width="1.6"/>`+tl(xw+tw+8,(y0+y1)/2,tt('Druckbogen'),'start',SK.acc);
+  o+=dimL(xw+tw+70,y0,xw+tw+70,y1,'h',-0.01,10)+dimL(42,y1-he,42,y1,'h<tspan font-size="9" dy="3">e</tspan>',-0.01,10);
+  return sv(360,236,tt('Kellerwand'),o);
+}
+function skSchub(){
+  const x0=80, y0=50, L=210, H=130, lc=150, smax=34; let o=MWH(x0,y0,L,H);
+  o+=`<rect x="${x0-8}" y="${y0-10}" width="${L+16}" height="10" fill="#cbd5e1" stroke="#111"/>`;
+  for(let k=0;k<5;k++){ const xx=x0+L*(k+0.5)/5; o+=vec(xx,y0-36,xx,y0-12,SK.load,1.2); }
+  o+=it(x0+L+12,y0-22,'N<tspan font-size="9" dy="3">Ed</tspan>','start',SK.load,12);
+  o+=vec(x0-60,y0-5,x0-10,y0-5,SK.load,2)+it(x0-58,y0-12,'V<tspan font-size="9" dy="3">Ed</tspan>','start',SK.load,12);
+  const yb=y0+H; o+=poly([[x0+L-lc,yb],[x0+L,yb+smax],[x0+L,yb]],'rgba(84,104,173,0.22)',SK.acc,1.2);
+  o+=it(x0+L+6,yb+smax,'σ<tspan font-size="9" dy="3">max</tspan>','start',SK.acc,12);
+  o+=dimL(x0+L-lc,yb+smax+16,x0+L,yb+smax+16,'l<tspan font-size="9" dy="3">c</tspan>',-0.01,12)+tl(x0+20,yb+16,tt('Fuge klafft'),'start',SK.load);
+  o+=dimL(x0-16,y0,x0-16,yb,'h',-0.01,-10);
+  return sv(360,240,tt('Schubwand'),o);
+}
+function skAusfach(){
+  const x0=50, y0=30, W=240, H=130; let o='';
+  o+=`<rect x="${x0-14}" y="${y0-12}" width="14" height="${H+24}" fill="#94a3b8" stroke="#111"/><rect x="${x0+W}" y="${y0-12}" width="14" height="${H+24}" fill="#94a3b8" stroke="#111"/>`;
+  o+=`<rect x="${x0-14}" y="${y0-12}" width="${W+28}" height="12" fill="#94a3b8" stroke="#111"/><rect x="${x0-14}" y="${y0+H}" width="${W+28}" height="12" fill="#94a3b8" stroke="#111"/>`;
+  o+=MWH(x0,y0,W,H);
+  [[0.3,0.35],[0.7,0.35],[0.5,0.65]].forEach(p=>{ const cx=x0+W*p[0], cy=y0+H*p[1]; o+=`<circle cx="${cx}" cy="${cy}" r="9" fill="none" stroke="${SK.load}" stroke-width="1.3"/><circle cx="${cx}" cy="${cy}" r="2" fill="${SK.load}"/>`; });
+  o+=tl(x0+W/2,y0+H*0.5+2,tt('Wind'),'middle',SK.load);
+  o+=dimL(x0,y0+H+38,x0+W,y0+H+38,'l',-0.01,12)+dimL(x0+W+30,y0,x0+W+30,y0+H,'h',-0.01,10);
+  return sv(340,214,tt('Ausfachungswand'),o);
+}
+
+// ── Stahlbeton: Zugkraftdeckung, zweiachsige Biegung, zweiachsige Platte (ref v0.3.68, wie size: nachweiseZK/SZ/PZ) ──
+function updateZugkraft(){
+  const out=document.getElementById('zkd-out'); if(!out) return;
+  const B=betonRow(valOf('zkd-c')), l=num('zkd-l'), q=num('zkd-q'), d=num('zkd-d'), cot=num('zkd-cot'), ds=+valOf('zkd-ds'), n=Math.round(num('zkd-n')), nd=Math.round(num('zkd-nd'));
+  if(!(l>0&&q>0&&d>0&&cot>=1&&cot<=3&&n>=2&&nd>=2&&nd<=n)){ out.innerHTML=tt('Bitte gültige Werte eingeben (1 ≤ cot θ ≤ 3, mindestens 2 durchlaufende Stäbe).'); return; }
+  const f=dG, L=l*1000, z=0.9*d, al=z*cot/2, As=Math.PI*ds*ds/4, Fb=As*SB.fyd/1000, Fd=nd*Fb, Fg=n*Fb;
+  const fbd=2.25*B[5]/SB.gc, lr=ds/4*SB.fyd/fbd, lbd=Math.max(lr, 0.3*lr, 10*ds, 100);
+  const M=x=>q*x*(L-x)/2/1e6, Mmax=q*l*l/8, Fmax=Mmax/(z/1000);
+  // verschobene Zugkraftlinie: F(x) = M(x + a_l)/z links der Mitte (Maximum M_max im Bereich ± a_l um die Mitte)
+  const Fs=x=>{ const xx = x<L/2 ? Math.min(x+al, L/2) : Math.max(x-al, L/2); return M(xx)/(z/1000); };
+  let x1=null; if(Fmax>Fd+1e-9){ let lo=0, hi=L/2; for(let k=0;k<80;k++){ const m=(lo+hi)/2; if(Fs(m)>Fd) hi=m; else lo=m; } x1=(lo+hi)/2; }
+  const anteil=nd/n;
+  const S=[_L`§Hebelarm und Versatzmaß`,
+    `z = 0,9 · d = 0,9 · ${f(d,0)} = ${f(z,1)} mm · a<sub>l</sub> = z · cot θ/2 = ${f(z,1)} · ${f(cot)}/2 = ${f(al,0)} mm`,
+    _L`§Größte Zugkraft und Tragfähigkeit der Stäbe`,
+    `M<sub>Ed,max</sub> = q · l²/8 = ${f(q,1)} · ${f(l)}²/8 = ${f(Mmax,1)} kNm → F<sub>sd,max</sub> = M/z = ${f(Fmax,1)} kN`,
+    _L`je Stab Ø${ds}: F = ${f(As,0)} · ${f(SB.fyd,1)} = ${f(Fb,1)} kN · ${n} Stäbe: F<sub>Rd</sub> = ${f(Fg,1)} kN`,
+    `F<sub>sd,max</sub>/F<sub>Rd</sub> = ${f(Fmax/Fg,3)} ≤ 1 ${ok(Fmax/Fg)}`,
+    _L`§Verankerungslänge (guter Verbund, gerade Stabenden)`,
+    `f<sub>bd</sub> = 2,25 · f<sub>ctk;0,05</sub>/γ<sub>c</sub> = 2,25 · ${f(B[5],1)}/1,5 = ${f(fbd)} N/mm² · l<sub>b,rqd</sub> = Ø/4 · f<sub>yd</sub>/f<sub>bd</sub> = ${f(lr,0)} mm → l<sub>bd</sub> = ${f(lbd,0)} mm`,
+    _L`§Staffelung`];
+  if(x1===null) S.push(_L`Die ${nd} durchlaufenden Stäbe (F<sub>Rd</sub> = ${f(Fd,1)} kN) decken die verschobene Zugkraftlinie überall.`);
+  else S.push(_L`${nd} durchlaufende Stäbe: F<sub>Rd</sub> = ${f(Fd,1)} kN → verschobene Zugkraftlinie überschreitet diesen Wert ab x = ${f(x1/1000,3)} m`,
+    _L`gestaffelte Stäbe (${n-nd} Ø${ds}) beginnen bei x = ${f(x1/1000,3)} − ${f(lbd/1000,3)} = <b>${f(Math.max(0,x1-lbd)/1000,2)} m</b> und enden symmetrisch bei ${f((L-Math.max(0,x1-lbd))/1000,2)} m`);
+  S.push(_L`§Bewehrung bis zum Auflager`, _L`${nd}/${n} = ${f(anteil*100,0)} % ≥ 25 % ${ok(0.25/anteil)}`);
+  out.innerHTML = ablauf(_L`Zugkraftdeckung l = ${f(l)} m, ${n} Ø${ds}`, S);
+}
+function updateZweiachsig(){
+  const out=document.getElementById('zwa-out'); if(!out) return;
+  const N=num('zwa-N'), NR=num('zwa-NR'), My=Math.abs(num('zwa-My')||0), MRy=num('zwa-MRy'), Mz=Math.abs(num('zwa-Mz')||0), MRz=num('zwa-MRz');
+  if(!(N>=0&&NR>0&&MRy>0&&MRz>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const f=dG, nr=N/NR, a = nr<=0.1 ? 1 : nr<=0.7 ? 1+0.5*(nr-0.1)/0.6 : nr<=1 ? 1.5+0.5*(nr-0.7)/0.3 : 2, ia=(Mz/MRz)**a+(My/MRy)**a;
+  const S=[_L`§Exponent a`, `N<sub>Ed</sub>/N<sub>Rd</sub> = ${f(N,0)}/${f(NR,0)} = ${f(nr,3)} → a = ${f(a,3)}`,
+    ...(nr>1 ? [tt('!N<sub>Ed</sub> > N<sub>Rd</sub>: Der Querschnitt trägt die Normalkraft nicht.')] : []),
+    _L`§Interaktion (Gl. 5.39)`,
+    `(${f(Mz,1)}/${f(MRz,1)})<sup>${f(a,3)}</sup> + (${f(My,1)}/${f(MRy,1)})<sup>${f(a,3)}</sup> = ${f((Mz/MRz)**a,3)} + ${f((My/MRy)**a,3)} = ${f(ia,3)} ≤ 1 ${ok(nr>1?9.99:ia)}`,
+    _L`!Zum Vergleich linear (a = 1): ${f(Mz/MRz+My/MRy,3)} — der Exponent a > 1 nutzt die Reserve der schrägen Nulllinie.`];
+  out.innerHTML = ablauf(_L`Zweiachsige Biegung N<sub>Ed</sub> = ${f(N,0)} kN`, S);
+}
+function updatePlatte2(){
+  const out=document.getElementById('pl2-out'); if(!out) return;
+  const a=num('pl2-lx'), b=num('pl2-ly'), q=num('pl2-q');
+  if(!(a>0&&b>0&&q>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const f=dG, lx=Math.min(a,b), ly=Math.max(a,b), kx=ly**4/(lx**4+ly**4), ky=1-kx, nx=1-5/6*(lx/ly)**2*kx, ny=1-5/6*(ly/lx)**2*ky;
+  const mx=nx*kx*q*lx*lx/8, my=ny*ky*q*ly*ly/8;
+  const S=[_L`§Lastaufteilung (gleiche Durchbiegung der Streifen)`,
+    `l<sub>x</sub> = ${f(lx)} m, l<sub>y</sub> = ${f(ly)} m → l<sub>y</sub>/l<sub>x</sub> = ${f(ly/lx,3)}`,
+    `k<sub>x</sub> = ${f(ly,2)}⁴/(${f(lx,2)}⁴ + ${f(ly,2)}⁴) = ${f(kx,4)} · k<sub>y</sub> = ${f(ky,4)}`,
+    _L`§Abminderung nach Marcus (Drillsteifigkeit)`,
+    `ν<sub>x</sub> = 1 − 5/6 · (${f(lx)}/${f(ly)})² · ${f(kx,4)} = ${f(nx,4)} · ν<sub>y</sub> = 1 − 5/6 · (${f(ly)}/${f(lx)})² · ${f(ky,4)} = ${f(ny,4)}`,
+    _L`§Feldmomente`,
+    `m<sub>x</sub> = ${f(nx,4)} · ${f(kx,4)} · ${f(q,1)} · ${f(lx)}²/8 = ${f(mx,2)} kNm/m`,
+    `m<sub>y</sub> = ${f(ny,4)} · ${f(ky,4)} · ${f(q,1)} · ${f(ly)}²/8 = ${f(my,2)} kNm/m`,
+    _L`!Ohne Drillsteifigkeit wäre m<sub>x</sub> = ${f(kx*q*lx*lx/8,2)} kNm/m; einachsig über l<sub>x</sub> gespannt ${f(q*lx*lx/8,2)} kNm/m.`,
+    ...(ly/lx>2 ? [tt('!l<sub>y</sub>/l<sub>x</sub> > 2: Die Platte trägt praktisch einachsig.')] : [])];
+  out.innerHTML = ablauf(_L`Platte ${f(lx)} × ${f(ly)} m`, S);
+}
+function skZugkraft(){
+  const x0=30, W=340, y0=40, H=120, L=1, al=0.08, n=6, nd=3; let o='';
+  const Mx=x=>4*x*(1-x), F=x=>Mx(x<0.5?Math.min(x+al,0.5):Math.max(x-al,0.5));
+  const X=x=>x0+W*x, Y=v=>y0+H*v;
+  o+=ln(x0,y0,x0+W,y0,SK.ink,1.4)+poly([[x0,y0],[x0-6,y0+10],[x0+6,y0+10]],'none')+poly([[x0+W,y0],[x0+W-6,y0+10],[x0+W+6,y0+10]],'none');
+  const P=[...Array(81)].map((_,i)=>[X(i/80),Y(Mx(i/80))]); o+=pl(P,'#94a3b8',1.2,'stroke-dasharray="4 3"');
+  const Q=[...Array(81)].map((_,i)=>[X(i/80),Y(F(i/80))]); o+=pl(Q,SK.load,1.8);
+  const fd=nd/n*1.05, xs=0.5-Math.sqrt(0.25-fd/4)-al, lb=0.1;
+  const D=[[X(0),Y(fd)],[X(Math.max(0,xs-lb)),Y(fd)],[X(Math.max(0,xs)),Y(1.05)],[X(1-Math.max(0,xs)),Y(1.05)],[X(1-Math.max(0,xs-lb)),Y(fd)],[X(1),Y(fd)]];
+  o+=pl(D,SK.acc,1.8);
+  o+=dimL(X(0.5-al-0.001),y0-6,X(0.5),y0-6,'a<tspan font-size="9" dy="3">l</tspan>',-0.01,-6);
+  o+=tl(X(0.99),Y(fd)-6,tt('durchlaufend'),'end',SK.acc)+tl(X(0.5),Y(1.05)+14,tt('alle Stäbe'),'middle',SK.acc);
+  return sv(400,190,tt('Zugkraftdeckung'),o);
+}
+function skZweiachsig(){
+  const x0=120, y0=30, b=110, h=140; let o='';
+  o+=poly([[x0,y0],[x0+b,y0],[x0+b,y0+h],[x0,y0+h]],SK.fill);
+  o+=poly([[x0,y0],[x0+b,y0],[x0+b,y0+h*0.25],[x0,y0+h*0.7]],'rgba(84,104,173,0.18)','none');
+  o+=ln(x0-20,y0+h*0.78,x0+b+20,y0+h*0.18,SK.acc,1.4,'stroke-dasharray="6 4"')+tl(x0+b+24,y0+h*0.16,tt('Nulllinie'),'start',SK.acc);
+  [[12,12],[b-12,12],[12,h-12],[b-12,h-12],[b/2,12],[b/2,h-12],[12,h/2],[b-12,h/2]].forEach(([u,v])=>{ o+=`<circle cx="${x0+u}" cy="${y0+v}" r="4" fill="#111"/>`; });
+  o+=vec(x0+b/2,y0+h+38,x0+b/2,y0+h+8,SK.load,1.6)+it(x0+b/2+6,y0+h+30,'M<tspan font-size="9" dy="3">Ed,y</tspan>','start',SK.load,12);
+  o+=vec(x0-40,y0+h/2,x0-8,y0+h/2,SK.load,1.6)+it(x0-44,y0+h/2-6,'M<tspan font-size="9" dy="3">Ed,z</tspan>','end',SK.load,12);
+  return sv(400,226,tt('Zweiachsige Biegung'),o);
+}
+function skPlatte2(){
+  const x0=70, y0=20, W=240, H=170; let o='';
+  o+=poly([[x0,y0],[x0+W,y0],[x0+W,y0+H],[x0,y0+H]],SK.fill);
+  o+=`<rect x="${x0}" y="${y0+H/2-14}" width="${W}" height="28" fill="rgba(84,104,173,0.15)" stroke="${SK.acc}" stroke-width="1"/>`;
+  o+=`<rect x="${x0+W/2-14}" y="${y0}" width="28" height="${H}" fill="rgba(194,65,12,0.12)" stroke="${SK.load}" stroke-width="1"/>`;
+  o+=dimL(x0,y0+H+12,x0+W,y0+H+12,'l<tspan font-size="9" dy="3">y</tspan>',-0.01,10)+dimL(x0-12,y0,x0-12,y0+H,'l<tspan font-size="9" dy="3">x</tspan>',-0.01,-10);
+  o+=tl(x0+W-4,y0+H/2-18,tt('Streifen in y'),'end',SK.acc)+tl(x0+W/2+18,y0+12,tt('Streifen in x'),'start',SK.load);
+  return sv(400,218,tt('Zweiachsig gespannte Platte'),o);
+}
+
+
+// ── Holz: Ausklinkung, Durchbruch, Satteldachträger, Querzug (ref v0.3.68, wie size: nachweiseAK/DB/SD/QZ) ──
+function hoDesign(p){ const m=holzMat(valOf(p+'-cls')), km=kmodOf(+valOf(p+'-nkl'), valOf(p+'-kled'));
+  return { m, km, fmd:km*m.fm/GM_H, fvd:km*m.fv/GM_H, fc90d:km*m.fc90/GM_H, ft90d:km*m.ft90/GM_H, kcr:kcrOf(m) }; }
+function hoSteps(D){ return [_L`§Bemessungswerte (γ<sub>M</sub> = 1,3)`,
+  _L`${D.m.cls}: k<sub>mod</sub> = ${dH(D.km)} · f<sub>m,d</sub> = ${dH(D.fmd)} · f<sub>v,d</sub> = ${dH(D.fvd)} · f<sub>c,90,d</sub> = ${dH(D.fc90d,3)} · f<sub>t,90,d</sub> = ${dH(D.ft90d,3)} N/mm²`]; }
+function updateAusklink(){
+  const out=document.getElementById('akl-out'); if(!out) return;
+  const D=hoDesign('akl'), b=num('akl-b'), h=num('akl-h'), hef=num('akl-hef'), x=num('akl-x')||0, i=num('akl-i')||0, V=num('akl-V');
+  if(!(b>0&&h>0&&hef>0&&hef<h&&x>=0&&i>=0&&V>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben (0 < h_ef < h).'); return; }
+  const al=hef/h, kn=D.m.bsh?6.5:5, kv=Math.min(1, kn*(1+1.1*i**1.5/Math.sqrt(h))/(Math.sqrt(h)*(Math.sqrt(al*(1-al))+0.8*x/h*Math.sqrt(1/al-al*al))));
+  const bef=D.kcr*b, td=1.5*V*1000/(bef*hef), R=kv*D.fvd;
+  const S=[...hoSteps(D), _L`§Abminderung k<sub>v</sub> (Gl. 6.62)`,
+    `α = h<sub>ef</sub>/h = ${dH(hef,0)}/${dH(h,0)} = ${dH(al,3)} · k<sub>n</sub> = ${dH(kn,1)}`,
+    `k<sub>v</sub> = ${dH(kn,1)} · (1 + 1,1 · ${dH(i,2)}<sup>1,5</sup>/√${dH(h,0)}) / (√${dH(h,0)} · (${dH(Math.sqrt(al*(1-al)),3)} + 0,8 · ${dH(x/h,3)} · ${dH(Math.sqrt(1/al-al*al),3)})) = ${dH(kv,3)}`,
+    _L`§Schub im Restquerschnitt`,
+    `b<sub>ef</sub> = k<sub>cr</sub> · b = ${dH(D.kcr,3)} · ${dH(b,0)} = ${dH(bef,1)} mm · τ<sub>d</sub> = 1,5 · ${dH(V,1)} · 10³/(${dH(bef,1)} · ${dH(hef,0)}) = ${dH(td,3)} N/mm²`,
+    `τ<sub>d</sub>/(k<sub>v</sub> · f<sub>v,d</sub>) = ${dH(td,3)}/(${dH(kv,3)} · ${dH(D.fvd,3)}) = ${dH(td/R,3)} ≤ 1 ${ok(td/R)}`,
+    ...(al<0.5 ? [tt('!α < 0,5: sehr tiefe Ausklinkung — nur mit Verstärkung ausführen.')] : [])];
+  out.innerHTML = ablauf(_L`Ausklinkung ${dH(b,0)} × ${dH(h,0)} mm`, S);
+}
+function updateDurchbruch(){
+  const out=document.getElementById('dbr-out'); if(!out) return;
+  const D=hoDesign('dbr'), rund=valOf('dbr-form')==='k', b=num('dbr-b'), h=num('dbr-h'), hd=num('dbr-hd'), hro=num('dbr-hro'), V=Math.abs(num('dbr-V')||0), Md=Math.abs(num('dbr-M')||0);
+  const hru=h-hro-hd;
+  if(!(b>0&&h>0&&hd>0&&hro>0&&hru>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben.'); return; }
+  const hr=Math.min(hro,hru)+(rund?0.15*hd:0), FtV=V*hd/(4*h)*(3-hd*hd/(h*h)), FtM=0.008*Md*1000/hr, Ft=FtV+FtM;
+  const lt=rund?0.353*hd+0.5*h:0.5*(hd+h), kt=Math.min(1,Math.sqrt(450/h)), R=0.5*lt*b*kt*D.ft90d/1000;
+  const S=[...hoSteps(D), _L`§Grenzen für unverstärkte Durchbrüche`,
+    `h<sub>d</sub> = ${dH(hd,0)} ${hd<=0.15*h?'≤':'>'} 0,15 · h = ${dH(0.15*h,0)} mm · min(h<sub>ro</sub>; h<sub>ru</sub>) = ${dH(Math.min(hro,hru),0)} ${Math.min(hro,hru)>=0.35*h?'≥':'<'} 0,35 · h = ${dH(0.35*h,0)} mm`,
+    ...(hd>0.15*h || Math.min(hro,hru)<0.35*h ? [tt('!Außerhalb der Grenzen nur mit Verstärkung zulässig.')] : []),
+    _L`§Querzugkraft am Durchbruchrand`,
+    `F<sub>t,V,d</sub> = ${dH(V,1)} · ${dH(hd,0)}/(4 · ${dH(h,0)}) · (3 − ${dH((hd/h)**2,3)}) = ${dH(FtV,2)} kN`,
+    `h<sub>r</sub> = ${dH(hr,1)} mm · F<sub>t,M,d</sub> = 0,008 · ${dH(Md,1)} · 10³/${dH(hr,1)} = ${dH(FtM,2)} kN · F<sub>t,90,d</sub> = ${dH(Ft,2)} kN`,
+    _L`§Querzugtragfähigkeit`,
+    `l<sub>t,90</sub> = ${dH(lt,1)} mm · k<sub>t,90</sub> = ${dH(kt,3)} · F<sub>t,90,Rd</sub> = 0,5 · ${dH(lt,1)} · ${dH(b,0)} · ${dH(kt,3)} · ${dH(D.ft90d,3)} = ${dH(R,2)} kN`,
+    `F<sub>t,90,d</sub>/F<sub>t,90,Rd</sub> = ${dH(Ft/R,3)} ≤ 1 ${ok(Ft/R)}`];
+  out.innerHTML = ablauf(_L`Durchbruch h<sub>d</sub> = ${dH(hd,0)} mm`, S);
+}
+function updateSattel(){
+  const out=document.getElementById('sdt-out'); if(!out) return;
+  const D=hoDesign('sdt'), L=num('sdt-L'), b=num('sdt-b'), h0=num('sdt-h0'), hap=num('sdt-hap'), q=num('sdt-q');
+  if(!(L>0&&b>0&&h0>0&&hap>h0&&q>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben (h_ap > h_0).'); return; }
+  if(!D.m.bsh){ out.innerHTML=tt('Satteldachträger werden aus Brettschichtholz hergestellt — bitte eine BSH-Klasse wählen.'); return; }
+  const ta=(hap-h0)/(L/2*1000), aDeg=Math.atan(ta)*180/Math.PI, hx=x=>h0+ta*1000*Math.min(x,L-x), Mx=x=>q*x*(L-x)/2, sig=x=>6*Mx(x)*1e6/(b*hx(x)**2);
+  let xm=0, sm=0; for(let k=0;k<=4000;k++){ const x=L/2*k/4000, v=sig(x); if(v>sm){ sm=v; xm=x; } }
+  const kh=x=>khOf(D.m, hx(x)), fmd=kh(xm)*D.fmd, kma=1/Math.sqrt(1+(fmd/(1.5*D.fvd)*ta)**2+(fmd/D.fc90d*ta*ta)**2), R1=kma*fmd;
+  const Map=q*L*L/8, s0=6*Map*1e6/(b*hap*hap), kl=1+1.4*ta+5.4*ta*ta, fmd2=khOf(D.m,hap)*D.fmd, sF=kl*s0;
+  const kp=0.2*ta, st=kp*s0, V0=b/1000*(hap/1000)**2*(1-ta/4), Vb=b/1000*L*(h0+hap)/2/1000, V=Math.min(V0,2/3*Vb), kvol=(0.01/V)**0.2, Rt=1.4*kvol*D.ft90d;
+  const S=[...hoSteps(D), _L`§Geometrie`, `tan α = (${dH(hap,0)} − ${dH(h0,0)})/${dH(L/2*1000,0)} = ${dH(ta,4)} → α = ${dH(aDeg,2)}°`,
+    _L`§Biegung am angeschnittenen Rand`,
+    _L`größte Randspannung bei x = ${dH(xm,2)} m (L · h<sub>0</sub>/(2 · h<sub>ap</sub>) = ${dH(L*h0/(2*hap),2)} m): h = ${dH(hx(xm),0)} mm, M<sub>d</sub> = ${dH(Mx(xm),1)} kNm`,
+    `σ<sub>m,d</sub> = ${dH(sm,2)} N/mm² · k<sub>m,α</sub> = ${dH(kma,3)} · k<sub>m,α</sub> · f<sub>m,d</sub> = ${dH(R1,2)} N/mm² → η = ${dH(sm/R1,3)} ${ok(sm/R1)}`,
+    _L`§Biegung im First`,
+    `M<sub>ap,d</sub> = ${dH(Map,1)} kNm · k<sub>l</sub> = ${dH(kl,3)} · σ<sub>m,d</sub> = ${dH(kl,3)} · ${dH(s0,2)} = ${dH(sF,2)} N/mm² ≤ k<sub>h</sub> · f<sub>m,d</sub> = ${dH(fmd2,2)} N/mm² → η = ${dH(sF/fmd2,3)} ${ok(sF/fmd2)}`,
+    _L`§Querzug im First`,
+    `k<sub>p</sub> = ${dH(kp,4)} · σ<sub>t,90,d</sub> = ${dH(st,3)} N/mm² · V = ${dH(V,4)} m³ → k<sub>vol</sub> = ${dH(kvol,3)}`,
+    `k<sub>dis</sub> · k<sub>vol</sub> · f<sub>t,90,d</sub> = 1,4 · ${dH(kvol,3)} · ${dH(D.ft90d,3)} = ${dH(Rt,3)} N/mm² → η = ${dH(st/Rt,3)} ${ok(st/Rt)}`];
+  out.innerHTML = ablauf(_L`Satteldachträger L = ${dH(L,1)} m`, S);
+}
+function updateQuerzug(){
+  const out=document.getElementById('qzg-out'); if(!out) return;
+  const D=hoDesign('qzg'), h=num('qzg-h'), a=num('qzg-a'), ar=num('qzg-ar')||0, tef=num('qzg-tef'), F=num('qzg-F');
+  if(!(h>0&&a>0&&a<h&&ar>=0&&tef>0&&F>0)){ out.innerHTML=tt('Bitte gültige Werte eingeben (0 < a < h).'); return; }
+  const al=a/h, ks=Math.max(1,0.7+1.4*ar/h), R=ks*(6.5+18*al*al)*(tef*h)**0.8*D.ft90d/1000;
+  const S=[...hoSteps(D), _L`§Lage des Anschlusses`, `α = a/h = ${dH(a,0)}/${dH(h,0)} = ${dH(al,3)}`];
+  if(al>0.7) S.push(tt('!α > 0,7: Der Anschluss liegt weit genug vom beanspruchten Rand entfernt — kein Querzugnachweis erforderlich.'));
+  else S.push(_L`§Querzugtragfähigkeit (NA, NCI zu 8.1.4)`,
+    `k<sub>s</sub> = max(1; 0,7 + 1,4 · ${dH(ar,0)}/${dH(h,0)}) = ${dH(ks,3)} · k<sub>r</sub> = 1`,
+    `F<sub>90,Rd</sub> = ${dH(ks,3)} · (6,5 + 18 · ${dH(al,3)}²) · (${dH(tef,0)} · ${dH(h,0)})<sup>0,8</sup> · ${dH(D.ft90d,3)} = ${dH(R,2)} kN`,
+    `F<sub>90,Ed</sub>/F<sub>90,Rd</sub> = ${dH(F,2)}/${dH(R,2)} = ${dH(F/R,3)} ≤ 1 ${ok(F/R)}`);
+  out.innerHTML = ablauf(_L`Querzug am Anschluss`, S);
+}
+function skAusklinkung(){
+  const x0=40, y0=40, L=320, h=80, hef=56, xs=70; let o='';
+  o+=poly([[x0,y0],[x0+L,y0],[x0+L,y0+h],[xs+30,y0+h],[xs+30,y0+hef],[x0,y0+hef]],'#f3ead9');
+  o+=poly([[xs-10,y0+hef],[xs,y0+hef-0],[xs+10,y0+hef]],'none')+poly([[xs,y0+hef],[xs-9,y0+hef+15],[xs+9,y0+hef+15]],'#fff');
+  o+=vec(xs,y0+hef+50,xs,y0+hef+18,SK.load,1.6)+it(xs+8,y0+hef+44,'V<tspan font-size="9" dy="3">Ed</tspan>','start',SK.load,12);
+  o+=ln(xs+30,y0+hef,xs+60,y0+hef-8,SK.acc,1.3,'stroke-dasharray="4 3"')+tl(xs+64,y0+hef-10,tt('Riss'),'start',SK.acc);
+  o+=dimL(x0+L+14,y0,x0+L+14,y0+h,'h',-0.01,10)+dimL(x0-12,y0,x0-12,y0+hef,'h<tspan font-size="9" dy="3">ef</tspan>',-0.01,-12);
+  o+=dimL(xs,y0+h+14,xs+30,y0+h+14,'x',-0.01,10);
+  return sv(400,170,tt('Ausklinkung'),o);
+}
+function skDurchbruch(){
+  const x0=30, y0=40, L=340, h=100, xd=170, hd=26, hro=40; let o='';
+  o+=`<rect x="${x0}" y="${y0}" width="${L}" height="${h}" fill="#f3ead9" stroke="#111" stroke-width="1.3"/>`+`<rect x="${xd}" y="${y0+hro}" width="40" height="${hd}" rx="4" fill="#fff" stroke="#111" stroke-width="1.2"/>`;
+  [[xd,y0+hro],[xd+40,y0+hro+hd]].forEach(([x,y])=>{ o+=vec(x,y,x+(x===xd?-12:12),y+(x===xd?-14:14),SK.acc,1.2); });
+  o+=dimL(xd+56,y0+hro,xd+56,y0+hro+hd,'h<tspan font-size="9" dy="3">d</tspan>',-0.01,12)+dimL(x0+L+14,y0,x0+L+14,y0+h,'h',-0.01,10)+dimL(xd-14,y0,xd-14,y0+hro,'h<tspan font-size="9" dy="3">ro</tspan>',-0.01,-14);
+  o+=tl(xd+20,y0+h+16,tt('Querzug an den Ecken'),'middle',SK.acc);
+  return sv(400,170,tt('Durchbruch'),o);
+}
+function skSattel(){
+  const x0=30, yb=150, L=340, h0=40, hap=90; let o='';
+  o+=poly([[x0,yb],[x0+L,yb],[x0+L,yb-h0],[x0+L/2,yb-hap],[x0,yb-h0]],'#f3ead9');
+  for(let k=1;k<4;k++){ const y=yb-k*h0/4; o+=ln(x0+4,y,x0+L-4,y,'#b07c3a',0.5,'opacity="0.5"'); }
+  o+=`<circle cx="${x0+L/2}" cy="${yb-hap+18}" r="14" fill="none" stroke="${SK.acc}" stroke-dasharray="3 2"/>`+tl(x0+L/2+20,yb-hap+6,tt('First: Querzug'),'start',SK.acc);
+  o+=dimL(x0-12,yb-h0,x0-12,yb,'h<tspan font-size="9" dy="3">0</tspan>',-0.01,-12)+dimL(x0+L/2+6,yb-hap,x0+L/2+6,yb,'h<tspan font-size="9" dy="3">ap</tspan>',-0.01,12);
+  return sv(400,170,tt('Satteldachträger'),o);
+}
+function skQuerzug(){
+  const x0=40, y0=40, L=320, h=100, a=50; let o='';
+  o+=`<rect x="${x0}" y="${y0}" width="${L}" height="${h}" fill="#f3ead9" stroke="#111" stroke-width="1.3"/>`;
+  [0,1,2].forEach(i=>{ o+=`<circle cx="${x0+L/2-20+i*20}" cy="${y0+h-a}" r="4" fill="#111"/>`; });
+  o+=vec(x0+L/2,y0+h-a+8,x0+L/2,y0+h+40,SK.load,1.8)+it(x0+L/2+8,y0+h+34,'F<tspan font-size="9" dy="3">90,Ed</tspan>','start',SK.load,12);
+  o+=dimL(x0+L+14,y0+h-a,x0+L+14,y0+h,'a',-0.01,10)+dimL(x0-12,y0,x0-12,y0+h,'h',-0.01,-10);
+  o+=ln(x0+L/2-40,y0+h-a+14,x0+L/2+40,y0+h-a+14,SK.acc,1.2,'stroke-dasharray="4 3"')+tl(x0+L/2+46,y0+h-a+18,tt('Spaltgefahr'),'start',SK.acc);
+  return sv(400,190,tt('Querzug'),o);
+}
+
 // ── Böschung (unendlich lange Böschung) ──
 function updateBoesch(){
   const out=document.getElementById('bo-out'); if(!out) return;
@@ -7021,6 +7299,127 @@ const CONTENT = {
   `,
 
   // ── GZT → Kippen ─────────────────────────────────
+  'holzbau/details/ausklinkung': () => _L`
+    <div class="card">
+      <div class="card-title">Warum Ausklinkungen gefährlich sind</div>
+      ${fig(skAusklinkung(),tt('Unten ausgeklinkter Träger: An der einspringenden Ecke entstehen Querzug und Schub — dort reißt das Holz entlang der Faser ein.'))}
+      <p>Wird ein Träger am Auflager unten ausgeklinkt, endet der Kraftfluss abrupt an der einspringenden Ecke. Dort überlagern sich Schub und <b>Querzug</b>, und Holz ist quer zur Faser sehr schwach. Der Riss läuft von der Ecke aus parallel zur Faser in den Träger. EC5 berücksichtigt das mit dem Abminderungsbeiwert k<sub>v</sub> auf die Schubfestigkeit.</p>
+      <div class="formula-box">
+        τ<sub>d</sub> = 1,5 · V<sub>Ed</sub> / (b<sub>ef</sub> · h<sub>ef</sub>) ≤ k<sub>v</sub> · f<sub>v,d</sub><br>
+        k<sub>v</sub> = min{ 1; k<sub>n</sub> · (1 + 1,1 · i<sup>1,5</sup>/√h) / ( √h · [√(α(1 − α)) + 0,8 · x/h · √(1/α − α²)] ) }
+        <div class="comment">EC5, 6.5.2, Gl. 6.60 und 6.62 · α = h<sub>ef</sub>/h · x — Abstand Auflagerkraft bis Ecke · i — Neigung eines Anschnitts (1 : i) · k<sub>n</sub> = 5 (Vollholz), 6,5 (BSH) · h in mm · oben ausgeklinkt: k<sub>v</sub> = 1</div>
+      </div>
+      <ul>
+        <li>Die Ecke flach anschneiden (i &gt; 0) hilft deutlich — der Kraftfluss wird umgelenkt statt abgeschnitten.</li>
+        <li>Die Auflagerkraft möglichst nahe an die Ecke legen (kleines x).</li>
+        <li>Tiefe Ausklinkungen (α &lt; 0,5) nur mit Verstärkung, z. B. Vollgewindeschrauben quer zur Faser.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Ausklinkung nachweisen</div>
+      <div class="calc-grid">
+        ${field(tt('Baustoff'), selHolz('akl-cls','C24','updateAusklink()'))}
+        ${field(tt('Nutzungsklasse'), selNkl('akl-nkl','updateAusklink()'))}
+        ${field(tt('Klasse der Lasteinwirkungsdauer'), selKled('akl-kled','2','updateAusklink()'))}
+        ${field(tt('Breite b [mm]'), inp('akl-b', 120, 'updateAusklink()'))}
+        ${field(tt('Höhe h [mm]'), inp('akl-h', 240, 'updateAusklink()'))}
+        ${field(tt('Resthöhe h<sub>ef</sub> [mm]'), inp('akl-hef', 180, 'updateAusklink()'))}
+        ${field(tt('Abstand x [mm]'), inp('akl-x', 60, 'updateAusklink()'))}
+        ${field(tt('Anschnitt i (0 = rechtwinklig)'), inp('akl-i', 0, 'updateAusklink()'))}
+        ${field('V<sub>Ed</sub> [kN]', inp('akl-V', 8, 'updateAusklink()'))}
+      </div>
+      <div class="calc-out" id="akl-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Holz → Ausklinkung)</a>
+    </div>`,
+  'holzbau/details/durchbruch': () => _L`
+    <div class="card">
+      <div class="card-title">Durchbrüche in Holzträgern</div>
+      ${fig(skDurchbruch(),tt('Durchbruch im Träger: An den Ecken entstehen Querzugspannungen aus Querkraft und Moment.'))}
+      <p>Leitungen werden gern durch Träger geführt. Jeder Durchbruch schwächt den Querschnitt und erzeugt an seinem Rand <b>Querzug</b> — aus der Querkraft, die um das Loch herumfließen muss, und aus dem Moment. Unverstärkte Durchbrüche sind nach dem deutschen NA nur in engen Grenzen erlaubt, sonst wird verstärkt.</p>
+      <div class="formula-box">
+        F<sub>t,90,d</sub> = F<sub>t,V,d</sub> + F<sub>t,M,d</sub> ≤ 0,5 · l<sub>t,90</sub> · b · k<sub>t,90</sub> · f<sub>t,90,d</sub><br>
+        F<sub>t,V,d</sub> = V<sub>d</sub> · h<sub>d</sub>/(4h) · (3 − h<sub>d</sub>²/h²) · F<sub>t,M,d</sub> = 0,008 · M<sub>d</sub>/h<sub>r</sub>
+        <div class="comment">DIN EN 1995-1-1/NA, NCI NA.6.7 · l<sub>t,90</sub> = 0,5 · (h<sub>d</sub> + h) rechteckig, 0,353 · h<sub>d</sub> + 0,5 · h rund · k<sub>t,90</sub> = min(1; (450/h)<sup>0,5</sup>) · h<sub>r</sub> = min(h<sub>ro</sub>; h<sub>ru</sub>), rund + 0,15 · h<sub>d</sub></div>
+      </div>
+      ${textTable([tt('Grenze (unverstärkt)'),tt('Wert')], [
+        [tt('Durchbruchhöhe'),'h<sub>d</sub> ≤ 0,15 · h'],
+        [tt('Restquerschnitt oben und unten'),'h<sub>ro</sub>, h<sub>ru</sub> ≥ 0,35 · h'],
+        [tt('Länge rechteckiger Durchbrüche'),'a ≤ 0,4 · h'],
+        [tt('Abstand zum Auflager'),'l<sub>v</sub> ≥ h'],
+      ])}
+      <div class="legend">Unverstärkt nur in den Nutzungsklassen 1 und 2; Ecken rechteckiger Durchbrüche mit r ≥ 15 mm ausrunden.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Durchbruch nachweisen</div>
+      <div class="calc-grid">
+        ${field(tt('Baustoff'), selHolz('dbr-cls','GL24h','updateDurchbruch()'))}
+        ${field(tt('Nutzungsklasse'), selNkl('dbr-nkl','updateDurchbruch()'))}
+        ${field(tt('Klasse der Lasteinwirkungsdauer'), selKled('dbr-kled','2','updateDurchbruch()'))}
+        ${field(tt('Form'), sel('dbr-form', [['r',tt('rechteckig')],['k',tt('rund')]], 'r', 'updateDurchbruch()'))}
+        ${field(tt('Breite b [mm]'), inp('dbr-b', 140, 'updateDurchbruch()'))}
+        ${field(tt('Höhe h [mm]'), inp('dbr-h', 600, 'updateDurchbruch()'))}
+        ${field(tt('Durchbruchhöhe h<sub>d</sub> [mm]'), inp('dbr-hd', 80, 'updateDurchbruch()'))}
+        ${field(tt('Rest oben h<sub>ro</sub> [mm]'), inp('dbr-hro', 260, 'updateDurchbruch()'))}
+        ${field('V<sub>d</sub> [kN]', inp('dbr-V', 40, 'updateDurchbruch()'))}
+        ${field('M<sub>d</sub> [kNm]', inp('dbr-M', 30, 'updateDurchbruch()'))}
+      </div>
+      <div class="calc-out" id="dbr-out"></div>
+      <a class="applink" href="size.html">→ Mit Schub, Biegung, Skizze und Bericht in „Bemessung“ (Holz → Durchbruch)</a>
+    </div>`,
+  'holzbau/details/sattel': () => _L`
+    <div class="card">
+      <div class="card-title">Satteldachträger aus Brettschichtholz</div>
+      ${fig(skSattel(),tt('Satteldachträger mit geradem Untergurt: am angeschnittenen Rand Biegung unter einem Winkel zur Faser, im First Spannungserhöhung und Querzug.'))}
+      <p>Beim Satteldachträger folgt die Oberseite der Dachneigung, die Fasern laufen aber parallel zum geraden Untergurt. Daraus ergeben sich drei Besonderheiten: Am <b>angeschnittenen Rand</b> wirkt die Biegespannung schräg zur Faser, die größte Randspannung liegt nicht in Feldmitte, und im <b>First</b> werden die Biegespannungen durch die Faserumlenkung erhöht und von <b>Querzug</b> begleitet.</p>
+      <div class="formula-box">
+        σ<sub>m,d</sub> = 6 · M<sub>d</sub>(x)/(b · h(x)²) ≤ k<sub>m,α</sub> · f<sub>m,d</sub> &nbsp;(Rand, Gl. 6.38)<br>
+        k<sub>m,α</sub> = 1 / √(1 + (f<sub>m,d</sub>/(1,5 · f<sub>v,d</sub>) · tan α)² + (f<sub>m,d</sub>/f<sub>c,90,d</sub> · tan²α)²)<br>
+        σ<sub>m,ap,d</sub> = k<sub>l</sub> · 6 · M<sub>ap,d</sub>/(b · h<sub>ap</sub>²) · k<sub>l</sub> = 1 + 1,4 · tan α + 5,4 · tan²α<br>
+        σ<sub>t,90,d</sub> = k<sub>p</sub> · 6 · M<sub>ap,d</sub>/(b · h<sub>ap</sub>²) ≤ k<sub>dis</sub> · k<sub>vol</sub> · f<sub>t,90,d</sub> · k<sub>p</sub> = 0,2 · tan α
+        <div class="comment">EC5, 6.4.2 und 6.4.3 · gerader Untergurt · k<sub>dis</sub> = 1,4 · k<sub>vol</sub> = (0,01 m³/V)<sup>0,2</sup> · Gleichlast: größte Randspannung bei x = L · h<sub>0</sub>/(2 · h<sub>ap</sub>)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Satteldachträger nachweisen (Gleichlast)</div>
+      <div class="calc-grid">
+        ${field(tt('Baustoff'), selHolz('sdt-cls','GL24h','updateSattel()'))}
+        ${field(tt('Nutzungsklasse'), selNkl('sdt-nkl','updateSattel()'))}
+        ${field(tt('Klasse der Lasteinwirkungsdauer'), selKled('sdt-kled','2','updateSattel()'))}
+        ${field(tt('Stützweite L [m]'), inp('sdt-L', 15, 'updateSattel()'))}
+        ${field(tt('Breite b [mm]'), inp('sdt-b', 160, 'updateSattel()'))}
+        ${field(tt('Höhe am Auflager h<sub>0</sub> [mm]'), inp('sdt-h0', 700, 'updateSattel()'))}
+        ${field(tt('Höhe im First h<sub>ap</sub> [mm]'), inp('sdt-hap', 1200, 'updateSattel()'))}
+        ${field('q<sub>Ed</sub> [kN/m]', inp('sdt-q', 12, 'updateSattel()'))}
+      </div>
+      <div class="calc-out" id="sdt-out"></div>
+      <a class="applink" href="size.html">→ Auch als Pultdachträger, mit Skizze und Bericht in „Bemessung“ (Holz → Satteldachträger)</a>
+    </div>`,
+  'holzbau/details/querzug': () => _L`
+    <div class="card">
+      <div class="card-title">Queranschlüsse: Last quer zur Faser</div>
+      ${fig(skQuerzug(),tt('Nebenträger hängt am Hauptträger: Die Kraft wird unterhalb der Verbindungsmittel quer zur Faser eingeleitet und spaltet das Holz.'))}
+      <p>Hängt ein Nebenträger seitlich an einem Hauptträger, zieht er über die Verbindungsmittel quer zur Faser am Holz. Liegt der Anschluss im unteren Bereich des Hauptträgers, muss der Bereich darunter die Kraft als <b>Querzug</b> nach oben „hochhängen“ — das Holz kann längs aufspalten. Je höher der Anschluss sitzt, desto geringer die Gefahr.</p>
+      <div class="formula-box">
+        F<sub>90,Rd</sub> = k<sub>s</sub> · k<sub>r</sub> · (6,5 + 18 · α²) · (t<sub>ef</sub> · h)<sup>0,8</sup> · f<sub>t,90,d</sub> &nbsp;[N]<br>
+        α = a/h · k<sub>s</sub> = max(1; 0,7 + 1,4 · a<sub>r</sub>/h)
+        <div class="comment">DIN EN 1995-1-1/NA, NCI zu 8.1.4 (ersetzt Gl. 8.4 der EN) · a — Abstand des am weitesten vom beanspruchten Rand entfernten Verbindungsmittels · a<sub>r</sub> — Abstand der äußeren Verbindungsmittel · t<sub>ef</sub> — wirksame Einbindetiefe · für α &gt; 0,7 kein Nachweis erforderlich</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Querzug nachweisen</div>
+      <div class="calc-grid">
+        ${field(tt('Baustoff'), selHolz('qzg-cls','GL24h','updateQuerzug()'))}
+        ${field(tt('Nutzungsklasse'), selNkl('qzg-nkl','updateQuerzug()'))}
+        ${field(tt('Klasse der Lasteinwirkungsdauer'), selKled('qzg-kled','3','updateQuerzug()'))}
+        ${field(tt('Höhe h [mm]'), inp('qzg-h', 400, 'updateQuerzug()'))}
+        ${field(tt('Abstand a [mm]'), inp('qzg-a', 200, 'updateQuerzug()'))}
+        ${field(tt('Abstand a<sub>r</sub> [mm]'), inp('qzg-ar', 0, 'updateQuerzug()'))}
+        ${field(tt('wirksame Tiefe t<sub>ef</sub> [mm]'), inp('qzg-tef', 100, 'updateQuerzug()'))}
+        ${field('F<sub>90,Ed</sub> [kN]', inp('qzg-F', 10, 'updateQuerzug()'))}
+      </div>
+      <div class="calc-out" id="qzg-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Holz → Querzug)</a>
+    </div>`,
   'holzbau/gzt/kippen': () => `
     <div class="card">
       <div class="card-title">Kippnachweis für Biegeträger — EN 1995-1-1, 6.3.3</div>
@@ -7101,6 +7500,10 @@ const AFTER = {
   'holzbau/gzt/zugdruck': () => updateHWI(),
   'holzbau/gzt/knicken':  () => updateHKN(),
   'holzbau/gzt/kippen':   () => updateHKI(),
+  'holzbau/details/ausklinkung': () => updateAusklink(),
+  'holzbau/details/durchbruch':  () => updateDurchbruch(),
+  'holzbau/details/sattel':      () => updateSattel(),
+  'holzbau/details/querzug':     () => updateQuerzug(),
   'holzbau/gzt/brand':    () => updateHBR(),
 };
 
@@ -8035,6 +8438,7 @@ Object.assign(CONTENT, {
   'mauerwerk/bemessung/teilflaeche': () => _L`
     <div class="card">
       <div class="card-title">Teilflächenpressung (EN 1996-1-1, 6.1.3)</div>
+      ${fig(skTeilfl(),tt('Ansicht der Wand: Die Einzellast breitet sich unter 60° aus. Maßgebend ist die Länge l<sub>efm</sub> in halber Wandhöhe.'))}
       <div class="formula-box">
         N<sub>Edc</sub> ≤ N<sub>Rdc</sub> = β · A<sub>b</sub> · f<sub>d</sub><br>
         β = (1 + 0,3 · a<sub>1</sub>/h<sub>c</sub>) · (1,5 − 1,1 · A<sub>b</sub>/A<sub>ef</sub>)&nbsp;&nbsp;&nbsp; 1,0 ≤ β ≤ min(1,25 + a<sub>1</sub>/(2 · h<sub>c</sub>); 1,5)<br>
@@ -8056,12 +8460,14 @@ Object.assign(CONTENT, {
         ${field('N<sub>Edc</sub> [kN]', inp('mwt-N', 110, 'updateMWT()'))}
       </div>
       <div class="calc-out" id="mwt-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Mauerwerk → Teilfläche)</a>
     </div>
   `,
 
   'mauerwerk/bemessung/keller': () => _L`
     <div class="card">
       <div class="card-title">Kellerwand mit Erddruck (DIN EN 1996-3, 4.5)</div>
+      ${fig(skKeller(),tt('Schnitt: Die Auflast überdrückt die Wand, der Erddruck wird über einen Druckbogen zwischen Kellerdecke und Bodenplatte abgetragen.'))}
       <div class="formula-box">
         Mindestauflast:&nbsp; n<sub>Ed,min</sub> ≥ ρ<sub>e</sub> · h · h<sub>e</sub>² / (β · t)<br>
         β = 20 (b<sub>c</sub> ≥ 2h)&nbsp;&nbsp; β = 60 − 20 · b<sub>c</sub>/h (h &lt; b<sub>c</sub> &lt; 2h)&nbsp;&nbsp; β = 40 (b<sub>c</sub> ≤ h)<br>
@@ -8092,6 +8498,7 @@ Object.assign(CONTENT, {
   'mauerwerk/bemessung/schub': () => _L`
     <div class="card">
       <div class="card-title">Schubwand — Aussteifung in Wandebene (EN 1996-1-1, 6.2)</div>
+      ${fig(skSchub(),tt('Ansicht: Die Horizontalkraft erzeugt ein Moment am Wandfuß. Ist die Ausmitte groß, klafft die Fuge, und nur die Länge l<sub>c</sub> ist überdrückt.'))}
       <div class="formula-box">
         Ausmitte:&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; überdrückte Länge:&nbsp; l<sub>c</sub> = l (e ≤ l/6) bzw. l<sub>c</sub> = 3 · (l/2 − e)<br>
         f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> ≤ 0,065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br>
@@ -8114,6 +8521,35 @@ Object.assign(CONTENT, {
         ${field('V<sub>Ed</sub> [kN]', inp('mws-V', 25, 'updateMWS()'))}
       </div>
       <div class="calc-out" id="mws-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Mauerwerk → Schubwand)</a>
+    </div>
+  `,
+
+  'mauerwerk/bemessung/ausfach': () => _L`
+    <div class="card">
+      <div class="card-title">Nichttragende Ausfachungswände</div>
+      ${fig(skAusfach(),tt('Ausfachung in einem Rahmen: Die Wand ist an allen vier Rändern gehalten und trägt nur Wind auf ihre eigene Fläche ab.'))}
+      <p>Ausfachungswände schließen die Felder eines Skeletts aus Stützen und Riegeln oder Decken. Sie tragen keine Lasten aus dem Bauwerk, müssen aber den <b>Wind</b> auf ihre eigene Fläche an die Ränder weitergeben. Gemauerte Wände sind dafür ohne Auflast schwach — sie wirken wie Platten, die sich über Bogen- und Plattenwirkung zwischen den Halterungen abstützen. Das NA erlaubt, auf einen rechnerischen Nachweis zu verzichten, wenn die Wandfläche einen Tabellenwert nicht überschreitet.</p>
+      <div class="formula-box">
+        A = h · l ≤ A<sub>zul</sub>&nbsp;&nbsp;&nbsp; ε = größere Seite / kleinere Seite<br>
+        A<sub>zul</sub> linear zwischen den Tabellenwerten für ε = 1,0 und ε ≥ 2,0
+        <div class="comment">DIN EN 1996-3/NA, Anhang NA.C, Tab. NA.C.1 (vierseitig gehalten) · Steinfestigkeitsklasse ≥ 4 · Normalmauermörtel NM IIa oder Dünnbettmörtel · bei Steinfestigkeitsklasse ≥ 12 dürfen die Werte für t = 115 und 150 mm um 1/3 erhöht werden</div>
+      </div>
+      ${textTable([tt('Wanddicke t'),tt('bis 8 m, ε = 1,0'),tt('bis 8 m, ε ≥ 2,0'),tt('8 … 20 m, ε = 1,0'),tt('8 … 20 m, ε ≥ 2,0')], [['115 mm','12','8','—','—'],['150 mm','12','8','8','5'],['175 mm','20','14','13','9'],['240 mm','36','25','23','16'],['≥ 300 mm','50','33','35','23']])}
+      <div class="legend">Größte zulässige Ausfachungsfläche in m² je Höhe über Gelände. Dreiseitig gehaltene Wände und Wände mit Öffnungen sind nicht abgedeckt.</div>
+      <div class="info-banner">Die Halterung am Rand muss die Windlast tatsächlich aufnehmen können — z. B. Anker in Nuten der Stützen und eine kraftschlüssige Fuge unter dem Riegel. Ohne sie gilt die Tabelle nicht.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Ausfachungsfläche prüfen</div>
+      <div class="calc-grid">
+        ${field(tt('Wanddicke'), sel('afr-t', [['115','115 mm'],['150','150 mm'],['175','175 mm'],['240','240 mm'],['300','≥ 300 mm']], '175', 'updateAusfach()'))}
+        ${field(tt('Steinfestigkeitsklasse'), sel('afr-sfk', [['4',tt('4 bis 10')],['12',tt('12 und höher')]], '4', 'updateAusfach()'))}
+        ${field(tt('Höhe über Gelände'), sel('afr-z', [['8',tt('bis 8 m')],['20',tt('8 … 20 m')]], '8', 'updateAusfach()'))}
+        ${field(tt('Höhe h [m]'), inp('afr-h', 2.75, 'updateAusfach()'))}
+        ${field(tt('Länge l [m]'), inp('afr-l', 5.0, 'updateAusfach()'))}
+      </div>
+      <div class="calc-out" id="afr-out"></div>
+      <a class="applink" href="size.html">→ Mit Skizze und Bericht in „Bemessung“ (Mauerwerk → Ausfachung)</a>
     </div>
   `,
 
@@ -10640,6 +11076,101 @@ Object.assign(CONTENT, {
     </div>
   `,
 
+  'stahlbeton/bewehrung/zugkraft': () => _L`
+    <div class="card">
+      <div class="card-title">Warum die Zugkraftlinie verschoben wird</div>
+      ${fig(skZugkraft(),tt('Zugkraftdeckung am Einfeldträger: verschobene Zugkraftlinie (orange) und Deckungslinie der Stäbe (blau), gestaffelte Stäbe mit Verankerung l<sub>bd</sub>.'))}
+      <p>Im Fachwerkmodell laufen die Betondruckstreben schräg. Die Zugkraft im Untergurt ist deshalb an jeder Stelle so groß wie M/z ein Stück weiter in Richtung Feldmitte: Die Zugkraftlinie wird um das <b>Versatzmaß a<sub>l</sub></b> verschoben. Bewehrung darf erst enden, wenn die Deckungslinie der übrigen Stäbe diese verschobene Linie umschließt — und dann noch um die Verankerungslänge l<sub>bd</sub> weiterlaufen.</p>
+      <div class="formula-box">
+        a<sub>l</sub> = z · (cot θ − cot α) / 2 &nbsp;→ senkrechte Bügel: a<sub>l</sub> = z · cot θ / 2<br>
+        F<sub>sd</sub>(x) = M<sub>Ed</sub>(x verschoben um a<sub>l</sub>) / z · F<sub>Rd</sub> = n · A<sub>s</sub> · f<sub>yd</sub>
+        <div class="comment">Bauteile ohne Querkraftbewehrung (Platten): a<sub>l</sub> = d · z ≈ 0,9 · d</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Regeln für die Staffelung</div>
+      <ul>
+        <li>Ein Stab endet rechnerisch dort, wo ihn die verschobene Zugkraftlinie nicht mehr braucht, und wird ab dort mit l<sub>bd</sub> verankert.</li>
+        <li>Mindestens ein Viertel der Feldbewehrung läuft bis über die Auflager (9.2.1.4 und 9.2.1.5) — in der Praxis mindestens zwei Stäbe.</li>
+        <li>Über Zwischenauflagern gilt dasselbe für die obere Bewehrung: verschobene Zugkraftlinie der Stützmomente plus l<sub>bd</sub>.</li>
+        <li>Wenige Stablängen sind wirtschaftlicher als viele genau gestaffelte — Staffelung lohnt bei großen Spannweiten und Stabdurchmessern.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Staffelung berechnen (Einfeldträger, Gleichlast)</div>
+      <div class="calc-grid">
+        ${field(tt('Beton'), betonSel('zkd-c', 'C30/37', 'updateZugkraft()'))}
+        ${field(tt('Stützweite l [m]'), inp('zkd-l', 6.0, 'updateZugkraft()'))}
+        ${field('q<sub>Ed</sub> [kN/m]', inp('zkd-q', 40, 'updateZugkraft()'))}
+        ${field(tt('Nutzhöhe d [mm]'), inp('zkd-d', 450, 'updateZugkraft()'))}
+        ${field('cot θ', inp('zkd-cot', 1.2, 'updateZugkraft()'))}
+        ${field(tt('Stabdurchmesser Ø [mm]'), sel('zkd-ds', [12,14,16,20,25,28].map(v=>[String(v),'Ø '+v]), '16', 'updateZugkraft()'))}
+        ${field(tt('Stäbe unten gesamt'), inp('zkd-n', 6, 'updateZugkraft()', 1))}
+        ${field(tt('davon durchlaufend'), inp('zkd-nd', 3, 'updateZugkraft()', 1))}
+      </div>
+      <div class="calc-out" id="zkd-out"></div>
+      <a class="applink" href="size.html">→ Mit Durchlaufträger, Stützbewehrung und Bericht in „Bemessung“ (Stahlbeton → Zugkraftdeckung)</a>
+    </div>`,
+  'stahlbeton/stuetzen/zweiachsig': () => _L`
+    <div class="card">
+      <div class="card-title">Schiefe Biegung mit Normalkraft</div>
+      ${fig(skZweiachsig(),tt('Stütze mit Momenten um beide Achsen: Die Nulllinie liegt schräg, die Tragfähigkeit ist kleiner als bei getrennter Betrachtung.'))}
+      <p>Wirken an einer Stütze Momente um beide Hauptachsen, liegt die Nulllinie schräg im Querschnitt. Statt einer aufwendigen räumlichen Dehnungsebene erlaubt EC2 einen einfachen Interaktionsnachweis aus den beiden <b>einachsigen</b> Momententragfähigkeiten bei derselben Normalkraft.</p>
+      <div class="formula-box">
+        (M<sub>Ed,z</sub> / M<sub>Rd,z</sub>)<sup>a</sup> + (M<sub>Ed,y</sub> / M<sub>Rd,y</sub>)<sup>a</sup> ≤ 1
+        <div class="comment">EC2, 5.8.9, Gl. 5.39 · M<sub>Ed</sub> mit Imperfektion und Theorie II. Ordnung je Richtung · M<sub>Rd</sub> einachsig bei N<sub>Ed</sub></div>
+      </div>
+      ${textTable(['N<sub>Ed</sub>/N<sub>Rd</sub>','0,1','0,7','1,0'], [['a','1,0','1,5','2,0']])}
+      <div class="legend">Zwischenwerte linear · N<sub>Rd</sub> = A<sub>c</sub> · f<sub>cd</sub> + A<sub>s</sub> · f<sub>yd</sub></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Wann der Nachweis entfallen darf</div>
+      <p>Getrennte Nachweise je Richtung genügen, wenn die Schlankheiten ähnlich sind (λ<sub>y</sub>/λ<sub>z</sub> ≤ 2 und λ<sub>z</sub>/λ<sub>y</sub> ≤ 2) und eine Richtung klar überwiegt: (e<sub>y</sub>/h<sub>eq</sub>) / (e<sub>z</sub>/b<sub>eq</sub>) ≤ 0,2 oder ≥ 5 (EC2, 5.8.9(3)).</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Interaktion prüfen</div>
+      <div class="calc-grid">
+        ${field('N<sub>Ed</sub> [kN]', inp('zwa-N', 1500, 'updateZweiachsig()'))}
+        ${field('N<sub>Rd</sub> [kN]', inp('zwa-NR', 4000, 'updateZweiachsig()'))}
+        ${field('M<sub>Ed,y</sub> [kNm]', inp('zwa-My', 80, 'updateZweiachsig()'))}
+        ${field('M<sub>Rd,y</sub> [kNm]', inp('zwa-MRy', 200, 'updateZweiachsig()'))}
+        ${field('M<sub>Ed,z</sub> [kNm]', inp('zwa-Mz', 50, 'updateZweiachsig()'))}
+        ${field('M<sub>Rd,z</sub> [kNm]', inp('zwa-MRz', 150, 'updateZweiachsig()'))}
+      </div>
+      <div class="calc-out" id="zwa-out"></div>
+      <p><a class="applink" href="#/stahlbeton/stuetzen/bemessung">→ M<sub>Rd</sub> einachsig berechnen (Stützen bemessen)</a></p>
+      <a class="applink" href="size.html">→ Mit Bewehrungswahl und Bericht in „Bemessung“ (Stahlbeton → Stütze zweiachsig)</a>
+    </div>`,
+  'stahlbeton/bemessung/platte2': () => _L`
+    <div class="card">
+      <div class="card-title">Lastabtrag in zwei Richtungen</div>
+      ${fig(skPlatte2(),tt('Zwei kreuzende Plattenstreifen in Feldmitte: gleiche Durchbiegung bestimmt, welcher Anteil der Last in welche Richtung geht.'))}
+      <p>Ist eine Platte allseitig gelagert und das Seitenverhältnis kleiner als etwa 2, trägt sie in beide Richtungen. Denkt man sich zwei kreuzende Streifen in Feldmitte, müssen sie sich gleich durchbiegen. Weil die Durchbiegung mit l⁴ wächst, nimmt der <b>kürzere</b> Streifen den größeren Lastanteil auf. Marcus berücksichtigt zusätzlich die Drillsteifigkeit der Platte, die die Feldmomente spürbar abmindert.</p>
+      <div class="formula-box">
+        k<sub>x</sub> = l<sub>y</sub>⁴ / (l<sub>x</sub>⁴ + l<sub>y</sub>⁴) · k<sub>y</sub> = 1 − k<sub>x</sub><br>
+        ν<sub>x</sub> = 1 − 5/6 · (l<sub>x</sub>/l<sub>y</sub>)² · k<sub>x</sub> · ν<sub>y</sub> = 1 − 5/6 · (l<sub>y</sub>/l<sub>x</sub>)² · k<sub>y</sub><br>
+        m<sub>x</sub> = ν<sub>x</sub> · k<sub>x</sub> · q · l<sub>x</sub>²/8 · m<sub>y</sub> = ν<sub>y</sub> · k<sub>y</sub> · q · l<sub>y</sub>²/8
+        <div class="comment">allseitig gelenkig gelagerte Rechteckplatte, Gleichlast q · l<sub>x</sub> ≤ l<sub>y</sub> · bei Einspannungen Tafeln (z. B. Czerny, Pieper/Martens)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Bewehrung</div>
+      <ul>
+        <li>Die Bewehrung der kürzeren Spannrichtung liegt außen (größere Nutzhöhe d<sub>x</sub>), die der längeren darüber (d<sub>y</sub> = d<sub>x</sub> − (Ø<sub>x</sub> + Ø<sub>y</sub>)/2).</li>
+        <li>In den Ecken heben sich gelenkig gelagerte Platten ab, wenn sie nicht gehalten sind; dort braucht es Drillbewehrung oben und unten.</li>
+        <li>Ab l<sub>y</sub>/l<sub>x</sub> > 2 trägt die Platte praktisch einachsig.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Feldmomente nach Marcus berechnen</div>
+      <div class="calc-grid">
+        ${field(tt('Seite l<sub>x</sub> [m]'), inp('pl2-lx', 5.0, 'updatePlatte2()'))}
+        ${field(tt('Seite l<sub>y</sub> [m]'), inp('pl2-ly', 6.0, 'updatePlatte2()'))}
+        ${field('q<sub>Ed</sub> [kN/m²]', inp('pl2-q', 10, 'updatePlatte2()'))}
+      </div>
+      <div class="calc-out" id="pl2-out"></div>
+      <a class="applink" href="size.html">→ Mit Biegebemessung beider Lagen und Bericht in „Bemessung“ (Stahlbeton → Platte zweiachsig)</a>
+    </div>`,
   'stahlbeton/stuetzen/schlankheit': () => _L`
     <div class="card">
       <div class="card-title">Ersatzlänge und Schlankheit</div>
@@ -10802,6 +11333,7 @@ Object.assign(AFTER, {
   'mauerwerk/bemessung/teilflaeche': () => updateMWT(),
   'mauerwerk/bemessung/keller': () => updateMWK(),
   'mauerwerk/bemessung/schub': () => updateMWS(),
+  'mauerwerk/bemessung/ausfach': () => updateAusfach(),
   'wasserbau/grundlagen/kennzahlen': () => updateKZ(),
   'wasserbau/hydrodynamik/ausfluss': () => updateAusfl(),
   'wasserbau/hydrodynamik/pumpen': () => updatePumpe(),
@@ -10855,6 +11387,9 @@ Object.assign(AFTER, {
   'stahlbeton/baustoffe/kriechen': () => updateKS(),
   'stahlbeton/bemessung/kd': () => updateKD(),
   'stahlbeton/bemessung/torsion': () => updateTor(),
+  'stahlbeton/bewehrung/zugkraft': () => updateZugkraft(),
+  'stahlbeton/stuetzen/zweiachsig': () => updateZweiachsig(),
+  'stahlbeton/bemessung/platte2': () => updatePlatte2(),
 });
 
 
@@ -11054,6 +11589,7 @@ const SEARCH_EXTRA = {
   'mauerwerk/baustoffe/moertel': () => 'Normalmörtel Dünnbettmörtel Leichtmörtel NM IIa NM III Überbindemaß Läuferverband Blockverband',
   'mauerwerk/baustoffe/festigkeit': () => 'fk fd E-Modul Kriechen Schwinden Haftscherfestigkeit EC6',
   'mauerwerk/bemessung/wand': () => 'Phi Abminderungsfaktor Endauflager Deckenverdrehung NRd EC6 DIN EN 1996-3',
+  'mauerwerk/bemessung/ausfach': () => 'Ausfachung Ausfachungswand nichttragend Wind Rahmen Skelett NA.C zulässige Fläche',
   'wasserbau/grundlagen/stoffwerte': () => 'Dichte Viskosität Zähigkeit Dampfdruck Oberflächenspannung Temperatur',
   'wasserbau/grundlagen/kennzahlen': () => 'Reynoldszahl Reynolds Froudezahl Froude Weber laminar turbulent Ähnlichkeit',
   'wasserbau/hydrodynamik/rohr': () => 'Moody Colebrook Darcy-Weisbach Swamee-Jain Rauheit Zeta Verlustbeiwert',
@@ -11071,6 +11607,9 @@ const SEARCH_EXTRA = {
   'stahlbeton/baustoffe/beton': () => 'Betonfestigkeit Druckfestigkeit fck fctm Elastizitätsmodul ' + BETON.map(r=>r[0]).join(' '),
   'stahlbeton/dauerhaftigkeit/deckung': () => 'Betondeckung cnom Vorhaltemaß Korrosion Karbonatisierung ' + EXPO.map(r=>r[0]).join(' '),
   'stahlbeton/bemessung/biegung': () => 'Biegebemessung Bewehrung As mu omega Tabelle Rechteckquerschnitt',
+  'stahlbeton/bewehrung/zugkraft': () => 'Zugkraftdeckung Staffelung Versatzmaß al Zugkraftlinie Deckungslinie Verankerung lbd',
+  'stahlbeton/stuetzen/zweiachsig': () => 'zweiachsige Biegung schiefe Biegung Stütze Interaktion Exponent a 5.8.9',
+  'stahlbeton/bemessung/platte2': () => 'zweiachsig gespannte Platte Marcus Lastaufteilung Drillsteifigkeit Kreuzstreifen',
   'stahlbeton/bemessung/kd': () => 'kd ks Tafel Bemessungstafel dimensionsgebunden',
   'stahlbeton/baustoffe/kriechen': () => 'Kriechzahl phi Schwindmaß Endkriechzahl wirksame Dicke h0',
   'stahlbeton/bewehrung/matten': () => 'Lagermatten Q188A Q257A Q335A R188A Biegerollendurchmesser Übergreifungslänge alpha6 Stoß',

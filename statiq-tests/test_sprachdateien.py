@@ -13,7 +13,8 @@ def check(name, ok, info=''):
 def lf(app,l):
     t=open(os.path.join(BASE,'lang',f'{app}.{l}.js'),encoding='utf-8').read(); return json.loads(t[t.index('{'):t.rindex('}')+1])
 
-for app,limit in [('size',1_300_000),('ref',1_000_000)]:
+# ref-Grenze in v0.3.68 auf 1,1 MB angehoben: Inhalt (Wissen-Pakete) gewachsen, Übersetzungen weiter ausgelagert
+for app,limit in [('size',1_300_000),('ref',1_100_000)]:
     sz=os.path.getsize(os.path.join(BASE,app+'.html'))
     check(f'{app}.html ohne Übersetzungen kleiner als {limit//1000} kB', sz<limit, sz)
     src=open(os.path.join(BASE,app+'.html'),encoding='utf-8').read()

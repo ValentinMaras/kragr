@@ -1151,6 +1151,7 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"Haftscherfestigkeit nach deutschem NA. Reibung (0,4·σ<sub>d</sub>) und die Grenze 0,065·f<sub>b</sub> folgen der EN; die NA-Nachweise für Steinzugversagen und Schubschlankheit sind nicht enthalten.":"Résistance initiale au cisaillement selon l’AN allemande. Le frottement (0,4·σ<sub>d</sub>) et la limite 0,065·f<sub>b</sub> suivent l’EN ; les vérifications de l’AN pour la rupture des blocs en traction et l’élancement en cisaillement ne sont pas incluses.",
 "Trägerstoß T2 — Laschen":"Joint de poutre T2 — éclisses",
 "Laschenstoß":"Éclissage",
 "Stahl — Laschenstoß":"Acier — Éclissage boulonné",
@@ -2508,7 +2509,6 @@ window.MULY_LANG = {
 "Schubfestigkeit: Haftscherfestigkeit plus Reibung aus der Auflast (EN 1996-1-1, 3.6.2)":"Résistance au cisaillement : résistance initiale au cisaillement plus frottement dû à la charge verticale (EN 1996-1-1, 3.6.2)",
 " · Stoßfugen unvermörtelt: 0,5·f<sub>vk0</sub> = {} N/mm²":" · joints verticaux non remplis de mortier : 0,5·f<sub>vk0</sub> = {} N/mm²",
 "Schubtragfähigkeit über die überdrückte Länge":"Résistance au cisaillement sur la longueur comprimée",
-"Das deutsche NA ergänzt Nachweise für Steinzugversagen und die Schubschlankheit — die Werte hier folgen den Empfehlungen von EN 1996-1-1.":"L'AN allemand ajoute des vérifications pour la rupture de l'élément par traction et pour l'élancement au cisaillement — les valeurs ici suivent les recommandations de l'EN 1996-1-1.",
 "Blau: Druckspannung in der Lagerfuge am Wandfuß; nur der überdrückte Teil l<sub>c</sub> trägt Schub.":"Bleu : contrainte de compression dans le joint horizontal en pied de voile ; seule la partie comprimée l<sub>c</sub> reprend le cisaillement.",
 "Genaueres Verfahren nach DIN EN 1996-1-1 (Knicken mit Kriechen, Lastausmitten), drei- und vierseitig gehaltene Wände, Bewehrtes Mauerwerk, Biegung senkrecht zur Wandebene aus Wind, Brandschutz und die Festigkeitstabellen des deutschen NA.":"Méthode plus précise selon DIN EN 1996-1-1 (flambement avec fluage, excentricités des charges), voiles tenus sur trois et quatre côtés, maçonnerie armée, flexion perpendiculaire au plan du voile due au vent, sécurité incendie et tableaux de résistances de l'AN allemand.",
 "Normalmörtel":"Mortier courant",

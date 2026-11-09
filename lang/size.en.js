@@ -1151,6 +1151,7 @@ window.MULY_LANG = {
 "posRecalc":"“{0}” recalculated with the newer calculation from “Internal forces” and saved."
 },
 "ttx": {
+"Haftscherfestigkeit nach deutschem NA. Reibung (0,4·σ<sub>d</sub>) und die Grenze 0,065·f<sub>b</sub> folgen der EN; die NA-Nachweise für Steinzugversagen und Schubschlankheit sind nicht enthalten.":"Initial shear strength to the German NA. Friction (0.4·σ<sub>d</sub>) and the limit 0.065·f<sub>b</sub> follow the EN; the NA checks for unit tensile failure and shear slenderness are not included.",
 "Trägerstoß T2 — Laschen":"Beam splice T2 — cover plates",
 "Laschenstoß":"Bolted splice",
 "Stahl — Laschenstoß":"Steel — Bolted cover plate splice",
@@ -2509,7 +2510,6 @@ window.MULY_LANG = {
 "Schubfestigkeit: Haftscherfestigkeit plus Reibung aus der Auflast (EN 1996-1-1, 3.6.2)":"Shear strength: initial shear strength plus friction from the vertical load (EN 1996-1-1, 3.6.2)",
 " · Stoßfugen unvermörtelt: 0,5·f<sub>vk0</sub> = {} N/mm²":" · head joints unfilled: 0.5·f<sub>vk0</sub> = {} N/mm²",
 "Schubtragfähigkeit über die überdrückte Länge":"Shear resistance over the compressed length",
-"Das deutsche NA ergänzt Nachweise für Steinzugversagen und die Schubschlankheit — die Werte hier folgen den Empfehlungen von EN 1996-1-1.":"The German NA adds checks for unit tensile failure and shear slenderness — the values here follow the recommendations of EN 1996-1-1.",
 "Blau: Druckspannung in der Lagerfuge am Wandfuß; nur der überdrückte Teil l<sub>c</sub> trägt Schub.":"Blue: compressive stress in the bed joint at the wall base; only the compressed part l<sub>c</sub> carries shear.",
 "Genaueres Verfahren nach DIN EN 1996-1-1 (Knicken mit Kriechen, Lastausmitten), drei- und vierseitig gehaltene Wände, Bewehrtes Mauerwerk, Biegung senkrecht zur Wandebene aus Wind, Brandschutz und die Festigkeitstabellen des deutschen NA.":"More accurate method to DIN EN 1996-1-1 (buckling with creep, load eccentricities), walls restrained on three and four sides, reinforced masonry, out-of-plane bending from wind, fire protection and the strength tables of the German NA.",
 "Normalmörtel":"General-purpose mortar",

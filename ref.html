@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.69 -->
+<!-- kragr·ref v0.3.70 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1392,7 +1392,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.69';
+const REF_VERSION = '0.3.70';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -5565,7 +5565,7 @@ function mwFest(art, m, fb, fm){
   if(r.err){ fk=NaN; err=r.err; S.push('!'+err); }
   else { fk=r.fk; S.push(_L`f<sub>k</sub> = ${f(fk,1)} N/mm² (Tabelle NA.D: ${tt(r.tab)}, Steinfestigkeitsklasse ${r.cls}, ${m==='dm'?tt('Dünnbettmörtel'):'M '+String(r.M).replace('.',',')})`);
     if(r.rounded) S.push(_L`!Klasse ${String(fb).replace('.',',')} auf die nächstkleinere Tabellenklasse ${r.cls} abgerundet`); }
-  const fvk0 = m==='dm' ? ({z:0.30,k:0.40,p:0.30,l:0.30})[A.t] : (A.t==='z' ? (fm>=10?0.30:fm>=2.5?0.20:0.10) : (fm>=10?0.20:fm>=2.5?0.15:0.10));
+  const fvk0 = (m==='dm' ? 0.22 : fm>=20 ? 0.26 : fm>=10 ? 0.22 : fm>=5 ? 0.18 : 0.08);
   const fd=MWR.zeta*fk/MWR.gM;
   S.push(`f<sub>d</sub> = ζ · f<sub>k</sub> / γ<sub>M</sub> = 0,85 · ${f(fk,2)} / 1,5 = ${f(fd,3)} N/mm²`);
   return { fk, fd, K:null, fvk0, grp:A.g, typ:A.t, name:A.n, S, err };
@@ -5643,7 +5643,7 @@ function updateFk(){
     `§Bemessungswert`, R.S[R.S.length-1], _L`!ζ = 0,85 erfasst die geringere Festigkeit unter Dauerlast; γ<sub>M</sub> = 1,5 für Mauerwerk nach NA`,
     _L`§Verformungskennwerte (NA, Anhaltswerte)`, `E = K<sub>E</sub> · f<sub>k</sub> = ${dk(rw.KE)} · ${f(R.fk,2)} = ${dk(E)} N/mm²`,
     _L`!Endkriechzahl φ<sub>∞</sub> = ${f(rw.phi,1)} · Endschwinden ε<sub>∞</sub> = ${f(rw.eps,1).replace('-','−')} mm/m · α<sub>t</sub> = ${rw.at} · 10⁻⁶ /K`,
-    _L`§Haftscherfestigkeit (Tab. 3.4, Empfehlung)`, `!f<sub>vk0</sub> = ${f(R.fvk0,2)} N/mm²`]);
+    _L`§Haftscherfestigkeit (DIN EN 1996-1-1/NA)`, `!f<sub>vk0</sub> = ${f(R.fvk0,2)} N/mm²`]);
 }
 // ── Knicklänge ──
 function mwRho2(t, decke){ return decke==='hb' ? 1.0 : (t<=175 ? 0.75 : t<=250 ? 0.90 : 1.0); }
@@ -5757,7 +5757,7 @@ function updateMWS(){
     _L`§Überdrückte Länge`, R.e<=l/6 ? _L`!e ≤ l/6 = ${f(l/6,3)} m: ganze Länge überdrückt, l<sub>c</sub> = ${f(R.lc,3)} m` : `l<sub>c</sub> = 3 · (l/2 − e) = 3 · (${f(l/2,3)} − ${f(R.e,3)}) = ${f(R.lc,3)} m`,
     `§Randdruck`, ...I.M.S, R.e<=l/6 ? `σ<sub>max</sub> = N / (t · l) · (1 + 6e/l) = ${f(R.smax,3)} N/mm²` : `σ<sub>max</sub> = 2N / (t · l<sub>c</sub>) = ${f(R.smax,3)} N/mm²`,
     `!σ<sub>max</sub> / f<sub>d</sub> = ${f(R.smax/I.M.fd,3)} ${ok(R.smax/I.M.fd)}`,
-    `§Schubfestigkeit (EN 1996-1-1, 3.6.2)`, `!f<sub>vk0</sub> = ${f(I.M.fvk0,2)} N/mm² (Tab. 3.4)${I.stoss?_L` · Stoßfugen unvermörtelt: halber Wert ${f(R.fvk0,3)} N/mm²`:''}`,
+    `§Schubfestigkeit (EN 1996-1-1, 3.6.2)`, `!f<sub>vk0</sub> = ${f(I.M.fvk0,2)} N/mm² (DIN EN 1996-1-1/NA)${I.stoss?_L` · Stoßfugen unvermörtelt: halber Wert ${f(R.fvk0,3)} N/mm²`:''}`,
     `σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>) = ${f(I.N,1)} / (${I.t} · ${f(R.lc,3)}) = ${f(R.sd,3)} N/mm²`,
     `f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> = ${f(R.fvk0,3)} + 0,4 · ${f(R.sd,3)} = ${f(R.fvk0+0.4*R.sd,3)} N/mm²`,
     `!Grenze 0,065 · f<sub>b</sub> = ${f(R.fvlt,3)} N/mm² → f<sub>vk</sub> = ${f(R.fvk,3)} N/mm²`, `f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub> = ${f(R.fvk,3)} / 1,5 = ${f(R.fvd,3)} N/mm²`,
@@ -8573,10 +8573,10 @@ Object.assign(CONTENT, {
         Ausmitte:&nbsp; e = M<sub>Ed</sub> / N<sub>Ed</sub> ≤ l/3&nbsp;&nbsp;&nbsp; überdrückte Länge:&nbsp; l<sub>c</sub> = l (e ≤ l/6) bzw. l<sub>c</sub> = 3 · (l/2 − e)<br>
         f<sub>vk</sub> = f<sub>vk0</sub> + 0,4 · σ<sub>d</sub> ≤ 0,065 · f<sub>b</sub>&nbsp;&nbsp;&nbsp; σ<sub>d</sub> = N<sub>Ed</sub> / (t · l<sub>c</sub>)<br>
         V<sub>Ed</sub> ≤ V<sub>Rd</sub> = f<sub>vd</sub> · t · l<sub>c</sub>&nbsp;&nbsp;&nbsp; f<sub>vd</sub> = f<sub>vk</sub> / γ<sub>M</sub>
-        <div class="comment">Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Das deutsche NA ergänzt Steinzugversagen und Schubschlankheit — hier die Empfehlungen der EN.</div>
+        <div class="comment">Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Haftscherfestigkeit nach deutschem NA; Reibung und die Grenze 0,065 · f<sub>b</sub> nach EN — die NA-Nachweise für Steinzugversagen und Schubschlankheit sind hier nicht enthalten.</div>
       </div>
-      ${textTable([tt('Mörtel'),tt('Ziegel'),tt('Kalksandstein, Beton, Porenbeton')], [['M10 … M20','0,30','0,20'],['M2,5 … M9','0,20','0,15'],['M1 … M2','0,10','0,10'],[tt('Dünnbettmörtel'),'0,30','0,40 (KS), 0,30 (sonst)']])}
-      <div class="legend">Haftscherfestigkeit f<sub>vk0</sub> [N/mm²] nach Tab. 3.4 (Empfehlung). Unvermörtelte Stoßfugen: halber Wert.</div>
+      ${textTable([tt('Mörtel'),'f<sub>vk0</sub> [N/mm²]'], [[tt('Normalmörtel M 2,5 (NM II)'),'0,08'],[tt('Normalmörtel M 5 (NM IIa)'),'0,18'],[tt('Normalmörtel M 10 (NM III)'),'0,22'],[tt('Normalmörtel M 20 (NM IIIa)'),'0,26'],[tt('Dünnbettmörtel'),'0,22']])}
+      <div class="legend">Haftscherfestigkeit f<sub>vk0</sub> nach DIN EN 1996-1-1/NA, für alle Steinarten gleich (die EN-Empfehlung Tab. 3.4 liegt mit 0,10 … 0,40 teils deutlich höher). Unvermörtelte Stoßfugen: halber Wert.</div>
     </div>
     <div class="card">
       <div class="card-title">Schubwand nachweisen</div>
@@ -10305,9 +10305,9 @@ Object.assign(CONTENT, {
         ['SE',tt('enggestufte Sande'),'≤ 5 %',tt('F1 nicht')],['SW',tt('weitgestufte Sand-Kies-Gemische'),'≤ 5 %',tt('F1 nicht')],['SI',tt('intermittierend gestufte Sand-Kies-Gemische'),'≤ 5 %',tt('F1 nicht')],
         ['GU, GT',tt('Kies-Schluff- bzw. Kies-Ton-Gemische'),'5 … 15 %',tt('F2 gering bis mittel')],['GU*, GT*',tt('Kies-Schluff- bzw. Kies-Ton-Gemische'),'15 … 40 %','F3 sehr'],
         ['SU, ST',tt('Sand-Schluff- bzw. Sand-Ton-Gemische'),'5 … 15 %',tt('F2 gering bis mittel')],['SU*, ST*',tt('Sand-Schluff- bzw. Sand-Ton-Gemische'),'15 … 40 %','F3 sehr'],
-        ['UL, UM, UA',tt('leicht / mittel / ausgeprägt plastische Schluffe'),'> 40 %','F3 sehr (UA: F2)'],
+        ['UL, UM, UA',tt('leicht / mittel / ausgeprägt plastische Schluffe'),'> 40 %','F3 sehr'],
         ['TL, TM, TA',tt('leicht / mittel / ausgeprägt plastische Tone'),'> 40 %','F3 / F2 / F2'],
-        ['OU, OT, OH, OK',tt('organische Schluffe und Tone, humose und kalkhaltige Böden'),'—','F3'],
+        ['OU',tt('organische Schluffe'),'—','F3 sehr'],['OT, OH, OK',tt('organische Tone, humose und kalkhaltige Böden'),'—',tt('F2 gering bis mittel')],
         ['HN, HZ, F',tt('Torfe, Mudden'),'—',tt('nicht als Baugrund')],
         ['A',tt('Auffüllung'),'—',tt('je nach Material')]])}
       <div class="legend">G Kies · S Sand · U Schluff · T Ton · O organisch · H Torf · E eng, W weit, I intermittierend gestuft · L, M, A: Fließgrenze &lt; 35 %, 35 … 50 %, &gt; 50 %.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.34 -->
+<!-- kragr·size v0.7.35 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -4207,7 +4207,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.34';
+const SIZE_VERSION = '0.7.35';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -7766,8 +7766,8 @@ function readMW(){
     if(r.err){ fk=NaN; err=r.err; how=err; }
     else { fk=r.fk; how=_L`f<sub>k</sub> = ${deNum(fk,1)} N/mm² (DIN EN 1996-3/NA, Anhang NA.D: ${tt(r.tab)}, Steinfestigkeitsklasse ${r.cls}, ${m==='dm'?tt('Dünnbettmörtel'):'M '+String(r.M).replace('.',',')})`
       + (r.rounded ? _L` – Klasse ${String(fb).replace('.',',')} auf die nächstkleinere Tabellenklasse ${r.cls} abgerundet` : ''); } }
-  // Haftscherfestigkeit f_vk0 nach EN 1996-1-1 Tab. 3.4 (empfohlen)
-  const fvk0 = m==='dm' ? ({z:0.30,k:0.40,p:0.30,l:0.30})[A.t] : (A.t==='z' ? (fm>=10?0.30:fm>=2.5?0.20:0.10) : (fm>=10?0.20:fm>=2.5?0.15:0.10));
+  // Haftscherfestigkeit f_vk0 nach DIN EN 1996-1-1/NA (NM II/IIa/III/IIIa = M 2,5/5/10/20, Dünnbettmörtel 0,22) — seit size v0.7.35 statt EN-Empfehlung Tab. 3.4
+  const fvk0 = (m==='dm' ? 0.22 : fm>=20 ? 0.26 : fm>=10 ? 0.22 : fm>=5 ? 0.18 : 0.08);
   const fd = MW.zeta*fk/MW.gM;
   return { art, m, fb, fm, own, K, fk, fd, fvk0, grp:A.g, artName:A.n, how, err };
 }
@@ -7936,12 +7936,12 @@ function nachweiseMH(I){
     `σ<sub>max</sub> = ${e<=l/6?'N/(t·l)·(1 + 6e/l)':'2N/(t·l<sub>c</sub>)'} = <b>${f3(smax)} N/mm²</b> ${smax<=M.fd?'≤':'>'} f<sub>d</sub> = ${f3(M.fd)} N/mm²`] });
   C.push({ id:'mhv', title:tt('Schub in Wandebene'), eta: I.V>0 ? I.V/VRd : 0, ok:I.V<=VRd, steps:[
     H(tt('Schubfestigkeit: Haftscherfestigkeit plus Reibung aus der Auflast (EN 1996-1-1, 3.6.2)')),
-    `f<sub>vk0</sub> = ${deNum(M.fvk0,2)} N/mm² (Tab. 3.4, empfohlen)${I.stoss?_L` · Stoßfugen unvermörtelt: 0,5·f<sub>vk0</sub> = ${deNum(fvk0,3)} N/mm²`:''}`,
+    `f<sub>vk0</sub> = ${deNum(M.fvk0,2)} N/mm² (DIN EN 1996-1-1/NA)${I.stoss?_L` · Stoßfugen unvermörtelt: 0,5·f<sub>vk0</sub> = ${deNum(fvk0,3)} N/mm²`:''}`,
     `σ<sub>d</sub> = N<sub>Ed</sub>/(t·l<sub>c</sub>) = ${f1(I.N)}/(${I.t}·${f(lc)}) = ${f3(sd)} N/mm²`,
     `f<sub>vk</sub> = f<sub>vk0</sub> + 0,4·σ<sub>d</sub> = ${f3(fvk0+0.4*sd)} ≤ 0,065·f<sub>b</sub> = ${f3(fvlt)} → <b>${f3(fvk)} N/mm²</b> · f<sub>vd</sub> = f<sub>vk</sub>/1,5 = ${f3(fvd)} N/mm²`,
     H(tt('Schubtragfähigkeit über die überdrückte Länge')),
     `V<sub>Rd</sub> = f<sub>vd</sub>·t·l<sub>c</sub> = ${f3(fvd)}·${I.t}·${f(lc)} = <b>${f1(VRd)} kN</b> ${I.V<=VRd?'≥':'<'} V<sub>Ed</sub> = ${f1(I.V)} kN`],
-    note:tt('Das deutsche NA ergänzt Nachweise für Steinzugversagen und die Schubschlankheit — die Werte hier folgen den Empfehlungen von EN 1996-1-1.') });
+    note:tt('Haftscherfestigkeit nach deutschem NA. Reibung (0,4·σ<sub>d</sub>) und die Grenze 0,065·f<sub>b</sub> folgen der EN; die NA-Nachweise für Steinzugversagen und Schubschlankheit sind nicht enthalten.') });
   return { C, ok:C.every(c=>c.ok), Mb, e, lc, sd, smax, fvk, fvd, VRd };
 }
 function figMH(I, res){

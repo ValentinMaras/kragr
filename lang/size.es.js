@@ -1151,6 +1151,7 @@ window.MULY_LANG = {
 "pc047":"S355GP (355 N/mm²)"
 },
 "ttx": {
+"Haftscherfestigkeit nach deutschem NA. Reibung (0,4·σ<sub>d</sub>) und die Grenze 0,065·f<sub>b</sub> folgen der EN; die NA-Nachweise für Steinzugversagen und Schubschlankheit sind nicht enthalten.":"Resistencia inicial a cortante según el AN alemán. El rozamiento (0,4·σ<sub>d</sub>) y el límite 0,065·f<sub>b</sub> siguen la EN; no se incluyen las comprobaciones del AN de rotura de las piezas a tracción ni de esbeltez a cortante.",
 "Trägerstoß T2 — Laschen":"Empalme de viga T2 — cubrejuntas",
 "Laschenstoß":"Empalme con cubrejuntas",
 "Stahl — Laschenstoß":"Acero — Empalme con cubrejuntas",
@@ -2508,7 +2509,6 @@ window.MULY_LANG = {
 "Schubfestigkeit: Haftscherfestigkeit plus Reibung aus der Auflast (EN 1996-1-1, 3.6.2)":"Resistencia a cortante: resistencia inicial a cortante más rozamiento debido a la carga vertical (EN 1996-1-1, 3.6.2)",
 " · Stoßfugen unvermörtelt: 0,5·f<sub>vk0</sub> = {} N/mm²":" · llagas sin mortero: 0,5·f<sub>vk0</sub> = {} N/mm²",
 "Schubtragfähigkeit über die überdrückte Länge":"Resistencia a cortante sobre la longitud comprimida",
-"Das deutsche NA ergänzt Nachweise für Steinzugversagen und die Schubschlankheit — die Werte hier folgen den Empfehlungen von EN 1996-1-1.":"El Anejo Nacional alemán añade comprobaciones para la rotura por tracción de la pieza y para la esbeltez a cortante; los valores aquí siguen las recomendaciones de la EN 1996-1-1.",
 "Blau: Druckspannung in der Lagerfuge am Wandfuß; nur der überdrückte Teil l<sub>c</sub> trägt Schub.":"Azul: tensión de compresión en el tendel en el pie del muro; solo la parte comprimida l<sub>c</sub> resiste el cortante.",
 "Genaueres Verfahren nach DIN EN 1996-1-1 (Knicken mit Kriechen, Lastausmitten), drei- und vierseitig gehaltene Wände, Bewehrtes Mauerwerk, Biegung senkrecht zur Wandebene aus Wind, Brandschutz und die Festigkeitstabellen des deutschen NA.":"Método más preciso según DIN EN 1996-1-1 (pandeo con fluencia, excentricidades de las cargas), muros arriostrados en tres y cuatro lados, fábrica armada, flexión perpendicular al plano del muro por viento, protección contra incendios y tablas de resistencias del Anejo Nacional alemán.",
 "Normalmörtel":"Mortero ordinario",

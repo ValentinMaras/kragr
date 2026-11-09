@@ -17,6 +17,15 @@ window.MULY_LANG = {
 "pickNone":"Ningún tema encontrado"
 },
 "ttx": {
+"Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Haftscherfestigkeit nach deutschem NA; Reibung und die Grenze 0,065 · f<sub>b</sub> nach EN — die NA-Nachweise für Steinzugversagen und Schubschlankheit sind hier nicht enthalten.":"Para V<sub>Rd</sub> usar el axil mínimo y para la compresión de borde el máximo. Resistencia inicial a cortante según el AN alemán; rozamiento y límite 0,065 · f<sub>b</sub> según la EN — no se incluyen aquí las comprobaciones del AN de rotura de las piezas a tracción ni de esbeltez a cortante.",
+"Haftscherfestigkeit f<sub>vk0</sub> nach DIN EN 1996-1-1/NA, für alle Steinarten gleich (die EN-Empfehlung Tab. 3.4 liegt mit 0,10 … 0,40 teils deutlich höher). Unvermörtelte Stoßfugen: halber Wert.":"Resistencia inicial a cortante f<sub>vk0</sub> según DIN EN 1996-1-1/NA, igual para todos los tipos de pieza (la recomendación EN, tabla 3.4, es en parte bastante mayor con 0,10 … 0,40). Juntas verticales sin mortero: la mitad del valor.",
+"Normalmörtel M 2,5 (NM II)":"Mortero ordinario M 2,5 (NM II)",
+"Normalmörtel M 5 (NM IIa)":"Mortero ordinario M 5 (NM IIa)",
+"Normalmörtel M 10 (NM III)":"Mortero ordinario M 10 (NM III)",
+"Normalmörtel M 20 (NM IIIa)":"Mortero ordinario M 20 (NM IIIa)",
+"organische Schluffe":"limos orgánicos",
+"organische Tone, humose und kalkhaltige Böden":"arcillas orgánicas, suelos húmicos y calcáreos",
+"§Haftscherfestigkeit (DIN EN 1996-1-1/NA)":"§Resistencia inicial a cortante (DIN EN 1996-1-1/NA)",
 "<a class=\"applink\" href=\"size.html\">→ Mit Skizze, Abhilfe und Bericht in „Bemessung“ (Stahl → Laschenstoß)</a>":"<a class=\"applink\" href=\"size.html\">→ Con croquis, soluciones e informe en «Dimensionado» (Acero → Empalme con cubrejuntas)</a>",
 "Bitte gültige Werte eingeben (Querabstand w zwischen Steg mit Ausrundungen und Gurtbreite, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).":"Introduce valores válidos (gramil w entre el alma con acuerdos y el ancho del ala, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).",
 "DIN EN 1993-1-8 mit NA, 3.6 bis 3.8 (Kategorie A, Scher-Lochleibungsverbindung) · m — Anzahl der Scherfugen · Σr² — polares Trägheitsmoment der Schraubengruppe · e — Abstand Stoßfuge bis Schwerpunkt der Stegschrauben · lange Verbindungen (L<sub>j</sub> &gt; 15d): β<sub>Lf</sub>":"DIN EN 1993-1-8 con AN, 3.6 a 3.8 (categoría A, cortante y aplastamiento) · m — número de planos de corte · Σr² — momento polar de inercia del grupo de tornillos · e — distancia de la junta al centro de los tornillos del alma · uniones largas (L<sub>j</sub> &gt; 15d): β<sub>Lf</sub>",

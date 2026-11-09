@@ -17,6 +17,15 @@ window.MULY_LANG = {
 "pickNone":"Aucun thème trouvé"
 },
 "ttx": {
+"Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Haftscherfestigkeit nach deutschem NA; Reibung und die Grenze 0,065 · f<sub>b</sub> nach EN — die NA-Nachweise für Steinzugversagen und Schubschlankheit sind hier nicht enthalten.":"Pour V<sub>Rd</sub>, prendre l’effort normal le plus faible, pour la compression de rive le plus fort. Résistance initiale au cisaillement selon l’AN allemande ; frottement et limite 0,065 · f<sub>b</sub> selon l’EN — les vérifications de l’AN pour la rupture des blocs en traction et l’élancement en cisaillement ne sont pas incluses ici.",
+"Haftscherfestigkeit f<sub>vk0</sub> nach DIN EN 1996-1-1/NA, für alle Steinarten gleich (die EN-Empfehlung Tab. 3.4 liegt mit 0,10 … 0,40 teils deutlich höher). Unvermörtelte Stoßfugen: halber Wert.":"Résistance initiale au cisaillement f<sub>vk0</sub> selon DIN EN 1996-1-1/NA, identique pour tous les types de blocs (la recommandation EN, tab. 3.4, est parfois nettement plus élevée avec 0,10 … 0,40). Joints verticaux non remplis : moitié de la valeur.",
+"Normalmörtel M 2,5 (NM II)":"Mortier courant M 2,5 (NM II)",
+"Normalmörtel M 5 (NM IIa)":"Mortier courant M 5 (NM IIa)",
+"Normalmörtel M 10 (NM III)":"Mortier courant M 10 (NM III)",
+"Normalmörtel M 20 (NM IIIa)":"Mortier courant M 20 (NM IIIa)",
+"organische Schluffe":"limons organiques",
+"organische Tone, humose und kalkhaltige Böden":"argiles organiques, sols humifères et calcaires",
+"§Haftscherfestigkeit (DIN EN 1996-1-1/NA)":"§Résistance initiale au cisaillement (DIN EN 1996-1-1/NA)",
 "<a class=\"applink\" href=\"size.html\">→ Mit Skizze, Abhilfe und Bericht in „Bemessung“ (Stahl → Laschenstoß)</a>":"<a class=\"applink\" href=\"size.html\">→ Avec schéma, remèdes et note dans « Dimensionnement » (Acier → Éclissage)</a>",
 "Bitte gültige Werte eingeben (Querabstand w zwischen Steg mit Ausrundungen und Gurtbreite, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).":"Veuillez saisir des valeurs valides (pince w entre l’âme avec congés et la largeur de semelle, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).",
 "DIN EN 1993-1-8 mit NA, 3.6 bis 3.8 (Kategorie A, Scher-Lochleibungsverbindung) · m — Anzahl der Scherfugen · Σr² — polares Trägheitsmoment der Schraubengruppe · e — Abstand Stoßfuge bis Schwerpunkt der Stegschrauben · lange Verbindungen (L<sub>j</sub> &gt; 15d): β<sub>Lf</sub>":"DIN EN 1993-1-8 avec AN, 3.6 à 3.8 (catégorie A, cisaillement et pression diamétrale) · m — nombre de plans de cisaillement · Σr² — moment d’inertie polaire du groupe de boulons · e — distance du joint au centre des boulons d’âme · assemblages longs (L<sub>j</sub> &gt; 15d) : β<sub>Lf</sub>",

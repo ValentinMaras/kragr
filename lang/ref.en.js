@@ -17,6 +17,15 @@ window.MULY_LANG = {
 "pickNone":"No topic found"
 },
 "ttx": {
+"Für V<sub>Rd</sub> die kleinste, für den Randdruck die größte Normalkraft ansetzen. Haftscherfestigkeit nach deutschem NA; Reibung und die Grenze 0,065 · f<sub>b</sub> nach EN — die NA-Nachweise für Steinzugversagen und Schubschlankheit sind hier nicht enthalten.":"Use the smallest axial force for V<sub>Rd</sub> and the largest for the edge compression. Initial shear strength to the German NA; friction and the limit 0.065 · f<sub>b</sub> to the EN — the NA checks for unit tensile failure and shear slenderness are not included here.",
+"Haftscherfestigkeit f<sub>vk0</sub> nach DIN EN 1996-1-1/NA, für alle Steinarten gleich (die EN-Empfehlung Tab. 3.4 liegt mit 0,10 … 0,40 teils deutlich höher). Unvermörtelte Stoßfugen: halber Wert.":"Initial shear strength f<sub>vk0</sub> to DIN EN 1996-1-1/NA, the same for all unit types (the EN recommendation Table 3.4 is partly much higher at 0.10 … 0.40). Unfilled perpend joints: half the value.",
+"Normalmörtel M 2,5 (NM II)":"General-purpose mortar M 2.5 (NM II)",
+"Normalmörtel M 5 (NM IIa)":"General-purpose mortar M 5 (NM IIa)",
+"Normalmörtel M 10 (NM III)":"General-purpose mortar M 10 (NM III)",
+"Normalmörtel M 20 (NM IIIa)":"General-purpose mortar M 20 (NM IIIa)",
+"organische Schluffe":"organic silts",
+"organische Tone, humose und kalkhaltige Böden":"organic clays, humic and calcareous soils",
+"§Haftscherfestigkeit (DIN EN 1996-1-1/NA)":"§Initial shear strength (DIN EN 1996-1-1/NA)",
 "<a class=\"applink\" href=\"size.html\">→ Mit Skizze, Abhilfe und Bericht in „Bemessung“ (Stahl → Laschenstoß)</a>":"<a class=\"applink\" href=\"size.html\">→ With sketch, remedies and report in “Design” (Steel → Bolted splice)</a>",
 "Bitte gültige Werte eingeben (Querabstand w zwischen Steg mit Ausrundungen und Gurtbreite, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).":"Please enter valid values (gauge w between web with root radii and flange width, n<sub>v</sub> ≥ 2, 1 ≤ n<sub>h</sub> ≤ 3).",
 "DIN EN 1993-1-8 mit NA, 3.6 bis 3.8 (Kategorie A, Scher-Lochleibungsverbindung) · m — Anzahl der Scherfugen · Σr² — polares Trägheitsmoment der Schraubengruppe · e — Abstand Stoßfuge bis Schwerpunkt der Stegschrauben · lange Verbindungen (L<sub>j</sub> &gt; 15d): β<sub>Lf</sub>":"DIN EN 1993-1-8 with NA, 3.6 to 3.8 (category A, shear/bearing connection) · m — number of shear planes · Σr² — polar moment of inertia of the bolt group · e — distance from the joint to the centroid of the web bolts · long joints (L<sub>j</sub> &gt; 15d): β<sub>Lf</sub>",

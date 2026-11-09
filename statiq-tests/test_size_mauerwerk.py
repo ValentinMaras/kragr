@@ -89,7 +89,7 @@ async def main():
         for name,(l,t,h,lag,N,V,stoss) in {'Kragscheibe, ganz überdrückt':(3.0,175,2.75,'krag',180,25,False),'klaffende Fuge':(2.0,175,2.75,'krag',120,30,False),'oben eingespannt, Stoßfugen offen':(2.5,240,2.75,'ein',150,40,True)}.items():
             await pg.evaluate(f"$('mh-l').value={l}; $('mh-t').value={t}; $('mh-h').value={h}; $('mh-lag').value='{lag}'; $('mh-N').value={N}; $('mh-V').value={V}; $('mh-stoss').checked={str(stoss).lower()}; run()")
             M=V*h*(1 if lag=='krag' else 0.5); e=M/N; lc=l if e<=l/6 else 3*(l/2-e); sd=N/(t*lc)
-            fvk0=(0.5 if stoss else 1)*0.40; fvk=min(fvk0+0.4*sd, 0.065*20); VRd=fvk/1.5*t*lc
+            fvk0=(0.5 if stoss else 1)*0.22; fvk=min(fvk0+0.4*sd, 0.065*20); VRd=fvk/1.5*t*lc   # f_vk0 Dünnbettmörtel nach DIN EN 1996-1-1/NA (seit size v0.7.35)
             g=await pg.evaluate("[LAST.res.lc, LAST.res.VRd, LAST.res.e]")
             check(f'Schubwand {name}', abs(g[0]-lc)<1e-12 and abs(g[1]-VRd)<1e-9, f'l_c = {lc:.3f} m, V_Rd = {VRd:.1f} kN')
         for m,word in [('druck','Φ'),('teil','β'),('keller','Druckbogen'),('schub','Schub')]:

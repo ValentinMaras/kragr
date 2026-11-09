@@ -130,7 +130,7 @@ async def main():
         await go('bemessung/schub'); okk=True; bad=[]
         for art,m,fb,fm,l,t,h,lag,st,N,V in [('k1','dm',25,10,2.5,175,2.75,'krag','1',150,25),('z1','nm',12,10,4.0,240,2.75,'eing','0',300,60),('k2','nm',12,5,1.5,175,2.5,'krag','0',80,8),('z2','nm',8,2.5,3.0,365,2.75,'krag','0',400,20)]:
             f=fk(art,m,fb,fm); typ=art[0]
-            fvk0 = ({'z':.30,'k':.40,'p':.30,'l':.30}[typ]) if m=='dm' else ((.30 if fm>=10 else .20 if fm>=2.5 else .10) if typ=='z' else (.20 if fm>=10 else .15 if fm>=2.5 else .10))
+            fvk0 = 0.22 if m=='dm' else (.26 if fm>=20 else .22 if fm>=10 else .18 if fm>=5 else .08)   # DIN EN 1996-1-1/NA (Lücking Tab. 8, KS-Themenheft 9 Tafel 18)
             Mb=V*h*(1 if lag=='krag' else 0.5); e=Mb/N; lc=l if e<=l/6 else max(0,3*(l/2-e)); sd=N/(t*lc)
             fv=min((0.5 if st=='1' else 1)*fvk0+0.4*sd, 0.065*fb); VRd=fv/1.5*t*lc
             await setv('mws-', {'art':art,'m':m,'fb':fb,'fm':fm,'l':l,'t':t,'h':h,'lag':lag,'st':st,'N':N,'V':V}, 'updateMWS'); o=await out('mws-out')

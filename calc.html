@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.30 -->
+<!-- kragr v0.11.31 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1895,7 +1895,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.30</span>
+    <span class="version">v0.11.31</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2432,7 +2432,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.30';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.31';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7478,10 +7478,8 @@ k2All();
 // Je Stelle unabhängig gewählt → Umhüllende (Grenzlinien max/min). Durchbiegung: charakteristische Kombination (γ = 1).
 // Angezeigt (Tabellen, Knoten, Biegelinie, Bericht): eine echte Kombination — die maßgebende für |M| oder die gewählte.
 // ══════════════════════════════════════════════════
-const LF_TYPES = ['G','Q','S','W1','W2','T'];   // T: Temperatur (v0.11.6, ψ = 0,6 / 0,5 / 0)
-const LF_PSI = { A:[0.7,0.5,0.3], B:[0.7,0.5,0.3], C:[0.7,0.7,0.6], D:[0.7,0.7,0.6], E:[1.0,0.9,0.8], F:[0.7,0.7,0.6], H:[0,0,0] };
-const LF_PSI_S = [0.5,0.2,0], LF_PSI_W = [0.6,0.2,0], LF_PSI_T = [0.6,0.5,0];
-const LF_GSUP = 1.35, LF_GINF = 1.0, LF_GQ = 1.5;
+// Teilsicherheits- und Kombinationsbeiwerte (LF_TYPES, LF_PSI…, LF_GSUP, LF_GINF, LF_GQ, LF_GINF_CH, LF_XI) und die Überlagerung selbst
+// (lcRules, lcOptions, lcFac, lcAt, lcCombine, lcSample) liegen seit calc v0.11.31 im Rechenkern solver.js. Hier: Oberfläche, Hülle, Anzeige.
 // Bemessungsgrundlage (calc v0.11.22): UK nach BS EN 1990/NA — Gl. 6.10a/6.10b mit ξ = 0,925, ψ0 Wind 0,5 und Kategorie H 0,7 (ψ1 = ψ2 = 0)
 const lfUK = () => typeof window.kragrNA==='function' && window.kragrNA()==='uk';
 // FR (calc v0.11.24): NF EN 1990/NA — Gl. 6.10, γ und ψ wie die EN-Empfehlung (SCIA „Theoretical background NA EN 1990“), also wie DE; nur die Normangabe ändert sich
@@ -7491,10 +7489,7 @@ const lfES = () => typeof window.kragrNA==='function' && window.kragrNA()==='es'
 // CH (calc v0.11.26): SIA 260 (Typ 2) — γ_G 1,35 / günstig 0,80, Leiteinwirkung γ_Q = 1,5, Begleiteinwirkungen ψ0·Q_k ohne γ_Q (SIA 260, 4.4.3.4, Gl. 16).
 // Die ψ-Tabelle (SIA 260, Anhang A, Tab. 2) ist nicht frei zugänglich: ψ0 gibt man je Einwirkungsart selbst ein, leer = 1,0 (sichere Seite).
 const lfCH = () => typeof window.kragrNA==='function' && window.kragrNA()==='ch';
-const LF_GINF_CH = 0.80;
-function lfPsiCH(t, T){ const k=(T==='W1'||T==='W2')?'W':T, v=parseFloat(String(document.getElementById(`lf-psi-${t}-${k}`)?.value||'').replace(',','.')); return isFinite(v) ? Math.min(1, Math.max(0, v)) : 1; }
 const lfNorm = () => lfCH() ? lfTx('formulaCH') : lfUK() ? lfTx('formulaUK') : lfFR() ? lfTx('formula').replace(/(DIN )?EN 1990/, 'NF EN 1990/NA (FR)') : lfES() ? lfTx('formulaES') : lfTx('formula');
-const LF_XI = 0.925;
 const LF_MAG = ['F','H','Me','M','qa','qb','dTN','dTM'];
 const LF_SK = { beam:'beam', cantilever:'cant', cont:'cont', frame:'frame' };          // Bereich → lastCalc-Schlüssel
 const LF_K3 = { beam:'beam', cant:'cantilever', cont:'cont', frame:'frame' };          // Lastzeilen-System → Bereich
@@ -7562,9 +7557,14 @@ function lfHasSet(t){ if(!supxOn(t)) return false; return Object.entries(SUPX[t]
 function lfOnK3(sys){ const t=LF_K3[sys]; return !!t && lfOn(t); }
 function lfCat(t){ const v=document.getElementById('lf-cat-'+t)?.value; return LF_PSI[v] && !(lfES() && v==='E') ? v : 'A'; }   // ES (CTE DB-SE): keine Lager-Kategorie
 function lfFeld(t){ return t==='cont' && !!document.getElementById('lf-feld-cont')?.checked; }
-function lfPsi(t, T){ if(lfCH() && T!=='G'){ const p=lfPsiCH(t,T); return [p,p,p]; } const uk=lfUK(); return T==='Q' ? (uk && lfCat(t)==='H' ? [0.7,0,0] : LF_PSI[lfCat(t)]) : T==='S' ? LF_PSI_S : (T==='W1'||T==='W2') ? (uk ? [0.5,0.2,0] : LF_PSI_W) : T==='T' ? LF_PSI_T : [1,1,1]; }
-const lfExcl = (a, b) => (a==='W1'&&b==='W2') || (a==='W2'&&b==='W1');
+// Regeln für den Rechenkern aus Bemessungsgrundlage (Land) und Eingaben
+function lfRules(t){
+  const na = typeof window.kragrNA==='function' ? window.kragrNA() : 'de', raw=k=>parseFloat(String(document.getElementById(`lf-psi-${t}-${k}`)?.value||'').replace(',','.'));
+  return lcRules({ na, cat:document.getElementById('lf-cat-'+t)?.value, psiCH: na==='ch' ? {Q:raw('Q'), S:raw('S'), W:raw('W'), T:raw('T')} : null });
+}
+function lfPsi(t, T){ return lfRules(t).psi[T] || [1,1,1]; }
 const lfSegName = k => k==='L' ? lfTx('ovL') : k==='R' ? lfTx('ovR') : `${lfTx('span')} ${(+k)+1}`;
+const lfMems = t => t==='frame' ? ['left','rafter','right'] : ['beam'];
 
 // Alle aktiven Lasten eines Bereichs: {v, T, part, name, seg}
 function lfLoads(t){
@@ -7576,78 +7576,12 @@ function lfLoads(t){
   else if(t==='frame'){ ['vert','horiz','temp'].forEach(k=>(frameLoads[k]||[]).forEach((l,i)=>add(l, k3Name('frame',k,i), null))); }
   return out;
 }
-// Einheitsrechnung auf einem gemeinsamen Raster abtasten (gleiche Elemente in allen Läufen, weil alle Lasten aktiv bleiben)
-function lfSample(t, cap){
-  if(!cap) return null;
-  const NP = t==='frame' ? 40 : 120, mems = t==='frame' ? ['left','rafter','right'] : ['beam'], out={reac:cap.reac.map(r=>r.slice())};
-  mems.forEach(m=>{ const es=cap.elems.filter(e=>e.mem===m).sort((a,b)=>a.t0-b.t0), r={t:[],M:[],Q:[],N:[],ux:[],uy:[]};
-    es.forEach(e=>{ const n=Math.max(2, Math.ceil((e.t1-e.t0)*NP));
-      for(let k=0;k<=n;k++){ const xi=e.L*k/n, f=frameForcesAt(e,xi), d=frameDispAt(e,xi);
-        r.t.push(e.t0+(e.t1-e.t0)*k/n); r.M.push(f.M); r.Q.push(f.Q); r.N.push(f.N); r.ux.push(d[0]); r.uy.push(d[1]); } });
-    out[m]=r; });
-  return out;
-}
-// Optionen: ULS je γ_G und Leiteinwirkung, SLS (charakteristisch) je Leiteinwirkung
-function lfOptions(t, P){
-  const hasG=P.some(p=>p.T==='G'), vars=[...new Set(P.filter(p=>p.T!=='G').map(p=>p.T))], leads=[null, ...vars], o=[];
-  if(lfUK() && hasG){   // 6.10a: 1,35·G + Σ 1,5·ψ0·Q · 6.10b: ξ·1,35·G + 1,5·Q_1 + Σ 1,5·ψ0·Q_i · günstig 1,0·G
-    o.push({uls:true, gam:LF_GSUP, lead:null, eq:'a'}); vars.forEach(lead=>o.push({uls:true, gam:LF_XI*LF_GSUP, lead, eq:'b'}));
-    leads.forEach(lead=>o.push({uls:true, gam:LF_GINF, lead}));
-  } else
-  (hasG ? [LF_GSUP, (lfCH() || lfES()) ? LF_GINF_CH : LF_GINF] : [LF_GSUP]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
-  leads.forEach(lead=>o.push({uls:false, gam:1, lead}));
-  return o;
-}
-function lfFac(t, o, T){
-  if(T==='G') return o.gam;
-  const g = o.uls ? LF_GQ : 1;
-  if(T===o.lead) return g;
-  if(lfExcl(T, o.lead)) return 0;
-  if(lfCH()) return lfPsi(t,T)[0];   // SIA 260: Begleiteinwirkung ψ0·Q_k ohne γ_Q
-  return g*lfPsi(t,T)[0];
-}
-// Grenzwert an einer Stelle: val(p) = Ergebnis des Teillastfalls p; sense +1 (max) / −1 (min). Liefert Wert und Faktoren je Teillastfall.
-function lfAt(t, o, P, val, sense){
-  const fac={}; let v=0;
-  P.forEach(p=>{ if(p.T==='G'){ fac[p.k]=o.gam; v+=o.gam*val(p); } });
-  const plain=P.filter(p=>p.T!=='G' && p.T!=='W1' && p.T!=='W2');
-  plain.forEach(p=>{ const f=lfFac(t,o,p.T), c=f*val(p); if(c*sense>1e-12){ fac[p.k]=f; v+=c; } else fac[p.k]=0; });
-  // Wind: W1 und W2 schließen sich aus — die ungünstigere (oder keine)
-  const W=['W1','W2'].map(T=>{ const ps=P.filter(p=>p.T===T); if(!ps.length) return null; const f=lfFac(t,o,T); return {ps, f, c:f*ps.reduce((s,p)=>s+val(p),0)}; }).filter(Boolean);
-  W.forEach(w=>w.ps.forEach(p=>{ fac[p.k]=0; }));
-  const best=W.filter(w=>w.f>0 && w.c*sense>1e-12).sort((a,b)=>sense*(b.c-a.c))[0];
-  if(best){ v+=best.c; best.ps.forEach(p=>{ fac[p.k]=best.f; }); }
-  return {v, fac};
-}
-// Überlagerung: Grenzlinien, maßgebende Kombinationen, Auflager-Grenzwerte
-function lfCombine(t, P, runs){
-  const mems = t==='frame' ? ['left','rafter','right'] : ['beam'], O=lfOptions(t,P), Ou=O.filter(o=>o.uls), Os=O.filter(o=>!o.uls);
-  const env={}, gov={maxM:null, minM:null, absQ:null, absN:null, sls:null};
-  const better=(g, v, cmp)=>!g || cmp(v, g.v);
-  mems.forEach(m=>{
-    const g0=runs[0][m], n=g0.t.length, e={t:g0.t.slice(), M:[],Q:[],N:[],M2:[],Q2:[],N2:[]};
-    for(let i=0;i<n;i++){
-      ['M','Q','N'].forEach(K=>{ let hi=-Infinity, lo=Infinity;
-        Ou.forEach(o=>{ const val=p=>runs[p.i][m][K][i], a=lfAt(t,o,P,val,1), b=lfAt(t,o,P,val,-1);
-          if(a.v>hi) hi=a.v; if(b.v<lo) lo=b.v;
-          if(K==='M'){ if(better(gov.maxM,a.v,(x,y)=>x>y+1e-9)) gov.maxM={v:a.v, fac:a.fac, o, m, i}; if(better(gov.minM,b.v,(x,y)=>x<y-1e-9)) gov.minM={v:b.v, fac:b.fac, o, m, i}; }
-          if(K==='Q'||K==='N'){ const key=K==='Q'?'absQ':'absN'; [a,b].forEach(r=>{ if(better(gov[key],Math.abs(r.v),(x,y)=>x>Math.abs(y)+1e-9)) gov[key]={v:r.v, fac:r.fac, o, m, i}; }); }
-        });
-        e[K].push(hi); e[K+'2'].push(lo); });
-      // Gebrauchstauglichkeit: größte Verschiebung (Riegel/Träger lotrecht, Stiele waagerecht)
-      const uK = (m==='left'||m==='right') ? 'ux' : 'uy';
-      Os.forEach(o=>[1,-1].forEach(sn=>{ const r=lfAt(t,o,P,p=>runs[p.i][m][uK][i],sn); if(better(gov.sls,Math.abs(r.v),(x,y)=>x>Math.abs(y)+1e-12)) gov.sls={v:r.v, fac:r.fac, o, m, i, uK}; }));
-    }
-    env[m]=e;
-  });
-  // Auflagerkräfte: Grenzwerte je Komponente
-  const reac = runs[0].reac.map((_,s)=>[0,1,2].map(c=>{ let hi=-Infinity, lo=Infinity;
-    Ou.forEach(o=>{ const val=p=>runs[p.i].reac[s][c]; hi=Math.max(hi, lfAt(t,o,P,val,1).v); lo=Math.min(lo, lfAt(t,o,P,val,-1).v); }); return [hi, lo]; }));
-  // Biegelinie der maßgebenden GZG-Kombination (echte Verformungsfigur)
-  const shape={}; if(gov.sls) mems.forEach(m=>{ shape[m]={ux:[], uy:[]}; runs[0][m].t.forEach((_,i)=>['ux','uy'].forEach(k=>shape[m][k].push(P.reduce((s,p)=>s+(gov.sls.fac[p.k]||0)*runs[p.i][m][k][i],0)))); });
-  ['absN','minM','maxM','absQ'].forEach(k=>{ if(gov[k] && Math.abs(gov[k].v)<1e-6) gov[k]=null; });
-  return {env, gov, reac, shape, mems};
-}
+// Rechnung im Kern (solver.js); die Hüllen behalten die bisherigen Namen
+function lfSample(t, cap){ return lcSample(cap, lfMems(t), t==='frame' ? 40 : 120); }
+function lfOptions(t, P){ return lcOptions(lfRules(t), P); }
+function lfFac(t, o, T){ return lcFac(lfRules(t), o, T); }
+function lfAt(t, o, P, val, sense){ return lcAt(lfRules(t), o, P, val, sense); }
+function lfCombine(t, P, runs){ return lcCombine(lfRules(t), lfMems(t), P, runs); }
 // Kombination als Formel: 1,35·G + 1,5·Q (Feld 1, 3) + 1,5·0,5·S
 function lfFormula(t, P, fac, o){
   const parts=[], bySeg={};
@@ -7655,7 +7589,7 @@ function lfFormula(t, P, fac, o){
     const f=fac[on[0].k]; let s;
     const one = Math.abs(f-1)<1e-9;
     if(T==='G') s = one ? 'G' : `${lfF(f)}·G`;
-    else { const psi=lfPsi(t,T)[0], g=o && o.uls && !(lfCH() && T!==o.lead) ? LF_GQ : 1;
+    else { const R=lfRules(t), psi=R.psi[T][0], g=o && o.uls && !(R.mode==='ch' && T!==o.lead) ? R.gQ : 1;
       s = Math.abs(f-g)<1e-9 ? (one ? T : `${lfF(f)}·${T}`) : (g===1 ? `${lfF(psi)}·${T}` : `${lfF(g)}·${lfF(psi)}·${T}`); }
     if(T==='Q' && ps.length>1 && on.length<ps.length) s+=` (${on.map(p=>lfSegName(p.seg)).join(', ')})`;
     parts.push(s); });

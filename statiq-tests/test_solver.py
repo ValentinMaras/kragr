@@ -29,9 +29,28 @@ r=node("""return ['three','two','fixed','mech'].map(k=>S.frameIndeterminacyOf({b
 check('frameIndeterminacyOf: Dreigelenk 0, Zweigelenk 1, eingespannt 3, zwei Loslager −1', r==[0,1,3,-1], r)
 r=node("const R=S.frameSolve({b:5,hA:4,hB:4,supA:'roller',supB:'roller',head:'none',hinges:[],vLoads:[],hLoads:[],EI_S:2100,EI_R:2100}); return !!R.mechanism;")
 check('frameSolve: verschiebliches System wird als Mechanismus erkannt', r is True, r)
+# ── Lastfälle und Kombinationen im Kern (calc v0.11.31) ──
+r=node("""const a=S.lcRules({na:'de',cat:'A'}), e=S.lcRules({na:'es',cat:'E'}), c=S.lcRules({na:'ch',psiCH:{Q:0.5}}), u=S.lcRules({na:'uk',cat:'H'});
+return {aQ:a.psi.Q, aI:a.gInf, eCat:e.cat, eI:e.gInf, cMode:c.mode, cQ:c.psi.Q[0], cW:c.psi.W1[0], uQ:u.psi.Q, uW:u.psi.W1, uMode:u.mode};""")
+check('lcRules: DE ψ(A) 0,7/0,5/0,3, γ_G,inf 1,0 · ES 0,80 ohne Kategorie E · CH ψ0 eingegeben, leer 1,0 · UK H 0,7/0/0, Wind 0,5', r.get('aQ')==[0.7,0.5,0.3] and r['aI']==1 and r['eCat']=='A' and r['eI']==0.8 and r['cMode']=='ch' and r['cQ']==0.5 and r['cW']==1 and r['uQ']==[0.7,0,0] and r['uW']==[0.5,0.2,0] and r['uMode']=='uk', r)
+r=node("""const P=[{k:'G',i:0,T:'G'},{k:'Q',i:1,T:'Q'},{k:'S',i:2,T:'S'}];
+return ['de','uk'].map(na=>{ const O=S.lcOptions(S.lcRules({na}),P); return [O.filter(o=>o.uls).length, O.filter(o=>!o.uls).length]; });""")
+check('lcOptions: G, Q, S → DE 6 + 3 Kombinationen, UK 6.10a/b: 6 + 3', r==[[6,3],[6,3]], r)
+# Einfeldträger 5 m: g = 10, q = 5 (Q), s = 4 (S) kN/m — M_G = 31,25, M_Q = 15,625, M_S = 12,5 kNm; V_G = 25, V_Q = 12,5, V_S = 10 kN
+LC="""const L=5, run=q=>{ const r=S.lineSolve(L,{supports:[{x:0,type:'pin'},{x:L,type:'roller'}],points:[],dists:q?[{a:0,b:L,qa:q,qb:q}]:[],EI:21000});
+  return S.lcSample({elems:r.model.elems, reac:r.reac.map(x=>[x.H,x.V,x.M])}, ['beam'], 120); };
+const runs=[run(10), run(5), run(4)], P=[{k:'G',i:0,T:'G'},{k:'Q',i:1,T:'Q'},{k:'S',i:2,T:'S'}];
+const C=S.lcCombine(S.lcRules(NA), ['beam'], P, runs);
+return {maxM:C.gov.maxM.v, minM:(e=>e.M2[e.t.reduce((b,t,i,a)=>Math.abs(t-0.5)<Math.abs(a[b]-0.5)?i:b,0)])(C.env.beam), VA:C.reac[0][1][0], fac:C.gov.maxM.fac, w:C.gov.sls.v};"""
+r=node(LC.replace('NA',"{na:'de',cat:'A'}"))
+check('lcCombine DE: max M = 1,35·31,25 + 1,5·12,5 + 1,5·0,7·15,625 = 77,34 kNm (Leiteinwirkung Schnee)', near(r.get('maxM',0),77.34375,0.01) and all(near(r['fac'][k],v,1e-9) for k,v in {'G':1.35,'Q':1.05,'S':1.5}.items()), r)
+check('lcCombine DE: min M in Feldmitte = 1,0·31,25 kNm (veränderliche günstig weggelassen), max V_A = 61,88 kN', near(r['minM'],31.25,0.02) and near(r['VA'],61.875,0.01), (r['minM'],r['VA']))
+r=node(LC.replace('NA',"{na:'ch',psiCH:{Q:0.7,S:0.5}}"))
+check('lcCombine CH (SIA 260): Begleiteinwirkung ψ0·Q_k ohne γ_Q → max M = 71,88 kNm', near(r.get('maxM',0),71.875,0.01), r.get('maxM'))
 src=open(os.path.join(BASE,'calc.html'),encoding='utf-8').read(); sol=open(os.path.join(BASE,'solver.js'),encoding='utf-8').read()
 moved=['frameBuildModel','frameSolveDSM','frameSampleForces','frameSampleFine','lineBuildModel','lineSolve','sampleFine','sampleUniform','frameForcesAt','tempRows']
 check('calc.html: Kern nicht mehr in der Seite, solver.js wird vor dem Hauptskript geladen', not any(re.search(r'\nfunction '+n+r'\(',src) for n in moved) and src.index('<script src="solver.js"></script>')<src.index('const STATIQ_VERSION'))
+check('calc.html: Beiwerte und Überlagerung der Lastfälle nur noch im Kern (calc v0.11.31)', 'const LF_PSI' not in src and 'const LF_GSUP' not in src and '\nfunction lcCombine(' not in src and 'lcCombine(lfRules(t)' in src)
 check('solver.js: keine Zugriffe auf die Seite (document, window)', not re.search(r'\bdocument\.|\bwindow\.', re.sub(r'//[^\n]*','',sol)))
 check('Offline-Speicher (sw.js) enthält solver.js', '"solver.js"' in open(os.path.join(BASE,'sw.js'),encoding='utf-8').read())
 try:

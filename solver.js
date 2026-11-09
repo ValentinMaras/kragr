@@ -1,4 +1,4 @@
-// kragr·solver v0.11.30 — Rechenkern von „Schnittkräfte“ (calc.html)
+// kragr·solver v0.11.31 — Rechenkern von „Schnittkräfte“ (calc.html)
 // Reine Rechenfunktionen ohne Zugriff auf die Seite: Eingabe als Daten, Ergebnis als Daten.
 // calc.html liest die Eingaben, ruft den Kern und zeichnet. Die Tests laden diese Datei direkt.
 //
@@ -7,6 +7,7 @@
 //   frameSolve(inp)              — Rahmen (gerader Riegel oder Satteldach) komplett: Modell, Lösung, Abtastung, Lagerkräfte
 //   frameIndeterminacyOf(inp)    — Grad der statischen Unbestimmtheit des Rahmens
 //   frameBuildModel / frameSolveDSM / frameSampleForces / frameSampleFine — die einzelnen Schritte
+//   lcRules / lcCombine (mit lcOptions, lcFac, lcAt, lcSample) — Lastfälle und Kombinationen nach EN 1990 bzw. Land
 // Einheiten: m, kN, kNm, EI in kNm². Vorzeichen siehe Kopf des Rahmenteils.
 // Optionaler globaler Faktor LF_SETF (Lastfallüberlagerung: Setzungen gehören zu G) wird gelesen, wenn vorhanden.
 
@@ -547,6 +548,105 @@ function lineArrays(res, sM, sQ, closeQ){
 }
 
 // ══════════════════════════════════════════════════
+// LASTFÄLLE UND KOMBINATIONEN (calc v0.11.31, vorher in calc.html)
+// Je Teillastfall eine Einheitsrechnung mit charakteristischen Lasten, dann je Stelle die ungünstigste Kombination:
+//   EN 1990 Gl. 6.10: Σ γ_G·G_k + γ_Q·Q_k,1 + Σ γ_Q·ψ_0,i·Q_k,i (γ_G = 1,35, günstig 1,0; γ_Q = 1,5, günstig 0)
+//   UK: Gl. 6.10a/6.10b mit ξ = 0,925 · ES (CTE DB-SE) und CH (SIA 260): γ_G,günstig = 0,80 · CH: Begleiteinwirkung ψ0·Q_k ohne γ_Q
+// Durchbiegung: charakteristische Kombination (γ = 1). W1 und W2 schließen sich aus.
+// ══════════════════════════════════════════════════
+const LF_TYPES = ['G','Q','S','W1','W2','T'];   // T: Temperatur (v0.11.6, ψ = 0,6 / 0,5 / 0)
+const LF_PSI = { A:[0.7,0.5,0.3], B:[0.7,0.5,0.3], C:[0.7,0.7,0.6], D:[0.7,0.7,0.6], E:[1.0,0.9,0.8], F:[0.7,0.7,0.6], H:[0,0,0] };
+const LF_PSI_S = [0.5,0.2,0], LF_PSI_W = [0.6,0.2,0], LF_PSI_T = [0.6,0.5,0];
+const LF_GSUP = 1.35, LF_GINF = 1.0, LF_GQ = 1.5, LF_GINF_CH = 0.80, LF_XI = 0.925;
+// Regeln je Bemessungsgrundlage. o: {na:'de'|'at'|'fr'|'uk'|'es'|'ch', cat:'A'…'H', psiCH:{Q,S,W,T} (leer = 1,0)}
+//   Ergebnis: {na, mode:'en'|'uk'|'ch', cat, gSup, gInf, gQ, xi, psi:{G,Q,S,W1,W2,T: [ψ0, ψ1, ψ2]}}
+function lcRules(o={}){
+  const na=o.na||'de', uk=na==='uk', ch=na==='ch', es=na==='es';
+  const cat = LF_PSI[o.cat] && !(es && o.cat==='E') ? o.cat : 'A';      // ES (CTE DB-SE): keine Lager-Kategorie
+  const pc = k => { const v=o.psiCH ? +o.psiCH[k] : NaN; return isFinite(v) ? Math.min(1, Math.max(0, v)) : 1; };
+  const tri = v => [v, v, v];
+  const psi = ch ? { Q:tri(pc('Q')), S:tri(pc('S')), W1:tri(pc('W')), W2:tri(pc('W')), T:tri(pc('T')) }
+                 : { Q: uk && cat==='H' ? [0.7,0,0] : LF_PSI[cat], S:LF_PSI_S, W1: uk ? [0.5,0.2,0] : LF_PSI_W, W2: uk ? [0.5,0.2,0] : LF_PSI_W, T:LF_PSI_T };
+  psi.G = [1,1,1];
+  return { na, mode: uk ? 'uk' : ch ? 'ch' : 'en', cat, gSup:LF_GSUP, gInf:(ch||es) ? LF_GINF_CH : LF_GINF, gQ:LF_GQ, xi:LF_XI, psi };
+}
+const lcExcl = (a, b) => (a==='W1'&&b==='W2') || (a==='W2'&&b==='W1');
+// Kombinationen: GZT je γ_G und Leiteinwirkung, GZG (charakteristisch) je Leiteinwirkung. P: [{k, i, T, seg}]
+function lcOptions(R, P){
+  const hasG=P.some(p=>p.T==='G'), vars=[...new Set(P.filter(p=>p.T!=='G').map(p=>p.T))], leads=[null, ...vars], o=[];
+  if(R.mode==='uk' && hasG){   // 6.10a: 1,35·G + Σ 1,5·ψ0·Q · 6.10b: ξ·1,35·G + 1,5·Q_1 + Σ 1,5·ψ0·Q_i · günstig 1,0·G
+    o.push({uls:true, gam:R.gSup, lead:null, eq:'a'}); vars.forEach(lead=>o.push({uls:true, gam:R.xi*R.gSup, lead, eq:'b'}));
+    leads.forEach(lead=>o.push({uls:true, gam:R.gInf, lead}));
+  } else
+  (hasG ? [R.gSup, R.gInf] : [R.gSup]).forEach(gam=>leads.forEach(lead=>o.push({uls:true, gam, lead})));
+  leads.forEach(lead=>o.push({uls:false, gam:1, lead}));
+  return o;
+}
+// Faktor eines Lastfalls T in der Kombination o
+function lcFac(R, o, T){
+  if(T==='G') return o.gam;
+  const g = o.uls ? R.gQ : 1;
+  if(T===o.lead) return g;
+  if(lcExcl(T, o.lead)) return 0;
+  if(R.mode==='ch') return R.psi[T][0];   // SIA 260: Begleiteinwirkung ψ0·Q_k ohne γ_Q
+  return g*R.psi[T][0];
+}
+// Grenzwert an einer Stelle: val(p) = Ergebnis des Teillastfalls p; sense +1 (max) / −1 (min). Liefert Wert und Faktoren je Teillastfall.
+function lcAt(R, o, P, val, sense){
+  const fac={}; let v=0;
+  P.forEach(p=>{ if(p.T==='G'){ fac[p.k]=o.gam; v+=o.gam*val(p); } });
+  const plain=P.filter(p=>p.T!=='G' && p.T!=='W1' && p.T!=='W2');
+  plain.forEach(p=>{ const f=lcFac(R,o,p.T), c=f*val(p); if(c*sense>1e-12){ fac[p.k]=f; v+=c; } else fac[p.k]=0; });
+  // Wind: W1 und W2 schließen sich aus — die ungünstigere (oder keine)
+  const W=['W1','W2'].map(T=>{ const ps=P.filter(p=>p.T===T); if(!ps.length) return null; const f=lcFac(R,o,T); return {ps, f, c:f*ps.reduce((s,p)=>s+val(p),0)}; }).filter(Boolean);
+  W.forEach(w=>w.ps.forEach(p=>{ fac[p.k]=0; }));
+  const best=W.filter(w=>w.f>0 && w.c*sense>1e-12).sort((a,b)=>sense*(b.c-a.c))[0];
+  if(best){ v+=best.c; best.ps.forEach(p=>{ fac[p.k]=best.f; }); }
+  return {v, fac};
+}
+// Einheitsrechnung auf einem gemeinsamen Raster abtasten. cap: {elems, reac:[[H,V,M]…]} (Modell der Rechnung)
+function lcSample(cap, mems, NP){
+  if(!cap) return null;
+  const out={reac:cap.reac.map(r=>r.slice())};
+  mems.forEach(m=>{ const es=cap.elems.filter(e=>e.mem===m).sort((a,b)=>a.t0-b.t0), r={t:[],M:[],Q:[],N:[],ux:[],uy:[]};
+    es.forEach(e=>{ const n=Math.max(2, Math.ceil((e.t1-e.t0)*NP));
+      for(let k=0;k<=n;k++){ const xi=e.L*k/n, f=frameForcesAt(e,xi), d=frameDispAt(e,xi);
+        r.t.push(e.t0+(e.t1-e.t0)*k/n); r.M.push(f.M); r.Q.push(f.Q); r.N.push(f.N); r.ux.push(d[0]); r.uy.push(d[1]); } });
+    out[m]=r; });
+  return out;
+}
+// Überlagerung: Grenzlinien, maßgebende Kombinationen, Auflager-Grenzwerte, Biegelinie der maßgebenden GZG-Kombination.
+//   runs[p.i] = lcSample(...) des Teillastfalls p
+function lcCombine(R, mems, P, runs){
+  const O=lcOptions(R,P), Ou=O.filter(o=>o.uls), Os=O.filter(o=>!o.uls);
+  const env={}, gov={maxM:null, minM:null, absQ:null, absN:null, sls:null};
+  const better=(g, v, cmp)=>!g || cmp(v, g.v);
+  mems.forEach(m=>{
+    const g0=runs[0][m], n=g0.t.length, e={t:g0.t.slice(), M:[],Q:[],N:[],M2:[],Q2:[],N2:[]};
+    for(let i=0;i<n;i++){
+      ['M','Q','N'].forEach(K=>{ let hi=-Infinity, lo=Infinity;
+        Ou.forEach(o=>{ const val=p=>runs[p.i][m][K][i], a=lcAt(R,o,P,val,1), b=lcAt(R,o,P,val,-1);
+          if(a.v>hi) hi=a.v; if(b.v<lo) lo=b.v;
+          if(K==='M'){ if(better(gov.maxM,a.v,(x,y)=>x>y+1e-9)) gov.maxM={v:a.v, fac:a.fac, o, m, i}; if(better(gov.minM,b.v,(x,y)=>x<y-1e-9)) gov.minM={v:b.v, fac:b.fac, o, m, i}; }
+          if(K==='Q'||K==='N'){ const key=K==='Q'?'absQ':'absN'; [a,b].forEach(r=>{ if(better(gov[key],Math.abs(r.v),(x,y)=>x>Math.abs(y)+1e-9)) gov[key]={v:r.v, fac:r.fac, o, m, i}; }); }
+        });
+        e[K].push(hi); e[K+'2'].push(lo); });
+      // Gebrauchstauglichkeit: größte Verschiebung (Riegel/Träger lotrecht, Stiele waagerecht)
+      const uK = (m==='left'||m==='right') ? 'ux' : 'uy';
+      Os.forEach(o=>[1,-1].forEach(sn=>{ const r=lcAt(R,o,P,p=>runs[p.i][m][uK][i],sn); if(better(gov.sls,Math.abs(r.v),(x,y)=>x>Math.abs(y)+1e-12)) gov.sls={v:r.v, fac:r.fac, o, m, i, uK}; }));
+    }
+    env[m]=e;
+  });
+  // Auflagerkräfte: Grenzwerte je Komponente
+  const reac = runs[0].reac.map((_,s)=>[0,1,2].map(c=>{ let hi=-Infinity, lo=Infinity;
+    Ou.forEach(o=>{ const val=p=>runs[p.i].reac[s][c]; hi=Math.max(hi, lcAt(R,o,P,val,1).v); lo=Math.min(lo, lcAt(R,o,P,val,-1).v); }); return [hi, lo]; }));
+  // Biegelinie der maßgebenden GZG-Kombination (echte Verformungsfigur)
+  const shape={}; if(gov.sls) mems.forEach(m=>{ shape[m]={ux:[], uy:[]}; runs[0][m].t.forEach((_,i)=>['ux','uy'].forEach(k=>shape[m][k].push(P.reduce((s,p)=>s+(gov.sls.fac[p.k]||0)*runs[p.i][m][k][i],0)))); });
+  ['absN','minM','maxM','absQ'].forEach(k=>{ if(gov[k] && Math.abs(gov[k].v)<1e-6) gov[k]=null; });
+  return {env, gov, reac, shape, mems};
+}
+
+// ══════════════════════════════════════════════════
 // ZUSAMMENGEFASSTE SCHNITTSTELLEN (calc v0.11.30)
 // ══════════════════════════════════════════════════
 // Unbestimmtheit n = r − 3 − g mit den wirksamen Gelenken (siehe calc.html, frameEffectiveHinges)
@@ -592,5 +692,6 @@ function frameSolve(inp){
 
 const KragrSolver = { frameGableOf, frameRafY, frameRafLen, supportDOF, tempRows, frameBuildModel, frameElemK, frameElemT, frameElemFeq, frameSolveDSM,
   frameForcesAt, frameSampleForces, sampleUniform, frameDispAt, frameSampleFine, sampleFine, lineBuildModel, lineSolve, lineArrays,
-  frameEffectiveHingesOf, frameIndeterminacyOf, frameSolve, FRAME_EA_FACTOR, GAUSS4 };
+  frameEffectiveHingesOf, frameIndeterminacyOf, frameSolve, FRAME_EA_FACTOR, GAUSS4,
+  LF_TYPES, LF_PSI, LF_PSI_S, LF_PSI_W, LF_PSI_T, LF_GSUP, LF_GINF, LF_GQ, LF_GINF_CH, LF_XI, lcRules, lcExcl, lcOptions, lcFac, lcAt, lcSample, lcCombine };
 if(typeof module!=='undefined' && module.exports) module.exports = KragrSolver;

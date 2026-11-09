@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.31 -->
+<!-- kragr v0.11.32 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -363,6 +363,8 @@ window.mulyProj = {
     .rb .steps { color:#222; font-size:12px; }
     .rb .steps b, .rb-res { color:#111; font-weight:700; border-bottom:3px double #111; padding:0 1px; }
     .rb .st { break-inside:avoid; }
+    .rb .st:has(.st-f > :nth-child(12)) { break-inside:auto; }   /* lange Schritte (Formänderungswerte) dürfen umbrechen, sonst bleibt eine halbe Seite leer */
+    .rb .st-h { break-after:avoid; } .rb .st-f > div, .rb .rw-figs { break-inside:avoid; }
     .rb .st-n { border-color:#111; color:#111; }
     .rb-tab { width:100%; border-collapse:collapse; font-family:'JetBrains Mono', monospace; font-size:12.5px; margin-top:4px; }
     .rb-tab th { text-align:right; font-weight:700; padding:5px 8px; border-bottom:1.2px solid #111; }
@@ -374,7 +376,7 @@ window.mulyProj = {
     .rb-dia { break-inside:avoid; } .rb-dia-t { font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700; margin-bottom:2px; }
     .rb-dia svg { display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
     .rb-foot { display:flex; justify-content:space-between; gap:12px; font-size:10px; color:#777; border-top:1px solid #ccc; margin-top:22px; padding-top:6px; }
-    @media print { .rb { max-width:none; } .rb-dias { grid-template-columns:1fr 1fr; } .rb-grid { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .rb-h { break-after:avoid; } .rb-dia, .rb-tab, .rb .st { break-inside:avoid; } }
+    @media print { .rb { max-width:none; } .rb-dias { grid-template-columns:1fr 1fr; } .rb-grid { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .rb-h { break-after:avoid; } .rb-dia, .rb-tab, .rb .st { break-inside:avoid; } .rb .st:has(.st-f > :nth-child(12)) { break-inside:auto; } }
     /* Umschalter (Lager, Kopfhalterung) — hatten bisher keinen Stil */
     .toggle-btn { padding: 6px 10px; margin: 0 4px 4px 0; font-size: 12px; font-family: Figtree, sans-serif;
                   border: 1px solid var(--border); border-radius: var(--radius-sm, 6px); background: var(--surface);
@@ -1895,7 +1897,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.31</span>
+    <span class="version">v0.11.32</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2432,7 +2434,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.31';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.32';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;

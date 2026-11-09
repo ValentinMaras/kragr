@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.70 -->
+<!-- kragr·ref v0.3.71 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -518,6 +518,7 @@
 #main .lb-page > .page-head .page-sub { font-size:10.5px !important; letter-spacing:.08em; text-transform:uppercase; color:#6b6d75 !important; margin:0 0 4px !important; font-weight:600; }
 #main .lb-page > .page-head { display:flex !important; flex-direction:column-reverse; }
 #main .lb-page > .page-head .page-title { font-size:clamp(24px, 3.4vw, 30px) !important; letter-spacing:-.025em; }
+#main .page-head .page-title { hyphens:auto; -webkit-hyphens:auto; overflow-wrap:break-word; }   /* lange Wörter (Teilsicherheitsbeiwerte) am Handy trennen statt die Seite zu verbreitern */
 .lb-n { font-variant-numeric:tabular-nums; color:#5468ad; margin-right:.5em; font-weight:800; }
 .nav-list-label .lb-n { font-weight:700; }
 .lb-tn { margin-right:6px; color:#9a9ca4; font-variant-numeric:tabular-nums; }
@@ -1392,7 +1393,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.70';
+const REF_VERSION = '0.3.71';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -2420,17 +2421,17 @@ function skTQuer(){
 // Spannungsverteilung Rechteck: σ linear, τ parabolisch
 function skSpannung(){
   const y1=30,y2=130,ym=80; let o='';
-  o+=poly([[30,y1],[70,y1],[70,y2],[30,y2]])+axH(22,82,ym,'')+cen(50,ym,'')+it(50,y2+30,tt('Querschnitt'),'middle',SK.ink,11);
+  o+=poly([[30,y1],[70,y1],[70,y2],[30,y2]])+axH(22,82,ym,'')+cen(50,ym,'')+it(50,y2+38,tt('Querschnitt'),'middle',SK.ink,11);
   o+=dimL(30,y2,70,y2,'b',10,8)+dimL(30,y2,30,y1,'h',-10,8);
   // σ
   const xs=150; o+=ln(xs,y1-6,xs,y2+6,SK.ink,0.8)+poly([[xs,y1],[xs-36,y1],[xs+36,y2],[xs,y2]],'#dbe7f9',SK.acc,1.1)+ln(xs-36,y1,xs+36,y2,SK.acc,1.1);
-  o+=it(xs-40,y1+4,'σ<tspan font-size="0.7em" dy="3">D</tspan>','end',SK.acc,12)+it(xs+40,y2+4,'σ<tspan font-size="0.7em" dy="3">Z</tspan>','start',SK.acc,12)+tl(xs,y2+30,'σ = M/I · z','middle',SK.ink,10)+tl(xs+6,ym-3,tt('Nulllinie'),'start');
+  o+=it(xs-40,y1+4,'σ<tspan font-size="0.7em" dy="3">D</tspan>','end',SK.acc,12)+it(xs+40,y2+4,'σ<tspan font-size="0.7em" dy="3">Z</tspan>','start',SK.acc,12)+tl(xs,y2+38,'σ = M/I · z','middle',SK.ink,10)+tl(xs+6,ym-3,tt('Nulllinie'),'start');
   for(let i=1;i<6;i++){ const yy=y1+(y2-y1)*i/6, xx=xs-36+72*i/6; if(Math.abs(yy-ym)>4) o+=ln(xs,yy,xx,yy,SK.acc,0.6); }
   // τ
   const xt=250, pts=[]; for(let i=0;i<=30;i++){ const t=i/30, z=y1+(y2-y1)*t; pts.push([xt+44*4*t*(1-t), z]); }
   o+=ln(xt,y1-6,xt,y2+6,SK.ink,0.8)+`<path d="M ${xt} ${y1} ${pts.map(p=>'L '+R1(p[0])+' '+R1(p[1])).join(' ')} Z" fill="#fde8dc" stroke="${SK.load}" stroke-width="1.1"/>`;
-  o+=it(xt+48,ym+4,'τ<tspan font-size="0.7em" dy="3">max</tspan>','start',SK.load,12)+tl(xt+10,y2+30,'τmax = 1,5·V/A','middle',SK.ink,10);
-  return sv(330,170,tt('Spannungsverteilung'),o);
+  o+=it(xt+48,ym+4,'τ<tspan font-size="0.7em" dy="3">max</tspan>','start',SK.load,12)+tl(xt+10,y2+38,'τmax = 1,5·V/A','middle',SK.ink,10);
+  return sv(330,178,tt('Spannungsverteilung'),o);
 }
 
 // Die vier Eulerfälle
@@ -5016,7 +5017,7 @@ function skKeller(){
   for(let i=1;i<=4;i++){ const yy=y1-he*(1-i/5), len=70*i/5; o+=vec(xw-len,yy,xw-2,yy,SK.load,1.1); }
   o+=vec(xw+tw/2,y0-44,xw+tw/2,y0-16,SK.load,1.8)+it(xw+tw/2+8,y0-28,'n<tspan font-size="9" dy="3">Ed</tspan>','start',SK.load,12);
   o+=`<path d="M ${xw+tw-4} ${y0} Q ${xw-tw+12} ${(y0+y1)/2} ${xw+tw-4} ${y1}" fill="none" stroke="${SK.acc}" stroke-width="1.6"/>`+tl(xw+tw+8,(y0+y1)/2,tt('Druckbogen'),'start',SK.acc);
-  o+=dimL(xw+tw+70,y0,xw+tw+70,y1,'h',-0.01,10)+dimL(42,y1-he,42,y1,'h<tspan font-size="9" dy="3">e</tspan>',-0.01,10);
+  o+=dimL(xw+tw+136,y0,xw+tw+136,y1,'h',-0.01,10)+dimL(42,y1-he,42,y1,'h<tspan font-size="9" dy="3">e</tspan>',-0.01,10);
   return sv(360,236,tt('Kellerwand'),o);
 }
 function skSchub(){
@@ -5584,13 +5585,13 @@ function skMWFormat(){
   let o=poly([[ox,oy],[ox+L,oy],[ox+L,oy-H],[ox,oy-H]],MWC.st)+poly([[ox,oy-H],[ox+L,oy-H],[ox+L+dx,oy-H+dy],[ox+dx,oy-H+dy]],'#f0dcc9')+poly([[ox+L,oy],[ox+L+dx,oy+dy],[ox+L+dx,oy-H+dy],[ox+L,oy-H]],'#d9b596');
   o+=dimL(ox,oy,ox+L,oy,'L',14)+dimL(ox,oy,ox,oy-H,'H',-14)+dimL(ox+L,oy,ox+L+dx,oy+dy,'B',12);
   const x0=290, k=1.7;
-  o+=tl(x0+40,22,tt('Achtelmeter: 1 Kopf = 12,5 cm'),'middle')+tl(x0+40,34,tt('(11,5 cm Stein + 1 cm Fuge)'),'middle');
+  o+=tl(x0+40,20,tt('Achtelmeter: 1 Kopf = 12,5 cm'),'middle',SK.dim,10.5)+tl(x0+40,34,tt('(11,5 cm Stein + 1 cm Fuge)'),'middle',SK.dim,10.5);
   for(let i=0;i<4;i++) o+=`<rect x="${R1(x0+i*12.5*k)}" y="52" width="${R1(11.5*k)}" height="18" fill="${MWC.st}" stroke="${SK.ink}"/>`;
-  o+=dimL(x0,70,x0+(4*12.5-1)*k,70,'n · 12,5 − 1',14)+tl(x0+40,108,tt('Außenmaß (n = 4)'),'middle');
+  o+=dimL(x0,70,x0+(4*12.5-1)*k,70,'n · 12,5 − 1',14)+tl(x0+40,113,tt('Außenmaß (n = 4)'),'middle',SK.dim,10.5);
   const y1=130, w=(3*12.5+1)*k;
   o+=`<rect x="${R1(x0-22)}" y="${y1}" width="22" height="18" fill="${MWC.st}" stroke="${SK.ink}"/><rect x="${R1(x0+w)}" y="${y1}" width="22" height="18" fill="${MWC.st}" stroke="${SK.ink}"/>`;
-  o+=dimL(x0,y1+18,x0+w,y1+18,'n · 12,5 + 1',14)+tl(x0+w/2,y1+56,tt('Öffnungsmaß (n = 3)'),'middle');
-  return sv(440,195,tt('Steinmaße und oktametrische Maßordnung'), o);
+  o+=dimL(x0,y1+18,x0+w,y1+18,'n · 12,5 + 1',14)+tl(x0+w/2,y1+62,tt('Öffnungsmaß (n = 3)'),'middle',SK.dim,10.5);
+  return sv(440,200,tt('Steinmaße und oktametrische Maßordnung'), o);
 }
 function skMWAuflager(){
   const cx=80, y0=50, h=170, t=34, a=24, sl=14, L=170;
@@ -5928,7 +5929,7 @@ function skFW(R){
     if(R.Fk[i]>0) o+=pload(X(i),yt-3,'',18); }
   o+=supPin(X(0),yb+2)+supRoll(X(R.n),yb+2);
   for(let i=0;i<R.n;i++){ o+=tl((X(i)+X(i+1))/2,yt-5,dS(R.O[i],1),'middle',col(R.O[i]))+tl((X(i)+X(i+1))/2,yb+12,dS(R.U[i],1),'middle',col(R.U[i])); }
-  { let lx=200; [[SK.acc,3,tt('Zug')],[SK.load,3,tt('Druck')],['#9ca3af',1,'0']].forEach(([c,sw,t])=>{ o+=ln(lx,yb+34,lx+16,yb+34,c,sw)+tl(lx+20,yb+37,t,'start'); lx+=20+t.length*5.6+14; }); o+=tl(lx,yb+37,'[kN]','start'); }   // Legende: Abstände nach Textlänge (Übersetzungen)
+  { let lx=130; [[SK.acc,3,tt('Zug')],[SK.load,3,tt('Druck')],['#9ca3af',1,'0']].forEach(([c,sw,t])=>{ o+=ln(lx,yb+34,lx+16,yb+34,c,sw)+tl(lx+20,yb+37,t,'start'); lx+=20+t.length*5.6+14; }); o+=tl(lx,yb+37,'[kN]','start'); }   // Legende: Abstände nach Textlänge (Übersetzungen)
   return sv(420,Math.round(yb+48),tt('Fachwerk: Stabkräfte (Strichstärke ∝ Kraft)'), o);
 }
 function updateFW(){
@@ -5959,23 +5960,24 @@ function dreigelenk(l, h, q, W){
   return { Av, Bv, Ah, Bh, Mc, Md, Mb, MbMax, xm };
 }
 function skDreigelenk(l,h,q,W,R){
-  const k=Math.min(150/l,100/h), yt=50, yb=yt+h*k;
-  const rahmen=(x0)=>{ const X=x=>x0+x*k; return ln(X(0),yb,X(0),yt,SK.ink,3)+ln(X(0),yt,X(l),yt,SK.ink,3)+ln(X(l),yt,X(l),yb,SK.ink,3)+`<circle cx="${R1(X(l/2))}" cy="${yt}" r="4" fill="#fff" stroke="${SK.ink}" stroke-width="1.4"/>`+supPin(X(0),yb+1)+supPin(X(l),yb+1); };
-  // links: System, Lasten, Reaktionen
-  let x0=95, X=x=>x0+x*k, o=rahmen(x0)+tl(X(l/2),18,tt('System und Auflagerkräfte')+' [kN]','middle');
+  // untereinander statt nebeneinander: am Handy sonst Schrift unter 6 px
+  const k=Math.min(150/l,100/h), x0=95, X=x=>x0+x*k;
+  const rahmen=(yt,yb)=>ln(X(0),yb,X(0),yt,SK.ink,3)+ln(X(0),yt,X(l),yt,SK.ink,3)+ln(X(l),yt,X(l),yb,SK.ink,3)+`<circle cx="${R1(X(l/2))}" cy="${yt}" r="4" fill="#fff" stroke="${SK.ink}" stroke-width="1.4"/>`+supPin(X(0),yb+1)+supPin(X(l),yb+1);
+  // oben: System, Lasten, Reaktionen
+  let yt=50, yb=yt+h*k, o=rahmen(yt,yb)+tl(X(l/2),18,tt('System und Auflagerkräfte')+' [kN]','middle');
   if(q>0) o+=udl(X(0)+3,X(l)-3,yt-2,14,1,1,'q');
   if(W>0) o+=`<line x1="${X(0)-40}" y1="${yt}" x2="${X(0)-3}" y2="${yt}" stroke="${SK.load}" stroke-width="1.6" marker-end="url(#ska)"/>`+it(X(0)-38,yt-6,'W','start',SK.load,12);
   const ar=(x1,y1,x2,y2)=>`<line x1="${R1(x1)}" y1="${R1(y1)}" x2="${R1(x2)}" y2="${R1(y2)}" stroke="${SK.acc}" stroke-width="1.4" marker-end="url(#skc)"/>`;
-  o+=ar(X(0),yb+46,X(0),yb+20)+tl(X(0)+4,yb+44,`A<tspan font-size="7" dy="2">v</tspan><tspan dy="-2"> = ${dS(R.Av,1)}</tspan>`,'start',SK.acc)+ar(X(l),yb+46,X(l),yb+20)+tl(X(l)+4,yb+44,`B<tspan font-size="7" dy="2">v</tspan><tspan dy="-2"> = ${dS(R.Bv,1)}</tspan>`,'start',SK.acc);
-  o+=(R.Ah>=0?ar(X(0)-36,yb+14,X(0)-10,yb+14):ar(X(0)-10,yb+14,X(0)-36,yb+14))+tl(X(0)-38,yb+8,`A<tspan font-size="7" dy="2">h</tspan><tspan dy="-2"> = ${dS(Math.abs(R.Ah),1)}</tspan>`,'end',SK.acc);
-  o+=(R.Bh>=0?ar(X(l)+10,yb+14,X(l)+36,yb+14):ar(X(l)+36,yb+14,X(l)+10,yb+14))+tl(X(l)+12,yb+8,`B<tspan font-size="7" dy="2">h</tspan><tspan dy="-2"> = ${dS(Math.abs(R.Bh),1)}</tspan>`,'start',SK.acc);
-  // rechts: Momentenlinie
-  x0=375; o+=rahmen(x0)+tl(X(l/2),18,tt('Momentenlinie [kNm]'),'middle');
+  o+=ar(X(0),yb+46,X(0),yb+20)+tl(X(0)+4,yb+44,`A<tspan font-size="8" dy="2">v</tspan><tspan dy="-2"> = ${dS(R.Av,1)}</tspan>`,'start',SK.acc)+ar(X(l),yb+46,X(l),yb+20)+tl(X(l)+4,yb+44,`B<tspan font-size="8" dy="2">v</tspan><tspan dy="-2"> = ${dS(R.Bv,1)}</tspan>`,'start',SK.acc);
+  o+=(R.Ah>=0?ar(X(0)-36,yb+14,X(0)-10,yb+14):ar(X(0)-10,yb+14,X(0)-36,yb+14))+tl(X(0)-38,yb+8,`A<tspan font-size="8" dy="2">h</tspan><tspan dy="-2"> = ${dS(Math.abs(R.Ah),1)}</tspan>`,'end',SK.acc);
+  o+=(R.Bh>=0?ar(X(l)+10,yb+14,X(l)+36,yb+14):ar(X(l)+36,yb+14,X(l)+10,yb+14))+tl(X(l)+12,yb+8,`B<tspan font-size="8" dy="2">h</tspan><tspan dy="-2"> = ${dS(Math.abs(R.Bh),1)}</tspan>`,'start',SK.acc);
+  // unten: Momentenlinie
+  const y0=yb+70; yt=y0+40; yb=yt+h*k; o+=rahmen(yt,yb)+tl(X(l/2),y0+8,tt('Momentenlinie [kNm]'),'middle');
   const mx=Math.max(Math.abs(R.Mc),Math.abs(R.Md),Math.abs(R.MbMax),1e-9), s=30/mx;
   o+=poly([[X(0),yb],[X(0)+R.Mc*s,yt],[X(0),yt]],SK.m+'22',SK.m,1.1)+poly([[X(l),yb],[X(l)-R.Md*s,yt],[X(l),yt]],SK.m+'22',SK.m,1.1);
   const pb=[[X(0),yt]]; for(let j=0;j<=40;j++){ const x=l*j/40; pb.push([X(x),yt+R.Mb(x)*s]); } pb.push([X(l),yt]); o+=poly(pb,SK.m+'22',SK.m,1.1);
   o+=tl(X(0)+R.Mc*s-3,yt-4,dS(R.Mc,1),'end',SK.m)+tl(X(l)-R.Md*s+3,yt-4,dS(R.Md,1),'start',SK.m);
-  return sv(600,Math.round(yb+56),tt('Dreigelenkrahmen: System und Momentenlinie'), o);
+  return sv(340,Math.round(yb+22),tt('Dreigelenkrahmen: System und Momentenlinie'), o);
 }
 function updateDGR(){
   const out=document.getElementById('dgr-out'); if(!out) return;

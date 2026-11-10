@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.37 -->
+<!-- kragr·size v0.7.38 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -4207,7 +4207,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.37';
+const SIZE_VERSION = '0.7.38';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11999,7 +11999,12 @@ window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':
   const fill=document.createElement('div'); fill.className='k-fill'; fill.setAttribute('aria-hidden','true');
   const anchor=document.querySelector('body > [data-bottom]');
   document.body.insertBefore(fill, anchor||null); document.body.appendChild(d);
-  const st=document.createElement('style'); st.textContent='@media screen{body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}body>*{flex-shrink:0}body>.k-fill{flex:1 0 0}}@media print{.legal-bar,.k-fill{display:none!important}}'; (document.head||document.body).appendChild(st);
+  // Höhe des Füllers per Skript statt body als Flex-Spalte (die verkleinerte zentrierte Blöcke wie die Auswahl in Schnittkräfte)
+  let fq=0; const fit=()=>{ fq=0; fill.style.height='0px'; const bs=getComputedStyle(document.body), end=d.getBoundingClientRect().bottom+window.scrollY+parseFloat(bs.paddingBottom||0)+parseFloat(bs.marginBottom||0); fill.style.height=Math.max(0, Math.floor(window.innerHeight-end))+'px'; };   // body hat teils min-height:100vh, daher am Ende der Leiste messen
+  const fitSoon=()=>{ if(!fq) fq=requestAnimationFrame(fit); };
+  window.addEventListener('resize', fitSoon); window.addEventListener('load', fitSoon); window.addEventListener('hashchange', fitSoon);
+  if(typeof ResizeObserver!=='undefined') new ResizeObserver(fitSoon).observe(document.body); fitSoon();
+  const st=document.createElement('style'); st.textContent='@media print{.legal-bar,.k-fill{display:none!important}}'; (document.head||document.body).appendChild(st);
   if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 

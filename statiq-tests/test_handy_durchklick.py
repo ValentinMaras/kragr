@@ -53,6 +53,12 @@ async def main():
             for tab in ['beam','cantilever','cont','frame']:
                 await pg.evaluate(f"showTab('{tab}')"); await pg.wait_for_timeout(450)
                 note('Schnittkräfte '+tab, await pg.evaluate(PROBE, await pg.query_selector('body'))); n+=1
+            narrow=[]
+            for f in ['calc.html','size.html','ref.html','projekt.html']:   # Auswahl oben füllt die Breite (am iPhone war sie in Schnittkräfte nach der Fußleisten-Änderung schmal)
+                await pg.goto(B+f); await pg.wait_for_timeout(500)
+                pw=await pg.evaluate("(()=>{ const p=document.querySelector('#pick, .pick'); return p? p.getBoundingClientRect().width : null; })()")
+                if pw is not None and pw < 0.8*w: narrow.append(f'{f}: {round(pw)} px')
+            check(f'{L} {w} px: Auswahl oben mindestens 80 % der Breite', not narrow, narrow)
             for f in ['index.html','projekt.html','rechtliches.html']:
                 await pg.goto(B+f); await pg.wait_for_timeout(450); note(f, await pg.evaluate(PROBE, await pg.query_selector('body'))); n+=1
             check(f'{L} {w} px: {n} Seiten ohne Seitenfehler', not errs, errs[:3])

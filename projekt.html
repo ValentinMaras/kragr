@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.36 · sichtbar „Rechenblätter“ -->
+<!-- kragr·projekt v0.1.37 · sichtbar „Rechenblätter“ -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -956,7 +956,7 @@ window.kragrK5Page = function(K){
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.36';
+const PROJ_VERSION = '0.1.37';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ addChk:'＋ Nachweis', withForces:'Mit den Schnittkräften dieses Systems:', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_first:'First', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', n1:'1 Rechenblatt', n:'{0} Rechenblätter', all:'Alle', report:'Bericht', open:'Öffnen', more:'Weitere Aktionen', rename:'Umbenennen', toSize:'In „{0}“ übernehmen',
@@ -1159,7 +1159,12 @@ window.addEventListener('storage', render); window.addEventListener('focus', ()=
   const fill=document.createElement('div'); fill.className='k-fill'; fill.setAttribute('aria-hidden','true');
   const anchor=document.querySelector('body > [data-bottom]');
   document.body.insertBefore(fill, anchor||null); document.body.appendChild(d);
-  const st=document.createElement('style'); st.textContent='@media screen{body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}body>*{flex-shrink:0}body>.k-fill{flex:1 0 0}}@media print{.legal-bar,.k-fill{display:none!important}}'; (document.head||document.body).appendChild(st);
+  // Höhe des Füllers per Skript statt body als Flex-Spalte (die verkleinerte zentrierte Blöcke wie die Auswahl in Schnittkräfte)
+  let fq=0; const fit=()=>{ fq=0; fill.style.height='0px'; const bs=getComputedStyle(document.body), end=d.getBoundingClientRect().bottom+window.scrollY+parseFloat(bs.paddingBottom||0)+parseFloat(bs.marginBottom||0); fill.style.height=Math.max(0, Math.floor(window.innerHeight-end))+'px'; };   // body hat teils min-height:100vh, daher am Ende der Leiste messen
+  const fitSoon=()=>{ if(!fq) fq=requestAnimationFrame(fit); };
+  window.addEventListener('resize', fitSoon); window.addEventListener('load', fitSoon); window.addEventListener('hashchange', fitSoon);
+  if(typeof ResizeObserver!=='undefined') new ResizeObserver(fitSoon).observe(document.body); fitSoon();
+  const st=document.createElement('style'); st.textContent='@media print{.legal-bar,.k-fill{display:none!important}}'; (document.head||document.body).appendChild(st);
   if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 

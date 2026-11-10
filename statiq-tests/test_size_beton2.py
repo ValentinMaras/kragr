@@ -66,13 +66,15 @@ async def main():
         # ── Druckbewehrung: b/h = 30/45, M = 330 kNm, von Hand 5 Ø 25 unten, 2 Ø 20 oben, Bügel Ø10 ──
         await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await setv('in-h',45); await setv('in-M',330)
         await setv('in-n',5); await sel('in-ds',25); await sel('in-dsw',10); await setv('in-sw',15); await setv('in-n2',2); await sel('in-ds2',20)
-        await pg.evaluate('run()'); t=await txt()
+        await pg.wait_for_timeout(400)
+        if await pg.evaluate("document.getElementById('in-n').value")!='5': await setv('in-n',5); await pg.wait_for_timeout(300)   # Stepper hängte gelegentlich an („55“)
+        await pg.evaluate('run()'); await pg.wait_for_timeout(100); t=await txt()   # verzögerte Neuberechnung aus den Eingaben abwarten (war gelegentlich zu früh)
         aR,ka=block(0.45); xi=0.45; d=450-25-10-12.5; d2=20+10+10; fc=fcd(30)
         mul=aR*xi*(1-ka*xi); MRl=mul*300*d*d*fc/1e6; dM=330-MRl; x=xi*d; es2=3.5*(x-d2)/x; s2=min(Es*es2/1000,fyd)
         As2=dM*1e6/((d-d2)*s2); As1=(aR*xi*300*d*fc+dM*1e6/(d-d2))/fyd
         check(f'Druckbewehrung: M_Rd,lim = {de(MRl,1)} kNm, ΔM = {de(dM,1)}', f'= {de(MRl,1)} kNm' in t and f'= {de(dM,1)} kNm' in t)
         check(f'A_s2,erf = {de(As2/100)} cm², A_s1,erf = {de(As1/100)} cm²', f'= {de(As2/100)} cm²' in t and f'= {de(As1/100)} cm²' in t)
-        check('2 Ø 20 oben = 6,28 cm² ≥ A_s2,erf, Nachweis erfüllt', '2 Ø 20 = 6,28 cm²' in t and await pg.evaluate("LAST.res.C.find(c=>c.id==='biegung').ok"))
+        _ok=await pg.evaluate("LAST.res.C.find(c=>c.id==='biegung').ok"); check('2 Ø 20 oben = 6,28 cm² ≥ A_s2,erf, Nachweis erfüllt', '2 Ø 20 = 6,28 cm²' in t and _ok, ('2 Ø 20 = 6,28 cm²' in t, _ok, [l for l in t.split(chr(10)) if 'Ø 20' in l][:3]))
         await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.check('#in-auto'); await pg.evaluate('run()'); line=await pg.inner_text('#reinf-line'); s=await pg.inner_text('#summary')
         m=re.search(r'oben (\d) Ø (\d+) \(Druckbewehrung\)',line)
         check('Automatisch: Druckbewehrung gewählt, alle Nachweise erfüllt', m is not None and int(m.group(1))*A(int(m.group(2)))>=As2-1 and 'Alle Nachweise erfüllt' in s, line)

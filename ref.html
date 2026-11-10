@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.72 -->
+<!-- kragr·ref v0.3.73 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1262,6 +1262,7 @@ window.kragrK5Page = function(K){
 <nav class="nav glass" id="breadcrumb" aria-label="Navigation"></nav>
 
 <div class="layout k-frame"><main class="main" id="main"></main><aside class="toc" id="toc" aria-label="Auf dieser Seite"></aside></div>
+<div id="ref-foot" class="k-frame" data-bottom></div>
 
 <script>
 // Sprachdateien: Deutsch steckt in der Seite, EN/FR/ES werden nur bei Bedarf geladen (lang/ref.<sprache>.js)
@@ -1393,7 +1394,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.72';
+const REF_VERSION = '0.3.73';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -11542,6 +11543,7 @@ function render(){
   document.title = pageTitle();
   renderToc(); closePick();
   trRef(document.getElementById('toc'));
+  { const rf=document.getElementById('ref-foot'), fn=[...main.querySelectorAll('.footnote')].pop(); if(rf){ rf.innerHTML=''; if(fn) rf.appendChild(fn); } }   // Versionszeile ganz unten über der Fußleiste
 }
 function pageTitle(){
   const {fach,kapitel,thema} = navState;
@@ -11942,8 +11944,13 @@ render();
   d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Figtree,system-ui,sans-serif;color:#5c5e66;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
   const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
     d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
-  upd(); document.body.appendChild(d);
-  const st=document.createElement('style'); st.textContent='@media print{.legal-bar{display:none!important}}'; (document.head||document.body).appendChild(st);
+  upd();
+  // Fußleiste immer ganz unten (v. 10.11.2026): Seite mindestens bildschirmhoch, ein Füller schiebt den Schluss nach unten.
+  // Steht ein Element mit data-bottom vor der Leiste (Wissen: Versionszeile), kommt der Füller davor.
+  const fill=document.createElement('div'); fill.className='k-fill'; fill.setAttribute('aria-hidden','true');
+  const anchor=document.querySelector('body > [data-bottom]');
+  document.body.insertBefore(fill, anchor||null); document.body.appendChild(d);
+  const st=document.createElement('style'); st.textContent='@media screen{body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}body>*{flex-shrink:0}body>.k-fill{flex:1 0 0}}@media print{.legal-bar,.k-fill{display:none!important}}'; (document.head||document.body).appendChild(st);
   if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 

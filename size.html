@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.36 -->
+<!-- kragr·size v0.7.37 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -4207,7 +4207,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.36';
+const SIZE_VERSION = '0.7.37';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11392,13 +11392,16 @@ function updatePick(){
   const a=$(g[1]).querySelector('button.active') || $(g[1]).querySelector('button');
   $('pick-g').textContent = matBtn(MAT).textContent; $('pick-t').textContent = a ? a.textContent : '';
 }
+const PICK_OPEN_KEY='kragr-pick-open-size';   // aufgeklappte Bereiche im Auswahlmenü bleiben offen (10.11.2026)
+const pickOpenGet=()=>{ try{ return JSON.parse(localStorage.getItem(PICK_OPEN_KEY)||'[]'); }catch(e){ return []; } };
+const pickOpenSet=(k,o)=>{ try{ const s=new Set(pickOpenGet()); o?s.add(k):s.delete(k); localStorage.setItem(PICK_OPEN_KEY, JSON.stringify([...s])); }catch(e){} };
 function buildPick(){
-  // Akkordeon: je Bereich eine aufklappbare Liste, der aktuelle Bereich ist offen
-  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>{ const bs=[...$(seg).querySelectorAll('button')], cur=MAT===mat, act=bs.find(b=>b.classList.contains('active'));
-    return `<div class="pick-group${cur?' open':''}" data-mat="${mat}"><button class="pick-head" aria-expanded="${cur}"><span class="pick-hn">${matBtn(mat).textContent}</span><span class="pick-hc">${cur&&act?act.textContent:tx('nTopics', bs.length)}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
+  // je Bereich eine aufklappbare Liste; der aktuelle und die zuletzt aufgeklappten Bereiche sind offen
+  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>{ const bs=[...$(seg).querySelectorAll('button')], cur=MAT===mat, op=cur||pickOpenGet().includes(mat), act=bs.find(b=>b.classList.contains('active'));
+    return `<div class="pick-group${op?' open':''}" data-mat="${mat}"><button class="pick-head" aria-expanded="${op}"><span class="pick-hn">${matBtn(mat).textContent}</span><span class="pick-hc">${cur&&act?act.textContent:tx('nTopics', bs.length)}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
     bs.map((b,i)=>`<button class="pick-item${cur && b.classList.contains('active')?' active':''}" role="menuitem" data-mat="${mat}" data-i="${i}">${b.textContent}</button>`).join('')}</div></div>`; }).join('');
   $('pick-menu').querySelectorAll('.pick-head').forEach(h=>h.onclick=e=>{ e.stopPropagation(); const g=h.parentElement, o=!g.classList.contains('open');
-    $('pick-menu').querySelectorAll('.pick-group').forEach(x=>{ x.classList.toggle('open', x===g && o); x.querySelector('.pick-head').setAttribute('aria-expanded', x===g && o); });
+    g.classList.toggle('open', o); h.setAttribute('aria-expanded', o); pickOpenSet(g.dataset.mat, o);   // andere Bereiche bleiben, wie sie sind
     if(o){ const m=$('pick-menu'), r=g.getBoundingClientRect(), mr=m.getBoundingClientRect(); if(r.bottom>mr.bottom) m.scrollTop += r.bottom-mr.bottom+8; } });
   $('pick-menu').querySelectorAll('.pick-item').forEach(el=>el.onclick=e=>{ e.stopPropagation();
     const mat=el.dataset.mat, seg=PICK_GROUPS.find(g=>g[0]===mat)[1];

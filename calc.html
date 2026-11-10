@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.33 -->
+<!-- kragr v0.11.34 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1897,7 +1897,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.33</span>
+    <span class="version">v0.11.34</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2434,7 +2434,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.33';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.34';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -6920,13 +6920,16 @@ function updatePick(){
   document.getElementById('pick-t').textContent = it ? it[1] : ux('frame');
   placePick();
 }
+const PICK_OPEN_KEY='kragr-pick-open-calc';   // aufgeklappte Bereiche im Auswahlmenü bleiben offen (10.11.2026)
+const pickOpenGet=()=>{ try{ return JSON.parse(localStorage.getItem(PICK_OPEN_KEY)||'[]'); }catch(e){ return []; } };
+const pickOpenSet=(k,o)=>{ try{ const s=new Set(pickOpenGet()); o?s.add(k):s.delete(k); localStorage.setItem(PICK_OPEN_KEY, JSON.stringify([...s])); }catch(e){} };
 function buildPick(){
   const cur=pickCurrent(), m=document.getElementById('pick-menu');
-  m.innerHTML = pickGroups().map(g=>{ const open = g.items.some(i=>i[0]===cur) || (g.key==='frames' && cur.startsWith('frame')); const act=g.items.find(i=>i[0]===cur);
-    return `<div class="pick-group${open?' open':''}" data-g="${g.key}"><button class="pick-head" aria-expanded="${open}"><span class="pick-hn">${g.name}</span><span class="pick-hc">${open&&act?act[1]:g.items.length>1?g.items.length+' '+ux('topics'):''}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
+  m.innerHTML = pickGroups().map(g=>{ const here = g.items.some(i=>i[0]===cur) || (g.key==='frames' && cur.startsWith('frame')), open = here || pickOpenGet().includes(g.key); const act=g.items.find(i=>i[0]===cur);
+    return `<div class="pick-group${open?' open':''}" data-g="${g.key}"><button class="pick-head" aria-expanded="${open}"><span class="pick-hn">${g.name}</span><span class="pick-hc">${here&&act?act[1]:g.items.length>1?g.items.length+' '+ux('topics'):''}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
       g.items.map(([k,l])=>`<button class="pick-item${k===cur?' active':''}" role="menuitem" data-k="${k}">${l}</button>`).join('')}</div></div>`; }).join('');
   m.querySelectorAll('.pick-head').forEach(h=>h.onclick=e=>{ e.stopPropagation(); const g=h.parentElement, o=!g.classList.contains('open');
-    m.querySelectorAll('.pick-group').forEach(x=>{ x.classList.toggle('open', x===g && o); x.querySelector('.pick-head').setAttribute('aria-expanded', x===g && o); }); });
+    g.classList.toggle('open', o); h.setAttribute('aria-expanded', o); pickOpenSet(g.dataset.g, o); });   // andere Bereiche bleiben, wie sie sind
   m.querySelectorAll('.pick-item').forEach(el=>el.onclick=e=>{ e.stopPropagation(); const [tab,preset]=el.dataset.k.split(':');
     showTab(tab); if(preset) applyFramePreset(preset); closePick(); updatePick(); liveCalc(true); });
 }

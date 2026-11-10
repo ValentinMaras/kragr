@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.73 -->
+<!-- kragr·ref v0.3.74 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1394,7 +1394,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.73';
+const REF_VERSION = '0.3.74';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -11798,18 +11798,21 @@ function pickHtml(){
   else { g=kmod('ref'); t=tx('pickHome'); }
   return `<div class="pick" id="pick"><button class="pick-btn" id="pick-btn" onclick="togglePick(event)" aria-haspopup="true" aria-expanded="false"><span class="pick-txt"><span class="pick-g" id="pick-g">${g}</span><span class="pick-t" id="pick-t">${t}</span></span><span class="pick-chev">▾</span></button><div class="pick-menu" id="pick-menu" role="menu"></div></div>`;
 }
+const PICK_OPEN_KEY='kragr-pick-open-ref';   // aufgeklappte Bereiche im Auswahlmenü bleiben offen (10.11.2026)
+const pickOpenGet=()=>{ try{ return JSON.parse(localStorage.getItem(PICK_OPEN_KEY)||'[]'); }catch(e){ return []; } };
+const pickOpenSet=(k,o)=>{ try{ const s=new Set(pickOpenGet()); o?s.add(k):s.delete(k); localStorage.setItem(PICK_OPEN_KEY, JSON.stringify([...s])); }catch(e){} };
 function buildPick(){
   const m=document.getElementById('pick-menu'); if(!m) return;
   const {fach,kapitel,thema}=navState;
   m.innerHTML = `<label class="pick-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="pick-q" type="search" placeholder="${tx('pickFilter')}" autocomplete="off" oninput="filterPick(this.value)"></label>`
-    + Object.entries(FAECHER).map(([fk,F])=>{ const cur=fk===fach, n=Object.values(F.kapitel).reduce((a,K)=>a+Object.keys(K.themen).length,0);
-      return `<div class="pick-group${cur?' open':''}" data-f="${fk}"><button class="pick-head" aria-expanded="${cur}"><span class="pick-tag">${F.tag}</span><span class="pick-hn">${F.title}${refUntr(fk)?' <span class="tree-de" title="'+tx('notYet')+'">DE</span>':''}</span><span class="pick-hc">${cur&&kapitel?F.kapitel[kapitel].title:n+' '+tx('topics')}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
+    + Object.entries(FAECHER).map(([fk,F])=>{ const cur=fk===fach, op=cur||pickOpenGet().includes(fk), n=Object.values(F.kapitel).reduce((a,K)=>a+Object.keys(K.themen).length,0);
+      return `<div class="pick-group${op?' open':''}" data-f="${fk}"><button class="pick-head" aria-expanded="${op}"><span class="pick-tag">${F.tag}</span><span class="pick-hn">${F.title}${refUntr(fk)?' <span class="tree-de" title="'+tx('notYet')+'">DE</span>':''}</span><span class="pick-hc">${cur&&kapitel?F.kapitel[kapitel].title:n+' '+tx('topics')}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
         Object.entries(F.kapitel).map(([kk,K])=>`<a class="pick-k" href="${hrefOf(fk,kk)}"><span class="lb-tn">${lbNum(fk,kk)}</span>${K.title}</a>`+Object.entries(K.themen).map(([tk,T])=>
           `<a class="pick-item${cur&&kk===kapitel&&tk===thema?' active':''}" role="menuitem" href="${hrefOf(fk,kk,tk)}">${T.title}</a>`).join('')).join('')}</div></div>`; }).join('')
     + `<div class="pick-none">${tx('pickNone')}</div>`;
   trRef(m);
   m.querySelectorAll('.pick-head').forEach(h=>h.onclick=e=>{ e.stopPropagation(); const g=h.parentElement, o=!g.classList.contains('open');
-    m.querySelectorAll('.pick-group').forEach(x=>{ x.classList.toggle('open', x===g && o); x.querySelector('.pick-head').setAttribute('aria-expanded', x===g && o); });
+    g.classList.toggle('open', o); h.setAttribute('aria-expanded', o); pickOpenSet(g.dataset.f, o);   // andere Bereiche bleiben, wie sie sind
     if(o){ const r=g.getBoundingClientRect(), mr=m.getBoundingClientRect(); if(r.bottom>mr.bottom) m.scrollTop += Math.min(r.top-mr.top-8, r.bottom-mr.bottom+8); } });
   m.querySelectorAll('a').forEach(a=>a.onclick=()=>closePick());
 }
@@ -11819,7 +11822,7 @@ function filterPick(q){
     g.querySelectorAll('.pick-item').forEach(a=>{ const hit=!t || norm(a.textContent).includes(t); a.classList.toggle('hide', !hit); any=any||hit; });
     g.querySelectorAll('.pick-k').forEach(k=>{ let n=k.nextElementSibling, vis=false; while(n && n.classList.contains('pick-item')){ if(!n.classList.contains('hide')) vis=true; n=n.nextElementSibling; } k.classList.toggle('hide', !vis); });
     g.classList.toggle('hide', !any); if(t) g.classList.toggle('open', any); anyAll=anyAll||any; });
-  if(!t) m.querySelectorAll('.pick-group').forEach(g=>g.classList.toggle('open', g.dataset.f===navState.fach));
+  if(!t){ const st=pickOpenGet(); m.querySelectorAll('.pick-group').forEach(g=>g.classList.toggle('open', g.dataset.f===navState.fach || st.includes(g.dataset.f))); }
   m.classList.toggle('empty', !anyAll);
 }
 function togglePick(e){ e && e.stopPropagation(); const p=document.getElementById('pick'); if(!p) return; const o=!p.classList.contains('open');

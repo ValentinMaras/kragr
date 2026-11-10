@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.75 -->
+<!-- kragr·ref v0.3.76 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1394,7 +1394,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.75';
+const REF_VERSION = '0.3.76';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -11806,7 +11806,7 @@ function buildPick(){
   const {fach,kapitel,thema}=navState;
   m.innerHTML = `<label class="pick-q"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="pick-q" type="search" placeholder="${tx('pickFilter')}" autocomplete="off" oninput="filterPick(this.value)"></label>`
     + Object.entries(FAECHER).map(([fk,F])=>{ const cur=fk===fach, op=cur||pickOpenGet().includes(fk), n=Object.values(F.kapitel).reduce((a,K)=>a+Object.keys(K.themen).length,0);
-      return `<div class="pick-group${op?' open':''}" data-f="${fk}"><button class="pick-head" aria-expanded="${op}"><span class="pick-tag">${F.tag}</span><span class="pick-hn">${F.title}${refUntr(fk)?' <span class="tree-de" title="'+tx('notYet')+'">DE</span>':''}</span><span class="pick-hc">${cur&&kapitel?F.kapitel[kapitel].title:n+' '+tx('topics')}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
+      return `<div class="pick-group${op?' open':''}" data-f="${fk}"><button class="pick-head" aria-expanded="${op}"><span class="pick-tag">${F.tag}</span><span class="pick-hn">${F.title}${refUntr(fk)?' <span class="tree-de" title="'+tx('notYet')+'">DE</span>':''}</span><span class="pick-hc">${cur&&kapitel?F.kapitel[kapitel].title:''}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
         Object.entries(F.kapitel).map(([kk,K])=>`<a class="pick-k" href="${hrefOf(fk,kk)}"><span class="lb-tn">${lbNum(fk,kk)}</span>${K.title}</a>`+Object.entries(K.themen).map(([tk,T])=>
           `<a class="pick-item${cur&&kk===kapitel&&tk===thema?' active':''}" role="menuitem" href="${hrefOf(fk,kk,tk)}">${T.title}</a>`).join('')).join('')}</div></div>`; }).join('')
     + `<div class="pick-none">${tx('pickNone')}</div>`;

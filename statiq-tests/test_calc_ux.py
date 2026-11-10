@@ -40,7 +40,9 @@ async def main():
         await pg.click('.pick-group[data-g="frames"] .pick-head'); await pg.click('.pick-item[data-k="frame:three"]'); await pg.wait_for_timeout(400)
         st=await pg.evaluate("[curTab(), framePresetNow(), document.getElementById('pick-t').textContent, document.getElementById('pick').classList.contains('open'), !document.getElementById('frame-results').classList.contains('hidden')]")
         check('Menü → Dreigelenkrahmen: Tab, Vorlage, Anzeige, Ergebnis', st==['frame','three','Dreigelenkrahmen',False,True], st)
-        await pg.click('#pick-btn'); await pg.click('.pick-group[data-g="beams"] .pick-head'); await pg.click('.pick-item[data-k="cantilever"]'); await pg.wait_for_timeout(300)
+        await pg.click('#pick-btn')
+        if not await pg.evaluate("document.querySelector('.pick-group[data-g=\"beams\"]').classList.contains('open')"): await pg.click('.pick-group[data-g="beams"] .pick-head')   # Balken bleibt seit v0.11.37 gemerkt offen
+        await pg.click('.pick-item[data-k="cantilever"]'); await pg.wait_for_timeout(300)
         check('Menü → Kragarm', await pg.evaluate("curTab()==='cantilever' && document.getElementById('pick-t').textContent==='Kragarm' && !document.getElementById('cant-results').classList.contains('hidden')"))
         check('Kopfzeile: Ordner-Symbol ist ein Link zu den Rechenblättern (kein Menü, keine Ansicht „Gespeichert“)', await pg.evaluate("!document.getElementById('proj-btn').hasAttribute('aria-haspopup') && document.getElementById('proj-panel').hidden"))
         await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("document.getElementById('pick').classList.contains('open')"))

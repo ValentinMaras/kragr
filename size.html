@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.39 -->
+<!-- kragr·size v0.7.40 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -4207,7 +4207,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.39';
+const SIZE_VERSION = '0.7.40';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11397,7 +11397,7 @@ const pickOpenGet=()=>{ try{ return JSON.parse(localStorage.getItem(PICK_OPEN_KE
 const pickOpenSet=(k,o)=>{ try{ const s=new Set(pickOpenGet()); o?s.add(k):s.delete(k); localStorage.setItem(PICK_OPEN_KEY, JSON.stringify([...s])); }catch(e){} };
 function buildPick(){
   // je Bereich eine aufklappbare Liste; der aktuelle und die zuletzt aufgeklappten Bereiche sind offen
-  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>{ const bs=[...$(seg).querySelectorAll('button')], cur=MAT===mat, op=cur||pickOpenGet().includes(mat), act=bs.find(b=>b.classList.contains('active'));
+  $('pick-menu').innerHTML = PICK_GROUPS.map(([mat,seg])=>{ const bs=[...$(seg).querySelectorAll('button')], cur=MAT===mat, op=cur||pickOpenGet().includes(mat), _k=cur&&pickOpenSet(mat,true), act=bs.find(b=>b.classList.contains('active'));
     return `<div class="pick-group${op?' open':''}" data-mat="${mat}"><button class="pick-head" aria-expanded="${op}"><span class="pick-hn">${matBtn(mat).textContent}</span><span class="pick-hc">${cur&&act?act.textContent:''}</span><span class="pick-hv">▾</span></button><div class="pick-body">${
     bs.map((b,i)=>`<button class="pick-item${cur && b.classList.contains('active')?' active':''}" role="menuitem" data-mat="${mat}" data-i="${i}">${b.textContent}</button>`).join('')}</div></div>`; }).join('');
   $('pick-menu').querySelectorAll('.pick-head').forEach(h=>h.onclick=e=>{ e.stopPropagation(); const g=h.parentElement, o=!g.classList.contains('open');

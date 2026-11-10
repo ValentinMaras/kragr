@@ -68,6 +68,17 @@ async def main():
             check(f'{L} {w} px: keine überlappenden Beschriftungen in Skizzen', not bad['ovl'], bad['ovl'][:4])
             check(f'{L} {w} px: Skizzenschrift nirgends unter 6,5 px (Bemessung 4,5 px)', not bad['small'], bad['small'][:4])
             await ctx.close()
+        # Auswahlmenü: aufgeklappte Bereiche bleiben offen, auch nach einer Auswahl in einem anderen Bereich (Valentin, 10.11.2026)
+        ctx=await br.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True); pg=await ctx.new_page()
+        for f,attr,cur,other in (('size.html','mat','beton','grund'),('calc.html','g','beams','frames'),('ref.html','f','baustatik','wasserbau')):
+            await pg.goto(B+f+('#/baustatik/balkentafeln/einfeld' if f=='ref.html' else '')); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(700)
+            O=f"[...document.querySelectorAll('.pick-group.open')].map(g=>g.dataset.{attr})"
+            await pg.tap('#pick-btn'); await pg.wait_for_timeout(250)
+            await pg.tap(f'.pick-group[data-{attr}="{other}"] .pick-head'); await pg.wait_for_timeout(150)
+            await pg.tap(f'.pick-group[data-{attr}="{other}"] .pick-item'); await pg.wait_for_timeout(600)
+            await pg.tap('#pick-btn'); await pg.wait_for_timeout(250); r=await pg.evaluate(O)
+            check(f'{f}: nach Auswahl in „{other}“ bleibt „{cur}“ beim Wiederöffnen aufgeklappt', cur in r and other in r, r)
+        await ctx.close()
         await br.close()
     print('FAILS:', fails); sys.exit(1 if fails else 0)
 asyncio.run(main())

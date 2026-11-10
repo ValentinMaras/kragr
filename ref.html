@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.71 -->
+<!-- kragr·ref v0.3.72 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -504,7 +504,7 @@
   .layout { grid-template-columns:minmax(0,1fr) 200px !important; }
   .layout > .main > * { max-width:none !important; }
   .toc { display:block !important; position:sticky; top:8px; max-height:calc(100vh - 16px); overflow:auto; padding-top:8px; }
-  .home-tiles { display:grid !important; } .home-hint { display:none !important; }
+  .home-hint { display:none !important; }
   .layout:has(> #toc:empty) { grid-template-columns:minmax(0,1fr) !important; }
 }
 </style>
@@ -1393,7 +1393,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.71';
+const REF_VERSION = '0.3.72';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -11570,23 +11570,8 @@ function renderBreadcrumb(){
 
 const footnote = extra => _L`<div class="footnote">kragr · ${kmod('ref')} v${REF_VERSION}${extra ? ' — '+extra : ''}</div>`.replace('</div>', ` · <a class="fehler-link" href="#" onclick="this.href=mulyFehlerHref('ref',REF_VERSION,location.hash)">${tt('Fehler gefunden? Bitte melden.')}</a></div>`);
 
-// ── Start: Fächer + Suche ──────────────────────────
+// ── Start: nur die Suche (v0.3.72; die Fächer stehen in der Auswahl oben, Kacheln wären doppelt) ──────────────────────────
 function viewFaecher(){
-  let tiles = '';
-  for(const [key, f] of Object.entries(FAECHER)){
-    tiles += `<a class="tile" href="${hrefOf(key)}">
-      <span class="tile-tag">${f.tag}</span>
-      <div class="tile-title">${f.title}</div>
-      <div class="tile-sub">${f.sub}</div>
-    </a>`;
-  }
-  FAECHER_SOON.forEach(s=>{
-    tiles += `<div class="tile soon" aria-disabled="true">
-      <span class="tile-tag">${s.tag}</span>
-      <div class="tile-title">${s.title}</div>
-      <div class="tile-sub">${tx('soon')}</div>
-    </div>`;
-  });
   return `
     <div class="search home-search">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
@@ -11594,7 +11579,6 @@ function viewFaecher(){
         oninput="runSearch(this.value)" aria-label="${tx('searchAria')}" autocomplete="off">
     </div>
     <div id="search-results"></div>
-    <div class="tile-grid home-tiles">${tiles}</div>
     ${footnote(tt('Nachschlagewerk'))}
   `;
 }

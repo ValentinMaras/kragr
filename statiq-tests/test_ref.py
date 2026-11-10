@@ -67,7 +67,7 @@ async def main():
         check('Suche ohne Treffer zeigt Hinweis', 'Keine Treffer' in await pg.evaluate("document.getElementById('search-results').innerText"))
         # ungültige Adresse → Start
         await pg.goto(url+'#/gibtsnicht/x')
-        check('Ungültige Adresse zeigt die Startseite (Suche, Kacheln, ohne Titel)', await pg.evaluate("!!document.getElementById('search') && !!document.querySelector('.home-tiles') && !document.querySelector('#main .page-title')"))
+        check('Ungültige Adresse zeigt die Startseite (Suche, ohne Titel)', await pg.evaluate("!!document.getElementById('search') && !document.querySelector('#main .page-title')"))
         # ── v0.2.0: neue Fächer ──
         import math
         fk = await pg.evaluate("Object.keys(FAECHER)")

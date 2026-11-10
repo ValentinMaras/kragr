@@ -55,8 +55,7 @@ async def main():
         check('Themenfilter findet „Hydratation und w/z-Wert“', any('Hydratation' in v for v in vis), vis[:4])
         # keine Themen-Anzahl mehr
         await pg.fill('#pick-q', ''); await pg.keyboard.press('Escape'); await pg.evaluate("location.hash='#/'"); await pg.wait_for_timeout(200)
-        subs=await pg.evaluate("[...document.querySelectorAll('.tile-sub')].map(e=>e.textContent)")
-        check('Übersicht: keine „n Themen“ an den Fachgebieten', subs and not any(re.search(r'\d+ Themen', s) for s in subs), subs[:2])
+        # (Übersichtskacheln entfallen seit ref v0.3.72; die Auswahl oben nennt die Themenzahl bewusst)
         await pg.evaluate("location.hash='#/stahlbeton'"); await pg.wait_for_timeout(200)
         meta=await pg.evaluate("[...document.querySelectorAll('.nav-list-meta')].map(e=>e.textContent.trim())")
         check('Kapitelliste: nur der Pfeil, keine Anzahl', meta and all(m=='›' for m in meta), meta[:3])

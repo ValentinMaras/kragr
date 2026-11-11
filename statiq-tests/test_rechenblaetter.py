@@ -77,7 +77,7 @@ async def main():
         # Menü
         await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open')
         mi=await pg.evaluate("()=>{const a=document.querySelector('#k5-menu [data-mod=projekt]'); return {t:a.querySelector('b').textContent, s:a.querySelector('.k5-mt > span').textContent, cur:a.getAttribute('aria-current')}}")
-        check('Menü: „Rechenblätter“ · „Gespeichert · als PDF drucken“, aktuelle Seite', mi=={'t':'Rechenblätter','s':'Gespeichert · als PDF drucken','cur':'page'}, mi)
+        check('Menü: „Rechenblätter“ · „Gespeichert · als PDF teilen“, aktuelle Seite', mi=={'t':'Rechenblätter','s':'Gespeichert · als PDF teilen','cur':'page'}, mi)
         await pg.keyboard.press('Escape')
         # size-Bericht in der Seite
         await pg.click('.bl:first-child button.p'); await pg.wait_for_timeout(200)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.41 -->
+<!-- kragr·size v0.7.42 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -994,13 +994,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF teilen',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',naSCH:'Schweizer Normen (SIA)',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'die Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · share as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',naSCH:'Swiss standards (SIA)',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · partager en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',naSCH:'Normes suisses (SIA)',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'la Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · compartir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',naSCH:'Normas suizas (SIA)',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -1456,6 +1456,7 @@ window.kragrK5Page = function(K){
   window.kragrBlatt={ t:t, relabel:relabel };
 })();
 </script>
+<script src="k5/pdf.js" defer></script>
 </head>
 <body>
 <header class="app-header glass k-hdr">
@@ -2989,7 +2990,7 @@ window.kragrK5Page = function(K){
 
 <div id="report-view" class="no-invert">
   <div class="report-actions">
-    <button class="btn" onclick="window.print()" data-i18n="print">Drucken / als PDF speichern</button>
+    <button class="btn" data-kragr-pdf="#report">PDF erstellen</button>
     <button class="btn secondary" onclick="hideReport()" data-i18n="back">Zurück zur Eingabe</button>
   </div>
   <div class="report" id="report"></div>
@@ -4207,7 +4208,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.41';
+const SIZE_VERSION = '0.7.42';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11106,7 +11107,7 @@ function repRB(html){
     + (typeof statiqDisclaimer==='function' ? '<div class="meta" style="margin-top:20px">'+statiqDisclaimer()+'</div>' : '')
     + `<div class="rb-foot"><span>kragr · ${kmod('size')}</span><span>${date} · ${kmod('size')} v${SIZE_VERSION}</span></div></div>`;
 }
-function showReport(){ $('report').innerHTML = repRB(trFig(buildReport())); document.body.classList.add('show-report'); window.scrollTo(0,0); }
+function showReport(){ $('report').innerHTML = repRB(trFig(buildReport())); { const pb=document.querySelector('[data-kragr-pdf]'); if(pb){ const nf=document.getElementById(typeof nameField==='function'?nameField():''); pb.setAttribute('data-kragr-pdf-name', (nf&&nf.value)||'kragr Bemessung'); } if(window.kragrPdfReset) kragrPdfReset(); } document.body.classList.add('show-report'); window.scrollTo(0,0); }
 function hideReport(){ document.body.classList.remove('show-report'); }
 
 // ══════════════════════════════════════════════════

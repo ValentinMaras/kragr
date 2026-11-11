@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·rechtliches v0.1.17 -->
+<!-- kragr·rechtliches v0.1.18 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -481,13 +481,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF teilen',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',naSCH:'Schweizer Normen (SIA)',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'die Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · share as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',naSCH:'Swiss standards (SIA)',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · partager en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',naSCH:'Normes suisses (SIA)',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'la Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · compartir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',naSCH:'Normas suizas (SIA)',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -875,6 +875,7 @@ de:{ title:'Impressum, Datenschutz und Hinweise',
     <h3>Deine Rechte</h3><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO) sowie das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>`,
   lic:`<h2 id="lizenzen">Lizenzen</h2>
     <p>Verwendete Schriften: Figtree, JetBrains Mono und Inter (nur griechische Buchstaben), jeweils unter der SIL Open Font License 1.1. Die Lizenztexte liegen im Ordner fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>
+    <p>PDF-Erstellung: jsPDF 2.5 und html2canvas 1.4, selbst gehostet, beide unter der MIT-Lizenz (<a href="https://github.com/parallax/jsPDF" rel="noopener">jsPDF</a>, <a href="https://github.com/niklasvh/html2canvas" rel="noopener">html2canvas</a>).</p>
     <p>Bewegungen: GSAP 3.13 (GreenSock), selbst gehostet unter der kostenlosen GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'Stand: Oktober 2026', back:'Zurück zur Startseite' },
 en:{ title:'Legal notice, privacy and disclaimer',
@@ -905,6 +906,7 @@ en:{ title:'Legal notice, privacy and disclaimer',
     <h3>Your rights</h3><p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a data protection authority.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
     <p>Fonts used: Figtree, JetBrains Mono and Inter (Greek letters only), each under the SIL Open Font License 1.1. The licence texts are in the fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>) folder.</p>
+    <p>PDF creation: jsPDF 2.5 and html2canvas 1.4, self-hosted, both under the MIT licence (<a href="https://github.com/parallax/jsPDF" rel="noopener">jsPDF</a>, <a href="https://github.com/niklasvh/html2canvas" rel="noopener">html2canvas</a>).</p>
     <p>Motion: GSAP 3.13 (GreenSock), self-hosted under the no-charge GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'As of October 2026', back:'Back to the start page' },
 fr:{ title:'Mentions légales, confidentialité et avertissement',
@@ -935,6 +937,7 @@ fr:{ title:'Mentions légales, confidentialité et avertissement',
     <h3>Vos droits</h3><p>Vous disposez des droits d’accès, de rectification, d’effacement, de limitation, de portabilité et d’opposition (art. 15 à 21 du RGPD) ainsi que du droit d’introduire une réclamation auprès d’une autorité de contrôle.</p>`,
   lic:`<h2 id="lizenzen">Licences</h2>
     <p>Polices utilisées : Figtree, JetBrains Mono et Inter (lettres grecques uniquement), chacune sous SIL Open Font License 1.1. Les textes des licences se trouvent dans le dossier fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>
+    <p>Création de PDF : jsPDF 2.5 et html2canvas 1.4, hébergés localement, tous deux sous licence MIT (<a href="https://github.com/parallax/jsPDF" rel="noopener">jsPDF</a>, <a href="https://github.com/niklasvh/html2canvas" rel="noopener">html2canvas</a>).</p>
     <p>Animations : GSAP 3.13 (GreenSock), hébergé localement sous la licence gratuite GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'Mise à jour : octobre 2026', back:'Retour à l’accueil' },
 es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
@@ -965,6 +968,7 @@ es:{ title:'Aviso legal, privacidad y exención de responsabilidad',
     <h3>Tus derechos</h3><p>Tienes derecho de acceso, rectificación, supresión, limitación, portabilidad y oposición (arts. 15–21 RGPD) y derecho a presentar una reclamación ante una autoridad de protección de datos.</p>`,
   lic:`<h2 id="lizenzen">Licencias</h2>
     <p>Fuentes utilizadas: Figtree, JetBrains Mono e Inter (solo letras griegas), todas bajo SIL Open Font License 1.1. Los textos de las licencias están en la carpeta fonts (<a href="fonts/LICENSE-Figtree.txt">Figtree</a>, <a href="fonts/LICENSE-JetBrainsMono.txt">JetBrains Mono</a>, <a href="fonts/LICENSE-Inter.txt">Inter</a>).</p>
+    <p>Creación de PDF: jsPDF 2.5 y html2canvas 1.4, alojados localmente, ambos con licencia MIT (<a href="https://github.com/parallax/jsPDF" rel="noopener">jsPDF</a>, <a href="https://github.com/niklasvh/html2canvas" rel="noopener">html2canvas</a>).</p>
     <p>Animaciones: GSAP 3.13 (GreenSock), alojado localmente bajo la licencia gratuita GSAP Standard License (<a href="https://gsap.com/standard-license" rel="noopener">gsap.com/standard-license</a>).</p>`,
   stand:'Actualizado: octubre de 2026', back:'Volver al inicio' }
 };

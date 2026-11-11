@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·projekt v0.1.38 · sichtbar „Rechenblätter“ -->
+<!-- kragr·projekt v0.1.39 · sichtbar „Rechenblätter“ -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -587,13 +587,13 @@ window.kragrK5Page = function(K){
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF drucken',
+    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF teilen',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',naSCH:'Schweizer Normen (SIA)',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'die Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · print as PDF',
+    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · share as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',naSCH:'Swiss standards (SIA)',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · imprimer en PDF',
+    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · partager en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',naSCH:'Normes suisses (SIA)',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'la Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · imprimir en PDF',
+    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · compartir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',naSCH:'Normas suizas (SIA)',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -922,6 +922,7 @@ window.kragrK5Page = function(K){
   if(D.readyState==='loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
+<script src="k5/pdf.js" defer></script>
 </head>
 <body>
 <header class="app-header glass k-hdr">
@@ -951,19 +952,19 @@ window.kragrK5Page = function(K){
 </div>
 
 <div id="report-view">
-  <div class="rep-acts"><button class="btn" onclick="hideReport()" data-t="back">← Zurück</button><span class="rep-title" id="rep-title"></span><button class="btn p" onclick="window.print()" data-t="print">Drucken / PDF</button></div>
+  <div class="rep-acts"><button class="btn" onclick="hideReport()" data-t="back">← Zurück</button><span class="rep-title" id="rep-title"></span><button class="btn p" data-kragr-pdf="#report">PDF erstellen</button></div>
   <div class="report" id="report"></div>
 </div>
 
 <script>
-const PROJ_VERSION = '0.1.38';
+const PROJ_VERSION = '0.1.39';
 const LANG = (()=>{ try{ return localStorage.getItem('statiq-lang') || 'de'; }catch(e){ return 'de'; } })();
 const T = {
  de:{ addChk:'＋ Nachweis', withForces:'Mit den Schnittkräften dieses Systems:', z_riegel:'Riegel', z_stiel:'Stiel (der stärker gedrückte)', kn_node:'Knoten', kn_eL:'Ecke links', kn_eR:'Ecke rechts', kn_first:'First', kn_sup:'Auflager', kn_weld:'Stahl · Schweißnaht am Stab {0} ({1})', kn_fuss:'Stahl · Stützenfuß am Stab {0}', kn_col:'Stütze', kn_raf:'Riegel', n1:'1 Rechenblatt', n:'{0} Rechenblätter', all:'Alle', report:'Bericht', open:'Öffnen', more:'Weitere Aktionen', rename:'Umbenennen', toSize:'In „{0}“ übernehmen',
   del:'Löschen', delAsk:'Wirklich löschen?', deleted:'„{0}“ gelöscht.', export:'Alle als Datei sichern', import:'Datei laden', exported:'Datei gespeichert.', imported:'{0} Rechenblätter geladen.',
   badFile:'Diese Datei ist keine kragr-Datei.', back:'← Zurück', print:'Drucken / PDF', ok:'erfüllt', notOk:'nicht erfüllt', noDraft:'älterer Stand: nur Bericht',
   noRep:'Für dieses Rechenblatt ist kein Bericht gespeichert. In „{0}“ öffnen und erneut speichern.',
-  none:'<b>Noch keine Rechenblätter.</b><br>Rechne in „{0}“ oder „{1}“ und wähle unter den Ergebnissen <b>„Als Rechenblatt speichern“</b>. Hier kannst du es danach als Bericht ansehen, als PDF drucken oder wieder öffnen.',
+  none:'<b>Noch keine Rechenblätter.</b><br>Rechne in „{0}“ oder „{1}“ und wähle unter den Ergebnissen <b>„Als Rechenblatt speichern“</b>. Hier kannst du es danach als Bericht ansehen, als PDF teilen oder wieder öffnen.',
   noneF:'In dieser Auswahl gibt es noch keine Rechenblätter.',
   hint:'Rechenblätter liegen nur in diesem Browser. Zum Sichern oder für ein anderes Gerät: „Alle als Datei sichern“ und dort „Datei laden“.',
   types:{ beam:'Einfeldträger', cantilever:'Kragarm', cont:'Durchlaufträger', frame:'Rahmen' } },
@@ -971,7 +972,7 @@ const T = {
   del:'Delete', delAsk:'Really delete?', deleted:'“{0}” deleted.', export:'Save all to file', import:'Load file', exported:'File saved.', imported:'{0} calculation sheets loaded.',
   badFile:'This file is not a kragr file.', back:'← Back', print:'Print / PDF', ok:'satisfied', notOk:'not satisfied', noDraft:'older version: report only',
   noRep:'No report is stored for this sheet. Open it in “{0}” and save again.',
-  none:'<b>No calculation sheets yet.</b><br>Calculate in “{0}” or “{1}” and choose <b>“Save as calculation sheet”</b> below the results. Here you can then view it as a report, print it as a PDF or open it again.',
+  none:'<b>No calculation sheets yet.</b><br>Calculate in “{0}” or “{1}” and choose <b>“Save as calculation sheet”</b> below the results. Here you can then view it as a report, share it as a PDF or open it again.',
   noneF:'No calculation sheets in this selection yet.',
   hint:'Calculation sheets are stored in this browser only. To back them up or move them to another device: “Save all to file”, then “Load file” there.',
   types:{ beam:'Simply supported beam', cantilever:'Cantilever', cont:'Continuous beam', frame:'Frame' } },
@@ -979,7 +980,7 @@ const T = {
   del:'Supprimer', delAsk:'Vraiment supprimer ?', deleted:'« {0} » supprimée.', export:'Tout enregistrer dans un fichier', import:'Charger un fichier', exported:'Fichier enregistré.', imported:'{0} notes de calcul chargées.',
   badFile:'Ce fichier n’est pas un fichier kragr.', back:'← Retour', print:'Imprimer / PDF', ok:'vérifiée', notOk:'non vérifiée', noDraft:'ancienne version : rapport seulement',
   noRep:'Aucun rapport enregistré pour cette note. L’ouvrir dans « {0} » et l’enregistrer à nouveau.',
-  none:'<b>Pas encore de notes de calcul.</b><br>Calculer dans « {0} » ou « {1} » et choisir <b>« Enregistrer comme note de calcul »</b> sous les résultats. Ici, on peut ensuite la voir comme rapport, l’imprimer en PDF ou la rouvrir.',
+  none:'<b>Pas encore de notes de calcul.</b><br>Calculer dans « {0} » ou « {1} » et choisir <b>« Enregistrer comme note de calcul »</b> sous les résultats. Ici, on peut ensuite la voir comme rapport, la partager en PDF ou la rouvrir.',
   noneF:'Pas encore de notes de calcul dans cette sélection.',
   hint:'Les notes de calcul sont stockées uniquement dans ce navigateur. Pour les sauvegarder ou les utiliser sur un autre appareil : « Tout enregistrer dans un fichier », puis « Charger un fichier » sur l’autre appareil.',
   types:{ beam:'Poutre sur deux appuis', cantilever:'Console', cont:'Poutre continue', frame:'Portique' } },
@@ -987,7 +988,7 @@ const T = {
   del:'Eliminar', delAsk:'¿Eliminar de verdad?', deleted:'«{0}» eliminada.', export:'Guardar todo en un archivo', import:'Cargar archivo', exported:'Archivo guardado.', imported:'{0} memorias de cálculo cargadas.',
   badFile:'El archivo no es un archivo de kragr.', back:'← Volver', print:'Imprimir / PDF', ok:'cumple', notOk:'no cumple', noDraft:'versión antigua: solo informe',
   noRep:'No hay informe guardado para esta memoria. Abrirla en «{0}» y guardarla de nuevo.',
-  none:'<b>Aún no hay memorias de cálculo.</b><br>Calcula en «{0}» o «{1}» y elige <b>«Guardar como memoria de cálculo»</b> debajo de los resultados. Aquí podrás verla como informe, imprimirla en PDF o volver a abrirla.',
+  none:'<b>Aún no hay memorias de cálculo.</b><br>Calcula en «{0}» o «{1}» y elige <b>«Guardar como memoria de cálculo»</b> debajo de los resultados. Aquí podrás verla como informe, compartirla en PDF o volver a abrirla.',
   noneF:'Aún no hay memorias de cálculo en esta selección.',
   hint:'Las memorias de cálculo se guardan solo en este navegador. Para hacer una copia o usarlas en otro dispositivo: «Guardar todo en un archivo» y allí «Cargar archivo».',
   types:{ beam:'Viga biapoyada', cantilever:'Voladizo', cont:'Viga continua', frame:'Pórtico' } } };
@@ -1107,7 +1108,7 @@ function rename(it, n){
 function report(id){ const it=byId(id); if(!it) return;
   if(it.kind==='c'){ location.href='calc.html#report='+encodeURIComponent(it.key); return; }
   let r=null; try{ r=localStorage.getItem(REP+it.name); }catch(e){}
-  document.getElementById('rep-title').textContent=it.name;
+  document.getElementById('rep-title').textContent=it.name; { const pb=document.querySelector('[data-kragr-pdf]'); if(pb) pb.setAttribute('data-kragr-pdf-name', it.name); if(window.kragrPdfReset) kragrPdfReset(); }
   document.getElementById('report').innerHTML = (r || `<h3>${esc(it.name)}</h3><p class="meta">${t('noRep', esc(M('size')))}</p>`)
     + (r && r.indexOf('rb-size')>=0 ? '' : typeof statiqDisclaimer==='function' ? '<div class="rep-disc" style="margin-top:18px;padding-top:8px;border-top:1px solid #ddd;font-size:10.5px;color:#666">'+statiqDisclaimer()+'</div>' : '');   // Berichte ab size v0.7.16 bringen den Hinweis selbst mit
   document.body.classList.add('show-report'); window.scrollTo(0,0); }

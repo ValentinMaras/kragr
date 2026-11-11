@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.40 -->
+<!-- kragr·size v0.7.41 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1439,7 +1439,7 @@ window.kragrK5Page = function(K){
     var old=D.getElementById('proj-panel'); if(old){ old.classList.remove('open'); old.setAttribute('hidden',''); }
     var b=D.getElementById('proj-btn'); if(b){ b.removeAttribute('aria-haspopup'); b.removeAttribute('aria-expanded'); }
     var hv=D.querySelector('.app-header .version'), m=D.querySelector('.app-header .module-name');
-    if(hv && m && !D.getElementById('k-verfoot')){ var f=D.createElement('div'); f.id='k-verfoot'; f.className='k-verfoot'; f.textContent='kragr · '+m.textContent.trim()+' '+hv.textContent.trim(); D.body.appendChild(f); }
+    // Versionszeile steht seit 11.11.2026 in der gemeinsamen Fußleiste
   }
   function init(){
     try{ legacy(); }catch(e){}
@@ -4207,7 +4207,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.40';
+const SIZE_VERSION = '0.7.41';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11981,30 +11981,39 @@ window.addEventListener("hashchange", ()=>{ openFromHash(); });
 window.addEventListener('focus', ()=>{ if($('ci-sel') && !$('ci-sel').matches(':focus')) renderCalcImport($('ci-sel').value); });
 </script>
 <script>
-// Fußleiste mit Haftungshinweis und Link zu Impressum/Datenschutz (Sprache folgt <html lang>)
+// Fußleiste mit Haftungshinweis, Link zu Impressum/Datenschutz und Versionszeile — in allen Apps gleich (Sprache folgt <html lang>)
 (function(){
   if(typeof document==='undefined' || !document.body || !document.createElement || !document.documentElement) return;
-  const TX={de:['Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung. Werte nach den genannten Normen, ohne Gewähr.','Impressum · Datenschutz · Hinweise'],
-    en:['Learning tool for students — does not replace a checked structural calculation. Values to the standards cited, without warranty.','Legal notice · Privacy · Disclaimer'],
-    fr:['Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée. Valeurs selon les normes citées, sans garantie.','Mentions légales · Confidentialité · Avertissement'],
-    es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención']};
+  const TX={de:['Lernwerkzeug für das Studium — ersetzt keine geprüfte statische Berechnung. Werte nach den genannten Normen, ohne Gewähr.','Impressum · Datenschutz · Hinweise','Fehler gefunden? Bitte melden.'],
+    en:['Learning tool for students — does not replace a checked structural calculation. Values to the standards cited, without warranty.','Legal notice · Privacy · Disclaimer','Found an error? Please report it.'],
+    fr:['Outil d’apprentissage pour les études — ne remplace pas une note de calcul contrôlée. Valeurs selon les normes citées, sans garantie.','Mentions légales · Confidentialité · Avertissement','Une erreur ? Merci de la signaler.'],
+    es:['Herramienta de aprendizaje para estudiantes — no sustituye un cálculo estructural revisado. Valores según las normas citadas, sin garantía.','Aviso legal · Privacidad · Exención','¿Has encontrado un error? Avísanos.']};
+  const MOD={de:{calc:'Schnittkräfte',size:'Bemessung',ref:'Wissen',projekt:'Rechenblätter'}, en:{calc:'Internal forces',size:'Design',ref:'Reference',projekt:'Calculation sheets'},
+    fr:{calc:'Efforts',size:'Dimensionnement',ref:'Référence',projekt:'Notes de calcul'}, es:{calc:'Esfuerzos',size:'Dimensionado',ref:'Referencia',projekt:'Memorias de cálculo'}};
+  const APP=((location.pathname.split('/').pop()||'').replace(/\.html$/,''))||'calc';
   window.statiqDisclaimer=()=>{ const l=(document.documentElement.lang||'de').slice(0,2); return (TX[l]||TX.de)[0]; };
+  // Fehler melden: Seiten mit eigenem Text (Eingaben) setzen window.kragrFehler; sonst einfache E-Mail mit Seite und Version
+  window.kragrFehlerHref=()=>{ if(typeof window.kragrFehler==='function') return window.kragrFehler();
+    const v=(document.querySelector('.app-header .version')||{}).textContent||''; const sub='Fehler in kragr·'+APP+' '+v.trim();
+    return 'mailto:kontakt@kragr.eu?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent('Seite: '+location.href+'\n\nWas ist falsch?\n\n'); };
   const d=document.createElement('div'); d.className='legal-bar'; d.setAttribute('role','contentinfo');
-  d.style.cssText='max-width:1100px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Figtree,system-ui,sans-serif;color:#5c5e66;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #ececec';
-  const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de;
-    d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html" style="color:inherit">'+t[1]+'</a>'; };
-  upd();
-  // Fußleiste immer ganz unten (v. 10.11.2026): Seite mindestens bildschirmhoch, ein Füller schiebt den Schluss nach unten.
-  // Steht ein Element mit data-bottom vor der Leiste (Wissen: Versionszeile), kommt der Füller davor.
+  const st=document.createElement('style');
+  st.textContent='.legal-bar{box-sizing:border-box;width:100%;max-width:1180px;margin:28px auto 0;padding:14px 24px 28px;font:12px/1.5 Figtree,system-ui,sans-serif;color:#5c5e66;display:flex;flex-direction:column;gap:6px;border-top:1px solid #ececec}'
+    +'.legal-bar a{color:inherit}.legal-bar .legal-ver{margin-top:4px}@media (max-width:560px){.legal-bar{padding-left:16px;padding-right:16px}}'
+    +'body{padding-bottom:0!important}.k-verfoot{display:none!important}@media print{.legal-bar,.k-fill{display:none!important}}';   // unten schließt überall die Leiste ab
+  (document.head||document.body).appendChild(st);
+  const upd=()=>{ const l=(document.documentElement.lang||'de').slice(0,2), t=TX[l]||TX.de, m=(MOD[l]||MOD.de)[APP]||'';
+    const v=((document.querySelector('.app-header .version')||{}).textContent||'').trim();
+    d.innerHTML='<span>'+t[0]+'</span><a href="rechtliches.html">'+t[1]+'</a>'
+      +'<span class="legal-ver">kragr · '+m+(v?' '+v:'')+' · <a class="fehler-link" href="#" onclick="this.href=kragrFehlerHref()">'+t[2]+'</a></span>'; };
+  window.kragrFootUpd=upd; upd();
+  // Fußleiste immer ganz unten: ein Füller vor der Leiste füllt kurze Seiten bis zur Bildschirmhöhe
   const fill=document.createElement('div'); fill.className='k-fill'; fill.setAttribute('aria-hidden','true');
-  const anchor=document.querySelector('body > [data-bottom]');
-  document.body.insertBefore(fill, anchor||null); document.body.appendChild(d);
-  // Höhe des Füllers per Skript statt body als Flex-Spalte (die verkleinerte zentrierte Blöcke wie die Auswahl in Schnittkräfte)
+  document.body.appendChild(fill); document.body.appendChild(d);
   let fq=0; const fit=()=>{ fq=0; fill.style.height='0px'; const bs=getComputedStyle(document.body), end=d.getBoundingClientRect().bottom+window.scrollY+parseFloat(bs.paddingBottom||0)+parseFloat(bs.marginBottom||0); fill.style.height=Math.max(0, Math.floor(window.innerHeight-end))+'px'; };   // body hat teils min-height:100vh, daher am Ende der Leiste messen
   const fitSoon=()=>{ if(!fq) fq=requestAnimationFrame(fit); };
   window.addEventListener('resize', fitSoon); window.addEventListener('load', fitSoon); window.addEventListener('hashchange', fitSoon);
   if(typeof ResizeObserver!=='undefined') new ResizeObserver(fitSoon).observe(document.body); fitSoon();
-  const st=document.createElement('style'); st.textContent='@media print{.legal-bar,.k-fill{display:none!important}}'; (document.head||document.body).appendChild(st);
   if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 
@@ -12033,6 +12042,7 @@ if(typeof navigator!=='undefined' && navigator.serviceWorker && typeof location!
 
 // Fehler melden: E-Mail mit Seite, Version und Eingaben. MULY_MAIL ist ein Platzhalter bis zur Einrichtung von kragr.eu.
 const MULY_MAIL = 'kontakt@kragr.eu';
+window.kragrFehler=()=>mulyFehlerHref('size',SIZE_VERSION,(typeof fixMode==='function'?fixMode():'')+' · '+JSON.stringify((typeof LAST!=='undefined'&&LAST&&LAST.I)||{}));
 function mulyFehlerHref(app, ver, extra){
   let lang='de'; try{ lang=localStorage.getItem('statiq-lang')||'de'; }catch(e){}
   let body=`Seite: ${location.href}\nModul: kragr·${app} v${ver}\nSprache: ${lang}\n\nWas ist falsch? (Ergebnis, erwarteter Wert, Quelle)\n\n\n`;

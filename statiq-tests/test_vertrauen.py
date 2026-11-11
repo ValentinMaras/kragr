@@ -21,13 +21,29 @@ async def main():
         v=await pg.evaluate("SIZE_VERSION")
         check('size: „Fehler melden“ öffnet E-Mail mit Modul, Version und Eingaben', h.startswith('mailto:') and f'size v{v}' in h and 'stahl/traeger' in h and '"prof"' in h, h[:140])
         await pg.goto(U+'calc.html'); await pg.wait_for_timeout(300)
-        n=await pg.evaluate("document.querySelectorAll('.footnote[data-foot] a.fehler-link').length")
-        await pg.evaluate("document.querySelector('.footnote[data-foot] a').onclick()"); h=unquote(await pg.evaluate("document.querySelector('.footnote[data-foot] a').href"))
+        FL="document.querySelector('.legal-bar .legal-ver a.fehler-link')"
+        await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(300)
+        await pg.evaluate(FL+".onclick()"); h=unquote(await pg.evaluate(FL+".href"))
         v=await pg.evaluate("STATIQ_VERSION")
-        check('calc: Link in allen vier Fußnoten, E-Mail mit Version', n==4 and f'calc v{v}' in h, (n, h[:100]))
+        check('calc: „Fehler melden“ in der Fußleiste, E-Mail mit Version und System', f'calc v{v}' in h and 'frame' in h, h[:140])
         await pg.goto(U+'ref.html#/baustatik/querschnitte/euler'); await pg.reload(); await pg.wait_for_timeout(300)
-        await pg.evaluate("document.querySelector('.footnote a.fehler-link').onclick()"); h=unquote(await pg.evaluate("document.querySelector('.footnote a.fehler-link').href"))
-        check('ref: Link in der Fußnote, E-Mail mit Thema (#/…)', '#/baustatik/querschnitte/euler' in h and 'ref v' in h, h[:120])
+        await pg.evaluate(FL+".onclick()"); h=unquote(await pg.evaluate(FL+".href"))
+        check('ref: Link in der Fußleiste, E-Mail mit Thema (#/…)', '#/baustatik/querschnitte/euler' in h and 'ref v' in h, h[:120])
+        # gleiche Fußleiste in allen Apps: Hinweis, Impressum, Version mit „Fehler melden“, nichts danach
+        bad=[]
+        for f,mod in (('calc.html','Schnittkräfte'),('size.html','Bemessung'),('ref.html','Wissen'),('projekt.html','Rechenblätter')):
+            await pg.goto(U+f); await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(500)
+            r=await pg.evaluate("(()=>{ const l=document.querySelector('.legal-bar'); const after=[]; let e=l.nextElementSibling; while(e){ if(e.offsetHeight>0 && getComputedStyle(e).position!=='fixed') after.push(e.tagName+'.'+e.className); e=e.nextElementSibling; } return [l.children.length, l.querySelector('.legal-ver')?.textContent||'', after, !!document.querySelector('.footnote, #k-verfoot:not([style*=none])') && [...document.querySelectorAll('.footnote, #k-verfoot')].some(x=>x.offsetHeight>0)]; })()")
+            ok=r[0]==3 and r[1].startswith('kragr · '+mod+' v') and r[1].endswith('Fehler gefunden? Bitte melden.') and not r[2] and not r[3]
+            if not ok: bad.append((f,r))
+        check('Fußleiste in Schnittkräfte, Bemessung, Wissen, Rechenblätter gleich (Hinweis · Impressum · Version mit „Fehler melden“), keine zweite Versionszeile', not bad, bad)
+        # Startseite so breit wie die Apps: linke Kante der Karten = linke Kante der Auswahl, am Rechner und am Handy
+        for w in (1280,390):
+            await pg.set_viewport_size({'width':w,'height':844}); edges={}
+            for f,sel in (('index.html','.module-card'),('calc.html','#pick'),('size.html','#pick'),('ref.html#/','#pick'),('projekt.html','#pick')):
+                await pg.goto(U+f); await pg.wait_for_timeout(450); edges[f]=await pg.evaluate(f"Math.round(document.querySelector('{sel}').getBoundingClientRect().left)")
+            check(f'{w} px: Startseite und Apps mit gleicher linker Kante', len(set(edges.values()))==1, edges)
+        await pg.set_viewport_size({'width':1280,'height':720})
         # Startseite
         vers=[]
         for f,c in [('calc.html','STATIQ_VERSION'),('ref.html','REF_VERSION'),('size.html','SIZE_VERSION'),('projekt.html','PROJ_VERSION')]:

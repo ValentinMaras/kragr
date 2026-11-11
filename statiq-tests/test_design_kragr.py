@@ -38,9 +38,9 @@ async def main():
             check(f'{f} Handy: Menüknopf 44 × 44; im Menü drei Module + Projekte, Erscheinungsbild, Sprache', r['w']==44 and r['hb']==44 and r['ver']=='none' and mn==[4,True,3,4], (r, mn))
             check(f'{f}: Schrift Figtree, Akzent #5468ad', r['font'].startswith('Figtree') and r['acc']=='#5468ad', r)
             fo=await pg.evaluate(FON); check(f'{f}: Figtree und JetBrains Mono geladen', 'Figtree' in fo and 'JetBrains Mono' in fo, fo)
-            v=await pg.inner_text('#k-verfoot')
+            v=await pg.evaluate("document.querySelector('.legal-bar .legal-ver').textContent.split(' · ').slice(0,2).join(' · ')")   # seit 11.11.2026 in der gemeinsamen Fußleiste
             want='kragr · Schnittkräfte v'+await pg.evaluate("typeof STATIQ_VERSION!=='undefined'?STATIQ_VERSION:''") if f=='calc' else 'kragr · Bemessung v'+await pg.evaluate("SIZE_VERSION")
-            check(f'{f}: Version unten auf der Seite (Handy)', v==want and v.startswith(('kragr · Schnittkräfte v0.11.','kragr · Bemessung v0.7.')) and await pg.is_visible('#k-verfoot'), v)
+            check(f'{f}: Version unten auf der Seite (Handy)', v==want and v.startswith(('kragr · Schnittkräfte v0.11.','kragr · Bemessung v0.7.')) and await pg.is_visible('.legal-bar .legal-ver'), v)
         await pg.goto(B+'calc.html'); await pg.wait_for_timeout(1500)
         r=await pg.evaluate("[localStorage.getItem('statiq-projekt'), !!document.getElementById('k-pmbar')]"); check('calc Handy: als Rechner ohne Projektbezug (kein Projekt, keine Projektzeile)', r==[None,False], r)
         await pg.close()

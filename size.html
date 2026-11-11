@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.42 -->
+<!-- kragr·size v0.7.43 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1457,6 +1457,12 @@ window.kragrK5Page = function(K){
 })();
 </script>
 <script src="k5/pdf.js" defer></script>
+<style>/* size v0.7.43: Abbildungen im Rechenweg am Handy bis fast an den Kartenrand (Zugkraftdeckungsbild: Schrift 6 → gut 7 px) */
+@media (max-width:560px){
+  #details .st-f > div:has(> svg.k-wide) { margin-left:-37px !important; margin-right:-12px !important; padding-left:0 !important; padding-right:0 !important; }
+  #details .st-f > div:has(> svg.k-wide) > svg { width:100%; height:auto; }
+}
+</style>
 </head>
 <body>
 <header class="app-header glass k-hdr">
@@ -4208,7 +4214,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.42';
+const SIZE_VERSION = '0.7.43';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4880,14 +4886,14 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
               _L`Stabende bei x = x<sub>E</sub> − l<sub>bd</sub> = <b>${deNum(xA/1000,2)} m</b> vom Auflager (beidseitig)`,
               _L`Länge der gestaffelten Stäbe ≥ l − 2·${deNum(xA/1000,2)} = <b>${deNum(Lc/1000,2)} m</b> → Ersparnis ≈ ${deNum(saved,1)} kg Betonstahl`);
             // Zugkraftdeckungsbild
-            const W=520, Hh=150, px=34, py=14, sx=(W-2*px)/L, sy=(Hh-28)/Math.max(FRd, Fmax);
+            const W=400, Hh=150, px=34, py=14, sx=(W-2*px)/L, sy=(Hh-28)/Math.max(FRd, Fmax);
             const X=v=>px+v*sx, Y=v=>py+(Hh-28)-v*sy, Mx=x=>4*Fmax*x/L*(1-x/L);
             const sh=x=> x<L/2-al ? Mx(Math.min(x+al,L/2)) : x>L/2+al ? Mx(Math.max(x-al,L/2)) : Fmax;
             let p1='', p2=''; for(let i=0;i<=100;i++){ const x=L*i/100; p1+=`${i?'L':'M'} ${X(x)} ${Y(Mx(x))} `; p2+=`${i?'L':'M'} ${X(x)} ${Y(sh(x))} `; }
             const FRx=x=>{ const t=Math.min(x, L-x); return t<=xA ? FR : t>=xE ? FRd : FR + (FRd-FR)*(t-xA)/(xE-xA); };
             let p3=''; for(const x of [0,xA,xE,L-xE,L-xA,L]) p3+=`${x?'L':'M'} ${X(x)} ${Y(FRx(x))} `;
             const yb=Hh+2;
-            svg = `<svg viewBox="0 0 ${W} ${Hh+52}" width="${W}" style="max-width:100%;height:auto;display:block;margin:6px 0" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zugkraftdeckung">`
+            svg = `<svg viewBox="0 0 ${W} ${Hh+52}" width="${W}" class="k-wide" style="max-width:100%;height:auto;display:block;margin:6px 0" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zugkraftdeckung">`
               + `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(L)}" y2="${Y(0)}" stroke="#111" stroke-width="1"/>`
               + `<path d="${p3} L ${X(L)} ${Y(0)} L ${X(0)} ${Y(0)} Z" fill="${C_IN}" fill-opacity="0.08"/>`
               + `<path d="${p1}" fill="none" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>`
@@ -5699,7 +5705,7 @@ function renderOut(C, ok, fig, line, nicht, refLink){
   $('chk-table').innerHTML = trFig(C.map(c=>`<tr><td class="chk-name"><a href="#n-${c.id}">${c.title}</a></td>
     <td style="width:34%">${c.info?'':etaBar(c)}</td><td class="chk-eta">${c.info?'—':deNum(c.eta*100,0)+' %'}</td>
     <td style="width:62px;text-align:right"><span class="tag ${c.info?'info':c.ok?'ok':'bad'}">${tx(c.info?'tagInfo':c.ok?'tagOk':'tagBad')}</span></td></tr>`).join(''));
-  $('fig').innerHTML = trFig(fig);
+  $('fig').innerHTML = trFig(fig); $('fig')._html=$('fig').innerHTML; $('fig')._orig=null; figStack();
   $('reinf-line').innerHTML = trFig(line);
   $('details').innerHTML = trFig(C.map(c=>`<div class="card" id="n-${c.id}">
       <div class="card-title"><span>${c.title}</span>${c.info?'':`<span class="tag ${c.ok?'ok':'bad'}">η = ${deNum(c.eta,2)}</span>`}</div>
@@ -11674,11 +11680,37 @@ const fixLabel = el => { const f=el.closest('.field')||el.closest('label'); let 
   if(/^bl-d(\d)$/.test(el.id)) t=tx('fixLayerD', el.id.slice(4), (sel=>sel?sel.options[sel.selectedIndex]?.text:'')($('bl-m'+el.id.slice(4))));
   return t.replace(/\s+/g,' ').trim(); };
 const fixFmt = (v, step) => { const d = step>=1 ? 0 : step>=0.1 ? 1 : 2; return deNum(v, d); };
+// Breite, zweiteilige Skizzen (Querschnitt | Ansicht) am Handy untereinander (v0.7.43): passt die Skizze nur stark verkleinert
+// in die Karte, wird sie an der breitesten leeren Stelle zwischen den beiden Teilen geteilt — gezeichnet wird nichts neu,
+// beide Hälften zeigen denselben Inhalt über einen eigenen Bildausschnitt. Die Lupe nutzt weiter die ganze Skizze (_orig).
+function figStack(){
+  const f=$('fig'); if(!f || f._html==null) return;
+  if(f._orig){ f.innerHTML=f._html; f._orig=null; }
+  const svg=f.querySelector(':scope > svg'); if(!svg || !svg.viewBox) return;
+  const vb=svg.viewBox.baseVal, cw=f.clientWidth, m=svg.getScreenCTM && svg.getScreenCTM();
+  f._w=cw; if(!cw || !m || !m.a || !vb.width || cw/vb.width>=0.72) return;
+  const iv=[]; svg.querySelectorAll('*').forEach(e=>{ const tx=e.tagName==='text'; if((!tx && (e.children.length || e.closest('text'))) || !e.getBBox || e.closest('defs')) return; const r=e.getBoundingClientRect(); if(!r.width && !r.height) return; iv.push([(r.left-m.e)/m.a, (r.right-m.e)/m.a]); });
+  if(iv.length<2) return; iv.sort((a,b)=>a[0]-b[0]);
+  let end=iv[0][1], g=[0,0]; for(const [a,b] of iv){ if(a>end && a-end>g[1]-g[0] && end>vb.width*0.25 && a<vb.width*0.8) g=[end,a]; end=Math.max(end,b); }
+  if(g[1]-g[0]<3) return;
+  const cut=(g[0]+g[1])/2, part=(x,w)=>{ const c=svg.cloneNode(true); c.setAttribute('viewBox', `${x} ${vb.y} ${w} ${vb.height}`); c.setAttribute('width', w); c.setAttribute('data-part',''); return c; };
+  const a=part(vb.x, cut-vb.x), b=part(cut, vb.x+vb.width-cut);
+  f._orig=svg; svg.replaceWith(a, b);
+  // leere Ränder oben/unten je Hälfte abschneiden
+  [a,b].forEach(c=>{ const v=c.viewBox.baseVal, mm=c.getScreenCTM(); if(!mm || !mm.d) return; let y1=1e9, y2=-1e9; const R=c.getBoundingClientRect();
+    c.querySelectorAll('*').forEach(e=>{ const tx=e.tagName==='text'; if((!tx && (e.children.length || e.closest('text'))) || !e.getBBox || e.closest('defs')) return; const r=e.getBoundingClientRect(); if(!r.width && !r.height) return; if(r.right<R.left+1 || r.left>R.right-1){ e.remove(); return; }   /* gehört zur anderen Hälfte */ y1=Math.min(y1,(r.top-mm.f)/mm.d); y2=Math.max(y2,(r.bottom-mm.f)/mm.d); });
+    if(y2>y1){ y1=Math.max(v.y, y1-6); y2=Math.min(v.y+v.height, y2+6); c.setAttribute('viewBox', `${v.x} ${y1} ${v.width} ${y2-y1}`); } });
+}
+{ let fsT=0; const again=()=>{ clearTimeout(fsT); fsT=setTimeout(()=>{ const f=$('fig'); if(f && f.clientWidth!==f._w) figStack(); }, 120); };
+  window.addEventListener('resize', again); if(typeof ResizeObserver!=='undefined'){ const f=document.getElementById('fig'); if(f) new ResizeObserver(again).observe(f); } }
 function fixProbe(cache, lever, v){
   const k = lever.id+'='+v; if(cache.has(k)) return cache.get(k);
-  const el=$(lever.id), old=el.value; el.value=v;
+  // Zahlenfelder: Probewert nur vorspiegeln (Eigenschaft am Element), das Feld selbst bleibt unberührt — sonst verliert ein Feld,
+  // in dem gerade getippt wird, Markierung und Schreibmarke (aus „5“ wurde beim Überschreiben „55“; v0.7.43)
+  const el=$(lever.id), shadow=el.tagName==='INPUT', old=el.value;
+  if(shadow) Object.defineProperty(el, 'value', { configurable:true, get:()=>String(v), set(){} }); else el.value=v;
   PROBE={ C:null }; try{ calcRun(); }catch(e){ PROBE.C=null; }
-  const C=PROBE.C; PROBE=null; el.value=old; cache.set(k, C); return C;
+  const C=PROBE.C; PROBE=null; if(shadow) delete el.value; else el.value=old; cache.set(k, C); return C;
 }
 const fixOk = (C, id) => { const c=C && C.find(x=>x.id===id); return c ? c.ok : null; };
 const fixAll = C => !!C && C.every(x=>x.ok);
@@ -11728,7 +11760,7 @@ function computeFix(bad, gen){
       for(const L of levers){ if(performance.now()-t0>2500) break; const r=fixSearch(cache, L, c.id); if(r) c.fix.push({ id:L.id, label:fixLabel($(L.id)), ...r }); }
     }
   } finally {
-    els.forEach((e,i)=>{ e.value=vals[i][0]; e.checked=vals[i][1]; e.disabled=vals[i][2]; });
+    els.forEach((e,i)=>{ if(e.value!==vals[i][0]) e.value=vals[i][0]; if(e.checked!==vals[i][1]) e.checked=vals[i][1]; if(e.disabled!==vals[i][2]) e.disabled=vals[i][2]; });   // nur Geändertes zurückschreiben
     PROBE={ C:null }; try{ calcRun(); }catch(e){} PROBE=null;   // Hinweise und Beschriftungen wie vorher
     LAST=last;
   }
@@ -12224,7 +12256,7 @@ var __zvTx = (typeof tx==='function') ? tx : null;   // Übersetzer der Seite (i
     if(ptr.size===1){ last=[...ptr.values()][0]; } else { last=null; stage.classList.remove('drag'); }
     if(e.pointerType!=='mouse' && e.type==='pointerup' && !moved && p){ var now=Date.now(); if(now-lastTap<300){ dbl(p.x, p.y); lastTap=0; } else lastTap=now; } }
   function open(){
-    var src=D.querySelector('#fig svg'); if(!src) return; if(!zv) build();
+    var fg=D.getElementById('fig'), src=(fg && fg._orig) || D.querySelector('#fig svg'); if(!src) return; if(!zv) build();   // geteilte Skizze: Lupe zeigt die ganze
     var c=src.cloneNode(true); c.removeAttribute('id'); [].forEach.call(c.querySelectorAll('[id]'), function(n){ n.removeAttribute('id'); });
     c.removeAttribute('width'); c.removeAttribute('height'); c.setAttribute('preserveAspectRatio','xMidYMid meet');
     inner.innerHTML=''; inner.appendChild(c);

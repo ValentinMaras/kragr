@@ -73,6 +73,15 @@ async def main():
         await pg.evaluate("setMat('holz'); setHoMode('bauteil'); $('ho-M').value='20'; run()"); await wait_fix(pg)
         box=await pg.evaluate("(document.querySelector('#n-biegung .fixbox')||{}).innerText||''")
         check('EN: Kasten englisch', 'Why is it not satisfied?' in box and 'instead of' in box and 'bending stress' in box and not re.search('[äöüß]', box), box[:120])
+        # Abhilfe-Suche darf ein Feld, in dem getippt wird, nicht anfassen (v0.7.43): Markierung bleibt, Überschreiben ergibt den getippten Wert
+        await pg.goto(HTML); await pg.evaluate('localStorage.clear()'); await pg.reload(); await pg.wait_for_timeout(300)
+        await pg.evaluate("setMat('holz'); setHoMode('bauteil'); document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed')); $('ho-M').value='20'; run()"); await wait_fix(pg)
+        nfix=await pg.evaluate("document.querySelectorAll('.fixbox').length")
+        await pg.evaluate("window.__w=0; const el=document.getElementById('ho-h'), d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value'); Object.defineProperty(HTMLInputElement.prototype,'value',{configurable:true,get(){return d.get.call(this)},set(v){ if(this===el) __w++; d.set.call(this,v); }})")
+        await pg.click('#ho-h'); await pg.keyboard.press('Control+a'); await pg.evaluate("run()"); await pg.wait_for_timeout(700)   # Suche läuft, während das Feld markiert ist
+        w=await pg.evaluate("__w"); await pg.keyboard.type('70'); await pg.wait_for_timeout(300)
+        v=await pg.evaluate("document.getElementById('ho-h').value")
+        check('Abhilfe-Suche schreibt nicht in das Feld mit der Schreibmarke; Überschreiben ergibt „70“', nfix>0 and w==0 and v=='70', (nfix, w, v))
         check('keine Skriptfehler', not errs, errs[:3])
         await br.close()
 asyncio.run(main())

@@ -95,7 +95,7 @@ async def main():
         s=await pg.evaluate("document.querySelector('#tab-frame [data-st=sup] > .k-head .k-sum').textContent")
         check('calc Rahmen: Lagerwahl wirkt, Kurzfassung der Stufe („Zweigelenkrahmen · n = 1“)', await pg.evaluate("document.getElementById('btn-sA-pin').classList.contains('active')") and (s.startswith('A △') or s.startswith('Zweigelenkrahmen')), s)
         await pg.evaluate("showTab('beam')")
-        # size: Eingabekarten als Akkordeon
+        # size: Eingabekarten aufklappbar (erst nur die erste offen)
         await pg.goto(B+'size.html'); await pg.evaluate("localStorage.removeItem('statiq-size-fold')"); await pg.reload(); await pg.wait_for_timeout(500)
         S="""()=>[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent!==null).map(c=>[c.dataset.fold, !c.classList.contains('closed'), (c.querySelector('.card-title .k5-hsum')||{}).textContent||'', !!c.querySelector('.card-title .k5-tri')])"""
         r=await pg.evaluate(S)
@@ -103,7 +103,8 @@ async def main():
         check('size: zugeklappte Karten zeigen eine Kurzfassung im Kopf', all(x[2] for x in r if not x[1]) and all(x[3] for x in r), r)
         await pg.click('.col-in .card.fold[data-fold="in-beton"] > .card-title'); await pg.wait_for_timeout(150)
         r=await pg.evaluate(S)
-        check('size: andere Karte öffnen schließt die erste', [x[0] for x in r if x[1]]==['in-beton'], r)
+        # seit size v0.7.45 kein Akkordeon mehr: geöffnete Karten bleiben offen (Handy und Rechner)
+        check('size: andere Karte öffnen lässt die erste offen', 'in-beton' in [x[0] for x in r if x[1]] and r[0][1], r)
         await pg.reload(); await pg.wait_for_timeout(500)
         r=await pg.evaluate(S)   # seit size v0.7.18 einheitlich: nach dem Laden ist nur die erste Eingabekarte offen
         check('size: nach Neuladen wieder nur die erste Karte offen', len([x for x in r if x[1]])==1 and r[0][1], r)

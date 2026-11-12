@@ -852,7 +852,8 @@ window.kragrK5Page = function(K){
     // Eingabekarten: immer nur eine offen; Kurzfassung im Kopf (wie die Lastzeilen in calc)
     var FS='statiq-size-fold';
     var sumOf=function(c){ try{ return typeof foldSummary==='function' ? foldSummary(c) : ''; }catch(e){ return ''; } };
-    // Zweispaltig (Rechner): Karten schließen sich nicht gegenseitig, jede bleibt, wie man sie gestellt hat (size v0.7.44)
+    // Karten schließen sich nicht gegenseitig: jede bleibt, wie man sie gestellt hat — am Rechner (v0.7.44) und am Handy (v0.7.45).
+    // Am Handy ist beim Laden und nach einem Wechsel des Nachweises nur die erste offen (foldReset), geöffnete bleiben offen.
     var WIDE=function(){ try{ return matchMedia('(min-width:861px)').matches; }catch(e){ return false; } };
     deco=function(){
       $$('.col-in .card.fold').forEach(function(c){ var h=$(':scope > .card-title', c); if(!h) return; c.classList.add('k5-fold');
@@ -862,17 +863,13 @@ window.kragrK5Page = function(K){
       K.watchBars($('#chk-table'), function(r){ var a=$('a', r); return a ? a.getAttribute('href') : r.rowIndex; });
     };
     D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.col-in .card.fold > .card-title'); if(!h || e.target.closest('button, a, input, select')) return;
-      var card=h.parentNode; if(card.classList.contains('closed') || WIDE()){ later(); return; }
-      var st={}; try{ st=JSON.parse(localStorage.getItem(FS)||'{}'); }catch(_){}
-      $$('.col-in .card.fold').forEach(function(c){ if(c===card || c.classList.contains('closed') || c.offsetParent===null) return; c.classList.add('closed'); if(c.dataset.fold) st[c.dataset.fold]=true; });
-      try{ localStorage.setItem(FS, JSON.stringify(st)); }catch(_){}
       later();
     });
     D.addEventListener('keydown', function(e){ var h=e.target; if((e.key==='Enter'||e.key===' ') && h.matches && h.matches('.col-in .card.fold > .card-title')){ e.preventDefault(); h.click(); } });
     // Beim Laden: nur die erste offene Eingabekarte bleibt offen (Akkordeon)
     setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; });
       if(!WIDE()) open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 0);
-    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; }); if(!WIDE()) open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 40); });
+    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(deco, 40); });
     // Umfang und Grundlagen: zugeklappt
     rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
   }

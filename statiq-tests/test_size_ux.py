@@ -63,11 +63,14 @@ async def main():
         check('Wechsel des Nachweises: weiter alle offen', o and all(o), o)
         await pg.evaluate("setTyp('balken')"); await pg.reload(); await pg.wait_for_timeout(400); o=await pg.evaluate(OPEN)
         check('nach Neuladen: alle offen', o and all(o), o)
-        # Handy (einspaltig): Akkordeon wie bisher — nach dem Laden nur die erste Karte offen, Öffnen einer anderen schließt die erste
+        # Handy (einspaltig): nach dem Laden nur die erste Karte offen; was man öffnet, bleibt offen
         await pg.set_viewport_size({'width':390,'height':844}); await pg.reload(); await pg.wait_for_timeout(500); o=await pg.evaluate(OPEN)
         check('Handy: nach Neuladen nur die erste Karte offen', o and o[0] and not any(o[1:]), o)
         await pg.click('.fold[data-fold="in-beton"] > .card-title'); await pg.wait_for_timeout(200); o=await pg.evaluate(OPEN)
-        check('Handy: andere Karte öffnen schließt die erste', sum(o)==1 and not o[0], o)
+        # seit size v0.7.45: geöffnete Karten bleiben auch am Handy offen (kein Akkordeon mehr)
+        check('Handy: andere Karte öffnen lässt die erste offen', sum(o)==2 and o[0], o)
+        await pg.evaluate("$('in-h').value=65; run()"); await pg.wait_for_timeout(200); o2=await pg.evaluate(OPEN)
+        check('Handy: neue Eingabe und Rechnung schließen nichts', sum(o2)>=2, o2)
         await pg.set_viewport_size({'width':1280,'height':900}); await pg.reload(); await pg.wait_for_timeout(500)
         # Nachweisdetails
         await pg.evaluate("$('in-h').value=30; $('in-M').value=600; run()"); await pg.wait_for_timeout(100)

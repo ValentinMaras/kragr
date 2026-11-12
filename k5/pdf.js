@@ -47,6 +47,24 @@
     el.setAttribute('style', old.st+';position:absolute!important;left:0!important;top:0!important;width:'+W+'px!important;max-width:none!important;margin:0!important;background:#fff!important;z-index:2147483000!important;box-sizing:border-box!important;padding:0!important');
     window.scrollTo(0,0);
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+    // SVG vorab selbst in Bilder umrechnen und für die Aufnahme ersetzen: html2canvas zeichnet eingebettete SVG (nur viewBox,
+    // Breite 100 %, Maße in ex) verschoben und abgeschnitten — Systemskizze ohne zweites Feld, das „r“ der Wortmarke versetzt
+    const scale0=Math.min(2, Math.max(1.5, window.devicePixelRatio||1)), swaps=[];
+    for(const v of [...el.querySelectorAll('svg')]){
+      const r=v.getBoundingClientRect(); if(r.width<1 || r.height<1) continue;
+      try{
+        const c=v.cloneNode(true), cs=getComputedStyle(v);
+        c.setAttribute('xmlns','http://www.w3.org/2000/svg'); c.setAttribute('width', r.width); c.setAttribute('height', r.height); c.removeAttribute('class');
+        c.setAttribute('style', 'color:'+cs.color+';font-family:'+cs.fontFamily.replace(/"/g,"'")+';overflow:'+(cs.overflow==='visible'?'visible':'hidden'));
+        const img=new Image(); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(c));
+        await (img.decode ? img.decode() : new Promise((ok,no)=>{ img.onload=ok; img.onerror=no; }));
+        const cv=document.createElement('canvas'); cv.width=Math.max(1,Math.round(r.width*scale0*1.5)); cv.height=Math.max(1,Math.round(r.height*scale0*1.5));
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+        cv.style.cssText='width:'+r.width+'px;height:'+r.height+'px;display:'+(cs.display==='inline'?'inline-block':cs.display)+';vertical-align:'+cs.verticalAlign+';margin:'+cs.margin+';flex:none';
+        v.replaceWith(cv); swaps.push([cv, v]);
+      }catch(e){}
+    }
+    const unsvg=()=>swaps.forEach(([cv,v])=>{ try{ cv.replaceWith(v); }catch(e){} });
     try{
       const pdf=new window.jspdf.jsPDF({unit:'mm', format:'a4', compress:true}), M=12, cw=210-2*M, ch=297-2*M;
       const pageH=Math.floor(W*ch/cw), cuts=breaks(el, pageH), r=el.getBoundingClientRect(), x0=r.left+window.scrollX, y0=r.top+window.scrollY;
@@ -61,6 +79,7 @@
       pdf.setProperties({title:name, creator:'kragr'});
       return new File([pdf.output('blob')], name.replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf', {type:'application/pdf'});
     } finally {
+      unsvg();
       el.setAttribute('style', old.st); if(!old.st) el.removeAttribute('style');
       body.classList.remove('kragr-pdf'); ps.remove(); window.scrollTo(old.sx, old.sy);
     }
@@ -96,7 +115,7 @@
   window.kragrPdfReset=()=>document.querySelectorAll('[data-kragr-pdf]').forEach(b=>{ if(b._pdf && !b._pdf.busy){ b._pdf={}; label(b); } });
   window.kragrPdf=makePdf;
   const st=document.createElement('style');
-  st.textContent='body.kragr-pdf{overflow:visible!important}body.kragr-pdf .k5-scrim,body.kragr-pdf .k5-menu,body.kragr-pdf #k-bar,body.kragr-pdf .mob-status{visibility:hidden!important}'
+  st.textContent='body.kragr-pdf,body.kragr-pdf *{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}body.kragr-pdf{overflow:visible!important}body.kragr-pdf .k5-scrim,body.kragr-pdf .k5-menu,body.kragr-pdf #k-bar,body.kragr-pdf .mob-status{visibility:hidden!important}'
     +'.kragr-pdf-ov{position:fixed!important;inset:0!important;display:flex!important;visibility:visible!important;align-items:center;justify-content:center;background:rgba(240,241,243,.97);color:#111114;font:600 15px Figtree,system-ui,sans-serif;z-index:2147483646!important}'
     +'@media print{[data-kragr-pdf]{display:none!important}}';
   (document.head||document.body).appendChild(st);

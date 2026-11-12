@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.40 -->
+<!-- kragr v0.11.41 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -366,6 +366,7 @@ window.mulyProj = {
     .rb .st:has(.st-f > :nth-child(12)) { break-inside:auto; }   /* lange Schritte (Formänderungswerte) dürfen umbrechen, sonst bleibt eine halbe Seite leer */
     .rb .st-h { break-after:avoid; } .rb .st-f > div, .rb .rw-figs { break-inside:avoid; }
     .rb .st-n { border-color:#111; color:#111; }
+    .rb .k-reflink, .rb div:has(> .k-reflink:only-child) { display:none; }   /* Verweis auf „Wissen“ gehört nicht ins Rechenblatt (v0.11.41) */
     .rb-tab { width:100%; border-collapse:collapse; font-family:'JetBrains Mono', monospace; font-size:12.5px; margin-top:4px; }
     .rb-tab th { text-align:right; font-weight:700; padding:5px 8px; border-bottom:1.2px solid #111; }
     .rb-tab td { text-align:right; padding:5px 8px; border-bottom:1px solid #ddd; }
@@ -1901,7 +1902,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.40</span>
+    <span class="version">v0.11.41</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2434,7 +2435,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.40';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.41';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -3222,9 +3223,10 @@ function drawContinuous() {
   let distIdx=0;
   lay.segs.forEach(sg=>{
     const sp=contSeg(sg.key);
+    let inSpan=0;   // Beschriftung nur innerhalb eines Feldes staffeln; Lasten in verschiedenen Feldern stehen auf gleicher Höhe (v0.11.41)
     (sp.dist||[]).filter(l=>l.enabled&&(l.values.qa!==0||l.values.qb!==0)).forEach(dl=>{
       const xa=X(sg.x0+Math.min(Math.max(dl.values.a,0),sg.L)), xb=X(sg.x0+Math.min(dl.values.b,sg.L));
-      h+=distSVG(xa,xb,dl.values.qa,dl.values.qb,maxF,bY,`q${distIdx+1}`,distIdx,'co'); distIdx++;
+      h+=distSVG(xa,xb,dl.values.qa,dl.values.qb,maxF,bY,`q${distIdx+1}`,inSpan++,'co'); distIdx++;
     });
   });
   // Balken (Abschnitte mit anderem Trägheitsmoment etwas dicker/dünner)
@@ -6660,7 +6662,7 @@ function rwCont(){
       if(i<n){ parts.push(`l<sub>${i+1}</sub>/3${kk(i)!==1?`·k<sub>${i+1}</sub>`:''}`); nums.push(`${nf(segs[i].L)}/3${kTxt(i)}`); }
       dLines.push(rwFigs(rwFig(t=>t<0.5?t*2:2-2*t,[0.5],[[0.5,'1']]), rwFig(t=>t<0.5?t*2:2-2*t,[0.5],[[0.5,'1']])), `EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i)+1}</sub> = ${nums.join(' + ')} = <b>${nf(dd(i,i),3)}</b> m`);
       if(unk.includes(i+1)) dLines.push(rwFigs(rwFig(t=>1-t,null,[[0,'1']]), rwFig(t=>t,null,[[1,'1']])),`EI₀·δ<sub>${unk.indexOf(i)+1}${unk.indexOf(i+1)+1}</sub> = ${nf(segs[i].L)}/6${kTxt(i)} = <b>${nf(dd(i,i+1),3)}</b> m`); });
-  S.push('§'+rwT('kgvD'), rwT('kgvDT'), ...dLines, `<a href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
+  S.push('§'+rwT('kgvD'), rwT('kgvDT'), ...dLines, `<a class="k-reflink" href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
   // δ_i0: je Last eine Tafelzeile
   const part = (ss, i, side) => {   // Beiträge der Lasten in Feld i zum Einheitszustand am linken (side 'L') bzw. rechten Lager
     const l=ss.L, out=[], k=kk(i), w = x => side==='R' ? x/l : 1-x/l;
@@ -6754,7 +6756,7 @@ function rwFrameKGV(model, sol, n){
   for(let i=0;i<nU;i++){ D.push([]); for(let j=0;j<nU;j++){ if(j<i){ D[i][j]=D[j][i]; continue; }
     const parts=model.elems.map((e,k)=>integ(GU[i], GU[j], k)), v=parts.reduce((t,p)=>t+p.v,0); D[i][j]=v;
     dSec.push(`EI₀·δ<sub>${i+1}${j+1}</sub>:`, ...parts.filter(p=>p.txt).flatMap(p=>[p.fig, p.txt]), `EI₀·δ<sub>${i+1}${j+1}</sub> = <b>${d3(v)}</b>`); } }
-  S.push(...dSec, `<a href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
+  S.push(...dSec, `<a class="k-reflink" href="ref.html#/baustatik/arbeitssatz/koppeltafel">${rwT('kgvTab')}</a>`);
   const bSec=['§'+rwT('kfB')];
   for(let i=0;i<nU;i++){ const parts=model.elems.map((e,k)=>integ(GU[i], G0, k)), v=parts.reduce((t,p)=>t+p.v,0); D0.push(v);
     bSec.push(`EI₀·δ<sub>${i+1}0</sub>:`, ...parts.filter(p=>p.txt).flatMap(p=>[p.fig, p.txt]), `EI₀·δ<sub>${i+1}0</sub> = <b>${d3(v)}</b>`); }

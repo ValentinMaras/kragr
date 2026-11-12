@@ -44,6 +44,13 @@ async def main():
         check('Schnittkräfte-Bericht: „Pos. 1 Rahmen.pdf“ mit mehreren Seiten', d.suggested_filename=='Pos. 1 Rahmen.pdf' and ok and n>=3, (d.suggested_filename, n, sz))
         r=await pg.evaluate("(()=>{ const el=document.getElementById('report-content'); return [el.getAttribute('style')||'', window.scrollY>=0]; })()")
         check('Bericht danach unverändert (Breite und Lage zurückgesetzt)', 'absolute' not in r[0], r)
+        r=await pg.evaluate("[document.querySelectorAll('#report-content svg').length, document.querySelectorAll('#report-content canvas').length, !!document.querySelector('#report-content .k-reflink') && [...document.querySelectorAll('#report-content .k-reflink')].some(a=>a.offsetHeight>0)]")
+        check('SVG nach der Aufnahme wieder da (keine Ersatzbilder übrig), Verweis auf „Wissen“ im Rechenblatt verborgen', r[0]>=4 and r[1]==0 and not r[2], r)
+        # Aufnahme: jede Skizze wird vorab selbst gerastert (html2canvas schnitt die Systemskizze ab und versetzte das „r“ der Wortmarke)
+        r=await pg.evaluate("""(async()=>{ const el=document.getElementById('report-content'); let seen=null; const o=window.html2canvas;
+          window.html2canvas=function(e,opt){ if(!seen) seen=[e.querySelectorAll('svg').length, e.querySelectorAll('canvas').length]; return o(e,opt); };
+          try{ await kragrPdf(el,'t'); } finally { window.html2canvas=o; } return seen; })()""")
+        check('Während der Aufnahme: keine SVG, nur gerasterte Bilder', r and r[0]==0 and r[1]>=4, r)
         await ctx.close()
         # ── Handy: zwei Tipps, Teilen-Menü mit PDF-Datei ──
         ctx=await br.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True); pg=await ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))

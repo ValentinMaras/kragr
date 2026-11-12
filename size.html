@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.43 -->
+<!-- kragr·size v0.7.44 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -944,6 +944,8 @@ window.kragrK5Page = function(K){
     // Eingabekarten: immer nur eine offen; Kurzfassung im Kopf (wie die Lastzeilen in calc)
     var FS='statiq-size-fold';
     var sumOf=function(c){ try{ return typeof foldSummary==='function' ? foldSummary(c) : ''; }catch(e){ return ''; } };
+    // Zweispaltig (Rechner): Karten schließen sich nicht gegenseitig, jede bleibt, wie man sie gestellt hat (size v0.7.44)
+    var WIDE=function(){ try{ return matchMedia('(min-width:861px)').matches; }catch(e){ return false; } };
     deco=function(){
       $$('.col-in .card.fold').forEach(function(c){ var h=$(':scope > .card-title', c); if(!h) return; c.classList.add('k5-fold');
         if(!$(':scope > .k5-hsum', h)){ var s=D.createElement('span'); s.className='k5-hsum'; h.appendChild(s); h.insertAdjacentHTML('beforeend', K.CHEV); h.setAttribute('role','button'); h.tabIndex=0; }
@@ -952,7 +954,7 @@ window.kragrK5Page = function(K){
       K.watchBars($('#chk-table'), function(r){ var a=$('a', r); return a ? a.getAttribute('href') : r.rowIndex; });
     };
     D.addEventListener('click', function(e){ var h=e.target.closest && e.target.closest('.col-in .card.fold > .card-title'); if(!h || e.target.closest('button, a, input, select')) return;
-      var card=h.parentNode; if(card.classList.contains('closed')){ later(); return; }
+      var card=h.parentNode; if(card.classList.contains('closed') || WIDE()){ later(); return; }
       var st={}; try{ st=JSON.parse(localStorage.getItem(FS)||'{}'); }catch(_){}
       $$('.col-in .card.fold').forEach(function(c){ if(c===card || c.classList.contains('closed') || c.offsetParent===null) return; c.classList.add('closed'); if(c.dataset.fold) st[c.dataset.fold]=true; });
       try{ localStorage.setItem(FS, JSON.stringify(st)); }catch(_){}
@@ -961,8 +963,8 @@ window.kragrK5Page = function(K){
     D.addEventListener('keydown', function(e){ var h=e.target; if((e.key==='Enter'||e.key===' ') && h.matches && h.matches('.col-in .card.fold > .card-title')){ e.preventDefault(); h.click(); } });
     // Beim Laden: nur die erste offene Eingabekarte bleibt offen (Akkordeon)
     setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; });
-      open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 0);
-    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; }); open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 40); });
+      if(!WIDE()) open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 0);
+    D.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.pick-menu, .seg button, [data-mode]')) setTimeout(function(){ var open=$$('.col-in .card.fold').filter(function(c){ return !c.classList.contains('closed') && c.offsetParent!==null; }); if(!WIDE()) open.slice(1).forEach(function(c){ c.classList.add('closed'); }); deco(); }, 40); });
     // Umfang und Grundlagen: zugeklappt
     rule('#scope-card', function(el){ var h=$(':scope > .card-title', el); return h ? {head:h, key:'scope', closed:true, sum:function(){ return ''; }} : null; });
   }
@@ -4214,7 +4216,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.43';
+const SIZE_VERSION = '0.7.44';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -12185,7 +12187,8 @@ function mulyFehlerHref(app, ver, extra){
 // vorher hing das von gespeicherten Zuständen je Karte ab (mal eine, mal drei offen).
 (function(){
   function reset(){ var cs=[].filter.call(document.querySelectorAll('.col-in .card.fold'), function(c){ return c.offsetParent!==null; });
-    cs.forEach(function(c,i){ c.classList.toggle('closed', i>0); });
+    var wide=false; try{ wide=matchMedia('(min-width:861px)').matches; }catch(e){}   // zweispaltig: alle Eingabekarten offen (size v0.7.44)
+    cs.forEach(function(c,i){ c.classList.toggle('closed', i>0 && !wide); });
     try{ document.dispatchEvent(new CustomEvent('k5refold')); }catch(e){} }
   window.foldReset=reset;
   ['setMat','setTyp','setStMode','setHoMode','setGrMode','setMwMode','setWbMode','setBpMode'].forEach(function(n){

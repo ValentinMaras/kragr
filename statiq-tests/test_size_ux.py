@@ -49,13 +49,26 @@ async def main():
         await pg.evaluate("setMat('beton'); setTyp('balken')"); await pg.wait_for_timeout(100)
         st=await pg.evaluate("[...document.querySelectorAll('.fold')].filter(c=>c.offsetParent).map(c=>[c.dataset.fold, c.classList.contains('closed'), c.querySelector('.fold-sum').textContent])")
         d={k:(c,t) for k,c,t in st}
-        check('Bauteil offen, Baustoffe zu mit Kurzfassung', d.get('seg-typ',(True,))[0]==False and d.get('in-beton',(False,''))[0] and 'C30/37' in d['in-beton'][1], d.get('in-beton'))
-        await pg.click('.fold[data-fold="in-beton"] > .card-title'); check('Klick auf den Titel klappt auf', not await pg.evaluate("document.querySelector('.fold[data-fold=\"in-beton\"]').classList.contains('closed')"))
-        await pg.reload(); await pg.wait_for_timeout(300)
-        # seit size v0.7.18 einheitlich: nach dem Laden ist nur die erste Eingabekarte offen (vorher gespeicherter Zustand je Karte)
-        check('nach Neuladen: erste Karte offen, Baustoffe wieder zu', await pg.evaluate("document.querySelector('.fold[data-fold=\"in-beton\"]').classList.contains('closed') && !document.querySelector('.col-in .fold').classList.contains('closed')"))
+        # seit size v0.7.44: am Rechner (zweispaltig) sind alle Eingabekarten offen und schließen sich nicht gegenseitig
+        check('Rechner: alle Eingabekarten offen', d and not any(c for c,_ in d.values()), st)
+        OPEN="[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent).map(c=>!c.classList.contains('closed'))"
+        await pg.click('.fold[data-fold="in-beton"] > .card-title'); await pg.wait_for_timeout(150)
+        o=await pg.evaluate(OPEN); bz=await pg.evaluate("document.querySelector('.fold[data-fold=\"in-beton\"]').classList.contains('closed')")
+        check('Klick auf den Titel klappt nur diese Karte zu, die anderen bleiben offen', bz and sum(o)==len(o)-1, o)
         await pg.evaluate("$('in-beton').value='C35/45'; run()")
         check('Kurzfassung folgt den Eingaben', 'C35/45' in await pg.inner_text('.fold[data-fold="in-beton"] .fold-sum'))
+        await pg.click('.fold[data-fold="in-beton"] > .card-title'); await pg.wait_for_timeout(150)
+        check('erneuter Klick klappt wieder auf, nichts anderes schließt sich', all(await pg.evaluate(OPEN)))
+        await pg.evaluate("setTyp('platte')"); await pg.wait_for_timeout(200); o=await pg.evaluate(OPEN)
+        check('Wechsel des Nachweises: weiter alle offen', o and all(o), o)
+        await pg.evaluate("setTyp('balken')"); await pg.reload(); await pg.wait_for_timeout(400); o=await pg.evaluate(OPEN)
+        check('nach Neuladen: alle offen', o and all(o), o)
+        # Handy (einspaltig): Akkordeon wie bisher — nach dem Laden nur die erste Karte offen, Öffnen einer anderen schließt die erste
+        await pg.set_viewport_size({'width':390,'height':844}); await pg.reload(); await pg.wait_for_timeout(500); o=await pg.evaluate(OPEN)
+        check('Handy: nach Neuladen nur die erste Karte offen', o and o[0] and not any(o[1:]), o)
+        await pg.click('.fold[data-fold="in-beton"] > .card-title'); await pg.wait_for_timeout(200); o=await pg.evaluate(OPEN)
+        check('Handy: andere Karte öffnen schließt die erste', sum(o)==1 and not o[0], o)
+        await pg.set_viewport_size({'width':1280,'height':900}); await pg.reload(); await pg.wait_for_timeout(500)
         # Nachweisdetails
         await pg.evaluate("$('in-h').value=30; $('in-M').value=600; run()"); await pg.wait_for_timeout(100)
         st=await pg.evaluate("[...document.querySelectorAll('#details .dfold')].map(c=>[c.id, c.classList.contains('closed'), !!c.querySelector('.card-title .tag.bad')])")

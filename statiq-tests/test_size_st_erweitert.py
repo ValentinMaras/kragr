@@ -25,7 +25,8 @@ async def main():
         check('keine eigene Karte „Weitere Einwirkungen“ mehr', not r['oldCard'])
         check('Titel nennt Inhalt: Biegung um z, Torsion, Einzellast', 'Biegung um z' in r['title'] and 'Torsion' in r['title'] and 'Gurt' in r['title'], r['title'])
         # seit size v0.7.18 ist nur die erste Eingabekarte offen: Karte Schnittgrößen öffnen
-        await pg.evaluate("(()=>{ const c=document.getElementById('sn-M').closest('.card.fold'); c.querySelector(':scope > .card-title').click(); })()"); await pg.wait_for_timeout(400)
+        # seit size v0.7.44 am Rechner alle offen: nur öffnen, wenn zu
+        await pg.evaluate("(()=>{ const c=document.getElementById('sn-M').closest('.card.fold'); if(c.classList.contains('closed')) c.querySelector(':scope > .card-title').click(); })()"); await pg.wait_for_timeout(400)
         await pg.click('#st-adv > .k5-head'); await pg.wait_for_timeout(300)
         o=await pg.evaluate("[!document.getElementById('st-adv').classList.contains('k5-closed'), document.getElementById('sn-Mz').offsetParent!==null]")
         check('Klick öffnet, Felder sichtbar', all(o), o)

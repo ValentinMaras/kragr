@@ -1,5 +1,6 @@
 # PDF-Datei statt Druckdialog (calc v0.11.39 · size v0.7.42 · projekt v0.1.39, 11.11.2026): k5/pdf.js erzeugt aus dem Bericht
-# eine echte PDF (html2canvas + jsPDF) mit der Druckansicht (Schriftfeld, Karo, zwei Spalten). Am Rechner Download,
+# eine echte PDF (html2canvas + jsPDF) mit der Druckansicht (Schriftfeld, zwei Spalten).
+# Seit calc v0.11.42 (12.11.2026): Schriftfeld oben auf jeder Seite, Blanko statt Karo, Berichtsfuß in der Fußzeile jeder Seite. Am Rechner Download,
 # am Handy zwei Tipps: „PDF erstellen“ → „PDF teilen“ (Teilen-Menü mit Datei). Ohne Playwright: SKIP.
 import os, sys, asyncio, re
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
@@ -51,6 +52,18 @@ async def main():
           window.html2canvas=function(e,opt){ if(!seen) seen=[e.querySelectorAll('svg').length, e.querySelectorAll('canvas').length]; return o(e,opt); };
           try{ await kragrPdf(el,'t'); } finally { window.html2canvas=o; } return seen; })()""")
         check('Während der Aufnahme: keine SVG, nur gerasterte Bilder', r and r[0]==0 and r[1]>=4, r)
+        # Kopf auf jeder Seite: das Schriftfeld wird einmal vorab aufgenommen (flacher Streifen), der Berichtsfuß steht in der Seitenfußzeile
+        r=await pg.evaluate("""(async()=>{ const el=document.getElementById('report-content'); const calls=[]; const o=window.html2canvas; let foot=null, sfh=0;
+          window.html2canvas=function(e,opt){ calls.push(Math.round(opt.height)); foot=getComputedStyle(e.querySelector('.rb-foot')).display; if(!sfh){ sfh=Math.round(e.querySelector('.rb-sf').getBoundingClientRect().height); } return o(e,opt); };
+          let f; try{ f=await kragrPdf(el,'t'); } finally { window.html2canvas=o; }
+          const b=new Uint8Array(await f.arrayBuffer()); let s=''; for(let i=0;i<b.length;i++) s+=String.fromCharCode(b[i]);
+          const ft=el.querySelector('.rb-foot');
+          return {calls, foot, sfh, pages:(s.match(/\\/Type\\s*\\/Page[^s]/g)||[]).length, after:[getComputedStyle(ft).display, ft.hasAttribute('data-kragr-pdf-off')],
+            grid:getComputedStyle(el.querySelector('.rb-grid')).backgroundImage}; })()""")
+        check('Schriftfeld wird vorab einzeln aufgenommen (erste Aufnahme = Höhe des Schriftfelds, danach eine je Seite)', r['calls'][0]<=r['sfh']+3 and r['sfh']<70 and len(r['calls'])==r['pages']+1 and r['pages']>=3, (r['calls'], r['sfh'], r['pages']))
+        check('Seiten ab der zweiten sind um den Kopf kürzer', r['calls'][1]<=1115 and max(r['calls'][2:])<=1115-r['sfh']-14, r['calls'])
+        check('Berichtsfuß während der Aufnahme aus (steht in der Seitenfußzeile), danach wieder da', r['foot']=='none' and r['after'][0]!='none' and not r['after'][1], (r['foot'], r['after']))
+        check('Schnittkräfte-Bericht: Rechenweg blanko, kein Karo', r['grid']=='none', r['grid'])
         await ctx.close()
         # ── Handy: zwei Tipps, Teilen-Menü mit PDF-Datei ──
         ctx=await br.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True); pg=await ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))

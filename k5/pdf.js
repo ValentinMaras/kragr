@@ -1,4 +1,4 @@
-// kragr · PDF aus einem Bericht (11.11.2026): erzeugt eine echte PDF-Datei im Browser (html2canvas + jsPDF, beide MIT, selbst gehostet)
+// kragr · PDF aus einem Bericht (11.11.2026, Kopf auf jeder Seite 12.11.2026): erzeugt eine echte PDF-Datei im Browser (html2canvas + jsPDF, beide MIT, selbst gehostet)
 // und gibt sie zum Teilen (Handy: Teilen-Menü mit Dateien, Mail, Messenger) oder zum Herunterladen (Rechner) aus.
 // Knöpfe: <button data-kragr-pdf="#report" data-kragr-pdf-name="…"> — Text und Ablauf setzt dieses Skript.
 // Ablauf am Handy in zwei Tipps: 1. „PDF erstellen“ (rechnet einige Sekunden), 2. „PDF teilen“ — das Teilen-Menü braucht einen
@@ -20,14 +20,17 @@
 
   // Seitenumbrüche: an Unterkanten von Blöcken, nie mitten durch Zeilen, Bilder, Tabellenzeilen oder Schrittköpfe
   const ATOM='svg,img,canvas,tr,li,p,pre,h1,h2,h3,h4,.st-h,.rb-dia,.rb-h,.eq,.eq-l,.eq-r,.figure,figure,.rep-disc,.meta,.rb-note,.rw-figs';
-  function breaks(el, pageH){
+  const HEAD='h1,h2,h3,h4,.rb-h,.rb-dia-t,.st-h';
+  function breaks(el, pageH, nextH){
     const top=el.getBoundingClientRect().top, H=el.scrollHeight, atoms=[], cand=new Set([H]);
     el.querySelectorAll('*').forEach(e=>{ const r=e.getBoundingClientRect(); if(!r.height) return; const a=r.top-top, b=r.bottom-top;
-      if(e.matches(ATOM) && r.height<pageH*0.9) atoms.push([a,b]); cand.add(Math.round(b)); cand.add(Math.round(a)); });
+      if(e.matches(ATOM) && r.height<pageH*0.9) atoms.push([a,b]); cand.add(Math.round(b)); cand.add(Math.round(a));
+      // keine Überschrift allein am Seitenende: zwischen Überschrift und dem Anfang des folgenden Blocks wird nicht getrennt
+      if(e.matches(HEAD)){ const n=e.nextElementSibling, q=n && n.getBoundingClientRect(); if(q && q.height) atoms.push([a, q.top-top+3]); } });
     const ok=y=>!atoms.some(([a,b])=>y>a+1 && y<b-1), ys=[...cand].filter(y=>y>0 && y<=H && ok(y)).sort((a,b)=>a-b), out=[0];
     let cur=0;
-    while(cur<H-1){ const lim=cur+pageH; if(lim>=H){ out.push(H); break; }
-      let best=0; for(const y of ys){ if(y>cur+pageH*0.35 && y<=lim) best=y; }
+    while(cur<H-1){ const ph=out.length>1 ? (nextH||pageH) : pageH, lim=cur+ph; if(lim>=H){ out.push(H); break; }
+      let best=0; for(const y of ys){ if(y>cur+ph*0.35 && y<=lim) best=y; }
       cur = best || lim; out.push(cur); }
     return out;
   }
@@ -67,19 +70,31 @@
     const unsvg=()=>swaps.forEach(([cv,v])=>{ try{ cv.replaceWith(v); }catch(e){} });
     try{
       const pdf=new window.jspdf.jsPDF({unit:'mm', format:'a4', compress:true}), M=12, cw=210-2*M, ch=297-2*M;
-      const pageH=Math.floor(W*ch/cw), cuts=breaks(el, pageH), r=el.getBoundingClientRect(), x0=r.left+window.scrollX, y0=r.top+window.scrollY;
+      const pageH=Math.floor(W*ch/cw), r=el.getBoundingClientRect(), x0=r.left+window.scrollX, y0=r.top+window.scrollY;
       const scale=Math.min(2, Math.max(1.5, window.devicePixelRatio||1));
+      const shot=(y,h)=>window.html2canvas(el, {scale, backgroundColor:'#ffffff', x:x0, y:y0+y, width:W, height:h, scrollX:0, scrollY:0, windowWidth:document.documentElement.clientWidth, logging:false, useCORS:true});
+      // Schriftfeld (Wortmarke, Position, Datum, Version) steht auf jeder Seite oben: einmal aufnehmen, ab Seite 2 wiederholen
+      const sf=el.querySelector('.rb-sf'), GAP=14; let head=null, headH=0;
+      if(sf){ const q=sf.getBoundingClientRect(), a=Math.max(0, Math.floor(q.top-r.top)-1), h=Math.ceil(q.height)+2;
+        if(h>8 && h<pageH*0.3){ head=(await shot(a,h)).toDataURL('image/jpeg', 0.92); headH=h; } }
+      // Fußzeile des Berichts wandert in die Fußzeile jeder Seite (links), rechts die Seitenzahl — sonst stünde sie allein auf der letzten Seite
+      const ft=el.querySelector('.rb-foot'), foot=ft ? ((ft.firstElementChild||ft).textContent||'').replace(/\s+/g,' ').trim() : '';
+      if(ft){ ft.setAttribute('data-kragr-pdf-off', ft.style.display||''); ft.style.display='none'; }
+      const cuts=breaks(el, pageH, head ? pageH-headH-GAP : pageH);
       for(let i=0;i<cuts.length-1;i++){
         const h=cuts[i+1]-cuts[i]; if(h<2) continue;
-        const cv=await window.html2canvas(el, {scale, backgroundColor:'#ffffff', x:x0, y:y0+cuts[i], width:W, height:h, scrollX:0, scrollY:0, windowWidth:document.documentElement.clientWidth, logging:false, useCORS:true});
+        const cv=await shot(cuts[i], h), off=(i>0 && head) ? headH+GAP : 0;
         if(i>0) pdf.addPage();
-        pdf.addImage(cv.toDataURL('image/jpeg', 0.9), 'JPEG', M, M, cw, cw*h/W, undefined, 'FAST');
+        if(off) pdf.addImage(head, 'JPEG', M, M, cw, cw*headH/W, 'kragr-kopf', 'FAST');
+        pdf.addImage(cv.toDataURL('image/jpeg', 0.9), 'JPEG', M, M+cw*off/W, cw, cw*h/W, undefined, 'FAST');
         pdf.setFontSize(8); pdf.setTextColor(120); pdf.text((i+1)+' / '+(cuts.length-1), 210-M, 297-5, {align:'right'});
+        if(foot) pdf.text(foot, M, 297-5);
       }
       pdf.setProperties({title:name, creator:'kragr'});
       return new File([pdf.output('blob')], name.replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf', {type:'application/pdf'});
     } finally {
       unsvg();
+      el.querySelectorAll('[data-kragr-pdf-off]').forEach(e=>{ e.style.display=e.getAttribute('data-kragr-pdf-off'); e.removeAttribute('data-kragr-pdf-off'); if(!e.getAttribute('style')) e.removeAttribute('style'); });
       el.setAttribute('style', old.st); if(!old.st) el.removeAttribute('style');
       body.classList.remove('kragr-pdf'); ps.remove(); window.scrollTo(old.sx, old.sy);
     }
@@ -115,7 +130,7 @@
   window.kragrPdfReset=()=>document.querySelectorAll('[data-kragr-pdf]').forEach(b=>{ if(b._pdf && !b._pdf.busy){ b._pdf={}; label(b); } });
   window.kragrPdf=makePdf;
   const st=document.createElement('style');
-  st.textContent='body.kragr-pdf,body.kragr-pdf *{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}body.kragr-pdf{overflow:visible!important}body.kragr-pdf .k5-scrim,body.kragr-pdf .k5-menu,body.kragr-pdf #k-bar,body.kragr-pdf .mob-status{visibility:hidden!important}'
+  st.textContent='body.kragr-pdf,body.kragr-pdf *{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}body.kragr-pdf{overflow:visible!important}body.kragr-pdf .eq-r{text-indent:0!important;padding-left:0!important}body.kragr-pdf .rb-sf{grid-template-columns:auto 1.6fr 1fr 1fr!important}body.kragr-pdf .rb-sf>div{border-bottom:none!important;border-right:1px solid #111!important}body.kragr-pdf .rb-sf>div:last-child{border-right:none!important}body.kragr-pdf .k5-scrim,body.kragr-pdf .k5-menu,body.kragr-pdf #k-bar,body.kragr-pdf .mob-status{visibility:hidden!important}'
     +'.kragr-pdf-ov{position:fixed!important;inset:0!important;display:flex!important;visibility:visible!important;align-items:center;justify-content:center;background:rgba(240,241,243,.97);color:#111114;font:600 15px Figtree,system-ui,sans-serif;z-index:2147483646!important}'
     +'@media print{[data-kragr-pdf]{display:none!important}}';
   (document.head||document.body).appendChild(st);

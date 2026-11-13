@@ -33,7 +33,8 @@ async def main():
             await pg.set_viewport_size({'width':W,'height':844}); R={}
             for f in PAGES:
                 await pg.goto(B+f+'.html'); await pg.wait_for_timeout(300); R[f]=await pg.evaluate(HDR)
-            check(f'{W} px: Kopfzeile zeigt nur Logo und ☰', all(set(r['shown'])<= {'logo','k5-burger'} and 'k5-burger' in r['shown'] for r in R.values()), {k:v['shown'] for k,v in R.items()})
+            # seit calc v0.11.44 · size v0.7.46: in Schnittkräfte und Bemessung zusätzlich „Rückgängig“ links neben ☰
+            check(f'{W} px: Kopfzeile zeigt nur Logo, ☰ und (in calc/size) Rückgängig', all(set(r['shown'])<= ({'logo','k5-burger','k5-undo'} if k in ('calc','size') else {'logo','k5-burger'}) and 'k5-burger' in r['shown'] for k,r in R.items()), {k:v['shown'] for k,v in R.items()})
             check(f'{W} px: ☰ mindestens 44 × 44 px', all(r['w']>=44 and r['h']>=44 for r in R.values()), {k:(v['w'],v['h']) for k,v in R.items()})
             edge=W-max(16 if W<=560 else 24, (W-1180)//2+24)
             check(f'{W} px: ☰ an der rechten Rahmenkante (App-Seiten)', all(abs(R[f]['right']-edge)<=1 for f in PAGES if f!='index'), {k:v['right'] for k,v in R.items()})

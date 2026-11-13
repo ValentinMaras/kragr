@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.45 -->
+<!-- kragr·size v0.7.46 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1456,6 +1456,7 @@ window.kragrK5Page = function(K){
 })();
 </script>
 <script src="k5/pdf.js" defer></script>
+<script src="k5/undo.js"></script>
 <style>/* size v0.7.43: Abbildungen im Rechenweg am Handy bis fast an den Kartenrand (Zugkraftdeckungsbild: Schrift 6 → gut 7 px) */
 @media (max-width:560px){
   #details .st-f > div:has(> svg.k-wide) { margin-left:-37px !important; margin-right:-12px !important; padding-left:0 !important; padding-right:0 !important; }
@@ -4213,7 +4214,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.45';
+const SIZE_VERSION = '0.7.46';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -11952,6 +11953,9 @@ applyI18n(); showLangNotice();
 if($('lang-sel')) $('lang-sel').value=LANG;
 initUX();
 load(); run();
+// Rückgängig (size v0.7.46, k5/undo.js): Verlauf über den gespeicherten Eingabestand; Wechsel des Nachweises ist kein eigener Schritt
+if(window.kragrUndo) kragrUndo({ get:snapshot, set:o=>{ apply(o); run(); save(); }, nav:['typ','mat','stmode','homode','grmode','mwmode','wbmode','bpmode'],
+  navFns:['setMat','setTyp','setStMode','setHoMode','setGrMode','setMwMode','setWbMode','setBpMode'] });
 // Aufruf aus „Schnittkräfte“: size.html#calc=<Schlüssel der gespeicherten Berechnung>
 // Projektübersicht: #pos=Name öffnet eine Position, &calc=… rechnet sie mit einer neueren Berechnung aus „Schnittkräfte“ neu und speichert (seit v0.5.28)
 function openFromHash(){

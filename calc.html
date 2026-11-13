@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.43 -->
+<!-- kragr v0.11.44 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1752,6 +1752,7 @@ window.kragrK5Page = function(K){
   @media (max-width:560px) { .nav.calc-top { padding-left:var(--k-gut) !important; padding-right:var(--k-gut) !important; } }   /* Auswahl am Handy mit gleichem Rand wie Bemessung und Rechenblätter */
 </style>
 <script src="k5/pdf.js" defer></script>
+<script src="k5/undo.js"></script>
 </head>
 <body>
 
@@ -1901,7 +1902,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.43</span>
+    <span class="version">v0.11.44</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2434,7 +2435,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.43';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.44';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7455,7 +7456,12 @@ function k4Restore(){
   if(!d || d.v!==1){   // Position ohne gespeicherten Eingabestand: wenigstens den Bereich des Systems zeigen
     if(K4_PM()){ try{ const ty=JSON.parse(localStorage.getItem(kragrPM.sysKey)).sdf.system.type; if(['beam','cantilever','cont','frame'].includes(ty) && ty!==curTab()) showTab(ty); }catch(e){} }
     return false; }
-  try{
+  try{ k4Apply(d, !location.hash); return true; }
+  catch(e){ try{ localStorage.removeItem(k4Key()); }catch(_){} return false; }
+}
+// Eingabestand übernehmen — beim Öffnen (Entwurf) und für „Rückgängig“ (calc v0.11.44, k5/undo.js)
+function k4Apply(d, tabToo){
+  {
     Object.entries(d.inputs||{}).forEach(([id,v])=>{ const e=document.getElementById(id); if(!e) return; if(e.type==='checkbox') e.checked=!!v; else e.value=v; });
     ['beam','cant'].forEach(s=>['point','dist','horiz','temp'].forEach(t=>{ if(d.loads && d.loads[s] && Array.isArray(d.loads[s][t])) loads[s][t]=d.loads[s][t]; }));
     if(Array.isArray(d.spanData) && d.spanData.length>=2){ spanData=d.spanData; numSpans=spanData.length; }
@@ -7474,9 +7480,8 @@ function k4Restore(){
     renderFrameLoads('vert'); renderFrameLoads('horiz'); renderFrameLoads('temp'); renderFrameHinges(); updateIndetInfo();
     if(typeof updatePresetButtons==='function') updatePresetButtons();
     drawBeam(); drawCantilever(); drawContinuous(); drawFrame();
-    if(!location.hash && ['beam','cantilever','cont','frame'].includes(d.tab) && d.tab!==curTab()) showTab(d.tab);
-    return true;
-  }catch(e){ try{ localStorage.removeItem(k4Key()); }catch(_){} return false; }
+    if(tabToo && ['beam','cantilever','cont','frame'].includes(d.tab) && d.tab!==curTab()) showTab(d.tab);
+  }
 }
 function k4Reset(b){ if(b && !b.classList.contains('armed')){ b.classList.add('armed'); b.textContent=k4('resetQ'); setTimeout(()=>{ b.classList.remove('armed'); b.textContent=k4('reset'); }, 3000); return; } _k4Off=true; try{ localStorage.removeItem(k4Key()); }catch(e){} location.hash=''; location.reload(); }
 function k4Panel(){ const x=document.getElementById('pp-extra'); if(!x || x.querySelector('.k-draft')) return;
@@ -7487,6 +7492,8 @@ function k4PanelTx(){ const x=document.querySelector('#pp-extra .k-draft'); if(!
   if(m){ try{ const e=JSON.parse(localStorage.getItem(decodeURIComponent(m[1]))||'null'); if(e && e.draft && e.draft.v===1){ localStorage.setItem(K4_LEGACY, JSON.stringify(e.draft)); window.kBlattOpen=e.name||''; } }catch(_){}
     history.replaceState(null,'',location.pathname+location.search); } }
 if(k4Restore()) liveCalc(true);
+// Rückgängig (calc v0.11.44): Verlauf über den Entwurfsstand; Reiterwechsel ist kein eigener Schritt
+if(window.kragrUndo) kragrUndo({ get:k4Snap, set:d=>{ k4Apply(d, true); liveCalc(true); k2All(); k4Save(); }, nav:['tab'], navFns:['showTab'] });
 ['input','change'].forEach(ev=>document.addEventListener(ev, e=>{ if(e.target.closest && e.target.closest('.main') && !e.target.closest('#tab-saved')) k4Save(); }));
 document.addEventListener('click', e=>{ if(e.target.closest && e.target.closest('.main') && !e.target.closest('#tab-saved')) k4Save(); });
 addEventListener('pagehide', ()=>k4Save(true)); document.addEventListener('visibilitychange', ()=>{ if(document.hidden) k4Save(true); });

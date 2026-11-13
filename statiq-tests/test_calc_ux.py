@@ -25,7 +25,9 @@ async def main():
         check('Eingabe ändern → Ergebnis rechnet nach (L = 6 m)', abs(m-ref)<0.006, f'{m} / {ref}')
         # zwei Spalten
         g=await pg.evaluate("(()=>{const a=document.querySelector('#tab-beam .col-in').getBoundingClientRect(), b=document.querySelector('#tab-beam .col-out').getBoundingClientRect(); return [a.left,a.right,b.left,b.top, getComputedStyle(document.querySelector('#tab-beam .col-out')).position]})()")
-        check('Rechner: Eingaben links, Ergebnis rechts (mitlaufend)', g[1]<=g[2] and g[4]=='sticky', g)
+        # seit calc v0.11.45: beide Spalten fensterhoch mit eigenem Scrollen (statt rechte Spalte „sticky“), siehe test_spalten
+        o=await pg.evaluate("[getComputedStyle(document.querySelector('#tab-beam .col-in')).overflowY, getComputedStyle(document.querySelector('#tab-beam .col-out')).overflowY]")
+        check('Rechner: Eingaben links, Ergebnis rechts, jede Spalte scrollt für sich', g[1]<=g[2] and o==['auto','auto'], (g, o))
         check('„Als Rechenblatt speichern“ ganz unten im Bereich (calc v0.11.12)', await pg.evaluate("document.getElementById('tab-beam').lastElementChild.classList.contains('kbl')"))
         # Auswahlmenü
         check('Auswahlknopf zeigt Bereich und System', await pg.inner_text('#pick-g')=='Balken' and await pg.inner_text('#pick-t')=='Einfeldträger')

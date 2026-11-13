@@ -71,7 +71,8 @@ async def main():
         mh=await d.evaluate("document.querySelector('#tab-beam .cols').style.minHeight")
         await d.evaluate("window.scrollTo(0,0)"); await d.wait_for_timeout(300)
         mh2=await d.evaluate("document.querySelector('#tab-beam .cols').style.minHeight")
-        check('Rechner: Spaltenbehälter hält die Höhe, beim Hochscrollen wieder frei', mh!='' and mh2=='', (mh, mh2))
+        # seit calc v0.11.45 sind die Spalten so hoch wie das Fenster und scrollen selbst: kein Festhalten der Höhe mehr nötig, aber auch nichts Hängengebliebenes
+        check('Rechner: Spaltenbehälter ohne hängengebliebene Mindesthöhe', mh2=='', (mh, mh2))
         await d.evaluate("window.scrollTo(0, 300)"); await d.wait_for_timeout(200)
         r=await d.evaluate(SAMPLE, ['#tab-beam .k-knoten', '#tab-beam .col-in > *:first-child'])
         check('Rechner: Karte rechts aufklappen — linke Spalte bleibt stehen', steps(r,'w')<=1 and steps(r,'sy')<=1, (steps(r,'w'), steps(r,'sy')))

@@ -1,6 +1,7 @@
 # Rückgängig (calc v0.11.44 · size v0.7.46, 13.11.2026): Knopf links neben dem Menü-Knopf in Schnittkräfte und Bemessung
 # (k5/undo.js). Ein Schritt = abgeschlossene Änderung; Reiter-/Nachweiswechsel ist kein Schritt, beim Zurücknehmen springt die Seite
-# aber dorthin. Nach dem Zurücknehmen Hinweis mit „Wiederholen“, Strg+Z / Strg+Umschalt+Z außerhalb von Feldern.
+# aber dorthin. „Wiederholen“ als gespiegelter Pfeil rechts daneben (seit calc v0.11.45 · size v0.7.47 statt eines Hinweises),
+# Strg+Z / Strg+Umschalt+Z außerhalb von Feldern.
 import os, sys, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
 try:
@@ -21,23 +22,27 @@ async def main():
             pg=await br.new_page(viewport={'width':w,'height':h}, is_mobile=mob, has_touch=mob); pg.on('pageerror', lambda e: errs.append(str(e)))
             # ── Bemessung ──
             await pg.goto(B+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
-            r=await pg.evaluate("(()=>{ const u=document.getElementById('k5-undo'), b=document.getElementById('k5-burger'); if(!u) return null; const a=u.getBoundingClientRect(), c=b.getBoundingClientRect();"
-                                " return [u.nextElementSibling===b, a.right<=c.left, Math.abs(a.top-c.top)<2, Math.round(a.height), Math.round(c.height), u.disabled, u.getAttribute('aria-label')]; })()")
-            check(f'{tag} Bemessung: Knopf links neben dem Menü, gleiche Höhe, anfangs aus', r and r[0] and r[1] and r[2] and r[3]==r[4] and r[5] and r[6]=='Rückgängig', r)
+            r=await pg.evaluate("(()=>{ const u=document.getElementById('k5-undo'), w=document.getElementById('k5-redo'), b=document.getElementById('k5-burger'); if(!u||!w) return null; const a=u.getBoundingClientRect(), d=w.getBoundingClientRect(), c=b.getBoundingClientRect();"
+                                " return [u.nextElementSibling===w && w.nextElementSibling===b, a.right<=d.left && d.right<=c.left, Math.abs(a.top-c.top)<2 && Math.abs(d.top-c.top)<2, Math.round(a.height), Math.round(c.height), u.disabled && w.disabled, u.getAttribute('aria-label'), w.getAttribute('aria-label'), getComputedStyle(w.querySelector('svg')).transform]; })()")
+            check(f'{tag} Bemessung: Rückgängig und Wiederholen links neben dem Menü, gleiche Höhe, anfangs aus', r and r[0] and r[1] and r[2] and r[3]==r[4] and r[5] and r[6]=='Rückgängig' and r[7]=='Wiederholen', r)
+            check(f'{tag} Bemessung: Wiederholen = derselbe Pfeil gespiegelt', r and r[8].startswith('matrix(-1'), r and r[8])
             await pg.mouse.click(5, 500); await pg.wait_for_timeout(300)
             check(f'{tag} Bemessung: Klick ins Leere ist kein Schritt', await pg.evaluate(DIS))
             await pg.fill('#in-h','70'); await pg.locator('#in-h').blur(); await pg.wait_for_timeout(250)
             await pg.fill('#in-M','300'); await pg.wait_for_timeout(100)   # noch im Feld: zählt beim Zurücknehmen als eigener Schritt
             check(f'{tag} Bemessung: nach einer Eingabe aktiv', not await pg.evaluate(DIS))
             await pg.click('#k5-undo'); await pg.wait_for_timeout(300)
-            r=await pg.evaluate("[$('in-h').value, $('in-M').value, !!document.querySelector('.k5-undo-toast.on'), document.querySelector('.k5-undo-toast span').textContent]")
-            check(f'{tag} Bemessung: erster Schritt zurück nimmt das zuletzt Getippte zurück, Hinweis erscheint', r[:3]==['70','220',True] and r[3]=='Rückgängig gemacht', r)
+            r=await pg.evaluate("[$('in-h').value, $('in-M').value, document.getElementById('k5-redo').disabled, !document.querySelector('.k5-undo-toast')]")
+            check(f'{tag} Bemessung: erster Schritt zurück nimmt das zuletzt Getippte zurück, Wiederholen wird aktiv, kein Hinweis', r==['70','220',False,True], r)
             r=await pg.evaluate("[...document.querySelectorAll('.k5-undone')].some(f=>f.contains($('in-M')))")
             check(f'{tag} Bemessung: zurückgenommenes Feld kurz hinterlegt', r)
             await pg.click('#k5-undo'); await pg.wait_for_timeout(300)
             check(f'{tag} Bemessung: zweiter Schritt zurück, danach nichts mehr', await pg.evaluate("[$('in-h').value, $('in-M').value]")==['60','220'] and await pg.evaluate(DIS))
-            await pg.click('.k5-undo-toast button'); await pg.wait_for_timeout(300)
+            await pg.click('#k5-redo'); await pg.wait_for_timeout(300)
             check(f'{tag} Bemessung: „Wiederholen“ stellt den Schritt wieder her', await pg.evaluate("$('in-h').value")=='70' and not await pg.evaluate(DIS))
+            await pg.click('#k5-redo'); await pg.wait_for_timeout(300)
+            check(f'{tag} Bemessung: zweimal Wiederholen, danach aus', await pg.evaluate("[$('in-h').value, $('in-M').value, document.getElementById('k5-redo').disabled]")==['70','300',True])
+            await pg.click('#k5-undo'); await pg.wait_for_timeout(300)
             # Wechsel des Nachweises: kein Schritt, auch wo der Wechsel Vorgaben in Felder schreibt
             await pg.click('#k5-undo'); await pg.wait_for_timeout(300); await pg.mouse.click(5,500); await pg.wait_for_timeout(200)
             pa=await pg.evaluate('Object.keys(PA)'); bad=[]
@@ -80,7 +85,7 @@ async def main():
             await pg.click('#k5-undo'); await pg.wait_for_timeout(400)
             r=await pg.evaluate("[curTab(), loads.beam.point.length, document.querySelectorAll('#tab-beam .k-chip[data-type=point]').length]")
             check(f'{tag} Schnittkräfte: zurück → springt zum Träger, Last wieder weg (auch in der Anzeige)', r[0]=='beam' and r[1]==n0 and r[2] in (n0, 0), r)
-            await pg.click('.k5-undo-toast button'); await pg.wait_for_timeout(400)
+            await pg.click('#k5-redo'); await pg.wait_for_timeout(400)
             check(f'{tag} Schnittkräfte: „Wiederholen“ bringt die Last zurück', await pg.evaluate("loads.beam.point.length")==n0+1)
             # Hinweis „Last gelöscht · Rückgängig“ verschwindet beim Zurücknehmen über den Knopf
             await pg.evaluate("document.getElementById('k-undo') && document.getElementById('k-undo').classList.add('on')")

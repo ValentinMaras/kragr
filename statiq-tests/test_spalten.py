@@ -39,6 +39,15 @@ async def main():
                     c=await pg.evaluate(S); foot=await pg.evaluate("(()=>{ const l=document.querySelector('.legal-bar'); return !!l && l.getBoundingClientRect().top<innerHeight; })()")
                     check(f'{name} {f}: am Spaltenende läuft die Seite weiter bis zur Fußleiste', c[0]>0 and foot, (c, foot))
             await pg.close()
+        # Menü am Handy quer (13.11.2026): Zeilen nicht zusammengeschoben, das Menü scrollt
+        pg=await br.new_page(viewport={'width':844,'height':390}, is_mobile=True, has_touch=True)
+        for f in ('calc','size','ref','projekt','index','rechtliches'):
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(700); await pg.click('#k5-burger'); await pg.wait_for_timeout(700)
+            r=await pg.evaluate("""(()=>{ const m=document.getElementById('k5-menu'), k=[...m.children].filter(e=>e.offsetHeight>0); let bad=[];
+              for(let i=1;i<k.length;i++){ const a=k[i-1].getBoundingClientRect(), b=k[i].getBoundingClientRect(); if(b.top<a.bottom-1) bad.push(k[i].className); }
+              const sq=k.filter(e=>e.scrollHeight>e.clientHeight+2).map(e=>e.className); return {bad, sq, scroll:m.scrollHeight>m.clientHeight}; })()""")
+            check(f'Handy quer {f}: Menüzeilen ohne Überlappung, Menü scrollt', not r['bad'] and not r['sq'] and r['scroll'], r)
+        await pg.close()
         # Handy hochkant: unverändert eine Spalte, die Seite scrollt
         pg=await br.new_page(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True)
         for f in ('size','calc'):

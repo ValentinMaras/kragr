@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·rechtliches v0.1.18 -->
+<!-- kragr·rechtliches v0.1.19 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -210,7 +210,7 @@
     transform:translateX(calc(100% + 24px)); visibility:hidden; transition:transform .42s var(--k5-ease), visibility 0s linear .42s; font-family:Figtree, system-ui, sans-serif; color:#111114; }
   .k5-menu.open { transform:none; visibility:visible; transition:transform .42s var(--k5-ease), visibility 0s; }
   html.dark .k5-menu { background:rgba(240,241,244,.94); }
-  .k5-menu > * { opacity:0; transform:translateX(18px); transition:opacity .3s, transform .4s var(--k5-ease); }
+  .k5-menu > * { flex-shrink:0; opacity:0; transform:translateX(18px); transition:opacity .3s, transform .4s var(--k5-ease); }   /* flex-shrink:0: bei wenig Höhe (Handy quer) scrollt das Menü, statt Zeilen übereinander zu schieben (13.11.2026) */
   .k5-menu.open > * { opacity:1; transform:none; transition-delay:calc(var(--i,0) * 35ms + 80ms); }
   .k5-mhead { display:flex; align-items:center; justify-content:space-between; padding:2px 4px 10px 8px; }
   .k5-mhead .k5-mlogo { font-size:20px; font-weight:800; letter-spacing:-.04em; text-decoration:none; color:#111114; }

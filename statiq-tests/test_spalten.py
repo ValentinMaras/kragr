@@ -24,6 +24,9 @@ async def main():
                 await pg.goto(B+f+'.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(1000)
                 g=await pg.evaluate(GEO)
                 check(f'{name} {f}: zwei Spalten nebeneinander unter der Kopfzeile, beide passen in die Höhe und scrollen selbst', g['side'] and g['top'] and g['fit'] and g['own']==['auto','auto'] and g['more'], g)
+                if name!='Handy quer':
+                    sw=await pg.evaluate("[getComputedStyle(document.documentElement).scrollbarWidth, getComputedStyle(document.querySelector('.col-in')).scrollbarWidth, getComputedStyle(document.querySelector('.col-out')).scrollbarWidth]")
+                    check(f'{name} {f}: Scrollleiste der Seite so schmal wie die der Spalten', sw==['thin','thin','thin'], sw)
                 if name=='Handy quer': continue   # Mausrad gibt es dort nicht; Aufbau oben genügt (Wischen = gleiches Verhalten im Browser)
                 W=kw['viewport']['width']
                 await pg.mouse.move(W*0.25, 500); await pg.mouse.wheel(0, 400); await pg.wait_for_timeout(350); a=await pg.evaluate(S)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.47 -->
+<!-- kragr·size v0.7.48 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -683,6 +683,7 @@ window.mulyProj = {
 @media (min-width:861px) and (min-height:541px) {
   .main > .col-in, .main > .col-out { position:relative; height:calc(100dvh - var(--k-hdr-h, 58px) - 8px); overflow-y:auto;
     scrollbar-width:thin; scrollbar-gutter:stable; padding:4px 10px 28px; margin:0 -10px; box-sizing:border-box; }
+  html { scrollbar-width:thin; }   /* Seitenleiste rechts so schmal wie die der Spalten (size v0.7.48) */
 }
 </style>
 <style data-k5>
@@ -4221,7 +4222,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.47';
+const SIZE_VERSION = '0.7.48';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════

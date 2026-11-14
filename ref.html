@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.80 -->
+<!-- kragr·ref v0.3.81 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -1393,7 +1393,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.80';
+const REF_VERSION = '0.3.81';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau
@@ -11963,10 +11963,21 @@ render();
   // Fußleiste immer ganz unten: ein Füller vor der Leiste füllt kurze Seiten bis zur Bildschirmhöhe
   const fill=document.createElement('div'); fill.className='k-fill'; fill.setAttribute('aria-hidden','true');
   document.body.appendChild(fill); document.body.appendChild(d);
-  let fq=0; const fit=()=>{ fq=0; fill.style.height='0px'; const bs=getComputedStyle(document.body), end=d.getBoundingClientRect().bottom+window.scrollY+parseFloat(bs.paddingBottom||0)+parseFloat(bs.marginBottom||0); fill.style.height=Math.max(0, Math.floor(window.innerHeight-end))+'px'; };   // body hat teils min-height:100vh, daher am Ende der Leiste messen
+  // Ohne den Füller vorher auf 0 zu setzen (14.11.2026): das ließ die Seite bei jeder Neuberechnung kurz schrumpfen; am iPhone lagen danach
+  // die feste Ergebnisleiste und die Kopfzeile mitten im Bild. Maß ist die Fensterhöhe ohne Tastatur (clientHeight statt innerHeight).
+  let fq=0; const fit=()=>{ fq=0; const cur=fill.offsetHeight, bs=getComputedStyle(document.body), end=d.getBoundingClientRect().bottom+window.scrollY+parseFloat(bs.paddingBottom||0)+parseFloat(bs.marginBottom||0);
+    const h=Math.max(0, Math.floor(document.documentElement.clientHeight-(end-cur))); if(Math.abs(h-cur)>=1) fill.style.height=h+'px'; };   // body hat teils min-height:100vh, daher am Ende der Leiste messen
   const fitSoon=()=>{ if(!fq) fq=requestAnimationFrame(fit); };
   window.addEventListener('resize', fitSoon); window.addEventListener('load', fitSoon); window.addEventListener('hashchange', fitSoon);
   if(typeof ResizeObserver!=='undefined') new ResizeObserver(fitSoon).observe(document.body); fitSoon();
+  // iPhone (14.11.2026): Nach dem Schließen der Tastatur blieb der sichtbare Ausschnitt gegen die Seite verschoben — Kopfzeile oben
+  // weg, die feste Ergebnisleiste mitten im Bild. Ein Scrollen um 1 px und zurück richtet beides wieder aus.
+  const vv=window.visualViewport, isField=e=>!!(e && e.matches && e.matches('input, textarea, select, [contenteditable="true"]'));
+  const resync=()=>{ if(isField(document.activeElement)) return; if(vv && vv.offsetTop<1 && Math.abs(vv.height-document.documentElement.clientHeight)<2) return;
+    const x=window.scrollX, y=window.scrollY; window.scrollTo(x, y+1); window.scrollTo(x, y); };
+  document.addEventListener('focusout', e=>{ if(isField(e.target)){ setTimeout(resync, 120); setTimeout(resync, 450); } });
+  let vh=vv ? vv.height : 0;   // nur wenn die Tastatur zuging (Höhe springt um mehr als 120 px nach oben), nicht beim Ein-/Ausblenden der Safari-Leiste
+  if(vv) vv.addEventListener('resize', ()=>{ const h=vv.height, up=h-vh>120; vh=h; if(up && !isField(document.activeElement)) setTimeout(resync, 60); });
   if(typeof MutationObserver!=='undefined') new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 

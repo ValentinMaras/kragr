@@ -48,6 +48,43 @@ async def main():
               const sq=k.filter(e=>e.scrollHeight>e.clientHeight+2).map(e=>e.className); return {bad, sq, scroll:m.scrollHeight>m.clientHeight}; })()""")
             check(f'Handy quer {f}: Menüzeilen ohne Überlappung, Menü scrollt', not r['bad'] and not r['sq'] and r['scroll'], r)
         await pg.close()
+        # Füller vor der Fußleiste (14.11.2026): wird nie kurz auf 0 gesetzt — am iPhone verrutschten danach Ergebnisleiste und Kopfzeile
+        pg=await br.new_page(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True)
+        await pg.goto(B+'size.html'); await pg.wait_for_timeout(900)
+        await pg.evaluate("window.__fh=[]; new MutationObserver(()=>window.__fh.push(document.querySelector('.k-fill').style.height)).observe(document.querySelector('.k-fill'),{attributes:true,attributeFilter:['style']})")
+        await pg.evaluate("scrollTo(0, document.documentElement.scrollHeight)"); await pg.wait_for_timeout(200)
+        y0=await pg.evaluate("scrollY")
+        for v in ('65','70','55','60'):
+            await pg.fill('#in-h', v); await pg.wait_for_timeout(250)
+        await pg.set_viewport_size({'width':390,'height':500}); await pg.wait_for_timeout(300); await pg.set_viewport_size({'width':390,'height':844}); await pg.wait_for_timeout(300)
+        r=await pg.evaluate("[window.__fh, Math.round(scrollY)]")
+        check('Handy: Füller nicht bei jeder Rechnung neu gesetzt (Seite schrumpft nicht zwischendurch)', '0px' not in r[0] or all(x=='0px' for x in r[0]), r)
+        for f in ('projekt','ref','calc','size'):
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(800)
+            q=await pg.evaluate("(()=>{ const l=document.querySelector('.legal-bar'), H=document.documentElement; return [Math.round(H.scrollHeight), H.clientHeight, Math.round(l.getBoundingClientRect().bottom+scrollY)]; })()")
+            check(f'Handy {f}: Fußleiste schließt die Seite ab, kurze Seite reicht genau bis unten', q[0]>=q[1] and abs(q[2]-q[0])<=2 and (q[0]>q[1]+2 or abs(q[0]-q[1])<=1), q)
+        await pg.close()
+        # iPhone: nach dem Schließen der Tastatur Ausschnitt neu ausrichten (Kopfzeile und Ergebnisleiste verrutschten in die Bildmitte)
+        ctx=await br.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True)
+        await ctx.add_init_script("""(()=>{ const t=new EventTarget(); const fake={offsetTop:0, height:844, addEventListener:t.addEventListener.bind(t), dispatchEvent:t.dispatchEvent.bind(t)};
+          Object.defineProperty(window,'visualViewport',{value:fake, configurable:true}); window.__vv=fake; window.__st=[];
+          const o=window.scrollTo.bind(window); window.scrollTo=function(x,y){ window.__st.push([x,y]); return o(x,y); }; })()""")
+        for f in ('size','calc'):
+            pg=await ctx.new_page(); await pg.goto(B+f+'.html'); await pg.wait_for_timeout(900)
+            fld='#in-h' if f=='size' else '#tab-beam input[type=number]'
+            await pg.evaluate("scrollTo(0,300)"); await pg.wait_for_timeout(100); await pg.evaluate("window.__st=[]")
+            await pg.focus(fld); await pg.evaluate("document.activeElement.blur()"); await pg.wait_for_timeout(600)
+            n0=await pg.evaluate("window.__st.length")
+            check(f'{f}: Feld verlassen ohne Versatz → kein Nachscrollen', n0==0, n0)
+            await pg.focus(fld); await pg.evaluate("window.__vv.offsetTop=380"); await pg.evaluate("document.activeElement.blur()"); await pg.wait_for_timeout(600)
+            r=await pg.evaluate("[window.__st.length, Math.round(scrollY)]")
+            check(f'{f}: Tastatur zu mit verschobenem Ausschnitt → Seite wird neu ausgerichtet, Lage bleibt', r[0]>=2 and abs(r[1]-300)<=1, r)
+            await pg.evaluate("window.__vv.offsetTop=0; window.__st=[]; window.__vv.height=460; window.__vv.dispatchEvent(new Event('resize')); window.__vv.height=844; window.__vv.dispatchEvent(new Event('resize'))"); await pg.wait_for_timeout(300)
+            check(f'{f}: Tastatur zu (Höhe springt) ohne Versatz → kein Nachscrollen', await pg.evaluate("window.__st.length")==0)
+            await pg.evaluate("window.__vv.height=780; window.__vv.dispatchEvent(new Event('resize')); window.__vv.offsetTop=40; window.__vv.height=844; window.__vv.dispatchEvent(new Event('resize'))"); await pg.wait_for_timeout(300)
+            check(f'{f}: Safari-Leiste ein/aus (kleiner Höhensprung) → kein Nachscrollen', await pg.evaluate("window.__st.length")==0)
+            await pg.close()
+        await ctx.close()
         # Handy hochkant: unverändert eine Spalte, die Seite scrollt
         pg=await br.new_page(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True)
         for f in ('size','calc'):

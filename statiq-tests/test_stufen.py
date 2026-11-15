@@ -78,7 +78,8 @@ async def main():
         # Einfeldträger
         await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(300)
         s=await pg.evaluate(ST, 'beam')
-        check('Einfeldträger: Länge bleibt an der Skizze, Stufen Lasten und Erweitert', [x[0] for x in s]==['loads','adv'] and await pg.is_visible('#bL'), s)
+        # seit calc v0.11.49 wie die anderen Systeme: Länge in „Abmessungen“, Lager eigene Stufe (siehe test_stufen_einheitlich)
+        check('Einfeldträger: Stufen Abmessungen · Lager · Lasten · Erweitert, Länge in „Abmessungen“', [x[0] for x in s]==['dims','sup','loads','adv'] and await pg.evaluate("!!document.querySelector('#tab-beam [data-st=dims] #bL')"), s)
         # Englisch
         await pg.evaluate("setCalcLang('en'); showTab('frame')"); await pg.wait_for_timeout(300)
         t=await pg.inner_text('#tab-frame .col-in')

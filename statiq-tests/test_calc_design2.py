@@ -22,16 +22,16 @@ async def main():
         pg=await br.new_page(viewport={'width':390,'height':844}); pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(U); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
         r=await pg.evaluate("""[document.querySelectorAll('#tab-beam .col-in > .card').length, !!document.querySelector('#tab-beam .k-loads #beam-point-list') && !!document.querySelector('#tab-beam .k-loads #beam-dist-list') && !!document.querySelector('#tab-beam .k-loads #beam-horiz-list'),
-          document.querySelectorAll('#tab-beam .k-loads .k-menu .add-load-btn').length, document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-sum').textContent,
+          document.querySelectorAll('#tab-beam .k-loads .k-menu .add-load-btn').length, document.querySelector('#tab-beam .k-loads .k-h').textContent, document.querySelector('#tab-beam .k-loads .k-sum').textContent,
           !!document.querySelector('#tab-cantilever .k-loads #cant-point-list'), !!document.querySelector('#tab-frame .k-loads #frame-vert-list') && !!document.querySelector('#tab-frame .k-loads #frame-horiz-list')]""")
-        check('Einfeldträger: System + eine Karte „Lasten“ (+ „Lastfälle nach EC 0“, v0.11.4) mit allen Listen, Menü mit 4 Einträgen (+ Temperatur, v0.11.6)', r[0]==3 and r[1] and r[2]==4 and r[3]=='Lasten' and r[4]=='2 Lasten', r)
+        check('Einfeldträger: System, Abmessungen, Lager, eine Karte „Lasten“ und Erweitert (v0.11.49) mit allen Listen, Menü mit 4 Einträgen (+ Temperatur, v0.11.6)', r[0]==5 and r[1] and r[2]==4 and r[3]=='Lasten' and r[4]=='2 Lasten', r)
         check('Kragarm und Rahmen: ebenfalls eine Lasten-Karte', r[5] and r[6], r)
         ch=await pg.evaluate("[...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent)")
         check('Chips unter der Skizze: „F1 10 kN“ und „q1 5 kN/m“', ch==['F1 10 kN','q1 5 kN/m'], ch)
         # Menü: Einzellast hinzufügen
         await pg.click('#tab-beam .k-add-btn'); vis=await pg.is_visible('#tab-beam .k-menu')
         await pg.click('#tab-beam .k-menu .add-load-btn >> nth=0'); await pg.wait_for_timeout(500)
-        r=await pg.evaluate("[document.querySelectorAll('#beam-point-list .load-item').length, getComputedStyle(document.querySelector('#tab-beam .k-menu')).display, [...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent), document.querySelector('#tab-beam .k-sum').textContent]")
+        r=await pg.evaluate("[document.querySelectorAll('#beam-point-list .load-item').length, getComputedStyle(document.querySelector('#tab-beam .k-menu')).display, [...document.querySelectorAll('#tab-beam .k-chip')].map(c=>c.textContent), document.querySelector('#tab-beam .k-loads .k-sum').textContent]")
         check('„+ Last hinzufügen“ → Menü → Einzellast: F2 neu, Menü zu, Chip F2, „3 Lasten“', vis and r[0]==2 and r[1]=='none' and 'F2 10 kN' in r[2] and r[3]=='3 Lasten', r)
         await pg.evaluate("removeLoad('beam','point', loads.beam.point[1].id)"); await pg.wait_for_timeout(400)
         # Stepper an der Stützweite: + 0,5 m, Rechnung folgt
@@ -117,9 +117,9 @@ async def main():
         check('Durchlaufträger-Gelenk: Feld per Umschalter', await pg.evaluate("[contCfg.hinges[0].span, document.querySelector('#cont-hinge-list .load-sum').textContent]")==[0,'Feld 1 · a = 1 m'])
         await pg.evaluate("removeContHinge(contCfg.hinges[0].id); showTab('beam')"); await pg.wait_for_timeout(500)
         # Lasten-Karte zuklappen: Kurzfassung
-        await pg.click('#tab-beam .k-head'); s=await pg.evaluate("[document.querySelector('#tab-beam .k-sum').textContent, getComputedStyle(document.querySelector('#tab-beam .k-body')).display]")
+        await pg.click('#tab-beam .k-loads > .k-head'); s=await pg.evaluate("[document.querySelector('#tab-beam .k-loads .k-sum').textContent, getComputedStyle(document.querySelector('#tab-beam .k-body')).display]")
         check('Lasten-Karte zu: Kurzfassung „F1 10 kN · q1 5 kN/m“', s==['F1 10 kN · q1 5 kN/m','none'], s)
-        await pg.click('#tab-beam .k-head')
+        await pg.click('#tab-beam .k-loads > .k-head')
         # Segment M/Q/N/w
         # k5: aktive Taste über eine gleitende weiße Fläche (.k5-pill) unter dem aktiven Knopf
         sg=await pg.evaluate("(()=>{const row=document.querySelector('#tab-beam .diagram-toggle-row'), p=row.querySelector('.k5-pill'), a=document.getElementById('diag-btn-M-beam'); return [getComputedStyle(p).backgroundColor, Math.round(p.getBoundingClientRect().left-a.getBoundingClientRect().left), Math.round(p.getBoundingClientRect().width-a.getBoundingClientRect().width), getComputedStyle(row).backgroundColor]})()")
@@ -153,11 +153,11 @@ async def main():
         await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
         # Sprache
         await pg.evaluate("setCalcLang('en')"); await pg.wait_for_timeout(500)
-        r=await pg.evaluate("[document.querySelector('#tab-beam .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.getElementById('ueb-btn').title]")
+        r=await pg.evaluate("[document.querySelector('#tab-beam .k-loads .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.getElementById('ueb-btn').title]")
         check('EN: Loads · + Add load · Angle α to the vertical · Practice mode', r[0]=='Loads' and r[1]=='+ Add load' and r[2]=='to the vertical' and 'Practice mode' in r[3] and 'full solution' in r[3], r)
         for lg,w in [('fr','Charges'),('es','Cargas')]:
             await pg.evaluate(f"setCalcLang('{lg}')"); await pg.wait_for_timeout(300)
-            check(f'{lg.upper()}: Lasten-Karte übersetzt', await pg.evaluate("document.querySelector('#tab-beam .k-h').textContent")==w)
+            check(f'{lg.upper()}: Lasten-Karte übersetzt', await pg.evaluate("document.querySelector('#tab-beam .k-loads .k-h').textContent")==w)
         await pg.evaluate("setCalcLang('de')")
         await pg.close()
         pg=await br.new_page(viewport={'width':1280,'height':800}); pg.on('pageerror', lambda e: errs.append(str(e)))

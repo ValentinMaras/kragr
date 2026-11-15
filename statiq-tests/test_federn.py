@@ -15,15 +15,15 @@ fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:74}', str(info)[:230])
 near=lambda a,b,t=0.01: a is not None and abs(a-b)<=t
-OPEN="localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"
+OPEN="localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{dims:true,sup:true,loads:true,adv:true},cantilever:{dims:true,sup:true,loads:true,adv:true}}))"
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':1280,'height':900}); pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');"+OPEN); await pg.reload(); await pg.wait_for_timeout(1000)
         # Einfeldträger: Federn über die Eingabe
-        r=await pg.evaluate("[!!document.querySelector('#tab-beam [data-st=adv] .k-supx'), document.querySelector('#tab-beam .k-supx .sx-body').hidden]")
-        check('Einfeldträger: „Federn und Setzungen“ unter Erweitert, zunächst aus', r==[True,True], r)
+        r=await pg.evaluate("[!!document.querySelector('#tab-beam [data-st=sup] .k-supx'), document.querySelector('#tab-beam .k-supx .sx-body').hidden]")
+        check('Einfeldträger: „Federn und Setzungen“ unter „Lager und Gelenke“ (seit calc v0.11.49), zunächst aus', r==[True,True], r)
         await pg.click('#tab-beam .k-supx .sx-on'); await pg.wait_for_timeout(300)
         r=await pg.evaluate("[...document.querySelectorAll('#tab-beam .sx-sup')].map(s=>s.dataset.lab+':'+[...s.querySelectorAll('input')].map(i=>i.dataset.sx).join(','))")
         check('Lager A und B mit Feder c_V und Setzung s (Einfeldträger ohne waagerechte Felder)', r==['A:cv,sv','B:cv,sv'], r)
@@ -33,8 +33,8 @@ async def main():
         check('Federn c = 5000 kN/m: w = 6,68 mm, Schnittgrößen unverändert (statisch bestimmt)', near(r[0],-6.6777,0.002) and near(r[1],28.125) and r[2]=='17.50', r)
         r=await pg.evaluate("[...document.querySelectorAll('#beam-svg .k-sxsvg text')].map(t=>t.textContent)")
         check('Skizze: c = 5000 an beiden Lagern', r.count('c=5000')==2, r)
-        r=await pg.evaluate("document.querySelector('#tab-beam [data-st=adv] > .k-head .k-sum').textContent")
-        check('Erweitert meldet „Federn/Setzungen“', 'Federn/Setzungen' in r, r)
+        r=await pg.evaluate("document.querySelector('#tab-beam [data-st=sup] > .k-head .k-sum').textContent")
+        check('„Lager und Gelenke“ meldet „Federn/Setzungen“', 'Federn/Setzungen' in r, r)
         # Temperatur
         await pg.evaluate("SUPX.beam={}; loads.beam.point=[]; loads.beam.dist=[]; renderLoads('beam','point'); renderLoads('beam','dist'); addLoad('beam','temp'); liveCalc(true)"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("[lastCalc.beam.maxima.w, lastCalc.beam.maxima.Mmax, loads.beam.temp[0].values]")

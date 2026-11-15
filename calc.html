@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.48 -->
+<!-- kragr v0.11.49 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1905,7 +1905,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.48</span>
+    <span class="version">v0.11.49</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2438,7 +2438,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.48';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.49';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7803,7 +7803,7 @@ if(Object.keys(LF_SK).some(lfOn)) liveCalc(true);
   .k-stn { flex:none; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:12px; background:#111114; color:#fff; font-size:12.5px; font-weight:800; }
   .k-st.k-closed .k-stn, .k-loads.k-closed .k-stn { background:#e6e7eb; color:#3d3f45; }
   .k-stn { display:none !important; }   /* v0.11.40: Stufen ohne Nummern (Valentin) */
-  .k-st .k-head .k-sum { text-align:right; }
+  .k-st .k-head .k-sum, .k-loads[data-st] > .k-head .k-sum, #span-load-cards > .k-loads > .k-head .k-sum { text-align:right; }   /* Kurzfassung überall rechts (calc v0.11.49) */
   .k-st-body > div[style*="margin-top"] { margin-top:4px !important; }
   .k-st-next { align-self:flex-end; min-height:40px; padding:0 16px; border:0; border-radius:20px; background:#111114; color:#fff; font:inherit; font-size:13.5px; font-weight:700; cursor:pointer; margin-top:4px; }
   .k-adv .k-adv-sec { padding-top:12px; border-top:1px solid #eceef1; }
@@ -7813,8 +7813,17 @@ if(Object.keys(LF_SK).some(lfOn)) liveCalc(true);
   .k-adv .k-adv-sec > .card > .card-title { display:none; }
   .k-adv .k-adv-sec > div[style] { margin-top:0 !important; }
   .k-adv .k-dot { display:inline-block; width:7px; height:7px; border-radius:4px; background:#5468ad; margin-right:6px; vertical-align:1px; }
-  .k-stw #span-load-cards { display:flex; flex-direction:column; gap:10px; }
-  .k-stw #span-load-cards > .card { margin:0; background:#f6f7f9; box-shadow:none; }
+  .k-stw #span-load-cards { display:flex; flex-direction:column; gap:0; }
+  /* Durchlaufträger (calc v0.11.49): je Feld eine schlichte Zwischenüberschrift statt eines Kastens im Kasten */
+  .k-stw #span-load-cards > .card { margin:0 !important; padding:12px 0 4px !important; background:transparent !important; box-shadow:none !important; border:0 !important; border-radius:0 !important; border-top:1px solid var(--k-line, #e3e5ea) !important; }
+  .k-stw #span-load-cards > .card:first-child { border-top:0 !important; padding-top:2px !important; }
+  .k-stw #span-load-cards > .card > .k-head { padding:0; min-height:28px; background:transparent; }
+  .k-stw #span-load-cards > .card > .k-head .k-h { font-size:14px; }
+  /* Lager beim Einfeld- und Kragträger (calc v0.11.49): fest vorgegeben, als Übersicht */
+  .k-supinfo { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+  .k-supi { display:grid; grid-template-columns:28px auto 1fr; align-items:center; gap:10px; padding:8px 12px; border-radius:12px; background:var(--k5-sub, #f5f6f8); font-size:14px; }
+  .k-supi .k-supi-s { font-size:16px; text-align:center; color:#5468ad; }
+  .k-supi > span:last-child { color:var(--k-text2, #5c5e66); }
   .k-eihint { font-size:12px; margin:0 0 8px; }
   .k-eihint button { border:0; background:transparent; padding:0; font:inherit; font-weight:700; color:#5468ad; cursor:pointer; text-decoration:underline; }
   /* Ergebnisse: Karten mit Kopfzeile zum Aufklappen */
@@ -7836,10 +7845,10 @@ if(Object.keys(LF_SK).some(lfOn)) liveCalc(true);
 // Ergebnisse: Rechenweg, Knoten und Lastfälle sind Karten mit Kopfzeile, standardmäßig zugeklappt.
 // ══════════════════════════════════════════════════
 const K11T = {
-  de:{ dims:'Abmessungen', sup:'Lager und Gelenke', loads:'Lasten', adv:'Erweitert', next:'Weiter: {0}', std:'Standard', gable:'Satteldach', head:'Kopfhalterung', ei:'Steifigkeit EI', eiCh:'EI geändert', lf:'Lastfälle', roof:'Riegelform', eiHint:'Biegesteifigkeit EI ändern:', open:'Erweitert öffnen', spans:'{0} Felder', hinge1:'1 Gelenk', hingeN:'{0} Gelenke', kr:'Kragarm', nodes:'{0} Knoten · {1} Stäbe', on:'an' , n1:'1 Last', nN:'{0} Lasten', n0:'keine Lasten' , mech:'verschieblich', det:'statisch bestimmt' },
-  en:{ dims:'Dimensions', sup:'Supports and hinges', loads:'Loads', adv:'Advanced', next:'Next: {0}', std:'default', gable:'Gable roof', head:'Head support', ei:'Bending stiffness EI', eiCh:'EI changed', lf:'Load cases', roof:'Rafter shape', eiHint:'Change the bending stiffness EI:', open:'open Advanced', spans:'{0} spans', hinge1:'1 hinge', hingeN:'{0} hinges', kr:'cantilever', nodes:'{0} nodes · {1} members', on:'on' , n1:'1 load', nN:'{0} loads', n0:'no loads' , mech:'mechanism', det:'statically determinate' },
-  fr:{ dims:'Dimensions', sup:'Appuis et articulations', loads:'Charges', adv:'Avancé', next:'Suivant : {0}', std:'standard', gable:'Toiture à deux versants', head:'Appui en tête', ei:'Rigidité EI', eiCh:'EI modifiée', lf:'Cas de charge', roof:'Forme de la traverse', eiHint:'Modifier la rigidité EI :', open:'ouvrir Avancé', spans:'{0} travées', hinge1:'1 articulation', hingeN:'{0} articulations', kr:'console', nodes:'{0} nœuds · {1} barres', on:'activés' , n1:'1 charge', nN:'{0} charges', n0:'aucune charge' , mech:'mécanisme', det:'isostatique' },
-  es:{ dims:'Dimensiones', sup:'Apoyos y rótulas', loads:'Cargas', adv:'Avanzado', next:'Siguiente: {0}', std:'estándar', gable:'Cubierta a dos aguas', head:'Apoyo en cabeza', ei:'Rigidez EI', eiCh:'EI modificada', lf:'Hipótesis', roof:'Forma del dintel', eiHint:'Cambiar la rigidez EI:', open:'abrir Avanzado', spans:'{0} vanos', hinge1:'1 rótula', hingeN:'{0} rótulas', kr:'voladizo', nodes:'{0} nudos · {1} barras', on:'activadas' , n1:'1 carga', nN:'{0} cargas', n0:'sin cargas' , mech:'mecanismo', det:'isostático' } };
+  de:{ free:'frei', freeEnd:'freies Ende', dims:'Abmessungen', sup:'Lager und Gelenke', loads:'Lasten', adv:'Erweitert', next:'Weiter: {0}', std:'Standard', gable:'Satteldach', head:'Kopfhalterung', ei:'Steifigkeit EI', eiCh:'EI geändert', lf:'Lastfälle', roof:'Riegelform', eiHint:'Biegesteifigkeit EI ändern:', open:'Erweitert öffnen', spans:'{0} Felder', hinge1:'1 Gelenk', hingeN:'{0} Gelenke', kr:'Kragarm', nodes:'{0} Knoten · {1} Stäbe', on:'an' , n1:'1 Last', nN:'{0} Lasten', n0:'keine Lasten' , mech:'verschieblich', det:'statisch bestimmt' },
+  en:{ free:'free', freeEnd:'free end', dims:'Dimensions', sup:'Supports and hinges', loads:'Loads', adv:'Advanced', next:'Next: {0}', std:'default', gable:'Gable roof', head:'Head support', ei:'Bending stiffness EI', eiCh:'EI changed', lf:'Load cases', roof:'Rafter shape', eiHint:'Change the bending stiffness EI:', open:'open Advanced', spans:'{0} spans', hinge1:'1 hinge', hingeN:'{0} hinges', kr:'cantilever', nodes:'{0} nodes · {1} members', on:'on' , n1:'1 load', nN:'{0} loads', n0:'no loads' , mech:'mechanism', det:'statically determinate' },
+  fr:{ free:'libre', freeEnd:'extrémité libre', dims:'Dimensions', sup:'Appuis et articulations', loads:'Charges', adv:'Avancé', next:'Suivant : {0}', std:'standard', gable:'Toiture à deux versants', head:'Appui en tête', ei:'Rigidité EI', eiCh:'EI modifiée', lf:'Cas de charge', roof:'Forme de la traverse', eiHint:'Modifier la rigidité EI :', open:'ouvrir Avancé', spans:'{0} travées', hinge1:'1 articulation', hingeN:'{0} articulations', kr:'console', nodes:'{0} nœuds · {1} barres', on:'activés' , n1:'1 charge', nN:'{0} charges', n0:'aucune charge' , mech:'mécanisme', det:'isostatique' },
+  es:{ free:'libre', freeEnd:'extremo libre', dims:'Dimensiones', sup:'Apoyos y rótulas', loads:'Cargas', adv:'Avanzado', next:'Siguiente: {0}', std:'estándar', gable:'Cubierta a dos aguas', head:'Apoyo en cabeza', ei:'Rigidez EI', eiCh:'EI modificada', lf:'Hipótesis', roof:'Forma del dintel', eiHint:'Cambiar la rigidez EI:', open:'abrir Avanzado', spans:'{0} vanos', hinge1:'1 rótula', hingeN:'{0} rótulas', kr:'voladizo', nodes:'{0} nudos · {1} barras', on:'activadas' , n1:'1 carga', nN:'{0} cargas', n0:'sin cargas' , mech:'mecanismo', det:'isostático' } };
 const k11 = (k, ...a) => { let s=(K11T[calcLang]||K11T.en)[k] ?? K11T.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; };
 const K11_CHEV = '<svg class="k-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
 const K11_DEF = { dims:true, sup:false, loads:true, adv:false };
@@ -7899,9 +7908,14 @@ function k11Build(){
       sysCard.after(dims); dims.after(sup); sup.after(loads); loads.after(adv); k11Next(dims,'sup'); k11Next(sup,'loads');
       try{ renderContUI(); }catch(e){}
     } else {
+      // Einfeld- und Kragträger wie Durchlaufträger und Rahmen (calc v0.11.49): Abmessungen → Lager und Gelenke → Lasten → Erweitert
+      const dims=k11Card(t,'dims',1), sup=k11Card(t,'sup',2);
+      const lf=document.getElementById(cfg.L)?.closest('.field'); if(lf) dims.querySelector('.k-st-body').appendChild(lf);
+      const si=document.createElement('div'); si.className='k-supinfo'; si.dataset.t=t; sup.querySelector('.k-st-body').appendChild(si);
       const ld=cin.querySelector(':scope > .k-loads'); if(ld){ ld.dataset.tab=t; ld.dataset.st='loads'; }
       const ab=adv.querySelector('.k-st-body'); if(eiSec) ab.appendChild(eiSec); if(lfc) ab.appendChild(k11Sec('lf', [lfc]));
-      (ld||sysCard).after(adv);
+      sysCard.after(dims); dims.after(sup); if(ld){ sup.after(ld); ld.after(adv); } else sup.after(adv);
+      k11Next(dims,'sup'); k11Next(sup,'loads');
     }
     // gespeicherter Zustand
     cin.querySelectorAll('[data-st]').forEach(c=>k11Set(c, k11Open(t, c.dataset.st), false));
@@ -7932,13 +7946,19 @@ function k11Sum(){
       if(contCfg.ovL.L>0 || contCfg.ovR.L>0) s+=' · '+k11('kr')+' '+[contCfg.ovL.L>0?k11Num(contCfg.ovL.L)+' m':'', contCfg.ovR.L>0?k11Num(contCfg.ovR.L)+' m':''].filter(Boolean).join(' / ');
       const ng=contCfg.hinges.length; if(ng) s+=' · '+(ng===1?k11('hinge1'):k11('hingeN',ng));
       if(supxSnap('cont', contLayout().supports.map((_,i)=>String.fromCharCode(65+i)))) s+=' · '+k12('sxShort'); }
+    else if((t==='beam'||t==='cantilever') && st==='dims'){ s='L = '+k11Num(v(t==='beam'?'bL':'cL'))+' m'; }
+    else if((t==='beam'||t==='cantilever') && st==='sup'){ const sp=t==='beam' ? [['A','pin'],['B','roller']] : [['A','fixed']];   // wie SX_SUPS (wird später geladen)
+      s=sp.map(([lab,ty])=>`${lab} ${K11_SUP[ty]}`).join(' · ')+(t==='cantilever' ? ' · '+k11('free') : '');
+      const late=typeof supxSnap==='function' && typeof k12==='function' && typeof sxSupName==='function';
+      if(late && supxSnap(t, sp.map(x=>x[0]))) s+=' · '+k12('sxShort');
+      const box=c.querySelector('.k-supinfo'); if(box && late){ const h=sp.map(([lab,ty])=>`<div class="k-supi"><span class="k-supi-s">${K11_SUP[ty]}</span><b>${k12('supL')} ${lab}</b><span>${sxSupName(ty).replace(/\s*[⊞△○]\s*$/,'')}</span></div>`).join('')
+        +(t==='cantilever' ? `<div class="k-supi"><span class="k-supi-s">—</span><b>${k11('freeEnd')}</b><span></span></div>` : ''); if(box._h!==h){ box._h=h; box.innerHTML=h; } } }
     else if(st==='loads'){ const n=c.querySelectorAll('.load-item').length; s = n===1 ? k11('n1') : n ? k11('nN', n) : k11('n0'); }
     else if(st==='adv'){ const a=[];
       if(t==='frame' && document.getElementById('fGable')?.checked) a.push(k11('gable'));
       if(t==='frame' && supportHead!=='none') a.push(k11('head'));
       const eiCh=[...c.querySelectorAll('[id$="-E"],[id$="-Iy"],[id^="frame-E-"],[id^="frame-Iy-"]')].some(e=>Math.abs((parseFloat(e.value)||0) - (/-E/.test(e.id)?210:10))>1e-9);
       if(eiCh) a.push(k11('eiCh')); if(typeof lfOn==='function' && lfOn(t)) a.push(k11('lf')+' '+k11('on'));
-      if((t==='beam'||t==='cantilever') && supxSnap(t, t==='beam'?['A','B']:['A'])) a.push(k12('sxShort'));
       s = a.length ? a.join(' · ') : k11('std'); c.classList.toggle('k-adv-on', a.length>0); }
     k11Tx(sm, s);
   });
@@ -8007,10 +8027,10 @@ function sxFields(t, ty){
   return f;
 }
 function sxUI(t){
-  const host = (t==='frame'||t==='cont') ? document.querySelector(`#tab-${t} [data-st="sup"] .k-st-body`) : document.querySelector(`#tab-${t} [data-st="adv"] .k-st-body`);
+  const host = document.querySelector(`#tab-${t} [data-st="sup"] .k-st-body`);   // seit calc v0.11.49 bei allen Systemen in „Lager und Gelenke“
   if(!host) return;
   let box=host.querySelector(':scope .k-supx');
-  if(!box){ box=document.createElement('div'); box.className='k-supx'+(t==='frame'||t==='cont' ? '' : ' k-adv-sec'); box.dataset.t=t;
+  if(!box){ box=document.createElement('div'); box.className='k-supx'; box.dataset.t=t;
     const nx=host.querySelector(':scope > .k-st-next'); nx ? host.insertBefore(box, nx) : host.appendChild(box); }
   const sups=SX_SUPS[t](), on=supxOn(t), sig=[calcLang, on, sups.map(s=>s.join(':')).join(',')].join('|');
   if(box._sig===sig) return; box._sig=sig;

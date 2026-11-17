@@ -1,5 +1,13 @@
 # kragr (vormals Muly, davor Statiq) — Übergabe für neuen Chat (calc v0.11.29 · ref v0.3.51 · size v0.7.10 · projekt v0.1.25 · rechtliches v0.1.17 · Startseite; sichtbar: Schnittkräfte · Bemessung · Wissen · Rechenblätter)
 
+## Merkliste — nächste Schritte (mit Valentin abgestimmt, Stand 17.11.2026)
+- Schnittkräfte: Lasten in der Skizze antippen (Lastknöpfe unter der Skizze, neue Einzellast per Tipp auf den Träger) auch bei Durchlaufträger und Rahmen — bisher nur Einfeld- und Kragträger (`K4GEO`). Vorgemerkt am 17.11.2026.
+- Auswahlmenü („Balkenmenü“, `.pick`) ins Burger-Menü verlegen — Vorschlag am 17.11.2026 gezeigt, Entscheidung offen.
+- Wissen: Durchstanzen, Kriechen ausbauen.
+- Schubwand: Werte nach NA nur mit frei zugänglicher Quelle.
+- PDF durchsuchbar (Text statt Bild) — vor Umsetzung Vorschlag zeigen.
+- Gemeinsamen Code der Apps in eigene Dateien auslagern — vor Umsetzung Vorschlag zeigen.
+
 ## Dateien
 - `index.html` — Startseite der Suite (Module calc, size, ref)
 - `calc.html` — Schnittgrößen-App (kragr·calc v0.11.13, sichtbar „Schnittkräfte“, DE/EN/FR/ES)

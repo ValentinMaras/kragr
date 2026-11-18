@@ -27,7 +27,7 @@ async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':1280,'height':900}); pg.on('pageerror', lambda e: errs.append(str(e)))
-        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('kragr-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
         await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(400)
         r=await pg.evaluate("[getComputedStyle(document.getElementById('gable-row')).display, document.getElementById('btn-roof-flat').classList.contains('active'), document.querySelectorAll('#frame-svg .k-raf').length]")
         check('Voreinstellung: gerader Riegel, Felder f und xF verborgen', r==['none',True,0], r)

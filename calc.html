@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.51 -->
+<!-- kragr v0.11.52 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1086,6 +1086,10 @@ window.mulyProj = {
   html.k5-pm-on .pick-chev { display:none !important; }
   html.k5-pm-on .pick.open .pick-menu { display:none !important; }
   body.k5-lock { overflow:hidden; }
+  /* Zahlenfelder ohne die kleinen Pfeile des Browsers — dafür gibt es − und + daneben; schnelles Tippen auf Knöpfe ohne Doppeltipp-Zoom (18.11.2026) */
+  input[type=number] { -moz-appearance:textfield; appearance:textfield; }
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; appearance:none; margin:0; }
+  button, .k-sb, [role="button"] { touch-action:manipulation; }
 
   /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
   header.k5-idx > .lang-switcher, header.k5-idx > .theme-btn { display:none !important; }
@@ -1969,7 +1973,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.51</span>
+    <span class="version">v0.11.52</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2502,7 +2506,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.51';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.52';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7918,10 +7922,14 @@ const K11T = {
   es:{ free:'libre', freeEnd:'extremo libre', dims:'Dimensiones', sup:'Apoyos y rótulas', loads:'Cargas', adv:'Avanzado', next:'Siguiente: {0}', std:'estándar', gable:'Cubierta a dos aguas', head:'Apoyo en cabeza', ei:'Rigidez EI', eiCh:'EI modificada', lf:'Hipótesis', roof:'Forma del dintel', eiHint:'Cambiar la rigidez EI:', open:'abrir Avanzado', spans:'{0} vanos', hinge1:'1 rótula', hingeN:'{0} rótulas', kr:'voladizo', nodes:'{0} nudos · {1} barras', on:'activadas' , n1:'1 carga', nN:'{0} cargas', n0:'sin cargas' , mech:'mecanismo', det:'isostático' } };
 const k11 = (k, ...a) => { let s=(K11T[calcLang]||K11T.en)[k] ?? K11T.de[k] ?? k; a.forEach((v,i)=>{ s=s.replace('{'+i+'}', v); }); return s; };
 const K11_CHEV = '<svg class="k-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 7 L5 3 L9 7 Z"/></svg>';
-const K11_DEF = { dims:true, sup:false, loads:true, adv:false };
-let K11S = {}; try{ K11S = JSON.parse(localStorage.getItem('statiq-stufen')||'{}') || {}; }catch(e){ K11S = {}; }
+// calc v0.11.52: beim Öffnen alle Stufen zu, man öffnet selbst. Im Testbetrieb (automatisierter Browser) wie bisher Abmessungen und Lasten
+// offen, damit die Feldprüfungen nicht jede Stufe öffnen müssen; ?k5zu in der Adresse prüft das echte Verhalten (wie ?k5motion).
+const K11_TEST = typeof navigator!=='undefined' && navigator.webdriver && !/k5zu/.test(location.search);
+const K11_DEF = K11_TEST ? { dims:true, sup:false, loads:true, adv:false } : { dims:false, sup:false, loads:false, adv:false };
+// Offene Stufen merkt sich die Seite nicht mehr (calc v0.11.52); der alte Speicher wird gelöscht. „kragr-stufen“ setzen nur Tests.
+let K11S = {}; try{ localStorage.removeItem('statiq-stufen'); K11S = JSON.parse(localStorage.getItem('kragr-stufen')||'{}') || {}; }catch(e){ K11S = {}; }
 function k11Open(t, st){ const v=(K11S[t]||{})[st]; return v===undefined ? K11_DEF[st] : !!v; }
-function k11Keep(t, st, open){ (K11S[t]=K11S[t]||{})[st]=open; try{ localStorage.setItem('statiq-stufen', JSON.stringify(K11S)); }catch(e){} }
+function k11Keep(t, st, open){ (K11S[t]=K11S[t]||{})[st]=open; }   // nur für die Sitzung: beim nächsten Öffnen wieder alles zu (calc v0.11.52)
 // eine Stufe auf- oder zuklappen (auch die Lasten-Karte, die schon eine eigene Kopfzeile hat)
 function k11Set(card, open, keep=true){
   if(card.classList.contains('k-loads')){ const h=card.querySelector(':scope > .k-head'); if(card.classList.contains('k-closed')===open && h) h.click(); return; }   // eigene Kopfzeile (Zusammenfassung der Lasten)
@@ -7963,7 +7971,7 @@ function k11Build(){
       const ab=adv.querySelector('.k-st-body');
       ab.appendChild(k11Sec(null, [k11Blk('btn-roof-flat')])); ab.appendChild(k11Sec(null, [k11Blk('btn-sH-none')]));
       if(eiSec) ab.appendChild(eiSec); if(lfc) ab.appendChild(k11Sec('lf', [lfc]));
-      sysCard.after(dims); dims.after(sup); k11Next(dims,'sup'); k11Next(sup,'loads');
+      sysCard.after(dims); dims.after(sup);   // ohne „Weiter“-Knopf (calc v0.11.52)
       const ld=cin.querySelector(':scope > .k-loads'); if(ld){ ld.dataset.tab=t; ld.dataset.st='loads'; const h=ld.querySelector(':scope > .k-head'); const n=document.createElement('span'); n.className='k-stn'; n.textContent='3'; h.prepend(n); sup.after(ld); ld.after(adv); }
       else cin.appendChild(adv);
     } else if(t==='cont'){
@@ -7972,7 +7980,7 @@ function k11Build(){
       const se=document.createElement('div'); se.id='cont-sup-inputs'; sup.querySelector('.k-st-body').appendChild(se);
       const slc=document.getElementById('span-load-cards'); if(slc) loads.querySelector('.k-st-body').appendChild(slc);
       const ab=adv.querySelector('.k-st-body'); if(eiSec) ab.appendChild(eiSec); if(lfc) ab.appendChild(k11Sec('lf', [lfc]));
-      sysCard.after(dims); dims.after(sup); sup.after(loads); loads.after(adv); k11Next(dims,'sup'); k11Next(sup,'loads');
+      sysCard.after(dims); dims.after(sup); sup.after(loads); loads.after(adv);
       try{ renderContUI(); }catch(e){}
     } else {
       // Einfeld- und Kragträger wie Durchlaufträger und Rahmen (calc v0.11.49): Abmessungen → Lager und Gelenke → Lasten → Erweitert
@@ -7982,7 +7990,6 @@ function k11Build(){
       const ld=cin.querySelector(':scope > .k-loads'); if(ld){ ld.dataset.tab=t; ld.dataset.st='loads'; }
       const ab=adv.querySelector('.k-st-body'); if(eiSec) ab.appendChild(eiSec); if(lfc) ab.appendChild(k11Sec('lf', [lfc]));
       sysCard.after(dims); dims.after(sup); if(ld){ sup.after(ld); ld.after(adv); } else sup.after(adv);
-      k11Next(dims,'sup'); k11Next(sup,'loads');
     }
     // gespeicherter Zustand
     cin.querySelectorAll('[data-st]').forEach(c=>k11Set(c, k11Open(t, c.dataset.st), false));

@@ -14,7 +14,7 @@ async def main():
         b=await p.chromium.launch(); pg=await b.new_page(); errs=[]
         pg.on('pageerror',lambda e: errs.append(str(e)))
         await pg.goto('file://'+HTML+'#frame')
-        await pg.evaluate("localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(600)   # alle Stufen offen (calc v0.11.5)
+        await pg.evaluate("localStorage.setItem('statiq-rw-closed','0');localStorage.setItem('statiq-res-fold',JSON.stringify({knoten:false,lfres:false}));localStorage.setItem('kragr-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{loads:true,adv:true},cantilever:{loads:true,adv:true}}))"); await pg.reload(); await pg.wait_for_timeout(600)   # alle Stufen offen (calc v0.11.5)
         await pg.evaluate("""()=>{ document.getElementById('fB').value=5; document.getElementById('fH').value=4; syncFrameHeights('h');
           frameLoads.vert=[{id:1,enabled:true,values:{member:'rafter',qa:10,qb:10,a:0,b:5}}]; frameLoads.horiz=[]; renderFrameUI(); }""")
         # Dreigelenkrahmen über den Schalter

@@ -19,7 +19,7 @@ async def main():
         await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(400)
         s=await pg.evaluate(ST, 'frame')
         check('Rahmen: Stufen Abmessungen · Lager · Lasten · Erweitert in dieser Reihenfolge', [x[0] for x in s]==['dims','sup','loads','adv'], s)
-        check('Erster Besuch: ① offen, ② zu, ③ offen, Erweitert zu', [x[1] for x in s]==[True,False,True,False], s)
+        check('Erster Besuch (Testbetrieb, siehe test_stufen_einheitlich für das echte Verhalten): ① offen, ② zu, ③ offen, Erweitert zu', [x[1] for x in s]==[True,False,True,False], s)
         check('Zusammenfassungen: „b = 5 m · h = 4 m“, „A ⊞ · B △ · n = 2“, „2 Lasten“, „Standard“', s[0][2]=='b = 5 m · h = 4 m' and s[1][2]=='A ⊞ · B △ · n = 2' and s[2][2]=='2 Lasten' and s[3][2]=='Standard', s)
         r=await pg.evaluate("""['fB','fHA','btn-preset-three','btn-sA-fixed','btn-sB-pin','frame-hinge-list','frame-indet-info','btn-roof-gable','btn-sH-left','frame-E-raf','frame-Iy-col','lf-on-frame']
           .map(id=>{ const e=document.getElementById(id); return e ? (e.closest('[data-st]')||{dataset:{}}).dataset.st || 'top' : null; })""")
@@ -28,9 +28,11 @@ async def main():
         r=await pg.evaluate("[...document.querySelectorAll('#tab-frame .k-stn')].map(e=>e.textContent)")
         check('Nummern ① ② ③ an den Stufen', r==['1','2','3'], r)
         # Weiter
-        await pg.click('#tab-frame [data-st=dims] .k-st-next'); await pg.wait_for_timeout(300)
+        # seit calc v0.11.52 ohne „Weiter“-Knopf: Stufen über ihre Kopfzeile öffnen
+        check('kein „Weiter“-Knopf mehr', await pg.evaluate("!document.querySelector('.k-st-next')"))
+        await pg.click('#tab-frame [data-st=dims] > .k-head'); await pg.click('#tab-frame [data-st=sup] > .k-head'); await pg.wait_for_timeout(300)
         s=await pg.evaluate(ST, 'frame')
-        check('„Weiter: Lager und Gelenke ›“ klappt ① zu und ② auf', [x[1] for x in s][:2]==[False,True], s)
+        check('Kopfzeilen: ① zu, ② auf', [x[1] for x in s][:2]==[False,True], s)
         check('Lager-Schalter jetzt sichtbar und bedienbar', await pg.is_visible('#btn-preset-three'))
         await pg.click('#btn-preset-three'); await pg.wait_for_timeout(400)
         s=await pg.evaluate(ST, 'frame')
@@ -49,7 +51,8 @@ async def main():
         # Zustand bleibt
         await pg.evaluate("k4Save(true)"); await pg.reload(); await pg.wait_for_timeout(1000); await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(400)
         s=await pg.evaluate(ST, 'frame')
-        check('Neu laden: offene und zugeklappte Stufen wie zuletzt', [x[1] for x in s]==[False,True,True,True], s)
+        # seit calc v0.11.52 merkt sich die Seite offene Stufen nicht mehr: nach dem Neuladen wieder der Anfangszustand
+        check('Neu laden: wieder der Anfangszustand (nichts gemerkt)', [x[1] for x in s]==[True,False,True,False], s)
         # EI-Hinweis im w-Diagramm
         await pg.evaluate("setDiagMode('frame','W')"); await pg.wait_for_timeout(200)
         r=await pg.evaluate("[getComputedStyle(document.getElementById('ei-hint-frame')).display, document.getElementById('ei-input-frame').closest('[data-st]').dataset.st]")
@@ -83,7 +86,7 @@ async def main():
         # Englisch
         await pg.evaluate("setCalcLang('en'); showTab('frame')"); await pg.wait_for_timeout(300)
         t=await pg.inner_text('#tab-frame .col-in')
-        check('Englisch: „Dimensions“, „Supports and hinges“, „Advanced“, „Next: …“', 'Dimensions' in t and 'Supports and hinges' in t and 'Advanced' in t and 'Next: Supports and hinges' in await pg.evaluate("document.querySelector('#tab-frame .k-st-next').textContent"), '')
+        check('Englisch: „Dimensions“, „Supports and hinges“, „Advanced“', 'Dimensions' in t and 'Supports and hinges' in t and 'Advanced' in t, '')
         await pg.close()
         # Handy: kein seitliches Scrollen
         pm=await br.new_page(viewport={'width':360,'height':780}); pm.on('pageerror', lambda e: errs.append(str(e)))

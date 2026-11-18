@@ -15,7 +15,7 @@ fails=0
 def check(name, ok, info=''):
     global fails; fails+=not ok; print('OK  ' if ok else 'FAIL', f'{name:74}', str(info)[:230])
 near=lambda a,b,t=0.01: a is not None and abs(a-b)<=t
-OPEN="localStorage.setItem('statiq-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{dims:true,sup:true,loads:true,adv:true},cantilever:{dims:true,sup:true,loads:true,adv:true}}))"
+OPEN="localStorage.setItem('kragr-stufen',JSON.stringify({frame:{dims:true,sup:true,loads:true,adv:true},cont:{dims:true,sup:true,loads:true,adv:true},beam:{dims:true,sup:true,loads:true,adv:true},cantilever:{dims:true,sup:true,loads:true,adv:true}}))"
 async def main():
     async with async_playwright() as p:
         br=await p.chromium.launch(); errs=[]

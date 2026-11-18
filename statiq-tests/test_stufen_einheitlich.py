@@ -24,7 +24,7 @@ async def main():
                   return {{order:st.map(e=>e.dataset.st), next:st.map(e=>e.querySelector(':scope .k-st-next')?.dataset.next||''), sumRight:st.map(e=>getComputedStyle(e.querySelector(':scope > .k-head .k-sum')).textAlign),
                     heads:st.map(e=>(e.querySelector(':scope > .k-head .k-h')||{{}}).textContent), supx:!!c.querySelector('[data-st=sup] .k-supx'), supxAdv:!!c.querySelector('[data-st=adv] .k-supx')}}; }})()""")
                 check(f'{tag} {t}: Stufen Abmessungen → Lager und Gelenke → Lasten → Erweitert', r['order']==['dims','sup','loads','adv'] and r['heads']==['Abmessungen','Lager und Gelenke','Lasten','Erweitert'], (r['order'], r['heads']))
-                check(f'{tag} {t}: „Weiter“ in Abmessungen und Lager, Kurzfassung rechts', r['next'][:2]==['sup','loads'] and all(a=='right' for a in r['sumRight']), (r['next'], r['sumRight']))
+                check(f'{tag} {t}: kein „Weiter“-Knopf mehr (calc v0.11.52), Kurzfassung rechts', r['next']==['','','',''] and all(a=='right' for a in r['sumRight']), (r['next'], r['sumRight']))
                 check(f'{tag} {t}: Federn und Setzungen in „Lager und Gelenke“', r['supx'] and not r['supxAdv'], r)
             # Einfeld-/Kragträger: Länge in Abmessungen, Lager-Übersicht, Federn wirken
             for t,L,info in (('beam','bL',['Lager A','Festlager','Lager B','Loslager']),('cantilever','cL',['Lager A','Einspannung','freies Ende'])):
@@ -42,6 +42,33 @@ async def main():
             r=await pg.evaluate("[...document.querySelectorAll('#span-load-cards > .card')].map(c=>{ const s=getComputedStyle(c); return [s.backgroundColor, s.boxShadow, (c.querySelector('.k-h')||{}).textContent]; })")
             check(f'{tag} cont: Lasten je Feld als Zwischenüberschrift (ohne eigenen Kasten)', len(r)>=2 and all(x[0] in ('rgba(0, 0, 0, 0)','transparent') and x[1]=='none' for x in r) and r[0][2].startswith('Feld 1'), r)
             await pg.close()
+        # Beim Öffnen alle Eingabestufen zu (calc v0.11.52) und alle Eingabekarten in Bemessung zu (size v0.7.53) — echtes Verhalten mit ?k5zu
+        for w,h,mob in ((390,844,True),(1280,900,False)):
+            pg=await br.new_page(viewport={'width':w,'height':h}, is_mobile=mob, has_touch=mob); pg.on('pageerror', lambda e: errs.append(str(e)))
+            await pg.goto(B+'calc.html?k5zu'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de');localStorage.setItem('statiq-stufen',JSON.stringify({beam:{dims:true,loads:true}}))"); await pg.reload(); await pg.wait_for_timeout(900)
+            bad={}
+            for t in ['beam','cantilever','cont','frame']:
+                await pg.evaluate(f"showTab('{t}')"); await pg.wait_for_timeout(250)
+                o=await pg.evaluate(f"[...document.querySelectorAll('#tab-{t} .col-in > [data-st]')].filter(c=>!c.classList.contains('k-closed')).map(c=>c.dataset.st)")
+                if o: bad[t]=o
+            check(f'{"Handy" if mob else "Rechner"} calc: beim Öffnen alle Stufen zu (auch mit altem Speicher)', not bad and await pg.evaluate("localStorage.getItem('statiq-stufen')") is None, bad)
+            await pg.click('#tab-beam [data-st=dims] > .k-head') if await pg.evaluate("curTab()")=='beam' else None
+            await pg.evaluate("showTab('beam')"); await pg.click('#tab-beam [data-st=dims] > .k-head'); await pg.wait_for_timeout(150)
+            await pg.reload(); await pg.wait_for_timeout(800)
+            check(f'{"Handy" if mob else "Rechner"} calc: geöffnete Stufe nach Neuladen wieder zu', await pg.evaluate("document.querySelector('#tab-beam [data-st=dims]').classList.contains('k-closed')"))
+            await pg.goto(B+'size.html?k5zu'); await pg.wait_for_timeout(900)
+            o=await pg.evaluate("[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent && !c.classList.contains('closed')).map(c=>c.dataset.fold)")
+            await pg.evaluate("setMat('holz')"); await pg.wait_for_timeout(300)
+            o2=await pg.evaluate("[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent && !c.classList.contains('closed')).map(c=>c.dataset.fold)")
+            check(f'{"Handy" if mob else "Rechner"} size: beim Öffnen und nach dem Wechsel alle Eingabekarten zu', o==[] and o2==[], (o, o2))
+            await pg.close()
+        # Zahlenfelder ohne Pfeile des Browsers
+        pg=await br.new_page(viewport={'width':1280,'height':900})
+        for f in ('calc','size'):
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(700)
+            r=await pg.evaluate("[getComputedStyle(document.querySelector('input[type=number]')).appearance, getComputedStyle(document.querySelector('.k-sb')).touchAction]")
+            check(f'{f}: Zahlenfelder ohne Browser-Pfeile, − und + ohne Doppeltipp-Zoom', r[0]=='textfield' and r[1]=='manipulation', r)
+        await pg.close()
         # Sprachen: neue Texte
         pg=await br.new_page(viewport={'width':1280,'height':900})
         for L,free in (('en','free end'),('fr','extrémité libre'),('es','extremo libre')):

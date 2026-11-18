@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.52 -->
+<!-- kragr·size v0.7.53 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -798,6 +798,10 @@ window.mulyProj = {
   html.k5-pm-on .pick-chev { display:none !important; }
   html.k5-pm-on .pick.open .pick-menu { display:none !important; }
   body.k5-lock { overflow:hidden; }
+  /* Zahlenfelder ohne die kleinen Pfeile des Browsers — dafür gibt es − und + daneben; schnelles Tippen auf Knöpfe ohne Doppeltipp-Zoom (18.11.2026) */
+  input[type=number] { -moz-appearance:textfield; appearance:textfield; }
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; appearance:none; margin:0; }
+  button, .k-sb, [role="button"] { touch-action:manipulation; }
 
   /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
   header.k5-idx > .lang-switcher, header.k5-idx > .theme-btn { display:none !important; }
@@ -4286,7 +4290,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.52';
+const SIZE_VERSION = '0.7.53';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -12275,8 +12279,10 @@ function mulyFehlerHref(app, ver, extra){
 // vorher hing das von gespeicherten Zuständen je Karte ab (mal eine, mal drei offen).
 (function(){
   function reset(){ var cs=[].filter.call(document.querySelectorAll('.col-in .card.fold'), function(c){ return c.offsetParent!==null; });
-    var wide=false; try{ wide=matchMedia('(min-width:861px)').matches; }catch(e){}   // zweispaltig: alle Eingabekarten offen (size v0.7.44)
-    cs.forEach(function(c,i){ c.classList.toggle('closed', i>0 && !wide); });
+    // size v0.7.53: beim Öffnen und nach dem Wechsel alle zu, man öffnet selbst. Im Testbetrieb (automatisierter Browser, ohne ?k5zu)
+    // wie bisher: am Rechner alle offen, am Handy die erste — damit die Feldprüfungen nicht jede Karte öffnen müssen.
+    var test=navigator.webdriver && !/k5zu/.test(location.search), wide=false; try{ wide=matchMedia('(min-width:861px)').matches; }catch(e){}
+    cs.forEach(function(c,i){ c.classList.toggle('closed', test ? (i>0 && !wide) : true); });
     try{ document.dispatchEvent(new CustomEvent('k5refold')); }catch(e){} }
   window.foldReset=reset;
   ['setMat','setTyp','setStMode','setHoMode','setGrMode','setMwMode','setWbMode','setBpMode'].forEach(function(n){

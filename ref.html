@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.83 -->
+<!-- kragr·ref v0.3.84 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -698,6 +698,10 @@ function allgView(key){
   html.k5-pm-on .pick-chev { display:none !important; }
   html.k5-pm-on .pick.open .pick-menu { display:none !important; }
   body.k5-lock { overflow:hidden; }
+  /* Zahlenfelder ohne die kleinen Pfeile des Browsers — dafür gibt es − und + daneben; schnelles Tippen auf Knöpfe ohne Doppeltipp-Zoom (18.11.2026) */
+  input[type=number] { -moz-appearance:textfield; appearance:textfield; }
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; appearance:none; margin:0; }
+  button, .k-sb, [role="button"] { touch-action:manipulation; }
 
   /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
   header.k5-idx > .lang-switcher, header.k5-idx > .theme-btn { display:none !important; }
@@ -1457,7 +1461,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.83';
+const REF_VERSION = '0.3.84';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau

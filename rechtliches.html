@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·rechtliches v0.1.20 -->
+<!-- kragr·rechtliches v0.1.21 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -249,7 +249,13 @@
   .k5-mod .k5-ic { width:36px; height:36px; border-radius:11px; }
   .k5-mod .k5-mch { margin-left:auto; flex:none; color:#6b6d75; font-size:15px; transition:transform .2s; }
   .k5-mod[aria-current="page"] .k5-mch { color:rgba(255,255,255,.75); }
-  .k5-mod.k5-cur[aria-expanded="false"] .k5-mch { transform:rotate(-90deg); }
+  .k5-mod[aria-expanded="false"] .k5-mch { transform:rotate(-90deg); }
+  .k5-cg + .k5-cg { margin-top:1px; }
+  .k5-cgh { display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border:0; border-radius:12px; background:transparent; font:inherit; font-size:14.5px; font-weight:700; color:#111114; cursor:pointer; text-align:left; }
+  .k5-cgh:hover { background:rgba(17,17,20,.04); }
+  .k5-cgh .k5-mch { margin-left:auto; color:#6b6d75; font-size:12px; transition:transform .2s; } .k5-cgh[aria-expanded="false"] .k5-mch { transform:rotate(-90deg); }
+  .k5-cgb { display:flex; flex-direction:column; gap:1px; padding:0 0 6px; } .k5-cgb[hidden] { display:none; }
+  .k5-ci { padding:8px 12px 8px 22px; border-radius:9px; font-size:14px; color:#3d3f45; text-decoration:none; } .k5-ci:hover { background:#fff; color:#111114; }
   .k5-tree { margin:4px 0 8px 29px; padding-left:10px; border-left:2px solid #dfe1e6; }
   .k5-tree[hidden] { display:none; }
   .k5-tree .pick-menu { display:block !important; position:static !important; inset:auto !important; max-height:none !important; overflow:visible !important; padding:0 !important; margin:0 !important; width:auto !important;
@@ -398,6 +404,7 @@
   .k5-segm button.k5-soon { opacity:.38; cursor:not-allowed; }
   @media print { .na-t, .na-hint { display:none !important; } }
 </style>
+<script src="k5/katalog.js"></script>
 <script data-k5-gsap src="k5/gsap.min.js" defer></script>
 <script data-k5>
 // Seiten-Anpassungen der Design-Schicht 5: welche Karten zu Akkordeons werden und was ihre Kurzfassung zeigt.
@@ -761,7 +768,13 @@ window.kragrK5Page = function(K){
     h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
     h+='<div class="k5-pm"'+I()+'>';
     MODS.forEach(function(m){ var cur=PAGE===m[0], nm='<span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+esc(typeof window.kmod==='function' ? window.kmod(m[0], lang()) : m[0])+'</b></span>';
+      var cat=!cur && window.KRAGR_KATALOG && KRAGR_KATALOG[m[0]] && (KRAGR_KATALOG[m[0]][lang()] || KRAGR_KATALOG[m[0]].de);
       if(cur && tree) h+='<button type="button" class="k5-mod k5-cur" aria-current="page" aria-expanded="true" data-mod="'+m[0]+'">'+nm+'<span class="k5-mch" aria-hidden="true">▾</span></button><div class="k5-tree" role="group"></div>';
+      else if(cat && cat.length){   // anderes Modul: erst aufklappen, dann das Thema wählen (Katalog aus k5/katalog.js)
+        var few=cat.reduce(function(a,g){ return a+g.i.length; },0)<=8;
+        h+='<button type="button" class="k5-mod k5-other" aria-expanded="false" data-mod="'+m[0]+'">'+nm+'<span class="k5-mch" aria-hidden="true">▾</span></button><div class="k5-tree k5-cat" role="group" hidden>'
+          +cat.map(function(g){ return '<div class="k5-cg"><button type="button" class="k5-cgh" aria-expanded="'+few+'"><span>'+esc(g.n)+'</span><span class="k5-mch" aria-hidden="true">▾</span></button><div class="k5-cgb"'+(few?'':' hidden')+'>'
+            +g.i.map(function(x){ return '<a class="k5-ci" href="'+esc(x[1])+'">'+esc(x[0])+'</a>'; }).join('')+'</div></div>'; }).join('')+'</div>'; }
       else h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(cur?' aria-current="page"':'')+' data-mod="'+m[0]+'">'+nm+'<span class="k5-mch" aria-hidden="true">'+(cur?'':'›')+'</span></a>'; });
     h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b></span><span class="k5-badge"></span><span class="k5-mch" aria-hidden="true">'+(PAGE==='projekt'?'':'›')+'</span></a>';
     h+='<button type="button" class="k5-setbtn"><span>'+esc(t('set'))+'</span><span class="k5-mch" aria-hidden="true">›</span></button>';
@@ -774,8 +787,11 @@ window.kragrK5Page = function(K){
     h+='</div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
     menu.querySelector('.k5-x').onclick=closeMenu;
-    var tr=menu.querySelector('.k5-tree'); if(tr){ try{ if(typeof window.buildPick==='function') window.buildPick(); }catch(e){} var pmn=D.getElementById('pick-menu'); if(pmn) tr.appendChild(pmn); else tr.hidden=true; }
+    var tr=menu.querySelector('.k5-tree:not(.k5-cat)'); if(tr){ try{ if(typeof window.buildPick==='function') window.buildPick(); }catch(e){} var pmn=D.getElementById('pick-menu'); if(pmn) tr.appendChild(pmn); else tr.hidden=true; }
     var cm=menu.querySelector('.k5-cur'); if(cm && tr) cm.onclick=function(){ var o=cm.getAttribute('aria-expanded')!=='true'; cm.setAttribute('aria-expanded', String(o)); tr.hidden=!o; };
+    Array.prototype.forEach.call(menu.querySelectorAll('.k5-other'), function(b){ b.onclick=function(){ var o=b.getAttribute('aria-expanded')!=='true', x=b.nextElementSibling; b.setAttribute('aria-expanded', String(o)); if(x) x.hidden=!o;
+      if(o && x) try{ x.scrollIntoView({block:'nearest', behavior:STILL()?'auto':'smooth'}); }catch(e){} }; });
+    Array.prototype.forEach.call(menu.querySelectorAll('.k5-cgh'), function(b){ b.onclick=function(){ var o=b.getAttribute('aria-expanded')!=='true', x=b.nextElementSibling; b.setAttribute('aria-expanded', String(o)); if(x) x.hidden=!o; }; });
     menu.querySelector('.k5-setbtn').onclick=function(){ menu.classList.add('k5-sub'); menu.scrollTop=0; requestAnimationFrame(placePills); var b=menu.querySelector('.k5-back'); if(b) b.focus({preventScroll:true}); };
     menu.querySelector('.k5-back').onclick=function(){ menu.classList.remove('k5-sub'); var s=menu.querySelector('.k5-setbtn'); if(s) s.focus({preventScroll:true}); };
     var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };

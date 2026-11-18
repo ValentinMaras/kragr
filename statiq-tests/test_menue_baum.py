@@ -1,6 +1,7 @@
 # Auswahl im Burger-Menü als Baum (18.11.2026, Vorschlag C): die Auswahlkarte oben ist eine schlichte Pfadzeile
 # „Modul › Bereich › Thema“; ein Tipp darauf öffnet das Menü. Im Menü sind die Module die Hauptpunkte, das aktuelle Modul ist bis zum
 # Thema aufgeklappt (die Liste der Seite, #pick-menu, wird dafür ausgeliehen), Einstellungen liegen auf einer Unterseite.
+# Andere Module klappen ihre Bereiche aus k5/katalog.js auf und springen erst beim Thema (calc.html#frame:two, size.html#nw=holz/2, ref-Kapitel).
 import os, sys, asyncio
 HERE=os.path.dirname(os.path.abspath(__file__)); B='file://'+os.path.abspath(os.path.join(HERE,'..'))+'/'
 try:
@@ -28,9 +29,9 @@ async def main():
                   (document.querySelector('#k5-menu .k5-cur')||{{}}).dataset?.mod, [...document.querySelectorAll('#k5-menu a.k5-mod')].map(a=>a.dataset.mod)]""")
                 check(f'{tag} {f}: Tipp öffnet das Menü; aktuelles Modul aufgeklappt bis zum Thema', r[0] and r[1] and (r[2] or '').strip()==act and r[3]==1 and r[4]==f and f not in r[5] and 'projekt' in r[5], r)
                 await pg.click('#k5-menu .k5-cur'); await pg.wait_for_timeout(150)
-                c=await pg.evaluate("[document.querySelector('.k5-tree').hidden, document.querySelector('#k5-menu .k5-cur').getAttribute('aria-expanded')]")
+                c=await pg.evaluate("[document.querySelector('.k5-tree:not(.k5-cat)').hidden, document.querySelector('#k5-menu .k5-cur').getAttribute('aria-expanded')]")
                 await pg.click('#k5-menu .k5-cur'); await pg.wait_for_timeout(150)
-                check(f'{tag} {f}: Modulzeile klappt den Baum zu und wieder auf', c==[True,'false'] and not await pg.evaluate("document.querySelector('.k5-tree').hidden"), c)
+                check(f'{tag} {f}: Modulzeile klappt den Baum zu und wieder auf', c==[True,'false'] and not await pg.evaluate("document.querySelector('.k5-tree:not(.k5-cat)').hidden"), c)
                 await pg.keyboard.press('Escape'); await pg.wait_for_timeout(150)
                 check(f'{tag} {f}: Escape schließt, Liste zurück an der Seite', await pg.evaluate(f"!{OPEN} && !!document.querySelector('#pick > #pick-menu') && document.querySelectorAll('#pick-menu').length===1"))
             # Auswahl treffen
@@ -64,9 +65,43 @@ async def main():
             # Seiten ohne Auswahl: kein Baum
             for f in ('projekt','index','rechtliches'):
                 await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); await pg.click('#k5-burger'); await pg.wait_for_timeout(200)
-                check(f'{tag} {f}: Menü ohne Baum, Module als Verweise', await pg.evaluate("!document.querySelector('.k5-tree') && document.querySelectorAll('#k5-menu a.k5-mod').length===4"))
+                check(f'{tag} {f}: kein eigener Baum; die drei Module zum Aufklappen, Rechenblätter als Verweis', await pg.evaluate("!document.querySelector('.k5-tree:not(.k5-cat)') && document.querySelectorAll('#k5-menu .k5-other').length===3 && document.querySelectorAll('#k5-menu a.k5-mod').length===1"))
                 await pg.keyboard.press('Escape')
             await pg.close()
+        # Andere Module (18.11.2026): erst aufklappen, dann das Thema wählen — springt direkt dorthin
+        pg=await br.new_page(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True); pg.on('pageerror', lambda e: errs.append(str(e)))
+        await pg.goto(B+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
+        await pg.click('#k5-burger'); await pg.wait_for_timeout(200)
+        r=await pg.evaluate("[...document.querySelectorAll('#k5-menu .k5-mod')].map(e=>e.tagName+':'+e.dataset.mod)")
+        check('Bemessung: Schnittkräfte und Wissen sind Aufklapper, Rechenblätter ein Verweis', r==['BUTTON:calc','BUTTON:size','BUTTON:ref','A:projekt'], r)
+        u0=pg.url; await pg.click('#k5-menu .k5-other[data-mod=calc]'); await pg.wait_for_timeout(200)
+        r=await pg.evaluate("[location.href, document.querySelector('.k5-other[data-mod=calc]').getAttribute('aria-expanded'), [...document.querySelector('.k5-other[data-mod=calc] + .k5-cat').querySelectorAll('.k5-ci')].filter(a=>a.offsetParent).map(a=>a.textContent)]")
+        check('Tipp auf „Schnittkräfte“ springt nicht, sondern klappt die Systeme auf', r[0]==u0 and r[1]=='true' and r[2]==['Einfeldträger','Kragarm','Durchlaufträger','Dreigelenkrahmen','Zweigelenkrahmen','Eingespannt'], r)
+        await pg.click('#k5-menu .k5-ci >> text=Zweigelenkrahmen'); await pg.wait_for_timeout(1300)
+        r=await pg.evaluate("[location.pathname.split('/').pop(), curTab(), framePresetNow(), document.getElementById('pick-t').textContent, location.hash]")
+        check('Systemwahl aus Bemessung öffnet Schnittkräfte mit diesem System', r==['calc.html','frame','two','Zweigelenkrahmen',''], r)
+        await pg.click('#k5-burger'); await pg.wait_for_timeout(200); await pg.click('#k5-menu .k5-other[data-mod=size]'); await pg.wait_for_timeout(150)
+        await pg.click('.k5-cgh >> text=Holz'); await pg.wait_for_timeout(150); await pg.click('.k5-cgb:not([hidden]) .k5-ci >> text=Ausklinkung'); await pg.wait_for_timeout(1300)
+        r=await pg.evaluate("[location.pathname.split('/').pop(), MAT, document.getElementById('pick-t').textContent, location.hash]")
+        check('Nachweiswahl aus Schnittkräfte öffnet Bemessung mit diesem Nachweis', r==['size.html','holz','Ausklinkung',''], r)
+        await pg.click('#k5-burger'); await pg.wait_for_timeout(200); await pg.click('#k5-menu .k5-other[data-mod=ref]'); await pg.wait_for_timeout(150)
+        await pg.click('.k5-cgh >> text=Stahlbeton'); await pg.wait_for_timeout(150); await pg.click('.k5-cgb:not([hidden]) .k5-ci >> text=Baustoffe'); await pg.wait_for_timeout(1300)
+        r=await pg.evaluate("[location.pathname.split('/').pop(), location.hash, document.getElementById('pick-t').textContent]")
+        check('Wissen aus Bemessung: Kapitel wählen öffnet das Kapitel', r==['ref.html','#/stahlbeton/baustoffe','Baustoffe'], r)
+        for f in ('projekt','index'):
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(500); await pg.click('#k5-burger'); await pg.wait_for_timeout(200)
+            r=await pg.evaluate("[...document.querySelectorAll('#k5-menu .k5-other')].map(b=>b.dataset.mod)")
+            check(f'{f}: Schnittkräfte, Bemessung, Wissen zum Aufklappen', r==['calc','size','ref'], r)
+            await pg.keyboard.press('Escape')
+        await pg.goto(B+'size.html'); await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(700)
+        await pg.click('#k5-burger'); await pg.wait_for_timeout(200); await pg.click('#k5-menu .k5-other[data-mod=calc]'); await pg.wait_for_timeout(150)
+        r=await pg.evaluate("[...document.querySelector('.k5-other[data-mod=calc] + .k5-cat').querySelectorAll('.k5-cgh span:first-child')].map(e=>e.textContent)")
+        check('Englisch: Bereiche anderer Module englisch', r==['Beams','Frames'], r)
+        await pg.evaluate("localStorage.setItem('statiq-lang','de')"); await pg.close()
+        # Katalog passt zum Stand der Seiten (sonst: python3 statiq-tests/katalog_bauen.py)
+        sys.path.insert(0, HERE); import katalog_bauen
+        K=await katalog_bauen.build(); have=open(os.path.join(HERE,'..','k5','katalog.js')).read()
+        check('k5/katalog.js ist aktuell (sonst katalog_bauen.py ausführen)', have==katalog_bauen.render(K), 'veraltet')
         # Sprachen: Pfadzeile folgt
         pg=await br.new_page(viewport={'width':390,'height':844})
         for L,mod in (('en','Design'),('fr','Dimensionnement'),('es','Dimensionado')):

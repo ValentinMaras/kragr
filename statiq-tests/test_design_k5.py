@@ -47,7 +47,7 @@ async def main():
               theme:!!document.querySelector('#k5-theme'), lang:!!document.querySelector('#k5-lang'), exp:document.getElementById('k5-burger').getAttribute('aria-expanded'),
               foc:document.activeElement && document.activeElement.closest('#k5-menu')!==null, lock:document.body.classList.contains('k5-lock')})""")
             # seit 18.11.2026: in calc, size und ref ist das aktuelle Modul ein Knopf, darunter der Baum mit der Auswahl
-            exp=[m+'>'+('Baum' if m==f and f in ('calc','size','ref') else m+'.html') for m in ('calc','size','ref','projekt')]
+            exp=['calc>Baum','size>Baum','ref>Baum','projekt>projekt.html']   # seit 18.11.2026 klappen alle drei Module ihre Themen auf (k5/katalog.js)
             check(f'{f}: Menü mit calc, size, ref, Rechenblätter; aktuelle Seite markiert', r['mods']==exp and r['cur']==cur, r)
             check(f'{f}: Menü offen (aria-expanded, Fokus im Menü, Seite gesperrt), Erscheinungsbild und Sprache', r['exp']=='true' and r['foc'] and r['lock'] and r['theme'] and r['lang'], r)
             check(f'{f}: Übungsmodus nur in calc und size', r['ueb']==(f in ('calc','size')), r['ueb'])

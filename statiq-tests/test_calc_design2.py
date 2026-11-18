@@ -147,10 +147,10 @@ async def main():
         # Übungsmodus-Schalter
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('#tab-beam .ueb-tog')]})()")
         check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr im Ergebnisfeld', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
-        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
+        await pg.click('#k5-burger'); await pg.click('.k5-setbtn'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, getComputedStyle(document.getElementById('k-bar')).display, getComputedStyle(t).backgroundColor]})()")
         check('an: Knopf blau, „Zahlen verborgen“, Ergebnisleiste aus (verrät sonst die Lösung)', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2]=='none' and sw[3]=='rgb(84, 104, 173)', sw)
-        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
+        await pg.click('#k5-burger'); await pg.click('.k5-setbtn'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
         # Sprache
         await pg.evaluate("setCalcLang('en')"); await pg.wait_for_timeout(500)
         r=await pg.evaluate("[document.querySelector('#tab-beam .k-loads .k-h').textContent, document.querySelector('#tab-beam .k-add-tx').textContent, document.querySelector('#beam-point-list .k-lab small')?.textContent, document.getElementById('ueb-btn').title]")

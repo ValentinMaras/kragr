@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.49 -->
+<!-- kragr v0.11.50 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -1051,6 +1051,34 @@ window.mulyProj = {
   .k5-row.k5-col { flex-direction:column; align-items:stretch; gap:8px; padding-top:10px; padding-bottom:10px; }
   .k5-mfoot { margin-top:auto; padding:16px 10px 4px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:12px; color:#5c5e66; }
   .k5-mfoot a { color:#5c5e66; } .k5-mfoot .k5-ver { font-family:'JetBrains Mono', ui-monospace, monospace; }
+  /* Menü als Baum (18.11.2026, Vorschlag C): Module; das aktuelle Modul aufgeklappt bis zum Thema; Einstellungen als Unterseite */
+  .k5-pm, .k5-ps { display:flex; flex-direction:column; gap:2px; flex:1 0 auto; }
+  .k5-menu:not(.k5-sub) .k5-ps, .k5-menu.k5-sub .k5-pm { display:none; }
+  .k5-mod { width:100%; box-sizing:border-box; border:0; background:transparent; font:inherit; text-align:left; cursor:pointer; padding:9px 12px; }
+  .k5-mod .k5-ic { width:36px; height:36px; border-radius:11px; }
+  .k5-mod .k5-mch { margin-left:auto; flex:none; color:#6b6d75; font-size:15px; transition:transform .2s; }
+  .k5-mod[aria-current="page"] .k5-mch { color:rgba(255,255,255,.75); }
+  .k5-mod.k5-cur[aria-expanded="false"] .k5-mch { transform:rotate(-90deg); }
+  .k5-tree { margin:4px 0 8px 29px; padding-left:10px; border-left:2px solid #dfe1e6; }
+  .k5-tree[hidden] { display:none; }
+  .k5-tree .pick-menu { display:block !important; position:static !important; inset:auto !important; max-height:none !important; overflow:visible !important; padding:0 !important; margin:0 !important; width:auto !important;
+    background:transparent !important; box-shadow:none !important; border-radius:0 !important; animation:none !important; transform:none !important; }
+  .k5-tree .pick-group.open { background:transparent; }
+  .k5-tree .pick-item.active { background:#111114 !important; color:#fff !important; box-shadow:none !important; }
+  .k5-setbtn, .k5-back { display:flex; align-items:center; gap:10px; width:100%; min-height:48px; padding:0 14px; border:0; border-radius:14px; background:#fff; font:inherit; font-size:14.5px; font-weight:700; color:#111114; cursor:pointer; text-align:left; }
+  .k5-setbtn { margin-top:10px; } .k5-setbtn .k5-mch { margin-left:auto; color:#6b6d75; font-size:15px; }
+  .k5-back { background:transparent; margin:0 0 6px; padding:0 8px; font-size:16px; font-weight:800; } .k5-back .k5-mch { font-size:20px; color:#5c5e66; }
+  /* Seite: die Auswahl wird eine schlichte Pfadzeile (Modul › Bereich › Thema); Tipp öffnet das Menü */
+  html.k5-pm-on .pick-btn { background:transparent !important; box-shadow:none !important; padding:4px 8px 8px !important; border-radius:12px !important; }
+  html.k5-pm-on .pick-btn:hover { background:rgba(17,17,20,.04) !important; }
+  html.k5-pm-on .pick-txt { display:flex !important; flex-direction:row !important; flex-wrap:wrap; align-items:baseline; column-gap:6px; min-width:0; }
+  html.k5-pm-on .pick-txt::before { content:var(--k5-modname, "") " \203A"; font-size:13px; font-weight:600; color:#6b6d75; }
+  html.k5-pm-on .pick.k5-same .pick-txt::before { content:none; }
+  html.k5-pm-on .pick-g { font-size:13px !important; font-weight:600 !important; color:#6b6d75 !important; }
+  html.k5-pm-on .pick-g:not(:empty)::after { content:" \203A"; }
+  html.k5-pm-on .pick-t { font-size:20px !important; }
+  html.k5-pm-on .pick-chev { display:none !important; }
+  html.k5-pm-on .pick.open .pick-menu { display:none !important; }
   body.k5-lock { overflow:hidden; }
 
   /* Startseite: gleiche Kopfzeile (☰), Modulkarten weiß */
@@ -1284,18 +1312,20 @@ window.kragrK5Page = function(K){
   if(window.kragrK5) return;
   var D=document, H=D.documentElement;
   var PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.html?$/,'')||'index';
+  // Auswahl (System, Nachweis, Thema) im Burger-Menü als Baum statt eigener Auswahlkarte (18.11.2026, Vorschlag C)
+  var PICKM = PAGE==='calc' || PAGE==='size' || PAGE==='ref'; if(PICKM) H.classList.add('k5-pm-on');
   var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   // Automatisierte Browser (Tests) ohne Bewegung, außer ?k5motion steht in der Adresse
   if(navigator.webdriver && !/k5motion/.test(location.search)) H.classList.add('k5-still');
   var STILL=function(){ return RM || H.classList.contains('k5-still'); };
   var T={
-    de:{menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF teilen',
+    de:{back:'Zurück',menu:'Menü',open:'Menü öffnen',close:'Menü schließen',mods:'Module',calc:'Rechner · Träger und Rahmen',size:'Nachweise nach Eurocode',ref:'Formeln, Tafeln, Beispiele',proj:'Rechenblätter',projS:'Gespeichert · als PDF teilen',
         set:'Einstellungen',ueb:'Übungsmodus',uebS:'Zahlen verborgen, selbst rechnen',look:'Erscheinungsbild',auto:'Auto',light:'Hell',dark:'Dunkel',lang:'Sprache',na:'Bemessungsgrundlage',naS:'Nationaler Anhang: {0}',naSCH:'Schweizer Normen (SIA)',soon:'in Vorbereitung',naHint:'Werte mit {0} legt der nationale Anhang fest. Das Land stellst du unter Menü › Bemessungsgrundlage ein.',naTip:'Wert aus dem nationalen Anhang ({0})',naPart:'Für {0} rechnet kragr bisher nur die Nachweise, deren Werte vollständig hinterlegt sind; die übrigen stehen als Hinweis da.',naRef:'Diese Seite zeigt die Werte nach deutschem NA (markiert mit NA DE). Für {0} sind sie hier noch nicht hinterlegt.',naAbbr:'NA',cDE:'Deutschland',cAT:'Österreich',cCH:'die Schweiz',cFR:'Frankreich',cES:'Spanien',cUK:'Vereinigtes Königreich',legal:'Impressum · Datenschutz',home:'Startseite',more:'mehr',less:'weniger'},
-    en:{menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · share as PDF',
+    en:{back:'Back',menu:'Menu',open:'Open menu',close:'Close menu',mods:'Modules',calc:'Calculator · beams and frames',size:'Eurocode design checks',ref:'Formulas, tables, examples',proj:'Calculation sheets',projS:'Saved · share as PDF',
         set:'Settings',ueb:'Practice mode',uebS:'Numbers hidden, work it out',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',na:'Design basis',naS:'National Annex: {0}',naSCH:'Swiss standards (SIA)',soon:'in preparation',naHint:'Values marked {0} are set by the National Annex. Choose the country under Menu › Design basis.',naTip:'Value from the National Annex ({0})',naPart:'For {0}, kragr so far only calculates the checks whose values are fully available; the others are shown as a note.',naRef:'This page shows the values of the German National Annex (marked NA DE). For {0} they are not yet available here.',naAbbr:'NA',cDE:'Germany',cAT:'Austria',cCH:'Switzerland',cFR:'France',cES:'Spain',cUK:'United Kingdom',legal:'Legal notice · Privacy',home:'Home',more:'more',less:'less'},
-    fr:{menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · partager en PDF',
+    fr:{back:'Retour',menu:'Menu',open:'Ouvrir le menu',close:'Fermer le menu',mods:'Modules',calc:'Calculateur · poutres et portiques',size:'Vérifications selon les Eurocodes',ref:'Formules, tableaux, exemples',proj:'Notes de calcul',projS:'Enregistrées · partager en PDF',
         set:'Réglages',ueb:'Mode exercice',uebS:'Valeurs masquées, à calculer soi-même',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',na:'Base de calcul',naS:'Annexe nationale : {0}',naSCH:'Normes suisses (SIA)',soon:'en préparation',naHint:'Les valeurs marquées {0} sont fixées par l’annexe nationale. Choisis le pays sous Menu › Base de calcul.',naTip:'Valeur de l’annexe nationale ({0})',naPart:'Pour {0}, kragr ne calcule pour l’instant que les vérifications dont les valeurs sont entièrement disponibles ; les autres apparaissent sous forme de remarque.',naRef:'Cette page donne les valeurs de l’annexe nationale allemande (marquées AN DE). Pour {0}, elles ne sont pas encore disponibles ici.',naAbbr:'AN',cDE:'Allemagne',cAT:'Autriche',cCH:'la Suisse',cFR:'France',cES:'Espagne',cUK:'Royaume-Uni',legal:'Mentions légales · Confidentialité',home:'Accueil',more:'plus',less:'moins'},
-    es:{menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · compartir en PDF',
+    es:{back:'Atrás',menu:'Menú',open:'Abrir menú',close:'Cerrar menú',mods:'Módulos',calc:'Calculadora · vigas y pórticos',size:'Comprobaciones según Eurocódigo',ref:'Fórmulas, tablas, ejemplos',proj:'Memorias de cálculo',projS:'Guardadas · compartir en PDF',
         set:'Ajustes',ueb:'Modo práctica',uebS:'Valores ocultos, calcúlalo tú',look:'Apariencia',auto:'Auto',light:'Claro',dark:'Oscuro',lang:'Idioma',na:'Base de cálculo',naS:'Anejo nacional: {0}',naSCH:'Normas suizas (SIA)',soon:'en preparación',naHint:'Los valores marcados con {0} los fija el anejo nacional. Elige el país en Menú › Base de cálculo.',naTip:'Valor del anejo nacional ({0})',naPart:'Para {0}, kragr solo calcula por ahora las comprobaciones cuyos valores están completos; las demás aparecen como nota.',naRef:'Esta página muestra los valores del anejo nacional alemán (marcados AN DE). Para {0} aún no están disponibles aquí.',naAbbr:'AN',cDE:'Alemania',cAT:'Austria',cCH:'Suiza',cFR:'Francia',cES:'España',cUK:'Reino Unido',legal:'Aviso legal · Privacidad',home:'Inicio',more:'más',less:'menos'}};
   // Startseite: keine Auswahlliste, die Sprache wechselt über ihr setLang()
   var VSEL={ _v:null, get value(){ if(this._v) return this._v; try{ return localStorage.getItem('statiq-lang')||'en'; }catch(e){ return 'en'; } }, set value(v){ this._v=v; },
@@ -1518,31 +1548,45 @@ window.kragrK5Page = function(K){
     scrim=D.createElement('div'); scrim.className='k5-scrim'; scrim.addEventListener('click', closeMenu);
     menu=D.createElement('div'); menu.id='k5-menu'; menu.className='k5-menu'; menu.setAttribute('role','dialog'); menu.setAttribute('aria-modal','true');
     D.body.appendChild(scrim); D.body.appendChild(menu);
+    menu.addEventListener('click', function(e){ if(e.target.closest && e.target.closest('.k5-tree .pick-item, .k5-tree .pick-k')) closeMenu(); }, true);   // gewählt: Menü zu (Liste geht zurück an die Seite)
     D.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ closeMenu(); } });
     labelBurger();
   }
-  function labelBurger(){ if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : PAGE):'');
+  function labelBurger(){ if(PICKM){ var mn=typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : PAGE; H.style.setProperty('--k5-modname', JSON.stringify(mn)); }
+    if(!burger) return; var cur=burger.querySelector('.k5-cur'); var m=PAGE==='projekt'?t('proj'):(MODS.some(function(x){return x[0]===PAGE;})?(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : PAGE):'');
     var tx=t('menu'); if(cur.textContent!==tx) cur.textContent=tx; burger.setAttribute('aria-label', t('open')+(m?' ('+m+')':'')); }
   function themeNow(){ return H.dataset.theme || (function(){ try{ return localStorage.getItem('muly-theme')||'auto'; }catch(e){ return 'auto'; } })(); }
   function setTheme(v){ var n=0; while(themeNow()!==v && n++<3 && window.mulyTheme) window.mulyTheme(); if(!window.mulyTheme){ try{ localStorage.setItem('muly-theme',v); }catch(e){} } }
   function hrefOf(name){ var a=D.querySelector('.k-hdr .header-links a[href^="'+name+'.html"]'); return a ? a.getAttribute('href') : name+'.html'; }
   function version(){ var v=D.querySelector('.k-hdr .version'); var s=v&&v.textContent.trim(); if(!s){ var m=(D.documentElement.outerHTML.slice(0,200).match(/v(\d+\.\d+\.\d+)/)||[])[0]; s=m||''; } return s; }
   function seg(id, items, cur){ return '<div class="k5-segm" role="group" id="'+id+'">'+items.map(function(it){ return '<button type="button" data-v="'+it[0]+'" aria-pressed="'+(it[0]===cur)+'">'+esc(it[1])+'</button>'; }).join('')+'<span class="k5-pill" aria-hidden="true"></span></div>'; }
+  // Liste der Auswahl gehört der Seite (#pick); im Menü steht sie nur geliehen — vor dem Neuaufbau und beim Schließen zurück
+  function pickBack(){ if(!menu) return; var pm=menu.querySelector('#pick-menu'); if(!pm) return; var pk=D.getElementById('pick');
+    if(pk && !pk.querySelector('#pick-menu')) pk.appendChild(pm); else pm.parentNode.removeChild(pm); }
   function renderMenu(){
-    var ueb=D.getElementById('ueb-btn'), i=0, h='';
+    pickBack();
+    var ueb=D.getElementById('ueb-btn'), i=0, h='', tree=PICKM && !!D.getElementById('pick');
     function I(){ return ' style="--i:'+(i++)+'"'; }
     h+='<div class="k5-mhead"'+I()+'><a class="k5-mlogo" href="index.html" aria-label="'+esc(t('home'))+'">krag'+(D.querySelector('.k-hdr .logo-r')||{outerHTML:'r'}).outerHTML+'</a><button type="button" class="k5-x" aria-label="'+esc(t('close'))+'">✕</button></div>';
-    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('mods'))+'</div>';
-    MODS.forEach(function(m){ h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(PAGE===m[0]?' aria-current="page"':'')+I()+' data-mod="'+m[0]+'"><span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+esc(typeof window.kmod==='function' ? window.kmod(m[0], lang()) : m[0])+'</b><span>'+esc(t(m[0]))+'</span></span></a>'; });
-    h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+I()+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b><span>'+esc(t('projS'))+'</span></span><span class="k5-badge"></span></a>';
-    h+='<div class="k5-mlabel"'+I()+'>'+esc(t('set'))+'</div>';
+    h+='<div class="k5-pm"'+I()+'>';
+    MODS.forEach(function(m){ var cur=PAGE===m[0], nm='<span class="k5-ic">'+m[2]+'</span><span class="k5-mt"><b>'+esc(typeof window.kmod==='function' ? window.kmod(m[0], lang()) : m[0])+'</b></span>';
+      if(cur && tree) h+='<button type="button" class="k5-mod k5-cur" aria-current="page" aria-expanded="true" data-mod="'+m[0]+'">'+nm+'<span class="k5-mch" aria-hidden="true">▾</span></button><div class="k5-tree" role="group"></div>';
+      else h+='<a class="k5-mod" href="'+esc(hrefOf(m[0]))+'"'+(cur?' aria-current="page"':'')+' data-mod="'+m[0]+'">'+nm+'<span class="k5-mch" aria-hidden="true">'+(cur?'':'›')+'</span></a>'; });
+    h+='<a class="k5-mod" href="projekt.html"'+(PAGE==='projekt'?' aria-current="page"':'')+' data-mod="projekt"><span class="k5-ic">'+ICON_PROJ+'</span><span class="k5-mt"><b>'+esc(t('proj'))+'</b></span><span class="k5-badge"></span><span class="k5-mch" aria-hidden="true">'+(PAGE==='projekt'?'':'›')+'</span></a>';
+    h+='<button type="button" class="k5-setbtn"><span>'+esc(t('set'))+'</span><span class="k5-mch" aria-hidden="true">›</span></button>';
+    var foot='<div class="k5-mfoot"><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
+    h+=foot+'</div><div class="k5-ps"'+I()+'><button type="button" class="k5-back" aria-label="'+esc(t('back'))+'"><span class="k5-mch" aria-hidden="true">‹</span>'+esc(t('set'))+'</button>';
     if(ueb && ueb.offsetParent!==null || ueb && getComputedStyle(ueb).display!=='none' || ueb && ueb.closest('.hdr-tools')) h+='<div class="k5-row"'+I()+'><span class="k5-rt">'+esc(t('ueb'))+'<span>'+esc(t('uebS'))+'</span></span><button type="button" class="k5-sw" id="k5-ueb" role="switch" aria-checked="'+(ueb.getAttribute('aria-pressed')==='true')+'" aria-label="'+esc(t('ueb'))+'"></button></div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('look'))+'</span>'+seg('k5-theme',[['auto',t('auto')],['light',t('light')],['dark',t('dark')]], themeNow())+'</div>';
     h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('na'))+'<span>'+esc(naSub())+'</span></span>'+seg('k5-na', NA_ALL.map(function(c){ return [c, c.toUpperCase()]; }), naNow())+'</div>';
     if(langSel()) h+='<div class="k5-row k5-col"'+I()+'><span class="k5-rt">'+esc(t('lang'))+'</span>'+seg('k5-lang',[['de','DE'],['en','EN'],['fr','FR'],['es','ES']], lang())+'</div>';
-    h+='<div class="k5-mfoot"'+I()+'><span class="k5-ver">'+esc(version()?('kragr'+(MODS.some(function(x){return x[0]===PAGE;})||PAGE==='projekt'?' · '+(typeof window.kmod==='function' ? window.kmod(PAGE==='projekt'?'proj':PAGE, lang()) : PAGE):'')+' '+version()):'kragr')+'</span><a href="rechtliches.html">'+esc(t('legal'))+'</a></div>';
+    h+='</div>';
     menu.innerHTML=h; menu.setAttribute('aria-label', t('menu'));
     menu.querySelector('.k5-x').onclick=closeMenu;
+    var tr=menu.querySelector('.k5-tree'); if(tr){ try{ if(typeof window.buildPick==='function') window.buildPick(); }catch(e){} var pmn=D.getElementById('pick-menu'); if(pmn) tr.appendChild(pmn); else tr.hidden=true; }
+    var cm=menu.querySelector('.k5-cur'); if(cm && tr) cm.onclick=function(){ var o=cm.getAttribute('aria-expanded')!=='true'; cm.setAttribute('aria-expanded', String(o)); tr.hidden=!o; };
+    menu.querySelector('.k5-setbtn').onclick=function(){ menu.classList.add('k5-sub'); menu.scrollTop=0; requestAnimationFrame(placePills); var b=menu.querySelector('.k5-back'); if(b) b.focus({preventScroll:true}); };
+    menu.querySelector('.k5-back').onclick=function(){ menu.classList.remove('k5-sub'); var s=menu.querySelector('.k5-setbtn'); if(s) s.focus({preventScroll:true}); };
     var sw=menu.querySelector('#k5-ueb'); if(sw) sw.onclick=function(){ closeMenu(); setTimeout(function(){ ueb.click(); }, STILL()?0:180); };
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-theme button'), function(b){ b.onclick=function(){ setTheme(b.dataset.v); pressSeg(b); }; });
     Array.prototype.forEach.call(menu.querySelectorAll('#k5-na button'), function(b){ var on=NA_ON.indexOf(b.dataset.v)>=0;
@@ -1554,9 +1598,10 @@ window.kragrK5Page = function(K){
   function pressSeg(b){ Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); }); placePills(); }
   function placePills(){ Array.prototype.forEach.call(D.querySelectorAll('.k5-segm'), function(g){ var p=g.querySelector('.k5-pill'), b=g.querySelector('button[aria-pressed="true"]'); if(!p) return;
     if(!b){ p.style.width='0'; return; } p.style.width=b.offsetWidth+'px'; p.style.transform='translateX('+b.offsetLeft+'px)'; }); }
-  function openMenu(){ if(!menu) return; lastFocus=D.activeElement; renderMenu(); menu.classList.add('open'); scrim.classList.add('open'); D.body.classList.add('k5-lock');
-    burger.setAttribute('aria-expanded','true'); requestAnimationFrame(placePills); var f=menu.querySelector('[aria-current="page"]')||menu.querySelector('.k5-mod'); if(f) f.focus({preventScroll:true}); }
-  function closeMenu(){ if(!menu||!menu.classList.contains('open')) return; menu.classList.remove('open'); scrim.classList.remove('open'); D.body.classList.remove('k5-lock');
+  function openMenu(){ if(!menu) return; lastFocus=D.activeElement; menu.classList.remove('k5-sub'); renderMenu(); menu.classList.add('open'); scrim.classList.add('open'); D.body.classList.add('k5-lock');
+    burger.setAttribute('aria-expanded','true'); requestAnimationFrame(placePills); var f=menu.querySelector('[aria-current="page"]')||menu.querySelector('.k5-mod'); if(f) f.focus({preventScroll:true});
+    var a=menu.querySelector('.k5-tree .pick-item.active'); if(a) try{ a.scrollIntoView({block:'center'}); }catch(e){} }
+  function closeMenu(){ if(!menu||!menu.classList.contains('open')) return; pickBack(); menu.classList.remove('open'); scrim.classList.remove('open'); D.body.classList.remove('k5-lock');
     burger.setAttribute('aria-expanded','false'); if(lastFocus && lastFocus.focus) try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
   // Fokus im Menü halten
   D.addEventListener('keydown', function(e){ if(e.key!=='Tab' || !menu || !menu.classList.contains('open')) return;
@@ -1614,6 +1659,9 @@ window.kragrK5Page = function(K){
 
   function init(){
     buildHeader();
+    if(PICKM){ window.togglePick=function(e){ if(e && e.stopPropagation) e.stopPropagation(); openMenu(); };   // Pfadzeile oben öffnet das Menü bei der Auswahl
+      var sq=0, same=function(){ sq=0; var p=D.getElementById('pick'), g=D.getElementById('pick-g'); if(p) p.classList.toggle('k5-same', !!g && g.textContent.trim()===(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : '')); };
+      new MutationObserver(function(){ if(!sq) sq=requestAnimationFrame(same); }).observe(D.body,{childList:true, subtree:true, characterData:true}); same(); }
     try{ if(window.kragrK5Page) window.kragrK5Page(window.kragrK5); }catch(e){ if(window.console) console.error(e); }
     reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
     window.addEventListener('resize', function(){ if(menu && menu.classList.contains('open')) placePills(); });
@@ -1905,7 +1953,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.49</span>
+    <span class="version">v0.11.50</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2438,7 +2486,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.49';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.50';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;

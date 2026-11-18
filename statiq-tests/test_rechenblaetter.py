@@ -70,8 +70,8 @@ async def main():
         check('Kopf ohne Auswahlmenü (projekt v0.1.40): klein die Module, groß die Anzahl, über die ganze Breite', r[0]=='Schnittkräfte + Bemessung' and not r[1] and abs(r[2]-r[3])<=1 and await pg.is_visible('.top-acts .acts'), r)
         # Menü
         await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open')
-        mi=await pg.evaluate("()=>{const a=document.querySelector('#k5-menu [data-mod=projekt]'); return {t:a.querySelector('b').textContent, s:a.querySelector('.k5-mt > span').textContent, cur:a.getAttribute('aria-current')}}")
-        check('Menü: „Rechenblätter“ · „Gespeichert · als PDF teilen“, aktuelle Seite', mi=={'t':'Rechenblätter','s':'Gespeichert · als PDF teilen','cur':'page'}, mi)
+        mi=await pg.evaluate("()=>{const a=document.querySelector('#k5-menu [data-mod=projekt]'); return {t:a.querySelector('b').textContent, cur:a.getAttribute('aria-current')}}")
+        check('Menü: „Rechenblätter“, aktuelle Seite (seit 18.11.2026 ohne Untertitel)', mi=={'t':'Rechenblätter','cur':'page'}, mi)
         await pg.keyboard.press('Escape')
         # size-Bericht in der Seite
         await pg.click('.bl:first-child button.p'); await pg.wait_for_timeout(200)

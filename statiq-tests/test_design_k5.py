@@ -42,31 +42,33 @@ async def main():
         await pg.set_viewport_size({'width':390,'height':844})
         for f,cur in [('calc','calc'),('size','size'),('ref','ref'),('projekt','projekt'),('index',None)]:
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(300); await menu(pg)
-            r=await pg.evaluate("""()=>({mods:[...document.querySelectorAll('#k5-menu .k5-mod')].map(a=>a.dataset.mod+'>'+a.getAttribute('href').split('#')[0]),
+            r=await pg.evaluate("""()=>({mods:[...document.querySelectorAll('#k5-menu .k5-mod')].map(a=>a.dataset.mod+'>'+(a.getAttribute('href')||'Baum').split('#')[0]),
               cur:(document.querySelector('#k5-menu .k5-mod[aria-current=page]')||{}).dataset?.mod||null, ueb:!!document.getElementById('k5-ueb'),
               theme:!!document.querySelector('#k5-theme'), lang:!!document.querySelector('#k5-lang'), exp:document.getElementById('k5-burger').getAttribute('aria-expanded'),
               foc:document.activeElement && document.activeElement.closest('#k5-menu')!==null, lock:document.body.classList.contains('k5-lock')})""")
-            check(f'{f}: Menü mit calc, size, ref, Rechenblätter; aktuelle Seite markiert', r['mods']==['calc>calc.html','size>size.html','ref>ref.html','projekt>projekt.html'] and r['cur']==cur, r)
+            # seit 18.11.2026: in calc, size und ref ist das aktuelle Modul ein Knopf, darunter der Baum mit der Auswahl
+            exp=[m+'>'+('Baum' if m==f and f in ('calc','size','ref') else m+'.html') for m in ('calc','size','ref','projekt')]
+            check(f'{f}: Menü mit calc, size, ref, Rechenblätter; aktuelle Seite markiert', r['mods']==exp and r['cur']==cur, r)
             check(f'{f}: Menü offen (aria-expanded, Fokus im Menü, Seite gesperrt), Erscheinungsbild und Sprache', r['exp']=='true' and r['foc'] and r['lock'] and r['theme'] and r['lang'], r)
             check(f'{f}: Übungsmodus nur in calc und size', r['ueb']==(f in ('calc','size')), r['ueb'])
             await pg.keyboard.press('Escape'); await pg.wait_for_timeout(100)
             check(f'{f}: Escape schließt das Menü', await pg.evaluate("!document.getElementById('k5-menu').classList.contains('open') && document.getElementById('k5-burger').getAttribute('aria-expanded')==='false' && !document.body.classList.contains('k5-lock')"))
         # Menü steuert Erscheinungsbild, Sprache, Übungsmodus
-        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(300); await menu(pg)
+        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(300); await menu(pg); await pg.click('.k5-setbtn')   # Einstellungen als Unterseite (18.11.2026)
         await pg.click('#k5-theme button[data-v="dark"]'); await pg.wait_for_timeout(100)
         check('Erscheinungsbild „Dunkel“ über das Menü', await pg.evaluate("document.documentElement.classList.contains('dark') && localStorage.getItem('muly-theme')==='dark'"))
         await pg.click('#k5-theme button[data-v="light"]'); await pg.wait_for_timeout(100)
         check('Erscheinungsbild „Hell“ über das Menü', await pg.evaluate("!document.documentElement.classList.contains('dark') && localStorage.getItem('muly-theme')==='light'"))
         await pg.click('#k5-theme button[data-v="auto"]')
         await pg.click('#k5-lang button[data-v="en"]'); await pg.wait_for_timeout(300)
-        r=await pg.evaluate("[localStorage.getItem('statiq-lang'), document.getElementById('lang-sel').value, document.querySelector('#k5-menu .k5-mlabel').textContent, document.querySelector('[data-i18n=system]').textContent]")
-        check('Sprache EN über das Menü: Seite und Menü englisch', r==['en','en','Modules','System'], r)
+        r=await pg.evaluate("[localStorage.getItem('statiq-lang'), document.getElementById('lang-sel').value, document.querySelector('#k5-menu .k5-back').textContent.replace('‹',''), document.querySelector('[data-i18n=system]').textContent]")
+        check('Sprache EN über das Menü: Seite und Menü englisch (Unterseite bleibt offen)', r==['en','en','Settings','System'], r)
         await pg.click('#k5-lang button[data-v="de"]'); await pg.wait_for_timeout(300)
         check('Sprache zurück auf DE', await pg.evaluate("localStorage.getItem('statiq-lang')")=='de')
         await pg.click('#k5-ueb'); await pg.wait_for_timeout(200)
         r=await pg.evaluate("[document.getElementById('ueb-btn').getAttribute('aria-pressed'), document.body.classList.contains('uebung'), document.getElementById('k5-menu').classList.contains('open')]")
         check('Übungsmodus über das Menü an (Menü schließt)', r==['true',True,False], r)
-        await menu(pg)
+        await menu(pg); await pg.click('.k5-setbtn')
         check('Schalter im Menü zeigt den Übungsmodus an', await pg.get_attribute('#k5-ueb','aria-checked')=='true')
         await pg.click('#k5-ueb'); await pg.wait_for_timeout(200)
         check('Übungsmodus über das Menü wieder aus', await pg.get_attribute('#ueb-btn','aria-pressed')=='false')
@@ -122,7 +124,8 @@ async def main():
         r=await pg.evaluate("(()=>{const h=document.querySelector('#main .page-head'), b=h.closest('.lb-page'); const cs=getComputedStyle(b); return [cs.backgroundColor, cs.borderRadius, getComputedStyle(h).flexDirection, h.querySelector('.page-sub').getBoundingClientRect().top < h.querySelector('.page-title').getBoundingClientRect().top]})()")
         check('ref: Seitenkopf im weißen Blatt, Fach · Kapitel als Oberzeile', r[0]=='rgb(255, 255, 255)' and r[1] in ('16px','20px') and r[2:]==['column-reverse',True], r)
         await pg.click('#pick-btn'); await pg.wait_for_timeout(200)
-        check('ref (Handy): Auswahl oben wie in calc/size öffnet die Themenliste', await pg.evaluate("document.getElementById('pick').classList.contains('open') && document.querySelectorAll('#pick-menu .pick-item').length>100"))
+        check('ref (Handy): Pfadzeile oben öffnet das Menü mit der Themenliste (seit 18.11.2026 im Burger-Menü)', await pg.evaluate("document.getElementById('k5-menu').classList.contains('open') && !!document.querySelector('#k5-menu .k5-tree #pick-menu') && document.querySelectorAll('#pick-menu .pick-item').length>100"))
+        await pg.keyboard.press('Escape'); await pg.wait_for_timeout(100)
         # rechtliches: Seitenkopf
         await pg.goto(B+'rechtliches.html'); await pg.wait_for_timeout(300)
         check('rechtliches: Titel, Einleitung und Sprungmarken in einer Kopfkarte', await pg.evaluate("(()=>{const k=document.querySelector('#content > .k5-phead'); return !!k && !!k.querySelector('h1') && !!k.querySelector('.lead')})()"))

@@ -29,7 +29,7 @@ async def main():
         for f in PAGES:
             await pg.goto(U+f+'.html'); await pg.evaluate("localStorage.setItem('muly-theme','auto')"); await pg.reload(); await pg.wait_for_timeout(250)
             # k5: Erscheinungsbild im Menü als Umschalter Auto · Hell · Dunkel
-            await pg.click('#k5-burger'); await pg.wait_for_timeout(150)
+            await pg.click('#k5-burger'); await pg.wait_for_timeout(150); await pg.click('.k5-setbtn'); await pg.wait_for_timeout(100)
             vis=await pg.evaluate("document.querySelectorAll('#k5-theme button').length")==3
             seq=[]
             for v in ['dark','light','auto']:

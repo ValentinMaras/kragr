@@ -16,7 +16,7 @@ async def main():
         pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(B+'size.html'); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
         # Menü
-        await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open'); await pg.wait_for_timeout(200)
+        await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open'); await pg.wait_for_timeout(200); await pg.click('.k5-setbtn'); await pg.wait_for_timeout(100)
         r=await pg.evaluate("""(()=>{const g=document.getElementById('k5-na'); const bs=[...g.querySelectorAll('button')];
           return {codes:bs.map(b=>b.textContent), on:bs.filter(b=>!b.disabled).map(b=>b.dataset.v), pressed:bs.filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.v),
             sub:g.closest('.k5-row').querySelector('.k5-rt').textContent, soon:bs[1].title, order:[...document.querySelectorAll('#k5-menu .k5-rt')].map(e=>e.firstChild.textContent)}})()""")
@@ -61,7 +61,7 @@ async def main():
         check('Rechenblätter: Bemessungsgrundlage im Menü', await pg.evaluate("!!document.getElementById('k5-na')"))
         # ── Österreich (size v0.7.23) — Sollwerte von Hand ──
         await pg.goto(B+'size.html'); await pg.evaluate("localStorage.clear(); localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(800)
-        await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open'); await pg.click('#k5-na button[data-v="at"]'); await pg.wait_for_timeout(400)
+        await pg.click('#k5-burger'); await pg.wait_for_selector('#k5-menu.open'); await pg.click('.k5-setbtn'); await pg.click('#k5-na button[data-v="at"]'); await pg.wait_for_timeout(400)
         r=await pg.evaluate("[kragrNA(), localStorage.getItem('kragr-na'), document.querySelector('#k5-na').closest('.k5-row').querySelector('.k5-rt > span').textContent]")
         check('AT wählen: gespeichert, Untertitel „Nationaler Anhang: Österreich“', r==['at','at','Nationaler Anhang: Österreich'], r)
         await pg.keyboard.press('Escape'); await pg.wait_for_timeout(300)

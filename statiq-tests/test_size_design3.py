@@ -42,10 +42,10 @@ async def main():
         # Übungsmodus-Schalter
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.closest('.hdr-tools')?1:0, t.getAttribute('aria-pressed'), t.title, !!document.querySelector('.det-bar .ueb-tog')]})()")
         check('Übungsmodus als Doktorhut-Knopf in der Kopfzeile (aus), kein Schalter mehr in der Rechenweg-Leiste', sw==[1,'false','Übungsmodus: Aus – vollständige Lösung',False], sw)
-        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
+        await pg.click('#k5-burger'); await pg.click('.k5-setbtn'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(600)
         sw=await pg.evaluate("(()=>{const t=document.getElementById('ueb-btn'); return [t.getAttribute('aria-pressed'), t.title, document.body.classList.contains('uebung')]})()")
         check('an: „Zahlen verborgen“, Übungsmodus aktiv', sw[0]=='true' and 'Zahlen verborgen' in sw[1] and sw[2], sw)
-        await pg.click('#k5-burger'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
+        await pg.click('#k5-burger'); await pg.click('.k5-setbtn'); await pg.click('#k5-ueb'); await pg.wait_for_timeout(500)
         # kein Querscrollen in allen Bereichen
         ov={}
         await pg.set_viewport_size({'width':360,'height':740})

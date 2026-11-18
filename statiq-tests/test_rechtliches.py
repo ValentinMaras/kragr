@@ -37,7 +37,7 @@ async def main():
             ph=await pg.evaluate("document.querySelectorAll('.ph').length"); lg=await pg.evaluate("document.documentElement.lang")
             check(f'{lang.upper()}: Rechtsseite mit fünf Abschnitten und Platzhaltern', ids and ph>=6 and lg==lang, (ids, ph, lg))
         # Sprache auf der Rechtsseite umschalten
-        await pg.click('#k5-burger'); await pg.click('#k5-lang button[data-v=de]'); await pg.wait_for_timeout(250); await pg.keyboard.press('Escape'); await pg.wait_for_timeout(100)
+        await pg.click('#k5-burger'); await pg.click('.k5-setbtn'); await pg.click('#k5-lang button[data-v=de]'); await pg.wait_for_timeout(250); await pg.keyboard.press('Escape'); await pg.wait_for_timeout(100)
         check('Rechtsseite: Umschalten auf DE', 'Angaben gemäß § 5 DDG' in await pg.evaluate("document.body.innerText"))
         # Fußleiste folgt dem Sprachwechsel in calc (ohne Neuladen)
         await pg.goto(U+'calc.html'); await pg.wait_for_timeout(300)

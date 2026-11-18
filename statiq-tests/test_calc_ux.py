@@ -40,14 +40,14 @@ async def main():
         vis=await pg.evaluate("(()=>{const r=document.querySelector('.pick-group.open .pick-item').getBoundingClientRect(); const e=document.elementFromPoint(r.x+r.width/2, r.y+r.height/2); return !!(e && e.closest('.pick-menu'))})()")
         check('Menü liegt über den Karten (nicht verdeckt)', vis)
         await pg.click('.pick-group[data-g="frames"] .pick-head'); await pg.click('.pick-item[data-k="frame:three"]'); await pg.wait_for_timeout(400)
-        st=await pg.evaluate("[curTab(), framePresetNow(), document.getElementById('pick-t').textContent, document.getElementById('pick').classList.contains('open'), !document.getElementById('frame-results').classList.contains('hidden')]")
+        st=await pg.evaluate("[curTab(), framePresetNow(), document.getElementById('pick-t').textContent, document.getElementById('k5-menu').classList.contains('open'), !document.getElementById('frame-results').classList.contains('hidden')]")
         check('Menü → Dreigelenkrahmen: Tab, Vorlage, Anzeige, Ergebnis', st==['frame','three','Dreigelenkrahmen',False,True], st)
         await pg.click('#pick-btn')
         if not await pg.evaluate("document.querySelector('.pick-group[data-g=\"beams\"]').classList.contains('open')"): await pg.click('.pick-group[data-g="beams"] .pick-head')   # Balken bleibt seit v0.11.37 gemerkt offen
         await pg.click('.pick-item[data-k="cantilever"]'); await pg.wait_for_timeout(300)
         check('Menü → Kragarm', await pg.evaluate("curTab()==='cantilever' && document.getElementById('pick-t').textContent==='Kragarm' && !document.getElementById('cant-results').classList.contains('hidden')"))
         check('Kopfzeile: Ordner-Symbol ist ein Link zu den Rechenblättern (kein Menü, keine Ansicht „Gespeichert“)', await pg.evaluate("!document.getElementById('proj-btn').hasAttribute('aria-haspopup') && document.getElementById('proj-panel').hidden"))
-        await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("document.getElementById('pick').classList.contains('open')"))
+        await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("document.getElementById('k5-menu').classList.contains('open')"))
         await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(400)
         check('Durchlaufträger startet mit Gleichlast und Ergebnis', await pg.evaluate("parseFloat(document.getElementById('cont-Mmax').textContent)")>15)
         # kompakte Lasten
@@ -80,7 +80,7 @@ async def main():
         await pg.evaluate("setCalcLang('de')")
         # keine Seitenleiste mehr: Module stehen oben, Sprache als Auswahl im Kopf
         check('Kein ☰-Menü und keine Seitenleiste', await pg.evaluate("!document.getElementById('nav-drawer') && !document.querySelector('.menu-btn')"))
-        await pg.click('#k5-burger'); await pg.click('#k5-lang button[data-v=fr]'); await pg.wait_for_timeout(250); await pg.keyboard.press('Escape'); await pg.wait_for_timeout(150)
+        await pg.click('#k5-burger'); await pg.click('.k5-setbtn'); await pg.click('#k5-lang button[data-v=fr]'); await pg.wait_for_timeout(250); await pg.keyboard.press('Escape'); await pg.wait_for_timeout(150)
         check('Sprachauswahl im Kopf: FR', await pg.evaluate("calcLang==='fr' && localStorage.getItem('statiq-lang')==='fr' && document.getElementById('lang-sel').value==='fr'"))
         await pg.evaluate("setCalcLang('de')")
         check('Auswahl folgt der Sprache', await pg.evaluate("document.getElementById('lang-sel').value")=='de')

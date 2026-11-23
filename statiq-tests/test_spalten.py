@@ -37,7 +37,8 @@ async def main():
                     await pg.mouse.move(W*0.25, 500)
                     for _ in range(8): await pg.mouse.wheel(0, 800); await pg.wait_for_timeout(120)
                     c=await pg.evaluate(S); foot=await pg.evaluate("(()=>{ const l=document.querySelector('.legal-bar'); return !!l && l.getBoundingClientRect().top<innerHeight; })()")
-                    check(f'{name} {f}: am Spaltenende läuft die Seite weiter bis zur Fußleiste', c[0]>0 and foot, (c, foot))
+                    # seit calc v0.11.54 · size v0.7.55 passt die Seite ins Fenster: sie scrollt nicht, die Fußleiste ist immer unten zu sehen
+                    check(f'{name} {f}: am Spaltenende scrollt die Seite nicht mit, Fußleiste unten im Bild', c[0]==0 and c[1]>0 and foot, (c, foot))
             await pg.close()
         # Menü am Handy quer (13.11.2026): Zeilen nicht zusammengeschoben, das Menü scrollt
         pg=await br.new_page(viewport={'width':844,'height':390}, is_mobile=True, has_touch=True)

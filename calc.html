@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.53 -->
+<!-- kragr v0.11.54 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -595,6 +595,20 @@ window.mulyProj = {
       .cols > .col-in, .cols > .col-out { position:relative; height:calc(100dvh - var(--k-hdr-h, 58px) - 8px); overflow-y:auto;
         scrollbar-width:thin; scrollbar-gutter:stable; padding:4px 10px 28px; margin:0 -10px; box-sizing:border-box; }
       html { scrollbar-width:thin; }   /* Seitenleiste rechts so schmal wie die der Spalten (calc v0.11.46) */
+    }
+    /* Rechner (calc v0.11.54): die Seite passt ins Fenster und scrollt nicht; nur die beiden Spalten scrollen. Fußleiste schmal ganz unten.
+       Gilt nur für die Bereiche mit zwei Spalten (nicht für „Gespeichert“). */
+    @media (min-width:1000px) and (min-height:560px) {
+      body:has(> main.main:not(.hidden) > .cols) { height:100dvh; overflow:hidden; }
+      main.main:not(.hidden):has(> .cols) { height:calc(100dvh - var(--k-hdr-h, 58px) - 34px); box-sizing:border-box; display:flex; flex-direction:column; padding-bottom:0 !important; }
+      main.main:not(.hidden) > .cols { flex:1 1 auto; min-height:0; }
+      main.main:not(.hidden) > .cols > .col-in, main.main:not(.hidden) > .cols > .col-out { height:100% !important; }
+      main.main:not(.hidden):has(> .cols) > .kbl { margin:6px 0 !important; flex:none; }
+  body:has(> main.main:not(.hidden) > .cols) .k-fill { display:none !important; }
+      body:has(> main.main:not(.hidden) > .cols) .legal-bar { flex-direction:row !important; flex-wrap:nowrap; align-items:center; gap:16px !important; margin:0 auto !important; padding:0 24px !important; height:34px; box-sizing:border-box;
+        font-size:11px !important; line-height:34px !important; overflow:hidden; white-space:nowrap; border-top:1px solid #e6e7ea !important; }
+      body:has(> main.main:not(.hidden) > .cols) .legal-bar > span:first-child { overflow:hidden; text-overflow:ellipsis; min-width:0; }
+      body:has(> main.main:not(.hidden) > .cols) .legal-bar .legal-ver { margin:0 0 0 auto !important; }
     }
     /* kompakte Lasten: zugeklappt mit Kurzfassung */
     .load-item.cmp .load-item-header { cursor:pointer; gap:10px; }
@@ -1990,7 +2004,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.53</span>
+    <span class="version">v0.11.54</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2523,7 +2537,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.53';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.54';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7942,7 +7956,9 @@ const K11_CHEV = '<svg class="k-chev" width="10" height="10" viewBox="0 0 10 10"
 // calc v0.11.52: beim Öffnen alle Stufen zu, man öffnet selbst. Im Testbetrieb (automatisierter Browser) wie bisher Abmessungen und Lasten
 // offen, damit die Feldprüfungen nicht jede Stufe öffnen müssen; ?k5zu in der Adresse prüft das echte Verhalten (wie ?k5motion).
 const K11_TEST = typeof navigator!=='undefined' && navigator.webdriver && !/k5zu/.test(location.search);
-const K11_DEF = K11_TEST ? { dims:true, sup:false, loads:true, adv:false } : { dims:false, sup:false, loads:false, adv:false };
+// Am Rechner (ab 1000 px, zwei Spalten) ist Platz: dort alle Stufen offen (calc v0.11.54); am Handy alle zu
+const K11_WIDE = typeof matchMedia==='function' && matchMedia('(min-width:1000px)').matches;
+const K11_DEF = K11_TEST ? { dims:true, sup:false, loads:true, adv:false } : K11_WIDE ? { dims:true, sup:true, loads:true, adv:true } : { dims:false, sup:false, loads:false, adv:false };
 // Offene Stufen merkt sich die Seite nicht mehr (calc v0.11.52); der alte Speicher wird gelöscht. „kragr-stufen“ setzen nur Tests.
 let K11S = {}; try{ localStorage.removeItem('statiq-stufen'); K11S = JSON.parse(localStorage.getItem('kragr-stufen')||'{}') || {}; }catch(e){ K11S = {}; }
 function k11Open(t, st){ const v=(K11S[t]||{})[st]; return v===undefined ? K11_DEF[st] : !!v; }

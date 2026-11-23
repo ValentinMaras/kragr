@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.54 -->
+<!-- kragr·size v0.7.55 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -684,6 +684,20 @@ window.mulyProj = {
   .main > .col-in, .main > .col-out { position:relative; height:calc(100dvh - var(--k-hdr-h, 58px) - 8px); overflow-y:auto;
     scrollbar-width:thin; scrollbar-gutter:stable; padding:4px 10px 28px; margin:0 -10px; box-sizing:border-box; }
   html { scrollbar-width:thin; }   /* Seitenleiste rechts so schmal wie die der Spalten (size v0.7.48) */
+}
+/* Rechner (size v0.7.55): die Seite passt ins Fenster und scrollt nicht; nur die beiden Spalten scrollen. Fußleiste schmal ganz unten,
+   „Als Rechenblatt speichern“ unter der rechten Spalte. Bericht (show-report) scrollt wie bisher. */
+@media (min-width:1000px) and (min-height:560px) {
+  body:not(.show-report) { height:100dvh; overflow:hidden; }
+  body:not(.show-report) .main { height:calc(100dvh - var(--k-hdr-h, 58px) - 34px); box-sizing:border-box; grid-template-rows:minmax(0,1fr) auto; row-gap:0 !important; padding-bottom:0 !important; }
+  body:not(.show-report) .main > .col-in { grid-row:1 / 3; height:100% !important; }
+  body:not(.show-report) .main > .col-out { height:100% !important; }
+  body:not(.show-report) .main > .kbl { grid-column:2 !important; grid-row:2; margin:6px 0 !important; }
+  body:not(.show-report) .k-fill { display:none !important; }
+  body:not(.show-report) .legal-bar { flex-direction:row !important; flex-wrap:nowrap; align-items:center; gap:16px !important; margin:0 auto !important; padding:0 24px !important; height:34px; box-sizing:border-box;
+    font-size:11px !important; line-height:34px !important; overflow:hidden; white-space:nowrap; border-top:1px solid #e6e7ea !important; }
+  body:not(.show-report) .legal-bar > span:first-child { overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  body:not(.show-report) .legal-bar .legal-ver { margin:0 0 0 auto !important; }
 }
 </style>
 <style data-k5>
@@ -4307,7 +4321,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.54';
+const SIZE_VERSION = '0.7.55';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -12296,10 +12310,10 @@ function mulyFehlerHref(app, ver, extra){
 // vorher hing das von gespeicherten Zuständen je Karte ab (mal eine, mal drei offen).
 (function(){
   function reset(){ var cs=[].filter.call(document.querySelectorAll('.col-in .card.fold'), function(c){ return c.offsetParent!==null; });
-    // size v0.7.53: beim Öffnen und nach dem Wechsel alle zu, man öffnet selbst. Im Testbetrieb (automatisierter Browser, ohne ?k5zu)
+    // size v0.7.53: beim Öffnen und nach dem Wechsel alle zu, man öffnet selbst (seit v0.7.55 nur am Handy). Im Testbetrieb (automatisierter Browser, ohne ?k5zu)
     // wie bisher: am Rechner alle offen, am Handy die erste — damit die Feldprüfungen nicht jede Karte öffnen müssen.
     var test=navigator.webdriver && !/k5zu/.test(location.search), wide=false; try{ wide=matchMedia('(min-width:861px)').matches; }catch(e){}
-    cs.forEach(function(c,i){ c.classList.toggle('closed', test ? (i>0 && !wide) : true); });
+    cs.forEach(function(c,i){ c.classList.toggle('closed', test ? (i>0 && !wide) : !wide); });   // size v0.7.55: am Rechner (zwei Spalten) alle offen, am Handy alle zu
     try{ document.dispatchEvent(new CustomEvent('k5refold')); }catch(e){} }
   window.foldReset=reset;
   ['setMat','setTyp','setStMode','setHoMode','setGrMode','setMwMode','setWbMode','setBpMode'].forEach(function(n){

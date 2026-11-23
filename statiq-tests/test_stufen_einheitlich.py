@@ -51,17 +51,37 @@ async def main():
                 await pg.evaluate(f"showTab('{t}')"); await pg.wait_for_timeout(250)
                 o=await pg.evaluate(f"[...document.querySelectorAll('#tab-{t} .col-in > [data-st]')].filter(c=>!c.classList.contains('k-closed')).map(c=>c.dataset.st)")
                 if o: bad[t]=o
-            check(f'{"Handy" if mob else "Rechner"} calc: beim Öffnen alle Stufen zu (auch mit altem Speicher)', not bad and await pg.evaluate("localStorage.getItem('statiq-stufen')") is None, bad)
+            if mob: check('Handy calc: beim Öffnen alle Stufen zu (auch mit altem Speicher)', not bad and await pg.evaluate("localStorage.getItem('statiq-stufen')") is None, bad)
+            else:   # Rechner (calc v0.11.54): alle Stufen offen
+                op={}
+                for t in ['beam','cantilever','cont','frame']:
+                    await pg.evaluate(f"showTab('{t}')"); await pg.wait_for_timeout(150)
+                    op[t]=await pg.evaluate(f"[...document.querySelectorAll('#tab-{t} .col-in > [data-st]')].filter(c=>c.classList.contains('k-closed')).map(c=>c.dataset.st)")
+                check('Rechner calc: beim Öffnen alle Stufen offen', all(v==[] for v in op.values()) and await pg.evaluate("localStorage.getItem('statiq-stufen')") is None, op)
             await pg.click('#tab-beam [data-st=dims] > .k-head') if await pg.evaluate("curTab()")=='beam' else None
             await pg.evaluate("showTab('beam')"); await pg.click('#tab-beam [data-st=dims] > .k-head'); await pg.wait_for_timeout(150)
             await pg.reload(); await pg.wait_for_timeout(800)
-            check(f'{"Handy" if mob else "Rechner"} calc: geöffnete Stufe nach Neuladen wieder zu', await pg.evaluate("document.querySelector('#tab-beam [data-st=dims]').classList.contains('k-closed')"))
+            check(f'{"Handy" if mob else "Rechner"} calc: nach Neuladen wieder der Anfangszustand', await pg.evaluate("document.querySelector('#tab-beam [data-st=dims]').classList.contains('k-closed')")==mob)
             await pg.goto(B+'size.html?k5zu'); await pg.wait_for_timeout(900)
             o=await pg.evaluate("[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent && !c.classList.contains('closed')).map(c=>c.dataset.fold)")
             await pg.evaluate("setMat('holz')"); await pg.wait_for_timeout(300)
             o2=await pg.evaluate("[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent && !c.classList.contains('closed')).map(c=>c.dataset.fold)")
-            check(f'{"Handy" if mob else "Rechner"} size: beim Öffnen und nach dem Wechsel alle Eingabekarten zu', o==[] and o2==[], (o, o2))
+            if mob: check('Handy size: beim Öffnen und nach dem Wechsel alle Eingabekarten zu', o==[] and o2==[], (o, o2))
+            else:
+                n=await pg.evaluate("[...document.querySelectorAll('.col-in .card.fold')].filter(c=>c.offsetParent).length")
+                check('Rechner size: beim Öffnen und nach dem Wechsel alle Eingabekarten offen (size v0.7.55)', len(o2)==n and n>0 and len(o)>0, (o, o2, n))
             await pg.close()
+        # Rechner: die Seite passt ins Fenster, nur die Spalten scrollen, Fußleiste schmal unten (calc v0.11.54 · size v0.7.55)
+        pg=await br.new_page(viewport={'width':1280,'height':800})
+        for f in ('calc','size'):
+            await pg.goto(B+f+'.html'); await pg.wait_for_timeout(900)
+            r=await pg.evaluate("""(()=>{ const H=document.documentElement, l=document.querySelector('.legal-bar').getBoundingClientRect(), V=s=>[...document.querySelectorAll(s)].find(e=>e.offsetParent);
+              const k=V('.kbl').getBoundingClientRect(), a=V('.col-in').getBoundingClientRect(), b=V('.col-out').getBoundingClientRect();
+              return {fit:H.scrollHeight<=H.clientHeight, foot:[Math.round(l.bottom), Math.round(l.height), parseFloat(getComputedStyle(document.querySelector('.legal-bar')).fontSize)], kbl:Math.round(k.bottom)<=Math.round(l.top), cols:[Math.round(a.top)===Math.round(b.top), a.bottom<=l.top+1, b.bottom<=k.top+1], own:[getComputedStyle(V('.col-in')).overflowY, getComputedStyle(V('.col-out')).overflowY]}; })()""")
+            check(f'Rechner {f}: Seite ohne eigenes Scrollen, Spalten scrollen, Speichern und Fußleiste (11 px, eine Zeile) unten im Bild', r['fit'] and r['foot'][0]==800 and r['foot'][1]<=36 and r['foot'][2]==11 and r['kbl'] and all(r['cols']) and r['own']==['auto','auto'], r)
+        await pg.goto(B+'calc.html'); await pg.wait_for_timeout(800); await pg.evaluate("showTab('saved')"); await pg.wait_for_timeout(300)
+        check('Rechner calc „Gespeichert“: normale Seite (scrollt, Fußleiste wie bisher)', await pg.evaluate("getComputedStyle(document.body).overflow!=='hidden'"))
+        await pg.close()
         # Zahlenfelder ohne Pfeile des Browsers
         pg=await br.new_page(viewport={'width':1280,'height':900})
         for f in ('calc','size'):

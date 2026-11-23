@@ -31,7 +31,7 @@ async def main():
         check('„Als Rechenblatt speichern“ ganz unten im Bereich (calc v0.11.12)', await pg.evaluate("document.getElementById('tab-beam').lastElementChild.classList.contains('kbl')"))
         # Auswahlmenü
         check('Auswahlknopf zeigt Bereich und System', await pg.inner_text('#pick-g')=='Balken' and await pg.inner_text('#pick-t')=='Einfeldträger')
-        await pg.click('#pick-btn')
+        await pg.click('#pick-btn:visible, #k5-hcrumb:visible')
         st=await pg.evaluate("[[...document.querySelectorAll('.pick-group')].map(g=>g.dataset.g), [...document.querySelectorAll('.pick-group.open')].map(g=>g.dataset.g), document.querySelectorAll('.pick-item').length]")
         check('Menü: Balken, Rahmen (Meine Projekte nur über den Knopf oben); nur der aktuelle Bereich offen', st==[['beams','frames'],['beams'],6], st)
         await pg.click('.pick-group[data-g="frames"] .pick-head'); await pg.wait_for_timeout(100)
@@ -42,12 +42,12 @@ async def main():
         await pg.click('.pick-group[data-g="frames"] .pick-head'); await pg.click('.pick-item[data-k="frame:three"]'); await pg.wait_for_timeout(400)
         st=await pg.evaluate("[curTab(), framePresetNow(), document.getElementById('pick-t').textContent, document.getElementById('k5-menu').classList.contains('open'), !document.getElementById('frame-results').classList.contains('hidden')]")
         check('Menü → Dreigelenkrahmen: Tab, Vorlage, Anzeige, Ergebnis', st==['frame','three','Dreigelenkrahmen',False,True], st)
-        await pg.click('#pick-btn')
+        await pg.click('#pick-btn:visible, #k5-hcrumb:visible')
         if not await pg.evaluate("document.querySelector('.pick-group[data-g=\"beams\"]').classList.contains('open')"): await pg.click('.pick-group[data-g="beams"] .pick-head')   # Balken bleibt seit v0.11.37 gemerkt offen
         await pg.click('.pick-item[data-k="cantilever"]'); await pg.wait_for_timeout(300)
         check('Menü → Kragarm', await pg.evaluate("curTab()==='cantilever' && document.getElementById('pick-t').textContent==='Kragarm' && !document.getElementById('cant-results').classList.contains('hidden')"))
         check('Kopfzeile: Ordner-Symbol ist ein Link zu den Rechenblättern (kein Menü, keine Ansicht „Gespeichert“)', await pg.evaluate("!document.getElementById('proj-btn').hasAttribute('aria-haspopup') && document.getElementById('proj-panel').hidden"))
-        await pg.click('#pick-btn'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("document.getElementById('k5-menu').classList.contains('open')"))
+        await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.keyboard.press('Escape'); check('Escape schließt das Menü', not await pg.evaluate("document.getElementById('k5-menu').classList.contains('open')"))
         await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(400)
         check('Durchlaufträger startet mit Gleichlast und Ergebnis', await pg.evaluate("parseFloat(document.getElementById('cont-Mmax').textContent)")>15)
         # kompakte Lasten
@@ -88,7 +88,7 @@ async def main():
         await pg.set_viewport_size({'width':390,'height':844}); await pg.wait_for_timeout(200)
         g=await pg.evaluate("[document.documentElement.scrollWidth, getComputedStyle(document.querySelector('#tab-beam .cols')).display, document.getElementById('lang-sel').getBoundingClientRect().right]")
         check('Handy: einspaltig, kein Querscrollen, Sprachauswahl sichtbar', g[0]<=390 and g[1]=='block' and g[2]<=390, g)
-        await pg.click('#pick-btn'); r=await pg.evaluate("(()=>{const r=document.getElementById('pick-menu').getBoundingClientRect(); return [r.left, r.right]})()")
+        await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); r=await pg.evaluate("(()=>{const r=document.getElementById('pick-menu').getBoundingClientRect(); return [r.left, r.right]})()")
         check('Handy: Menü passt auf den Bildschirm', r[0]>=0 and r[1]<=390, r)
         check('keine Skriptfehler', not errs, errs)
         await br.close()

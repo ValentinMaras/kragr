@@ -34,7 +34,7 @@ async def main():
         await pg.evaluate("setMat('beton')"); await pg.wait_for_timeout(300)
         await pg.click('.col-in .card.fold:nth-of-type(3) > .card-title'); await pg.wait_for_timeout(400)
         for lab in ['Stütze','Torsion','Balken']:
-            await pg.click('#pick'); await pg.wait_for_timeout(300); await pg.click(f'.pick-menu >> text={lab}'); await pg.wait_for_timeout(500)
+            await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(300); await pg.click(f'.pick-menu >> text={lab}'); await pg.wait_for_timeout(500)
             f=await pg.evaluate(FOLD)
             check(f'Auswahl „{lab}“: erste Eingabekarte offen, alle anderen zu', f and f[0] and not any(f[1:]), f)
         d=await br.new_page(viewport={'width':1280,'height':900}); d.on('pageerror', lambda e: errs.append(str(e)))

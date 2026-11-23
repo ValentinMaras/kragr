@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·ref v0.3.84 -->
+<!-- kragr·ref v0.3.85 -->
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -697,6 +697,17 @@ function allgView(key){
   html.k5-pm-on .pick-t { font-size:20px !important; }
   html.k5-pm-on .pick-chev { display:none !important; }
   html.k5-pm-on .pick.open .pick-menu { display:none !important; }
+  /* Rechner: Pfad in der Kopfzeile (Entwurf P1), auf der Seite entfällt die Pfadzeile — beide Spalten oben bündig */
+  .k5-hcrumb { display:none; }
+  @media (min-width:1000px) {
+    html.k5-pm-on .k5-hcrumb { display:flex; align-items:baseline; gap:6px; min-width:0; max-width:56%; margin-left:14px; padding:6px 10px 6px 18px; border:0; border-radius:12px; background:transparent;
+      font:inherit; font-size:14px; font-weight:600; color:#6b6d75; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; position:relative; }
+    html.k5-pm-on .k5-hcrumb::before { content:''; position:absolute; left:0; top:50%; width:1px; height:26px; margin-top:-13px; background:#d5d7dc; }
+    html.k5-pm-on .k5-hcrumb:hover { background:rgba(17,17,20,.04); }
+    html.k5-pm-on .k5-hcrumb b { font-size:18px; font-weight:800; color:#111114; overflow:hidden; text-overflow:ellipsis; }
+    html.k5-pm-on .k5-hcrumb[hidden] { display:none; }
+    html.k5-pm-on .pick { display:none !important; }
+  }
   body.k5-lock { overflow:hidden; }
   /* Zahlenfelder ohne die kleinen Pfeile des Browsers — dafür gibt es − und + daneben; schnelles Tippen auf Knöpfe ohne Doppeltipp-Zoom (18.11.2026) */
   input[type=number] { -moz-appearance:textfield; appearance:textfield; }
@@ -1292,7 +1303,13 @@ window.kragrK5Page = function(K){
   function init(){
     buildHeader();
     if(PICKM){ window.togglePick=function(e){ if(e && e.stopPropagation) e.stopPropagation(); openMenu(); };   // Pfadzeile oben öffnet das Menü bei der Auswahl
-      var sq=0, same=function(){ sq=0; var p=D.getElementById('pick'), g=D.getElementById('pick-g'); if(p) p.classList.toggle('k5-same', !!g && g.textContent.trim()===(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : '')); };
+      // Am Rechner (ab 1000 px) steht der Pfad in der Kopfzeile neben dem Logo, beide Spalten beginnen bündig (23.11.2026, Entwurf P1)
+      var hd=D.querySelector('.app-header.k-hdr'), lg=hd && hd.querySelector('.logo');
+      if(lg && !D.getElementById('k5-hcrumb')){ var cb=D.createElement('button'); cb.type='button'; cb.id='k5-hcrumb'; cb.className='k5-hcrumb'; cb.onclick=function(){ openMenu(); }; lg.parentNode.insertBefore(cb, lg.nextSibling); }
+      var sq=0, same=function(){ sq=0; var p=D.getElementById('pick'), g=D.getElementById('pick-g'), tt=D.getElementById('pick-t'), mn=(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : ''), gs=g ? g.textContent.trim() : '', sm=gs===mn;
+        if(p) p.classList.toggle('k5-same', !!g && sm);
+        var c=D.getElementById('k5-hcrumb'); if(c){ var ts=tt ? tt.textContent.trim() : '', h=(sm||!mn?'':'<span>'+esc(mn)+' ›</span>')+(gs?'<span>'+esc(gs)+' ›</span>':'')+'<b>'+esc(ts)+'</b>';
+          if(c._h!==h){ c._h=h; c.innerHTML=h; c.setAttribute('aria-label', (sm?'':mn+' › ')+(gs?gs+' › ':'')+ts); c.hidden=!ts; } } };
       new MutationObserver(function(){ if(!sq) sq=requestAnimationFrame(same); }).observe(D.body,{childList:true, subtree:true, characterData:true}); same(); }
     try{ if(window.kragrK5Page) window.kragrK5Page(window.kragrK5); }catch(e){ if(window.console) console.error(e); }
     reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
@@ -1461,7 +1478,7 @@ const _trObs = (typeof MutationObserver!=='undefined' && LANG!=='de') ? new Muta
 // Jede Seite hat eine eigene Adresse (#/holzbau/baustoffe/vollholz):
 // Zurück-Taste und Wischgeste des Browsers funktionieren, Seiten lassen sich
 // verlinken und bleiben beim Neuladen erhalten.
-const REF_VERSION = '0.3.84';
+const REF_VERSION = '0.3.85';
 
 // ══════════════════════════════════════════════════
 // DATEN — Holzbau

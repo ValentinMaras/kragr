@@ -312,6 +312,17 @@
   html.k5-pm-on .pick-t { font-size:20px !important; }
   html.k5-pm-on .pick-chev { display:none !important; }
   html.k5-pm-on .pick.open .pick-menu { display:none !important; }
+  /* Rechner: Pfad in der Kopfzeile (Entwurf P1), auf der Seite entfällt die Pfadzeile — beide Spalten oben bündig */
+  .k5-hcrumb { display:none; }
+  @media (min-width:1000px) {
+    html.k5-pm-on .k5-hcrumb { display:flex; align-items:baseline; gap:6px; min-width:0; max-width:56%; margin-left:14px; padding:6px 10px 6px 18px; border:0; border-radius:12px; background:transparent;
+      font:inherit; font-size:14px; font-weight:600; color:#6b6d75; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; position:relative; }
+    html.k5-pm-on .k5-hcrumb::before { content:''; position:absolute; left:0; top:50%; width:1px; height:26px; margin-top:-13px; background:#d5d7dc; }
+    html.k5-pm-on .k5-hcrumb:hover { background:rgba(17,17,20,.04); }
+    html.k5-pm-on .k5-hcrumb b { font-size:18px; font-weight:800; color:#111114; overflow:hidden; text-overflow:ellipsis; }
+    html.k5-pm-on .k5-hcrumb[hidden] { display:none; }
+    html.k5-pm-on .pick { display:none !important; }
+  }
   body.k5-lock { overflow:hidden; }
   /* Zahlenfelder ohne die kleinen Pfeile des Browsers — dafür gibt es − und + daneben; schnelles Tippen auf Knöpfe ohne Doppeltipp-Zoom (18.11.2026) */
   input[type=number] { -moz-appearance:textfield; appearance:textfield; }
@@ -907,7 +918,13 @@ window.kragrK5Page = function(K){
   function init(){
     buildHeader();
     if(PICKM){ window.togglePick=function(e){ if(e && e.stopPropagation) e.stopPropagation(); openMenu(); };   // Pfadzeile oben öffnet das Menü bei der Auswahl
-      var sq=0, same=function(){ sq=0; var p=D.getElementById('pick'), g=D.getElementById('pick-g'); if(p) p.classList.toggle('k5-same', !!g && g.textContent.trim()===(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : '')); };
+      // Am Rechner (ab 1000 px) steht der Pfad in der Kopfzeile neben dem Logo, beide Spalten beginnen bündig (23.11.2026, Entwurf P1)
+      var hd=D.querySelector('.app-header.k-hdr'), lg=hd && hd.querySelector('.logo');
+      if(lg && !D.getElementById('k5-hcrumb')){ var cb=D.createElement('button'); cb.type='button'; cb.id='k5-hcrumb'; cb.className='k5-hcrumb'; cb.onclick=function(){ openMenu(); }; lg.parentNode.insertBefore(cb, lg.nextSibling); }
+      var sq=0, same=function(){ sq=0; var p=D.getElementById('pick'), g=D.getElementById('pick-g'), tt=D.getElementById('pick-t'), mn=(typeof window.kmod==='function' ? window.kmod(PAGE, lang()) : ''), gs=g ? g.textContent.trim() : '', sm=gs===mn;
+        if(p) p.classList.toggle('k5-same', !!g && sm);
+        var c=D.getElementById('k5-hcrumb'); if(c){ var ts=tt ? tt.textContent.trim() : '', h=(sm||!mn?'':'<span>'+esc(mn)+' ›</span>')+(gs?'<span>'+esc(gs)+' ›</span>':'')+'<b>'+esc(ts)+'</b>';
+          if(c._h!==h){ c._h=h; c.innerHTML=h; c.setAttribute('aria-label', (sm?'':mn+' › ')+(gs?gs+' › ':'')+ts); c.hidden=!ts; } } };
       new MutationObserver(function(){ if(!sq) sq=requestAnimationFrame(same); }).observe(D.body,{childList:true, subtree:true, characterData:true}); same(); }
     try{ if(window.kragrK5Page) window.kragrK5Page(window.kragrK5); }catch(e){ if(window.console) console.error(e); }
     reveal('.k5-reveal, main .card, .pick-btn, .k5-card, .results-grid .metric');
@@ -1054,7 +1071,7 @@ window.kragrK5Page = function(K){
 
 <footer class="footer">
   <div class="footer-logo">krag<svg class="logo-r" viewBox="182 12 53 80" aria-hidden="true"><rect x="184" y="50" width="15" height="42" fill="#5468ad"/><rect x="184" y="50" width="45" height="11" rx="2" fill="#5468ad"/><line x1="223" y1="20" x2="223" y2="40" stroke="#5468ad" stroke-width="4"/><path d="M215 37 L223 48 L231 37 Z" fill="#5468ad"/></svg></div>
-  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · Schnittkräfte v0.11.52 · Bemessung v0.7.53 · Wissen v0.3.84 · Rechenblätter v0.1.45</span></div>
+  <div class="footer-meta"><span id="footer-meta">Valentin Maras</span> · <a id="footer-legal" href="rechtliches.html">Legal notice · Privacy</a><span class="fm-ver"> · Schnittkräfte v0.11.53 · Bemessung v0.7.54 · Wissen v0.3.85 · Rechenblätter v0.1.46</span></div>
   <div class="footer-note" id="footer-check">Every calculation path is tested against independent recalculations — currently more than 2,000 automated checks.</div>
   <div class="footer-note" id="footer-note">Learning tool for students — does not replace a checked structural calculation.</div>
 </footer>

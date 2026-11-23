@@ -34,7 +34,7 @@ async def main():
             for f in PAGES:
                 await pg.goto(B+f+'.html'); await pg.wait_for_timeout(300); R[f]=await pg.evaluate(HDR)
             # seit calc v0.11.44 · size v0.7.46: in Schnittkräfte und Bemessung zusätzlich „Rückgängig“ links neben ☰
-            check(f'{W} px: Kopfzeile zeigt nur Logo, ☰ und (in calc/size) Rückgängig/Wiederholen', all(set(r['shown'])<= ({'logo','k5-burger','k5-undo','k5-redo'} if k in ('calc','size') else {'logo','k5-burger'}) and 'k5-burger' in r['shown'] for k,r in R.items()), {k:v['shown'] for k,v in R.items()})
+            check(f'{W} px: Kopfzeile zeigt nur Logo, ☰ und (in calc/size) Rückgängig/Wiederholen', all(set(r['shown'])<= ({'logo','k5-burger','k5-undo','k5-redo','k5-hcrumb'} if k in ('calc','size') else {'logo','k5-burger','k5-hcrumb'} if k=='ref' else {'logo','k5-burger'}) and 'k5-burger' in r['shown'] for k,r in R.items()), {k:v['shown'] for k,v in R.items()})
             check(f'{W} px: ☰ mindestens 44 × 44 px', all(r['w']>=44 and r['h']>=44 for r in R.values()), {k:(v['w'],v['h']) for k,v in R.items()})
             edge=W-max(16 if W<=560 else 24, (W-1180)//2+24)
             check(f'{W} px: ☰ an der rechten Rahmenkante (App-Seiten)', all(abs(R[f]['right']-edge)<=1 for f in PAGES if f!='index'), {k:v['right'] for k,v in R.items()})
@@ -123,7 +123,7 @@ async def main():
         # seit ref v0.3.53: der Seitenkopf sitzt im weißen Lehrbuchblatt (.lb-page)
         r=await pg.evaluate("(()=>{const h=document.querySelector('#main .page-head'), b=h.closest('.lb-page'); const cs=getComputedStyle(b); return [cs.backgroundColor, cs.borderRadius, getComputedStyle(h).flexDirection, h.querySelector('.page-sub').getBoundingClientRect().top < h.querySelector('.page-title').getBoundingClientRect().top]})()")
         check('ref: Seitenkopf im weißen Blatt, Fach · Kapitel als Oberzeile', r[0]=='rgb(255, 255, 255)' and r[1] in ('16px','20px') and r[2:]==['column-reverse',True], r)
-        await pg.click('#pick-btn'); await pg.wait_for_timeout(200)
+        await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(200)
         check('ref (Handy): Pfadzeile oben öffnet das Menü mit der Themenliste (seit 18.11.2026 im Burger-Menü)', await pg.evaluate("document.getElementById('k5-menu').classList.contains('open') && !!document.querySelector('#k5-menu .k5-tree #pick-menu') && document.querySelectorAll('#pick-menu .pick-item').length>100"))
         await pg.keyboard.press('Escape'); await pg.wait_for_timeout(100)
         # rechtliches: Seitenkopf

@@ -24,7 +24,7 @@ async def main():
                     await pg.evaluate(f"scrollTo(0,{y})"); await pg.wait_for_timeout(120); res.append(await pg.evaluate(TOP))
                 check(f'{f} {W} px: Logo und ☰ bleiben beim Scrollen vorne', all(r['logo'] and r['burger'] for r in res), res)
             await pg.goto(B+'calc.html'); await pg.wait_for_timeout(600)
-            await pg.click('#pick'); await pg.wait_for_timeout(400)
+            await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(400)
             o=await pg.evaluate("(()=>{ const m=document.querySelector('.pick-menu'); if(!m) return null; const r=m.getBoundingClientRect(); const t=document.elementFromPoint(r.left+r.width/2, r.bottom-12); return !!(t && m.contains(t)); })()")
             check(f'calc {W} px: geöffnete Systemauswahl liegt über dem Inhalt', o, o)
             await pg.close()

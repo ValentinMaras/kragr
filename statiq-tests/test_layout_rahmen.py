@@ -20,7 +20,9 @@ async def main():
                 m[f]=await pg.evaluate(JS)
             c,s=m['calc.html'],m['size.html']
             check(f'{w} px: Kopfzeile gleich hoch ({c["head"]} / {s["head"]})', c['head']==s['head'])
-            check(f'{w} px: Auswahl gleich gesetzt und gleich breit (wie size in der Eingabespalte)', c['pick']==s['pick'] and c['pick'][0]==c['cinc'][0] and c['pick'][2]==c['cinc'][2], (c['pick'], s['pick'], c['cinc']))   # seit calc v0.11.45 · size v0.7.47: Spalte mit Innenrand und eigenem Scrollbalken
+            # seit 23.11.2026 steht der Pfad am Rechner in der Kopfzeile (Entwurf P1): Auswahl auf der Seite verborgen, beide Spalten oben bündig
+            hc=await pg.evaluate("[document.getElementById('k5-hcrumb').offsetParent!==null, document.getElementById('pick').offsetParent===null]")
+            check(f'{w} px: Pfad in der Kopfzeile, Auswahl auf der Seite verborgen', all(hc), hc)
             check(f'{w} px: Ergebnisspalte beginnt auf gleicher Höhe', abs(c['ctop']-s['ctop'])<=1, (c['ctop'], s['ctop']))
             check(f'{w} px: Eingabe- und Ergebnisspalte gleich breit und gleich gesetzt', c['cin'][0]==s['cin'][0] and c['cin'][2]==s['cin'][2] and c['cout'][0]==s['cout'][0] and c['cout'][2]==s['cout'][2], (c['cin'],s['cin'],c['cout'],s['cout']))
             await pg.close()

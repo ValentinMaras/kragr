@@ -41,7 +41,9 @@ async def main():
         for w in (1280,390):
             await pg.set_viewport_size({'width':w,'height':844}); edges={}
             for f,sel in (('index.html','.module-card'),('calc.html','#pick'),('size.html','#pick'),('ref.html#/','#pick'),('projekt.html','#pick')):
-                await pg.goto(U+f); await pg.wait_for_timeout(450); edges[f]=await pg.evaluate(f"Math.round(document.querySelector('{sel}').getBoundingClientRect().left)")
+                # seit 23.11.2026 ist die Pfadzeile am Rechner in der Kopfzeile: dann zählt die Inhaltskante der ersten Spalte bzw. von #main
+                await pg.goto(U+f); await pg.wait_for_timeout(450); edges[f]=await pg.evaluate(f"""(()=>{{ const e=document.querySelector('{sel}'); if(e && e.offsetParent) return Math.round(e.getBoundingClientRect().left);
+                  const c=[...document.querySelectorAll('.col-in')].find(x=>x.offsetParent) || document.getElementById('main'); return Math.round(c.getBoundingClientRect().left+parseFloat(getComputedStyle(c).paddingLeft)); }})()""")
             check(f'{w} px: Startseite und Apps mit gleicher linker Kante', len(set(edges.values()))==1, edges)
         await pg.set_viewport_size({'width':1280,'height':720})
         # Startseite

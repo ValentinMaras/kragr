@@ -36,7 +36,8 @@ async def main():
         await pg.evaluate("buildPick()"); side=await pg.evaluate(TEXTS, '#pick-menu')
         bad=[x for x in side if german(x) and x!='DE']
         check('EN: Themenmenü (alle Themen) englisch', not bad, bad[:5])
-        check('EN: Startseite englisch', 'Reference' in await pg.inner_text('#main') and 'Choose a topic' in await pg.inner_text('#main'))
+        tx=await pg.inner_text('#main') + ' ' + await pg.evaluate("(document.getElementById('k5-hcrumb')||{getAttribute:()=>''}).getAttribute('aria-label')||''")   # Pfad am Rechner in der Kopfzeile
+        check('EN: Startseite englisch', 'Reference' in tx and 'Choose a topic' in tx, tx[:120])
         done=await pg.evaluate("REF_EN_DONE")
         nde=await pg.evaluate("document.querySelectorAll('.tree-de').length")
         check('EN: alle 10 Fächer übersetzt, kein Hinweis „DE“', len(done)==10 and nde==0, (len(done),nde))

@@ -1,4 +1,4 @@
-# Auswahl im Burger-Menü als Baum (18.11.2026, Vorschlag C): die Auswahlkarte oben ist eine schlichte Pfadzeile
+# Auswahl im Burger-Menü als Baum (18.11.2026, Vorschlag C): die Auswahlkarte oben ist eine schlichte Pfadzeile (am Rechner seit 23.11.2026 in der Kopfzeile)
 # „Modul › Bereich › Thema“; ein Tipp darauf öffnet das Menü. Im Menü sind die Module die Hauptpunkte, das aktuelle Modul ist bis zum
 # Thema aufgeklappt (die Liste der Seite, #pick-menu, wird dafür ausgeliehen), Einstellungen liegen auf einer Unterseite.
 # Andere Module klappen ihre Bereiche aus k5/katalog.js auf und springen erst beim Thema (calc.html#frame:two, size.html#nw=holz/2, ref-Kapitel).
@@ -24,7 +24,13 @@ async def main():
                   const before=getComputedStyle(tx,'::before').content, g=document.getElementById('pick-g').textContent, t=document.getElementById('pick-t').textContent;
                   return {bg:cs.backgroundColor, sh:cs.boxShadow, path:(before.replace(/^"|"$/g,'').replace(/\\\\203A|\\u203a/g,'›')+' '+g+' › '+t).replace(/\\s+/g,' ')}; })()""")
                 check(f'{tag} {f}: Auswahl als schlichte Pfadzeile ohne Kasten „{crumb}“', r['bg'] in ('rgba(0, 0, 0, 0)','transparent') and r['sh']=='none' and r['path'].strip()==crumb, r)
-                await pg.click('#pick-btn'); await pg.wait_for_timeout(300)
+                # Rechner (23.11.2026, Entwurf P1): Pfad in der Kopfzeile neben dem Logo, Pfadzeile auf der Seite entfällt, Spalten oben bündig
+                h=await pg.evaluate("""(()=>{ const c=document.getElementById('k5-hcrumb'), V=s=>[...document.querySelectorAll(s)].find(e=>e.offsetParent), a=V('.col-in'), b=V('.col-out');
+                  const top=x=>x ? Math.round([...x.children].find(e=>e.offsetParent).getBoundingClientRect().top) : null;
+                  return {vis:!!c && c.offsetParent!==null, lab:c && c.getAttribute('aria-label'), pick:document.getElementById('pick').offsetParent!==null, logo:c && c.previousElementSibling && c.previousElementSibling.classList.contains('logo'), tops:[top(a), top(b)]}; })()""")
+                if mob: check(f'{tag} {f}: Pfad bleibt über den Eingaben, nicht in der Kopfzeile', not h['vis'] and h['pick'], h)
+                else: check(f'{tag} {f}: Pfad in der Kopfzeile neben dem Logo, Seite ohne Pfadzeile, Spalten bündig', h['vis'] and h['logo'] and h['lab']==crumb and not h['pick'] and (f=='ref' or (h['tops'][0]==h['tops'][1])), h)
+                await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(300)
                 r=await pg.evaluate(f"""[{OPEN}, !!document.querySelector('#k5-menu .k5-tree #pick-menu'), (document.querySelector('.k5-tree .pick-item.active')||{{}}).textContent, document.querySelectorAll('#pick-menu').length,
                   (document.querySelector('#k5-menu .k5-cur')||{{}}).dataset?.mod, [...document.querySelectorAll('#k5-menu a.k5-mod')].map(a=>a.dataset.mod)]""")
                 check(f'{tag} {f}: Tipp öffnet das Menü; aktuelles Modul aufgeklappt bis zum Thema', r[0] and r[1] and (r[2] or '').strip()==act and r[3]==1 and r[4]==f and f not in r[5] and 'projekt' in r[5], r)
@@ -35,16 +41,16 @@ async def main():
                 await pg.keyboard.press('Escape'); await pg.wait_for_timeout(150)
                 check(f'{tag} {f}: Escape schließt, Liste zurück an der Seite', await pg.evaluate(f"!{OPEN} && !!document.querySelector('#pick > #pick-menu') && document.querySelectorAll('#pick-menu').length===1"))
             # Auswahl treffen
-            await pg.goto(B+'size.html'); await pg.wait_for_timeout(900); await pg.click('#pick-btn'); await pg.wait_for_timeout(200)
+            await pg.goto(B+'size.html'); await pg.wait_for_timeout(900); await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(200)
             await pg.click('.k5-tree .pick-item >> text=Stütze'); await pg.wait_for_timeout(500)
             r=await pg.evaluate(f"[TYP, {OPEN}, document.getElementById('pick-t').textContent, document.querySelectorAll('#pick-menu').length]")
             check(f'{tag} size: Thema wählen stellt um und schließt das Menü', r==['stuetze',False,'Stütze',1], r)
-            await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900); await pg.click('#pick-btn'); await pg.wait_for_timeout(200)
+            await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900); await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(200)
             await pg.click('.k5-tree .pick-item >> text=Durchlaufträger'); await pg.wait_for_timeout(500)
             r=await pg.evaluate(f"[curTab(), {OPEN}, document.getElementById('pick-t').textContent]")
             check(f'{tag} calc: System wählen stellt um und schließt das Menü', r==['cont',False,'Durchlaufträger'], r)
             await pg.evaluate("showTab('beam')")
-            await pg.goto(B+'ref.html#/stahlbeton/baustoffe/kriechen'); await pg.wait_for_timeout(900); await pg.click('#pick-btn'); await pg.wait_for_timeout(200)
+            await pg.goto(B+'ref.html#/stahlbeton/baustoffe/kriechen'); await pg.wait_for_timeout(900); await pg.click('#pick-btn:visible, #k5-hcrumb:visible'); await pg.wait_for_timeout(200)
             await pg.fill('#pick-q','manning'); await pg.wait_for_timeout(200)
             vis=await pg.evaluate("[...document.querySelectorAll('.k5-tree .pick-item')].filter(a=>a.offsetParent).map(a=>a.textContent)")
             check(f'{tag} ref: Suche im Baum filtert die Themen', 0<len(vis)<6, vis)

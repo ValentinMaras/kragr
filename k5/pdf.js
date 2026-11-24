@@ -16,7 +16,21 @@
   const load=src=>new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=base+src; s.onload=ok; s.onerror=()=>no(new Error('load '+src)); document.head.appendChild(s); });
   let libs=null;
   const needLibs=()=> libs || (libs=Promise.all([ window.html2canvas?0:load('html2canvas.min.js'), (window.jspdf&&window.jspdf.jsPDF)?0:load('jspdf.umd.min.js') ]).catch(e=>{ libs=null; throw e; }));
-  const canShareFiles=()=>{ try{ return !!(navigator.canShare && navigator.canShare({files:[new File(['x'],'x.pdf',{type:'application/pdf'})]})); }catch(e){ return false; } };
+  const canShareFiles0=()=>{ try{ return !!(navigator.canShare && navigator.canShare({files:[new File(['x'],'x.pdf',{type:'application/pdf'})]})); }catch(e){ return false; } };
+  // Am Rechner (Maus, kein Touch) nicht über das Teilen-Menü: unter Windows legt „Kopieren“ dort die Datei nicht in die Zwischenablage (24.11.2026).
+  // Stattdessen speichern — mit „Speichern unter“, wo der Browser es kann (Ort frei wählbar, z. B. Desktop), sonst als Download
+  const desk=()=>{ try{ return matchMedia('(hover:hover) and (pointer:fine)').matches; }catch(e){ return false; } };
+  const canShareFiles=()=>!desk() && canShareFiles0();
+  const fileName=name=>name.replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf';
+  async function pickTarget(name){   // vor dem Rechnen aufrufen: der Dialog braucht den frischen Klick
+    if(!desk() || typeof window.showSaveFilePicker!=='function' || navigator.webdriver) return null;
+    try{ return await window.showSaveFilePicker({ suggestedName:fileName(name), types:[{ description:'PDF', accept:{'application/pdf':['.pdf']} }] }); }
+    catch(e){ return e && e.name==='AbortError' ? 'abort' : null; }
+  }
+  async function saveFile(file, h){
+    if(h && h!=='abort'){ try{ const w=await h.createWritable(); await w.write(file); await w.close(); return; }catch(e){} }
+    download(file);
+  }
 
   // Seitenumbrüche: an Unterkanten von Blöcken, nie mitten durch Zeilen, Bilder, Tabellenzeilen oder Schrittköpfe
   const ATOM='svg,img,canvas,tr,li,p,pre,h1,h2,h3,h4,.st-h,.rb-dia,.rb-h,.eq,.eq-l,.eq-r,.figure,figure,.rep-disc,.meta,.rb-note,.rw-figs';
@@ -91,7 +105,7 @@
         if(foot) pdf.text(foot, M, 297-5);
       }
       pdf.setProperties({title:name, creator:'kragr'});
-      return new File([pdf.output('blob')], name.replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf', {type:'application/pdf'});
+      return new File([pdf.output('blob')], fileName(name), {type:'application/pdf'});
     } finally {
       unsvg();
       el.querySelectorAll('[data-kragr-pdf-off]').forEach(e=>{ e.style.display=e.getAttribute('data-kragr-pdf-off'); e.removeAttribute('data-kragr-pdf-off'); if(!e.getAttribute('style')) e.removeAttribute('style'); });
@@ -106,22 +120,25 @@
   }
 
   // Zustand je Knopf: leer → erstellen; fertig → teilen/speichern
-  function label(b){ const st=b._pdf||{}; b.textContent = st.busy ? T('busy') : st.file ? (canShareFiles()?T('share'):T('save')) : T('make'); b.disabled=!!st.busy; b.setAttribute('aria-busy', st.busy?'true':'false'); }
+  function label(b){ const st=b._pdf||{}; b.textContent = st.busy ? T('busy') : desk() ? T('save') : st.file ? (canShareFiles()?T('share'):T('save')) : T('make'); b.disabled=!!st.busy; b.setAttribute('aria-busy', st.busy?'true':'false'); }
   async function click(b){
     const st=b._pdf||(b._pdf={});
     if(st.busy) return;
     const el=document.querySelector(b.getAttribute('data-kragr-pdf')); if(!el) return;
     if(st.file && el.innerHTML.length!==st.at) st.file=null;   // anderer Bericht geöffnet → neu erstellen
+    const name0=(b.getAttribute('data-kragr-pdf-name') || (typeof b.kragrPdfName==='function' && b.kragrPdfName()) || document.title || 'kragr').trim();
+    const h=await pickTarget(st.file ? st.file.name.replace(/\.pdf$/,'') : name0); if(h==='abort') return;
     if(st.file){   // zweiter Tipp: teilen bzw. speichern (frischer Tipp, daher vom Browser erlaubt)
       const f=st.file;
+      if(desk()){ await saveFile(f, h); return; }
       if(canShareFiles()){ try{ await navigator.share({files:[f], title:f.name.replace(/\.pdf$/,'')}); }catch(e){ if(e && e.name!=='AbortError') download(f); } }
       else download(f);
       return; }
-    const name=(b.getAttribute('data-kragr-pdf-name') || (typeof b.kragrPdfName==='function' && b.kragrPdfName()) || document.title || 'kragr').trim();
+    const name=name0;
     st.busy=true; label(b);
     const ov=document.createElement('div'); ov.className='kragr-pdf-ov'; ov.textContent=T('busy'); document.body.appendChild(ov);   // deckt die Seite ab, solange die Druckansicht für die Aufnahme gilt
     try{ st.file=await makePdf(el, name); st.at=el.innerHTML.length;
-      if(!canShareFiles()){ download(st.file); } }   // Rechner: gleich herunterladen
+      if(!canShareFiles()) await saveFile(st.file, h); }   // Rechner: gleich speichern (Ort aus „Speichern unter“ oder Download)
     catch(e){ st.file=null; try{ console.error(e); }catch(_){} alert(T('fail')); }
     finally{ ov.remove(); st.busy=false; label(b); }
   }

@@ -29,14 +29,19 @@ async def main():
         br=await p.chromium.launch(); errs=[]
         # ── Rechner: Download ──
         ctx=await br.new_context(viewport={'width':1280,'height':900}, accept_downloads=True); pg=await ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))
+        await ctx.add_init_script(SHARE)   # Rechner mit Teilen-Funktion (Windows): trotzdem speichern statt Teilen-Menü (24.11.2026)
         await save_sheets(pg)
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(600)
         check('Rechenblätter: kein Druckdialog mehr am Bericht', await pg.evaluate("!document.querySelector('#report-view [onclick*=\"print\"]')"))
         await pg.click('.bl:nth-child(1) button.p'); await pg.wait_for_timeout(500)
-        b=pg.locator('[data-kragr-pdf]'); check('Knopf „PDF erstellen“', await b.inner_text()=='PDF erstellen', await b.inner_text())
+        b=pg.locator('[data-kragr-pdf]'); check('Rechner: Knopf „PDF speichern“ (ein Klick, kein Teilen-Menü)', await b.inner_text()=='PDF speichern', await b.inner_text())
         async with pg.expect_download(timeout=90000) as dl: await b.click()
         d=await dl.value; f=os.path.join(TMP,'t_size.pdf'); await d.save_as(f); ok,n,sz=pdfinfo(f)
         check('Bemessung (Rechenblätter): Download „Pos. 2 Holzträger.pdf“, echte PDF mit Seiten', d.suggested_filename=='Pos. 2 Holzträger.pdf' and ok and n>=2 and sz>50000, (d.suggested_filename, n, sz))
+        check('Rechner: Teilen-Menü nicht geöffnet, obwohl der Browser Dateien teilen kann', await pg.evaluate("window.__shared.length")==0 and await b.inner_text()=='PDF speichern')
+        async with pg.expect_download(timeout=30000) as dl: await b.click()
+        d=await dl.value
+        check('Rechner: zweiter Klick speichert dieselbe Datei erneut (ohne neu zu rechnen)', d.suggested_filename=='Pos. 2 Holzträger.pdf' and await pg.evaluate("window.__shared.length")==0, d.suggested_filename)
         check('Druckansicht bleibt nicht hängen (Stil und Hinweis entfernt)', await pg.evaluate("!document.querySelector('style[data-kragr-pdf-print], .kragr-pdf-ov') && !document.body.classList.contains('kragr-pdf')"))
         await pg.goto(B+'projekt.html'); await pg.wait_for_timeout(500); await pg.click('.bl:nth-child(2) button.p'); await pg.wait_for_timeout(1800)
         b=pg.locator('[data-kragr-pdf]')

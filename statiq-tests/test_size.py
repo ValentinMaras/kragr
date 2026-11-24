@@ -68,10 +68,10 @@ async def main():
         check(f'Rissbreite: wk = {de(wk,3)} mm', f'= {de(wk,3)} mm' in t)
         check('Alle Nachweise erfüllt', 'Alle Nachweise erfüllt' in t)
         # Handeingabe: 3 Ø 20 reicht nicht
-        await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await pg.fill('#in-n','3'); await pg.select_option('#in-ds','20')
+        await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await pg.select_option('#in-lagen','1'); await pg.fill('#in-l1','3'); await pg.select_option('#in-ds','20')
         t=await out()
         check('Hand: 3 Ø 20 → Biegung nicht erfüllt', 'nicht erfüllt' in t and 'As,vorh = 3 Ø 20 = 9,42 cm²' in t)
-        await pg.fill('#in-n','8'); await pg.select_option('#in-ds','25')
+        await pg.select_option('#in-lagen','1'); await pg.fill('#in-l1','8'); await pg.select_option('#in-ds','25')
         t=await out()
         check('Hand: 8 Ø 25 in b = 30 cm → Stabhinweis', 'passen nicht nebeneinander' in t)
         await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.check('#in-auto')
@@ -113,7 +113,7 @@ async def main():
         # ── Unterzug (Plattenbalken) ──
         await pg.fill('#in-h','60'); await pg.evaluate("setTyp('unterzug')"); t=await out()
         check('Unterzug: beff = 300 + 2·1020 = 2340 mm', 'beff = bw + Σ beff,i = 300 + 1020 + 1020 = 2340 mm' in t)
-        await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await pg.fill('#in-n','3'); await pg.select_option('#in-ds','28'); await pg.select_option('#in-dsw','8'); await pg.fill('#in-sw','10')
+        await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await pg.select_option('#in-lagen','1'); await pg.fill('#in-l1','3'); await pg.select_option('#in-ds','28'); await pg.select_option('#in-dsw','8'); await pg.fill('#in-sw','10')
         t=await out(); x,Fc=tsolve(380,548,2340,180,300)
         check(f'Unterzug Feld: Fcd = {de(Fc/1000,1)} kN, As,erf = {de(Fc/fyd/100)} cm² (Referenz)', f'= {de(Fc/1000,1)} kN' in t and f'As,erf = Fcd/fyd = {de(Fc/fyd/100)} cm²' in t and 'Nulllinie in der Platte' in t)
         vEd=0.75*Fc*1020/2340/(180*7500/4)
@@ -124,11 +124,11 @@ async def main():
         check('Auflagertiefe 15 cm: Verankerung nicht erfüllt', 'Verankerungslänge reicht nicht' in t)
         await pg.fill('#in-t','25')
         # Gurt schmal → Nulllinie im Steg
-        await pg.fill('#in-hf','10'); await pg.fill('#in-b1','20'); await pg.fill('#in-b2','20'); await pg.fill('#in-M','500'); await pg.fill('#in-n','4'); await pg.select_option('#in-ds','25')
+        await pg.fill('#in-hf','10'); await pg.fill('#in-b1','20'); await pg.fill('#in-b2','20'); await pg.fill('#in-M','500'); await pg.select_option('#in-lagen','1'); await pg.fill('#in-l1','4'); await pg.select_option('#in-ds','25')
         t=await out(); x,Fc=tsolve(500,552.5,700,100,300)
         check(f'Schmaler Gurt: Nulllinie im Steg, x = {de(x,1)} mm, Fcd = {de(Fc/1000,1)} kN', 'Nulllinie im Steg' in t and f'x = {de(x,1)} mm' in t and f'= {de(Fc/1000,1)} kN' in t)
         # Stützmoment
-        await pg.fill('#in-hf','18'); await pg.fill('#in-b1','135'); await pg.fill('#in-b2','135'); await pg.fill('#in-M','380'); await pg.fill('#in-n','3'); await pg.select_option('#in-ds','28')
+        await pg.fill('#in-hf','18'); await pg.fill('#in-b1','135'); await pg.fill('#in-b2','135'); await pg.fill('#in-M','380'); await pg.select_option('#in-lagen','1'); await pg.fill('#in-l1','3'); await pg.select_option('#in-ds','28')
         await pg.fill('#in-Ms','300'); await pg.fill('#in-nt','9'); await pg.select_option('#in-dst','14'); t=await out()
         mus=300e6/(300*565**2*17); AsT=omega(mus)*300*565*17/fyd
         check(f'Stütze: Rechteck bw, μ = {de(mus,4)}, As,erf = {de(AsT/100)} cm²', f'= {de(mus,4)}' in t and f'dSt·fcd/fyd = {de(AsT/100)} cm²' in t)
@@ -139,7 +139,7 @@ async def main():
         check('Bericht Unterzug: Plattenbalken, Gurtanschluss, Endauflager', 'Unterzug (Plattenbalken)' in r and 'Anschluss Gurt' in r and 'Endauflager' in r)
         await pg.click('text=Zurück zur Eingabe'); await pg.fill('#in-Ms','0')
         # ── v0.1.2: Rissbreite über der Stütze ──
-        await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await pg.fill('#in-n','3'); await pg.select_option('#in-ds','28'); await pg.select_option('#in-dsw','8'); await pg.fill('#in-sw','10')
+        await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await pg.select_option('#in-lagen','1'); await pg.fill('#in-l1','3'); await pg.select_option('#in-ds','28'); await pg.select_option('#in-dsw','8'); await pg.fill('#in-sw','10')
         await pg.fill('#in-Ms','300'); await pg.fill('#in-nt','9'); await pg.select_option('#in-dst','14'); await pg.fill('#in-Mqps','150'); t=await out()
         AsT=9*math.pi*14**2/4; dt=565.0; aeR=200000/33000; rr=AsT/(300*dt); xs=(-aeR*rr+math.sqrt((aeR*rr)**2+2*aeR*rr))*dt; zs=dt-xs/3; sss=150e6/(AsT*zs)
         hces=min(2.5*(600-dt),(600-xs)/3,300); rps=AsT/(1200*hces); srs=min(14/(3.6*rps), sss*14/(3.6*2.9))

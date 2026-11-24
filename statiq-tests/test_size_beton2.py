@@ -65,9 +65,9 @@ async def main():
 
         # ── Druckbewehrung: b/h = 30/45, M = 330 kNm, von Hand 5 Ø 25 unten, 2 Ø 20 oben, Bügel Ø10 ──
         await pg.evaluate("document.querySelectorAll('.fold').forEach(c=>c.classList.remove('closed'))"); await pg.uncheck('#in-auto'); await setv('in-h',45); await setv('in-M',330)
-        await setv('in-n',5); await sel('in-ds',25); await sel('in-dsw',10); await setv('in-sw',15); await setv('in-n2',2); await sel('in-ds2',20)
+        await sel('in-lagen',1); await setv('in-l1',5); await sel('in-ds',25); await sel('in-dsw',10); await setv('in-sw',15); await setv('in-n2',2); await sel('in-ds2',20)
         await pg.wait_for_timeout(400)
-        if await pg.evaluate("document.getElementById('in-n').value")!='5': await setv('in-n',5); await pg.wait_for_timeout(300)   # Stepper hängte gelegentlich an („55“)
+        if await pg.evaluate("document.getElementById('in-n').value")!='5': await sel('in-lagen',1); await setv('in-l1',5); await pg.wait_for_timeout(300)   # Stepper hängte gelegentlich an („55“)
         await pg.evaluate('run()'); await pg.wait_for_timeout(100); t=await txt()   # verzögerte Neuberechnung aus den Eingaben abwarten (war gelegentlich zu früh)
         aR,ka=block(0.45); xi=0.45; d=450-25-10-12.5; d2=20+10+10; fc=fcd(30)
         mul=aR*xi*(1-ka*xi); MRl=mul*300*d*d*fc/1e6; dM=330-MRl; x=xi*d; es2=3.5*(x-d2)/x; s2=min(Es*es2/1000,fyd)

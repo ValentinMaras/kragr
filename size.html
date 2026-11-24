@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr·size v0.7.56 -->
+<!-- kragr·size v0.7.57 -->
 <html lang="de" data-kpage="size">
 <head>
   <meta charset="UTF-8" />
@@ -1896,9 +1896,13 @@ window.kragrK5Page = function(K){
       <div class="card-title" data-i18n="z061">Bewehrung</div>
       <label class="check" style="margin-bottom:10px"><input type="checkbox" id="in-auto" checked onchange="run()"> <span data-i18n="z480">automatisch wählen</span></label>
       <div class="grid2" id="reinf-balken">
-        <div class="field"><label data-i18n="z062">Anzahl Längsstäbe</label><input type="number" step="1" id="in-n" value="4" oninput="run()"></div>
+        <div class="field"><label data-i18n="zl1">Bewehrungslagen</label><select id="in-lagen" onchange="lagenSet()"><option value="1" selected data-i18n="zl2">eine Lage</option><option value="2" data-i18n="zl3">zwei Lagen</option><option value="3" data-i18n="zl4">drei Lagen</option></select></div>
         <div class="field"><label data-i18n="z041">Ø Längsstab [mm]</label><select id="in-ds" onchange="run()"></select></div>
-        <div class="field full"><label data-i18n="z064">davon in der 2. Lage: Anzahl (0 = eine Lage)</label><input type="number" step="1" min="0" id="in-nl2" value="0" oninput="run()"></div>
+        <div class="field"><label data-i18n="zl5">Stäbe in Lage 1 (unten)</label><input type="number" step="1" min="2" id="in-l1" value="4" oninput="lagenSet()"></div>
+        <div class="field lg2"><label data-i18n="zl6">Stäbe in Lage 2</label><input type="number" step="1" min="1" id="in-l2" value="2" oninput="lagenSet()"></div>
+        <div class="field lg3"><label data-i18n="zl7">Stäbe in Lage 3</label><input type="number" step="1" min="1" id="in-l3" value="2" oninput="lagenSet()"></div>
+        <div class="field full hint" id="in-nsum"></div>
+        <div hidden><input type="number" id="in-n" value="4"><input type="number" id="in-nl2" value="0"><input type="number" id="in-nl3" value="0"></div>   <!-- Modell: Gesamtzahl, davon in Lage 2 und 3 (size v0.7.57) -->
         <div class="field"><label data-i18n="z042">Ø Bügel [mm]</label><select id="in-dsw" onchange="run()"></select></div>
         <div class="field"><label data-i18n="z066">Bügelabstand s<sub>w</sub> [cm]</label><input type="number" step="any" id="in-sw" value="20" oninput="run()"></div>
         <div class="field dz-only"><label data-i18n="z067">Feld oben: Anzahl (Druck-/Montagestäbe)</label><input type="number" step="1" id="in-n2" value="2" oninput="run()"></div>
@@ -1912,7 +1916,7 @@ window.kragrK5Page = function(K){
         <div class="field top-only"><label data-i18n="z070">Stütze oben: Ø [mm]</label><select id="in-dspt" onchange="run()"></select></div>
         <div class="field top-only"><label data-i18n="z074">Stütze oben: s [cm]</label><input type="number" step="any" id="in-st" value="15" oninput="run()"></div>
       </div>
-      <div class="hint"><span id="hint-balken" data-i18n="z075">Balken und Unterzug: zweischnittige Bügel, Feldbewehrung einlagig im Steg; die Stützbewehrung eines Unterzugs liegt über b<sub>eff</sub> verteilt in der Platte. </span><span data-i18n="z484">Bei „automatisch“ wird die Bewehrung mit der kleinsten
+      <div class="hint"><span id="hint-balken" data-i18n="z075">Balken und Unterzug: zweischnittige Bügel, Feldbewehrung im Steg in einer bis drei Lagen (gleicher Ø, Stäbe lotrecht übereinander); die Stützbewehrung eines Unterzugs liegt über b<sub>eff</sub> verteilt in der Platte. </span><span data-i18n="z484">Bei „automatisch“ wird die Bewehrung mit der kleinsten
         Querschnittsfläche gewählt, die Biegung, Stababstände und Rissbreite erfüllt.</span></div>
     </div>
     </div>
@@ -3217,8 +3221,13 @@ const I18N = { "de": {
 "z059":"Haken / Winkelhaken",
 "z060":"Direkte Lagerung: Die Verankerung beginnt an der Auflagervorderkante. Indirekte Lagerung: Der Träger hängt in einem anderen Träger\n        und braucht dort eine Aufhängebewehrung; die Verankerung liegt in dessen Breite. Haken dürfen mit α₁ = 0,7 angesetzt werden, wenn die Betondeckung\n        senkrecht zur Krümmungsebene ≥ 3·Ø ist.",
 "z061":"Bewehrung",
-"z062":"Anzahl Längsstäbe",
-"z064":"davon in der 2. Lage: Anzahl (0 = eine Lage)",
+"zl1":"Bewehrungslagen",
+"zl2":"eine Lage",
+"zl3":"zwei Lagen",
+"zl4":"drei Lagen",
+"zl5":"Stäbe in Lage 1 (unten)",
+"zl6":"Stäbe in Lage 2",
+"zl7":"Stäbe in Lage 3",
 "z066":"Bügelabstand s<sub>w</sub> [cm]",
 "z067":"Feld oben: Anzahl (Druck-/Montagestäbe)",
 "z068":"Feld oben: Ø [mm]",
@@ -3226,7 +3235,7 @@ const I18N = { "de": {
 "z070":"Stütze oben: Ø [mm]",
 "z072":"Stababstand s [cm]",
 "z074":"Stütze oben: s [cm]",
-"z075":"Balken und Unterzug: zweischnittige Bügel, Feldbewehrung einlagig im Steg; die Stützbewehrung eines Unterzugs liegt über b<sub>eff</sub> verteilt in der Platte.",
+"z075":"Balken und Unterzug: zweischnittige Bügel, Feldbewehrung im Steg in einer bis drei Lagen (gleicher Ø, Stäbe lotrecht übereinander); die Stützbewehrung eines Unterzugs liegt über b<sub>eff</sub> verteilt in der Platte.",
 "z077":"Anschluss",
 "z078":"Profil und Werkstoff",
 "z082":"Stahlsorte",
@@ -4357,7 +4366,7 @@ function fitSvgText(root=document){
 if(LANG!=='de'){ let _fitP=0; const _fitMO=new MutationObserver(()=>{ if(_fitP) return; _fitP=requestAnimationFrame(()=>{ _fitP=0; fitSvgText(); }); });
   const _fitGo=()=>_fitMO.observe(document.body,{childList:true,subtree:true,characterData:true}); document.body ? _fitGo() : document.addEventListener('DOMContentLoaded',_fitGo); }
 
-const SIZE_VERSION = '0.7.56';
+const SIZE_VERSION = '0.7.57';
 document.getElementById('ver').textContent = 'v' + SIZE_VERSION;
 
 // ══════════════════════════════════════════════════
@@ -4533,7 +4542,7 @@ function readInput(){
     M: num('in-M'), V: num('in-V'), Mqp: num('in-Mqp'), Ms: num('in-Ms')||0, Mqps: num('in-Mqps')||0, zwang: $('in-zwang').checked,
     aufl: $('in-aufl').checked, ind: $('in-lager').value==='ind', t: num('in-t'), a1: +$('in-haken').value,
     auto: $('in-auto').checked,
-    n: Math.round(num('in-n')), nl2: Math.max(0, Math.round(num('in-nl2'))||0), ds: +$('in-ds').value, dsw: +$('in-dsw').value, sw: num('in-sw'),
+    n: Math.round(num('in-n')), nl2: Math.max(0, Math.round(num('in-nl2'))||0), nl3: Math.max(0, Math.round(num('in-nl3'))||0), ds: +$('in-ds').value, dsw: +$('in-dsw').value, sw: num('in-sw'),
     nt: Math.round(num('in-nt')), dst: +$('in-dst').value, n2: Math.round(num('in-n2')), ds2: +$('in-ds2').value,
     dsp: +$('in-dsp').value, s: num('in-s'), dspt: +$('in-dspt').value, st: num('in-st'),
   };
@@ -4547,7 +4556,7 @@ function validate(I){
   if(I.typ==='unterzug'){ if(!(I.hf>0 && I.hf<I.h)) bad.push(tt('Plattendicke 0 < h_f < h')); if(!(I.b1>=0 && I.b2>=0)) bad.push(tt('Plattenbreiten b₁, b₂ ≥ 0')); }
   if(I.aufl && !(I.t>0)) bad.push(tt('Auflagertiefe'));
   if(!I.auto){
-    if(isStab(I)){ if(!(I.n>=2)) bad.push(tt('mindestens 2 Längsstäbe')); if(I.nl2>0 && !(I.n-I.nl2>=2 && I.nl2<=I.n-I.nl2)) bad.push(tt('2. Lage: höchstens so viele Stäbe wie in der 1. Lage, unten mindestens 2')); if(I.typ==='balken' && !(I.n2>=2)) bad.push(tt('mindestens 2 Stäbe oben im Feld')); if(!(I.sw>0)) bad.push(tt('Bügelabstand')); if(I.Ms>0 && !(I.nt>=2)) bad.push(tt('mindestens 2 Stäbe oben')); }
+    if(isStab(I)){ if(!(I.n>=2)) bad.push(tt('mindestens 2 Längsstäbe')); if((I.nl2>0 || I.nl3>0) && !(I.n-I.nl2-I.nl3>=2 && I.nl2<=I.n-I.nl2-I.nl3)) bad.push(tt('2. Lage: höchstens so viele Stäbe wie in der 1. Lage, unten mindestens 2')); if(I.nl3>0 && !(I.nl2>=I.nl3)) bad.push(tt('3. Lage: höchstens so viele Stäbe wie in der 2. Lage')); if(I.typ==='balken' && !(I.n2>=2)) bad.push(tt('mindestens 2 Stäbe oben im Feld')); if(!(I.sw>0)) bad.push(tt('Bügelabstand')); if(I.Ms>0 && !(I.nt>=2)) bad.push(tt('mindestens 2 Stäbe oben')); }
     else { if(!(I.s>0)) bad.push(tt('Stababstand')); if(I.Ms>0 && !(I.st>0)) bad.push(tt('Stababstand oben')); }
   }
   return bad;
@@ -4617,9 +4626,10 @@ function geometrie(I, R){
   const dsw=R.dsw, cw=deckung(I.expo, dsw), cl=deckung(I.expo, ds), ct=deckung(I.expo, dst);
   const cv = Math.max(cw.cnom, cl.cnom - dsw);                    // Verlegemaß Bügel unten
   const cvt = Math.max(cw.cnom, ct.cnom - dsw);                   // oben
-  // zwei Lagen: m Stäbe der n liegen in der 2. Lage, lichter Lagenabstand a_v = max(Ø; d_g + 5; 20) (EN 1992-1-1, 8.2)
-  const m = R.nl2>0 ? R.nl2 : 0, av = Math.max(ds, (I.dg||16)+5, 20), d1 = h - cv - dsw - ds/2, d = d1 - (m>0 ? m/R.n*(ds+av) : 0);
-  return { b, h, cw, cl, ct, cv, cvl: cv+dsw, d, d1, m, av, cvt, dt: h - cvt - dsw - dst/2 };
+  // mehrere Lagen: m2 Stäbe der n in der 2. Lage, m3 in der 3. (size v0.7.57); lichter Lagenabstand a_v = max(Ø; d_g + 5; 20) (EN 1992-1-1, 8.2)
+  // d bis zum Schwerpunkt aller Stäbe (gleiche Ø): Lage k liegt (k − 1)·(Ø + a_v) über der 1. Lage
+  const m2 = R.nl2>0 ? R.nl2 : 0, m3 = m2>0 && R.nl3>0 ? R.nl3 : 0, m = m2 + m3, av = Math.max(ds, (I.dg||16)+5, 20), d1 = h - cv - dsw - ds/2, d = d1 - (m>0 ? (m2 + 2*m3)/R.n*(ds+av) : 0);
+  return { b, h, cw, cl, ct, cv, cvl: cv+dsw, d, d1, m, m2, m3, av, cvt, dt: h - cvt - dsw - dst/2 };
 }
 
 // ══════════════════════════════════════════════════
@@ -4655,10 +4665,11 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
          _L`Verlegemaß Bügel c<sub>v</sub> = max(${G.cw.cnom}; ${G.cl.cnom-R.dsw}) = <b>${G.cv} mm</b>`];
     st.push(H(tt('Statische Nutzhöhe: Abstand vom gedrückten Rand bis zur Mitte der Zugbewehrung')));
     if(G.m>0){
-      st.push(_L`Bewehrung in zwei Lagen: ${R.n-G.m} Stäbe in der 1. Lage, ${G.m} in der 2. Lage darüber`);
+      st.push(G.m3>0 ? _L`Bewehrung in drei Lagen: ${R.n-G.m} Stäbe in der 1. Lage, ${G.m2} in der 2., ${G.m3} in der 3. Lage darüber` : _L`Bewehrung in zwei Lagen: ${R.n-G.m} Stäbe in der 1. Lage, ${G.m} in der 2. Lage darüber`);
       st.push(_L`1. Lage: d<sub>1</sub> = h − c<sub>v</sub> − Ø<sub>w</sub> − Ø/2 = ${h} − ${G.cv} − ${R.dsw} − ${deNum(R.ds/2,1)} = ${deNum(G.d1,1)} mm`);
       st.push(_L`lichter Lagenabstand a<sub>v</sub> = max(Ø; d<sub>g</sub> + 5; 20) = max(${R.ds}; ${I.dg+5}; 20) = ${deNum(G.av,0)} mm → Achsabstand der Lagen Ø + a<sub>v</sub> = ${deNum(R.ds+G.av,0)} mm`);
-      st.push(_L`Nutzhöhe bis zum Schwerpunkt beider Lagen (gleiche Ø): d = d<sub>1</sub> − ${G.m}/${R.n}·(Ø + a<sub>v</sub>) = ${deNum(G.d1,1)} − ${deNum(G.m/R.n*(R.ds+G.av),1)} = <b>${deNum(d,1)} mm</b>`);
+      st.push(G.m3>0 ? _L`Nutzhöhe bis zum Schwerpunkt aller Lagen (gleiche Ø): d = d<sub>1</sub> − (n<sub>2</sub> + 2·n<sub>3</sub>)/n·(Ø + a<sub>v</sub>) = ${deNum(G.d1,1)} − (${G.m2} + 2·${G.m3})/${R.n}·${deNum(R.ds+G.av,0)} = <b>${deNum(d,1)} mm</b>`
+        : _L`Nutzhöhe bis zum Schwerpunkt beider Lagen (gleiche Ø): d = d<sub>1</sub> − ${G.m}/${R.n}·(Ø + a<sub>v</sub>) = ${deNum(G.d1,1)} − ${deNum(G.m/R.n*(R.ds+G.av),1)} = <b>${deNum(d,1)} mm</b>`);
     } else
     st.push(`d = h − c<sub>v</sub>${platte?'':' − Ø<sub>w</sub>'} − Ø/2 = ${h} − ${G.cv}${platte?'':' − '+R.dsw} − ${deNum(R.ds/2,1)} = <b>${deNum(d,1)} mm</b>`);
     if(I.Ms>0) st.push(_L`oben (Stütze, Ø${R.dst}): d<sub>St</sub> = h − ${G.cvt}${platte?'':' − '+R.dsw} − ${deNum(R.dst/2,1)} = <b>${deNum(G.dt,1)} mm</b>`);
@@ -4696,7 +4707,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
     const ES = naV('asmin','')==='es', fctfl = Math.max((1.6-h/1000)*fctm, fctm); let WES=0;
     const asMinES = W => { WES=W; return W/(0.8*h)*fctfl/SB.fyd; };
     const asMinTxt = (bt, deTxt) => ES ? _L`A<sub>s,min</sub> = W/(0,8·h)·f<sub>ctm,fl</sub>/f<sub>yd</sub> = ${deNum(WES/1e6,2)}·10⁶/(0,8·${h})·${deNum(fctfl,2)}/${deNum(SB.fyd,1)} = ${deNum(Asmin/100)} cm²${unit} (UNE-EN 1992-1-1/AN, 9.2.1.1; f<sub>ctm,fl</sub> = max((1,6 − h/1000)·f<sub>ctm</sub>; f<sub>ctm</sub>))` : AT ? _L`A<sub>s,min</sub> = max(0,26·f<sub>ctm</sub>/f<sub>yk</sub>; 0,0013)·b<sub>t</sub>·d = max(${deNum(0.26*fctm/SB.fyk,5)}; 0,0013)·${bt}·${deNum(d,1)} = ${deNum(Asmin/100)} cm²${unit} (EN 1992-1-1, 9.2.1.1)` : deTxt;
-    let note='', eta;
+    let note='', eta, xL=0, ecL=3.5;   // xL, ecL: Nulllinie und Randstauchung für die oberste Lage (drei Lagen)
     if(uz){
       const T=tSection(BF.beff, hf, b, h);
       Asmin = ES ? asMinES(T.Wu) : AT ? asMinEN(b) : fctm*T.Wu/(SB.fyk*0.9*d); Asmax = 0.08*T.A;
@@ -4710,7 +4721,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
         S.push(BQ ? `ξ = x/d = ${deNum(BQ.s.xi,3)} > 0,45` : tt('Die Druckzone kann das Moment nicht aufnehmen.'));
         note=tt('Druckzone überlastet: Querschnitt vergrößern oder höhere Betonklasse wählen.'); eta = BQ ? BQ.s.xi/XI_LIM : 9.99; AsErf = Asmin;
       } else {
-        const AsB = BQ.Fc/SB.fyd; AsErf=Math.max(AsB, Asmin);
+        const AsB = BQ.Fc/SB.fyd; AsErf=Math.max(AsB, Asmin); xL=BQ.x; ecL=BQ.s.ec;
         S.push(_L`ε<sub>c</sub> = −${deNum(BQ.s.ec,2)} ‰ (Beton oben), ε<sub>s</sub> = ${deNum(BQ.s.es,1)} ‰ (Stahl)`);
         S.push(`→ x = ${deNum(BQ.x,1)} mm ${BQ.x<=hf?'≤':'>'} h<sub>f</sub> = ${hf} mm (${BQ.x<=hf?tt('Nulllinie in der Platte'):tt('Nulllinie im Steg')})`);
         S.push(`ξ = x/d = ${deNum(BQ.s.xi,3)} ≤ 0,45 (ausreichend duktil)`);
@@ -4732,7 +4743,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       S.push(`μ<sub>Eds</sub> = M<sub>Ed</sub> / (b·d²·f<sub>cd</sub>) = ${deNum(I.M,1)}·10⁶ / (${b}·${deNum(d,1)}²·${deNum(fcd)}) = <b>${deNum(mu,4)}</b>`);
       if((!st || mu>MU_LIM) && I.typ==='balken'){
         // Druckbewehrung: Beton bis ξ_lim ausnutzen, Restmoment ΔM über das Stahlpaar A_s2 / zusätzliches A_s1
-        const sl = biegeAusMu(MU_LIM), x = XI_LIM*d, n2 = R.n2||2, ds2 = R.ds2||12;
+        const sl = biegeAusMu(MU_LIM), x = XI_LIM*d, n2 = R.n2||2, ds2 = R.ds2||12; xL=x; ecL=3.5;
         const c2 = Math.max(G.cw.cnom, deckung(I.expo, ds2).cnom - R.dsw), d2 = c2 + R.dsw + ds2/2;
         const MRlim = MU_LIM*b*d*d*fcd/1e6, dM = I.M - MRlim;
         const es2 = 3.5*(x-d2)/x, ss2 = Math.min(SB.Es*es2/1000, SB.fyd);
@@ -4765,7 +4776,7 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
         note = tt('Die Druckzone reicht nicht. Querschnitt vergrößern oder höhere Betonklasse wählen (Druckbewehrung ist für Platten und Plattenbalken nicht vorgesehen).');
         eta = mu/MU_LIM;
       } else {
-        const AsB = st.omega*b*d*fcd/SB.fyd; AsErf = Math.max(AsB, Asmin);
+        const AsB = st.omega*b*d*fcd/SB.fyd; AsErf = Math.max(AsB, Asmin); xL=st.xi*d; ecL=st.ec;
         S.push(_L`μ<sub>Eds</sub> ≤ μ<sub>lim</sub> = ${deNum(MU_LIM,3)} → keine Druckbewehrung nötig`);
         S.push(H(tt('Ablesen aus der Bemessungstabelle (ω-Verfahren, Parabel-Rechteck)')));
         S.push(`ω = ${deNum(st.omega,4)}`);
@@ -4780,6 +4791,13 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
         S.push(_L`A<sub>s,vorh</sub> = ${platte?`Ø${R.ds}/${deNum(R.s/10,1)} cm`:`${R.n} Ø ${R.ds}`} = <b>${deNum(As/100)} cm²${unit}</b> ≥ ${deNum(AsErf/100)} cm²${unit}`);
         eta = AsErf/As;
       }
+    }
+    if(G.m3>0 && xL>0){   // drei Lagen (size v0.7.57): fließt die oberste Lage noch? Sonst ist „alle Stäbe mit f_yd im Schwerpunkt“ zu günstig
+      const d3 = G.d1 - 2*(R.ds+G.av), es3 = ecL*(d3-xL)/xL, fl = es3>=SB.eyd;
+      S.push(H(tt('Oberste Lage: fließt der Stahl dort noch? (Dehnung linear über die Höhe)')));
+      S.push(_L`d<sub>3</sub> = d<sub>1</sub> − 2·(Ø + a<sub>v</sub>) = ${deNum(G.d1,1)} − 2·${deNum(R.ds+G.av,0)} = ${deNum(d3,1)} mm`);
+      S.push(_L`ε<sub>s3</sub> = ε<sub>c</sub>·(d<sub>3</sub> − x)/x = ${deNum(ecL,2)}·(${deNum(d3,1)} − ${deNum(xL,1)})/${deNum(xL,1)} = ${deNum(es3,2)} ‰ ${fl?'≥':'<'} ε<sub>yd</sub> = ${deNum(SB.eyd,2)} ‰ ${fl?'✓':'✗'}`);
+      if(!fl) note = (note ? note+' ' : '') + tt('Die oberste Lage liegt nahe an der Nulllinie und fließt nicht (ε<sub>s3</sub> < ε<sub>yd</sub>). Alle Stäbe mit f<sub>yd</sub> im Schwerpunkt anzusetzen liegt hier auf der unsicheren Seite: weniger Lagen, breiteren oder höheren Querschnitt wählen.');
     }
     if(As + (DZ?DZ.As2:0) > Asmax){ eta = Math.max(eta, (As + (DZ?DZ.As2:0))/Asmax); note = `A<sub>s</sub> > 0,08·A<sub>c</sub> = ${deNum(Asmax/100)} cm².`; }
     C.push({ id:'biegung', title: uz ? tt('Biegung im Feld — Plattenbalken (GZT)') : tt('Biegung im Feld (GZT)'), eta, ok: eta<=1, steps:S, note, naBlock: !!G.cl.naMiss });
@@ -4811,7 +4829,9 @@ function nachweise(I, R){   // R: { ds, n | s, dsw, sw, dst, nt | st }
       eta = a>0 ? amin/a : 9.99;
       if(G.m>0){
         S.push(H(tt('2. Lage: Stäbe lotrecht über denen der 1. Lage, damit Rüttelgassen frei bleiben')));
-        S.push(_L`${G.m} Stäbe in der 2. Lage ≤ ${n1} Stäbe in der 1. Lage ✓ · waagerechter Abstand dort ≥ a`);
+        S.push(_L`${G.m2} Stäbe in der 2. Lage ≤ ${n1} Stäbe in der 1. Lage ✓ · waagerechter Abstand dort ≥ a`);
+        if(G.m3>0){ S.push(H(tt('3. Lage: Stäbe lotrecht über denen der 2. Lage')));
+          S.push(_L`${G.m3} Stäbe in der 3. Lage ≤ ${G.m2} Stäbe in der 2. Lage ✓`); }
         S.push(_L`lotrechter lichter Abstand der Lagen a<sub>v</sub> = ${deNum(G.av,0)} mm ≥ a<sub>min</sub> = ${amin} mm ✓ (über Abstandhalter, z. B. Ø${Math.max(R.ds,20)}-Querstäbe)`);
       }
       if(a<amin) note = G.m>0 ? tt('Die Stäbe der 1. Lage passen nicht nebeneinander. Mehr Stäbe in die 2. Lage, größeren Durchmesser oder breiteren Querschnitt wählen.') : tt('Die Stäbe passen nicht nebeneinander. Größeren Durchmesser mit weniger Stäben, zweite Lage oder breiteren Querschnitt wählen.');
@@ -5147,14 +5167,21 @@ function autoBewehrung(I){
   const platte = I.typ==='platte';
   const bottom = [];
   if(platte){ const smax=smaxPlatte(I.h*10); for(const ds of DS_P) for(const s of [250,225,200,175,150,125,100,75]) if(s<=smax) bottom.push({ ds, s }); }
-  else for(const ds of DS_L) for(let n=2;n<=8;n++) bottom.push({ ds, n, nl2:0 });
+  else for(const ds of DS_L) for(let n=2;n<=8;n++) bottom.push({ ds, n, nl2:0, nl3:0 });
   const area = c => platte ? areaBar(c.ds)*1000/c.s : c.n*areaBar(c.ds);
   bottom.sort((a,b)=> area(a)-area(b) || (a.n||0)-(b.n||0));
   // zweite Lage nur, wenn eine Lage nicht reicht: n Stäbe, davon m oben (m ≤ n − m), vorab grob auf Platz geprüft (Bügel Ø8)
   const bottom2 = [];
   if(!platte){ const G0 = geometrie(I, { ds:10, dsw:8, dst:16 }), bi = I.b*10 - 2*G0.cv - 16;
-    for(const ds of DS_L) for(let n=4;n<=14;n++) for(let m=2;m<=n/2;m++){ const n1=n-m; if((bi-n1*ds)/(n1-1) >= Math.max(ds, I.dg+5, 20)) bottom2.push({ ds, n, nl2:m }); }
+    for(const ds of DS_L) for(let n=4;n<=14;n++) for(let m=2;m<=n/2;m++){ const n1=n-m; if((bi-n1*ds)/(n1-1) >= Math.max(ds, I.dg+5, 20)) bottom2.push({ ds, n, nl2:m, nl3:0 }); }
     bottom2.sort((a,b)=> area(a)-area(b) || a.nl2-b.nl2); }
+  // dritte Lage erst, wenn zwei nicht reichen (size v0.7.57): untere Lagen voll (so viele Stäbe, wie in eine Lage passen), Rest 2 … n1 in Lage 3.
+  // Je Ø und Stabzahl nur diese Verteilung (größtes d) — hält die Suche kurz, wenn nichts passt
+  const bottom3 = [];
+  if(!platte){ const G0 = geometrie(I, { ds:10, dsw:8, dst:16 }), bi = I.b*10 - 2*G0.cv - 16;
+    for(const ds of DS_L){ let n1=0; for(let k=2;k<=8;k++) if((bi-k*ds)/(k-1) >= Math.max(ds, I.dg+5, 20)) n1=k;
+      if(n1>=2) for(let m3=2;m3<=n1;m3++) bottom3.push({ ds, n:2*n1+m3, nl2:n1, nl3:m3 }); }
+    bottom3.sort((a,b)=> area(a)-area(b) || a.nl3-b.nl3); }
   const base = platte ? { dst:10, st:150 } : { dsw:8, sw:20, dst:16, nt:2, ...(I.typ==='balken'?{n2:2, ds2:12}:{}) };
   const Inob = {...I, Ms:0};                       // Feld zuerst ohne Stütze
   const pick = ids => { for(const c of bottom){ const r={...base, ...c}; if(!platte) stirrups(Inob, r);
@@ -5162,7 +5189,8 @@ function autoBewehrung(I){
     if(res.DZ && res.DZ.As2E > res.DZ.As2 && isFinite(res.DZ.As2E)){ const t = topDruck(res.DZ.As2E, I.b*10, r); if(t){ Object.assign(r, t); stirrups(Inob, r); res = nachweise(Inob, r); } }
     if(okIds(res, ids)) return r; } return null; };
   const pick2 = ids => { const keep=bottom.splice(0, bottom.length, ...bottom2); const r=pick(ids); bottom.splice(0, bottom.length, ...keep); return r; };
-  const both = ids => pick(ids) || pick2(ids);
+  const pick3 = ids => { const keep=bottom.splice(0, bottom.length, ...bottom3); const r=pick(ids); bottom.splice(0, bottom.length, ...keep); return r; };
+  const both = ids => pick(ids) || pick2(ids) || pick3(ids);
   let R = both(['biegung','regeln','riss','auflager']) || both(['biegung','regeln','riss']) || both(['biegung','regeln']) || {...base, ...bottom[bottom.length-1]};
   if(!platte && !R.dsw) stirrups(Inob, R);
   if(I.Ms>0) R = topBewehrung(I, R);
@@ -5264,7 +5292,9 @@ function figQuerschnitt(I, res){
     const xi = i => n1===1 ? (xs+xe)/2 : xs+(xe-xs)*i/(n1-1);
     for(let i=0;i<n1;i++) s+=`<circle cx="${xi(i)}" cy="${yb1}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`;
     if(m>0){ const y2 = yb1 - (R.ds+res.G.av)*sc;
-      for(let j=0;j<m;j++){ const i = m===1 ? Math.round((n1-1)/2) : Math.round(j*(n1-1)/(m-1)); s+=`<circle cx="${xi(i)}" cy="${y2}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`; }
+      const m2=res.G.m2||m, m3=res.G.m3||0, i2 = j => m2===1 ? Math.round((n1-1)/2) : Math.round(j*(n1-1)/(m2-1));
+      for(let j=0;j<m2;j++) s+=`<circle cx="${xi(i2(j))}" cy="${y2}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`;
+      for(let k=0;k<m3;k++){ const j = m3===1 ? Math.round((m2-1)/2) : Math.round(k*(m2-1)/(m3-1)); s+=`<circle cx="${xi(i2(j))}" cy="${y2-(R.ds+res.G.av)*sc}" r="${Math.max(2.2, R.ds/2*sc)}" fill="#111"/>`; }
       s+=`<line x1="${xw+2}" y1="${yb}" x2="${xw+bw-2}" y2="${yb}" stroke="${C_IN}" stroke-width="0.8" stroke-dasharray="2 2"/>`+svgT(xw+bw+4, yb+3, 'S', 'start', C_IN, 8.5); }
     const yt = y0 + (h-res.G.dt)*sc;
     if(I.Ms>0){
@@ -5315,7 +5345,7 @@ function figQuerschnitt(I, res){
 function reinfText(I, R, dz){
   if(I.typ==='platte') return _L`unten Ø${R.ds}/${deNum(R.s/10,1)} cm = ${deNum(areaBar(R.ds)*1000/R.s/100)} cm²/m`
     + (I.Ms>0 ? _L` · oben (Stütze) Ø${R.dst}/${deNum(R.st/10,1)} cm = ${deNum(areaBar(R.dst)*1000/R.st/100)} cm²/m` : '');
-  return _L`unten ${R.n} Ø ${R.ds} = ${deNum(R.n*areaBar(R.ds)/100)} cm²${R.nl2>0?_L` (${R.n-R.nl2} + ${R.nl2} in zwei Lagen)`:''}`
+  return _L`unten ${R.n} Ø ${R.ds} = ${deNum(R.n*areaBar(R.ds)/100)} cm²${R.nl2>0 && R.nl3>0 ? _L` (${R.n-R.nl2-R.nl3} + ${R.nl2} + ${R.nl3} in drei Lagen)` : R.nl2>0?_L` (${R.n-R.nl2} + ${R.nl2} in zwei Lagen)`:''}`
     + (R.n2 && I.typ==='balken' ? _L` · oben ${R.n2} Ø ${R.ds2}${dz?tt(' (Druckbewehrung)'):''}` : '')
     + _L` · Bügel Ø${R.dsw}/${deNum(R.sw,1)} cm`
     + (I.Ms>0 ? _L` · oben (Stütze) ${R.nt} Ø ${R.dst} = ${deNum(R.nt*areaBar(R.dst)/100)} cm²` : '');
@@ -5399,12 +5429,31 @@ function showBad(bad){
   // seit v0.7.14 ohne Karte „Ergebnis“: der Hinweis steht in der Leiste „Ergebnisse“
   $('details').innerHTML=`<div class="det-bar"><span class="det-h"><span class="det-t">${tx('calcSteps')}</span><span class="det-sum bad">${$('summary').querySelector('.summary').innerHTML}</span></span></div>`;
 }
+// Bewehrungslagen (size v0.7.57): sichtbar Auswahl 1–3 Lagen und Stäbe je Lage; gerechnet wird mit den verborgenen Feldern
+// in-n (gesamt), in-nl2, in-nl3 — so bleiben gespeicherte Stände und Dateien lesbar
+function lagenSet(){
+  const L=+$('in-lagen').value, v=id=>Math.max(0, Math.round(num(id))||0);
+  if(L>=2 && !(v('in-l2')>0)) $('in-l2').value=2;
+  if(L>=3 && !(v('in-l3')>0)) $('in-l3').value=2;
+  const a=v('in-l1'), b2=L>=2?v('in-l2'):0, c=L>=3?v('in-l3'):0;
+  $('in-n').value=a+b2+c; $('in-nl2').value=b2; $('in-nl3').value=b2>0?c:0;
+  lagenUI(true); run();
+}
+function lagenUI(user){
+  const v=id=>Math.max(0, Math.round(num(id))||0), n=v('in-n'), m2=v('in-nl2'), m3=m2>0?v('in-nl3'):0, act=document.activeElement, own=act && ['in-lagen','in-l1','in-l2','in-l3'].includes(act.id);
+  if(!user && !own){ $('in-lagen').value = m3>0 ? '3' : m2>0 ? '2' : '1'; $('in-l1').value = n-m2-m3; if(m2>0) $('in-l2').value = m2; if(m3>0) $('in-l3').value = m3; }
+  const L=+$('in-lagen').value;
+  document.querySelectorAll('#reinf-balken .lg2').forEach(e=>e.style.display = L>=2 ? '' : 'none');
+  document.querySelectorAll('#reinf-balken .lg3').forEach(e=>e.style.display = L>=3 ? '' : 'none');
+  const ds=+$('in-ds').value; $('in-nsum').innerHTML = L>1 && n>0 ? _L`zusammen ${n} Ø ${ds} = ${deNum(n*areaBar(ds)/100)} cm²` : '';
+}
 function runBeton(){
   if(PA['beton/'+TYP]) return runPA('beton/'+TYP);
   if(TYP==='stuetze') return runStuetze();
   if(TYP==='durchstanzen') return runDS();
+  lagenUI();
   const I=readInput(), bad=validate(I);
-  ['in-n','in-nl2','in-ds','in-dsw','in-sw','in-dsp','in-s','in-nt','in-dst','in-dspt','in-st','in-n2','in-ds2'].forEach(id=>$(id).disabled = I.auto);
+  ['in-n','in-nl2','in-nl3','in-lagen','in-l1','in-l2','in-l3','in-ds','in-dsw','in-sw','in-dsp','in-s','in-nt','in-dst','in-dspt','in-st','in-n2','in-ds2'].forEach(id=>$(id).disabled = I.auto);
   document.querySelectorAll('.dz-only').forEach(e=>e.style.display = I.typ==='balken' ? '' : 'none');
   document.querySelectorAll('.top-only').forEach(e=>e.style.display = I.Ms>0 ? '' : 'none');
   $('in-t').disabled = $('in-haken').disabled = $('in-lager').disabled = !I.aufl;
@@ -5416,10 +5465,11 @@ function runBeton(){
   if(I.auto){
     R = autoBewehrung(I);
     if(I.typ==='platte'){ $('in-dsp').value=R.ds; $('in-s').value=R.s/10; $('in-dspt').value=R.dst; $('in-st').value=R.st/10; }
-    else { $('in-n').value=R.n; $('in-nl2').value=R.nl2||0; $('in-ds').value=R.ds; $('in-dsw').value=R.dsw; $('in-sw').value=R.sw; $('in-nt').value=R.nt; $('in-dst').value=R.dst; if(R.n2){ $('in-n2').value=R.n2; $('in-ds2').value=R.ds2; } }
+    else { $('in-n').value=R.n; $('in-nl2').value=R.nl2||0; $('in-nl3').value=R.nl3||0; $('in-ds').value=R.ds; $('in-dsw').value=R.dsw; $('in-sw').value=R.sw; $('in-nt').value=R.nt; $('in-dst').value=R.dst; if(R.n2){ $('in-n2').value=R.n2; $('in-ds2').value=R.ds2; } }
   } else {
-    R = I.typ==='platte' ? { ds:I.dsp, s:I.s*10, dst:I.dspt, st:I.st*10 } : { ds:I.ds, n:I.n, nl2:I.nl2, dsw:I.dsw, sw:I.sw, dst:I.dst, nt:I.nt, ...(I.typ==='balken'?{n2:I.n2, ds2:I.ds2}:{}) };
+    R = I.typ==='platte' ? { ds:I.dsp, s:I.s*10, dst:I.dspt, st:I.st*10 } : { ds:I.ds, n:I.n, nl2:I.nl2, nl3:I.nl3, dsw:I.dsw, sw:I.sw, dst:I.dst, nt:I.nt, ...(I.typ==='balken'?{n2:I.n2, ds2:I.ds2}:{}) };
   }
+  if(I.auto) lagenUI();
   const res = nachweise(I, R);
   LAST = { mat:'beton', I, res, date: new Date() };
   renderOut(res.C, res.ok, figQuerschnitt(I, res), reinfText(I, res.R, !!res.DZ), NICHT_ENTHALTEN, 'ref.html#/stahlbeton');
@@ -11264,7 +11314,7 @@ function hideReport(){ document.body.classList.remove('show-report'); }
 // ══════════════════════════════════════════════════
 const STORE='statiq-size-v1';
 const FIELDS=['in-name','in-b','in-h','in-l','in-K','in-hf','in-feld','in-b1','in-b2','in-beton','in-expo','in-cmindur','in-dg','in-cot','in-M','in-V','in-Mqp','in-Ms','in-Mqps',
-  'in-t','in-haken','in-lager','in-n','in-nl2','in-ds','in-dsw','in-sw','in-nt','in-dst','in-dsp','in-s','in-dspt','in-st','in-n2','in-ds2',
+  'in-t','in-haken','in-lager','in-n','in-nl2','in-nl3','in-ds','in-dsw','in-sw','in-nt','in-dst','in-dsp','in-s','in-dspt','in-st','in-n2','in-ds2',
   'su-l','su-beta','su-N','su-phi','su-M02','su-M01','su-n','su-ds','su-dsw','su-sw','ds-form','ds-pos','ds-c1','ds-c2','ds-V','ds-dsx','ds-sx','ds-dsy','ds-sy'];
 const CHECKS=['bg-ns','bs-tr','hv-vorg','su-auto','in-tw','in-zwang','in-auto','in-aufl','sn-auto','an-gew','ho-auto','sw-front','mw-own','mh-stoss','gs-gw'];
 const SFIELDS=['bs-fl','bf-S','bf-d','bf-dR','bf-m1','bf-l1','bf-a1','bf-m2','bf-l2','bf-a2','bf-m3','bf-l3','bf-a3','bf-m4','bf-l4','bf-a4','bp-name','bp-art','bp-ti','bp-te','bs-anf','bs-kf','bs-up','bs-dE','bs-rE','bs-s','bs-K','bs-zul','bl-m1','bl-d1','bl-l1','bl-u1','bl-r1','bl-m2','bl-d2','bl-l2','bl-u2','bl-r2','bl-m3','bl-d3','bl-l3','bl-u3','bl-r3','bl-m4','bl-d4','bl-l4','bl-u4','bl-r4','bl-m5','bl-d5','bl-l5','bl-u5','bl-r5','bl-m6','bl-d6','bl-l6','bl-u6','bl-r6','sn-name','sn-reihe','sn-prof','sn-stahl','sn-L','sn-M','sn-V','sn-N','sn-mv','sn-psi','sn-by','sn-bz','sn-Llt','sn-zg','sn-Mk','sn-wlim',

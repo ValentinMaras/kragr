@@ -76,9 +76,9 @@ async def main():
         for f in ('calc','size'):
             await pg.goto(B+f+'.html'); await pg.wait_for_timeout(900)
             r=await pg.evaluate("""(()=>{ const H=document.documentElement, l=document.querySelector('.legal-bar').getBoundingClientRect(), V=s=>[...document.querySelectorAll(s)].find(e=>e.offsetParent);
-              const k=V('.kbl').getBoundingClientRect(), a=V('.col-in').getBoundingClientRect(), b=V('.col-out').getBoundingClientRect();
-              return {fit:H.scrollHeight<=H.clientHeight, foot:[Math.round(l.bottom), Math.round(l.height), parseFloat(getComputedStyle(document.querySelector('.legal-bar')).fontSize)], kbl:Math.round(k.bottom)<=Math.round(l.top), cols:[Math.round(a.top)===Math.round(b.top), a.bottom<=l.top+1, b.bottom<=k.top+1], own:[getComputedStyle(V('.col-in')).overflowY, getComputedStyle(V('.col-out')).overflowY]}; })()""")
-            check(f'Rechner {f}: Seite ohne eigenes Scrollen, Spalten scrollen, Speichern und Fußleiste (11 px, eine Zeile) unten im Bild', r['fit'] and r['foot'][0]==800 and r['foot'][1]<=36 and r['foot'][2]==11 and r['kbl'] and all(r['cols']) and r['own']==['auto','auto'], r)
+              const a=V('.col-in').getBoundingClientRect(), b=V('.col-out').getBoundingClientRect();
+              return {fit:H.scrollHeight<=H.clientHeight, foot:[Math.round(l.bottom), Math.round(l.height), parseFloat(getComputedStyle(document.querySelector('.legal-bar')).fontSize)], cols:[Math.round(a.top)===Math.round(b.top), a.bottom<=l.top+1, b.bottom<=l.top+1], own:[getComputedStyle(V('.col-in')).overflowY, getComputedStyle(V('.col-out')).overflowY]}; })()""")
+            check(f'Rechner {f}: Seite ohne eigenes Scrollen, Spalten scrollen, Fußleiste (11 px, eine Zeile) unten im Bild', r['fit'] and r['foot'][0]==800 and r['foot'][1]<=36 and r['foot'][2]==11 and all(r['cols']) and r['own']==['auto','auto'], r)
         await pg.goto(B+'calc.html'); await pg.wait_for_timeout(800); await pg.evaluate("showTab('saved')"); await pg.wait_for_timeout(300)
         check('Rechner calc „Gespeichert“: normale Seite (scrollt, Fußleiste wie bisher)', await pg.evaluate("getComputedStyle(document.body).overflow!=='hidden'"))
         await pg.close()

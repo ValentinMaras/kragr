@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.54 -->
+<!-- kragr v0.11.55 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -603,7 +603,6 @@ window.mulyProj = {
       main.main:not(.hidden):has(> .cols) { height:calc(100dvh - var(--k-hdr-h, 58px) - 34px); box-sizing:border-box; display:flex; flex-direction:column; padding-bottom:0 !important; }
       main.main:not(.hidden) > .cols { flex:1 1 auto; min-height:0; }
       main.main:not(.hidden) > .cols > .col-in, main.main:not(.hidden) > .cols > .col-out { height:100% !important; }
-      main.main:not(.hidden):has(> .cols) > .kbl { margin:6px 0 !important; flex:none; }
   body:has(> main.main:not(.hidden) > .cols) .k-fill { display:none !important; }
       body:has(> main.main:not(.hidden) > .cols) .legal-bar { flex-direction:row !important; flex-wrap:nowrap; align-items:center; gap:16px !important; margin:0 auto !important; padding:0 24px !important; height:34px; box-sizing:border-box;
         font-size:11px !important; line-height:34px !important; overflow:hidden; white-space:nowrap; border-top:1px solid #e6e7ea !important; }
@@ -1727,6 +1726,18 @@ window.kragrK5Page = function(K){
   /* Rechenblatt speichern (calc v0.11.11 · size v0.7.9) */
   .kbl { display:flex; flex-direction:column; align-items:flex-end; gap:6px; margin:28px 0 8px; clear:both; }   /* ganz unten rechts (calc v0.11.12) */
   .kbl-form { width:min(100%, 520px); }
+  /* Seit 24.11.2026: Speichern als Symbol in der Kopfzeile (zwischen Wiederholen und Menü); Namensfeld und Meldung als kleines Fenster darunter */
+  .k5-save { flex:none; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; margin-left:6px; padding:0; border:none; border-radius:14px;
+    background:var(--k5-card,#fff); box-shadow:var(--k5-sh,0 1px 3px rgba(17,17,20,.12)); color:#111114; cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform .2s, box-shadow .25s; }
+  .k5-save svg { width:20px; height:20px; } .k5-save:hover { box-shadow:var(--k5-sh-h,0 4px 12px rgba(17,17,20,.14)); } .k5-save:active { transform:scale(.92); }
+  .k5-save[hidden] { display:none; } .k5-save + .k5-burger { margin-left:8px !important; }
+  @media (orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px) { .k-hdr .k5-save { width:38px; height:38px; } }
+  .kbl.kbl-top { position:fixed; z-index:160; top:calc(var(--k-hdr-h, 58px) + 6px); right:max(10px, calc((100vw - 1180px) / 2 + 20px)); width:min(400px, calc(100vw - 20px)); margin:0 !important; display:none; align-items:stretch; }
+  .kbl.kbl-top.kbl-on { display:flex; }
+  .kbl.kbl-top > .kbl-btn { display:none !important; }
+  .kbl.kbl-top .kbl-form { width:auto; box-shadow:0 18px 48px rgba(17,17,20,.18), 0 0 0 1px rgba(17,17,20,.05); }
+  .kbl.kbl-top .kbl-msg:not(:empty) { padding:10px 14px; border-radius:14px; background:var(--k5-card,#fff); box-shadow:0 18px 48px rgba(17,17,20,.18), 0 0 0 1px rgba(17,17,20,.05); text-align:left; }
+  @media print { .k5-save { display:none !important; } }
   .main > .kbl { grid-column:1 / -1; }   /* size: über beide Spalten des Rasters */
   .kbl-msg { text-align:right; }
   .kbl-btn { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border:none; border-radius:14px; background:var(--k5-card,#fff); box-shadow:var(--k5-sh, inset 0 0 0 1px #d4d4d8); color:#111114; font:inherit; font-size:14px; font-weight:700; cursor:pointer; }
@@ -1822,7 +1833,7 @@ window.kragrK5Page = function(K){
   }
   function label(w){ w.querySelector('.kbl-btn span').textContent=t('save'); w.querySelector('.kbl-l > span').textContent=t('name');
     var ok=w.querySelector('.kbl-ok'); if(!ok.classList.contains('armed')) ok.textContent=t('ok'); w.querySelector('.kbl-x').textContent=t('cancel'); }
-  function relabel(){ Array.prototype.forEach.call(D.querySelectorAll('.kbl'), label); }
+  function relabel(){ Array.prototype.forEach.call(D.querySelectorAll('.kbl'), label); var sb=D.getElementById('k5-save'); if(sb){ sb.title=t('save'); sb.setAttribute('aria-label', t('save')); } }
 
   // Reste aus dem früheren Projektmodus (bis calc v0.11.10 im Block data-pm): altes Projekt-Fenster verborgen, aber für Prüfstände
   // über mulyAltProj() erreichbar (Speichern/Laden in size, Übernahme aus calc); Ordner-Symbol der alten Kopfzeile → Rechenblätter;
@@ -1845,8 +1856,33 @@ window.kragrK5Page = function(K){
     if(PAGE==='size'){ var mm=String(location.hash||'').match(/^#blatt=(.+)$/); if(mm){ var n=decodeURIComponent(mm[1]); history.replaceState(null,'',location.pathname+location.search);
       try{ var i=posRead().findIndex(function(p){ return p.name===n; }); if(i>=0){ loadPos(i); var mg=D.querySelector('.kbl .kbl-msg'); if(mg) mg.textContent=t('opened', n); } }catch(e){} } }
   }
+  // Speichern-Symbol in der Kopfzeile (24.11.2026): öffnet das Namensfeld der sichtbaren Speicherleiste als kleines Fenster unter der Kopfzeile
+  var SAVEIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M7 3v5h8V3"/><rect x="7" y="13" width="10" height="8" rx="1"/></svg>';
+  var hideT=0;
+  function curKbl(){ return Array.prototype.filter.call(D.querySelectorAll('.kbl'), function(k){ var m=k.closest('main'); return !m || !m.classList.contains('hidden'); })[0] || null; }
+  function off(){ Array.prototype.forEach.call(D.querySelectorAll('.kbl.kbl-on'), function(x){ x.classList.remove('kbl-on'); var f=x.querySelector('.kbl-form'), b=x.querySelector('.kbl-btn'); if(f) f.hidden=true; if(b) b.hidden=false; }); }
+  function flash(k){ if(!k) return; k.classList.add('kbl-on'); clearTimeout(hideT); hideT=setTimeout(function(){ if(k.querySelector('.kbl-form').hidden){ k.classList.remove('kbl-on'); k.querySelector('.kbl-msg').innerHTML=''; } }, 6000); }
+  function topSave(){
+    Array.prototype.forEach.call(D.querySelectorAll('.kbl'), function(k){ k.classList.add('kbl-top');
+      if(k._top) return; k._top=1;
+      k.querySelector('.kbl-x').addEventListener('click', function(){ k.classList.remove('kbl-on'); var s=D.getElementById('k5-save'); if(s) s.focus(); });
+      k.querySelector('.kbl-in').addEventListener('keydown', function(e){ if(e.key==='Escape') k.classList.remove('kbl-on'); });
+      new MutationObserver(function(){ var m=k.querySelector('.kbl-msg'); if(m.innerHTML.trim() && k.querySelector('.kbl-form').hidden) flash(k); }).observe(k.querySelector('.kbl-msg'),{childList:true, characterData:true, subtree:true}); });
+    var bg=D.getElementById('k5-burger'); if(!bg) return false;
+    var b=D.getElementById('k5-save');
+    if(!b){ b=D.createElement('button'); b.type='button'; b.id='k5-save'; b.className='k5-save'; b.innerHTML=SAVEIC;
+      b.addEventListener('click', function(e){ e.stopPropagation(); var k=curKbl(); if(!k) return; var on=k.classList.contains('kbl-on') && !k.querySelector('.kbl-form').hidden;
+        off(); if(on) return; k.classList.add('kbl-on'); clearTimeout(hideT); k.querySelector('.kbl-btn').click(); });
+      D.addEventListener('click', function(e){ if(e.target.closest && (e.target.closest('.kbl.kbl-on') || e.target.closest('#k5-save'))) return; off(); }, true); }
+    var rd=D.getElementById('k5-redo'); bg.parentNode.insertBefore(b, rd && rd.parentNode===bg.parentNode ? rd.nextSibling : bg);
+    b.title=t('save'); b.setAttribute('aria-label', t('save')); b.hidden=!curKbl(); return true;
+  }
+  window.kragrSaveTop=function(){ var b=D.getElementById('k5-save'); if(b) b.hidden=!curKbl(); };
+  function initTop(){ if(!topSave()){ var mo=new MutationObserver(function(){ if(topSave()) mo.disconnect(); }); mo.observe(D.documentElement,{childList:true, subtree:true}); }
+    if(PAGE==='calc' && typeof window.showTab==='function'){ var st=window.showTab; window.showTab=function(){ var r=st.apply(this, arguments); off(); window.kragrSaveTop(); return r; }; }
+    var k=curKbl(); if(k && k.querySelector('.kbl-msg').innerHTML.trim()) flash(k); }
   // nach allen anderen Start-Routinen (Spalten in calc entstehen erst beim Start)
-  D.readyState==='loading' ? D.addEventListener('DOMContentLoaded', function(){ setTimeout(init, 0); }) : setTimeout(init, 0);
+  D.readyState==='loading' ? D.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){ init(); initTop(); }, 0); }) : setTimeout(function(){ init(); initTop(); }, 0);
   window.kragrBlatt={ t:t, relabel:relabel };
 })();
 </script>
@@ -2004,7 +2040,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.54</span>
+    <span class="version">v0.11.55</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2537,7 +2573,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.54';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.55';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;

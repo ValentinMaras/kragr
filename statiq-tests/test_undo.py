@@ -23,8 +23,8 @@ async def main():
             # ── Bemessung ──
             await pg.goto(B+'size.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
             r=await pg.evaluate("(()=>{ const u=document.getElementById('k5-undo'), w=document.getElementById('k5-redo'), b=document.getElementById('k5-burger'); if(!u||!w) return null; const a=u.getBoundingClientRect(), d=w.getBoundingClientRect(), c=b.getBoundingClientRect();"
-                                " return [u.nextElementSibling===w && w.nextElementSibling===b, a.right<=d.left && d.right<=c.left, Math.abs(a.top-c.top)<2 && Math.abs(d.top-c.top)<2, Math.round(a.height), Math.round(c.height), u.disabled && w.disabled, u.getAttribute('aria-label'), w.getAttribute('aria-label'), getComputedStyle(w.querySelector('svg')).transform]; })()")
-            check(f'{tag} Bemessung: Rückgängig und Wiederholen links neben dem Menü, gleiche Höhe, anfangs aus', r and r[0] and r[1] and r[2] and r[3]==r[4] and r[5] and r[6]=='Rückgängig' and r[7]=='Wiederholen', r)
+                                " return [u.nextElementSibling===w && (w.nextElementSibling===b || w.nextElementSibling.id==='k5-save' && w.nextElementSibling.nextElementSibling===b), a.right<=d.left && d.right<=c.left, Math.abs(a.top-c.top)<2 && Math.abs(d.top-c.top)<2, Math.round(a.height), Math.round(c.height), u.disabled && w.disabled, u.getAttribute('aria-label'), w.getAttribute('aria-label'), getComputedStyle(w.querySelector('svg')).transform]; })()")
+            check(f'{tag} Bemessung: Rückgängig und Wiederholen links neben dem Menü (Speichern dazwischen erlaubt), gleiche Höhe, anfangs aus', r and r[0] and r[1] and r[2] and r[3]==r[4] and r[5] and r[6]=='Rückgängig' and r[7]=='Wiederholen', r)
             check(f'{tag} Bemessung: Wiederholen = derselbe Pfeil gespiegelt', r and r[8].startswith('matrix(-1'), r and r[8])
             await pg.mouse.click(5, 500); await pg.wait_for_timeout(300)
             check(f'{tag} Bemessung: Klick ins Leere ist kein Schritt', await pg.evaluate(DIS))

@@ -22,14 +22,16 @@ async def main():
         br=await p.chromium.launch(); errs=[]
         pg=await br.new_page(viewport={'width':390,'height':844}); pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
-        r=await pg.evaluate("""()=>{const w=document.querySelector('#tab-beam .kbl'); return {par:w && w.parentNode.id, last:w===w.parentNode.lastElementChild, right:Math.round(innerWidth-w.querySelector('.kbl-btn').getBoundingClientRect().right), vis:!!(w && w.offsetParent), txt:w && w.querySelector('.kbl-btn').textContent,
-            old:[...document.querySelectorAll('.col-out .save-btn')].some(e=>e.offsetParent)}}""")
-        check('calc: Knopf „Als Rechenblatt speichern“ ganz unten im Bereich, rechts (v0.11.12)', r['par']=='tab-beam' and r['last'] and r['right']<=17 and r['vis'] and r['txt']=='Als Rechenblatt speichern', r)
+        r=await pg.evaluate("""()=>{const w=document.querySelector('#tab-beam .kbl'), s=document.getElementById('k5-save'), bg=document.getElementById('k5-burger');
+            return {par:w && w.parentNode.id, hid:getComputedStyle(w).display==='none', vis:!!(s && s.offsetParent), txt:s && s.title, aria:s && s.getAttribute('aria-label'), icon:!!(s && s.querySelector('svg')) && !s.textContent.trim(),
+              order:[...bg.parentNode.children].filter(e=>e.tagName==='BUTTON').map(e=>e.id).slice(-4),
+              old:[...document.querySelectorAll('.col-out .save-btn')].some(e=>e.offsetParent)}}""")
+        check('calc: Speichern als Symbol in der Kopfzeile zwischen Vor und Menü (calc v0.11.55)', r['par']=='tab-beam' and r['hid'] and r['vis'] and r['txt']=='Als Rechenblatt speichern' and r['aria']==r['txt'] and r['icon'] and r['order']==['k5-undo','k5-redo','k5-save','k5-burger'], r)
         check('calc: alter Knopf „Berechnung speichern“ verborgen', not r['old'], r)
         # Einfeldträger, Startlasten F = 10 kN bei a = 2,5 m und q = 5 kN/m von 0 bis 5 m, jetzt L = 7 m:
         # A = 25·4,5/7 + 10·4,5/7 = 22,5 kN; Q = 22,5 − 5·2,5 = 10 → nach F genau 0, also max M unter F: 22,5·2,5 − 5·2,5²/2 = 40,625 kNm
         await pg.fill('#bL','7'); await pg.dispatch_event('#bL','input'); await pg.wait_for_timeout(500)
-        await pg.click('#tab-beam .kbl-btn'); await pg.wait_for_timeout(100)
+        await pg.click('#k5-save'); await pg.wait_for_timeout(100)
         d=await pg.input_value('#tab-beam .kbl-in')
         check('Vorschlag für den Namen aus dem System', d=='Einfeldträger L=7m', d)
         await pg.fill('#tab-beam .kbl-in','Pos. 2 Unterzug'); await pg.press('#tab-beam .kbl-in','Enter'); await pg.wait_for_timeout(250)
@@ -38,21 +40,25 @@ async def main():
         e=await pg.evaluate("""()=>{const k=Object.keys(localStorage).filter(k=>k.startsWith('statiq_sdf_')); const o=JSON.parse(localStorage.getItem(k[0])); return {n:k.length, name:o.name, M:o.sdf.results.Mmax, draft:!!o.draft, L:o.draft&&o.draft.inputs.bL}}""")
         check('gespeichert: Name, M_max = 40,625 kNm und die Eingaben (L = 7)', e['n']==1 and e['name']=='Pos. 2 Unterzug' and abs(e['M']-40.625)<1e-6 and e['draft'] and e['L']=='7', e)
         # gleicher Name: erst nachfragen, dann überschreiben (kein zweiter Eintrag)
-        await pg.click('#tab-beam .kbl-btn'); await pg.fill('#tab-beam .kbl-in','Pos. 2 Unterzug'); await pg.click('#tab-beam .kbl-ok')
+        await pg.click('#k5-save'); await pg.fill('#tab-beam .kbl-in','Pos. 2 Unterzug'); await pg.click('#tab-beam .kbl-ok')
         a=await pg.text_content('#tab-beam .kbl-ok'); await pg.click('#tab-beam .kbl-ok'); await pg.wait_for_timeout(200)
         n=await pg.evaluate("Object.keys(localStorage).filter(k=>k.startsWith('statiq_sdf_')).length")
         check('gleicher Name: „Überschreiben?“, dann ersetzt (1 Eintrag)', a=='Überschreiben?' and n==1 and 'Überschrieben' in await pg.text_content('#tab-beam .kbl-msg'), (a,n))
         # Abbrechen mit Escape
-        await pg.click('#tab-beam .kbl-btn'); await pg.press('#tab-beam .kbl-in','Escape')
-        check('Escape schließt das Namensfeld', await pg.evaluate("document.querySelector('#tab-beam .kbl-form').hidden && !document.querySelector('#tab-beam .kbl-btn').hidden"))
+        await pg.click('#k5-save'); await pg.press('#tab-beam .kbl-in','Escape')
+        check('Escape schließt das Namensfeld (Fenster unter der Kopfzeile zu)', await pg.evaluate("document.querySelector('#tab-beam .kbl-form').hidden && !document.querySelector('#tab-beam .kbl').classList.contains('kbl-on')"))
+        await pg.click('#k5-save'); await pg.wait_for_timeout(100); await pg.mouse.click(30, 600); await pg.wait_for_timeout(100)
+        check('Tippen daneben schließt das Namensfeld', await pg.evaluate("getComputedStyle(document.querySelector('#tab-beam .kbl')).display==='none'"))
+        await pg.evaluate("showTab('saved')"); await pg.wait_for_timeout(100); hs=await pg.evaluate("document.getElementById('k5-save').hidden"); await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(100)
+        check('„Gespeichert“: kein Speichern-Symbol, im Rechner wieder da', hs and not await pg.evaluate("document.getElementById('k5-save').hidden"))
         # Sprache in calc ohne Neuladen
-        await pg.evaluate("setCalcLang('en')"); t=await pg.text_content('#tab-beam .kbl-btn'); await pg.evaluate("setCalcLang('de')")
+        await pg.evaluate("setCalcLang('en')"); t=await pg.get_attribute('#k5-save','title'); await pg.evaluate("setCalcLang('de')")
         check('calc: Sprache wechselt den Knopftext mit (EN)', t=='Save as calculation sheet', t)
         # size
         await pg.goto(B+'size.html'); await pg.wait_for_timeout(900)
-        r=await pg.evaluate("()=>{const w=document.querySelector('.kbl'), b=w.querySelector('.kbl-btn').getBoundingClientRect(); return {vis:!!(w&&w.offsetParent), rep:w.parentNode.matches('main') && w===w.parentNode.lastElementChild, right:Math.round(innerWidth-b.right)}}")
-        check('size: Knopf ganz unten auf der Seite, rechts', r['vis'] and r['rep'] and r['right']<=17, r)
-        await pg.click('.kbl-btn'); await pg.fill('.kbl-in','Unterzug Beton'); await pg.click('.kbl-ok'); await pg.wait_for_timeout(400)
+        r=await pg.evaluate("()=>{const w=document.querySelector('.kbl'), s=document.getElementById('k5-save'); return {hid:getComputedStyle(w).display==='none', vis:!!(s&&s.offsetParent), order:[...s.parentNode.children].filter(e=>e.tagName==='BUTTON').map(e=>e.id).slice(-4)}}")
+        check('size: Speichern als Symbol in der Kopfzeile zwischen Vor und Menü (size v0.7.56)', r['hid'] and r['vis'] and r['order']==['k5-undo','k5-redo','k5-save','k5-burger'], r)
+        await pg.click('#k5-save'); await pg.fill('.kbl-in','Unterzug Beton'); await pg.click('.kbl-ok'); await pg.wait_for_timeout(400)
         e=await pg.evaluate("()=>{const L=JSON.parse(localStorage.getItem('statiq-size-positionen')||'[]'); return {n:L.length, name:L[0]&&L[0].name, rep:(localStorage.getItem('statiq-size-bericht:Unterzug Beton')||'').length}}")
         check('size: Nachweis und Bericht gespeichert', e['n']==1 and e['name']=='Unterzug Beton' and e['rep']>500, e)
         # Daten aus früheren Projekten: nicht zeigen

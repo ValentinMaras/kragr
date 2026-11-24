@@ -67,7 +67,7 @@
     if(!U || btn) return true; const bg=D.getElementById('k5-burger'); if(!bg) return false;
     const mk=(id, cls, fn)=>{ const b=D.createElement('button'); b.type='button'; b.id=id; b.className=cls;
       b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>';
-      b.addEventListener('click', e=>{ e.stopPropagation(); fn(); }); bg.parentNode.insertBefore(b, bg); return b; };
+      b.addEventListener('click', e=>{ e.stopPropagation(); fn(); }); const sv=D.getElementById('k5-save'); bg.parentNode.insertBefore(b, sv && sv.parentNode===bg.parentNode ? sv : bg); return b; };   // Reihenfolge: Zurück, Vor, Speichern, Menü
     btn=mk('k5-undo', 'k5-undo', undo); rbtn=mk('k5-redo', 'k5-undo k5-redo', redo);   // Wiederholen: derselbe Pfeil gespiegelt
     label(); return true;
   }
@@ -99,7 +99,7 @@
     '.k5-undo{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;padding:0;border:none;border-radius:14px;background:var(--k5-card,#fff);box-shadow:var(--k5-sh,0 1px 3px rgba(17,17,20,.12));color:#111114;cursor:pointer;transition:transform .25s var(--k5-spring,ease),box-shadow .25s,opacity .2s;-webkit-tap-highlight-color:transparent}'
     +'.k5-undo svg{width:21px;height:21px}.k5-undo:hover:not(:disabled){box-shadow:var(--k5-sh-h,0 4px 12px rgba(17,17,20,.14))}.k5-undo:active:not(:disabled){transform:scale(.92)}'
     +'.k5-undo:disabled{cursor:default;color:#b4b6bd;box-shadow:none;background:transparent}'
-    +'.k5-redo{margin-left:6px}.k5-redo svg{transform:scaleX(-1)}.k5-undo + .k5-burger{margin-left:8px!important}'
+    +'.k5-redo{margin-left:6px}.k5-redo svg{transform:scaleX(-1)}.k5-undo + .k5-burger{margin-left:8px!important}.k5-undo + .k5-save{margin-left:6px}'
     +'@media (max-width:380px){.k5-undo{width:40px}.k5-redo{margin-left:4px}}'
     +'@media (orientation:landscape) and (max-height:540px) and (min-width:640px) and (max-width:999px){.k-hdr .k5-undo{height:38px;width:38px}}'
     +'.k5-undo-fx{border-radius:10px;transition:background-color .7s,box-shadow .7s}.k5-undone{background-color:rgba(245,158,11,.2)!important;box-shadow:0 0 0 5px rgba(245,158,11,.2)!important}'

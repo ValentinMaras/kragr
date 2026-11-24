@@ -20,9 +20,9 @@ SHARE="""window.__shared=[]; Object.defineProperty(navigator,'canShare',{value:(
 async def save_sheets(pg):
     await pg.goto(B+'calc.html'); await pg.evaluate("localStorage.clear();localStorage.setItem('statiq-lang','de')"); await pg.reload(); await pg.wait_for_timeout(900)
     await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(400)
-    await pg.click('#tab-frame .kbl-btn'); await pg.fill('#tab-frame .kbl-in','Pos. 1 Rahmen'); await pg.click('#tab-frame .kbl-ok'); await pg.wait_for_timeout(300)
+    await pg.click('#k5-save'); await pg.fill('#tab-frame .kbl-in','Pos. 1 Rahmen'); await pg.click('#tab-frame .kbl-ok'); await pg.wait_for_timeout(300)
     await pg.goto(B+'size.html'); await pg.wait_for_timeout(800); await pg.evaluate("setMat('holz'); setHoMode('bauteil')"); await pg.wait_for_timeout(300)
-    await pg.click('.kbl-btn'); await pg.fill('.kbl-in','Pos. 2 Holzträger'); await pg.click('.kbl-ok'); await pg.wait_for_timeout(400)
+    await pg.click('#k5-save'); await pg.fill('.kbl-in','Pos. 2 Holzträger'); await pg.click('.kbl-ok'); await pg.wait_for_timeout(400)
 
 async def main():
     async with async_playwright() as p:

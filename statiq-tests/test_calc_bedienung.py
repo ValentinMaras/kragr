@@ -59,7 +59,7 @@ async def main():
             await pg.goto(B+'projekt.html'); await pg.evaluate("localStorage.removeItem('muly-calc-entwurf')")   # Startwerte: Entwurf löschen, solange calc nicht offen ist
             await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900)
             await pg.evaluate(f"showTab('{tab}')"); await pg.wait_for_timeout(500)
-            await pg.click(f'#tab-{tab} .kbl-btn'); await pg.fill(f'#tab-{tab} .kbl-in', 'Test '+tab); await pg.click(f'#tab-{tab} .kbl-ok'); await pg.wait_for_timeout(200)
+            await pg.click('#k5-save'); await pg.fill(f'#tab-{tab} .kbl-in', 'Test '+tab); await pg.click(f'#tab-{tab} .kbl-ok'); await pg.wait_for_timeout(200)
             return await pg.evaluate(f"Object.keys(localStorage).find(k=>k.startsWith('statiq_sdf_') && JSON.parse(localStorage.getItem(k)).name==='Test {tab}')")
         async def nw(key, ziel, part=None):
             await pg.goto('about:blank'); await pg.goto(B+f'size.html#calc={key}&ziel={ziel}'+(f'&part={part}' if part else '')); await pg.wait_for_timeout(1500)

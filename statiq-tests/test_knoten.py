@@ -71,7 +71,7 @@ async def main():
             await pg.goto(B+'calc.html'); await pg.wait_for_timeout(900); await pg.evaluate("showTab('frame')"); await pg.wait_for_timeout(600)
             if await pg.evaluate("lastCalc.frame && lastCalc.frame.knoten && lastCalc.frame.knoten.nodes.length")==4: break
             await pg.evaluate("_k4Off=true; localStorage.removeItem('muly-calc-entwurf')")
-        await pg.click('#tab-frame .kbl-btn'); await pg.fill('#tab-frame .kbl-in','Rahmen Test'); await pg.click('#tab-frame .kbl-ok'); await pg.wait_for_timeout(200)
+        await pg.click('#k5-save'); await pg.fill('#tab-frame .kbl-in','Rahmen Test'); await pg.click('#tab-frame .kbl-ok'); await pg.wait_for_timeout(200)
         key=await pg.evaluate("Object.keys(localStorage).find(k=>k.startsWith('statiq_sdf_') && JSON.parse(localStorage.getItem(k)).name==='Rahmen Test')")
         r=await pg.evaluate(f"JSON.parse(localStorage.getItem('{key}')).sdf.results.knoten.nodes.length")
         check('Rechenblatt enthält die Knoten (SDF results.knoten)', r==4, r)

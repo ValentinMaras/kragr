@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.55 -->
+<!-- kragr v0.11.56 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -2040,7 +2040,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.55</span>
+    <span class="version">v0.11.56</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2573,7 +2573,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.55';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.56';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -7960,7 +7960,13 @@ if(Object.keys(LF_SK).some(lfOn)) liveCalc(true);
   /* Lager beim Einfeld- und Kragträger (calc v0.11.49): fest vorgegeben, als Übersicht */
   .k-supinfo { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
   .k-supi { display:grid; grid-template-columns:28px auto 1fr; align-items:center; gap:10px; padding:8px 12px; border-radius:12px; background:var(--k5-sub, #f5f6f8); font-size:14px; }
-  .k-supi .k-supi-s { font-size:16px; text-align:center; color:#5468ad; }
+  .k-supi .k-supi-s { font-size:16px; text-align:center; color:#5468ad; display:flex; align-items:center; justify-content:center; }
+  .k-supi .k-supi-s svg { height:24px; width:auto; }
+  /* kleine Lagerzeichen (calc v0.11.56): dieselben Zeichen wie in den Skizzen (ksSup), in Textfarbe; das Zeichen ⊞ △ ○ bleibt unsichtbar im Text */
+  .k-si { display:inline-flex; align-items:center; vertical-align:-0.3em; }
+  .k-sum .k-si svg { height:16px; width:auto; }
+  .toggle-btn .k-si svg { height:16px; width:auto; margin-left:2px; }
+  .k-vh { position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
   .k-supi > span:last-child { color:var(--k-text2, #5c5e66); }
   .k-eihint { font-size:12px; margin:0 0 8px; }
   .k-eihint button { border:0; background:transparent; padding:0; font:inherit; font-weight:700; color:#5468ad; cursor:pointer; text-decoration:underline; }
@@ -8071,7 +8077,35 @@ function k11Build(){
 const k11Num = v => fmtV(v);
 const K11_SUP = { fixed:'⊞', pin:'△', roller:'○' };
 function k11Tx(el, s){ if(el && el.textContent!==s) el.textContent=s; }
+// Lagerzeichen als kleines Bild (calc v0.11.56): Festlager Dreieck mit Gelenk und Schraffur, Loslager mit Gleitlinie, Einspannung als Wand bzw. Schraffur
+// dir: 'down' (Lager unter dem Knoten), 'left'/'right' (Wand links/rechts am Stabende)
+function k11Ic(ty, dir){
+  const s=0.62; let g='', w=28, h;
+  if(ty==='fixed' && dir!=='down'){ const xw = dir==='right' ? 20 : 8;
+    g = ksWall(xw, 2, 18, dir==='right' ? 1 : -1, 7*s, s) + `<line x1="${dir==='right'?3:xw}" y1="10" x2="${dir==='right'?xw:25}" y2="10" stroke="${KS.sym}" stroke-width="${1.6*s}"/>`; h=20; }
+  else if(ty==='fixed'){ g = `<line x1="14" y1="1" x2="14" y2="9" stroke="${KS.sym}" stroke-width="${1.6*s}"/>` + ksHatch(14-13*s, 14+13*s, 9, 5, 6*s, s); h=9+6*s+1.5; }
+  else { const r=ksSup(ty, 14, 3, {s}); g=r.svg; h=3+r.depth+1.5; }
+  g = g.replace(/#111114/g,'currentColor').replace(/fill="#fff"/g,'fill="none"').replace(/stroke="#8a8c94"/g,'stroke="currentColor" stroke-opacity="0.6"')
+       .replace(/stroke-width="([\d.]+)"/g, (m,v)=>`stroke-width="${ksF(Math.max(1.1, v*1.7))}"`);   // klein gezeichnet: Striche kräftiger als in der Skizze
+  return `<svg viewBox="0 0 ${w} ${ksF(h)}" aria-hidden="true" focusable="false">${g}</svg>`;
+}
+// Kurzfassung der Lager: Text wie bisher (⊞ △ ○, für Vergleiche und Kopieren), sichtbar als Bild
+function k11SupHtml(el, s, t){
+  if(!el) return;
+  const esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'), ty={'⊞':'fixed','△':'pin','○':'roller'};
+  const n=(s.match(/[⊞△○]/g)||[]).length; let i=0;
+  const h=esc(s).replace(/[⊞△○]/g, ch=>{ const k=i++, d = t==='frame' ? 'down' : k===0 ? 'left' : k===n-1 ? 'right' : 'down';
+    return `<span class="k-si" role="img" aria-label="${esc(supW(ty[ch]))}">${k11Ic(ty[ch], d)}<span class="k-vh" aria-hidden="true">${ch}</span></span>`; });
+  if(el._h!==h || el.textContent!==s){ el._h=h; el.innerHTML=h; }
+}
+// Lagerknöpfe (Rahmen: Einspannung ⊞, Festlager △, Loslager ○): Zeichen am Ende ebenfalls als Bild; die Übersetzung setzt den Text neu, dann hier wieder
+function k11SupBtns(){
+  document.querySelectorAll('.toggle-btn[id^="btn-s"]').forEach(b=>{ if(b.querySelector('.k-si')) return; const m=b.textContent.match(/^(.*?)\s*([⊞△○])\s*$/); if(!m) return;
+    const ty={'⊞':'fixed','△':'pin','○':'roller'}[m[2]], d = ty==='fixed' ? 'down' : 'down';
+    b.innerHTML = m[1].replace(/&/g,'&amp;').replace(/</g,'&lt;') + ` <span class="k-si">${k11Ic(ty, d)}<span class="k-vh" aria-hidden="true">${m[2]}</span></span>`; });
+}
 function k11Sum(){
+  k11SupBtns();
   document.querySelectorAll('[data-k11]').forEach(e=>k11Tx(e, k11(e.dataset.k11)));
   document.querySelectorAll('.k-st-next').forEach(b=>k11Tx(b, k11('next', k11(b.dataset.next))+' ›'));
   document.querySelectorAll('.k-st').forEach(c=>{
@@ -8094,7 +8128,7 @@ function k11Sum(){
       s=sp.map(([lab,ty])=>`${lab} ${K11_SUP[ty]}`).join(' · ')+(t==='cantilever' ? ' · '+k11('free') : '');
       const late=typeof supxSnap==='function' && typeof k12==='function' && typeof sxSupName==='function';
       if(late && supxSnap(t, sp.map(x=>x[0]))) s+=' · '+k12('sxShort');
-      const box=c.querySelector('.k-supinfo'); if(box && late){ const h=sp.map(([lab,ty])=>`<div class="k-supi"><span class="k-supi-s">${K11_SUP[ty]}</span><b>${k12('supL')} ${lab}</b><span>${sxSupName(ty).replace(/\s*[⊞△○]\s*$/,'')}</span></div>`).join('')
+      const box=c.querySelector('.k-supinfo'); if(box && late){ const h=sp.map(([lab,ty])=>`<div class="k-supi"><span class="k-supi-s" role="img" aria-label="${supW(ty)}">${k11Ic(ty, ty==='fixed'?'left':'down')}</span><b>${k12('supL')} ${lab}</b><span>${sxSupName(ty).replace(/\s*[⊞△○]\s*$/,'')}</span></div>`).join('')
         +(t==='cantilever' ? `<div class="k-supi"><span class="k-supi-s">—</span><b>${k11('freeEnd')}</b><span></span></div>` : ''); if(box._h!==h){ box._h=h; box.innerHTML=h; } } }
     else if(st==='loads'){ const n=c.querySelectorAll('.load-item').length; s = n===1 ? k11('n1') : n ? k11('nN', n) : k11('n0'); }
     else if(st==='adv'){ const a=[];
@@ -8103,7 +8137,7 @@ function k11Sum(){
       const eiCh=[...c.querySelectorAll('[id$="-E"],[id$="-Iy"],[id^="frame-E-"],[id^="frame-Iy-"]')].some(e=>Math.abs((parseFloat(e.value)||0) - (/-E/.test(e.id)?210:10))>1e-9);
       if(eiCh) a.push(k11('eiCh')); if(typeof lfOn==='function' && lfOn(t)) a.push(k11('lf')+' '+k11('on'));
       s = a.length ? a.join(' · ') : k11('std'); c.classList.toggle('k-adv-on', a.length>0); }
-    k11Tx(sm, s);
+    if(st==='sup') k11SupHtml(sm, s, t); else k11Tx(sm, s);
   });
   // Ergebnis-Karten
   document.querySelectorAll('.k-knoten, .k-lfres').forEach(k11Fold);

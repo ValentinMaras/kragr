@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- kragr v0.11.56 -->
+<!-- kragr v0.11.57 -->
 <html lang="de" data-kpage="calc">
 <head>
   <meta charset="UTF-8" />
@@ -2040,7 +2040,7 @@ window.kragrK5Page = function(K){
   <div class="hdr-tools">
     <button class="proj-btn" id="proj-btn" type="button" onclick="toggleProj(event)" data-st="none"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M2.6 5.6c0-.9.7-1.6 1.6-1.6h3.4l1.7 1.9h6.5c.9 0 1.6.7 1.6 1.6v7.4c0 .9-.7 1.6-1.6 1.6H4.2c-.9 0-1.6-.7-1.6-1.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="pb-tx">Projekte</span><span class="pb-dot" aria-hidden="true"></span></button>
     <button type="button" class="ueb-hdr" id="ueb-btn" aria-pressed="false" onclick="mulyUebClick()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.6v4.1c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.1"/><path d="M22 9.5v5.2"/></svg></button>
-    <span class="version">v0.11.56</span>
+    <span class="version">v0.11.57</span>
     <select class="lang-sel" id="lang-sel" aria-label="Sprache / Language" onchange="setCalcLang(this.value)"><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="es">ES</option></select>
   </div>
 </header>
@@ -2573,7 +2573,7 @@ function showToast(text, type='error'){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 300); }, 3500);
 }
-const STATIQ_VERSION = '0.11.56';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
+const STATIQ_VERSION = '0.11.57';   // App- und SDF-Version (SDF vor 0.8 trägt immer '0.5.5')
 const DEG = Math.PI / 180;
 const loads = { beam:{point:[],dist:[],horiz:[],temp:[]}, cant:{point:[],dist:[],horiz:[],temp:[]} };
 let uid = 0;
@@ -2933,13 +2933,16 @@ function changeSpans(delta) {
 }
 
 const SUP_OPTS = () => [['pin',tr('supPin')],['roller',tr('supRoller')],['fixed',tr('supFixed')]];
-function setContSup(side, v){ contCfg[side==='L'?'supL':'supR'] = v; drawContinuous(); }
+function setContSup(side, v){ contCfg[side==='L'?'supL':'supR'] = v;
+  document.querySelectorAll(`#cont-sup-inputs [id^="btn-sC${side}-"]`).forEach(b=>b.classList.toggle('active', b.id===`btn-sC${side}-${v}`));
+  drawContinuous(); }
 function setOverhang(side, v){ const o=contSeg(side); o.L = Math.max(0, parseFloat(v)||0); renderContUI(); drawContinuous(); }
 function renderContUI() {
   const lab = 'font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px';
   // Feldlängen und Steifigkeitsverhältnis je Feld
   const lenEl = document.getElementById('span-length-inputs');
-  const sel = (side, cur) => `<select onchange="setContSup('${side}', this.value)">${SUP_OPTS().map(([v,t])=>`<option value="${v}"${v===cur?' selected':''}>${t}</option>`).join('')}</select>`;
+  // Endlager als Knöpfe wie beim Rahmen (calc v0.11.57, statt Auswahlliste): Einspannung, Festlager, Loslager — Zeichen als Bild über k11SupBtns
+  const sel = (side, cur) => `<div class="toggle-row">${[...SUP_OPTS()].sort((a,b)=>['fixed','pin','roller'].indexOf(a[0])-['fixed','pin','roller'].indexOf(b[0])).map(([v,t])=>`<button type="button" class="toggle-btn${v===cur?' active':''}" id="btn-sC${side}-${v}" onclick="setContSup('${side}','${v}')">${t}</button>`).join('')}</div>`;
   const spanHtml = spanData.map((sp,i) =>
     `<div class="field-row">
       <div class="field"><label>${tr('spanWord')} ${i+1} — L<sub>${i+1}</sub> <span class="unit">m</span></label>
@@ -2950,10 +2953,8 @@ function renderContUI() {
     + `<div style="font-size:11px;color:var(--text3);margin-top:4px">I<sub>i</sub> / I — ${tr('eiRatio')} (1 = ${tr('eiRef')})</div>`;
   // Lager, Kragarme, Gelenke: seit v0.11.5 in eigener Stufe „Lager und Gelenke“ (#cont-sup-inputs), sonst darunter
   const supHtml = `<div style="${lab};margin-top:12px">${tr('endSupports')}</div>
-    <div class="field-row">
-      <div class="field"><label>${tr('leftEnd')}</label>${sel('L', contCfg.supL)}</div>
-      <div class="field"><label>${tr('rightEnd')}</label>${sel('R', contCfg.supR)}</div>
-    </div>
+    <div class="field"><label>${tr('leftEnd')}</label>${sel('L', contCfg.supL)}</div>
+    <div class="field"><label>${tr('rightEnd')}</label>${sel('R', contCfg.supR)}</div>
     <div class="field-row">
       <div class="field"><label>${tr('overhangL')} <span class="unit">m</span></label>
         <input type="number" value="${contCfg.ovL.L}" step="0.1" min="0" onchange="setOverhang('L', this.value)"></div>
@@ -2965,6 +2966,7 @@ function renderContUI() {
     <button class="add-load-btn" onclick="addContHinge()">${tr('addHinge')}</button>`;
   const supEl = document.getElementById('cont-sup-inputs');
   if(supEl){ lenEl.innerHTML = spanHtml; supEl.innerHTML = supHtml; } else lenEl.innerHTML = spanHtml + supHtml;
+  if(typeof k11SupBtns==="function") k11SupBtns();   // Zeichen der Endlager-Knöpfe als Bild (calc v0.11.57)
 
   // Lastkarten: Kragarm links, Felder, Kragarm rechts
   const keys = [...(contCfg.ovL.L>0?['L']:[]), ...spanData.map((_,i)=>i), ...(contCfg.ovR.L>0?['R']:[])];
@@ -7966,6 +7968,10 @@ if(Object.keys(LF_SK).some(lfOn)) liveCalc(true);
   .k-si { display:inline-flex; align-items:center; vertical-align:-0.3em; }
   .k-sum .k-si svg { height:16px; width:auto; }
   .toggle-btn .k-si svg { height:16px; width:auto; margin-left:2px; }
+  /* Handy: drei Lagerknöpfe nebeneinander, Zeichen über dem Wort (calc v0.11.57) */
+  @media (max-width:520px){ .k-suprow:not([style*="none"]) { display:grid !important; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:6px; }
+    .k-suprow .toggle-btn { margin:0 !important; display:flex; flex-direction:column-reverse; align-items:center; justify-content:center; gap:4px; padding:8px 4px; min-width:0; white-space:nowrap; }
+    .k-suprow .toggle-btn .k-si svg { height:20px; margin:0; } }
   .k-vh { position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
   .k-supi > span:last-child { color:var(--k-text2, #5c5e66); }
   .k-eihint { font-size:12px; margin:0 0 8px; }
@@ -8101,7 +8107,8 @@ function k11SupHtml(el, s, t){
 // Lagerknöpfe (Rahmen: Einspannung ⊞, Festlager △, Loslager ○): Zeichen am Ende ebenfalls als Bild; die Übersetzung setzt den Text neu, dann hier wieder
 function k11SupBtns(){
   document.querySelectorAll('.toggle-btn[id^="btn-s"]').forEach(b=>{ if(b.querySelector('.k-si')) return; const m=b.textContent.match(/^(.*?)\s*([⊞△○])\s*$/); if(!m) return;
-    const ty={'⊞':'fixed','△':'pin','○':'roller'}[m[2]], d = ty==='fixed' ? 'down' : 'down';
+    const ty={'⊞':'fixed','△':'pin','○':'roller'}[m[2]], d = /^btn-sCL-/.test(b.id) ? 'left' : /^btn-sCR-/.test(b.id) ? 'right' : 'down';   // Durchlaufträger: Wand am Trägerende; Rahmen: Fuß
+    if(b.parentElement) b.parentElement.classList.add('k-suprow');
     b.innerHTML = m[1].replace(/&/g,'&amp;').replace(/</g,'&lt;') + ` <span class="k-si">${k11Ic(ty, d)}<span class="k-vh" aria-hidden="true">${m[2]}</span></span>`; });
 }
 function k11Sum(){

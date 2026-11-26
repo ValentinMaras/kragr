@@ -58,6 +58,18 @@ async def main():
         await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(400); await pg.evaluate(OPEN, 'cont'); await pg.wait_for_timeout(300)
         s=await pg.evaluate(INFO, '#tab-cont [data-st=sup] .k-sum .k-si')
         check('Durchlaufträger: ein Zeichen je Lager (△ ○ ○)', [x['glyph'] for x in s]==['△','○','○'] and s[0]['tri']==1 and s[1]['horiz']==2, [x['glyph'] for x in s])
+        # Durchlaufträger (calc v0.11.57): Endlager als Knöpfe statt Auswahlliste
+        r=await pg.evaluate("[!document.querySelector('#cont-sup-inputs select'), [...document.querySelectorAll('#cont-sup-inputs .toggle-btn')].map(b=>b.id), [...document.querySelectorAll('#cont-sup-inputs .toggle-btn.active')].map(b=>b.id)]")
+        check('Durchlaufträger: keine Auswahlliste mehr, je Ende drei Knöpfe (Einspannung, Festlager, Loslager), Festlager/Loslager aktiv', r[0] and r[1]==['btn-sCL-fixed','btn-sCL-pin','btn-sCL-roller','btn-sCR-fixed','btn-sCR-pin','btn-sCR-roller'] and r[2]==['btn-sCL-pin','btn-sCR-roller'], r)
+        s=await pg.evaluate(INFO, '#cont-sup-inputs .toggle-btn .k-si')
+        check('Knöpfe mit Lagerzeichen; Einspannung als Wand am Trägerende (kein Dreieck)', len(s)==6 and s[0]['tri']==0 and s[0]['vert']==1 and s[1]['tri']==1 and s[2]['horiz']==2, [(x['tri'],x['vert'],x['horiz']) for x in s])
+        m0=await pg.evaluate("lastCalc.cont && JSON.stringify(lastCalc.cont).length")
+        await pg.click('#btn-sCR-fixed'); await pg.wait_for_timeout(400)
+        r=await pg.evaluate("[contCfg.supR, [...document.querySelectorAll('#cont-sup-inputs .toggle-btn.active')].map(b=>b.id), document.querySelector('#tab-cont [data-st=sup] .k-sum').textContent]")
+        check('Klick „Einspannung“ rechts: Modell, aktiver Knopf und Kurzfassung „△ ○ ⊞“', r==['fixed',['btn-sCL-pin','btn-sCR-fixed'],'△ ○ ⊞'], r)
+        r=await pg.evaluate("(()=>{ const s=document.querySelectorAll('#tab-cont [data-st=sup] .k-sum .k-si svg'); const L=s[s.length-1].querySelectorAll('line'); return [...L].some(l=>+l.getAttribute('x1')===20 && +l.getAttribute('x2')===20); })()")
+        check('Kurzfassung: rechtes Endlager eingespannt → Wand rechts', r)
+        await pg.click('#btn-sCR-roller'); await pg.wait_for_timeout(300)
         # Englisch: Namen übersetzt, Knöpfe nach dem Sprachwechsel wieder mit Bild
         await pg.evaluate("localStorage.setItem('statiq-lang','en')"); await pg.reload(); await pg.wait_for_timeout(1000)
         await pg.evaluate("showTab('beam')"); await pg.wait_for_timeout(400); await pg.evaluate(OPEN, 'beam'); await pg.wait_for_timeout(300)
@@ -70,6 +82,14 @@ async def main():
         await pg.emulate_media(color_scheme='dark'); await pg.evaluate("document.documentElement.setAttribute('data-theme','dark')"); await pg.wait_for_timeout(300)
         s=await pg.evaluate(INFO, '#tab-frame [data-st=sup] .k-sum .k-si')
         check('Dunkel: Zeichen in Textfarbe (keine feste Schwarzfarbe)', all(x['stroke']=='currentColor' for x in s), s)
+        # Handy: drei Lagerknöpfe in einer Zeile, Zeichen über dem Wort
+        m=await br.new_page(viewport={'width':390,'height':844}); m.on('pageerror', lambda e: errs.append(str(e)))
+        await m.goto(B+'calc.html'); await m.evaluate("localStorage.setItem('statiq-lang','de')"); await m.reload(); await m.wait_for_timeout(1000)
+        for t,sel in [('cont','#btn-sCL-'),('frame','#btn-sA-')]:
+            await m.evaluate(f"showTab('{t}')"); await m.wait_for_timeout(400); await m.evaluate(OPEN, t); await m.wait_for_timeout(300)
+            r=await m.evaluate(f"['fixed','pin','roller'].map(v=>{{ const b=document.querySelector('{sel}'+v), r=b.getBoundingClientRect(), i=b.querySelector('.k-si').getBoundingClientRect(); return [Math.round(r.top), i.bottom<=r.top+r.height/2+4, Math.round(r.right)]; }})")
+            check(f'Handy {t}: drei Knöpfe in einer Zeile, Zeichen oben, nichts über den Rand', len({x[0] for x in r})==1 and all(x[1] for x in r) and max(x[2] for x in r)<=390, r)
+        await m.close()
         check('keine Skriptfehler', not errs, errs)
         await br.close()
 asyncio.run(main())

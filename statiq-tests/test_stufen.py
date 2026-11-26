@@ -70,7 +70,7 @@ async def main():
         check('Lastfälle-Karte zugeklappt, Ansichts-Chips bleiben sichtbar, Kopfzeile nennt max M mit Kombination', r[0] and r[1] and r[2].startswith('max M = ') and ' kNm · ' in r[2] and '·G' in r[2], r)
         # Durchlaufträger
         await pg.evaluate("showTab('cont')"); await pg.wait_for_timeout(400)
-        r=await pg.evaluate("""[!!document.querySelector('#tab-cont [data-st=dims] #span-length-inputs input'), !!document.querySelector('#tab-cont [data-st=sup] #cont-sup-inputs select'),
+        r=await pg.evaluate("""[!!document.querySelector('#tab-cont [data-st=dims] #span-length-inputs input'), !!document.querySelector('#tab-cont [data-st=sup] #cont-sup-inputs #btn-sCL-pin'),
            !!document.querySelector('#tab-cont [data-st=sup] #cont-hinge-list'), !!document.querySelector('#tab-cont [data-st=loads] #span-load-cards .k-loads'), !document.querySelector('#span-length-inputs select')]""")
         check('Durchlaufträger: Felder in ①, Endlager/Kragarme/Gelenke in ②, Lasten je Feld in ③', all(r), r)
         await pg.evaluate("addContHinge()")
